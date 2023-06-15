@@ -166,22 +166,54 @@
 .angel_button {
   background: #4fe9a4 !important;
 }
-.investor_button{
-  background: #1A1A1A !important
+.investor_button {
+  background: #1a1a1a !important;
 }
-.mentor_button{
-  background-color:#fd5901 !important
+.mentor_button {
+  background-color: #fd5901 !important;
 }
-.angel_img img{
-height: 480px;
+.angel_img img {
+  height: 480px;
 }
-.client_img img{
+.client_img img {
   height: 450px;
 }
-.mentor_img img{
+.mentor_img img {
   height: 400px;
+}
+.margin_bottom {
+  margin-bottom: 150px;
+}
+
+/* startups section */
+.startups_section_btn {
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+}
+.startups_title h2 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 62px;
+  text-align: center;
+  letter-spacing: -0.002em;
+}
+.fintech_card {
+  width: 268px;
+  height: 303px;
+  background: #b0b0b0;
+  border-radius: 40px;
+}
+
+.mt-80{
+  margin-top: 80px;
+}
+.brand_icon img{
+  height: 120px;
 
 }
-.margin_bottom{
-  margin-bottom:150px
+.collab_brand_icon img{
+  height: 30px;
+
 }

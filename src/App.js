@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import './App.css'
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
@@ -18,7 +19,7 @@ function App() {
         </Route> */}
         </Routes>
 
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </div>
   );

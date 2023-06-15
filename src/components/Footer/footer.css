@@ -1,0 +1,58 @@
+.footer_container {
+  background-color: #000;
+  color: #fff;
+}
+.footer_container {
+  background-color: #333;
+  color: #fff;
+  padding: 30px 0;
+}
+
+.footer_container p {
+  margin-bottom: 20px;
+}
+
+.footer_container h4 {
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.footer_container a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer_container .input-group {
+  margin-top: 10px;
+}
+
+.footer_container .input-group .form-control {
+  border-radius: 0;
+}
+
+.footer_container .input-group .btn-primary {
+  border-radius: 0;
+}
+
+.subscribe_btn {
+  width: 88px;
+  height: 40px;
+  left: 1252px;
+  top: 8415px;
+  border: none;
+  background: #fd5901;
+  border-radius: 6.624px;
+  color: #fff;
+}
+.subscribe_input input{
+  width: 276px;
+  height: 40px;
+  background: #ffffff;
+  box-shadow: 0px 0.552px 8.28px rgba(0, 0, 0, 0.15);
+  border-radius: 6.624px;
+}
+.subscribe_input input::placeholder{
+  color: #fd5901;
+
+}

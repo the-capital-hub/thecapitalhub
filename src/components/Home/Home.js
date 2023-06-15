@@ -15,6 +15,23 @@ import ManageInvestortIcon from "../../Images/Group 10.svg";
 import MentorIcon from "../../Images/Group 13.svg";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Accel from "../../Images/Accel.svg";
+import RTP from "../../Images/RTP.svg";
+import Zoover from "../../Images/Zoover2.svg";
+import Nexus from "../../Images/Nexus Mods.svg";
+import Matrix from "../../Images/Matrix .svg";
+import Vhal from "../../Images/Vhall .svg";
+import YCom from "../../Images/Y Combinator.png";
+import LightSpeedIcon from "../../Images/LightSpeed.svg";
+import Kalari from "../../Images/KalaariCapital.svg";
+import GoogleIcon from "../../Images/Google.svg";
+import GoogleIcon1 from "../../Images/Google1.svg";
+import MicrosoftIcon1 from "../../Images/Microsoft1.svg";
+import MicrosoftIcon from "../../Images/Microsoft.svg";
+import Amazon from "../../Images/amazon.svg";
+import Zoover1 from "../../Images/Zoover.svg";
+
+
 
 const Home = () => {
   const [clicked, setClicked] = useState(false);
@@ -248,13 +265,14 @@ const Home = () => {
 
       <div className="container-fluid our_startups_section">
         <div className="container">
-          <div className="row d-flex align-items-center justify-content-center">
-            <div className="col-md-8 b">
+          <div className="row d-flex align-items-center justify-content-between startups_title">
+            <h3>Our Startups</h3>
+            <div className="col-md-4">
               <ul id="navbar" className={clicked ? "active" : ""}>
                 <li>
                   <Link
                     to="/fintech"
-                    className={selectedLink === "fintech" ? "active" : ""}
+                    className={selectedLink === "home" ? "active" : ""}
                     onClick={() => setSelectedLink("fintech")}
                   >
                     Fintech
@@ -290,8 +308,82 @@ const Home = () => {
                 </li>
               </ul>
             </div>
-            <div className="col-md-4 title_text b">
-              <button className="">Invest now</button>
+            <div className="col-md-4 title_text d-flex justify-content-end">
+              <button className="startups_section_btn">Invest now</button>
+            </div>
+          </div>
+          <div className="row d-flex justify-content-between align-items-center pt-5 pb-5">
+            <div className="col-2 fintech_card"></div>
+            <div className="col-2 fintech_card"></div>
+            <div className="col-2 fintech_card"></div>
+            <div className="col-2 fintech_card"></div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container-fluid our_startups_section">
+        <div className="container">
+          <div className="row ">
+            <h2 style={{ textAlign: "center" }}>Co-investors</h2>
+            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center">
+              <img src={Accel} alt="brans icons" />
+            </div>
+            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center mt-80">
+              <img src={RTP} alt="brans icons" />
+            </div>
+            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center">
+              <img src={Zoover} alt="brans icons" />
+            </div>
+            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center mt-80">
+              <img src={Nexus} alt="brans icons" />
+            </div>
+            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center">
+              <img src={Matrix} alt="brans icons" />
+            </div>
+            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center mt-80">
+              <img src={Vhal} alt="brans icons" />
+            </div>
+          </div>
+          <div className="row mt-4">
+            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center">
+              <img src={YCom} alt="brans icons" />
+            </div>
+            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center ">
+              <img src={LightSpeedIcon} alt="brans icons" />
+            </div>
+            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center">
+              <img src={Kalari} alt="brans icons" />
+            </div>
+            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center ">
+              <img src={GoogleIcon} alt="brans icons" />
+            </div>
+            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center">
+              <img src={MicrosoftIcon1} alt="brans icons" />
+            </div>
+            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center ">
+              <img src={Vhal} alt="brans icons" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container-fluid">
+        <div className="container mb-5">
+          <div className="row d-flex justify-content-around align-items-center">
+            <h2 style={{ textAlign: "center", marginTop: "68px", marginBottom:"68px" }}>
+              Our Collaboration
+            </h2>
+            <div className="col-md-2 collab_brand_icon d-flex justify-content-center align-items-center">
+              <img src={Amazon} alt="brans icons" />
+            </div>
+            <div className="col-md-2 collab_brand_icon d-flex justify-content-center align-items-center">
+              <img src={Zoover1} alt="brans icons" />
+            </div>
+            <div className="col-md-2 collab_brand_icon d-flex justify-content-center align-items-center">
+              <img src={GoogleIcon1} alt="brans icons" />
+            </div>
+            <div className="col-md-2 collab_brand_icon d-flex justify-content-center align-items-center">
+              <img src={MicrosoftIcon} alt="brans icons" />
             </div>
           </div>
         </div>
