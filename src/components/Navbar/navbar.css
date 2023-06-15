@@ -1,0 +1,129 @@
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  padding: 40px 0px;
+  /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06); */
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+.scrolling-nav {
+  background-image: linear-gradient(
+    to bottom,
+    rgb(255, 255, 255),
+    rgba(255, 255, 255, 0.999)
+  );
+  background-color: transparent;
+}
+#navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#navbar li {
+  list-style: none;
+  padding: 0 20px;
+  position: relative;
+}
+
+#navbar li a {
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #000;
+  transition: 0.3s ease-in-out;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 27px;
+}
+#navbar li a:hover,
+#navbar li a.active {
+  color: #fd5901;
+}
+
+#navbar li a:hover::after,
+#navbar li a.active::after {
+  content: "";
+  width: 40%;
+  height: 2px;
+  background: #fd5901;
+  position: absolute;
+  bottom: -4px;
+  left: 30px;
+}
+#mobile {
+  display: none;
+}
+
+#mobile i {
+  color: #fff;
+  align-items: center;
+}
+.loginbtn {
+  border: 2px solid #fd5901;
+  border-radius: 50px;
+  color: #fff !important;
+  text-align: center;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 27px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  width: 155px;
+  height: 47px;
+  left: 1185px;
+  top: 73px;
+
+  background: #fd5901;
+  border-radius: 50px;
+}
+.loginbtn:hover::after {
+  display: none;
+}
+
+@media screen and (max-width: 769px) {
+  #navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: fixed;
+    top: 90px;
+    right: -300px;
+    width: 300px;
+    height: 100vh;
+    background: #1b2430;
+    box-shadow: 0 40px 60px rgba(0, 0, 0, 0.1);
+    padding: 40px 0 0 10px;
+    transition: 0.3s ease-in-out;
+  }
+
+  #navbar.active {
+    right: 0px;
+  }
+
+  #navbar li {
+    margin-bottom: 25px;
+  }
+
+  #mobile {
+    display: block;
+  }
+
+  #mobile i {
+    font-size: 24px;
+    cursor: pointer;
+  }
+}
