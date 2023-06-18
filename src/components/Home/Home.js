@@ -39,7 +39,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container mb-md-5">
         <div className="row">
           <div className=" col-md-8 title__text d-flex flex-column justify-content-center">
             <h2>
@@ -51,7 +51,9 @@ const Home = () => {
             <h4>Are you a investor ?</h4>
             <div className="row row-cols-md-3 g-0 mt-5">
               <div className="col">
+              <Link to="/signup">
                 <button className="btn1 btn-primary">Start Up</button>
+                </Link>
               </div>
               <div className="col">
                 <button className="btn2 btn-primary">Investor</button>
@@ -321,7 +323,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="container-fluid our_startups_section">
+      <div className="container-fluid our_investor_section">
         <div className="container">
           <div className="row ">
             <h2 style={{ textAlign: "center" }}>Co-investors</h2>

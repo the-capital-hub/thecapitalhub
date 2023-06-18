@@ -3,23 +3,28 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import './App.css'
 import Footer from "./components/Footer/Footer";
+import Register from './components/Register/Register'
+import Login from "./components/Login/Login";
 
 function App() {
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-
   return (
     <div className="container-fluid">
       <Router>
-        <Navbar />
         <Routes>
-          <Route>
-            <Route path="/" element={<Home />} />
-          </Route>
-          {/* <Route element={<PrivateRoute />}>
-        </Route> */}
-        </Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Navbar />
+                <Home />
+                <Footer />
+              </>
+            }
+          />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/login" element={<Login />} />
 
-        <Footer />
+        </Routes>
       </Router>
     </div>
   );

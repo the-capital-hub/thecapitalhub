@@ -75,11 +75,11 @@ const Footer = () => {
               Follow us on social media and stay updated with the latest
               information about our services
             </p>
-            <div className="d-flex justify-content-between">
-              <img src={FbIcon} alt="img" />
-              <img src={TwIcon} alt="img" />
-              <img src={InIcon} alt="img" />
-              <img src={YtIcon} alt="img" />
+            <div className="d-flex justify-content-start">
+              <img src={FbIcon} alt="img" style={{margin:"0px 2px"}} />
+              <img src={TwIcon} alt="img" style={{margin:"0px 2px"}} />
+              <img src={InIcon} alt="img" style={{margin:"0px 2px"}} />
+              <img src={YtIcon} alt="img" style={{margin:"0px 2px"}} />
             </div>
           </div>
           <div className="col-md-3 col-sm-6 ">
@@ -99,6 +99,12 @@ const Footer = () => {
                   Subscribe
                 </button>
               </div>
+            </div>
+          </div>
+          <div className="row ">
+            <div className="col copyright_text">
+            <h5>2022 - &copy;Lorem all right deserved</h5>
+
             </div>
           </div>
         </div>
