@@ -24,91 +24,91 @@ const Register = () => {
           </h3>
 
           <form>
-            <div class="row">
-              <div class="col-6 first_name">
+            <div className="row">
+              <div className="col-6 first_name">
                 <label for="firstname">First Name</label>
                 <input
                   type="text"
                   id="firstname"
                   name="firstname"
-                  class="form-control"
+                  className="form-control"
                   required
                 />
               </div>
-              <div class="col-6 first_name">
+              <div className="col-6 first_name">
                 <label for="lastname">Last Name</label>
                 <input
                   type="text"
                   id="lastname"
                   name="lastname"
-                  class="form-control"
+                  className="form-control"
                   required
                 />
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-12">
+            <div className="row">
+              <div className="col-12">
                 <label for="mobile">Mobile Number</label>
                 <input
                   type="tel"
                   id="mobile_number"
                   name="mobile"
-                  class="form-control"
+                  className="form-control"
                   required
                 />
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-12">
+            <div className="row">
+              <div className="col-12">
                 <label for="password">Password</label>
                 <input
                   type="password"
                   id="password"
                   name="password"
-                  class="form-control"
+                  className="form-control"
                   required
                 />
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-12">
+            <div className="row">
+              <div className="col-12">
                 <label for="confirm-password">Confirm Password</label>
                 <input
                   type="password"
                   id="confirm-password"
                   name="confirm-password"
-                  class="form-control"
+                  className="form-control"
                   required
                 />
               </div>
             </div>
 
-            <div class="form-check">
+            <div className="form-check">
               <input
                 type="checkbox"
                 id="terms"
                 name="terms"
-                class="form-check-input"
+                className="form-check-input"
                 required
               />
-              <label for="terms" class="form-check-label">
+              <label for="terms" className="form-check-label">
                 I agree to the terms and conditions
               </label>
             </div>
             <div className="submit_btn">
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" className="btn btn-primary">
                 Create Account
               </button>
             </div>
           </form>
 
-          <div class="line-container">
-            <hr class="line" />
-            <span class="text">Or continue with</span>
-            <hr class="line" />
+          <div className="line-container">
+            <hr className="line" />
+            <span className="text">Or continue with</span>
+            <hr className="line" />
           </div>
           <div className="row">
             <div className="col d-flex justify-content-center align-items-center login_icons">

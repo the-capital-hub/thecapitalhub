@@ -17,6 +17,7 @@ import Investors from "./components/Investor/Investors/Investors";
 import Support from "./components/Investor/Support/Support";
 import Help from "./components/Investor/Help/Help";
 import Feed from "./components/Investor/Feed/Feed";
+import CreatePost from "./components/Investor/CreatePost/CreatePost";
 
 function App() {
   return (
@@ -37,25 +38,17 @@ function App() {
           <Route path="/login" element={<Login />} />
 
           <Route element={<PrivateRoute />}>
-            {/* <Route path="/investor" element={<h2>Text</h2>}/> */}
-            <Route path="/investor" element={<InvestorHome/>} />
-            <Route path="/home" element={<Feed/>} />
-            <Route path="/documentation" element={<Documentation/>} />
-            <Route path="/savePost" element={<SavePost/>} />
-            <Route path="/onelink" element={<OneLink/>} />
-            <Route path="/team" element={<Team/>} />
-            <Route path="/customers" element={<Customer/>} />
-            <Route path="/investors" element={<Investors/>} />
-            <Route path="/help" element={<Help/>} />
-            <Route path="/support" element={<Support/>} />
-
-
-
-
-
-
-
-
+            <Route path="/investor" element={<InvestorHome />} />
+            <Route path="/home" element={<Feed />} />
+            <Route path="/createpost" element={<CreatePost />} />
+            <Route path="/documentation" element={<Documentation />} />
+            <Route path="/savePost" element={<SavePost />} />
+            <Route path="/onelink" element={<OneLink />} />
+            <Route path="/team" element={<Team />} />
+            <Route path="/customers" element={<Customer />} />
+            <Route path="/investors" element={<Investors />} />
+            <Route path="/help" element={<Help />} />
+            <Route path="/support" element={<Support />} />
           </Route>
         </Routes>
       </Router>

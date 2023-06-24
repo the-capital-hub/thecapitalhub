@@ -75,10 +75,10 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           <SidebarContent>
             <Menu iconShape="round">
               <MenuItem
-                active={location.pathname.includes("/createpost")}
+                // active={location.pathname.includes("/")}
                 className=""
               >
-                <Link to="#" onClick={handleCreatePost}>
+                <Link to="/createpost">
                   {sidebarCollapsed ? (
                     <><button className="plus_btn"><img src={PlusIcon} alt="" /></button></>
                   ) : (

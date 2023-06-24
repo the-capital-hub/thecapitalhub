@@ -22,27 +22,27 @@ const Login = () => {
           </h3>
 
           <form className="login_form">
-            <div class="row">
-              <div class="col-12">
+            <div className="row">
+              <div className="col-12">
                 <label for="mobile">Mobile Number</label>
                 <input
                   type="tel"
                   id="mobile_number"
                   name="mobile"
-                  class="form-control"
+                  className="form-control"
                   required
                 />
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-12">
+            <div className="row">
+              <div className="col-12">
                 <label for="password">Password</label>
                 <input
                   type="password"
                   id="password"
                   name="password"
-                  class="form-control"
+                  className="form-control"
                   required
                 />
                 <Link to ="/forgotpassword" className="forgot_password">
@@ -51,16 +51,16 @@ const Login = () => {
               </div>
             </div>
             <div className="login_btn">
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" className="btn btn-primary">
                 Log in
               </button>
             </div>
           </form>
 
-          <div class="line-container">
-            <hr class="line" />
-            <span class="text">Or continue with</span>
-            <hr class="line" />
+          <div className="line-container">
+            <hr className="line" />
+            <span className="text">Or continue with</span>
+            <hr className="line" />
           </div>
           <div className="row">
             <div className="col d-flex justify-content-center align-items-center login_icons">

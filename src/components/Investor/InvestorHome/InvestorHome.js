@@ -5,17 +5,18 @@ import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
 import AddUserIconBlack from "../../../Images/investorIcon/Add-UserBlack.svg";
 import LocationIcon from "../../../Images/investorIcon/octicon_location-16.svg";
-import EmailIcon from '../../../Images/investorIcon/Message.svg'
+import EmailIcon from "../../../Images/investorIcon/Message.svg";
 import TweeterIcon from "../../../Images/investorIcon/Tweeter.svg";
 import IntagramIcon from "../../../Images/investorIcon/Instagram.svg";
 import LinkedinIcon from "../../../Images/investorIcon/Linkedin.svg";
 import WebIcon from "../../../Images/investorIcon/WebIcon.svg";
-import LogoX from '../../../Images/investorIcon/LogoX.png'
+import LogoX from "../../../Images/investorIcon/LogoX.png";
 import LoopIcon from "../../../Images/investorIcon/LoopIcon.svg";
 import { CiEdit } from "react-icons/ci";
 import { Link } from "react-router-dom";
-import Card from "../MilestoneCard/Card";
-import {SidebarContext} from "../../Sidebar/SidebarContext";
+import Card from "../Cards/MilestoneCard/Card";
+import { SidebarContext } from "../../Sidebar/SidebarContext";
+import SmallProfileCard from "../Cards/TwoSmallMyProfile/SmallProfileCard";
 
 const InvestorHome = () => {
   // const sidebarCollapsed = useContext(SidebarContext);
@@ -32,24 +33,12 @@ const InvestorHome = () => {
     // console.log("sidebarCollapsed", sidebarCollapsed);
   });
   return (
-    <div className="container">
+    <div className="container-fluid">
       <div className="row mt-2">
+      <SmallProfileCard />
         <div className="col">
           <div className="content-70">
-            <div className="row">
-              <div className="col-6">
-                <div className="box boxOne flex_content">
-                  <h2 className="typography">Hello, Mr. Pramod</h2>
-                  <span className="smallest_typo">{formattedDate}</span>
-                </div>
-              </div>
-              <div className="col-6">
-                <div className="box boxTwo flex_content">
-                  <img src={ArrowIcon} alt="arrow" />
-                  <h2 className="typography">My Profile</h2>
-                </div>
-              </div>
-            </div>
+            
 
             <div className="row">
               <div className="col-12 mt-2">
@@ -272,7 +261,7 @@ const InvestorHome = () => {
                     <div className="col-12">
                       <div className="image_name_section mt-2 company_details_image_text">
                         <span className="company_details_logo_container">
-                        <img src={LogoX} alt="profileimage" />
+                          <img src={LogoX} alt="profileimage" />
                         </span>
                         <div className="left_profile_text flex_content">
                           <h2 className="typography m-2">The Capital Hub</h2>
@@ -280,15 +269,16 @@ const InvestorHome = () => {
                             Channing & Barrett industries pvt ltd
                           </span>
                           <span className="small_typo location_icon">
-                            <img src={LocationIcon} alt="location"/>jayanagar 4th block banglore{" "}
-                            <img src={EmailIcon} alt="location"/>pramodbadigar.capitalhub@gmail.com{" "}
+                            <img src={LocationIcon} alt="location" />
+                            jayanagar 4th block banglore{" "}
+                            <img src={EmailIcon} alt="location" />
+                            pramodbadigar.capitalhub@gmail.com{" "}
                           </span>
                           <div className="small_typo social_icon mt-3">
-                            <img src={WebIcon} alt="social_img"/>
-                            <img src={LinkedinIcon} alt="social_img"/>
-                            <img src={TweeterIcon} alt="social_img"/>
-                            <img src={IntagramIcon} alt="social_img"/>
-
+                            <img src={WebIcon} alt="social_img" />
+                            <img src={LinkedinIcon} alt="social_img" />
+                            <img src={TweeterIcon} alt="social_img" />
+                            <img src={IntagramIcon} alt="social_img" />
                           </div>
                         </div>
                       </div>
@@ -335,8 +325,8 @@ const InvestorHome = () => {
                       Manage Account
                     </button>
                     {/* loop */}
-                    <div class="card mt-2 right_view_profile_card right_loop_card ">
-                      <div class="card-header">
+                    <div className="card mt-2 right_view_profile_card right_loop_card ">
+                      <div className="card-header">
                         <div className="loop_title">
                           <span>Loop</span>
                           <span style={{ fontSize: "10px" }}>
@@ -345,17 +335,19 @@ const InvestorHome = () => {
                         </div>
                         <img src={LoopIcon} alt="loop" />
                       </div>
-                      <div class="card-body">
-                        <h5 class="card-title">How can I help you today?</h5>
+                      <div className="card-body">
+                        <h5 className="card-title">
+                          How can I help you today?
+                        </h5>
 
-                        <div class="input-group">
+                        <div className="input-group">
                           <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             placeholder="Type your message and loop me in"
                           />
                           <button
-                            class="btn btn-primary send-button"
+                            className="btn btn-primary send-button"
                             type="button"
                           >
                             send
@@ -368,13 +360,13 @@ const InvestorHome = () => {
               </div>
 
               <div className="col-12 recommendation_card">
-                <div class="card mt-2 right_view_profile_card right_view_profile">
-                  <div class="card-header">
+                <div className="card mt-2 right_view_profile_card right_view_profile">
+                  <div className="card-header">
                     <div className="loop_title">
                       <span>Recommendation (Investor)</span>
                     </div>
                   </div>
-                  <div class="card-body recommendation_card_body ">
+                  <div className="card-body recommendation_card_body ">
                     <img src={profilePic} alt="img" />
                     <div className="recommendation_card_text">
                       <h3>Harideep</h3>
@@ -388,7 +380,7 @@ const InvestorHome = () => {
                     </div>
                   </div>
                   <hr className="hr" />
-                  <div class="card-body recommendation_card_body ">
+                  <div className="card-body recommendation_card_body ">
                     <img src={profilePic} alt="img" />
                     <div className="recommendation_card_text">
                       <h3>Harideep</h3>
@@ -405,13 +397,13 @@ const InvestorHome = () => {
               </div>
 
               <div className="col-12 recommendation_card">
-                <div class="card mt-2 right_view_profile_card right_view_profile">
-                  <div class="card-header">
+                <div className="card mt-2 right_view_profile_card right_view_profile">
+                  <div className="card-header">
                     <div className="loop_title">
                       <span>News Corner</span>
                     </div>
                   </div>
-                  <div class="card-body recommendation_card_body ">
+                  <div className="card-body recommendation_card_body ">
                     <div className="recommendation_card_text">
                       <h4 className="smallest_typo">
                         Cellbell startup has raised to $10 million dollor
@@ -423,7 +415,7 @@ const InvestorHome = () => {
                     </div>
                   </div>
                   <hr className="hr" />
-                  <div class="card-body recommendation_card_body ">
+                  <div className="card-body recommendation_card_body ">
                     <div className="recommendation_card_text">
                       <h4 className="smallest_typo">
                         Cellbell startup has raised to $10 million dollor

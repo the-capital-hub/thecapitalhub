@@ -1,9 +1,22 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
+import SmallProfileCard from "../Cards/TwoSmallMyProfile/SmallProfileCard";
 
 const OneLink = () => {
   return (
-    <div>OneLink</div>
-  )
-}
+    <>
+      <div className="container-fluid createpost_container">
+        <div className="row mt-2">
+          <SmallProfileCard text={"One link"}/>
+        </div>
+        <div className="row">
+          <div className="col-12 colSize">
+           s
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
-export default OneLink
+export default OneLink;
