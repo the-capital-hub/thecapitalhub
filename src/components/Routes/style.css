@@ -1,0 +1,19 @@
+.investor_home_container{
+    background-color: #EAEEF2;
+    margin: 0;
+}
+
+.investor_home_container {
+    display: flex;
+  }
+  
+  .sidebar {
+    width: 300px; /* Set the desired width of the sidebar */
+    background-color: #EAEEF2;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 10px;
+  }
+  

@@ -31,8 +31,6 @@ import MicrosoftIcon from "../../Images/Microsoft.svg";
 import Amazon from "../../Images/amazon.svg";
 import Zoover1 from "../../Images/Zoover.svg";
 
-
-
 const Home = () => {
   const [clicked, setClicked] = useState(false);
   const [selectedLink, setSelectedLink] = useState("home");
@@ -51,12 +49,14 @@ const Home = () => {
             <h4>Are you a investor ?</h4>
             <div className="row row-cols-md-3 g-0 mt-5">
               <div className="col">
-              <Link to="/signup">
-                <button className="btn1 btn-primary">Start Up</button>
+                <Link to="/signup">
+                  <button className="btn1 btn-primary">Start Up</button>
                 </Link>
               </div>
               <div className="col">
-                <button className="btn2 btn-primary">Investor</button>
+                <Link to="/investor">
+                  <button className="btn2 btn-primary">Investor</button>
+                </Link>
               </div>
             </div>
           </div>
@@ -372,7 +372,13 @@ const Home = () => {
       <div className="container-fluid">
         <div className="container mb-5">
           <div className="row d-flex justify-content-around align-items-center">
-            <h2 style={{ textAlign: "center", marginTop: "68px", marginBottom:"68px" }}>
+            <h2
+              style={{
+                textAlign: "center",
+                marginTop: "68px",
+                marginBottom: "68px",
+              }}
+            >
               Our Collaboration
             </h2>
             <div className="col-md-2 collab_brand_icon d-flex justify-content-center align-items-center">
