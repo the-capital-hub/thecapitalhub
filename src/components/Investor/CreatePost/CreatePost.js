@@ -8,7 +8,7 @@ const CreatePost = () => {
   return (
     <div className="container-fluid createpost_container">
       <div className="row mt-2">
-        <SmallProfileCard />
+        <SmallProfileCard text={"Create Post"} width={"60%"}/>
       </div>
       <div className="row">
         <div className="col-12 colSize">
@@ -27,7 +27,7 @@ const CreatePost = () => {
               <h4>Title</h4>
             </div>
             <div className="createpost_textarea ">
-              <textarea class="custom-textarea" />
+              <textarea className="custom-textarea" />
             </div>
             <div className="createpost_footer ">
               <div className="createpost_footer_links">

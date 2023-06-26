@@ -37,12 +37,12 @@
   justify-content: center;
 }
 .boxOne {
-  width: 15rem;
+  width: 16rem;
   height: 6rem;
   padding: 30px;
 }
 .boxTwo {
-  width: 15rem;
+  width: 16rem;
   height: 6rem;
   padding: 30px;
   flex-direction: row;
