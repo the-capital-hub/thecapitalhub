@@ -3,30 +3,28 @@ import { useEffect, useState } from "react";
 import InvestorNavbar from "../Investor/InvestorNavbar/InvestorNavbar";
 import InvestorSidebar from "../Investor/InvestorSidebar/InvestorSidebar";
 import "./style.css";
-import { SidebarContext } from "../Sidebar/SidebarContext";
-import { SidebarProvider } from "../Sidebar/SidebarContext";
+import LogOutPopUp from "../PopUp/LogOutPopUp/LogOutPopUp"
 
 function PrivateRoute({ children, ...props }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
     <div className="container-fluid investor_home_container">
-      <SidebarProvider>
-        <div
-          className="sidebar"
-          style={{ width: sidebarCollapsed ? "10%" : "20.5%" }}
-        >
-          <InvestorSidebar
-            sidebarCollapsed={sidebarCollapsed}
-            setSidebarCollapsed={setSidebarCollapsed}
-          />
-        </div>
-        <div className="content">
-          <InvestorNavbar />
+      <LogOutPopUp/>
+      <div
+        className="sidebar"
+        style={{ width: sidebarCollapsed ? "10%" : "20.5%" }}
+      >
+        <InvestorSidebar
+          sidebarCollapsed={sidebarCollapsed}
+          setSidebarCollapsed={setSidebarCollapsed}
+        />
+      </div>
+      <div className="content">
+        <InvestorNavbar />
 
-          <Outlet />
-        </div>
-      </SidebarProvider>
+        <Outlet />
+      </div>
     </div>
   );
 }

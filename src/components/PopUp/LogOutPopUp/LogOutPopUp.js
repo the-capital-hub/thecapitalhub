@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const LogOutPopUp = ({ setPopupOpen, popupOpen }) => {
     const handleClose = () => setPopupOpen(false);
   return (
@@ -14,7 +15,7 @@ const LogOutPopUp = ({ setPopupOpen, popupOpen }) => {
           <div className="modal-content">
             <div className="createpost_modal-header">
               <div className="createpostpopup">
-               
+               popup
               </div>
               <button
                 type="button"

@@ -16,7 +16,7 @@ const Footer = () => {
           <div className="col-md-3 col-sm-12 d-flex justify-content-center align-items-center ">
             <p>
               Lorem ipsum dolor sit amet consectetur. Magna integer enim vitae
-              vulputate eu vitae tristique.
+              vulputate eu vitae tristique.raju
             </p>
           </div>
           <div className="col-md-2 col-sm-6 ">

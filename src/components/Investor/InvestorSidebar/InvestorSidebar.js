@@ -31,8 +31,6 @@ import { SidebarContext } from "../../Sidebar/SidebarContext";
 
 const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const location = useLocation();
-  const { openPopup } = useContext(SidebarContext);
-  const [showPopup, setShowPopup] = useState(false);
   const menuIconClick = () => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
@@ -41,9 +39,6 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
     // Handle logout logic here
   };
 
-  const handleCreatePost = () => {
-    openPopup();
-  };
   return (
     <div
       className={`container sidebar_container ${
