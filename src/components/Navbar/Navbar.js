@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./navbar.css";
+import "./navbar.scss";
 import Logo from '../../Images/Logo.svg'
 
 

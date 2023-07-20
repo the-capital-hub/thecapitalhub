@@ -1,0 +1,139 @@
+// ourstartup.scss
+
+// Variables (if any)
+$primary-color: #fd5901;
+$secondary-color: #1b2430;
+
+// Mixins (if any)
+
+// Styles
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  padding: 40px 0px;
+  /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06); */
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+
+  &.scrolling-nav {
+    background-image: linear-gradient(to bottom, #fff, rgba(255, 255, 255, 0.999));
+    background-color: transparent;
+  }
+
+  #navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    li {
+      list-style: none;
+      padding: 0 20px;
+      position: relative;
+
+      a {
+        text-decoration: none;
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: #000;
+        transition: 0.3s ease-in-out;
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+
+        &:hover,
+        &.active {
+          color: $primary-color;
+
+          &::after {
+            content: "";
+            width: 40%;
+            height: 2px;
+            background: $primary-color;
+            position: absolute;
+            bottom: -4px;
+            left: 30px;
+          }
+        }
+      }
+    }
+  }
+
+  #mobile {
+    display: none;
+
+    i {
+      color: #fff;
+      align-items: center;
+    }
+  }
+
+  .loginbtn {
+    border: 2px solid $primary-color;
+    border-radius: 50px;
+    color: #fff !important;
+    text-align: center;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 27px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    width: 155px;
+    height: 47px;
+    left: 1185px;
+    top: 73px;
+
+    background: $primary-color;
+    border-radius: 50px;
+
+    &:hover::after {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 769px) {
+    #navbar {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      position: fixed;
+      top: 90px;
+      right: -300px;
+      width: 300px;
+      height: 100vh;
+      background: $secondary-color;
+      box-shadow: 0 40px 60px rgba(0, 0, 0, 0.1);
+      padding: 40px 0 0 10px;
+      transition: 0.3s ease-in-out;
+
+      &.active {
+        right: 0;
+      }
+
+      li {
+        margin-bottom: 25px;
+      }
+    }
+
+    #mobile {
+      display: block;
+
+      i {
+        font-size: 24px;
+        cursor: pointer;
+      }
+    }
+  }
+}

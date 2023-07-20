@@ -1,12 +1,6 @@
 import React from "react";
-import "./home.css";
+import "./home.scss";
 import GirlIcon from "../../Images/GirlIcons.png";
-import G1Icon from "../../Images/Group 1 (1).svg";
-import G2Icon from "../../Images/Group 2 (1).svg";
-import G3Icon from "../../Images/Group 2 (2).svg";
-import G4Icon from "../../Images/Group 3.svg";
-import G5Icon from "../../Images/Group 4.svg";
-import G6Icon from "../../Images/Group 5.svg";
 import laptopIcon from "../../Images/Group 6.svg";
 import AngelIcon from "../../Images/Group 7.svg";
 import ManageTeamIcon from "../../Images/Group 8.svg";
@@ -30,6 +24,8 @@ import MicrosoftIcon1 from "../../Images/Microsoft1.svg";
 import MicrosoftIcon from "../../Images/Microsoft.svg";
 import Amazon from "../../Images/amazon.svg";
 import Zoover1 from "../../Images/Zoover.svg";
+import WhyChooseUsCard from "../Card/Home/WhyChooseUs/WhyChooseUsCard";
+import OurStartUp from "./OurStartUp";
 
 const Home = () => {
   const [clicked, setClicked] = useState(false);
@@ -67,69 +63,7 @@ const Home = () => {
       </div>
       <div className="container-fluid why_choose_us_container">
         <div className="container">
-          <div className="why_choose_us row justify-content-around align-items-center my-4">
-            <h2 className="text-center mb-5 mt-5">Why choose us</h2>
-            <div className="col-md-4 b why_chooseus_card mb-69">
-              <div className="row d-flex justify-content-center align-item-center inside_card">
-                <img src={G1Icon} alt="img" />
-                <h3>Angel Investor</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet
-                  in porttitor in sit sem eu, nunc diam. Quis nisi,
-                </p>
-              </div>
-            </div>
-            <div className="col-md-4 b why_chooseus_card mb-69">
-              <div className="row d-flex justify-content-center align-item-center inside_card">
-                <img src={G2Icon} alt="img" />
-                <h3>One link</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet
-                  in porttitor in sit sem eu, nunc diam. Quis nisi,
-                </p>
-              </div>
-            </div>
-            <div className="col-md-4 b why_chooseus_card mb-69">
-              <div className="row d-flex justify-content-center align-item-center inside_card">
-                <img src={G3Icon} alt="img" />
-                <h3>Networking</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet
-                  in porttitor in sit sem eu, nunc diam. Quis nisi,
-                </p>
-              </div>
-            </div>
-            <div className="col-md-4 b why_chooseus_card mb-69">
-              <div className="row d-flex justify-content-center align-item-center inside_card">
-                <img src={G4Icon} alt="img" />
-                <h3>Team Management</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet
-                  in porttitor in sit sem eu, nunc diam. Quis nisi,
-                </p>
-              </div>
-            </div>
-            <div className="col-md-4 b why_chooseus_card mb-69">
-              <div className="row d-flex justify-content-center align-item-center inside_card">
-                <img src={G5Icon} alt="img" />
-                <h3>Client Management</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet
-                  in porttitor in sit sem eu, nunc diam. Quis nisi,
-                </p>
-              </div>
-            </div>
-            <div className="col-md-4 b why_chooseus_card mb-69">
-              <div className="row d-flex justify-content-center align-item-center inside_card">
-                <img src={G6Icon} alt="img" />
-                <h3>Client Management</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet
-                  in porttitor in sit sem eu, nunc diam. Quis nisi,
-                </p>
-              </div>
-            </div>
-          </div>
+          <WhyChooseUsCard/>
         </div>
       </div>
 
@@ -140,10 +74,10 @@ const Home = () => {
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Create your one link now</h3>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur. Maecenas ac elementum
-                  lacus vel vitae sed nisi aliquam aliquet. Vel adipiscing
-                  placerat tellus faucibus diam mauris ipsum vitae. Justo
-                  adipiscing integer dictum tortor viverra vel .
+                  Build your online presence effortlessly with our user-friendly
+                  platform. Customise your unique One-Link, showcase your work,
+                  and connect with your audience seamlessly. Start building your
+                  digital footprint today!
                 </p>
                 <button>Create</button>
               </div>
@@ -165,10 +99,11 @@ const Home = () => {
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Angle Investment made easy</h3>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur. Maecenas ac elementum
-                  lacus vel vitae sed nisi aliquam aliquet. Vel adipiscing
-                  placerat tellus faucibus diam mauris ipsum vitae. Justo
-                  adipiscing integer dictum tortor viverra vel .
+                  Unlock the potential of early-stage startups and
+                  entrepreneurs. Our platform connects angel investors with
+                  innovative ideas, providing a streamlined and secure
+                  investment process for sustainable growth and financial
+                  returns.
                 </p>
                 <button className="angel_button">Learn more</button>
               </div>
@@ -184,10 +119,10 @@ const Home = () => {
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Manage your team</h3>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur. Maecenas ac elementum
-                  lacus vel vitae sed nisi aliquam aliquet. Vel adipiscing
-                  placerat tellus faucibus diam mauris ipsum vitae. Justo
-                  adipiscing integer dictum tortor viverra vel .
+                  Efficiently oversee your team's projects, tasks, and
+                  collaboration with our powerful Team Management tools.
+                  Streamline workflows, foster effective communication, and
+                  drive productivity to achieve remarkable results.
                 </p>
                 <button>Learn more</button>
               </div>
@@ -209,10 +144,11 @@ const Home = () => {
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Client Management</h3>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur. Maecenas ac elementum
-                  lacus vel vitae sed nisi aliquam aliquet. Vel adipiscing
-                  placerat tellus faucibus diam mauris ipsum vitae. Justo
-                  adipiscing integer dictum tortor viverra vel .
+                  Transform your approach to client relationships. Our Client
+                  Management system centralises client data, streamlines
+                  communication, and automates processes, empowering you to
+                  deliver personalised and exceptional service at every
+                  touchpoint.
                 </p>
                 <button className="angel_button">Learn more</button>
               </div>
@@ -228,10 +164,10 @@ const Home = () => {
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Investor management</h3>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur. Maecenas ac elementum
-                  lacus vel vitae sed nisi aliquam aliquet. Vel adipiscing
-                  placerat tellus faucibus diam mauris ipsum vitae. Justo
-                  adipiscing integer dictum tortor viverra vel .
+                  Elevate your investor relations with our comprehensive
+                  Investor Management platform. From fundraising to reporting,
+                  track and engage with investors, foster trust, and drive
+                  success for your venture.
                 </p>
                 <button className="investor_button">Learn more</button>
               </div>
@@ -253,10 +189,10 @@ const Home = () => {
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Growth high for mentor</h3>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur. Maecenas ac elementum
-                  lacus vel vitae sed nisi aliquam aliquet. Vel adipiscing
-                  placerat tellus faucibus diam mauris ipsum vitae. Justo
-                  adipiscing integer dictum tortor viverra vel .
+                  Unlock the potential of mentorship. Join our network of
+                  accomplished mentors and guide the next generation of
+                  entrepreneurs. Share your expertise, cultivate innovative
+                  ideas, and create a lasting impact on startup success.
                 </p>
                 <button className="mentor_button">Learn more</button>
               </div>
@@ -266,61 +202,7 @@ const Home = () => {
       </div>
 
       <div className="container-fluid our_startups_section">
-        <div className="container">
-          <div className="row d-flex align-items-center justify-content-between startups_title">
-            <h3>Our Startups</h3>
-            <div className="col-md-4">
-              <ul id="navbar" className={clicked ? "active" : ""}>
-                <li>
-                  <Link
-                    to="/fintech"
-                    className={selectedLink === "home" ? "active" : ""}
-                    onClick={() => setSelectedLink("fintech")}
-                  >
-                    Fintech
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/edutech"
-                    className={selectedLink === "edutech" ? "active" : ""}
-                    onClick={() => setSelectedLink("edutech")}
-                  >
-                    Edutech
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/agreective"
-                    className={selectedLink === "agreective" ? "active" : ""}
-                    onClick={() => setSelectedLink("agreective")}
-                  >
-                    Agreective
-                  </Link>
-                </li>
-                <li>
-                  {/* {console.log((localStorage.getItem('isLoggedIn')))} */}
-                  <Link
-                    to="/invest"
-                    className={""}
-                    onClick={() => setSelectedLink("invest")}
-                  >
-                    Invest
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div className="col-md-4 title_text d-flex justify-content-end">
-              <button className="startups_section_btn">Invest now</button>
-            </div>
-          </div>
-          <div className="row d-flex justify-content-between align-items-center pt-5 pb-5">
-            <div className="col-2 fintech_card"></div>
-            <div className="col-2 fintech_card"></div>
-            <div className="col-2 fintech_card"></div>
-            <div className="col-2 fintech_card"></div>
-          </div>
-        </div>
+       <OurStartUp/>
       </div>
 
       <div className="container-fluid our_investor_section">

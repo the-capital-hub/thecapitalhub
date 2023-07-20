@@ -18,6 +18,8 @@ import Support from "./components/Investor/Support/Support";
 import Help from "./components/Investor/Help/Help";
 import Feed from "./components/Investor/Feed/Feed";
 import CreatePost from "./components/Investor/CreatePost/CreatePost";
+import AboutUs from "./components/AboutUs/AboutUs";
+import ContactUs from "./components/ContactUs/ContactUs";
 
 function App() {
   return (
@@ -30,6 +32,28 @@ function App() {
               <>
                 <Navbar />
                 <Home />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/about"
+            element={
+              <>
+                <Navbar />
+                <AboutUs />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/contactus"
+            element={
+              <>
+                <Navbar />
+                <ContactUs />
                 <Footer />
               </>
             }

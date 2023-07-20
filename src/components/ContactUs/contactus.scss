@@ -1,0 +1,112 @@
+$card-width: 30%;
+
+.contactus_container {
+    .title_section {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+
+        h2 {
+            color: #000;
+            font-family: Poppins;
+            font-size: 38px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+
+        span {
+            color: #2B2B2B;
+            font-family: Poppins;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+
+        .followus_image_section {
+            display: flex;
+            justify-content: space-around;
+            width: 30%;
+
+            img {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    }
+
+    .container {
+
+        .card-container_contact {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            flex: 1;
+            border-radius: 20px;
+            border: 1px solid #E7E7E7;
+            background: #F9F9F9;
+            width: $card-width;
+            padding: 20px;
+            margin-bottom: 20px;
+
+            img {
+                width: 70px;
+                height: 70px;
+            }
+
+            .text_content {
+                p {
+                    width: 100%;
+                    color: #797979;
+                    font-family: Poppins;
+                    font-size: 15px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: normal;
+                    word-wrap: normal;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: normal;
+                    margin-top: 10px;
+                }
+            }
+
+            button {
+                width: 141px;
+                height: 50px;
+                flex-shrink: 0;
+                border-radius: 40px;
+                background: #FFF;
+                color: #000;
+                font-family: Poppins;
+                font-size: 15px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                border: none;
+            }
+
+
+
+        }
+
+        // Media query for responsiveness
+        @media (max-width: 768px) {
+            .card-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                width: 100%;
+            }
+        }
+
+    }
+}
