@@ -67,17 +67,17 @@ const AboutUs = () => {
             </p>
           </div>
 
-          <div className="about_us_title_text mt-5">
+          <div className="about_us_title_text mt-5 co-investor_title">
             <h2 className="mb-5">Co-investors</h2>
             <CoInvestorCard />
           </div>
 
-          <div className="about_us_title_text mt-5">
+          <div className="about_us_title_text mt-5 meet_our_team">
             <h2 className="mb-5">Meet our team</h2>
             <MeetOurTeam />
           </div>
 
-          <div className="about_us_title_text mt-5">
+          <div className="about_us_title_text mt-5 team_title">
             <h2 className="mb-4"> Team</h2>
             <p>
               Lorem ipsum dolor sit amet consectetur. At consequat purus
@@ -93,7 +93,7 @@ const AboutUs = () => {
             </p>
           </div>
 
-          <div className="about_us_title_text mt-5 our_service">
+          <div className="about_us_title_text mt-5 our_service co-investor_title">
             <h2 className="mb-5">Our Services</h2>
             <p>
               Lorem ipsum dolor sit amet consectetur. At consequat purus

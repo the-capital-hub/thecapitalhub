@@ -21,6 +21,27 @@ $primary-color: #fd5901;
 
     .container {
         margin: 40px 100px;
+        .co-investor_title{
+            h2 {
+                &::after {
+                 width: 15% !important;
+                }
+            }
+        }
+        .team_title{
+            h2 {
+                &::after {
+                 width: 7% !important;
+                }
+            }
+        }
+        .meet_our_team{
+            h2 {
+                &::after {
+                 width: 17% !important;
+                }
+            }
+        }
 
         .about_us_title_text {
             h2 {
