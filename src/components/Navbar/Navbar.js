@@ -48,7 +48,7 @@ function Navbar() {
             </li>
             <li>
               {/* {console.log((localStorage.getItem('isLoggedIn')))} */}
-              <Link to="/login" className={'loginbtn'} onClick={() => setSelectedLink('login')}>Log in</Link>
+              <Link to="/signup" className={'loginbtn'} onClick={() => setSelectedLink('login')}>Log in</Link>
             </li>
           </ul>
         </div>

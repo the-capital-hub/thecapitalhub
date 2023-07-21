@@ -13,6 +13,13 @@ const MeetOurTeam = () => {
           </div>
         </div>
         <div class="card">
+          {/* <img src={LightSpeedIcon} alt="" /> */}
+          <div class="info">
+            <p class="name">Upma</p>
+            <p class="designation">Human Resource</p>
+          </div>
+        </div>
+        <div class="card">
           {/* <img src={MatrixIcon} alt="" /> */}
           <div class="info">
             <p class="name">Hari</p>

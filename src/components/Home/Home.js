@@ -97,7 +97,7 @@ const Home = () => {
             </div>
             <div className="col-7 ">
               <div className="row d-flex justify-content-left align-items-center title_text">
-                <h3>Angle Investment made easy</h3>
+                <h3>Angel investment made easy</h3>
                 <p>
                   Unlock the potential of early-stage startups and
                   entrepreneurs. Our platform connects angel investors with

@@ -1,5 +1,5 @@
 import React from "react";
-import "./footer.css";
+import "./footer.scss";
 import FbIcon from "../../Images/Fb.svg";
 import TwIcon from "../../Images/Tw.svg";
 import InIcon from "../../Images/In.svg";
@@ -84,10 +84,10 @@ const Footer = () => {
           </div>
           <div className="col-md-3 col-sm-6 ">
             <h4>Subscribe to our Newsletter</h4>
-            <p>
+            {/* <p>
               Lorem ipsum dolor sit amet consectetur. Velit enim est urna est
               massa cras. Sed varius convallis netus aliquet duis ut.
-            </p>
+            </p> */}
             <div className="input-group mb-3 subscribe_input">
               <input
                 type="text"
