@@ -35,7 +35,7 @@ const Home = () => {
     <>
       <div className="container mb-md-5">
         <div className="row">
-          <div className=" col-md-8 title__text d-flex flex-column justify-content-center">
+          <div className=" col-8 title__text d-flex flex-column justify-content-center">
             <h2>
               Find your prefect mentorship <br />
               for better future{" "}
@@ -43,27 +43,23 @@ const Home = () => {
             </h2>
 
             <h4>Are you a investor ?</h4>
-            <div className="row row-cols-md-3 g-0 mt-5">
-              <div className="col">
-                <Link to="/signup">
-                  <button className="btn1 btn-primary">Start Up</button>
-                </Link>
-              </div>
-              <div className="col">
-                <Link to="/investor">
-                  <button className="btn2 btn-primary">Investor</button>
-                </Link>
-              </div>
+            <div className="buttons_row g-0">
+              <Link to="/signup">
+                <button className="btn1 btn-primary">Start Up</button>
+              </Link>
+              <Link to="/investor">
+                <button className="btn2 btn-primary">Investor</button>
+              </Link>
             </div>
           </div>
-          <div className=" col-md-4 image_section">
+          <div className=" col-4 image_section">
             <img src={GirlIcon} alt="img1" />
           </div>
         </div>
       </div>
       <div className="container-fluid why_choose_us_container">
         <div className="container">
-          <WhyChooseUsCard/>
+          <WhyChooseUsCard />
         </div>
       </div>
 
@@ -202,7 +198,7 @@ const Home = () => {
       </div>
 
       <div className="container-fluid our_startups_section">
-       <OurStartUp/>
+        <OurStartUp />
       </div>
 
       <div className="container-fluid our_investor_section">

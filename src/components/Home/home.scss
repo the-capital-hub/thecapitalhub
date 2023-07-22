@@ -1,14 +1,17 @@
-// styles.scss
-
-// Variables (if any)
 $primary-color: #fd5901;
 $secondary-color: #1b2430;
 
-// Mixins (if any)
 
-// Styles
 .row {
   margin: 0;
+
+  .buttons_row {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+  }
 }
 
 .b {
@@ -23,6 +26,7 @@ $secondary-color: #1b2430;
     font-size: 48px;
     line-height: 170%;
     margin-top: 75px;
+    width: 100%;
   }
 
   h4 {
@@ -36,9 +40,8 @@ $secondary-color: #1b2430;
 
 .image_section {
   img {
-    margin-left: -156px;
-    height: 500px;
-    width: 570px;
+    width: 100%;
+
   }
 }
 
@@ -101,7 +104,7 @@ $secondary-color: #1b2430;
 .onelink_img {
   img {
     height: 730px;
-    width: 600px;
+    width: 100%
   }
 }
 
@@ -160,18 +163,21 @@ $secondary-color: #1b2430;
 
 .angel_img {
   img {
+    width: 100%;
     height: 480px;
   }
 }
 
 .client_img {
   img {
+    width: 100%;
     height: 450px;
   }
 }
 
 .mentor_img {
   img {
+    width: 100%;
     height: 400px;
   }
 }
@@ -200,4 +206,54 @@ $secondary-color: #1b2430;
   background-color: #faffff;
   padding-top: 5% !important;
   padding-bottom: 5% !important;
+}
+
+@media (max-width: 768px) {
+  .container.mb-md-5 {
+    margin-bottom: 20px;
+  }
+
+  .buttons_row {
+    margin-top: 20px !important;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100% !important;
+    a{
+      width: 45%;
+    }
+  }
+
+  .image_section {
+    img {
+      height: auto;
+      width: 100%;
+      margin: 20px 0;
+    }
+  }
+
+  .btn1,
+  .btn2,
+  button {
+    width: 100%;
+    margin: 10px 0;
+    height: 50px;
+  }
+
+  .title__text h2 {
+    font-size: 20px;
+    margin-top: 45px;
+  }
+
+  .title__text h4 {
+    font-size: 16px;
+  }
+
+  .our_investor_section .brand_icon img {
+    height: 60px;
+  }
+
+  .collab_brand_icon img {
+    height: 20px;
+  }
 }

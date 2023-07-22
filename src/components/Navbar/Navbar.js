@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.scss";
-import Logo from '../../Images/Logo.svg'
-
+import Logo from "../../Images/Logo.svg";
+import { RxCross2 } from "react-icons/rx";
+import { FaBars } from "react-icons/fa";
+import HambergerIcon from '../../Images/Hamberger.svg'
 
 function Navbar() {
   const [clicked, setClicked] = useState(false);
-  const [selectedLink, setSelectedLink] = useState('home');
+  const [selectedLink, setSelectedLink] = useState("home");
   const [isScrolling, setIsScrolling] = useState(false);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  
+
   const handleScroll = () => {
     const scrollTop = window.pageYOffset;
     setIsScrolling(scrollTop > 0);
@@ -24,41 +26,74 @@ function Navbar() {
   };
 
   return (
-    <div className="container">
-      <nav className={isScrolling ? "scrolling-nav" : ""}>
-        <Link to="/">
-          <img src={Logo} alt="logo" style={{height:"41px", width:"221px"}}/>
-        </Link>
+    <div className="container nav_container">
+      <nav className={`nav ${isScrolling ? "scrolling-nav" : ""}`}>
+        <div className="hamberger_logo_login_container">
+          <div className="logo_hamberger">
+            <div id="mobile" onClick={handleClick}>
+              {clicked ? (
+                <RxCross2 size={"2rem"} className="i" />
+              ) : (
+                <img src={HambergerIcon} alt="hamberger"/>
+              )}
+            </div>
 
-        <div>
-          <ul
-            id="navbar"
-            className={clicked ? "active" : ""}
-          >
+            <Link to="/" className="logo">
+              <img src={Logo} alt="logo" />
+            </Link>
+          </div>
+          <div>
             <li>
-              <Link to="/" className={selectedLink === 'home' ? 'active' : ''} onClick={() => setSelectedLink('home')}>
+              <Link
+                to="/signup"
+                className={"mobile_loginbtn"}
+                onClick={() => setSelectedLink("login")}
+              >
+                Log in
+              </Link>
+            </li>
+          </div>
+        </div>
+
+        <div className={`navbar-items ${clicked ? "active" : ""}`}>
+          <ul id="navbar" className={clicked ? "active" : ""}>
+            <li>
+              <Link
+                to="/"
+                className={selectedLink === "home" ? "active" : ""}
+                onClick={() => setSelectedLink("home")}
+              >
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/about" className={selectedLink === 'about' ? 'active' : ''} onClick={() => setSelectedLink('about')}>About Us</Link>
+              <Link
+                to="/about"
+                className={selectedLink === "about" ? "active" : ""}
+                onClick={() => setSelectedLink("about")}
+              >
+                About Us
+              </Link>
             </li>
             <li>
-              <Link to="/contactus" className={selectedLink === 'contactus' ? 'active' : ''} onClick={() => setSelectedLink('contactus')}>Contact Us</Link>
+              <Link
+                to="/contactus"
+                className={selectedLink === "contactus" ? "active" : ""}
+                onClick={() => setSelectedLink("contactus")}
+              >
+                Contact Us
+              </Link>
             </li>
             <li>
-              {/* {console.log((localStorage.getItem('isLoggedIn')))} */}
-              <Link to="/signup" className={'loginbtn'} onClick={() => setSelectedLink('login')}>Log in</Link>
+              <Link
+                to="/signup"
+                className={"loginbtn"}
+                onClick={() => setSelectedLink("login")}
+              >
+                Log in
+              </Link>
             </li>
           </ul>
-        </div>
-
-        <div id="mobile" onClick={handleClick}>
-          {/* <span
-            style={{color:'#fff'}}
-            id="bar"
-            className=""
-          >{clicked ? <RxCross2 size={'2rem'}/> : <FaBars size={'2rem'}/>}</span> */}
         </div>
       </nav>
     </div>

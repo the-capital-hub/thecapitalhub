@@ -1,6 +1,7 @@
 $card-width: 30%;
 
 .contactus_container {
+    overflow: auto;
     .title_section {
         display: flex;
         justify-content: center;
