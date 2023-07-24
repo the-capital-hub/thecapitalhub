@@ -11,7 +11,7 @@ const WhyChooseUsCard = () => {
   return (
     <>
       <div className="why_choose_us row justify-content-around align-items-center my-4">
-        <h2 className="text-center mb-5 mt-5">Why choose us</h2>
+        <h2 className="text-center text_center ">Why choose us</h2>
         <div className="col-md-4 b why_chooseus_card mb-69">
           <div className="row d-flex justify-content-center align-item-center inside_card">
             <img src={G1Icon} alt="img" />

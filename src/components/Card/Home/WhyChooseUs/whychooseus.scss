@@ -1,47 +1,86 @@
-.why_chooseus_card {
-    box-sizing: border-box;
-    width: 357px;
-    height: 380px;
-    border: 1px solid #e3e3e3;
-    border-radius: 10px;
+/* why choose us */
+.why_choose_us_container {
+  background-color: #000;
+
+
+  .why_choose_us {
     color: #fff;
-    background: #fcfcfc;
-  
-    .inside_card {
-      /* margin: 26px; */
-  
-      img {
-        height: 120px;
-        width: 120px;
-      }
-  
-      h3 {
-        font-family: "Poppins";
-        font-style: normal;
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 45px;
-        text-align: center;
-        letter-spacing: -0.002em;
-        color: #000000;
-      }
-  
-      p {
-        height: 96px;
-        left: 169px;
-        top: 1327px;
-        color: #1f1f1f;
-        font-family: "Poppins";
-        font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 24px;
-        text-align: justify;
-        letter-spacing: -0.002em;
-        padding: 5px 15px;
+
+    h2 {
+      color: #fff;
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 48px;
+      line-height: 72px;
+      text-align: center;
+      letter-spacing: -0.002em;
+      padding: 80px;
+    }
+  }
+}
+
+.why_chooseus_card {
+  box-sizing: border-box;
+  width: 357px;
+  height: 380px;
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+  color: #fff;
+  background: #fcfcfc;
+
+  .text_center {
+    margin: 20px 0px;
+  }
+
+  .inside_card {
+    /* margin: 26px; */
+
+    img {
+      height: 120px;
+      width: 120px;
+    }
+
+    h3 {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 45px;
+      text-align: center;
+      letter-spacing: -0.002em;
+      color: #000000;
+    }
+
+    p {
+      height: 96px;
+      left: 169px;
+      top: 1327px;
+      color: #1f1f1f;
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      text-align: justify;
+      letter-spacing: -0.002em;
+      padding: 5px 15px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .why_choose_us_container {
+    .why_choose_us {
+      h2 {
+        font-size: 26px;
+        padding: 20px;
       }
     }
   }
-  .mb-69 {
-    margin-bottom: 69px;
-  }
+
+}
+
+.mb-69 {
+  margin-bottom: 69px;
+}

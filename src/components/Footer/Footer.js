@@ -14,12 +14,12 @@ const Footer = () => {
       <div className="container">
         <div className="row">
           <div className="col-md-3 col-sm-12 d-flex justify-content-center align-items-center ">
-            <p>
+            {/* <p>
               Lorem ipsum dolor sit amet consectetur. Magna integer enim vitae
               vulputate eu vitae tristique.raju
-            </p>
+            </p> */}
           </div>
-          <div className="col-md-2 col-sm-6 ">
+          <div className="col-md-2 col-sm-6 footer_list_item">
             <h4>General</h4>
             <ul className="list-unstyled">
               <li>
@@ -44,7 +44,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="col-md-2 col-sm-6 ">
+          <div className="col-md-2 col-sm-6 footer_list_item">
             <h4>Policies</h4>
             <ul className="list-unstyled">
               <li>
@@ -69,7 +69,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="col-md-2 col-sm-6 ">
+          <div className="col-md-2 col-sm-6 footer_list_item">
             <h4>Get in touch</h4>
             <p>
               Follow us on social media and stay updated with the latest
@@ -82,7 +82,7 @@ const Footer = () => {
               <img src={YtIcon} alt="img" style={{margin:"0px 2px"}} />
             </div>
           </div>
-          <div className="col-md-3 col-sm-6 ">
+          <div className="col-md-3 col-sm-6 footer_list_item">
             <h4>Subscribe to our Newsletter</h4>
             {/* <p>
               Lorem ipsum dolor sit amet consectetur. Velit enim est urna est

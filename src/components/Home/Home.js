@@ -9,28 +9,12 @@ import ManageInvestortIcon from "../../Images/Group 10.svg";
 import MentorIcon from "../../Images/Group 13.svg";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Accel from "../../Images/Accel.svg";
-import RTP from "../../Images/RTP.svg";
-import Zoover from "../../Images/Zoover2.svg";
-import Nexus from "../../Images/Nexus Mods.svg";
-import Matrix from "../../Images/Matrix .svg";
-import Vhal from "../../Images/Vhall .svg";
-import YCom from "../../Images/Y Combinator.png";
-import LightSpeedIcon from "../../Images/LightSpeed.svg";
-import Kalari from "../../Images/KalaariCapital.svg";
-import GoogleIcon from "../../Images/Google.svg";
-import GoogleIcon1 from "../../Images/Google1.svg";
-import MicrosoftIcon1 from "../../Images/Microsoft1.svg";
-import MicrosoftIcon from "../../Images/Microsoft.svg";
-import Amazon from "../../Images/amazon.svg";
-import Zoover1 from "../../Images/Zoover.svg";
 import WhyChooseUsCard from "../Card/Home/WhyChooseUs/WhyChooseUsCard";
-import OurStartUp from "./OurStartUp";
+import OurStartUp from "./OurStartUp/OurStartUp";
+import CoInvestor from "./CoInvestor/CoInvestor";
+import OurCollabration from "./OurCollabration/OurCollabration";
 
 const Home = () => {
-  const [clicked, setClicked] = useState(false);
-  const [selectedLink, setSelectedLink] = useState("home");
-
   return (
     <>
       <div className="container mb-md-5">
@@ -55,6 +39,31 @@ const Home = () => {
           <div className=" col-4 image_section">
             <img src={GirlIcon} alt="img1" />
           </div>
+          <section className="welcome_section mt-5">
+            <h6>
+              Welcome to Capital Hub, Our integrated platform, where investors,
+              startups, and professionals come together to unlock new
+              opportunities and build meaningful connections. Whether your’re seeking
+              investment opportunities, looking to fund your startup, or eager
+              to expand your network, our platform offers the perfect ecosystem
+              to fulfill your goals
+            </h6>
+          </section>
+          <div className="container section_container">
+            <h2>Who are &nbsp;<span style={{color:"#FD5901"}}>we ?</span></h2>
+            <section className="welcome_section">
+              <h6>
+                The Capital HUB team comprises exceptional individuals with a
+                diveerse range of expertise, spanning investment banking,
+                startup management banking, startup management, software
+                development, advisory services, and more. Our collective
+                dedication is aimed at empowering startups to flourish and
+                thrive in today’s dynamic markrt. Together, we are committed to
+                providing the guidance and support needed for your startup to
+                reach new heights of success
+              </h6>
+            </section>
+          </div>
         </div>
       </div>
       <div className="container-fluid why_choose_us_container">
@@ -66,7 +75,7 @@ const Home = () => {
       <div className="container-fluid onelink_container">
         <div className="container">
           <div className="row d-flex justify-content-center align-items-center">
-            <div className="col-6 ">
+            <div className="col-lg-6 col-md-12">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Create your one link now</h3>
                 <p>
@@ -78,8 +87,8 @@ const Home = () => {
                 <button>Create</button>
               </div>
             </div>
-            <div className="col-6  onelink_img">
-              <img src={laptopIcon} alt="img" />
+            <div className="col-lg-6 col-md-12 onelink_img">
+              <img className="create_one_link" src={laptopIcon} alt="img" />
             </div>
           </div>
         </div>
@@ -87,11 +96,15 @@ const Home = () => {
 
       <div className="container-fluid onelink_container">
         <div className="container">
-          <div className="row d-flex justify-content-center align-items-center">
-            <div className="col-5  angel_img">
-              <img src={AngelIcon} alt="img" />
+          <div className="row d-flex justify-content-center align-items-center angel_investment">
+            <div className="col-lg-6 col-md-12  angel_img">
+              <img
+                className="angel_investment_image"
+                src={AngelIcon}
+                alt="img"
+              />
             </div>
-            <div className="col-7 ">
+            <div className="col-lg-6 col-md-12 angel_investment_text">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Angel investment made easy</h3>
                 <p>
@@ -111,7 +124,7 @@ const Home = () => {
       <div className="container-fluid onelink_container">
         <div className="container">
           <div className="row d-flex justify-content-center align-items-center">
-            <div className="col-6 ">
+            <div className="col-lg-6 col-md-12 ">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Manage your team</h3>
                 <p>
@@ -123,8 +136,8 @@ const Home = () => {
                 <button>Learn more</button>
               </div>
             </div>
-            <div className="col-6  onelink_img">
-              <img src={ManageTeamIcon} alt="img" />
+            <div className="col-lg-6 col-md-12  onelink_img">
+              <img className="manage_team_img" src={ManageTeamIcon} alt="img" />
             </div>
           </div>
         </div>
@@ -132,11 +145,11 @@ const Home = () => {
 
       <div className="container-fluid onelink_container">
         <div className="container">
-          <div className="row d-flex justify-content-center align-items-center">
-            <div className="col-5  client_img">
+          <div className="row d-flex justify-content-center align-items-center angel_investment">
+            <div className="col-lg-6 col-md-12 client_img">
               <img src={ManageClientIcon} alt="img" />
             </div>
-            <div className="col-7 ">
+            <div className="col-lg-6 col-md-12 angel_investment_text">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Client Management</h3>
                 <p>
@@ -156,7 +169,7 @@ const Home = () => {
       <div className="container-fluid onelink_container">
         <div className="container">
           <div className="row d-flex justify-content-center align-items-center">
-            <div className="col-6 ">
+            <div className="col-lg-6 col-md-12 ">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Investor management</h3>
                 <p>
@@ -168,8 +181,12 @@ const Home = () => {
                 <button className="investor_button">Learn more</button>
               </div>
             </div>
-            <div className="col-6  onelink_img">
-              <img src={ManageInvestortIcon} alt="img" />
+            <div className="col-lg-6 col-md-12  onelink_img">
+              <img
+                className="manage_team_img"
+                src={ManageInvestortIcon}
+                alt="img"
+              />
             </div>
           </div>
         </div>
@@ -177,11 +194,15 @@ const Home = () => {
 
       <div className="container-fluid onelink_container">
         <div className="container margin_bottom">
-          <div className="row d-flex justify-content-center align-items-center">
-            <div className="col-5  mentor_img">
-              <img src={MentorIcon} alt="img" />
+          <div className="row d-flex justify-content-center align-items-center angel_investment">
+            <div className="col-lg-6 col-md-12  mentor_img ">
+              <img
+                className="angel_investment_image"
+                src={MentorIcon}
+                alt="img"
+              />
             </div>
-            <div className="col-7 ">
+            <div className="col-lg-6 col-md-12 angel_investment_text">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Growth high for mentor</h3>
                 <p>
@@ -202,77 +223,11 @@ const Home = () => {
       </div>
 
       <div className="container-fluid our_investor_section">
-        <div className="container">
-          <div className="row ">
-            <h2 style={{ textAlign: "center" }}>Co-investors</h2>
-            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center">
-              <img src={Accel} alt="brans icons" />
-            </div>
-            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center mt-80">
-              <img src={RTP} alt="brans icons" />
-            </div>
-            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center">
-              <img src={Zoover} alt="brans icons" />
-            </div>
-            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center mt-80">
-              <img src={Nexus} alt="brans icons" />
-            </div>
-            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center">
-              <img src={Matrix} alt="brans icons" />
-            </div>
-            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center mt-80">
-              <img src={Vhal} alt="brans icons" />
-            </div>
-          </div>
-          <div className="row mt-4">
-            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center">
-              <img src={YCom} alt="brans icons" />
-            </div>
-            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center ">
-              <img src={LightSpeedIcon} alt="brans icons" />
-            </div>
-            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center">
-              <img src={Kalari} alt="brans icons" />
-            </div>
-            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center ">
-              <img src={GoogleIcon} alt="brans icons" />
-            </div>
-            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center">
-              <img src={MicrosoftIcon1} alt="brans icons" />
-            </div>
-            <div className="col-md-2 brand_icon d-flex justify-content-center align-items-center ">
-              <img src={Vhal} alt="brans icons" />
-            </div>
-          </div>
-        </div>
+        <CoInvestor />
       </div>
 
       <div className="container-fluid">
-        <div className="container mb-5">
-          <div className="row d-flex justify-content-around align-items-center">
-            <h2
-              style={{
-                textAlign: "center",
-                marginTop: "68px",
-                marginBottom: "68px",
-              }}
-            >
-              Our Collaboration
-            </h2>
-            <div className="col-md-2 collab_brand_icon d-flex justify-content-center align-items-center">
-              <img src={Amazon} alt="brans icons" />
-            </div>
-            <div className="col-md-2 collab_brand_icon d-flex justify-content-center align-items-center">
-              <img src={Zoover1} alt="brans icons" />
-            </div>
-            <div className="col-md-2 collab_brand_icon d-flex justify-content-center align-items-center">
-              <img src={GoogleIcon1} alt="brans icons" />
-            </div>
-            <div className="col-md-2 collab_brand_icon d-flex justify-content-center align-items-center">
-              <img src={MicrosoftIcon} alt="brans icons" />
-            </div>
-          </div>
-        </div>
+        <OurCollabration />
       </div>
     </>
   );

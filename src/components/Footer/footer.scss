@@ -204,3 +204,23 @@
 
   color: #bdb9b9;
 }
+
+@media screen and (max-width: 768px) {
+
+.footer_container{
+  .footer_list_item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .list-unstyled{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+}

@@ -6,12 +6,86 @@ $secondary-color: #1b2430;
   margin: 0;
 
   .buttons_row {
-    margin-top: 40px;
+    margin-top: 20px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 70%;
   }
+
+  .section_container {
+    margin: 20px;
+    overflow: hidden;
+
+    h2 {
+      background-color: #EAEAEA;
+      width: 30%;
+      font-family: Poppins;
+      font-size: 44px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 160%;
+      margin: 0px;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      border: 1px solid #EAEAEA;
+      background: #EAEAEA;
+      box-shadow: 4px 4px 30px 0px rgba(0, 0, 0, 0.10);
+      border-bottom: none;
+    }
+
+    .welcome_section {
+      background-color: #EAEAEA;
+      position: relative;
+      padding: 20px;
+      border: 1px solid #EAEAEA;
+      background: #EAEAEA;
+      box-shadow: 4px 4px 10px 0px rgba(152, 152, 152, 0.1);
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 30px;
+        top: 20px;
+        height: 80%;
+        width: 5px;
+        background-color: #FD5901;
+        border-radius: 8px;
+      }
+
+      h6 {
+        margin-left: 30px;
+      }
+    }
+  }
+
+  .welcome_section {
+    position: relative;
+    padding-left: 20px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      height: 90%;
+      width: 5px;
+      background-color: #FD5901;
+      border-radius: 8px;
+    }
+
+  }
+
+  .welcome_section h6 {
+    color: #414141;
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 40px;
+  }
+
 }
 
 .b {
@@ -77,86 +151,67 @@ $secondary-color: #1b2430;
   }
 }
 
-/* why choose us */
-.why_choose_us_container {
-  background-color: #000;
-}
-
-.why_choose_us {
-  color: #fff;
-
-  h2 {
-    color: #fff;
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 48px;
-    line-height: 72px;
-    text-align: center;
-    letter-spacing: -0.002em;
-    padding: 80px;
-  }
-}
-
 
 
 /* one Link section */
-.onelink_img {
-  img {
-    height: 730px;
-    width: 100%
-  }
-}
-
-.title_text {
-  h3 {
-    height: 62px;
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 44px;
-    line-height: 62px;
-    letter-spacing: -0.002em;
-    color: #000000;
+.onelink_container {
+  .onelink_img {
+    img {
+      height: 730px;
+      width: 100%
+    }
   }
 
-  p {
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 200;
-    font-size: 20px;
-    line-height: 34px;
-    text-align: justify;
-    color: #292929;
-    margin-top: 1rem;
-  }
-
-  button {
-    width: 210px;
-    height: 60px;
-    background: #a782ec;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 27px;
-    color: #ffffff;
-    border: none;
-    margin-top: 1rem;
-    margin-left: 15px;
-
-    &.angel_button {
-      background: #4fe9a4 !important;
+  .title_text {
+    h3 {
+      height: 62px;
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 38px;
+      line-height: 62px;
+      letter-spacing: -0.002em;
+      color: #000000;
     }
 
-    &.investor_button {
-      background: #1a1a1a !important;
+    p {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 200;
+      font-size: 20px;
+      line-height: 34px;
+      text-align: justify;
+      color: #292929;
+      margin-top: 1rem;
     }
 
-    &.mentor_button {
-      background-color: #fd5901 !important;
+    button {
+      width: 210px;
+      height: 60px;
+      background: #a782ec;
+      box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 27px;
+      color: #ffffff;
+      border: none;
+      margin-top: 1rem;
+      margin-left: 15px;
+
+      &.angel_button {
+        background: #4fe9a4 !important;
+      }
+
+      &.investor_button {
+        background: #1a1a1a !important;
+      }
+
+      &.mentor_button {
+        background-color: #fd5901 !important;
+      }
     }
   }
 }
@@ -186,21 +241,11 @@ $secondary-color: #1b2430;
   margin-bottom: 150px;
 }
 
-.mt-80 {
-  margin-top: 80px;
-}
 
-.brand_icon {
-  img {
-    height: 120px;
-  }
-}
 
-.collab_brand_icon {
-  img {
-    height: 30px;
-  }
-}
+// one_link_ends
+
+
 
 .our_investor_section {
   background-color: #faffff;
@@ -209,6 +254,37 @@ $secondary-color: #1b2430;
 }
 
 @media (max-width: 768px) {
+
+  .row {
+    .section_container {
+      margin: 0px;
+
+      h2 {
+        width: 100%;
+        font-size: 38px;
+      }
+
+      .welcome_section {
+        h6 {
+          font-size: 14px;
+        }
+
+        .break {
+          display: none;
+        }
+      }
+    }
+
+    .welcome_section h6 {
+      color: #414141;
+      font-family: Poppins;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 25px;
+    }
+  }
+
   .container.mb-md-5 {
     margin-bottom: 20px;
   }
@@ -219,16 +295,21 @@ $secondary-color: #1b2430;
     justify-content: space-around;
     align-items: center;
     width: 100% !important;
-    a{
-      width: 45%;
+
+    a {
+      width: 45% !important;
     }
   }
 
   .image_section {
     img {
+      // height: auto;
+      // width: 100%;
+      // margin: 20px 0;
       height: auto;
-      width: 100%;
-      margin: 20px 0;
+      width: 145px;
+      margin: 37px 0px 0px 0;
+      margin-left: -45px;
     }
   }
 
@@ -236,17 +317,105 @@ $secondary-color: #1b2430;
   .btn2,
   button {
     width: 100%;
-    margin: 10px 0;
-    height: 50px;
+    height: 36px;
+    padding: 0;
+    font-size: 12px;
+  }
+
+  .onelink_container {
+    .onelink_img {
+      .create_one_link {
+        margin-left: -26px;
+        margin-top: -30%;
+      }
+
+      img {
+        height: 730px;
+        width: 100%;
+      }
+    }
+
+    .angel_investment {
+      flex-direction: column-reverse;
+    }
+
+    .angel_investment_text {
+      margin-top: -30%;
+    }
+
+    .angel_investment_image {
+      margin-left: -15px;
+      margin-top: -3%;
+    }
+
+    .manage_team_img {
+      margin-left: -3px;
+      margin-top: -30%;
+    }
+
+
+
+    .title_text {
+      h3 {
+        height: 45px;
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 27px;
+        line-height: 35px;
+        letter-spacing: -0.002em;
+        color: #000000;
+      }
+
+      p {
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 200;
+        font-size: 20px;
+        line-height: 34px;
+        text-align: justify;
+        color: #292929;
+        margin-top: 1rem;
+      }
+
+      button {
+        width: 210px;
+        height: 60px;
+        background: #a782ec;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        color: #ffffff;
+        border: none;
+        margin-top: 1rem;
+        margin-left: 15px;
+
+        &.angel_button {
+          background: #4fe9a4 !important;
+        }
+
+        &.investor_button {
+          background: #1a1a1a !important;
+        }
+
+        &.mentor_button {
+          background-color: #fd5901 !important;
+        }
+      }
+    }
   }
 
   .title__text h2 {
-    font-size: 20px;
+    font-size: 15px;
     margin-top: 45px;
   }
 
   .title__text h4 {
-    font-size: 16px;
+    font-size: 13px;
   }
 
   .our_investor_section .brand_icon img {
@@ -256,4 +425,6 @@ $secondary-color: #1b2430;
   .collab_brand_icon img {
     height: 20px;
   }
+
+
 }
