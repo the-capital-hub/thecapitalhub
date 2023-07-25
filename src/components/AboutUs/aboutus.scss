@@ -21,24 +21,28 @@ $primary-color: #fd5901;
 
     .container {
         margin: 40px 100px;
-        .co-investor_title{
+
+        .co-investor_title {
             h2 {
                 &::after {
-                 width: 15% !important;
+                    width: 15% !important;
                 }
             }
         }
-        .team_title{
+
+        .team_title {
             h2 {
                 &::after {
-                 width: 7% !important;
+                    width: 7% !important;
                 }
             }
         }
-        .meet_our_team{
+
+        .meet_our_team {
+            margin-top: 3rem;
             h2 {
                 &::after {
-                 width: 17% !important;
+                    width: 17% !important;
                 }
             }
         }
@@ -81,7 +85,7 @@ $primary-color: #fd5901;
             h1 {
                 color: #000;
                 font-family: Poppins;
-                font-size: 48px;
+                font-size: 40px;
                 font-style: normal;
                 font-weight: 600;
                 line-height: normal;
@@ -106,6 +110,7 @@ $primary-color: #fd5901;
                 display: flex;
                 justify-content: space-between;
                 align-items: flex-start;
+                margin-top: 2rem;
 
                 .image {
                     width: 20%;
@@ -116,13 +121,19 @@ $primary-color: #fd5901;
 
                 .text_content {
                     width: 78%;
+
+                    .para_margin {
+                        margin-bottom: 20px;
+                        line-height: 27px;
+                        font-size: 16px;
+                    }
                 }
 
                 p,
                 span {
                     color: #535353;
                     font-family: Poppins;
-                    font-size: 18px;
+                    font-size: 16px;
                     font-style: normal;
                     font-weight: 400;
                     line-height: 40px;
@@ -155,4 +166,173 @@ $primary-color: #fd5901;
             }
         }
     }
+}
+
+@media screen and (max-width: 768px) {
+
+    .aboutus_container {
+
+        .title_text_row {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            h2 {
+                color: #FCFCFC;
+                font-family: Poppins;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                text-align: center;
+            }
+        }
+
+        .container {
+            margin: 0px;
+
+
+            .co-investor_title {
+                h2 {
+                    &::after {
+                        width: 45% !important;
+                    }
+                }
+            }
+    
+            .team_title {
+                h2 {
+                    &::after {
+                        width: 20% !important;
+                    }
+                }
+            }
+    
+            .meet_our_team {
+                margin-top: 1rem;
+                h2 {
+                    &::after {
+                        width: 47% !important;
+                    }
+                }
+            }
+
+            .about_us_title_text {
+                h2 {
+                    color: #000;
+                    font-family: Poppins;
+                    font-size: 25px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                    position: relative;
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        left: 0;
+                        bottom: -5px;
+                        /* Adjust this value to control the distance between the text and the underline */
+                        width: 30%;
+                        height: 2px;
+                        /* Adjust this value to control the thickness of the underline */
+                        background-color: $primary-color;
+                        /* Optionally change the color of the underline */
+                    }
+                }
+
+                p {
+                    color: #535353;
+                    font-family: Poppins;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 30px;
+                }
+            }
+
+            .founder_section {
+                h1 {
+                    color: #000;
+                    font-family: Poppins;
+                    font-size: 28px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                    position: relative;
+                    text-align: center;
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        left: 32%;
+                        bottom: -1px;
+                        width: 35%;
+                        height: 2px;
+                        background-color: $primary-color;
+                    }
+                }
+
+                .founder_container {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+
+                    .image {
+                        width: 80%;
+                        height: 250px;
+                        background: #DBDBDB;
+                        border-radius: 40px;
+                    }
+
+                    .text_content {
+                        width: 100%;
+
+                        .para_margin {
+                            font-size: 16px;
+                        }
+                    }
+
+                    p,
+                    span {
+                        color: #535353;
+                        font-family: Poppins;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 40px;
+                        margin: 10px;
+                    }
+
+                    h2 {
+                        color: #000;
+                        font-family: Poppins;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 40px;
+                        margin: 10px;
+                    }
+                }
+            }
+
+            .our_service {
+                ul {
+                    li {
+                        color: #535353;
+                        font-family: Poppins;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 40px;
+                        /* 166.667% */
+                    }
+                }
+            }
+        }
+
+    }
+
 }

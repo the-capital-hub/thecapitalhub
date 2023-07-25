@@ -1,0 +1,167 @@
+.login_container {
+
+  .login_heading {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .login_heading h3 {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 80px;
+    margin-top: 150px;
+    color: #000000;
+  }
+
+  .login_heading img {
+    margin-top: 0px;
+    height: 400px;
+  }
+
+  .login_heading_right {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 5%;
+  }
+
+  .login_heading_right h1 {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+
+    color: #000000;
+  }
+
+  .login_heading_right h3 {
+    margin-left: 10px;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 33px;
+    color: #000000;
+  }
+
+  label {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    text-align: center;
+    color: #000000;
+  }
+
+  input[type="text"],
+  input[type="tel"],
+  input[type="password"] {
+    width: 84%;
+    padding: 15px;
+    border-radius: 3px;
+    background-color: #fff;
+    padding: 18px 17px;
+    gap: 10px;
+    height: 54px;
+    border: 2px solid #000000;
+    border-radius: 10px;
+  }
+
+  .first_name {
+    width: 46%;
+  }
+
+  .form-check {
+    margin: 20px;
+  }
+
+  .form-check-label {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    color: #000000;
+  }
+
+  button[type="submit"] {
+    width: 437px;
+    height: 50px;
+    left: 832px;
+    top: 745px;
+    background: #fd5901;
+    border-radius: 10px;
+    border: none;
+  }
+
+  .login_btn {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    display: flex;
+    width: 86%;
+    justify-content: center;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 18px;
+    text-align: center;
+    color: #ffffff;
+    margin-top: 8%;
+  }
+
+  .line-container {
+    display: flex;
+    align-items: center;
+    width: 70%;
+    margin: 20px 0px 20px 54px;
+  }
+
+  .line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: black;
+    margin: 0 10px;
+  }
+
+  .text {
+    font-size: 18px;
+  }
+
+  .login_icons {
+    margin-left: -45px;
+  }
+
+  .login_icons img {
+    height: 30px;
+    margin: 10px;
+  }
+
+  .login_form {
+    margin-top: 30px;
+  }
+
+  .forgot_password {
+    text-decoration: none;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 38px;
+    /* identical to box height, or 180% */
+
+    text-align: center;
+
+    color: #fd5901;
+    display: flex;
+    justify-content: end;
+    width: 84%;
+  }
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import './whychooseus.scss'
+import "./whychooseus.scss";
 import G1Icon from "../../../../Images/Group 1 (1).svg";
 import G2Icon from "../../../../Images/Group 2 (1).svg";
 import G3Icon from "../../../../Images/Group 2 (2).svg";
@@ -17,9 +17,9 @@ const WhyChooseUsCard = () => {
             <img src={G1Icon} alt="img" />
             <h3>Angel Investor</h3>
             <p>
-              Discover strategic investment opportunities and connect with
-              promising startups through our platform, empowering you to make a
-              lasting impact on the entrepreneurial ecosystem.
+              Discover the perfect angel investors aligned with your preferences
+              through our advanced filtering system, as finding the right
+              investor is crucial for your startup's success.
             </p>
           </div>
         </div>
@@ -28,10 +28,9 @@ const WhyChooseUsCard = () => {
             <img src={G2Icon} alt="img" />
             <h3>One link</h3>
             <p>
-              Consolidate all your digital presence into a single, shareable
-              link. Streamline your online identity and make it easier for
-              others to explore your portfolio, projects, and social media
-              profiles effortlessly.
+              Streamline your startup's communication by sharing all vital
+              information, including pitch decks and documents, effortlessly
+              with a single, easily accessible link.
             </p>
           </div>
         </div>
@@ -40,10 +39,9 @@ const WhyChooseUsCard = () => {
             <img src={G3Icon} alt="img" />
             <h3>Networking</h3>
             <p>
-              Expand your professional network and forge valuable connections
-              with industry leaders, entrepreneurs, and like-minded individuals.
-              Unlock endless possibilities for collaboration, mentorship, and
-              career growth.
+              Expand your horizons by connecting and learning from experienced
+              leaders, mentors, and angel investors, fostering valuable
+              relationships to fuel your startup's growth.
             </p>
           </div>
         </div>
@@ -52,10 +50,9 @@ const WhyChooseUsCard = () => {
             <img src={G4Icon} alt="img" />
             <h3>Team Management</h3>
             <p>
-              Efficiently coordinate and oversee your team's tasks, deadlines,
-              and progress with our intuitive Team Management solution.
-              Streamline communication, boost productivity, and foster a
-              cohesive work environment.
+              Optimize team collaboration and productivity by adding members,
+              creating a vision board, and assigning tasks, all within an
+              efficient and cohesive environment for seamless teamwork.
             </p>
           </div>
         </div>
@@ -64,10 +61,9 @@ const WhyChooseUsCard = () => {
             <img src={G5Icon} alt="img" />
             <h3>Client Management(CRM)</h3>
             <p>
-              Simplify your client interactions and streamline your sales
-              process with our Client Management system. From lead generation to
-              nurturing relationships, our tools help you deliver exceptional
-              customer experiences.
+              Simplify client interactions with comprehensive management tools,
+              including payment and workflow tracking, invoice creation, and
+              easy payment processing for a seamless client experience.
             </p>
           </div>
         </div>
@@ -76,10 +72,10 @@ const WhyChooseUsCard = () => {
             <img src={G6Icon} alt="img" />
             <h3>Investor Management(IRM)</h3>
             <p>
-              Effectively manage your investor relationships, track funding
-              rounds, and keep stakeholders informed. Our Investor Management
-              solution provides the tools to streamline communication and foster
-              investor confidence.
+              Cultivate and nurture investor relationships with our platform's
+              dedicated tools, segmenting and engaging with potential investors
+              while effortlessly sharing your startup's details in just one
+              click.
             </p>
           </div>
         </div>

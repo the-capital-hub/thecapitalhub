@@ -20,6 +20,7 @@ import Feed from "./components/Investor/Feed/Feed";
 import CreatePost from "./components/Investor/CreatePost/CreatePost";
 import AboutUs from "./components/AboutUs/AboutUs";
 import ContactUs from "./components/ContactUs/ContactUs";
+import Service from "./components/Service/Service";
 
 function App() {
   return (
@@ -54,6 +55,17 @@ function App() {
               <>
                 <Navbar />
                 <ContactUs />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/service"
+            element={
+              <>
+                <Navbar />
+                <Service />
                 <Footer />
               </>
             }

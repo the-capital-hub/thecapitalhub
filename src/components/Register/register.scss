@@ -1,0 +1,272 @@
+.register_container {
+  .register_heading {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+
+    h3 {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 48px;
+      line-height: 80px;
+      margin-top: 150px;
+      color: #000000;
+    }
+
+    img {
+      margin-top: -50px;
+      height: 400px;
+    }
+  }
+
+  .register_heading_right {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 5%;
+
+    h1 {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 48px;
+      color: #000000;
+    }
+
+    h3 {
+      margin-left: 10px;
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 33px;
+      color: #000000;
+    }
+
+    .welcome {
+      display: none;
+    }
+
+    .already_have_account_mobile {
+      display: none;
+    }
+  }
+
+  label {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+    text-align: center;
+    color: #000000;
+  }
+
+  input[type="text"],
+  input[type="tel"],
+  input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    border-radius: 3px;
+    background-color: #fff;
+    padding: 18px 17px;
+    gap: 10px;
+    height: 54px;
+    border: 2px solid #000000;
+    border-radius: 10px;
+
+    &.first_name {
+      width: 46%;
+    }
+  }
+
+  .form-check {
+    margin: 20px;
+
+    .form-check-label {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 18px;
+      text-align: center;
+      color: #000000;
+    }
+  }
+
+  button[type="submit"] {
+    width: 437px;
+    height: 50px;
+    left: 832px;
+    top: 745px;
+    background: #fd5901;
+    border-radius: 10px;
+    border: none;
+  }
+
+  .submit_btn {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 90%;
+    justify-content: center;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 18px;
+    text-align: center;
+    color: #ffffff;
+  }
+
+  .line-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    margin: 20px 0px 20px 72px;
+
+    .line {
+      flex-grow: 1;
+      height: 1px;
+      background-color: black;
+    }
+  }
+
+  .text {
+    font-size: 18px;
+  }
+
+  .login_icons {
+    margin-left: -36px;
+
+    img {
+      height: 30px;
+      margin: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .register_container {
+    .register_heading {
+      display: none;
+    }
+
+    .register_heading_right {
+      h1 {
+        font-size: 24px;
+      }
+
+
+      label {
+        color: #000;
+        font-family: Poppins;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+
+      input[type="text"],
+      input[type="tel"],
+      input[type="password"] {
+        width: 100%;
+        padding: 15px;
+        border-radius: 3px;
+        background-color: #fff;
+        padding: 18px 17px;
+        gap: 10px;
+        height: 54px;
+        border: 2px solid #000000;
+        border-radius: 10px;
+
+        &.first_name {
+          width: 100%;
+        }
+
+        &::placeholder {
+          color: #B4B4B4;
+          font-family: Poppins;
+          font-size: 15px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+
+      .welcome {
+        display: block;
+        color: #000;
+        font-family: Poppins;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+
+      .already_have_account {
+        display: none;
+      }
+
+      .already_have_account_mobile {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        color: #B4B4B4;
+        font-family: Poppins;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+
+    }
+
+    .submit_btn {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      width: 100%;
+      justify-content: center;
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 18px;
+      text-align: center;
+      color: #ffffff;
+
+      button {
+        width: 80%;
+      }
+    }
+
+    .line-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 70%;
+      margin: 20px 0px 20px 85px;
+
+      .line {
+        flex-grow: 1;
+        height: 1px;
+        background-color: black;
+      }
+    }
+
+    .login_icons {
+      margin-left: 0px;
+
+      img {
+        height: 30px;
+        margin: 10px;
+      }
+    }
+  }
+
+
+}

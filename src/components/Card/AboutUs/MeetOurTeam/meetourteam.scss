@@ -8,6 +8,7 @@ $logo-size: 100px;
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
+    margin-bottom: 10%;
 
 
     .card {
@@ -20,7 +21,9 @@ $logo-size: 100px;
         justify-content: center;
         align-items: center;
         height: 236px;
-        p{
+        position: relative;
+
+        p {
             margin: 0;
         }
 
@@ -30,7 +33,7 @@ $logo-size: 100px;
             align-items: center;
             margin-top: 10px;
             position: absolute;
-            bottom: -20%;
+            bottom: -55%;
 
             .name {
                 color: #000;
@@ -50,7 +53,43 @@ $logo-size: 100px;
                 line-height: normal;
 
             }
+
+            .hovering_para {
+                color: #000;
+                font-family: Poppins;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 300;
+                line-height: 20px;
+                margin-top: 10px; 
+                width: 20rem;
+                text-align: center;
+            }
         }
 
+        .social_icon {
+            position: absolute;
+            top: 85%;
+
+            img {
+                cursor: pointer;
+            }
+
+        }
+
+
     }
+}
+
+@media screen and (max-width: 768px) {
+    .meetourteam_container {
+        justify-content: center;
+
+        .card {
+            width: 18rem;
+            margin-bottom: 10rem;
+        }
+    }
+
+
 }

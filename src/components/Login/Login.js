@@ -1,5 +1,5 @@
 import React from "react";
-import "./login.css";
+import "./login.scss";
 import RegisterIcon from "../../Images/Group 21.svg";
 import GIcon from "../../Images/Group 22.svg";
 import FIcon from "../../Images/Group 23.svg";
@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const Login = () => {
   return (
     <>
-      <div className="row d-flex">
+      <div className="row d-flex login_container">
         <div className="col-6 login_heading">
           <h3>Welcome back!</h3>
           <img src={RegisterIcon} alt="" />

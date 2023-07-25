@@ -1,5 +1,5 @@
 import React from "react";
-import "./register.css";
+import "./register.scss";
 import RegisterIcon from "../../Images/Group 21.svg";
 import GIcon from "../../Images/Group 22.svg";
 import FIcon from "../../Images/Group 23.svg";
@@ -8,24 +8,25 @@ import AIcon from "../../Images/Group 24.svg";
 const Register = () => {
   return (
     <>
-      <div className="row d-flex">
-        <div className="col-6 register_heading">
+      <div className="row d-flex register_container">
+        <div className="col-lg-6 col-md-12 register_heading">
           <h3>
             Start your journey <br />
             with us.
           </h3>
           <img src={RegisterIcon} alt="" />
         </div>
-        <div className="col-6 register_heading_right">
+        <div className="col-lg-6 col-md-12 register_heading_right">
+          <span className="welcome">Welcome </span>
           <h1>Create new account</h1>
-          <h3>
+          <h3 className="already_have_account">
             Already have an account?{" "}
             <span style={{ color: "red" }}>Log In</span>
           </h3>
 
           <form>
             <div className="row">
-              <div className="col-6 first_name">
+              <div className="col-lg-6 col-md-12 first_name">
                 <label for="firstname">First Name</label>
                 <input
                   type="text"
@@ -33,9 +34,10 @@ const Register = () => {
                   name="firstname"
                   className="form-control"
                   required
+                  placeholder="First Name"
                 />
               </div>
-              <div className="col-6 first_name">
+              <div className="col-lg-6 col-md-12 first_name">
                 <label for="lastname">Last Name</label>
                 <input
                   type="text"
@@ -43,12 +45,13 @@ const Register = () => {
                   name="lastname"
                   className="form-control"
                   required
+                  placeholder="Last Name"
                 />
               </div>
             </div>
 
             <div className="row">
-              <div className="col-12">
+              <div className="col-md-12">
                 <label for="mobile">Mobile Number</label>
                 <input
                   type="tel"
@@ -56,12 +59,13 @@ const Register = () => {
                   name="mobile"
                   className="form-control"
                   required
+                  placeholder="Mobile Number"
                 />
               </div>
             </div>
 
             <div className="row">
-              <div className="col-12">
+              <div className="col-md-12">
                 <label for="password">Password</label>
                 <input
                   type="password"
@@ -69,12 +73,13 @@ const Register = () => {
                   name="password"
                   className="form-control"
                   required
+                  placeholder="Password"
                 />
               </div>
             </div>
 
             <div className="row">
-              <div className="col-12">
+              <div className="col-md-12">
                 <label for="confirm-password">Confirm Password</label>
                 <input
                   type="password"
@@ -82,6 +87,7 @@ const Register = () => {
                   name="confirm-password"
                   className="form-control"
                   required
+                  placeholder="Confirm Password"
                 />
               </div>
             </div>
@@ -103,6 +109,10 @@ const Register = () => {
                 Create Account
               </button>
             </div>
+            <h3 className="already_have_account_mobile">
+              Already have an account?{" "}
+              <span style={{ color: "red" }}>Log In</span>
+            </h3>
           </form>
 
           <div className="line-container">

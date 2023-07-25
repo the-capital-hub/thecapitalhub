@@ -86,6 +86,15 @@ function Navbar() {
             </li>
             <li>
               <Link
+                to="/service"
+                className={selectedLink === "service" ? "active" : ""}
+                onClick={() => setSelectedLink("service")}
+              >
+                Service
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/signup"
                 className={"loginbtn"}
                 onClick={() => setSelectedLink("login")}

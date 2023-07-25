@@ -1,12 +1,12 @@
 // Variables for responsiveness
-$card-width: 15rem; 
-$logo-size: 100px; 
+$card-width: 15rem;
+$logo-size: 100px;
 
 .coinvestor-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    max-width: 1200px; 
+    max-width: 1200px;
     margin: 0 auto;
 
     img {
@@ -28,4 +28,31 @@ $logo-size: 100px;
         height: 236px;
     }
 
+}
+
+@media screen and (max-width: 768px) {
+    .coinvestor-container {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+
+        .card {
+            flex: 0 0 auto;
+            width: 10rem;
+            height: 136px;
+            margin-right: 10px;
+            img {
+                width: 105.905px;
+                height: 104.406px;
+                flex-shrink: 0;
+            }
+        }
+        .card::-webkit-scrollbar {
+            display: none;
+        }
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+    }
 }
