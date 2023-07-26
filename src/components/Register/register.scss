@@ -65,7 +65,7 @@
   }
 
   input[type="text"],
-  input[type="tel"],
+  input[type="email"],
   input[type="password"] {
     width: 100%;
     padding: 15px;
@@ -80,6 +80,23 @@
     &.first_name {
       width: 46%;
     }
+  }
+  input[type="tel"] {
+    width: 100%;
+    padding: 15px;
+    border-radius: 3px;
+    background-color: #fff;
+    padding: 18px 17px;
+    gap: 10px;
+    height: 54px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+
+    &:focus {
+      border: none;
+    }
+
   }
 
   .form-check {

@@ -1,51 +1,57 @@
-.login_container {
-
-  .login_heading {
+.register_container {
+  .register_heading {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     flex-direction: column;
+
+    h3 {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 48px;
+      line-height: 80px;
+      margin-top: 150px;
+      color: #000000;
+    }
+
+    img {
+      margin-top: -50px;
+      height: 400px;
+    }
   }
 
-  .login_heading h3 {
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 700;
-    font-size: 48px;
-    line-height: 80px;
-    margin-top: 150px;
-    color: #000000;
-  }
-
-  .login_heading img {
-    margin-top: 0px;
-    height: 400px;
-  }
-
-  .login_heading_right {
+  .register_heading_right {
     display: flex;
     justify-content: center;
     flex-direction: column;
     padding-top: 5%;
-  }
 
-  .login_heading_right h1 {
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 48px;
+    h1 {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 48px;
+      color: #000000;
+    }
 
-    color: #000000;
-  }
+    h3 {
+      margin-left: 10px;
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 33px;
+      color: #000000;
+    }
 
-  .login_heading_right h3 {
-    margin-left: 10px;
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 33px;
-    color: #000000;
+    .welcome {
+      display: none;
+    }
+
+    .already_have_account_mobile {
+      display: none;
+    }
   }
 
   label {
@@ -59,9 +65,8 @@
   }
 
   input[type="text"],
-  input[type="tel"],
   input[type="password"] {
-    width: 84%;
+    width: 100%;
     padding: 15px;
     border-radius: 3px;
     background-color: #fff;
@@ -70,24 +75,42 @@
     height: 54px;
     border: 2px solid #000000;
     border-radius: 10px;
+
+    &.first_name {
+      width: 46%;
+    }
   }
 
-  .first_name {
-    width: 46%;
+  input[type="tel"] {
+    width: 100%;
+    padding: 15px;
+    border-radius: 3px;
+    background-color: #fff;
+    padding: 18px 17px;
+    gap: 10px;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+
+    &:focus {
+      border: none;
+    }
+
   }
 
   .form-check {
     margin: 20px;
-  }
 
-  .form-check-label {
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 18px;
-    text-align: center;
-    color: #000000;
+    .form-check-label {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 18px;
+      text-align: center;
+      color: #000000;
+    }
   }
 
   button[type="submit"] {
@@ -100,12 +123,11 @@
     border: none;
   }
 
-  .login_btn {
+  .submit_btn {
     display: flex;
     justify-content: start;
     align-items: center;
-    display: flex;
-    width: 86%;
+    width: 90%;
     justify-content: center;
     font-family: "Poppins";
     font-style: normal;
@@ -114,21 +136,20 @@
     line-height: 18px;
     text-align: center;
     color: #ffffff;
-    margin-top: 8%;
   }
 
   .line-container {
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 70%;
-    margin: 20px 0px 20px 54px;
-  }
+    margin: 20px 0px 20px 72px;
 
-  .line {
-    flex-grow: 1;
-    height: 1px;
-    background-color: black;
-    margin: 0 10px;
+    .line {
+      flex-grow: 1;
+      height: 1px;
+      background-color: black;
+    }
   }
 
   .text {
@@ -136,32 +157,226 @@
   }
 
   .login_icons {
-    margin-left: -45px;
+    margin-left: -36px;
+
+    img {
+      height: 30px;
+      margin: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .register_container {
+    .register_heading {
+      display: none;
+    }
+
+    .register_heading_right {
+      h1 {
+        font-size: 24px;
+      }
+
+
+      label {
+        color: #000;
+        font-family: Poppins;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 15px;
+        border-radius: 3px;
+        background-color: #fff;
+        padding: 18px 17px;
+        gap: 10px;
+        height: 54px;
+        border: 2px solid #000000;
+        border-radius: 10px;
+
+        &.first_name {
+          width: 100%;
+        }
+
+        &::placeholder {
+          color: #B4B4B4;
+          font-family: Poppins;
+          font-size: 15px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+      input[type="tel"] {
+        width: 100%;
+        padding: 15px;
+        border-radius: 3px;
+        background-color: #fff;
+        padding: 18px 17px;
+        gap: 10px;
+        height: 50px;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+    
+        &:focus {
+          border: none;
+        }
+    
+      }
+
+      .welcome {
+        display: block;
+        color: #000;
+        font-family: Poppins;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+
+      .already_have_account {
+        display: none;
+      }
+
+      .already_have_account_mobile {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        color: #B4B4B4;
+        font-family: Poppins;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+
+
+
+
+    }
+
+    .submit_btn {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      width: 100%;
+      justify-content: center;
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 18px;
+      text-align: center;
+      color: #ffffff;
+
+      button {
+        width: 80%;
+      }
+    }
+
+    .line-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 70%;
+      margin: 20px 0px 20px 85px;
+
+      .line {
+        flex-grow: 1;
+        height: 1px;
+        background-color: black;
+      }
+    }
+
+    .login_icons {
+      margin-left: 0px;
+
+      img {
+        height: 30px;
+        margin: 10px;
+      }
+    }
   }
 
-  .login_icons img {
-    height: 30px;
-    margin: 10px;
+
+}
+
+.plato_form_control {
+  width: 100%;
+  padding: 15px;
+  border-radius: 3px;
+  background-color: #fff;
+  padding: 18px 17px;
+  gap: 10px;
+  height: 54px;
+  border: 2px solid #000000;
+  border-radius: 10px;
+
+  &.first_name {
+    width: 100%;
   }
 
-  .login_form {
-    margin-top: 30px;
-  }
-
-  .forgot_password {
-    text-decoration: none;
-    font-family: "Poppins";
+  &::placeholder {
+    color: #B4B4B4;
+    font-family: Poppins;
+    font-size: 15px;
     font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 38px;
-    /* identical to box height, or 180% */
-
-    text-align: center;
-
-    color: #fd5901;
-    display: flex;
-    justify-content: end;
-    width: 84%;
+    font-weight: 400;
+    line-height: normal;
   }
+
+  .PhoneInputInput {
+    border: none;
+  }
+
+  .PhoneInputCountry {
+    display: flex;
+    flex-direction: row-reverse;
+
+    .PhoneInputCountryIcon {
+      display: flex;
+
+      img {
+        height: 15px;
+        width: 24px;
+        border-radius: 50%;
+      }
+    }
+
+    .PhoneInputCountrySelect {
+      height: 18px;
+      width: 20px;
+      margin-left: 2px;
+      background-color: transparent;
+      border: none;
+    }
+  }
+
+  /* Add your custom styling here */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  /* Position the select to the left of the input */
+  .react-phone-number-input__country {
+    order: -1;
+    /* Move the country select to the left */
+    margin-right: 5px;
+    /* Add a small gap between select and input */
+  }
+
+  /* Adjust the size of the flag/logo */
+  .react-phone-number-input__icon {
+    /* You can adjust the height and width to your desired size */
+    height: 24px;
+    width: auto;
+  }
+
 }

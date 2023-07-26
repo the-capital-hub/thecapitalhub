@@ -1,11 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import "./register.scss";
 import RegisterIcon from "../../Images/Group 21.svg";
 import GIcon from "../../Images/Group 22.svg";
 import FIcon from "../../Images/Group 23.svg";
 import AIcon from "../../Images/Group 24.svg";
+import PhoneInput from "react-phone-number-input";
+import AfterRegisterPopUp from "../PopUp/AfterRegisterPopUp/AfterRegisterPopUp";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [inputValues, setInputValues] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    phoneNumber: "",
+  });
+
+  const handleInputChange = (event, type) => {
+    if (type !== "country" && type !== "state" && type !== "phoneNumber") {
+      const { name, value } = event.target;
+      setInputValues({ ...inputValues, [name]: value });
+    } else if (type === "country") {
+      setInputValues({ ...inputValues, country: event });
+    } else if (type === "state") {
+      setInputValues({ ...inputValues, state: event });
+    } else if (type === "phoneNumber") {
+      setInputValues({ ...inputValues, phoneNumber: event });
+    }
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    localStorage.setItem("user_data", JSON.stringify(inputValues));
+    console.log(inputValues);
+
+    setIsSubmitted(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsSubmitted(true);
+    navigate("/");
+  };
+
+  const navigate = useNavigate();
   return (
     <>
       <div className="row d-flex register_container">
@@ -24,17 +63,19 @@ const Register = () => {
             <span style={{ color: "red" }}>Log In</span>
           </h3>
 
-          <form>
+          <form onSubmit={handleFormSubmit}>
             <div className="row">
               <div className="col-lg-6 col-md-12 first_name">
                 <label for="firstname">First Name</label>
                 <input
                   type="text"
                   id="firstname"
-                  name="firstname"
+                  name="firstName"
                   className="form-control"
                   required
                   placeholder="First Name"
+                  value={inputValues.firstName}
+                  onChange={(e) => handleInputChange(e, "firstName")}
                 />
               </div>
               <div className="col-lg-6 col-md-12 first_name">
@@ -42,24 +83,43 @@ const Register = () => {
                 <input
                   type="text"
                   id="lastname"
-                  name="lastname"
+                  name="lastName"
+                  value={inputValues.lastName}
                   className="form-control"
                   required
                   placeholder="Last Name"
+                  onChange={(e) => handleInputChange(e, "lastName")}
                 />
               </div>
             </div>
 
             <div className="row">
-              <div className="col-md-12">
-                <label for="mobile">Mobile Number</label>
-                <input
-                  type="tel"
-                  id="mobile_number"
-                  name="mobile"
-                  className="form-control"
-                  required
+              <div className="col-md-12 input-container">
+                <label htmlFor="mobile">Mobile Number</label>
+                <PhoneInput
                   placeholder="Mobile Number"
+                  className="form-control plato_form_control"
+                  defaultCountry="IN"
+                  countryCallingCodeEditable={false}
+                  initialValueFormat="national"
+                  autoComplete="off"
+                  onChange={(e) => handleInputChange(e, "phoneNumber")}
+                  value={inputValues.phoneNumber}
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-12">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  className="form-control"
+                  value={inputValues.email}
+                  required
+                  placeholder="Email"
+                  onChange={(e) => handleInputChange(e, "email")}
                 />
               </div>
             </div>
@@ -71,23 +131,11 @@ const Register = () => {
                   type="password"
                   id="password"
                   name="password"
+                  value={inputValues.password}
                   className="form-control"
                   required
                   placeholder="Password"
-                />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-md-12">
-                <label for="confirm-password">Confirm Password</label>
-                <input
-                  type="password"
-                  id="confirm-password"
-                  name="confirm-password"
-                  className="form-control"
-                  required
-                  placeholder="Confirm Password"
+                  onChange={(e) => handleInputChange(e, "password")}
                 />
               </div>
             </div>
@@ -128,6 +176,7 @@ const Register = () => {
             </div>
           </div>
         </div>
+        {isSubmitted && <AfterRegisterPopUp onClose={handleClosePopup} />}
       </div>
     </>
   );

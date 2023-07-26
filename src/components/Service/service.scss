@@ -29,6 +29,7 @@
 
         .our_service {
             position: relative;
+            margin-bottom: 20px;
 
             h1 {
                 color: black;
@@ -48,6 +49,7 @@
 
             .list_container {
                 display: flex;
+                margin-top: 3rem;
 
                 .number_section {
                     position: relative;
@@ -75,6 +77,8 @@
 
                 .content_and_text {
                     display: flex;
+                    justify-content: center;
+                    align-items: center;
                     margin-left: 3rem;
 
                     img {
@@ -86,9 +90,36 @@
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
+                        align-items: flex-start;
                         margin-top: 10px;
+
+                        h5 {
+                            color: #000;
+                            font-family: Poppins;
+                            font-size: 20px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: normal;
+                            letter-spacing: -0.04px;
+                        }
+
+                        p {
+                            color: #373737;
+                            text-align: justify;
+                            font-family: Poppins;
+                            font-size: 18px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: normal;
+                        }
                     }
                 }
+            }
+
+            .read_more {
+                border: none;
+                color: red;
+                background-color: transparent;
             }
         }
 
@@ -158,4 +189,103 @@
         }
 
     }
+}
+
+@media screen and (max-width: 768px) {
+    .service_main_container {
+        .container {
+            .heading_section {
+                h1 {
+                    font-size: 34px;
+                }
+
+                p {
+                    font-size: 14px;
+                }
+            }
+
+            .our_service {
+                h1 {
+                    color: black;
+                    font-size: 20px;
+                    font-weight: bold;
+                    text-align: left;
+
+                    &::after {
+                        content: "";
+                        display: block;
+                        width: 100px;
+                        height: 2px;
+                        background-color: black;
+                        margin: 8px;
+                    }
+                }
+
+                .list_container {
+                    margin-top: 1rem;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+
+                    .number_section {
+                        position: relative;
+                        color: #A4ABBA;
+                        font-family: Poppins;
+                        font-size: 44px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: normal;
+
+                        &::after {
+                            content: "";
+                            position: absolute;
+                            height: 2px;
+                            /* Change width to height */
+                            width: 103px;
+                            /* Change height to width */
+                            background: #A4ABBA;
+                            top: 90%;
+                            right: -80px;
+                            transform: translateX(-50%);
+                            /* Change translateY to translateX */
+                        }
+                    }
+
+                    .content_and_text {
+                        justify-content: center;
+                        align-items: center;
+                        margin-left: 1rem;
+
+                        img {
+                            height: 70px;
+                            width: 70px;
+                        }
+
+                        .text_container {
+                            h5 {
+                                font-size: 16px;
+                            }
+
+                            p {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+
+
+
+                }
+
+                .read_more {
+                    border: none;
+                    color: red;
+                    background-color: transparent;
+                    font-size: 16px;
+                    margin-left: -15%;
+                }
+            }
+        }
+    }
+
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./service.scss";
 import serviceSixIcon from "../../Images/service/Group 15404.svg";
 import serviceTwoIcon from "../../Images/service/Group 15405.svg";
@@ -11,6 +11,11 @@ import leftIcon from "../../Images/service/Arrow---Left-Circle.svg";
 import rightIcon from "../../Images/service/Arrow---Right-Circle.svg";
 
 const Service = () => {
+  const [showMore, setShowMore] = useState(false);
+
+  const handleReadMoreClick = () => {
+    setShowMore(!showMore);
+  };
   return (
     <>
       <div className="container-fluid service_main_container">
@@ -30,7 +35,7 @@ const Service = () => {
           </section>
           <section className="our_service">
             <h1>Our Services</h1>
-            <div className="list_container mt-5">
+            <div className="list_container">
               <div className="number_section">01</div>
               <div className="content_and_text">
                 <img src={serviceOneIcon} alt="img" />
@@ -41,12 +46,15 @@ const Service = () => {
                     HUB is now your one-stop destination for all your
                     fundraising needs.{" "}
                   </p>
+                  <button onClick={handleReadMoreClick} className="read_more">
+                   Read more >>
+                  </button>
                 </div>
               </div>
             </div>
             <hr />
 
-            <div className="list_container mt-5">
+            <div className="list_container ">
               <div className="number_section">02</div>
               <div className="content_and_text">
                 <img src={serviceFiveIcon} alt="img" />
@@ -56,12 +64,15 @@ const Service = () => {
                     Capital HUB offers elegant pitch deck design and
                     professional support to startups.
                   </p>
+                  <button onClick={handleReadMoreClick} className="read_more">
+                   Read more >>
+                  </button>
                 </div>
               </div>
             </div>
             <hr />
 
-            <div className="list_container mt-5">
+            <div className="list_container ">
               <div className="number_section">03</div>
               <div className="content_and_text">
                 <img src={serviceFourIcon} alt="img" />
@@ -72,12 +83,15 @@ const Service = () => {
                     of any business plan, and they can have a big impact on your
                     business's success.
                   </p>
+                  <button onClick={handleReadMoreClick} className="read_more">
+                   Read more >>
+                  </button>
                 </div>
               </div>
             </div>
             <hr />
 
-            <div className="list_container mt-5">
+            <div className="list_container ">
               <div className="number_section">04</div>
               <div className="content_and_text">
                 <img src={serviceThreeIcon} alt="img" />
@@ -88,12 +102,15 @@ const Service = () => {
                     to Web development, and Android and iOS development
                     services.
                   </p>
+                  <button onClick={handleReadMoreClick} className="read_more">
+                   Read more >>
+                  </button>
                 </div>
               </div>
             </div>
             <hr />
 
-            <div className="list_container mt-5">
+            <div className="list_container ">
               <div className="number_section">05</div>
               <div className="content_and_text">
                 <img src={serviceTwoIcon} alt="img" />
@@ -104,12 +121,15 @@ const Service = () => {
                     business transformation through the power of people,
                     technology, and innovation.
                   </p>
+                  <button onClick={handleReadMoreClick} className="read_more">
+                   Read more >>
+                  </button>
                 </div>
               </div>
             </div>
             <hr />
 
-            <div className="list_container mt-5">
+            <div className="list_container ">
               <div className="number_section">06</div>
               <div className="content_and_text">
                 <img src={serviceSixIcon} alt="img" />
@@ -119,13 +139,16 @@ const Service = () => {
                     Capital HUB supports startups with compliance and DD
                     services as part of their fundraising journey.
                   </p>
+                  <button onClick={handleReadMoreClick} className="read_more">
+                   Read more >>
+                  </button>
                 </div>
               </div>
             </div>
             <hr />
           </section>
 
-          <section className="our_client_feedback mt-5">
+          {/* <section className="our_client_feedback ">
             <h1>What Our Client Says</h1>
             <div className="feedback_container mt-5 mb-5">
               <div className="col-lg-6 image_container">
@@ -148,13 +171,13 @@ const Service = () => {
                 </div>
               </div>
             </div>
-            <p>
+            <p className="end_para">
               Lorem ipsum dolor sit amet consectetur. Maecenas ac elementum
               lacus vel vitae sed nisi aliquam aliquet. Vel adipiscing placerat
               tellus faucibus diam mauris ipsum vitae. Justo adipiscing integer
               dictum tortor viverra vel .Lorem ipsum dolor sit amet consectetur.
             </p>
-          </section>
+          </section> */}
         </div>
       </div>
     </>

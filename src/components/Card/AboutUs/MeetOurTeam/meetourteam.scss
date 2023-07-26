@@ -20,8 +20,15 @@ $logo-size: 100px;
         flex-direction: column; // Add this to arrange name and designation vertically
         justify-content: center;
         align-items: center;
-        height: 236px;
         position: relative;
+        max-height: 250px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 29.965px;
+        }
 
         p {
             margin: 0;
@@ -33,7 +40,7 @@ $logo-size: 100px;
             align-items: center;
             margin-top: 10px;
             position: absolute;
-            bottom: -55%;
+            bottom: -58%;
 
             .name {
                 color: #000;
@@ -61,18 +68,23 @@ $logo-size: 100px;
                 font-style: normal;
                 font-weight: 300;
                 line-height: 20px;
-                margin-top: 10px; 
+                margin-top: 10px;
                 width: 20rem;
                 text-align: center;
             }
         }
 
-        .social_icon {
+        .social_icon_list {
+            display: flex;
             position: absolute;
-            top: 85%;
+            top: -30%;
+            margin-right:0px !important;
 
             img {
                 cursor: pointer;
+                height: 35px;
+                width: 35px;
+                fill: aliceblue;
             }
 
         }

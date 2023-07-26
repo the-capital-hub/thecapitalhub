@@ -2,6 +2,7 @@ import React from "react";
 import "./aboutus.scss";
 import CoInvestorCard from "../Card/AboutUs/CoInvestor/CoInvestorCard";
 import MeetOurTeam from "../Card/AboutUs/MeetOurTeam/MeetOurTeam";
+import PramodImage from "../../Images/service/pramod.jpeg";
 
 const AboutUs = () => {
   return (
@@ -28,8 +29,8 @@ const AboutUs = () => {
           <div className="founder_section mb-5">
             <h1>Founding team</h1>
             <div className="founder_container">
-              <div className="image ">
-                <img src="" alt="" />
+              <div className="image">
+                <img src={PramodImage} alt="" />
               </div>
 
               <div className="text_content">
@@ -138,14 +139,13 @@ const AboutUs = () => {
             <p>That's why we started Capital HUB</p>
           </div>
 
-          <div className="about_us_title_text mt-5 co-investor_title">
-            <h2 className="mb-5">Co-investors</h2>
-            <CoInvestorCard />
-          </div>
-
           <div className="about_us_title_text meet_our_team">
             <h2 className="mb-5">Meet our Warriors</h2>
             <MeetOurTeam />
+          </div>
+          <div className="about_us_title_text mt-5 co-investor_title mb-5">
+            <h2 className="mb-5">Our Collaborations</h2>
+            <CoInvestorCard />
           </div>
 
           {/* <div className="about_us_title_text mt-5 team_title">
