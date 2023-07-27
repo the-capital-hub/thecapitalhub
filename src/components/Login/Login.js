@@ -5,6 +5,7 @@ import GIcon from "../../Images/Group 22.svg";
 import FIcon from "../../Images/Group 23.svg";
 import AIcon from "../../Images/Group 24.svg";
 import PhoneInput from "react-phone-number-input";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [inputValues, setInputValues] = useState({
@@ -45,7 +46,7 @@ const Login = () => {
           <h1 className="mt-5">Log in</h1>
           <h3 className="already_have_account">
             I don’t have an account?{" "}
-            <span style={{ color: "red" }}>Create account</span>
+            <Link to={"/signup"} style={{ color: "red" }}>Create account</Link>
           </h3>
 
           <form>
@@ -98,7 +99,7 @@ const Login = () => {
             </div>
             <h3 className="already_have_account_mobile">
               I don’t have an account? &nbsp;
-              <span style={{ color: "red" }}>Create account</span>
+              <Link to={"/signup"} style={{ color: "red" }}>Create account</Link>
             </h3>
           </form>
 

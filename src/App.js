@@ -21,6 +21,12 @@ import CreatePost from "./components/Investor/CreatePost/CreatePost";
 import AboutUs from "./components/AboutUs/AboutUs";
 import ContactUs from "./components/ContactUs/ContactUs";
 import Service from "./components/Service/Service";
+import Fundraising from "./components/Service/Fundraising/Fundraising";
+import PitchDeck from "./components/Service/PitchDeck/PitchDeck";
+import WebDevelopment from "./components/Service/WebDevelopment/WebDevelopment";
+import FinancialsDocumentation from "./components/Service/FinancialsDocumentation/FinancialsDocumentation";
+import StartupConsulting from "./components/Service/StartupConsulting/StartupConsulting";
+import CompliancesDeligence from "./components/Service/CompliancesDeligence/CompliancesDeligence";
 
 function App() {
   return (
@@ -66,6 +72,68 @@ function App() {
               <>
                 <Navbar />
                 <Service />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/fundraising"
+            element={
+              <>
+                <Navbar />
+                <Fundraising />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/pitch-deck"
+            element={
+              <>
+                <Navbar />
+                <PitchDeck />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/financials-document"
+            element={
+              <>
+                <Navbar />
+                <FinancialsDocumentation />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/sturtup-consulting"
+            element={
+              <>
+                <Navbar />
+                <StartupConsulting />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/complience"
+            element={
+              <>
+                <Navbar />
+                <CompliancesDeligence />
+                <Footer />
+              </>
+            }
+          />
+           <Route
+            path="/web-development"
+            element={
+              <>
+                <Navbar />
+                <WebDevelopment />
                 <Footer />
               </>
             }

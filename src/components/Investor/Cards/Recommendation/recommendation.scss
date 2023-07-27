@@ -1,0 +1,49 @@
+.recommendation_main_container {
+
+
+    .recommendation_card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .recommendation_card_body {
+        display: flex;
+        justify-content: start;
+        align-items: flex-start;
+    }
+
+    .recommendation_card_body img {
+        width: 30px;
+    }
+
+    .recommendation_card_text h3 {
+        color: #484848;
+        font-size: 15px;
+        font-family: Poppins;
+        font-weight: 600;
+    }
+
+    .recommendation_card_text button {
+        width: 89px;
+        height: 29px;
+        flex-shrink: 0;
+        border-radius: 20px;
+        border: 1px solid #acacac;
+        color: #000;
+        font-size: 13px;
+        font-family: Poppins;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+    }
+
+    .recommendation_card_text button img {
+        width: 13px;
+    }
+
+    .recommendation_card hr {
+        margin: 0px 5%;
+    }
+}

@@ -59,9 +59,9 @@ const Home = () => {
                 startup management banking, startup management, software
                 development, advisory services, and more. Our collective
                 dedication is aimed at empowering startups to flourish and
-                thrive in today’s dynamic markrt. Together, we are committed to
+                thrive in today’s dynamic market. Together, we are committed to
                 providing the guidance and support needed for your startup to
-                reach new heights of success
+                reach new heights of success.
               </h6>
             </section>
           </div>
@@ -79,7 +79,7 @@ const Home = () => {
             <div className="col-lg-6 col-md-12">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Create your one link now</h3>
-                <p>
+                <p className="desktop_para">
                   With our innovative "One Link" feature, managing your
                   startup's communication has never been easier. Say goodbye to
                   the hassle of multiple attachments and lengthy emails. <br />
@@ -90,6 +90,12 @@ const Home = () => {
                   investors, partners, and stakeholders. Experience the
                   simplicity of centralized information sharing and make a
                   lasting impression with a seamless, professional approach.
+                </p>
+                <p className="mobile_para">
+                  Build your online presence effortlessly with our user-friendly
+                  platform. Customise your unique One-Link, showcase your work,
+                  and connect with your audience seamlessly. Start building your
+                  digital footprint today!
                 </p>
                 <button>Create</button>
               </div>
@@ -114,7 +120,7 @@ const Home = () => {
             <div className="col-lg-6 col-md-12 angel_investment_text">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Angel investment made easy</h3>
-                <p>
+                <p className="desktop_para">
                   Unlock the potential of your startup by connecting with the
                   ideal angel investors tailored to your preferences. Our
                   advanced filtering system ensures you find the perfect match,
@@ -122,6 +128,13 @@ const Home = () => {
                   on this opportunity to take your business to new heights with
                   the right investors by your side. Let us help you make the
                   right connections for a thriving future.
+                </p>
+                <p className="mobile_para">
+                  Unlock the potential of early-stage startups and
+                  entrepreneurs. Our platform connects angel investors with
+                  innovative ideas, providing a streamlined and secure
+                  investment process for sustainable growth and financial
+                  returns.
                 </p>
                 <button className="angel_button">Learn more</button>
               </div>
@@ -136,7 +149,7 @@ const Home = () => {
             <div className="col-lg-6 col-md-12 ">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Manage your team</h3>
-                <p>
+                <p className="desktop_para">
                   With our intuitive team management tools, enhance
                   collaboration and productivity within your startup. Easily add
                   team members, create vision boards, and assign tasks,
@@ -144,6 +157,12 @@ const Home = () => {
                   Experience the power of our platform, driving your startup
                   towards success through efficient and effective team
                   management.
+                </p>
+                <p className="mobile_para">
+                  Efficiently oversee your team's projects, tasks, and
+                  collaboration with our powerful Team Management tools.
+                  Streamline workflows, foster effective communication, and
+                  drive productivity to achieve remarkable results.
                 </p>
                 <button>Learn more</button>
               </div>
@@ -164,13 +183,20 @@ const Home = () => {
             <div className="col-lg-6 col-md-12 angel_investment_text">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Client Management</h3>
-                <p>
+                <p className="desktop_para">
                   Elevate client interactions with our user-friendly management
                   tools. From simplified payment and workflow tracking to
                   effortless invoice creation and smooth payment processing, our
                   platform ensures a seamless and satisfying experience for your
                   clients. Strengthen client relationships and leave a lasting
                   impression with our comprehensive client management solutions.
+                </p>
+                <p className="mobile_para">
+                  Transform your approach to client relationships. Our Client
+                  Management system centralises client data, streamlines
+                  communication, and automates processes, empowering you to
+                  deliver personalised and exceptional service at every
+                  touchpoint.
                 </p>
                 <button className="angel_button">Learn more</button>
               </div>
@@ -185,13 +211,20 @@ const Home = () => {
             <div className="col-lg-6 col-md-12 ">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Investor management</h3>
-                <p>
+                <p className="desktop_para">
                   Foster investor relationships with our dedicated tools,
                   nurturing and cultivating connections. Effortlessly segment
                   and engage with potential investors, while sharing your
                   startup's details in just one click. Our platform empowers you
                   to build strong investor connections, driving the success and
                   growth of your startup.
+                </p>
+
+                <p className="mobile_para">
+                  Elevate your investor relations with our comprehensive
+                  Investor Management platform. From fundraising to reporting,
+                  track and engage with investors, foster trust, and drive
+                  success for your venture.
                 </p>
                 <button className="investor_button">Learn more</button>
               </div>
@@ -220,7 +253,7 @@ const Home = () => {
             <div className="col-lg-6 col-md-12 angel_investment_text">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Growthive for Mentors</h3>
-                <p>
+                <p className="desktop_para">
                   Introducing Growthive, an innovative program by Capital HUB
                   that bridges the gap between investors and early-stage
                   startups. Investors become mentors, offering their expertise
@@ -229,6 +262,12 @@ const Home = () => {
                   knowledge at their disposal, Growthive empowers startups to
                   navigate the challenging journey from 0 to 1, unlocking their
                   full potential and fostering lasting growth.
+                </p>
+                <p className="mobile_para">
+                  Unlock the potential of mentorship. Join our network of
+                  accomplished mentors and guide the next generation of
+                  entrepreneurs. Share your expertise, cultivate innovative
+                  ideas, and create a lasting impact on startup success.
                 </p>
                 <button className="mentor_button">Be a mentor now</button>
               </div>

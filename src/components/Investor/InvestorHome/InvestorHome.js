@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import "./investorHome.css";
+import "./investorHome.scss";
 import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
 import { CiEdit } from "react-icons/ci";
@@ -14,7 +14,7 @@ import CompanyDetailsCard from "../Cards/CompanyDetails/CompanyDetailsCard";
 
 const InvestorHome = () => {
   return (
-    <div className="container-fluid">
+    <div className="container-fluid investorHome_main_container">
       <div className="row mt-2">
         <div className="col">
         <SmallProfileCard />

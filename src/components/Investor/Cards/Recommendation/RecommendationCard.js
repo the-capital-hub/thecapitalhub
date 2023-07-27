@@ -1,11 +1,12 @@
 import React from "react";
 import AddUserIconBlack from "../../../../Images/investorIcon/Add-UserBlack.svg";
 import profilePic from "../../../../Images/investorIcon/profilePic.svg";
-
+import './recommendation.scss'
 
 const RecommendationCard = () => {
   return (
     <>
+    <div className="recommendation_main_container">
       <div className="col-12 recommendation_card">
         <div className="card mt-2 right_view_profile_card right_view_profile">
           <div className="card-header">
@@ -37,6 +38,7 @@ const RecommendationCard = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

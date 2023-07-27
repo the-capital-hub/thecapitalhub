@@ -9,13 +9,16 @@ import imageReview from "../../Images/service/Rectangle 1980.png";
 import serviceOneIcon from "../../Images/service/Group 15409.svg";
 import leftIcon from "../../Images/service/Arrow---Left-Circle.svg";
 import rightIcon from "../../Images/service/Arrow---Right-Circle.svg";
+import { useNavigate, useNavigation } from "react-router-dom";
 
 const Service = () => {
   const [showMore, setShowMore] = useState(false);
 
-  const handleReadMoreClick = () => {
+  const handleReadMoreClick = (route) => {
+    navigate(route);
     setShowMore(!showMore);
   };
+  const navigate = useNavigate();
   return (
     <>
       <div className="container-fluid service_main_container">
@@ -46,8 +49,11 @@ const Service = () => {
                     HUB is now your one-stop destination for all your
                     fundraising needs.{" "}
                   </p>
-                  <button onClick={handleReadMoreClick} className="read_more">
-                   Read more >>
+                  <button
+                    onClick={() => handleReadMoreClick("/fundraising")}
+                    className="read_more"
+                  >
+                    Read more >>
                   </button>
                 </div>
               </div>
@@ -64,8 +70,11 @@ const Service = () => {
                     Capital HUB offers elegant pitch deck design and
                     professional support to startups.
                   </p>
-                  <button onClick={handleReadMoreClick} className="read_more">
-                   Read more >>
+                  <button
+                    onClick={() => handleReadMoreClick("/pitch-deck")}
+                    className="read_more"
+                  >
+                    Read more >>
                   </button>
                 </div>
               </div>
@@ -83,8 +92,8 @@ const Service = () => {
                     of any business plan, and they can have a big impact on your
                     business's success.
                   </p>
-                  <button onClick={handleReadMoreClick} className="read_more">
-                   Read more >>
+                  <button  onClick={() => handleReadMoreClick("/financials-document")} className="read_more">
+                    Read more >>
                   </button>
                 </div>
               </div>
@@ -102,8 +111,11 @@ const Service = () => {
                     to Web development, and Android and iOS development
                     services.
                   </p>
-                  <button onClick={handleReadMoreClick} className="read_more">
-                   Read more >>
+                  <button
+                    onClick={() => handleReadMoreClick("/web-development")}
+                    className="read_more"
+                  >
+                    Read more >>
                   </button>
                 </div>
               </div>
@@ -121,8 +133,8 @@ const Service = () => {
                     business transformation through the power of people,
                     technology, and innovation.
                   </p>
-                  <button onClick={handleReadMoreClick} className="read_more">
-                   Read more >>
+                  <button onClick={() => handleReadMoreClick("/sturtup-consulting")} className="read_more">
+                    Read more >>
                   </button>
                 </div>
               </div>
@@ -139,8 +151,8 @@ const Service = () => {
                     Capital HUB supports startups with compliance and DD
                     services as part of their fundraising journey.
                   </p>
-                  <button onClick={handleReadMoreClick} className="read_more">
-                   Read more >>
+                  <button onClick={() => handleReadMoreClick("/complience")} className="read_more">
+                    Read more >>
                   </button>
                 </div>
               </div>

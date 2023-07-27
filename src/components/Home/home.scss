@@ -180,9 +180,13 @@ $secondary-color: #1b2430;
       font-weight: 200;
       font-size: 20px;
       line-height: 34px;
-      text-align: justify;
+      // text-align: justify;
       color: #292929;
       margin-top: 1rem;
+    }
+
+    .mobile_para {
+      display: none;
     }
 
     button {
@@ -330,7 +334,7 @@ $secondary-color: #1b2430;
       }
 
       img {
-        height: 730px;
+        height: 600px;
         width: 100%;
       }
     }
@@ -361,7 +365,7 @@ $secondary-color: #1b2430;
         font-family: "Poppins";
         font-style: normal;
         font-weight: 600;
-        font-size: 27px;
+        font-size: 20px;
         line-height: 35px;
         letter-spacing: -0.002em;
         color: #000000;
@@ -371,16 +375,22 @@ $secondary-color: #1b2430;
         font-family: "Poppins";
         font-style: normal;
         font-weight: 200;
-        font-size: 20px;
+        font-size: 16px;
         line-height: 34px;
-        text-align: justify;
+        // text-align: justify;
         color: #292929;
-        margin-top: 1rem;
+        margin-top: .1rem;
+      }
+      .desktop_para{
+        display: none;
+      }
+      .mobile_para{
+        display: block;
       }
 
       button {
-        width: 210px;
-        height: 60px;
+        width: 180px;
+        height: 45px;
         background: #a782ec;
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 10px;

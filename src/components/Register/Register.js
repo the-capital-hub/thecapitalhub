@@ -4,9 +4,10 @@ import RegisterIcon from "../../Images/Group 21.svg";
 import GIcon from "../../Images/Group 22.svg";
 import FIcon from "../../Images/Group 23.svg";
 import AIcon from "../../Images/Group 24.svg";
+import backArrow from "../../Images/left-arrow.png"
 import PhoneInput from "react-phone-number-input";
 import AfterRegisterPopUp from "../PopUp/AfterRegisterPopUp/AfterRegisterPopUp";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -43,12 +44,16 @@ const Register = () => {
     setIsSubmitted(true);
     navigate("/");
   };
+  const handleBack = () =>{
+    navigate("/");
+  }
 
   const navigate = useNavigate();
   return (
     <>
       <div className="row d-flex register_container">
         <div className="col-lg-6 col-md-12 register_heading">
+          <img className="backArrow" src={backArrow} alt="arrow_back" onClick={handleBack}/>
           <h3>
             Start your journey <br />
             with us.
@@ -56,11 +61,12 @@ const Register = () => {
           <img src={RegisterIcon} alt="" />
         </div>
         <div className="col-lg-6 col-md-12 register_heading_right">
-          <span className="welcome">Welcome </span>
+        <img className="backArrow_mobile" src={backArrow} alt="arrow_back" onClick={handleBack}/>
+          <span className="welcome mt-4">Welcome </span>
           <h1>Create new account</h1>
           <h3 className="already_have_account">
-            Already have an account?{" "}
-            <span style={{ color: "red" }}>Log In</span>
+            Already have an account?{" "} &nbsp;
+            <Link to={"/login"} style={{ color: "red" }}>Log In</Link>
           </h3>
 
           <form onSubmit={handleFormSubmit}>
@@ -158,8 +164,8 @@ const Register = () => {
               </button>
             </div>
             <h3 className="already_have_account_mobile">
-              Already have an account?{" "}
-              <span style={{ color: "red" }}>Log In</span>
+              Already have an account?{" "}&nbsp;
+              <Link to={"/login"} style={{ color: "red" }}>Log In</Link>
             </h3>
           </form>
 

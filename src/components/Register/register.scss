@@ -4,6 +4,16 @@
     justify-content: flex-end;
     align-items: center;
     flex-direction: column;
+    position: relative;
+
+    .backArrow {
+      position: absolute;
+      top: 16%;
+      left: 16%;
+      height: 8%;
+      width: 12%;
+      cursor: pointer;
+    }
 
     h3 {
       font-family: "Poppins";
@@ -26,6 +36,10 @@
     justify-content: center;
     flex-direction: column;
     padding-top: 5%;
+
+    .backArrow_mobile {
+      display: none;
+    }
 
     h1 {
       font-family: "Poppins";
@@ -81,6 +95,7 @@
       width: 46%;
     }
   }
+
   input[type="tel"] {
     width: 100%;
     padding: 15px;
@@ -173,6 +188,18 @@
     }
 
     .register_heading_right {
+      .backArrow_mobile {
+        display: block;
+        position: absolute;
+        top: 0%;
+        left: 2%;
+        height: 4%;
+        width: 8%;
+        cursor: pointer;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
       h1 {
         font-size: 24px;
       }
