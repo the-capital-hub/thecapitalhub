@@ -1,0 +1,47 @@
+  /* company details card start*/
+  .company_details {
+    /* height: 400px; */
+  }
+
+  .company_details_logo_container {
+    height: 135px;
+    width: 150px;
+    border-radius: 60%;
+    background: #f6f6f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .company_details p {
+    color: #595959;
+    font-size: 16px;
+    font-family: Poppins;
+    line-height: 150%;
+    letter-spacing: 0.76px;
+  }
+
+  .company_details_image_text {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .location_icon img {
+    height: 22px;
+    width: 22px;
+  }
+
+  .location_icon {
+    color: #595959;
+    font-size: 13px;
+    font-family: Poppins;
+  }
+
+  .social_icon img {
+    height: 24px;
+    width: 24px;
+    margin-right: 22px;
+  }
+
+/* company details card ends*/

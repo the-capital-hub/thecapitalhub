@@ -27,6 +27,7 @@ import WebDevelopment from "./components/Service/WebDevelopment/WebDevelopment";
 import FinancialsDocumentation from "./components/Service/FinancialsDocumentation/FinancialsDocumentation";
 import StartupConsulting from "./components/Service/StartupConsulting/StartupConsulting";
 import CompliancesDeligence from "./components/Service/CompliancesDeligence/CompliancesDeligence";
+import OurInvestor from "./components/OurInvestor/OurInvestor";
 
 function App() {
   return (
@@ -128,12 +129,23 @@ function App() {
               </>
             }
           />
-           <Route
+          <Route
             path="/web-development"
             element={
               <>
                 <Navbar />
                 <WebDevelopment />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/our-investor"
+            element={
+              <>
+                <Navbar />
+                <OurInvestor/>
                 <Footer />
               </>
             }

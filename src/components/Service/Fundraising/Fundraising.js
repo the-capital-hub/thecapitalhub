@@ -2,12 +2,15 @@ import React from "react";
 import "./fundraising.scss";
 import serviceOneIcon from "../../../Images/service/Group 15409.svg";
 import listIcon from "../../../Images/ListDot.svg";
+import BackIcon from '../../../Images/BackIcon.svg'
+import { Link } from "react-router-dom";
 
 const Fundraising = () => {
   return (
     <>
       <div className="container-fluid fundraising_main_container">
         <div className="container">
+        <Link to={'/service'}><img src={BackIcon} alt="back"/>Back</Link>
           <section className="heading_section_fund">
             <h1>
               We offer the best

@@ -1,6 +1,8 @@
 import React from "react";
 import "./WebDevelopment.scss";
-import serviceOneIcon from "../../../Images/service/Group 15409.svg";
+import serviceThreeIcon from "../../../Images/service/Group 15406.svg";
+import BackIcon from '../../../Images/BackIcon.svg'
+import { Link } from "react-router-dom";
 import listIcon from "../../../Images/ListDot.svg";
 
 const WebDevelopment = () => {
@@ -8,6 +10,7 @@ const WebDevelopment = () => {
     <>
       <div className="container-fluid webdev_main_container">
         <div className="container">
+        <Link to={'/service'}><img src={BackIcon} alt="back"/>Back</Link>
           <section className="heading_section_fund">
             <h1>
               We offer the best
@@ -15,7 +18,7 @@ const WebDevelopment = () => {
             </h1>
 
             <div className="title_and_image">
-              <img src={serviceOneIcon} alt="" />
+              <img src={serviceThreeIcon} alt="" />
               <h2>WEB DEVELOPMENT</h2>
             </div>
 

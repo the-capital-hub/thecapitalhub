@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./feed.css";
+import "./feed.scss";
 import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
 import { CiEdit } from "react-icons/ci";

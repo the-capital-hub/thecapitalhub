@@ -1,0 +1,48 @@
+.view_profile_container {
+    .view_profile {
+        height: 436px;
+        flex-shrink: 0;
+        border: 1px solid #dcdcdc;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 40px;
+        background: #fff;
+        box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
+    }
+
+    .view_profile_name_section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .right_profile_text {
+        align-items: center;
+    }
+
+    .right_profile_text h2 {
+        color: #000;
+        font-size: 15px;
+        font-family: Poppins;
+        font-weight: 500;
+        display: flex;
+    }
+
+    .profile_btn {
+        width: 90%;
+        height: 45px;
+        flex-shrink: 0;
+        border-radius: 10px;
+        background: #fd5901;
+        color: #fff;
+        font-size: 13px;
+        font-family: Poppins;
+        font-weight: 500;
+        border: none;
+    }
+
+    .manage_acount_btn {
+        background: #c9c9c9 !important;
+    }
+}

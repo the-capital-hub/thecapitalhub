@@ -95,6 +95,15 @@ function Navbar() {
             </li>
             <li>
               <Link
+                to="/our-investor"
+                className={selectedLink === "investor" ? "active" : ""}
+                onClick={() => setSelectedLink("investor")}
+              >
+                Investor
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/signup"
                 className={"loginbtn"}
                 onClick={() => setSelectedLink("login")}

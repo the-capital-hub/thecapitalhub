@@ -1,6 +1,8 @@
 import React from "react";
 import "./StartupConsulting.scss";
-import serviceOneIcon from "../../../Images/service/Group 15409.svg";
+import serviceTwoIcon from "../../../Images/service/Group 15405.svg";
+import BackIcon from "../../../Images/BackIcon.svg";
+import { Link } from "react-router-dom";
 import listIcon from "../../../Images/ListDot.svg";
 
 const StartupConsulting = () => {
@@ -8,6 +10,10 @@ const StartupConsulting = () => {
     <>
       <div className="container-fluid startup-consulting_main_container ">
         <div className="container">
+          <Link to={"/service"}>
+            <img src={BackIcon} alt="back" />
+            Back
+          </Link>
           <section className="heading_section_fund">
             <h1>
               We offer the best
@@ -15,7 +21,7 @@ const StartupConsulting = () => {
             </h1>
 
             <div className="title_and_image">
-              <img src={serviceOneIcon} alt="" />
+              <img src={serviceTwoIcon} alt="" />
               <h2>Startup Consulting / CXO Services</h2>
             </div>
 

@@ -2,12 +2,15 @@ import React from "react";
 import "./PitchDeck.scss";
 import serviceFiveIcon from "../../../Images/service/Group 15408.svg";
 import listIcon from "../../../Images/ListDot.svg";
+import BackIcon from '../../../Images/BackIcon.svg'
+import { Link } from "react-router-dom";
 
 const PitchDeck = () => {
   return (
     <>
       <div className="container-fluid pitch_main_container">
         <div className="container">
+        <Link to={'/service'}><img src={BackIcon} alt="back"/>Back</Link>
           <section className="heading_section_fund">
             <h1>
               We offer the best

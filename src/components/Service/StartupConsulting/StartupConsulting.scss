@@ -1,5 +1,23 @@
 .startup-consulting_main_container {
     .container {
+        a {
+            color: #000;
+            font-family: Poppins;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            position: absolute;
+            text-decoration: none;
+
+            img {
+                width: 8.495px;
+                height: 15.109px;
+                flex-shrink: 0;
+                margin-right: 5px;
+            }
+        }
+
         .heading_section_fund {
             display: flex;
             flex-direction: column;
@@ -81,6 +99,71 @@
                         margin-right: 20px;
                         width: 20px;
                         height: 20px;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .startup-consulting_main_container {
+        .container {
+            a {
+                color: #000;
+                font-family: Poppins;
+                font-size: 15px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                position: absolute;
+                text-decoration: none;
+                top: 12%;
+
+                img {
+                    width: 6.495px;
+                    height: 10.109px;
+                    flex-shrink: 0;
+                    margin-right: 5px;
+                }
+            }
+
+            .heading_section_fund {
+
+                h1 {
+                    font-size: 28px;
+                    margin-top: 20px;
+                }
+
+                p {
+                    font-size: 14px;
+                }
+
+                .title_and_image {
+                    img {
+                        margin-right: 8px;
+                        width: 32px;
+                        height: 32.36px;
+                    }
+
+                    h2 {
+                        position: relative;
+                        font-size: 20px;
+
+                    }
+                }
+            }
+
+            .list_section {
+                ul {
+                    li {
+                        font-size: 14px;
+
+                        img {
+                            width: 14px;
+                            height: 14px;
+                        }
                     }
                 }
             }

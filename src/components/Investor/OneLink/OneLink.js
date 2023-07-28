@@ -11,7 +11,7 @@ const OneLink = () => {
         </div>
         <div className="row">
           <div className="col-12 colSize">
-           s
+          
           </div>
         </div>
       </div>

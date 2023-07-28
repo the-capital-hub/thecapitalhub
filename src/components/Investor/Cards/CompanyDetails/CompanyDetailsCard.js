@@ -6,13 +6,14 @@ import IntagramIcon from "../../../../Images/investorIcon/Instagram.svg";
 import LinkedinIcon from "../../../../Images/investorIcon/Linkedin.svg";
 import WebIcon from "../../../../Images/investorIcon/WebIcon.svg";
 import LogoX from "../../../../Images/investorIcon/LogoX.png";
+import './companyDetails.scss'
 
 const CompanyDetailsCard = () => {
   return (
     <>
       <div className="row">
         <div className="col-12 mt-2">
-          <div className=" box bio_container company_details">
+          <div className=" company_details">
             <div className="row">
               <div className="col-12">
                 <div className="image_name_section mt-2 company_details_image_text">

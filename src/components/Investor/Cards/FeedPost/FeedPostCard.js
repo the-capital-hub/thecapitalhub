@@ -6,8 +6,7 @@ import SavedIcon from '../../../../Images/SavedIcon.svg'
 import HomeIcon from '../../../../Images/HomeIcon.svg'
 import ThreeODotIcon from '../../../../Images/ThreeDotIcon.svg'
 import FireIcon from '../../../../Images/Fire.png'
-
-import "./feedPostCard.css";
+import "./feedPostCard.scss";
 
 const FeedPostCard = () => {
   return (

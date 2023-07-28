@@ -1,13 +1,17 @@
 import React from "react";
 import "./FinancialsDocumentation.scss";
-import serviceFiveIcon from "../../../Images/service/Group 15408.svg";
+import serviceFourIcon from "../../../Images/service/Group 15407.svg";
+
 import listIcon from "../../../Images/ListDot.svg";
+import BackIcon from '../../../Images/BackIcon.svg'
+import { Link } from "react-router-dom";
 
 const FinancialsDocumentation = () => {
   return (
     <>
       <div className="container-fluid financial-document_main_container">
         <div className="container">
+        <Link to={'/service'}><img src={BackIcon} alt="back"/>Back</Link>
           <section className="heading_section_fund">
             <h1>
               We offer the best
@@ -15,7 +19,7 @@ const FinancialsDocumentation = () => {
             </h1>
 
             <div className="title_and_image">
-              <img src={serviceFiveIcon} alt="" />
+              <img src={serviceFourIcon} alt="" />
               <h2>FINANCIAL DOCUMENTATION</h2>
             </div>
 
