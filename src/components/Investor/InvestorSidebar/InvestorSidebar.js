@@ -9,17 +9,13 @@ import {
 } from "react-pro-sidebar";
 import ArrowLeft from "../../../Images/investorsidebar/ArrowLeft.svg";
 import ArrowRight from "../../../Images/investorsidebar/ArrowRight.svg";
-import LogOut from "../../../Images/investorsidebar/Log-out.svg";
 import Setting from "../../../Images/investorsidebar/Settings.svg";
 import Support from "../../../Images/investorsidebar/Support.svg";
-import Users from "../../../Images/investorsidebar/Users.svg";
 import HomeIcon from "../../../Images/investorIcon/home.svg";
-import OnelinkIcon from "../../../Images/investorIcon/OneLink.svg";
 import BookIcon from "../../../Images/investorIcon/Book.svg";
 import ExitIcon from "../../../Images/investorIcon/Exit.svg";
 import GroupIcon from "../../../Images/investorIcon/Group.svg";
 import InvestorIcon from "../../../Images/investorIcon/Pot.svg";
-import ChangeUserIcon from "../../../Images/investorIcon/ChangeUser.svg";
 import SaveIcon from "../../../Images/investorIcon/Save.svg";
 import PlusIcon from "../../../Images/investorIcon/Plus.svg";
 import profilePic from "../../../Images/investorIcon/profilePic.svg";
@@ -27,7 +23,6 @@ import {BsLink45Deg} from 'react-icons/bs'
 import "react-pro-sidebar/dist/css/styles.css";
 import "./investorsidebar.scss";
 import { Link, useLocation } from "react-router-dom";
-import { SidebarContext } from "../../Sidebar/SidebarContext";
 
 const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const location = useLocation();

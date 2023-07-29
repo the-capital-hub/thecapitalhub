@@ -52,13 +52,13 @@ const OurInvestor = () => {
             <h1>BENEFITS OF BEING AN ANGEL INVESTOR WITH CAPITAL HUB</h1>
             <OurInvestorCard />
           </section>
-          <section className="heading_section_investor">
+          {/* <section className="heading_section_investor">
             <div className="title_and_image">
               <h2>TESTIMONIALS</h2>
             </div>
             <p>We love our customers and they love us back</p>
 
-          </section>
+          </section> */}
         </div>
       </div>
     </>

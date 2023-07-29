@@ -1,0 +1,99 @@
+.introductory_message_container {
+    .box_container {
+        width: 750px;
+        height: 411px;
+        background-color: #fff;
+        border-radius: 40px;
+        background: #fff;
+        box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
+
+        .title_section {
+
+            .title_wrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-top-right-radius: 40px;
+                border-top-left-radius: 40px;
+                height: 60px;
+                background-color: black;
+                color: white;
+                padding: 8px;
+                overflow: hidden;
+
+                h6 {
+                    font-family: Poppins;
+                    font-size: 16px;
+                    font-weight: 500;
+                    margin: 0;
+                    margin-left: 30px;
+                }
+
+                .image_container {
+                    margin-right: 20px;
+
+                    img {
+                        height: 20px;
+                        width: 25px;
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+
+        .text_section {
+            padding: 20px;
+
+            p {
+                color: #515151;
+                font-family: Poppins;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 160%;
+                /* 33.6px */
+                letter-spacing: 0.84px;
+            }
+        }
+
+        .input_section {
+            .input_container {
+                display: flex;
+                align-items: center;
+                padding: 10px;
+                border: 1px solid #EAEEF2;
+                background-color: #EAEEF2;
+                border-radius: 8px;
+                margin: 5% 2% 0% 2%;
+
+                .left_icon {
+                    margin-right: 10px;
+
+                    img {}
+                }
+
+                input {
+                    flex: 1;
+                    border: none;
+                    outline: none;
+                    font-size: 14px;
+                    padding: 8px;
+                    border-radius: 6px;
+                    background-color: #EAEEF2;
+
+                    ::placeholder {
+                        color: #999;
+                    }
+                }
+
+                .right_icons {
+                    margin-left: 10px;
+
+                    img {
+                        /* Add styles for the SVG images on the right */
+                    }
+                }
+            }
+        }
+    }
+}

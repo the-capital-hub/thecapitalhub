@@ -1,0 +1,102 @@
+.onepagepreview_container {
+    .box_container {
+        // width: 750px;
+        height: auto;
+        background-color: #fff;
+        border-radius: 40px;
+        background: #fff;
+        box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
+
+        .heading_section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 20%;
+
+            button,
+            h6 {
+                margin-top: 5%;
+                margin-right: 6%;
+            }
+
+            h6 {
+                margin-left: 6%;
+            }
+
+            button {
+                width: 95px;
+                height: 38px;
+                flex-shrink: 0;
+                border-radius: 10px;
+                background: #000;
+                color: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+        }
+
+        .dollar_rupree {
+            margin-left: 2%;
+            margin-bottom: 2%;
+            margin-top: 2%;
+        }
+
+        .company_description {
+            display: flex;
+            border-radius: 5px;
+            border: 0.76px solid #E3E3E3;
+            background: #000;
+            width: 96%;
+            margin: auto;
+            height: 142px;
+
+            img {
+                object-fit: contain;
+                margin-left: 10px;
+            }
+
+            .company_text {
+                display: flex;
+                color: #fff;
+                flex-direction: column;
+                width: 100%;
+                justify-content: center;
+                margin-left: 20px;
+
+                h6 {
+                    color: #FFF;
+                    font-family: Poppins;
+                    font-size: 12px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+                }
+            }
+        }
+
+        .card_section {
+            width: 96%;
+            margin: auto;
+            margin-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .table_section {
+            max-width: 96%;
+            width: 96%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .team_section {
+            width: 100%;
+            overflow-x: scroll;
+            padding-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+}

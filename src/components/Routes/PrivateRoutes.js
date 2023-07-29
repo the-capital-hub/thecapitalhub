@@ -3,29 +3,36 @@ import { useEffect, useState } from "react";
 import InvestorNavbar from "../Investor/InvestorNavbar/InvestorNavbar";
 import InvestorSidebar from "../Investor/InvestorSidebar/InvestorSidebar";
 import "./style.scss";
-import LogOutPopUp from "../PopUp/LogOutPopUp/LogOutPopUp"
+import LogOutPopUp from "../PopUp/LogOutPopUp/LogOutPopUp";
 
 function PrivateRoute({ children, ...props }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-
+  const handleSidebarToggle = () => {
+    setSidebarCollapsed((prev) => !prev);
+  };
   return (
-    <div className="container-fluid investor_home_container">
-      <LogOutPopUp/>
-      <div
-        className="sidebar"
-        style={{ width: sidebarCollapsed ? "10%" : "20.5%" }}
-      >
-        <InvestorSidebar
-          sidebarCollapsed={sidebarCollapsed}
-          setSidebarCollapsed={setSidebarCollapsed}
-        />
-      </div>
-      <div className="content">
-        <InvestorNavbar />
+    <>
+      <InvestorNavbar />
 
-        <Outlet />
+      <div
+        className={`container-fluid investor_home_container ${
+          sidebarCollapsed ? "sidebar-collapsed" : ""
+        }`}
+      >
+        <LogOutPopUp />
+
+        <div className="sidebar">
+          <InvestorSidebar
+            sidebarCollapsed={sidebarCollapsed}
+            setSidebarCollapsed={handleSidebarToggle}
+          />
+        </div>
+
+        <div className="content">
+          <Outlet />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

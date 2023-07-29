@@ -6,6 +6,11 @@
     background: #ffffff;
     box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.05);
     border-radius: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
 
     .bar_logo_container {
       display: flex;
