@@ -11,9 +11,9 @@ import './companyDetails.scss'
 const CompanyDetailsCard = () => {
   return (
     <>
-      <div className="row">
+      <div className="row company_details_container">
         <div className="col-12 mt-2">
-          <div className=" company_details">
+          <div className=" company_details box">
             <div className="row">
               <div className="col-12">
                 <div className="image_name_section mt-2 company_details_image_text">

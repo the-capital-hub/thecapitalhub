@@ -25,7 +25,7 @@ import PlusIcon from "../../../Images/investorIcon/Plus.svg";
 import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import {BsLink45Deg} from 'react-icons/bs'
 import "react-pro-sidebar/dist/css/styles.css";
-import "./investorsidebar.css";
+import "./investorsidebar.scss";
 import { Link, useLocation } from "react-router-dom";
 import { SidebarContext } from "../../Sidebar/SidebarContext";
 

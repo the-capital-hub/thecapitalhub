@@ -1,3 +1,7 @@
+.investorHome_main_container {
+
+
+
   .typography {
     color: #000;
     font-size: 20px;
@@ -35,30 +39,7 @@
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
   }
 
-  .flex_content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
 
-  .boxOne {
-    width: 16rem;
-    height: 6rem;
-    padding: 30px;
-  }
-
-  .boxTwo {
-    width: 16rem;
-    height: 6rem;
-    padding: 30px;
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .boxTwo img {
-    width: 70.118px;
-    height: 10.118px;
-  }
 
   .bio_container {
     width: 750px;
@@ -75,75 +56,9 @@
     flex-shrink: 0;
     height: 340px;
   }
-// 
 
 
- 
-  /* loop starts */
-  .loop_container {
-    width: 100%;
-    height: 200px;
-    border-radius: 10px;
-    background: #eaeef2;
-  }
 
-  .loop_title {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .right_view_profile_card {
-    border-radius: 20px;
-  }
-
-  .right_loop_card {
-    width: 90%;
-  }
-
-  .right_view_profile {
-    width: 100%;
-  }
-
-  .right_view_profile_card .card-header {
-    background-color: #000;
-    color: #fff;
-    font-size: 18px;
-    display: flex;
-    justify-content: space-between;
-    border-radius: 20px 20px 0px 0px;
-  }
-
-  .right_view_profile_card .card-body h5 {
-    color: #000;
-    font-size: 13px;
-    font-family: Poppins;
-    font-weight: 500;
-  }
-
-  .input-group {
-    position: relative;
-  }
-
-  .input-group input {
-    height: 2rem;
-  }
-
-  .input-group input::placeholder {
-    font-size: 0.8rem;
-  }
-
-  .send-button {
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 1;
-    background-color: #000;
-    color: #fff;
-  }
-
-  /* loop ends */
   .image_name_section {
     display: flex;
     justify-content: center;
@@ -245,3 +160,4 @@
     text-decoration: none;
   }
 
+}

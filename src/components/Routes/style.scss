@@ -1,0 +1,16 @@
+.investor_home_container {
+  display: flex;
+  background-color: #EAEEF2;
+  margin: 0;
+
+  .sidebar {
+    width: 300px;
+    background-color: #EAEEF2;
+  }
+
+  .content {
+    flex: 1;
+    padding: 10px;
+  }
+
+}

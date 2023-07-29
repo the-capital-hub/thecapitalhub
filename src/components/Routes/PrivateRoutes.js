@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import InvestorNavbar from "../Investor/InvestorNavbar/InvestorNavbar";
 import InvestorSidebar from "../Investor/InvestorSidebar/InvestorSidebar";
-import "./style.css";
+import "./style.scss";
 import LogOutPopUp from "../PopUp/LogOutPopUp/LogOutPopUp"
 
 function PrivateRoute({ children, ...props }) {

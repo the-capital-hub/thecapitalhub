@@ -4,7 +4,7 @@ import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
 import { CiEdit } from "react-icons/ci";
 import { Link } from "react-router-dom";
-import Card from "../Cards/MilestoneCard/Card";
+import MileStoneCard from "../Cards/MilestoneCard/MileStoneCard";
 import { SidebarContext } from "../../Sidebar/SidebarContext";
 import SmallProfileCard from "../Cards/TwoSmallMyProfile/SmallProfileCard";
 import RightProfileCard from "../Cards/RightProfileCard/RightProfileCard";
@@ -227,7 +227,7 @@ const InvestorHome = () => {
                     </div>
                   </div>
                   <div className="col-12 mt-2">
-                    <Card />
+                    <MileStoneCard />
                   </div>
                 </div>
               </div>

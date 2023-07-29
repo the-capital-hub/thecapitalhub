@@ -1,6 +1,6 @@
 import React from "react";
 import ArrowIcon from "../../../../Images/investorIcon/Arrow.svg";
-import "./style.css";
+import "./SmallProfileCard.scss";
 
 const SmallProfileCard = ({ text, width }) => {
   const formatDate = (dateString) => {
@@ -11,7 +11,7 @@ const SmallProfileCard = ({ text, width }) => {
   const formattedDate = formatDate("2023-06-22");
 
   return (
-    <div className="container-fluid">
+    <div className="container-fluid small_card_container">
       <div
         className="row small_card_row"
         style={{ width: width ? width : "100%" }}

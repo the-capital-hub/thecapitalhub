@@ -1,47 +1,93 @@
-  /* company details card start*/
+.company_details_container {
   .company_details {
+
     /* height: 400px; */
+    &.mt-4 {
+      margin-top: 4rem;
+    }
+
+    .image_name_section {
+      display: flex;
+      align-items: center;
+
+      &.mt-2 {
+        margin-top: 2rem;
+      }
+
+      img {
+        width: 90px;
+        height: 90px;
+      }
+    }
+
+    .company_details_logo_container {
+      height: 105px;
+      width: 150px;
+      border-radius: 60%;
+      background: #f6f6f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        /* Styles for the logo image */
+      }
+    }
+
+    .left_profile_text {
+      .typography {
+        font-size: 22px;
+        font-family: Poppins;
+        margin: 0.5rem;
+      }
+
+      .small_typo {
+        font-size: 16px;
+        font-family: Poppins;
+
+        &.m-2 {
+          margin: 0.5rem;
+        }
+
+        &.location_icon {
+          img {
+            height: 16px;
+            width: 16px;
+            margin-right: 5px;
+          }
+        }
+
+        &.social_icon {
+          display: flex;
+          align-items: center;
+
+          img {
+            height: 24px;
+            width: 24px;
+            margin-right: 22px;
+          }
+
+          &.mt-3 {
+            margin-top: 3rem;
+          }
+        }
+      }
+    }
   }
 
-  .company_details_logo_container {
-    height: 135px;
-    width: 150px;
-    border-radius: 60%;
-    background: #f6f6f6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .box {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 40px;
+    background: #fff;
+    box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
   }
 
-  .company_details p {
+  p {
     color: #595959;
     font-size: 16px;
     font-family: Poppins;
     line-height: 150%;
     letter-spacing: 0.76px;
   }
-
-  .company_details_image_text {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  .location_icon img {
-    height: 22px;
-    width: 22px;
-  }
-
-  .location_icon {
-    color: #595959;
-    font-size: 13px;
-    font-family: Poppins;
-  }
-
-  .social_icon img {
-    height: 24px;
-    width: 24px;
-    margin-right: 22px;
-  }
-
-/* company details card ends*/
+}

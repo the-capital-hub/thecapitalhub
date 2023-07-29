@@ -11,7 +11,7 @@ import "./feedPostCard.scss";
 const FeedPostCard = () => {
   return (
     <>
-      <div className="row">
+      <div className="row feedpostcard_main_container">
         <div className="col-12">
           <div className="box feedpostcard_container mt-2">
             <div className="  feed_header_container">

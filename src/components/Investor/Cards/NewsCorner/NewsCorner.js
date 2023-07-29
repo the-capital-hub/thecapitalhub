@@ -8,7 +8,7 @@ const NewsCorner = () => {
         <div className="col-12 newscorner_card">
           <div className="card mt-2 right_view_profile_card right_view_profile">
             <div className="card-header">
-              <div className="loop_title">
+              <div className="title">
                 <span>News Corner</span>
               </div>
             </div>

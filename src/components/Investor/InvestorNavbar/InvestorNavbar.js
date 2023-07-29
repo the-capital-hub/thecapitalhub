@@ -1,5 +1,5 @@
 import React from "react";
-import "./investorNavbar.css";
+import "./investorNavbar.scss";
 import Bar from "../../../Images/investorIcon/Bar.svg";
 import Logo from "../../../Images/investorIcon/Logo.svg";
 import NotificationIcon from "../../../Images/investorIcon/notification.svg";

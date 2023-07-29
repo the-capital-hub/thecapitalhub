@@ -1,5 +1,5 @@
 import React from "react";
-import "./createPost.css";
+import "./createPost.scss";
 import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import SmallProfileCard from "../Cards/TwoSmallMyProfile/SmallProfileCard";
 import { Link } from "react-router-dom";
