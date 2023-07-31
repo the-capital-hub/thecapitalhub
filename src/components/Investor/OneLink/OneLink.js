@@ -53,7 +53,7 @@ const OneLink = () => {
         </div>
         <div className="row">
           <div className="col-12 mt-2">
-            <OnePagePreview />
+            <OnePagePreview show={true}/>
           </div>
         </div>
       </div>

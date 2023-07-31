@@ -28,6 +28,7 @@ import FinancialsDocumentation from "./components/Service/FinancialsDocumentatio
 import StartupConsulting from "./components/Service/StartupConsulting/StartupConsulting";
 import CompliancesDeligence from "./components/Service/CompliancesDeligence/CompliancesDeligence";
 import OurInvestor from "./components/OurInvestor/OurInvestor";
+import OneLinkEditPage from "./components/Investor/OneLink/OneLinkEditPage/OneLinkEditPage";
 
 function App() {
   return (
@@ -160,6 +161,7 @@ function App() {
             <Route path="/documentation" element={<Documentation />} />
             <Route path="/savePost" element={<SavePost />} />
             <Route path="/onelink" element={<OneLink />} />
+            <Route path="/onelink/edit" element={<OneLinkEditPage />} />
             <Route path="/team" element={<Team />} />
             <Route path="/customers" element={<Customer />} />
             <Route path="/investors" element={<Investors />} />
