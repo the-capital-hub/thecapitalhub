@@ -1,4 +1,4 @@
-import React,{useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import {
   ProSidebar,
   Menu,
@@ -19,7 +19,7 @@ import InvestorIcon from "../../../Images/investorIcon/Pot.svg";
 import SaveIcon from "../../../Images/investorIcon/Save.svg";
 import PlusIcon from "../../../Images/investorIcon/Plus.svg";
 import profilePic from "../../../Images/investorIcon/profilePic.svg";
-import {BsLink45Deg} from 'react-icons/bs'
+import { BsLink45Deg } from "react-icons/bs";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./investorsidebar.scss";
 import { Link, useLocation } from "react-router-dom";
@@ -45,10 +45,16 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           <SidebarHeader>
             <div className="logotext">
               {sidebarCollapsed ? (
-                <img src={profilePic} alt="" />
+                <Link to={"/investor"}>
+                  {" "}
+                  <img src={profilePic} alt="" />
+                </Link>
               ) : (
                 <>
-                  <img src={profilePic} alt="" />
+                  <Link to={"/investor"}>
+                    {" "}
+                    <img src={profilePic} alt="" />
+                  </Link>
                   <h3>Pramod badiger</h3>
                   <h4>Pramodbadigar@gmail.com</h4>
                 </>
@@ -70,7 +76,11 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
               >
                 <Link to="/createpost">
                   {sidebarCollapsed ? (
-                    <><button className="plus_btn"><img src={PlusIcon} alt="" /></button></>
+                    <>
+                      <button className="plus_btn">
+                        <img src={PlusIcon} alt="" />
+                      </button>
+                    </>
                   ) : (
                     <>
                       <button className="create_post">
@@ -114,7 +124,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
               >
                 <Link to="/onelink">
                   {/* <img src={OnelinkIcon} alt="" width="17px" height="17px" /> */}
-                  <BsLink45Deg height={"59px"} width={"59px"} size={"20px"}/>
+                  <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} />
                   {!sidebarCollapsed && <span>One link</span>}
                 </Link>
               </MenuItem>

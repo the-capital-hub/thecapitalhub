@@ -1,5 +1,5 @@
 import React from "react";
-import "./createpostpopup.css";
+import "./createpostpopup.scss";
 import SmileeIcon from "../../../Images/Smilee.svg";
 import GallaryIcon from "../../../Images/Gallary.svg";
 import ThreeDotsIcon from "../../../Images/ThreeDots.svg";

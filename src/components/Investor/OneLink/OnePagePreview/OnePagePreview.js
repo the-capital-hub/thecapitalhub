@@ -3,9 +3,9 @@ import "./OnePagePreview.scss";
 import EditIcon from "../../../../Images/WhiteEdit.svg";
 import DollarRupeeImage from "../../../../Images/Dollar_rupee.svg";
 import PramodSq from "../../../../Images/PramodSqare.png";
-import OnePagePreviewCard from "../../Cards/OneLink/OnePagePreviewCard/OnePagePreviewCard";
+import OnePagePreviewCard from "../../InvestorGlobalCards/OneLink/OnePagePreviewCard/OnePagePreviewCard";
 import Table from "../Table/Table";
-import TeamCard from "../../Cards/OneLink/TeamCard/TeamCard";
+import TeamCard from "../../InvestorGlobalCards/OneLink/TeamCard/TeamCard";
 
 const OnePagePreview = () => {
   return (

@@ -1,0 +1,65 @@
+.half_bend_container {
+    .box_container {
+        width: 750px;
+        background-color: #fff;
+        border-radius: 40px;
+        background: #fff;
+        box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
+
+        .custom-card {
+            padding: 20px 5px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            position: relative;
+            overflow: hidden;
+            border-top-right-radius: 60px;
+
+            .top-right-radius {
+                position: absolute;
+                top: 10px;
+                left: 1px;
+                right: 0;
+                border-top-right-radius: 20px;
+
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            .card-body {
+                padding: 1rem .5rem;
+
+                .card-title {
+                    font-size: 16px;
+                }
+            }
+
+            .bottom-black-bar {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 30px;
+                background-color: #000;
+
+                p {
+                    color: #FFF;
+                    font-family: Poppins;
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: normal;
+                    margin-left: 10px;
+                    margin-top: 5px;
+                    
+                }
+            }
+        }
+
+        .main_col {
+            padding: 20px;
+        }
+    }
+}

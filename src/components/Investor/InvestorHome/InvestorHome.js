@@ -4,13 +4,13 @@ import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
 import { CiEdit } from "react-icons/ci";
 import { Link } from "react-router-dom";
-import MileStoneCard from "../Cards/MilestoneCard/MileStoneCard";
+import MileStoneCard from "../InvestorGlobalCards/MilestoneCard/MileStoneCard";
 import { SidebarContext } from "../../Sidebar/SidebarContext";
-import SmallProfileCard from "../Cards/TwoSmallMyProfile/SmallProfileCard";
-import RightProfileCard from "../Cards/RightProfileCard/RightProfileCard";
-import RecommendationCard from "../Cards/Recommendation/RecommendationCard";
-import NewsCorner from "../Cards/NewsCorner/NewsCorner";
-import CompanyDetailsCard from "../Cards/CompanyDetails/CompanyDetailsCard";
+import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
+import RightProfileCard from "../InvestorGlobalCards/RightProfileCard/RightProfileCard";
+import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
+import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
+import CompanyDetailsCard from "../InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
 
 const InvestorHome = () => {
   return (
