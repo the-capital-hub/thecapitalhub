@@ -41,7 +41,7 @@ const Help = () => {
                     Or choose a category to quickly find the help you need
                   </h6>
 
-                  {/* <section class="card-section">
+                  <section class="card-section">
                     <div class="card">
                       <img src={CustomerIcon} alt="text" />
                       <p>Contact us</p>
@@ -174,7 +174,7 @@ const Help = () => {
                         </div>
                       </div>
                     </div>
-                  </section> */}
+                  </section>
                 </div>
               </div>
             </div>

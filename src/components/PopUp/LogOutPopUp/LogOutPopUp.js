@@ -1,40 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
+import "./LogOutPopUp.scss";
+import CorrectIcon from "../../../Images/investorsidebar/Log-out.svg";
 
+const LogOutPopUp = ({
+  setShowLogoutPopup,
+  handleLogoutLogic,
+  showLogoutPopup,
+}) => {
+  const handleLogout = () => {
+    handleLogoutLogic();
+    setShowLogoutPopup(false);
+  };
 
-const LogOutPopUp = ({ setPopupOpen, popupOpen }) => {
-    const handleClose = () => setPopupOpen(false);
+  const handleCancel = () => {
+    setShowLogoutPopup(false);
+  };
+
   return (
     <>
-      {popupOpen && <div className="background-overlay"></div>}
-      <div
-        className={`modal ${popupOpen ? "d-block" : ""}`}
-        // tabIndex="-1"
-        role="dialog"
-      >
-        <div className="modal-dialog modal-dialog-centered" role="document">
-          <div className="modal-content">
-            <div className="createpost_modal-header">
-              <div className="createpostpopup">
-               popup
-              </div>
-              <button
-                type="button"
-                className="close"
-                onClick={handleClose}
-                style={{ background: "transparent", border: "none" }}
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <h1>Logout</h1>
-            </div>
-            <div className="createpost_modal_footer">
-            
+   {showLogoutPopup && (
+        <div className="logout_popup">
+          <div className="popup">
+            <div className="popup-content">
+              <img src={CorrectIcon} alt="" />
+              <h1>
+                Are you sure you want to &nbsp;
+                <span style={{ color: "#FD5901" }}>Log Out?</span>
+              </h1>
+              {/* <button className="ok_button">OK</button> */}
+              <button  className="cancel_button " onClick={handleCancel}>Cancel</button>
+              <button className="ok_button" onClick={handleLogout}>Log out</button>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

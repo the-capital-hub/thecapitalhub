@@ -23,17 +23,21 @@ import { BsLink45Deg } from "react-icons/bs";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./investorsidebar.scss";
 import { Link, useLocation } from "react-router-dom";
+import LogOutPopUp from "../../PopUp/LogOutPopUp/LogOutPopUp";
 
 const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
+  const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const location = useLocation();
   const menuIconClick = () => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
 
   const handleLogout = () => {
-    // Handle logout logic here
+    // Step 3: Show the logout popup
+    setShowLogoutPopup(true);
   };
 
+  const handleLogoutLogic = () => {};
   return (
     <div
       className={`container sidebar_container ${
@@ -187,6 +191,13 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           </SidebarFooter>
         </ProSidebar>
       </div>
+      {showLogoutPopup && (
+        <LogOutPopUp
+          setShowLogoutPopup={setShowLogoutPopup} // Make sure this prop is passed correctly
+          handleLogoutLogic={handleLogoutLogic}
+          showLogoutPopup
+        />
+      )}
     </div>
   );
 };
