@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import InvestorNavbar from "../Investor/InvestorNavbar/InvestorNavbar";
 import InvestorSidebar from "../Investor/InvestorSidebar/InvestorSidebar";
@@ -10,30 +10,42 @@ function PrivateRoute({ children, ...props }) {
   const handleSidebarToggle = () => {
     setSidebarCollapsed((prev) => !prev);
   };
-  return (
-    <>
-      <InvestorNavbar />
 
-      <div
-        className={`container-fluid investor_home_container ${
-          sidebarCollapsed ? "sidebar-collapsed" : ""
-        }`}
-      >
-        <LogOutPopUp />
+  const isLoggedIn = () => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    console.log("isLoggedIn-->", isLoggedIn);
+    return isLoggedIn === "true";
+  };
+  if (!isLoggedIn()) {
+    return <Navigate to="/login" replace />;
+  }
 
-        <div className="sidebar">
-          <InvestorSidebar
-            sidebarCollapsed={sidebarCollapsed}
-            setSidebarCollapsed={handleSidebarToggle}
-          />
+  if (isLoggedIn()) {
+    return (
+      <>
+        <InvestorNavbar />
+
+        <div
+          className={`container-fluid investor_home_container ${
+            sidebarCollapsed ? "sidebar-collapsed" : ""
+          }`}
+        >
+          <LogOutPopUp />
+
+          <div className="sidebar">
+            <InvestorSidebar
+              sidebarCollapsed={sidebarCollapsed}
+              setSidebarCollapsed={handleSidebarToggle}
+            />
+          </div>
+
+          <div className="content">
+            <Outlet />
+          </div>
         </div>
-
-        <div className="content">
-          <Outlet />
-        </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  } else <Navigate to="/login" replace />;
 }
 
 export default PrivateRoute;

@@ -38,7 +38,28 @@ const getUsersService = async (info) => {
       throw error;
     }
   };
+
+  const loginUserService = async ({ phoneNumber, password }) => {
+    try {
+      const client = getClient();
+      const database = client.db("thecapitalhub");
+      const collection = database.collection("users");
+  
+      // Find the user based on the provided phoneNumber
+      const user = await collection.findOne({ phoneNumber });
+  
+      // Check if the user exists and if the provided password matches the stored password
+      if (user && user.password === password) {
+        return user;
+      } else {
+        throw new Error('Invalid credentials');
+      }
+    } catch (error) {
+      console.error('Failed to perform login:', error);
+      throw error;
+    }
+  };
   
   module.exports = {
-    getUsersService,registerUserService
+    getUsersService,registerUserService,loginUserService
   };

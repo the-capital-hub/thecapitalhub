@@ -6,7 +6,7 @@ import FIcon from "../../Images/Group 23.svg";
 import AIcon from "../../Images/Group 24.svg";
 import backArrow from "../../Images/left-arrow.png";
 import PhoneInput from "react-phone-number-input";
-import AfterRegisterPopUp from "../PopUp/AfterRegisterPopUp/AfterRegisterPopUp";
+import AfterRegisterPopUp from "../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import { Link, useNavigate } from "react-router-dom";
 import { getUser, postUser } from "../../Service/user";
 import ErrorPopUp from "../PopUp/ErrorPopUp/ErrorPopUp";
@@ -58,7 +58,7 @@ const Register = () => {
 
   const handleClosePopup = () => {
     setIsSubmitted(true);
-    navigate("/");
+    navigate("/login");
   };
   const handleBack = () => {
     navigate("/");
@@ -219,7 +219,7 @@ const Register = () => {
             </div>
           </div>
         </div>
-        {isSubmitted && <AfterRegisterPopUp onClose={handleClosePopup} />}
+        {isSubmitted && <AfterRegisterPopUp onClose={handleClosePopup} register={true} />}
 
         {showErrorPopup && (
           <ErrorPopUp

@@ -5,22 +5,17 @@ import GIcon from "../../Images/Group 22.svg";
 import FIcon from "../../Images/Group 23.svg";
 import AIcon from "../../Images/Group 24.svg";
 import PhoneInput from "react-phone-number-input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { postUserLogin } from "../../Service/user";
+import AfterSuccessPopUp from "../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import ErrorPopUp from "../PopUp/ErrorPopUp/ErrorPopUp";
 
 const Login = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState(null);
   const [inputValues, setInputValues] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
     password: "",
     phoneNumber: "",
-    nameOnCard: "",
-    addressLine1: "",
-    addressLine2: "",
-    country: "",
-    state: "",
-    city: "",
-    couponCode: "",
   });
   const handleInputChange = (event, type) => {
     if (type !== "country" && type !== "state" && type !== "phoneNumber") {
@@ -34,6 +29,40 @@ const Login = () => {
       setInputValues({ ...inputValues, phoneNumber: event });
     }
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const { phoneNumber, password } = inputValues;
+      const response = await postUserLogin(inputValues);
+      console.log("response-->", response);
+
+      const token = response.token;
+      localStorage.setItem("accessToken", token);
+      localStorage.setItem("isLoggedIn", "true");
+      if (response) {
+        console.log("response--->", response)
+        setIsSubmitted(true);
+
+        setTimeout(() => {
+          setIsSubmitted(false);
+          navigate("/investor");
+        }, 2000);
+      }
+
+      console.log("JWT Token:", token);
+    } catch (error) {
+      console.error("Login failed:", error.response.data.error);
+      setError(error.response.data.error);
+    }
+  };
+  const navigate = useNavigate();
+
+  const handleClosePopup = () => {
+    navigate("/investor");
+  };
+
   return (
     <>
       <div className="row d-flex register_container">
@@ -46,10 +75,12 @@ const Login = () => {
           <h1 className="mt-5">Log in</h1>
           <h3 className="already_have_account">
             I don’t have an account?{" "}
-            <Link to={"/signup"} style={{ color: "red" }}>Create account</Link>
+            <Link to={"/signup"} style={{ color: "red" }}>
+              Create account
+            </Link>
           </h3>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="row">
               <div className="col-md-12 input-container">
                 <label htmlFor="mobile">Mobile Number</label>
@@ -76,6 +107,8 @@ const Login = () => {
                   className="form-control"
                   required
                   placeholder="Password"
+                  onChange={(e) => handleInputChange(e, "password")}
+                  value={inputValues.password}
                 />
               </div>
             </div>
@@ -99,7 +132,9 @@ const Login = () => {
             </div>
             <h3 className="already_have_account_mobile">
               I don’t have an account? &nbsp;
-              <Link to={"/signup"} style={{ color: "red" }}>Create account</Link>
+              <Link to={"/signup"} style={{ color: "red" }}>
+                Create account
+              </Link>
             </h3>
           </form>
 
@@ -116,6 +151,18 @@ const Login = () => {
             </div>
           </div>
         </div>
+        {isSubmitted && (
+          <AfterSuccessPopUp onClose={handleClosePopup} login={true} />
+        )}
+
+        {error && (
+          <ErrorPopUp
+            message={error}
+            onClose={setTimeout(() => {
+              setError(false);
+            }, 1000)}
+          />
+        )}
       </div>
     </>
   );
