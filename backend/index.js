@@ -5,7 +5,7 @@ const usersData = require('./routes/usersData');
 
 const app = express();
 app.use(express.json());
-require('dotenv').config();
+// require('dotenv').config();
 const options = {
   allowedHeaders: [
     'Origin',
