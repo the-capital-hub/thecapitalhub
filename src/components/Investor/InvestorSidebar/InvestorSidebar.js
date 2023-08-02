@@ -22,12 +22,13 @@ import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import { BsLink45Deg } from "react-icons/bs";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./investorsidebar.scss";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate} from "react-router-dom";
 import LogOutPopUp from "../../PopUp/LogOutPopUp/LogOutPopUp";
 
 const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate()
   const menuIconClick = () => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
@@ -37,7 +38,11 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
     setShowLogoutPopup(true);
   };
 
-  const handleLogoutLogic = () => {};
+  const handleLogoutLogic = () => {
+    localStorage.removeItem("isLoggedIn")
+    navigate("/login")
+
+  };
   return (
     <div
       className={`container sidebar_container ${

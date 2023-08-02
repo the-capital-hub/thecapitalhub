@@ -4,6 +4,7 @@
   "description": "This is the Backend for Gentleman-attlier ecommerce site",
   "main": "index.js",
   "scripts": {
+    "build":"npm run build",
     "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
