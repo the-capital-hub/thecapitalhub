@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./register.scss";
 import RegisterIcon from "../../Images/Group 21.svg";
 import GIcon from "../../Images/Group 22.svg";
 import FIcon from "../../Images/Group 23.svg";
 import AIcon from "../../Images/Group 24.svg";
-import backArrow from "../../Images/left-arrow.png"
+import backArrow from "../../Images/left-arrow.png";
 import PhoneInput from "react-phone-number-input";
 import AfterRegisterPopUp from "../PopUp/AfterRegisterPopUp/AfterRegisterPopUp";
 import { Link, useNavigate } from "react-router-dom";
+import { getUser, postUser } from "../../Service/user";
+import ErrorPopUp from "../PopUp/ErrorPopUp/ErrorPopUp";
 
 const Register = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [inputValues, setInputValues] = useState({
     firstName: "",
     lastName: "",
@@ -32,28 +35,53 @@ const Register = () => {
     }
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
-    localStorage.setItem("user_data", JSON.stringify(inputValues));
-    console.log(inputValues);
 
-    setIsSubmitted(true);
+    if (!isValidMobileNumber(inputValues.phoneNumber)) {
+      setShowErrorPopup(true);
+      setTimeout(()=>{
+        setShowErrorPopup(false);
+      },2000)
+   
+      return;
+    }
+    localStorage.setItem("user_data", JSON.stringify(inputValues));
+    try {
+      const response = await postUser(inputValues);
+      console.log("User data posted successfully:", response);
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error("Error posting user data:", error);
+    }
   };
 
   const handleClosePopup = () => {
     setIsSubmitted(true);
     navigate("/");
   };
-  const handleBack = () =>{
+  const handleBack = () => {
     navigate("/");
-  }
+  };
 
   const navigate = useNavigate();
+  const isValidMobileNumber = (phoneNumber) => {
+    // Remove any non-digit characters from the input
+    const cleanedNumber = phoneNumber.replace(/\D/g, "");
+
+    // Check if the cleaned number starts with the country code for India (+91) and has 10 digits
+    return /^91\d{10}$/.test(cleanedNumber);
+  };
   return (
     <>
       <div className="row d-flex register_container">
         <div className="col-lg-6 col-md-12 register_heading">
-          <img className="backArrow" src={backArrow} alt="arrow_back" onClick={handleBack}/>
+          <img
+            className="backArrow"
+            src={backArrow}
+            alt="arrow_back"
+            onClick={handleBack}
+          />
           <h3>
             Start your journey <br />
             with us.
@@ -61,12 +89,19 @@ const Register = () => {
           <img src={RegisterIcon} alt="" />
         </div>
         <div className="col-lg-6 col-md-12 register_heading_right">
-        <img className="backArrow_mobile" src={backArrow} alt="arrow_back" onClick={handleBack}/>
+          <img
+            className="backArrow_mobile"
+            src={backArrow}
+            alt="arrow_back"
+            onClick={handleBack}
+          />
           <span className="welcome mt-4">Welcome </span>
           <h1>Create new account</h1>
           <h3 className="already_have_account">
-            Already have an account?{" "} &nbsp;
-            <Link to={"/login"} style={{ color: "red" }}>Log In</Link>
+            Already have an account? &nbsp;
+            <Link to={"/login"} style={{ color: "red" }}>
+              Log In
+            </Link>
           </h3>
 
           <form onSubmit={handleFormSubmit}>
@@ -164,8 +199,10 @@ const Register = () => {
               </button>
             </div>
             <h3 className="already_have_account_mobile">
-              Already have an account?{" "}&nbsp;
-              <Link to={"/login"} style={{ color: "red" }}>Log In</Link>
+              Already have an account? &nbsp;
+              <Link to={"/login"} style={{ color: "red" }}>
+                Log In
+              </Link>
             </h3>
           </form>
 
@@ -183,6 +220,15 @@ const Register = () => {
           </div>
         </div>
         {isSubmitted && <AfterRegisterPopUp onClose={handleClosePopup} />}
+
+        {showErrorPopup && (
+          <ErrorPopUp
+            message={
+              "Invalid mobile number. Please enter a valid mobile number."
+            }
+            onClose={() => setShowErrorPopup(false)} // Add a handler to close the error popup
+          />
+        )}
       </div>
     </>
   );
