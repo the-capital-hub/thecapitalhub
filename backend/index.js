@@ -29,7 +29,7 @@ app.use(cors(options));
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["https://thecapitalhubbackend.onrender.com"],
     methods: ["POST", "GET", "PUT"],
     credentials: true,
   })
