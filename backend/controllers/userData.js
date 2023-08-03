@@ -46,7 +46,7 @@ const registerUserController = async (req, res, next) => {
         .status(409)
         .json({ error: "User with this email already exists" });
     }
-    return res.status(500).json({ error: "Failed to create the user" });
+    return res.status(500).json( error );
   }
 };
 
