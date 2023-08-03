@@ -17,7 +17,7 @@ const CompliancesDeligence = () => {
             </h1>
 
             <div className="title_and_image">
-              <img src={serviceSixIcon} alt="" />
+              <img src={serviceSixIcon} alt="image" />
               <h2>COMPLIANCES AND DUE DILIGENCE</h2>
             </div>
 

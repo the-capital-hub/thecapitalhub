@@ -56,13 +56,13 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
               {sidebarCollapsed ? (
                 <Link to={"/investor"}>
                   {" "}
-                  <img src={profilePic} alt="" />
+                  <img src={profilePic} alt="image" />
                 </Link>
               ) : (
                 <>
                   <Link to={"/investor"}>
                     {" "}
-                    <img src={profilePic} alt="" />
+                    <img src={profilePic} alt="image" />
                   </Link>
                   <h3>Pramod badiger</h3>
                   <h4>Pramodbadigar@gmail.com</h4>
@@ -71,9 +71,9 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
             </div>
             <div className="closemenu" onClick={menuIconClick}>
               {sidebarCollapsed ? (
-                <img className="closemenu-Right" src={ArrowRight} alt="" />
+                <img className="closemenu-Right" src={ArrowRight} alt="image" />
               ) : (
-                <img className="closemenu-Left" src={ArrowLeft} alt="" />
+                <img className="closemenu-Left" src={ArrowLeft} alt="image" />
               )}
             </div>
           </SidebarHeader>
@@ -87,14 +87,14 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   {sidebarCollapsed ? (
                     <>
                       <button className="plus_btn">
-                        <img src={PlusIcon} alt="" />
+                        <img src={PlusIcon} alt="image" />
                       </button>
                     </>
                   ) : (
                     <>
                       <button className="create_post">
                         <span>Create Post</span>
-                        <img src={PlusIcon} alt="" />
+                        <img src={PlusIcon} alt="image" />
                       </button>
                     </>
                   )}
@@ -105,7 +105,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link to="/home">
-                  <img src={HomeIcon} alt="" />
+                  <img src={HomeIcon} alt="image" />
                   {!sidebarCollapsed && <span>Home</span>}
                 </Link>
               </MenuItem>
@@ -114,7 +114,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link to="/documentation">
-                  <img src={BookIcon} alt="" width="17px" height="17px" />
+                  <img src={BookIcon} alt="image" width="17px" height="17px" />
                   {!sidebarCollapsed && <span>Documentation</span>}
                 </Link>
               </MenuItem>
@@ -123,7 +123,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link to="/savePost">
-                  <img src={SaveIcon} alt="" width="17px" height="17px" />
+                  <img src={SaveIcon} alt="image" width="17px" height="17px" />
                   {!sidebarCollapsed && <span>Saved posts</span>}
                 </Link>
               </MenuItem>
@@ -132,7 +132,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link to="/onelink">
-                  {/* <img src={OnelinkIcon} alt="" width="17px" height="17px" /> */}
+                  {/* <img src={OnelinkIcon} alt="image" width="17px" height="17px" /> */}
                   <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} />
                   {!sidebarCollapsed && <span>One link</span>}
                 </Link>
@@ -142,7 +142,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link to="/team">
-                  <img src={GroupIcon} alt="" width="17px" height="17px" />
+                  <img src={GroupIcon} alt="image" width="17px" height="17px" />
                   {!sidebarCollapsed && <span>Team</span>}
                 </Link>
               </MenuItem>
@@ -151,7 +151,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link to="/customers">
-                  <img src={Setting} alt="" width="17px" height="17px" />
+                  <img src={Setting} alt="image" width="17px" height="17px" />
                   {!sidebarCollapsed && <span>Customers</span>}
                 </Link>
               </MenuItem>
@@ -160,7 +160,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link to="/investors">
-                  <img src={InvestorIcon} alt="" width="17px" height="17px" />
+                  <img src={InvestorIcon} alt="image" width="17px" height="17px" />
                   {!sidebarCollapsed && <span>Investors</span>}
                 </Link>
               </MenuItem>
@@ -169,7 +169,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link to="/help">
-                  <img src={Setting} alt="" width="17px" height="17px" />
+                  <img src={Setting} alt="image" width="17px" height="17px" />
                   {!sidebarCollapsed && <span>Help</span>}
                 </Link>
               </MenuItem>
@@ -180,7 +180,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link to="/support">
-                  <img src={Support} alt="" width="17px" height="17px" />
+                  <img src={Support} alt="image" width="17px" height="17px" />
                   {!sidebarCollapsed && <span>Support</span>}
                 </Link>
               </MenuItem>
@@ -189,7 +189,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           <SidebarFooter>
             <Menu iconShape="round">
               <MenuItem onClick={handleLogout}>
-                <img src={ExitIcon} alt="" width="17px" height="17px" />
+                <img src={ExitIcon} alt="image" width="17px" height="17px" />
                 {!sidebarCollapsed && <span>Log out</span>}
               </MenuItem>
             </Menu>

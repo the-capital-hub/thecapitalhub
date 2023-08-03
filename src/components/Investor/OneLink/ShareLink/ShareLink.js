@@ -17,13 +17,13 @@ const ShareLink = () => {
           <section className="copy_link_input">
             <div className="input_container left_margin">
               <div className="left_icons">
-                <img src={LinkImage} alt="" />
+                <img src={LinkImage} alt="image" />
               </div>
               <input type="text" placeholder="Type your text here" />
               <div className="right_icons">
-                <img className="right_icons_img1" src={Cross} alt="" />
-                <img className="right_icons_img2" src={CorrectImage} alt="" />
-                <img className="right_icons_img3" src={ExitImage} alt="" />
+                <img className="right_icons_img1" src={Cross} alt="image" />
+                <img className="right_icons_img2" src={CorrectImage} alt="image" />
+                <img className="right_icons_img3" src={ExitImage} alt="image" />
               </div>
             </div>
           </section>
@@ -33,15 +33,15 @@ const ShareLink = () => {
             <div className="input_container">
               <input type="text" placeholder="Type your text here" />
               <div className="right_icons">
-                <img className="right_icons_img1" src={ExitImage} alt="" />
-                <img className="right_icons_img2" src={CorrectImage} alt="" />
+                <img className="right_icons_img1" src={ExitImage} alt="image" />
+                <img className="right_icons_img2" src={CorrectImage} alt="image" />
               </div>
             </div>
             <div className="input_container">
               <input type="text" placeholder="Type your text here" />
               <div className="right_icons">
-                <img className="right_icons_img1" src={ExitImage} alt="" />
-                <img className="right_icons_img2" src={CorrectImage} alt="" />
+                <img className="right_icons_img1" src={ExitImage} alt="image" />
+                <img className="right_icons_img2" src={CorrectImage} alt="image" />
               </div>
             </div>
           </section>

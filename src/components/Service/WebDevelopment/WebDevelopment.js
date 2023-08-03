@@ -18,7 +18,7 @@ const WebDevelopment = () => {
             </h1>
 
             <div className="title_and_image">
-              <img src={serviceThreeIcon} alt="" />
+              <img src={serviceThreeIcon} alt="image" />
               <h2>WEB DEVELOPMENT</h2>
             </div>
 
@@ -48,27 +48,27 @@ const WebDevelopment = () => {
           <section className="list_section">
             <ul>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Innovation/ Tech-consultants</div>{" "}
               </li>
 
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Website development services</div>{" "}
               </li>
 
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Android application development</div>{" "}
               </li>
 
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>iOS development services</div>{" "}
               </li>
 
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Rapid prototyping model for startups</div>{" "}
               </li>
             </ul>

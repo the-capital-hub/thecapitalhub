@@ -19,7 +19,7 @@ const FinancialsDocumentation = () => {
             </h1>
 
             <div className="title_and_image">
-              <img src={serviceFourIcon} alt="" />
+              <img src={serviceFourIcon} alt="image" />
               <h2>FINANCIAL DOCUMENTATION</h2>
             </div>
 
@@ -89,39 +89,39 @@ const FinancialsDocumentation = () => {
             <ul>
               <h2>What's included in the financial projections :</h2>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Sales Forecast Report </div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Income Statement Projection</div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Cash Flow Statements</div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Balance Sheet Projection</div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Financial Ratios</div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Valuation Report</div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Sensitivity Analysis Report </div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Cap Table</div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Exit strategy</div>
               </li>
             </ul>

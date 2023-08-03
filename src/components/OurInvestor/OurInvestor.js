@@ -17,7 +17,7 @@ const OurInvestor = () => {
           </Link>
           <section className="heading_section_investor">
             <div className="title_and_image">
-              <img src={serviceOneIcon} alt="" />
+              <img src={serviceOneIcon} alt="image" />
               <h2>Investor</h2>
             </div>
           </section>
@@ -25,7 +25,7 @@ const OurInvestor = () => {
           <section className="row image_and_text">
             <div className="col-lg-4 col-md-12">
               <div className="image_section">
-                <img src={InvestorIcon} alt="" />
+                <img src={InvestorIcon} alt="image" />
               </div>
             </div>
             <div className="col-lg-8 col-md-12">

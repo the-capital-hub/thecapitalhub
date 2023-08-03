@@ -30,7 +30,7 @@ const AboutUs = () => {
             <h1>Founding team</h1>
             <div className="founder_container">
               <div className="image">
-                <img src={PramodImage} alt="" />
+                <img src={PramodImage} alt="image" />
               </div>
 
               <div className="text_content">
@@ -60,7 +60,7 @@ const AboutUs = () => {
             {/* <h1>Founder</h1> */}
             <div className="founder_container">
               <div className="image ">
-                <img src="" alt="" />
+                <img src="" alt="image" />
               </div>
 
               <div className="text_content">
@@ -89,7 +89,7 @@ const AboutUs = () => {
             {/* <h1>Founder</h1> */}
             <div className="founder_container">
               <div className="image ">
-                <img src="" alt="" />
+                <img src="" alt="image" />
               </div>
 
               <div className="text_content">

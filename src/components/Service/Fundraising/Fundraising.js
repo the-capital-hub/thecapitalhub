@@ -18,7 +18,7 @@ const Fundraising = () => {
             </h1>
 
             <div className="title_and_image">
-              <img src={serviceOneIcon} alt="" />
+              <img src={serviceOneIcon} alt="image" />
               <h2>Fundraising</h2>
             </div>
 
@@ -45,7 +45,7 @@ const Fundraising = () => {
           <section className="list_section">
             <ul>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>
                   <b> Have a great idea </b>
                   Ideas are not something that you work on for a few days and
@@ -57,7 +57,7 @@ const Fundraising = () => {
               </li>
 
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>
                   <b> Create an MVP (minimal viable product) or a prototype.</b>
                   Once you have the right idea. Now start building a niche
@@ -67,7 +67,7 @@ const Fundraising = () => {
               </li>
 
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>
                   <b> Have initial traction</b>
                   Having Initial traction not only brings hope to your idea but
@@ -78,7 +78,7 @@ const Fundraising = () => {
               </li>
 
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>
                   <b> Build an elegant pitch deck </b>
                   Once your team, product, and initial traction are ready. If
@@ -92,7 +92,7 @@ const Fundraising = () => {
               </li>
 
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>
                   <b>Create an investors list </b>
                   All you need to do when you need help is ask. You will have to
@@ -108,7 +108,7 @@ const Fundraising = () => {
               </li>
 
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>
                   <b>Approach by cold emails and LinkedIn </b>
                   Once the investor list is created, start approaching the

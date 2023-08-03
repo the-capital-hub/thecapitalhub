@@ -86,7 +86,7 @@ const Register = () => {
             Start your journey <br />
             with us.
           </h3>
-          <img src={RegisterIcon} alt="" />
+          <img src={RegisterIcon} alt="image" />
         </div>
         <div className="col-lg-6 col-md-12 register_heading_right">
           <img
@@ -213,9 +213,9 @@ const Register = () => {
           </div>
           <div className="row">
             <div className="col d-flex justify-content-center align-items-center login_icons">
-              <img src={GIcon} alt="" />
-              <img src={FIcon} alt="" />
-              <img src={AIcon} alt="" />
+              <img src={GIcon} alt="image" />
+              <img src={FIcon} alt="image" />
+              <img src={AIcon} alt="image" />
             </div>
           </div>
         </div>

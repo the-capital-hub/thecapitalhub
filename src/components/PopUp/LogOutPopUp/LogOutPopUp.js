@@ -22,7 +22,7 @@ const LogOutPopUp = ({
         <div className="logout_popup">
           <div className="popup">
             <div className="popup-content">
-              <img src={CorrectIcon} alt="" />
+              <img src={CorrectIcon} alt="image" />
               <h1>
                 Are you sure you want to &nbsp;
                 <span style={{ color: "#FD5901" }}>Log Out?</span>

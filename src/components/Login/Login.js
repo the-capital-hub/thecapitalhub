@@ -68,7 +68,7 @@ const Login = () => {
       <div className="row d-flex register_container">
         <div className="col-lg-6 col-md-12 register_heading">
           <h3>Welcome back!</h3>
-          <img src={RegisterIcon} alt="" />
+          <img src={RegisterIcon} alt="image" />
         </div>
         <div className="col-lg-6 col-md-12 register_heading_right">
           <span className="welcome">Welcome back!</span>
@@ -145,9 +145,9 @@ const Login = () => {
           </div>
           <div className="row">
             <div className="col d-flex justify-content-center align-items-center login_icons">
-              <img src={GIcon} alt="" />
-              <img src={FIcon} alt="" />
-              <img src={AIcon} alt="" />
+              <img src={GIcon} alt="image" />
+              <img src={FIcon} alt="image" />
+              <img src={AIcon} alt="image" />
             </div>
           </div>
         </div>

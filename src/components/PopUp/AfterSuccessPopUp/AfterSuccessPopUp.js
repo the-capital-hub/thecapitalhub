@@ -14,7 +14,7 @@ const AfterSuccessPopUp = ({ onClose ,register, login}) => {
     <div className="after_register_popup">
       <div className="popup">
         <div className="popup-content">
-          <img src={CorrectIcon} alt="" />
+          <img src={CorrectIcon} alt="image" />
           {register && <h1>
             Thank You for <span style={{ color: "#FD5901" }}>Registering!</span>
           </h1>}

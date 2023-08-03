@@ -11,12 +11,12 @@ const MeetOurTeam = () => {
     <>
       <div class="meetourteam_container">
         <div class="card">
-          <img src={UpmaImage} alt="" />
+          <img src={UpmaImage} alt="image" />
 
           <div class="info">
             <div className="social_icon_list">
               <img src={EmailIcon} alt="emailicon" />
-              <img src={LinkedInIcon} alt="" />
+              <img src={LinkedInIcon} alt="image" />
             </div>
             <p class="name">Upma Singh</p>
             <p class="designation">Senior Investment Analyst</p>
@@ -28,12 +28,12 @@ const MeetOurTeam = () => {
           </div>
         </div>
         <div class="card">
-          <img src={PreetiImage} alt="" />
+          <img src={PreetiImage} alt="image" />
 
           <div class="info">
             <div className="social_icon_list">
               <img src={EmailIcon} alt="emailicon" />
-              <img src={LinkedInIcon} alt="" />
+              <img src={LinkedInIcon} alt="image" />
             </div>
             <p class="name">Preeti Yadav</p>
             <p class="designation">Senior Investment Analyst</p>
@@ -45,11 +45,11 @@ const MeetOurTeam = () => {
           </div>
         </div>
         <div class="card">
-          <img src={RaghuImage} alt="" />
+          <img src={RaghuImage} alt="image" />
           <div class="info">
             <div className="social_icon_list">
               <img src={EmailIcon} alt="emailicon" />
-              <img src={LinkedInIcon} alt="" />
+              <img src={LinkedInIcon} alt="image" />
             </div>
             <p class="name">Raghukrishnan J</p>
             <p class="designation">Senior Investment Analyst</p>
@@ -61,14 +61,14 @@ const MeetOurTeam = () => {
           </div>
         </div>
         {/* <div class="card">
-          <img src={NexusIcon} alt="" />
+          <img src={NexusIcon} alt="image" />
           <div class="info">
             <p class="name">Hari</p>
             <p class="designation">UI/UX Designer</p>
           </div>
         </div>
         <div class="card">
-          <img src={GIcon} alt="" />
+          <img src={GIcon} alt="image" />
           <div class="info">
             <p class="name">Raghu</p>
             <p class="designation">Project Manager</p>

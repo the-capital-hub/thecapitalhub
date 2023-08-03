@@ -20,17 +20,17 @@ const OnePagePreview = () => {
             <Link to={"/onelink/edit"}>
               <button>
                 Edit &nbsp;
-                <img src={EditIcon} alt="" />
+                <img src={EditIcon} alt="image" />
               </button>
             </Link>
           </section>
           <hr />
           <section className="dollar_rupree">
-            <img src={DollarRupeeImage} alt="" />
+            <img src={DollarRupeeImage} alt="image" />
           </section>
 
           <section className="company_description">
-            <img src={PramodSq} alt="" />
+            <img src={PramodSq} alt="image" />
             <div className="company_text">
               <h6>Enter company description </h6>
               <hr />

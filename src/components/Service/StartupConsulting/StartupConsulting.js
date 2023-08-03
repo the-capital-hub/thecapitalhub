@@ -21,7 +21,7 @@ const StartupConsulting = () => {
             </h1>
 
             <div className="title_and_image">
-              <img src={serviceTwoIcon} alt="" />
+              <img src={serviceTwoIcon} alt="image" />
               <h2>Startup Consulting / CXO Services</h2>
             </div>
 
@@ -59,39 +59,39 @@ const StartupConsulting = () => {
           <section className="list_section">
             <ul>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Situational Analysis</div>{" "}
               </li>
 
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Competitor Analysis</div>{" "}
               </li>
 
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>SWOT Brand Positioning</div>{" "}
               </li>
 
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Goal Setting along with KPIs</div>{" "}
               </li>
 
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>User Persona Research</div>{" "}
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Marketing Communications Audit</div>{" "}
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Digital Audit - SEO, Content, and Social Media</div>{" "}
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Strategy Consulting and GTM Roadmap</div>{" "}
               </li>
             </ul>

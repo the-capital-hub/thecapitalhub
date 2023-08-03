@@ -17,19 +17,19 @@ const CoInvestorCard = () => {
     <>
       <div class="coinvestor-container">
         <div class="card">
-          <img src={RegisterKaroLogo} alt="" />
+          <img src={RegisterKaroLogo} alt="image" />
           <h3>RegisterKaro</h3>
         </div>
         <div class="card">
-          <img src={AlienLogo} alt="" />
+          <img src={AlienLogo} alt="image" />
           <h3>Alien Marketing</h3>
         </div>
         <div class="card">
-          <img src={AdvocateLogo} alt="" />
+          <img src={AdvocateLogo} alt="image" />
           <h3>Legal Vakil</h3>
         </div>
         <div class="card">
-          <img src={SbiLogo} alt="" />
+          <img src={SbiLogo} alt="image" />
           <h3>State Bank Of India</h3>
         </div>
       </div>

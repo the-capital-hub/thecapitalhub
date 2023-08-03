@@ -26,7 +26,7 @@ const TeamCard = () => {
             <div className="card">
               <div className="card-body">
                 <h5 className="card-title">{card.title}</h5>
-                <img src={PramodSq} alt="" />
+                <img src={PramodSq} alt="image" />
                 <div className="company_text">
                   <h6>Enter company description </h6>
                   <hr />

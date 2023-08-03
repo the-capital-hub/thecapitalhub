@@ -18,7 +18,7 @@ const PitchDeck = () => {
             </h1>
 
             <div className="title_and_image">
-              <img src={serviceFiveIcon} alt="" />
+              <img src={serviceFiveIcon} alt="image" />
               <h2>Pitch Deck</h2>
             </div>
 
@@ -69,51 +69,51 @@ const PitchDeck = () => {
             <ul>
               <h2>What's included in the financial documentations :</h2>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Problem</div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Solution</div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Value Proposition</div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Market Size</div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Competition</div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Revenue Model</div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Go to Market</div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Team</div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Current Traction</div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Milestones</div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Financial Projection</div>
               </li>
               <li>
-                <img src={listIcon} alt="" />
+                <img src={listIcon} alt="image" />
                 <div>Investment Ask & Exit Strategy</div>
               </li>
             </ul>

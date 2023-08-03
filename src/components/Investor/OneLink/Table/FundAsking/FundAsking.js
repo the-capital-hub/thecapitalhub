@@ -10,7 +10,7 @@ const FundAsking = () => {
           <div className="card">
             <div className="card-body">
               <h5 className="card-title">Funding Ask (in lakhs)</h5>
-              <img src={PramodSq} alt="" />
+              <img src={PramodSq} alt="image" />
               <hr />
               <div className="amount_text">
                 <h6>1,00000</h6>
