@@ -9,7 +9,7 @@ const generateSecretKey = () => {
 };
 
 const secretKey = generateSecretKey();
-console.log("Secret Key:", secretKey);
+// console.log("Secret Key:", secretKey);
 
 const getUsersController = async (req, res, next) => {
   try {
@@ -72,7 +72,7 @@ const loginUserController = async (req, res, next) => {
     return res.status(200).json({ message: "Login successful", user,token });
   } catch (error) {
     console.error(error);
-    return res.status(401).json({ error: "Invalid credentials" });
+    return res.status(401).json(error);
   }
 };
 

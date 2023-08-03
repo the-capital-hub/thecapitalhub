@@ -48,6 +48,7 @@ const getUsersService = async (info) => {
   
       // Find the user based on the provided phoneNumber
       const user = await collection.findOne({ phoneNumber });
+      console.log("user-->",user)
   
       // Check if the user exists and if the provided password matches the stored password
       if (user && user.password === password) {
