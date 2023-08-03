@@ -1,9 +1,9 @@
 const { MongoClient } = require("mongodb");
 
 const username = "raazuuprasain94";
-const password = "TheCapitalHub@123"; // Password with '@' character
+const password = "CapitalHub@123"; // Password with '@' character
 const clusterName = "cluster0";
-const dbName = "yourDatabaseName";
+const dbName = "thecapitalhub";
 
 const uri = `mongodb+srv://${encodeURIComponent(username)}:${encodeURIComponent(
   password
