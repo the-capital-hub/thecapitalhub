@@ -11,8 +11,11 @@ import RightProfileCard from "../InvestorGlobalCards/RightProfileCard/RightProfi
 import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import CompanyDetailsCard from "../InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
+import { useSelector } from "react-redux";
 
 const CreatePost = () => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
   return (
     <div className="container-fluid createpost_container">
       <div className="row mt-2">
@@ -26,7 +29,7 @@ const CreatePost = () => {
                     <div className="ceatepost_img_name">
                       <img src={profilePic} alt="profile pic" />
                       <span className="">
-                        <h2>Pramod Badiger</h2>
+                        <h2>{loggedInUser?.firstName} {loggedInUser?.lastName}</h2>
                         <h6>Post to anyone</h6>
                       </span>
                     </div>

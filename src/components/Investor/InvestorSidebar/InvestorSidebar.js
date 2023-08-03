@@ -24,8 +24,13 @@ import "react-pro-sidebar/dist/css/styles.css";
 import "./investorsidebar.scss";
 import { Link, useLocation, useNavigate} from "react-router-dom";
 import LogOutPopUp from "../../PopUp/LogOutPopUp/LogOutPopUp";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../Store/Action/userAction";
 
 const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
+  const dispatch = useDispatch();
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const location = useLocation();
   const navigate = useNavigate()
@@ -39,7 +44,9 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   };
 
   const handleLogoutLogic = () => {
+    dispatch(logout());
     localStorage.removeItem("isLoggedIn")
+    
     navigate("/login")
 
   };
@@ -64,8 +71,8 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     {" "}
                     <img src={profilePic} alt="image" />
                   </Link>
-                  <h3>Pramod badiger</h3>
-                  <h4>Pramodbadigar@gmail.com</h4>
+                  <h3>{loggedInUser?.firstName} { loggedInUser?.lastName}</h3>
+                  <h4>{loggedInUser?.email}</h4>
                 </>
               )}
             </div>

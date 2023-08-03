@@ -4,8 +4,11 @@ import SmileeIcon from "../../../Images/Smilee.svg";
 import GallaryIcon from "../../../Images/Gallary.svg";
 import ThreeDotsIcon from "../../../Images/ThreeDots.svg";
 import CameraIcon from "../../../Images/Camera.svg";
+import { useSelector } from "react-redux";
 
 const CreatePostPopUp = ({ setPopupOpen, popupOpen }) => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
   const handleClose = () => setPopupOpen(false);
 
   return (
@@ -22,7 +25,7 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen }) => {
                     alt="profile pic"
                   />
                   <span>
-                    <h2>Pramod Badiger</h2>
+                    <h2>{loggedInUser?.firstName} {loggedInUser.lastName}</h2>
                     <h6>Post to anyone</h6>
                   </span>
                 </div>

@@ -11,8 +11,11 @@ import RightProfileCard from "../InvestorGlobalCards/RightProfileCard/RightProfi
 import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import CompanyDetailsCard from "../InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
+import { useSelector } from "react-redux";
 
 const InvestorHome = () => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
   return (
     <div className="container-fluid investorHome_main_container">
       <div className="row mt-2">
@@ -27,7 +30,7 @@ const InvestorHome = () => {
                       <div className="image_name_section mt-2">
                         <img src={profilePic} alt="profileimage" />
                         <div className="left_profile_text flex_content">
-                          <h2 className="typography">Pramod badiger</h2>
+                          <h2 className="typography">{loggedInUser?.firstName } { loggedInUser?.lastName}</h2>
                           <span className="small_typo">
                             Founder & CEO of capital Hub
                           </span>
@@ -136,7 +139,7 @@ const InvestorHome = () => {
                               className="small_typo"
                               style={{ marginBottom: "1rem" }}
                             >
-                              Pramod
+                              {loggedInUser?.firstName}
                             </td>
                           </tr>
                           <tr>
@@ -149,7 +152,7 @@ const InvestorHome = () => {
                               className="small_typo"
                               style={{ marginBottom: "1rem" }}
                             >
-                              Badigard
+                              {loggedInUser?.lastName}
                             </td>
                           </tr>
                           <tr>
@@ -162,7 +165,7 @@ const InvestorHome = () => {
                               className="small_typo"
                               style={{ marginBottom: "1rem" }}
                             >
-                              Pramodbadigar@gmail.com
+                             {loggedInUser?.email}
                             </td>
                           </tr>
                           <tr>
@@ -175,7 +178,7 @@ const InvestorHome = () => {
                               className="small_typo"
                               style={{ marginBottom: "1rem" }}
                             >
-                              +91 7567388228
+                             {loggedInUser?.phoneNumber}
                             </td>
                           </tr>
                         </tbody>

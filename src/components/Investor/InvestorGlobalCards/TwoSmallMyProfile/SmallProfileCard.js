@@ -1,8 +1,9 @@
 import React from "react";
 import ArrowIcon from "../../../../Images/investorIcon/Arrow.svg";
 import "./SmallProfileCard.scss";
-
+import { useSelector } from "react-redux";
 const SmallProfileCard = ({ text, width }) => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const formatDate = (dateString) => {
     const options = { weekday: "short", month: "long", day: "numeric" };
     const date = new Date(dateString);
@@ -18,7 +19,7 @@ const SmallProfileCard = ({ text, width }) => {
       >
         <div className="col-6">
           <div className="box boxOne flex_content">
-            <h2 className="typography">Hello, Mr. Pramod</h2>
+            <h2 className="typography">Hello, Mr. {loggedInUser?.firstName}</h2>
             <span className="smallest_typo">{formattedDate}</span>
           </div>
         </div>

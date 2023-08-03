@@ -9,8 +9,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { postUserLogin } from "../../Service/user";
 import AfterSuccessPopUp from "../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import ErrorPopUp from "../PopUp/ErrorPopUp/ErrorPopUp";
+import { useDispatch, useSelector } from "react-redux";
+import { loginSuccess, loginFailure } from "../../Store/Action/userAction";
+
+
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState(null);
   const [inputValues, setInputValues] = useState({
@@ -49,12 +54,16 @@ const Login = () => {
           setIsSubmitted(false);
           navigate("/investor");
         }, 2000);
+
+        dispatch(loginSuccess(response.user));
       }
 
       console.log("JWT Token:", token);
     } catch (error) {
       console.error("Login failed:", error.response.data.error);
       setError(error.response.data.error);
+
+      dispatch(loginFailure(error.response.data.error));
     }
   };
   const navigate = useNavigate();
@@ -68,7 +77,7 @@ const Login = () => {
       <div className="row d-flex register_container">
         <div className="col-lg-6 col-md-12 register_heading">
           <h3>Welcome back!</h3>
-          <img src={RegisterIcon} alt="" />
+          <img src={RegisterIcon} alt="image" />
         </div>
         <div className="col-lg-6 col-md-12 register_heading_right">
           <span className="welcome">Welcome back!</span>
@@ -127,13 +136,13 @@ const Login = () => {
             </div>
             <div className="submit_btn">
               <button type="submit" className="btn btn-primary">
-                Create Account
+              Log In
               </button>
             </div>
             <h3 className="already_have_account_mobile">
               I don’t have an account? &nbsp;
               <Link to={"/signup"} style={{ color: "red" }}>
-                Create account
+                Log In
               </Link>
             </h3>
           </form>
@@ -145,9 +154,9 @@ const Login = () => {
           </div>
           <div className="row">
             <div className="col d-flex justify-content-center align-items-center login_icons">
-              <img src={GIcon} alt="" />
-              <img src={FIcon} alt="" />
-              <img src={AIcon} alt="" />
+              <img src={GIcon} alt="image" />
+              <img src={FIcon} alt="image" />
+              <img src={AIcon} alt="image" />
             </div>
           </div>
         </div>
