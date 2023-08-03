@@ -1,4 +1,4 @@
-const { getClient } = require("../constants/db");
+const { getClient, connectToMongoDB } = require("../constants/db");
 const getUsersService = async (info) => {
     try {
         const client = getClient();
@@ -12,7 +12,8 @@ const getUsersService = async (info) => {
         return [];
       }
   };
-
+  connectToMongoDB()
+ 
 
   const registerUserService = async (user) => {
     console.log("user",user)
