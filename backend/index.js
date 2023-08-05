@@ -2,9 +2,11 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const usersData = require('./routes/usersData');
-
+const postData = require('./routes/postData')
+const fileUpload = require("express-fileupload");
 const app = express();
 app.use(express.json());
+app.use(fileUpload());
 // require('dotenv').config();
 const options = {
   allowedHeaders: [
@@ -37,8 +39,10 @@ app.use(
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use('/users', usersData);
+app.use('/post', postData);
 app.get('/welcome', (req, res) => {
     res.status(200).send({ message: 'Hi Welcome!' });
   });

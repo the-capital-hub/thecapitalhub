@@ -60,10 +60,11 @@ const Login = () => {
 
       console.log("JWT Token:", token);
     } catch (error) {
-      console.error("Login failed:", error.response.data.error);
-      setError(error.response.data.error);
+      // console.error("Login failed:", error.response.data.error);
+      // setError(error.response.data.error);
 
-      dispatch(loginFailure(error.response.data.error));
+      // dispatch(loginFailure(error.response.data.error));
+      console.log(error)
     }
   };
   const navigate = useNavigate();

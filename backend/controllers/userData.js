@@ -2,13 +2,14 @@ const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const getUsersService = require("../services/userService");
 const { registerUserService } = require("../services/userService");
+const { secretKey } = require("../constants/config");
 
-const generateSecretKey = () => {
-  const lengthInBytes = 32; // 32 bytes = 256 bits
-  return crypto.randomBytes(lengthInBytes).toString("hex");
-};
+// const generateSecretKey = () => {
+//   const lengthInBytes = 32; // 32 bytes = 256 bits
+//   return crypto.randomBytes(lengthInBytes).toString("hex");
+// };
 
-const secretKey = generateSecretKey();
+// const secretKey = generateSecretKey();
 // console.log("Secret Key:", secretKey);
 
 const getUsersController = async (req, res, next) => {
@@ -67,6 +68,10 @@ const loginUserController = async (req, res, next) => {
     const token = jwt.sign({ userId: user._id, phoneNumber: user.phoneNumber }, secretKey, {
       expiresIn: '1h', // Token expiration time (e.g., 1 hour)
     });
+    req.user = user;
+    console.log("token-->",token)
+    console.log("secretKey-->",secretKey)
+
     // For example, you might set user session or JWT token
     // Here, we'll just return a success response
     return res.status(200).json({ message: "Login successful", user,token });

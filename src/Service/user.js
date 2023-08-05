@@ -58,4 +58,15 @@ async function postUserLogin(userData) {
   }
 }
 
-export { getUser, postUser, postUserLogin };
+async function postUserPost(postData) {
+  console.log("postData-->0",postData)
+  try {
+    const response = await axiosInstance.post(API.postUserPost, postData);
+    return response.data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
+  }
+}
+
+export { getUser, postUser, postUserLogin,postUserPost};
