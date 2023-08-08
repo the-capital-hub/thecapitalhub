@@ -6,5 +6,8 @@ const API = Object.freeze({
   postUser: `${baseUrl}/users/createUser`,
   loginUser: `${baseUrl}/users/login`,
   postUserPost:`${baseUrl}/post/post`,
+  uploadDocument:`${baseUrl}/upload`,
+  getDocument:`${baseUrl}/documentation/getDocument`
+
   });
 export default API;
