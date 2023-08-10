@@ -1,11 +1,8 @@
-const { MongoClient } = require("mongodb");
-
-// Replace "your-mongodb-uri" with your actual MongoDB connection URI
-const uri = "mongodb://localhost:27017/your-database-name";
+import { MongoClient } from "mongodb";
 
 let client;
 
-const connectToMongoDB = async () => {
+export const connectToMongoDB = async () => {
   try {
     if (!client) {
       client = new MongoClient(uri);
@@ -17,14 +14,14 @@ const connectToMongoDB = async () => {
   }
 };
 
-const getClient = () => {
+export const getClient = () => {
   if (!client) {
     throw new Error("MongoDB client is not connected.");
   }
   return client;
 };
 
-const postService = async ({ text, image, video, document }) => {
+export const postService = async ({ text, image, video, document }) => {
   try {
     // Connect to MongoDB before using the client
     await connectToMongoDB();
@@ -53,10 +50,4 @@ const postService = async ({ text, image, video, document }) => {
     console.error("Error in postService:", error);
     throw new Error("Error creating post");
   }
-};
-
-module.exports = {
-  getClient,
-  connectToMongoDB,
-  postService,
 };

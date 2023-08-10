@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
+import { getDocumentList } from "../controllers/documentDataController.js";
 const router = express.Router();
 
-const documentController = require("../controllers/documentDataController");
+router.get("/getDocument", getDocumentList);
 
-router.get('/getDocument', documentController.getDocumentList);
-module.exports = router;
+export default router;

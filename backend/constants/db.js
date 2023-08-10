@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+import { MongoClient } from "mongodb";
 
 const username = "raazuuprasain94";
 const password = "CapitalHub@123"; // Password with '@' character
@@ -9,18 +9,13 @@ const uri = `mongodb+srv://${encodeURIComponent(username)}:${encodeURIComponent(
   password
 )}@${clusterName}.3qsyv8d.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
-const client = new MongoClient(uri);
+export const client = new MongoClient(uri);
 
-async function connectToMongoDB() {
+export const connectToMongoDB = async () => {
   try {
     await client.connect();
     console.log("Connected to MongoDB");
   } catch (error) {
     console.error("Failed to connect to MongoDB", error);
   }
-}
-
-module.exports = {
-  connectToMongoDB,
-  getClient: () => client,
 };

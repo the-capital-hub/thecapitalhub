@@ -1,6 +1,7 @@
 {
   "name": "gentleman-attlier-backend",
   "version": "1.0.0",
+  "type": "module",
   "description": "This is the Backend for Gentleman-attlier ecommerce site",
   "main": "index.js",
   "scripts": {
