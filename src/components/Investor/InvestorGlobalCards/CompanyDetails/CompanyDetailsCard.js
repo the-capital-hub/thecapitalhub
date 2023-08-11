@@ -1,6 +1,6 @@
 import React from "react";
 import LocationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
-import EmailIcon from "../../../../Images/investorIcon/Message.svg";
+import EmailIcon from "../../../../Images/investorIcon/message.svg";
 import TweeterIcon from "../../../../Images/investorIcon/Tweeter.svg";
 import IntagramIcon from "../../../../Images/investorIcon/Instagram.svg";
 import LinkedinIcon from "../../../../Images/investorIcon/Linkedin.svg";
