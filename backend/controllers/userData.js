@@ -3,6 +3,7 @@ import {
   registerUserService,
   getUsersService,
   loginUserService,
+  getUserById,
 } from "../services/userService.js";
 import { secretKey } from "../constants/config.js";
 
@@ -59,5 +60,21 @@ export const loginUserController = async (req, res, next) => {
     return res
       .status(401)
       .json({ operational: true, success: false, message: error.message });
+  }
+};
+
+
+// get user by id 
+
+export const getUserByIdController = async (req, res) => {
+  try {
+    const response = await getUserById(req.params.id);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while creating the company."
+    });
   }
 };

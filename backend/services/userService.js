@@ -37,3 +37,27 @@ export const loginUserService = async ({ phoneNumber, password }) => {
   await comparePassword(password, user.password);
   return user;
 };
+
+//get User by id
+export const getUserById = async (userId) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found."
+      };
+    }
+    return {
+      status: 200,
+      message: "User details retrieved successfully.",
+      data: user
+    };
+  } catch (error) {
+    console.error("Error getting user:", error);
+    return {
+      status: 500,
+      message: "An error occurred while getting the user."
+    };
+  }
+};
