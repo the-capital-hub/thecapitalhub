@@ -47,14 +47,14 @@ export const loginUserController = async (req, res, next) => {
       password,
     });
 
+    delete user.password;
+
     const token = jwt.sign(
       { userId: user._id, phoneNumber: user.phoneNumber },
       secretKey
     );
 
-    return res
-      .status(200)
-      .json({ message: "Login successful", user: phoneNumber, token });
+    return res.status(200).json({ message: "Login successful", user, token });
   } catch (error) {
     return res
       .status(401)

@@ -21,8 +21,8 @@ const userSchema = new Schema(
       trim: true,
     },
     phoneNumber: {
-      type: Number,
-      unique: true,
+      type: String,
+      // unique: true,
       // required: [true, "Chief Warden must have an contact number."],
       // validate: {
       //   validator: (number) => number.toString().length === 13,
@@ -32,7 +32,7 @@ const userSchema = new Schema(
     email: {
       type: String,
       trim: true,
-      unique: true,
+      // unique: true,
       lowercase: true,
       // required: [true, "User must have an email."],
       // validate: {

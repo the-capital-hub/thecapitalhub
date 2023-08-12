@@ -20,7 +20,7 @@ const InvestorHome = () => {
     <div className="container-fluid investorHome_main_container">
       <div className="row mt-2">
         <div className="col">
-        <SmallProfileCard />
+          <SmallProfileCard />
           <div className="content-70">
             <div className="row">
               <div className="col-12 mt-2">
@@ -29,8 +29,10 @@ const InvestorHome = () => {
                     <div className="col-7">
                       <div className="image_name_section mt-2">
                         <img src={profilePic} alt="profileimage" />
-                        <div className="left_profile_text flex_content">
-                          <h2 className="typography">{loggedInUser?.firstName } { loggedInUser?.lastName}</h2>
+                        <div className="left_profile_text flex_content ms-3">
+                          <h2 className="typography">
+                            {loggedInUser?.firstName} {loggedInUser?.lastName}
+                          </h2>
                           <span className="small_typo">
                             Founder & CEO of capital Hub
                           </span>
@@ -165,7 +167,7 @@ const InvestorHome = () => {
                               className="small_typo"
                               style={{ marginBottom: "1rem" }}
                             >
-                             {loggedInUser?.email}
+                              {loggedInUser?.email}
                             </td>
                           </tr>
                           <tr>
@@ -178,7 +180,7 @@ const InvestorHome = () => {
                               className="small_typo"
                               style={{ marginBottom: "1rem" }}
                             >
-                             {loggedInUser?.phoneNumber}
+                              {loggedInUser?.phoneNumber}
                             </td>
                           </tr>
                         </tbody>
@@ -235,7 +237,7 @@ const InvestorHome = () => {
                 </div>
               </div>
             </div>
-            <CompanyDetailsCard/>
+            <CompanyDetailsCard />
           </div>
         </div>
         <div className="col">
@@ -243,7 +245,7 @@ const InvestorHome = () => {
             <div className="row">
               <RightProfileCard />
               <RecommendationCard />
-              <NewsCorner/>
+              <NewsCorner />
             </div>
           </div>
         </div>

@@ -1,6 +1,4 @@
-import React from "react";
-import "./investorNavbar.scss";
-import Bar from "../../../Images/investorIcon/Bar.svg";
+import "./NavBar.scss";
 import Logo from "../../../Images/investorIcon/Logo.svg";
 import NotificationIcon from "../../../Images/investorIcon/notification.svg";
 import MessageIcon from "../../../Images/investorIcon/message.svg";
@@ -8,11 +6,11 @@ import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
 import { Link } from "react-router-dom";
 
-const InvestorNavbar = () => {
+function NavBar() {
   return (
     <>
       <div className="container pt-1">
-        <div className="row investor_navbar ">
+        <div className="row investor_view_navbar ">
           <div className="col-md-5 d-flex">
             <div className="row bar_logo_container ">
               <div className="logo_container">
@@ -55,6 +53,6 @@ const InvestorNavbar = () => {
       </div>
     </>
   );
-};
+}
 
-export default InvestorNavbar;
+export default NavBar;

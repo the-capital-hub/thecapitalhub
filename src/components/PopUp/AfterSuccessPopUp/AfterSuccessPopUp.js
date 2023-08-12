@@ -2,7 +2,7 @@ import React from "react";
 import "./AfterSuccessPopUp.scss";
 import CorrectIcon from "../../../Images/CorrectIcon.svg";
 
-const AfterSuccessPopUp = ({ onClose, register, login,savedFile }) => {
+const AfterSuccessPopUp = ({ onClose, register, login, savedFile }) => {
   const handleOKClick = () => {
     onClose();
 
