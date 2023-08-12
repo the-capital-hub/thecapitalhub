@@ -6,8 +6,8 @@ import {
   loginUserController,
 } from "../controllers/userData.js";
 
-router.get("/getUser", getUsersController);
 router.post("/createUser", registerUserController);
+router.get("/getUser", getUsersController);
 router.post("/login", loginUserController);
 
 export default router;

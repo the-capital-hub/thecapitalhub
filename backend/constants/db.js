@@ -1,21 +1,16 @@
-import { MongoClient } from "mongodb";
+import mongoose from "mongoose";
 
-const username = "raazuuprasain94";
-const password = "CapitalHub@123"; // Password with '@' character
-const clusterName = "cluster0";
-const dbName = "thecapitalhub";
-
-const uri = `mongodb+srv://${encodeURIComponent(username)}:${encodeURIComponent(
-  password
-)}@${clusterName}.3qsyv8d.mongodb.net/${dbName}?retryWrites=true&w=majority`;
-
-export const client = new MongoClient(uri);
-
-export const connectToMongoDB = async () => {
+const connectDB = async () => {
   try {
-    await client.connect();
-    console.log("Connected to MongoDB");
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      dbName: "thecapitalhub",
+    });
+    console.log("Database is connected");
   } catch (error) {
-    console.error("Failed to connect to MongoDB", error);
+    throw Error("Internal Server Error");
   }
 };
+
+export default connectDB;
