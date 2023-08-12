@@ -15,8 +15,9 @@ export const getUsersService = async (info) => {
 export const registerUserService = async (user) => {
   try {
     const existingUser = await UserModel.findOne({
-      $or: [{ name: user.name }, { phoneNumber: user.phoneNumber }],
+      $or: [{ email: user.email }, { phoneNumber: user.phoneNumber }],
     });
+    console.log(existingUser);
     if (existingUser) {
       throw new Error("Existing user. Please log in");
     }
