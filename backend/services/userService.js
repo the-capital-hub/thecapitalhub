@@ -1,11 +1,10 @@
-import { client, connectToMongoDB } from "../constants/db.js";
+import mongoose from "mongoose";
+import { UserModel } from "../models/User.js";
+import { comparePassword } from "../utils/passwordManager.js";
 
 export const getUsersService = async (info) => {
   try {
-    const database = client.db("thecapitalhub");
-    const collection = database.collection("users");
-
-    const products = await collection.find({}).toArray();
+    const products = await UserModel.find({}).toArray();
     return products;
   } catch (error) {
     console.error("Failed to fetch data:", error);
@@ -13,49 +12,27 @@ export const getUsersService = async (info) => {
   }
 };
 
-connectToMongoDB();
-
 export const registerUserService = async (user) => {
-  console.log("user", user);
   try {
-    const database = client.db("thecapitalhub");
-    const collection = database.collection("users");
-
-    // Check if the user already exists based on the email
-    const existingUser = await collection.findOne({ email: user.email });
+    const existingUser = await UserModel.findOne({
+      $or: [{ name: user.name }, { phoneNumber: user.phoneNumber }],
+    });
     if (existingUser) {
-      throw new Error("User with this email already exists");
+      throw new Error("Existing user. Please log in");
     }
-
-    // Save the new user in the database
-
-    const result = await collection.insertOne(user);
-
-    // Return the saved user object
-    return result;
+    const newUser = new UserModel(user);
+    newUser.save();
+    return newUser;
   } catch (error) {
-    console.error("Failed to create the user:", error);
     throw error;
   }
 };
 
 export const loginUserService = async ({ phoneNumber, password }) => {
-  try {
-    const database = client.db("thecapitalhub");
-    const collection = database.collection("users");
+  const user = await UserModel.findOne({ phoneNumber });
 
-    // Find the user based on the provided phoneNumber
-    const user = await collection.findOne({ phoneNumber });
-    console.log("user-->", user);
+  if (!user) throw new Error("Invalid credentials");
 
-    // Check if the user exists and if the provided password matches the stored password
-    if (user && user.password === password) {
-      return user;
-    } else {
-      throw new Error("Invalid credentials");
-    }
-  } catch (error) {
-    console.error("Failed to perform login:", error);
-    throw error;
-  }
+  await comparePassword(password, user.password);
+  return user;
 };
