@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import NavBarIV from "../../../components/InvestorView/NavBar/NavBar";
 import SideBarIV from "../../../components/InvestorView/SideBar/SideBar";
+import "./ValidateOneLink.scss";
 
 function ValidateOneLink() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
@@ -13,7 +14,7 @@ function ValidateOneLink() {
 
   // if checking fails, show 404
   return (
-    <>
+    <div className="d-flex flex-column">
       <NavBarIV />
       <div
         className={`container-fluid investor_view_container ${
@@ -31,7 +32,7 @@ function ValidateOneLink() {
           <Outlet />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
