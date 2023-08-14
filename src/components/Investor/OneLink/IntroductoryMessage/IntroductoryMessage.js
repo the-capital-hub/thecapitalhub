@@ -18,9 +18,11 @@ const IntroductoryMessage = ({ title, image, para, input }) => {
             )}
           </div>
         </section>
-        <section className="text_section">
-          <p>{para}</p>
-        </section>
+        {para && (
+          <section className="text_section">
+            <p>{para}</p>
+          </section>
+        )}
         {input && (
           <section className="input_section">
             <div className="input_container">

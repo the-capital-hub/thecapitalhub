@@ -1,12 +1,8 @@
-const crypto = require("crypto");
+import crypto from "crypto";
 
 const generateSecretKey = () => {
   const lengthInBytes = 32;
   return crypto.randomBytes(lengthInBytes).toString("hex");
 };
 
-const secretKey = generateSecretKey();
-
-module.exports = {
-  secretKey,
-};
+export const secretKey = generateSecretKey();

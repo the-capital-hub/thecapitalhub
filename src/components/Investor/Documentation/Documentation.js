@@ -14,19 +14,16 @@ const Documentation = () => {
       <div className="row mt-2">
         <div className="col">
           <SmallProfileCard text={"Documentation"} />
-          <div className="content-70">
-            <div className="row">
+          <div className="content-70 mt-3">
+            {/* <div className="row">
               <div className="col-12 mt-2">
                 <IntroductoryMessage
                   title={
                     "Upload and share all you importance documentaion in one go"
                   }
-                  para={
-                    "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
-                  }
                 />
               </div>
-            </div>
+            </div> */}
             <div className="row">
               <div className="col-12 mt-2">
                 <UploadContainer />

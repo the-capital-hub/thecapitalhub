@@ -1,67 +1,63 @@
-const { getClient, connectToMongoDB } = require("../constants/db");
-const getUsersService = async (info) => {
-    try {
-        const client = getClient();
-        const database = client.db("thecapitalhub");
-        const collection = database.collection("users");
-    
-        const products = await collection.find({}).toArray();
-        return products;
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-        return [];
-      }
-  };
-  connectToMongoDB()
- 
+import mongoose from "mongoose";
+import { UserModel } from "../models/User.js";
+import { comparePassword } from "../utils/passwordManager.js";
 
-  const registerUserService = async (user) => {
-    console.log("user",user)
-    try {
-      const client = getClient();
-      const database = client.db("thecapitalhub");
-      const collection = database.collection("users");
-  
-      // Check if the user already exists based on the email
-      const existingUser = await collection.findOne({ email: user.email });
-      if (existingUser) {
-        throw new Error('User with this email already exists');
-      }
-  
-      // Save the new user in the database
+export const getUsersService = async (info) => {
+  try {
+    const products = await UserModel.find({}).toArray();
+    return products;
+  } catch (error) {
+    console.error("Failed to fetch data:", error);
+    return [];
+  }
+};
 
-      const result = await collection.insertOne(user);
-  
-      // Return the saved user object
-      return result
-    } catch (error) {
-      console.error('Failed to create the user:', error);
-      throw error;
+export const registerUserService = async (user) => {
+  try {
+    const existingUser = await UserModel.findOne({
+      $or: [{ email: user.email }, { phoneNumber: user.phoneNumber }],
+    });
+    console.log(existingUser);
+    if (existingUser) {
+      throw new Error("Existing user. Please log in");
     }
-  };
+    const newUser = new UserModel(user);
+    newUser.save();
+    return newUser;
+  } catch (error) {
+    throw error;
+  }
+};
 
-  const loginUserService = async ({ phoneNumber, password }) => {
-    try {
-      const client = getClient();
-      const database = client.db("thecapitalhub");
-      const collection = database.collection("users");
-  
-      // Find the user based on the provided phoneNumber
-      const user = await collection.findOne({ phoneNumber });
-      console.log("user-->",user)
-  
-      // Check if the user exists and if the provided password matches the stored password
-      if (user && user.password === password) {
-        return user;
-      } else {
-        throw new Error('Invalid credentials');
-      }
-    } catch (error) {
-      console.error('Failed to perform login:', error);
-      throw error;
+export const loginUserService = async ({ phoneNumber, password }) => {
+  const user = await UserModel.findOne({ phoneNumber });
+
+  if (!user) throw new Error("Invalid credentials");
+
+  await comparePassword(password, user.password);
+  return user;
+};
+
+//get User by id
+export const getUserById = async (userId) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found."
+      };
     }
-  };
-  
-  module.exports = {
-    getUsersService,registerUserService,loginUserService
-  };
+    return {
+      status: 200,
+      message: "User details retrieved successfully.",
+      data: user
+    };
+  } catch (error) {
+    console.error("Error getting user:", error);
+    return {
+      status: 500,
+      message: "An error occurred while getting the user."
+    };
+  }
+};

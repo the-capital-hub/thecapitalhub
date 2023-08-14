@@ -1,20 +1,15 @@
-const crypto = require("crypto");
-const jwt = require("jsonwebtoken");
-const getUsersService = require("../services/userService");
-const { registerUserService } = require("../services/userService");
-const { secretKey } = require("../constants/config");
+import jwt from "jsonwebtoken";
+import {
+  registerUserService,
+  getUsersService,
+  loginUserService,
+  getUserById,
+} from "../services/userService.js";
+import { secretKey } from "../constants/config.js";
 
-// const generateSecretKey = () => {
-//   const lengthInBytes = 32; // 32 bytes = 256 bits
-//   return crypto.randomBytes(lengthInBytes).toString("hex");
-// };
-
-// const secretKey = generateSecretKey();
-// console.log("Secret Key:", secretKey);
-
-const getUsersController = async (req, res, next) => {
+export const getUsersController = async (req, res, next) => {
   try {
-    const getUser = await getUsersService.getUsersService();
+    const getUser = await getUsersService();
     return res.status(200).json(getUser);
   } catch (error) {
     console.error(error);
@@ -22,15 +17,11 @@ const getUsersController = async (req, res, next) => {
   }
 };
 
-const registerUserController = async (req, res, next) => {
-  console.log("req.body", req.body);
+export const registerUserController = async (req, res, next) => {
   try {
     const { firstName, lastName, email, password, phoneNumber } = req.body;
 
-    // Perform input validation here if needed
-
-    // Call the service to save the user
-    const newUser = await registerUserService({
+    await registerUserService({
       firstName,
       lastName,
       email,
@@ -38,51 +29,52 @@ const registerUserController = async (req, res, next) => {
       phoneNumber,
     });
 
-    // If the user is saved successfully, send a custom success response
     return res.status(201).json({ message: "User added successfully" });
-  } catch (error) {
-    console.error(error);
-    if (error.message === "User with this email already exists") {
-      return res
-        .status(409)
-        .json({ error: "User with this email already exists" });
-    }
-    return res.status(500).json( error );
+  } catch ({ message }) {
+    res.status(409).json({
+      success: false,
+      operational: true,
+      message,
+    });
   }
 };
 
-const loginUserController = async (req, res, next) => {
+export const loginUserController = async (req, res, next) => {
   try {
     const { phoneNumber, password } = req.body;
-    console.log("req.body",req.body)
 
-    // Perform input validation here if needed
-
-    // Call the service to perform the login logic
-    const user = await getUsersService.loginUserService({
+    const user = await loginUserService({
       phoneNumber,
       password,
     });
 
-    // If the login is successful, you can perform necessary actions
-    const token = jwt.sign({ userId: user._id, phoneNumber: user.phoneNumber }, secretKey, {
-      expiresIn: '1h', // Token expiration time (e.g., 1 hour)
-    });
-    req.user = user;
-    console.log("token-->",token)
-    console.log("secretKey-->",secretKey)
+    delete user.password;
 
-    // For example, you might set user session or JWT token
-    // Here, we'll just return a success response
-    return res.status(200).json({ message: "Login successful", user,token });
+    const token = jwt.sign(
+      { userId: user._id, phoneNumber: user.phoneNumber },
+      secretKey
+    );
+
+    return res.status(200).json({ message: "Login successful", user, token });
   } catch (error) {
-    console.error(error);
-    return res.status(401).json(error);
+    return res
+      .status(401)
+      .json({ operational: true, success: false, message: error.message });
   }
 };
 
-module.exports = {
-  getUsersController,
-  registerUserController,
-  loginUserController,
+
+// get user by id 
+
+export const getUserByIdController = async (req, res) => {
+  try {
+    const response = await getUserById(req.params.id);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while creating the company."
+    });
+  }
 };

@@ -47,7 +47,7 @@ const InvestorNavbar = () => {
                   {" "}
                   <img className="profile-pic" src={profilePic} alt="Profile" />
                 </Link>
-                <span className="me">Me</span>
+                {/* <span className="me">Me</span> */}
               </div>
             </div>
           </div>

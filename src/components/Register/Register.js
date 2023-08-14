@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./register.scss";
 import RegisterIcon from "../../Images/Group 21.svg";
 import GIcon from "../../Images/Group 22.svg";
@@ -10,8 +10,14 @@ import AfterRegisterPopUp from "../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import { Link, useNavigate } from "react-router-dom";
 import { getUser, postUser } from "../../Service/user";
 import ErrorPopUp from "../PopUp/ErrorPopUp/ErrorPopUp";
+import { firebase, auth } from "../../firebase";
+import SelectWhatYouAre from "../PopUp/SelectWhatYouAre/SelectWhatYouAre";
+import StartUpForm from "../PopUp/StartUpForm/StartUpForm";
+import InvestorForm from "../PopUp/InvestorForm/InvestorForm";
 
 const Register = () => {
+  const [isMobileVerified, setIsMobileVerified] = useState(false);
+
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [inputValues, setInputValues] = useState({
@@ -21,6 +27,19 @@ const Register = () => {
     password: "",
     phoneNumber: "",
   });
+
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const otpInputRefs = useRef([]);
+  const [show, setshow] = useState(false);
+  const [showSelectWhatYouAre, setShowSelectWhatYouAre] = useState(false);
+  const [showStartUp, setShowStartUp] = useState(false);
+  const [showInvestor, setShowInvestor] = useState(false);
+
+  const [final, setfinal] = useState("");
+  // Sent OTP
+  useEffect(() => {
+    let verify = new firebase.auth.RecaptchaVerifier("recaptcha-container");
+  }, []);
 
   const handleInputChange = (event, type) => {
     if (type !== "country" && type !== "state" && type !== "phoneNumber") {
@@ -37,13 +56,17 @@ const Register = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    if (!isMobileVerified) {
+      alert("Please verify your Mobile Number");
+      return;
+    }
 
     if (!isValidMobileNumber(inputValues.phoneNumber)) {
       setShowErrorPopup(true);
-      setTimeout(()=>{
+      setTimeout(() => {
         setShowErrorPopup(false);
-      },2000)
-   
+      }, 2000);
+
       return;
     }
     localStorage.setItem("user_data", JSON.stringify(inputValues));
@@ -72,6 +95,103 @@ const Register = () => {
     // Check if the cleaned number starts with the country code for India (+91) and has 10 digits
     return /^91\d{10}$/.test(cleanedNumber);
   };
+
+  const handleVerifyMobile = async (phoneNumber) => {
+    if (isValidMobileNumber(phoneNumber)) {
+      // Implement your mobile number verification logic here
+      if (phoneNumber === "" || phoneNumber.length < 10) return;
+
+      setTimeout(() => {
+        let verify = new firebase.auth.RecaptchaVerifier("recaptcha-container");
+        auth
+          .signInWithPhoneNumber(phoneNumber, verify)
+          .then((result) => {
+            setfinal(result);
+            alert("code sent");
+            setshow(true);
+          })
+          .catch((err) => {
+            alert(err);
+            window.location.reload();
+          });
+      }, 500);
+      // For example, send a verification code via SMS and wait for user input
+      // Once verified, update the isMobileVerified state
+    } else {
+      // Handle invalid phone number scenario
+      console.log("Invalid phone number");
+    }
+  };
+
+  // Validate OTP
+  const ValidateOtp = () => {
+    if (otp === null || final === null) return;
+    const verificationCode = otp.join(""); // Join the array elements into a string
+    final
+      .confirm(verificationCode)
+      .then((result) => {
+        console.log("Verified Success", result);
+        alert("Mobile Verification Success");
+
+        if (result) {
+          // Set the user's login status in local storage or Redux store
+          // localStorage.setItem("isLoggedIn", "true");
+          setIsMobileVerified(true);
+          navigate("/signup");
+          setshow(false);
+        }
+      })
+      .catch((err) => {
+        alert("Wrong code");
+      });
+  };
+
+  const handleOtpChange = (event, index) => {
+    const value = event.target.value;
+    console.log(value);
+    const updatedOtp = [...otp];
+    updatedOtp[index] = value;
+    setOtp(updatedOtp);
+    if (value !== "" && index < otp.length - 1) {
+      otpInputRefs.current[index + 1].focus();
+    }
+  };
+
+  const handleOtpKeyDown = (event, index) => {
+    if (event.key === "Backspace" && index > 0 && otp[index] === "") {
+      const updatedOtp = [...otp];
+      updatedOtp[index - 1] = "";
+      setOtp(updatedOtp);
+      otpInputRefs.current[index - 1].focus();
+    }
+  };
+
+  const handleOtpPaste = (event) => {
+    event.preventDefault();
+    const pastedText = event.clipboardData.getData("text/plain");
+    const sanitizedText = pastedText.replace(/[^0-9]/g, "").slice(0, 6);
+    const updatedOtp = [...otp];
+    for (let i = 0; i < sanitizedText.length; i++) {
+      updatedOtp[i] = sanitizedText[i];
+    }
+    setOtp(updatedOtp);
+  };
+
+  const handleClick = () => {
+    console.log("handle click");
+    setShowSelectWhatYouAre(true);
+  };
+
+  const handleStartupClick = () => {
+    setShowSelectWhatYouAre(false);
+    setShowStartUp(true)
+  };
+
+  const handleInvestorClick = () => {
+    setShowSelectWhatYouAre(false);
+    setShowInvestor(true)
+  };
+
   return (
     <>
       <div className="row d-flex register_container">
@@ -137,16 +257,29 @@ const Register = () => {
             <div className="row">
               <div className="col-md-12 input-container">
                 <label htmlFor="mobile">Mobile Number</label>
-                <PhoneInput
-                  placeholder="Mobile Number"
-                  className="form-control plato_form_control"
-                  defaultCountry="IN"
-                  countryCallingCodeEditable={false}
-                  initialValueFormat="national"
-                  autoComplete="off"
-                  onChange={(e) => handleInputChange(e, "phoneNumber")}
-                  value={inputValues.phoneNumber}
-                />
+                <div className="input-group">
+                  <PhoneInput
+                    placeholder="Mobile Number"
+                    className="form-control plato_form_control"
+                    defaultCountry="IN"
+                    countryCallingCodeEditable={false}
+                    initialValueFormat="national"
+                    autoComplete="off"
+                    onChange={(e) => handleInputChange(e, "phoneNumber")}
+                    value={inputValues.phoneNumber}
+                  />
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => handleVerifyMobile(inputValues.phoneNumber)}
+                  >
+                    Verify
+                  </button>
+                </div>
+
+                {isMobileVerified && (
+                  <p className="text-success">Mobile number verified!</p>
+                )}
+                <div id="recaptcha-container"></div>
               </div>
             </div>
             <div className="row">
@@ -194,7 +327,11 @@ const Register = () => {
               </label>
             </div>
             <div className="submit_btn">
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={handleClick}
+              >
                 Create Account
               </button>
             </div>
@@ -219,7 +356,9 @@ const Register = () => {
             </div>
           </div>
         </div>
-        {isSubmitted && <AfterRegisterPopUp onClose={handleClosePopup} register={true} />}
+        {isSubmitted && (
+          <AfterRegisterPopUp onClose={handleClosePopup} register={true} />
+        )}
 
         {showErrorPopup && (
           <ErrorPopUp
@@ -228,6 +367,47 @@ const Register = () => {
             }
             onClose={() => setShowErrorPopup(false)} // Add a handler to close the error popup
           />
+        )}
+
+        {show && (
+          <div className={show && "verification_container"}>
+            <div className="login_content_main">
+              <div className="login_content">
+                <h2>Enter verification code</h2>
+                <h6>
+                  We have just sent a verification code to your mobile number
+                </h6>
+                <div className="otp-container">
+                  {otp.map((value, index) => (
+                    <input
+                      key={index}
+                      type="text"
+                      value={value}
+                      onChange={(event) => handleOtpChange(event, index)}
+                      onKeyDown={(event) => handleOtpKeyDown(event, index)}
+                      className={`otp-box ${value !== "" ? "has-value" : ""}`}
+                      maxLength={1}
+                      ref={(inputRef) => {
+                        otpInputRefs.current[index] = inputRef;
+                      }}
+                    />
+                  ))}
+                </div>
+                <h3>Send the code again</h3>
+                <h3>Change phone number</h3>
+                <div className="continue_btn">
+                  <button onClick={ValidateOtp}>Verify</button>
+                </div>
+              </div>
+            </div>
+            <br />
+            <br />
+          </div>
+        )}
+        {showStartUp && <StartUpForm />}
+        {showInvestor && <InvestorForm />}
+        {showSelectWhatYouAre && (
+          <SelectWhatYouAre onStartupClick={handleStartupClick}  onInvestorClick={handleInvestorClick}/>
         )}
       </div>
     </>
