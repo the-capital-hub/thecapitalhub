@@ -153,3 +153,78 @@
     text-decoration: none;
   }
 }
+
+@media (max-width: 768px) {
+  .seventy,
+  .thirty {
+    margin: 0;
+    padding: 0;
+  }
+  .investorHome_main_container {
+    .bio_container,
+    .personal_information,
+    .bio_information {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+
+      .designation_list {
+        color: #000;
+        font-size: 16px;
+        font-family: Poppins;
+        font-weight: 500;
+        padding-right: 50px;
+      }
+    }
+  }
+
+  .bio_container {
+    .col-seven {
+      padding: 0;
+      .image_name_section {
+        img {
+          height: 20%;
+        }
+        .left_profile_text {
+          .typography {
+            color: #000;
+            font-size: 17px;
+            font-family: Poppins;
+            font-weight: 600;
+            margin: 0;
+          }
+
+          .smallest_typo {
+            color: #686868;
+            font-size: 10px;
+            font-family: Poppins;
+          }
+
+          .small_typo {
+            color: #717171;
+            font-size: 14px;
+            font-family: Poppins;
+          }
+        }
+      }
+    }
+
+    .col-five {
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      .connect_btn button {
+        width: 8rem;
+      }
+    }
+    .designation {
+      .designation_list {
+        color: #000;
+        font-size: 16px;
+        font-family: Poppins;
+        font-weight: 500;
+        padding-right: 50px;
+      }
+    }
+  }
+}

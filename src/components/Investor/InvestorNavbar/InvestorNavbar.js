@@ -1,26 +1,32 @@
 import React from "react";
 import "./investorNavbar.scss";
 import Bar from "../../../Images/investorIcon/Bar.svg";
+import searchIconBlack from '../../../Images/navbar/Search.svg'
 import Logo from "../../../Images/investorIcon/Logo.svg";
 import NotificationIcon from "../../../Images/investorIcon/notification.svg";
 import MessageIcon from "../../../Images/investorIcon/message.svg";
 import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
+import HambergerIcon from '../../../Images/Hamberger.svg'
 import { Link } from "react-router-dom";
 
-const InvestorNavbar = () => {
+const InvestorNavbar = (props) => {
   return (
     <>
       <div className="container pt-1">
         <div className="row investor_navbar ">
-          <div className="col-md-5 d-flex">
+          <div className="col-5 d-flex">
             <div className="row bar_logo_container ">
               <div className="logo_container">
                 <img src={Logo} alt="bar" />
               </div>
+              <div className="mobile-home-hamberger" onClick={props.handleSidebarToggle}>
+              <img src={HambergerIcon} alt="bar" />
+                <h1>Home</h1>
+              </div>
             </div>
           </div>
-          <div className="col-md-7 navbar_right_container">
+          <div className="col-7 navbar_right_container">
             <div className="searchbar-container">
               <input
                 type="text"
@@ -31,7 +37,14 @@ const InvestorNavbar = () => {
                 <img src={searchIcon} alt="search" />
               </button>
             </div>
+            
             <div className="icons-container">
+            <div className="mobile-icon-wrapper ">
+                <span className="notification-icon">
+                  <img src={searchIconBlack} alt="notification" />
+                </span>
+              </div>
+
               <div className="icon-wrapper">
                 <span className="notification-icon">
                   <img src={NotificationIcon} alt="notification" />
