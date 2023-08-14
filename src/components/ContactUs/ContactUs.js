@@ -1,11 +1,11 @@
 import React from "react";
 import "./contactus.scss";
 import callIcon from "../../Images/Call.svg";
-import messageIcon from "../../Images/message.svg";
+import messageIcon from "../../Images/Message.svg";
 import mapPinIcon from "../../Images/map_pin.svg";
-import fbIcon from '../../Images/fb_contact.svg'
-import instaIcon from '../../Images/insta_contact.svg'
-import twIcon from '../../Images/tw_contact.svg'
+import fbIcon from "../../Images/fb_contact.svg";
+import instaIcon from "../../Images/insta_contact.svg";
+import twIcon from "../../Images/tw_contact.svg";
 const ContactUs = () => {
   return (
     <>
@@ -70,7 +70,6 @@ const ContactUs = () => {
             <img src={fbIcon} alt="img" />
             <img src={instaIcon} alt="img" />
             <img src={twIcon} alt="img" />
-
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ import documentData from "./routes/documentData.js";
 import multer from "multer";
 import connectDB from "./constants/db.js";
 import globalErrorHandler from "./error/AppError.js";
-import companyData from "./routes/companyData.js"
+import startUpData from "./routes/startUpData.js";
 
 dotenv.config();
 const app = express();
@@ -21,7 +21,7 @@ app.use(cors()); // Use CORS middleware to allow requests from all origins
 app.use("/users", usersData);
 app.use("/post", postData);
 app.use("/documentation", documentData);
-app.use("/company", companyData);
+app.use("/startup", startUpData);
 
 // documentation upload
 

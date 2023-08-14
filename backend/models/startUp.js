@@ -1,21 +1,23 @@
 import { Schema, model } from "mongoose";
 
-const companySchema = new Schema(
+const startUpSchema = new Schema(
   {
     startup_name: {
       type: String,
-      required: true
+      required: true,
     },
     founderId: {
+      type: Schema.Types.ObjectId,
+      ref: "Users",
+    },
+    introductoryMessage: {
       type: String,
-      required: true
     },
     logo: {
       type: String,
     },
     location: {
       type: String,
-      // required: true
     },
     description: {
       type: String,
@@ -27,23 +29,29 @@ const companySchema = new Schema(
       type: String,
     },
     competitiveLandscape: {
-      type: String
+      type: String,
     },
     growthStrategy: {
-      type: String
+      type: String,
     },
     marketTraction: {
-      type: String
+      type: String,
     },
     businessModel: {
-      type: String
+      type: String,
     },
     growthModel: {
-      type: String
+      type: String,
     },
     team: {
       type: Array,
-      default: [],
+      default: [
+        {
+          name: String,
+          designation: String,
+          image: String,
+        },
+      ],
     },
     TAM: {
       type: Number,
@@ -71,13 +79,19 @@ const companySchema = new Schema(
     },
     oneLink: {
       type: String,
-    }
+      default: function () {
+        return this.startup_name.split(" ").join("").toLowerCase();
+      },
+    },
+    contactDetails: {
+      fullName: String,
+      phoneNumber: String,
+      email: String,
+    },
   },
   {
     timestamps: true,
   }
-
 );
 
-export default model("Company", companySchema);
-
+export const StartUpModel = model("StartUps", startUpSchema);
