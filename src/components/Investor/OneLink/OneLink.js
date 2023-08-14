@@ -47,7 +47,7 @@ const OneLink = () => {
             <div className="row">
               <RightProfileCard />
               <RecommendationCard />
-              <NewsCorner />
+              {/* <NewsCorner /> */}
             </div>
           </div>
         </div>

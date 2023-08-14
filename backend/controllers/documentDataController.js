@@ -1,11 +1,7 @@
-const documentService = require('../services/documentDataService');
+import { getDocumentList as getAllDocumentList } from "../services/documentDataService.js";
 
 // Controller function to get a list of uploaded files and their names
-const getDocumentList = (req, res) => {
-  const files = documentService.getDocumentList();
+export const getDocumentList = (req, res) => {
+  const files = getAllDocumentList();
   res.status(200).json({ files });
-};
-
-module.exports = {
-  getDocumentList,
 };

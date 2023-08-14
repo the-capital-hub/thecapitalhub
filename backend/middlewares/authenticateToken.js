@@ -1,19 +1,12 @@
-const jwt = require("jsonwebtoken");
-const { secretKey } = require("../constants/config");
-const { getClient } = require("../constants/db");
+import jwt from "jsonwebtoken";
+import { secretKey } from "../constants/config";
+import { getClient } from "../constants/db";
 
 const authenticateToken = (req, res, next) => {
-  console.log("req",req)
+  console.log("req", req);
   const token = req.header("Authorization");
   console.log("Received token:", token);
   console.log("Using secret:", secretKey);
-  const user = jwt.verify(token, secretKey);
-  console.log("Token verified. User details:", user);
-  if (!token) {
-    return res
-      .status(401)
-      .json({ success: false, message: "No token provided" });
-  }
 
   try {
     // Verify the token synchronously and get the user details
@@ -48,4 +41,4 @@ const authenticateToken = (req, res, next) => {
   }
 };
 
-module.exports = authenticateToken;
+export default authenticateToken;
