@@ -16,7 +16,7 @@ const CompanyDetailsCard = () => {
           <div className=" company_details box">
             <div className="row">
               <div className="col-12">
-                <div className="image_name_section mt-2 company_details_image_text">
+                <div className="image_name_section mt-2 ">
                   <span className="company_details_logo_container">
                     <img src={LogoX} alt="profileimage" />
                   </span>
@@ -43,7 +43,7 @@ const CompanyDetailsCard = () => {
             </div>
             <div className="row">
               <div className="company_details mt-4">
-                <p>
+                <p className="para_text">
                   As the Founder at Capital HUB, Man's all about building great
                   start-ups from a simple idea to an elegant reality. Humbled
                   and honored to have worked with Angels and VC's across the

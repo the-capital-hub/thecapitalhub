@@ -19,14 +19,14 @@ const InvestorHome = () => {
   return (
     <div className="container-fluid investorHome_main_container">
       <div className="row mt-2">
-        <div className="col">
+        <div className="col seventy">
           <SmallProfileCard />
           <div className="content-70">
             <div className="row">
               <div className="col-12 mt-2">
                 <div className=" box bio_container">
                   <div className="row">
-                    <div className="col-7">
+                    <div className="col-8 col-seven">
                       <div className="image_name_section mt-2">
                         <img src={profilePic} alt="profileimage" />
                         <div className="left_profile_text flex_content ms-3">
@@ -40,7 +40,7 @@ const InvestorHome = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="col-5">
+                    <div className="col-4 col-five">
                       <div className="connect_btn m-4">
                         <button>
                           <img src={AddUserIcon} />
@@ -240,7 +240,7 @@ const InvestorHome = () => {
             <CompanyDetailsCard />
           </div>
         </div>
-        <div className="col">
+        <div className="col thirty">
           <div className="content-30">
             <div className="row">
               <RightProfileCard />

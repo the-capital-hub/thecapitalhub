@@ -45,7 +45,7 @@ const RightProfileCard = () => {
                     className="form-control"
                     placeholder="Type your message and loop me in"
                   />
-                  <button className="btn btn-primary send-button" type="button">
+                  <button className="btn-primary send-button" type="button">
                     send
                   </button>
                 </div>

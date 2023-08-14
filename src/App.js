@@ -161,7 +161,7 @@ function App() {
           <Route path="/login" element={<Login />} />
 
           <Route element={<PrivateRoute />}>
-            <Route path="/investor" element={<InvestorHome />} />
+            <Route path="/profile" element={<InvestorHome />} />
             <Route path="/home" element={<Feed />} />
             <Route path="/createpost" element={<CreatePost />} />
             <Route path="/documentation" element={<Documentation />} />
