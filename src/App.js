@@ -30,6 +30,11 @@ import CompliancesDeligence from "./components/Service/CompliancesDeligence/Comp
 import OurInvestor from "./components/OurInvestor/OurInvestor";
 import OneLinkEditPage from "./components/Investor/OneLink/OneLinkEditPage/OneLinkEditPage";
 import InvestorManageAccount from "./components/Investor/InvestorManageAccount/InvestorManageAccount";
+import Profile from "./pages/InvestorView/Profile/Profile";
+import Company from "./pages/InvestorView/Company/Company";
+import OnePager from "./pages/InvestorView/OnePager/OnePager";
+import DocumentationIV from "./pages/InvestorView/Documentation/Documentation";
+import ValidateOneLink from "./pages/InvestorView/ValidateOneLink/ValidateOneLink";
 
 function App() {
   return (
@@ -147,7 +152,7 @@ function App() {
             element={
               <>
                 <Navbar />
-                <OurInvestor/>
+                <OurInvestor />
                 <Footer />
               </>
             }
@@ -163,12 +168,24 @@ function App() {
             <Route path="/savePost" element={<SavePost />} />
             <Route path="/onelink" element={<OneLink />} />
             <Route path="/onelink/edit" element={<OneLinkEditPage />} />
-            <Route path="/investor/manage-account" element={<InvestorManageAccount />} />
+            <Route
+              path="/investor/manage-account"
+              element={<InvestorManageAccount />}
+            />
             <Route path="/team" element={<Team />} />
             <Route path="/customers" element={<Customer />} />
             <Route path="/investors" element={<Investors />} />
             <Route path="/help" element={<Help />} />
             <Route path="/support" element={<Support />} />
+          </Route>
+
+          {/* OneLink */}
+          <Route path="/onelink/:username" element={<ValidateOneLink />}>
+            <Route path="" element={<Profile />} />
+            <Route path="company" element={<Company />} />
+            <Route path="onePager" element={<OnePager />} />
+            <Route path="documentation" element={<DocumentationIV />} />
+            <Route path="investNow" element={<DocumentationIV />} />
           </Route>
         </Routes>
       </Router>

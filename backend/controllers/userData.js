@@ -3,6 +3,7 @@ import {
   registerUserService,
   getUsersService,
   loginUserService,
+  getUserById,
 } from "../services/userService.js";
 import { secretKey } from "../constants/config.js";
 
@@ -17,14 +18,10 @@ export const getUsersController = async (req, res, next) => {
 };
 
 export const registerUserController = async (req, res, next) => {
-  console.log("req.body", req.body);
   try {
     const { firstName, lastName, email, password, phoneNumber } = req.body;
 
-    // Perform input validation here if needed
-
-    // Call the service to save the user
-    const newUser = await registerUserService({
+    await registerUserService({
       firstName,
       lastName,
       email,
@@ -32,49 +29,52 @@ export const registerUserController = async (req, res, next) => {
       phoneNumber,
     });
 
-    // If the user is saved successfully, send a custom success response
     return res.status(201).json({ message: "User added successfully" });
-  } catch (error) {
-    console.error(error);
-    if (error.message === "User with this email already exists") {
-      return res
-        .status(409)
-        .json({ error: "User with this email already exists" });
-    }
-    return res.status(500).json(error);
+  } catch ({ message }) {
+    res.status(409).json({
+      success: false,
+      operational: true,
+      message,
+    });
   }
 };
 
 export const loginUserController = async (req, res, next) => {
   try {
     const { phoneNumber, password } = req.body;
-    console.log("req.body", req.body);
 
-    // Perform input validation here if needed
-
-    // Call the service to perform the login logic
     const user = await loginUserService({
       phoneNumber,
       password,
     });
 
-    // If the login is successful, you can perform necessary actions
+    delete user.password;
+
     const token = jwt.sign(
       { userId: user._id, phoneNumber: user.phoneNumber },
-      secretKey,
-      {
-        expiresIn: "1h", // Token expiration time (e.g., 1 hour)
-      }
+      secretKey
     );
-    req.user = user;
-    console.log("token-->", token);
-    console.log("secretKey-->", secretKey);
 
-    // For example, you might set user session or JWT token
-    // Here, we'll just return a success response
     return res.status(200).json({ message: "Login successful", user, token });
   } catch (error) {
+    return res
+      .status(401)
+      .json({ operational: true, success: false, message: error.message });
+  }
+};
+
+
+// get user by id 
+
+export const getUserByIdController = async (req, res) => {
+  try {
+    const response = await getUserById(req.params.id);
+    res.status(response.status).send(response);
+  } catch (error) {
     console.error(error);
-    return res.status(401).json(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while creating the company."
+    });
   }
 };
