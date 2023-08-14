@@ -11,6 +11,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { getUser, postUser } from "../../Service/user";
 import ErrorPopUp from "../PopUp/ErrorPopUp/ErrorPopUp";
 import { firebase, auth } from "../../firebase";
+import SelectWhatYouAre from "../PopUp/SelectWhatYouAre/SelectWhatYouAre";
+import StartUpForm from "../PopUp/StartUpForm/StartUpForm";
+import InvestorForm from "../PopUp/InvestorForm/InvestorForm";
 
 const Register = () => {
   const [isMobileVerified, setIsMobileVerified] = useState(false);
@@ -28,6 +31,10 @@ const Register = () => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const otpInputRefs = useRef([]);
   const [show, setshow] = useState(false);
+  const [showSelectWhatYouAre, setShowSelectWhatYouAre] = useState(false);
+  const [showStartUp, setShowStartUp] = useState(false);
+  const [showInvestor, setShowInvestor] = useState(false);
+
   const [final, setfinal] = useState("");
   // Sent OTP
   useEffect(() => {
@@ -49,9 +56,9 @@ const Register = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    if(!isMobileVerified){
-      alert("Please verify your Mobile Number")
-      return
+    if (!isMobileVerified) {
+      alert("Please verify your Mobile Number");
+      return;
     }
 
     if (!isValidMobileNumber(inputValues.phoneNumber)) {
@@ -110,7 +117,6 @@ const Register = () => {
       }, 500);
       // For example, send a verification code via SMS and wait for user input
       // Once verified, update the isMobileVerified state
-     
     } else {
       // Handle invalid phone number scenario
       console.log("Invalid phone number");
@@ -125,14 +131,14 @@ const Register = () => {
       .confirm(verificationCode)
       .then((result) => {
         console.log("Verified Success", result);
-        alert("Mobile Verification Success")
+        alert("Mobile Verification Success");
 
         if (result) {
           // Set the user's login status in local storage or Redux store
           // localStorage.setItem("isLoggedIn", "true");
           setIsMobileVerified(true);
           navigate("/signup");
-          setshow(false)
+          setshow(false);
         }
       })
       .catch((err) => {
@@ -169,6 +175,21 @@ const Register = () => {
       updatedOtp[i] = sanitizedText[i];
     }
     setOtp(updatedOtp);
+  };
+
+  const handleClick = () => {
+    console.log("handle click");
+    setShowSelectWhatYouAre(true);
+  };
+
+  const handleStartupClick = () => {
+    setShowSelectWhatYouAre(false);
+    setShowStartUp(true)
+  };
+
+  const handleInvestorClick = () => {
+    setShowSelectWhatYouAre(false);
+    setShowInvestor(true)
   };
 
   return (
@@ -234,20 +255,6 @@ const Register = () => {
             </div>
 
             <div className="row">
-              {/* <div className="col-md-12 input-container">
-                <label htmlFor="mobile">Mobile Number</label>
-                <PhoneInput
-                  placeholder="Mobile Number"
-                  className="form-control plato_form_control"
-                  defaultCountry="IN"
-                  countryCallingCodeEditable={false}
-                  initialValueFormat="national"
-                  autoComplete="off"
-                  onChange={(e) => handleInputChange(e, "phoneNumber")}
-                  value={inputValues.phoneNumber}
-                />
-              </div> */}
-
               <div className="col-md-12 input-container">
                 <label htmlFor="mobile">Mobile Number</label>
                 <div className="input-group">
@@ -268,12 +275,11 @@ const Register = () => {
                     Verify
                   </button>
                 </div>
-                
 
                 {isMobileVerified && (
                   <p className="text-success">Mobile number verified!</p>
                 )}
-                  <div id="recaptcha-container"></div>
+                <div id="recaptcha-container"></div>
               </div>
             </div>
             <div className="row">
@@ -321,7 +327,11 @@ const Register = () => {
               </label>
             </div>
             <div className="submit_btn">
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={handleClick}
+              >
                 Create Account
               </button>
             </div>
@@ -359,39 +369,46 @@ const Register = () => {
           />
         )}
 
-       {show && <div  className={show && "verification_container"}>
-          <div className="login_content_main">
-            <div className="login_content">
-              <h2>Enter verification code</h2>
-              <h6>
-                We have just sent a verification code to your mobile number
-              </h6>
-              <div className="otp-container">
-                {otp.map((value, index) => (
-                  <input
-                    key={index}
-                    type="text"
-                    value={value}
-                    onChange={(event) => handleOtpChange(event, index)}
-                    onKeyDown={(event) => handleOtpKeyDown(event, index)}
-                    className={`otp-box ${value !== "" ? "has-value" : ""}`}
-                    maxLength={1}
-                    ref={(inputRef) => {
-                      otpInputRefs.current[index] = inputRef;
-                    }}
-                  />
-                ))}
-              </div>
-              <h3>Send the code again</h3>
-              <h3>Change phone number</h3>
-              <div className="continue_btn">
-                <button onClick={ValidateOtp}>Verify</button>
+        {show && (
+          <div className={show && "verification_container"}>
+            <div className="login_content_main">
+              <div className="login_content">
+                <h2>Enter verification code</h2>
+                <h6>
+                  We have just sent a verification code to your mobile number
+                </h6>
+                <div className="otp-container">
+                  {otp.map((value, index) => (
+                    <input
+                      key={index}
+                      type="text"
+                      value={value}
+                      onChange={(event) => handleOtpChange(event, index)}
+                      onKeyDown={(event) => handleOtpKeyDown(event, index)}
+                      className={`otp-box ${value !== "" ? "has-value" : ""}`}
+                      maxLength={1}
+                      ref={(inputRef) => {
+                        otpInputRefs.current[index] = inputRef;
+                      }}
+                    />
+                  ))}
+                </div>
+                <h3>Send the code again</h3>
+                <h3>Change phone number</h3>
+                <div className="continue_btn">
+                  <button onClick={ValidateOtp}>Verify</button>
+                </div>
               </div>
             </div>
+            <br />
+            <br />
           </div>
-          <br />
-          <br />
-        </div>}
+        )}
+        {showStartUp && <StartUpForm />}
+        {showInvestor && <InvestorForm />}
+        {showSelectWhatYouAre && (
+          <SelectWhatYouAre onStartupClick={handleStartupClick}  onInvestorClick={handleInvestorClick}/>
+        )}
       </div>
     </>
   );
