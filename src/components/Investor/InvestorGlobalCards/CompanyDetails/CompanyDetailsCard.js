@@ -1,12 +1,12 @@
 import React from "react";
 import LocationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
-import EmailIcon from "../../../../Images/investorIcon/message.svg";
+import EmailIcon from "../../../../Images/investorIcon/Message.svg";
 import TweeterIcon from "../../../../Images/investorIcon/Tweeter.svg";
 import IntagramIcon from "../../../../Images/investorIcon/Instagram.svg";
 import LinkedinIcon from "../../../../Images/investorIcon/Linkedin.svg";
 import WebIcon from "../../../../Images/investorIcon/WebIcon.svg";
 import LogoX from "../../../../Images/investorIcon/LogoX.png";
-import './companyDetails.scss'
+import "./companyDetails.scss";
 
 const CompanyDetailsCard = () => {
   return (

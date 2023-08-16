@@ -1,13 +1,13 @@
 import React from "react";
 import "./investorNavbar.scss";
 import Bar from "../../../Images/investorIcon/Bar.svg";
-import searchIconBlack from '../../../Images/navbar/Search.svg'
+import searchIconBlack from "../../../Images/navbar/Search.svg";
 import Logo from "../../../Images/investorIcon/Logo.svg";
 import NotificationIcon from "../../../Images/investorIcon/notification.svg";
-import MessageIcon from "../../../Images/investorIcon/message.svg";
+import MessageIcon from "../../../Images/investorIcon/Message.svg";
 import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
-import HambergerIcon from '../../../Images/Hamberger.svg'
+import HambergerIcon from "../../../Images/Hamberger.svg";
 import { Link } from "react-router-dom";
 
 const InvestorNavbar = (props) => {
@@ -20,8 +20,11 @@ const InvestorNavbar = (props) => {
               <div className="logo_container">
                 <img src={Logo} alt="bar" />
               </div>
-              <div className="mobile-home-hamberger" onClick={props.handleSidebarToggle}>
-              <img src={HambergerIcon} alt="bar" />
+              <div
+                className="mobile-home-hamberger"
+                onClick={props.handleSidebarToggle}
+              >
+                <img src={HambergerIcon} alt="bar" />
                 <h1>Home</h1>
               </div>
             </div>
@@ -37,9 +40,9 @@ const InvestorNavbar = (props) => {
                 <img src={searchIcon} alt="search" />
               </button>
             </div>
-            
+
             <div className="icons-container">
-            <div className="mobile-icon-wrapper ">
+              <div className="mobile-icon-wrapper ">
                 <span className="notification-icon">
                   <img src={searchIconBlack} alt="notification" />
                 </span>
