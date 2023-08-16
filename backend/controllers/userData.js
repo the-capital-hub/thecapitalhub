@@ -4,6 +4,7 @@ import {
   getUsersService,
   loginUserService,
   getUserById,
+  updateUserData,
 } from "../services/userService.js";
 import { secretKey } from "../constants/config.js";
 
@@ -48,7 +49,7 @@ export const loginUserController = async (req, res, next) => {
       password,
     });
 
-    delete user.password;
+    user.password = undefined;
 
     const token = jwt.sign(
       { userId: user._id, phoneNumber: user.phoneNumber },
@@ -63,9 +64,7 @@ export const loginUserController = async (req, res, next) => {
   }
 };
 
-
-// get user by id 
-
+// get user by id
 export const getUserByIdController = async (req, res) => {
   try {
     const response = await getUserById(req.params.id);
@@ -74,7 +73,16 @@ export const getUserByIdController = async (req, res) => {
     console.error(error);
     res.status(500).send({
       status: 500,
-      message: "An error occurred while creating the company."
+      message: "An error occurred while creating the company.",
     });
   }
+};
+
+// Update User
+export const updateUser = async (req, res) => {
+  try {
+    const { userId, ...newData } = req.body;
+    const { status, message } = await updateUserData({ userId, newData });
+    res.status(status).json({ message });
+  } catch (error) {}
 };

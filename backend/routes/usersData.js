@@ -3,9 +3,13 @@ import {
   getUsersController,
   registerUserController,
   loginUserController,
-  getUserByIdController
+  getUserByIdController,
+  updateUser,
 } from "../controllers/userData.js";
 const router = express.Router();
+
+// Profile Page
+router.patch("/updateFounder", updateUser);
 
 router.post("/createUser", registerUserController);
 router.get("/getUser", getUsersController);

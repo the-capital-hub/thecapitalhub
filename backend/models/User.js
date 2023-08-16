@@ -51,6 +51,10 @@ const userSchema = new Schema(
         type: String,
       },
     ],
+    bio: {
+      type: String,
+      trim: true,
+    },
     education: {
       type: String,
       trim: true,
@@ -64,6 +68,10 @@ const userSchema = new Schema(
       type: String,
       // required: [true, "User must provide gender"],
     },
+    startUp: {
+      type: Schema.Types.ObjectId,
+      ref: "StartUps",
+    },
   },
   {
     timestamps: true,
@@ -73,7 +81,8 @@ const userSchema = new Schema(
 userSchema.pre("save", async function (next) {
   try {
     if (this.isModified && this.isModified("password")) {
-      this.password = hashPassword(this.password);
+      console.log(this);
+      this.password = await hashPassword(this.password);
     }
     next();
   } catch (error) {

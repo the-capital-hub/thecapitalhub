@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
 import { UserModel } from "../models/User.js";
 import { comparePassword } from "../utils/passwordManager.js";
+import { StartUpModel } from "../models/startUp.js";
 
 export const getUsersService = async (info) => {
   try {
@@ -17,7 +17,6 @@ export const registerUserService = async (user) => {
     const existingUser = await UserModel.findOne({
       $or: [{ email: user.email }, { phoneNumber: user.phoneNumber }],
     });
-    console.log(existingUser);
     if (existingUser) {
       throw new Error("Existing user. Please log in");
     }
@@ -31,9 +30,7 @@ export const registerUserService = async (user) => {
 
 export const loginUserService = async ({ phoneNumber, password }) => {
   const user = await UserModel.findOne({ phoneNumber });
-
   if (!user) throw new Error("Invalid credentials");
-
   await comparePassword(password, user.password);
   return user;
 };
@@ -45,19 +42,60 @@ export const getUserById = async (userId) => {
     if (!user) {
       return {
         status: 404,
-        message: "User not found."
+        message: "User not found.",
       };
     }
     return {
       status: 200,
       message: "User details retrieved successfully.",
-      data: user
+      data: user,
     };
   } catch (error) {
     console.error("Error getting user:", error);
     return {
       status: 500,
-      message: "An error occurred while getting the user."
+      message: "An error occurred while getting the user.",
+    };
+  }
+};
+
+// Update User Bio and Names
+export const updateUserData = async ({ userId, newData }) => {
+  try {
+    await UserModel.findByIdAndUpdate(userId, { ...newData });
+    return {
+      status: 200,
+      message: "User updated succesfully",
+    };
+  } catch (error) {
+    return {
+      status: 500,
+      message: "An error occurred while updating the bio.",
+    };
+  }
+};
+
+// Start up data
+
+export const getStartUpData = async (userId) => {
+  try {
+    const startUp = await StartUpModel.findOne({ founderId: userId });
+    if (!startUp) {
+      return {
+        status: 404,
+        message: "StartUp not found.",
+      };
+    }
+    return {
+      status: 200,
+      message: "StartUp details retrieved successfully.",
+      data: startUp,
+    };
+  } catch (error) {
+    console.error("Error getting StartUp:", error);
+    return {
+      status: 500,
+      message: "An error occurred while getting the StartUp.",
     };
   }
 };
