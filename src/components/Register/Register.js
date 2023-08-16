@@ -34,6 +34,7 @@ const Register = () => {
   const [showSelectWhatYouAre, setShowSelectWhatYouAre] = useState(false);
   const [showStartUp, setShowStartUp] = useState(false);
   const [showInvestor, setShowInvestor] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [final, setfinal] = useState("");
   // Sent OTP
@@ -75,23 +76,18 @@ const Register = () => {
       localStorage.setItem("user_data", JSON.stringify(response));
 
       // setIsSubmitted(true);
-      if (response){
+      if (response) {
         setShowSelectWhatYouAre(true);
       }
     } catch (error) {
       console.error("Error posting user data:", error.response.data.message);
-      return <>
-        
-          <ErrorPopUp
-            message={
-              error.response.data.message
-            }
-            onClose={() => setShowErrorPopup(false)} // Add a handler to close the error popup
-          />
-        )
-      </>
-    }
+      setErrorMessage(error.response.data.message);
+      setShowErrorPopup(true)
 
+      setTimeout(() => {
+        setShowErrorPopup(false);
+      }, 2000);
+    }
   };
 
   const handleClosePopup = () => {
@@ -425,6 +421,13 @@ const Register = () => {
           <SelectWhatYouAre
             onStartupClick={handleStartupClick}
             onInvestorClick={handleInvestorClick}
+          />
+        )}
+
+        {showErrorPopup && (
+          <ErrorPopUp
+            message={errorMessage}
+            onClose={() => setErrorMessage("")} // Clear the error message when closing the popup
           />
         )}
       </div>
