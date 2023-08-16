@@ -25,3 +25,70 @@ export const postController = async (req, res) => {
       .json({ error: "An error occurred while submitting the post." });
   }
 };
+
+export const createPost = async (req, res) => {
+  const token = req.cookies.token;
+  if (!token) res.status(401).send("You are not authenticated");
+  else {
+    const { userId } = jwt.decode(token);
+    console.log(userId);
+    try {
+      const newPost = new Post({
+        ...req.body,
+        createdById: id,
+      });
+      await newPost.save();
+      res.status(200).send(newPost);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+};
+
+export const getSinglePost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    res.status(200).send(post);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
+export const getPostByUser = async (req, res) => {
+  const token = req.cookies.token;
+  if (!token) res.status(401).send("You are not authenticated");
+  else {
+    try {
+      const post = await Post.find({ createdById: req.params.id });
+      res.status(200).send(post);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+};
+
+export const getAllPosts = async (req, res) => {
+  const token = req.cookies.token;
+  if (!token) res.status(401).send("You are not authenticated");
+  else {
+    try {
+      const post = await Post.find();
+      res.status(200).send(post);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+};
+
+export const getSomePosts = async (req, res) => {
+  const token = req.cookies.token;
+  if (!token) res.status(401).send("You are not authenticated");
+  else {
+    try {
+      const posts = await Post.findById(req.params.id);
+      res.status(200).send(posts);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+};

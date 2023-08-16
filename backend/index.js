@@ -19,7 +19,7 @@ app.use(express.static("public"));
 app.use(cors()); // Use CORS middleware to allow requests from all origins
 
 app.use("/users", usersData);
-app.use("/post", postData);
+app.use("/api/posts", postData);
 app.use("/documentation", documentData);
 app.use("/startup", startUpData);
 

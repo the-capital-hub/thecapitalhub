@@ -22,7 +22,7 @@ export const registerUserController = async (req, res, next) => {
   try {
     const { firstName, lastName, email, password, phoneNumber } = req.body;
 
-    await registerUserService({
+    const newUser = await registerUserService({
       firstName,
       lastName,
       email,
@@ -30,7 +30,9 @@ export const registerUserController = async (req, res, next) => {
       phoneNumber,
     });
 
-    return res.status(201).json({ message: "User added successfully" });
+    return res
+      .status(201)
+      .json({ data: newUser, message: "User added successfully" });
   } catch ({ message }) {
     res.status(409).json({
       success: false,
@@ -56,7 +58,10 @@ export const loginUserController = async (req, res, next) => {
       secretKey
     );
 
-    return res.status(200).json({ message: "Login successful", user, token });
+    return res
+      .cookie("token", token)
+      .status(200)
+      .json({ message: "Login successful", user, token });
   } catch (error) {
     return res
       .status(401)
