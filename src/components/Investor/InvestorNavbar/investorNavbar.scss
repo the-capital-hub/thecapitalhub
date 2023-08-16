@@ -25,6 +25,9 @@
           height: 45px;
         }
       }
+      .mobile-home-hamberger {
+        display: none;
+      }
     }
 
     /* right container */
@@ -72,6 +75,10 @@
         display: flex;
         align-items: center;
 
+        .mobile-icon-wrapper {
+          display: none;
+        }
+
         .icon-wrapper {
           margin-left: 1.5rem;
           width: 49px;
@@ -110,6 +117,69 @@
             line-height: 22px;
             /* identical to box height */
             color: #8f8f8f;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    .investor_navbar {
+      .bar_logo_container {
+        .logo_container {
+          display: none;
+
+          img {
+          }
+        }
+
+        .mobile-home-hamberger {
+          display: flex;
+          h1 {
+            color: #000;
+            font-family: Poppins;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            margin: 0;
+            margin-left: 2px;
+          }
+        }
+      }
+
+      /* right container */
+      .navbar_right_container {
+        .searchbar-container {
+          display: none;
+        }
+
+        .icons-container {
+          .mobile-icon-wrapper {
+            display: flex;
+            margin-left: 1.5rem;
+            width: 49px;
+            height: 49px;
+            left: 1397px;
+            top: 49px;
+            background: #eaeef2;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .icon-wrapper {
+            .notification-icon,
+            .message-icon {
+            }
+
+            .profile-pic {
+            }
+
+            .me {
+            }
           }
         }
       }

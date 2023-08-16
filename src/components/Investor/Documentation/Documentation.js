@@ -30,9 +30,9 @@ const Documentation = () => {
               </div>
             </div>
             <div className="row">
-              <div className="col-12 mt-2">
+              {/* <div className="col-12 mt-2"> */}
                 <HalfbendCard />
-              </div>
+              {/* </div> */}
             </div>
           </div>
         </div>

@@ -103,3 +103,18 @@
     }
   }
 }
+@media (max-width: 768px) {
+  .introductory_message_container {
+    .box_container {
+      width: 100%;
+
+      .title_section {
+        .title_wrapper {
+          .image_container {
+            margin-right: 0px;
+          }
+        }
+      }
+    }
+  }
+}
