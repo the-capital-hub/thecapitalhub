@@ -14,7 +14,8 @@ export const createNewPost = async (data) => {
     if (data?.video) {
       const { url } = await cloudinary.uploader.upload(data.video, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/posts/videos`,
-        format: "webm",
+        resource_type: "video",
+        // format: "webm",
         unique_filename: true,
       });
       data.video = url;
@@ -30,7 +31,12 @@ export const createNewPost = async (data) => {
 
 export const allPostsData = async () => {
   try {
-    const allPosts = await PostModel.find().sort({ _id: -1 });
+    const allPosts = await PostModel.find()
+      .populate({
+        path: "user",
+        select: "firstName lastName -_id",
+      })
+      .sort({ _id: -1 });
     return allPosts;
   } catch (error) {
     throw new Error("Error fetching all posts");
