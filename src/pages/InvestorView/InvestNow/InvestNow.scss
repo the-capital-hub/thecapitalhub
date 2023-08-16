@@ -1,0 +1,28 @@
+.investNow {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 500px;
+    margin-left: 300px;
+    margin-top: 100px;
+    padding: 50px;
+    border-radius: 25px;
+    .inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+        button {
+            font-size: 13px;
+            padding: 10px 50px;
+            outline: none;
+            border-radius: 10px;
+            background: #d3f36b;
+            border: none;
+        }
+    }
+}

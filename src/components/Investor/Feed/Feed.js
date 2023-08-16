@@ -7,12 +7,25 @@ import RecommendationCard from "../Cards/Recommendation/RecommendationCard";
 import NewsCorner from "../Cards/NewsCorner/NewsCorner";
 import FeedPostCard from "../Cards/FeedPost/FeedPostCard";
 import CreatePostPopUp from "../../PopUp/CreatePostPopUp/CreatePostPopUp";
+import { getAllPostsAPI } from "../../../Service/user";
 
 const Feed = () => {
   const [popupOpen, setPopupOpen] = useState(false);
+  const [allPosts, setAllPosts] = useState([]);
+  const [newPost, setNewPost] = useState(false);
   const openPopup = () => {
     setPopupOpen(!popupOpen);
   };
+
+  console.log(allPosts);
+
+  useEffect(() => {
+    getAllPostsAPI()
+      .then(({ data }) => {
+        setAllPosts(data);
+      })
+      .catch(() => setAllPosts([]));
+  }, [newPost]);
   return (
     <>
       <div className="container-fluid feed_container">
@@ -25,19 +38,46 @@ const Feed = () => {
                   <div className="box start_post_container">
                     <img src={profilePic} alt="Image" />
                     <input
+                      className="px-3"
                       type="text"
-                      placeholder="Enter text"
+                      placeholder="Create a post"
                       onClick={openPopup}
                     />
                   </div>
                 </div>
               </div>
-              <FeedPostCard />
-              <FeedPostCard />
-              <FeedPostCard />
+              {allPosts.length ? (
+                allPosts.map(
+                  ({
+                    description,
+                    user: { firstName, lastName },
+                    video,
+                    image,
+                    createdAt,
+                  }) => (
+                    <FeedPostCard
+                      key={Math.random()}
+                      description={description}
+                      firstName={firstName}
+                      lastName={lastName}
+                      video={video}
+                      image={image}
+                      createdAt={createdAt}
+                    />
+                  )
+                )
+              ) : (
+                <p className="container p-5 text-center my-5 bg-white rounded-5 shadow ">
+                  Loading...
+                </p>
+              )}
             </div>
             {popupOpen && (
-              <CreatePostPopUp setPopupOpen={setPopupOpen} popupOpen />
+              <CreatePostPopUp
+                setPopupOpen={setPopupOpen}
+                popupOpen
+                setNewPost={setNewPost}
+              />
             )}
           </div>
           <div className="col">

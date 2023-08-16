@@ -37,9 +37,12 @@
 
   .content {
     flex: 1;
-    margin-left: 210px;
+    margin-left: 250px;
+    min-height: 100vh;
     transition: margin-left 0.3s ease;
-    margin-top: 5%;
+    // margin-top: 5%;
+    margin-top: 90px;
+    border-radius: 25px;
   }
 
   // Add a class to handle the sidebar collapsed state

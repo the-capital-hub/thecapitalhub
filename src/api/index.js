@@ -1,4 +1,4 @@
-import { environment } from '../environments/environment'
+import { environment } from "../environments/environment";
 
 const baseUrl = environment.baseUrl;
 const API = Object.freeze({
@@ -6,9 +6,10 @@ const API = Object.freeze({
   postUser: `${baseUrl}/users/createUser`,
   postStartUpData:`${baseUrl}/startup/createStartup`,
   loginUser: `${baseUrl}/users/login`,
-  postUserPost:`${baseUrl}/post/post`,
-  uploadDocument:`${baseUrl}/upload`,
-  getDocument:`${baseUrl}/documentation/getDocument`
+  postUserPost: `${baseUrl}/api/posts/newPost`,
+  uploadDocument: `${baseUrl}/upload`,
+  getDocument: `${baseUrl}/documentation/getDocument`,
+  getAllPosts: `${baseUrl}/api/posts/getposts`,
+});
 
-  });
 export default API;
