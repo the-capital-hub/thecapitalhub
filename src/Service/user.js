@@ -89,4 +89,21 @@ async function postUserPost(postData) {
   }
 }
 
-export { getUser, postUser, postUserLogin, postUserPost, getPdfData,uploadDocument};
+export const getAllPostsAPI = async () => {
+  try {
+    const response = await axiosInstance.get(API.getAllPosts);
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+
+export {
+  getUser,
+  postUser,
+  postUserLogin,
+  postUserPost,
+  getPdfData,
+  uploadDocument,
+};
