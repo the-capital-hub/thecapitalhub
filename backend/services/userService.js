@@ -21,7 +21,7 @@ export const registerUserService = async (user) => {
       throw new Error("Existing user. Please log in");
     }
     const newUser = new UserModel(user);
-    newUser.save();
+    await newUser.save();
     newUser.password = undefined;
     return newUser;
   } catch (error) {
