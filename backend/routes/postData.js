@@ -1,11 +1,12 @@
 import express from "express";
-import { createPost } from "../controllers/postController.js";
+import { createPost, getAllPosts, getSinglePost } from "../controllers/postController.js";
+import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
 
+router.use(authenticateToken);
+
 router.post("/newPost", createPost);
-// router.get("/getsavedposts/:id", getSomePosts);
-// router.get("/getpost/:id", getPostByUser);
-// router.get("/getposts", getAllPosts);
-// router.get("/getsinglepost/:id", getSinglePost);
+router.get("/getposts", getAllPosts);
+router.get("/getSinglePost/:id", getSinglePost);
 
 export default router;

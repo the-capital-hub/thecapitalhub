@@ -1,8 +1,3 @@
-import crypto from "crypto";
-
-const generateSecretKey = () => {
-  const lengthInBytes = 32;
-  return crypto.randomBytes(lengthInBytes).toString("hex");
-};
-
-export const secretKey = generateSecretKey();
+import dotenv from "dotenv";
+dotenv.config();
+export const secretKey = process.env.JWT_SECRET_KEY;
