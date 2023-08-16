@@ -46,11 +46,12 @@ const userSchema = new Schema(
       type: String,
       // required: [true, "User must have a password."],
     },
-    experience: [
-      {
-        type: String,
-      },
-    ],
+    experience: String,
+    // experience: [
+    //   {
+    //     type: String,
+    //   },
+    // ],
     bio: {
       type: String,
       trim: true,

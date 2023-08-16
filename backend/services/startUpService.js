@@ -21,7 +21,10 @@ export const createStartup = async (startUpData) => {
     });
     await newStartUp.save();
     const { founderId } = newStartUp;
-    await UserModel.findByIdAndUpdate(founderId, { startUp: newStartUp._id });
+    await UserModel.findByIdAndUpdate(founderId, {
+      startUp: newStartUp._id,
+      gender: newStartUp.gender,
+    });
     return {
       status: 200,
       message: "Startup Added",
@@ -75,7 +78,7 @@ export const updateStartUpData = async (founderId, data) => {
     return {
       status: 200,
       data: updatedData,
-      message: `${startUp.startup_name} updated succesfully`,
+      message: `${startUp.company} updated succesfully`,
     };
   } catch (error) {
     console.error("Error updating StartUp details:", err);
