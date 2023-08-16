@@ -1,6 +1,6 @@
 import React from "react";
 import "./meetourteam.scss";
-import EmailIcon from "../../../../Images/investorIcon/message.svg";
+import EmailIcon from "../../../../Images/investorIcon/Message.svg";
 import LinkedInIcon from "../../../../Images/service/linkedin.svg";
 import UpmaImage from "../../../../Images/service/Upma.jpeg";
 import PreetiImage from "../../../../Images/service/preeti.jpeg";
