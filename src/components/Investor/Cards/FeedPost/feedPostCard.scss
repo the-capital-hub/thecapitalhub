@@ -6,7 +6,7 @@
 
       .para_container_text {
         p {
-          height: 258px;
+          // height: 258px;
           flex-shrink: 0;
           border-radius: 20px;
           border: 1px solid #dadada;
@@ -18,6 +18,11 @@
           line-height: 160%;
           letter-spacing: 0.42px;
           padding: 20px 15px;
+
+          @media (max-width: 768px) {
+            height:auto;
+            font-size: 15px; /* Reduce font size for smaller screens */
+          }
         }
       }
     }
@@ -41,14 +46,17 @@
             width: 15.954px;
             height: 26.346px;
             margin-right: 5px;
+
+            @media (max-width: 768px) {
+              width: 10.954px; /* Adjust image size for smaller screens */
+              height: 18.346px;
+            }
           }
 
           span {
             margin-right: 5px;
           }
-
         }
-
       }
 
       .feedpostcard_footer {
@@ -56,17 +64,19 @@
           width: 15.954px;
           height: 26.346px;
           margin-right: 5px;
+
+          @media (max-width: 768px) {
+            width: 10.954px; /* Adjust image size for smaller screens */
+            height: 18.346px;
+          }
         }
 
         .feedpostcard_footer_like_comment {
           span {
             margin-right: 5px;
           }
-
         }
       }
-
-
 
       .three_dot {
         display: flex;
@@ -86,15 +96,7 @@
         justify-content: flex-start;
         align-items: center;
       }
-
     }
-
-
-
-
-
-
-
   }
 
   .box {

@@ -135,7 +135,7 @@ const HalfbendCard = () => {
     //     </div>
     //   </div>
     // </div>
-    <div className="half_bend_container">
+    <div className="half_bend_container row">
       <div className="box_container mt-4">
         <div className="row">
           {data.map((item) => (

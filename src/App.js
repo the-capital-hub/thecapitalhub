@@ -35,6 +35,7 @@ import Company from "./pages/InvestorView/Company/Company";
 import OnePager from "./pages/InvestorView/OnePager/OnePager";
 import DocumentationIV from "./pages/InvestorView/Documentation/Documentation";
 import ValidateOneLink from "./pages/InvestorView/ValidateOneLink/ValidateOneLink";
+import InvestNow from "./pages/InvestorView/InvestNow/InvestNow";
 
 function App() {
   return (
@@ -161,7 +162,7 @@ function App() {
           <Route path="/login" element={<Login />} />
 
           <Route element={<PrivateRoute />}>
-            <Route path="/investor" element={<InvestorHome />} />
+            <Route path="/profile" element={<InvestorHome />} />
             <Route path="/home" element={<Feed />} />
             <Route path="/createpost" element={<CreatePost />} />
             <Route path="/documentation" element={<Documentation />} />
@@ -185,7 +186,8 @@ function App() {
             <Route path="company" element={<Company />} />
             <Route path="onePager" element={<OnePager />} />
             <Route path="documentation" element={<DocumentationIV />} />
-            <Route path="investNow" element={<DocumentationIV />} />
+            <Route path="investnow" element={<InvestNow />} />
+            {/* <Route path="investNow" element={<DocumentationIV />} /> */}
           </Route>
         </Routes>
       </Router>

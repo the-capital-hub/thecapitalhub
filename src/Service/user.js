@@ -68,6 +68,16 @@ async function postUser(userData) {
   }
 }
 
+async function postStartUpData(startUpData) {
+  try {
+    const response = await axiosInstance.post(API.postStartUpData, startUpData);
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+}
+
 async function postUserLogin(userData) {
   try {
     const response = await axiosInstance.post(API.loginUser, userData);
@@ -89,4 +99,4 @@ async function postUserPost(postData) {
   }
 }
 
-export { getUser, postUser, postUserLogin, postUserPost, getPdfData,uploadDocument};
+export { getUser, postUser,postStartUpData, postUserLogin, postUserPost, getPdfData,uploadDocument};

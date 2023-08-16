@@ -23,7 +23,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px;
+      padding: 10px;
       img {
         height: 20px;
       }
@@ -31,7 +31,7 @@
     h1 {
       color: #000;
       font-family: Poppins;
-      font-size: 26px;
+      font-size: 20px;
       font-style: normal;
       font-weight: 600;
       line-height: normal;
@@ -49,20 +49,26 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
       label {
-        margin-bottom: 8px;
+        margin-bottom: 4px;
         font-weight: bold;
+        color: #6d6d6d;
+        font-family: Poppins;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
       }
       .input_half {
         display: flex;
         input,
         select {
           width: 100%;
-          padding: 8px;
-          margin-bottom: 8px;
+          padding: 2px;
+          margin-bottom: 2px !important;
           border: 1px solid #ccc;
           border-radius: 4px;
           font-size: 14px;
-          height: 44px;
+          height: 24px;
         }
       }
 
@@ -72,9 +78,12 @@
         padding: 8px;
         margin-bottom: 8px;
         border: 1px solid #ccc;
-        border-radius: 4px;
         font-size: 14px;
-        height: 44px;
+        height: 36px !important;
+        border-radius: 5px;
+        border: 1px solid rgba(216, 216, 216, 0.79);
+        background: #fbfbfb;
+        box-shadow: 4px 4px 30px 0px rgba(140, 90, 201, 0.09);
       }
 
       button {

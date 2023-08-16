@@ -50,11 +50,11 @@ const OnePagePreview = () => {
             <TeamCard />
           </section>
 
-          <section className="fund_asking_deployment">
-            <div className="funding_divider">
+          <section className="row fund_asking_deployment">
+            <div className="col-12 funding_divider">
               <FundAsking />
             </div>
-            <div className="funding_divider">
+            <div className="col-12 funding_divider">
               <FundDeployment />
             </div>
           </section>

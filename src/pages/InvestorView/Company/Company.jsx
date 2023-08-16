@@ -1,5 +1,12 @@
-function Company() {
-  return <div>Company</div>;
-}
+import React from "react";
+import './company.scss'
+
+const Company = () => {
+  return (
+    <>
+     company
+    </>
+  );
+};
 
 export default Company;

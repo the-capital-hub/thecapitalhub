@@ -61,13 +61,13 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           <SidebarHeader>
             <div className="logotext">
               {sidebarCollapsed ? (
-                <Link to={"/investor"}>
+                <Link to={"/profile"}>
                   {" "}
                   <img src={profilePic} alt="image" />
                 </Link>
               ) : (
                 <>
-                  <Link to={"/investor"}>
+                  <Link to={"/profile"}>
                     {" "}
                     <img src={profilePic} alt="image" />
                   </Link>

@@ -52,7 +52,7 @@ const Login = () => {
 
         setTimeout(() => {
           setIsSubmitted(false);
-          navigate("/investor");
+          navigate("/profile");
         }, 2000);
 
         dispatch(loginSuccess(response.user));
@@ -70,7 +70,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleClosePopup = () => {
-    navigate("/investor");
+    navigate("/profile");
   };
 
   return (

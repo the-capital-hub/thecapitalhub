@@ -8,20 +8,20 @@ import documentData from "./routes/documentData.js";
 import multer from "multer";
 import connectDB from "./constants/db.js";
 import globalErrorHandler from "./error/AppError.js";
-import companyData from "./routes/companyData.js"
+import startUpData from "./routes/startUpData.js";
 
 dotenv.config();
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(cors()); // Use CORS middleware to allow requests from all origins
 
 app.use("/users", usersData);
-app.use("/post", postData);
+app.use("/api/posts", postData);
 app.use("/documentation", documentData);
-app.use("/company", companyData);
+app.use("/startup", startUpData);
 
 // documentation upload
 

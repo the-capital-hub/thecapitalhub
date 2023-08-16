@@ -6,8 +6,10 @@ import ThreeDotsIcon from "../../../Images/ThreeDots.svg";
 import CameraIcon from "../../../Images/Camera.svg";
 import { useSelector } from "react-redux";
 import { postUserPost } from "../../../Service/user";
+import { getBase64 } from "../../../utils/getBase64";
+import profilePic from "../../../Images/investorIcon/profilePic.svg";
 
-const CreatePostPopUp = ({ setPopupOpen, popupOpen }) => {
+const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const [postText, setPostText] = useState(""); // Store the textarea data
@@ -48,21 +50,23 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen }) => {
     setPostText(event.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const postData = new FormData();
-    postData.append("text", postText);
-    postData.append("user", JSON.stringify(loggedInUser));
+    postData.append("description", postText);
+    // postData.append("description", postText); one for category is also required
 
     // Append the image, video, and document files if they are selected
     if (selectedImage) {
-      postData.append("image", selectedImage);
+      const image = await getBase64(selectedImage);
+      postData.append("image", image);
     }
     if (selectedVideo) {
-      postData.append("video", selectedVideo);
+      const video = await getBase64(selectedVideo);
+      postData.append("video", video);
     }
-    if (selectedDocument) {
-      postData.append("document", selectedDocument);
-    }
+    // if (selectedDocument) {
+    //   postData.append("document", selectedDocument);
+    // }
 
     // Call the postUserPost function to make the POST request to the server
     postUserPost(postData)
@@ -75,6 +79,7 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen }) => {
         setSelectedImage(null);
         setSelectedVideo(null);
         setSelectedDocument(null);
+        setNewPost(Math.random());
         // Close the popup after successful submission
         handleClose();
       })
@@ -97,10 +102,7 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen }) => {
             <div className="createpost_modal-header">
               <div className="createpostpopup">
                 <div className="ceatepost_img_name">
-                  <img
-                    src="/static/media/profilePic.ac4dfd95fdad6810ad15579f16b2e550.svg"
-                    alt="profile pic"
-                  />
+                  <img src={profilePic} alt="profile pic" />
                   <span>
                     <h2>
                       {loggedInUser?.firstName} {loggedInUser.lastName}
@@ -120,10 +122,7 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen }) => {
             </div>
             <div className="modal-body">
               <div className="createpost_text_area">
-                <textarea
-                  value={postText}
-                  onChange={handleTextareaChange}
-                />
+                <textarea value={postText} onChange={handleTextareaChange} />
               </div>
             </div>
             <div className="createpost_modal_footer">
@@ -151,7 +150,10 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen }) => {
                       ref={cameraInputRef}
                       onChange={handleFileChange}
                     />
-                    <button className="white_button" onClick={handleCameraButtonClick}>
+                    <button
+                      className="white_button"
+                      onClick={handleCameraButtonClick}
+                    >
                       <img src={CameraIcon} alt="Button 2" />
                     </button>
 
@@ -162,7 +164,10 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen }) => {
                       ref={smileeInputRef}
                       onChange={handleFileChange}
                     />
-                    <button className="white_button" onClick={handleSmileeButtonClick}>
+                    <button
+                      className="white_button"
+                      onClick={handleSmileeButtonClick}
+                    >
                       <img src={SmileeIcon} alt="Button 3" />
                     </button>
 

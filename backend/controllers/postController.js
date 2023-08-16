@@ -1,27 +1,49 @@
-import { postService } from "../services/postService.js";
+import {
+  allPostsData,
+  createNewPost,
+  singlePostData,
+} from "../services/postService";
 
-export const postController = async (req, res) => {
+export const createPost = async (req, res) => {
   try {
-    const { text } = req.body;
-
-    // Access the uploaded files using the field names directly from the request object
-    const imageFile = req.files["image"] ? req.files["image"] : null;
-    const videoFile = req.files["video"] ? req.files["video"] : null;
-    const documentFile = req.files["document"] ? req.files["document"] : null;
-
-    // Call the postService to save the post data to the database
-    const savedPost = await postService({
-      text,
-      image: imageFile,
-      video: videoFile,
-      document: documentFile,
+    const newPost = await createNewPost({
+      ...req.body,
+      user: req.userId,
     });
+    res.status(200).send({
+      message: "Post created succesfully",
+      data: newPost,
+    });
+  } catch (err) {
+    console.error("Error creating new post: ", err);
+    res.status(500).send(err);
+  }
+};
 
-    res.json({ message: "Post submitted successfully!", post: savedPost });
-  } catch (error) {
-    console.error("Error submitting post:", error);
-    res
-      .status(500)
-      .json({ error: "An error occurred while submitting the post." });
+export const getAllPosts = async (req, res) => {
+  try {
+    const data = await allPostsData();
+    if (!data.length) {
+      res.status(404).send({
+        message: "No Posts yet",
+      });
+    } else {
+      res.status(200).send({ message: "Posts fetched succesfully", data });
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+};
+
+export const getSinglePost = async (req, res) => {
+  try {
+    const data = await singlePostData(req.params.id);
+    if (!data) {
+      res.status(404).send({ message: "No post found" });
+    } else {
+      res.status(200).send({ message: "Post fetched succesfully", data });
+    }
+  } catch (err) {
+    res.status(500).send(err);
   }
 };
