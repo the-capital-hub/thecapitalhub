@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 
 const startUpSchema = new Schema(
   {
-    startup_name: {
+    company: {
       type: String,
       required: true,
     },
@@ -11,6 +11,9 @@ const startUpSchema = new Schema(
       ref: "Users",
     },
     introductoryMessage: {
+      type: String,
+    },
+    sector: {
       type: String,
     },
     logo: {
@@ -77,10 +80,18 @@ const startUpSchema = new Schema(
       type: Number,
       // required: true
     },
+    preFundingAsk: {
+      type: Number,
+      // required: true
+    },
+    numberOfFundingRounds: {
+      type: Number,
+      // required: true
+    },
     oneLink: {
       type: String,
       default: function () {
-        return this.startup_name.split(" ").join("").toLowerCase();
+        return this.company.split(" ").join("").toLowerCase();
       },
     },
     contactDetails: {
@@ -88,6 +99,7 @@ const startUpSchema = new Schema(
       phoneNumber: String,
       email: String,
     },
+    portfolio: String,
   },
   {
     timestamps: true,
