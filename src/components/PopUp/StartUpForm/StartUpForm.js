@@ -1,17 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./StartUpForm.scss";
 import { Link } from "react-router-dom";
+import { postStartUpData } from "../../../Service/user";
+import { useNavigate } from "react-router-dom";
+import AfterRegisterPopUp from "../../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 
 const StartUpForm = ({ onStartupClick }) => {
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
-    company: "",
-    designation: "",
+    firstName: "",
+    lastName: "",
     gender: "",
-    education: "",
-    experience: "",
-    location: "",
-    industry: "",
+    company: "",
+    sector: "",
+    fundingAsk: "",
+    preFundingAsk: "",
+    numberOfFundingRounds: "",
   });
+
+  const handleClosePopup = () => {
+    setIsSubmitted(true);
+    navigate("/login");
+  };
+  const handleBack = () => {
+    navigate("/");
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -21,11 +36,39 @@ const StartUpForm = ({ onStartupClick }) => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // You can call your onStartupClick or other logic here with formData
-    console.log(formData);
+    try {
+      const response = await postStartUpData(formData);
+      console.log("Startup data posted successfully:", response);
+      localStorage.setItem("user_data",response)
+
+      // Call onStartupClick or other logic here with formData
+      if (response) {
+        // Additional logic
+        setIsSubmitted(true);
+      }
+    } catch (error) {
+      console.error("Error posting user data:", error);
+    }
   };
+  useEffect(() => {
+    let userDataFromLocalStorage = localStorage.getItem("user_data");
+    if (userDataFromLocalStorage) {
+      setUserData(JSON.parse(userDataFromLocalStorage).data);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Update form data with user data
+    if (userData) {
+      setFormData((prevData) => ({
+        ...prevData,
+        firstName: userData.firstName || "",
+        lastName: userData.lastName || "",
+      }));
+    }
+  }, [userData]);
 
   return (
     <>
@@ -33,9 +76,9 @@ const StartUpForm = ({ onStartupClick }) => {
         <div className="popup-container">
           <div className="popup">
             <div className="back_and_home">
-              <Link to={"/signup"}>
+              <a href="/signup" onClick={handleBack}>
                 <img src="back" alt="back" />
-              </Link>
+              </a>
               <a href="/signup">Home</a>
             </div>
             <div className="title_text">
@@ -48,29 +91,32 @@ const StartUpForm = ({ onStartupClick }) => {
             <div className="inside_startUp_popup">
               <form onSubmit={handleSubmit}>
                 <div className="input_half row">
-                  <div className="col-12">
-                    <label htmlFor="company">Company:</label>
+                  <div className="col-6">
+                    <label htmlFor="firstName">FirstName:</label>
                     <input
                       type="text"
-                      id="company"
-                      name="company"
-                      value={formData.company}
+                      id="firstName"
+                      name="firstName"
+                      value={formData.firstName}
                       onChange={handleInputChange}
+                      readOnly
+                    />
+                  </div>
+                  <div className="col-6">
+                    <label htmlFor="lastName">LastName:</label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      readOnly
                     />
                   </div>
                 </div>
+
                 <div className="input_half row">
-                  <div className="col-6">
-                    <label htmlFor="designation">Designation:</label>
-                    <input
-                      type="text"
-                      id="designation"
-                      name="designation"
-                      value={formData.designation}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div className="col-6">
+                  <div className="col-12">
                     <label htmlFor="gender">Gender:</label>
                     <select
                       id="gender"
@@ -84,62 +130,24 @@ const StartUpForm = ({ onStartupClick }) => {
                       {/* Add more options as needed */}
                     </select>
                   </div>
-                </div>
-                <div className="input_half row">
-                  <div className="col-6">
-                    <label htmlFor="education">Education:</label>
+                  {/* <div className="col-6">
+                    <label htmlFor="company">Company Name:</label>
                     <input
                       type="text"
-                      id="education"
-                      name="education"
-                      value={formData.education}
+                      id="company"
+                      name="company"
+                      value={formData.company}
                       onChange={handleInputChange}
                     />
-                  </div>
-                  <div className="col-6">
-                    <label htmlFor="experience">Experience:</label>
-                    <input
-                      type="text"
-                      id="experience"
-                      name="experience"
-                      value={formData.experience}
-                      onChange={handleInputChange}
-                    />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="input_half row">
                   <div className="col-12">
-                    <label htmlFor="location">Location:</label>
-                    <input
-                      type="text"
-                      id="location"
-                      name="location"
-                      value={formData.location}
-                      onChange={handleInputChange}
-                    />{" "}
-                  </div>
-                </div>
-
-                <div className="input_half row">
-                  <div className="col-12">
-                    <label htmlFor="portfolio">Portfolio:</label>
-                    <input
-                      type="text"
-                      id="portfolio"
-                      name="portfolio"
-                      value={formData.portfolio}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                </div>
-
-                <div className="input_half row">
-                  <div className="col-12">
-                    <label htmlFor="industry">Industry:</label>
+                    <label htmlFor="sector">Company Sector:</label>
                     <select
-                      id="industry"
-                      name="industry"
-                      value={formData.industry}
+                      id="sector"
+                      name="sector"
+                      value={formData.sector}
                       onChange={handleInputChange}
                     >
                       <option value="">Select</option>
@@ -152,6 +160,61 @@ const StartUpForm = ({ onStartupClick }) => {
 
                 <div className="input_half row">
                   <div className="col-12">
+                    <label htmlFor="company">Company Name:</label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="input_half row">
+                  <div className="col-12">
+                    <label htmlFor="fundingAsk">Funding Ask:</label>
+                    <input
+                      type="text"
+                      id="fundingAsk"
+                      name="fundingAsk"
+                      value={formData.fundingAsk}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="input_half row">
+                  <div className="col-12">
+                    <label htmlFor="preFundingAsk">
+                      Previous funding round (amount):
+                    </label>
+                    <input
+                      type="text"
+                      id="preFundingAsk"
+                      name="preFundingAsk"
+                      value={formData.preFundingAsk}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </div>
+                <div className="input_half row">
+                  <div className="col-12">
+                    <label htmlFor="numberOfFundingRounds">
+                      Number of funding rounds:
+                    </label>
+                    <input
+                      type="text"
+                      id="numberOfFundingRounds"
+                      name="numberOfFundingRounds"
+                      value={formData.numberOfFundingRounds}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </div>
+
+                <div className="input_half row mt-2">
+                  <div className="col-12">
                     <button type="submit">Submit</button>
                   </div>
                 </div>
@@ -160,6 +223,9 @@ const StartUpForm = ({ onStartupClick }) => {
           </div>
         </div>
       </div>
+      {isSubmitted && (
+        <AfterRegisterPopUp onClose={handleClosePopup} register={true} />
+      )}
     </>
   );
 };

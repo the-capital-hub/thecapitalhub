@@ -34,6 +34,7 @@ const Register = () => {
   const [showSelectWhatYouAre, setShowSelectWhatYouAre] = useState(false);
   const [showStartUp, setShowStartUp] = useState(false);
   const [showInvestor, setShowInvestor] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [final, setfinal] = useState("");
   // Sent OTP
@@ -69,13 +70,23 @@ const Register = () => {
 
       return;
     }
-    localStorage.setItem("user_data", JSON.stringify(inputValues));
     try {
       const response = await postUser(inputValues);
       console.log("User data posted successfully:", response);
-      setIsSubmitted(true);
+      localStorage.setItem("user_data", JSON.stringify(response));
+
+      // setIsSubmitted(true);
+      if (response) {
+        setShowSelectWhatYouAre(true);
+      }
     } catch (error) {
-      console.error("Error posting user data:", error);
+      console.error("Error posting user data:", error.response.data.message);
+      setErrorMessage(error.response.data.message);
+      setShowErrorPopup(true)
+
+      setTimeout(() => {
+        setShowErrorPopup(false);
+      }, 2000);
     }
   };
 
@@ -135,6 +146,7 @@ const Register = () => {
 
         if (result) {
           // Set the user's login status in local storage or Redux store
+          console.log(result);
           // localStorage.setItem("isLoggedIn", "true");
           setIsMobileVerified(true);
           navigate("/signup");
@@ -179,17 +191,16 @@ const Register = () => {
 
   const handleClick = () => {
     console.log("handle click");
-    setShowSelectWhatYouAre(true);
   };
 
   const handleStartupClick = () => {
     setShowSelectWhatYouAre(false);
-    setShowStartUp(true)
+    setShowStartUp(true);
   };
 
   const handleInvestorClick = () => {
     setShowSelectWhatYouAre(false);
-    setShowInvestor(true)
+    setShowInvestor(true);
   };
 
   return (
@@ -407,7 +418,17 @@ const Register = () => {
         {showStartUp && <StartUpForm />}
         {showInvestor && <InvestorForm />}
         {showSelectWhatYouAre && (
-          <SelectWhatYouAre onStartupClick={handleStartupClick}  onInvestorClick={handleInvestorClick}/>
+          <SelectWhatYouAre
+            onStartupClick={handleStartupClick}
+            onInvestorClick={handleInvestorClick}
+          />
+        )}
+
+        {showErrorPopup && (
+          <ErrorPopUp
+            message={errorMessage}
+            onClose={() => setErrorMessage("")} // Clear the error message when closing the popup
+          />
         )}
       </div>
     </>

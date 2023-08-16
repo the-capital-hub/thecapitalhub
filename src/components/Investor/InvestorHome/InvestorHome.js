@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./investorHome.scss";
 import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
@@ -14,8 +14,57 @@ import CompanyDetailsCard from "../InvestorGlobalCards/CompanyDetails/CompanyDet
 import { useSelector } from "react-redux";
 
 const InvestorHome = () => {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const [isBioEditable, setIsBioEditable] = useState(false);
+  const [bioContent, setBioContent] = useState(`
+    A little about myself. “Dejection is a sign of failure...
+  `);
 
+  const handleEditBio = () => {
+    setIsBioEditable(!isBioEditable);
+  };
+
+  const handleBioChange = (newBioContent) => {
+    setBioContent(newBioContent);
+    // Perform other actions like updating the backend, etc.
+  };
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const [isDesignationEditable, setIsDesignationEditable] = useState(false);
+  const [isExperienceEditable, setIsExperienceEditable] = useState(false);
+  const [isEducationEditable, setIsEducationEditable] = useState(false);
+
+  const handleEdit = (field) => {
+    switch (field) {
+      case "designation":
+        setIsDesignationEditable(!isDesignationEditable);
+        break;
+      case "experience":
+        setIsExperienceEditable(!isExperienceEditable);
+        break;
+      case "education":
+        setIsEducationEditable(!isEducationEditable);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const renderEditableField = (fieldName, value, isEditable) => {
+    if (isEditable) {
+      return (
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => handleFieldChange(fieldName, e.target.value)}
+        />
+      );
+    }
+    return <span className="small_typo">{value}</span>;
+  };
+
+  const handleFieldChange = (fieldName, newValue) => {
+    console.log("fieldName", fieldName, ...newValue);
+    // Handle field value changes and update state or perform other actions.
+  };
   return (
     <div className="container-fluid investorHome_main_container">
       <div className="row mt-2">
@@ -32,6 +81,7 @@ const InvestorHome = () => {
                         <div className="left_profile_text flex_content ms-3">
                           <h2 className="typography">
                             {loggedInUser?.firstName} {loggedInUser?.lastName}
+                            {console.log("loggedInUser--<", loggedInUser)}
                           </h2>
                           <span className="small_typo">
                             Founder & CEO of capital Hub
@@ -55,6 +105,13 @@ const InvestorHome = () => {
                       <table>
                         <tbody>
                           <tr>
+                            <td className="edit_btn">
+                              <button onClick={() => handleEdit("experience")}>
+                                Edit <CiEdit />
+                              </button>
+                            </td>
+                          </tr>
+                          <tr>
                             <td>
                               <strong className="designation_list">
                                 Current company
@@ -73,11 +130,12 @@ const InvestorHome = () => {
                                 Designation
                               </strong>
                             </td>
-                            <td
-                              className="small_typo"
-                              style={{ marginBottom: "1rem" }}
-                            >
-                              Founder & CEO
+                            <td style={{ marginBottom: "1rem" }}>
+                              {renderEditableField(
+                                "designation",
+                                "Founder & CEO",
+                                isDesignationEditable
+                              )}
                             </td>
                           </tr>
                           <tr>
@@ -99,15 +157,12 @@ const InvestorHome = () => {
                                 Experience
                               </strong>
                             </td>
-                            <td
-                              className="small_typo"
-                              style={{ marginBottom: "1rem" }}
-                            >
-                              5+ Years building various startups
-                              <br />
-                              Mentored 21 startups
-                              <br />
-                              Growth $ 10M+
+                            <td style={{ marginBottom: "1rem" }}>
+                              {renderEditableField(
+                                "experience",
+                                "5+ Years building various startups\nMentored 21 startups\nGrowth $ 10M+",
+                                isExperienceEditable
+                              )}
                             </td>
                           </tr>
                         </tbody>
@@ -123,9 +178,9 @@ const InvestorHome = () => {
                 <div className=" box personal_information">
                   <div className="personal_information_header">
                     <h2 className="typography">Personal Information</h2>
-                    <button>
+                    {/* <button>
                       Edit <CiEdit />
-                    </button>
+                    </button> */}
                   </div>
                   <div className="col-12 mt-2">
                     <div className="designation_info">
@@ -191,7 +246,7 @@ const InvestorHome = () => {
               </div>
             </div>
 
-            <div className="row">
+            {/* <div className="row">
               <div className="col-12 mt-2">
                 <div className=" box personal_information">
                   <div className="personal_information_header">
@@ -213,6 +268,34 @@ const InvestorHome = () => {
                         to solve an issue and every time we end up with a new
                         problem.
                       </p>
+                    </div>
+                  </div>
+                  <div className="col-12 mt-2 designation_see_more">
+                    <Link to={"/"}>See more</Link>
+                  </div>
+                </div>
+              </div>
+            </div> */}
+
+            <div className="row">
+              <div className="col-12 mt-2">
+                <div className="box personal_information">
+                  <div className="personal_information_header">
+                    <h2 className="typography">Bio</h2>
+                    <button onClick={handleEditBio}>
+                      Edit <CiEdit />
+                    </button>
+                  </div>
+                  <div className="col-12 mt-2">
+                    <div className="designation_info">
+                      {isBioEditable ? (
+                        <textarea
+                          value={bioContent}
+                          onChange={(e) => handleBioChange(e.target.value)}
+                        />
+                      ) : (
+                        <p className="small_typo">{bioContent}</p>
+                      )}
                     </div>
                   </div>
                   <div className="col-12 mt-2 designation_see_more">
