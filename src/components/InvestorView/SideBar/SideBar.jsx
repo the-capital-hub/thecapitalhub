@@ -60,7 +60,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           <SidebarContent>
             <Menu iconShape="round">
               <MenuItem
-                active={location.pathname.slice(-8).includes("asd")}
+                active={location.pathname.slice(-8).includes("/profile")}
                 className="active-item"
               >
                 <Link to="">
