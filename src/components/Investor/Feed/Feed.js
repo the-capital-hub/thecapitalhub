@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./feed.scss";
 import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import SmallProfileCard from "../Cards/TwoSmallMyProfile/SmallProfileCard";
@@ -16,8 +16,6 @@ const Feed = () => {
   const openPopup = () => {
     setPopupOpen(!popupOpen);
   };
-
-  console.log(allPosts);
 
   useEffect(() => {
     getAllPostsAPI()
@@ -37,12 +35,14 @@ const Feed = () => {
                 <div className="col-12 mt-2">
                   <div className="box start_post_container">
                     <img src={profilePic} alt="Image" />
-                    <input
-                      className="px-3"
-                      type="text"
-                      placeholder="Create a post"
-                      onClick={openPopup}
-                    />
+                    <div className="w-100 me-4" onClick={openPopup}>
+                      <input
+                        className="px-3"
+                        type="text"
+                        placeholder="Write a post..."
+                        style={{ pointerEvents: "none" }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

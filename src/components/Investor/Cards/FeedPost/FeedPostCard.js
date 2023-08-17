@@ -1,11 +1,11 @@
 import React from "react";
 import profilePic from "../../../../Images/investorIcon/profilePic.svg";
 import locationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
-import RoundLogo from "../../../../Images/RoundLogo.png";
-import SavedIcon from "../../../../Images/SavedIcon.svg";
+// import RoundLogo from "../../../../Images/RoundLogo.png";
+// import SavedIcon from "../../../../Images/SavedIcon.svg";
+// import FireIcon from "../../../../Images/Fire.png";
 import HomeIcon from "../../../../Images/HomeIcon.svg";
 import ThreeODotIcon from "../../../../Images/ThreeDotIcon.svg";
-import FireIcon from "../../../../Images/Fire.png";
 import "./feedPostCard.scss";
 import TimeAgo from "timeago-react";
 
@@ -19,19 +19,19 @@ const FeedPostCard = ({
 }) => {
   return (
     <>
-      <div className="row feedpostcard_main_container">
+      <div className="row feedpostcard_main_container mb-2">
         <div className="col-12">
           <div className="box feedpostcard_container mt-2">
             <div className="  feed_header_container">
               <div className="feedpostcard_content">
                 <img src={profilePic} alt="logo" />
-                <div className="feedpostcart_text_header">
+                <div className="feedpostcart_text_header my-1">
                   <span
-                    style={{ fontSize: "20px", fontWeight: 600, color: "#000" }}
+                    style={{ fontSize: "18px", fontWeight: 600, color: "#000" }}
                   >
                     {firstName + " " + lastName}
                   </span>
-                  <span>
+                  <span className="d-flex flex-column flex-md-row">
                     <span
                       style={{
                         fontSize: "12px",
@@ -65,53 +65,45 @@ const FeedPostCard = ({
               </div>
             </div>
             <hr />
-            <div className="row">
-              <div className="col-12 para_container">
-                <div className="para_container_text ">
-                  <p style={{ fontSize: "15px" }}>{description}</p>
-                  {image && (
-                    <span className="d-flex">
-                      <img
-                        className="mx-auto"
-                        style={{ maxHeight: "350px" }}
-                        src={image}
-                        alt="post-image"
-                      />
-                    </span>
-                  )}
-                  {video && (
-                    <span className="d-flex">
-                      <video
-                        className="mx-auto"
-                        controls
-                        autoPlay
-                        height={"300px"}
-                      >
-                        <source alt="post-video" src={video} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    </span>
-                  )}
-                </div>
+            <div className="para_container w-100">
+              <div className="para_container_text w-100">
+                <p style={{ fontSize: "15px" }}>{description}</p>
+                {image && (
+                  <span className="d-flex">
+                    <img
+                      className="mx-auto"
+                      style={{ maxHeight: "350px", objectFit: "contain" }}
+                      width={"100%"}
+                      src={image}
+                      alt="post-image"
+                    />
+                  </span>
+                )}
+                {video && (
+                  <span className="d-flex">
+                    <video
+                      className="mx-auto"
+                      width={"100%"}
+                      style={{ maxWidth: "500px" }}
+                      controls
+                    >
+                      <source alt="post-video" src={video} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </span>
+                )}
               </div>
             </div>
             <hr />
-            <div className="row feedpostcard_footer">
-              <div className="col-6">
+            <div className="row feedpostcard_footer mb-2">
+              <div className="col-8">
                 <div className="feedpostcard_footer_like_comment">
-                  <span>
-                    <img src={FireIcon} alt="Like" />
-                    <span className="mx-2">Like</span>
-                  </span>
-                  <span>
-                    <img src={HomeIcon} alt="Comment" />
-                    <span className="mx-2">Comment</span>
-                  </span>
+                  <span className="ms-1 me-2">👍 Like</span>
+                  <span className="me-1">💬 Comment</span>
                 </div>
               </div>
-              <div className="col-6 d-flex align-items-center justify-content-end">
-                <img className="mx-2 h-75" src={SavedIcon} alt="saved" />
-                <span>Save</span>
+              <div className="col-4 d-flex align-items-center justify-content-end">
+                <span>📑 Save</span>
               </div>
             </div>
           </div>
