@@ -17,6 +17,8 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
   const [selectedVideo, setSelectedVideo] = useState(null); // Store the selected video data
   const [selectedDocument, setSelectedDocument] = useState(null); // Store the selected document data
 
+  const [posting, setPosting] = useState(false);
+
   const handleClose = () => setPopupOpen(false);
 
   const galleryInputRef = useRef(null);
@@ -50,7 +52,12 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
     setPostText(event.target.value);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setPosting(true);
+    if (!postText) {
+      return setPosting(false);
+    }
     const postData = new FormData();
     postData.append("description", postText);
     // postData.append("description", postText); one for category is also required
@@ -86,7 +93,8 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
       .catch((error) => {
         // Handle error if needed
         console.error("Error submitting post:", error);
-      });
+      })
+      .finally(() => setPosting(false));
   };
 
   return (
@@ -111,14 +119,18 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
                   </span>
                 </div>
               </div>
-              <button
-                type="button"
-                className="close"
-                onClick={handleClose}
-                style={{ background: "transparent", border: "none" }}
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
+              <div>
+                <button
+                  type="button"
+                  className="close d-flex justify-content-end"
+                  onClick={handleClose}
+                  style={{ background: "transparent", border: "none" }}
+                >
+                  <h3 aria-hidden="true" className="m-3">
+                    &times;
+                  </h3>
+                </button>
+              </div>
             </div>
             <div className="modal-body">
               <div className="createpost_text_area">
@@ -164,21 +176,27 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
                       ref={smileeInputRef}
                       onChange={handleFileChange}
                     />
-                    <button
+                    {/* <button
                       className="white_button"
                       onClick={handleSmileeButtonClick}
                     >
                       <img src={SmileeIcon} alt="Button 3" />
-                    </button>
+                    </button> */}
 
                     <button className="white_button">
                       <img src={ThreeDotsIcon} alt="Button 4" />
                     </button>
                   </div>
                   <div className="post_button_container">
-                    <button className="post_button" onClick={handleSubmit}>
-                      Post
-                    </button>
+                    {posting ? (
+                      <button className="post_button" disabled>
+                        Posting...
+                      </button>
+                    ) : (
+                      <button className="post_button" onClick={handleSubmit}>
+                        Post
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

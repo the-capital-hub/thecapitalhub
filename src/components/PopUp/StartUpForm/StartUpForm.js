@@ -41,7 +41,7 @@ const StartUpForm = ({ onStartupClick }) => {
     try {
       const response = await postStartUpData(formData);
       console.log("Startup data posted successfully:", response);
-      localStorage.setItem("user_data",response)
+      localStorage.setItem("user_data", response);
 
       // Call onStartupClick or other logic here with formData
       if (response) {
