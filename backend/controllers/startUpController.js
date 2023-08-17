@@ -4,6 +4,7 @@ import {
   updateOnePager,
   updateStartUpData,
   investNowService,
+  getStartupByFounderId,
 } from "../services/startUpService.js";
 import { getStartUpData } from "../services/userService.js";
 
@@ -122,3 +123,16 @@ export const investNowController = async (req, res) => {
   }
 };
 
+export const getStartupByFounderIdController = async (req, res) => {
+  const { founderId } = req.params;
+  try {
+    const response = await getStartupByFounderId(founderId);
+    res.status(response.status).send(response);
+  } catch (err) {
+    console.error("Error getting company:", err);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting company.",
+    });
+  }
+}

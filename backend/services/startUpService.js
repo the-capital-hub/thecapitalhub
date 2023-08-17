@@ -168,3 +168,26 @@ export const investNowService = async (args) => {
     };
   }
 };
+
+export const getStartupByFounderId = async (founderId) => {
+  try {
+    const company = await StartUpModel.findOne({ founderId });
+    if (!company) {
+      return {
+        status: 404,
+        message: "StartUp not found.",
+      };
+    }
+    return {
+      status: 200,
+      message: "StartUp details retrieved successfully.",
+      data: company,
+    };
+  } catch (err) {
+    console.error("Error getting StartUp details:", err);
+    return {
+      status: 500,
+      message: "An error occurred while getting StartUp details.",
+    };
+  }
+}

@@ -12,7 +12,8 @@ const API = Object.freeze({
   getAllPosts: `${baseUrl}/api/posts/getposts`,
   updateUser: `${baseUrl}/users/updateFounder`,
   getOnePager: `${baseUrl}/startUp/getOnePager`,
-  getUserById: `${baseUrl}/users/getUserById`
+  getUserById: `${baseUrl}/users/getUserById`,
+  getStartupByFounderId: `${baseUrl}/startup/getStartupByFounderId`
 });
 
 export default API;

@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 function Profile() {
   const { username } = useParams();
   const [user, setUser] = useState([]);
-
+  console.log(username);
   useEffect(() => {
     getUserById(username)
       .then(({ data }) => {

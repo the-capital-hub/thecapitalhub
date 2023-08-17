@@ -15,7 +15,7 @@
 import React from "react";
 import "./OneLinkMarketSection.scss";
 
-const OneLinkMarketSection = () => {
+const OneLinkMarketSection = ({company}) => {
   const cardData = [
     {
       title: "title",

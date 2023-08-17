@@ -145,6 +145,17 @@ export const updateUserAPI = async (data) => {
   }
 };
 
+const getStartupByFounderId = async (founderId) => {
+  try {
+    const response = await axiosInstance.get(API.getStartupByFounderId+"/"+founderId);
+    console.log("Response",response);
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+}
+
 export {
   getUser,
   postUser,
@@ -156,4 +167,5 @@ export {
   getAllPostsAPI,
   getOnePager, 
   getUserById,
+  getStartupByFounderId
 };
