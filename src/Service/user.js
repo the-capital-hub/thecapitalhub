@@ -38,9 +38,13 @@ async function getUser() {
   }
 }
 
-async function getPdfData() {
+async function getPdfData(userId, folderId) {
   try {
-    const response = await axiosInstance.get(API.getDocument);
+    const requestBody = {
+      userId,
+      folderId,
+    }
+    const response = await axiosInstance.post(API.getDocument, requestBody);
     return response.data;
   } catch (error) {
     console.error("Error:", error);

@@ -1,7 +1,7 @@
 import "./NavBar.scss";
 import Logo from "../../../Images/investorIcon/Logo.svg";
 import NotificationIcon from "../../../Images/investorIcon/notification.svg";
-import MessageIcon from "../../../Images/investorIcon/Message.svg";
+import MessageIcon from "../../../Images/investorIcon/message.svg";
 import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
 import { Link } from "react-router-dom";

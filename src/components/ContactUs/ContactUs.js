@@ -1,7 +1,7 @@
 import React from "react";
 import "./contactus.scss";
 import callIcon from "../../Images/Call.svg";
-import messageIcon from "../../Images/Message.svg";
+import messageIcon from "../../Images/message.svg";
 import mapPinIcon from "../../Images/map_pin.svg";
 import fbIcon from "../../Images/fb_contact.svg";
 import instaIcon from "../../Images/insta_contact.svg";

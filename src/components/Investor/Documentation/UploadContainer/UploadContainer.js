@@ -4,12 +4,17 @@ import UploadIcon from "../../../../Images/UploadIcon.svg";
 import PDFIcon from "../../../../Images/PDFIcon.png"; // Import your PDF icon
 import axios from "axios";
 import AfterSuccessPopUp from "../../../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import { environment } from "../../../../environments/environment";
+import { useSelector } from "react-redux";
+
+const baseUrl = environment.baseUrl;
 
 const UploadContainer = () => {
   const fileInputRef = useRef(null);
   const [isFileOver, setIsFileOver] = useState(false);
   const [thumbnailUrl, setThumbnailUrl] = useState(null);
   const [showPopUp, setShowPopUp] = useState(false);
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const handleClosePopup = () => {
     setShowPopUp(false);
@@ -56,13 +61,21 @@ const UploadContainer = () => {
     fileInputRef.current.click();
   };
 
-  const handlePdfUploadClick = () => {
+  const handlePdfUploadClick = async () => {
     if (thumbnailUrl) {
-      const formData = new FormData();
-      formData.append("file", fileInputRef.current.files[0]);
-
-      axios
-        .post("http://localhost:8081/upload", formData)
+      const data = new FormData()
+      data.append("file",fileInputRef.current.files[0])
+      data.append("upload_preset","fiverr");
+      const res = await axios.post("https://api.cloudinary.com/v1_1/dndcersc4/upload",data,
+      { withCredentials: false });
+      const requestBody = {
+        fileUrl: res.data.url,
+        fileName: res.data.original_filename,
+        userId: loggedInUser._id,
+        folderId: "64dc89095df364b443f04a20",
+      }
+      await axios
+        .post(`${baseUrl}/documentation/uploadDocument`, requestBody)
         .then((response) => {
           console.log("response", response);
           if (response.status == 200) {
