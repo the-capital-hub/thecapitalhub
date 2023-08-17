@@ -87,4 +87,21 @@
             }
         }
     }
+    .buttons {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        button {
+            background: #d3f36b;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+        }
+        button:nth-child(1) {
+            background-color: white;
+            border: 1px solid lightgray;
+        }
+    }
 }
