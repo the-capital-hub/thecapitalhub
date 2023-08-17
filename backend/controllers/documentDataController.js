@@ -3,7 +3,10 @@ import {
   uploadDocument,
   getDocumentByUser,
   createFolder,
-  getFolderByUser
+  getFolderByUser,
+  renameFolder,
+  deleteFolder,
+  deleteDocument
 } from "../services/documentDataService.js";
 // Controller function to get a list of uploaded files and their names
 export const getDocumentList = (req, res) => {
@@ -59,6 +62,45 @@ export const getDocumentByUserController = async (req, res) => {
     res.status(500).send({
       status: 500,
       message: "An error occurred while getting documents.",
+    });
+  }
+};
+
+export const renameFolderController = async (req, res) => {
+  try {
+    const response = await renameFolder(req.body);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while renaming folder.",
+    });
+  }
+};
+
+export const deleteFolderController = async (req, res) => {
+  try {
+    const response = await deleteFolder(req.body);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while deleting folder.",
+    });
+  }
+};
+
+export const deleteDocumentController = async (req, res) => {
+  try {
+    const response = await deleteDocument(req.body);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while deleting document.",
     });
   }
 };

@@ -125,4 +125,82 @@ export const getDocumentByUser = async (args) => {
   }
 };
 
+export const renameFolder = async (args) => {
+  try {
+    const { folderId, newFolderName } = args;
+    const folder = await Folder.findOne({_id: folderId });
+    
+    if (!folder) {
+      return {
+        status: 404,
+        message: "Folder not found.",
+      };
+    }
+    
+    folder.folderName = newFolderName;
+    await folder.save();
+    
+    return {
+      status: 200,
+      message: "Folder renamed successfully.",
+      data: folder,
+    };
+  } catch (error) {
+    console.error("Error renaming folder:", error);
+    return {
+      status: 500,
+      message: "An error occurred while renaming the folder.",
+    };
+  }
+};
 
+
+export const deleteFolder = async (args) => {
+  try {
+    const { folderId } = args;
+    const folder = await Folder.findOne({ _id: folderId });
+    if (!folder) {
+      return {
+        status: 404,
+        message: "Folder not found.",
+      };
+    }
+    
+    await File.deleteMany({ folderId: folderId });
+    await Folder.deleteOne({ _id: folder._id });
+    return {
+      status: 200,
+      message: "Folder deleted successfully.",
+    };
+  } catch (error) {
+    console.error("Error deleting folder:", error);
+    return {
+      status: 500,
+      message: "An error occurred while deleting the folder.",
+    };
+  }
+};
+
+export const deleteDocument = async (args) => {
+  try {
+    const { documentId } = args;
+    const document = await File.findOne({  _id: documentId });
+    if (!document) {
+      return {
+        status: 404,
+        message: "Document not found.",
+      };
+    }
+    await File.deleteOne({ _id: document._id });
+    return {
+      status: 200,
+      message: "Document deleted successfully.",
+    };
+  } catch (error) {
+    console.error("Error deleting document:", error);
+    return {
+      status: 500,
+      message: "An error occurred while deleting the document.",
+    };
+  }
+};
