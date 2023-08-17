@@ -110,6 +110,11 @@ const OnePager = () => {
           <InvestNow />
         </div>
       </div>
+
+      <div className="buttons">
+        <button>Preview</button>
+        <button>Download</button>
+      </div>
     </div>
   );
 };
