@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import "./investorHome.scss";
 import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
-import { CiEdit } from "react-icons/ci";
+import { CiEdit, CiSaveUp2 } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import MileStoneCard from "../InvestorGlobalCards/MilestoneCard/MileStoneCard";
 import { SidebarContext } from "../../Sidebar/SidebarContext";
@@ -11,60 +11,98 @@ import RightProfileCard from "../InvestorGlobalCards/RightProfileCard/RightProfi
 import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import CompanyDetailsCard from "../InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUserAPI } from "../../../Service/user";
+import { loginSuccess } from "../../../Store/Action/userAction";
+import { getBase64 } from "../../../utils/getBase64";
 
 const InvestorHome = () => {
   const [isBioEditable, setIsBioEditable] = useState(false);
-  const [bioContent, setBioContent] = useState(`
-    A little about myself. “Dejection is a sign of failure...
-  `);
-
-  const handleEditBio = () => {
-    setIsBioEditable(!isBioEditable);
-  };
-
-  const handleBioChange = (newBioContent) => {
-    setBioContent(newBioContent);
-    // Perform other actions like updating the backend, etc.
-  };
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const [isDesignationEditable, setIsDesignationEditable] = useState(false);
-  const [isExperienceEditable, setIsExperienceEditable] = useState(false);
-  const [isEducationEditable, setIsEducationEditable] = useState(false);
+  const [bioContent, setBioContent] = useState(loggedInUser?.bio || "");
+  const [personalEditable, setPersonalEditable] = useState(false);
 
-  const handleEdit = (field) => {
-    switch (field) {
-      case "designation":
-        setIsDesignationEditable(!isDesignationEditable);
-        break;
-      case "experience":
-        setIsExperienceEditable(!isExperienceEditable);
-        break;
-      case "education":
-        setIsEducationEditable(!isEducationEditable);
-        break;
-      default:
-        break;
+  const [personalData, setPersonalData] = useState({
+    designation: loggedInUser?.designation || "",
+    education: loggedInUser?.education || "",
+    experience: loggedInUser?.experience || "",
+    profilePicture: loggedInUser.profilePicture,
+  });
+
+  const dispatch = useDispatch();
+
+  const personalEditHandler = (field) => {
+    setPersonalEditable(!personalEditable);
+  };
+
+  const submitPersonalHandler = async () => {
+    try {
+      const newPersonalData = personalData;
+      if (newPersonalData.profilePictufre !== loggedInUser.profilePicture) {
+        const image = await getBase64(newPersonalData.profilePicture);
+        newPersonalData.profilePicture = image;
+      }
+      const {
+        data: { data },
+      } = await updateUserAPI(personalData);
+      dispatch(loginSuccess(data));
+      setPersonalEditable(!personalEditable);
+    } catch (error) {
+      console.log(error);
     }
   };
 
-  const renderEditableField = (fieldName, value, isEditable) => {
-    if (isEditable) {
+  const personalChangeHandler = (e) => {
+    if (e.target.name === "profilePicture") {
+      const { name, files } = e.target;
+      setPersonalData({
+        ...personalData,
+        [name]: files[0],
+      });
+    } else {
+      const { name, value } = e.target;
+      setPersonalData({
+        ...personalData,
+        [name]: value,
+      });
+    }
+  };
+
+  const renderEditableField = (fieldName) => {
+    if (personalEditable) {
+      if (fieldName === "profilePicture") {
+        return (
+          <input
+            type="file"
+            className="w-100"
+            accept="image/*"
+            name={fieldName}
+            value={personalData.fieldName}
+            onChange={personalChangeHandler}
+          />
+        );
+      }
       return (
         <input
           type="text"
-          value={value}
-          onChange={(e) => handleFieldChange(fieldName, e.target.value)}
+          className="w-100"
+          name={fieldName}
+          value={personalData.fieldName}
+          onChange={personalChangeHandler}
         />
       );
     }
-    return <span className="small_typo">{value}</span>;
+    return <span className="small_typo">{loggedInUser[fieldName]}</span>;
   };
 
-  const handleFieldChange = (fieldName, newValue) => {
-    console.log("fieldName", fieldName, ...newValue);
-    // Handle field value changes and update state or perform other actions.
+  const submitBioHandler = async () => {
+    const {
+      data: { data },
+    } = await updateUserAPI({ bio: bioContent });
+    dispatch(loginSuccess(data));
+    setIsBioEditable(!isBioEditable);
   };
+
   return (
     <div className="container-fluid investorHome_main_container">
       <div className="row mt-2">
@@ -77,15 +115,20 @@ const InvestorHome = () => {
                   <div className="row">
                     <div className="col-8 col-seven">
                       <div className="image_name_section mt-2">
-                        <img src={profilePic} alt="profileimage" />
+                        <img
+                          src={loggedInUser.profilePicture}
+                          alt="profileimage"
+                          className="rounded-circle"
+                        />
                         <div className="left_profile_text flex_content ms-3">
                           <h2 className="typography">
                             {loggedInUser?.firstName} {loggedInUser?.lastName}
-                            {console.log("loggedInUser--<", loggedInUser)}
                           </h2>
                           <span className="small_typo">
-                            Founder & CEO of capital Hub
+                            {loggedInUser?.designation ||
+                              "Founder & CEO of The Capital Hub"}
                           </span>
+                          <br />
                           <span className="small_typo">Bangalore , India</span>
                         </div>
                       </div>
@@ -101,20 +144,30 @@ const InvestorHome = () => {
                   </div>
                   <hr className="divider_hr" />
                   <div className="row">
-                    <div className="designation mt-2">
-                      <table>
+                    <div className="designation mt-2 w-100">
+                      <span className="edit_btn w-100 d-flex ">
+                        <span className="ms-auto">
+                          <button onClick={() => personalEditHandler()}>
+                            {personalEditable ? "Cancel" : "Edit"}
+                            <CiEdit />
+                          </button>
+                          {personalEditable && (
+                            <button
+                              className="ms-2"
+                              onClick={() => submitPersonalHandler()}
+                            >
+                              Save <CiSaveUp2 />
+                            </button>
+                          )}
+                        </span>
+                      </span>
+                      <table className="w-100">
                         <tbody>
-                          <tr>
-                            <td className="edit_btn">
-                              <button onClick={() => handleEdit("experience")}>
-                                Edit <CiEdit />
-                              </button>
-                            </td>
-                          </tr>
+                          <tr></tr>
                           <tr>
                             <td>
                               <strong className="designation_list">
-                                Current company
+                                Company
                               </strong>
                             </td>
                             <td
@@ -131,11 +184,7 @@ const InvestorHome = () => {
                               </strong>
                             </td>
                             <td style={{ marginBottom: "1rem" }}>
-                              {renderEditableField(
-                                "designation",
-                                "Founder & CEO",
-                                isDesignationEditable
-                              )}
+                              {renderEditableField("designation")}
                             </td>
                           </tr>
                           <tr>
@@ -144,11 +193,8 @@ const InvestorHome = () => {
                                 Education
                               </strong>
                             </td>
-                            <td
-                              className="small_typo"
-                              style={{ marginBottom: "1rem" }}
-                            >
-                              Graduate, University of Northampton
+                            <td style={{ marginBottom: "1rem" }}>
+                              {renderEditableField("education")}
                             </td>
                           </tr>
                           <tr>
@@ -158,13 +204,21 @@ const InvestorHome = () => {
                               </strong>
                             </td>
                             <td style={{ marginBottom: "1rem" }}>
-                              {renderEditableField(
-                                "experience",
-                                "5+ Years building various startups\nMentored 21 startups\nGrowth $ 10M+",
-                                isExperienceEditable
-                              )}
+                              {renderEditableField("experience")}
                             </td>
                           </tr>
+                          {personalEditable && (
+                            <tr>
+                              <td>
+                                <strong className="designation_list">
+                                  Profile Picture
+                                </strong>
+                              </td>
+                              <td style={{ marginBottom: "1rem" }}>
+                                {renderEditableField("profilePicture")}
+                              </td>
+                            </tr>
+                          )}
                         </tbody>
                       </table>
                     </div>
@@ -282,24 +336,38 @@ const InvestorHome = () => {
                 <div className="box personal_information">
                   <div className="personal_information_header">
                     <h2 className="typography">Bio</h2>
-                    <button onClick={handleEditBio}>
-                      Edit <CiEdit />
-                    </button>
+                    <span className="ms-auto">
+                      <button onClick={() => setIsBioEditable(!isBioEditable)}>
+                        {isBioEditable ? "Cancel" : "Edit"}
+                        <CiEdit />
+                      </button>
+                      {isBioEditable && (
+                        <button
+                          className="ms-2"
+                          onClick={() => submitBioHandler()}
+                        >
+                          Save <CiSaveUp2 />
+                        </button>
+                      )}
+                    </span>
                   </div>
                   <div className="col-12 mt-2">
                     <div className="designation_info">
                       {isBioEditable ? (
                         <textarea
                           value={bioContent}
-                          onChange={(e) => handleBioChange(e.target.value)}
+                          name="bio"
+                          onChange={(e) => setBioContent(e.target.value)}
                         />
                       ) : (
-                        <p className="small_typo">{bioContent}</p>
+                        <p className="small_typo">
+                          {loggedInUser?.bio || "Click on edit to add bio"}
+                        </p>
                       )}
                     </div>
                   </div>
                   <div className="col-12 mt-2 designation_see_more">
-                    <Link to={"/"}>See more</Link>
+                    <Link to={""}>See more</Link>
                   </div>
                 </div>
               </div>
@@ -311,7 +379,7 @@ const InvestorHome = () => {
                   <div className="personal_information_header">
                     <h2 className="typography">Milestones</h2>
                     <div className="milestone_see_more">
-                      <Link to={"/"}>See more</Link>
+                      <Link to={""}>See more</Link>
                     </div>
                   </div>
                   <div className="col-12 mt-2">

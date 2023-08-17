@@ -9,8 +9,10 @@ import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
 import HambergerIcon from "../../../Images/Hamberger.svg";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const InvestorNavbar = (props) => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
   return (
     <>
       <div className="container pt-1">
@@ -61,7 +63,11 @@ const InvestorNavbar = (props) => {
               <div className="icon-wrapper">
                 <Link to={"/investor/manage-account"}>
                   {" "}
-                  <img className="profile-pic" src={profilePic} alt="Profile" />
+                  <img
+                    className="profile-pic"
+                    src={loggedInUser.profilePicture}
+                    alt="Profile"
+                  />
                 </Link>
                 {/* <span className="me">Me</span> */}
               </div>

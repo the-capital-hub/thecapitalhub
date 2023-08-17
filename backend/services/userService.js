@@ -1,6 +1,7 @@
 import { UserModel } from "../models/User.js";
 import { comparePassword } from "../utils/passwordManager.js";
 import { StartUpModel } from "../models/startUp.js";
+import { cloudinary } from "../utils/uploadImage";
 
 export const getUsersService = async (info) => {
   try {
@@ -60,15 +61,29 @@ export const getUserById = async (userId) => {
   }
 };
 
-// Update User Bio and Names
+// Update User
 export const updateUserData = async ({ userId, newData }) => {
   try {
-    await UserModel.findByIdAndUpdate(userId, { ...newData });
+    if (newData?.profilePicture) {
+      const { url } = await cloudinary.uploader.upload(newData.profilePicture, {
+        folder: `${process.env.CLOUDIANRY_FOLDER}/users/profilePictures`,
+        format: "webp",
+        unique_filename: true,
+      });
+      newData.profilePicture = url;
+    }
+    const data = await UserModel.findByIdAndUpdate(
+      userId,
+      { ...newData },
+      { new: true }
+    );
     return {
       status: 200,
       message: "User updated succesfully",
+      data,
     };
   } catch (error) {
+    console.log(error);
     return {
       status: 500,
       message: "An error occurred while updating the bio.",

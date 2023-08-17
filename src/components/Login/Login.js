@@ -12,8 +12,6 @@ import ErrorPopUp from "../PopUp/ErrorPopUp/ErrorPopUp";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess, loginFailure } from "../../Store/Action/userAction";
 
-
-
 const Login = () => {
   const dispatch = useDispatch();
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -47,13 +45,14 @@ const Login = () => {
       localStorage.setItem("accessToken", token);
       localStorage.setItem("isLoggedIn", "true");
       if (response) {
-        console.log("response--->", response)
+        console.log("response--->", response);
         setIsSubmitted(true);
 
         setTimeout(() => {
           setIsSubmitted(false);
           navigate("/profile");
         }, 2000);
+
 
         dispatch(loginSuccess(response.user));
       }
@@ -64,7 +63,7 @@ const Login = () => {
       // setError(error.response.data.error);
 
       // dispatch(loginFailure(error.response.data.error));
-      console.log(error)
+      console.log(error);
     }
   };
   const navigate = useNavigate();
@@ -137,7 +136,7 @@ const Login = () => {
             </div>
             <div className="submit_btn">
               <button type="submit" className="btn btn-primary">
-              Log In
+                Log In
               </button>
             </div>
             <h3 className="already_have_account_mobile">

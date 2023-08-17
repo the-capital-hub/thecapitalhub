@@ -6,14 +6,19 @@ import {
   getUserByIdController,
   updateUser,
 } from "../controllers/userData.js";
+import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
+
+router.post("/login", loginUserController);
+router.post("/createUser", registerUserController);
+
+// Authorized routes below
+router.use(authenticateToken);
 
 // Profile Page
 router.patch("/updateFounder", updateUser);
 
-router.post("/createUser", registerUserController);
 router.get("/getUser", getUsersController);
-router.post("/login", loginUserController);
 router.get("/getUserById/:id", getUserByIdController);
 
 export default router;
