@@ -3,9 +3,17 @@ import "./OnePager.scss";
 import {
   Card,
   CompanyDetails,
+  ImagePlaceholder,
   MarketCard,
   SimpleCard,
+  TeamCard,
+  Title,
 } from "../../../components/InvestorView";
+import OnePagePreviewCard from "../../../components/Investor/InvestorGlobalCards/OneLink/OnePagePreviewCard/OnePagePreviewCard";
+import OnePagePreview from "../../../components/Investor/OneLink/OnePagePreview/OnePagePreview";
+import Table from "../../../components/Investor/OneLink/Table/Table";
+import TeamsCard from "../../../components/InvestorView/TeamsCard/TeamsCard";
+import InvestNow from "../InvestNow/InvestNow";
 
 const OnePager = () => {
   const [rupeeHighlight, setRupeeHighlight] = useState(true);
@@ -63,11 +71,43 @@ const OnePager = () => {
       <hr />
 
       <div className="marketCards">
-        <h4>Market (in crores)</h4>
+        <Title title="Market (in cr)" />
         <div className="cards">
           <MarketCard title={"TAM"} subtitle={"(Total Advisable Market)"} />
           <MarketCard title={"SAM"} subtitle={"(Service Advisable Market)"} />
           <MarketCard title={"SAM"} subtitle={"(Service Advisable Market)"} />
+        </div>
+      </div>
+
+      <div className="projections">
+        <Title title={"Projections"} />
+        <Table hidden={true} />
+      </div>
+
+      <div className="team">
+        <Title title={"Team"} />
+        <div className="cards">
+          <TeamsCard />
+          <TeamsCard />
+          <TeamsCard />
+        </div>
+      </div>
+
+      <div className="fundingAndContact">
+        <div className="left">
+          <Title title={"Funding ask (in Lakhs)"} />
+          <div className="box">
+            <h1>Enter Funding Amount</h1>
+            <hr />
+            <ImagePlaceholder
+              text={
+                "Upload image a piechart showing how you utilize the funding amount"
+              }
+            />
+          </div>
+        </div>
+        <div className="right">
+          <InvestNow />
         </div>
       </div>
     </div>

@@ -6,6 +6,9 @@ import ThankYouModal from "./ThankYouModal/ThankYouModal";
 import CompanyDetails from "./CompanyDetails/CompanyDetails";
 import SimpleCard from "./SimpleCard/SimpleCard";
 import MarketCard from "./MarketCard/MarketCard.jsx";
+import Title from "./Title/Title";
+import TeamCard from "../Investor/InvestorGlobalCards/OneLink/TeamCard/TeamCard";
+import ImagePlaceholder from "./ImagePlaceholder/ImagePlaceholder";
 
 export {
   NavBar,
@@ -16,4 +19,7 @@ export {
   CompanyDetails,
   SimpleCard,
   MarketCard,
+  Title,
+  TeamCard,
+  ImagePlaceholder,
 };

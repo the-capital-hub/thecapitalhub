@@ -1,13 +1,11 @@
 import { camera } from "../../../Images/InvestorsView";
+import ImagePlaceholder from "../ImagePlaceholder/ImagePlaceholder";
 import "./CompanyDetails.scss";
 
 const CompanyDetails = () => {
   return (
     <div className="companyDetailsContainer">
-      <div className="pfp">
-        <img src={camera} alt="" />
-        <p>Upload Company Logo</p>
-      </div>
+      <ImagePlaceholder text={"Upload your image"} />
       <div className="details">
         <p>Enter company duration</p>
         <hr />

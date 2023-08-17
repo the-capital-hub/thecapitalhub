@@ -1,6 +1,7 @@
 .onePager {
     display: flex;
     flex-direction: column;
+    gap: 30px;
     align-items: start;
     background-color: #fff;
     padding: 10px;
@@ -31,9 +32,59 @@
         flex-wrap: wrap;
     }
 
-    .marketCards {
-        h4 {
-            font-size: 14px;
+    .projections {
+        margin-top: 30px;
+    }
+
+    .fundingAndContact {
+        display: flex;
+        align-items: start;
+        justify-content: space-evenly;
+        width: 100%;
+        flex-wrap: wrap;
+        .left {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+            padding: 50px;
+            .pfp {
+                width: 40%;
+                padding: 10px;
+                border-radius: 25px;
+            }
+            .box {
+                border: 1px solid lightgray;
+                padding: 50px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                hr {
+                    width: 300px;
+                }
+                h1 {
+                    font-size: 20px;
+                }
+            }
+        }
+        .right {
+            .investNow {
+                width: 400px;
+                position: relative;
+                top: auto;
+                bottom: auto;
+                left: auto;
+                right: auto;
+                margin-left: 0px;
+                margin-top: 0px;
+                .inputs {
+                    padding: 50px;
+                    border: 1px solid lightgray;
+                    button {
+                        display: none;
+                    }
+                }
+            }
         }
     }
 }
