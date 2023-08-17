@@ -23,7 +23,7 @@ router.put("/onePager", editOnePager);
 
 // Phase 2
 // OneLink Page Data
-router.get("/getOnePager", getOnePagerController);
+router.get("/getOnePager/:oneLink", getOnePagerController);
 
 router.post("/investNow", investNowController);
 

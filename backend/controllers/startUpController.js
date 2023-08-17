@@ -23,7 +23,7 @@ export const createStartUpController = async (req, res) => {
 
 // Phase 2
 export const getOnePagerController = async (req, res) => {
-  const { oneLink } = req.body;
+  const { oneLink } = req.params;
   try {
     const response = await getOnePager(oneLink);
     res.status(response.status).send(response);

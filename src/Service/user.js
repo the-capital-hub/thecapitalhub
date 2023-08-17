@@ -112,4 +112,27 @@ async function getAllPostsAPI() {
   }
 }
 
-export { getUser, postUser,postStartUpData, postUserLogin, postUserPost, getPdfData,uploadDocument,getAllPostsAPI};
+async function getOnePager(oneLink) {
+  try {
+    const response = await axiosInstance.get(API.getOnePager+"/"+oneLink);
+    console.log("Response",response);
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+}
+
+async function getUserById(oneLink) {
+  try {
+    const onePager = await getOnePager(oneLink)
+    const response = await axiosInstance.get(API.getUserById+"/"+onePager.data.founderId);
+    console.log("Response",response);
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+}
+
+export { getUser, postUser,postStartUpData, postUserLogin, postUserPost, getPdfData, uploadDocument, getAllPostsAPI, getOnePager, getUserById};
