@@ -49,3 +49,24 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+    .investorPopUp {
+        .containerTwo {
+            .wrapperTwo {
+                width: 400px;
+            }
+        }
+    }
+}
+
+@media (max-width: 426px) {
+    .investorPopUp {
+        .containerTwo {
+            .wrapperTwo {
+                width: 300px;
+                height: 200px;
+            }
+        }
+    }
+}
