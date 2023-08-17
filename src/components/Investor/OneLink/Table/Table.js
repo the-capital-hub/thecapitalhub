@@ -1,11 +1,11 @@
 import React from "react";
 import "./table.scss";
 
-const Table = () => {
+const Table = ({ hidden }) => {
   return (
     <>
       <div className="table-container">
-      <h2>Projections</h2>
+        <h2 className={hidden && "hidden"}>Projections</h2>
 
         <table>
           <tr>
