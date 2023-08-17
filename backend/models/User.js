@@ -73,6 +73,12 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "StartUps",
     },
+    profilePicture: {
+      type: String,
+      default:
+        "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp",
+    },
+    designation: String,
   },
   {
     timestamps: true,

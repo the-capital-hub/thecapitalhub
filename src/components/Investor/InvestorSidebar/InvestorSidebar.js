@@ -22,7 +22,7 @@ import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import { BsLink45Deg } from "react-icons/bs";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./investorsidebar.scss";
-import { Link, useLocation, useNavigate} from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import LogOutPopUp from "../../PopUp/LogOutPopUp/LogOutPopUp";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -33,7 +33,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const menuIconClick = () => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
@@ -45,10 +45,9 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
 
   const handleLogoutLogic = () => {
     dispatch(logout());
-    localStorage.removeItem("isLoggedIn")
-    
-    navigate("/login")
+    localStorage.removeItem("isLoggedIn");
 
+    navigate("/login");
   };
   return (
     <div
@@ -63,15 +62,27 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
               {sidebarCollapsed ? (
                 <Link to={"/profile"}>
                   {" "}
-                  <img src={profilePic} alt="image" />
+                  <img
+                    className="rounded-circle"
+                    width={50}
+                    src={loggedInUser.profilePicture}
+                    alt="image"
+                  />
                 </Link>
               ) : (
                 <>
                   <Link to={"/profile"}>
                     {" "}
-                    <img src={profilePic} alt="image" />
+                    <img
+                      className="rounded-circle"
+                      width={70}
+                      src={loggedInUser.profilePicture}
+                      alt="image"
+                    />
                   </Link>
-                  <h3>{loggedInUser?.firstName} { loggedInUser?.lastName}</h3>
+                  <h3>
+                    {loggedInUser?.firstName} {loggedInUser?.lastName}
+                  </h3>
                   <h4>{loggedInUser?.email}</h4>
                 </>
               )}
@@ -167,7 +178,12 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link to="/investors">
-                  <img src={InvestorIcon} alt="image" width="17px" height="17px" />
+                  <img
+                    src={InvestorIcon}
+                    alt="image"
+                    width="17px"
+                    height="17px"
+                  />
                   {!sidebarCollapsed && <span>Investors</span>}
                 </Link>
               </MenuItem>
