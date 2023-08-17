@@ -10,6 +10,7 @@ const API = Object.freeze({
   uploadDocument: `${baseUrl}/upload`,
   getDocument: `${baseUrl}/documentation/getDocumentsByUser`,
   getAllPosts: `${baseUrl}/api/posts/getposts`,
+  updateUser: `${baseUrl}/users/updateFounder`,
   getOnePager: `${baseUrl}/startUp/getOnePager`,
   getUserById: `${baseUrl}/users/getUserById`
 });
