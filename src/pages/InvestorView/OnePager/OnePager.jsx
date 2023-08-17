@@ -61,7 +61,7 @@ const OnePager = () => {
       <div className="companyDetails">
         <CompanyDetails
           companyName={onePager.company}
-          introductoryMessage={onePager.introductoryMessage}
+          description={onePager.description}
           image={onePager.companyProfile}
         />
       </div>

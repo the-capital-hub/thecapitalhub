@@ -19,6 +19,9 @@ import profileIcon from "../../../Images/profile.png";
 import companyIcon from "../../../Images/company.png";
 import documentationIcon from "../../../Images/documentation.png";
 import investIcon from "../../../Images/invest.png";
+import { getUserById } from "../../../Service/user";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -26,6 +29,17 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const menuIconClick = () => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
+  
+  const { username } = useParams();
+  const [user, setUser] = useState([]);
+
+  useEffect(() => {
+    getUserById(username)
+      .then(({ data }) => {
+        setUser(data);
+      })
+      .catch(() => setUser([]));
+  }, [username]);
 
   return (
     <div
@@ -43,9 +57,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <>
                   <img src={profilePic} alt="image" />
                   <h3>
-                    {loggedInUser?.firstName} {loggedInUser?.lastName}
+                    {user?.firstName} {user?.lastName}
                   </h3>
-                  <h4>{loggedInUser?.email}</h4>
+                  <h4>{user?.email}</h4>
                 </>
               )}
             </div>

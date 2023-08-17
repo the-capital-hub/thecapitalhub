@@ -10,7 +10,6 @@ import { getUserById } from "../../../Service/user";
 import { useState, useEffect } from "react";
 
 function Profile() {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const { username } = useParams();
   const [user, setUser] = useState([]);
 
@@ -228,7 +227,7 @@ function Profile() {
               </div>
             </div>
           </div>
-          <CompanyDetailsCard />
+          <CompanyDetailsCard user={user}/>
         </div>
       </div>
     </div>
