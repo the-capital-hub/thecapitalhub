@@ -37,12 +37,10 @@
 
   .content {
     flex: 1;
-    margin-left: 250px;
-    min-height: 100vh;
+    margin-left: 210px;
     transition: margin-left 0.3s ease;
-    // margin-top: 5%;
-    margin-top: 90px;
-    border-radius: 25px;
+    margin-top: 5%;
+    overflow: hidden;
   }
 
   // Add a class to handle the sidebar collapsed state
@@ -53,6 +51,84 @@
 
     .content {
       margin-left: 65px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .investor_view_container {
+    .sidebar {
+      left: 0;
+      bottom: 0;
+      // Add class for sidebar in fixed position
+      &.fixed {
+      }
+    }
+
+    .sidebar::-webkit-scrollbar {
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+
+    .content {
+      // flex: 1;
+      margin-left: 0px;
+      transition: margin-left 0.3s ease;
+      margin-top: 12%;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    // Add a class to handle the sidebar collapsed state
+    &.sidebar-collapsed {
+      .sidebar {
+        width: 0;
+        opacity: 0;
+        transition: width 0.3s ease, opacity 0.3s ease;
+      }
+
+      .content {
+        margin-left: 0px;
+      }
+    }
+  }
+}
+
+@media (max-width: 468px) {
+  .investor_home_container {
+    .sidebar {
+      left: 0;
+      bottom: 0;
+      // Add class for sidebar in fixed position
+      &.fixed {
+      }
+    }
+
+    .sidebar::-webkit-scrollbar {
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+
+    .content {
+      // flex: 1;
+      margin-left: 0px;
+      transition: margin-left 0.3s ease;
+      margin-top: 16%;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    // Add a class to handle the sidebar collapsed state
+    &.sidebar-collapsed {
+      .sidebar {
+        width: 0;
+        opacity: 0;
+        transition: width 0.3s ease, opacity 0.3s ease;
+      }
+
+      .content {
+        margin-left: 0px;
+      }
     }
   }
 }
