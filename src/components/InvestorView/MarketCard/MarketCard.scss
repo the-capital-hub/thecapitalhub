@@ -1,0 +1,30 @@
+.MarketCard {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    gap: 10px;
+    border-radius: 10px;
+    align-items: center;
+    // color: white;
+    .titles {
+        display: flex;
+        gap: 5px;
+    }
+    h3 {
+        font-size: 20px;
+    }
+    h3:nth-child(1) {
+        color: white;
+    }
+    .amount {
+        display: flex;
+        background-color: white;
+        padding: 10px 15px;
+        border-radius: 15px;
+        input {
+            border: none;
+            outline: none;
+        }
+    }
+}

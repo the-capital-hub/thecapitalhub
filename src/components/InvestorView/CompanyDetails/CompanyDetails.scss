@@ -1,0 +1,14 @@
+.companyDetailsContainer {
+    display: flex;
+    background: black;
+    height: 200px;
+    align-items: center;
+    gap: 15px;
+    width: 90%;
+    padding: 20px;
+    color: white;
+    
+    .details {
+        width: 70%;
+    }
+}
