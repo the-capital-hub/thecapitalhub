@@ -1,39 +1,50 @@
+import { Outlet, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Outlet, useParams } from "react-router-dom";
 import NavBarIV from "../../../components/InvestorView/NavBar/NavBar";
 import SideBarIV from "../../../components/InvestorView/SideBar/SideBar";
 import "./ValidateOneLink.scss";
 
-function ValidateOneLink() {
+function ValidateOneLink({ children, ...props }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  const { username: firstName } = useParams();
-  useEffect(() => {
-    console.log(firstName);
-    // API call for checking if the start up is valid
-  }, []);
+  const handleSidebarToggle = () => {
+    setSidebarCollapsed((prev) => !prev);
+  };
 
-  // if checking fails, show 404
-  return (
-    <div className="d-flex flex-column">
-      <NavBarIV />
-      <div
-        className={`container-fluid investor_view_container ${
-          sidebarCollapsed ? "sidebar-collapsed" : ""
-        }`}
-      >
-        <div className="sidebar">
-          <SideBarIV
-            sidebarCollapsed={sidebarCollapsed}
-            setSidebarCollapsed={() => setSidebarCollapsed(!sidebarCollapsed)}
-          />
-        </div>
+  const isLoggedIn = () => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    console.log("isLoggedIn-->", isLoggedIn);
+    return isLoggedIn === "true";
+  };
+  if (!isLoggedIn()) {
+    return <Navigate to="/login" replace />;
+  }
 
-        <div className="content">
-          <Outlet />
+  if (isLoggedIn()) {
+    return (
+      <>
+        <NavBarIV handleSidebarToggle={handleSidebarToggle}/>
+
+        <div
+          className={`container-fluid investor_view_container ${
+            sidebarCollapsed ? "sidebar-collapsed" : ""
+          }`}
+        >
+
+          <div className="sidebar">
+            <SideBarIV
+              sidebarCollapsed={sidebarCollapsed}
+              setSidebarCollapsed={handleSidebarToggle}
+            />
+          </div>
+
+          <div className="content">
+            <Outlet />
+          </div>
         </div>
-      </div>
-    </div>
-  );
+      </>
+    );
+  } else <Navigate to="/login" replace />;
 }
 
 export default ValidateOneLink;
+
