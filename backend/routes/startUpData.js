@@ -6,6 +6,7 @@ import {
   editStartUpOneLink,
   getOnePagerController,
   startUpData,
+  investNowController,
 } from "../controllers/startUpController.js";
 const router = express.Router();
 
@@ -23,5 +24,7 @@ router.put("/onePager", editOnePager);
 // Phase 2
 // OneLink Page Data
 router.get("/getOnePager", getOnePagerController);
+
+router.post("/investNow", investNowController);
 
 export default router;

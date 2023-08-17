@@ -3,6 +3,7 @@ import {
   getOnePager,
   updateOnePager,
   updateStartUpData,
+  investNowService,
 } from "../services/startUpService.js";
 import { getStartUpData } from "../services/userService.js";
 
@@ -99,3 +100,25 @@ export const editOnePager = async (req, res) => {
     });
   }
 };
+
+export const investNowController = async (req, res) => {
+  try {
+    const { fromUserName, fromUserEmail, fromUserMobile, toUserId } = req.body;
+
+    const response = await investNowService({
+      fromUserName,
+      fromUserEmail,
+      fromUserMobile,
+      toUserId,
+    });
+
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error("Error sending investment proposal:", error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while sending the investment proposal.",
+    });
+  }
+};
+
