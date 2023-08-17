@@ -1,6 +1,5 @@
 import React from "react";
 import "./rightProfileCard.scss";
-import profilePic from "../../../../Images/investorIcon/profilePic.svg";
 import LoopIcon from "../../../../Images/investorIcon/LoopIcon.svg";
 import { useSelector } from "react-redux";
 
@@ -12,9 +11,16 @@ const RightProfileCard = () => {
       <div className="col-12 view_profile_container">
         <div className="view_profile" style={{ width: "100%" }}>
           <div className="view_profile_name_section mt-2">
-            <img src={profilePic} alt="profileimage" />
+            <img
+              src={loggedInUser.profilePicture}
+              alt="profileimage"
+              width={50}
+              className="rounded-circle"
+            />
             <div className="right_profile_text flex_content">
-              <h2 className="typography">{loggedInUser?.firstName} {loggedInUser?.lastName}</h2>
+              <h2 className="typography">
+                {loggedInUser?.firstName} {loggedInUser?.lastName}
+              </h2>
               <span className="smallest_typo">{loggedInUser?.email}</span>
               <span className="smallest_typo">
                 Founder & CEO of capital Hub

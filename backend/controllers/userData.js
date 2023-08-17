@@ -86,8 +86,11 @@ export const getUserByIdController = async (req, res) => {
 // Update User
 export const updateUser = async (req, res) => {
   try {
-    const { userId, ...newData } = req.body;
-    const { status, message } = await updateUserData({ userId, newData });
-    res.status(status).json({ message });
+    const { userId, body: newData } = req;
+    const { status, message, data } = await updateUserData({
+      userId,
+      newData,
+    });
+    res.status(status).json({ message, data });
   } catch (error) {}
 };

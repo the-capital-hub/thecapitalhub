@@ -11,7 +11,7 @@ import { getAllPostsAPI } from "../../../Service/user";
 
 const Feed = () => {
   const [popupOpen, setPopupOpen] = useState(false);
-  const [allPosts, setAllPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState(null);
   const [newPost, setNewPost] = useState(false);
   const openPopup = () => {
     setPopupOpen(!popupOpen);
@@ -22,7 +22,10 @@ const Feed = () => {
       .then(({ data }) => {
         setAllPosts(data);
       })
-      .catch(() => setAllPosts([]));
+      .catch((err) => {
+        console.log(err);
+        setAllPosts([]);
+      });
   }, [newPost]);
   return (
     <>
@@ -46,7 +49,7 @@ const Feed = () => {
                   </div>
                 </div>
               </div>
-              {allPosts.length ? (
+              {allPosts ? (
                 allPosts.map(
                   ({
                     description,
