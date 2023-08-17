@@ -108,4 +108,23 @@ async function getAllPostsAPI() {
   }
 }
 
-export { getUser, postUser,postStartUpData, postUserLogin, postUserPost, getPdfData,uploadDocument,getAllPostsAPI};
+export const updateUserAPI = async (data) => {
+  try {
+    const response = await axiosInstance.patch(API.updateUser, data);
+    return response;
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error;
+  }
+};
+
+export {
+  getUser,
+  postUser,
+  postStartUpData,
+  postUserLogin,
+  postUserPost,
+  getPdfData,
+  uploadDocument,
+  getAllPostsAPI,
+};

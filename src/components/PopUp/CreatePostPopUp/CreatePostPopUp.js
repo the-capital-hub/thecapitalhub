@@ -55,7 +55,7 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setPosting(true);
-    if (!postText) {
+    if (!postText && !selectedImage && !selectedVideo) {
       return setPosting(false);
     }
     const postData = new FormData();

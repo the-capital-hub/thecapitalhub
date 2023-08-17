@@ -16,6 +16,7 @@ const FeedPostCard = ({
   video,
   image,
   createdAt,
+  profilePicture,
 }) => {
   return (
     <>
@@ -24,7 +25,14 @@ const FeedPostCard = ({
           <div className="box feedpostcard_container mt-2">
             <div className="  feed_header_container">
               <div className="feedpostcard_content">
-                <img src={profilePic} alt="logo" />
+                <img
+                  src={
+                    profilePic
+                    // profilePicture
+                    // || "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
+                  }
+                  alt="logo"
+                />
                 <div className="feedpostcart_text_header my-1">
                   <span
                     style={{ fontSize: "18px", fontWeight: 600, color: "#000" }}
