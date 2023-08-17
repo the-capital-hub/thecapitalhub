@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import CompanyDetailsCard from "../../../components/Investor/InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
 import { useSelector } from "react-redux";
 import MileStoneCard from "../../../components/Investor/InvestorGlobalCards/MilestoneCard/MileStoneCard";
-
+import './Profile.scss'
 function Profile() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   return (
-    <div className="container-fluid investorHome_main_container">
+    <div className="container-fluid profile_main_container">
       <div className="row mt-2">
         <div className="col">
           <div className="row">
@@ -18,7 +18,7 @@ function Profile() {
                 <div className="row">
                   <div className="col-7">
                     <div className="image_name_section mt-2">
-                      <img src={profilePic} alt="profileimage" />
+                      <img src={loggedInUser.profilePicture} alt="profileimage" />
                       <div className="left_profile_text flex_content ms-3">
                         <h2 className="typography">
                           {loggedInUser?.firstName} {loggedInUser?.lastName}

@@ -13,7 +13,7 @@ const RightProfileCard = () => {
       <div className="col-12 view_profile_container">
         <div className="view_profile" style={{ width: "100%" }}>
           <div className="view_profile_name_section mt-2">
-            <img src={profilePic} alt="profileimage" />
+            <img src={loggedInUser.profilePicture} width={100} className="rounded-circle" alt="profileimage" />
             <div className="right_profile_text flex_content">
               <h2 className="typography">{loggedInUser?.firstName} {loggedInUser?.lastName}</h2>
               <span className="smallest_typo">{loggedInUser?.email}</span>

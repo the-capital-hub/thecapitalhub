@@ -3,7 +3,10 @@ import { secretKey } from "../constants/config";
 import { UserModel } from "../models/User";
 
 export const authenticateToken = async (req, res, next) => {
-  const token = req.headers.authorization.replace("Bearer ", "");
+  const token = req.headers?.authorization?.replace("Bearer ", "");
+  if (!token) {
+    throw new Error("Unauthorized user");
+  }
   try {
     // Verify the token synchronously and get the user details
     const { userId } = jwt.verify(token, secretKey);
