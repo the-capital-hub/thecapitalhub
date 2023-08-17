@@ -1,4 +1,18 @@
-.container-fluid{
-    margin: 0;
-    padding: 0;
+.container-fluid {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --scrollbarBG: #eee;
+  --thumbBG: #7e7e7e;
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
 }
