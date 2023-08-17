@@ -3,8 +3,8 @@ import { Schema, model } from "mongoose";
 const folderSchema = new Schema(
   {
     userId: {
-      type: String,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "Users",
     },
     folderName: {
       type: String,

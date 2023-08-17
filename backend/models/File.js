@@ -6,16 +6,16 @@ const fileSchema = new Schema(
     // mimetype: { type: String, required: true },
     // size: { type: Number, required: true },
     userId: {
-      type: String,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "Users",
     },
     fileName: {
       type: String,
       required: true,
     },
     folderId: {
-      type: String,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "Folders",
     },
     fileUrl: {
       type: String,
