@@ -12,7 +12,7 @@ import lnIcon from "../../../Images/investorView/ln.svg";
 import feedbackIcon from "../../../Images/investorIcon/profilePic.svg";
 
 import { useSelector } from "react-redux";
-import "./company.scss";
+import "./Company.scss";
 import CardComponent from "./CardComponent/CardComponent";
 import FeedbackCard from "./FeedbackCard/FeedbackCard";
 import FundingTeamCard from "./FundingTeamCard/FundingTeamCard";
