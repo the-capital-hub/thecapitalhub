@@ -3,7 +3,7 @@ import "./CompanyDetails.scss";
 
 const CompanyDetails = () => {
   return (
-    <div className="companyDetails">
+    <div className="companyDetailsContainer">
       <div className="pfp">
         <img src={camera} alt="" />
         <p>Upload Company Logo</p>

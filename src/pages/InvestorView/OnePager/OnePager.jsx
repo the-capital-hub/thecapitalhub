@@ -1,6 +1,11 @@
 import { useState } from "react";
 import "./OnePager.scss";
-import { CompanyDetails } from "../../../components/InvestorView";
+import {
+  Card,
+  CompanyDetails,
+  MarketCard,
+  SimpleCard,
+} from "../../../components/InvestorView";
 
 const OnePager = () => {
   const [rupeeHighlight, setRupeeHighlight] = useState(true);
@@ -36,6 +41,34 @@ const OnePager = () => {
 
       <div className="companyDetails">
         <CompanyDetails />
+      </div>
+
+      <hr />
+
+      <div className="cards">
+        <SimpleCard
+          title={"Problem"}
+          text={"Enter the problem statement your startup is addressing"}
+        />
+        <SimpleCard
+          title={"Solution"}
+          text={"Enter the solution your startup is offering"}
+        />
+        <SimpleCard
+          title={"Competitive Landscape"}
+          text={"Mention your competitors"}
+        />
+      </div>
+
+      <hr />
+
+      <div className="marketCards">
+        <h4>Market (in crores)</h4>
+        <div className="cards">
+          <MarketCard title={"TAM"} subtitle={"(Total Advisable Market)"} />
+          <MarketCard title={"SAM"} subtitle={"(Service Advisable Market)"} />
+          <MarketCard title={"SAM"} subtitle={"(Service Advisable Market)"} />
+        </div>
       </div>
     </div>
   );
