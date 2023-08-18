@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import CompanyDetailsCard from "../../../components/Investor/InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
 import { useSelector } from "react-redux";
 import MileStoneCard from "../../../components/Investor/InvestorGlobalCards/MilestoneCard/MileStoneCard";
-import './Profile.scss'
+import "./Profile.scss";
 import { useParams } from "react-router-dom";
 import { getUserById } from "../../../Service/user";
 import { useState, useEffect } from "react";
@@ -226,7 +226,7 @@ function Profile() {
               </div>
             </div>
           </div>
-          <CompanyDetailsCard user={user}/>
+          <CompanyDetailsCard user={user} />
         </div>
       </div>
     </div>
