@@ -60,28 +60,28 @@ const Fundraising = () => {
             <h1 style={{ color: "#FD5901" }}>Explore</h1>
             <h1>Our Popular Services</h1>
 
-            <section class="card-section">
-              <div class="card">
+            <section class="card-section row">
+              <div class="card col-lg-4 col-md-6 col-sm-12">
                 <img src={bulbIcon} alt="text" />
                 <p>Have a great idea</p>
               </div>
-              <div class="card">
+              <div class="card col-lg-4 col-md-6 col-sm-12">
                 <img src={mvpIcon} alt="text" />
                 <p>MVP (Minimal Viable Product)</p>
               </div>
-              <div class="card">
+              <div class="card col-lg-4 col-md-6 col-sm-12">
                 <img src={flyingIcon} alt="text" />
                 <p>Have initial traction</p>
               </div>
-              <div class="card">
+              <div class="card col-lg-4 col-md-6 col-sm-12">
                 <img src={handshakeIcon} alt="text" />
                 <p>Build an elegant pitch deck</p>
               </div>
-              <div class="card">
+              <div class="card col-lg-4 col-md-6 col-sm-12">
                 <img src={investorlistIcon} alt="text" />
                 <p>Create a investor list</p>
               </div>
-              <div class="card">
+              <div class="card col-lg-4 col-md-6 col-sm-12">
                 <img src={emailIcon} alt="text" />
                 <p>Approach by cold emails and LinkedIn</p>
               </div>

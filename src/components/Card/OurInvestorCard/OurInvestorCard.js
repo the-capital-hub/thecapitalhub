@@ -17,7 +17,7 @@ const OurInvestorCard = () => {
     <>
       <div className="our_investor_container">
         <div className="our_investor row justify-content-around align-items-center my-4">
-          <div className="col-md-4 b our_investor_card mb-69">
+          <div className="col-md-6 col-lg-4 col-sm-12 b our_investor_card mb-69">
             <div className="row d-flex justify-content-center align-item-center inside_card">
               <img src={RightFit} alt="img" />
               <h3 className="underline_one">Right Fit</h3>
@@ -27,7 +27,7 @@ const OurInvestorCard = () => {
               </h4>
             </div>
           </div>
-          <div className="col-md-4 b our_investor_card mb-69">
+          <div className="col-md-6 col-lg-4 col-sm-12 b our_investor_card mb-69">
             <div className="row d-flex justify-content-center align-item-center inside_card">
               <img src={VerifiedStartups} alt="img" />
               <h3 className="underline_two">Verified Startups</h3>
@@ -37,7 +37,7 @@ const OurInvestorCard = () => {
               </h4>
             </div>
           </div>
-          <div className="col-md-4 b our_investor_card mb-69">
+          <div className="col-md-6 col-lg-4 col-sm-12 b our_investor_card mb-69">
             <div className="row d-flex justify-content-center align-item-center inside_card">
               <img src={ComplianceDiligence} alt="img" />
               <h3 className="underline_three">Compliance and due diligence</h3>
@@ -48,7 +48,7 @@ const OurInvestorCard = () => {
               </h4>
             </div>
           </div>
-          <div className="col-md-4 b our_investor_card mb-69">
+          <div className="col-md-6 col-lg-4 col-sm-12 b our_investor_card mb-69">
             <div className="row d-flex justify-content-center align-item-center inside_card">
               <img src={CompleteDocumentation} alt="img" />
               <h3 className="underline_four">Complete documentation</h3>
@@ -59,7 +59,7 @@ const OurInvestorCard = () => {
               </h4>
             </div>
           </div>
-          <div className="col-md-4 b our_investor_card mb-69">
+          <div className="col-md-6 col-lg-4 col-sm-12 b our_investor_card mb-69">
             <div className="row d-flex justify-content-center align-item-center inside_card">
               <img src={Support} alt="img" />
               <h3 className="underline_five">24/7 Support</h3>
@@ -70,7 +70,7 @@ const OurInvestorCard = () => {
               </h4>
             </div>
           </div>
-          <div className="col-md-4 b our_investor_card mb-69">
+          <div className="col-md-6 col-lg-4 col-sm-12 b our_investor_card mb-69">
             <div className="row d-flex justify-content-center align-item-center inside_card">
               <img src={Convenience} alt="img" />
               <h3 className="underline_six"> Convenience</h3>
@@ -79,7 +79,7 @@ const OurInvestorCard = () => {
               </h4>
             </div>
           </div>
-          <div className="col-md-4 b our_investor_card mb-69">
+          <div className="col-md-6 col-lg-4 col-sm-12 b our_investor_card mb-69">
             <div className="row d-flex justify-content-center align-item-center inside_card">
               <img src={Regularupdates} alt="img" />
               <h3 className="underline_seven">Regular updates</h3>
@@ -90,7 +90,7 @@ const OurInvestorCard = () => {
               </h4>
             </div>
           </div>
-          <div className="col-md-4 b our_investor_card mb-69">
+          <div className="col-md-6 col-lg-4 col-sm-12 b our_investor_card mb-69">
             <div className="row d-flex justify-content-center align-item-center inside_card">
               <img src={TrustFaith} alt="img" />
               <h3 className="underline_eight">Trust and Faith</h3>
@@ -102,7 +102,7 @@ const OurInvestorCard = () => {
               </h4>
             </div>
           </div>
-          <div className="col-md-4 b our_investor_card mb-69">
+          <div className="col-md-6 col-lg-4 col-sm-12 b our_investor_card mb-69">
             <div className="row d-flex justify-content-center align-item-center inside_card">
               <img src={BestOfferings} alt="img" />
               <h3 className="underline_nine">Best Offerings</h3>
