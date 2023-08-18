@@ -135,4 +135,4 @@ export const getStartupByFounderIdController = async (req, res) => {
       message: "An error occurred while getting company.",
     });
   }
-}
+};

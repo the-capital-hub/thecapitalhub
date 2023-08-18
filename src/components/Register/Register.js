@@ -73,7 +73,7 @@ const Register = () => {
     try {
       const response = await postUser(inputValues);
       console.log("User data posted successfully:", response);
-      localStorage.setItem("user_data", JSON.stringify(response));
+      localStorage.setItem("user_data", JSON.stringify(response.data));
 
       // setIsSubmitted(true);
       if (response) {
@@ -82,7 +82,7 @@ const Register = () => {
     } catch (error) {
       console.error("Error posting user data:", error.response.data.message);
       setErrorMessage(error.response.data.message);
-      setShowErrorPopup(true)
+      setShowErrorPopup(true);
 
       setTimeout(() => {
         setShowErrorPopup(false);
@@ -146,8 +146,7 @@ const Register = () => {
 
         if (result) {
           // Set the user's login status in local storage or Redux store
-          console.log(result);
-          // localStorage.setItem("isLoggedIn", "true");
+          setShowSelectWhatYouAre(true);
           setIsMobileVerified(true);
           navigate("/signup");
           setshow(false);
@@ -282,6 +281,7 @@ const Register = () => {
                   <button
                     className="btn btn-secondary"
                     onClick={() => handleVerifyMobile(inputValues.phoneNumber)}
+                    style={{ zIndex: 0 }}
                   >
                     Verify
                   </button>
@@ -416,7 +416,6 @@ const Register = () => {
           </div>
         )}
         {showStartUp && <StartUpForm />}
-        {/* {!showStartUp && <StartUpForm />} */}
         {showInvestor && <InvestorForm />}
         {showSelectWhatYouAre && (
           <SelectWhatYouAre

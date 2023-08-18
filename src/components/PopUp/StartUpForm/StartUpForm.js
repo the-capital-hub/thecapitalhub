@@ -39,15 +39,16 @@ const StartUpForm = ({ onStartupClick }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await postStartUpData(formData);
+      const { _id } = JSON.parse(localStorage.getItem("user_data"));
+      const response = await postStartUpData({ ...formData, founderId: _id });
       console.log("Startup data posted successfully:", response);
-      localStorage.setItem("user_data", response);
 
       // Call onStartupClick or other logic here with formData
       if (response) {
         // Additional logic
         setIsSubmitted(true);
       }
+      localStorage.removeItem("user_data");
     } catch (error) {
       console.error("Error posting user data:", error);
     }
@@ -55,7 +56,7 @@ const StartUpForm = ({ onStartupClick }) => {
   useEffect(() => {
     let userDataFromLocalStorage = localStorage.getItem("user_data");
     if (userDataFromLocalStorage) {
-      setUserData(JSON.parse(userDataFromLocalStorage).data);
+      setUserData(JSON.parse(userDataFromLocalStorage));
     }
   }, []);
 

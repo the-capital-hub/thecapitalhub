@@ -34,7 +34,7 @@ const OneLink = () => {
           <div className="content-70">
             <div className="row">
               <div className="col-12 mt-2">
-                <ShareLink OneLink={company?.oneLink}/>
+                <ShareLink OneLink={company?.oneLink} />
               </div>
             </div>
 
@@ -47,9 +47,7 @@ const OneLink = () => {
                     folder: FolderImage,
                     video: VideoImage,
                   }}
-                  para={
-                  company.introductoryMessage 
-                  }
+                  para={company.introductoryMessage}
                   input={true}
                 />
               </div>
@@ -67,7 +65,7 @@ const OneLink = () => {
         </div>
         <div className="row">
           <div className="col-12 mt-2">
-            <OnePagePreview show={true}/>
+            <OnePagePreview show={true} />
           </div>
         </div>
       </div>
