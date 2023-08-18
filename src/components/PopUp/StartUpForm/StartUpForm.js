@@ -39,15 +39,16 @@ const StartUpForm = ({ onStartupClick }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await postStartUpData(formData);
+      const { _id } = JSON.parse(localStorage.getItem("user_data"));
+      const response = await postStartUpData({ ...formData, founderId: _id });
       console.log("Startup data posted successfully:", response);
-      localStorage.setItem("user_data", response);
 
       // Call onStartupClick or other logic here with formData
       if (response) {
         // Additional logic
         setIsSubmitted(true);
       }
+      localStorage.removeItem("user_data");
     } catch (error) {
       console.error("Error posting user data:", error);
     }
@@ -55,7 +56,7 @@ const StartUpForm = ({ onStartupClick }) => {
   useEffect(() => {
     let userDataFromLocalStorage = localStorage.getItem("user_data");
     if (userDataFromLocalStorage) {
-      setUserData(JSON.parse(userDataFromLocalStorage).data);
+      setUserData(JSON.parse(userDataFromLocalStorage));
     }
   }, []);
 
@@ -72,12 +73,12 @@ const StartUpForm = ({ onStartupClick }) => {
 
   return (
     <>
-      <div className="startup_form_container">
+      <div className="startup_form_container_register">
         <div className="popup-container">
           <div className="popup">
             <div className="back_and_home">
               <a href="/signup" onClick={handleBack}>
-                <img src="back" alt="back" />
+                <span>← Back</span>
               </a>
               <a href="/signup">Home</a>
             </div>
@@ -124,7 +125,7 @@ const StartUpForm = ({ onStartupClick }) => {
                       value={formData.gender}
                       onChange={handleInputChange}
                     >
-                      <option value="">Select</option>
+                      <option value="">Select a gender</option>
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                       {/* Add more options as needed */}
@@ -150,9 +151,9 @@ const StartUpForm = ({ onStartupClick }) => {
                       value={formData.sector}
                       onChange={handleInputChange}
                     >
-                      <option value="">Select</option>
-                      <option value="option1">Option 1</option>
-                      <option value="option2">Option 2</option>
+                      <option value="">Choose a sector</option>
+                      <option value="option1">Sector 1</option>
+                      <option value="option2">Sector 2</option>
                       {/* Add more options as needed */}
                     </select>
                   </div>
@@ -213,10 +214,8 @@ const StartUpForm = ({ onStartupClick }) => {
                   </div>
                 </div>
 
-                <div className="input_half row mt-2">
-                  <div className="col-12">
-                    <button type="submit">Submit</button>
-                  </div>
+                <div className="input_half mt-2 w-100 d-flex justify-content-end">
+                  <button type="submit">Confirm</button>
                 </div>
               </form>
             </div>

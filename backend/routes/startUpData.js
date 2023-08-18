@@ -6,6 +6,8 @@ import {
   editStartUpOneLink,
   getOnePagerController,
   startUpData,
+  investNowController,
+  getStartupByFounderIdController,
 } from "../controllers/startUpController.js";
 const router = express.Router();
 
@@ -19,9 +21,11 @@ router.post("/createStartup", createStartUpController);
 router.patch("/onelink", editStartUpOneLink);
 router.patch("/introMessage", editStartUpIntroMessage);
 router.put("/onePager", editOnePager);
-
+router.get("/getStartupByFounderId/:founderId", getStartupByFounderIdController);
 // Phase 2
 // OneLink Page Data
-router.get("/getOnePager", getOnePagerController);
+router.get("/getOnePager/:oneLink", getOnePagerController);
+
+router.post("/investNow", investNowController);
 
 export default router;

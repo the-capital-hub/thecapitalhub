@@ -100,6 +100,16 @@ const startUpSchema = new Schema(
       email: String,
     },
     portfolio: String,
+    investorProposals: {
+      type: Array,
+      default: [
+        {
+          name: String,
+          email: String,
+          phone: String,
+        },
+      ],
+    },
   },
   {
     timestamps: true,

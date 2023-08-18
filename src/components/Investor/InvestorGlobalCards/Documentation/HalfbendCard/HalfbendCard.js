@@ -4,25 +4,28 @@ import ThreeDot from "../../../../../Images/VerticalBlackThreeDots.svg";
 // import folderIcon from "../../../../../Images/Folder.png";
 import pdfIcon from "../../../../../Images/PDFIcon.png";
 import { getPdfData } from "../../../../../Service/user";
+import { useSelector } from "react-redux";
 
 const HalfbendCard = () => {
   const [data, setData] = useState([]);
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const folderId = "64dc89095df364b443f04a20";
 
   useEffect(() => {
-    getPdfData().then((res) => {
-      setData(res.files);
-      console.log("data", res);
+    getPdfData(loggedInUser._id, folderId).then((res) => {
+      setData(res.data);
+      // console.log("data", res);
     });
   }, []);
 
-  const openPdfInNewWindow = (pdfData) => {
-    // Convert the binary data to a Blob
-    const pdfBlob = new Blob([pdfData], { type: "application/pdf" });
+  const openPdfInNewWindow = (pdfUrl) => {
+    // // Convert the binary data to a Blob
+    // const pdfBlob = new Blob([pdfData], { type: "application/pdf" });
 
-    // Create a URL for the Blob
-    const pdfUrl = URL.createObjectURL(pdfBlob);
+    // // Create a URL for the Blob
+    // const pdfUrl = URL.createObjectURL(pdfBlob);
 
-    // Open the PDF in a new window
+    // // Open the PDF in a new window
     const newWindow = window.open("", "_blank");
     newWindow.document.write(
       '<iframe width="100%" height="100%" src="' + pdfUrl + '"></iframe>'
@@ -141,8 +144,8 @@ const HalfbendCard = () => {
           {data.map((item) => (
             <div
               className="col-md-4 d-flex justify-content-center align-items-center main_col"
-              key={item.name}
-              onClick={() => openPdfInNewWindow(item.data)}
+              key={item.fileName}
+              onClick={() => openPdfInNewWindow(item.fileUrl)}
             >
               <div className="custom-card">
                 <img
@@ -152,7 +155,7 @@ const HalfbendCard = () => {
                   alt="PDF Icon"
                 />
               </div>
-              <h6>{item.name}</h6>
+              <h6>{item.fileName}</h6>
             </div>
           ))}
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import "./meetourteam.scss";
-import EmailIcon from "../../../../Images/investorIcon/Message.svg";
+import EmailIcon from "../../../../Images/investorIcon/message.svg";
 import LinkedInIcon from "../../../../Images/service/linkedin.svg";
 import UpmaImage from "../../../../Images/service/Upma.jpeg";
 import PreetiImage from "../../../../Images/service/preeti.jpeg";
@@ -9,8 +9,8 @@ import RaghuImage from "../../../../Images/service/raghu.jpeg";
 const MeetOurTeam = () => {
   return (
     <>
-      <div class="meetourteam_container">
-        <div class="card">
+      <div class="meetourteam_container ">
+        <div class="card col-lg-4 col-md-6 col-sm-12">
           <img src={UpmaImage} alt="image" />
 
           <div class="info">
@@ -27,7 +27,7 @@ const MeetOurTeam = () => {
             </p>
           </div>
         </div>
-        <div class="card">
+        <div class="card col-lg-4 col-md-6 col-sm-12">
           <img src={PreetiImage} alt="image" />
 
           <div class="info">
@@ -44,7 +44,7 @@ const MeetOurTeam = () => {
             </p>
           </div>
         </div>
-        <div class="card">
+        <div class="card col-lg-4 col-md-6 col-sm-12">
           <img src={RaghuImage} alt="image" />
           <div class="info">
             <div className="social_icon_list">

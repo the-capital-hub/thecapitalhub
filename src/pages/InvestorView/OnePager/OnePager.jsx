@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./OnePager.scss";
 import {
   Card,
@@ -14,11 +14,22 @@ import OnePagePreview from "../../../components/Investor/OneLink/OnePagePreview/
 import Table from "../../../components/Investor/OneLink/Table/Table";
 import TeamsCard from "../../../components/InvestorView/TeamsCard/TeamsCard";
 import InvestNow from "../InvestNow/InvestNow";
+import { useParams } from "react-router-dom";
+import { getOnePager } from "../../../Service/user";
 
 const OnePager = () => {
   const [rupeeHighlight, setRupeeHighlight] = useState(true);
   const [dollarHighlight, setDollarHighlight] = useState(false);
+  const { username } = useParams();
+  const [onePager, setOnePager] = useState([]);
 
+  useEffect(() => {
+    getOnePager(username)
+      .then(({ data }) => {
+        setOnePager(data);
+      })
+      .catch(() => setOnePager([]));
+  }, [username]);
   const changeHighlight = (currency) => {
     if (currency === "rupee") {
       setDollarHighlight(false);
@@ -32,6 +43,7 @@ const OnePager = () => {
 
   return (
     <div className="onePager">
+      <h1>One Pager</h1>
       <div className="currency">
         <span
           className={rupeeHighlight && "highlighted"}
@@ -48,23 +60,21 @@ const OnePager = () => {
       </div>
 
       <div className="companyDetails">
-        <CompanyDetails />
+        <CompanyDetails
+          companyName={onePager.company}
+          description={onePager.description}
+          image={onePager.companyProfile}
+        />
       </div>
 
       <hr />
 
       <div className="cards">
-        <SimpleCard
-          title={"Problem"}
-          text={"Enter the problem statement your startup is addressing"}
-        />
-        <SimpleCard
-          title={"Solution"}
-          text={"Enter the solution your startup is offering"}
-        />
+        <SimpleCard title={"Problem"} text={onePager.problem} />
+        <SimpleCard title={"Solution"} text={onePager.solution} />
         <SimpleCard
           title={"Competitive Landscape"}
-          text={"Mention your competitors"}
+          text={onePager.competitiveLandscape}
         />
       </div>
 
@@ -73,9 +83,21 @@ const OnePager = () => {
       <div className="marketCards">
         <Title title="Market (in cr)" />
         <div className="cards">
-          <MarketCard title={"TAM"} subtitle={"(Total Advisable Market)"} />
-          <MarketCard title={"SAM"} subtitle={"(Service Advisable Market)"} />
-          <MarketCard title={"SAM"} subtitle={"(Service Advisable Market)"} />
+          <MarketCard
+            title={"TAM"}
+            subtitle={"(Total Advisable Market)"}
+            amount={onePager.TAM}
+          />
+          <MarketCard
+            title={"SAM"}
+            subtitle={"(Service Advisable Market)"}
+            amount={onePager.SAM}
+          />
+          <MarketCard
+            title={"SAM"}
+            subtitle={"(Service Advisable Market)"}
+            amount={onePager.SOM}
+          />
         </div>
       </div>
 
@@ -87,9 +109,9 @@ const OnePager = () => {
       <div className="team">
         <Title title={"Team"} />
         <div className="cards">
-          <TeamsCard />
-          <TeamsCard />
-          <TeamsCard />
+          {onePager?.team?.map((team, index) => (
+            <TeamsCard name={team.name} designation={team.designation} />
+          ))}
         </div>
       </div>
 
@@ -97,7 +119,7 @@ const OnePager = () => {
         <div className="left">
           <Title title={"Funding ask (in Lakhs)"} />
           <div className="box">
-            <h1>Enter Funding Amount</h1>
+            <h1>{onePager.fundingAsk || `Enter Funding Amount`}</h1>
             <hr />
             <ImagePlaceholder
               text={

@@ -15,20 +15,20 @@ import SbiLogo from '../../../../Images/service/sbi_logo.jpeg'
 const CoInvestorCard = () => {
   return (
     <>
-      <div class="coinvestor-container">
-        <div class="card">
+      <div class="coinvestor-container ">
+        <div class="card col-lg-4 col-md-6 col-sm-12">
           <img src={RegisterKaroLogo} alt="image" />
           <h3>RegisterKaro</h3>
         </div>
-        <div class="card">
+        <div class="card col-lg-4 col-md-6 col-sm-12">
           <img src={AlienLogo} alt="image" />
           <h3>Alien Marketing</h3>
         </div>
-        <div class="card">
+        <div class="card col-lg-4 col-md-6 col-sm-12">
           <img src={AdvocateLogo} alt="image" />
           <h3>Legal Vakil</h3>
         </div>
-        <div class="card">
+        <div class="card col-lg-4 col-md-6 col-sm-12">
           <img src={SbiLogo} alt="image" />
           <h3>State Bank Of India</h3>
         </div>

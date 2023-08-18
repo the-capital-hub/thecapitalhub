@@ -3,6 +3,8 @@ import {
   getOnePager,
   updateOnePager,
   updateStartUpData,
+  investNowService,
+  getStartupByFounderId,
 } from "../services/startUpService.js";
 import { getStartUpData } from "../services/userService.js";
 
@@ -22,7 +24,7 @@ export const createStartUpController = async (req, res) => {
 
 // Phase 2
 export const getOnePagerController = async (req, res) => {
-  const { oneLink } = req.body;
+  const { oneLink } = req.params;
   try {
     const response = await getOnePager(oneLink);
     res.status(response.status).send(response);
@@ -96,6 +98,41 @@ export const editOnePager = async (req, res) => {
     res.status(500).send({
       error: true,
       message: "An error occured while changing One Pager Data",
+    });
+  }
+};
+
+export const investNowController = async (req, res) => {
+  try {
+    const { fromUserName, fromUserEmail, fromUserMobile, toUserId } = req.body;
+
+    const response = await investNowService({
+      fromUserName,
+      fromUserEmail,
+      fromUserMobile,
+      toUserId,
+    });
+
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error("Error sending investment proposal:", error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while sending the investment proposal.",
+    });
+  }
+};
+
+export const getStartupByFounderIdController = async (req, res) => {
+  const { founderId } = req.params;
+  try {
+    const response = await getStartupByFounderId(founderId);
+    res.status(response.status).send(response);
+  } catch (err) {
+    console.error("Error getting company:", err);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting company.",
     });
   }
 };

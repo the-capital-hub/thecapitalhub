@@ -12,6 +12,7 @@
   "author": "TheCapitalHub.in",
   "license": "ISC",
   "dependencies": {
+    "@emailjs/nodejs": "^2.2.0",
     "aws-sdk": "^2.1411.0",
     "bcrypt": "^5.1.0",
     "cloudinary": "^1.40.0",

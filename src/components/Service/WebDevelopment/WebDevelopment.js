@@ -62,23 +62,23 @@ const WebDevelopment = () => {
             <h1>Development services offered</h1>
 
             <section class="card-section row">
-              <div class="card col-md-12">
+              <div class="card col-md-6 col-sm-12">
                 <img src={inovationTechIcon} alt="text" />
                 <p> Innovation/ Tech-consultants</p>
               </div>
-              <div class="card col-md-12">
+              <div class="card col-md-6 col-sm-12">
                 <img src={devlopmentIcon} alt="text" />
                 <p>Website development services</p>
               </div>
-              <div class="card col-md-12">
+              <div class="card col-md-6 col-sm-12">
                 <img src={applicationIcon} alt="text" />
                 <p> Android application development</p>
               </div>
-              <div class="card col-md-12">
+              <div class="card col-md-6 col-sm-12">
                 <img src={isoIcon} alt="text" />
                 <p> iOS development services</p>
               </div>
-              <div class="card col-md-12">
+              <div class="card col-md-6 col-sm-12">
                 <img src={prototypingIcon} alt="text" />
                 <p> Rapid prototyping model for startups</p>
               </div>

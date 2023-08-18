@@ -38,9 +38,13 @@ async function getUser() {
   }
 }
 
-async function getPdfData() {
+async function getPdfData(userId, folderId) {
   try {
-    const response = await axiosInstance.get(API.getDocument);
+    const requestBody = {
+      userId,
+      folderId,
+    }
+    const response = await axiosInstance.post(API.getDocument, requestBody);
     return response.data;
   } catch (error) {
     console.error("Error:", error);
@@ -108,6 +112,29 @@ async function getAllPostsAPI() {
   }
 }
 
+async function getOnePager(oneLink) {
+  try {
+    const response = await axiosInstance.get(API.getOnePager+"/"+oneLink);
+    console.log("Response",response);
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+}
+
+async function getUserById(oneLink) {
+  try {
+    const onePager = await getOnePager(oneLink)
+    const response = await axiosInstance.get(API.getUserById+"/"+onePager.data.founderId);
+    console.log("Response",response);
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+}
+
 export const updateUserAPI = async (data) => {
   try {
     const response = await axiosInstance.patch(API.updateUser, data);
@@ -118,6 +145,17 @@ export const updateUserAPI = async (data) => {
   }
 };
 
+const getStartupByFounderId = async (founderId) => {
+  try {
+    const response = await axiosInstance.get(API.getStartupByFounderId+"/"+founderId);
+    console.log("Response",response);
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+}
+
 export {
   getUser,
   postUser,
@@ -127,4 +165,7 @@ export {
   getPdfData,
   uploadDocument,
   getAllPostsAPI,
+  getOnePager, 
+  getUserById,
+  getStartupByFounderId
 };

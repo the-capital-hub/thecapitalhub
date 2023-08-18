@@ -8,9 +8,12 @@ const API = Object.freeze({
   loginUser: `${baseUrl}/users/login`,
   postUserPost: `${baseUrl}/api/posts/newPost`,
   uploadDocument: `${baseUrl}/upload`,
-  getDocument: `${baseUrl}/documentation/getDocument`,
+  getDocument: `${baseUrl}/documentation/getDocumentsByUser`,
   getAllPosts: `${baseUrl}/api/posts/getposts`,
   updateUser: `${baseUrl}/users/updateFounder`,
+  getOnePager: `${baseUrl}/startUp/getOnePager`,
+  getUserById: `${baseUrl}/users/getUserById`,
+  getStartupByFounderId: `${baseUrl}/startup/getStartupByFounderId`
 });
 
 export default API;
