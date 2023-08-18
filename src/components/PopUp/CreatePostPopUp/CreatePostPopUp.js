@@ -13,6 +13,7 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const [postText, setPostText] = useState(""); // Store the textarea data
+  const [category, setCategory] = useState("");
   const [selectedImage, setSelectedImage] = useState(null); // Store the selected image data
   const [selectedVideo, setSelectedVideo] = useState(null); // Store the selected video data
   const [selectedDocument, setSelectedDocument] = useState(null); // Store the selected document data
@@ -55,12 +56,12 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setPosting(true);
-    if (!postText && !selectedImage && !selectedVideo) {
+    if ((!postText && !selectedImage && !selectedVideo) || !category) {
       return setPosting(false);
     }
     const postData = new FormData();
     postData.append("description", postText);
-    // postData.append("description", postText); one for category is also required
+    postData.append("category", category);
 
     // Append the image, video, and document files if they are selected
     if (selectedImage) {
@@ -135,6 +136,18 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
             <div className="modal-body">
               <div className="createpost_text_area">
                 <textarea value={postText} onChange={handleTextareaChange} />
+                <select
+                  name="category"
+                  className="w-100 my-2 p-1"
+                  onChange={({ target: { value } }) => setCategory(value)}
+                >
+                  <option value="">Choose a topic</option>
+                  <option value="startup">Startup</option>
+                  <option value="investor">Investor</option>
+                  <option value="learning">Learnings</option>
+                  <option value="fund">Fund</option>
+                  <option value="other">Others</option>
+                </select>
               </div>
             </div>
             <div className="createpost_modal_footer">

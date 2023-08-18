@@ -27,6 +27,15 @@ const Feed = () => {
         setAllPosts([]);
       });
   }, [newPost]);
+
+  const savePostHandler = async (postId) => {
+    try {
+      // api call for savin a post
+    } catch (error) {
+      
+    }
+  }
+
   return (
     <>
       <div className="container-fluid feed_container">

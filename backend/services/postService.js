@@ -56,6 +56,12 @@ export const singlePostData = async (_id) => {
 
 export const savePostService = async (user, _id) => {
   try {
+    const savedAlready = await UserModel.find({ _id: user, savedPosts: _id });
+    if (savedAlready) {
+      return {
+        message: "Already saved post",
+      };
+    }
     const updatedUser = await UserModel.findOneAndUpdate(
       { _id: user },
       { $push: { savedPosts: _id } },
