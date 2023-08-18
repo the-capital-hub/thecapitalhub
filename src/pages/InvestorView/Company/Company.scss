@@ -146,7 +146,7 @@
         justify-content: flex-start;
         .social_icons {
           margin-left: 10px;
-          width: 12%;
+          width: 150px;
           padding: 10px 20px;
           border-radius: 20px;
           background: rgba(206, 206, 206, 0.46);
@@ -233,12 +233,16 @@
       }
       .focus_things {
         display: flex;
+        flex-wrap: wrap;
         justify-content: flex-start;
         .focusItem {
           display: flex;
           justify-content: center;
           margin-left: 10px;
-          width: 20%;
+          width: 130px;
+          align-items: center;
+          text-align: center;
+          margin: 10px;
           padding: 10px 20px;
           border-radius: 20px;
           background: rgba(206, 206, 206, 0.46);
@@ -255,11 +259,25 @@
     padding: 0;
   }
   .company_main_container {
-    .mobile_display{
+    .mobile_display {
       display: flex;
     }
-    .mobile_display_none{
+    .mobile_display_none {
       display: none !important;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .company_main_container {
+    .image_name_section {
+      flex-direction: column;
+      text-align: center;
+    }
+    .box {
+      .public_link_section {
+        overflow-x: scroll;
+      }
     }
   }
 }

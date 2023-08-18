@@ -57,7 +57,6 @@
 
 // export default NavBar;
 
-
 import React from "react";
 import "./NavBar.scss";
 import Bar from "../../../Images/investorIcon/Bar.svg";
@@ -85,7 +84,7 @@ const NavBar = (props) => {
                 onClick={props.handleSidebarToggle}
               >
                 <img src={HambergerIcon} alt="bar" />
-                <h1>Home</h1>
+                {/* <h1>Home</h1> */}
               </div>
             </div>
           </div>

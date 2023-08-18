@@ -1,51 +1,62 @@
 .investNow {
     display: flex;
-    // position: absolute;
-    // top: 0;
-    // bottom: 0;
-    // left: 0;
-    // right: 0;
-    // margin: auto;
-    // height: 50%;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
     justify-content: center;
-    background-color: white;
-    width: 500px;
-    margin-left: 300px;
-    margin-top: 100px;
-    padding: 50px;
-    border-radius: 25px;
-    .inputs {
+    align-items: center;
+    height: 90vh;
+    width: 100%;
+    .investNowContainer {
         display: flex;
+        // position: absolute;
+        // top: 0;
+        // bottom: 0;
+        // left: 0;
+        // right: 0;
+        // margin: auto;
+        // height: 50%;
         flex-direction: column;
         gap: 20px;
         align-items: center;
         justify-content: center;
-        button {
-            font-size: 13px;
-            padding: 10px 50px;
-            outline: none;
-            border-radius: 10px;
-            background: #d3f36b;
-            border: none;
+        background-color: white;
+        width: 500px;
+        // margin-left: 300px;
+        // margin-top: 100px;
+        padding: 50px;
+        border-radius: 25px;
+        .inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            button {
+                font-size: 13px;
+                padding: 10px 50px;
+                outline: none;
+                border-radius: 10px;
+                background: #d3f36b;
+                border: none;
+            }
         }
     }
 }
 
 @media (max-width: 1024px) {
     .investNow {
-        margin-left: 100px;
+        .investNowContainer {
+            margin-left: 100px;
+        }
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 820px) {
     .investNow {
-        margin-left: 0px;
-        width: 320px;
-        .inputs {
-            width: 200px;
+        .investNowContainer {
+            margin-left: 0px;
+            width: 320px;
+            .inputs {
+                width: 200px;
+            }
         }
     }
 }
