@@ -16,9 +16,20 @@ import "./Company.scss";
 import CardComponent from "./CardComponent/CardComponent";
 import FeedbackCard from "./FeedbackCard/FeedbackCard";
 import FundingTeamCard from "./FundingTeamCard/FundingTeamCard";
-function Company() {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+import { useParams } from "react-router-dom";
+import { getOnePager } from "../../../Service/user";
+import { useState, useEffect } from "react";
 
+function Company() {
+  const { username } = useParams();
+  const [onePager, setOnePager] = useState([]);
+  useEffect(() => {
+    getOnePager(username)
+      .then(({ data }) => {
+        setOnePager(data);
+      })
+      .catch(() => setOnePager([]));
+  }, [username]);
   return (
     <div className="container-fluid company_main_container">
       <div className="row mt-2">
@@ -29,15 +40,14 @@ function Company() {
                 <div className="row">
                   <div className="col-lg-7 col-md-12">
                     <div className="image_name_section mt-2">
-                      <img src={profilePic} alt="profileimage" />
+                      <img src={onePager.profile || profilePic} alt="profileimage" />
                       <div className="left_profile_text flex_content ms-3">
-                        <h2 className="typography">The Fisdom</h2>
+                        <h2 className="typography">{onePager.company}</h2>
                         <span className="small_typo">The Finance company</span>
                         <div>
                           <span className="small_typo_location">
                             {" "}
-                            <img src={LocationIcon} alt="location" /> Bangalore
-                            , India
+                            <img src={LocationIcon} alt="location" /> {onePager.location}
                           </span>
                           <span className="small_typo_location">
                             {" "}
@@ -70,7 +80,7 @@ function Company() {
                   <div className="col-lg-9 col-md-12">
                     <p>
                       {" "}
-                      Man's all about building great start-ups from a simple
+                      {/* Man's all about building great start-ups from a simple
                       idea to an elegant reality. Humbled and honored to have
                       worked with Angels and VC's across the globe to support
                       and grow the startup culture.With the vision of make in
@@ -78,7 +88,8 @@ function Company() {
                       reality glasses for Defence, Enterprise, and Training
                       sectors. In addition to hardware, they also provide their
                       clients with end-to-end AR/VR/MR solutions that are
-                      tailored to their business needs.
+                      tailored to their business needs. */}
+                      {onePager.description}
                     </p>
                   </div>
                 </div>

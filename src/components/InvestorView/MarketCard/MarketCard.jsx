@@ -1,6 +1,6 @@
 import "./MarketCard.scss";
 
-const MarketCard = ({ title, subtitle }) => {
+const MarketCard = ({ title, subtitle, amount }) => {
   return (
     <div className="MarketCard">
       <div className="titles">
@@ -8,7 +8,7 @@ const MarketCard = ({ title, subtitle }) => {
         <h3>{subtitle}</h3>
       </div>
       <div className="amount">
-        <input type="text" placeholder="Enter Amount" />
+        <input type="text" placeholder={amount || `Enter Amount`} />
         <span>Cr</span>
       </div>
     </div>

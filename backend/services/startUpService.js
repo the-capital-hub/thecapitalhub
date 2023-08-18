@@ -1,5 +1,6 @@
 import { UserModel } from "../models/User.js";
 import { StartUpModel } from "../models/startUp.js";
+import { sendMail } from "../utils/mailHelper.js";
 
 export const createStartup = async (startUpData) => {
   try {
@@ -81,7 +82,7 @@ export const updateStartUpData = async (founderId, data) => {
       message: `${startUp.company} updated succesfully`,
     };
   } catch (error) {
-    console.error("Error updating StartUp details:", err);
+    console.error("Error updating StartUp details:", error);
     return {
       status: 500,
       message: "An error occurred while updating StartUp details.",
@@ -100,10 +101,93 @@ export const updateOnePager = async ({ _id, ...data }) => {
       data: newOnePage,
     };
   } catch (error) {
-    console.error("Error updating One Pager details:", err);
+    console.error("Error updating One Pager details:", error);
     return {
       status: 500,
       message: "An error occurred while updating One Pager details.",
     };
   }
 };
+
+export const investNowService = async (args) => {
+  try {
+    const { fromUserName, fromUserEmail, fromUserMobile, toUserId } = args;
+    const toUser = await UserModel.findById(toUserId);
+    if (!toUser) {
+      return {
+        status: 404,
+        message: "Recipient user not found.",
+      };
+    }
+    
+    const emailMessage = `
+      Hello ${toUser.firstName},
+      
+      You have received an investment proposal from ${fromUserName}.
+      
+      Contact Details:
+      Email: ${fromUserEmail}
+      Mobile: ${fromUserMobile}
+      
+      Regards,
+      CapitalHub
+    `;
+    const response = await sendMail(
+      "Capital HUB",
+      toUser.email,
+      fromUserEmail,
+      "Investment Proposal",
+      emailMessage
+    );
+
+    if (response.status === 200) {
+      const startup = await StartUpModel.findOne({ founderId: toUserId });
+      if (startup) {
+        startup.investorProposals.push({
+          name: fromUserName,
+          email: fromUserEmail,
+          phone: fromUserMobile,
+        });
+        await startup.save();
+      }
+      return {
+        status: 200,
+        message: "Investment proposal email sent successfully.",
+      };
+    } else {
+      return {
+        status: 500,
+        message: "An error occurred while sending the investment proposal email.",
+      };
+    }
+  } catch (error) {
+    console.error("Error sending investment proposal email:", error);
+    return {
+      status: 500,
+      message: "An error occurred while sending the investment proposal email.",
+    };
+  }
+};
+
+export const getStartupByFounderId = async (founderId) => {
+  try {
+    const company = await StartUpModel.findOne({ founderId });
+    if (!company) {
+      return {
+        status: 404,
+        message: "StartUp not found.",
+      };
+    }
+    return {
+      status: 200,
+      message: "StartUp details retrieved successfully.",
+      data: company,
+    };
+  } catch (err) {
+    console.error("Error getting StartUp details:", err);
+    return {
+      status: 500,
+      message: "An error occurred while getting StartUp details.",
+    };
+  }
+}

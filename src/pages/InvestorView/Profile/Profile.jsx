@@ -5,9 +5,20 @@ import CompanyDetailsCard from "../../../components/Investor/InvestorGlobalCards
 import { useSelector } from "react-redux";
 import MileStoneCard from "../../../components/Investor/InvestorGlobalCards/MilestoneCard/MileStoneCard";
 import './Profile.scss'
-function Profile() {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+import { useParams } from "react-router-dom";
+import { getUserById } from "../../../Service/user";
+import { useState, useEffect } from "react";
 
+function Profile() {
+  const { username } = useParams();
+  const [user, setUser] = useState([]);
+  useEffect(() => {
+    getUserById(username)
+      .then(({ data }) => {
+        setUser(data);
+      })
+      .catch(() => setUser([]));
+  }, [username]);
   return (
     <div className="container-fluid profile_main_container">
       <div className="row mt-2">
@@ -18,15 +29,15 @@ function Profile() {
                 <div className="row">
                   <div className="col-7">
                     <div className="image_name_section mt-2">
-                      <img src={loggedInUser.profilePicture} alt="profileimage" />
+                      <img src={user.profilePicture} alt="profileimage" />
                       <div className="left_profile_text flex_content ms-3">
                         <h2 className="typography">
-                          {loggedInUser?.firstName} {loggedInUser?.lastName}
+                          {user?.firstName} {user?.lastName}
                         </h2>
                         <span className="small_typo">
-                          Founder & CEO of capital Hub
+                          {user?.designation || `Founder & CEO of capital Hub`}
                         </span>
-                        <span className="small_typo">Bangalore , India</span>
+                        <span className="small_typo"> Bangalore , India</span>
                       </div>
                     </div>
                   </div>
@@ -67,7 +78,7 @@ function Profile() {
                             className="small_typo"
                             style={{ marginBottom: "1rem" }}
                           >
-                            Founder & CEO
+                            {user?.designation}
                           </td>
                         </tr>
                         <tr>
@@ -80,7 +91,7 @@ function Profile() {
                             className="small_typo"
                             style={{ marginBottom: "1rem" }}
                           >
-                            Graduate, University of Northampton
+                            {user.education}
                           </td>
                         </tr>
                         <tr>
@@ -93,11 +104,7 @@ function Profile() {
                             className="small_typo"
                             style={{ marginBottom: "1rem" }}
                           >
-                            5+ Years building various startups
-                            <br />
-                            Mentored 21 startups
-                            <br />
-                            Growth $ 10M+
+                            {user?.experience}
                           </td>
                         </tr>
                       </tbody>
@@ -128,7 +135,7 @@ function Profile() {
                             className="small_typo"
                             style={{ marginBottom: "1rem" }}
                           >
-                            {loggedInUser?.firstName}
+                            {user?.firstName}
                           </td>
                         </tr>
                         <tr>
@@ -141,7 +148,7 @@ function Profile() {
                             className="small_typo"
                             style={{ marginBottom: "1rem" }}
                           >
-                            {loggedInUser?.lastName}
+                            {user?.lastName}
                           </td>
                         </tr>
                         <tr>
@@ -152,7 +159,7 @@ function Profile() {
                             className="small_typo"
                             style={{ marginBottom: "1rem" }}
                           >
-                            {loggedInUser?.email}
+                            {user?.email || `Test`}
                           </td>
                         </tr>
                         <tr>
@@ -165,7 +172,7 @@ function Profile() {
                             className="small_typo"
                             style={{ marginBottom: "1rem" }}
                           >
-                            {loggedInUser?.phoneNumber}
+                            {user?.phoneNumber}
                           </td>
                         </tr>
                       </tbody>
@@ -185,14 +192,15 @@ function Profile() {
                 <div className="col-12 mt-2">
                   <div className="designation_info">
                     <p className="small_typo">
-                      A little about myself. “Dejection is a sign of failure but
+                      {/* A little about myself. “Dejection is a sign of failure but
                       it becomes the cause of success”. I wrote this when I was
                       16 years old and that’s exactly when I idealised the
                       reality of life. In this current world, success is defined
                       in many ways, some of which include money, fame and power.
                       I believe that success is just the beginning of a new
                       problem. Every step of our lives we work hard to solve an
-                      issue and every time we end up with a new problem.
+                      issue and every time we end up with a new problem. */}
+                      {user?.bio}
                     </p>
                   </div>
                 </div>
@@ -218,7 +226,7 @@ function Profile() {
               </div>
             </div>
           </div>
-          <CompanyDetailsCard />
+          <CompanyDetailsCard user={user}/>
         </div>
       </div>
     </div>

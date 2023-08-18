@@ -10,8 +10,22 @@ import OnePagePreview from "./OnePagePreview/OnePagePreview";
 import ThreeDotsImage from "../../../Images/whiteTheeeDots.svg";
 import FolderImage from "../../../Images/Folder.svg";
 import VideoImage from "../../../Images/Video.svg";
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { getStartupByFounderId } from "../../../Service/user";
 
 const OneLink = () => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  console.log(loggedInUser);
+  const userId = loggedInUser._id;
+  const [company, setCompany] = useState([]);
+  useEffect(() => {
+    getStartupByFounderId(userId)
+      .then(({ data }) => {
+        setCompany(data);
+      })
+      .catch(() => setCompany([]));
+  }, [userId]);
   return (
     <div className="container-fluid onelink_container">
       <div className="row mt-2">
@@ -20,7 +34,7 @@ const OneLink = () => {
           <div className="content-70">
             <div className="row">
               <div className="col-12 mt-2">
-                <ShareLink />
+                <ShareLink OneLink={company?.oneLink}/>
               </div>
             </div>
 
@@ -34,7 +48,7 @@ const OneLink = () => {
                     video: VideoImage,
                   }}
                   para={
-                    "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
+                  company.introductoryMessage 
                   }
                   input={true}
                 />

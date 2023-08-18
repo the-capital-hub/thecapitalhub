@@ -12,6 +12,8 @@ const router = express.Router();
 router.post("/login", loginUserController);
 router.post("/createUser", registerUserController);
 
+router.get("/getUserById/:id", getUserByIdController);
+
 // Authorized routes below
 router.use(authenticateToken);
 
@@ -19,6 +21,5 @@ router.use(authenticateToken);
 router.patch("/updateFounder", updateUser);
 
 router.get("/getUser", getUsersController);
-router.get("/getUserById/:id", getUserByIdController);
 
 export default router;

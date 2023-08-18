@@ -9,8 +9,23 @@ import TeamCard from "../../InvestorGlobalCards/OneLink/TeamCard/TeamCard";
 import FundAsking from "../Table/FundAsking/FundAsking";
 import FundDeployment from "../Table/FundDeployment/FundDeployment";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { getStartupByFounderId } from "../../../../Service/user";
 
 const OnePagePreview = () => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  console.log(loggedInUser);
+  const userId = loggedInUser._id;
+  const [company, setCompany] = useState([]);
+  useEffect(() => {
+    getStartupByFounderId(userId)
+      .then(({ data }) => {
+        setCompany(data);
+      })
+      .catch(() => setCompany([]));
+  }, [userId]);
+  console.log("Company:",company);
   return (
     <>
       <div className="onepagepreview_container">
@@ -32,14 +47,14 @@ const OnePagePreview = () => {
           <section className="company_description">
             <img src={PramodSq} alt="image" />
             <div className="company_text">
-              <h6>Enter company description </h6>
+              <h6>{company?.company || `Enter company description`} </h6>
               <hr />
-              <h6>Eg: India’s best startup platfrom</h6>
+              <h6>{company?.description || 'Eg: India’s best startup platfrom'}</h6>
             </div>
           </section>
 
           <section className="card_section">
-            <OnePagePreviewCard />
+            <OnePagePreviewCard company={company}/>
           </section>
 
           <section className="table_section">
@@ -47,12 +62,20 @@ const OnePagePreview = () => {
           </section>
 
           <section className="team_section">
-            <TeamCard />
+            {/* <TeamCard/> */}
+            {company?.team?.map((team, index) => (
+            <TeamCard
+              index={index}
+              profile= {team?.image}
+              name={team?.name}
+              designation={team?.designation}
+            />
+          ))}
           </section>
 
           <section className="row fund_asking_deployment">
             <div className="col-12 funding_divider">
-              <FundAsking />
+              <FundAsking company={company}/>
             </div>
             <div className="col-12 funding_divider">
               <FundDeployment />
