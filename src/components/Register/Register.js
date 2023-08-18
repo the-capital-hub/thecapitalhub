@@ -415,8 +415,8 @@ const Register = () => {
             <br />
           </div>
         )}
-        {/* {showStartUp && <StartUpForm />} */}
-        {!showStartUp && <StartUpForm />}
+        {showStartUp && <StartUpForm />}
+        {/* {!showStartUp && <StartUpForm />} */}
         {showInvestor && <InvestorForm />}
         {showSelectWhatYouAre && (
           <SelectWhatYouAre
