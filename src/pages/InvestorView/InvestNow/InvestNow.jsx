@@ -11,12 +11,14 @@ const InvestNow = () => {
   return (
     <div className="investNow">
       {showModal && <ThankYouModal onCancel={setShowModal} />}
-      <p>Contact Details</p>
-      <div className="inputs">
-        <Input type={"text"} placeholder={"Full Name"} />
-        <Input type={"number"} placeholder={"Mobile number"} />
-        <Input type={"email"} placeholder={"Email Id"} />
-        <button onClick={() => setShowModal(true)}>Show Interest</button>
+      <div className="investNowContainer">
+        <p>Contact Details</p>
+        <div className="inputs">
+          <Input type={"text"} placeholder={"Full Name"} />
+          <Input type={"number"} placeholder={"Mobile number"} />
+          <Input type={"email"} placeholder={"Email Id"} />
+          <button onClick={() => setShowModal(true)}>Show Interest</button>
+        </div>
       </div>
     </div>
   );

@@ -55,7 +55,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 820px) {
   .investor_view_container {
     .sidebar {
       left: 0;
@@ -84,7 +84,9 @@
       .sidebar {
         width: 0;
         opacity: 0;
-        transition: width 0.3s ease, opacity 0.3s ease;
+        transition:
+          width 0.3s ease,
+          opacity 0.3s ease;
       }
 
       .content {
@@ -123,7 +125,9 @@
       .sidebar {
         width: 0;
         opacity: 0;
-        transition: width 0.3s ease, opacity 0.3s ease;
+        transition:
+          width 0.3s ease,
+          opacity 0.3s ease;
       }
 
       .content {

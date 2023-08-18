@@ -1,8 +1,22 @@
 .documentation {
     background: white;
-    min-height: 100vh;
     padding: 20px 50px;
+    gap: 30px;
     display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    .docscontainer {
+        display: flex;
+        gap: 20px;
+        min-height: 100vh;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 820px) {
+    .documentation {
+        align-items: center;
+        .docscontainer {
+            justify-content: center;
+        }
+    }
 }
