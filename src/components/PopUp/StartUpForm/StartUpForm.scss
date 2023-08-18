@@ -1,32 +1,48 @@
-.startup_form_container {
+.startup_form_container_register {
   .popup-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    display: flex;
-    justify-content: center;
     align-items: center;
   }
 
   .popup {
-    max-width: 50%;
-    max-height: 100%;
     background-color: white;
-    border-radius: 20px;
     background: #fff;
     overflow-y: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: 768px) {
+      border-radius: 20px;
+      height: auto;
+      padding: 20px;
+
+      .inside_startUp_popup {
+        // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+      }
+    }
 
     .back_and_home {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px;
+      padding: 20px;
+      text-transform: uppercase;
       img {
         height: 20px;
+      }
+      a {
+        color: black;
+        text-decoration: none;
       }
     }
     h1 {
@@ -47,7 +63,6 @@
       background-color: white;
       border-radius: 10px;
       padding: 0px 20px 10px 20px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
       label {
         margin-bottom: 4px;
@@ -71,6 +86,10 @@
           font-size: 14px;
           height: 24px;
         }
+        button {
+          width: fit-content;
+          padding: 0 50px;
+        }
       }
 
       input,
@@ -90,7 +109,7 @@
       button {
         width: 100%;
         border-radius: 10px;
-        background: #ff0000;
+        background: #5b0ffe;
         color: white;
         border: none;
         padding: 8px 16px;

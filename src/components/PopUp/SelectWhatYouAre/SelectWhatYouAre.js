@@ -1,7 +1,7 @@
-import React, { useState } from "react";
 import "./SelectWhatYouAre.scss";
 import StartUpIcon from "../../../Images/start_up.png";
 import InvestorIcon from "../../../Images/investor_popup.png";
+import { Link } from "react-router-dom";
 
 const SelectWhatYouAre = ({ onStartupClick, onInvestorClick }) => {
   const openStartUp = () => {
@@ -17,10 +17,10 @@ const SelectWhatYouAre = ({ onStartupClick, onInvestorClick }) => {
         <div className="popup-container">
           <div className="popup">
             <div className="back_and_home">
-              <img src="back" alt="back" />
-              <a href="/signup">Home</a>
+              <span>← Back</span>
+              <Link href="/signup">Home</Link>
             </div>
-            <h1>Select One what you are.....!</h1>
+            <h2>Select One what you are</h2>
             <div className="inside_popup">
               <div className="card">
                 <img src={StartUpIcon} alt="Card 1" />

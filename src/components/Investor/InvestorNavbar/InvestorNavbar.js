@@ -10,14 +10,23 @@ import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
 import HambergerIcon from "../../../Images/Hamberger.svg";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const InvestorNavbar = (props) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const [url, setUrl] = useState("Home");
+
+  useEffect(() => {
+    const url = window.location.href.split("/");
+    setUrl(url[url.length - 1]);
+  }, [window.location.href]);
+
   return (
     <>
       <div className="container pt-1">
-        <div className="row investor_navbar ">
-          <div className="col-5 d-flex">
+        <div className="d-flex investor_navbar justify-content-between">
+          <div className="d-flex">
             <div className="row bar_logo_container ">
               <div className="logo_container">
                 <img src={Logo} alt="bar" />
@@ -27,11 +36,11 @@ const InvestorNavbar = (props) => {
                 onClick={props.handleSidebarToggle}
               >
                 <img src={HambergerIcon} alt="bar" />
-                <h1>Home</h1>
+                <h1 className="ms-2">{url}</h1>
               </div>
             </div>
           </div>
-          <div className="col-7 navbar_right_container">
+          <div className="navbar_right_container">
             <div className="searchbar-container">
               <input
                 type="text"
@@ -60,6 +69,7 @@ const InvestorNavbar = (props) => {
                   <img src={MessageIcon} alt="message" />
                 </span>
               </div>
+              {/* <div className="icon-wrapper d-none d-md-block"> */}
               <div className="icon-wrapper">
                 <Link to={"/investor/manage-account"}>
                   {" "}

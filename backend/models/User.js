@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 // import validator from "validator";
 import { hashPassword } from "../utils/passwordManager.js";
 
@@ -79,6 +79,12 @@ const userSchema = new Schema(
         "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp",
     },
     designation: String,
+    savedPosts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Posts",
+      },
+    ],
   },
   {
     timestamps: true,
@@ -88,7 +94,6 @@ const userSchema = new Schema(
 userSchema.pre("save", async function (next) {
   try {
     if (this.isModified && this.isModified("password")) {
-      console.log(this);
       this.password = await hashPassword(this.password);
     }
     next();
