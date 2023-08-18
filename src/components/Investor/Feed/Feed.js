@@ -31,10 +31,8 @@ const Feed = () => {
   const savePostHandler = async (postId) => {
     try {
       // api call for savin a post
-    } catch (error) {
-      
-    }
-  }
+    } catch (error) {}
+  };
 
   return (
     <>
@@ -92,7 +90,7 @@ const Feed = () => {
               />
             )}
           </div>
-          <div className="col">
+          <div className="col   d-none d-xl-block">
             <div className="content-30">
               <div className="row">
                 <RightProfileCard />

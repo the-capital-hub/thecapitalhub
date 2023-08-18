@@ -29,7 +29,9 @@ const CreatePost = () => {
                     <div className="ceatepost_img_name">
                       <img src={profilePic} alt="profile pic" />
                       <span className="">
-                        <h2>{loggedInUser?.firstName} {loggedInUser?.lastName}</h2>
+                        <h2>
+                          {loggedInUser?.firstName} {loggedInUser?.lastName}
+                        </h2>
                         <h6>Post to anyone</h6>
                       </span>
                     </div>
@@ -84,7 +86,7 @@ const CreatePost = () => {
             </div>
           </div>
         </div>
-        <div className="col">
+        <div className="col  d-none d-xl-block">
           <div className="content-30">
             <div className="row">
               <RightProfileCard />
