@@ -143,7 +143,7 @@ const AboutUs = () => {
             <h2 className="mb-5">Meet our Warriors</h2>
             <MeetOurTeam />
           </div>
-          <div className="about_us_title_text mt-5 co-investor_title mb-5">
+          <div className="about_us_title_text  co-investor_title mb-5">
             <h2 className="mb-5">Our Collaborations</h2>
             <CoInvestorCard />
           </div>

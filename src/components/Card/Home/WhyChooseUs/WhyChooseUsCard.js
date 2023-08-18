@@ -12,7 +12,7 @@ const WhyChooseUsCard = () => {
     <>
       <div className="why_choose_us row justify-content-around align-items-center my-4">
         <h2 className="text-center text_center ">Why choose us</h2>
-        <div className="col-md-4 b why_chooseus_card mb-69">
+        <div className="col-md-6 b why_chooseus_card mb-69">
           <div className="row d-flex justify-content-center align-item-center inside_card">
             <img src={G1Icon} alt="img" />
             <h3>Angel Investor</h3>
@@ -23,7 +23,7 @@ const WhyChooseUsCard = () => {
             </h4>
           </div>
         </div>
-        <div className="col-md-4 b why_chooseus_card mb-69">
+        <div className="col-md-6 b why_chooseus_card mb-69">
           <div className="row d-flex justify-content-center align-item-center inside_card">
             <img src={G2Icon} alt="img" />
             <h3>One link</h3>
@@ -34,7 +34,7 @@ const WhyChooseUsCard = () => {
             </h4>
           </div>
         </div>
-        <div className="col-md-4 b why_chooseus_card mb-69">
+        <div className="col-md-6 b why_chooseus_card mb-69">
           <div className="row d-flex justify-content-center align-item-center inside_card">
             <img src={G3Icon} alt="img" />
             <h3>Networking</h3>
@@ -45,7 +45,7 @@ const WhyChooseUsCard = () => {
             </h4>
           </div>
         </div>
-        <div className="col-md-4 b why_chooseus_card mb-69">
+        <div className="col-md-6 b why_chooseus_card mb-69">
           <div className="row d-flex justify-content-center align-item-center inside_card">
             <img src={G4Icon} alt="img" />
             <h3>Team Management</h3>
@@ -56,7 +56,7 @@ const WhyChooseUsCard = () => {
             </h4>
           </div>
         </div>
-        <div className="col-md-4 b why_chooseus_card mb-69">
+        <div className="col-md-6 b why_chooseus_card mb-69">
           <div className="row d-flex justify-content-center align-item-center inside_card">
             <img src={G5Icon} alt="img" />
             <h3>Client Management(CRM)</h3>
@@ -67,7 +67,7 @@ const WhyChooseUsCard = () => {
             </h4>
           </div>
         </div>
-        <div className="col-md-4 b why_chooseus_card mb-69">
+        <div className="col-md-6 b why_chooseus_card mb-69">
           <div className="row d-flex justify-content-center align-item-center inside_card">
             <img src={G6Icon} alt="img" />
             <h3>Investor Management(IRM)</h3>
