@@ -30,7 +30,7 @@ const Register = () => {
 
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const otpInputRefs = useRef([]);
-  const [show, setshow] = useState(false);
+  const [show, setshow] = useState(true);
   const [showSelectWhatYouAre, setShowSelectWhatYouAre] = useState(false);
   const [showStartUp, setShowStartUp] = useState(false);
   const [showInvestor, setShowInvestor] = useState(false);
