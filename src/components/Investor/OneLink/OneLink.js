@@ -34,7 +34,7 @@ const OneLink = () => {
           <div className="content-70">
             <div className="row">
               <div className="col-12 mt-2">
-                <ShareLink />
+                <ShareLink OneLink={company?.oneLink}/>
               </div>
             </div>
 

@@ -12,7 +12,6 @@ import { useState, useEffect } from "react";
 function Profile() {
   const { username } = useParams();
   const [user, setUser] = useState([]);
-  console.log(username);
   useEffect(() => {
     getUserById(username)
       .then(({ data }) => {
@@ -160,7 +159,7 @@ function Profile() {
                             className="small_typo"
                             style={{ marginBottom: "1rem" }}
                           >
-                            {user?.email}
+                            {user?.email || `Test`}
                           </td>
                         </tr>
                         <tr>

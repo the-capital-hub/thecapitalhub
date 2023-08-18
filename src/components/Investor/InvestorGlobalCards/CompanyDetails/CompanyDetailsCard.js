@@ -41,7 +41,7 @@ const CompanyDetailsCard = (userDetails) => {
                       <img src={LocationIcon} alt="location" />
                       {onePager.location}{" "}
                       <img src={EmailIcon} alt="location" />
-                      {userDetails?.user.email}{" "}
+                      {userDetails?.user?.email}{" "}
                     </span>
                     <div className="small_typo social_icon mt-3">
                       <img src={WebIcon} alt="social_img" />

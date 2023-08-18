@@ -5,7 +5,7 @@ import ExitImage from "../../../../Images/Exit.svg";
 import CorrectImage from "../../../../Images/Correct.svg";
 import Cross from "../../../../Images/Cross.svg";
 
-const ShareLink = () => {
+const ShareLink = (oneLink) => {
   return (
     <>
       <div className="ShareLink_container">
@@ -19,7 +19,7 @@ const ShareLink = () => {
               <div className="left_icons">
                 <img src={LinkImage} alt="image" />
               </div>
-              <input type="text" placeholder="Type your text here" />
+              <input type="text" placeholder={"Type your text here"} value={window.location.href+ '/' + oneLink.OneLink }/>
               <div className="right_icons">
                 <img className="right_icons_img1" src={Cross} alt="image" />
                 <img
