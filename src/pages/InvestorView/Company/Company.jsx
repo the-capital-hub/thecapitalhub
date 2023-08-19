@@ -36,7 +36,7 @@ function Company() {
         <div className="col">
           <div className="row">
             <div className="col-12 mt-2">
-              <div className=" box ">
+              <div className="  box">
                 <div className="row">
                   <div className="col-lg-7 col-md-12">
                     <div className="image_name_section mt-2">
