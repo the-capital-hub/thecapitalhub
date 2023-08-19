@@ -64,11 +64,10 @@
   }
 }
 
-// @media (max-width: 768px) {
-//   .half_bend_container {
-//     .box_container {
-//       width: 100%;
-//     }
-//   }
-
-// }
+@media (max-width: 820px) {
+  .half_bend_container {
+    .box_container {
+      width: 100%;
+    }
+  }
+}

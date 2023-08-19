@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 20px;
-    border: 1px dashed #FD5901;
+    border: 1px dashed #fd5901;
     background: rgba(253, 89, 1, 0.06);
     backdrop-filter: blur(23.5px);
     padding: 20px;
@@ -24,9 +24,16 @@
     .text {
         font-size: 16px;
         font-weight: bold;
-        color: #FD5901;
+        color: #fd5901;
     }
-    .text_upload{
+    .text_upload {
         cursor: pointer;
+    }
+}
+
+@media (max-width: 425px) {
+    .upload_container {
+        width: 300px;
+        text-align: center;
     }
 }
