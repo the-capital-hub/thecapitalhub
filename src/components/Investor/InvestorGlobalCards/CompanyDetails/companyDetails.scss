@@ -91,7 +91,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 820px) {
   .company_details_container {
     .company_details {
       .image_name_section {
@@ -169,6 +169,18 @@
         font-weight: 400;
         line-height: 150%; /* 11.609px */
         letter-spacing: 0.31px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .company_details_container {
+    .company_details {
+      width: 98%;
+      .image_name_section {
+        .company_details_logo_container {
+        }
       }
     }
   }

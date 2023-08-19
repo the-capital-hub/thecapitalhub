@@ -4,7 +4,6 @@
         justify-content: center;
         align-items: center;
 
-
         .right_view_profile_card {
             border-radius: 20px;
 
@@ -52,7 +51,6 @@
                     background-color: #000;
                     color: #fff;
                 }
-
             }
         }
 
@@ -79,13 +77,14 @@
             }
 
             button {
-                width: 89px;
+                width: 100px;
                 height: 29px;
                 flex-shrink: 0;
                 border-radius: 20px;
                 border: 1px solid #acacac;
                 color: #000;
                 font-size: 13px;
+                padding: 20px 5px;
                 font-family: Poppins;
                 display: flex;
                 justify-content: space-between;
@@ -102,9 +101,7 @@
                 font-size: 12px;
                 font-family: Poppins;
             }
-
         }
-
     }
 
     .newscorner_card hr {
