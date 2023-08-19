@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./OnePagePreviewCard.scss";
 import { useSelector } from "react-redux";
 import { postStartUpData } from "../../../../../Service/user";
 
 const OnePagePreviewCard = ({ company, page }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const [editedContent, setEditedContent] = useState({}); 
+
   const cardData = [
     {
       field: "problem",
@@ -42,16 +44,16 @@ const OnePagePreviewCard = ({ company, page }) => {
     // { title: "7.Business Model", content: "Your Business Model" },
   ];
 
-  const handleUpdate = (field, event) => {
-    const updatedValue = event.target.value;
-    if(!updatedValue) return;
+  const handleUpdate = (field, newValue) => {
+    if (!newValue) return;
+    setEditedContent({ ...editedContent, [field]: newValue });
+
     postStartUpData({
-      [field]: updatedValue,
+      [field]: newValue,
       founderId: loggedInUser._id,
     })
       .then(({ data }) => {
         console.log(data);
-        window.location.reload();
       })
       .catch((err) => console.log(err));
   };
@@ -65,17 +67,16 @@ const OnePagePreviewCard = ({ company, page }) => {
               <div className="card-body">
                 <h5 className="card-title">{card.title}</h5>
                 {page === "oneLinkEdit" ? (
-                  <textarea
-                  cols={30}
-                  rows={4}
-                  placeholder={card.content}
-                  className="card-text"
-                  onBlur={(e) => handleUpdate([card.field], e)}
-                />
+                  <input
+                    type="text"
+                    className="card-text"
+                    value={editedContent[card.field] || card.content}
+                    onChange={(e) => handleUpdate(card.field, e.target.value)}
+                    onBlur={() => handleUpdate(card.field, editedContent[card.field])}
+                  />
                 ) : (
                   <h6>{card.content}</h6>
                 )}
-                
               </div>
             </div>
           </div>
