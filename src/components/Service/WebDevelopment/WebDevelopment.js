@@ -15,7 +15,7 @@ import prototypingIcon from "../../../Images/service/image 63.png";
 const WebDevelopment = () => {
   return (
     <>
-      <div className="container-fluid webdevlopment_main_container">
+      <div className="container webdevlopment_main_container">
         <div className="container">
           <Link to={"/service"}>
             <img src={BackIcon} alt="back" />
@@ -33,11 +33,11 @@ const WebDevelopment = () => {
             <div className="para-image">
               <div className="para">
                 <p className="mt-2">
-                  Capital HUB is the go-to source for startups when it comes to
-                  web development, and Android and iOS development services. We
-                  recognize that building a great startup begins with adapting
-                  to new technology and evolving as a startup with all new
-                  features.
+                  The Capital HUB is the go-to source for startups when it comes
+                  to web development, and Android and iOS development services.
+                  We recognize that building a great startup begins with
+                  adapting to new technology and evolving as a startup with all
+                  new features.
                 </p>
                 <p>
                   Our team of experienced developers can help you with
@@ -90,7 +90,7 @@ const WebDevelopment = () => {
               That's why we're here to support you every step of the way, from
               design and development to marketing and scaling. Whether you're
               starting from scratch or just need a little help getting started,
-              Capital HUB has you covered.
+              The Capital HUB has you covered.
             </p>
             <p>
               Our team of experienced developers can help you with everything
@@ -99,8 +99,8 @@ const WebDevelopment = () => {
               product.
             </p>
             <p>
-              So, what are you waiting for? Start your journey with Capital HUB
-              today!
+              So, what are you waiting for? Start your journey with The Capital
+              HUB today!
             </p>
           </section>
         </div>

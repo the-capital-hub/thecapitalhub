@@ -6,7 +6,7 @@ import IntagramIcon from "../../../../Images/investorIcon/Instagram.svg";
 import LinkedinIcon from "../../../../Images/investorIcon/Linkedin.svg";
 import WebIcon from "../../../../Images/investorIcon/WebIcon.svg";
 import LogoX from "../../../../Images/investorIcon/LogoX.png";
-import './companyDetails.scss'
+import "./companyDetails.scss";
 
 const CompanyDetailsCard = () => {
   return (
@@ -44,14 +44,10 @@ const CompanyDetailsCard = () => {
             <div className="row">
               <div className="company_details mt-4">
                 <p>
-                  As the Founder at Capital HUB, Man's all about building great
-                  start-ups from a simple idea to an elegant reality. Humbled
-                  and honored to have worked with Angels and VC's across the
-                  globe to support and grow the startup culture.As the Founder
-                  at Capital HUB, Man's all about building great start-ups from
-                  a simple idea to an elegant reality. Humbled and honored to
-                  have worked with Angels and VC's across the globe to support
-                  and grow the startup culture.
+                  As the Founder at The Capital HUB, my vision is all about building
+                  great start-ups from a simple idea to an elegant reality.
+                  Humbled and honored to have worked with Angels and VC's across
+                  the globe to support and grow the startup culture.
                 </p>
               </div>
             </div>

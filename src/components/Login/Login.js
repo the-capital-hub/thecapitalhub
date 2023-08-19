@@ -83,7 +83,7 @@ const Login = () => {
           <img src={RegisterIcon} alt="image" />
         </div>
         <div className="col-lg-6 col-md-12 register_heading_right">
-          <Link to="/">
+          <Link className="d-lg-none" to="/">
             <img className="backArrow" src={backArrow} alt="arrow_back" />
           </Link>
           <span className="welcome">Welcome back!</span>

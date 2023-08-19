@@ -24,7 +24,7 @@ const RightProfileCard = () => {
               </h2>
               <span className="smallest_typo">{loggedInUser?.email}</span>
               <span className="smallest_typo">
-                Founder & CEO of capital Hub
+                Founder & CEO of The Capital Hub
               </span>
             </div>
             <button className="profile_btn mt-2">View Profile</button>

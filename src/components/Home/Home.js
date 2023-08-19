@@ -26,7 +26,7 @@ const Home = () => {
             </h2>
 
             <h4>Register now as</h4>
-            <div className="buttons_row g-0">
+            <div className="buttons_row">
               <Link to="/signup">
                 <button className="btn1 btn-primary">Start Up</button>
               </Link>
@@ -40,7 +40,7 @@ const Home = () => {
           </div>
           <section className="welcome_section mt-5">
             <h6>
-              Welcome to Capital Hub, Our integrated platform, where investors,
+              Welcome to The Capital Hub, Our integrated platform, where investors,
               startups, and professionals come together to unlock new
               opportunities and build meaningful connections. Whether your’re
               seeking investment opportunities, looking to fund your startup, or
@@ -54,7 +54,7 @@ const Home = () => {
             </h2>
             <section className="welcome_section">
               <h6>
-                The Capital HUB team comprises exceptional individuals with a
+                The Capital Hub team comprises exceptional individuals with a
                 diveerse range of expertise, spanning investment banking,
                 startup management banking, startup management, software
                 development, advisory services, and more. Our collective
@@ -254,7 +254,7 @@ const Home = () => {
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h3>Growthive for Mentors</h3>
                 <p className="desktop_para">
-                  Introducing Growthive, an innovative program by Capital HUB
+                  Introducing Growthive, an innovative program by The Capital Hub
                   that bridges the gap between investors and early-stage
                   startups. Investors become mentors, offering their expertise
                   and guidance in exchange for equity, propelling startups from

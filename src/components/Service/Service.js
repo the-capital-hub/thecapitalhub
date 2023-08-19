@@ -29,7 +29,7 @@ const Service = () => {
               <span style={{ color: "#FD5901" }}> services</span>
             </h1>
             <p>
-              Capital HUB provides a 360-degree approach to building a great
+              The Capital HUB provides a 360-degree approach to building a great
               Startup. We work with startups on Raising Angel investments, Pitch
               deck creation, Financials, Business plans, Brand management,
               Growth model, Software development, Marketing, and Compliance
@@ -67,7 +67,7 @@ const Service = () => {
                 <div className="text_container">
                   <h5>Pitch Deck</h5>
                   <p>
-                    Capital HUB offers elegant pitch deck design and
+                    The Capital HUB offers elegant pitch deck design and
                     professional support to startups.
                   </p>
                   <button
@@ -92,7 +92,10 @@ const Service = () => {
                     of any business plan, and they can have a big impact on your
                     business's success.
                   </p>
-                  <button  onClick={() => handleReadMoreClick("/financials-document")} className="read_more">
+                  <button
+                    onClick={() => handleReadMoreClick("/financials-document")}
+                    className="read_more"
+                  >
                     Read more >>
                   </button>
                 </div>
@@ -107,8 +110,8 @@ const Service = () => {
                 <div className="text_container">
                   <h5>Web Development</h5>
                   <p>
-                    Capital HUB is the go-to source for startups when it comes
-                    to Web development, and Android and iOS development
+                    The Capital HUB is the go-to source for startups when it
+                    comes to Web development, and Android and iOS development
                     services.
                   </p>
                   <button
@@ -129,11 +132,14 @@ const Service = () => {
                 <div className="text_container">
                   <h5>Startup Consulting / CXO Services</h5>
                   <p>
-                    Capital HUB is building a better working world by realizing
-                    business transformation through the power of people,
-                    technology, and innovation.
+                    The Capital HUB is building a better working world by
+                    realizing business transformation through the power of
+                    people, technology, and innovation.
                   </p>
-                  <button onClick={() => handleReadMoreClick("/sturtup-consulting")} className="read_more">
+                  <button
+                    onClick={() => handleReadMoreClick("/sturtup-consulting")}
+                    className="read_more"
+                  >
                     Read more >>
                   </button>
                 </div>
@@ -148,16 +154,18 @@ const Service = () => {
                 <div className="text_container">
                   <h5>Compliances and due diligence</h5>
                   <p>
-                    Capital HUB supports startups with compliance and DD
+                    The Capital HUB supports startups with compliance and DD
                     services as part of their fundraising journey.
                   </p>
-                  <button onClick={() => handleReadMoreClick("/complience")} className="read_more">
+                  <button
+                    onClick={() => handleReadMoreClick("/complience")}
+                    className="read_more"
+                  >
                     Read more >>
                   </button>
                 </div>
               </div>
             </div>
-            <hr />
           </section>
 
           {/* <section className="our_client_feedback ">
