@@ -26,7 +26,6 @@ const TeamCard = ({ index, profile, name, designation, page }) => {
             <div className="card-body">
               <h5 className="card-title">Team {index}</h5>
               <img src={PramodSq} alt="image" />
-              {console.log(page)}
               <div className="company_text">
                 {page === "oneLinkEdit" ? (
                   <input placeholder={name} />

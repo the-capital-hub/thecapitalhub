@@ -156,3 +156,28 @@
         }
     }
 }
+
+@media (max-width: 820px) {
+    input {
+        width: 100px;
+    }
+    .editview_container {
+        .box_container {
+            .team_section {
+                display: flex;
+                flex-direction: column;
+                overflow-x: hidden;
+                input {
+                    font-size: 12px;
+                }
+            }
+            .fund_asking_deployment {
+                display: flex;
+                flex-direction: column;
+                .funding_divider {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
