@@ -7,7 +7,11 @@ const IntroductoryMessage = ({ title, image, para, input }) => {
     <div className="introductory_message_container">
       <div className="box_container">
         <section className="title_section">
-          <div className="title_wrapper">
+          <div
+            className={`title_wrapper ${
+              !para ? "title-only-border" : "default-border"
+            }`}
+          >
             <h6>{title}</h6>
             {image && (
               <div className="image_container">

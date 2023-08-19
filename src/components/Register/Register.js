@@ -324,7 +324,7 @@ const Register = () => {
                 />
               </div>
             </div>
-
+{/* 
             <div className="form-check">
               <input
                 type="checkbox"
@@ -336,8 +336,8 @@ const Register = () => {
               <label for="terms" className="form-check-label">
                 I agree to the terms and conditions
               </label>
-            </div>
-            <div className="submit_btn">
+            </div> */}
+            <div className="submit_btn mt-3">
               <button
                 type="submit"
                 className="btn btn-primary"
