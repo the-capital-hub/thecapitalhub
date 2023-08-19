@@ -11,6 +11,7 @@ import AfterSuccessPopUp from "../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import ErrorPopUp from "../PopUp/ErrorPopUp/ErrorPopUp";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess, loginFailure } from "../../Store/Action/userAction";
+import backArrow from "../../Images/left-arrow.png";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -53,7 +54,6 @@ const Login = () => {
           navigate("/profile");
         }, 2000);
 
-
         dispatch(loginSuccess(response.user));
       }
 
@@ -76,10 +76,16 @@ const Login = () => {
     <>
       <div className="row d-flex register_container">
         <div className="col-lg-6 col-md-12 register_heading">
+          <Link to="/">
+            <img className="backArrow" src={backArrow} alt="arrow_back" />
+          </Link>
           <h3>Welcome back!</h3>
           <img src={RegisterIcon} alt="image" />
         </div>
         <div className="col-lg-6 col-md-12 register_heading_right">
+          <Link to="/">
+            <img className="backArrow" src={backArrow} alt="arrow_back" />
+          </Link>
           <span className="welcome">Welcome back!</span>
           <h1 className="mt-5">Log in</h1>
           <h3 className="already_have_account">
@@ -122,7 +128,7 @@ const Login = () => {
               </div>
             </div>
 
-            <div className="form-check">
+            {/* <div className="form-check">
               <input
                 type="checkbox"
                 id="terms"
@@ -133,8 +139,8 @@ const Login = () => {
               <label for="terms" className="form-check-label">
                 I agree to the terms and conditions
               </label>
-            </div>
-            <div className="submit_btn">
+            </div> */}
+            <div className="submit_btn mt-3">
               <button type="submit" className="btn btn-primary">
                 Log In
               </button>
