@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./TeamCard.scss";
 import PramodSq from "../../../../../Images/PramodSqare.png";
 import { useSelector } from "react-redux";
@@ -6,21 +6,28 @@ import { postStartUpData } from "../../../../../Service/user";
 
 const TeamCard = ({ index, profile, name, designation, page, company }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const [editedName, setEditedName] = useState(name);
+  const [editedDesignation, setEditedDesignation] = useState(designation);
 
-  const handleUpdate = (field, event) => {
-    const updatedValue = event.target.value;
-    if(!updatedValue) return;
-    company.team[index - 1][field] = updatedValue;
+  const handleUpdate = () => {
+    const updatedTeam = [...company.team];
+    updatedTeam[index - 1] = {
+      ...updatedTeam[index - 1],
+      name: editedName,
+      designation: editedDesignation,
+    };
+    const updatedCompany = { ...company, team: updatedTeam };
+
     postStartUpData({
-      ...company,
+      ...updatedCompany,
       founderId: loggedInUser._id,
     })
       .then(({ data }) => {
         console.log(data);
-        window.location.reload();
       })
       .catch((err) => console.log(err));
   };
+
   return (
     <>
       <div className="row team_card_container">
@@ -31,21 +38,30 @@ const TeamCard = ({ index, profile, name, designation, page, company }) => {
               <img src={PramodSq} alt="image" />
               <div className="company_text">
                 {page === "oneLinkEdit" ? (
-                  <input placeholder={name} 
-                  onBlur={(e) => handleUpdate("name", e)}
-                  />
+                  <>
+                    <input
+                      type="text"
+                      value={editedName}
+                      onChange={(e) => setEditedName(e.target.value)}
+                      onBlur={handleUpdate}
+                    />
+                    <hr />
+                    <input
+                      type="text"
+                      value={editedDesignation}
+                      onChange={(e) => setEditedDesignation(e.target.value)}
+                      onBlur={handleUpdate}
+                    />
+                    <hr />
+                  </>
                 ) : (
-                  <h6>{name}</h6>
+                  <>
+                    <h6>{name}</h6>
+                    <hr />
+                    <h6>{designation}</h6>
+                    <hr />
+                  </>
                 )}
-                <hr />
-                {page === "oneLinkEdit" ? (
-                  <input placeholder={designation} 
-                  onBlur={(e) => handleUpdate("designation", e)}
-                  />
-                ) : (
-                  <h6>{designation}</h6>
-                )}
-                <hr />
               </div>
             </div>
           </div>

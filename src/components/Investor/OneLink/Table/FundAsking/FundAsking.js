@@ -32,11 +32,11 @@ const FundAsking = ({ company, page }) => {
               <div className="amount_text">
                 {page === "oneViewEdit" ? (
                   <input 
-                  placeholder={company?.fundingAsk || 10000} 
+                  placeholder={company?.fundingAsk} 
                   onBlur={(e) => handleUpdate("fundingAsk", e)}
                   />
                 ) : (
-                  <h6>{company?.fundingAsk || 10000}</h6>
+                  <h6>{company?.fundingAsk}</h6>
                 )}
               </div>
             </div>
