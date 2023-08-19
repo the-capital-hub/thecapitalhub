@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const FinancialsDocumentation = () => {
   return (
     <>
-      <div className="container-fluid financial-document_main_container">
+      <div className="container financial-document_main_container">
         <div className="container">
         <Link to={'/service'}><img src={BackIcon} alt="back"/>Back</Link>
           <section className="heading_section_fund">

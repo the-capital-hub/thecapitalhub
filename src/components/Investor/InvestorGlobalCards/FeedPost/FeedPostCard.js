@@ -1,11 +1,11 @@
 import React from "react";
 import profilePic from "../../../../Images/investorIcon/profilePic.svg";
 import locationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
-import RoundLogo from '../../../../Images/RoundLogo.png'
-import SavedIcon from '../../../../Images/SavedIcon.svg'
-import HomeIcon from '../../../../Images/HomeIcon.svg'
-import ThreeODotIcon from '../../../../Images/ThreeDotIcon.svg'
-import FireIcon from '../../../../Images/Fire.png'
+import RoundLogo from "../../../../Images/RoundLogo.png";
+import SavedIcon from "../../../../Images/SavedIcon.svg";
+import HomeIcon from "../../../../Images/HomeIcon.svg";
+import ThreeODotIcon from "../../../../Images/ThreeDotIcon.svg";
+import FireIcon from "../../../../Images/Fire.png";
 import "./feedPostCard.scss";
 
 const FeedPostCard = () => {
@@ -21,7 +21,7 @@ const FeedPostCard = () => {
                   <span
                     style={{ fontSize: "20px", fontWeight: 600, color: "#000" }}
                   >
-                    Capital Hub
+                    The Capital Hub
                   </span>
                   <span>
                     <span
@@ -52,21 +52,20 @@ const FeedPostCard = () => {
                   </span>
                 </div>
               </div>
-              <div className="three_dot"><img src={ThreeODotIcon} alt="dot"/></div>
+              <div className="three_dot">
+                <img src={ThreeODotIcon} alt="dot" />
+              </div>
             </div>
             <hr />
             <div className="row">
               <div className="col-12 para_container">
                 <div className="para_container_text">
                   <p>
-                    As the Founder at Capital HUB, Man's all about building
-                    great start-ups from a simple idea to an elegant reality.
-                    Humbled and honored to have worked with Angels and VC's
-                    across the globe to support and grow the startup culture.As
-                    the Founder at Capital HUB, Man's all about building great
-                    start-ups from a simple idea to an elegant reality. Humbled
-                    and honored to have worked with Angels and VC's across the
-                    globe to support and grow the startup culture.
+                    As the Founder at The Capital HUB, my vision is all about
+                    building great start-ups from a simple idea to an elegant
+                    reality. Humbled and honored to have worked with Angels and
+                    VC's across the globe to support and grow the
+                    startup culture.
                   </p>
                 </div>
               </div>

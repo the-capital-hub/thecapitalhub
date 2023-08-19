@@ -15,7 +15,7 @@ import emailIcon from "../../../Images/service/image 58(1).png";
 const Fundraising = () => {
   return (
     <>
-      <div className="container-fluid fundraising_main_container">
+      <div className="container fundraising_main_container">
         <div className="container">
           <Link to={"/service"}>
             <img src={BackIcon} alt="back" />
@@ -34,11 +34,11 @@ const Fundraising = () => {
               <div className="para">
                 <p className="mt-2">
                   Start raising your first round of angel investments with
-                  Capital HUB. At its very core Capital HUB focuses on finding
+                  The Capital HUB. At its very core The Capital HUB focuses on finding
                   ideal and right strategic investors to Support, Mentor, and
                   guide founders to experience the full potential of raising
                   investment from an angel. With a closed curated network of
-                  over 1000+ angels, Capital HUB is now your one-stop
+                  over 1000+ angels, The Capital HUB is now your one-stop
                   destination for all your fundraising needs.{" "}
                 </p>
 
@@ -190,7 +190,7 @@ const Fundraising = () => {
                   expect NO and try to believe in the idea that you once started
                   and never stop working on it until you reach your goals. Seems
                   like a lot of work? Contact us now and let us help you build
-                  your next great venture together at Capital HUB
+                  your next great venture together at The Capital HUB
                 </div>{" "}
               </li>
             </ul>

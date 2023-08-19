@@ -33,14 +33,15 @@ const CompanyDetailsCard = (userDetails) => {
                     <img src={LogoX} alt="profileimage" />
                   </span>
                   <div className="left_profile_text flex_content">
-                    <h2 className="typography m-2">{onePager.company || `The Capital Hub`}</h2>
+                    <h2 className="typography m-2">
+                      {onePager.company || `The Capital Hub`}
+                    </h2>
                     <span className="small_typo m-2">
                       {onePager.description}
                     </span>
                     <span className="small_typo location_icon">
                       <img src={LocationIcon} alt="location" />
-                      {onePager.location}{" "}
-                      <img src={EmailIcon} alt="location" />
+                      {onePager.location} <img src={EmailIcon} alt="location" />
                       {userDetails?.user?.email}{" "}
                     </span>
                     <div className="small_typo social_icon mt-3">
@@ -56,14 +57,7 @@ const CompanyDetailsCard = (userDetails) => {
             <div className="row">
               <div className="company_details mt-4">
                 <p className="para_text">
-                  {/* As the Founder at Capital HUB, Man's all about building great
-                  start-ups from a simple idea to an elegant reality. Humbled
-                  and honored to have worked with Angels and VC's across the
-                  globe to support and grow the startup culture.As the Founder
-                  at Capital HUB, Man's all about building great start-ups from
-                  a simple idea to an elegant reality. Humbled and honored to
-                  have worked with Angels and VC's across the globe to support
-                  and grow the startup culture. */}
+                  {/* As the Founder at The Capital HUB, my vision is all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture. */}
                   {onePager.introductoryMessage}
                 </p>
               </div>

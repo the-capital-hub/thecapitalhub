@@ -48,8 +48,12 @@
         }
         .image-sec {
           img {
-            margin-top: -16%;
+            // margin-top: -16%;
           }
+        }
+
+        @media(max-width: 768px) {
+          flex-direction: column-reverse;
         }
       }
 

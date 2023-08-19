@@ -70,14 +70,15 @@
         border: 1px solid #eee;
         background: #fff;
         box-shadow: 4px 4px 30px 0px rgba(0, 0, 0, 0.1);
-        width: 405px;
-        height: 250px;
+        // width: 405px;
+        // height: 250px;
         flex-shrink: 0;
         display: flex;
         justify-content: center;
 
         img {
           width: 80%;
+          margin: 10px;
         }
       }
 
@@ -95,7 +96,7 @@
           &::after {
             content: "";
             position: absolute;
-            top: 11%;
+            top: 28px;
             left: 0;
             width: 40%;
             height: 3px;
@@ -130,7 +131,7 @@
         &::after {
           content: "";
           position: absolute;
-          top: 3%;
+          top: 4%;
           left: 15%;
           width: 70%;
           height: 3px;
@@ -148,8 +149,8 @@
         margin-top: 20px;
 
         .image_section {
-            width: 100%;
-            margin-bottom: 2rem;
+          width: 100%;
+          margin-bottom: 2rem;
         }
 
         .text_section {
@@ -157,7 +158,7 @@
             &::after {
               content: "";
               position: absolute;
-              top: 11%;
+              top: 26px;
               left: 0;
               width: 50%;
               height: 3px;
@@ -264,8 +265,8 @@
 
         .text_section {
           position: relative;
-          margin-top: 30px;
-          margin-left: 20px;
+          // margin-top: 30px;
+          // margin-left: 20px;
 
           h1 {
             color: #000;
@@ -278,7 +279,7 @@
             &::after {
               content: "";
               position: absolute;
-              top: 11%;
+              top: 60px;
               left: 0;
               width: 75%;
               height: 3px;
@@ -313,7 +314,7 @@
           &::after {
             content: "";
             position: absolute;
-            top: 1.5%;
+            top: 90px;
             left: 15%;
             width: 70%;
             height: 3px;
@@ -324,5 +325,3 @@
     }
   }
 }
-
-

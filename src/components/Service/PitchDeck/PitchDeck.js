@@ -2,15 +2,18 @@ import React from "react";
 import "./PitchDeck.scss";
 import serviceFiveIcon from "../../../Images/service/Group 15408.svg";
 import listIcon from "../../../Images/ListDot.svg";
-import BackIcon from '../../../Images/BackIcon.svg'
+import BackIcon from "../../../Images/BackIcon.svg";
 import { Link } from "react-router-dom";
 
 const PitchDeck = () => {
   return (
     <>
-      <div className="container-fluid pitch_main_container">
+      <div className="container pitch_main_container">
         <div className="container">
-        <Link to={'/service'}><img src={BackIcon} alt="back"/>Back</Link>
+          <Link to={"/service"}>
+            <img src={BackIcon} alt="back" />
+            Back
+          </Link>
           <section className="heading_section_fund">
             <h1>
               We offer the best
@@ -23,7 +26,7 @@ const PitchDeck = () => {
             </div>
 
             <p className="mt-4">
-              Capital HUB offers elegant pitch deck design and professional
+              The Capital HUB offers elegant pitch deck design and professional
               support to startups. With our advanced designs and friendly
               support, you can confidently present your business case to
               investors.
@@ -36,7 +39,7 @@ const PitchDeck = () => {
               create a pitch deck that will make your startup look polished and
               professional. Whether you're seeking angel round funding or
               looking to attract investors, we can help you begin your
-              fundraising journey with Capital HUB.
+              fundraising journey with The Capital HUB.
             </p>
           </section>
 

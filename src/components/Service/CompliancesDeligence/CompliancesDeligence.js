@@ -1,15 +1,18 @@
 import React from "react";
 import "./CompliancesDeligence.scss";
 import serviceSixIcon from "../../../Images/service/Group 15404.svg";
-import BackIcon from '../../../Images/BackIcon.svg'
+import BackIcon from "../../../Images/BackIcon.svg";
 import { Link } from "react-router-dom";
 
 const CompliancesDeligence = () => {
   return (
     <>
-      <div className="container-fluid complience_main_container">
+      <div className="container complience_main_container">
         <div className="container">
-          <Link to={'/service'}><img src={BackIcon} alt="back"/>Back</Link>
+          <Link to={"/service"}>
+            <img src={BackIcon} alt="back" />
+            Back
+          </Link>
           <section className="heading_section_fund">
             <h1>
               We offer the best
@@ -22,10 +25,10 @@ const CompliancesDeligence = () => {
             </div>
 
             <p className="mt-4">
-              Capital HUB supports startups with compliance and DD services as
-              part of their fundraising journey. Capital HUB extensive services
-              to incorporate startups, startup India registration, and due
-              diligence.
+              The Capital HUB supports startups with compliance and DD services
+              as part of their fundraising journey. The Capital HUB extensive
+              services to incorporate startups, startup India registration, and
+              due diligence.
             </p>
           </section>
           <section className="title_text_description ">

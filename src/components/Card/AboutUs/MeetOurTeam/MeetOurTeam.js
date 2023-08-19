@@ -22,7 +22,7 @@ const MeetOurTeam = () => {
             <p class="designation">Senior Investment Analyst</p>
             <p className="hovering_para">
               A seasoned Analyst with a keen eye for market trends and
-              investment opportunities, driving success for Capital HUB's
+              investment opportunities, driving success for The Capital HUB's
               clients.
             </p>
           </div>
@@ -39,7 +39,7 @@ const MeetOurTeam = () => {
             <p class="designation">Senior Investment Analyst</p>
             <p className="hovering_para">
               A seasoned Analyst with a keen eye for market trends and
-              investment opportunities, driving success for Capital HUB's
+              investment opportunities, driving success for The Capital HUB's
               clients.
             </p>
           </div>
@@ -55,7 +55,7 @@ const MeetOurTeam = () => {
             <p class="designation">Senior Investment Analyst</p>
             <p className="hovering_para">
               A seasoned Analyst with a keen eye for market trends and
-              investment opportunities, driving success for Capital HUB's
+              investment opportunities, driving success for The Capital HUB's
               clients.
             </p>
           </div>

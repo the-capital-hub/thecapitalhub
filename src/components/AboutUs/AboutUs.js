@@ -15,7 +15,7 @@ const AboutUs = () => {
           <div className="about_us_title_text">
             <h2>About Us</h2>
             <p>
-              Welcome to Capital HUB, where our mission is to empower millions
+              Welcome to The Capital HUB, where our mission is to empower millions
               of aspiring Indian entrepreneurs in building successful startups.
               Our platform provides a dynamic ecosystem, connecting startups
               with investors and mentors, fostering growth and innovation. With
@@ -36,7 +36,7 @@ const AboutUs = () => {
               <div className="text_content">
                 <p className="para_margin">
                   With an entrepreneurial spirit and a flair for innovation,
-                  Pramod Badiger, the Founder and CEO of Capital HUB, is a force
+                  Pramod Badiger, the Founder and CEO of The Capital HUB, is a force
                   to be reckoned with. He thrives on structured processes but
                   cherishes the beauty of unscripted conversations. Pramod
                   prefers informal meetings and keeps business updates formal,
@@ -44,7 +44,7 @@ const AboutUs = () => {
                   <br />A true believer in diving deep into the details and
                   envisioning the future, he is often found crystal ball gazing
                   to chart the path ahead. As the silent cheerleader and
-                  occasional horse whisperer at Capital HUB, Pramod lends his
+                  occasional horse whisperer at The Capital HUB, Pramod lends his
                   unwavering support to founders, encouraging them to build
                   their businesses with conviction and individuality. To him,
                   it's not just about offering opinions; it's about empowering
@@ -65,7 +65,7 @@ const AboutUs = () => {
 
               <div className="text_content">
                 <p className="para_margin">
-                  Rohit Sharma, a seasoned Mentor and Advisor at Capital HUB,
+                  Rohit Sharma, a seasoned Mentor and Advisor at The Capital HUB,
                   brings a wealth of experience and wisdom to the table. With a
                   penchant for strategic thinking and a passion for guiding
                   startups, he is a true inspiration to aspiring entrepreneurs.
@@ -94,8 +94,8 @@ const AboutUs = () => {
 
               <div className="text_content">
                 <p className="para_margin">
-                  Meet Shruthi Sullery, the dynamic Principal of Investor
-                  Relations at Capital HUB. With an innate ability to connect
+                  Meet Shruthi Sullerey, the dynamic Principal of Investor
+                  Relations at The Capital HUB. With an innate ability to connect
                   with investors and foster meaningful relationships, Shruthi
                   plays a pivotal role in shaping the future of startups. Her
                   expertise in the financial realm, combined with a passion for
@@ -108,7 +108,7 @@ const AboutUs = () => {
                   every startup she collaborates with, propelling them towards
                   greater heights.
                 </p>
-                <span>Shruthi Sullery</span>
+                <span>Shruthi Sullerey</span>
                 <h2>Principal Investor Relations </h2>
               </div>
             </div>
@@ -136,7 +136,7 @@ const AboutUs = () => {
               capital; they craved the magic of networking and the wisdom of
               mentorship to turn their dreams into realities.
             </p>
-            <p>That's why we started Capital HUB</p>
+            <p>That's why we started The Capital HUB</p>
           </div>
 
           <div className="about_us_title_text meet_our_team">
@@ -167,7 +167,7 @@ const AboutUs = () => {
           {/* <div className="about_us_title_text mt-5 our_service co-investor_title">
             <h2 className="mb-5">Our Professional Services</h2>
             <p>
-              Capital HUB provides a 360-degree approach to building a great
+              The Capital HUB provides a 360-degree approach to building a great
               Startup. We work with startups on Raising Angel investments, Pitch
               deck creation, Financials, Business plans, Brand management,
               Growth model, Software development, Marketing, and Compliance
@@ -176,11 +176,11 @@ const AboutUs = () => {
             <ul>
               <li>
                 <b> FUNDRAISING </b>: With a closed curated network of over
-                1000+ angels, Capital HUB is now your one-stop destination for
+                1000+ angels, The Capital HUB is now your one-stop destination for
                 all your fundraising needs.
               </li>
               <li>
-                <b>PITCH DECK </b>: Capital HUB offers elegant pitch deck design
+                <b>PITCH DECK </b>: The Capital HUB offers elegant pitch deck design
                 and professional support to startups.
               </li>
               <li>
@@ -189,12 +189,12 @@ const AboutUs = () => {
                 have a big impact on your business's success.
               </li>
               <li>
-                <b> WEB DEVELOPMENT</b> : Capital HUB is the go-to source for
+                <b> WEB DEVELOPMENT</b> : The Capital HUB is the go-to source for
                 startups when it comes to Web development, and Android and iOS
                 development services. 
               </li>
               <li>
-                <b> STARTUP CONSULTING / CXO SERVICES </b>:  Capital HUB is
+                <b> STARTUP CONSULTING / CXO SERVICES </b>:  The Capital HUB is
                 building a better working world by realizing business
                 transformation through the power of people, technology, and
                 innovation. 
