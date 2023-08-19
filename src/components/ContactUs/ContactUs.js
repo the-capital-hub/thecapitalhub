@@ -12,7 +12,9 @@ const ContactUs = () => {
       <div className="container-fluid contactus_container">
         <div className="title_section">
           <h2>Contact Us</h2>
-          <span>Our experts will be happy to assist you with your queries</span>
+          <span className="mx-2">
+            Our experts will be happy to assist you with your queries
+          </span>
         </div>
         <div className="container mt-5">
           <div class="card-container card-container_contact">
@@ -41,7 +43,7 @@ const ContactUs = () => {
                     fontWeight: "500",
                   }}
                 >
-                  capitalhub@gmail.com
+                  investments@thecapitalhub.in
                 </span>
                 <p>
                   Write to us about your query and our customer support team
@@ -55,7 +57,7 @@ const ContactUs = () => {
               <div className="text_content">
                 <h2>Our address</h2>
                 <p>
-                  Capital Hub <br />
+                  The Capital Hub <br />
                   Benz circle, 5th Floor, <br /> Electronic city, <br />
                   karnataka, bangalore – 500 064
                 </p>

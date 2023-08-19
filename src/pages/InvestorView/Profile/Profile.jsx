@@ -65,7 +65,7 @@ function Profile() {
                             className="small_typo"
                             style={{ marginBottom: "1rem" }}
                           >
-                            Capital Hub
+                            The Capital Hub
                           </td>
                         </tr>
                         <tr>

@@ -8,7 +8,7 @@ import listIcon from "../../../Images/ListDot.svg";
 const StartupConsulting = () => {
   return (
     <>
-      <div className="container-fluid startup-consulting_main_container ">
+      <div className="container startup-consulting_main_container ">
         <div className="container">
           <Link to={"/service"}>
             <img src={BackIcon} alt="back" />
@@ -26,7 +26,7 @@ const StartupConsulting = () => {
             </div>
 
             <p className="mt-4">
-              Capital HUB is building a better working world by realizing
+              The Capital HUB is building a better working world by realizing
               business transformation through the power of people, technology,
               and innovation. <br />
               By using these three pillars, we are able to create a more
