@@ -115,3 +115,23 @@ export const getStartUpData = async (userId) => {
     };
   }
 };
+
+export const updateUserById = async (userId, newData) => {
+  try {
+    const data = await UserModel.findByIdAndUpdate(
+      userId,
+      { ...newData }
+    );
+    return {
+      status: 200,
+      message: "User updated succesfully",
+      data,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      status: 500,
+      message: "An error occurred while updating the bio.",
+    };
+  }
+};

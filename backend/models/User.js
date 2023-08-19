@@ -107,7 +107,7 @@ userSchema.pre(
   async function (next) {
     try {
       const data = this.getUpdate();
-      if (data.password) {
+      if (data?.password) {
         data.password = hashPassword(this.password);
       }
       next();
