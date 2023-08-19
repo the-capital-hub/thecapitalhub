@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import { getUserById } from "../../../Service/user";
 import { useState, useEffect } from "react";
 
-function Profile() {
+function  Profile() {
   const { username } = useParams();
   const [user, setUser] = useState([]);
   useEffect(() => {

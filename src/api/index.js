@@ -13,7 +13,8 @@ const API = Object.freeze({
   updateUser: `${baseUrl}/users/updateFounder`,
   getOnePager: `${baseUrl}/startUp/getOnePager`,
   getUserById: `${baseUrl}/users/getUserById`,
-  getStartupByFounderId: `${baseUrl}/startup/getStartupByFounderId`
+  getStartupByFounderId: `${baseUrl}/startup/getStartupByFounderId`,
+  updateUserById: `${baseUrl}/users/updateUserById`
 });
 
 export default API;

@@ -5,6 +5,7 @@ import {
   loginUserController,
   getUserByIdController,
   updateUser,
+  updateUserByIdController,
 } from "../controllers/userData.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
@@ -13,6 +14,8 @@ router.post("/login", loginUserController);
 router.post("/createUser", registerUserController);
 
 router.get("/getUserById/:id", getUserByIdController);
+
+router.patch("/updateUserById/:userId", updateUserByIdController);
 
 // Authorized routes below
 router.use(authenticateToken);
