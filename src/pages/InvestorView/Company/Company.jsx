@@ -175,7 +175,7 @@ function Company() {
                     </div>
                     <div className="social_icons">
                       <span>
-                        <img src={twIcon} alt="google" /> Tweeter
+                        <img src={twIcon} alt="google" /> Twitter
                       </span>
                     </div>
                     <div className="social_icons">
@@ -249,7 +249,7 @@ function Company() {
                   <h2>Key Focusing Area</h2>
                   <div className="focus_things">
                     <div className="focusItem">
-                      <span>Fainance</span>
+                      <span>Finance</span>
                     </div>
                     <div className="focusItem">
                       <span>3D Scanning</span>
@@ -261,7 +261,7 @@ function Company() {
                       <span>Virtual Reality VR</span>
                     </div>
                     <div className="focusItem">
-                      <span>Artifical Inteligence</span>
+                      <span>Artificial Intelligence</span>
                     </div>
                   </div>
                 </div>
