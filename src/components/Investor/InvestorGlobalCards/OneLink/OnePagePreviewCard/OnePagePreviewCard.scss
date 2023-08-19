@@ -3,14 +3,13 @@
     flex-wrap: wrap;
     justify-content: space-between;
 
-
     .card {
         position: relative;
         height: 138px;
         margin-bottom: 20px;
         border-radius: 4px;
-        background: #FFF;
-        box-shadow: 4px 4px 30px 0px rgba(234, 238, 242, 0.50);
+        background: #fff;
+        box-shadow: 4px 4px 30px 0px rgba(234, 238, 242, 0.5);
 
         .card-body {
             display: flex;
@@ -24,7 +23,7 @@
                 left: 25%;
                 transform: translateX(-50%);
                 border-radius: 5px;
-                color: #FF772F;
+                color: #ff772f;
                 text-align: center;
                 font-family: Poppins;
                 font-size: 12px;
@@ -40,7 +39,8 @@
                 font-style: normal;
                 font-weight: 400;
                 line-height: normal;
-
+                outline: none;
+                border: none;
             }
         }
     }

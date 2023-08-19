@@ -57,7 +57,7 @@ const OneLinkEditView = () => {
           </section>
 
           <section className="table_section">
-            <Table />
+            <Table page={"oneLinkEditPage"} />
           </section>
 
           <section className="team_section">
@@ -74,7 +74,7 @@ const OneLinkEditView = () => {
 
           <section className="fund_asking_deployment">
             <div className="funding_divider">
-              <FundAsking company={company}/>
+              <FundAsking company={company} page={'oneViewEdit'}/>
             </div>
             <div className="funding_divider">
               <OneLinkContactEdit />

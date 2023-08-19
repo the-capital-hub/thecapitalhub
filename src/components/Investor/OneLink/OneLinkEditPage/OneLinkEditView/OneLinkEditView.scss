@@ -34,7 +34,6 @@
                 justify-content: center;
                 align-items: center;
             }
-
         }
 
         .dollar_rupree {
@@ -47,7 +46,7 @@
         .company_description {
             display: flex;
             border-radius: 5px;
-            border: 0.76px solid #E3E3E3;
+            border: 0.76px solid #e3e3e3;
             background: #000;
             width: 96%;
             margin: auto;
@@ -67,7 +66,7 @@
                 margin-left: 20px;
 
                 h6 {
-                    color: #FFF;
+                    color: #fff;
                     font-family: Poppins;
                     font-size: 12px;
                     font-style: normal;
@@ -94,6 +93,7 @@
             max-width: 96%;
             width: 96%;
             display: flex;
+            overflow-x: scroll;
             justify-content: center;
         }
 
@@ -131,15 +131,15 @@
                 height: 60px;
                 flex-shrink: 0;
                 margin-bottom: 10px;
-                background-color: #FFF;
+                background-color: #fff;
                 border-radius: 50px;
-                border: 1px solid #FD5901;
-                color: #FD5901;
+                border: 1px solid #fd5901;
+                color: #fd5901;
                 margin-right: 10px;
             }
 
             .download_button {
-                background: #FD5901;
+                background: #fd5901;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -155,5 +155,4 @@
             }
         }
     }
-
 }
