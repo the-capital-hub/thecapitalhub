@@ -68,6 +68,7 @@ const OneLinkEditView = () => {
               profile= {team?.image}
               name={team?.name}
               designation={team?.designation}
+              page={'oneLinkEdit'}
             />
           ))}
           </section>
