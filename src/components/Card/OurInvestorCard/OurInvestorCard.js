@@ -4,13 +4,11 @@ import RightFit from "../../../Images/ourInvestor/RightFit.svg";
 import VerifiedStartups from "../../../Images/ourInvestor/VerifiedStartups.svg";
 import ComplianceDiligence from "../../../Images/ourInvestor/Compliancediligence.svg";
 import CompleteDocumentation from "../../../Images/ourInvestor/Completedocumentation.svg";
-import Support from "../../../Images/ourInvestor/Support.svg"
-import Convenience from "../../../Images/ourInvestor/Convenience.svg"
-import Regularupdates from "../../../Images/ourInvestor/Regularupdates.svg"
-import TrustFaith from "../../../Images/ourInvestor/TrustandFaith.svg"
-import BestOfferings from "../../../Images/ourInvestor/Best Offerings.svg"
-
-
+import Support from "../../../Images/ourInvestor/Support.svg";
+import Convenience from "../../../Images/ourInvestor/Convenience.svg";
+import Regularupdates from "../../../Images/ourInvestor/Regularupdates.svg";
+import TrustFaith from "../../../Images/ourInvestor/TrustandFaith.svg";
+import BestOfferings from "../../../Images/ourInvestor/Best Offerings.svg";
 
 const OurInvestorCard = () => {
   return (
@@ -32,8 +30,8 @@ const OurInvestorCard = () => {
               <img src={VerifiedStartups} alt="img" />
               <h3 className="underline_two">Verified Startups</h3>
               <h4>
-                Capital HUB verifies every startup presented to an investor to
-                maintain the authenticity and value of the community built.{" "}
+                The Capital HUB verifies every startup presented to an investor
+                to maintain the authenticity and value of the community built.{" "}
               </h4>
             </div>
           </div>
@@ -43,7 +41,7 @@ const OurInvestorCard = () => {
               <h3 className="underline_three">Compliance and due diligence</h3>
               <h4>
                 Startups and founders are thoroughly vetted and DD such as LDD,
-                FDD, and CDD are done by Capital HUB, to make a smoother
+                FDD, and CDD are done by The Capital HUB, to make a smoother
                 decision and save time while you begin your investing journey.{" "}
               </h4>
             </div>
@@ -64,8 +62,8 @@ const OurInvestorCard = () => {
               <img src={Support} alt="img" />
               <h3 className="underline_five">24/7 Support</h3>
               <h4>
-                Capital HUB believes in finding your best half ( startups ), so
-                we will be available 24/7 to make your experience in angel
+                The Capital HUB believes in finding your best half ( startups ),
+                so we will be available 24/7 to make your experience in angel
                 investing worthwhile.
               </h4>
             </div>
@@ -75,7 +73,8 @@ const OurInvestorCard = () => {
               <img src={Convenience} alt="img" />
               <h3 className="underline_six"> Convenience</h3>
               <h4>
-                End End Documentation and handholding is done by capital HUB.
+                End End Documentation and handholding is done by The Capital
+                HUB.
               </h4>
             </div>
           </div>
@@ -84,7 +83,7 @@ const OurInvestorCard = () => {
               <img src={Regularupdates} alt="img" />
               <h3 className="underline_seven">Regular updates</h3>
               <h4>
-                Capital HUB will take the responsibility to provide weekly,
+                The Capital HUB will take the responsibility to provide weekly,
                 Monthly, and quarterly updates from founders and startups to
                 showcase our commitment to using the funds for the right cause
               </h4>
@@ -95,10 +94,10 @@ const OurInvestorCard = () => {
               <img src={TrustFaith} alt="img" />
               <h3 className="underline_eight">Trust and Faith</h3>
               <h4>
-                Capital HUB and its valued advisors act as an observer on the
-                board to successfully help startups network, retain authenticity
-                and manage funds in the right direction of scalability and
-                growth.
+                The Capital HUB and its valued advisors act as an observer on
+                the board to successfully help startups network, retain
+                authenticity and manage funds in the right direction of
+                scalability and growth.
               </h4>
             </div>
           </div>

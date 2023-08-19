@@ -5,6 +5,7 @@ import {
   loginUserService,
   getUserById,
   updateUserData,
+  updateUserById,
 } from "../services/userService.js";
 import { secretKey } from "../constants/config.js";
 
@@ -91,6 +92,14 @@ export const updateUser = async (req, res) => {
       userId,
       newData,
     });
+    res.status(status).json({ message, data });
+  } catch (error) {}
+};
+
+export const updateUserByIdController = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { status, message, data } = await updateUserById(userId,req.body);
     res.status(status).json({ message, data });
   } catch (error) {}
 };

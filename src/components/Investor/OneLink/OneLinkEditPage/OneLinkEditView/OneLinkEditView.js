@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./OneLinkEditView.scss";
 import DollarRupeeImage from "../../../../../Images/Dollar_rupee.svg";
 import PramodSq from "../../../../../Images/PramodSqare.png";
@@ -12,22 +12,46 @@ import SmallProfileCard from "../../../InvestorGlobalCards/TwoSmallMyProfile/Sma
 import OneLinkMarketSection from "../OneLinkMarketSection/OneLinkMarketSection";
 import OneLinkContactEdit from "./OneLinkContactEdit/OneLinkContactEdit";
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import { getStartupByFounderId } from "../../../../../Service/user";
+import { getStartupByFounderId, postStartUpData } from "../../../../../Service/user";
 
 const OneLinkEditView = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  console.log(loggedInUser);
   const userId = loggedInUser._id;
-  const [company, setCompany] = useState([]);
+  const [company, setCompany] = useState({});
+  const [formData, setFormData] = useState({
+    company: "",
+    description: "",
+  });
+
   useEffect(() => {
     getStartupByFounderId(userId)
       .then(({ data }) => {
         setCompany(data);
+        setFormData({
+          company: data.company || "",
+          description: data.description || "",
+        });
       })
-      .catch(() => setCompany([]));
+      .catch(() => setCompany({}));
   }, [userId]);
-  console.log("Company:",company);
+
+  const handleInputChange = (field, event) => {
+    const updatedValue = event.target.value;
+    if(!updatedValue) return;
+    setFormData({ ...formData, [field]: updatedValue });
+  };
+
+  const handleUpdate = () => {
+    postStartUpData({
+      ...formData,
+      founderId: loggedInUser._id,
+    })
+      .then(({ data }) => {
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <div className="editview_container">
@@ -42,18 +66,30 @@ const OneLinkEditView = () => {
           <section className="company_description">
             <img src={PramodSq} alt="image" />
             <div className="company_text">
-              <h6>{company.company || "Enter company description"} </h6>
+              <h6>
+                <input
+                  value={formData.company}
+                  onChange={(e) => handleInputChange("company", e)}
+                  onBlur={(e) => handleUpdate()}
+                />
+              </h6>
               <hr />
-              <h6>{company.description || "Eg: India’s best startup platfrom"}</h6>
+              <h6>
+                <textarea
+                  value={formData.description}
+                  onChange={(e) => handleInputChange("description", e)}
+                  onBlur={(e) => handleUpdate()}
+                />
+              </h6>
             </div>
           </section>
-          {/* problem solution section */}
+
           <section className="card_section">
-            <OnePagePreviewCard company={company}/>
+            <OnePagePreviewCard company={company} page={"oneLinkEdit"}/>
           </section>
 
           <section className="market_section">
-            <OneLinkMarketSection company={company}/>
+            <OneLinkMarketSection company={company} page={"oneLinkEdit"} />
           </section>
 
           <section className="table_section">
@@ -61,24 +97,24 @@ const OneLinkEditView = () => {
           </section>
 
           <section className="team_section">
-            {/* <TeamCard /> */}
             {company?.team?.map((team, index) => (
-            <TeamCard
-              index={index}
-              profile= {team?.image}
-              name={team?.name}
-              designation={team?.designation}
-              page={'oneLinkEdit'}
-            />
-          ))}
+              <TeamCard
+                index={index + 1}
+                profile={team?.image}
+                name={team?.name}
+                designation={team?.designation}
+                company={company}
+                page={"oneLinkEdit"}
+              />
+            ))}
           </section>
 
           <section className="fund_asking_deployment">
             <div className="funding_divider">
-              <FundAsking company={company} page={'oneViewEdit'}/>
+              <FundAsking company={company} page={"oneViewEdit"} />
             </div>
             <div className="funding_divider">
-              <OneLinkContactEdit />
+              <OneLinkContactEdit oneLink = {company.oneLink} page={"oneViewEdit"}/>
             </div>
           </section>
 
@@ -86,7 +122,7 @@ const OneLinkEditView = () => {
             <div className="download_button_container">
               <button>Preview</button>
               <button className="download_button">
-                 Download for &#8377;69
+                Download for &#8377;69
               </button>
             </div>
           </section>

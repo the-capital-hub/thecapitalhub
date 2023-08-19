@@ -1,23 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import "./TeamCard.scss";
 import PramodSq from "../../../../../Images/PramodSqare.png";
+import { useSelector } from "react-redux";
+import { postStartUpData } from "../../../../../Service/user";
 
-const TeamCard = ({ index, profile, name, designation, page }) => {
-  const cardData = [
-    {
-      title: "team",
-      content: "Enter the problem statement your startup is addressing",
-    },
-    {
-      title: "team2",
-      content: "Enter the solution your startup is offering",
-    },
-    { title: "team3", content: "Mention your competitors" },
-    { title: "team4", content: "Your startup’s revenue model" },
-    { title: "team5", content: "Your Growth startegy" },
-    { title: "team6", content: "Your Market traction" },
-    // { title: "7.Business Model", content: "Your Business Model" },
-  ];
+const TeamCard = ({ index, profile, name, designation, page, company }) => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const [editedName, setEditedName] = useState(name);
+  const [editedDesignation, setEditedDesignation] = useState(designation);
+
+  const handleUpdate = () => {
+    const updatedTeam = [...company.team];
+    updatedTeam[index - 1] = {
+      ...updatedTeam[index - 1],
+      name: editedName,
+      designation: editedDesignation,
+    };
+    const updatedCompany = { ...company, team: updatedTeam };
+
+    postStartUpData({
+      ...updatedCompany,
+      founderId: loggedInUser._id,
+    })
+      .then(({ data }) => {
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <div className="row team_card_container">
@@ -26,20 +36,32 @@ const TeamCard = ({ index, profile, name, designation, page }) => {
             <div className="card-body">
               <h5 className="card-title">Team {index}</h5>
               <img src={PramodSq} alt="image" />
-              {console.log(page)}
               <div className="company_text">
                 {page === "oneLinkEdit" ? (
-                  <input placeholder={name} />
+                  <>
+                    <input
+                      type="text"
+                      value={editedName}
+                      onChange={(e) => setEditedName(e.target.value)}
+                      onBlur={handleUpdate}
+                    />
+                    <hr />
+                    <input
+                      type="text"
+                      value={editedDesignation}
+                      onChange={(e) => setEditedDesignation(e.target.value)}
+                      onBlur={handleUpdate}
+                    />
+                    <hr />
+                  </>
                 ) : (
-                  <h6>{name}</h6>
+                  <>
+                    <h6>{name}</h6>
+                    <hr />
+                    <h6>{designation}</h6>
+                    <hr />
+                  </>
                 )}
-                <hr />
-                {page === "oneLinkEdit" ? (
-                  <input placeholder={designation} />
-                ) : (
-                  <h6>{designation}</h6>
-                )}
-                <hr />
               </div>
             </div>
           </div>

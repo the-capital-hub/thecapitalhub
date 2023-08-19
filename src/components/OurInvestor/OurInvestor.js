@@ -9,7 +9,7 @@ import OurInvestorCard from "../Card/OurInvestorCard/OurInvestorCard";
 const OurInvestor = () => {
   return (
     <>
-      <div className="container-fluid investor_main_container">
+      <div className="container investor_main_container">
         <div className="container">
           <Link to={"/"}>
             <img src={BackIcon} alt="back" />
@@ -32,24 +32,36 @@ const OurInvestor = () => {
               <div className="text_section">
                 <h1>READY TO BE AN ANGEL INVESTOR?</h1>
                 <p>
-                  We got you covered. Begin your journey of Angel investment
-                  with as low as INR 2.5 - 5 Lakhs. Yes, you heard it right,
-                  Capital HUB focuses on connecting angels with the right
-                  startups in their preferred area and industry of investment.
+                  Begin your journey of Angel investment with as low as INR 2.5
+                  - 5 Lakhs. The Capital HUB focuses on connecting angels with
+                  the right startups in their preferred area and industry of
+                  investment.
                   <br />
                   <br />
-                  Capital HUB always provides investors with Verified,
+                  The Capital HUB always provides investors with verified,
                   authenticated, and fully documented startups. Capital HUB
                   focuses on the 3M's (management, Market, and mathematics ),
-                  Product or tech, Startup stage, Founder's experience, Current
-                  traction, and many more to help find the right fit to begin
-                  your angel investment journey with Capital HUB.
+                  product, technology, startup stage, founder's experience,
+                  current traction, and many more to help find the right fit to
+                  begin your angel investment journey with Capital HUB.
+                </p>
+                <h1>COMPLIANCE AND DUE DILIGENCE</h1>
+                <p>
+                  Startups and founders are thoroughly vetted through our due
+                  diligence processes such as LDD, FDD, and CDD to make a
+                  smoother decision and save time while you begin your investing
+                  journey.
+                </p>
+                <h1>CONVENIENCE</h1>
+                <p>
+                  End-to-End Documentation and handholding is done by The
+                  Capital HUB.
                 </p>
               </div>
             </div>
           </section>
           <section className="row benifits_container">
-            <h1>BENEFITS OF BEING AN ANGEL INVESTOR WITH CAPITAL HUB</h1>
+            <h1>BENEFITS OF BEING AN ANGEL INVESTOR WITH THE CAPITAL HUB</h1>
             <OurInvestorCard />
           </section>
           {/* <section className="heading_section_investor">
