@@ -67,7 +67,7 @@
     border-radius: 40px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 820px) {
     .container {
 
         .our_startup_container {
@@ -107,6 +107,12 @@
         }
     }
 
+    .our_startup_main_container {
+        margin-top: -15%;
+    }
+}
+
+@media (max-width: 768px) {
     .our_startup_main_container {
         margin-top: -25%;
     }

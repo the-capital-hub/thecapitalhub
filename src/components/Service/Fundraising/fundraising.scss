@@ -102,6 +102,7 @@
             height: 140px;
             width: 160px;
             margin-right: 50px;
+            margin-bottom: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -109,6 +110,8 @@
             border: 1px solid #EBEBEB;
             background: #FCFDFF;
             box-shadow: 4px 4px 30px 0px rgba(0, 0, 0, 0.07);
+
+            
 
             img {
 
@@ -127,9 +130,9 @@
             }
         }
 
-        .card:nth-child(1) {
-            margin-left: 50px;
-        }
+        // .card:nth-child(1) {
+        //     margin-left: 50px;
+        // }
 
 
     }
@@ -168,7 +171,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 820px) {
   .fundraising_main_container {
     .container {
       a {
@@ -191,6 +194,7 @@
       }
 
       .heading_section_fund {
+        margin-top: 4rem;
         h1 {
           font-size: 28px;
           margin-top: 20px;

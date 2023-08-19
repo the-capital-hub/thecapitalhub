@@ -40,14 +40,18 @@ function Company() {
                 <div className="row">
                   <div className="col-lg-7 col-md-12">
                     <div className="image_name_section mt-2">
-                      <img src={onePager.profile || profilePic} alt="profileimage" />
+                      <img
+                        src={onePager.profile || profilePic}
+                        alt="profileimage"
+                      />
                       <div className="left_profile_text flex_content ms-3">
                         <h2 className="typography">{onePager.company}</h2>
                         <span className="small_typo">The Finance company</span>
                         <div>
                           <span className="small_typo_location">
                             {" "}
-                            <img src={LocationIcon} alt="location" /> {onePager.location}
+                            <img src={LocationIcon} alt="location" />{" "}
+                            {onePager.location}
                           </span>
                           <span className="small_typo_location">
                             {" "}

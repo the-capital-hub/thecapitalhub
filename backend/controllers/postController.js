@@ -1,6 +1,8 @@
 import {
   allPostsData,
   createNewPost,
+  getUserSavedPosts,
+  savePostService,
   singlePostData,
 } from "../services/postService";
 
@@ -10,7 +12,7 @@ export const createPost = async (req, res) => {
       ...req.body,
       user: req.userId,
     });
-    res.status(200).send({
+    res.send({
       message: "Post created succesfully",
       data: newPost,
     });
@@ -28,7 +30,7 @@ export const getAllPosts = async (req, res) => {
         message: "No Posts yet",
       });
     } else {
-      res.status(200).send({ message: "Posts fetched succesfully", data });
+      res.send({ message: "Posts fetched succesfully", data });
     }
   } catch (err) {
     res.status(500).send(err);
@@ -41,9 +43,27 @@ export const getSinglePost = async (req, res) => {
     if (!data) {
       res.status(404).send({ message: "No post found" });
     } else {
-      res.status(200).send({ message: "Post fetched succesfully", data });
+      res.send({ message: "Post fetched succesfully", data });
     }
   } catch (err) {
     res.status(500).send(err);
+  }
+};
+
+export const savePost = async (req, res) => {
+  try {
+    const response = await savePostService(req.userId, req.params.postId);
+    res.send(response);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
+export const getSavedPosts = async (req, res) => {
+  try {
+    const response = await getUserSavedPosts(req.userId);
+    res.send(response);
+  } catch (error) {
+    res.status(500).send(error);
   }
 };

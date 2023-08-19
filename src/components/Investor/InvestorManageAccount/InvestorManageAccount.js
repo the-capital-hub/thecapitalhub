@@ -15,7 +15,7 @@ const InvestorManageAccount = () => {
             <div className="row">
               <div className="col-12 mt-2">
                 <div className="box_container">
-                  <section className="col-6">
+                  <section className="">
                     <div className="present_account card">
                       {/* Header */}
                       <div className="d-flex align-items-center">
@@ -42,7 +42,7 @@ const InvestorManageAccount = () => {
                     </div>
                   </section>
 
-                  <section className="col-6 card empty_box">
+                  <section className=" card empty_box">
                     <div className="d-flex align-items-center">
                       <div className="logo">
                         <img src={logoIcon} alt="img" />

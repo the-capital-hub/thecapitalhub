@@ -11,7 +11,6 @@
     display: flex;
     align-items: center;
     margin-bottom: 15px;
-
     .header-left {
       img {
         width: 60px;
@@ -85,11 +84,22 @@
           font-style: normal;
           font-weight: 400;
           line-height: normal;
-          img{
+          img {
             height: 12px;
             margin-right: 5px;
           }
         }
+      }
+    }
+  }
+}
+
+@media (max-width: 820px) {
+  .fundingteamcard-component {
+    min-width: 200px;
+    .card-body {
+      .designation_connect {
+        flex-direction: column;
       }
     }
   }

@@ -1,4 +1,5 @@
 import { PostModel } from "../models/Post";
+import { UserModel } from "../models/User";
 import { cloudinary } from "../utils/uploadImage";
 
 export const createNewPost = async (data) => {
@@ -50,5 +51,49 @@ export const singlePostData = async (_id) => {
   } catch (error) {
     console.error(error);
     throw new Error("Error getting post");
+  }
+};
+
+export const savePostService = async (user, _id) => {
+  try {
+    const savedAlready = await UserModel.find({ _id: user, savedPosts: _id });
+    if (savedAlready) {
+      return {
+        message: "Already saved post",
+      };
+    }
+    const updatedUser = await UserModel.findOneAndUpdate(
+      { _id: user },
+      { $push: { savedPosts: _id } },
+      {
+        new: true,
+      }
+    );
+    return {
+      message: "Post saved succesfully",
+    };
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error saving post");
+  }
+};
+
+export const getUserSavedPosts = async (user) => {
+  try {
+    const { savedPosts, firstName } = await UserModel.findById(user).populate(
+      "savedPosts"
+    );
+    if (!savedPosts.length) {
+      return {
+        message: "No saved Posts",
+      };
+    }
+    return {
+      data: savedPosts,
+      message: `Saved posts of ${firstName}`,
+    };
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error getting saved posts");
   }
 };

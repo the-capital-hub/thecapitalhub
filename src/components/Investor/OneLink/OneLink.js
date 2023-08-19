@@ -54,7 +54,7 @@ const OneLink = () => {
             </div>
           </div>
         </div>
-        <div className="col">
+        <div className="col   d-none d-xl-block">
           <div className="content-30">
             <div className="row">
               <RightProfileCard />

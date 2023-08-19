@@ -5,12 +5,15 @@
     top: 39px;
     background: #ffffff;
     box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.05);
-    border-radius: 20px;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
+
+    @media (min-width: 768px) {
+      border-radius: 20px;
+    }
 
     .bar_logo_container {
       display: flex;
@@ -77,19 +80,26 @@
 
         .mobile-icon-wrapper {
           display: none;
+
+          @media (min-width: 768px) {
+            background: #eaeef2;
+          }
         }
 
         .icon-wrapper {
-          margin-left: 1.5rem;
           width: 49px;
           height: 49px;
-          left: 1397px;
-          top: 49px;
-          background: #eaeef2;
+          // left: 1397px;
+          // top: 49px;
           border-radius: 50%;
           display: flex;
           justify-content: center;
           align-items: center;
+
+          @media (min-width: 768px) {
+            margin-left: 1.5rem;
+            background: #eaeef2;
+          }
 
           .notification-icon,
           .message-icon {
@@ -101,6 +111,10 @@
             width: 49px;
             height: 49px;
             border-radius: 50%;
+            @media (max-width: 768px) {
+              width: 35px;
+              height: 35px;
+            }
           }
 
           .me {
@@ -140,12 +154,13 @@
           h1 {
             color: #000;
             font-family: Poppins;
-            font-size: 18px;
+            font-size: 16px;
             font-style: normal;
             font-weight: 600;
             line-height: normal;
             margin: 0;
             margin-left: 2px;
+            text-transform: uppercase;
           }
         }
       }
@@ -159,12 +174,12 @@
         .icons-container {
           .mobile-icon-wrapper {
             display: flex;
-            margin-left: 1.5rem;
+            // margin-left: 1.5rem;
             width: 49px;
             height: 49px;
-            left: 1397px;
+            // left: 1397px;
             top: 49px;
-            background: #eaeef2;
+            // background: #eaeef2;
             border-radius: 50%;
             display: flex;
             justify-content: center;

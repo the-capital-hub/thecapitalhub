@@ -43,6 +43,7 @@ const OnePager = () => {
 
   return (
     <div className="onePager">
+      <h1>One Pager</h1>
       <div className="currency">
         <span
           className={rupeeHighlight && "highlighted"}
@@ -69,14 +70,8 @@ const OnePager = () => {
       <hr />
 
       <div className="cards">
-        <SimpleCard
-          title={"Problem"}
-          text={onePager.problem}
-        />
-        <SimpleCard
-          title={"Solution"}
-          text={onePager.solution}
-        />
+        <SimpleCard title={"Problem"} text={onePager.problem} />
+        <SimpleCard title={"Solution"} text={onePager.solution} />
         <SimpleCard
           title={"Competitive Landscape"}
           text={onePager.competitiveLandscape}
@@ -88,9 +83,21 @@ const OnePager = () => {
       <div className="marketCards">
         <Title title="Market (in cr)" />
         <div className="cards">
-          <MarketCard title={"TAM"} subtitle={"(Total Advisable Market)"} amount={onePager.TAM} />
-          <MarketCard title={"SAM"} subtitle={"(Service Advisable Market)"} amount={onePager.SAM} />
-          <MarketCard title={"SAM"} subtitle={"(Service Advisable Market)"} amount={onePager.SOM} />
+          <MarketCard
+            title={"TAM"}
+            subtitle={"(Total Advisable Market)"}
+            amount={onePager.TAM}
+          />
+          <MarketCard
+            title={"SAM"}
+            subtitle={"(Service Advisable Market)"}
+            amount={onePager.SAM}
+          />
+          <MarketCard
+            title={"SAM"}
+            subtitle={"(Service Advisable Market)"}
+            amount={onePager.SOM}
+          />
         </div>
       </div>
 
@@ -103,10 +110,7 @@ const OnePager = () => {
         <Title title={"Team"} />
         <div className="cards">
           {onePager?.team?.map((team, index) => (
-            <TeamsCard
-              name={team.name}
-              designation={team.designation}
-            />
+            <TeamsCard name={team.name} designation={team.designation} />
           ))}
         </div>
       </div>

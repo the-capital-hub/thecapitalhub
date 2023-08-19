@@ -23,10 +23,12 @@ const FundingTeamCard = ({ image, name, age, paragraph }) => {
             <h3>CEO & Founder</h3>
           </div>
           <div className="connect_button">
-         
-            <button>  <span>
-              <img src={ConnectBtn} alt="" />
-            </span>Connect</button>
+            <button>
+              <span>
+                <img src={ConnectBtn} alt="" />
+              </span>
+              Connect
+            </button>
           </div>
         </div>
       </div>

@@ -37,11 +37,11 @@ const Footer = () => {
                   Contact Us
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="#" className="text-white">
                   Courses
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="col-md-2 col-sm-6 footer_list_item">
@@ -101,12 +101,12 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="row ">
+          {/* <div className="row ">
             <div className="col copyright_text">
             <h5>2022 - &copy;Lorem all right deserved</h5>
 
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

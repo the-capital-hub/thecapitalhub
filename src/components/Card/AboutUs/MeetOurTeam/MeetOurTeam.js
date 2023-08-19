@@ -9,8 +9,8 @@ import RaghuImage from "../../../../Images/service/raghu.jpeg";
 const MeetOurTeam = () => {
   return (
     <>
-      <div class="meetourteam_container">
-        <div class="card">
+      <div class="meetourteam_container ">
+        <div class="card col-lg-4 col-md-6 col-sm-12">
           <img src={UpmaImage} alt="image" />
 
           <div class="info">
@@ -27,7 +27,7 @@ const MeetOurTeam = () => {
             </p>
           </div>
         </div>
-        <div class="card">
+        <div class="card col-lg-4 col-md-6 col-sm-12">
           <img src={PreetiImage} alt="image" />
 
           <div class="info">
@@ -44,7 +44,7 @@ const MeetOurTeam = () => {
             </p>
           </div>
         </div>
-        <div class="card">
+        <div class="card col-lg-4 col-md-6 col-sm-12">
           <img src={RaghuImage} alt="image" />
           <div class="info">
             <div className="social_icon_list">
