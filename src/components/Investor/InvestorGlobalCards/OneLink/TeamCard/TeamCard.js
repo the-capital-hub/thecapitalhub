@@ -1,23 +1,26 @@
 import React from "react";
 import "./TeamCard.scss";
 import PramodSq from "../../../../../Images/PramodSqare.png";
+import { useSelector } from "react-redux";
+import { postStartUpData } from "../../../../../Service/user";
 
-const TeamCard = ({ index, profile, name, designation, page }) => {
-  const cardData = [
-    {
-      title: "team",
-      content: "Enter the problem statement your startup is addressing",
-    },
-    {
-      title: "team2",
-      content: "Enter the solution your startup is offering",
-    },
-    { title: "team3", content: "Mention your competitors" },
-    { title: "team4", content: "Your startup’s revenue model" },
-    { title: "team5", content: "Your Growth startegy" },
-    { title: "team6", content: "Your Market traction" },
-    // { title: "7.Business Model", content: "Your Business Model" },
-  ];
+const TeamCard = ({ index, profile, name, designation, page, company }) => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
+  const handleUpdate = (field, event) => {
+    const updatedValue = event.target.value;
+    if(!updatedValue) return;
+    company.team[index - 1][field] = updatedValue;
+    postStartUpData({
+      ...company,
+      founderId: loggedInUser._id,
+    })
+      .then(({ data }) => {
+        console.log(data);
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <>
       <div className="row team_card_container">
@@ -28,13 +31,17 @@ const TeamCard = ({ index, profile, name, designation, page }) => {
               <img src={PramodSq} alt="image" />
               <div className="company_text">
                 {page === "oneLinkEdit" ? (
-                  <input placeholder={name} />
+                  <input placeholder={name} 
+                  onBlur={(e) => handleUpdate("name", e)}
+                  />
                 ) : (
                   <h6>{name}</h6>
                 )}
                 <hr />
                 {page === "oneLinkEdit" ? (
-                  <input placeholder={designation} />
+                  <input placeholder={designation} 
+                  onBlur={(e) => handleUpdate("designation", e)}
+                  />
                 ) : (
                   <h6>{designation}</h6>
                 )}

@@ -126,6 +126,7 @@ async function getOnePager(oneLink) {
 async function getUserById(oneLink) {
   try {
     const onePager = await getOnePager(oneLink)
+    console.log(onePager);
     const response = await axiosInstance.get(API.getUserById+"/"+onePager.data.founderId);
     console.log("Response",response);
     return response.data;
@@ -155,6 +156,16 @@ const getStartupByFounderId = async (founderId) => {
     throw error;
   }
 }
+
+export const updateUserById = async (userId, data) => {
+  try {
+    const response = await axiosInstance.patch(API.updateUserById + "/" + userId, data);
+    return response;
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error;
+  }
+};
 
 export {
   getUser,
