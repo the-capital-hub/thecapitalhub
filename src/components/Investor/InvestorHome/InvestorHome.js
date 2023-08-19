@@ -113,14 +113,14 @@ const InvestorHome = () => {
               <div className="col-12 mt-2">
                 <div className=" box bio_container">
                   <div className="row">
-                    <div className="col-8 col-seven">
+                    <div className="col-10 col-md-8 col-seven">
                       <div className="image_name_section mt-2">
                         <img
                           src={loggedInUser.profilePicture}
                           alt="profileimage"
                           className="rounded-circle"
                         />
-                        <div className="left_profile_text flex_content ms-3">
+                        <div className="flex-grow-1 left_profile_text flex_content ms-3">
                           <h2 className="typography">
                             {loggedInUser?.firstName} {loggedInUser?.lastName}
                           </h2>
@@ -133,11 +133,11 @@ const InvestorHome = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="col-4 col-five">
-                      <div className="connect_btn m-4">
-                        <button>
+                    <div className="col-2 col-md-4 col-five">
+                      <div className=" m-4">
+                        <button className="connect_btn px-3">
                           <img src={AddUserIcon} />
-                          <span>Connect</span>
+                          <span className="mx-2 d-none d-md-block">Connect</span>
                         </button>
                       </div>
                     </div>
