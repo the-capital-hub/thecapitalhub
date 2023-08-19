@@ -149,24 +149,13 @@
   justify-content: flex-start;
 }
 
-#header
-  .pro-sidebar-inner
-  .pro-sidebar-layout
-  ul
-  .pro-inner-item
-  .pro-icon-wrapper {
+#header .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item .pro-icon-wrapper {
   background-color: #fbf4cd;
   color: #000;
   border-radius: 3px;
 }
 
-#header
-  .pro-sidebar-inner
-  .pro-sidebar-layout
-  ul
-  .pro-inner-item
-  .pro-icon-wrapper
-  .pro-item-content {
+#header .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item .pro-icon-wrapper .pro-item-content {
   color: #000;
 }
 
@@ -188,5 +177,5 @@
   padding: 20px;
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 820px) {
 }

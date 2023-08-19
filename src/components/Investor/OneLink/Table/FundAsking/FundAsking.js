@@ -2,7 +2,7 @@ import React from "react";
 import "./FundAsking.scss";
 import PramodSq from "../../../../../Images/PramodSqare.png";
 
-const FundAsking = ({company}) => {
+const FundAsking = ({ company, page }) => {
   return (
     <>
       <div className="row fund_asking_container">
@@ -13,7 +13,11 @@ const FundAsking = ({company}) => {
               <img src={PramodSq} alt="image" />
               <hr />
               <div className="amount_text">
-                <h6>{company?.fundingAsk || 10000}</h6>
+                {page === "oneViewEdit" ? (
+                  <input placeholder={company?.fundingAsk || 10000} />
+                ) : (
+                  <h6>{company?.fundingAsk || 10000}</h6>
+                )}
               </div>
             </div>
           </div>

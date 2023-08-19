@@ -2,7 +2,7 @@ import React from "react";
 import "./TeamCard.scss";
 import PramodSq from "../../../../../Images/PramodSqare.png";
 
-const TeamCard = ({index, profile, name, designation}) => {
+const TeamCard = ({ index, profile, name, designation, page }) => {
   const cardData = [
     {
       title: "team",
@@ -21,20 +21,29 @@ const TeamCard = ({index, profile, name, designation}) => {
   return (
     <>
       <div className="row team_card_container">
-          <div className="col-md-4" key={index}>
-            <div className="card">
-              <div className="card-body">
-                <h5 className="card-title">Team {index}</h5>
-                <img src={PramodSq} alt="image" />
-                <div className="company_text">
-                  <h6>{name} </h6>
-                  <hr />
+        <div className="col-md-4" key={index}>
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">Team {index}</h5>
+              <img src={PramodSq} alt="image" />
+              {console.log(page)}
+              <div className="company_text">
+                {page === "oneLinkEdit" ? (
+                  <input placeholder={name} />
+                ) : (
+                  <h6>{name}</h6>
+                )}
+                <hr />
+                {page === "oneLinkEdit" ? (
+                  <input placeholder={designation} />
+                ) : (
                   <h6>{designation}</h6>
-                  <hr />
-                </div>
+                )}
+                <hr />
               </div>
             </div>
           </div>
+        </div>
       </div>
     </>
   );
