@@ -6,7 +6,7 @@ import { updateUserById } from "../../../../../../Service/user";
 const OneLinkContactEdit = ({ oneLink, page }) => {
   const [user, setUser] = useState({});
   const [editedUser, setEditedUser] = useState({});
-  
+
   useEffect(() => {
     getUserById(oneLink)
       .then(({ data }) => {
@@ -48,25 +48,23 @@ const OneLinkContactEdit = ({ oneLink, page }) => {
   return (
     <>
       <div className="row fund_asking_container">
-        <div className="col-md-12">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Contact Details</h5>
-              <div className="card_inputs">
-                {page === "oneViewEdit" ? (
-                  <>
-                    {renderEditableField("firstName")}
-                    {renderEditableField("phoneNumber")}
-                    {renderEditableField("email")}
-                  </>
-                ) : (
-                  <>
-                    {renderNonEditableField("firstName")}
-                    {renderNonEditableField("phoneNumber")}
-                    {renderNonEditableField("email")}
-                  </>
-                )}
-              </div>
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title">Contact Details</h5>
+            <div className="card_inputs">
+              {page === "oneViewEdit" ? (
+                <>
+                  {renderEditableField("firstName")}
+                  {renderEditableField("phoneNumber")}
+                  {renderEditableField("email")}
+                </>
+              ) : (
+                <>
+                  {renderNonEditableField("firstName")}
+                  {renderNonEditableField("phoneNumber")}
+                  {renderNonEditableField("email")}
+                </>
+              )}
             </div>
           </div>
         </div>

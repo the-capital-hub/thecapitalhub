@@ -4,7 +4,7 @@ import Send from "../../../../Images/Send.svg";
 
 const IntroductoryMessage = ({ title, image, para, input }) => {
   return (
-    <div className="introductory_message_container">
+    <div className="introductory_message_container mt-3">
       <div className="box_container">
         <section className="title_section">
           <div

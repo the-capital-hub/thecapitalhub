@@ -122,7 +122,7 @@ const OneLinkEditView = () => {
             <div className="download_button_container">
               <button>Preview</button>
               <button className="download_button">
-                Download for &#8377;69
+                Download
               </button>
             </div>
           </section>
