@@ -30,39 +30,37 @@ const TeamCard = ({ index, profile, name, designation, page, company }) => {
 
   return (
     <>
-      <div className="row team_card_container">
-        <div className="col-md-4" key={index}>
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Team {index}</h5>
-              <img src={PramodSq} alt="image" />
-              <div className="company_text">
-                {page === "oneLinkEdit" ? (
-                  <>
-                    <input
-                      type="text"
-                      value={editedName}
-                      onChange={(e) => setEditedName(e.target.value)}
-                      onBlur={handleUpdate}
-                    />
-                    <hr />
-                    <input
-                      type="text"
-                      value={editedDesignation}
-                      onChange={(e) => setEditedDesignation(e.target.value)}
-                      onBlur={handleUpdate}
-                    />
-                    <hr />
-                  </>
-                ) : (
-                  <>
-                    <h6>{name}</h6>
-                    <hr />
-                    <h6>{designation}</h6>
-                    <hr />
-                  </>
-                )}
-              </div>
+      <div className="col-md-5 col-lg-5 col-xl-4 mx-1" key={index}>
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title">Team {index}</h5>
+            <img src={PramodSq} alt="image" />
+            <div className="company_text">
+              {page === "oneLinkEdit" ? (
+                <>
+                  <input
+                    type="text"
+                    value={editedName}
+                    onChange={(e) => setEditedName(e.target.value)}
+                    onBlur={handleUpdate}
+                  />
+                  <hr />
+                  <input
+                    type="text"
+                    value={editedDesignation}
+                    onChange={(e) => setEditedDesignation(e.target.value)}
+                    onBlur={handleUpdate}
+                  />
+                  <hr />
+                </>
+              ) : (
+                <>
+                  <h6>{name}</h6>
+                  <hr />
+                  <h6>{designation}</h6>
+                  <hr />
+                </>
+              )}
             </div>
           </div>
         </div>

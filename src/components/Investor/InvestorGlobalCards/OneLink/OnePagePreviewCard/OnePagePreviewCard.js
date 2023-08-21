@@ -62,7 +62,7 @@ const OnePagePreviewCard = ({ company, page }) => {
     <>
       <div className="row onepage_card_container">
         {cardData.map((card, index) => (
-          <div className="col-md-4" key={index}>
+          <div className="col-md-6 col-lg-4" key={index}>
             <div className="card">
               <div className="card-body">
                 <h5 className="card-title">{card.title}</h5>

@@ -127,7 +127,8 @@
 
             button {
                 border-radius: 50px;
-                width: 258px;
+                width: 25%;
+                min-width: 150px;
                 height: 60px;
                 flex-shrink: 0;
                 margin-bottom: 10px;
@@ -147,6 +148,8 @@
                 border: none;
                 color: #fff;
                 margin-right: 5%;
+                width: 25%;
+                min-width: 150px;
 
                 span {
                     font-size: 20px;

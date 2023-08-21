@@ -28,31 +28,20 @@ const OneLink = () => {
   }, [userId]);
   return (
     <div className="container-fluid onelink_container">
-      <div className="row mt-2">
+      <div className="row mt-4 mt-xxl-2">
         <div className="col">
           <SmallProfileCard text={"One Link"} />
-          <div className="content-70">
-            <div className="row">
-              <div className="col-12 mt-2">
-                <ShareLink OneLink={company?.oneLink} />
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col-12 mt-2">
-                <IntroductoryMessage
-                  title={"Introductory message"}
-                  image={{
-                    threeDots: ThreeDotsImage,
-                    folder: FolderImage,
-                    video: VideoImage,
-                  }}
-                  para={company.introductoryMessage}
-                  input={true}
-                />
-              </div>
-            </div>
-          </div>
+          <ShareLink OneLink={company?.oneLink} />
+          <IntroductoryMessage
+            title={"Introductory message"}
+            image={{
+              threeDots: ThreeDotsImage,
+              folder: FolderImage,
+              video: VideoImage,
+            }}
+            para={company.introductoryMessage}
+            input={true}
+          />
         </div>
         <div className="col   d-none d-xl-block">
           <div className="content-30">
@@ -63,11 +52,7 @@ const OneLink = () => {
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-12 mt-2">
-            <OnePagePreview show={true} />
-          </div>
-        </div>
+        <OnePagePreview show={true} />
       </div>
     </div>
   );

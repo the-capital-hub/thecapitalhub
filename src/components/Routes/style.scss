@@ -36,6 +36,7 @@
   }
 
   .content {
+    flex-grow: 1;
     flex: 1;
     margin-left: 210px;
     transition: margin-left 0.3s ease;
@@ -131,5 +132,4 @@
       }
     }
   }
-
 }
