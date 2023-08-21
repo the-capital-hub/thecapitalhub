@@ -112,7 +112,7 @@ const InvestorHome = () => {
             <div className="row">
               <div className="col-12 mt-2">
                 <div className=" box bio_container">
-                  <div className="row">
+                  <div className="row profileContainer">
                     <div className="col-10 col-md-8 col-seven">
                       <div className="image_name_section mt-2">
                         <img
@@ -137,7 +137,8 @@ const InvestorHome = () => {
                       <div className=" m-4">
                         <button className="connect_btn px-3">
                           <img src={AddUserIcon} />
-                          <span className="mx-2 d-none d-md-block">Connect</span>
+                          {/* <span className="mx-2 d-none d-md-block"> */}
+                          <span className="mx-2">Connect</span>
                         </button>
                       </div>
                     </div>
@@ -161,14 +162,12 @@ const InvestorHome = () => {
                           )}
                         </span>
                       </span>
-                      <table className="w-100">
+                      <table className="">
                         <tbody>
                           <tr></tr>
                           <tr>
                             <td>
-                              <strong className="designation_list">
-                                Company
-                              </strong>
+                              <strong className="">Company</strong>
                             </td>
                             <td
                               className="small_typo"
@@ -179,9 +178,7 @@ const InvestorHome = () => {
                           </tr>
                           <tr>
                             <td>
-                              <strong className="designation_list">
-                                Designation
-                              </strong>
+                              <strong className="">Designation</strong>
                             </td>
                             <td style={{ marginBottom: "1rem" }}>
                               {renderEditableField("designation")}
@@ -189,9 +186,7 @@ const InvestorHome = () => {
                           </tr>
                           <tr>
                             <td>
-                              <strong className="designation_list">
-                                Education
-                              </strong>
+                              <strong className="">Education</strong>
                             </td>
                             <td style={{ marginBottom: "1rem" }}>
                               {renderEditableField("education")}
@@ -199,9 +194,7 @@ const InvestorHome = () => {
                           </tr>
                           <tr>
                             <td>
-                              <strong className="designation_list">
-                                Experience
-                              </strong>
+                              <strong className="">Experience</strong>
                             </td>
                             <td style={{ marginBottom: "1rem" }}>
                               {renderEditableField("experience")}
@@ -210,9 +203,7 @@ const InvestorHome = () => {
                           {personalEditable && (
                             <tr>
                               <td>
-                                <strong className="designation_list">
-                                  Profile Picture
-                                </strong>
+                                <strong className="">Profile Picture</strong>
                               </td>
                               <td style={{ marginBottom: "1rem" }}>
                                 {renderEditableField("profilePicture")}
@@ -242,9 +233,7 @@ const InvestorHome = () => {
                         <tbody>
                           <tr>
                             <td>
-                              <strong className="designation_list">
-                                Firstname
-                              </strong>
+                              <strong className="">Firstname</strong>
                             </td>
                             <td
                               className="small_typo"
@@ -255,9 +244,7 @@ const InvestorHome = () => {
                           </tr>
                           <tr>
                             <td>
-                              <strong className="designation_list">
-                                LastName
-                              </strong>
+                              <strong className="">LastName</strong>
                             </td>
                             <td
                               className="small_typo"
@@ -268,9 +255,7 @@ const InvestorHome = () => {
                           </tr>
                           <tr>
                             <td>
-                              <strong className="designation_list">
-                                Email
-                              </strong>
+                              <strong className="">Email</strong>
                             </td>
                             <td
                               className="small_typo"
@@ -281,9 +266,7 @@ const InvestorHome = () => {
                           </tr>
                           <tr>
                             <td>
-                              <strong className="designation_list">
-                                Mobile number
-                              </strong>
+                              <strong className="">Mobile number</strong>
                             </td>
                             <td
                               className="small_typo"
@@ -382,7 +365,7 @@ const InvestorHome = () => {
                       <Link to={""}>See more</Link>
                     </div>
                   </div>
-                  <div className="col-12 mt-2">
+                  <div className="col-12 mt-2 milestones">
                     <MileStoneCard />
                   </div>
                 </div>
@@ -393,7 +376,7 @@ const InvestorHome = () => {
         </div>
         <div className="col thirty">
           <div className="content-30">
-            <div className="row">
+            <div className="row d-none d-xl-block">
               <RightProfileCard />
               <RecommendationCard />
               <NewsCorner />

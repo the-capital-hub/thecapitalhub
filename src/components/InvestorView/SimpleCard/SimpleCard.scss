@@ -13,3 +13,14 @@
         padding: 50px 50px 50px 10px;
     }
 }
+
+@media (max-width: 426px) {
+    .simpleCard {
+        padding: 0px 0px;
+        padding-left: 0px;
+        // width: 300px;
+        p {
+            width: 300px;
+        }
+    }
+}

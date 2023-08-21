@@ -5,7 +5,7 @@ import "./CompanyDetails.scss";
 const CompanyDetails = ({ companyName, description, image }) => {
   return (
     <div className="companyDetailsContainer">
-      <ImagePlaceholder text={"Upload your image"} imageUrl={image}/>
+      <ImagePlaceholder text={"Upload your image"} imageUrl={image} />
       <div className="details">
         <p>{companyName || `Enter company duration`}</p>
         <hr />
