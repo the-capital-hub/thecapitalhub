@@ -12,3 +12,22 @@
         width: 70%;
     }
 }
+
+@media (max-width: 426px) {
+    .companyDetailsContainer {
+        width: 300px;
+        .details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            p {
+                font-size: 14px;
+                letter-spacing: 1px;
+                margin: 0;
+            }
+            hr {
+                margin: 0;
+            }
+        }
+    }
+}

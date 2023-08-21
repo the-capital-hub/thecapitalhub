@@ -13,3 +13,14 @@
         text-align: center;
     }
 }
+
+@media (max-width: 426px) {
+    .pfp {
+        width: 50%;
+        justify-content: none;
+        gap: 10px;
+        align-items: center;
+        padding: 20px;
+        // height: 120px;
+    }
+}
