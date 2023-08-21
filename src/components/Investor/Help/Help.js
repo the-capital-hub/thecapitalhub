@@ -1,4 +1,3 @@
-import React, { useContext, useEffect } from "react";
 import "./Help.scss";
 import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import HelpIcon from "../../../Images/Help/Help.svg";
@@ -80,7 +79,8 @@ const Help = () => {
                             aria-expanded="false"
                             aria-controls="flush-collapseOne"
                           >
-                            Guide: How to use customer relationship management
+                            Coming soon...
+                            {/* Guide: How to use customer relationship management */}
                           </button>
                         </h2>
                         <div
@@ -90,11 +90,17 @@ const Help = () => {
                           data-bs-parent="#accordionFlushExample"
                         >
                           <div className="accordion-body">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non arcu aliquet, tristique tellus ac, cursus quam. Cras vel purus quis nulla malesuada posuere. Nullam a eros a felis fringilla gravida eu et turpis. Praesent eu tellus nec arcu sagittis gravida in eget erat.
+                            This feature is coming soon.
+                            {/* Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Sed non arcu aliquet, tristique tellus ac,
+                            cursus quam. Cras vel purus quis nulla malesuada
+                            posuere. Nullam a eros a felis fringilla gravida eu
+                            et turpis. Praesent eu tellus nec arcu sagittis
+                            gravida in eget erat. */}
                           </div>
                         </div>
                       </div>
-                      <div className="accordion-item">
+                      {/* <div className="accordion-item">
                         <h2 className="accordion-header" id="flush-headingTwo">
                           <button
                             className="accordion-button collapsed"
@@ -114,7 +120,12 @@ const Help = () => {
                           data-bs-parent="#accordionFlushExample"
                         >
                           <div className="accordion-body">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non arcu aliquet, tristique tellus ac, cursus quam. Cras vel purus quis nulla malesuada posuere. Nullam a eros a felis fringilla gravida eu et turpis. Praesent eu tellus nec arcu sagittis gravida in eget erat.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Sed non arcu aliquet, tristique tellus ac,
+                            cursus quam. Cras vel purus quis nulla malesuada
+                            posuere. Nullam a eros a felis fringilla gravida eu
+                            et turpis. Praesent eu tellus nec arcu sagittis
+                            gravida in eget erat.
                           </div>
                         </div>
                       </div>
@@ -141,7 +152,12 @@ const Help = () => {
                           data-bs-parent="#accordionFlushExample"
                         >
                           <div className="accordion-body">
-                           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non arcu aliquet, tristique tellus ac, cursus quam. Cras vel purus quis nulla malesuada posuere. Nullam a eros a felis fringilla gravida eu et turpis. Praesent eu tellus nec arcu sagittis gravida in eget erat.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Sed non arcu aliquet, tristique tellus ac,
+                            cursus quam. Cras vel purus quis nulla malesuada
+                            posuere. Nullam a eros a felis fringilla gravida eu
+                            et turpis. Praesent eu tellus nec arcu sagittis
+                            gravida in eget erat.
                           </div>
                         </div>
                       </div>
@@ -169,10 +185,15 @@ const Help = () => {
                           data-bs-parent="#accordionFlushExample"
                         >
                           <div className="accordion-body">
-                           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non arcu aliquet, tristique tellus ac, cursus quam. Cras vel purus quis nulla malesuada posuere. Nullam a eros a felis fringilla gravida eu et turpis. Praesent eu tellus nec arcu sagittis gravida in eget erat.
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Sed non arcu aliquet, tristique tellus ac,
+                            cursus quam. Cras vel purus quis nulla malesuada
+                            posuere. Nullam a eros a felis fringilla gravida eu
+                            et turpis. Praesent eu tellus nec arcu sagittis
+                            gravida in eget erat.
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </section>
                 </div>
