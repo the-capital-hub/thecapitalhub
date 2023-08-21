@@ -146,7 +146,7 @@ const Register = () => {
 
         if (result) {
           // Set the user's login status in local storage or Redux store
-          setShowSelectWhatYouAre(true);
+          // setShowSelectWhatYouAre(true);
           setIsMobileVerified(true);
           navigate("/signup");
           setshow(false);
