@@ -96,7 +96,12 @@
       overflow-x: scroll;
       padding-bottom: 20px;
       display: flex;
-      justify-content: center;
+      .team-card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 96%;
+      }
     }
 
     .fund_asking_deployment {
@@ -112,10 +117,28 @@
     }
   }
 }
+@media (max-width: 1200px) {
+  .onepagepreview_container {
+    .box_container {
+      width: 90%;
+      margin: 0;
+      .fund_asking_deployment {
+        .funding_divider {
+          width: 100%;
+        }
+      }
+      .table_section {
+        overflow-x: scroll;
+      }
+    }
+  }
+}
 @media (max-width: 820px) {
   .onepagepreview_container {
     .box_container {
-      width: 700px;
+      width: 100%;
+      max-width: 750px;
+      margin: 0;
       .fund_asking_deployment {
         .funding_divider {
           width: 100%;
@@ -131,7 +154,7 @@
 @media (max-width: 425px) {
   .onepagepreview_container {
     .box_container {
-      width: 300px;
+      width: 100%;
       .team_section {
         display: flex;
         flex-direction: column;

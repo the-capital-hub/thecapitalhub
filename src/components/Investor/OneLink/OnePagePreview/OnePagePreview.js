@@ -25,10 +25,10 @@ const OnePagePreview = () => {
       })
       .catch(() => setCompany([]));
   }, [userId]);
-  console.log("Company:",company);
+  console.log("Company:", company);
   return (
     <>
-      <div className="onepagepreview_container">
+      <div className="onepagepreview_container mt-3">
         <div className="box_container">
           <section className="heading_section">
             <h6>One Page Preview</h6>
@@ -49,12 +49,14 @@ const OnePagePreview = () => {
             <div className="company_text">
               <h6>{company?.company || `Enter company description`} </h6>
               <hr />
-              <h6>{company?.description || 'Eg: India’s best startup platfrom'}</h6>
+              <h6>
+                {company?.description || "Eg: India’s best startup platfrom"}
+              </h6>
             </div>
           </section>
 
           <section className="card_section">
-            <OnePagePreviewCard company={company}/>
+            <OnePagePreviewCard company={company} />
           </section>
 
           <section className="table_section">
@@ -64,22 +66,18 @@ const OnePagePreview = () => {
           <section className="team_section">
             {/* <TeamCard/> */}
             {company?.team?.map((team, index) => (
-            <TeamCard
-              index={index}
-              profile= {team?.image}
-              name={team?.name}
-              designation={team?.designation}
-            />
-          ))}
+              <TeamCard
+                index={index}
+                profile={team?.image}
+                name={team?.name}
+                designation={team?.designation}
+              />
+            ))}
           </section>
 
           <section className="row fund_asking_deployment">
-            <div className="col-12 funding_divider">
-              <FundAsking company={company}/>
-            </div>
-            <div className="col-12 funding_divider">
-              <FundDeployment />
-            </div>
+            <FundAsking company={company} />
+            <FundDeployment />
           </section>
         </div>
       </div>

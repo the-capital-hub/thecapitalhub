@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const ShareLink = (oneLink) => {
   return (
     <>
-      <div className="ShareLink_container">
+      <div className="ShareLink_container mt-3">
         <div className="box_container">
           <section className="title_section">
             <h6>Now share all your startup details in one link</h6>

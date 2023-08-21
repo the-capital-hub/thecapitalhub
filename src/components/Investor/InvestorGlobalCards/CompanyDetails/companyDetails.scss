@@ -174,7 +174,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1025px) {
   .company_details_container {
     .company_details {
       width: 98%;
@@ -182,6 +182,14 @@
         .company_details_logo_container {
         }
       }
+    }
+  }
+}
+
+@media (max-width: 426px) {
+  .company_details_container {
+    .company_details {
+      width: 500px;
     }
   }
 }

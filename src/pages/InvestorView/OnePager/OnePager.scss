@@ -75,10 +75,10 @@
             .investNow {
                 width: 400px;
                 margin-left: 0px;
-                margin-top: 0px;
+                margin-top: -100px;
                 .inputs {
-                    padding: 50px;
-                    width: 300px;
+                    padding: 50px 10px;
+                    min-width: 300px;
                     border: 1px solid lightgray;
                     button {
                         display: none;
@@ -122,5 +122,18 @@
             width: 100%;
             overflow-x: scroll;
         }
+    }
+}
+
+@media (max-width: 426px) {
+    .onePager {
+        margin-left: -10px;
+        margin-top: 60px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .onePager {
+        margin-top: 60px;
     }
 }
