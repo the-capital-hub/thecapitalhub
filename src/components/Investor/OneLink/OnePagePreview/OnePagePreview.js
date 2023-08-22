@@ -40,9 +40,9 @@ const OnePagePreview = () => {
             </Link>
           </section>
           <hr />
-          <section className="dollar_rupree">
+          {/* <section className="dollar_rupree">
             <img src={DollarRupeeImage} alt="image" />
-          </section>
+          </section> */}
 
           <section className="company_description">
             <img src={PramodSq} alt="image" />
