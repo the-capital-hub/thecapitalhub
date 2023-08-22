@@ -14,7 +14,9 @@ const API = Object.freeze({
   getOnePager: `${baseUrl}/startUp/getOnePager`,
   getUserById: `${baseUrl}/users/getUserById`,
   getStartupByFounderId: `${baseUrl}/startup/getStartupByFounderId`,
-  updateUserById: `${baseUrl}/users/updateUserById`
+  updateUserById: `${baseUrl}/users/updateUserById`,
+  updateIntroMessage: `${baseUrl}/startup/introMessage`,
+  getSavedPosts: `${baseUrl}/api/posts/savedPosts`,
 });
 
 export default API;

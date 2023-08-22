@@ -10,14 +10,37 @@ import HalfbendCard from "../InvestorGlobalCards/Documentation/HalfbendCard/Half
 import { Card } from "../../InvestorView";
 import UploadModal from "./UploadModal/UploadModal";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { environment } from "../../../environments/environment";
 
 const Documentation = () => {
   const [showModal, setShowModal] = useState(false);
+  const baseURL = environment.baseUrl;
+  const [folders, setFolders] = useState([
+    "Financials",
+    "Pitch Deck",
+    "Legal",
+    "Update",
+    "KYC Details",
+    "Business",
+  ]);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const getFolders = async () => {
+      try {
+        const res = await axios.get(`${baseURL}`)
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getFolders();
+  }, []);
 
   return (
     <div className="documentation">
-      {showModal && <UploadModal onCancel={setShowModal} />}
+      {showModal && <UploadModal onCancel={setShowModal} folders={folders} />}
       <div className="left">
         <IntroductoryMessage
           title={"Uplod your document"}
@@ -51,11 +74,11 @@ const Documentation = () => {
         </div>
       </div>
 
-      <div className="right">
+      {/* <div className="right">
         <RightProfileCard />
         <RecommendationCard />
         <NewsCorner />
-      </div>
+      </div> */}
     </div>
     // <div className="container-fluid investorHome_main_container">
     //   <div className="row mt-2">

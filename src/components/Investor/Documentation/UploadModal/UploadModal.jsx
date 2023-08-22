@@ -4,6 +4,8 @@ import "./UploadModal.scss";
 const UploadModal = ({ onCancel }) => {
   const [folder, setFolder] = useState("");
 
+
+
   return (
     <div className="uploadModal">
       <div className="blackbg" onClick={() => onCancel(false)}></div>
@@ -17,7 +19,7 @@ const UploadModal = ({ onCancel }) => {
           >
             <option value="Financials">Financials</option>
             <option value="Pitch">Pitch Deck</option>
-            <option value="Financials">Legal</option>
+            <option value="Leg">Legal</option>
             <option value="Financials">Update</option>
             <option value="Financials">KYC Details</option>
             <option value="Financials">Business</option>

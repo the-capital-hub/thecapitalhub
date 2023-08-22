@@ -112,7 +112,12 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
             <div className="createpost_modal-header">
               <div className="createpostpopup">
                 <div className="ceatepost_img_name">
-                  <img src={profilePic} alt="profile pic" />
+                  <img
+                    src={loggedInUser.profilePicture}
+                    width={80}
+                    className="rounded-circle"
+                    alt="profile pic"
+                  />
                   <span>
                     <h2>
                       {loggedInUser?.firstName} {loggedInUser.lastName}

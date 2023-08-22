@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import "./IntroductoryMessage.scss";
 import Send from "../../../../Images/Send.svg";
+import { updateIntroMsgAPI } from "../../../../Service/user";
 
-const IntroductoryMessage = ({ title, image, para, input }) => {
+const IntroductoryMessage = ({ title, image, para, input, className }) => {
+  const [newIntroMsg, setNewIntroMsg] = useState("");
+  const [newPara, setNewPara] = useState("");
+
+  const submitNewIMHandler = async () => {
+    try {
+      await updateIntroMsgAPI({ introductoryMessage: newIntroMsg });
+      setNewPara(newIntroMsg);
+      setNewIntroMsg("");
+    } catch (error) {
+      console.error("Error updating intro: ", error);
+    }
+  };
+
   return (
-    <div className="introductory_message_container mt-3">
+    <div className={`introductory_message_container mt-3 ${className}`}>
       <div className="box_container">
         <section className="title_section">
           <div
@@ -24,14 +38,20 @@ const IntroductoryMessage = ({ title, image, para, input }) => {
         </section>
         {para && (
           <section className="text_section">
-            <p>{para}</p>
+            <p>{newPara || para}</p>
           </section>
         )}
         {input && (
           <section className="input_section">
             <div className="input_container">
-              <input type="text" placeholder="Type your text here" />
-              <div className="right_icons">
+              <input
+                type="text"
+                name="introductoryMessage"
+                placeholder="Type your text here"
+                value={newIntroMsg}
+                onChange={(e) => setNewIntroMsg(e.target.value)}
+              />
+              <div className="right_icons" onClick={submitNewIMHandler}>
                 <img src={Send} alt="Cross" />
               </div>
             </div>
