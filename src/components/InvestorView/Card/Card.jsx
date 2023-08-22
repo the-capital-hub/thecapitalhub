@@ -1,9 +1,9 @@
 import "./Card.scss";
 import { threeblackdots } from "../../../Images/InvestorsView";
 
-const Card = ({ text }) => {
+const Card = ({ text, onClicked }) => {
   return (
-    <div className="investorsCard">
+    <div onClick={onClicked} className="investorsCard">
       <div className="container">
         <img src={threeblackdots} alt="" />
         <div className="wrapper">

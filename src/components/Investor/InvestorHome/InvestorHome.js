@@ -376,7 +376,7 @@ const InvestorHome = () => {
         </div>
         <div className="col thirty">
           <div className="content-30">
-            <div className="row">
+            <div className="row d-none d-xl-block">
               <RightProfileCard />
               <RecommendationCard />
               <NewsCorner />
