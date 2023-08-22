@@ -12,7 +12,10 @@ import SmallProfileCard from "../../../InvestorGlobalCards/TwoSmallMyProfile/Sma
 import OneLinkMarketSection from "../OneLinkMarketSection/OneLinkMarketSection";
 import OneLinkContactEdit from "./OneLinkContactEdit/OneLinkContactEdit";
 import { useSelector } from "react-redux";
-import { getStartupByFounderId, postStartUpData } from "../../../../../Service/user";
+import {
+  getStartupByFounderId,
+  postStartUpData,
+} from "../../../../../Service/user";
 
 const OneLinkEditView = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -37,7 +40,7 @@ const OneLinkEditView = () => {
 
   const handleInputChange = (field, event) => {
     const updatedValue = event.target.value;
-    if(!updatedValue) return;
+    if (!updatedValue) return;
     setFormData({ ...formData, [field]: updatedValue });
   };
 
@@ -68,7 +71,7 @@ const OneLinkEditView = () => {
             <div className="company_text">
               <h6>
                 <input
-                  value={formData.company}
+                  placeholder={formData.company}
                   onChange={(e) => handleInputChange("company", e)}
                   onBlur={(e) => handleUpdate()}
                 />
@@ -76,7 +79,7 @@ const OneLinkEditView = () => {
               <hr />
               <h6>
                 <textarea
-                  value={formData.description}
+                  placeholder={formData.description}
                   onChange={(e) => handleInputChange("description", e)}
                   onBlur={(e) => handleUpdate()}
                 />
@@ -85,7 +88,7 @@ const OneLinkEditView = () => {
           </section>
 
           <section className="card_section">
-            <OnePagePreviewCard company={company} page={"oneLinkEdit"}/>
+            <OnePagePreviewCard company={company} page={"oneLinkEdit"} />
           </section>
 
           <section className="market_section">
@@ -114,16 +117,17 @@ const OneLinkEditView = () => {
               <FundAsking company={company} page={"oneViewEdit"} />
             </div>
             <div className="funding_divider">
-              <OneLinkContactEdit oneLink = {company.oneLink} page={"oneViewEdit"}/>
+              <OneLinkContactEdit
+                oneLink={company.oneLink}
+                page={"oneViewEdit"}
+              />
             </div>
           </section>
 
           <section className="button_preview_download_section">
             <div className="download_button_container">
               <button>Preview</button>
-              <button className="download_button">
-                Download
-              </button>
+              <button className="download_button">Download</button>
             </div>
           </section>
         </div>

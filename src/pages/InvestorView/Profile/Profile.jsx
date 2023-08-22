@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import { getUserById } from "../../../Service/user";
 import { useState, useEffect } from "react";
 
-function  Profile() {
+function Profile() {
   const { username } = useParams();
   const [user, setUser] = useState([]);
   useEffect(() => {
@@ -29,7 +29,7 @@ function  Profile() {
                 <div className="row">
                   <div className="col-7">
                     <div className="image_name_section mt-2">
-                      <img src={user.profilePicture} alt="profileimage" />
+                      <img src={user?.profilePicture} alt="profileimage" />
                       <div className="left_profile_text flex_content ms-3">
                         <h2 className="typography">
                           {user?.firstName} {user?.lastName}
