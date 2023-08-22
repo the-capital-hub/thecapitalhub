@@ -56,7 +56,8 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setPosting(true);
-    if ((!postText && !selectedImage && !selectedVideo) || !category) {
+    // if ((!postText && !selectedImage && !selectedVideo) || !category) {
+    if (!postText && !selectedImage && !selectedVideo) {
       return setPosting(false);
     }
     const postData = new FormData();
@@ -121,7 +122,7 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
                     <h2>
                       {loggedInUser?.firstName} {loggedInUser.lastName}
                     </h2>
-                    <h6>Post to anyone</h6>
+                    <h6>Public</h6>
                   </span>
                 </div>
               </div>
@@ -140,8 +141,8 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
             </div>
             <div className="modal-body">
               <div className="createpost_text_area">
-                <textarea value={postText} onChange={handleTextareaChange} />
-                <select
+                <textarea className="p-3" value={postText} onChange={handleTextareaChange} placeholder="Write a post..." />
+                {/* <select
                   name="category"
                   className="w-100 my-2 p-1"
                   onChange={({ target: { value } }) => setCategory(value)}
@@ -152,7 +153,7 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
                   <option value="learning">Learnings</option>
                   <option value="fund">Fund</option>
                   <option value="other">Others</option>
-                </select>
+                </select> */}
               </div>
             </div>
             <div className="createpost_modal_footer">
