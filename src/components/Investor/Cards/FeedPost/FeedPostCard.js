@@ -7,9 +7,12 @@ import locationIcon from "../../../../Images/investorIcon/octicon_location-16.sv
 import HomeIcon from "../../../../Images/HomeIcon.svg";
 import ThreeODotIcon from "../../../../Images/ThreeDotIcon.svg";
 import "./feedPostCard.scss";
+import shareIMG from "../../../../Images/share.png";
 import TimeAgo from "timeago-react";
+import AddUserIcon from "../../../../Images/investorIcon/Add-User.svg";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+
 
 const FeedPostCard = ({
   description,
@@ -119,12 +122,13 @@ const FeedPostCard = ({
             <div className="row feedpostcard_footer mb-2">
               <div className="col-8">
                 <div className="feedpostcard_footer_like_comment">
-                  <span className="ms-1 me-2">👍 Like</span>
-                  <span className="me-1">💬 Comment</span>
+                  <span className="ms-1 me-2">👍</span>
+                  <span className="me-1">💬</span>
                 </div>
               </div>
-              <div className="col-4 d-flex align-items-center justify-content-end">
-                <span>📑 Save</span>
+              <div className="col-4 d-flex align-items-center gap-3 justify-content-end">
+                <img src={shareIMG} width={16} />
+                <span>📑</span>
               </div>
             </div>
           </div>

@@ -27,13 +27,13 @@ const IntroductoryMessage = ({ title, image, para, input, className }) => {
             }`}
           >
             <h6>{title}</h6>
-            {image && (
+            {/* {image && (
               <div className="image_container">
                 <img src={image.video} alt="Video" />
                 <img src={image.folder} alt="Folder" />
                 <img src={image.threeDots} alt="Three Dots" />
               </div>
-            )}
+            )} */}  
           </div>
         </section>
         {para && (
