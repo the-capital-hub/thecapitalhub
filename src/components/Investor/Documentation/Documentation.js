@@ -27,10 +27,22 @@ const Documentation = () => {
         />
         <UploadContainer onClicked={setShowModal} />
         <div className="cards">
-          <Card onClicked={() => navigate("/financials")} text={"Financials"} />
-          <Card onClicked={() => navigate("/pitchdeck")} text={"Pitch Deck"} />
-          <Card onClicked={() => navigate("/legal")} text={"Legal"} />
-          <Card onClicked={() => navigate("/update")} text={"Update"} />
+          <Card
+            onClicked={() => navigate("/documentation/financials")}
+            text={"Financials"}
+          />
+          <Card
+            onClicked={() => navigate("/documentation/pitchdeck")}
+            text={"Pitch Deck"}
+          />
+          <Card
+            onClicked={() => navigate("/documentation/legal")}
+            text={"Legal"}
+          />
+          <Card
+            onClicked={() => navigate("/documentation/update")}
+            text={"Update"}
+          />
           <Card
             onClicked={() => navigate("/kycdetails")}
             text={"KYC Details"}
