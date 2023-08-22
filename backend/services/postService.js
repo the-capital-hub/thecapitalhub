@@ -56,7 +56,10 @@ export const singlePostData = async (_id) => {
 
 export const savePostService = async (user, _id) => {
   try {
-    const savedAlready = await UserModel.find({ _id: user, savedPosts: _id });
+    const savedAlready = await UserModel.exists({
+      _id: user,
+      savedPosts: _id,
+    });
     if (savedAlready) {
       return {
         message: "Already saved post",
@@ -80,9 +83,17 @@ export const savePostService = async (user, _id) => {
 
 export const getUserSavedPosts = async (user) => {
   try {
-    const { savedPosts, firstName } = await UserModel.findById(user).populate(
-      "savedPosts"
-    );
+    const { savedPosts, firstName } = await UserModel.findOne({
+      _id: user,
+    }).populate({
+      path: "savedPosts",
+      model: "Posts",
+      populate: {
+        path: "user",
+        model: "Users",
+        select: "firstName lastName profilePicture -_id",
+      },
+    });
     if (!savedPosts.length) {
       return {
         message: "No saved Posts",

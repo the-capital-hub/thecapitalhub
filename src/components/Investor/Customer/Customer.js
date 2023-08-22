@@ -1,8 +1,6 @@
-import { useSelector } from "react-redux";
 import "./Customer.scss";
 
 const Customer = () => {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   return (
     <div className="customer_container">
