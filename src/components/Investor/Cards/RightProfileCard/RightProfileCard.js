@@ -31,7 +31,7 @@ const RightProfileCard = () => {
               Manage Account
             </button>
             {/* loop */}
-            <div className="card mt-2 right_view_profile_card right_loop_card ">
+            {/* <div className="card mt-2 right_view_profile_card right_loop_card ">
               <div className="card-header">
                 <div className="loop_title">
                   <span>Loop</span>
@@ -55,7 +55,7 @@ const RightProfileCard = () => {
                   </button>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

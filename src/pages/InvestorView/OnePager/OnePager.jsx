@@ -44,7 +44,7 @@ const OnePager = () => {
   return (
     <div className="onePager">
       <h1>One Pager</h1>
-      <div className="currency">
+      {/* <div className="currency">
         <span
           className={rupeeHighlight && "highlighted"}
           onClick={() => changeHighlight("rupee")}
@@ -57,7 +57,7 @@ const OnePager = () => {
         >
           $
         </span>
-      </div>
+      </div> */}
 
       <div className="companyDetails">
         <CompanyDetails

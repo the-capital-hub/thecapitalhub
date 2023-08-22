@@ -1,6 +1,6 @@
 .view_profile_container {
     .view_profile {
-        height: 436px;
+        // height: 436px;
         flex-shrink: 0;
         border: 1px solid #dcdcdc;
         background-color: #fff;
@@ -8,6 +8,8 @@
         border-radius: 40px;
         background: #fff;
         box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
+        padding-top: 2rem;
+        padding-bottom: 2rem;
     }
 
     .view_profile_name_section {

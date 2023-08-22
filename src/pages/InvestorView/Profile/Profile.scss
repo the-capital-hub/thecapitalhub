@@ -54,15 +54,15 @@
 
   .image_name_section {
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
   }
 
   .image_name_section img {
     width: 90px;
     height: 90px;
+    border-radius: 50%;
   }
 
   .connect_btn {
