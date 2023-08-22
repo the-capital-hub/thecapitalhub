@@ -1,102 +1,109 @@
 // NavigatedCardViewer.js
 import React, { useState } from "react";
 import "./NavigatedCardViewer.scss";
-
-import ThreeDot from "../../../../Images/VerticalBlackThreeDots.svg";
-import StartUp from "../../../../Images/Startup.png";
+import FeedPostCard from "../../Cards/FeedPost/FeedPostCard";
+import { useEffect } from "react";
+import { getSavedPostsAPI } from "../../../../Service/user";
 
 const NavigatedCardViewer = () => {
-  const [activeHeader, setActiveHeader] = useState("Startup");
+  const [activeHeader, setActiveHeader] = useState("startup");
+  const [allPosts, setAllPosts] = useState(null);
+  const [filteredPosts, setFilteredPosts] = useState([]);
 
   const handleHeaderClick = (header) => {
+    setFilteredPosts(allPosts.filter(({ category }) => category === header));
     setActiveHeader(header);
   };
+
+  useEffect(() => {
+    getSavedPostsAPI()
+      .then(({ data: { data } }) => {
+        setAllPosts(data);
+        setFilteredPosts(
+          data.filter(({ category }) => category === activeHeader)
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+        setAllPosts([]);
+      });
+  }, []);
 
   return (
     <div className="navigated_box_container ">
       <div className="navigated-card-viewer">
-        <div className="navigation-header">
+        <div className="navigation-header border-bottom">
           <div
-            className={`nav-item ${activeHeader === "Startup" ? "active" : ""}`}
-            onClick={() => handleHeaderClick("Startup")}
+            className={`nav-item ${activeHeader === "startup" ? "active" : ""}`}
+            onClick={() => handleHeaderClick("startup")}
           >
             Startup
           </div>
           <div
             className={`nav-item ${
-              activeHeader === "Investor" ? "active" : ""
+              activeHeader === "investor" ? "active" : ""
             }`}
-            onClick={() => handleHeaderClick("Investor")}
+            onClick={() => handleHeaderClick("investor")}
           >
             Investor
           </div>
           <div
             className={`nav-item ${
-              activeHeader === "Learning" ? "active" : ""
+              activeHeader === "learning" ? "active" : ""
             }`}
-            onClick={() => handleHeaderClick("Learning")}
+            onClick={() => handleHeaderClick("learning")}
           >
             Learning
           </div>
           <div
-            className={`nav-item ${activeHeader === "Fund" ? "active" : ""}`}
-            onClick={() => handleHeaderClick("Fund")}
+            className={`nav-item ${activeHeader === "fund" ? "active" : ""}`}
+            onClick={() => handleHeaderClick("fund")}
           >
             Fund
           </div>
           <div
-            className={`nav-item ${activeHeader === "Add" ? "active" : ""}`}
-            onClick={() => handleHeaderClick("Add")}
+            className={`nav-item ${activeHeader === "other" ? "active" : ""}`}
+            onClick={() => handleHeaderClick("other")}
           >
-            Add
+            Other
           </div>
         </div>
-        <hr className="divider_hr" />
-        <div className="card-viewer">
-          {[...Array(9)].map((_, index) => (
-            <div key={index} className="card border rounded p-3 ">
-              {/* Card Header */}
-              <div className="d-flex align-items-center justify-content-between mb-2">
-                <div className="d-flex">
-                  <img
-                    src={StartUp}
-                    alt="Card Image"
-                    className="img-fluid mr-2"
-                    style={{
-                      width: "30px",
-                      height: "30px",
-                      borderRadius: "50%",
-                    }}
+        <div className="row row-cols-1">
+          {allPosts ? (
+            filteredPosts.length ? (
+              filteredPosts.map(
+                (
+                  {
+                    description,
+                    user: { firstName, lastName, profilePicture },
+                    video,
+                    image,
+                    createdAt,
+                  },
+                  index
+                ) => (
+                  <FeedPostCard
+                    key={index}
+                    description={description}
+                    profilePicture={profilePicture}
+                    firstName={firstName}
+                    lastName={lastName}
+                    video={video}
+                    image={image}
+                    createdAt={createdAt}
                   />
-                  <div>
-                    <span className="card_heading">
-                      {activeHeader} Card {index + 1}
-                    </span>
-                    <span className="card_heading">
-                      {activeHeader} Card {index + 1}
-                    </span>
-                  </div>
-                </div>
-                <div>
-                  <img
-                    src={ThreeDot}
-                    alt="Three Dot"
-                    className="img-fluid"
-                    style={{ width: "20px", height: "20px" }}
-                  />
-                </div>
-              </div>
-              <img
-                src={StartUp}
-                alt="Card Body Image"
-                className="img-fluid mb-2"
-              />
-              <p>
-                Some text in the card footer. You can replace this with your own
-                content.
+                )
+              )
+            ) : (
+              <p className="container p-5 text-center my-5 bg-white mx-auto ">
+                {`No posts saved for ${activeHeader}`}
               </p>
-            </div>
-          ))}
+            )
+          ) : (
+            <p className="container p-5 text-center my-5 bg-white mx-auto ">
+              Loading...
+            </p>
+          )}
         </div>
       </div>
     </div>

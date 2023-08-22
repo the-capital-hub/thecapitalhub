@@ -26,7 +26,7 @@ const InvestorHome = () => {
     designation: loggedInUser?.designation || "",
     education: loggedInUser?.education || "",
     experience: loggedInUser?.experience || "",
-    profilePicture: loggedInUser.profilePicture,
+    profilePicture: loggedInUser.profilePicture || "",
   });
 
   const dispatch = useDispatch();
@@ -37,14 +37,14 @@ const InvestorHome = () => {
 
   const submitPersonalHandler = async () => {
     try {
-      const newPersonalData = personalData;
-      if (newPersonalData.profilePictufre !== loggedInUser.profilePicture) {
-        const image = await getBase64(newPersonalData.profilePicture);
+      const { profilePicture, ...newPersonalData } = personalData;
+      if (typeof profilePicture === "object") {
+        const image = await getBase64(profilePicture);
         newPersonalData.profilePicture = image;
       }
       const {
         data: { data },
-      } = await updateUserAPI(personalData);
+      } = await updateUserAPI(newPersonalData);
       dispatch(loginSuccess(data));
       setPersonalEditable(!personalEditable);
     } catch (error) {

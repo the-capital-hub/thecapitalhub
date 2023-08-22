@@ -43,7 +43,7 @@ async function getPdfData(userId, folderId) {
     const requestBody = {
       userId,
       folderId,
-    }
+    };
     const response = await axiosInstance.post(API.getDocument, requestBody);
     return response.data;
   } catch (error) {
@@ -114,8 +114,8 @@ async function getAllPostsAPI() {
 
 async function getOnePager(oneLink) {
   try {
-    const response = await axiosInstance.get(API.getOnePager+"/"+oneLink);
-    console.log("Response",response);
+    const response = await axiosInstance.get(API.getOnePager + "/" + oneLink);
+    console.log("Response", response);
     return response.data;
   } catch (error) {
     console.error("Error:", error);
@@ -125,10 +125,12 @@ async function getOnePager(oneLink) {
 
 async function getUserById(oneLink) {
   try {
-    const onePager = await getOnePager(oneLink)
+    const onePager = await getOnePager(oneLink);
     console.log(onePager);
-    const response = await axiosInstance.get(API.getUserById+"/"+onePager.data.founderId);
-    console.log("Response",response);
+    const response = await axiosInstance.get(
+      API.getUserById + "/" + onePager.data.founderId
+    );
+    console.log("Response", response);
     return response.data;
   } catch (error) {
     console.error("Error:", error);
@@ -148,24 +150,37 @@ export const updateUserAPI = async (data) => {
 
 const getStartupByFounderId = async (founderId) => {
   try {
-    const response = await axiosInstance.get(API.getStartupByFounderId+"/"+founderId);
-    console.log("Response",response);
+    const response = await axiosInstance.get(
+      API.getStartupByFounderId + "/" + founderId
+    );
+    console.log("Response", response);
     return response.data;
   } catch (error) {
     console.error("Error:", error);
     throw error;
   }
-}
+};
 
 export const updateUserById = async (userId, data) => {
   try {
-    const response = await axiosInstance.patch(API.updateUserById + "/" + userId, data);
+    const response = await axiosInstance.patch(
+      API.updateUserById + "/" + userId,
+      data
+    );
     return response;
   } catch (error) {
     console.error("Error: ", error);
     throw error;
   }
 };
+
+export const updateIntroMsgAPI = async (newIntro) =>
+  await axiosInstance.patch(API.updateIntroMessage, newIntro);
+
+export const getSavedPostsAPI = async () =>
+  await axiosInstance.get(API.getSavedPosts);
+
+// export const savePostAPI = async (postId) => await axiosInstance
 
 export {
   getUser,
@@ -176,7 +191,7 @@ export {
   getPdfData,
   uploadDocument,
   getAllPostsAPI,
-  getOnePager, 
+  getOnePager,
   getUserById,
-  getStartupByFounderId
+  getStartupByFounderId,
 };

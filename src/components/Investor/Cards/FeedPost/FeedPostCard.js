@@ -8,6 +8,8 @@ import HomeIcon from "../../../../Images/HomeIcon.svg";
 import ThreeODotIcon from "../../../../Images/ThreeDotIcon.svg";
 import "./feedPostCard.scss";
 import TimeAgo from "timeago-react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const FeedPostCard = ({
   description,
@@ -18,6 +20,16 @@ const FeedPostCard = ({
   createdAt,
   profilePicture,
 }) => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
+  const savePostHandler = async (postId) => {
+    try {
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
       <div className="row feedpostcard_main_container mb-2">
@@ -27,10 +39,11 @@ const FeedPostCard = ({
               <div className="feedpostcard_content">
                 <img
                   src={
-                    profilePic
-                    // profilePicture
-                    // || "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
+                    profilePicture ||
+                    "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
                   }
+                  width={50}
+                  className="rounded-circle"
                   alt="logo"
                 />
                 <div className="feedpostcart_text_header my-1">

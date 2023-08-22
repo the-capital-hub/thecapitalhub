@@ -10,14 +10,37 @@ import HalfbendCard from "../InvestorGlobalCards/Documentation/HalfbendCard/Half
 import { Card } from "../../InvestorView";
 import UploadModal from "./UploadModal/UploadModal";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { environment } from "../../../environments/environment";
 
 const Documentation = () => {
   const [showModal, setShowModal] = useState(false);
+  const baseURL = environment.baseUrl;
+  const [folders, setFolders] = useState([
+    "Financials",
+    "Pitch Deck",
+    "Legal",
+    "Update",
+    "KYC Details",
+    "Business",
+  ]);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const getFolders = async () => {
+      try {
+        const res = await axios.get(`${baseURL}`)
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getFolders();
+  }, []);
 
   return (
     <div className="documentation">
-      {showModal && <UploadModal onCancel={setShowModal} />}
+      {showModal && <UploadModal onCancel={setShowModal} folders={folders} />}
       <div className="left">
         <IntroductoryMessage
           title={"Uplod your document"}
@@ -27,10 +50,22 @@ const Documentation = () => {
         />
         <UploadContainer onClicked={setShowModal} />
         <div className="cards">
-          <Card onClicked={() => navigate("/financials")} text={"Financials"} />
-          <Card onClicked={() => navigate("/pitchdeck")} text={"Pitch Deck"} />
-          <Card onClicked={() => navigate("/legal")} text={"Legal"} />
-          <Card onClicked={() => navigate("/update")} text={"Update"} />
+          <Card
+            onClicked={() => navigate("/documentation/financials")}
+            text={"Financials"}
+          />
+          <Card
+            onClicked={() => navigate("/documentation/pitchdeck")}
+            text={"Pitch Deck"}
+          />
+          <Card
+            onClicked={() => navigate("/documentation/legal")}
+            text={"Legal"}
+          />
+          <Card
+            onClicked={() => navigate("/documentation/update")}
+            text={"Update"}
+          />
           <Card
             onClicked={() => navigate("/kycdetails")}
             text={"KYC Details"}
@@ -39,11 +74,11 @@ const Documentation = () => {
         </div>
       </div>
 
-      <div className="right">
+      {/* <div className="right">
         <RightProfileCard />
         <RecommendationCard />
         <NewsCorner />
-      </div>
+      </div> */}
     </div>
     // <div className="container-fluid investorHome_main_container">
     //   <div className="row mt-2">
