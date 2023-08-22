@@ -30,7 +30,7 @@ const Documentation = () => {
   useEffect(() => {
     const getFolders = async () => {
       try {
-        const res = await axios.get(`${baseURL}`)
+        const res = await axios.get(`${baseURL}`);
       } catch (err) {
         console.log(err);
       }
@@ -39,47 +39,50 @@ const Documentation = () => {
   }, []);
 
   return (
-    <div className="documentation">
-      {showModal && <UploadModal onCancel={setShowModal} folders={folders} />}
-      <div className="left">
-        <IntroductoryMessage
-          title={"Uplod your document"}
-          para={
-            "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
-          }
-        />
-        <UploadContainer onClicked={setShowModal} />
-        <div className="cards">
-          <Card
-            onClicked={() => navigate("/documentation/financials")}
-            text={"Financials"}
+    <>
+      <SmallProfileCard text={"Documentation"} />
+      <div className="documentation">
+        {showModal && <UploadModal onCancel={setShowModal} folders={folders} />}
+        <div className="left">
+          <IntroductoryMessage
+            title={"Uplod your document"}
+            para={
+              "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
+            }
           />
-          <Card
-            onClicked={() => navigate("/documentation/pitchdeck")}
-            text={"Pitch Deck"}
-          />
-          <Card
-            onClicked={() => navigate("/documentation/legal")}
-            text={"Legal"}
-          />
-          <Card
-            onClicked={() => navigate("/documentation/update")}
-            text={"Update"}
-          />
-          <Card
-            onClicked={() => navigate("/kycdetails")}
-            text={"KYC Details"}
-          />
-          <Card onClicked={() => navigate("/business")} text={"Business"} />
+          <UploadContainer onClicked={setShowModal} />
+          <div className="cards">
+            <Card
+              onClicked={() => navigate("/documentation/financials")}
+              text={"Financials"}
+            />
+            <Card
+              onClicked={() => navigate("/documentation/pitchdeck")}
+              text={"Pitch Deck"}
+            />
+            <Card
+              onClicked={() => navigate("/documentation/legal")}
+              text={"Legal"}
+            />
+            <Card
+              onClicked={() => navigate("/documentation/update")}
+              text={"Update"}
+            />
+            <Card
+              onClicked={() => navigate("/kycdetails")}
+              text={"KYC Details"}
+            />
+            <Card onClicked={() => navigate("/business")} text={"Business"} />
+          </div>
+        </div>
+
+        <div className="right ">
+          <RightProfileCard />
+          <RecommendationCard />
+          <NewsCorner />
         </div>
       </div>
-
-      {/* <div className="right">
-        <RightProfileCard />
-        <RecommendationCard />
-        <NewsCorner />
-      </div> */}
-    </div>
+    </>
     // <div className="container-fluid investorHome_main_container">
     //   <div className="row mt-2">
     //     <div className="col">

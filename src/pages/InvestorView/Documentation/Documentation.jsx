@@ -1,3 +1,4 @@
+import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import { NavBar, SideBar, Card } from "../../../components/InvestorView";
 import "./Documentation.scss";
 
