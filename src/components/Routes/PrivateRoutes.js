@@ -23,7 +23,7 @@ function PrivateRoute({ children, ...props }) {
   if (isLoggedIn()) {
     return (
       <>
-        <InvestorNavbar handleSidebarToggle={handleSidebarToggle}/>
+        <InvestorNavbar handleSidebarToggle={handleSidebarToggle} sidebarCollapsed={sidebarCollapsed}/>
 
         <div
           className={`container-fluid investor_home_container ${

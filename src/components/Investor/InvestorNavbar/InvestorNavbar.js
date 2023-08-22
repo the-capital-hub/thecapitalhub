@@ -8,6 +8,7 @@ import MessageIcon from "../../../Images/investorIcon/message.svg";
 import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
 import HambergerIcon from "../../../Images/Hamberger.svg";
+import HambergerCrossIcon from '../../../Images/investorsidebar/FontX.svg'
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -35,7 +36,7 @@ const InvestorNavbar = (props) => {
                 className="mobile-home-hamberger"
                 onClick={props.handleSidebarToggle}
               >
-                <img src={HambergerIcon} alt="bar" />
+               { props.sidebarCollapsed ? <img src={HambergerIcon} alt="bar" /> : <img src={HambergerCrossIcon} alt="bar" />}
                 <h1 className="ms-2">{url}</h1>
               </div>
             </div>
