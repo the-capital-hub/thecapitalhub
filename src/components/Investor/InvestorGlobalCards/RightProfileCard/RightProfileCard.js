@@ -10,7 +10,7 @@ const RightProfileCard = () => {
   return (
     <>
       <div className="col-12 view_profile_container">
-        <div className="view_profile" style={{ minHeight: "600px" }}>
+        <div className="view_profile">
           <div className="view_profile_name_section mt-2">
             <img
               src={loggedInUser.profilePicture}
@@ -32,7 +32,7 @@ const RightProfileCard = () => {
               Manage Account
             </button>
             {/* loop */}
-            <div className="card mt-2 right_view_profile_card right_loop_card ">
+            {/* <div className="card mt-2 right_view_profile_card right_loop_card ">
               <div className="card-header">
                 <div className="loop_title">
                   <span>Loop</span>
@@ -56,7 +56,7 @@ const RightProfileCard = () => {
                   </button>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

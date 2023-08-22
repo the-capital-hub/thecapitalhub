@@ -1,0 +1,21 @@
+.documentation {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin-top: 30px;
+    .left {
+        display: flex;
+        flex-direction: column;
+        // align-items: center;
+        justify-content: center;
+        gap: 30px;
+        // margin-left: 50px;
+        width: 70%;
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: start;
+        }
+    }
+}

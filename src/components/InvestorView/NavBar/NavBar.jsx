@@ -74,7 +74,7 @@ const NavBar = (props) => {
     <>
       <div className="container pt-1">
         <div className="row investor_view_navbar ">
-          <div className="col-5 d-flex">
+          <div className="col-12 d-flex justify-content-center">
             <div className="row bar_logo_container ">
               <div className="logo_container">
                 <img src={Logo} alt="bar" />
@@ -88,7 +88,7 @@ const NavBar = (props) => {
               </div>
             </div>
           </div>
-          <div className="col-7 navbar_right_container">
+          {/* <div className="col-7 navbar_right_container">
             <div className="searchbar-container">
               <input
                 type="text"
@@ -122,10 +122,9 @@ const NavBar = (props) => {
                   {" "}
                   <img className="profile-pic" src={profilePic} alt="Profile" />
                 </Link>
-                {/* <span className="me">Me</span> */}
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

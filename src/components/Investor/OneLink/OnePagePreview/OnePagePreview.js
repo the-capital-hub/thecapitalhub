@@ -15,7 +15,9 @@ import { getStartupByFounderId } from "../../../../Service/user";
 
 const OnePagePreview = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  console.log(loggedInUser);
+
+  // console.log(loggedInUser);
+
   const userId = loggedInUser._id;
   const [company, setCompany] = useState([]);
   useEffect(() => {
@@ -25,7 +27,9 @@ const OnePagePreview = () => {
       })
       .catch(() => setCompany([]));
   }, [userId]);
-  console.log("Company:", company);
+
+  // console.log("Company:", company);
+
   return (
     <>
       <div className="onepagepreview_container mt-3">
@@ -40,9 +44,9 @@ const OnePagePreview = () => {
             </Link>
           </section>
           <hr />
-          <section className="dollar_rupree">
+          {/* <section className="dollar_rupree">
             <img src={DollarRupeeImage} alt="image" />
-          </section>
+          </section> */}
 
           <section className="company_description">
             <img src={PramodSq} alt="image" />

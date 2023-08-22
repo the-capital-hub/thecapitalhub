@@ -16,7 +16,7 @@ const ShareLink = (oneLink) => {
           </section>
           <hr />
           <Link
-            to={"/onelink/" + oneLink.OneLink}
+            // to={"/onelink/" + oneLink.OneLink}
             className="copy_link_input text-decoration-none"
           >
             <div className="input_container left_margin">

@@ -6,7 +6,7 @@
 
   .sidebar {
     // width: 300px;
-    // background-color: #eaeef2;
+    background-color: #eaeef2;
     position: fixed;
     top: 11.5%;
     left: 0;
@@ -36,11 +36,11 @@
   }
 
   .content {
-    flex-grow: 1;
     flex: 1;
     margin-left: 210px;
     transition: margin-left 0.3s ease;
     margin-top: 5%;
+    overflow: hidden;
   }
 
   // Add a class to handle the sidebar collapsed state
@@ -55,9 +55,8 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 820px) {
   .investor_home_container {
-    background-color: white;
     .sidebar {
       left: 0;
       bottom: 0;
@@ -85,7 +84,9 @@
       .sidebar {
         width: 0;
         opacity: 0;
-        transition: width 0.3s ease, opacity 0.3s ease;
+        transition:
+          width 0.3s ease,
+          opacity 0.3s ease;
       }
 
       .content {
@@ -97,6 +98,7 @@
 
 @media (max-width: 468px) {
   .investor_home_container {
+    background-color: white;
     .sidebar {
       left: 0;
       bottom: 0;
@@ -124,7 +126,9 @@
       .sidebar {
         width: 0;
         opacity: 0;
-        transition: width 0.3s ease, opacity 0.3s ease;
+        transition:
+          width 0.3s ease,
+          opacity 0.3s ease;
       }
 
       .content {

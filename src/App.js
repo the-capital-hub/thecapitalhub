@@ -36,6 +36,7 @@ import OnePager from "./pages/InvestorView/OnePager/OnePager";
 import DocumentationIV from "./pages/InvestorView/Documentation/Documentation";
 import ValidateOneLink from "./pages/InvestorView/ValidateOneLink/ValidateOneLink";
 import InvestNow from "./pages/InvestorView/InvestNow/InvestNow";
+import FolderContents from "./components/Investor/FolderContents/FolderContents";
 
 function App() {
   return (
@@ -169,6 +170,7 @@ function App() {
             <Route path="/savePost" element={<SavePost />} />
             <Route path="/onelink" element={<OneLink />} />
             <Route path="/onelink/edit" element={<OneLinkEditPage />} />
+            <Route path="/documentation/:route" element={<FolderContents />} />
             <Route
               path="/investor/manage-account"
               element={<InvestorManageAccount />}

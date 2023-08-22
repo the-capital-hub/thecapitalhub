@@ -10,16 +10,6 @@ function ValidateOneLink({ children, ...props }) {
     setSidebarCollapsed((prev) => !prev);
   };
 
-  const isLoggedIn = () => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    console.log("isLoggedIn-->", isLoggedIn);
-    return isLoggedIn === "true";
-  };
-  if (!isLoggedIn()) {
-    return <Navigate to="/login" replace />;
-  }
-
-  if (isLoggedIn()) {
     return (
       <>
         <NavBarIV handleSidebarToggle={handleSidebarToggle}/>
@@ -43,7 +33,6 @@ function ValidateOneLink({ children, ...props }) {
         </div>
       </>
     );
-  } else <Navigate to="/login" replace />;
 }
 
 export default ValidateOneLink;

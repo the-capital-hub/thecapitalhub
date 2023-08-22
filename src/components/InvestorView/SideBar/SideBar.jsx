@@ -130,11 +130,18 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           <SidebarFooter>
             <Menu iconShape="round">
               <MenuItem
-                active={location.pathname.includes("/investNow")}
+                active={location.pathname.includes("/investnow")}
                 className="active-item invest_now"
               >
-                <img src={investIcon} alt="image" width="17px" height="17px" />
-                {!sidebarCollapsed && <span>Invest Now</span>}
+                <Link to="investnow">
+                  <img
+                    src={investIcon}
+                    alt="image"
+                    width="17px"
+                    height="17px"
+                  />
+                  {!sidebarCollapsed && <span>Invest Now</span>}
+                </Link>
               </MenuItem>
             </Menu>
           </SidebarFooter>

@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import { getUserById } from "../../../Service/user";
 import { useState, useEffect } from "react";
 
-function  Profile() {
+function Profile() {
   const { username } = useParams();
   const [user, setUser] = useState([]);
   useEffect(() => {
@@ -22,14 +22,14 @@ function  Profile() {
   return (
     <div className="container-fluid profile_main_container">
       <div className="row mt-2">
-        <div className="col">
+        <div className="col mb-5">
           <div className="row">
             <div className="col-12 mt-2">
               <div className=" box ">
                 <div className="row">
                   <div className="col-7">
                     <div className="image_name_section mt-2">
-                      <img src={user.profilePicture} alt="profileimage" />
+                      <img src={user?.profilePicture} alt="profileimage" />
                       <div className="left_profile_text flex_content ms-3">
                         <h2 className="typography">
                           {user?.firstName} {user?.lastName}
@@ -41,14 +41,14 @@ function  Profile() {
                       </div>
                     </div>
                   </div>
-                  <div className="col-5">
+                  {/* <div className="col-5">
                     <div className="connect_btn m-4">
                       <button>
                         <img src={AddUserIcon} />
                         <span>Connect</span>
                       </button>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <hr className="divider_hr" />
                 <div className="row">
