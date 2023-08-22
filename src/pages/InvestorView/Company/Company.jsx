@@ -70,9 +70,9 @@ function Company() {
                   <div className="col-lg-5 right_buttons mobile_display_none">
                     <img src={saved} alt="saved" />
                     <div className="connect_btn m-4">
-                      <button className="connect_founder">
+                      {/* <button className="connect_founder">
                         Connect with the founder
-                      </button>
+                      </button> */}
                       <button className="invest_now">Invest Now</button>
                     </div>
                   </div>

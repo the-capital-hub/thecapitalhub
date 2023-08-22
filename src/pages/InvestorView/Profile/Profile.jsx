@@ -22,7 +22,7 @@ function Profile() {
   return (
     <div className="container-fluid profile_main_container">
       <div className="row mt-2">
-        <div className="col">
+        <div className="col mb-5">
           <div className="row">
             <div className="col-12 mt-2">
               <div className=" box ">
@@ -41,14 +41,14 @@ function Profile() {
                       </div>
                     </div>
                   </div>
-                  <div className="col-5">
+                  {/* <div className="col-5">
                     <div className="connect_btn m-4">
                       <button>
                         <img src={AddUserIcon} />
                         <span>Connect</span>
                       </button>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <hr className="divider_hr" />
                 <div className="row">

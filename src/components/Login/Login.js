@@ -59,8 +59,8 @@ const Login = () => {
 
       console.log("JWT Token:", token);
     } catch (error) {
-      // console.error("Login failed:", error.response.data.error);
-      // setError(error.response.data.error);
+      console.error("Login failed:", error.response.data.message);
+      setError(error.response.data.message);
 
       // dispatch(loginFailure(error.response.data.error));
       console.log(error);
@@ -148,7 +148,7 @@ const Login = () => {
             <h3 className="already_have_account_mobile">
               I don’t have an account? &nbsp;
               <Link to={"/signup"} style={{ color: "red" }}>
-                Log In
+                Create account
               </Link>
             </h3>
           </form>
