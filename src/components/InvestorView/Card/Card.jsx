@@ -5,7 +5,7 @@ const Card = ({ text, onClicked }) => {
   return (
     <div onClick={onClicked} className="investorsCard">
       <div className="container">
-        <img src={threeblackdots} alt="" />
+        {/* <img src={threeblackdots} alt="" /> */}
         <div className="wrapper">
           <hr />
           <p>{text}</p>
