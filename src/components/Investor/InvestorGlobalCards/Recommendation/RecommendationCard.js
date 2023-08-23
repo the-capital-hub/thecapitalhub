@@ -15,7 +15,7 @@ const RecommendationCard = () => {
               </div>
             </div>
             <div className="card-body recommendation_card_body ">
-              <img src={profilePic} alt="img" />
+              <img src={profilePic} alt="img" className="rounded-circle"/>
               <div className="recommendation_card_text">
                 <h3>Harideep</h3>
                 <h4 className="smallest_typo">
@@ -29,7 +29,7 @@ const RecommendationCard = () => {
             </div>
             <hr className="hr" />
             <div className="card-body recommendation_card_body ">
-              <img src={profilePic} alt="img" />
+              <img src={profilePic} alt="img" className="rounded-circle"/>
               <div className="recommendation_card_text">
                 <h3>Harideep</h3>
                 <h4 className="smallest_typo">

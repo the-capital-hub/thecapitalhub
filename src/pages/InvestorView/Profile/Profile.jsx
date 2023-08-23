@@ -31,7 +31,11 @@ function Profile() {
                 <div className="row">
                   <div className="col-7">
                     <div className="image_name_section mt-2">
-                      <img src={user?.profilePicture} alt="profileimage" />
+                      <img
+                        className="rounded-cirlce"
+                        src={user?.profilePicture}
+                        alt="profileimage"
+                      />
                       <div className="left_profile_text flex_content ms-3">
                         <h2 className="typography">
                           {user?.firstName} {user?.lastName}

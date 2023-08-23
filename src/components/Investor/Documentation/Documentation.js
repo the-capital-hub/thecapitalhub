@@ -41,7 +41,7 @@ const Documentation = () => {
   return (
     <>
       <SmallProfileCard text={"Documentation"} />
-      <div className="documentation">
+      <div className="documentationStartup">
         {showModal && <UploadModal onCancel={setShowModal} folders={folders} />}
         <div className="left">
           <IntroductoryMessage
@@ -76,7 +76,7 @@ const Documentation = () => {
           </div>
         </div>
 
-        <div className="right ">
+        <div className="right">
           <RightProfileCard />
           <RecommendationCard />
           <NewsCorner />
