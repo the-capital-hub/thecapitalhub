@@ -169,6 +169,11 @@
     list-style: none;
     text-decoration: none;
   }
+  .card_holder {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-width: 768px) {
@@ -270,5 +275,9 @@
         }
       }
     }
+
+  .width_hundred{
+    width: 98%;
+  }
   }
 }

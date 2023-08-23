@@ -85,6 +85,21 @@
           img {
           }
         }
+        textarea {
+          width: 100%;
+          border: none;
+          resize: none;
+          outline: none;
+          padding: 0;
+          margin: 0;
+          background: none;
+          font-family: inherit;
+          font-size: inherit;
+          height: 100%;
+          ::placeholder {
+            color: #999;
+          }
+        }
 
         input {
           flex: 1;
