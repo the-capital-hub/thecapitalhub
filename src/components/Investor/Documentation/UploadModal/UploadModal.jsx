@@ -4,8 +4,6 @@ import "./UploadModal.scss";
 const UploadModal = ({ onCancel }) => {
   const [folder, setFolder] = useState("");
 
-
-
   return (
     <div className="uploadModal">
       <div className="blackbg" onClick={() => onCancel(false)}></div>
@@ -24,7 +22,12 @@ const UploadModal = ({ onCancel }) => {
             <option value="Financials">KYC Details</option>
             <option value="Financials">Business</option>
           </select>
-          {folder && <input type="file" />}
+          {folder && (
+            <>
+              <input type="file" />
+              <button>Upload</button>
+            </>
+          )}
         </div>
       </div>
     </div>
