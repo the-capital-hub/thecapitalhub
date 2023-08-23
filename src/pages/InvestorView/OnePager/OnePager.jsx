@@ -16,6 +16,8 @@ import TeamsCard from "../../../components/InvestorView/TeamsCard/TeamsCard";
 import InvestNow from "../InvestNow/InvestNow";
 import { useParams } from "react-router-dom";
 import { getOnePager } from "../../../Service/user";
+import html2canvas from "html2canvas"; 
+import jsPDF from "jspdf";
 
 const OnePager = () => {
   const [rupeeHighlight, setRupeeHighlight] = useState(true);
@@ -38,6 +40,35 @@ const OnePager = () => {
     if (currency === "dollar") {
       setDollarHighlight(true);
       setRupeeHighlight(false);
+    }
+  };
+
+  const handleDownloadPDF = () => {
+    const element = document.querySelector(".onePager");
+    if (element) {
+      html2canvas(element).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF("p", "mm", "a4");
+        pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
+        pdf.save(username + ".pdf");
+      });
+    }
+  };
+  const handlePreviewPDF = () => {
+    const element = document.querySelector(".onePager");
+    if (element) {
+      html2canvas(element).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+
+        // Open the PDF preview in a new tab
+        const pdf = new jsPDF("p", "mm", "a4");
+        pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
+
+        // Create a Blob from the PDF data and open it in a new tab
+        const pdfBlob = pdf.output("blob");
+        const blobUrl = URL.createObjectURL(pdfBlob);
+        window.open(blobUrl, "_blank");
+      });
     }
   };
 
@@ -129,13 +160,13 @@ const OnePager = () => {
           </div>
         </div>
         <div className="right">
-          <InvestNow />
+          <InvestNow page={"onePager"}/>
         </div>
       </div>
 
       <div className="buttons">
-        <button>Preview</button>
-        <button>Download</button>
+        <button onClick={handlePreviewPDF}>Preview</button>
+        <button onClick={handleDownloadPDF}>Download</button>
       </div>
     </div>
   );

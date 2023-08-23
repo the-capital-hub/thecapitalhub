@@ -38,17 +38,24 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
     smileeInputRef.current.click();
   };
 
+  const [previewImage, setPreviewImage] = useState("");
+  const [previewVideo, setPreviewVideo] = useState("");
+  const [previewVideoType, setPreviewVideoType] = useState("");
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
+    const objectUrl = URL.createObjectURL(file);
     if (event.target.name === "image") {
+      setPreviewImage(objectUrl);
       setSelectedImage(file);
     } else if (event.target.name === "video") {
+      setPreviewVideoType(file.type)
+      setPreviewVideo(objectUrl);
       setSelectedVideo(file);
     } else if (event.target.name === "document") {
       setSelectedDocument(file);
     }
   };
-
   const handleTextareaChange = (event) => {
     setPostText(event.target.value);
   };
@@ -141,7 +148,12 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
             </div>
             <div className="modal-body">
               <div className="createpost_text_area">
-                <textarea className="p-3" value={postText} onChange={handleTextareaChange} placeholder="Write a post..." />
+                <textarea
+                  className="p-3"
+                  value={postText}
+                  onChange={handleTextareaChange}
+                  placeholder="Write a post..."
+                />
                 {/* <select
                   name="category"
                   className="w-100 my-2 p-1"
@@ -154,6 +166,13 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
                   <option value="fund">Fund</option>
                   <option value="other">Others</option>
                 </select> */}
+                {previewImage && <img src={previewImage} />}
+                {previewVideo && (
+                  <video controls width={"100%"}>
+                    <source src={previewVideo} type={previewVideoType} />
+                    Your browser does not support the video tag.
+                  </video>
+                )}
               </div>
             </div>
             <div className="createpost_modal_footer">

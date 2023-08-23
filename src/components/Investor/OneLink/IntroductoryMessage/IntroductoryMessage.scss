@@ -1,6 +1,6 @@
 .introductory_message_container {
   .box_container {
-    width: 750px;
+    max-width: 750px;
     // height: 411px;
     background-color: #fff;
     border-radius: 40px;
@@ -83,6 +83,21 @@
           margin-right: 10px;
 
           img {
+          }
+        }
+        textarea {
+          width: 100%;
+          border: none;
+          resize: none;
+          outline: none;
+          padding: 0;
+          margin: 0;
+          background: none;
+          font-family: inherit;
+          font-size: inherit;
+          height: 100%;
+          ::placeholder {
+            color: #999;
           }
         }
 

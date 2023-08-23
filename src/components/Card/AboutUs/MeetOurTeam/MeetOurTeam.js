@@ -1,10 +1,11 @@
 import React from "react";
 import "./meetourteam.scss";
-import EmailIcon from "../../../../Images/investorIcon/message.svg";
+import EmailIcon from "../../../../Images/message.svg";
 import LinkedInIcon from "../../../../Images/service/linkedin.svg";
 import UpmaImage from "../../../../Images/service/Upma.jpeg";
 import PreetiImage from "../../../../Images/service/preeti.jpeg";
 import RaghuImage from "../../../../Images/service/raghu.jpeg";
+import { Link } from "react-router-dom";
 
 const MeetOurTeam = () => {
   return (
@@ -15,8 +16,12 @@ const MeetOurTeam = () => {
 
           <div class="info">
             <div className="social_icon_list">
-              <img src={EmailIcon} alt="emailicon" />
-              <img src={LinkedInIcon} alt="image" />
+              <Link to="mailto:investments@capitalhub.in">
+                <img src={EmailIcon} alt="emailicon" />
+              </Link>
+              <Link to="https://www.linkedin.com/in/your-profile-url">
+                <img src={LinkedInIcon} alt="image" />
+              </Link>
             </div>
             <p class="name">Upma Singh</p>
             <p class="designation">Senior Investment Analyst</p>
@@ -31,9 +36,13 @@ const MeetOurTeam = () => {
           <img src={PreetiImage} alt="image" />
 
           <div class="info">
-            <div className="social_icon_list">
-              <img src={EmailIcon} alt="emailicon" />
-              <img src={LinkedInIcon} alt="image" />
+          <div className="social_icon_list">
+              <Link to="mailto:investments@capitalhub.in">
+                <img src={EmailIcon} alt="emailicon" />
+              </Link>
+              <Link to="https://www.linkedin.com/in/your-profile-url">
+                <img src={LinkedInIcon} alt="image" />
+              </Link>
             </div>
             <p class="name">Preeti Yadav</p>
             <p class="designation">Senior Investment Analyst</p>
@@ -47,9 +56,13 @@ const MeetOurTeam = () => {
         <div class="card col-lg-4 col-md-6 col-sm-12">
           <img src={RaghuImage} alt="image" />
           <div class="info">
-            <div className="social_icon_list">
-              <img src={EmailIcon} alt="emailicon" />
-              <img src={LinkedInIcon} alt="image" />
+          <div className="social_icon_list">
+              <Link to="mailto:investments@capitalhub.in">
+                <img src={EmailIcon} alt="emailicon" />
+              </Link>
+              <Link to="https://www.linkedin.com/in/your-profile-url">
+                <img src={LinkedInIcon} alt="image" />
+              </Link>
             </div>
             <p class="name">Raghukrishnan J</p>
             <p class="designation">Senior Investment Analyst</p>

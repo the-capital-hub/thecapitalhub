@@ -9,8 +9,9 @@ const IntroductoryMessage = ({ title, image, para, input, className }) => {
 
   const submitNewIMHandler = async () => {
     try {
-      await updateIntroMsgAPI({ introductoryMessage: newIntroMsg });
-      setNewPara(newIntroMsg);
+      const formattedMsg = newIntroMsg.replace(/\n/g, "<br/>");
+      await updateIntroMsgAPI({ introductoryMessage: formattedMsg });
+      setNewPara(formattedMsg);
       setNewIntroMsg("");
     } catch (error) {
       console.error("Error updating intro: ", error);
@@ -27,32 +28,31 @@ const IntroductoryMessage = ({ title, image, para, input, className }) => {
             }`}
           >
             <h6>{title}</h6>
-            {/* {image && (
-              <div className="image_container">
-                <img src={image.video} alt="Video" />
-                <img src={image.folder} alt="Folder" />
-                <img src={image.threeDots} alt="Three Dots" />
-              </div>
-            )} */}  
           </div>
         </section>
         {para && (
           <section className="text_section">
-            <p>{newPara || para}</p>
+            <p dangerouslySetInnerHTML={{ __html: newPara || para }} />
           </section>
         )}
         {input && (
           <section className="input_section">
             <div className="input_container">
-              <input
+              <textarea
                 type="text"
                 name="introductoryMessage"
                 placeholder="Type your text here"
                 value={newIntroMsg}
                 onChange={(e) => setNewIntroMsg(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    submitNewIMHandler();
+                  }
+                }}
               />
               <div className="right_icons" onClick={submitNewIMHandler}>
-                <img src={Send} alt="Cross" />
+                <img src={Send} alt="Send" />
               </div>
             </div>
           </section>

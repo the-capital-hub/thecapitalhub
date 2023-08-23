@@ -41,7 +41,7 @@ const Documentation = () => {
   return (
     <>
       <SmallProfileCard text={"Documentation"} />
-      <div className="documentation">
+      <div className="documentationStartup">
         {showModal && <UploadModal onCancel={setShowModal} folders={folders} />}
         <div className="left">
           <IntroductoryMessage
@@ -69,14 +69,14 @@ const Documentation = () => {
               text={"Update"}
             />
             <Card
-              onClicked={() => navigate("/kycdetails")}
+              onClicked={() => navigate("/documentation/kycdetails")}
               text={"KYC Details"}
             />
-            <Card onClicked={() => navigate("/business")} text={"Business"} />
+            <Card onClicked={() => navigate("/documentation/business")} text={"Business"} />
           </div>
         </div>
 
-        <div className="right ">
+        <div className="right">
           <RightProfileCard />
           <RecommendationCard />
           <NewsCorner />

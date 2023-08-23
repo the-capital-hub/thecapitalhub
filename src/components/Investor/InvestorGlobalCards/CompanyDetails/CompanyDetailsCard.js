@@ -7,20 +7,32 @@ import LinkedinIcon from "../../../../Images/investorIcon/Linkedin.svg";
 import WebIcon from "../../../../Images/investorIcon/WebIcon.svg";
 import LogoX from "../../../../Images/investorIcon/LogoX.png";
 import "./companyDetails.scss";
-import { useParams } from "react-router-dom";
-import { getOnePager } from "../../../../Service/user";
+import { CiEdit, CiSaveUp2 } from "react-icons/ci";
+import { getStartupByFounderId, postStartUpData } from "../../../../Service/user";
 import { useState, useEffect } from "react";
 
-const CompanyDetailsCard = (userDetails) => {
-  const { username } = useParams();
+
+const CompanyDetailsCard = ({ userDetails, page }) => {
+  const [isDescriptionEditable, setIsDescriptionEditable] = useState(false);
+  const [descriptionContent, setDescriptionContent] = useState("");
   const [onePager, setOnePager] = useState([]);
   useEffect(() => {
-    getOnePager(username)
+    getStartupByFounderId(userDetails._id)
       .then(({ data }) => {
         setOnePager(data);
+        setDescriptionContent(data.description);
       })
       .catch(() => setOnePager([]));
-  }, [username]);
+  }, [userDetails]);
+  const submitDescriptionHandler = async () => {
+    const updatedData = {
+      founderId: userDetails._id,
+      description: descriptionContent
+    }
+    await postStartUpData(updatedData);
+    setIsDescriptionEditable(!isDescriptionEditable);
+  };
+
   return (
     <>
       <div className="row company_details_container">
@@ -37,12 +49,12 @@ const CompanyDetailsCard = (userDetails) => {
                       {onePager.company || `The Capital Hub`}
                     </h2>
                     <span className="small_typo m-2">
-                      {onePager.description}
+                      {/* {onePager.description} */}
                     </span>
                     <span className="small_typo location_icon">
                       <img src={LocationIcon} alt="location" />
                       {onePager.location} <img src={EmailIcon} alt="location" />
-                      {userDetails?.user?.email}{" "}
+                      {userDetails?.email}{""}
                     </span>
                     <div className="small_typo social_icon mt-3">
                       <img src={WebIcon} alt="social_img" />
@@ -56,10 +68,48 @@ const CompanyDetailsCard = (userDetails) => {
             </div>
             <div className="row">
               <div className="company_details mt-4">
-                <p className="para_text">
-                  {/* As the Founder at The Capital HUB, my vision is all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture. */}
-                  {onePager.introductoryMessage}
-                </p>
+                {page === "edit" ? (
+                  <>
+                    <span className="ms-auto">
+
+                      <button
+                        className="edit-btn"
+                        onClick={() => setIsDescriptionEditable(!isDescriptionEditable)}>
+                        {isDescriptionEditable ? "Cancel" : "Edit"}
+                        <CiEdit />
+                      </button>
+                      {isDescriptionEditable && (
+                        <button
+                          className="edit-btn ms-2"
+                          onClick={() => submitDescriptionHandler()}
+                        >
+                          Save <CiSaveUp2 />
+                        </button>
+                      )}
+                    </span>
+                    <p className="para_text">
+                      {/* As the Founder at The Capital HUB, my vision is all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture. */}
+                      {/* {onePager.description} */}
+                      {isDescriptionEditable ? (
+                        <textarea
+                        className="description"
+                          value={descriptionContent}
+                          name="bio"
+                          onChange={(e) => setDescriptionContent(e.target.value)}
+                        />
+                      ) : (
+                        <p className="small_typo">
+                          {descriptionContent}
+                        </p>
+                      )}
+                    </p>
+                  </>
+                ) : (
+                  <p className="small_typo">
+                    {descriptionContent}
+                  </p>
+                )}
+
               </div>
             </div>
           </div>

@@ -15,6 +15,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUserAPI } from "../../../Service/user";
 import { loginSuccess } from "../../../Store/Action/userAction";
 import { getBase64 } from "../../../utils/getBase64";
+import CoinIcon from "../../../Images/investorView/Rectangle.png";
+import ColorCard from "../InvestorGlobalCards/ColoredCards/ColorCard";
 
 const InvestorHome = () => {
   const [isBioEditable, setIsBioEditable] = useState(false);
@@ -129,7 +131,7 @@ const InvestorHome = () => {
                               "Founder & CEO of The Capital Hub"}
                           </span>
                           <br />
-                          <span className="small_typo">Bangalore , India</span>
+                          <span className="small_typo">{loggedInUser?.location || "Bangalore , India"}</span>
                         </div>
                       </div>
                     </div>
@@ -371,7 +373,56 @@ const InvestorHome = () => {
                 </div>
               </div>
             </div>
-            <CompanyDetailsCard />
+            <CompanyDetailsCard userDetails={loggedInUser} page={"edit"}/>
+
+            <div className="row">
+              <div className="col-12 mt-2">
+                  <div className="card_holder">
+                    <ColorCard
+                      color="white"
+                      background="#BB98FF"
+                      text="Last round investment"
+                      image={CoinIcon}
+                      amount={"500 M"}
+                    />
+                    <ColorCard
+                      color="white"
+                      background="#DAC191"
+                      text="Total Investment"
+                      image={CoinIcon}
+                      amount={"500 M"}
+                    />
+                    <ColorCard
+                      color="white"
+                      background="#DCDCDC"
+                      text="No.of Investers"
+                      image={CoinIcon}
+                      amount={"500 M"}
+                    />
+                     <ColorCard
+                    color="white"
+                    background="#2B2B2B"
+                    text="Fund ask"
+                    image={CoinIcon}
+                    amount={"500 M"}
+                  />
+                   <ColorCard
+                    color="white"
+                    background="#FF7373"
+                    text="Valuation"
+                    image={CoinIcon}
+                    amount={"500 M"}
+                  />
+                   <ColorCard
+                    color="white"
+                    background="#9198DA"
+                    text="Raised funds"
+                    image={CoinIcon}
+                    amount={"500 M"}
+                  />
+                  </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="col thirty">

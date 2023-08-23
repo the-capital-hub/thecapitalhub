@@ -43,6 +43,7 @@ function Company() {
                       <img
                         src={onePager.profile || profilePic}
                         alt="profileimage"
+                        className="rounded-circle"
                       />
                       <div className="left_profile_text flex_content ms-3">
                         <h2 className="typography">{onePager.company}</h2>

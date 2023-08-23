@@ -1,18 +1,15 @@
 import React from "react";
 import profilePic from "../../../../Images/investorIcon/profilePic.svg";
 import locationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
-// import RoundLogo from "../../../../Images/RoundLogo.png";
-// import SavedIcon from "../../../../Images/SavedIcon.svg";
-// import FireIcon from "../../../../Images/Fire.png";
 import HomeIcon from "../../../../Images/HomeIcon.svg";
 import ThreeODotIcon from "../../../../Images/ThreeDotIcon.svg";
 import "./feedPostCard.scss";
-import shareIMG from "../../../../Images/share.png";
+import shareIcon from "../../../../Images/post/share.png";
+import fireIcon from "../../../../Images/post/fire.png";
+import commentIcon from "../../../../Images/post/comment.svg";
+import saveIcon from "../../../../Images/post/save.svg";
 import TimeAgo from "timeago-react";
-import AddUserIcon from "../../../../Images/investorIcon/Add-User.svg";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
-
 
 const FeedPostCard = ({
   description,
@@ -22,16 +19,16 @@ const FeedPostCard = ({
   image,
   createdAt,
   profilePicture,
+  designation,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const savePostHandler = async (postId) => {
     try {
-      
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <>
@@ -64,7 +61,7 @@ const FeedPostCard = ({
                       }}
                     >
                       <img src={HomeIcon} alt="logo" />
-                      Corporate
+                      {designation}
                     </span>
                     <span
                       style={{
@@ -121,14 +118,14 @@ const FeedPostCard = ({
             <hr />
             <div className="row feedpostcard_footer mb-2">
               <div className="col-8">
-                <div className="feedpostcard_footer_like_comment">
-                  <span className="ms-1 me-2">👍</span>
-                  <span className="me-1">💬</span>
+                <div className="feedpostcard_footer_like_comment d-flex gap-2">
+                  <img src={fireIcon} width={18} />
+                  <img src={commentIcon} width={16} />
                 </div>
               </div>
               <div className="col-4 d-flex align-items-center gap-3 justify-content-end">
-                <img src={shareIMG} width={16} />
-                <span>📑</span>
+                <img src={shareIcon} width={16} />
+                <img src={saveIcon} width={16} />
               </div>
             </div>
           </div>
