@@ -6,7 +6,7 @@ import CorrectImage from "../../../../Images/Correct.svg";
 import Cross from "../../../../Images/Cross.svg";
 import { Link } from "react-router-dom";
 
-const ShareLink = (oneLink) => {
+const ShareLink = ({OneLink,onExitClick}) => {
   return (
     <>
       <div className="ShareLink_container mt-3">
@@ -26,11 +26,11 @@ const ShareLink = (oneLink) => {
               <input
                 type="text"
                 placeholder={"Type your text here"}
-                value={"thecapitalhub.in/" + oneLink.OneLink}
+                value={"thecapitalhub.in/" + OneLink}
                 disabled
               />
               <div className="right_icons">
-                <img className="right_icons_img1" src={ExitImage} alt="image" />
+                <img className="right_icons_img1" src={ExitImage} alt="image"onClick={onExitClick}/>
                 {/* <img
                   className="right_icons_img2"
                   src={CorrectImage}
