@@ -80,10 +80,10 @@ export const getFolderByUser = async (userId) => {
 
 export const uploadDocument = async (args) => {
   try {
-    const { userId, folderId, fileUrl, fileName } = args;
+    const { userId, folderName, fileUrl, fileName } = args;
     const file = new File({
       userId: userId,
-      folderId: folderId,
+      folderName: folderName,
       fileName: fileName,
       fileUrl: fileUrl,
     });
@@ -103,8 +103,8 @@ export const uploadDocument = async (args) => {
 
 export const getDocumentByUser = async (args) => {
   try {
-    const {userId, folderId} = args;
-    const file = await File.find({userId: userId, folderId: folderId});
+    const {userId, folderName} = args;
+    const file = await File.find({userId: userId, folderName: folderName});
     if(!file) {
       return {
         status: 404,

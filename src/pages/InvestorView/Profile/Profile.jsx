@@ -14,7 +14,7 @@ function Profile() {
   const [user, setUser] = useState([]);
   useEffect(() => {
     getUserById(username)
-      .then(({ data }) => {
+      .then(({data}) => {
         setUser(data);
       })
       .catch(() => setUser([]));
@@ -37,7 +37,7 @@ function Profile() {
                         <span className="small_typo">
                           {user?.designation || `Founder & CEO of capital Hub`}
                         </span>
-                        <span className="small_typo"> Bangalore , India</span>
+                        <span className="small_typo" style={{ display: "block" }}> {user?.location}</span>
                       </div>
                     </div>
                   </div>
@@ -65,7 +65,7 @@ function Profile() {
                             className="small_typo"
                             style={{ marginBottom: "1rem" }}
                           >
-                            The Capital Hub
+                            {user.company}
                           </td>
                         </tr>
                         <tr>
@@ -159,7 +159,7 @@ function Profile() {
                             className="small_typo"
                             style={{ marginBottom: "1rem" }}
                           >
-                            {user?.email || `Test`}
+                            {user?.email}
                           </td>
                         </tr>
                         <tr>

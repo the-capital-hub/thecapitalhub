@@ -38,11 +38,11 @@ async function getUser() {
   }
 }
 
-async function getPdfData(userId, folderId) {
+async function getPdfData(userId, folderName) {
   try {
     const requestBody = {
       userId,
-      folderId,
+      folderName,
     };
     const response = await axiosInstance.post(API.getDocument, requestBody);
     return response.data;
@@ -129,6 +129,8 @@ async function getUserById(oneLink) {
     const response = await axiosInstance.get(
       API.getUserById + "/" + onePager.data.founderId
     );
+    response.data.data.company = onePager.data.company;
+    response.data.data.location = onePager.data.location;
     console.log("Response", response);
     return response.data;
   } catch (error) {
