@@ -16,6 +16,17 @@ const router = express.Router();
 // Create a new startUp
 router.post("/createStartup", createStartUpController);
 
+// Phase 2
+// OneLink Page Data
+
+router.get("/getOnePager/:oneLink", getOnePagerController);
+router.get(
+  "/getStartupByFounderId/:founderId",
+  getStartupByFounderIdController
+);
+
+router.post("/investNow", investNowController);
+
 // Middleware for checking token
 router.use(authenticateToken);
 
@@ -26,14 +37,7 @@ router.get("/details/:userId", startUpData);
 router.patch("/onelink", editStartUpOneLink);
 router.patch("/introMessage", editStartUpIntroMessage);
 router.put("/onePager", editOnePager);
-router.get(
-  "/getStartupByFounderId/:founderId",
-  getStartupByFounderIdController
-);
-// Phase 2
-// OneLink Page Data
-router.get("/getOnePager/:oneLink", getOnePagerController);
 
-router.post("/investNow", investNowController);
+
 
 export default router;

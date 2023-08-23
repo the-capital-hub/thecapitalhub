@@ -69,10 +69,10 @@ const Documentation = () => {
               text={"Update"}
             />
             <Card
-              onClicked={() => navigate("/kycdetails")}
+              onClicked={() => navigate("/documentation/kycdetails")}
               text={"KYC Details"}
             />
-            <Card onClicked={() => navigate("/business")} text={"Business"} />
+            <Card onClicked={() => navigate("/documentation/business")} text={"Business"} />
           </div>
         </div>
 
