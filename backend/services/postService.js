@@ -35,7 +35,7 @@ export const allPostsData = async () => {
     const allPosts = await PostModel.find()
       .populate({
         path: "user",
-        select: "firstName lastName -_id",
+        select: "firstName lastName designation profilePicture -_id",
       })
       .sort({ _id: -1 });
     return allPosts;
