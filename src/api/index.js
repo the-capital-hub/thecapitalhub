@@ -17,6 +17,7 @@ const API = Object.freeze({
   updateUserById: `${baseUrl}/users/updateUserById`,
   updateIntroMessage: `${baseUrl}/startup/introMessage`,
   getSavedPosts: `${baseUrl}/api/posts/savedPosts`,
+  investNow: `${baseUrl}/startUp/investNow`,
 });
 
 export default API;

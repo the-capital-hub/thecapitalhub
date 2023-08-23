@@ -8,11 +8,11 @@ const FolderContents = () => {
   const { route } = useParams();
 
   const title = route[0].toUpperCase() + route.slice(1);
-
+  console.log(route);
   return (
     <div className="folderContents">
       <h1>{title}</h1>
-      <HalfbendCard />
+      <HalfbendCard folderName={route}/>
     </div>
   );
 };

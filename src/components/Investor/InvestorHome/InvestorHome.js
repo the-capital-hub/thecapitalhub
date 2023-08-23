@@ -131,7 +131,7 @@ const InvestorHome = () => {
                               "Founder & CEO of The Capital Hub"}
                           </span>
                           <br />
-                          <span className="small_typo">Bangalore , India</span>
+                          <span className="small_typo">{loggedInUser?.location || "Bangalore , India"}</span>
                         </div>
                       </div>
                     </div>
@@ -373,7 +373,7 @@ const InvestorHome = () => {
                 </div>
               </div>
             </div>
-            <CompanyDetailsCard />
+            <CompanyDetailsCard userDetails={loggedInUser} page={"edit"}/>
 
             <div className="row">
               <div className="col-12 mt-2">

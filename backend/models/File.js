@@ -13,9 +13,9 @@ const fileSchema = new Schema(
       type: String,
       required: true,
     },
-    folderId: {
-      type: Schema.Types.ObjectId,
-      ref: "Folders",
+    folderName: {
+      type: String,
+      required: true,
     },
     fileUrl: {
       type: String,
