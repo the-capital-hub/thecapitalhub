@@ -183,6 +183,17 @@ export const getSavedPostsAPI = async () =>
 
 // export const savePostAPI = async (postId) => await axiosInstance
 
+export const investNow = async (data) => {
+  try {
+    const response = await axiosInstance.post(
+      
+    );
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error;
+  }
+}
+
 export {
   getUser,
   postUser,
