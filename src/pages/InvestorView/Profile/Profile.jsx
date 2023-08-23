@@ -8,6 +8,8 @@ import "./Profile.scss";
 import { useParams } from "react-router-dom";
 import { getUserById } from "../../../Service/user";
 import { useState, useEffect } from "react";
+import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
+import CoinIcon from "../../../Images/investorView/Rectangle.png";
 
 function Profile() {
   const { username } = useParams();
@@ -231,6 +233,54 @@ function Profile() {
             </div>
           </div>
           <CompanyDetailsCard userDetails={user} />
+          <div className="row">
+            <div className="col-12 mt-2">
+              <div className="card_holder">
+                <ColorCard
+                  color="white"
+                  background="#BB98FF"
+                  text="Last round investment"
+                  image={CoinIcon}
+                  amount={"500 M"}
+                />
+                <ColorCard
+                  color="white"
+                  background="#DAC191"
+                  text="Total Investment"
+                  image={CoinIcon}
+                  amount={"500 M"}
+                />
+                <ColorCard
+                  color="white"
+                  background="#DCDCDC"
+                  text="No.of Investers"
+                  image={CoinIcon}
+                  amount={"500 M"}
+                />
+                <ColorCard
+                  color="white"
+                  background="#2B2B2B"
+                  text="Fund ask"
+                  image={CoinIcon}
+                  amount={"500 M"}
+                />
+                <ColorCard
+                  color="white"
+                  background="#FF7373"
+                  text="Valuation"
+                  image={CoinIcon}
+                  amount={"500 M"}
+                />
+                <ColorCard
+                  color="white"
+                  background="#9198DA"
+                  text="Raised funds"
+                  image={CoinIcon}
+                  amount={"500 M"}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
