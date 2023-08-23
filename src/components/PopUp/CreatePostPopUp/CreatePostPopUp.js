@@ -166,7 +166,7 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
                   <option value="fund">Fund</option>
                   <option value="other">Others</option>
                 </select> */}
-                {previewImage && <img src={previewImage} />}
+                {previewImage && <img src={previewImage} width={"100%"}/>}
                 {previewVideo && (
                   <video controls width={"100%"}>
                     <source src={previewVideo} type={previewVideoType} />
