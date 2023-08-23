@@ -28,7 +28,7 @@ const OneLink = () => {
   }, [userId]);
   return (
     <div className="container-fluid onelink_container">
-      <div className="row mt-4 mt-xxl-2">
+      <div className="row mt-sm-4 mt-md-2 mt-xxl-2">
         <div className="col">
           <SmallProfileCard text={"One Link"} />
           <ShareLink OneLink={company?.oneLink} />
