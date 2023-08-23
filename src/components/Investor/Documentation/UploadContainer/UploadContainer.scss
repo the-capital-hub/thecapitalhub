@@ -41,3 +41,9 @@
         text-align: center;
     }
 }
+
+@media (max-width: 320px) {
+    .upload_container {
+        width: auto;
+    }
+}
