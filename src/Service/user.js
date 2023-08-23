@@ -126,7 +126,6 @@ async function getOnePager(oneLink) {
 async function getUserById(oneLink) {
   try {
     const onePager = await getOnePager(oneLink);
-    console.log(onePager);
     const response = await axiosInstance.get(
       API.getUserById + "/" + onePager.data.founderId
     );

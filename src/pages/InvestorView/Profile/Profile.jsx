@@ -91,7 +91,7 @@ function Profile() {
                             className="small_typo"
                             style={{ marginBottom: "1rem" }}
                           >
-                            {user.education}
+                            {user?.education}
                           </td>
                         </tr>
                         <tr>
@@ -226,7 +226,7 @@ function Profile() {
               </div>
             </div>
           </div>
-          <CompanyDetailsCard user={user} />
+          <CompanyDetailsCard userDetails={user} />
         </div>
       </div>
     </div>

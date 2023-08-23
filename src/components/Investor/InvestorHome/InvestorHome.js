@@ -371,7 +371,7 @@ const InvestorHome = () => {
                 </div>
               </div>
             </div>
-            <CompanyDetailsCard />
+            <CompanyDetailsCard userDetails={loggedInUser} page={"edit"}/>
           </div>
         </div>
         <div className="col thirty">
