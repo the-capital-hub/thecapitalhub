@@ -4,11 +4,8 @@
     left: 0;
     bottom: 0;
     right: 0;
-    // height: 100%;
-    // width: 100%;
     position: fixed;
     .blackbg {
-        // position: absolute;
         background: #000;
         height: 100vh;
         width: 100%;
@@ -37,13 +34,23 @@
             height: 50%;
             width: 40%;
             margin: auto;
-            align-items: start;
-            justify-content: center;
             gap: 20px;
             .foldernames {
                 display: flex;
                 gap: 20px;
                 flex-wrap: wrap;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .uploadModal {
+        .modalcontainer {
+            .modalwrapper {
+                width: 80%;
+                align-items: center;
+                justify-content: center;
             }
         }
     }
