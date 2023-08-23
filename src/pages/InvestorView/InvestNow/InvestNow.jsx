@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input, ThankYouModal } from "../../../components/InvestorView";
 import { useNavigate } from "react-router-dom";
 import "./InvestNow.scss";
-import {} from "../../../Service/user"
-const InvestNow = () => {
+import { useParams } from "react-router-dom";
+import { getOnePager, investNow } from "../../../Service/user";
+import { getUserById } from "../../../Service/user";
+
+const InvestNow = ({page}) => {
+  const [user, setUser] = useState({});
+  const { username } = useParams();
+  const [onePager, setOnePager] = useState([]);
+  useEffect(() => {
+    getUserById(username)
+      .then(({ data }) => {
+        setUser(data);
+      })
+      .catch(() => setUser({}));
+  }, [username]);
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
 
@@ -12,17 +25,50 @@ const InvestNow = () => {
   const [mobileNumber, setMobileNumber] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleSubmit = () => {
-    // console.log("Full Name:", fullName);
-    // console.log("Mobile Number:", mobileNumber);
-    // console.log("Email:", email);
-    setShowModal(true);
+  const handleSubmit = async () => {
+    await getOnePager(username)
+      .then(({ data }) => {
+        setOnePager(data);
+      })
+      .catch(() => setOnePager([]));
+    const requestBody = {
+      fromUserName: fullName,
+      fromUserEmail: email,
+      fromUserMobile: mobileNumber,
+      toUserId: onePager.founderId,
+    }
+    const response = await investNow(requestBody);
+    if(response.status === 200) setShowModal(true);
+    
   };
 
   return (
     <div className="investNow">
       {showModal && <ThankYouModal onCancel={() => setShowModal(false)} />}
       <div className="investNowContainer">
+      {page === "onePager" ? (
+        <>
+        <p>Contact Details</p>
+        <div className="inputs">
+          <Input
+            type={"text"}
+            placeholder={"Full Name"}
+            value={user.firstName + " " + user.lastName}
+          />
+          <Input
+            type={"text"}
+            placeholder={"Mobile number"}
+            value={user.phoneNumber}
+          />
+          <Input
+            type={"email"}
+            placeholder={"Email Id"}
+            value={user.email}
+          />
+          </div>
+        </> 
+      ) : (
+        <>
         <p>Contact Details</p>
         <div className="inputs">
           <Input
@@ -45,6 +91,8 @@ const InvestNow = () => {
           />
           <button onClick={handleSubmit}>Show Interest</button>
         </div>
+        </>
+      )}
       </div>
     </div>
   );

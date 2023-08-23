@@ -16,6 +16,9 @@ import {
   getStartupByFounderId,
   postStartUpData,
 } from "../../../../../Service/user";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+
 
 const OneLinkEditView = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -54,6 +57,34 @@ const OneLinkEditView = () => {
       })
       .catch((err) => console.log(err));
   };
+
+  const handleDownloadPDF = () => {
+    const container = document.querySelector(".editview_container");
+  
+    if (container) {
+      html2canvas(container).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF("p", "mm", "a4");
+        pdf.addImage(imgData, "PNG", 0, 0, 210, 297); 
+        pdf.save(formData.company + ".pdf");
+      });
+    }
+  };
+
+  const handlePreviewPDF = () => {
+    const container = document.querySelector(".editview_container");
+    if (container) {
+      html2canvas(container).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF("p", "mm", "a4");
+        pdf.addImage(imgData, "PNG", 0, 0, 210, 297); 
+        const blob = pdf.output("blob");
+        const blobUrl = URL.createObjectURL(blob);
+        window.open(blobUrl, "_blank");
+      });
+    }
+  };
+  
 
   return (
     <>
@@ -126,8 +157,8 @@ const OneLinkEditView = () => {
 
           <section className="button_preview_download_section">
             <div className="download_button_container">
-              <button>Preview</button>
-              <button className="download_button">Download</button>
+              <button onClick={handlePreviewPDF}>Preview</button>
+              <button className="download_button" onClick={handleDownloadPDF}>Download</button>
             </div>
           </section>
         </div>
