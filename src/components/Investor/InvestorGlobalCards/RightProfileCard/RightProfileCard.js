@@ -3,6 +3,7 @@ import "./rightProfileCard.scss";
 import profilePic from "../../../../Images/investorIcon/profilePic.svg";
 import LoopIcon from "../../../../Images/investorIcon/LoopIcon.svg";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const RightProfileCard = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -27,10 +28,10 @@ const RightProfileCard = () => {
                 Founder & CEO of The Capital Hub
               </span>
             </div>
-            <button className="profile_btn mt-2">View Profile</button>
-            <button className="profile_btn mt-1 manage_acount_btn">
+             <Link to="/profile" className="profile_btn mt-2">View Profile</Link>
+            <Link to="/investor/manage-account" className="profile_btn mt-1 manage_acount_btn">
               Manage Account
-            </button>
+            </Link>
             {/* loop */}
             {/* <div className="card mt-2 right_view_profile_card right_loop_card ">
               <div className="card-header">

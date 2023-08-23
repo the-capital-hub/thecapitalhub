@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./feed.scss";
 import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import SmallProfileCard from "../Cards/TwoSmallMyProfile/SmallProfileCard";
-import RightProfileCard from "../Cards/RightProfileCard/RightProfileCard";
+import RightProfileCard from "../InvestorGlobalCards/RightProfileCard/RightProfileCard";
 import RecommendationCard from "../Cards/Recommendation/RecommendationCard";
 import NewsCorner from "../Cards/NewsCorner/NewsCorner";
 import FeedPostCard from "../Cards/FeedPost/FeedPostCard";
