@@ -27,7 +27,11 @@ const CreatePost = () => {
                 <div className=" box bio_container">
                   <div className="row">
                     <div className="ceatepost_img_name">
-                      <img src={profilePic} alt="profile pic" />
+                      <img
+                        src={profilePic}
+                        alt="profile pic"
+                        className="rounded-circle"
+                      />
                       <span className="">
                         <h2>
                           {loggedInUser?.firstName} {loggedInUser?.lastName}

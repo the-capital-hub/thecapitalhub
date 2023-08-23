@@ -5,7 +5,7 @@ import logoIcon from "../../../Images/manageAccount/Group 15186.svg";
 import profileIcon from "../../../Images/investorIcon/profilePic.svg";
 
 const InvestorManageAccount = () => {
-    const [checked, setChecked] = useState(true)
+  const [checked, setChecked] = useState(true);
   return (
     <div className="container-fluid manage_account_container">
       <div className="row mt-2">

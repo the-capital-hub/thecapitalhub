@@ -29,7 +29,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const menuIconClick = () => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
-  
+
   const { username } = useParams();
   const [user, setUser] = useState([]);
 
@@ -52,10 +52,14 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           <SidebarHeader>
             <div className="logotext">
               {sidebarCollapsed ? (
-                <img src={profilePic} alt="image" />
+                <img src={profilePic} alt="image" className="rounded-circle" />
               ) : (
                 <>
-                  <img src={profilePic} alt="image" />
+                  <img
+                    src={profilePic}
+                    alt="image"
+                    className="rounded-circle"
+                  />
                   <h3>
                     {user?.firstName} {user?.lastName}
                   </h3>

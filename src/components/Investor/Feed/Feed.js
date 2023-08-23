@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./feed.scss";
-import profilePic from "../../../Images/investorIcon/profilePic.svg";
+// import profilePic from "../../../Images/investorIcon/profilePic.svg";
 import SmallProfileCard from "../Cards/TwoSmallMyProfile/SmallProfileCard";
 import RightProfileCard from "../Cards/RightProfileCard/RightProfileCard";
 import RecommendationCard from "../Cards/Recommendation/RecommendationCard";
@@ -8,6 +8,7 @@ import NewsCorner from "../Cards/NewsCorner/NewsCorner";
 import FeedPostCard from "../Cards/FeedPost/FeedPostCard";
 import CreatePostPopUp from "../../PopUp/CreatePostPopUp/CreatePostPopUp";
 import { getAllPostsAPI } from "../../../Service/user";
+import { useSelector } from "react-redux";
 
 const Feed = () => {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -16,6 +17,8 @@ const Feed = () => {
   const openPopup = () => {
     setPopupOpen(!popupOpen);
   };
+
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   useEffect(() => {
     getAllPostsAPI()
@@ -44,7 +47,11 @@ const Feed = () => {
               <div className="row">
                 <div className="col-12 mt-2">
                   <div className="box start_post_container">
-                    <img src={profilePic} alt="Image" />
+                    <img
+                      src={loggedInUser.profilePicture}
+                      alt="Image"
+                      className="rounded-circle"
+                    />
                     <div className="w-100 me-4" onClick={openPopup}>
                       <input
                         className="px-3"
@@ -60,13 +67,15 @@ const Feed = () => {
                 allPosts.map(
                   ({
                     description,
-                    user: { firstName, lastName },
+                    user: { firstName, lastName, designation, profilePicture },
                     video,
                     image,
                     createdAt,
                   }) => (
                     <FeedPostCard
                       key={Math.random()}
+                      designation={designation}
+                      profilePicture={profilePicture}
                       description={description}
                       firstName={firstName}
                       lastName={lastName}
