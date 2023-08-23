@@ -29,7 +29,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const menuIconClick = () => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
-  
+
   const { username } = useParams();
   const [user, setUser] = useState([]);
 

@@ -75,7 +75,7 @@ const InvestorNavbar = (props) => {
                 <Link to={"/investor/manage-account"}>
                   {" "}
                   <img
-                    className="profile-pic"
+                    className="profile-pic rounded-circle"
                     src={loggedInUser.profilePicture}
                     alt="Profile"
                   />
