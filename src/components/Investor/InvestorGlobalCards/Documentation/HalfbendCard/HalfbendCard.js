@@ -6,16 +6,17 @@ import pdfIcon from "../../../../../Images/PDFIcon.png";
 import { getPdfData } from "../../../../../Service/user";
 import { useSelector } from "react-redux";
 
-const HalfbendCard = ({folderName}) => {
+const HalfbendCard = ({folderName, userId}) => {
   const [data, setData] = useState([]);
+  const [user, setUser] = useState([]);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-
+  console.log("user",userId)
   useEffect(() => {
-    getPdfData(loggedInUser._id, folderName).then((res) => {
+    getPdfData(loggedInUser?._id || userId, folderName).then((res) => {
       setData(res.data);
       // console.log("data", res);
     });
-  }, [loggedInUser, folderName]);
+  }, [loggedInUser, userId, folderName]);
 
   const openPdfInNewWindow = (pdfUrl) => {
     // // Convert the binary data to a Blob

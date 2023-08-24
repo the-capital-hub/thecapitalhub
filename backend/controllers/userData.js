@@ -6,6 +6,7 @@ import {
   getUserById,
   updateUserData,
   updateUserById,
+  changePassword,
 } from "../services/userService.js";
 import { secretKey } from "../constants/config.js";
 
@@ -103,3 +104,18 @@ export const updateUserByIdController = async (req, res) => {
     res.status(status).json({ message, data });
   } catch (error) {}
 };
+
+export const changePasswordController = async (req, res) => {
+  try {
+    const { userId } = req;
+    const { newPassword } = req.body;
+    const response = await changePassword(userId, newPassword)
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while updating password.",
+    });
+  }
+}

@@ -20,6 +20,11 @@
       }
     }
 
+    .edit-container {
+      display: flex;
+      justify-content: flex-end;
+    }
+
     .edit-btn {
       border-radius: 131px;
       border: 1px solid #c6c6c6;
@@ -30,11 +35,13 @@
       font-size: 18px;
       font-family: Poppins;
       cursor: pointer;
+
     }
 
     .description {
       width: 98%;
     }
+
     .company_details_logo_container {
       height: 105px;
       width: 150px;

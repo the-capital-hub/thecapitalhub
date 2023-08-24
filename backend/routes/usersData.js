@@ -6,6 +6,7 @@ import {
   getUserByIdController,
   updateUser,
   updateUserByIdController,
+  changePasswordController,
 } from "../controllers/userData.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
@@ -24,5 +25,7 @@ router.use(authenticateToken);
 router.patch("/updateFounder", updateUser);
 
 router.get("/getUser", getUsersController);
+
+router.patch("/changePassword", changePasswordController);
 
 export default router;
