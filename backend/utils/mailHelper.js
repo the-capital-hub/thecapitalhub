@@ -5,7 +5,6 @@ export const sendMail = async (from_name, to_mail, from_mail, subject, message) 
         publicKey: process.env.EMAILJS_PUBLIC_KEY,
         privateKey: process.env.EMAILJS_PRIVATE_KEY,
       });
-      console.log({from_name, to_mail, from_mail, subject, message})
       const response = await emailjs.send(
         process.env.EMAILJS_SERVICE_ID,
         process.env.EMAILJS_TEMPLATE_ID,

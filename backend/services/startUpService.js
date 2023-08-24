@@ -2,6 +2,8 @@ import { UserModel } from "../models/User.js";
 import { StartUpModel } from "../models/startUp.js";
 import { sendMail } from "../utils/mailHelper.js";
 
+const adminMail = "learn.capitalhub@gmail.com";
+
 export const createStartup = async (startUpData) => {
   try {
     let existingCompany = await StartUpModel.findOne({
@@ -22,14 +24,45 @@ export const createStartup = async (startUpData) => {
     });
     await newStartUp.save();
     const { founderId } = newStartUp;
-    await UserModel.findByIdAndUpdate(founderId, {
+    const user = await UserModel.findByIdAndUpdate(founderId, {
       startUp: newStartUp._id,
-      gender: newStartUp.gender,
+      gender: startUpData.gender,
     });
-    return {
-      status: 200,
-      message: "Startup Added",
-    };
+    const emailMessage = `
+        A new user has requested for an account:
+        
+        User Details:
+        User ID: ${user._id}
+        Name: ${user.firstName} ${user.lastName}
+        Email: ${user.email}
+        Mobile: ${user.phoneNumber}
+
+        Startup Details:
+        Company Name: ${newStartUp.company}
+        Sector: ${newStartUp.sector}
+        Funding Ask: ${newStartUp.fundingAsk}
+        Previous Funding: ${newStartUp.preFundingAsk}
+        Number of Funding Rounds: ${newStartUp.numberOfFundingRounds}
+      `;
+      const subject = "New Account Request";
+      const response = await sendMail(
+        user.firstName,
+        adminMail,
+        user.email,
+        subject,
+        emailMessage
+      )
+      if(response.status === 200) {
+        return {
+          status: 200,
+          message: "Startup Added",
+        };
+      } else {
+        return {
+          status: 500,
+          message: "Error while sending mail",
+        };
+      }
   } catch (error) {
     console.error("Error creating company:", error);
     return {

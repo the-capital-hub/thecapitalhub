@@ -182,6 +182,7 @@ function App() {
             <Route path="/support" element={<Support />} />
           </Route>
 
+          
           {/* OneLink */}
           <Route path="/onelink/:username" element={<ValidateOneLink />}>
             <Route path="" element={<Profile />} />
@@ -189,6 +190,7 @@ function App() {
             <Route path="onePager" element={<OnePager />} />
             <Route path="documentation" element={<DocumentationIV />} />
             <Route path="investnow" element={<InvestNow />} />
+            <Route path="documentation/:route" element={<FolderContents />} />
             {/* <Route path="investNow" element={<DocumentationIV />} /> */}
           </Route>
         </Routes>

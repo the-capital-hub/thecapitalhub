@@ -226,7 +226,7 @@ const Register = () => {
             onClick={handleBack}
           />
           <span className="welcome mt-4">Welcome </span>
-          <h1>Create new account</h1>
+          <h1>Join Our Waitlist</h1>
           <h3 className="already_have_account">
             Already have an account? &nbsp;
             <Link to={"/login"} style={{ color: "red" }}>
