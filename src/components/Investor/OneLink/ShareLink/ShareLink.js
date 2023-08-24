@@ -26,7 +26,7 @@ const ShareLink = ({OneLink,onExitClick}) => {
               <input
                 type="text"
                 placeholder={"Type your text here"}
-                value={"thecapitalhub.in/" + OneLink}
+                value={"thecapitalhub.in/onelink/" + OneLink}
                 disabled
               />
               <div className="right_icons">

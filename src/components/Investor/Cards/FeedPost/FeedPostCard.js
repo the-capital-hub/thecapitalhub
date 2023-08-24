@@ -119,13 +119,13 @@ const FeedPostCard = ({
             <div className="row feedpostcard_footer mb-2">
               <div className="col-8">
                 <div className="feedpostcard_footer_like_comment d-flex gap-2">
-                  <img src={fireIcon} width={18} />
-                  <img src={commentIcon} width={16} />
+                  <img src={fireIcon} width={18} alt="like post"/>
+                  <img src={commentIcon} width={16}  alt="comment post"/>
                 </div>
               </div>
               <div className="col-4 d-flex align-items-center gap-3 justify-content-end">
-                <img src={shareIcon} width={16} />
-                <img src={saveIcon} width={16} />
+                <img src={shareIcon} width={16} alt="share post"/>
+                <img src={saveIcon} width={16} alt="save post"/>
               </div>
             </div>
           </div>

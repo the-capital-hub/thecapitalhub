@@ -22,7 +22,7 @@ const RecommendationCard = () => {
                   UI/UX Designer/Product Designer
                 </h4>
                 <button>
-                  <img src={AddUserIconBlack} />
+                  <img src={AddUserIconBlack} alt="add user"/>
                   <span>Connect</span>
                 </button>
               </div>
@@ -36,7 +36,7 @@ const RecommendationCard = () => {
                   UI/UX Designer/Product Designer
                 </h4>
                 <button>
-                  <img src={AddUserIconBlack} />
+                  <img src={AddUserIconBlack} alt="add user" />
                   <span>Connect</span>
                 </button>
               </div>

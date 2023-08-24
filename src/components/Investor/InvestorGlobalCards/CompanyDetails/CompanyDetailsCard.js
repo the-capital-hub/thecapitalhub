@@ -71,7 +71,7 @@ const CompanyDetailsCard = ({ userDetails, page }) => {
                 {page === "edit" ? (
                   <>
                     <span className="ms-auto">
-
+                    <div className="edit-container">
                       <button
                         className="edit-btn"
                         onClick={() => setIsDescriptionEditable(!isDescriptionEditable)}>
@@ -86,6 +86,7 @@ const CompanyDetailsCard = ({ userDetails, page }) => {
                           Save <CiSaveUp2 />
                         </button>
                       )}
+                      </div>
                     </span>
                     <p className="para_text">
                       {/* As the Founder at The Capital HUB, my vision is all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture. */}

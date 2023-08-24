@@ -57,6 +57,15 @@ function Navbar() {
 
         <div className={`navbar-items ${clicked ? "active" : ""}`}>
           <ul id="navbar" className={clicked ? "active" : ""}>
+          <li>
+              <Link
+                to="/blog"
+                className={selectedLink === "blog" ? "active" : ""}
+                onClick={() => setSelectedLink("blog")}
+              >
+                Blog
+              </Link>
+            </li>
             <li>
               <Link
                 to="/"

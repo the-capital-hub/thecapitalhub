@@ -1,22 +1,22 @@
 import { useState, useEffect } from "react";
 import "./OnePager.scss";
 import {
-  Card,
+  // Card,
   CompanyDetails,
   ImagePlaceholder,
   MarketCard,
   SimpleCard,
-  TeamCard,
+  // TeamCard,
   Title,
 } from "../../../components/InvestorView";
-import OnePagePreviewCard from "../../../components/Investor/InvestorGlobalCards/OneLink/OnePagePreviewCard/OnePagePreviewCard";
-import OnePagePreview from "../../../components/Investor/OneLink/OnePagePreview/OnePagePreview";
+// import OnePagePreviewCard from "../../../components/Investor/InvestorGlobalCards/OneLink/OnePagePreviewCard/OnePagePreviewCard";
+// import OnePagePreview from "../../../components/Investor/OneLink/OnePagePreview/OnePagePreview";
 import Table from "../../../components/Investor/OneLink/Table/Table";
 import TeamsCard from "../../../components/InvestorView/TeamsCard/TeamsCard";
 import InvestNow from "../InvestNow/InvestNow";
 import { useParams } from "react-router-dom";
 import { getOnePager } from "../../../Service/user";
-import html2canvas from "html2canvas"; 
+import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
 const OnePager = () => {
@@ -45,29 +45,42 @@ const OnePager = () => {
 
   const handleDownloadPDF = () => {
     const element = document.querySelector(".onePager");
+    const buttons = document.querySelectorAll(".buttons button");
+    buttons.forEach((button) => {
+      button.style.display = "none";
+    });
+
     if (element) {
       html2canvas(element).then((canvas) => {
         const imgData = canvas.toDataURL("image/png");
         const pdf = new jsPDF("p", "mm", "a4");
         pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
         pdf.save(username + ".pdf");
+        buttons.forEach((button) => {
+          button.style.display = "block";
+        });
       });
     }
   };
+
   const handlePreviewPDF = () => {
     const element = document.querySelector(".onePager");
+    const buttons = document.querySelectorAll(".buttons button");
+    buttons.forEach((button) => {
+      button.style.display = "none";
+    });
+
     if (element) {
       html2canvas(element).then((canvas) => {
         const imgData = canvas.toDataURL("image/png");
-
-        // Open the PDF preview in a new tab
         const pdf = new jsPDF("p", "mm", "a4");
         pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
-
-        // Create a Blob from the PDF data and open it in a new tab
         const pdfBlob = pdf.output("blob");
         const blobUrl = URL.createObjectURL(pdfBlob);
         window.open(blobUrl, "_blank");
+        buttons.forEach((button) => {
+          button.style.display = "block";
+        });
       });
     }
   };
@@ -89,7 +102,6 @@ const OnePager = () => {
           $
         </span>
       </div> */}
-
       <div className="companyDetails">
         <CompanyDetails
           companyName={onePager.company}
@@ -160,7 +172,7 @@ const OnePager = () => {
           </div>
         </div>
         <div className="right">
-          <InvestNow page={"onePager"}/>
+          <InvestNow page={"onePager"} />
         </div>
       </div>
 

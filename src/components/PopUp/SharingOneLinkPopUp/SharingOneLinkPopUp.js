@@ -1,35 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import "./SharingOneLinkPopUp.scss";
 import {
   FacebookShareButton,
   WhatsappShareButton,
   EmailShareButton,
+  WhatsappIcon,
+  EmailIcon,
+  FacebookIcon
 } from "react-share";
-import FacebookIcon from "../../../Images/Fb.svg"; // Import your own icons
-import WhatsappIcon from "../../../Images/Fb.svg"; // Import your own icons
-import EmailIcon from "../../../Images/Fb.svg"; // Import your own icons
+import { HiOutlineClipboard } from 'react-icons/hi'
 
-const SharingOneLinkPopUp = ({ introMessage, oneLink ,onClose}) => {
-  const shareUrl = "https://thecapitalhub.in/" + oneLink; // Update with your URL
+const SharingOneLinkPopUp = ({ introMessage, oneLink, onClose }) => {
+  const shareUrl = "https://thecapitalhub.in/onelink/" + oneLink;
+  const messageForSharing = introMessage.replace(/<br\s*\/?>/g, "\n");
+  const [copyStatus, setCopyStatus] = useState(""); // State for copy status
+
+  // Function to handle copying to clipboard
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text)
+      .then(() => setCopyStatus("Copied!"))
+      .catch(() => setCopyStatus("Copy failed"));
+  };
 
   return (
     <div className="after_register_popup">
       <div className="popup">
         <div className="popup-content">
-          {/* <p className="intro-message">{introMessage}</p> */}
-          <p className="text_section" dangerouslySetInnerHTML={{ __html: introMessage  }} />
+          <p className="text_section">{messageForSharing}</p>
 
-          <h6>Click here for : <a href={shareUrl}>OneLink</a></h6>
+          <h6>Click here for: <a href={shareUrl}>OneLink</a></h6>
+
+          <h4>Share this details via</h4>
           <div className="share-buttons">
-            <FacebookShareButton url={shareUrl}>
-              <img src={FacebookIcon} alt="Facebook" />
+            <FacebookShareButton url={shareUrl} quote={messageForSharing}>
+              <FacebookIcon size={32} round />
             </FacebookShareButton>
-            <WhatsappShareButton url={shareUrl}>
-              <img src={WhatsappIcon} alt="WhatsApp" />
+            <WhatsappShareButton url={"\n Here is Our OneLink : "+shareUrl} title={messageForSharing}>
+              <WhatsappIcon size={32} round />
             </WhatsappShareButton>
-            <EmailShareButton url={shareUrl}>
-              <img src={EmailIcon} alt="Email" />
+            <EmailShareButton url={shareUrl} body={messageForSharing}>
+              <EmailIcon size={32} round />
             </EmailShareButton>
+            {/* Clipboard icon */}
+            <HiOutlineClipboard size={32} onClick={() => copyToClipboard(`${messageForSharing} \n Here is Our OneLink: ${shareUrl}`)} />
+            {copyStatus && <p>{copyStatus}</p>}
           </div>
 
           <button className="close-button" onClick={onClose}>

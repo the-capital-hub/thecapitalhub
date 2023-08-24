@@ -1,4 +1,3 @@
-import React from "react";
 import "./home.scss";
 import GirlIcon from "../../Images/GirlIcons.png";
 import laptopIcon from "../../Images/Group 6.svg";
@@ -8,7 +7,6 @@ import ManageClientIcon from "../../Images/Group 9.svg";
 import ManageInvestortIcon from "../../Images/Group 10.svg";
 import MentorIcon from "../../Images/Group 13.svg";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import WhyChooseUsCard from "../Card/Home/WhyChooseUs/WhyChooseUsCard";
 import OurStartUp from "./OurStartUp/OurStartUp";
 import CoInvestor from "./CoInvestor/CoInvestor";
@@ -20,12 +18,11 @@ const Home = () => {
       <div className="container mb-md-5">
         <div className="row">
           <div className=" col-8 title__text d-flex flex-column justify-content-center">
-            <h2>
+            <h1>
               Fund your next big idea into a &nbsp;
               <span style={{ color: "#FD5901" }}>startup now !</span>
-            </h2>
-
-            <h4>Register now as</h4>
+            </h1>
+            <h2>Register now as</h2>
             <div className="buttons_row">
               <Link to="/signup">
                 <button className="btn1 btn-primary">Start Up</button>
@@ -78,7 +75,7 @@ const Home = () => {
           <div className="row d-flex justify-content-center align-items-center">
             <div className="col-lg-6 col-md-12">
               <div className="row d-flex justify-content-left align-items-center title_text">
-                <h3>Create your one link now</h3>
+                <h1>Create your one link now</h1>
                 <p className="desktop_para">
                   With our innovative "One Link" feature, managing your
                   startup's communication has never been easier. Say goodbye to
@@ -119,7 +116,7 @@ const Home = () => {
             </div>
             <div className="col-lg-6 col-md-12 angel_investment_text">
               <div className="row d-flex justify-content-left align-items-center title_text">
-                <h3>Angel investment made easy</h3>
+                <h1>Angel investment made easy</h1>
                 <p className="desktop_para">
                   Unlock the potential of your startup by connecting with the
                   ideal angel investors tailored to your preferences. Our
@@ -150,7 +147,7 @@ const Home = () => {
           <div className="row d-flex justify-content-center align-items-center">
             <div className="col-lg-6 col-md-12 ">
               <div className="row d-flex justify-content-left align-items-center title_text">
-                <h3>Manage your team</h3>
+                <h1>Manage your team</h1>
                 <p className="desktop_para">
                   With our intuitive team management tools, enhance
                   collaboration and productivity within your startup. Easily add
@@ -186,7 +183,7 @@ const Home = () => {
             </div>
             <div className="col-lg-6 col-md-12 angel_investment_text">
               <div className="row d-flex justify-content-left align-items-center title_text">
-                <h3>Client Management</h3>
+                <h1>Client Management</h1>
                 <p className="desktop_para">
                   Elevate client interactions with our user-friendly management
                   tools. From simplified payment and workflow tracking to
@@ -216,7 +213,7 @@ const Home = () => {
           <div className="row d-flex justify-content-center align-items-center">
             <div className="col-lg-6 col-md-12 ">
               <div className="row d-flex justify-content-left align-items-center title_text">
-                <h3>Investor management</h3>
+                <h1>Investor management</h1>
                 <p className="desktop_para">
                   Foster investor relationships with our dedicated tools,
                   nurturing and cultivating connections. Effortlessly segment
@@ -260,7 +257,7 @@ const Home = () => {
             </div>
             <div className="col-lg-6 col-md-12 angel_investment_text">
               <div className="row d-flex justify-content-left align-items-center title_text">
-                <h3>Growthive for Mentors</h3>
+                <h1>Growthive for Mentors</h1>
                 <p className="desktop_para">
                   Introducing Growthive, an innovative program by The Capital
                   Hub that bridges the gap between investors and early-stage

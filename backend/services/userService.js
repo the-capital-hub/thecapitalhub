@@ -31,7 +31,7 @@ export const registerUserService = async (user) => {
 };
 
 export const loginUserService = async ({ phoneNumber, password }) => {
-  const user = await UserModel.findOne({ phoneNumber });
+  const user = await UserModel.findOne({ phoneNumber, userStatus: "active" });
   if (!user) throw new Error("Invalid credentials");
   await comparePassword(password, user.password);
   return user;
@@ -132,6 +132,24 @@ export const updateUserById = async (userId, newData) => {
     return {
       status: 500,
       message: "An error occurred while updating the bio.",
+    };
+  }
+};
+
+export const changePassword = async (userId, newPassword) => {
+  try {
+    const user = await UserModel.findById(userId);
+    user.password = newPassword;
+    await user.save();
+    return {
+      status: 200,
+      message: "Password Changed Successfully"
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      status: 500,
+      message: "An error occurred while updating the password.",
     };
   }
 };
