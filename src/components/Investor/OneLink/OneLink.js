@@ -33,7 +33,7 @@ const OneLink = () => {
         setCompany(data);
       })
       .catch(() => setCompany([]));
-  }, [userId]);
+  }, [userId,company]);
 
   const handleClosePopup = () => {
     setIsExitClicked(false);
