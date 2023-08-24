@@ -45,11 +45,11 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     const objectUrl = URL.createObjectURL(file);
-    if (event.target.name === "image") {
+    if (event.target.name === "image" && file.type.includes("image")) {
       setPreviewImage(objectUrl);
       setSelectedImage(file);
-    } else if (event.target.name === "video") {
-      setPreviewVideoType(file.type)
+    } else if (event.target.name === "video" && file.type.includes("video")) {
+      setPreviewVideoType(file.type);
       setPreviewVideo(objectUrl);
       setSelectedVideo(file);
     } else if (event.target.name === "document") {
@@ -166,7 +166,7 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
                   <option value="fund">Fund</option>
                   <option value="other">Others</option>
                 </select> */}
-                {previewImage && <img src={previewImage} />}
+                {previewImage && <img src={previewImage} width={"50%"} alt="preview of image"/>}
                 {previewVideo && (
                   <video controls width={"100%"}>
                     <source src={previewVideo} type={previewVideoType} />

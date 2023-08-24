@@ -85,6 +85,10 @@ const userSchema = new Schema(
         ref: "Posts",
       },
     ],
+    userStatus: {
+      type: String,
+      default: "inactive"
+    }
   },
   {
     timestamps: true,

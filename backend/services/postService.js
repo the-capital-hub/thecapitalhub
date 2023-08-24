@@ -54,7 +54,33 @@ export const singlePostData = async (_id) => {
   }
 };
 
-export const savePostService = async (user, _id) => {
+// export const savePostService = async (user, _id) => {
+//   try {
+//     const savedAlready = await UserModel.exists({
+//       _id: user,
+//       savedPosts: _id,
+//     });
+//     if (savedAlready) {
+//       return {
+//         message: "Already saved post",
+//       };
+//     }
+//     const updatedUser = await UserModel.findOneAndUpdate(
+//       { _id: user },
+//       { $push: { savedPosts: _id } },
+//       {
+//         new: true,
+//       }
+//     );
+//     return {
+//       message: "Post saved succesfully",
+//     };
+//   } catch (error) {
+//     console.error(error);
+//     throw new Error("Error saving post");
+//   }
+// };
+export const savePostService = async (user, _id, collection) => {
   try {
     const savedAlready = await UserModel.exists({
       _id: user,

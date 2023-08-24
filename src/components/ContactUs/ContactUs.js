@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./contactus.scss";
 import callIcon from "../../Images/Call.svg";
 import messageIcon from "../../Images/message.svg";
@@ -6,7 +6,50 @@ import mapPinIcon from "../../Images/map_pin.svg";
 import fbIcon from "../../Images/fb_contact.svg";
 import instaIcon from "../../Images/insta_contact.svg";
 import twIcon from "../../Images/tw_contact.svg";
+import { environment } from "../../environments/environment";
+import axios from "axios";
+const baseUrl = environment.baseUrl;
+
 const ContactUs = () => {
+  const [contactForm, setContactForm] = useState({
+    name: "",
+    email: "",
+    mobileNumber: "",
+    category: "fundraising",
+    description: "",
+  });
+
+  const onChangeFormHandler = (event) => {
+    const { name, value } = event.target;
+    setContactForm((prevState) => {
+      return {
+        ...prevState,
+        [name]: value,
+      };
+    });
+  };
+
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+    console.log(contactForm);
+    const requestBody = {
+      name: contactForm.name,
+      email: contactForm.email.trim(),
+      mobile: contactForm.mobileNumber,
+      inquiryType: contactForm.category,
+      description: contactForm.description 
+    }
+    axios
+        .post(`${baseUrl}/contactUs`, requestBody)
+        .then((response) => {
+          console.log("response", response);
+          if (response.status === 200) alert(response.data.message)
+        }).catch((error) => {
+          console.error("Error uploading file:", error);
+        });
+
+  };
+
   return (
     <>
       <div className="container-fluid contactus_container">
@@ -17,8 +60,75 @@ const ContactUs = () => {
           </span>
         </div>
         <div className="container mt-5">
-          <div class="card-container card-container_contact">
-            <div class="card">
+          <form
+            className="d-flex gap-3 flex-column"
+            onSubmit={formSubmitHandler}
+          >
+            <div className="row row-cols-1 row-cols-lg-2">
+              <div className="form-input col">
+                <label htmlFor="name">Name</label>
+                <input
+                  id="name"
+                  type="text"
+                  value={contactForm.name}
+                  onChange={onChangeFormHandler}
+                  name="name"
+                  required
+                />
+              </div>
+              <div className="form-input col">
+                <label htmlFor="email">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  value={contactForm.email}
+                  onChange={onChangeFormHandler}
+                  required
+                />
+              </div>
+            </div>
+            <div className="row row-cols-1 row-cols-lg-2">
+              <div className="form-input col">
+                <label htmlFor="mobileNumber">Mobile Number</label>
+                <input
+                  id="mobileNumber"
+                  type="number"
+                  name="mobileNumber"
+                  value={contactForm.mobileNumber}
+                  onChange={onChangeFormHandler}
+                  required
+                />
+              </div>
+              <div className="form-input col">
+                <label htmlFor="category">Choose one</label>
+                <select
+                  id="category"
+                  value={contactForm.category}
+                  onChange={onChangeFormHandler}
+                  name="category"
+                  required
+                >
+                  <option value="fundraising">Fundraising</option>
+                  <option value="webdevelopment">Web Development</option>
+                </select>
+              </div>
+            </div>
+            <div className="form-input px-2">
+              <label htmlFor="description">Description</label>
+              <textarea
+                id="description"
+                name="description"
+                value={contactForm.description}
+                onChange={onChangeFormHandler}
+                rows={5}
+                required
+              />
+            </div>
+            <button type="submit">Submit</button>
+          </form>
+          <div className="card-container card-container_contact">
+            <div className="card">
               <img src={callIcon} alt="callimg" />
               <div className="text_content">
                 <h2>Customer Support</h2>
@@ -32,7 +142,7 @@ const ContactUs = () => {
               </div>
               <button>Call Us</button>
             </div>
-            <div class="card">
+            <div className="card">
               <img src={messageIcon} alt="callimg" />
               <div className="text_content">
                 <h2>Email us</h2>
@@ -52,7 +162,7 @@ const ContactUs = () => {
               </div>
               <button>Send Email</button>
             </div>
-            <div class="card">
+            <div className="card">
               <img src={mapPinIcon} alt="callimg" />
               <div className="text_content">
                 <h2>Our address</h2>
