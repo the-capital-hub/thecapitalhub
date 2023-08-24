@@ -37,6 +37,8 @@ import DocumentationIV from "./pages/InvestorView/Documentation/Documentation";
 import ValidateOneLink from "./pages/InvestorView/ValidateOneLink/ValidateOneLink";
 import InvestNow from "./pages/InvestorView/InvestNow/InvestNow";
 import FolderContents from "./components/Investor/FolderContents/FolderContents";
+import Blog from "./components/Blog/Blog";
+import BlogDetailed from "./components/Blog/BlogDetailed/BlogDetailed";
 
 function App() {
   return (
@@ -49,6 +51,27 @@ function App() {
               <>
                 <Navbar />
                 <Home />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/blog"
+            element={
+              <>
+                <Navbar />
+                <Blog />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/blog/webdevlopment"
+            element={
+              <>
+                <Navbar />
+                <BlogDetailed />
                 <Footer />
               </>
             }
@@ -182,6 +205,7 @@ function App() {
             <Route path="/support" element={<Support />} />
           </Route>
 
+          
           {/* OneLink */}
           <Route path="/onelink/:username" element={<ValidateOneLink />}>
             <Route path="" element={<Profile />} />
@@ -189,6 +213,7 @@ function App() {
             <Route path="onePager" element={<OnePager />} />
             <Route path="documentation" element={<DocumentationIV />} />
             <Route path="investnow" element={<InvestNow />} />
+            <Route path="documentation/:route" element={<FolderContents />} />
             {/* <Route path="investNow" element={<DocumentationIV />} /> */}
           </Route>
         </Routes>
