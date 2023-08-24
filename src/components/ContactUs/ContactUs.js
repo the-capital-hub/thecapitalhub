@@ -6,13 +6,16 @@ import mapPinIcon from "../../Images/map_pin.svg";
 import fbIcon from "../../Images/fb_contact.svg";
 import instaIcon from "../../Images/insta_contact.svg";
 import twIcon from "../../Images/tw_contact.svg";
+import { environment } from "../../environments/environment";
+import axios from "axios";
+const baseUrl = environment.baseUrl;
 
 const ContactUs = () => {
   const [contactForm, setContactForm] = useState({
     name: "",
     email: "",
     mobileNumber: "",
-    category: "",
+    category: "fundraising",
     description: "",
   });
 
@@ -21,15 +24,30 @@ const ContactUs = () => {
     setContactForm((prevState) => {
       return {
         ...prevState,
-        [name]: value.trim(),
+        [name]: value,
       };
     });
   };
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(contactForm); // form data
-    // Api call here
+    console.log(contactForm);
+    const requestBody = {
+      name: contactForm.name,
+      email: contactForm.email.trim(),
+      mobile: contactForm.mobileNumber,
+      inquiryType: contactForm.category,
+      description: contactForm.description 
+    }
+    axios
+        .post(`${baseUrl}/contactUs`, requestBody)
+        .then((response) => {
+          console.log("response", response);
+          if (response.status === 200) alert(response.data.message)
+        }).catch((error) => {
+          console.error("Error uploading file:", error);
+        });
+
   };
 
   return (
@@ -88,6 +106,7 @@ const ContactUs = () => {
                   id="category"
                   value={contactForm.category}
                   onChange={onChangeFormHandler}
+                  name="category"
                   required
                 >
                   <option value="fundraising">Fundraising</option>
@@ -104,14 +123,12 @@ const ContactUs = () => {
                 onChange={onChangeFormHandler}
                 rows={5}
                 required
-              >
-                Enter your message here...
-              </textarea>
+              />
             </div>
             <button type="submit">Submit</button>
           </form>
-          <div class="card-container card-container_contact">
-            <div class="card">
+          <div className="card-container card-container_contact">
+            <div className="card">
               <img src={callIcon} alt="callimg" />
               <div className="text_content">
                 <h2>Customer Support</h2>
@@ -125,7 +142,7 @@ const ContactUs = () => {
               </div>
               <button>Call Us</button>
             </div>
-            <div class="card">
+            <div className="card">
               <img src={messageIcon} alt="callimg" />
               <div className="text_content">
                 <h2>Email us</h2>
@@ -145,7 +162,7 @@ const ContactUs = () => {
               </div>
               <button>Send Email</button>
             </div>
-            <div class="card">
+            <div className="card">
               <img src={mapPinIcon} alt="callimg" />
               <div className="text_content">
                 <h2>Our address</h2>
