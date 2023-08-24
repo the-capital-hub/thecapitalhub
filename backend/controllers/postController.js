@@ -50,9 +50,22 @@ export const getSinglePost = async (req, res) => {
   }
 };
 
+// export const savePost = async (req, res) => {
+//   try {
+//     const response = await savePostService(req.userId, req.params.postId);
+//     res.send(response);
+//   } catch (error) {
+//     res.status(500).send(error);
+//   }
+// };
+
 export const savePost = async (req, res) => {
   try {
-    const response = await savePostService(req.userId, req.params.postId);
+    const response = await savePostService(
+      req.userId,
+      req.params.postId,
+      req.body.collection
+    );
     res.send(response);
   } catch (error) {
     res.status(500).send(error);

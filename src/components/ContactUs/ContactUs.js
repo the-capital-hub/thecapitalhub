@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./contactus.scss";
 import callIcon from "../../Images/Call.svg";
 import messageIcon from "../../Images/message.svg";
@@ -6,7 +6,32 @@ import mapPinIcon from "../../Images/map_pin.svg";
 import fbIcon from "../../Images/fb_contact.svg";
 import instaIcon from "../../Images/insta_contact.svg";
 import twIcon from "../../Images/tw_contact.svg";
+
 const ContactUs = () => {
+  const [contactForm, setContactForm] = useState({
+    name: "",
+    email: "",
+    mobileNumber: "",
+    category: "",
+    description: "",
+  });
+
+  const onChangeFormHandler = (event) => {
+    const { name, value } = event.target;
+    setContactForm((prevState) => {
+      return {
+        ...prevState,
+        [name]: value.trim(),
+      };
+    });
+  };
+
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+    console.log(contactForm); // form data
+    // Api call here
+  };
+
   return (
     <>
       <div className="container-fluid contactus_container">
@@ -17,6 +42,74 @@ const ContactUs = () => {
           </span>
         </div>
         <div className="container mt-5">
+          <form
+            className="d-flex gap-3 flex-column"
+            onSubmit={formSubmitHandler}
+          >
+            <div className="row row-cols-1 row-cols-lg-2">
+              <div className="form-input col">
+                <label htmlFor="name">Name</label>
+                <input
+                  id="name"
+                  type="text"
+                  value={contactForm.name}
+                  onChange={onChangeFormHandler}
+                  name="name"
+                  required
+                />
+              </div>
+              <div className="form-input col">
+                <label htmlFor="email">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  value={contactForm.email}
+                  onChange={onChangeFormHandler}
+                  required
+                />
+              </div>
+            </div>
+            <div className="row row-cols-1 row-cols-lg-2">
+              <div className="form-input col">
+                <label htmlFor="mobileNumber">Mobile Number</label>
+                <input
+                  id="mobileNumber"
+                  type="number"
+                  name="mobileNumber"
+                  value={contactForm.mobileNumber}
+                  onChange={onChangeFormHandler}
+                  required
+                />
+              </div>
+              <div className="form-input col">
+                <label htmlFor="category">Choose one</label>
+                <select
+                  id="category"
+                  value={contactForm.category}
+                  onChange={onChangeFormHandler}
+                  required
+                >
+                  <option value="fundraising">Fundraising</option>
+                  <option value="webdevelopment">Web Development</option>
+                </select>
+              </div>
+            </div>
+            <div className="form-input px-2">
+              <label htmlFor="description">Description</label>
+              <textarea
+                id="description"
+                name="description"
+                value={contactForm.description}
+                onChange={onChangeFormHandler}
+                rows={5}
+                required
+              >
+                Enter your message here...
+              </textarea>
+            </div>
+            <button type="submit">Submit</button>
+          </form>
           <div class="card-container card-container_contact">
             <div class="card">
               <img src={callIcon} alt="callimg" />
