@@ -16,6 +16,7 @@ router.get("/getSinglePost/:id", getSinglePost);
 
 // Single user routes
 router.post("/newPost", createPost);
+// router.patch("/oldsavePost/:postId", savePost);
 router.patch("/savePost/:postId", savePost);
 router.get("/savedPosts", getSavedPosts);
 
