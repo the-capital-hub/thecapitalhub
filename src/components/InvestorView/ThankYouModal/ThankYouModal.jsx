@@ -8,7 +8,7 @@ const ThankYouModal = ({ onCancel }) => {
       <div className="containerTwo">
         <div className="wrapperTwo">
           <span>Thank you for Showing Interest!</span>
-          <img src={tick} alt="" />
+          <img src={tick} alt="Thank you for Showing Interest!" />
         </div>
       </div>
     </div>

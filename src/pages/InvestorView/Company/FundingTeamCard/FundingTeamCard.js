@@ -25,7 +25,7 @@ const FundingTeamCard = ({ image, name, age, paragraph }) => {
           <div className="connect_button">
             <button>
               <span>
-                <img src={ConnectBtn} alt="" />
+                <img src={ConnectBtn} alt="connect" />
               </span>
               Connect
             </button>
