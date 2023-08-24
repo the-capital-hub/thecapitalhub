@@ -37,6 +37,8 @@ import DocumentationIV from "./pages/InvestorView/Documentation/Documentation";
 import ValidateOneLink from "./pages/InvestorView/ValidateOneLink/ValidateOneLink";
 import InvestNow from "./pages/InvestorView/InvestNow/InvestNow";
 import FolderContents from "./components/Investor/FolderContents/FolderContents";
+import Blog from "./components/Blog/Blog";
+import BlogDetailed from "./components/Blog/BlogDetailed/BlogDetailed";
 
 function App() {
   return (
@@ -49,6 +51,27 @@ function App() {
               <>
                 <Navbar />
                 <Home />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/blog"
+            element={
+              <>
+                <Navbar />
+                <Blog />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/blog/webdevlopment"
+            element={
+              <>
+                <Navbar />
+                <BlogDetailed />
                 <Footer />
               </>
             }
