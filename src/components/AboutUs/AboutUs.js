@@ -31,7 +31,7 @@ const AboutUs = () => {
             <h1>Founding team</h1>
             <div className="founder_container">
               <div className="image rounded-circle">
-                <img src={PramodImage} className="rounded-circle" alt="image" />
+                <img src={PramodImage} className="rounded-circle" alt="founder" />
               </div>
 
               <div className="text_content">
@@ -61,7 +61,7 @@ const AboutUs = () => {
             {/* <h1>Founder</h1> */}
             <div className="founder_container">
               <div className="image rounded-circle">
-                <img src="" alt="image" className="rounded-circle" />
+                <img src="" alt="founder" className="rounded-circle" />
               </div>
 
               <div className="text_content">
