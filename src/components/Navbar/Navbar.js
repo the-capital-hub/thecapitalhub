@@ -127,7 +127,7 @@ function Navbar() {
                         }
                         onClick={() => setSelectedLink("web-development")}
                       >
-                        WebDevelopment
+                        Web Development
                       </Link>
                     </li>
 
@@ -162,7 +162,7 @@ function Navbar() {
                         }
                         onClick={() => setSelectedLink("complience")}
                       >
-                        COMPLIANCES
+                        Compliance
                       </Link>
                     </li>
                   </ul>}

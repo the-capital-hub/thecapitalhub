@@ -1,6 +1,6 @@
 import React from "react";
 import "./TeamCard.scss";
-import PramodSq from "../../../../../Images/PramodSqare.png";
+import PramodSq from "../../../../../Images/Pramod.jpeg";
 
 const TeamCard = () => {
   const cardData = [
@@ -26,7 +26,7 @@ const TeamCard = () => {
             <div className="card">
               <div className="card-body">
                 <h5 className="card-title">{card.title}</h5>
-                <img src={PramodSq} alt="image" />
+                <img src={PramodSq} alt="image" style={{height:"120px", width:"120px"}}/>
                 <div className="company_text">
                   <h6>Enter company description </h6>
                   <hr />

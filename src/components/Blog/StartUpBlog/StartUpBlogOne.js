@@ -19,7 +19,7 @@ const StartUpBlogOne = () => {
         <hr />
 
         <div className="row">
-          <div className="col-lg-7 col-md-12 seventy ">
+          <div className="col-lg-12 col-md-12 seventy ">
             <h1 className="headingOne">
               Why Mentoring Matters: Why Angel Investors Should Prioritize
               Mentorship Before Investing in a Startup
@@ -180,7 +180,7 @@ const StartUpBlogOne = () => {
               </button> */}
             </div>
           </div>
-          <div className="col-lg-5  col-md-12 thirty">
+          {/* <div className="col-lg-5  col-md-12 thirty">
             <div className="search_bar">
               <div className="search-input-container">
                 <img src={SearchIcon} className="search-icon fas fa-search" />
@@ -204,7 +204,7 @@ const StartUpBlogOne = () => {
               <PopularArticle image={BlogImageOne} button={"Stock Market"} />
               <PopularArticle image={BlogImageOne} button={"Stock Market"} />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

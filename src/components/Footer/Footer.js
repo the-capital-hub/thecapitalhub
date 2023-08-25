@@ -20,7 +20,7 @@ const Footer = () => {
             <h4>General</h4>
             <ul className="list-unstyled">
               <li>
-                <a href="#" className="text-white">
+                <a href="http://thecapitalhub.in/about" className="text-white">
                   About Us
                 </a>
               </li>
@@ -30,7 +30,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-white">
+                <a href="http://thecapitalhub.in/contactus" className="text-white">
                   Contact Us
                 </a>
               </li>

@@ -61,7 +61,10 @@ const ContactUs = () => {
   return (
     <>
       {formSubmitted && (
-        <AfterSuccessPopUp contactFrom onClose={() => setFormSubmitted(!formSubmitted)} />
+        <AfterSuccessPopUp
+          contactFrom
+          onClose={() => setFormSubmitted(!formSubmitted)}
+        />
       )}
       <div className="container-fluid contactus_container">
         <div className="title_section">
@@ -207,8 +210,8 @@ const ContactUs = () => {
                 <h2>Our address</h2>
                 <p>
                   The Capital Hub <br />
-                  Benz circle, 5th Floor, <br /> Electronic city, <br />
-                  karnataka, bangalore – 500 064
+                  7th block, Jayanagar,
+                  <br /> Bengaluru - 560070
                 </p>
               </div>
             </div>
@@ -218,7 +221,7 @@ const ContactUs = () => {
         <div className="title_section mb-5">
           <h2>Follow us on</h2>
           <div className="followus_image_section">
-            <a href="your_facebook_link_here">
+            <a href="">
               <img src={fbIcon} alt="Facebook" />
             </a>
 
@@ -226,7 +229,7 @@ const ContactUs = () => {
               <img src={instaIcon} alt="Instagram" />
             </a>
 
-            <a href="your_twitter_link_here">
+            <a href="">
               <img src={twIcon} alt="Twitter" />
             </a>
           </div>
