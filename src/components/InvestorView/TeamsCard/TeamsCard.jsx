@@ -1,11 +1,9 @@
 import "./TeamsCard.scss";
-import { camera } from "../../../Images/InvestorsView";
-import ImagePlaceholder from "../ImagePlaceholder/ImagePlaceholder";
 
-const TeamsCard = ({image, name, designation}) => {
+const TeamsCard = ({ image, name, designation }) => {
   return (
     <div className="TeamsCard">
-      <ImagePlaceholder text={"Upload your image"} imageUrl={image}/>
+      <img src={image} width={100} alt="" className="rounded-4" />
       <div className="details">
         <div className="about">
           <p>{name || `Name`}</p>

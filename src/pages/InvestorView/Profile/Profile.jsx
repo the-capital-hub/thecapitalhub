@@ -1,4 +1,4 @@
-import profilePic from "../../../Images/investorIcon/profilePic.svg";
+import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
 import { Link } from "react-router-dom";
 import CompanyDetailsCard from "../../../components/Investor/InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";

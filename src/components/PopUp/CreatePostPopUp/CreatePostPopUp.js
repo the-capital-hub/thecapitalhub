@@ -7,7 +7,7 @@ import CameraIcon from "../../../Images/Camera.svg";
 import { useSelector } from "react-redux";
 import { postUserPost } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
-import profilePic from "../../../Images/investorIcon/profilePic.svg";
+import profilePic from "../../../Images/investorIcon/profilePic.webp";
 
 const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);

@@ -106,7 +106,7 @@ const OnePager = () => {
         <CompanyDetails
           companyName={onePager.company}
           description={onePager.description}
-          image={onePager.companyProfile}
+          image={onePager.logo}
         />
       </div>
 
@@ -153,7 +153,7 @@ const OnePager = () => {
         <Title title={"Team"} />
         <div className="cards">
           {onePager?.team?.map((team, index) => (
-            <TeamsCard name={team.name} designation={team.designation} />
+            <TeamsCard key={index} image={team.image} name={team.name} designation={team.designation} />
           ))}
         </div>
       </div>

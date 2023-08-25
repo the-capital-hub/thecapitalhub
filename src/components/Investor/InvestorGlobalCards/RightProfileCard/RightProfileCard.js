@@ -1,6 +1,6 @@
 import React from "react";
 import "./rightProfileCard.scss";
-import profilePic from "../../../../Images/investorIcon/profilePic.svg";
+import profilePic from "../../../../Images/investorIcon/profilePic.webp";
 import LoopIcon from "../../../../Images/investorIcon/LoopIcon.svg";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";

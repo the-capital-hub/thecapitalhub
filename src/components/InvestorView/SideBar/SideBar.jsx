@@ -9,7 +9,7 @@ import {
 import ArrowLeft from "../../../Images/investorsidebar/ArrowLeft.svg";
 import ArrowRight from "../../../Images/investorsidebar/ArrowRight.svg";
 import BookIcon from "../../../Images/investorIcon/Book.svg";
-import profilePic from "../../../Images/investorIcon/profilePic.svg";
+import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import "react-pro-sidebar/dist/css/styles.css";
 import "../../Investor/InvestorSidebar/investorsidebar.scss";
 import { Link, useLocation } from "react-router-dom";

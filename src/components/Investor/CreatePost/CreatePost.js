@@ -1,6 +1,6 @@
 import "./createPost.scss";
 import React, { useContext, useEffect } from "react";
-import profilePic from "../../../Images/investorIcon/profilePic.svg";
+import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
 import { CiEdit } from "react-icons/ci";
 import { Link } from "react-router-dom";
