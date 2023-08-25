@@ -36,7 +36,7 @@ const OurStartUp = () => {
                 className={selectedLink === "agreective" ? "active" : ""}
                 onClick={() => handleLinkClick("agreective")}
               >
-                Agreective
+                Agritech
               </Link>
             </li>
             <li>
@@ -50,7 +50,7 @@ const OurStartUp = () => {
           </ul>
         </div>
         <div className="col-md-4 title_text d-flex justify-content-end invest_now_startup_btn">
-          <button className="startups_section_btn">Invest now</button>
+        <Link to={'/contactus'} style={{textDecoration:"none"}}>  <button className="startups_section_btn">Invest now</button></Link>
         </div>
       </div>
       <div className="row d-flex justify-content-between align-items-center pt-5 pb-5 our_startup_container">

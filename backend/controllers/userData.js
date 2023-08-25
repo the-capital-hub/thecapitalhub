@@ -7,6 +7,8 @@ import {
   updateUserData,
   updateUserById,
   changePassword,
+  requestPasswordReset,
+  resetPassword,
 } from "../services/userService.js";
 import { secretKey } from "../constants/config.js";
 
@@ -119,3 +121,25 @@ export const changePasswordController = async (req, res) => {
     });
   }
 }
+
+export const requestPasswordResetController = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const response = await requestPasswordReset(email);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'An error occurred while requesting a password reset' });
+  }
+};
+
+export const resetPasswordController = async (req, res) => {
+  try {
+    const { token, newPassword } = req.body;
+    const response = await resetPassword(token, newPassword);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'An error occurred while resetting the password' });
+  }
+};

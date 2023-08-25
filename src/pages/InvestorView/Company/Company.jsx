@@ -9,7 +9,7 @@ import googleIcon from "../../../Images/investorView/Google svg(1).svg";
 import fbIcon from "../../../Images/investorView/Facebook svg.svg";
 import twIcon from "../../../Images/investorView/tw.svg";
 import lnIcon from "../../../Images/investorView/ln.svg";
-import feedbackIcon from "../../../Images/investorIcon/profilePic.svg";
+import feedbackIcon from "../../../Images/investorIcon/profilePic.webp";
 
 import { useSelector } from "react-redux";
 import "./Company.scss";
@@ -41,13 +41,16 @@ function Company() {
                   <div className="col-lg-7 col-md-12">
                     <div className="image_name_section mt-2">
                       <img
-                        src={onePager.profile || profilePic}
+                        src={onePager.logo || profilePic}
                         alt="profileimage"
                         className="rounded-circle"
+                        width={100}
                       />
                       <div className="left_profile_text flex_content ms-3">
                         <h2 className="typography">{onePager.company}</h2>
-                        <span className="small_typo">The Finance company</span>
+                        <span className="small_typo text-uppercase">
+                          {onePager.sector}
+                        </span>
                         <div>
                           <span className="small_typo_location">
                             {" "}

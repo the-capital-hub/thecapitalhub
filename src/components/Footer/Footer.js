@@ -5,9 +5,6 @@ import TwIcon from "../../Images/Tw.svg";
 import InIcon from "../../Images/In.svg";
 import YtIcon from "../../Images/Yt.svg";
 
-
-
-
 const Footer = () => {
   return (
     <div className="container-fluid footer_container">
@@ -76,18 +73,18 @@ const Footer = () => {
               information about our services
             </p>
             <div className="d-flex justify-content-start">
-              <img src={FbIcon} alt="img" style={{margin:"0px 2px"}} />
-              <img src={TwIcon} alt="img" style={{margin:"0px 2px"}} />
-              <img src={InIcon} alt="img" style={{margin:"0px 2px"}} />
-              <img src={YtIcon} alt="img" style={{margin:"0px 2px"}} />
+              <img src={FbIcon} alt="img" style={{ margin: "0px 2px" }} />
+              <img src={TwIcon} alt="img" style={{ margin: "0px 2px" }} />
+              <img src={InIcon} alt="img" style={{ margin: "0px 2px" }} />
+              <img src={YtIcon} alt="img" style={{ margin: "0px 2px" }} />
             </div>
           </div>
-          <div className="col-md-3 col-sm-6 footer_list_item">
+          {/* <div className="col-md-3 col-sm-6 footer_list_item">
             <h4>Subscribe to our Newsletter</h4>
-            {/* <p>
+            <p>
               Lorem ipsum dolor sit amet consectetur. Velit enim est urna est
               massa cras. Sed varius convallis netus aliquet duis ut.
-            </p> */}
+            </p>
             <div className="input-group mb-3 subscribe_input">
               <input
                 type="text"
@@ -100,7 +97,7 @@ const Footer = () => {
                 </button>
               </div>
             </div>
-          </div>
+          </div> */}
           {/* <div className="row ">
             <div className="col copyright_text">
             <h5>2022 - &copy;Lorem all right deserved</h5>
