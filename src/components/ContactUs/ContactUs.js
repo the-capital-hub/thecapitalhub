@@ -218,15 +218,15 @@ const ContactUs = () => {
         <div className="title_section mb-5">
           <h2>Follow us on</h2>
           <div className="followus_image_section">
-            <a href="your_facebook_link_here">
-              <img src={fbIcon} alt="Facebook" />
+            <a href="">
+              <img src={fbIcon} alt="Facebook"/>
             </a>
 
             <a href="https://instagram.com/capitalhub_official?igshid=MzRlODBiNWFlZA==">
               <img src={instaIcon} alt="Instagram" />
             </a>
 
-            <a href="your_twitter_link_here">
+            <a href="">
               <img src={twIcon} alt="Twitter" />
             </a>
           </div>
