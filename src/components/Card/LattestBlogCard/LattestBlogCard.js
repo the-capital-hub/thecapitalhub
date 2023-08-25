@@ -1,17 +1,17 @@
 import React from 'react';
 import './LattestBlogCard.scss'
 
-const LattestBlogCard = ({image,button}) => {
+const LattestBlogCard = ({image,button,title,date,onClick}) => {
   return (
-    <div className="blog-card">
+    <div className="blog-card col-lg-4 col-md-6 col-sm-12" onClick={onClick}>
       <img
         className="blog-card-image"
         src={image}
         alt="Blog"
       />
       <button className="blog-card-button">{button}</button>
-      <h3 className="blog-card-title">Blog Title</h3>
-      <p className="blog-card-date">August 24, 2023</p>
+      <h3 className="blog-card-title">{title}</h3>
+      <p className="blog-card-date">{date}</p>
     </div>
   );
 }

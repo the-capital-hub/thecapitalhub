@@ -39,6 +39,9 @@ import InvestNow from "./pages/InvestorView/InvestNow/InvestNow";
 import FolderContents from "./components/Investor/FolderContents/FolderContents";
 import Blog from "./components/Blog/Blog";
 import BlogDetailed from "./components/Blog/BlogDetailed/BlogDetailed";
+import StartUpBlogOne from "./components/Blog/StartUpBlog/StartUpBlogOne";
+import StartUpBlogTwo from "./components/Blog/StartUpBlog/StartUpBlogTwo";
+import StartUpBlogThree from "./components/Blog/StartUpBlog/StartUpBlogThree";
 
 function App() {
   return (
@@ -72,6 +75,39 @@ function App() {
               <>
                 <Navbar />
                 <BlogDetailed />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/blog/startupOne"
+            element={
+              <>
+                <Navbar />
+                <StartUpBlogOne />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/blog/startupTwo"
+            element={
+              <>
+                <Navbar />
+                <StartUpBlogTwo />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/blog/startupThree"
+            element={
+              <>
+                <Navbar />
+                <StartUpBlogThree />
                 <Footer />
               </>
             }
@@ -205,7 +241,6 @@ function App() {
             <Route path="/support" element={<Support />} />
           </Route>
 
-          
           {/* OneLink */}
           <Route path="/onelink/:username" element={<ValidateOneLink />}>
             <Route path="" element={<Profile />} />

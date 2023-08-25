@@ -1,6 +1,9 @@
 $card-width: 30%;
 
 .contactus_container {
+  a{
+    cursor: pointer;
+  }
   overflow: auto;
   .title_section {
     display: flex;
@@ -103,7 +106,9 @@ $card-width: 30%;
       img {
         width: 70px;
         height: 70px;
+        cursor: pointer;
       }
+     
 
       .text_content {
         h2 {
