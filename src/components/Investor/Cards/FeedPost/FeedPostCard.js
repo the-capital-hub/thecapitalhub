@@ -81,9 +81,9 @@ const FeedPostCard = ({
                   </span>
                 </div>
               </div>
-              <div className="three_dot">
+              {/* <div className="three_dot">
                 <img src={ThreeODotIcon} alt="dot" />
-              </div>
+              </div> */}
             </div>
             <hr />
             <div className="para_container w-100">
