@@ -5,9 +5,6 @@ import TwIcon from "../../Images/Tw.svg";
 import InIcon from "../../Images/In.svg";
 import YtIcon from "../../Images/Yt.svg";
 
-
-
-
 const Footer = () => {
   return (
     <div className="container-fluid footer_container">
@@ -76,10 +73,10 @@ const Footer = () => {
               information about our services
             </p>
             <div className="d-flex justify-content-start">
-              <img src={FbIcon} alt="img" style={{margin:"0px 2px"}} />
-              <img src={TwIcon} alt="img" style={{margin:"0px 2px"}} />
-              <img src={InIcon} alt="img" style={{margin:"0px 2px"}} />
-              <img src={YtIcon} alt="img" style={{margin:"0px 2px"}} />
+              <img src={FbIcon} alt="img" style={{ margin: "0px 2px" }} />
+              <img src={TwIcon} alt="img" style={{ margin: "0px 2px" }} />
+              <img src={InIcon} alt="img" style={{ margin: "0px 2px" }} />
+              <img src={YtIcon} alt="img" style={{ margin: "0px 2px" }} />
             </div>
           </div>
           <div className="col-md-3 col-sm-6 footer_list_item">
@@ -88,7 +85,7 @@ const Footer = () => {
               Lorem ipsum dolor sit amet consectetur. Velit enim est urna est
               massa cras. Sed varius convallis netus aliquet duis ut.
             </p> */}
-            <div className="input-group mb-3 subscribe_input">
+            {/* <div className="input-group mb-3 subscribe_input">
               <input
                 type="text"
                 className="form-control"
@@ -99,7 +96,7 @@ const Footer = () => {
                   Subscribe
                 </button>
               </div>
-            </div>
+            </div> */}
           </div>
           {/* <div className="row ">
             <div className="col copyright_text">

@@ -1,4 +1,3 @@
-import React from "react";
 import "./whychooseus.scss";
 import G1Icon from "../../../../Images/Group 1 (1).svg";
 import G2Icon from "../../../../Images/Group 2 (1).svg";
@@ -11,7 +10,7 @@ const WhyChooseUsCard = () => {
   return (
     <>
       <div className="why_choose_us row justify-content-around align-items-center my-4">
-        <h1 className="text-center text_center ">Why choose us</h1>
+        <h1 className="text-center text_center my-4 my-md-5">Why choose us</h1>
         <div className="col-md-6 b why_chooseus_card mb-69">
           <div className="row d-flex justify-content-center align-item-center inside_card">
             <img src={G1Icon} alt="img" />
