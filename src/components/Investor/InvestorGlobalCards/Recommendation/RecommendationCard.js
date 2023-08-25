@@ -1,6 +1,6 @@
 import React from "react";
 import AddUserIconBlack from "../../../../Images/investorIcon/Add-UserBlack.svg";
-import profilePic from "../../../../Images/investorIcon/profilePic.svg";
+import profilePic from "../../../../Images/investorIcon/profilePic.webp";
 import "./recommendation.scss";
 
 const RecommendationCard = () => {

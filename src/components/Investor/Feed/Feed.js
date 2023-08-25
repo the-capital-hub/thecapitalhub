@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./feed.scss";
-// import profilePic from "../../../Images/investorIcon/profilePic.svg";
+// import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import SmallProfileCard from "../Cards/TwoSmallMyProfile/SmallProfileCard";
 import RightProfileCard from "../InvestorGlobalCards/RightProfileCard/RightProfileCard";
 import RecommendationCard from "../Cards/Recommendation/RecommendationCard";

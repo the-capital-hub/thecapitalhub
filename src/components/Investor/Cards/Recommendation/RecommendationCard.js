@@ -1,6 +1,6 @@
 import React from "react";
 import AddUserIconBlack from "../../../../Images/investorIcon/Add-UserBlack.svg";
-import profilePic from "../../../../Images/investorIcon/profilePic.svg";
+import profilePic from "../../../../Images/investorIcon/profilePic.webp";
 import "./recommendation.scss";
 
 const RecommendationCard = () => {
@@ -22,7 +22,7 @@ const RecommendationCard = () => {
                   UI/UX Designer/Product Designer
                 </h4>
                 <button>
-                  <img src={AddUserIconBlack} alt="add user"/>
+                  <img src={AddUserIconBlack} alt="add user" />
                   <span>Connect</span>
                 </button>
               </div>

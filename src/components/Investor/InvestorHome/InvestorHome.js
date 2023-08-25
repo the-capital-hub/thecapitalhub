@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./investorHome.scss";
-import profilePic from "../../../Images/investorIcon/profilePic.svg";
+import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
 import { Link } from "react-router-dom";

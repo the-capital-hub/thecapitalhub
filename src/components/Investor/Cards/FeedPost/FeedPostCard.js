@@ -1,5 +1,5 @@
 import React from "react";
-import profilePic from "../../../../Images/investorIcon/profilePic.svg";
+import profilePic from "../../../../Images/investorIcon/profilePic.webp";
 import locationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
 import HomeIcon from "../../../../Images/HomeIcon.svg";
 import ThreeODotIcon from "../../../../Images/ThreeDotIcon.svg";
