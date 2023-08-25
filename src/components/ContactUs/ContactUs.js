@@ -8,16 +8,18 @@ import instaIcon from "../../Images/insta_contact.svg";
 import twIcon from "../../Images/tw_contact.svg";
 import { environment } from "../../environments/environment";
 import axios from "axios";
+import AfterSuccessPopUp from "../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 const baseUrl = environment.baseUrl;
 
 const ContactUs = () => {
-  const [contactForm, setContactForm] = useState({
+  const initialForm = {
     name: "",
     email: "",
     mobileNumber: "",
     category: "fundraising",
     description: "",
-  });
+  };
+  const [contactForm, setContactForm] = useState({ ...initialForm });
 
   const onChangeFormHandler = (event) => {
     const { name, value } = event.target;
@@ -28,6 +30,8 @@ const ContactUs = () => {
       };
     });
   };
+
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
@@ -43,15 +47,22 @@ const ContactUs = () => {
       .post(`${baseUrl}/contactUs`, requestBody)
       .then((response) => {
         console.log("response", response);
-        if (response.status === 200) alert(response.data.message);
+        if (response.status === 200) {
+          console.log("form submitted");
+          setFormSubmitted(true);
+          setContactForm({ ...initialForm });
+        }
       })
       .catch((error) => {
-        console.error("Error uploading file:", error);
+        console.error("Error sending mail:", error);
       });
   };
 
   return (
     <>
+      {formSubmitted && (
+        <AfterSuccessPopUp contactFrom onClose={() => setFormSubmitted(!formSubmitted)} />
+      )}
       <div className="container-fluid contactus_container">
         <div className="title_section">
           <h2>Contact Us</h2>
@@ -132,7 +143,13 @@ const ContactUs = () => {
               <img src={callIcon} alt="callimg" />
               <div className="text_content">
                 <h2>Customer Support</h2>
-                <span style={{ color: "#FD5901", fontSize: "15px" ,cursor:"pointer"}}>
+                <span
+                  style={{
+                    color: "#FD5901",
+                    fontSize: "15px",
+                    cursor: "pointer",
+                  }}
+                >
                   +91 8217839506
                 </span>
                 <p>
@@ -143,7 +160,11 @@ const ContactUs = () => {
               <button>
                 <a
                   href="tel:+918217839506"
-                  style={{ textDecoration: "none", color: "inherit" ,cursor:"pointer"}}
+                  style={{
+                    textDecoration: "none",
+                    color: "inherit",
+                    cursor: "pointer",
+                  }}
                 >
                   Call Us
                 </a>
@@ -170,7 +191,11 @@ const ContactUs = () => {
               <button>
                 <a
                   href="mailto:investments@thecapitalhub.in"
-                  style={{ textDecoration: "none", color: "inherit",cursor:"pointer" }}
+                  style={{
+                    textDecoration: "none",
+                    color: "inherit",
+                    cursor: "pointer",
+                  }}
                 >
                   Send Email
                 </a>

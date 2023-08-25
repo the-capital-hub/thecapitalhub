@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./InvestorManageAccount.scss";
 import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import logoIcon from "../../../Images/manageAccount/Group 15186.svg";
-import profileIcon from "../../../Images/investorIcon/profilePic.svg";
+import profileIcon from "../../../Images/investorIcon/profilePic.webp";
 
 const InvestorManageAccount = () => {
   const [checked, setChecked] = useState(true);
