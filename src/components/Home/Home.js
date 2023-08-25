@@ -109,7 +109,9 @@ const Home = () => {
                   and connect with your audience seamlessly. Start building your
                   digital footprint today!
                 </p>
-                <button>Create</button>
+                <Link to="/signup">
+                  <button>Create</button>
+                </Link>
               </div>
             </div>
             <div className="col-lg-6 col-md-12 onelink_img">
@@ -148,7 +150,7 @@ const Home = () => {
                   investment process for sustainable growth and financial
                   returns.
                 </p>
-                <Link to="/login">
+                <Link to="/signup">
                   <button className="angel_button">Learn more</button>
                 </Link>
               </div>
@@ -178,7 +180,7 @@ const Home = () => {
                   Streamline workflows, foster effective communication, and
                   drive productivity to achieve remarkable results.
                 </p>
-                <Link to="/login">
+                <Link to="/signup">
                   <button>Learn more</button>
                 </Link>
               </div>
@@ -214,7 +216,7 @@ const Home = () => {
                   deliver personalised and exceptional service at every
                   touchpoint.
                 </p>
-                <Link to="/login">
+                <Link to="/signup">
                   <button className="angel_button">Learn more</button>
                 </Link>
               </div>
@@ -244,7 +246,7 @@ const Home = () => {
                   track and engage with investors, foster trust, and drive
                   success for your venture.
                 </p>
-                <Link to="/login">
+                <Link to="/signup">
                   <button className="investor_button">Learn more</button>
                 </Link>
               </div>
@@ -289,7 +291,7 @@ const Home = () => {
                   entrepreneurs. Share your expertise, cultivate innovative
                   ideas, and create a lasting impact on startup success.
                 </p>
-                <Link to="/login">
+                <Link to="/signup">
                   <button className="mentor_button">Be a mentor now</button>
                 </Link>
               </div>
