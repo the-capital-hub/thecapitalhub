@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./OneLinkEditView.scss";
 import DollarRupeeImage from "../../../../../Images/Dollar_rupee.svg";
-import PramodSq from "../../../../../Images/PramodSqare.png";
+import PramodSq from "../../../../../Images/Pramod.jpeg";
 import OnePagePreviewCard from "../../../InvestorGlobalCards/OneLink/OnePagePreviewCard/OnePagePreviewCard";
 import Table from "../../Table/Table";
 import TeamCard from "../../../InvestorGlobalCards/OneLink/TeamCard/TeamCard";
@@ -99,7 +99,7 @@ const OneLinkEditView = () => {
           </section> */}
           <div className="download_preview">
             <section className="company_description">
-              <img src={PramodSq} alt="image" />
+              <img src={PramodSq} alt="image" style={{height:"120px", width:"120px"}}/>
               <div className="company_text">
                 <h6>
                   <input

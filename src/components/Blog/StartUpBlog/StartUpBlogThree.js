@@ -28,7 +28,7 @@ const StartUpBlogThree = () => {
         <hr />
 
         <div className="row">
-          <div className="col-lg-7 col-md-12  seventy ">
+          <div className="col-lg-12 col-md-12  seventy ">
             <h1 className="headingOne">
               8 Tips to start raising Angel investments for startups
             </h1>
@@ -162,7 +162,7 @@ const StartUpBlogThree = () => {
               </p>
             </div>
           </div>
-          <div className="col-lg-5 col-md-12  thirty">
+          {/* <div className="col-lg-5 col-md-12  thirty">
             <div className="search_bar">
               <div className="search-input-container">
                 <img src={SearchIcon} className="search-icon fas fa-search" />
@@ -186,7 +186,7 @@ const StartUpBlogThree = () => {
               <PopularArticle image={BlogImageOne} button={"Stock Market"} />
               <PopularArticle image={BlogImageOne} button={"Stock Market"} />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

@@ -46,7 +46,7 @@ const Blog = () => {
             <li>></li>
           </ul>
         </div>
-        <div className="container main_blog_container">
+        {/* <div className="container main_blog_container">
           <section className="row main_blog_section">
             <div className="col-lg-5 col-md-12 image_section_left">
               <img src={ImageBlog1} alt="img" />
@@ -69,7 +69,7 @@ const Blog = () => {
             </div>
           </section>
         </div>
-        <hr />
+        <hr /> */}
         <div className="container lattest_blog_container">
           <h1>Latest Blogs</h1>
           <section className="row justify-content-around">
@@ -158,7 +158,7 @@ const Blog = () => {
             </ul>
           </nav>
         </div>
-        <div className="subscribe_container_section">
+        {/* <div className="subscribe_container_section">
           <h2>Get exclusive content and expert advice</h2>
           <div className="subscribe-input-container">
             <input
@@ -168,7 +168,7 @@ const Blog = () => {
             />
             <button className="subscribe-button">Subscribe</button>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

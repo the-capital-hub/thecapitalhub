@@ -2,7 +2,7 @@ import React from "react";
 import "./OnePagePreview.scss";
 import EditIcon from "../../../../Images/WhiteEdit.svg";
 import DollarRupeeImage from "../../../../Images/Dollar_rupee.svg";
-import PramodSq from "../../../../Images/PramodSqare.png";
+import PramodSq from "../../../../Images/Pramod.jpeg";
 import OnePagePreviewCard from "../../InvestorGlobalCards/OneLink/OnePagePreviewCard/OnePagePreviewCard";
 import Table from "../Table/Table";
 import TeamCard from "../../InvestorGlobalCards/OneLink/TeamCard/TeamCard";

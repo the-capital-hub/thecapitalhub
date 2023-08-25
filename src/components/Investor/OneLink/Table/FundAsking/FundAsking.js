@@ -1,6 +1,6 @@
 import React from "react";
 import "./FundAsking.scss";
-import PramodSq from "../../../../../Images/PramodSqare.png";
+import PramodSq from "../../../../../Images/Pramod.jpeg";
 import { useSelector } from "react-redux";
 import { postStartUpData } from "../../../../../Service/user";
 
@@ -27,7 +27,7 @@ const FundAsking = ({ company, page }) => {
           <div className="card">
             <div className="card-body">
               <h5 className="card-title">Funding Ask (in lakhs)</h5>
-              <img src={PramodSq} alt="image" />
+              <img src={PramodSq} alt="image" style={{height:"120px", width:"120px"}}/>
               <hr />
               <div className="amount_text">
                 {page === "oneViewEdit" ? (
