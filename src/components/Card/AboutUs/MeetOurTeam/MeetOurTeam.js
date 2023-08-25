@@ -4,7 +4,7 @@ import EmailIcon from "../../../../Images/message.svg";
 import LinkedInIcon from "../../../../Images/service/linkedin.svg";
 import UpmaImage from "../../../../Images/service/Upma.jpeg";
 import PreetiImage from "../../../../Images/service/preeti.jpeg";
-import RaghuImage from "../../../../Images/service/raghu.jpeg";
+import RaghuImage from "../../../../Images/aboutUs/Raghu.jpeg";
 import { Link } from "react-router-dom";
 
 const MeetOurTeam = () => {

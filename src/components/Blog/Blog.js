@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Blog.scss";
 import ImageBlog1 from "../../Images/blog/Rectangle 1271.png";
 import ImageBlog2 from "../../Images/blog/Rectangle 1273.png";
-import SearchIcon from "../../Images/blog/Combined-Shape.svg"
+import SearchIcon from "../../Images/blog/Combined-Shape.svg";
 import LattestBlogCard from "../Card/LattestBlogCard/LattestBlogCard";
+import BlogoneImage from "../../Images/blog/1 AsPGU1Q42C9lsVRoMg91Nw.webp";
+import BlogtwoImage from "../../Images/blog/eighttips.webp";
+import BlogthreeImage from "../../Images/blog/BlogthreeImage.webp";
+import {useNavigate } from "react-router-dom";
 
 const Blog = () => {
+
+  const navigate = useNavigate();
+
+  const handleCardClick = (route) => {
+    navigate(route);
+  };
+
+
   return (
     <>
       <div className="container-fluid blog_container">
@@ -15,7 +27,7 @@ const Blog = () => {
           </div>
           <div className="col-md-6 search_bar">
             <div className="search-input-container">
-              <img src={SearchIcon} className="search-icon fas fa-search"/>
+              <img src={SearchIcon} className="search-icon fas fa-search" />
               <input type="search" placeholder="Search" />
             </div>
           </div>
@@ -36,10 +48,10 @@ const Blog = () => {
         </div>
         <div className="container main_blog_container">
           <section className="row main_blog_section">
-            <div className="col-5 image_section_left">
+            <div className="col-lg-5 col-md-12 image_section_left">
               <img src={ImageBlog1} alt="img" />
             </div>
-            <div className="col-7 right_content_section">
+            <div className="col-lg-7 col-md-12 right_content_section">
               <div className="button_and_text">
                 <button>Web Development</button>
                 <span>Published on Monday, August 21st, 2023</span>
@@ -61,12 +73,56 @@ const Blog = () => {
         <div className="container lattest_blog_container">
           <h1>Latest Blogs</h1>
           <section className="row justify-content-around">
-            <LattestBlogCard image={ImageBlog2} button={"Startup"} />
-            <LattestBlogCard image={ImageBlog1} button={"Taxes"} />
-            <LattestBlogCard image={ImageBlog1} button={"Web Devlopment"} />
-            <LattestBlogCard image={ImageBlog2} button={"Invest"} />
-            <LattestBlogCard image={ImageBlog1} button={"Stock Market"} />
-            <LattestBlogCard image={ImageBlog1} button={"Fund Raising"} />
+            <LattestBlogCard
+              image={BlogoneImage}
+              button={"Startup"}
+              date={"May 1 2023"}
+              title={
+                "Why Mentoring Matters: Why Angel Investors Should Prioritize Mentorship Before Investing in a Startup"
+              }
+              onClick={() => handleCardClick("/blog/startupOne")} 
+            />
+
+            <LattestBlogCard
+              image={BlogtwoImage}
+              button={"Startup"}
+              date={"Jan 21 2023"}
+              title={"8 Tips to start raising Angel investments for startups"}
+              onClick={() => handleCardClick("/blog/startupTwo")}
+            />
+
+            <LattestBlogCard
+              image={BlogthreeImage}
+              button={"Startup"}
+              date={"Jan 21 2023"}
+              title={"HOW TO BUILD A GREAT STARTUP by Pramod Badiger"}
+              onClick={() => handleCardClick("/blog/startupThree")}
+            />
+
+            <LattestBlogCard
+              image={ImageBlog2}
+              button={"Startup"}
+              date={"May 1 2023"}
+              title={
+                "Why Mentoring Matters: Why Angel Investors Should Prioritize Mentorship Before Investing in a Startup"
+              }
+            />
+            <LattestBlogCard
+              image={ImageBlog1}
+              button={"Startup"}
+              date={"May 1 2023"}
+              title={
+                "Why Mentoring Matters: Why Angel Investors Should Prioritize Mentorship Before Investing in a Startup"
+              }
+            />
+            <LattestBlogCard
+              image={ImageBlog1}
+              button={"Startup"}
+              date={"May 1 2023"}
+              title={
+                "Why Mentoring Matters: Why Angel Investors Should Prioritize Mentorship Before Investing in a Startup"
+              }
+            />
           </section>
         </div>
         <div className="container pagination_container_section">

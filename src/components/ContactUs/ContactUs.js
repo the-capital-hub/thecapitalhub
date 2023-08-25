@@ -37,17 +37,17 @@ const ContactUs = () => {
       email: contactForm.email.trim(),
       mobile: contactForm.mobileNumber,
       inquiryType: contactForm.category,
-      description: contactForm.description 
-    }
+      description: contactForm.description,
+    };
     axios
-        .post(`${baseUrl}/contactUs`, requestBody)
-        .then((response) => {
-          console.log("response", response);
-          if (response.status === 200) alert(response.data.message)
-        }).catch((error) => {
-          console.error("Error uploading file:", error);
-        });
-
+      .post(`${baseUrl}/contactUs`, requestBody)
+      .then((response) => {
+        console.log("response", response);
+        if (response.status === 200) alert(response.data.message);
+      })
+      .catch((error) => {
+        console.error("Error uploading file:", error);
+      });
   };
 
   return (
@@ -132,15 +132,22 @@ const ContactUs = () => {
               <img src={callIcon} alt="callimg" />
               <div className="text_content">
                 <h2>Customer Support</h2>
-                <span style={{ color: "#FD5901", fontSize: "15px" }}>
-                  +91 xxxxxxxxxx
+                <span style={{ color: "#FD5901", fontSize: "15px" ,cursor:"pointer"}}>
+                  +91 8217839506
                 </span>
                 <p>
                   You may call us between Monday to Friday 9:00 am to 5:30 pm
                   from your registered mobile number.
                 </p>
               </div>
-              <button>Call Us</button>
+              <button>
+                <a
+                  href="tel:+918217839506"
+                  style={{ textDecoration: "none", color: "inherit" ,cursor:"pointer"}}
+                >
+                  Call Us
+                </a>
+              </button>
             </div>
             <div className="card">
               <img src={messageIcon} alt="callimg" />
@@ -160,7 +167,14 @@ const ContactUs = () => {
                   will revert as soon as possible
                 </p>
               </div>
-              <button>Send Email</button>
+              <button>
+                <a
+                  href="mailto:investments@thecapitalhub.in"
+                  style={{ textDecoration: "none", color: "inherit",cursor:"pointer" }}
+                >
+                  Send Email
+                </a>
+              </button>
             </div>
             <div className="card">
               <img src={mapPinIcon} alt="callimg" />
@@ -179,9 +193,17 @@ const ContactUs = () => {
         <div className="title_section mb-5">
           <h2>Follow us on</h2>
           <div className="followus_image_section">
-            <img src={fbIcon} alt="img" />
-            <img src={instaIcon} alt="img" />
-            <img src={twIcon} alt="img" />
+            <a href="your_facebook_link_here">
+              <img src={fbIcon} alt="Facebook" />
+            </a>
+
+            <a href="https://instagram.com/capitalhub_official?igshid=MzRlODBiNWFlZA==">
+              <img src={instaIcon} alt="Instagram" />
+            </a>
+
+            <a href="your_twitter_link_here">
+              <img src={twIcon} alt="Twitter" />
+            </a>
           </div>
         </div>
       </div>
