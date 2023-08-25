@@ -1,15 +1,18 @@
 .blog-card {
   border: 1px solid #ddd;
-  width: 30%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
-  // margin-right: 20px;
   margin-bottom: 20px;
+  padding: 20px;
+  width: 32.33%;
+
+
 }
+
 
 .blog-card-image {
   width: 100%;
-  height: auto;
+  height: 56%;
 }
 
 .blog-card-button {
@@ -40,4 +43,18 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+@media (max-width: 820px) {
+  .blog-card{
+    width: 49%;
+  }
+
+}
+
+@media (max-width: 426px) {
+  .blog-card{
+    width: 100%;
+  }
+
 }

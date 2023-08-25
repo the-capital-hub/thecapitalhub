@@ -2,7 +2,7 @@ import React from "react";
 import "./aboutus.scss";
 import CoInvestorCard from "../Card/AboutUs/CoInvestor/CoInvestorCard";
 import MeetOurTeam from "../Card/AboutUs/MeetOurTeam/MeetOurTeam";
-import PramodImage from "../../Images/service/pramod.jpeg";
+import PramodImage from "../../Images/aboutUs/Pramod.jpeg";
 
 const AboutUs = () => {
   return (

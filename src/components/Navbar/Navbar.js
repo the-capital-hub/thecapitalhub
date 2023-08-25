@@ -4,7 +4,7 @@ import "./navbar.scss";
 import Logo from "../../Images/Logo.svg";
 import { RxCross2 } from "react-icons/rx";
 import { FaBars } from "react-icons/fa";
-import HambergerIcon from '../../Images/Hamberger.svg'
+import HambergerIcon from "../../Images/Hamberger.svg";
 
 function Navbar() {
   const [clicked, setClicked] = useState(false);
@@ -34,7 +34,7 @@ function Navbar() {
               {clicked ? (
                 <RxCross2 size={"2rem"} className="i" />
               ) : (
-                <img src={HambergerIcon} alt="hamberger"/>
+                <img src={HambergerIcon} alt="hamberger" />
               )}
             </div>
 
@@ -57,15 +57,6 @@ function Navbar() {
 
         <div className={`navbar-items ${clicked ? "active" : ""}`}>
           <ul id="navbar" className={clicked ? "active" : ""}>
-          <li>
-              <Link
-                to="/blog"
-                className={selectedLink === "blog" ? "active" : ""}
-                onClick={() => setSelectedLink("blog")}
-              >
-                Blog
-              </Link>
-            </li>
             <li>
               <Link
                 to="/"
@@ -109,6 +100,15 @@ function Navbar() {
                 onClick={() => setSelectedLink("investor")}
               >
                 Investor
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/blog"
+                className={selectedLink === "blog" ? "active" : ""}
+                onClick={() => setSelectedLink("blog")}
+              >
+                Blog
               </Link>
             </li>
             <li>
