@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 const baseUrl = environment.baseUrl;
 
-const UploadContainer = () => {
+const UploadContainer = ({ onClicked }) => {
   const fileInputRef = useRef(null);
   const [isFileOver, setIsFileOver] = useState(false);
   const [thumbnailUrl, setThumbnailUrl] = useState(null);
@@ -18,7 +18,7 @@ const UploadContainer = () => {
 
   const handleClosePopup = () => {
     setShowPopUp(false);
-    setThumbnailUrl("")
+    setThumbnailUrl("");
   };
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
@@ -63,17 +63,20 @@ const UploadContainer = () => {
 
   const handlePdfUploadClick = async () => {
     if (thumbnailUrl) {
-      const data = new FormData()
-      data.append("file",fileInputRef.current.files[0])
-      data.append("upload_preset","fiverr");
-      const res = await axios.post("https://api.cloudinary.com/v1_1/dndcersc4/upload",data,
-      { withCredentials: false });
+      const data = new FormData();
+      data.append("file", fileInputRef.current.files[0]);
+      data.append("upload_preset", "fiverr");
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/dndcersc4/upload",
+        data,
+        { withCredentials: false }
+      );
       const requestBody = {
         fileUrl: res.data.url,
         fileName: res.data.original_filename,
         userId: loggedInUser._id,
         folderId: "64dc89095df364b443f04a20",
-      }
+      };
       await axios
         .post(`${baseUrl}/documentation/uploadDocument`, requestBody)
         .then((response) => {
@@ -97,7 +100,11 @@ const UploadContainer = () => {
   return (
     <>
       {thumbnailUrl ? (
-        <div className="upload_container" style={containerStyle}>
+        <div
+          onClick={() => onClicked(true)}
+          className="upload_container"
+          style={containerStyle}
+        >
           <div className="image_container">
             <img src={PDFIcon} alt="Uploaded Thumbnail" />
           </div>
@@ -115,11 +122,12 @@ const UploadContainer = () => {
         </div>
       ) : (
         <div
+          onClick={() => onClicked(true)}
           className="upload_container"
           style={containerStyle}
           onDragOver={handleDragOver}
           onDrop={handleDrop}
-          onClick={handleImageContainerClick}
+          // onClick={handleImageContainerClick}
         >
           <div className="image_container">
             <img src={UploadIcon} alt="Upload Icon" />
@@ -132,10 +140,9 @@ const UploadContainer = () => {
             onChange={handleFileInputChange}
           />
 
-          <p className="text">Click to upload or drag and drop the doc</p>
+          <p className="text">Click to upload</p>
         </div>
       )}
-
       {showPopUp && (
         <AfterSuccessPopUp savedFile={true} onClose={handleClosePopup} />
       )}

@@ -4,8 +4,8 @@ import { camera } from "../../../Images/InvestorsView";
 const ImagePlaceholder = ({ text, imageUrl }) => {
   return (
     <div className="pfp">
-      <img src={camera} alt="" />
-      <p>{text}</p>
+      <img src={imageUrl || camera} width={"100%"} alt="camera" />
+      {text && <p>{text}</p>}
     </div>
   );
 };

@@ -9,7 +9,7 @@ import {
 import ArrowLeft from "../../../Images/investorsidebar/ArrowLeft.svg";
 import ArrowRight from "../../../Images/investorsidebar/ArrowRight.svg";
 import BookIcon from "../../../Images/investorIcon/Book.svg";
-import profilePic from "../../../Images/investorIcon/profilePic.svg";
+import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import "react-pro-sidebar/dist/css/styles.css";
 import "../../Investor/InvestorSidebar/investorsidebar.scss";
 import { Link, useLocation } from "react-router-dom";
@@ -29,7 +29,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const menuIconClick = () => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
-  
+
   const { username } = useParams();
   const [user, setUser] = useState([]);
 
@@ -52,10 +52,10 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           <SidebarHeader>
             <div className="logotext">
               {sidebarCollapsed ? (
-                <img src={profilePic} alt="image" />
+                <img className="rounded-circle" src={user.profilePicture} alt="image" />
               ) : (
                 <>
-                  <img src={profilePic} alt="image" />
+                  <img src={user.profilePicture} alt="image" className="rounded-circle" />
                   <h3>
                     {user?.firstName} {user?.lastName}
                   </h3>
@@ -130,11 +130,18 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           <SidebarFooter>
             <Menu iconShape="round">
               <MenuItem
-                active={location.pathname.includes("/investNow")}
+                active={location.pathname.includes("/investnow")}
                 className="active-item invest_now"
               >
-                <img src={investIcon} alt="image" width="17px" height="17px" />
-                {!sidebarCollapsed && <span>Invest Now</span>}
+                <Link to="investnow">
+                  <img
+                    src={investIcon}
+                    alt="image"
+                    width="17px"
+                    height="17px"
+                  />
+                  {!sidebarCollapsed && <span>Invest Now</span>}
+                </Link>
               </MenuItem>
             </Menu>
           </SidebarFooter>

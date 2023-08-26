@@ -5,9 +5,10 @@ import searchIconBlack from "../../../Images/navbar/Search.svg";
 import Logo from "../../../Images/investorIcon/Logo.svg";
 import NotificationIcon from "../../../Images/investorIcon/notification.svg";
 import MessageIcon from "../../../Images/investorIcon/message.svg";
-import profilePic from "../../../Images/investorIcon/profilePic.svg";
+import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
 import HambergerIcon from "../../../Images/Hamberger.svg";
+import HambergerCrossIcon from '../../../Images/investorsidebar/FontX.svg'
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -35,7 +36,7 @@ const InvestorNavbar = (props) => {
                 className="mobile-home-hamberger"
                 onClick={props.handleSidebarToggle}
               >
-                <img src={HambergerIcon} alt="bar" />
+               { props.sidebarCollapsed ? <img src={HambergerIcon} alt="bar" /> : <img src={HambergerCrossIcon} alt="bar" />}
                 <h1 className="ms-2">{url}</h1>
               </div>
             </div>
@@ -74,7 +75,7 @@ const InvestorNavbar = (props) => {
                 <Link to={"/investor/manage-account"}>
                   {" "}
                   <img
-                    className="profile-pic"
+                    className="profile-pic rounded-circle"
                     src={loggedInUser.profilePicture}
                     alt="Profile"
                   />

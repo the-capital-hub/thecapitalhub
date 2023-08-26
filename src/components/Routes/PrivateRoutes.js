@@ -6,7 +6,7 @@ import "./style.scss";
 import LogOutPopUp from "../PopUp/LogOutPopUp/LogOutPopUp";
 
 function PrivateRoute({ children, ...props }) {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   const handleSidebarToggle = () => {
     setSidebarCollapsed((prev) => !prev);
   };
@@ -23,7 +23,10 @@ function PrivateRoute({ children, ...props }) {
   if (isLoggedIn()) {
     return (
       <>
-        <InvestorNavbar handleSidebarToggle={handleSidebarToggle}/>
+        <InvestorNavbar
+          handleSidebarToggle={handleSidebarToggle}
+          sidebarCollapsed={sidebarCollapsed}
+        />
 
         <div
           className={`container-fluid investor_home_container ${

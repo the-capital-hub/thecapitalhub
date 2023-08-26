@@ -5,7 +5,7 @@ import { postStartUpData } from "../../../../../Service/user";
 
 const OnePagePreviewCard = ({ company, page }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const [editedContent, setEditedContent] = useState({}); 
+  const [editedContent, setEditedContent] = useState({});
 
   const cardData = [
     {
@@ -70,9 +70,11 @@ const OnePagePreviewCard = ({ company, page }) => {
                   <input
                     type="text"
                     className="card-text"
-                    value={editedContent[card.field] || card.content}
+                    placeholder={editedContent[card.field] || card.content}
                     onChange={(e) => handleUpdate(card.field, e.target.value)}
-                    onBlur={() => handleUpdate(card.field, editedContent[card.field])}
+                    onBlur={() =>
+                      handleUpdate(card.field, editedContent[card.field])
+                    }
                   />
                 ) : (
                   <h6>{card.content}</h6>

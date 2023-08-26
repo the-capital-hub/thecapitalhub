@@ -7,7 +7,7 @@ import CameraIcon from "../../../Images/Camera.svg";
 import { useSelector } from "react-redux";
 import { postUserPost } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
-import profilePic from "../../../Images/investorIcon/profilePic.svg";
+import profilePic from "../../../Images/investorIcon/profilePic.webp";
 
 const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -38,17 +38,24 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
     smileeInputRef.current.click();
   };
 
+  const [previewImage, setPreviewImage] = useState("");
+  const [previewVideo, setPreviewVideo] = useState("");
+  const [previewVideoType, setPreviewVideoType] = useState("");
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    if (event.target.name === "image") {
+    const objectUrl = URL.createObjectURL(file);
+    if (event.target.name === "image" && file.type.includes("image")) {
+      setPreviewImage(objectUrl);
       setSelectedImage(file);
-    } else if (event.target.name === "video") {
+    } else if (event.target.name === "video" && file.type.includes("video")) {
+      setPreviewVideoType(file.type);
+      setPreviewVideo(objectUrl);
       setSelectedVideo(file);
     } else if (event.target.name === "document") {
       setSelectedDocument(file);
     }
   };
-
   const handleTextareaChange = (event) => {
     setPostText(event.target.value);
   };
@@ -56,7 +63,8 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setPosting(true);
-    if ((!postText && !selectedImage && !selectedVideo) || !category) {
+    // if ((!postText && !selectedImage && !selectedVideo) || !category) {
+    if (!postText && !selectedImage && !selectedVideo) {
       return setPosting(false);
     }
     const postData = new FormData();
@@ -111,12 +119,17 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
             <div className="createpost_modal-header">
               <div className="createpostpopup">
                 <div className="ceatepost_img_name">
-                  <img src={profilePic} alt="profile pic" />
+                  <img
+                    src={loggedInUser.profilePicture}
+                    width={80}
+                    className="rounded-circle"
+                    alt="profile pic"
+                  />
                   <span>
                     <h2>
                       {loggedInUser?.firstName} {loggedInUser.lastName}
                     </h2>
-                    <h6>Post to anyone</h6>
+                    <h6>Public</h6>
                   </span>
                 </div>
               </div>
@@ -135,8 +148,13 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
             </div>
             <div className="modal-body">
               <div className="createpost_text_area">
-                <textarea value={postText} onChange={handleTextareaChange} />
-                <select
+                <textarea
+                  className="p-3"
+                  value={postText}
+                  onChange={handleTextareaChange}
+                  placeholder="Write a post..."
+                />
+                {/* <select
                   name="category"
                   className="w-100 my-2 p-1"
                   onChange={({ target: { value } }) => setCategory(value)}
@@ -147,7 +165,16 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
                   <option value="learning">Learnings</option>
                   <option value="fund">Fund</option>
                   <option value="other">Others</option>
-                </select>
+                </select> */}
+
+                {previewImage && <img src={previewImage} width={"50%"} alt="preview of image"/>}
+
+                {previewVideo && (
+                  <video controls width={"100%"}>
+                    <source src={previewVideo} type={previewVideoType} />
+                    Your browser does not support the video tag.
+                  </video>
+                )}
               </div>
             </div>
             <div className="createpost_modal_footer">

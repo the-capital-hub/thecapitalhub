@@ -8,14 +8,14 @@ $logo-size: 100px;
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
-    margin-bottom: 10%;
+    // margin-bottom: 10%;
 
 
     .card {
         border-radius: 29.965px;
         background: #DBDBDB;
         width: $card-width;
-        margin-bottom: 20px;
+        // margin-bottom: 20px;
         display: flex;
         flex-direction: column; // Add this to arrange name and designation vertically
         justify-content: center;
@@ -40,7 +40,8 @@ $logo-size: 100px;
             align-items: center;
             margin-top: 10px;
             position: absolute;
-            bottom: -88%;
+            // bottom: -88%;
+            top:112%;
             width: 100%;
 
             .name {
@@ -78,7 +79,7 @@ $logo-size: 100px;
         .social_icon_list {
             display: flex;
             position: absolute;
-            top: -30%;
+            top: -18%;
             margin-right:0px !important;
 
             img {
@@ -104,6 +105,9 @@ $logo-size: 100px;
 
             .info{
                 bottom: -75%;
+            }
+            .social_icon_list{
+                top: -22%;
             }
         }
     }

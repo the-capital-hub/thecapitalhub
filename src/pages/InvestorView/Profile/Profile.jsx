@@ -1,4 +1,4 @@
-import profilePic from "../../../Images/investorIcon/profilePic.svg";
+import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
 import { Link } from "react-router-dom";
 import CompanyDetailsCard from "../../../components/Investor/InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
@@ -8,13 +8,15 @@ import "./Profile.scss";
 import { useParams } from "react-router-dom";
 import { getUserById } from "../../../Service/user";
 import { useState, useEffect } from "react";
+import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
+import CoinIcon from "../../../Images/investorView/Rectangle.png";
 
-function  Profile() {
+function Profile() {
   const { username } = useParams();
   const [user, setUser] = useState([]);
   useEffect(() => {
     getUserById(username)
-      .then(({ data }) => {
+      .then(({data}) => {
         setUser(data);
       })
       .catch(() => setUser([]));
@@ -22,14 +24,18 @@ function  Profile() {
   return (
     <div className="container-fluid profile_main_container">
       <div className="row mt-2">
-        <div className="col">
+        <div className="col mb-5">
           <div className="row">
             <div className="col-12 mt-2">
               <div className=" box ">
                 <div className="row">
                   <div className="col-7">
                     <div className="image_name_section mt-2">
-                      <img src={user.profilePicture} alt="profileimage" />
+                      <img
+                        className="rounded-cirlce"
+                        src={user?.profilePicture}
+                        alt="profileimage"
+                      />
                       <div className="left_profile_text flex_content ms-3">
                         <h2 className="typography">
                           {user?.firstName} {user?.lastName}
@@ -37,18 +43,18 @@ function  Profile() {
                         <span className="small_typo">
                           {user?.designation || `Founder & CEO of capital Hub`}
                         </span>
-                        <span className="small_typo"> Bangalore , India</span>
+                        <span className="small_typo" style={{ display: "block" }}> {user?.location}</span>
                       </div>
                     </div>
                   </div>
-                  <div className="col-5">
+                  {/* <div className="col-5">
                     <div className="connect_btn m-4">
                       <button>
                         <img src={AddUserIcon} />
                         <span>Connect</span>
                       </button>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <hr className="divider_hr" />
                 <div className="row">
@@ -65,7 +71,7 @@ function  Profile() {
                             className="small_typo"
                             style={{ marginBottom: "1rem" }}
                           >
-                            The Capital Hub
+                            {user.company}
                           </td>
                         </tr>
                         <tr>
@@ -91,7 +97,7 @@ function  Profile() {
                             className="small_typo"
                             style={{ marginBottom: "1rem" }}
                           >
-                            {user.education}
+                            {user?.education}
                           </td>
                         </tr>
                         <tr>
@@ -159,7 +165,7 @@ function  Profile() {
                             className="small_typo"
                             style={{ marginBottom: "1rem" }}
                           >
-                            {user?.email || `Test`}
+                            {user?.email}
                           </td>
                         </tr>
                         <tr>
@@ -226,7 +232,55 @@ function  Profile() {
               </div>
             </div>
           </div>
-          <CompanyDetailsCard user={user} />
+          <CompanyDetailsCard userDetails={user} />
+          <div className="row">
+            <div className="col-12 mt-2">
+              <div className="card_holder">
+                <ColorCard
+                  color="white"
+                  background="#BB98FF"
+                  text="Last round investment"
+                  image={CoinIcon}
+                  amount={"500 M"}
+                />
+                <ColorCard
+                  color="white"
+                  background="#DAC191"
+                  text="Total Investment"
+                  image={CoinIcon}
+                  amount={"500 M"}
+                />
+                <ColorCard
+                  color="white"
+                  background="#DCDCDC"
+                  text="No.of Investers"
+                  image={CoinIcon}
+                  amount={"500 M"}
+                />
+                <ColorCard
+                  color="white"
+                  background="#2B2B2B"
+                  text="Fund ask"
+                  image={CoinIcon}
+                  amount={"500 M"}
+                />
+                <ColorCard
+                  color="white"
+                  background="#FF7373"
+                  text="Valuation"
+                  image={CoinIcon}
+                  amount={"500 M"}
+                />
+                <ColorCard
+                  color="white"
+                  background="#9198DA"
+                  text="Raised funds"
+                  image={CoinIcon}
+                  amount={"500 M"}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

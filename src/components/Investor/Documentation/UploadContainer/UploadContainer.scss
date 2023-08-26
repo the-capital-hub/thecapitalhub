@@ -8,6 +8,10 @@
     background: rgba(253, 89, 1, 0.06);
     backdrop-filter: blur(23.5px);
     padding: 20px;
+    // z-index: -10;
+    &:hover {
+        cursor: pointer;
+    }
 
     .image_container {
         margin-bottom: 10px;
@@ -35,5 +39,11 @@
     .upload_container {
         width: 300px;
         text-align: center;
+    }
+}
+
+@media (max-width: 320px) {
+    .upload_container {
+        width: auto;
     }
 }

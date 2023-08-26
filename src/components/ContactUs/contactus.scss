@@ -1,6 +1,9 @@
 $card-width: 30%;
 
 .contactus_container {
+  a{
+    cursor: pointer;
+  }
   overflow: auto;
   .title_section {
     display: flex;
@@ -32,13 +35,58 @@ $card-width: 30%;
       width: 30%;
 
       img {
-        width: 100px;
-        height: 100px;
+        width: 70px;
+        height: 70px;
       }
     }
   }
 
   .container {
+    form {
+      border-radius: 20px;
+      border: 1px solid #e7e7e7;
+      background: #f9f9f9;
+      padding: 20px;
+
+      .form-input {
+        display: flex;
+        flex-direction: column;
+        label {
+          color: #666;
+          font-family: Poppins;
+          font-size: 10px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+
+        input,
+        select,
+        textarea {
+          font-size: 13px;
+          width: 100%;
+          padding: 5px;
+          border-radius: 5.861px;
+          border: 0.586px solid #e4e4e4;
+          background: #fff;
+        }
+      }
+
+      button {
+        border-radius: 10px;
+        background: #fd5901;
+        color: #fff;
+        font-family: Poppins;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        border: none;
+        width: 100px;
+        height: 37px;
+        margin: auto;
+      }
+    }
     .card-container_contact {
       display: flex;
       justify-content: space-between;
@@ -58,7 +106,9 @@ $card-width: 30%;
       img {
         width: 70px;
         height: 70px;
+        cursor: pointer;
       }
+     
 
       .text_content {
         h2 {

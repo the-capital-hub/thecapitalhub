@@ -12,11 +12,13 @@ import ErrorPopUp from "../PopUp/ErrorPopUp/ErrorPopUp";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess, loginFailure } from "../../Store/Action/userAction";
 import backArrow from "../../Images/left-arrow.png";
+import ResetPasswordPopUp from "../PopUp/RequestPasswordPopUp/RequestPasswordPopUp";
 
 const Login = () => {
   const dispatch = useDispatch();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState(null);
+  const [showResetPopUp, setShowResetPopUp] = useState(false)
   const [inputValues, setInputValues] = useState({
     password: "",
     phoneNumber: "",
@@ -33,6 +35,7 @@ const Login = () => {
       setInputValues({ ...inputValues, phoneNumber: event });
     }
   };
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -59,8 +62,8 @@ const Login = () => {
 
       console.log("JWT Token:", token);
     } catch (error) {
-      // console.error("Login failed:", error.response.data.error);
-      // setError(error.response.data.error);
+      console.error("Login failed:", error.response.data.message);
+      setError(error.response.data.message);
 
       // dispatch(loginFailure(error.response.data.error));
       console.log(error);
@@ -71,7 +74,13 @@ const Login = () => {
   const handleClosePopup = () => {
     navigate("/profile");
   };
-
+  const handleCloseResetPopup = () => {
+    setShowResetPopUp(false);
+    navigate("/login");
+  };
+  const handleBack = () => {
+    navigate("/");
+  };
   return (
     <>
       <div className="row d-flex register_container">
@@ -127,6 +136,13 @@ const Login = () => {
                 />
               </div>
             </div>
+            <div className="row mt-2">
+              <div className="col-md-12">
+               <Link to={""} onClick={()=>setShowResetPopUp(true)}>
+                Forgot Password?
+               </Link>
+              </div>
+            </div>
 
             {/* <div className="form-check">
               <input
@@ -148,7 +164,7 @@ const Login = () => {
             <h3 className="already_have_account_mobile">
               I don’t have an account? &nbsp;
               <Link to={"/signup"} style={{ color: "red" }}>
-                Log In
+                Create account
               </Link>
             </h3>
           </form>
@@ -178,6 +194,8 @@ const Login = () => {
             }, 1000)}
           />
         )}
+
+        {showResetPopUp&& <ResetPasswordPopUp onClose={handleCloseResetPopup}/>}
       </div>
     </>
   );

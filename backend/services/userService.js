@@ -2,6 +2,12 @@ import { UserModel } from "../models/User.js";
 import { comparePassword } from "../utils/passwordManager.js";
 import { StartUpModel } from "../models/startUp.js";
 import { cloudinary } from "../utils/uploadImage";
+import jwt from "jsonwebtoken";
+import { secretKey } from "../constants/config.js";
+import { sendMail } from "../utils/mailHelper.js";
+import bcrypt from "bcrypt";
+
+const adminMail = "learn.capitalhub@gmail.com";
 
 export const getUsersService = async (info) => {
   try {
@@ -31,7 +37,13 @@ export const registerUserService = async (user) => {
 };
 
 export const loginUserService = async ({ phoneNumber, password }) => {
-  const user = await UserModel.findOne({ phoneNumber });
+  const user = await UserModel.findOne({
+    phoneNumber,
+    userStatus: "active",
+  }).populate({
+    path: "startUp",
+    select: "company logo",
+  });
   if (!user) throw new Error("Invalid credentials");
   await comparePassword(password, user.password);
   return user;
@@ -118,10 +130,7 @@ export const getStartUpData = async (userId) => {
 
 export const updateUserById = async (userId, newData) => {
   try {
-    const data = await UserModel.findByIdAndUpdate(
-      userId,
-      { ...newData }
-    );
+    const data = await UserModel.findByIdAndUpdate(userId, { ...newData });
     return {
       status: 200,
       message: "User updated succesfully",
@@ -132,6 +141,123 @@ export const updateUserById = async (userId, newData) => {
     return {
       status: 500,
       message: "An error occurred while updating the bio.",
+    };
+  }
+};
+
+export const changePassword = async (userId, { newPassword, oldPassword }) => {
+  try {
+    const user = await UserModel.findById(userId);
+    const checkPassword = await bcrypt.compare(oldPassword, user.password);
+    if (!checkPassword) {
+      return {
+        status: 401,
+        message: "Invalid Password",
+      };
+    }
+    user.password = newPassword;
+    await user.save();
+    return {
+      status: 200,
+      message: "Password Changed Successfully",
+    };
+  } catch (error) {
+    return {
+      status: 500,
+      message: "An error occurred while updating the password.",
+    };
+  }
+};
+
+export const requestPasswordReset = async (email) => {
+  try {
+    const user = await UserModel.findOne({ email });
+    if (!user) {
+      return {
+        status: 404,
+        message: "User Not Found",
+      };
+    }
+    const payload = {
+      userId: user._id.toString(),
+    };
+    const resetToken = jwt.sign(payload, secretKey, {
+      expiresIn: "1h",
+    });
+    const resetLink = `${process.env.BASE_URL}/reset-password?token=${resetToken}`;
+    console.log(resetToken);
+    const resetPasswordMessage = `
+      <p>You've requested to reset your password. If you didn't make this request, please ignore this email.</p>
+  
+      <p>To reset your password, click the button below:</p>
+      <p style="text-align: center;"> 
+      <a href="${resetLink}" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; text-decoration: none; border-radius: 5px;">Reset Password</a>
+    </p>
+      <p>If the above button doesn't work, copy and paste the following URL into your browser:</p>
+      <p>${resetLink}</p>
+    
+      <p>This link will expire in 1 hour for security reasons.</p>
+    
+      <p>If you have any questions or need further assistance, please contact our support team.</p>
+    
+      <p>Regards,<br>The Capital Hub</p>
+    `;
+    const subject = "Password Reset Request";
+    const response = await sendMail(
+      "The Capital Hub",
+      user.email,
+      adminMail,
+      subject,
+      resetPasswordMessage
+    );
+    if (response.status === 200) {
+      return {
+        status: 200,
+        message: "Password reset email sent successfully",
+      };
+    } else {
+      return {
+        status: 500,
+        message: "Error sending password reset email",
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      status: 500,
+      message: "Error requesting password reset",
+    };
+  }
+};
+
+export const resetPassword = async (token, newPassword) => {
+  console.log("token, newPassword",token, newPassword)
+  try {
+    const decodedToken = jwt.verify(token, secretKey);
+    if (!decodedToken || !decodedToken.userId) {
+      return {
+        status: 400,
+        message: "Invalid or expired reset token",
+      };
+    }
+    const user = await UserModel.findById(decodedToken.userId);
+    if (!user) {
+      return {
+        status: 400,
+        message: "User not found",
+      };
+    }
+    user.password = newPassword;
+    await user.save();
+    return {
+      status: 200,
+      message: "Password reset successfully",
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      status: 500,
+      message: "Error resetting password",
     };
   }
 };

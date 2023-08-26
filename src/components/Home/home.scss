@@ -1,7 +1,6 @@
 $primary-color: #fd5901;
 $secondary-color: #1b2430;
 
-
 .row {
   margin: 0;
 
@@ -18,8 +17,8 @@ $secondary-color: #1b2430;
     margin: 20px;
     overflow: hidden;
 
-    h2 {
-      background-color: #EAEAEA;
+    h1 {
+      background-color: #eaeaea;
       width: 30%;
       font-family: Poppins;
       font-size: 44px;
@@ -30,18 +29,18 @@ $secondary-color: #1b2430;
       display: flex;
       justify-content: center;
       padding: 10px;
-      border: 1px solid #EAEAEA;
-      background: #EAEAEA;
-      box-shadow: 4px 4px 30px 0px rgba(0, 0, 0, 0.10);
+      border: 1px solid #eaeaea;
+      background: #eaeaea;
+      box-shadow: 4px 4px 30px 0px rgba(0, 0, 0, 0.1);
       border-bottom: none;
     }
 
     .welcome_section {
-      background-color: #EAEAEA;
+      background-color: #eaeaea;
       position: relative;
       padding: 20px;
-      border: 1px solid #EAEAEA;
-      background: #EAEAEA;
+      border: 1px solid #eaeaea;
+      background: #eaeaea;
       box-shadow: 4px 4px 10px 0px rgba(152, 152, 152, 0.1);
 
       &::before {
@@ -51,7 +50,7 @@ $secondary-color: #1b2430;
         top: 20px;
         height: 80%;
         width: 5px;
-        background-color: #FD5901;
+        background-color: #fd5901;
         border-radius: 8px;
       }
 
@@ -72,10 +71,9 @@ $secondary-color: #1b2430;
       top: 10px;
       height: 90%;
       width: 5px;
-      background-color: #FD5901;
+      background-color: #fd5901;
       border-radius: 8px;
     }
-
   }
 
   .welcome_section h6 {
@@ -86,7 +84,6 @@ $secondary-color: #1b2430;
     font-weight: 500;
     line-height: 40px;
   }
-
 }
 
 .b {
@@ -94,7 +91,7 @@ $secondary-color: #1b2430;
 }
 
 .title__text {
-  h2 {
+  h1 {
     font-family: "Poppins";
     font-style: normal;
     font-weight: 700;
@@ -104,7 +101,7 @@ $secondary-color: #1b2430;
     width: 100%;
   }
 
-  h4 {
+  h2 {
     font-family: "Poppins";
     font-style: normal;
     font-weight: 500;
@@ -116,7 +113,6 @@ $secondary-color: #1b2430;
 .image_section {
   img {
     width: 100%;
-
   }
 }
 
@@ -152,19 +148,17 @@ $secondary-color: #1b2430;
   }
 }
 
-
-
 /* one Link section */
 .onelink_container {
   .onelink_img {
     img {
       height: 730px;
-      width: 100%
+      width: 100%;
     }
   }
 
   .title_text {
-    h3 {
+    h1 {
       height: 62px;
       font-family: "Poppins";
       font-style: normal;
@@ -221,7 +215,6 @@ $secondary-color: #1b2430;
   }
 }
 
-
 .angel_img {
   img {
     width: 100%;
@@ -247,11 +240,7 @@ $secondary-color: #1b2430;
   margin-bottom: 150px;
 }
 
-
-
 // one_link_ends
-
-
 
 .our_investor_section {
   background-color: #faffff;
@@ -259,10 +248,7 @@ $secondary-color: #1b2430;
   padding-bottom: 5% !important;
 }
 
-
-
 @media (max-width: 1200px) {
-
   .row {
     .section_container {
       margin: 0px;
@@ -361,10 +347,8 @@ $secondary-color: #1b2430;
       // margin-top: -30%;
     }
 
-
-
     .title_text {
-      h3 {
+      h1 {
         height: 45px;
         font-family: "Poppins";
         font-style: normal;
@@ -383,12 +367,12 @@ $secondary-color: #1b2430;
         line-height: 34px;
         // text-align: justify;
         color: #292929;
-        margin-top: .1rem;
+        margin-top: 0.1rem;
       }
-      .desktop_para{
+      .desktop_para {
         display: none;
       }
-      .mobile_para{
+      .mobile_para {
         display: block;
       }
 
@@ -422,7 +406,7 @@ $secondary-color: #1b2430;
       }
     }
   }
-  .our_startups_section{
+  .our_startups_section {
     margin-top: 30%;
   }
 
@@ -442,14 +426,19 @@ $secondary-color: #1b2430;
   .collab_brand_icon img {
     height: 20px;
   }
-
-
 }
 
-
 @media (max-width: 820px) {
-
   .row {
+    .title__text {
+      h1 {
+        font-size: 24px;
+        margin: 20px 0;
+      }
+      h2 {
+        margin: 0;
+      }
+    }
     .section_container {
       margin: 0px;
 
@@ -548,10 +537,8 @@ $secondary-color: #1b2430;
       // margin-top: -30%;
     }
 
-
-
     .title_text {
-      h3 {
+      h1 {
         height: 45px;
         font-family: "Poppins";
         font-style: normal;
@@ -570,12 +557,12 @@ $secondary-color: #1b2430;
         line-height: 34px;
         // text-align: justify;
         color: #292929;
-        margin-top: .1rem;
+        margin-top: 0.1rem;
       }
-      .desktop_para{
+      .desktop_para {
         display: none;
       }
-      .mobile_para{
+      .mobile_para {
         display: block;
       }
 
@@ -609,7 +596,7 @@ $secondary-color: #1b2430;
       }
     }
   }
-  .our_startups_section{
+  .our_startups_section {
     margin-top: 20%;
   }
 
@@ -629,6 +616,4 @@ $secondary-color: #1b2430;
   .collab_brand_icon img {
     height: 20px;
   }
-
-
 }

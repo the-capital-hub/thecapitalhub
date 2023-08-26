@@ -36,6 +36,13 @@ import OnePager from "./pages/InvestorView/OnePager/OnePager";
 import DocumentationIV from "./pages/InvestorView/Documentation/Documentation";
 import ValidateOneLink from "./pages/InvestorView/ValidateOneLink/ValidateOneLink";
 import InvestNow from "./pages/InvestorView/InvestNow/InvestNow";
+import FolderContents from "./components/Investor/FolderContents/FolderContents";
+import Blog from "./components/Blog/Blog";
+import BlogDetailed from "./components/Blog/BlogDetailed/BlogDetailed";
+import StartUpBlogOne from "./components/Blog/StartUpBlog/StartUpBlogOne";
+import StartUpBlogTwo from "./components/Blog/StartUpBlog/StartUpBlogTwo";
+import StartUpBlogThree from "./components/Blog/StartUpBlog/StartUpBlogThree";
+import NewPasswordPopUp from "./components/PopUp/NewPasswordPopUp/NewPasswordPopUp";
 
 function App() {
   return (
@@ -48,6 +55,70 @@ function App() {
               <>
                 <Navbar />
                 <Home />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/reset-password"
+            element={
+              <>
+                <Navbar />
+                <NewPasswordPopUp />
+                {/* <Footer /> */}
+              </>
+            }
+          />
+          <Route
+            path="/blog"
+            element={
+              <>
+                <Navbar />
+                <Blog />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/blog/webdevlopment"
+            element={
+              <>
+                <Navbar />
+                <BlogDetailed />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/blog/startupOne"
+            element={
+              <>
+                <Navbar />
+                <StartUpBlogOne />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/blog/startupTwo"
+            element={
+              <>
+                <Navbar />
+                <StartUpBlogTwo />
+                <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/blog/startupThree"
+            element={
+              <>
+                <Navbar />
+                <StartUpBlogThree />
                 <Footer />
               </>
             }
@@ -169,6 +240,7 @@ function App() {
             <Route path="/savePost" element={<SavePost />} />
             <Route path="/onelink" element={<OneLink />} />
             <Route path="/onelink/edit" element={<OneLinkEditPage />} />
+            <Route path="/documentation/:route" element={<FolderContents />} />
             <Route
               path="/investor/manage-account"
               element={<InvestorManageAccount />}
@@ -187,6 +259,7 @@ function App() {
             <Route path="onePager" element={<OnePager />} />
             <Route path="documentation" element={<DocumentationIV />} />
             <Route path="investnow" element={<InvestNow />} />
+            <Route path="documentation/:route" element={<FolderContents />} />
             {/* <Route path="investNow" element={<DocumentationIV />} /> */}
           </Route>
         </Routes>

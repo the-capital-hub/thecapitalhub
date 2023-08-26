@@ -2,11 +2,10 @@
 .why_choose_us_container {
   background-color: #000;
 
-
   .why_choose_us {
     color: #fff;
 
-    h2 {
+    h1 {
       color: #fff;
       font-family: "Poppins";
       font-style: normal;
@@ -15,7 +14,7 @@
       line-height: 72px;
       text-align: center;
       letter-spacing: -0.002em;
-      padding: 80px;
+      // padding: 80px;
     }
   }
 }
@@ -41,7 +40,7 @@
       width: 120px;
     }
 
-    h3 {
+    h2 {
       font-family: "Poppins";
       font-style: normal;
       font-weight: 600;
@@ -53,13 +52,13 @@
     }
 
     h4 {
-       color: #414141;
-        font-family: Poppins;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 25px;
-        text-align: center;
+      color: #414141;
+      font-family: Poppins;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 25px;
+      text-align: center;
     }
   }
 }
@@ -67,54 +66,52 @@
 @media screen and (max-width: 820px) {
   .why_choose_us_container {
     .why_choose_us {
-      h2 {
+      h1 {
         font-size: 26px;
-        padding: 20px;
+        // padding: 20px;
       }
-    }
-  }
+      .why_chooseus_card {
+        box-sizing: border-box;
+        width: 310px;
+        height: 365px;
+        border: 1px solid #e3e3e3;
+        border-radius: 10px;
+        color: #fff;
+        background: #fcfcfc;
 
-  .why_chooseus_card {
+        .text_center {
+          margin: 20px 0px;
+        }
 
-    box-sizing: border-box;
-    width: 310px;
-    height: 365px;
-    border: 1px solid #e3e3e3;
-    border-radius: 10px;
-    color: #fff;
-    background: #fcfcfc;
+        .inside_card {
+          /* margin: 26px; */
 
-    .text_center {
-      margin: 20px 0px;
-    }
+          img {
+            height: 120px;
+            width: 120px;
+          }
 
-    .inside_card {
-      /* margin: 26px; */
+          h2 {
+            font-family: "Poppins";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 45px;
+            text-align: center;
+            letter-spacing: -0.002em;
+            color: #000000;
+          }
 
-      img {
-        height: 120px;
-        width: 120px;
-      }
-
-      h3 {
-        font-family: "Poppins";
-        font-style: normal;
-        font-weight: 600;
-        font-size: 18px;
-        line-height: 45px;
-        text-align: center;
-        letter-spacing: -0.002em;
-        color: #000000;
-      }
-
-      h4 {
-        color: #414141;
-        font-family: Poppins;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 25px;
-        text-align: center;
+          h4 {
+            color: #414141;
+            font-family: Poppins;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 25px;
+            text-align: center;
+          }
+        }
       }
     }
   }

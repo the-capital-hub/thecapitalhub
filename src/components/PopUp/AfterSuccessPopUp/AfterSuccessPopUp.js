@@ -2,7 +2,15 @@ import React from "react";
 import "./AfterSuccessPopUp.scss";
 import CorrectIcon from "../../../Images/CorrectIcon.svg";
 
-const AfterSuccessPopUp = ({ onClose, register, login, savedFile }) => {
+const AfterSuccessPopUp = ({
+  onClose,
+  contactFrom,
+  register,
+  login,
+  savedFile,
+  passwordChange,
+  emailSent,
+}) => {
   const handleOKClick = () => {
     onClose();
 
@@ -15,6 +23,12 @@ const AfterSuccessPopUp = ({ onClose, register, login, savedFile }) => {
       <div className="popup">
         <div className="popup-content">
           <img src={CorrectIcon} alt="image" />
+          {contactFrom && (
+            <h1>
+              Form Submitted{" "}
+              <span style={{ color: "#FD5901" }}>Successfully!</span>
+            </h1>
+          )}
           {register && (
             <h1>
               Thank You for{" "}
@@ -27,8 +41,14 @@ const AfterSuccessPopUp = ({ onClose, register, login, savedFile }) => {
               <span style={{ color: "#FD5901" }}>Logged in!</span>
             </h1>
           )}
-          {register && <p>We will contact you soon...</p>}
+          {(register || contactFrom) && <p>We will contact you soon...</p>}
           {savedFile && <h1>File Saved Successfully</h1>}
+
+          {passwordChange && <h1>Password Change Successfully</h1>}
+
+          {emailSent && <h1>Email Sent Successfully</h1>}
+          {emailSent && <p>Please Check Your Email</p>}
+
           <button className="ok_button" onClick={handleOKClick}>
             OK
           </button>
