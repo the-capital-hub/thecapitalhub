@@ -80,57 +80,194 @@ export const singlePostData = async (_id) => {
 //     throw new Error("Error saving post");
 //   }
 // };
-export const savePostService = async (user, _id, collection) => {
+// export const savePostService = async (user, _id, collection) => {
+//   try {
+//     const savedAlready = await UserModel.exists({
+//       _id: user,
+//       savedPosts: _id,
+//     });
+//     if (savedAlready) {
+//       return {
+//         message: "Already saved post",
+//       };
+//     }
+//     const updatedUser = await UserModel.findOneAndUpdate(
+//       { _id: user },
+//       { $push: { savedPosts: _id } },
+//       {
+//         new: true,
+//       }
+//     );
+//     return {
+//       message: "Post saved succesfully",
+//     };
+//   } catch (error) {
+//     console.error(error);
+//     throw new Error("Error saving post");
+//   }
+// };
+
+// export const getUserSavedPosts = async (user) => {
+//   try {
+//     const { savedPosts, firstName } = await UserModel.findOne({
+//       _id: user,
+//     }).populate({
+//       path: "savedPosts",
+//       model: "Posts",
+//       populate: {
+//         path: "user",
+//         model: "Users",
+//         select: "firstName lastName profilePicture -_id",
+//       },
+//     });
+//     if (!savedPosts.length) {
+//       return {
+//         message: "No saved Posts",
+//       };
+//     }
+//     return {
+//       data: savedPosts,
+//       message: `Saved posts of ${firstName}`,
+//     };
+//   } catch (error) {
+//     console.error(error);
+//     throw new Error("Error getting saved posts");
+//   }
+// };
+
+//Like a post
+export const likeUnlikePost = async (postId, userId) => {
   try {
-    const savedAlready = await UserModel.exists({
-      _id: user,
-      savedPosts: _id,
-    });
-    if (savedAlready) {
+    const post = await PostModel.findById(postId);
+    if (!post) {
       return {
-        message: "Already saved post",
+        status: 404,
+        message: "Post not found",
       };
     }
-    const updatedUser = await UserModel.findOneAndUpdate(
-      { _id: user },
-      { $push: { savedPosts: _id } },
-      {
-        new: true,
-      }
-    );
+    const hasLiked = post.likes.includes(userId);
+    if (hasLiked) {
+      post.likes.pull(userId);
+    } else {
+      post.likes.push(userId);
+    }
+    await post.save();
     return {
-      message: "Post saved succesfully",
+      status: 200,
+      message: hasLiked ? "Post Unliked" : "Post Liked",
+      data: post,
     };
   } catch (error) {
     console.error(error);
-    throw new Error("Error saving post");
+    return {
+      status: 500,
+      message: "An error occurred while liking/unliking the post.",
+    };
   }
 };
 
-export const getUserSavedPosts = async (user) => {
+// Comment on a post
+export const commentOnPost = async (postId, userId, text) => {
   try {
-    const { savedPosts, firstName } = await UserModel.findOne({
-      _id: user,
-    }).populate({
-      path: "savedPosts",
-      model: "Posts",
-      populate: {
-        path: "user",
-        model: "Users",
-        select: "firstName lastName profilePicture -_id",
-      },
-    });
-    if (!savedPosts.length) {
+    const post = await PostModel.findById(postId);
+    if (!post) {
       return {
-        message: "No saved Posts",
+        status: 404,
+        message: "Post not found",
       };
     }
+    const newComment = {
+      user: userId,
+      text,
+    };
+    post.comments.push(newComment);
+    await post.save();
     return {
-      data: savedPosts,
-      message: `Saved posts of ${firstName}`,
+      status: 200,
+      message: "Comment added successfully",
+      data: post,
     };
   } catch (error) {
     console.error(error);
-    throw new Error("Error getting saved posts");
+    return {
+      status: 500,
+      message: "An error occurred while adding the comment.",
+    };
   }
 };
+
+// get comments by post
+export const getComments = async (postId) => {
+  try {
+    const post = await PostModel.findById(postId);
+    if (!post) {
+      return {
+        status: 404,
+        message: "Post not found",
+      };
+    }
+    const comments = post.comments;
+    return {
+      status: 200,
+      message: "Comments retrieved successfully",
+      data: comments,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while fetching comments.",
+    };
+  }
+};
+
+
+// save post
+export const savePost = async (userId, collectionName, postId) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found",
+      };
+    }
+
+    let collection = user.savedPosts.find(
+      (c) => c.name === collectionName
+    );
+
+    if (!collection) {
+      collection = {
+        name: collectionName,
+        posts: [],
+      };
+      collection.posts.push(postId);
+      user.savedPosts.push(collection);
+      await user.save();
+      return {
+        status: 200,
+        message: "Post saved successfully",
+      }
+    }
+    if (collection.posts.includes(postId)) {
+      return {
+        status: 400,
+        message: "Post is already in the collection",
+      };
+    }
+    collection.posts.push(postId);
+    await user.save();
+    return {
+      status: 200,
+      message: "Post saved successfully",
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while saving the post.",
+    };
+  }
+};
+

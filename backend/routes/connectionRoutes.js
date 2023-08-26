@@ -12,7 +12,7 @@ import {
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
 
-// router.use(authenticateToken);
+router.use(authenticateToken);
 
 router.post("/sendConnectionRequest", sendConnectionRequestController);
 router.get("/getSentPendingConnectionRequests/:userId", getSentPendingConnectionRequestsController);
