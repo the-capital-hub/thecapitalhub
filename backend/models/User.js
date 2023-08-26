@@ -2,6 +2,24 @@ import mongoose, { Schema, model } from "mongoose";
 // import validator from "validator";
 import { hashPassword } from "../utils/passwordManager.js";
 
+const collectionSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    posts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Posts",
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
+
 const userSchema = new Schema(
   {
     firstName: {
@@ -79,12 +97,7 @@ const userSchema = new Schema(
         "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp",
     },
     designation: String,
-    savedPosts: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Posts",
-      },
-    ],
+    savedPosts: [collectionSchema],
     connections: [
       {
         type: Schema.Types.ObjectId,
