@@ -102,7 +102,7 @@ export const updateUser = async (req, res) => {
 export const updateUserByIdController = async (req, res) => {
   try {
     const { userId } = req.params;
-    const { status, message, data } = await updateUserById(userId,req.body);
+    const { status, message, data } = await updateUserById(userId, req.body);
     res.status(status).json({ message, data });
   } catch (error) {}
 };
@@ -110,8 +110,8 @@ export const updateUserByIdController = async (req, res) => {
 export const changePasswordController = async (req, res) => {
   try {
     const { userId } = req;
-    const { newPassword } = req.body;
-    const response = await changePassword(userId, newPassword)
+    const { newPassword, oldPassword } = req.body;
+    const response = await changePassword(userId, { newPassword, oldPassword });
     res.status(response.status).send(response);
   } catch (error) {
     console.error(error);
@@ -120,7 +120,7 @@ export const changePasswordController = async (req, res) => {
       message: "An error occurred while updating password.",
     });
   }
-}
+};
 
 export const requestPasswordResetController = async (req, res) => {
   try {
@@ -129,7 +129,9 @@ export const requestPasswordResetController = async (req, res) => {
     res.status(response.status).send(response);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'An error occurred while requesting a password reset' });
+    return res
+      .status(500)
+      .json({ message: "An error occurred while requesting a password reset" });
   }
 };
 
@@ -140,6 +142,8 @@ export const resetPasswordController = async (req, res) => {
     res.status(response.status).send(response);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: 'An error occurred while resetting the password' });
+    return res
+      .status(500)
+      .json({ message: "An error occurred while resetting the password" });
   }
 };
