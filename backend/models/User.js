@@ -85,6 +85,12 @@ const userSchema = new Schema(
         ref: "Posts",
       },
     ],
+    connections: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Users",
+      },
+    ],
     userStatus: {
       type: String,
       default: "inactive"
