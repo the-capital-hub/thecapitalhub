@@ -1,4 +1,3 @@
-import React from "react";
 import "./coinvestor.scss";
 // import GIcon from "../../../../Images/Google - png 0.png";
 // import LightSpeedIcon from "../../../../Images/LightSpeed VT - jpeg 1.png";
@@ -9,13 +8,10 @@ import AlienLogo from '../../../../Images/service/logo_A.jpeg'
 import AdvocateLogo from '../../../../Images/service/advocate_logo.jpeg'
 import SbiLogo from '../../../../Images/service/sbi_logo.jpeg'
 
-
-
-
 const CoInvestorCard = () => {
   return (
     <>
-      <div class="coinvestor-container ">
+      <div class="coinvestor-container">
         <div class="card col-lg-4 col-md-6 col-sm-12">
           <img src={RegisterKaroLogo} alt="image" />
           <h3>RegisterKaro</h3>

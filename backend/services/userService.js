@@ -36,7 +36,13 @@ export const registerUserService = async (user) => {
 };
 
 export const loginUserService = async ({ phoneNumber, password }) => {
-  const user = await UserModel.findOne({ phoneNumber, userStatus: "active" });
+  const user = await UserModel.findOne({
+    phoneNumber,
+    userStatus: "active",
+  }).populate({
+    path: "startUp",
+    select: "company logo",
+  });
   if (!user) throw new Error("Invalid credentials");
   await comparePassword(password, user.password);
   return user;
@@ -123,10 +129,7 @@ export const getStartUpData = async (userId) => {
 
 export const updateUserById = async (userId, newData) => {
   try {
-    const data = await UserModel.findByIdAndUpdate(
-      userId,
-      { ...newData }
-    );
+    const data = await UserModel.findByIdAndUpdate(userId, { ...newData });
     return {
       status: 200,
       message: "User updated succesfully",
@@ -148,8 +151,8 @@ export const changePassword = async (userId, newPassword) => {
     await user.save();
     return {
       status: 200,
-      message: "Password Changed Successfully"
-    }
+      message: "Password Changed Successfully",
+    };
   } catch (error) {
     console.log(error);
     return {
@@ -165,14 +168,14 @@ export const requestPasswordReset = async (email) => {
     if (!user) {
       return {
         status: 404,
-        message: "User Not Found"
-      }
+        message: "User Not Found",
+      };
     }
     const payload = {
       userId: user._id.toString(),
     };
     const resetToken = jwt.sign(payload, secretKey, {
-      expiresIn: '1h',
+      expiresIn: "1h",
     });
     const resetLink = `${process.env.BASE_URL}/reset-password?token=${resetToken}`;
     console.log(resetToken);
@@ -215,7 +218,7 @@ export const requestPasswordReset = async (email) => {
     console.log(error);
     return {
       status: 500,
-      message: 'Error requesting password reset',
+      message: "Error requesting password reset",
     };
   }
 };
@@ -226,27 +229,27 @@ export const resetPassword = async (token, newPassword) => {
     if (!decodedToken || !decodedToken.userId) {
       return {
         status: 400,
-        message: 'Invalid or expired reset token',
+        message: "Invalid or expired reset token",
       };
     }
     const user = await UserModel.findById(decodedToken.userId);
     if (!user) {
       return {
         status: 400,
-        message: 'User not found',
+        message: "User not found",
       };
     }
     user.password = newPassword;
     await user.save();
     return {
       status: 200,
-      message: 'Password reset successfully',
+      message: "Password reset successfully",
     };
   } catch (error) {
     console.log(error);
     return {
       status: 500,
-      message: 'Error resetting password',
+      message: "Error resetting password",
     };
   }
 };
