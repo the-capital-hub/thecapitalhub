@@ -191,12 +191,36 @@ export const investNow = async (data) => {
     console.error("Error: ", error);
     throw error;
   }
-}
+};
 export const postResetPaswordLink = async (email) => {
-  console.log("email-fs->",email)
+  console.log("email-fs->", email);
   try {
     const response = await axiosInstance.post(API.postResetPaswordLink, {
       email: email, // Pass the email to the request body
+    });
+    return response;
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error;
+  }
+};
+
+export const changePasswordAPI = async (newData) => {
+  try {
+    const { data } = await axiosInstance.patch(API.changePassword, newData);
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error?.response?.data || error;
+  }
+};
+
+
+export const postNewPassword = async (password, token) => {
+  try {
+    const response = await axiosInstance.patch(API.postNewPassword, {
+      token: token,
+      newPassword: password,
     });
     return response;
   } catch (error) {

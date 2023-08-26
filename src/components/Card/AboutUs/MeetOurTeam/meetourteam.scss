@@ -40,7 +40,8 @@ $logo-size: 100px;
             align-items: center;
             margin-top: 10px;
             position: absolute;
-            bottom: -88%;
+            // bottom: -88%;
+            top:112%;
             width: 100%;
 
             .name {
@@ -78,7 +79,7 @@ $logo-size: 100px;
         .social_icon_list {
             display: flex;
             position: absolute;
-            top: -30%;
+            top: -18%;
             margin-right:0px !important;
 
             img {
@@ -104,6 +105,9 @@ $logo-size: 100px;
 
             .info{
                 bottom: -75%;
+            }
+            .social_icon_list{
+                top: -22%;
             }
         }
     }

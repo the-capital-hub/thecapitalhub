@@ -2,7 +2,7 @@ import React from "react";
 import ArrowIcon from "../../../../Images/investorIcon/Arrow.svg";
 import "./SmallProfileCard.scss";
 import { useSelector } from "react-redux";
-const SmallProfileCard = ({ text, width }) => {
+const SmallProfileCard = ({ className, text, width }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const formatDate = (dateString) => {
     const options = { weekday: "short", month: "long", day: "numeric" };
@@ -12,7 +12,7 @@ const SmallProfileCard = ({ text, width }) => {
   const formattedDate = formatDate(new Date().toDateString());
 
   return (
-    <div className="container-fluid small_card_container">
+    <div className={`container-fluid small_card_container ${className}`}>
       <div
         className="row small_card_row"
         style={{ width: width ? width : "100%" }}

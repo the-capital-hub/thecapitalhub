@@ -16,6 +16,8 @@ import threeSevenImage from "../../../Images/blog/threeseven.webp";
 import threeEightImage from "../../../Images/blog/threeeight.webp";
 
 const StartUpBlogThree = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
   return (
     <>
       <div className="container blog_detailed_container">
