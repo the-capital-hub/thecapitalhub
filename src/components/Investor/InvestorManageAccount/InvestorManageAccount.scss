@@ -1,21 +1,78 @@
 /* InvestorManageAccount.scss */
 .manage_account_container {
+  height: 100%; 
+  min-height: 90vh;
   .box_container {
-    height: 100%;
+    height: fit-content;
     background-color: #fff;
     padding: 10px;
     border-radius: 40px;
     background: #fff;
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
     @media (min-width: 1000px) {
       flex-direction: row;
     }
     /* Add this to align boxes horizontally */
 
+    .change_password {
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      @media (max-width: 768px) {
+        margin: 5px;
+      }
+      form {
+        display: flex;
+        gap: 7px;
+        .form-input {
+          display: flex;
+          flex-direction: column;
+          label {
+            color: #666;
+            font-family: Poppins;
+            font-size: 13px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+          }
+
+          input,
+          select,
+          textarea {
+            font-size: 13px;
+            width: 100%;
+            padding: 5px;
+            border-radius: 5.861px;
+            border: 0.586px solid #e4e4e4;
+            background: #fff;
+          }
+        }
+
+        button {
+          border-radius: 10px;
+          background: #fd5901;
+          color: #fff;
+          font-family: Poppins;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+          border: none;
+          width: 100px;
+          height: 37px;
+          margin: auto;
+        }
+      }
+    }
+
     .present_account {
-      margin: 20px;
+      // margin: 20px;
       background-color: #f9f9f9;
       padding: 20px;
       border-radius: 20px;
@@ -118,8 +175,8 @@
     }
 
     .empty_box {
-      margin: 20px;
-      flex: 1;
+      // margin: 20px;
+      height: fit-content;  
       background-color: #f9f9f9;
       border-radius: 20px;
       padding: 20px;

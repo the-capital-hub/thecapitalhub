@@ -5,6 +5,7 @@ import { cloudinary } from "../utils/uploadImage";
 import jwt from "jsonwebtoken";
 import { secretKey } from "../constants/config.js";
 import { sendMail } from "../utils/mailHelper.js";
+import bcrypt from "bcrypt";
 
 const adminMail = "learn.capitalhub@gmail.com";
 
@@ -144,9 +145,16 @@ export const updateUserById = async (userId, newData) => {
   }
 };
 
-export const changePassword = async (userId, newPassword) => {
+export const changePassword = async (userId, { newPassword, oldPassword }) => {
   try {
     const user = await UserModel.findById(userId);
+    const checkPassword = await bcrypt.compare(oldPassword, user.password);
+    if (!checkPassword) {
+      return {
+        status: 401,
+        message: "Invalid Password",
+      };
+    }
     user.password = newPassword;
     await user.save();
     return {
@@ -154,7 +162,6 @@ export const changePassword = async (userId, newPassword) => {
       message: "Password Changed Successfully",
     };
   } catch (error) {
-    console.log(error);
     return {
       status: 500,
       message: "An error occurred while updating the password.",
