@@ -15,8 +15,6 @@ import threeSixImage from "../../../Images/blog/threesix.webp";
 import threeSevenImage from "../../../Images/blog/threeseven.webp";
 import threeEightImage from "../../../Images/blog/threeeight.webp";
 
-
-
 const StartUpBlogThree = () => {
   return (
     <>
@@ -30,7 +28,7 @@ const StartUpBlogThree = () => {
         <div className="row">
           <div className="col-lg-12 col-md-12  seventy ">
             <h1 className="headingOne">
-              8 Tips to start raising Angel investments for startups
+              HOW TO BUILD A GREAT STARTUP by Pramod Badiger
             </h1>
 
             <div className="time_icon">
@@ -137,7 +135,7 @@ const StartUpBlogThree = () => {
               <p>
                 Follow Pramod Badiger at :{" "}
                 <a href="https://www.linkedin.com/in/pramod-badiger-a3226618b">
-                 Linkedin
+                  Linkedin
                 </a>
               </p>
               <br />

@@ -10,7 +10,7 @@ function Navbar() {
   const [clicked, setClicked] = useState(false);
   const [selectedLink, setSelectedLink] = useState("home");
   const [isScrolling, setIsScrolling] = useState(false);
-  const [hideDropdown, setHideDropDown] = useState(false)
+  const [hideDropdown, setHideDropDown] = useState(false);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -26,9 +26,9 @@ function Navbar() {
     setClicked(!clicked);
   };
 
-  const handleMouseOver = () =>{
-    setHideDropDown(true)
-  }
+  const handleMouseOver = () => {
+    setHideDropDown(true);
+  };
   return (
     <div className="container nav_container">
       <nav className={`nav ${isScrolling ? "scrolling-nav" : ""}`}>
@@ -79,105 +79,87 @@ function Navbar() {
               </Link>
             </li>
             <li className="dropdown">
-              <span className="dropdown-label">Our Service</span>
+              <span className="dropdown-label">Service</span>
               {/* Start of sub-dropdown menu */}
-              <ul className="dropdown-menu">
-                <li className="dropdown">
-                  <Link
-                    to="/service"
-                    className={selectedLink === "service" ? "active" : ""}
-                    onClick={() => setSelectedLink("service")}
-                    onMouseOver={handleMouseOver}
-                  >
-                    Service
-                  </Link>
-                 { (selectedLink === "service" || selectedLink === "fundraising" || selectedLink === "pitch-deck" || selectedLink === "financials-document" || selectedLink === "web-development" || selectedLink === "sturtup-consulting" || selectedLink === "complience") && <ul
-                    className="dropdown-menu "
-                    style={{ marginLeft: "160px" }}
-                  >
-                    <li>
-                      <Link
-                        to="/fundraising"
-                        className={
-                          selectedLink === "fundraising" ? "active" : ""
-                        }
-                        onClick={() => setSelectedLink("fundraising")}
-                      >
-                        Fundraising
-                      </Link>
-                    </li>
+              {
+                <ul className="dropdown-menu ">
+                  <li>
+                    <Link
+                      to="/fundraising"
+                      className={selectedLink === "fundraising" ? "active" : ""}
+                      onClick={() => setSelectedLink("fundraising")}
+                    >
+                      Fundraising
+                    </Link>
+                  </li>
 
-                    <li>
-                      <Link
-                        to="/financials-document"
-                        className={
-                          selectedLink === "financials-document" ? "active" : ""
-                        }
-                        onClick={() => setSelectedLink("financials-document")}
-                      >
-                        Financials Documentation
-                      </Link>
-                    </li>
+                  <li>
+                    <Link
+                      to="/financials-document"
+                      className={
+                        selectedLink === "financials-document" ? "active" : ""
+                      }
+                      onClick={() => setSelectedLink("financials-document")}
+                    >
+                      Financials Documentation
+                    </Link>
+                  </li>
 
-                    <li>
-                      <Link
-                        to="/web-development"
-                        className={
-                          selectedLink === "web-development" ? "active" : ""
-                        }
-                        onClick={() => setSelectedLink("web-development")}
-                      >
-                        Web Development
-                      </Link>
-                    </li>
+                  <li>
+                    <Link
+                      to="/web-development"
+                      className={
+                        selectedLink === "web-development" ? "active" : ""
+                      }
+                      onClick={() => setSelectedLink("web-development")}
+                    >
+                      Web Development
+                    </Link>
+                  </li>
 
-                    <li>
-                      <Link
-                        to="/pitch-deck"
-                        className={
-                          selectedLink === "pitch-deck" ? "active" : ""
-                        }
-                        onClick={() => setSelectedLink("pitch-deck")}
-                      >
-                        Pitch Deck
-                      </Link>
-                    </li>
+                  <li>
+                    <Link
+                      to="/pitch-deck"
+                      className={selectedLink === "pitch-deck" ? "active" : ""}
+                      onClick={() => setSelectedLink("pitch-deck")}
+                    >
+                      Pitch Deck
+                    </Link>
+                  </li>
 
-                    <li>
-                      <Link
-                        to="/sturtup-consulting"
-                        className={
-                          selectedLink === "sturtup-consulting" ? "active" : ""
-                        }
-                        onClick={() => setSelectedLink("sturtup-consulting")}
-                      >
-                        Startup Consulting
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/complience"
-                        className={
-                          selectedLink === "complience" ? "active" : ""
-                        }
-                        onClick={() => setSelectedLink("complience")}
-                      >
-                        Compliance
-                      </Link>
-                    </li>
-                  </ul>}
-                </li>
-                <li>
-                  <Link
-                    to="/our-investor"
-                    className={selectedLink === "investor" ? "active" : ""}
-                    onClick={() => setSelectedLink("investor")}
-                  >
-                    Investor
-                  </Link>
-                </li>
-              </ul>
+                  <li>
+                    <Link
+                      to="/sturtup-consulting"
+                      className={
+                        selectedLink === "sturtup-consulting" ? "active" : ""
+                      }
+                      onClick={() => setSelectedLink("sturtup-consulting")}
+                    >
+                      Startup Consulting
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/complience"
+                      className={selectedLink === "complience" ? "active" : ""}
+                      onClick={() => setSelectedLink("complience")}
+                    >
+                      Compliance
+                    </Link>
+                  </li>
+                </ul>
+              }
+
               {/* End of sub-dropdown menu */}
+            </li>
+            <li>
+              <Link
+                to="/our-investor"
+                className={selectedLink === "investor" ? "active" : ""}
+                onClick={() => setSelectedLink("investor")}
+              >
+                Investor
+              </Link>
             </li>
             <li>
               <Link
