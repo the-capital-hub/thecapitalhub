@@ -224,6 +224,7 @@ export const requestPasswordReset = async (email) => {
 };
 
 export const resetPassword = async (token, newPassword) => {
+  console.log("token, newPassword",token, newPassword)
   try {
     const decodedToken = jwt.verify(token, secretKey);
     if (!decodedToken || !decodedToken.userId) {

@@ -42,6 +42,7 @@ import BlogDetailed from "./components/Blog/BlogDetailed/BlogDetailed";
 import StartUpBlogOne from "./components/Blog/StartUpBlog/StartUpBlogOne";
 import StartUpBlogTwo from "./components/Blog/StartUpBlog/StartUpBlogTwo";
 import StartUpBlogThree from "./components/Blog/StartUpBlog/StartUpBlogThree";
+import NewPasswordPopUp from "./components/PopUp/NewPasswordPopUp/NewPasswordPopUp";
 
 function App() {
   return (
@@ -55,6 +56,16 @@ function App() {
                 <Navbar />
                 <Home />
                 <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/reset-password"
+            element={
+              <>
+                <Navbar />
+                <NewPasswordPopUp />
+                {/* <Footer /> */}
               </>
             }
           />

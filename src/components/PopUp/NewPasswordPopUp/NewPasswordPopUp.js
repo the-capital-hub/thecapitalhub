@@ -1,40 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom"; // Import useLocation
 import "./NewPasswordPopUp.scss";
-import { postResetPaswordLink } from "../../../Service/user";
+import { postNewPassword } from "../../../Service/user";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import AfterSuccessPopUp from "../AfterSuccessPopUp/AfterSuccessPopUp";
 
 const NewPasswordPopUp = ({ onClose }) => {
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false)
+  const location = useLocation(); // Get the location object
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
   };
 
-  const handleSendResetLink = async () => {
+  const handleNewPassword = async () => {
     try {
-      await postResetPaswordLink(email);
-      console.log("Sending reset link to:", email);
-      onClose();
+      const token = new URLSearchParams(location.search).get("token");
+      if (token) {
+        console.log("Token:", token);
+        console.log("Password:", password);
+  
+        const response = await postNewPassword(password, token);
+        console.log("Response:", response.data); // Log the response from the API
+        if(response.status=='200'){
+          setShowSuccess(true)
+        }
+      } else {
+        console.log("Token not found in URL");
+      }
     } catch (error) {
-      console.error("Error sending reset link:", error);
+      alert("Invalid User Details or Token")
+      console.error("Error updating password:", error);
     }
   };
+
+  const handleClosePopup = () => {
+    setShowSuccess(false);
+    navigate("/login");
+  };
+  const navigate = useNavigate();
 
   return (
     <div className="reset_password_popup">
       <div className="popup">
         <div className="popup-content">
           <div>
-            <h4 className="mb-5">
-              Enter your email and we'll send you a link to reset Password
-            </h4>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={handleEmailChange}
-            />
-            <button className="ok_button" onClick={handleSendResetLink}>
-              Send Link
+            <h4 className="mb-5">Enter your New Password</h4>
+            <div className="password_input">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your Password"
+                value={password}
+                onChange={handlePasswordChange}
+              />
+              <button
+                className="eye-button"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+              </button>
+            </div>
+            <button className="reset_button" onClick={handleNewPassword}>
+              Reset Password
             </button>
           </div>
           <button className="close-button" onClick={onClose}>
@@ -42,6 +71,7 @@ const NewPasswordPopUp = ({ onClose }) => {
           </button>
         </div>
       </div>
+      {showSuccess &&  <AfterSuccessPopUp onClose={handleClosePopup} passwordChange={true} />}
     </div>
   );
 };
