@@ -1,13 +1,12 @@
-import React from "react";
 import "./rightProfileCard.scss";
-import profilePic from "../../../../Images/investorIcon/profilePic.webp";
-import LoopIcon from "../../../../Images/investorIcon/LoopIcon.svg";
+// import profilePic from "../../../../Images/investorIcon/profilePic.webp";
+// import LoopIcon from "../../../../Images/investorIcon/LoopIcon.svg";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const RightProfileCard = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-
+  console.log(loggedInUser);
   return (
     <>
       <div className="col-12 view_profile_container">
@@ -25,11 +24,16 @@ const RightProfileCard = () => {
               </h2>
               <span className="smallest_typo">{loggedInUser?.email}</span>
               <span className="smallest_typo">
-                Founder & CEO of The Capital Hub
+                {`${loggedInUser?.designation} at ${loggedInUser?.startUp?.company}`}
               </span>
             </div>
-             <Link to="/profile" className="profile_btn mt-2">View Profile</Link>
-            <Link to="/investor/manage-account" className="profile_btn mt-1 manage_acount_btn">
+            <Link to="/profile" className="profile_btn mt-2">
+              View Profile
+            </Link>
+            <Link
+              to="/investor/manage-account"
+              className="profile_btn mt-1 manage_acount_btn"
+            >
               Manage Account
             </Link>
             {/* loop */}

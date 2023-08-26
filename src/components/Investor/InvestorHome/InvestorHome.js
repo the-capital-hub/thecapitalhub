@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import "./investorHome.scss";
-import profilePic from "../../../Images/investorIcon/profilePic.webp";
+// import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import MileStoneCard from "../InvestorGlobalCards/MilestoneCard/MileStoneCard";
-import { SidebarContext } from "../../Sidebar/SidebarContext";
+// import { SidebarContext } from "../../Sidebar/SidebarContext";
 import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import RightProfileCard from "../InvestorGlobalCards/RightProfileCard/RightProfileCard";
 import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
@@ -131,14 +131,16 @@ const InvestorHome = () => {
                               "Founder & CEO of The Capital Hub"}
                           </span>
                           <br />
-                          <span className="small_typo">{loggedInUser?.location || "Bangalore , India"}</span>
+                          <span className="small_typo">
+                            {loggedInUser?.location || "Bangalore , India"}
+                          </span>
                         </div>
                       </div>
                     </div>
                     <div className="col-2 col-md-4 col-five">
                       <div className=" m-4">
                         <button className="connect_btn px-3">
-                          <img src={AddUserIcon} alt="add user"/>
+                          <img src={AddUserIcon} alt="add user" />
                           {/* <span className="mx-2 d-none d-md-block"> */}
                           <span className="mx-2">Connect</span>
                         </button>
@@ -175,7 +177,7 @@ const InvestorHome = () => {
                               className="small_typo"
                               style={{ marginBottom: "1rem" }}
                             >
-                              The Capital Hub
+                              {loggedInUser?.startUp?.company || "No StartUp"}
                             </td>
                           </tr>
                           <tr>
@@ -373,54 +375,54 @@ const InvestorHome = () => {
                 </div>
               </div>
             </div>
-            <CompanyDetailsCard userDetails={loggedInUser} page={"edit"}/>
+            <CompanyDetailsCard userDetails={loggedInUser} page={"edit"} />
 
             <div className="row">
               <div className="col-12 mt-2">
-                  <div className="card_holder">
-                    <ColorCard
-                      color="white"
-                      background="#BB98FF"
-                      text="Last round investment"
-                      image={CoinIcon}
-                      amount={"500 M"}
-                    />
-                    <ColorCard
-                      color="white"
-                      background="#DAC191"
-                      text="Total Investment"
-                      image={CoinIcon}
-                      amount={"500 M"}
-                    />
-                    <ColorCard
-                      color="white"
-                      background="#DCDCDC"
-                      text="No.of Investers"
-                      image={CoinIcon}
-                      amount={"500 M"}
-                    />
-                     <ColorCard
+                <div className="card_holder">
+                  <ColorCard
+                    color="white"
+                    background="#BB98FF"
+                    text="Last round investment"
+                    image={CoinIcon}
+                    amount={"500 M"}
+                  />
+                  <ColorCard
+                    color="white"
+                    background="#DAC191"
+                    text="Total Investment"
+                    image={CoinIcon}
+                    amount={"500 M"}
+                  />
+                  <ColorCard
+                    color="white"
+                    background="#DCDCDC"
+                    text="No.of Investers"
+                    image={CoinIcon}
+                    amount={"500 M"}
+                  />
+                  <ColorCard
                     color="white"
                     background="#2B2B2B"
                     text="Fund ask"
                     image={CoinIcon}
                     amount={"500 M"}
                   />
-                   <ColorCard
+                  <ColorCard
                     color="white"
                     background="#FF7373"
                     text="Valuation"
                     image={CoinIcon}
                     amount={"500 M"}
                   />
-                   <ColorCard
+                  <ColorCard
                     color="white"
                     background="#9198DA"
                     text="Raised funds"
                     image={CoinIcon}
                     amount={"500 M"}
                   />
-                  </div>
+                </div>
               </div>
             </div>
           </div>
