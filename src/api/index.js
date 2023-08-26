@@ -19,6 +19,7 @@ const API = Object.freeze({
   getSavedPosts: `${baseUrl}/api/posts/savedPosts`,
   postResetPaswordLink: `${baseUrl}/users/requestPasswordReset`,
   investNow: `${baseUrl}/startUp/investNow`,
+  changePassword: `${baseUrl}/users/changePassword`,
 });
 
 export default API;
