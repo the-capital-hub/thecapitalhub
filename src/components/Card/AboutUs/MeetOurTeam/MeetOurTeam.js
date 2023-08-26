@@ -1,4 +1,3 @@
-import React from "react";
 import "./meetourteam.scss";
 import EmailIcon from "../../../../Images/message.svg";
 import LinkedInIcon from "../../../../Images/service/linkedin.svg";
@@ -10,7 +9,7 @@ import { Link } from "react-router-dom";
 const MeetOurTeam = () => {
   return (
     <>
-      <div class="meetourteam_container ">
+      <div class="meetourteam_container gap-2">
         <div class="card col-lg-4 col-md-6 col-sm-12">
           <img src={UpmaImage} alt="image" />
 

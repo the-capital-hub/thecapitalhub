@@ -10,6 +10,7 @@ import connectDB from "./constants/db.js";
 import globalErrorHandler from "./error/AppError.js";
 import startUpData from "./routes/startUpData.js";
 import contactUsData from "./routes/contactUsData.js";
+import connectionData from "./routes/connectionRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -23,8 +24,8 @@ app.use("/users", usersData);
 app.use("/api/posts", postData);
 app.use("/documentation", documentData);
 app.use("/startup", startUpData);
-app.use("/contactUs",contactUsData);
-
+app.use("/contactUs", contactUsData);
+app.use("/connections", connectionData);
 // documentation upload
 
 const storage = multer.diskStorage({

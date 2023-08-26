@@ -32,7 +32,7 @@ const Blog = () => {
             </div>
           </div>
         </div>
-        <div className="row navbar_black">
+        {/* <div className="row navbar_black">
           <ul className="navbar_list">
             <li> </li>
             <li className="active">All</li>
@@ -45,7 +45,7 @@ const Blog = () => {
             <li>Investors</li>
             <li>></li>
           </ul>
-        </div>
+        </div> */}
         {/* <div className="container main_blog_container">
           <section className="row main_blog_section">
             <div className="col-lg-5 col-md-12 image_section_left">

@@ -8,11 +8,13 @@ import WebIcon from "../../../../Images/investorIcon/WebIcon.svg";
 import LogoX from "../../../../Images/investorIcon/LogoX.png";
 import "./companyDetails.scss";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
-import { getStartupByFounderId, postStartUpData } from "../../../../Service/user";
+import {
+  getStartupByFounderId,
+  postStartUpData,
+} from "../../../../Service/user";
 import { useState, useEffect } from "react";
 
-
-const CompanyDetailsCard = ({ userDetails, page }) => {
+const   CompanyDetailsCard = ({ userDetails, page }) => {
   const [isDescriptionEditable, setIsDescriptionEditable] = useState(false);
   const [descriptionContent, setDescriptionContent] = useState("");
   const [onePager, setOnePager] = useState([]);
@@ -27,8 +29,8 @@ const CompanyDetailsCard = ({ userDetails, page }) => {
   const submitDescriptionHandler = async () => {
     const updatedData = {
       founderId: userDetails._id,
-      description: descriptionContent
-    }
+      description: descriptionContent,
+    };
     await postStartUpData(updatedData);
     setIsDescriptionEditable(!isDescriptionEditable);
   };
@@ -42,7 +44,7 @@ const CompanyDetailsCard = ({ userDetails, page }) => {
               <div className="col-12">
                 <div className="image_name_section mt-2 ">
                   <span className="company_details_logo_container">
-                    <img src={LogoX} alt="profileimage" />
+                    <img src={onePager.logo || LogoX} alt="profileimage" />
                   </span>
                   <div className="left_profile_text flex_content">
                     <h2 className="typography m-2">
@@ -54,7 +56,8 @@ const CompanyDetailsCard = ({ userDetails, page }) => {
                     <span className="small_typo location_icon">
                       <img src={LocationIcon} alt="location" />
                       {onePager.location} <img src={EmailIcon} alt="location" />
-                      {userDetails?.email}{""}
+                      {userDetails?.email}
+                      {""}
                     </span>
                     <div className="small_typo social_icon mt-3">
                       <img src={WebIcon} alt="social_img" />
@@ -71,21 +74,24 @@ const CompanyDetailsCard = ({ userDetails, page }) => {
                 {page === "edit" ? (
                   <>
                     <span className="ms-auto">
-                    <div className="edit-container">
-                      <button
-                        className="edit-btn"
-                        onClick={() => setIsDescriptionEditable(!isDescriptionEditable)}>
-                        {isDescriptionEditable ? "Cancel" : "Edit"}
-                        <CiEdit />
-                      </button>
-                      {isDescriptionEditable && (
+                      <div className="edit-container">
                         <button
-                          className="edit-btn ms-2"
-                          onClick={() => submitDescriptionHandler()}
+                          className="edit-btn"
+                          onClick={() =>
+                            setIsDescriptionEditable(!isDescriptionEditable)
+                          }
                         >
-                          Save <CiSaveUp2 />
+                          {isDescriptionEditable ? "Cancel" : "Edit"}
+                          <CiEdit />
                         </button>
-                      )}
+                        {isDescriptionEditable && (
+                          <button
+                            className="edit-btn ms-2"
+                            onClick={() => submitDescriptionHandler()}
+                          >
+                            Save <CiSaveUp2 />
+                          </button>
+                        )}
                       </div>
                     </span>
                     <p className="para_text">
@@ -93,24 +99,21 @@ const CompanyDetailsCard = ({ userDetails, page }) => {
                       {/* {onePager.description} */}
                       {isDescriptionEditable ? (
                         <textarea
-                        className="description"
+                          className="description"
                           value={descriptionContent}
                           name="bio"
-                          onChange={(e) => setDescriptionContent(e.target.value)}
+                          onChange={(e) =>
+                            setDescriptionContent(e.target.value)
+                          }
                         />
                       ) : (
-                        <p className="small_typo">
-                          {descriptionContent}
-                        </p>
+                        <p className="small_typo">{descriptionContent}</p>
                       )}
                     </p>
                   </>
                 ) : (
-                  <p className="small_typo">
-                    {descriptionContent}
-                  </p>
+                  <p className="small_typo">{descriptionContent}</p>
                 )}
-
               </div>
             </div>
           </div>

@@ -192,6 +192,18 @@ export const investNow = async (data) => {
     throw error;
   }
 }
+export const postResetPaswordLink = async (email) => {
+  console.log("email-fs->",email)
+  try {
+    const response = await axiosInstance.post(API.postResetPaswordLink, {
+      email: email, // Pass the email to the request body
+    });
+    return response;
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error;
+  }
+};
 
 export {
   getUser,
