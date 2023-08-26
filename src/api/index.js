@@ -17,6 +17,7 @@ const API = Object.freeze({
   updateUserById: `${baseUrl}/users/updateUserById`,
   updateIntroMessage: `${baseUrl}/startup/introMessage`,
   getSavedPosts: `${baseUrl}/api/posts/savedPosts`,
+  postResetPaswordLink: `${baseUrl}/users/requestPasswordReset`,
   investNow: `${baseUrl}/startUp/investNow`,
 });
 
