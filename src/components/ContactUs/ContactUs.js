@@ -229,7 +229,7 @@ const ContactUs = () => {
               <img src={instaIcon} alt="Instagram" />
             </a>
 
-            <a href="">
+            <a href="https://twitter.com/TheCapitalHub_">
               <img src={twIcon} alt="Twitter" />
             </a>
           </div>
