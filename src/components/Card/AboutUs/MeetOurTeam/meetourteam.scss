@@ -8,14 +8,14 @@ $logo-size: 100px;
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
-    margin-bottom: 10%;
+    // margin-bottom: 10%;
 
 
     .card {
         border-radius: 29.965px;
         background: #DBDBDB;
         width: $card-width;
-        margin-bottom: 20px;
+        // margin-bottom: 20px;
         display: flex;
         flex-direction: column; // Add this to arrange name and designation vertically
         justify-content: center;

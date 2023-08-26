@@ -1,4 +1,3 @@
-import React from "react";
 import "./aboutus.scss";
 import CoInvestorCard from "../Card/AboutUs/CoInvestor/CoInvestorCard";
 import MeetOurTeam from "../Card/AboutUs/MeetOurTeam/MeetOurTeam";
@@ -11,7 +10,7 @@ const AboutUs = () => {
         <div className="row title_text_row">
           <h2>Helping Millions of Indians build startups</h2>
         </div>
-        <div className="container">
+        <div className="container mx-auto mt-4">
           <div className="about_us_title_text">
             <h2>About Us</h2>
             <p>
@@ -31,10 +30,16 @@ const AboutUs = () => {
             <h1>Founding team</h1>
             <div className="founder_container">
               <div className="image rounded-circle">
-                <img src={PramodImage} className="rounded-circle" alt="founder" />
+                <img
+                  src={PramodImage}
+                  className="rounded-circle"
+                  alt="founder"
+                />
               </div>
 
               <div className="text_content">
+                <h2>Pramod Badiger</h2>
+                <span>Founder and CEO</span>
                 <p className="para_margin">
                   With an entrepreneurial spirit and a flair for innovation,
                   Pramod Badiger, the Founder and CEO of The Capital HUB, is a
@@ -51,8 +56,6 @@ const AboutUs = () => {
                   it's not just about offering opinions; it's about empowering
                   founders to shape their dreams on their terms.
                 </p>
-                <span>Pramod Badiger</span>
-                <h2>Founder and CEO</h2>
               </div>
             </div>
           </div>
@@ -65,6 +68,8 @@ const AboutUs = () => {
               </div>
 
               <div className="text_content">
+                <h2>Rohit Sharma</h2>
+                <span>Mentor and Advisor</span>
                 <p className="para_margin">
                   Rohit Sharma, a seasoned Mentor and Advisor at The Capital
                   HUB, brings a wealth of experience and wisdom to the table.
@@ -80,8 +85,6 @@ const AboutUs = () => {
                   Rohit Sharma by their side, startups find the guidance and
                   encouragement they need to reach new heights of success.
                 </p>
-                <span>Rohit Sharma</span>
-                <h2>Mentor and Advisor </h2>
               </div>
             </div>
           </div>
@@ -94,6 +97,8 @@ const AboutUs = () => {
               </div>
 
               <div className="text_content">
+                <h2>Shruthi Sullerey</h2>
+                <span>Principal Investor Relations</span>
                 <p className="para_margin">
                   Meet Shruthi Sullerey, the dynamic Principal of Investor
                   Relations at The Capital HUB. With an innate ability to
@@ -109,8 +114,6 @@ const AboutUs = () => {
                   every startup she collaborates with, propelling them towards
                   greater heights.
                 </p>
-                <span>Shruthi Sullerey</span>
-                <h2>Principal Investor Relations </h2>
               </div>
             </div>
           </div>
@@ -145,7 +148,7 @@ const AboutUs = () => {
             <MeetOurTeam />
           </div>
           <div className="about_us_title_text  co-investor_title mb-5">
-            <h2 className="mb-5">Our Collaborations</h2>
+            <h2 className="mb-3">Our Collaborations</h2>
             <CoInvestorCard />
           </div>
 
