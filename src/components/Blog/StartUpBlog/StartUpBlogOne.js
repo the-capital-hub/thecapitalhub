@@ -9,6 +9,7 @@ import inIcon from "../../../Images/blog/typcn_social-instagram.svg";
 import BlogoneImage from "../../../Images/blog/1 AsPGU1Q42C9lsVRoMg91Nw.webp";
 
 const StartUpBlogOne = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
   return (
     <>
       <div className="container blog_detailed_container">

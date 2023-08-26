@@ -8,6 +8,8 @@ import twIcon from "../../../Images/blog/typcn_social-twitter.svg";
 import inIcon from "../../../Images/blog/typcn_social-instagram.svg";
 import BlogtwoImage from "../../../Images/blog/eighttips.webp";
 const StartUpBlogTwo = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
   return (
     <>
       <div className="container blog_detailed_container">

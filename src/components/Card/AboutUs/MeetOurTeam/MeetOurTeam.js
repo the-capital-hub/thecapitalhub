@@ -18,16 +18,16 @@ const MeetOurTeam = () => {
               <Link to="mailto:investments@capitalhub.in">
                 <img src={EmailIcon} alt="emailicon" />
               </Link>
-              <Link to="https://www.linkedin.com/in/your-profile-url">
+              <Link to="https://www.linkedin.com/in/upma-singh-bb4b1576/">
                 <img src={LinkedInIcon} alt="image" />
               </Link>
             </div>
             <p class="name">Upma Singh</p>
             <p class="designation">Senior Investment Analyst</p>
             <p className="hovering_para">
-              A seasoned Analyst with a keen eye for market trends and
-              investment opportunities, driving success for The Capital HUB's
-              clients.
+              A veteran of the venture capital ecosystem, Upma's deep
+              understanding of businesses and entrepreneurship lands her as one
+              of the most valuable assets for The Capital Hub
             </p>
           </div>
         </div>
@@ -35,40 +35,41 @@ const MeetOurTeam = () => {
           <img src={PreetiImage} alt="image" />
 
           <div class="info">
-          <div className="social_icon_list">
+            <div className="social_icon_list">
               <Link to="mailto:investments@capitalhub.in">
                 <img src={EmailIcon} alt="emailicon" />
               </Link>
-              <Link to="https://www.linkedin.com/in/your-profile-url">
+              <Link to="https://www.linkedin.com/in/preeti1629/">
                 <img src={LinkedInIcon} alt="image" />
               </Link>
             </div>
             <p class="name">Preeti Yadav</p>
             <p class="designation">Senior Investment Analyst</p>
             <p className="hovering_para">
-              A seasoned Analyst with a keen eye for market trends and
-              investment opportunities, driving success for The Capital HUB's
-              clients.
+              A seasoned analyst with a keen eye for market trends and
+              investment opportunities, Preeti is the steady backbone that
+              ensures the success for The Capital Hub's clients.
             </p>
           </div>
         </div>
         <div class="card col-lg-4 col-md-6 col-sm-12">
           <img src={RaghuImage} alt="image" />
           <div class="info">
-          <div className="social_icon_list">
+            <div className="social_icon_list">
               <Link to="mailto:investments@capitalhub.in">
                 <img src={EmailIcon} alt="emailicon" />
               </Link>
-              <Link to="https://www.linkedin.com/in/your-profile-url">
+              <Link to="https://www.linkedin.com/in/raghukrishnan-j/">
                 <img src={LinkedInIcon} alt="image" />
               </Link>
             </div>
             <p class="name">Raghukrishnan J</p>
             <p class="designation">Senior Investment Analyst</p>
             <p className="hovering_para">
-              A seasoned Analyst with a keen eye for market trends and
-              investment opportunities, driving success for The Capital HUB's
-              clients.
+              A technology enthusiast with a thirst for exponential growth and
+              scalability, Raghu's innate curiosity and passion for the Indian
+              growth story drives him to be the engine of success for The
+              Capital Hub.
             </p>
           </div>
         </div>

@@ -8,6 +8,8 @@ const AfterSuccessPopUp = ({
   register,
   login,
   savedFile,
+  passwordChange,
+  emailSent,
 }) => {
   const handleOKClick = () => {
     onClose();
@@ -41,6 +43,12 @@ const AfterSuccessPopUp = ({
           )}
           {(register || contactFrom) && <p>We will contact you soon...</p>}
           {savedFile && <h1>File Saved Successfully</h1>}
+
+          {passwordChange && <h1>Password Change Successfully</h1>}
+
+          {emailSent && <h1>Email Sent Successfully</h1>}
+          {emailSent && <p>Please Check Your Email</p>}
+
           <button className="ok_button" onClick={handleOKClick}>
             OK
           </button>

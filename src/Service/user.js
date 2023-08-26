@@ -215,6 +215,20 @@ export const changePasswordAPI = async (newData) => {
   }
 };
 
+
+export const postNewPassword = async (password, token) => {
+  try {
+    const response = await axiosInstance.patch(API.postNewPassword, {
+      token: token,
+      newPassword: password,
+    });
+    return response;
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error;
+  }
+};
+
 export {
   getUser,
   postUser,
