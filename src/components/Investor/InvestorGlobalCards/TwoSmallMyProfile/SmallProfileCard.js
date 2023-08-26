@@ -9,7 +9,7 @@ const SmallProfileCard = ({ text, width }) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", options);
   };
-  const formattedDate = formatDate("2023-06-22");
+  const formattedDate = formatDate(new Date().toDateString());
 
   return (
     <div className="container-fluid small_card_container">
@@ -19,7 +19,7 @@ const SmallProfileCard = ({ text, width }) => {
       >
         <div className="col-6">
           <div className="box boxOne flex_content">
-            <h2 className="typography">Hello, Mr. {loggedInUser?.firstName}</h2>
+            <h2 className="typography">Hello, {loggedInUser?.firstName}</h2>
             <span className="smallest_typo">{formattedDate}</span>
           </div>
         </div>
