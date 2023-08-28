@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./contactus.scss";
 import callIcon from "../../Images/Call.svg";
 import messageIcon from "../../Images/message.svg";
@@ -57,6 +57,10 @@ const ContactUs = () => {
         console.error("Error sending mail:", error);
       });
   };
+
+  useEffect(() => {
+    document.title = "Contact Us | The Capital Hub";
+  }, []);
 
   return (
     <>

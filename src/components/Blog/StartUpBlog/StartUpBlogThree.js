@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./style.scss";
 import BlogImageOne from "../../../Images/blog/Rectangle 1271.png";
 import SearchIcon from "../../../Images/blog/Combined-Shape.svg";
@@ -17,7 +17,10 @@ import threeEightImage from "../../../Images/blog/threeeight.webp";
 
 const StartUpBlogThree = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
-
+  useEffect(() => {
+    document.title =
+      "HOW TO BUILD A GREAT STARTUP by Pramod Badiger | The Capital Hub";
+  }, []);
   return (
     <>
       <div className="container blog_detailed_container">

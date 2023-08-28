@@ -7,8 +7,12 @@ import FeaturedArticles from "../../../Images/Help/FeatureIcon.svg";
 import CustomerIcon from "../../../Images/Help/Customer.png";
 import QuestionIcon from "../../../Images/Help/Questionmark.png";
 import AvatarIcon from "../../../Images/Help/Avatar.png";
+import { useEffect } from "react";
 
 const Help = () => {
+  useEffect(() => {
+    document.title = "Help | The Capital Hub";
+  }, []);
   return (
     <div className="container-fluid help_main_container">
       <div className="row mt-2">

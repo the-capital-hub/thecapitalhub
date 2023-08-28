@@ -30,7 +30,10 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="http://thecapitalhub.in/contactus" className="text-white">
+                <a
+                  href="http://thecapitalhub.in/contactus"
+                  className="text-white"
+                >
                   Contact Us
                 </a>
               </li>
@@ -73,10 +76,18 @@ const Footer = () => {
               information about our services
             </p>
             <div className="d-flex justify-content-start">
-              <img src={FbIcon} alt="img" style={{ margin: "0px 2px" }} />
-              <img src={TwIcon} alt="img" style={{ margin: "0px 2px" }} />
-              <img src={InIcon} alt="img" style={{ margin: "0px 2px" }} />
-              <img src={YtIcon} alt="img" style={{ margin: "0px 2px" }} />
+              <a href="">
+                <img src={FbIcon} alt="img" style={{ margin: "0px 2px" }} />
+              </a>
+              <a href="https://twitter.com/TheCapitalHub_">
+                <img src={TwIcon} alt="img" style={{ margin: "0px 2px" }} />
+              </a>
+              <a href="https://instagram.com/capitalhub_official?igshid=MzRlODBiNWFlZA==">
+                <img src={InIcon} alt="img" style={{ margin: "0px 2px" }} />
+              </a>
+              <a href="">
+                <img src={YtIcon} alt="img" style={{ margin: "0px 2px" }} />
+              </a>
             </div>
           </div>
           {/* <div className="col-md-3 col-sm-6 footer_list_item">

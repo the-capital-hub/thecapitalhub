@@ -6,11 +6,12 @@ import { useParams } from "react-router-dom";
 import { getOnePager, investNow } from "../../../Service/user";
 import { getUserById } from "../../../Service/user";
 
-const InvestNow = ({page}) => {
+const InvestNow = ({ page }) => {
   const [user, setUser] = useState({});
   const { username } = useParams();
   const [onePager, setOnePager] = useState([]);
   useEffect(() => {
+    document.title = "Invest Now - One Link | The Capital Hub";
     getUserById(username)
       .then(({ data }) => {
         setUser(data);
@@ -36,63 +37,62 @@ const InvestNow = ({page}) => {
       fromUserEmail: email,
       fromUserMobile: mobileNumber,
       toUserId: onePager.founderId,
-    }
+    };
     const response = await investNow(requestBody);
-    if(response.status === 200) setShowModal(true);
-    
+    if (response.status === 200) setShowModal(true);
   };
 
   return (
     <div className="investNow">
       {showModal && <ThankYouModal onCancel={() => setShowModal(false)} />}
       <div className="investNowContainer">
-      {page === "onePager" ? (
-        <>
-        <p>Contact Details</p>
-        <div className="inputs">
-          <Input
-            type={"text"}
-            placeholder={"Full Name"}
-            value={user.firstName + " " + user.lastName}
-          />
-          <Input
-            type={"text"}
-            placeholder={"Mobile number"}
-            value={user.phoneNumber}
-          />
-          <Input
-            type={"email"}
-            placeholder={"Email Id"}
-            value={user.email}
-          />
-          </div>
-        </> 
-      ) : (
-        <>
-        <p>Contact Details</p>
-        <div className="inputs">
-          <Input
-            type={"text"}
-            placeholder={"Full Name"}
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
-          />
-          <Input
-            type={"number"}
-            placeholder={"Mobile number"}
-            value={mobileNumber}
-            onChange={(e) => setMobileNumber(e.target.value)}
-          />
-          <Input
-            type={"email"}
-            placeholder={"Email Id"}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <button onClick={handleSubmit}>Show Interest</button>
-        </div>
-        </>
-      )}
+        {page === "onePager" ? (
+          <>
+            <p>Contact Details</p>
+            <div className="inputs">
+              <Input
+                type={"text"}
+                placeholder={"Full Name"}
+                value={user.firstName + " " + user.lastName}
+              />
+              <Input
+                type={"text"}
+                placeholder={"Mobile number"}
+                value={user.phoneNumber}
+              />
+              <Input
+                type={"email"}
+                placeholder={"Email Id"}
+                value={user.email}
+              />
+            </div>
+          </>
+        ) : (
+          <>
+            <p>Contact Details</p>
+            <div className="inputs">
+              <Input
+                type={"text"}
+                placeholder={"Full Name"}
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+              />
+              <Input
+                type={"number"}
+                placeholder={"Mobile number"}
+                value={mobileNumber}
+                onChange={(e) => setMobileNumber(e.target.value)}
+              />
+              <Input
+                type={"email"}
+                placeholder={"Email Id"}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <button onClick={handleSubmit}>Show Interest</button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

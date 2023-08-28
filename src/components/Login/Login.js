@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./login.scss";
 import RegisterIcon from "../../Images/Group 21.svg";
 import GIcon from "../../Images/Group 22.svg";
@@ -18,7 +18,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState(null);
-  const [showResetPopUp, setShowResetPopUp] = useState(false)
+  const [showResetPopUp, setShowResetPopUp] = useState(false);
   const [inputValues, setInputValues] = useState({
     password: "",
     phoneNumber: "",
@@ -35,7 +35,6 @@ const Login = () => {
       setInputValues({ ...inputValues, phoneNumber: event });
     }
   };
-  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -81,6 +80,11 @@ const Login = () => {
   const handleBack = () => {
     navigate("/");
   };
+
+  useEffect(() => {
+    document.title = "Log In | The Capital Hub";
+  }, []);
+
   return (
     <>
       <div className="row d-flex register_container">
@@ -138,9 +142,9 @@ const Login = () => {
             </div>
             <div className="row mt-2">
               <div className="col-md-12">
-               <Link to={""} onClick={()=>setShowResetPopUp(true)}>
-                Forgot Password?
-               </Link>
+                <Link to={""} onClick={() => setShowResetPopUp(true)}>
+                  Forgot Password?
+                </Link>
               </div>
             </div>
 
@@ -195,7 +199,9 @@ const Login = () => {
           />
         )}
 
-        {showResetPopUp&& <ResetPasswordPopUp onClose={handleCloseResetPopup}/>}
+        {showResetPopUp && (
+          <ResetPasswordPopUp onClose={handleCloseResetPopup} />
+        )}
       </div>
     </>
   );

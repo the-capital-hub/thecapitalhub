@@ -15,8 +15,9 @@ function Profile() {
   const { username } = useParams();
   const [user, setUser] = useState([]);
   useEffect(() => {
+    document.title = "Profile - One Link | The Capital Hub";
     getUserById(username)
-      .then(({data}) => {
+      .then(({ data }) => {
         setUser(data);
       })
       .catch(() => setUser([]));
@@ -43,7 +44,13 @@ function Profile() {
                         <span className="small_typo">
                           {user?.designation || `Founder & CEO of capital Hub`}
                         </span>
-                        <span className="small_typo" style={{ display: "block" }}> {user?.location}</span>
+                        <span
+                          className="small_typo"
+                          style={{ display: "block" }}
+                        >
+                          {" "}
+                          {user?.location}
+                        </span>
                       </div>
                     </div>
                   </div>

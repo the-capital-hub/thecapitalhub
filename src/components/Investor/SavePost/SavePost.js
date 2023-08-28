@@ -4,10 +4,12 @@ import RightProfileCard from "../InvestorGlobalCards/RightProfileCard/RightProfi
 import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import NavigatedCardViewer from "./NavigatedCardViewer/NavigatedCardViewer";
+import { useEffect } from "react";
 
 const SavePost = () => {
-
-
+  useEffect(() => {
+    document.title = "Saved Posts | The Capital Hub";
+  }, []);
 
   return (
     <div className="container-fluid savedpost_main_container">
