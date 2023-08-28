@@ -412,6 +412,7 @@ const InvestorHome = () => {
                       handleAmountChange("last_round_investment", amount)
                     }
                     field={field}
+                    colorCardData={colorCardData}
                   />
                   <ColorCard
                     color="white"
@@ -423,6 +424,7 @@ const InvestorHome = () => {
                       handleAmountChange("total_investment", amount)
                     }
                     field={field}
+                    colorCardData={colorCardData}
                   />
                   <ColorCard
                     color="white"
@@ -434,6 +436,7 @@ const InvestorHome = () => {
                       handleAmountChange("no_of_investers", amount)
                     }
                     field={field}
+                    colorCardData={colorCardData}
                   />
                   <ColorCard
                     color="white"
@@ -445,6 +448,7 @@ const InvestorHome = () => {
                       handleAmountChange("fund_ask", amount)
                     }
                     field={field}
+                    colorCardData={colorCardData}
                   />
                   <ColorCard
                     color="white"
@@ -456,6 +460,7 @@ const InvestorHome = () => {
                       handleAmountChange("valuation", amount)
                     }
                     field={field}
+                    colorCardData={colorCardData}
                   />
                   <ColorCard
                     color="white"
@@ -467,6 +472,7 @@ const InvestorHome = () => {
                       handleAmountChange("raised_funds", amount)
                     }
                     field={field}
+                    colorCardData={colorCardData}
                   />
                 </div>
               </div>

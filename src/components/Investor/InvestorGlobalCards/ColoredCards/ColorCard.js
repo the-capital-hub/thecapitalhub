@@ -3,7 +3,16 @@ import "./ColorCard.scss";
 import { postStartUpData } from "../../../../Service/user";
 import { useSelector } from "react-redux";
 
-const ColorCard = ({ color, text, image, amount, background, onAmountChange,field}) => {
+const ColorCard = ({
+  color,
+  text,
+  image,
+  amount,
+  background,
+  onAmountChange,
+  field,
+  colorCardData,
+}) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedAmount, setEditedAmount] = useState(amount);
@@ -21,9 +30,7 @@ const ColorCard = ({ color, text, image, amount, background, onAmountChange,fiel
     onAmountChange(editedAmount);
     const updatedData = {
       founderId: loggedInUser._id,
-      colorCard: {
-        [field]: editedAmount,
-      },
+      colorCard: { ...colorCardData, [field]: editedAmount },
     };
     postStartUpData(updatedData)
       .then((res) => {
@@ -32,11 +39,14 @@ const ColorCard = ({ color, text, image, amount, background, onAmountChange,fiel
       .catch((error) => {
         console.error("Error-->", error);
       });
-      console.log("loggedInUser-->",loggedInUser.colorCard)
+    console.log("loggedInUser-->", loggedInUser.colorCard);
   };
 
   return (
-    <div className="colorcard-component card row width_hundred" style={{ background }}>
+    <div
+      className="colorcard-component card row width_hundred"
+      style={{ background }}
+    >
       <div className="col-7 col-sm-6 left-content" style={{ color }}>
         <>
           <h3 className="title">{text}</h3>
