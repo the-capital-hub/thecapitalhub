@@ -271,3 +271,121 @@ export const savePost = async (userId, collectionName, postId) => {
   }
 };
 
+//get all collections
+export const getAllSavedPostCollections = async (userId) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found",
+      };
+    }
+    const collections = user.savedPosts;
+    return {
+      status: 200,
+      message: "Saved post collections retrieved successfully",
+      data: collections,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while fetching saved post collections.",
+    };
+  }
+};
+
+//get saved post by collection name
+export const getSavedPostsByCollection = async (userId, collectionName) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found",
+      };
+    }
+    const collection = user.savedPosts.find(
+      (c) => c.name === collectionName
+    );
+    if (!collection) {
+      return {
+        status: 404,
+        message: `Collection not found`,
+      };
+    }
+    const postIds = collection.posts;
+    const savedPosts = await PostModel.find({ _id: { $in: postIds } });
+    return {
+      status: 200,
+      message: `Saved posts retrieved successfully`,
+      data: savedPosts,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while fetching saved posts by collection name.",
+    };
+  }
+};
+
+
+//get like count
+export const getLikeCount = async (postId) => {
+  try {
+    const post = await PostModel.findById(postId);
+    if (!post) {
+      return {
+        status: 404,
+        message: "Post not found",
+      };
+    }
+    const likeCount = post.likes.length;
+    return {
+      status: 200,
+      message: "Like count retrieved successfully",
+      data: {
+        count: likeCount,
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while fetching like count.",
+    };
+  }
+};
+
+
+// get users who liked the post
+export const getUsersWhoLikedPost = async (postId) => {
+  try {
+    const post = await PostModel.findById(postId);
+    if (!post) {
+      return {
+        status: 404,
+        message: "Post not found",
+      };
+    }
+    const likedUsers = await PostModel.findById(postId)
+      .populate({
+        path: "likes",
+        select: "firstName lastName profilePicture",
+      })
+    return {
+      status: 200,
+      message: "Users who liked the post retrieved successfully",
+      data: likedUsers.likes,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while fetching liked users.",
+    };
+  }
+};
+
