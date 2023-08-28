@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./fundraising.scss";
 import serviceOneIcon from "../../../Images/service/Group 15409.svg";
 import listIcon from "../../../Images/ListDot.svg";
@@ -13,6 +13,9 @@ import investorlistIcon from "../../../Images/service/image 56.png";
 import emailIcon from "../../../Images/service/image 58(1).png";
 
 const Fundraising = () => {
+  useEffect(() => {
+    document.title = "Fundraising Service | The Capital Hub";
+  }, []);
   return (
     <>
       <div className="container fundraising_main_container">
@@ -33,13 +36,13 @@ const Fundraising = () => {
             <div className="para-image">
               <div className="para">
                 <p className="mt-2">
-                  Start raising your first round of angel investments with
-                  The Capital HUB. At its very core The Capital HUB focuses on finding
-                  ideal and right strategic investors to Support, Mentor, and
-                  guide founders to experience the full potential of raising
-                  investment from an angel. With a closed curated network of
-                  over 1000+ angels, The Capital HUB is now your one-stop
-                  destination for all your fundraising needs.{" "}
+                  Start raising your first round of angel investments with The
+                  Capital HUB. At its very core The Capital HUB focuses on
+                  finding ideal and right strategic investors to Support,
+                  Mentor, and guide founders to experience the full potential of
+                  raising investment from an angel. With a closed curated
+                  network of over 1000+ angels, The Capital HUB is now your
+                  one-stop destination for all your fundraising needs.{" "}
                 </p>
 
                 <p>
@@ -112,9 +115,10 @@ const Fundraising = () => {
                 <img src={listIcon} alt="image" />
                 <div>
                   <b>
-                    {" "}Create an
-                    <span style={{ color: "#FD5901" }}> MVP</span>{" "}
-                    (minimal viable product) or a prototype.
+                    {" "}
+                    Create an
+                    <span style={{ color: "#FD5901" }}> MVP</span> (minimal
+                    viable product) or a prototype.
                   </b>
                   Once you have the right idea. Now start building a niche
                   product that can attract a few early customers where you can
@@ -177,7 +181,12 @@ const Fundraising = () => {
               <li>
                 <img src={listIcon} alt="image" />
                 <div>
-                  <b>Approach by cold <span style={{color:"#FD5901"}}>emails and LinkedIn</span> </b>
+                  <b>
+                    Approach by cold{" "}
+                    <span style={{ color: "#FD5901" }}>
+                      emails and LinkedIn
+                    </span>{" "}
+                  </b>
                   Once the investor list is created, start approaching the
                   investors providing them sufficient amount of information and
                   an ample amount of time to get back to you and discuss more.

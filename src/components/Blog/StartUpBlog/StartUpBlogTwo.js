@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./style.scss";
 import BlogImageOne from "../../../Images/blog/Rectangle 1271.png";
 import SearchIcon from "../../../Images/blog/Combined-Shape.svg";
@@ -9,7 +9,10 @@ import inIcon from "../../../Images/blog/typcn_social-instagram.svg";
 import BlogtwoImage from "../../../Images/blog/eighttips.webp";
 const StartUpBlogTwo = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
-
+  useEffect(() => {
+    document.title =
+      "8 Tips to start raising Angel investments for startups | The Capital Hub";
+  }, []);
   return (
     <>
       <div className="container blog_detailed_container">
@@ -123,7 +126,7 @@ const StartUpBlogTwo = () => {
                 your idea to{" "}
                 <a href="gmail.com">investments.capitalhub@gmail.com</a>
               </p>
-              <br/>
+              <br />
               <p>Let’s Build a Valuable venture together.</p>
               <a href="http://thecapitalhub.in/">thecapitalhub.in</a>
 

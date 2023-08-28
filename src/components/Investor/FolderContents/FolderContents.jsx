@@ -9,6 +9,7 @@ const FolderContents = () => {
   const { username } = useParams();
   const [user, setUser] = useState([]);
   useEffect(() => {
+    document.title = "Documents | The Capital Hub";
     getUserById(username)
       .then(({ data }) => {
         setUser(data);

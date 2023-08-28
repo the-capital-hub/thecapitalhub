@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./StartupConsulting.scss";
 import serviceTwoIcon from "../../../Images/service/Group 15405.svg";
 import BackIcon from "../../../Images/BackIcon.svg";
@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import listIcon from "../../../Images/ListDot.svg";
 
 const StartupConsulting = () => {
+  useEffect(() => {
+    document.title = "Start Up Counselling Service | The Capital Hub";
+  }, []);
   return (
     <>
       <div className="container startup-consulting_main_container ">
