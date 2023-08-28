@@ -21,7 +21,7 @@ const API = Object.freeze({
   postNewPassword: `${baseUrl}/users/resetPassword`,
   investNow: `${baseUrl}/startUp/investNow`,
   changePassword: `${baseUrl}/users/changePassword`,
-  likeUnlikePost: `${baseUrl}api/posts/likeUnlikePost`,
+  likeUnlikePost: `${baseUrl}/api/posts/likeUnlikePost`,
 });
 
 export default API;

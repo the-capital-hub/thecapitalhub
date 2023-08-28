@@ -38,7 +38,7 @@ const FeedPostCard = ({
 
   useEffect(() => {
     setLiked(likes.includes(loggedInUser._id));
-  }, [liked]);
+  }, []);
 
   const likeUnlikeHandler = async () => {
     try {
@@ -138,12 +138,21 @@ const FeedPostCard = ({
             <div className="row feedpostcard_footer mb-2">
               <div className="col-8">
                 <div className="feedpostcard_footer_like_comment d-flex gap-2">
-                  <img
-                    src={liked ? fireIcon : bwFireIcon}
-                    width={18}
-                    alt="like post"
-                    onClick={likeUnlikeHandler}
-                  />
+                  {liked ? (
+                    <img
+                      src={fireIcon}
+                      width={18}
+                      alt="like post"
+                      onClick={likeUnlikeHandler}
+                    />
+                  ) : (
+                    <img
+                      src={bwFireIcon}
+                      width={18}
+                      alt="like post"
+                      onClick={likeUnlikeHandler}
+                    />
+                  )}
                   <img src={commentIcon} width={16} alt="comment post" />
                 </div>
               </div>

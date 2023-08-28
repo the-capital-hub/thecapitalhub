@@ -230,7 +230,10 @@ export const postNewPassword = async (password, token) => {
 
 export const likeUnlikeAPI = async (postId) => {
   try {
-    const response = await axiosInstance.post(`API.likeUnlikePost/${postId}`);
+    console.log(`${API.likeUnlikePost}/${postId}`);
+    const response = await axiosInstance.post(
+      `${API.likeUnlikePost}/${postId}`
+    );
     return response;
   } catch (error) {
     console.error("Error: ", error);
