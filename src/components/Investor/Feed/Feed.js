@@ -72,9 +72,12 @@ const Feed = () => {
                     video,
                     image,
                     createdAt,
+                    likes,
+                    _id,
                   }) => (
                     <FeedPostCard
                       key={Math.random()}
+                      postId={_id}
                       designation={designation}
                       profilePicture={profilePicture}
                       description={description}
@@ -83,6 +86,7 @@ const Feed = () => {
                       video={video}
                       image={image}
                       createdAt={createdAt}
+                      likes={likes}
                     />
                   )
                 )

@@ -1,17 +1,20 @@
-import React from "react";
-import profilePic from "../../../../Images/investorIcon/profilePic.webp";
+import React, { useEffect } from "react";
 import locationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
 import HomeIcon from "../../../../Images/HomeIcon.svg";
-import ThreeODotIcon from "../../../../Images/ThreeDotIcon.svg";
+// import ThreeODotIcon from "../../../../Images/ThreeDotIcon.svg";
 import "./feedPostCard.scss";
 import shareIcon from "../../../../Images/post/share.png";
-import fireIcon from "../../../../Images/post/fire.png";
+import fireIcon from "../../../../Images/post/like-fire.png";
+import bwFireIcon from "../../../../Images/post/unlike-fire.png";
 import commentIcon from "../../../../Images/post/comment.svg";
 import saveIcon from "../../../../Images/post/save.svg";
 import TimeAgo from "timeago-react";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import { likeUnlikeAPI } from "../../../../Service/user";
 
 const FeedPostCard = ({
+  postId,
   description,
   firstName,
   lastName,
@@ -20,6 +23,7 @@ const FeedPostCard = ({
   createdAt,
   profilePicture,
   designation,
+  likes,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
@@ -27,6 +31,21 @@ const FeedPostCard = ({
     try {
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const [liked, setLiked] = useState(false);
+
+  useEffect(() => {
+    setLiked(likes.includes(loggedInUser._id));
+  }, []);
+
+  const likeUnlikeHandler = async () => {
+    try {
+      await likeUnlikeAPI(postId);
+      setLiked(!liked);
+    } catch (error) {
+      console.log("Error liking post: ", error);
     }
   };
 
@@ -119,13 +138,27 @@ const FeedPostCard = ({
             <div className="row feedpostcard_footer mb-2">
               <div className="col-8">
                 <div className="feedpostcard_footer_like_comment d-flex gap-2">
-                  <img src={fireIcon} width={18} alt="like post"/>
-                  <img src={commentIcon} width={16}  alt="comment post"/>
+                  {liked ? (
+                    <img
+                      src={fireIcon}
+                      width={18}
+                      alt="like post"
+                      onClick={likeUnlikeHandler}
+                    />
+                  ) : (
+                    <img
+                      src={bwFireIcon}
+                      width={18}
+                      alt="like post"
+                      onClick={likeUnlikeHandler}
+                    />
+                  )}
+                  <img src={commentIcon} width={16} alt="comment post" />
                 </div>
               </div>
               <div className="col-4 d-flex align-items-center gap-3 justify-content-end">
-                <img src={shareIcon} width={16} alt="share post"/>
-                <img src={saveIcon} width={16} alt="save post"/>
+                <img src={shareIcon} width={16} alt="share post" />
+                <img src={saveIcon} width={16} alt="save post" />
               </div>
             </div>
           </div>
