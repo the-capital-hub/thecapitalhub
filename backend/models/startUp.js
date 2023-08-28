@@ -2,6 +2,14 @@ import { Schema, model } from "mongoose";
 
 const startUpSchema = new Schema(
   {
+    colorCard: {
+      last_round_investment: String,
+      total_investment: String,
+      no_of_investers: String,
+      fund_ask:String,
+      valuation:String,
+      raised_funds:String,
+    },
     company: {
       type: String,
       required: true,

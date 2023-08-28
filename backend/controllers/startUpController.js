@@ -13,6 +13,7 @@ export const createStartUpController = async (req, res) => {
   try {
     const response = await createStartup(req.body);
     res.status(response.status).send(response);
+    return response
   } catch (error) {
     console.error(error);
     res.status(500).send({

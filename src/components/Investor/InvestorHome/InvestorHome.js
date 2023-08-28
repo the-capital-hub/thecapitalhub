@@ -12,7 +12,7 @@ import RecommendationCard from "../InvestorGlobalCards/Recommendation/Recommenda
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import CompanyDetailsCard from "../InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserAPI } from "../../../Service/user";
+import { getStartupByFounderId, updateUserAPI } from "../../../Service/user";
 import { loginSuccess } from "../../../Store/Action/userAction";
 import { getBase64 } from "../../../utils/getBase64";
 import CoinIcon from "../../../Images/investorView/Rectangle.png";
@@ -30,6 +30,34 @@ const InvestorHome = () => {
     experience: loggedInUser?.experience || "",
     profilePicture: loggedInUser.profilePicture || "",
   });
+
+  const [colorCardData, setColorCardData] = useState(null);
+
+  const [field, setField] = useState("last_round_investment");
+
+  const handleAmountChange = (currentfield, updatedAmount) => {
+    console.log(field);
+    console.log(currentfield);
+    setField(currentfield);
+    setColorCardData((prevData) => ({
+      ...prevData,
+      [currentfield]: updatedAmount,
+    }));
+  };
+
+  useEffect(() => {
+    getStartupByFounderId(loggedInUser._id).then(({ data }) => {
+      console.log("ssss__>", data.colorCard.last_round_investment);
+      setColorCardData({
+        last_round_investment: data.colorCard.last_round_investment,
+        total_investment: data.colorCard.total_investment,
+        no_of_investers: data.colorCard.no_of_investers,
+        fund_ask: data.colorCard.fund_ask,
+        valuation: data.colorCard.valuation,
+        raised_funds: data.colorCard.raised_funds,
+      });
+    });
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -383,50 +411,82 @@ const InvestorHome = () => {
 
             <div className="row">
               <div className="col-12 mt-2">
-                <div className="card_holder">
-                  <ColorCard
-                    color="white"
-                    background="#BB98FF"
-                    text="Last round investment"
-                    image={CoinIcon}
-                    amount={"500 M"}
-                  />
-                  <ColorCard
-                    color="white"
-                    background="#DAC191"
-                    text="Total Investment"
-                    image={CoinIcon}
-                    amount={"500 M"}
-                  />
-                  <ColorCard
-                    color="white"
-                    background="#DCDCDC"
-                    text="No.of Investers"
-                    image={CoinIcon}
-                    amount={"500 M"}
-                  />
-                  <ColorCard
-                    color="white"
-                    background="#2B2B2B"
-                    text="Fund ask"
-                    image={CoinIcon}
-                    amount={"500 M"}
-                  />
-                  <ColorCard
-                    color="white"
-                    background="#FF7373"
-                    text="Valuation"
-                    image={CoinIcon}
-                    amount={"500 M"}
-                  />
-                  <ColorCard
-                    color="white"
-                    background="#9198DA"
-                    text="Raised funds"
-                    image={CoinIcon}
-                    amount={"500 M"}
-                  />
-                </div>
+                {colorCardData && (
+                  <div className="card_holder">
+                    <ColorCard
+                      color="white"
+                      background="#BB98FF"
+                      text="Last round investment"
+                      image={CoinIcon}
+                      amount={colorCardData.last_round_investment}
+                      onAmountChange={(amount) =>
+                        handleAmountChange("last_round_investment", amount)
+                      }
+                      field={field}
+                      colorCardData={colorCardData}
+                    />
+                    <ColorCard
+                      color="white"
+                      background="#DAC191"
+                      text="Total Investment"
+                      image={CoinIcon}
+                      amount={colorCardData.total_investment}
+                      onAmountChange={(amount) =>
+                        handleAmountChange("total_investment", amount)
+                      }
+                      field={field}
+                      colorCardData={colorCardData}
+                    />
+                    <ColorCard
+                      color="white"
+                      background="#DCDCDC"
+                      text="No.of Investers"
+                      image={CoinIcon}
+                      amount={colorCardData.no_of_investers}
+                      onAmountChange={(amount) =>
+                        handleAmountChange("no_of_investers", amount)
+                      }
+                      field={field}
+                      colorCardData={colorCardData}
+                    />
+                    <ColorCard
+                      color="white"
+                      background="#2B2B2B"
+                      text="Fund ask"
+                      image={CoinIcon}
+                      amount={colorCardData.fund_ask}
+                      onAmountChange={(amount) =>
+                        handleAmountChange("fund_ask", amount)
+                      }
+                      field={field}
+                      colorCardData={colorCardData}
+                    />
+                    <ColorCard
+                      color="white"
+                      background="#FF7373"
+                      text="Valuation"
+                      image={CoinIcon}
+                      amount={colorCardData.valuation}
+                      onAmountChange={(amount) =>
+                        handleAmountChange("valuation", amount)
+                      }
+                      field={field}
+                      colorCardData={colorCardData}
+                    />
+                    <ColorCard
+                      color="white"
+                      background="#9198DA"
+                      text="Raised funds"
+                      image={CoinIcon}
+                      amount={colorCardData.raised_funds}
+                      onAmountChange={(amount) =>
+                        handleAmountChange("raised_funds", amount)
+                      }
+                      field={field}
+                      colorCardData={colorCardData}
+                    />
+                  </div>
+                )}
               </div>
             </div>
           </div>
