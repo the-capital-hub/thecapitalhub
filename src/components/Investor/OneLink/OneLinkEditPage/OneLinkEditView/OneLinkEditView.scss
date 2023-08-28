@@ -96,7 +96,7 @@
         }
 
         .table_section {
-            max-width: 1000px;
+            max-width: 1400px;
             width: 96%;
             display: flex;
             overflow-x: scroll;
@@ -104,11 +104,12 @@
         }
 
         .team_section {
-            width: 100%;
+            width: 96%;
             overflow-x: scroll;
             padding-bottom: 20px;
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
+            margin-left: 3%;
         }
 
         .fund_asking_deployment {
@@ -174,10 +175,12 @@
     }
     .editview_container {
         .box_container {
+            padding-top: 15px;
+            margin-top: 0px;
             .team_section {
                 display: flex;
-                flex-direction: column;
-                overflow-x: hidden;
+                // flex-direction: column;
+                // overflow-x: hidden;
                 input {
                     font-size: 12px;
                 }

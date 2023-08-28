@@ -49,7 +49,7 @@ const OnePagePreview = () => {
           </section> */}
 
           <section className="company_description">
-            <img src={PramodSq} alt="image" />
+            <img src={company.logo} alt="image" />
             <div className="company_text">
               <h6>{company?.company || `Enter company description`} </h6>
               <hr />
@@ -80,8 +80,12 @@ const OnePagePreview = () => {
           </section>
 
           <section className="row fund_asking_deployment">
-            <FundAsking company={company} />
-            <FundDeployment />
+            <div className="funding_divider">
+              <FundAsking company={company} />
+            </div>
+            <div className="funding_divider">
+              <FundDeployment />
+            </div>
           </section>
         </div>
       </div>

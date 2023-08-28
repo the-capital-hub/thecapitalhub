@@ -23,11 +23,11 @@ const FundAsking = ({ company, page }) => {
   return (
     <>
       <div className="row fund_asking_container">
-        <div className="col-md-12">
+        <div className="col-md-12 col-lg-12">
           <div className="card">
             <div className="card-body">
               <h5 className="card-title">Funding Ask (in lakhs)</h5>
-              <img src={PramodSq} alt="image" style={{height:"120px", width:"120px"}}/>
+              <img src={company.logo} alt="image" style={{height:"120px", width:"120px"}}/>
               <hr />
               <div className="amount_text">
                 {page === "oneViewEdit" ? (

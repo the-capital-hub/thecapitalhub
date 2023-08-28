@@ -5,7 +5,8 @@
 
     .card {
         position: relative;
-        height: 138px;
+        // height: 138px;
+        // max-height: 140px;
         margin-bottom: 20px;
         border-radius: 4px;
         background: #fff;
@@ -15,6 +16,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+        overflow-y: auto;
+
 
             .card-title {
                 background-color: #fff;

@@ -66,3 +66,43 @@
         }
     }
 }
+
+@media (max-width: 820px) {
+
+    .onelink_market_container {
+   
+    
+        .before_card {
+          
+        }
+    
+        .card {
+        
+    
+            .card-body {
+              overflow: hidden;
+              width: 100%;
+    
+                .card-title {
+               
+                }
+    
+                .card-text {
+                 
+    
+                }
+    
+                input {
+                    width: 80%;
+                    height: 45px;
+                    flex-shrink: 0;
+                    outline: none; 
+                    &.focus{
+                        outline: none;
+                    }
+                }
+            }
+        }
+    }
+
+}
