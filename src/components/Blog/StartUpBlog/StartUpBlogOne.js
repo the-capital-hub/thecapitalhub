@@ -17,7 +17,7 @@ const StartUpBlogOne = () => {
     <>
       <div className="container blog_detailed_container">
         <div className="category_section">
-          <span className="blog">Blog</span> >{" "}
+          <span className="blog">Blog</span> {"> "}
           <span className="category">Start Up</span>
         </div>
         <hr />
@@ -38,8 +38,17 @@ const StartUpBlogOne = () => {
               </div>
             </div>
             <div className="col-12 image_section">
-              <img src={BlogoneImage} alt="img" />
-              <p>The Power of Mentorship in Startups:</p>
+              <div className="d-flex">
+                <img
+                  src={BlogoneImage}
+                  width={"100%"}
+                  style={{ maxWidth: "600px", objectFit: "contain" }}
+                  className="mx-auto my-lg-3"
+                  alt="img"
+                />
+              </div>
+
+              <u>The Power of Mentorship in Startups:</u>
               <p>
                 How Growthive Is Empowering Angel Investors to Be More Than Just
                 Funders
@@ -68,7 +77,15 @@ const StartUpBlogOne = () => {
                 mentorship is a critical component of success for many
                 entrepreneurs.
               </p>
-
+              <div className="d-flex">
+                <img
+                  src="https://img.freepik.com/free-vector/businesswomen-presenting-graph-colleague_74855-2353.jpg?size=626&ext=jpg&ga=GA1.1.176513024.1692192688&semt=ais"
+                  width={"100%"}
+                  style={{ maxWidth: "600px", objectFit: "contain" }}
+                  className="mx-auto my-lg-3"
+                  alt="img"
+                />
+              </div>
               <p>
                 The benefits of mentorship are many. First, mentors can provide
                 valuable advice and guidance based on their own experiences.
@@ -106,6 +123,15 @@ const StartUpBlogOne = () => {
                 startups on a deeper level and to make more informed investment
                 decisions down the road.
               </p>
+              <div className="d-flex">
+                <img
+                  src="https://img.freepik.com/free-vector/hand-drawn-flat-design-innovation-concept_23-2149149286.jpg?w=996&t=st=1693218161~exp=1693218761~hmac=8781da4f49ba7978b238936a183b3803f2acfe33143758a3afc5fa9f9ee879c6"
+                  width={"100%"}
+                  style={{ maxWidth: "600px", objectFit: "contain" }}
+                  className="mx-auto my-lg-3"
+                  alt="img"
+                />
+              </div>
               <p>
                 In conclusion, the power of mentorship in startups cannot be
                 overstated. Mentorship can provide valuable advice, guidance,
@@ -137,10 +163,10 @@ const StartUpBlogOne = () => {
 
               <p>
                 <b>Pramod Badiger</b> is a dynamic entrepreneur and the{" "}
-                <b>founder and CEO of Capital HUB.</b> Capital HUB is a company
-                that helps startups raise angel investments and helps investors
-                invest in high-growth startups. As a founder, Pramod is
-                passionate about connecting startups with potential investors
+                <b>founder and CEO of The Capital HUB.</b> The Capital HUB is a
+                company that helps startups raise angel investments and helps
+                investors invest in high-growth startups. As a founder, Pramod
+                is passionate about connecting startups with potential investors
                 and providing them with the resources and support they need to
                 succeed. He is also building an angel networking platform to
                 bridge the gap between startups and angel investors, making it
