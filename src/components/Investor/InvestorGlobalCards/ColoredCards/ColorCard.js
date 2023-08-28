@@ -41,6 +41,8 @@ const ColorCard = ({
       });
     console.log("loggedInUser-->", loggedInUser.colorCard);
   };
+  console.log("fileee---->", field,
+  colorCardData,)
 
   return (
     <div
