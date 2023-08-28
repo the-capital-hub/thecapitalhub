@@ -8,6 +8,10 @@ import {
   commentOnPost,
   getComments,
   savePost,
+  getAllSavedPostCollections,
+  getSavedPostsByCollection,
+  getLikeCount,
+  getUsersWhoLikedPost,
 } from "../services/postService";
 
 export const createPost = async (req, res) => {
@@ -118,6 +122,7 @@ export const commentOnPostController = async (req, res) => {
   }
 };
 
+//get comments
 export const getCommentsController = async (req, res) => {
   try {
     const { postId } = req.params;
@@ -144,6 +149,65 @@ export const savePostController = async (req, res) => {
     return res.status(500).send({
       status: 500,
       message: "An error occurred while saving the post.",
+    });
+  }
+};
+
+//get saved post 
+export const getAllSavedPostCollectionsController = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const response = await getAllSavedPostCollections(userId);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting saved post collections.",
+    });
+  }
+};
+
+//get saved post by collection
+export const getSavedPostsByCollectionController = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const { collectionName } = req.body;
+    const response = await getSavedPostsByCollection(userId, collectionName);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred getting saved post.",
+    });
+  }
+};
+
+//get likes count
+export const getLikeCountController = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const result = await getLikeCount(postId);
+    return res.status(result.status).json(result);
+  } catch (error) {
+    return res.status(500).send({
+      status: 500,
+      message: 'An error occurred while getting likes count.',
+    });
+  }
+};
+
+//get users who liked the post
+export const getUsersWhoLikedPostController = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const result = await getUsersWhoLikedPost(postId);
+    return res.status(result.status).json(result);
+  } catch (error) {
+    return res.status(500).send({
+      status: 500,
+      message: 'An error occurred while getting liked users.',
     });
   }
 };
