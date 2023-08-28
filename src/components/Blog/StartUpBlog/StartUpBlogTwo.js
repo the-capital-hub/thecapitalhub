@@ -24,9 +24,9 @@ const StartUpBlogTwo = () => {
 
         <div className="row">
           <div className="col-lg-12 col-md-12  seventy ">
-            <h1 className="headingOne">
+            <h2 className="headingOne">
               8 Tips to start raising Angel investments for startups
-            </h1>
+            </h2>
 
             <div className="time_icon">
               <span>Published on Jan 21, 2023</span>
@@ -130,7 +130,7 @@ const StartUpBlogTwo = () => {
               <p>Let’s Build a Valuable venture together.</p>
               <a href="http://thecapitalhub.in/">thecapitalhub.in</a>
 
-              <h1 className="inside_seventy_heading">About the author :</h1>
+              <h2 className="inside_seventy_heading">About the author :</h2>
 
               <p>
                 <b>Pramod Badiger</b> is a dynamic entrepreneur and the{" "}

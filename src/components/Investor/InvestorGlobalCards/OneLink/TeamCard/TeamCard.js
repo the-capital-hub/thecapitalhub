@@ -34,7 +34,7 @@ const TeamCard = ({ index, profile, name, designation, page, company }) => {
         <div className="card">
           <div className="card-body">
             <h5 className="card-title">Team {index}</h5>
-            <img src={PramodSq} alt="image" style={{height:"120px", width:"120px"}} />
+            <img src={profile} alt="image" style={{height:"120px", width:"120px"}} />
             <div className="company_text">
               {page === "oneLinkEdit" ? (
                 <>

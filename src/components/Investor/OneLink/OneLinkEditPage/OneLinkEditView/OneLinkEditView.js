@@ -99,7 +99,7 @@ const OneLinkEditView = () => {
           </section> */}
           <div className="download_preview">
             <section className="company_description">
-              <img src={PramodSq} alt="image" style={{height:"120px", width:"120px"}}/>
+              <img src={company.logo} alt="image" style={{height:"120px", width:"120px"}}/>
               <div className="company_text">
                 <h6>
                   <input
