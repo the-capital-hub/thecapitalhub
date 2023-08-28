@@ -15,7 +15,7 @@ const BlogDetailed = () => {
     <>
       <div className="container blog_detailed_container">
         <div className="category_section">
-          <span className="blog">Blog</span> >{" "}
+          <span className="blog">Blog</span> {"> "}
           <span className="category">Web Development</span>
         </div>
         <hr />

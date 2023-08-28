@@ -44,7 +44,7 @@ const StartUpBlogThree = () => {
                 <img className="social_icon" src={inIcon} alt="img" />
               </div>
             </div>
-            <div className="col-12 image_section">
+            <div className="col-12 image_section mt-5">
               <p>
                 Building a great startup requires a combination of passion,
                 creativity, and hard work. Here are some key steps that can help
@@ -60,7 +60,15 @@ const StartUpBlogThree = () => {
                 specific problem, you can develop a clear and compelling value
                 proposition for your startup.
               </p>
-              <img src={BlogthreeImage} alt="img" />
+              <div className="d-flex">
+                <img
+                  src={BlogthreeImage}
+                  width={"100%"}
+                  style={{ maxWidth: "600px", objectFit: "contain" }}
+                  className="mx-auto my-lg-3"
+                  alt="img"
+                />
+              </div>
 
               <p>
                 <b>Conduct market research: </b>
@@ -71,8 +79,15 @@ const StartUpBlogThree = () => {
                 and benefits of your product or service, and will also help you
                 understand the competitive landscape.
               </p>
-              <img src={threeTwoImage} alt="img" />
-
+              <div className="d-flex">
+                <img
+                  src={threeTwoImage}
+                  width={"100%"}
+                  style={{ maxWidth: "600px", objectFit: "contain" }}
+                  className="mx-auto my-lg-3"
+                  alt="img"
+                />
+              </div>
               <p>
                 <b>Build a team: </b>A great startup requires a great team.
                 Building a team of people who share your vision and are
@@ -81,8 +96,15 @@ const StartUpBlogThree = () => {
                 skills, who can work well together, and who have a track record
                 of success.
               </p>
-              <img src={threeThreeImage} alt="img" />
-
+              <div className="d-flex">
+                <img
+                  src={threeThreeImage}
+                  width={"100%"}
+                  style={{ maxWidth: "600px", objectFit: "contain" }}
+                  className="mx-auto my-lg-3"
+                  alt="img"
+                />
+              </div>
               <p>
                 <b>Develop a business plan: </b>A business plan is a critical
                 tool that will help you define your startup’s objectives,
@@ -90,8 +112,15 @@ const StartUpBlogThree = () => {
                 potential challenges and risks, and will provide a roadmap for
                 growth.{" "}
               </p>
-              <img src={threeFourImage} alt="img" />
-
+              <div className="d-flex">
+                <img
+                  src={threeFourImage}
+                  width={"100%"}
+                  style={{ maxWidth: "600px", objectFit: "contain" }}
+                  className="mx-auto my-lg-3"
+                  alt="img"
+                />
+              </div>
               <p>
                 <b>Create a Minimum Viable Product (MVP): </b>Once you have a
                 solid business plan, it is important to develop a Minimum Viable
@@ -99,8 +128,15 @@ const StartUpBlogThree = () => {
                 have the core features and functionality that your customers
                 need, but it does not need to be fully polished.
               </p>
-              <img src={threeFiveImage} alt="img" />
-
+              <div className="d-flex">
+                <img
+                  src={threeFiveImage}
+                  width={"100%"}
+                  style={{ maxWidth: "600px", objectFit: "contain" }}
+                  className="mx-auto my-lg-3"
+                  alt="img"
+                />
+              </div>
               <p>
                 <b>Test and iterate: </b>
                 Once you have an MVP, it is important to test it with customers
@@ -108,8 +144,15 @@ const StartUpBlogThree = () => {
                 for improvement and will also give you insight into what
                 features and functionality your customers value most.
               </p>
-              <img src={threeSixImage} alt="img" />
-
+              <div className="d-flex">
+                <img
+                  src={threeSixImage}
+                  width={"100%"}
+                  style={{ maxWidth: "600px", objectFit: "contain" }}
+                  className="mx-auto my-lg-3"
+                  alt="img"
+                />
+              </div>
               <p>
                 <b>Raise funding: </b>
                 To scale your startup and grow it, you will need to raise
@@ -118,8 +161,15 @@ const StartUpBlogThree = () => {
                 solid pitch and a clear plan for how you will use the funding to
                 grow your business.
               </p>
-              <img src={threeSevenImage} alt="img" />
-
+              <div className="d-flex">
+                <img
+                  src={threeSevenImage}
+                  width={"100%"}
+                  style={{ maxWidth: "600px", objectFit: "contain" }}
+                  className="mx-auto my-lg-3"
+                  alt="img"
+                />
+              </div>
               <p>
                 <b>Scale and grow: </b>
                 Once you have a solid product, a great team, and funding in
@@ -128,8 +178,15 @@ const StartUpBlogThree = () => {
                 as expanding your customer base, developing new features and
                 functionality, and building strategic partnerships.
               </p>
-              <img src={threeEightImage} alt="img" />
-
+              <div className="d-flex">
+                <img
+                  src={threeEightImage}
+                  width={"100%"}
+                  style={{ maxWidth: "600px", objectFit: "contain" }}
+                  className="mx-auto my-lg-3"
+                  alt="img"
+                />
+              </div>
               <p>
                 Starting a successful startup is a challenging and complex
                 process, but by following these steps and staying focused on
@@ -143,18 +200,19 @@ const StartUpBlogThree = () => {
                   Linkedin
                 </a>
               </p>
-              <br />
               <p>Let’s Build a Valuable venture together.</p>
-              <a href="http://thecapitalhub.in/">thecapitalhub.in</a>
+              <a className="mb-5" href="http://thecapitalhub.in/">
+                thecapitalhub.in
+              </a>
 
               <h2 className="inside_seventy_heading">About the author :</h2>
 
               <p>
                 <b>Pramod Badiger</b> is a dynamic entrepreneur and the{" "}
-                <b>founder and CEO of Capital HUB.</b> Capital HUB is a company
-                that helps startups raise angel investments and helps investors
-                invest in high-growth startups. As a founder, Pramod is
-                passionate about connecting startups with potential investors
+                <b>founder and CEO of The Capital HUB.</b> The Capital HUB is a
+                company that helps startups raise angel investments and helps
+                investors invest in high-growth startups. As a founder, Pramod
+                is passionate about connecting startups with potential investors
                 and providing them with the resources and support they need to
                 succeed. He is also building an angel networking platform to
                 bridge the gap between startups and angel investors, making it
