@@ -8,7 +8,7 @@ import AfterSuccessPopUp from "../AfterSuccessPopUp/AfterSuccessPopUp";
 const NewPasswordPopUp = ({ onClose }) => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false);
   const location = useLocation(); // Get the location object
 
   const handlePasswordChange = (e) => {
@@ -21,17 +21,17 @@ const NewPasswordPopUp = ({ onClose }) => {
       if (token) {
         console.log("Token:", token);
         console.log("Password:", password);
-  
+
         const response = await postNewPassword(password, token);
         console.log("Response:", response.data); // Log the response from the API
-        if(response.status=='200'){
-          setShowSuccess(true)
+        if (response.status == "200") {
+          setShowSuccess(true);
         }
       } else {
         console.log("Token not found in URL");
       }
     } catch (error) {
-      alert("Invalid User Details or Token")
+      alert("Invalid User Details or Token");
       console.error("Error updating password:", error);
     }
   };
@@ -41,6 +41,10 @@ const NewPasswordPopUp = ({ onClose }) => {
     navigate("/login");
   };
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Reset Password | The Capital Hub";
+  }, []);
 
   return (
     <div className="reset_password_popup">
@@ -71,7 +75,9 @@ const NewPasswordPopUp = ({ onClose }) => {
           </button>
         </div>
       </div>
-      {showSuccess &&  <AfterSuccessPopUp onClose={handleClosePopup} passwordChange={true} />}
+      {showSuccess && (
+        <AfterSuccessPopUp onClose={handleClosePopup} passwordChange={true} />
+      )}
     </div>
   );
 };

@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./BlogDetailed.scss";
 import BlogImageOne from "../../../Images/blog/Rectangle 1271.png";
 import SearchIcon from "../../../Images/blog/Combined-Shape.svg";
 import PopularArticle from "../../Card/PopularArticle/PopularArticle";
-import fbIcon from "../../../Images/blog/typcn_social-facebook.svg"
-import twIcon from "../../../Images/blog/typcn_social-twitter.svg"
-import inIcon from "../../../Images/blog/typcn_social-instagram.svg"
-
-
+import fbIcon from "../../../Images/blog/typcn_social-facebook.svg";
+import twIcon from "../../../Images/blog/typcn_social-twitter.svg";
+import inIcon from "../../../Images/blog/typcn_social-instagram.svg";
 
 const BlogDetailed = () => {
+  useEffect(() => {
+    document.title = "Web Development Blog | The Capital Hub";
+  }, []);
   return (
     <>
       <div className="container blog_detailed_container">
@@ -97,17 +98,15 @@ const BlogDetailed = () => {
                 Signal'
               </h3>
               <h2>Subscribe now</h2>
-              <input type="email" placeholder="Enter Email Id"/>
+              <input type="email" placeholder="Enter Email Id" />
               <button>Subscribe</button>
             </div>
 
             <div className="popular_article">
-                <h1>Popular Articles</h1>
-                <PopularArticle image={BlogImageOne} button={"Stock Market"}/>
-                <PopularArticle image={BlogImageOne} button={"Stock Market"}/>
-                <PopularArticle image={BlogImageOne} button={"Stock Market"}/>
-
-
+              <h1>Popular Articles</h1>
+              <PopularArticle image={BlogImageOne} button={"Stock Market"} />
+              <PopularArticle image={BlogImageOne} button={"Stock Market"} />
+              <PopularArticle image={BlogImageOne} button={"Stock Market"} />
             </div>
           </div>
         </div>

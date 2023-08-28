@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./style.scss";
 import BlogImageOne from "../../../Images/blog/Rectangle 1271.png";
 import SearchIcon from "../../../Images/blog/Combined-Shape.svg";
@@ -9,6 +9,9 @@ import inIcon from "../../../Images/blog/typcn_social-instagram.svg";
 import BlogoneImage from "../../../Images/blog/1 AsPGU1Q42C9lsVRoMg91Nw.webp";
 
 const StartUpBlogOne = () => {
+  useEffect(() => {
+    document.title = "Why mentoring matters? Blog | The Capital Hub";
+  }, []);
   window.scrollTo({ top: 0, behavior: "smooth" });
   return (
     <>
@@ -133,18 +136,18 @@ const StartUpBlogOne = () => {
               <h1 className="inside_seventy_heading">About the author :</h1>
 
               <p>
-                <b>Pramod Badiger</b> is a dynamic entrepreneur and the <b>founder and CEO
-                of Capital HUB.</b> Capital HUB is a company that helps startups
-                raise angel investments and helps investors invest in
-                high-growth startups. As a founder, Pramod is passionate about
-                connecting startups with potential investors and providing them
-                with the resources and support they need to succeed. He is also
-                building an angel networking platform to bridge the gap between
-                startups and angel investors, making it easier for them to
-                connect and collaborate. With his deep understanding of the
-                startup ecosystem and his ability to identify and capitalize on
-                new opportunities, Pramod is well-positioned to lead Capital HUB
-                to success.
+                <b>Pramod Badiger</b> is a dynamic entrepreneur and the{" "}
+                <b>founder and CEO of Capital HUB.</b> Capital HUB is a company
+                that helps startups raise angel investments and helps investors
+                invest in high-growth startups. As a founder, Pramod is
+                passionate about connecting startups with potential investors
+                and providing them with the resources and support they need to
+                succeed. He is also building an angel networking platform to
+                bridge the gap between startups and angel investors, making it
+                easier for them to connect and collaborate. With his deep
+                understanding of the startup ecosystem and his ability to
+                identify and capitalize on new opportunities, Pramod is
+                well-positioned to lead Capital HUB to success.
               </p>
 
               {/* <h1 className="inside_seventy_heading">

@@ -21,6 +21,7 @@ const Feed = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   useEffect(() => {
+    document.title = "Home | The Capital Hub";
     getAllPostsAPI()
       .then(({ data }) => {
         setAllPosts(data);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./service.scss";
 import serviceSixIcon from "../../Images/service/Group 15404.svg";
 import serviceTwoIcon from "../../Images/service/Group 15405.svg";
@@ -19,6 +19,9 @@ const Service = () => {
     setShowMore(!showMore);
   };
   const navigate = useNavigate();
+  useEffect(() => {
+    document.title = "Services | The Capital Hub";
+  }, []);
   return (
     <>
       <div className="container-fluid service_main_container">

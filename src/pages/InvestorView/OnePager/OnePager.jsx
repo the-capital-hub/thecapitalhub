@@ -26,6 +26,7 @@ const OnePager = () => {
   const [onePager, setOnePager] = useState([]);
 
   useEffect(() => {
+    document.title = "OnePager - One Link | The Capital Hub";
     getOnePager(username)
       .then(({ data }) => {
         setOnePager(data);
@@ -153,7 +154,12 @@ const OnePager = () => {
         <Title title={"Team"} />
         <div className="cards">
           {onePager?.team?.map((team, index) => (
-            <TeamsCard key={index} image={team.image} name={team.name} designation={team.designation} />
+            <TeamsCard
+              key={index}
+              image={team.image}
+              name={team.name}
+              designation={team.designation}
+            />
           ))}
         </div>
       </div>

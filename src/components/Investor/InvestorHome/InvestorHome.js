@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./investorHome.scss";
 // import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
@@ -104,6 +104,10 @@ const InvestorHome = () => {
     dispatch(loginSuccess(data));
     setIsBioEditable(!isBioEditable);
   };
+
+  useEffect(() => {
+    document.title = "Profile | The Capital Hub";
+  }, []);
 
   return (
     <div className="container-fluid investorHome_main_container">

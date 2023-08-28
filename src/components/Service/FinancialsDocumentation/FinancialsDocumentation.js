@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./FinancialsDocumentation.scss";
 import serviceFourIcon from "../../../Images/service/Group 15407.svg";
 
 import listIcon from "../../../Images/ListDot.svg";
-import BackIcon from '../../../Images/BackIcon.svg'
+import BackIcon from "../../../Images/BackIcon.svg";
 import { Link } from "react-router-dom";
 
 const FinancialsDocumentation = () => {
+  useEffect(() => {
+    document.title = "Financial Documentation Service | The Capital Hub";
+  }, []);
   return (
     <>
       <div className="container financial-document_main_container">
         <div className="container">
-        <Link to={'/service'}><img src={BackIcon} alt="back"/>Back</Link>
+          <Link to={"/service"}>
+            <img src={BackIcon} alt="back" />
+            Back
+          </Link>
           <section className="heading_section_fund">
             <h1>
               We offer the best
@@ -172,7 +178,9 @@ const FinancialsDocumentation = () => {
             </div>
             <div>
               <h3>Easy to modify</h3>
-              <p>Fully editable file in which you can easily modify assumptions.</p>
+              <p>
+                Fully editable file in which you can easily modify assumptions.
+              </p>
             </div>
           </section>
         </div>

@@ -202,6 +202,10 @@ const Register = () => {
     setShowInvestor(true);
   };
 
+  useEffect(() => {
+    document.title = "Register | The Capital Hub";
+  }, []);
+
   return (
     <>
       <div className="row d-flex register_container">
@@ -324,7 +328,7 @@ const Register = () => {
                 />
               </div>
             </div>
-{/* 
+            {/* 
             <div className="form-check">
               <input
                 type="checkbox"

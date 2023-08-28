@@ -28,6 +28,7 @@ const Documentation = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = "Documentation | The Capital Hub";
     const getFolders = async () => {
       try {
         const res = await axios.get(`${baseURL}`);
@@ -72,7 +73,10 @@ const Documentation = () => {
               onClicked={() => navigate("/documentation/kycdetails")}
               text={"KYC Details"}
             />
-            <Card onClicked={() => navigate("/documentation/business")} text={"Business"} />
+            <Card
+              onClicked={() => navigate("/documentation/business")}
+              text={"Business"}
+            />
           </div>
         </div>
 

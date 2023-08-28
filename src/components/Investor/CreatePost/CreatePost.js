@@ -16,6 +16,10 @@ import { useSelector } from "react-redux";
 const CreatePost = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
+  useEffect(() => {
+    document.title = "Create a Post | The Capital Hub";
+  }, []);
+
   return (
     <div className="container-fluid createpost_container">
       <div className="row mt-2">

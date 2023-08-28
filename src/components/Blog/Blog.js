@@ -7,16 +7,18 @@ import LattestBlogCard from "../Card/LattestBlogCard/LattestBlogCard";
 import BlogoneImage from "../../Images/blog/1 AsPGU1Q42C9lsVRoMg91Nw.webp";
 import BlogtwoImage from "../../Images/blog/eighttips.webp";
 import BlogthreeImage from "../../Images/blog/BlogthreeImage.webp";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Blog = () => {
-
   const navigate = useNavigate();
 
   const handleCardClick = (route) => {
     navigate(route);
   };
 
+  useEffect(() => {
+    document.title = "Blogs | The Capital Hub";
+  }, []);
 
   return (
     <>
@@ -80,7 +82,7 @@ const Blog = () => {
               title={
                 "Why Mentoring Matters: Why Angel Investors Should Prioritize Mentorship Before Investing in a Startup"
               }
-              onClick={() => handleCardClick("/blog/startupOne")} 
+              onClick={() => handleCardClick("/blog/startupOne")}
             />
 
             <LattestBlogCard
