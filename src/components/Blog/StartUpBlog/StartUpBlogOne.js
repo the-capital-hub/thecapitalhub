@@ -21,10 +21,10 @@ const StartUpBlogOne = () => {
 
         <div className="row">
           <div className="col-lg-12 col-md-12 seventy ">
-            <h1 className="headingOne">
+            <h2 className="headingOne">
               Why Mentoring Matters: Why Angel Investors Should Prioritize
               Mentorship Before Investing in a Startup
-            </h1>
+            </h2>
 
             <div className="time_icon">
               <span>Published on May 1, 2023</span>
@@ -130,7 +130,7 @@ const StartUpBlogOne = () => {
               <p>Let’s Build a Valuable venture together.</p>
               <a href="http://thecapitalhub.in/">thecapitalhub.in</a>
 
-              <h1 className="inside_seventy_heading">About the author :</h1>
+              <h2 className="inside_seventy_heading">About the author :</h2>
 
               <p>
                 <b>Pramod Badiger</b> is a dynamic entrepreneur and the <b>founder and CEO
@@ -147,9 +147,9 @@ const StartUpBlogOne = () => {
                 to success.
               </p>
 
-              {/* <h1 className="inside_seventy_heading">
+              {/* <h2 className="inside_seventy_heading">
                 How to learn about the Web Development ?
-              </h1> */}
+              </h2> */}
               {/* <p>
                 Lorem ipsum dolor sit amet consectetur. At consequat purus
                 hendrerit proin risus Sit purus ante dictum in malesuada
@@ -163,9 +163,9 @@ const StartUpBlogOne = () => {
                 hendrerit proin risus Sit purus ante dictum in malesuada id.{" "}
               </p> */}
 
-              {/* <h1 className="inside_seventy_heading">
+              {/* <h2 className="inside_seventy_heading">
                 Top web development courses in India
-              </h1> */}
+              </h2> */}
 
               {/* <ol>
                 <li>Capital Hub</li>
@@ -200,7 +200,7 @@ const StartUpBlogOne = () => {
             </div>
 
             <div className="popular_article">
-              <h1>Popular Articles</h1>
+              <h2>Popular Articles</h2>
               <PopularArticle image={BlogImageOne} button={"Stock Market"} />
               <PopularArticle image={BlogImageOne} button={"Stock Market"} />
               <PopularArticle image={BlogImageOne} button={"Stock Market"} />

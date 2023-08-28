@@ -25,12 +25,12 @@ const Blog = () => {
           <div className="col-md-6">
             <h1 className="blog_title">Blog</h1>
           </div>
-          <div className="col-md-6 search_bar">
+          {/* <div className="col-md-6 search_bar">
             <div className="search-input-container">
               <img src={SearchIcon} className="search-icon fas fa-search" />
               <input type="search" placeholder="Search" />
             </div>
-          </div>
+          </div> */}
         </div>
         {/* <div className="row navbar_black">
           <ul className="navbar_list">
