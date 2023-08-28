@@ -3,7 +3,7 @@ import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProf
 import logoIcon from "../../../Images/manageAccount/Group 15186.svg";
 import profileIcon from "../../../Images/investorIcon/profilePic.webp";
 import { changePasswordAPI } from "../../../Service/user";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const InvestorManageAccount = () => {
   const initialForm = {
@@ -42,6 +42,10 @@ const InvestorManageAccount = () => {
       .catch(({ message }) => setMessage(message))
       .finally(() => setTimeout(() => setMessage(false), 3000));
   };
+
+  useEffect(() => {
+    document.title = "Manage Account | The Capital Hub";
+  }, []);
 
   return (
     <div className="container-fluid manage_account_container">

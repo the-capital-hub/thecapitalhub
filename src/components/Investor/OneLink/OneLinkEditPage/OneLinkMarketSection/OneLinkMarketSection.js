@@ -1,17 +1,3 @@
-// import React from 'react'
-// import './OneLinkMarketSection.scss'
-
-// const OneLinkMarketSection = () => {
-//   return (
-//   <>
-
-//   s
-//   </>
-//   )
-// }
-
-// export default OneLinkMarketSection
-
 import React from "react";
 import "./OneLinkMarketSection.scss";
 import { useSelector } from "react-redux";

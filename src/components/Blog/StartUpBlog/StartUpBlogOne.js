@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./style.scss";
 import BlogImageOne from "../../../Images/blog/Rectangle 1271.png";
 import SearchIcon from "../../../Images/blog/Combined-Shape.svg";
@@ -9,6 +9,9 @@ import inIcon from "../../../Images/blog/typcn_social-instagram.svg";
 import BlogoneImage from "../../../Images/blog/1 AsPGU1Q42C9lsVRoMg91Nw.webp";
 
 const StartUpBlogOne = () => {
+  useEffect(() => {
+    document.title = "Why mentoring matters? Blog | The Capital Hub";
+  }, []);
   window.scrollTo({ top: 0, behavior: "smooth" });
   return (
     <>
@@ -21,10 +24,10 @@ const StartUpBlogOne = () => {
 
         <div className="row">
           <div className="col-lg-12 col-md-12 seventy ">
-            <h1 className="headingOne">
+            <h2 className="headingOne">
               Why Mentoring Matters: Why Angel Investors Should Prioritize
               Mentorship Before Investing in a Startup
-            </h1>
+            </h2>
 
             <div className="time_icon">
               <span>Published on May 1, 2023</span>
@@ -130,26 +133,26 @@ const StartUpBlogOne = () => {
               <p>Let’s Build a Valuable venture together.</p>
               <a href="http://thecapitalhub.in/">thecapitalhub.in</a>
 
-              <h1 className="inside_seventy_heading">About the author :</h1>
+              <h2 className="inside_seventy_heading">About the author :</h2>
 
               <p>
-                <b>Pramod Badiger</b> is a dynamic entrepreneur and the <b>founder and CEO
-                of Capital HUB.</b> Capital HUB is a company that helps startups
-                raise angel investments and helps investors invest in
-                high-growth startups. As a founder, Pramod is passionate about
-                connecting startups with potential investors and providing them
-                with the resources and support they need to succeed. He is also
-                building an angel networking platform to bridge the gap between
-                startups and angel investors, making it easier for them to
-                connect and collaborate. With his deep understanding of the
-                startup ecosystem and his ability to identify and capitalize on
-                new opportunities, Pramod is well-positioned to lead Capital HUB
-                to success.
+                <b>Pramod Badiger</b> is a dynamic entrepreneur and the{" "}
+                <b>founder and CEO of Capital HUB.</b> Capital HUB is a company
+                that helps startups raise angel investments and helps investors
+                invest in high-growth startups. As a founder, Pramod is
+                passionate about connecting startups with potential investors
+                and providing them with the resources and support they need to
+                succeed. He is also building an angel networking platform to
+                bridge the gap between startups and angel investors, making it
+                easier for them to connect and collaborate. With his deep
+                understanding of the startup ecosystem and his ability to
+                identify and capitalize on new opportunities, Pramod is
+                well-positioned to lead Capital HUB to success.
               </p>
 
-              {/* <h1 className="inside_seventy_heading">
+              {/* <h2 className="inside_seventy_heading">
                 How to learn about the Web Development ?
-              </h1> */}
+              </h2> */}
               {/* <p>
                 Lorem ipsum dolor sit amet consectetur. At consequat purus
                 hendrerit proin risus Sit purus ante dictum in malesuada
@@ -163,9 +166,9 @@ const StartUpBlogOne = () => {
                 hendrerit proin risus Sit purus ante dictum in malesuada id.{" "}
               </p> */}
 
-              {/* <h1 className="inside_seventy_heading">
+              {/* <h2 className="inside_seventy_heading">
                 Top web development courses in India
-              </h1> */}
+              </h2> */}
 
               {/* <ol>
                 <li>Capital Hub</li>
@@ -200,7 +203,7 @@ const StartUpBlogOne = () => {
             </div>
 
             <div className="popular_article">
-              <h1>Popular Articles</h1>
+              <h2>Popular Articles</h2>
               <PopularArticle image={BlogImageOne} button={"Stock Market"} />
               <PopularArticle image={BlogImageOne} button={"Stock Market"} />
               <PopularArticle image={BlogImageOne} button={"Stock Market"} />

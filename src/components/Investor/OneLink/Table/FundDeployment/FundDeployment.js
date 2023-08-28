@@ -4,8 +4,9 @@ import './FundDeployment.scss';
 const Table = () => {
   return (
     <>
-      <div className="fund_deployment_container">
-        <h2>Projections</h2>
+    <div className="row">
+      <div className="fund_deployment_container col-lg-12">
+        <h2>Fund deployment</h2>
         <table>
           <tr>
             <th>Requirement</th>
@@ -23,6 +24,7 @@ const Table = () => {
             <td>1000</td>
           </tr>
         </table>
+      </div>
       </div>
     </>
   );

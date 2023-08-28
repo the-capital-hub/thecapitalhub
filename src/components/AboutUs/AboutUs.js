@@ -2,8 +2,12 @@ import "./aboutus.scss";
 import CoInvestorCard from "../Card/AboutUs/CoInvestor/CoInvestorCard";
 import MeetOurTeam from "../Card/AboutUs/MeetOurTeam/MeetOurTeam";
 import PramodImage from "../../Images/aboutUs/Pramod.jpeg";
+import { useEffect } from "react";
 
 const AboutUs = () => {
+  useEffect(() => {
+    document.title = "About Us | The Capital Hub";
+  }, []);
   return (
     <>
       <div className="container-fluid aboutus_container">

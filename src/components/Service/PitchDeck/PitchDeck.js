@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./PitchDeck.scss";
 import serviceFiveIcon from "../../../Images/service/Group 15408.svg";
 import listIcon from "../../../Images/ListDot.svg";
@@ -6,6 +6,9 @@ import BackIcon from "../../../Images/BackIcon.svg";
 import { Link } from "react-router-dom";
 
 const PitchDeck = () => {
+  useEffect(() => {
+    document.title = "Pitch Deck Service | The Capital Hub";
+  }, []);
   return (
     <>
       <div className="container pitch_main_container">

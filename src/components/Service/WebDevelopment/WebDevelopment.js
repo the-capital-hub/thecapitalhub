@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./WebDevelopment.scss";
 import serviceOneIcon from "../../../Images/service/Group 15409.svg";
 import serviceThreeIcon from "../../../Images/service/Group 15406.svg";
@@ -13,6 +13,9 @@ import isoIcon from "../../../Images/service/image 62.png";
 import prototypingIcon from "../../../Images/service/image 63.png";
 
 const WebDevelopment = () => {
+  useEffect(() => {
+    document.title = "Web Development Service | The Capital Hub";
+  }, []);
   return (
     <>
       <div className="container webdevlopment_main_container">
