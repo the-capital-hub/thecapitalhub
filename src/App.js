@@ -43,6 +43,9 @@ import StartUpBlogOne from "./components/Blog/StartUpBlog/StartUpBlogOne";
 import StartUpBlogTwo from "./components/Blog/StartUpBlog/StartUpBlogTwo";
 import StartUpBlogThree from "./components/Blog/StartUpBlog/StartUpBlogThree";
 import NewPasswordPopUp from "./components/PopUp/NewPasswordPopUp/NewPasswordPopUp";
+import TermOfService from "./components/TermOfService/TermOfService";
+import Privacy from "./components/Privacy/Privacy";
+import SecuritySafeGuard from "./components/SecuritySafeGuard/SecuritySafeGuard";
 
 function App() {
   return (
@@ -225,6 +228,36 @@ function App() {
               <>
                 <Navbar />
                 <OurInvestor />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path="/term-of-service"
+            element={
+              <>
+                <Navbar />
+                <TermOfService />
+                <Footer />
+              </>
+            }
+          />
+            <Route
+            path="/privacy"
+            element={
+              <>
+                <Navbar />
+                <Privacy />
+                <Footer />
+              </>
+            }
+          />
+            <Route
+            path="/security-safeguard"
+            element={
+              <>
+                <Navbar />
+                <SecuritySafeGuard />
                 <Footer />
               </>
             }

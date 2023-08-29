@@ -12,35 +12,35 @@ const Table = ({ hidden, page }) => {
             <th>Revenue:</th>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
             </td>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
             </td>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
             </td>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
             </td>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
@@ -50,35 +50,35 @@ const Table = ({ hidden, page }) => {
             <th>Expense:</th>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
             </td>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
             </td>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
             </td>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
             </td>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
