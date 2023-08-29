@@ -4,6 +4,7 @@ import FbIcon from "../../Images/Fb.svg";
 import TwIcon from "../../Images/Tw.svg";
 import InIcon from "../../Images/In.svg";
 import YtIcon from "../../Images/Yt.svg";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -48,19 +49,19 @@ const Footer = () => {
             <h4>Policies</h4>
             <ul className="list-unstyled">
               <li>
-                <a href="#" className="text-white">
+                <Link to="/security-safeguard" className="text-white">
                   Security safeguards
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-white">
+              <Link to="/term-of-service"  className="text-white">
                   Terms of service
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-white">
+              <Link to="/privacy"  className="text-white">
                   Privacy
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="text-white">

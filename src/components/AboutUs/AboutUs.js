@@ -64,8 +64,7 @@ const AboutUs = () => {
             </div>
           </div>
 
-          <div className="founder_section mb-5">
-            {/* <h1>Founder</h1> */}
+          {/* <div className="founder_section mb-5">
             <div className="founder_container">
               <div className="image rounded-circle">
                 <img src="" alt="founder" className="rounded-circle" />
@@ -91,10 +90,9 @@ const AboutUs = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="founder_section mb-5">
-            {/* <h1>Founder</h1> */}
+          {/* <div className="founder_section mb-5">
             <div className="founder_container">
               <div className="image rounded-circle">
                 <img src="" alt="image" className="rounded-circle" />
@@ -120,7 +118,7 @@ const AboutUs = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="about_us_title_text">
             <h2>Our Story</h2>
