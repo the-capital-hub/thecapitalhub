@@ -19,6 +19,8 @@ import FundingTeamCard from "./FundingTeamCard/FundingTeamCard";
 import { useParams } from "react-router-dom";
 import { getOnePager } from "../../../Service/user";
 import { useState, useEffect } from "react";
+import RaghuImage from '../../../Images/aboutUs/Raghu.jpeg'
+import RajuImage from '../../../Images/Rectangle 1895.png'
 
 function Company() {
   const { username } = useParams();
@@ -195,28 +197,29 @@ function Company() {
                   <div className="feedbackcard">
                     <FeedbackCard
                       image={feedbackIcon}
-                      name="Pramod Badigar"
-                      stars={4}
-                      paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
+                      name="image
+                      Sagar S"
+                      stars={5}
+                      paragraph="I had an amazing experience with Kyntox Biotech! The team's dedication to innovation really stood out to me. Their commitment to producing high-quality products while prioritizing safety is commendable. I was thoroughly impressed with their transparent communication throughout the process."
                     />
                     <FeedbackCard
+                      image={RaghuImage}
+                      name="Raghukrishnan J"
+                      stars={5}
+                      paragraph="Kyntox Biotech exceeded my expectations in every way possible. Their professionalism and knowledge in biotechnology are unparalleled. The quality of their products speaks volumes about their commitment to excellence.My interactions with their team left me confident in their capabilities and eager to explore more of their offerings. A fantastic experience overall!"
+                    />{" "}
+                    <FeedbackCard
+                      image={RajuImage}
+                      name="Raju Prasain"
+                      stars={4}
+                      paragraph="Working with Kyntox Biotech was an absolute pleasure. I was pleasantly surprised by their prompt delivery and exceptional customer service. The team's passion for advancing healthcare solutions is evident in their work. I look forward to collaborating with them again in the future."
+                    />
+                    {/* <FeedbackCard
                       image={feedbackIcon}
                       name="Pramod Badigar"
                       stars={4}
                       paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
-                    />
-                    <FeedbackCard
-                      image={feedbackIcon}
-                      name="Pramod Badigar"
-                      stars={4}
-                      paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
-                    />
-                    <FeedbackCard
-                      image={feedbackIcon}
-                      name="Pramod Badigar"
-                      stars={4}
-                      paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
-                    />
+                    /> */}
                   </div>
                 </div>
 
@@ -224,26 +227,69 @@ function Company() {
                   <h2>Founding Team</h2>
                   <div className="fundingteamcard">
                     <FundingTeamCard
-                      image={feedbackIcon}
-                      name="Pramod Badigar"
+                      image={
+                        "https://res.cloudinary.com/drjt9guif/image/upload/q_92/v1692963108/TheCapitalHub/startUps/teamMembers/greendrive/sagar_jae33e.webp"
+                      }
+                      name="Sagar S"
+                      designation="Sr. Operation Manager"
                       age={30}
                       paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
                     />
                     <FundingTeamCard
-                      image={feedbackIcon}
-                      name="Pramod Badigar"
+                      image={
+                        "https://res.cloudinary.com/drjt9guif/image/upload/q_100/v1692963218/TheCapitalHub/startUps/teamMembers/greendrive/shashi_nd30jr.webp"
+                      }
+                      name="Shashidhar B N"
+                      designation="Operation Manager"
                       age={30}
                       paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
                     />
                     <FundingTeamCard
-                      image={feedbackIcon}
-                      name="Pramod Badigar"
+                      image={
+                        "https://res.cloudinary.com/drjt9guif/image/upload/v1692963289/TheCapitalHub/startUps/teamMembers/greendrive/ashiq_ou8o2v.webp"
+                      }
+                      name="Ashiq M"
+                      designation="Sr. Service Manager"
                       age={30}
                       paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
                     />
+
                     <FundingTeamCard
-                      image={feedbackIcon}
-                      name="Pramod Badigar"
+                      image={
+                        "https://res.cloudinary.com/drjt9guif/image/upload/v1692963438/TheCapitalHub/startUps/teamMembers/greendrive/melam-steven_wb41ee.webp"
+                      }
+                      name="Melam Steven Ezra"
+                      designation="Operation Manager"
+                      age={30}
+                      paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
+                    />
+
+                    <FundingTeamCard
+                      image={
+                        "https://res.cloudinary.com/drjt9guif/image/upload/v1692963528/TheCapitalHub/startUps/teamMembers/greendrive/nagaraju_savm2s.webp"
+                      }
+                      name="Molumoori Nagaraju"
+                      designation="Growth Manager"
+                      age={30}
+                      paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
+                    />
+
+                    <FundingTeamCard
+                      image={
+                        "https://res.cloudinary.com/drjt9guif/image/upload/v1692963668/TheCapitalHub/startUps/teamMembers/greendrive/navya_blspa8.webp"
+                      }
+                      name="Navya M"
+                      designation="HR Manager"
+                      age={30}
+                      paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
+                    />
+
+                    <FundingTeamCard
+                      image={
+                        "https://res.cloudinary.com/drjt9guif/image/upload/v1692963755/TheCapitalHub/startUps/teamMembers/greendrive/swathi-k_ediifp.webp"
+                      }
+                      name="Swathi K"
+                      designation="Accountant Manager"
                       age={30}
                       paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
                     />
