@@ -3,12 +3,12 @@ import "./feed.scss";
 // import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import SmallProfileCard from "../Cards/TwoSmallMyProfile/SmallProfileCard";
 import RightProfileCard from "../InvestorGlobalCards/RightProfileCard/RightProfileCard";
-import RecommendationCard from "../Cards/Recommendation/RecommendationCard";
 import FeedPostCard from "../Cards/FeedPost/FeedPostCard";
 import CreatePostPopUp from "../../PopUp/CreatePostPopUp/CreatePostPopUp";
 import { getAllPostsAPI } from "../../../Service/user";
 import { useSelector } from "react-redux";
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
+import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
 
 const Feed = () => {
   const [popupOpen, setPopupOpen] = useState(false);

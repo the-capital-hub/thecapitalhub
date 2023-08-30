@@ -46,6 +46,7 @@ import NewPasswordPopUp from "./components/PopUp/NewPasswordPopUp/NewPasswordPop
 import TermOfService from "./components/TermOfService/TermOfService";
 import Privacy from "./components/Privacy/Privacy";
 import SecuritySafeGuard from "./components/SecuritySafeGuard/SecuritySafeGuard";
+import Connection from "./components/Investor/Connection/Connection";
 
 function App() {
   return (
@@ -242,7 +243,7 @@ function App() {
               </>
             }
           />
-            <Route
+          <Route
             path="/privacy"
             element={
               <>
@@ -252,7 +253,7 @@ function App() {
               </>
             }
           />
-            <Route
+          <Route
             path="/security-safeguard"
             element={
               <>
@@ -282,6 +283,7 @@ function App() {
             <Route path="/customers" element={<Customer />} />
             <Route path="/investors" element={<Investors />} />
             <Route path="/help" element={<Help />} />
+            <Route path="/connection" element={<Connection />} />
             <Route path="/support" element={<Support />} />
           </Route>
 
