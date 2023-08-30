@@ -300,9 +300,9 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="container-fluid our_startups_section mb-5">
+      {/* <div className="container-fluid our_startups_section mb-5">
         <OurStartUp />
-      </div>
+      </div> */}
 
       {/* <div className="container-fluid our_investor_section">
         <CoInvestor />

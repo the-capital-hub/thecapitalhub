@@ -205,6 +205,19 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 </Link>
               </MenuItem>
 
+              <MenuItem
+                active={location.pathname.includes("/connection")}
+                className="active-item"
+              >
+                <Link
+                  onClick={() => setSidebarCollapsed(true)}
+                  to="/connection"
+                >
+                  <img src={Setting} alt="image" width="17px" height="17px" />
+                  {!sidebarCollapsed && <span>Connnections</span>}
+                </Link>
+              </MenuItem>
+
               <hr className="hr-above-support" />
               <MenuItem
                 active={location.pathname.includes("/support")}

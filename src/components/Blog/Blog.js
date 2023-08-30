@@ -101,7 +101,7 @@ const Blog = () => {
               onClick={() => handleCardClick("/blog/startupThree")}
             />
 
-            <LattestBlogCard
+            {/* <LattestBlogCard
               image={ImageBlog2}
               button={"Startup"}
               date={"May 1 2023"}
@@ -124,7 +124,7 @@ const Blog = () => {
               title={
                 "Why Mentoring Matters: Why Angel Investors Should Prioritize Mentorship Before Investing in a Startup"
               }
-            />
+            /> */}
           </section>
         </div>
         <div className="container pagination_container_section">

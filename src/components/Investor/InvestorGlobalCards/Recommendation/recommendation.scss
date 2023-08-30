@@ -1,106 +1,124 @@
 .recommendation_main_container {
-    .recommendation_card {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        hr {
-            margin: 0px 5%;
-        }
-        .right_view_profile_card {
-            border-radius: 20px;
-
-            .card-header {
-                background-color: #000;
-                color: #fff;
-                font-size: 18px;
-                display: flex;
-                justify-content: space-between;
-                border-radius: 20px 20px 0px 0px;
-
-                .title {
-                    display: flex;
-                    justify-content: center;
-                    align-items: flex-start;
-                    flex-direction: column;
-                }
-            }
-
-            .card-body {
-                h5 {
-                    color: #000;
-                    font-size: 13px;
-                    font-family: Poppins;
-                    font-weight: 500;
-                }
-
-                .input-group {
-                    position: relative;
-                }
-
-                .input-group input {
-                    height: 2rem;
-                }
-
-                .input-group input::placeholder {
-                    font-size: 0.8rem;
-                }
-
-                .send-button {
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                    z-index: 1;
-                    background-color: #000;
-                    color: #fff;
-                }
-            }
-
-            .recommendation_card_body {
-                display: flex;
-                justify-content: start;
-                align-items: flex-start;
-
-                img {
-                    width: 30px;
-                }
-
-                .recommendation_card_text {
-                    h3 {
-                        color: #484848;
-                        font-size: 15px;
-                        font-family: Poppins;
-                        font-weight: 600;
-                    }
-
-                    .smallest_typo {
-                        color: #686868;
-                        font-size: 12px;
-                        font-family: Poppins;
-                    }
-                    button {
-                        // height: 29px;
-                        width: 120px;
-                        flex-shrink: 0;
-                        border-radius: 20px;
-                        border: 1px solid #acacac;
-                        color: #000;
-                        font-size: 13px;
-                        font-family: Poppins;
-                        padding: 20px;
-                        display: flex;
-                        gap: 10px;
-                        align-items: center;
-                        background-color: #fff;
-                        img {
-                            height: 13px;
-                        }
-                    }
-                }
-            }
-        }
-
-        .right_view_profile {
-            width: 100%;
-        }
+  .recommendation_card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    hr {
+      margin: 0px 5%;
     }
+    .right_view_profile_card {
+      border-radius: 20px;
+
+      .card-header {
+        background-color: #000;
+        color: #fff;
+        font-size: 18px;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 20px 20px 0px 0px;
+
+        .title {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+
+      .card-body {
+        h5 {
+          color: #000;
+          font-size: 13px;
+          font-family: Poppins;
+          font-weight: 500;
+        }
+
+        .input-group {
+          position: relative;
+        }
+
+        .input-group input {
+          height: 2rem;
+        }
+
+        .input-group input::placeholder {
+          font-size: 0.8rem;
+        }
+
+        .send-button {
+          position: absolute;
+          right: 0;
+          top: 0;
+          z-index: 1;
+          background-color: #000;
+          color: #fff;
+        }
+      }
+
+      .recommendation_card_body {
+        display: flex;
+        justify-content: start;
+        align-items: flex-start;
+
+        img {
+          width: 30px;
+          height: 30px;
+        }
+
+        .recommendation_card_text {
+          h3 {
+            color: #484848;
+            font-size: 15px;
+            font-family: Poppins;
+            font-weight: 600;
+          }
+
+          .smallest_typo {
+            color: #686868;
+            font-size: 12px;
+            font-family: Poppins;
+          }
+          button {
+            // height: 29px;
+            width: 120px;
+            flex-shrink: 0;
+            border-radius: 20px;
+            border: 1px solid #acacac;
+            color: #000;
+            font-size: 13px;
+            font-family: Poppins;
+            padding: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            background-color: #fff;
+            img {
+              height: 13px;
+            }
+          }
+          .connect_button {
+            width: 120px;
+            flex-shrink: 0;
+            border-radius: 20px;
+            border: 1px solid #acacac;
+            color: #000;
+            font-size: 13px;
+            font-family: Poppins;
+            padding: 10px;
+            display: flex;
+            gap: 0px;
+            align-items: center;
+            background-color: #fff;
+            img {
+              height: 13px;
+            }
+          }
+        }
+      }
+    }
+
+    .right_view_profile {
+      width: 100%;
+    }
+  }
 }
