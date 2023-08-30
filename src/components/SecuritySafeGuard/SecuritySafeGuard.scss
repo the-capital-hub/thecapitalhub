@@ -31,17 +31,7 @@
         line-height: normal;
         position: relative; /* Add this line to establish positioning context */
   
-        &::after {
-          content: "";
-          display: block;
-          width: 90%;
-          height: 1px;
-          background: #d0d0d0;
-          position: absolute;
-          bottom: 0;
-          top: 15px;
-          left: 7%;
-        }
+     
       }
       .heading_with_line_two {
         color: #000;
@@ -52,17 +42,6 @@
         line-height: normal;
         position: relative; /* Add this line to establish positioning context */
   
-        &::after {
-          content: "";
-          display: block;
-          width: 82%;
-          height: 1px;
-          background: #d0d0d0;
-          position: absolute;
-          bottom: 0;
-          top: 15px;
-          left: 14%;
-        }
       }
 
       .heading_with_line_three {
@@ -74,17 +53,7 @@
         line-height: normal;
         position: relative; /* Add this line to establish positioning context */
   
-        &::after {
-          content: "";
-          display: block;
-          width: 88%;
-          height: 1px;
-          background: #d0d0d0;
-          position: absolute;
-          bottom: 0;
-          top: 15px;
-          left: 8%;
-        }
+ 
       }
       .heading_with_line_four {
         color: #000;
@@ -95,17 +64,7 @@
         line-height: normal;
         position: relative; /* Add this line to establish positioning context */
   
-        &::after {
-          content: "";
-          display: block;
-          width: 83%;
-          height: 1px;
-          background: #d0d0d0;
-          position: absolute;
-          bottom: 0;
-          top: 15px;
-          left: 13%;
-        }
+   
       }
     }
   
@@ -148,15 +107,11 @@
           }
           .heading_with_line_one{
               font-size: 18px; 
-              &::after {
-                display: none;
-              }
+            
           }
           .heading_with_line_two,.heading_with_line_three,.heading_with_line_four {
             font-size: 18px; 
-            &::after {
-              display: none;
-            }
+         
           }
         }
         .button_section {
@@ -183,9 +138,7 @@
           .heading_with_line_one,
           .heading_with_line_two {
             font-size: 18px; 
-            &::after {
-              display: none;
-            }
+          
           }
         }
         .button_section {

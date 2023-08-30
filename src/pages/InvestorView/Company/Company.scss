@@ -183,8 +183,10 @@
 
     .fundingteam_section {
       display: flex;
-      flex-direction: column;
+      // flex-direction: column;
       margin-top: 3%;
+      width: 100%;
+      max-width: 100%;
       .fundingteamcard {
         display: flex;
         overflow-x: scroll;

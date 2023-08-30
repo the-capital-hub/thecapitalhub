@@ -39,17 +39,7 @@
       line-height: normal;
       position: relative; /* Add this line to establish positioning context */
 
-      &::after {
-        content: "";
-        display: block;
-        width: 80%;
-        height: 1px;
-        background: #d0d0d0;
-        position: absolute;
-        bottom: 0;
-        top: 15px;
-        left: 17%;
-      }
+   
     }
     .heading_with_line_two {
       color: #000;
@@ -60,17 +50,7 @@
       line-height: normal;
       position: relative; /* Add this line to establish positioning context */
 
-      &::after {
-        content: "";
-        display: block;
-        width: 80%;
-        height: 1px;
-        background: #d0d0d0;
-        position: absolute;
-        bottom: 0;
-        top: 15px;
-        left: 18%;
-      }
+
     }
   }
 

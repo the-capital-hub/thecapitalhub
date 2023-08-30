@@ -1,6 +1,7 @@
 import React from "react";
 import AddUserIconBlack from "../../../../Images/investorIcon/Add-UserBlack.svg";
-import profilePic from "../../../../Images/investorIcon/profilePic.webp";
+import profilePicUpma from "../../../../Images/Rectangle 1895.png";
+import profilePicRaghu from '../../../../Images/aboutUs/Raghu.jpeg'
 import "./recommendation.scss";
 
 const RecommendationCard = () => {
@@ -15,13 +16,11 @@ const RecommendationCard = () => {
               </div>
             </div>
             <div className="card-body recommendation_card_body ">
-              <img src={profilePic} alt="img" className="rounded-circle"/>
+              <img src={profilePicRaghu} alt="img" className="rounded-circle" />
               <div className="recommendation_card_text">
-                <h3>Harideep</h3>
-                <h4 className="smallest_typo">
-                  UI/UX Designer/Product Designer
-                </h4>
-                <button>
+                <h3>Raghukrishnan J</h3>
+                <h4 className="smallest_typo">Senior Investment Analyst</h4>
+                <button className="connect_button">
                   <img src={AddUserIconBlack} alt="add user" />
                   <span>Connect</span>
                 </button>
@@ -29,14 +28,14 @@ const RecommendationCard = () => {
             </div>
             <hr className="hr" />
             <div className="card-body recommendation_card_body ">
-              <img src={profilePic} alt="img" className="rounded-circle"/>
+              <img src={profilePicUpma} alt="img" className="rounded-circle" />
               <div className="recommendation_card_text">
-                <h3>Harideep</h3>
+                <h3>Raju Prasain</h3>
                 <h4 className="smallest_typo">
-                  UI/UX Designer/Product Designer
+                  FullStack Developer
                 </h4>
-                <button>
-                  <img src={AddUserIconBlack} alt="add user"/>
+                <button className="connect_button">
+                  <img src={AddUserIconBlack} alt="add user" />
                   <span>Connect</span>
                 </button>
               </div>
