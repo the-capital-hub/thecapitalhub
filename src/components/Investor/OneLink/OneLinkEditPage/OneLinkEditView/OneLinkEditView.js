@@ -57,49 +57,6 @@ const OneLinkEditView = () => {
       .catch((err) => console.log(err));
   };
 
-  // !mobile download
-  // const handleDownloadPDF = () => {
-  //   const container = document.querySelector(".download_preview");
-
-  //   if (container) {
-  //     html2canvas(container).then((canvas) => {
-  //       const imgData = canvas.toDataURL("image/png");
-  //       const pdf = new jsPDF("p", "mm", "a4");
-  //       pdf.addImage(imgData, "PNG", 80, 0, 50, 297);
-  //       pdf.save(formData.company + ".pdf");
-  //     });
-  //   }
-  // };
-
-  // !tablet view
-  // const handleDownloadPDF = () => {
-  //   const container = document.querySelector(".download_preview");
-
-  //   if (container) {
-  //     html2canvas(container).then((canvas) => {
-  //       const imgData = canvas.toDataURL("image/png");
-  //       const pdf = new jsPDF("p", "mm", "a4");
-  //       pdf.addImage(imgData, "PNG", 50, 0, 110, 297);
-  //       pdf.save(formData.company + ".pdf");
-  //     });
-  //   }
-  // };
-
-  // !pc view
-  // const handleDownloadPDF = () => {
-  //   const container = document.querySelector(".download_preview");
-
-  //   if (container) {
-  //     html2canvas(container).then((canvas) => {
-  //       const imgData = canvas.toDataURL("image/png");
-  //       const pdf = new jsPDF("p", "mm", "a4");
-  //       pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
-  //       pdf.save(formData.company + ".pdf");
-  //     });
-  //   }
-  // };
-
-  // !all views
   const handleDownloadPDF = () => {
     const element = document.querySelector(".download_preview");
     const buttons = document.querySelectorAll(".buttons button");

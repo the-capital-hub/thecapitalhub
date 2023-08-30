@@ -63,11 +63,11 @@ const Footer = () => {
                   Privacy
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <a href="#" className="text-white">
                   Accessibility
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="col-md-2 col-sm-6 footer_list_item">
@@ -77,7 +77,7 @@ const Footer = () => {
               information about our services
             </p>
             <div className="d-flex justify-content-start">
-              <a href="">
+              <a href="https://www.facebook.com/p/Capital-HUB-100086708877527/">
                 <img src={FbIcon} alt="img" style={{ margin: "0px 2px" }} />
               </a>
               <a href="https://twitter.com/TheCapitalHub_">
@@ -86,7 +86,7 @@ const Footer = () => {
               <a href="https://instagram.com/capitalhub_official?igshid=MzRlODBiNWFlZA==">
                 <img src={InIcon} alt="img" style={{ margin: "0px 2px" }} />
               </a>
-              <a href="">
+              <a href="https://www.youtube.com/@huboriginals4179/featured">
                 <img src={YtIcon} alt="img" style={{ margin: "0px 2px" }} />
               </a>
             </div>
