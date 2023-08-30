@@ -19,6 +19,7 @@ const HalfbendCard = ({folderName, userId}) => {
   }, [loggedInUser, userId, folderName]);
 
   const openPdfInNewWindow = (pdfUrl) => {
+     console.log("pdfurl---------",pdfUrl)
     // // Convert the binary data to a Blob
     // const pdfBlob = new Blob([pdfData], { type: "application/pdf" });
 
