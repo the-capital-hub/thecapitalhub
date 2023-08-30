@@ -2,6 +2,9 @@ import "./InvestorManageAccount.scss";
 import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import logoIcon from "../../../Images/manageAccount/Group 15186.svg";
 import profileIcon from "../../../Images/investorIcon/profilePic.webp";
+import profileIconRaghu from "../../../Images/aboutUs/Raghu.jpeg"
+import profileIconRaju from "../../../Images/Rectangle 1895.png"
+
 import { changePasswordAPI } from "../../../Service/user";
 import { useEffect, useState } from "react";
 
@@ -176,7 +179,7 @@ const InvestorManageAccount = () => {
                   <div className="left_section">
                     <div className="d-flex align-items-center">
                       <div className="profile_image">
-                        <img src={profileIcon} alt="img" />
+                        <img src={profileIconRaghu} alt="img" />
                       </div>
                       <div className="name_email">
                         <h4>Raghu</h4>
@@ -196,7 +199,7 @@ const InvestorManageAccount = () => {
                   <div className="left_section">
                     <div className="d-flex align-items-center">
                       <div className="profile_image">
-                        <img src={profileIcon} alt="img" />
+                        <img src={profileIconRaju} alt="img" />
                       </div>
                       <div className="name_email">
                         <h4>Raju Prasain</h4>
