@@ -87,16 +87,40 @@ const OneLinkEditView = () => {
 
   // !pc view
   const handleDownloadPDF = () => {
-    const container = document.querySelector(".download_preview");
-
-    if (container) {
-      html2canvas(container).then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF("p", "mm", "a4");
-        pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
-        pdf.save(formData.company + ".pdf");
-      });
-    }
+    const element = document.querySelector(".download_preview");
+    // const buttons = document.querySelectorAll(".buttons button");
+    // buttons.forEach((button) => {
+    //   button.style.display = "none";
+    // });
+    html2canvas(element, {
+      allowTaint: false,
+      removeContainer: true,
+      backgroundColor: '#ffffff',
+      scale: window.devicePixelRatio,
+      useCORS: false
+    }).then(canvas => {
+      const contentDataURL = canvas.toDataURL('image/png')
+      const imgWidth = 210;
+      const pageHeight = 295;
+      const imgHeight = canvas.height * imgWidth / canvas.width;
+      let heightLeft = imgHeight;
+      let pdf = new jsPDF('p', 'mm', 'a4'); 
+      let position = 5;
+    
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      heightLeft -= pageHeight;
+    
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+        heightLeft -= pageHeight;
+      }
+      pdf.save(`${formData.company}.pdf`);
+      // buttons.forEach((button) => {
+      //   button.style.display = "block";
+      // });
+    });
   };
 
   const handlePreviewPDF = () => {
