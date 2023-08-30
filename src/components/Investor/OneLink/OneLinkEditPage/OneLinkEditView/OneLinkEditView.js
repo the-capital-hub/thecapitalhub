@@ -19,7 +19,6 @@ import {
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
-
 const OneLinkEditView = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const userId = loggedInUser._id;
@@ -58,6 +57,35 @@ const OneLinkEditView = () => {
       .catch((err) => console.log(err));
   };
 
+  // !mobile download
+  // const handleDownloadPDF = () => {
+  //   const container = document.querySelector(".download_preview");
+
+  //   if (container) {
+  //     html2canvas(container).then((canvas) => {
+  //       const imgData = canvas.toDataURL("image/png");
+  //       const pdf = new jsPDF("p", "mm", "a4");
+  //       pdf.addImage(imgData, "PNG", 80, 0, 50, 297);
+  //       pdf.save(formData.company + ".pdf");
+  //     });
+  //   }
+  // };
+
+  // !tablet view
+  // const handleDownloadPDF = () => {
+  //   const container = document.querySelector(".download_preview");
+
+  //   if (container) {
+  //     html2canvas(container).then((canvas) => {
+  //       const imgData = canvas.toDataURL("image/png");
+  //       const pdf = new jsPDF("p", "mm", "a4");
+  //       pdf.addImage(imgData, "PNG", 50, 0, 110, 297);
+  //       pdf.save(formData.company + ".pdf");
+  //     });
+  //   }
+  // };
+
+  // !pc view
   const handleDownloadPDF = () => {
     const container = document.querySelector(".download_preview");
 
@@ -85,11 +113,9 @@ const OneLinkEditView = () => {
     }
   };
 
-
   return (
     <>
       <div className="editview_container">
-
         <div className="col">
           <SmallProfileCard text={"Edit"} />
         </div>
@@ -99,11 +125,15 @@ const OneLinkEditView = () => {
           </section> */}
           <div className="download_preview">
             <section className="company_description">
-              <img src={company.logo} alt="image" style={{height:"120px", width:"120px"}}/>
+              <img
+                src={company.logo}
+                alt="image"
+                style={{ height: "120px", width: "120px" }}
+              />
               <div className="company_text">
                 <h6>
                   <input
-                  className="name_container"
+                    className="name_container"
                     value={formData.company}
                     onChange={(e) => handleInputChange("company", e)}
                     onBlur={(e) => handleUpdate()}
@@ -112,7 +142,7 @@ const OneLinkEditView = () => {
                 <hr />
                 <h6>
                   <textarea
-                  className="name_container"
+                    className="name_container"
                     value={formData.description}
                     onChange={(e) => handleInputChange("description", e)}
                     onBlur={(e) => handleUpdate()}
@@ -161,7 +191,9 @@ const OneLinkEditView = () => {
           <section className="button_preview_download_section pdf-hidden">
             <div className="download_button_container">
               <button onClick={handlePreviewPDF}>Preview</button>
-              <button className="download_button" onClick={handleDownloadPDF}>Download</button>
+              <button className="download_button" onClick={handleDownloadPDF}>
+                Download
+              </button>
             </div>
           </section>
         </div>
