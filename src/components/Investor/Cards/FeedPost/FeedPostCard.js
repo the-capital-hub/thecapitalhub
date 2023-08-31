@@ -42,9 +42,10 @@ const FeedPostCard = ({
 
   const likeUnlikeHandler = async () => {
     try {
-      await likeUnlikeAPI(postId);
       setLiked(!liked);
+      await likeUnlikeAPI(postId);
     } catch (error) {
+      setLiked(!liked);
       console.log("Error liking post: ", error);
     }
   };
