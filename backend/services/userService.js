@@ -261,3 +261,25 @@ export const resetPassword = async (token, newPassword) => {
     };
   }
 };
+
+//search user 
+export const searchUsers = async (searchParam) => {
+  try {
+    const users = await UserModel.find({
+      $or: [
+        { username: { $regex: searchParam, $options: "i" } },
+        { email: { $regex: searchParam, $options: "i" } },
+      ],
+    });
+    return {
+      status: 200,
+      message: users,
+    }
+  } catch (error) {
+    console.error("Error searching for users:", error);
+    return {
+      status: 500,
+      message: "Error searching for users",
+    };
+  }
+};
