@@ -22,6 +22,8 @@ const API = Object.freeze({
   investNow: `${baseUrl}/startUp/investNow`,
   changePassword: `${baseUrl}/users/changePassword`,
   likeUnlikePost: `${baseUrl}/api/posts/likeUnlikePost`,
+  getRecommendations: `${baseUrl}/connections/getRecommendations`,
+  sendConnectionRequest: `${baseUrl}/connections/sendConnectionRequest`,
 });
 
 export default API;

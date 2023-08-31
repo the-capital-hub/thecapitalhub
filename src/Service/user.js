@@ -241,6 +241,33 @@ export const likeUnlikeAPI = async (postId) => {
   }
 };
 
+export const getRecommendations = async (userId) => {
+  try {
+    const response = await axiosInstance.get(
+      `${API.getRecommendations}/${userId}`
+    );   
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+}
+
+export const sentConnectionRequest = async (senderId, receiverId) => {
+  try {
+    const response = await axiosInstance.post(
+      `${API.sendConnectionRequest}`, 
+      {
+        senderId: senderId,
+        receiverId: receiverId,
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
 export {
   getUser,
   postUser,
