@@ -22,6 +22,9 @@ const API = Object.freeze({
   investNow: `${baseUrl}/startUp/investNow`,
   changePassword: `${baseUrl}/users/changePassword`,
   likeUnlikePost: `${baseUrl}/api/posts/likeUnlikePost`,
+  pendingConnectionRequests: `${baseUrl}/connections/getPendingConnectionRequests`,
+  acceptConnectionRequest: `${baseUrl}/connections/acceptConnectionRequest`,
+  rejectConnectionRequest: `${baseUrl}/connections/rejectConnectionRequest`,
   getRecommendations: `${baseUrl}/connections/getRecommendations`,
   sendConnectionRequest: `${baseUrl}/connections/sendConnectionRequest`,
 });

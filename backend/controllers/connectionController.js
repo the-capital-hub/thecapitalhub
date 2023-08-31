@@ -58,8 +58,8 @@ export const cancelConnectionRequestController = async (req, res) => {
 // Get pending connection requests received by a user
 export const getPendingConnectionRequestsController = async (req, res) => {
   try {
-    const { userId } = req.params;
-    const response = await getPendingConnectionRequests(userId);
+    // const { userId } = req.params;
+    const response = await getPendingConnectionRequests(req.userId);
     return res.status(response.status).send(response);
   } catch (error) {
     console.error(error);

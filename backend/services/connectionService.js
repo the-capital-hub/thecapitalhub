@@ -13,7 +13,7 @@ export const sendConnectionRequest = async (senderId, receiverId) => {
       return {
         status: 400,
         message: "Connection request already sent",
-        data: []
+        data: [],
       };
     }
 
@@ -60,7 +60,8 @@ export const getSentPendingConnectionRequests = async (userId) => {
     console.error(error);
     return {
       status: 500,
-      message: "An error occurred while getting sent pending connection requests.",
+      message:
+        "An error occurred while getting sent pending connection requests.",
     };
   }
 };
@@ -96,19 +97,21 @@ export const getPendingConnectionRequests = async (userId) => {
     const pendingRequests = await ConnectionModel.find({
       receiver: userId,
       status: "pending",
-    }).populate("sender", "firstName lastName");
+    })
+      .populate("sender", "firstName lastName profilePicture designation")
+      .sort({ _id: "-1" });
 
     return {
       status: 200,
       message: "Pending requests retrived successfully",
       data: pendingRequests,
-    }
+    };
   } catch (error) {
     console.log(error);
     return {
       status: 500,
       message: "An error occurred while getting pending connection request.",
-    }
+    };
   }
 };
 
@@ -122,23 +125,23 @@ export const acceptConnectionRequest = async (connectionId) => {
     );
     await UserModel.findOneAndUpdate(
       { _id: connection.sender },
-      { $push: { connections: connection.receiver } },
+      { $push: { connections: connection.receiver } }
     );
     await UserModel.findOneAndUpdate(
       { _id: connection.receiver },
-      { $push: { connections: connection.sender } },
+      { $push: { connections: connection.sender } }
     );
     return {
       status: 200,
       message: "Connection Accepted",
       data: connection,
-    }
+    };
   } catch (error) {
     console.log(error);
     return {
       status: 500,
       message: "An error occurred while accepting the connection request.",
-    }
+    };
   }
 };
 
@@ -154,20 +157,23 @@ export const rejectConnectionRequest = async (connectionId) => {
       status: 200,
       message: "Connection Rejected",
       data: connection,
-    }
+    };
   } catch (error) {
     console.log(error);
     return {
       status: 500,
       message: "An error occurred while rejecting the connection request.",
-    }
+    };
   }
 };
 
 //get all user connections
 export const getUserConnections = async (userId) => {
   try {
-    const user = await UserModel.findById(userId).populate("connections", "firstName lastName");
+    const user = await UserModel.findById(userId).populate(
+      "connections",
+      "firstName lastName"
+    );
     if (!user) {
       return {
         status: 404,
@@ -184,7 +190,7 @@ export const getUserConnections = async (userId) => {
     return {
       status: 500,
       message: "An error occurred while getting user connections.",
-    }
+    };
   }
 };
 
@@ -199,14 +205,12 @@ export const removeConnection = async (connectionId) => {
       };
     }
     if (connection.status === "accepted") {
-      await UserModel.findByIdAndUpdate(
-        connection.sender,
-        { $pull: { connections: connection.receiver } }
-      );
-      await UserModel.findByIdAndUpdate(
-        connection.receiver,
-        { $pull: { connections: connection.sender } }
-      );
+      await UserModel.findByIdAndUpdate(connection.sender, {
+        $pull: { connections: connection.receiver },
+      });
+      await UserModel.findByIdAndUpdate(connection.receiver, {
+        $pull: { connections: connection.sender },
+      });
     }
     await ConnectionModel.findByIdAndRemove(connectionId);
     return {
