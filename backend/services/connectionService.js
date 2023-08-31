@@ -223,3 +223,54 @@ export const removeConnection = async (connectionId) => {
   }
 };
 
+export const getRecommendations = async (userId) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found",
+      };
+    }
+    const recommendations = [];
+    const userConnections = user.connections;
+    for (const connectedUserId of userConnections) {
+      const connectedUser = await UserModel.findById(connectedUserId);
+      const mutualConnections = connectedUser.connections;
+      
+      for (const connectionId of mutualConnections) {
+        if (connectionId.toString() !== userId && !recommendations.includes(connectionId)) {
+          const existsPendingConnections = await ConnectionModel.findOne({
+            $or: [
+              { sender: userId, receiver: connectionId, status: "pending" },
+              { sender: connectionId, receiver: userId, status: "pending" }
+            ]
+          });
+          if (!existsPendingConnections) recommendations.push(connectionId);
+        }
+      }
+    }
+    
+    if (recommendations.length === 0 )
+    {
+      const users = await UserModel.find({ _id: { $nin: userConnections }, userStatus: "active" });
+      return {
+        status: 200,
+        message: "Recommended User data retrived successfully",
+        data: users
+      }
+    }
+    const users = await UserModel.find({ _id: { $in: recommendations } });
+    return {
+      status: 200,
+      message: "Recommended User data retrived successfully",
+      data: users
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      status: 500,
+      message: "An error occurred while getting recomendations"
+    }
+  }
+}

@@ -26,7 +26,7 @@ router.post("/requestPasswordReset", requestPasswordResetController);
 router.patch("/resetPassword", resetPasswordController);
 
 // Authorized routes below
-// router.use(authenticateToken);
+router.use(authenticateToken);  
 
 // Profile Page
 router.patch("/updateFounder", updateUser);

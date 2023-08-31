@@ -8,6 +8,7 @@ import {
   removeConnectionController,
   cancelConnectionRequestController,
   getSentPendingConnectionRequestsController,
+  getRecommendationsController,
 } from "../controllers/connectionController.js"; 
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
@@ -22,5 +23,7 @@ router.patch("/acceptConnectionRequest/:connectionId", acceptConnectionRequestCo
 router.patch("/rejectConnectionRequest/:connectionId", rejectConnectionRequestController);
 router.get("/getUserConnections/:userId", getUserConnectionsController);
 router.delete("/removeConnection/:connectionId", removeConnectionController);
+
+router.get("/getRecommendations/:userId", getRecommendationsController);
 
 export default router;
