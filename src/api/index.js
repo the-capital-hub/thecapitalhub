@@ -25,6 +25,8 @@ const API = Object.freeze({
   pendingConnectionRequests: `${baseUrl}/connections/getPendingConnectionRequests`,
   acceptConnectionRequest: `${baseUrl}/connections/acceptConnectionRequest`,
   rejectConnectionRequest: `${baseUrl}/connections/rejectConnectionRequest`,
+  getRecommendations: `${baseUrl}/connections/getRecommendations`,
+  sendConnectionRequest: `${baseUrl}/connections/sendConnectionRequest`,
 });
 
 export default API;
