@@ -26,6 +26,7 @@ import LogOutPopUp from "../../PopUp/LogOutPopUp/LogOutPopUp";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../Store/Action/userAction";
+import connectionsIcon from "../../../Images/investorsidebar/connection.svg";
 
 const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const dispatch = useDispatch();
@@ -213,7 +214,12 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   onClick={() => setSidebarCollapsed(true)}
                   to="/connection"
                 >
-                  <img src={Setting} alt="image" width="17px" height="17px" />
+                  <img
+                    src={connectionsIcon}
+                    alt="image"
+                    width="17px"
+                    height="17px"
+                  />
                   {!sidebarCollapsed && <span>Connnections</span>}
                 </Link>
               </MenuItem>

@@ -1,6 +1,7 @@
 .connection_main_container {
   display: flex;
   flex-direction: column;
+  min-height: 90vh;
   .box {
     background-color: #fff;
     padding: 10px;
@@ -10,6 +11,10 @@
     width: 96%;
     margin-left: 2%;
     margin-right: 2%;
+
+    h4 {
+      font-size: 26px;
+    }
   }
 
   .content_section {
@@ -56,16 +61,28 @@
       font-weight: 500;
       line-height: normal;
       border: none;
-      width: 4%;
+      // width: 4%;
+      padding: 5px 10px;
+      width: fit-content;
     }
     .connection_list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .connection_item:last-child {
+        border: none;
+      }
       .connection_item {
-        display: flex;
-        justify-content: space-between;
+        padding-bottom: 7px;
+        border-bottom: 1px solid #b5b5b5;
+        // display: flex;
+        // justify-content: space-between;
         .connection_left {
           display: flex;
           justify-content: flex-start;
           align-items: center;
+          gap: 10px;
 
           img {
             height: 70px;
@@ -74,14 +91,22 @@
           }
 
           .body_container {
+            .h6 {
+              font-weight: 600;
+            }
             p {
               margin: 0;
               padding: 0;
+            }
+            .connection_time {
+              font-size: 12px;
             }
           }
         }
 
         .connection_right {
+          display: flex;
+          gap: 10px;
           button {
             border: none;
           }
@@ -101,7 +126,6 @@
             flex-shrink: 0;
             color: #fff;
             font-family: Poppins;
-            font-size: 20px;
             font-style: normal;
             font-weight: 400;
             line-height: normal;
