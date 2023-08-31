@@ -9,6 +9,7 @@ import {
   changePassword,
   requestPasswordReset,
   resetPassword,
+  searchUsers,
 } from "../services/userService.js";
 import { secretKey } from "../constants/config.js";
 
@@ -139,6 +140,19 @@ export const resetPasswordController = async (req, res) => {
   try {
     const { token, newPassword } = req.body;
     const response = await resetPassword(token, newPassword);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ message: "An error occurred while resetting the password" });
+  }
+};
+
+export const searchUsersController = async (req, res) => {
+  try {
+    const { searchParam } = req.params;
+    const response = await searchUsers(searchParam);
     res.status(response.status).send(response);
   } catch (error) {
     console.error(error);
