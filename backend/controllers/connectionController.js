@@ -7,6 +7,7 @@ import {
   removeConnection,
   cancelConnectionRequest,
   getSentPendingConnectionRequests,
+  getRecommendations,
 } from "../services/connectionService.js"; 
 
 //send connect request 
@@ -57,8 +58,8 @@ export const cancelConnectionRequestController = async (req, res) => {
 // Get pending connection requests received by a user
 export const getPendingConnectionRequestsController = async (req, res) => {
   try {
-    const { userId } = req.params;
-    const response = await getPendingConnectionRequests(userId);
+    // const { userId } = req.params;
+    const response = await getPendingConnectionRequests(req.userId);
     return res.status(response.status).send(response);
   } catch (error) {
     console.error(error);
@@ -126,5 +127,18 @@ export const removeConnectionController = async (req, res) => {
       status: 500,
       message: "An error occurred while removing the connection.",
     });
+  }
+};
+
+export const getRecommendationsController = async (req, res) => {
+  try {
+    const response = await getRecommendations(req.params.userId);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurrecd while getting recommendations"
+    })
   }
 };

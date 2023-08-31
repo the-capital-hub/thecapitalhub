@@ -89,13 +89,12 @@ export const getSinglePost = async (req, res) => {
 //   }
 // };
 
-
 // like or unlike a post
 export const likeUnlikePostController = async (req, res) => {
   try {
     const { postId } = req.params;
-    const { userId } = req.body;
-    const response = await likeUnlikePost(postId, userId);
+    // const { userId } = req.body;
+    const response = await likeUnlikePost(postId, req.userId);
     return res.status(response.status).send(response);
   } catch (error) {
     console.error(error);
@@ -153,7 +152,7 @@ export const savePostController = async (req, res) => {
   }
 };
 
-//get saved post 
+//get saved post
 export const getAllSavedPostCollectionsController = async (req, res) => {
   try {
     const userId = req.params.userId;
@@ -193,7 +192,7 @@ export const getLikeCountController = async (req, res) => {
   } catch (error) {
     return res.status(500).send({
       status: 500,
-      message: 'An error occurred while getting likes count.',
+      message: "An error occurred while getting likes count.",
     });
   }
 };
@@ -207,7 +206,7 @@ export const getUsersWhoLikedPostController = async (req, res) => {
   } catch (error) {
     return res.status(500).send({
       status: 500,
-      message: 'An error occurred while getting liked users.',
+      message: "An error occurred while getting liked users.",
     });
   }
 };

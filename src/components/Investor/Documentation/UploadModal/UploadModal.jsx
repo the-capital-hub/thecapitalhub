@@ -5,6 +5,15 @@ import { environment } from "../../../../environments/environment";
 import AfterSuccessPopUp from "../../../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import { useSelector } from "react-redux";
 const baseUrl = environment.baseUrl;
+const AWS = require('aws-sdk');
+
+AWS.config.update({
+  accessKeyId: 'AKIA2PMPJXOHR3RLM6H6',
+  secretAccessKey: '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',
+  region: 'eu-north-1',
+});
+
+const s3 = new AWS.S3();
 
 const UploadModal = ({ onCancel }) => {
   const [folder, setFolder] = useState("");
@@ -19,32 +28,39 @@ const UploadModal = ({ onCancel }) => {
 
   const handlePdfUploadClick = async () => {
     if (fileInputRef.current.files.length > 0) { 
-      console.log(fileInputRef.current.files[0])
-      const data = new FormData();
-      data.append("file", fileInputRef.current.files[0]);
-      data.append("upload_preset", "fiverr");
-      const res = await axios.post(
-        "https://api.cloudinary.com/v1_1/dndcersc4/upload",
-        data,
-        { withCredentials: false }
-      );
-      const requestBody = {
-        fileUrl: res.data.url,
-        fileName: res.data.original_filename,
-        userId: loggedInUser._id,
-        folderName: folder,
+      const file = fileInputRef.current.files[0];
+      const timestamp = Date.now(); 
+      const fileName = `${timestamp}_${file.name}`;
+      const params = {
+        Bucket: 'capitalhub',
+        Key: `documents/${fileName}`,
+        Body: file,
       };
-      await axios
-        .post(`${baseUrl}/documentation/uploadDocument`, requestBody)
-        .then((response) => {
-          console.log("response", response);
-          if (response.status === 200) {
-            setShowPopUp(true);
-          }
-        })
-        .catch((error) => {
-          console.error("Error uploading file:", error);
-        });
+
+      try {
+        const res = await s3.upload(params).promise();
+        console.log("Result:",);
+        const requestBody = {
+          fileUrl: res.Location,
+          fileName: file.name,
+          userId: loggedInUser._id,
+          folderName: folder,
+        };
+        await axios
+          .post(`${baseUrl}/documentation/uploadDocument`, requestBody)
+          .then((response) => {
+            console.log("response", response);
+            if (response.status === 200) {
+              setShowPopUp(true);
+            }
+          })
+          .catch((error) => {
+            console.error("Error uploading file:", error);
+          });
+      } catch (error) {
+        console.error('Error uploading file to S3:', error);
+      }
+      
     }
   };
   return (

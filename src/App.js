@@ -47,6 +47,7 @@ import TermOfService from "./components/TermOfService/TermOfService";
 import Privacy from "./components/Privacy/Privacy";
 import SecuritySafeGuard from "./components/SecuritySafeGuard/SecuritySafeGuard";
 import Connection from "./components/Investor/Connection/Connection";
+import Search from "./pages/StartUp/Search/Search";
 
 function App() {
   return (
@@ -284,6 +285,7 @@ function App() {
             <Route path="/investors" element={<Investors />} />
             <Route path="/help" element={<Help />} />
             <Route path="/connection" element={<Connection />} />
+            <Route path="/search" element={<Search />} />
             <Route path="/support" element={<Support />} />
           </Route>
 

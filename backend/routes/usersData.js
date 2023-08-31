@@ -9,6 +9,7 @@ import {
   changePasswordController,
   requestPasswordResetController,
   resetPasswordController,
+  searchUsersController,
 } from "../controllers/userData.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
@@ -25,7 +26,7 @@ router.post("/requestPasswordReset", requestPasswordResetController);
 router.patch("/resetPassword", resetPasswordController);
 
 // Authorized routes below
-router.use(authenticateToken);
+router.use(authenticateToken);  
 
 // Profile Page
 router.patch("/updateFounder", updateUser);
@@ -33,6 +34,9 @@ router.patch("/updateFounder", updateUser);
 router.get("/getUser", getUsersController);
 
 router.patch("/changePassword", changePasswordController);
+
+
+router.get("/search/:searchParam", searchUsersController);
 
 
 
