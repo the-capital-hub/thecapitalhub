@@ -20,20 +20,7 @@ const HalfbendCard = ({folderName, userId}) => {
 
   const openPdfInNewWindow = (pdfUrl) => {
      console.log("pdfurl---------",pdfUrl)
-    // // Convert the binary data to a Blob
-    // const pdfBlob = new Blob([pdfData], { type: "application/pdf" });
-
-    // // Create a URL for the Blob
-    // const pdfUrl = URL.createObjectURL(pdfBlob);
-
-    // // Open the PDF in a new window
-    const newWindow = window.open("", "_blank");
-    newWindow.document.write(
-      '<iframe width="100%" height="100%" src="' + pdfUrl + '"></iframe>'
-    );
-
-    // Release the temporary URL after opening the PDF
-    URL.revokeObjectURL(pdfUrl);
+     window.location.href = pdfUrl;
   };
 
   return (
