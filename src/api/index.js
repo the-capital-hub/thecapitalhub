@@ -28,6 +28,10 @@ const API = Object.freeze({
   rejectConnectionRequest: `${baseUrl}/connections/rejectConnectionRequest`,
   getRecommendations: `${baseUrl}/connections/getRecommendations`,
   sendConnectionRequest: `${baseUrl}/connections/sendConnectionRequest`,
+  sendPostComment: `${baseUrl}/api/posts/comment`,
+  getPostComment:`${baseUrl}/api/posts/getComments`,
+
+  
   cancelConnectionRequest: `${baseUrl}/connections/cancelConnectionRequest`,
 });
 
