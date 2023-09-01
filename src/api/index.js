@@ -23,10 +23,12 @@ const API = Object.freeze({
   changePassword: `${baseUrl}/users/changePassword`,
   likeUnlikePost: `${baseUrl}/api/posts/likeUnlikePost`,
   pendingConnectionRequests: `${baseUrl}/connections/getPendingConnectionRequests`,
+  sentConnectionRequests: `${baseUrl}/connections/getSentPendingConnectionRequests`,
   acceptConnectionRequest: `${baseUrl}/connections/acceptConnectionRequest`,
   rejectConnectionRequest: `${baseUrl}/connections/rejectConnectionRequest`,
   getRecommendations: `${baseUrl}/connections/getRecommendations`,
   sendConnectionRequest: `${baseUrl}/connections/sendConnectionRequest`,
+  cancelConnectionRequest: `${baseUrl}/connections/cancelConnectionRequest`,
 });
 
 export default API;
