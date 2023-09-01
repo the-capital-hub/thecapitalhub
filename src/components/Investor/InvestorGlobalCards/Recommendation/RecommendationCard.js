@@ -26,7 +26,7 @@ const RecommendationCard = () => {
     sentConnectionRequest(loggedInUser._id, userId)
       .then(({ data }) => {
         setConnectionSent(!connectionSent);
-        setTimeout(() => setConnectionSent((prev) => !prev), 1000);
+        setTimeout(() => setConnectionSent((prev) => !prev), 2500);
         getRecommendations(loggedInUser._id)
           .then(({ data }) => {
             setUsers(data.slice(0, 5));
