@@ -318,6 +318,32 @@ export const cancelConnectionRequestAPI = async (connectionId) => {
   }
 };
 
+export const sendPostComment = async ({ postId, userId, text }) => {
+  try {
+    const response = await axiosInstance.post(
+      `${API.sendPostComment}/${postId}`,
+      {
+        userId: userId,
+        text: text,
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+
+export const getPostComment = async ({ postId }) => {
+  try {
+    const response = await axiosInstance.get(`${API.getPostComment}/${postId}`);
+    return response;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+
 export {
   getUser,
   postUser,
