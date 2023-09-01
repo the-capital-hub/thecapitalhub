@@ -3,6 +3,8 @@ import "./Connection.scss";
 import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import {
   acceptConnectionAPI,
+  cancelConnectionRequestAPI,
+  getSentConnectionsAPI,
   pendingConnectionRequestsAPI,
   rejectConnectionAPI,
 } from "../../../Service/user";
@@ -14,10 +16,15 @@ const Connection = () => {
   const [loading, setLoading] = useState(true);
 
   const handleTabChange = (tab) => {
+    if (tab === "received") {
+      getReceivedConnections();
+    } else {
+      getSentConnection();
+    }
     setSelectedTab(tab);
   };
 
-  const getAllPendingConnections = () => {
+  const getReceivedConnections = () => {
     setLoading(true);
     pendingConnectionRequestsAPI()
       .then(({ data }) => setReceivedConnections(data))
@@ -25,26 +32,43 @@ const Connection = () => {
       .finally(() => setLoading(false));
   };
 
+  const getSentConnection = () => {
+    setLoading(true);
+    getSentConnectionsAPI()
+      .then(({ data }) => setReceivedConnections(data))
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
+  };
+
   useEffect(() => {
     document.title = "Connections | The Capital Hub";
-    getAllPendingConnections();
+    getReceivedConnections();
   }, []);
 
   const acceptConnectionHandler = async (connectionId) => {
     try {
       await acceptConnectionAPI(connectionId);
-      getAllPendingConnections();
+      getReceivedConnections();
     } catch (error) {
-      console.log("Error accepting post: ", error);
+      console.log("Error accepting connection: ", error);
     }
   };
 
   const rejectConnectionHandler = async (connectionId) => {
     try {
       await rejectConnectionAPI(connectionId);
-      getAllPendingConnections();
+      getReceivedConnections();
     } catch (error) {
-      console.log("Error accepting post: ", error);
+      console.log("Error rejecting connection: ", error);
+    }
+  };
+
+  const cancelConnectionRequest = async (connectionId) => {
+    try {
+      await cancelConnectionRequestAPI(connectionId);
+      getSentConnection();
+    } catch (error) {
+      console.log("Error cancelling connection: ", error);
     }
   };
 
@@ -76,8 +100,8 @@ const Connection = () => {
               </a>
             </nav>
             <hr />
-            <button className="all_button">All</button>
-            <hr />
+            {/* <button className="all_button">All</button>
+            <hr /> */}
             <div className="connection_list">
               {loading ? (
                 <h5 className="text-center my-5">Loading connections...</h5>
@@ -123,11 +147,50 @@ const Connection = () => {
                     )
                   )
                 ) : (
-                  <h5 className="text-center my-5">No pending connections.</h5>
+                  <h5 className="text-center my-5">No received connections.</h5>
                 )
               ) : (
                 <div className="sent_placeholder">
-                  {/* You can add any content you want for the "Sent" tab */}
+                  {receivedConnections.length ? (
+                    receivedConnections.map(
+                      ({ receiver, updatedAt, _id }, index) => (
+                        <div
+                          key={index}
+                          className="connection_item d-flex flex-column flex-md-row justify-content-between "
+                        >
+                          <div className="connection_left">
+                            <img
+                              src={receiver.profilePicture}
+                              alt="Connection"
+                            />
+                            <div className="body_container">
+                              <p className="connection_name h5">{`${receiver.firstName} ${receiver.lastName}`}</p>
+                              <p className="connection_designation">
+                                {receiver.designation}
+                              </p>
+                              <p>
+                                <TimeAgo
+                                  className="connection_time"
+                                  datetime={updatedAt}
+                                  locale=""
+                                />
+                              </p>
+                            </div>
+                          </div>
+                          <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-center">
+                            <button
+                              onClick={() => cancelConnectionRequest(_id)}
+                              className="py-2 px-3 rounded-5"
+                            >
+                              Cancel Request
+                            </button>
+                          </div>
+                        </div>
+                      )
+                    )
+                  ) : (
+                    <h5 className="text-center my-5">No sent connections.</h5>
+                  )}
                 </div>
               )}
             </div>

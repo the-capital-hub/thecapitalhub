@@ -43,7 +43,7 @@ export const getSentPendingConnectionRequests = async (userId) => {
     const sentRequests = await ConnectionModel.find({
       sender: userId,
       status: "pending",
-    }).populate("receiver", "firstName lastName");
+    }).populate("receiver", "firstName lastName profilePicture designation");
     if (sentRequests.length === 0) {
       return {
         status: 200,
@@ -241,40 +241,45 @@ export const getRecommendations = async (userId) => {
     for (const connectedUserId of userConnections) {
       const connectedUser = await UserModel.findById(connectedUserId);
       const mutualConnections = connectedUser.connections;
-      
+
       for (const connectionId of mutualConnections) {
-        if (connectionId.toString() !== userId && !recommendations.includes(connectionId)) {
+        if (
+          connectionId.toString() !== userId &&
+          !recommendations.includes(connectionId)
+        ) {
           const existsPendingConnections = await ConnectionModel.findOne({
             $or: [
               { sender: userId, receiver: connectionId, status: "pending" },
-              { sender: connectionId, receiver: userId, status: "pending" }
-            ]
+              { sender: connectionId, receiver: userId, status: "pending" },
+            ],
           });
           if (!existsPendingConnections) recommendations.push(connectionId);
         }
       }
     }
-    
-    if (recommendations.length === 0 )
-    {
-      const users = await UserModel.find({ _id: { $nin: userConnections }, userStatus: "active" });
+
+    if (recommendations.length === 0) {
+      const users = await UserModel.find({
+        _id: { $nin: userConnections },
+        userStatus: "active",
+      });
       return {
         status: 200,
         message: "Recommended User data retrived successfully",
-        data: users
-      }
+        data: users,
+      };
     }
     const users = await UserModel.find({ _id: { $in: recommendations } });
     return {
       status: 200,
       message: "Recommended User data retrived successfully",
-      data: users
-    }
+      data: users,
+    };
   } catch (error) {
     console.log(error);
     return {
       status: 500,
-      message: "An error occurred while getting recomendations"
-    }
+      message: "An error occurred while getting recomendations",
+    };
   }
-}
+};
