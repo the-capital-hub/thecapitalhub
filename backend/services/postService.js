@@ -199,7 +199,11 @@ export const commentOnPost = async (postId, userId, text) => {
 // get comments by post
 export const getComments = async (postId) => {
   try {
-    const post = await PostModel.findById(postId);
+    const post = await PostModel.findById(postId).populate({
+      path: "comments.user",
+      model: "Users", 
+      select: "firstName lastName designation profilePicture",
+    });
     if (!post) {
       return {
         status: 404,
