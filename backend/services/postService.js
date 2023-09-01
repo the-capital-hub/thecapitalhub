@@ -168,6 +168,7 @@ export const likeUnlikePost = async (postId, userId) => {
 
 // Comment on a post
 export const commentOnPost = async (postId, userId, text) => {
+
   try {
     const post = await PostModel.findById(postId);
     if (!post) {
