@@ -253,58 +253,43 @@ const FeedPostCard = ({
                       </div>
                     </section>
                   </div>
-
-                  {/* { comments.map((val)=>{
-                  <section className="comment_messages">
-                    <div className="connection_item d-flex flex-column flex-md-row justify-content-between ">
-                      <div className="connection_left">
-                        <img
-                          src={commentIconOne}
-                          alt="Connection"
-                          className="comment_connection"
-                        />
-                        <div className="body_container">
-                          <p className="connection_name">Raju Prasain</p>
-                          <p className="connection_designation">
-                            FullStack Developer
-                          </p>
-                        </div>
-                      </div>
-                      <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-center">
-                        <span className="days_time">2 days ago</span>
-                      </div>
-                    </div>
-
-                    <p className="comment_text">
-                     {val.text}
-                    </p>
-                  </section>
-                 })} */}
-                  {comments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map((val) => (
-                    <section className="comment_messages" key={val._id}>
-                      <div className="connection_item d-flex flex-column flex-md-row justify-content-between">
-                        <div className="connection_left">
-                          <img
-                            src={commentIconOne}
-                            alt="Connection"
-                            className="comment_connection"
-                          />
-                          <div className="body_container">
-                            <p className="connection_name">Raju Prasain</p>
-                            <p className="connection_designation">
-                              FullStack Developer
-                            </p>
+                  {comments
+                    .sort(
+                      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                    )
+                    .map((val) => (
+                      <section className="comment_messages" key={val._id}>
+                        <div className="connection_item d-flex flex-column flex-md-row justify-content-between">
+                          <div className="connection_left">
+                            {val.user && (
+                              <>
+                                <img
+                                  src={val.user.profilePicture || ""}
+                                  alt="Connection"
+                                  className="comment_connection"
+                                />
+                                <div className="body_container">
+                                  <p className="connection_name">
+                                    {val.user.firstName +
+                                      " " +
+                                      val.user.lastName}
+                                  </p>
+                                  <p className="connection_designation">
+                                    {val.user.designation}
+                                  </p>
+                                </div>
+                              </>
+                            )}
+                          </div>
+                          <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-center">
+                            <span className="days_time">
+                              <TimeAgo datetime={val.createdAt} locale="" />
+                            </span>
                           </div>
                         </div>
-                        <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-center">
-                          <span className="days_time">
-                            <TimeAgo datetime={val.createdAt} locale="" />
-                          </span>
-                        </div>
-                      </div>
-                      <p className="comment_text">{val.text}</p>
-                    </section>
-                  ))}
+                        <p className="comment_text">{val.text}</p>
+                      </section>
+                    ))}
                 </div>
               )}
             </div>
