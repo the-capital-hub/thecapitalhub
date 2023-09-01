@@ -396,7 +396,7 @@ const InvestorHome = () => {
               <div className="col-12 mt-2">
                 <div className=" box personal_information">
                   <div className="personal_information_header">
-                    <h2 className="typography">Milestones</h2>
+                    <h2 className="typography">Featured posts</h2>
                     <div className="milestone_see_more">
                       <Link to={""}>See more</Link>
                     </div>
