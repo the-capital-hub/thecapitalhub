@@ -46,9 +46,11 @@ const FeedPostCard = ({
 
   const likeUnlikeHandler = async () => {
     try {
+      liked ? likes.length-- : likes.length++;
       setLiked(!liked);
       await likeUnlikeAPI(postId);
     } catch (error) {
+      !liked ? likes.length-- : likes.length++;
       setLiked(!liked);
       console.log("Error liking post: ", error);
     }
@@ -139,7 +141,10 @@ const FeedPostCard = ({
                 )}
               </div>
             </div>
-            <hr />
+            <span className=" mx-3 text-secondary" style={{ fontSize: "14px" }}>
+              {likes.length} likes
+            </span>
+            <hr className="mt-1 mb-2" />
             <div className="row feedpostcard_footer mb-2">
               <div className="col-8">
                 <div className="feedpostcard_footer_like_comment d-flex gap-2">
