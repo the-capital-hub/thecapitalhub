@@ -10,6 +10,8 @@ const AfterSuccessPopUp = ({
   savedFile,
   passwordChange,
   emailSent,
+  successText,
+  withoutOkButton,
 }) => {
   const handleOKClick = () => {
     onClose();
@@ -45,13 +47,15 @@ const AfterSuccessPopUp = ({
           {savedFile && <h1>File Saved Successfully</h1>}
 
           {passwordChange && <h1>Password Change Successfully</h1>}
-
+          {successText && <h1>{successText}</h1>}
           {emailSent && <h1>Email Sent Successfully</h1>}
           {emailSent && <p>Please Check Your Email</p>}
 
-          <button className="ok_button" onClick={handleOKClick}>
-            OK
-          </button>
+          {!withoutOkButton && (
+            <button className="ok_button" onClick={handleOKClick}>
+              OK
+            </button>
+          )}
           <button className="close-button" onClick={onClose}>
             X
           </button>

@@ -156,7 +156,7 @@ const Connection = () => {
                       ({ receiver, updatedAt, _id }, index) => (
                         <div
                           key={index}
-                          className="connection_item d-flex flex-column flex-md-row justify-content-between "
+                          className="connection_item py-2 d-flex flex-column flex-md-row justify-content-between "
                         >
                           <div className="connection_left">
                             <img

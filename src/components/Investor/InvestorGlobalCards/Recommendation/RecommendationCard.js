@@ -1,34 +1,39 @@
 import React from "react";
 import AddUserIconBlack from "../../../../Images/investorIcon/Add-UserBlack.svg";
-import profilePicUpma from "../../../../Images/Rectangle 1895.png";
-import profilePicRaghu from '../../../../Images/aboutUs/Raghu.jpeg'
+import AfterSuccessPopup from "../../../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import "./recommendation.scss";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { getRecommendations, sentConnectionRequest } from "../../../../Service/user";
+import {
+  getRecommendations,
+  sentConnectionRequest,
+} from "../../../../Service/user";
 
 const RecommendationCard = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [users, setUsers] = useState([]);
   useEffect(() => {
     getRecommendations(loggedInUser._id)
-    .then(({ data }) => {
-      setUsers(data.slice(0, 5));
-    })
-    .catch(() => setUsers({}));
+      .then(({ data }) => {
+        setUsers(data.slice(0, 5));
+      })
+      .catch(() => setUsers({}));
   }, [loggedInUser._id]);
 
+  const [connectionSent, setConnectionSent] = useState(false);
+
   const handleConnect = (userId) => {
-    sentConnectionRequest (loggedInUser._id, userId)
-    .then(({ data }) => {
-      alert("Connection Sent");
-      getRecommendations(loggedInUser._id)
-        .then(({ data }) => {
-          setUsers(data.slice(0, 5));
-        })
-        .catch(() => setUsers({}));
-    })
-    .catch((error) => console.log(error));
+    sentConnectionRequest(loggedInUser._id, userId)
+      .then(({ data }) => {
+        setConnectionSent(!connectionSent);
+        setTimeout(() => setConnectionSent((prev) => !prev), 1000);
+        getRecommendations(loggedInUser._id)
+          .then(({ data }) => {
+            setUsers(data.slice(0, 5));
+          })
+          .catch(() => setUsers({}));
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -41,21 +46,30 @@ const RecommendationCard = () => {
                 <span>Recommendation</span>
               </div>
             </div>
-            {users.map((user) => (
+            {users.map((user, i) => (
               <>
-            <div className="card-body recommendation_card_body ">
-              <img src={user.profilePicture} alt="img" className="rounded-circle" />
-              <div className="recommendation_card_text">
-                <h3>{user.firstName} {user.lastName}</h3>
-                <h4 className="smallest_typo">{user.designation || "" }</h4>
-                <button className="connect_button" onClick={() => handleConnect(user._id)}>
-                  <img src={AddUserIconBlack} alt="add user" />
-                  <span>Connect</span>
-                </button>
-              </div>
-            </div>
-            <hr className="hr" />
-            </>
+                <div className="card-body recommendation_card_body " key={i}>
+                  <img
+                    src={user.profilePicture}
+                    alt="img"
+                    className="rounded-circle"
+                  />
+                  <div className="recommendation_card_text">
+                    <h3>
+                      {user.firstName} {user.lastName}
+                    </h3>
+                    <h4 className="smallest_typo">{user.designation || ""}</h4>
+                    <button
+                      className="connect_button"
+                      onClick={() => handleConnect(user._id)}
+                    >
+                      <img src={AddUserIconBlack} alt="add user" />
+                      <span>Connect</span>
+                    </button>
+                  </div>
+                </div>
+                <hr className="hr" />
+              </>
             ))}
             {/* <div className="card-body recommendation_card_body ">
               <img src={profilePicUpma} alt="img" className="rounded-circle" />
@@ -72,6 +86,13 @@ const RecommendationCard = () => {
             </div> */}
           </div>
         </div>
+        {connectionSent && (
+          <AfterSuccessPopup
+            withoutOkButton
+            onClose={() => setConnectionSent(!connectionSent)}
+            successText="Connection Sent Successfully"
+          />
+        )}
       </div>
     </>
   );
