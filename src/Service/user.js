@@ -344,6 +344,18 @@ export const getPostComment = async ({ postId }) => {
   }
 };
 
+export const getUserConnections = async (userId) => {
+  try {
+    const response = await axiosInstance.get(
+      `${API.getUserConnections}/${userId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+
 export {
   getUser,
   postUser,

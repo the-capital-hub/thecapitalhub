@@ -5,25 +5,42 @@ import {
   acceptConnectionAPI,
   cancelConnectionRequestAPI,
   getSentConnectionsAPI,
+  getUserConnections,
   pendingConnectionRequestsAPI,
   rejectConnectionAPI,
 } from "../../../Service/user";
 import TimeAgo from "timeago-react";
+import { useSelector } from "react-redux";
 
 const Connection = () => {
   const [selectedTab, setSelectedTab] = useState("received"); // Default to "received"
   const [receivedConnections, setReceivedConnections] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [getAllConnection, setGetAllConnection] = useState([]); // State for accepted connections
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
+  // Function to handle tab change
+  useEffect(() => {
+    getUserConnections(loggedInUser._id).then((res) => {
+      console.log("res2-->", res);
+      setGetAllConnection(res.data); // Set accepted connections data
+    });
+  }, []);
   const handleTabChange = (tab) => {
     if (tab === "received") {
       getReceivedConnections();
+    } else if (tab === "accepted") {
+      getUserConnections(loggedInUser._id).then((res) => {
+        console.log("res-->", res);
+        setGetAllConnection(res.data); // Set accepted connections data
+      });
     } else {
       getSentConnection();
     }
     setSelectedTab(tab);
   };
 
+  // Function to get received connections
   const getReceivedConnections = () => {
     setLoading(true);
     pendingConnectionRequestsAPI()
@@ -32,6 +49,7 @@ const Connection = () => {
       .finally(() => setLoading(false));
   };
 
+  // Function to get sent connections
   const getSentConnection = () => {
     setLoading(true);
     getSentConnectionsAPI()
@@ -45,6 +63,7 @@ const Connection = () => {
     getReceivedConnections();
   }, []);
 
+  // Function to accept a connection
   const acceptConnectionHandler = async (connectionId) => {
     try {
       await acceptConnectionAPI(connectionId);
@@ -54,6 +73,7 @@ const Connection = () => {
     }
   };
 
+  // Function to reject a connection
   const rejectConnectionHandler = async (connectionId) => {
     try {
       await rejectConnectionAPI(connectionId);
@@ -63,6 +83,7 @@ const Connection = () => {
     }
   };
 
+  // Function to cancel a sent connection request
   const cancelConnectionRequest = async (connectionId) => {
     try {
       await cancelConnectionRequestAPI(connectionId);
@@ -98,10 +119,18 @@ const Connection = () => {
               >
                 Sent
               </a>
+
+              <a
+                href="#"
+                className={`connection_nav_link ${
+                  selectedTab === "accepted" ? "active" : ""
+                }`}
+                onClick={() => handleTabChange("accepted")}
+              >
+                Accepted
+              </a>
             </nav>
             <hr />
-            {/* <button className="all_button">All</button>
-            <hr /> */}
             <div className="connection_list">
               {loading ? (
                 <h5 className="text-center my-5">Loading connections...</h5>
@@ -113,6 +142,7 @@ const Connection = () => {
                         key={index}
                         className="connection_item d-flex flex-column flex-md-row justify-content-between "
                       >
+                        {/* Render content for received connections here */}
                         <div className="connection_left">
                           <img src={sender.profilePicture} alt="Connection" />
                           <div className="body_container">
@@ -149,7 +179,7 @@ const Connection = () => {
                 ) : (
                   <h5 className="text-center my-5">No received connections.</h5>
                 )
-              ) : (
+              ) : selectedTab === "sent" ? (
                 <div className="sent_placeholder">
                   {receivedConnections.length ? (
                     receivedConnections.map(
@@ -158,6 +188,7 @@ const Connection = () => {
                           key={index}
                           className="connection_item py-2 d-flex flex-column flex-md-row justify-content-between "
                         >
+                          {/* Render content for sent connections here */}
                           <div className="connection_left">
                             <img
                               src={receiver.profilePicture}
@@ -192,7 +223,43 @@ const Connection = () => {
                     <h5 className="text-center my-5">No sent connections.</h5>
                   )}
                 </div>
-              )}
+              ) : selectedTab === "accepted" ? (
+                // Render content for the "Accepted" tab here using getAllConnection
+                getAllConnection.length ? (
+                  getAllConnection.map((data, index) => (
+                    // console.log("data-->", data)
+                    <div
+                      key={index}
+                      className="connection_item d-flex flex-column flex-md-row justify-content-between"
+                    >
+                      {/* Render the accepted connection content here */}
+                      <div className="connection_left">
+                        <img src={data.profilePicture} alt="Connection" />
+                        <div className="body_container">
+                          <p className="connection_name h5">{`${
+                            data.firstName ? data.firstName : "name"
+                          } ${data.lastName ? data.lastName : ""}`}</p>
+                          <p className="connection_designation">
+                            {data.designation ? data.designation : ""}
+                          </p>
+                          <p>
+                            {/* <TimeAgo
+                              className="connection_time"
+                              datetime={data.updatedAt ? data.updatedAt : ""}
+                              locale=""
+                            /> */}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-center">
+                        {/* You can add buttons or other elements for accepted connections */}
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <h5 className="text-center my-5">No accepted connections.</h5>
+                )
+              ) : null}
             </div>
           </div>
         </div>
