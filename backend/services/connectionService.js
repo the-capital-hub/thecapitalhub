@@ -172,7 +172,7 @@ export const getUserConnections = async (userId) => {
   try {
     const user = await UserModel.findById(userId).populate(
       "connections",
-      "firstName lastName"
+      "firstName lastName profilePicture designation"
     );
     if (!user) {
       return {
