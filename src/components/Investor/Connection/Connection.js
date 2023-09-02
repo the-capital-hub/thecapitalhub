@@ -133,7 +133,13 @@ const Connection = () => {
             <hr />
             <div className="connection_list">
               {loading ? (
-                <h5 className="text-center my-5">Loading connections...</h5>
+                <h5 className="text-center my-5">
+                  <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                </h5>
               ) : selectedTab === "received" ? (
                 receivedConnections.length ? (
                   receivedConnections.map(
