@@ -52,7 +52,7 @@ const FeaturedPostCard = ({
 
   return (
     <>
-      <div className="row featuredpostcard_main_container mb-2">
+      <div className=" featuredpostcard_main_container mb-2">
         <div className="col-12">
           <div className="box featuredpostcard_container mt-2">
             <div className="  feed_header_container">
@@ -68,14 +68,14 @@ const FeaturedPostCard = ({
                 />
                 <div className="feedpostcart_text_header my-1">
                   <span
-                    style={{ fontSize: "18px", fontWeight: 600, color: "#000" }}
+                    style={{ fontSize: "15px", fontWeight: 600, color: "#000" }}
                   >
                     {firstName + " " + lastName}
                   </span>
                   <span className="d-flex flex-column flex-md-row">
                     <span
                       style={{
-                        fontSize: "12px",
+                        fontSize: "10px",
                         fontWeight: 500,
                         color: "#000",
                       }}
@@ -85,7 +85,7 @@ const FeaturedPostCard = ({
                     </span>
                     <span
                       style={{
-                        fontSize: "12px",
+                        fontSize: "10px",
                         fontWeight: 500,
                         color: "#000",
                       }}
@@ -95,7 +95,7 @@ const FeaturedPostCard = ({
                     </span>
                   </span>
                   <span
-                    style={{ fontSize: "12px", fontWeight: 500, color: "#000" }}
+                    style={{ fontSize: "10px", fontWeight: 500, color: "#000" }}
                   >
                     <TimeAgo datetime={createdAt} locale="" />
                   </span>
@@ -108,8 +108,8 @@ const FeaturedPostCard = ({
             <hr />
             <div className="para_container w-100">
               <div className="para_container_text w-100">
-                <p style={{ fontSize: "15px",wordWrap: "break-word" ,overflowWrap: "break-word"}}>{description}</p>
-                {image && (
+                <p style={{ fontSize: "13px",wordWrap: "break-word" ,overflowWrap: "break-word"}}>{description}</p>
+                {/* {image && (
                   <span className="d-flex">
                     <img
                       className="mx-auto"
@@ -119,8 +119,8 @@ const FeaturedPostCard = ({
                       alt="post-image"
                     />
                   </span>
-                )}
-                {video && (
+                )} */}
+                {/* {video && (
                   <span className="d-flex">
                     <video
                       className="mx-auto"
@@ -132,7 +132,7 @@ const FeaturedPostCard = ({
                       Your browser does not support the video tag.
                     </video>
                   </span>
-                )}
+                )} */}
               </div>
             </div>
             {/* <hr />

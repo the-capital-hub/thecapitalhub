@@ -86,9 +86,11 @@ const Card = () => {
             )
           )
         ) : (
-          <p className="container p-5 text-center my-5 bg-white rounded-5 shadow ">
-            Loading...
-          </p>
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
         )}
       </div>
     </div>
