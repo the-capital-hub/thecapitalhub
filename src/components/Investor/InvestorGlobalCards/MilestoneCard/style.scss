@@ -4,7 +4,7 @@
   margin-bottom: 1rem;
   padding-bottom: 1rem;
   white-space: nowrap;
-  overflow: hidden;
+  overflow: scroll;
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */
 }
@@ -27,8 +27,10 @@
   height: 200px;
   flex-shrink: 0;
 }
-.post_container_div{
+.post_container_div {
   max-width: 100%;
+  display: flex;
+  margin: auto;
 }
 
 .see-more-button {
@@ -42,4 +44,11 @@
 
 .see-more-button:hover {
   background-color: #366fd8;
+}
+@media (max-width: 768px) {
+  .post_container_div {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 }

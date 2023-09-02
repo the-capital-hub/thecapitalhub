@@ -101,7 +101,11 @@ const NavigatedCardViewer = () => {
             )
           ) : (
             <p className="container p-5 text-center my-5 bg-white mx-auto ">
-              Loading...
+              <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
             </p>
           )}
         </div>
