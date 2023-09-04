@@ -81,7 +81,7 @@ const FeedPostCard = ({
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
-    setLiked(likes.includes(loggedInUser._id));
+    // setLiked(likes.includes(loggedInUser._id));
   }, []);
 
   useEffect(() => {
