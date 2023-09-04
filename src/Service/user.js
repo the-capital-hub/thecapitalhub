@@ -356,6 +356,35 @@ export const getUserConnections = async (userId) => {
   }
 };
 
+// getpost by collection name
+export const getSavedPostCollections = async (userId) => {
+  try {
+    const response = await axiosInstance.get(
+      `${API.getSavedPostCollections}/${userId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+
+export const getSavedPostsByCollection = async (userId, collectionName) => {
+  console.log("userId,collectionName-->", userId, collectionName);
+  try {
+    const response = await axiosInstance.post(
+      `${API.getSavedPostsByCollection}/${userId}`,
+      {
+        collectionName: collectionName,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+
 export {
   getUser,
   postUser,
