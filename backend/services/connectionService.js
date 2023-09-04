@@ -260,13 +260,24 @@ export const getRecommendations = async (userId) => {
 
     if (recommendations.length === 0) {
       const users = await UserModel.find({
-        _id: { $nin: userConnections },
+        _id: { $nin: [...userConnections, userId] },
         userStatus: "active",
       });
+      const usersWithPendingConnections = await ConnectionModel.find({
+        $or: [
+          { sender: userId, receiver: { $in: users.map(user => user._id) }, status: "pending" },
+          { sender: { $in: users.map(user => user._id) }, receiver: userId, status: "pending" },
+        ],
+      });
+      const usersWithoutPendingConnections = users.filter(user =>
+        !usersWithPendingConnections.some(connection =>
+          connection.sender.equals(user._id) || connection.receiver.equals(user._id)
+        )
+      );
       return {
         status: 200,
         message: "Recommended User data retrived successfully",
-        data: users,
+        data: usersWithoutPendingConnections,
       };
     }
     const users = await UserModel.find({ _id: { $in: recommendations } });

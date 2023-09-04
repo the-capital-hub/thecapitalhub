@@ -321,7 +321,12 @@ export const getSavedPostsByCollection = async (userId, collectionName) => {
       };
     }
     const postIds = collection.posts;
-    const savedPosts = await PostModel.find({ _id: { $in: postIds } });
+    const savedPosts = await PostModel.find({ _id: { $in: postIds } })
+    .populate({
+      path: 'user',
+      select: 'firstName lastName profilePicture designation'
+    })
+    .exec();
     return {
       status: 200,
       message: `Saved posts retrieved successfully`,

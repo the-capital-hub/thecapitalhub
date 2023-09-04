@@ -15,7 +15,7 @@ import {
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
 
-router.use(authenticateToken);
+// router.use(authenticateToken);
 
 router.get("/getposts", getAllPosts);
 router.get("/getSinglePost/:id", getSinglePost);  
@@ -25,7 +25,7 @@ router.post("/newPost", createPost);
 // router.patch("/oldsavePost/:postId", savePost);
 router.patch("/savePost/:postId", savePostController);
 router.get("/getSavedPostCollections/:userId", getAllSavedPostCollectionsController);
-router.get("/getSavedPostsByCollection/:userId", getSavedPostsByCollectionController);
+router.post("/getSavedPostsByCollection/:userId", getSavedPostsByCollectionController);
 
 router.post("/likeUnlikePost/:postId", likeUnlikePostController);
 router.get('/likeCount/:postId', getLikeCountController);
