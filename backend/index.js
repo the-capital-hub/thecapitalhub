@@ -11,6 +11,7 @@ import globalErrorHandler from "./error/AppError.js";
 import startUpData from "./routes/startUpData.js";
 import contactUsData from "./routes/contactUsData.js";
 import connectionData from "./routes/connectionRoutes.js";
+import investorData from "./routes/investorRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -26,6 +27,7 @@ app.use("/documentation", documentData);
 app.use("/startup", startUpData);
 app.use("/contactUs", contactUsData);
 app.use("/connections", connectionData);
+app.use("/investor", investorData);
 // documentation upload
 
 const storage = multer.diskStorage({

@@ -283,3 +283,55 @@ export const searchUsers = async (searchParam) => {
     };
   }
 };
+
+// add education
+export const addEducation = async (userId, educationData) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found",
+      };
+    }
+    user.recentEducation.push(educationData);
+    await user.save();
+    return {
+      status: 200,
+      message: "Education added",
+      data: user,
+    };
+  } catch (error) {
+    console.error("Error adding recent education:", error);
+    return {
+      status: 500,
+      message: "An error occurred while adding education.",
+    };
+  }
+};
+
+// add experince
+export const addExperience = async (userId, experienceData) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found",
+      };
+    }
+    user.recentExperience.push(experienceData);
+    await user.save();
+    return {
+      status: 200,
+      message: "Experience added",
+      data: user,
+    };
+  } catch (error) {
+    console.error("Error adding recent experience:", error);
+    return {
+      status: 500,
+      message: "An error occurred while adding experience.",
+    };
+  }
+};
