@@ -1,11 +1,15 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import "./App.scss";
 import Footer from "./components/Footer/Footer";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
-import InvestorNavbar from "./components/Investor/InvestorNavbar/InvestorNavbar";
 import InvestorHome from "./components/Investor/InvestorHome/InvestorHome";
 import PrivateRoute from "./components/Routes/PrivateRoutes";
 import Documentation from "./components/Investor/Documentation/Documentation";
@@ -299,7 +303,15 @@ function App() {
           </Route>
 
           {/* Investor */}
-          <Route path="/investor" element={<ProtectedInvestorRoutes />}></Route>
+          <Route path="/investor" element={<ProtectedInvestorRoutes />}>
+            <Route path="" element={<Navigate to="profile" replace />} />
+            <Route
+              path="profile"
+              element={
+                <p>asfdlskjdflas dfas dfaslfda safeguardasd fasdf as df as</p>
+              }
+            />
+          </Route>
         </Routes>
       </Router>
     </div>
