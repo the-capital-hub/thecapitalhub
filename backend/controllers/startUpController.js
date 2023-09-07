@@ -5,6 +5,7 @@ import {
   updateStartUpData,
   investNowService,
   getStartupByFounderId,
+  getAllStartups,
 } from "../services/startUpService.js";
 import { getStartUpData } from "../services/userService.js";
 
@@ -134,6 +135,20 @@ export const getStartupByFounderIdController = async (req, res) => {
     res.status(500).send({
       status: 500,
       message: "An error occurred while getting company.",
+    });
+  }
+};
+
+// get all startups
+export const getAllStartupsController = async (req, res) => {
+  try {
+    const response = await getAllStartups();
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error("Error in getAllStartupsController:", error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while fetching all startups.",
     });
   }
 };
