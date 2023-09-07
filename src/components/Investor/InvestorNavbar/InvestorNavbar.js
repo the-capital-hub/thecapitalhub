@@ -72,7 +72,7 @@ const InvestorNavbar = (props) => {
               </div>
               {/* <div className="icon-wrapper d-none d-md-block"> */}
               <div className="icon-wrapper">
-                <Link to={"/investor/manage-account"}>
+                <Link to={"/manage-account"}>
                   {" "}
                   <img
                     className="profile-pic rounded-circle"

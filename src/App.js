@@ -48,6 +48,7 @@ import Privacy from "./components/Privacy/Privacy";
 import SecuritySafeGuard from "./components/SecuritySafeGuard/SecuritySafeGuard";
 import Connection from "./components/Investor/Connection/Connection";
 import Search from "./pages/StartUp/Search/Search";
+import ProtectedInvestorRoutes from "./pages/Investor/ProtectedInvestorRoutes/ProtectedInvestorRoutes";
 
 function App() {
   return (
@@ -276,10 +277,7 @@ function App() {
             <Route path="/onelink" element={<OneLink />} />
             <Route path="/onelink/edit" element={<OneLinkEditPage />} />
             <Route path="/documentation/:route" element={<FolderContents />} />
-            <Route
-              path="/investor/manage-account"
-              element={<InvestorManageAccount />}
-            />
+            <Route path="/manage-account" element={<InvestorManageAccount />} />
             <Route path="/team" element={<Team />} />
             <Route path="/customers" element={<Customer />} />
             <Route path="/investors" element={<Investors />} />
@@ -299,6 +297,9 @@ function App() {
             <Route path="documentation/:route" element={<FolderContents />} />
             {/* <Route path="investNow" element={<DocumentationIV />} /> */}
           </Route>
+
+          {/* Investor */}
+          <Route path="/investor" element={<ProtectedInvestorRoutes />}></Route>
         </Routes>
       </Router>
     </div>

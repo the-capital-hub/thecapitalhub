@@ -31,7 +31,7 @@ const RightProfileCard = () => {
               View Profile
             </Link>
             <Link
-              to="/investor/manage-account"
+              to="/manage-account"
               className="profile_btn mt-1 manage_acount_btn"
             >
               Manage Account
