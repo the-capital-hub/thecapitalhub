@@ -1,0 +1,53 @@
+.mystartup_main_container {
+  .startup_container {
+    border-radius: 10px;
+    border: 1px solid #eaeaea;
+    background: #fff;
+    width: 99%;
+    padding: 20px;
+
+    .title_h4 {
+      color: #090909;
+      font-family: Poppins;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+    .card_container {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .big_card_container {
+    margin-bottom: 2rem;
+    width: 99%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .left_container,
+    .right_container {
+      border-radius: 10px;
+      border: 1px solid #dfdfdf;
+      background: #fff;
+      width: 49%;
+      padding: 15px;
+      height: 30rem;
+    }
+    .left_container {
+      .chart_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .right_container {
+      .two_by_two_card_container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  }
+}

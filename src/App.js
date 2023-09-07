@@ -54,6 +54,7 @@ import Connection from "./components/Investor/Connection/Connection";
 import Search from "./pages/StartUp/Search/Search";
 import ProtectedInvestorRoutes from "./pages/Investor/ProtectedInvestorRoutes/ProtectedInvestorRoutes";
 import InvestorProfile from "./pages/Investor/Profile/Profile";
+import MyStartUp from "./pages/Investor/MyStartUp/MyStartUp";
 
 function App() {
   return (
@@ -307,6 +308,7 @@ function App() {
           <Route path="/investor" element={<ProtectedInvestorRoutes />}>
             <Route path="" element={<Navigate to="profile" replace />} />
             <Route path="profile" element={<InvestorProfile />} />
+            <Route path="mystartup" element={<MyStartUp />} />
           </Route>
         </Routes>
       </Router>
