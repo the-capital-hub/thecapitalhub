@@ -53,6 +53,7 @@ import SecuritySafeGuard from "./components/SecuritySafeGuard/SecuritySafeGuard"
 import Connection from "./components/Investor/Connection/Connection";
 import Search from "./pages/StartUp/Search/Search";
 import ProtectedInvestorRoutes from "./pages/Investor/ProtectedInvestorRoutes/ProtectedInvestorRoutes";
+import MyStartUp from "./pages/Investor/MyStartUp/MyStartUp";
 
 function App() {
   return (
@@ -311,6 +312,7 @@ function App() {
                 <p>asfdlskjdflas dfas dfaslfda safeguardasd fasdf as df as</p>
               }
             />
+            <Route path="mystartup" element={<MyStartUp />} />
           </Route>
         </Routes>
       </Router>

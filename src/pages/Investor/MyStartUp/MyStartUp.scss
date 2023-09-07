@@ -1,0 +1,22 @@
+.mystartup_main_container {
+  .startup_container {
+    border-radius: 10px;
+    border: 1px solid #eaeaea;
+    background: #fff;
+    width: 99%;
+    padding: 20px;
+
+    .title_h4 {
+      color: #090909;
+      font-family: Poppins;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+    .card_container {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
