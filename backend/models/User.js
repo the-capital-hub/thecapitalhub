@@ -104,6 +104,29 @@ const userSchema = new Schema(
         ref: "Users",
       },
     ],
+    recentExperience: [
+      {
+        logo: String,
+        companyName: String,
+        location: String,
+        experienceDuration: String,
+        role: String,
+      },
+    ],
+
+    recentEducation: [
+      {
+        logo: String,
+        collegeName: String,
+        location: String,
+        passoutYear: Number,
+        course: String,
+      },
+    ],
+    investor: {
+      type: Schema.Types.ObjectId,
+      ref: "Investors",
+    },
     userStatus: {
       type: String,
       default: "inactive"

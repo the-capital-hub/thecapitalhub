@@ -10,6 +10,8 @@ import {
   requestPasswordReset,
   resetPassword,
   searchUsers,
+  addEducation,
+  addExperience,
 } from "../services/userService.js";
 import { secretKey } from "../constants/config.js";
 
@@ -159,5 +161,37 @@ export const searchUsersController = async (req, res) => {
     return res
       .status(500)
       .json({ message: "An error occurred while resetting the password" });
+  }
+};
+
+// add education
+export const addEducationController = async (req, res) => {
+  try {
+    const { userId } = req.params; 
+    const response = await addEducation(userId, req.body);
+    res.status(response.status).send(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while adding education.",
+    });
+  }
+};
+
+//add experience
+export const addExperienceController = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const response = await addExperience(userId, req.body);
+    res.status(response.status).send(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while adding experience.",
+    });
   }
 };
