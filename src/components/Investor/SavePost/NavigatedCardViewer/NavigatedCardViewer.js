@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./NavigatedCardViewer.scss";
-import FeedPostCard from "../../Cards/FeedPost/FeedPostCard";
 import {
   getSavedPostCollections,
   getSavedPostsAPI,

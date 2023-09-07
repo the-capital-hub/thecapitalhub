@@ -385,6 +385,25 @@ export const getSavedPostsByCollection = async (userId, collectionName) => {
   }
 };
 
+export const savePost = async ( postId, userId, collectionName ) => {
+  console.log("postId, userId, collectionName ",postId, userId, collectionName )
+  try {
+    const response = await axiosInstance.patch(
+      `${API.savePost}/${postId}`,
+      {
+        userId: userId,
+        collectionName: collectionName,
+      }
+    );
+    return response;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+
+
+
 export {
   getUser,
   postUser,

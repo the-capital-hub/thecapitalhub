@@ -32,6 +32,8 @@ const FeedPostCard = ({
   profilePicture,
   designation,
   likes,
+  handleSaved,
+  saved
 }) => {
   const [showComment, setShowComment] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -220,7 +222,7 @@ const FeedPostCard = ({
               </div>
               <div className="col-4 d-flex align-items-center gap-3 justify-content-end">
                 <img src={shareIcon} width={16} alt="share post" />
-                <img src={saveIcon} width={16} alt="save post" />
+                <img src={saveIcon} width={16} alt="save post" onClick={()=>handleSaved(!saved)}/>
               </div>
               {showComment && (
                 <div>

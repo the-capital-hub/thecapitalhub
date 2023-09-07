@@ -9,8 +9,10 @@ import { getAllPostsAPI } from "../../../Service/user";
 import { useSelector } from "react-redux";
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
+import SavedPostPopUp from "../../PopUp/SavedPostPopUp/SavedPostPopUp";
 
 const Feed = () => {
+  const [saved, handleSaved] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
   const [allPosts, setAllPosts] = useState(null);
   const [newPost, setNewPost] = useState(false);
@@ -19,6 +21,12 @@ const Feed = () => {
   };
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const handleClosePopup = () => {
+    handleSaved(false);
+  };
+  // const handleBack = () => {
+  //   navigate("/");
+  // };
 
   useEffect(() => {
     document.title = "Home | The Capital Hub";
@@ -87,6 +95,8 @@ const Feed = () => {
                       image={image}
                       createdAt={createdAt}
                       likes={likes}
+                      handleSaved={handleSaved}
+                      saved={saved}
                     />
                   )
                 )
@@ -106,6 +116,32 @@ const Feed = () => {
                 popupOpen
                 setNewPost={setNewPost}
               />
+            )}
+
+            {/* {saved && <SavedPostPopUp onClose={handleClosePopup} postId={_id}/>} */}
+
+            {saved && allPosts ? (
+              allPosts.map(
+                (data) => (
+                  <SavedPostPopUp
+                    onClose={handleClosePopup}
+                    key={Math.random()}
+                    handleSaved={handleSaved}
+                    saved={saved}
+                    data={data}
+                    postId={data._id}
+                  />
+                  
+                )
+              )
+            ) : (
+              <p className="container p-5 text-center my-5 bg-white rounded-5 shadow ">
+                <div class="d-flex justify-content-center">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              </p>
             )}
           </div>
           <div className="col   d-none d-xl-block">
