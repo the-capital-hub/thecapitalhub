@@ -4,9 +4,8 @@ import "./rightProfileCard.scss";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const RightProfileCard = () => {
+const RightProfileCard = ({noProfile}) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  console.log(loggedInUser);
   return (
     <>
       <div className="col-12 view_profile_container">
@@ -27,11 +26,11 @@ const RightProfileCard = () => {
                 {`${loggedInUser?.designation} at ${loggedInUser?.startUp?.company}`}
               </span>
             </div>
-            <Link to="/profile" className="profile_btn mt-2">
+            {!noProfile && <Link to="/profile" className="profile_btn mt-2">
               View Profile
-            </Link>
+            </Link>}
             <Link
-              to="/investor/manage-account"
+              to="/manage-account"
               className="profile_btn mt-1 manage_acount_btn"
             >
               Manage Account

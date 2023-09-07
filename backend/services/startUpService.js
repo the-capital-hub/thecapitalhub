@@ -224,3 +224,21 @@ export const getStartupByFounderId = async (founderId) => {
     };
   }
 }
+
+// Get All Startups
+export const getAllStartups = async () => {
+  try {
+    const startups = await StartUpModel.find();
+    return {
+      status: 200,
+      message: "Startups retrieved successfully.",
+      data: startups,
+    };
+  } catch (error) {
+    console.error("Error getting all startups:", error);
+    return {
+      status: 500,
+      message: "An error occurred while getting all startups.",
+    };
+  }
+};

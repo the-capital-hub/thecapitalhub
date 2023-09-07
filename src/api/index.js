@@ -29,7 +29,7 @@ const API = Object.freeze({
   getRecommendations: `${baseUrl}/connections/getRecommendations`,
   getSavedPostCollections: `${baseUrl}/api/posts/getSavedPostCollections`,
   getSavedPostsByCollection: `${baseUrl}/api/posts/getSavedPostsByCollection`,
-  getCollectionsName: `${baseUrl}/connections/getUserConnections`,
+  getUserConnections: `${baseUrl}/connections/getUserConnections`,
   sendConnectionRequest: `${baseUrl}/connections/sendConnectionRequest`,
   sendPostComment: `${baseUrl}/api/posts/comment`,
   getPostComment:`${baseUrl}/api/posts/getComments`,
