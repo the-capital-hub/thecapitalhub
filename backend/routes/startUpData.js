@@ -8,6 +8,7 @@ import {
   startUpData,
   investNowController,
   getStartupByFounderIdController,
+  getAllStartupsController,
 } from "../controllers/startUpController.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 
@@ -38,6 +39,6 @@ router.patch("/onelink", editStartUpOneLink);
 router.patch("/introMessage", editStartUpIntroMessage);
 router.put("/onePager", editOnePager);
 
-
+router.get("/getALlStartUps", getAllStartupsController);
 
 export default router;
