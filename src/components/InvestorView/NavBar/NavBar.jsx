@@ -41,7 +41,7 @@
 //                 </span>
 //               </div>
 //               <div className="icon-wrapper">
-//                 <Link to={"/investor/manage-account"}>
+//                 <Link to={"/manage-account"}>
 //                   {" "}
 //                   <img className="profile-pic" src={profilePic} alt="Profile" />
 //                 </Link>
@@ -118,7 +118,7 @@ const NavBar = (props) => {
                 </span>
               </div>
               <div className="icon-wrapper">
-                <Link to={"/investor/manage-account"}>
+                <Link to={"/manage-account"}>
                   {" "}
                   <img className="profile-pic" src={profilePic} alt="Profile" />
                 </Link>

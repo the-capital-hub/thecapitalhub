@@ -1,11 +1,15 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import "./App.scss";
 import Footer from "./components/Footer/Footer";
 import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
-import InvestorNavbar from "./components/Investor/InvestorNavbar/InvestorNavbar";
 import InvestorHome from "./components/Investor/InvestorHome/InvestorHome";
 import PrivateRoute from "./components/Routes/PrivateRoutes";
 import Documentation from "./components/Investor/Documentation/Documentation";
@@ -48,6 +52,7 @@ import Privacy from "./components/Privacy/Privacy";
 import SecuritySafeGuard from "./components/SecuritySafeGuard/SecuritySafeGuard";
 import Connection from "./components/Investor/Connection/Connection";
 import Search from "./pages/StartUp/Search/Search";
+import ProtectedInvestorRoutes from "./pages/Investor/ProtectedInvestorRoutes/ProtectedInvestorRoutes";
 
 function App() {
   return (
@@ -276,10 +281,7 @@ function App() {
             <Route path="/onelink" element={<OneLink />} />
             <Route path="/onelink/edit" element={<OneLinkEditPage />} />
             <Route path="/documentation/:route" element={<FolderContents />} />
-            <Route
-              path="/investor/manage-account"
-              element={<InvestorManageAccount />}
-            />
+            <Route path="/manage-account" element={<InvestorManageAccount />} />
             <Route path="/team" element={<Team />} />
             <Route path="/customers" element={<Customer />} />
             <Route path="/investors" element={<Investors />} />
@@ -298,6 +300,17 @@ function App() {
             <Route path="investnow" element={<InvestNow />} />
             <Route path="documentation/:route" element={<FolderContents />} />
             {/* <Route path="investNow" element={<DocumentationIV />} /> */}
+          </Route>
+
+          {/* Investor */}
+          <Route path="/investor" element={<ProtectedInvestorRoutes />}>
+            <Route path="" element={<Navigate to="profile" replace />} />
+            <Route
+              path="profile"
+              element={
+                <p>asfdlskjdflas dfas dfaslfda safeguardasd fasdf as df as</p>
+              }
+            />
           </Route>
         </Routes>
       </Router>
