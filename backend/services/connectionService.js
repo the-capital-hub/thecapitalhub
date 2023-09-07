@@ -245,7 +245,7 @@ export const getRecommendations = async (userId) => {
       for (const connectionId of mutualConnections) {
         if (
           connectionId.toString() !== userId &&
-          !recommendations.includes(connectionId)
+          !recommendations.includes(connectionId) && !userConnections.includes(connectionId)
         ) {
           const existsPendingConnections = await ConnectionModel.findOne({
             $or: [
@@ -257,10 +257,9 @@ export const getRecommendations = async (userId) => {
         }
       }
     }
-
     if (recommendations.length === 0) {
       const users = await UserModel.find({
-        _id: { $nin: [...userConnections, userId] },
+        _id: { $nin: [...userConnections] },
         userStatus: "active",
       });
       const usersWithPendingConnections = await ConnectionModel.find({
