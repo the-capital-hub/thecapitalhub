@@ -10,6 +10,8 @@ import {
   requestPasswordResetController,
   resetPasswordController,
   searchUsersController,
+  addEducationController,
+  addExperienceController,
 } from "../controllers/userData.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
@@ -38,6 +40,7 @@ router.patch("/changePassword", changePasswordController);
 
 router.get("/search/:searchParam", searchUsersController);
 
-
+router.patch("/addEducation/:userId", addEducationController);
+router.patch("/addExperience/:userId", addExperienceController);
 
 export default router;
