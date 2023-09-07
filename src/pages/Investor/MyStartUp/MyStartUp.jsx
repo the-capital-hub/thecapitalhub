@@ -4,6 +4,8 @@ import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/T
 import MyInvestmentCard from "../InvestorCards/MyInvestmentCard/MyInvestmentCard";
 import logoIcon from "../../../Images/investorIcon/Rectangle 1577.png";
 import EyeLikeImage from "../../../Images/investorIcon/Ellipse 192.svg";
+import ChartComponent from "./ChartComponent";
+import PostInvestmentCard from "../InvestorCards/PostInvestmentCard/PostInvestmentCard";
 
 const MyStartUp = () => {
   return (
@@ -66,14 +68,41 @@ const MyStartUp = () => {
           </div>
         </div>
 
-        <div className="row mt-2">
+        <div className="row mt-2 big_card_container">
           <div className="col-6 left_container">
-
+            <h4 className="title_h4">Summary</h4>
+            <hr />
+            <div className="chart_container">
+              <ChartComponent />
+            </div>
           </div>
           <div className="col-6 right_container">
-
+            <h4 className="title_h4">Past Investments</h4>
+            <hr />
+            <div className="two_by_two_card_container">
+              <PostInvestmentCard
+                logo={logoIcon}
+                text="Investment 1"
+                para="Some description for Investment 1."
+                images={EyeLikeImage}
+                smallText="Small text for Investment 1."
+              />
+              <PostInvestmentCard
+                logo={logoIcon}
+                text="Investment 1"
+                para="Some description for Investment 1."
+                images={EyeLikeImage}
+                smallText="Small text for Investment 1."
+              />
+              <PostInvestmentCard
+                logo={logoIcon}
+                text="Investment 1"
+                para="Some description for Investment 1."
+                images={EyeLikeImage}
+                smallText="Small text for Investment 1."
+              />
+            </div>
           </div>
-
         </div>
       </div>
     </>
