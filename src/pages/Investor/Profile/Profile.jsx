@@ -6,11 +6,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
-import CompanyDetailsCard from "../../../components/Investor/InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
 import RightProfileCard from "../../../components/Investor/InvestorGlobalCards/RightProfileCard/RightProfileCard";
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
-import MileStoneCard from "../../../components/Investor/Cards/MilestoneCard/MileStoneCard";
+import fisdomStartUpIcon from "../../../Images/Investor/Profile/fisdom_startup.png";
+import linkSectorIcon from "../../../Images/Investor/Profile/link_sector.png";
+import educationIcon from "../../../Images/Investor/Profile/iit_education.svg";
+import avgInvestmentIcon from "../../../Images/Investor/Profile/avg_investment.png";
+import noOfInvestmentIcon from "../../../Images/Investor/Profile/num_of_investments.svg";
+import ticketSizeIcon from "../../../Images/Investor/Profile/ticket_size.svg";
+import seedRoundIcon from "../../../Images/Investor/Profile/seed_round.svg";
+import totalInvestmentIcon from "../../../Images/Investor/Profile/total_investment.png";
+import InvestmentDetailCard from "../../../components/NewInvestor/InvestmentDetailCard/InvestmentDetailCard";
 
 function Profile() {
   const [isBioEditable, setIsBioEditable] = useState(false);
@@ -152,7 +159,7 @@ function Profile() {
           <div className="content-70">
             <div className="row">
               <div className="col-12 mt-2">
-                <div className=" box bio_container">
+                <div className=" box bio_container rounded border shadow-sm">
                   <div className="row profileContainer">
                     <div className="col-10 col-md-8 col-seven">
                       <div className="image_name_section mt-2">
@@ -261,9 +268,9 @@ function Profile() {
               </div>
             </div>
 
-            <div className="row">
+            <div className="row rounded">
               <div className="col-12 mt-2">
-                <div className=" box personal_information">
+                <div className=" box personal_information rounded border shadow-sm">
                   <div className="personal_information_header">
                     <h2 className="typography green_underline">
                       Personal Information
@@ -361,7 +368,7 @@ function Profile() {
 
             <div className="row">
               <div className="col-12 mt-2">
-                <div className="box personal_information">
+                <div className="box personal_information  rounded border shadow-sm">
                   <div className="personal_information_header">
                     <h2 className="typography green_underline">Bio</h2>
                     <span className="ms-auto">
@@ -412,29 +419,331 @@ function Profile() {
           </div>
         </div>
       </div>
-      <div className="startups_invested">
+      <div className="startups_invested shadow-sm ">
         <div className="header">
           <h2 className="green_underline typography">Startups Invested</h2>
           <div className="green_button">
             <Link to={""}>Add New</Link>
           </div>
         </div>
-        <div className="invested_cards">
-          <div className="invested_card">
-            <img src="" alt="" />
-            <div className="description">
-              <h6>StartUp Name</h6>
-              <hr />
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Repellat tenetur harum corrupti ut alias, provident porro facere
-                inventore est corporis quis explicabo laudantium repellendus ad
-                impedit voluptatem quia nobis voluptatibus.
+        {/* Loop cards here */}
+        <div className="invested_cards hide_scrollbar">
+          <div className="invested_card border rounded shadow-sm">
+            <div className="card_title">
+              <img src={fisdomStartUpIcon} alt="startup icon" width={50} />
+              <h5>StartUp Name</h5>
+            </div>
+            <div className="p-2">
+              <p className="green_underline mb-1">Sector:</p>
+              <p className="mb-0">
+                One classical breakdown of economic activity distinguishes three
+                sectors: Primary: involves the retrieval and production of
+                raw-material commodities, such as corn, coal, wood or iron
+              </p>
+            </div>
+          </div>
+          <div className="invested_card border rounded shadow-sm">
+            <div className="card_title">
+              <img src={fisdomStartUpIcon} alt="startup icon" width={50} />
+              <h5>StartUp Name</h5>
+            </div>
+            <div className="p-2">
+              <p className="green_underline mb-1">Sector:</p>
+              <p className="mb-0">
+                One classical breakdown of economic activity distinguishes three
+                sectors: Primary: involves the retrieval and production of
+                raw-material commodities, such as corn, coal, wood or iron
+              </p>
+            </div>
+          </div>
+          <div className="invested_card border rounded shadow-sm">
+            <div className="card_title">
+              <img src={fisdomStartUpIcon} alt="startup icon" width={50} />
+              <h5>StartUp Name</h5>
+            </div>
+            <div className="p-2">
+              <p className="green_underline mb-1">Sector:</p>
+              <p className="mb-0">
+                One classical breakdown of economic activity distinguishes three
+                sectors: Primary: involves the retrieval and production of
+                raw-material commodities, such as corn, coal, wood or iron
+              </p>
+            </div>
+          </div>
+          <div className="invested_card border rounded shadow-sm">
+            <div className="card_title">
+              <img src={fisdomStartUpIcon} alt="startup icon" width={50} />
+              <h5>StartUp Name</h5>
+            </div>
+            <div className="p-2">
+              <p className="green_underline mb-1">Sector:</p>
+              <p className="mb-0">
+                One classical breakdown of economic activity distinguishes three
+                sectors: Primary: involves the retrieval and production of
+                raw-material commodities, such as corn, coal, wood or iron
+              </p>
+            </div>
+          </div>
+          <div className="invested_card border rounded shadow-sm">
+            <div className="card_title">
+              <img src={fisdomStartUpIcon} alt="startup icon" width={50} />
+              <h5>StartUp Name</h5>
+            </div>
+            <div className="p-2">
+              <p className="green_underline mb-1">Sector:</p>
+              <p className="mb-0">
+                One classical breakdown of economic activity distinguishes three
+                sectors: Primary: involves the retrieval and production of
+                raw-material commodities, such as corn, coal, wood or iron
               </p>
             </div>
           </div>
         </div>
       </div>
+      <div className="sector_interested shadow-sm">
+        <div className="header">
+          <h2 className="green_underline typography">Sectors Interested</h2>
+          <div className="green_button">
+            <Link to={""}>Add New</Link>
+          </div>
+        </div>
+        {/* Loop cards from here onwards */}
+        <div className="interested_cards hide_scrollbar">
+          <div className="interested_card border rounded shadow-sm">
+            <img
+              className="rounded-circle border"
+              src={linkSectorIcon}
+              alt="sector image"
+              width={50}
+              height={50}
+            />
+            <h6>Link Sector</h6>
+          </div>
+          <div className="interested_card border rounded shadow-sm">
+            <img
+              className="rounded-circle border"
+              src={linkSectorIcon}
+              alt="sector image"
+              width={50}
+              height={50}
+            />
+            <h6>Link Sector</h6>
+          </div>
+          <div className="interested_card border rounded shadow-sm">
+            <img
+              className="rounded-circle border"
+              src={linkSectorIcon}
+              alt="sector image"
+              width={50}
+              height={50}
+            />
+            <h6>Link Sector</h6>
+          </div>
+          <div className="interested_card border rounded shadow-sm">
+            <img
+              className="rounded-circle border"
+              src={linkSectorIcon}
+              alt="sector image"
+              width={50}
+              height={50}
+            />
+            <h6>Link Sector</h6>
+          </div>
+          <div className="interested_card border rounded shadow-sm">
+            <img
+              className="rounded-circle border"
+              src={linkSectorIcon}
+              alt="sector image"
+              width={50}
+              height={50}
+            />
+            <h6>Link Sector</h6>
+          </div>
+          <div className="interested_card border rounded shadow-sm">
+            <img
+              className="rounded-circle border"
+              src={linkSectorIcon}
+              alt="sector image"
+              width={50}
+              height={50}
+            />
+            <h6>Link Sector</h6>
+          </div>
+          <div className="interested_card border rounded shadow-sm">
+            <img
+              className="rounded-circle border"
+              src={linkSectorIcon}
+              alt="sector image"
+              width={50}
+              height={50}
+            />
+            <h6>Link Sector</h6>
+          </div>
+        </div>
+      </div>
+      <section className="investment_philosophy shadow-sm">
+        <h2 className="green_underline typography">Investment Philosophy</h2>
+        <div className="d-flex flex-column flex-md-row gap-2 w-100 px-4 py-2">
+          <p>Description: </p>
+          <p className="text-secondary">
+            Investing Deploying Capital toward projects or activities that are
+            expected to generate a positive financial return over time.
+          </p>
+        </div>
+        <div className="recent_experience border rounded mx-md-4">
+          <div className="flex-md-row header">
+            <h5 className="green_underline h5">Recent Experience</h5>
+            <div className="green_button">
+              <Link to={""}>
+                <span>Add </span>
+                <span className="d-none d-md-inline-block">Experience</span>
+              </Link>
+            </div>
+          </div>
+          <div className="experience_cards">
+            <div className="experience_card py-2 mt-1 row row-cols-1 row-cols-md-2">
+              <div className="img_container rounded d-flex align-items-center justify-content-center mx-auto col-6 col-md-2">
+                <img
+                  className="rounded-circle"
+                  src={linkSectorIcon}
+                  height={100}
+                  alt="experience image"
+                />
+              </div>
+              <div className="description mt-1 mt-md-0 col-md-9 row row-cols-1 row-cols-md-2 row-cols-xl-3">
+                <div className="d-flex flex-column mb-1 mb-md-3">
+                  <p className="text-secondary mb-1">Company Name</p>
+                  <p className="m-0">The Capital HUB, India</p>
+                </div>
+                <div className="d-flex flex-column mb-1 mb-md-3">
+                  <p className="text-secondary mb-1">Location</p>
+                  <p className="m-0">Bangalore, India</p>
+                </div>
+                <div className="d-flex flex-column mb-1 mb-md-3">
+                  <p className="text-secondary mb-1">Experience</p>
+                  <p className="m-0">2Years 2 months, Present Full Time.</p>
+                </div>
+                <div className="d-flex flex-column mb-1 mb-md-3">
+                  <p className="text-secondary mb-1">Role</p>
+                  <p className="m-0">UI/UX Designer</p>
+                </div>
+              </div>
+            </div>
+            <div className="experience_card py-2 mt-1 row row-cols-1 row-cols-md-2">
+              <div className="img_container rounded d-flex align-items-center justify-content-center mx-auto col-6 col-md-2">
+                <img
+                  className="rounded-circle"
+                  src={linkSectorIcon}
+                  height={100}
+                  alt="experience image"
+                />
+              </div>
+              <div className="description mt-1 mt-md-0 col-md-9 row row-cols-1 row-cols-md-2 row-cols-xl-3">
+                <div className="d-flex flex-column mb-1 mb-md-3">
+                  <p className="text-secondary mb-1">Company Name</p>
+                  <p className="m-0">The Capital HUB, India</p>
+                </div>
+                <div className="d-flex flex-column mb-1 mb-md-3">
+                  <p className="text-secondary mb-1">Location</p>
+                  <p className="m-0">Bangalore, India</p>
+                </div>
+                <div className="d-flex flex-column mb-1 mb-md-3">
+                  <p className="text-secondary mb-1">Experience</p>
+                  <p className="m-0">2Years 2 months, Present Full Time.</p>
+                </div>
+                <div className="d-flex flex-column mb-1 mb-md-3">
+                  <p className="text-secondary mb-1">Role</p>
+                  <p className="m-0">UI/UX Designer</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="education border rounded mx-md-4">
+          <div className="flex-md-row header">
+            <h5 className="green_underline h5">Education</h5>
+            <div className="green_button">
+              <Link to={""}>
+                <span>Add </span>
+                <span className="d-none d-md-inline-block">Education</span>
+              </Link>
+            </div>
+          </div>
+          <div className="experience_cards">
+            <div className="experience_card py-2 mt-1 row row-cols-1 row-cols-md-2">
+              <div className="img_container rounded d-flex align-items-center justify-content-center mx-auto col-6 col-md-2">
+                <img
+                  className="rounded-circle"
+                  src={educationIcon}
+                  height={100}
+                  alt="education image"
+                />
+              </div>
+              <div className="description mt-1 mt-md-0 col-md-9 row row-cols-1 row-cols-md-2 row-cols-xl-3">
+                <div className="d-flex flex-column mb-1 mb-md-3">
+                  <p className="text-secondary mb-1">College Name</p>
+                  <p className="m-0">IIIT, India</p>
+                </div>
+                <div className="d-flex flex-column mb-1 mb-md-3">
+                  <p className="text-secondary mb-1">Location</p>
+                  <p className="m-0">Bangalore, India</p>
+                </div>
+                <div className="d-flex flex-column mb-1 mb-md-3">
+                  <p className="text-secondary mb-1">Passed Out</p>
+                  <p className="m-0">2010 - 2014</p>
+                </div>
+                <div className="d-flex flex-column mb-1 mb-md-3">
+                  <p className="text-secondary mb-1">Course</p>
+                  <p className="m-0">
+                    B.Tech, Computer Science And Engineering.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="investment_details_cards row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+          <InvestmentDetailCard
+            className="col"
+            img={totalInvestmentIcon}
+            title="Total Investment"
+            amount="1 Crore"
+          />
+          <InvestmentDetailCard
+            className="col"
+            img={avgInvestmentIcon}
+            title="Average Investment"
+            amount="50 Lakhs"
+          />
+          <InvestmentDetailCard
+            className="col"
+            img={noOfInvestmentIcon}
+            title="No.of Investment"
+            amount="10"
+          />
+          <InvestmentDetailCard
+            className="col"
+            img={ticketSizeIcon}
+            title="Minimum Tickets Size"
+            amount="25 Lakhs"
+          />
+          <InvestmentDetailCard
+            className="col"
+            img={ticketSizeIcon}
+            title="Maximum Tickets Size"
+            amount="50 Lakhs"
+          />
+          <InvestmentDetailCard
+            className="col"
+            img={seedRoundIcon}
+            title="Seed Round"
+            amount="10"
+          />
+        </div>
+        <button className="green_button btn mx-3">
+          Book Your Appointment Now
+        </button>
+      </section>
     </div>
   );
 }
