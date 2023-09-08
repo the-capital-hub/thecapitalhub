@@ -1,0 +1,45 @@
+.explore_container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .filter_container {
+    border-radius: 10px;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0.125rem 0.25rem rgba(black, 0.075);
+
+    .filter_by {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      .active {
+        color: #000;
+        background-color: #d3f36b;
+      }
+      button {
+        border: none;
+        color: #9c8f8f;
+        background-color: white;
+        border-radius: 5px;
+        padding: 5px 10px;
+        width: fit-content;
+      }
+    }
+
+    .filter_by_selections {
+      margin: 10px 0;
+    }
+  }
+
+  .filtered_company_details {
+    box-shadow: 0 0.125rem 0.25rem rgba(black, 0.075);
+    padding: 10px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+}
