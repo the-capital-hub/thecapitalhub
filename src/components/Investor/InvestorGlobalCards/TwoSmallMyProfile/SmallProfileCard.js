@@ -2,6 +2,7 @@ import React from "react";
 import ArrowIcon from "../../../../Images/investorIcon/Arrow.svg";
 import "./SmallProfileCard.scss";
 import { useSelector } from "react-redux";
+
 const SmallProfileCard = ({ className, text, width }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const formatDate = (dateString) => {

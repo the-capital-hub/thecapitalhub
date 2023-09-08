@@ -139,7 +139,10 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 active={location.pathname.includes("/explore")}
                 className="active-item"
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="">
+                <Link
+                  onClick={() => setSidebarCollapsed(true)}
+                  to="/investor/explore"
+                >
                   <img
                     src={exploreIcon}
                     alt="image"
@@ -150,10 +153,10 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 </Link>
               </MenuItem>
               <MenuItem
-                active={location.pathname.includes("/my-StartUps")}
+                active={location.pathname.includes("/mystartups")}
                 className="active-item"
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="">
+                <Link onClick={() => setSidebarCollapsed(true)} to="/investor/mystartups">
                   <img
                     src={myStartUpIcon}
                     alt="image"
