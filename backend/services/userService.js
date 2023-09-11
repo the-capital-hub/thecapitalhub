@@ -52,13 +52,14 @@ export const loginUserService = async ({ phoneNumber, password }) => {
 //get User by id
 export const getUserById = async (userId) => {
   try {
-    const user = await UserModel.findById(userId);
+    const user = await UserModel.findById(userId).populate("startUp");
     if (!user) {
       return {
         status: 404,
         message: "User not found.",
       };
     }
+    user.password = undefined;
     return {
       status: 200,
       message: "User details retrieved successfully.",
@@ -231,7 +232,7 @@ export const requestPasswordReset = async (email) => {
 };
 
 export const resetPassword = async (token, newPassword) => {
-  console.log("token, newPassword",token, newPassword)
+  console.log("token, newPassword", token, newPassword);
   try {
     const decodedToken = jwt.verify(token, secretKey);
     if (!decodedToken || !decodedToken.userId) {
@@ -262,7 +263,7 @@ export const resetPassword = async (token, newPassword) => {
   }
 };
 
-//search user 
+//search user
 export const searchUsers = async (searchParam) => {
   try {
     const users = await UserModel.find({
@@ -274,7 +275,7 @@ export const searchUsers = async (searchParam) => {
     return {
       status: 200,
       message: users,
-    }
+    };
   } catch (error) {
     console.error("Error searching for users:", error);
     return {
