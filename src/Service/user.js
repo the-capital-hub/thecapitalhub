@@ -385,6 +385,16 @@ export const getSavedPostsByCollection = async (userId, collectionName) => {
   }
 };
 
+export const getUserAndStartUpByUserIdAPI = async (userId) => {
+  try {
+    const { data } = await axiosInstance.get(`${API.getUserById}/${userId}`);
+    return data;
+  } catch (error) {
+    console.error("Error getting user details:", error);
+    throw error;
+  }
+};
+
 export {
   getUser,
   postUser,
