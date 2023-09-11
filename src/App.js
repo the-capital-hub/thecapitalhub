@@ -56,6 +56,7 @@ import ProtectedInvestorRoutes from "./pages/Investor/ProtectedInvestorRoutes/Pr
 import InvestorProfile from "./pages/Investor/Profile/Profile";
 import MyStartUp from "./pages/Investor/MyStartUp/MyStartUp";
 import Explore from "./pages/Investor/Explore/Explore";
+import OtherUserProfile from "./pages/StartUp/OtherUserProfile/OtherUserProfile";
 
 function App() {
   return (
@@ -277,6 +278,7 @@ function App() {
 
           <Route element={<PrivateRoute />}>
             <Route path="/profile" element={<InvestorHome />} />
+            <Route path="/user/:userId" element={<OtherUserProfile />} />
             <Route path="/home" element={<Feed />} />
             <Route path="/createpost" element={<CreatePost />} />
             <Route path="/documentation" element={<Documentation />} />
