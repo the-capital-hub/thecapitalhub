@@ -1,64 +1,64 @@
 .colorcard-component {
-    width: 30%;
-    height:auto ;
+  width: 30%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 10px;
+  padding: 20px 10px;
+  flex-shrink: 0;
+  border-radius: 40px !important;
+  border: 0.517px solid #dcdcdc;
+  background: #bb98ff;
+  box-shadow: 2.0674986839294434px 2.0674986839294434px 3.101248025894165px 0px
+    rgba(0, 0, 0, 0.05);
+
+  .left-content {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 10px;
-    padding: 20px 10px;
-    flex-shrink: 0;
-    border-radius: 40px !important;
-    border: 0.517px solid #dcdcdc;
-    background: #bb98ff;
-    box-shadow: 2.0674986839294434px 2.0674986839294434px 3.101248025894165px 0px rgba(0, 0, 0, 0.05);
-  
-    .left-content {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 10px;
-  
-      .title {
-        margin: 0;
-        font-size: 12px;
-        font-weight: bold;
-      }
-  
-      .rupee-sign {
-        font-size: 14px;
-        margin-top: 5px;
-      }
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 10px;
 
-      .edit_input{
-        background-color: transparent;
-        outline: none;
-        border: none;
-        margin: 0;
-        font-size: 15px;
-        font-weight: bold;
-        color: #dcdcdc;
-      }
+    .title {
+      margin: 0;
+      font-size: 12px;
+      font-weight: bold;
     }
-  
-    .right-content {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding: 10px;
-  
-      img {
-        max-width: 100%;
-        max-height: 100%;
-      }
+
+    .rupee-sign {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .edit_input {
+      background-color: transparent;
+      outline: none;
+      border: none;
+      margin: 0;
+      font-size: 15px;
+      font-weight: bold;
+      color: #dcdcdc;
     }
   }
-  
-  @media (max-width: 426px) {
 
-    .colorcard-component {
-      width: 50%;
-      flex-direction: row !important;
+  .right-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
     }
-
   }
+}
+
+@media (max-width: 426px) {
+  .colorcard-component {
+    width: 100%;
+    margin: 0;
+    flex-direction: row !important;
+  }
+}

@@ -12,6 +12,8 @@ const ColorCard = ({
   onAmountChange,
   field,
   colorCardData,
+  className,
+  noRupee,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -41,12 +43,11 @@ const ColorCard = ({
       });
     console.log("loggedInUser-->", loggedInUser.colorCard);
   };
-  console.log("fileee---->", field,
-  colorCardData,)
+  console.log("fileee---->", field, colorCardData);
 
   return (
     <div
-      className="colorcard-component card row width_hundred"
+      className={`${className} colorcard-component card row`}
       style={{ background }}
     >
       <div className="col-7 col-sm-6 left-content" style={{ color }}>
@@ -61,14 +62,17 @@ const ColorCard = ({
               onBlur={handleBlur}
             />
           ) : (
-            <span className="rupee-sign" onClick={handleEditClick}>
-              ₹ {editedAmount}
+            <span
+              className="rupee-sign"
+              onClick={onAmountChange ? handleEditClick : () => {}}
+            >
+              {!noRupee && "₹"} {editedAmount}
             </span>
           )}
         </>
       </div>
       <div className="col-5 right-content">
-        <img src={image} alt="Card" />
+        <img src={image} alt="Card" width={60} />
       </div>
     </div>
   );

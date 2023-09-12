@@ -33,8 +33,6 @@ const API = Object.freeze({
   sendConnectionRequest: `${baseUrl}/connections/sendConnectionRequest`,
   sendPostComment: `${baseUrl}/api/posts/comment`,
   getPostComment:`${baseUrl}/api/posts/getComments`,
-
-  
   cancelConnectionRequest: `${baseUrl}/connections/cancelConnectionRequest`,
 });
 
