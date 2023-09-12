@@ -1,7 +1,7 @@
 import ArticleOne from "./apply-page-components/articles/ArticleOne";
 import ArticleTwo from "./apply-page-components/articles/ArticleTwo";
 import Header from "./apply-page-components/header/Header";
-import "./App.scss";
+import "./ApplyPage.scss";
 import ArticleThree from "./apply-page-components/articles/ArticleThree";
 import Form from "./apply-page-components/form/Form";
 
