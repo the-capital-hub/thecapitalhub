@@ -18,6 +18,7 @@ import {
 } from "../../../../../Service/user";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { getBase64 } from "../../../../../utils/getBase64";
 
 const OneLinkEditView = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -27,6 +28,7 @@ const OneLinkEditView = () => {
     company: "",
     description: "",
   });
+  const [selectedLogo, setSelectedLogo] = useState(null);
 
   useEffect(() => {
     getStartupByFounderId(userId)
@@ -126,6 +128,17 @@ const OneLinkEditView = () => {
     });
   };
 
+  const logoOnChangeHandler = async ({ target }) => {
+    const logo = await getBase64(target.files[0]);
+    setFormData((prevForm) => {
+      return {
+        ...prevForm,
+        logo,
+      };
+    });
+    handleUpdate();
+  };
+
   return (
     <>
       <div className="editview_container">
@@ -138,11 +151,31 @@ const OneLinkEditView = () => {
           </section> */}
           <div className="download_preview">
             <section className="company_description">
-              <img
-                src={company.logo}
-                alt="image"
-                style={{ height: "120px", width: "120px" }}
-              />
+              <div className="mx-2" style={{ height: "120px", width: "120px" }}>
+                <label htmlFor="logoImg" className="position-relative">
+                  <img
+                    src={selectedLogo || company?.logo}
+                    alt="image"
+                    style={{ height: "120px", width: "120px" }}
+                    role="button"
+                  />
+                  <span
+                    style={{ fontSize: "10px", left: "30%" }}
+                    className="position-absolute top-50 text-white rounded-pill bg-dark py-1 px-2"
+                  >
+                    Update
+                  </span>
+                </label>
+                <input
+                  type="file"
+                  value=""
+                  id="logoImg"
+                  name="logo"
+                  onChange={logoOnChangeHandler}
+                  accept=".jpg, .jpeg, .png, .webp, .svg"
+                  hidden
+                />
+              </div>
               <div className="company_text">
                 <h6>
                   <input

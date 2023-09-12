@@ -57,6 +57,8 @@ import InvestorProfile from "./pages/Investor/Profile/Profile";
 import MyStartUp from "./pages/Investor/MyStartUp/MyStartUp";
 import Explore from "./pages/Investor/Explore/Explore";
 import OtherUserProfile from "./pages/StartUp/OtherUserProfile/OtherUserProfile";
+import Messages from "./pages/StartUp/Messages/Messages";
+import Notifications from "./pages/StartUp/Notifications/Notifications";
 
 function App() {
   return (
@@ -294,6 +296,8 @@ function App() {
             <Route path="/connection" element={<Connection />} />
             <Route path="/search" element={<Search />} />
             <Route path="/support" element={<Support />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/notifications" element={<Notifications />} />
           </Route>
 
           {/* OneLink */}
