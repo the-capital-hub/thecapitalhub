@@ -59,6 +59,7 @@ import Explore from "./pages/Investor/Explore/Explore";
 import OtherUserProfile from "./pages/StartUp/OtherUserProfile/OtherUserProfile";
 import Messages from "./pages/StartUp/Messages/Messages";
 import Notifications from "./pages/StartUp/Notifications/Notifications";
+import Syndicates from "./pages/Investor/Syndicates/Syndicates";
 
 function App() {
   return (
@@ -317,6 +318,7 @@ function App() {
             <Route path="profile" element={<InvestorProfile />} />
             <Route path="mystartups" element={<MyStartUp />} />
             <Route path="explore" element={<Explore />} />
+            <Route path="syndicates" element={<Syndicates />} />
           </Route>
         </Routes>
       </Router>

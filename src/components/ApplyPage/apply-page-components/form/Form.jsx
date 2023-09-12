@@ -10,7 +10,7 @@ export default function Form() {
 
   return (
     <div className="">
-      <form onSubmit={handleSubmit} className="form">
+      <form onSubmit={(e) => handleSubmit(e)} className="form">
         <fieldset className="form__fieldset">
           <legend>Form Filling</legend>
           {/* Name */}
