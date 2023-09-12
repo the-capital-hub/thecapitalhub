@@ -28,7 +28,7 @@ router.post("/requestPasswordReset", requestPasswordResetController);
 router.patch("/resetPassword", resetPasswordController);
 
 // Authorized routes below
-router.use(authenticateToken);  
+// router.use(authenticateToken);  
 
 // Profile Page
 router.patch("/updateFounder", updateUser);
@@ -38,7 +38,7 @@ router.get("/getUser", getUsersController);
 router.patch("/changePassword", changePasswordController);
 
 
-router.get("/search/:searchParam", searchUsersController);
+router.get("/search", searchUsersController);
 
 router.patch("/addEducation/:userId", addEducationController);
 router.patch("/addExperience/:userId", addExperienceController);

@@ -107,6 +107,12 @@ const startUpSchema = new Schema(
       phoneNumber: String,
       email: String,
     },
+    socialLinks: {
+      website: String,
+      linkedin: String,
+      twitter: String,
+      instagram: String,
+    },
     portfolio: String,
     investorProposals: {
       type: Array,
