@@ -79,7 +79,7 @@ export const updateUserData = async ({ userId, newData }) => {
   try {
     if (newData?.profilePicture) {
       const { url } = await cloudinary.uploader.upload(newData.profilePicture, {
-        folder: `${process.env.CLOUDIANRY_FOLDER}/users/profilePictures`,
+        folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
         format: "webp",
         unique_filename: true,
       });
@@ -263,7 +263,7 @@ export const resetPassword = async (token, newPassword) => {
   }
 };
 
-//search user
+//search user/ company
 export const searchUsers = async (searchParam) => {
   try {
     const users = await UserModel.find({
@@ -272,9 +272,18 @@ export const searchUsers = async (searchParam) => {
         { email: { $regex: searchParam, $options: "i" } },
       ],
     });
+    const company = await StartUpModel.find({
+      $or: [
+        { company: {$regex: searchParam, $options: "i"} },
+        { oneLink: { $regex: searchParam, $options: "i" } },
+      ],
+    });
     return {
       status: 200,
-      message: users,
+      message: {
+        users: users,
+        company: company,
+      },
     };
   } catch (error) {
     console.error("Error searching for users:", error);

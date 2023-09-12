@@ -87,7 +87,7 @@ const OneLinkEditView = () => {
         pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
       }
-      pdf.save("thecapitalhub.pdf");
+      pdf.save(`${formData.company}.pdf`);
       buttons.forEach((button) => {
         button.style.display = "block";
       });
@@ -96,16 +96,34 @@ const OneLinkEditView = () => {
 
   const handlePreviewPDF = () => {
     const container = document.querySelector(".download_preview");
-    if (container) {
-      html2canvas(container).then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF("p", "mm", "a4");
-        pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
-        const blob = pdf.output("blob");
-        const blobUrl = URL.createObjectURL(blob);
-        window.open(blobUrl, "_blank");
-      });
-    }
+    html2canvas(container, {
+      allowTaint: false,
+      removeContainer: true,
+      backgroundColor: "#ffffff",
+      scale: window.devicePixelRatio,
+      useCORS: false,
+    }).then((canvas) => {
+      const contentDataURL = canvas.toDataURL("image/png");
+      const imgWidth = 210;
+      const pageHeight = 295;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      let pdf = new jsPDF("p", "mm", "a4");
+      let position = 5;
+
+      pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+      const blob = pdf.output("blob");
+      const blobUrl = URL.createObjectURL(blob);
+      window.open(blobUrl, "_blank");
+    });
   };
 
   return (
