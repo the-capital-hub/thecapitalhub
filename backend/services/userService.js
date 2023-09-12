@@ -264,18 +264,18 @@ export const resetPassword = async (token, newPassword) => {
 };
 
 //search user/ company
-export const searchUsers = async (searchParam) => {
+export const searchUsers = async (searchQuery) => {
   try {
     const users = await UserModel.find({
       $or: [
-        { username: { $regex: searchParam, $options: "i" } },
-        { email: { $regex: searchParam, $options: "i" } },
+        { username: { $regex: searchQuery, $options: "i" } },
+        { email: { $regex: searchQuery, $options: "i" } },
       ],
     });
     const company = await StartUpModel.find({
       $or: [
-        { company: {$regex: searchParam, $options: "i"} },
-        { oneLink: { $regex: searchParam, $options: "i" } },
+        { company: {$regex: searchQuery, $options: "i"} },
+        { oneLink: { $regex: searchQuery, $options: "i" } },
       ],
     });
     return {

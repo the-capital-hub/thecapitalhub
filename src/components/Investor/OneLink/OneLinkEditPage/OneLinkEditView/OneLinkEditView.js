@@ -27,6 +27,7 @@ const OneLinkEditView = () => {
   const [formData, setFormData] = useState({
     company: "",
     description: "",
+    logo: "",
   });
   const [selectedLogo, setSelectedLogo] = useState(null);
 
@@ -37,6 +38,7 @@ const OneLinkEditView = () => {
         setFormData({
           company: data.company || "",
           description: data.description || "",
+          logo: data.logo || "",
         });
       })
       .catch(() => setCompany({}));
@@ -48,13 +50,16 @@ const OneLinkEditView = () => {
     setFormData({ ...formData, [field]: updatedValue });
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = (logo) => {
+    if(logo) {
+      formData.logo = logo
+    }
     postStartUpData({
       ...formData,
       founderId: loggedInUser._id,
     })
-      .then(({ data }) => {
-        console.log(data);
+      .then(({data}) => {
+        setSelectedLogo(data.logo);
       })
       .catch((err) => console.log(err));
   };
@@ -130,13 +135,14 @@ const OneLinkEditView = () => {
 
   const logoOnChangeHandler = async ({ target }) => {
     const logo = await getBase64(target.files[0]);
+    console.log(target.files[0]);
     setFormData((prevForm) => {
       return {
         ...prevForm,
-        logo,
+        "logo": logo,
       };
     });
-    handleUpdate();
+    handleUpdate(logo);
   };
 
   return (

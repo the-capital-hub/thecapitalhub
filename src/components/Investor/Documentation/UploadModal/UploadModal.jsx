@@ -8,9 +8,9 @@ const baseUrl = environment.baseUrl;
 const AWS = require('aws-sdk');
 
 AWS.config.update({
-  accessKeyId: 'AKIA2PMPJXOHR3RLM6H6',
-  secretAccessKey: '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',
-  region: 'eu-north-1',
+  accessKeyId: 'AKIA3ADZ252QBA67V4VO',
+  secretAccessKey: '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',
+  region: 'us-east-1',
 });
 
 const s3 = new AWS.S3();

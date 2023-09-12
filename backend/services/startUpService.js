@@ -26,6 +26,7 @@ export const createStartup = async (startUpData) => {
       return {
         status: 200,
         message: "Startup Updated",
+        data: existingCompany,
       };
     }
     const newStartUp = new StartUpModel({
@@ -65,6 +66,7 @@ export const createStartup = async (startUpData) => {
         return {
           status: 200,
           message: "Startup Added",
+          data: newStartUp,
         };
       } else {
         return {

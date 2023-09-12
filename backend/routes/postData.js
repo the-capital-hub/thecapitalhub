@@ -11,11 +11,12 @@ import {
   getCommentsController,
   getLikeCountController,
   getUsersWhoLikedPostController,
+  deletedPostController,
 } from "../controllers/postController.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
 
-// router.use(authenticateToken);
+router.use(authenticateToken);
 
 router.get("/getposts", getAllPosts);
 router.get("/getSinglePost/:id", getSinglePost);  
@@ -32,5 +33,7 @@ router.get('/likeCount/:postId', getLikeCountController);
 router.get('/likedUsers/:postId', getUsersWhoLikedPostController);
 router.post("/comment/:postId", commentOnPostController);
 router.get("/getComments/:postId", getCommentsController);
+
+router.delete("/deletePost/:postId", deletedPostController);
 
 export default router;
