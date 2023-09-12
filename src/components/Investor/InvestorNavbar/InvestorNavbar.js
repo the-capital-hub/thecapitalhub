@@ -10,10 +10,15 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
+import { getSearchResultsAPI } from "../../../Service/user";
 
 const InvestorNavbar = (props) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [url, setUrl] = useState("Home");
+  const [searchSuggestions, setSearchSuggestions] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [inputOnFocus, setInputOnFocus] = useState(false);
 
   useEffect(() => {
     const url = window.location.href.split("/");
@@ -23,6 +28,14 @@ const InvestorNavbar = (props) => {
         : url[url.length - 2]
     );
   }, [window.location.href]);
+
+  const searchInputHandler = async ({ target }) => {
+    setLoading(true);
+    setSearchInput(target.value);
+    const { data } = await getSearchResultsAPI(target.value);
+    console.log(data);
+    setLoading(false);
+  };
 
   return (
     <>
@@ -47,15 +60,41 @@ const InvestorNavbar = (props) => {
             </div>
           </div>
           <div className="navbar_right_container">
-            <div className="searchbar-container">
-              <input
-                type="text"
-                className="searchbar-input"
-                placeholder="Search"
-              />
-              <button className="searchbar-button">
-                <img src={searchIcon} alt="search" />
-              </button>
+            <div className="search_container position-relative">
+              <div className="searchbar-container">
+                <input
+                  type="text"
+                  className="searchbar-input"
+                  placeholder="Search"
+                  onChange={searchInputHandler}
+                  onFocus={() => setInputOnFocus(true)}
+                  onBlurCapture={() => setInputOnFocus(false)}
+                />
+                <button className="searchbar-button">
+                  <img src={searchIcon} alt="search" />
+                </button>
+              </div>
+              {inputOnFocus && (
+                <div className="search_results rounded-5 border shadow-sm p-4 position-absolute bg-white">
+                  {!loading ? (
+                    searchSuggestions?.length ? (
+                      searchSuggestions.map(({ name, id, type }) => (
+                        <span className="single_result">
+                          <Link to={`#`}>{name}</Link>
+                        </span>
+                      ))
+                    ) : (
+                      <h6 className="h6 text-center w-100 text-secondary">
+                        No Suggestions
+                      </h6>
+                    )
+                  ) : (
+                    <h6 className="h6 text-center w-100 text-secondary">
+                      Loading...
+                    </h6>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="icons-container">
@@ -65,7 +104,10 @@ const InvestorNavbar = (props) => {
                 </span>
               </div>
 
-              <Link to="/notifications" className="rounded-circle notification-icon">
+              <Link
+                to="/notifications"
+                className="rounded-circle notification-icon"
+              >
                 <div className="icon-wrapper">
                   <img src={NotificationIcon} alt="notification" />
                 </div>
