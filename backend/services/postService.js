@@ -399,3 +399,25 @@ export const getUsersWhoLikedPost = async (postId) => {
   }
 };
 
+export const deletePost = async (postId, userId) => {
+  try {
+    const deletedPost = await PostModel.findOneAndDelete({_id: postId, user: userId});
+    if(!deletedPost) {
+      return {
+        status: 404,
+        message: "Post not found.",
+      };
+    }
+    return {
+      status: 200,
+      message: "Post Deleted Successfully",
+      data: deletedPost,
+    }
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while deleting posts.",
+    };
+  }
+};

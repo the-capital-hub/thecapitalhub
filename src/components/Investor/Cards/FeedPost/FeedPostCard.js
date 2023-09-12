@@ -86,7 +86,6 @@ const FeedPostCard = ({
 
   useEffect(() => {
     getPostComment({ postId }).then((res) => {
-      console.log("response useeffect", res.data.data);
       setComments(res.data.data);
     });
   }, []);

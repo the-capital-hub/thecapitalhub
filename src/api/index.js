@@ -34,6 +34,7 @@ const API = Object.freeze({
   sendPostComment: `${baseUrl}/api/posts/comment`,
   getPostComment:`${baseUrl}/api/posts/getComments`,
   cancelConnectionRequest: `${baseUrl}/connections/cancelConnectionRequest`,
+  getSearchResults: `${baseUrl}/users/search`
 });
 
 export default API;
