@@ -30,10 +30,14 @@ const InvestorNavbar = (props) => {
   }, [window.location.href]);
 
   const searchInputHandler = async ({ target }) => {
-    setLoading(true);
-    setSearchInput(target.value);
-    const { data } = await getSearchResultsAPI(target.value);
-    console.log(data);
+    try {
+      setLoading(true);
+      setSearchInput(target.value);
+      const { data } = await getSearchResultsAPI(target.value);
+      setSearchSuggestions(data);
+    } catch (error) {
+      console.error("Error getting search results : ", error);
+    }
     setLoading(false);
   };
 
@@ -66,27 +70,47 @@ const InvestorNavbar = (props) => {
                   type="text"
                   className="searchbar-input"
                   placeholder="Search"
+                  value={searchInput}
                   onChange={searchInputHandler}
                   onFocus={() => setInputOnFocus(true)}
-                  onBlurCapture={() => setInputOnFocus(false)}
+                  onBlurCapture={() => {
+                    setSearchInput("");
+                    setSearchSuggestions(false);
+                    setInputOnFocus(false);
+                  }}
                 />
                 <button className="searchbar-button">
                   <img src={searchIcon} alt="search" />
                 </button>
               </div>
-              {inputOnFocus && (
+              {inputOnFocus && searchSuggestions && (
                 <div className="search_results rounded-5 border shadow-sm p-4 position-absolute bg-white">
                   {!loading ? (
-                    searchSuggestions?.length ? (
-                      searchSuggestions.map(({ name, id, type }) => (
-                        <span className="single_result">
-                          <Link to={`#`}>{name}</Link>
-                        </span>
-                      ))
-                    ) : (
-                      <h6 className="h6 text-center w-100 text-secondary">
-                        No Suggestions
-                      </h6>
+                    searchSuggestions && (
+                      <>
+                        {!!searchSuggestions?.users?.length && (
+                          <span className="">Users</span>
+                        )}
+                        {searchSuggestions?.users
+                          ?.slice(0, 5)
+                          .map(({ firstName, lastName }) => (
+                            <span className="single_result">
+                              <Link to={`#`}>
+                                {firstName} {lastName}
+                              </Link>
+                            </span>
+                          ))}
+                        {!!searchSuggestions?.company?.length && (
+                          <span className="mt-2">Companies</span>
+                        )}
+                        {searchSuggestions?.company
+                          ?.slice(0, 5)
+                          .map(({ company }) => (
+                            <span className="single_result">
+                              <Link to={`#`}>{company}</Link>
+                            </span>
+                          ))}
+                      </>
                     )
                   ) : (
                     <h6 className="h6 text-center w-100 text-secondary">
