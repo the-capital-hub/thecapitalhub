@@ -42,6 +42,32 @@
       width: 98%;
     }
 
+    .social-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem; 
+    }
+    
+    .input-group {
+      display: flex;
+      align-items: center; 
+    }
+    
+    .input-group label {
+      width: 120px;
+      font-size: 14px;
+      margin-right: 10px;
+    }
+    
+    .input-group input {
+      flex: 1;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    
+
     .company_details_logo_container {
       height: 105px;
       width: 150px;

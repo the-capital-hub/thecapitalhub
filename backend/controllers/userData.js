@@ -153,8 +153,8 @@ export const resetPasswordController = async (req, res) => {
 
 export const searchUsersController = async (req, res) => {
   try {
-    const { searchParam } = req.params;
-    const response = await searchUsers(searchParam);
+    const { searchQuery } = req.query;
+    const response = await searchUsers(searchQuery);
     res.status(response.status).send(response);
   } catch (error) {
     console.error(error);

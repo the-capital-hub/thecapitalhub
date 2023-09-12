@@ -45,23 +45,41 @@ const OnePager = () => {
   };
 
   const handleDownloadPDF = () => {
+    alert("Hello");
     const element = document.querySelector(".onePager");
     const buttons = document.querySelectorAll(".buttons button");
     buttons.forEach((button) => {
       button.style.display = "none";
     });
+    html2canvas(element, {
+      allowTaint: false,
+      removeContainer: true,
+      backgroundColor: "#ffffff",
+      scale: window.devicePixelRatio,
+      useCORS: false,
+    }).then((canvas) => {
+      const contentDataURL = canvas.toDataURL("image/png");
+      const imgWidth = 210;
+      const pageHeight = 295;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      let pdf = new jsPDF("p", "mm", "a4");
+      let position = 5;
 
-    if (element) {
-      html2canvas(element).then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF("p", "mm", "a4");
-        pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
-        pdf.save(username + ".pdf");
-        buttons.forEach((button) => {
-          button.style.display = "block";
-        });
+      pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+      pdf.save(`${username}.pdf`);
+      buttons.forEach((button) => {
+        button.style.display = "block";
       });
-    }
+    });
   };
 
   const handlePreviewPDF = () => {
@@ -70,20 +88,37 @@ const OnePager = () => {
     buttons.forEach((button) => {
       button.style.display = "none";
     });
+    html2canvas(element, {
+      allowTaint: false,
+      removeContainer: true,
+      backgroundColor: "#ffffff",
+      scale: window.devicePixelRatio,
+      useCORS: false,
+    }).then((canvas) => {
+      const contentDataURL = canvas.toDataURL("image/png");
+      const imgWidth = 210;
+      const pageHeight = 295;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      let pdf = new jsPDF("p", "mm", "a4");
+      let position = 5;
 
-    if (element) {
-      html2canvas(element).then((canvas) => {
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF("p", "mm", "a4");
-        pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
-        const pdfBlob = pdf.output("blob");
-        const blobUrl = URL.createObjectURL(pdfBlob);
-        window.open(blobUrl, "_blank");
-        buttons.forEach((button) => {
-          button.style.display = "block";
-        });
+      pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+      const blob = pdf.output("blob");
+      const blobUrl = URL.createObjectURL(blob);
+      window.open(blobUrl, "_blank");
+      buttons.forEach((button) => {
+        button.style.display = "block";
       });
-    }
+    });
   };
 
   return (
