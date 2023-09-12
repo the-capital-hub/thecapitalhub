@@ -142,7 +142,7 @@ const InvestorManageAccount = () => {
               </div>
             </section>
 
-            <section className="col card empty_box">
+            {/* <section className="col card empty_box">
               <div className="d-flex align-items-center">
                 <div className="logo">
                   <img src={logoIcon} alt="img" />
@@ -152,9 +152,7 @@ const InvestorManageAccount = () => {
               <p>
                 Add another account - so you can switch between them easily.
               </p>
-              {/* Existing Account Section */}
               <section className="existing_accounts">
-                {/* Small Horizontal Card */}
                 <div className="small_card">
                   <div className="left_section">
                     <div className="d-flex align-items-center">
@@ -168,7 +166,6 @@ const InvestorManageAccount = () => {
                     </div>
                   </div>
                   <div className="right_section">
-                    {/* Rounded Checkbox (Assuming you have an input checkbox styled as a rounded checkbox) */}
                     <label className="checkbox_container">
                       <input type="checkbox" checked />
                       <span className="checkmark"></span>
@@ -188,7 +185,6 @@ const InvestorManageAccount = () => {
                     </div>
                   </div>
                   <div className="right_section">
-                    {/* Rounded Checkbox (Assuming you have an input checkbox styled as a rounded checkbox) */}
                     <label className="checkbox_container">
                       <input type="checkbox" />
                       <span className="checkmark"></span>
@@ -208,7 +204,6 @@ const InvestorManageAccount = () => {
                     </div>
                   </div>
                   <div className="right_section">
-                    {/* Rounded Checkbox (Assuming you have an input checkbox styled as a rounded checkbox) */}
                     <label className="checkbox_container">
                       <input type="checkbox" />
                       <span className="checkmark"></span>
@@ -216,7 +211,7 @@ const InvestorManageAccount = () => {
                   </div>
                 </div>
               </section>
-            </section>
+            </section> */}
           </div>
         </div>
       </div>
