@@ -280,7 +280,7 @@ export const searchUsers = async (searchQuery) => {
     });
     return {
       status: 200,
-      message: {
+      data: {
         users: users,
         company: company,
       },

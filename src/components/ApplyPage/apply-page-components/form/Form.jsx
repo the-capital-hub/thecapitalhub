@@ -4,7 +4,7 @@ import "./Form.scss";
 export default function Form() {
   const options = ["Fundraising", "Development", "Consulting", "Investing"];
 
-  function handleSubmit() {
+  function handleSubmit(e) {
     e.preventDefault();
   }
 
