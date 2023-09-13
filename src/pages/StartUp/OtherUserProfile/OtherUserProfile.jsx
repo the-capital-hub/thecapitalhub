@@ -27,7 +27,7 @@ function OtherUserProfile() {
     getUserAndStartUpByUserIdAPI(userId)
       .then(({ data }) => setUserData(data))
       .catch(() => navigate("/profile"));
-  }, []);
+  }, [userId]);
 
   return (
     <section className="other_user_profile">
@@ -225,7 +225,11 @@ function OtherUserProfile() {
           className="h4 text-secondary w-100 my-5 text-center"
           style={{ minHeight: "90vh" }}
         >
-          Loading user profile...
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
         </h4>
       )}
     </section>
