@@ -83,6 +83,7 @@ const CompanyDetailsCard = ({ userDetails, page, className }) => {
                     <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer">
                       <img src={IntagramIcon} alt="Instagram" />
                     </a>
+
                   </div>
                 </div>
               </div>
@@ -117,6 +118,7 @@ const CompanyDetailsCard = ({ userDetails, page, className }) => {
                     {/* As the Founder at The Capital HUB, my vision is all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture. */}
                     {/* {onePager.description} */}
                     {isDescriptionEditable ? (
+
                       <>
                         <textarea
                           className="description"
@@ -179,6 +181,7 @@ const CompanyDetailsCard = ({ userDetails, page, className }) => {
                           </div>
                         </div>
                       </>
+
                     ) : (
                       <p className="small_typo">{descriptionContent}</p>
                     )}
