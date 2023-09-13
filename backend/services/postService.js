@@ -35,7 +35,7 @@ export const allPostsData = async () => {
     const allPosts = await PostModel.find()
       .populate({
         path: "user",
-        select: "firstName lastName designation profilePicture -_id",
+        select: "firstName lastName designation profilePicture",
       })
       .sort({ _id: -1 });
     return allPosts;
@@ -168,7 +168,6 @@ export const likeUnlikePost = async (postId, userId) => {
 
 // Comment on a post
 export const commentOnPost = async (postId, userId, text) => {
-
   try {
     const post = await PostModel.findById(postId);
     if (!post) {
@@ -202,7 +201,7 @@ export const getComments = async (postId) => {
   try {
     const post = await PostModel.findById(postId).populate({
       path: "comments.user",
-      model: "Users", 
+      model: "Users",
       select: "firstName lastName designation profilePicture",
     });
     if (!post) {
@@ -226,7 +225,6 @@ export const getComments = async (postId) => {
   }
 };
 
-
 // save post
 export const savePost = async (userId, collectionName, postId) => {
   try {
@@ -238,9 +236,7 @@ export const savePost = async (userId, collectionName, postId) => {
       };
     }
 
-    let collection = user.savedPosts.find(
-      (c) => c.name === collectionName
-    );
+    let collection = user.savedPosts.find((c) => c.name === collectionName);
 
     if (!collection) {
       collection = {
@@ -253,7 +249,7 @@ export const savePost = async (userId, collectionName, postId) => {
       return {
         status: 200,
         message: "Post saved successfully",
-      }
+      };
     }
     if (collection.posts.includes(postId)) {
       return {
@@ -311,9 +307,7 @@ export const getSavedPostsByCollection = async (userId, collectionName) => {
         message: "User not found",
       };
     }
-    const collection = user.savedPosts.find(
-      (c) => c.name === collectionName
-    );
+    const collection = user.savedPosts.find((c) => c.name === collectionName);
     if (!collection) {
       return {
         status: 404,
@@ -322,11 +316,11 @@ export const getSavedPostsByCollection = async (userId, collectionName) => {
     }
     const postIds = collection.posts;
     const savedPosts = await PostModel.find({ _id: { $in: postIds } })
-    .populate({
-      path: 'user',
-      select: 'firstName lastName profilePicture designation'
-    })
-    .exec();
+      .populate({
+        path: "user",
+        select: "firstName lastName profilePicture designation",
+      })
+      .exec();
     return {
       status: 200,
       message: `Saved posts retrieved successfully`,
@@ -336,11 +330,11 @@ export const getSavedPostsByCollection = async (userId, collectionName) => {
     console.error(error);
     return {
       status: 500,
-      message: "An error occurred while fetching saved posts by collection name.",
+      message:
+        "An error occurred while fetching saved posts by collection name.",
     };
   }
 };
-
 
 //get like count
 export const getLikeCount = async (postId) => {
@@ -369,7 +363,6 @@ export const getLikeCount = async (postId) => {
   }
 };
 
-
 // get users who liked the post
 export const getUsersWhoLikedPost = async (postId) => {
   try {
@@ -380,11 +373,10 @@ export const getUsersWhoLikedPost = async (postId) => {
         message: "Post not found",
       };
     }
-    const likedUsers = await PostModel.findById(postId)
-      .populate({
-        path: "likes",
-        select: "firstName lastName profilePicture",
-      })
+    const likedUsers = await PostModel.findById(postId).populate({
+      path: "likes",
+      select: "firstName lastName profilePicture",
+    });
     return {
       status: 200,
       message: "Users who liked the post retrieved successfully",
@@ -401,8 +393,11 @@ export const getUsersWhoLikedPost = async (postId) => {
 
 export const deletePost = async (postId, userId) => {
   try {
-    const deletedPost = await PostModel.findOneAndDelete({_id: postId, user: userId});
-    if(!deletedPost) {
+    const deletedPost = await PostModel.findOneAndDelete({
+      _id: postId,
+      user: userId,
+    });
+    if (!deletedPost) {
       return {
         status: 404,
         message: "Post not found.",
@@ -412,7 +407,7 @@ export const deletePost = async (postId, userId) => {
       status: 200,
       message: "Post Deleted Successfully",
       data: deletedPost,
-    }
+    };
   } catch (error) {
     console.error(error);
     return {

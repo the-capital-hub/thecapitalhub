@@ -12,6 +12,7 @@ import TimeAgo from "timeago-react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { likeUnlikeAPI } from "../../../../Service/user";
+import { Link } from "react-router-dom";
 
 const FeaturedPostCard = ({
   postId,
@@ -24,6 +25,7 @@ const FeaturedPostCard = ({
   profilePicture,
   designation,
   likes,
+  userId,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
@@ -57,15 +59,17 @@ const FeaturedPostCard = ({
           <div className="box featuredpostcard_container mt-2">
             <div className="  feed_header_container">
               <div className="feedpostcard_content">
-                <img
-                  src={
-                    profilePicture ||
-                    "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
-                  }
-                  width={50}
-                  className="rounded-circle"
-                  alt="logo"
-                />
+                <Link to={`/user/${userId}`} className="rounded-circle">
+                  <img
+                    src={
+                      profilePicture ||
+                      "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
+                    }
+                    width={50}
+                    className="rounded-circle"
+                    alt="logo"
+                  />
+                </Link>
                 <div className="feedpostcart_text_header my-1">
                   <span
                     style={{ fontSize: "15px", fontWeight: 600, color: "#000" }}
@@ -108,7 +112,15 @@ const FeaturedPostCard = ({
             <hr />
             <div className="para_container w-100">
               <div className="para_container_text w-100">
-                <p style={{ fontSize: "13px",wordWrap: "break-word" ,overflowWrap: "break-word"}}>{description}</p>
+                <p
+                  style={{
+                    fontSize: "13px",
+                    wordWrap: "break-word",
+                    overflowWrap: "break-word",
+                  }}
+                >
+                  {description}
+                </p>
                 {/* {image && (
                   <span className="d-flex">
                     <img

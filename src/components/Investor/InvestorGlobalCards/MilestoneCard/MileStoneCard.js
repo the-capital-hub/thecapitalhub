@@ -63,7 +63,13 @@ const Card = () => {
           allPosts.map(
             ({
               description,
-              user: { firstName, lastName, designation, profilePicture },
+              user: {
+                firstName,
+                lastName,
+                designation,
+                profilePicture,
+                _id: userId,
+              },
               video,
               image,
               createdAt,
@@ -73,6 +79,7 @@ const Card = () => {
               <FeaturedPostCard
                 key={_id} // Use a unique key for each post
                 postId={_id}
+                userId={userId}
                 designation={designation}
                 profilePicture={profilePicture}
                 description={description}
