@@ -60,6 +60,7 @@ import OtherUserProfile from "./pages/StartUp/OtherUserProfile/OtherUserProfile"
 import Messages from "./pages/StartUp/Messages/Messages";
 import Notifications from "./pages/StartUp/Notifications/Notifications";
 import Syndicates from "./pages/Investor/Syndicates/Syndicates";
+import LiveDeals from "./pages/Investor/LiveDeals/LiveDeals";
 
 function App() {
   return (
@@ -319,6 +320,7 @@ function App() {
             <Route path="mystartups" element={<MyStartUp />} />
             <Route path="explore" element={<Explore />} />
             <Route path="syndicates" element={<Syndicates />} />
+            <Route path="live-deals" element={<LiveDeals />} />
           </Route>
         </Routes>
       </Router>
