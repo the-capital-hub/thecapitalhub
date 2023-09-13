@@ -6,7 +6,7 @@ export default function Syndicates() {
   return (
     <div className="syndicates__container">
       <SmallProfileCard text="Syndicates" />
-      <section className="syndicates__section__wrapper bg-white rounded-3 m-3 border">
+      <section className="section__wrapper bg-white rounded-3 m-3 border">
         <div className="companies__container border-bottom ">
           <div className="companies__header py-3 px-4 d-flex justify-content-between align-items-center border-bottom">
             <h2 className="main__heading div__heading">Companies</h2>
