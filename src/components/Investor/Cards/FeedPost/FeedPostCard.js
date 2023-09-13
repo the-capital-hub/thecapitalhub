@@ -20,6 +20,7 @@ import SmileeIcon from "../../../../Images/Group 15141(1).svg";
 import ImageIcon from "../../../../Images/Group 15141.svg";
 import RoundLogo from "../../../../Images/RoundLogo.png";
 import commentIconOne from "../../../../Images/image 40(1).png";
+import { Link } from "react-router-dom";
 
 const FeedPostCard = ({
   postId,
@@ -32,6 +33,7 @@ const FeedPostCard = ({
   profilePicture,
   designation,
   likes,
+  userId,
 }) => {
   const [showComment, setShowComment] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -109,15 +111,17 @@ const FeedPostCard = ({
           <div className="box feedpostcard_container mt-2">
             <div className="  feed_header_container">
               <div className="feedpostcard_content">
-                <img
-                  src={
-                    profilePicture ||
-                    "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
-                  }
-                  width={50}
-                  className="rounded-circle"
-                  alt="logo"
-                />
+                <Link to={`/user/${userId}`} className="rounded-circle">
+                  <img
+                    src={
+                      profilePicture ||
+                      "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
+                    }
+                    width={50}
+                    className="rounded-circle"
+                    alt="logo"
+                  />
+                </Link>
                 <div className="feedpostcart_text_header my-1">
                   <span
                     style={{ fontSize: "18px", fontWeight: 600, color: "#000" }}

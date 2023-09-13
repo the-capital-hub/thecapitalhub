@@ -8,16 +8,17 @@ import {
   getRecommendations,
   sentConnectionRequest,
 } from "../../../../Service/user";
+import { Link } from "react-router-dom";
 
 const RecommendationCard = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     getRecommendations(loggedInUser._id)
       .then(({ data }) => {
         setUsers(data.slice(0, 5));
-        setLoading(false)
+        setLoading(false);
       })
       .catch(() => setUsers({}));
   }, [loggedInUser._id]);
@@ -42,34 +43,42 @@ const RecommendationCard = () => {
     <>
       <div className="recommendation_main_container">
         <div className="col-12 recommendation_card">
-          {loading ? (
-            <div class="d-flex justify-content-center">
-              <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
+          <div className="card mt-2 right_view_profile_card right_view_profile">
+            <div className="card-header">
+              <div className="title">
+                <span>Recommendation</span>
               </div>
             </div>
-          ) : (
-            <div className="card mt-2 right_view_profile_card right_view_profile">
-              <div className="card-header">
-                <div className="title">
-                  <span>Recommendation</span>
+
+            {loading ? (
+              <div class="d-flex justify-content-center my-4">
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
                 </div>
               </div>
-              {users.map((user, i) => (
-                <>
-                  <div className="card-body recommendation_card_body " key={i}>
-                    <img
-                      src={user.profilePicture}
-                      alt="img"
-                      className="rounded-circle"
-                    />
-                    <div className="recommendation_card_text">
-                      <h3>
-                        {user.firstName} {user.lastName}
-                      </h3>
-                      <h4 className="smallest_typo">
-                        {user.designation || ""}
-                      </h4>
+            ) : (
+              <>
+                {users.map((user, i) => (
+                  <>
+                    <div
+                      className="card-body recommendation_card_body "
+                      key={i}
+                    >
+                      <Link to={`/user/${user._id}`} className="rounded-circle">
+                        <img
+                          src={user.profilePicture}
+                          alt="img"
+                          className="rounded-circle"
+                        />
+                      </Link>
+                      <div className="recommendation_card_text">
+                        <h3>
+                          {user.firstName} {user.lastName}
+                        </h3>
+                        <h4 className="smallest_typo">
+                          {user.designation || ""}
+                        </h4>
+                      </div>
                       <button
                         className="connect_button"
                         onClick={() => handleConnect(user._id)}
@@ -78,33 +87,20 @@ const RecommendationCard = () => {
                         <span>Connect</span>
                       </button>
                     </div>
-                  </div>
-                  <hr className="hr" />
-                </>
-              ))}
-              {/* <div className="card-body recommendation_card_body ">
-              <img src={profilePicUpma} alt="img" className="rounded-circle" />
-              <div className="recommendation_card_text">
-                <h3>Raju Prasain</h3>
-                <h4 className="smallest_typo">
-                  FullStack Developer
-                </h4>
-                <button className="connect_button">
-                  <img src={AddUserIconBlack} alt="add user" />
-                  <span>Connect</span>
-                </button>
-              </div>
-            </div> */}
-            </div>
+                    <hr className="hr" />
+                  </>
+                ))}
+              </>
+            )}
+          </div>
+          {connectionSent && (
+            <AfterSuccessPopup
+              withoutOkButton
+              onClose={() => setConnectionSent(!connectionSent)}
+              successText="Connection Sent Successfully"
+            />
           )}
         </div>
-        {connectionSent && (
-          <AfterSuccessPopup
-            withoutOkButton
-            onClose={() => setConnectionSent(!connectionSent)}
-            successText="Connection Sent Successfully"
-          />
-        )}
       </div>
     </>
   );

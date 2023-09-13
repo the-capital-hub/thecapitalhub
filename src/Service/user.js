@@ -370,7 +370,6 @@ export const getSavedPostCollections = async (userId) => {
 };
 
 export const getSavedPostsByCollection = async (userId, collectionName) => {
-  console.log("userId,collectionName-->", userId, collectionName);
   try {
     const response = await axiosInstance.post(
       `${API.getSavedPostsByCollection}/${userId}`,

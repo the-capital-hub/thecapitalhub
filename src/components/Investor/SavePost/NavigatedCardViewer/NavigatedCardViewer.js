@@ -20,7 +20,7 @@ const NavigatedCardViewer = () => {
   const handleHeaderClick = (header) => {
     setActiveHeader(header);
     setCollectionName(header);
-    setLoading(true); 
+    setLoading(true);
   };
 
   useEffect(() => {
@@ -46,17 +46,17 @@ const NavigatedCardViewer = () => {
 
   useEffect(() => {
     if (collectionName) {
-      setLoading(true); 
+      setLoading(true);
       getSavedPostsByCollection(loggedInUser._id, collectionName)
         .then((data) => {
           console.log(data);
           setAllPosts(data.data);
-          setLoading(false); 
+          setLoading(false);
         })
         .catch((error) => {
           console.log(error);
           setAllPosts([]);
-          setLoading(false); 
+          setLoading(false);
         });
     }
   }, [loggedInUser, collectionName, activeHeader]);
@@ -76,7 +76,6 @@ const NavigatedCardViewer = () => {
           ))}
         </div>
         <div className="row row-cols-1">
-          {console.log("allpost", allPosts)}
           {loading ? (
             <div className="d-flex justify-content-center">
               <div className="spinner-border" role="status">
@@ -88,7 +87,13 @@ const NavigatedCardViewer = () => {
               (
                 {
                   description,
-                  user: { firstName, lastName, profilePicture, designation },
+                  user: {
+                    firstName,
+                    lastName,
+                    profilePicture,
+                    designation,
+                    _id: userId,
+                  },
                   video,
                   image,
                   createdAt,
@@ -97,6 +102,7 @@ const NavigatedCardViewer = () => {
               ) => (
                 <SavedPostSmallCard
                   activeHeader={activeHeader}
+                  userId={userId}
                   key={index}
                   description={description}
                   profilePicture={profilePicture}

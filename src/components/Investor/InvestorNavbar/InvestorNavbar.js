@@ -6,7 +6,7 @@ import MessageIcon from "../../../Images/investorIcon/message.svg";
 import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
 import HambergerIcon from "../../../Images/Hamberger.svg";
 import HambergerCrossIcon from "../../../Images/investorsidebar/FontX.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -20,13 +20,20 @@ const InvestorNavbar = (props) => {
   const [loading, setLoading] = useState(false);
   const [inputOnFocus, setInputOnFocus] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    const url = window.location.href.split("/");
-    setUrl(
-      url[url.length - 1].length < 16
+    let url = window.location.href;
+    if (window.location.href.includes("?")) {
+      url = url.split("?")[0];
+    }
+    url = url.split("/");
+    const title =
+      url[url.length - 1]?.length < 16
         ? url[url.length - 1]
-        : url[url.length - 2]
-    );
+        : url[url.length - 2];
+    console.log(url[url.length - 1]?.length);
+    setUrl(title);
   }, [window.location.href]);
 
   const searchInputHandler = async ({ target }) => {
@@ -39,6 +46,13 @@ const InvestorNavbar = (props) => {
       console.error("Error getting search results : ", error);
     }
     setLoading(false);
+  };
+
+  const searchSubmitHandler = (e) => {
+    console.log(searchSuggestions);
+    e.preventDefault();
+    if (!searchInput) return;
+    navigate(`/search?query=${searchInput}`);
   };
 
   return (
@@ -65,7 +79,10 @@ const InvestorNavbar = (props) => {
           </div>
           <div className="navbar_right_container">
             <div className="search_container position-relative">
-              <div className="searchbar-container">
+              <form
+                onSubmit={searchSubmitHandler}
+                className="searchbar-container"
+              >
                 <input
                   type="text"
                   className="searchbar-input"
@@ -74,31 +91,44 @@ const InvestorNavbar = (props) => {
                   onChange={searchInputHandler}
                   onFocus={() => setInputOnFocus(true)}
                   onBlurCapture={() => {
-                    setSearchInput("");
-                    setSearchSuggestions(false);
-                    setInputOnFocus(false);
+                    setTimeout(() => {
+                      setInputOnFocus(false);
+                      setSearchSuggestions(false);
+                      setSearchInput("");
+                    }, 500);
                   }}
                 />
-                <button className="searchbar-button">
+                <button
+                  type="submit"
+                  className="searchbar-button d-flex align-items-center justify-content-center"
+                >
                   <img src={searchIcon} alt="search" />
                 </button>
-              </div>
+              </form>
               {inputOnFocus && searchSuggestions && (
                 <div className="search_results rounded-5 border shadow-sm p-4 position-absolute bg-white">
                   {!loading ? (
                     searchSuggestions && (
                       <>
+                        {!searchSuggestions?.company?.length &&
+                          !searchSuggestions?.users?.length && (
+                            <h6 className="h6 text-center w-100 text-secondary">
+                              No Suggestions.
+                            </h6>
+                          )}
                         {!!searchSuggestions?.users?.length && (
                           <span className="">Users</span>
                         )}
                         {searchSuggestions?.users
                           ?.slice(0, 5)
-                          .map(({ firstName, lastName }) => (
-                            <span className="single_result">
-                              <Link to={`#`}>
-                                {firstName} {lastName}
-                              </Link>
-                            </span>
+                          .map(({ firstName, lastName, _id }) => (
+                            <Link
+                              key={_id}
+                              className="single_result"
+                              to={`/user/${_id}`}
+                            >
+                              {firstName} {lastName}
+                            </Link>
                           ))}
                         {!!searchSuggestions?.company?.length && (
                           <span className="mt-2">Companies</span>
@@ -113,9 +143,11 @@ const InvestorNavbar = (props) => {
                       </>
                     )
                   ) : (
-                    <h6 className="h6 text-center w-100 text-secondary">
-                      Loading...
-                    </h6>
+                    <div class="d-flex justify-content-center">
+                      <div class="spinner-border text-secondary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
                   )}
                 </div>
               )}
