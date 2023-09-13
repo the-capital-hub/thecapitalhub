@@ -38,6 +38,8 @@ const Feed = () => {
     } catch (error) {}
   };
 
+  console.log(allPosts) 
+
   return (
     <>
       <div className="container-fluid feed_container">
@@ -68,7 +70,13 @@ const Feed = () => {
                 allPosts.map(
                   ({
                     description,
-                    user: { firstName, lastName, designation, profilePicture },
+                    user: {
+                      firstName,
+                      lastName,
+                      designation,
+                      profilePicture,
+                      _id: userId,
+                    },
                     video,
                     image,
                     createdAt,
@@ -77,6 +85,7 @@ const Feed = () => {
                   }) => (
                     <FeedPostCard
                       key={Math.random()}
+                      userId={userId}
                       postId={_id}
                       designation={designation}
                       profilePicture={profilePicture}
