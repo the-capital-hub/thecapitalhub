@@ -263,6 +263,7 @@ export const resetPassword = async (token, newPassword) => {
   }
 };
 
+
 //search user/ company
 export const searchUsers = async (searchQuery) => {
   try {
@@ -280,10 +281,14 @@ export const searchUsers = async (searchQuery) => {
     });
     return {
       status: 200,
+
       data: {
         users: users,
         company: company,
       },
+
+
+
     };
   } catch (error) {
     console.error("Error searching for users:", error);

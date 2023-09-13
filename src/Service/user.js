@@ -394,6 +394,7 @@ export const getUserAndStartUpByUserIdAPI = async (userId) => {
   }
 };
 
+
 export const getSearchResultsAPI = async (searchBy) => {
   try {
     const { data } = await axiosInstance.get(
@@ -405,7 +406,6 @@ export const getSearchResultsAPI = async (searchBy) => {
     throw error;
   }
 };
-
 export {
   getUser,
   postUser,
