@@ -71,16 +71,16 @@ const CompanyDetailsCard = ({ userDetails, page, className }) => {
                     </span>
                   </span>
                   <div className="small_typo social_icon mt-3">
-                    <a href={socialLinks.website} target="_blank" rel="noopener noreferrer">
+                    <a href={socialLinks?.website} target="_blank" rel="noopener noreferrer">
                       <img src={WebIcon} alt="Website" />
                     </a>
-                    <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
+                    <a href={socialLinks?.linkedin} target="_blank" rel="noopener noreferrer">
                       <img src={LinkedinIcon} alt="LinkedIn" />
                     </a>
-                    <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer">
+                    <a href={socialLinks?.twitter} target="_blank" rel="noopener noreferrer">
                       <img src={TweeterIcon} alt="Twitter" />
                     </a>
-                    <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer">
+                    <a href={socialLinks?.instagram} target="_blank" rel="noopener noreferrer">
                       <img src={IntagramIcon} alt="Instagram" />
                     </a>
 
