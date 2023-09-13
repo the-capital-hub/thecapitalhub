@@ -370,7 +370,6 @@ export const getSavedPostCollections = async (userId) => {
 };
 
 export const getSavedPostsByCollection = async (userId, collectionName) => {
-  console.log("userId,collectionName-->", userId, collectionName);
   try {
     const response = await axiosInstance.post(
       `${API.getSavedPostsByCollection}/${userId}`,
@@ -395,6 +394,7 @@ export const getUserAndStartUpByUserIdAPI = async (userId) => {
   }
 };
 
+
 export const getSearchResultsAPI = async (searchBy) => {
   try {
     const { data } = await axiosInstance.get(
@@ -406,7 +406,6 @@ export const getSearchResultsAPI = async (searchBy) => {
     throw error;
   }
 };
-
 export {
   getUser,
   postUser,

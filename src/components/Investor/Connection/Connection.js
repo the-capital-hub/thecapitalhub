@@ -11,6 +11,7 @@ import {
 } from "../../../Service/user";
 import TimeAgo from "timeago-react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Connection = () => {
   const [selectedTab, setSelectedTab] = useState("received"); // Default to "received"
@@ -150,7 +151,9 @@ const Connection = () => {
                       >
                         {/* Render content for received connections here */}
                         <div className="connection_left">
-                          <img src={sender.profilePicture} alt="Connection" />
+                          <Link to={`/user/${_id}`}>
+                            <img src={sender.profilePicture} alt="Connection" />
+                          </Link>
                           <div className="body_container">
                             <p className="connection_name h5">{`${sender.firstName} ${sender.lastName}`}</p>
                             <p className="connection_designation">
@@ -240,7 +243,9 @@ const Connection = () => {
                     >
                       {/* Render the accepted connection content here */}
                       <div className="connection_left">
-                        <img src={data.profilePicture} alt="Connection" />
+                        <Link to={`/user/${data._id}`}>
+                          <img src={data.profilePicture} alt="Connection" />
+                        </Link>
                         <div className="body_container">
                           <p className="connection_name h5">{`${
                             data.firstName ? data.firstName : "name"
