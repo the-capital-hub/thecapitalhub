@@ -18,11 +18,18 @@ const CompanyDetailsCard = ({ userDetails, page, className }) => {
   const [isDescriptionEditable, setIsDescriptionEditable] = useState(false);
   const [descriptionContent, setDescriptionContent] = useState("");
   const [onePager, setOnePager] = useState([]);
+  const [socialLinks, setSocialLinks] = useState({
+    website: "",
+    linkedin: "",
+    twitter: "",
+    instagram: "",
+  });
   useEffect(() => {
     getStartupByFounderId(userDetails._id)
       .then(({ data }) => {
         setOnePager(data);
         setDescriptionContent(data.description);
+        setSocialLinks(data.socialLinks);
       })
       .catch(() => setOnePager([]));
   }, [userDetails]);
@@ -30,6 +37,7 @@ const CompanyDetailsCard = ({ userDetails, page, className }) => {
     const updatedData = {
       founderId: userDetails._id,
       description: descriptionContent,
+      socialLinks,
     };
     await postStartUpData(updatedData);
     setIsDescriptionEditable(!isDescriptionEditable);
@@ -63,10 +71,19 @@ const CompanyDetailsCard = ({ userDetails, page, className }) => {
                     </span>
                   </span>
                   <div className="small_typo social_icon mt-3">
-                    <img src={WebIcon} alt="social_img" />
-                    <img src={LinkedinIcon} alt="social_img" />
-                    <img src={TweeterIcon} alt="social_img" />
-                    <img src={IntagramIcon} alt="social_img" />
+                    <a href={socialLinks.website} target="_blank" rel="noopener noreferrer">
+                      <img src={WebIcon} alt="Website" />
+                    </a>
+                    <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
+                      <img src={LinkedinIcon} alt="LinkedIn" />
+                    </a>
+                    <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer">
+                      <img src={TweeterIcon} alt="Twitter" />
+                    </a>
+                    <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer">
+                      <img src={IntagramIcon} alt="Instagram" />
+                    </a>
+
                   </div>
                 </div>
               </div>
@@ -101,12 +118,70 @@ const CompanyDetailsCard = ({ userDetails, page, className }) => {
                     {/* As the Founder at The Capital HUB, my vision is all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture. */}
                     {/* {onePager.description} */}
                     {isDescriptionEditable ? (
-                      <textarea
-                        className="description"
-                        value={descriptionContent}
-                        name="bio"
-                        onChange={(e) => setDescriptionContent(e.target.value)}
-                      />
+
+                      <>
+                        <textarea
+                          className="description"
+                          value={descriptionContent}
+                          name="bio"
+                          onChange={(e) => setDescriptionContent(e.target.value)}
+                        />
+                        <div className="social-inputs">
+                          <div className="input-group">
+                            <label>Website:</label>
+                            <input
+                              type="text"
+                              value={socialLinks?.website}
+                              onChange={(e) =>
+                                setSocialLinks({
+                                  ...socialLinks,
+                                  website: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                          <div className="input-group">
+                            <label>LinkedIn:</label>
+                            <input
+                              type="text"
+                              value={socialLinks?.linkedin}
+                              onChange={(e) =>
+                                setSocialLinks({
+                                  ...socialLinks,
+                                  linkedin: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                          <div className="input-group">
+                            <label>Twitter:</label>
+                            <input
+                              type="text"
+                              value={socialLinks?.twitter}
+                              onChange={(e) =>
+                                setSocialLinks({
+                                  ...socialLinks,
+                                  twitter: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                          <div className="input-group">
+                            <label>Instagram:</label>
+                            <input
+                              type="text"
+                              value={socialLinks?.instagram}
+                              onChange={(e) =>
+                                setSocialLinks({
+                                  ...socialLinks,
+                                  instagram: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+                        </div>
+                      </>
+
                     ) : (
                       <p className="small_typo">{descriptionContent}</p>
                     )}

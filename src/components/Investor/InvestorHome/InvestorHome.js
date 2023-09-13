@@ -12,7 +12,7 @@ import RecommendationCard from "../InvestorGlobalCards/Recommendation/Recommenda
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import CompanyDetailsCard from "../InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getStartupByFounderId, updateUserAPI } from "../../../Service/user";
+import { getStartupByFounderId, updateUserAPI, postStartUpData } from "../../../Service/user";
 import { loginSuccess } from "../../../Store/Action/userAction";
 import { getBase64 } from "../../../utils/getBase64";
 import CoinIcon from "../../../Images/investorView/Rectangle.png";
@@ -23,14 +23,14 @@ const InvestorHome = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [bioContent, setBioContent] = useState(loggedInUser?.bio || "");
   const [personalEditable, setPersonalEditable] = useState(false);
-
+  const [companyName, setCompanyName] = useState("");
   const [personalData, setPersonalData] = useState({
     designation: loggedInUser?.designation || "",
     education: loggedInUser?.education || "",
     experience: loggedInUser?.experience || "",
     profilePicture: loggedInUser.profilePicture || "",
   });
-
+  console.log("logged user", loggedInUser);
   const [colorCardData, setColorCardData] = useState(null);
 
   const [field, setField] = useState("last_round_investment");
@@ -47,7 +47,8 @@ const InvestorHome = () => {
 
   useEffect(() => {
     getStartupByFounderId(loggedInUser._id).then(({ data }) => {
-      console.log("ssss__>", data.colorCard.last_round_investment);
+      setCompanyName(data.company);
+      // console.log("ssss__>", data.colorCard.last_round_investment);
       setColorCardData({
         last_round_investment: data.colorCard.last_round_investment,
         total_investment: data.colorCard.total_investment,
@@ -58,6 +59,11 @@ const InvestorHome = () => {
       });
     });
   }, []);
+
+  const [editCompanyName, setEditCompanyName] = useState({
+    founderId: loggedInUser._id,
+    company: companyName
+  });
 
   const dispatch = useDispatch();
 
@@ -76,6 +82,8 @@ const InvestorHome = () => {
         data: { data },
       } = await updateUserAPI(newPersonalData);
       dispatch(loginSuccess(data));
+      const response = await postStartUpData(editCompanyName);
+      setCompanyName(editCompanyName.company);
       setPersonalEditable(!personalEditable);
     } catch (error) {
       console.log(error);
@@ -98,6 +106,15 @@ const InvestorHome = () => {
     }
   };
 
+  const companyNameHandler = (e) => {
+    const { name, value } = e.target;
+    setEditCompanyName({
+      ...editCompanyName,
+      [name]: value,
+    });
+    console.log("Hello",editCompanyName);
+  }
+
   const renderEditableField = (fieldName) => {
     if (personalEditable) {
       if (fieldName === "profilePicture") {
@@ -112,6 +129,17 @@ const InvestorHome = () => {
           />
         );
       }
+      if (fieldName === "company") {
+        return (
+          <input
+            type="text"
+            className="w-100"
+            name={fieldName}
+            value={editCompanyName.fieldName}
+            onChange={companyNameHandler}
+          />
+        );
+      }
       return (
         <input
           type="text"
@@ -122,6 +150,7 @@ const InvestorHome = () => {
         />
       );
     }
+    if (fieldName === "company") return <span className="small_typo">{companyName}</span>;
     return <span className="small_typo">{loggedInUser[fieldName]}</span>;
   };
 
@@ -209,7 +238,8 @@ const InvestorHome = () => {
                               className="small_typo"
                               style={{ marginBottom: "1rem" }}
                             >
-                              {loggedInUser?.startUp?.company || "No StartUp"}
+                              {/* {companyName || "No StartUp"} */}
+                              {renderEditableField("company")}
                             </td>
                           </tr>
                           <tr>

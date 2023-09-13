@@ -12,7 +12,9 @@ import {
   getSavedPostsByCollection,
   getLikeCount,
   getUsersWhoLikedPost,
+  deletePost,
 } from "../services/postService";
+import mongoose from "mongoose";
 
 export const createPost = async (req, res) => {
   try {
@@ -207,6 +209,23 @@ export const getUsersWhoLikedPostController = async (req, res) => {
     return res.status(500).send({
       status: 500,
       message: "An error occurred while getting liked users.",
+    });
+  }
+};
+
+
+//delete post 
+export const deletedPostController = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const userId =  req.userId;
+    const result = await deletePost(postId,userId);
+    return res.status(result.status).json(result);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while deleting posts.",
     });
   }
 };

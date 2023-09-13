@@ -39,6 +39,6 @@ router.patch("/onelink", editStartUpOneLink);
 router.patch("/introMessage", editStartUpIntroMessage);
 router.put("/onePager", editOnePager);
 
-router.get("/getALlStartUps", getAllStartupsController);
+router.get("/getAllStartUps", getAllStartupsController);
 
 export default router;
