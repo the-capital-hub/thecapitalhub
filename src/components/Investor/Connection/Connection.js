@@ -197,13 +197,13 @@ const Connection = () => {
                           {/* Render content for sent connections here */}
                           <div className="connection_left">
                             <img
-                              src={receiver.profilePicture}
+                              src={receiver?.profilePicture}
                               alt="Connection"
                             />
                             <div className="body_container">
-                              <p className="connection_name h5">{`${receiver.firstName} ${receiver.lastName}`}</p>
+                              <p className="connection_name h5">{`${receiver?.firstName} ${receiver?.lastName}`}</p>
                               <p className="connection_designation">
-                                {receiver.designation}
+                                {receiver?.designation}
                               </p>
                               <p>
                                 <TimeAgo
