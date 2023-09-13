@@ -8,7 +8,7 @@ export default function User({
     <div
       className={`user d-flex align-items-center border border-dark-subtle rounded-pill gap-1 user__padding pe-4`}
     >
-      <img src={userImgURL} alt="User image" className="user__image" />
+      <img src={userImgURL} alt="User" className="user__image" />
       <div
         className={`user__details d-flex flex-column justify-content-center`}
       >

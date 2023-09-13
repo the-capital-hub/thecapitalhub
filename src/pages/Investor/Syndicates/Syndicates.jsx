@@ -1,5 +1,5 @@
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
-import CompanyCardContainer from "../../../components/Investor/SyndicateComponents/CompanyCardContainer";
+import CompanyCardContainer from "../../../components/NewInvestor/SyndicateComponents/CompanyCardContainer";
 import "./Syndicates.scss";
 
 export default function Syndicates() {
