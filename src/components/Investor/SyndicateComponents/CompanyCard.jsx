@@ -21,9 +21,9 @@ export default function CompanyCard({ company, text = "Group" }) {
           <p className="card__subtitle">{company.motto}</p>
         </div>
       </div>
-      <div className="card-body mt-0 pt-0">
-        <div className="company__overview mb-3">
-          <h6 className="div__heading  my-2">Over View</h6>
+      <div className="card-body mt-0 pt-0 d-flex flex-column gap-2 align-items-start w-100">
+        <div className="company__overview">
+          <h6 className="div__heading my-2">Over View</h6>
           <div className="overview__container">
             <CompanyOverviewCard
               heading={"Website"}
@@ -48,7 +48,7 @@ export default function CompanyCard({ company, text = "Group" }) {
             />
           </div>
         </div>
-        <div className="company__people">
+        <div className="company__people w-100">
           <h6 className="div__heading my-2">People in group</h6>
           <div className="people__container d-flex gap-2 mt-3">
             <User

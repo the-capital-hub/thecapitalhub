@@ -3,8 +3,10 @@
   scroll-snap-align: start;
   flex: 0 0 20rem;
 
+  box-shadow: 4px 4px 30px 0px rgba(211, 243, 107, 0.1);
+
   @media (min-width: 900px) {
-    flex: 0 0 32rem;
+    flex: 0 0 35rem;
   }
 }
 
