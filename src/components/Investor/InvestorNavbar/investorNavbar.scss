@@ -47,18 +47,13 @@
           margin-right: 10px;
 
           .searchbar-input {
-            width: 100%;
             height: 49px;
             background: #eaeef2;
             border-radius: 20px;
             border: none;
             transition: width 0.4s ease;
             padding: 0 15px;
-
-            &:focus {
-              width: 400px;
-              outline: none;
-            }
+            outline: none;
           }
 
           .searchbar-button {
@@ -215,16 +210,178 @@
         .icons-container {
           .mobile-icon-wrapper {
             display: flex;
-            // margin-left: 1.5rem;
             width: 49px;
             height: 49px;
-            // left: 1397px;
-            top: 49px;
-            // background: #eaeef2;
             border-radius: 50%;
-            display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+
+            .search_container {
+              // top: 500px;
+              left: -300px;
+              top: 60px;
+              background-color: white;
+
+              // top: calc(100% + 255px);
+
+              width: 350px;
+              min-height: 80px;
+
+              .searchbar-container {
+                display: flex;
+                align-items: center;
+                position: relative;
+                margin-right: 10px;
+
+                .searchbar-input {
+                  height: 49px;
+                  width: 310px;
+                  background: #eaeef2;
+                  border-radius: 20px;
+                  border: none;
+                  transition: width 0.4s ease;
+                  padding: 0 15px;
+                  outline: none;
+                }
+
+                .searchbar-button {
+                  position: absolute;
+                  right: -5px;
+                  top: 0;
+                  width: 48px;
+                  height: 49px;
+                  background: #fd5901;
+                  border: none;
+                  border-top-right-radius: 20px;
+                  border-bottom-right-radius: 20px;
+                  cursor: pointer;
+                }
+              }
+
+              .search_results {
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                gap: 5px;
+                .single_result:nth-child(6),
+                .single_result:nth-child(13) {
+                  border-bottom: none;
+                }
+                a {
+                  text-decoration: none;
+                  color: #6c757d;
+                  &:hover {
+                    color: #fd5901;
+                  }
+                }
+                .single_result {
+                  border-bottom: 1px solid lightgrey;
+                  padding: 2px 0;
+                  transition: padding-left ease 0.2s;
+                  &:hover {
+                    // background-color: rgb(221, 221, 221);
+                    border-radius: 5px;
+                    padding-left: 10px;
+                  }
+                }
+              }
+            }
+          }
+          .icon-wrapper {
+            .notification-icon,
+            .message-icon {
+            }
+
+            .profile-pic {
+            }
+
+            .me {
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .container {
+    .investor_navbar {
+      
+
+      /* right container */
+      .navbar_right_container {
+        .icons-container {
+          .mobile-icon-wrapper {
+            .search_container {
+              left: auto;
+              margin-right: 20px;
+              top: 60px;
+              background-color: white;
+
+              width: 350px;
+              min-height: 80px;
+
+              .searchbar-container {
+                display: flex;
+                align-items: center;
+                position: relative;
+                margin-right: 10px;
+
+                .searchbar-input {
+                  height: 49px;
+                  width: 310px;
+                  background: #eaeef2;
+                  border-radius: 20px;
+                  border: none;
+                  transition: width 0.4s ease;
+                  padding: 0 15px;
+                  outline: none;
+                }
+
+                .searchbar-button {
+                  position: absolute;
+                  right: -5px;
+                  top: 0;
+                  width: 48px;
+                  height: 49px;
+                  background: #fd5901;
+                  border: none;
+                  border-top-right-radius: 20px;
+                  border-bottom-right-radius: 20px;
+                  cursor: pointer;
+                }
+              }
+
+              .search_results {
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                gap: 5px;
+                .single_result:nth-child(6),
+                .single_result:nth-child(13) {
+                  border-bottom: none;
+                }
+                a {
+                  text-decoration: none;
+                  color: #6c757d;
+                  &:hover {
+                    color: #fd5901;
+                  }
+                }
+                .single_result {
+                  border-bottom: 1px solid lightgrey;
+                  padding: 2px 0;
+                  transition: padding-left ease 0.2s;
+                  &:hover {
+                    // background-color: rgb(221, 221, 221);
+                    border-radius: 5px;
+                    padding-left: 10px;
+                  }
+                }
+              }
+            }
           }
           .icon-wrapper {
             .notification-icon,
