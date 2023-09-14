@@ -101,7 +101,31 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-right: 20px;
+
+        .kebab_menu_container {
+          position: absolute;
+          ul.kebab_menu {
+            position: absolute;
+            list-style-type: none;
+            top: 30px;
+            right: 20px;
+
+            background-color: white;
+
+            li {
+              margin-bottom: 6px;
+              color: rgb(92, 92, 92);
+              &:hover {
+                border-bottom: 1px solid #d1d1d1;
+                color: black;
+                cursor: pointer;
+              }
+            }
+            li:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
       }
 
       .feedpostcard_footer {
@@ -278,7 +302,6 @@
             font-weight: 600;
             line-height: normal;
           }
-       
         }
       }
 

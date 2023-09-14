@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import locationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
 import HomeIcon from "../../../../Images/HomeIcon.svg";
-// import ThreeODotIcon from "../../../../Images/ThreeDotIcon.svg";
+import ThreeODotIcon from "../../../../Images/ThreeDotIcon.svg";
 import "./feedPostCard.scss";
 import shareIcon from "../../../../Images/post/share.png";
 import fireIcon from "../../../../Images/post/like-fire.png";
@@ -12,6 +12,7 @@ import TimeAgo from "timeago-react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import {
+  deletePostAPI,
   getPostComment,
   likeUnlikeAPI,
   sendPostComment,
@@ -21,6 +22,7 @@ import ImageIcon from "../../../../Images/Group 15141.svg";
 import RoundLogo from "../../../../Images/RoundLogo.png";
 import commentIconOne from "../../../../Images/image 40(1).png";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
 
 const FeedPostCard = ({
   postId,
@@ -34,6 +36,7 @@ const FeedPostCard = ({
   designation,
   likes,
   userId,
+  fetchAllPosts,
 }) => {
   const [showComment, setShowComment] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -83,13 +86,26 @@ const FeedPostCard = ({
   const [liked, setLiked] = useState(false);
 
   useEffect(() => {
-    // setLiked(likes.includes(loggedInUser._id));
-  }, []);
+    setLiked(likes.includes(loggedInUser._id));
 
-  useEffect(() => {
     getPostComment({ postId }).then((res) => {
       setComments(res.data.data);
     });
+
+    const outsideClickHandler = (event) => {
+      if (
+        kebabMenuContainerRef.current &&
+        !kebabMenuContainerRef.current.contains(event.target)
+      ) {
+        setKebabMenuVisible(false);
+      }
+    };
+
+    document.addEventListener("click", outsideClickHandler);
+
+    return () => {
+      document.removeEventListener("click", outsideClickHandler);
+    };
   }, []);
 
   const likeUnlikeHandler = async () => {
@@ -104,12 +120,25 @@ const FeedPostCard = ({
     }
   };
 
+  const [kebabMenuVisible, setKebabMenuVisible] = useState(false);
+
+  const deletePost = async (postId) => {
+    try {
+      await deletePostAPI(postId);
+      await fetchAllPosts();
+    } catch (error) {
+      console.log("Error deleting post : ", error);
+    }
+  };
+
+  const kebabMenuContainerRef = useRef(null);
+
   return (
     <>
       <div className="row feedpostcard_main_container mb-2">
         <div className="col-12">
           <div className="box feedpostcard_container mt-2">
-            <div className="  feed_header_container">
+            <div className="  feed_header_container border-2 border-bottom mb-3 pb-2">
               <div className="feedpostcard_content">
                 <Link to={`/user/${userId}`} className="rounded-circle">
                   <img
@@ -123,11 +152,13 @@ const FeedPostCard = ({
                   />
                 </Link>
                 <div className="feedpostcart_text_header my-1">
-                  <span
+                  <Link
+                    to={`/user/${userId}`}
+                    className="text-decoration-none"
                     style={{ fontSize: "18px", fontWeight: 600, color: "#000" }}
                   >
                     {firstName + " " + lastName}
-                  </span>
+                  </Link>
                   <span className="d-flex flex-column flex-md-row">
                     <span
                       style={{
@@ -157,11 +188,35 @@ const FeedPostCard = ({
                   </span>
                 </div>
               </div>
-              {/* <div className="three_dot">
-                <img src={ThreeODotIcon} alt="dot" />
-              </div> */}
+              <div className="three_dot px-2 px-md-4"> 
+                <div
+                  className="kebab_menu_container"
+                  ref={kebabMenuContainerRef}
+                >
+                  <img
+                    src={ThreeODotIcon}
+                    alt="dot"
+                    className="me-3 p-2"
+                    onClick={() => {
+                      setKebabMenuVisible(!kebabMenuVisible);
+                    }}
+                    onBlurCapture={() => {
+                      setTimeout(() => {
+                        setKebabMenuVisible(false);
+                      }, 100);
+                    }}
+                  />
+                  {kebabMenuVisible && (
+                    <ul className="kebab_menu border rounded shadow-sm p-3">
+                      {userId === loggedInUser?._id && (
+                        <li onClick={() => deletePost(postId)}>Delete</li>
+                      )}
+                      <li>Report</li>
+                    </ul>
+                  )}
+                </div>
+              </div>
             </div>
-            <hr />
             <div className="para_container w-100">
               <div className="para_container_text w-100">
                 <p style={{ fontSize: "15px" }}>{description}</p>
