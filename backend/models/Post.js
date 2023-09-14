@@ -35,6 +35,13 @@ const postSchema = new Schema(
       },
     ],
     comments: [commentSchema],
+    resharedPostId: {
+      type: Schema.Types.ObjectId,
+      ref: "Posts",
+    },
+    resharedCount: {
+      type: Number,
+    }
   },
   {
     timestamps: true,
