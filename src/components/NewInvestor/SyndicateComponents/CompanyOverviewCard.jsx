@@ -11,7 +11,7 @@ export default function CompanyOverviewCard({
   return (
     <div
       className={`link__container d-flex flex-column ${
-        fontBase ? "gap-2" : "gap-1"
+        fontBase ? "gap-2 me-lg-4" : "gap-1"
       }`}
     >
       <p>{heading}</p>
