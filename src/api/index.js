@@ -32,9 +32,10 @@ const API = Object.freeze({
   getUserConnections: `${baseUrl}/connections/getUserConnections`,
   sendConnectionRequest: `${baseUrl}/connections/sendConnectionRequest`,
   sendPostComment: `${baseUrl}/api/posts/comment`,
-  getPostComment:`${baseUrl}/api/posts/getComments`,
+  getPostComment: `${baseUrl}/api/posts/getComments`,
   cancelConnectionRequest: `${baseUrl}/connections/cancelConnectionRequest`,
-  getSearchResults: `${baseUrl}/users/search`
+  getSearchResults: `${baseUrl}/users/search`,
+  deletePost: `${baseUrl}/api/posts/deletePost`,
 });
 
 export default API;

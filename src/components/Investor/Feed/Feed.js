@@ -14,14 +14,16 @@ const Feed = () => {
   const [popupOpen, setPopupOpen] = useState(false);
   const [allPosts, setAllPosts] = useState(null);
   const [newPost, setNewPost] = useState(false);
+  const [loadingFeed, setLoadingFeed] = useState(false);
+
   const openPopup = () => {
     setPopupOpen(!popupOpen);
   };
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
-  useEffect(() => {
-    document.title = "Home | The Capital Hub";
+  const fetchAllPosts = () => {
+    setLoadingFeed(true);
     getAllPostsAPI()
       .then(({ data }) => {
         setAllPosts(data);
@@ -29,7 +31,13 @@ const Feed = () => {
       .catch((err) => {
         console.log(err);
         setAllPosts([]);
-      });
+      })
+      .finally(() => setLoadingFeed(false));
+  };
+
+  useEffect(() => {
+    document.title = "Home | The Capital Hub";
+    fetchAllPosts();
   }, [newPost]);
 
   const savePostHandler = async (postId) => {
@@ -37,8 +45,6 @@ const Feed = () => {
       // api call for savin a post
     } catch (error) {}
   };
-
-  console.log(allPosts) 
 
   return (
     <>
@@ -66,12 +72,12 @@ const Feed = () => {
                   </div>
                 </div>
               </div>
-              {allPosts ? (
-                allPosts.map(
+              {!loadingFeed ? (
+                allPosts?.map(
                   ({
                     description,
                     user: {
-                      firstName,
+                      firstName, 
                       lastName,
                       designation,
                       profilePicture,
@@ -96,6 +102,7 @@ const Feed = () => {
                       image={image}
                       createdAt={createdAt}
                       likes={likes}
+                      fetchAllPosts={fetchAllPosts}
                     />
                   )
                 )
