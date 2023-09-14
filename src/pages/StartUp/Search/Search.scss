@@ -34,7 +34,19 @@
           height: 80px;
           //   object-fit: contain;
         }
+
+        .people_name_link {
+          text-decoration: none;
+          color: #000000;
+  
+          &:hover {
+            color: #fd5901;
+          }
+        }
       }
+
+      
     }
   }
 }
+
