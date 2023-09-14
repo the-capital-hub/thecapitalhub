@@ -45,6 +45,14 @@ export default function Feedback() {
       feedback:
         "This is my first review and also every website and app working very good and there is not lag on website or app.",
     },
+    {
+      id: 5,
+      image: userThree,
+      name: "Jonas",
+      rating: 5,
+      feedback:
+        "This is my first review and also every website and app working very good and there is not lag on website or app.",
+    },
   ];
 
   return (
