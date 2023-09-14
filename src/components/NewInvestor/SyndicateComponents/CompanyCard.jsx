@@ -16,7 +16,7 @@ export default function CompanyCard({ company, text = "Group" }) {
         <div className="card__image__container">
           <img src={company.image} alt={company.name} className="card__image" />
         </div>
-        <div className="company__details d-flex flex-column justify-content-center">
+        <div className="company__details d-flex flex-column justify-content-center pe-1">
           <h5 className="card-title m-0">{company.name}</h5>
           <p className="card__subtitle">{company.motto}</p>
         </div>
@@ -24,7 +24,7 @@ export default function CompanyCard({ company, text = "Group" }) {
       <div className="card-body mt-0 pt-0 d-flex flex-column gap-2 align-items-start w-100">
         <div className="company__overview">
           <h6 className="div__heading my-2">Over View</h6>
-          <div className="overview__container">
+          <div className="d-flex flex-column gap-3 flex-lg-row gap-lg-5 ">
             <CompanyOverviewCard
               heading={"Website"}
               text={company.name}
@@ -50,7 +50,7 @@ export default function CompanyCard({ company, text = "Group" }) {
         </div>
         <div className="company__people w-100">
           <h6 className="div__heading my-2">People in group</h6>
-          <div className="people__container d-flex gap-2 mt-3">
+          <div className="people__container d-flex gap-3 mt-3">
             <User
               userImgURL={UserOne}
               userName={company.userOne.name}

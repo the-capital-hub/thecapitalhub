@@ -61,6 +61,8 @@ import Messages from "./pages/StartUp/Messages/Messages";
 import Notifications from "./pages/StartUp/Notifications/Notifications";
 import Syndicates from "./pages/Investor/Syndicates/Syndicates";
 import LiveDeals from "./pages/Investor/LiveDeals/LiveDeals";
+import SearchResults from "./pages/Investor/SearchResults/SearchResults";
+import Chats from "./pages/ChatPages/Chats/Chats";
 
 function App() {
   return (
@@ -277,6 +279,15 @@ function App() {
               </>
             }
           />
+
+          <Route
+            path="/chats"
+            element={
+              <>
+                <Chats />
+              </>
+            }
+          />
           <Route path="/signup" element={<Register />} />
           <Route path="/login" element={<Login />} />
 
@@ -321,6 +332,7 @@ function App() {
             <Route path="explore" element={<Explore />} />
             <Route path="syndicates" element={<Syndicates />} />
             <Route path="live-deals" element={<LiveDeals />} />
+            <Route path="search-results" element={<SearchResults />} />
           </Route>
         </Routes>
       </Router>
