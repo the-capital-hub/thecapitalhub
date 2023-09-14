@@ -21,6 +21,12 @@ export const createNewPost = async (data) => {
       });
       data.video = url;
     }
+    if (data.resharedPostId) {
+      await PostModel.findByIdAndUpdate(
+        data.resharedPostId, 
+        { $inc: { resharedCount: 1 } }, 
+      );
+    }
     const newPost = new PostModel(data);
     await newPost.save();
     return newPost;
@@ -46,7 +52,9 @@ export const allPostsData = async () => {
 
 export const singlePostData = async (_id) => {
   try {
-    const post = await PostModel.findOne({ _id });
+    const post = await PostModel.findOne({ _id })
+      .populate('resharedPostId')
+      .exec();
     return post;
   } catch (error) {
     console.error(error);

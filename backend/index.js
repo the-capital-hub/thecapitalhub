@@ -2,16 +2,21 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import { Server } from "socket.io";
+import multer from "multer";
+import connectDB from "./constants/db.js";
+
+//routes
 import usersData from "./routes/usersData.js";
 import postData from "./routes/postData.js";
 import documentData from "./routes/documentData.js";
-import multer from "multer";
-import connectDB from "./constants/db.js";
 import globalErrorHandler from "./error/AppError.js";
 import startUpData from "./routes/startUpData.js";
 import contactUsData from "./routes/contactUsData.js";
 import connectionData from "./routes/connectionRoutes.js";
 import investorData from "./routes/investorRoutes.js";
+import chatData from "./routes/chatRoutes.js";
+import messageData from "./routes/messageRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -28,6 +33,9 @@ app.use("/startup", startUpData);
 app.use("/contactUs", contactUsData);
 app.use("/connections", connectionData);
 app.use("/investor", investorData);
+app.use("/chat", chatData);
+app.use("/message", messageData);
+
 // documentation upload
 
 const storage = multer.diskStorage({
@@ -55,6 +63,44 @@ app.use(globalErrorHandler);
 
 connectDB();
 
-app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT, () => {
   console.log(`Listening on ${process.env.PORT}`);
+});
+
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+  },
+});
+
+let activeUsers = [];
+io.on("connection", (socket) => {
+  socket.on("new-user-add", (newUserId) => {
+    if (newUserId !== null) {
+      if (!activeUsers.some((user) => user.userId === newUserId)) {
+        activeUsers.push({
+          userId: newUserId,
+          socketId: socket.id,
+        });
+      }
+      console.log("Connected User", activeUsers);
+      io.emit("get-users", activeUsers);
+    }
+  });
+
+  socket.on("disconnected", () => {
+    activeUsers = activeUsers.filter((user) => user.socketId !== socket.id);
+    console.log("User disconnected", activeUsers);
+    io.emit("get-users", activeUsers);
+  });
+
+  socket.on("send-message", (data) => {
+    const { recieverId } = data;
+    const user = activeUsers.find((user) => user.userId === recieverId);
+    console.log("Active users: ", activeUsers);
+    console.log("Users: ", user);
+    console.log("Sending from socket to: ", recieverId);
+    console.log("Data: ", data);
+    if (user) io.to(user.socketId).emit("recieve-message", data);
+  });
 });

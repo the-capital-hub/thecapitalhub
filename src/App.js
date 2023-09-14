@@ -61,6 +61,7 @@ import Messages from "./pages/StartUp/Messages/Messages";
 import Notifications from "./pages/StartUp/Notifications/Notifications";
 import Syndicates from "./pages/Investor/Syndicates/Syndicates";
 import LiveDeals from "./pages/Investor/LiveDeals/LiveDeals";
+import Chats from "./pages/ChatPages/Chats/Chats";
 
 function App() {
   return (
@@ -274,6 +275,15 @@ function App() {
                 <Navbar />
                 <SecuritySafeGuard />
                 <Footer />
+              </>
+            }
+          />
+
+          <Route
+            path="/chats"
+            element={
+              <>
+              <Chats/>
               </>
             }
           />

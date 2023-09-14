@@ -306,7 +306,7 @@ const InvestorNavbar = (props) => {
                   <img src={NotificationIcon} alt="notification" />
                 </div>
               </Link>
-              <Link to="/messages" className="rounded-circle message-icon">
+              <Link to="/chats" className="rounded-circle message-icon">
                 <div className="icon-wrapper">
                   <img src={MessageIcon} alt="message" />
                 </div>

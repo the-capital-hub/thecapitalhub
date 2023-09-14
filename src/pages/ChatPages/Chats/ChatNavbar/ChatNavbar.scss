@@ -1,0 +1,62 @@
+.chat_navbar_container {
+  border-radius: 30px;
+  border: 1px solid #dcdcdc;
+  background: #1d1d1d;
+  box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
+  padding: 10px 30px;
+  height: 106px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+
+  .left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .rounded_img {
+      border-radius: 50%;
+      height: 70px;
+      width: 70px;
+    }
+
+    .title_and_message {
+      margin-left: 10px;
+      .name_title {
+        color: #fff;
+        font-family: Poppins;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+      .online {
+        color: #a3ffa3;
+        font-family: Poppins;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+      .message_title {
+        color: #858585;
+        font-family: Poppins;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+    }
+  }
+  .right {
+    display: flex;
+    align-items: flex-end;
+    .call, .video, .threedot {
+      margin-right: 20px;
+      height: 30px;
+      width: 30px;
+     
+    }
+  }
+}

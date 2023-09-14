@@ -1,0 +1,19 @@
+.bookmark {
+  border: 0;
+  outline: 0;
+  width: fit-content;
+  align-self: flex-end;
+  padding: 0.05em;
+  border-radius: 50%;
+
+  img {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.actions-btn {
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
