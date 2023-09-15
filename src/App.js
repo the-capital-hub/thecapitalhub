@@ -63,6 +63,7 @@ import Syndicates from "./pages/Investor/Syndicates/Syndicates";
 import LiveDeals from "./pages/Investor/LiveDeals/LiveDeals";
 import SearchResults from "./pages/Investor/SearchResults/SearchResults";
 import Chats from "./pages/ChatPages/Chats/Chats";
+import MySchedule from "./pages/Investor/MySchedule/MySchedule";
 
 function App() {
   return (
@@ -333,6 +334,7 @@ function App() {
             <Route path="syndicates" element={<Syndicates />} />
             <Route path="live-deals" element={<LiveDeals />} />
             <Route path="search-results" element={<SearchResults />} />
+            <Route path="my-schedule" element={<MySchedule />} />
           </Route>
         </Routes>
       </Router>
