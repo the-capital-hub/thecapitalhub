@@ -71,7 +71,11 @@ const InvestorNavbar = (props) => {
           <div className="d-flex">
             <div className="row bar_logo_container ">
               <div className="logo_container">
-                <img src={Logo} alt="bar" />
+                <img
+                  src={Logo}
+                  onClick={() => navigate("/home")}
+                  alt="the capital hub logo"
+                />
               </div>
               <div
                 className="mobile-home-hamberger"
