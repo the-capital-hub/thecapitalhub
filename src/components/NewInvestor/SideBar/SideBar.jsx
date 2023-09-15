@@ -156,7 +156,10 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 active={location.pathname.includes("/mystartups")}
                 className="active-item"
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="/investor/mystartups">
+                <Link
+                  onClick={() => setSidebarCollapsed(true)}
+                  to="/investor/mystartups"
+                >
                   <img
                     src={myStartUpIcon}
                     alt="image"
@@ -170,7 +173,10 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 active={location.pathname.includes("/syndicates")}
                 className="active-item"
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="/onelink">
+                <Link
+                  onClick={() => setSidebarCollapsed(true)}
+                  to="/investor/syndicates"
+                >
                   {/* <img src={OnelinkIcon} alt="image" width="17px" height="17px" /> */}
                   <img
                     src={syndicateIcon}
@@ -182,10 +188,13 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 </Link>
               </MenuItem>
               <MenuItem
-                active={location.pathname.includes("/live-Deals")}
+                active={location.pathname.includes("/live-deals")}
                 className="active-item"
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="/team">
+                <Link
+                  onClick={() => setSidebarCollapsed(true)}
+                  to="/investor/live-deals"
+                >
                   <img
                     src={liveDealsIcon}
                     alt="image"
@@ -196,10 +205,13 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 </Link>
               </MenuItem>
               <MenuItem
-                active={location.pathname.includes("/my-schedules")}
+                active={location.pathname.includes("/my-schedule")}
                 className="active-item"
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="/customers">
+                <Link
+                  onClick={() => setSidebarCollapsed(true)}
+                  to="/investor/my-schedule"
+                >
                   <img
                     src={mySchedulesIcon}
                     alt="image"
