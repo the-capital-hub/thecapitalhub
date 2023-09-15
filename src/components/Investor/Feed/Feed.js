@@ -38,7 +38,7 @@ const Feed = () => {
     } catch (error) {}
   };
 
-  console.log(allPosts) 
+  console.log(allPosts);
 
   return (
     <>

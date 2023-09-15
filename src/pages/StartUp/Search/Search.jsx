@@ -42,7 +42,6 @@ function Search() {
     sentConnectionRequest(loggedInUser._id, userId)
       .then(({ data }) => {
         setConnectionSent(true); // Set the state to true once
-        console.log(data);
         
         setTimeout(() => {
           setConnectionSent(false); // Reset the state after a delay

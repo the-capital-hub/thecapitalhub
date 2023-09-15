@@ -8,6 +8,7 @@ import fireIcon from "../../../../Images/post/like-fire.png";
 import bwFireIcon from "../../../../Images/post/unlike-fire.png";
 import commentIcon from "../../../../Images/post/comment.svg";
 import saveIcon from "../../../../Images/post/save.svg";
+import savedIcon from "../../../../Images/post/saved.png";
 import TimeAgo from "timeago-react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -15,12 +16,15 @@ import {
   getPostComment,
   likeUnlikeAPI,
   sendPostComment,
+  getSavedPostCollections
 } from "../../../../Service/user";
 import SmileeIcon from "../../../../Images/Group 15141(1).svg";
 import ImageIcon from "../../../../Images/Group 15141.svg";
 import RoundLogo from "../../../../Images/RoundLogo.png";
 import commentIconOne from "../../../../Images/image 40(1).png";
 import { Link } from "react-router-dom";
+import SavePostPopUP from "../../../../components/PopUp/SavePostPopUP/SavePostPopUP";
+import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 
 const FeedPostCard = ({
   postId,
@@ -39,6 +43,25 @@ const FeedPostCard = ({
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
+
+  const [savedPostId, setSavedPostId] = useState([]);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showSavePopUp, setshowSavePopUp] = useState(false);
+  // console.log(savedPostId)
+  // console.log(postId)
+  const handleCloseSavePopup = () => {
+    setshowSavePopUp(false);
+  };
+  const handleSavePopUp = () => {
+    setshowSavePopUp(true);
+  };
+ 
+  const receiveSavedPostStatus = () => {
+    setShowSuccess(true); 
+    setTimeout(() => {
+      setShowSuccess(false); // Reset the state after a delay
+    }, 2500)
+  };
 
   const handleEnterPress = async (e) => {
     if (e.key === "Enter") {
@@ -82,15 +105,37 @@ const FeedPostCard = ({
 
   const [liked, setLiked] = useState(false);
 
-  useEffect(() => {
-    // setLiked(likes.includes(loggedInUser._id));
-  }, []);
 
+
+ 
   useEffect(() => {
     getPostComment({ postId }).then((res) => {
       setComments(res.data.data);
     });
+  
+    const fetchSavedPostData = async () => {
+      try {
+        const response = await getSavedPostCollections(loggedInUser._id);
+        
+        if (response.data && response.data.length > 0) {
+          const allSavedPostDataIds = response.data.reduce((acc, collection) => {
+            if (collection.posts && Array.isArray(collection.posts)) {
+              acc = acc.concat(collection.posts);
+            }
+            return acc;
+          }, []);
+          // console.log(allSavedPostDataIds);
+          setSavedPostId(allSavedPostDataIds);
+        }
+      } catch (error) {
+        console.error("Error fetching saved post collections:", error);
+      }
+    };
+  
+    fetchSavedPostData();
   }, []);
+  
+  
 
   const likeUnlikeHandler = async () => {
     try {
@@ -223,7 +268,21 @@ const FeedPostCard = ({
               </div>
               <div className="col-4 d-flex align-items-center gap-3 justify-content-end">
                 <img src={shareIcon} width={16} alt="share post" />
-                <img src={saveIcon} width={16} alt="save post" />
+                {savedPostId.includes(postId)?
+                 <img
+                 src={savedIcon}
+                 width={16}
+                 alt="save post"
+                
+               />
+               :
+                  <img
+                  src={saveIcon}
+                  width={16}
+                  alt="save post"
+                  onClick={handleSavePopUp}
+                />
+                }
               </div>
               {showComment && (
                 <div>
@@ -298,6 +357,16 @@ const FeedPostCard = ({
             </div>
           </div>
         </div>
+        {showSavePopUp && (
+          <SavePostPopUP postId={postId} savedPostStatus={receiveSavedPostStatus} onClose={handleCloseSavePopup} />
+        )}
+        {showSuccess && (
+          <AfterSuccessPopUp
+          withoutOkButton
+          onClose={() => setShowSuccess(!showSuccess)}
+            successText="Post saved Successfully"
+          />
+        )}
       </div>
     </>
   );

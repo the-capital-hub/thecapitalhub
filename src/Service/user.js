@@ -406,6 +406,25 @@ export const getSearchResultsAPI = async (searchBy) => {
     throw error;
   }
 };
+
+export const savePostByUserIdAPI = async (userId, collectionName, postId) => {
+  try {
+    const postdata = {
+      collectionName: collectionName,
+      userId: userId,
+    };
+    const url = `${API.savePostByUserId}/${postId}`;
+    const { data } = await axiosInstance.patch(url, postdata);
+
+    return data;
+  } catch (error) {
+    console.error("Error saving the post:", error);
+    throw error;
+  }
+};
+
+
+
 export {
   getUser,
   postUser,
