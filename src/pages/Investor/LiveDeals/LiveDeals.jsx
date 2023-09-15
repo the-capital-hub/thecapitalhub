@@ -39,8 +39,10 @@ export default function LiveDeals() {
   // Fetch companies data here.
 
   return (
-    <div className="liveDeals__container">
-      <SmallProfileCard text="Live Deals" />
+    <div className="liveDeals__container px-3 border-start">
+      <div className="pb-4 pt-2">
+        <SmallProfileCard text="Live Deals" />
+      </div>
       <section className="section__wrapper">
         <div className="deals__company__container d-flex flex-column gap-4">
           {companies.map((company) => {

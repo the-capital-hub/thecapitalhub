@@ -4,12 +4,12 @@ import "./SearchResults.scss";
 
 export default function SearchResults() {
   return (
-    <div className="search__results__wrapper">
-      <div className="">
+    <div className="search__results__wrapper px-3 border-start pb-5">
+      <div className="pb-4 pt-2">
         <SearchFilters />
         {/* <h1>Search Filters</h1> */}
       </div>
-      <div className="results__container border-start">
+      <div className="results__container">
         <CompanyProfile />
       </div>
     </div>

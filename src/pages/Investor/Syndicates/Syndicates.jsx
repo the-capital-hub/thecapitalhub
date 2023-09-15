@@ -4,9 +4,11 @@ import "./Syndicates.scss";
 
 export default function Syndicates() {
   return (
-    <div className="syndicates__container">
-      <SmallProfileCard text="Syndicates" />
-      <section className="section__wrapper bg-white rounded-3 m-3 border">
+    <div className="syndicates__container px-3 border-start">
+      <div className="pb-4 pt-2">
+        <SmallProfileCard text="Syndicates" />
+      </div>
+      <section className="section__wrapper bg-white rounded-4 border">
         <div className="companies__container border-bottom ">
           <div className="companies__header py-3 px-4 d-flex flex-column flex-sm-row gap-4 justify-content-between align-items-center border-bottom">
             <h2 className="main__heading div__heading">Companies</h2>

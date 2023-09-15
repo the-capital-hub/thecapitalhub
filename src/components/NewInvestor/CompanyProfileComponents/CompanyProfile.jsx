@@ -30,7 +30,7 @@ export default function CompanyProfile() {
   };
 
   return (
-    <div className="company__profile bg-white rounded-4 border m-3 p-lg-4">
+    <div className="company__profile bg-white rounded-4 border p-lg-4 shadow-sm">
       <div className="company__section__one border-bottom d-flex flex-column gap-4 py-5 ps-3">
         <div className="company__info d-flex flex-column flex-xl-row gap-4 justify-content-between position-relative">
           <CompanyInfo company={company} />
