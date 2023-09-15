@@ -167,7 +167,7 @@ export const searchUsersController = async (req, res) => {
 // add education
 export const addEducationController = async (req, res) => {
   try {
-    const { userId } = req.params; 
+    const { userId } = req.params;
     const response = await addEducation(userId, req.body);
     res.status(response.status).send(response);
     return response;
