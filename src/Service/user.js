@@ -458,3 +458,33 @@ export const deletePostAPI = async (postId) => {
     throw error;
   }
 };
+
+export const getUserChats = async (userId) => {
+  try {
+    const { data } = await axiosInstance.get(`${API.getUserChats}/${userId}`);
+    return data;
+  } catch (error) {
+    console.error("Error getting user chats:", error);
+    throw error;
+  }
+};
+
+export const getMessageByChatId = async (chatId) => {
+  try {
+    const { data } = await axiosInstance.get(`${API.getMessageByChatId}/${chatId}`);
+    return data;
+  } catch (error) {
+    console.error("Error getting user message:", error);
+    throw error;
+  }
+};
+
+export const addMessage = async (messageData) => {
+  try {
+    const { data } = await axiosInstance.post(`${API.addMessage}`, messageData);
+    return data;
+  } catch (error) {
+    console.error("Error getting user message:", error);
+    throw error;
+  }
+};

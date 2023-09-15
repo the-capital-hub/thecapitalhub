@@ -26,6 +26,9 @@
 
         img {
           height: 45px;
+          &:hover {
+            cursor: pointer;
+          }
         }
       }
       .mobile-home-hamberger {
@@ -308,8 +311,6 @@
 @media (max-width: 420px) {
   .container {
     .investor_navbar {
-      
-
       /* right container */
       .navbar_right_container {
         .icons-container {

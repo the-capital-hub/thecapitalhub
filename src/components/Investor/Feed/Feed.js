@@ -83,7 +83,7 @@ const Feed = () => {
                   ({
                     description,
                     user: {
-                      firstName, 
+                      firstName,
                       lastName,
                       designation,
                       profilePicture,

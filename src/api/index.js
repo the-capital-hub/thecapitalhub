@@ -37,6 +37,10 @@ const API = Object.freeze({
   getSearchResults: `${baseUrl}/users/search`,
   savePostByUserId: `${baseUrl}/api/posts/savePost`,
   deletePost: `${baseUrl}/api/posts/deletePost`,
+  getUserChats: `${baseUrl}/chat/getUserChats`,
+  createChat: `${baseUrl}/chat/createChat`,
+  getMessageByChatId: `${baseUrl}/message/getMessages`,
+  addMessage: `${baseUrl}/message/addMessage`,
 });
 
 export default API;

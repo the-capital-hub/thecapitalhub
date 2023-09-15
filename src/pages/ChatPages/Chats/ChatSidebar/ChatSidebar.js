@@ -3,7 +3,30 @@ import "./ChatSidebar.scss";
 import profileImage from "../../../../Images/Pramod.jpeg";
 import pinIcon from "../../../../Images/Chat/Pin.svg";
 import messageIcon from "../../../../Images/Chat/Chat.svg"
-const ChatSidebar = () => {
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { getUserChats } from "../../../../Service/user";
+
+const ChatSidebar = ({ selectedChat, setSelectedUser }) => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const [chats, setChats] = useState([]);
+
+  useEffect(() => {
+    getUserChats(loggedInUser._id)
+      .then((res) => {
+        setChats(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.error("Error-->", error);
+      });
+  }, [loggedInUser]);
+
+  const handleSelectedChat = (chatId, userId) => {
+    console.log(userId);
+    selectedChat(chatId);
+    setSelectedUser(userId);
+  }
   return (
     <>
       <div className="chatsidebar_main_container">
@@ -37,7 +60,7 @@ const ChatSidebar = () => {
               <div className="notification">2</div>
             </div>
           </section>
-          <section className="user_chat mt-3">
+          {/* <section className="user_chat mt-3">
             <div className="left">
               <img src={profileImage} className="rounded_img" />
               <div className="title_and_message">
@@ -62,65 +85,40 @@ const ChatSidebar = () => {
               <div className="time">09:00 am</div>
               <div className="notification">2</div>
             </div>
-          </section>
+          </section> */}
         </div>
 
         <span style={{ margin: "5px 10px" }}>
           <img src={messageIcon} /> ALL MESSAGE
         </span>
         <div className="person_wise_chat mt-2">
-          <section className="user_chat mt-3">
-            <div className="left">
-              <img src={profileImage} className="rounded_img" />
-              <div className="title_and_message">
-                <h5 className="name_title">Raju</h5>
-                <h5 className="message_title">Hey Hi! there what’s up</h5>
-              </div>
+          {chats.map((chat, index) => (
+            <div key={index}>
+              {chat.members.map((member) => {
+                if (member._id !== loggedInUser._id) {
+                  return (
+                    <section
+                      className="user_chat mt-3" key={member._id}
+                      onClick={() => handleSelectedChat(chat._id, member._id)}
+                    >
+                      <div className="left">
+                        <img src={member.profilePicture} alt="Profile" className="rounded_img" />
+                        <div className="title_and_message">
+                          <h5 className="name_title">{member.firstName} {member.lastName}</h5>
+                          <h5 className="message_title">Hey Hi! there what’s up</h5>
+                        </div>
+                      </div>
+                      <div className="right">
+                        <div className="time">09:00 am</div>
+                        <div className="notification">2</div>
+                      </div>
+                    </section>
+                  );
+                }
+                return null;
+              })}
             </div>
-            <div className="right">
-              <div className="time">09:00 am</div>
-              <div className="notification">2</div>
-            </div>
-          </section>
-          <section className="user_chat mt-3">
-            <div className="left">
-              <img src={profileImage} className="rounded_img" />
-              <div className="title_and_message">
-                <h5 className="name_title">Raju</h5>
-                <h5 className="message_title">Hey Hi! there what’s up</h5>
-              </div>
-            </div>
-            <div className="right">
-              <div className="time">09:00 am</div>
-              <div className="notification">2</div>
-            </div>
-          </section>
-          <section className="user_chat mt-3">
-            <div className="left">
-              <img src={profileImage} className="rounded_img" />
-              <div className="title_and_message">
-                <h5 className="name_title">Raju</h5>
-                <h5 className="message_title">Hey Hi! there what’s up</h5>
-              </div>
-            </div>
-            <div className="right">
-              <div className="time">09:00 am</div>
-              <div className="notification">2</div>
-            </div>
-          </section>
-          <section className="user_chat mt-3">
-            <div className="left">
-              <img src={profileImage} className="rounded_img" />
-              <div className="title_and_message">
-                <h5 className="name_title">Raju</h5>
-                <h5 className="message_title">Hey Hi! there what’s up</h5>
-              </div>
-            </div>
-            <div className="right">
-              <div className="time">09:00 am</div>
-              <div className="notification">2</div>
-            </div>
-          </section>
+          ))}
         </div>
       </div>
     </>
