@@ -1,0 +1,15 @@
+.chat_main_container {
+  border-radius: 20px;
+  background: #eaeef2;
+  display: flex;
+  .left_section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    flex-direction: column;
+  }
+  .right_section {
+    width: 75%;
+  }
+}

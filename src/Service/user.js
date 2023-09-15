@@ -139,6 +139,19 @@ async function getUserById(oneLink) {
   }
 }
 
+// export {
+//   getUser,
+//   postUser,
+//   postStartUpData,
+//   postUserLogin,
+//   postUserPost,
+//   getPdfData,
+//   uploadDocument,
+//   getAllPostsAPI,
+//   getOnePager,
+//   getUserById,
+// };
+
 export const updateUserAPI = async (data) => {
   try {
     const response = await axiosInstance.patch(API.updateUser, data);
@@ -149,7 +162,7 @@ export const updateUserAPI = async (data) => {
   }
 };
 
-const getStartupByFounderId = async (founderId) => {
+export const getStartupByFounderId = async (founderId) => {
   try {
     const response = await axiosInstance.get(
       API.getStartupByFounderId + "/" + founderId
@@ -394,7 +407,6 @@ export const getUserAndStartUpByUserIdAPI = async (userId) => {
   }
 };
 
-
 export const getSearchResultsAPI = async (searchBy) => {
   try {
     const { data } = await axiosInstance.get(
@@ -436,5 +448,13 @@ export {
   getAllPostsAPI,
   getOnePager,
   getUserById,
-  getStartupByFounderId,
+}
+export const deletePostAPI = async (postId) => {
+  try {
+    const { data } = await axiosInstance.delete(`${API.deletePost}/${postId}`);
+    return data;
+  } catch (error) {
+    console.error("Error getting search results:", error);
+    throw error;
+  }
 };

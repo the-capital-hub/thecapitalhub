@@ -2,7 +2,7 @@
 $color-capital: rgba(211, 243, 107, 1);
 $color-capital-dark: rgb(96, 110, 48);
 
-.syndicates__section__wrapper {
+.section__wrapper {
   h1,
   h2,
   h3,
@@ -21,6 +21,7 @@ $color-capital-dark: rgb(96, 110, 48);
 
 // component classes
 .btn-capital {
+  width: fit-content;
   background-color: $color-capital;
   border: 1px solid $color-capital;
   border-radius: 5px;
@@ -30,7 +31,8 @@ $color-capital-dark: rgb(96, 110, 48);
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
   font-weight: 400;
-  padding: 0.5em 0.75em;
+  line-height: 1rem;
+  padding: 0.75em 1em;
 
   cursor: pointer;
   transition: all 200ms ease-in-out;
@@ -67,7 +69,7 @@ $color-capital-dark: rgb(96, 110, 48);
 .div__heading {
   text-decoration: underline;
   text-decoration-color: $color-capital;
-  text-decoration-thickness: 1px;
+  text-decoration-thickness: 2px;
   text-underline-offset: 0.25em;
 }
 

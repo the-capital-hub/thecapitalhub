@@ -3,12 +3,13 @@ import { useState } from "react";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import Company from "../../../components/NewInvestor/Company/Company";
 import FilterBySelect from "../../../components/NewInvestor/FilterBySelect/FilterBySelect";
+import CompanyProfile from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfile";
 
 function Explore() {
   const [activeTab, setActiveTab] = useState("StartupBackground");
 
   return (
-    <div className="explore_container">
+    <div className="explore_container px-3 border-start">
       <SmallProfileCard text="Explore" />
       <section className="filter_container border">
         <h5 className="h5">Find StartUps by</h5>
@@ -52,9 +53,11 @@ function Explore() {
           )}
         </div>
       </section>
-      <section className="filtered_company_details rounded shadow-sm border">
-        <Company />
-        <Company />
+      <section className="filtered_company_details">
+        {/* <Company /> */}
+        {/* <Company /> */}
+        <CompanyProfile />
+        <CompanyProfile />
       </section>
     </div>
   );

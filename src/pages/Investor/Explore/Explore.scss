@@ -1,7 +1,7 @@
 .explore_container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 2rem;
 
   .filter_container {
     border-radius: 10px;
@@ -34,12 +34,12 @@
   }
 
   .filtered_company_details {
-    box-shadow: 0 0.125rem 0.25rem rgba(black, 0.075);
-    padding: 10px;
-    background: #fff;
+    // box-shadow: 0 0.125rem 0.25rem rgba(black, 0.075);
+    // padding: 10px;
+    // background: #fff;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 2rem;
     margin-bottom: 20px;
   }
 }
