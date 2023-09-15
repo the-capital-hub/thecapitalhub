@@ -5,7 +5,7 @@ import DealsFunds from "../../../components/NewInvestor/LiveDealsComponents/Deal
 
 export default function DealsCompany({ company }) {
   return (
-    <div className="bg-white border rounded-4 p-2 p-lg-5 m-3">
+    <div className="bg-white border rounded-4 p-2 p-lg-5">
       <DealsHeader
         image={company.image}
         name={company.name}
