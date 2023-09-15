@@ -139,18 +139,18 @@ async function getUserById(oneLink) {
   }
 }
 
-export {
-  getUser,
-  postUser,
-  postStartUpData,
-  postUserLogin,
-  postUserPost,
-  getPdfData,
-  uploadDocument,
-  getAllPostsAPI,
-  getOnePager,
-  getUserById,
-};
+// export {
+//   getUser,
+//   postUser,
+//   postStartUpData,
+//   postUserLogin,
+//   postUserPost,
+//   getPdfData,
+//   uploadDocument,
+//   getAllPostsAPI,
+//   getOnePager,
+//   getUserById,
+// };
 
 export const updateUserAPI = async (data) => {
   try {
@@ -419,6 +419,36 @@ export const getSearchResultsAPI = async (searchBy) => {
   }
 };
 
+export const savePostByUserIdAPI = async (userId, collectionName, postId) => {
+  try {
+    const postdata = {
+      collectionName: collectionName,
+      userId: userId,
+    };
+    const url = `${API.savePostByUserId}/${postId}`;
+    const { data } = await axiosInstance.patch(url, postdata);
+
+    return data;
+  } catch (error) {
+    console.error("Error saving the post:", error);
+    throw error;
+  }
+};
+
+
+
+export {
+  getUser,
+  postUser,
+  postStartUpData,
+  postUserLogin,
+  postUserPost,
+  getPdfData,
+  uploadDocument,
+  getAllPostsAPI,
+  getOnePager,
+  getUserById,
+}
 export const deletePostAPI = async (postId) => {
   try {
     const { data } = await axiosInstance.delete(`${API.deletePost}/${postId}`);

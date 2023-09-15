@@ -117,7 +117,7 @@ const NavigatedCardViewer = () => {
             )
           ) : (
             <p className="container p-5 text-center my-5 bg-white mx-auto">
-              {`No posts saved for ${activeHeader}`}
+              No posts saved 
             </p>
           )}
         </div>

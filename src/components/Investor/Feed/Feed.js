@@ -5,7 +5,7 @@ import SmallProfileCard from "../Cards/TwoSmallMyProfile/SmallProfileCard";
 import RightProfileCard from "../InvestorGlobalCards/RightProfileCard/RightProfileCard";
 import FeedPostCard from "../Cards/FeedPost/FeedPostCard";
 import CreatePostPopUp from "../../PopUp/CreatePostPopUp/CreatePostPopUp";
-import { getAllPostsAPI } from "../../../Service/user";
+import { getAllPostsAPI,getSavedPostCollections } from "../../../Service/user";
 import { useSelector } from "react-redux";
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
@@ -15,6 +15,7 @@ const Feed = () => {
   const [allPosts, setAllPosts] = useState(null);
   const [newPost, setNewPost] = useState(false);
   const [loadingFeed, setLoadingFeed] = useState(false);
+  const [getSavedPostData, setgetSavedPostData] = useState('');
 
   const openPopup = () => {
     setPopupOpen(!popupOpen);
@@ -36,6 +37,9 @@ const Feed = () => {
   };
 
   useEffect(() => {
+     getSavedPostCollections(loggedInUser._id).then((data)=>{
+      setgetSavedPostData(data)
+     })
     document.title = "Home | The Capital Hub";
     fetchAllPosts();
   }, [newPost]);
@@ -45,6 +49,8 @@ const Feed = () => {
       // api call for savin a post
     } catch (error) {}
   };
+
+  console.log(allPosts);
 
   return (
     <>
@@ -103,6 +109,7 @@ const Feed = () => {
                       createdAt={createdAt}
                       likes={likes}
                       fetchAllPosts={fetchAllPosts}
+                      response={getSavedPostData}
                     />
                   )
                 )
