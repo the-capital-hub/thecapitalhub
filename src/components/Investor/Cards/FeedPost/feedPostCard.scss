@@ -360,3 +360,18 @@
     margin-right: 5px; /* Optional: Add spacing between icons */
   }
 }
+
+#reportPostModal {
+  .reasons_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+
+    .form-check-label {
+      border-radius: 130px;
+      border: 1px solid grey;
+      padding: 5px 10px;
+      margin: 0;
+    }
+  }
+}

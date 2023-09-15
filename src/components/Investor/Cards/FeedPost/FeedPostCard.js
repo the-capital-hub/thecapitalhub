@@ -23,6 +23,11 @@ import RoundLogo from "../../../../Images/RoundLogo.png";
 import commentIconOne from "../../../../Images/image 40(1).png";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
+import ModalBsLauncher from "../../../PopUp/ModalBS/ModalBsLauncher/ModalBsLauncher";
+import ModalBSContainer from "../../../PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
+import ModalBSHeader from "../../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
+import ModalBSFooter from "../../../PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
+import ModalBSBody from "../../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
 
 const FeedPostCard = ({
   postId,
@@ -120,8 +125,11 @@ const FeedPostCard = ({
     }
   };
 
+  // Kebab menu
   const [kebabMenuVisible, setKebabMenuVisible] = useState(false);
+  const kebabMenuContainerRef = useRef(null);
 
+  // Delete post
   const deletePost = async (postId) => {
     try {
       await deletePostAPI(postId);
@@ -131,7 +139,19 @@ const FeedPostCard = ({
     }
   };
 
-  const kebabMenuContainerRef = useRef(null);
+  // Report post
+  const [reportReason, setReportReason] = useState("");
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [filingReport, setFilingReport] = useState(false);
+
+  const reportSubmitHandler = () => {
+    // take reason from state = reportReason
+    setFilingReport(true);
+    setTimeout(() => {
+      setFilingReport(false);
+      setShowReportModal(false);
+    }, 2000);
+  };
 
   return (
     <>
@@ -188,7 +208,7 @@ const FeedPostCard = ({
                   </span>
                 </div>
               </div>
-              <div className="three_dot px-2 px-md-4"> 
+              <div className="three_dot px-2 px-md-4">
                 <div
                   className="kebab_menu_container"
                   ref={kebabMenuContainerRef}
@@ -211,7 +231,7 @@ const FeedPostCard = ({
                       {userId === loggedInUser?._id && (
                         <li onClick={() => deletePost(postId)}>Delete</li>
                       )}
-                      <li>Report</li>
+                      <li onClick={() => setShowReportModal(true)}>Report</li>
                     </ul>
                   )}
                 </div>
@@ -354,8 +374,120 @@ const FeedPostCard = ({
           </div>
         </div>
       </div>
+
+      <ModalBSContainer showModal={showReportModal} id="reportPostModal">
+        <ModalBSHeader title="Report Post" />
+        <ModalBSBody>
+          <h6 className="h6">Select a reason that applies</h6>
+          <div className="reasons_container">
+            <div class="form-check form-check-inline m-0">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="reportReason"
+                onChange={({ target }) => setReportReason(target.value)}
+                id="inlineRadio1"
+                value="Harassment"
+                hidden
+              />
+              <label
+                class={`form-check-label ${
+                  reportReason === "Harassment" && "bg-secondary text-white"
+                }`}
+                for="inlineRadio1"
+              >
+                Harassment
+              </label>
+            </div>
+            <div class="form-check form-check-inline m-0">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="reportReason"
+                onChange={({ target }) => setReportReason(target.value)}
+                id="inlineRadio2"
+                value="Spam"
+                hidden
+              />
+              <label
+                class={`form-check-label ${
+                  reportReason === "Spam" && "bg-secondary text-white"
+                }`}
+                for="inlineRadio2"
+              >
+                Spam
+              </label>
+            </div>
+            <div class="form-check form-check-inline m-0">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="reportReason"
+                onChange={({ target }) => setReportReason(target.value)}
+                id="inlineRadio3"
+                value="Fraud or scam"
+                hidden
+              />
+              <label
+                class={`form-check-label ${
+                  reportReason === "Fraud or scam" && "bg-secondary text-white"
+                }`}
+                for="inlineRadio3"
+              >
+                Fraud or scam
+              </label>
+            </div>
+            <div class="form-check form-check-inline m-0">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="reportReason"
+                onChange={({ target }) => setReportReason(target.value)}
+                id="inlineRadio4"
+                value="Hateful Speech"
+                hidden
+              />
+              <label
+                class={`form-check-label ${
+                  reportReason === "Hateful Speech" && "bg-secondary text-white"
+                }`}
+                for="inlineRadio4"
+              >
+                Hateful Speech
+              </label>
+            </div>
+          </div>
+          <h6 className="h6 mt-3 text-decoration-underline">
+            Looking for something else?
+          </h6>
+          <span>
+            Sometimes our members prefer not to see certain kinds of content,
+            rather than reporting.
+          </span>
+        </ModalBSBody>
+        <ModalBSFooter cancel cancelClass="cancel_button btn">
+          {!filingReport ? (
+            <button
+              type="submit"
+              className="submit_button btn"
+              onClick={reportSubmitHandler}
+            >
+              Submit report
+            </button>
+          ) : (
+            <button class="submit_button btn" type="button" disabled>
+              <span role="status" className="me-1">
+                Submit report
+              </span>
+              <span
+                class="spinner-border spinner-border-sm"
+                aria-hidden="true"
+              ></span>
+            </button>
+          )}
+        </ModalBSFooter>
+      </ModalBSContainer>
     </>
   );
 };
-
 export default FeedPostCard;

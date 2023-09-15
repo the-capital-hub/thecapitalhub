@@ -155,7 +155,14 @@ const Connection = () => {
                             <img src={sender.profilePicture} alt="Connection" />
                           </Link>
                           <div className="body_container">
-                            <p className="connection_name h5">{`${sender.firstName} ${sender.lastName}`}</p>
+                            <p className="connection_name h5">
+                              <Link
+                                to={`/user/${_id}`}
+                                className=" text-black text-decoration-none"
+                              >
+                                {`${sender.firstName} ${sender.lastName}`}
+                              </Link>
+                            </p>
                             <p className="connection_designation">
                               {sender.designation}
                             </p>
@@ -199,12 +206,21 @@ const Connection = () => {
                         >
                           {/* Render content for sent connections here */}
                           <div className="connection_left">
-                            <img
-                              src={receiver?.profilePicture}
-                              alt="Connection"
-                            />
+                            <Link to={`/user/${_id}`}>
+                              <img
+                                src={receiver?.profilePicture}
+                                alt="Connection"
+                              />
+                            </Link>
                             <div className="body_container">
-                              <p className="connection_name h5">{`${receiver?.firstName} ${receiver?.lastName}`}</p>
+                              <p className="connection_name h5">
+                                <Link
+                                  to={`/user/${_id}`}
+                                  className=" text-black text-decoration-none"
+                                >
+                                  {`${receiver.firstName} ${receiver.lastName}`}
+                                </Link>
+                              </p>
                               <p className="connection_designation">
                                 {receiver?.designation}
                               </p>
@@ -247,9 +263,16 @@ const Connection = () => {
                           <img src={data.profilePicture} alt="Connection" />
                         </Link>
                         <div className="body_container">
-                          <p className="connection_name h5">{`${
-                            data.firstName ? data.firstName : "name"
-                          } ${data.lastName ? data.lastName : ""}`}</p>
+                          <p className="connection_name h5">
+                            <Link
+                              to={`/user/${data._id}`}
+                              className=" text-black text-decoration-none"
+                            >
+                              {`${data.firstName ? data.firstName : "name"} ${
+                                data.lastName ? data.lastName : ""
+                              }`}
+                            </Link>
+                          </p>
                           <p className="connection_designation">
                             {data.designation ? data.designation : ""}
                           </p>
