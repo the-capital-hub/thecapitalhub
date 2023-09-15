@@ -157,7 +157,8 @@ const ContactUs = () => {
                     cursor: "pointer",
                   }}
                 >
-                  +91 8217839506
+                  {/* +91 8217839506 */}
+                  +91 76249 37258
                 </span>
                 <p>
                   You may call us between Monday to Friday 9:00 am to 5:30 pm
@@ -166,7 +167,7 @@ const ContactUs = () => {
               </div>
               <button>
                 <a
-                  href="tel:+918217839506"
+                  href="tel:+917624937258"
                   style={{
                     textDecoration: "none",
                     color: "inherit",
