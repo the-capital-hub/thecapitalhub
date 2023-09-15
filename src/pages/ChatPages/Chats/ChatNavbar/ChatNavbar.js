@@ -4,18 +4,29 @@ import profileImage from "../../../../Images/Pramod.jpeg";
 import CallIcon from '../../../../Images/Chat/Call.svg'
 import videoIcon from '../../../../Images/Chat/Video.svg'
 import threeDotIcon from '../../../../Images/whiteTheeeDots.svg'
+import { useEffect, useState } from "react";
+import { getUserAndStartUpByUserIdAPI } from "../../../../Service/user";
 
-
-
-const ChatNavbar = () => {
+const ChatNavbar = ({chatId, userId}) => {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    getUserAndStartUpByUserIdAPI(userId)
+      .then((res) => {
+        setUser(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.error("Error-->", error);
+      });
+  }, [userId]);
   return (
     <>
       <div className="chat_navbar_container">
           <div className="left">
-            <img src={profileImage} className="rounded_img" />
+            <img src={user?.profilePicture} className="rounded_img" />
             <div className="title_and_message">
-              <h5 className="name_title">Raju</h5>
-              <h5 className="message_title">UI/UX Designer</h5>
+              <h5 className="name_title">{user?.firstName} {user?.lastName}</h5>
+              <h5 className="message_title">{user?.designation}</h5>
               <h4 className="online">Online</h4>
             </div>
           </div>
