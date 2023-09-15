@@ -35,7 +35,8 @@ export const getUserChats = async (userId) => {
   try {
     const chats = await ChatModel.find({
       members: { $in: [userId] },
-    });
+    }).populate('members');
+    
     if (chats.length === 0) {
       return {
         status: 404,
