@@ -17,7 +17,6 @@ import {
   getPostComment,
   likeUnlikeAPI,
   sendPostComment,
-  getSavedPostCollections
 } from "../../../../Service/user";
 import SmileeIcon from "../../../../Images/Group 15141(1).svg";
 import ImageIcon from "../../../../Images/Group 15141.svg";
@@ -41,6 +40,7 @@ const FeedPostCard = ({
   likes,
   userId,
   fetchAllPosts,
+  response
 }) => {
   const [showComment, setShowComment] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -50,8 +50,6 @@ const FeedPostCard = ({
   const [savedPostId, setSavedPostId] = useState([]);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showSavePopUp, setshowSavePopUp] = useState(false);
-  // console.log(savedPostId)
-  // console.log(postId)
   const handleCloseSavePopup = () => {
     setshowSavePopUp(false);
   };
@@ -118,7 +116,6 @@ const FeedPostCard = ({
   
     const fetchSavedPostData = async () => {
       try {
-        const response = await getSavedPostCollections(loggedInUser._id);
         
         if (response.data && response.data.length > 0) {
           const allSavedPostDataIds = response.data.reduce((acc, collection) => {

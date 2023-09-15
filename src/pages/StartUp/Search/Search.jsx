@@ -23,6 +23,7 @@ function Search() {
   const queryParams = new URLSearchParams(location.search);
   const searchBy = queryParams.get("query");
   const userIdToRemove = loggedInUser._id;
+
   useEffect(() => {
     async function fetchData() {
       const data = await getSearchResultsAPI(searchBy);
@@ -38,6 +39,7 @@ function Search() {
       fetchData();
     }
   }, [searchBy]);
+  console.log(userData)
   const handleConnect = (userId) => {
     sentConnectionRequest(loggedInUser._id, userId)
       .then(({ data }) => {
