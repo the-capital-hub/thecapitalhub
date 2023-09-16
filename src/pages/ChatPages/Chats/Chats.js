@@ -16,23 +16,38 @@ const Chats = () => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [sendMessage, setSendMessage] = useState(null);
   const [recieveMessage, setRecieveMessage] = useState(null);
+  
   const socket = useRef();
-
+  
+  const disconnectSocket = () => {
+    socket.current?.disconnect();
+  };
+  const disconnectFromServer = () => {
+    socket.current?.emit("disconnected");
+  };
+  
   useEffect(() => {
     socket.current = io(environment.baseUrl);
     socket.current.emit("new-user-add", loggedInUser?._id);
     socket.current.on("get-users", (users) => {
       setOnlineUsers(users);
     });
-    
+    return () => {
+      disconnectFromServer();
+      disconnectSocket();
+    };
+  }, [loggedInUser]);
 
+  useEffect(() => {
+    console.log("recieve");
     socket.current?.on("recieve-message", (data) => {
       console.log(data);
       setRecieveMessage(data);
     });
-  }, []);
+  }, [socket]);
 
   useEffect(() => {
+    console.log("Send");
     if (sendMessage !== null) {
       socket.current?.emit("send-message", sendMessage);
     }
@@ -53,17 +68,17 @@ const Chats = () => {
           {selectedChat && (
             <>
               <ChatNavbar
-              chatId={selectedChat} 
-              userId={selectedUser} 
+                chatId={selectedChat}
+                userId={selectedUser}
               />
-              <ChatDashboard 
-              chatId={selectedChat} 
-              userId={selectedUser}
-              setSendMessage={setSendMessage}
-              recieveMessage={recieveMessage}
+              <ChatDashboard
+                chatId={selectedChat}
+                userId={selectedUser}
+                setSendMessage={setSendMessage}
+                recieveMessage={recieveMessage}
               />
             </>
-          )} 
+          )}
         </section>
       </div>
     </>
