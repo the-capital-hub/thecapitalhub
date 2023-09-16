@@ -1,0 +1,12 @@
+@import "react-big-calendar/lib/sass/styles";
+@import "react-big-calendar/lib/addons/dragAndDrop/styles"; // if using DnD
+
+.calendar__container {
+  height: 600px;
+  position: relative;
+}
+
+// Styling calender
+.rbc-allday-cell {
+  display: none;
+}

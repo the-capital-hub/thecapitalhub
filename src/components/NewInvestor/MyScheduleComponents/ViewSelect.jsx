@@ -29,7 +29,7 @@ export default function ViewSelect({ handleViewSelect }) {
   return (
     <div className="view__selector d-flex gap-2 bg-light px-2 py-3 rounded-3">
       <button
-        className="view__btn border-0 px-3 py-2 rounded-3"
+        className="view__btn border-0 px-3 py-1 rounded-3"
         data-view="day"
         onClick={handleDayClick}
         ref={dayRef}
@@ -37,7 +37,7 @@ export default function ViewSelect({ handleViewSelect }) {
         Day
       </button>
       <button
-        className="view__btn border-0 px-3 py-2 rounded-3 active__view"
+        className="view__btn border-0 px-3 py-1 rounded-3 active__view"
         data-view="week"
         onClick={handleWeekClick}
         ref={weekRef}
@@ -45,7 +45,7 @@ export default function ViewSelect({ handleViewSelect }) {
         Week
       </button>
       <button
-        className="view__btn border-0 px-3 py-2 rounded-3"
+        className="view__btn border-0 px-3 py-1 rounded-3"
         data-view="month"
         onClick={handleMonthClick}
         ref={monthRef}

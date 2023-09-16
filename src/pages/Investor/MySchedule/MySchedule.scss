@@ -1,10 +1,13 @@
 .view__btn {
+  font-size: 1.25rem;
   outline: none;
   background-color: transparent;
   color: rgba(128, 128, 128, 0.75);
+  //   transition: all 150ms ease-in;
 }
 
 .active__view {
+  //   transition: all 150ms ease-in;
   background-color: white;
   color: black;
   box-shadow: 0 0 10px rgba(188, 188, 188, 0.75);
