@@ -87,8 +87,10 @@ const Home = () => {
 
       <div className="container-fluid onelink_container">
         <div className="container">
-          <div className="row d-flex justify-content-center align-items-center">
-            <div className="col-lg-6 col-md-12">
+        {/* row */}
+          <div className=" d-flex justify-content-center align-items-center">
+          {/* col-md-12 */}
+            <div className="col-lg-6 ">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h1>Create your one link now</h1>
                 <p className="desktop_para">
@@ -114,7 +116,8 @@ const Home = () => {
                 </Link>
               </div>
             </div>
-            <div className="col-lg-6 col-md-12 onelink_img">
+            {/* col-md-12 */}
+            <div className="col-lg-6  onelink_img">
               <img className="create_one_link" src={laptopIcon} alt="img" />
             </div>
           </div>
@@ -123,15 +126,18 @@ const Home = () => {
 
       <div className="container-fluid onelink_container">
         <div className="container">
-          <div className="row d-flex justify-content-center align-items-center angel_investment">
-            <div className="col-lg-6 col-md-12  angel_img">
+          {/* row */}
+          <div className=" d-flex justify-content-center align-items-center angel_investment">
+          {/* col-md-12 */}
+            <div className="col-lg-6   angel_img">
               <img
                 className="angel_investment_image"
                 src={AngelIcon}
                 alt="img"
               />
             </div>
-            <div className="col-lg-6 col-md-12 angel_investment_text">
+            {/* col-md-12 */}
+            <div className="col-lg-6  angel_investment_text">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h1>Angel investment made easy</h1>
                 <p className="desktop_para">
@@ -161,8 +167,10 @@ const Home = () => {
 
       <div className="container-fluid onelink_container">
         <div className="container">
-          <div className="row d-flex justify-content-center align-items-center">
-            <div className="col-lg-6 col-md-12 ">
+        {/* row */}
+          <div className=" d-flex justify-content-center align-items-center">
+          {/* col-md-12 */}
+            <div className="col-lg-6  ">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h1>Manage your team</h1>
                 <p className="desktop_para">
@@ -185,7 +193,8 @@ const Home = () => {
                 </Link>
               </div>
             </div>
-            <div className="col-lg-6 col-md-12  onelink_img">
+            {/* col-md-12 */}
+            <div className="col-lg-6   onelink_img">
               <img className="manage_team_img" src={ManageTeamIcon} alt="img" />
             </div>
           </div>
@@ -194,11 +203,14 @@ const Home = () => {
 
       <div className="container-fluid onelink_container">
         <div className="container">
-          <div className="row d-flex justify-content-center align-items-center angel_investment">
-            <div className="col-lg-6 col-md-12 client_img">
+          {/* row */}
+          <div className=" d-flex justify-content-center align-items-center angel_investment">
+          {/* col-md-12 */}
+            <div className="col-lg-6  client_img">
               <img src={ManageClientIcon} alt="img" />
             </div>
-            <div className="col-lg-6 col-md-12 angel_investment_text">
+            {/* col-md-12 */}
+            <div className="col-lg-6  angel_investment_text">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h1>Client Management</h1>
                 <p className="desktop_para">
@@ -227,8 +239,10 @@ const Home = () => {
 
       <div className="container-fluid onelink_container">
         <div className="container">
-          <div className="row d-flex justify-content-center align-items-center">
-            <div className="col-lg-6 col-md-12 ">
+        {/* row */}
+          <div className=" d-flex justify-content-center align-items-center">
+          {/* col-md-12 */}
+            <div className="col-lg-6  ">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h1>Investor management</h1>
                 <p className="desktop_para">
@@ -251,7 +265,8 @@ const Home = () => {
                 </Link>
               </div>
             </div>
-            <div className="col-lg-6 col-md-12  onelink_img">
+            {/* col-md-12 */}
+            <div className="col-lg-6   onelink_img">
               <img
                 className="manage_team_img"
                 src={ManageInvestortIcon}
@@ -264,15 +279,18 @@ const Home = () => {
 
       <div className="container-fluid onelink_container">
         <div className="container margin_bottom">
-          <div className="row d-flex justify-content-center align-items-center angel_investment">
-            <div className="col-lg-6 col-md-12  mentor_img ">
+        {/* row */}
+          <div className=" d-flex justify-content-center align-items-center angel_investment">
+          {/* col-md-12 */}
+            <div className="col-lg-6   mentor_img ">
               <img
                 className="angel_investment_image"
                 src={MentorIcon}
                 alt="img"
               />
             </div>
-            <div className="col-lg-6 col-md-12 angel_investment_text">
+            {/* col-md-12 */}
+            <div className="col-lg-6  angel_investment_text">
               <div className="row d-flex justify-content-left align-items-center title_text">
                 <h1>Growthive for Mentors</h1>
                 <p className="desktop_para">
