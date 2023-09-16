@@ -58,7 +58,7 @@ function OtherUserProfile() {
                 </div>
               </div>
               <div className="buttons d-flex gap-2 flex-row align-items-md-center">
-              <Link to={`/chats?userId=${userData?._id}`}>
+              <Link to={`/chats?userId=${userData?._id}`} className="text-decoration-none">
                 <button className="message btn rounded-pill px-3 py-2">
                   <img src={messageIcon} width={20} alt="message user" />
                   <span>Message</span>
