@@ -41,6 +41,7 @@ const API = Object.freeze({
   createChat: `${baseUrl}/chat/createChat`,
   getMessageByChatId: `${baseUrl}/message/getMessages`,
   addMessage: `${baseUrl}/message/addMessage`,
+  getSinglePost: `${baseUrl}/api/posts/getSinglePost`,
 });
 
 export default API;

@@ -7,6 +7,9 @@ import shareIcon from "../../../../Images/post/share.png";
 import fireIcon from "../../../../Images/post/like-fire.png";
 import bwFireIcon from "../../../../Images/post/unlike-fire.png";
 import commentIcon from "../../../../Images/post/comment.svg";
+import repostIcon from "../../../../Images/post/repost.svg";
+import repostWithThoughtsIcon from "../../../../Images/post/repost-with-thoughts.svg";
+import repostInstantlyIcon from "../../../../Images/post/repost-grey.svg";
 import saveIcon from "../../../../Images/post/save.svg";
 import savedIcon from "../../../../Images/post/saved.png";
 import TimeAgo from "timeago-react";
@@ -21,12 +24,10 @@ import {
 import SmileeIcon from "../../../../Images/Group 15141(1).svg";
 import ImageIcon from "../../../../Images/Group 15141.svg";
 import RoundLogo from "../../../../Images/RoundLogo.png";
-import commentIconOne from "../../../../Images/image 40(1).png";
 import { Link } from "react-router-dom";
 import SavePostPopUP from "../../../../components/PopUp/SavePostPopUP/SavePostPopUP";
 import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import { useRef } from "react";
-import ModalBsLauncher from "../../../PopUp/ModalBS/ModalBsLauncher/ModalBsLauncher";
 import ModalBSContainer from "../../../PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
 import ModalBSHeader from "../../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
 import ModalBSFooter from "../../../PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
@@ -45,7 +46,12 @@ const FeedPostCard = ({
   likes,
   userId,
   fetchAllPosts,
-  response
+  response,
+  repostWithToughts,
+  repostInstantly,
+  repostLoading,
+  repostPreview,
+  resharedPostId,
 }) => {
   const [showComment, setShowComment] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -61,19 +67,12 @@ const FeedPostCard = ({
   const handleSavePopUp = () => {
     setshowSavePopUp(true);
   };
- 
+
   const receiveSavedPostStatus = () => {
-    setShowSuccess(true); 
+    setShowSuccess(true);
     setTimeout(() => {
       setShowSuccess(false); // Reset the state after a delay
-    }, 2500)
-  };
-
-  const handleEnterPress = async (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault(); // Prevent the default behavior of Enter key (e.g., newline)
-      await sendComment(); // Send the comment when Enter is pressed
-    }
+    }, 2500);
   };
 
   const sendComment = async () => {
@@ -102,55 +101,55 @@ const FeedPostCard = ({
     }
   };
 
-  const savePostHandler = async (postId) => {
-    try {
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const [liked, setLiked] = useState(false);
 
-
-
- 
   useEffect(() => {
-    getPostComment({ postId }).then((res) => {
-      setComments(res.data.data);
-    });
-  
-    const fetchSavedPostData = async () => {
-      try {
-        
-        if (response.data && response.data.length > 0) {
-          const allSavedPostDataIds = response.data.reduce((acc, collection) => {
-            if (collection.posts && Array.isArray(collection.posts)) {
-              acc = acc.concat(collection.posts);
-            }
-            return acc;
-          }, []);
-          // console.log(allSavedPostDataIds);
-          setSavedPostId(allSavedPostDataIds);
+    if (!repostPreview) {
+      getPostComment({ postId }).then((res) => {
+        setComments(res.data.data);
+      });
+
+      const fetchSavedPostData = async () => {
+        try {
+          if (response.data && response.data.length > 0) {
+            const allSavedPostDataIds = response.data.reduce(
+              (acc, collection) => {
+                if (collection.posts && Array.isArray(collection.posts)) {
+                  acc = acc.concat(collection.posts);
+                }
+                return acc;
+              },
+              []
+            );
+            // console.log(allSavedPostDataIds);
+            setSavedPostId(allSavedPostDataIds);
+          }
+        } catch (error) {
+          console.error("Error fetching saved post collections:", error);
         }
-      } catch (error) {
-        console.error("Error fetching saved post collections:", error);
-      }
-    };
-  
-    fetchSavedPostData();
-  // useEffect(() => {
-    setLiked(likes.includes(loggedInUser._id));
+      };
 
-    getPostComment({ postId }).then((res) => {
-      setComments(res.data.data);
-    });
+      fetchSavedPostData();
+      // useEffect(() => {
+      setLiked(likes?.includes(loggedInUser._id) || null);
 
+      getPostComment({ postId }).then((res) => {
+        setComments(res.data.data);
+      });
+    }
     const outsideClickHandler = (event) => {
       if (
         kebabMenuContainerRef.current &&
         !kebabMenuContainerRef.current.contains(event.target)
       ) {
         setKebabMenuVisible(false);
+      }
+
+      if (
+        repostContainerRef.current &&
+        !repostContainerRef.current.contains(event.target)
+      ) {
+        setShowRepostOptions(false);
       }
     };
 
@@ -160,8 +159,6 @@ const FeedPostCard = ({
       document.removeEventListener("click", outsideClickHandler);
     };
   }, []);
-  
-  
 
   const likeUnlikeHandler = async () => {
     try {
@@ -193,6 +190,9 @@ const FeedPostCard = ({
   const [reportReason, setReportReason] = useState("");
   const [showReportModal, setShowReportModal] = useState(false);
   const [filingReport, setFilingReport] = useState(false);
+  const [showRepostOptions, setShowRepostOptions] = useState(false);
+
+  const repostContainerRef = useRef(null);
 
   const reportSubmitHandler = () => {
     // take reason from state = reportReason
@@ -207,7 +207,11 @@ const FeedPostCard = ({
     <>
       <div className="row feedpostcard_main_container mb-2">
         <div className="col-12">
-          <div className="box feedpostcard_container mt-2">
+          <div
+            className={`box feedpostcard_container mt-2 ${
+              repostPreview && "rounded shadow-sm border"
+            }`}
+          >
             <div className="  feed_header_container border-2 border-bottom mb-3 pb-2">
               <div className="feedpostcard_content">
                 <Link to={`/user/${userId}`} className="rounded-circle">
@@ -258,44 +262,48 @@ const FeedPostCard = ({
                   </span>
                 </div>
               </div>
-              <div className="three_dot px-2 px-md-4">
-                <div
-                  className="kebab_menu_container"
-                  ref={kebabMenuContainerRef}
-                >
-                  <img
-                    src={ThreeODotIcon}
-                    alt="dot"
-                    className="me-3 p-2"
-                    onClick={() => {
-                      setKebabMenuVisible(!kebabMenuVisible);
-                    }}
-                    onBlurCapture={() => {
-                      setTimeout(() => {
-                        setKebabMenuVisible(false);
-                      }, 100);
-                    }}
-                  />
-                  {kebabMenuVisible && (
-                    <ul className="kebab_menu border rounded shadow-sm p-3">
-                      {userId === loggedInUser?._id && (
-                        <li onClick={() => deletePost(postId)}>Delete</li>
-                      )}
-                      <li onClick={() => setShowReportModal(true)}>Report</li>
-                    </ul>
-                  )}
+              {!repostPreview && (
+                <div className="three_dot px-2 px-md-4">
+                  <div
+                    className="kebab_menu_container"
+                    ref={kebabMenuContainerRef}
+                  >
+                    <img
+                      src={ThreeODotIcon}
+                      alt="dot"
+                      className="me-3 p-2"
+                      onClick={() => {
+                        setKebabMenuVisible(!kebabMenuVisible);
+                      }}
+                      onBlurCapture={() => {
+                        setTimeout(() => {
+                          setKebabMenuVisible(false);
+                        }, 100);
+                      }}
+                    />
+                    {kebabMenuVisible && (
+                      <ul className="kebab_menu border rounded shadow-sm p-3">
+                        {userId === loggedInUser?._id && (
+                          <li onClick={() => deletePost(postId)}>Delete</li>
+                        )}
+                        <li onClick={() => setShowReportModal(true)}>Report</li>
+                      </ul>
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
             <div className="para_container w-100">
               <div className="para_container_text w-100">
-                <p style={{ fontSize: "15px" }}>{description}</p>
+                {description && (
+                  <p style={{ fontSize: "15px" }}>{description}</p>
+                )}
                 {image && (
                   <span className="d-flex">
                     <img
                       className="mx-auto"
                       style={{ maxHeight: "350px", objectFit: "contain" }}
-                      width={"100%"}
+                      width={!repostPreview ? "100%" : "50%"}
                       src={image}
                       alt="post-image"
                     />
@@ -305,7 +313,7 @@ const FeedPostCard = ({
                   <span className="d-flex">
                     <video
                       className="mx-auto"
-                      width={"100%"}
+                      width={!repostPreview ? "100%" : "50%"}
                       style={{ maxWidth: "500px" }}
                       controls
                     >
@@ -314,136 +322,228 @@ const FeedPostCard = ({
                     </video>
                   </span>
                 )}
-              </div>
-            </div>
-            <span className=" mx-3 text-secondary" style={{ fontSize: "14px" }}>
-              {likes.length} likes
-            </span>
-            <hr className="mt-1 mb-2" />
-            <div className="row feedpostcard_footer mb-2">
-              <div className="col-8">
-                <div className="feedpostcard_footer_like_comment d-flex gap-2">
-                  {liked ? (
-                    <img
-                      src={fireIcon}
-                      width={18}
-                      alt="like post"
-                      onClick={likeUnlikeHandler}
-                    />
-                  ) : (
-                    <img
-                      src={bwFireIcon}
-                      width={18}
-                      alt="like post"
-                      onClick={likeUnlikeHandler}
-                    />
-                  )}
-                  <img
-                    src={commentIcon}
-                    width={16}
-                    alt="comment post"
-                    onClick={() => setShowComment(!showComment)}
+                {resharedPostId && (
+                  <FeedPostCard
+                    repostPreview
+                    userId={resharedPostId?.user?._id}
+                    postId={resharedPostId?._id}
+                    designation={resharedPostId?.user?.designation}
+                    profilePicture={resharedPostId?.user?.profilePicture}
+                    description={resharedPostId?.description}
+                    firstName={resharedPostId?.user?.firstName}
+                    lastName={resharedPostId?.user?.lastName}
+                    video={resharedPostId?.video}
+                    image={resharedPostId?.image}
+                    createdAt={resharedPostId?.createdAt}
+                    likes={resharedPostId?.likes}
                   />
-                </div>
+                )}
               </div>
-              <div className="col-4 d-flex align-items-center gap-3 justify-content-end">
-                <img src={shareIcon} width={16} alt="share post" />
-                {savedPostId.includes(postId)?
-                 <img
-                 src={savedIcon}
-                 width={16}
-                 alt="save post"
-                
-               />
-               :
-                  <img
-                  src={saveIcon}
-                  width={16}
-                  alt="save post"
-                  onClick={handleSavePopUp}
-                />
-                }
-              </div>
-              {showComment && (
-                <div>
-                  <div class="comment_container">
-                    <div class="logo">
-                      <img src={RoundLogo} alt="Logo" />
-                    </div>
-                    <section class="input_and_logo_section">
-                      <div class="input_box">
-                        <input
-                          type="text"
-                          placeholder="Add Comment"
-                          value={commentText}
-                          onChange={(e) => setCommentText(e.target.value)}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter") {
-                              e.preventDefault(); // Prevent the default Enter behavior
-                              sendComment(); // Call sendComment when Enter is pressed
-                            }
-                          }}
-                        />
-                        <div class="icons">
-                          <span class="image_icon">
-                            <img src={ImageIcon} alt="image" />
-                          </span>
-                          <span class="smiley_icon">
-                            <img src={SmileeIcon} alt="photo" />
-                          </span>
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                  {comments
-                    .sort(
-                      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-                    )
-                    .map((val) => (
-                      <section className="comment_messages" key={val._id}>
-                        <div className="connection_item d-flex flex-column flex-md-row justify-content-between">
-                          <div className="connection_left">
-                            {val.user && (
-                              <>
-                                <img
-                                  src={val.user.profilePicture || ""}
-                                  alt="Connection"
-                                  className="comment_connection"
-                                />
-                                <div className="body_container">
-                                  <p className="connection_name">
-                                    {val.user.firstName +
-                                      " " +
-                                      val.user.lastName}
-                                  </p>
-                                  <p className="connection_designation">
-                                    {val.user.designation}
-                                  </p>
-                                </div>
-                              </>
-                            )}
-                          </div>
-                          <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-center">
-                            <span className="days_time">
-                              <TimeAgo datetime={val.createdAt} locale="" />
-                            </span>
-                          </div>
-                        </div>
-                        <p className="comment_text">{val.text}</p>
-                      </section>
-                    ))}
-                </div>
-              )}
             </div>
+            {likes && (
+              <span
+                className=" mx-3 text-secondary"
+                style={{ fontSize: "14px" }}
+              >
+                {likes?.length} likes
+              </span>
+            )}
+            {!repostPreview && (
+              <>
+                <hr className="mt-1 mb-2" />
+                <div className="row feedpostcard_footer mb-2">
+                  <div className="col-8">
+                    <div className="feedpostcard_footer_like_comment d-flex gap-2">
+                      {liked ? (
+                        <img
+                          src={fireIcon}
+                          width={18}
+                          alt="like post"
+                          onClick={likeUnlikeHandler}
+                        />
+                      ) : (
+                        <img
+                          src={bwFireIcon}
+                          width={18}
+                          alt="like post"
+                          onClick={likeUnlikeHandler}
+                        />
+                      )}
+                      <img
+                        src={commentIcon}
+                        width={16}
+                        alt="comment post"
+                        onClick={() => setShowComment(!showComment)}
+                      />
+                    </div>
+                  </div>
+                  <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
+                    <span
+                      className={`repost_container rounded ${
+                        showRepostOptions ? "bg-light" : ""
+                      }`}
+                      ref={repostContainerRef}
+                    >
+                      <img
+                        src={repostIcon}
+                        width={12}
+                        alt="reshare post"
+                        onClick={() => setShowRepostOptions(!showRepostOptions)}
+                      />
+                      {showRepostOptions && (
+                        <span className="repost_options rounded shadow-sm">
+                          <button
+                            className="single_option btn text-start py-1 px-1 rounded border-bottom"
+                            onClick={() => repostWithToughts(postId)}
+                          >
+                            {!repostLoading?.withThoughts ? (
+                              <img
+                                src={repostWithThoughtsIcon}
+                                alt="repost with thoughts"
+                              />
+                            ) : (
+                              <div
+                                class="spinner-border text-secondary"
+                                role="status"
+                              >
+                                <span class="visually-hidden">Loading...</span>
+                              </div>
+                            )}
+                            <div className="d-flex flex-column g-1 ">
+                              <span className="title">
+                                Repost with your thoughts
+                              </span>
+                              <span className="description">
+                                Create a new post
+                              </span>
+                            </div>
+                          </button>
+                          <button
+                            className="single_option btn text-start py-1 px-2 rounded border-bottom"
+                            onClick={() => repostInstantly(postId)}
+                          >
+                            {!repostLoading?.instant ? (
+                              <img
+                                src={repostInstantlyIcon}
+                                alt="repost instantly"
+                              />
+                            ) : (
+                              <div
+                                class="spinner-border text-secondary"
+                                role="status"
+                              >
+                                <span class="visually-hidden">Loading...</span>
+                              </div>
+                            )}
+                            <div className="d-flex flex-column g-1 ">
+                              <span className="title">Repost Instantly</span>
+                              <span className="description">
+                                Instantly bring to other's feed
+                              </span>
+                            </div>
+                          </button>
+                        </span>
+                      )}
+                    </span>
+                    <img src={shareIcon} width={16} alt="share post" />
+                    {savedPostId.includes(postId) ? (
+                      <img src={savedIcon} width={16} alt="save post" />
+                    ) : (
+                      <img
+                        src={saveIcon}
+                        width={16}
+                        alt="save post"
+                        onClick={handleSavePopUp}
+                      />
+                    )}
+                  </div>
+                  {showComment && (
+                    <div>
+                      <div class="comment_container">
+                        <div class="logo">
+                          <img src={RoundLogo} alt="Logo" />
+                        </div>
+                        <section class="input_and_logo_section">
+                          <div class="input_box">
+                            <input
+                              type="text"
+                              placeholder="Add Comment"
+                              value={commentText}
+                              onChange={(e) => setCommentText(e.target.value)}
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                  e.preventDefault(); // Prevent the default Enter behavior
+                                  sendComment(); // Call sendComment when Enter is pressed
+                                }
+                              }}
+                            />
+                            <div class="icons">
+                              <span class="image_icon">
+                                <img src={ImageIcon} alt="image" />
+                              </span>
+                              <span class="smiley_icon">
+                                <img src={SmileeIcon} alt="photo" />
+                              </span>
+                            </div>
+                          </div>
+                        </section>
+                      </div>
+                      {comments
+                        .sort(
+                          (a, b) =>
+                            new Date(b.createdAt) - new Date(a.createdAt)
+                        )
+                        .map((val) => (
+                          <section className="comment_messages" key={val._id}>
+                            <div className="connection_item d-flex flex-column flex-md-row justify-content-between">
+                              <div className="connection_left">
+                                {val.user && (
+                                  <>
+                                    <img
+                                      src={val.user.profilePicture || ""}
+                                      alt="Connection"
+                                      className="comment_connection"
+                                    />
+                                    <div className="body_container">
+                                      <p className="connection_name">
+                                        {val.user.firstName +
+                                          " " +
+                                          val.user.lastName}
+                                      </p>
+                                      <p className="connection_designation">
+                                        {val.user.designation}
+                                      </p>
+                                    </div>
+                                  </>
+                                )}
+                              </div>
+                              <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-center">
+                                <span className="days_time">
+                                  <TimeAgo datetime={val.createdAt} locale="" />
+                                </span>
+                              </div>
+                            </div>
+                            <p className="comment_text">{val.text}</p>
+                          </section>
+                        ))}
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
           </div>
         </div>
         {showSavePopUp && (
-          <SavePostPopUP postId={postId} savedPostStatus={receiveSavedPostStatus} onClose={handleCloseSavePopup} />
+          <SavePostPopUP
+            postId={postId}
+            savedPostStatus={receiveSavedPostStatus}
+            onClose={handleCloseSavePopup}
+          />
         )}
         {showSuccess && (
           <AfterSuccessPopUp
-          withoutOkButton
-          onClose={() => setShowSuccess(!showSuccess)}
+            withoutOkButton
+            onClose={() => setShowSuccess(!showSuccess)}
             successText="Post saved Successfully"
           />
         )}
