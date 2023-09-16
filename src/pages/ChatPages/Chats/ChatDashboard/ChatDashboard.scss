@@ -1,6 +1,6 @@
 .chat_dashboard_container {
   width: 95%;
-  height: 100vh;
+  height: 85vh;
   border-radius: 30px;
   border: 1px solid #cfcfcf;
   background: #fff;
@@ -59,6 +59,9 @@
   }
 
   .chat_messages {
+    height: 80%;
+    overflow-y: scroll;
+    overflow-x: hidden;
     .other_sender {
       align-self: flex-start;
       display: flex;
@@ -119,7 +122,7 @@
   .chat_input_section {
     padding-bottom: 20px;
     position: absolute;
-    bottom: 20px;
+    bottom: 0px;
     width: 100%;
 
     .chat_input_container {
