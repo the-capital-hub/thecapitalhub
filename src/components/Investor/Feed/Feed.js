@@ -5,7 +5,11 @@ import SmallProfileCard from "../Cards/TwoSmallMyProfile/SmallProfileCard";
 import RightProfileCard from "../InvestorGlobalCards/RightProfileCard/RightProfileCard";
 import FeedPostCard from "../Cards/FeedPost/FeedPostCard";
 import CreatePostPopUp from "../../PopUp/CreatePostPopUp/CreatePostPopUp";
-import { getAllPostsAPI,getSavedPostCollections } from "../../../Service/user";
+import {
+  getAllPostsAPI,
+  getSavedPostCollections,
+  postUserPost,
+} from "../../../Service/user";
 import { useSelector } from "react-redux";
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
@@ -15,7 +19,7 @@ const Feed = () => {
   const [allPosts, setAllPosts] = useState(null);
   const [newPost, setNewPost] = useState(false);
   const [loadingFeed, setLoadingFeed] = useState(false);
-  const [getSavedPostData, setgetSavedPostData] = useState('');
+  const [getSavedPostData, setgetSavedPostData] = useState("");
 
   const openPopup = () => {
     setPopupOpen(!popupOpen);
@@ -37,20 +41,29 @@ const Feed = () => {
   };
 
   useEffect(() => {
-     getSavedPostCollections(loggedInUser._id).then((data)=>{
-      setgetSavedPostData(data)
-     })
+    getSavedPostCollections(loggedInUser._id).then((data) => {
+      setgetSavedPostData(data);
+    });
     document.title = "Home | The Capital Hub";
     fetchAllPosts();
   }, [newPost]);
 
-  const savePostHandler = async (postId) => {
-    try {
-      // api call for savin a post
-    } catch (error) {}
-  };
+  console.log(allPosts?.[0]);
 
-  console.log(allPosts);
+  // Repost
+  const [repostLoading, setRepostLoading] = useState({
+    instant: false,
+    withThoughts: false,
+  });
+  const [respostingPostId, setRepostingPostId] = useState("");
+
+  const repostInstantly = (resharedPostId) => {
+    setRepostLoading({ ...repostLoading, instant: true });
+    postUserPost({ resharedPostId })
+      .then(() => fetchAllPosts())
+      .catch((err) => console.log(err))
+      .finally(() => setRepostLoading({ ...repostLoading, instant: false }));
+  };
 
   return (
     <>
@@ -94,6 +107,7 @@ const Feed = () => {
                     createdAt,
                     likes,
                     _id,
+                    resharedPostId,
                   }) => (
                     <FeedPostCard
                       key={Math.random()}
@@ -110,6 +124,13 @@ const Feed = () => {
                       likes={likes}
                       fetchAllPosts={fetchAllPosts}
                       response={getSavedPostData}
+                      repostWithToughts={(resharedPostId) => {
+                        setRepostingPostId(resharedPostId);
+                        openPopup();
+                      }}
+                      repostInstantly={repostInstantly}
+                      repostLoading={repostLoading}
+                      resharedPostId={resharedPostId}
                     />
                   )
                 )
@@ -128,6 +149,7 @@ const Feed = () => {
                 setPopupOpen={setPopupOpen}
                 popupOpen
                 setNewPost={setNewPost}
+                respostingPostId={respostingPostId}
               />
             )}
           </div>
