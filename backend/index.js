@@ -97,10 +97,10 @@ io.on("connection", (socket) => {
   socket.on("send-message", (data) => {
     const { recieverId } = data;
     const user = activeUsers.find((user) => user.userId === recieverId);
-    console.log("Active users: ", activeUsers);
+    // console.log("Active users: ", activeUsers);
     console.log("Users: ", user);
-    console.log("Sending from socket to: ", recieverId);
-    console.log("Data: ", data);
+    // console.log("Sending from socket to: ", recieverId);
+    console.log("Data: ", data.text);
     if (user) io.to(user.socketId).emit("recieve-message", data);
   });
 });

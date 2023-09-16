@@ -104,6 +104,18 @@ const userSchema = new Schema(
         ref: "Users",
       },
     ],
+    connectionsSent: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Users",
+      },
+    ],
+    connectionsReceived: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Users",
+      },
+    ],
     recentExperience: [
       {
         logo: String,

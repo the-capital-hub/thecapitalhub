@@ -2,11 +2,15 @@ import "./InvestorManageAccount.scss";
 import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import logoIcon from "../../../Images/manageAccount/Group 15186.svg";
 import profileIcon from "../../../Images/investorIcon/profilePic.webp";
-import profileIconRaghu from "../../../Images/aboutUs/Raghu.jpeg"
-import profileIconRaju from "../../../Images/Rectangle 1895.png"
+import profileIconRaghu from "../../../Images/aboutUs/Raghu.jpeg";
+import profileIconRaju from "../../../Images/Rectangle 1895.png";
 
 import { changePasswordAPI } from "../../../Service/user";
 import { useEffect, useState } from "react";
+import LogOutPopUp from "../../PopUp/LogOutPopUp/LogOutPopUp";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../../../Store/Action/userAction";
 
 const InvestorManageAccount = () => {
   const initialForm = {
@@ -49,6 +53,15 @@ const InvestorManageAccount = () => {
   useEffect(() => {
     document.title = "Manage Account | The Capital Hub";
   }, []);
+
+  const [showLogoutPopup, setShowLogoutPopup] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogoutLogic = () => {
+    dispatch(logout());
+    localStorage.removeItem("isLoggedIn");
+    navigate("/login");
+  };
 
   return (
     <div className="container-fluid manage_account_container">
@@ -142,8 +155,18 @@ const InvestorManageAccount = () => {
               </div>
             </section>
 
-            {/* <section className="col card empty_box">
-              <div className="d-flex align-items-center">
+            <section className="col card empty_box">
+              <button className="btn logout-btn" onClick={setShowLogoutPopup}>
+                Log out
+              </button>
+              {showLogoutPopup && (
+                <LogOutPopUp
+                  setShowLogoutPopup={setShowLogoutPopup} // Make sure this prop is passed correctly
+                  handleLogoutLogic={handleLogoutLogic}
+                  showLogoutPopup
+                />
+              )}
+              {/* <div className="d-flex align-items-center">
                 <div className="logo">
                   <img src={logoIcon} alt="img" />
                 </div>
@@ -210,8 +233,8 @@ const InvestorManageAccount = () => {
                     </label>
                   </div>
                 </div>
-              </section>
-            </section> */}
+              </section> */}
+            </section>
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ function Explore() {
   const [activeTab, setActiveTab] = useState("StartupBackground");
 
   return (
-    <div className="explore_container">
+    <div className="explore_container px-3 border-start">
       <SmallProfileCard text="Explore" />
       <section className="filter_container border">
         <h5 className="h5">Find StartUps by</h5>
@@ -53,7 +53,7 @@ function Explore() {
           )}
         </div>
       </section>
-      <section className="filtered_company_details rounded shadow-sm border-start">
+      <section className="filtered_company_details">
         {/* <Company /> */}
         {/* <Company /> */}
         <CompanyProfile />

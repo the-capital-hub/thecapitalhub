@@ -16,13 +16,20 @@ export const sendConnectionRequest = async (senderId, receiverId) => {
         data: [],
       };
     }
-
     const connection = new ConnectionModel({
       sender: senderId,
       receiver: receiverId,
       status: "pending",
     });
     await connection.save();
+    await UserModel.findOneAndUpdate(
+      { _id: connection.sender },
+      { $push: { connectionsSent: connection.receiver } }
+    );
+    await UserModel.findOneAndUpdate(
+      { _id: connection.receiver },
+      { $push: { connectionsReceived: connection.sender } }
+    );
     return {
       status: 200,
       message: "Connection Request Sent",
@@ -77,6 +84,14 @@ export const cancelConnectionRequest = async (connectionId) => {
       };
     }
     await ConnectionModel.findByIdAndRemove(connectionId);
+    await UserModel.findOneAndUpdate(
+      { _id: connection.sender },
+      { $pull: { connectionsSent: connection.receiver } }
+    );
+    await UserModel.findOneAndUpdate(
+      { _id: connection.receiver },
+      { $pull: { connectionsReceived: connection.sender } }
+    );
     return {
       status: 200,
       message: "Connection Request Canceled",
@@ -125,7 +140,15 @@ export const acceptConnectionRequest = async (connectionId) => {
     );
     await UserModel.findOneAndUpdate(
       { _id: connection.sender },
+      { $pull: { connectionsSent: connection.receiver } }
+    );
+    await UserModel.findOneAndUpdate(
+      { _id: connection.sender },
       { $push: { connections: connection.receiver } }
+    );
+    await UserModel.findOneAndUpdate(
+      { _id: connection.receiver },
+      { $pull: { connectionsReceived: connection.sender } }
     );
     await UserModel.findOneAndUpdate(
       { _id: connection.receiver },
@@ -152,6 +175,14 @@ export const rejectConnectionRequest = async (connectionId) => {
       connectionId,
       { status: "rejected" },
       { new: true }
+    );
+    await UserModel.findOneAndUpdate(
+      { _id: connection.sender },
+      { $pull: { connectionsSent: connection.receiver } }
+    );
+    await UserModel.findOneAndUpdate(
+      { _id: connection.receiver },
+      { $pull: { connectionsReceived: connection.sender } }
     );
     return {
       status: 200,
@@ -238,6 +269,8 @@ export const getRecommendations = async (userId) => {
     }
     const recommendations = [];
     const userConnections = user.connections;
+    const userSentConnections = user.connectionsSent || " ";
+    const userReceivedConnections = user.connectionsReceived || " ";
     for (const connectedUserId of userConnections) {
       const connectedUser = await UserModel.findById(connectedUserId);
       const mutualConnections = connectedUser.connections;
@@ -259,24 +292,18 @@ export const getRecommendations = async (userId) => {
     }
     if (recommendations.length === 0) {
       const users = await UserModel.find({
-        _id: { $nin: [...userConnections] },
+        _id: { $nin: [
+          ...userConnections,
+          userId,
+          ...userSentConnections,
+          ...userReceivedConnections
+        ] },
         userStatus: "active",
       });
-      const usersWithPendingConnections = await ConnectionModel.find({
-        $or: [
-          { sender: userId, receiver: { $in: users.map(user => user._id) }, status: "pending" },
-          { sender: { $in: users.map(user => user._id) }, receiver: userId, status: "pending" },
-        ],
-      });
-      const usersWithoutPendingConnections = users.filter(user =>
-        !usersWithPendingConnections.some(connection =>
-          connection.sender.equals(user._id) || connection.receiver.equals(user._id)
-        )
-      );
       return {
         status: 200,
         message: "Recommended User data retrived successfully",
-        data: usersWithoutPendingConnections,
+        data: users,
       };
     }
     const users = await UserModel.find({ _id: { $in: recommendations } });

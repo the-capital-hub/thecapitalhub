@@ -149,7 +149,7 @@ export const updateUserById = async (userId, newData) => {
 export const changePassword = async (userId, { newPassword, oldPassword }) => {
   try {
     const user = await UserModel.findById(userId);
-    const checkPassword = await bcrypt.compare(oldPassword, user.password);
+    const checkPassword = bcrypt.compare(oldPassword, user.password);
     if (!checkPassword) {
       return {
         status: 401,
@@ -263,7 +263,6 @@ export const resetPassword = async (token, newPassword) => {
   }
 };
 
-
 //search user/ company
 export const searchUsers = async (searchQuery) => {
   try {
@@ -275,7 +274,7 @@ export const searchUsers = async (searchQuery) => {
     });
     const company = await StartUpModel.find({
       $or: [
-        { company: {$regex: searchQuery, $options: "i"} },
+        { company: { $regex: searchQuery, $options: "i" } },
         { oneLink: { $regex: searchQuery, $options: "i" } },
       ],
     });
@@ -286,9 +285,6 @@ export const searchUsers = async (searchQuery) => {
         users: users,
         company: company,
       },
-
-
-
     };
   } catch (error) {
     console.error("Error searching for users:", error);

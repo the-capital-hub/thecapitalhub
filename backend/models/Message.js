@@ -7,7 +7,8 @@ const messageSchema = new Schema(
       ref: "Chats",
     },
     senderId: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "Users",
     },
     text: {
       type: String,
