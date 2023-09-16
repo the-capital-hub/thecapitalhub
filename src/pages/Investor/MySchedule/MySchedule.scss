@@ -1,0 +1,11 @@
+.view__btn {
+  outline: none;
+  background-color: transparent;
+  color: rgba(128, 128, 128, 0.75);
+}
+
+.active__view {
+  background-color: white;
+  color: black;
+  box-shadow: 0 0 10px rgba(188, 188, 188, 0.75);
+}
