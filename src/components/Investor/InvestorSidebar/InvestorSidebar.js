@@ -46,7 +46,6 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const handleLogoutLogic = () => {
     dispatch(logout());
     localStorage.removeItem("isLoggedIn");
-
     navigate("/login");
   };
   return (
@@ -106,7 +105,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
               >
                 <Link
                   onClick={() => setSidebarCollapsed(true)}
-                  to="/createpost"
+                  to="/write-blog"
                 >
                   {sidebarCollapsed ? (
                     <>
@@ -116,8 +115,8 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     </>
                   ) : (
                     <>
-                      <button className="create_post">
-                        <span>Create Post</span>
+                      <button className="create_post px-3">
+                        <span className="ms-0">Write a blog </span>
                         <img src={PlusIcon} alt="image" />
                       </button>
                     </>

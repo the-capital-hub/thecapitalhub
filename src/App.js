@@ -64,6 +64,7 @@ import LiveDeals from "./pages/Investor/LiveDeals/LiveDeals";
 import SearchResults from "./pages/Investor/SearchResults/SearchResults";
 import Chats from "./pages/ChatPages/Chats/Chats";
 import MySchedule from "./pages/Investor/MySchedule/MySchedule";
+import WriteBlog from "./pages/StartUp/WriteBlog/WriteBlog";
 
 function App() {
   return (
@@ -297,6 +298,7 @@ function App() {
             <Route path="/user/:userId" element={<OtherUserProfile />} />
             <Route path="/home" element={<Feed />} />
             <Route path="/createpost" element={<CreatePost />} />
+            <Route path="/write-blog" element={<WriteBlog />} />
             <Route path="/documentation" element={<Documentation />} />
             <Route path="/savePost" element={<SavePost />} />
             <Route path="/onelink" element={<OneLink />} />
