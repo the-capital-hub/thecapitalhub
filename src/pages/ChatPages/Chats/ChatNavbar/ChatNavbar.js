@@ -31,8 +31,8 @@ const ChatNavbar = ({chatId, userId}) => {
             </div>
           </div>
           <div className="right">
-            <img src={CallIcon} className="call"/>
-            <img src={videoIcon} className="video"/>
+            {/* <img src={CallIcon} className="call"/>
+            <img src={videoIcon} className="video"/> */}
             <img src={threeDotIcon} className="threedot"/>
 
           </div>
