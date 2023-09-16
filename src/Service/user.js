@@ -498,3 +498,29 @@ export const getSinglePostAPI = async (postId) => {
     throw error;
   }
 };
+
+export const findChat = async (firstId, secondId) => {
+  try {
+    const { data } = await axiosInstance.get(
+      `${API.findChat}/${firstId}/${secondId}`
+    );
+    return data;
+  } catch (error) {
+    console.error("Error getting user message:", error);
+    throw error;
+  }
+};
+
+export const createChat = async (senderId, recieverId) => {
+  try {
+    const requestData = {
+      senderId,
+      recieverId,
+    };
+    const { data } = await axiosInstance.post(`${API.createChat}`, requestData);
+    return data;
+  } catch (error) {
+    console.error("Error getting user message:", error);
+    throw error;
+  }
+};
