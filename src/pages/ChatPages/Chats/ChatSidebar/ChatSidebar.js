@@ -6,11 +6,15 @@ import messageIcon from "../../../../Images/Chat/Chat.svg"
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getUserChats } from "../../../../Service/user";
+import { useLocation } from 'react-router-dom';
+
 
 const ChatSidebar = ({ selectedChat, setSelectedUser }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [chats, setChats] = useState([]);
-
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const chatUserId = queryParams.get('userId');
   useEffect(() => {
     getUserChats(loggedInUser._id)
       .then((res) => {

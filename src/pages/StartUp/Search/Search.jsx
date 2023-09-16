@@ -24,6 +24,16 @@ function Search() {
   const searchBy = queryParams.get("query");
   const userIdToRemove = loggedInUser._id;
 
+  const handleConnect = (userId) => {
+    sentConnectionRequest(loggedInUser._id, userId)
+      .then(({ data }) => {
+        setConnectionSent(true); // Set the state to true once
+        setTimeout(() => {
+          setConnectionSent(false); // Reset the state after a delay
+        }, 2500);
+      })
+      .catch((error) => console.log(error));
+  };
   useEffect(() => {
     async function fetchData() {
       const data = await getSearchResultsAPI(searchBy);
@@ -34,24 +44,10 @@ function Search() {
       setCompanyData(data?.data?.company);
       setLoading(false);
     }
-
     if (queryParams.has("query")) {
       fetchData();
     }
-  }, [searchBy]);
-  console.log(userData)
-  const handleConnect = (userId) => {
-    sentConnectionRequest(loggedInUser._id, userId)
-      .then(({ data }) => {
-        setConnectionSent(true); // Set the state to true once
-        
-        setTimeout(() => {
-          setConnectionSent(false); // Reset the state after a delay
-        }, 2500);
-      })
-      .catch((error) => console.log(error));
-  };
-  
+  }, [searchBy,connectionSent]);
   return (
     <div className="container-fluid serach_main_container">
       <SmallProfileCard text={"Search"} />
@@ -90,13 +86,30 @@ function Search() {
                       <p>{`${users?.designation ? users?.designation : ""}`}</p>
                     </div>
                   </div>
-                  <button
-                    className="d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white"
-                    onClick={() => handleConnect(users?._id)}
-                  >
-                    <img src={connectIcon} alt="connect-user" />
-                    <span>Connect</span>
-                  </button>
+
+                  {users?.connectionsSent?.includes(loggedInUser._id) ? (
+                    <Link to="/chats" className="text-decoration-none">
+                    <button 
+                    className="  d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white">
+                      {/* <img src={connectIcon} alt="connect-user" /> */}
+                      <span >Message</span>
+                    </button>
+                    </Link>
+                  ) : users?.connectionsReceived?.includes(loggedInUser._id) ? (
+                    <button 
+                    className="  d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white">
+                      <img src={connectIcon} alt="connect-user" />
+                      <span>Pending</span>
+                    </button>
+                  ) : (
+                    <button
+                      className="d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white"
+                      onClick={() => handleConnect(users?._id)}
+                    >
+                      <img src={connectIcon} alt="connect-user" />
+                      <span>Connect</span>
+                    </button>
+                  )}
                 </div>
               ))
             )}
@@ -124,11 +137,7 @@ function Search() {
                 >
                   <div className="short_desc d-flex">
                     <img
-                      src={`${
-                        company?.logo
-                          ? company?.logo
-                          : companyIcon
-                      }`}
+                      src={`${company?.logo ? company?.logo : companyIcon}`}
                       className="people_img rounded-circle"
                       alt="company image"
                     />
