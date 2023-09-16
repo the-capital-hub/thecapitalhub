@@ -2,9 +2,10 @@
   border-radius: 20px;
   background: #eaeef2;
   display: flex;
+  overflow: hidden;
   .left_section {
     display: flex;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
     width: 25%;
     flex-direction: column;
