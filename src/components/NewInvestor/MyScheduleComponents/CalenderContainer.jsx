@@ -3,14 +3,15 @@ import BigCalendar from "./BigCalendar";
 import { momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./CalendarContainer.scss";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 
 const calendarData = {
   defaultDate: new Date(),
   scrollToTime: new Date(new Date().setHours(new Date().getHours() - 0.5)),
   views: ["day", "week", "month"],
   messages: {
-    previous: "<--",
-    next: "-->",
+    previous: <FaArrowLeft />,
+    next: <FaArrowRight />,
   },
   max: new Date(new Date().setHours(21, 0, 0)),
   min: new Date(new Date().setHours(9, 0, 0)),
