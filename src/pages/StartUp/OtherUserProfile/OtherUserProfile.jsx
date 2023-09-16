@@ -12,7 +12,7 @@ import noOfInvIcon from "../../../Images/StartUp/icons/ColoredCards/Investors.sv
 import fundAskIcon from "../../../Images/StartUp/icons/ColoredCards/fundAsk.svg";
 import valuationIcon from "../../../Images/StartUp/icons/ColoredCards/3Coins.svg";
 import raisedFundsIcon from "../../../Images/StartUp/icons/ColoredCards/3CoinStack.svg";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getUserAndStartUpByUserIdAPI } from "../../../Service/user";
 
@@ -58,10 +58,12 @@ function OtherUserProfile() {
                 </div>
               </div>
               <div className="buttons d-flex gap-2 flex-row align-items-md-center">
+              <Link to={`/chats?userId=${userData?._id}`} className="text-decoration-none">
                 <button className="message btn rounded-pill px-3 py-2">
                   <img src={messageIcon} width={20} alt="message user" />
                   <span>Message</span>
                 </button>
+                </Link>
                 <button className="more btn rounded-pill px-3 py-2">
                   <span>More</span>
                 </button>
