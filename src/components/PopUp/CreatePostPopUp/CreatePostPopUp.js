@@ -1,15 +1,21 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./createpostpopup.scss";
 import SmileeIcon from "../../../Images/Smilee.svg";
 import GallaryIcon from "../../../Images/Gallary.svg";
 import ThreeDotsIcon from "../../../Images/ThreeDots.svg";
 import CameraIcon from "../../../Images/Camera.svg";
 import { useSelector } from "react-redux";
-import { postUserPost } from "../../../Service/user";
+import { getSinglePostAPI, postUserPost } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
 import profilePic from "../../../Images/investorIcon/profilePic.webp";
+import FeedPostCard from "../../Investor/Cards/FeedPost/FeedPostCard";
 
-const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
+const CreatePostPopUp = ({
+  setPopupOpen,
+  popupOpen,
+  setNewPost,
+  respostingPostId,
+}) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const [postText, setPostText] = useState(""); // Store the textarea data
@@ -63,11 +69,16 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setPosting(true);
-    // if ((!postText && !selectedImage && !selectedVideo) || !category) {
-    if (!postText && !selectedImage && !selectedVideo) {
-      return setPosting(false);
+
+    if (!selectedImage && !selectedVideo) {
+      if (!respostingPostId && !postText) {
+        return setPosting(false);
+      }
     }
     const postData = new FormData();
+    if (respostingPostId) {
+      postData.append("resharedPostId", respostingPostId);
+    }
     postData.append("description", postText);
     postData.append("category", category);
 
@@ -105,6 +116,21 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
       })
       .finally(() => setPosting(false));
   };
+
+  const [repostingPostData, setRepostingPostData] = useState(null);
+  const [loadingRepostData, setLoadingRepostData] = useState(false);
+
+  useEffect(() => {
+    if (respostingPostId) {
+      setLoadingRepostData(true);
+      getSinglePostAPI(respostingPostId)
+        .then(({ data }) => {
+          setRepostingPostData(data);
+          setLoadingRepostData(false);
+        })
+        .catch(() => handleClose());
+    }
+  }, []);
 
   return (
     <>
@@ -150,6 +176,7 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
               <div className="createpost_text_area">
                 <textarea
                   className="p-3"
+                  style={{ height: respostingPostId ? "80px" : "200px" }}
                   value={postText}
                   onChange={handleTextareaChange}
                   placeholder="Write a post..."
@@ -167,7 +194,38 @@ const CreatePostPopUp = ({ setPopupOpen, popupOpen, setNewPost }) => {
                   <option value="other">Others</option>
                 </select> */}
 
-                {previewImage && <img src={previewImage} width={"50%"} alt="preview of image"/>}
+                {respostingPostId &&
+                  (loadingRepostData ? (
+                    <div class="d-flex justify-content-center my-4">
+                      <h6 className="h6 me-4">Loading post...</h6>
+                      <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <FeedPostCard
+                      repostPreview
+                      userId={repostingPostData?.user?._id}
+                      postId={repostingPostData?._id}
+                      designation={repostingPostData?.user?.designation}
+                      profilePicture={repostingPostData?.user?.profilePicture}
+                      description={repostingPostData?.description}
+                      firstName={repostingPostData?.user?.firstName}
+                      lastName={repostingPostData?.user?.lastName}
+                      video={repostingPostData?.video}
+                      image={repostingPostData?.image}
+                      createdAt={repostingPostData?.createdAt}
+                      likes={repostingPostData?.likes}
+                    />
+                  ))}
+
+                {previewImage && (
+                  <img
+                    src={previewImage}
+                    width={"50%"}
+                    alt="preview of image"
+                  />
+                )}
 
                 {previewVideo && (
                   <video controls width={"100%"}>

@@ -435,8 +435,6 @@ export const savePostByUserIdAPI = async (userId, collectionName, postId) => {
   }
 };
 
-
-
 export {
   getUser,
   postUser,
@@ -448,7 +446,7 @@ export {
   getAllPostsAPI,
   getOnePager,
   getUserById,
-}
+};
 export const deletePostAPI = async (postId) => {
   try {
     const { data } = await axiosInstance.delete(`${API.deletePost}/${postId}`);
@@ -471,7 +469,9 @@ export const getUserChats = async (userId) => {
 
 export const getMessageByChatId = async (chatId) => {
   try {
-    const { data } = await axiosInstance.get(`${API.getMessageByChatId}/${chatId}`);
+    const { data } = await axiosInstance.get(
+      `${API.getMessageByChatId}/${chatId}`
+    );
     return data;
   } catch (error) {
     console.error("Error getting user message:", error);
@@ -482,6 +482,42 @@ export const getMessageByChatId = async (chatId) => {
 export const addMessage = async (messageData) => {
   try {
     const { data } = await axiosInstance.post(`${API.addMessage}`, messageData);
+    return data;
+  } catch (error) {
+    console.error("Error getting user message:", error);
+    throw error;
+  }
+};
+
+export const getSinglePostAPI = async (postId) => {
+  try {
+    const { data } = await axiosInstance.get(`${API.getSinglePost}/${postId}`);
+    return data;
+  } catch (error) {
+    console.error("Error getting user message:", error);
+    throw error;
+  }
+};
+
+export const findChat = async (firstId, secondId) => {
+  try {
+    const { data } = await axiosInstance.get(
+      `${API.findChat}/${firstId}/${secondId}`
+    );
+    return data;
+  } catch (error) {
+    console.error("Error getting user message:", error);
+    throw error;
+  }
+};
+
+export const createChat = async (senderId, recieverId) => {
+  try {
+    const requestData = {
+      senderId,
+      recieverId,
+    };
+    const { data } = await axiosInstance.post(`${API.createChat}`, requestData);
     return data;
   } catch (error) {
     console.error("Error getting user message:", error);

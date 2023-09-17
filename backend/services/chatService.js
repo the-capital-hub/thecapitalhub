@@ -65,8 +65,9 @@ export const findChat = async (firstId, secondId) => {
     });
     if (!chat) {
       return {
-        status: 404,
+        status: 200,
         message: "Chat not found",
+        data: [],
       };
     }
     return {
