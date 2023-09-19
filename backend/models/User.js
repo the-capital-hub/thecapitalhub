@@ -139,6 +139,12 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Investors",
     },
+    pinnedChat: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Chats",
+    },
+  ],
     userStatus: {
       type: String,
       default: "inactive"
