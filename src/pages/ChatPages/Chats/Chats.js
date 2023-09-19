@@ -111,12 +111,12 @@ const Chats = () => {
                 chatId={selectedChat}
                 userId={selectedUser}
               />
-              <ChatDashboard
+              {/* <ChatDashboard
                 chatId={selectedChat}
                 userId={selectedUser}
                 setSendMessage={setSendMessage}
                 recieveMessage={recieveMessage}
-              />
+              /> */}
             </>
           )}
         </section>
