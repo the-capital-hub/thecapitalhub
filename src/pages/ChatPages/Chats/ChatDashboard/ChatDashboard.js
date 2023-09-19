@@ -208,8 +208,24 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
                           alt=""
                         />
                       </div>
-
                       <div className="mymessage_container">{message?.text}</div>
+                      {message?.image && (
+                        <div className="message_container">
+                          <img
+                            src={message.image}
+                            width={50}
+                            alt="message image"
+                          />
+                        </div>
+                      )}
+                      {message?.video && (
+                        <div className="message_container">
+                          <video controls width={"100%"}>
+                            <source src={message?.video} type={"video/mp4"} />
+                            Your browser does not support the video tag.
+                          </video>
+                        </div>
+                      )}
                     </div>
                   </section>
                 ) : (
@@ -308,6 +324,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
                       id="image"
                       name="image"
                       hidden
+                      onChange={handleFileChange}
                     />
                   </div>
                   <div className="attachment-option">
@@ -325,6 +342,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
                       id="video"
                       name="video"
                       hidden
+                      onChange={handleFileChange}
                     />
                   </div>
                 </div>
