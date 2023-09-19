@@ -14,8 +14,8 @@ export default function ViewSelect({ handleViewSelect }) {
     return (
       <button
         id={view}
-        className={`"view__btn border-0 px-3 py-1 rounded-3 text-capitalize bg-transparent " ${
-          view === activeView ? "active__view" : ""
+        className={`view__btn border-0 px-3 py-1 rounded-3 text-capitalize bg-transparent ${
+          view === activeView ? " active__view" : ""
         } `}
         onClick={(e) => handleViewClick(e.target.id)}
       >
