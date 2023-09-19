@@ -13,6 +13,15 @@ const messageSchema = new Schema(
     text: {
       type: String,
     },
+    documents: {
+      type: String,
+    },
+    image: {
+      type: String,
+    },
+    video: {
+      type: String,
+    },
     read: {
       type: Boolean,
       default: false,

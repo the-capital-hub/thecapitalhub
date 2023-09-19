@@ -1,11 +1,31 @@
 import { MessageModel } from "../models/Message.js";
+import { cloudinary } from "../utils/uploadImage";
 
-export const addMessage = async (chatId, senderId, text) => {
+export const addMessage = async (chatId, senderId, text, documents, image, video) => {
   try {
+    if(image) {
+      const { url } = await cloudinary.uploader.upload(image, {
+        folder: `${process.env.CLOUDIANRY_FOLDER}/posts/images`,
+        format: "webp",
+        unique_filename: true,
+      });
+      image = url;
+    } 
+    if (video) {
+      const { url } = await cloudinary.uploader.upload(video, {
+        folder: `${process.env.CLOUDIANRY_FOLDER}/posts/videos`,
+        resource_type: "video",
+        unique_filename: true,
+      });
+      video = url;
+    }
     const message = new MessageModel({
       chatId,
       senderId,
       text,
+      documents,
+      image,
+      video
     });
     await message.save();
     return {

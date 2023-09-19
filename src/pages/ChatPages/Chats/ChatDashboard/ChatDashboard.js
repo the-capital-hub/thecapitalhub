@@ -101,6 +101,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
   const groupedMessages = groupMessagesByDate(messages);
 
   const handleSend = () => {
+    if (!sendText) return;
     const message = {
       senderId: loggedInUser._id,
       text: sendText,
