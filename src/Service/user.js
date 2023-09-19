@@ -435,8 +435,6 @@ export const savePostByUserIdAPI = async (userId, collectionName, postId) => {
   }
 };
 
-
-
 export {
   getUser,
   postUser,
@@ -448,7 +446,7 @@ export {
   getAllPostsAPI,
   getOnePager,
   getUserById,
-}
+};
 export const deletePostAPI = async (postId) => {
   try {
     const { data } = await axiosInstance.delete(`${API.deletePost}/${postId}`);
@@ -471,7 +469,9 @@ export const getUserChats = async (userId) => {
 
 export const getMessageByChatId = async (chatId) => {
   try {
-    const { data } = await axiosInstance.get(`${API.getMessageByChatId}/${chatId}`);
+    const { data } = await axiosInstance.get(
+      `${API.getMessageByChatId}/${chatId}`
+    );
     return data;
   } catch (error) {
     console.error("Error getting user message:", error);
@@ -489,9 +489,21 @@ export const addMessage = async (messageData) => {
   }
 };
 
+export const getSinglePostAPI = async (postId) => {
+  try {
+    const { data } = await axiosInstance.get(`${API.getSinglePost}/${postId}`);
+    return data;
+  } catch (error) {
+    console.error("Error getting user message:", error);
+    throw error;
+  }
+};
+
 export const findChat = async (firstId, secondId) => {
   try {
-    const { data } = await axiosInstance.get(`${API.findChat}/${firstId}/${secondId}`);
+    const { data } = await axiosInstance.get(
+      `${API.findChat}/${firstId}/${secondId}`
+    );
     return data;
   } catch (error) {
     console.error("Error getting user message:", error);
@@ -509,6 +521,26 @@ export const createChat = async (senderId, recieverId) => {
     return data;
   } catch (error) {
     console.error("Error getting user message:", error);
+    throw error;
+  }
+};
+
+export const markMessagesAsRead = async (chatId, userId) => {
+  try {
+    const response = await axiosInstance.patch(`${API.markMessagesAsRead}/${chatId}/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error marking message as read:", error);
+    throw error;
+  }
+};
+
+export const getUnreadMessageCount = async (chatId, userId) => {
+  try {
+    const response = await axiosInstance.get(`${API.getUnreadMessageCount}/${chatId}/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error getting user message count:", error);
     throw error;
   }
 };

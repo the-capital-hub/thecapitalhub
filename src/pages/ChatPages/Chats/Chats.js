@@ -99,6 +99,8 @@ const Chats = () => {
           <ChatSidebar
             selectedChat={setSelectedChat}
             setSelectedUser={setSelectedUser}
+            recieveMessage={recieveMessage}
+            sendMessage={sendMessage}
           />
 
         </section>

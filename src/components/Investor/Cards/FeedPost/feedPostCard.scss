@@ -1,5 +1,49 @@
 .feedpostcard_main_container {
   .feedpostcard_container {
+    .repost_container {
+      padding: 2px 5px;
+      position: relative;
+      .repost_options {
+        position: absolute;
+        top: 30px;
+        right: 0;
+
+        width: 220px;
+
+        background-color: white;
+        padding: 10px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        .single_option {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+
+          &:hover {
+            background-color: #f0f0f0;
+          }
+
+          .title {
+            font-size: 12px;
+            font-weight: 500;
+            color: #000;
+          }
+          .description {
+            font-size: 10px;
+            font-weight: 100;
+          }
+
+          @media (max-width: 420px) {
+            .description {
+              display: none;
+            }
+          }
+        }
+      }
+    }
     .para_container {
       display: flex;
       margin: auto;

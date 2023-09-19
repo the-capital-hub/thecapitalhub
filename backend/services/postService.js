@@ -22,10 +22,9 @@ export const createNewPost = async (data) => {
       data.video = url;
     }
     if (data.resharedPostId) {
-      await PostModel.findByIdAndUpdate(
-        data.resharedPostId, 
-        { $inc: { resharedCount: 1 } }, 
-      );
+      await PostModel.findByIdAndUpdate(data.resharedPostId, {
+        $inc: { resharedCount: 1 },
+      });
     }
     const newPost = new PostModel(data);
     await newPost.save();
@@ -43,7 +42,17 @@ export const allPostsData = async () => {
         path: "user",
         select: "firstName lastName designation profilePicture",
       })
+      .populate({
+        path: "resharedPostId",
+        select: "",
+        populate: {
+          path: "user",
+          select: "firstName lastName designation profilePicture",
+        },
+      })
       .sort({ _id: -1 });
+
+    // console.log(allPosts);
     return allPosts;
   } catch (error) {
     throw new Error("Error fetching all posts");
@@ -53,7 +62,7 @@ export const allPostsData = async () => {
 export const singlePostData = async (_id) => {
   try {
     const post = await PostModel.findOne({ _id })
-      .populate('resharedPostId')
+      .populate("resharedPostId user")
       .exec();
     return post;
   } catch (error) {

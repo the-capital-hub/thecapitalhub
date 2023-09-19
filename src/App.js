@@ -318,8 +318,8 @@ function App() {
 
           {/* OneLink */}
           <Route path="/onelink/:username" element={<ValidateOneLink />}>
-            <Route path="" element={<Profile />} />
-            <Route path="company" element={<Company />} />
+            <Route path="" element={<Company />} />
+            <Route path="profile" element={<Profile />} />
             <Route path="onePager" element={<OnePager />} />
             <Route path="documentation" element={<DocumentationIV />} />
             <Route path="investnow" element={<InvestNow />} />
