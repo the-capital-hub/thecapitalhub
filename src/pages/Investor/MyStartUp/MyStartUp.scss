@@ -50,4 +50,16 @@
       }
     }
   }
+  .green_button {
+    border-radius: 5px;
+    background: #d3f36b;
+    padding: 8px 25px;
+    width: auto;
+    font-size: 14px;
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+  }
 }
