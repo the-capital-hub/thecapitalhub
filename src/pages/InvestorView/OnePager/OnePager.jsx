@@ -24,12 +24,15 @@ const OnePager = () => {
   const [dollarHighlight, setDollarHighlight] = useState(false);
   const { username } = useParams();
   const [onePager, setOnePager] = useState([]);
+  const [imageData, setImageData] = useState(null);
+
 
   useEffect(() => {
     document.title = "OnePager - One Link | The Capital Hub";
     getOnePager(username)
       .then(({ data }) => {
         setOnePager(data);
+        console.log(data)
       })
       .catch(() => setOnePager([]));
   }, [username]);
@@ -96,6 +99,7 @@ const OnePager = () => {
       useCORS: false,
     }).then((canvas) => {
       const contentDataURL = canvas.toDataURL("image/png");
+      console.log(contentDataURL)
       const imgWidth = 210;
       const pageHeight = 295;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
@@ -121,6 +125,24 @@ const OnePager = () => {
     });
   };
 
+
+  useEffect(() => {
+    // Fetch the image data from the URL
+    fetch(onePager.logo)
+      .then((response) => response.blob())
+      .then((blob) => {
+        // Create a URL for the blob data
+        const blobUrl = URL.createObjectURL(blob);
+        setImageData(blobUrl);
+      })
+      .catch((error) => {
+        console.error("Error fetching image:", error);
+      });
+  }, [onePager.logo]);
+
+
+
+
   return (
     <div className="onePager">
       <h1>One Pager</h1>
@@ -142,7 +164,8 @@ const OnePager = () => {
         <CompanyDetails
           companyName={onePager.company}
           description={onePager.description}
-          image={onePager.logo}
+          // image={onePager.logo}
+          image={imageData}
         />
       </div>
 
