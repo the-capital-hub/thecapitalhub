@@ -52,7 +52,7 @@ export const allPostsData = async () => {
       })
       .sort({ _id: -1 });
 
-    console.log(allPosts);
+    // console.log(allPosts);
     return allPosts;
   } catch (error) {
     throw new Error("Error fetching all posts");
