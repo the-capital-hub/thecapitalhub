@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./ChatDashboard.scss";
-import profilePic from "../../../../Images/Pramod.jpeg";
 import sendIcon from "../../../../Images/Send.svg";
 import { useSelector } from "react-redux";
 import {
   getMessageByChatId,
   getUserAndStartUpByUserIdAPI,
   addMessage,
-  markMessagesAsRead
+  markMessagesAsRead,
 } from "../../../../Service/user";
 
 const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
@@ -16,10 +15,11 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
   const [user, setUser] = useState(null);
   const [sendText, setSendText] = useState("");
   const chatMessagesContainerRef = useRef(null);
-  
+
   useEffect(() => {
     if (chatMessagesContainerRef.current) {
-      chatMessagesContainerRef.current.scrollTop = chatMessagesContainerRef.current.scrollHeight;
+      chatMessagesContainerRef.current.scrollTop =
+        chatMessagesContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
@@ -62,11 +62,11 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
   const groupMessagesByDate = (messages) => {
     const groupedMessages = [];
     let currentDate = null;
-  
+
     for (const message of messages) {
       const messageDate = new Date(message.createdAt);
       const today = new Date();
-  
+
       if (
         currentDate &&
         currentDate.getDate() === messageDate.getDate() &&
@@ -88,15 +88,16 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
           messageDate.getMonth() + 1
         }-${messageDate.getFullYear()}`;
         groupedMessages.push({
-          date: today.getDate() === messageDate.getDate() ? "Today" : formattedDate,
+          date:
+            today.getDate() === messageDate.getDate() ? "Today" : formattedDate,
           messages: [message],
         });
       }
     }
-  
+
     return groupedMessages;
   };
-  
+
   const groupedMessages = groupMessagesByDate(messages);
 
   const handleSend = () => {
@@ -114,62 +115,75 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
         console.error("Error-->", error);
       });
     const recieverId = userId;
-    const createdAt =  new Date().toISOString();
+    const createdAt = new Date().toISOString();
     setSendMessage({ ...message, recieverId, createdAt });
     setSendText("");
   };
 
   const formatTime = (date) => {
     const options = {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true, 
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
     };
-  
-    return new Intl.DateTimeFormat('en-US', options).format(date);
+
+    return new Intl.DateTimeFormat("en-US", options).format(date);
   };
 
-  
   return (
     <div className="chat_dashboard_container">
       <div className="chat_messages_group" ref={chatMessagesContainerRef}>
-      {groupedMessages.map((group) => (
-        <div key={group.date}>
-          <h6 className="date_header">{group.date}</h6>
-          <div className="chat_messages">
-            {group.messages.map((message) =>
-              message.senderId === loggedInUser._id ? (
-                <section className="my_message_main" key={message._id}>
-                  <div className="my_messages">
-                    <div className="time_name_image">
-                      <div className="time_name">
-                        <h6 className="name_title">{loggedInUser?.firstName} {loggedInUser?.lastName}</h6>{" "}
-                        <h6 className="time">{formatTime(new Date(message.createdAt))}</h6>
+        {groupedMessages.map((group) => (
+          <div key={group.date}>
+            <h6 className="date_header">{group.date}</h6>
+            <div className="chat_messages">
+              {group.messages.map((message) =>
+                message.senderId === loggedInUser._id ? (
+                  <section className="my_message_main" key={message._id}>
+                    <div className="my_messages">
+                      <div className="time_name_image">
+                        <div className="time_name">
+                          <h6 className="name_title">
+                            {loggedInUser?.firstName} {loggedInUser?.lastName}
+                          </h6>
+                          <h6 className="time">
+                            {formatTime(new Date(message.createdAt))}
+                          </h6>
+                        </div>
+                        <img
+                          className="image_profile"
+                          src={loggedInUser?.profilePicture}
+                          alt=""
+                        />
                       </div>
-                      <img className="image_profile" src={loggedInUser?.profilePicture} alt="" />
+
+                      <div className="mymessage_container">{message?.text}</div>
                     </div>
-
-                    <div className="mymessage_container">{message?.text}</div>
-                  </div>
-                </section>
-              ) : (
-                <section className="other_sender" key={message._id}>
-                  <img className="image_profile" src={user?.profilePicture} alt="" />
-                  <div className="other_messages">
-                    <div className="time_name">
-                      <h6 className="name_title">{user?.firstName} {user?.lastName} </h6>{" "}
-                      <h6 className="time">{formatTime(new Date(message.createdAt))}</h6>
+                  </section>
+                ) : (
+                  <section className="other_sender" key={message._id}>
+                    <img
+                      className="image_profile"
+                      src={user?.profilePicture}
+                      alt=""
+                    />
+                    <div className="other_messages">
+                      <div className="time_name">
+                        <h6 className="name_title">
+                          {user?.firstName} {user?.lastName}{" "}
+                        </h6>{" "}
+                        <h6 className="time">
+                          {formatTime(new Date(message.createdAt))}
+                        </h6>
+                      </div>
+                      <div className="message_container">{message?.text}</div>
                     </div>
-
-                    <div className="message_container">{message?.text}</div>
-
-                  </div>
-                </section>
-              )
-            )}
+                  </section>
+                )
+              )}
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
       </div>
       <section className="chat_input_section">
         <div className="chat_input_container">
@@ -181,11 +195,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
             value={sendText}
           />
           <div className="right_icons">
-            <img
-              src={sendIcon}
-              alt="Send"
-              onClick={() => handleSend()}
-            />
+            <img src={sendIcon} alt="Send" onClick={() => handleSend()} />
           </div>
         </div>
       </section>
