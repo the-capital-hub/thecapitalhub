@@ -38,3 +38,49 @@ export const getMessages = async (chatId) => {
     };
   }
 };
+
+export const markMessagesAsRead = async (chatId, userId) => {
+  try {
+    const result = await MessageModel.updateMany(
+      { chatId, senderId: userId }, { $set: { read: true } }
+    );
+    if (result.nModified > 0) {
+      return {
+        status: 200,
+        message: "All messages in the chat have been marked as read.",
+      };
+    } else {
+      return {
+        status: 200,
+        message: "No messages found in the chat to mark as read.",
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      status: 500,
+      message: "An error occurred while marking messages as read.",
+    };
+  }
+};
+
+export const getUnreadMessageCount = async (chatId, userId) => {
+  try {
+    const unreadCount = await MessageModel.countDocuments({
+      chatId,
+      senderId: { $ne: userId },
+      read: false,
+    });
+    return {
+      status: 200,
+      message: "Unread message count retrieved successfully",
+      data: unreadCount,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while getting unread message count.",
+    };
+  }
+};

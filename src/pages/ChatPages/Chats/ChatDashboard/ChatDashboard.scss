@@ -57,10 +57,14 @@
       right: 0;
     }
   }
-
+  .chat_messages_group {
+    height: 90%;
+    overflow-y: scroll;
+  }
+  
   .chat_messages {
     height: 80%;
-    overflow-y: scroll;
+    // overflow-y: scroll;
     overflow-x: hidden;
     .other_sender {
       align-self: flex-start;

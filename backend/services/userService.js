@@ -267,11 +267,17 @@ export const resetPassword = async (token, newPassword) => {
 export const searchUsers = async (searchQuery) => {
   try {
     const users = await UserModel.find({
-      $or: [
-        { username: { $regex: searchQuery, $options: "i" } },
-        { email: { $regex: searchQuery, $options: "i" } },
+      $and: [
+        {
+          $or: [
+            { username: { $regex: searchQuery, $options: "i" } },
+            { email: { $regex: searchQuery, $options: "i" } },
+          ],
+        },
+        { userStatus: 'active' },
       ],
     });
+    
     const company = await StartUpModel.find({
       $or: [
         { company: { $regex: searchQuery, $options: "i" } },
