@@ -11,6 +11,35 @@ const MEETINGTYPES = ["Daily", "Weekly", "Monthly"];
 export default function MySchedule() {
   const [view, setView] = useState("week");
 
+  // Fetch meetingData for user here
+  const EVENTS = [
+    {
+      start: new Date(2023, 8, 19, 10, 0),
+      end: new Date(2023, 8, 19, 11, 30),
+      title: "Test Event",
+    },
+    {
+      start: new Date(2023, 8, 20, 12, 0),
+      end: new Date(2023, 8, 20, 13, 0),
+      title: "Test Event",
+    },
+    {
+      start: new Date(2023, 8, 22, 15, 30),
+      end: new Date(2023, 8, 22, 16, 45),
+      title: "Test Event",
+    },
+    {
+      start: new Date(2023, 8, 18, 9, 30),
+      end: new Date(2023, 8, 18, 12, 45),
+      title: "Work",
+    },
+    {
+      start: new Date(2023, 8, 21, 13, 30),
+      end: new Date(2023, 8, 21, 16, 45),
+      title: "Test Event",
+    },
+  ];
+
   function handleViewSelect(selectedView) {
     console.log(selectedView);
     setView(selectedView);
@@ -29,7 +58,11 @@ export default function MySchedule() {
 
         <div className="schedule__container px-3">
           <div className="calender__div">
-            <CalendarContainer view={view} />
+            <CalendarContainer
+              view={view}
+              meetingsData={EVENTS}
+              setView={setView}
+            />
           </div>
           <div className="meetings__div p-3 border rounded-4 d-flex flex-column gap-2">
             {MEETINGTYPES.map((type, index) => {
