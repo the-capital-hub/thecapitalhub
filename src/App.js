@@ -101,7 +101,6 @@ function App() {
               </>
             }
           />
-
           <Route
             path="/blog/webdevlopment"
             element={
@@ -112,7 +111,6 @@ function App() {
               </>
             }
           />
-
           <Route
             path="/blog/startupOne"
             element={
@@ -123,7 +121,6 @@ function App() {
               </>
             }
           />
-
           <Route
             path="/blog/startupTwo"
             element={
@@ -134,7 +131,6 @@ function App() {
               </>
             }
           />
-
           <Route
             path="/blog/startupThree"
             element={
@@ -145,7 +141,6 @@ function App() {
               </>
             }
           />
-
           <Route
             path="/about"
             element={
@@ -156,7 +151,6 @@ function App() {
               </>
             }
           />
-
           <Route
             path="/contactus"
             element={
@@ -167,7 +161,6 @@ function App() {
               </>
             }
           />
-
           <Route
             path="/service"
             element={
@@ -178,7 +171,6 @@ function App() {
               </>
             }
           />
-
           <Route
             path="/fundraising"
             element={
@@ -189,7 +181,6 @@ function App() {
               </>
             }
           />
-
           <Route
             path="/pitch-deck"
             element={
@@ -240,7 +231,6 @@ function App() {
               </>
             }
           />
-
           <Route
             path="/our-investor"
             element={
@@ -281,18 +271,13 @@ function App() {
               </>
             }
           />
-
-          <Route
-            path="/chats"
-            element={
-              <>
-                <Chats />
-              </>
-            }
-          />
           <Route path="/signup" element={<Register />} />
           <Route path="/login" element={<Login />} />
 
+          {/* Chat */}
+          <Route path="/chats" element={<Chats />} />
+
+          {/* StartUp */}
           <Route element={<PrivateRoute />}>
             <Route path="/profile" element={<InvestorHome />} />
             <Route path="/user/:userId" element={<OtherUserProfile />} />
@@ -315,7 +300,6 @@ function App() {
             <Route path="/messages" element={<Messages />} />
             <Route path="/notifications" element={<Notifications />} />
           </Route>
-
           {/* OneLink */}
           <Route path="/onelink/:username" element={<ValidateOneLink />}>
             <Route path="" element={<Company />} />
@@ -326,7 +310,6 @@ function App() {
             <Route path="documentation/:route" element={<FolderContents />} />
             {/* <Route path="investNow" element={<DocumentationIV />} /> */}
           </Route>
-
           {/* Investor */}
           <Route path="/investor" element={<ProtectedInvestorRoutes />}>
             <Route path="" element={<Navigate to="profile" replace />} />
