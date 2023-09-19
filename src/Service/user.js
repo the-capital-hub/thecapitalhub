@@ -524,3 +524,23 @@ export const createChat = async (senderId, recieverId) => {
     throw error;
   }
 };
+
+export const markMessagesAsRead = async (chatId, userId) => {
+  try {
+    const response = await axiosInstance.patch(`${API.markMessagesAsRead}/${chatId}/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error marking message as read:", error);
+    throw error;
+  }
+};
+
+export const getUnreadMessageCount = async (chatId, userId) => {
+  try {
+    const response = await axiosInstance.get(`${API.getUnreadMessageCount}/${chatId}/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error getting user message count:", error);
+    throw error;
+  }
+};

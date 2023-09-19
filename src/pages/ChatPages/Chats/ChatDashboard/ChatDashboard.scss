@@ -8,6 +8,9 @@
   text-align: center;
   position: relative;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+
   .name_title {
     color: #000;
     font-family: Poppins;
@@ -57,14 +60,19 @@
       right: 0;
     }
   }
+  .chat_messages_group {
+    height: 90%;
+    overflow-y: scroll;
+  }
 
   .chat_messages {
     height: 80%;
-    overflow-y: scroll;
+    // overflow-y: scroll;
     overflow-x: hidden;
     .other_sender {
       align-self: flex-start;
       display: flex;
+      max-width: 40%;
 
       .image_profile {
         height: 50px;
@@ -81,8 +89,9 @@
         .message_container {
           background-color: #eaeef2;
           padding: 10px 20px;
-          border-radius: 20px;
-          max-width: 50%;
+          border-top-right-radius: 20px;
+          border-bottom-right-radius: 20px;
+          border-bottom-left-radius: 20px;
           margin-bottom: 10px;
         }
       }
@@ -110,7 +119,9 @@
           background-color: #fd5901;
           color: white;
           padding: 10px 20px;
-          border-radius: 20px;
+          border-top-left-radius: 20px;
+          border-bottom-right-radius: 20px;
+          border-bottom-left-radius: 20px;
           max-width: 50%;
           margin-bottom: 10px;
           margin-right: 50px;

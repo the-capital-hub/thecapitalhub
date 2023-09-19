@@ -27,7 +27,7 @@ const ChatNavbar = ({chatId, userId}) => {
             <div className="title_and_message">
               <h5 className="name_title">{user?.firstName} {user?.lastName}</h5>
               <h5 className="message_title">{user?.designation}</h5>
-              <h4 className="online">Online</h4>
+              {/* <h4 className="online">Online</h4> */}
             </div>
           </div>
           <div className="right">

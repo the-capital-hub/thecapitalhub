@@ -21,7 +21,12 @@ const Chats = () => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [sendMessage, setSendMessage] = useState(null);
   const [recieveMessage, setRecieveMessage] = useState(null);
+  // const previousUrl = window.history.length > 1 ? window.history.go(-1) : null;
 
+  // if (previousUrl) {
+  //   console.log('Previous URL:', window.location.href);
+  // }
+  
   const socket = useRef();
 
   const disconnectSocket = () => {
@@ -90,10 +95,12 @@ const Chats = () => {
     <>
       <div className="container-fluid chat_main_container">
         <section className="left_section">
-          <ChatSearch />
+          <ChatSearch  />
           <ChatSidebar
             selectedChat={setSelectedChat}
             setSelectedUser={setSelectedUser}
+            recieveMessage={recieveMessage}
+            sendMessage={sendMessage}
           />
 
         </section>
@@ -104,12 +111,12 @@ const Chats = () => {
                 chatId={selectedChat}
                 userId={selectedUser}
               />
-              <ChatDashboard
+              {/* <ChatDashboard
                 chatId={selectedChat}
                 userId={selectedUser}
                 setSendMessage={setSendMessage}
                 recieveMessage={recieveMessage}
-              />
+              /> */}
             </>
           )}
         </section>
