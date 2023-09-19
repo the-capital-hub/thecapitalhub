@@ -17,6 +17,7 @@ const ChatSearch = () => {
       setLoading(true);
       setSearchInput(target.value);
       const { data } = await getSearchResultsAPI(target.value);
+      console.log(data)
       setSearchSuggestions(data);
     } catch (error) {
       console.error("Error getting search results : ", error);
@@ -59,7 +60,7 @@ const ChatSearch = () => {
             onFocus={() => setInputOnFocus(true)}
             onBlurCapture={searchInputBlurHandler}
           />
-          <div class>
+          <div className="search-results-wrapper">
             {inputOnFocus && searchSuggestions && !mobileSearch && (
               <div className="search_results rounded-5 border shadow-sm p-4 position-absolute bg-white">
                 {!loading ? (
@@ -79,47 +80,11 @@ const ChatSearch = () => {
                           <Link
                             key={_id}
                             className="single_result"
-                            to={`/user/${_id}`}
+                            to={`/chats?userId=${_id}`}
                           >
                             {firstName} {lastName}
                           </Link>
                         ))}
-                      {searchSuggestions?.users?.length > 5 && (
-                        <span className="w-100 d-flex justify-content-center">
-                          <button
-                            className="btn btn-xs btn-light"
-                            onClick={() => {
-                              searchSubmitHandler();
-                              searchInputBlurHandler();
-                            }}
-                          >
-                            Show more
-                          </button>
-                        </span>
-                      )}
-                      {/* {!!searchSuggestions?.company?.length && (
-                          <span className="mt-2">Companies</span>
-                        )}
-                        {searchSuggestions?.company
-                          ?.slice(0, 5)
-                          .map(({ company }) => (
-                            <span className="single_result">
-                              <Link to={`#`}>{company}</Link>
-                            </span>
-                          ))}
-                        {searchSuggestions?.company?.length > 5 && (
-                          <span className="w-100 d-flex justify-content-center">
-                            <button
-                              className="btn btn-xs btn-light"
-                              onClick={() => {
-                                searchSubmitHandler();
-                                searchInputBlurHandler();
-                              }}
-                            >
-                              Show more
-                            </button>
-                          </span>
-                        )} */}
                     </>
                   )
                 ) : (

@@ -27,7 +27,7 @@ const FundAsking = ({ company, page }) => {
           <div className="card">
             <div className="card-body">
               <h5 className="card-title">Funding Ask (in lakhs)</h5>
-              <img src={company.logo} alt="image" style={{height:"120px", width:"120px"}}/>
+              <img src={company?.logo} alt="image" style={{height:"120px", width:"120px"}}/>
               <hr />
               <div className="amount_text">
                 {page === "oneViewEdit" ? (

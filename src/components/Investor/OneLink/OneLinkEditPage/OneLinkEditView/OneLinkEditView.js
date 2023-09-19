@@ -30,6 +30,8 @@ const OneLinkEditView = () => {
     logo: "",
   });
   const [selectedLogo, setSelectedLogo] = useState(null);
+  const [imageData, setImageData] = useState(null);
+
 
   useEffect(() => {
     getStartupByFounderId(userId)
@@ -43,6 +45,20 @@ const OneLinkEditView = () => {
       })
       .catch(() => setCompany({}));
   }, [userId]);
+
+  useEffect(() => {
+    // Fetch the image data from the URL
+    fetch(company?.logo)
+      .then((response) => response.blob())
+      .then((blob) => {
+        // Create a URL for the blob data
+        const blobUrl = URL.createObjectURL(blob);
+        setImageData(blobUrl);
+      })
+      .catch((error) => {
+        console.error("Error fetching image:", error);
+      });
+  }, [company?.logo]);
 
   const handleInputChange = (field, event) => {
     const updatedValue = event.target.value;
@@ -160,7 +176,7 @@ const OneLinkEditView = () => {
               <div className="mx-2" style={{ height: "120px", width: "120px" }}>
                 <label htmlFor="logoImg" className="position-relative">
                   <img
-                    src={selectedLogo || company?.logo}
+                    src={selectedLogo || imageData}
                     alt="image"
                     style={{ height: "120px", width: "120px" }}
                     role="button"
