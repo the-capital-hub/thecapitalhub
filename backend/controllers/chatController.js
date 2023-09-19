@@ -2,6 +2,8 @@ import {
   createChat,
   getUserChats,
   findChat,
+  togglePinChat,
+  getPinnedChats,
 } from "../services/chatService.js";
 
 export const createChatController = async (req, res) => {
@@ -42,6 +44,34 @@ export const findChatController = async (req, res) => {
     return res.status(500).send({
       status: 500,
       message: "An error occurred while finding the chat.",
+    });
+  }
+};
+
+export const togglePinChatController = async (req, res) => {
+  try {
+    const { userId, chatId } = req.params;
+    const response = await togglePinChat(userId, chatId);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while pinning/unpinning the chat.",
+    });
+  }
+};
+
+export const getPinnedChatsController = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const response = await getPinnedChats(userId);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while fetching pinned chats.",
     });
   }
 };
