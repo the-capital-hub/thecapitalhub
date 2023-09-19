@@ -5,6 +5,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./CalendarContainer.scss";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 
+// Custom event component
 const EventComponent = ({ event }) => {
   const { title, start, end } = event;
   const date = moment(start).format("ddd MMM DD");
@@ -59,6 +60,7 @@ const EventComponent = ({ event }) => {
   );
 };
 
+// Props for react-big-calendar
 const calendarData = {
   components: {
     event: EventComponent,
@@ -83,16 +85,17 @@ const calendarData = {
     },
   },
 };
-
 const mlocalizer = momentLocalizer(moment);
 
-export default function CalendarContainer({ view }) {
+export default function CalendarContainer({ view, meetingsData, setView }) {
   return (
     <div className="calendar__container">
       <BigCalendar
         calendarData={calendarData}
         localizer={mlocalizer}
         view={view}
+        setView={setView}
+        meetingsData={meetingsData}
       />
     </div>
   );

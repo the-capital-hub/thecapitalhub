@@ -2,7 +2,7 @@
 @import "react-big-calendar/lib/addons/dragAndDrop/styles"; // if using DnD
 
 .calendar__container {
-  height: 600px;
+  height: 800px;
   position: relative;
 }
 
@@ -76,19 +76,27 @@
 // Scrollbar
 .rbc-time-content::-webkit-scrollbar {
   width: 8px;
-  height: auto;
+  height: 4px;
 }
 
-.rbc-time-content::-webkit-scrollbar-thumb {
+.rbc-time-header-content::-webkit-scrollbar {
+  height: 8px;
+  width: 4px;
+}
+
+.rbc-time-content::-webkit-scrollbar-thumb,
+.rbc-time-header-content::-webkit-scrollbar-thumb {
   background: rgba(211, 243, 107, 0.5);
   border-radius: 10rem;
 }
 
-.rbc-time-content::-webkit-scrollbar-thumb:hover {
+.rbc-time-content::-webkit-scrollbar-thumb:hover,
+.rbc-time-header-content::-webkit-scrollbar-thumb:hover {
   background: rgba(211, 243, 107, 1);
 }
 
-.rbc-time-content::-webkit-scrollbar-track {
+.rbc-time-content::-webkit-scrollbar-track,
+.rbc-time-header-content::-webkit-scrollbar-track {
   background: transparent;
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 0;
@@ -97,6 +105,7 @@
 
 .rbc-time-header-content {
   border-left: none;
+  overflow-x: auto;
 }
 
 .rbc-time-header-cell {
@@ -106,7 +115,10 @@
   .rbc-header {
     border-left: 0;
     border-bottom: none;
-    padding: 0;
+    padding-left: 0.35em;
+    min-width: 5.75rem;
+    max-width: 100%;
+    overflow-x: auto;
 
     button {
       border: none;
@@ -199,4 +211,9 @@
     width: 12ch;
     text-align: center;
   }
+}
+
+.rbc-day-slot.rbc-time-column {
+  min-width: 5.75rem;
+  max-width: 100%;
 }

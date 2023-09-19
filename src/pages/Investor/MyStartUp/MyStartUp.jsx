@@ -6,6 +6,7 @@ import logoIcon from "../../../Images/investorIcon/Rectangle 1577.png";
 import EyeLikeImage from "../../../Images/investorIcon/Ellipse 192.svg";
 import ChartComponent from "./ChartComponent";
 import PostInvestmentCard from "../InvestorCards/PostInvestmentCard/PostInvestmentCard";
+import { Link } from "react-router-dom";
 
 const MyStartUp = () => {
   return (
@@ -14,7 +15,17 @@ const MyStartUp = () => {
         <SmallProfileCard text={"My Startup"} />
         <div className="row mt-2">
           <div className="col-12 startup_container">
-            <h4 className="title_h4">My Investments</h4>
+            <div className="d-flex align-items-center justify-content-between">
+              <h4 className="title_h4">My Investments</h4>
+              <div className="d-flex gap-2">
+                <div className="green_button">
+                  <Link to={""}>Add New</Link>
+                </div>
+                <div className="green_button">
+                  <Link to={""}>Edit</Link>
+                </div>
+              </div>
+            </div>
             <hr />
             <div className="card_container">
               <MyInvestmentCard
@@ -40,7 +51,17 @@ const MyStartUp = () => {
               />
             </div>
             <hr />
-            <h4 className="title_h4">My Interest</h4>
+            <div className="d-flex align-items-center justify-content-between">
+              <h4 className="title_h4">My Interests</h4>
+              <div className="d-flex gap-2">
+                <div className="green_button">
+                  <Link to={""}>Add New</Link>
+                </div>
+                <div className="green_button">
+                  <Link to={""}>Edit</Link>
+                </div>
+              </div>
+            </div>
             <hr />
             <div className="card_container">
               <MyInvestmentCard
