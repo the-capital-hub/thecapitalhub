@@ -6,12 +6,22 @@
   position: relative;
 }
 
-.rbc-time-view {
-  border-radius: 10px;
-  //   border-right: 1px solid red;
+// Styles for the Calendar
+
+.rbc-calendar {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
 }
 
-// Styling calender
+.rbc-time-view {
+  //   border-radius: 10px;
+  //   border-right: 1px solid red;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+
 .rbc-allday-cell {
   display: none;
 }
@@ -29,7 +39,7 @@
     // border: 1px solid red;
     flex: 0 0 18ch;
     font-size: 1.25rem;
-    margin: 0;
+    margin: 1em 0;
   }
 
   .rbc-btn-group:first-of-type button:first-of-type {
@@ -80,7 +90,8 @@
 
 .rbc-time-content::-webkit-scrollbar-track {
   background: transparent;
-  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 0;
   border-radius: 10rem;
 }
 
@@ -137,4 +148,55 @@
 
 .rbc-today {
   background-color: inherit;
+}
+
+// Styles for Meetings/Events in calendar
+// .rbc-day-slot.rbc-time-column {
+//   min-width: 8rem;
+//   max-width: 100%;
+// }
+
+.rbc-events-container {
+  border: 0 !important;
+  margin-inline: 0.5em !important;
+}
+
+.rbc-event {
+  font-family: "Poppins", sans-serif !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  // border: 1px solid red !important;
+  // padding: 0.25em !important;
+}
+
+.rbc-event-label {
+  display: none;
+}
+
+.rbc-event-content {
+  font-size: 0.9rem;
+  width: 100% !important;
+  height: 100% !important;
+  // border: 1px solid yellow;
+}
+
+.event__text {
+  padding-inline: 0.5em;
+}
+
+.event__text:first-of-type {
+  padding-top: 1em;
+}
+
+.meeting__flag {
+  margin-top: min(5%, 2em);
+  padding-inline: 0.5em;
+
+  // border: 1px solid yellow;
+  p {
+    width: 12ch;
+    text-align: center;
+  }
 }
