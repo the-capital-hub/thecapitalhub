@@ -4,7 +4,7 @@ import "./Meetings.scss";
 import moment from "moment";
 
 export default function Meetings({ type, meetingsData, view }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(type.includes(view));
 
   function handleDetailClick() {
     setIsOpen(!isOpen);
