@@ -4,6 +4,9 @@ import "../Syndicates/Syndicates.scss";
 import "./MySchedule.scss";
 import ViewSelect from "../../../components/NewInvestor/MyScheduleComponents/ViewSelect";
 import CalendarContainer from "../../../components/NewInvestor/MyScheduleComponents/CalenderContainer";
+import Meetings from "../../../components/NewInvestor/MyScheduleComponents/Meetings";
+
+const MEETINGTYPES = ["Daily", "Weekly", "Monthly"];
 
 export default function MySchedule() {
   const [view, setView] = useState("week");
@@ -28,15 +31,10 @@ export default function MySchedule() {
           <div className="calender__div">
             <CalendarContainer view={view} />
           </div>
-          <div className="meetings__div p-3 border rounded-4">
-            <details className="border">
-              <summary className="border border-danger">Daily Meetings</summary>
-              <ul>
-                <li>Meeting 1</li>
-                <li>Meeting 2</li>
-                <li>Meeting 3</li>
-              </ul>
-            </details>
+          <div className="meetings__div p-3 border rounded-4 d-flex flex-column gap-2">
+            {MEETINGTYPES.map((type, index) => {
+              return <Meetings key={type} type={type} />;
+            })}
           </div>
         </div>
       </section>
