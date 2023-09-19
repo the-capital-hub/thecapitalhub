@@ -1,57 +1,40 @@
-import { useRef } from "react";
+import { useState } from "react";
 
 export default function ViewSelect({ handleViewSelect }) {
-  const dayRef = useRef(null);
-  const weekRef = useRef(null);
-  const monthRef = useRef(null);
+  const [activeView, setActiveView] = useState("week");
 
-  function handleDayClick(e) {
-    handleViewSelect(e.target.dataset.view);
-    dayRef.current.classList.add("active__view");
-    weekRef.current.classList.remove("active__view");
-    monthRef.current.classList.remove("active__view");
+  function handleViewClick(id) {
+    handleViewSelect(id);
+    setActiveView(id);
   }
 
-  function handleWeekClick(e) {
-    handleViewSelect(e.target.dataset.view);
-    weekRef.current.classList.add("active__view");
-    dayRef.current.classList.remove("active__view");
-    monthRef.current.classList.remove("active__view");
-  }
+  const viewOptions = ["day", "week", "month"];
 
-  function handleMonthClick(e) {
-    handleViewSelect(e.target.dataset.view);
-    monthRef.current.classList.add("active__view");
-    weekRef.current.classList.remove("active__view");
-    dayRef.current.classList.remove("active__view");
-  }
+  const ViewButton = ({ view, handleViewClick }) => {
+    return (
+      <button
+        id={view}
+        className={`"view__btn border-0 px-3 py-1 rounded-3 text-capitalize bg-transparent " ${
+          view === activeView ? "active__view" : ""
+        } `}
+        onClick={(e) => handleViewClick(e.target.id)}
+      >
+        {view}
+      </button>
+    );
+  };
 
   return (
     <div className="view__selector d-flex gap-2 bg-light px-2 py-3 rounded-3">
-      <button
-        className="view__btn border-0 px-3 py-1 rounded-3"
-        data-view="day"
-        onClick={handleDayClick}
-        ref={dayRef}
-      >
-        Day
-      </button>
-      <button
-        className="view__btn border-0 px-3 py-1 rounded-3 active__view"
-        data-view="week"
-        onClick={handleWeekClick}
-        ref={weekRef}
-      >
-        Week
-      </button>
-      <button
-        className="view__btn border-0 px-3 py-1 rounded-3"
-        data-view="month"
-        onClick={handleMonthClick}
-        ref={monthRef}
-      >
-        Month
-      </button>
+      {viewOptions.map((view) => {
+        return (
+          <ViewButton
+            view={view}
+            handleViewClick={handleViewClick}
+            key={view}
+          />
+        );
+      })}
     </div>
   );
 }
