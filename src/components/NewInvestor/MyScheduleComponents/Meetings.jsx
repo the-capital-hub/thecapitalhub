@@ -25,7 +25,7 @@ export default function Meetings({ type, meetingsData, view }) {
     return (
       <div className="d-flex justify-content-between align-items-center mb-2 ">
         <li
-          className={`text-capitalize w-75 fw-lighter  text-opacity-75 ${
+          className={`meeting__list__item text-capitalize fw-lighter text-opacity-75 ${
             isComplete ? "text-white-50 " : "text-white"
           } `}
         >
