@@ -54,7 +54,9 @@ export default function MySchedule() {
       <section className="section__wrapper bg-white rounded-3 border mb-5 pb-5 d-flex flex-column gap-5">
         <div className="d-flex flex-column flex-lg-row gap-4 justify-content-between align-items-center border-bottom p-3">
           <ViewSelect handleViewSelect={handleViewSelect} />
-          <button className="btn-capital lh-1">Create Meeting</button>
+          <button className="btn-capital lh-1 py-0 py-md-2">
+            Create Meeting
+          </button>
         </div>
 
         <div className="schedule__container px-3">
