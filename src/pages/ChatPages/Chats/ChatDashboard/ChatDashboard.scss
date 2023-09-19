@@ -183,10 +183,46 @@
       }
 
       .right_icons {
-        margin-left: 10px;
+        display: flex;
+        gap: 10px;
+        padding: 0 5px;
 
-        img {
-          /* Add styles for the SVG images on the right */
+        .attactment-container {
+          position: relative;
+          .attachment-options {
+            position: absolute;
+            bottom: 40px;
+            right: 10px;
+            border-radius: 10px;
+            background: #a7a7a7;
+            // max-width: 200px;
+            width: auto;
+
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+            // flex-wrap: wrap;
+
+            cursor: default;
+
+            .attachment-option {
+              display: flex;
+              flex-direction: column;
+              gap: 5px;
+              align-items: center;
+              cursor: pointer;
+
+              img {
+                background-color: rgba(255, 255, 255, 0.6);
+              }
+
+              p {
+                margin: 0;
+                font-size: 14px;
+                color: rgb(233, 233, 233);
+              }
+            }
+          }
         }
       }
     }
