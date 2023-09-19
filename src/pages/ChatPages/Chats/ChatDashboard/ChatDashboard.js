@@ -8,6 +8,12 @@ import {
   addMessage,
   markMessagesAsRead,
 } from "../../../../Service/user";
+import attachmentGreyIcon from "../../../../Images/Chat/attachtment-grey.svg";
+import attachmentOrangeIcon from "../../../../Images/Chat/attachment-orange.svg";
+import imageIcon from "../../../../Images/Chat/image.svg";
+import documentIcon from "../../../../Images/Chat/document.svg";
+import videoIcon from "../../../../Images/Chat/attachVideo.svg";
+import { getBase64 } from "../../../../utils/getBase64";
 
 const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -100,13 +106,23 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
 
   const groupedMessages = groupMessagesByDate(messages);
 
-  const handleSend = () => {
-    if (!sendText) return;
-    const message = {
-      senderId: loggedInUser._id,
-      text: sendText,
-      chatId: chatId,
-    };
+  const handleSend = async () => {
+    if (sendText?.trim() === "") return;
+    const message = new FormData();
+
+    message.append("senderId", loggedInUser._id);
+    message.append("text", sendText);
+    message.append("chatId", chatId);
+
+    if (selectedImage) {
+      const image = await getBase64(selectedImage);
+      message.append("image", image);
+    }
+    if (selectedVideo) {
+      const video = await getBase64(selectedVideo);
+      message.append("video", video);
+    }
+
     addMessage(message)
       .then(({ data }) => {
         setMessages([...messages, data]);
@@ -119,6 +135,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
     const createdAt = new Date().toISOString();
     setSendMessage({ ...message, recieverId, createdAt });
     setSendText("");
+    setShowAttachDocs(false);
   };
 
   const formatTime = (date) => {
@@ -129,6 +146,40 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
     };
 
     return new Intl.DateTimeFormat("en-US", options).format(date);
+  };
+
+  const [showAttachDocs, setShowAttachDocs] = useState(false);
+  const attachDocContainerRef = useRef();
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+
+  useEffect(() => {
+    const outsideClickHandler = (event) => {
+      if (
+        attachDocContainerRef.current &&
+        !attachDocContainerRef.current.contains(event.target)
+      ) {
+        setShowAttachDocs(false);
+      }
+    };
+
+    document.addEventListener("click", outsideClickHandler);
+
+    return () => {
+      document.removeEventListener("click", outsideClickHandler);
+    };
+  }, []);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (event.target.name === "image" && file.type.includes("image")) {
+      setSelectedImage(file);
+    } else if (event.target.name === "video" && file.type.includes("video")) {
+      setSelectedVideo(file);
+    } else if (event.target.name === "document") {
+      console.log("document");
+      // setSelectedDocument(file);
+    }
   };
 
   return (
@@ -178,6 +229,23 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
                         </h6>
                       </div>
                       <div className="message_container">{message?.text}</div>
+                      {message?.image && (
+                        <div className="message_container">
+                          <img
+                            src={message.image}
+                            width={50}
+                            alt="message image"
+                          />
+                        </div>
+                      )}
+                      {message?.video && (
+                        <div className="message_container">
+                          <video controls width={"100%"}>
+                            <source src={message?.video} type={"video/mp4"} />
+                            Your browser does not support the video tag.
+                          </video>
+                        </div>
+                      )}
                     </div>
                   </section>
                 )
@@ -196,7 +264,81 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
             value={sendText}
           />
           <div className="right_icons">
-            <img src={sendIcon} alt="Send" onClick={() => handleSend()} />
+            <button
+              className="attactment-container btn"
+              ref={attachDocContainerRef}
+            >
+              {!showAttachDocs ? (
+                <img
+                  src={attachmentGreyIcon}
+                  width={20}
+                  onClick={() => setShowAttachDocs(!showAttachDocs)}
+                  alt="attach"
+                />
+              ) : (
+                <img
+                  src={attachmentOrangeIcon}
+                  width={20}
+                  onClick={() => setShowAttachDocs(!showAttachDocs)}
+                  alt="attach"
+                />
+              )}
+              {showAttachDocs && (
+                <div className="attachment-options shadow-sm">
+                  <div className="attachment-option">
+                    <img
+                      className="p-1 rounded-circle "
+                      src={documentIcon}
+                      alt="upload document"
+                    />
+                    <p>Document</p>
+                  </div>
+                  <div className="attachment-option">
+                    <label htmlFor="image">
+                      <img
+                        src={imageIcon}
+                        alt="upload images"
+                        className="p-1 rounded-circle "
+                      />
+                      <p>Image</p>
+                    </label>
+                    <input
+                      type="file"
+                      accept="image/png, image/jpeg, image/jpg, image/svg+xml"
+                      id="image"
+                      name="image"
+                      hidden
+                    />
+                  </div>
+                  <div className="attachment-option">
+                    <label htmlFor="video">
+                      <img
+                        src={videoIcon}
+                        alt="upload video"
+                        className="p-1 rounded-circle "
+                      />
+                      <p>Video</p>
+                    </label>
+                    <input
+                      type="file"
+                      accept="video/mp4,video/x-m4v,video/*"
+                      id="video"
+                      name="video"
+                      hidden
+                    />
+                  </div>
+                </div>
+              )}
+            </button>
+            <button className="btn p-0">
+              <img
+                className="border-start border-2"
+                src={sendIcon}
+                alt="Send"
+                width={30}
+                onClick={() => handleSend()}
+              />
+            </button>
           </div>
         </div>
       </section>
