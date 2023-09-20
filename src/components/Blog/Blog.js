@@ -114,6 +114,32 @@ const Blog = () => {
               }
             />
             <LattestBlogCard
+              image="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80"
+              button={"HealthTech"}
+              date={"Sept 20 2023"}
+              title={
+                "Telemedicine: A Health Revolution at Your Fingertips - MedTel Health Care Company Leading the Way"
+              }
+              onClick={() =>
+                handleCardClick(
+                  "/blog/telemedicine-health-revolution-at-your-fingertips-medtel-health-care-company-leading-the-way"
+                )
+              }
+            />
+             <LattestBlogCard
+              image="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80"
+              button={"FoodTech"}
+              date={"Sept 20 2023"}
+              title={
+                "How Zomato is Revolutionising the Food Supply Chain Through Food Technology"
+              }
+              onClick={() =>
+                handleCardClick(
+                  "/blog/how-zomato-is-revolutionising-the-food-supply-chain-through-food-technology"
+                )
+              }
+            />
+            <LattestBlogCard
               image={BlogoneImage}
               button={"Startup"}
               date={"May 1 2023"}

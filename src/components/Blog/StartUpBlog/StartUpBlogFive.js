@@ -11,7 +11,7 @@ import FounderImg from "../../../Images/blog/harold mondschein.webp";
 
 const StartUpBlogOne = () => {
   useEffect(() => {
-    document.title = "Why mentoring matters? Blog | The Capital Hub";
+    document.title = " How Zomato is Revolutionising the Food Supply Chain Through Food Technology Blog | The Capital Hub";
   }, []);
   window.scrollTo({ top: 0, behavior: "smooth" });
   return (

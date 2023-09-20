@@ -11,7 +11,7 @@ import FounderImg from "../../../Images/blog/harold mondschein.webp";
 
 const StartUpBlogOne = () => {
   useEffect(() => {
-    document.title = "Why mentoring matters? Blog | The Capital Hub";
+    document.title = "Telemedicine: A Health Revolution at Your Fingertips - MedTel Health Care Company Leading the Way Blog | The Capital Hub";
   }, []);
   window.scrollTo({ top: 0, behavior: "smooth" });
   return (
