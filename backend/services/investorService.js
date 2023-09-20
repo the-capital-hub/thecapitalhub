@@ -29,6 +29,10 @@ export const createInvestor = async (investorData) => {
     const user = await UserModel.findByIdAndUpdate(founderId, {
       investor: newInvestor._id,
       gender: investorData.gender,
+      designation: investorData.designation,
+      education: investorData.education,
+      experience: investorData.experience,
+      location: investorData.location,
     });
     const emailMessage = `
         A new user has requested for an account:
