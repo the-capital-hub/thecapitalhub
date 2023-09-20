@@ -13,6 +13,18 @@
   box-shadow: 2.0674986839294434px 2.0674986839294434px 3.101248025894165px 0px
     rgba(0, 0, 0, 0.05);
 
+  &:hover {
+    .left-content {
+      .rupee-sign {
+        .edit-tip {
+          visibility: visible;
+          opacity: 1;
+          transition: opacity 150ms ease-in;
+        }
+      }
+    }
+  }
+
   .left-content {
     display: flex;
     flex-direction: column;
@@ -29,16 +41,31 @@
     .rupee-sign {
       font-size: 14px;
       margin-top: 5px;
+      position: relative;
+      // border: 1px solid white;
+
+      .edit-tip {
+        // border: 1px solid yellow;
+        width: 12ch;
+        position: absolute;
+        top: 110%;
+        left: 0;
+
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 150ms ease-in;
+      }
     }
 
     .edit_input {
       background-color: transparent;
-      outline: none;
+      width: 15ch;
+      outline: 1px solid rgba(0, 0, 0, 0.1);
       border: none;
       margin: 0;
       font-size: 15px;
       font-weight: bold;
-      color: #dcdcdc;
+      color: white;
     }
   }
 
