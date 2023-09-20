@@ -3,9 +3,20 @@ import "./rightProfileCard.scss";
 // import LoopIcon from "../../../../Images/investorIcon/LoopIcon.svg";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { getInvestorById } from "../../../../Service/user";
 
 const RightProfileCard = ({noProfile}) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const [investor, setInvestor] = useState(null);
+  useEffect(() => {
+    if(loggedInUser?.investor) { 
+      getInvestorById(loggedInUser?.investor).then(({data}) => {
+        setInvestor(data);
+      });
+    }
+  }, [loggedInUser]);
+  
   return (
     <>
       <div className="col-12 view_profile_container">
@@ -23,7 +34,7 @@ const RightProfileCard = ({noProfile}) => {
               </h2>
               <span className="smallest_typo">{loggedInUser?.email}</span>
               <span className="smallest_typo">
-                {`${loggedInUser?.designation} at ${loggedInUser?.startUp?.company}`}
+                {`${loggedInUser?.designation} at ${loggedInUser?.startUp?.company || investor?.companyName}`}
               </span>
             </div>
             {!noProfile && <Link to="/profile" className="profile_btn mt-2">
