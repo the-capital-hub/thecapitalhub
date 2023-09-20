@@ -57,6 +57,7 @@ const ColorCard = ({
             <input
               type="text"
               className="edit_input"
+              id="edit"
               value={editedAmount}
               onChange={handleAmountChange}
               onBlur={handleBlur}
@@ -66,7 +67,12 @@ const ColorCard = ({
               className="rupee-sign"
               onClick={onAmountChange ? handleEditClick : () => {}}
             >
-              {!noRupee && "₹"} {editedAmount}
+              {!noRupee && "₹"} {editedAmount}{" "}
+              {
+                <label htmlFor="edit" className="edit-tip">
+                  Click to edit
+                </label>
+              }
             </span>
           )}
         </>

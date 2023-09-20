@@ -54,7 +54,7 @@ export default function MySchedule() {
       <section className="section__wrapper bg-white rounded-3 border mb-5 pb-5 d-flex flex-column gap-5">
         <div className="d-flex flex-column flex-lg-row gap-4 justify-content-between align-items-center border-bottom p-3">
           <ViewSelect handleViewSelect={handleViewSelect} />
-          <button className="btn-capital lh-1 py-0 py-md-2">
+          <button className="btn-capital lh-1 py-0 py-md-3">
             Create Meeting
           </button>
         </div>
@@ -67,12 +67,12 @@ export default function MySchedule() {
               setView={setView}
             />
           </div>
-          <div className="meetings__div p-3 border rounded-4 d-flex flex-column gap-4">
+          <div className="meetings__div p-3 border rounded-4 d-flex flex-column gap-3">
             {MEETINGTYPES.map((type, index) => {
               return (
                 <Meetings
                   key={type}
-                  type={type}
+                  meetingType={type}
                   meetingsData={EVENTS}
                   view={view}
                 />
