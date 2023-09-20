@@ -10,6 +10,8 @@ import RightProfileCard from "../../../components/Investor/InvestorGlobalCards/R
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
 import fisdomStartUpIcon from "../../../Images/Investor/Profile/fisdom_startup.png";
+import theCapitalHub from "../../../Images/Investor/Profile/thecapitalhub.svg";
+import bondLink from "../../../Images/Investor/Profile/bondlink.svg";
 import linkSectorIcon from "../../../Images/Investor/Profile/link_sector.png";
 import educationIcon from "../../../Images/Investor/Profile/iit_education.svg";
 import avgInvestmentIcon from "../../../Images/Investor/Profile/avg_investment.png";
@@ -23,6 +25,7 @@ import ModalBSContainer from "../../../components/PopUp/ModalBS/ModalBSContainer
 import ModalBSHeader from "../../../components/PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
 import ModalBSBody from "../../../components/PopUp/ModalBS/ModalBSBody/ModalBSBody";
 import ModalBSFooter from "../../../components/PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
+import InvestedCard from "../../../components/NewInvestor/ProfileComponents/InvestedCard";
 
 function Profile() {
   const [isBioEditable, setIsBioEditable] = useState(false);
@@ -53,6 +56,40 @@ function Profile() {
     recentExperience: [],
     recentEducation: [],
   };
+
+  // Mock data for Startups Invested in
+  const investedStartups = [
+    {
+      name: "The Capital Hub",
+      image: theCapitalHub,
+      id: 1,
+    },
+    {
+      name: "Fisdom",
+      image: fisdomStartUpIcon,
+      id: 2,
+    },
+    {
+      name: "Bondlink",
+      image: bondLink,
+      id: 3,
+    },
+    {
+      name: "The Capital Hub",
+      image: theCapitalHub,
+      id: 4,
+    },
+    {
+      name: "Fisdom",
+      image: fisdomStartUpIcon,
+      id: 5,
+    },
+    {
+      name: "Bondlink",
+      image: bondLink,
+      id: 6,
+    },
+  ];
 
   const [bioContent, setBioContent] = useState(loggedInUser?.bio || "");
   const [personalEditable, setPersonalEditable] = useState(false);
@@ -437,83 +474,32 @@ function Profile() {
         </div>
         {/* Loop cards here */}
         <div className="invested_cards hide_scrollbar">
-          <div className="invested_card border rounded shadow-sm">
-            <div className="card_title">
-              <img src={fisdomStartUpIcon} alt="startup icon" width={50} />
-              <h5>StartUp Name</h5>
-            </div>
-            <div className="p-2">
-              <p className="green_underline mb-1">Sector:</p>
-              <p className="mb-0">
-                One classical breakdown of economic activity distinguishes three
-                sectors: Primary: involves the retrieval and production of
-                raw-material commodities, such as corn, coal, wood or iron
-              </p>
-            </div>
-          </div>
-          <div className="invested_card border rounded shadow-sm">
-            <div className="card_title">
-              <img src={fisdomStartUpIcon} alt="startup icon" width={50} />
-              <h5>StartUp Name</h5>
-            </div>
-            <div className="p-2">
-              <p className="green_underline mb-1">Sector:</p>
-              <p className="mb-0">
-                One classical breakdown of economic activity distinguishes three
-                sectors: Primary: involves the retrieval and production of
-                raw-material commodities, such as corn, coal, wood or iron
-              </p>
-            </div>
-          </div>
-          <div className="invested_card border rounded shadow-sm">
-            <div className="card_title">
-              <img src={fisdomStartUpIcon} alt="startup icon" width={50} />
-              <h5>StartUp Name</h5>
-            </div>
-            <div className="p-2">
-              <p className="green_underline mb-1">Sector:</p>
-              <p className="mb-0">
-                One classical breakdown of economic activity distinguishes three
-                sectors: Primary: involves the retrieval and production of
-                raw-material commodities, such as corn, coal, wood or iron
-              </p>
-            </div>
-          </div>
-          <div className="invested_card border rounded shadow-sm">
-            <div className="card_title">
-              <img src={fisdomStartUpIcon} alt="startup icon" width={50} />
-              <h5>StartUp Name</h5>
-            </div>
-            <div className="p-2">
-              <p className="green_underline mb-1">Sector:</p>
-              <p className="mb-0">
-                One classical breakdown of economic activity distinguishes three
-                sectors: Primary: involves the retrieval and production of
-                raw-material commodities, such as corn, coal, wood or iron
-              </p>
-            </div>
-          </div>
-          <div className="invested_card border rounded shadow-sm">
-            <div className="card_title">
-              <img src={fisdomStartUpIcon} alt="startup icon" width={50} />
-              <h5>StartUp Name</h5>
-            </div>
-            <div className="p-2">
-              <p className="green_underline mb-1">Sector:</p>
-              <p className="mb-0">
-                One classical breakdown of economic activity distinguishes three
-                sectors: Primary: involves the retrieval and production of
-                raw-material commodities, such as corn, coal, wood or iron
-              </p>
-            </div>
-          </div>
+          {investedStartups.map((startUp, index) => {
+            return <InvestedCard startUp={startUp} key={startUp.id} />;
+          })}
         </div>
       </div>
       {/* Startups Modal */}
       <ModalBSContainer id="startupsModal">
         <ModalBSHeader title="Add/Edit Startups Invested" />
-        <ModalBSBody>Body</ModalBSBody>
-        <ModalBSFooter>Footer</ModalBSFooter>
+        <ModalBSBody>
+          <div className="d-flex flex-column gap-2">
+            {investedStartups.map((startUp, index) => {
+              return (
+                <div className="border p-1 d-flex justify-content-between align-items-center">
+                  <img
+                    src={startUp.image}
+                    alt={startUp.name}
+                    style={{ width: "50px" }}
+                  />
+                  <h5>{startUp.name}</h5>
+                  <button className="btn green_button">Remove</button>
+                </div>
+              );
+            })}
+          </div>
+        </ModalBSBody>
+        {/* <ModalBSFooter>Footer</ModalBSFooter> */}
       </ModalBSContainer>
 
       <div className="sector_interested shadow-sm">
