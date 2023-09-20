@@ -65,6 +65,7 @@ import SearchResults from "./pages/Investor/SearchResults/SearchResults";
 import Chats from "./pages/ChatPages/Chats/Chats";
 import MySchedule from "./pages/Investor/MySchedule/MySchedule";
 import WriteBlog from "./pages/StartUp/WriteBlog/WriteBlog";
+import BlogWrapper from "./components/Blog/BlogWrapper/BlogWrapper";
 
 function App() {
   return (
@@ -88,56 +89,6 @@ function App() {
                 <Navbar />
                 <NewPasswordPopUp />
                 {/* <Footer /> */}
-              </>
-            }
-          />
-          <Route
-            path="/blog"
-            element={
-              <>
-                <Navbar />
-                <Blog />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/blog/webdevlopment"
-            element={
-              <>
-                <Navbar />
-                <BlogDetailed />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/blog/startupOne"
-            element={
-              <>
-                <Navbar />
-                <StartUpBlogOne />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/blog/startupTwo"
-            element={
-              <>
-                <Navbar />
-                <StartUpBlogTwo />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/blog/startupThree"
-            element={
-              <>
-                <Navbar />
-                <StartUpBlogThree />
-                <Footer />
               </>
             }
           />
@@ -276,6 +227,15 @@ function App() {
 
           {/* Chat */}
           <Route path="/chats" element={<Chats />} />
+
+          {/* Blog */}
+          <Route path="/blog" element={<BlogWrapper />}>
+            <Route path="" element={<Blog />} />
+            <Route path="webdevlopment" element={<BlogDetailed />} />
+            <Route path="startupOne" element={<StartUpBlogOne />} />
+            <Route path="startupTwo" element={<StartUpBlogTwo />} />
+            <Route path="startupThree" element={<StartUpBlogThree />} />
+          </Route>
 
           {/* StartUp */}
           <Route element={<PrivateRoute />}>
