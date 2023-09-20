@@ -13,7 +13,10 @@ const messageSchema = new Schema(
     text: {
       type: String,
     },
-    documents: {
+    documentName: {
+      type: String,
+    },
+    documentUrl: {
       type: String,
     },
     image: {
