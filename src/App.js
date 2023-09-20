@@ -46,6 +46,8 @@ import BlogDetailed from "./components/Blog/BlogDetailed/BlogDetailed";
 import StartUpBlogOne from "./components/Blog/StartUpBlog/StartUpBlogOne";
 import StartUpBlogTwo from "./components/Blog/StartUpBlog/StartUpBlogTwo";
 import StartUpBlogThree from "./components/Blog/StartUpBlog/StartUpBlogThree";
+import StartUpBlogFour from "./components/Blog/StartUpBlog/StartUpBlogFour";
+import StartUpBlogFive from "./components/Blog/StartUpBlog/StartUpBlogFive";
 import NewPasswordPopUp from "./components/PopUp/NewPasswordPopUp/NewPasswordPopUp";
 import TermOfService from "./components/TermOfService/TermOfService";
 import Privacy from "./components/Privacy/Privacy";
@@ -287,6 +289,8 @@ function App() {
             <Route path="startupOne" element={<StartUpBlogOne />} />
             <Route path="startupTwo" element={<StartUpBlogTwo />} />
             <Route path="startupThree" element={<StartUpBlogThree />} />
+            <Route path="startupFour" element={<StartUpBlogFour />} />
+            <Route path="startupFive" element={<StartUpBlogFive />} />
           </Route>
         </Routes>
       </Router>
