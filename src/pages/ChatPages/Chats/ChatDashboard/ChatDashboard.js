@@ -7,13 +7,24 @@ import {
   getUserAndStartUpByUserIdAPI,
   addMessage,
   markMessagesAsRead,
+  getStartupByFounderId,
 } from "../../../../Service/user";
 import attachmentGreyIcon from "../../../../Images/Chat/attachtment-grey.svg";
 import attachmentOrangeIcon from "../../../../Images/Chat/attachment-orange.svg";
 import imageIcon from "../../../../Images/Chat/image.svg";
 import documentIcon from "../../../../Images/Chat/document.svg";
 import videoIcon from "../../../../Images/Chat/attachVideo.svg";
+import onelinkIcon from "../../../../Images/Chat/Onelink.svg";
 import { getBase64 } from "../../../../utils/getBase64";
+const AWS = require('aws-sdk');
+
+AWS.config.update({
+  accessKeyId: 'AKIA3ADZ252QBA67V4VO',
+  secretAccessKey: '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',
+  region: 'us-east-1',
+});
+
+const s3 = new AWS.S3();
 
 const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -55,6 +66,9 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
       .catch((error) => {
         console.error("Error-->", error);
       });
+  }, [chatId]);
+
+  useEffect(() => {
     getUserAndStartUpByUserIdAPI(userId)
       .then((res) => {
         setUser(res.data);
@@ -63,7 +77,8 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
       .catch((error) => {
         console.error("Error-->", error);
       });
-  }, [chatId, userId]);
+  }, [userId]);
+
 
   const groupMessagesByDate = (messages) => {
     const groupedMessages = [];
@@ -90,9 +105,8 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
         groupedMessages.push({ date: "Yesterday", messages: [message] });
       } else {
         currentDate = messageDate;
-        const formattedDate = `${messageDate.getDate()}-${
-          messageDate.getMonth() + 1
-        }-${messageDate.getFullYear()}`;
+        const formattedDate = `${messageDate.getDate()}-${messageDate.getMonth() + 1
+          }-${messageDate.getFullYear()}`;
         groupedMessages.push({
           date:
             today.getDate() === messageDate.getDate() ? "Today" : formattedDate,
@@ -107,20 +121,38 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
   const groupedMessages = groupMessagesByDate(messages);
 
   const handleSend = async () => {
-    if (sendText?.trim() === "") return;
-    const message = new FormData();
-
-    message.append("senderId", loggedInUser._id);
-    message.append("text", sendText);
-    message.append("chatId", chatId);
+    if (sendText?.trim() === "" && selectedImage === null && selectedVideo === null && selectedDocument === null) return;
+    const message = {
+      senderId: loggedInUser._id,
+      text: sendText,
+      chatId: chatId
+    };
 
     if (selectedImage) {
       const image = await getBase64(selectedImage);
-      message.append("image", image);
+      message.image = image;
     }
     if (selectedVideo) {
       const video = await getBase64(selectedVideo);
-      message.append("video", video);
+      message.video = video;
+    }
+    if (selectedDocument) {
+      console.log("doc");
+      const timestamp = Date.now();
+      const fileName = `${timestamp}_${selectedDocument.name}`;
+      const params = {
+        Bucket: 'capitalhub',
+        Key: `documents/${fileName}`,
+        Body: selectedDocument,
+      };
+      try {
+        const res = await s3.upload(params).promise();
+        message.documentName = selectedDocument.name;
+        message.documentUrl = res.Location;
+        console.log(res.Location);
+      } catch (error) {
+        console.error('Error uploading file to S3:', error);
+      }
     }
 
     addMessage(message)
@@ -135,6 +167,9 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
     const createdAt = new Date().toISOString();
     setSendMessage({ ...message, recieverId, createdAt });
     setSendText("");
+    setSelectedImage(null);
+    setSelectedVideo(null);
+    setSelectedDocument(null);
     setShowAttachDocs(false);
   };
 
@@ -152,6 +187,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
   const attachDocContainerRef = useRef();
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [selectedDocument, setSelectedDocument] = useState(null);
 
   useEffect(() => {
     const outsideClickHandler = (event) => {
@@ -177,10 +213,31 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
     } else if (event.target.name === "video" && file.type.includes("video")) {
       setSelectedVideo(file);
     } else if (event.target.name === "document") {
-      console.log("document");
-      // setSelectedDocument(file);
+      setSelectedDocument(file);
     }
+    setShowAttachDocs(false);
   };
+
+  const handleOnelinkClick = () => {
+    getStartupByFounderId(loggedInUser._id)
+      .then(({ data }) => {
+        setSendText(`thecapitalhub.in/onelink/${data.oneLink}`);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const removeSelectedImage = () => {
+    setSelectedImage(null);
+  };
+
+  const removeSelectedVideo = () => {
+    setSelectedVideo(null);
+  };
+
+  const removeSelectedDocument = () => {
+    setSelectedDocument(null);
+  };
+
 
   return (
     <div className="chat_dashboard_container">
@@ -208,22 +265,38 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
                           alt=""
                         />
                       </div>
-                      <div className="mymessage_container">{message?.text}</div>
+                      {message.text !== "" && (
+                        <div className="mymessage_container">
+                          <p>{message.text}</p>
+                        </div>
+                      )}
                       {message?.image && (
-                        <div className="message_container">
+                        <div className="mymessage_container">
                           <img
                             src={message.image}
-                            width={50}
+                            className="image-message"
                             alt="message image"
                           />
                         </div>
                       )}
                       {message?.video && (
-                        <div className="message_container">
-                          <video controls width={"100%"}>
+                        <div className="mymessage_container">
+                          <video controls className="video-message">
                             <source src={message?.video} type={"video/mp4"} />
                             Your browser does not support the video tag.
                           </video>
+                        </div>
+                      )}
+                      {message.documentUrl && (
+                        <div className="mymessage_container">
+                          <a href={message.documentUrl} target="_blank" rel="noopener noreferrer">
+                            <img
+                              className="p-1 rounded-circle"
+                              src={documentIcon}
+                              alt="upload document"
+                            />
+                            <p>{message.documentName}</p>
+                          </a>
                         </div>
                       )}
                     </div>
@@ -244,22 +317,38 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
                           {formatTime(new Date(message.createdAt))}
                         </h6>
                       </div>
-                      <div className="message_container">{message?.text}</div>
+                      {message.text !== "" && (
+                        <div className="message_container">
+                          <p>{message.text}</p>
+                        </div>
+                      )}
                       {message?.image && (
                         <div className="message_container">
                           <img
                             src={message.image}
-                            width={50}
+                            className="image-message"
                             alt="message image"
                           />
                         </div>
                       )}
                       {message?.video && (
                         <div className="message_container">
-                          <video controls width={"100%"}>
+                          <video controls className="video-message">
                             <source src={message?.video} type={"video/mp4"} />
                             Your browser does not support the video tag.
                           </video>
+                        </div>
+                      )}
+                      {message.documentUrl && (
+                        <div className="message_container">
+                          <a href={message.documentUrl} target="_blank" rel="noopener noreferrer">
+                            <img
+                              className="p-1 rounded-circle"
+                              src={documentIcon}
+                              alt="upload document"
+                            />
+                            <p>{message.documentName}</p>
+                          </a>
                         </div>
                       )}
                     </div>
@@ -272,6 +361,45 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
       </div>
       <section className="chat_input_section">
         <div className="chat_input_container">
+          {selectedImage && (
+            <div className="image-preview">
+              <img
+                src={URL.createObjectURL(selectedImage)}
+                alt="Selected Image"
+              />
+              <button
+                className="remove-preview"
+                onClick={removeSelectedImage}
+              >
+                X
+              </button>
+            </div>
+          )}
+          {selectedVideo && (
+            <div className="video-preview">
+              <video controls width={200}>
+                <source src={URL.createObjectURL(selectedVideo)} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <button
+                className="remove-preview"
+                onClick={removeSelectedVideo}
+              >
+                X
+              </button>
+            </div>
+          )}
+          {selectedDocument && (
+            <div className="document-preview">
+              <p>{selectedDocument.name}</p>
+              <button
+                className="remove-preview"
+                onClick={removeSelectedDocument}
+              >
+                X
+              </button>
+            </div>
+          )}
           <input
             type="text"
             name="introductoryMessage"
@@ -302,12 +430,21 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
               {showAttachDocs && (
                 <div className="attachment-options shadow-sm">
                   <div className="attachment-option">
-                    <img
-                      className="p-1 rounded-circle "
-                      src={documentIcon}
-                      alt="upload document"
+                    <label htmlFor="documentInput">
+                      <img
+                        className="p-1 rounded-circle"
+                        src={documentIcon}
+                        alt="upload document"
+                      />
+                      <p>Document</p>
+                    </label>
+                    <input
+                      type="file"
+                      id="documentInput"
+                      name="document"
+                      hidden
+                      onChange={handleFileChange}
                     />
-                    <p>Document</p>
                   </div>
                   <div className="attachment-option">
                     <label htmlFor="image">
@@ -345,6 +482,17 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
                       onChange={handleFileChange}
                     />
                   </div>
+                  <div className="attachment-option" onClick={handleOnelinkClick}>
+                    <label htmlFor="onelink">
+                      <img
+                        src={onelinkIcon}
+                        alt="One link"
+                        className="p-1 rounded-circle"
+                      />
+                      <p>One Link</p>
+                    </label>
+                  </div>
+
                 </div>
               )}
             </button>

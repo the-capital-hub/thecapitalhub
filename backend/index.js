@@ -101,11 +101,10 @@ io.on("connection", (socket) => {
   socket.on("send-message", (data) => {
     try {
       const { recieverId } = data;
-      console.log(activeUsers)
       const user = activeUsers.find((user) => user.userId === recieverId);
-      console.log("Active users: ", activeUsers);
-      console.log("Users: ", user);
-      console.log("Sending from socket to: ", recieverId);
+      // console.log("Active users: ", activeUsers);
+      // console.log("Users: ", user);
+      // console.log("Sending from socket to: ", recieverId);
       console.log("Data: ", data);
       if (user) io.to(user.socketId).emit("recieve-message", data);
     } catch (error) {

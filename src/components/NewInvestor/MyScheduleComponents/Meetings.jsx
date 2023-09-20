@@ -3,7 +3,7 @@ import { BiChevronDownCircle, BiChevronUpCircle } from "react-icons/bi";
 import "./Meetings.scss";
 import moment from "moment";
 
-export default function Meetings({ type, meetingsData, view }) {
+export default function Meetings({ meetingType, meetingsData, view }) {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleDetailClick() {
@@ -25,7 +25,7 @@ export default function Meetings({ type, meetingsData, view }) {
     return (
       <div className="d-flex justify-content-between align-items-center mb-2 ">
         <li
-          className={`text-capitalize w-75 fw-lighter  text-opacity-75 ${
+          className={`meeting__list__item text-capitalize fw-lighter text-opacity-75 ${
             isComplete ? "text-white-50 " : "text-white"
           } `}
         >
@@ -43,17 +43,14 @@ export default function Meetings({ type, meetingsData, view }) {
   };
 
   return (
-    <details
-      className="border bg-primary p-2 text-white fs-6 rounded-3 "
-      open={type.includes(view)}
-    >
+    <details className="border bg-primary p-2 text-white rounded-3 ">
       <summary
         className={`text-capitalize meeting__header p-1 d-flex justify-content-between align-items-center ${
           isOpen ? "border-bottom border-white" : ""
         } `}
         onClick={handleDetailClick}
       >
-        <p className="text-capitalize">{type} Meetings</p>
+        <p className="text-capitalize">{meetingType} Meetings</p>
         {isOpen ? (
           <BiChevronUpCircle style={{ fontSize: "1.25rem" }} />
         ) : (
@@ -61,7 +58,7 @@ export default function Meetings({ type, meetingsData, view }) {
         )}
       </summary>
       <ul className=" list-unstyled pt-2 px-1 ">
-        {type.includes(view) &&
+        {meetingType.includes(view) &&
           meetingsData.map((meeting, index) => {
             return (
               <MeetingItem

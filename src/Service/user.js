@@ -544,3 +544,22 @@ export const getUnreadMessageCount = async (chatId, userId) => {
     throw error;
   }
 };
+
+export const togglePinMessage = async (userId,chatId ) => {
+  try {
+    const response = await axiosInstance.patch(`${API.togglePinMessage}/${userId}/${chatId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error getting user message count:", error);
+    throw error;
+  }
+};
+export const getPinnedChat = async (userId ) => {
+  try {
+    const response = await axiosInstance.get(`${API.getPinnedChat}/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error getting user message count:", error);
+    throw error;
+  }
+};
