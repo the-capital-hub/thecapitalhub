@@ -13,7 +13,7 @@ export const createChat = async (senderId, recieverId) => {
         message: "Chat already exists",
       };
     }
-    
+
     const newChat = new ChatModel({
       members: [senderId, recieverId],
     });
@@ -124,7 +124,15 @@ export const togglePinChat = async (userId, chatId) => {
 // Get Pinned Chats
 export const getPinnedChats = async (userId) => {
   try {
-    const user = await UserModel.findById(userId).populate("pinnedChat");
+    const user = await UserModel.findById(userId)
+      .populate({
+        path: "pinnedChat",
+        populate: {
+          path: "members",
+          model: "Users"
+        }
+      });
+
     if (!user) {
       return {
         status: 404,

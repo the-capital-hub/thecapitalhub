@@ -1,3 +1,11 @@
+details summary {
+  transition: margin 0.15s ease-out;
+}
+
+details[open] summary {
+  margin-bottom: 10px;
+}
+
 .meeting__header {
   list-style-type: none;
 }
