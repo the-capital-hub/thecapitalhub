@@ -219,12 +219,12 @@ const ChatSidebar = ({
                 const messageTime = formatTimestamp(dates[chat._id]);
                 return (
                   <section
-                    className="user_chat mt-3"
+                    className="user_chat mt-3 "
                     key={member._id}
                     onClick={() => handleSelectedChat(chat._id, member._id)}
                   >
                     
-                    <div className="left ms-auto">
+                    <div className="left">
                       <img
                         src={member.profilePicture}
                         alt="Profile"
