@@ -30,6 +30,8 @@ import ModalBSBody from "../../../components/PopUp/ModalBS/ModalBSBody/ModalBSBo
 import ModalBSFooter from "../../../components/PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
 import InvestedCard from "../../../components/NewInvestor/ProfileComponents/InvestedCard";
 import SectorCard from "../../../components/NewInvestor/ProfileComponents/SectorCard";
+import StartupsModal from "../../../components/NewInvestor/ProfileComponents/StartupsModal";
+import { BsFillCloudUploadFill } from "react-icons/bs";
 
 function Profile() {
   const [isBioEditable, setIsBioEditable] = useState(false);
@@ -511,24 +513,7 @@ function Profile() {
       <ModalBSContainer id="startupsModal">
         <ModalBSHeader title="Add/Edit Startups Invested" />
         <ModalBSBody>
-          <div className="d-flex flex-column gap-3 p-3">
-            {investedStartups.map((startUp, index) => {
-              return (
-                <div
-                  className="border rounded-3 p-2 d-flex justify-content-between align-items-center"
-                  key={startUp.id}
-                >
-                  <img
-                    src={startUp.image}
-                    alt={startUp.name}
-                    style={{ width: "50px" }}
-                  />
-                  <h5 className="green_underline">{startUp.name}</h5>
-                  <button className="btn green_button">Remove</button>
-                </div>
-              );
-            })}
-          </div>
+          <StartupsModal investedStartups={investedStartups} />
         </ModalBSBody>
       </ModalBSContainer>
 
