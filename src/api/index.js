@@ -45,6 +45,9 @@ const API = Object.freeze({
   findChat: `${baseUrl}/chat/findChat`,
   markMessagesAsRead: `${baseUrl}/message/markMessagesAsRead`,
   getUnreadMessageCount: `${baseUrl}/message/getUnreadMessageCount`,
+  togglePinMessage: `${baseUrl}/chat/togglePin`,
+  getPinnedChat: `${baseUrl}/chat/getPinnedChat`,
+
 });
 
 export default API;
