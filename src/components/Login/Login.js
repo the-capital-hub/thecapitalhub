@@ -44,6 +44,7 @@ const Login = () => {
       const response = await postUserLogin(inputValues);
       console.log("response-->", response);
 
+      const user = response.user;
       const token = response.token;
       localStorage.setItem("accessToken", token);
       localStorage.setItem("isLoggedIn", "true");
@@ -53,7 +54,8 @@ const Login = () => {
 
         setTimeout(() => {
           setIsSubmitted(false);
-          navigate("/profile");
+          if(!user.investor) navigate("/profile");
+          else navigate("/investor");
         }, 2000);
 
         dispatch(loginSuccess(response.user));
