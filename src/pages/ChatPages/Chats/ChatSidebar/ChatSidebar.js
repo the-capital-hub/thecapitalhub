@@ -30,12 +30,17 @@ const ChatSidebar = ({
   const [unreadMessageCounts, setUnreadMessageCounts] = useState({});
   const [dates, setDates] = useState({});
   const [selectedUserChat, setSelectedUserChat] = useState(null);
+  const [pinnedChat, setPinnedChat] = useState(false);
 
 
 
   const handlePinClick=(chatId)=>{
     togglePinMessage(loggedInUser._id,chatId).then((res) => {
       console.log(res);
+      setPinnedChat(true)
+      setTimeout(() => {
+        setPinnedChat(false);
+      }, 1000);
     });
    
   }
@@ -56,7 +61,7 @@ const ChatSidebar = ({
       .catch((error) => {
         console.error("Error-->", error);
       });
-  }, [loggedInUser, sendMessage, recieveMessage, selectedUserChat]);
+  }, [loggedInUser, sendMessage, recieveMessage, selectedUserChat ,pinnedChat]);
 
   const handleSelectedChat = (chatId, userId) => {
     console.log(userId);
@@ -187,7 +192,7 @@ const ChatSidebar = ({
                       {messageTime !== "Invalid Date" && (
                         <div className="time">{messageTime}</div>
                       )}
-                       <img src={pinIcon} className="pt-1 px-1" onClick={() =>handlePinClick(chat._id)} alt="Pin" />
+                       <img src={pinIcon} className="pt-1 px-1 ms-auto" onClick={() =>handlePinClick(chat._id)} alt="Pin" />
                       {unreadMessageCount > 0 && (
                         <div className="notification">{unreadMessageCount}</div>
                       )}
@@ -219,7 +224,7 @@ const ChatSidebar = ({
                     onClick={() => handleSelectedChat(chat._id, member._id)}
                   >
                     
-                    <div className="left">
+                    <div className="left ms-auto">
                       <img
                         src={member.profilePicture}
                         alt="Profile"
@@ -238,7 +243,7 @@ const ChatSidebar = ({
                       {messageTime !== "Invalid Date" && (
                         <div className="time">{messageTime}</div>
                       )}
-                       <img src={pinIcon} className="pt-1 px-1" onClick={() =>handlePinClick(chat._id)} alt="Pin" />
+                       <img src={pinIcon} className="pt-1 px-1 " onClick={() =>handlePinClick(chat._id)} alt="Pin" />
                       {unreadMessageCount > 0 && (
                         <div className="notification">{unreadMessageCount}</div>
                       )}
