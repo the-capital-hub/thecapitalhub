@@ -76,6 +76,43 @@ const Blog = () => {
           <h1>Latest Blogs</h1>
           <section className="row justify-content-around">
             <LattestBlogCard
+              image="https://images.unsplash.com/photo-1556155092-490a1ba16284?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+              button={"Startup"}
+              date={"Sept 20 2023"}
+              title={"Meesho: Revolutionising E-Commerce for Entrepreneurs"}
+              onClick={() =>
+                handleCardClick(
+                  "/blog/meesho-revolutionising-e-commerce-for-entrepreneurs"
+                )
+              }
+            />
+            <LattestBlogCard
+              image="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1971&q=80"
+              button={"FoodTech"}
+              date={"Sept 20 2023"}
+              title={
+                "A Sustainable Alternative to Traditional Meat Products: GoodDot as an Example"
+              }
+              onClick={() =>
+                handleCardClick(
+                  "/blog/sustainable-alternative-to-traditional-meat-products-gooddot-as-example"
+                )
+              }
+            />
+            <LattestBlogCard
+              image="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80"
+              button={"HealthTech"}
+              date={"Sept 20 2023"}
+              title={
+                "Empowering Patient Care: Mykare Health's Innovative Approach to HealthTech"
+              }
+              onClick={() =>
+                handleCardClick(
+                  "/blog/empowering-patient-care-mykare-health-innovative-approach-to-healthtech"
+                )
+              }
+            />
+            <LattestBlogCard
               image={BlogoneImage}
               button={"Startup"}
               date={"May 1 2023"}
@@ -101,14 +138,7 @@ const Blog = () => {
               onClick={() => handleCardClick("/blog/startupThree")}
             />
 
-            {/* <LattestBlogCard
-              image={ImageBlog2}
-              button={"Startup"}
-              date={"May 1 2023"}
-              title={
-                "Why Mentoring Matters: Why Angel Investors Should Prioritize Mentorship Before Investing in a Startup"
-              }
-            />
+            {/* 
             <LattestBlogCard
               image={ImageBlog1}
               button={"Startup"}

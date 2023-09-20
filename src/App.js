@@ -67,6 +67,8 @@ import MySchedule from "./pages/Investor/MySchedule/MySchedule";
 import WriteBlog from "./pages/StartUp/WriteBlog/WriteBlog";
 import BlogWrapper from "./components/Blog/BlogWrapper/BlogWrapper";
 import MeeshoBlog from "./pages/Blogs/MeeshoBlog/MeeshoBlog";
+import GoodDotBlog from "./pages/Blogs/GoodDotBlog/GoodDotBlog";
+import MyKareBlog from "./pages/Blogs/MyKareBlog/MyKareBlog";
 
 function App() {
   return (
@@ -282,6 +284,14 @@ function App() {
             <Route
               path="meesho-revolutionising-e-commerce-for-entrepreneurs"
               element={<MeeshoBlog />}
+            />
+            <Route
+              path="sustainable-alternative-to-traditional-meat-products-gooddot-as-example"
+              element={<GoodDotBlog />}
+            />
+            <Route
+              path="empowering-patient-care-mykare-health-innovative-approach-to-healthtech"
+              element={<MyKareBlog />}
             />
             <Route path="webdevlopment" element={<BlogDetailed />} />
             <Route path="startupOne" element={<StartUpBlogOne />} />

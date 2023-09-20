@@ -8,14 +8,14 @@
     //   display: flex;
     //   justify-content: end;
     // }
-.blog_title{
-    color: #000;
-font-family: Poppins;
-font-size: 32px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
-}
+    .blog_title {
+      color: #000;
+      font-family: Poppins;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
     .search_bar {
       display: flex;
       align-items: center;
@@ -216,4 +216,16 @@ line-height: normal;
   }
 
   /* Additional styling as needed */
+}
+
+.blog-references {
+  // list-style: none;
+  a {
+    font-size: 14px;
+    color: grey;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
