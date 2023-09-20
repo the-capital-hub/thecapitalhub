@@ -13,6 +13,9 @@ import fisdomStartUpIcon from "../../../Images/Investor/Profile/fisdom_startup.p
 import theCapitalHub from "../../../Images/Investor/Profile/thecapitalhub.svg";
 import bondLink from "../../../Images/Investor/Profile/bondlink.svg";
 import linkSectorIcon from "../../../Images/Investor/Profile/link_sector.png";
+import Agritech from "../../../Images/Investor/Profile/Agritech.svg";
+import Finance from "../../../Images/Investor/Profile/Finance.svg";
+import Sunbank from "../../../Images/Investor/Profile/Sunbank.svg";
 import educationIcon from "../../../Images/Investor/Profile/iit_education.svg";
 import avgInvestmentIcon from "../../../Images/Investor/Profile/avg_investment.png";
 import noOfInvestmentIcon from "../../../Images/Investor/Profile/num_of_investments.svg";
@@ -27,8 +30,15 @@ import ModalBSBody from "../../../components/PopUp/ModalBS/ModalBSBody/ModalBSBo
 import ModalBSFooter from "../../../components/PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
 import InvestedCard from "../../../components/NewInvestor/ProfileComponents/InvestedCard";
 import { loginSuccess } from "../../../Store/Action/userAction";
-import { getInvestorById, updateUserAPI, postInvestorData } from "../../../Service/user";
+import {
+  getInvestorById,
+  updateUserAPI,
+  postInvestorData,
+} from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
+import SectorCard from "../../../components/NewInvestor/ProfileComponents/SectorCard";
+import StartupsModal from "../../../components/NewInvestor/ProfileComponents/StartupsModal";
+import { BsFillCloudUploadFill } from "react-icons/bs";
 
 function Profile() {
   const [isBioEditable, setIsBioEditable] = useState(false);
@@ -37,7 +47,7 @@ function Profile() {
   const [companyName, setCompanyName] = useState("");
   const [editCompanyName, setEditCompanyName] = useState({
     founderId: loggedInUser._id,
-    companyName: companyName
+    companyName: companyName,
   });
   // const loggedInUser = {
   //   _id: "64e9fd9d4e368da2bf3e721f",
@@ -100,6 +110,30 @@ function Profile() {
     },
   ];
 
+  // Mock data for Sectors Interested
+  const sectorsData = [
+    {
+      id: 1,
+      label: "Link Sector",
+      image: linkSectorIcon,
+    },
+    {
+      id: 2,
+      label: "Agritech",
+      image: Agritech,
+    },
+    {
+      id: 3,
+      label: "Finance",
+      image: Finance,
+    },
+    {
+      id: 4,
+      label: "Sunbank",
+      image: Sunbank,
+    },
+  ];
+
   const [bioContent, setBioContent] = useState(loggedInUser?.bio || "");
   const [personalEditable, setPersonalEditable] = useState(false);
 
@@ -111,9 +145,9 @@ function Profile() {
   });
 
   useEffect(() => {
-    getInvestorById(loggedInUser?.investor).then(({data}) => {
+    getInvestorById(loggedInUser?.investor).then(({ data }) => {
       setInvestor(data);
-      setCompanyName(data.companyName)
+      setCompanyName(data.companyName);
     });
   }, [loggedInUser]);
 
@@ -148,7 +182,7 @@ function Profile() {
       ...editCompanyName,
       companyName: value,
     });
-  }
+  };
 
   const personalChangeHandler = (e) => {
     if (e.target.name === "profilePicture") {
@@ -201,7 +235,8 @@ function Profile() {
         />
       );
     }
-    if (fieldName === "company") return <span className="small_typo">{companyName}</span>;
+    if (fieldName === "company")
+      return <span className="small_typo">{companyName}</span>;
     return <span className="small_typo">{loggedInUser[fieldName]}</span>;
   };
 
@@ -488,8 +523,8 @@ function Profile() {
       </div>
 
       {/* Startups Invested In */}
-      <div className="startups_invested shadow-sm ">
-        <div className="header">
+      <div className="startups_invested shadow-sm mt-4">
+        <div className="header border-bottom p-4 ">
           <h2 className="green_underline typography">Startups Invested</h2>
           <div className="green_button">
             <Link to={""}>
@@ -498,7 +533,7 @@ function Profile() {
           </div>
         </div>
         {/* Loop cards here */}
-        <div className="invested_cards hide_scrollbar">
+        <div className="invested_cards hide_scrollbar px-3 py-4">
           {investedStartups.map((startUp, index) => {
             return <InvestedCard startUp={startUp} key={startUp.id} />;
           })}
@@ -508,106 +543,52 @@ function Profile() {
       <ModalBSContainer id="startupsModal">
         <ModalBSHeader title="Add/Edit Startups Invested" />
         <ModalBSBody>
-          <div className="d-flex flex-column gap-2">
-            {investedStartups.map((startUp, index) => {
+          <StartupsModal investedStartups={investedStartups} />
+        </ModalBSBody>
+      </ModalBSContainer>
+
+      {/* Sectores Interested */}
+      <div className="sector_interested shadow-sm">
+        <div className="header border-bottom p-4">
+          <h2 className="green_underline typography">Sectors Interested</h2>
+          <div className="green_button">
+            <Link to={""}>
+              <ModalBsLauncher id="sectorsModal">Add New</ModalBsLauncher>
+            </Link>
+          </div>
+        </div>
+        {/* Loop cards from here onwards */}
+        <div className="interested_cards hide_scrollbar px-3 py-5 ">
+          {sectorsData.map((sector, index) => {
+            return <SectorCard key={sector.id} sector={sector} />;
+          })}
+        </div>
+      </div>
+      {/* Sectors Modal */}
+      <ModalBSContainer id="sectorsModal">
+        <ModalBSHeader title={"Add/Edit Sectors interested"} />
+        <ModalBSBody>
+          <div className="d-flex flex-column gap-3 p-3">
+            {sectorsData.map((sector, index) => {
               return (
-                <div className="border p-1 d-flex justify-content-between align-items-center">
+                <div
+                  className="border rounded-3 p-2 d-flex justify-content-between align-items-center"
+                  key={sector.id}
+                >
                   <img
-                    src={startUp.image}
-                    alt={startUp.name}
+                    src={sector.image}
+                    alt={sector.label}
                     style={{ width: "50px" }}
                   />
-                  <h5>{startUp.name}</h5>
+                  <h5>{sector.label}</h5>
                   <button className="btn green_button">Remove</button>
                 </div>
               );
             })}
           </div>
         </ModalBSBody>
-        {/* <ModalBSFooter>Footer</ModalBSFooter> */}
       </ModalBSContainer>
 
-      <div className="sector_interested shadow-sm">
-        <div className="header">
-          <h2 className="green_underline typography">Sectors Interested</h2>
-          <div className="green_button">
-            <Link to={""}>Add New</Link>
-          </div>
-        </div>
-        {/* Loop cards from here onwards */}
-        <div className="interested_cards hide_scrollbar">
-          <div className="interested_card border rounded shadow-sm">
-            <img
-              className="rounded-circle border"
-              src={linkSectorIcon}
-              alt="sector image"
-              width={50}
-              height={50}
-            />
-            <h6>Link Sector</h6>
-          </div>
-          <div className="interested_card border rounded shadow-sm">
-            <img
-              className="rounded-circle border"
-              src={linkSectorIcon}
-              alt="sector image"
-              width={50}
-              height={50}
-            />
-            <h6>Link Sector</h6>
-          </div>
-          <div className="interested_card border rounded shadow-sm">
-            <img
-              className="rounded-circle border"
-              src={linkSectorIcon}
-              alt="sector image"
-              width={50}
-              height={50}
-            />
-            <h6>Link Sector</h6>
-          </div>
-          <div className="interested_card border rounded shadow-sm">
-            <img
-              className="rounded-circle border"
-              src={linkSectorIcon}
-              alt="sector image"
-              width={50}
-              height={50}
-            />
-            <h6>Link Sector</h6>
-          </div>
-          <div className="interested_card border rounded shadow-sm">
-            <img
-              className="rounded-circle border"
-              src={linkSectorIcon}
-              alt="sector image"
-              width={50}
-              height={50}
-            />
-            <h6>Link Sector</h6>
-          </div>
-          <div className="interested_card border rounded shadow-sm">
-            <img
-              className="rounded-circle border"
-              src={linkSectorIcon}
-              alt="sector image"
-              width={50}
-              height={50}
-            />
-            <h6>Link Sector</h6>
-          </div>
-          <div className="interested_card border rounded shadow-sm">
-            <img
-              className="rounded-circle border"
-              src={linkSectorIcon}
-              alt="sector image"
-              width={50}
-              height={50}
-            />
-            <h6>Link Sector</h6>
-          </div>
-        </div>
-      </div>
       <section className="investment_philosophy shadow-sm">
         <h2 className="green_underline typography">Investment Philosophy</h2>
         <div className="d-flex flex-column flex-md-row gap-2 w-100 px-4 py-2">

@@ -11,7 +11,7 @@ function ModalBSContainer({ id, label, children, showModal }) {
       tabindex="-1"
       aria-labelledby={label || "modalLabel"}
     >
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl ">
         <div class="modal-content">{children}</div>
       </div>
     </div>
