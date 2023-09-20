@@ -14,17 +14,21 @@ const investorSchema = new Schema(
     description: {
       type: String,
     },
+    location: {
+      type: String,
+      required: true,
+    },
     industry: {
       type: String,
       required: true,
     },
     maximumInvest: {
       type: Number,
-      required: true,
+      // required: true,
     },
     minimumInvest: {
       type: Number,
-      required: true,
+      // required: true,
     },
     portfolio: {
       type: String,

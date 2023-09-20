@@ -545,21 +545,42 @@ export const getUnreadMessageCount = async (chatId, userId) => {
   }
 };
 
-export const togglePinMessage = async (userId,chatId ) => {
+export const togglePinMessage = async (userId, chatId) => {
   try {
     const response = await axiosInstance.patch(`${API.togglePinMessage}/${userId}/${chatId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error while toogle pin chat:", error);
+    throw error;
+  }
+};
+
+export const getPinnedChat = async (userId) => {
+  try {
+    const response = await axiosInstance.get(`${API.getPinnedChat}/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error getting pinned chat:", error);
+    throw error;
+  }
+};
+
+export const getInvestorById = async (investorId) => {
+  try {
+    const response = await axiosInstance.get(`${API.getInvestorById}/${investorId}`);
     return response.data;
   } catch (error) {
     console.error("Error getting user message count:", error);
     throw error;
   }
 };
-export const getPinnedChat = async (userId ) => {
+
+export const postInvestorData = async (investorData) => {
   try {
-    const response = await axiosInstance.get(`${API.getPinnedChat}/${userId}`);
+    const response = await axiosInstance.post(`${API.postInvestorData}`, investorData);
     return response.data;
   } catch (error) {
-    console.error("Error getting user message count:", error);
+    console.error("Error posting investor data:", error);
     throw error;
   }
 };

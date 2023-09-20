@@ -46,18 +46,20 @@ const InvestorHome = () => {
   };
 
   useEffect(() => {
-    getStartupByFounderId(loggedInUser._id).then(({ data }) => {
-      setCompanyName(data.company);
-      // console.log("ssss__>", data.colorCard.last_round_investment);
-      setColorCardData({
-        last_round_investment: data.colorCard.last_round_investment,
-        total_investment: data.colorCard.total_investment,
-        no_of_investers: data.colorCard.no_of_investers,
-        fund_ask: data.colorCard.fund_ask,
-        valuation: data.colorCard.valuation,
-        raised_funds: data.colorCard.raised_funds,
+    if (!loggedInUser?.investor) {
+      getStartupByFounderId(loggedInUser._id).then(({ data }) => {
+        setCompanyName(data?.company);
+        // console.log("ssss__>", data.colorCard.last_round_investment);
+        setColorCardData({
+          last_round_investment: data.colorCard.last_round_investment,
+          total_investment: data.colorCard.total_investment,
+          no_of_investers: data.colorCard.no_of_investers,
+          fund_ask: data.colorCard.fund_ask,
+          valuation: data.colorCard.valuation,
+          raised_funds: data.colorCard.raised_funds,
+        });
       });
-    });
+    }
   }, []);
 
   const [editCompanyName, setEditCompanyName] = useState({
@@ -112,7 +114,6 @@ const InvestorHome = () => {
       ...editCompanyName,
       [name]: value,
     });
-    console.log("Hello",editCompanyName);
   }
 
   const renderEditableField = (fieldName) => {
