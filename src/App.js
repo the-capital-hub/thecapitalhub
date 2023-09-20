@@ -46,6 +46,8 @@ import BlogDetailed from "./components/Blog/BlogDetailed/BlogDetailed";
 import StartUpBlogOne from "./components/Blog/StartUpBlog/StartUpBlogOne";
 import StartUpBlogTwo from "./components/Blog/StartUpBlog/StartUpBlogTwo";
 import StartUpBlogThree from "./components/Blog/StartUpBlog/StartUpBlogThree";
+import StartUpBlogFour from "./components/Blog/StartUpBlog/StartUpBlogFour";
+import StartUpBlogFive from "./components/Blog/StartUpBlog/StartUpBlogFive";
 import NewPasswordPopUp from "./components/PopUp/NewPasswordPopUp/NewPasswordPopUp";
 import TermOfService from "./components/TermOfService/TermOfService";
 import Privacy from "./components/Privacy/Privacy";
@@ -65,6 +67,10 @@ import SearchResults from "./pages/Investor/SearchResults/SearchResults";
 import Chats from "./pages/ChatPages/Chats/Chats";
 import MySchedule from "./pages/Investor/MySchedule/MySchedule";
 import WriteBlog from "./pages/StartUp/WriteBlog/WriteBlog";
+import BlogWrapper from "./components/Blog/BlogWrapper/BlogWrapper";
+import MeeshoBlog from "./pages/Blogs/MeeshoBlog/MeeshoBlog";
+import GoodDotBlog from "./pages/Blogs/GoodDotBlog/GoodDotBlog";
+import MyKareBlog from "./pages/Blogs/MyKareBlog/MyKareBlog";
 
 function App() {
   return (
@@ -88,56 +94,6 @@ function App() {
                 <Navbar />
                 <NewPasswordPopUp />
                 {/* <Footer /> */}
-              </>
-            }
-          />
-          <Route
-            path="/blog"
-            element={
-              <>
-                <Navbar />
-                <Blog />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/blog/webdevlopment"
-            element={
-              <>
-                <Navbar />
-                <BlogDetailed />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/blog/startupOne"
-            element={
-              <>
-                <Navbar />
-                <StartUpBlogOne />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/blog/startupTwo"
-            element={
-              <>
-                <Navbar />
-                <StartUpBlogTwo />
-                <Footer />
-              </>
-            }
-          />
-          <Route
-            path="/blog/startupThree"
-            element={
-              <>
-                <Navbar />
-                <StartUpBlogThree />
-                <Footer />
               </>
             }
           />
@@ -300,6 +256,7 @@ function App() {
             <Route path="/messages" element={<Messages />} />
             <Route path="/notifications" element={<Notifications />} />
           </Route>
+
           {/* OneLink */}
           <Route path="/onelink/:username" element={<ValidateOneLink />}>
             <Route path="" element={<Company />} />
@@ -310,6 +267,7 @@ function App() {
             <Route path="documentation/:route" element={<FolderContents />} />
             {/* <Route path="investNow" element={<DocumentationIV />} /> */}
           </Route>
+
           {/* Investor */}
           <Route path="/investor" element={<ProtectedInvestorRoutes />}>
             <Route path="" element={<Navigate to="profile" replace />} />
@@ -320,6 +278,29 @@ function App() {
             <Route path="live-deals" element={<LiveDeals />} />
             <Route path="search-results" element={<SearchResults />} />
             <Route path="my-schedule" element={<MySchedule />} />
+          </Route>
+
+          {/* Blogs */}
+          <Route path="/blog" element={<BlogWrapper />}>
+            <Route path="" element={<Blog />} />
+            <Route
+              path="meesho-revolutionising-e-commerce-for-entrepreneurs"
+              element={<MeeshoBlog />}
+            />
+            <Route
+              path="sustainable-alternative-to-traditional-meat-products-gooddot-as-example"
+              element={<GoodDotBlog />}
+            />
+            <Route
+              path="empowering-patient-care-mykare-health-innovative-approach-to-healthtech"
+              element={<MyKareBlog />}
+            />
+            <Route path="webdevlopment" element={<BlogDetailed />} />
+            <Route path="startupOne" element={<StartUpBlogOne />} />
+            <Route path="startupTwo" element={<StartUpBlogTwo />} />
+            <Route path="startupThree" element={<StartUpBlogThree />} />
+            <Route path="telemedicine-health-revolution-at-your-fingertips-medtel-health-care-company-leading-the-way" element={<StartUpBlogFour />} />
+            <Route path="how-zomato-is-revolutionising-the-food-supply-chain-through-food-technology" element={<StartUpBlogFive />} />
           </Route>
         </Routes>
       </Router>

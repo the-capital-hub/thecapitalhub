@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./InvestorForm.scss";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import AfterRegisterPopUp from "../../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import { postInvestorData } from "../../../Service/user";
 
 const InvestorForm = ({ onStartupClick }) => {
+  const navigate = useNavigate();
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
-    company: "",
+    companyName: "",
     designation: "",
     gender: "",
     education: "",
@@ -21,11 +26,32 @@ const InvestorForm = ({ onStartupClick }) => {
     }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // You can call your onStartupClick or other logic here with formData
-    console.log(formData);
+  const handleBack = () => {
+    navigate("/");
   };
+
+  const handleClosePopup = () => {
+    setIsSubmitted(true);
+    navigate("/login");
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const { _id } = JSON.parse(localStorage.getItem("user_data"));
+      const response = await postInvestorData({ ...formData, founderId: _id });
+      console.log("Investor data posted successfully:", response);
+      if (response) {
+        setIsSubmitted(true);
+      }
+      localStorage.removeItem("user_data");
+    } catch (error) {
+      console.error("Error posting user data:", error);
+    }
+  };
+
+
+  
 
   return (
     <>
@@ -33,9 +59,9 @@ const InvestorForm = ({ onStartupClick }) => {
         <div className="popup-container">
           <div className="popup">
             <div className="back_and_home">
-              <Link to={"/signup"}>
-                <img src="back" alt="back" />
-              </Link>
+            <a href="/signup" onClick={handleBack}>
+                <span>← Back</span>
+              </a>
               <a href="/signup">Home</a>
             </div>
             <div className="title_text">
@@ -52,9 +78,9 @@ const InvestorForm = ({ onStartupClick }) => {
                     <label htmlFor="company">Company:</label>
                     <input
                       type="text"
-                      id="company"
-                      name="company"
-                      value={formData.company}
+                      id="companyName"
+                      name="companyName"
+                      value={formData.companyName}
                       onChange={handleInputChange}
                     />
                   </div>
@@ -160,6 +186,9 @@ const InvestorForm = ({ onStartupClick }) => {
           </div>
         </div>
       </div>
+      {isSubmitted && (
+        <AfterRegisterPopUp onClose={handleClosePopup} register={true} />
+      )}
     </>
   );
 };
