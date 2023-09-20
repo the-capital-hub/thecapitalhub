@@ -18,6 +18,11 @@ import ticketSizeIcon from "../../../Images/Investor/Profile/ticket_size.svg";
 import seedRoundIcon from "../../../Images/Investor/Profile/seed_round.svg";
 import totalInvestmentIcon from "../../../Images/Investor/Profile/total_investment.png";
 import InvestmentDetailCard from "../../../components/NewInvestor/InvestmentDetailCard/InvestmentDetailCard";
+import ModalBsLauncher from "../../../components/PopUp/ModalBS/ModalBsLauncher/ModalBsLauncher";
+import ModalBSContainer from "../../../components/PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
+import ModalBSHeader from "../../../components/PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
+import ModalBSBody from "../../../components/PopUp/ModalBS/ModalBSBody/ModalBSBody";
+import ModalBSFooter from "../../../components/PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
 
 function Profile() {
   const [isBioEditable, setIsBioEditable] = useState(false);
@@ -419,11 +424,15 @@ function Profile() {
           </div>
         </div>
       </div>
+
+      {/* Startups Invested In */}
       <div className="startups_invested shadow-sm ">
         <div className="header">
           <h2 className="green_underline typography">Startups Invested</h2>
           <div className="green_button">
-            <Link to={""}>Add New</Link>
+            <Link to={""}>
+              <ModalBsLauncher id="startupsModal">Add New</ModalBsLauncher>
+            </Link>
           </div>
         </div>
         {/* Loop cards here */}
@@ -500,6 +509,13 @@ function Profile() {
           </div>
         </div>
       </div>
+      {/* Startups Modal */}
+      <ModalBSContainer id="startupsModal">
+        <ModalBSHeader title="Add/Edit Startups Invested" />
+        <ModalBSBody>Body</ModalBSBody>
+        <ModalBSFooter>Footer</ModalBSFooter>
+      </ModalBSContainer>
+
       <div className="sector_interested shadow-sm">
         <div className="header">
           <h2 className="green_underline typography">Sectors Interested</h2>
