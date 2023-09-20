@@ -92,25 +92,28 @@ export const findChat = async (firstId, secondId) => {
 // Pin or Unpin a Chat
 export const togglePinChat = async (userId, chatId) => {
   try {
-    const user = await UserModel.findById(userId);
-    if (!user) {
+    const userDetails = await UserModel.findById(userId).exec();
+    if (!userDetails) {
       return {
         status: 404,
         message: "User not found",
       };
     }
-    const pinnedChatIds = user.pinnedChat;
-    if (pinnedChatIds.includes(chatId)) {
-      user.pinnedChat = pinnedChatIds.filter((id) => id !== chatId);
-    } else {
-      user.pinnedChat = [...pinnedChatIds, chatId];
-    }
-
-    await user.save();
+    const pinnedChatIds = userDetails.pinnedChat;
+    const isChatPinned = pinnedChatIds.includes(chatId);
+    const update = isChatPinned
+      ? { $pull: { pinnedChat: chatId } }
+      : { $push: { pinnedChat: chatId } };
+    const user = await UserModel.findByIdAndUpdate(
+      userId,
+      update,
+      { new: true }
+    );
 
     return {
       status: 200,
       message: "Chat pinned/unpinned successfully",
+      data: user,
     };
   } catch (error) {
     console.error(error);
