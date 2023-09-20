@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./ChatSearch.scss";
 import backIcon from "../../../../Images/Chat/BackIcon.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { getSearchResultsAPI } from "../../../../Service/user";
 
 const ChatSearch = () => {
@@ -45,9 +44,9 @@ const ChatSearch = () => {
     <>
       <div className="chat_search_container">
         <span>
-          <Link to={`/profile`}>
-            <img src={backIcon} className="back_img" />
-          </Link>
+          {/* <Link to={`/profile`}> */}
+            <img src={backIcon} className="back_img" onClick={() => navigate(-1)}/>
+          {/* </Link> */}
         </span>
         <h1 className="chat_title">Chats</h1>
         <div className="inputs">

@@ -75,10 +75,10 @@ const Register = () => {
       console.log("User data posted successfully:", response);
       localStorage.setItem("user_data", JSON.stringify(response.data));
 
-      setIsSubmitted(true);
-      // if (response) {
-      //   setShowSelectWhatYouAre(true);
-      // }
+      // setIsSubmitted(true);
+      if (response) {
+        setShowSelectWhatYouAre(true);
+      }
     } catch (error) {
       console.error("Error posting user data:", error.response.data.message);
       setErrorMessage(error.response.data.message);

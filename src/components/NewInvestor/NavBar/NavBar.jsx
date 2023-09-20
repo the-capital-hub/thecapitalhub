@@ -67,11 +67,13 @@ const NavBar = (props) => {
                   <img src={NotificationIcon} alt="notification" />
                 </span>
               </div>
+              <Link to="/chats" className="rounded-circle message-icon">
               <div className="icon-wrapper">
                 <span className="message-icon">
                   <img src={MessageIcon} alt="message" />
                 </span>
               </div>
+              </Link>
               {/* <div className="icon-wrapper d-none d-md-block"> */}
               <div className="icon-wrapper">
                 <Link to={"/manage-account"}>

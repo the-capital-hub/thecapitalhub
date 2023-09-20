@@ -26,36 +26,45 @@ import ModalBSHeader from "../../../components/PopUp/ModalBS/ModalBSHeader/Modal
 import ModalBSBody from "../../../components/PopUp/ModalBS/ModalBSBody/ModalBSBody";
 import ModalBSFooter from "../../../components/PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
 import InvestedCard from "../../../components/NewInvestor/ProfileComponents/InvestedCard";
+import { loginSuccess } from "../../../Store/Action/userAction";
+import { getInvestorById, updateUserAPI, postInvestorData } from "../../../Service/user";
+import { getBase64 } from "../../../utils/getBase64";
 
 function Profile() {
   const [isBioEditable, setIsBioEditable] = useState(false);
-  // const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const loggedInUser = {
-    _id: "64e9fd9d4e368da2bf3e721f",
-    firstName: "Pramod",
-    lastName: "Badiger",
-    phoneNumber: "+919998887770",
-    email: "pramod@gmail.com",
-    profilePicture:
-      "https://res.cloudinary.com/drjt9guif/image/upload/c_scale,q_100,w_265/v1692955323/TheCapitalHub/users/profilePictures/wprwfl9rsdkyfptag0hw.webp",
-    connections: [
-      "64e87dcae2108d5c01ebb619",
-      "64e7327ed2133164ba157af3",
-      "64e87dcae2108d5c01ebb619",
-      "64e87dcae2108d5c01ebb619",
-    ],
-    userStatus: "active",
-    savedPosts: [],
-    createdAt: "2023-08-26T13:26:53.761Z",
-    updatedAt: "2023-09-03T14:31:02.721Z",
-    __v: 0,
-    designation: "Founder",
-    education: "Graduate, University of Northampton",
-    experience: "5+ Years building various startups & Growth $10M+",
-    bio: "I am the founder and CEO of The Capital Hub. Welcome! Hi",
-    recentExperience: [],
-    recentEducation: [],
-  };
+  const [investor, setInvestor] = useState(null);
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const [companyName, setCompanyName] = useState("");
+  const [editCompanyName, setEditCompanyName] = useState({
+    founderId: loggedInUser._id,
+    companyName: companyName
+  });
+  // const loggedInUser = {
+  //   _id: "64e9fd9d4e368da2bf3e721f",
+  //   firstName: "Pramod",
+  //   lastName: "Badiger",
+  //   phoneNumber: "+919998887770",
+  //   email: "pramod@gmail.com",
+  //   profilePicture:
+  //     "https://res.cloudinary.com/drjt9guif/image/upload/c_scale,q_100,w_265/v1692955323/TheCapitalHub/users/profilePictures/wprwfl9rsdkyfptag0hw.webp",
+  //   connections: [
+  //     "64e87dcae2108d5c01ebb619",
+  //     "64e7327ed2133164ba157af3",
+  //     "64e87dcae2108d5c01ebb619",
+  //     "64e87dcae2108d5c01ebb619",
+  //   ],
+  //   userStatus: "active",
+  //   savedPosts: [],
+  //   createdAt: "2023-08-26T13:26:53.761Z",
+  //   updatedAt: "2023-09-03T14:31:02.721Z",
+  //   __v: 0,
+  //   designation: "Founder",
+  //   education: "Graduate, University of Northampton",
+  //   experience: "5+ Years building various startups & Growth $10M+",
+  //   bio: "I am the founder and CEO of The Capital Hub. Welcome! Hi",
+  //   recentExperience: [],
+  //   recentEducation: [],
+  // };
 
   // Mock data for Startups Invested in
   const investedStartups = [
@@ -101,19 +110,12 @@ function Profile() {
     profilePicture: loggedInUser.profilePicture || "",
   });
 
-  // useEffect(() => {
-  //   getStartupByFounderId(loggedInUser._id).then(({ data }) => {
-  //     console.log("ssss__>", data.colorCard.last_round_investment);
-  //     setColorCardData({
-  //       last_round_investment: data.colorCard.last_round_investment,
-  //       total_investment: data.colorCard.total_investment,
-  //       no_of_investers: data.colorCard.no_of_investers,
-  //       fund_ask: data.colorCard.fund_ask,
-  //       valuation: data.colorCard.valuation,
-  //       raised_funds: data.colorCard.raised_funds,
-  //     });
-  //   });
-  // }, []);
+  useEffect(() => {
+    getInvestorById(loggedInUser?.investor).then(({data}) => {
+      setInvestor(data);
+      setCompanyName(data.companyName)
+    });
+  }, [loggedInUser]);
 
   const dispatch = useDispatch();
 
@@ -124,19 +126,29 @@ function Profile() {
   const submitPersonalHandler = async () => {
     try {
       const { profilePicture, ...newPersonalData } = personalData;
-      // if (typeof profilePicture === "object") {
-      //   const image = await getBase64(profilePicture);
-      //   newPersonalData.profilePicture = image;
-      // }
-      // const {
-      //   data: { data },
-      // } = await updateUserAPI(newPersonalData);
-      // dispatch(loginSuccess(data));
-      // setPersonalEditable(!personalEditable);
+      if (typeof profilePicture === "object") {
+        const image = await getBase64(profilePicture);
+        newPersonalData.profilePicture = image;
+      }
+      const {
+        data: { data },
+      } = await updateUserAPI(newPersonalData);
+      dispatch(loginSuccess(data));
+      const response = await postInvestorData(editCompanyName);
+      setCompanyName(editCompanyName.company);
+      setPersonalEditable(!personalEditable);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const companyNameHandler = (e) => {
+    const { name, value } = e.target;
+    setEditCompanyName({
+      ...editCompanyName,
+      companyName: value,
+    });
+  }
 
   const personalChangeHandler = (e) => {
     if (e.target.name === "profilePicture") {
@@ -168,6 +180,17 @@ function Profile() {
           />
         );
       }
+      if (fieldName === "company") {
+        return (
+          <input
+            type="text"
+            className="w-100"
+            name={fieldName}
+            value={editCompanyName.fieldName}
+            onChange={companyNameHandler}
+          />
+        );
+      }
       return (
         <input
           type="text"
@@ -178,15 +201,16 @@ function Profile() {
         />
       );
     }
+    if (fieldName === "company") return <span className="small_typo">{companyName}</span>;
     return <span className="small_typo">{loggedInUser[fieldName]}</span>;
   };
 
   const submitBioHandler = async () => {
-    // const {
-    //   data: { data },
-    // } = await updateUserAPI({ bio: bioContent });
-    // dispatch(loginSuccess(data));
-    // setIsBioEditable(!isBioEditable);
+    const {
+      data: { data },
+    } = await updateUserAPI({ bio: bioContent });
+    dispatch(loginSuccess(data));
+    setIsBioEditable(!isBioEditable);
   };
 
   useEffect(() => {
@@ -265,7 +289,8 @@ function Profile() {
                               className="small_typo"
                               style={{ marginBottom: "1rem" }}
                             >
-                              {loggedInUser?.startUp?.company || "No StartUp"}
+                              {/* {investor?.companyName || "No StartUp"} */}
+                              {renderEditableField("company")}
                             </td>
                           </tr>
                           <tr>
