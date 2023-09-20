@@ -22,6 +22,7 @@ const ChatSidebar = ({
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [chats, setChats] = useState([]);
+  const [pinnedChats, setPinnedChats] = useState([]);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const chatUserId = queryParams.get("userId");
@@ -40,7 +41,8 @@ const ChatSidebar = ({
   }
   useEffect(() => {
      getPinnedChat(loggedInUser._id).then((res) => {
-        console.log(res);
+        console.log(res.data);
+        setPinnedChats(res.data)
       });
     getUserChats(loggedInUser._id)
       .then((res) => {
@@ -124,8 +126,8 @@ const ChatSidebar = ({
         <span style={{ margin: "5px 10px" }}>
           <img src={pinIcon} /> PINNED
         </span>
-        <div className="person_wise_chat mt-2">
-          <section className="user_chat mt-3">
+        {/* <div className="person_wise_chat mt-2"> */}
+          {/* <section className="user_chat mt-3">
             <div className="left">
               <img src={profileImage} className="rounded_img" />
               <div className="title_and_message">
@@ -151,8 +153,54 @@ const ChatSidebar = ({
               <div className="time">09:00 am</div>
               <div className="notification">2</div>
             </div>
-          </section>
-        </div>
+          </section> */}
+          {pinnedChats?.map((chat, index) => (
+          <div key={index} className="person_wise_chat mt-2">
+            {chat.members.map((member) => {
+              if (member._id !== loggedInUser._id) {
+                const latestMessage = latestMessages[chat._id];
+                const unreadMessageCount = unreadMessageCounts[chat._id];
+                const messageTime = formatTimestamp(dates[chat._id]);
+                return (
+                  <section
+                    className="user_chat mt-3"
+                    key={member._id}
+                    onClick={() => handleSelectedChat(chat._id, member._id)}
+                  >
+                    
+                    <div className="left d-flex justify-content-between">
+                      <img
+                        src={member.profilePicture}
+                        alt="Profile"
+                        className="rounded_img"
+                      />
+                      <div className="title_and_message">
+                        <h5 className="name_title">
+                          {member.firstName} {member.lastName}
+                        </h5>
+                        <h5 className="message_title">
+                          {latestMessage || "No messages yet"}
+                        </h5>
+                      </div>
+                    </div>
+                    <div className="right">
+                      {messageTime !== "Invalid Date" && (
+                        <div className="time">{messageTime}</div>
+                      )}
+                       <img src={pinIcon} className="pt-1 px-1" onClick={() =>handlePinClick(chat._id)} alt="Pin" />
+                      {unreadMessageCount > 0 && (
+                        <div className="notification">{unreadMessageCount}</div>
+                      )}
+                    </div>
+                  </section>
+                );
+              }
+              return null;
+            })}
+          </div>
+        ))}
+
+        {/* </div> */}
 
         <span style={{ margin: "5px 10px" }}>
           <img src={messageIcon} /> ALL MESSAGE
