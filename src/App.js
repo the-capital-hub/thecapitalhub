@@ -299,8 +299,8 @@ function App() {
             <Route path="startupOne" element={<StartUpBlogOne />} />
             <Route path="startupTwo" element={<StartUpBlogTwo />} />
             <Route path="startupThree" element={<StartUpBlogThree />} />
-            <Route path="startupFour" element={<StartUpBlogFour />} />
-            <Route path="startupFive" element={<StartUpBlogFive />} />
+            <Route path="telemedicine-health-revolution-at-your-fingertips-medtel-health-care-company-leading-the-way" element={<StartUpBlogFour />} />
+            <Route path="how-zomato-is-revolutionising-the-food-supply-chain-through-food-technology" element={<StartUpBlogFive />} />
           </Route>
         </Routes>
       </Router>
