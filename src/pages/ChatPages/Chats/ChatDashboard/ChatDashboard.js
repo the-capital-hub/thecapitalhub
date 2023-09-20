@@ -210,16 +210,16 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
                       </div>
                       <div className="mymessage_container">{message?.text}</div>
                       {message?.image && (
-                        <div className="message_container">
+                        <div className="mymessage_container">
                           <img
                             src={message.image}
-                            width={50}
+                            width={200}
                             alt="message image"
                           />
                         </div>
                       )}
                       {message?.video && (
-                        <div className="message_container">
+                        <div className="mymessage_container">
                           <video controls width={"100%"}>
                             <source src={message?.video} type={"video/mp4"} />
                             Your browser does not support the video tag.
@@ -249,7 +249,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
                         <div className="message_container">
                           <img
                             src={message.image}
-                            width={50}
+                            width={200}
                             alt="message image"
                           />
                         </div>
