@@ -66,6 +66,7 @@ import Chats from "./pages/ChatPages/Chats/Chats";
 import MySchedule from "./pages/Investor/MySchedule/MySchedule";
 import WriteBlog from "./pages/StartUp/WriteBlog/WriteBlog";
 import BlogWrapper from "./components/Blog/BlogWrapper/BlogWrapper";
+import MeeshoBlog from "./pages/Blogs/MeeshoBlog/MeeshoBlog";
 
 function App() {
   return (
@@ -228,15 +229,6 @@ function App() {
           {/* Chat */}
           <Route path="/chats" element={<Chats />} />
 
-          {/* Blog */}
-          <Route path="/blog" element={<BlogWrapper />}>
-            <Route path="" element={<Blog />} />
-            <Route path="webdevlopment" element={<BlogDetailed />} />
-            <Route path="startupOne" element={<StartUpBlogOne />} />
-            <Route path="startupTwo" element={<StartUpBlogTwo />} />
-            <Route path="startupThree" element={<StartUpBlogThree />} />
-          </Route>
-
           {/* StartUp */}
           <Route element={<PrivateRoute />}>
             <Route path="/profile" element={<InvestorHome />} />
@@ -260,6 +252,7 @@ function App() {
             <Route path="/messages" element={<Messages />} />
             <Route path="/notifications" element={<Notifications />} />
           </Route>
+
           {/* OneLink */}
           <Route path="/onelink/:username" element={<ValidateOneLink />}>
             <Route path="" element={<Company />} />
@@ -270,6 +263,7 @@ function App() {
             <Route path="documentation/:route" element={<FolderContents />} />
             {/* <Route path="investNow" element={<DocumentationIV />} /> */}
           </Route>
+
           {/* Investor */}
           <Route path="/investor" element={<ProtectedInvestorRoutes />}>
             <Route path="" element={<Navigate to="profile" replace />} />
@@ -280,6 +274,19 @@ function App() {
             <Route path="live-deals" element={<LiveDeals />} />
             <Route path="search-results" element={<SearchResults />} />
             <Route path="my-schedule" element={<MySchedule />} />
+          </Route>
+
+          {/* Blogs */}
+          <Route path="/blog" element={<BlogWrapper />}>
+            <Route path="" element={<Blog />} />
+            <Route
+              path="meesho-revolutionising-e-commerce-for-entrepreneurs"
+              element={<MeeshoBlog />}
+            />
+            <Route path="webdevlopment" element={<BlogDetailed />} />
+            <Route path="startupOne" element={<StartUpBlogOne />} />
+            <Route path="startupTwo" element={<StartUpBlogTwo />} />
+            <Route path="startupThree" element={<StartUpBlogThree />} />
           </Route>
         </Routes>
       </Router>
