@@ -4,7 +4,7 @@ import { BsFillCloudUploadFill } from "react-icons/bs";
 
 export default function StartupsModal({ investedStartups }) {
   return (
-    <div className="startups__modal__content gap-5">
+    <div className="startups__modal__content">
       <div className="border rounded-3 p-3 overflow-y-auto">
         <h5 className="green_underline">Startups Invested: </h5>
         <div className="d-flex flex-column gap-3 p-3 w-100">
@@ -33,6 +33,8 @@ export default function StartupsModal({ investedStartups }) {
           })}
         </div>
       </div>
+
+      {/* Form */}
       <div className="border rounded-3 p-3">
         <h5 className="green_underline">Add new: </h5>
 

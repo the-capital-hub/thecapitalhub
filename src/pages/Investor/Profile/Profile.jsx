@@ -533,7 +533,7 @@ function Profile() {
           </div>
         </div>
         {/* Loop cards here */}
-        <div className="invested_cards hide_scrollbar px-3 py-4">
+        <div className="invested_cards px-3 py-4">
           {investedStartups.map((startUp, index) => {
             return <InvestedCard startUp={startUp} key={startUp.id} />;
           })}
