@@ -238,6 +238,11 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
     setSelectedDocument(null);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSend();
+    }
+  };
 
   return (
     <div className="chat_dashboard_container">
@@ -405,6 +410,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
             name="introductoryMessage"
             placeholder="Your message..."
             onChange={(e) => setSendText(e.target.value)}
+            onKeyDown={handleKeyDown}
             value={sendText}
           />
           <div className="right_icons">
