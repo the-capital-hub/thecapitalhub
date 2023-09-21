@@ -32,27 +32,24 @@ const ChatSidebar = ({
   const [selectedUserChat, setSelectedUserChat] = useState(null);
   const [pinnedChat, setPinnedChat] = useState(false);
 
-
-
-  const handlePinClick=(chatId)=>{
-    togglePinMessage(loggedInUser._id,chatId).then((res) => {
+  const handlePinClick = (chatId) => {
+    togglePinMessage(loggedInUser._id, chatId).then((res) => {
       console.log(res);
-      setPinnedChat(true)
+      setPinnedChat(true);
       setTimeout(() => {
         setPinnedChat(false);
       }, 1000);
     });
-   
-  }
+  };
   useEffect(() => {
-     getPinnedChat(loggedInUser._id).then((res) => {
-        console.log(res.data);
-        setPinnedChats(res.data)
-      });
+    getPinnedChat(loggedInUser._id).then((res) => {
+      console.log(res.data);
+      setPinnedChats(res.data);
+    });
     getUserChats(loggedInUser._id)
       .then((res) => {
         setChats(res.data);
-        console.log(res.data)
+        console.log(res.data);
         res.data.forEach((chat) => {
           handleGetMessageByChatId(chat._id);
           handleGetUnreadMessageCount(chat._id);
@@ -61,7 +58,7 @@ const ChatSidebar = ({
       .catch((error) => {
         console.error("Error-->", error);
       });
-  }, [loggedInUser, sendMessage, recieveMessage, selectedUserChat ,pinnedChat]);
+  }, [loggedInUser, sendMessage, recieveMessage, selectedUserChat, pinnedChat]);
 
   const handleSelectedChat = (chatId, userId) => {
     console.log(userId);
@@ -132,7 +129,7 @@ const ChatSidebar = ({
           <img src={pinIcon} /> PINNED
         </span>
         {/* <div className="person_wise_chat mt-2"> */}
-          {/* <section className="user_chat mt-3">
+        {/* <section className="user_chat mt-3">
             <div className="left">
               <img src={profileImage} className="rounded_img" />
               <div className="title_and_message">
@@ -159,20 +156,30 @@ const ChatSidebar = ({
               <div className="notification">2</div>
             </div>
           </section> */}
-          {pinnedChats?.map((chat, index) => (
+        {pinnedChats?.map((chat, index) => (
           <div key={index} className="person_wise_chat mt-2">
             {chat.members.map((member) => {
               if (member._id !== loggedInUser._id) {
-                const latestMessage = latestMessages[chat._id];
+                const inputString = latestMessages[chat._id];
                 const unreadMessageCount = unreadMessageCounts[chat._id];
                 const messageTime = formatTimestamp(dates[chat._id]);
+
+                const numberOfCharacters = 13;
+                let latestMessage;
+
+                if (inputString?.length > numberOfCharacters) {
+                  latestMessage =
+                    inputString.substring(0, numberOfCharacters) + "...";
+                } else {
+                  latestMessage = inputString;
+                }
+
                 return (
                   <section
                     className="user_chat mt-3"
                     key={member._id}
                     onClick={() => handleSelectedChat(chat._id, member._id)}
                   >
-                    
                     <div className="left d-flex justify-content-between">
                       <img
                         src={member.profilePicture}
@@ -192,7 +199,12 @@ const ChatSidebar = ({
                       {messageTime !== "Invalid Date" && (
                         <div className="time">{messageTime}</div>
                       )}
-                       <img src={pinIcon} className="pt-1 px-1 ms-auto" onClick={() =>handlePinClick(chat._id)} alt="Pin" />
+                      <img
+                        src={pinIcon}
+                        className="pt-1 px-1 ms-auto"
+                        onClick={() => handlePinClick(chat._id)}
+                        alt="Pin"
+                      />
                       {unreadMessageCount > 0 && (
                         <div className="notification">{unreadMessageCount}</div>
                       )}
@@ -214,16 +226,26 @@ const ChatSidebar = ({
           <div key={index} className="person_wise_chat mt-2">
             {chat.members.map((member) => {
               if (member._id !== loggedInUser._id) {
-                const latestMessage = latestMessages[chat._id];
+                const inputString = latestMessages[chat._id];
                 const unreadMessageCount = unreadMessageCounts[chat._id];
                 const messageTime = formatTimestamp(dates[chat._id]);
+
+                const numberOfCharacters = 13;
+                let latestMessage;
+
+                if (inputString?.length > numberOfCharacters) {
+                  latestMessage =
+                    inputString.substring(0, numberOfCharacters) + "...";
+                } else {
+                  latestMessage = inputString;
+                }
+
                 return (
                   <section
                     className="user_chat mt-3 "
                     key={member._id}
                     onClick={() => handleSelectedChat(chat._id, member._id)}
                   >
-                    
                     <div className="left">
                       <img
                         src={member.profilePicture}
@@ -243,7 +265,12 @@ const ChatSidebar = ({
                       {messageTime !== "Invalid Date" && (
                         <div className="time">{messageTime}</div>
                       )}
-                       <img src={pinIcon} className="pt-1 px-1 " onClick={() =>handlePinClick(chat._id)} alt="Pin" />
+                      <img
+                        src={pinIcon}
+                        className="pt-1 px-1 "
+                        onClick={() => handlePinClick(chat._id)}
+                        alt="Pin"
+                      />
                       {unreadMessageCount > 0 && (
                         <div className="notification">{unreadMessageCount}</div>
                       )}
