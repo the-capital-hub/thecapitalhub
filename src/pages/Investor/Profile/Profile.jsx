@@ -169,7 +169,7 @@ function Profile() {
       } = await updateUserAPI(newPersonalData);
       dispatch(loginSuccess(data));
       const response = await postInvestorData(editCompanyName);
-      setCompanyName(editCompanyName.company);
+      setCompanyName(editCompanyName.companyName);
       setPersonalEditable(!personalEditable);
     } catch (error) {
       console.log(error);
