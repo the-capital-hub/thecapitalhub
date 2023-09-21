@@ -6,6 +6,9 @@ import { getBase64 } from "../../../utils/getBase64";
 import {
   addStartupInvested,
   addSectorOfInterest,
+  getInvestorById,
+  uploadLogo,
+  postInvestorData,
 } from "../../../Service/user";
 import { useSelector } from "react-redux";
 
@@ -14,7 +17,8 @@ export default function AddEditModal({
   heading,
   isStartups = true,
   setInvestedStartups,
-  setSectorsData
+  setSectorsData,
+  testformData
 }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [formData, setFormData] = useState({
@@ -23,11 +27,16 @@ export default function AddEditModal({
     description: "",
   });
   const [sectorLogo, setSectorLogo] = useState(null);
+  const [isEdited, setIsEdited] = useState(false);
+  const [editIndex, setEditIndex] = useState(null);
+  const [isNewImage, setNewImage] = useState(false);
+
   const handleInputChange = (event) => {
+    console.log(testformData);
     const { name, value, type, files } = event.target;
     console.log(name);
     if (type === "file") {
-      console.log("File selected:", files[0]);
+      setNewImage(false);
       setFormData({
         ...formData,
         [name]: files[0],
@@ -39,45 +48,124 @@ export default function AddEditModal({
       });
     }
   };
+
   const handleSectorLogoChange = (event) => {
     const { files } = event.target;
     setSectorLogo(files[0]);
+    setNewImage(false);
   }
+
+  //handle add and edit
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      console.log("Form Data:", formData);
-      if (isStartups) {
-        const logo = await getBase64(formData.companyImage);
-        const newStartUpData = {
-          logo: logo,
-          name: formData.name,
-          description: formData.description,
+      if (isEdited) {
+        const { data: investor } = await getInvestorById(loggedInUser?.investor);
+        if (isStartups) {
+          const editedStartUp = investor.startupsInvested[editIndex];
+          editedStartUp.name = formData.name;
+          editedStartUp.description = formData.description;
+          if (formData.companyImage instanceof Blob) {
+            const logo = await getBase64(formData.companyImage);
+            const { url } = await uploadLogo({ logo });
+            editedStartUp.logo = url;
+          }
+          investor.startupsInvested[editIndex] = editedStartUp;
+          const { data: response } = await postInvestorData(investor);
+          setInvestedStartups(response.startupsInvested);
+        } else {
+          const editedSector = investor.sectorInterested[editIndex];
+          editedSector.name = formData.name;
+          if (sectorLogo instanceof Blob) {
+            const logo = await getBase64(sectorLogo);
+            const { url } = await uploadLogo({ logo });
+            editedSector.logo = url;
+          }
+          investor.sectorInterested[editIndex] = editedSector;
+          const { data: response } = await postInvestorData(investor);
+          setSectorsData(response.sectorInterested);
         }
-        console.log(newStartUpData);
-        const response = await addStartupInvested(loggedInUser?.investor, newStartUpData);
-        setInvestedStartups(response.data.startupsInvested);
       } else {
-        const logo = await getBase64(sectorLogo);
-        const newSectorData = {
-          logo: logo,
-          name: formData.name,
+        if (isStartups) {
+          const logo = await getBase64(formData.companyImage);
+          const newStartUpData = {
+            logo: logo,
+            name: formData.name,
+            description: formData.description,
+          }
+          console.log(newStartUpData);
+          const response = await addStartupInvested(loggedInUser?.investor, newStartUpData);
+          setInvestedStartups(response.data.startupsInvested);
+        } else {
+          const logo = await getBase64(sectorLogo);
+          const newSectorData = {
+            logo: logo,
+            name: formData.name,
+          }
+          console.log("Sector", newSectorData);
+          const response = await addSectorOfInterest(loggedInUser?.investor, newSectorData);
+          console.log(response.data);
+          setSectorsData(response.data.sectorInterested);
         }
-        console.log("Sector", newSectorData);
-        const response = await addSectorOfInterest(loggedInUser?.investor, newSectorData);
-        console.log(response.data);
-        setSectorsData(response.data.sectorInterested);
       }
-      setFormData({
-        companyImage: "",
-        name: "",
-        description: "",
-      });
-      setSectorLogo(null);
+      resetFormData();
     } catch (error) {
       console.log(error);
     }
   };
+
+  const handleEdit = async (index) => {
+    try {
+      setIsEdited(true);
+      setNewImage(true);
+      setEditIndex(index);
+      if (isStartups) {
+        const startUp = dataArray[index];
+        setFormData({
+          name: startUp.name,
+          companyImage: startUp.logo,
+          description: startUp.description
+        })
+      } else {
+        const sector = dataArray[index];
+        setFormData({
+          name: sector.name,
+        })
+        setSectorLogo(sector.logo)
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const resetFormData = () => {
+    setFormData({
+      companyImage: "",
+      name: "",
+      description: "",
+    });
+    setSectorLogo(null);
+    setIsEdited(false);
+    setEditIndex(null);
+    setNewImage(false);
+  };
+
+  const handleDelete = async (index) => {
+    try {
+      const { data: investor } = await getInvestorById(loggedInUser?.investor);
+      if (isStartups) {
+        investor.startupsInvested.splice(index, 1);
+        const { data: response } = await postInvestorData(investor);
+        setInvestedStartups(response.startupsInvested);
+      } else {
+        investor.sectorInterested.splice(index, 1);
+        const { data: response } = await postInvestorData(investor);
+        setSectorsData(response.sectorInterested);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="profile__modal__content">
@@ -97,10 +185,10 @@ export default function AddEditModal({
                 />
                 <h6 className="green_underline ">{startUp.name}</h6>
                 <div className="d-flex gap-2">
-                  <button className="btn green_button px-3">
+                  <button className="btn green_button px-3" onClick={() => handleEdit(index)}>
                     <CiEdit style={{ color: "", backgroundColor: "" }} />
                   </button>
-                  <button className="btn btn-danger">
+                  <button className="btn btn-danger" onClick={() => handleDelete(index)}>
                     <AiFillDelete style={{ color: "", backgroundColor: "" }} />
                   </button>
                 </div>
@@ -136,6 +224,13 @@ export default function AddEditModal({
                   <label htmlFor="companyImage" className="text-black fw-lighter">
                     Upload Image
                   </label>
+                  {formData.companyImage && (
+                    <img
+                      src={isEdited && isNewImage ? formData.companyImage : URL.createObjectURL(formData.companyImage)}
+                      alt="Selected Image"
+                      style={{ maxWidth: "100%", maxHeight: "70px" }}
+                    />
+                  )}
                 </div>
               </div>
             ) : (
@@ -158,6 +253,13 @@ export default function AddEditModal({
                   <label htmlFor="sectorLogo" className="text-black fw-lighter">
                     Upload Image
                   </label>
+                  {sectorLogo && (
+                    <img
+                      src={isEdited && isNewImage ? sectorLogo : URL.createObjectURL(sectorLogo)}
+                      alt="Selected Image"
+                      style={{ maxWidth: "100%", maxHeight: "200px" }}
+                    />
+                  )}
                 </div>
               </div>
             )}
@@ -189,9 +291,13 @@ export default function AddEditModal({
               ""
             )}
 
-            <button className="btn green_button w-auto mx-auto fs-6" type="submit" data-bs-dismiss="modal">Save</button>
+            <div className="d-flex justify-between">
+              <button className="btn green_button w-auto fs-6" type="button" onClick={resetFormData}>Clear</button>
+              <button className="btn green_button w-auto fs-6 ms-2" type="submit" data-bs-dismiss="modal">Save</button>
+            </div>
           </div>
         </form>
+
       </div>
     </div>
   );

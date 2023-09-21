@@ -604,3 +604,13 @@ export const addSectorOfInterest = async (investorId, newSectorOfInterestData) =
     throw error;
   }
 };
+
+export const uploadLogo = async (logo) => {
+  try {
+    const response = await axiosInstance.post(`${API.uploadLogo}`, logo);
+    return response.data;
+  } catch (error) {
+    console.error("Error while adding sector of interest:", error);
+    throw error;
+  }
+};

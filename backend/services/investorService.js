@@ -174,3 +174,24 @@ export const getInvestorById = async (investorId) => {
     };
   }
 };
+
+export const uploadLogo = async (logo) => {
+  try {
+    const { url } = await cloudinary.uploader.upload(logo, {
+      folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
+      format: "webp",
+      unique_filename: true,
+    });
+    return {
+      status: 200,
+      message: "Upload successfull",
+      url: url,
+    };
+  } catch (error) {
+    console.error("Error uploading:", error);
+    return {
+      status: 500,
+      message: "An error occurred while uploading.",
+    };
+  }
+};

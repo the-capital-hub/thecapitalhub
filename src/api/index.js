@@ -51,6 +51,7 @@ const API = Object.freeze({
   postInvestorData: `${baseUrl}/investor/createInvestor`,
   addStartupInvested: `${baseUrl}/investor/addStartupInvested`,
   addSectorOfInterest: `${baseUrl}/investor/addSectorOfInterest`,
+  uploadLogo: `${baseUrl}/investor/uploadLogo`,
 });
 
 export default API;

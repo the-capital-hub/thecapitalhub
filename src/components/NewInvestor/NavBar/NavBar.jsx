@@ -60,7 +60,7 @@ const NavBar = (props) => {
   return (
     <>
       <div className="container pt-1  mb-4 mb-xl-0">
-        <div className="d-flex investor_navbar justify-content-between">
+        <div className="d-flex my-investor_navbar justify-content-between">
           <div className="d-flex">
             <div className="row bar_logo_container ">
               <div className="logo_container">
