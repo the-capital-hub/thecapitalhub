@@ -3,8 +3,8 @@
     border-radius: 10px;
     border: 1px solid #eaeaea;
     background: #fff;
-    width: 99%;
-    padding: 20px;
+    // width: 99%;
+    // padding: 20px;
 
     .title_h4 {
       color: #090909;
@@ -14,10 +14,10 @@
       font-weight: 500;
       line-height: normal;
     }
-    .card_container {
-      display: flex;
-      justify-content: space-between;
-    }
+    // .card_container {
+    //   display: flex;
+    //   justify-content: space-between;
+    // }
   }
   .big_card_container {
     margin-bottom: 2rem;
@@ -61,5 +61,11 @@
       text-decoration: none;
       color: black;
     }
+  }
+
+  .green_underline {
+    text-decoration: underline solid #d3f36b;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
   }
 }
