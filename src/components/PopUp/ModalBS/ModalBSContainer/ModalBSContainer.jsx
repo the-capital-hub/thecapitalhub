@@ -1,6 +1,13 @@
 import "./ModalBSContainer.scss";
 
-function ModalBSContainer({ id, label, children, showModal, isStatic = true }) {
+function ModalBSContainer({
+  id,
+  label,
+  children,
+  showModal,
+  isStatic = true,
+  modalXl = false,
+}) {
   return (
     <div
       className={`modal fade ${showModal ? "show" : ""} `}
@@ -11,7 +18,11 @@ function ModalBSContainer({ id, label, children, showModal, isStatic = true }) {
       tabIndex="-1"
       aria-labelledby={label || "modalLabel"}
     >
-      <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl ">
+      <div
+        className={`modal-dialog modal-dialog-centered modal-dialog-scrollable ${
+          modalXl ? "modal-xl" : ""
+        } `}
+      >
         <div className="modal-content">{children}</div>
       </div>
     </div>
