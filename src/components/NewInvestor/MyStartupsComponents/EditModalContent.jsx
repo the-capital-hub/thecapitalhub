@@ -6,12 +6,14 @@ import "./EditModalContent.scss";
 
 export default function EditModalContent({ dataArray, isInterests }) {
   const [companies, setCompanies] = useState(dataArray);
-  const [editMode, SetEditMode] = useState(false);
+  const [editMode, setEditMode] = useState(false);
   const [editingCompany, setEditingCompany] = useState(companies[0]);
 
-  function handleEditClick(id) {
+  function handleEditClick(selectedCompany) {
     // console.log(companies.filter((company) => company.id === id)[0]);
-    setEditingCompany(companies.filter((company) => company.id === id)[0]);
+    setEditingCompany(selectedCompany);
+    console.log(editingCompany);
+    setEditMode(true);
   }
 
   return (
@@ -34,7 +36,7 @@ export default function EditModalContent({ dataArray, isInterests }) {
                 <div className="d-flex gap-2">
                   <button
                     className="green_button px-3"
-                    onClick={() => handleEditClick(company.id)}
+                    onClick={() => handleEditClick(company)}
                   >
                     <CiEdit style={{ color: "", backgroundColor: "" }} />
                   </button>
@@ -48,12 +50,14 @@ export default function EditModalContent({ dataArray, isInterests }) {
         </div>
       </div>
 
-      <div className=" d-flex justify-content-center align-items-start gap-4 border rounded-3 p-3 ">
+      <div className=" d-flex justify-content-center align-items-start gap-4 border rounded-3 p-3 pb-5">
         <MyInvestmentCard
           company={editingCompany}
           isInterests={isInterests}
           editMode={editMode}
+          setEditMode={setEditMode}
           setCompanies={setCompanies}
+          key={editingCompany.id}
         />
       </div>
     </div>
