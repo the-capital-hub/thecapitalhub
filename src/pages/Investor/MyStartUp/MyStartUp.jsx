@@ -12,6 +12,7 @@ import ModalBSContainer from "../../../components/PopUp/ModalBS/ModalBSContainer
 import ModalBSHeader from "../../../components/PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
 import ModalBSBody from "../../../components/PopUp/ModalBS/ModalBSBody/ModalBSBody";
 import AddModalContent from "../../../components/NewInvestor/MyStartupsComponents/AddModalContent";
+import EditModalContent from "../../../components/NewInvestor/MyStartupsComponents/EditModalContent";
 
 const MyStartUp = () => {
   // Mock data for my investments
@@ -86,9 +87,15 @@ const MyStartUp = () => {
             </ModalBSContainer>
 
             {/* My Investments Edit Modal */}
-            <ModalBSContainer id={"myInvestmentsEditModal"} isStatic={false}>
+            <ModalBSContainer
+              id={"myInvestmentsEditModal"}
+              isStatic={false}
+              modalXl
+            >
               <ModalBSHeader title={"Edit Investments"} />
-              <ModalBSBody>Body</ModalBSBody>
+              <ModalBSBody>
+                <EditModalContent dataArray={investmentsData} />
+              </ModalBSBody>
             </ModalBSContainer>
 
             {/* My Interests */}
@@ -135,9 +142,18 @@ const MyStartUp = () => {
             </ModalBSContainer>
 
             {/* My Investments Edit Modal */}
-            <ModalBSContainer id={"myInterestsEditModal"} isStatic={false}>
+            <ModalBSContainer
+              id={"myInterestsEditModal"}
+              isStatic={false}
+              modalXl
+            >
               <ModalBSHeader title={"Edit Interests"} />
-              <ModalBSBody>Body</ModalBSBody>
+              <ModalBSBody>
+                <EditModalContent
+                  dataArray={investmentsData}
+                  isInterests={true}
+                />
+              </ModalBSBody>
             </ModalBSContainer>
           </div>
         </div>

@@ -72,6 +72,8 @@ export default function AddModalContent({ isInterests = false }) {
               type="number"
               name="equity"
               id="equity"
+              min={0}
+              max={100}
               placeholder={`equity...`}
               className="p-2 w-100 rounded-3 modal__input"
             />

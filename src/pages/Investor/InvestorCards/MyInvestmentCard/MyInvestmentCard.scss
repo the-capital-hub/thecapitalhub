@@ -23,3 +23,17 @@
     }
   }
 }
+
+.modal__input {
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: border-color 0.3s ease-in-out;
+
+  &:focus {
+    border-color: rgba(140, 90, 201, 1);
+  }
+}
+
+.save__button {
+  bottom: -50px;
+}
