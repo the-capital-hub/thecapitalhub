@@ -4,6 +4,7 @@ import {
   addSectorOfInterestController,
   addStartupInvestedController,
   getInvestorByIdController,
+  uploadLogoController,
 } from "../controllers/investorController.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 
@@ -16,5 +17,6 @@ router.use(authenticateToken);
 router.patch("/addSectorOfInterest/:investorId", addSectorOfInterestController);
 router.patch("/addStartupInvested/:investorId", addStartupInvestedController);
 router.get("/getInvestorById/:investorId", getInvestorByIdController);
+router.post("/uploadLogo", uploadLogoController);
 
 export default router;

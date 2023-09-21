@@ -7,12 +7,12 @@ export default function InvestedCard({ startUp }) {
   return (
     <div className="invested_card border rounded " id={startUp.id}>
       <div className="card_title">
-        <img src={startUp.image} alt="startup icon" width={50} />
+        <img src={startUp.logo || "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"} alt="startup icon" width={50} />
         <h5 className="green_underline pb-2">{startUp.name}</h5>
       </div>
       <div className="py-2 pe-2 card_text">
         <p className="green_underline mb-1">Sector:</p>
-        <p className="mb-0">{text}</p>
+        <p className="mb-0">{startUp.description}</p>
       </div>
     </div>
   );
