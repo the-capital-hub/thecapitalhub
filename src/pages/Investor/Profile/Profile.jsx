@@ -581,27 +581,10 @@ function Profile() {
       <ModalBSContainer id="sectorsModal" isStatic={false}>
         <ModalBSHeader title={"Add/Edit Sectors interested"} />
         <ModalBSBody>
-          {/* <div className="d-flex flex-column gap-3 p-3">
-            {sectorsData.map((sector, index) => {
-              return (
-                <div
-                  className="border rounded-3 p-2 d-flex justify-content-between align-items-center"
-                  key={sector.id}
-                >
-                  <img
-                    src={sector.image}
-                    alt={sector.label}
-                    style={{ width: "50px" }}
-                  />
-                  <h5>{sector.label}</h5>
-                  <button className="btn green_button">Remove</button>
-                </div>
-              );
-            })}
-          </div> */}
           <AddEditModal
             dataArray={sectorsData}
             heading={"Sectors Interested"}
+            isStartups={false}
           />
         </ModalBSBody>
       </ModalBSContainer>
