@@ -584,3 +584,33 @@ export const postInvestorData = async (investorData) => {
     throw error;
   }
 };
+
+export const addStartupInvested = async (investorId, newStartUpInvestedData) => {
+  try {
+    const response = await axiosInstance.patch(`${API.addStartupInvested}/${investorId}`, newStartUpInvestedData);
+    return response.data;
+  } catch (error) {
+    console.error("Error while adding startup invested:", error);
+    throw error;
+  }
+};
+
+export const addSectorOfInterest = async (investorId, newSectorOfInterestData) => {
+  try {
+    const response = await axiosInstance.patch(`${API.addSectorOfInterest}/${investorId}`, newSectorOfInterestData);
+    return response.data;
+  } catch (error) {
+    console.error("Error while adding sector of interest:", error);
+    throw error;
+  }
+};
+
+export const uploadLogo = async (logo) => {
+  try {
+    const response = await axiosInstance.post(`${API.uploadLogo}`, logo);
+    return response.data;
+  } catch (error) {
+    console.error("Error while adding sector of interest:", error);
+    throw error;
+  }
+};
