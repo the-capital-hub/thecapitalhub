@@ -51,18 +51,18 @@ const RecommendationCard = () => {
             </div>
 
             {loading ? (
-              <div class="d-flex justify-content-center my-4">
-                <div class="spinner-border" role="status">
-                  <span class="visually-hidden">Loading...</span>
+              <div className="d-flex justify-content-center my-4">
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
                 </div>
               </div>
             ) : (
               <>
                 {users.map((user, i) => (
-                  <>
+                  <div key={i}>
                     <div
                       className="card-body recommendation_card_body "
-                      key={i}
+                      // key={i}
                     >
                       <Link to={`/user/${user._id}`} className="rounded-circle">
                         <img
@@ -88,7 +88,7 @@ const RecommendationCard = () => {
                       </button>
                     </div>
                     <hr className="hr" />
-                  </>
+                  </div>
                 ))}
               </>
             )}

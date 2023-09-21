@@ -41,7 +41,7 @@ const StartUpBlogOne = () => {
             <div className="col-12 image_section">
               <div className="d-flex">
                 <img
-                  src={BlogoneImage}
+                  src="https://images.unsplash.com/photo-1530213786676-41ad9f7736f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
                   width={"100%"}
                   style={{ maxWidth: "600px", objectFit: "contain" }}
                   className="mx-auto my-lg-3"
@@ -86,8 +86,8 @@ const StartUpBlogOne = () => {
                 efforts to develop innovative telemedicine solutions that
                 utilise cutting-edge technologies.
               </p>
-              <ol type="1">
-                <li>
+              <ol className="text-dark" type="1">
+                <li className="text-dark">
                   Mobile Health Apps: MedTel Health Care Company has developed
                   intuitive mobile health apps that connect patients and
                   healthcare professionals in real-time. These apps provide a
@@ -97,8 +97,8 @@ const StartUpBlogOne = () => {
                   MedTel Health Care Company puts the control of healthcare in
                   the hands of patients, enabling them to receive timely medical
                   advice and treatment from anywhere.
-                </li>
-                <li>
+                </li >
+                <li className="text-dark"> 
                   Secure Communication Platforms: Ensuring the confidentiality
                   and security of patient information is paramount in
                   telemedicine. MedTel Health Care Company has implemented
@@ -109,37 +109,37 @@ const StartUpBlogOne = () => {
                   privacy in telemedicine interactions.
                   <b>Connected Devices</b>
                   <ul>
-                    <li>
+                    <li className="text-dark">
                       Access to bluetooth connected Glucometer, Blood pressure
                       monitor, Weighing scale, Fetal heart monitor &
                       Hemoglobinometer.
                     </li>
-                    <li>
+                    <li className="text-dark">
                       Track real time vitals, watch trends and download reports.
                     </li>
                   </ul>
                   <b>Support at your finger tips</b>
                   <ul>
-                    <li>
+                    <li className="text-dark">
                       One-on-one expert support through our partner care
                       providers (Doctors, Nurses and Health Coaches).
                     </li>
-                    <li>
+                    <li className="text-dark">
                       Timely technical support for devices and emergencies.
                     </li>
                   </ul>
                   <b>Nudges and Alerts</b>
                   <ul>
-                    <li>
+                    <li className="text-dark">
                       Evidence based nudges to help patients stay on track
                     </li>
-                    <li>
+                    <li className="text-dark">
                       Personalized engagement programs for improving patient
                       compliance.
                     </li>
                   </ul>
                 </li>
-                <li>
+                <li className="text-dark">
                   .Remote Patient Monitoring: MedTel Health Care Company
                   integrates remote patient monitoring devices into its
                   telemedicine solutions. These devices enable patients to
@@ -150,7 +150,7 @@ const StartUpBlogOne = () => {
                   provide timely interventions, and prevent potential health
                   complications.
                 </li>
-                <li>
+                <li className="text-dark">
                   .Electronic Health Records (EHR) Integration: Seamless
                   integration of electronic health records is a crucial aspect
                   of MedTel Health Care Companies healthtech solutions. By

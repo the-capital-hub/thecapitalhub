@@ -8,7 +8,7 @@ export default function SectorCard({ sector }) {
         width={50}
         height={50}
       />
-      <h6 className="m-0">{sector.label}</h6>
+      <h6 className="m-0">{sector.name}</h6>
     </div>
   );
 }

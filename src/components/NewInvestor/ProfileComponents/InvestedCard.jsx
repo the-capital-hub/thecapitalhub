@@ -10,7 +10,7 @@ export default function InvestedCard({ startUp }) {
         <img src={startUp.image} alt="startup icon" width={50} />
         <h5 className="green_underline pb-2">{startUp.name}</h5>
       </div>
-      <div className="p-2">
+      <div className="py-2 pe-2 card_text">
         <p className="green_underline mb-1">Sector:</p>
         <p className="mb-0">{text}</p>
       </div>
