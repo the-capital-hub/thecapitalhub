@@ -48,7 +48,6 @@ const OnePager = () => {
   };
 
   const handleDownloadPDF = () => {
-    alert("Hello");
     const element = document.querySelector(".onePager");
     const buttons = document.querySelectorAll(".buttons button");
     buttons.forEach((button) => {
