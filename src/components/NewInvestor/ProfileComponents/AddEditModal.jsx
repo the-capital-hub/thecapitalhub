@@ -2,7 +2,11 @@ import { AiFillDelete } from "react-icons/ai";
 import { CiEdit } from "react-icons/ci";
 import { BsFillCloudUploadFill } from "react-icons/bs";
 
-export default function AddEditModal({ dataArray, heading }) {
+export default function AddEditModal({
+  dataArray,
+  heading,
+  isStartups = true,
+}) {
   return (
     <div className="profile__modal__content">
       <div className="border rounded-3 p-2 w-100 overflow-y-auto">
@@ -63,22 +67,26 @@ export default function AddEditModal({ dataArray, heading }) {
           <div className="invested__company__name ">
             <input
               type="text"
-              name="companyName"
-              id="companyName"
-              placeholder="company name..."
+              name="name"
+              id="name"
+              placeholder={`${isStartups ? "company" : "sector"} name...`}
               className="p-2 w-100 rounded-3 modal__input"
             />
           </div>
 
-          <div className="invested__company__description">
-            <textarea
-              name="description"
-              id="description"
-              rows={8}
-              className="p-2 w-100 rounded-3 modal__input"
-              placeholder="description..."
-            ></textarea>
-          </div>
+          {isStartups ? (
+            <div className="invested__company__description">
+              <textarea
+                name="description"
+                id="description"
+                rows={8}
+                className="p-2 w-100 rounded-3 modal__input"
+                placeholder="description..."
+              ></textarea>
+            </div>
+          ) : (
+            ""
+          )}
 
           <button className="btn green_button w-auto mx-auto fs-6">Save</button>
         </div>
