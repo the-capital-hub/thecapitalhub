@@ -16,6 +16,8 @@ import documentIcon from "../../../../Images/Chat/document.svg";
 import videoIcon from "../../../../Images/Chat/attachVideo.svg";
 import onelinkIcon from "../../../../Images/Chat/Onelink.svg";
 import { getBase64 } from "../../../../utils/getBase64";
+import Linkify from 'react-linkify';
+
 const AWS = require('aws-sdk');
 
 AWS.config.update({
@@ -38,7 +40,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
       chatMessagesContainerRef.current.scrollTop =
         chatMessagesContainerRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [messages, recieveMessage]);
 
   useEffect(() => {
     markMessagesAsRead(chatId, userId)
@@ -221,10 +223,10 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
   const handleOnelinkClick = () => {
     getStartupByFounderId(loggedInUser._id)
       .then(({ data }) => {
-        setSendText(`thecapitalhub.in/onelink/${data.oneLink}`);
+        setSendText(`https://thecapitalhub.in/onelink/${data.oneLink}`);
       })
       .catch((error) => console.log(error));
-  };
+  };  
 
   const removeSelectedImage = () => {
     setSelectedImage(null);
@@ -272,7 +274,9 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
                       </div>
                       {message.text !== "" && (
                         <div className="mymessage_container">
-                          <p>{message.text}</p>
+                          <Linkify>
+                            <p>{message.text}</p>
+                          </Linkify>
                         </div>
                       )}
                       {message?.image && (
@@ -324,7 +328,9 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
                       </div>
                       {message.text !== "" && (
                         <div className="message_container">
-                          <p>{message.text}</p>
+                          <Linkify>
+                            <p>{message.text}</p>
+                          </Linkify>
                         </div>
                       )}
                       {message?.image && (

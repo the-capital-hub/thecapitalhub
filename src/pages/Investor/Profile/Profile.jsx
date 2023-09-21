@@ -49,90 +49,66 @@ function Profile() {
     founderId: loggedInUser._id,
     companyName: companyName,
   });
-  // const loggedInUser = {
-  //   _id: "64e9fd9d4e368da2bf3e721f",
-  //   firstName: "Pramod",
-  //   lastName: "Badiger",
-  //   phoneNumber: "+919998887770",
-  //   email: "pramod@gmail.com",
-  //   profilePicture:
-  //     "https://res.cloudinary.com/drjt9guif/image/upload/c_scale,q_100,w_265/v1692955323/TheCapitalHub/users/profilePictures/wprwfl9rsdkyfptag0hw.webp",
-  //   connections: [
-  //     "64e87dcae2108d5c01ebb619",
-  //     "64e7327ed2133164ba157af3",
-  //     "64e87dcae2108d5c01ebb619",
-  //     "64e87dcae2108d5c01ebb619",
-  //   ],
-  //   userStatus: "active",
-  //   savedPosts: [],
-  //   createdAt: "2023-08-26T13:26:53.761Z",
-  //   updatedAt: "2023-09-03T14:31:02.721Z",
-  //   __v: 0,
-  //   designation: "Founder",
-  //   education: "Graduate, University of Northampton",
-  //   experience: "5+ Years building various startups & Growth $10M+",
-  //   bio: "I am the founder and CEO of The Capital Hub. Welcome! Hi",
-  //   recentExperience: [],
-  //   recentEducation: [],
-  // };
+  const [investedStartups, setInvestedStartups] = useState([]);
+  const [sectorsData, setSectorsData] = useState([]);
 
   // Mock data for Startups Invested in
-  const investedStartups = [
-    {
-      name: "The Capital Hub",
-      image: theCapitalHub,
-      id: 1,
-    },
-    {
-      name: "Fisdom",
-      image: fisdomStartUpIcon,
-      id: 2,
-    },
-    {
-      name: "Bondlink",
-      image: bondLink,
-      id: 3,
-    },
-    {
-      name: "The Capital Hub",
-      image: theCapitalHub,
-      id: 4,
-    },
-    {
-      name: "Fisdom",
-      image: fisdomStartUpIcon,
-      id: 5,
-    },
-    {
-      name: "Bondlink",
-      image: bondLink,
-      id: 6,
-    },
-  ];
+  // const investedStartups = [
+  //   {
+  //     name: "The Capital Hub",
+  //     image: theCapitalHub,
+  //     id: 1,
+  //   },
+  //   {
+  //     name: "Fisdom",
+  //     image: fisdomStartUpIcon,
+  //     id: 2,
+  //   },
+  //   {
+  //     name: "Bondlink",
+  //     image: bondLink,
+  //     id: 3,
+  //   },
+  //   {
+  //     name: "The Capital Hub",
+  //     image: theCapitalHub,
+  //     id: 4,
+  //   },
+  //   {
+  //     name: "Fisdom",
+  //     image: fisdomStartUpIcon,
+  //     id: 5,
+  //   },
+  //   {
+  //     name: "Bondlink",
+  //     image: bondLink,
+  //     id: 6,
+  //   },
+  // ];
 
   // Mock data for Sectors Interested
-  const sectorsData = [
-    {
-      id: 1,
-      name: "Link Sector",
-      image: linkSectorIcon,
-    },
-    {
-      id: 2,
-      name: "Agritech",
-      image: Agritech,
-    },
-    {
-      id: 3,
-      name: "Finance",
-      image: Finance,
-    },
-    {
-      id: 4,
-      name: "Sunbank",
-      image: Sunbank,
-    },
-  ];
+  // const sectorsData = [
+  //   {
+  //     id: 1,
+  //     name: "Link Sector",
+  //     image: linkSectorIcon,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Agritech",
+  //     image: Agritech,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Finance",
+  //     image: Finance,
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Sunbank",
+  //     image: Sunbank,
+  //   },
+  // ];
 
   const [bioContent, setBioContent] = useState(loggedInUser?.bio || "");
   const [personalEditable, setPersonalEditable] = useState(false);
@@ -148,6 +124,8 @@ function Profile() {
     getInvestorById(loggedInUser?.investor).then(({ data }) => {
       setInvestor(data);
       setCompanyName(data.companyName);
+      setInvestedStartups(data.startupsInvested)
+      setSectorsData(data.sectorInterested);
     });
   }, [loggedInUser]);
 
@@ -551,6 +529,7 @@ function Profile() {
           <AddEditModal
             dataArray={investedStartups}
             heading={"Startups Invested"}
+            setInvestedStartups={setInvestedStartups}
           />
         </ModalBSBody>
       </ModalBSContainer>
@@ -585,6 +564,7 @@ function Profile() {
             dataArray={sectorsData}
             heading={"Sectors Interested"}
             isStartups={false}
+            setSectorsData={setSectorsData}
           />
         </ModalBSBody>
       </ModalBSContainer>
