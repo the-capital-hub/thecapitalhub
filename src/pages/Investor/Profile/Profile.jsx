@@ -37,7 +37,7 @@ import {
 } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
 import SectorCard from "../../../components/NewInvestor/ProfileComponents/SectorCard";
-import StartupsModal from "../../../components/NewInvestor/ProfileComponents/StartupsModal";
+import AddEditModal from "../../../components/NewInvestor/ProfileComponents/AddEditModal";
 import { BsFillCloudUploadFill } from "react-icons/bs";
 
 function Profile() {
@@ -114,22 +114,22 @@ function Profile() {
   const sectorsData = [
     {
       id: 1,
-      label: "Link Sector",
+      name: "Link Sector",
       image: linkSectorIcon,
     },
     {
       id: 2,
-      label: "Agritech",
+      name: "Agritech",
       image: Agritech,
     },
     {
       id: 3,
-      label: "Finance",
+      name: "Finance",
       image: Finance,
     },
     {
       id: 4,
-      label: "Sunbank",
+      name: "Sunbank",
       image: Sunbank,
     },
   ];
@@ -526,10 +526,10 @@ function Profile() {
       <div className="startups_invested shadow-sm mt-4">
         <div className="header border-bottom p-4 ">
           <h2 className="green_underline typography">Startups Invested</h2>
-          <div className="green_button">
-            <Link to={""}>
-              <ModalBsLauncher id="startupsModal">Add New</ModalBsLauncher>
-            </Link>
+          <div className="green_button px-2 px-sm-3 ">
+            {/* <Link to={""}> */}
+            <ModalBsLauncher id="startupsModal">Add New</ModalBsLauncher>
+            {/* </Link> */}
           </div>
         </div>
         {/* Loop cards here */}
@@ -540,10 +540,13 @@ function Profile() {
         </div>
       </div>
       {/* Startups Modal */}
-      <ModalBSContainer id="startupsModal">
+      <ModalBSContainer id="startupsModal" isStatic={false}>
         <ModalBSHeader title="Add/Edit Startups Invested" />
         <ModalBSBody>
-          <StartupsModal investedStartups={investedStartups} />
+          <AddEditModal
+            dataArray={investedStartups}
+            heading={"Startups Invested"}
+          />
         </ModalBSBody>
       </ModalBSContainer>
 
@@ -551,24 +554,24 @@ function Profile() {
       <div className="sector_interested shadow-sm">
         <div className="header border-bottom p-4">
           <h2 className="green_underline typography">Sectors Interested</h2>
-          <div className="green_button">
-            <Link to={""}>
-              <ModalBsLauncher id="sectorsModal">Add New</ModalBsLauncher>
-            </Link>
+          <div className="green_button  px-2 px-sm-3 ">
+            {/* <Link to={""}> */}
+            <ModalBsLauncher id="sectorsModal">Add New</ModalBsLauncher>
+            {/* </Link> */}
           </div>
         </div>
         {/* Loop cards from here onwards */}
-        <div className="interested_cards hide_scrollbar px-3 py-5 ">
+        <div className="interested_cards px-3 py-5 ">
           {sectorsData.map((sector, index) => {
             return <SectorCard key={sector.id} sector={sector} />;
           })}
         </div>
       </div>
       {/* Sectors Modal */}
-      <ModalBSContainer id="sectorsModal">
+      <ModalBSContainer id="sectorsModal" isStatic={false}>
         <ModalBSHeader title={"Add/Edit Sectors interested"} />
         <ModalBSBody>
-          <div className="d-flex flex-column gap-3 p-3">
+          {/* <div className="d-flex flex-column gap-3 p-3">
             {sectorsData.map((sector, index) => {
               return (
                 <div
@@ -585,7 +588,11 @@ function Profile() {
                 </div>
               );
             })}
-          </div>
+          </div> */}
+          <AddEditModal
+            dataArray={sectorsData}
+            heading={"Sectors Interested"}
+          />
         </ModalBSBody>
       </ModalBSContainer>
 

@@ -2,13 +2,13 @@ import { AiFillDelete } from "react-icons/ai";
 import { CiEdit } from "react-icons/ci";
 import { BsFillCloudUploadFill } from "react-icons/bs";
 
-export default function StartupsModal({ investedStartups }) {
+export default function AddEditModal({ dataArray, heading }) {
   return (
-    <div className="startups__modal__content">
-      <div className="border rounded-3 p-3 overflow-y-auto">
-        <h5 className="green_underline">Startups Invested: </h5>
-        <div className="d-flex flex-column gap-3 p-3 w-100">
-          {investedStartups.map((startUp, index) => {
+    <div className="profile__modal__content">
+      <div className="border rounded-3 p-2 w-100 overflow-y-auto">
+        <h5 className="green_underline">{heading}: </h5>
+        <div className="d-flex flex-column gap-3 p-0 p-sm-2 w-100">
+          {dataArray.map((startUp, index) => {
             return (
               <div
                 className="border rounded-3 p-2 d-flex justify-content-between align-items-center"
@@ -19,7 +19,7 @@ export default function StartupsModal({ investedStartups }) {
                   alt={startUp.name}
                   style={{ width: "50px" }}
                 />
-                <h6 className="green_underline">{startUp.name}</h6>
+                <h6 className="green_underline ">{startUp.name}</h6>
                 <div className="d-flex gap-2">
                   <button className="btn green_button px-3">
                     <CiEdit style={{ color: "", backgroundColor: "" }} />
@@ -80,7 +80,7 @@ export default function StartupsModal({ investedStartups }) {
             ></textarea>
           </div>
 
-          <button className="btn green_button w-25 mx-auto fs-6">Save</button>
+          <button className="btn green_button w-auto mx-auto fs-6">Save</button>
         </div>
       </div>
     </div>
