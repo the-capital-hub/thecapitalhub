@@ -526,9 +526,14 @@ function Profile() {
       <div className="startups_invested shadow-sm mt-4">
         <div className="header border-bottom p-4 ">
           <h2 className="green_underline typography">Startups Invested</h2>
-          <div className="green_button px-2 px-sm-3 ">
+          <div className="">
             {/* <Link to={""}> */}
-            <ModalBsLauncher id="startupsModal">Add New</ModalBsLauncher>
+            <ModalBsLauncher
+              id="startupsModal"
+              className={"green_button px-2 px-sm-3 "}
+            >
+              Add New
+            </ModalBsLauncher>
             {/* </Link> */}
           </div>
         </div>
@@ -554,9 +559,14 @@ function Profile() {
       <div className="sector_interested shadow-sm">
         <div className="header border-bottom p-4">
           <h2 className="green_underline typography">Sectors Interested</h2>
-          <div className="green_button  px-2 px-sm-3 ">
+          <div className="">
             {/* <Link to={""}> */}
-            <ModalBsLauncher id="sectorsModal">Add New</ModalBsLauncher>
+            <ModalBsLauncher
+              id="sectorsModal"
+              className={"green_button px-2 px-sm-3 "}
+            >
+              Add New
+            </ModalBsLauncher>
             {/* </Link> */}
           </div>
         </div>
