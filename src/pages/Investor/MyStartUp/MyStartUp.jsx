@@ -127,7 +127,16 @@ const MyStartUp = () => {
                 </div>
               </div>
             </div>
-            <div className="card_container p-4 ">
+            <div className="card_container p-4 d-flex gap-5 align-items-center ">
+              {investmentsData.map((company, index) => {
+                return (
+                  <MyInvestmentCard
+                    key={company.id}
+                    company={company}
+                    isInterests={true}
+                  />
+                );
+              })}
               {/* <MyInvestmentCard
                 logo={logoIcon}
                 text="Investment 1"

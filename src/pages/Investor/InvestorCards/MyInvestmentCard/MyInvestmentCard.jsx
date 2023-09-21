@@ -13,11 +13,18 @@ const MyInvestmentCard = ({ company, isInterests = false }) => {
           </div>
         </div>
         {!isInterests ? (
-          <p className="para m-0 " style={{ color: "rgba(74, 74, 74, 1)" }}>
+          <p className="m-0 " style={{ color: "rgba(74, 74, 74, 1)" }}>
             {company.description}
           </p>
         ) : (
-          <div className=""></div>
+          <div className="para mt-2">
+            <p className="m-0 ask__heading ">
+              <strong>Ask:</strong>
+            </p>
+            <p className="m-0 " style={{ color: "rgba(74, 74, 74, 1)" }}>
+              {company.description}
+            </p>
+          </div>
         )}
       </div>
 
@@ -26,14 +33,30 @@ const MyInvestmentCard = ({ company, isInterests = false }) => {
           <img src={InvestedIcon} alt="Image" className="small-image" />
           <p className="m-0 " style={{ color: "rgba(74, 74, 74, 1)" }}>
             Invested:{" "}
-            <span className="equity text-decoration-underline ">
+            <span className="equity text-decoration-underline ms-2 ">
               {company.equity}%
             </span>{" "}
             <strong>Equity</strong>
           </p>
         </div>
       ) : (
-        <div></div>
+        <div className="">
+          <div className="d-flex align-items-center py-2 px-3 border-bottom">
+            <p className="m-0">
+              <strong>My Commitment:</strong> EA
+            </p>
+          </div>
+          <div className="bottom d-flex align-items-center py-2 px-3 gap-2">
+            <img src={InvestedIcon} alt="Image" className="small-image" />
+            <p className="m-0 " style={{ color: "rgba(74, 74, 74, 1)" }}>
+              Invested:{" "}
+              <span className="equity text-decoration-underline ms-2 ">
+                {company.equity}%
+              </span>{" "}
+              <strong>Equity</strong>
+            </p>
+          </div>
+        </div>
       )}
     </div>
   );

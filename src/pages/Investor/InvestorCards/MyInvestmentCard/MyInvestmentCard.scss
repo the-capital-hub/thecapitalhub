@@ -14,4 +14,12 @@
       font-size: 1.25rem;
     }
   }
+
+  .para {
+    display: flex;
+
+    .ask__heading {
+      flex: 0 0 5ch;
+    }
+  }
 }
