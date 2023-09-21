@@ -1,6 +1,7 @@
 import { UserModel } from "../models/User.js";
 import { InvestorModel } from "../models/Investor.js";
 import { sendMail } from "../utils/mailHelper.js";
+import { cloudinary } from "../utils/uploadImage";
 
 const adminMail = "learn.capitalhub@gmail.com";
 
@@ -87,6 +88,14 @@ export const addSectorOfInterest = async (investorId, sectorData) => {
         message: "Investor not found",
       };
     }
+    if(sectorData.logo) {
+      const { url } = await cloudinary.uploader.upload(sectorData.logo, {
+        folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
+        format: "webp",
+        unique_filename: true,
+      });
+      sectorData.logo = url;
+    }
     investor.sectorInterested.push(sectorData);
     await investor.save();
     return {
@@ -113,6 +122,14 @@ export const addStartupInvested = async (investorId, startupData) => {
         status: 404,
         message: "Investor not found",
       };
+    }
+    if(startupData.logo) {
+      const { url } = await cloudinary.uploader.upload(startupData.logo, {
+        folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
+        format: "webp",
+        unique_filename: true,
+      });
+      startupData.logo = url;
     }
     investor.startupsInvested.push(startupData);
     await investor.save();

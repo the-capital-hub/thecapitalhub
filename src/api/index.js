@@ -49,6 +49,8 @@ const API = Object.freeze({
   getPinnedChat: `${baseUrl}/chat/getPinnedChat`,
   getInvestorById: `${baseUrl}/investor/getInvestorById`,
   postInvestorData: `${baseUrl}/investor/createInvestor`,
+  addStartupInvested: `${baseUrl}/investor/addStartupInvested`,
+  addSectorOfInterest: `${baseUrl}/investor/addSectorOfInterest`,
 });
 
 export default API;
