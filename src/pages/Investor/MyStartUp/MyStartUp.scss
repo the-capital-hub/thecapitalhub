@@ -53,9 +53,15 @@
   .green_button {
     border-radius: 5px;
     background: #d3f36b;
+    border: 1px solid #d3f36b;
     padding: 8px 25px;
     width: auto;
     font-size: 14px;
+
+    &:active {
+      // background-color: transparent;
+      transform: scale(0.95);
+    }
 
     a {
       text-decoration: none;

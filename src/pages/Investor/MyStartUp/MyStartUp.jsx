@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./MyStartUp.scss";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import MyInvestmentCard from "../InvestorCards/MyInvestmentCard/MyInvestmentCard";
@@ -11,6 +11,7 @@ import ModalBsLauncher from "../../../components/PopUp/ModalBS/ModalBsLauncher/M
 import ModalBSContainer from "../../../components/PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
 import ModalBSHeader from "../../../components/PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
 import ModalBSBody from "../../../components/PopUp/ModalBS/ModalBSBody/ModalBSBody";
+import AddModalContent from "../../../components/NewInvestor/MyStartupsComponents/AddModalContent";
 
 const MyStartUp = () => {
   // Mock data for my investments
@@ -54,7 +55,7 @@ const MyStartUp = () => {
                 <div className="">
                   {/* <Link to={""}>Add New</Link> */}
                   <ModalBsLauncher
-                    id={"myStartupsAddModal"}
+                    id={"myInvestmentsAddModal"}
                     className={"green_button"}
                   >
                     Add New
@@ -63,7 +64,7 @@ const MyStartUp = () => {
                 <div className="">
                   {/* <Link to={""}>Edit</Link> */}
                   <ModalBsLauncher
-                    id={"myStartupsEditModal"}
+                    id={"myInvestmentsEditModal"}
                     className={"green_button"}
                   >
                     Edit
@@ -75,36 +76,17 @@ const MyStartUp = () => {
               {investmentsData.map((company, index) => {
                 return <MyInvestmentCard key={company.id} company={company} />;
               })}
-              {/* <MyInvestmentCard
-                logo={logoIcon}
-                text="Investment 1"
-                para="Some description for Investment 1."
-                images={EyeLikeImage}
-                smallText="Small text for Investment 1."
-              />
-              <MyInvestmentCard
-                logo={logoIcon}
-                text="Investment 2"
-                para="Some description for Investment 2."
-                images={EyeLikeImage}
-                smallText="Small text for Investment 2."
-              />
-              <MyInvestmentCard
-                logo={logoIcon}
-                text="Investment 3"
-                para="Some description for Investment 3."
-                images={EyeLikeImage}
-                smallText="Small text for Investment 3."
-              /> */}
             </div>
             {/* My Investments Add Modal */}
-            <ModalBSContainer id={"myStartupsAddModal"} isStatic={false}>
+            <ModalBSContainer id={"myInvestmentsAddModal"} isStatic={false}>
               <ModalBSHeader title={"Add new Investment"} />
-              <ModalBSBody>Body</ModalBSBody>
+              <ModalBSBody>
+                <AddModalContent />
+              </ModalBSBody>
             </ModalBSContainer>
 
             {/* My Investments Edit Modal */}
-            <ModalBSContainer id={"myStartupsEditModal"} isStatic={false}>
+            <ModalBSContainer id={"myInvestmentsEditModal"} isStatic={false}>
               <ModalBSHeader title={"Edit Investments"} />
               <ModalBSBody>Body</ModalBSBody>
             </ModalBSContainer>
@@ -115,13 +97,19 @@ const MyStartUp = () => {
               <div className="d-flex gap-2">
                 <div className="">
                   {/* <Link to={""}>Add New</Link> */}
-                  <ModalBsLauncher className={"green_button"}>
+                  <ModalBsLauncher
+                    id={"myInterestsAddModal"}
+                    className={"green_button"}
+                  >
                     Add New
                   </ModalBsLauncher>
                 </div>
                 <div className="">
                   {/* <Link to={""}>Edit</Link> */}
-                  <ModalBsLauncher className={"green_button"}>
+                  <ModalBsLauncher
+                    id={"myInterestsEditModal"}
+                    className={"green_button"}
+                  >
                     Edit
                   </ModalBsLauncher>
                 </div>
@@ -137,28 +125,20 @@ const MyStartUp = () => {
                   />
                 );
               })}
-              {/* <MyInvestmentCard
-                logo={logoIcon}
-                text="Investment 1"
-                para="Some description for Investment 1."
-                images={EyeLikeImage}
-                smallText="Small text for Investment 1."
-              />
-              <MyInvestmentCard
-                logo={logoIcon}
-                text="Investment 2"
-                para="Some description for Investment 2."
-                images={EyeLikeImage}
-                smallText="Small text for Investment 2."
-              />
-              <MyInvestmentCard
-                logo={logoIcon}
-                text="Investment 3"
-                para="Some description for Investment 3."
-                images={EyeLikeImage}
-                smallText="Small text for Investment 3."
-              /> */}
             </div>
+            {/* My Interests Add Modal */}
+            <ModalBSContainer id={"myInterestsAddModal"} isStatic={false}>
+              <ModalBSHeader title={"Add new Interest"} />
+              <ModalBSBody>
+                <AddModalContent isInterests />
+              </ModalBSBody>
+            </ModalBSContainer>
+
+            {/* My Investments Edit Modal */}
+            <ModalBSContainer id={"myInterestsEditModal"} isStatic={false}>
+              <ModalBSHeader title={"Edit Interests"} />
+              <ModalBSBody>Body</ModalBSBody>
+            </ModalBSContainer>
           </div>
         </div>
 

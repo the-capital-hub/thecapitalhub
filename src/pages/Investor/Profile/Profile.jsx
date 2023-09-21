@@ -545,7 +545,7 @@ function Profile() {
         </div>
       </div>
       {/* Startups Modal */}
-      <ModalBSContainer id="startupsModal" isStatic={false}>
+      <ModalBSContainer id="startupsModal" isStatic={false} modalXl>
         <ModalBSHeader title="Add/Edit Startups Invested" />
         <ModalBSBody>
           <AddEditModal
@@ -578,7 +578,7 @@ function Profile() {
         </div>
       </div>
       {/* Sectors Modal */}
-      <ModalBSContainer id="sectorsModal" isStatic={false}>
+      <ModalBSContainer id="sectorsModal" isStatic={false} modalXl>
         <ModalBSHeader title={"Add/Edit Sectors interested"} />
         <ModalBSBody>
           <AddEditModal
