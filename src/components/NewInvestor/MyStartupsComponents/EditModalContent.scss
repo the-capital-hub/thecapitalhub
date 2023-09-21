@@ -1,0 +1,10 @@
+.edit__modal__body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2em;
+  justify-content: space-around;
+
+  @media (min-width: 1000px) {
+    grid-template-columns: 50% 45%;
+  }
+}
