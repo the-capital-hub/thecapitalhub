@@ -37,4 +37,12 @@
       cursor: pointer;
     }
   }
+
+  .investment-card-container {
+    flex: 0 0 19rem;
+
+    @media (min-width: 500px) {
+      flex: 0 0 24rem;
+    }
+  }
 }
