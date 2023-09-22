@@ -79,7 +79,11 @@ export default function AddModalContent({ isInterests = false }) {
             />
           </div>
 
-          <button type="submit" className="green_button w-auto mx-auto fs-6">
+          <button
+            type="submit"
+            className="green_button w-auto mx-auto fs-6"
+            data-bs-dismiss="modal"
+          >
             Save
           </button>
         </form>

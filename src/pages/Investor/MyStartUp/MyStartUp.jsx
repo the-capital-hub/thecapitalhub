@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./MyStartUp.scss";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import MyInvestmentCard from "../InvestorCards/MyInvestmentCard/MyInvestmentCard";
@@ -14,34 +14,42 @@ import ModalBSBody from "../../../components/PopUp/ModalBS/ModalBSBody/ModalBSBo
 import AddModalContent from "../../../components/NewInvestor/MyStartupsComponents/AddModalContent";
 import EditModalContent from "../../../components/NewInvestor/MyStartupsComponents/EditModalContent";
 
+// Mock data for my investments
+const investmentsData = [
+  {
+    id: 1,
+    logo: logoIcon,
+    name: "Bondlink",
+    description:
+      "One classical breakdown of economic activity distinguishes three sectors.",
+    equity: 3,
+    commitment: "EA",
+  },
+  {
+    id: 2,
+    logo: logoIcon,
+    name: "Mini Cubex",
+    description:
+      "One classical breakdown of economic activity distinguishes three sectors.",
+    equity: 10,
+    commitment: "EA",
+  },
+  {
+    id: 3,
+    logo: logoIcon,
+    name: "HCL",
+    description:
+      "One classical breakdown of economic activity distinguishes three sectors.",
+    equity: 10,
+    commitment: "EA",
+  },
+];
+
 const MyStartUp = () => {
-  // Mock data for my investments
-  const investmentsData = [
-    {
-      id: 1,
-      logo: logoIcon,
-      name: "Bondlink",
-      description:
-        "One classical breakdown of economic activity distinguishes three sectors.",
-      equity: 3,
-    },
-    {
-      id: 2,
-      logo: logoIcon,
-      name: "Mini Cubex",
-      description:
-        "One classical breakdown of economic activity distinguishes three sectors.",
-      equity: 10,
-    },
-    {
-      id: 3,
-      logo: logoIcon,
-      name: "HCL",
-      description:
-        "One classical breakdown of economic activity distinguishes three sectors.",
-      equity: 10,
-    },
-  ];
+  // Make fetch request for companies data
+
+  // Save fetched data to state.
+  const [companyData, setCompanyData] = useState(investmentsData);
 
   return (
     <>
@@ -50,7 +58,7 @@ const MyStartUp = () => {
         <div className="row mt-2 m-3">
           <div className="col-12 startup_container p-0">
             {/* My Investments */}
-            <div className="d-flex align-items-center justify-content-between border border-3 border-top-0 border-start-0 border-end-0 py-3 px-4 ">
+            <div className="d-flex align-items-center justify-content-between border border-2 border-top-0 border-start-0 border-end-0 py-3 px-4 ">
               <h4 className="title_h4 m-0 green_underline ">My Investments</h4>
               <div className="d-flex gap-2">
                 <div className="">
@@ -73,8 +81,8 @@ const MyStartUp = () => {
                 </div>
               </div>
             </div>
-            <div className="card_container border-bottom p-4 d-flex gap-5 align-items-center">
-              {investmentsData.map((company, index) => {
+            <div className="card_container border-bottom p-4 d-flex gap-5 align-items-center overflow-x-auto">
+              {companyData.map((company, index) => {
                 return <MyInvestmentCard key={company.id} company={company} />;
               })}
             </div>
@@ -91,15 +99,16 @@ const MyStartUp = () => {
               id={"myInvestmentsEditModal"}
               isStatic={false}
               modalXl
+              key={"edit investments"}
             >
               <ModalBSHeader title={"Edit Investments"} />
               <ModalBSBody>
-                <EditModalContent dataArray={investmentsData} />
+                <EditModalContent dataArray={companyData} key={"investments"} />
               </ModalBSBody>
             </ModalBSContainer>
 
             {/* My Interests */}
-            <div className="d-flex align-items-center justify-content-between border border-3 border-top-0 border-start-0 border-end-0 py-3 px-4 ">
+            <div className="d-flex align-items-center justify-content-between border border-2 border-top-0 border-start-0 border-end-0 py-3 px-4 ">
               <h4 className="title_h4 m-0 green_underline">My Interests</h4>
               <div className="d-flex gap-2">
                 <div className="">
@@ -123,7 +132,7 @@ const MyStartUp = () => {
               </div>
             </div>
             <div className="card_container p-4 d-flex gap-5 align-items-center ">
-              {investmentsData.map((company, index) => {
+              {companyData.map((company, index) => {
                 return (
                   <MyInvestmentCard
                     key={company.id}
@@ -141,18 +150,16 @@ const MyStartUp = () => {
               </ModalBSBody>
             </ModalBSContainer>
 
-            {/* My Investments Edit Modal */}
+            {/* My Invterests Edit Modal */}
             <ModalBSContainer
               id={"myInterestsEditModal"}
               isStatic={false}
               modalXl
+              key={"edit interests"}
             >
               <ModalBSHeader title={"Edit Interests"} />
               <ModalBSBody>
-                <EditModalContent
-                  dataArray={investmentsData}
-                  isInterests={true}
-                />
+                <EditModalContent dataArray={companyData} isInterests={true} />
               </ModalBSBody>
             </ModalBSContainer>
           </div>
