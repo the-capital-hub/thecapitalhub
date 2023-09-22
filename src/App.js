@@ -71,6 +71,8 @@ import BlogWrapper from "./components/Blog/BlogWrapper/BlogWrapper";
 import MeeshoBlog from "./pages/Blogs/MeeshoBlog/MeeshoBlog";
 import GoodDotBlog from "./pages/Blogs/GoodDotBlog/GoodDotBlog";
 import MyKareBlog from "./pages/Blogs/MyKareBlog/MyKareBlog";
+import InvestorHomeFeed from "./pages/Investor/Home/Home";
+
 
 function App() {
   return (
@@ -259,7 +261,7 @@ function App() {
 
           {/* OneLink */}
           <Route path="/onelink/:username" element={<ValidateOneLink />}>
-            <Route path="" element={<Company />} />
+          <Route path="" element={<Company />} />
             <Route path="profile" element={<Profile />} />
             <Route path="onePager" element={<OnePager />} />
             <Route path="documentation" element={<DocumentationIV />} />
@@ -270,6 +272,7 @@ function App() {
 
           {/* Investor */}
           <Route path="/investor" element={<ProtectedInvestorRoutes />}>
+          <Route path="home" element={<InvestorHomeFeed/>} />
             <Route path="" element={<Navigate to="profile" replace />} />
             <Route path="profile" element={<InvestorProfile />} />
             <Route path="mystartups" element={<MyStartUp />} />
