@@ -13,6 +13,7 @@ import {
   getPinnedChat,
 } from "../../../../Service/user";
 import { useLocation } from "react-router-dom";
+import CommunitiesContainer from "../../../../components/Investor/ChatComponents/CommunitiesContainer";
 
 const ChatSidebar = ({
   selectedChat,
