@@ -2,16 +2,18 @@ import React, { useEffect } from "react";
 import "./MyInvestmentCard.scss";
 import InvestedIcon from "../../../../Images/investorIcon/Ellipse 192.svg";
 import { useState } from "react";
+import { BsFillCloudUploadFill } from "react-icons/bs";
 
 const MyInvestmentCard = ({
   company,
   isInterests = false,
-  editMode,
-  setEditMode,
-  setCompanies,
+  editMode = false,
+  updateCompanies,
 }) => {
+  // Save company rendered in modal tp state
   const [currCompany, setCurrCompany] = useState(company);
 
+  // Update changes to currCompany
   function handleInputChange(e, id) {
     let value = e.target.value;
     let key = e.target.name;
@@ -28,40 +30,56 @@ const MyInvestmentCard = ({
       setCurrCompany((prevCurrCompany) => {
         return { ...prevCurrCompany, equity: value };
       });
+    } else if (key === "commitment") {
+      setCurrCompany((prevCurrCompany) => {
+        return { ...prevCurrCompany, commitment: value };
+      });
     }
   }
 
+  // Pass updated currCompany to EditModalContent.jsx
   function handleSave(currCompany) {
-    setEditMode(false);
-
-    setCompanies((prevCompanies) => {
-      let companiesList = prevCompanies.map((comp, index) => {
-        if (comp.id === currCompany.id) {
-          return { ...currCompany };
-        }
-        return comp;
-      });
-
-      // console.log(companiesList);
-      return companiesList;
-    });
+    updateCompanies(currCompany);
   }
 
   return (
     <div className="investment-card-container border rounded-3 position-relative">
       <div className="d-flex flex-column py-2 px-3 border-bottom ">
         <div className="left">
-          <img src={currCompany.logo} alt="Logo" className="logo" />
+          {/* Logo */}
+          {!editMode ? (
+            <img src={currCompany.logo} alt="Logo" className="logo" />
+          ) : (
+            <div className="">
+              <label
+                htmlFor="logoFile"
+                className="upload__label rounded-circle "
+                style={{ width: "80px", height: "80px" }}
+              >
+                <BsFillCloudUploadFill
+                  style={{
+                    fontSize: "1.5rem",
+                    color: "rgba(140, 90, 201, 1)",
+                  }}
+                />
+              </label>
+              <input
+                type="file"
+                name="logoFile"
+                id="logoFile"
+                accept="image/*"
+                className={`visually-hidden`}
+              />
+            </div>
+          )}
 
           {/* Name */}
           {!editMode ? (
-            <p
-              className="text m-0 ms-3"
-              onDoubleClick={() => setEditMode(true)}
-            >
+            <p className="text m-0 ms-3">
               <strong className="green_underline">{currCompany.name}</strong>
             </p>
           ) : (
+            // Name input
             <input
               type="text"
               name="name"
@@ -79,10 +97,10 @@ const MyInvestmentCard = ({
             <p
               className={`m-0 mt-2 ${editMode ? "d-none" : "d-block"} `}
               style={{ color: "rgba(74, 74, 74, 1)" }}
-              onDoubleClick={() => setEditMode(true)}
             >
               {currCompany.description}
             </p>
+            {/* Description input */}
             <textarea
               id="description"
               name="description"
@@ -103,10 +121,10 @@ const MyInvestmentCard = ({
             <p
               className={`m-0 ${editMode ? "d-none" : "d-block"}  `}
               style={{ color: "rgba(74, 74, 74, 1)" }}
-              onDoubleClick={() => setEditMode(true)}
             >
               {currCompany.description}
             </p>
+            {/* Interests ask field input */}
             <textarea
               id="description"
               name="description"
@@ -131,10 +149,10 @@ const MyInvestmentCard = ({
               className={`equity text-decoration-underline ms-2 ${
                 editMode ? "d-none" : ""
               }`}
-              onDoubleClick={() => setEditMode(true)}
             >
               {currCompany.equity}%
             </span>{" "}
+            {/*Investment Equity input */}
             <input
               type="number"
               name="equity"
@@ -153,8 +171,23 @@ const MyInvestmentCard = ({
       ) : (
         <div className="">
           <div className="d-flex align-items-center py-2 px-3 border-bottom">
-            <p className="m-0">
-              <strong>My Commitment:</strong> EA
+            {/* Interests Commitment */}
+            <p className={`m-0`}>
+              <strong>My Commitment:</strong>{" "}
+              <span className={`${editMode ? "d-none" : ""}`}>
+                {currCompany.commitment}
+              </span>
+              {/* Interests Commitment input */}
+              <input
+                type="text"
+                name="commitment"
+                id="commitment"
+                className={`modal__input p-2 mx-1 w-50 rounded-2 ${
+                  editMode ? "d-inline" : "d-none"
+                } `}
+                defaultValue={currCompany.commitment}
+                onChange={(e) => handleInputChange(e, currCompany.id)}
+              />
             </p>
           </div>
 
@@ -166,10 +199,10 @@ const MyInvestmentCard = ({
                 className={`equity text-decoration-underline ms-2 ${
                   editMode ? "d-none" : ""
                 }`}
-                onDoubleClick={() => setEditMode(true)}
               >
                 {currCompany.equity}%
               </span>{" "}
+              {/* Interests Equity input */}
               <input
                 type="number"
                 name="equity"

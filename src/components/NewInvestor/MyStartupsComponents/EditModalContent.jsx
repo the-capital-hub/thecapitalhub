@@ -1,19 +1,43 @@
 import MyInvestmentCard from "../../../pages/Investor/InvestorCards/MyInvestmentCard/MyInvestmentCard";
 import { AiFillDelete } from "react-icons/ai";
 import { CiEdit } from "react-icons/ci";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./EditModalContent.scss";
 
 export default function EditModalContent({ dataArray, isInterests }) {
+  // Save companies data to state.
   const [companies, setCompanies] = useState(dataArray);
+
+  // editMode to enable/disable editing.
   const [editMode, setEditMode] = useState(false);
-  const [editingCompany, setEditingCompany] = useState(companies[0]);
+
+  // Set editing company and pass it to MyInvestmentCard.
+  const [editingCompany, setEditingCompany] = useState(dataArray[0]);
+
+  useEffect(() => {
+    // Make Post request to update Investment data.
+  }, [companies]);
 
   function handleEditClick(selectedCompany) {
-    // console.log(companies.filter((company) => company.id === id)[0]);
     setEditingCompany(selectedCompany);
-    console.log(editingCompany);
     setEditMode(true);
+  }
+
+  function updateCompanies(newCompanyData) {
+    // Set Editmode to false
+    setEditMode(false);
+
+    // updating list of companies with new information.
+    setCompanies((prevCompanies) => {
+      let companiesList = prevCompanies.map((comp, index) => {
+        if (comp.id === newCompanyData.id) {
+          return { ...newCompanyData };
+        }
+        return comp;
+      });
+      // console.log(companiesList);
+      return companiesList;
+    });
   }
 
   return (
@@ -30,9 +54,16 @@ export default function EditModalContent({ dataArray, isInterests }) {
                 <img
                   src={company.logo}
                   alt={company.name}
-                  style={{ width: "50px" }}
+                  style={{ width: "50px", cursor: "pointer" }}
+                  onClick={() => setEditingCompany(company)}
                 />
-                <h6 className="green_underline ">{company.name}</h6>
+                <h6
+                  className="green_underline "
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setEditingCompany(company)}
+                >
+                  {company.name}
+                </h6>
                 <div className="d-flex gap-2">
                   <button
                     className="green_button px-3"
@@ -55,8 +86,7 @@ export default function EditModalContent({ dataArray, isInterests }) {
           company={editingCompany}
           isInterests={isInterests}
           editMode={editMode}
-          setEditMode={setEditMode}
-          setCompanies={setCompanies}
+          updateCompanies={updateCompanies}
           key={editingCompany.id}
         />
       </div>
