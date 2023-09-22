@@ -1,5 +1,5 @@
 .investment-card-container {
-  width: 24rem;
+  flex: 0 0 24rem;
   // border-radius: 10px;
   // border: 1px solid #eaeaea;
   background: #fff;
@@ -35,5 +35,5 @@
 }
 
 .save__button {
-  bottom: -50px;
+  bottom: -45px;
 }
