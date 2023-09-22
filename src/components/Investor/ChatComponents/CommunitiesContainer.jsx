@@ -1,13 +1,7 @@
-import { HiOutlineUserGroup } from "react-icons/hi2";
-import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import "./CommunitiesContainer.scss";
 import CommunityCard from "./CommunityCard";
 import { useState } from "react";
-import ModalBSContainer from "../../PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
-import ModalBSHeader from "../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
-import ModalBSBody from "../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
-import ModalBsLauncher from "../../PopUp/ModalBS/ModalBsLauncher/ModalBsLauncher";
-import NewCommunityModal from "./NewCommunityModal";
+import CommunitiesIcon from "./CommunitiesIcon";
 
 export default function CommunitiesContainer() {
   // Fetch Commmunities data here
@@ -28,6 +22,27 @@ export default function CommunitiesContainer() {
       lastMessage: "Nice one! It is also a good idea to include... ",
       lastMessageTimestamp: "3:37 pm",
     },
+    {
+      id: 3,
+      name: "Fintech Investors",
+      lastUser: "Robert",
+      lastMessage: "Nice one! It is also a good idea to include... ",
+      lastMessageTimestamp: "3:37 pm",
+    },
+    {
+      id: 4,
+      name: "Fintech Investors",
+      lastUser: "Robert",
+      lastMessage: "Nice one! It is also a good idea to include... ",
+      lastMessageTimestamp: "3:37 pm",
+    },
+    {
+      id: 5,
+      name: "Fintech Investors",
+      lastUser: "Robert",
+      lastMessage: "Nice one! It is also a good idea to include... ",
+      lastMessageTimestamp: "3:37 pm",
+    },
   ];
   // Save data to State
   const [communities, setCommunities] = useState(communitiesData);
@@ -35,7 +50,10 @@ export default function CommunitiesContainer() {
   return (
     <details className="communities__wrapper d-flex flex-column bg-white rounded-4 shadow-sm">
       <summary className="communities__header d-flex align-items-center gap-2 py-3 px-4 ">
-        <HiOutlineUserGroup style={{ fontSize: "2rem" }} />
+        {/* <HiOutlineUserGroup style={{ fontSize: "2rem" }} /> */}
+        <CommunitiesIcon
+          style={{ height: "30px", width: "30px", color: "currentColor" }}
+        />
         <h4
           className="m-0 text-capitalize "
           // style={{ color: " rgba(159, 159, 159, 1)" }}
@@ -45,16 +63,16 @@ export default function CommunitiesContainer() {
       </summary>
       <div className="communities__chats d-flex flex-column pb-4 border-top">
         {/* Add new */}
-        <ModalBsLauncher
+        {/* <ModalBsLauncher
           id="AddNewCommunity"
           className="new__community d-flex align-items-center gap-3 px-4 py-4 border-bottom "
         >
           {" "}
           <AiOutlineUsergroupAdd style={{ fontSize: "1.75rem" }} />{" "}
           <h5 className="m-0">New Community</h5>{" "}
-        </ModalBsLauncher>
+        </ModalBsLauncher> */}
         {/* Add new Modal */}
-        <ModalBSContainer isStatic={false} id="AddNewCommunity">
+        {/* <ModalBSContainer isStatic={false} id="AddNewCommunity">
           <ModalBSHeader
             title={"Create a Community"}
             className={"orange__heading"}
@@ -62,7 +80,7 @@ export default function CommunitiesContainer() {
           <ModalBSBody>
             <NewCommunityModal />
           </ModalBSBody>
-        </ModalBSContainer>
+        </ModalBSContainer> */}
 
         {/* Render communities list */}
         <div className="my__communities d-flex flex-column gap-4 px-4 pt-4">

@@ -40,22 +40,24 @@ export default function NewCommunityModal() {
   ];
 
   return (
-    <div className="newCommunity__modal d-flex flex-column gap-3 p-3 border rounded-3">
+    <div className="newCommunity__modal d-flex flex-column gap-3 p-3 ">
       {/* Name input */}
-      <div className="border-bottom py-3">
-        <label htmlFor="communityName">Name:</label>
+      <div className=" py-3">
         <input
           type="text"
           name="communityName"
           id="communityName"
-          placeholder="community name..."
-          className="modal__input p-2 rounded-2 ms-2"
+          placeholder="Enter Name"
+          className="modal__input p-2 rounded-2 w-100"
         />
       </div>
 
       {/* Contact search */}
       <div className="search__members">
-        <div className="d-flex align-items-center gap-2 p-2 border rounded-2">
+        <div
+          className="d-flex align-items-center gap-2 p-2 border rounded-2"
+          style={{ backgroundColor: "#fafafa" }}
+        >
           <BsSearch />
           <input
             type="search"
@@ -77,14 +79,21 @@ export default function NewCommunityModal() {
             >
               <img src={contact.image} alt="contact" />
               <h6 className="m-0">{contact.name}</h6>
-              <button className="btn btn-success">Add</button>
+              <button className="orange_button">Add</button>
             </div>
           );
         })}
       </div>
 
-      {/* Done */}
-      <button className="orange_button w-25 mx-auto">Done</button>
+      {/* Cancel/Done */}
+      <div className="d-flex justify-content-center align-items-center gap-2">
+        <button className="cancel_button w-25 " data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button className="orange_button w-25 " data-bs-dismiss="modal">
+          Done
+        </button>
+      </div>
     </div>
   );
 }

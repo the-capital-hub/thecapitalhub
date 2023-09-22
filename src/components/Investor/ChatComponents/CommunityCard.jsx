@@ -19,7 +19,10 @@ export default function CommunityCard({ community }) {
       </span>
       <div className="d-flex justify-content-between w-100">
         <div className="d-flex flex-column justify-content-between gap-2">
-          <h5 className="m-0 text-capitalize" style={{ fontSize: "1.25rem" }}>
+          <h5
+            className="m-0 text-capitalize"
+            style={{ fontSize: "1.25rem", color: "#fd5901" }}
+          >
             {community.name}
           </h5>
           <p className="m-0 text__clip " style={{ fontSize: "0.8rem" }}>
