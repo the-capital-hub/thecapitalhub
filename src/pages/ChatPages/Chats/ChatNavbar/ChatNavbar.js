@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { getUserAndStartUpByUserIdAPI } from "../../../../Service/user";
 
 const ChatNavbar = ({chatId, userId}) => {
+  const [chatkebabMenu, setChatkebabMenu] = useState(false);
+
   const [user, setUser] = useState(null);
   useEffect(() => {
     getUserAndStartUpByUserIdAPI(userId)
@@ -30,13 +32,19 @@ const ChatNavbar = ({chatId, userId}) => {
               {/* <h4 className="online">Online</h4> */}
             </div>
           </div>
-          <div className="right">
+          <div className="right ">
             {/* <img src={CallIcon} className="call"/>
             <img src={videoIcon} className="video"/> */}
-            <img src={threeDotIcon} className="threedot"/>
-
+            <img src={threeDotIcon} className="threedot"  onClick={() => setChatkebabMenu(!chatkebabMenu)}/>
           </div>
       </div>
+          {chatkebabMenu && (
+                      <ul className="kebab_menu border rounded shadow-sm p-3">
+                        
+                        <li >Clear Chat</li>
+                      </ul>
+                    )}
+      
     </>
   );
 };
