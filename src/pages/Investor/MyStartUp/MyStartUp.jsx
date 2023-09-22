@@ -60,7 +60,7 @@ const MyStartUp = () => {
             {/* My Investments */}
             <div className="d-flex align-items-center justify-content-between border border-2 border-top-0 border-start-0 border-end-0 py-3 px-4 ">
               <h4 className="title_h4 m-0 green_underline ">My Investments</h4>
-              <div className="d-flex gap-2">
+              <div className="d-flex flex-column flex-md-row text-center gap-2">
                 <div className="">
                   {/* <Link to={""}>Add New</Link> */}
                   <ModalBsLauncher
@@ -110,7 +110,7 @@ const MyStartUp = () => {
             {/* My Interests */}
             <div className="d-flex align-items-center justify-content-between border border-2 border-top-0 border-start-0 border-end-0 py-3 px-4 ">
               <h4 className="title_h4 m-0 green_underline">My Interests</h4>
-              <div className="d-flex gap-2">
+              <div className="d-flex  flex-column flex-md-row text-center gap-2">
                 <div className="">
                   {/* <Link to={""}>Add New</Link> */}
                   <ModalBsLauncher
@@ -131,7 +131,7 @@ const MyStartUp = () => {
                 </div>
               </div>
             </div>
-            <div className="card_container p-4 d-flex gap-5 align-items-center ">
+            <div className="card_container p-4 d-flex gap-5 align-items-center overflow-x-auto ">
               {companyData.map((company, index) => {
                 return (
                   <MyInvestmentCard
