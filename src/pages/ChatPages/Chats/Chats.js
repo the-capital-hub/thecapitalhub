@@ -10,6 +10,7 @@ import { io } from "socket.io-client";
 import { environment } from "../../../environments/environment";
 import { useLocation } from "react-router-dom";
 import { findChat, createChat } from "../../../Service/user";
+import CommunitiesContainer from "../../../components/Investor/ChatComponents/CommunitiesContainer";
 
 const Chats = () => {
   const location = useLocation();
@@ -26,7 +27,7 @@ const Chats = () => {
   // if (previousUrl) {
   //   console.log('Previous URL:', window.location.href);
   // }
-  
+
   const socket = useRef();
 
   const disconnectSocket = () => {
@@ -61,7 +62,7 @@ const Chats = () => {
     if (sendMessage !== null) {
       socket.current?.emit("send-message", sendMessage);
     }
-  }, [sendMessage])
+  }, [sendMessage]);
 
   const handleCreateChat = async () => {
     await createChat(userId, loggedInUser._id)
@@ -72,7 +73,7 @@ const Chats = () => {
       .catch((error) => {
         console.error("Error creating chat-->", error);
       });
-  }
+  };
   useEffect(() => {
     if (userId) {
       findChat(userId, loggedInUser._id)
@@ -81,7 +82,7 @@ const Chats = () => {
           if (res.data.length === 0) {
             return handleCreateChat();
           } else {
-            setSelectedChat(res.data._id)
+            setSelectedChat(res.data._id);
             setSelectedUser(userId);
             console.log("Chat:", res.data._id);
           }
@@ -90,27 +91,24 @@ const Chats = () => {
           console.error("Error-->", error);
         });
     }
-  }, [userId])
+  }, [userId]);
   return (
     <>
       <div className="container-fluid chat_main_container">
         <section className="left_section">
-          <ChatSearch  />
+          <ChatSearch />
+          <CommunitiesContainer />
           <ChatSidebar
             selectedChat={setSelectedChat}
             setSelectedUser={setSelectedUser}
             recieveMessage={recieveMessage}
             sendMessage={sendMessage}
           />
-
         </section>
         <section className="right_section ">
           {selectedChat && (
             <>
-              <ChatNavbar
-                chatId={selectedChat}
-                userId={selectedUser}
-              />
+              <ChatNavbar chatId={selectedChat} userId={selectedUser} />
               <ChatDashboard
                 chatId={selectedChat}
                 userId={selectedUser}

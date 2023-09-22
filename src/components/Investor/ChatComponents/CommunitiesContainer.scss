@@ -1,0 +1,23 @@
+.communities__wrapper {
+  width: 90%;
+  border: 1px solid #cfcfcf;
+
+  .new__community {
+    cursor: pointer;
+  }
+
+  .modal-header {
+    border-color: black;
+  }
+}
+
+.orange__heading {
+  color: #fd5901;
+}
+
+.text__clip {
+  width: 20ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

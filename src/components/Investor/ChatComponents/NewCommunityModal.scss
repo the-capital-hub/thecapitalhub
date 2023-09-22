@@ -1,0 +1,23 @@
+.newCommunity__modal {
+  .modal__input {
+    outline: 0;
+    transition: border 0.3s ease-in-out;
+    &:focus {
+      border: 1px solid #fd5901;
+    }
+  }
+
+  .orange_button {
+    border-radius: 5px;
+    background: #fd5901;
+    border: 1px solid #fd5901;
+    padding: 8px 25px;
+    width: auto;
+    font-size: 14px;
+
+    &:active {
+      // background-color: transparent;
+      transform: scale(0.95);
+    }
+  }
+}
