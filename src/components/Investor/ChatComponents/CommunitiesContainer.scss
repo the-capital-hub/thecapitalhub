@@ -49,3 +49,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.community__card {
+  h5 {
+    font-size: 1.125rem;
+  }
+
+  .time__stamp {
+    font-size: 0.8rem;
+  }
+}
