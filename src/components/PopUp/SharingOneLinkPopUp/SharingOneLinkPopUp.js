@@ -28,14 +28,20 @@ const SharingOneLinkPopUp = ({ introMessage, oneLink, onClose }) => {
         <div className="popup-content">
           <p className="text_section">{messageForSharing}</p>
 
-          <h6>Click here for: <a href={shareUrl}>OneLink</a></h6>
+          <h6>
+            Click here for:{" "}
+            <a href={shareUrl} target="_blank" rel="noopener noreferrer">
+              OneLink
+            </a>
+          </h6>
+    
 
           <h4>Share this details via</h4>
           <div className="share-buttons">
             <FacebookShareButton url={shareUrl} quote={messageForSharing}>
               <FacebookIcon size={32} round />
             </FacebookShareButton>
-            <WhatsappShareButton url={"\n Here is Our OneLink : "+shareUrl} title={messageForSharing}>
+            <WhatsappShareButton url={"\n Here is Our OneLink : " + shareUrl} title={messageForSharing}>
               <WhatsappIcon size={32} round />
             </WhatsappShareButton>
             <EmailShareButton url={shareUrl} body={messageForSharing}>
