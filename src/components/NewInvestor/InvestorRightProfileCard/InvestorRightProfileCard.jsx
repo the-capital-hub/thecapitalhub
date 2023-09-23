@@ -38,13 +38,13 @@ const RightProfileCard = ({noProfile}) => {
             </div>
             
             <Link
-              to="/manage-account"
+              to="/investor/manage-account"
               className="profile_btn mt-1 manage_acount_btn"
             >
               Manage Account
             </Link>
             {/* loop */}
-            <div className="card mt-2 right_view_profile_card right_loop_card ">
+            {/* <div className="card mt-2 right_view_profile_card right_loop_card ">
               <div className="card-header">
                 <div className="loop_title">
                   <span>Loop</span>
@@ -68,7 +68,7 @@ const RightProfileCard = ({noProfile}) => {
                   </button>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

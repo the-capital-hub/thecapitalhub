@@ -130,7 +130,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 active={location.pathname.includes("/home")}
                 className="active-item"
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="">
+                <Link onClick={() => setSidebarCollapsed(true)} to="/investor/home">
                   <img src={HomeIcon} alt="image" />
                   {!sidebarCollapsed && <span>Home</span>}
                 </Link>

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
-import RightProfileCard from "../../../components/Investor/InvestorGlobalCards/RightProfileCard/RightProfileCard";
+import InvestorRightProfileCard from "../../../components/NewInvestor/InvestorRightProfileCard/InvestorRightProfileCard";
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
 import fisdomStartUpIcon from "../../../Images/Investor/Profile/fisdom_startup.png";
@@ -492,7 +492,7 @@ function Profile() {
         <div className="col thirty">
           <div className="content-30">
             <div className="row d-none d-xl-block">
-              <RightProfileCard noProfile />
+              <InvestorRightProfileCard />
               <RecommendationCard />
               <NewsCorner />
             </div>
