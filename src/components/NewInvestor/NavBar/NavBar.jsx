@@ -310,7 +310,7 @@ const NavBar = (props) => {
               </Link>
               {/* <div className="icon-wrapper d-none d-md-block"> */}
               <div className="icon-wrapper">
-                <Link to={"/manage-account"}>
+                <Link to={"/investor/manage-account"}>
                   {" "}
                   <img
                     className="profile-pic rounded-circle"

@@ -72,7 +72,7 @@ import MeeshoBlog from "./pages/Blogs/MeeshoBlog/MeeshoBlog";
 import GoodDotBlog from "./pages/Blogs/GoodDotBlog/GoodDotBlog";
 import MyKareBlog from "./pages/Blogs/MyKareBlog/MyKareBlog";
 import InvestorHomeFeed from "./pages/Investor/Home/Home";
-
+import NewInvestorManageAccount from "./components/NewInvestor/InvestorManageAccount/NewInvestorManageAccount";
 
 function App() {
   return (
@@ -275,6 +275,7 @@ function App() {
           <Route path="home" element={<InvestorHomeFeed/>} />
             <Route path="" element={<Navigate to="profile" replace />} />
             <Route path="profile" element={<InvestorProfile />} />
+            <Route path="manage-account" element={<NewInvestorManageAccount />} />
             <Route path="mystartups" element={<MyStartUp />} />
             <Route path="explore" element={<Explore />} />
             <Route path="syndicates" element={<Syndicates />} />

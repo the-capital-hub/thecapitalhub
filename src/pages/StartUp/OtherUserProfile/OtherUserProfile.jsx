@@ -24,6 +24,7 @@ function OtherUserProfile() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getUserAndStartUpByUserIdAPI(userId)
       .then(({ data }) => setUserData(data))
       .catch(() => navigate("/profile"));
