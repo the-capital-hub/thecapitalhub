@@ -22,6 +22,7 @@ const Chats = () => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [sendMessage, setSendMessage] = useState(null);
   const [recieveMessage, setRecieveMessage] = useState(null);
+  const [cleared, setCleared] = useState(false);
   // const previousUrl = window.history.length > 1 ? window.history.go(-1) : null;
 
   // if (previousUrl) {
@@ -108,12 +109,13 @@ const Chats = () => {
         <section className="right_section ">
           {selectedChat && (
             <>
-              <ChatNavbar chatId={selectedChat} userId={selectedUser} />
+              <ChatNavbar chatId={selectedChat} userId={selectedUser} isclear={setCleared} cleared={cleared}/>
               <ChatDashboard
                 chatId={selectedChat}
                 userId={selectedUser}
                 setSendMessage={setSendMessage}
                 recieveMessage={recieveMessage}
+                cleared={cleared}
               />
             </>
           )}
