@@ -95,7 +95,7 @@ const Chats = () => {
   return (
     <>
       <div className="container-fluid chat_main_container">
-        <section className="left_section">
+        <section className="left_section my-3 ">
           <ChatSearch />
           <CommunitiesContainer />
           <ChatSidebar
@@ -105,7 +105,7 @@ const Chats = () => {
             sendMessage={sendMessage}
           />
         </section>
-        <section className="right_section ">
+        <section className="right_section my-3 ">
           {selectedChat && (
             <>
               <ChatNavbar chatId={selectedChat} userId={selectedUser} />
