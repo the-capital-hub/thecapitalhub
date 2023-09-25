@@ -28,7 +28,7 @@ AWS.config.update({
 
 const s3 = new AWS.S3();
 
-const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
+const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState(null);
@@ -68,7 +68,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage }) => {
       .catch((error) => {
         console.error("Error-->", error);
       });
-  }, [chatId]);
+  }, [chatId, cleared]);
 
   useEffect(() => {
     getUserAndStartUpByUserIdAPI(userId)
