@@ -55,6 +55,11 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
     localStorage.removeItem("isLoggedIn");
     navigate("/login");
   };
+
+  function handleMyCommunityClick() {
+    navigate("/chats");
+  }
+
   return (
     <div
       className={`container sidebar_container ${
@@ -182,20 +187,23 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   </div>
                   {!sidebarCollapsed && (
                     <details className="">
-                      <summary className="">Community</summary>
+                      <summary className="d-flex align-items-center gap-2">
+                        Community
+                      </summary>
                       <div className="d-flex flex-column gap-2">
                         {/* Add new */}
                         <ModalBsLauncher
                           id="AddNewCommunity"
                           className="sidebar__community__btn m-0"
                         >
-                          <p className="m-0">Create a Community</p>{" "}
+                          <p className="m-0">Create a Community</p>
                         </ModalBsLauncher>
-                        {/* <Link to={`/chats`} className="justify-content-start "> */}
-                        <button className="sidebar__community__btn">
+                        <button
+                          className="sidebar__community__btn"
+                          onClick={handleMyCommunityClick}
+                        >
                           My Community
                         </button>
-                        {/* </Link> */}
                       </div>
                     </details>
                   )}
