@@ -83,7 +83,7 @@ export default function CommunitiesContainer() {
         </ModalBSContainer> */}
 
         {/* Render communities list */}
-        <div className="my__communities d-flex flex-column gap-4 px-4 pt-4">
+        <div className="my__communities d-flex flex-column gap-4 px-3 pt-4">
           <h5 className="m-0">My Communities</h5>
           {communities.map((community, index) => {
             return <CommunityCard community={community} key={community.id} />;
