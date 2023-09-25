@@ -22,6 +22,7 @@ const Chats = () => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [sendMessage, setSendMessage] = useState(null);
   const [recieveMessage, setRecieveMessage] = useState(null);
+  const [cleared, setCleared] = useState(false);
   // const previousUrl = window.history.length > 1 ? window.history.go(-1) : null;
 
   // if (previousUrl) {
@@ -95,7 +96,7 @@ const Chats = () => {
   return (
     <>
       <div className="container-fluid chat_main_container">
-        <section className="left_section">
+        <section className="left_section my-3 ">
           <ChatSearch />
           <CommunitiesContainer />
           <ChatSidebar
@@ -105,15 +106,16 @@ const Chats = () => {
             sendMessage={sendMessage}
           />
         </section>
-        <section className="right_section ">
+        <section className="right_section my-3 ">
           {selectedChat && (
             <>
-              <ChatNavbar chatId={selectedChat} userId={selectedUser} />
+              <ChatNavbar chatId={selectedChat} userId={selectedUser} isclear={setCleared} cleared={cleared}/>
               <ChatDashboard
                 chatId={selectedChat}
                 userId={selectedUser}
                 setSendMessage={setSendMessage}
                 recieveMessage={recieveMessage}
+                cleared={cleared}
               />
             </>
           )}
