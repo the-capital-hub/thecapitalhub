@@ -2,6 +2,12 @@ import "./CommunitiesContainer.scss";
 import CommunityCard from "./CommunityCard";
 import { useState } from "react";
 import CommunitiesIcon from "./CommunitiesIcon";
+// import ModalBsLauncher from "../../PopUp/ModalBS/ModalBsLauncher/ModalBsLauncher";
+// import ModalBSBody from "../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
+// import ModalBSContainer from "../../PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
+// import ModalBSHeader from "../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
+// import { AiOutlineUsergroupAdd } from "react-icons/ai";
+// import NewCommunityModal from "../ChatComponents/NewCommunityModal";
 
 export default function CommunitiesContainer() {
   // Fetch Commmunities data here
@@ -58,7 +64,7 @@ export default function CommunitiesContainer() {
           className="m-0 text-capitalize "
           // style={{ color: " rgba(159, 159, 159, 1)" }}
         >
-          communities
+          community
         </h4>
       </summary>
       <div className="communities__chats d-flex flex-column pb-4 border-top">
