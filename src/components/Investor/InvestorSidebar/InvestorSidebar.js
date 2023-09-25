@@ -27,6 +27,13 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../Store/Action/userAction";
 import connectionsIcon from "../../../Images/investorsidebar/connection.svg";
+import CommunitiesIcon from "../ChatComponents/CommunitiesIcon";
+import ModalBsLauncher from "../../PopUp/ModalBS/ModalBsLauncher/ModalBsLauncher";
+import ModalBSBody from "../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
+import ModalBSContainer from "../../PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
+import ModalBSHeader from "../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
+import { AiOutlineUsergroupAdd } from "react-icons/ai";
+import NewCommunityModal from "../ChatComponents/NewCommunityModal";
 
 const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const dispatch = useDispatch();
@@ -163,6 +170,48 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   {!sidebarCollapsed && <span>One link</span>}
                 </Link>
               </MenuItem>
+
+              {/* Communities */}
+              <MenuItem
+                active={location.pathname.includes("/chats")}
+                className="active-item"
+              >
+                <div className="sidebar__community d-flex gap-4 ">
+                  <div onClick={() => setSidebarCollapsed(true)}>
+                    <CommunitiesIcon width="17px" height="17px" />
+                  </div>
+                  {!sidebarCollapsed && (
+                    <details className="">
+                      <summary className="">Community</summary>
+                      <div className="d-flex flex-column gap-2">
+                        {/* Add new */}
+                        <ModalBsLauncher
+                          id="AddNewCommunity"
+                          className="sidebar__community__btn m-0"
+                        >
+                          <p className="m-0">Create a Community</p>{" "}
+                        </ModalBsLauncher>
+                        {/* <Link to={`/chats`} className="justify-content-start "> */}
+                        <button className="sidebar__community__btn">
+                          My Community
+                        </button>
+                        {/* </Link> */}
+                      </div>
+                    </details>
+                  )}
+                </div>
+                {/* Modal for creating new Community */}
+                <ModalBSContainer isStatic={false} id="AddNewCommunity">
+                  <ModalBSHeader
+                    title={"Create a Community"}
+                    className={"orange__heading"}
+                  />
+                  <ModalBSBody>
+                    <NewCommunityModal />
+                  </ModalBSBody>
+                </ModalBSContainer>
+              </MenuItem>
+
               <MenuItem
                 active={location.pathname.includes("/team")}
                 className="active-item"
