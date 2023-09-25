@@ -52,6 +52,7 @@ const API = Object.freeze({
   addStartupInvested: `${baseUrl}/investor/addStartupInvested`,
   addSectorOfInterest: `${baseUrl}/investor/addSectorOfInterest`,
   uploadLogo: `${baseUrl}/investor/uploadLogo`,
+  clearChat: `${baseUrl}/message/clearChatMessages`,
 });
 
 export default API;

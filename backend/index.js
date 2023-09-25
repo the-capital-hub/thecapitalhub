@@ -17,6 +17,7 @@ import connectionData from "./routes/connectionRoutes.js";
 import investorData from "./routes/investorRoutes.js";
 import chatData from "./routes/chatRoutes.js";
 import messageData from "./routes/messageRoutes.js";
+import communityData from "./routes/communityRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -35,6 +36,7 @@ app.use("/connections", connectionData);
 app.use("/investor", investorData);
 app.use("/chat", chatData);
 app.use("/message", messageData);
+app.use("/community", communityData);
 
 // documentation upload
 
