@@ -15,12 +15,12 @@ import savedIcon from "../../../Images/post/saved.png";
 import TimeAgo from "timeago-react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-// import {
-//   deletePostAPI,
-//   getPostComment,
-//   likeUnlikeAPI,
-//   sendPostComment,
-// } from "../../../../Service/user";
+import {
+  deletePostAPI,
+  getPostComment,
+  likeUnlikeAPI,
+  sendPostComment,
+} from "../../../Service/user";
 import SmileeIcon from "../../../Images/Group 15141(1).svg";
 import ImageIcon from "../../../Images/Group 15141.svg";
 import RoundLogo from "../../../Images/RoundLogo.png";
@@ -77,7 +77,25 @@ const FeedPostCard = ({
 
   const sendComment = async () => {
     try {
-      
+      const response = await sendPostComment({
+        // postId: JSON.stringify(postId),
+        // userId: JSON.stringify(loggedInUser._id),
+        // text: JSON.stringify(commentText),
+
+        postId: postId,
+        userId: loggedInUser._id,
+        text: commentText,
+      });
+      if (response.data.status == "200") {
+        await getPostComment({ postId }).then((res) => {
+          console.log("response", res.data.data);
+          setComments(res.data.data);
+        });
+      }
+
+      console.log("Comment submitted successfully:", response.data);
+
+      setCommentText("");
     } catch (error) {
       console.error("Error submitting comment:", error);
     }
@@ -87,7 +105,37 @@ const FeedPostCard = ({
 
   useEffect(() => {
     if (!repostPreview) {
-      
+      getPostComment({ postId }).then((res) => {
+        setComments(res.data.data);
+      });
+
+      const fetchSavedPostData = async () => {
+        try {
+          if (response.data && response.data.length > 0) {
+            const allSavedPostDataIds = response.data.reduce(
+              (acc, collection) => {
+                if (collection.posts && Array.isArray(collection.posts)) {
+                  acc = acc.concat(collection.posts);
+                }
+                return acc;
+              },
+              []
+            );
+            // console.log(allSavedPostDataIds);
+            setSavedPostId(allSavedPostDataIds);
+          }
+        } catch (error) {
+          console.error("Error fetching saved post collections:", error);
+        }
+      };
+
+      fetchSavedPostData();
+      // useEffect(() => {
+      setLiked(likes?.includes(loggedInUser._id) || null);
+
+      getPostComment({ postId }).then((res) => {
+        setComments(res.data.data);
+      });
     }
     const outsideClickHandler = (event) => {
       if (
@@ -114,7 +162,9 @@ const FeedPostCard = ({
 
   const likeUnlikeHandler = async () => {
     try {
-      
+      liked ? likes.length-- : likes.length++;
+      setLiked(!liked);
+      await likeUnlikeAPI(postId);
     } catch (error) {
       !liked ? likes.length-- : likes.length++;
       setLiked(!liked);
@@ -129,8 +179,8 @@ const FeedPostCard = ({
   // Delete post
   const deletePost = async (postId) => {
     try {
-      // await deletePostAPI(postId);
-      // await fetchAllPosts();
+      await deletePostAPI(postId);
+      await fetchAllPosts();
     } catch (error) {
       console.log("Error deleting post : ", error);
     }

@@ -287,11 +287,11 @@ const CreatePostPopUp = ({
                   </div>
                   <div className="post_button_container">
                     {posting ? (
-                      <button className="post_button" disabled>
+                      <button className="investor-post_button" disabled>
                         Posting...
                       </button>
                     ) : (
-                      <button className="post_button" onClick={handleSubmit}>
+                      <button className="investor-post_button" onClick={handleSubmit}>
                         Post
                       </button>
                     )}
