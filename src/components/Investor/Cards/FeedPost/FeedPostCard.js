@@ -445,7 +445,7 @@ const FeedPostCard = ({
                         </span>
                       )}
                     </span>
-                    <img src={shareIcon} width={16} alt="share post" />
+                    {/* <img src={shareIcon} width={16} alt="share post" /> */}
                     {savedPostId.includes(postId) ? (
                       <img src={savedIcon} width={16} alt="save post" />
                     ) : (

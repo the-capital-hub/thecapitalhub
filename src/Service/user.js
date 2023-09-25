@@ -610,7 +610,17 @@ export const uploadLogo = async (logo) => {
     const response = await axiosInstance.post(`${API.uploadLogo}`, logo);
     return response.data;
   } catch (error) {
-    console.error("Error while adding sector of interest:", error);
+    console.error("Error while uploading logo:", error);
+    throw error;
+  }
+};
+
+export const clearChat = async (chatId) => {
+  try {
+    const response = await axiosInstance.patch(`${API.clearChat}/${chatId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error while clearing chat:", error);
     throw error;
   }
 };

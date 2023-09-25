@@ -105,3 +105,27 @@ export const getUnreadMessageCount = async (chatId, userId) => {
     };
   }
 };
+
+export const clearAllMessages = async (chatId) => {
+  try {
+    const result = await MessageModel.deleteMany({ chatId });
+
+    if (result.deletedCount > 0) {
+      return {
+        status: 200,
+        message: "All messages in the chat have been cleared.",
+      };
+    } else {
+      return {
+        status: 200,
+        message: "No messages found in the chat to clear.",
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      status: 500,
+      message: "An error occurred while clearing messages.",
+    };
+  }
+};
