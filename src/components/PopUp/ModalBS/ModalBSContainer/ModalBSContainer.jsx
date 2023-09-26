@@ -10,10 +10,10 @@ function ModalBSContainer({
 }) {
   return (
     <div
-      className={`modal fade ${showModal ? "show" : ""} `}
-      style={{ display: showModal ? "block" : "none" }}
+      className={`modal fade `}
+      // style={{ display: showModal ? "block" : "none" }}
       id={id}
-      data-bs-backdrop={` ${isStatic ? "static" : ""} `}
+      data-bs-backdrop={`${isStatic ? "static" : " "}`}
       data-bs-keyboard="false"
       tabIndex="-1"
       aria-labelledby={label || "modalLabel"}

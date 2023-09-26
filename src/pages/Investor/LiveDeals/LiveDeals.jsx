@@ -7,6 +7,7 @@ import {
 import "../Syndicates/Syndicates.scss";
 import "./LiveDeals.scss";
 import DealsCompany from "../../../components/NewInvestor/LiveDealsComponents/DealsCompany";
+import ComingSoon from "../../../components/ComingSoon/ComingSoon";
 
 const companies = [
   {
@@ -43,13 +44,14 @@ export default function LiveDeals() {
       <div className="pb-4 pt-2">
         <SmallProfileCard text="Live Deals" />
       </div>
-      <section className="section__wrapper">
+      <ComingSoon titleColor={"green"} />
+      {/* <section className="section__wrapper">
         <div className="deals__company__container d-flex flex-column gap-4">
           {companies.map((company) => {
             return <DealsCompany company={company} key={company.name} />;
           })}
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

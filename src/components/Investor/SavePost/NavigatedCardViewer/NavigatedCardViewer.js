@@ -75,9 +75,9 @@ const NavigatedCardViewer = () => {
             </div>
           ))}
         </div>
-        <div className="row row-cols-1">
+        <div className="card-viewer">
           {loading ? (
-            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center align-items-center w-100">
               <div className="spinner-border" role="status">
                 <span className="visually-hidden">Loading...</span>
               </div>
@@ -117,7 +117,7 @@ const NavigatedCardViewer = () => {
             )
           ) : (
             <p className="container p-5 text-center my-5 bg-white mx-auto">
-              No posts saved 
+              No posts saved
             </p>
           )}
         </div>
