@@ -286,7 +286,13 @@ const FeedPostCard = ({
                         {userId === loggedInUser?._id && (
                           <li onClick={() => deletePost(postId)}>Delete</li>
                         )}
-                        <li onClick={() => setShowReportModal(true)}>Report</li>
+                        <li
+                          data-bs-toggle="modal"
+                          data-bs-target="#reportPostModal"
+                          // onClick={() => setShowReportModal(true)}
+                        >
+                          Report
+                        </li>
                       </ul>
                     )}
                   </div>
@@ -549,7 +555,7 @@ const FeedPostCard = ({
         )}
       </div>
 
-      <ModalBSContainer showModal={showReportModal} id="reportPostModal">
+      <ModalBSContainer id="reportPostModal">
         <ModalBSHeader title="Report Post" />
         <ModalBSBody>
           <h6 className="h6">Select a reason that applies</h6>
