@@ -130,7 +130,10 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 active={location.pathname.includes("/home")}
                 className="active-item"
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="/investor/home">
+                <Link
+                  onClick={() => setSidebarCollapsed(true)}
+                  to="/investor/home"
+                >
                   <img src={HomeIcon} alt="image" />
                   {!sidebarCollapsed && <span>Home</span>}
                 </Link>
@@ -225,7 +228,10 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 active={location.pathname.includes("/saved-posts")}
                 className="active-item"
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="/help">
+                <Link
+                  onClick={() => setSidebarCollapsed(true)}
+                  to="/investor/saved-posts"
+                >
                   <img
                     src={savedPostsIcon}
                     alt="image"

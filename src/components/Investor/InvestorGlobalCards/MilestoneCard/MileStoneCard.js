@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./style.scss";
 import { getAllPostsAPI } from "../../../../Service/user";
 import FeaturedPostCard from "../../Cards/FeaturedPostCard/FeaturedPostCard";
+import { useSelector } from "react-redux";
 
 const Card = () => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
   const [popupOpen, setPopupOpen] = useState(false);
   const [allPosts, setAllPosts] = useState(null);
   const [newPost, setNewPost] = useState(false);
@@ -43,11 +46,18 @@ const Card = () => {
     getAllPostsAPI()
       .then(({ data }) => {
         // Sort the posts in descending order based on createdAt timestamps
-        const sortedPosts = data.sort((a, b) =>
-          b.createdAt.localeCompare(a.createdAt)
+        // const sortedPosts = data.sort((a, b) =>
+        //   b.createdAt.localeCompare(a.createdAt)
+        // );
+
+        // Sort posts by loggedInUser
+        const sortedPosts = data.filter(
+          (post) => post.user["_id"] === loggedInUser["_id"]
         );
+
         // Select the last 3 recent posts
-        const last3RecentPosts = sortedPosts.slice(0, 3);
+        const last3RecentPosts =
+          sortedPosts.length > 3 ? sortedPosts.slice(0, 3) : sortedPosts;
         setAllPosts(last3RecentPosts); // Update the state with the last 3 recent posts
       })
       .catch((err) => {
