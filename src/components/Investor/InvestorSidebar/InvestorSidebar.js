@@ -76,9 +76,9 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   {" "}
                   <img
                     className="rounded-circle"
-                    width={50}
+                    style={{ width: "50px", height: "50px" }}
                     src={loggedInUser.profilePicture}
-                    alt="image"
+                    alt="User profile"
                   />
                 </Link>
               ) : (
@@ -90,12 +90,12 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     {" "}
                     <img
                       className="rounded-circle"
-                      width={70}
+                      style={{ width: "70px", height: "70px" }}
                       src={loggedInUser.profilePicture}
                       alt="image"
                     />
                   </Link>
-                  <h3>
+                  <h3 className="">
                     {loggedInUser?.firstName} {loggedInUser?.lastName}
                   </h3>
                   <h4>{loggedInUser?.email}</h4>

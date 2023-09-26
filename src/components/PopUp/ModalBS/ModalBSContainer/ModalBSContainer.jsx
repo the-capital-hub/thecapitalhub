@@ -13,7 +13,7 @@ function ModalBSContainer({
       className={`modal fade `}
       // style={{ display: showModal ? "block" : "none" }}
       id={id}
-      data-bs-backdrop={`${isStatic ? "static" : ""}`}
+      data-bs-backdrop={`${isStatic ? "static" : " "}`}
       data-bs-keyboard="false"
       tabIndex="-1"
       aria-labelledby={label || "modalLabel"}
