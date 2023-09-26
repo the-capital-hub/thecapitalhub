@@ -61,7 +61,7 @@ export default function NewCommunityModal() {
           <BsFillCameraFill
             style={{
               fontSize: "1.5rem",
-              color: "rgba(253, 89, 1,1);",
+              color: "rgba(253, 89, 1,1)",
             }}
           />
         </label>

@@ -12,7 +12,11 @@ import RecommendationCard from "../InvestorGlobalCards/Recommendation/Recommenda
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import CompanyDetailsCard from "../InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getStartupByFounderId, updateUserAPI, postStartUpData } from "../../../Service/user";
+import {
+  getStartupByFounderId,
+  updateUserAPI,
+  postStartUpData,
+} from "../../../Service/user";
 import { loginSuccess } from "../../../Store/Action/userAction";
 import { getBase64 } from "../../../utils/getBase64";
 import CoinIcon from "../../../Images/investorView/Rectangle.png";
@@ -64,7 +68,7 @@ const InvestorHome = () => {
 
   const [editCompanyName, setEditCompanyName] = useState({
     founderId: loggedInUser._id,
-    company: companyName
+    company: companyName,
   });
 
   const dispatch = useDispatch();
@@ -114,7 +118,7 @@ const InvestorHome = () => {
       ...editCompanyName,
       [name]: value,
     });
-  }
+  };
 
   const renderEditableField = (fieldName) => {
     if (personalEditable) {
@@ -151,7 +155,8 @@ const InvestorHome = () => {
         />
       );
     }
-    if (fieldName === "company") return <span className="small_typo">{companyName}</span>;
+    if (fieldName === "company")
+      return <span className="small_typo">{companyName}</span>;
     return <span className="small_typo">{loggedInUser[fieldName]}</span>;
   };
 
@@ -438,7 +443,11 @@ const InvestorHome = () => {
                 </div>
               </div>
             </div>
-            <CompanyDetailsCard className='mt-2' userDetails={loggedInUser} page={"edit"} />
+            <CompanyDetailsCard
+              className="mt-2"
+              userDetails={loggedInUser}
+              page={"edit"}
+            />
 
             <div className="row">
               <div className="col-12 mt-2">
