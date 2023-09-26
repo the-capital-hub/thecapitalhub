@@ -73,6 +73,7 @@ import GoodDotBlog from "./pages/Blogs/GoodDotBlog/GoodDotBlog";
 import MyKareBlog from "./pages/Blogs/MyKareBlog/MyKareBlog";
 import InvestorHomeFeed from "./pages/Investor/Home/Home";
 import NewInvestorManageAccount from "./components/NewInvestor/InvestorManageAccount/NewInvestorManageAccount";
+import SavedPosts from "./pages/Investor/SavedPosts/SavedPosts";
 
 function App() {
   return (
@@ -261,7 +262,7 @@ function App() {
 
           {/* OneLink */}
           <Route path="/onelink/:username" element={<ValidateOneLink />}>
-          <Route path="" element={<Company />} />
+            <Route path="" element={<Company />} />
             <Route path="profile" element={<Profile />} />
             <Route path="onePager" element={<OnePager />} />
             <Route path="documentation" element={<DocumentationIV />} />
@@ -272,16 +273,20 @@ function App() {
 
           {/* Investor */}
           <Route path="/investor" element={<ProtectedInvestorRoutes />}>
-          <Route path="home" element={<InvestorHomeFeed/>} />
+            <Route path="home" element={<InvestorHomeFeed />} />
             <Route path="" element={<Navigate to="profile" replace />} />
             <Route path="profile" element={<InvestorProfile />} />
-            <Route path="manage-account" element={<NewInvestorManageAccount />} />
+            <Route
+              path="manage-account"
+              element={<NewInvestorManageAccount />}
+            />
             <Route path="mystartups" element={<MyStartUp />} />
             <Route path="explore" element={<Explore />} />
             <Route path="syndicates" element={<Syndicates />} />
             <Route path="live-deals" element={<LiveDeals />} />
             <Route path="search-results" element={<SearchResults />} />
             <Route path="my-schedule" element={<MySchedule />} />
+            <Route path="saved-posts" element={<SavedPosts />} />
           </Route>
 
           {/* Blogs */}
@@ -303,8 +308,14 @@ function App() {
             <Route path="startupOne" element={<StartUpBlogOne />} />
             <Route path="startupTwo" element={<StartUpBlogTwo />} />
             <Route path="startupThree" element={<StartUpBlogThree />} />
-            <Route path="telemedicine-health-revolution-at-your-fingertips-medtel-health-care-company-leading-the-way" element={<StartUpBlogFour />} />
-            <Route path="how-zomato-is-revolutionising-the-food-supply-chain-through-food-technology" element={<StartUpBlogFive />} />
+            <Route
+              path="telemedicine-health-revolution-at-your-fingertips-medtel-health-care-company-leading-the-way"
+              element={<StartUpBlogFour />}
+            />
+            <Route
+              path="how-zomato-is-revolutionising-the-food-supply-chain-through-food-technology"
+              element={<StartUpBlogFive />}
+            />
           </Route>
         </Routes>
       </Router>
