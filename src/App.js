@@ -288,17 +288,11 @@ function App() {
           <Route path="/blog" element={<BlogWrapper />}>
             <Route path="" element={<Blog />} />
             <Route
-              path="meesho-revolutionising-e-commerce-for-entrepreneurs"
-              element={<MeeshoBlog />}
-            />
+              path="meesho-revolutionising-e-commerce-for-entrepreneurs" element={<MeeshoBlog />} />
             <Route
-              path="sustainable-alternative-to-traditional-meat-products-gooddot-as-example"
-              element={<GoodDotBlog />}
-            />
+              path="sustainable-alternative-to-traditional-meat-products-gooddot-as-example" element={<GoodDotBlog />} />
             <Route
-              path="empowering-patient-care-mykare-health-innovative-approach-to-healthtech"
-              element={<MyKareBlog />}
-            />
+              path="empowering-patient-care-mykare-health-innovative-approach-to-healthtech" element={<MyKareBlog />} />
             <Route path="webdevlopment" element={<BlogDetailed />} />
             <Route path="startupOne" element={<StartUpBlogOne />} />
             <Route path="startupTwo" element={<StartUpBlogTwo />} />
