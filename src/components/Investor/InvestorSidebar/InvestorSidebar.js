@@ -18,7 +18,7 @@ import GroupIcon from "../../../Images/investorIcon/Group.svg";
 import InvestorIcon from "../../../Images/investorIcon/Pot.svg";
 import SaveIcon from "../../../Images/investorIcon/Save.svg";
 import PlusIcon from "../../../Images/investorIcon/Plus.svg";
-import { BsLink45Deg } from "react-icons/bs";
+import { BsLink45Deg, BsChevronDown, BsChevronUp } from "react-icons/bs";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./investorsidebar.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -39,6 +39,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
+  const [isCommunityDetailOpen, setIsCommunityDetailOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const menuIconClick = () => {
@@ -183,23 +184,41 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
               >
                 <div className="sidebar__community d-flex gap-4 ">
                   <div onClick={() => setSidebarCollapsed(true)}>
-                    <CommunitiesIcon width="17px" height="17px" />
+                    <CommunitiesIcon
+                      width="17px"
+                      height="17px"
+                      color={`${
+                        isCommunityDetailOpen
+                          ? "#fd5901"
+                          : "rgba(97, 97, 97, 1)"
+                      }`}
+                    />
                   </div>
                   {!sidebarCollapsed && (
                     <details className="">
-                      <summary className="d-flex align-items-center gap-2">
+                      <summary
+                        className="d-flex align-items-center gap-2"
+                        onClick={() =>
+                          setIsCommunityDetailOpen(!isCommunityDetailOpen)
+                        }
+                      >
                         Community
+                        {isCommunityDetailOpen ? (
+                          <BsChevronUp />
+                        ) : (
+                          <BsChevronDown />
+                        )}
                       </summary>
                       <div className="d-flex flex-column gap-2">
                         {/* Add new */}
                         <ModalBsLauncher
                           id="AddNewCommunity"
-                          className="sidebar__community__btn m-0"
+                          className="sidebar__community__btn m-0 "
                         >
                           <p className="m-0">Create a Community</p>
                         </ModalBsLauncher>
                         <button
-                          className="sidebar__community__btn"
+                          className="sidebar__community__btn "
                           onClick={handleMyCommunityClick}
                         >
                           My Community
@@ -207,17 +226,18 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                       </div>
                     </details>
                   )}
+
+                  {/* Modal for creating new Community */}
+                  <ModalBSContainer isStatic={false} id="AddNewCommunity">
+                    <ModalBSHeader
+                      title={"Create a Community"}
+                      className={"orange__heading"}
+                    />
+                    <ModalBSBody>
+                      <NewCommunityModal />
+                    </ModalBSBody>
+                  </ModalBSContainer>
                 </div>
-                {/* Modal for creating new Community */}
-                <ModalBSContainer isStatic={false} id="AddNewCommunity">
-                  <ModalBSHeader
-                    title={"Create a Community"}
-                    className={"orange__heading"}
-                  />
-                  <ModalBSBody>
-                    <NewCommunityModal />
-                  </ModalBSBody>
-                </ModalBSContainer>
               </MenuItem>
 
               <MenuItem

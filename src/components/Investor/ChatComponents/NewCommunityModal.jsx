@@ -1,5 +1,5 @@
 import "./NewCommunityModal.scss";
-import { BsSearch } from "react-icons/bs";
+import { BsSearch, BsFillCameraFill } from "react-icons/bs";
 import {
   userFive,
   userOne,
@@ -39,8 +39,34 @@ export default function NewCommunityModal() {
     },
   ];
 
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
   return (
-    <div className="newCommunity__modal d-flex flex-column gap-3 p-3 ">
+    <form
+      onSubmit={handleSubmit}
+      className="newCommunity__modal d-flex flex-column gap-3 p-3 "
+    >
+      {/* Profile picture input */}
+      <div className="mx-auto">
+        <input
+          type="file"
+          name="profilePicture"
+          id="profilePicture"
+          accept="image/*"
+          className="visually-hidden"
+        />
+        <label htmlFor="profilePicture" className="upload__label">
+          <BsFillCameraFill
+            style={{
+              fontSize: "1.5rem",
+              color: "rgba(253, 89, 1,1);",
+            }}
+          />
+        </label>
+      </div>
+
       {/* Name input */}
       <div className=" py-3">
         <input
@@ -53,20 +79,18 @@ export default function NewCommunityModal() {
       </div>
 
       {/* Contact search */}
-      <div className="search__members">
-        <div
-          className="d-flex align-items-center gap-2 p-2 border rounded-2"
-          style={{ backgroundColor: "#fafafa" }}
-        >
-          <BsSearch />
-          <input
-            type="search"
-            name="myContacts"
-            id="myContacts"
-            placeholder="search your contacts..."
-            className="modal__input border-0 p-1 w-100"
-          />
-        </div>
+      <div
+        className="search__members d-flex align-items-center gap-2 p-2 rounded-2"
+        style={{ backgroundColor: "#fafafa" }}
+      >
+        <BsSearch />
+        <input
+          type="search"
+          name="myContacts"
+          id="myContacts"
+          placeholder="search your contacts..."
+          className="modal__input border-0 p-1 w-100"
+        />
       </div>
 
       {/* Top contacts */}
@@ -87,13 +111,17 @@ export default function NewCommunityModal() {
 
       {/* Cancel/Done */}
       <div className="d-flex justify-content-center align-items-center gap-2">
-        <button className="cancel_button w-25 " data-bs-dismiss="modal">
+        <button className="cancel_button " data-bs-dismiss="modal">
           Cancel
         </button>
-        <button className="orange_button w-25 " data-bs-dismiss="modal">
+        <button
+          type="submit"
+          className="orange_button "
+          data-bs-dismiss="modal"
+        >
           Done
         </button>
       </div>
-    </div>
+    </form>
   );
 }

@@ -1,9 +1,48 @@
 .newCommunity__modal {
+  .visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+  }
+
+  input.visually-hidden:is(:focus, :focus-within) + label {
+    color: rgba(253, 89, 1, 1);
+  }
+
+  .upload__label {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 0.25em dotted rgba(253, 89, 1, 1);
+    color: #fd5901;
+    border-radius: 50%;
+    background-color: rgba(253, 89, 1, 0.2);
+    cursor: pointer;
+
+    label {
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+  }
+
   .modal__input {
     background-color: #fafafa;
     outline: 0;
     transition: border 0.3s ease-in-out;
     &:focus {
+      border: 1px solid #fd5901;
+    }
+  }
+
+  .search__members {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    &:focus-within {
+      transition: border 0.3s ease-in-out;
       border: 1px solid #fd5901;
     }
   }
@@ -15,6 +54,7 @@
     padding: 8px 25px;
     width: auto;
     font-size: 14px;
+    color: white;
 
     &:active {
       transform: scale(0.95);

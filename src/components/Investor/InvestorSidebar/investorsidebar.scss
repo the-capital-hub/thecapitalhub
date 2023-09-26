@@ -54,7 +54,7 @@
 .closemenu {
   position: absolute;
   right: 0px;
-  z-index: 11111;
+  z-index: 1051 !important;
   top: 4.7rem;
 }
 .closemenu-Left {
@@ -219,6 +219,27 @@
       font-size: 0.85rem;
       font-weight: 500;
       text-align: left;
+    }
+  }
+
+  // For responsiveness of Modal component
+  .modal {
+    margin-top: 20%;
+
+    @media (min-width: 500px) {
+      margin-top: 15%;
+    }
+
+    @media (min-width: 575px) {
+      margin-top: 13.5%;
+    }
+
+    @media (min-width: 768px) {
+      margin-top: 10%;
+    }
+
+    @media (min-width: 769px) {
+      margin-top: 0;
     }
   }
 }
