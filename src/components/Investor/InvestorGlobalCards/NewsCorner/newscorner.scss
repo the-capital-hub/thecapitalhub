@@ -1,110 +1,131 @@
 .newscorner_container {
-    .newscorner_card {
+  .newscorner_card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .right_view_profile_card {
+      border-radius: 20px;
+
+      .card-header {
+        background-color: #000;
+        color: #fff;
+        font-size: 18px;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: space-between;
+        border-radius: 20px 20px 0px 0px;
 
-        .right_view_profile_card {
-            border-radius: 20px;
+        .title {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
 
-            .card-header {
-                background-color: #000;
-                color: #fff;
-                font-size: 18px;
-                display: flex;
-                justify-content: space-between;
-                border-radius: 20px 20px 0px 0px;
-
-                .title {
-                    display: flex;
-                    justify-content: center;
-                    align-items: flex-start;
-                    flex-direction: column;
-                }
-            }
-
-            .card-body {
-                h5 {
-                    color: #000;
-                    font-size: 13px;
-                    font-family: Poppins;
-                    font-weight: 500;
-                }
-
-                .input-group {
-                    position: relative;
-                }
-
-                .input-group input {
-                    height: 2rem;
-                }
-
-                .input-group input::placeholder {
-                    font-size: 0.8rem;
-                }
-
-                .send-button {
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                    z-index: 1;
-                    background-color: #000;
-                    color: #fff;
-                }
-            }
+      .card-body {
+        h5 {
+          color: #000;
+          font-size: 13px;
+          font-family: Poppins;
+          font-weight: 500;
         }
 
-        .right_view_profile {
-            width: 100%;
+        .input-group {
+          position: relative;
         }
+
+        .input-group input {
+          height: 2rem;
+        }
+
+        .input-group input::placeholder {
+          font-size: 0.8rem;
+        }
+
+        .send-button {
+          position: absolute;
+          right: 0;
+          top: 0;
+          z-index: 1;
+          background-color: #000;
+          color: #fff;
+        }
+      }
     }
 
-    .newscorner_card_body {
+    .right_view_profile {
+      width: 100%;
+    }
+  }
+
+  .newscorner_card_body {
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+
+    img {
+      width: 30px;
+    }
+
+    .newscorner_card_text {
+      h3 {
+        color: #484848;
+        font-size: 15px;
+        font-family: Poppins;
+        font-weight: 600;
+      }
+
+      button {
+        width: 100px;
+        height: 29px;
+        flex-shrink: 0;
+        border-radius: 20px;
+        border: 1px solid #acacac;
+        color: #000;
+        font-size: 13px;
+        padding: 20px 5px;
+        font-family: Poppins;
         display: flex;
-        justify-content: start;
-        align-items: flex-start;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
 
         img {
-            width: 30px;
+          width: 13px;
         }
+      }
 
-        .newscorner_card_text {
-            h3 {
-                color: #484848;
-                font-size: 15px;
-                font-family: Poppins;
-                font-weight: 600;
-            }
+      .smallest_typo {
+        color: #686868;
+        font-size: 12px;
+        font-family: Poppins;
+      }
 
-            button {
-                width: 100px;
-                height: 29px;
-                flex-shrink: 0;
-                border-radius: 20px;
-                border: 1px solid #acacac;
-                color: #000;
-                font-size: 13px;
-                padding: 20px 5px;
-                font-family: Poppins;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                background-color: #fff;
+      .newsImage__container {
+        // width: 16rem;
+        // height: 14rem;
+        margin-inline: auto;
+      }
 
-                img {
-                    width: 13px;
-                }
-            }
-
-            .smallest_typo {
-                color: #686868;
-                font-size: 12px;
-                font-family: Poppins;
-            }
+      .show__more__link {
+        width: fit-content;
+        .show__more {
+          transition: all 0.15s ease-in-out;
+          &:hover {
+            background-color: #000;
+            color: white;
+          }
         }
+      }
     }
+  }
 
-    .newscorner_card hr {
-        margin: 0px 5%;
-    }
+  .newscorner_card_body + .newscorner_card_body {
+    border-top: 1px solid rgba(220, 220, 220, 1);
+  }
+
+  .newscorner_card hr {
+    margin: 0px 5%;
+  }
 }

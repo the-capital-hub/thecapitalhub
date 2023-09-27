@@ -1,5 +1,5 @@
 import "./Explore.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import Company from "../../../components/NewInvestor/Company/Company";
 import FilterBySelect from "../../../components/NewInvestor/FilterBySelect/FilterBySelect";
@@ -7,6 +7,10 @@ import CompanyProfile from "../../../components/NewInvestor/CompanyProfileCompon
 
 function Explore() {
   const [activeTab, setActiveTab] = useState("StartupBackground");
+
+  useEffect(() => {
+    document.title = "Explore | Investors - The Capital Hub";
+  }, []);
 
   return (
     <div className="explore_container px-3 border-start">

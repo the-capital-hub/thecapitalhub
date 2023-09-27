@@ -18,7 +18,7 @@ export default function AddEditModal({
   isStartups = true,
   setInvestedStartups,
   setSectorsData,
-  testformData
+  testformData,
 }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [formData, setFormData] = useState({
@@ -53,14 +53,16 @@ export default function AddEditModal({
     const { files } = event.target;
     setSectorLogo(files[0]);
     setNewImage(false);
-  }
+  };
 
   //handle add and edit
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       if (isEdited) {
-        const { data: investor } = await getInvestorById(loggedInUser?.investor);
+        const { data: investor } = await getInvestorById(
+          loggedInUser?.investor
+        );
         if (isStartups) {
           const editedStartUp = investor.startupsInvested[editIndex];
           editedStartUp.name = formData.name;
@@ -92,18 +94,24 @@ export default function AddEditModal({
             logo: logo,
             name: formData.name,
             description: formData.description,
-          }
+          };
           console.log(newStartUpData);
-          const response = await addStartupInvested(loggedInUser?.investor, newStartUpData);
+          const response = await addStartupInvested(
+            loggedInUser?.investor,
+            newStartUpData
+          );
           setInvestedStartups(response.data.startupsInvested);
         } else {
           const logo = await getBase64(sectorLogo);
           const newSectorData = {
             logo: logo,
             name: formData.name,
-          }
+          };
           console.log("Sector", newSectorData);
-          const response = await addSectorOfInterest(loggedInUser?.investor, newSectorData);
+          const response = await addSectorOfInterest(
+            loggedInUser?.investor,
+            newSectorData
+          );
           console.log(response.data);
           setSectorsData(response.data.sectorInterested);
         }
@@ -124,14 +132,14 @@ export default function AddEditModal({
         setFormData({
           name: startUp.name,
           companyImage: startUp.logo,
-          description: startUp.description
-        })
+          description: startUp.description,
+        });
       } else {
         const sector = dataArray[index];
         setFormData({
           name: sector.name,
-        })
-        setSectorLogo(sector.logo)
+        });
+        setSectorLogo(sector.logo);
       }
     } catch (error) {
       console.log(error);
@@ -165,7 +173,7 @@ export default function AddEditModal({
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <div className="profile__modal__content">
@@ -179,16 +187,25 @@ export default function AddEditModal({
                 key={index}
               >
                 <img
-                  src={startUp.logo || "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"}
+                  src={
+                    startUp.logo ||
+                    "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
+                  }
                   alt={startUp.name}
                   style={{ width: "50px" }}
                 />
                 <h6 className="green_underline ">{startUp.name}</h6>
                 <div className="d-flex gap-2">
-                  <button className="btn green_button px-3" onClick={() => handleEdit(index)}>
+                  <button
+                    className="btn green_button px-3"
+                    onClick={() => handleEdit(index)}
+                  >
                     <CiEdit style={{ color: "", backgroundColor: "" }} />
                   </button>
-                  <button className="btn btn-danger" onClick={() => handleDelete(index)}>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleDelete(index)}
+                  >
                     <AiFillDelete style={{ color: "", backgroundColor: "" }} />
                   </button>
                 </div>
@@ -214,23 +231,30 @@ export default function AddEditModal({
                   className="visually-hidden"
                   onChange={handleInputChange}
                 />
-                <div className="upload__label p-2">
-                  <BsFillCloudUploadFill
-                    style={{
-                      fontSize: "1.5rem",
-                      color: "rgba(140, 90, 201, 1)",
-                    }}
-                  />
-                  <label htmlFor="companyImage" className="text-black fw-lighter">
-                    Upload Image
-                  </label>
-                  {formData.companyImage && (
-                    <img
-                      src={isEdited && isNewImage ? formData.companyImage : URL.createObjectURL(formData.companyImage)}
-                      alt="Selected Image"
-                      style={{ maxWidth: "100%", maxHeight: "70px" }}
+                <div className="">
+                  <label
+                    htmlFor="companyImage"
+                    className="text-black fw-lighter upload__label  "
+                  >
+                    <BsFillCloudUploadFill
+                      style={{
+                        fontSize: "1.5rem",
+                        color: "rgba(140, 90, 201, 1)",
+                      }}
                     />
-                  )}
+                    Upload Image
+                    {formData.companyImage && (
+                      <img
+                        src={
+                          isEdited && isNewImage
+                            ? formData.companyImage
+                            : URL.createObjectURL(formData.companyImage)
+                        }
+                        alt="Selected Image"
+                        style={{ maxWidth: "100%", maxHeight: "70px" }}
+                      />
+                    )}
+                  </label>
                 </div>
               </div>
             ) : (
@@ -255,7 +279,11 @@ export default function AddEditModal({
                   </label>
                   {sectorLogo && (
                     <img
-                      src={isEdited && isNewImage ? sectorLogo : URL.createObjectURL(sectorLogo)}
+                      src={
+                        isEdited && isNewImage
+                          ? sectorLogo
+                          : URL.createObjectURL(sectorLogo)
+                      }
                       alt="Selected Image"
                       style={{ maxWidth: "100%", maxHeight: "200px" }}
                     />
@@ -292,12 +320,23 @@ export default function AddEditModal({
             )}
 
             <div className="d-flex justify-between">
-              <button className="btn green_button w-auto fs-6" type="button" onClick={resetFormData}>Clear</button>
-              <button className="btn green_button w-auto fs-6 ms-2" type="submit" data-bs-dismiss="modal">Save</button>
+              <button
+                className="btn green_button w-auto fs-6"
+                type="button"
+                onClick={resetFormData}
+              >
+                Clear
+              </button>
+              <button
+                className="btn green_button w-auto fs-6 ms-2"
+                type="submit"
+                data-bs-dismiss="modal"
+              >
+                Save
+              </button>
             </div>
           </div>
         </form>
-
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ import {
 import { useSelector } from "react-redux";
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
+import { useLocation } from 'react-router-dom';
 
 const Feed = () => {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -39,6 +40,18 @@ const Feed = () => {
       })
       .finally(() => setLoadingFeed(false));
   };
+
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const showPopup = queryParams.get('showPopup') === 'true';
+
+  useEffect(() => {
+    if (showPopup) {
+      setPopupOpen(true);
+      const urlWithoutQuery = location.pathname;
+      window.history.replaceState({}, '', urlWithoutQuery);
+    }
+  }, [location]);
 
   useEffect(() => {
     getSavedPostCollections(loggedInUser._id).then((data) => {

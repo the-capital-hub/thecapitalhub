@@ -114,14 +114,15 @@
   margin-bottom: 20px;
 }
 .create_post_newInvestor {
-  height: 40px;
   border: none;
   background: #d3f36b;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #ffffff;
+  gap: 0.5em;
+  padding: 0.5em 1.5em;
+  box-shadow: 0 4px 10px 0 rgba(63, 60, 255, 0.2);
 }
 .create_post img {
   height: 15px !important;

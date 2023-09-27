@@ -6,17 +6,17 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getInvestorById } from "../../../../Service/user";
 
-const RightProfileCard = ({noProfile}) => {
+const RightProfileCard = ({ noProfile }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [investor, setInvestor] = useState(null);
   useEffect(() => {
-    if(loggedInUser?.investor) { 
-      getInvestorById(loggedInUser?.investor).then(({data}) => {
+    if (loggedInUser?.investor) {
+      getInvestorById(loggedInUser?.investor).then(({ data }) => {
         setInvestor(data);
       });
     }
   }, [loggedInUser]);
-  
+
   return (
     <>
       <div className="col-12 view_profile_container">
@@ -24,7 +24,7 @@ const RightProfileCard = ({noProfile}) => {
           <div className="view_profile_name_section mt-2">
             <img
               src={loggedInUser.profilePicture}
-              width={100}
+              style={{ width: "100px", height: "100px" }}
               className="rounded-circle"
               alt="profileimage"
             />
@@ -34,12 +34,16 @@ const RightProfileCard = ({noProfile}) => {
               </h2>
               <span className="smallest_typo">{loggedInUser?.email}</span>
               <span className="smallest_typo">
-                {`${loggedInUser?.designation} at ${loggedInUser?.startUp?.company || investor?.companyName}`}
+                {`${loggedInUser?.designation} at ${
+                  loggedInUser?.startUp?.company || investor?.companyName
+                }`}
               </span>
             </div>
-            {!noProfile && <Link to="/profile" className="profile_btn mt-2">
-              View Profile
-            </Link>}
+            {!noProfile && (
+              <Link to="/profile" className="profile_btn mt-2">
+                View Profile
+              </Link>
+            )}
             <Link
               to="/manage-account"
               className="profile_btn mt-1 manage_acount_btn"
