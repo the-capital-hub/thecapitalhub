@@ -52,31 +52,33 @@ const Documentation = () => {
             // }
           />
           <UploadContainer onClicked={setShowModal} />
-          <div className="cards">
-            <Card
+          <div className="cards px-xxl-4">
+            {/* <Card
               onClicked={() => navigate("/documentation/financials")}
               text={"Financials"}
-            />
+            /> */}
             <Card
               onClicked={() => navigate("/documentation/pitchdeck")}
               text={"Pitch Deck"}
             />
             <Card
-              onClicked={() => navigate("/documentation/legal")}
-              text={"Legal"}
-            />
-            <Card
-              onClicked={() => navigate("/documentation/update")}
-              text={"Update"}
+              onClicked={() => navigate("/documentation/business")}
+              text={"Business"}
             />
             <Card
               onClicked={() => navigate("/documentation/kycdetails")}
               text={"KYC Details"}
             />
             <Card
-              onClicked={() => navigate("/documentation/business")}
-              text={"Business"}
+              onClicked={() =>
+                navigate("/documentation/legal%20and%20compliance")
+              }
+              text={"Legal and Compliance"}
             />
+            {/* <Card
+              onClicked={() => navigate("/documentation/update")}
+              text={"Update"}
+            /> */}
           </div>
         </div>
 
