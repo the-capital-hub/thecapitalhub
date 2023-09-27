@@ -1,5 +1,5 @@
 .investorHome_main_container {
-  // margin-top: 40px;
+  margin-top: 30px;
   display: flex;
 
   .typography {
@@ -253,10 +253,10 @@
 //     }
 //   }
 // }
-@media(max-width:820){
+@media (max-width: 820) {
   .investorHome_main_container {
     margin-top: 0px !important;
-  }  
+  }
 }
 
 @media (max-width: 426px) {
