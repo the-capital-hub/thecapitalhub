@@ -35,7 +35,7 @@ const investorSchema = new Schema(
     },
     sectorInterested: [
       {
-        logo: String, 
+        logo: String,
         name: String,
       },
     ],
@@ -46,6 +46,9 @@ const investorSchema = new Schema(
         logo: String,
       },
     ],
+    investmentPhilosophy: {
+      type: String,
+    },
   },
   {
     timestamps: true,

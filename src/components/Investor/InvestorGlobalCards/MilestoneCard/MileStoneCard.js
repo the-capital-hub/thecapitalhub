@@ -67,8 +67,8 @@ const Card = () => {
   }, [newPost]);
 
   return (
-    <div className="card-container">
-      <div className="post_container_div">
+    <div className="card-container ">
+      <div className="post_container_div d-flex align-items-center gap-4 ps-3 w-100 ">
         {allPosts ? (
           allPosts.map(
             ({
