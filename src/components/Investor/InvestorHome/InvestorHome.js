@@ -290,15 +290,15 @@ const InvestorHome = () => {
               </div>
             </div>
 
-            <div className="row">
+            {/* <div className="row">
               <div className="col-12 mt-2">
                 <div className=" box personal_information">
                   <div className="personal_information_header">
-                    <h2 className="typography">Personal Information</h2>
-                    {/* <button>
+                    <h2 className="typography">Personal Information</h2> */}
+            {/* <button>
                       Edit <CiEdit />
                     </button> */}
-                  </div>
+            {/* </div>
                   <div className="col-12 mt-2">
                     <div className="designation_info">
                       <table>
@@ -353,7 +353,7 @@ const InvestorHome = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* <div className="row">
               <div className="col-12 mt-2">
