@@ -1,3 +1,4 @@
 import PlusIcon from "./PlusIcon";
+import SearchIcon from "./SearchIcon";
 
-export { PlusIcon };
+export { PlusIcon, SearchIcon };
