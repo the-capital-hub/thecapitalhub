@@ -51,7 +51,7 @@
 
           .searchbar-input {
             height: 49px;
-            background: #eaeef2;
+            background: rgba(205, 205, 205, 1);
             border-radius: 20px;
             border: none;
             transition: width 0.4s ease;
@@ -65,7 +65,7 @@
             top: 0;
             width: 48px;
             height: 49px;
-            background: #D3F36B;
+            background: #d3f36b;
             border: none;
             border-top-right-radius: 20px;
             border-bottom-right-radius: 20px;
@@ -86,7 +86,7 @@
             text-decoration: none;
             color: #6c757d;
             &:hover {
-              color: #D3F36B;
+              color: #d3f36b;
             }
           }
           .single_result {
@@ -254,7 +254,7 @@
                   top: 0;
                   width: 48px;
                   height: 49px;
-                  background: #D3F36B;
+                  background: #d3f36b;
                   border: none;
                   border-top-right-radius: 20px;
                   border-bottom-right-radius: 20px;
@@ -275,7 +275,7 @@
                   text-decoration: none;
                   color: #6c757d;
                   &:hover {
-                    color: #D3F36B;
+                    color: #d3f36b;
                   }
                 }
                 .single_result {
@@ -347,7 +347,7 @@
                   top: 0;
                   width: 48px;
                   height: 49px;
-                  background: #D3F36B;
+                  background: #d3f36b;
                   border: none;
                   border-top-right-radius: 20px;
                   border-bottom-right-radius: 20px;
@@ -368,7 +368,7 @@
                   text-decoration: none;
                   color: #6c757d;
                   &:hover {
-                    color: #D3F36B;
+                    color: #d3f36b;
                   }
                 }
                 .single_result {

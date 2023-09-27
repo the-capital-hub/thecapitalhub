@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./MyStartUp.scss";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import MyInvestmentCard from "../InvestorCards/MyInvestmentCard/MyInvestmentCard";
@@ -46,6 +46,10 @@ const investmentsData = [
 ];
 
 const MyStartUp = () => {
+  useEffect(() => {
+    document.title = "My Startups | Investors - The Capital Hub";
+  }, []);
+
   // Make fetch request for companies data
 
   // Save fetched data to state.

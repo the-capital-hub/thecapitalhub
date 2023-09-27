@@ -47,7 +47,7 @@ function Home() {
     getSavedPostCollections(loggedInUser._id).then((data) => {
       setgetSavedPostData(data);
     });
-    document.title = "Home | The Capital Hub";
+    document.title = "Home | Investors - The Capital Hub";
     fetchAllPosts();
   }, [newPost]);
 
@@ -180,6 +180,6 @@ function Home() {
       </div>
     </>
   );
-};
+}
 
-export default Home
+export default Home;

@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
 import { getSearchResultsAPI } from "../../../Service/user";
+import { SearchIcon } from "../SvgIcons";
 
 const NavBar = (props) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -55,7 +56,6 @@ const NavBar = (props) => {
     }, 500);
   };
   const [mobileSearch, setMobileSearch] = useState(false);
-
 
   return (
     <>
@@ -105,7 +105,8 @@ const NavBar = (props) => {
                   type="submit"
                   className="searchbar-button d-flex align-items-center justify-content-center"
                 >
-                  <img src={searchIcon} alt="search" />
+                  {/* <img src={searchIcon} alt="search" /> */}
+                  <SearchIcon color="black" width="24" height="24" />
                 </button>
               </form>
               {inputOnFocus && searchSuggestions && !mobileSearch && (

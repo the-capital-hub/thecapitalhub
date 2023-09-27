@@ -277,23 +277,22 @@
     input.visually-hidden:is(:focus, :focus-within)+label {
       color: rgba(140, 90, 201, 1);
     }
-  }
-
-  .upload__label {
-    width: 150px;
-    height: 150px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 0.25em dotted rgba(140, 90, 201, 1);
-    border-radius: 15px;
-    background-color: rgba(140, 90, 201, 0.2);
-    cursor: pointer;
-
-    label {
-      font-size: 0.75rem;
+    .upload__label {
+      width: 150px;
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 0.25em dotted rgba(140, 90, 201, 1);
+      border-radius: 15px;
+      background-color: rgba(140, 90, 201, 0.2);
       cursor: pointer;
+
+      label {
+        font-size: 0.75rem;
+        cursor: pointer;
+      }
     }
   }
 
