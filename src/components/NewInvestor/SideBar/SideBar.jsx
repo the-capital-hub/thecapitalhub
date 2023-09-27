@@ -141,7 +141,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/investor/home"
                 >
                   <img src={HomeIcon} alt="image" />
-                  {!sidebarCollapsed && <span>Home</span>}
+                  {!sidebarCollapsed && (
+                    <span className="text-black">Home</span>
+                  )}
                 </Link>
               </MenuItem>
               <MenuItem
@@ -158,7 +160,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     width="17px"
                     height="17px"
                   />
-                  {!sidebarCollapsed && <span>Explore</span>}
+                  {!sidebarCollapsed && (
+                    <span className="text-black">Explore</span>
+                  )}
                 </Link>
               </MenuItem>
               <MenuItem
@@ -175,7 +179,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     width="17px"
                     height="17px"
                   />
-                  {!sidebarCollapsed && <span>My StartUps</span>}
+                  {!sidebarCollapsed && (
+                    <span className="text-black">My StartUps</span>
+                  )}
                 </Link>
               </MenuItem>
               <MenuItem
@@ -193,7 +199,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     width="17px"
                     height="17px"
                   />
-                  {!sidebarCollapsed && <span>Syndicates</span>}
+                  {!sidebarCollapsed && (
+                    <span className="text-black">Syndicates</span>
+                  )}
                 </Link>
               </MenuItem>
               <MenuItem
@@ -210,7 +218,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     width="17px"
                     height="17px"
                   />
-                  {!sidebarCollapsed && <span>Live Deals</span>}
+                  {!sidebarCollapsed && (
+                    <span className="text-black">Live Deals</span>
+                  )}
                 </Link>
               </MenuItem>
               <MenuItem
@@ -227,7 +237,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     width="17px"
                     height="17px"
                   />
-                  {!sidebarCollapsed && <span>My Schedules</span>}
+                  {!sidebarCollapsed && (
+                    <span className="text-black">My Schedules</span>
+                  )}
                 </Link>
               </MenuItem>
               <MenuItem
@@ -244,7 +256,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     width="17px"
                     height="17px"
                   />
-                  {!sidebarCollapsed && <span>Saved Posts</span>}
+                  {!sidebarCollapsed && (
+                    <span className="text-black">Saved Posts</span>
+                  )}
                 </Link>
               </MenuItem>
               {/* <MenuItem
@@ -295,7 +309,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
             <Menu iconShape="round">
               <MenuItem onClick={handleLogout}>
                 <img src={ExitIcon} alt="image" width="17px" height="17px" />
-                {!sidebarCollapsed && <span>Log out</span>}
+                {!sidebarCollapsed && (
+                  <span className="text-black">Log out</span>
+                )}
               </MenuItem>
             </Menu>
           </SidebarFooter>
