@@ -54,74 +54,74 @@ const FeaturedPostCard = ({
 
   return (
     <>
-      <div className=" featuredpostcard_main_container mb-2">
-        <div className="col-12">
-          <div className="box featuredpostcard_container mt-2">
-            <div className="  feed_header_container">
-              <div className="feedpostcard_content">
-                <Link to={`/user/${userId}`} className="rounded-circle">
-                  <img
-                    src={
-                      profilePicture ||
-                      "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
-                    }
-                    width={50}
-                    className="rounded-circle"
-                    alt="logo"
-                  />
-                </Link>
-                <div className="feedpostcart_text_header my-1">
+      <div className=" featuredpostcard_main_container mb-2 ">
+        {/* <div className="col-12"> */}
+        <div className=" featuredpostcard_container mt-2 rounded-5 shadow-sm border">
+          <div className="feed_header_container p-2 border-bottom ">
+            <div className="feedpostcard_content ">
+              <Link to={`/user/${userId}`} className="rounded-circle">
+                <img
+                  src={
+                    profilePicture ||
+                    "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
+                  }
+                  style={{ width: "50px", height: "50px" }}
+                  className="rounded-circle"
+                  alt="logo"
+                />
+              </Link>
+              <div className="feedpostcart_text_header my-1">
+                <span
+                  style={{ fontSize: "15px", fontWeight: 600, color: "#000" }}
+                >
+                  {firstName + " " + lastName}
+                </span>
+                <span className="d-flex flex-column flex-md-row">
                   <span
-                    style={{ fontSize: "15px", fontWeight: 600, color: "#000" }}
+                    style={{
+                      fontSize: "10px",
+                      fontWeight: 500,
+                      color: "#000",
+                    }}
                   >
-                    {firstName + " " + lastName}
-                  </span>
-                  <span className="d-flex flex-column flex-md-row">
-                    <span
-                      style={{
-                        fontSize: "10px",
-                        fontWeight: 500,
-                        color: "#000",
-                      }}
-                    >
-                      <img src={HomeIcon} alt="logo" />
-                      {designation}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "10px",
-                        fontWeight: 500,
-                        color: "#000",
-                      }}
-                    >
-                      <img src={locationIcon} alt="logo" />
-                      Bangalore, India
-                    </span>
+                    <img src={HomeIcon} alt="logo" />
+                    {designation}
                   </span>
                   <span
-                    style={{ fontSize: "10px", fontWeight: 500, color: "#000" }}
+                    style={{
+                      fontSize: "10px",
+                      fontWeight: 500,
+                      color: "#000",
+                    }}
                   >
-                    <TimeAgo datetime={createdAt} locale="" />
+                    <img src={locationIcon} alt="logo" />
+                    Bangalore, India
                   </span>
-                </div>
+                </span>
+                <span
+                  style={{ fontSize: "10px", fontWeight: 500, color: "#000" }}
+                >
+                  <TimeAgo datetime={createdAt} locale="" />
+                </span>
               </div>
-              {/* <div className="three_dot">
+            </div>
+            {/* <div className="three_dot">
                 <img src={ThreeODotIcon} alt="dot" />
               </div> */}
-            </div>
-            <hr />
-            <div className="para_container w-100">
-              <div className="para_container_text w-100">
-                <p
-                  style={{
-                    fontSize: "13px",
-                    wordWrap: "break-word",
-                    overflowWrap: "break-word",
-                  }}
-                >
-                  {description}
-                </p>
-                {/* {image && (
+          </div>
+          {/* <hr /> */}
+          <div className="para_container w-100 p-2 ">
+            <div className="para_container_text w-100">
+              <p
+                style={{
+                  fontSize: "13px",
+                  wordWrap: "break-word",
+                  overflowWrap: "break-word",
+                }}
+              >
+                {description}
+              </p>
+              {/* {image && (
                   <span className="d-flex">
                     <img
                       className="mx-auto"
@@ -132,7 +132,7 @@ const FeaturedPostCard = ({
                     />
                   </span>
                 )} */}
-                {/* {video && (
+              {/* {video && (
                   <span className="d-flex">
                     <video
                       className="mx-auto"
@@ -145,9 +145,9 @@ const FeaturedPostCard = ({
                     </video>
                   </span>
                 )} */}
-              </div>
             </div>
-            {/* <hr />
+          </div>
+          {/* <hr />
             <div className="row feedpostcard_footer mb-2">
               <div className="col-8">
                 <div className="feedpostcard_footer_like_comment d-flex gap-2">
@@ -174,8 +174,8 @@ const FeaturedPostCard = ({
                 <img src={saveIcon} width={16} alt="save post" />
               </div>
             </div> */}
-          </div>
         </div>
+        {/* </div> */}
       </div>
     </>
   );
