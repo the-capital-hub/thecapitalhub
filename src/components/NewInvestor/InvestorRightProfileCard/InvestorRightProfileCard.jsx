@@ -5,25 +5,25 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-const RightProfileCard = ({noProfile}) => {
+const RightProfileCard = ({ noProfile }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [investor, setInvestor] = useState(null);
-//   useEffect(() => {
-//     if(loggedInUser?.investor) { 
-//       getInvestorById(loggedInUser?.investor).then(({data}) => {
-//         setInvestor(data);
-//       });
-//     }
-//   }, [loggedInUser]);
-  
+  //   useEffect(() => {
+  //     if(loggedInUser?.investor) {
+  //       getInvestorById(loggedInUser?.investor).then(({data}) => {
+  //         setInvestor(data);
+  //       });
+  //     }
+  //   }, [loggedInUser]);
+
   return (
     <>
-      <div className="col-12 view_profile_container">
+      <div className="col-12 investor_profile_container">
         <div className="view_profile">
           <div className="view_profile_name_section mt-2">
             <img
               src={loggedInUser.profilePicture}
-              width={100}
+              style={{ width: "100px", height: "100px" }}
               className="rounded-circle"
               alt="profileimage"
             />
@@ -33,13 +33,15 @@ const RightProfileCard = ({noProfile}) => {
               </h2>
               <span className="smallest_typo">{loggedInUser?.email}</span>
               <span className="smallest_typo">
-                {`${loggedInUser?.designation} at ${loggedInUser?.startUp?.company || investor?.companyName}`}
+                {`${loggedInUser?.designation} at ${
+                  loggedInUser?.startUp?.company || investor?.companyName
+                }`}
               </span>
             </div>
-            
+
             <Link
               to="/investor/manage-account"
-              className="profile_btn mt-1 manage_acount_btn"
+              className="profile_btn mt-1 investor__green"
             >
               Manage Account
             </Link>
