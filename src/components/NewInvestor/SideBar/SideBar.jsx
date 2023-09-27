@@ -20,7 +20,7 @@ import mySchedulesIcon from "../../../Images/Investor/Sidebar/My Schedules.svg";
 import savedPostsIcon from "../../../Images/Investor/Sidebar/SavedPosts.svg";
 import ExitIcon from "../../../Images/investorIcon/Exit.svg";
 import InvestorIcon from "../../../Images/investorIcon/Pot.svg";
-import PlusIcon from "../../../Images/investorIcon/Plus.svg";
+// import PlusIcon from "../../../Images/investorIcon/Plus.svg";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./SideBar.scss";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -29,6 +29,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../Store/Action/userAction";
 import connectionsIcon from "../../../Images/investorsidebar/connection.svg";
+import { PlusIcon } from "../SvgIcons";
 
 const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const dispatch = useDispatch();
@@ -69,9 +70,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 >
                   <img
                     className="rounded-circle"
-                    width={50}
+                    style={{ width: "60px", height: "60px" }}
                     src={loggedInUser.profilePicture}
-                    alt="image"
+                    alt="User profile"
                   />
                 </Link>
               ) : (
@@ -83,9 +84,12 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     {" "}
                     <img
                       className="rounded-circle"
-                      width={70}
+                      style={{
+                        width: "60px",
+                        height: "60px",
+                      }}
                       src={loggedInUser.profilePicture}
-                      alt="image"
+                      alt="User profile"
                     />
                   </Link>
                   <h3>
@@ -113,14 +117,16 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   {sidebarCollapsed ? (
                     <>
                       <button className="plus_btn_newInvestor">
-                        <img src={PlusIcon} alt="image" />
+                        {/* <img src={PlusIcon} alt="image" /> */}
+                        <PlusIcon color="black" width="24" height="24" />
                       </button>
                     </>
                   ) : (
                     <>
                       <button className="create_post_newInvestor">
-                        <span>Create Post</span>
-                        <img src={PlusIcon} alt="image" />
+                        <span className="text-black ms-0">Create Post</span>
+                        {/* <img src={PlusIcon} alt="image" /> */}
+                        <PlusIcon color="black" width="24" height="24" />
                       </button>
                     </>
                   )}
