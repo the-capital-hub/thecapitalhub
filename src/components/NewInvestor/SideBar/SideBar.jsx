@@ -109,7 +109,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 // active={location.pathname.includes("/")}
                 className=""
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="">
+                <Link onClick={() => setSidebarCollapsed(true)} to="/investor/home?showPopup=true">
                   {sidebarCollapsed ? (
                     <>
                       <button className="plus_btn_newInvestor">
@@ -119,7 +119,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   ) : (
                     <>
                       <button className="create_post_newInvestor">
-                        <span>Create Post</span>
+                        <span>Create a Post</span>
                         <img src={PlusIcon} alt="image" />
                       </button>
                     </>

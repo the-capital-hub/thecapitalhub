@@ -36,7 +36,9 @@ const RightProfileCard = ({noProfile}) => {
                 {`${loggedInUser?.designation} at ${loggedInUser?.startUp?.company || investor?.companyName}`}
               </span>
             </div>
-            
+            <Link to="/investor/profile" className="investor_profile_btn mt-2">
+              View Profile
+            </Link>
             <Link
               to="/investor/manage-account"
               className="profile_btn mt-1 manage_acount_btn"

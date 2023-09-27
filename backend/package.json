@@ -1,8 +1,8 @@
 {
-  "name": "gentleman-attlier-backend",
+  "name": "thecapitalhub-backend",
   "version": "1.0.0",
   "type": "module",
-  "description": "This is the Backend for Gentleman-attlier ecommerce site",
+  "description": "This is the Backend for The Capital Hub",
   "main": "index.js",
   "scripts": {
     "build": "npm run build",

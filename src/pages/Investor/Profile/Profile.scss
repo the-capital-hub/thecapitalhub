@@ -131,6 +131,7 @@
     justify-content: space-between;
     margin: 1rem;
   }
+
   .card_holder {
     display: flex;
     justify-content: space-between;
@@ -151,6 +152,7 @@
 
   .designation_info {
     margin-left: 1rem;
+
     textarea {
       width: 98%;
     }
@@ -183,6 +185,7 @@
     background: #fff;
     // padding: 20px;
     margin: 0 20px 20px 20px;
+
     .header {
       display: flex;
       justify-content: space-between;
@@ -190,11 +193,13 @@
       // border-bottom: solid 1px #dfdfdf;
       align-items: center;
     }
+
     .invested_cards {
       display: flex;
       width: 100%;
       gap: 3em;
       overflow-x: auto;
+
       .invested_card {
         flex-shrink: 0;
         margin: 10px 0;
@@ -204,9 +209,11 @@
         display: flex;
         flex-direction: column;
         box-shadow: 4px 4px 30px 0px rgba(211, 243, 107, 0.1);
+
         .card_title {
           display: flex;
           align-items: center;
+
           h5 {
             padding-bottom: 5px;
             padding-left: 10px;
@@ -267,7 +274,7 @@
       clip: rect(1px, 1px, 1px, 1px);
     }
 
-    input.visually-hidden:is(:focus, :focus-within) + label {
+    input.visually-hidden:is(:focus, :focus-within)+label {
       color: rgba(140, 90, 201, 1);
     }
   }
@@ -327,6 +334,7 @@
     background: #fff;
     // padding: 20px;
     margin: 0 20px 20px 20px;
+
     .header {
       display: flex;
       justify-content: space-between;
@@ -334,11 +342,13 @@
       // border-bottom: solid 1px #dfdfdf;
       align-items: center;
     }
+
     .interested_cards {
       display: flex;
       width: 100%;
       gap: 3em;
       overflow-x: auto;
+
       .interested_card {
         flex-shrink: 0;
         // margin: 10px 0;
@@ -363,32 +373,56 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+
     h2 {
       padding: 0 20px 20px 20px;
       width: auto;
       border-bottom: solid 1px #dfdfdf;
     }
+
+    button {
+      border-radius: 131px;
+      border: 1px solid #c6c6c6;
+      width: 107px;
+      height: 35px;
+      flex-shrink: 0;
+      color: #717171;
+      font-size: 18px;
+      font-family: Poppins;
+      margin-right: 30px;
+      cursor: pointer;
+    }
+
+    textarea {
+      width: 98%;
+    }
+
     .recent_experience,
     .education {
       border-radius: 10px;
       background: #fff;
       padding: 20px;
+
       .header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding-bottom: 5px;
       }
+
       .experience_cards {
         .experience_card:last-child {
           border-bottom: none;
         }
+
         .experience_card {
           border-bottom: solid 1px #dfdfdf;
+
           .img_container {
             padding: 20px;
             background: rgba(211, 243, 107, 0.44);
           }
+
           .description {
             font-size: 14px;
           }
@@ -423,6 +457,7 @@
       color: black;
     }
   }
+
   .green_underline {
     text-decoration: underline solid #d3f36b;
     text-decoration-thickness: 2px;
@@ -514,12 +549,14 @@
   .profile_container {
     .startups_invested {
       padding: 10px;
+
       .invested_cards {
         .invested_card {
           width: 300px;
         }
       }
     }
+
     .profileContainer {
       display: flex;
       flex-direction: column;
@@ -527,17 +564,21 @@
       margin-left: 20px;
       // justify-content: start;
     }
+
     table {
       width: 300px;
       font-size: 15px;
+
       strong {
         font-weight: 200;
         margin-right: 15px;
       }
     }
+
     .milestones {
       overflow-x: scroll;
     }
+
     .small_typo {
       width: 300px;
     }
