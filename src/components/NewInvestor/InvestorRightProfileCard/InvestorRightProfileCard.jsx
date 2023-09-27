@@ -38,6 +38,9 @@ const RightProfileCard = ({ noProfile }) => {
                 }`}
               </span>
             </div>
+            <Link to="/investor/profile" className="profile_btn mt-2 investor__green">
+              View Profile
+            </Link>
 
             <Link
               to="/investor/manage-account"

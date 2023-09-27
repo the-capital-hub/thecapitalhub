@@ -15,6 +15,7 @@ import {
   getSavedPostCollections,
   postUserPost,
 } from "../../../Service/user";
+import { useLocation } from 'react-router-dom';
 
 function Home() {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -67,6 +68,17 @@ function Home() {
       .finally(() => setRepostLoading({ ...repostLoading, instant: false }));
   };
 
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const showPopup = queryParams.get('showPopup') === 'true';
+
+  useEffect(() => {
+    if (showPopup) {
+      setPopupOpen(true);
+      const urlWithoutQuery = location.pathname;
+      window.history.replaceState({}, '', urlWithoutQuery);
+    }
+  }, [location]);
   return (
     <>
       <div className="container-fluid feed_container">
