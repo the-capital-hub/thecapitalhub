@@ -61,7 +61,7 @@ const SavedPostSmallCard = ({
             src={image}
             alt="Post"
             className="img-fluid mb-2 rounded-4"
-            style={{ width: "18rem", height: "auto" }}
+            style={{ width: "18rem", maxHeight: "18rem", objectFit: "contain" }}
           />
         ) : (
           ""

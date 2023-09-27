@@ -124,7 +124,7 @@ function Profile() {
     getInvestorById(loggedInUser?.investor).then(({ data }) => {
       setInvestor(data);
       setCompanyName(data.companyName);
-      setInvestedStartups(data.startupsInvested)
+      setInvestedStartups(data.startupsInvested);
       setSectorsData(data.sectorInterested);
     });
   }, [loggedInUser]);
@@ -227,7 +227,7 @@ function Profile() {
   };
 
   useEffect(() => {
-    document.title = "Profile | The Capital Hub";
+    document.title = "Profile | Investors - The Capital Hub";
   }, []);
 
   return (
