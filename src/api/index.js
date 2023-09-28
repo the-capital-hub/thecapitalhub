@@ -55,6 +55,7 @@ const API = Object.freeze({
   clearChat: `${baseUrl}/message/clearChatMessages`,
   createCommunity:`${baseUrl}/community/createCommunity`,
   getAllCommunity:`${baseUrl}/community/getAllCommunitiesByUserId`,
+  addMyInterest: `${baseUrl}/investor/addMyInterest`,
 });
 
 export default API;

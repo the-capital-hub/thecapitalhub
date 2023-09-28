@@ -22,6 +22,11 @@ import { useState, useEffect } from "react";
 import RaghuImage from '../../../Images/aboutUs/Raghu.jpeg'
 import RajuImage from '../../../Images/Rectangle 1895.png'
 
+import TweeterIcon from "../../../Images/investorIcon/Tweeter.svg";
+import IntagramIcon from "../../../Images/investorIcon/Instagram.svg";
+import LinkedinIcon from "../../../Images/investorIcon/Linkedin.svg";
+import WebIcon from "../../../Images/investorIcon/WebIcon.svg";
+
 function Company() {
   const { username } = useParams();
   const [onePager, setOnePager] = useState([]);
@@ -172,22 +177,30 @@ function Company() {
                   <div className="public_link">
                     <div className="social_icons">
                       <span>
-                        <img src={googleIcon} alt="google" /> Google
+                        <a href={onePager?.socialLinks?.website} target="_blank" rel="noopener noreferrer">
+                          <img src={WebIcon} alt="google" /> Website
+                        </a>
                       </span>
                     </div>
                     <div className="social_icons">
                       <span>
-                        <img src={fbIcon} alt="google" /> Facebook
+                      <a href={onePager?.socialLinks?.instagram} target="_blank" rel="noopener noreferrer">
+                        <img src={IntagramIcon} alt="google" /> Instagram
+                        </a>
                       </span>
                     </div>
                     <div className="social_icons">
                       <span>
+                      <a href={onePager?.socialLinks?.twitter} target="_blank" rel="noopener noreferrer">
                         <img src={twIcon} alt="google" /> Twitter
+                        </a>
                       </span>
                     </div>
                     <div className="social_icons">
                       <span>
+                      <a href={onePager?.socialLinks?.linkedin} target="_blank" rel="noopener noreferrer">
                         <img src={lnIcon} alt="google" /> LinkedIn
+                        </a>
                       </span>
                     </div>
                   </div>
@@ -197,8 +210,7 @@ function Company() {
                   <div className="feedbackcard">
                     <FeedbackCard
                       image={feedbackIcon}
-                      name="image
-                      Sagar S"
+                      name="Sagar S"
                       stars={5}
                       paragraph="I had an amazing experience with Kyntox Biotech! The team's dedication to innovation really stood out to me. Their commitment to producing high-quality products while prioritizing safety is commendable. I was thoroughly impressed with their transparent communication throughout the process."
                     />

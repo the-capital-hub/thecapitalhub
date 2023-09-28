@@ -25,6 +25,7 @@ export default function AddEditModal({
     companyImage: "",
     name: "",
     description: "",
+    equity: "",
   });
   const [sectorLogo, setSectorLogo] = useState(null);
   const [isEdited, setIsEdited] = useState(false);
@@ -67,6 +68,7 @@ export default function AddEditModal({
           const editedStartUp = investor.startupsInvested[editIndex];
           editedStartUp.name = formData.name;
           editedStartUp.description = formData.description;
+          editedStartUp.investedEquity = formData.equity;
           if (formData.companyImage instanceof Blob) {
             const logo = await getBase64(formData.companyImage);
             const { url } = await uploadLogo({ logo });
@@ -94,6 +96,7 @@ export default function AddEditModal({
             logo: logo,
             name: formData.name,
             description: formData.description,
+            investedEquity: formData.equity,
           };
           console.log(newStartUpData);
           const response = await addStartupInvested(
@@ -304,6 +307,7 @@ export default function AddEditModal({
             </div>
 
             {isStartups ? (
+              <>
               <div className="invested__company__description">
                 <textarea
                   name="description"
@@ -315,6 +319,18 @@ export default function AddEditModal({
                   onChange={handleInputChange}
                 ></textarea>
               </div>
+              <div className="invested__company__name ">
+              <input
+                type="number"
+                name="equity"
+                id="equity"
+                placeholder="Equity"
+                className="p-2 w-100 rounded-3 modal__input"
+                value={formData.equity}
+                onChange={handleInputChange}
+              />
+            </div>
+            </>
             ) : (
               ""
             )}

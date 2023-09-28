@@ -13,39 +13,42 @@ import ModalBSHeader from "../../../components/PopUp/ModalBS/ModalBSHeader/Modal
 import ModalBSBody from "../../../components/PopUp/ModalBS/ModalBSBody/ModalBSBody";
 import AddModalContent from "../../../components/NewInvestor/MyStartupsComponents/AddModalContent";
 import EditModalContent from "../../../components/NewInvestor/MyStartupsComponents/EditModalContent";
+import { getInvestorById } from "../../../Service/user";
+import { useSelector } from "react-redux";
 
 // Mock data for my investments
-const investmentsData = [
-  {
-    id: 1,
-    logo: logoIcon,
-    name: "Bondlink",
-    description:
-      "One classical breakdown of economic activity distinguishes three sectors.",
-    equity: 3,
-    commitment: "EA",
-  },
-  {
-    id: 2,
-    logo: logoIcon,
-    name: "Mini Cubex",
-    description:
-      "One classical breakdown of economic activity distinguishes three sectors.",
-    equity: 10,
-    commitment: "EA",
-  },
-  {
-    id: 3,
-    logo: logoIcon,
-    name: "HCL",
-    description:
-      "One classical breakdown of economic activity distinguishes three sectors.",
-    equity: 10,
-    commitment: "EA",
-  },
-];
+// const investmentsData = [
+//   {
+//     id: 1,
+//     logo: logoIcon,
+//     name: "Bondlink",
+//     description:
+//       "One classical breakdown of economic activity distinguishes three sectors.",
+//     equity: 3,
+//     commitment: "EA",
+//   },
+//   {
+//     id: 2,
+//     logo: logoIcon,
+//     name: "Mini Cubex",
+//     description:
+//       "One classical breakdown of economic activity distinguishes three sectors.",
+//     equity: 10,
+//     commitment: "EA",
+//   },
+//   {
+//     id: 3,
+//     logo: logoIcon,
+//     name: "HCL",
+//     description:
+//       "One classical breakdown of economic activity distinguishes three sectors.",
+//     equity: 10,
+//     commitment: "EA",
+//   },
+// ];
 
 const MyStartUp = () => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
   useEffect(() => {
     document.title = "My Startups | Investors - The Capital Hub";
   }, []);
@@ -53,7 +56,16 @@ const MyStartUp = () => {
   // Make fetch request for companies data
 
   // Save fetched data to state.
-  const [companyData, setCompanyData] = useState(investmentsData);
+  // const [companyData, setCompanyData] = useState(investmentsData);
+  const [investedStartups, setInvestedStartups] = useState([]);
+  const [myInterests, setMyInterests] = useState([]);
+
+  useEffect(() => {
+    getInvestorById(loggedInUser?.investor).then(({ data }) => {
+      setInvestedStartups(data.startupsInvested);
+      setMyInterests(data.myInterests);
+    });
+  }, [loggedInUser]);
 
   return (
     <>
@@ -86,7 +98,7 @@ const MyStartUp = () => {
               </div>
             </div>
             <div className="card_container border-bottom p-4 d-flex gap-5 align-items-center overflow-x-auto">
-              {companyData.map((company, index) => {
+              {investedStartups.map((company, index) => {
                 return <MyInvestmentCard key={company.id} company={company} />;
               })}
             </div>
@@ -94,7 +106,7 @@ const MyStartUp = () => {
             <ModalBSContainer id={"myInvestmentsAddModal"} isStatic={false}>
               <ModalBSHeader title={"Add new Investment"} />
               <ModalBSBody>
-                <AddModalContent />
+                <AddModalContent setInvestedStartups={setInvestedStartups}/>
               </ModalBSBody>
             </ModalBSContainer>
 
@@ -107,7 +119,7 @@ const MyStartUp = () => {
             >
               <ModalBSHeader title={"Edit Investments"} />
               <ModalBSBody>
-                <EditModalContent dataArray={companyData} key={"investments"} />
+                <EditModalContent dataArray={investedStartups} key={"investments"} setInvestedStartups={setInvestedStartups}/>
               </ModalBSBody>
             </ModalBSContainer>
 
@@ -136,7 +148,7 @@ const MyStartUp = () => {
               </div>
             </div>
             <div className="card_container p-4 d-flex gap-5 align-items-center overflow-x-auto ">
-              {companyData.map((company, index) => {
+              {myInterests.map((company, index) => {
                 return (
                   <MyInvestmentCard
                     key={company.id}
@@ -150,7 +162,7 @@ const MyStartUp = () => {
             <ModalBSContainer id={"myInterestsAddModal"} isStatic={false}>
               <ModalBSHeader title={"Add new Interest"} />
               <ModalBSBody>
-                <AddModalContent isInterests />
+                <AddModalContent isInterests setMyInterests={setMyInterests}/>
               </ModalBSBody>
             </ModalBSContainer>
 
@@ -163,7 +175,7 @@ const MyStartUp = () => {
             >
               <ModalBSHeader title={"Edit Interests"} />
               <ModalBSBody>
-                <EditModalContent dataArray={companyData} isInterests={true} />
+                <EditModalContent dataArray={myInterests} isInterests={true} setMyInterests={setMyInterests}/>
               </ModalBSBody>
             </ModalBSContainer>
           </div>
