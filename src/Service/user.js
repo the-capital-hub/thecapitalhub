@@ -643,3 +643,14 @@ export const getAllCommunity = async (userId) => {
     throw error;
   }
 };
+
+
+export const addMyInterest = async (investorId, newInterestData) => {
+  try {
+    const response = await axiosInstance.patch(`${API.addMyInterest}/${investorId}`, newInterestData);
+    return response.data;
+  } catch (error) {
+    console.error("Error while adding interest:", error);
+    throw error;
+  }
+};

@@ -44,6 +44,16 @@ const investorSchema = new Schema(
         name: String,
         description: String,
         logo: String,
+        investedEquity: String,
+      },
+    ],
+    myInterests: [
+      {
+        logo: String,
+        name: String,
+        ask: String,
+        commitment: String,
+        investedEquity: String,
       },
     ],
     investmentPhilosophy: {

@@ -467,7 +467,7 @@ const FeedPostCard = ({
                     <div>
                       <div class="comment_container">
                         <div class="logo">
-                          <img src={RoundLogo} alt="Logo" />
+                          <img src={loggedInUser.profilePicture} alt="Logo" />
                         </div>
                         <section class="input_and_logo_section">
                           <div class="input_box">
@@ -505,17 +505,22 @@ const FeedPostCard = ({
                               <div className="connection_left">
                                 {val.user && (
                                   <>
-                                    <img
-                                      src={val.user.profilePicture || ""}
-                                      alt="Connection"
-                                      className="comment_connection"
-                                    />
+                                    <Link to={`/user/${val.user._id}`}>
+                                      <img
+                                        src={val.user.profilePicture || ""}
+                                        alt="Connection"
+                                        className="comment_connection"
+                                      />
+                                    </Link>
                                     <div className="body_container">
-                                      <p className="connection_name">
+                                      <Link
+                                        to={`/user/${val.user._id}`}
+                                        className="connection_name"
+                                      >
                                         {val.user.firstName +
                                           " " +
                                           val.user.lastName}
-                                      </p>
+                                      </Link>
                                       <p className="connection_designation">
                                         {val.user.designation}
                                       </p>
