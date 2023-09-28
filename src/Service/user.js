@@ -624,3 +624,22 @@ export const clearChat = async (chatId) => {
     throw error;
   }
 };
+
+export const createCommunity = async (createCommunityData) => {
+  try {
+    const response = await axiosInstance.post(`${API.createCommunity}`,createCommunityData);
+    return response.data;
+  } catch (error) {
+    console.error("Error while clearing chat:", error);
+    throw error;
+  }
+};
+export const getAllCommunity = async (userId) => {
+  try {
+    const response = await axiosInstance.get(`${API.getAllCommunity}/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error while clearing chat:", error);
+    throw error;
+  }
+};
