@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./feed.scss";
 // import profilePic from "../../../Images/investorIcon/profilePic.webp";
-import SmallProfileCard from "../Cards/TwoSmallMyProfile/SmallProfileCard";
+import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import RightProfileCard from "../InvestorGlobalCards/RightProfileCard/RightProfileCard";
 import FeedPostCard from "../Cards/FeedPost/FeedPostCard";
 import CreatePostPopUp from "../../PopUp/CreatePostPopUp/CreatePostPopUp";
@@ -13,7 +13,7 @@ import {
 import { useSelector } from "react-redux";
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 const Feed = () => {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -43,13 +43,13 @@ const Feed = () => {
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const showPopup = queryParams.get('showPopup') === 'true';
+  const showPopup = queryParams.get("showPopup") === "true";
 
   useEffect(() => {
     if (showPopup) {
       setPopupOpen(true);
       const urlWithoutQuery = location.pathname;
-      window.history.replaceState({}, '', urlWithoutQuery);
+      window.history.replaceState({}, "", urlWithoutQuery);
     }
   }, [location]);
 
@@ -82,9 +82,13 @@ const Feed = () => {
     <>
       <div className="container-fluid feed_container">
         <div className="row mt-2">
-          <div className="col">
-            <SmallProfileCard text={"Home"} />
-            <div className="content-70">
+          <div className="col main_content d-flex flex-column gap-3">
+            <div className="row">
+              <div className="col">
+                <SmallProfileCard text={"Home"} />
+              </div>
+            </div>
+            <div className="content-70 d-flex flex-column gap-3">
               <div className="row">
                 <div className="col-12 mt-2">
                   <div className="box start_post_container">
@@ -92,6 +96,7 @@ const Feed = () => {
                       src={loggedInUser.profilePicture}
                       alt="Image"
                       className="rounded-circle"
+                      style={{ width: "50px", height: "50px" }}
                     />
                     <div className="w-100 me-4" onClick={openPopup}>
                       <input
@@ -166,14 +171,10 @@ const Feed = () => {
               />
             )}
           </div>
-          <div className="col   d-none d-xl-block">
-            <div className="content-30">
-              <div className="row">
-                <RightProfileCard />
-                <RecommendationCard />
-                <NewsCorner />
-              </div>
-            </div>
+          <div className="col right_content">
+            <RightProfileCard />
+            <RecommendationCard />
+            <NewsCorner />
           </div>
         </div>
       </div>

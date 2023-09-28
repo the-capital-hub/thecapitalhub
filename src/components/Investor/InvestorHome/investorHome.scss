@@ -1,6 +1,22 @@
 .investorHome_main_container {
-  margin-top: 40px;
+  // margin-top: 40px;
+  margin-block: 1.5em;
   display: flex;
+
+  // Right side content
+  .thirty {
+    display: none;
+
+    @media (min-width: 1215px) {
+      display: block;
+      flex: 0 0 24rem;
+    }
+  }
+
+  // main content
+  .seventy {
+    flex-grow: 1;
+  }
 
   .typography {
     color: #000;

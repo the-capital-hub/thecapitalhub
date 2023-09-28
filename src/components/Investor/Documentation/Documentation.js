@@ -40,11 +40,15 @@ const Documentation = () => {
   }, []);
 
   return (
-    <>
-      <SmallProfileCard text={"Documentation"} />
-      <div className="documentationStartup">
-        {showModal && <UploadModal onCancel={setShowModal} folders={folders} />}
-        <div className="left">
+    <div className="documentation-wrapper">
+      {/* Main content */}
+      <div className="left-content">
+        <SmallProfileCard text={"Documentation"} />
+        <div className="documentationStartup">
+          {showModal && (
+            <UploadModal onCancel={setShowModal} folders={folders} />
+          )}
+
           <IntroductoryMessage
             title={"Upload your document"}
             // para={
@@ -52,11 +56,11 @@ const Documentation = () => {
             // }
           />
           <UploadContainer onClicked={setShowModal} />
-          <div className="cards px-xxl-4">
+          <div className="cards px-xxl-4 bg-white py-5 rounded-4">
             {/* <Card
-              onClicked={() => navigate("/documentation/financials")}
-              text={"Financials"}
-            /> */}
+                onClicked={() => navigate("/documentation/financials")}
+                text={"Financials"}
+              /> */}
             <Card
               onClicked={() => navigate("/documentation/pitchdeck")}
               text={"Pitch Deck"}
@@ -76,19 +80,20 @@ const Documentation = () => {
               text={"Legal and Compliance"}
             />
             {/* <Card
-              onClicked={() => navigate("/documentation/update")}
-              text={"Update"}
-            /> */}
+                onClicked={() => navigate("/documentation/update")}
+                text={"Update"}
+              /> */}
           </div>
         </div>
-
-        <div className="right">
-          <RightProfileCard />
-          <RecommendationCard />
-          <NewsCorner />
-        </div>
       </div>
-    </>
+
+      {/* Right content */}
+      <div className="right-content">
+        <RightProfileCard />
+        <RecommendationCard />
+        <NewsCorner />
+      </div>
+    </div>
     // <div className="container-fluid investorHome_main_container">
     //   <div className="row mt-2">
     //     <div className="col">
