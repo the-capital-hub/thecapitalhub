@@ -25,7 +25,8 @@ function Profile() {
   return (
     <div className="container-fluid profile_main_container">
       <div className="row mt-2">
-        <div className="col mb-5">
+        {/* Added d-flex flex-column gap-3 here. Easy to manipulate - Srihari */}
+        <div className="col mb-5 d-flex flex-column gap-3">
           <div className="row">
             <div className="col-12 mt-2">
               <div className=" box ">
@@ -239,7 +240,9 @@ function Profile() {
               </div>
             </div>
           </div>
-          <CompanyDetailsCard userDetails={user} />
+          <div className="row">
+            <CompanyDetailsCard userDetails={user} className={"mt-2"} />
+          </div>
           <div className="row">
             <div className="col-12 mt-2">
               <div className="card_holder">

@@ -24,7 +24,7 @@ const RightProfileCard = ({ noProfile }) => {
             <img
               src={loggedInUser.profilePicture}
               style={{ width: "100px", height: "100px" }}
-              className="rounded-circle"
+              className="rounded-circle profile-image"
               alt="profileimage"
             />
             <div className="right_profile_text flex_content">
@@ -38,7 +38,10 @@ const RightProfileCard = ({ noProfile }) => {
                 }`}
               </span>
             </div>
-            <Link to="/investor/profile" className="profile_btn mt-2 investor__green">
+            <Link
+              to="/investor/profile"
+              className="profile_btn mt-2 investor__green"
+            >
               View Profile
             </Link>
 
