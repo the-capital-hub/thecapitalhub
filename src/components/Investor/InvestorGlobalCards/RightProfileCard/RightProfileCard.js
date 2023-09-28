@@ -25,7 +25,7 @@ const RightProfileCard = ({ noProfile }) => {
             <img
               src={loggedInUser.profilePicture}
               style={{ width: "100px", height: "100px" }}
-              className="rounded-circle"
+              className="rounded-circle profile-image"
               alt="profileimage"
             />
             <div className="right_profile_text flex_content">

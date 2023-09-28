@@ -7,62 +7,66 @@ import {
   userFour,
   userThree,
 } from "../../../Images/Investor/CompanyProfile";
-import {
-  getUserConnections
-} from "../../../Service/user"
+import { getUserConnections, createCommunity } from "../../../Service/user";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { getBase64 } from "../../../utils/getBase64";
 export default function NewCommunityModal() {
-  const [getAllConnection, setGetAllConnection] = useState([]); // State for accepted connections
+  const [getAllConnection, setGetAllConnection] = useState([]);
+  const [memberIds, setMemberIds] = useState([]);
+  const [name, setName] = useState();
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-console.log("first")
   useEffect(() => {
     getUserConnections(loggedInUser._id).then((res) => {
-      console.log("res2-->", res.data);
-      setGetAllConnection(res.data); // Set accepted connections data
+      setGetAllConnection(res.data);
     });
   }, []);
-  
-  // fetch top contacts
-  // Mock for top contacts
-  // const topContacts = [
-  //   {
-  //     id: 1,
-  //     name: "Rachel",
-  //     image: userFive,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Joey",
-  //     image: userOne,
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Chandler",
-  //     image: userTwo,
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Monica",
-  //     image: userFive,
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Ross",
-  //     image: userFour,
-  //   },
-  // ];
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  const handleButtonClick = (event, memberId) => {
+    event.preventDefault();
+
+    setMemberIds([...memberIds, memberId, loggedInUser._id]);
+  };
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
+
+  function handleSubmit(event) {
+    alert("test")
+    event.preventDefault();
+
+    getBase64(selectedFile)
+      .then((profileImg) => {
+    const data = {
+      profileImage: profileImg,
+      communityName: name,
+      adminId: loggedInUser?._id,
+      members: memberIds,
+    };
+
+    createCommunity(data)
+      .then((res) => {
+        console.log(res)
+        setGetAllConnection(res.data);
+      })
+      .catch((error) => {
+        console.error("Error creating community:", error);
+      });
+    })
+    .catch((error) => {
+      console.error("Error getting base64 image:", error);
+    });
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="newCommunity__modal d-flex flex-column gap-3 p-3 "
-    >
+    <form className="newCommunity__modal d-flex flex-column gap-3 p-3 ">
       {/* Profile picture input */}
       <div className="mx-auto">
         <input
@@ -71,6 +75,7 @@ console.log("first")
           id="profilePicture"
           accept="image/*"
           className="visually-hidden"
+          onChange={handleFileChange}
         />
         <label htmlFor="profilePicture" className="upload__label">
           <BsFillCameraFill
@@ -89,7 +94,9 @@ console.log("first")
           name="communityName"
           id="communityName"
           placeholder="Enter Name"
+          value={name}
           className="modal__input p-2 rounded-2 w-100"
+          onChange={handleNameChange}
         />
       </div>
 
@@ -114,13 +121,26 @@ console.log("first")
           return (
             <div
               className="p-2 d-flex justify-content-between align-items-center rounded-2 bg-light"
-              key={contact.id}
+              key={contact?._id}
             >
-              <img src={contact?.profilePicture} alt="contact" className="img-fluid "  />
-              <h6 className="m-0"> {`${contact.firstName ? contact.firstName : "name"} ${
-                                contact.lastName ? contact.lastName : ""
-                              }`}</h6>
-              <button className="orange_button">Add</button>
+              <img
+                src={contact?.profilePicture}
+                alt="contact"
+                className="img-fluid "
+              />
+              <h6 className="m-0">
+                {" "}
+                {`${contact?.firstName ? contact?.firstName : "name"} ${
+                  contact?.lastName ? contact?.lastName : ""
+                }`}
+              </h6>
+              {/* <button
+                className="orange_button"
+                onClick={() => handleButtonClick(contact?._id)}
+              > */}
+              <button  className="orange_button" onClick={event => handleButtonClick(event, contact?._id)}>
+                Add
+              </button>
             </div>
           );
         })}
@@ -135,6 +155,7 @@ console.log("first")
           type="submit"
           className="orange_button "
           data-bs-dismiss="modal"
+          onClick={event => handleSubmit(event)}
         >
           Done
         </button>

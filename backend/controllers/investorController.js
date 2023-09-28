@@ -4,6 +4,7 @@ import {
   addStartupInvested,
   getInvestorById,
   uploadLogo,
+  addMyInterest,
 } from "../services/investorService.js";
 
 //create Investor
@@ -79,6 +80,21 @@ export const uploadLogoController = async (req, res) => {
     res.status(500).send({
       status: 500,
       message: "An error occurred while uploading logo.",
+    });
+  }
+};
+
+export const addMyInterestController = async (req, res) => {
+  try {
+    const { investorId } = req.params;
+    const response = await addMyInterest(investorId, req.body);
+    res.status(response.status).send(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while adding my interest data.",
     });
   }
 };

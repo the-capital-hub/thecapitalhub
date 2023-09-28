@@ -6,7 +6,7 @@
 
   .sidebar {
     // width: 300px;
-    background-color: #eaeef2;
+    // background-color: #eaeef2;
     position: fixed;
     top: 11.5%;
     left: 0;
@@ -84,9 +84,7 @@
       .sidebar {
         width: 0;
         opacity: 0;
-        transition:
-          width 0.3s ease,
-          opacity 0.3s ease;
+        transition: width 0.3s ease, opacity 0.3s ease;
       }
 
       .content {
@@ -126,9 +124,7 @@
       .sidebar {
         width: 0;
         opacity: 0;
-        transition:
-          width 0.3s ease,
-          opacity 0.3s ease;
+        transition: width 0.3s ease, opacity 0.3s ease;
       }
 
       .content {

@@ -175,9 +175,13 @@ const InvestorHome = () => {
   return (
     <div className="container-fluid investorHome_main_container">
       <div className="row mt-2">
-        <div className="col seventy">
-          <SmallProfileCard />
-          <div className="content-70">
+        <div className="col seventy d-flex flex-column gap-3">
+          <div className="row">
+            <div className="col-12">
+              <SmallProfileCard className={""} />
+            </div>
+          </div>
+          <div className="content-70 d-flex flex-column gap-3">
             <div className="row">
               <div className="col-12 mt-2">
                 <div className=" box bio_container">
@@ -443,11 +447,13 @@ const InvestorHome = () => {
                 </div>
               </div>
             </div>
-            <CompanyDetailsCard
-              className="mt-2"
-              userDetails={loggedInUser}
-              page={"edit"}
-            />
+            <div className="row">
+              <CompanyDetailsCard
+                className="mt-2"
+                userDetails={loggedInUser}
+                page={"edit"}
+              />
+            </div>
 
             <div className="row">
               <div className="col-12 mt-2">
@@ -532,13 +538,9 @@ const InvestorHome = () => {
           </div>
         </div>
         <div className="col thirty">
-          <div className="content-30">
-            <div className="row d-none d-xl-block">
-              <RightProfileCard />
-              <RecommendationCard />
-              <NewsCorner />
-            </div>
-          </div>
+          <RightProfileCard />
+          <RecommendationCard />
+          <NewsCorner />
         </div>
       </div>
     </div>
