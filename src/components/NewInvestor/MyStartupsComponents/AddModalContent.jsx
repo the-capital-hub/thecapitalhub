@@ -1,10 +1,78 @@
 import { BsFillCloudUploadFill } from "react-icons/bs";
 import "./AddModalContent.scss";
+import { useState } from "react";
+import { getBase64 } from "../../../utils/getBase64";
+import {
+  addStartupInvested,
+  addMyInterest,
+} from "../../../Service/user";
+import { useSelector } from "react-redux";
 
-export default function AddModalContent({ isInterests = false }) {
-  function handleSubmit(e) {
+export default function AddModalContent({ isInterests = false, setInvestedStartups, setMyInterests }) {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const [interestLogo, setInterestLogo] = useState(null);
+  const [formData, setFormData] = useState({
+    companyImage: "",
+    name: "",
+    description: "",
+    equity: "",
+    ask: "",
+    commitment: "",
+  });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isInterests) {
+      const logo = await getBase64(interestLogo);
+      const newInterestData = {
+        logo: logo,
+        name: formData.name,
+        ask: formData.ask,
+        commitment: formData.commitment,
+        investedEquity: formData.equity,
+      };
+      const response = await addMyInterest(
+        loggedInUser?.investor,
+        newInterestData
+      );
+      console.log(response.data.myInterests);
+      setMyInterests(response.data.myInterests);
+    } else {
+      const logo = await getBase64(formData.companyImage);
+      const newStartUpData = {
+        logo: logo,
+        name: formData.name,
+        description: formData.description,
+        investedEquity: formData.equity,
+      };
+      const response = await addStartupInvested(
+        loggedInUser?.investor,
+        newStartUpData
+      );
+      setInvestedStartups(response.data.startupsInvested);
+    }
   }
+
+  const handleInterestLogo = (e) => {
+    setInterestLogo(e.target.files[0]);
+  }
+
+  const handleInputChange = (event) => {
+    const { name, value, type, files } = event.target;
+    console.log(name);
+    if (type === "file") {
+      setFormData({
+        ...formData,
+        [name]: files[0],
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
+  };
+
 
   return (
     <div className="d-flex flex-column gap-3">
@@ -12,27 +80,67 @@ export default function AddModalContent({ isInterests = false }) {
         <h5 className="green_underline">Add new: </h5>
 
         <form onSubmit={handleSubmit} className="d-flex flex-column gap-4">
-          <div className="upload__image mt-4">
-            <input
-              type="file"
-              name="companyImage"
-              id="companyImage"
-              accept="image/*"
-              className="visually-hidden"
-            />
-            <div className="upload__label p-2">
-              <BsFillCloudUploadFill
-                style={{
-                  fontSize: "1.5rem",
-                  color: "rgba(140, 90, 201, 1)",
-                }}
+          {isInterests ? (
+            <div className="upload__image mt-4">
+              <input
+                type="file"
+                name="interestLogo"
+                id="interestLogo"
+                accept="image/*"
+                className="visually-hidden"
+                onChange={handleInterestLogo}
               />
-              <label htmlFor="companyImage" className="text-black fw-lighter">
-                Upload Image
-              </label>
+              <div className="upload__label p-2">
+                <BsFillCloudUploadFill
+                  style={{
+                    fontSize: "1.5rem",
+                    color: "rgba(140, 90, 201, 1)",
+                  }}
+                />
+                <label htmlFor="interestLogo" className="text-black fw-lighter">
+                  Upload Image
+                  {interestLogo && (
+                    <img
+                      src={URL.createObjectURL(interestLogo)
+                      }
+                      alt="Selected Image"
+                      style={{ maxWidth: "100%", maxHeight: "70px" }}
+                    />
+                  )}
+                </label>
+              </div>
             </div>
-          </div>
-
+          ) : (
+            <div className="upload__image mt-4">
+              <input
+                type="file"
+                name="companyImage"
+                id="companyImage"
+                accept="image/*"
+                className="visually-hidden"
+                onChange={handleInputChange}
+              />
+              <div className="upload__label p-2">
+                <BsFillCloudUploadFill
+                  style={{
+                    fontSize: "1.5rem",
+                    color: "rgba(140, 90, 201, 1)",
+                  }}
+                />
+                <label htmlFor="companyImage" className="text-black fw-lighter">
+                  Upload Image
+                  {formData.companyImage && (
+                    <img
+                      src={URL.createObjectURL(formData.companyImage)
+                      }
+                      alt="Selected Image"
+                      style={{ maxWidth: "100%", maxHeight: "70px" }}
+                    />
+                  )}
+                </label>
+              </div>
+            </div>
+          )}
           <div className="">
             <input
               type="text"
@@ -40,6 +148,7 @@ export default function AddModalContent({ isInterests = false }) {
               id="name"
               placeholder={`company name...`}
               className="p-2 w-100 rounded-3 modal__input"
+              onChange={handleInputChange}
             />
           </div>
 
@@ -50,6 +159,7 @@ export default function AddModalContent({ isInterests = false }) {
               rows={4}
               className="p-2 w-100 rounded-3 modal__input"
               placeholder={`${isInterests ? "ask..." : "description..."}`}
+              onChange={handleInputChange}
             ></textarea>
           </div>
 
@@ -61,6 +171,7 @@ export default function AddModalContent({ isInterests = false }) {
                 id="commitment"
                 placeholder={`commitment...`}
                 className="p-2 w-100 rounded-3 modal__input"
+                onChange={handleInputChange}
               />
             </div>
           ) : (
@@ -76,6 +187,7 @@ export default function AddModalContent({ isInterests = false }) {
               max={100}
               placeholder={`equity...`}
               className="p-2 w-100 rounded-3 modal__input"
+              onChange={handleInputChange}
             />
           </div>
 

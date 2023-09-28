@@ -195,3 +195,37 @@ export const uploadLogo = async (logo) => {
     };
   }
 };
+
+export const addMyInterest = async (investorId, data) => {
+  try {
+    const investor = await InvestorModel.findById(investorId);
+
+    if (!investor) {
+      return {
+        status: 404,
+        message: "Investor not found",
+      };
+    }
+    if(data.logo) {
+      const { url } = await cloudinary.uploader.upload(data.logo, {
+        folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
+        format: "webp",
+        unique_filename: true,
+      });
+      data.logo = url;
+    }
+    investor.myInterests.push(data);
+    await investor.save();
+    return {
+      status: 200,
+      message: "My Interest added",
+      data: investor,
+    };
+  } catch (error) {
+    console.error("Error adding My Interests:", error);
+    return {
+      status: 500,
+      message: "An error occurred while adding my interest data.",
+    };
+  }
+};
