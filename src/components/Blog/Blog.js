@@ -8,6 +8,7 @@ import LattestBlogCard from "../Card/LattestBlogCard/LattestBlogCard";
 import BlogoneImage from "../../Images/blog/1 AsPGU1Q42C9lsVRoMg91Nw.webp";
 import BlogtwoImage from "../../Images/blog/eighttips.webp";
 import BlogthreeImage from "../../Images/blog/BlogthreeImage.webp";
+import UXImage from "../../Images/blog/UXBlog/i1.png";
 import { useNavigate } from "react-router-dom";
 
 const Blog = () => {
@@ -77,6 +78,20 @@ const Blog = () => {
           <h1>Latest Blogs</h1>
           <section className="row justify-content-around">
             <LattestBlogCard
+              image={UXImage}
+              button={"Startup"}
+              date={"Sept 28 2023"}
+              title={
+                "User Experience (UX): How it can be a differentiator in a crowded marketplace"
+              }
+              onClick={() =>
+                handleCardClick(
+                  "/blog/ux-how-it-can-be-a-differentiator-in-a-crowded-marketplace"
+                )
+              }
+            />
+
+            <LattestBlogCard
               image="https://images.unsplash.com/photo-1556155092-490a1ba16284?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
               button={"Startup"}
               date={"Sept 20 2023"}
@@ -126,7 +141,7 @@ const Blog = () => {
                 )
               }
             />
-             <LattestBlogCard
+            <LattestBlogCard
               image="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
               button={"FoodTech"}
               date={"Sept 20 2023"}
