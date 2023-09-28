@@ -1,5 +1,5 @@
 .documentation-wrapper {
-  margin-inline: 1em;
+  margin-inline: 1.5em;
   margin-block: 2em;
   display: flex;
   flex-direction: column;
@@ -35,7 +35,12 @@
   }
 
   .right-content {
-    flex: 0 0 22rem;
+    display: none;
+
+    @media (min-width: 1200px) {
+      display: block;
+      flex: 0 0 22rem;
+    }
   }
 }
 
