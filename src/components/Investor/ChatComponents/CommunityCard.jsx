@@ -1,6 +1,7 @@
 import { HiOutlineUserGroup } from "react-icons/hi2";
 
 export default function CommunityCard({ community }) {
+  console.log(community)
   return (
     <div
       style={{ backgroundColor: "rgba(234, 238, 242, 1)" }}
@@ -23,14 +24,14 @@ export default function CommunityCard({ community }) {
             className="m-0 text-capitalize text__clip--12"
             style={{ color: "#fd5901" }}
           >
-            {community.name}
+            {community?.communityName}
           </h5>
           <p className="m-0 text__clip " style={{ fontSize: "0.8rem" }}>
-            {community.lastUser}: {community.lastMessage}
+            {"Vijay"}: {"Yes. It is done."}
           </p>
         </div>
         <div className="d-flex flex-column justify-content-between">
-          <p className="time__stamp m-0 ">{community.lastMessageTimestamp}</p>
+          <p className="time__stamp m-0 ">{"6:07 pm"}</p>
         </div>
       </div>
     </div>
