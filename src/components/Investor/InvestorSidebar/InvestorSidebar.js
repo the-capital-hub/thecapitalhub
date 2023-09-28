@@ -118,7 +118,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
               >
                 <Link
                   onClick={() => setSidebarCollapsed(true)}
-                  to="/write-blog"
+                  to="home?showPopup=true"
                 >
                   {sidebarCollapsed ? (
                     <>
@@ -129,7 +129,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   ) : (
                     <>
                       <button className="create_post px-3">
-                        <span className="ms-0">Write a blog </span>
+                        <span className="ms-0">Create a post</span>
                         <img src={PlusIcon} alt="image" />
                       </button>
                     </>

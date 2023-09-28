@@ -51,7 +51,7 @@ function Profile() {
   });
   const [investedStartups, setInvestedStartups] = useState([]);
   const [sectorsData, setSectorsData] = useState([]);
-
+  const [isInvestmentPhilosophy, setIsInvestmentPhilosophy] = useState(false);
   // Mock data for Startups Invested in
   // const investedStartups = [
   //   {
@@ -112,6 +112,7 @@ function Profile() {
 
   const [bioContent, setBioContent] = useState(loggedInUser?.bio || "");
   const [personalEditable, setPersonalEditable] = useState(false);
+  const [investmentPhilosophy, setInvestmentPhilosophy] = useState(null);
 
   const [personalData, setPersonalData] = useState({
     designation: loggedInUser?.designation || "",
@@ -126,6 +127,7 @@ function Profile() {
       setCompanyName(data.companyName);
       setInvestedStartups(data.startupsInvested);
       setSectorsData(data.sectorInterested);
+      setInvestmentPhilosophy(data.investmentPhilosophy || "");
     });
   }, [loggedInUser]);
 
@@ -224,6 +226,19 @@ function Profile() {
     } = await updateUserAPI({ bio: bioContent });
     dispatch(loginSuccess(data));
     setIsBioEditable(!isBioEditable);
+  };
+
+  const submitInvestmentPhilosophyChange = async () => {
+    try {
+      const {data} = await postInvestorData({
+        founderId: loggedInUser._id,
+        investmentPhilosophy: investmentPhilosophy,
+      });
+      console.log(data);
+      setIsInvestmentPhilosophy(!isInvestmentPhilosophy);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -571,12 +586,33 @@ function Profile() {
 
       <section className="investment_philosophy shadow-sm">
         <h2 className="green_underline typography">Investment Philosophy</h2>
+        <span className="ms-auto">
+          <button onClick={() => setIsInvestmentPhilosophy(!isInvestmentPhilosophy)}>
+            {isInvestmentPhilosophy ? "Cancel" : "Edit"}
+            <CiEdit />
+          </button>
+          {isInvestmentPhilosophy && (
+            <button
+              className="ms-2"
+            onClick={() => submitInvestmentPhilosophyChange()}
+            >
+              Save <CiSaveUp2 />
+            </button>
+          )}
+        </span>
         <div className="d-flex flex-column flex-md-row gap-2 w-100 px-4 py-2">
           <p>Description: </p>
-          <p className="text-secondary">
-            Investing Deploying Capital toward projects or activities that are
-            expected to generate a positive financial return over time.
-          </p>
+          {isInvestmentPhilosophy ? (
+            <textarea
+              value={investmentPhilosophy}
+              name="investmentPhilosophy"
+              onChange={(e) => setInvestmentPhilosophy(e.target.value)}
+            />
+          ) : (
+            <p className="text-secondary">
+              {investmentPhilosophy || "Click on edit to add Investment Philosophy"}
+            </p>
+          )}
         </div>
         <div className="recent_experience border rounded mx-md-4">
           <div className="flex-md-row header">

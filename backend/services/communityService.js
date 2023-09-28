@@ -1,7 +1,16 @@
 import { CommunityModel } from "../models/Community.js";
+import { cloudinary } from "../utils/uploadImage";
 
 export const createCommunity = async (communitydata) => {
   try {
+    if (communitydata.profileImage) {
+      const { url } = await cloudinary.uploader.upload(communitydata.profileImage, {
+        folder: `${process.env.CLOUDIANRY_FOLDER}/posts/images`,
+        format: "webp",
+        unique_filename: true,
+      });
+      communitydata.profileImage = url;
+    }
     const newCommunity = new CommunityModel({
       ...communitydata,
     });
