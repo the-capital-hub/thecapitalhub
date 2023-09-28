@@ -19,8 +19,14 @@ import FundingTeamCard from "./FundingTeamCard/FundingTeamCard";
 import { useParams } from "react-router-dom";
 import { getOnePager } from "../../../Service/user";
 import { useState, useEffect } from "react";
-import RaghuImage from '../../../Images/aboutUs/Raghu.jpeg'
-import RajuImage from '../../../Images/Rectangle 1895.png'
+import RaghuImage from "../../../Images/aboutUs/Raghu.jpeg";
+import UpmaImage from "../../../Images/aboutUs/Upma.jpg";
+import PreetiImage from "../../../Images/aboutUs/Preeti.jpg";
+import RajuImage from "../../../Images/Rectangle 1895.png";
+import AdithyaImage from "../../../Images/aboutUs/developers/Adithya.png";
+import ShahabasImage from "../../../Images/aboutUs/developers/Shahabas.jpg";
+import SrihariImage from "../../../Images/aboutUs/developers/Srihari.jpg";
+import JijinImage from "../../../Images/aboutUs/developers/Jijin.jpg";
 
 function Company() {
   const { username } = useParams();
@@ -75,7 +81,7 @@ function Company() {
                     </div>
                   </div>
                   <div className="col-lg-5 right_buttons mobile_display_none">
-                    <img src={saved} alt="saved" />
+                    {/* <img src={saved} alt="saved" /> */}
                     <div className="connect_btn m-4">
                       {/* <button className="connect_founder">
                         Connect with the founder
@@ -227,69 +233,55 @@ function Company() {
                   <h2>Founding Team</h2>
                   <div className="fundingteamcard">
                     <FundingTeamCard
-                      image={
-                        "https://res.cloudinary.com/drjt9guif/image/upload/q_92/v1692963108/TheCapitalHub/startUps/teamMembers/greendrive/sagar_jae33e.webp"
-                      }
-                      name="Sagar S"
-                      designation="Sr. Operation Manager"
+                      image={UpmaImage}
+                      name="Upma Singh"
+                      designation="Sr. Investment Analyst"
                       age={30}
                       paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
                     />
                     <FundingTeamCard
-                      image={
-                        "https://res.cloudinary.com/drjt9guif/image/upload/q_100/v1692963218/TheCapitalHub/startUps/teamMembers/greendrive/shashi_nd30jr.webp"
-                      }
-                      name="Shashidhar B N"
-                      designation="Operation Manager"
+                      image={PreetiImage}
+                      name="Preeti Yadav"
+                      designation="Sr. Investment Analyst"
                       age={30}
                       paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
                     />
                     <FundingTeamCard
-                      image={
-                        "https://res.cloudinary.com/drjt9guif/image/upload/v1692963289/TheCapitalHub/startUps/teamMembers/greendrive/ashiq_ou8o2v.webp"
-                      }
-                      name="Ashiq M"
-                      designation="Sr. Service Manager"
+                      image={RaghuImage}
+                      name="Raghukrishnan J"
+                      designation="Sr. Investment Analyst"
                       age={30}
                       paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
                     />
 
                     <FundingTeamCard
-                      image={
-                        "https://res.cloudinary.com/drjt9guif/image/upload/v1692963438/TheCapitalHub/startUps/teamMembers/greendrive/melam-steven_wb41ee.webp"
-                      }
-                      name="Melam Steven Ezra"
-                      designation="Operation Manager"
+                      image={ShahabasImage}
+                      name="Muhamed Shahabas C"
+                      designation="Full Stack Developer"
                       age={30}
                       paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
                     />
 
                     <FundingTeamCard
-                      image={
-                        "https://res.cloudinary.com/drjt9guif/image/upload/v1692963528/TheCapitalHub/startUps/teamMembers/greendrive/nagaraju_savm2s.webp"
-                      }
-                      name="Molumoori Nagaraju"
-                      designation="Growth Manager"
+                      image={AdithyaImage}
+                      name="Adithya Hebbar"
+                      designation="Backend Developer"
                       age={30}
                       paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
                     />
 
                     <FundingTeamCard
-                      image={
-                        "https://res.cloudinary.com/drjt9guif/image/upload/v1692963668/TheCapitalHub/startUps/teamMembers/greendrive/navya_blspa8.webp"
-                      }
-                      name="Navya M"
-                      designation="HR Manager"
+                      image={JijinImage}
+                      name="Jijin"
+                      designation="Frontend Developer"
                       age={30}
                       paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
                     />
 
                     <FundingTeamCard
-                      image={
-                        "https://res.cloudinary.com/drjt9guif/image/upload/v1692963755/TheCapitalHub/startUps/teamMembers/greendrive/swathi-k_ediifp.webp"
-                      }
-                      name="Swathi K"
-                      designation="Accountant Manager"
+                      image={SrihariImage}
+                      name="Srihari M S"
+                      designation="Frontend Developer"
                       age={30}
                       paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
                     />
