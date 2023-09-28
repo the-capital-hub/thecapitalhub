@@ -14,14 +14,17 @@ function MeeshoBlog() {
   return (
     <>
       <div className="container blog_detailed_container">
+        {/* Blog category */}
         <div className="category_section">
           <span className="blog">Blog</span> {"> "}
           <span className="category">Start Up</span>
         </div>
         <hr />
 
+        {/* Blog Container */}
         <div className="row">
           <div className="col-lg-12 col-md-12 seventy ">
+            {/* Blog Header */}
             <h2 className="headingOne">
               Meesho: Revolutionising E-Commerce for Entrepreneurs
             </h2>
@@ -34,6 +37,8 @@ function MeeshoBlog() {
                 <img className="social_icon" src={inIcon} alt="img" />
               </div>
             </div>
+
+            {/* Blog Body */}
             <div className="col-12 image_section">
               <div className="d-flex">
                 {/* <img
