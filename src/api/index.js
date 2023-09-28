@@ -53,6 +53,8 @@ const API = Object.freeze({
   addSectorOfInterest: `${baseUrl}/investor/addSectorOfInterest`,
   uploadLogo: `${baseUrl}/investor/uploadLogo`,
   clearChat: `${baseUrl}/message/clearChatMessages`,
+  createCommunity:`${baseUrl}/community/createCommunity`,
+  getAllCommunity:`${baseUrl}/community/getAllCommunitiesByUserId`,
 });
 
 export default API;
