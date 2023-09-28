@@ -274,7 +274,7 @@
       clip: rect(1px, 1px, 1px, 1px);
     }
 
-    input.visually-hidden:is(:focus, :focus-within)+label {
+    input.visually-hidden:is(:focus, :focus-within) + label {
       color: rgba(140, 90, 201, 1);
     }
     .upload__label {
@@ -379,7 +379,7 @@
       border-bottom: solid 1px #dfdfdf;
     }
 
-    button {
+    .edit_button {
       border-radius: 131px;
       border: 1px solid #c6c6c6;
       width: 107px;
@@ -387,7 +387,7 @@
       flex-shrink: 0;
       color: #717171;
       font-size: 18px;
-      font-family: Poppins;
+      font-family: "Poppins";
       margin-right: 30px;
       cursor: pointer;
     }

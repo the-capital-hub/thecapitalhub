@@ -230,7 +230,7 @@ function Profile() {
 
   const submitInvestmentPhilosophyChange = async () => {
     try {
-      const {data} = await postInvestorData({
+      const { data } = await postInvestorData({
         founderId: loggedInUser._id,
         investmentPhilosophy: investmentPhilosophy,
       });
@@ -587,14 +587,17 @@ function Profile() {
       <section className="investment_philosophy shadow-sm">
         <h2 className="green_underline typography">Investment Philosophy</h2>
         <span className="ms-auto">
-          <button onClick={() => setIsInvestmentPhilosophy(!isInvestmentPhilosophy)}>
+          <button
+            className="edit_button"
+            onClick={() => setIsInvestmentPhilosophy(!isInvestmentPhilosophy)}
+          >
             {isInvestmentPhilosophy ? "Cancel" : "Edit"}
             <CiEdit />
           </button>
           {isInvestmentPhilosophy && (
             <button
               className="ms-2"
-            onClick={() => submitInvestmentPhilosophyChange()}
+              onClick={() => submitInvestmentPhilosophyChange()}
             >
               Save <CiSaveUp2 />
             </button>
@@ -610,7 +613,8 @@ function Profile() {
             />
           ) : (
             <p className="text-secondary">
-              {investmentPhilosophy || "Click on edit to add Investment Philosophy"}
+              {investmentPhilosophy ||
+                "Click on edit to add Investment Philosophy"}
             </p>
           )}
         </div>
