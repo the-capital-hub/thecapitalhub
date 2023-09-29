@@ -433,3 +433,87 @@ export const deletePost = async (postId, userId) => {
     };
   }
 };
+
+export const addToFeaturedPost = async (postId, userId) => {
+  try {
+    const user = await UserModel.findOneAndUpdate(
+      { _id: userId },
+      { $push: { featuredPosts: postId } },
+      { new: true }
+    );
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found.",
+      };
+    }
+    return {
+      status: 200,
+      message: "Post added to featured post",
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while adding posts as featured.",
+    };
+  }
+};
+
+
+export const getFeaturedPostsByUser = async (userId) => {
+  try {
+    const user = await UserModel.findById(userId).populate('featuredPosts');
+
+    if (!user) {
+      return {
+        status: 404,
+        message: 'User not found.',
+        featuredPosts: [],
+      };
+    }
+
+    const featuredPosts = user.featuredPosts;
+
+    return {
+      status: 200,
+      message: 'Featured posts retrieved successfully.',
+      featuredPosts,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: 'An error occurred while retrieving featured posts.',
+      featuredPosts: [],
+    };
+  }
+};
+
+export const removeFromFeaturedPost = async (postId, userId) => {
+  try {
+    const user = await UserModel.findByIdAndUpdate(
+      userId,
+      { $pull: { featuredPosts: postId } },
+      { new: true }
+    );
+
+    if (!user) {
+      return {
+        status: 404,
+        message: 'User not found.',
+      };
+    }
+
+    return {
+      status: 200,
+      message: 'Post removed from featured posts.',
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: 'An error occurred while removing the post from featured posts.',
+    };
+  }
+};

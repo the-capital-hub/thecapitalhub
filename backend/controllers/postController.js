@@ -13,6 +13,9 @@ import {
   getLikeCount,
   getUsersWhoLikedPost,
   deletePost,
+  addToFeaturedPost,
+  getFeaturedPostsByUser,
+  removeFromFeaturedPost,
 } from "../services/postService";
 import mongoose from "mongoose";
 
@@ -226,6 +229,50 @@ export const deletedPostController = async (req, res) => {
     return res.status(500).send({
       status: 500,
       message: "An error occurred while deleting posts.",
+    });
+  }
+};
+
+export const addToFeaturedPostController = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const userId =  req.userId;
+    const result = await addToFeaturedPost(postId,userId);
+    return res.status(result.status).json(result);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while adding post as featured.",
+    });
+  }
+};
+
+export const getFeaturedPostsByUserController = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const result = await getFeaturedPostsByUser(userId);
+    return res.status(result.status).json(result);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting featured post.",
+    });
+  }
+};
+
+export const removeFromFeaturedPostController = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const userId =  req.userId;
+    const result = await removeFromFeaturedPost(postId, userId);
+    return res.status(result.status).json(result);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while removing featured post.",
     });
   }
 };

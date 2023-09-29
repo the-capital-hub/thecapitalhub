@@ -145,6 +145,12 @@ const userSchema = new Schema(
       ref: "Chats",
     },
   ],
+  featuredPosts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Posts",
+    },
+  ],
     userStatus: {
       type: String,
       default: "inactive"
