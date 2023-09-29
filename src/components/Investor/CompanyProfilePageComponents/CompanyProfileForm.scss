@@ -1,0 +1,39 @@
+.profile__form {
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    fieldset,
+    legend {
+      all: revert;
+    }
+
+    fieldset {
+      border: 1px solid #e2e2e2;
+      border-radius: 10px;
+      background-color: #fbfbfb;
+      padding: 0;
+
+      .profile_form_input {
+        border: none;
+        outline: none;
+        width: 100%;
+        background-color: transparent;
+
+        padding: 0.5em 0.75em;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: normal;
+      }
+    }
+
+    legend {
+      margin-left: 2em;
+      padding-inline: 1em;
+      color: #3a3a3a;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+}

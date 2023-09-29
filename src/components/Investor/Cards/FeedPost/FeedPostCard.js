@@ -20,6 +20,7 @@ import {
   getPostComment,
   likeUnlikeAPI,
   sendPostComment,
+  addToFeaturedPost,
 } from "../../../../Service/user";
 import SmileeIcon from "../../../../Images/Group 15141(1).svg";
 import ImageIcon from "../../../../Images/Group 15141.svg";
@@ -32,6 +33,8 @@ import ModalBSContainer from "../../../PopUp/ModalBS/ModalBSContainer/ModalBSCon
 import ModalBSHeader from "../../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
 import ModalBSFooter from "../../../PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
 import ModalBSBody from "../../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
+import { BiMessageSquareAdd } from "react-icons/bi";
+import IconComponent_add from "../../SvgIcons/IconComponent_add";
 
 const FeedPostCard = ({
   postId,
@@ -203,6 +206,20 @@ const FeedPostCard = ({
     }, 2000);
   };
 
+  // add post as featured
+  const [showFeaturedPostSuccess, setShowFeaturedPostSuccess] = useState(false);
+  const handleAddToFeatured = async (postId) => {
+    try {
+      console.log(postId);
+      const response = await addToFeaturedPost(postId);
+      if (response.status === 200) {
+        setShowFeaturedPostSuccess(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className="row feedpostcard_main_container mb-2">
@@ -284,6 +301,15 @@ const FeedPostCard = ({
                     />
                     {kebabMenuVisible && (
                       <ul className="kebab_menu border rounded shadow-sm p-3">
+                        {userId === loggedInUser?._id && (
+                          <li
+                            onClick={() => handleAddToFeatured(postId)}
+                            className="d-flex align-items-center gap-2"
+                          >
+                            <IconComponent_add />
+                            Featured
+                          </li>
+                        )}
                         {userId === loggedInUser?._id && (
                           <li onClick={() => deletePost(postId)}>Delete</li>
                         )}
@@ -557,6 +583,13 @@ const FeedPostCard = ({
             withoutOkButton
             onClose={() => setShowSuccess(!showSuccess)}
             successText="Post saved Successfully"
+          />
+        )}
+        {showFeaturedPostSuccess && (
+          <AfterSuccessPopUp
+            withoutOkButton
+            onClose={() => setShowFeaturedPostSuccess(!showFeaturedPostSuccess)}
+            successText="The post has been added as a featured post."
           />
         )}
       </div>

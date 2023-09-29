@@ -26,6 +26,7 @@ const FeaturedPostCard = ({
   designation,
   likes,
   userId,
+  isDelete,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
@@ -54,7 +55,7 @@ const FeaturedPostCard = ({
 
   return (
     <>
-      <div className=" featuredpostcard_main_container mb-2 ">
+      <div className="featuredpostcard_main_container mb-2">
         {/* <div className="col-12"> */}
         <div className=" featuredpostcard_container mt-2 rounded-5 shadow-sm border">
           <div className="feed_header_container p-2 border-bottom ">
@@ -85,7 +86,7 @@ const FeaturedPostCard = ({
                     }}
                   >
                     <img src={HomeIcon} alt="logo" />
-                    {designation}
+                    {designation}, {loggedInUser.startUp.company}
                   </span>
                   <span
                     style={{
@@ -111,40 +112,41 @@ const FeaturedPostCard = ({
           </div>
           {/* <hr /> */}
           <div className="para_container w-100 p-2 ">
-            <div className="para_container_text w-100">
+            <div className="para_container_text w-100 d-flex flex-column gap-2 ">
               <p
                 style={{
                   fontSize: "13px",
                   wordWrap: "break-word",
                   overflowWrap: "break-word",
                 }}
+                className=""
               >
                 {description}
               </p>
-              {/* {image && (
-                  <span className="d-flex">
-                    <img
-                      className="mx-auto"
-                      style={{ maxHeight: "350px", objectFit: "contain" }}
-                      width={"100%"}
-                      src={image}
-                      alt="post-image"
-                    />
-                  </span>
-                )} */}
-              {/* {video && (
-                  <span className="d-flex">
-                    <video
-                      className="mx-auto"
-                      width={"100%"}
-                      style={{ maxWidth: "500px" }}
-                      controls
-                    >
-                      <source alt="post-video" src={video} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                  </span>
-                )} */}
+              {image && (
+                <span className="d-flex">
+                  <img
+                    className="mx-auto"
+                    style={{ maxHeight: "350px", objectFit: "contain" }}
+                    width={"100%"}
+                    src={image}
+                    alt="post-image"
+                  />
+                </span>
+              )}
+              {video && (
+                <span className="d-flex">
+                  <video
+                    className="mx-auto"
+                    width={"100%"}
+                    style={{ maxWidth: "500px" }}
+                    controls
+                  >
+                    <source alt="post-video" src={video} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </span>
+              )}
             </div>
           </div>
           {/* <hr />

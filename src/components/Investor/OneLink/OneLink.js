@@ -40,40 +40,41 @@ const OneLink = () => {
     // navigate("/login");
   };
   return (
-    <div className="container-fluid onelink_container">
-      <div className="row mt-sm-4 mt-md-2 mt-xxl-2">
-        <div className="col">
-          <SmallProfileCard text={"One Link"} />
-          <ShareLink OneLink={company?.oneLink} onExitClick={handleExitClick} />
-          <IntroductoryMessage
-            title={"Introductory message"}
-            image={{
-              threeDots: ThreeDotsImage,
-              folder: FolderImage,
-              video: VideoImage,
-            }}
-            para={company.introductoryMessage}
-            input={true}
-          />
-        </div>
-        <div className="col   d-none d-xl-block">
-          <div className="content-30">
-            <div className="row">
-              <RightProfileCard />
-              <RecommendationCard />
-              {/* <NewsCorner /> */}
-            </div>
+    <div className="container-fluid ">
+      <div className="onelink_container">
+        <div className="onelink_intro_container mt-sm-4 mt-md-2 mt-xxl-2">
+          <div className="main__content">
+            <SmallProfileCard text={"One Link"} />
+            <ShareLink
+              OneLink={company?.oneLink}
+              onExitClick={handleExitClick}
+            />
+            <IntroductoryMessage
+              title={"Introductory message"}
+              image={{
+                threeDots: ThreeDotsImage,
+                folder: FolderImage,
+                video: VideoImage,
+              }}
+              para={company.introductoryMessage}
+              input={true}
+            />
+          </div>
+          <div className="right__content">
+            <RightProfileCard />
+            <RecommendationCard />
+            {/* <NewsCorner /> */}
           </div>
         </div>
         <OnePagePreview show={true} />
+        {isExitClicked && (
+          <SharingOneLinkPopUp
+            introMessage={company.introductoryMessage}
+            oneLink={company.oneLink}
+            onClose={handleClosePopup}
+          />
+        )}
       </div>
-      {isExitClicked && (
-        <SharingOneLinkPopUp
-          introMessage={company.introductoryMessage}
-          oneLink={company.oneLink}
-          onClose={handleClosePopup}
-        />
-      )}
     </div>
   );
 };

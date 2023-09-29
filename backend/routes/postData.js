@@ -12,6 +12,10 @@ import {
   getLikeCountController,
   getUsersWhoLikedPostController,
   deletedPostController,
+  addToFeaturedPostController,
+  getFeaturedPostsByUserController,
+  removeFromFeaturedPostController,
+  deleteCommentController,
 } from "../controllers/postController.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
@@ -33,7 +37,12 @@ router.get('/likeCount/:postId', getLikeCountController);
 router.get('/likedUsers/:postId', getUsersWhoLikedPostController);
 router.post("/comment/:postId", commentOnPostController);
 router.get("/getComments/:postId", getCommentsController);
+router.delete("/deleteComment/:postId/:commentId", deleteCommentController);
 
 router.delete("/deletePost/:postId", deletedPostController);
+
+router.post("/addToFeaturedPost/:postId", addToFeaturedPostController);
+router.get("/getFeaturedPostsByUser/:userId", getFeaturedPostsByUserController);
+router.delete("/removeFromFeaturedPost/:postId", removeFromFeaturedPostController);
 
 export default router;

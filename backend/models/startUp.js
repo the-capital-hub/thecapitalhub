@@ -33,6 +33,21 @@ const startUpSchema = new Schema(
     description: {
       type: String,
     },
+    startedAtDate: {
+      type: String,
+    },
+    industryType: {
+      type: String,
+    },
+    NoOfEmployees: {
+      type: Number,
+    },
+    vision: {
+      type: String,
+    },
+    mission: {
+      type: String,
+    },
     problem: {
       type: String,
     },
