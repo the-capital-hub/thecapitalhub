@@ -101,6 +101,31 @@
     flex-shrink: 0;
     }
   }
+
+  .image-cropper-container {
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+  }
+  
+  .image-cropper {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+  }
+  
+  .image-cropper img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .image-cropper-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
   
   @keyframes slideFromTop {
     from {

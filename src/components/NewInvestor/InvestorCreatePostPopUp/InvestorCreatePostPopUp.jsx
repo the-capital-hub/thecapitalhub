@@ -9,6 +9,7 @@ import { getSinglePostAPI, postUserPost } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
 import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import FeedPostCard from "../../Investor/Cards/FeedPost/FeedPostCard";
+import EasyCrop from "react-easy-crop";
 
 const CreatePostPopUp = ({
   setPopupOpen,
@@ -23,8 +24,10 @@ const CreatePostPopUp = ({
   const [selectedImage, setSelectedImage] = useState(null); // Store the selected image data
   const [selectedVideo, setSelectedVideo] = useState(null); // Store the selected video data
   const [selectedDocument, setSelectedDocument] = useState(null); // Store the selected document data
-
   const [posting, setPosting] = useState(false);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedImage, setCroppedImage] = useState(null);
 
   const handleClose = () => setPopupOpen(false);
 
@@ -54,10 +57,20 @@ const CreatePostPopUp = ({
     if (event.target.name === "image" && file.type.includes("image")) {
       setPreviewImage(objectUrl);
       setSelectedImage(file);
+      setCroppedImage(null);
+      if (setSelectedVideo) {
+        setPreviewVideo("");
+        setSelectedVideo(null);
+        setPreviewVideoType("");
+      }
     } else if (event.target.name === "video" && file.type.includes("video")) {
       setPreviewVideoType(file.type);
       setPreviewVideo(objectUrl);
       setSelectedVideo(file);
+      if (selectedImage) {
+        setPreviewImage("");
+        setSelectedImage(null);
+      }
     } else if (event.target.name === "document") {
       setSelectedDocument(file);
     }
@@ -65,6 +78,51 @@ const CreatePostPopUp = ({
   const handleTextareaChange = (event) => {
     setPostText(event.target.value);
   };
+
+  const getCroppedImg = async (imageSrc, crop) => {
+    const image = new Image();
+    image.src = imageSrc;
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = crop.width;
+    canvas.height = crop.height;
+    ctx.drawImage(
+      image,
+      crop.x,
+      crop.y,
+      crop.width,
+      crop.height,
+      0,
+      0,
+      crop.width,
+      crop.height
+    );
+
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            reject(new Error("Failed to crop image"));
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.readAsDataURL(blob);
+          reader.onloadend = () => {
+            resolve(reader.result);
+          };
+        },
+        "image/jpeg",
+        1
+      );
+    });
+  };
+
+  const onCropComplete = async (croppedArea, croppedAreaPixels) => {
+    const croppedImg = await getCroppedImg(previewImage, croppedAreaPixels);
+    setCroppedImage(croppedImg);
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,8 +142,7 @@ const CreatePostPopUp = ({
 
     // Append the image, video, and document files if they are selected
     if (selectedImage) {
-      const image = await getBase64(selectedImage);
-      postData.append("image", image);
+      postData.append("image", croppedImage);
     }
     if (selectedVideo) {
       const video = await getBase64(selectedVideo);
@@ -106,6 +163,7 @@ const CreatePostPopUp = ({
         setSelectedImage(null);
         setSelectedVideo(null);
         setSelectedDocument(null);
+        setCroppedImage(null);
         setNewPost(Math.random());
         // Close the popup after successful submission
         handleClose();
@@ -220,15 +278,24 @@ const CreatePostPopUp = ({
                   ))}
 
                 {previewImage && (
-                  <img
-                    src={previewImage}
-                    width={"50%"}
-                    alt="preview of image"
-                  />
+                  <div className="image-cropper">
+                    <EasyCrop
+                      image={previewImage}
+                      crop={crop}
+                      zoom={zoom}
+                      onCropChange={setCrop}
+                      onZoomChange={setZoom}
+                      onCropComplete={onCropComplete}
+                    />
+                  </div>
                 )}
 
                 {previewVideo && (
-                  <video controls width={"100%"}>
+                  <video
+                    key={selectedVideo ? selectedVideo.name : ""}
+                    controls
+                    width={"100%"}
+                  >
                     <source src={previewVideo} type={previewVideoType} />
                     Your browser does not support the video tag.
                   </video>
@@ -245,6 +312,7 @@ const CreatePostPopUp = ({
                       style={{ display: "none" }}
                       ref={galleryInputRef}
                       onChange={handleFileChange}
+                      accept="image/*"
                     />
                     <button
                       className="white_button"
@@ -259,6 +327,7 @@ const CreatePostPopUp = ({
                       style={{ display: "none" }}
                       ref={cameraInputRef}
                       onChange={handleFileChange}
+                      accept="video/*"
                     />
                     <button
                       className="white_button"
