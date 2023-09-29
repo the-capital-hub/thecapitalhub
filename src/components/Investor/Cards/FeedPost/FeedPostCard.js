@@ -242,7 +242,7 @@ const FeedPostCard = ({
                       }}
                     >
                       <img src={HomeIcon} alt="logo" />
-                      {designation}
+                      {designation}, {loggedInUser.startUp.company}
                     </span>
                     <span
                       style={{
@@ -258,6 +258,7 @@ const FeedPostCard = ({
                   <span
                     style={{ fontSize: "12px", fontWeight: 500, color: "#000" }}
                   >
+                    {" "}
                     <TimeAgo datetime={createdAt} locale="" />
                   </span>
                 </div>
