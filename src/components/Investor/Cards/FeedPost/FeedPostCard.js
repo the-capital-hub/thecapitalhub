@@ -32,6 +32,8 @@ import ModalBSContainer from "../../../PopUp/ModalBS/ModalBSContainer/ModalBSCon
 import ModalBSHeader from "../../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
 import ModalBSFooter from "../../../PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
 import ModalBSBody from "../../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
+import { BiMessageSquareAdd } from "react-icons/bi";
+import IconComponent_add from "../../SvgIcons/IconComponent_add";
 
 const FeedPostCard = ({
   postId,
@@ -203,6 +205,10 @@ const FeedPostCard = ({
     }, 2000);
   };
 
+  const handleAddToFeatured = (postId) => {
+    // Add to featured logic
+  };
+
   return (
     <>
       <div className="row feedpostcard_main_container mb-2">
@@ -284,6 +290,15 @@ const FeedPostCard = ({
                     />
                     {kebabMenuVisible && (
                       <ul className="kebab_menu border rounded shadow-sm p-3">
+                        {userId === loggedInUser?._id && (
+                          <li
+                            onClick={handleAddToFeatured}
+                            className="d-flex align-items-center gap-2"
+                          >
+                            <IconComponent_add />
+                            Featured
+                          </li>
+                        )}
                         {userId === loggedInUser?._id && (
                           <li onClick={() => deletePost(postId)}>Delete</li>
                         )}
