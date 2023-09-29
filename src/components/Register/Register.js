@@ -358,7 +358,7 @@ const Register = () => {
             </h3>
           </form>
 
-          <div className="line-container">
+          {/* <div className="line-container">
             <hr className="line" />
             <span className="text">Or continue with</span>
             <hr className="line" />
@@ -369,7 +369,7 @@ const Register = () => {
               <img src={FIcon} alt="image" />
               <img src={AIcon} alt="image" />
             </div>
-          </div>
+          </div> */}
         </div>
         {isSubmitted && (
           <AfterRegisterPopUp onClose={handleClosePopup} register={true} />

@@ -4,8 +4,7 @@ const MarketCard = ({ title, subtitle, amount }) => {
   return (
     <div className="MarketCard">
       <div className="titles">
-        <h3>{title}</h3>
-        <h3>{subtitle}</h3>
+        <h3>{title}{subtitle}</h3>
       </div>
       <div className="amount">
         <input type="text" placeholder={amount || `Enter Amount`} />

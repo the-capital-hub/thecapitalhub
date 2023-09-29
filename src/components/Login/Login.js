@@ -50,11 +50,19 @@ const Login = () => {
       localStorage.setItem("isLoggedIn", "true");
       if (response) {
         console.log("response--->", response);
-        setIsSubmitted(true);
 
+        if (button1Class === "btn1" && user.investor) {
+          setError("Invalid credentials");
+          return;
+        }
+        if (button2Class === "btn1" && !user.investor) {
+          setError("Invalid credentials");
+          return;
+        }
+        setIsSubmitted(true);
         setTimeout(() => {
           setIsSubmitted(false);
-          if(!user.investor) navigate("/profile");
+          if (!user.investor) navigate("/profile");
           else navigate("/investor");
         }, 2000);
 
@@ -87,6 +95,19 @@ const Login = () => {
     document.title = "Log In | The Capital Hub";
   }, []);
 
+  const [button1Class, setButton1Class] = useState('btn1');
+  const [button2Class, setButton2Class] = useState('btn2');
+
+  const handleButton1Click = () => {
+    setButton1Class('btn1');
+    setButton2Class('btn2');
+  };
+
+  const handleButton2Click = () => {
+    setButton1Class('btn2');
+    setButton2Class('btn1');
+  };
+
   return (
     <>
       <div className="row d-flex register_container">
@@ -102,7 +123,28 @@ const Login = () => {
             <img className="backArrow" src={backArrow} alt="arrow_back" />
           </Link>
           <span className="welcome">Welcome back!</span>
-          <h1 className="mt-5">Log in</h1>
+
+          <div className="login_buttons_row">
+            <h1 className="mt-5">Login</h1>
+            <Link to="">
+              <button
+                className={`btn-primaryy ${button1Class} login_btn`}
+                onClick={handleButton1Click}
+              >
+                StartUp
+              </button>
+            </Link>
+            <Link to="">
+              <button
+                className={`btn-primaryy ${button2Class} login_btn`}
+                onClick={handleButton2Click}
+              >
+                Investor
+              </button>
+            </Link>
+          </div>
+
+
           <h3 className="already_have_account">
             I don’t have an account?{" "}
             <Link to={"/signup"} style={{ color: "red" }}>
@@ -175,7 +217,7 @@ const Login = () => {
             </h3>
           </form>
 
-          <div className="line-container">
+          {/* <div className="line-container">
             <hr className="line" />
             <span className="text">Or continue with</span>
             <hr className="line" />
@@ -186,7 +228,7 @@ const Login = () => {
               <img src={FIcon} alt="image" />
               <img src={AIcon} alt="image" />
             </div>
-          </div>
+          </div> */}
         </div>
         {isSubmitted && (
           <AfterSuccessPopUp onClose={handleClosePopup} login={true} />
