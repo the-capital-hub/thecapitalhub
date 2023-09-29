@@ -9,6 +9,8 @@ import { getSinglePostAPI, postUserPost } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
 import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import FeedPostCard from "../../Investor/Cards/FeedPost/FeedPostCard";
+import EasyCrop from "react-easy-crop";
+// import { getCroppedImg } from "./getCroppedImg";
 
 const CreatePostPopUp = ({
   setPopupOpen,
@@ -18,13 +20,16 @@ const CreatePostPopUp = ({
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
-  const [postText, setPostText] = useState(""); // Store the textarea data
+  const [postText, setPostText] = useState("");
   const [category, setCategory] = useState("");
-  const [selectedImage, setSelectedImage] = useState(null); // Store the selected image data
-  const [selectedVideo, setSelectedVideo] = useState(null); // Store the selected video data
-  const [selectedDocument, setSelectedDocument] = useState(null); // Store the selected document data
-
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [selectedDocument, setSelectedDocument] = useState(null);
   const [posting, setPosting] = useState(false);
+
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedImage, setCroppedImage] = useState(null);
 
   const handleClose = () => setPopupOpen(false);
 
@@ -48,22 +53,81 @@ const CreatePostPopUp = ({
   const [previewVideo, setPreviewVideo] = useState("");
   const [previewVideoType, setPreviewVideoType] = useState("");
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
     const objectUrl = URL.createObjectURL(file);
+
     if (event.target.name === "image" && file.type.includes("image")) {
       setPreviewImage(objectUrl);
       setSelectedImage(file);
+      setSelectedVideo(null);
+      setCroppedImage(null);
+      if (setSelectedVideo) {
+        setPreviewVideo("");
+        setSelectedVideo(null);
+        setPreviewVideoType("");
+      }
     } else if (event.target.name === "video" && file.type.includes("video")) {
       setPreviewVideoType(file.type);
       setPreviewVideo(objectUrl);
       setSelectedVideo(file);
+      setSelectedImage(null);
+      if (selectedImage) {
+        setPreviewImage("");
+        setSelectedImage(null);
+      }
     } else if (event.target.name === "document") {
       setSelectedDocument(file);
     }
   };
+
   const handleTextareaChange = (event) => {
     setPostText(event.target.value);
+  };
+
+  const getCroppedImg = async (imageSrc, crop) => {
+    const image = new Image();
+    image.src = imageSrc;
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = crop.width;
+    canvas.height = crop.height;
+    ctx.drawImage(
+      image,
+      crop.x,
+      crop.y,
+      crop.width,
+      crop.height,
+      0,
+      0,
+      crop.width,
+      crop.height
+    );
+
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            reject(new Error("Failed to crop image"));
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.readAsDataURL(blob);
+          reader.onloadend = () => {
+            resolve(reader.result);
+          };
+        },
+        "image/jpeg",
+        1
+      );
+    });
+  };
+
+
+  const onCropComplete = async (croppedArea, croppedAreaPixels) => {
+    const croppedImg = await getCroppedImg(previewImage, croppedAreaPixels);
+    setCroppedImage(croppedImg);
   };
 
   const handleSubmit = async (e) => {
@@ -75,6 +139,7 @@ const CreatePostPopUp = ({
         return setPosting(false);
       }
     }
+
     const postData = new FormData();
     if (respostingPostId) {
       postData.append("resharedPostId", respostingPostId);
@@ -82,36 +147,27 @@ const CreatePostPopUp = ({
     postData.append("description", postText);
     postData.append("category", category);
 
-    // Append the image, video, and document files if they are selected
     if (selectedImage) {
-      const image = await getBase64(selectedImage);
-      postData.append("image", image);
+      postData.append("image", croppedImage);
     }
     if (selectedVideo) {
       const video = await getBase64(selectedVideo);
       postData.append("video", video);
     }
-    // if (selectedDocument) {
-    //   postData.append("document", selectedDocument);
-    // }
 
-    // Call the postUserPost function to make the POST request to the server
     postUserPost(postData)
       .then((response) => {
         console.log("response from frontend-->", response);
-        // Handle the response if needed
         console.log("Post submitted successfully!");
-        // Reset the state to clear the inputs
         setPostText("");
         setSelectedImage(null);
         setSelectedVideo(null);
         setSelectedDocument(null);
+        setCroppedImage(null);
         setNewPost(Math.random());
-        // Close the popup after successful submission
         handleClose();
       })
       .catch((error) => {
-        // Handle error if needed
         console.error("Error submitting post:", error);
       })
       .finally(() => setPosting(false));
@@ -220,15 +276,25 @@ const CreatePostPopUp = ({
                   ))}
 
                 {previewImage && (
-                  <img
-                    src={previewImage}
-                    width={"50%"}
-                    alt="preview of image"
-                  />
+                  <div className="image-cropper">
+                    <EasyCrop
+                      image={previewImage}
+                      crop={crop}
+                      zoom={zoom}
+                      onCropChange={setCrop}
+                      onZoomChange={setZoom}
+                      onCropComplete={onCropComplete}
+                    />
+                  </div>
                 )}
 
+
                 {previewVideo && (
-                  <video controls width={"100%"}>
+                  <video
+                    key={selectedVideo ? selectedVideo.name : ""}
+                    controls
+                    width={"100%"}
+                  >
                     <source src={previewVideo} type={previewVideoType} />
                     Your browser does not support the video tag.
                   </video>
@@ -245,6 +311,7 @@ const CreatePostPopUp = ({
                       style={{ display: "none" }}
                       ref={galleryInputRef}
                       onChange={handleFileChange}
+                      accept="image/*"
                     />
                     <button
                       className="white_button"
@@ -259,6 +326,7 @@ const CreatePostPopUp = ({
                       style={{ display: "none" }}
                       ref={cameraInputRef}
                       onChange={handleFileChange}
+                      accept="video/*"
                     />
                     <button
                       className="white_button"
