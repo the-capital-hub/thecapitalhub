@@ -484,7 +484,7 @@ const FeedPostCard = ({
                                 }
                               }}
                             />
-                            <div class="icons">
+                            <div class="icons comment_icons">
                               <span class="image_icon">
                                 <img src={ImageIcon} alt="image" />
                               </span>
