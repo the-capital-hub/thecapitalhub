@@ -24,7 +24,7 @@ export default function CompanyProfilePage() {
     if (!loggedInUser?.investor) {
       getStartupByFounderId(loggedInUser._id).then(({ data }) => {
         // setCompanyName(data?.company);
-        console.log("useeffect data", data);
+        // console.log("useeffect data", data);
         setColorCardData({
           last_round_investment: data.colorCard.last_round_investment,
           total_investment: data.colorCard.total_investment,
