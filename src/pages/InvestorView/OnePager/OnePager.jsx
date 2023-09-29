@@ -186,17 +186,17 @@ const OnePager = () => {
         <div className="cards">
           <MarketCard
             title={"TAM"}
-            subtitle={"(Total Advisable Market)"}
+            subtitle={"(Total Addressable Market)"}
             amount={onePager.TAM}
           />
           <MarketCard
             title={"SAM"}
-            subtitle={"(Service Advisable Market)"}
+            subtitle={"(Servicable Addressable Market)"}
             amount={onePager.SAM}
           />
           <MarketCard
-            title={"SAM"}
-            subtitle={"(Service Advisable Market)"}
+            title={"SOM"}
+            subtitle={"(Serviceable Obtainable Market)"}
             amount={onePager.SOM}
           />
         </div>
