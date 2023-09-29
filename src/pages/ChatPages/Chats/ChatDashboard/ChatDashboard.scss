@@ -100,7 +100,12 @@
           display: flex;
           flex-direction: column;
           align-items: center;
-          
+
+          a {
+            // color: rgb(93, 93, 93);
+            color: #212529;
+          }
+
           .video-message {
             max-width: 100%;
             height: auto;
@@ -109,7 +114,7 @@
             background-color: #000;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
           }
-  
+
           .image-message {
             max-width: 100%;
             height: auto;
@@ -153,7 +158,11 @@
           display: flex;
           flex-direction: column;
           align-items: center;
-          
+
+          a {
+            color: white;
+          }
+
           .video-message {
             max-width: 100%;
             height: auto;
@@ -162,7 +171,7 @@
             background-color: #000;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
           }
-  
+
           .image-message {
             max-width: 100%;
             height: auto;
@@ -173,7 +182,7 @@
         }
       }
     }
-  } 
+  }
 
   .chat_input_section {
     padding-bottom: 20px;
@@ -218,7 +227,8 @@
       .left_icon {
         margin-right: 10px;
 
-        img {}
+        img {
+        }
       }
 
       textarea {

@@ -8,18 +8,18 @@ const OneLinkMarketSection = ({company, page}) => {
   const cardData = [
     {
       field: "TAM",
-      title: "title",
+      // title: "title",
       content: "TAM (Total Addressable Market)",
     },
     {
       field: "SAM",
-      title: "2.Solution",
-      content: "SAM (Service Addressable Market)",
+      // title: "2.Solution",
+      content: "SAM (Servicable Addressable Market)",
     },
     {
       field: "SOM",
-      title: "3.Competitive Landscape",
-      content: "SAM (Service Addressable Market)",
+      // title: "3.Competitive Landscape",
+      content: "SOM (Serviceable Obtainable Market)",
     },
     // { title: "7.Business Model", content: "Your Business Model" },
   ];

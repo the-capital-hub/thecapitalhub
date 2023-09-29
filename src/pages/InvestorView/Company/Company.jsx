@@ -218,19 +218,19 @@ function Company() {
                       image={feedbackIcon}
                       name="Sagar S"
                       stars={5}
-                      paragraph="I had an amazing experience with Kyntox Biotech! The team's dedication to innovation really stood out to me. Their commitment to producing high-quality products while prioritizing safety is commendable. I was thoroughly impressed with their transparent communication throughout the process."
+                      paragraph="I had an amazing experience with The Capital Hub! The team's dedication to innovation really stood out to me. Their commitment to producing high-quality products while prioritizing safety is commendable. I was thoroughly impressed with their transparent communication throughout the process."
                     />
                     <FeedbackCard
                       image={RaghuImage}
                       name="Raghukrishnan J"
                       stars={5}
-                      paragraph="Kyntox Biotech exceeded my expectations in every way possible. Their professionalism and knowledge in biotechnology are unparalleled. The quality of their products speaks volumes about their commitment to excellence.My interactions with their team left me confident in their capabilities and eager to explore more of their offerings. A fantastic experience overall!"
+                      paragraph="The Capital Hub exceeded my expectations in every way possible. Their professionalism and knowledge in biotechnology are unparalleled. The quality of their products speaks volumes about their commitment to excellence.My interactions with their team left me confident in their capabilities and eager to explore more of their offerings. A fantastic experience overall!"
                     />{" "}
                     <FeedbackCard
                       image={RajuImage}
                       name="Raju Prasain"
                       stars={4}
-                      paragraph="Working with Kyntox Biotech was an absolute pleasure. I was pleasantly surprised by their prompt delivery and exceptional customer service. The team's passion for advancing healthcare solutions is evident in their work. I look forward to collaborating with them again in the future."
+                      paragraph="Working with The Capital Hub was an absolute pleasure. I was pleasantly surprised by their prompt delivery and exceptional customer service. The team's passion for advancing healthcare solutions is evident in their work. I look forward to collaborating with them again in the future."
                     />
                     {/* <FeedbackCard
                       image={feedbackIcon}
