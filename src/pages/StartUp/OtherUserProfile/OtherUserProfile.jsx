@@ -99,7 +99,7 @@ function OtherUserProfile() {
           </div>
           <div className="row row-cols-auto row-cols-lg-2 g-0 gx-md-4">
             <div className="left_container p-0 pe-md-auto d-flex flex-column gap-3 col-12 col-lg-8">
-              <div className="about rounded border shadow-sm profile_container">
+              {/* <div className="about rounded border shadow-sm profile_container">
                 <h4 className="h4">About</h4>
                 <p className="text-secondary">{userData?.bio}</p>
               </div>
@@ -123,7 +123,7 @@ function OtherUserProfile() {
                     <p className="m-0">{userData?.phoneNumber}</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="experience rounded border shadow-sm profile_container">
                 <h4 className="h4">Experience</h4>
                 <div className="single_experience row row-cols-1 row-cols-md-2 gx-2">
