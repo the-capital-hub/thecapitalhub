@@ -517,3 +517,37 @@ export const removeFromFeaturedPost = async (postId, userId) => {
     };
   }
 };
+
+export const deleteComment = async (postId, commentId) => {
+  try {
+    const post = await PostModel.findById(postId);
+
+    if (!post) {
+      return {
+        status: 404,
+        message: 'Post not found.',
+      };
+    }
+    const commentIndex = post.comments.findIndex((comment) =>
+      comment._id.equals(commentId)
+    );
+    if (commentIndex === -1) {
+      return {
+        status: 404,
+        message: 'Comment not found.',
+      };
+    }
+    post.comments.splice(commentIndex, 1);
+    await post.save();
+    return {
+      status: 200,
+      message: 'Comment deleted successfully.',
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: 'An error occurred while deleting the comment.',
+    };
+  }
+};
