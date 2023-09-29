@@ -1,9 +1,29 @@
 .register_container {
+  .login_buttons_row {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    gap: 10px;
+
+    button {
+      margin-left: 30px;
+    }
+  }
+
+  .login_btn {
+    width: 150px;
+    height: 50px;
+  }
+
   .register_heading {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     flex-direction: column;
+
     .backArrow {
       position: absolute;
       top: 16%;
@@ -34,11 +54,12 @@
     justify-content: center;
     flex-direction: column;
     padding-top: 5%;
+
     .backArrow {
       height: 25px;
       width: 25px;
       cursor: pointer;
-    }   
+    }
 
     h1 {
       font-family: "Poppins";
@@ -223,6 +244,7 @@
           line-height: normal;
         }
       }
+
       input[type="tel"] {
         width: 100%;
         padding: 15px;
