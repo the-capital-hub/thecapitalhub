@@ -68,7 +68,7 @@ const Card = () => {
 
   return (
     <div className="card-container ">
-      <div className="post_container_div d-flex align-items-center gap-4 ps-3 w-100 ">
+      <div className="post_container_div d-flex align-items-stretch gap-4 ps-3 w-100 overflow-x-auto ">
         {allPosts ? (
           allPosts.map(
             ({
