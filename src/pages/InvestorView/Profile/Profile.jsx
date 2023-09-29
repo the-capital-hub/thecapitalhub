@@ -129,7 +129,7 @@ function Profile() {
             </div>
           </div>
 
-          <div className="row">
+          {/* <div className="row">
             <div className="col-12 mt-2">
               <div className=" box ">
                 <div className="personal_information_header">
@@ -195,7 +195,7 @@ function Profile() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="row">
             <div className="col-12 mt-2">
