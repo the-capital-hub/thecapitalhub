@@ -1,14 +1,30 @@
 import React, { useEffect, useState } from "react";
 import "./style.scss";
-import { getAllPostsAPI } from "../../../../Service/user";
+import { getAllPostsAPI, getFeaturedPost } from "../../../../Service/user";
 import FeaturedPostCard from "../../Cards/FeaturedPostCard/FeaturedPostCard";
 import { useSelector } from "react-redux";
 
-const Card = () => {
+const Card = ({ userId, isDelete=false }) => {
+  const [allPosts, setAllPosts] = useState(null);
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    getFeaturedPost(userId)
+      .then(({ user }) => {
+        console.log("ft", user);
+        setUser(user);
+        setAllPosts(user.featuredPosts);
+      })
+      .catch((err) => {
+        console.log(err);
+        setUser([]);
+        setAllPosts([]);
+      });
+  }, [userId])
+
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const [popupOpen, setPopupOpen] = useState(false);
-  const [allPosts, setAllPosts] = useState(null);
+
   const [newPost, setNewPost] = useState(false);
   const openPopup = () => {
     setPopupOpen(!popupOpen);
@@ -43,28 +59,7 @@ const Card = () => {
 
   useEffect(() => {
     document.title = "Featured Post | The Capital Hub";
-    getAllPostsAPI()
-      .then(({ data }) => {
-        // Sort the posts in descending order based on createdAt timestamps
-        // const sortedPosts = data.sort((a, b) =>
-        //   b.createdAt.localeCompare(a.createdAt)
-        // );
-
-        // Sort posts by loggedInUser
-        const sortedPosts = data.filter(
-          (post) => post.user["_id"] === loggedInUser["_id"]
-        );
-
-        // Select the last 3 recent posts
-        const last3RecentPosts =
-          sortedPosts.length > 3 ? sortedPosts.slice(0, 3) : sortedPosts;
-        setAllPosts(last3RecentPosts); // Update the state with the last 3 recent posts
-      })
-      .catch((err) => {
-        console.log(err);
-        setAllPosts([]);
-      });
-  }, [newPost]);
+  }, []);
 
   return (
     <div className="card-container ">
@@ -73,13 +68,6 @@ const Card = () => {
           allPosts.map(
             ({
               description,
-              user: {
-                firstName,
-                lastName,
-                designation,
-                profilePicture,
-                _id: userId,
-              },
               video,
               image,
               createdAt,
@@ -90,15 +78,16 @@ const Card = () => {
                 key={_id} // Use a unique key for each post
                 postId={_id}
                 userId={userId}
-                designation={designation}
-                profilePicture={profilePicture}
+                designation={user?.designation}
+                profilePicture={user?.profilePicture}
                 description={description}
-                firstName={firstName}
-                lastName={lastName}
+                firstName={user?.firstName}
+                lastName={user?.lastName}
                 video={video}
                 image={image}
                 createdAt={createdAt}
                 likes={likes}
+                isDelete={isDelete}
               />
             )
           )

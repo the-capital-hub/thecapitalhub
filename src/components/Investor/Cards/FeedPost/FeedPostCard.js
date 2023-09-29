@@ -20,6 +20,7 @@ import {
   getPostComment,
   likeUnlikeAPI,
   sendPostComment,
+  addToFeaturedPost,
 } from "../../../../Service/user";
 import SmileeIcon from "../../../../Images/Group 15141(1).svg";
 import ImageIcon from "../../../../Images/Group 15141.svg";
@@ -205,8 +206,18 @@ const FeedPostCard = ({
     }, 2000);
   };
 
-  const handleAddToFeatured = (postId) => {
-    // Add to featured logic
+  // add post as featured
+  const [showFeaturedPostSuccess, setShowFeaturedPostSuccess] = useState(false);
+  const handleAddToFeatured = async (postId) => {
+    try {
+      console.log(postId);
+      const response = await addToFeaturedPost(postId);
+      if (response.status === 200) {
+        setShowFeaturedPostSuccess(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -292,7 +303,7 @@ const FeedPostCard = ({
                       <ul className="kebab_menu border rounded shadow-sm p-3">
                         {userId === loggedInUser?._id && (
                           <li
-                            onClick={handleAddToFeatured}
+                            onClick={() => handleAddToFeatured(postId)}
                             className="d-flex align-items-center gap-2"
                           >
                             <IconComponent_add />
@@ -572,6 +583,13 @@ const FeedPostCard = ({
             withoutOkButton
             onClose={() => setShowSuccess(!showSuccess)}
             successText="Post saved Successfully"
+          />
+        )}
+        {showFeaturedPostSuccess && (
+          <AfterSuccessPopUp
+            withoutOkButton
+            onClose={() => setShowFeaturedPostSuccess(!showFeaturedPostSuccess)}
+            successText="The post has been added as a featured post."
           />
         )}
       </div>

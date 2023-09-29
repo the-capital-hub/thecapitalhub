@@ -56,6 +56,8 @@ const API = Object.freeze({
   createCommunity:`${baseUrl}/community/createCommunity`,
   getAllCommunity:`${baseUrl}/community/getAllCommunitiesByUserId`,
   addMyInterest: `${baseUrl}/investor/addMyInterest`,
+  getFeaturedPostsByUser: `${baseUrl}/api/posts/getFeaturedPostsByUser`,
+  addToFeaturedPost: `${baseUrl}/api/posts/addToFeaturedPost`,
 });
 
 export default API;
