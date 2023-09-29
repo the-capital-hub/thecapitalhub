@@ -436,26 +436,31 @@ export const deletePost = async (postId, userId) => {
 
 export const addToFeaturedPost = async (postId, userId) => {
   try {
-    const user = await UserModel.findOneAndUpdate(
-      { _id: userId },
-      { $push: { featuredPosts: postId } },
-      { new: true }
-    );
+    const user = await UserModel.findOne({ _id: userId });
     if (!user) {
       return {
         status: 404,
         message: "User not found.",
       };
     }
+    if (user.featuredPosts.includes(postId)) {
+      return {
+        status: 400,
+        message: "Post is already in featured posts.",
+      };
+    }
+    user.featuredPosts.push(postId);
+    await user.save();
+
     return {
       status: 200,
-      message: "Post added to featured post",
+      message: "Post added to featured posts",
     };
   } catch (error) {
     console.error(error);
     return {
       status: 500,
-      message: "An error occurred while adding posts as featured.",
+      message: "An error occurred while adding the post to featured posts.",
     };
   }
 };
@@ -473,12 +478,10 @@ export const getFeaturedPostsByUser = async (userId) => {
       };
     }
 
-    const featuredPosts = user.featuredPosts;
-
     return {
       status: 200,
       message: 'Featured posts retrieved successfully.',
-      featuredPosts,
+      user,
     };
   } catch (error) {
     console.error(error);
@@ -514,6 +517,40 @@ export const removeFromFeaturedPost = async (postId, userId) => {
     return {
       status: 500,
       message: 'An error occurred while removing the post from featured posts.',
+    };
+  }
+};
+
+export const deleteComment = async (postId, commentId) => {
+  try {
+    const post = await PostModel.findById(postId);
+
+    if (!post) {
+      return {
+        status: 404,
+        message: 'Post not found.',
+      };
+    }
+    const commentIndex = post.comments.findIndex((comment) =>
+      comment._id.equals(commentId)
+    );
+    if (commentIndex === -1) {
+      return {
+        status: 404,
+        message: 'Comment not found.',
+      };
+    }
+    post.comments.splice(commentIndex, 1);
+    await post.save();
+    return {
+      status: 200,
+      message: 'Comment deleted successfully.',
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: 'An error occurred while deleting the comment.',
     };
   }
 };

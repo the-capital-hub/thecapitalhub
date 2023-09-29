@@ -26,6 +26,7 @@ const FeaturedPostCard = ({
   designation,
   likes,
   userId,
+  isDelete,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
