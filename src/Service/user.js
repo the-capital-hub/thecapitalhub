@@ -654,3 +654,23 @@ export const addMyInterest = async (investorId, newInterestData) => {
     throw error;
   }
 };
+
+export const getFeaturedPost = async (userId) => {
+  try {
+    const response = await axiosInstance.get(`${API.getFeaturedPostsByUser}/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error while getting featured post:", error);
+    throw error;
+  }
+};
+
+export const addToFeaturedPost = async (postId) => {
+  try {
+    const response = await axiosInstance.post(`${API.addToFeaturedPost}/${postId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error while adding featured post:", error);
+    throw error;
+  }
+};

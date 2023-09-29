@@ -22,6 +22,31 @@ const investorSchema = new Schema(
       type: String,
       required: true,
     },
+    startedAtDate: {
+      type: String,
+    },
+    NoOfEmployees: {
+      type: Number,
+    },
+    vision: {
+      type: String,
+    },
+    websiteUrl: {
+      type: String,
+    },
+    mission: {
+      type: String,
+    },
+    team: {
+      type: Array,
+      default: [
+        {
+          name: String,
+          designation: String,
+          image: String,
+        },
+      ],
+    },
     maximumInvest: {
       type: Number,
       // required: true,

@@ -16,6 +16,7 @@ import {
   addToFeaturedPost,
   getFeaturedPostsByUser,
   removeFromFeaturedPost,
+  deleteComment,
 } from "../services/postService";
 import mongoose from "mongoose";
 
@@ -273,6 +274,20 @@ export const removeFromFeaturedPostController = async (req, res) => {
     return res.status(500).send({
       status: 500,
       message: "An error occurred while removing featured post.",
+    });
+  }
+};
+
+export const deleteCommentController = async (req, res) => {
+  try {
+    const { postId, commentId } = req.params;
+    const result = await deleteComment(postId, commentId);
+    return res.status(result.status).json(result);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      status: 500,
+      message: 'An error occurred while deleting the comment.',
     });
   }
 };

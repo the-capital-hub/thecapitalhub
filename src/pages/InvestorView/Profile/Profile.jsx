@@ -235,7 +235,7 @@ function Profile() {
                   </div>
                 </div>
                 <div className="col-12 mt-2">
-                  <MileStoneCard />
+                  <MileStoneCard userId={user._id}/>
                 </div>
               </div>
             </div>
