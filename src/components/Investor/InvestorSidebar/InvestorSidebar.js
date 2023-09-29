@@ -34,6 +34,7 @@ import ModalBSContainer from "../../PopUp/ModalBS/ModalBSContainer/ModalBSContai
 import ModalBSHeader from "../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import NewCommunityModal from "../ChatComponents/NewCommunityModal";
+import companyProfileIcon from "../../../Images/StartUp/Sidebar/companyProfile.svg";
 
 const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const dispatch = useDispatch();
@@ -145,6 +146,20 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   {!sidebarCollapsed && <span>Home</span>}
                 </Link>
               </MenuItem>
+
+              <MenuItem
+                active={location.pathname.includes("/company-profile")}
+                className="active-item"
+              >
+                <Link
+                  onClick={() => setSidebarCollapsed(true)}
+                  to="/company-profile"
+                >
+                  <img src={companyProfileIcon} alt="image" />
+                  {!sidebarCollapsed && <span>Company Profile</span>}
+                </Link>
+              </MenuItem>
+
               <MenuItem
                 active={location.pathname.includes("/documentation")}
                 className="active-item"

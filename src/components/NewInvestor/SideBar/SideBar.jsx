@@ -30,6 +30,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../../Store/Action/userAction";
 import connectionsIcon from "../../../Images/investorsidebar/connection.svg";
 import { PlusIcon } from "../SvgIcons";
+import companyProfileIcon from "../../../Images/Investor/Sidebar/company.svg";
 
 const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const dispatch = useDispatch();
@@ -113,7 +114,10 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 // active={location.pathname.includes("/")}
                 className=""
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="/investor/home?showPopup=true">
+                <Link
+                  onClick={() => setSidebarCollapsed(true)}
+                  to="/investor/home?showPopup=true"
+                >
                   {sidebarCollapsed ? (
                     <>
                       <button className="plus_btn_newInvestor">
@@ -148,6 +152,22 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   )}
                 </Link>
               </MenuItem>
+
+              <MenuItem
+                active={location.pathname.includes("/company-profile")}
+                className="active-item"
+              >
+                <Link
+                  onClick={() => setSidebarCollapsed(true)}
+                  to="/investor/company-profile"
+                >
+                  <img src={companyProfileIcon} alt="image" />
+                  {!sidebarCollapsed && (
+                    <span className="text-black">Company Profile</span>
+                  )}
+                </Link>
+              </MenuItem>
+
               <MenuItem
                 active={location.pathname.includes("/explore")}
                 className="active-item"
