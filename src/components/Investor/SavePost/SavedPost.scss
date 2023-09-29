@@ -1,8 +1,22 @@
 .savedpost_main_container {
   margin: 1.5rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: space-between;
   gap: 2em;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+
+  // Main Content
+  .main__content {
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+  }
 
   // Right side Content
   .right__content {
@@ -12,14 +26,6 @@
       display: block;
       flex: 0 0 24rem;
     }
-  }
-  // Main Content
-  .main__content {
-    flex-grow: 1;
-
-    display: flex;
-    flex-direction: column;
-    gap: 2em;
   }
 
   .typography {
