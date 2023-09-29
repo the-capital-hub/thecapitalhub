@@ -76,6 +76,7 @@ import NewInvestorManageAccount from "./components/NewInvestor/InvestorManageAcc
 import SavedPosts from "./pages/Investor/SavedPosts/SavedPosts";
 import UXBlog from "./pages/Blogs/UXBlog/UXBlog";
 import CompanyProfilePage from "./pages/StartUp/CompanyProfile/CompanyProfilePage";
+import InvestorCompanyProfilePage from "./pages/Investor/InvestorCompanyProfilePage/InvestorCompanyProfilePage";
 
 function App() {
   return (
@@ -290,6 +291,10 @@ function App() {
             <Route path="search-results" element={<SearchResults />} />
             <Route path="my-schedule" element={<MySchedule />} />
             <Route path="saved-posts" element={<SavedPosts />} />
+            <Route
+              path="company-profile"
+              element={<InvestorCompanyProfilePage />}
+            />
           </Route>
 
           {/* Blogs */}

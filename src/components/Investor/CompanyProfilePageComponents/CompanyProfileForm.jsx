@@ -3,7 +3,7 @@ import "./CompanyProfileForm.scss";
 
 export default function CompanyProfileForm({ submitHandler }) {
   return (
-    <div className="profile__form bg-white rounded-5 p-5">
+    <>
       <form action="" onSubmit={submitHandler} className="">
         <fieldset>
           <legend>Company Name</legend>
@@ -77,6 +77,6 @@ export default function CompanyProfileForm({ submitHandler }) {
           />
         </fieldset>
       </form>
-    </div>
+    </>
   );
 }

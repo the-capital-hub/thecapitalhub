@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./CompanyProfilePage.scss";
+import "./InvestorCompanyProfilePage.scss";
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
@@ -12,7 +12,7 @@ import CoinIcon from "../../../Images/investorView/Rectangle.png";
 import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
 import { getStartupByFounderId } from "../../../Service/user";
 
-export default function CompanyProfilePage() {
+export default function InvestorCompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const [colorCardData, setColorCardData] = useState(null);
@@ -56,17 +56,18 @@ export default function CompanyProfilePage() {
   function submitBioHandler(e) {}
 
   return (
-    <div className="companyProfilePage__wrapper">
+    <div className="investorCompanyProfilePage__wrapper p-3 border-start">
       {/* Main content */}
       <div className="main__content">
         <SmallProfileCard text={"Company Profile"} />
 
-        <div className="profile__form bg-white rounded-5 p-5">
+        {/* Company profile form */}
+        <div className="profile__form bg-white rounded-3 p-5 border">
           <CompanyProfileForm submitHandler={handleFormSubmit} />
         </div>
 
         {/* Company Description */}
-        <div className="paragraph__component bg-white rounded-5 p-5 d-flex flex-column gap-4">
+        <div className="paragraph__component bg-white rounded-3 p-5 d-flex flex-column gap-4 border">
           <div className="d-flex align-items-center justify-content-between">
             <h2>Company Description</h2>
 
@@ -88,7 +89,7 @@ export default function CompanyProfilePage() {
         </div>
 
         {/* Core Team */}
-        <div className="core__team bg-white rounded-5 p-5 d-flex flex-column gap-4">
+        <div className="core__team bg-white rounded-3 p-5 d-flex flex-column gap-4 border">
           <div className="d-flex align-items-center justify-content-between">
             <h2>Core Team</h2>
             <Link className="see__more align-self-end">See more</Link>
@@ -153,7 +154,7 @@ export default function CompanyProfilePage() {
         </div>
 
         {/* Milestones */}
-        <div className="milestones__component bg-white rounded-5 p-5 d-flex flex-column gap-4">
+        <div className="milestones__component bg-white rounded-3 p-5 d-flex flex-column gap-4 border">
           <div className="d-flex align-items-center justify-content-between">
             <h2>Milestones</h2>
             <Link className="see__more align-self-end">See more</Link>
@@ -168,11 +169,11 @@ export default function CompanyProfilePage() {
               }}
             >
               {/* <img
-                src={RaghuImage}
-                alt={"name"}
-                style={{ width: "50px", height: "50px" }}
-                className="rounded-circle"
-              /> */}
+                  src={RaghuImage}
+                  alt={"name"}
+                  style={{ width: "50px", height: "50px" }}
+                  className="rounded-circle"
+                /> */}
               <Link className="see__more orange align-self-end mt-auto">
                 See more
               </Link>
@@ -187,11 +188,11 @@ export default function CompanyProfilePage() {
               }}
             >
               {/* <img
-                src={RaghuImage}
-                alt={"name"}
-                style={{ width: "50px", height: "50px" }}
-                className="rounded-circle"
-              /> */}
+                  src={RaghuImage}
+                  alt={"name"}
+                  style={{ width: "50px", height: "50px" }}
+                  className="rounded-circle"
+                /> */}
               <Link className="see__more orange align-self-end mt-auto">
                 See more
               </Link>
@@ -206,11 +207,11 @@ export default function CompanyProfilePage() {
               }}
             >
               {/* <img
-                src={RaghuImage}
-                alt={"name"}
-                style={{ width: "50px", height: "50px" }}
-                className="rounded-circle"
-              /> */}
+                  src={RaghuImage}
+                  alt={"name"}
+                  style={{ width: "50px", height: "50px" }}
+                  className="rounded-circle"
+                /> */}
               <Link className="see__more orange align-self-end mt-auto">
                 See more
               </Link>
@@ -225,11 +226,11 @@ export default function CompanyProfilePage() {
               }}
             >
               {/* <img
-                src={RaghuImage}
-                alt={"name"}
-                style={{ width: "50px", height: "50px" }}
-                className="rounded-circle"
-              /> */}
+                  src={RaghuImage}
+                  alt={"name"}
+                  style={{ width: "50px", height: "50px" }}
+                  className="rounded-circle"
+                /> */}
               <Link className="see__more orange align-self-end mt-auto">
                 See more
               </Link>
@@ -313,7 +314,6 @@ export default function CompanyProfilePage() {
       {/* Right side content */}
       <div className="right__content">
         <RecommendationCard />
-        <NewsCorner />
       </div>
     </div>
   );
