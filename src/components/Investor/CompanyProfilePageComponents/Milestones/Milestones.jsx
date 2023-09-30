@@ -4,6 +4,14 @@ import { Link } from "react-router-dom";
 import MilestoneBadge from "./MilestoneBadge";
 import MockBadge from "../../../../Images/StartUp/Milestones/MockBadge.svg";
 import MockFundsBadge from "../../../../Images/StartUp/Milestones/MockfundsBadge.svg";
+import {
+  ModalBSBody,
+  ModalBSContainer,
+  ModalBSFooter,
+  ModalBSHeader,
+  ModalBsLauncher,
+} from "../../../PopUp/ModalBS";
+import AddMilestoneModal from "./AddMilestoneModal";
 
 export default function Milestones({ headingClass, containerClass }) {
   // Mock data array
@@ -36,6 +44,29 @@ export default function Milestones({ headingClass, containerClass }) {
             />
           );
         })}
+      </div>
+      {/* If authorised show "Add" button that triggers add modal */}
+      {
+        <div className="align-self-end">
+          <ModalBsLauncher
+            id={"AddMilestoneModal"}
+            className="orange_button d-flex align-items-center gap-1 w-auto "
+          >
+            <span>Add</span>
+          </ModalBsLauncher>
+        </div>
+      }
+      {/* Modal for adding new team member */}
+      <div className="addMilestoneModal__container">
+        <ModalBSContainer id={"AddMilestoneModal"} modalXl>
+          <ModalBSHeader
+            title={"Add Milestone"}
+            className={"orange__heading"}
+          />
+          <ModalBSBody>
+            <AddMilestoneModal />
+          </ModalBSBody>
+        </ModalBSContainer>
       </div>
     </div>
   );

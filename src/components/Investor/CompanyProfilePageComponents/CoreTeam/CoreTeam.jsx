@@ -33,6 +33,7 @@ export default function CoreTeam() {
           );
         })}
       </div>
+      {/* If authorised show "Add" button that triggers add modal */}
       {
         <div className="align-self-end">
           <ModalBsLauncher

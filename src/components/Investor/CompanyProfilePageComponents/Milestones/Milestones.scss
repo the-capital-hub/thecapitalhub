@@ -1,0 +1,27 @@
+.orange_button {
+  border-radius: 5px;
+  background: #fd5901;
+  border: 1px solid #fd5901;
+  padding: 8px 25px;
+  width: auto;
+  font-size: 14px;
+  color: white;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.orange__heading {
+  color: #fd5901;
+}
+.addMilestoneModal__container {
+  .modal__input {
+    background-color: #fafafa;
+    outline: 0;
+    transition: border 0.3s ease-in-out;
+    &:focus {
+      border: 1px solid #fd5901;
+    }
+  }
+}
