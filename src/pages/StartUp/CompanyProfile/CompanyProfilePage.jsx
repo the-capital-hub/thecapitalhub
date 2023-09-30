@@ -6,6 +6,7 @@ import RecommendationCard from "../../../components/Investor/InvestorGlobalCards
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
 import { getStartupByFounderId } from "../../../Service/user";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function CompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -26,7 +27,18 @@ export default function CompanyProfilePage() {
       <div className="main__content">
         <SmallProfileCard text={"Company Profile"} />
 
-        <CompanyProfile isOnelink={true} companyData={companyData} />
+        <div className="">
+          <Link
+            to={"/company-profile/edit"}
+            className="text-decoration-none text-dark bg-white p-4 rounded-4"
+          >
+            Click here to edit company details
+          </Link>
+        </div>
+
+        <div className="" style={{ maxWidth: "900px" }}>
+          <CompanyProfile isOnelink={true} companyData={companyData} />
+        </div>
       </div>
 
       {/* Right side content */}
