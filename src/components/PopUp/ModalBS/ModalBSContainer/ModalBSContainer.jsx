@@ -7,10 +7,11 @@ function ModalBSContainer({
   showModal,
   isStatic = true,
   modalXl = false,
+  isFade = true,
 }) {
   return (
     <div
-      className={`modal fade `}
+      className={`modal ${isFade ? " fade " : ""} `}
       // style={{ display: showModal ? "block" : "none" }}
       id={id}
       data-bs-backdrop={`${isStatic ? "static" : " "}`}
