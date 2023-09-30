@@ -27,6 +27,7 @@ export default function CompanyProfile({ isOnelink, companyData }) {
   let vision = "Vision";
   let mission = "Mission";
   let noOfEmployees = "200+";
+  let team = "";
 
   if (companyData) {
     name = companyData.company || name;
@@ -39,6 +40,7 @@ export default function CompanyProfile({ isOnelink, companyData }) {
     vision = companyData.vision || vision;
     mission = companyData.mission || mission;
     noOfEmployees = companyData.noOfEmployees || noOfEmployees;
+    team = companyData.team || team;
   }
   // const company = {
   //   image: HCLImage,
@@ -63,17 +65,17 @@ export default function CompanyProfile({ isOnelink, companyData }) {
     <div className="company__profile bg-white rounded-4 border p-lg-4 shadow-sm">
       <div className="company__section__one border-bottom d-flex flex-column gap-4 py-5 ps-3">
         <div className="company__info d-flex flex-column flex-xl-row gap-4 justify-content-between position-relative">
-          <CompanyInfo name={name} logo={logo} location={location} foundedYear={foundedIn}/>
+          <CompanyInfo name={name} logo={logo} location={location} foundedYear={foundedIn} />
           <CompanyActions isOnelink={isOnelink} />
         </div>
-        <CompanyAbout about={description} vision={vision} mission={mission} noOfEmployees={noOfEmployees}/>
-        <CompanyStats colorCard={colorCard}/>
+        <CompanyAbout about={description} vision={vision} mission={mission} noOfEmployees={noOfEmployees} />
+        <CompanyStats colorCard={colorCard} />
       </div>
 
       <div className="company__section__two d-flex flex-column gap-4 pt-3 pb-5 ps-3">
         <PublicLinks socialLinks={socialLinks} />
         <Feedback />
-        <FoundingTeam />
+        <FoundingTeam isOnelink={isOnelink} team={team} />
         <KeyFocus
           tags={[
             "Finance",

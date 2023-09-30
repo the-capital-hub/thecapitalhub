@@ -128,7 +128,7 @@ export default function CompanyProfilePage() {
 
         {/* Core Team */}
         <div className="core__team bg-white rounded-5 p-5">
-          <CoreTeam />
+          <CoreTeam companyData={companyData} setCompanyData={setCompanyData}/>
         </div>
 
         {/* Milestones */}
