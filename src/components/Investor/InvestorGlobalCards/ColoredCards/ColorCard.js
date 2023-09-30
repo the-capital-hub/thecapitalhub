@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ColorCard.scss";
-import { postStartUpData } from "../../../../Service/user";
+import { postStartUpData, postInvestorData } from "../../../../Service/user";
 import { useSelector } from "react-redux";
 
 const ColorCard = ({
@@ -14,10 +14,15 @@ const ColorCard = ({
   colorCardData,
   className,
   noRupee,
+  isInvestor = false
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedAmount, setEditedAmount] = useState(amount);
+
+  useEffect(() => {
+    setEditedAmount(amount);
+  }, [amount]);
 
   const handleEditClick = () => {
     setIsEditMode(true);
@@ -34,14 +39,24 @@ const ColorCard = ({
       founderId: loggedInUser._id,
       colorCard: { ...colorCardData, [field]: editedAmount },
     };
-    postStartUpData(updatedData)
+    if (isInvestor) {
+      postInvestorData(updatedData)
       .then((res) => {
         console.log("Res-->", res);
       })
       .catch((error) => {
         console.error("Error-->", error);
       });
-    console.log("loggedInUser-->", loggedInUser.colorCard);
+    } else {
+      postStartUpData(updatedData)
+        .then((res) => {
+          console.log("Res-->", res);
+        })
+        .catch((error) => {
+          console.error("Error-->", error);
+        });
+    }
+
   };
 
   return (
@@ -65,7 +80,7 @@ const ColorCard = ({
           ) : (
             <span
               className="rupee-sign"
-              onClick={onAmountChange ? handleEditClick : () => {}}
+              onClick={onAmountChange ? handleEditClick : () => { }}
             >
               {!noRupee && "₹"} {editedAmount}{" "}
               {

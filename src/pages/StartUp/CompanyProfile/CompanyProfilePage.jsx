@@ -10,37 +10,36 @@ import { CiEdit, CiSaveUp2 } from "react-icons/ci";
 import RaghuImage from "../../../Images/aboutUs/Raghu.jpeg";
 import CoinIcon from "../../../Images/investorView/Rectangle.png";
 import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
-import { getStartupByFounderId } from "../../../Service/user";
+import { getStartupByFounderId, postStartUpData } from "../../../Service/user";
 
 export default function CompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const [colorCardData, setColorCardData] = useState(null);
 
-  const [field, setField] = useState("last_round_investment");
-
-  // useEffect(() => {
-  //   if (!loggedInUser?.investor) {
-  //     getStartupByFounderId(loggedInUser._id).then(({ data }) => {
-  //       // setCompanyName(data?.company);
-  //       // console.log("useeffect data", data);
-  //       setColorCardData({
-  //         last_round_investment: data.colorCard.last_round_investment,
-  //         total_investment: data.colorCard.total_investment,
-  //         no_of_investers: data.colorCard.no_of_investers,
-  //         fund_ask: data.colorCard.fund_ask,
-  //         valuation: data.colorCard.valuation,
-  //         raised_funds: data.colorCard.raised_funds,
-  //       });
-  //     });
-  //   }
-  // }, []);
+  const [companyData, setCompanyData] = useState([]);
+  const [isBioEditable, setIsBioEditable] = useState(false);
+  const [companyDescription, setCompanyDescription] = useState(null);
+  
+  useEffect(() => {
+    if (!loggedInUser?.investor) {
+      getStartupByFounderId(loggedInUser._id).then(({ data }) => {
+        setCompanyData(data);
+        setCompanyDescription(data.description)
+        setColorCardData({
+          last_round_investment: data.colorCard.last_round_investment,
+          total_investment: data.colorCard.total_investment,
+          no_of_investers: data.colorCard.no_of_investers,
+          fund_ask: data.colorCard.fund_ask,
+          valuation: data.colorCard.valuation,
+          raised_funds: data.colorCard.raised_funds,
+        });
+      });
+    }
+  }, []);
 
   // handleAmountChange
   const handleAmountChange = (currentfield, updatedAmount) => {
-    console.log(field);
-    console.log(currentfield);
-    setField(currentfield);
     setColorCardData((prevData) => ({
       ...prevData,
       [currentfield]: updatedAmount,
@@ -48,12 +47,27 @@ export default function CompanyProfilePage() {
   };
 
   // Handle Form submit
-  function handleFormSubmit(e) {
-    e.preventDefault();
-  }
+  // function handleFormSubmit(e) {
+  //   e.preventDefault();
+  // }
 
   // Handle Description submit
-  function submitBioHandler(e) {}
+  const submitBioHandler = async (e) => {
+    e.preventDefault();
+    const companyData = {
+      description: companyDescription,
+      founderId: loggedInUser._id,
+    }
+    try {
+      const response = await postStartUpData(companyData);
+      if(response.status === 200) {
+        setIsBioEditable(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
   return (
     <div className="companyProfilePage__wrapper">
@@ -62,7 +76,7 @@ export default function CompanyProfilePage() {
         <SmallProfileCard text={"Company Profile"} />
 
         <div className="profile__form bg-white rounded-5 p-5">
-          <CompanyProfileForm submitHandler={handleFormSubmit} />
+          <CompanyProfileForm companyData={companyData} />
         </div>
 
         {/* Company Description */}
@@ -70,12 +84,22 @@ export default function CompanyProfilePage() {
           <div className="d-flex align-items-center justify-content-between">
             <h2>Company Description</h2>
 
-            <button className="edit__btn">
-              Edit
-              <CiEdit />
-            </button>
+            <span className="ms-auto">
+              <button className="edit__btn" onClick={() => setIsBioEditable(!isBioEditable)}>
+                {isBioEditable ? "Cancel" : "Edit"}
+                <CiEdit />
+              </button>
+              {isBioEditable && (
+                <button
+                  className="ms-2 edit__btn"
+                  onClick={e => submitBioHandler(e)}
+                >
+                  Save <CiSaveUp2 />
+                </button>
+              )}
+            </span>
           </div>
-          <p>
+          {/* <p>
             A little about myself. “Dejection is a sign of failure but it
             becomes the cause of success”. I wrote this when I was 16 years old
             and that’s exactly when I idealised the reality of life. In this
@@ -83,7 +107,18 @@ export default function CompanyProfilePage() {
             include money, fame and power. I believe that success is just the
             beginning of a new problem. Every step of our lives we work hard to
             solve an issue and every time we end up with a new problem.
-          </p>
+          </p> */}
+          {isBioEditable ? (
+            <textarea
+              value={companyDescription}
+              name="bio"
+              onChange={(e) => setCompanyDescription(e.target.value)}
+            />
+          ) : (
+            <p className="small_typo">
+              {companyDescription || "Click on edit to add company description"}
+            </p>
+          )}
           <Link className="see__more align-self-end">See more</Link>
         </div>
 
@@ -244,11 +279,11 @@ export default function CompanyProfilePage() {
             background="#BB98FF"
             text="Last round investment"
             image={CoinIcon}
-            amount={"Text" || colorCardData.last_round_investment}
+            amount={colorCardData?.last_round_investment || ""}
             onAmountChange={(amount) =>
               handleAmountChange("last_round_investment", amount)
             }
-            field={field}
+            field={"last_round_investment"}
             colorCardData={colorCardData}
           />
           <ColorCard
@@ -256,11 +291,11 @@ export default function CompanyProfilePage() {
             background="#DAC191"
             text="Total Investment"
             image={CoinIcon}
-            amount={"Text" || colorCardData.total_investment}
+            amount={colorCardData?.total_investment || ""}
             onAmountChange={(amount) =>
               handleAmountChange("total_investment", amount)
             }
-            field={field}
+            field={"total_investment"}
             colorCardData={colorCardData}
           />
           <ColorCard
@@ -268,11 +303,11 @@ export default function CompanyProfilePage() {
             background="#DCDCDC"
             text="No.of Investers"
             image={CoinIcon}
-            amount={"Text" || colorCardData.no_of_investers}
+            amount={colorCardData?.no_of_investers || ""}
             onAmountChange={(amount) =>
               handleAmountChange("no_of_investers", amount)
             }
-            field={field}
+            field={"no_of_investers"}
             colorCardData={colorCardData}
           />
           <ColorCard
@@ -280,9 +315,9 @@ export default function CompanyProfilePage() {
             background="#2B2B2B"
             text="Fund ask"
             image={CoinIcon}
-            amount={"Text" || colorCardData.fund_ask}
+            amount={colorCardData?.fund_ask || ""}
             onAmountChange={(amount) => handleAmountChange("fund_ask", amount)}
-            field={field}
+            field={"fund_ask"}
             colorCardData={colorCardData}
           />
           <ColorCard
@@ -290,9 +325,9 @@ export default function CompanyProfilePage() {
             background="#FF7373"
             text="Valuation"
             image={CoinIcon}
-            amount={"Text" || colorCardData.valuation}
+            amount={colorCardData?.valuation || ""}
             onAmountChange={(amount) => handleAmountChange("valuation", amount)}
-            field={field}
+            field={"valuation"}
             colorCardData={colorCardData}
           />
           <ColorCard
@@ -300,11 +335,11 @@ export default function CompanyProfilePage() {
             background="#9198DA"
             text="Raised funds"
             image={CoinIcon}
-            amount={"Text" || colorCardData.raised_funds}
+            amount={colorCardData?.raised_funds || ""}
             onAmountChange={(amount) =>
               handleAmountChange("raised_funds", amount)
             }
-            field={field}
+            field={"raised_funds"}
             colorCardData={colorCardData}
           />
         </div>
