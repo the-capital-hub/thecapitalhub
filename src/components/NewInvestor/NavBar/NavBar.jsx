@@ -66,7 +66,7 @@ const NavBar = (props) => {
               <div className="logo_container">
                 <img
                   src={Logo}
-                  onClick={() => navigate("/home")}
+                  onClick={() => navigate("/investor/home")}
                   alt="the capital hub logo"
                 />
               </div>
@@ -103,7 +103,7 @@ const NavBar = (props) => {
                 />
                 <button
                   type="submit"
-                  className="searchbar-button d-flex align-items-center justify-content-center"
+                  className="investor-searchbar-button d-flex align-items-center justify-content-center"
                 >
                   {/* <img src={searchIcon} alt="search" /> */}
                   <SearchIcon color="black" width="24" height="24" />

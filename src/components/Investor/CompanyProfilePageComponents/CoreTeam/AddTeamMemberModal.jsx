@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { BsFillCameraFill } from "react-icons/bs";
+import { postStartUpData, uploadLogo } from "../../../../Service/user";
+import { getBase64 } from "../../../../utils/getBase64";
 
-export default function AddTeamMemberModal() {
+export default function AddTeamMemberModal({ companyData, setCompanyData }) {
   const [member, setMember] = useState({ name: "", designation: "" });
   const [selectedFile, setSelectedFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   // handleChange
   function handleInputChange(e) {
@@ -25,12 +28,50 @@ export default function AddTeamMemberModal() {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
+    const imageUrl = URL.createObjectURL(file);
+    setImagePreview(imageUrl);
   };
 
   // handle AddTeamMember
-  function handleAddTeamMember(e) {
+  const handleAddTeamMember = async (e) => {
     e.preventDefault();
-  }
+    let profileImage = "";
+
+    if (selectedFile) {
+      try {
+        const logo = await getBase64(selectedFile);
+        const { url } = await uploadLogo({ logo });
+        profileImage = url;
+      } catch (error) {
+        console.log("Error:", error);
+        return;
+      }
+    }
+
+    const updatedTeamMember = {
+      name: member.name,
+      designation: member.designation,
+      image: profileImage,
+    };
+    console.log("Team", updatedTeamMember);
+
+    try {
+      setCompanyData((previousData) => ({
+        ...previousData,
+        team: [...previousData.team, updatedTeamMember],
+      }));
+      const response = await postStartUpData({
+        founderId: companyData.founderId,
+        team: [...companyData.team, updatedTeamMember],
+      });
+
+      console.log(response);
+      setMember({ name: "", designation: "" });
+      setSelectedFile(null);
+    } catch (error) {
+      console.error("Error adding team member:", error);
+    }
+  };
 
   return (
     <form
@@ -41,21 +82,34 @@ export default function AddTeamMemberModal() {
       <div className="mx-auto">
         <input
           type="file"
-          name="profilePicture"
-          id="profilePicture"
+          name="image"
+          id="image"
           accept="image/*"
           className="visually-hidden"
           onChange={handleFileChange}
         />
-        <label htmlFor="profilePicture" className="upload__label">
-          <BsFillCameraFill
-            style={{
-              fontSize: "1.5rem",
-              color: "rgba(253, 89, 1,1)",
-            }}
-          />
+        <label htmlFor="image" className="upload__label">
+          {imagePreview ? (
+            <img
+              src={imagePreview}
+              alt="Selected"
+              className="preview-image"
+            />
+          ) : (
+            <BsFillCameraFill
+              style={{
+                fontSize: "1.5rem",
+                color: "rgba(253, 89, 1,1)",
+              }}
+            />
+          )}
         </label>
       </div>
+      {/* {imagePreview && (
+        <div className="image-preview">
+          <img src={imagePreview} alt="Selected" />
+        </div>
+      )} */}
 
       {/* Name input */}
       <div className="">
@@ -82,6 +136,13 @@ export default function AddTeamMemberModal() {
           onChange={handleInputChange}
         />
       </div>
+      <button
+        className="orange_button"
+        onClick={handleAddTeamMember}
+        data-bs-dismiss="modal"
+      >
+        Add
+      </button>
     </form>
   );
 }
