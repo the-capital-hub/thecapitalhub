@@ -38,8 +38,7 @@ $color-capital-dark: rgb(96, 110, 48);
   cursor: pointer;
   transition: all 200ms ease-in-out;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $color-capital !important;
     color: black !important;
     transform: scale(0.95) !important;
@@ -65,8 +64,7 @@ $color-capital-dark: rgb(96, 110, 48);
   cursor: pointer;
   transition: all 200ms ease-in-out;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $color-capital !important;
     color: black !important;
     transform: scale(0.95) !important;
@@ -91,8 +89,7 @@ $color-capital-dark: rgb(96, 110, 48);
   cursor: pointer;
   transition: all 200ms ease-in-out;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $color-capital !important;
     color: black !important;
     transform: scale(0.95) !important;

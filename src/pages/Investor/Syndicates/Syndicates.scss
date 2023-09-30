@@ -40,10 +40,8 @@ $color-capital-dark: rgb(96, 110, 48);
   cursor: pointer;
   transition: all 200ms ease-in-out;
 
-  &:hover,
-  &:focus {
-    background-color: $color-capital-dark;
-    color: white;
+  &:hover {
+    transform: scale(0.95) !important;
   }
 }
 
@@ -63,10 +61,8 @@ $color-capital-dark: rgb(96, 110, 48);
   cursor: pointer;
   transition: all 200ms ease-in-out;
 
-  &:hover,
-  &:focus {
-    background-color: $color-capital-dark;
-    color: white;
+  &:hover {
+    transform: scale(0.95) !important;
   }
 }
 
