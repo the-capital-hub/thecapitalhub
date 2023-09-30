@@ -46,7 +46,8 @@ function Company() {
       .catch(() => setOnePager([]));
   }, [username]);
 
-  console.log("company", onePager);
+  // console.log("company", onePager);
+
   return (
     // Older version of company profile
     // <div className="container-fluid company_main_container">
