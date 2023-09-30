@@ -6,9 +6,9 @@ const startUpSchema = new Schema(
       last_round_investment: String,
       total_investment: String,
       no_of_investers: String,
-      fund_ask:String,
-      valuation:String,
-      raised_funds:String,
+      fund_ask: String,
+      valuation: String,
+      raised_funds: String,
     },
     company: {
       type: String,
@@ -39,7 +39,7 @@ const startUpSchema = new Schema(
     industryType: {
       type: String,
     },
-    NoOfEmployees: {
+    noOfEmployees: {
       type: Number,
     },
     vision: {

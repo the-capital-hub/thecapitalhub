@@ -596,7 +596,7 @@ function Profile() {
           </button>
           {isInvestmentPhilosophy && (
             <button
-              className="ms-2"
+              className="ms-2 edit_button"
               onClick={() => submitInvestmentPhilosophyChange()}
             >
               Save <CiSaveUp2 />
