@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function AddUser({ props }) {
+export default function AddUser({ props, height = "12", width = "12" }) {
   return (
     <svg
-      width="12"
-      height="12"
+      width={width}
+      height={height}
       viewBox="0 0 10 10"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
