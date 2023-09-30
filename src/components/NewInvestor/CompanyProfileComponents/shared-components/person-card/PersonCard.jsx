@@ -31,7 +31,7 @@ export default function PersonCard({ person, isFeedBack }) {
           <>
             <div className="founder">
               <p className="text-muted fw-light">Designation</p>
-              <h6 className="fw-medium">{person.designation}</h6>
+              <h6 className="fw-medium designation">{person.designation}</h6>
             </div>
             <button className="btn-capital-small connectNow d-flex align-items-center gap-1 ms-auto">
               {/* <img src={AddUser} alt="user icon" /> */}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./CoreTeam.scss";
 import CoreTeamCard from "./CoreTeamCard";
 import RaghuImage from "../../../../Images/aboutUs/Raghu.jpeg";
@@ -12,9 +12,12 @@ import {
 } from "../../../PopUp/ModalBS";
 import AddTeamMemberModal from "./AddTeamMemberModal";
 
-export default function CoreTeam() {
-  // Mock dataArray
-  const team = [1, 1, 1, 1];
+export default function CoreTeam({ companyData, setCompanyData }) {
+
+  const [team, setTeam] = useState(companyData?.team);
+  useEffect(() => {
+    setTeam(companyData?.team);
+  }, [companyData])
 
   return (
     <div className=" d-flex flex-column gap-4">
@@ -23,16 +26,20 @@ export default function CoreTeam() {
         <Link className="see__more align-self-end">See more</Link>
       </div>
       <div className="team__cards__container d-flex align-items-center gap-5 flex-wrap">
-        {team.map(() => {
-          return (
+        {team && team.length > 0 ? (
+          team.map((member, index) => (
             <CoreTeamCard
-              image={RaghuImage}
-              name={"Raghu"}
-              designation={"Web Developer"}
+              key={index} 
+              image={member.image}
+              name={member.name}
+              designation={member.designation}
             />
-          );
-        })}
+          ))
+        ) : (
+          <p>Click Add to add team members</p>
+        )}
       </div>
+
       {
         <div className="align-self-end">
           <ModalBsLauncher
@@ -51,7 +58,7 @@ export default function CoreTeam() {
             className={"orange__heading"}
           />
           <ModalBSBody>
-            <AddTeamMemberModal />
+            <AddTeamMemberModal setCompanyData={setCompanyData} companyData={companyData} />
           </ModalBSBody>
         </ModalBSContainer>
       </div>
