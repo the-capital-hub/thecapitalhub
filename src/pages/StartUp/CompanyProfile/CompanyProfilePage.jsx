@@ -12,6 +12,7 @@ import CoinIcon from "../../../Images/investorView/Rectangle.png";
 import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
 import { getStartupByFounderId, postStartUpData } from "../../../Service/user";
 import CoreTeam from "../../../components/Investor/CompanyProfilePageComponents/CoreTeam/CoreTeam";
+import Milestones from "../../../components/Investor/CompanyProfilePageComponents/Milestones/Milestones";
 
 export default function CompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -132,87 +133,7 @@ export default function CompanyProfilePage() {
 
         {/* Milestones */}
         <div className="milestones__component bg-white rounded-5 p-5 d-flex flex-column gap-4">
-          <div className="d-flex align-items-center justify-content-between">
-            <h2>Milestones</h2>
-            <Link className="see__more align-self-end">See more</Link>
-          </div>
-          <div className="milestone__cards__container d-flex align-items-center gap-5 flex-wrap">
-            <div
-              className="p-4 d-flex flex-column align-items-center gap-3 rounded-5"
-              style={{
-                backgroundColor: "#EDEDED",
-                width: "240px",
-                height: "260px",
-              }}
-            >
-              {/* <img
-                src={RaghuImage}
-                alt={"name"}
-                style={{ width: "50px", height: "50px" }}
-                className="rounded-circle"
-              /> */}
-              <Link className="see__more orange align-self-end mt-auto">
-                See more
-              </Link>
-            </div>
-
-            <div
-              className="p-4 d-flex flex-column align-items-center gap-3 rounded-5"
-              style={{
-                backgroundColor: "#EDEDED",
-                width: "240px",
-                height: "260px",
-              }}
-            >
-              {/* <img
-                src={RaghuImage}
-                alt={"name"}
-                style={{ width: "50px", height: "50px" }}
-                className="rounded-circle"
-              /> */}
-              <Link className="see__more orange align-self-end mt-auto">
-                See more
-              </Link>
-            </div>
-
-            <div
-              className="p-4 d-flex flex-column align-items-center gap-3 rounded-5"
-              style={{
-                backgroundColor: "#EDEDED",
-                width: "240px",
-                height: "260px",
-              }}
-            >
-              {/* <img
-                src={RaghuImage}
-                alt={"name"}
-                style={{ width: "50px", height: "50px" }}
-                className="rounded-circle"
-              /> */}
-              <Link className="see__more orange align-self-end mt-auto">
-                See more
-              </Link>
-            </div>
-
-            <div
-              className="p-4 d-flex flex-column align-items-center gap-3 rounded-5"
-              style={{
-                backgroundColor: "#EDEDED",
-                width: "240px",
-                height: "260px",
-              }}
-            >
-              {/* <img
-                src={RaghuImage}
-                alt={"name"}
-                style={{ width: "50px", height: "50px" }}
-                className="rounded-circle"
-              /> */}
-              <Link className="see__more orange align-self-end mt-auto">
-                See more
-              </Link>
-            </div>
-          </div>
+          <Milestones />
         </div>
 
         {/* Color Cards */}

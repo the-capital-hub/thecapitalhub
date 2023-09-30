@@ -19,6 +19,7 @@ import {
   Revenue2,
   Revenue3,
 } from "../../../Images/Investor/CompanyProfile";
+import Milestones from "../../../components/Investor/CompanyProfilePageComponents/Milestones/Milestones";
 
 function Profile() {
   const { username } = useParams();
@@ -31,10 +32,10 @@ function Profile() {
       .then(({ data }) => {
         setUser(data);
         getStartupByFounderId(data._id)
-        .then(({ data }) => {
-          setColorCard(data.colorCard);
-        })
-        .catch(() => setColorCard([]));
+          .then(({ data }) => {
+            setColorCard(data.colorCard);
+          })
+          .catch(() => setColorCard([]));
       })
       .catch(() => setUser([]));
   }, [username]);
@@ -245,7 +246,12 @@ function Profile() {
           <div className="row">
             <div className="col-12 mt-2">
               <div className=" box">
-                <div className="personal_information_header">
+                <Milestones
+                  headingClass={"typography"}
+                  containerClass={"p-3"}
+                />
+
+                {/* <div className="personal_information_header">
                   <h2 className="typography">Milestones</h2>
                   <div className="milestone_see_more">
                     <Link to={"/"}>See more</Link>
@@ -253,7 +259,7 @@ function Profile() {
                 </div>
                 <div className="col-12 mt-2">
                   <MileStoneCard userId={user._id} />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
