@@ -26,7 +26,7 @@ export default function PublicLinks({ socialLinks }) {
       <div className="d-flex gap-3 flex-wrap">
         {socialLinks
           ? Object.keys(socialLinks).map((key, index) => {
-              return <SocialLink icon={Icons[key]} name={key} key={key} />;
+              return <SocialLink icon={Icons[key]} name={key} key={key} socialLinks={socialLinks}/>;
             })
           : ""}
       </div>
