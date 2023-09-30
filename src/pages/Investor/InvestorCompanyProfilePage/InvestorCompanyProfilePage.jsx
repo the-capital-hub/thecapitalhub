@@ -10,7 +10,7 @@ import { CiEdit, CiSaveUp2 } from "react-icons/ci";
 import RaghuImage from "../../../Images/aboutUs/Raghu.jpeg";
 import CoinIcon from "../../../Images/investorView/Rectangle.png";
 import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
-import { getStartupByFounderId } from "../../../Service/user";
+import { getInvestorById, postInvestorData } from "../../../Service/user";
 
 export default function InvestorCompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -18,23 +18,23 @@ export default function InvestorCompanyProfilePage() {
   const [colorCardData, setColorCardData] = useState(null);
 
   const [field, setField] = useState("last_round_investment");
+  const [companyData, setCompanyData] = useState([]);
+  const [isBioEditable, setIsBioEditable] = useState(false);
+  const [companyDescription, setCompanyDescription] = useState(null);
 
-  // useEffect(() => {
-  //   if (!loggedInUser?.investor) {
-  //     getStartupByFounderId(loggedInUser._id).then(({ data }) => {
-  //       // setCompanyName(data?.company);
-  //       // console.log("useeffect data", data);
-  //       setColorCardData({
-  //         last_round_investment: data.colorCard.last_round_investment,
-  //         total_investment: data.colorCard.total_investment,
-  //         no_of_investers: data.colorCard.no_of_investers,
-  //         fund_ask: data.colorCard.fund_ask,
-  //         valuation: data.colorCard.valuation,
-  //         raised_funds: data.colorCard.raised_funds,
-  //       });
-  //     });
-  //   }
-  // }, []);
+  useEffect(() => {
+    getInvestorById(loggedInUser.investor).then(({ data }) => {
+        setCompanyData(data);
+        setColorCardData({
+          averageInvestment: data.colorCard.averageInvestment,
+          total_investment: data.colorCard.total_investment,
+          no_of_investments: data.colorCard.no_of_investments,
+          minimumTicketsSize: data.colorCard.minimumTicketsSize,
+          maximumTicketsSize: data.colorCard.maximumTicketsSize,
+          seedRound: data.colorCard.seedRound,
+        });
+      });
+  }, []);
 
   // handleAmountChange
   const handleAmountChange = (currentfield, updatedAmount) => {
@@ -53,7 +53,21 @@ export default function InvestorCompanyProfilePage() {
   }
 
   // Handle Description submit
-  function submitBioHandler(e) {}
+  const submitBioHandler = async (e) => {
+    e.preventDefault();
+    const companyData = {
+      description: companyDescription,
+      founderId: loggedInUser._id,
+    }
+    try {
+      const response = await postInvestorData(companyData);
+      if(response.status === 200) {
+        setIsBioEditable(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="investorCompanyProfilePage__wrapper p-3 border-start">
@@ -63,7 +77,7 @@ export default function InvestorCompanyProfilePage() {
 
         {/* Company profile form */}
         <div className="profile__form bg-white rounded-3 p-5 border">
-          <CompanyProfileForm submitHandler={handleFormSubmit} />
+          <CompanyProfileForm companyData={companyData} investor={true}/>
         </div>
 
         {/* Company Description */}
@@ -71,12 +85,22 @@ export default function InvestorCompanyProfilePage() {
           <div className="d-flex align-items-center justify-content-between">
             <h2>Company Description</h2>
 
-            <button className="edit__btn">
-              Edit
-              <CiEdit />
-            </button>
+            <span className="ms-auto">
+              <button className="edit__btn" onClick={() => setIsBioEditable(!isBioEditable)}>
+                {isBioEditable ? "Cancel" : "Edit"}
+                <CiEdit />
+              </button>
+              {isBioEditable && (
+                <button
+                  className="ms-2 edit__btn"
+                  onClick={e => submitBioHandler(e)}
+                >
+                  Save <CiSaveUp2 />
+                </button>
+              )}
+            </span>
           </div>
-          <p>
+          {/* <p>
             A little about myself. “Dejection is a sign of failure but it
             becomes the cause of success”. I wrote this when I was 16 years old
             and that’s exactly when I idealised the reality of life. In this
@@ -84,7 +108,18 @@ export default function InvestorCompanyProfilePage() {
             include money, fame and power. I believe that success is just the
             beginning of a new problem. Every step of our lives we work hard to
             solve an issue and every time we end up with a new problem.
-          </p>
+          </p> */}
+          {isBioEditable ? (
+            <textarea
+              value={companyDescription}
+              name="bio"
+              onChange={(e) => setCompanyDescription(e.target.value)}
+            />
+          ) : (
+            <p className="small_typo">
+              {companyDescription || "Click on edit to add company description"}
+            </p>
+          )}
           <Link className="see__more align-self-end">See more</Link>
         </div>
 
@@ -243,70 +278,76 @@ export default function InvestorCompanyProfilePage() {
           <ColorCard
             color="white"
             background="#BB98FF"
-            text="Last round investment"
+            text="Total Investment"
             image={CoinIcon}
-            amount={"Text" || colorCardData.last_round_investment}
+            amount={colorCardData?.total_investment || "0"}
             onAmountChange={(amount) =>
-              handleAmountChange("last_round_investment", amount)
+              handleAmountChange("total_investment", amount)
             }
-            field={field}
+            field={"total_investment"}
             colorCardData={colorCardData}
+            isInvestor={true}
           />
           <ColorCard
             color="white"
             background="#DAC191"
-            text="Total Investment"
+            text="Average Investment"
             image={CoinIcon}
-            amount={"Text" || colorCardData.total_investment}
+            amount={colorCardData?.averageInvestment || "0"}
             onAmountChange={(amount) =>
-              handleAmountChange("total_investment", amount)
+              handleAmountChange("averageInvestment", amount)
             }
-            field={field}
+            field={"averageInvestment"}
             colorCardData={colorCardData}
+            isInvestor={true}
           />
           <ColorCard
             color="white"
             background="#DCDCDC"
-            text="No.of Investers"
+            text="No.of Investment"
             image={CoinIcon}
-            amount={"Text" || colorCardData.no_of_investers}
+            amount={colorCardData?.no_of_investments || "0"}
             onAmountChange={(amount) =>
-              handleAmountChange("no_of_investers", amount)
+              handleAmountChange("no_of_investments", amount)
             }
-            field={field}
+            field={"no_of_investments"}
             colorCardData={colorCardData}
+            isInvestor={true}
           />
           <ColorCard
             color="white"
             background="#2B2B2B"
-            text="Fund ask"
+            text="Minimum Tickets Size"
             image={CoinIcon}
-            amount={"Text" || colorCardData.fund_ask}
-            onAmountChange={(amount) => handleAmountChange("fund_ask", amount)}
-            field={field}
+            amount={colorCardData?.minimumTicketsSize || "0"}
+            onAmountChange={(amount) => handleAmountChange("minimumTicketsSize", amount)}
+            field={"minimumTicketsSize"}
             colorCardData={colorCardData}
+            isInvestor={true}
           />
           <ColorCard
             color="white"
             background="#FF7373"
-            text="Valuation"
+            text="Maximum Tickets Size"
             image={CoinIcon}
-            amount={"Text" || colorCardData.valuation}
-            onAmountChange={(amount) => handleAmountChange("valuation", amount)}
-            field={field}
+            amount={colorCardData?.maximumTicketsSize || "0"}
+            onAmountChange={(amount) => handleAmountChange("maximumTicketsSize", amount)}
+            field={"maximumTicketsSize"}
             colorCardData={colorCardData}
+            isInvestor={true}
           />
           <ColorCard
             color="white"
             background="#9198DA"
-            text="Raised funds"
+            text="Seed Round"
             image={CoinIcon}
-            amount={"Text" || colorCardData.raised_funds}
+            amount={colorCardData?.seedRound || "0"}
             onAmountChange={(amount) =>
-              handleAmountChange("raised_funds", amount)
+              handleAmountChange("seedRound", amount)
             }
-            field={field}
+            field={"seedRound"}
             colorCardData={colorCardData}
+            isInvestor={true}
           />
         </div>
       </div>

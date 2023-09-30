@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   userFive,
   userOne,
@@ -6,41 +7,47 @@ import {
 import PersonCard from "../../shared-components/person-card/PersonCard";
 import "../feedback/Feedback.scss";
 
-export default function FoundingTeam() {
-  let people = [];
-  // Make fetch request and store data in people array.
-  // ...
-  // Mocking people data
-  people = [
-    {
-      id: 1,
-      image: userOne,
-      name: "Abhishek Raj",
-      age: 28,
-      designation: "CEO & Founder",
-    },
-    {
-      id: 2,
-      image: userSix,
-      name: "Rahul",
-      age: 28,
-      designation: "Manager",
-    },
-    {
-      id: 3,
-      image: userFive,
-      name: "Leo",
-      age: 28,
-      designation: "Web-Designer",
-    },
-    {
-      id: 4,
-      image: userFive,
-      name: "Leo",
-      age: 28,
-      designation: "Web-Designer",
-    },
-  ];
+export default function FoundingTeam({ isOnelink = false, team }) {
+  const [people, setPeople] = useState([]);
+
+  useEffect(() => {
+    if (isOnelink) {
+      setPeople(team);
+    } else {
+      const defaultPeople = [
+        {
+          id: 1,
+          image: userOne,
+          name: "Abhishek Raj",
+          age: 28,
+          designation: "CEO & Founder",
+        },
+        {
+          id: 2,
+          image: userSix,
+          name: "Rahul",
+          age: 28,
+          designation: "Manager",
+        },
+        {
+          id: 3,
+          image: userFive,
+          name: "Leo",
+          age: 28,
+          designation: "Web-Designer",
+        },
+        {
+          id: 4,
+          image: userFive,
+          name: "Leo",
+          age: 28,
+          designation: "Web-Designer",
+        },
+      ];
+
+      setPeople(defaultPeople);
+    }
+  }, [isOnelink, team]);
 
   return (
     <div className="founding__team d-flex flex-column gap-4">
