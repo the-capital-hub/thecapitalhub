@@ -126,7 +126,7 @@ const FeaturedPostCard = ({
               {image && (
                 <span className="d-flex">
                   <img
-                    className="mx-auto"
+                    className="mx-auto rounded-4 my-2 "
                     style={{ maxHeight: "350px", objectFit: "contain" }}
                     width={"100%"}
                     src={image}
@@ -137,7 +137,7 @@ const FeaturedPostCard = ({
               {video && (
                 <span className="d-flex">
                   <video
-                    className="mx-auto"
+                    className="mx-auto my-2"
                     width={"100%"}
                     style={{ maxWidth: "500px" }}
                     controls

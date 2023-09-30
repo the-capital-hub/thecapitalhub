@@ -1,7 +1,8 @@
 import CardBody from "./CardBody";
 import CardHead from "./CardHead";
 import "./PersonCard.scss";
-import { AddUser } from "../../../../../Images/Investor/CompanyProfile";
+// import { AddUser } from "../../../../../Images/Investor/CompanyProfile";
+import { AddUserIcon } from "../../../SvgIcons";
 
 export default function PersonCard({ person, isFeedBack }) {
   let personHead = [];
@@ -33,7 +34,8 @@ export default function PersonCard({ person, isFeedBack }) {
               <h6 className="fw-medium">{person.designation}</h6>
             </div>
             <button className="btn-capital-small connectNow d-flex align-items-center gap-1 ms-auto">
-              <img src={AddUser} alt="user icon" />
+              {/* <img src={AddUser} alt="user icon" /> */}
+              <AddUserIcon />
               <p>Connect Now</p>
             </button>
           </>

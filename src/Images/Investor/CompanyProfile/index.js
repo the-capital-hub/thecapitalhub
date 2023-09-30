@@ -23,6 +23,8 @@ import Linkedin from "./socials/Linkedin.svg";
 import PlayStore from "./socials/PlayStore.svg";
 import Twitter from "./socials/Twitter.svg";
 import AddUser from "./Add-User.svg";
+import Instagram from "./socials/Instagram.svg";
+import Website from "./socials/Website.svg";
 
 export {
   About1,
@@ -50,4 +52,6 @@ export {
   PlayStore,
   Twitter,
   AddUser,
+  Instagram,
+  Website,
 };
