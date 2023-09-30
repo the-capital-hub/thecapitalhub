@@ -60,6 +60,7 @@ const ColorCard = ({
               value={editedAmount}
               onChange={handleAmountChange}
               onBlur={handleBlur}
+              autoFocus
             />
           ) : (
             <span

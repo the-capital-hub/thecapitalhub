@@ -38,7 +38,8 @@ export default function CardHead(props) {
             />
           </div>
         ) : (
-          <p className="age">{age} Years</p>
+          ""
+          // <p className="age">{age} Years</p>
         )}
       </div>
     </div>

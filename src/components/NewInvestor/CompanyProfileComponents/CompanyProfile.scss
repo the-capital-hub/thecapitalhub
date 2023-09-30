@@ -40,8 +40,9 @@ $color-capital-dark: rgb(96, 110, 48);
 
   &:hover,
   &:focus {
-    background-color: $color-capital-dark;
-    color: white;
+    background-color: $color-capital !important;
+    color: black !important;
+    transform: scale(0.95) !important;
   }
 }
 
@@ -66,8 +67,9 @@ $color-capital-dark: rgb(96, 110, 48);
 
   &:hover,
   &:focus {
-    background-color: $color-capital-dark;
-    color: white;
+    background-color: $color-capital !important;
+    color: black !important;
+    transform: scale(0.95) !important;
   }
 }
 
@@ -91,8 +93,9 @@ $color-capital-dark: rgb(96, 110, 48);
 
   &:hover,
   &:focus {
-    background-color: $color-capital-dark;
-    color: white;
+    background-color: $color-capital !important;
+    color: black !important;
+    transform: scale(0.95) !important;
   }
 }
 
