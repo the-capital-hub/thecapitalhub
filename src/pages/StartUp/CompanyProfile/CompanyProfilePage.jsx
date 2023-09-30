@@ -11,6 +11,7 @@ import RaghuImage from "../../../Images/aboutUs/Raghu.jpeg";
 import CoinIcon from "../../../Images/investorView/Rectangle.png";
 import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
 import { getStartupByFounderId, postStartUpData } from "../../../Service/user";
+import CoreTeam from "../../../components/Investor/CompanyProfilePageComponents/CoreTeam/CoreTeam";
 
 export default function CompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -20,12 +21,12 @@ export default function CompanyProfilePage() {
   const [companyData, setCompanyData] = useState([]);
   const [isBioEditable, setIsBioEditable] = useState(false);
   const [companyDescription, setCompanyDescription] = useState(null);
-  
+
   useEffect(() => {
     if (!loggedInUser?.investor) {
       getStartupByFounderId(loggedInUser._id).then(({ data }) => {
         setCompanyData(data);
-        setCompanyDescription(data.description)
+        setCompanyDescription(data.description);
         setColorCardData({
           last_round_investment: data.colorCard.last_round_investment,
           total_investment: data.colorCard.total_investment,
@@ -57,17 +58,16 @@ export default function CompanyProfilePage() {
     const companyData = {
       description: companyDescription,
       founderId: loggedInUser._id,
-    }
+    };
     try {
       const response = await postStartUpData(companyData);
-      if(response.status === 200) {
+      if (response.status === 200) {
         setIsBioEditable(false);
       }
     } catch (error) {
       console.log(error);
     }
-  }
-
+  };
 
   return (
     <div className="companyProfilePage__wrapper">
@@ -85,14 +85,17 @@ export default function CompanyProfilePage() {
             <h2>Company Description</h2>
 
             <span className="ms-auto">
-              <button className="edit__btn" onClick={() => setIsBioEditable(!isBioEditable)}>
+              <button
+                className="edit__btn"
+                onClick={() => setIsBioEditable(!isBioEditable)}
+              >
                 {isBioEditable ? "Cancel" : "Edit"}
                 <CiEdit />
               </button>
               {isBioEditable && (
                 <button
                   className="ms-2 edit__btn"
-                  onClick={e => submitBioHandler(e)}
+                  onClick={(e) => submitBioHandler(e)}
                 >
                   Save <CiSaveUp2 />
                 </button>
@@ -123,68 +126,8 @@ export default function CompanyProfilePage() {
         </div>
 
         {/* Core Team */}
-        <div className="core__team bg-white rounded-5 p-5 d-flex flex-column gap-4">
-          <div className="d-flex align-items-center justify-content-between">
-            <h2>Core Team</h2>
-            <Link className="see__more align-self-end">See more</Link>
-          </div>
-          <div className="team__cards__container d-flex align-items-center gap-5 flex-wrap">
-            <div
-              className="p-4 d-flex flex-column align-items-center gap-3 rounded-5"
-              style={{ backgroundColor: "#EDEDED" }}
-            >
-              <img
-                src={RaghuImage}
-                alt={"name"}
-                style={{ width: "50px", height: "50px" }}
-                className="rounded-circle"
-              />
-              <h5>Raghu</h5>
-              <p>Web Developer</p>
-            </div>
-
-            <div
-              className="p-4 d-flex flex-column align-items-center gap-3 rounded-5"
-              style={{ backgroundColor: "#EDEDED" }}
-            >
-              <img
-                src={RaghuImage}
-                alt={"name"}
-                style={{ width: "50px", height: "50px" }}
-                className="rounded-circle"
-              />
-              <h5>Raghu</h5>
-              <p>Web Developer</p>
-            </div>
-
-            <div
-              className="p-4 d-flex flex-column  align-items-center gap-3 rounded-5"
-              style={{ backgroundColor: "#EDEDED" }}
-            >
-              <img
-                src={RaghuImage}
-                alt={"name"}
-                style={{ width: "50px", height: "50px" }}
-                className="rounded-circle"
-              />
-              <h5>Raghu</h5>
-              <p>Web Developer</p>
-            </div>
-
-            <div
-              className="p-4 d-flex flex-column  align-items-center gap-3 rounded-5"
-              style={{ backgroundColor: "#EDEDED" }}
-            >
-              <img
-                src={RaghuImage}
-                alt={"name"}
-                style={{ width: "50px", height: "50px" }}
-                className="rounded-circle"
-              />
-              <h5>Raghu</h5>
-              <p>Web Developer</p>
-            </div>
-          </div>
+        <div className="core__team bg-white rounded-5 p-5">
+          <CoreTeam />
         </div>
 
         {/* Milestones */}
