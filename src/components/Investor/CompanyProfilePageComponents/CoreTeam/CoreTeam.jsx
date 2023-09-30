@@ -13,11 +13,10 @@ import {
 import AddTeamMemberModal from "./AddTeamMemberModal";
 
 export default function CoreTeam({ companyData, setCompanyData }) {
-
   const [team, setTeam] = useState(companyData?.team);
   useEffect(() => {
     setTeam(companyData?.team);
-  }, [companyData])
+  }, [companyData]);
 
   return (
     <div className=" d-flex flex-column gap-4">
@@ -29,7 +28,7 @@ export default function CoreTeam({ companyData, setCompanyData }) {
         {team && team.length > 0 ? (
           team.map((member, index) => (
             <CoreTeamCard
-              key={index} 
+              key={index}
               image={member.image}
               name={member.name}
               designation={member.designation}
@@ -39,7 +38,7 @@ export default function CoreTeam({ companyData, setCompanyData }) {
           <p>Click Add to add team members</p>
         )}
       </div>
-
+      {/* If authorised show "Add" button that triggers add modal */}
       {
         <div className="align-self-end">
           <ModalBsLauncher
@@ -58,7 +57,10 @@ export default function CoreTeam({ companyData, setCompanyData }) {
             className={"orange__heading"}
           />
           <ModalBSBody>
-            <AddTeamMemberModal setCompanyData={setCompanyData} companyData={companyData} />
+            <AddTeamMemberModal
+              setCompanyData={setCompanyData}
+              companyData={companyData}
+            />
           </ModalBSBody>
         </ModalBSContainer>
       </div>

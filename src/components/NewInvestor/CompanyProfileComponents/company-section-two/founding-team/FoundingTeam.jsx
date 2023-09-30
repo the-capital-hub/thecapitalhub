@@ -49,7 +49,6 @@ export default function FoundingTeam({ isOnelink = false, team }) {
     }
   }, [isOnelink, team]);
 
-
   return (
     <div className="founding__team d-flex flex-column gap-4">
       <h6 className="div__heading">Founding Team</h6>

@@ -5,7 +5,12 @@ export default function CardHead(props) {
 
   return (
     <div className="card__head d-flex gap-2">
-      <img src={image} alt="Profile picture" />
+      <img
+        src={image}
+        alt="Profile picture"
+        style={{ width: "50px", height: "50px" }}
+        className="rounded-circle"
+      />
       <div className="">
         <h4 className="card__head__name">{name}</h4>
         {rating ? (

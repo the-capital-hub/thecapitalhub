@@ -333,7 +333,7 @@ function Company() {
     // </div>
 
     // Newer version of company profile
-    <div className="company__profile__container m-3 ps-3 border-start">
+    <div className="company__profile__container m-3 mt-5 mt-xl-3 ps-3 border-start">
       {onePager.length !== 0 ? (
         <CompanyProfile isOnelink={true} companyData={onePager} />
       ) : (
