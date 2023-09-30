@@ -25,13 +25,10 @@ const investorSchema = new Schema(
     startedAtDate: {
       type: String,
     },
-    NoOfEmployees: {
+    noOfEmployees: {
       type: Number,
     },
     vision: {
-      type: String,
-    },
-    websiteUrl: {
       type: String,
     },
     mission: {
@@ -83,6 +80,20 @@ const investorSchema = new Schema(
     ],
     investmentPhilosophy: {
       type: String,
+    },
+    socialLinks: {
+      website: String,
+      linkedin: String,
+      twitter: String,
+      instagram: String,
+    },
+    colorCard: {
+      averageInvestment: String,
+      total_investment: String,
+      no_of_investments: String,
+      minimumTicketsSize: String,
+      maximumTicketsSize: String,
+      seedRound: String,
     },
   },
   {
