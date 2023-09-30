@@ -15,12 +15,12 @@ const Documentation = () => {
     <div className="documentation">
       <h1>Documentation</h1>
       <div className="docscontainer">
-        <Card
+        {/* <Card
           text={"Financials"}
           onClicked={() =>
             navigate(`/onelink/${username}/documentation/financials`)
           }
-        />
+        /> */}
         <Card
           text={"Pitch Deck"}
           onClicked={() =>
@@ -28,15 +28,15 @@ const Documentation = () => {
           }
         />
         <Card
-          text={"Legal"}
+          text={"Legal and compliance"}
           onClicked={() => navigate(`/onelink/${username}/documentation/legal`)}
         />
-        <Card
+        {/* <Card
           text={"Update"}
           onClicked={() =>
             navigate(`/onelink/${username}/documentation/update`)
           }
-        />
+        /> */}
         <Card
           text={"KYC Details"}
           onClicked={() =>

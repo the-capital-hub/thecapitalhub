@@ -6,22 +6,39 @@ import { useSelector } from "react-redux";
 import MileStoneCard from "../../../components/Investor/InvestorGlobalCards/MilestoneCard/MileStoneCard";
 import "./Profile.scss";
 import { useParams } from "react-router-dom";
-import { getUserById } from "../../../Service/user";
+import { getUserById, getStartupByFounderId } from "../../../Service/user";
 import { useState, useEffect } from "react";
 import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
 import CoinIcon from "../../../Images/investorView/Rectangle.png";
+import {
+  About1,
+  About2,
+  About3,
+  About4,
+  Revenue1,
+  Revenue2,
+  Revenue3,
+} from "../../../Images/Investor/CompanyProfile";
 
 function Profile() {
   const { username } = useParams();
   const [user, setUser] = useState([]);
+  const [colorCard, setColorCard] = useState([]);
+
   useEffect(() => {
     document.title = "Profile - One Link | The Capital Hub";
     getUserById(username)
       .then(({ data }) => {
         setUser(data);
+        getStartupByFounderId(data._id)
+        .then(({ data }) => {
+          setColorCard(data.colorCard);
+        })
+        .catch(() => setColorCard([]));
       })
       .catch(() => setUser([]));
   }, [username]);
+
   return (
     <div className="container-fluid profile_main_container">
       <div className="row mt-2">
@@ -235,7 +252,7 @@ function Profile() {
                   </div>
                 </div>
                 <div className="col-12 mt-2">
-                  <MileStoneCard userId={user._id}/>
+                  <MileStoneCard userId={user._id} />
                 </div>
               </div>
             </div>
@@ -250,43 +267,49 @@ function Profile() {
                   color="white"
                   background="#BB98FF"
                   text="Last round investment"
-                  image={CoinIcon}
-                  amount={"500 M"}
+                  image={About1}
+                  amount={colorCard.last_round_investment}
+                  isOneLink={true}
                 />
                 <ColorCard
                   color="white"
                   background="#DAC191"
                   text="Total Investment"
-                  image={CoinIcon}
-                  amount={"500 M"}
+                  image={About2}
+                  amount={colorCard.total_investment}
+                  isOneLink={true}
                 />
                 <ColorCard
                   color="white"
                   background="#DCDCDC"
                   text="No.of Investers"
-                  image={CoinIcon}
-                  amount={"500 M"}
+                  image={About3}
+                  amount={colorCard.no_of_investers}
+                  isOneLink={true}
                 />
                 <ColorCard
                   color="white"
                   background="#2B2B2B"
                   text="Fund ask"
-                  image={CoinIcon}
-                  amount={"500 M"}
+                  image={About4}
+                  amount={colorCard.fund_ask}
+                  isOneLink={true}
                 />
                 <ColorCard
                   color="white"
                   background="#FF7373"
                   text="Valuation"
-                  image={CoinIcon}
-                  amount={"500 M"}
+                  image={Revenue1}
+                  amount={colorCard.valuation}
+                  isOneLink={true}
                 />
                 <ColorCard
                   color="white"
                   background="#9198DA"
                   text="Raised funds"
-                  image={CoinIcon}
-                  amount={"500 M"}
+                  image={Revenue2}
+                  amount={colorCard.raised_funds}
+                  isOneLink={true}
                 />
               </div>
             </div>

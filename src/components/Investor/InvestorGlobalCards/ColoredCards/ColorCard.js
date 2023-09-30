@@ -14,7 +14,8 @@ const ColorCard = ({
   colorCardData,
   className,
   noRupee,
-  isInvestor = false
+  isInvestor = false,
+  isOneLink = false
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -83,7 +84,8 @@ const ColorCard = ({
               onClick={onAmountChange ? handleEditClick : () => { }}
             >
               {!noRupee && "₹"} {editedAmount}{" "}
-              {
+              
+              {!isOneLink && 
                 <label htmlFor="edit" className="edit-tip">
                   Click to edit
                 </label>
