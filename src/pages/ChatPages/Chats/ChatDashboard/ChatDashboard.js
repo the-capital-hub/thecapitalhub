@@ -34,6 +34,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
   const [user, setUser] = useState(null);
   const [sendText, setSendText] = useState("");
   const chatMessagesContainerRef = useRef(null);
+  const [isSent, setIsSent] = useState(false);
 
   useEffect(() => {
     if (chatMessagesContainerRef.current) {
@@ -68,7 +69,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
       .catch((error) => {
         console.error("Error-->", error);
       });
-  }, [chatId, cleared]);
+  }, [chatId, cleared, isSent]);
 
   useEffect(() => {
     getUserAndStartUpByUserIdAPI(userId)
@@ -159,13 +160,26 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
 
     addMessage(message)
       .then(({ data }) => {
-        setMessages([...messages, data]);
+        // setMessages([...messages, data]);
+        setIsSent(!isSent);
         console.log(data);
       })
       .catch((error) => {
         console.error("Error-->", error);
       });
-    const recieverId = userId;
+    message.senderId = {
+      _id: loggedInUser._id,
+      firstName: loggedInUser.fileName,
+      lastName: loggedInUser.lastName,
+      profilePicture: loggedInUser.profilePicture,
+    }
+    const recieverId = [userId];
+    // recieverId = [{
+    //   _id: user?._id,
+    //   firstName: user.firstName,
+    //   lastName: user.lastName,
+    //   profilePicture: user.profilePicture
+    // }];
     const createdAt = new Date().toISOString();
     setSendMessage({ ...message, recieverId, createdAt });
     setSendText("");
@@ -226,7 +240,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
         setSendText(`https://thecapitalhub.in/onelink/${data.oneLink}`);
       })
       .catch((error) => console.log(error));
-  };  
+  };
 
   const removeSelectedImage = () => {
     setSelectedImage(null);
@@ -254,7 +268,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
             <h6 className="date_header">{group.date}</h6>
             <div className="chat_messages">
               {group.messages.map((message) =>
-                message.senderId === loggedInUser._id ? (
+                message.senderId._id === loggedInUser._id ? (
                   <section className="my_message_main" key={message._id}>
                     <div className="my_messages">
                       <div className="time_name_image">

@@ -151,13 +151,13 @@ const InvestorManageAccount = () => {
                 </div>
                 {/* Footer */}
                 <div className="footer">
-                  <button className="btn-delete">Delete account</button>
+                  <button className="investor-btn-delete">Delete account</button>
                 </div>
               </div>
             </section>
 
             <section className="col card empty_box">
-              <button className="btn logout-btn" onClick={setShowLogoutPopup}>
+              <button className="btn investor-logout-btn" onClick={setShowLogoutPopup}>
                 Log out
               </button>
               {showLogoutPopup && (

@@ -6,12 +6,11 @@
   height: 10rem;
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 100%;
   justify-content: center;
 
   .back_img {
     margin-left: 10px;
-
   }
 
   .chat_title {
@@ -22,7 +21,6 @@
     font-weight: 600;
     line-height: normal;
     margin-left: 10px;
-
   }
   .search_chat {
     border-radius: 20px;
@@ -33,15 +31,13 @@
     border: none;
   }
 
-  .inputs{
+  .inputs {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
   }
 }
-
-
 
 .search-results-wrapper {
   position: absolute;

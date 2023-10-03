@@ -59,21 +59,22 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   };
 
   function handleMyCommunityClick() {
-    navigate("/chats");
+    navigate("/chats?isCommunityOpen=true");
   }
 
   return (
     <div
-      className={`container sidebar_container ${
-        sidebarCollapsed ? "collapsed" : ""
-      }`}
+      className={`container sidebar_container ${sidebarCollapsed ? "collapsed" : ""
+        }`}
     >
       <div id="header">
         <ProSidebar collapsed={sidebarCollapsed}>
           <SidebarHeader>
             <div className="logotext">
               {sidebarCollapsed ? (
-                <Link onClick={() => setSidebarCollapsed(true)} to={"/profile"}>
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)} 
+                  to={"/profile"}>
                   {" "}
                   <img
                     className="rounded-circle"
@@ -85,7 +86,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
               ) : (
                 <>
                   <Link
-                    onClick={() => setSidebarCollapsed(true)}
+                    // onClick={() => setSidebarCollapsed(true)}
                     to={"/profile"}
                   >
                     {" "}
@@ -118,7 +119,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className=""
               >
                 <Link
-                  onClick={() => setSidebarCollapsed(true)}
+                  // onClick={() => setSidebarCollapsed(true)}
                   to="home?showPopup=true"
                 >
                   {sidebarCollapsed ? (
@@ -141,7 +142,9 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 active={location.pathname.includes("/home")}
                 className="active-item"
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="/home">
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)} 
+                  to="/home">
                   <img src={HomeIcon} alt="image" />
                   {!sidebarCollapsed && <span>Home</span>}
                 </Link>
@@ -152,61 +155,40 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link
-                  onClick={() => setSidebarCollapsed(true)}
+                  // onClick={() => setSidebarCollapsed(true)}
                   to="/company-profile"
                 >
                   <img src={companyProfileIcon} alt="image" />
-                  {!sidebarCollapsed && <span>Company Profile</span>}
-                </Link>
-              </MenuItem>
-
-              <MenuItem
-                active={location.pathname.includes("/documentation")}
-                className="active-item"
-              >
-                <Link
-                  onClick={() => setSidebarCollapsed(true)}
-                  to="/documentation"
-                >
-                  <img src={BookIcon} alt="image" width="17px" height="17px" />
-                  {!sidebarCollapsed && <span>Documentation</span>}
-                </Link>
-              </MenuItem>
-              <MenuItem
-                active={location.pathname.includes("/savePost")}
-                className="active-item"
-              >
-                <Link onClick={() => setSidebarCollapsed(true)} to="/savePost">
-                  <img src={SaveIcon} alt="image" width="17px" height="17px" />
-                  {!sidebarCollapsed && <span>Saved posts</span>}
+                  {!sidebarCollapsed && <span>Company</span>}
                 </Link>
               </MenuItem>
               <MenuItem
                 active={location.pathname.includes("/onelink")}
                 className="active-item"
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="/onelink">
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)} 
+                  to="/onelink">
                   {/* <img src={OnelinkIcon} alt="image" width="17px" height="17px" /> */}
                   <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} />
                   {!sidebarCollapsed && <span>One link</span>}
                 </Link>
               </MenuItem>
-
-              {/* Communities */}
               <MenuItem
                 active={location.pathname.includes("/chats")}
                 className="active-item"
               >
                 <div className="sidebar__community d-flex gap-4 ">
-                  <div onClick={() => setSidebarCollapsed(true)}>
+                  <div
+                  // onClick={() => setSidebarCollapsed(true)}
+                  >
                     <CommunitiesIcon
                       width="17px"
                       height="17px"
-                      color={`${
-                        isCommunityDetailOpen
-                          ? "#fd5901"
-                          : "rgba(97, 97, 97, 1)"
-                      }`}
+                      color={`${isCommunityDetailOpen
+                        ? "#fd5901"
+                        : "rgba(97, 97, 97, 1)"
+                        }`}
                     />
                   </div>
                   {!sidebarCollapsed && (
@@ -241,25 +223,60 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                       </div>
                     </details>
                   )}
-
-                  {/* Modal for creating new Community */}
-                  <ModalBSContainer isStatic={false} id="AddNewCommunity">
-                    <ModalBSHeader
-                      title={"Create a Community"}
-                      className={"orange__heading"}
-                    />
-                    <ModalBSBody>
-                      <NewCommunityModal />
-                    </ModalBSBody>
-                  </ModalBSContainer>
                 </div>
               </MenuItem>
+              <MenuItem
+                active={location.pathname.includes("/documentation")}
+                className="active-item"
+              >
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)}
+                  to="/documentation"
+                >
+                  <img src={BookIcon} alt="image" width="17px" height="17px" />
+                  {!sidebarCollapsed && <span>Documentation</span>}
+                </Link>
+              </MenuItem>
+              <MenuItem
+                active={location.pathname.includes("/savePost")}
+                className="active-item"
+              >
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)} 
+                  to="/savePost">
+                  <img src={SaveIcon} alt="image" width="17px" height="17px" />
+                  {!sidebarCollapsed && <span>Saved posts</span>}
+                </Link>
+              </MenuItem>
+
+
+              <MenuItem
+                active={location.pathname.includes("/connection")}
+                className="active-item"
+              >
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)}
+                  to="/connection"
+                >
+                  <img
+                    src={connectionsIcon}
+                    alt="image"
+                    width="17px"
+                    height="17px"
+                  />
+                  {!sidebarCollapsed && <span>Connnections</span>}
+                </Link>
+              </MenuItem>
+
 
               <MenuItem
                 active={location.pathname.includes("/team")}
                 className="active-item"
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="/team">
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)} 
+                  to="/team"
+                >
                   <img src={GroupIcon} alt="image" width="17px" height="17px" />
                   {!sidebarCollapsed && <span>Team</span>}
                 </Link>
@@ -268,7 +285,10 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 active={location.pathname.includes("/customers")}
                 className="active-item"
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="/customers">
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)} 
+                  to="/customers"
+                >
                   <img src={Setting} alt="image" width="17px" height="17px" />
                   {!sidebarCollapsed && <span>Customers</span>}
                 </Link>
@@ -277,7 +297,10 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 active={location.pathname.includes("/investors")}
                 className="active-item"
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="/investors">
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)} 
+                  to="/investors"
+                >
                   <img
                     src={InvestorIcon}
                     alt="image"
@@ -291,36 +314,26 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 active={location.pathname.includes("/help")}
                 className="active-item"
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="/help">
+                <Link
+                  //  onClick={() => setSidebarCollapsed(true)} 
+                  to="/help"
+                >
                   <img src={Setting} alt="image" width="17px" height="17px" />
                   {!sidebarCollapsed && <span>Help</span>}
                 </Link>
               </MenuItem>
 
-              <MenuItem
-                active={location.pathname.includes("/connection")}
-                className="active-item"
-              >
-                <Link
-                  onClick={() => setSidebarCollapsed(true)}
-                  to="/connection"
-                >
-                  <img
-                    src={connectionsIcon}
-                    alt="image"
-                    width="17px"
-                    height="17px"
-                  />
-                  {!sidebarCollapsed && <span>Connnections</span>}
-                </Link>
-              </MenuItem>
+
 
               <hr className="hr-above-support" />
               <MenuItem
                 active={location.pathname.includes("/support")}
                 className="active-item"
               >
-                <Link onClick={() => setSidebarCollapsed(true)} to="/support">
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)} 
+                  to="/support"
+                >
                   <img src={Support} alt="image" width="17px" height="17px" />
                   {!sidebarCollapsed && <span>Support</span>}
                 </Link>

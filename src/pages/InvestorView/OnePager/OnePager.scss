@@ -1,139 +1,146 @@
 .onePager {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  margin-top: 15px;
+  overflow-x: hidden;
+  border-radius: 25px;
+  gap: 30px;
+  align-items: start;
+  background-color: #fff;
+  padding: 10px 30px;
+  .currency {
     display: flex;
-    flex-direction: column;
-    margin-left: 20px;
-    margin-top: 15px;
-    overflow-x: hidden;
-    border-radius: 25px;
-    gap: 30px;
+    gap: 10px;
+    span {
+      padding: 5px 15px;
+      font-size: 20px;
+      background: #eaeef2;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .highlighted {
+      background-color: #d3f36b;
+    }
+  }
+
+  .companyDetails {
+    width: 100%;
+    margin-top: 30px;
+  }
+
+  .cards {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+
+  .projections {
+    margin-top: 30px;
+  }
+
+  .fundingAndContact {
+    display: flex;
     align-items: start;
-    background-color: #fff;
-    padding: 10px 30px;
-    .currency {
+    justify-content: space-evenly;
+    width: 100%;
+    flex-wrap: wrap;
+    .left {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+      padding: 50px;
+      .pfp {
+        width: 40%;
+        padding: 10px;
+        border-radius: 25px;
+      }
+      .box {
+        border: 1px solid lightgray;
+        padding: 50px;
         display: flex;
-        gap: 10px;
-        span {
-            padding: 5px 15px;
-            font-size: 20px;
-            background: #eaeef2;
-            &:hover {
-                cursor: pointer;
-            }
-        }
-        .highlighted {
-            background-color: #d3f36b;
-        }
-    }
-
-    .companyDetails {
-        width: 100%;
-        margin-top: 30px;
-    }
-
-    .cards {
-        display: flex;
-        gap: 5px;
-        flex-wrap: wrap;
-    }
-
-    .projections {
-        margin-top: 30px;
-    }
-
-    .fundingAndContact {
-        display: flex;
-        align-items: start;
-        justify-content: space-evenly;
-        width: 100%;
-        flex-wrap: wrap;
-        .left {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            text-align: center;
-            padding: 50px;
-            .pfp {
-                width: 40%;
-                padding: 10px;
-                border-radius: 25px;
-            }
-            .box {
-                border: 1px solid lightgray;
-                padding: 50px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                hr {
-                    width: 300px;
-                }
-                h1 {
-                    font-size: 20px;
-                }
-            }
-        }
-        .right {
-            .investNow {
-                width: 400px;
-                margin-left: 0px;
-                margin-top: -100px;
-                .inputs {
-                    padding: 50px 10px;
-                    min-width: 300px;
-                    border: 1px solid lightgray;
-                    button {
-                        display: none;
-                    }
-                }
-            }
-        }
-    }
-    .buttons {
-        display: flex;
-        gap: 10px;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
-        width: 100%;
-        button {
-            background: #d3f36b;
-            border: none;
-            border-radius: 25px;
-            padding: 10px 20px;
+        hr {
+          width: 300px;
         }
-        button:nth-child(1) {
-            background-color: white;
-            border: 1px solid lightgray;
+        h1 {
+          font-size: 20px;
         }
+      }
     }
+    .right {
+      .investNow {
+        width: 400px;
+        margin-left: 0px;
+        margin-top: -100px;
+        .inputs {
+          padding: 50px 10px;
+          min-width: 300px;
+          border: 1px solid lightgray;
+          button {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  .buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    button {
+      background: #d3f36b;
+      border: none;
+      border-radius: 25px;
+      padding: 10px 20px;
+    }
+    button:nth-child(1) {
+      background-color: white;
+      border: 1px solid lightgray;
+    }
+  }
+
+  .download-button {
+    background: #d3f36b;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+  }
 }
 
 @media (max-width: 820px) {
-    .onePager {
-        align-items: center;
-        .companyDetails {
-            display: flex;
-            justify-content: center;
-        }
-        .cards {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .projections {
-            width: 100%;
-            overflow-x: scroll;
-        }
+  .onePager {
+    align-items: center;
+    .companyDetails {
+      display: flex;
+      justify-content: center;
     }
+    .cards {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .projections {
+      width: 100%;
+      overflow-x: scroll;
+    }
+  }
 }
 
 @media (max-width: 426px) {
-    .onePager {
-        margin-left: -10px;
-        margin-top: 60px;
-    }
+  .onePager {
+    margin-left: -10px;
+    margin-top: 60px;
+  }
 }
 
 @media (max-width: 1024px) {
-    .onePager {
-        margin-top: 60px;
-    }
+  .onePager {
+    margin-top: 60px;
+  }
 }

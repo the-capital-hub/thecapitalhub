@@ -26,13 +26,12 @@ const OnePager = () => {
   const [onePager, setOnePager] = useState([]);
   const [imageData, setImageData] = useState(null);
 
-
   useEffect(() => {
     document.title = "OnePager - One Link | The Capital Hub";
     getOnePager(username)
       .then(({ data }) => {
         setOnePager(data);
-        console.log(data)
+        console.log(data);
       })
       .catch(() => setOnePager([]));
   }, [username]);
@@ -98,7 +97,7 @@ const OnePager = () => {
       useCORS: false,
     }).then((canvas) => {
       const contentDataURL = canvas.toDataURL("image/png");
-      console.log(contentDataURL)
+      console.log(contentDataURL);
       const imgWidth = 210;
       const pageHeight = 295;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
@@ -124,7 +123,6 @@ const OnePager = () => {
     });
   };
 
-
   useEffect(() => {
     // Fetch the image data from the URL
     fetch(onePager.logo)
@@ -139,12 +137,15 @@ const OnePager = () => {
       });
   }, [onePager.logo]);
 
-
-
-
   return (
     <div className="onePager">
-      <h1>One Pager</h1>
+      <div className="d-flex justify-content-between align-items-center w-100">
+        <h1>One Pager</h1>
+        <button className="download-button me-5" onClick={handleDownloadPDF}>
+          Download
+        </button>
+      </div>
+
       {/* <div className="currency">
         <span
           className={rupeeHighlight && "highlighted"}
@@ -241,7 +242,7 @@ const OnePager = () => {
 
       <div className="buttons">
         <button onClick={handlePreviewPDF}>Preview</button>
-        <button onClick={handleDownloadPDF}>Download</button>
+        {/* <button onClick={handleDownloadPDF}>Download</button> */}
       </div>
     </div>
   );

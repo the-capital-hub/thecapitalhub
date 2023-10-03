@@ -79,3 +79,27 @@
     border-radius: 50%;
   }
 }
+
+.added-members {
+  margin-top: 10px;
+}
+
+.added-members-list {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.added-members-list strong {
+  font-weight: bold;
+}
+
+.added-members-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.added-members-list li {
+  margin: 5px 0;
+  font-size: 14px;
+}

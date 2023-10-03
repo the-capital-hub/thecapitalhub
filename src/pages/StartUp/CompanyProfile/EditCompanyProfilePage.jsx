@@ -116,14 +116,16 @@ export default function EditCompanyProfilePage() {
             <textarea
               value={companyDescription}
               name="bio"
+              rows={8}
               onChange={(e) => setCompanyDescription(e.target.value)}
+              className="p-2 rounded-3"
             />
           ) : (
             <p className="small_typo">
               {companyDescription || "Click on edit to add company description"}
             </p>
           )}
-          <Link className="see__more align-self-end">See more</Link>
+          {/* <Link className="see__more align-self-end">See more</Link> */}
         </div>
 
         {/* Core Team */}

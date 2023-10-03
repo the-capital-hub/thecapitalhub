@@ -16,19 +16,47 @@ export default function NewCommunityModal() {
   const [memberIds, setMemberIds] = useState([]);
   const [name, setName] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredConnections, setFilteredConnections] = useState([]);
+  const [previewImageUrl, setPreviewImageUrl] = useState("");
+  const [addedMembers, setAddedMembers] = useState([]);
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   useEffect(() => {
     getUserConnections(loggedInUser._id).then((res) => {
       setGetAllConnection(res.data);
+      setFilteredConnections(res.data);
     });
   }, []);
 
+  useEffect(() => {
+    console.log(searchQuery);
+    const filtered = getAllConnection.filter((connection) => {
+      const fullName = `${connection.firstName} ${connection.lastName}`;
+      return fullName.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+    setFilteredConnections(filtered);
+  }, [searchQuery, getAllConnection]);
+
+  //set members
   const handleButtonClick = (event, memberId) => {
     event.preventDefault();
-
-    setMemberIds([...memberIds, memberId, loggedInUser._id]);
+    if (memberIds.includes(memberId)) {
+      const updatedMemberIds = memberIds.filter((id) => id !== memberId);
+      setMemberIds(updatedMemberIds);
+      const updatedAddedMembers = addedMembers.filter(
+        (member) => member._id !== memberId
+      );
+      setAddedMembers(updatedAddedMembers);
+    } else {
+      setMemberIds([...memberIds, memberId, loggedInUser._id]);
+      const addedMember = getAllConnection.find(
+        (member) => member._id === memberId
+      );
+      setAddedMembers([...addedMembers, addedMember]);
+    }
   };
+
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
@@ -36,33 +64,34 @@ export default function NewCommunityModal() {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
+    const imageUrl = URL.createObjectURL(file);
+    setPreviewImageUrl(imageUrl);
   };
 
   function handleSubmit(event) {
-    alert("test")
     event.preventDefault();
 
     getBase64(selectedFile)
       .then((profileImg) => {
-    const data = {
-      profileImage: profileImg,
-      communityName: name,
-      adminId: loggedInUser?._id,
-      members: memberIds,
-    };
+        const data = {
+          profileImage: profileImg,
+          communityName: name,
+          adminId: loggedInUser?._id,
+          members: memberIds,
+        };
 
-    createCommunity(data)
-      .then((res) => {
-        console.log(res)
-        setGetAllConnection(res.data);
+        createCommunity(data)
+          .then((res) => {
+            console.log(res)
+            setGetAllConnection(res.data);
+          })
+          .catch((error) => {
+            console.error("Error creating community:", error);
+          });
       })
       .catch((error) => {
-        console.error("Error creating community:", error);
+        console.error("Error getting base64 image:", error);
       });
-    })
-    .catch((error) => {
-      console.error("Error getting base64 image:", error);
-    });
   }
 
   return (
@@ -78,12 +107,24 @@ export default function NewCommunityModal() {
           onChange={handleFileChange}
         />
         <label htmlFor="profilePicture" className="upload__label">
-          <BsFillCameraFill
-            style={{
-              fontSize: "1.5rem",
-              color: "rgba(253, 89, 1,1)",
-            }}
-          />
+
+          {previewImageUrl ? (
+            <img
+              src={previewImageUrl}
+              alt="Preview"
+              style={{
+                maxWidth: "100%",
+                maxHeight: "150px",
+              }}
+            />
+          ) : (
+            <BsFillCameraFill
+              style={{
+                fontSize: "1.5rem",
+                color: "rgba(253, 89, 1,1)",
+              }}
+            />
+          )}
         </label>
       </div>
 
@@ -100,6 +141,22 @@ export default function NewCommunityModal() {
         />
       </div>
 
+      {/* Display added members */}
+      <div className="added-members">
+        {addedMembers.length > 0 && (
+          <div className="added-members-list">
+            <strong>Added Members:</strong>
+            <ul>
+              {addedMembers.map((member) => (
+                <li key={member._id}>
+                  {member.firstName} {member.lastName}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
       {/* Contact search */}
       <div
         className="search__members d-flex align-items-center gap-2 p-2 rounded-2"
@@ -108,16 +165,21 @@ export default function NewCommunityModal() {
         <BsSearch />
         <input
           type="search"
-          name="myContacts"
-          id="myContacts"
-          placeholder="search your contacts..."
+          name="searchContacts"
+          id="searchContacts"
+          placeholder="Search your contacts..."
           className="modal__input border-0 p-1 w-100"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
 
       {/* Top contacts */}
       <div className="top__contacts p-2 d-flex flex-column gap-2 ">
-        {getAllConnection?.map((contact, index) => {
+        {filteredConnections?.map((contact, index) => {
+          const isAdded = addedMembers.some(
+            (member) => member._id === contact._id
+          );
           return (
             <div
               className="p-2 d-flex justify-content-between align-items-center rounded-2 bg-light"
@@ -130,16 +192,19 @@ export default function NewCommunityModal() {
               />
               <h6 className="m-0">
                 {" "}
-                {`${contact?.firstName ? contact?.firstName : "name"} ${
-                  contact?.lastName ? contact?.lastName : ""
-                }`}
+                {`${contact?.firstName ? contact?.firstName : "name"} ${contact?.lastName ? contact?.lastName : ""
+                  }`}
               </h6>
               {/* <button
                 className="orange_button"
                 onClick={() => handleButtonClick(contact?._id)}
               > */}
-              <button  className="orange_button" onClick={event => handleButtonClick(event, contact?._id)}>
-                Add
+              <button
+                className={`orange_button ${isAdded ? "added-button" : ""
+                  }`}
+                onClick={(event) => handleButtonClick(event, contact._id)}
+              >
+                {isAdded ? "Added" : "Add"}
               </button>
             </div>
           );
