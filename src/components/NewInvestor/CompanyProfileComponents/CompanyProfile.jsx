@@ -9,7 +9,11 @@ import KeyFocus from "./company-section-two/key-focus/KeyFocus";
 import CompanyAbout from "./company-section-one/company-about/CompanyAbout";
 import "./CompanyProfile.scss";
 
-export default function CompanyProfile({ isOnelink, companyData }) {
+export default function CompanyProfile({
+  isOnelink,
+  companyData,
+  startup = "false",
+}) {
   // Fetch Company Data here
   let name = "HCL";
   let logo = HCLImage;
@@ -61,14 +65,14 @@ export default function CompanyProfile({ isOnelink, companyData }) {
   // };
 
   return (
-    <div className="company__profile bg-white rounded-4 border p-lg-4 shadow-sm">
-      <div className="company__section__one border-bottom d-flex flex-column gap-4 py-5 ps-3">
+    <div className="company__profile bg-white shadow-sm" startup={startup}>
+      <div className="company__section__one border-bottom d-flex flex-column gap-4 py-5 px-5">
         <div className="company__info d-flex flex-column flex-xl-row gap-4 justify-content-between position-relative">
           <CompanyInfo
             name={name}
             logo={logo}
             location={location}
-            foundedYear={foundedIn}
+            foundedYear={new Date(foundedIn).getFullYear()}
           />
           <CompanyActions isOnelink={isOnelink} />
         </div>
@@ -81,7 +85,7 @@ export default function CompanyProfile({ isOnelink, companyData }) {
         <CompanyStats colorCard={colorCard} />
       </div>
 
-      <div className="company__section__two d-flex flex-column gap-4 pt-3 pb-5 ps-3">
+      <div className="company__section__two d-flex flex-column gap-4 pt-3 pb-5 px-5">
         <PublicLinks socialLinks={socialLinks} />
         <Feedback />
         <FoundingTeam isOnelink={isOnelink} team={team} />

@@ -4,14 +4,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 2em;
 
   @media (min-width: 768px) {
     flex-direction: row;
   }
 
   .main__content {
-    flex-grow: 1;
+    max-width: calc(100% - 26rem);
+    // border: 1px solid red;
 
     display: flex;
     flex-direction: column;

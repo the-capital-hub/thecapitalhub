@@ -1,7 +1,7 @@
 import { HiOutlineUserGroup } from "react-icons/hi2";
 
 export default function CommunityCard({ community }) {
-  console.log(community)
+  console.log(community);
   return (
     <div
       style={{ backgroundColor: "rgba(234, 238, 242, 1)" }}
@@ -33,7 +33,7 @@ export default function CommunityCard({ community }) {
       <div className="d-flex justify-content-between w-100">
         <div className="d-flex flex-column justify-content-between gap-1">
           <h5
-            className="m-0 text-capitalize text__clip--12"
+            className="m-0 text-capitalize text__clip--15"
             style={{ color: "#fd5901" }}
           >
             {community?.communityName}

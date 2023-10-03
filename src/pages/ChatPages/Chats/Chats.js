@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import { environment } from "../../../environments/environment";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { findChat, createChat } from "../../../Service/user";
 import CommunitiesContainer from "../../../components/Investor/ChatComponents/CommunitiesContainer";
 
@@ -16,6 +16,7 @@ const Chats = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const userId = searchParams.get("userId");
+  const isCommunityOpen = searchParams.get("isCommunityOpen");
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [selectedChat, setSelectedChat] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -28,6 +29,10 @@ const Chats = () => {
   // if (previousUrl) {
   //   console.log('Previous URL:', window.location.href);
   // }
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   const socket = useRef();
 
@@ -98,7 +103,7 @@ const Chats = () => {
       <div className="container-fluid chat_main_container">
         <section className="left_section my-3 ">
           <ChatSearch />
-          <CommunitiesContainer />
+          <CommunitiesContainer isCommunityOpen={isCommunityOpen} />
           <ChatSidebar
             selectedChat={setSelectedChat}
             setSelectedUser={setSelectedUser}
@@ -109,7 +114,12 @@ const Chats = () => {
         <section className="right_section my-3 ">
           {selectedChat && (
             <>
-              <ChatNavbar chatId={selectedChat} userId={selectedUser} isclear={setCleared} cleared={cleared}/>
+              <ChatNavbar
+                chatId={selectedChat}
+                userId={selectedUser}
+                isclear={setCleared}
+                cleared={cleared}
+              />
               <ChatDashboard
                 chatId={selectedChat}
                 userId={selectedUser}
