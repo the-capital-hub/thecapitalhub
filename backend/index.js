@@ -78,7 +78,6 @@ const io = new Server(server, {
 let activeUsers = [];
 io.on("connection", (socket) => {
   socket.on("new-user-add", (newUserId) => {
-    console.log("New", newUserId);
     if (newUserId !== null) {
       const existingUserIndex = activeUsers.findIndex((user) => user.userId === newUserId);
       if (existingUserIndex !== -1) {
@@ -89,7 +88,6 @@ io.on("connection", (socket) => {
           socketId: socket.id,
         });
       }
-      console.log("Connected User", activeUsers);
       io.emit("get-users", activeUsers);
     }
   });
@@ -103,12 +101,16 @@ io.on("connection", (socket) => {
   socket.on("send-message", (data) => {
     try {
       const { recieverId } = data;
-      const user = activeUsers.find((user) => user.userId === recieverId);
+      // const user = activeUsers.find((user) => user.userId === recieverId);
       // console.log("Active users: ", activeUsers);
       // console.log("Users: ", user);
       // console.log("Sending from socket to: ", recieverId);
-      console.log("Data: ", data);
-      if (user) io.to(user.socketId).emit("recieve-message", data);
+      // console.log("Data: ", data);
+      // if (user) io.to(user.socketId).emit("recieve-message", data);
+      const matchedUsers = activeUsers.filter((user) => recieverId.includes(user.userId));
+      matchedUsers.forEach((user) => {
+        io.to(user.socketId).emit("recieve-message", data);
+      });
     } catch (error) {
       console.log(error);
     }

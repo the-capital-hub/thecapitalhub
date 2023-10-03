@@ -1,12 +1,12 @@
 import { HiOutlineUserGroup } from "react-icons/hi2";
 
-export default function CommunityCard({ community }) {
-  console.log(community);
+export default function CommunityCard({ community, onClicked }) {
   return (
     <div
       style={{ backgroundColor: "rgba(234, 238, 242, 1)" }}
       className="community__card d-flex align-items-center gap-2 py-2 px-2 rounded-4 "
       key={community.id}
+      onClick={() => onClicked(community._id)}
     >
       <span className="border rounded-circle p-2 position-relative">
         {community.profileImage ?

@@ -32,7 +32,6 @@ export const createCommunity = async (communitydata) => {
 export const getCommunityById = async (communityId) => {
   try {
     const community = await CommunityModel.findById(communityId)
-      .populate('members');
 
     if (!community) {
       return {
@@ -57,7 +56,12 @@ export const getCommunityById = async (communityId) => {
 
 export const getAllCommunitiesByUserId = async (userId) => {
   try {
-    const communities = await CommunityModel.find({ members: userId });
+    const communities = await CommunityModel.find({ members: userId }).populate({
+      path: "members",
+      model: "Users",
+      select: "firstName lastName profilePicture",
+    })
+    .exec();
 
     return {
       status: 200,

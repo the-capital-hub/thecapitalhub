@@ -22,6 +22,7 @@ import SettingsMediaBody from "../../../components/Investor/ChatComponents/ChatS
 import IconFile from "../../../components/Investor/SvgIcons/IconFile";
 import SettingsFilesBody from "../../../components/Investor/ChatComponents/ChatSettings/SettingsFilesBody";
 import ChatSettings from "../../../components/Investor/ChatComponents/ChatSettings/ChatSettings";
+import CommunityDashboard from "./CommunityDashboard/CommunityDashboard";
 
 const Chats = () => {
   const location = useLocation();
@@ -36,6 +37,7 @@ const Chats = () => {
   const [recieveMessage, setRecieveMessage] = useState(null);
   const [cleared, setCleared] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isCommunitySelected, setIsCommunitySelected] = useState(false);
   // const previousUrl = window.history.length > 1 ? window.history.go(-1) : null;
 
   // if (previousUrl) {
@@ -77,6 +79,7 @@ const Chats = () => {
 
   useEffect(() => {
     console.log("Send");
+    console.log(sendMessage);
     if (sendMessage !== null) {
       socket.current?.emit("send-message", sendMessage);
     }
@@ -115,32 +118,46 @@ const Chats = () => {
       <div className="container-fluid chat_main_container">
         <section className="left_section my-3 ms-3 ">
           <ChatSearch />
-          <CommunitiesContainer isCommunityOpen={isCommunityOpen} />
+          <CommunitiesContainer
+            isCommunityOpen={isCommunityOpen}
+            selectedChat={setSelectedChat}
+            setIsCommunitySelected={setIsCommunitySelected}
+          />
           <ChatSidebar
             selectedChat={setSelectedChat}
             setSelectedUser={setSelectedUser}
             recieveMessage={recieveMessage}
             sendMessage={sendMessage}
+            setIsCommunitySelected={setIsCommunitySelected}
           />
         </section>
-        <section className="main_section my-3 me-3">
+        <section className="right_section my-3 ">
           {selectedChat && (
-            <>
-              <ChatNavbar
-                chatId={selectedChat}
-                userId={selectedUser}
-                isclear={setCleared}
-                cleared={cleared}
-                setIsSettingsOpen={setIsSettingsOpen}
-              />
-              <ChatDashboard
-                chatId={selectedChat}
-                userId={selectedUser}
-                setSendMessage={setSendMessage}
-                recieveMessage={recieveMessage}
-                cleared={cleared}
-              />
-            </>
+            <ChatNavbar
+              chatId={selectedChat}
+              userId={selectedUser}
+              isclear={setCleared}
+              cleared={cleared}
+              isCommunitySelected={isCommunitySelected}
+            />
+          )}
+          {!isCommunitySelected && (
+            <ChatDashboard
+              chatId={selectedChat}
+              userId={selectedUser}
+              setSendMessage={setSendMessage}
+              recieveMessage={recieveMessage}
+              cleared={cleared}
+            />
+          )}
+          {isCommunitySelected && (
+            <CommunityDashboard
+              chatId={selectedChat}
+              userId={selectedUser}
+              setSendMessage={setSendMessage}
+              recieveMessage={recieveMessage}
+              cleared={cleared}
+            />
           )}
         </section>
 
