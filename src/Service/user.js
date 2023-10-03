@@ -674,3 +674,13 @@ export const addToFeaturedPost = async (postId) => {
     throw error;
   }
 };
+
+export const getCommunityById = async (communityId) => {
+  try {
+    const response = await axiosInstance.get(`${API.getCommunityById}/${communityId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error while getting community by id:", error);
+    throw error;
+  }
+};

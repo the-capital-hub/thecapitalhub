@@ -11,6 +11,7 @@ import { environment } from "../../../environments/environment";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { findChat, createChat } from "../../../Service/user";
 import CommunitiesContainer from "../../../components/Investor/ChatComponents/CommunitiesContainer";
+import CommunityDashboard from "./CommunityDashboard/CommunityDashboard";
 
 const Chats = () => {
   const location = useLocation();
@@ -24,6 +25,7 @@ const Chats = () => {
   const [sendMessage, setSendMessage] = useState(null);
   const [recieveMessage, setRecieveMessage] = useState(null);
   const [cleared, setCleared] = useState(false);
+  const [isCommunitySelected, setIsCommunitySelected] = useState(false);
   // const previousUrl = window.history.length > 1 ? window.history.go(-1) : null;
 
   // if (previousUrl) {
@@ -65,6 +67,7 @@ const Chats = () => {
 
   useEffect(() => {
     console.log("Send");
+    console.log(sendMessage);
     if (sendMessage !== null) {
       socket.current?.emit("send-message", sendMessage);
     }
@@ -103,31 +106,46 @@ const Chats = () => {
       <div className="container-fluid chat_main_container">
         <section className="left_section my-3 ">
           <ChatSearch />
-          <CommunitiesContainer isCommunityOpen={isCommunityOpen} />
+          <CommunitiesContainer
+            isCommunityOpen={isCommunityOpen}
+            selectedChat={setSelectedChat}
+            setIsCommunitySelected={setIsCommunitySelected}
+          />
           <ChatSidebar
             selectedChat={setSelectedChat}
             setSelectedUser={setSelectedUser}
             recieveMessage={recieveMessage}
             sendMessage={sendMessage}
+            setIsCommunitySelected={setIsCommunitySelected}
           />
         </section>
         <section className="right_section my-3 ">
-          {selectedChat && (
-            <>
-              <ChatNavbar
-                chatId={selectedChat}
-                userId={selectedUser}
-                isclear={setCleared}
-                cleared={cleared}
-              />
-              <ChatDashboard
-                chatId={selectedChat}
-                userId={selectedUser}
-                setSendMessage={setSendMessage}
-                recieveMessage={recieveMessage}
-                cleared={cleared}
-              />
-            </>
+          {selectedChat &&
+            <ChatNavbar
+              chatId={selectedChat}
+              userId={selectedUser}
+              isclear={setCleared}
+              cleared={cleared}
+              isCommunitySelected={isCommunitySelected}
+            />
+          }
+          {!isCommunitySelected && (
+            <ChatDashboard
+              chatId={selectedChat}
+              userId={selectedUser}
+              setSendMessage={setSendMessage}
+              recieveMessage={recieveMessage}
+              cleared={cleared}
+            />
+          )}
+          {isCommunitySelected && (
+            <CommunityDashboard
+              chatId={selectedChat}
+              userId={selectedUser}
+              setSendMessage={setSendMessage}
+              recieveMessage={recieveMessage}
+              cleared={cleared}
+            />
           )}
         </section>
       </div>
