@@ -36,9 +36,19 @@ export default function CompanyProfilePage() {
           </Link>
         </div>
 
-        <div className="" style={{ maxWidth: "900px" }}>
-          <CompanyProfile isOnelink={true} companyData={companyData} />
-        </div>
+        {companyData.length !== 0 ? (
+          <CompanyProfile
+            isOnelink={true}
+            companyData={companyData}
+            startup="true"
+          />
+        ) : (
+          <div className="mx-auto w-100 bg-white rounded-5 p-5 d-flex justify-content-center min-vh-100">
+            <div class="spinner-grow orange" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Right side content */}
