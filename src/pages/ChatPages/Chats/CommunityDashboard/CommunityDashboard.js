@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./ChatDashboard.scss";
+import "./CommunityDashboard.scss";
 import sendIcon from "../../../../Images/Send.svg";
 import { useSelector } from "react-redux";
 import {
@@ -8,6 +8,7 @@ import {
   addMessage,
   markMessagesAsRead,
   getStartupByFounderId,
+  getCommunityById,
 } from "../../../../Service/user";
 import attachmentGreyIcon from "../../../../Images/Chat/attachtment-grey.svg";
 import attachmentOrangeIcon from "../../../../Images/Chat/attachment-orange.svg";
@@ -28,7 +29,7 @@ AWS.config.update({
 
 const s3 = new AWS.S3();
 
-const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared }) => {
+const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared, isCommunitySelected }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState(null);
@@ -43,15 +44,15 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
     }
   }, [messages, recieveMessage]);
 
-  useEffect(() => {
-    markMessagesAsRead(chatId, userId)
-      .then((response) => {
-        console.log(response.message);
-      })
-      .catch((error) => {
-        console.error("Error marking messages as read:", error);
-      });
-  }, [chatId, userId, recieveMessage]);
+  // useEffect(() => {
+  //   markMessagesAsRead(chatId, userId)
+  //     .then((response) => {
+  //       console.log(response.message);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error marking messages as read:", error);
+  //     });
+  // }, [chatId, userId, recieveMessage]);
 
   useEffect(() => {
     console.log(recieveMessage);
@@ -71,16 +72,18 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
       });
   }, [chatId, cleared, isSent]);
 
+  const [community, setCommunity] = useState([]);
+
   useEffect(() => {
-    getUserAndStartUpByUserIdAPI(userId)
+    getCommunityById(chatId)
       .then((res) => {
-        setUser(res.data);
-        console.log(res.data);
+        setCommunity(res.data);
+        setUser(null);
       })
       .catch((error) => {
         console.error("Error-->", error);
-      });
-  }, [userId]);
+      })
+  }, [chatId, isCommunitySelected]);
 
 
   const groupMessagesByDate = (messages) => {
@@ -160,7 +163,6 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
 
     addMessage(message)
       .then(({ data }) => {
-        // setMessages([...messages, data]);
         setIsSent(!isSent);
         console.log(data);
       })
@@ -173,13 +175,8 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
       lastName: loggedInUser.lastName,
       profilePicture: loggedInUser.profilePicture,
     }
-    const recieverId = [userId];
-    // recieverId = [{
-    //   _id: user?._id,
-    //   firstName: user.firstName,
-    //   lastName: user.lastName,
-    //   profilePicture: user.profilePicture
-    // }];
+    let recieverId = community.members;
+    recieverId = recieverId.filter(member => member !== loggedInUser._id);
     const createdAt = new Date().toISOString();
     setSendMessage({ ...message, recieverId, createdAt });
     setSendText("");
@@ -328,13 +325,13 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
                   <section className="other_sender" key={message._id}>
                     <img
                       className="image_profile"
-                      src={user?.profilePicture}
+                      src={message.senderId?.profilePicture}
                       alt=""
                     />
                     <div className="other_messages">
                       <div className="time_name">
                         <h6 className="name_title">
-                          {user?.firstName} {user?.lastName}{" "}
+                          {message.senderId?.firstName} {message.senderId?.lastName}{" "}
                         </h6>{" "}
                         <h6 className="time">
                           {formatTime(new Date(message.createdAt))}

@@ -20,6 +20,7 @@ const ChatSidebar = ({
   setSelectedUser,
   recieveMessage,
   sendMessage,
+  setIsCommunitySelected,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [chats, setChats] = useState([]);
@@ -66,6 +67,7 @@ const ChatSidebar = ({
     selectedChat(chatId);
     setSelectedUser(userId);
     setSelectedUserChat(userId);
+    setIsCommunitySelected(false);
   };
 
   const handleGetMessageByChatId = (chatId) => {
