@@ -26,9 +26,6 @@ export default function CommunityCard({ community }) {
           />
         }
 
-
-
-
       </span>
       <div className="d-flex justify-content-between w-100">
         <div className="d-flex flex-column justify-content-between gap-1">
