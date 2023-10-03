@@ -241,17 +241,6 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                       </div>
                     </details>
                   )}
-
-                  {/* Modal for creating new Community */}
-                  <ModalBSContainer isStatic={false} id="AddNewCommunity">
-                    <ModalBSHeader
-                      title={"Create a Community"}
-                      className={"orange__heading"}
-                    />
-                    <ModalBSBody>
-                      <NewCommunityModal />
-                    </ModalBSBody>
-                  </ModalBSContainer>
                 </div>
               </MenuItem>
 
