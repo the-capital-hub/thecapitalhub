@@ -8,6 +8,7 @@ import PhoneInput from "react-phone-number-input";
 import { Link, useNavigate } from "react-router-dom";
 import { postUserLogin } from "../../Service/user";
 import AfterSuccessPopUp from "../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import InvestorAfterSuccessPopUp from "../PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
 import ErrorPopUp from "../PopUp/ErrorPopUp/ErrorPopUp";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess, loginFailure } from "../../Store/Action/userAction";
@@ -17,6 +18,7 @@ import ResetPasswordPopUp from "../PopUp/RequestPasswordPopUp/RequestPasswordPop
 const Login = () => {
   const dispatch = useDispatch();
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isInvestorSubmitted, setIsInvestorSubmitted] = useState(false);
   const [error, setError] = useState(null);
   const [showResetPopUp, setShowResetPopUp] = useState(false);
   const [inputValues, setInputValues] = useState({
@@ -59,9 +61,17 @@ const Login = () => {
           setError("Invalid credentials");
           return;
         }
-        setIsSubmitted(true);
+        if(button1Class === "btn1" ) {
+          setIsSubmitted(true);
+        }
+
+        if (button2Class === "btn1") {
+          setIsInvestorSubmitted(true);
+        }
+       
         setTimeout(() => {
           setIsSubmitted(false);
+          setIsInvestorSubmitted(false);
           if (!user.investor) navigate("/profile");
           else navigate("/investor");
         }, 2000);
@@ -232,6 +242,9 @@ const Login = () => {
         </div>
         {isSubmitted && (
           <AfterSuccessPopUp onClose={handleClosePopup} login={true} />
+        )}
+        {isInvestorSubmitted && (
+          < InvestorAfterSuccessPopUp onClose={handleClosePopup} login={true} />
         )}
 
         {error && (

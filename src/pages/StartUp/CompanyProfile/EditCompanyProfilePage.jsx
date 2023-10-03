@@ -123,7 +123,7 @@ export default function EditCompanyProfilePage() {
               {companyDescription || "Click on edit to add company description"}
             </p>
           )}
-          <Link className="see__more align-self-end">See more</Link>
+          {/* <Link className="see__more align-self-end">See more</Link> */}
         </div>
 
         {/* Core Team */}
