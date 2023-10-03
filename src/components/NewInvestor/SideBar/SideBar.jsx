@@ -31,6 +31,8 @@ import { logout } from "../../../Store/Action/userAction";
 import connectionsIcon from "../../../Images/investorsidebar/connection.svg";
 import { PlusIcon } from "../SvgIcons";
 import companyProfileIcon from "../../../Images/Investor/Sidebar/company.svg";
+import { BsLink45Deg } from "react-icons/bs";
+
 
 const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const dispatch = useDispatch();
@@ -56,9 +58,8 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
 
   return (
     <div
-      className={`container newInvestor_sidebar_container ${
-        sidebarCollapsed ? "collapsed" : ""
-      }`}
+      className={`container newInvestor_sidebar_container ${sidebarCollapsed ? "collapsed" : ""
+        }`}
     >
       <div id="header">
         <ProSidebar collapsed={sidebarCollapsed}>
@@ -66,7 +67,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
             <div className="logotext">
               {sidebarCollapsed ? (
                 <Link
-                  onClick={() => setSidebarCollapsed(true)}
+                  // onClick={() => setSidebarCollapsed(true)}
                   to={"/investor/profile"}
                 >
                   <img
@@ -79,7 +80,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
               ) : (
                 <>
                   <Link
-                    onClick={() => setSidebarCollapsed(true)}
+                    // onClick={() => setSidebarCollapsed(true)}
                     to={"/investor/profile"}
                   >
                     {" "}
@@ -115,7 +116,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className=""
               >
                 <Link
-                  onClick={() => setSidebarCollapsed(true)}
+                  // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/home?showPopup=true"
                 >
                   {sidebarCollapsed ? (
@@ -143,7 +144,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link
-                  onClick={() => setSidebarCollapsed(true)}
+                  // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/home"
                 >
                   <img src={HomeIcon} alt="image" />
@@ -158,12 +159,27 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link
-                  onClick={() => setSidebarCollapsed(true)}
+                  // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/company-profile"
                 >
                   <img src={companyProfileIcon} alt="image" />
                   {!sidebarCollapsed && (
-                    <span className="text-black">Company Profile</span>
+                    <span className="text-black">Company</span>
+                  )}
+                </Link>
+              </MenuItem>
+
+              <MenuItem
+                active={location.pathname.includes("/company-profile")}
+                className="active-item"
+              >
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)}
+                  to="/investor/company-profile"
+                >
+                  <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} />
+                  {!sidebarCollapsed && (
+                    <span className="text-black">OneLink</span>
                   )}
                 </Link>
               </MenuItem>
@@ -173,7 +189,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link
-                  onClick={() => setSidebarCollapsed(true)}
+                  // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/explore"
                 >
                   <img
@@ -192,7 +208,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link
-                  onClick={() => setSidebarCollapsed(true)}
+                  // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/mystartups"
                 >
                   <img
@@ -207,11 +223,49 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 </Link>
               </MenuItem>
               <MenuItem
+                active={location.pathname.includes("/my-schedule")}
+                className="active-item"
+              >
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)}
+                  to="/investor/my-schedule"
+                >
+                  <img
+                    src={mySchedulesIcon}
+                    alt="image"
+                    width="17px"
+                    height="17px"
+                  />
+                  {!sidebarCollapsed && (
+                    <span className="text-black">My Schedules</span>
+                  )}
+                </Link>
+              </MenuItem>
+              <MenuItem
+                active={location.pathname.includes("/saved-posts")}
+                className="active-item"
+              >
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)}
+                  to="/investor/saved-posts"
+                >
+                  <img
+                    src={savedPostsIcon}
+                    alt="image"
+                    width="17px"
+                    height="17px"
+                  />
+                  {!sidebarCollapsed && (
+                    <span className="text-black">Saved Posts</span>
+                  )}
+                </Link>
+              </MenuItem>
+              <MenuItem
                 active={location.pathname.includes("/syndicates")}
                 className="active-item"
               >
                 <Link
-                  onClick={() => setSidebarCollapsed(true)}
+                  // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/syndicates"
                 >
                   {/* <img src={OnelinkIcon} alt="image" width="17px" height="17px" /> */}
@@ -231,7 +285,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link
-                  onClick={() => setSidebarCollapsed(true)}
+                  // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/live-deals"
                 >
                   <img
@@ -245,44 +299,8 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   )}
                 </Link>
               </MenuItem>
-              <MenuItem
-                active={location.pathname.includes("/my-schedule")}
-                className="active-item"
-              >
-                <Link
-                  onClick={() => setSidebarCollapsed(true)}
-                  to="/investor/my-schedule"
-                >
-                  <img
-                    src={mySchedulesIcon}
-                    alt="image"
-                    width="17px"
-                    height="17px"
-                  />
-                  {!sidebarCollapsed && (
-                    <span className="text-black">My Schedules</span>
-                  )}
-                </Link>
-              </MenuItem>
-              <MenuItem
-                active={location.pathname.includes("/saved-posts")}
-                className="active-item"
-              >
-                <Link
-                  onClick={() => setSidebarCollapsed(true)}
-                  to="/investor/saved-posts"
-                >
-                  <img
-                    src={savedPostsIcon}
-                    alt="image"
-                    width="17px"
-                    height="17px"
-                  />
-                  {!sidebarCollapsed && (
-                    <span className="text-black">Saved Posts</span>
-                  )}
-                </Link>
-              </MenuItem>
+
+
               {/* <MenuItem
                 active={location.pathname.includes("/investors")}
                 className="active-item"

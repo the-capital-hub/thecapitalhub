@@ -10,7 +10,6 @@ import { getBase64 } from "../../../utils/getBase64";
 import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import FeedPostCard from "../../Investor/Cards/FeedPost/FeedPostCard";
 import EasyCrop from "react-easy-crop";
-// import { getCroppedImg } from "./getCroppedImg";
 
 const CreatePostPopUp = ({
   setPopupOpen,
