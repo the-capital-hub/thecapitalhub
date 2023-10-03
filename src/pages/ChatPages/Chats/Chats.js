@@ -21,6 +21,7 @@ import MediaIcon from "../../../Images/Chat/media.svg";
 import SettingsMediaBody from "../../../components/Investor/ChatComponents/ChatSettings/SettingsMediaBody";
 import IconFile from "../../../components/Investor/SvgIcons/IconFile";
 import SettingsFilesBody from "../../../components/Investor/ChatComponents/ChatSettings/SettingsFilesBody";
+import ChatSettings from "../../../components/Investor/ChatComponents/ChatSettings/ChatSettings";
 
 const Chats = () => {
   const location = useLocation();
@@ -34,6 +35,7 @@ const Chats = () => {
   const [sendMessage, setSendMessage] = useState(null);
   const [recieveMessage, setRecieveMessage] = useState(null);
   const [cleared, setCleared] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   // const previousUrl = window.history.length > 1 ? window.history.go(-1) : null;
 
   // if (previousUrl) {
@@ -121,7 +123,7 @@ const Chats = () => {
             sendMessage={sendMessage}
           />
         </section>
-        <section className="main_section my-3">
+        <section className="main_section my-3 me-3">
           {selectedChat && (
             <>
               <ChatNavbar
@@ -129,6 +131,7 @@ const Chats = () => {
                 userId={selectedUser}
                 isclear={setCleared}
                 cleared={cleared}
+                setIsSettingsOpen={setIsSettingsOpen}
               />
               <ChatDashboard
                 chatId={selectedChat}
@@ -141,76 +144,14 @@ const Chats = () => {
           )}
         </section>
 
-        {/* chat setting */}
-        <section className="right_section my-3 me-3 ">
-          <div className="chat_settings bg-white rounded-4 shadow-sm p-3">
-            {/* Settings Header */}
-            <SettingsHeader />
-
-            {/* Settings About */}
-            <SettingsAbout />
-
-            {/* Settings - member in communities */}
-            <div className="settings_member_communities py-4 border-bottom">
-              <SettingsBlackHeader>
-                <CommunitiesIcon width="17px" height="17px" />
-                <p
-                  className="text-uppercase m-0"
-                  style={{ fontSize: "12px", fontWeight: "400" }}
-                >
-                  member in {"two"} communities
-                </p>
-              </SettingsBlackHeader>
-              <SettingsBlackBody>
-                <SettingsCommunityBody />
-              </SettingsBlackBody>
-            </div>
-
-            {/* Settings - media */}
-            <div className="settings_media py-4 border-bottom">
-              <SettingsBlackHeader>
-                <img src={MediaIcon} alt="media" />
-                <p
-                  className="text-uppercase m-0"
-                  style={{ fontSize: "12px", fontWeight: "400" }}
-                >
-                  media ({"22"})
-                </p>
-                <p
-                  className="text-capitalize m-0 orange_underline text_orange ms-auto"
-                  style={{ fontSize: "12px", fontWeight: "400" }}
-                >
-                  show all
-                </p>
-              </SettingsBlackHeader>
-              <SettingsBlackBody>
-                <SettingsMediaBody />
-              </SettingsBlackBody>
-            </div>
-
-            {/* Settings - Files */}
-            <div className="settings_files py-4">
-              <SettingsBlackHeader>
-                <IconFile />
-                <p
-                  className="text-uppercase m-0"
-                  style={{ fontSize: "12px", fontWeight: "400" }}
-                >
-                  file type ({"12"})
-                </p>
-                <p
-                  className="text-capitalize m-0 orange_underline text_orange ms-auto"
-                  style={{ fontSize: "12px", fontWeight: "400" }}
-                >
-                  show all
-                </p>
-              </SettingsBlackHeader>
-              <SettingsBlackBody>
-                <SettingsFilesBody />
-              </SettingsBlackBody>
-            </div>
-          </div>
-        </section>
+        {/* chat settings */}
+        {isSettingsOpen ? (
+          <section className="right_section my-3 me-3 ">
+            <ChatSettings />
+          </section>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );
