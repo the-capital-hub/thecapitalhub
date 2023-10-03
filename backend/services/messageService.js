@@ -45,7 +45,12 @@ export const addMessage = async (chatId, senderId, text, documentName, documentU
 
 export const getMessages = async (chatId) => {
   try {
-    const chats = await MessageModel.find({ chatId });
+    const chats = await MessageModel.find({ chatId })
+      .populate({
+        path: 'senderId',
+        select: 'firstName lastName profilePicture',
+      })
+      .exec();
     return {
       status: 200,
       message: "Message retrived successfully",

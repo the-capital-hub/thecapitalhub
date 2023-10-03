@@ -10,7 +10,7 @@ import {
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
 
-// router.use(authenticateToken);
+router.use(authenticateToken);
 
 router.post("/addMessage", addMessageController);
 router.get("/getMessages/:chatId", getMessagesController);
