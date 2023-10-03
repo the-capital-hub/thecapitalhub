@@ -8,14 +8,18 @@ export default function CommunityCard({ community, onClicked }) {
       key={community.id}
       onClick={() => onClicked(community._id)}
     >
-      <span className="border rounded-circle p-2 position-relative">
-        {community.profileImage ?
-          <img src={community.profileImage} style={{
-            height: "40px",
-            width: "40px",
-            borderRadius: "50%",
-          }} alt="Company Profile" />
-          :
+      <span className="p-2 position-relative">
+        {community.profileImage ? (
+          <img
+            src={community.profileImage}
+            style={{
+              height: "50px",
+              width: "50px",
+              borderRadius: "50%",
+            }}
+            alt="Company Profile"
+          />
+        ) : (
           <HiOutlineUserGroup
             style={{
               height: "40px",
@@ -24,8 +28,7 @@ export default function CommunityCard({ community, onClicked }) {
             }}
             className=""
           />
-        }
-
+        )}
       </span>
       <div className="d-flex justify-content-between w-100">
         <div className="d-flex flex-column justify-content-between gap-1">

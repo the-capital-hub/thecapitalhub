@@ -17,19 +17,26 @@ import documentIcon from "../../../../Images/Chat/document.svg";
 import videoIcon from "../../../../Images/Chat/attachVideo.svg";
 import onelinkIcon from "../../../../Images/Chat/Onelink.svg";
 import { getBase64 } from "../../../../utils/getBase64";
-import Linkify from 'react-linkify';
+import Linkify from "react-linkify";
 
-const AWS = require('aws-sdk');
+const AWS = require("aws-sdk");
 
 AWS.config.update({
-  accessKeyId: 'AKIA3ADZ252QBA67V4VO',
-  secretAccessKey: '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',
-  region: 'us-east-1',
+  accessKeyId: "AKIA3ADZ252QBA67V4VO",
+  secretAccessKey: "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",
+  region: "us-east-1",
 });
 
 const s3 = new AWS.S3();
 
-const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared, isCommunitySelected }) => {
+const CommunityDashboard = ({
+  chatId,
+  userId,
+  setSendMessage,
+  recieveMessage,
+  cleared,
+  isCommunitySelected,
+}) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState(null);
@@ -82,9 +89,8 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
       })
       .catch((error) => {
         console.error("Error-->", error);
-      })
+      });
   }, [chatId, isCommunitySelected]);
-
 
   const groupMessagesByDate = (messages) => {
     const groupedMessages = [];
@@ -111,8 +117,9 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
         groupedMessages.push({ date: "Yesterday", messages: [message] });
       } else {
         currentDate = messageDate;
-        const formattedDate = `${messageDate.getDate()}-${messageDate.getMonth() + 1
-          }-${messageDate.getFullYear()}`;
+        const formattedDate = `${messageDate.getDate()}-${
+          messageDate.getMonth() + 1
+        }-${messageDate.getFullYear()}`;
         groupedMessages.push({
           date:
             today.getDate() === messageDate.getDate() ? "Today" : formattedDate,
@@ -127,11 +134,17 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
   const groupedMessages = groupMessagesByDate(messages);
 
   const handleSend = async () => {
-    if (sendText?.trim() === "" && selectedImage === null && selectedVideo === null && selectedDocument === null) return;
+    if (
+      sendText?.trim() === "" &&
+      selectedImage === null &&
+      selectedVideo === null &&
+      selectedDocument === null
+    )
+      return;
     const message = {
       senderId: loggedInUser._id,
       text: sendText,
-      chatId: chatId
+      chatId: chatId,
     };
 
     if (selectedImage) {
@@ -147,7 +160,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
       const timestamp = Date.now();
       const fileName = `${timestamp}_${selectedDocument.name}`;
       const params = {
-        Bucket: 'capitalhub',
+        Bucket: "capitalhub",
         Key: `documents/${fileName}`,
         Body: selectedDocument,
       };
@@ -157,7 +170,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
         message.documentUrl = res.Location;
         console.log(res.Location);
       } catch (error) {
-        console.error('Error uploading file to S3:', error);
+        console.error("Error uploading file to S3:", error);
       }
     }
 
@@ -174,9 +187,9 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
       firstName: loggedInUser.fileName,
       lastName: loggedInUser.lastName,
       profilePicture: loggedInUser.profilePicture,
-    }
+    };
     let recieverId = community.members;
-    recieverId = recieverId.filter(member => member !== loggedInUser._id);
+    recieverId = recieverId.filter((member) => member !== loggedInUser._id);
     const createdAt = new Date().toISOString();
     setSendMessage({ ...message, recieverId, createdAt });
     setSendText("");
@@ -258,7 +271,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
   };
 
   return (
-    <div className="chat_dashboard_container">
+    <div className="community_dashboard_container">
       <div className="chat_messages_group" ref={chatMessagesContainerRef}>
         {groupedMessages.map((group) => (
           <div key={group.date}>
@@ -309,7 +322,11 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
                       )}
                       {message.documentUrl && (
                         <div className="mymessage_container">
-                          <a href={message.documentUrl} target="_blank" rel="noopener noreferrer">
+                          <a
+                            href={message.documentUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             <img
                               className="p-1 rounded-circle"
                               src={documentIcon}
@@ -331,7 +348,8 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
                     <div className="other_messages">
                       <div className="time_name">
                         <h6 className="name_title">
-                          {message.senderId?.firstName} {message.senderId?.lastName}{" "}
+                          {message.senderId?.firstName}{" "}
+                          {message.senderId?.lastName}{" "}
                         </h6>{" "}
                         <h6 className="time">
                           {formatTime(new Date(message.createdAt))}
@@ -363,7 +381,11 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
                       )}
                       {message.documentUrl && (
                         <div className="message_container">
-                          <a href={message.documentUrl} target="_blank" rel="noopener noreferrer">
+                          <a
+                            href={message.documentUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             <img
                               className="p-1 rounded-circle"
                               src={documentIcon}
@@ -389,10 +411,7 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
                 src={URL.createObjectURL(selectedImage)}
                 alt="Selected Image"
               />
-              <button
-                className="remove-preview"
-                onClick={removeSelectedImage}
-              >
+              <button className="remove-preview" onClick={removeSelectedImage}>
                 X
               </button>
             </div>
@@ -400,13 +419,13 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
           {selectedVideo && (
             <div className="video-preview">
               <video controls width={200}>
-                <source src={URL.createObjectURL(selectedVideo)} type="video/mp4" />
+                <source
+                  src={URL.createObjectURL(selectedVideo)}
+                  type="video/mp4"
+                />
                 Your browser does not support the video tag.
               </video>
-              <button
-                className="remove-preview"
-                onClick={removeSelectedVideo}
-              >
+              <button className="remove-preview" onClick={removeSelectedVideo}>
                 X
               </button>
             </div>
@@ -505,7 +524,10 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
                       onChange={handleFileChange}
                     />
                   </div>
-                  <div className="attachment-option" onClick={handleOnelinkClick}>
+                  <div
+                    className="attachment-option"
+                    onClick={handleOnelinkClick}
+                  >
                     <label htmlFor="onelink">
                       <img
                         src={onelinkIcon}
@@ -515,7 +537,6 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
                       <p>One Link</p>
                     </label>
                   </div>
-
                 </div>
               )}
             </button>
@@ -535,4 +556,4 @@ const ChatDashboard = ({ chatId, userId, setSendMessage, recieveMessage, cleared
   );
 };
 
-export default ChatDashboard;
+export default CommunityDashboard;

@@ -11,16 +11,6 @@ import { environment } from "../../../environments/environment";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { findChat, createChat } from "../../../Service/user";
 import CommunitiesContainer from "../../../components/Investor/ChatComponents/CommunitiesContainer";
-import SettingsHeader from "../../../components/Investor/ChatComponents/ChatSettings/SettingsHeader";
-import SettingsAbout from "../../../components/Investor/ChatComponents/ChatSettings/SettingsAbout";
-import CommunitiesIcon from "../../../components/Investor/ChatComponents/CommunitiesIcon";
-import SettingsBlackHeader from "../../../components/Investor/ChatComponents/ChatSettings/SettingsBlackHeader";
-import SettingsCommunityBody from "../../../components/Investor/ChatComponents/ChatSettings/SettingsCommunityBody";
-import SettingsBlackBody from "../../../components/Investor/ChatComponents/ChatSettings/SettingsBlackBody";
-import MediaIcon from "../../../Images/Chat/media.svg";
-import SettingsMediaBody from "../../../components/Investor/ChatComponents/ChatSettings/SettingsMediaBody";
-import IconFile from "../../../components/Investor/SvgIcons/IconFile";
-import SettingsFilesBody from "../../../components/Investor/ChatComponents/ChatSettings/SettingsFilesBody";
 import ChatSettings from "../../../components/Investor/ChatComponents/ChatSettings/ChatSettings";
 import CommunityDashboard from "./CommunityDashboard/CommunityDashboard";
 
@@ -116,7 +106,7 @@ const Chats = () => {
   return (
     <>
       <div className="container-fluid chat_main_container">
-        <section className="left_section my-3 ms-3 ">
+        <section className="left_section my-3 mx-3 ">
           <ChatSearch />
           <CommunitiesContainer
             isCommunityOpen={isCommunityOpen}
@@ -131,7 +121,7 @@ const Chats = () => {
             setIsCommunitySelected={setIsCommunitySelected}
           />
         </section>
-        <section className="right_section my-3 ">
+        <section className="main_section my-3 me-3">
           {selectedChat && (
             <ChatNavbar
               chatId={selectedChat}
@@ -139,9 +129,10 @@ const Chats = () => {
               isclear={setCleared}
               cleared={cleared}
               isCommunitySelected={isCommunitySelected}
+              setIsSettingsOpen={setIsSettingsOpen}
             />
           )}
-          {!isCommunitySelected && (
+          {!isCommunitySelected && selectedChat && (
             <ChatDashboard
               chatId={selectedChat}
               userId={selectedUser}
@@ -164,7 +155,7 @@ const Chats = () => {
         {/* chat settings */}
         {isSettingsOpen ? (
           <section className="right_section my-3 me-3 ">
-            <ChatSettings />
+            <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
           </section>
         ) : (
           ""

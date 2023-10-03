@@ -17,6 +17,7 @@ const ChatNavbar = ({
   isclear,
   cleared,
   isCommunitySelected,
+  setIsSettingsOpen,
 }) => {
   const [chatkebabMenu, setChatkebabMenu] = useState(false);
 
@@ -60,10 +61,19 @@ const ChatNavbar = ({
         });
     }
   }, [userId, isCommunitySelected, chatId]);
+
+  function handleOpenSettingsClick() {
+    setIsSettingsOpen(true);
+  }
+
   return (
     <>
       <div className="chat_navbar_container">
-        <div className="left">
+        <div
+          className="left"
+          onClick={handleOpenSettingsClick}
+          style={{ cursor: "pointer" }}
+        >
           <img
             src={user?.profilePicture || community?.profileImage}
             className="rounded_img"

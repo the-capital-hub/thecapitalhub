@@ -12,7 +12,11 @@ import { getAllCommunity } from "../../../Service/user";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-export default function CommunitiesContainer({ isCommunityOpen, selectedChat, setIsCommunitySelected }) {
+export default function CommunitiesContainer({
+  isCommunityOpen,
+  selectedChat,
+  setIsCommunitySelected,
+}) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [getCommunity, setGetCommunity] = useState([]);
 
@@ -70,9 +74,13 @@ export default function CommunitiesContainer({ isCommunityOpen, selectedChat, se
         <div className="my__communities d-flex flex-column gap-4 px-3 pt-4">
           <h5 className="m-0">My Communities</h5>
           {getCommunity?.data?.map((community, index) => {
-            return <CommunityCard community={community} key={community._id} 
-            onClicked={handleCommunityCardClick}
-            />;
+            return (
+              <CommunityCard
+                community={community}
+                key={community._id}
+                onClicked={handleCommunityCardClick}
+              />
+            );
           })}
         </div>
       </div>

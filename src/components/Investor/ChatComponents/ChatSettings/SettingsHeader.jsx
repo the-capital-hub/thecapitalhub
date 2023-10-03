@@ -1,10 +1,13 @@
 import React from "react";
 import IconClose from "../../SvgIcons/IconClose";
 
-export default function SettingsHeader() {
+export default function SettingsHeader({ setIsSettingsOpen }) {
   return (
     <div className="settings_header d-flex flex-column align-items-center gap-1 border-bottom pb-4">
-      <button className="align-self-end bg-transparent border-0">
+      <button
+        className="align-self-end bg-transparent border-0"
+        onClick={() => setIsSettingsOpen(false)}
+      >
         <IconClose />
       </button>
 

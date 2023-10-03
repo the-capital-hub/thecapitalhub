@@ -10,11 +10,11 @@ import IconFile from "../../SvgIcons/IconFile";
 import SettingsFilesBody from "./SettingsFilesBody";
 import IconMedia from "../../SvgIcons/IconMedia";
 
-export default function ChatSettings() {
+export default function ChatSettings({ setIsSettingsOpen }) {
   return (
     <div className="chat_settings bg-white rounded-4 shadow-sm p-3">
       {/* Settings Header */}
-      <SettingsHeader />
+      <SettingsHeader setIsSettingsOpen={setIsSettingsOpen} />
 
       {/* Settings About */}
       <SettingsAbout />
