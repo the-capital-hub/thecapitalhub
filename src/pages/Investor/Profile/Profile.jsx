@@ -497,7 +497,7 @@ function Profile() {
                     </div>
                   </div>
                   <div className="col-12 mt-2 designation_see_more">
-                    <Link to={""}>See more</Link>
+                    {/* <Link to={""}>See more</Link> */}
                   </div>
                 </div>
               </div>

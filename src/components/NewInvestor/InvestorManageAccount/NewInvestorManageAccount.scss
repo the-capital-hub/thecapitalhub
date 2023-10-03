@@ -161,10 +161,10 @@
         display: flex;
         justify-content: center;
 
-        .btn-delete {
+        .investor-btn-delete {
           /* Styles for the delete button */
-          color: #fff;
-          background-color: red;
+          color: #000;
+          background-color: #D3F36B;
           border: none;
           border-radius: 5px;
           padding: 8px 16px;
@@ -184,10 +184,10 @@
         margin: 5px;
       }
 
-      .logout-btn {
+      .investor-logout-btn {
         /* Styles for the delete button */
-        color: #fff;
-        background-color: red;
+        color: #000;
+        background-color: #D3F36B;
         border: none;
         border-radius: 5px;
         padding: 8px 16px;
