@@ -10,6 +10,8 @@ import { getBase64 } from "../../../utils/getBase64";
 import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import FeedPostCard from "../../Investor/Cards/FeedPost/FeedPostCard";
 import EasyCrop from "react-easy-crop";
+import { BsLink45Deg } from "react-icons/bs";
+import IconFile from "../../Investor/SvgIcons/IconFile";
 
 const CreatePostPopUp = ({
   setPopupOpen,
@@ -33,15 +35,15 @@ const CreatePostPopUp = ({
   const handleClose = () => setPopupOpen(false);
 
   const galleryInputRef = useRef(null);
-  const cameraInputRef = useRef(null);
+  const documentInputRef = useRef(null);
   const smileeInputRef = useRef(null);
 
   const handleGalleryButtonClick = () => {
     galleryInputRef.current.click();
   };
 
-  const handleCameraButtonClick = () => {
-    cameraInputRef.current.click();
+  const handleDocumentButtonClick = () => {
+    documentInputRef.current.click();
   };
 
   const handleSmileeButtonClick = () => {
@@ -122,7 +124,6 @@ const CreatePostPopUp = ({
       );
     });
   };
-
 
   const onCropComplete = async (croppedArea, croppedAreaPixels) => {
     const croppedImg = await getCroppedImg(previewImage, croppedAreaPixels);
@@ -287,7 +288,6 @@ const CreatePostPopUp = ({
                   </div>
                 )}
 
-
                 {previewVideo && (
                   <video
                     key={selectedVideo ? selectedVideo.name : ""}
@@ -319,19 +319,28 @@ const CreatePostPopUp = ({
                       <img src={GallaryIcon} alt="Button 1" />
                     </button>
 
-                    <input
+                    {/* <input
                       type="file"
                       name="video"
                       style={{ display: "none" }}
                       ref={cameraInputRef}
                       onChange={handleFileChange}
                       accept="video/*"
+                    /> */}
+                    <input
+                      type="file"
+                      name="document"
+                      style={{ display: "none" }}
+                      ref={documentInputRef}
+                      onChange={handleFileChange}
+                      accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf"
                     />
                     <button
                       className="white_button"
-                      onClick={handleCameraButtonClick}
+                      onClick={handleDocumentButtonClick}
                     >
-                      <img src={CameraIcon} alt="Button 2" />
+                      {/* <img src={CameraIcon} alt="Button 2" /> */}
+                      <IconFile width="16px" height="16px" />
                     </button>
 
                     <input
@@ -349,7 +358,12 @@ const CreatePostPopUp = ({
                     </button> */}
 
                     <button className="white_button">
-                      <img src={ThreeDotsIcon} alt="Button 4" />
+                      {/* <img src={ThreeDotsIcon} alt="Button 4" /> */}
+                      <BsLink45Deg
+                        height={"59px"}
+                        width={"59px"}
+                        size={"20px"}
+                      />
                     </button>
                   </div>
                   <div className="post_button_container">

@@ -8,7 +8,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 95%;
+  // width: 95%;
 
   .left {
     display: flex;
@@ -52,11 +52,12 @@
   .right {
     display: flex;
     align-items: flex-end;
-    .call, .video, .threedot {
+    .call,
+    .video,
+    .threedot {
       margin-right: 20px;
       height: 25px;
       width: 25px;
-     
     }
   }
 }

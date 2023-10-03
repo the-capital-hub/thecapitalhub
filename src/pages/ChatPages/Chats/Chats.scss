@@ -1,8 +1,10 @@
 .chat_main_container {
-  border-radius: 20px;
+  // border-radius: 20px;
   background: #eaeef2;
   display: flex;
   overflow: hidden;
+  // gap: 1rem;
+
   .left_section {
     display: flex;
     flex-direction: column;
@@ -23,10 +25,47 @@
       flex: 0 0 28rem;
     }
   }
-  .right_section {
+  .main_section {
     flex-grow: 1;
 
     display: flex;
     flex-direction: column;
+  }
+
+  .right_section {
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
+    flex: 0 0 22rem;
+    gap: 1em;
+
+    @media (min-width: 768px) {
+      flex: 0 0 22rem;
+    }
+
+    @media (min-width: 1200px) {
+      flex: 0 0 24rem;
+    }
+
+    @media (min-width: 1440px) {
+      flex: 0 0 28rem;
+    }
+
+    .chat_settings {
+      width: 100%;
+      min-height: 85dvh;
+    }
+
+    .text_orange {
+      color: rgba(253, 89, 1, 1);
+    }
+
+    .orange_underline {
+      text-decoration: underline;
+      text-decoration-color: rgba(253, 89, 1, 1);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.25em;
+    }
   }
 }

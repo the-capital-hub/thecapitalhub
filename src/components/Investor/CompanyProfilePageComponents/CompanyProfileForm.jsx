@@ -4,6 +4,7 @@ import { postStartUpData, postInvestorData } from "../../../Service/user";
 
 export default function CompanyProfileForm({ companyData, investor = false }) {
   const [formData, setFormData] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
     if (investor) {
@@ -40,17 +41,21 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
     }
   };
 
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+  };
+
   const handleBlur = async () => {
     try {
       if (investor) {
         console.log(formData);
         const response = await postInvestorData(formData);
-        console.log(response);  
+        console.log(response);
       } else {
         const response = await postStartUpData(formData);
         console.log(response);
       }
-
     } catch (error) {
       console.log(error);
     }
@@ -59,6 +64,24 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
   return (
     <>
       <form action="" className="" onBlur={handleBlur}>
+        <fieldset>
+          <legend>Company Profile Picture</legend>
+          <input
+            type="file"
+            name="companyLogo"
+            id="companyLogo"
+            className=" visually-hidden"
+            value={""}
+            onChange={handleFileInputChange}
+          />
+          <div className="profile_form_input d-flex align-items-center gap-4">
+            <label htmlFor="companyLogo" style={{ cursor: "pointer" }}>
+              Upload Picture
+            </label>
+            <p className="m-0 fs-6 fw-light">Uploaded_file_name</p>
+          </div>
+        </fieldset>
+
         <fieldset>
           <legend>Company Name</legend>
           <input

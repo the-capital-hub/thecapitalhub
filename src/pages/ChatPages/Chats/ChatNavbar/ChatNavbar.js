@@ -1,13 +1,24 @@
 import React from "react";
 import "./ChatNavbar.scss";
 import profileImage from "../../../../Images/Pramod.jpeg";
-import CallIcon from '../../../../Images/Chat/Call.svg'
-import videoIcon from '../../../../Images/Chat/Video.svg'
-import threeDotIcon from '../../../../Images/whiteTheeeDots.svg'
+import CallIcon from "../../../../Images/Chat/Call.svg";
+import videoIcon from "../../../../Images/Chat/Video.svg";
+import threeDotIcon from "../../../../Images/whiteTheeeDots.svg";
 import { useEffect, useState } from "react";
-import { getUserAndStartUpByUserIdAPI, clearChat, getCommunityById } from "../../../../Service/user";
+import {
+  getUserAndStartUpByUserIdAPI,
+  clearChat,
+  getCommunityById,
+} from "../../../../Service/user";
 
-const ChatNavbar = ({ chatId, userId, isclear, cleared, isCommunitySelected }) => {
+const ChatNavbar = ({
+  chatId,
+  userId,
+  isclear,
+  cleared,
+  isCommunitySelected,
+  setIsSettingsOpen,
+}) => {
   const [chatkebabMenu, setChatkebabMenu] = useState(false);
 
   const handleClearChat = () => {
@@ -28,8 +39,8 @@ const ChatNavbar = ({ chatId, userId, isclear, cleared, isCommunitySelected }) =
   useEffect(() => {
     setCommunity(null);
     setUser(null);
-    console.log("Selected",isCommunitySelected);
-    console.log("Selected",chatId);
+    console.log("Selected", isCommunitySelected);
+    console.log("Selected", chatId);
     if (isCommunitySelected) {
       getCommunityById(chatId)
         .then((res) => {
@@ -50,14 +61,28 @@ const ChatNavbar = ({ chatId, userId, isclear, cleared, isCommunitySelected }) =
         });
     }
   }, [userId, isCommunitySelected, chatId]);
+
+  function handleOpenSettingsClick() {
+    setIsSettingsOpen(true);
+  }
+
   return (
     <>
       <div className="chat_navbar_container">
-        <div className="left">
-          <img src={user?.profilePicture || community?.profileImage} className="rounded_img" />
+        <div
+          className="left"
+          onClick={handleOpenSettingsClick}
+          style={{ cursor: "pointer" }}
+        >
+          <img
+            src={user?.profilePicture || community?.profileImage}
+            className="rounded_img"
+          />
           <div className="title_and_message">
             <h5 className="name_title">
-              {user ? `${user.firstName} ${user.lastName}` : community?.communityName}
+              {user
+                ? `${user.firstName} ${user.lastName}`
+                : community?.communityName}
             </h5>
 
             <h5 className="message_title">{user?.designation}</h5>
@@ -67,7 +92,11 @@ const ChatNavbar = ({ chatId, userId, isclear, cleared, isCommunitySelected }) =
         <div className="right ">
           {/* <img src={CallIcon} className="call"/>
             <img src={videoIcon} className="video"/> */}
-          <img src={threeDotIcon} className="threedot" onClick={() => setChatkebabMenu(!chatkebabMenu)} />
+          <img
+            src={threeDotIcon}
+            className="threedot"
+            onClick={() => setChatkebabMenu(!chatkebabMenu)}
+          />
         </div>
       </div>
       {chatkebabMenu && (
@@ -75,7 +104,6 @@ const ChatNavbar = ({ chatId, userId, isclear, cleared, isCommunitySelected }) =
           <li onClick={handleClearChat}>Clear Chat</li>
         </ul>
       )}
-
     </>
   );
 };
