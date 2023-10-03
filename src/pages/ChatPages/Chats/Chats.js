@@ -111,7 +111,7 @@ const Chats = () => {
   return (
     <>
       <div className="container-fluid chat_main_container">
-        <section className="left_section my-3  border border-info">
+        <section className="left_section my-3 ms-3 ">
           <ChatSearch />
           <CommunitiesContainer isCommunityOpen={isCommunityOpen} />
           <ChatSidebar
