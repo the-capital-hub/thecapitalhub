@@ -1,5 +1,6 @@
 import React from "react";
 import "./SettingsCommunityBody.scss";
+import Default from "../../../../Images/Chat/default-user-avatar.webp";
 
 export default function SettingsCommunityBody() {
   return (
@@ -15,7 +16,7 @@ const CommunityBar = () => {
   return (
     <div className="border-item px-3 py-3 d-flex align-items-center gap-2 ">
       <img
-        src={""}
+        src={"" || Default}
         alt="community profile"
         style={{ width: "40px", height: "40px" }}
         className="shadow-sm rounded-circle"

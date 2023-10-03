@@ -1,5 +1,8 @@
 import React from "react";
 import IconClose from "../../SvgIcons/IconClose";
+import Default from "../../../../Images/Chat/default-user-avatar.webp";
+import IconVideo from "../../SvgIcons/IconVideo";
+import IconCall from "../../SvgIcons/IconCall";
 
 export default function SettingsHeader({ setIsSettingsOpen }) {
   return (
@@ -13,7 +16,7 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
 
       {/* Profile picture */}
       <img
-        src={""}
+        src={"" || Default}
         alt={"user name"}
         style={{ width: "70px", height: "70px" }}
       />
@@ -42,14 +45,7 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
             backgroundColor: "rgba(234, 238, 242, 1)",
           }}
         >
-          <img
-            src={""}
-            alt=""
-            style={{
-              width: "25px",
-              height: "25px",
-            }}
-          />
+          <IconCall width="24px" height="24px" />
         </div>
         <div
           className="d-flex justify-content-center align-items-center rounded-circle"
@@ -59,14 +55,7 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
             backgroundColor: "rgba(234, 238, 242, 1)",
           }}
         >
-          <img
-            src={""}
-            alt=""
-            style={{
-              width: "25px",
-              height: "25px",
-            }}
-          />
+          <IconVideo width="24px" height="24px" />
         </div>
       </div>
     </div>
