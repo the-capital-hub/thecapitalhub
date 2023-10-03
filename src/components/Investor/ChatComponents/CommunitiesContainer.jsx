@@ -12,26 +12,24 @@ import { getAllCommunity } from "../../../Service/user";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-export default function CommunitiesContainer() {
+export default function CommunitiesContainer({ isCommunityOpen }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [getCommunity, setGetCommunity] = useState([]);
-
-
 
   useEffect(() => {
     getAllCommunity(loggedInUser?._id).then((res) => {
       setGetCommunity(res);
     });
   }, []);
-console.log(getCommunity.data)
+  console.log(getCommunity.data);
 
   // Fetch Commmunities data here
 
-
-
-
   return (
-    <details className="communities__wrapper d-flex flex-column bg-white rounded-4 shadow-sm">
+    <details
+      className="communities__wrapper d-flex flex-column bg-white rounded-4 shadow-sm"
+      open={isCommunityOpen}
+    >
       <summary className="communities__header d-flex align-items-center gap-2 py-3 px-4 ">
         {/* <HiOutlineUserGroup style={{ fontSize: "2rem" }} /> */}
         <CommunitiesIcon

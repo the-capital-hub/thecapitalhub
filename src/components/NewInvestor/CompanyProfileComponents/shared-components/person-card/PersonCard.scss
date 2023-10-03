@@ -3,7 +3,7 @@
   flex: 0 0 20rem;
   scroll-snap-align: start;
 
-  box-shadow: 6.93333px 6.93333px 52px 0px rgba(211, 243, 107, 0.1);
+  box-shadow: 7px 0px 30px 0px var(--color-card-shadow);
 }
 
 .card__head {
@@ -58,5 +58,6 @@
 
   p {
     font-size: 12px;
+    color: inherit;
   }
 }

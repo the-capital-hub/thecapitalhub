@@ -11,7 +11,7 @@
   border-radius: 10rem;
 }
 .cards__container::-webkit-scrollbar-thumb {
-  background: rgba(211, 243, 107, 0.2);
+  background: var(--color-btn-01);
 }
 
 .cards__container::-webkit-scrollbar-track {
@@ -19,5 +19,5 @@
 }
 
 .cards__container::-webkit-scrollbar-thumb:hover {
-  background: rgba(211, 243, 107, 1);
+  background: var(--color-btn-08);
 }
