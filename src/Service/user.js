@@ -684,3 +684,23 @@ export const getCommunityById = async (communityId) => {
     throw error;
   }
 };
+
+export const getChatSettings = async (loggedInUserId, otherUserId, chatId) => {
+  try {
+    const response = await axiosInstance.get(`${API.getChatSettings}/${loggedInUserId}/${otherUserId}/${chatId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error while getting chat setting:", error);
+    throw error;
+  }
+};
+
+export const getCommunitySettings = async (communityId) => {
+  try {
+    const response = await axiosInstance.get(`${API.getCommunitySettings}/${communityId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error while getting chat setting:", error);
+    throw error;
+  }
+};

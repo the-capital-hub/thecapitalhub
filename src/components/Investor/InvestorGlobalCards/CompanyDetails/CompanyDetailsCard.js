@@ -24,20 +24,27 @@ const CompanyDetailsCard = ({ userDetails, page, className }) => {
     twitter: "",
     instagram: "",
   });
+  const [locationData, setLocationData] = useState("");
+
+  // Fetch user details
   useEffect(() => {
     getStartupByFounderId(userDetails._id)
       .then(({ data }) => {
         setOnePager(data);
         setDescriptionContent(data.description);
         setSocialLinks(data.socialLinks);
+        setLocationData(data.location);
       })
       .catch(() => setOnePager([]));
   }, [userDetails]);
+
+  // Submit Changes
   const submitDescriptionHandler = async () => {
     const updatedData = {
       founderId: userDetails._id,
       description: descriptionContent,
       socialLinks,
+      location: locationData,
     };
     await postStartUpData(updatedData);
     setIsDescriptionEditable(!isDescriptionEditable);
@@ -66,7 +73,7 @@ const CompanyDetailsCard = ({ userDetails, page, className }) => {
                       {onePager.location}
                     </span>
                     <span>
-                      <img src={EmailIcon} alt="location" />
+                      <img src={EmailIcon} alt="email icon" />
                       {userDetails?.email}
                     </span>
                   </span>
@@ -109,7 +116,7 @@ const CompanyDetailsCard = ({ userDetails, page, className }) => {
               {page === "edit" ? (
                 <>
                   <span className="ms-auto">
-                    <div className="edit-container">
+                    <div className="edit-container mb-4">
                       <button
                         className="edit-btn"
                         onClick={() =>
@@ -134,14 +141,37 @@ const CompanyDetailsCard = ({ userDetails, page, className }) => {
                     {/* {onePager.description} */}
                     {isDescriptionEditable ? (
                       <>
-                        <textarea
-                          className="description"
-                          value={descriptionContent}
-                          name="bio"
-                          onChange={(e) =>
-                            setDescriptionContent(e.target.value)
-                          }
-                        />
+                        {/* Edit description */}
+                        <div className="input-group my-2">
+                          <label htmlFor="bio" className="align-self-start">
+                            Description:
+                          </label>
+                          <textarea
+                            className="description flex-grow-1 rounded-2"
+                            value={descriptionContent}
+                            id="bio"
+                            name="bio"
+                            rows={6}
+                            onChange={(e) =>
+                              setDescriptionContent(e.target.value)
+                            }
+                          />
+                        </div>
+
+                        {/* Edit Location */}
+                        <div className="input-group mb-2">
+                          <label htmlFor="location">Location:</label>
+                          <input
+                            type="text"
+                            id="location"
+                            name="location"
+                            value={locationData}
+                            onChange={(e) => setLocationData(e.target.value)}
+                            className="rounded-2"
+                          />
+                        </div>
+
+                        {/* Edit social links */}
                         <div className="social-inputs">
                           <div className="input-group">
                             <label>Website:</label>
@@ -154,6 +184,7 @@ const CompanyDetailsCard = ({ userDetails, page, className }) => {
                                   website: e.target.value,
                                 })
                               }
+                              className="rounded-2"
                             />
                           </div>
                           <div className="input-group">
@@ -167,6 +198,7 @@ const CompanyDetailsCard = ({ userDetails, page, className }) => {
                                   linkedin: e.target.value,
                                 })
                               }
+                              className="rounded-2"
                             />
                           </div>
                           <div className="input-group">
@@ -180,6 +212,7 @@ const CompanyDetailsCard = ({ userDetails, page, className }) => {
                                   twitter: e.target.value,
                                 })
                               }
+                              className="rounded-2"
                             />
                           </div>
                           <div className="input-group">
@@ -193,6 +226,7 @@ const CompanyDetailsCard = ({ userDetails, page, className }) => {
                                   instagram: e.target.value,
                                 })
                               }
+                              className="rounded-2"
                             />
                           </div>
                         </div>

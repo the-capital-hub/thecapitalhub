@@ -2,14 +2,22 @@ import React from "react";
 import IconFile from "../../SvgIcons/IconFile";
 import IconVideo from "../../SvgIcons/IconVideo";
 import IconChevronRight from "../../SvgIcons/IconChevronRight";
+import { useSelector } from "react-redux";
 
 export default function SettingsFilesBody() {
+  const chatProfile = useSelector((state) => state.chat.chatProfile);
+  const communityProfile = useSelector((state) => state.chat.communityProfile);
+  const isCommunitySelected = useSelector((state) => state.chat.isCommunitySelected);
+
   return (
     <>
-      <FileBar fileType="documents" fileCount="06">
+      <FileBar fileType="documents" fileCount={isCommunitySelected ? communityProfile?.documents?.length : chatProfile?.documents.length}>
         <IconFile color={"black"} />
       </FileBar>
-      <FileBar fileType="videos" fileCount="06">
+      <FileBar fileType="videos" fileCount={isCommunitySelected ? communityProfile?.videos?.length : chatProfile?.videos.length}>
+        <IconVideo color={"black"} />
+      </FileBar>
+      <FileBar fileType="images" fileCount={isCommunitySelected ? communityProfile?.images?.length : chatProfile?.images.length}>
         <IconVideo color={"black"} />
       </FileBar>
     </>

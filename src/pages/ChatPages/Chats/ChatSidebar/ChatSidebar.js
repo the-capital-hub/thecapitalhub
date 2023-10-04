@@ -4,7 +4,7 @@ import profileImage from "../../../../Images/Pramod.jpeg";
 import pinIcon from "../../../../Images/Chat/Pin.svg";
 import messageIcon from "../../../../Images/Chat/Chat.svg";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   getUserChats,
   getMessageByChatId,
@@ -13,16 +13,16 @@ import {
   getPinnedChat,
 } from "../../../../Service/user";
 import { useLocation } from "react-router-dom";
-import CommunitiesContainer from "../../../../components/Investor/ChatComponents/CommunitiesContainer";
+import {
+  setChatId,
+  setUserId,
+  setIsCommuntySelected,
+} from "../../../../Store/features/chat/chatSlice";
 
-const ChatSidebar = ({
-  selectedChat,
-  setSelectedUser,
-  recieveMessage,
-  sendMessage,
-  setIsCommunitySelected,
-}) => {
+const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const dispatch = useDispatch();
+
   const [chats, setChats] = useState([]);
   const [pinnedChats, setPinnedChats] = useState([]);
   const location = useLocation();
@@ -34,6 +34,7 @@ const ChatSidebar = ({
   const [selectedUserChat, setSelectedUserChat] = useState(null);
   const [pinnedChat, setPinnedChat] = useState(false);
 
+  // Handle PinClick
   const handlePinClick = (chatId) => {
     togglePinMessage(loggedInUser._id, chatId).then((res) => {
       console.log(res);
@@ -43,6 +44,7 @@ const ChatSidebar = ({
       }, 1000);
     });
   };
+
   useEffect(() => {
     getPinnedChat(loggedInUser._id).then((res) => {
       console.log(res.data);
@@ -62,12 +64,14 @@ const ChatSidebar = ({
       });
   }, [loggedInUser, sendMessage, recieveMessage, selectedUserChat, pinnedChat]);
 
+  // Handle selected chat
   const handleSelectedChat = (chatId, userId) => {
     console.log(userId);
-    selectedChat(chatId);
-    setSelectedUser(userId);
+    dispatch(setChatId(chatId));
+    dispatch(setUserId(userId));
+    dispatch(setIsCommuntySelected(false));
+
     setSelectedUserChat(userId);
-    setIsCommunitySelected(false);
   };
 
   const handleGetMessageByChatId = (chatId) => {

@@ -2,6 +2,7 @@ import {
   createCommunity,
   getCommunityById,
   getAllCommunitiesByUserId,
+  getCommunitySettings,
 } from "../services/communityService.js";
 
 export const createCommunityController = async (req, res) => {
@@ -41,6 +42,20 @@ export const getAllCommunitiesByUserIdController = async (req, res) => {
     return res.status(500).send({
       status: 500,
       message: "An error occurred while getting community.",
+    });
+  }
+};
+
+export const getCommunitySettingsController = async (req, res) => {
+  try {
+    const { communityId } = req.params;
+    const response = await getCommunitySettings(communityId);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting community settings.",
     });
   }
 };
