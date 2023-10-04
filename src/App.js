@@ -79,6 +79,8 @@ import EditCompanyProfilePage from "./pages/StartUp/CompanyProfile/EditCompanyPr
 import EditInvestorCompanyProfilePage from "./pages/Investor/InvestorCompanyProfilePage/EditInvestorCompanyProfilePage";
 import CompanyProfilePage from "./pages/StartUp/CompanyProfile/CompanyProfilePage";
 import InvestorCompanyProfilePage from "./pages/Investor/InvestorCompanyProfilePage/InvestorCompanyProfilePage";
+import FoodLandingPage from "./eCommerace/pages/LandingPage/FoodLandingPage/FoodLandingPage";
+import Layout from "./components/ECommerace/Layout/Layout/Layout";
 
 function App() {
   return (
@@ -338,6 +340,9 @@ function App() {
               path="ux-how-it-can-be-a-differentiator-in-a-crowded-marketplace"
               element={<UXBlog />}
             />
+          </Route>
+          <Route path="/e-commerace" element={<Layout />}>
+            <Route path="food" element={<FoodLandingPage />} />
           </Route>
         </Routes>
       </Router>
