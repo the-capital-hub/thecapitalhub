@@ -11,26 +11,8 @@
   .chatsidebar_content {
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
-    height: 80dvh;
-
-    &::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: rgba(253, 89, 1, 0.2);
-      border-radius: 10rem;
-
-      &:hover {
-        background-color: rgba(253, 89, 1, 0.8);
-      }
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: transparent;
-      border-radius: 10rem;
-    }
+    // overflow-y: auto;
+    // height: 80dvh;
 
     .person_wise_chat {
       display: flex;

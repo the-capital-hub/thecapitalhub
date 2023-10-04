@@ -127,14 +127,19 @@ const Chats = () => {
   return (
     <>
       <div className="container-fluid chat_main_container">
-        <section className="left_section my-3 mx-3 ">
-          <ChatSearch />
-          <CommunitiesContainer isCommunityOpen={isCommunityOpen} />
-          <ChatSidebar
-            recieveMessage={recieveMessage}
-            sendMessage={sendMessage}
-          />
-        </section>
+        {/* Left section */}
+        <div className="left_section_wrapper mt-3 mx-3">
+          <section className="left_section pe-1 ">
+            <ChatSearch />
+            <CommunitiesContainer isCommunityOpen={isCommunityOpen} />
+            <ChatSidebar
+              recieveMessage={recieveMessage}
+              sendMessage={sendMessage}
+            />
+          </section>
+        </div>
+
+        {/* Main Chat section */}
         <section className="main_section my-3 me-3">
           {chatId && (
             <ChatNavbar
@@ -159,11 +164,13 @@ const Chats = () => {
           )}
         </section>
 
-        {/* chat settings */}
+        {/*Right section chat settings */}
         {isSettingsOpen ? (
-          <section className="right_section my-3 me-3 ">
-            <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
-          </section>
+          <div className="right_section_wrapper">
+            <section className="right_section mt-3 me-3 ">
+              <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
+            </section>
+          </div>
         ) : (
           ""
         )}

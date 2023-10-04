@@ -65,7 +65,26 @@
 
   .chat_messages_group {
     height: 90%;
-    overflow-y: scroll;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(253, 89, 1, 0.05);
+      border-radius: 10rem;
+
+      &:hover {
+        background-color: rgba(253, 89, 1, 0.8);
+      }
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+      border-radius: 10rem;
+    }
   }
 
   .chat_messages {
