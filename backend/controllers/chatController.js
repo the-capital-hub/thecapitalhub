@@ -4,6 +4,7 @@ import {
   findChat,
   togglePinChat,
   getPinnedChats,
+  getChatSettings,
 } from "../services/chatService.js";
 
 export const createChatController = async (req, res) => {
@@ -72,6 +73,20 @@ export const getPinnedChatsController = async (req, res) => {
     return res.status(500).send({
       status: 500,
       message: "An error occurred while fetching pinned chats.",
+    });
+  }
+};
+
+export const getChatSettingsController = async (req, res) => {
+  try {
+    const { loggedUserId, otherUserId, chatId } = req.params;
+    const response = await getChatSettings(loggedUserId, otherUserId, chatId);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting chat settings.",
     });
   }
 };

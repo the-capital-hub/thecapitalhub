@@ -1,5 +1,7 @@
 import { ChatModel } from "../models/Chat.js";
 import { UserModel } from "../models/User.js";
+import { CommunityModel } from "../models/Community.js";
+import { MessageModel } from "../models/Message.js";
 
 export const createChat = async (senderId, recieverId) => {
   try {
@@ -156,3 +158,47 @@ export const getPinnedChats = async (userId) => {
     };
   }
 };
+
+export const getChatSettings = async (loggedUserId, otherUserId, chatId) => {
+  try {
+    const user = await UserModel.findById(otherUserId);
+    const communities = await CommunityModel.find({
+      members: { $all: [loggedUserId, otherUserId] },
+    }).populate('members');
+    
+    //fetch images
+    const images = await MessageModel.find({
+      chatId: chatId,
+      image: { $ne: null }, 
+    });
+
+    // Fetch videos
+    const videos = await MessageModel.find({
+      chatId: chatId,
+      video: { $ne: null }, 
+    });
+
+    // Fetch documents
+    const documents = await MessageModel.find({
+      chatId: chatId,
+      documentUrl: { $ne: null },
+    });
+    return {
+      status: 200,
+      message: "Chat settings retrieved successfully.",
+      data: {
+        user,
+        communities,
+        images,
+        videos,
+        documents
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while getting chat settings.",
+    };
+  }
+}
