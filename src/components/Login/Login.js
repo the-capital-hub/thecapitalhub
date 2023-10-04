@@ -95,7 +95,11 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleClosePopup = () => {
-    navigate("/profile");
+    if (isSubmitted) {
+      navigate("/profile");
+    } else if (isInvestorSubmitted) {
+      navigate("/investor/profile");
+    }
   };
   const handleCloseResetPopup = () => {
     setShowResetPopUp(false);
