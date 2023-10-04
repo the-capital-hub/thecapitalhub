@@ -10,7 +10,8 @@ import { useEffect, useState } from "react";
 import LogOutPopUp from "../../PopUp/LogOutPopUp/LogOutPopUp";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../../../Store/Action/userAction";
+// import { logout } from "../../../Store/Action/userAction";
+import { logout } from "../../../Store/features/user/userSlice";
 
 const InvestorManageAccount = () => {
   const initialForm = {

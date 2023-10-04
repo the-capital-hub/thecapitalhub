@@ -11,7 +11,11 @@ import AfterSuccessPopUp from "../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import InvestorAfterSuccessPopUp from "../PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
 import ErrorPopUp from "../PopUp/ErrorPopUp/ErrorPopUp";
 import { useDispatch, useSelector } from "react-redux";
-import { loginSuccess, loginFailure } from "../../Store/Action/userAction";
+// import { loginSuccess, loginFailure } from "../../Store/Action/userAction";
+import {
+  loginSuccess,
+  loginFailure,
+} from "../../Store/features/user/userSlice";
 import backArrow from "../../Images/left-arrow.png";
 import ResetPasswordPopUp from "../PopUp/RequestPasswordPopUp/RequestPasswordPopUp";
 
@@ -61,14 +65,14 @@ const Login = () => {
           setError("Invalid credentials");
           return;
         }
-        if(button1Class === "btn1" ) {
+        if (button1Class === "btn1") {
           setIsSubmitted(true);
         }
 
         if (button2Class === "btn1") {
           setIsInvestorSubmitted(true);
         }
-       
+
         setTimeout(() => {
           setIsSubmitted(false);
           setIsInvestorSubmitted(false);
@@ -105,17 +109,17 @@ const Login = () => {
     document.title = "Log In | The Capital Hub";
   }, []);
 
-  const [button1Class, setButton1Class] = useState('btn1');
-  const [button2Class, setButton2Class] = useState('btn2');
+  const [button1Class, setButton1Class] = useState("btn1");
+  const [button2Class, setButton2Class] = useState("btn2");
 
   const handleButton1Click = () => {
-    setButton1Class('btn1');
-    setButton2Class('btn2');
+    setButton1Class("btn1");
+    setButton2Class("btn2");
   };
 
   const handleButton2Click = () => {
-    setButton1Class('btn2');
-    setButton2Class('btn1');
+    setButton1Class("btn2");
+    setButton2Class("btn1");
   };
 
   return (
@@ -153,7 +157,6 @@ const Login = () => {
               </button>
             </Link>
           </div>
-
 
           <h3 className="already_have_account">
             I don’t have an account?{" "}
@@ -244,7 +247,7 @@ const Login = () => {
           <AfterSuccessPopUp onClose={handleClosePopup} login={true} />
         )}
         {isInvestorSubmitted && (
-          < InvestorAfterSuccessPopUp onClose={handleClosePopup} login={true} />
+          <InvestorAfterSuccessPopUp onClose={handleClosePopup} login={true} />
         )}
 
         {error && (
