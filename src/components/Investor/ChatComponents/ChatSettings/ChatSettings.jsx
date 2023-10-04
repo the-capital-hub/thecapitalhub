@@ -12,7 +12,10 @@ import IconMedia from "../../SvgIcons/IconMedia";
 
 export default function ChatSettings({ setIsSettingsOpen }) {
   return (
-    <div className="chat_settings bg-white rounded-4 shadow-sm p-3">
+    <div
+      className="chat_settings bg-white rounded-4 shadow-sm p-3"
+      style={{ border: "1px solid #cfcfcf" }}
+    >
       {/* Settings Header */}
       <SettingsHeader setIsSettingsOpen={setIsSettingsOpen} />
 

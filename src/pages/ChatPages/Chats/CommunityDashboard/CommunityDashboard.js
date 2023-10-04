@@ -29,15 +29,14 @@ AWS.config.update({
 
 const s3 = new AWS.S3();
 
-const CommunityDashboard = ({
-  chatId,
-  userId,
-  setSendMessage,
-  recieveMessage,
-  cleared,
-  isCommunitySelected,
-}) => {
+const CommunityDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
+  // Fetch global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const chatId = useSelector((state) => state.chat.chatId);
+  const isCommunitySelected = useSelector(
+    (state) => state.chat.isCommunitySelected
+  );
+
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState(null);
   const [sendText, setSendText] = useState("");

@@ -5,7 +5,7 @@ import ChatSidebar from "./ChatSidebar/ChatSidebar";
 import ChatNavbar from "./ChatNavbar/ChatNavbar";
 import ChatDashboard from "./ChatDashboard/ChatDashboard";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import { environment } from "../../../environments/environment";
 import { useLocation, useSearchParams } from "react-router-dom";
@@ -13,13 +13,24 @@ import { findChat, createChat } from "../../../Service/user";
 import CommunitiesContainer from "../../../components/Investor/ChatComponents/CommunitiesContainer";
 import ChatSettings from "../../../components/Investor/ChatComponents/ChatSettings/ChatSettings";
 import CommunityDashboard from "./CommunityDashboard/CommunityDashboard";
+import { setChatId, setUserId } from "../../../Store/features/chat/chatSlice";
 
 const Chats = () => {
+  // search params
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const userId = searchParams.get("userId");
+  // const userId = searchParams.get("userId");
   const isCommunityOpen = searchParams.get("isCommunityOpen");
+
+  // Fetch global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const userId = useSelector((state) => state.chat.userId);
+  const chatId = useSelector((state) => state.chat.chatId);
+  const isCommunitySelected = useSelector(
+    (state) => state.chat.isCommunitySelected
+  );
+  const dispatch = useDispatch();
+
   const [selectedChat, setSelectedChat] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
@@ -27,13 +38,14 @@ const Chats = () => {
   const [recieveMessage, setRecieveMessage] = useState(null);
   const [cleared, setCleared] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [isCommunitySelected, setIsCommunitySelected] = useState(false);
+  // const [isCommunitySelected, setIsCommunitySelected] = useState(false);
   // const previousUrl = window.history.length > 1 ? window.history.go(-1) : null;
 
   // if (previousUrl) {
   //   console.log('Previous URL:', window.location.href);
   // }
 
+  // When directed to chats scroll page to top
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
@@ -75,16 +87,22 @@ const Chats = () => {
     }
   }, [sendMessage]);
 
+  // create chat. Pass userId and loggedInUserId
   const handleCreateChat = async () => {
     await createChat(userId, loggedInUser._id)
       .then((res) => {
-        setSelectedChat(res.data._id);
-        setSelectedUser(userId);
+        // setSelectedChat(res.data._id);
+        // setSelectedUser(userId);
+        dispatch(setChatId(res.data._id));
+        dispatch(setUserId(userId));
       })
       .catch((error) => {
         console.error("Error creating chat-->", error);
       });
   };
+
+  // When userId changes findchat and set selectedChatId and selectedUserId
+  // If a chat does not exist, create a new chat.
   useEffect(() => {
     if (userId) {
       findChat(userId, loggedInUser._id)
@@ -93,8 +111,10 @@ const Chats = () => {
           if (res.data.length === 0) {
             return handleCreateChat();
           } else {
-            setSelectedChat(res.data._id);
-            setSelectedUser(userId);
+            // setSelectedChat(res.data._id);
+            // setSelectedUser(userId);
+            dispatch(setChatId(res.data._id));
+            dispatch(setUserId(userId));
             console.log("Chat:", res.data._id);
           }
         })
@@ -103,39 +123,33 @@ const Chats = () => {
         });
     }
   }, [userId]);
+
   return (
     <>
       <div className="container-fluid chat_main_container">
-        <section className="left_section my-3 mx-3 ">
-          <ChatSearch />
-          <CommunitiesContainer
-            isCommunityOpen={isCommunityOpen}
-            selectedChat={setSelectedChat}
-            setIsCommunitySelected={setIsCommunitySelected}
-          />
-          <ChatSidebar
-            selectedChat={setSelectedChat}
-            setSelectedUser={setSelectedUser}
-            recieveMessage={recieveMessage}
-            sendMessage={sendMessage}
-            setIsCommunitySelected={setIsCommunitySelected}
-          />
-        </section>
+        {/* Left section */}
+        <div className="left_section_wrapper mt-3 mx-3">
+          <section className="left_section pe-1 ">
+            <ChatSearch />
+            <CommunitiesContainer isCommunityOpen={isCommunityOpen} />
+            <ChatSidebar
+              recieveMessage={recieveMessage}
+              sendMessage={sendMessage}
+            />
+          </section>
+        </div>
+
+        {/* Main Chat section */}
         <section className="main_section my-3 me-3">
-          {selectedChat && (
+          {chatId && (
             <ChatNavbar
-              chatId={selectedChat}
-              userId={selectedUser}
               isclear={setCleared}
               cleared={cleared}
-              isCommunitySelected={isCommunitySelected}
               setIsSettingsOpen={setIsSettingsOpen}
             />
           )}
-          {!isCommunitySelected && selectedChat && (
+          {!isCommunitySelected && chatId && (
             <ChatDashboard
-              chatId={selectedChat}
-              userId={selectedUser}
               setSendMessage={setSendMessage}
               recieveMessage={recieveMessage}
               cleared={cleared}
@@ -143,8 +157,6 @@ const Chats = () => {
           )}
           {isCommunitySelected && (
             <CommunityDashboard
-              chatId={selectedChat}
-              userId={selectedUser}
               setSendMessage={setSendMessage}
               recieveMessage={recieveMessage}
               cleared={cleared}
@@ -152,11 +164,13 @@ const Chats = () => {
           )}
         </section>
 
-        {/* chat settings */}
+        {/*Right section chat settings */}
         {isSettingsOpen ? (
-          <section className="right_section my-3 me-3 ">
-            <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
-          </section>
+          <div className="right_section_wrapper">
+            <section className="right_section mt-3 me-3 ">
+              <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
+            </section>
+          </div>
         ) : (
           ""
         )}

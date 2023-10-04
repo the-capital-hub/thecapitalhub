@@ -1,12 +1,25 @@
 import { HiOutlineUserGroup } from "react-icons/hi2";
+import {
+  setChatId,
+  setIsCommuntySelected,
+} from "../../../Store/features/chat/chatSlice";
+import { useDispatch } from "react-redux";
 
-export default function CommunityCard({ community, onClicked }) {
+export default function CommunityCard({ community }) {
+  const dispatch = useDispatch();
+
+  // Handle community click
+  function handleCommunityClick(communityId) {
+    dispatch(setChatId(communityId));
+    dispatch(setIsCommuntySelected(true));
+  }
+
   return (
     <div
       style={{ backgroundColor: "rgba(234, 238, 242, 1)" }}
       className="community__card d-flex align-items-center gap-2 py-2 px-2 rounded-4 "
       key={community.id}
-      onClick={() => onClicked(community._id)}
+      onClick={() => handleCommunityClick(community._id)}
     >
       <span className="p-2 position-relative">
         {community.profileImage ? (
