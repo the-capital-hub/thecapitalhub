@@ -94,7 +94,6 @@ io.on("connection", (socket) => {
 
   socket.on("disconnected", () => {
     activeUsers = activeUsers.filter((user) => user.socketId !== socket.id);
-    console.log("User disconnected", activeUsers);
     io.emit("get-users", activeUsers);
   });
 

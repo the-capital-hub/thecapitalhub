@@ -3,8 +3,13 @@ import IconClose from "../../SvgIcons/IconClose";
 import Default from "../../../../Images/Chat/default-user-avatar.webp";
 import IconVideo from "../../SvgIcons/IconVideo";
 import IconCall from "../../SvgIcons/IconCall";
+import { useSelector } from "react-redux";
 
 export default function SettingsHeader({ setIsSettingsOpen }) {
+  const chatProfile = useSelector((state) => state.chat.chatProfile);
+  const communityProfile = useSelector((state) => state.chat.communityProfile);
+  const isCommunitySelected = useSelector((state) => state.chat.isCommunitySelected);
+
   return (
     <div className="settings_header d-flex flex-column align-items-center gap-1 border-bottom pb-4">
       <button
@@ -16,14 +21,19 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
 
       {/* Profile picture */}
       <img
-        src={"" || Default}
+        src={(isCommunitySelected ? communityProfile?.community?.profileImage : chatProfile?.user?.profilePicture) || Default}
         alt={"user name"}
-        style={{ width: "70px", height: "70px" }}
+        style={{ width: "70px", height: "70px", borderRadius: "50%" }}
       />
 
       {/* Name and designation */}
       <div className="settings_user_text d-flex flex-column align-items-center">
-        <h5 style={{ fontSize: "20px", fontWeight: "500" }}>{"Harideep"}</h5>
+        <h5 style={{ fontSize: "20px", fontWeight: "500" }}>
+          {isCommunitySelected
+            ? communityProfile?.community?.communityName
+            : `${chatProfile?.user?.firstName} ${chatProfile?.user?.lastName}`}
+        </h5>
+
         <p
           style={{
             color: "rgba(113, 113, 113, 1)",
@@ -31,7 +41,7 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
             fontWeight: "400",
           }}
         >
-          {"UI/UX Designer"}
+          {isCommunitySelected ? " " : chatProfile?.user?.designation}
         </p>
       </div>
 

@@ -59,6 +59,8 @@ const API = Object.freeze({
   getFeaturedPostsByUser: `${baseUrl}/api/posts/getFeaturedPostsByUser`,
   addToFeaturedPost: `${baseUrl}/api/posts/addToFeaturedPost`,
   getCommunityById: `${baseUrl}/community/getCommunityById`,
+  getChatSettings: `${baseUrl}/chat/getChatSettings`,
+  getCommunitySettings: `${baseUrl}/community/getCommunitySettings`,
 });
 
 export default API;
