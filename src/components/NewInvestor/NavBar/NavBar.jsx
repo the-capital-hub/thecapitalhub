@@ -44,7 +44,7 @@ const NavBar = (props) => {
   const searchSubmitHandler = (e) => {
     if (e) e.preventDefault();
     if (!searchInput) return;
-    // navigate(`/search?query=${searchInput}`);
+    navigate(`/investor/search?query=${searchInput}`);
   };
 
   const searchInputBlurHandler = () => {
