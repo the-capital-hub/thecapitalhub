@@ -10,16 +10,19 @@ import {
   clearChat,
   getCommunityById,
 } from "../../../../Service/user";
+import { useSelector } from "react-redux";
 
-const ChatNavbar = ({
-  chatId,
-  userId,
-  isclear,
-  cleared,
-  isCommunitySelected,
-  setIsSettingsOpen,
-}) => {
+const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
+  // Fetch GlobalState
+  const chatId = useSelector((state) => state.chat.chatId);
+  const userId = useSelector((state) => state.chat.userId);
+  const isCommunitySelected = useSelector(
+    (state) => state.chat.isCommunitySelected
+  );
+
   const [chatkebabMenu, setChatkebabMenu] = useState(false);
+
+  // When chatType changes update isCommunitySelec
 
   const handleClearChat = () => {
     clearChat(chatId)
