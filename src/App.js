@@ -76,8 +76,9 @@ import NewInvestorManageAccount from "./components/NewInvestor/InvestorManageAcc
 import SavedPosts from "./pages/Investor/SavedPosts/SavedPosts";
 import UXBlog from "./pages/Blogs/UXBlog/UXBlog";
 import EditCompanyProfilePage from "./pages/StartUp/CompanyProfile/EditCompanyProfilePage";
-import InvestorCompanyProfilePage from "./pages/Investor/InvestorCompanyProfilePage/InvestorCompanyProfilePage";
+import EditInvestorCompanyProfilePage from "./pages/Investor/InvestorCompanyProfilePage/EditInvestorCompanyProfilePage";
 import CompanyProfilePage from "./pages/StartUp/CompanyProfile/CompanyProfilePage";
+import InvestorCompanyProfilePage from "./pages/Investor/InvestorCompanyProfilePage/InvestorCompanyProfilePage";
 
 function App() {
   return (
@@ -293,11 +294,15 @@ function App() {
             <Route path="explore" element={<Explore />} />
             <Route path="syndicates" element={<Syndicates />} />
             <Route path="live-deals" element={<LiveDeals />} />
-            <Route path="search-results" element={<SearchResults />} />
+            <Route path="search" element={<SearchResults />} />
             <Route path="my-schedule" element={<MySchedule />} />
             <Route path="saved-posts" element={<SavedPosts />} />
             <Route
               path="company-profile"
+              element={<EditInvestorCompanyProfilePage />}
+            />
+            <Route
+              path="company-profile/:founderId"
               element={<InvestorCompanyProfilePage />}
             />
           </Route>

@@ -34,6 +34,8 @@ function Search() {
       })
       .catch((error) => console.log(error));
   };
+
+  // Fetch search Data
   useEffect(() => {
     async function fetchData() {
       const data = await getSearchResultsAPI(searchBy);
@@ -47,7 +49,8 @@ function Search() {
     if (queryParams.has("query")) {
       fetchData();
     }
-  }, [searchBy,connectionSent]);
+  }, [searchBy, connectionSent]);
+
   return (
     <div className="container-fluid serach_main_container">
       <SmallProfileCard text={"Search"} />
@@ -89,15 +92,13 @@ function Search() {
 
                   {users?.connectionsSent?.includes(loggedInUser._id) ? (
                     <Link to="/chats" className="text-decoration-none">
-                    <button 
-                    className="  d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white">
-                      {/* <img src={connectIcon} alt="connect-user" /> */}
-                      <span >Message</span>
-                    </button>
+                      <button className="  d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white">
+                        {/* <img src={connectIcon} alt="connect-user" /> */}
+                        <span>Message</span>
+                      </button>
                     </Link>
                   ) : users?.connectionsReceived?.includes(loggedInUser._id) ? (
-                    <button 
-                    className="  d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white">
+                    <button className="  d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white">
                       <img src={connectIcon} alt="connect-user" />
                       <span>Pending</span>
                     </button>
