@@ -73,7 +73,7 @@ export default function SearchResults() {
                       name={`${firstName} ${lastName}`}
                       description={designation}
                       key={_id}
-                      id={_id}
+                      param={_id}
                     />
                   );
                 })
@@ -100,14 +100,14 @@ export default function SearchResults() {
             {!loading ? (
               companyData.length !== 0 ? (
                 companyData.map((comp) => {
-                  const { logo, company, description, _id, founderId } = comp;
+                  const { logo, company, description, _id, oneLink } = comp;
                   return (
                     <ResultBar
                       image={logo}
                       name={company}
                       description={description}
                       key={_id}
-                      id={founderId}
+                      param={oneLink}
                       isCompany
                     />
                   );

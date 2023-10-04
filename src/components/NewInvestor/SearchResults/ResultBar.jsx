@@ -3,11 +3,17 @@ import Default from "../../../Images/Investor/searchResult/business-and-trade.pn
 import "./ResultBar.scss";
 import { Link } from "react-router-dom";
 
-export default function ResultBar({ image, name, description, isCompany, id }) {
+export default function ResultBar({
+  image,
+  name,
+  description,
+  isCompany,
+  param,
+}) {
   return (
     <Link
       className="Link"
-      to={isCompany ? `/investor/company-profile/${id}` : ""}
+      to={isCompany ? `/investor/company-profile/${param}` : ""}
     >
       <div className="result__bar d-flex align-items-center gap-3 p-3">
         <img

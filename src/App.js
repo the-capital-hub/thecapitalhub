@@ -302,7 +302,7 @@ function App() {
               element={<EditInvestorCompanyProfilePage />}
             />
             <Route
-              path="company-profile/:founderId"
+              path="company-profile/:username"
               element={<InvestorCompanyProfilePage />}
             />
           </Route>
