@@ -15,7 +15,7 @@ const SmallProfileCard = ({ className, text, width }) => {
   return (
     <div className={`container-fluid small_card_container ${className}`}>
       <div
-        className="d-flex align-items-center gap-5 small_card_row"
+        className="d-flex flex-column flex-md-row align-items-center gap-5 small_card_row"
         style={{ width: width ? width : "100%" }}
       >
         <div className="">
