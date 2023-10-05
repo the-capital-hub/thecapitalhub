@@ -4,6 +4,8 @@ const initialState = {
   chatId: "",
   userId: "",
   isCommunitySelected: false,
+  chatProfile: {},
+  communityProfile: {},
 };
 
 export const chatSlice = createSlice({
@@ -28,7 +30,12 @@ export const chatSlice = createSlice({
   },
 });
 
-export const { setChatId, setUserId, setIsCommuntySelected, setChatProfile, setCommunityProfile } =
-  chatSlice.actions;
+export const {
+  setChatId,
+  setUserId,
+  setIsCommuntySelected,
+  setChatProfile,
+  setCommunityProfile,
+} = chatSlice.actions;
 
 export default chatSlice.reducer;

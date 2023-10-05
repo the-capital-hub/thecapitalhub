@@ -508,7 +508,7 @@ function Profile() {
           <div className="content-30">
             <div className="row d-none d-xl-block">
               <InvestorRightProfileCard />
-              <RecommendationCard />
+              <RecommendationCard isInvestor={true} />
               <NewsCorner />
             </div>
           </div>
