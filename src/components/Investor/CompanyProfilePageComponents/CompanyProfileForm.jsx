@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./CompanyProfileForm.scss";
 import { postStartUpData, postInvestorData } from "../../../Service/user";
+import { getBase64 } from "../../../utils/getBase64";
 
 export default function CompanyProfileForm({ companyData, investor = false }) {
   const [formData, setFormData] = useState("");
@@ -48,8 +49,11 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
 
   const handleBlur = async () => {
     try {
-      if (investor) {
-        console.log(formData);
+      if(selectedFile) {
+        const logo = await getBase64(selectedFile);
+        formData.logo = logo;
+      }
+      if (investor) { 
         const response = await postInvestorData(formData);
         console.log(response);
       } else {
@@ -72,13 +76,14 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
             id="companyLogo"
             className=" visually-hidden"
             value={""}
+            accept="image/*"
             onChange={handleFileInputChange}
           />
           <div className="profile_form_input d-flex align-items-center gap-4">
             <label htmlFor="companyLogo" style={{ cursor: "pointer" }}>
               Upload Picture
             </label>
-            <p className="m-0 fs-6 fw-light">Uploaded_file_name</p>
+            <p className="m-0 fs-6 fw-light">{selectedFile?.name}</p>
           </div>
         </fieldset>
 

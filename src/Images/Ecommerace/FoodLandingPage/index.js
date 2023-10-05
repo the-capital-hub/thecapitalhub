@@ -6,6 +6,15 @@ import foodBox from './food-box.png'
 import roundBox from './round-box.png'
 import foodVessel from './food-vessel.png'
 import womenWithFood from './women-with-food.png'
+import star from './star.png'
+import JackSon from './Jack Son.png'
+import rectanglePizza1 from './Rectangle pizza.png'
+import rectanglePizza2 from './Rectanglepizza2.png'
+import icecream from './icecream.png'
+import chicken from './chicken.png'
+import burger from './burger.png'
+import pizza from './pizza.png'
+
 
 
 
@@ -17,5 +26,13 @@ export default {
     foodBox,
     roundBox,
     foodVessel,
-    womenWithFood
+    womenWithFood,
+    star,
+    JackSon,
+    rectanglePizza1,
+    rectanglePizza2,
+    icecream,
+    chicken,
+    burger,
+    pizza
 }

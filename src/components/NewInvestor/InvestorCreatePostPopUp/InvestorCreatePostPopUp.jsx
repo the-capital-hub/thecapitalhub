@@ -10,6 +10,17 @@ import { getBase64 } from "../../../utils/getBase64";
 import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import FeedPostCard from "../../Investor/Cards/FeedPost/FeedPostCard";
 import EasyCrop from "react-easy-crop";
+import IconFile from "../../Investor/SvgIcons/IconFile";
+import { BsLink45Deg } from "react-icons/bs";
+const AWS = require("aws-sdk");
+
+AWS.config.update({
+  accessKeyId: "AKIA3ADZ252QBA67V4VO",
+  secretAccessKey: "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",
+  region: "us-east-1",
+});
+
+const s3 = new AWS.S3();
 
 const CreatePostPopUp = ({
   setPopupOpen,
@@ -34,6 +45,7 @@ const CreatePostPopUp = ({
   const galleryInputRef = useRef(null);
   const cameraInputRef = useRef(null);
   const smileeInputRef = useRef(null);
+  const documentInputRef = useRef(null);
 
   const handleGalleryButtonClick = () => {
     galleryInputRef.current.click();
@@ -41,6 +53,10 @@ const CreatePostPopUp = ({
 
   const handleCameraButtonClick = () => {
     cameraInputRef.current.click();
+  };
+
+  const handleDocumentButtonClick = () => {
+    documentInputRef.current.click();
   };
 
   const handleSmileeButtonClick = () => {
@@ -58,21 +74,30 @@ const CreatePostPopUp = ({
       setPreviewImage(objectUrl);
       setSelectedImage(file);
       setCroppedImage(null);
-      if (setSelectedVideo) {
+      if (selectedVideo || selectedDocument) {
         setPreviewVideo("");
         setSelectedVideo(null);
         setPreviewVideoType("");
+        setSelectedDocument(null);
       }
     } else if (event.target.name === "video" && file.type.includes("video")) {
       setPreviewVideoType(file.type);
       setPreviewVideo(objectUrl);
       setSelectedVideo(file);
-      if (selectedImage) {
+      if (selectedImage || selectedDocument) {
         setPreviewImage("");
         setSelectedImage(null);
+        setSelectedDocument(null);
       }
     } else if (event.target.name === "document") {
       setSelectedDocument(file);
+      if (selectedImage || selectedVideo) {
+        setPreviewImage("");
+        setSelectedImage(null);
+        setPreviewVideo("");
+        setSelectedVideo(null);
+        setPreviewVideoType("");
+      }
     }
   };
   const handleTextareaChange = (event) => {
@@ -148,9 +173,18 @@ const CreatePostPopUp = ({
       const video = await getBase64(selectedVideo);
       postData.append("video", video);
     }
-    // if (selectedDocument) {
-    //   postData.append("document", selectedDocument);
-    // }
+    if (selectedDocument) {
+      const timestamp = Date.now();
+      const fileName = `${timestamp}_${selectedDocument.name}`;
+      const params = {
+        Bucket: "capitalhub",
+        Key: `documents/${fileName}`,
+        Body: selectedDocument,
+      };
+      const res = await s3.upload(params).promise();
+      postData.append("documentUrl", res.Location);
+      postData.append("documentName", selectedDocument.name);
+    }
 
     // Call the postUserPost function to make the POST request to the server
     postUserPost(postData)
@@ -340,6 +374,22 @@ const CreatePostPopUp = ({
                       type="file"
                       name="document"
                       style={{ display: "none" }}
+                      ref={documentInputRef}
+                      onChange={handleFileChange}
+                      accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf"
+                    />
+                    <button
+                      className="white_button"
+                      onClick={handleDocumentButtonClick}
+                    >
+                      {/* <img src={CameraIcon} alt="Button 2" /> */}
+                      <IconFile width="16px" height="16px" />
+                    </button>
+
+                    <input
+                      type="file"
+                      name="document"
+                      style={{ display: "none" }}
                       ref={smileeInputRef}
                       onChange={handleFileChange}
                     />
@@ -350,8 +400,16 @@ const CreatePostPopUp = ({
                       <img src={SmileeIcon} alt="Button 3" />
                     </button> */}
 
-                    <button className="white_button">
+                    {/* <button className="white_button">
                       <img src={ThreeDotsIcon} alt="Button 4" />
+                    </button> */}
+                    <button className="white_button">
+                      {/* <img src={ThreeDotsIcon} alt="Button 4" /> */}
+                      <BsLink45Deg
+                        height={"59px"}
+                        width={"59px"}
+                        size={"20px"}
+                      />
                     </button>
                   </div>
                   <div className="post_button_container">

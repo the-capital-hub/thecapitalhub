@@ -4,40 +4,40 @@ import AfterSuccessPopup from "../../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import "./investorRecommendationCard.scss";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-// import {
-//   getRecommendations,
-//   sentConnectionRequest,
-// } from "../../../../Service/user";
+import {
+  getRecommendations,
+  sentConnectionRequest,
+} from "../../../Service/user";
 import { Link } from "react-router-dom";
 
 const RecommendationCard = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-//   useEffect(() => {
-//     getRecommendations(loggedInUser._id)
-//       .then(({ data }) => {
-//         setUsers(data.slice(0, 5));
-//         setLoading(false);
-//       })
-//       .catch(() => setUsers({}));
-//   }, [loggedInUser._id]);
+  useEffect(() => {
+    getRecommendations(loggedInUser._id)
+      .then(({ data }) => {
+        setUsers(data.slice(0, 5));
+        setLoading(false);
+      })
+      .catch(() => setUsers({}));
+  }, [loggedInUser._id]);
 
   const [connectionSent, setConnectionSent] = useState(false);
 
-//   const handleConnect = (userId) => {
-//     sentConnectionRequest(loggedInUser._id, userId)
-//       .then(({ data }) => {
-//         setConnectionSent(!connectionSent);
-//         setTimeout(() => setConnectionSent((prev) => !prev), 2500);
-//         getRecommendations(loggedInUser._id)
-//           .then(({ data }) => {
-//             setUsers(data.slice(0, 5));
-//           })
-//           .catch(() => setUsers({}));
-//       })
-//       .catch((error) => console.log(error));
-//   };
+  //   const handleConnect = (userId) => {
+  //     sentConnectionRequest(loggedInUser._id, userId)
+  //       .then(({ data }) => {
+  //         setConnectionSent(!connectionSent);
+  //         setTimeout(() => setConnectionSent((prev) => !prev), 2500);
+  //         getRecommendations(loggedInUser._id)
+  //           .then(({ data }) => {
+  //             setUsers(data.slice(0, 5));
+  //           })
+  //           .catch(() => setUsers({}));
+  //       })
+  //       .catch((error) => console.log(error));
+  //   };
 
   return (
     <>
@@ -64,7 +64,7 @@ const RecommendationCard = () => {
                       className="card-body recommendation_card_body "
                       // key={i}
                     >
-                      <Link to={`/user/${user._id}`} className="rounded-circle">
+                      <Link to={`#`} className="rounded-circle">
                         <img
                           src={user.profilePicture}
                           alt="img"

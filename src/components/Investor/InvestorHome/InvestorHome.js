@@ -174,8 +174,8 @@ const InvestorHome = () => {
 
   return (
     <div className="container-fluid investorHome_main_container">
-      <div className="row mt-2">
-        <div className="col seventy d-flex flex-column gap-3">
+      <div className=" two_column_wrapper mt-2">
+        <div className=" seventy d-flex flex-column gap-3">
           <div className="row">
             <div className="col-12">
               <SmallProfileCard className={""} />
@@ -442,7 +442,7 @@ const InvestorHome = () => {
                     </div>
                   </div>
                   <div className="col-12 mt-2 milestones">
-                    <MileStoneCard userId={loggedInUser._id} isDelete={true}/>
+                    <MileStoneCard userId={loggedInUser._id} isDelete={true} />
                   </div>
                 </div>
               </div>
@@ -537,7 +537,7 @@ const InvestorHome = () => {
             </div>
           </div>
         </div>
-        <div className="col thirty">
+        <div className="thirty">
           <RightProfileCard />
           <RecommendationCard />
           <NewsCorner />

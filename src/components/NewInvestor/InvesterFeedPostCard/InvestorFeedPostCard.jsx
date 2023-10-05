@@ -32,6 +32,7 @@ import ModalBSContainer from "../../PopUp/ModalBS/ModalBSContainer/ModalBSContai
 import ModalBSHeader from "../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
 import ModalBSFooter from "../../PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
 import ModalBSBody from "../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
+import Linkify from "react-linkify";
 
 const FeedPostCard = ({
   postId,
@@ -40,6 +41,8 @@ const FeedPostCard = ({
   lastName,
   video,
   image,
+  documentUrl,
+  documentName,
   createdAt,
   profilePicture,
   designation,
@@ -205,7 +208,7 @@ const FeedPostCard = ({
 
   return (
     <>
-      <div className="row feedpostcard_main_container mb-2">
+      <div className="row investor_feedpostcard_main_container mb-2">
         <div className="col-12">
           <div
             className={`box feedpostcard_container mt-2 ${
@@ -295,9 +298,18 @@ const FeedPostCard = ({
             </div>
             <div className="para_container w-100">
               <div className="para_container_text w-100">
-                {description && (
-                  <p style={{ fontSize: "15px" }}>{description}</p>
-                )}
+                <Linkify>
+                  {description && (
+                    <p style={{ fontSize: "15px" }}>
+                      {description}{" "}
+                      {documentUrl && (
+                        <a href={documentUrl} className="mx-auto">
+                          {documentName}
+                        </a>
+                      )}
+                    </p>
+                  )}
+                </Linkify>
                 {image && (
                   <span className="d-flex">
                     <img

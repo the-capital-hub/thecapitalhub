@@ -81,6 +81,7 @@ import CompanyProfilePage from "./pages/StartUp/CompanyProfile/CompanyProfilePag
 import InvestorCompanyProfilePage from "./pages/Investor/InvestorCompanyProfilePage/InvestorCompanyProfilePage";
 import FoodLandingPage from "./eCommerace/pages/LandingPage/FoodLandingPage/FoodLandingPage";
 import Layout from "./components/ECommerace/Layout/Layout/Layout";
+import OtherInvestorProfile from "./pages/Investor/OtherInvestorProfile/OtherInvestorProfile";
 
 function App() {
   return (
@@ -307,6 +308,7 @@ function App() {
               path="company-profile/:username"
               element={<InvestorCompanyProfilePage />}
             />
+            <Route path="user/:userId" element={<OtherInvestorProfile />} />
           </Route>
 
           {/* Blogs */}

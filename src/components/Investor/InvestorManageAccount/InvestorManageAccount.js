@@ -65,7 +65,7 @@ const InvestorManageAccount = () => {
   };
 
   return (
-    <div className="container-fluid manage_account_container">
+    <div className=" manage_account_container">
       <div className="row">
         <div className="col">
           <SmallProfileCard className="mt-5 mt-xl-3" text={"Manage Account"} />
@@ -145,8 +145,8 @@ const InvestorManageAccount = () => {
                     <img src={profileIcon} alt="img" />
                   </div>
                   <div className="name_email">
-                    <h4>Pramod Badiger</h4>
-                    <h6>Pramodbadiger@gmail.com</h6>
+                    <h4 className="text-break">Pramod Badiger</h4>
+                    <h6 className="text-break">Pramodbadiger@gmail.com</h6>
                   </div>
                 </div>
                 {/* Footer */}
