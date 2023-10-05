@@ -118,6 +118,8 @@ function Home() {
                     },
                     video,
                     image,
+                    documentUrl,
+                    documentName,
                     createdAt,
                     likes,
                     _id,
@@ -134,6 +136,8 @@ function Home() {
                       lastName={lastName}
                       video={video}
                       image={image}
+                      documentName={documentName}
+                      documentUrl={documentUrl}
                       createdAt={createdAt}
                       likes={likes}
                       fetchAllPosts={fetchAllPosts}

@@ -182,7 +182,8 @@ const CreatePostPopUp = ({
         Body: selectedDocument,
       };
       const res = await s3.upload(params).promise();
-      postData.append("documents", res.Location);
+      postData.append("documentUrl", res.Location);
+      postData.append("documentName", selectedDocument.name);
     }
 
     // Call the postUserPost function to make the POST request to the server
