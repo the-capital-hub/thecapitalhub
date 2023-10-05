@@ -83,30 +83,22 @@ const Feed = () => {
       <div className="container-fluid feed_container">
         <div className="row mt-2">
           <div className="col main_content d-flex flex-column gap-3">
-            <div className="row">
-              <div className="col">
-                <SmallProfileCard text={"Home"} />
-              </div>
-            </div>
+            <SmallProfileCard className="d-none d-md-block" text={"Home"} />
             <div className="content-70 d-flex flex-column gap-3">
-              <div className="row">
-                <div className="col-12 mt-2">
-                  <div className="box start_post_container">
-                    <img
-                      src={loggedInUser.profilePicture}
-                      alt="Image"
-                      className="rounded-circle"
-                      style={{ width: "50px", height: "50px" }}
-                    />
-                    <div className="w-100 me-4" onClick={openPopup}>
-                      <input
-                        className="px-3"
-                        type="text"
-                        placeholder="Write a post..."
-                        style={{ pointerEvents: "none" }}
-                      />
-                    </div>
-                  </div>
+              <div className="box start_post_container">
+                <img
+                  src={loggedInUser.profilePicture}
+                  alt="Image"
+                  className="rounded-circle"
+                  style={{ width: "50px", height: "50px" }} 
+                />
+                <div className="w-auto flex-grow-1 me-4" onClick={openPopup}>
+                  <input
+                    className="px-3 flex-grow-1"
+                    type="text"
+                    placeholder="Write a post..."
+                    style={{ pointerEvents: "none" }}
+                  />
                 </div>
               </div>
               {!loadingFeed ? (
