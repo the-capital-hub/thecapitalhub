@@ -15,7 +15,7 @@ import {
   getSavedPostCollections,
   postUserPost,
 } from "../../../Service/user";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 function Home() {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -70,18 +70,18 @@ function Home() {
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const showPopup = queryParams.get('showPopup') === 'true';
+  const showPopup = queryParams.get("showPopup") === "true";
 
   useEffect(() => {
     if (showPopup) {
       setPopupOpen(true);
       const urlWithoutQuery = location.pathname;
-      window.history.replaceState({}, '', urlWithoutQuery);
+      window.history.replaceState({}, "", urlWithoutQuery);
     }
   }, [location]);
   return (
     <>
-      <div className="container-fluid feed_container">
+      <div className="container-fluid investor_feed_container">
         <div className="row mt-2">
           <div className="col">
             <InvestorSmallProfilecard text={"Home"} />
