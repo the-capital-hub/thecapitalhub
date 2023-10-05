@@ -11,16 +11,19 @@ const investorSchema = new Schema(
       type: String,
       required: true,
     },
+    logo: {
+      type: String,
+    },
     description: {
       type: String,
     },
     location: {
       type: String,
-      required: true,
+      // required: true,
     },
     industry: {
       type: String,
-      required: true,
+      // required: true,
     },
     startedAtDate: {
       type: String,
