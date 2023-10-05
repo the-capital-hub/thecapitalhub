@@ -114,6 +114,8 @@ const Feed = () => {
                     },
                     video,
                     image,
+                    documentUrl,
+                    documentName,
                     createdAt,
                     likes,
                     _id,
@@ -130,6 +132,8 @@ const Feed = () => {
                       lastName={lastName}
                       video={video}
                       image={image}
+                      documentName={documentName}
+                      documentUrl={documentUrl}
                       createdAt={createdAt}
                       likes={likes}
                       fetchAllPosts={fetchAllPosts}

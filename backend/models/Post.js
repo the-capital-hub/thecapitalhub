@@ -28,6 +28,8 @@ const postSchema = new Schema(
     },
     image: String,
     video: String,
+    documentName: String,
+    documentUrl: String,
     likes: [
       {
         type: Schema.Types.ObjectId,
