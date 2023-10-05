@@ -10,7 +10,7 @@ import {
 } from "../../../../Service/user";
 import { Link } from "react-router-dom";
 
-const RecommendationCard = () => {
+const RecommendationCard = ({ isInvestor }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -62,18 +62,34 @@ const RecommendationCard = () => {
                   users.map((user, i) => (
                     <div key={i}>
                       <div className="card-body recommendation_card_body">
-                        <Link to={`/user/${user._id}`} className="rounded-circle">
-                          <img src={user.profilePicture} alt="img" className="rounded-circle" />
+                        <Link
+                          to={
+                            isInvestor
+                              ? `/investor/user/${user._id}`
+                              : `/user/${user._id}`
+                          }
+                          className="rounded-circle"
+                        >
+                          <img
+                            src={user.profilePicture}
+                            alt="img"
+                            className="rounded-circle"
+                          />
                         </Link>
                         <div className="recommendation_card_text">
                           <h3>
                             {user.firstName} {user.lastName}
                           </h3>
                           {user.designation && (
-                            <h4 className="smallest_typo">{user.designation}</h4>
+                            <h4 className="smallest_typo">
+                              {user.designation}
+                            </h4>
                           )}
                         </div>
-                        <button className="connect_button" onClick={() => handleConnect(user._id)}>
+                        <button
+                          className="connect_button"
+                          onClick={() => handleConnect(user._id)}
+                        >
                           <img src={AddUserIconBlack} alt="add user" />
                           <span>Connect</span>
                         </button>

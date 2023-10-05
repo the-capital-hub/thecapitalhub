@@ -76,10 +76,12 @@ import NewInvestorManageAccount from "./components/NewInvestor/InvestorManageAcc
 import SavedPosts from "./pages/Investor/SavedPosts/SavedPosts";
 import UXBlog from "./pages/Blogs/UXBlog/UXBlog";
 import EditCompanyProfilePage from "./pages/StartUp/CompanyProfile/EditCompanyProfilePage";
-import InvestorCompanyProfilePage from "./pages/Investor/InvestorCompanyProfilePage/InvestorCompanyProfilePage";
+import EditInvestorCompanyProfilePage from "./pages/Investor/InvestorCompanyProfilePage/EditInvestorCompanyProfilePage";
 import CompanyProfilePage from "./pages/StartUp/CompanyProfile/CompanyProfilePage";
+import InvestorCompanyProfilePage from "./pages/Investor/InvestorCompanyProfilePage/InvestorCompanyProfilePage";
 import FoodLandingPage from "./eCommerace/pages/LandingPage/FoodLandingPage/FoodLandingPage";
-import Layout from "./components/ECommerace/Layout/Layout/Layout"
+import Layout from "./components/ECommerace/Layout/Layout/Layout";
+import OtherInvestorProfile from "./pages/Investor/OtherInvestorProfile/OtherInvestorProfile";
 
 function App() {
   return (
@@ -295,13 +297,18 @@ function App() {
             <Route path="explore" element={<Explore />} />
             <Route path="syndicates" element={<Syndicates />} />
             <Route path="live-deals" element={<LiveDeals />} />
-            <Route path="search-results" element={<SearchResults />} />
+            <Route path="search" element={<SearchResults />} />
             <Route path="my-schedule" element={<MySchedule />} />
             <Route path="saved-posts" element={<SavedPosts />} />
             <Route
               path="company-profile"
+              element={<EditInvestorCompanyProfilePage />}
+            />
+            <Route
+              path="company-profile/:username"
               element={<InvestorCompanyProfilePage />}
             />
+            <Route path="user/:userId" element={<OtherInvestorProfile />} />
           </Route>
 
           {/* Blogs */}
@@ -337,8 +344,7 @@ function App() {
             />
           </Route>
           <Route path="/e-commerace" element={<Layout />}>
-
-          <Route path="food" element={<FoodLandingPage/>} />
+            <Route path="food" element={<FoodLandingPage />} />
           </Route>
         </Routes>
       </Router>

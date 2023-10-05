@@ -59,11 +59,14 @@ function OtherUserProfile() {
                 </div>
               </div>
               <div className="buttons d-flex gap-2 flex-row align-items-md-center">
-              <Link to={`/chats?userId=${userData?._id}`} className="text-decoration-none">
-                <button className="message btn rounded-pill px-3 py-2">
-                  <img src={messageIcon} width={20} alt="message user" />
-                  <span>Message</span>
-                </button>
+                <Link
+                  to={`/chats?userId=${userData?._id}`}
+                  className="text-decoration-none"
+                >
+                  <button className="message btn rounded-pill px-3 py-2">
+                    <img src={messageIcon} width={20} alt="message user" />
+                    <span>Message</span>
+                  </button>
                 </Link>
                 <button className="more btn rounded-pill px-3 py-2">
                   <span>More</span>
@@ -124,6 +127,8 @@ function OtherUserProfile() {
                   </div>
                 </div>
               </div> */}
+
+              {/* Experience */}
               <div className="experience rounded border shadow-sm profile_container">
                 <h4 className="h4">Experience</h4>
                 <div className="single_experience row row-cols-1 row-cols-md-2 gx-2">
@@ -154,6 +159,8 @@ function OtherUserProfile() {
                   </div>
                 </div>
               </div>
+
+              {/* Education */}
               <div className="education rounded border shadow-sm profile_container">
                 <h4 className="h4">Education</h4>
                 <div className="single_education">

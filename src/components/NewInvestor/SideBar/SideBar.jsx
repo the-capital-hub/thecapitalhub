@@ -170,12 +170,12 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
               </MenuItem>
 
               <MenuItem
-                active={location.pathname.includes("/company-profile")}
+                active={location.pathname.includes("/onelink")}
                 className="active-item"
               >
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
-                  to="/investor/company-profile"
+                  // to="/investor/company-profile"
                 >
                   <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} />
                   {!sidebarCollapsed && (
