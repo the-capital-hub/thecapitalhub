@@ -68,25 +68,28 @@
   }
 
   // CSS related to intersection observer
-  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+  transition: opacity 0.75s ease-in-out;
 
-  //   .opacity-0 {
-  //     opacity: 0;
-  //   }
+  .opacity-0 {
+    opacity: 0;
+  }
 
-  //   .opacity-1 {
-  //     opacity: 1;
-  //   }
+  .opacity-1 {
+    opacity: 1;
+  }
 
   .slide-left {
-    transform: translateX(-100px);
+    // transition: transform 2s ease-in-out;
+    transform: translateX(-30%);
   }
 
   .slide-right {
-    transform: translateX(100px);
+    // transition: transform 2s ease-in-out;
+    transform: translateX(30%);
   }
 
   .slide-reset {
+    transition: transform 0.75s ease-in-out;
     transform: translateX(0px);
   }
 }

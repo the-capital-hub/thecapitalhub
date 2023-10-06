@@ -11,12 +11,12 @@ export default function Features({ dataObject, btnClass, ltr }) {
   const { inView, ref } = useInView({
     triggerOnce: true,
     fallbackInView: true,
-    threshold: 1,
+    threshold: 0.25,
   });
 
   return (
     <div
-      className={`features_container ${inView ? "opacity-1" : "opacity-0"}`}
+      className={`features_container ${inView ? "opacity-1" : "opacity-0"} `}
       ref={ref}
     >
       <div
@@ -51,7 +51,7 @@ export default function Features({ dataObject, btnClass, ltr }) {
 
         {/* Image */}
         <div
-          className={`image__wrapper ${ltr ? "slide-left" : "slide-right"} ${
+          className={`image__wrapper ${ltr ? "slide-right" : "slide-left"} ${
             inView ? "slide-reset" : ""
           } `}
         >
