@@ -175,7 +175,7 @@ function Home() {
             <div className="content-30">
               <div className="row">
                 <InvestorRightProfileCard />
-                <RecommendationCard />
+                <RecommendationCard isInvestor={true}/>
                 <NewsCorner />
               </div>
             </div>
