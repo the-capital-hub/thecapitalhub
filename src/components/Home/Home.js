@@ -92,7 +92,7 @@ const Home = () => {
 
       {/* Features section */}
       <div className="container-fluid m-0 p-0">
-        <div className="container my-0 mx-auto px-0 py-4">
+        <div className="container my-0 mx-auto px-xl-0 px-3 py-4">
           <Features
             dataObject={featuresData.onelink}
             btnClass={"btn-purple"}

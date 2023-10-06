@@ -1,16 +1,12 @@
 .register_container {
   .login_buttons_row {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 70%;
-    gap: 10px;
-
-    button {
-      margin-left: 30px;
-    }
+    // margin-top: 20px;
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: center;
+    // align-items: center;
+    // width: 70%;
+    // gap: 10px;
   }
 
   .login_btn {
@@ -80,6 +76,7 @@
     justify-content: center;
     flex-direction: column;
     padding-top: 5%;
+    gap: 2em;
 
     .backArrow {
       height: 25px;

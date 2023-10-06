@@ -120,43 +120,53 @@ const Login = () => {
   }, []);
 
   return (
-    <>
-      <div className="row d-flex register_container">
+    <div className="container d-flex justify-content-center align-items-start py-md-5 min-vh-100">
+      <div className="row d-flex register_container w-100 ">
+        {/* Leftside heading and hero image */}
         <div className="col-lg-6 col-md-12 register_heading">
           <Link to="/">
             <img className="backArrow" src={backArrow} alt="arrow_back" />
           </Link>
           <h3>Welcome back!</h3>
-          <img src={RegisterIcon} alt="image" />
+          <img
+            src={RegisterIcon}
+            alt="image"
+            className="img-fluid"
+            loading="lazy"
+          />
         </div>
+
+        {/* Right side form */}
         <div className="col-lg-6 col-md-12 register_heading_right">
           <Link className="d-lg-none" to="/">
             <img className="backArrow" src={backArrow} alt="arrow_back" />
           </Link>
           <span className="welcome">Welcome back!</span>
 
-          <div className="login_buttons_row">
+          <div className="login_buttons_row d-flex flex-column align-items-center gap-3">
             <h1 className="mt-5">Login</h1>
-            <Link to="">
-              <button
-                className={`btn-primaryy login_btn ${
-                  !isInvestorSelected ? "startup" : ""
-                } `}
-                onClick={() => setIsInvestorSelected(false)}
-              >
-                StartUp
-              </button>
-            </Link>
-            <Link to="">
-              <button
-                className={`btn-primaryy login_btn ${
-                  isInvestorSelected ? "investor" : ""
-                } `}
-                onClick={() => setIsInvestorSelected(true)}
-              >
-                Investor
-              </button>
-            </Link>
+            <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-4 gap-sm-5">
+              <Link to="">
+                <button
+                  className={`btn-primaryy login_btn ${
+                    !isInvestorSelected ? "startup" : ""
+                  } `}
+                  onClick={() => setIsInvestorSelected(false)}
+                >
+                  StartUp
+                </button>
+              </Link>
+              <Link to="">
+                <button
+                  className={`btn-primaryy login_btn ${
+                    isInvestorSelected ? "investor" : ""
+                  } `}
+                  onClick={() => setIsInvestorSelected(true)}
+                >
+                  Investor
+                </button>
+              </Link>
+            </div>
           </div>
 
           <h3 className="already_have_account">
@@ -171,7 +181,7 @@ const Login = () => {
 
           <form onSubmit={handleSubmit}>
             <div className="row">
-              <div className="col-md-12 input-container">
+              <div className="col-md-12 col input-container">
                 <label htmlFor="mobile">Mobile Number</label>
                 <PhoneInput
                   placeholder="Mobile Number"
@@ -270,7 +280,7 @@ const Login = () => {
           <ResetPasswordPopUp onClose={handleCloseResetPopup} />
         )}
       </div>
-    </>
+    </div>
   );
 };
 

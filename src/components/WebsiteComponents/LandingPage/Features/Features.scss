@@ -2,15 +2,26 @@
   padding-block: 3em;
 
   .content_grid {
+    gap: 2rem;
+
     .text_column {
-      flex: 0 0 50%;
+      flex: 0 0 100%;
+
+      @media (min-width: 1200px) {
+        flex: 0 0 50%;
+      }
     }
 
     .image_wrapper {
-      flex: 0 0 45%;
+      flex: 0 0 100%;
+
+      @media (min-width: 1200px) {
+        flex: 0 0 45%;
+      }
     }
 
     @media (min-width: 1200px) {
+      gap: 0em;
     }
 
     .desktop_para {
@@ -28,7 +39,7 @@
 
     .mobile_para {
       display: block;
-
+      margin-top: 0;
       @media (min-width: 1200px) {
         display: none;
       }
@@ -42,6 +53,7 @@
       padding-block: 0.5em;
       text-align: center;
       font-size: 18px;
+      line-height: 1rem;
       color: white;
       box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.25);
 

@@ -20,13 +20,13 @@ export default function Features({ dataObject, btnClass, ltr }) {
       ref={ref}
     >
       <div
-        className={`content_grid d-flex justify-content-between ${
-          ltr ? "flex-row" : "flex-row-reverse"
+        className={`content_grid d-flex flex-column justify-content-between ${
+          ltr ? "flex-xl-row" : "flex-xl-row-reverse"
         } `}
       >
         {/* Text */}
         <div
-          className={`text_column d-flex flex-column gap-4 justify-content-center ${
+          className={`text_column d-flex flex-column gap-xl-4 gap-2 justify-content-center ${
             ltr ? "slide-left" : "slide-right"
           } ${inView ? "slide-reset" : ""} `}
         >
