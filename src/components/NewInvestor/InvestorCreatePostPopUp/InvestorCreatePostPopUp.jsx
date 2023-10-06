@@ -4,6 +4,7 @@ import SmileeIcon from "../../../Images/Smilee.svg";
 import GallaryIcon from "../../../Images/Gallary.svg";
 import ThreeDotsIcon from "../../../Images/ThreeDots.svg";
 import CameraIcon from "../../../Images/Camera.svg";
+import IconVideo from "../../../Images/post/Video.svg";
 import { useSelector } from "react-redux";
 import { getSinglePostAPI, postUserPost } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
@@ -367,7 +368,7 @@ const CreatePostPopUp = ({
                       className="white_button"
                       onClick={handleCameraButtonClick}
                     >
-                      <img src={CameraIcon} alt="Button 2" />
+                      <img src={IconVideo} alt="Button 2" />
                     </button>
 
                     <input
@@ -376,7 +377,6 @@ const CreatePostPopUp = ({
                       style={{ display: "none" }}
                       ref={documentInputRef}
                       onChange={handleFileChange}
-                      accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf"
                     />
                     <button
                       className="white_button"
