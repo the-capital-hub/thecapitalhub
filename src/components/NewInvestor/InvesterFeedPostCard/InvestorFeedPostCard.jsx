@@ -208,11 +208,12 @@ const FeedPostCard = ({
 
   return (
     <>
-      <div className="row feedpostcard_main_container mb-2">
+      <div className="row investor_feedpostcard_main_container mb-2">
         <div className="col-12">
           <div
-            className={`box feedpostcard_container mt-2 ${repostPreview && "rounded shadow-sm border"
-              }`}
+            className={`box feedpostcard_container mt-2 ${
+              repostPreview && "rounded shadow-sm border"
+            }`}
           >
             <div className="  feed_header_container border-2 border-bottom mb-3 pb-2">
               <div className="feedpostcard_content">
@@ -299,9 +300,14 @@ const FeedPostCard = ({
               <div className="para_container_text w-100">
                 <Linkify>
                   {description && (
-                    <p style={{ fontSize: "15px" }}>{description} {documentUrl && (
-                      <a href={documentUrl} className="mx-auto">{documentName}</a>
-                    )}</p>
+                    <p style={{ fontSize: "15px" }}>
+                      {description}{" "}
+                      {documentUrl && (
+                        <a href={documentUrl} className="mx-auto">
+                          {documentName}
+                        </a>
+                      )}
+                    </p>
                   )}
                 </Linkify>
                 {image && (
@@ -385,8 +391,9 @@ const FeedPostCard = ({
                   </div>
                   <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                     <span
-                      className={`repost_container rounded ${showRepostOptions ? "bg-light" : ""
-                        }`}
+                      className={`repost_container rounded ${
+                        showRepostOptions ? "bg-light" : ""
+                      }`}
                       ref={repostContainerRef}
                     >
                       <img
@@ -570,8 +577,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Harassment" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio1"
               >
                 Harassment
@@ -588,8 +596,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Spam" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio2"
               >
                 Spam
@@ -606,8 +615,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Fraud or scam" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio3"
               >
                 Fraud or scam
@@ -624,8 +634,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Hateful Speech" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio4"
               >
                 Hateful Speech
