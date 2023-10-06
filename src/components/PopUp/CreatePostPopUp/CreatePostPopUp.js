@@ -5,13 +5,18 @@ import GallaryIcon from "../../../Images/Gallary.svg";
 import ThreeDotsIcon from "../../../Images/ThreeDots.svg";
 import CameraIcon from "../../../Images/Camera.svg";
 import { useSelector } from "react-redux";
-import { getSinglePostAPI, postUserPost, getStartupByFounderId } from "../../../Service/user";
+import {
+  getSinglePostAPI,
+  postUserPost,
+  getStartupByFounderId,
+} from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
 import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import FeedPostCard from "../../Investor/Cards/FeedPost/FeedPostCard";
 import EasyCrop from "react-easy-crop";
 import { BsLink45Deg } from "react-icons/bs";
 import IconFile from "../../Investor/SvgIcons/IconFile";
+import IconVideo from "../../../Images/post/Video.svg";
 
 const AWS = require("aws-sdk");
 
@@ -116,7 +121,7 @@ const CreatePostPopUp = ({
   const handleOneLinkClick = () => {
     getStartupByFounderId(loggedInUser._id)
       .then(({ data }) => {
-        setPostText(`https://thecapitalhub.in/onelink/${data.oneLink}`);
+        setPostText((prevPostText) => prevPostText + ` https://thecapitalhub.in/onelink/${data.oneLink}`);
       })
       .catch((error) => console.log(error));
   };
@@ -249,6 +254,7 @@ const CreatePostPopUp = ({
       >
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
+            {/* Create Post modal header */}
             <div className="createpost_modal-header">
               <div className="createpostpopup">
                 <div className="ceatepost_img_name">
@@ -279,6 +285,8 @@ const CreatePostPopUp = ({
                 </button>
               </div>
             </div>
+
+            {/* Create Post modal body */}
             <div className="modal-body">
               <div className="createpost_text_area">
                 <textarea
@@ -355,10 +363,13 @@ const CreatePostPopUp = ({
                 )}
               </div>
             </div>
+
+            {/* create post modal footer - Icons and Post button */}
             <div className="createpost_modal_footer">
               <div className="modal_footer_container mt-4 mb-3">
                 <div className="modal_footer_container">
                   <div className="left_buttons">
+                    {/* Image input and Icon */}
                     <input
                       type="file"
                       name="image"
@@ -374,6 +385,7 @@ const CreatePostPopUp = ({
                       <img src={GallaryIcon} alt="Button 1" />
                     </button>
 
+                    {/* Video input and Icon */}
                     <input
                       type="file"
                       name="video"
@@ -382,22 +394,20 @@ const CreatePostPopUp = ({
                       onChange={handleFileChange}
                       accept="video/*"
                     />
-
                     <button
                       className="white_button"
                       onClick={handleCameraButtonClick}
                     >
-                      <img src={CameraIcon} alt="Button 2" />
-
+                      <img src={IconVideo} alt="Button 2" />
                     </button>
 
+                    {/* Document input and Icon */}
                     <input
                       type="file"
                       name="document"
                       style={{ display: "none" }}
                       ref={documentInputRef}
                       onChange={handleFileChange}
-                      accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf"
                     />
                     <button
                       className="white_button"
@@ -421,7 +431,10 @@ const CreatePostPopUp = ({
                       <img src={SmileeIcon} alt="Button 3" />
                     </button> */}
 
-                    <button className="white_button" onClick={handleOneLinkClick}>
+                    <button
+                      className="white_button"
+                      onClick={handleOneLinkClick}
+                    >
                       {/* <img src={ThreeDotsIcon} alt="Button 4" /> */}
                       <BsLink45Deg
                         height={"59px"}

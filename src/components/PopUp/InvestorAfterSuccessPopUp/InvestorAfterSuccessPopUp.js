@@ -1,8 +1,9 @@
 import React from "react";
 import "./InvestorAfterSuccessPopUp.scss";
 import CorrectIcon from "../../../Images/CorrectIcon.svg";
+import IconCorrect from "./IconCorrect";
 
-const AfterSuccessPopUp = ({
+const InvestorAfterSuccessPopUp = ({
   onClose,
   contactFrom,
   register,
@@ -24,7 +25,8 @@ const AfterSuccessPopUp = ({
     <div className="investor_after_register_popup">
       <div className="popup">
         <div className="popup-content">
-          <img src={CorrectIcon} alt="image" />
+          {/* <img src={CorrectIcon} alt="image" /> */}
+          <IconCorrect fill={"#d3f36b"} />
           {contactFrom && (
             <h1>
               Form Submitted{" "}
@@ -65,4 +67,4 @@ const AfterSuccessPopUp = ({
   );
 };
 
-export default AfterSuccessPopUp;
+export default InvestorAfterSuccessPopUp;

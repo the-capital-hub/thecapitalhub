@@ -38,8 +38,11 @@ export default function SearchResults() {
     if (searchParams.has("query")) {
       fetchData();
     }
-  }, [query]);
+  }, [query, searchParams, userIdToRemove]);
 
+  useEffect(() => {
+    setQuery(searchParams.get("query"));
+  }, [searchParams]);
   return (
     <div className="search__results__wrapper px-3 border-start pb-5">
       <div className="pb-4 pt-2">
