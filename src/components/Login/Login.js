@@ -21,14 +21,16 @@ import ResetPasswordPopUp from "../PopUp/RequestPasswordPopUp/RequestPasswordPop
 
 const Login = () => {
   const dispatch = useDispatch();
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [isInvestorSubmitted, setIsInvestorSubmitted] = useState(false);
+  const [isLoginSuccessfull, setIsLoginSuccessfull] = useState(false);
+  const [isInvestorSelected, setIsInvestorSelected] = useState(false);
   const [error, setError] = useState(null);
   const [showResetPopUp, setShowResetPopUp] = useState(false);
   const [inputValues, setInputValues] = useState({
     password: "",
     phoneNumber: "",
   });
+
+  // Handle Input change
   const handleInputChange = (event, type) => {
     if (type !== "country" && type !== "state" && type !== "phoneNumber") {
       const { name, value } = event.target;
@@ -42,6 +44,7 @@ const Login = () => {
     }
   };
 
+  // Handle Submit
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -57,25 +60,21 @@ const Login = () => {
       if (response) {
         console.log("response--->", response);
 
-        if (button1Class === "btn1" && user.investor) {
+        if (!isInvestorSelected && user.investor) {
           setError("Invalid credentials");
           return;
         }
-        if (button2Class === "btn1" && !user.investor) {
+        if (isInvestorSelected && !user.investor) {
           setError("Invalid credentials");
           return;
-        }
-        if (button1Class === "btn1") {
-          setIsSubmitted(true);
         }
 
-        if (button2Class === "btn1") {
-          setIsInvestorSubmitted(true);
-        }
+        setIsLoginSuccessfull(true);
 
         setTimeout(() => {
-          setIsSubmitted(false);
-          setIsInvestorSubmitted(false);
+          setIsInvestorSelected(false);
+          setIsLoginSuccessfull(false);
+
           if (!user.investor) navigate("/profile");
           else navigate("/investor");
         }, 2000);
@@ -95,9 +94,9 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleClosePopup = () => {
-    if (isSubmitted) {
+    if (!isInvestorSelected) {
       navigate("/profile");
-    } else if (isInvestorSubmitted) {
+    } else if (isInvestorSelected) {
       navigate("/investor/profile");
     }
   };
@@ -112,19 +111,6 @@ const Login = () => {
   useEffect(() => {
     document.title = "Log In | The Capital Hub";
   }, []);
-
-  const [button1Class, setButton1Class] = useState("btn1");
-  const [button2Class, setButton2Class] = useState("btn2");
-
-  const handleButton1Click = () => {
-    setButton1Class("btn1");
-    setButton2Class("btn2");
-  };
-
-  const handleButton2Click = () => {
-    setButton1Class("btn2");
-    setButton2Class("btn1");
-  };
 
   return (
     <>
@@ -146,16 +132,20 @@ const Login = () => {
             <h1 className="mt-5">Login</h1>
             <Link to="">
               <button
-                className={`btn-primaryy ${button1Class} login_btn`}
-                onClick={handleButton1Click}
+                className={`btn-primaryy login_btn ${
+                  !isInvestorSelected ? "startup" : ""
+                } `}
+                onClick={() => setIsInvestorSelected(false)}
               >
                 StartUp
               </button>
             </Link>
             <Link to="">
               <button
-                className={`btn-primaryy ${button2Class} login_btn`}
-                onClick={handleButton2Click}
+                className={`btn-primaryy login_btn ${
+                  isInvestorSelected ? "investor" : ""
+                } `}
+                onClick={() => setIsInvestorSelected(true)}
               >
                 Investor
               </button>
@@ -164,7 +154,10 @@ const Login = () => {
 
           <h3 className="already_have_account">
             I don’t have an account?{" "}
-            <Link to={"/signup"} style={{ color: "red" }}>
+            <Link
+              to={"/signup"}
+              className={isInvestorSelected ? "green" : "orange"}
+            >
               Create account
             </Link>
           </h3>
@@ -222,7 +215,10 @@ const Login = () => {
               </label>
             </div> */}
             <div className="submit_btn mt-3">
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className={` ${isInvestorSelected ? "investor" : "startup"}`}
+              >
                 Log In
               </button>
             </div>
@@ -247,10 +243,10 @@ const Login = () => {
             </div>
           </div> */}
         </div>
-        {isSubmitted && (
+        {isLoginSuccessfull && !isInvestorSelected && (
           <AfterSuccessPopUp onClose={handleClosePopup} login={true} />
         )}
-        {isInvestorSubmitted && (
+        {isLoginSuccessfull && isInvestorSelected && (
           <InvestorAfterSuccessPopUp onClose={handleClosePopup} login={true} />
         )}
 
