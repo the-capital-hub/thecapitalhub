@@ -121,7 +121,7 @@ const CreatePostPopUp = ({
   const handleOneLinkClick = () => {
     getStartupByFounderId(loggedInUser._id)
       .then(({ data }) => {
-        setPostText(`https://thecapitalhub.in/onelink/${data.oneLink}`);
+        setPostText((prevPostText) => prevPostText + ` https://thecapitalhub.in/onelink/${data.oneLink}`);
       })
       .catch((error) => console.log(error));
   };
@@ -408,7 +408,6 @@ const CreatePostPopUp = ({
                       style={{ display: "none" }}
                       ref={documentInputRef}
                       onChange={handleFileChange}
-                      accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,.pdf"
                     />
                     <button
                       className="white_button"
