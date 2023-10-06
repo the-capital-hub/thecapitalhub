@@ -212,7 +212,7 @@ const NavBar = (props) => {
                       />
                       <button
                         type="submit"
-                        className="searchbar-button d-flex align-items-center justify-content-center"
+                        className="investor-searchbar-button d-flex align-items-center justify-content-center"
                       >
                         <img src={searchIcon} alt="search" />
                       </button>
