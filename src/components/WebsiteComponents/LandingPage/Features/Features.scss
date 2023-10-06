@@ -1,0 +1,92 @@
+.features_container {
+  padding-block: 3em;
+
+  .content_grid {
+    .text_column {
+      flex: 0 0 50%;
+    }
+
+    .image_wrapper {
+      flex: 0 0 45%;
+    }
+
+    @media (min-width: 1200px) {
+    }
+
+    .desktop_para {
+      display: none;
+      @media (min-width: 1200px) {
+        display: block;
+        width: 90%;
+        line-height: 1.75;
+      }
+    }
+
+    .desktop_para + .desktop_para {
+      margin-top: 0;
+    }
+
+    .mobile_para {
+      display: block;
+
+      @media (min-width: 1200px) {
+        display: none;
+      }
+    }
+
+    .btn-base {
+      border: 1px solid transparent;
+      border-radius: 10px;
+
+      width: 210px;
+      padding-block: 0.5em;
+      text-align: center;
+      font-size: 18px;
+      color: white;
+      box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+      &:active {
+        box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.25) inset;
+      }
+    }
+
+    .btn-purple {
+      background-color: rgba(167, 130, 236, 1);
+    }
+
+    .btn-green {
+      background-color: rgba(79, 233, 164, 1);
+    }
+
+    .btn-black {
+      background-color: rgba(26, 26, 26, 1);
+    }
+
+    .btn-orange {
+      background-color: rgba(253, 89, 1, 1);
+    }
+  }
+
+  // CSS related to intersection observer
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+
+  //   .opacity-0 {
+  //     opacity: 0;
+  //   }
+
+  //   .opacity-1 {
+  //     opacity: 1;
+  //   }
+
+  .slide-left {
+    transform: translateX(-100px);
+  }
+
+  .slide-right {
+    transform: translateX(100px);
+  }
+
+  .slide-reset {
+    transform: translateX(0px);
+  }
+}
