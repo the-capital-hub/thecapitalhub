@@ -129,7 +129,7 @@ const NavBar = (props) => {
                             <Link
                               key={_id}
                               className="single_result"
-                              // to={`/user/${_id}`}
+                              to={`/investor/user/${_id}`}
                             >
                               {firstName} {lastName}
                             </Link>
@@ -152,9 +152,9 @@ const NavBar = (props) => {
                         )}
                         {searchSuggestions?.company
                           ?.slice(0, 5)
-                          .map(({ company }) => (
+                          .map(({ company, oneLink }) => (
                             <span className="single_result">
-                              <Link to={`#`}>{company}</Link>
+                              <Link to={`/investor/company-profile/${oneLink}`}>{company}</Link>
                             </span>
                           ))}
                         {searchSuggestions?.company?.length > 5 && (

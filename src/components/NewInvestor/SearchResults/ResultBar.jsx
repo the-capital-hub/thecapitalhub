@@ -13,7 +13,7 @@ export default function ResultBar({
   return (
     <Link
       className="Link"
-      to={isCompany ? `/investor/company-profile/${param}` : ""}
+      to={isCompany ? `/investor/company-profile/${param}` : `/investor/user/${param}`}
     >
       <div className="result__bar d-flex align-items-center gap-3 p-3">
         <img

@@ -359,7 +359,7 @@ export default function EditInvestorCompanyProfilePage() {
 
       {/* Right side content */}
       <div className="right__content">
-        <RecommendationCard />
+        <RecommendationCard isInvestor={true}/>
       </div>
     </div>
   );
