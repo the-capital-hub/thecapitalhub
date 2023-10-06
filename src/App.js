@@ -82,6 +82,7 @@ import InvestorCompanyProfilePage from "./pages/Investor/InvestorCompanyProfileP
 import FoodLandingPage from "./eCommerace/pages/LandingPage/FoodLandingPage/FoodLandingPage";
 import Layout from "./components/ECommerace/Layout/Layout/Layout";
 import OtherInvestorProfile from "./pages/Investor/OtherInvestorProfile/OtherInvestorProfile";
+import NikeLandingPage from "./eCommerace/pages/LandingPage/NikeLandingPage/NikeLandingPage";
 
 function App() {
   return (
@@ -343,8 +344,10 @@ function App() {
               element={<UXBlog />}
             />
           </Route>
-          <Route path="/e-commerace" element={<Layout />}>
+          <Route path="/e-commerce" element={<Layout />}>
             <Route path="food" element={<FoodLandingPage />} />
+            <Route path="nike" element={<NikeLandingPage />} />
+
           </Route>
         </Routes>
       </Router>
