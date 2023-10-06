@@ -10,7 +10,11 @@
   }
 
   .main__content {
-    max-width: calc(100% - 26rem);
+    max-width: 100%;
+
+    @media (min-width: 1360px) {
+      max-width: calc(100% - 26rem);
+    }
     // border: 1px solid red;
 
     display: flex;
@@ -21,7 +25,12 @@
   .right__content {
     display: none;
 
-    @media (min-width: 1200px) {
+    // @media (min-width: 1200px) {
+    //   display: block;
+    //   flex: 0 0 20rem;
+    // }
+
+    @media (min-width: 1360px) {
       display: block;
       flex: 0 0 24rem;
     }
