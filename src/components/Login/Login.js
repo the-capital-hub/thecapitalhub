@@ -21,9 +21,11 @@ import ResetPasswordPopUp from "../PopUp/RequestPasswordPopUp/RequestPasswordPop
 
 const Login = () => {
   const dispatch = useDispatch();
+  // States for login
   const [isLoginSuccessfull, setIsLoginSuccessfull] = useState(false);
   const [isInvestorSelected, setIsInvestorSelected] = useState(false);
   const [error, setError] = useState(null);
+
   const [showResetPopUp, setShowResetPopUp] = useState(false);
   const [inputValues, setInputValues] = useState({
     password: "",
@@ -60,18 +62,23 @@ const Login = () => {
       if (response) {
         console.log("response--->", response);
 
+        // (startup is selected)Investor is not selected and user is investor
         if (!isInvestorSelected && user.investor) {
           setError("Invalid credentials");
           return;
         }
+
+        // Investor is selected and user is not investor(user is startup)
         if (isInvestorSelected && !user.investor) {
           setError("Invalid credentials");
           return;
         }
 
+        // No errors, Set loginsuccessfull to true
         setIsLoginSuccessfull(true);
 
         setTimeout(() => {
+          // Reset states
           setIsInvestorSelected(false);
           setIsLoginSuccessfull(false);
 
