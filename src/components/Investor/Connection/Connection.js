@@ -151,13 +151,13 @@ const Connection = () => {
                       >
                         {/* Render content for received connections here */}
                         <div className="connection_left">
-                          <Link to={`/user/${_id}`}>
+                          <Link to={`/user/${sender?._id}`}>
                             <img src={sender.profilePicture} alt="Connection" />
                           </Link>
                           <div className="body_container">
                             <p className="connection_name h5">
                               <Link
-                                to={`/user/${_id}`}
+                                to={`/user/${sender?._id}`}
                                 className=" text-black text-decoration-none"
                               >
                                 {`${sender.firstName} ${sender.lastName}`}
@@ -206,7 +206,7 @@ const Connection = () => {
                         >
                           {/* Render content for sent connections here */}
                           <div className="connection_left">
-                            <Link to={`/user/${_id}`}>
+                            <Link to={`/user/${receiver?._id}`}>
                               <img
                                 src={receiver?.profilePicture}
                                 alt="Connection"
@@ -215,7 +215,7 @@ const Connection = () => {
                             <div className="body_container">
                               <p className="connection_name h5">
                                 <Link
-                                  to={`/user/${_id}`}
+                                  to={`/user/${receiver?._id}`}
                                   className=" text-black text-decoration-none"
                                 >
                                   {`${receiver.firstName} ${receiver.lastName}`}

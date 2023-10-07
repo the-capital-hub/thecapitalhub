@@ -30,11 +30,17 @@ const TeamCard = ({ index, profile, name, designation, page, company }) => {
 
   return (
     <>
-      <div className="col-md-5 col-lg-5 col-xl-4 mx-1" key={index}>
+      <div className="" key={index}>
         <div className="card">
           <div className="card-body">
-            <h5 className="card-title">Team {index}</h5>
-            <img src={profile} alt="image" style={{height:"120px", width:"120px"}} />
+            <h5 className="card-title px-2">Team {index}</h5>
+            <img
+              src={profile}
+              alt="image"
+              style={{ height: "120px", width: "120px" }}
+              loading="lazy"
+              className="rounded-2 object-fit-cover"
+            />
             <div className="company_text">
               {page === "oneLinkEdit" ? (
                 <>
@@ -43,22 +49,24 @@ const TeamCard = ({ index, profile, name, designation, page, company }) => {
                     value={editedName}
                     onChange={(e) => setEditedName(e.target.value)}
                     onBlur={handleUpdate}
+                    className="w-100"
                   />
-                  <hr />
+                  <hr className="mt-1" />
                   <input
                     type="text"
                     value={editedDesignation}
                     onChange={(e) => setEditedDesignation(e.target.value)}
                     onBlur={handleUpdate}
+                    className="w-100"
                   />
-                  <hr />
+                  <hr className="mt-1" />
                 </>
               ) : (
                 <>
                   <h6>{name}</h6>
-                  <hr />
+                  <hr className="mt-1" />
                   <h6>{designation}</h6>
-                  <hr />
+                  <hr className="mt-1" />
                 </>
               )}
             </div>

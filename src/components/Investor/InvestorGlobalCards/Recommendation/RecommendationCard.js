@@ -1,6 +1,7 @@
 import React from "react";
 import AddUserIconBlack from "../../../../Images/investorIcon/Add-UserBlack.svg";
 import AfterSuccessPopup from "../../../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import InvestorAfterSuccessPopUp from "../../../PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
 import "./recommendation.scss";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
@@ -103,8 +104,15 @@ const RecommendationCard = ({ isInvestor }) => {
               </>
             )}
           </div>
-          {connectionSent && (
+          {connectionSent && !isInvestor && (
             <AfterSuccessPopup
+              withoutOkButton
+              onClose={() => setConnectionSent(!connectionSent)}
+              successText="Connection Sent Successfully"
+            />
+          )}
+          {connectionSent && isInvestor && (
+            <InvestorAfterSuccessPopUp
               withoutOkButton
               onClose={() => setConnectionSent(!connectionSent)}
               successText="Connection Sent Successfully"

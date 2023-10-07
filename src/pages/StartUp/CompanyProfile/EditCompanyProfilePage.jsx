@@ -76,7 +76,7 @@ export default function EditCompanyProfilePage() {
       <div className="main__content">
         <SmallProfileCard text={"Company Profile"} />
 
-        <div className="profile__form bg-white rounded-5 p-5">
+        <div className="bg-white rounded-5 p-5">
           <CompanyProfileForm companyData={companyData} />
         </div>
 

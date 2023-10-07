@@ -32,7 +32,6 @@ const OneLinkEditView = () => {
   const [selectedLogo, setSelectedLogo] = useState(null);
   const [imageData, setImageData] = useState(null);
 
-
   useEffect(() => {
     getStartupByFounderId(userId)
       .then(({ data }) => {
@@ -67,14 +66,14 @@ const OneLinkEditView = () => {
   };
 
   const handleUpdate = (logo) => {
-    if(logo) {
-      formData.logo = logo
+    if (logo) {
+      formData.logo = logo;
     }
     postStartUpData({
       ...formData,
       founderId: loggedInUser._id,
     })
-      .then(({data}) => {
+      .then(({ data }) => {
         setSelectedLogo(data.logo);
       })
       .catch((err) => console.log(err));
@@ -155,7 +154,7 @@ const OneLinkEditView = () => {
     setFormData((prevForm) => {
       return {
         ...prevForm,
-        "logo": logo,
+        logo: logo,
       };
     });
     handleUpdate(logo);
@@ -167,13 +166,16 @@ const OneLinkEditView = () => {
         <div className="col">
           <SmallProfileCard text={"Edit"} />
         </div>
-        <div className="box_container">
+        <div className="box_container px-5 py-5 my-4">
           {/* <section className="dollar_rupree">
             <img src={DollarRupeeImage} alt="image" />
           </section> */}
           <div className="download_preview">
             <section className="company_description">
-              <div className="mx-2" style={{ height: "120px", width: "120px" }}>
+              <div
+                className="mx-2 my-2 my-md-0"
+                style={{ height: "120px", width: "120px" }}
+              >
                 <label htmlFor="logoImg" className="position-relative">
                   <img
                     src={selectedLogo || imageData}
@@ -198,19 +200,19 @@ const OneLinkEditView = () => {
                   hidden
                 />
               </div>
-              <div className="company_text">
+              <div className="company_text text-center text-md-start">
                 <h6>
                   <input
-                    className="name_container"
+                    className="name_container "
                     value={formData.company}
                     onChange={(e) => handleInputChange("company", e)}
                     onBlur={(e) => handleUpdate()}
                   />
                 </h6>
-                <hr />
+                <hr className="m-0" />
                 <h6>
                   <textarea
-                    className="name_container"
+                    className="description_container"
                     value={formData.description}
                     onChange={(e) => handleInputChange("description", e)}
                     onBlur={(e) => handleUpdate()}
@@ -256,6 +258,7 @@ const OneLinkEditView = () => {
               </div>
             </section>
           </div>
+
           <section className="button_preview_download_section pdf-hidden">
             <div className="download_button_container">
               <button onClick={handlePreviewPDF}>Preview</button>

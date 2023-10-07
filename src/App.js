@@ -83,6 +83,8 @@ import FoodLandingPage from "./eCommerace/pages/LandingPage/FoodLandingPage/Food
 import Layout from "./components/ECommerace/Layout/Layout/Layout";
 import OtherInvestorProfile from "./pages/Investor/OtherInvestorProfile/OtherInvestorProfile";
 import NikeLandingPage from "./eCommerace/pages/LandingPage/NikeLandingPage/NikeLandingPage";
+import FtechLandingPage from "./eCommerace/pages/LandingPage/FtechLandingPage/FtechLandingPage";
+import InvestorConnection from "./components/NewInvestor/InvestorConnection/InvestorConnection";
 
 function App() {
   return (
@@ -301,6 +303,7 @@ function App() {
             <Route path="search" element={<SearchResults />} />
             <Route path="my-schedule" element={<MySchedule />} />
             <Route path="saved-posts" element={<SavedPosts />} />
+            <Route path="connection" element={<InvestorConnection />} />
             <Route
               path="company-profile"
               element={<EditInvestorCompanyProfilePage />}
@@ -347,6 +350,8 @@ function App() {
           <Route path="/e-commerce" element={<Layout />}>
             <Route path="food" element={<FoodLandingPage />} />
             <Route path="nike" element={<NikeLandingPage />} />
+            <Route path="f-tech" element={<FtechLandingPage />} />
+
 
           </Route>
         </Routes>
