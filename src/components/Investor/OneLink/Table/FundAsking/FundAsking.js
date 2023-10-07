@@ -8,7 +8,7 @@ const FundAsking = ({ company, page }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const handleUpdate = (field, event) => {
     const updatedValue = event.target.value;
-    if(!updatedValue) return;
+    if (!updatedValue) return;
     postStartUpData({
       [field]: updatedValue,
       founderId: loggedInUser._id,
@@ -22,18 +22,24 @@ const FundAsking = ({ company, page }) => {
 
   return (
     <>
-      <div className="row fund_asking_container">
-        <div className="col-md-12 col-lg-12">
+      <div className=" fund_asking_container">
+        <div className="col-md-12 col-lg-12 col-12">
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">Funding Ask (in lakhs)</h5>
-              <img src={company?.logo} alt="image" style={{height:"120px", width:"120px"}}/>
+              <h5 className="card-title px-2">Funding Ask (in lakhs)</h5>
+              <img
+                src={company?.logo}
+                alt="image"
+                style={{ height: "120px", width: "120px" }}
+              />
               <hr />
               <div className="amount_text">
                 {page === "oneViewEdit" ? (
-                  <input 
-                  placeholder={company?.fundingAsk} 
-                  onBlur={(e) => handleUpdate("fundingAsk", e)}
+                  <input
+                    placeholder={company?.fundingAsk}
+                    onBlur={(e) => handleUpdate("fundingAsk", e)}
+                    className="px-2 py-1 fundAsk_input"
+                    style={{ outline: "none" }}
                   />
                 ) : (
                   <h6>{company?.fundingAsk}</h6>
