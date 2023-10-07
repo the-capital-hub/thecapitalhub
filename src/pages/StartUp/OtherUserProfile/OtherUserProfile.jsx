@@ -100,7 +100,7 @@ function OtherUserProfile() {
               </div>
             </div>
           </div>
-          <div className="row row-cols-auto row-cols-lg-2 g-0 gx-md-4">
+          <div className="row row-cols-auto row-cols-lg-2 g-0 gx-md-4 two_column_wrapper">
             <div className="left_container p-0 pe-md-auto d-flex flex-column gap-3 col-12 col-lg-8">
               {/* <div className="about rounded border shadow-sm profile_container">
                 <h4 className="h4">About</h4>
@@ -174,10 +174,16 @@ function OtherUserProfile() {
                   <p className="m-0 font_12 font_light">March 2019 - 2023</p>
                 </div>
               </div>
-              <CompanyDetailsCard
-                className="company_details rounded border shadow-sm profile_container"
-                userDetails={userData}
-              />
+
+              {/* Company Details */}
+              <div className="company_details_container shadow-sm rounded">
+                <CompanyDetailsCard
+                  className="company_details rounded border profile_container"
+                  userDetails={userData}
+                />
+              </div>
+
+              {/* Color Cards */}
               <div className="coloured_cards row row-cols-1 row-cols-md-2 row-cols-lg-3">
                 <ColorCard
                   color="white"

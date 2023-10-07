@@ -52,6 +52,7 @@ export default function AddMilestoneModal() {
                 milestone={badge.milestone}
                 milestoneWidth="200px"
                 isMini
+                key={`${badge.milestone}${index}`}
               />
             );
           })}

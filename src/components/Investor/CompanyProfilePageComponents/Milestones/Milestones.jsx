@@ -41,6 +41,7 @@ export default function Milestones({ headingClass, containerClass }) {
               badge={mile.badge}
               milestone={mile.milestone}
               text={mile.text}
+              key={`${mile.milestone}${index}`}
             />
           );
         })}

@@ -47,13 +47,15 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
     setSelectedFile(file);
   };
 
-  const handleBlur = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
-      if(selectedFile) {
+      if (selectedFile) {
         const logo = await getBase64(selectedFile);
         formData.logo = logo;
       }
-      if (investor) { 
+      if (investor) {
         const response = await postInvestorData(formData);
         console.log(response);
       } else {
@@ -66,9 +68,9 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
   };
 
   return (
-    <>
-      <form action="" className="" onBlur={handleBlur}>
-        <fieldset>
+    <div className="profile__form">
+      <form action="" className="" onSubmit={handleSubmit}>
+        <fieldset className={investor ? "investor" : "startup"}>
           <legend>Company Profile Picture</legend>
           <input
             type="file"
@@ -87,7 +89,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
           </div>
         </fieldset>
 
-        <fieldset>
+        <fieldset className={investor ? "investor" : "startup"}>
           <legend>Company Name</legend>
           <input
             type="text"
@@ -99,7 +101,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
           />
         </fieldset>
 
-        <fieldset>
+        <fieldset className={investor ? "investor" : "startup"}>
           <legend>Established Date</legend>
           <input
             type="date"
@@ -111,7 +113,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
           />
         </fieldset>
 
-        <fieldset>
+        <fieldset className={investor ? "investor" : "startup"}>
           <legend>Type of Industry</legend>
           <input
             type="text"
@@ -123,7 +125,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
           />
         </fieldset>
 
-        <fieldset>
+        <fieldset className={investor ? "investor" : "startup"}>
           <legend>No. of Employees</legend>
           <input
             type="number"
@@ -137,7 +139,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
           />
         </fieldset>
 
-        <fieldset>
+        <fieldset className={investor ? "investor" : "startup"}>
           <legend>Website URL</legend>
           <input
             type="url"
@@ -149,7 +151,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
           />
         </fieldset>
 
-        <fieldset>
+        <fieldset className={investor ? "investor" : "startup"}>
           <legend>Vision</legend>
           <input
             type="text"
@@ -161,7 +163,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
           />
         </fieldset>
 
-        <fieldset>
+        <fieldset className={investor ? "investor" : "startup"}>
           <legend>Mission</legend>
           <input
             type="text"
@@ -172,7 +174,29 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
             onChange={handleInputChange}
           />
         </fieldset>
+
+        <fieldset className={investor ? "investor" : "startup"}>
+          <legend>Key Focus</legend>
+          <input
+            type="text"
+            name="keyFocus"
+            id="keyFocus"
+            className="profile_form_input"
+            value={formData.keyFocus || ""}
+            onChange={handleInputChange}
+            placeholder="Finance, AR, VR, AI"
+          />
+        </fieldset>
+
+        <button
+          type="submit"
+          className={`align-self-end btn-base ${
+            investor ? "investor" : "startup"
+          }`}
+        >
+          Save
+        </button>
       </form>
-    </>
+    </div>
   );
 }

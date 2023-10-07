@@ -15,7 +15,7 @@ const ColorCard = ({
   className,
   noRupee,
   isInvestor = false,
-  isOneLink = false
+  isOneLink = false,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -42,12 +42,12 @@ const ColorCard = ({
     };
     if (isInvestor) {
       postInvestorData(updatedData)
-      .then((res) => {
-        console.log("Res-->", res);
-      })
-      .catch((error) => {
-        console.error("Error-->", error);
-      });
+        .then((res) => {
+          console.log("Res-->", res);
+        })
+        .catch((error) => {
+          console.error("Error-->", error);
+        });
     } else {
       postStartUpData(updatedData)
         .then((res) => {
@@ -57,7 +57,6 @@ const ColorCard = ({
           console.error("Error-->", error);
         });
     }
-
   };
 
   return (
@@ -81,15 +80,14 @@ const ColorCard = ({
           ) : (
             <span
               className="rupee-sign"
-              onClick={onAmountChange ? handleEditClick : () => { }}
+              onClick={onAmountChange ? handleEditClick : () => {}}
             >
               {!noRupee && "₹"} {editedAmount}{" "}
-              
-              {!isOneLink && 
+              {!isOneLink && (
                 <label htmlFor="edit" className="edit-tip">
                   Click to edit
                 </label>
-              }
+              )}
             </span>
           )}
         </>
