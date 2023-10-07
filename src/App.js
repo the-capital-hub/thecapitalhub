@@ -84,6 +84,7 @@ import Layout from "./components/ECommerace/Layout/Layout/Layout";
 import OtherInvestorProfile from "./pages/Investor/OtherInvestorProfile/OtherInvestorProfile";
 import NikeLandingPage from "./eCommerace/pages/LandingPage/NikeLandingPage/NikeLandingPage";
 import FtechLandingPage from "./eCommerace/pages/LandingPage/FtechLandingPage/FtechLandingPage";
+import TransportLandingPage from "./eCommerace/pages/LandingPage/TransportLandingPage/TransportLandingPage";
 
 function App() {
   return (
@@ -349,6 +350,8 @@ function App() {
             <Route path="food" element={<FoodLandingPage />} />
             <Route path="nike" element={<NikeLandingPage />} />
             <Route path="f-tech" element={<FtechLandingPage />} />
+            <Route path="transport" element={<TransportLandingPage />} />
+
 
 
           </Route>
