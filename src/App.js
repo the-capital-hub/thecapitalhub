@@ -85,6 +85,7 @@ import OtherInvestorProfile from "./pages/Investor/OtherInvestorProfile/OtherInv
 import NikeLandingPage from "./eCommerace/pages/LandingPage/NikeLandingPage/NikeLandingPage";
 import FtechLandingPage from "./eCommerace/pages/LandingPage/FtechLandingPage/FtechLandingPage";
 import TransportLandingPage from "./eCommerace/pages/LandingPage/TransportLandingPage/TransportLandingPage";
+import InvestorConnection from "./components/NewInvestor/InvestorConnection/InvestorConnection";
 
 function App() {
   return (
@@ -303,6 +304,7 @@ function App() {
             <Route path="search" element={<SearchResults />} />
             <Route path="my-schedule" element={<MySchedule />} />
             <Route path="saved-posts" element={<SavedPosts />} />
+            <Route path="connection" element={<InvestorConnection />} />
             <Route
               path="company-profile"
               element={<EditInvestorCompanyProfilePage />}

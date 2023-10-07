@@ -1,0 +1,137 @@
+.investor_connection_main_container {
+  display: flex;
+  flex-direction: column;
+  min-height: 90vh;
+  .box {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 40px;
+    background: #fff;
+    box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
+    width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
+
+    h4 {
+      font-size: 26px;
+    }
+  }
+
+  .content_section {
+    .active {
+      color: #d3f36b;
+      font-family: Poppins;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 160%; /* 32px */
+      letter-spacing: 0.8px;
+    }
+
+    .connection_nav {
+      a {
+        margin-right: 20px;
+        text-decoration: none;
+        color: #000;
+        font-family: Poppins;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 160%; /* 32px */
+        letter-spacing: 0.8px;
+      }
+      .active {
+        color: #718e11;
+        font-family: Poppins;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 160%; /* 32px */
+        letter-spacing: 0.8px;
+      }
+    }
+
+    .all_button {
+      border-radius: 10px;
+      background: #d3f36b;
+      color: #000;
+      font-family: Poppins;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      border: none;
+      // width: 4%;
+      padding: 5px 10px;
+      width: fit-content;
+    }
+    .connection_list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .connection_item:last-child {
+        border: none;
+      }
+      .connection_item {
+        padding-bottom: 7px;
+        border-bottom: 1px solid #b5b5b5;
+        // display: flex;
+        // justify-content: space-between;
+        .connection_left {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 10px;
+
+          img {
+            height: 70px;
+            width: 70px;
+            border-radius: 50%;
+          }
+
+          .body_container {
+            .h6 {
+              font-weight: 600;
+            }
+            p {
+              margin: 0;
+              padding: 0;
+            }
+            .connection_time {
+              font-size: 12px;
+            }
+          }
+        }
+
+        .connection_right {
+          display: flex;
+          gap: 10px;
+          button {
+            border: none;
+          }
+          .ignore_button {
+            border-radius: 140px;
+            background: #eaeef2;
+            width: 120px;
+            height: 45px;
+            flex-shrink: 0;
+          }
+
+          .accept_button {
+            border-radius: 140px;
+            background: #d3f36b;
+            width: 120px;
+            height: 45px;
+            flex-shrink: 0;
+            color: #000;
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+          }
+        }
+      }
+    }
+  }
+}

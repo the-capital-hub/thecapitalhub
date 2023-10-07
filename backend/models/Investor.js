@@ -98,6 +98,9 @@ const investorSchema = new Schema(
       maximumTicketsSize: String,
       seedRound: String,
     },
+    keyFocus: {
+      type: String,
+    }
   },
   {
     timestamps: true,

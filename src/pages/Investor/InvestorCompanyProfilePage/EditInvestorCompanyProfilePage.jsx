@@ -76,7 +76,7 @@ export default function EditInvestorCompanyProfilePage() {
         <SmallProfileCard text={"Company Profile"} />
 
         {/* Company profile form */}
-        <div className="profile__form bg-white rounded-3 p-5 border">
+        <div className="bg-white rounded-3 p-5 border">
           <CompanyProfileForm companyData={companyData} investor={true} />
         </div>
 
@@ -126,6 +126,7 @@ export default function EditInvestorCompanyProfilePage() {
           {/* <Link className="see__more align-self-end">See more</Link> */}
         </div>
 
+        {/* When integrating with backend replace below code with CoreTeam Component */}
         {/* Core Team */}
         <div className="core__team bg-white rounded-3 p-5 d-flex flex-column gap-4 border">
           <div className="d-flex align-items-center justify-content-between">
@@ -191,6 +192,7 @@ export default function EditInvestorCompanyProfilePage() {
           </div>
         </div>
 
+        {/* When integrating with backend replace below code with Milestones Component */}
         {/* Milestones */}
         <div className="milestones__component bg-white rounded-3 p-5 d-flex flex-column gap-4 border">
           <div className="d-flex align-items-center justify-content-between">
@@ -207,11 +209,11 @@ export default function EditInvestorCompanyProfilePage() {
               }}
             >
               {/* <img
-                  src={RaghuImage}
-                  alt={"name"}
-                  style={{ width: "50px", height: "50px" }}
-                  className="rounded-circle"
-                /> */}
+                src={RaghuImage}
+                alt={"name"}
+                style={{ width: "50px", height: "50px" }}
+                className="rounded-circle"
+              /> */}
               <Link className="see__more orange align-self-end mt-auto">
                 See more
               </Link>
@@ -359,7 +361,7 @@ export default function EditInvestorCompanyProfilePage() {
 
       {/* Right side content */}
       <div className="right__content">
-        <RecommendationCard isInvestor={true}/>
+        <RecommendationCard isInvestor={true} />
       </div>
     </div>
   );

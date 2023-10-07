@@ -7,21 +7,24 @@
     background: #fff;
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
 
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
     .heading_section {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 20%;
+      // height: 20%;
+      padding-block-start: 2rem;
+      padding-block-end: 1rem;
+      border-bottom: 1px solid rgba(180, 180, 180, 1);
 
       a,
       h6 {
-        margin-top: 5%;
-        margin-right: 6%;
+        // margin-top: 5%;
+        // margin-right: 6%;
         text-decoration: none;
-      }
-
-      h6 {
-        margin-left: 6%;
       }
 
       button {
@@ -48,7 +51,7 @@
       border-radius: 5px;
       border: 0.76px solid #e3e3e3;
       background: #000;
-      width: 96%;
+      width: 100%;
       margin: auto;
       min-height: 142px;
 
@@ -79,33 +82,88 @@
     }
 
     .card_section {
-      width: 96%;
-      margin: auto;
-      margin-top: 20px;
-      padding-bottom: 20px;
+      width: 100%;
+      // margin: auto;
+      // margin-top: 20px;
+      // padding-bottom: 20px;
     }
 
     .table_section {
-      max-width: 96%;
-      width: 96%;
+      // max-width: 96%;
+      width: 100%;
       display: flex;
       justify-content: center;
-      overflow-x: scroll;
+      overflow-x: auto;
+
+      &::-webkit-scrollbar {
+        height: 8px;
+        width: 300px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(253, 89, 1, 0.9);
+        border-radius: 10rem;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: rgba(253, 89, 1, 0.2);
+        border-radius: 10rem;
+        margin-inline: 30dvw;
+      }
+
+      &::-webkit-scrollbar-track-piece {
+        &:start {
+          margin-left: 0;
+        }
+
+        &:end {
+          margin-right: 0;
+        }
+      }
     }
 
     .team_section {
-      width: 96%;
-      margin-left: 3%;
-      overflow-x: scroll;
+      width: 100%;
+      // margin-left: 3%;
+      overflow-x: auto;
       padding-bottom: 20px;
       display: flex;
       justify-content: flex-start;
-      .team-card-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        width: 96%;
+      gap: 2rem;
+
+      &::-webkit-scrollbar {
+        height: 8px;
+        width: 300px;
       }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(253, 89, 1, 0.9);
+        border-radius: 10rem;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: rgba(253, 89, 1, 0.2);
+        border-radius: 10rem;
+        margin-inline: 30dvw;
+      }
+
+      &::-webkit-scrollbar-track-piece {
+        &:start {
+          margin-left: 0;
+        }
+
+        &:end {
+          margin-right: 0;
+        }
+      }
+
+      // .team-card-container {
+      //   display: flex;
+      //   flex-wrap: wrap;
+      //   justify-content: space-between;
+      //   width: 96%;
+      //   border: 1px solid green;
+      // }
     }
 
     .fund_asking_deployment {
@@ -116,7 +174,7 @@
 
       .funding_divider {
         width: 48%;
-        overflow: scroll;
+        // overflow: scroll;
       }
     }
   }
@@ -162,7 +220,6 @@
       .team_section {
         display: flex;
         flex-direction: column;
-      
       }
       .company_description {
         flex-direction: column;
