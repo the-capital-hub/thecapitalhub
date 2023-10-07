@@ -27,10 +27,10 @@ export default function CompanyProfilePage() {
       <div className="main__content">
         <SmallProfileCard text={"Company Profile"} />
 
-        <div className="">
+        <div className="bg-white rounded-4 p-4">
           <Link
             to={"/company-profile/edit"}
-            className="text-decoration-none text-dark bg-white p-4 rounded-4"
+            className="text-decoration-none text-dark fs-5"
           >
             Click here to edit company details
           </Link>
