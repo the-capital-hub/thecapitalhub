@@ -6,6 +6,7 @@ import star from './star.png'
 import groupOfPeople from './Group-of-people.png'
 import rosewhite from './rosewhite.png'
 import main from './Group 15438.png'
+import offershoe from './offershoe.png'
 
 
 
@@ -17,5 +18,6 @@ export default{
     star,
     groupOfPeople,
     rosewhite,
-    main
+    main,
+    offershoe
 }
