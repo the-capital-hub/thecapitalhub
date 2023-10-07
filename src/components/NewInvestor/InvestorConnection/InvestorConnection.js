@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "./Connection.scss";
-import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
+import "./InvestorConnection.scss";
+import SmallProfileCard from "../../Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import {
   acceptConnectionAPI,
   cancelConnectionRequestAPI,
@@ -95,7 +95,7 @@ const Connection = () => {
   };
 
   return (
-    <div className="container-fluid connection_main_container">
+    <div className="container-fluid investor_connection_main_container">
       <SmallProfileCard text={"Connections"} />
       <section className="content_section mt-4">
         <div className="row">
@@ -151,13 +151,13 @@ const Connection = () => {
                       >
                         {/* Render content for received connections here */}
                         <div className="connection_left">
-                          <Link to={`/user/${sender?._id}`}>
+                          <Link to={`/investor/user/${sender?._id}`}>
                             <img src={sender.profilePicture} alt="Connection" />
                           </Link>
                           <div className="body_container">
                             <p className="connection_name h5">
                               <Link
-                                to={`/user/${sender?._id}`}
+                                to={`/investor/user/${sender?._id}`}
                                 className=" text-black text-decoration-none"
                               >
                                 {`${sender.firstName} ${sender.lastName}`}
@@ -206,7 +206,7 @@ const Connection = () => {
                         >
                           {/* Render content for sent connections here */}
                           <div className="connection_left">
-                            <Link to={`/user/${receiver?._id}`}>
+                            <Link to={`/investor/user/${receiver?._id}`}>
                               <img
                                 src={receiver?.profilePicture}
                                 alt="Connection"
@@ -215,7 +215,7 @@ const Connection = () => {
                             <div className="body_container">
                               <p className="connection_name h5">
                                 <Link
-                                  to={`/user/${receiver?._id}`}
+                                  to={`/investor/user/${receiver?._id}`}
                                   className=" text-black text-decoration-none"
                                 >
                                   {`${receiver.firstName} ${receiver.lastName}`}
@@ -259,13 +259,13 @@ const Connection = () => {
                     >
                       {/* Render the accepted connection content here */}
                       <div className="connection_left">
-                        <Link to={`/user/${data._id}`}>
+                        <Link to={`/investor/user/${data._id}`}>
                           <img src={data.profilePicture} alt="Connection" />
                         </Link>
                         <div className="body_container">
                           <p className="connection_name h5">
                             <Link
-                              to={`/user/${data._id}`}
+                              to={`/investor/user/${data._id}`}
                               className=" text-black text-decoration-none"
                             >
                               {`${data.firstName ? data.firstName : "name"} ${

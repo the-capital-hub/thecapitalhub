@@ -4,17 +4,18 @@ import LoopIcon from "../../../Images/investorIcon/LoopIcon.svg";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { getInvestorById } from "../../../Service/user";
 
 const RightProfileCard = ({ noProfile }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [investor, setInvestor] = useState(null);
-  //   useEffect(() => {
-  //     if(loggedInUser?.investor) {
-  //       getInvestorById(loggedInUser?.investor).then(({data}) => {
-  //         setInvestor(data);
-  //       });
-  //     }
-  //   }, [loggedInUser]);
+    useEffect(() => {
+      if(loggedInUser?.investor) {
+        getInvestorById(loggedInUser?.investor).then(({data}) => {
+          setInvestor(data);
+        });
+      }
+    }, [loggedInUser]);
 
   return (
     <>
