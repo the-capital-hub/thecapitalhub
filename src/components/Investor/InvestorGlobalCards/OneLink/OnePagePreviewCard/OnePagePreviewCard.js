@@ -169,7 +169,7 @@ const OnePagePreviewCard = ({ company, page }) => {
           <div className="col-md-6 col-lg-4" key={index}>
             <div className="card">
               <div className="card-body">
-                <h5 className="card-title">{card.title}</h5>
+                <h5 className="card-title px-2">{card.title}</h5>
                 {page === "oneLinkEdit" ? (
                   editableIndex === index ? (
                     <textarea
@@ -184,12 +184,15 @@ const OnePagePreviewCard = ({ company, page }) => {
                       }}
                     />
                   ) : (
-                    <h6 onClick={() => setEditableIndex(index)} style={{  wordBreak:" break-word"}}>
+                    <h6
+                      onClick={() => setEditableIndex(index)}
+                      style={{ wordBreak: " break-word" }}
+                    >
                       {card.content}
                     </h6>
                   )
                 ) : (
-                  <h6 style={{  wordBreak:" break-word"}}>{card.content}</h6>
+                  <h6 style={{ wordBreak: " break-word" }}>{card.content}</h6>
                 )}
               </div>
             </div>

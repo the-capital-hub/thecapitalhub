@@ -32,7 +32,6 @@ const OneLinkEditView = () => {
   const [selectedLogo, setSelectedLogo] = useState(null);
   const [imageData, setImageData] = useState(null);
 
-
   useEffect(() => {
     getStartupByFounderId(userId)
       .then(({ data }) => {
@@ -67,14 +66,14 @@ const OneLinkEditView = () => {
   };
 
   const handleUpdate = (logo) => {
-    if(logo) {
-      formData.logo = logo
+    if (logo) {
+      formData.logo = logo;
     }
     postStartUpData({
       ...formData,
       founderId: loggedInUser._id,
     })
-      .then(({data}) => {
+      .then(({ data }) => {
         setSelectedLogo(data.logo);
       })
       .catch((err) => console.log(err));
@@ -155,7 +154,7 @@ const OneLinkEditView = () => {
     setFormData((prevForm) => {
       return {
         ...prevForm,
-        "logo": logo,
+        logo: logo,
       };
     });
     handleUpdate(logo);
