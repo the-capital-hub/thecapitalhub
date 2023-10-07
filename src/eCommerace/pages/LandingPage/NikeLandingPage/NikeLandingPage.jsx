@@ -6,16 +6,9 @@ function NikeLandingPage() {
   return (
     <div className="nilke-landing-page container-fluid">
 
-
 <div className="first-section w-100">
-    <img src={assets.main} alt="main img" className="w-100" />
+    <img src={assets.main} alt="main img"  />
 </div>
-
-
-
-
-
-
 
       <div className="second-section d-flex flex-column  justify-content-evenly flex-md-row p-5">
         <div className="left-section">
@@ -52,7 +45,7 @@ function NikeLandingPage() {
           <div className="box d-flex flex-column align-items-center">
             <div className="shoe-img  px-auto">
               <img
-                className="imgshoe"
+                className="imgshoe w-100"
                 src={assets.whiteBlueOrange}
                 alt="shoe "
               />
@@ -70,7 +63,7 @@ function NikeLandingPage() {
           <div className="box d-flex flex-column align-items-center">
             <div className="shoe-img  px-auto">
               <img
-                className="imgshoe"
+                className="imgshoe w-100"
                 src={assets.blueYellowOrange}
                 alt="shoe "
               />
@@ -88,7 +81,7 @@ function NikeLandingPage() {
           <div className="box d-flex flex-column align-items-center">
             <div className="shoe-img  px-auto">
               <img
-                className="imgshoe"
+                className="imgshoe w-100"
                 src={assets.blackOrangeRose}
                 alt="shoe "
               />
@@ -113,7 +106,20 @@ function NikeLandingPage() {
 
 
 
-
+<div className="fourth-section  d-flex flex-column  align-items-center   ">
+<h3>About Us</h3>
+  <div className="inner-section d-flex flex-column flex-md-row  justify-content-center align-items-center">
+  <div className="left-section d-flex flex-column flex-md-row  justify-content-evenly align-items-center ">
+    <img src={assets.offershoe} alt="offershoe " className="w-100 pb-5" />
+  </div>
+  <div className="right-section container  ">
+    <h1>We  Provide <span>High Quality </span>  Shoes.</h1>
+    <p>Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit proin risus Sit purus ante dictum in malesuada id. </p>
+    <p>Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit proin risus Sit purus ante dictum in malesuada id. it purus ante dictum in malesuada id.</p>
+    <button>Explore more</button>
+  </div>
+  </div>
+</div>
 
 
 
@@ -137,7 +143,7 @@ function NikeLandingPage() {
             </p>
             <button>Explore more</button>
           </div>
-          <div className="right-section">
+          <div className="right-section w-100">
             <div className="img-div">
               <img src={assets.rosewhite} alt="rosewhite"  />
             </div>
