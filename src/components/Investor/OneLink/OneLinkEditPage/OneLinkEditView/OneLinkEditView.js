@@ -166,7 +166,7 @@ const OneLinkEditView = () => {
         <div className="col">
           <SmallProfileCard text={"Edit"} />
         </div>
-        <div className="box_container px-4 py-5 my-4">
+        <div className="box_container px-5 py-5 my-4">
           {/* <section className="dollar_rupree">
             <img src={DollarRupeeImage} alt="image" />
           </section> */}

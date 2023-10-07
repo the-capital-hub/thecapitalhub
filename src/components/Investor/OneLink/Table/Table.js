@@ -18,7 +18,7 @@ const Table = ({ hidden, page }) => {
                   {page === "oneLinkEditPage" ? (
                     <input className="table_input" placeholder={year} />
                   ) : (
-                    ""
+                    `${year}`
                   )}
                 </td>
               );
@@ -67,7 +67,7 @@ const Table = ({ hidden, page }) => {
                   {page === "oneLinkEditPage" ? (
                     <input className="table_input" placeholder={year} />
                   ) : (
-                    ""
+                    `${year}`
                   )}
                 </td>
               );
