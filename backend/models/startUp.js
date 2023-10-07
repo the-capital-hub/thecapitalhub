@@ -139,6 +139,9 @@ const startUpSchema = new Schema(
         },
       ],
     },
+    keyFocus: {
+      type: String,
+    }
   },
   {
     timestamps: true,

@@ -6,6 +6,7 @@ const LogOutPopUp = ({
   setShowLogoutPopup,
   handleLogoutLogic,
   showLogoutPopup,
+  isInvestor = false
 }) => {
   const handleLogout = () => {
     handleLogoutLogic();
@@ -16,6 +17,10 @@ const LogOutPopUp = ({
     setShowLogoutPopup(false);
   };
 
+  const buttonColor = isInvestor ? "#d3f36b" : "#fd5901";
+  const textColor = isInvestor ? "#000" : "#FD5901";
+  const buttonText = isInvestor ? "#000" : "#fff";
+
   return (
     <>
    {showLogoutPopup && (
@@ -25,11 +30,11 @@ const LogOutPopUp = ({
               <img src={CorrectIcon} alt="image" />
               <h1>
                 Are you sure you want to &nbsp;
-                <span style={{ color: "#FD5901" }}>Log Out?</span>
+                <span style={{ color: textColor }}>Log Out?</span>
               </h1>
               {/* <button className="ok_button">OK</button> */}
               <button  className="cancel_button " onClick={handleCancel}>Cancel</button>
-              <button className="ok_button" onClick={handleLogout}>Log out</button>
+              <button className="ok_button" style={{ backgroundColor: buttonColor, color: buttonText }} onClick={handleLogout}>Log out</button>
             </div>
           </div>
         </div>

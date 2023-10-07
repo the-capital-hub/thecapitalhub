@@ -26,7 +26,7 @@ import ImageIcon from "../../../Images/Group 15141.svg";
 import RoundLogo from "../../../Images/RoundLogo.png";
 import { Link } from "react-router-dom";
 import SavePostPopUP from "../../../components/PopUp/SavePostPopUP/SavePostPopUP";
-import AfterSuccessPopUp from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import InvestorAfterSuccessPopUp from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
 import { useRef } from "react";
 import ModalBSContainer from "../../PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
 import ModalBSHeader from "../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
@@ -550,10 +550,11 @@ const FeedPostCard = ({
             postId={postId}
             savedPostStatus={receiveSavedPostStatus}
             onClose={handleCloseSavePopup}
+            isInvestor="true"
           />
         )}
         {showSuccess && (
-          <AfterSuccessPopUp
+          <InvestorAfterSuccessPopUp
             withoutOkButton
             onClose={() => setShowSuccess(!showSuccess)}
             successText="Post saved Successfully"

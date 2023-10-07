@@ -32,6 +32,7 @@ export default function CompanyProfile({
   let mission = "Mission";
   let noOfEmployees = "200+";
   let team = [];
+  let tags = [];
 
   if (companyData) {
     name = companyData.company || name;
@@ -45,6 +46,7 @@ export default function CompanyProfile({
     mission = companyData.mission || mission;
     noOfEmployees = companyData.noOfEmployees || noOfEmployees;
     team = companyData.team || team;
+    tags = companyData.keyFocus?.split(',').map(tag => tag.trim()) || tags;
   }
   // const company = {
   //   image: HCLImage,
@@ -89,15 +91,7 @@ export default function CompanyProfile({
         <PublicLinks socialLinks={socialLinks} />
         <Feedback />
         <FoundingTeam isOnelink={isOnelink} team={team} />
-        <KeyFocus
-          tags={[
-            "Finance",
-            "3D Scanning",
-            "Augmented Reality AR",
-            "Virtual Reality VR",
-            "Artificial Intelligence AI",
-          ]}
-        />
+        <KeyFocus tags={tags} />
       </div>
     </div>
   );

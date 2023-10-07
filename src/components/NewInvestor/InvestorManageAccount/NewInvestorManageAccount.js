@@ -165,6 +165,7 @@ const InvestorManageAccount = () => {
                   setShowLogoutPopup={setShowLogoutPopup} // Make sure this prop is passed correctly
                   handleLogoutLogic={handleLogoutLogic}
                   showLogoutPopup
+                  isInvestor={true}
                 />
               )}
               {/* <div className="d-flex align-items-center">

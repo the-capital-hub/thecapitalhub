@@ -33,7 +33,6 @@ import { PlusIcon } from "../SvgIcons";
 import companyProfileIcon from "../../../Images/Investor/Sidebar/company.svg";
 import { BsLink45Deg } from "react-icons/bs";
 
-
 const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -261,6 +260,25 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 </Link>
               </MenuItem>
               <MenuItem
+                active={location.pathname.includes("/connection")}
+                className="active-item"
+              >
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)}
+                  to="/investor/connection"
+                >
+                  <img
+                    src={connectionsIcon}
+                    alt="image"
+                    width="17px"
+                    height="17px"
+                  />
+                  {!sidebarCollapsed && (
+                    <span className="text-black">Connection</span>
+                  )}
+                </Link>
+              </MenuItem>
+              <MenuItem
                 active={location.pathname.includes("/syndicates")}
                 className="active-item"
               >
@@ -362,6 +380,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           setShowLogoutPopup={setShowLogoutPopup} // Make sure this prop is passed correctly
           handleLogoutLogic={handleLogoutLogic}
           showLogoutPopup
+          isInvestor={true}
         />
       )}
     </div>
