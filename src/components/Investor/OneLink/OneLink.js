@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { getStartupByFounderId } from "../../../Service/user";
 import SharingOneLinkPopUp from "../../PopUp/SharingOneLinkPopUp/SharingOneLinkPopUp";
+import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 const OneLink = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -40,7 +41,7 @@ const OneLink = () => {
     // navigate("/login");
   };
   return (
-    <div className="container">
+    <MaxWidthWrapper>
       <div className="onelink_container">
         <div className="onelink_intro_container mt-sm-4 mt-md-2 mt-xxl-2">
           <div className="main__content">
@@ -75,7 +76,7 @@ const OneLink = () => {
           />
         )}
       </div>
-    </div>
+    </MaxWidthWrapper>
   );
 };
 
