@@ -1,0 +1,14 @@
+.suspense-loader {
+  width: 80vw;
+  height: 80vh;
+  margin: auto auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999999;
+
+  background-color: rgba(255, 255, 255, 0.397);
+  opacity: 0.5px;
+}
