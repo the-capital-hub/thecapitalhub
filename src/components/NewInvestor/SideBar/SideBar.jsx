@@ -174,7 +174,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link
-                  onClick={() => setSidebarCollapsed(true)}
+                  // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/onelink"
                 >
                   <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} />

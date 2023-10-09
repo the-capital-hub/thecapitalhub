@@ -7,6 +7,7 @@ import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCor
 import { getInvestorById } from "../../../Service/user";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 export default function CompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -22,41 +23,39 @@ export default function CompanyProfilePage() {
   }, []);
 
   return (
-    <div className="investor_companyProfilePage__wrapper">
-      {/* Main content */}
-      <div className="main__content">
-        <SmallProfileCard text={"Company Profile"} />
-
-        <div className="bg-white rounded-4 p-4">
-          <Link
-            to={"/investor/company-profile/edit"}
-            className="text-decoration-none text-dark fs-5"
-          >
-            Click here to edit company details
-          </Link>
-        </div>
-
-        {companyData.length !== 0 ? (
-          <CompanyProfile
-            isOnelink={true}
-            investorData={companyData}
-            // startup="t"
-            
-          />
-        ) : (
-          <div className="mx-auto w-100 bg-white rounded-5 p-5 d-flex justify-content-center min-vh-100">
-            <div class="spinner-grow yellow" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
+    <MaxWidthWrapper>
+      <div className="investor_companyProfilePage__wrapper">
+        {/* Main content */}
+        <div className="main__content">
+          <SmallProfileCard text={"Company Profile"} />
+          <div className="bg-white rounded-4 p-4">
+            <Link
+              to={"/investor/company-profile/edit"}
+              className="text-decoration-none text-dark fs-5"
+            >
+              Click here to edit company details
+            </Link>
           </div>
-        )}
+          {companyData.length !== 0 ? (
+            <CompanyProfile
+              isOnelink={true}
+              investorData={companyData}
+              // startup="t"
+            />
+          ) : (
+            <div className="mx-auto w-100 bg-white rounded-5 p-5 d-flex justify-content-center min-vh-100">
+              <div class="spinner-grow yellow" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          )}
+        </div>
+        {/* Right side content */}
+        <div className="right__content">
+          <RecommendationCard />
+          <NewsCorner />
+        </div>
       </div>
-
-      {/* Right side content */}
-      <div className="right__content">
-        <RecommendationCard />
-        <NewsCorner />
-      </div>
-    </div>
+    </MaxWidthWrapper>
   );
 }
