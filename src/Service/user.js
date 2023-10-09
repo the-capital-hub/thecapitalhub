@@ -704,3 +704,24 @@ export const getCommunitySettings = async (communityId) => {
     throw error;
   }
 };
+
+
+export const deleteComment = async (postId, commentId) => {
+  try {
+    const response = await axiosInstance.delete(`${API.deleteComment}/${postId}/${commentId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error while deleting the post:", error);
+    throw error;
+  }
+};
+
+export const toggleLikeComment = async (postId, commentId) => {
+  try {
+    const response = await axiosInstance.post(`${API.likeComment}/${postId}/${commentId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error in like comment:", error);
+    throw error;
+  }
+};

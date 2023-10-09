@@ -208,15 +208,14 @@ const InvestorHome = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="col-2 col-md-4 col-five">
+                    {/* <div className="col-2 col-md-4 col-five">
                       <div className=" m-4">
                         <button className="connect_btn px-3">
                           <img src={AddUserIcon} alt="add user" />
-                          {/* <span className="mx-2 d-none d-md-block"> */}
                           <span className="mx-2">Connect</span>
                         </button>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                   <hr className="divider_hr" />
                   <div className="row">
