@@ -4,7 +4,7 @@ import "./TransportLandingPage.scss";
 
 function TransportLandingPage() {
   return (
-    <div className="landing-page container-fluid">
+    <div className="transport-landing-page container-fluid">
       <div className="first-section d-flex flex-column   ">
         <div className="inner-section d-flex flex-column  justify-content-evenly flex-md-row">
           <div className="left-section  d-flex flex-column justify-content-evenly  ">

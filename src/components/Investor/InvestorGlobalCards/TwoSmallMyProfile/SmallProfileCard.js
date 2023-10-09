@@ -14,7 +14,7 @@ const SmallProfileCard = ({ className, text, width }) => {
 
   return (
     <div className={`container-fluid small_card_container ${className}`}>
-      <div
+      {/* <div
         className="d-flex flex-column flex-md-row align-items-center gap-1 gap-md-5 small_card_row"
         style={{ width: width ? width : "100%" }}
       >
@@ -30,7 +30,7 @@ const SmallProfileCard = ({ className, text, width }) => {
             <h2 className="typography">{text ? text : "My Profile"}</h2>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
