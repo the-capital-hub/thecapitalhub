@@ -14,7 +14,12 @@ import {
 } from "../../../../Service/user";
 import { useState, useEffect } from "react";
 
-const CompanyDetailsCard = ({ userDetails, page, className }) => {
+const CompanyDetailsCard = ({
+  userDetails,
+  page,
+  className,
+  isOnelink = false,
+}) => {
   const [isDescriptionEditable, setIsDescriptionEditable] = useState(false);
   const [descriptionContent, setDescriptionContent] = useState("");
   const [onePager, setOnePager] = useState([]);
@@ -53,7 +58,7 @@ const CompanyDetailsCard = ({ userDetails, page, className }) => {
   return (
     <>
       <div className={`${className} row company_details_container`}>
-        <div className=" company_details box">
+        <div className={`company_details box ${isOnelink ? "border" : ""} `}>
           <div className="row">
             <div className="col-12">
               <div className="image_name_section mt-2 ">

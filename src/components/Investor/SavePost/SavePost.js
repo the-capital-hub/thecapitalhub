@@ -5,6 +5,7 @@ import RecommendationCard from "../InvestorGlobalCards/Recommendation/Recommenda
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import NavigatedCardViewer from "./NavigatedCardViewer/NavigatedCardViewer";
 import { useEffect } from "react";
+import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 const SavePost = () => {
   useEffect(() => {
@@ -12,7 +13,7 @@ const SavePost = () => {
   }, []);
 
   return (
-    <div className="container-fluid ">
+    <MaxWidthWrapper>
       <div className="savedpost_main_container">
         {/* Main Content */}
         <div className="main__content">
@@ -34,7 +35,7 @@ const SavePost = () => {
           <NewsCorner />
         </div>
       </div>
-    </div>
+    </MaxWidthWrapper>
   );
 };
 

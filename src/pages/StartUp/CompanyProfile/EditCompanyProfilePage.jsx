@@ -13,6 +13,7 @@ import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredC
 import { getStartupByFounderId, postStartUpData } from "../../../Service/user";
 import CoreTeam from "../../../components/Investor/CompanyProfilePageComponents/CoreTeam/CoreTeam";
 import Milestones from "../../../components/Investor/CompanyProfilePageComponents/Milestones/Milestones";
+import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 export default function EditCompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -71,151 +72,154 @@ export default function EditCompanyProfilePage() {
   };
 
   return (
-    <div className="editcompanyProfilePage__wrapper">
-      {/* Main content */}
-      <div className="main__content">
-        <SmallProfileCard text={"Company Profile"} />
-
-        <div className="bg-white rounded-5 p-5">
-          <CompanyProfileForm companyData={companyData} />
-        </div>
-
-        {/* Company Description */}
-        <div className="paragraph__component bg-white rounded-5 p-5 d-flex flex-column gap-4">
-          <div className="d-flex align-items-center justify-content-between">
-            <h2>Company Description</h2>
-
-            <span className="ms-auto">
-              <button
-                className="edit__btn"
-                onClick={() => setIsBioEditable(!isBioEditable)}
-              >
-                {isBioEditable ? "Cancel" : "Edit"}
-                <CiEdit />
-              </button>
-              {isBioEditable && (
-                <button
-                  className="ms-2 edit__btn"
-                  onClick={(e) => submitBioHandler(e)}
-                >
-                  Save <CiSaveUp2 />
-                </button>
-              )}
-            </span>
+    <MaxWidthWrapper>
+      <div className="editcompanyProfilePage__wrapper">
+        {/* Main content */}
+        <div className="main__content">
+          <SmallProfileCard text={"Company Profile"} />
+          <div className="bg-white rounded-5 p-5">
+            <CompanyProfileForm companyData={companyData} />
           </div>
-          {/* <p>
-            A little about myself. “Dejection is a sign of failure but it
-            becomes the cause of success”. I wrote this when I was 16 years old
-            and that’s exactly when I idealised the reality of life. In this
-            current world, success is defined in many ways, some of which
-            include money, fame and power. I believe that success is just the
-            beginning of a new problem. Every step of our lives we work hard to
-            solve an issue and every time we end up with a new problem.
-          </p> */}
-          {isBioEditable ? (
-            <textarea
-              value={companyDescription}
-              name="bio"
-              rows={8}
-              onChange={(e) => setCompanyDescription(e.target.value)}
-              className="p-2 rounded-3"
+          {/* Company Description */}
+          <div className="paragraph__component bg-white rounded-5 p-5 d-flex flex-column gap-4">
+            <div className="d-flex align-items-center justify-content-between">
+              <h2>Company Description</h2>
+              <span className="ms-auto">
+                <button
+                  className="edit__btn"
+                  onClick={() => setIsBioEditable(!isBioEditable)}
+                >
+                  {isBioEditable ? "Cancel" : "Edit"}
+                  <CiEdit />
+                </button>
+                {isBioEditable && (
+                  <button
+                    className="ms-2 edit__btn"
+                    onClick={(e) => submitBioHandler(e)}
+                  >
+                    Save <CiSaveUp2 />
+                  </button>
+                )}
+              </span>
+            </div>
+            {/* <p>
+              A little about myself. “Dejection is a sign of failure but it
+              becomes the cause of success”. I wrote this when I was 16 years old
+              and that’s exactly when I idealised the reality of life. In this
+              current world, success is defined in many ways, some of which
+              include money, fame and power. I believe that success is just the
+              beginning of a new problem. Every step of our lives we work hard to
+              solve an issue and every time we end up with a new problem.
+            </p> */}
+            {isBioEditable ? (
+              <textarea
+                value={companyDescription}
+                name="bio"
+                rows={8}
+                onChange={(e) => setCompanyDescription(e.target.value)}
+                className="p-2 rounded-3"
+              />
+            ) : (
+              <p className="small_typo">
+                {companyDescription ||
+                  "Click on edit to add company description"}
+              </p>
+            )}
+            {/* <Link className="see__more align-self-end">See more</Link> */}
+          </div>
+          {/* Core Team */}
+          <div className="core__team bg-white rounded-5 p-5">
+            <CoreTeam
+              companyData={companyData}
+              setCompanyData={setCompanyData}
             />
-          ) : (
-            <p className="small_typo">
-              {companyDescription || "Click on edit to add company description"}
-            </p>
-          )}
-          {/* <Link className="see__more align-self-end">See more</Link> */}
+          </div>
+          {/* Milestones */}
+          <div className="milestones__component bg-white rounded-5 p-5 d-flex flex-column gap-4">
+            <Milestones />
+          </div>
+          {/* Color Cards */}
+          <div className="card_holder d-flex justify-content-between flex-wrap">
+            <ColorCard
+              color="white"
+              background="#BB98FF"
+              text="Last round investment"
+              image={CoinIcon}
+              amount={colorCardData?.last_round_investment || ""}
+              onAmountChange={(amount) =>
+                handleAmountChange("last_round_investment", amount)
+              }
+              field={"last_round_investment"}
+              colorCardData={colorCardData}
+            />
+            <ColorCard
+              color="white"
+              background="#DAC191"
+              text="Total Investment"
+              image={CoinIcon}
+              amount={colorCardData?.total_investment || ""}
+              onAmountChange={(amount) =>
+                handleAmountChange("total_investment", amount)
+              }
+              field={"total_investment"}
+              colorCardData={colorCardData}
+            />
+            <ColorCard
+              color="white"
+              background="#DCDCDC"
+              text="No.of Investers"
+              image={CoinIcon}
+              amount={colorCardData?.no_of_investers || ""}
+              onAmountChange={(amount) =>
+                handleAmountChange("no_of_investers", amount)
+              }
+              field={"no_of_investers"}
+              colorCardData={colorCardData}
+            />
+            <ColorCard
+              color="white"
+              background="#2B2B2B"
+              text="Fund ask"
+              image={CoinIcon}
+              amount={colorCardData?.fund_ask || ""}
+              onAmountChange={(amount) =>
+                handleAmountChange("fund_ask", amount)
+              }
+              field={"fund_ask"}
+              colorCardData={colorCardData}
+            />
+            <ColorCard
+              color="white"
+              background="#FF7373"
+              text="Valuation"
+              image={CoinIcon}
+              amount={colorCardData?.valuation || ""}
+              onAmountChange={(amount) =>
+                handleAmountChange("valuation", amount)
+              }
+              field={"valuation"}
+              colorCardData={colorCardData}
+            />
+            <ColorCard
+              color="white"
+              background="#9198DA"
+              text="Raised funds"
+              image={CoinIcon}
+              amount={colorCardData?.raised_funds || ""}
+              onAmountChange={(amount) =>
+                handleAmountChange("raised_funds", amount)
+              }
+              field={"raised_funds"}
+              colorCardData={colorCardData}
+            />
+          </div>
         </div>
-
-        {/* Core Team */}
-        <div className="core__team bg-white rounded-5 p-5">
-          <CoreTeam companyData={companyData} setCompanyData={setCompanyData} />
-        </div>
-
-        {/* Milestones */}
-        <div className="milestones__component bg-white rounded-5 p-5 d-flex flex-column gap-4">
-          <Milestones />
-        </div>
-
-        {/* Color Cards */}
-        <div className="card_holder d-flex justify-content-between flex-wrap">
-          <ColorCard
-            color="white"
-            background="#BB98FF"
-            text="Last round investment"
-            image={CoinIcon}
-            amount={colorCardData?.last_round_investment || ""}
-            onAmountChange={(amount) =>
-              handleAmountChange("last_round_investment", amount)
-            }
-            field={"last_round_investment"}
-            colorCardData={colorCardData}
-          />
-          <ColorCard
-            color="white"
-            background="#DAC191"
-            text="Total Investment"
-            image={CoinIcon}
-            amount={colorCardData?.total_investment || ""}
-            onAmountChange={(amount) =>
-              handleAmountChange("total_investment", amount)
-            }
-            field={"total_investment"}
-            colorCardData={colorCardData}
-          />
-          <ColorCard
-            color="white"
-            background="#DCDCDC"
-            text="No.of Investers"
-            image={CoinIcon}
-            amount={colorCardData?.no_of_investers || ""}
-            onAmountChange={(amount) =>
-              handleAmountChange("no_of_investers", amount)
-            }
-            field={"no_of_investers"}
-            colorCardData={colorCardData}
-          />
-          <ColorCard
-            color="white"
-            background="#2B2B2B"
-            text="Fund ask"
-            image={CoinIcon}
-            amount={colorCardData?.fund_ask || ""}
-            onAmountChange={(amount) => handleAmountChange("fund_ask", amount)}
-            field={"fund_ask"}
-            colorCardData={colorCardData}
-          />
-          <ColorCard
-            color="white"
-            background="#FF7373"
-            text="Valuation"
-            image={CoinIcon}
-            amount={colorCardData?.valuation || ""}
-            onAmountChange={(amount) => handleAmountChange("valuation", amount)}
-            field={"valuation"}
-            colorCardData={colorCardData}
-          />
-          <ColorCard
-            color="white"
-            background="#9198DA"
-            text="Raised funds"
-            image={CoinIcon}
-            amount={colorCardData?.raised_funds || ""}
-            onAmountChange={(amount) =>
-              handleAmountChange("raised_funds", amount)
-            }
-            field={"raised_funds"}
-            colorCardData={colorCardData}
-          />
+        {/* Right side content */}
+        <div className="right__content">
+          <RecommendationCard />
+          <NewsCorner />
         </div>
       </div>
-
-      {/* Right side content */}
-      <div className="right__content">
-        <RecommendationCard />
-        <NewsCorner />
-      </div>
-    </div>
+    </MaxWidthWrapper>
   );
 }

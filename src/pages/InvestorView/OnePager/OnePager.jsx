@@ -18,6 +18,7 @@ import { useParams } from "react-router-dom";
 import { getOnePager } from "../../../Service/user";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 const OnePager = () => {
   const [rupeeHighlight, setRupeeHighlight] = useState(true);
@@ -138,113 +139,111 @@ const OnePager = () => {
   }, [onePager.logo]);
 
   return (
-    <div className="onePager">
-      <div className="d-flex justify-content-between align-items-center w-100">
-        <h1>One Pager</h1>
-        <button className="download-button me-5" onClick={handleDownloadPDF}>
-          Download
-        </button>
-      </div>
-
-      {/* <div className="currency">
-        <span
-          className={rupeeHighlight && "highlighted"}
-          onClick={() => changeHighlight("rupee")}
-        >
-          ₹
-        </span>
-        <span
-          className={dollarHighlight && "highlighted"}
-          onClick={() => changeHighlight("dollar")}
-        >
-          $
-        </span>
-      </div> */}
-      <div className="companyDetails">
-        <CompanyDetails
-          companyName={onePager.company}
-          description={onePager.description}
-          // image={onePager.logo}
-          image={imageData}
-        />
-      </div>
-
-      <hr />
-
-      <div className="cards">
-        <SimpleCard title={"Problem"} text={onePager.problem} />
-        <SimpleCard title={"Solution"} text={onePager.solution} />
-        <SimpleCard
-          title={"Competitive Landscape"}
-          text={onePager.competitiveLandscape}
-        />
-      </div>
-
-      <hr />
-
-      <div className="marketCards">
-        <Title title="Market (in cr)" />
-        <div className="cards">
-          <MarketCard
-            title={"TAM"}
-            subtitle={"(Total Addressable Market)"}
-            amount={onePager.TAM}
-          />
-          <MarketCard
-            title={"SAM"}
-            subtitle={"(Servicable Addressable Market)"}
-            amount={onePager.SAM}
-          />
-          <MarketCard
-            title={"SOM"}
-            subtitle={"(Serviceable Obtainable Market)"}
-            amount={onePager.SOM}
-          />
-        </div>
-      </div>
-
-      <div className="projections">
-        <Title title={"Projections"} />
-        <Table hidden={true} />
-      </div>
-
-      <div className="team">
-        <Title title={"Team"} />
-        <div className="cards">
-          {onePager?.team?.map((team, index) => (
-            <TeamsCard
-              key={index}
-              image={team.image}
-              name={team.name}
-              designation={team.designation}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="fundingAndContact">
-        <div className="left">
-          <Title title={"Funding ask (in Lakhs)"} />
-          <div className="box">
-            <h1>{onePager.fundingAsk || `Enter Funding Amount`}</h1>
-            <hr />
-            <ImagePlaceholder
-              text={
-                "Upload image a piechart showing how you utilize the funding amount"
-              }
+    <MaxWidthWrapper>
+      <div className="border-start">
+        <div className="onePager shadow-sm border">
+          <div className="d-flex justify-content-between align-items-center w-100">
+            <h1>One Pager</h1>
+            <button
+              className="download-button me-5"
+              onClick={handleDownloadPDF}
+            >
+              Download
+            </button>
+          </div>
+          {/* <div className="currency">
+            <span
+              className={rupeeHighlight && "highlighted"}
+              onClick={() => changeHighlight("rupee")}
+            >
+              ₹
+            </span>
+            <span
+              className={dollarHighlight && "highlighted"}
+              onClick={() => changeHighlight("dollar")}
+            >
+              $
+            </span>
+          </div> */}
+          <div className="companyDetails">
+            <CompanyDetails
+              companyName={onePager.company}
+              description={onePager.description}
+              // image={onePager.logo}
+              image={imageData}
             />
           </div>
-        </div>
-        <div className="right">
-          <InvestNow page={"onePager"} />
+          <hr />
+          <div className="cards">
+            <SimpleCard title={"Problem"} text={onePager.problem} />
+            <SimpleCard title={"Solution"} text={onePager.solution} />
+            <SimpleCard
+              title={"Competitive Landscape"}
+              text={onePager.competitiveLandscape}
+            />
+          </div>
+          <hr />
+          <div className="marketCards">
+            <Title title="Market (in cr)" />
+            <div className="cards">
+              <MarketCard
+                title={"TAM"}
+                subtitle={"(Total Addressable Market)"}
+                amount={onePager.TAM}
+              />
+              <MarketCard
+                title={"SAM"}
+                subtitle={"(Servicable Addressable Market)"}
+                amount={onePager.SAM}
+              />
+              <MarketCard
+                title={"SOM"}
+                subtitle={"(Serviceable Obtainable Market)"}
+                amount={onePager.SOM}
+              />
+            </div>
+          </div>
+          <div className="projections">
+            <Title title={"Projections"} />
+            <Table hidden={true} />
+          </div>
+          <div className="team">
+            <Title title={"Team"} />
+            <div className="cards">
+              {onePager?.team?.map((team, index) => (
+                <TeamsCard
+                  key={index}
+                  image={team.image}
+                  name={team.name}
+                  designation={team.designation}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="fundingAndContact">
+            <div className="left">
+              <Title title={"Funding ask (in Lakhs)"} />
+              <div className="box">
+                <h1>{onePager.fundingAsk || `Enter Funding Amount`}</h1>
+                <hr />
+                <ImagePlaceholder
+                  text={
+                    "Upload image a piechart showing how you utilize the funding amount"
+                  }
+                />
+              </div>
+            </div>
+            <div className="right">
+              <InvestNow page={"onePager"} />
+            </div>
+          </div>
+          <div className="buttons">
+            <button onClick={handlePreviewPDF}>Preview</button>
+            {/* <button onClick={handleDownloadPDF}>Download</button> */}
+          </div>
         </div>
       </div>
-
-      <div className="buttons">
-        <button onClick={handlePreviewPDF}>Preview</button>
-        {/* <button onClick={handleDownloadPDF}>Download</button> */}
-      </div>
-    </div>
+    </MaxWidthWrapper>
   );
 };
 
