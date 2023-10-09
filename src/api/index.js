@@ -53,8 +53,8 @@ const API = Object.freeze({
   addSectorOfInterest: `${baseUrl}/investor/addSectorOfInterest`,
   uploadLogo: `${baseUrl}/investor/uploadLogo`,
   clearChat: `${baseUrl}/message/clearChatMessages`,
-  createCommunity:`${baseUrl}/community/createCommunity`,
-  getAllCommunity:`${baseUrl}/community/getAllCommunitiesByUserId`,
+  createCommunity: `${baseUrl}/community/createCommunity`,
+  getAllCommunity: `${baseUrl}/community/getAllCommunitiesByUserId`,
   addMyInterest: `${baseUrl}/investor/addMyInterest`,
   getFeaturedPostsByUser: `${baseUrl}/api/posts/getFeaturedPostsByUser`,
   addToFeaturedPost: `${baseUrl}/api/posts/addToFeaturedPost`,
@@ -65,7 +65,8 @@ const API = Object.freeze({
   likeComment: `${baseUrl}/api/posts/toggleLikeComment`,
 
 
-  unsavePost: `${baseUrl}/api/posts/unsavePost`
+  unsavePost: `${baseUrl}/api/posts/unsavePost`,
+  removeFromFeaturedPost: `${baseUrl}/api/posts/removeFromFeaturedPost`,
 });
 
 export default API;

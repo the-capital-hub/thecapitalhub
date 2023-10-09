@@ -1,5 +1,5 @@
-import { Outlet, Navigate } from "react-router-dom";
-import { useState } from "react";
+import { Outlet, Navigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import InvestorNavbar from "../Investor/InvestorNavbar/InvestorNavbar";
 import InvestorSidebar from "../Investor/InvestorSidebar/InvestorSidebar";
 import "./style.scss";
@@ -8,6 +8,11 @@ import { ModalBSContainer, ModalBSBody, ModalBSHeader } from "../PopUp/ModalBS";
 import NewCommunityModal from "../Investor/ChatComponents/NewCommunityModal";
 
 function PrivateRoute({ children, ...props }) {
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   const handleSidebarToggle = () => {
     setSidebarCollapsed((prev) => !prev);

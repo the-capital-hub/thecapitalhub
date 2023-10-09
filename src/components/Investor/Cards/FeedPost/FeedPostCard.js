@@ -41,6 +41,8 @@ import ModalBSBody from "../../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
 import { BiMessageSquareAdd } from "react-icons/bi";
 import IconComponent_add from "../../SvgIcons/IconComponent_add";
 import Linkify from "react-linkify";
+import IconDelete from "../../SvgIcons/IconDelete";
+import IconReportPost from "../../SvgIcons/IconReportPost";
 
 const FeedPostCard = ({
   postId,
@@ -83,7 +85,7 @@ const FeedPostCard = ({
     const requestBody = {
       userId: loggedInUser._id,
       postId: postId,
-    }
+    };
     console.log(requestBody);
     try {
       const response = await unsavePost(requestBody);
@@ -92,8 +94,7 @@ const FeedPostCard = ({
     } catch (error) {
       console.log(error);
     }
-
-  }
+  };
 
   const [showUnsaveSuccess, setShowUnsaveSuccess] = useState(false);
   const receiveUnSavedPostStatus = () => {
@@ -105,7 +106,6 @@ const FeedPostCard = ({
     }, 2500);
   };
 
-
   const receiveSavedPostStatus = () => {
     setShowSuccess(true);
     setTimeout(() => {
@@ -113,7 +113,6 @@ const FeedPostCard = ({
       setSavedPostId([...savedPostId, postId]);
     }, 2500);
   };
-
 
   const sendComment = async () => {
     try {
@@ -296,8 +295,9 @@ const FeedPostCard = ({
     <>
       <div className="feedpostcard_main_container mb-2">
         <div
-          className={`box feedpostcard_container mt-2 ${repostPreview && "rounded shadow-sm border"
-            }`}
+          className={`box feedpostcard_container mt-2 ${
+            repostPreview && "rounded shadow-sm border"
+          }`}
         >
           {/* Post Header */}
           <div className="feed_header_container border-2 border-bottom mb-3 pb-2">
@@ -382,18 +382,26 @@ const FeedPostCard = ({
                           className="d-flex align-items-center gap-2"
                         >
                           <IconComponent_add />
-                          Featured
+                          <span>Featured</span>
                         </li>
                       )}
                       {userId === loggedInUser?._id && (
-                        <li onClick={() => deletePost(postId)}>Delete</li>
+                        <li
+                          onClick={() => deletePost(postId)}
+                          className="d-flex align-items-center gap-2"
+                        >
+                          <IconDelete />
+                          <span>Delete</span>
+                        </li>
                       )}
                       <li
                         data-bs-toggle="modal"
                         data-bs-target="#reportPostModal"
-                      // onClick={() => setShowReportModal(true)}
+                        className="d-flex align-items-center gap-2"
+                        // onClick={() => setShowReportModal(true)}
                       >
-                        Report
+                        <IconReportPost />
+                        <span>Report</span>
                       </li>
                     </ul>
                   )}
@@ -472,6 +480,7 @@ const FeedPostCard = ({
             <>
               <hr className="mt-1 mb-2" />
               <div className="row feedpostcard_footer mb-2">
+                {/* Like and Comment */}
                 <div className="col-8">
                   <div className="feedpostcard_footer_like_comment d-flex gap-2">
                     {liked ? (
@@ -480,6 +489,7 @@ const FeedPostCard = ({
                         width={18}
                         alt="like post"
                         onClick={likeUnlikeHandler}
+                        style={{ cursor: "pointer" }}
                       />
                     ) : (
                       <img
@@ -487,6 +497,7 @@ const FeedPostCard = ({
                         width={18}
                         alt="like post"
                         onClick={likeUnlikeHandler}
+                        style={{ cursor: "pointer" }}
                       />
                     )}
                     <img
@@ -494,13 +505,17 @@ const FeedPostCard = ({
                       width={16}
                       alt="comment post"
                       onClick={() => setShowComment(!showComment)}
+                      style={{ cursor: "pointer" }}
                     />
                   </div>
                 </div>
+
+                {/* Repost and Save posts */}
                 <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                   <span
-                    className={`repost_container rounded ${showRepostOptions ? "bg-light" : ""
-                      }`}
+                    className={`repost_container rounded ${
+                      showRepostOptions ? "bg-light" : ""
+                    }`}
                     ref={repostContainerRef}
                   >
                     <img
@@ -508,9 +523,10 @@ const FeedPostCard = ({
                       width={12}
                       alt="reshare post"
                       onClick={() => setShowRepostOptions(!showRepostOptions)}
+                      style={{ cursor: "pointer" }}
                     />
                     {showRepostOptions && (
-                      <span className="repost_options rounded shadow-sm">
+                      <span className="repost_options border rounded shadow-sm">
                         <button
                           className="single_option btn text-start py-1 px-1 rounded border-bottom"
                           onClick={() => repostWithToughts(postId)}
@@ -565,16 +581,25 @@ const FeedPostCard = ({
                     )}
                   </span>
                   {savedPostId.includes(postId) ? (
-                    <img src={savedIcon} width={16} alt="save post" onClick={handleUnsavePost} />
+                    <img
+                      src={savedIcon}
+                      width={16}
+                      alt="save post"
+                      onClick={handleUnsavePost}
+                      style={{ cursor: "pointer" }}
+                    />
                   ) : (
                     <img
                       src={saveIcon}
                       width={16}
                       alt="save post"
                       onClick={handleSavePopUp}
+                      style={{ cursor: "pointer" }}
                     />
                   )}
                 </div>
+
+                {/* Show Comments */}
                 {showComment && (
                   <div>
                     <div class="comment_container">
@@ -606,6 +631,8 @@ const FeedPostCard = ({
                         </div>
                       </section>
                     </div>
+
+                    {/* Comments */}
                     {comments
                       .sort(
                         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -737,8 +764,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Harassment" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio1"
               >
                 Harassment
@@ -755,8 +783,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Spam" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio2"
               >
                 Spam
@@ -773,8 +802,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Fraud or scam" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio3"
               >
                 Fraud or scam
@@ -791,8 +821,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Hateful Speech" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio4"
               >
                 Hateful Speech

@@ -1,5 +1,5 @@
-import { Outlet, Navigate } from "react-router-dom";
-import { useState } from "react";
+import { Outlet, Navigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "./ProtectedInvestorRoutes.scss";
 import LogOutPopUp from "../../../components/PopUp/LogOutPopUp/LogOutPopUp";
 import InvestorNavbar from "../../../components/NewInvestor/NavBar/NavBar";
@@ -10,7 +10,10 @@ function ProtectedInvestorRoutes({ children, ...props }) {
   const handleSidebarToggle = () => {
     setSidebarCollapsed((prev) => !prev);
   };
-
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
   // const isLoggedIn = () => {
   //   const isLoggedIn = localStorage.getItem("isLoggedIn");
   //   console.log("isLoggedIn-->", isLoggedIn);

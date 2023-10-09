@@ -2,6 +2,7 @@
   // border: 1px solid red;
   .featuredpostcard_container {
     width: 22rem;
+    max-width: 22rem;
 
     // width: 97%;
     display: flex;
@@ -48,7 +49,7 @@
 
       .feedpostcard_content {
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
 
         .feedpostcart_text_header {
@@ -90,6 +91,14 @@
           span {
             margin-right: 5px;
           }
+        }
+
+        .btn_base_sm {
+          outline: none;
+          border: none;
+          background-color: transparent;
+          padding: 0.25em 0 0 0.5em;
+          color: rgb(173, 38, 38);
         }
       }
 
