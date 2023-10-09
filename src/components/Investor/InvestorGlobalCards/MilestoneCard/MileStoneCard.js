@@ -4,7 +4,7 @@ import { getAllPostsAPI, getFeaturedPost } from "../../../../Service/user";
 import FeaturedPostCard from "../../Cards/FeaturedPostCard/FeaturedPostCard";
 import { useSelector } from "react-redux";
 
-const Card = ({ userId, isDelete=false }) => {
+const Card = ({ userId, isDelete = false }) => {
   const [allPosts, setAllPosts] = useState(null);
   const [user, setUser] = useState(null);
   useEffect(() => {
@@ -19,7 +19,7 @@ const Card = ({ userId, isDelete=false }) => {
         setUser([]);
         setAllPosts([]);
       });
-  }, [userId])
+  }, [userId]);
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
@@ -66,14 +66,7 @@ const Card = ({ userId, isDelete=false }) => {
       <div className="post_container_div d-flex align-items-stretch gap-4 ps-3 w-100 overflow-x-auto ">
         {allPosts ? (
           allPosts.map(
-            ({
-              description,
-              video,
-              image,
-              createdAt,
-              likes,
-              _id,
-            }) => (
+            ({ description, video, image, createdAt, likes, _id }) => (
               <FeaturedPostCard
                 key={_id} // Use a unique key for each post
                 postId={_id}
@@ -87,7 +80,6 @@ const Card = ({ userId, isDelete=false }) => {
                 image={image}
                 createdAt={createdAt}
                 likes={likes}
-                isDelete={isDelete}
               />
             )
           )
