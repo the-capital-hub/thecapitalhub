@@ -59,8 +59,6 @@ const FeedPostCard = ({
   repostLoading,
   repostPreview,
   resharedPostId,
-  unsavePostStatus,
-  setUnsavePostStatus,
 }) => {
   const [showComment, setShowComment] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -91,7 +89,7 @@ const FeedPostCard = ({
     } catch (error) {
       console.log(error);
     }
-    
+
   }
 
   const [showUnsaveSuccess, setShowUnsaveSuccess] = useState(false);
@@ -99,7 +97,8 @@ const FeedPostCard = ({
     setShowUnsaveSuccess(true);
     setTimeout(() => {
       setShowUnsaveSuccess(false);
-      setUnsavePostStatus(!unsavePostStatus);
+      const updatedSavedPostId = savedPostId.filter((id) => id !== postId);
+      setSavedPostId(updatedSavedPostId);
     }, 2500);
   };
 
@@ -108,9 +107,10 @@ const FeedPostCard = ({
     setShowSuccess(true);
     setTimeout(() => {
       setShowSuccess(false);
-      setUnsavePostStatus(!unsavePostStatus);
+      setSavedPostId([...savedPostId, postId]);
     }, 2500);
   };
+
 
   const sendComment = async () => {
     try {
@@ -257,9 +257,8 @@ const FeedPostCard = ({
     <>
       <div className="feedpostcard_main_container mb-2">
         <div
-          className={`box feedpostcard_container mt-2 ${
-            repostPreview && "rounded shadow-sm border"
-          }`}
+          className={`box feedpostcard_container mt-2 ${repostPreview && "rounded shadow-sm border"
+            }`}
         >
           {/* Post Header */}
           <div className="feed_header_container border-2 border-bottom mb-3 pb-2">
@@ -353,7 +352,7 @@ const FeedPostCard = ({
                       <li
                         data-bs-toggle="modal"
                         data-bs-target="#reportPostModal"
-                        // onClick={() => setShowReportModal(true)}
+                      // onClick={() => setShowReportModal(true)}
                       >
                         Report
                       </li>
@@ -461,9 +460,8 @@ const FeedPostCard = ({
                 </div>
                 <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                   <span
-                    className={`repost_container rounded ${
-                      showRepostOptions ? "bg-light" : ""
-                    }`}
+                    className={`repost_container rounded ${showRepostOptions ? "bg-light" : ""
+                      }`}
                     ref={repostContainerRef}
                   >
                     <img
@@ -528,7 +526,7 @@ const FeedPostCard = ({
                     )}
                   </span>
                   {savedPostId.includes(postId) ? (
-                    <img src={savedIcon} width={16} alt="save post" onClick={handleUnsavePost}/>
+                    <img src={savedIcon} width={16} alt="save post" onClick={handleUnsavePost} />
                   ) : (
                     <img
                       src={saveIcon}
@@ -635,7 +633,7 @@ const FeedPostCard = ({
         {showUnsaveSuccess && (
           <AfterSuccessPopUp
             withoutOkButton
-            onClose={() => setShowSuccess(!showSuccess)}
+            onClose={() => setShowUnsaveSuccess(!showUnsaveSuccess)}
             successText="Post unsaved Successfully"
           />
         )}
@@ -664,9 +662,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Harassment" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio1"
               >
                 Harassment
@@ -683,9 +680,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Spam" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio2"
               >
                 Spam
@@ -702,9 +698,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Fraud or scam" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio3"
               >
                 Fraud or scam
@@ -721,9 +716,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Hateful Speech" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio4"
               >
                 Hateful Speech

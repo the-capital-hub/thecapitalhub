@@ -53,8 +53,7 @@ const Feed = () => {
       window.history.replaceState({}, "", urlWithoutQuery);
     }
   }, [location]);
-  
-  const [unsavePostStatus, setUnsavePostStatus] = useState(false);
+
 
   useEffect(() => {
     getSavedPostCollections(loggedInUser._id).then((data) => {
@@ -62,7 +61,7 @@ const Feed = () => {
     });
     document.title = "Home | The Capital Hub";
     fetchAllPosts();
-  }, [newPost, unsavePostStatus]);
+  }, [newPost]);
 
   console.log(allPosts?.[0]);
 
@@ -152,8 +151,6 @@ const Feed = () => {
                     repostInstantly={repostInstantly}
                     repostLoading={repostLoading}
                     resharedPostId={resharedPostId}
-                    setUnsavePostStatus = {setUnsavePostStatus}
-                    unsavePostStatus = {unsavePostStatus}
                   />
                 )
               )

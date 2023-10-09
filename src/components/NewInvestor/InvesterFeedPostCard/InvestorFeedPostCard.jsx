@@ -56,8 +56,6 @@ const FeedPostCard = ({
   repostLoading,
   repostPreview,
   resharedPostId,
-  unsavePostStatus,
-  setUnsavePostStatus,
 }) => {
   const [showComment, setShowComment] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -77,7 +75,8 @@ const FeedPostCard = ({
   const receiveSavedPostStatus = () => {
     setShowSuccess(true);
     setTimeout(() => {
-      setShowSuccess(false); // Reset the state after a delay
+      setShowSuccess(false);
+      setSavedPostId([...savedPostId, postId]);
     }, 2500);
   };
 
@@ -92,7 +91,7 @@ const FeedPostCard = ({
         userId: loggedInUser._id,
         text: commentText,
       });
-      if (response.data.status == "200") {
+      if (response.data.status === "200") {
         await getPostComment({ postId }).then((res) => {
           console.log("response", res.data.data);
           setComments(res.data.data);
@@ -207,7 +206,6 @@ const FeedPostCard = ({
       userId: loggedInUser._id,
       postId: postId,
     }
-    console.log(requestBody);
     try {
       const response = await unsavePost(requestBody);
       console.log(response);
@@ -215,7 +213,7 @@ const FeedPostCard = ({
     } catch (error) {
       console.log(error);
     }
-    
+
   }
 
   const [showUnsaveSuccess, setShowUnsaveSuccess] = useState(false);
@@ -223,7 +221,8 @@ const FeedPostCard = ({
     setShowUnsaveSuccess(true);
     setTimeout(() => {
       setShowUnsaveSuccess(false);
-      setUnsavePostStatus(!unsavePostStatus);
+      const updatedSavedPostId = savedPostId.filter((id) => id !== postId);
+      setSavedPostId(updatedSavedPostId);
     }, 2500);
   };
 
@@ -233,7 +232,6 @@ const FeedPostCard = ({
     setTimeout(() => {
       setFilingReport(false);
       setShowReportModal(false);
-      setUnsavePostStatus(!unsavePostStatus);
     }, 2000);
   };
 
@@ -242,9 +240,8 @@ const FeedPostCard = ({
       <div className="row investor_feedpostcard_main_container mb-2">
         <div className="col-12">
           <div
-            className={`box feedpostcard_container mt-2 ${
-              repostPreview && "rounded shadow-sm border"
-            }`}
+            className={`box feedpostcard_container mt-2 ${repostPreview && "rounded shadow-sm border"
+              }`}
           >
             <div className="  feed_header_container border-2 border-bottom mb-3 pb-2">
               <div className="feedpostcard_content">
@@ -422,9 +419,8 @@ const FeedPostCard = ({
                   </div>
                   <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                     <span
-                      className={`repost_container rounded ${
-                        showRepostOptions ? "bg-light" : ""
-                      }`}
+                      className={`repost_container rounded ${showRepostOptions ? "bg-light" : ""
+                        }`}
                       ref={repostContainerRef}
                     >
                       <img
@@ -490,7 +486,7 @@ const FeedPostCard = ({
                     </span>
                     {/* <img src={shareIcon} width={16} alt="share post" /> */}
                     {savedPostId.includes(postId) ? (
-                      <img src={savedIcon} width={16} alt="save post" onClick={handleUnsavePost}/>
+                      <img src={savedIcon} width={16} alt="save post" onClick={handleUnsavePost} />
                     ) : (
                       <img
                         src={saveIcon}
@@ -587,7 +583,7 @@ const FeedPostCard = ({
         {showUnsaveSuccess && (
           <InvestorAfterSuccessPopUp
             withoutOkButton
-            onClose={() => setShowSuccess(!showSuccess)}
+            onClose={() => setShowUnsaveSuccess(!showUnsaveSuccess)}
             successText="Post unsaved Successfully"
           />
         )}
@@ -616,9 +612,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Harassment" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio1"
               >
                 Harassment
@@ -635,9 +630,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Spam" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio2"
               >
                 Spam
@@ -654,9 +648,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Fraud or scam" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio3"
               >
                 Fraud or scam
@@ -673,9 +666,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Hateful Speech" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio4"
               >
                 Hateful Speech
