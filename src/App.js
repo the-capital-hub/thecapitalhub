@@ -78,7 +78,8 @@ import UXBlog from "./pages/Blogs/UXBlog/UXBlog";
 import EditCompanyProfilePage from "./pages/StartUp/CompanyProfile/EditCompanyProfilePage";
 import EditInvestorCompanyProfilePage from "./pages/Investor/InvestorCompanyProfilePage/EditInvestorCompanyProfilePage";
 import CompanyProfilePage from "./pages/StartUp/CompanyProfile/CompanyProfilePage";
-import InvestorCompanyProfilePage from "./pages/Investor/InvestorCompanyProfilePage/InvestorCompanyProfilePage";
+import InvestorOtherCompanyProfilePage from "./pages/Investor/InvestorCompanyProfilePage/InvestorCompanyProfilePage";
+import InvestorCompanyProfilePage from "./pages/Investor/InvestorCompanyProfilePage/InvestorCompany";
 import FoodLandingPage from "./eCommerace/pages/LandingPage/FoodLandingPage/FoodLandingPage";
 import Layout from "./components/ECommerace/Layout/Layout/Layout";
 import OtherInvestorProfile from "./pages/Investor/OtherInvestorProfile/OtherInvestorProfile";
@@ -306,12 +307,16 @@ function App() {
             <Route path="saved-posts" element={<SavedPosts />} />
             <Route path="connection" element={<InvestorConnection />} />
             <Route
-              path="company-profile"
+              path="company-profile/edit"
               element={<EditInvestorCompanyProfilePage />}
+            />
+             <Route
+              path="company-profile"
+              element={<InvestorCompanyProfilePage />}
             />
             <Route
               path="company-profile/:username"
-              element={<InvestorCompanyProfilePage />}
+              element={<InvestorOtherCompanyProfilePage />}
             />
             <Route path="user/:userId" element={<OtherInvestorProfile />} />
           </Route>
