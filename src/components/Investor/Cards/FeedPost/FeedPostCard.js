@@ -21,6 +21,7 @@ import {
   likeUnlikeAPI,
   sendPostComment,
   addToFeaturedPost,
+  unsavePost,
 } from "../../../../Service/user";
 import SmileeIcon from "../../../../Images/Group 15141(1).svg";
 import ImageIcon from "../../../../Images/Group 15141.svg";
@@ -76,10 +77,37 @@ const FeedPostCard = ({
     setshowSavePopUp(true);
   };
 
+  const handleUnsavePost = async (e) => {
+    e.preventDefault();
+    const requestBody = {
+      userId: loggedInUser._id,
+      postId: postId,
+    };
+    console.log(requestBody);
+    try {
+      const response = await unsavePost(requestBody);
+      console.log(response);
+      receiveUnSavedPostStatus();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const [showUnsaveSuccess, setShowUnsaveSuccess] = useState(false);
+  const receiveUnSavedPostStatus = () => {
+    setShowUnsaveSuccess(true);
+    setTimeout(() => {
+      setShowUnsaveSuccess(false);
+      const updatedSavedPostId = savedPostId.filter((id) => id !== postId);
+      setSavedPostId(updatedSavedPostId);
+    }, 2500);
+  };
+
   const receiveSavedPostStatus = () => {
     setShowSuccess(true);
     setTimeout(() => {
-      setShowSuccess(false); // Reset the state after a delay
+      setShowSuccess(false);
+      setSavedPostId([...savedPostId, postId]);
     }, 2500);
   };
 
@@ -94,7 +122,7 @@ const FeedPostCard = ({
         userId: loggedInUser._id,
         text: commentText,
       });
-      if (response.data.status == "200") {
+      if (response.data.status === "200") {
         await getPostComment({ postId }).then((res) => {
           console.log("response", res.data.data);
           setComments(res.data.data);
@@ -129,7 +157,6 @@ const FeedPostCard = ({
               },
               []
             );
-            // console.log(allSavedPostDataIds);
             setSavedPostId(allSavedPostDataIds);
           }
         } catch (error) {
@@ -519,6 +546,7 @@ const FeedPostCard = ({
                       src={savedIcon}
                       width={16}
                       alt="save post"
+                      onClick={handleUnsavePost}
                       style={{ cursor: "pointer" }}
                     />
                   ) : (
@@ -627,6 +655,13 @@ const FeedPostCard = ({
             withoutOkButton
             onClose={() => setShowSuccess(!showSuccess)}
             successText="Post saved Successfully"
+          />
+        )}
+        {showUnsaveSuccess && (
+          <AfterSuccessPopUp
+            withoutOkButton
+            onClose={() => setShowUnsaveSuccess(!showUnsaveSuccess)}
+            successText="Post unsaved Successfully"
           />
         )}
         {showFeaturedPostSuccess && (

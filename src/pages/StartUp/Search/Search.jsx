@@ -92,15 +92,19 @@ function Search() {
 
                   {users?.connectionsSent?.includes(loggedInUser._id) ? (
                     <Link to="/chats" className="text-decoration-none">
-                      <button className="  d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white">
+                      <button className="d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white">
                         {/* <img src={connectIcon} alt="connect-user" /> */}
                         <span>Message</span>
                       </button>
                     </Link>
                   ) : users?.connectionsReceived?.includes(loggedInUser._id) ? (
-                    <button className="  d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white">
+                    <button className="d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white">
                       <img src={connectIcon} alt="connect-user" />
                       <span>Pending</span>
+                    </button>
+                  ) : users?.connections?.includes(loggedInUser._id) ? (
+                    <button className="d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white">
+                      <span>Connected</span>
                     </button>
                   ) : (
                     <button
@@ -111,6 +115,7 @@ function Search() {
                       <span>Connect</span>
                     </button>
                   )}
+
                 </div>
               ))
             )}
@@ -144,9 +149,8 @@ function Search() {
                     />
                     <div className="d-flex flex-column justify-content-center">
                       <h5>{`${company?.company}`}</h5>
-                      <p>{`${
-                        company?.description ? company?.description : ""
-                      }`}</p>
+                      <p>{`${company?.description ? company?.description : ""
+                        }`}</p>
                     </div>
                   </div>
                 </div>

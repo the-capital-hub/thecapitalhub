@@ -17,6 +17,8 @@ import {
   getFeaturedPostsByUser,
   removeFromFeaturedPost,
   deleteComment,
+  unsavePost,
+  toggleCommentLike,
 } from "../services/postService";
 import mongoose from "mongoose";
 
@@ -158,6 +160,20 @@ export const savePostController = async (req, res) => {
   }
 };
 
+export const unsavePostController = async (req, res) => {
+  try {
+    const { userId, postId } = req.body;
+    const response = await unsavePost(userId, postId);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while unsaving the post.",
+    });
+  }
+};
+
 //get saved post
 export const getAllSavedPostCollectionsController = async (req, res) => {
   try {
@@ -287,6 +303,21 @@ export const deleteCommentController = async (req, res) => {
     return res.status(500).json({
       status: 500,
       message: "An error occurred while deleting the comment.",
+    });
+  }
+};
+
+export const toggleCommentLikeController = async (req, res) => {
+  try {
+    const { postId, commentId } = req.params;
+    const { userId } = req.userId;
+    const response = await toggleCommentLike(postId, commentId, userId);
+    return res.status(response.status).json(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      status: 500,
+      message: "An error occurred while liking the comment.",
     });
   }
 };

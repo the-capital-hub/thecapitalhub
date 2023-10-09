@@ -54,6 +54,7 @@ const Feed = () => {
     }
   }, [location]);
 
+
   useEffect(() => {
     getSavedPostCollections(loggedInUser._id).then((data) => {
       setgetSavedPostData(data);
