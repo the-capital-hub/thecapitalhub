@@ -6,8 +6,8 @@ function IconComponent_add(props) {
     <svg
       viewBox="0 0 21 21"
       fill="currentColor"
-      height="1.25rem"
-      width="1.25rem"
+      height="1.3rem"
+      width="1.3rem"
       {...props}
     >
       <g

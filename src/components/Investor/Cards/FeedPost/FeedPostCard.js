@@ -36,6 +36,8 @@ import ModalBSBody from "../../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
 import { BiMessageSquareAdd } from "react-icons/bi";
 import IconComponent_add from "../../SvgIcons/IconComponent_add";
 import Linkify from "react-linkify";
+import IconDelete from "../../SvgIcons/IconDelete";
+import IconReportPost from "../../SvgIcons/IconReportPost";
 
 const FeedPostCard = ({
   postId,
@@ -314,18 +316,26 @@ const FeedPostCard = ({
                           className="d-flex align-items-center gap-2"
                         >
                           <IconComponent_add />
-                          Featured
+                          <span>Featured</span>
                         </li>
                       )}
                       {userId === loggedInUser?._id && (
-                        <li onClick={() => deletePost(postId)}>Delete</li>
+                        <li
+                          onClick={() => deletePost(postId)}
+                          className="d-flex align-items-center gap-2"
+                        >
+                          <IconDelete />
+                          <span>Delete</span>
+                        </li>
                       )}
                       <li
                         data-bs-toggle="modal"
                         data-bs-target="#reportPostModal"
+                        className="d-flex align-items-center gap-2"
                         // onClick={() => setShowReportModal(true)}
                       >
-                        Report
+                        <IconReportPost />
+                        <span>Report</span>
                       </li>
                     </ul>
                   )}
