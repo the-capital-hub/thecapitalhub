@@ -15,6 +15,7 @@ import raisedFundsIcon from "../../../Images/StartUp/icons/ColoredCards/3CoinSta
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getUserAndStartUpByUserIdAPI } from "../../../Service/user";
+import FeaturedPostsContainer from "../../../components/Investor/InvestorGlobalCards/MilestoneCard/FeaturedPostsContainer";
 
 function OtherUserProfile() {
   const [userData, setUserData] = useState(null);
@@ -31,7 +32,7 @@ function OtherUserProfile() {
   }, [userId]);
 
   return (
-    <section className="other_user_profile">
+    <section className="container other_user_profile">
       <SmallProfileCard className="mt-lg-2 mt-xl-0" text="User Details" />
       {userData ? (
         <>
@@ -100,7 +101,7 @@ function OtherUserProfile() {
               </div>
             </div>
           </div>
-          <div className="row row-cols-auto row-cols-lg-2 g-0 gx-md-4 two_column_wrapper">
+          <div className="row row-cols-auto row-cols-lg-2 g-0 gx-md-4 two_column_wrapper mb-4">
             <div className="left_container p-0 pe-md-auto d-flex flex-column gap-3 col-12 col-lg-8">
               {/* <div className="about rounded border shadow-sm profile_container">
                 <h4 className="h4">About</h4>
@@ -175,6 +176,23 @@ function OtherUserProfile() {
                 </div>
               </div>
 
+              {/* Otheruser's Featured Posts */}
+              <div className="bg-white rounded shadow-sm d-flex flex-column gap-3 p-4">
+                {/* Heading */}
+                <div className="d-flex justify-content-between">
+                  <h4>Featured Posts</h4>
+                  <Link
+                    className="fs-6 text-decoration-none"
+                    style={{ color: "#717171" }}
+                  >
+                    See More
+                  </Link>
+                </div>
+
+                {/* Featured Posts container */}
+                <FeaturedPostsContainer userId={userId} />
+              </div>
+
               {/* Company Details */}
               <div className="company_details_container shadow-sm rounded">
                 <CompanyDetailsCard
@@ -184,7 +202,7 @@ function OtherUserProfile() {
               </div>
 
               {/* Color Cards */}
-              <div className="coloured_cards row row-cols-1 row-cols-md-2 row-cols-lg-3">
+              <div className="coloured_cards row row-cols-1 row-cols-md-2 row-cols-lg-3 gap-3">
                 <ColorCard
                   color="white"
                   background="#BB98FF"
@@ -236,7 +254,7 @@ function OtherUserProfile() {
                 />
               </div>
             </div>
-            <div className="right_container col-lg-4 d-none d-lg-block d-flex flex-column gap-3">
+            <div className="right_container">
               <RecommendationCard />
               <NewsCorner />
             </div>

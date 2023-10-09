@@ -12,6 +12,7 @@ import "./CompanyProfile.scss";
 export default function CompanyProfile({
   isOnelink,
   companyData,
+  investorData,
   startup = "false",
 }) {
   // Fetch Company Data here
@@ -47,6 +48,20 @@ export default function CompanyProfile({
     noOfEmployees = companyData.noOfEmployees || noOfEmployees;
     team = companyData.team || team;
     tags = companyData.keyFocus?.split(',').map(tag => tag.trim()) || tags;
+  }
+  if (investorData) {
+    name = investorData.companyName || name;
+    logo = investorData.logo || logo;
+    location = investorData.location || location;
+    description = investorData.description || description;
+    socialLinks = investorData.socialLinks || socialLinks;
+    colorCard = investorData.colorCard || colorCard;
+    foundedIn = investorData.startedAtDate || foundedIn;
+    vision = investorData.vision || vision;
+    mission = investorData.mission || mission;
+    noOfEmployees = investorData.noOfEmployees || noOfEmployees;
+    team = investorData.team || team;
+    tags = investorData.keyFocus?.split(',').map(tag => tag.trim()) || tags;
   }
   // const company = {
   //   image: HCLImage,

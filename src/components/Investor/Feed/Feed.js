@@ -80,7 +80,7 @@ const Feed = () => {
   };
 
   return (
-    <div className="feed_container">
+    <div className="container mx-auto feed_container">
       <div className="main_content">
         <div className="Posts__column d-flex flex-column gap-4">
           {/* Small Profile Card */}
@@ -94,7 +94,11 @@ const Feed = () => {
               className="rounded-circle"
               style={{ width: "50px", height: "50px" }}
             />
-            <div className="w-auto flex-grow-1 me-4" onClick={openPopup}>
+            <div
+              className="w-auto flex-grow-1 me-4"
+              onClick={openPopup}
+              style={{ cursor: "pointer" }}
+            >
               <input
                 className="px-3 flex-grow-1"
                 type="text"

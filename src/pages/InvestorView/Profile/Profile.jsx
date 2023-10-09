@@ -3,7 +3,7 @@ import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
 import { Link } from "react-router-dom";
 import CompanyDetailsCard from "../../../components/Investor/InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
 import { useSelector } from "react-redux";
-import MileStoneCard from "../../../components/Investor/InvestorGlobalCards/MilestoneCard/MileStoneCard";
+import MileStoneCard from "../../../components/Investor/InvestorGlobalCards/MilestoneCard/FeaturedPostsContainer";
 import "./Profile.scss";
 import { useParams } from "react-router-dom";
 import { getUserById, getStartupByFounderId } from "../../../Service/user";
