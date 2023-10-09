@@ -20,7 +20,6 @@ import {
   unsavePost,
   toggleCommentLike,
 } from "../services/postService";
-import mongoose from "mongoose";
 
 export const createPost = async (req, res) => {
   try {

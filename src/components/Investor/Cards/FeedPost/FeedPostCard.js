@@ -82,6 +82,7 @@ const FeedPostCard = ({
   };
 
   const handleUnsavePost = async (e) => {
+    receiveUnSavedPostStatus();
     e.preventDefault();
     const requestBody = {
       userId: loggedInUser._id,
@@ -91,7 +92,6 @@ const FeedPostCard = ({
     try {
       const response = await unsavePost(requestBody);
       console.log(response);
-      receiveUnSavedPostStatus();
     } catch (error) {
       console.log(error);
     }
@@ -99,20 +99,20 @@ const FeedPostCard = ({
 
   const [showUnsaveSuccess, setShowUnsaveSuccess] = useState(false);
   const receiveUnSavedPostStatus = () => {
-    setShowUnsaveSuccess(true);
-    setTimeout(() => {
-      setShowUnsaveSuccess(false);
+    // setShowUnsaveSuccess(true);
+    // setTimeout(() => {
+    //   setShowUnsaveSuccess(false);
       const updatedSavedPostId = savedPostId.filter((id) => id !== postId);
       setSavedPostId(updatedSavedPostId);
-    }, 2500);
+    // }, 2500);
   };
 
   const receiveSavedPostStatus = () => {
-    setShowSuccess(true);
-    setTimeout(() => {
-      setShowSuccess(false);
+    // setShowSuccess(true);
+    // setTimeout(() => {
+    //   setShowSuccess(false);
       setSavedPostId([...savedPostId, postId]);
-    }, 2500);
+    // }, 2500);
   };
 
   const sendComment = async () => {
