@@ -8,7 +8,7 @@ import {
   cancelConnectionRequest,
   getSentPendingConnectionRequests,
   getRecommendations,
-} from "../services/connectionService.js"; 
+} from "../services/connectionService.js";
 
 //send connect request 
 export const sendConnectionRequestController = async (req, res) => {

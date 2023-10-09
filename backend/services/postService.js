@@ -1,6 +1,7 @@
 import { PostModel } from "../models/Post";
 import { UserModel } from "../models/User";
 import { cloudinary } from "../utils/uploadImage";
+import { addNotification } from "./notificationService.js";
 
 export const createNewPost = async (data) => {
   try {
@@ -22,9 +23,11 @@ export const createNewPost = async (data) => {
       data.video = url;
     }
     if (data.resharedPostId) {
-      await PostModel.findByIdAndUpdate(data.resharedPostId, {
+      const sharedPost = await PostModel.findByIdAndUpdate(data.resharedPostId, {
         $inc: { resharedCount: 1 },
       });
+      const type = "postShared";
+      await addNotification(sharedPost.user, data.user, type);
     }
     const newPost = new PostModel(data);
     await newPost.save();
@@ -167,6 +170,8 @@ export const likeUnlikePost = async (postId, userId) => {
       post.likes.pull(userId);
     } else {
       post.likes.push(userId);
+      const type = "postLiked";
+      await addNotification(post.user, userId, type);
     }
     await post.save();
     return {
@@ -199,6 +204,8 @@ export const commentOnPost = async (postId, userId, text) => {
     };
     post.comments.push(newComment);
     await post.save();
+    const type = "postCommented";
+    await addNotification(post.user, userId, type);
     return {
       status: 200,
       message: "Comment added successfully",
@@ -624,7 +631,6 @@ export const toggleCommentLike = async (postId, commentId, userId) => {
     await post.save();
 
     const likeCount = comment.likes.length;
-
     return {
       status: 200,
       message: likeStatusMessage,
