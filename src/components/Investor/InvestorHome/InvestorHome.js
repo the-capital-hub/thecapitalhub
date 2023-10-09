@@ -186,7 +186,7 @@ const InvestorHome = () => {
             <div className="content-70 d-flex flex-column gap-3">
               <div className="row">
                 <div className="col-12 mt-2">
-                  <div className=" box bio_container">
+                  <div className=" px-4 py-3 box bio_container">
                     <div className="row profileContainer">
                       <div className="col-10 col-md-8 col-seven">
                         <div className="image_name_section mt-2">
@@ -210,15 +210,14 @@ const InvestorHome = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="col-2 col-md-4 col-five">
+                      {/* <div className="col-2 col-md-4 col-five">
                         <div className=" m-4">
                           <button className="connect_btn px-3">
                             <img src={AddUserIcon} alt="add user" />
-                            {/* <span className="mx-2 d-none d-md-block"> */}
-                            <span className="mx-2">Connect</span>
+                              <span className="mx-2">Connect</span>
                           </button>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                     <hr className="divider_hr" />
                     <div className="row">

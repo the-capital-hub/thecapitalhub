@@ -106,7 +106,6 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   };
 
   const formatTimestamp = (timestamp) => {
-    console.log(timestamp);
     const messageDate = new Date(timestamp);
     const currentDate = new Date();
     const isToday =

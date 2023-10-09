@@ -61,6 +61,10 @@ const API = Object.freeze({
   getCommunityById: `${baseUrl}/community/getCommunityById`,
   getChatSettings: `${baseUrl}/chat/getChatSettings`,
   getCommunitySettings: `${baseUrl}/community/getCommunitySettings`,
+  deleteComment: `${baseUrl}/api/posts/deleteComment`,
+  likeComment: `${baseUrl}/api/posts/toggleLikeComment`,
+
+
   unsavePost: `${baseUrl}/api/posts/unsavePost`,
   removeFromFeaturedPost: `${baseUrl}/api/posts/removeFromFeaturedPost`,
 });
