@@ -57,8 +57,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
 
   return (
     <div
-      className={`container newInvestor_sidebar_container ${sidebarCollapsed ? "collapsed" : ""
-        }`}
+      className={`container newInvestor_sidebar_container ${
+        sidebarCollapsed ? "collapsed" : ""
+      }`}
     >
       <div id="header">
         <ProSidebar collapsed={sidebarCollapsed}>
@@ -173,8 +174,8 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <Link
-                  // onClick={() => setSidebarCollapsed(true)}
-                  // to="/investor/company-profile"
+                  onClick={() => setSidebarCollapsed(true)}
+                  to="/investor/onelink"
                 >
                   <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} />
                   {!sidebarCollapsed && (
@@ -317,7 +318,6 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   )}
                 </Link>
               </MenuItem>
-
 
               {/* <MenuItem
                 active={location.pathname.includes("/investors")}

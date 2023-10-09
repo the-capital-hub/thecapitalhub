@@ -21,12 +21,9 @@ const OneLink = () => {
   console.log(loggedInUser);
   const userId = loggedInUser._id;
   const [isExitClicked, setIsExitClicked] = useState(false);
-
-  const handleExitClick = () => {
-    console.log("Clilc");
-    setIsExitClicked(true);
-  };
   const [company, setCompany] = useState([]);
+
+  // Fetch data by userId
   useEffect(() => {
     document.title = "One Link | The Capital Hub";
     getStartupByFounderId(userId)
@@ -36,10 +33,17 @@ const OneLink = () => {
       .catch(() => setCompany([]));
   }, [userId]);
 
+  // HandleExitClick
+  const handleExitClick = () => {
+    console.log("Clilc");
+    setIsExitClicked(true);
+  };
+
   const handleClosePopup = () => {
     setIsExitClicked(false);
     // navigate("/login");
   };
+
   return (
     <MaxWidthWrapper>
       <div className="onelink_container">
