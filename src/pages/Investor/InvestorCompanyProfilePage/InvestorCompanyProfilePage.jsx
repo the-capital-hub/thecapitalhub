@@ -7,6 +7,7 @@ import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/T
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import { useParams } from "react-router-dom";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
+import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 export default function InvestorCompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -24,24 +25,24 @@ export default function InvestorCompanyProfilePage() {
   }, [username]);
 
   return (
-    <div className="editinvestorCompanyProfilePage__wrapper p-3 border-start">
-      {/* Main content */}
-      <div className="main__content">
-        <SmallProfileCard text={"Company Profile"} />
-
-        {/* Company profile */}
-        {companyData.length !== 0 ? (
-          <CompanyProfile companyData={companyData} />
-        ) : (
-          <SpinnerBS />
-        )}
+    <MaxWidthWrapper>
+      <div className="editinvestorCompanyProfilePage__wrapper p-3 border-start">
+        {/* Main content */}
+        <div className="main__content">
+          <SmallProfileCard text={"Company Profile"} />
+          {/* Company profile */}
+          {companyData.length !== 0 ? (
+            <CompanyProfile companyData={companyData} />
+          ) : (
+            <SpinnerBS />
+          )}
+        </div>
+        {/* Right side content */}
+        <div className="right__content">
+          <RecommendationCard />
+          <NewsCorner />
+        </div>
       </div>
-
-      {/* Right side content */}
-      <div className="right__content">
-        <RecommendationCard />
-        <NewsCorner />
-      </div>
-    </div>
+    </MaxWidthWrapper>
   );
 }

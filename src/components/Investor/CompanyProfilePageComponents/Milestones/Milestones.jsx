@@ -1,6 +1,6 @@
 import React from "react";
 import "./Milestones.scss";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import MilestoneBadge from "./MilestoneBadge";
 import MockBadge from "../../../../Images/StartUp/Milestones/MockBadge.svg";
 import MockFundsBadge from "../../../../Images/StartUp/Milestones/MockfundsBadge.svg";
@@ -28,6 +28,8 @@ export default function Milestones({ headingClass, containerClass }) {
     },
   ];
 
+  let { pathname } = useLocation();
+
   return (
     <div className={` d-flex flex-column gap-4 ${containerClass} `}>
       <div className="d-flex align-items-center justify-content-between">
@@ -47,7 +49,7 @@ export default function Milestones({ headingClass, containerClass }) {
         })}
       </div>
       {/* If authorised show "Add" button that triggers add modal */}
-      {
+      {!pathname.includes("onelink") ? (
         <div className="align-self-end">
           <ModalBsLauncher
             id={"AddMilestoneModal"}
@@ -56,7 +58,9 @@ export default function Milestones({ headingClass, containerClass }) {
             <span>Add</span>
           </ModalBsLauncher>
         </div>
-      }
+      ) : (
+        ""
+      )}
       {/* Modal for adding new team member */}
       <div className="addMilestoneModal__container">
         <ModalBSContainer id={"AddMilestoneModal"} modalXl>

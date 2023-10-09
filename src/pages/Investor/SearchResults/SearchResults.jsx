@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { getSearchResultsAPI } from "../../../Service/user";
 import { useSelector } from "react-redux";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
+import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 const SEARCHFILTERS = ["Industry", "Age", "Stage", "Startups"];
 
@@ -27,105 +28,105 @@ export default function SearchResults() {
   // Fetch search data
   useEffect(() => {
     async function fetchData() {
+      console.log(query);
       const data = await getSearchResultsAPI(query);
-      const updatedUserData = data?.data?.users?.filter(
-        (user) => user?._id !== userIdToRemove
-      );
-      setPeopleData(updatedUserData);
+      setPeopleData(data?.data?.users);
       setCompanyData(data?.data?.company);
       setLoading(false);
+    }
+    if (searchParams.has("query") && query !== searchParams.get("query")) {
+      setQuery(searchParams.get("query"));
+      setLoading(true);
     }
     if (searchParams.has("query")) {
       fetchData();
     }
-  }, [query, searchParams, userIdToRemove]);
+  }, [query, searchParams]);
 
   useEffect(() => {
     setQuery(searchParams.get("query"));
   }, [searchParams]);
   return (
-    <div className="search__results__wrapper px-3 border-start pb-5">
-      <div className="pb-4 pt-2">
-        <Filters filterLabels={SEARCHFILTERS} />
-        {/* <h1>Search Filters</h1> */}
-      </div>
-      <div className="search__results d-flex flex-column gap-5">
-        {/* People Results */}
-        <section className="people__results">
-          <div className="results__container bg-white shadow-sm rounded-3 pb-4">
-            {/* Category */}
-            <div className="p-4 border-bottom">
-              <h3 className="m-0">{"People"}</h3>
-            </div>
-
-            {/* Loop through data array here */}
-            {!loading ? (
-              peopleData.length !== 0 ? (
-                peopleData.map((person) => {
-                  const {
-                    profilePicture,
-                    firstName,
-                    lastName,
-                    designation,
-                    _id,
-                  } = person;
-
-                  return (
-                    <ResultBar
-                      image={profilePicture}
-                      name={`${firstName} ${lastName}`}
-                      description={designation}
-                      key={_id}
-                      param={_id}
-                    />
-                  );
-                })
+    <MaxWidthWrapper>
+      <div className="search__results__wrapper px-3 border-start pb-5">
+        <div className="pb-4 pt-2">
+          <Filters filterLabels={SEARCHFILTERS} />
+          {/* <h1>Search Filters</h1> */}
+        </div>
+        <div className="search__results d-flex flex-column gap-5">
+          {/* People Results */}
+          <section className="people__results">
+            <div className="results__container bg-white shadow-sm rounded-3 pb-4">
+              {/* Category */}
+              <div className="p-4 border-bottom">
+                <h3 className="m-0">{"People"}</h3>
+              </div>
+              {/* Loop through data array here */}
+              {!loading ? (
+                peopleData.length !== 0 ? (
+                  peopleData.map((person) => {
+                    const {
+                      profilePicture,
+                      firstName,
+                      lastName,
+                      designation,
+                      _id,
+                    } = person;
+                    return (
+                      <ResultBar
+                        image={profilePicture}
+                        name={`${firstName} ${lastName}`}
+                        description={designation}
+                        key={_id}
+                        param={_id}
+                      />
+                    );
+                  })
+                ) : (
+                  <div className="text-center py-4">
+                    <h4>No Users Found</h4>
+                  </div>
+                )
               ) : (
-                <div className="text-center py-4">
-                  <h4>No Users Found</h4>
-                </div>
-              )
-            ) : (
-              <SpinnerBS colorClass={"text-success"} />
-            )}
-          </div>
-        </section>
-
-        {/* Company Results */}
-        <section className="companies__results">
-          <div className="results__container bg-white shadow-sm rounded-3 pb-4">
-            {/* Category */}
-            <div className="p-4 border-bottom">
-              <h3 className="m-0">{"Company"}</h3>
+                <SpinnerBS colorClass={"text-success"} />
+              )}
             </div>
-
-            {/* Loop through data array here */}
-            {!loading ? (
-              companyData.length !== 0 ? (
-                companyData.map((comp) => {
-                  const { logo, company, description, _id, oneLink } = comp;
-                  return (
-                    <ResultBar
-                      image={logo}
-                      name={company}
-                      description={description}
-                      key={_id}
-                      param={oneLink}
-                      isCompany
-                    />
-                  );
-                })
+          </section>
+          {/* Company Results */}
+          <section className="companies__results">
+            <div className="results__container bg-white shadow-sm rounded-3 pb-4">
+              {/* Category */}
+              <div className="p-4 border-bottom">
+                <h3 className="m-0">{"Company"}</h3>
+              </div>
+              {/* Loop through data array here */}
+              {!loading ? (
+                companyData.length !== 0 ? (
+                  companyData.map((comp) => {
+                    const { logo, company, description, _id, oneLink } = comp;
+                    return (
+                      <ResultBar
+                        image={logo}
+                        name={company}
+                        description={description}
+                        key={_id}
+                        param={oneLink}
+                        isCompany
+                      />
+                    );
+                  })
+                ) : (
+                  <div className="text-center py-4">
+                    <h4>No Companies Found</h4>
+                  </div>
+                )
               ) : (
-                <div className="text-center py-4">
-                  <h4>No Companies Found</h4>
-                </div>
-              )
-            ) : (
-              <SpinnerBS colorClass={"text-success"} />
-            )}
-          </div>
-        </section>
+                <SpinnerBS colorClass={"text-success"} />
+              )}
+            </div>
+          </section>
+        </div>
       </div>
-    </div>
+    </MaxWidthWrapper>
   );
 }

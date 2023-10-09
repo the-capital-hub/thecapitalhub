@@ -53,14 +53,20 @@ const API = Object.freeze({
   addSectorOfInterest: `${baseUrl}/investor/addSectorOfInterest`,
   uploadLogo: `${baseUrl}/investor/uploadLogo`,
   clearChat: `${baseUrl}/message/clearChatMessages`,
-  createCommunity:`${baseUrl}/community/createCommunity`,
-  getAllCommunity:`${baseUrl}/community/getAllCommunitiesByUserId`,
+  createCommunity: `${baseUrl}/community/createCommunity`,
+  getAllCommunity: `${baseUrl}/community/getAllCommunitiesByUserId`,
   addMyInterest: `${baseUrl}/investor/addMyInterest`,
   getFeaturedPostsByUser: `${baseUrl}/api/posts/getFeaturedPostsByUser`,
   addToFeaturedPost: `${baseUrl}/api/posts/addToFeaturedPost`,
   getCommunityById: `${baseUrl}/community/getCommunityById`,
   getChatSettings: `${baseUrl}/chat/getChatSettings`,
   getCommunitySettings: `${baseUrl}/community/getCommunitySettings`,
+  deleteComment: `${baseUrl}/api/posts/deleteComment`,
+  likeComment: `${baseUrl}/api/posts/toggleLikeComment`,
+  unsavePost: `${baseUrl}/api/posts/unsavePost`,
+  removeFromFeaturedPost: `${baseUrl}/api/posts/removeFromFeaturedPost`,
+  deleteMessage: `${baseUrl}/message/deleteMessage`,
+
 });
 
 export default API;

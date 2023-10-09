@@ -12,6 +12,8 @@ import repostWithThoughtsIcon from "../../../../Images/post/repost-with-thoughts
 import repostInstantlyIcon from "../../../../Images/post/repost-grey.svg";
 import saveIcon from "../../../../Images/post/save.svg";
 import savedIcon from "../../../../Images/post/saved.png";
+import deleteIcon from "../../../../Images/post/delete.png";
+
 import TimeAgo from "timeago-react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -21,6 +23,9 @@ import {
   likeUnlikeAPI,
   sendPostComment,
   addToFeaturedPost,
+  deleteComment,
+  toggleLikeComment,
+  unsavePost,
 } from "../../../../Service/user";
 import SmileeIcon from "../../../../Images/Group 15141(1).svg";
 import ImageIcon from "../../../../Images/Group 15141.svg";
@@ -36,6 +41,8 @@ import ModalBSBody from "../../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
 import { BiMessageSquareAdd } from "react-icons/bi";
 import IconComponent_add from "../../SvgIcons/IconComponent_add";
 import Linkify from "react-linkify";
+import IconDelete from "../../SvgIcons/IconDelete";
+import IconReportPost from "../../SvgIcons/IconReportPost";
 
 const FeedPostCard = ({
   postId,
@@ -63,7 +70,7 @@ const FeedPostCard = ({
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
-
+  console.log(comments);
   const [savedPostId, setSavedPostId] = useState([]);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showSavePopUp, setshowSavePopUp] = useState(false);
@@ -74,11 +81,38 @@ const FeedPostCard = ({
     setshowSavePopUp(true);
   };
 
+  const handleUnsavePost = async (e) => {
+    receiveUnSavedPostStatus();
+    e.preventDefault();
+    const requestBody = {
+      userId: loggedInUser._id,
+      postId: postId,
+    };
+    console.log(requestBody);
+    try {
+      const response = await unsavePost(requestBody);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const [showUnsaveSuccess, setShowUnsaveSuccess] = useState(false);
+  const receiveUnSavedPostStatus = () => {
+    // setShowUnsaveSuccess(true);
+    // setTimeout(() => {
+    //   setShowUnsaveSuccess(false);
+      const updatedSavedPostId = savedPostId.filter((id) => id !== postId);
+      setSavedPostId(updatedSavedPostId);
+    // }, 2500);
+  };
+
   const receiveSavedPostStatus = () => {
-    setShowSuccess(true);
-    setTimeout(() => {
-      setShowSuccess(false); // Reset the state after a delay
-    }, 2500);
+    // setShowSuccess(true);
+    // setTimeout(() => {
+    //   setShowSuccess(false);
+      setSavedPostId([...savedPostId, postId]);
+    // }, 2500);
   };
 
   const sendComment = async () => {
@@ -92,7 +126,7 @@ const FeedPostCard = ({
         userId: loggedInUser._id,
         text: commentText,
       });
-      if (response.data.status == "200") {
+      if (response.data.status === "200") {
         await getPostComment({ postId }).then((res) => {
           console.log("response", res.data.data);
           setComments(res.data.data);
@@ -108,7 +142,20 @@ const FeedPostCard = ({
   };
 
   const [liked, setLiked] = useState(false);
+  // const [commentLiked, setCommentLiked] = useState(true);
 
+  const commentlikeUnlikeHandler = async (postId, commentId) => {
+    try {
+      const result = await toggleLikeComment(postId, commentId);
+      console.log("Toggle Like Result:", result);
+
+      
+      const response = await getPostComment({ postId });
+      setComments(response.data.data);
+    } catch (error) {
+      console.error("Error likeDislike comment : ", error);
+    }
+  };
   useEffect(() => {
     if (!repostPreview) {
       getPostComment({ postId }).then((res) => {
@@ -127,7 +174,6 @@ const FeedPostCard = ({
               },
               []
             );
-            // console.log(allSavedPostDataIds);
             setSavedPostId(allSavedPostDataIds);
           }
         } catch (error) {
@@ -175,6 +221,20 @@ const FeedPostCard = ({
       !liked ? likes.length-- : likes.length++;
       setLiked(!liked);
       console.log("Error liking post: ", error);
+    }
+  };
+
+  // Delete comment
+  const deleteComments = async (postId, commentId) => {
+    console.log(postId, commentId);
+    try {
+      await deleteComment(postId, commentId);
+      await getPostComment({ postId }).then((res) => {
+        console.log("response", res.data.data);
+        setComments(res.data.data);
+      });
+        } catch (error) {
+      console.log("Error deleting comment : ", error);
     }
   };
 
@@ -314,18 +374,26 @@ const FeedPostCard = ({
                           className="d-flex align-items-center gap-2"
                         >
                           <IconComponent_add />
-                          Featured
+                          <span>Featured</span>
                         </li>
                       )}
                       {userId === loggedInUser?._id && (
-                        <li onClick={() => deletePost(postId)}>Delete</li>
+                        <li
+                          onClick={() => deletePost(postId)}
+                          className="d-flex align-items-center gap-2"
+                        >
+                          <IconDelete />
+                          <span>Delete</span>
+                        </li>
                       )}
                       <li
                         data-bs-toggle="modal"
                         data-bs-target="#reportPostModal"
+                        className="d-flex align-items-center gap-2"
                         // onClick={() => setShowReportModal(true)}
                       >
-                        Report
+                        <IconReportPost />
+                        <span>Report</span>
                       </li>
                     </ul>
                   )}
@@ -404,6 +472,7 @@ const FeedPostCard = ({
             <>
               <hr className="mt-1 mb-2" />
               <div className="row feedpostcard_footer mb-2">
+                {/* Like and Comment */}
                 <div className="col-8">
                   <div className="feedpostcard_footer_like_comment d-flex gap-2">
                     {liked ? (
@@ -412,6 +481,7 @@ const FeedPostCard = ({
                         width={18}
                         alt="like post"
                         onClick={likeUnlikeHandler}
+                        style={{ cursor: "pointer" }}
                       />
                     ) : (
                       <img
@@ -419,6 +489,7 @@ const FeedPostCard = ({
                         width={18}
                         alt="like post"
                         onClick={likeUnlikeHandler}
+                        style={{ cursor: "pointer" }}
                       />
                     )}
                     <img
@@ -426,9 +497,12 @@ const FeedPostCard = ({
                       width={16}
                       alt="comment post"
                       onClick={() => setShowComment(!showComment)}
+                      style={{ cursor: "pointer" }}
                     />
                   </div>
                 </div>
+
+                {/* Repost and Save posts */}
                 <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                   <span
                     className={`repost_container rounded ${
@@ -441,9 +515,10 @@ const FeedPostCard = ({
                       width={12}
                       alt="reshare post"
                       onClick={() => setShowRepostOptions(!showRepostOptions)}
+                      style={{ cursor: "pointer" }}
                     />
                     {showRepostOptions && (
-                      <span className="repost_options rounded shadow-sm">
+                      <span className="repost_options border rounded shadow-sm">
                         <button
                           className="single_option btn text-start py-1 px-1 rounded border-bottom"
                           onClick={() => repostWithToughts(postId)}
@@ -498,16 +573,25 @@ const FeedPostCard = ({
                     )}
                   </span>
                   {savedPostId.includes(postId) ? (
-                    <img src={savedIcon} width={16} alt="save post" />
+                    <img
+                      src={savedIcon}
+                      width={16}
+                      alt="save post"
+                      onClick={handleUnsavePost}
+                      style={{ cursor: "pointer" }}
+                    />
                   ) : (
                     <img
                       src={saveIcon}
                       width={16}
                       alt="save post"
                       onClick={handleSavePopUp}
+                      style={{ cursor: "pointer" }}
                     />
                   )}
                 </div>
+
+                {/* Show Comments */}
                 {showComment && (
                   <div>
                     <div class="comment_container">
@@ -539,12 +623,17 @@ const FeedPostCard = ({
                         </div>
                       </section>
                     </div>
+
+                    {/* Comments */}
                     {comments
                       .sort(
                         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
                       )
                       .map((val) => (
-                        <section className="comment_messages" key={val._id}>
+                        <section
+                          className="comment_messages my-2"
+                          key={val._id}
+                        >
                           <div className="connection_item d-flex flex-column flex-md-row justify-content-between">
                             <div className="connection_left">
                               {val.user && (
@@ -579,6 +668,47 @@ const FeedPostCard = ({
                             </div>
                           </div>
                           <p className="comment_text">{val.text}</p>
+                          <hr className="p-0 m-0" />
+                          <div className="d-flex  justify-content-between px-2">
+                            <div className="p-2">
+                              {val?.likes.includes(loggedInUser._id) ? (
+                                <img
+                                  src={fireIcon}
+                                  width={18}
+                                  alt="like post"
+                                  onClick={() =>
+                                    commentlikeUnlikeHandler(postId, val._id)
+                                  }
+                                />
+                              ) : (
+                                <img
+                                  src={bwFireIcon}
+                                  width={18}
+                                  alt="like post"
+                                  onClick={() =>
+                                    commentlikeUnlikeHandler(postId, val._id)
+                                  }
+                                />
+                              )}
+                              <span
+                                className=" mx-3 text-secondary"
+                                style={{ fontSize: "14px" }}
+                              >
+                                {val?.likes.length} likes
+                              </span>
+                            </div>
+                            {userId === loggedInUser?._id && (
+                              <p
+                                onClick={() => deleteComments(postId, val._id)}
+                              >
+                                <img
+                                  src={deleteIcon}
+                                  alt="image"
+                                  className="deleteIcon py-1"
+                                />
+                              </p>
+                            )}
+                          </div>
                         </section>
                       ))}
                   </div>
@@ -600,6 +730,13 @@ const FeedPostCard = ({
             withoutOkButton
             onClose={() => setShowSuccess(!showSuccess)}
             successText="Post saved Successfully"
+          />
+        )}
+        {showUnsaveSuccess && (
+          <AfterSuccessPopUp
+            withoutOkButton
+            onClose={() => setShowUnsaveSuccess(!showUnsaveSuccess)}
+            successText="Post unsaved Successfully"
           />
         )}
         {showFeaturedPostSuccess && (

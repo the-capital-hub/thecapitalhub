@@ -16,6 +16,7 @@ import {
   postUserPost,
 } from "../../../Service/user";
 import { useLocation } from "react-router-dom";
+import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 function Home() {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -80,7 +81,7 @@ function Home() {
     }
   }, [location]);
   return (
-    <>
+    <MaxWidthWrapper>
       <div className="container-fluid investor_feed_container">
         <div className="row mt-2">
           <div className="col">
@@ -175,14 +176,14 @@ function Home() {
             <div className="content-30">
               <div className="row">
                 <InvestorRightProfileCard />
-                <RecommendationCard isInvestor={true}/>
+                <RecommendationCard isInvestor={true} />
                 <NewsCorner />
               </div>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </MaxWidthWrapper>
   );
 }
 

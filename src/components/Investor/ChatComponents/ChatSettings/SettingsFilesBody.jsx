@@ -11,13 +11,13 @@ export default function SettingsFilesBody() {
 
   return (
     <>
-      <FileBar fileType="documents" fileCount={isCommunitySelected ? communityProfile?.documents?.length : chatProfile?.documents.length}>
+      <FileBar fileType="documents" fileCount={isCommunitySelected ? communityProfile?.documents?.length : chatProfile?.documents?.length}>
         <IconFile color={"black"} />
       </FileBar>
-      <FileBar fileType="videos" fileCount={isCommunitySelected ? communityProfile?.videos?.length : chatProfile?.videos.length}>
+      <FileBar fileType="videos" fileCount={isCommunitySelected ? communityProfile?.videos?.length : chatProfile?.videos?.length}>
         <IconVideo color={"black"} />
       </FileBar>
-      <FileBar fileType="images" fileCount={isCommunitySelected ? communityProfile?.images?.length : chatProfile?.images.length}>
+      <FileBar fileType="images" fileCount={isCommunitySelected ? communityProfile?.images?.length : chatProfile?.images?.length}>
         <IconVideo color={"black"} />
       </FileBar>
     </>

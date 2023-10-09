@@ -1,6 +1,7 @@
 import { PostModel } from "../models/Post";
 import { UserModel } from "../models/User";
 import { cloudinary } from "../utils/uploadImage";
+import { addNotification } from "./notificationService.js";
 
 export const createNewPost = async (data) => {
   try {
@@ -22,9 +23,11 @@ export const createNewPost = async (data) => {
       data.video = url;
     }
     if (data.resharedPostId) {
-      await PostModel.findByIdAndUpdate(data.resharedPostId, {
+      const sharedPost = await PostModel.findByIdAndUpdate(data.resharedPostId, {
         $inc: { resharedCount: 1 },
       });
+      const type = "postShared";
+      await addNotification(sharedPost.user, data.user, type);
     }
     const newPost = new PostModel(data);
     await newPost.save();
@@ -167,6 +170,8 @@ export const likeUnlikePost = async (postId, userId) => {
       post.likes.pull(userId);
     } else {
       post.likes.push(userId);
+      const type = "postLiked";
+      await addNotification(post.user, userId, type);
     }
     await post.save();
     return {
@@ -199,6 +204,8 @@ export const commentOnPost = async (postId, userId, text) => {
     };
     post.comments.push(newComment);
     await post.save();
+    const type = "postCommented";
+    await addNotification(post.user, userId, type);
     return {
       status: 200,
       message: "Comment added successfully",
@@ -288,6 +295,45 @@ export const savePost = async (userId, collectionName, postId) => {
     };
   }
 };
+
+export const unsavePost = async (userId, postId) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found",
+      };
+    }
+    for (let i = 0; i < user.savedPosts.length; i++) {
+      const collection = user.savedPosts[i];
+      const postIndex = collection.posts.indexOf(postId);
+
+      if (postIndex !== -1) {
+        collection.posts.splice(postIndex, 1);
+        if (collection.posts.length === 0) {
+          user.savedPosts.splice(i, 1);
+        }
+        await user.save();
+        return {
+          status: 200,
+          message: "Post unsaved successfully",
+        };
+      }
+    }
+    return {
+      status: 400,
+      message: "Post not found in any collection",
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while unsaving the post.",
+    };
+  }
+};
+
 
 //get all collections
 export const getAllSavedPostCollections = async (userId) => {
@@ -554,3 +600,49 @@ export const deleteComment = async (postId, commentId) => {
     };
   }
 };
+
+export const toggleCommentLike = async (postId, commentId, userId) => {
+  try {
+    const post = await PostModel.findById(postId);
+    if (!post) {
+      return {
+        status: 404,
+        message: "Post not found",
+      };
+    }
+    const comment = post.comments.id(commentId);
+    if (!comment) {
+      return {
+        status: 404,
+        message: "Comment not found",
+      };
+    }
+    const likedIndex = comment.likes.indexOf(userId);
+    let likeStatusMessage = "";
+
+    if (likedIndex === -1) {
+      comment.likes.push(userId);
+      likeStatusMessage = "Comment liked successfully";
+    } else {
+      comment.likes.splice(likedIndex, 1);
+      likeStatusMessage = "Comment unliked successfully";
+    }
+
+    await post.save();
+
+    const likeCount = comment.likes.length;
+    return {
+      status: 200,
+      message: likeStatusMessage,
+      likeCount: likeCount,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while toggling the comment like status.",
+    };
+  }
+};
+
+

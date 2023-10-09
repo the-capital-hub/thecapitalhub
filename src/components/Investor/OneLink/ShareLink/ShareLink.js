@@ -5,8 +5,9 @@ import ExitImage from "../../../../Images/Exit.svg";
 import CorrectImage from "../../../../Images/Correct.svg";
 import Cross from "../../../../Images/Cross.svg";
 import { Link } from "react-router-dom";
+import IconLink from "../../SvgIcons/IconLink";
 
-const ShareLink = ({OneLink,onExitClick}) => {
+const ShareLink = ({ OneLink, onExitClick, investor = false }) => {
   return (
     <>
       <div className="ShareLink_container mt-3">
@@ -20,8 +21,11 @@ const ShareLink = ({OneLink,onExitClick}) => {
             className="copy_link_input text-decoration-none"
           >
             <div className="input_container left_margin">
-              <div className="left_icons">
-                <img src={LinkImage} alt="image" />
+              <div
+                className={`left_icons ${investor ? "investor" : "startup"} `}
+              >
+                {/* <img src={LinkImage} alt="image" /> */}
+                <IconLink color={`${investor ? "black" : "white"} `} />
               </div>
               <input
                 type="text"
@@ -30,7 +34,12 @@ const ShareLink = ({OneLink,onExitClick}) => {
                 disabled
               />
               <div className="right_icons">
-                <img className="right_icons_img1" src={ExitImage} alt="image"onClick={onExitClick}/>
+                <img
+                  className="right_icons_img1"
+                  src={ExitImage}
+                  alt="image"
+                  onClick={onExitClick}
+                />
                 {/* <img
                   className="right_icons_img2"
                   src={CorrectImage}

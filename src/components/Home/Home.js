@@ -13,8 +13,24 @@ import CoInvestor from "./CoInvestor/CoInvestor";
 import OurCollabration from "./OurCollabration/OurCollabration";
 import { featuresData } from "../../constants/LandingPageFeatures";
 import Features from "../WebsiteComponents/LandingPage/Features/Features";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 const Home = () => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const isLoggedIn = () => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    console.log("isLoggedIn-->", isLoggedIn);
+    return isLoggedIn === "true";
+  };
+
+  if (isLoggedIn()) {
+    if (loggedInUser.investor) {
+      return <Navigate to="/investor/profile" replace state={{ noreferer: true }} />;
+    } else {
+      return <Navigate to="/profile" replace state={{ noreferer: true }} />;
+    }
+  }
   return (
     <>
       {/* Hero section */}

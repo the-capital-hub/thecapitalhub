@@ -33,6 +33,7 @@ import IntagramIcon from "../../../Images/investorIcon/Instagram.svg";
 import LinkedinIcon from "../../../Images/investorIcon/Linkedin.svg";
 import WebIcon from "../../../Images/investorIcon/WebIcon.svg";
 import CompanyProfile from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfile";
+import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 function Company() {
   const { username } = useParams();
@@ -333,17 +334,19 @@ function Company() {
     // </div>
 
     // Newer version of company profile
-    <div className="company__profile__container m-3 mt-5 mt-xl-3 ps-3 border-start">
-      {onePager.length !== 0 ? (
-        <CompanyProfile isOnelink={true} companyData={onePager} />
-      ) : (
-        <div className="bg-white rounded-4 border p-lg-4 shadow-sm d-flex justify-content-center min-vh-100">
-          <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
+    <MaxWidthWrapper>
+      <div className="company__profile__container m-3 mt-5 mt-xl-3 ps-3 border-start">
+        {onePager.length !== 0 ? (
+          <CompanyProfile isOnelink={true} companyData={onePager} />
+        ) : (
+          <div className="bg-white rounded-4 border p-lg-4 shadow-sm d-flex justify-content-center min-vh-100">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </MaxWidthWrapper>
   );
 }
 

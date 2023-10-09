@@ -8,7 +8,10 @@ import {
   addMessage,
   markMessagesAsRead,
   getStartupByFounderId,
+  deleteMessage,
 } from "../../../../Service/user";
+import ThreeODotIcon from "../../../../Images/ThreeDotIcon.svg";
+
 import attachmentGreyIcon from "../../../../Images/Chat/attachtment-grey.svg";
 import attachmentOrangeIcon from "../../../../Images/Chat/attachment-orange.svg";
 import imageIcon from "../../../../Images/Chat/image.svg";
@@ -17,6 +20,8 @@ import videoIcon from "../../../../Images/Chat/attachVideo.svg";
 import onelinkIcon from "../../../../Images/Chat/Onelink.svg";
 import { getBase64 } from "../../../../utils/getBase64";
 import Linkify from "react-linkify";
+import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import ChatDeletePopup from '../ChatDeletePopup/ChatDeletePopup'
 
 const AWS = require("aws-sdk");
 
@@ -39,6 +44,29 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
   const [sendText, setSendText] = useState("");
   const chatMessagesContainerRef = useRef(null);
   const [isSent, setIsSent] = useState(false);
+
+  const [showFeaturedPostSuccess, setShowFeaturedPostSuccess] = useState(false);
+  const [deletePopup, setDeletePopup] = useState(false);
+  const [msgId, setMsgId] = useState('false');
+
+  const hadilDeleteOk = async() => {
+console.log(msgId)
+try {
+  const result = await deleteMessage(msgId);
+  console.log("delete message Result:", result);
+if(result){
+  setShowFeaturedPostSuccess(true)
+  setDeletePopup(false)
+}
+  
+  
+} catch (error) {
+  console.error("Error likeDislike comment : ", error);
+}
+    
+    }
+  
+
 
   useEffect(() => {
     if (chatMessagesContainerRef.current) {
@@ -73,7 +101,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
       .catch((error) => {
         console.error("Error-->", error);
       });
-  }, [chatId, cleared, isSent]);
+  }, [chatId, cleared, isSent , showFeaturedPostSuccess]);
 
   useEffect(() => {
     getUserAndStartUpByUserIdAPI(userId)
@@ -279,7 +307,10 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
             <div className="chat_messages">
               {group.messages.map((message) =>
                 message.senderId._id === loggedInUser._id ? (
-                  <section className="my_message_main" key={message._id}>
+                  <section
+                    className="my_message_main text-break"
+                    key={message._id}
+                  >
                     <div className="my_messages">
                       <div className="time_name_image">
                         <div className="time_name">
@@ -297,11 +328,17 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                         />
                       </div>
                       {message.text !== "" && (
-                        <div className="mymessage_container">
-                          <Linkify>
-                            <p>{message.text}</p>
-                          </Linkify>
-                        </div>
+                       <div className="mymessage_container text-break">
+                       <div className="d-flex justify-content-end py-2">
+                         <button className="btn" onClick={() => { setDeletePopup(true); setMsgId(message?._id); }}>
+                           <img src={ThreeODotIcon} alt="dot" />
+                         </button>
+                       </div>
+                       <Linkify>
+                         <p className="text-break">{message.text}</p>
+                       </Linkify>
+                     </div>
+                     
                       )}
                       {message?.image && (
                         <div className="mymessage_container">
@@ -321,25 +358,29 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                         </div>
                       )}
                       {message.documentUrl && (
-                        <div className="mymessage_container">
+                        <div className="mymessage_container text-break">
                           <a
                             href={message.documentUrl}
                             target="_blank"
                             rel="noopener noreferrer"
+                            className="text-break"
                           >
                             <img
                               className="p-1 rounded-circle"
                               src={documentIcon}
                               alt="upload document"
                             />
-                            <p>{message.documentName}</p>
+                            <p className="text-break">{message.documentName}</p>
                           </a>
                         </div>
                       )}
                     </div>
                   </section>
                 ) : (
-                  <section className="other_sender" key={message._id}>
+                  <section
+                    className="other_sender text-break"
+                    key={message._id}
+                  >
                     <img
                       className="image_profile"
                       src={user?.profilePicture}
@@ -355,9 +396,9 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                         </h6>
                       </div>
                       {message.text !== "" && (
-                        <div className="message_container">
+                        <div className="message_container text-break">
                           <Linkify>
-                            <p>{message.text}</p>
+                            <p className="text-break">{message.text}</p>
                           </Linkify>
                         </div>
                       )}
@@ -379,18 +420,19 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                         </div>
                       )}
                       {message.documentUrl && (
-                        <div className="message_container">
+                        <div className="message_container text-break">
                           <a
                             href={message.documentUrl}
                             target="_blank"
                             rel="noopener noreferrer"
+                            className="text-break"
                           >
                             <img
                               className="p-1 rounded-circle"
                               src={documentIcon}
                               alt="upload document"
                             />
-                            <p>{message.documentName}</p>
+                            <p className="text-break">{message.documentName}</p>
                           </a>
                         </div>
                       )}
@@ -551,6 +593,27 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
           </div>
         </div>
       </section>
+      {deletePopup?<ChatDeletePopup>
+        <div className="d-flex flex-column  justify-content-center ">
+
+        <h1>Delete permeanently</h1>
+        <hr className="p-0 m-1 "/>
+        <p>This message will be Deleted permeanently </p>
+        <div className="d-flex flex-column flex-md-row mx-auto" >
+        <button className="popup-close-button " onClick={() => setDeletePopup(false)}>Cancle</button>
+        <button className="popup-ok_button" onClick={() =>  hadilDeleteOk() }>Ok</button>
+
+        </div>
+        </div>
+      </ChatDeletePopup> :''}
+      
+      {showFeaturedPostSuccess ? (
+
+      <AfterSuccessPopUp
+      onClose={() => setShowFeaturedPostSuccess(false)}
+      successText="The message has been deleted successfully."
+      />
+      ):""}
     </div>
   );
 };
