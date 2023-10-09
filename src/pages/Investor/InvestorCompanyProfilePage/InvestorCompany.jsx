@@ -45,7 +45,7 @@ export default function CompanyProfilePage() {
           />
         ) : (
           <div className="mx-auto w-100 bg-white rounded-5 p-5 d-flex justify-content-center min-vh-100">
-            <div class="spinner-grow orange" role="status">
+            <div class="spinner-grow yellow" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
           </div>
