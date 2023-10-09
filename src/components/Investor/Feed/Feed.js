@@ -94,7 +94,11 @@ const Feed = () => {
               className="rounded-circle"
               style={{ width: "50px", height: "50px" }}
             />
-            <div className="w-auto flex-grow-1 me-4" onClick={openPopup}>
+            <div
+              className="w-auto flex-grow-1 me-4"
+              onClick={openPopup}
+              style={{ cursor: "pointer" }}
+            >
               <input
                 className="px-3 flex-grow-1"
                 type="text"

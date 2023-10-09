@@ -414,6 +414,7 @@ const FeedPostCard = ({
             <>
               <hr className="mt-1 mb-2" />
               <div className="row feedpostcard_footer mb-2">
+                {/* Like and Comment */}
                 <div className="col-8">
                   <div className="feedpostcard_footer_like_comment d-flex gap-2">
                     {liked ? (
@@ -422,6 +423,7 @@ const FeedPostCard = ({
                         width={18}
                         alt="like post"
                         onClick={likeUnlikeHandler}
+                        style={{ cursor: "pointer" }}
                       />
                     ) : (
                       <img
@@ -429,6 +431,7 @@ const FeedPostCard = ({
                         width={18}
                         alt="like post"
                         onClick={likeUnlikeHandler}
+                        style={{ cursor: "pointer" }}
                       />
                     )}
                     <img
@@ -436,9 +439,12 @@ const FeedPostCard = ({
                       width={16}
                       alt="comment post"
                       onClick={() => setShowComment(!showComment)}
+                      style={{ cursor: "pointer" }}
                     />
                   </div>
                 </div>
+
+                {/* Repost and Save posts */}
                 <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                   <span
                     className={`repost_container rounded ${
@@ -451,9 +457,10 @@ const FeedPostCard = ({
                       width={12}
                       alt="reshare post"
                       onClick={() => setShowRepostOptions(!showRepostOptions)}
+                      style={{ cursor: "pointer" }}
                     />
                     {showRepostOptions && (
-                      <span className="repost_options rounded shadow-sm">
+                      <span className="repost_options border rounded shadow-sm">
                         <button
                           className="single_option btn text-start py-1 px-1 rounded border-bottom"
                           onClick={() => repostWithToughts(postId)}
@@ -508,16 +515,24 @@ const FeedPostCard = ({
                     )}
                   </span>
                   {savedPostId.includes(postId) ? (
-                    <img src={savedIcon} width={16} alt="save post" />
+                    <img
+                      src={savedIcon}
+                      width={16}
+                      alt="save post"
+                      style={{ cursor: "pointer" }}
+                    />
                   ) : (
                     <img
                       src={saveIcon}
                       width={16}
                       alt="save post"
                       onClick={handleSavePopUp}
+                      style={{ cursor: "pointer" }}
                     />
                   )}
                 </div>
+
+                {/* Show Comments */}
                 {showComment && (
                   <div>
                     <div class="comment_container">
@@ -549,6 +564,8 @@ const FeedPostCard = ({
                         </div>
                       </section>
                     </div>
+
+                    {/* Comments */}
                     {comments
                       .sort(
                         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
