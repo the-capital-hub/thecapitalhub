@@ -716,7 +716,7 @@ export const removeFromFeaturedPost = async (postId) => {
     );
     return response.data;
   } catch (error) {
-    console.log("Error while removeing post from featured post:", error);
+    console.log("Error while removing post from featured post:", error);
     throw error;
   }
 };

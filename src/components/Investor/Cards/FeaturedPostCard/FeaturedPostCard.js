@@ -29,7 +29,7 @@ const FeaturedPostCard = ({
   designation,
   likes,
   userId,
-  setIsDeleteSuccessfull,
+  setIsDeleteSuccessful,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   // States for handling remove post from featured post
@@ -60,19 +60,19 @@ const FeaturedPostCard = ({
   };
 
   // Handle remove post from featured posts
-  const handleRemovePost = async (postId, userId) => {
+  const handleRemovePost = async (postId) => {
     // set loading = true
     setLoading(true);
     const response = await removeFromFeaturedPost(postId);
     console.log(response);
-    // if (response.status === 200) {
-    //   setIsDeleteSuccessfull(true);
-    //   setLoading(false);
-    // } else if (response.status === 500) {
-    //   // Show error message in a toast or tooltip
-    //   setError(response.message);
-    //   setLoading(false);
-    // }
+    if (response.status === 200) {
+      setIsDeleteSuccessful(true);
+      setLoading(false);
+    } else if (response.status === 500) {
+      // Show error message in a toast or tooltip
+      setError(response.message);
+      setLoading(false);
+    }
   };
 
   return (
@@ -134,7 +134,10 @@ const FeaturedPostCard = ({
               {/*Show Delete featured post if userId=loggedInUser._id */}
               {userId === loggedInUser._id ? (
                 <div className="align-self-start">
-                  <button className="btn_base_sm" onClick={handleRemovePost}>
+                  <button
+                    className="btn_base_sm"
+                    onClick={() => handleRemovePost(postId)}
+                  >
                     {loading ? (
                       <SpinnerBS
                         colorClass={"text-danger"}

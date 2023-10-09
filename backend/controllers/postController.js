@@ -217,13 +217,12 @@ export const getUsersWhoLikedPostController = async (req, res) => {
   }
 };
 
-
-//delete post 
+//delete post
 export const deletedPostController = async (req, res) => {
   try {
     const { postId } = req.params;
-    const userId =  req.userId;
-    const result = await deletePost(postId,userId);
+    const userId = req.userId;
+    const result = await deletePost(postId, userId);
     return res.status(result.status).json(result);
   } catch (error) {
     console.log(error);
@@ -237,8 +236,8 @@ export const deletedPostController = async (req, res) => {
 export const addToFeaturedPostController = async (req, res) => {
   try {
     const { postId } = req.params;
-    const userId =  req.userId;
-    const result = await addToFeaturedPost(postId,userId);
+    const userId = req.userId;
+    const result = await addToFeaturedPost(postId, userId);
     return res.status(result.status).json(result);
   } catch (error) {
     console.log(error);
@@ -266,7 +265,7 @@ export const getFeaturedPostsByUserController = async (req, res) => {
 export const removeFromFeaturedPostController = async (req, res) => {
   try {
     const { postId } = req.params;
-    const userId =  req.userId;
+    const userId = req.userId;
     const result = await removeFromFeaturedPost(postId, userId);
     return res.status(result.status).json(result);
   } catch (error) {
@@ -287,7 +286,7 @@ export const deleteCommentController = async (req, res) => {
     console.error(error);
     return res.status(500).json({
       status: 500,
-      message: 'An error occurred while deleting the comment.',
+      message: "An error occurred while deleting the comment.",
     });
   }
 };
