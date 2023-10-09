@@ -2,13 +2,16 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.scss";
 
+// Wrappers
 import ValidateOneLink from "./pages/InvestorView/ValidateOneLink/ValidateOneLink";
 import ProtectedInvestorRoutes from "./pages/Investor/ProtectedInvestorRoutes/ProtectedInvestorRoutes";
 import BlogWrapper from "./components/Blog/BlogWrapper/BlogWrapper";
 import EcommerceLayout from "./components/ECommerace/Layout/Layout/Layout";
 
+// Pages
 import Chats from "./pages/ChatPages/Chats/Chats";
 
+// Routes
 import StartUpRoutes from "./routes/StartUpRoutes";
 import OneLinkRoutes from "./routes/OneLinkRoutes";
 import InvestorRoutes from "./routes/InvestorRoutes";
