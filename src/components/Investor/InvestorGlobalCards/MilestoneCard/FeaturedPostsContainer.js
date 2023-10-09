@@ -4,9 +4,10 @@ import { getAllPostsAPI, getFeaturedPost } from "../../../../Service/user";
 import FeaturedPostCard from "../../Cards/FeaturedPostCard/FeaturedPostCard";
 import { useSelector } from "react-redux";
 
-const FeaturedPostsContainer = ({ userId, isDelete = false }) => {
+const FeaturedPostsContainer = ({ userId }) => {
   const [allPosts, setAllPosts] = useState(null);
   const [user, setUser] = useState(null);
+  const [isDeleteSuccessful, setIsDeleteSuccessful] = useState(false);
 
   // Fetch featured posts by userId
   useEffect(() => {
@@ -21,7 +22,7 @@ const FeaturedPostsContainer = ({ userId, isDelete = false }) => {
         setUser([]);
         setAllPosts([]);
       });
-  }, [userId]);
+  }, [userId, isDeleteSuccessful]);
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
@@ -83,6 +84,7 @@ const FeaturedPostsContainer = ({ userId, isDelete = false }) => {
                   image={image}
                   createdAt={createdAt}
                   likes={likes}
+                  setIsDeleteSuccessful={setIsDeleteSuccessful}
                 />
               )
             )

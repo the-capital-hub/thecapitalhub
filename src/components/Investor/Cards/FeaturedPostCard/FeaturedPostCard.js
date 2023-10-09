@@ -14,6 +14,8 @@ import { useState } from "react";
 import { likeUnlikeAPI } from "../../../../Service/user";
 import { Link } from "react-router-dom";
 import IconDeleteFill from "../../SvgIcons/IconDeleteFill";
+import { removeFromFeaturedPost } from "../../../../Service/user";
+import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 
 const FeaturedPostCard = ({
   postId,
@@ -27,9 +29,12 @@ const FeaturedPostCard = ({
   designation,
   likes,
   userId,
-  isDelete,
+  setIsDeleteSuccessfull,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  // States for handling remove post from featured post
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const savePostHandler = async (postId) => {
     try {
@@ -55,7 +60,20 @@ const FeaturedPostCard = ({
   };
 
   // Handle remove post from featured posts
-  const handleRemovePost = () => {};
+  const handleRemovePost = async (postId, userId) => {
+    // set loading = true
+    setLoading(true);
+    const response = await removeFromFeaturedPost(postId);
+    console.log(response);
+    // if (response.status === 200) {
+    //   setIsDeleteSuccessfull(true);
+    //   setLoading(false);
+    // } else if (response.status === 500) {
+    //   // Show error message in a toast or tooltip
+    //   setError(response.message);
+    //   setLoading(false);
+    // }
+  };
 
   return (
     <>
@@ -117,7 +135,14 @@ const FeaturedPostCard = ({
               {userId === loggedInUser._id ? (
                 <div className="align-self-start">
                   <button className="btn_base_sm" onClick={handleRemovePost}>
-                    <IconDeleteFill height="1.25rem" width="1.25rem" />
+                    {loading ? (
+                      <SpinnerBS
+                        colorClass={"text-danger"}
+                        spinnerSizeClass="spinner-border-sm"
+                      />
+                    ) : (
+                      <IconDeleteFill height="1.25rem" width="1.25rem" />
+                    )}
                   </button>
                 </div>
               ) : (
