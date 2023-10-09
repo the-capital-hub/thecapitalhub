@@ -4,7 +4,7 @@ import "./investorHome.scss";
 import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
 import { Link } from "react-router-dom";
-import MileStoneCard from "../InvestorGlobalCards/MilestoneCard/MileStoneCard";
+import FeaturedPostsContainer from "../InvestorGlobalCards/MilestoneCard/FeaturedPostsContainer";
 // import { SidebarContext } from "../../Sidebar/SidebarContext";
 import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import RightProfileCard from "../InvestorGlobalCards/RightProfileCard/RightProfileCard";
@@ -442,7 +442,7 @@ const InvestorHome = () => {
                     </div>
                   </div>
                   <div className="col-12 mt-2 milestones">
-                    <MileStoneCard userId={loggedInUser._id} />
+                    <FeaturedPostsContainer userId={loggedInUser._id} />
                   </div>
                 </div>
               </div>

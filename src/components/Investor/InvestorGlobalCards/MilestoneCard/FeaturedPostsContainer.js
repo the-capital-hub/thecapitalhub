@@ -4,9 +4,11 @@ import { getAllPostsAPI, getFeaturedPost } from "../../../../Service/user";
 import FeaturedPostCard from "../../Cards/FeaturedPostCard/FeaturedPostCard";
 import { useSelector } from "react-redux";
 
-const Card = ({ userId, isDelete = false }) => {
+const FeaturedPostsContainer = ({ userId, isDelete = false }) => {
   const [allPosts, setAllPosts] = useState(null);
   const [user, setUser] = useState(null);
+
+  // Fetch featured posts by userId
   useEffect(() => {
     getFeaturedPost(userId)
       .then(({ user }) => {
@@ -63,25 +65,29 @@ const Card = ({ userId, isDelete = false }) => {
 
   return (
     <div className="card-container ">
-      <div className="post_container_div d-flex align-items-stretch gap-4 ps-3 w-100 overflow-x-auto ">
+      <div className="post_container_div d-flex align-items-stretch gap-4 ps-3 w-100 overflow-x-auto">
         {allPosts ? (
-          allPosts.map(
-            ({ description, video, image, createdAt, likes, _id }) => (
-              <FeaturedPostCard
-                key={_id} // Use a unique key for each post
-                postId={_id}
-                userId={userId}
-                designation={user?.designation}
-                profilePicture={user?.profilePicture}
-                description={description}
-                firstName={user?.firstName}
-                lastName={user?.lastName}
-                video={video}
-                image={image}
-                createdAt={createdAt}
-                likes={likes}
-              />
+          allPosts.length !== 0 ? (
+            allPosts.map(
+              ({ description, video, image, createdAt, likes, _id }) => (
+                <FeaturedPostCard
+                  key={_id} // Use a unique key for each post
+                  postId={_id}
+                  userId={userId}
+                  designation={user?.designation}
+                  profilePicture={user?.profilePicture}
+                  description={description}
+                  firstName={user?.firstName}
+                  lastName={user?.lastName}
+                  video={video}
+                  image={image}
+                  createdAt={createdAt}
+                  likes={likes}
+                />
+              )
             )
+          ) : (
+            <h6 className="text-muted">No Featured Posts</h6>
           )
         ) : (
           <div class="d-flex justify-content-center">
@@ -95,4 +101,4 @@ const Card = ({ userId, isDelete = false }) => {
   );
 };
 
-export default Card;
+export default FeaturedPostsContainer;
