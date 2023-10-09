@@ -65,6 +65,7 @@ const API = Object.freeze({
   likeComment: `${baseUrl}/api/posts/toggleLikeComment`,
 
 
+  unsavePost: `${baseUrl}/api/posts/unsavePost`
 });
 
 export default API;

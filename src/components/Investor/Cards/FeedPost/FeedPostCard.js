@@ -25,6 +25,7 @@ import {
   addToFeaturedPost,
   deleteComment,
   toggleLikeComment,
+  unsavePost,
 } from "../../../../Service/user";
 import SmileeIcon from "../../../../Images/Group 15141(1).svg";
 import ImageIcon from "../../../../Images/Group 15141.svg";
@@ -77,12 +78,42 @@ const FeedPostCard = ({
     setshowSavePopUp(true);
   };
 
+  const handleUnsavePost = async (e) => {
+    e.preventDefault();
+    const requestBody = {
+      userId: loggedInUser._id,
+      postId: postId,
+    }
+    console.log(requestBody);
+    try {
+      const response = await unsavePost(requestBody);
+      console.log(response);
+      receiveUnSavedPostStatus();
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
+  const [showUnsaveSuccess, setShowUnsaveSuccess] = useState(false);
+  const receiveUnSavedPostStatus = () => {
+    setShowUnsaveSuccess(true);
+    setTimeout(() => {
+      setShowUnsaveSuccess(false);
+      const updatedSavedPostId = savedPostId.filter((id) => id !== postId);
+      setSavedPostId(updatedSavedPostId);
+    }, 2500);
+  };
+
+
   const receiveSavedPostStatus = () => {
     setShowSuccess(true);
     setTimeout(() => {
-      setShowSuccess(false); // Reset the state after a delay
+      setShowSuccess(false);
+      setSavedPostId([...savedPostId, postId]);
     }, 2500);
   };
+
 
   const sendComment = async () => {
     try {
@@ -95,7 +126,7 @@ const FeedPostCard = ({
         userId: loggedInUser._id,
         text: commentText,
       });
-      if (response.data.status == "200") {
+      if (response.data.status === "200") {
         await getPostComment({ postId }).then((res) => {
           console.log("response", res.data.data);
           setComments(res.data.data);
@@ -111,7 +142,7 @@ const FeedPostCard = ({
   };
 
   const [liked, setLiked] = useState(false);
-  const [commentLiked, setCommentLiked] = useState(false);
+  const [commentLiked, setCommentLiked] = useState(true);
   const [commentLikCount, setCommentLikCount] = useState(0);
 
   // const commentlikelikeHandler = async () => {
@@ -121,8 +152,14 @@ const FeedPostCard = ({
   const commentlikeUnlikeHandler = async (postId, commentId) => {
     try {
       const result = await toggleLikeComment(postId, commentId);
-      console.log('Toggle Like Result:', result);
-      await fetchAllPosts();
+      console.log('Toggle Like Result:', result.message);
+      if(result.message==="Comment unliked successfully"){
+            setCommentLiked(false);
+      }
+      if(result.message==="Comment liked successfully"){
+        setCommentLiked(true);
+      }
+      // await fetchAllPosts();
     } catch (error) {
       console.log("Error likeDislike comment : ", error);
     }
@@ -149,7 +186,6 @@ const FeedPostCard = ({
               },
               []
             );
-            // console.log(allSavedPostDataIds);
             setSavedPostId(allSavedPostDataIds);
           }
         } catch (error) {
@@ -260,9 +296,8 @@ const FeedPostCard = ({
     <>
       <div className="feedpostcard_main_container mb-2">
         <div
-          className={`box feedpostcard_container mt-2 ${
-            repostPreview && "rounded shadow-sm border"
-          }`}
+          className={`box feedpostcard_container mt-2 ${repostPreview && "rounded shadow-sm border"
+            }`}
         >
           {/* Post Header */}
           <div className="feed_header_container border-2 border-bottom mb-3 pb-2">
@@ -356,7 +391,7 @@ const FeedPostCard = ({
                       <li
                         data-bs-toggle="modal"
                         data-bs-target="#reportPostModal"
-                        // onClick={() => setShowReportModal(true)}
+                      // onClick={() => setShowReportModal(true)}
                       >
                         Report
                       </li>
@@ -464,9 +499,8 @@ const FeedPostCard = ({
                 </div>
                 <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                   <span
-                    className={`repost_container rounded ${
-                      showRepostOptions ? "bg-light" : ""
-                    }`}
+                    className={`repost_container rounded ${showRepostOptions ? "bg-light" : ""
+                      }`}
                     ref={repostContainerRef}
                   >
                     <img
@@ -531,7 +565,7 @@ const FeedPostCard = ({
                     )}
                   </span>
                   {savedPostId.includes(postId) ? (
-                    <img src={savedIcon} width={16} alt="save post" />
+                    <img src={savedIcon} width={16} alt="save post" onClick={handleUnsavePost} />
                   ) : (
                     <img
                       src={saveIcon}
@@ -618,7 +652,7 @@ const FeedPostCard = ({
 
 
 <div className="p-2">
-                            {commentLiked ? (
+                            {!commentLiked ? (
                               <img
                                 src={fireIcon}
                                 width={18}
@@ -671,6 +705,13 @@ const FeedPostCard = ({
             successText="Post saved Successfully"
           />
         )}
+        {showUnsaveSuccess && (
+          <AfterSuccessPopUp
+            withoutOkButton
+            onClose={() => setShowUnsaveSuccess(!showUnsaveSuccess)}
+            successText="Post unsaved Successfully"
+          />
+        )}
         {showFeaturedPostSuccess && (
           <AfterSuccessPopUp
             withoutOkButton
@@ -696,9 +737,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Harassment" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio1"
               >
                 Harassment
@@ -715,9 +755,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Spam" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio2"
               >
                 Spam
@@ -734,9 +773,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Fraud or scam" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio3"
               >
                 Fraud or scam
@@ -753,9 +791,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Hateful Speech" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio4"
               >
                 Hateful Speech

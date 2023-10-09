@@ -43,6 +43,7 @@ function Home() {
       .finally(() => setLoadingFeed(false));
   };
 
+
   useEffect(() => {
     getSavedPostCollections(loggedInUser._id).then((data) => {
       setgetSavedPostData(data);
@@ -175,7 +176,7 @@ function Home() {
             <div className="content-30">
               <div className="row">
                 <InvestorRightProfileCard />
-                <RecommendationCard isInvestor={true}/>
+                <RecommendationCard isInvestor={true} />
                 <NewsCorner />
               </div>
             </div>

@@ -289,6 +289,45 @@ export const savePost = async (userId, collectionName, postId) => {
   }
 };
 
+export const unsavePost = async (userId, postId) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found",
+      };
+    }
+    for (let i = 0; i < user.savedPosts.length; i++) {
+      const collection = user.savedPosts[i];
+      const postIndex = collection.posts.indexOf(postId);
+
+      if (postIndex !== -1) {
+        collection.posts.splice(postIndex, 1);
+        if (collection.posts.length === 0) {
+          user.savedPosts.splice(i, 1);
+        }
+        await user.save();
+        return {
+          status: 200,
+          message: "Post unsaved successfully",
+        };
+      }
+    }
+    return {
+      status: 400,
+      message: "Post not found in any collection",
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while unsaving the post.",
+    };
+  }
+};
+
+
 //get all collections
 export const getAllSavedPostCollections = async (userId) => {
   try {
@@ -554,3 +593,47 @@ export const deleteComment = async (postId, commentId) => {
     };
   }
 };
+
+export const toggleCommentLike = async (postId, commentId, userId) => {
+  try {
+    const post = await PostModel.findById(postId);
+    if (!post) {
+      return {
+        status: 404,
+        message: "Post not found",
+      };
+    }
+
+    const comment = post.comments.id(commentId);
+    if (!comment) {
+      return {
+        status: 404,
+        message: "Comment not found",
+      };
+    }
+
+    const likedIndex = comment.likes.indexOf(userId);
+
+    if (likedIndex === -1) {
+      // If the user hasn't liked the comment, add the like
+      comment.likes.push(userId);
+    } else {
+      // If the user has already liked the comment, remove the like
+      comment.likes.splice(likedIndex, 1);
+    }
+
+    await post.save();
+
+    return {
+      status: 200,
+      message: likedIndex === -1 ? "Comment liked successfully" : "Comment unliked successfully",
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while toggling the comment like status.",
+    };
+  }
+};
+

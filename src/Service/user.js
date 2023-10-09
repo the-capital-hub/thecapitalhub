@@ -722,6 +722,17 @@ export const toggleLikeComment = async (postId, commentId) => {
     return response.data;
   } catch (error) {
     console.error("Error in like comment:", error);
+  }
+}
+export const unsavePost = async (requestBody) => {
+  try {
+    console.log("body",requestBody);
+    const response = await axiosInstance.patch(`${API.unsavePost}`, {
+      ...requestBody,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error while unsaving post:", error);
     throw error;
   }
 };
