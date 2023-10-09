@@ -142,29 +142,26 @@ const FeedPostCard = ({
 
   const [liked, setLiked] = useState(false);
   const [commentLiked, setCommentLiked] = useState(true);
-  const [commentLikCount, setCommentLikCount] = useState(0);
 
-  // const commentlikelikeHandler = async () => {
-  //   setCommentLiked(true);
-  //   setCommentLikCount(commentLikCount + 1);
-  // };
   const commentlikeUnlikeHandler = async (postId, commentId) => {
     try {
       const result = await toggleLikeComment(postId, commentId);
-      console.log('Toggle Like Result:', result.message);
-      if(result.message==="Comment unliked successfully"){
-            setCommentLiked(false);
-      }
-      if(result.message==="Comment liked successfully"){
+      console.log('Toggle Like Result:', result);
+  
+      if (result.message === "Comment unliked successfully") {
+        setCommentLiked(false);
+      } else if (result.message === "Comment liked successfully") {
         setCommentLiked(true);
       }
-      // await fetchAllPosts();
+  
+      // Fetch the updated comments after the like/unlike action.
+      const response = await getPostComment({ postId });
+      setComments(response.data.data);
     } catch (error) {
-      console.log("Error likeDislike comment : ", error);
+      console.error("Error likeDislike comment : ", error);
     }
-    // setCommentLiked(false);
-    // setCommentLikCount(commentLikCount - 1);
   };
+  ;
   
 
   useEffect(() => {
@@ -679,12 +676,11 @@ const FeedPostCard = ({
 
 
 <div className="p-2">
-                            {!commentLiked ? (
+                            {commentLiked ? (
                               <img
                                 src={fireIcon}
                                 width={18}
                                 alt="like post"
-                                // onClick={commentlikeUnlikeHandler}
                                 onClick={() => commentlikeUnlikeHandler(postId,val._id )}
                               />
                             ) : (
@@ -692,7 +688,6 @@ const FeedPostCard = ({
                                 src={bwFireIcon}
                                 width={18}
                                 alt="like post"
-                                // onClick={commentlikelikeHandler}
                                 onClick={() => commentlikeUnlikeHandler(postId,val._id )}
                               />
                             )}
@@ -700,7 +695,7 @@ const FeedPostCard = ({
                               className=" mx-3 text-secondary"
                               style={{ fontSize: "14px" }}
                             >
-                              {commentLikCount} likes
+                              {val?.likes.length} likes
                             </span>
                           </div>
                           {userId === loggedInUser?._id && (
