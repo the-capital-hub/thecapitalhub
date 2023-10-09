@@ -149,13 +149,7 @@ const FeedPostCard = ({
       const result = await toggleLikeComment(postId, commentId);
       console.log("Toggle Like Result:", result);
 
-      // if (result.message === "Comment unliked successfully") {
-      //   setCommentLiked(false);
-      // } else if (result.message === "Comment liked successfully") {
-      //   setCommentLiked(true);
-      // }
-
-      // Fetch the updated comments after the like/unlike action.
+      
       const response = await getPostComment({ postId });
       setComments(response.data.data);
     } catch (error) {
