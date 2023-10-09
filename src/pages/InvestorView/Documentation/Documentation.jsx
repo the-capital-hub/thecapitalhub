@@ -4,6 +4,7 @@ import { NavBar, SideBar, Card } from "../../../components/InvestorView";
 import "./Documentation.scss";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 const Documentation = () => {
   const navigate = useNavigate();
@@ -12,45 +13,51 @@ const Documentation = () => {
     document.title = "Documentation - One Link | The Capital Hub";
   }, []);
   return (
-    <div className="documentation">
-      <h1>Documentation</h1>
-      <div className="docscontainer">
-        {/* <Card
-          text={"Financials"}
-          onClicked={() =>
-            navigate(`/onelink/${username}/documentation/financials`)
-          }
-        /> */}
-        <Card
-          text={"Pitch Deck"}
-          onClicked={() =>
-            navigate(`/onelink/${username}/documentation/pitchdeck`)
-          }
-        />
-        <Card
-          text={"Legal and compliance"}
-          onClicked={() => navigate(`/onelink/${username}/documentation/legal`)}
-        />
-        {/* <Card
-          text={"Update"}
-          onClicked={() =>
-            navigate(`/onelink/${username}/documentation/update`)
-          }
-        /> */}
-        <Card
-          text={"KYC Details"}
-          onClicked={() =>
-            navigate(`/onelink/${username}/documentation/kycdetails`)
-          }
-        />
-        <Card
-          text={"Business"}
-          onClicked={() =>
-            navigate(`/onelink/${username}/documentation/business`)
-          }
-        />
+    <MaxWidthWrapper>
+      <div className="border-start">
+        <div className="documentation shadow-sm border">
+          <h1>Documentation</h1>
+          <div className="docscontainer">
+            {/* <Card
+              text={"Financials"}
+              onClicked={() =>
+                navigate(`/onelink/${username}/documentation/financials`)
+              }
+            /> */}
+            <Card
+              text={"Pitch Deck"}
+              onClicked={() =>
+                navigate(`/onelink/${username}/documentation/pitchdeck`)
+              }
+            />
+            <Card
+              text={"Legal and compliance"}
+              onClicked={() =>
+                navigate(`/onelink/${username}/documentation/legal`)
+              }
+            />
+            {/* <Card
+              text={"Update"}
+              onClicked={() =>
+                navigate(`/onelink/${username}/documentation/update`)
+              }
+            /> */}
+            <Card
+              text={"KYC Details"}
+              onClicked={() =>
+                navigate(`/onelink/${username}/documentation/kycdetails`)
+              }
+            />
+            <Card
+              text={"Business"}
+              onClicked={() =>
+                navigate(`/onelink/${username}/documentation/business`)
+              }
+            />
+          </div>
+        </div>
       </div>
-    </div>
+    </MaxWidthWrapper>
   );
 };
 
