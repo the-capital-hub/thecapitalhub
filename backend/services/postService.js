@@ -603,7 +603,6 @@ export const toggleCommentLike = async (postId, commentId, userId) => {
         message: "Post not found",
       };
     }
-
     const comment = post.comments.id(commentId);
     if (!comment) {
       return {
@@ -611,22 +610,25 @@ export const toggleCommentLike = async (postId, commentId, userId) => {
         message: "Comment not found",
       };
     }
-
     const likedIndex = comment.likes.indexOf(userId);
+    let likeStatusMessage = "";
 
     if (likedIndex === -1) {
-      // If the user hasn't liked the comment, add the like
       comment.likes.push(userId);
+      likeStatusMessage = "Comment liked successfully";
     } else {
-      // If the user has already liked the comment, remove the like
       comment.likes.splice(likedIndex, 1);
+      likeStatusMessage = "Comment unliked successfully";
     }
 
     await post.save();
 
+    const likeCount = comment.likes.length;
+
     return {
       status: 200,
-      message: likedIndex === -1 ? "Comment liked successfully" : "Comment unliked successfully",
+      message: likeStatusMessage,
+      likeCount: likeCount,
     };
   } catch (error) {
     console.error(error);
@@ -636,4 +638,5 @@ export const toggleCommentLike = async (postId, commentId, userId) => {
     };
   }
 };
+
 
