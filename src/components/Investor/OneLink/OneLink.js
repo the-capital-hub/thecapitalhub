@@ -40,7 +40,7 @@ const OneLink = () => {
     // navigate("/login");
   };
   return (
-    <div className="container-fluid ">
+    <div className="container">
       <div className="onelink_container">
         <div className="onelink_intro_container mt-sm-4 mt-md-2 mt-xxl-2">
           <div className="main__content">

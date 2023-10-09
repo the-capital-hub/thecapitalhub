@@ -7,7 +7,7 @@ function WriteBlog() {
     document.title = "Write a blog | The Capital Hub";
   }, []);
   return (
-    <div className="write-blog_container">
+    <div className="container write-blog_container">
       <ComingSoon />
     </div>
   );

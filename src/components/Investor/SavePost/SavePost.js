@@ -12,7 +12,7 @@ const SavePost = () => {
   }, []);
 
   return (
-    <div className="container-fluid ">
+    <div className="container ">
       <div className="savedpost_main_container">
         {/* Main Content */}
         <div className="main__content">

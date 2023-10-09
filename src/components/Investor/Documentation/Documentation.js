@@ -40,7 +40,7 @@ const Documentation = () => {
   }, []);
 
   return (
-    <div className="documentation-wrapper">
+    <div className="container mx-auto documentation-wrapper">
       {/* Main content */}
       <div className="left-content">
         <SmallProfileCard text={"Documentation"} />
