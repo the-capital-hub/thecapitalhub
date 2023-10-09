@@ -279,7 +279,10 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
             <div className="chat_messages">
               {group.messages.map((message) =>
                 message.senderId._id === loggedInUser._id ? (
-                  <section className="my_message_main" key={message._id}>
+                  <section
+                    className="my_message_main text-break"
+                    key={message._id}
+                  >
                     <div className="my_messages">
                       <div className="time_name_image">
                         <div className="time_name">
@@ -297,9 +300,9 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                         />
                       </div>
                       {message.text !== "" && (
-                        <div className="mymessage_container">
+                        <div className="mymessage_container text-break">
                           <Linkify>
-                            <p>{message.text}</p>
+                            <p className="text-break">{message.text}</p>
                           </Linkify>
                         </div>
                       )}
@@ -321,25 +324,29 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                         </div>
                       )}
                       {message.documentUrl && (
-                        <div className="mymessage_container">
+                        <div className="mymessage_container text-break">
                           <a
                             href={message.documentUrl}
                             target="_blank"
                             rel="noopener noreferrer"
+                            className="text-break"
                           >
                             <img
                               className="p-1 rounded-circle"
                               src={documentIcon}
                               alt="upload document"
                             />
-                            <p>{message.documentName}</p>
+                            <p className="text-break">{message.documentName}</p>
                           </a>
                         </div>
                       )}
                     </div>
                   </section>
                 ) : (
-                  <section className="other_sender" key={message._id}>
+                  <section
+                    className="other_sender text-break"
+                    key={message._id}
+                  >
                     <img
                       className="image_profile"
                       src={user?.profilePicture}
@@ -355,9 +362,9 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                         </h6>
                       </div>
                       {message.text !== "" && (
-                        <div className="message_container">
+                        <div className="message_container text-break">
                           <Linkify>
-                            <p>{message.text}</p>
+                            <p className="text-break">{message.text}</p>
                           </Linkify>
                         </div>
                       )}
@@ -379,18 +386,19 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                         </div>
                       )}
                       {message.documentUrl && (
-                        <div className="message_container">
+                        <div className="message_container text-break">
                           <a
                             href={message.documentUrl}
                             target="_blank"
                             rel="noopener noreferrer"
+                            className="text-break"
                           >
                             <img
                               className="p-1 rounded-circle"
                               src={documentIcon}
                               alt="upload document"
                             />
-                            <p>{message.documentName}</p>
+                            <p className="text-break">{message.documentName}</p>
                           </a>
                         </div>
                       )}

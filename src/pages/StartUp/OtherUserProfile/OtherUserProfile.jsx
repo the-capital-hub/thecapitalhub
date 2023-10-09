@@ -191,12 +191,14 @@ function OtherUserProfile() {
                   text="Last round investment"
                   image={lastRoundInvIcon}
                   amount={userData?.startUp?.colorCard?.last_round_investment}
+                  isNotEditable
                 />
                 <ColorCard
                   color="white"
                   background="#DAC191"
                   text="Total Investment"
                   image={totalInvIcon}
+                  isNotEditable
                   amount={userData?.startUp?.colorCard?.total_investment}
                 />
                 <ColorCard
@@ -206,12 +208,14 @@ function OtherUserProfile() {
                   image={noOfInvIcon}
                   amount={userData?.startUp?.colorCard?.no_of_investers}
                   noRupee
+                  isNotEditable
                 />
                 <ColorCard
                   color="white"
                   background="#2B2B2B"
                   text="Fund ask"
                   image={fundAskIcon}
+                  isNotEditable
                   amount={userData?.startUp?.colorCard?.fund_ask}
                 />
                 <ColorCard
@@ -219,9 +223,11 @@ function OtherUserProfile() {
                   background="#FF7373"
                   text="Valuation"
                   image={valuationIcon}
+                  isNotEditable
                   amount={userData?.startUp?.colorCard?.valuation}
                 />
                 <ColorCard
+                  isNotEditable
                   color="white"
                   background="#9198DA"
                   text="Raised funds"
