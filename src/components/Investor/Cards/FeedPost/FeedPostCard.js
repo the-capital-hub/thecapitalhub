@@ -70,6 +70,7 @@ const FeedPostCard = ({
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
+  console.log(comments);
   const [savedPostId, setSavedPostId] = useState([]);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showSavePopUp, setshowSavePopUp] = useState(false);
@@ -141,19 +142,19 @@ const FeedPostCard = ({
   };
 
   const [liked, setLiked] = useState(false);
-  const [commentLiked, setCommentLiked] = useState(true);
+  // const [commentLiked, setCommentLiked] = useState(true);
 
   const commentlikeUnlikeHandler = async (postId, commentId) => {
     try {
       const result = await toggleLikeComment(postId, commentId);
-      console.log('Toggle Like Result:', result);
-  
-      if (result.message === "Comment unliked successfully") {
-        setCommentLiked(false);
-      } else if (result.message === "Comment liked successfully") {
-        setCommentLiked(true);
-      }
-  
+      console.log("Toggle Like Result:", result);
+
+      // if (result.message === "Comment unliked successfully") {
+      //   setCommentLiked(false);
+      // } else if (result.message === "Comment liked successfully") {
+      //   setCommentLiked(true);
+      // }
+
       // Fetch the updated comments after the like/unlike action.
       const response = await getPostComment({ postId });
       setComments(response.data.data);
@@ -161,9 +162,6 @@ const FeedPostCard = ({
       console.error("Error likeDislike comment : ", error);
     }
   };
-  ;
-  
-
   useEffect(() => {
     if (!repostPreview) {
       getPostComment({ postId }).then((res) => {
@@ -234,11 +232,14 @@ const FeedPostCard = ({
 
   // Delete comment
   const deleteComments = async (postId, commentId) => {
-    console.log(postId, commentId)
+    console.log(postId, commentId);
     try {
       await deleteComment(postId, commentId);
-      await fetchAllPosts();
-    } catch (error) {
+      await getPostComment({ postId }).then((res) => {
+        console.log("response", res.data.data);
+        setComments(res.data.data);
+      });
+        } catch (error) {
       console.log("Error deleting comment : ", error);
     }
   };
@@ -635,8 +636,10 @@ const FeedPostCard = ({
                         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
                       )
                       .map((val) => (
-                        
-                        <section className="comment_messages my-2" key={val._id}>
+                        <section
+                          className="comment_messages my-2"
+                          key={val._id}
+                        >
                           <div className="connection_item d-flex flex-column flex-md-row justify-content-between">
                             <div className="connection_left">
                               {val.user && (
@@ -673,37 +676,45 @@ const FeedPostCard = ({
                           <p className="comment_text">{val.text}</p>
                           <hr className="p-0 m-0" />
                           <div className="d-flex  justify-content-between px-2">
-
-
-<div className="p-2">
-                            {commentLiked ? (
-                              <img
-                                src={fireIcon}
-                                width={18}
-                                alt="like post"
-                                onClick={() => commentlikeUnlikeHandler(postId,val._id )}
-                              />
-                            ) : (
-                              <img
-                                src={bwFireIcon}
-                                width={18}
-                                alt="like post"
-                                onClick={() => commentlikeUnlikeHandler(postId,val._id )}
-                              />
+                            <div className="p-2">
+                              {val?.likes.includes(loggedInUser._id) ? (
+                                <img
+                                  src={fireIcon}
+                                  width={18}
+                                  alt="like post"
+                                  onClick={() =>
+                                    commentlikeUnlikeHandler(postId, val._id)
+                                  }
+                                />
+                              ) : (
+                                <img
+                                  src={bwFireIcon}
+                                  width={18}
+                                  alt="like post"
+                                  onClick={() =>
+                                    commentlikeUnlikeHandler(postId, val._id)
+                                  }
+                                />
+                              )}
+                              <span
+                                className=" mx-3 text-secondary"
+                                style={{ fontSize: "14px" }}
+                              >
+                                {val?.likes.length} likes
+                              </span>
+                            </div>
+                            {userId === loggedInUser?._id && (
+                              <p
+                                onClick={() => deleteComments(postId, val._id)}
+                              >
+                                <img
+                                  src={deleteIcon}
+                                  alt="image"
+                                  className="deleteIcon py-1"
+                                />
+                              </p>
                             )}
-                            <span
-                              className=" mx-3 text-secondary"
-                              style={{ fontSize: "14px" }}
-                            >
-                              {val?.likes.length} likes
-                            </span>
                           </div>
-                          {userId === loggedInUser?._id && (
-                            <p onClick={() => deleteComments(postId,val._id )}><img src={deleteIcon} alt="image" className="deleteIcon py-1" /></p>
-                          )}
-                          </div>
-
-                        
                         </section>
                       ))}
                   </div>
