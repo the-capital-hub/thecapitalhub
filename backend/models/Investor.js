@@ -100,7 +100,13 @@ const investorSchema = new Schema(
     },
     keyFocus: {
       type: String,
-    }
+    },
+    oneLink: {
+      type: String,
+      default: function () {
+        return this.companyName.split(" ").join("").toLowerCase();
+      },
+    },
   },
   {
     timestamps: true,

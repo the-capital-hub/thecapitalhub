@@ -134,3 +134,28 @@ export const clearAllMessages = async (chatId) => {
     };
   }
 };
+
+export const deleteMessage = async (messageId) => {
+  try {
+    const deletedMessage = await MessageModel.findByIdAndDelete(messageId);
+
+    if (!deletedMessage) {
+      return {
+        status: 404,
+        message: "Message not found",
+      };
+    }
+
+    return {
+      status: 200,
+      message: "Message deleted successfully",
+      data: deletedMessage,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while deleting the message.",
+    };
+  }
+};

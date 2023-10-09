@@ -40,16 +40,11 @@ function Search() {
   useEffect(() => {
     async function fetchData() {
       const data = await getSearchResultsAPI(searchBy);
-      const updatedUserData = data?.data?.users?.filter(
-        (user) => user?._id !== userIdToRemove
-      );
-      setUserData(updatedUserData);
+      setUserData(data.data.users);
       setCompanyData(data?.data?.company);
       setLoading(false);
     }
-    if (queryParams.has("query")) {
-      fetchData();
-    }
+    fetchData();
   }, [searchBy, connectionSent]);
 
   return (
