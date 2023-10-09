@@ -16,6 +16,7 @@ import {
   postUserPost,
 } from "../../../Service/user";
 import { useLocation } from "react-router-dom";
+import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 function Home() {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -42,7 +43,6 @@ function Home() {
       })
       .finally(() => setLoadingFeed(false));
   };
-
 
   useEffect(() => {
     getSavedPostCollections(loggedInUser._id).then((data) => {
@@ -81,7 +81,7 @@ function Home() {
     }
   }, [location]);
   return (
-    <>
+    <MaxWidthWrapper>
       <div className="container-fluid investor_feed_container">
         <div className="row mt-2">
           <div className="col">
@@ -183,7 +183,7 @@ function Home() {
           </div>
         </div>
       </div>
-    </>
+    </MaxWidthWrapper>
   );
 }
 
