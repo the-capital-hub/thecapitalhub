@@ -63,10 +63,10 @@ const API = Object.freeze({
   getCommunitySettings: `${baseUrl}/community/getCommunitySettings`,
   deleteComment: `${baseUrl}/api/posts/deleteComment`,
   likeComment: `${baseUrl}/api/posts/toggleLikeComment`,
-
-
   unsavePost: `${baseUrl}/api/posts/unsavePost`,
   removeFromFeaturedPost: `${baseUrl}/api/posts/removeFromFeaturedPost`,
+  deleteMessage: `${baseUrl}/message/deleteMessage`,
+
 });
 
 export default API;

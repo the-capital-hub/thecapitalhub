@@ -788,3 +788,12 @@ export const unsavePost = async (requestBody) => {
     throw error;
   }
 };
+
+export const deleteMessage = async (messageId) => {
+  try {
+    const response = await axiosInstance.delete(`${API.deleteMessage}/${messageId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error in delete message:", error);
+  }
+}
