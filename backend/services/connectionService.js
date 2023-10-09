@@ -1,5 +1,6 @@
 import { ConnectionModel } from "../models/Connection.js";
 import { UserModel } from "../models/User.js";
+import { addNotification } from "./notificationService.js";
 
 //send connect request
 export const sendConnectionRequest = async (senderId, receiverId) => {
@@ -30,6 +31,8 @@ export const sendConnectionRequest = async (senderId, receiverId) => {
       { _id: connection.receiver },
       { $push: { connectionsReceived: connection.sender } }
     );
+    const type = "connectionRequest";
+    await addNotification(receiverId, senderId, type);
     return {
       status: 200,
       message: "Connection Request Sent",
@@ -154,6 +157,8 @@ export const acceptConnectionRequest = async (connectionId) => {
       { _id: connection.receiver },
       { $push: { connections: connection.sender } }
     );
+    const type = "connectionAccepted";
+    await addNotification(connection.sender, connection.receiver, type);
     return {
       status: 200,
       message: "Connection Accepted",
@@ -292,12 +297,14 @@ export const getRecommendations = async (userId) => {
     }
     if (recommendations.length === 0) {
       const users = await UserModel.find({
-        _id: { $nin: [
-          ...userConnections,
-          userId,
-          ...userSentConnections,
-          ...userReceivedConnections
-        ] },
+        _id: {
+          $nin: [
+            ...userConnections,
+            userId,
+            ...userSentConnections,
+            ...userReceivedConnections
+          ]
+        },
         userStatus: "active",
       });
       return {
