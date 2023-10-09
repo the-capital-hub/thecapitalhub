@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./ChatSearch.scss";
+
 import backIcon from "../../../../Images/Chat/BackIcon.svg";
+import searchIcon from "../../../../Images/Chat/Search.svg";
+
 import { Link, useNavigate } from "react-router-dom";
 import { getSearchResultsAPI } from "../../../../Service/user";
 
@@ -16,7 +19,7 @@ const ChatSearch = () => {
       setLoading(true);
       setSearchInput(target.value);
       const { data } = await getSearchResultsAPI(target.value);
-      console.log(data)
+      console.log(data);
       setSearchSuggestions(data);
     } catch (error) {
       console.error("Error getting search results : ", error);
@@ -43,22 +46,30 @@ const ChatSearch = () => {
   return (
     <>
       <div className="chat_search_container">
-        <span>
+        <span className="back_img rounded-circle">
           {/* <Link to={`/profile`}> */}
-            <img src={backIcon} className="back_img" onClick={() => navigate(-1)}/>
+          <img
+            src={backIcon}
+            width={20}
+            height={20}
+            onClick={() => navigate(-1)}
+          />
           {/* </Link> */}
         </span>
         <h1 className="chat_title">Chats</h1>
         <div className="inputs">
-          <input
-            type="search"
-            className="search_chat"
-            placeholder="Search..."
-            value={searchInput}
-            onChange={searchInputHandler}
-            onFocus={() => setInputOnFocus(true)}
-            onBlurCapture={searchInputBlurHandler}
-          />
+          <div className="search_chat">
+            <img src={searchIcon} alt="Search user" width={20} height={20} />
+            <input
+              type="search"
+              className=""
+              placeholder="Search"
+              value={searchInput}
+              onChange={searchInputHandler}
+              onFocus={() => setInputOnFocus(true)}
+              onBlurCapture={searchInputBlurHandler}
+            />
+          </div>
           <div className="search-results-wrapper">
             {inputOnFocus && searchSuggestions && !mobileSearch && (
               <div className="search_results rounded-5 border shadow-sm p-4 position-absolute bg-white">

@@ -19,7 +19,7 @@ const Chats = () => {
   // search params
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  // const userId = searchParams.get("userId");
+  // const userId = searchParams.get("userId" );
   const isCommunityOpen = searchParams.get("isCommunityOpen");
 
   // Fetch global state
