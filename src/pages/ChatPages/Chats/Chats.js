@@ -1,5 +1,5 @@
-import React from "react";
 import "./Chats.scss";
+
 import ChatSearch from "./ChatSearch/ChatSearch";
 import ChatSidebar from "./ChatSidebar/ChatSidebar";
 import ChatNavbar from "./ChatNavbar/ChatNavbar";
@@ -14,6 +14,8 @@ import CommunitiesContainer from "../../../components/Investor/ChatComponents/Co
 import ChatSettings from "../../../components/Investor/ChatComponents/ChatSettings/ChatSettings";
 import CommunityDashboard from "./CommunityDashboard/CommunityDashboard";
 import { setChatId, setUserId } from "../../../Store/features/chat/chatSlice";
+
+import selectAChatIcon from "../../../Images/Chat/selectAChat.png";
 
 const Chats = () => {
   // search params
@@ -141,26 +143,33 @@ const Chats = () => {
 
         {/* Main Chat section */}
         <section className="main_section my-3 me-3">
-          {chatId && (
-            <ChatNavbar
-              isclear={setCleared}
-              cleared={cleared}
-              setIsSettingsOpen={setIsSettingsOpen}
-            />
-          )}
-          {!isCommunitySelected && chatId && (
-            <ChatDashboard
-              setSendMessage={setSendMessage}
-              recieveMessage={recieveMessage}
-              cleared={cleared}
-            />
-          )}
-          {isCommunitySelected && (
-            <CommunityDashboard
-              setSendMessage={setSendMessage}
-              recieveMessage={recieveMessage}
-              cleared={cleared}
-            />
+          {chatId ? (
+            <>
+              <ChatNavbar
+                isclear={setCleared}
+                cleared={cleared}
+                setIsSettingsOpen={setIsSettingsOpen}
+              />
+              {!isCommunitySelected && (
+                <ChatDashboard
+                  setSendMessage={setSendMessage}
+                  recieveMessage={recieveMessage}
+                  cleared={cleared}
+                />
+              )}
+              {isCommunitySelected && (
+                <CommunityDashboard
+                  setSendMessage={setSendMessage}
+                  recieveMessage={recieveMessage}
+                  cleared={cleared}
+                />
+              )}
+            </>
+          ) : (
+            <div className="select-chat-container">
+              <img src={selectAChatIcon} alt="select a chat" />
+              <h3 className="orange">Select a message</h3>
+            </div>
           )}
         </section>
 
