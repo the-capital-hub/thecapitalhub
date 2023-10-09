@@ -54,7 +54,6 @@ const Feed = () => {
     }
   }, [location]);
 
-
   useEffect(() => {
     getSavedPostCollections(loggedInUser._id).then((data) => {
       setgetSavedPostData(data);
@@ -81,7 +80,7 @@ const Feed = () => {
   };
 
   return (
-    <div className="feed_container">
+    <div className="container mx-auto feed_container">
       <div className="main_content">
         <div className="Posts__column d-flex flex-column gap-4">
           {/* Small Profile Card */}

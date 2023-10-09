@@ -32,7 +32,7 @@ function OtherUserProfile() {
   }, [userId]);
 
   return (
-    <section className="other_user_profile">
+    <section className="container other_user_profile">
       <SmallProfileCard className="mt-lg-2 mt-xl-0" text="User Details" />
       {userData ? (
         <>

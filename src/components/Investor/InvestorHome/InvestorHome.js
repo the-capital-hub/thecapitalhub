@@ -173,7 +173,7 @@ const InvestorHome = () => {
   }, []);
 
   return (
-    <div className="container-fluid investorHome_main_container">
+    <div className="container investorHome_main_container">
       <div className=" two_column_wrapper mt-2">
         <div className=" seventy d-flex flex-column gap-3">
           <div className="row">
