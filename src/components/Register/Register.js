@@ -14,9 +14,12 @@ import { firebase, auth } from "../../firebase";
 import SelectWhatYouAre from "../PopUp/SelectWhatYouAre/SelectWhatYouAre";
 import StartUpForm from "../PopUp/StartUpForm/StartUpForm";
 import InvestorForm from "../PopUp/InvestorForm/InvestorForm";
+// import { Navigate } from "react-router-dom";
+// import { useSelector } from "react-redux";
 
 const Register = () => {
   const [isMobileVerified, setIsMobileVerified] = useState(false);
+  // const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showErrorPopup, setShowErrorPopup] = useState(false);

@@ -8,6 +8,12 @@ const commentSchema = new Schema(
       required: true,
     },
     text: String,
+    likes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Users",
+      },
+    ],
   },
   {
     timestamps: true,
