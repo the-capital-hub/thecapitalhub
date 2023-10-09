@@ -27,18 +27,20 @@ export default function SearchResults() {
   // Fetch search data
   useEffect(() => {
     async function fetchData() {
+      console.log(query);
       const data = await getSearchResultsAPI(query);
-      const updatedUserData = data?.data?.users?.filter(
-        (user) => user?._id !== userIdToRemove
-      );
-      setPeopleData(updatedUserData);
+      setPeopleData(data?.data?.users);
       setCompanyData(data?.data?.company);
       setLoading(false);
+    }
+    if (searchParams.has("query") && query !== searchParams.get("query")) {
+      setQuery(searchParams.get("query"));
+      setLoading(true);
     }
     if (searchParams.has("query")) {
       fetchData();
     }
-  }, [query, searchParams, userIdToRemove]);
+  }, [query, searchParams]);
 
   useEffect(() => {
     setQuery(searchParams.get("query"));
