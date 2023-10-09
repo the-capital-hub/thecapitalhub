@@ -13,6 +13,9 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { likeUnlikeAPI } from "../../../../Service/user";
 import { Link } from "react-router-dom";
+import IconDeleteFill from "../../SvgIcons/IconDeleteFill";
+import { removeFromFeaturedPost } from "../../../../Service/user";
+import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 
 const FeaturedPostCard = ({
   postId,
@@ -26,9 +29,12 @@ const FeaturedPostCard = ({
   designation,
   likes,
   userId,
-  isDelete,
+  setIsDeleteSuccessful,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  // States for handling remove post from featured post
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const savePostHandler = async (postId) => {
     try {
@@ -53,13 +59,29 @@ const FeaturedPostCard = ({
     }
   };
 
+  // Handle remove post from featured posts
+  const handleRemovePost = async (postId) => {
+    // set loading = true
+    setLoading(true);
+    const response = await removeFromFeaturedPost(postId);
+    console.log(response);
+    if (response.status === 200) {
+      setIsDeleteSuccessful(true);
+      setLoading(false);
+    } else if (response.status === 500) {
+      // Show error message in a toast or tooltip
+      setError(response.message);
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <div className="featuredpostcard_main_container mb-2">
         {/* <div className="col-12"> */}
         <div className=" featuredpostcard_container mt-2 rounded-5 shadow-sm border">
           <div className="feed_header_container p-2 border-bottom ">
-            <div className="feedpostcard_content ">
+            <div className="feedpostcard_content w-100">
               <Link to={`/user/${userId}`} className="rounded-circle">
                 <img
                   src={
@@ -72,12 +94,14 @@ const FeaturedPostCard = ({
                 />
               </Link>
               <div className="feedpostcart_text_header my-1">
+                {/* Fullname */}
                 <span
                   style={{ fontSize: "15px", fontWeight: 600, color: "#000" }}
                 >
                   {firstName + " " + lastName}
                 </span>
-                <span className="d-flex flex-column flex-md-row">
+                {/* Details */}
+                <span className="d-flex flex-column flex-md-row flex-wrap">
                   <span
                     style={{
                       fontSize: "10px",
@@ -86,7 +110,7 @@ const FeaturedPostCard = ({
                     }}
                   >
                     <img src={HomeIcon} alt="logo" />
-                    {designation}, {loggedInUser.startUp.company}
+                    {designation}, {userId.startUp?.company}
                   </span>
                   <span
                     style={{
@@ -99,12 +123,34 @@ const FeaturedPostCard = ({
                     Bangalore, India
                   </span>
                 </span>
+                {/* Time ago */}
                 <span
                   style={{ fontSize: "10px", fontWeight: 500, color: "#000" }}
                 >
                   <TimeAgo datetime={createdAt} locale="" />
                 </span>
               </div>
+
+              {/*Show Delete featured post if userId=loggedInUser._id */}
+              {userId === loggedInUser._id ? (
+                <div className="align-self-start">
+                  <button
+                    className="btn_base_sm"
+                    onClick={() => handleRemovePost(postId)}
+                  >
+                    {loading ? (
+                      <SpinnerBS
+                        colorClass={"text-danger"}
+                        spinnerSizeClass="spinner-border-sm"
+                      />
+                    ) : (
+                      <IconDeleteFill height="1.25rem" width="1.25rem" />
+                    )}
+                  </button>
+                </div>
+              ) : (
+                ""
+              )}
             </div>
             {/* <div className="three_dot">
                 <img src={ThreeODotIcon} alt="dot" />

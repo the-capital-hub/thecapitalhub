@@ -527,7 +527,9 @@ export const createChat = async (senderId, recieverId) => {
 
 export const markMessagesAsRead = async (chatId, userId) => {
   try {
-    const response = await axiosInstance.patch(`${API.markMessagesAsRead}/${chatId}/${userId}`);
+    const response = await axiosInstance.patch(
+      `${API.markMessagesAsRead}/${chatId}/${userId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error marking message as read:", error);
@@ -537,7 +539,9 @@ export const markMessagesAsRead = async (chatId, userId) => {
 
 export const getUnreadMessageCount = async (chatId, userId) => {
   try {
-    const response = await axiosInstance.get(`${API.getUnreadMessageCount}/${chatId}/${userId}`);
+    const response = await axiosInstance.get(
+      `${API.getUnreadMessageCount}/${chatId}/${userId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error getting user message count:", error);
@@ -547,7 +551,9 @@ export const getUnreadMessageCount = async (chatId, userId) => {
 
 export const togglePinMessage = async (userId, chatId) => {
   try {
-    const response = await axiosInstance.patch(`${API.togglePinMessage}/${userId}/${chatId}`);
+    const response = await axiosInstance.patch(
+      `${API.togglePinMessage}/${userId}/${chatId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error while toogle pin chat:", error);
@@ -567,7 +573,9 @@ export const getPinnedChat = async (userId) => {
 
 export const getInvestorById = async (investorId) => {
   try {
-    const response = await axiosInstance.get(`${API.getInvestorById}/${investorId}`);
+    const response = await axiosInstance.get(
+      `${API.getInvestorById}/${investorId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error getting user message count:", error);
@@ -577,7 +585,10 @@ export const getInvestorById = async (investorId) => {
 
 export const postInvestorData = async (investorData) => {
   try {
-    const response = await axiosInstance.post(`${API.postInvestorData}`, investorData);
+    const response = await axiosInstance.post(
+      `${API.postInvestorData}`,
+      investorData
+    );
     return response.data;
   } catch (error) {
     console.error("Error posting investor data:", error);
@@ -585,9 +596,15 @@ export const postInvestorData = async (investorData) => {
   }
 };
 
-export const addStartupInvested = async (investorId, newStartUpInvestedData) => {
+export const addStartupInvested = async (
+  investorId,
+  newStartUpInvestedData
+) => {
   try {
-    const response = await axiosInstance.patch(`${API.addStartupInvested}/${investorId}`, newStartUpInvestedData);
+    const response = await axiosInstance.patch(
+      `${API.addStartupInvested}/${investorId}`,
+      newStartUpInvestedData
+    );
     return response.data;
   } catch (error) {
     console.error("Error while adding startup invested:", error);
@@ -595,9 +612,15 @@ export const addStartupInvested = async (investorId, newStartUpInvestedData) => 
   }
 };
 
-export const addSectorOfInterest = async (investorId, newSectorOfInterestData) => {
+export const addSectorOfInterest = async (
+  investorId,
+  newSectorOfInterestData
+) => {
   try {
-    const response = await axiosInstance.patch(`${API.addSectorOfInterest}/${investorId}`, newSectorOfInterestData);
+    const response = await axiosInstance.patch(
+      `${API.addSectorOfInterest}/${investorId}`,
+      newSectorOfInterestData
+    );
     return response.data;
   } catch (error) {
     console.error("Error while adding sector of interest:", error);
@@ -627,7 +650,10 @@ export const clearChat = async (chatId) => {
 
 export const createCommunity = async (createCommunityData) => {
   try {
-    const response = await axiosInstance.post(`${API.createCommunity}`,createCommunityData);
+    const response = await axiosInstance.post(
+      `${API.createCommunity}`,
+      createCommunityData
+    );
     return response.data;
   } catch (error) {
     console.error("Error while clearing chat:", error);
@@ -636,7 +662,9 @@ export const createCommunity = async (createCommunityData) => {
 };
 export const getAllCommunity = async (userId) => {
   try {
-    const response = await axiosInstance.get(`${API.getAllCommunity}/${userId}`);
+    const response = await axiosInstance.get(
+      `${API.getAllCommunity}/${userId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error while clearing chat:", error);
@@ -644,10 +672,12 @@ export const getAllCommunity = async (userId) => {
   }
 };
 
-
 export const addMyInterest = async (investorId, newInterestData) => {
   try {
-    const response = await axiosInstance.patch(`${API.addMyInterest}/${investorId}`, newInterestData);
+    const response = await axiosInstance.patch(
+      `${API.addMyInterest}/${investorId}`,
+      newInterestData
+    );
     return response.data;
   } catch (error) {
     console.error("Error while adding interest:", error);
@@ -657,7 +687,9 @@ export const addMyInterest = async (investorId, newInterestData) => {
 
 export const getFeaturedPost = async (userId) => {
   try {
-    const response = await axiosInstance.get(`${API.getFeaturedPostsByUser}/${userId}`);
+    const response = await axiosInstance.get(
+      `${API.getFeaturedPostsByUser}/${userId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error while getting featured post:", error);
@@ -667,7 +699,9 @@ export const getFeaturedPost = async (userId) => {
 
 export const addToFeaturedPost = async (postId) => {
   try {
-    const response = await axiosInstance.post(`${API.addToFeaturedPost}/${postId}`);
+    const response = await axiosInstance.post(
+      `${API.addToFeaturedPost}/${postId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error while adding featured post:", error);
@@ -675,9 +709,23 @@ export const addToFeaturedPost = async (postId) => {
   }
 };
 
+export const removeFromFeaturedPost = async (postId) => {
+  try {
+    const response = await axiosInstance.delete(
+      `${API.removeFromFeaturedPost}/${postId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Error while removing post from featured post:", error);
+    throw error;
+  }
+};
+
 export const getCommunityById = async (communityId) => {
   try {
-    const response = await axiosInstance.get(`${API.getCommunityById}/${communityId}`);
+    const response = await axiosInstance.get(
+      `${API.getCommunityById}/${communityId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error while getting community by id:", error);
@@ -687,7 +735,9 @@ export const getCommunityById = async (communityId) => {
 
 export const getChatSettings = async (loggedInUserId, otherUserId, chatId) => {
   try {
-    const response = await axiosInstance.get(`${API.getChatSettings}/${loggedInUserId}/${otherUserId}/${chatId}`);
+    const response = await axiosInstance.get(
+      `${API.getChatSettings}/${loggedInUserId}/${otherUserId}/${chatId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error while getting chat setting:", error);
@@ -697,7 +747,9 @@ export const getChatSettings = async (loggedInUserId, otherUserId, chatId) => {
 
 export const getCommunitySettings = async (communityId) => {
   try {
-    const response = await axiosInstance.get(`${API.getCommunitySettings}/${communityId}`);
+    const response = await axiosInstance.get(
+      `${API.getCommunitySettings}/${communityId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error while getting chat setting:", error);
@@ -707,7 +759,7 @@ export const getCommunitySettings = async (communityId) => {
 
 export const unsavePost = async (requestBody) => {
   try {
-    console.log("body",requestBody);
+    console.log("body", requestBody);
     const response = await axiosInstance.patch(`${API.unsavePost}`, {
       ...requestBody,
     });

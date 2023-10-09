@@ -233,8 +233,7 @@ export const getUsersWhoLikedPostController = async (req, res) => {
   }
 };
 
-
-//delete post 
+//delete post
 export const deletedPostController = async (req, res) => {
   try {
     const { postId } = req.params;
@@ -303,7 +302,7 @@ export const deleteCommentController = async (req, res) => {
     console.error(error);
     return res.status(500).json({
       status: 500,
-      message: 'An error occurred while deleting the comment.',
+      message: "An error occurred while deleting the comment.",
     });
   }
 };
@@ -318,7 +317,7 @@ export const toggleCommentLikeController = async (req, res) => {
     console.error(error);
     return res.status(500).json({
       status: 500,
-      message: 'An error occurred while liking the comment.',
+      message: "An error occurred while liking the comment.",
     });
   }
 };
