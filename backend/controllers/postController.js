@@ -310,7 +310,7 @@ export const deleteCommentController = async (req, res) => {
 export const toggleCommentLikeController = async (req, res) => {
   try {
     const { postId, commentId } = req.params;
-    const { userId } = req.userId;
+    const userId = req.userId;
     const response = await toggleCommentLike(postId, commentId, userId);
     return res.status(response.status).json(response);
   } catch (error) {

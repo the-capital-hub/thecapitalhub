@@ -4,6 +4,7 @@ import {
   markMessagesAsRead,
   getUnreadMessageCount,
   clearAllMessages,
+  deleteMessage,
 } from "../services/messageService.js";
 
 export const addMessageController = async (req, res) => {
@@ -72,6 +73,20 @@ export const clearAllMessagesController = async (req, res) => {
     return res.status(500).send({
       status: 500,
       message: "An error occurred while clearing messages.",
+    });
+  }
+};
+
+export const deleteMessageController = async (req, res) => {
+  try {
+    const { messageId } = req.params;
+    const response = await deleteMessage(messageId);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while deleting messages.",
     });
   }
 };
