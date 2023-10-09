@@ -10,7 +10,7 @@ const OtherInvestorProfile = lazy(() =>
 );
 const InvestorCompanyProfilePage = lazy(() =>
   import(
-    "../pages/Investor/InvestorCompanyProfilePage/InvestorCompanyProfilePage"
+    "../pages/Investor/InvestorCompanyProfilePage/InvestorCompany"
   )
 );
 const EditInvestorCompanyProfilePage = lazy(() =>
@@ -136,22 +136,6 @@ function InvestorRoutes() {
         element={
           <Suspense fallback={<SuspenseLoader />}>
             <InvestorConnection />
-          </Suspense>
-        }
-      />
-      <Route
-        path="company-profile"
-        element={
-          <Suspense fallback={<SuspenseLoader />}>
-            <EditInvestorCompanyProfilePage />
-          </Suspense>
-        }
-      />
-      <Route
-        path="company-profile/:username"
-        element={
-          <Suspense fallback={<SuspenseLoader />}>
-            <InvestorCompanyProfilePage />
           </Suspense>
         }
       />

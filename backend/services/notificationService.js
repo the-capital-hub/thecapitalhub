@@ -1,4 +1,4 @@
-import { NotificationModel } from "./notificationModel";
+import { NotificationModel } from "../models/Notification.js";
 
 export const addNotification = async (recipient, sender, type, post = null) => {
   try {
@@ -19,3 +19,19 @@ export const addNotification = async (recipient, sender, type, post = null) => {
   }
 }
 
+export const getNotificationsByUserId = async (userId) => {
+  try {
+    const notifications = await NotificationModel.find({ recipient: userId })
+      .populate("sender", "firstName lastName");
+    return {
+      status: 200,
+      message: "Notification retrived",
+      data: notifications
+    }
+  } catch (error) {
+    return {
+      status: 500,
+      message: "An error occured while getting the notifications",
+    }
+  }
+}

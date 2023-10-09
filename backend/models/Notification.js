@@ -15,7 +15,7 @@ const notificationSchema = new Schema({
 
   type: {
     type: String,
-    enum: ["connectionRequest", "connectionAccepted", "postLiked", "postShared", "postCommented", "commentLiked"],
+    enum: ["connectionRequest", "connectionAccepted", "postLiked", "postShared", "postCommented"],
     required: true,
   },
   post: {
