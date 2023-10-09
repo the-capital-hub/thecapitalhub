@@ -41,6 +41,12 @@ const Explore = lazy(() => import("../pages/Investor/Explore/Explore"));
 const InvestorProfile = lazy(() => import("../pages/Investor/Profile/Profile"));
 const MyStartUp = lazy(() => import("../pages/Investor/MyStartUp/MyStartUp"));
 
+const InvestorOtherCompanyProfilePage = lazy(() =>
+  import(
+    "../pages/Investor/InvestorCompanyProfilePage/InvestorCompanyProfilePage"
+  )
+);
+
 function InvestorRoutes() {
   return (
     <>
@@ -154,6 +160,30 @@ function InvestorRoutes() {
         element={
           <Suspense fallback={<SuspenseLoader />}>
             <OtherInvestorProfile />
+          </Suspense>
+        }
+      />
+      <Route
+        path="company-profile/edit"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <EditInvestorCompanyProfilePage />
+          </Suspense>
+        }
+      />
+      <Route
+        path="company-profile"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <InvestorCompanyProfilePage />
+          </Suspense>
+        }
+      />
+      <Route
+        path="company-profile/:username"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <InvestorOtherCompanyProfilePage />
           </Suspense>
         }
       />
