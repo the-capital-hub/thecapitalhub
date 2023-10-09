@@ -20,6 +20,7 @@ import {
   getPostComment,
   likeUnlikeAPI,
   sendPostComment,
+  unsavePost,
 } from "../../../Service/user";
 import SmileeIcon from "../../../Images/Group 15141(1).svg";
 import ImageIcon from "../../../Images/Group 15141.svg";
@@ -55,6 +56,8 @@ const FeedPostCard = ({
   repostLoading,
   repostPreview,
   resharedPostId,
+  unsavePostStatus,
+  setUnsavePostStatus,
 }) => {
   const [showComment, setShowComment] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -197,12 +200,40 @@ const FeedPostCard = ({
 
   const repostContainerRef = useRef(null);
 
+
+  const handleUnsavePost = async (e) => {
+    e.preventDefault();
+    const requestBody = {
+      userId: loggedInUser._id,
+      postId: postId,
+    }
+    console.log(requestBody);
+    try {
+      const response = await unsavePost(requestBody);
+      console.log(response);
+      receiveUnSavedPostStatus();
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
+
+  const [showUnsaveSuccess, setShowUnsaveSuccess] = useState(false);
+  const receiveUnSavedPostStatus = () => {
+    setShowUnsaveSuccess(true);
+    setTimeout(() => {
+      setShowUnsaveSuccess(false);
+      setUnsavePostStatus(!unsavePostStatus);
+    }, 2500);
+  };
+
   const reportSubmitHandler = () => {
     // take reason from state = reportReason
     setFilingReport(true);
     setTimeout(() => {
       setFilingReport(false);
       setShowReportModal(false);
+      setUnsavePostStatus(!unsavePostStatus);
     }, 2000);
   };
 
@@ -459,7 +490,7 @@ const FeedPostCard = ({
                     </span>
                     {/* <img src={shareIcon} width={16} alt="share post" /> */}
                     {savedPostId.includes(postId) ? (
-                      <img src={savedIcon} width={16} alt="save post" />
+                      <img src={savedIcon} width={16} alt="save post" onClick={handleUnsavePost}/>
                     ) : (
                       <img
                         src={saveIcon}
@@ -551,6 +582,13 @@ const FeedPostCard = ({
             savedPostStatus={receiveSavedPostStatus}
             onClose={handleCloseSavePopup}
             isInvestor="true"
+          />
+        )}
+        {showUnsaveSuccess && (
+          <InvestorAfterSuccessPopUp
+            withoutOkButton
+            onClose={() => setShowSuccess(!showSuccess)}
+            successText="Post unsaved Successfully"
           />
         )}
         {showSuccess && (

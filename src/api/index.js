@@ -61,6 +61,7 @@ const API = Object.freeze({
   getCommunityById: `${baseUrl}/community/getCommunityById`,
   getChatSettings: `${baseUrl}/chat/getChatSettings`,
   getCommunitySettings: `${baseUrl}/community/getCommunitySettings`,
+  unsavePost: `${baseUrl}/api/posts/unsavePost`
 });
 
 export default API;

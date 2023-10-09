@@ -43,13 +43,15 @@ function Home() {
       .finally(() => setLoadingFeed(false));
   };
 
+  const [unsavePostStatus, setUnsavePostStatus] = useState(false);
+
   useEffect(() => {
     getSavedPostCollections(loggedInUser._id).then((data) => {
       setgetSavedPostData(data);
     });
     document.title = "Home | Investors - The Capital Hub";
     fetchAllPosts();
-  }, [newPost]);
+  }, [newPost, unsavePostStatus]);
 
   console.log(allPosts?.[0]);
 
@@ -149,6 +151,8 @@ function Home() {
                       repostInstantly={repostInstantly}
                       repostLoading={repostLoading}
                       resharedPostId={resharedPostId}
+                      setUnsavePostStatus={setUnsavePostStatus}
+                      unsavePostStatus={unsavePostStatus}
                     />
                   )
                 )
@@ -175,7 +179,7 @@ function Home() {
             <div className="content-30">
               <div className="row">
                 <InvestorRightProfileCard />
-                <RecommendationCard isInvestor={true}/>
+                <RecommendationCard isInvestor={true} />
                 <NewsCorner />
               </div>
             </div>

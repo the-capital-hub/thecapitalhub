@@ -18,8 +18,11 @@ import {
 } from "../../Store/features/user/userSlice";
 import backArrow from "../../Images/left-arrow.png";
 import ResetPasswordPopUp from "../PopUp/RequestPasswordPopUp/RequestPasswordPopUp";
+import { Navigate } from "react-router-dom";
 
 const Login = () => {
+
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const dispatch = useDispatch();
   // States for login
   const [isLoginSuccessfull, setIsLoginSuccessfull] = useState(false);
@@ -119,6 +122,20 @@ const Login = () => {
     document.title = "Log In | The Capital Hub";
   }, []);
 
+  const isLoggedIn = () => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    console.log("isLoggedIn-->", isLoggedIn);
+    return isLoggedIn === "true";
+  };
+  if (isLoggedIn()) {
+    if (loggedInUser.investor) {
+      return <Navigate to="/investor" replace />;
+    } else {
+      return <Navigate to="/profile" replace />;
+    }
+  }
+
+
   return (
     <div className="container d-flex justify-content-center align-items-start py-md-5 min-vh-100">
       <div className="row d-flex register_container w-100 ">
@@ -148,9 +165,8 @@ const Login = () => {
             <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-4 gap-sm-5">
               <Link to="">
                 <button
-                  className={`btn-primaryy login_btn ${
-                    !isInvestorSelected ? "startup" : ""
-                  } `}
+                  className={`btn-primaryy login_btn ${!isInvestorSelected ? "startup" : ""
+                    } `}
                   onClick={() => setIsInvestorSelected(false)}
                 >
                   StartUp
@@ -158,9 +174,8 @@ const Login = () => {
               </Link>
               <Link to="">
                 <button
-                  className={`btn-primaryy login_btn ${
-                    isInvestorSelected ? "investor" : ""
-                  } `}
+                  className={`btn-primaryy login_btn ${isInvestorSelected ? "investor" : ""
+                    } `}
                   onClick={() => setIsInvestorSelected(true)}
                 >
                   Investor

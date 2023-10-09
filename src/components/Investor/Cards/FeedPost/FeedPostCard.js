@@ -21,6 +21,7 @@ import {
   likeUnlikeAPI,
   sendPostComment,
   addToFeaturedPost,
+  unsavePost,
 } from "../../../../Service/user";
 import SmileeIcon from "../../../../Images/Group 15141(1).svg";
 import ImageIcon from "../../../../Images/Group 15141.svg";
@@ -58,6 +59,8 @@ const FeedPostCard = ({
   repostLoading,
   repostPreview,
   resharedPostId,
+  unsavePostStatus,
+  setUnsavePostStatus,
 }) => {
   const [showComment, setShowComment] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -74,10 +77,38 @@ const FeedPostCard = ({
     setshowSavePopUp(true);
   };
 
+  const handleUnsavePost = async (e) => {
+    e.preventDefault();
+    const requestBody = {
+      userId: loggedInUser._id,
+      postId: postId,
+    }
+    console.log(requestBody);
+    try {
+      const response = await unsavePost(requestBody);
+      console.log(response);
+      receiveUnSavedPostStatus();
+    } catch (error) {
+      console.log(error);
+    }
+    
+  }
+
+  const [showUnsaveSuccess, setShowUnsaveSuccess] = useState(false);
+  const receiveUnSavedPostStatus = () => {
+    setShowUnsaveSuccess(true);
+    setTimeout(() => {
+      setShowUnsaveSuccess(false);
+      setUnsavePostStatus(!unsavePostStatus);
+    }, 2500);
+  };
+
+
   const receiveSavedPostStatus = () => {
     setShowSuccess(true);
     setTimeout(() => {
-      setShowSuccess(false); // Reset the state after a delay
+      setShowSuccess(false);
+      setUnsavePostStatus(!unsavePostStatus);
     }, 2500);
   };
 
@@ -92,7 +123,7 @@ const FeedPostCard = ({
         userId: loggedInUser._id,
         text: commentText,
       });
-      if (response.data.status == "200") {
+      if (response.data.status === "200") {
         await getPostComment({ postId }).then((res) => {
           console.log("response", res.data.data);
           setComments(res.data.data);
@@ -127,7 +158,6 @@ const FeedPostCard = ({
               },
               []
             );
-            // console.log(allSavedPostDataIds);
             setSavedPostId(allSavedPostDataIds);
           }
         } catch (error) {
@@ -498,7 +528,7 @@ const FeedPostCard = ({
                     )}
                   </span>
                   {savedPostId.includes(postId) ? (
-                    <img src={savedIcon} width={16} alt="save post" />
+                    <img src={savedIcon} width={16} alt="save post" onClick={handleUnsavePost}/>
                   ) : (
                     <img
                       src={saveIcon}
@@ -600,6 +630,13 @@ const FeedPostCard = ({
             withoutOkButton
             onClose={() => setShowSuccess(!showSuccess)}
             successText="Post saved Successfully"
+          />
+        )}
+        {showUnsaveSuccess && (
+          <AfterSuccessPopUp
+            withoutOkButton
+            onClose={() => setShowSuccess(!showSuccess)}
+            successText="Post unsaved Successfully"
           />
         )}
         {showFeaturedPostSuccess && (
