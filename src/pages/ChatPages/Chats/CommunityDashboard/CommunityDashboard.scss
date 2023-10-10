@@ -327,4 +327,22 @@
       }
     }
   }
+  .popup-close-button , .popup-ok_button{
+    // width: 20%;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: #FD5901;
+    color: #FFF;
+    text-align: center;
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    border: none;
+    margin: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }
