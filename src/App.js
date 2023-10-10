@@ -18,6 +18,7 @@ import InvestorRoutes from "./routes/InvestorRoutes";
 import BlogRoutes from "./routes/BlogRoutes";
 import PublicRoutes from "./routes/PublicRoutes";
 import EcommerceRoutes from "./routes/EcommerceRoutes";
+import NotFound404 from "./pages/Error/NotFound404/NotFound404";
 
 function App() {
   return (
@@ -51,6 +52,9 @@ function App() {
         <Route path="/e-commerce" element={<EcommerceLayout />}>
           {EcommerceRoutes()}
         </Route>
+
+        {/* 404 Not Found */}
+        <Route path="*" element={<NotFound404 />} />
       </Routes>
     </Router>
   );

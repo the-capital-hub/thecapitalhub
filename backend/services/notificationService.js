@@ -23,7 +23,8 @@ export const addNotification = async (recipient, sender, type, post = null, conn
 export const getNotificationsByUserId = async (userId) => {
   try {
     const notifications = await NotificationModel.find({ recipient: userId })
-      .populate("sender", "firstName lastName");
+      .populate("sender", "firstName lastName")
+      .sort({ _id: -1 });
     return {
       status: 200,
       message: "Notification retrived",

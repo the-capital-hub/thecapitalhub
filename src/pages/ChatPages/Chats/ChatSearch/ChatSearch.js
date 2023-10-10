@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./ChatSearch.scss";
 
-import backIcon from "../../../../Images/Chat/BackIcon.svg";
 import searchIcon from "../../../../Images/Chat/Search.svg";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -46,16 +45,6 @@ const ChatSearch = () => {
   return (
     <>
       <div className="chat_search_container">
-        <span className="back_img rounded-circle">
-          {/* <Link to={`/profile`}> */}
-          <img
-            src={backIcon}
-            width={20}
-            height={20}
-            onClick={() => navigate(-1)}
-          />
-          {/* </Link> */}
-        </span>
         <h1 className="chat_title">Chats</h1>
         <div className="inputs">
           <div className="search_chat">
