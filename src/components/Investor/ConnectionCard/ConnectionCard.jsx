@@ -38,7 +38,7 @@ function ConnectionCard() {
         <p  className='mb-2'>Lorem, ipsum </p>
         <button>Connected</button>
       </div>
-
+       
 
 
       <div className='single-card d-flex flex-column flex align-items-center '>
