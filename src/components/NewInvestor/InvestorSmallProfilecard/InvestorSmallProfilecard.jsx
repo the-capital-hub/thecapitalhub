@@ -13,7 +13,7 @@ const SmallProfileCard = ({ text, width }) => {
   const formattedDate = formatDate(new Date().toDateString());
   return (
     <div className="container-fluid small_card_container">
-      <div
+      {/* <div
         className="row small_card_row"
         style={{ width: width ? width : "100%" }}
       >
@@ -29,7 +29,7 @@ const SmallProfileCard = ({ text, width }) => {
             <h2 className="typography">{text ? text : "My Profile"}</h2>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

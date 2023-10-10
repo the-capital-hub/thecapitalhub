@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./home.scss";
 import profilePic from "../../../Images/investorIcon/profilePic.webp";
-
+import InfiniteScroll from "react-infinite-scroll-component";
 import { useSelector } from "react-redux";
 // import InvestorRecommendationCard from "../../../components/NewInvestor/InvestorRecommendationCard/InvestorRecommendationCard";
 import InvestorRightProfileCard from "../../../components/NewInvestor/InvestorRightProfileCard/InvestorRightProfileCard";
@@ -20,10 +20,12 @@ import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidth
 
 function Home() {
   const [popupOpen, setPopupOpen] = useState(false);
-  const [allPosts, setAllPosts] = useState(null);
+  const [allPosts, setAllPosts] = useState([]);
   const [newPost, setNewPost] = useState(false);
   const [loadingFeed, setLoadingFeed] = useState(false);
   const [getSavedPostData, setgetSavedPostData] = useState("");
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
 
   const openPopup = () => {
     setPopupOpen(!popupOpen);
@@ -31,15 +33,18 @@ function Home() {
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
-  const fetchAllPosts = () => {
-    setLoadingFeed(true);
-    getAllPostsAPI()
+  const fetchMorePosts = () => {
+    getAllPostsAPI(page)
       .then(({ data }) => {
-        setAllPosts(data);
+        if (data.length === 0) {
+        } else {
+          setAllPosts([...allPosts, ...data]);
+          setPage(page + 1);
+        }
       })
       .catch((err) => {
+        setHasMore(false);
         console.log(err);
-        setAllPosts([]);
       })
       .finally(() => setLoadingFeed(false));
   };
@@ -49,7 +54,7 @@ function Home() {
       setgetSavedPostData(data);
     });
     document.title = "Home | Investors - The Capital Hub";
-    fetchAllPosts();
+    fetchMorePosts();
   }, [newPost]);
 
   console.log(allPosts?.[0]);
@@ -64,7 +69,7 @@ function Home() {
   const repostInstantly = (resharedPostId) => {
     setRepostLoading({ ...repostLoading, instant: true });
     postUserPost({ resharedPostId })
-      .then(() => fetchAllPosts())
+      .then(() => fetchMorePosts())
       .catch((err) => console.log(err))
       .finally(() => setRepostLoading({ ...repostLoading, instant: false }));
   };
@@ -80,6 +85,8 @@ function Home() {
       window.history.replaceState({}, "", urlWithoutQuery);
     }
   }, [location]);
+
+
   return (
     <MaxWidthWrapper>
       <div className="container-fluid investor_feed_container">
@@ -106,8 +113,20 @@ function Home() {
                   </div>
                 </div>
               </div>
-              {!loadingFeed ? (
-                allPosts?.map(
+              {/* {!loadingFeed ? ( */}
+              <InfiniteScroll
+                dataLength={allPosts.length}
+                next={fetchMorePosts}
+                hasMore={hasMore}
+                loader={<p className="container p-5 text-center my-5 bg-white rounded-5 shadow ">
+                  <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                </p>}
+              >
+                {allPosts?.map(
                   ({
                     description,
                     user: {
@@ -141,7 +160,7 @@ function Home() {
                       documentUrl={documentUrl}
                       createdAt={createdAt}
                       likes={likes}
-                      fetchAllPosts={fetchAllPosts}
+                      fetchAllPosts={fetchMorePosts}
                       response={getSavedPostData}
                       repostWithToughts={(resharedPostId) => {
                         setRepostingPostId(resharedPostId);
@@ -152,8 +171,9 @@ function Home() {
                       resharedPostId={resharedPostId}
                     />
                   )
-                )
-              ) : (
+                )}
+              </InfiniteScroll>
+              {/* ) : (
                 <p className="container p-5 text-center my-5 bg-white rounded-5 shadow ">
                   <div class="d-flex justify-content-center">
                     <div class="spinner-border" role="status">
@@ -161,7 +181,7 @@ function Home() {
                     </div>
                   </div>
                 </p>
-              )}
+              )}*/}
             </div>
             {popupOpen && (
               <InvestorCreatePostPopUp

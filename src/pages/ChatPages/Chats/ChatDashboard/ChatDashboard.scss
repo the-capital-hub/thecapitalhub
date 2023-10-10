@@ -68,17 +68,20 @@
     overflow-y: auto;
     scrollbar-gutter: stable;
 
+    scrollbar-width: thick;
+    scrollbar-color: #fd5901 transparent;
+
     &::-webkit-scrollbar {
-      width: 8px;
+      width: 12px;
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: rgba(253, 89, 1, 0.05);
+      background-color: #fd5901;
       border-radius: 10rem;
+    }
 
-      &:hover {
-        background-color: rgba(253, 89, 1, 0.8);
-      }
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #fd5901;
     }
 
     &::-webkit-scrollbar-track {

@@ -229,3 +229,30 @@ export const addMyInterest = async (investorId, data) => {
     };
   }
 };
+
+export const getOnePager = async (oneLink) => {
+  try {
+    const investor = await InvestorModel.findOne({oneLink: oneLink})
+    .populate({
+      path: 'founderId',
+      model: 'Users', 
+    });
+    if (!investor) {
+      return {
+        status: 404,
+        message: "Investor Data not found",
+      };
+    }
+    return {
+      status: 200,
+      message: "Investor Data found",
+      data: investor,
+    };
+  } catch (error) {
+    console.error("Error getting investor by ID:", error);
+    return {
+      status: 500,
+      message: "An error occurred while fetching the onepager.",
+    };
+  }
+};

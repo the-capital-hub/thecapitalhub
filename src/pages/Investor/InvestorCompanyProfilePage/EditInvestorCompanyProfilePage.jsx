@@ -82,24 +82,27 @@ export default function EditInvestorCompanyProfilePage() {
           </div>
           {/* Company Description */}
           <div className="paragraph__component bg-white rounded-3 p-5 d-flex flex-column gap-4 border">
-            <div className="d-flex align-items-center justify-content-between">
+            <div className="d-flex flex-column-reverse flex-sm-row align-items-sm-center justify-content-between">
               <h2>Company Description</h2>
               <span className="ms-auto">
-                <button
-                  className="edit__btn"
-                  onClick={() => setIsBioEditable(!isBioEditable)}
-                >
-                  {isBioEditable ? "Cancel" : "Edit"}
-                  <CiEdit />
-                </button>
-                {isBioEditable && (
+                <div className="d-flex gap-2">
                   <button
-                    className="ms-2 edit__btn"
-                    onClick={(e) => submitBioHandler(e)}
+                    className={`align-self-end btn-base investor ${isBioEditable ? 'btn-sm' : ''}`}
+                    onClick={() => setIsBioEditable(!isBioEditable)}
                   >
-                    Save <CiSaveUp2 />
+                    {isBioEditable ? "Cancel" : "Edit"}
+                    {/* <CiEdit /> */}
                   </button>
-                )}
+                  {isBioEditable && (
+                    <button
+                      className={`align-self-end btn-base investor ${isBioEditable ? 'btn-sm' : ''}`}
+                      onClick={(e) => submitBioHandler(e)}
+                    >
+                      Save
+                      {/* <CiSaveUp2 /> */}
+                    </button>
+                  )}
+                </div>
               </span>
             </div>
             {/* <p>

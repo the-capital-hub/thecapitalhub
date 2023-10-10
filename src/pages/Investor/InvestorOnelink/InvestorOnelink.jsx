@@ -8,7 +8,7 @@ import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidth
 import { useSelector } from "react-redux";
 import OnePagePreview from "../../../components/Investor/OneLink/OnePagePreview/OnePagePreview";
 import SharingOneLinkPopUp from "../../../components/PopUp/SharingOneLinkPopUp/SharingOneLinkPopUp";
-import { getStartupByFounderId } from "../../../Service/user";
+import { getInvestorById } from "../../../Service/user";
 import ThreeDotsImage from "../../../Images/whiteTheeeDots.svg";
 import FolderImage from "../../../Images/Folder.svg";
 import VideoImage from "../../../Images/Video.svg";
@@ -17,19 +17,19 @@ import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/T
 export default function InvestorOnelink() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   //   console.log(loggedInUser);
-  const userId = loggedInUser._id;
+  // const userId = loggedInUser._id;
   const [isExitClicked, setIsExitClicked] = useState(false);
   const [company, setCompany] = useState([]);
 
   // Fetch data by userId
   useEffect(() => {
     document.title = "One Link | The Capital Hub";
-    getStartupByFounderId(userId)
+    getInvestorById(loggedInUser.investor)
       .then(({ data }) => {
         setCompany(data);
       })
       .catch(() => setCompany([]));
-  }, [userId]);
+  }, [loggedInUser]);
 
   // HandleExitClick
   const handleExitClick = () => {
@@ -63,6 +63,9 @@ export default function InvestorOnelink() {
               }}
               para={company.introductoryMessage}
               input={true}
+              isExitClicked={isExitClicked}
+              setCompany={setCompany}
+              investor
             />
           </div>
           {/* Right Side content */}
@@ -74,11 +77,12 @@ export default function InvestorOnelink() {
 
         {/* Onepage Preview */}
         <OnePagePreview show={true} />
-        {isExitClicked && (
+        {isExitClicked && company.introductoryMessage && (
           <SharingOneLinkPopUp
             introMessage={company.introductoryMessage}
             oneLink={company.oneLink}
             onClose={handleClosePopup}
+            investor
           />
         )}
       </div>
