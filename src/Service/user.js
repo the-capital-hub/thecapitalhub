@@ -102,9 +102,9 @@ async function postUserPost(postData) {
     throw error;
   }
 }
-async function getAllPostsAPI() {
+async function getAllPostsAPI(page) {
   try {
-    const response = await axiosInstance.get(API.getAllPosts);
+    const response = await axiosInstance.get(`${API.getAllPosts}?page=${page}`);
     return response.data;
   } catch (error) {
     console.error("Error:", error);

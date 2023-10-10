@@ -165,7 +165,7 @@ function Company() {
           </div>
         </div>
       </div>
-      <div className="row feedback_section feedback_card_section">
+      {/* <div className="row feedback_section feedback_card_section">
         <h2>Feedback</h2>
         <div className="feedbackcard">
           <FeedbackCard
@@ -187,14 +187,9 @@ function Company() {
             stars={4}
             paragraph="Working with Kyntox Biotech was an absolute pleasure. I was pleasantly surprised by their prompt delivery and exceptional customer service. The team's passion for advancing healthcare solutions is evident in their work. I look forward to collaborating with them again in the future."
           />
-          {/* <FeedbackCard
-        image={feedbackIcon}
-        name="Pramod Badigar"
-        stars={4}
-        paragraph="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel justo et nisl consectetur hendrerit. Fusce pharetra fringilla ligula, id rhoncus nisl imperdiet nec."
-      /> */}
+
         </div>
-      </div>
+      </div> */}
 
       <div className="row fundingteam_section fundingteam_card_section">
         <h2>Founding Team</h2>

@@ -18,6 +18,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
         vision: companyData.vision || "",
         mission: companyData.mission || "",
         socialLinks: companyData.socialLinks || "",
+        keyFocus: companyData.keyFocus || "",
       });
     } else {
       setFormData(companyData || {});

@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 import { Route } from "react-router-dom";
 import PrivateRoute from "../components/Routes/PrivateRoutes";
 import SinglePost from "../components/SinglePost/SinglePost";
+import SuspenseLoader from "../components/SuspenseLoader/SuspenseLoader";
 
 const InvestorHome = lazy(() =>
   import("../components/Investor/InvestorHome/InvestorHome")
@@ -49,6 +50,9 @@ const CompanyProfilePage = lazy(() =>
 const EditCompanyProfilePage = lazy(() =>
   import("../pages/StartUp/CompanyProfile/EditCompanyProfilePage")
 );
+const StartupExplore = lazy(() =>
+  import("../pages/StartUp/StartupExplore/StartupExplore")
+);
 
 function StartUpRoutes() {
   return (
@@ -56,7 +60,7 @@ function StartUpRoutes() {
       <Route
         path="/profile"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <InvestorHome />
           </Suspense>
         }
@@ -64,7 +68,7 @@ function StartUpRoutes() {
       <Route
         path="/user/:userId"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <OtherUserProfile />
           </Suspense>
         }
@@ -72,7 +76,7 @@ function StartUpRoutes() {
       <Route
         path="/home"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <Feed />
           </Suspense>
         }
@@ -80,7 +84,7 @@ function StartUpRoutes() {
       <Route
         path="/createpost"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <CreatePost />
           </Suspense>
         }
@@ -88,7 +92,7 @@ function StartUpRoutes() {
       <Route
         path="/write-blog"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <WriteBlog />
           </Suspense>
         }
@@ -96,7 +100,7 @@ function StartUpRoutes() {
       <Route
         path="/documentation"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <Documentation />
           </Suspense>
         }
@@ -104,7 +108,7 @@ function StartUpRoutes() {
       <Route
         path="/savePost"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <SavePost />
           </Suspense>
         }
@@ -112,7 +116,7 @@ function StartUpRoutes() {
       <Route
         path="/onelink"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <OneLink />
           </Suspense>
         }
@@ -120,7 +124,7 @@ function StartUpRoutes() {
       <Route
         path="/onelink/edit"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <OneLinkEditPage />
           </Suspense>
         }
@@ -128,7 +132,7 @@ function StartUpRoutes() {
       <Route
         path="/documentation/:route"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <FolderContents />
           </Suspense>
         }
@@ -136,7 +140,7 @@ function StartUpRoutes() {
       <Route
         path="/manage-account"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <InvestorManageAccount />
           </Suspense>
         }
@@ -144,7 +148,7 @@ function StartUpRoutes() {
       <Route
         path="/team"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <Team />
           </Suspense>
         }
@@ -152,7 +156,7 @@ function StartUpRoutes() {
       <Route
         path="/customers"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <Customer />
           </Suspense>
         }
@@ -160,7 +164,7 @@ function StartUpRoutes() {
       <Route
         path="/investors"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <Investors />
           </Suspense>
         }
@@ -168,7 +172,7 @@ function StartUpRoutes() {
       <Route
         path="/help"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <Help />
           </Suspense>
         }
@@ -176,7 +180,7 @@ function StartUpRoutes() {
       <Route
         path="/connection"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <Connection />
           </Suspense>
         }
@@ -184,7 +188,7 @@ function StartUpRoutes() {
       <Route
         path="/search"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <Search />
           </Suspense>
         }
@@ -192,7 +196,7 @@ function StartUpRoutes() {
       <Route
         path="/support"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <Support />
           </Suspense>
         }
@@ -200,7 +204,7 @@ function StartUpRoutes() {
       <Route
         path="/messages"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <Messages />
           </Suspense>
         }
@@ -208,7 +212,7 @@ function StartUpRoutes() {
       <Route
         path="/notifications"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <Notifications />
           </Suspense>
         }
@@ -216,7 +220,7 @@ function StartUpRoutes() {
       <Route
         path="/company-profile"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <CompanyProfilePage />
           </Suspense>
         }
@@ -224,15 +228,23 @@ function StartUpRoutes() {
       <Route
         path="/company-profile/edit"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <EditCompanyProfilePage />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/explore"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <StartupExplore />
           </Suspense>
         }
       />
       <Route
         path="/posts/:_id"
         element={
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <SinglePost />
           </Suspense>
         }

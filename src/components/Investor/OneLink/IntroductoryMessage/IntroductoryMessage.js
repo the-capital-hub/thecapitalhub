@@ -1,17 +1,31 @@
 import React, { useState } from "react";
 import "./IntroductoryMessage.scss";
 import Send from "../../../../Images/Send.svg";
-import { updateIntroMsgAPI } from "../../../../Service/user";
+import { updateIntroMsgAPI, postInvestorData } from "../../../../Service/user";
+import { useSelector } from "react-redux";
 
-const IntroductoryMessage = ({ title, image, para, input, className }) => {
+const IntroductoryMessage = ({ title, image, para, input, className, isExitClicked, setCompany, investor = false }) => {
   const [newIntroMsg, setNewIntroMsg] = useState("");
   const [newPara, setNewPara] = useState("");
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const submitNewIMHandler = async () => {
     try {
       const formattedMsg = newIntroMsg.replace(/\n/g, "<br/>");
-      await updateIntroMsgAPI({ introductoryMessage: formattedMsg });
+      if(investor) {
+        await postInvestorData({
+          founderId: loggedInUser._id,
+          introductoryMessage: formattedMsg,
+        });
+      } else {
+        await updateIntroMsgAPI({ introductoryMessage: formattedMsg });
+      }
+      
       setNewPara(formattedMsg);
+      setCompany((prevCompany) => ({
+        ...prevCompany,
+        introductoryMessage: formattedMsg,
+      }));
       setNewIntroMsg("");
     } catch (error) {
       console.error("Error updating intro: ", error);
@@ -23,14 +37,16 @@ const IntroductoryMessage = ({ title, image, para, input, className }) => {
       <div className="box_container">
         <section className="title_section">
           <div
-            className={`title_wrapper ${
-              !para ? "title-only-border" : "default-border"
-            }`}
+            className={`title_wrapper ${!para ? "title-only-border" : "default-border"
+              }`}
           >
             <h6>{title}</h6>
           </div>
         </section>
-        {para && (
+        {isExitClicked && newPara === "" && para === undefined &&  (
+          <div className="warning_message">Please enter an introductory message.</div>
+        )}
+        {(para || newPara) && (
           <section className="text_section">
             <p dangerouslySetInnerHTML={{ __html: newPara || para }} />
           </section>

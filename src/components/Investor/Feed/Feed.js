@@ -16,13 +16,16 @@ import RecommendationCard from "../InvestorGlobalCards/Recommendation/Recommenda
 import { useLocation } from "react-router-dom";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const Feed = () => {
   const [popupOpen, setPopupOpen] = useState(false);
-  const [allPosts, setAllPosts] = useState(null);
+  const [allPosts, setAllPosts] = useState([]);
   const [newPost, setNewPost] = useState(false);
   const [loadingFeed, setLoadingFeed] = useState(false);
   const [getSavedPostData, setgetSavedPostData] = useState("");
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
 
   const openPopup = () => {
     setPopupOpen(!popupOpen);
@@ -30,18 +33,22 @@ const Feed = () => {
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
-  const fetchAllPosts = () => {
-    setLoadingFeed(true);
-    getAllPostsAPI()
+  const fetchMorePosts = () => {
+    getAllPostsAPI(page)
       .then(({ data }) => {
-        setAllPosts(data);
+        if (data.length === 0) {
+          setHasMore(false);
+        } else {
+          setAllPosts([...allPosts, ...data]);
+          setPage(page + 1);
+        }
       })
       .catch((err) => {
+        setHasMore(false);
         console.log(err);
-        setAllPosts([]);
-      })
-      .finally(() => setLoadingFeed(false));
+      });
   };
+
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -60,7 +67,7 @@ const Feed = () => {
       setgetSavedPostData(data);
     });
     document.title = "Home | The Capital Hub";
-    fetchAllPosts();
+    fetchMorePosts();
   }, [newPost]);
 
   // Repost
@@ -73,7 +80,7 @@ const Feed = () => {
   const repostInstantly = (resharedPostId) => {
     setRepostLoading({ ...repostLoading, instant: true });
     postUserPost({ resharedPostId })
-      .then(() => fetchAllPosts())
+      .then(() => fetchMorePosts())
       .catch((err) => console.log(err))
       .finally(() => setRepostLoading({ ...repostLoading, instant: false }));
   };
@@ -108,8 +115,16 @@ const Feed = () => {
             </div>
             {/* Posts container - column of <FeedPostCard /> */}
             <div className="Posts__container d-flex flex-column gap-3">
-              {!loadingFeed ? (
-                allPosts?.map(
+              {/* {!loadingFeed ? ( */}
+              <InfiniteScroll
+                dataLength={allPosts.length}
+                next={fetchMorePosts}
+                hasMore={hasMore}
+                loader={<div className="container p-5 text-center my-5 bg-white rounded-5 shadow-sm ">
+                  <SpinnerBS />
+                </div>}
+              >
+                {allPosts?.map(
                   ({
                     description,
                     user: {
@@ -143,7 +158,7 @@ const Feed = () => {
                       documentUrl={documentUrl}
                       createdAt={createdAt}
                       likes={likes}
-                      fetchAllPosts={fetchAllPosts}
+                      fetchAllPosts={fetchMorePosts}
                       response={getSavedPostData}
                       repostWithToughts={(resharedPostId) => {
                         setRepostingPostId(resharedPostId);
@@ -154,12 +169,14 @@ const Feed = () => {
                       resharedPostId={resharedPostId}
                     />
                   )
-                )
-              ) : (
+                )}
+              </InfiniteScroll>
+
+              {/* ) : (
                 <div className="container p-5 text-center my-5 bg-white rounded-5 shadow-sm ">
                   <SpinnerBS />
                 </div>
-              )}
+              )} */}
             </div>
           </div>
           {popupOpen && (
