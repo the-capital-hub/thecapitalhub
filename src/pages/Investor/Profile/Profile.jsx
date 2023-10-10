@@ -279,15 +279,15 @@ function Profile() {
                           </div>
                         </div>
                       </div>
-                      <div className="col-2 col-md-4 col-five">
+                      {/* <div className="col-2 col-md-4 col-five">
                         <div className=" m-4">
                           <button className="connect_btn px-3">
-                            <img src={AddUserIcon} alt="add user" />
+                            <img src={AddUserIcon} alt="add user" /> */}
                             {/* <span className="mx-2 d-none d-md-block"> */}
-                            <span className="mx-2">Connect</span>
+                            {/* <span className="mx-2">Connect</span>
                           </button>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                     <hr className="divider_hr" />
                     <div className="row">
@@ -430,36 +430,6 @@ function Profile() {
                   </div>
                 </div>
               </div>
-              {/* <div className="row">
-                <div className="col-12 mt-2">
-                  <div className=" box personal_information">
-                    <div className="personal_information_header">
-                      <h2 className="typography">Bio</h2>
-                      <button>
-                        Edit <CiEdit />
-                      </button>
-                    </div>
-                    <div className="col-12 mt-2">
-                      <div className="designation_info">
-                        <p className="small_typo">
-                          A little about myself. “Dejection is a sign of failure
-                          but it becomes the cause of success”. I wrote this when
-                          I was 16 years old and that’s exactly when I idealised
-                          the reality of life. In this current world, success is
-                          defined in many ways, some of which include money, fame
-                          and power. I believe that success is just the beginning
-                          of a new problem. Every step of our lives we work hard
-                          to solve an issue and every time we end up with a new
-                          problem.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="col-12 mt-2 designation_see_more">
-                      <Link to={"/"}>See more</Link>
-                    </div>
-                  </div>
-                </div>
-              </div> */}
               <div className="row">
                 <div className="col-12 mt-2">
                   <div className="box personal_information  rounded border shadow-sm">

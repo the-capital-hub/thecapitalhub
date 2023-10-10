@@ -6,8 +6,11 @@ import "./style.scss";
 import LogOutPopUp from "../PopUp/LogOutPopUp/LogOutPopUp";
 import { ModalBSContainer, ModalBSBody, ModalBSHeader } from "../PopUp/ModalBS";
 import NewCommunityModal from "../Investor/ChatComponents/NewCommunityModal";
+import { useSelector } from "react-redux";
 
 function PrivateRoute({ children, ...props }) {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
   const location = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -28,6 +31,9 @@ function PrivateRoute({ children, ...props }) {
   }
 
   if (isLoggedIn()) {
+    if (loggedInUser.investor) {
+      return <Navigate to="/investor/home" replace />;
+    }
     return (
       <>
         <InvestorNavbar
@@ -36,9 +42,8 @@ function PrivateRoute({ children, ...props }) {
         />
 
         <div
-          className={`container-fluid investor_home_container ${
-            sidebarCollapsed ? "sidebar-collapsed" : ""
-          }`}
+          className={`container-fluid investor_home_container ${sidebarCollapsed ? "sidebar-collapsed" : ""
+            }`}
         >
           <LogOutPopUp />
 

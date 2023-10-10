@@ -129,9 +129,9 @@ const Login = () => {
   };
   if (isLoggedIn()) {
     if (loggedInUser.investor) {
-      return <Navigate to="/investor" replace />;
+      return <Navigate to="/investor/home" replace />;
     } else {
-      return <Navigate to="/profile" replace />;
+      return <Navigate to="/home" replace />;
     }
   }
 
