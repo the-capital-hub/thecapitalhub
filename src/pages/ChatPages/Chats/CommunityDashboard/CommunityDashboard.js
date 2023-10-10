@@ -9,6 +9,7 @@ import {
   markMessagesAsRead,
   getStartupByFounderId,
   getCommunityById,
+  deleteMessage
 } from "../../../../Service/user";
 import attachmentGreyIcon from "../../../../Images/Chat/attachtment-grey.svg";
 import attachmentOrangeIcon from "../../../../Images/Chat/attachment-orange.svg";
@@ -18,6 +19,9 @@ import videoIcon from "../../../../Images/Chat/attachVideo.svg";
 import onelinkIcon from "../../../../Images/Chat/Onelink.svg";
 import { getBase64 } from "../../../../utils/getBase64";
 import Linkify from "react-linkify";
+import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import ChatDeletePopup from "../ChatDeletePopup/ChatDeletePopup";
+import ChatDropDownMenu from "../ChatDropDownMenu/ChatDropDownMenu";
 
 const AWS = require("aws-sdk");
 
@@ -36,12 +40,25 @@ const CommunityDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
   const isCommunitySelected = useSelector(
     (state) => state.chat.isCommunitySelected
   );
-
+  const [showFeaturedPostSuccess, setShowFeaturedPostSuccess] = useState(false);
+  const [deletePopup, setDeletePopup] = useState(false);
   const [messages, setMessages] = useState([]);
   const [user, setUser] = useState(null);
   const [sendText, setSendText] = useState("");
   const chatMessagesContainerRef = useRef(null);
   const [isSent, setIsSent] = useState(false);
+  const [msgId, setMsgId] = useState("");
+
+
+
+  const handleSetDeletePopup=()=>{
+    setDeletePopup(true)
+  }
+  const handleIdBack=(data)=>{
+console.log(data)
+setMsgId(data)
+  }
+
 
   useEffect(() => {
     if (chatMessagesContainerRef.current) {
@@ -49,6 +66,20 @@ const CommunityDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
         chatMessagesContainerRef.current.scrollHeight;
     }
   }, [messages, recieveMessage]);
+
+  const hadilDeleteOk = async () => {
+    console.log(msgId);
+    try {
+      const result = await deleteMessage(msgId);
+      console.log("delete message Result:", result);
+      if (result) {
+        setShowFeaturedPostSuccess(true);
+        setDeletePopup(false);
+      }
+    } catch (error) {
+      console.error("Error likeDislike comment : ", error);
+    }
+  };
 
   // useEffect(() => {
   //   markMessagesAsRead(chatId, userId)
@@ -76,7 +107,7 @@ const CommunityDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
       .catch((error) => {
         console.error("Error-->", error);
       });
-  }, [chatId, cleared, isSent]);
+  }, [chatId, cleared, isSent,showFeaturedPostSuccess]);
 
   const [community, setCommunity] = useState([]);
 
@@ -297,6 +328,8 @@ const CommunityDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                       </div>
                       {message.text !== "" && (
                         <div className="mymessage_container">
+
+<ChatDropDownMenu onClicks={handleSetDeletePopup} idBack={handleIdBack} id={message?._id} />
                           <Linkify>
                             <p>{message.text}</p>
                           </Linkify>
@@ -551,6 +584,27 @@ const CommunityDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
           </div>
         </div>
       </section>
+      {deletePopup?<ChatDeletePopup>
+        <div className="d-flex flex-column  justify-content-center ">
+
+        <h1>Delete permeanently</h1>
+        <hr className="p-0 m-1 "/>
+        <p>This message will be Deleted permeanently </p>
+        <div className="d-flex flex-column flex-md-row mx-auto" >
+        <button className="popup-close-button " onClick={() => setDeletePopup(false)}>Cancle</button>
+        <button className="popup-ok_button" onClick={() =>  hadilDeleteOk() }>Ok</button>
+
+        </div>
+        </div>
+      </ChatDeletePopup> :''}
+      
+      {showFeaturedPostSuccess ? (
+
+      <AfterSuccessPopUp
+      onClose={() => setShowFeaturedPostSuccess(false)}
+      successText="The message has been deleted successfully."
+      />
+      ):""}
     </div>
   );
 };

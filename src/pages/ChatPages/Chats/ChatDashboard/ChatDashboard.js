@@ -10,7 +10,6 @@ import {
   getStartupByFounderId,
   deleteMessage,
 } from "../../../../Service/user";
-import ThreeODotIcon from "../../../../Images/ThreeDotIcon.svg";
 
 import attachmentGreyIcon from "../../../../Images/Chat/attachtment-grey.svg";
 import attachmentOrangeIcon from "../../../../Images/Chat/attachment-orange.svg";
@@ -21,7 +20,8 @@ import onelinkIcon from "../../../../Images/Chat/Onelink.svg";
 import { getBase64 } from "../../../../utils/getBase64";
 import Linkify from "react-linkify";
 import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
-import ChatDeletePopup from '../ChatDeletePopup/ChatDeletePopup'
+import ChatDeletePopup from "../ChatDeletePopup/ChatDeletePopup";
+import ChatDropDownMenu from "../ChatDropDownMenu/ChatDropDownMenu";
 
 const AWS = require("aws-sdk");
 
@@ -47,26 +47,37 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
 
   const [showFeaturedPostSuccess, setShowFeaturedPostSuccess] = useState(false);
   const [deletePopup, setDeletePopup] = useState(false);
-  const [msgId, setMsgId] = useState('false');
+  const [msgId, setMsgId] = useState("");
+  const [messageMenu, setMessageMenu] = useState(true);
 
-  const hadilDeleteOk = async() => {
-console.log(msgId)
-try {
-  const result = await deleteMessage(msgId);
-  console.log("delete message Result:", result);
-if(result){
-  setShowFeaturedPostSuccess(true)
-  setDeletePopup(false)
-}
-  
-  
-} catch (error) {
-  console.error("Error likeDislike comment : ", error);
-}
-    
+  const handleMouseEnter = () => {
+    setMessageMenu(false);
+  };
+
+  const handleMouseLeave = () => {
+    setMessageMenu(true);
+  };
+  const handleSetDeletePopup = () => {
+    setDeletePopup(true);
+  };
+  const handleIdBack = (data) => {
+    console.log(data);
+    setMsgId(data);
+  };
+
+  const hadilDeleteOk = async () => {
+    console.log(msgId);
+    try {
+      const result = await deleteMessage(msgId);
+      console.log("delete message Result:", result);
+      if (result) {
+        setShowFeaturedPostSuccess(true);
+        setDeletePopup(false);
+      }
+    } catch (error) {
+      console.error("Error likeDislike comment : ", error);
     }
-  
-
+  };
 
   useEffect(() => {
     if (chatMessagesContainerRef.current) {
@@ -101,7 +112,7 @@ if(result){
       .catch((error) => {
         console.error("Error-->", error);
       });
-  }, [chatId, cleared, isSent , showFeaturedPostSuccess]);
+  }, [chatId, cleared, isSent, showFeaturedPostSuccess]);
 
   useEffect(() => {
     getUserAndStartUpByUserIdAPI(userId)
@@ -328,17 +339,24 @@ if(result){
                         />
                       </div>
                       {message.text !== "" && (
-                       <div className="mymessage_container text-break">
-                       <div className="d-flex justify-content-end py-2">
-                         <button className="btn" onClick={() => { setDeletePopup(true); setMsgId(message?._id); }}>
-                           <img src={ThreeODotIcon} alt="dot" />
-                         </button>
-                       </div>
-                       <Linkify>
-                         <p className="text-break">{message.text}</p>
-                       </Linkify>
-                     </div>
-                     
+                        <div
+                          className="mymessage_container text-break position-relative "
+                          onMouseEnter={handleMouseEnter}
+                          onMouseLeave={handleMouseLeave}
+                        >
+
+                            <ChatDropDownMenu
+                            
+                              onClicks={handleSetDeletePopup}
+                              idBack={handleIdBack}
+                              id={message?._id}
+                              showMenu={messageMenu}
+                            />
+                    
+                          <Linkify>
+                            <p className="text-break">{message.text} </p>
+                          </Linkify>
+                        </div>
                       )}
                       {message?.image && (
                         <div className="mymessage_container">
@@ -593,27 +611,40 @@ if(result){
           </div>
         </div>
       </section>
-      {deletePopup?<ChatDeletePopup>
-        <div className="d-flex flex-column  justify-content-center ">
+      {deletePopup ? (
+        <ChatDeletePopup>
+          <div className="d-flex flex-column  justify-content-center ">
+            <h1>Delete permanently</h1>
+            <hr className="p-0 m-1 " />
+            <p>This message will be Deleted permeanently </p>
+            <div className="d-flex flex-column flex-md-row mx-auto">
+              <button
+                className="popup-close-button "
+                onClick={() => setDeletePopup(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="popup-ok_button"
+                onClick={() => hadilDeleteOk()}
+              >
+                Ok
+              </button>
+            </div>
+          </div>
+        </ChatDeletePopup>
+      ) : (
+        ""
+      )}
 
-        <h1>Delete permeanently</h1>
-        <hr className="p-0 m-1 "/>
-        <p>This message will be Deleted permeanently </p>
-        <div className="d-flex flex-column flex-md-row mx-auto" >
-        <button className="popup-close-button " onClick={() => setDeletePopup(false)}>Cancle</button>
-        <button className="popup-ok_button" onClick={() =>  hadilDeleteOk() }>Ok</button>
-
-        </div>
-        </div>
-      </ChatDeletePopup> :''}
-      
       {showFeaturedPostSuccess ? (
-
-      <AfterSuccessPopUp
-      onClose={() => setShowFeaturedPostSuccess(false)}
-      successText="The message has been deleted successfully."
-      />
-      ):""}
+        <AfterSuccessPopUp
+          onClose={() => setShowFeaturedPostSuccess(false)}
+          successText="The message has been deleted successfully."
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
