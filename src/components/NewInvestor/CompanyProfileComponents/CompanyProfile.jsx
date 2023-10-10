@@ -104,7 +104,7 @@ export default function CompanyProfile({
 
       <div className="company__section__two d-flex flex-column gap-4 pt-3 pb-5 px-5">
         <PublicLinks socialLinks={socialLinks} />
-        <Feedback />
+        {/* <Feedback /> */}
         <FoundingTeam isOnelink={isOnelink} team={team} />
         <KeyFocus tags={tags} />
       </div>

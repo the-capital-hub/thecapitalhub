@@ -233,10 +233,10 @@ export const addMyInterest = async (investorId, data) => {
 export const getOnePager = async (oneLink) => {
   try {
     const investor = await InvestorModel.findOne({oneLink: oneLink})
-    // .populate({
-    //   path: 'founderId',
-    //   model: 'Users', 
-    // });
+    .populate({
+      path: 'founderId',
+      model: 'Users', 
+    });
     if (!investor) {
       return {
         status: 404,

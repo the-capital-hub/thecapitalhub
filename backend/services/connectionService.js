@@ -32,7 +32,7 @@ export const sendConnectionRequest = async (senderId, receiverId) => {
       { $push: { connectionsReceived: connection.sender } }
     );
     const type = "connectionRequest";
-    await addNotification(receiverId, senderId, type);
+    await addNotification(receiverId, senderId, type, null, connection._id);
     return {
       status: 200,
       message: "Connection Request Sent",
@@ -158,7 +158,7 @@ export const acceptConnectionRequest = async (connectionId) => {
       { $push: { connections: connection.sender } }
     );
     const type = "connectionAccepted";
-    await addNotification(connection.sender, connection.receiver, type);
+    await addNotification(connection.sender, connection.receiver, type, null, connection._id);
     return {
       status: 200,
       message: "Connection Accepted",
