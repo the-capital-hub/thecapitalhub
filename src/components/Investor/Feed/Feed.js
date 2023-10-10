@@ -63,8 +63,6 @@ const Feed = () => {
     fetchAllPosts();
   }, [newPost]);
 
-  console.log(allPosts?.[0]);
-
   // Repost
   const [repostLoading, setRepostLoading] = useState({
     instant: false,

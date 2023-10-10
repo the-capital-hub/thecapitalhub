@@ -102,8 +102,8 @@ const FeedPostCard = ({
     // setShowUnsaveSuccess(true);
     // setTimeout(() => {
     //   setShowUnsaveSuccess(false);
-      const updatedSavedPostId = savedPostId.filter((id) => id !== postId);
-      setSavedPostId(updatedSavedPostId);
+    const updatedSavedPostId = savedPostId.filter((id) => id !== postId);
+    setSavedPostId(updatedSavedPostId);
     // }, 2500);
   };
 
@@ -111,7 +111,7 @@ const FeedPostCard = ({
     // setShowSuccess(true);
     // setTimeout(() => {
     //   setShowSuccess(false);
-      setSavedPostId([...savedPostId, postId]);
+    setSavedPostId([...savedPostId, postId]);
     // }, 2500);
   };
 
@@ -149,7 +149,6 @@ const FeedPostCard = ({
       const result = await toggleLikeComment(postId, commentId);
       console.log("Toggle Like Result:", result);
 
-      
       const response = await getPostComment({ postId });
       setComments(response.data.data);
     } catch (error) {
@@ -233,7 +232,7 @@ const FeedPostCard = ({
         console.log("response", res.data.data);
         setComments(res.data.data);
       });
-        } catch (error) {
+    } catch (error) {
       console.log("Error deleting comment : ", error);
     }
   };
@@ -246,7 +245,9 @@ const FeedPostCard = ({
   const deletePost = async (postId) => {
     try {
       await deletePostAPI(postId);
-      await fetchAllPosts();
+      if (fetchAllPosts) {
+        await fetchAllPosts();
+      }
     } catch (error) {
       console.log("Error deleting post : ", error);
     }
@@ -324,7 +325,7 @@ const FeedPostCard = ({
                     }}
                   >
                     <img src={HomeIcon} alt="logo" />
-                    {designation}, {loggedInUser.startUp.company}
+                    {designation}, {loggedInUser?.startUp?.company}
                   </span>
                   <span
                     style={{

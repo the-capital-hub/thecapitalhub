@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react";
 import { Route } from "react-router-dom";
 import PrivateRoute from "../components/Routes/PrivateRoutes";
+import SinglePost from "../components/SinglePost/SinglePost";
 
 const InvestorHome = lazy(() =>
   import("../components/Investor/InvestorHome/InvestorHome")
@@ -225,6 +226,14 @@ function StartUpRoutes() {
         element={
           <Suspense fallback={<p>Loading...</p>}>
             <EditCompanyProfilePage />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/posts/:_id"
+        element={
+          <Suspense fallback={<p>Loading...</p>}>
+            <SinglePost />
           </Suspense>
         }
       />
