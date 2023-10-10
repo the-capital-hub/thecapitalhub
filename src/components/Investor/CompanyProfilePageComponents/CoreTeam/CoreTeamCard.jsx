@@ -14,8 +14,8 @@ export default function CoreTeamCard({ image, name, designation }) {
         className="rounded-circle"
         loading="lazy"
       />
-      <h5 className="text-capitalize text-break">{name}</h5>
-      <p className="text-capitalize text-break">{designation}</p>
+      <h5 className="text-capitalize text-center text-break">{name}</h5>
+      <p className="text-capitalize text-center text-break">{designation}</p>
     </div>
   );
 }

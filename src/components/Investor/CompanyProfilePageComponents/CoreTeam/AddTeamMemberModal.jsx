@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import { BsFillCameraFill } from "react-icons/bs";
-import { postStartUpData, uploadLogo } from "../../../../Service/user";
+import {
+  getStartupByFounderId,
+  postStartUpData,
+  uploadLogo,
+} from "../../../../Service/user";
 import { getBase64 } from "../../../../utils/getBase64";
+import IconEdit from "../../SvgIcons/IconEdit";
+import IconDeleteFill from "../../SvgIcons/IconDeleteFill";
 
 export default function AddTeamMemberModal({ companyData, setCompanyData }) {
   const [member, setMember] = useState({ name: "", designation: "" });
   const [selectedFile, setSelectedFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+
+  // Fetch current core team members here
+  const { team: currentTeam } = companyData;
+  // console.log(currentTeam);
 
   // handleChange
   function handleInputChange(e) {
@@ -68,81 +79,150 @@ export default function AddTeamMemberModal({ companyData, setCompanyData }) {
       console.log(response);
       setMember({ name: "", designation: "" });
       setSelectedFile(null);
+      setIsEditing(false);
     } catch (error) {
       console.error("Error adding team member:", error);
     }
   };
 
+  // Handle select click
+  function handleSelectClick(e, member) {
+    setIsEditing(true);
+    setMember(member);
+    setImagePreview(member.image);
+  }
+
+  // Handle Delete click
+  function handleDeleteClick(e, member) {
+    let response = window.confirm(
+      `Are you sure you want to remove "${member.name}" from your Team?`
+    );
+    if (response) {
+    }
+  }
+
   return (
-    <form
-      onSubmit={handleAddTeamMember}
-      className="d-flex flex-column gap-4 p-4"
-    >
-      {/* Profile picture input */}
-      <div className="mx-auto">
-        <input
-          type="file"
-          name="image"
-          id="image"
-          accept="image/*"
-          className="visually-hidden"
-          onChange={handleFileChange}
-        />
-        <label htmlFor="image" className="upload__label">
-          {imagePreview ? (
-            <img
-              src={imagePreview}
-              alt="Selected"
-              className="preview-image"
-            />
-          ) : (
-            <BsFillCameraFill
-              style={{
-                fontSize: "1.5rem",
-                color: "rgba(253, 89, 1,1)",
-              }}
-            />
-          )}
-        </label>
-      </div>
-      {/* {imagePreview && (
-        <div className="image-preview">
-          <img src={imagePreview} alt="Selected" />
+    <div className="team_member_modal d-flex gap-4 justify-content-around py-3">
+      {/* Edit/Remove modal */}
+
+      <div className="edit_remove_team d-flex flex-column gap-3 overflow-y-auto py-3">
+        <h5 className="m-0 text-center">Select member to edit</h5>
+        <div className="d-flex flex-column gap-3">
+          {/* Loop current team member here */}
+          {currentTeam
+            ? currentTeam.map((member, index) => {
+                return (
+                  <div
+                    className="d-flex align-items-center justify-content-around p-2 bg-light rounded-3"
+                    key={`${member.name}${index}`}
+                  >
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        objectFit: "cover",
+                      }}
+                      className="rounded-circle"
+                    />
+                    <h6 className="m-0 flex-grow-1 text-center" style={{}}>
+                      {member.name}
+                    </h6>
+                    <div className="d-flex gap-2">
+                      <button
+                        className="modal_edit_btn"
+                        onClick={(e) => handleSelectClick(e, member, index)}
+                      >
+                        <IconEdit />
+                      </button>
+                      <button
+                        className="modal_delete_btn"
+                        onClick={(e) => handleDeleteClick(e, member, index)}
+                      >
+                        <IconDeleteFill />
+                      </button>
+                    </div>
+                  </div>
+                );
+              })
+            : ""}
         </div>
-      )} */}
-
-      {/* Name input */}
-      <div className="">
-        <input
-          type="text"
-          name="name"
-          id="name"
-          placeholder="Enter Name"
-          value={member.name}
-          className="modal__input p-2 rounded-2 w-100"
-          onChange={handleInputChange}
-        />
       </div>
 
-      {/* Designation input */}
-      <div className="">
-        <input
-          type="text"
-          name="designation"
-          id="designation"
-          placeholder="Enter Designation"
-          value={member.designation}
-          className="modal__input p-2 rounded-2 w-100"
-          onChange={handleInputChange}
-        />
+      {/* Add modal */}
+      <div className="add_team d-flex flex-column gap-3 bg-light rounded-3 shadow-sm py-3">
+        <h5 className="m-0 text-center">Add new Member</h5>
+
+        <form
+          onSubmit={handleAddTeamMember}
+          className="d-flex flex-column gap-4 p-4"
+        >
+          {/* Profile picture input */}
+          <div className="mx-auto">
+            <input
+              type="file"
+              name="image"
+              id="image"
+              accept="image/*"
+              className="visually-hidden"
+              onChange={handleFileChange}
+            />
+            <label htmlFor="image" className="upload__label">
+              {imagePreview ? (
+                <img
+                  src={imagePreview}
+                  alt="Selected"
+                  className="preview-image"
+                />
+              ) : (
+                <BsFillCameraFill
+                  style={{
+                    fontSize: "1.5rem",
+                    color: "rgba(253, 89, 1,1)",
+                  }}
+                />
+              )}
+            </label>
+          </div>
+          {/* {imagePreview && (
+            <div className="image-preview">
+              <img src={imagePreview} alt="Selected" />
+            </div>
+          )} */}
+          {/* Name input */}
+          <div className="">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Enter Name"
+              value={member.name}
+              className="modal__input p-2 rounded-2 w-100"
+              onChange={handleInputChange}
+            />
+          </div>
+          {/* Designation input */}
+          <div className="">
+            <input
+              type="text"
+              name="designation"
+              id="designation"
+              placeholder="Enter Designation"
+              value={member.designation}
+              className="modal__input p-2 rounded-2 w-100"
+              onChange={handleInputChange}
+            />
+          </div>
+          <button
+            className="orange_button"
+            onClick={handleAddTeamMember}
+            data-bs-dismiss="modal"
+          >
+            {isEditing ? "Update" : "Add"}
+          </button>
+        </form>
       </div>
-      <button
-        className="orange_button"
-        onClick={handleAddTeamMember}
-        data-bs-dismiss="modal"
-      >
-        Add
-      </button>
-    </form>
+    </div>
   );
 }
