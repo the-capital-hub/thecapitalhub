@@ -8,12 +8,13 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import { environment } from "../../../environments/environment";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { findChat, createChat } from "../../../Service/user";
 import CommunitiesContainer from "../../../components/Investor/ChatComponents/CommunitiesContainer";
 import ChatSettings from "../../../components/Investor/ChatComponents/ChatSettings/ChatSettings";
 import CommunityDashboard from "./CommunityDashboard/CommunityDashboard";
 import { setChatId, setUserId } from "../../../Store/features/chat/chatSlice";
+import backIcon from "../../../Images/Chat/BackIcon.svg";
 
 import selectAChatIcon from "../../../Images/Chat/selectAChat.png";
 
@@ -23,6 +24,7 @@ const Chats = () => {
   const searchParams = new URLSearchParams(location.search);
   // const userId = searchParams.get("userId" );
   const isCommunityOpen = searchParams.get("isCommunityOpen");
+  const navigate = useNavigate();
 
   // Fetch global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -132,6 +134,14 @@ const Chats = () => {
         {/* Left section */}
         <div className="left_section_wrapper mt-3 mx-3">
           <section className="left_section pe-1 ">
+            <span className="back_img rounded-circle shadow-sm" title="Go Back">
+              <img
+                src={backIcon}
+                width={20}
+                height={20}
+                onClick={() => navigate(-1)}
+              />
+            </span>
             <ChatSearch />
             <CommunitiesContainer isCommunityOpen={isCommunityOpen} />
             <ChatSidebar
