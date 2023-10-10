@@ -293,7 +293,8 @@ const FeedPostCard = ({
           }`}
         >
           {/* Post Header */}
-          <div className="feed_header_container border-2 border-bottom mb-3 pb-2">
+          {/* <div className="feed_header_container border-2 border-bottom mb-3 pb-2"> */}
+          <div className="feed_header_container pb-2">
             <div className="feedpostcard_content">
               {/* Poster's Profile Picture */}
               <Link to={`/user/${userId}`} className="rounded-circle">
