@@ -48,6 +48,14 @@
           align-items: center;
           left: 1.5%;
 
+          &.startup {
+            background-color: #fd5901;
+          }
+
+          &.investor {
+            background-color: rgb(211, 243, 107);
+          }
+
           svg {
             /* Add any styling for the SVG image on the left */
           }

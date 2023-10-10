@@ -15,6 +15,7 @@ import AddModalContent from "../../../components/NewInvestor/MyStartupsComponent
 import EditModalContent from "../../../components/NewInvestor/MyStartupsComponents/EditModalContent";
 import { getInvestorById } from "../../../Service/user";
 import { useSelector } from "react-redux";
+import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 // Mock data for my investments
 // const investmentsData = [
@@ -68,7 +69,7 @@ const MyStartUp = () => {
   }, [loggedInUser]);
 
   return (
-    <>
+    <MaxWidthWrapper>
       <div className="container-fluid mystartup_main_container">
         <SmallProfileCard text={"My Startup"} />
         <div className="row mt-2 m-3">
@@ -106,7 +107,7 @@ const MyStartUp = () => {
             <ModalBSContainer id={"myInvestmentsAddModal"} isStatic={false}>
               <ModalBSHeader title={"Add new Investment"} />
               <ModalBSBody>
-                <AddModalContent setInvestedStartups={setInvestedStartups}/>
+                <AddModalContent setInvestedStartups={setInvestedStartups} />
               </ModalBSBody>
             </ModalBSContainer>
 
@@ -119,7 +120,11 @@ const MyStartUp = () => {
             >
               <ModalBSHeader title={"Edit Investments"} />
               <ModalBSBody>
-                <EditModalContent dataArray={investedStartups} key={"investments"} setInvestedStartups={setInvestedStartups}/>
+                <EditModalContent
+                  dataArray={investedStartups}
+                  key={"investments"}
+                  setInvestedStartups={setInvestedStartups}
+                />
               </ModalBSBody>
             </ModalBSContainer>
 
@@ -162,7 +167,7 @@ const MyStartUp = () => {
             <ModalBSContainer id={"myInterestsAddModal"} isStatic={false}>
               <ModalBSHeader title={"Add new Interest"} />
               <ModalBSBody>
-                <AddModalContent isInterests setMyInterests={setMyInterests}/>
+                <AddModalContent isInterests setMyInterests={setMyInterests} />
               </ModalBSBody>
             </ModalBSContainer>
 
@@ -175,7 +180,11 @@ const MyStartUp = () => {
             >
               <ModalBSHeader title={"Edit Interests"} />
               <ModalBSBody>
-                <EditModalContent dataArray={myInterests} isInterests={true} setMyInterests={setMyInterests}/>
+                <EditModalContent
+                  dataArray={myInterests}
+                  isInterests={true}
+                  setMyInterests={setMyInterests}
+                />
               </ModalBSBody>
             </ModalBSContainer>
           </div>
@@ -218,7 +227,7 @@ const MyStartUp = () => {
           </div>
         </div>
       </div>
-    </>
+    </MaxWidthWrapper>
   );
 };
 

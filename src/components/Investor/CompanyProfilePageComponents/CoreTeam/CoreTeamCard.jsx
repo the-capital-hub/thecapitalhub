@@ -1,9 +1,10 @@
 import React from "react";
+import "./CoreTeamCard.scss";
 
 export default function CoreTeamCard({ image, name, designation }) {
   return (
     <div
-      className="p-4 d-flex flex-column align-items-center gap-3 rounded-5"
+      className="p-4 d-flex flex-column align-items-center gap-3 rounded-5 core_team_card"
       style={{ backgroundColor: "#EDEDED" }}
     >
       <img
@@ -13,8 +14,8 @@ export default function CoreTeamCard({ image, name, designation }) {
         className="rounded-circle"
         loading="lazy"
       />
-      <h5 className="text-capitalize">{name}</h5>
-      <p className="text-capitalize">{designation}</p>
+      <h5 className="text-capitalize text-break">{name}</h5>
+      <p className="text-capitalize text-break">{designation}</p>
     </div>
   );
 }

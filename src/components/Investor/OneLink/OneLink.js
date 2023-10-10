@@ -14,18 +14,16 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { getStartupByFounderId } from "../../../Service/user";
 import SharingOneLinkPopUp from "../../PopUp/SharingOneLinkPopUp/SharingOneLinkPopUp";
+import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 const OneLink = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   console.log(loggedInUser);
   const userId = loggedInUser._id;
   const [isExitClicked, setIsExitClicked] = useState(false);
-
-  const handleExitClick = () => {
-    console.log("Clilc");
-    setIsExitClicked(true);
-  };
   const [company, setCompany] = useState([]);
+
+  // Fetch data by userId
   useEffect(() => {
     document.title = "One Link | The Capital Hub";
     getStartupByFounderId(userId)
@@ -35,12 +33,19 @@ const OneLink = () => {
       .catch(() => setCompany([]));
   }, [userId]);
 
+  // HandleExitClick
+  const handleExitClick = () => {
+    console.log("Clilc");
+    setIsExitClicked(true);
+  };
+
   const handleClosePopup = () => {
     setIsExitClicked(false);
     // navigate("/login");
   };
+
   return (
-    <div className="container-fluid ">
+    <MaxWidthWrapper>
       <div className="onelink_container">
         <div className="onelink_intro_container mt-sm-4 mt-md-2 mt-xxl-2">
           <div className="main__content">
@@ -75,7 +80,7 @@ const OneLink = () => {
           />
         )}
       </div>
-    </div>
+    </MaxWidthWrapper>
   );
 };
 

@@ -15,6 +15,7 @@ import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
 import { useLocation } from "react-router-dom";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
+import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 const Feed = () => {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -80,105 +81,105 @@ const Feed = () => {
   };
 
   return (
-    <div className="container mx-auto feed_container">
-      <div className="main_content">
-        <div className="Posts__column d-flex flex-column gap-4">
-          {/* Small Profile Card */}
-          <SmallProfileCard className="d-none d-md-block" text={"Home"} />
-
-          {/* Write a Post */}
-          <div className="bg-white rounded-5 start_post_container">
-            <img
-              src={loggedInUser.profilePicture}
-              alt="Image"
-              className="rounded-circle"
-              style={{ width: "50px", height: "50px" }}
-            />
-            <div
-              className="w-auto flex-grow-1 me-4"
-              onClick={openPopup}
-              style={{ cursor: "pointer" }}
-            >
-              <input
-                className="px-3 flex-grow-1"
-                type="text"
-                placeholder="Write a post..."
-                style={{ pointerEvents: "none" }}
+    <MaxWidthWrapper>
+      <div className=" feed_container">
+        <div className="main_content">
+          <div className="Posts__column d-flex flex-column gap-4">
+            {/* Small Profile Card */}
+            <SmallProfileCard className="d-none d-md-block" text={"Home"} />
+            {/* Write a Post */}
+            <div className="bg-white rounded-5 start_post_container">
+              <img
+                src={loggedInUser.profilePicture}
+                alt="Image"
+                className="rounded-circle"
+                style={{ width: "50px", height: "50px" }}
               />
+              <div
+                className="w-auto flex-grow-1 me-4"
+                onClick={openPopup}
+                style={{ cursor: "pointer" }}
+              >
+                <input
+                  className="px-3 flex-grow-1"
+                  type="text"
+                  placeholder="Write a post..."
+                  style={{ pointerEvents: "none" }}
+                />
+              </div>
+            </div>
+            {/* Posts container - column of <FeedPostCard /> */}
+            <div className="Posts__container d-flex flex-column gap-3">
+              {!loadingFeed ? (
+                allPosts?.map(
+                  ({
+                    description,
+                    user: {
+                      firstName,
+                      lastName,
+                      designation,
+                      profilePicture,
+                      _id: userId,
+                    },
+                    video,
+                    image,
+                    documentUrl,
+                    documentName,
+                    createdAt,
+                    likes,
+                    _id,
+                    resharedPostId,
+                  }) => (
+                    <FeedPostCard
+                      key={Math.random()}
+                      userId={userId}
+                      postId={_id}
+                      designation={designation}
+                      profilePicture={profilePicture}
+                      description={description}
+                      firstName={firstName}
+                      lastName={lastName}
+                      video={video}
+                      image={image}
+                      documentName={documentName}
+                      documentUrl={documentUrl}
+                      createdAt={createdAt}
+                      likes={likes}
+                      fetchAllPosts={fetchAllPosts}
+                      response={getSavedPostData}
+                      repostWithToughts={(resharedPostId) => {
+                        setRepostingPostId(resharedPostId);
+                        openPopup();
+                      }}
+                      repostInstantly={repostInstantly}
+                      repostLoading={repostLoading}
+                      resharedPostId={resharedPostId}
+                    />
+                  )
+                )
+              ) : (
+                <div className="container p-5 text-center my-5 bg-white rounded-5 shadow-sm ">
+                  <SpinnerBS />
+                </div>
+              )}
             </div>
           </div>
-
-          {/* Posts container - column of <FeedPostCard /> */}
-          <div className="Posts__container d-flex flex-column gap-3">
-            {!loadingFeed ? (
-              allPosts?.map(
-                ({
-                  description,
-                  user: {
-                    firstName,
-                    lastName,
-                    designation,
-                    profilePicture,
-                    _id: userId,
-                  },
-                  video,
-                  image,
-                  documentUrl,
-                  documentName,
-                  createdAt,
-                  likes,
-                  _id,
-                  resharedPostId,
-                }) => (
-                  <FeedPostCard
-                    key={Math.random()}
-                    userId={userId}
-                    postId={_id}
-                    designation={designation}
-                    profilePicture={profilePicture}
-                    description={description}
-                    firstName={firstName}
-                    lastName={lastName}
-                    video={video}
-                    image={image}
-                    documentName={documentName}
-                    documentUrl={documentUrl}
-                    createdAt={createdAt}
-                    likes={likes}
-                    fetchAllPosts={fetchAllPosts}
-                    response={getSavedPostData}
-                    repostWithToughts={(resharedPostId) => {
-                      setRepostingPostId(resharedPostId);
-                      openPopup();
-                    }}
-                    repostInstantly={repostInstantly}
-                    repostLoading={repostLoading}
-                    resharedPostId={resharedPostId}
-                  />
-                )
-              )
-            ) : (
-              <div className="container p-5 text-center my-5 bg-white rounded-5 shadow-sm ">
-                <SpinnerBS />
-              </div>
-            )}
-          </div>
+          {popupOpen && (
+            <CreatePostPopUp
+              setPopupOpen={setPopupOpen}
+              popupOpen
+              setNewPost={setNewPost}
+              respostingPostId={respostingPostId}
+            />
+          )}
         </div>
-        {popupOpen && (
-          <CreatePostPopUp
-            setPopupOpen={setPopupOpen}
-            popupOpen
-            setNewPost={setNewPost}
-            respostingPostId={respostingPostId}
-          />
-        )}
+        <div className="right_content">
+          <RightProfileCard />
+          <RecommendationCard />
+          <NewsCorner />
+        </div>
       </div>
-      <div className="right_content">
-        <RightProfileCard />
-        <RecommendationCard />
-        <NewsCorner />
-      </div>
-    </div>
+    </MaxWidthWrapper>
   );
 };
 

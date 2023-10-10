@@ -8,6 +8,7 @@ import "../Syndicates/Syndicates.scss";
 import "./LiveDeals.scss";
 import DealsCompany from "../../../components/NewInvestor/LiveDealsComponents/DealsCompany";
 import ComingSoon from "../../../components/ComingSoon/ComingSoon";
+import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 const companies = [
   {
@@ -40,18 +41,20 @@ export default function LiveDeals() {
   // Fetch companies data here.
 
   return (
-    <div className="liveDeals__container px-3 border-start">
-      <div className="pb-4 pt-2">
-        <SmallProfileCard text="Live Deals" />
-      </div>
-      <ComingSoon titleColor={"green"} />
-      {/* <section className="section__wrapper">
-        <div className="deals__company__container d-flex flex-column gap-4">
-          {companies.map((company) => {
-            return <DealsCompany company={company} key={company.name} />;
-          })}
+    <MaxWidthWrapper>
+      <div className="liveDeals__container px-3 border-start">
+        <div className="pb-4 pt-2">
+          <SmallProfileCard text="Live Deals" />
         </div>
-      </section> */}
-    </div>
+        <ComingSoon titleColor={"green"} />
+        {/* <section className="section__wrapper">
+          <div className="deals__company__container d-flex flex-column gap-4">
+            {companies.map((company) => {
+              return <DealsCompany company={company} key={company.name} />;
+            })}
+          </div>
+        </section> */}
+      </div>
+    </MaxWidthWrapper>
   );
 }

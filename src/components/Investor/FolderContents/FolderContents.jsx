@@ -3,6 +3,7 @@ import "./FolderContents.scss";
 import { useParams } from "react-router-dom";
 import HalfbendCard from "../InvestorGlobalCards/Documentation/HalfbendCard/HalfbendCard";
 import { getUserById } from "../../../Service/user";
+import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 const FolderContents = () => {
   const { route } = useParams();
@@ -19,10 +20,12 @@ const FolderContents = () => {
   const title = route[0].toUpperCase() + route.slice(1);
   console.log(route);
   return (
-    <div className="folderContents">
-      <h1>{title}</h1>
-      <HalfbendCard folderName={route} userId={user?._id} />
-    </div>
+    <MaxWidthWrapper>
+      <div className="folderContents">
+        <h1>{title}</h1>
+        <HalfbendCard folderName={route} userId={user?._id} />
+      </div>
+    </MaxWidthWrapper>
   );
 };
 
