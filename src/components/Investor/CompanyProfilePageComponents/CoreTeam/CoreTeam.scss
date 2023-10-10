@@ -88,4 +88,24 @@
       width: 2rem;
     }
   }
+
+  .modal_delete_btn {
+    outline: none;
+    border: none;
+    background-color: #555;
+    padding: 0.5em;
+    border-radius: 10px;
+    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.2);
+
+    &:active {
+      box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.2) inset;
+    }
+
+    svg {
+      fill: white;
+      // stroke: #fafafa;
+      height: 1.5rem;
+      width: 2rem;
+    }
+  }
 }
