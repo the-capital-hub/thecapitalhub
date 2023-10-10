@@ -10,6 +10,6 @@ const router = express.Router();
 router.use(authenticateToken);
 
 router.get("/getNotification/:userId", getNotificationsByUserIdController);
-router.get("/markMessageAsRead/:messageId", markMessageAsReadController);
+router.patch("/markMessageAsRead/:messageId", markMessageAsReadController);
 
 export default router;
