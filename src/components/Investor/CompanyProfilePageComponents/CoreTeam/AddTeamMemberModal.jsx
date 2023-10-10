@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { BsFillCameraFill } from "react-icons/bs";
-import { postStartUpData, uploadLogo } from "../../../../Service/user";
+import {
+  getStartupByFounderId,
+  postStartUpData,
+  uploadLogo,
+} from "../../../../Service/user";
 import { getBase64 } from "../../../../utils/getBase64";
 import IconEdit from "../../SvgIcons/IconEdit";
 
@@ -10,6 +14,7 @@ export default function AddTeamMemberModal({ companyData, setCompanyData }) {
   const [imagePreview, setImagePreview] = useState(null);
 
   // Fetch current core team members here
+  const { team: currentTeam } = companyData;
 
   // handleChange
   function handleInputChange(e) {
@@ -76,6 +81,9 @@ export default function AddTeamMemberModal({ companyData, setCompanyData }) {
     }
   };
 
+  // Handle select click
+  function handleSelectClick(e) {}
+
   return (
     <div className="team_member_modal d-flex gap-4 justify-content-around py-3">
       {/* Edit/Remove modal */}
@@ -84,18 +92,27 @@ export default function AddTeamMemberModal({ companyData, setCompanyData }) {
         <h5 className="m-0 text-center">Select member to edit</h5>
         <div className="d-flex flex-column gap-3">
           {/* Loop current team member here */}
-          <div className="d-flex align-items-center justify-content-around p-2 bg-light rounded-3">
-            <img
-              src=""
-              alt=""
-              style={{ width: "50px", height: "50px", objectFit: "cover" }}
-              className="rounded-circle"
-            />
-            <h6 className="m-0">Name</h6>
-            <button className="modal_edit_btn">
-              <IconEdit />
-            </button>
-          </div>
+          {currentTeam.map((member, index) => {
+            return (
+              <div
+                className="d-flex align-items-center justify-content-around p-2 bg-light rounded-3"
+                key={`${member.name}${index}`}
+              >
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  style={{ width: "50px", height: "50px", objectFit: "cover" }}
+                  className="rounded-circle"
+                />
+                <h6 className="m-0 flex-grow-1 text-center" style={{}}>
+                  {member.name}
+                </h6>
+                <button className="modal_edit_btn" onClick={handleSelectClick}>
+                  <IconEdit />
+                </button>
+              </div>
+            );
+          })}
         </div>
       </div>
 
