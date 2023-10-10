@@ -3,6 +3,7 @@ import searchIconBlack from "../../../Images/navbar/Search.svg";
 import Logo from "../../../Images/investorIcon/Logo.svg";
 import NotificationIcon from "../../../Images/investorIcon/notification.svg";
 import MessageIcon from "../../../Images/investorIcon/message.svg";
+import OrangeNotificationIcon from "../../../Images/investorIcon/OrangeNotificationIcon.svg";
 import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
 import HambergerIcon from "../../../Images/Hamberger.svg";
 import HambergerCrossIcon from "../../../Images/investorsidebar/FontX.svg";
@@ -11,6 +12,8 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
 import { getSearchResultsAPI } from "../../../Service/user";
+import NotificationsPopup from "./NotificationsPopup/NotificationsPopup";
+import { useRef } from "react";
 
 const InvestorNavbar = (props) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -19,11 +22,13 @@ const InvestorNavbar = (props) => {
   const [searchInput, setSearchInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [inputOnFocus, setInputOnFocus] = useState(false);
+  const [toggleNotificationPopup, setToggleNotificationPopup] = useState(false);
+  const notificationPopup = useRef();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    let url = window.location.href;
+    let url = window.location.href; 
     if (window.location.href.includes("?")) {
       url = url.split("?")[0];
     }
@@ -47,6 +52,21 @@ const InvestorNavbar = (props) => {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        notificationPopup.current &&
+        !notificationPopup.current.contains(event.target)
+      ) {
+        setToggleNotificationPopup(false);
+      }
+    }
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [toggleNotificationPopup]);
 
   const searchSubmitHandler = (e) => {
     if (e) e.preventDefault();
@@ -302,14 +322,35 @@ const InvestorNavbar = (props) => {
                 )}
               </div>
 
-              <Link
+              {/* <Link
                 to="/notifications"
                 className="rounded-circle notification-icon"
+              > */}
+              <div
+                className={`notification-container icon-wrapper`}
+                ref={notificationPopup}
               >
-                <div className="icon-wrapper">
-                  <img src={NotificationIcon} alt="notification" />
-                </div>
-              </Link>
+                {!toggleNotificationPopup ? (
+                  <img
+                    src={NotificationIcon}
+                    alt="notification"
+                    onClick={() => setToggleNotificationPopup((prev) => !prev)}
+                  />
+                ) : (
+                  <img
+                    src={OrangeNotificationIcon}
+                    alt="notification"
+                    width={50}
+                    onClick={() => setToggleNotificationPopup((prev) => !prev)}
+                  />
+                )}
+                {toggleNotificationPopup && (
+                  <NotificationsPopup
+                    toggleVisibility={setToggleNotificationPopup}
+                  />
+                )}
+              </div>
+              {/* </Link> */}
               <Link to="/chats" className="rounded-circle message-icon">
                 <div className="icon-wrapper">
                   <img src={MessageIcon} alt="message" />

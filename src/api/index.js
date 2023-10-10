@@ -66,7 +66,8 @@ const API = Object.freeze({
   unsavePost: `${baseUrl}/api/posts/unsavePost`,
   removeFromFeaturedPost: `${baseUrl}/api/posts/removeFromFeaturedPost`,
   deleteMessage: `${baseUrl}/message/deleteMessage`,
-
+  getNotifications: `${baseUrl}/notificaton/getNotification`,
+  markNotificationAsRead: `${baseUrl}/notificaton/markMessageAsRead`,
 });
 
 export default API;

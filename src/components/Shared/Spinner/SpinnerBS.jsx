@@ -4,9 +4,10 @@ export default function SpinnerBS({
   colorClass,
   spinnerClass = "spinner-border",
   spinnerSizeClass = " ",
+  className,
 }) {
   return (
-    <div className="">
+    <div className={className}>
       <div
         className={`${spinnerClass} ${spinnerSizeClass} ${colorClass}`}
         role="status"
