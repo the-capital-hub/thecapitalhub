@@ -8,6 +8,13 @@
     .image_name_section {
       display: flex;
       align-items: center;
+      justify-content: space-around;
+      // flex-direction: column;
+      gap: 0.5em;
+
+      @media (min-width: 768px) {
+        justify-content: flex-start;
+      }
 
       &.mt-2 {
         margin-top: 2rem;
@@ -80,7 +87,7 @@
     }
 
     .company_details_logo_container {
-      height: 105px;
+      height: 150px;
       width: 150px;
       border-radius: 50%;
       // background: #f6f6f6;
@@ -161,7 +168,7 @@
           width: 62px;
 
           img {
-            height: 40px;
+            height: 60px;
             width: 60px;
           }
         }
@@ -244,7 +251,7 @@
 @media (max-width: 1025px) {
   .company_details_container {
     .company_details {
-      width: 100%;
+      // width: 100%;
 
       .image_name_section {
         .company_details_logo_container {
