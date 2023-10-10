@@ -1,7 +1,7 @@
-.ConnectionCard {
+.ConnectionCard_container {
   gap: 5px;
-  overflow-y: auto;
-//   width: 100%;
+  overflow-x: auto;
+  //   width: 100%;
 
   &::-webkit-scrollbar {
     height: 8px;
@@ -9,21 +9,19 @@
 
   &::-webkit-scrollbar-thumb {
     border-radius: 10rem;
-    background-color: rgba(253, 89, 1, 0.2);
-
-    &:hover {
-      background-color: rgba(253, 89, 1, 0.8);
-    }
+    background-color: rgba(253, 89, 1, 0.8);
   }
 
   &::-webkit-scrollbar-track {
     border-radius: 10rem;
-    background-color: transparent;
+    background-color: rgba(253, 89, 1, 0.2);
+    margin-inline: 10dvw;
   }
+
   .single-card {
     background-color: #eaeef2;
     gap: 5px;
-    width: 30%;
+    flex: 0 0 12rem;
     padding: 20px;
     border-radius: 15px;
     text-align: center;
@@ -47,6 +45,8 @@
       justify-content: center;
       align-items: center;
       text-decoration: none;
+      // position: absolute;
+      // bottom: 9px;
     }
   }
 }

@@ -5,6 +5,7 @@ import Company from "../../../components/NewInvestor/Company/Company";
 import FilterBySelect from "../../../components/NewInvestor/FilterBySelect/FilterBySelect";
 import CompanyProfile from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfile";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import CompanyProfileList from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfileList";
 
 function Explore() {
   const [activeTab, setActiveTab] = useState("StartupBackground");
@@ -59,12 +60,13 @@ function Explore() {
             )}
           </div>
         </section>
-        <section className="filtered_company_details">
-          {/* <Company /> */}
-          {/* <Company /> */}
+
+        {/* Company profiles list - pass filters here */}
+        <CompanyProfileList />
+        {/* <section className="filtered_company_details">
           <CompanyProfile />
           <CompanyProfile />
-        </section>
+        </section> */}
       </div>
     </MaxWidthWrapper>
   );
