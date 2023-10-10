@@ -22,6 +22,7 @@ import { getBase64 } from "../../../utils/getBase64";
 import CoinIcon from "../../../Images/investorView/Rectangle.png";
 import ColorCard from "../InvestorGlobalCards/ColoredCards/ColorCard";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
+import ConnectionCard from "../ConnectionCard/ConnectionCard";
 
 const InvestorHome = () => {
   const [isBioEditable, setIsBioEditable] = useState(false);
@@ -427,6 +428,21 @@ const InvestorHome = () => {
                     </div>
                     <div className="col-12 mt-2 designation_see_more">
                       {/* <Link to={""}>See more</Link> */}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-12 mt-2">
+                  <div className=" box personal_information">
+                    <div className="personal_information_header">
+                      <h2 className="typography">connections</h2>
+                      <div className="milestone_see_more">
+                        <Link to={""}>See more</Link>
+                      </div>
+                    </div>
+                    <div className="col-12 mt-2 milestones">
+                    <ConnectionCard/>
                     </div>
                   </div>
                 </div>
