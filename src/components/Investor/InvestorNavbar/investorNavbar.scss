@@ -123,15 +123,12 @@
         .icon-wrapper {
           width: 49px;
           height: 49px;
-          // left: 1397px;
-          // top: 49px;
           border-radius: 50%;
           display: flex;
           justify-content: center;
           align-items: center;
 
           @media (min-width: 768px) {
-            // margin-left: 1.5rem;
             background: #eaeef2;
           }
 
@@ -166,6 +163,10 @@
             /* identical to box height */
             color: #8f8f8f;
           }
+        }
+
+        .notification-container {
+          position: relative;
         }
       }
     }

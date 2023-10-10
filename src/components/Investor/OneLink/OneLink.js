@@ -22,7 +22,6 @@ const OneLink = () => {
   const userId = loggedInUser._id;
   const [isExitClicked, setIsExitClicked] = useState(false);
   const [company, setCompany] = useState([]);
-
   // Fetch data by userId
   useEffect(() => {
     document.title = "One Link | The Capital Hub";
@@ -63,6 +62,8 @@ const OneLink = () => {
               }}
               para={company.introductoryMessage}
               input={true}
+              isExitClicked={isExitClicked}
+              setCompany={setCompany}
             />
           </div>
           <div className="right__content">
@@ -72,7 +73,7 @@ const OneLink = () => {
           </div>
         </div>
         <OnePagePreview show={true} />
-        {isExitClicked && (
+        {isExitClicked && company.introductoryMessage && (
           <SharingOneLinkPopUp
             introMessage={company.introductoryMessage}
             oneLink={company.oneLink}

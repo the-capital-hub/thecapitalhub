@@ -27,7 +27,7 @@ export const createNewPost = async (data) => {
         $inc: { resharedCount: 1 },
       });
       const type = "postShared";
-      await addNotification(sharedPost.user, data.user, type);
+      await addNotification(sharedPost.user, data.user, type, data.resharedPostId);
     }
     const newPost = new PostModel(data);
     await newPost.save();
@@ -38,8 +38,34 @@ export const createNewPost = async (data) => {
   }
 };
 
-export const allPostsData = async () => {
+// export const allPostsData = async () => {
+//   try {
+//     const allPosts = await PostModel.find()
+//       .populate({
+//         path: "user",
+//         select: "firstName lastName designation profilePicture",
+//       })
+//       .populate({
+//         path: "resharedPostId",
+//         select: "",
+//         populate: {
+//           path: "user",
+//           select: "firstName lastName designation profilePicture",
+//         },
+//       })
+//       .sort({ _id: -1 });
+
+//     // console.log(allPosts);
+//     return allPosts;
+//   } catch (error) {
+//     throw new Error("Error fetching all posts");
+//   }
+// };
+
+export const allPostsData = async (page, perPage) => {
   try {
+    const skip = (page - 1) * perPage;
+
     const allPosts = await PostModel.find()
       .populate({
         path: "user",
@@ -53,14 +79,16 @@ export const allPostsData = async () => {
           select: "firstName lastName designation profilePicture",
         },
       })
-      .sort({ _id: -1 });
+      .sort({ _id: -1 })
+      .skip(skip)
+      .limit(perPage);
 
-    // console.log(allPosts);
     return allPosts;
   } catch (error) {
     throw new Error("Error fetching all posts");
   }
 };
+
 
 export const singlePostData = async (_id) => {
   try {
@@ -171,7 +199,7 @@ export const likeUnlikePost = async (postId, userId) => {
     } else {
       post.likes.push(userId);
       const type = "postLiked";
-      await addNotification(post.user, userId, type);
+      await addNotification(post.user, userId, type, postId);
     }
     await post.save();
     return {
@@ -205,7 +233,7 @@ export const commentOnPost = async (postId, userId, text) => {
     post.comments.push(newComment);
     await post.save();
     const type = "postCommented";
-    await addNotification(post.user, userId, type);
+    await addNotification(post.user, userId, type, postId);
     return {
       status: 200,
       message: "Comment added successfully",

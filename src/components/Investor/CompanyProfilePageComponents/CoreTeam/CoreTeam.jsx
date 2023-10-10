@@ -51,7 +51,7 @@ export default function CoreTeam({ companyData, setCompanyData }) {
       }
       {/* Modal for adding new team member */}
       <div className="addCoreTeamModal__container">
-        <ModalBSContainer id={"AddTeamMemberModal"}>
+        <ModalBSContainer id={"AddTeamMemberModal"} modalXl>
           <ModalBSHeader
             title={"Add Team Member"}
             className={"orange__heading"}

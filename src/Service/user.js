@@ -102,9 +102,9 @@ async function postUserPost(postData) {
     throw error;
   }
 }
-async function getAllPostsAPI() {
+async function getAllPostsAPI(page) {
   try {
-    const response = await axiosInstance.get(API.getAllPosts);
+    const response = await axiosInstance.get(`${API.getAllPosts}?page=${page}`);
     return response.data;
   } catch (error) {
     console.error("Error:", error);
@@ -494,7 +494,7 @@ export const getSinglePostAPI = async (postId) => {
     const { data } = await axiosInstance.get(`${API.getSinglePost}/${postId}`);
     return data;
   } catch (error) {
-    console.error("Error getting user message:", error);
+    console.error("Error getting single post:", error);
     throw error;
   }
 };
@@ -757,10 +757,11 @@ export const getCommunitySettings = async (communityId) => {
   }
 };
 
-
 export const deleteComment = async (postId, commentId) => {
   try {
-    const response = await axiosInstance.delete(`${API.deleteComment}/${postId}/${commentId}`);
+    const response = await axiosInstance.delete(
+      `${API.deleteComment}/${postId}/${commentId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error while deleting the post:", error);
@@ -770,12 +771,14 @@ export const deleteComment = async (postId, commentId) => {
 
 export const toggleLikeComment = async (postId, commentId) => {
   try {
-    const response = await axiosInstance.post(`${API.likeComment}/${postId}/${commentId}`);
+    const response = await axiosInstance.post(
+      `${API.likeComment}/${postId}/${commentId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error in like comment:", error);
   }
-}
+};
 export const unsavePost = async (requestBody) => {
   try {
     console.log("body", requestBody);
@@ -791,9 +794,33 @@ export const unsavePost = async (requestBody) => {
 
 export const deleteMessage = async (messageId) => {
   try {
-    const response = await axiosInstance.delete(`${API.deleteMessage}/${messageId}`);
+    const response = await axiosInstance.delete(
+      `${API.deleteMessage}/${messageId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error in delete message:", error);
   }
-}
+};
+
+export const fetchNotificationsAPI = async (userId) => {
+  try {
+    const response = await axiosInstance.get(
+      `${API.getNotifications}/${userId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching notifications: ", error);
+  }
+};
+
+export const markNotificationAsReadAPI = async (_id) => {
+  try {
+    const response = await axiosInstance.patch(
+      `${API.markNotificationAsRead}/${_id}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Error marking notificaiton as read : ", error);
+  }
+};
