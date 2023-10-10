@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CompanyProfile from "./CompanyProfile";
 
-export default function CompanyProfileList(props) {
+export default function CompanyProfileList({ isStartup }) {
   const [loading, setLoading] = useState(false); //Change default to true when integrating
   const [startupsList, setStartupsList] = useState([]); //State for startups list
 
@@ -11,8 +11,8 @@ export default function CompanyProfileList(props) {
   return (
     <div className="d-flex flex-column gap-3">
       {/* Loop company Profile here */}
-      <CompanyProfile startup="true" />
-      <CompanyProfile startup="true" />
+      <CompanyProfile startup={`${isStartup ? "true" : "false"}`} />
+      <CompanyProfile startup={`${isStartup ? "true" : "false"}`} />
     </div>
   );
 }

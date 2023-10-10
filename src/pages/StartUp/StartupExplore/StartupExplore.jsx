@@ -73,7 +73,7 @@ export default function StartupExplore() {
         </div>
 
         {/* Companies List - pass filter props*/}
-        <CompanyProfileList />
+        <CompanyProfileList isStartup />
       </section>
     </MaxWidthWrapper>
   );
