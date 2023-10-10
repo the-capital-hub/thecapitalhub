@@ -17,6 +17,17 @@
 }
 
 .addCoreTeamModal__container {
+  .team_member_modal {
+    .edit_remove_team {
+      flex: 0 0 45%;
+      scrollbar-gutter: stable;
+    }
+
+    .add_team {
+      flex: 0 0 45%;
+    }
+  }
+
   .visually-hidden {
     position: absolute !important;
     height: 1px;
@@ -50,10 +61,31 @@
 
   .modal__input {
     background-color: #fafafa;
+    border: 1px solid rgba(0, 0, 0, 0.2);
     outline: 0;
     transition: border 0.3s ease-in-out;
     &:focus {
       border: 1px solid #fd5901;
+    }
+  }
+
+  .modal_edit_btn {
+    outline: none;
+    border: none;
+    background-color: #fd5901;
+    padding: 0.5em;
+    border-radius: 10px;
+    box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.2);
+
+    &:active {
+      box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 0.2) inset;
+    }
+
+    svg {
+      fill: #fd5901;
+      stroke: #fafafa;
+      height: 1.5rem;
+      width: 2rem;
     }
   }
 }
