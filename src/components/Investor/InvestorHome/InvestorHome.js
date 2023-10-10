@@ -446,7 +446,7 @@ const InvestorHome = () => {
                   </div>
                 </div>
                 <div className="col-12 mt-2 milestones">
-                  <ConnectionCard />
+                  <ConnectionCard  userId={loggedInUser._id} />
                 </div>
               </div>
 
