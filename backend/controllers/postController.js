@@ -39,13 +39,16 @@ export const createPost = async (req, res) => {
 
 export const getAllPosts = async (req, res) => {
   try {
-    const data = await allPostsData();
+    const { page, perPage } = req.query;
+    const pageNumber = parseInt(page) || 1;
+    const postsPerPage = parseInt(perPage) || 10; 
+    const data = await allPostsData(pageNumber, postsPerPage);
     if (!data.length) {
       res.status(404).send({
         message: "No Posts yet",
       });
     } else {
-      res.send({ message: "Posts fetched succesfully", data });
+      res.send({ message: "Posts fetched successfully", data });
     }
   } catch (err) {
     res.status(500).send(err);

@@ -17,6 +17,9 @@ const investorSchema = new Schema(
     description: {
       type: String,
     },
+    introductoryMessage: {
+      type: String,
+    },
     location: {
       type: String,
       // required: true,

@@ -22,6 +22,10 @@ const notificationSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Posts",
   },
+  connection: {
+    type: Schema.Types.ObjectId,
+    ref: "Connections",
+  },
   createdAt: {
     type: Date,
     default: Date.now,

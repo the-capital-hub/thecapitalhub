@@ -82,9 +82,9 @@
         .left_icon {
           margin-right: 10px;
 
-          img {
-          }
+          img {}
         }
+
         textarea {
           width: 100%;
           border: none;
@@ -96,6 +96,7 @@
           font-family: inherit;
           font-size: inherit;
           height: 100%;
+
           ::placeholder {
             color: #999;
           }
@@ -126,6 +127,7 @@
     }
   }
 }
+
 @media (max-width: 768px) {
   .introductory_message_container {
     .box_container {
@@ -140,4 +142,13 @@
       }
     }
   }
+}
+
+.warning_message {
+  background-color: #ff0707;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
 }
