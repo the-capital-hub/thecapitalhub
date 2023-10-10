@@ -802,3 +802,25 @@ export const deleteMessage = async (messageId) => {
     console.error("Error in delete message:", error);
   }
 };
+
+export const fetchNotificationsAPI = async (userId) => {
+  try {
+    const response = await axiosInstance.get(
+      `${API.getNotifications}/${userId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching notifications: ", error);
+  }
+};
+
+export const markNotificationAsReadAPI = async (_id) => {
+  try {
+    const response = await axiosInstance.patch(
+      `${API.markNotificationAsRead}/${_id}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Error marking notificaiton as read : ", error);
+  }
+};
