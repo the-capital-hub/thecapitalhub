@@ -30,7 +30,7 @@ const ShareLink = ({ OneLink, onExitClick, investor = false }) => {
               <input
                 type="text"
                 placeholder={"Type your text here"}
-                value={"thecapitalhub.in/onelink/" + OneLink}
+                value={investor ? "thecapitalhub.in/investor/onelink/" + OneLink : "thecapitalhub.in/onelink/" + OneLink}
                 disabled
               />
               <div className="right_icons">

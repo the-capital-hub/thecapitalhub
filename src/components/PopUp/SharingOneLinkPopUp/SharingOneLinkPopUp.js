@@ -10,8 +10,8 @@ import {
 } from "react-share";
 import { HiOutlineClipboard } from 'react-icons/hi'
 
-const SharingOneLinkPopUp = ({ introMessage, oneLink, onClose }) => {
-  const shareUrl = "https://thecapitalhub.in/onelink/" + oneLink;
+const SharingOneLinkPopUp = ({ introMessage, oneLink, onClose, investor = false }) => {
+  const shareUrl = investor? "https://thecapitalhub.in/investor/onelink/" + oneLink: "https://thecapitalhub.in/onelink/" + oneLink;
   const messageForSharing = introMessage.replace(/<br\s*\/?>/g, "\n");
   const [copyStatus, setCopyStatus] = useState(""); // State for copy status
 
@@ -41,14 +41,14 @@ const SharingOneLinkPopUp = ({ introMessage, oneLink, onClose }) => {
             <FacebookShareButton url={shareUrl} quote={messageForSharing}>
               <FacebookIcon size={32} round />
             </FacebookShareButton>
-            <WhatsappShareButton url={"\n Here is Our OneLink : " + shareUrl} title={messageForSharing}>
+            <WhatsappShareButton url={"\nHere is Our OneLink : " + shareUrl} title={messageForSharing}>
               <WhatsappIcon size={32} round />
             </WhatsappShareButton>
             <EmailShareButton url={shareUrl} body={messageForSharing}>
               <EmailIcon size={32} round />
             </EmailShareButton>
             {/* Clipboard icon */}
-            <HiOutlineClipboard size={32} onClick={() => copyToClipboard(`${messageForSharing} \n Here is Our OneLink: ${shareUrl}`)} />
+            <HiOutlineClipboard size={32} onClick={() => copyToClipboard(`${messageForSharing} \nHere is Our OneLink: ${shareUrl}`)} />
             {copyStatus && <p>{copyStatus}</p>}
           </div>
 
