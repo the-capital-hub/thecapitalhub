@@ -66,7 +66,7 @@ const FeaturedPostsContainer = ({ userId }) => {
 
   return (
     <div className="card-container ">
-      <div className="post_container_div d-flex align-items-stretch gap-4 ps-3 w-100 overflow-x-auto">
+      <div className="post_container_div d-flex gap-4 ps-3 w-100 overflow-x-auto">
         {allPosts ? (
           allPosts.length !== 0 ? (
             allPosts.map(

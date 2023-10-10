@@ -1,14 +1,15 @@
 .investorHome_main_container {
   // margin-top: 40px;
-  margin-block: 1.5rem;
-  display: flex;
+  // margin-block: 1.5rem;
+  // display: flex;
   // background-color: rgba(234, 238, 242, 1);
 
   .two_column_wrapper {
-    margin-inline: 1rem;
+    // margin-inline: 1rem;
 
     display: flex;
     flex-direction: column;
+    // align-items: center;
     justify-content: space-between;
 
     @media (min-width: 768px) {
@@ -35,7 +36,11 @@
       }
     }
     .seventy {
-      max-width: calc(100% - 26rem);
+      max-width: calc(100% - 0rem);
+
+      @media (min-width: 1200px) {
+        max-width: calc(100% - 26rem);
+      }
       // flex-grow: 1;
     }
 
@@ -56,6 +61,7 @@
     .small_typo {
       color: #717171;
       font-size: 16px;
+      font-weight: 500;
       font-family: Poppins;
     }
 
@@ -77,17 +83,17 @@
     }
 
     .bio_container {
-      width: 750px;
+      // width: 750px;
       // height: 411px;
     }
 
     .personal_information {
-      width: 750px;
+      // width: 750px;
       flex-shrink: 0;
     }
 
     .bio_information {
-      width: 750px;
+      // width: 750px;
       flex-shrink: 0;
       height: 340px;
     }
@@ -160,7 +166,18 @@
     }
 
     table tr td {
-      padding-bottom: 0.5rem;
+      padding-bottom: 1rem;
+    }
+
+    .profile_table {
+      width: 100%;
+      @media (min-width: 1200px) {
+        width: 75%;
+      }
+    }
+
+    tr {
+      width: 100%;
     }
 
     .personal_information_header {
@@ -213,6 +230,19 @@
       font-family: Poppins;
       list-style: none;
       text-decoration: none;
+    }
+  }
+
+  .profile_edit_field {
+    outline: none;
+    border: 1px solid rgba(220, 220, 220, 1);
+    border-radius: 5px;
+    padding: 0.25em 0.75em;
+    color: #777;
+
+    &:focus {
+      transition: border 0.15s ease-in-out;
+      border: 1px solid rgba(253, 89, 1, 1);
     }
   }
 }
@@ -316,10 +346,10 @@
       }
     }
     .milestones {
-      overflow-x: scroll;
+      // overflow-x: scroll;
     }
     .small_typo {
-      width: 300px;
+      // width: 300px;
     }
   }
 }
