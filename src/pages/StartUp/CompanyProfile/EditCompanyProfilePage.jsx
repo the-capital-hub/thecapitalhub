@@ -82,12 +82,14 @@ export default function EditCompanyProfilePage() {
           </div>
           {/* Company Description */}
           <div className="paragraph__component bg-white rounded-5 p-5 d-flex flex-column gap-4">
-            <div className="d-flex flex-column-reverse flex-sm-row align-items-sm-center justify-content-between">
+            <div className="d-flex flex-row flex-sm-row align-items-sm-center justify-content-between">
               <h2>Company Description</h2>
               <span className="ms-auto">
-                <div className="d-flex gap-2"> 
+                <div className="d-flex gap-2">
                   <button
-                    className={`align-self-end btn-base startup ${isBioEditable ? 'btn-sm' : ''}`}
+                    className={`align-self-end btn-base startup ${
+                      isBioEditable ? "btn-sm" : ""
+                    }`}
                     onClick={() => setIsBioEditable(!isBioEditable)}
                   >
                     {isBioEditable ? "Cancel" : "Edit"}
@@ -95,10 +97,12 @@ export default function EditCompanyProfilePage() {
                   </button>
                   {isBioEditable && (
                     <button
-                      className={`align-self-end btn-base startup ${isBioEditable ? 'btn-sm' : ''}`}
+                      className={`align-self-end btn-base startup ${
+                        isBioEditable ? "btn-sm" : ""
+                      }`}
                       onClick={(e) => submitBioHandler(e)}
                     >
-                      Save 
+                      Save
                       {/* <CiSaveUp2 /> */}
                     </button>
                   )}
@@ -136,6 +140,7 @@ export default function EditCompanyProfilePage() {
             <CoreTeam
               companyData={companyData}
               setCompanyData={setCompanyData}
+              theme="startup"
             />
           </div>
           {/* Milestones */}

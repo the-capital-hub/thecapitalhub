@@ -21,6 +21,7 @@ import {
   likeUnlikeAPI,
   sendPostComment,
   unsavePost,
+  getLikeCount,
 } from "../../../Service/user";
 import SmileeIcon from "../../../Images/Group 15141(1).svg";
 import ImageIcon from "../../../Images/Group 15141.svg";
@@ -65,6 +66,7 @@ const FeedPostCard = ({
   const [savedPostId, setSavedPostId] = useState([]);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showSavePopUp, setshowSavePopUp] = useState(false);
+  const [likedBy, setLikedBy] = useState(null);
   const handleCloseSavePopup = () => {
     setshowSavePopUp(false);
   };
@@ -76,7 +78,7 @@ const FeedPostCard = ({
     // setShowSuccess(true);
     // setTimeout(() => {
     //   setShowSuccess(false);
-      setSavedPostId([...savedPostId, postId]);
+    setSavedPostId([...savedPostId, postId]);
     // }, 2500);
   };
 
@@ -221,8 +223,8 @@ const FeedPostCard = ({
     // setShowUnsaveSuccess(true);
     // setTimeout(() => {
     //   setShowUnsaveSuccess(false);
-      const updatedSavedPostId = savedPostId.filter((id) => id !== postId);
-      setSavedPostId(updatedSavedPostId);
+    const updatedSavedPostId = savedPostId.filter((id) => id !== postId);
+    setSavedPostId(updatedSavedPostId);
     // }, 2500);
   };
 
@@ -239,6 +241,14 @@ const FeedPostCard = ({
 const handleDoubleClick = () => {
   likeUnlikeHandler()
   }
+  useEffect(() => {
+    getLikeCount(postId)
+      .then(({ data }) => {
+        setLikedBy(data.likedBy);
+      })
+      .catch((error) => console.log(error));
+  }, [liked]);
+
   return (
     <>
       <div className="row investor_feedpostcard_main_container mb-2">
@@ -390,7 +400,16 @@ const handleDoubleClick = () => {
                 className=" mx-3 text-secondary"
                 style={{ fontSize: "14px" }}
               >
-                {likes?.length} likes
+                {/* {likes?.length} likes */}
+                {likedBy ? (
+                  <>
+                    Liked By {likedBy}
+                  </>
+                ): 
+                 <>
+                 {likes?.length} likes
+                 </>
+                }
               </span>
             )}
             {!repostPreview && (

@@ -10,12 +10,12 @@ export default function CoreTeamCard({ image, name, designation }) {
       <img
         src={image}
         alt={"name"}
-        style={{ width: "50px", height: "50px" }}
+        style={{ width: "50px", height: "50px", objectFit: "cover" }}
         className="rounded-circle"
         loading="lazy"
       />
-      <h5 className="text-capitalize text-break">{name}</h5>
-      <p className="text-capitalize text-break">{designation}</p>
+      <h5 className="text-capitalize text-center text-break">{name}</h5>
+      <p className="text-capitalize text-center text-break">{designation}</p>
     </div>
   );
 }

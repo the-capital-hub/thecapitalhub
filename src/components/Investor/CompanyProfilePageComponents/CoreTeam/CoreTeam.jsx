@@ -12,7 +12,7 @@ import {
 } from "../../../PopUp/ModalBS";
 import AddTeamMemberModal from "./AddTeamMemberModal";
 
-export default function CoreTeam({ companyData, setCompanyData }) {
+export default function CoreTeam({ companyData, setCompanyData, theme }) {
   const [team, setTeam] = useState(companyData?.team);
   useEffect(() => {
     setTeam(companyData?.team);
@@ -24,7 +24,9 @@ export default function CoreTeam({ companyData, setCompanyData }) {
         <h2>Core Team</h2>
         <Link className="see__more align-self-end">See more</Link>
       </div>
-      <div className="team__cards__container d-flex align-items-center gap-5 flex-wrap">
+      <div
+        className={`team__cards__container d-flex align-items-center gap-5 pb-3 ${theme} `}
+      >
         {team && team.length > 0 ? (
           team.map((member, index) => (
             <CoreTeamCard
@@ -43,7 +45,7 @@ export default function CoreTeam({ companyData, setCompanyData }) {
         <div className="align-self-end">
           <ModalBsLauncher
             id={"AddTeamMemberModal"}
-            className="orange_button d-flex align-items-center gap-1 w-auto "
+            className={`add_button d-flex align-items-center gap-1 w-auto ${theme} `}
           >
             <span>Add</span>
           </ModalBsLauncher>
@@ -51,15 +53,16 @@ export default function CoreTeam({ companyData, setCompanyData }) {
       }
       {/* Modal for adding new team member */}
       <div className="addCoreTeamModal__container">
-        <ModalBSContainer id={"AddTeamMemberModal"}>
+        <ModalBSContainer id={"AddTeamMemberModal"} modalXl>
           <ModalBSHeader
             title={"Add Team Member"}
-            className={"orange__heading"}
+            className={`orange__heading ${theme}`}
           />
           <ModalBSBody>
             <AddTeamMemberModal
               setCompanyData={setCompanyData}
               companyData={companyData}
+              theme={theme}
             />
           </ModalBSBody>
         </ModalBSContainer>

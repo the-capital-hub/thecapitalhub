@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function MilestoneBadge({ badge, milestone, text, isMini }) {
   return (
     <div
-      className="p-4 d-flex flex-column align-items-center gap-3 rounded-5"
+      className="badge_container p-4 d-flex flex-column align-items-center gap-3 rounded-5"
       style={{
         backgroundColor: "#EDEDED",
         width: `${isMini ? "160px" : "260px"}`,

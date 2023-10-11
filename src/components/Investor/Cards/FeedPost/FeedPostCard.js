@@ -26,6 +26,7 @@ import {
   deleteComment,
   toggleLikeComment,
   unsavePost,
+  getLikeCount,
 } from "../../../../Service/user";
 import SmileeIcon from "../../../../Images/Group 15141(1).svg";
 import ImageIcon from "../../../../Images/Group 15141.svg";
@@ -74,6 +75,8 @@ const FeedPostCard = ({
   const [savedPostId, setSavedPostId] = useState([]);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showSavePopUp, setshowSavePopUp] = useState(false);
+  const [likedBy, setLikedBy] = useState(null);
+
   const handleCloseSavePopup = () => {
     setshowSavePopUp(false);
   };
@@ -289,14 +292,20 @@ const FeedPostCard = ({
 const handleDoubleClick = () => {
 likeUnlikeHandler()
 }
+  useEffect(() => {
+    getLikeCount(postId)
+      .then(({ data }) => {
+        setLikedBy(data.likedBy);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <>
       <div className="feedpostcard_main_container mb-2">
         <div
-          className={`box feedpostcard_container mt-2 ${
-            repostPreview && "rounded shadow-sm border"
-          }`}
+          className={`box feedpostcard_container mt-2 ${repostPreview && "rounded shadow-sm border"
+            }`}
         >
           {/* Post Header */}
           {/* <div className="feed_header_container border-2 border-bottom mb-3 pb-2"> */}
@@ -398,7 +407,7 @@ likeUnlikeHandler()
                         data-bs-toggle="modal"
                         data-bs-target="#reportPostModal"
                         className="d-flex align-items-center gap-2"
-                        // onClick={() => setShowReportModal(true)}
+                      // onClick={() => setShowReportModal(true)}
                       >
                         <IconReportPost />
                         <span>Report</span>
@@ -474,7 +483,16 @@ likeUnlikeHandler()
           </div>
           {likes && (
             <span className=" mx-3 text-secondary" style={{ fontSize: "14px" }}>
-              {likes?.length} likes
+              {/* {likes?.length} likes */}
+              {likedBy ? (
+                <>
+                  Liked By {likedBy}
+                </>
+              ) :
+                <>
+                  {likes?.length} likes
+                </>
+              }
             </span>
           )}
           {!repostPreview && (
@@ -514,9 +532,8 @@ likeUnlikeHandler()
                 {/* Repost and Save posts */}
                 <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                   <span
-                    className={`repost_container rounded ${
-                      showRepostOptions ? "bg-light" : ""
-                    }`}
+                    className={`repost_container rounded ${showRepostOptions ? "bg-light" : ""
+                      }`}
                     ref={repostContainerRef}
                   >
                     <img
@@ -773,9 +790,8 @@ likeUnlikeHandler()
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Harassment" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio1"
               >
                 Harassment
@@ -792,9 +808,8 @@ likeUnlikeHandler()
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Spam" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio2"
               >
                 Spam
@@ -811,9 +826,8 @@ likeUnlikeHandler()
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Fraud or scam" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio3"
               >
                 Fraud or scam
@@ -830,9 +844,8 @@ likeUnlikeHandler()
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Hateful Speech" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio4"
               >
                 Hateful Speech
