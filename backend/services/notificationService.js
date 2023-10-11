@@ -64,3 +64,28 @@ export const markMessageAsRead = async (messageId) => {
   }
 };
 
+export const markAllMessagesAsRead = async (userId) => {
+  try {
+    const result = await NotificationModel.updateMany(
+      { recipient: userId },
+      { $set: { isRead: true } }
+    );
+    if (result.nModified === 0) {
+      return {
+        status: 404,
+        message: "No unread notifications found for the user",
+      };
+    }
+    return {
+      status: 200,
+      message: "All messages marked as read",
+    };
+  } catch (error) {
+    return {
+      status: 500,
+      message: "An error occurred while marking all messages as read",
+    };
+  }
+};
+
+
