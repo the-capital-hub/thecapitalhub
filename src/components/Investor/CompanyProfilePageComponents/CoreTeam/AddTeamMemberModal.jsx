@@ -47,9 +47,11 @@ export default function AddTeamMemberModal({
   }
 
   // handleFileChange
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
+
+    // Image preview
     const imageUrl = URL.createObjectURL(file);
     setImagePreview(imageUrl);
   };
@@ -57,6 +59,7 @@ export default function AddTeamMemberModal({
   // handle AddTeamMember
   const handleAddTeamMember = async (e) => {
     e.preventDefault();
+    let index = member.index;
     let profileImage = "";
 
     if (selectedFile) {
@@ -86,19 +89,39 @@ export default function AddTeamMemberModal({
     console.log("edited member", editedTeamMember);
 
     try {
-      setCompanyData((previousData) => ({
-        ...previousData,
-        team: [...previousData.team, updatedTeamMember],
-      }));
-      const response = await postStartUpData({
-        founderId: companyData.founderId,
-        team: [...companyData.team, updatedTeamMember],
-      });
+      if (isEditing) {
+        let editedTeam = [...companyData.team];
+        editedTeam[index] = { ...editedTeam[index], ...editedTeamMember };
+        console.log("editedTeam", editedTeam);
 
-      console.log(response);
+        setCompanyData((previousData) => ({
+          ...previousData,
+          team: [...editedTeam],
+        }));
+
+        const response = await postStartUpData({
+          founderId: companyData.founderId,
+          team: [...editedTeam],
+        });
+        console.log(response);
+      } else {
+        // If not editing then Adding new member
+        setCompanyData((previousData) => ({
+          ...previousData,
+          team: [...previousData.team, updatedTeamMember],
+        }));
+
+        const response = await postStartUpData({
+          founderId: companyData.founderId,
+          team: [...companyData.team, updatedTeamMember],
+        });
+        console.log(response);
+      }
+
       setMember(initialMemberState);
       setSelectedFile(null);
       setIsEditing(false);
+      setImagePreview(null);
     } catch (error) {
       console.error("Error adding team member:", error);
     }
@@ -121,7 +144,7 @@ export default function AddTeamMemberModal({
     if (response) {
       const newTeam = [...companyData.team];
       const deleted = newTeam.splice(index, 1);
-      console.log("deleted", deleted, "newTeam", newTeam);
+      // console.log("deleted", deleted, "newTeam", newTeam);
 
       // Post startupData
       try {
@@ -138,10 +161,19 @@ export default function AddTeamMemberModal({
         setMember(initialMemberState);
         setSelectedFile(null);
         setIsEditing(false);
+        setImagePreview(null);
       } catch (error) {
         console.error("Error adding team member:", error);
       }
     }
+  }
+
+  // Handle Clear
+  function handleClear() {
+    setMember(initialMemberState);
+    setIsEditing(false);
+    setSelectedFile(null);
+    setImagePreview(null);
   }
 
   return (
@@ -261,10 +293,18 @@ export default function AddTeamMemberModal({
           </div>
           <button
             className={`orange_button ${theme}`}
-            onClick={handleAddTeamMember}
+            // onClick={handleAddTeamMember}
             data-bs-dismiss="modal"
+            type="submit"
           >
             {isEditing ? "Update" : "Add"}
+          </button>
+          <button
+            type="button"
+            className={`orange_button ${theme}`}
+            onClick={handleClear}
+          >
+            Clear
           </button>
         </form>
       </div>
