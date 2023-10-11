@@ -211,6 +211,57 @@ const FeedPostCard = ({
     };
   }, []);
 
+  const videoRef = useRef(null);
+  useEffect(() => {
+    const video = videoRef.current;
+    let playState = null;
+
+    if (video) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            video.pause();
+            playState = false;
+          } else {
+            video.muted = true;
+            video
+              .play()
+              .then(() => {
+                playState = true;
+              })
+              .catch((error) => {
+                console.error("Auto-play failed:", error);
+              });
+          }
+        });
+      }, {});
+
+      observer.observe(video);
+
+      const onVisibilityChange = () => {
+        if (document.hidden || !playState) {
+          video.pause();
+        } else {
+          video
+            .play()
+            .then(() => {
+              playState = true;
+            })
+            .catch((error) => {
+              console.error("Auto-play failed:", error);
+            });
+        }
+      };
+
+      document.addEventListener("visibilitychange", onVisibilityChange);
+
+      return () => {
+        observer.unobserve(video);
+        document.removeEventListener("visibilitychange", onVisibilityChange);
+      };
+    }
+  }, [video]);
+
   const likeUnlikeHandler = async () => {
     try {
       liked ? likes.length-- : likes.length++;
@@ -440,6 +491,7 @@ const FeedPostCard = ({
                     width={!repostPreview ? "100%" : "50%"}
                     style={{ maxWidth: "500px" }}
                     controls
+                    ref={videoRef}
                   >
                     <source alt="post-video" src={video} type="video/mp4" />
                     Your browser does not support the video tag.
