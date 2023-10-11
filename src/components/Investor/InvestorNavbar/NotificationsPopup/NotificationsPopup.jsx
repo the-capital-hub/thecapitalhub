@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./NotificationsPopup.scss";
 import {
   fetchNotificationsAPI,
+  markAllNotificationsReadAPI,
   markNotificationAsReadAPI,
 } from "../../../../Service/user";
 import { useSelector } from "react-redux";
@@ -85,8 +86,23 @@ function NotificationsPopup({ toggleVisibility }) {
     }
   };
 
+  const markAllRead = async () => {
+    try {
+      await markAllNotificationsReadAPI();
+      await fetchNotifications();
+    } catch (error) {
+      console.log("Error marking all notifications as read: ", error);
+    }
+  };
+
   return (
     <div className="notifications-popup border shadow-sm rounded bg-white">
+      <div className="d-flex justify-content-between align-items-center py-1 border-bottom border-2">
+        <span>Notifications</span>
+        <button className="btn btn-xs btn-light" onClick={markAllRead}>
+          Mark all read
+        </button>
+      </div>
       {!loading ? (
         notifications.length ? (
           <>

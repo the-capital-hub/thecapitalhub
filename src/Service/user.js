@@ -824,3 +824,11 @@ export const markNotificationAsReadAPI = async (_id) => {
     console.log("Error marking notificaiton as read : ", error);
   }
 };
+
+export const markAllNotificationsReadAPI = async () => {
+  try {
+    //////
+  } catch (error) {
+    console.log("Error marking all notifications as read: ", error);
+  }
+};
