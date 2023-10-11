@@ -298,7 +298,8 @@ export const removeFromFeaturedPostController = async (req, res) => {
 export const deleteCommentController = async (req, res) => {
   try {
     const { postId, commentId } = req.params;
-    const result = await deleteComment(postId, commentId);
+    const userId = req.userId;
+    const result = await deleteComment(postId, commentId, userId);
     return res.status(result.status).json(result);
   } catch (error) {
     console.error(error);
