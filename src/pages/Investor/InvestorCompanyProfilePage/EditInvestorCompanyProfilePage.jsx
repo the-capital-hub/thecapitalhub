@@ -87,7 +87,9 @@ export default function EditInvestorCompanyProfilePage() {
               <span className="ms-auto">
                 <div className="d-flex gap-2">
                   <button
-                    className={`align-self-end btn-base investor ${isBioEditable ? 'btn-sm' : ''}`}
+                    className={`align-self-end btn-base investor ${
+                      isBioEditable ? "btn-sm" : ""
+                    }`}
                     onClick={() => setIsBioEditable(!isBioEditable)}
                   >
                     {isBioEditable ? "Cancel" : "Edit"}
@@ -95,7 +97,9 @@ export default function EditInvestorCompanyProfilePage() {
                   </button>
                   {isBioEditable && (
                     <button
-                      className={`align-self-end btn-base investor ${isBioEditable ? 'btn-sm' : ''}`}
+                      className={`align-self-end btn-base investor ${
+                        isBioEditable ? "btn-sm" : ""
+                      }`}
                       onClick={(e) => submitBioHandler(e)}
                     >
                       Save
@@ -312,6 +316,7 @@ export default function EditInvestorCompanyProfilePage() {
               field={"no_of_investments"}
               colorCardData={colorCardData}
               isInvestor={true}
+              noRupee={true}
             />
             <ColorCard
               color="white"
@@ -325,6 +330,7 @@ export default function EditInvestorCompanyProfilePage() {
               field={"minimumTicketsSize"}
               colorCardData={colorCardData}
               isInvestor={true}
+              noRupee={true}
             />
             <ColorCard
               color="white"
@@ -338,6 +344,7 @@ export default function EditInvestorCompanyProfilePage() {
               field={"maximumTicketsSize"}
               colorCardData={colorCardData}
               isInvestor={true}
+              noRupee={true}
             />
             <ColorCard
               color="white"
@@ -351,6 +358,7 @@ export default function EditInvestorCompanyProfilePage() {
               field={"seedRound"}
               colorCardData={colorCardData}
               isInvestor={true}
+              noRupee={true}
             />
           </div>
         </div>
