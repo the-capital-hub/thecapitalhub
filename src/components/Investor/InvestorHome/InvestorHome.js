@@ -70,7 +70,7 @@ const InvestorHome = () => {
 
   const [editCompanyName, setEditCompanyName] = useState({
     founderId: loggedInUser._id,
-    company: companyName,
+    company: loggedInUser.startUp.company,
   });
 
   const dispatch = useDispatch();
@@ -123,6 +123,8 @@ const InvestorHome = () => {
   };
 
   const renderEditableField = (fieldName) => {
+    // console.log(editCompanyName);
+    console.log("personal", personalData);
     if (personalEditable) {
       if (fieldName === "profilePicture") {
         return (
@@ -142,7 +144,7 @@ const InvestorHome = () => {
             type="text"
             className="w-100 profile_edit_field"
             name={fieldName}
-            value={editCompanyName.fieldName}
+            value={editCompanyName[fieldName]}
             onChange={companyNameHandler}
           />
         );
@@ -153,7 +155,7 @@ const InvestorHome = () => {
             type="text"
             className="w-100 profile_edit_field"
             name={fieldName}
-            value={editCompanyName.fieldName}
+            value={personalData[fieldName]}
             onChange={companyNameHandler}
             rows={4}
           />
@@ -164,7 +166,7 @@ const InvestorHome = () => {
           type="text"
           className="w-100 profile_edit_field"
           name={fieldName}
-          value={personalData.fieldName}
+          value={personalData[fieldName]}
           onChange={personalChangeHandler}
         />
       );
