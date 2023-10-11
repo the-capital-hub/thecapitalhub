@@ -1,6 +1,6 @@
 import { ConnectionModel } from "../models/Connection.js";
 import { UserModel } from "../models/User.js";
-import { addNotification } from "./notificationService.js";
+import { addNotification, deleteNotification } from "./notificationService.js";
 
 //send connect request
 export const sendConnectionRequest = async (senderId, receiverId) => {
@@ -87,6 +87,8 @@ export const cancelConnectionRequest = async (connectionId) => {
       };
     }
     await ConnectionModel.findByIdAndRemove(connectionId);
+    const type = "connectionRequest";
+    await deleteNotification(connection.receiver, connection.sender, type, connection._id);
     await UserModel.findOneAndUpdate(
       { _id: connection.sender },
       { $pull: { connectionsSent: connection.receiver } }
@@ -189,6 +191,8 @@ export const rejectConnectionRequest = async (connectionId) => {
       { _id: connection.receiver },
       { $pull: { connectionsReceived: connection.sender } }
     );
+    const type = "connectionAccepted";
+    await deleteNotification(connection.sender, connection.receiver, type, connection._id);
     return {
       status: 200,
       message: "Connection Rejected",

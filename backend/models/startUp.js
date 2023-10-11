@@ -21,6 +21,9 @@ const startUpSchema = new Schema(
     introductoryMessage: {
       type: String,
     },
+    previousIntroductoryMessage: {
+      type: Array,
+    },
     sector: {
       type: String,
     },
@@ -71,13 +74,13 @@ const startUpSchema = new Schema(
     },
     team: {
       type: Array,
-      default: [
-        {
-          name: String,
-          designation: String,
-          image: String,
-        },
-      ],
+      // default: [
+      //   {
+      //     name: String,
+      //     designation: String,
+      //     image: String,
+      //   },
+      // ],
     },
     TAM: {
       type: Number,

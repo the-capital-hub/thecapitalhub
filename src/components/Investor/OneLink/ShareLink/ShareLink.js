@@ -7,7 +7,7 @@ import Cross from "../../../../Images/Cross.svg";
 import { Link } from "react-router-dom";
 import IconLink from "../../SvgIcons/IconLink";
 
-const ShareLink = ({ OneLink, onExitClick, investor = false }) => {
+const ShareLink = ({ OneLink, onExitClick, investor = false, isExitClicked }) => {
   return (
     <>
       <div className="ShareLink_container mt-3">
@@ -16,6 +16,9 @@ const ShareLink = ({ OneLink, onExitClick, investor = false }) => {
             <h6>Now share all your startup details in one link</h6>
           </section>
           <hr />
+          {isExitClicked && OneLink === "" && (
+            <div className="warning_message">Please fill company details to get the Onelink.</div>
+          )}
           <Link
             // to={"/onelink/" + oneLink.OneLink}
             className="copy_link_input text-decoration-none"
@@ -29,8 +32,14 @@ const ShareLink = ({ OneLink, onExitClick, investor = false }) => {
               </div>
               <input
                 type="text"
-                placeholder={"Type your text here"}
-                value={investor ? "thecapitalhub.in/investor/onelink/" + OneLink : "thecapitalhub.in/onelink/" + OneLink}
+                placeholder="Type your text here"
+                value={
+                  OneLink
+                    ? investor
+                      ? "thecapitalhub.in/investor/onelink/" + OneLink
+                      : "thecapitalhub.in/onelink/" + OneLink
+                    : ""
+                }
                 disabled
               />
               <div className="right_icons">
