@@ -235,6 +235,10 @@ const FeedPostCard = ({
     }, 2000);
   };
 
+// double click like 
+const handleDoubleClick = () => {
+  likeUnlikeHandler()
+  }
   return (
     <>
       <div className="row investor_feedpostcard_main_container mb-2">
@@ -346,6 +350,7 @@ const FeedPostCard = ({
                       width={!repostPreview ? "100%" : "50%"}
                       src={image}
                       alt="post-image"
+                      onDoubleClick={handleDoubleClick}
                     />
                   </span>
                 )}

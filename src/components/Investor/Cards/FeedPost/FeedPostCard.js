@@ -284,6 +284,12 @@ const FeedPostCard = ({
     }
   };
 
+
+// double click like 
+const handleDoubleClick = () => {
+likeUnlikeHandler()
+}
+
   return (
     <>
       <div className="feedpostcard_main_container mb-2">
@@ -429,6 +435,7 @@ const FeedPostCard = ({
                     width={!repostPreview ? "100%" : "50%"}
                     src={image}
                     alt="post-image"
+                    onDoubleClick={handleDoubleClick}
                   />
                 </span>
               )}
