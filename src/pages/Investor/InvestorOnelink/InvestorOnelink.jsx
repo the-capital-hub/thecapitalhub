@@ -62,6 +62,7 @@ export default function InvestorOnelink() {
                 video: VideoImage,
               }}
               para={company.introductoryMessage}
+              previous={company?.previousIntroductoryMessage}
               input={true}
               isExitClicked={isExitClicked}
               setCompany={setCompany}

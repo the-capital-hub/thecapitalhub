@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import "./StartupExplore.scss";
-import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
+// import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import FilterBySelect from "../../../components/NewInvestor/FilterBySelect/FilterBySelect";
 import CompanyProfileList from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfileList";
 
 export default function StartupExplore() {
-  const [activeTab, setActiveTab] = useState("StartupBackground");
+  const [activeTab, setActiveTab] = useState("Investor");
 
   useEffect(() => {
     document.title = "Explore | The Capital Hub";
@@ -26,27 +26,27 @@ export default function StartupExplore() {
           <div className="startup_explore_tabs d-flex align-items-center border-bottom">
             <button
               className={`btn_base py-3 px-3 ${
-                activeTab === "StartupBackground" ? "active" : ""
+                activeTab === "Investor" ? "active" : ""
               }`}
-              onClick={() => setActiveTab("StartupBackground")}
+              onClick={() => setActiveTab("Investor")}
             >
-              Startup Background
+              Investor
             </button>
             <button
               className={`btn_base py-3 px-3 ${
-                activeTab === "FoundingTeam" ? "active" : ""
+                activeTab === "Startup" ? "active" : ""
               }`}
-              onClick={() => setActiveTab("FoundingTeam")}
+              onClick={() => setActiveTab("Startup")}
             >
-              Founding Team
+              Startup
             </button>
             <button
               className={`btn_base py-3 px-3 ${
-                activeTab === "RevenuesFunding" ? "active" : ""
+                activeTab === "Founder" ? "active" : ""
               }`}
-              onClick={() => setActiveTab("RevenuesFunding")}
+              onClick={() => setActiveTab("Founder")}
             >
-              Revenues and Funding
+              Founder
             </button>
           </div>
 
@@ -63,7 +63,7 @@ export default function StartupExplore() {
               name="incorporationModel"
             />
             <FilterBySelect label="DPIIT Registered" name="dpiitRegistered" />
-            {activeTab === "FoundingTeam" && (
+            {activeTab === "Founder" && (
               <>
                 <FilterBySelect label="Incubation" name="incubation" />
                 <FilterBySelect label="Incubation" name="incubation" />

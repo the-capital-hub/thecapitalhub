@@ -5,6 +5,12 @@ import "./Documentation.scss";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import {
+  GreenBusiness,
+  GreenKYC,
+  GreenLegal,
+  GreenPitch,
+} from "../../../Images/StartUp/Documentaion";
 
 const Documentation = () => {
   const navigate = useNavigate();
@@ -14,7 +20,7 @@ const Documentation = () => {
   }, []);
   return (
     <MaxWidthWrapper>
-      <div className="border-start">
+      <div className="border_left">
         <div className="documentation shadow-sm border">
           <h1>Documentation</h1>
           <div className="docscontainer">
@@ -29,12 +35,14 @@ const Documentation = () => {
               onClicked={() =>
                 navigate(`/onelink/${username}/documentation/pitchdeck`)
               }
+              image={GreenPitch}
             />
             <Card
               text={"Legal and compliance"}
               onClicked={() =>
                 navigate(`/onelink/${username}/documentation/legal`)
               }
+              image={GreenLegal}
             />
             {/* <Card
               text={"Update"}
@@ -47,12 +55,14 @@ const Documentation = () => {
               onClicked={() =>
                 navigate(`/onelink/${username}/documentation/kycdetails`)
               }
+              image={GreenKYC}
             />
             <Card
               text={"Business"}
               onClicked={() =>
                 navigate(`/onelink/${username}/documentation/business`)
               }
+              image={GreenBusiness}
             />
           </div>
         </div>

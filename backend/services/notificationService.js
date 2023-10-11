@@ -9,6 +9,9 @@ export const addNotification = async (recipient, sender, type, post = null, conn
       post,
       connection,
     });
+    if (sender === recipient) {
+      return;
+    }
     await notification.save();
     return {
       status: 200,
@@ -61,6 +64,58 @@ export const markMessageAsRead = async (messageId) => {
       status: 500,
       message: "An error occurred while marking the message as read",
     };
+  }
+};
+
+export const markAllMessagesAsRead = async (userId) => {
+  try {
+    const result = await NotificationModel.updateMany(
+      { recipient: userId },
+      { $set: { isRead: true } }
+    );
+    if (result.nModified === 0) {
+      return {
+        status: 404,
+        message: "No unread notifications found for the user",
+      };
+    }
+    return {
+      status: 200,
+      message: "All messages marked as read",
+    };
+  } catch (error) {
+    return {
+      status: 500,
+      message: "An error occurred while marking all messages as read",
+    };
+  }
+};
+
+export const deleteNotification = async (recipient, sender, type, id) => {
+  try {
+    const result = await NotificationModel.deleteMany({
+      $and: [
+        {
+          $or: [
+            { connection: id },
+            { post: id },
+          ],
+        },
+        { recipient, sender, type },
+      ],
+    });
+    if (result.deletedCount === 0) {
+      return {
+        status: 200,
+        message: "No notifications found for the given ID and recipients",
+      };
+    }
+    return {
+      status: 200,
+      message: "Notifications deleted successfully by connection or post ID and recipients",
+    };
+  } catch (error) {
+    throw error;
   }
 };
 

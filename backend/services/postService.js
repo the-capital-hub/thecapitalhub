@@ -1,7 +1,7 @@
 import { PostModel } from "../models/Post";
 import { UserModel } from "../models/User";
 import { cloudinary } from "../utils/uploadImage";
-import { addNotification } from "./notificationService.js";
+import { addNotification, deleteNotification } from "./notificationService.js";
 
 export const createNewPost = async (data) => {
   try {
@@ -196,6 +196,8 @@ export const likeUnlikePost = async (postId, userId) => {
     const hasLiked = post.likes.includes(userId);
     if (hasLiked) {
       post.likes.pull(userId);
+      const type = "postLiked";
+      deleteNotification(post.user, userId, type, postId);
     } else {
       post.likes.push(userId);
       const type = "postLiked";
@@ -438,18 +440,45 @@ export const getLikeCount = async (postId) => {
       };
     }
     const likeCount = post.likes.length;
-    return {
-      status: 200,
-      message: "Like count retrieved successfully",
-      data: {
-        count: likeCount,
-      },
-    };
+    if (likeCount === 0) {
+      return {
+        status: 200,
+        message: "No one has liked this post yet",
+        data: {
+          count: 0,
+        },
+      };
+    } else if (likeCount === 1) {
+      const user = await UserModel.findById(post.likes[0]);
+      return {
+        status: 200,
+        message: "1 person liked this post",
+        data: {
+          count: 1,
+          likedBy: user ? user.firstName : 'Unknown User',
+        },
+      };
+    } else {
+      const usersWhoLiked = await UserModel.find({ _id: { $in: post.likes.slice(0, 2) } });
+      const otherCount = likeCount - 2;
+      let likedBy = usersWhoLiked.map((user) => user.firstName).join(', ');
+      if (otherCount > 0) {
+        likedBy += `, and ${otherCount} others`;
+      }
+      return {
+        status: 200,
+        message: `${likeCount} people liked this post`,
+        data: {
+          count: likeCount,
+          likedBy,
+        },
+      };
+    }
   } catch (error) {
     console.error(error);
     return {
       status: 500,
-      message: "An error occurred while fetching like count.",
+      message: "An error occurred while fetching like count",
     };
   }
 };
@@ -595,7 +624,7 @@ export const removeFromFeaturedPost = async (postId, userId) => {
   }
 };
 
-export const deleteComment = async (postId, commentId) => {
+export const deleteComment = async (postId, commentId, userId) => {
   try {
     const post = await PostModel.findById(postId);
 
@@ -605,6 +634,10 @@ export const deleteComment = async (postId, commentId) => {
         message: 'Post not found.',
       };
     }
+
+    const type = "postCommented";
+    await deleteNotification(post.user, userId, type, postId);
+
     const commentIndex = post.comments.findIndex((comment) =>
       comment._id.equals(commentId)
     );

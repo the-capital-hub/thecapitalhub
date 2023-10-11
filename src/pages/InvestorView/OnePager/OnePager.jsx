@@ -140,7 +140,7 @@ const OnePager = () => {
 
   return (
     <MaxWidthWrapper>
-      <div className="border-start">
+      <div className="border_left">
         <div className="onePager shadow-sm border">
           <div className="d-flex justify-content-between align-items-center w-100">
             <h1>One Pager</h1>

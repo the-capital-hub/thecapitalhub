@@ -2,12 +2,18 @@ import React, { useState, useEffect } from "react";
 import "./CompanyProfileForm.scss";
 import { postStartUpData, postInvestorData } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
+import AfterSuccessPopup from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 
 export default function CompanyProfileForm({ companyData, investor = false }) {
   const [formData, setFormData] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [fromSubmit, setFromSubmit] = useState(false);
+  const [popupData, setPopupData] = useState("");
+
+
 
   useEffect(() => {
+   
     if (investor) {
       setFormData({
         founderId: companyData.founderId || "",
@@ -62,6 +68,8 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
       } else {
         const response = await postStartUpData(formData);
         console.log(response);
+        setPopupData("Changes saved")
+        setFromSubmit(true)
       }
     } catch (error) {
       console.log(error);
@@ -198,6 +206,13 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
           Save
         </button>
       </form>
+      {fromSubmit && (
+      <AfterSuccessPopup
+            withoutOkButton
+            onClose={() => setFromSubmit(!fromSubmit)}
+            successText={popupData}
+          />
+          )}
     </div>
   );
 }

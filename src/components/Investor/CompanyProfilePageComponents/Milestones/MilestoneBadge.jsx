@@ -1,10 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function MilestoneBadge({ badge, milestone, text, isMini }) {
+export default function MilestoneBadge({
+  badge,
+  milestone,
+  text,
+  isMini,
+  theme,
+}) {
   return (
     <div
-      className="p-4 d-flex flex-column align-items-center gap-3 rounded-5"
+      className="badge_container p-4 d-flex flex-column align-items-center gap-3 rounded-5"
       style={{
         backgroundColor: "#EDEDED",
         width: `${isMini ? "160px" : "260px"}`,
@@ -34,7 +40,7 @@ export default function MilestoneBadge({ badge, milestone, text, isMini }) {
       {isMini ? (
         ""
       ) : (
-        <Link className="see__more orange align-self-end mt-auto">
+        <Link className={`see__more orange align-self-end mt-auto ${theme}`}>
           See more
         </Link>
       )}
