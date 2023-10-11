@@ -2,19 +2,19 @@ import "./InvestorManageAccount.scss";
 import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import logoIcon from "../../../Images/manageAccount/Group 15186.svg";
 import profileIcon from "../../../Images/investorIcon/profilePic.webp";
-import profileIconRaghu from "../../../Images/aboutUs/Raghu.jpeg";
-import profileIconRaju from "../../../Images/Rectangle 1895.png";
 
 import { changePasswordAPI } from "../../../Service/user";
 import { useEffect, useState } from "react";
 import LogOutPopUp from "../../PopUp/LogOutPopUp/LogOutPopUp";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 // import { logout } from "../../../Store/Action/userAction";
 import { logout } from "../../../Store/features/user/userSlice";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 const InvestorManageAccount = () => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
   const initialForm = {
     oldPassword: "",
     newPassword: "",
@@ -136,7 +136,7 @@ const InvestorManageAccount = () => {
                 </div>
               </section>
               <section className="col">
-                <div className="present_account card">
+                <div className="present_account card"> 
                   {/* Header */}
                   <div className="d-flex align-items-center">
                     <div className="logo">
@@ -148,11 +148,11 @@ const InvestorManageAccount = () => {
                   {/* Body */}
                   <div className="d-flex align-items-center">
                     <div className="profile_image">
-                      <img src={profileIcon} alt="img" />
+                      <img src={loggedInUser?.profilePicture} alt="img" />
                     </div>
                     <div className="name_email">
-                      <h4 className="text-break">Pramod Badiger</h4>
-                      <h6 className="text-break">Pramodbadiger@gmail.com</h6>
+                      <h4 className="text-break">{loggedInUser?.firstName} {loggedInUser?.lastName}</h4>
+                      <h6 className="text-break">{loggedInUser?.email}</h6>
                     </div>
                   </div>
                   {/* Footer */}
