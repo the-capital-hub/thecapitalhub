@@ -74,9 +74,7 @@ export const editStartUpOneLink = async (req, res) => {
 export const editStartUpIntroMessage = async (req, res) => {
   try {
     const { introductoryMessage } = req.body;
-    const { status, ...data } = await updateStartUpData(req.userId, {
-      introductoryMessage,
-    });
+    const { status, ...data } = await updateStartUpData(req.userId,introductoryMessage);
     res.status(status).send({
       message: data.message,
       data: { introductoryMessage: data.data.introductoryMessage },

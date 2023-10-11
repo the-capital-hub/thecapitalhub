@@ -43,6 +43,7 @@ const OneLink = () => {
     // navigate("/login");
   };
 
+
   return (
     <MaxWidthWrapper>
       <div className="onelink_container">
@@ -52,6 +53,7 @@ const OneLink = () => {
             <ShareLink
               OneLink={company?.oneLink}
               onExitClick={handleExitClick}
+              isExitClicked={isExitClicked}
             />
             <IntroductoryMessage
               title={"Introductory message"}
@@ -60,7 +62,8 @@ const OneLink = () => {
                 folder: FolderImage,
                 video: VideoImage,
               }}
-              para={company.introductoryMessage}
+              para={company?.introductoryMessage}
+              previous={company?.previousIntroductoryMessage}
               input={true}
               isExitClicked={isExitClicked}
               setCompany={setCompany}

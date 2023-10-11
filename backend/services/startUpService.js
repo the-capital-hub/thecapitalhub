@@ -106,7 +106,7 @@ export const getOnePager = async (oneLink) => {
   }
 };
 
-export const updateStartUpData = async (founderId, data) => {
+export const updateStartUpData = async (founderId, introductoryMessage) => {
   try {
     const startUp = await StartUpModel.findOne({ founderId });
     if (!startUp) {
@@ -117,7 +117,12 @@ export const updateStartUpData = async (founderId, data) => {
     }
     const updatedData = await StartUpModel.findOneAndUpdate(
       { founderId },
-      data,
+      {
+        $push: {
+          previousIntroductoryMessage: startUp.introductoryMessage || introductoryMessage,
+        },
+        introductoryMessage: introductoryMessage,
+      },
       { new: true }
     );
     return {
