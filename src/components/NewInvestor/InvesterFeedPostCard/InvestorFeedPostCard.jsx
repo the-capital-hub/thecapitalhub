@@ -22,6 +22,8 @@ import {
   sendPostComment,
   unsavePost,
   getLikeCount,
+  toggleLikeComment,
+  deleteComment,
 } from "../../../Service/user";
 import SmileeIcon from "../../../Images/Group 15141(1).svg";
 import ImageIcon from "../../../Images/Group 15141.svg";
@@ -35,6 +37,8 @@ import ModalBSHeader from "../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
 import ModalBSFooter from "../../PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
 import ModalBSBody from "../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
 import Linkify from "react-linkify";
+import deleteIcon from "../../../Images/post/delete.png";
+
 
 const FeedPostCard = ({
   postId,
@@ -93,14 +97,14 @@ const FeedPostCard = ({
         userId: loggedInUser._id,
         text: commentText,
       });
-      if (response.data.status === "200") {
+      if (response.data.status === 200) {
         await getPostComment({ postId }).then((res) => {
           console.log("response", res.data.data);
           setComments(res.data.data);
         });
       }
 
-      console.log("Comment submitted successfully:", response.data);
+      console.log("Comment submitted successfully:", response.data.status);
 
       setCommentText("");
     } catch (error) {
@@ -248,6 +252,41 @@ const handleDoubleClick = () => {
       })
       .catch((error) => console.log(error));
   }, [liked]);
+
+
+
+
+
+  const commentlikeUnlikeHandler = async (postId, commentId) => {
+    try {
+      const result = await toggleLikeComment(postId, commentId);
+      console.log("Toggle Like Result:", result);
+
+      const response = await getPostComment({ postId });
+      setComments(response.data.data);
+    } catch (error) {
+      console.error("Error  investor likeDislike comment : ", error);
+    }
+  };
+
+
+
+  const deleteComments = async (postId, commentId) => {
+    console.log(postId, commentId);
+    try {
+     
+      await deleteComment(postId, commentId);
+      await getPostComment({ postId }).then((res) => {
+        console.log("response", res.data.data);
+        setComments(res.data.data);
+      });
+    } catch (error) {
+      console.log("Error investor deleting comment : ", error);
+    }
+  };
+
+
+
 
   return (
     <>
@@ -437,7 +476,7 @@ const handleDoubleClick = () => {
                         src={commentIcon}
                         width={16}
                         alt="comment post"
-                        onClick={() => setShowComment(!showComment)}
+                         onClick={() => setShowComment(!showComment)}
                       />
                     </div>
                   </div>
@@ -557,7 +596,7 @@ const handleDoubleClick = () => {
                             new Date(b.createdAt) - new Date(a.createdAt)
                         )
                         .map((val) => (
-                          <section className="comment_messages" key={val._id}>
+                          <section className="comment_messages my-2" key={val._id}>
                             <div className="connection_item d-flex flex-column flex-md-row justify-content-between">
                               <div className="connection_left">
                                 {val.user && (
@@ -586,7 +625,54 @@ const handleDoubleClick = () => {
                                 </span>
                               </div>
                             </div>
-                            <p className="comment_text">{val.text}</p>
+                            <p className="comment_text mb-1">{val.text}</p>
+
+
+
+
+
+                            <hr className="p-0 m-0" />
+                          <div className="d-flex  justify-content-between px-2">
+                            <div className="p-2">
+                              {val?.likes.includes(loggedInUser._id) ? (
+                                <img
+                                  src={fireIcon}
+                                  width={18}
+                                  alt="like post"
+                                  onClick={() =>
+                                    commentlikeUnlikeHandler(postId, val._id)
+                                  }
+                                />
+                              ) : (
+                                <img
+                                  src={bwFireIcon}
+                                  width={18}
+                                  alt="like post"
+                                  onClick={() =>
+                                    commentlikeUnlikeHandler(postId, val._id)
+                                  }
+                                />
+                              )}
+                              <span
+                                className=" mx-3 text-secondary"
+                                style={{ fontSize: "14px" }}
+                              >
+                                {val?.likes.length} likes
+                              </span>
+                            </div>
+                            { userId === loggedInUser?._id && (
+                                <img
+                                  src={deleteIcon}
+                                  alt="image"
+                                  className="deleteIcon py-1"
+                                  onClick={() => deleteComments(postId, val._id)}
+                                />
+                                )}
+                          </div>
+
+
+
+
                           </section>
                         ))}
                     </div>
