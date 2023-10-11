@@ -184,6 +184,7 @@ export default function EditCompanyProfilePage() {
               }
               field={"no_of_investers"}
               colorCardData={colorCardData}
+              noRupee={true}
             />
             <ColorCard
               color="white"
