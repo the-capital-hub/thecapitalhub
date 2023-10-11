@@ -446,7 +446,7 @@ const InvestorHome = () => {
                   </div>
                 </div>
                 <div className="col-12 mt-2 milestones">
-                  <ConnectionCard  userId={loggedInUser._id} />
+                  <ConnectionCard userId={loggedInUser._id} />
                 </div>
               </div>
 
@@ -513,6 +513,7 @@ const InvestorHome = () => {
                       }
                       field={field}
                       colorCardData={colorCardData}
+                      noRupee={true}
                     />
                     <ColorCard
                       color="white"

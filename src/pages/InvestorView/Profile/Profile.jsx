@@ -43,13 +43,13 @@ function Profile() {
 
   return (
     <MaxWidthWrapper>
-      <div className="profile_main_container border-start">
+      <div className="profile_main_container border-start ps-3">
         <div className="row mt-2">
           {/* Added d-flex flex-column gap-3 here. Easy to manipulate - Srihari */}
           <div className="col mb-5 d-flex flex-column gap-3">
             <div className="row">
               <div className="col-12 mt-2">
-                <div className="border box ">
+                <div className="border box px-4">
                   <div className="row">
                     <div className="col-7">
                       <div className="image_name_section mt-2">
@@ -249,6 +249,7 @@ function Profile() {
                   <Milestones
                     headingClass={"typography"}
                     containerClass={"p-3"}
+                    theme="investor"
                   />
                   {/* <div className="personal_information_header">
                     <h2 className="typography">Milestones</h2>
@@ -295,6 +296,7 @@ function Profile() {
                     image={About3}
                     amount={colorCard.no_of_investers}
                     isOneLink={true}
+                    noRupee={true}
                   />
                   <ColorCard
                     color="white"

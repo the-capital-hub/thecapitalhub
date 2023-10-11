@@ -13,7 +13,7 @@ import {
 } from "../../../PopUp/ModalBS";
 import AddMilestoneModal from "./AddMilestoneModal";
 
-export default function Milestones({ headingClass, containerClass }) {
+export default function Milestones({ headingClass, containerClass, theme }) {
   // Mock data array
   const companyMilestones = [
     {
@@ -34,7 +34,7 @@ export default function Milestones({ headingClass, containerClass }) {
     <div className={` d-flex flex-column gap-4 ${containerClass} `}>
       <div className="d-flex align-items-center justify-content-between">
         <h2 className={headingClass}>Milestones</h2>
-        <Link className="see__more align-self-end">See more</Link>
+        <Link className={`see__more align-self-end ${theme}`}>See more</Link>
       </div>
       <div className="milestone__cards__container d-flex align-items-center gap-5 pb-3">
         {companyMilestones.map((mile, index) => {
@@ -44,6 +44,7 @@ export default function Milestones({ headingClass, containerClass }) {
               milestone={mile.milestone}
               text={mile.text}
               key={`${mile.milestone}${index}`}
+              theme={theme}
             />
           );
         })}
@@ -53,7 +54,7 @@ export default function Milestones({ headingClass, containerClass }) {
         <div className="align-self-end">
           <ModalBsLauncher
             id={"AddMilestoneModal"}
-            className="orange_button d-flex align-items-center gap-1 w-auto "
+            className={`orange_button d-flex align-items-center gap-1 w-auto ${theme}`}
           >
             <span>Add</span>
           </ModalBsLauncher>
