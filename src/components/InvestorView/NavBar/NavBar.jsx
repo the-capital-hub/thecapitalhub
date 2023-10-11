@@ -74,7 +74,7 @@ const NavBar = (props) => {
     <>
       <div className="container pt-1">
         <div className="row investor_view_navbar ">
-          <div className="col-12 d-flex justify-content-center">
+          <div className="col-12 d-flex ms-5">
             <div className="row bar_logo_container ">
               <div className="logo_container">
                 <img src={Logo} alt="bar" />

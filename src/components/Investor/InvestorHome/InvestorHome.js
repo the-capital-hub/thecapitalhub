@@ -57,12 +57,12 @@ const InvestorHome = () => {
         setCompanyName(data?.company);
         // console.log("ssss__>", data.colorCard.last_round_investment);
         setColorCardData({
-          last_round_investment: data.colorCard.last_round_investment,
-          total_investment: data.colorCard.total_investment,
-          no_of_investers: data.colorCard.no_of_investers,
-          fund_ask: data.colorCard.fund_ask,
-          valuation: data.colorCard.valuation,
-          raised_funds: data.colorCard.raised_funds,
+          last_round_investment: data?.colorCard?.last_round_investment,
+          total_investment: data?.colorCard?.total_investment,
+          no_of_investers: data?.colorCard?.no_of_investers,
+          fund_ask: data?.colorCard?.fund_ask,
+          valuation: data?.colorCard?.valuation,
+          raised_funds: data?.colorCard?.raised_funds,
         });
       });
     }
@@ -70,7 +70,7 @@ const InvestorHome = () => {
 
   const [editCompanyName, setEditCompanyName] = useState({
     founderId: loggedInUser._id,
-    company: companyName,
+    company: loggedInUser.startUp.company,
   });
 
   const dispatch = useDispatch();
@@ -142,7 +142,7 @@ const InvestorHome = () => {
             type="text"
             className="w-100 profile_edit_field"
             name={fieldName}
-            value={editCompanyName.fieldName}
+            value={editCompanyName[fieldName]}
             onChange={companyNameHandler}
           />
         );
@@ -153,7 +153,7 @@ const InvestorHome = () => {
             type="text"
             className="w-100 profile_edit_field"
             name={fieldName}
-            value={editCompanyName.fieldName}
+            value={personalData[fieldName]}
             onChange={companyNameHandler}
             rows={4}
           />
@@ -164,7 +164,7 @@ const InvestorHome = () => {
           type="text"
           className="w-100 profile_edit_field"
           name={fieldName}
-          value={personalData.fieldName}
+          value={personalData[fieldName]}
           onChange={personalChangeHandler}
         />
       );
@@ -446,7 +446,7 @@ const InvestorHome = () => {
                   </div>
                 </div>
                 <div className="col-12 mt-2 milestones">
-                  <ConnectionCard  userId={loggedInUser._id} />
+                  <ConnectionCard userId={loggedInUser._id} />
                 </div>
               </div>
 
@@ -513,6 +513,7 @@ const InvestorHome = () => {
                       }
                       field={field}
                       colorCardData={colorCardData}
+                      noRupee={true}
                     />
                     <ColorCard
                       color="white"

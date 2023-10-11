@@ -49,7 +49,6 @@ const Feed = () => {
       });
   };
 
-
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const showPopup = queryParams.get("showPopup") === "true";
@@ -120,9 +119,11 @@ const Feed = () => {
                 dataLength={allPosts.length}
                 next={fetchMorePosts}
                 hasMore={hasMore}
-                loader={<div className="container p-5 text-center my-5 bg-white rounded-5 shadow-sm ">
-                  <SpinnerBS />
-                </div>}
+                loader={
+                  <div className="container p-5 text-center my-5 bg-white rounded-5 shadow-sm ">
+                    <SpinnerBS />
+                  </div>
+                }
               >
                 {allPosts?.map(
                   ({

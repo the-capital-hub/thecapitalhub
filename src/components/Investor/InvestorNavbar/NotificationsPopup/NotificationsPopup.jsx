@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./NotificationsPopup.scss";
 import {
   fetchNotificationsAPI,
+  markAllNotificationsReadAPI,
   markNotificationAsReadAPI,
 } from "../../../../Service/user";
 import { useSelector } from "react-redux";
@@ -85,48 +86,69 @@ function NotificationsPopup({ toggleVisibility }) {
     }
   };
 
+  const markAllRead = async () => {
+    try {
+      await markAllNotificationsReadAPI();
+      await fetchNotifications();
+    } catch (error) {
+      console.log("Error marking all notifications as read: ", error);
+    }
+  };
+
   return (
     <div className="notifications-popup border shadow-sm rounded bg-white">
+      <div className="d-flex justify-content-between align-items-center py-1 border-bottom border-2">
+        <span>Notifications</span>
+        <button className="btn btn-xs btn-light" onClick={markAllRead}>
+          Mark all read
+        </button>
+      </div>
       {!loading ? (
         notifications.length ? (
           <>
-            {notifications.map(
-              ({
-                _id,
-                sender: { firstName, lastName, _id: userId },
-                type,
-                createdAt,
-                isRead,
-                post,
-                connection,
-              }) => (
-                <div className="notification">
-                  <div className="content d-flex flex-column gap-2">
-                    <p className="m-0">
-                      <Link
-                        to={`/user/${userId}`}
-                        className="fw-bold"
-                        onClick={() => toggleVisibility(false)}
-                      >
-                        {firstName} {lastName}
-                      </Link>{" "}
-                      {notificationType(type, post || connection)}
-                    </p>
-                    <TimeAgo datetime={createdAt} locale="" className="fs-10" />
+            {notifications
+              .slice(0, 5)
+              .map(
+                ({
+                  _id,
+                  sender: { firstName, lastName, _id: userId },
+                  type,
+                  createdAt,
+                  isRead,
+                  post,
+                  connection,
+                }) => (
+                  <div className="notification">
+                    <div className="content d-flex flex-column gap-2">
+                      <p className="m-0">
+                        <Link
+                          to={`/user/${userId}`}
+                          className="fw-bold"
+                          onClick={() => toggleVisibility(false)}
+                        >
+                          {firstName} {lastName}
+                        </Link>{" "}
+                        {notificationType(type, post || connection)}
+                      </p>
+                      <TimeAgo
+                        datetime={createdAt}
+                        locale=""
+                        className="fs-10"
+                      />
+                    </div>
+                    <div className="actions d-flex flex-column gap-1">
+                      {!isRead && (
+                        <button
+                          className="btn btn-light btn-sm"
+                          onClick={() => markAsRead(_id)}
+                        >
+                          Mark as read
+                        </button>
+                      )}
+                    </div>
                   </div>
-                  <div className="actions d-flex flex-column gap-1">
-                    {!isRead && (
-                      <button
-                        className="btn btn-light btn-sm"
-                        onClick={() => markAsRead(_id)}
-                      >
-                        Mark as read
-                      </button>
-                    )}
-                  </div>
-                </div>
-              )
-            )}
+                )
+              )}
             {notifications.length > 5 && (
               <button
                 className="btn btn-light btn-sm"

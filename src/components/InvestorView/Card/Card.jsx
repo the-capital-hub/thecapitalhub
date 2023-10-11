@@ -1,12 +1,18 @@
 import "./Card.scss";
 import { threeblackdots } from "../../../Images/InvestorsView";
 
-const Card = ({ text, onClicked }) => {
+const Card = ({ text, onClicked, image }) => {
   return (
     <div onClick={onClicked} className="investorsCard">
-      <div className="container">
+      <div className="folder_container">
+        <img
+          src={image}
+          alt={text}
+          style={{ objectFit: "cover", height: "auto", width: "180px" }}
+          className="align-self-center"
+        />
         {/* <img src={threeblackdots} alt="" /> */}
-        <div className="wrapper">
+        <div className="folder_footer">
           <hr />
           <p>{text}</p>
         </div>

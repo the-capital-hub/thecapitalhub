@@ -8,7 +8,7 @@ import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidth
 import CompanyProfileList from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfileList";
 
 function Explore() {
-  const [activeTab, setActiveTab] = useState("StartupBackground");
+  const [activeTab, setActiveTab] = useState("Startup");
 
   useEffect(() => {
     document.title = "Explore | Investors - The Capital Hub";
@@ -22,22 +22,22 @@ function Explore() {
           <h5 className="h5">Find StartUps by</h5>
           <div className="filter_by">
             <button
-              className={activeTab === "StartupBackground" ? "active" : ""}
-              onClick={() => setActiveTab("StartupBackground")}
+              className={activeTab === "Startup" ? "active" : ""}
+              onClick={() => setActiveTab("Startup")}
             >
-              Startup Background
+              Startup
             </button>
             <button
-              className={activeTab === "FoundingTeam" ? "active" : ""}
-              onClick={() => setActiveTab("FoundingTeam")}
+              className={activeTab === "Founder" ? "active" : ""}
+              onClick={() => setActiveTab("Founder")}
             >
-              Founding Team
+              Founder
             </button>
             <button
-              className={activeTab === "RevenuesFunding" ? "active" : ""}
-              onClick={() => setActiveTab("RevenuesFunding")}
+              className={activeTab === "Investor" ? "active" : ""}
+              onClick={() => setActiveTab("Investor")}
             >
-              Revenues & Funding
+              Investor
             </button>
           </div>
           <div className="filter_by_selections row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2">
@@ -52,7 +52,7 @@ function Explore() {
               name="incorporationModel"
             />
             <FilterBySelect label="DPIIT Registered" name="dpiitRegistered" />
-            {activeTab === "FoundingTeam" && (
+            {activeTab === "Founder" && (
               <>
                 <FilterBySelect label="Incubation" name="incubation" />
                 <FilterBySelect label="Incubation" name="incubation" />

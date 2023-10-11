@@ -9,6 +9,9 @@ export const addNotification = async (recipient, sender, type, post = null, conn
       post,
       connection,
     });
+    if (sender === recipient) {
+      return;
+    }
     await notification.save();
     return {
       status: 200,
@@ -88,4 +91,31 @@ export const markAllMessagesAsRead = async (userId) => {
   }
 };
 
+export const deleteNotification = async (recipient, sender, type, id) => {
+  try {
+    const result = await NotificationModel.deleteMany({
+      $and: [
+        {
+          $or: [
+            { connection: id },
+            { post: id },
+          ],
+        },
+        { recipient, sender, type },
+      ],
+    });
+    if (result.deletedCount === 0) {
+      return {
+        status: 200,
+        message: "No notifications found for the given ID and recipients",
+      };
+    }
+    return {
+      status: 200,
+      message: "Notifications deleted successfully by connection or post ID and recipients",
+    };
+  } catch (error) {
+    throw error;
+  }
+};
 

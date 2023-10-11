@@ -1,7 +1,7 @@
 import { PostModel } from "../models/Post";
 import { UserModel } from "../models/User";
 import { cloudinary } from "../utils/uploadImage";
-import { addNotification } from "./notificationService.js";
+import { addNotification, deleteNotification } from "./notificationService.js";
 
 export const createNewPost = async (data) => {
   try {
@@ -196,6 +196,8 @@ export const likeUnlikePost = async (postId, userId) => {
     const hasLiked = post.likes.includes(userId);
     if (hasLiked) {
       post.likes.pull(userId);
+      const type = "postLiked";
+      deleteNotification(post.user, userId, type, postId);
     } else {
       post.likes.push(userId);
       const type = "postLiked";
@@ -622,7 +624,7 @@ export const removeFromFeaturedPost = async (postId, userId) => {
   }
 };
 
-export const deleteComment = async (postId, commentId) => {
+export const deleteComment = async (postId, commentId, userId) => {
   try {
     const post = await PostModel.findById(postId);
 
@@ -632,6 +634,10 @@ export const deleteComment = async (postId, commentId) => {
         message: 'Post not found.',
       };
     }
+
+    const type = "postCommented";
+    await deleteNotification(post.user, userId, type, postId);
+
     const commentIndex = post.comments.findIndex((comment) =>
       comment._id.equals(commentId)
     );

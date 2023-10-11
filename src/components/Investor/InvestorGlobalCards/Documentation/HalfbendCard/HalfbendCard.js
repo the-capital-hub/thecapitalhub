@@ -12,10 +12,17 @@ const HalfbendCard = ({folderName, userId}) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   console.log("user",userId)
   useEffect(() => {
-    getPdfData(loggedInUser?._id || userId, folderName).then((res) => {
-      setData(res.data);
-      // console.log("data", res);
-    });
+    if (userId) {
+      getPdfData(userId, folderName).then((res) => {
+        setData(res.data);
+        // console.log("data", res);
+      });
+    } else {
+      getPdfData(loggedInUser._id, folderName).then((res) => {
+        setData(res.data);
+        // console.log("data", res);
+      });
+    }
   }, [loggedInUser, userId, folderName]);
 
   const openPdfInNewWindow = (pdfUrl) => {
@@ -129,7 +136,7 @@ const HalfbendCard = ({folderName, userId}) => {
     <div className="half_bend_container row">
       <div className="box_container mt-4">
         <div className="row">
-          {data.map((item) => (
+          {data?.map((item) => (
             <div
               className="col-md-4 d-flex justify-content-center align-items-center main_col"
               key={item.fileName}
