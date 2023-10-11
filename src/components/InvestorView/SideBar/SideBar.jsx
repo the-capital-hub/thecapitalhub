@@ -139,9 +139,28 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   {!sidebarCollapsed && <span>Documentation</span>}
                 </Link>
               </MenuItem>
+
+              {/* Invest now */}
+              <div className="pt-2">
+                <MenuItem
+                  active={currentTab === "investNow"}
+                  onClick={() => setCurrentTab("investNow")}
+                  className="active-item invest_now"
+                >
+                  <Link to="investnow">
+                    <img
+                      src={investIcon}
+                      alt="image"
+                      width="17px"
+                      height="17px"
+                    />
+                    {!sidebarCollapsed && <span>Invest Now</span>}
+                  </Link>
+                </MenuItem>
+              </div>
             </Menu>
           </SidebarContent>
-          <SidebarFooter>
+          {/* <SidebarFooter>
             <Menu iconShape="round">
               <MenuItem
                 active={currentTab === "investNow"}
@@ -159,7 +178,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 </Link>
               </MenuItem>
             </Menu>
-          </SidebarFooter>
+          </SidebarFooter> */}
         </ProSidebar>
       </div>
     </div>

@@ -14,6 +14,9 @@
     z-index: 1;
     transition: width 0.3s ease;
     overflow: scroll;
+    // border: 1px solid blue;
+    display: flex;
+    flex-direction: column;
 
     // Add class for sidebar in fixed position
     &.fixed {
@@ -39,7 +42,7 @@
     flex: 1;
     margin-left: 210px;
     transition: margin-left 0.3s ease;
-    margin-top: 10%;
+    margin-top: min(100px, 10%);
     overflow: hidden;
   }
 
