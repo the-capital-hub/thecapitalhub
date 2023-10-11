@@ -123,8 +123,6 @@ const InvestorHome = () => {
   };
 
   const renderEditableField = (fieldName) => {
-    // console.log(editCompanyName);
-    console.log("personal", personalData);
     if (personalEditable) {
       if (fieldName === "profilePicture") {
         return (
