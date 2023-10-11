@@ -20,7 +20,7 @@ const Documentation = () => {
   }, []);
   return (
     <MaxWidthWrapper>
-      <div className="border-start">
+      <div className="border_left">
         <div className="documentation shadow-sm border">
           <h1>Documentation</h1>
           <div className="docscontainer">

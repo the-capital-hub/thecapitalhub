@@ -1,3 +1,10 @@
+.border_left {
+  border: 0;
+  @media (min-width: 1000px) {
+    border-left: 1px solid rgba(230, 230, 230, 1);
+  }
+}
+
 .documentation {
   background: white;
   margin-left: 20px;

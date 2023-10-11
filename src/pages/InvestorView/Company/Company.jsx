@@ -335,16 +335,18 @@ function Company() {
 
     // Newer version of company profile
     <MaxWidthWrapper>
-      <div className="company__profile__container m-3 mt-5 mt-xl-3 ps-3 border-start">
-        {onePager.length !== 0 ? (
-          <CompanyProfile isOnelink={true} companyData={onePager} />
-        ) : (
-          <div className="bg-white rounded-4 border p-lg-4 shadow-sm d-flex justify-content-center min-vh-100">
-            <div class="spinner-border" role="status">
-              <span class="visually-hidden">Loading...</span>
+      <div className="border_left">
+        <div className="company__profile__container m-3 mt-5 mt-xl-3 ps-3 border-start">
+          {onePager.length !== 0 ? (
+            <CompanyProfile isOnelink={true} companyData={onePager} />
+          ) : (
+            <div className="bg-white rounded-4 border p-lg-4 shadow-sm d-flex justify-content-center min-vh-100">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </MaxWidthWrapper>
   );
