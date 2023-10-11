@@ -70,6 +70,8 @@ const CreatePostPopUp = ({
     smileeInputRef.current.click();
   };
 
+  const [cropComplete, setCropComplete] = useState(false);
+
   const [previewImage, setPreviewImage] = useState("");
   const [previewVideo, setPreviewVideo] = useState("");
   const [previewVideoType, setPreviewVideoType] = useState("");
@@ -121,7 +123,10 @@ const CreatePostPopUp = ({
   const handleOneLinkClick = () => {
     getStartupByFounderId(loggedInUser._id)
       .then(({ data }) => {
-        setPostText((prevPostText) => prevPostText + ` https://thecapitalhub.in/onelink/${data.oneLink}`);
+        setPostText(
+          (prevPostText) =>
+            prevPostText + ` https://thecapitalhub.in/onelink/${data.oneLink}`
+        );
       })
       .catch((error) => console.log(error));
   };
@@ -334,18 +339,27 @@ const CreatePostPopUp = ({
                     />
                   ))}
 
-                {previewImage && (
-                  <div className="image-cropper">
-                    <EasyCrop
-                      image={previewImage}
-                      crop={crop}
-                      zoom={zoom}
-                      onCropChange={setCrop}
-                      onZoomChange={setZoom}
-                      onCropComplete={onCropComplete}
-                    />
+                {previewImage && !cropComplete && (
+                  <div className="d-flex flex-column justify-content-center gap-2">
+                    <div className="image-cropper">
+                      <EasyCrop
+                        image={previewImage}
+                        crop={crop}
+                        zoom={zoom}
+                        onCropChange={setCrop}
+                        onZoomChange={setZoom}
+                        onCropComplete={onCropComplete}
+                      />
+                    </div>
+                    <button
+                      className="btn btn-light btn-sm"
+                      onClick={() => setCropComplete(true)}
+                    >
+                      Crop
+                    </button>
                   </div>
                 )}
+                {cropComplete && <img src={croppedImage} alt="" />}
 
                 {previewVideo && (
                   <video
