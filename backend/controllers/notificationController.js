@@ -1,6 +1,7 @@
 import {
   getNotificationsByUserId,
   markMessageAsRead,
+  markAllMessagesAsRead,
 } from "../services/notificationService.js";
 
 export const getNotificationsByUserIdController = async (req, res) => {
@@ -27,6 +28,20 @@ export const markMessageAsReadController = async (req, res) => {
     return res.status(500).json({
       status: 500,
       message: "An error occurred while marking the message as read",
+    });
+  }
+};
+
+export const markAllMessagesAsReadController = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const response = await markAllMessagesAsRead(userId);
+    return res.status(response.status).json(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      status: 500,
+      message: "An error occurred while marking all the message as read",
     });
   }
 };

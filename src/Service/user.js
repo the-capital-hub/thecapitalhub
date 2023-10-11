@@ -833,3 +833,12 @@ export const markAllNotificationsReadAPI = async () => {
     console.log("Error marking all notifications as read: ", error);
   }
 };
+
+export const getLikeCount = async (postId) => {
+  try {
+    const response = await axiosInstance.get(`${API.getLikeCount}/${postId}`);
+    return response.data;
+  } catch (error) {
+    console.log("Error getting notification count : ", error);
+  }
+};
