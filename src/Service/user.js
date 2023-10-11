@@ -827,7 +827,8 @@ export const markNotificationAsReadAPI = async (_id) => {
 
 export const markAllNotificationsReadAPI = async () => {
   try {
-    //////
+    const response = await axiosInstance.patch(API.markAllNotificationAsRead);
+    return response.data;
   } catch (error) {
     console.log("Error marking all notifications as read: ", error);
   }

@@ -68,6 +68,7 @@ const API = Object.freeze({
   deleteMessage: `${baseUrl}/message/deleteMessage`,
   getNotifications: `${baseUrl}/notificaton/getNotification`,
   markNotificationAsRead: `${baseUrl}/notificaton/markMessageAsRead`,
+  markAllNotificationAsRead: `${baseUrl}/notificaton/markAllNotificationsAsRead`,
 });
 
 export default API;
