@@ -438,18 +438,45 @@ export const getLikeCount = async (postId) => {
       };
     }
     const likeCount = post.likes.length;
-    return {
-      status: 200,
-      message: "Like count retrieved successfully",
-      data: {
-        count: likeCount,
-      },
-    };
+    if (likeCount === 0) {
+      return {
+        status: 200,
+        message: "No one has liked this post yet",
+        data: {
+          count: 0,
+        },
+      };
+    } else if (likeCount === 1) {
+      const user = await UserModel.findById(post.likes[0]);
+      return {
+        status: 200,
+        message: "1 person liked this post",
+        data: {
+          count: 1,
+          likedBy: user ? user.firstName : 'Unknown User',
+        },
+      };
+    } else {
+      const usersWhoLiked = await UserModel.find({ _id: { $in: post.likes.slice(0, 2) } });
+      const otherCount = likeCount - 2;
+      let likedBy = usersWhoLiked.map((user) => user.firstName).join(', ');
+      if (otherCount > 0) {
+        likedBy += `, and ${otherCount} others`;
+      }
+      return {
+        status: 200,
+        message: `${likeCount} people liked this post`,
+        data: {
+          count: likeCount,
+          likedBy,
+        },
+      };
+    }
   } catch (error) {
     console.error(error);
     return {
       status: 500,
-      message: "An error occurred while fetching like count.",
+      message: "An error occurred while fetching like count",
     };
   }
 };
