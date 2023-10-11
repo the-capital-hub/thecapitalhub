@@ -13,6 +13,7 @@ import repostInstantlyIcon from "../../../../Images/post/repost-grey.svg";
 import saveIcon from "../../../../Images/post/save.svg";
 import savedIcon from "../../../../Images/post/saved.png";
 import deleteIcon from "../../../../Images/post/delete.png";
+import Modal from "../../../PopUp/Modal/Modal";
 
 import TimeAgo from "timeago-react";
 import { useSelector } from "react-redux";
@@ -71,7 +72,6 @@ const FeedPostCard = ({
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
-  console.log(comments);
   const [savedPostId, setSavedPostId] = useState([]);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showSavePopUp, setshowSavePopUp] = useState(false);
@@ -338,11 +338,6 @@ const FeedPostCard = ({
     }
   };
 
-
-// double click like 
-const handleDoubleClick = () => {
-likeUnlikeHandler()
-}
   useEffect(() => {
     getLikeCount(postId)
       .then(({ data }) => {
@@ -351,12 +346,29 @@ likeUnlikeHandler()
       .catch((error) => console.log(error));
   }, []);
 
+  const singleClickTimer = useRef(null);
+  const [showImgagePopup, setShowImgagePopup] = useState(false);
+
+  const handleImageOnClick = () => {
+    if (!singleClickTimer.current) {
+      singleClickTimer.current = setTimeout(() => {
+        setShowImgagePopup(true);
+        singleClickTimer.current = null;
+      }, 300);
+    } else {
+      likeUnlikeHandler();
+      clearTimeout(singleClickTimer.current);
+      singleClickTimer.current = null;
+    }
+  };
+
   return (
     <>
       <div className="feedpostcard_main_container mb-2">
         <div
-          className={`box feedpostcard_container mt-2 ${repostPreview && "rounded shadow-sm border"
-            }`}
+          className={`box feedpostcard_container mt-2 ${
+            repostPreview && "rounded shadow-sm border"
+          }`}
         >
           {/* Post Header */}
           {/* <div className="feed_header_container border-2 border-bottom mb-3 pb-2"> */}
@@ -458,7 +470,7 @@ likeUnlikeHandler()
                         data-bs-toggle="modal"
                         data-bs-target="#reportPostModal"
                         className="d-flex align-items-center gap-2"
-                      // onClick={() => setShowReportModal(true)}
+                        // onClick={() => setShowReportModal(true)}
                       >
                         <IconReportPost />
                         <span>Report</span>
@@ -495,7 +507,7 @@ likeUnlikeHandler()
                     width={!repostPreview ? "100%" : "50%"}
                     src={image}
                     alt="post-image"
-                    onDoubleClick={handleDoubleClick}
+                    onClick={handleImageOnClick}
                   />
                 </span>
               )}
@@ -536,15 +548,7 @@ likeUnlikeHandler()
           {likes && (
             <span className=" mx-3 text-secondary" style={{ fontSize: "14px" }}>
               {/* {likes?.length} likes */}
-              {likedBy ? (
-                <>
-                  Liked By {likedBy}
-                </>
-              ) :
-                <>
-                  {likes?.length} likes
-                </>
-              }
+              {likedBy ? <>Liked By {likedBy}</> : <>{likes?.length} likes</>}
             </span>
           )}
           {!repostPreview && (
@@ -584,8 +588,9 @@ likeUnlikeHandler()
                 {/* Repost and Save posts */}
                 <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                   <span
-                    className={`repost_container rounded ${showRepostOptions ? "bg-light" : ""
-                      }`}
+                    className={`repost_container rounded ${
+                      showRepostOptions ? "bg-light" : ""
+                    }`}
                     ref={repostContainerRef}
                   >
                     <img
@@ -826,6 +831,20 @@ likeUnlikeHandler()
         )}
       </div>
 
+      {showImgagePopup && (
+        <Modal>
+          <div className="image-popup-container position-relative">
+            <button
+              className="btn btn-sm btn-light position-absolute top-0 end-0 m-2"
+              onClick={() => setShowImgagePopup(false)}
+            >
+              X
+            </button>
+            <img src={image} alt="zoomed image" />
+          </div>
+        </Modal>
+      )}
+
       <ModalBSContainer id="reportPostModal">
         <ModalBSHeader title="Report Post" />
         <ModalBSBody>
@@ -842,8 +861,9 @@ likeUnlikeHandler()
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Harassment" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio1"
               >
                 Harassment
@@ -860,8 +880,9 @@ likeUnlikeHandler()
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Spam" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio2"
               >
                 Spam
@@ -878,8 +899,9 @@ likeUnlikeHandler()
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Fraud or scam" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio3"
               >
                 Fraud or scam
@@ -896,8 +918,9 @@ likeUnlikeHandler()
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Hateful Speech" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio4"
               >
                 Hateful Speech
