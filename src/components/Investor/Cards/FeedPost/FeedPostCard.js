@@ -287,6 +287,11 @@ const FeedPostCard = ({
     }
   };
 
+
+// double click like 
+const handleDoubleClick = () => {
+likeUnlikeHandler()
+}
   useEffect(() => {
     getLikeCount(postId)
       .then(({ data }) => {
@@ -439,6 +444,7 @@ const FeedPostCard = ({
                     width={!repostPreview ? "100%" : "50%"}
                     src={image}
                     alt="post-image"
+                    onDoubleClick={handleDoubleClick}
                   />
                 </span>
               )}

@@ -1,6 +1,8 @@
 import "./OtherUserProfile.scss";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import messageIcon from "../../../Images/StartUp/icons/message.svg";
+import connection from "../../../Images/StartUp/icons/connection-user.png";
+
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
 import companyLogo from "../../../Images/dummy/companyLogo.png";
@@ -14,12 +16,18 @@ import valuationIcon from "../../../Images/StartUp/icons/ColoredCards/3Coins.svg
 import raisedFundsIcon from "../../../Images/StartUp/icons/ColoredCards/3CoinStack.svg";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getUserAndStartUpByUserIdAPI } from "../../../Service/user";
+import { getUserAndStartUpByUserIdAPI ,sentConnectionRequest} from "../../../Service/user";
 import FeaturedPostsContainer from "../../../components/Investor/InvestorGlobalCards/MilestoneCard/FeaturedPostsContainer";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import AfterSuccessPopup from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 
+import { useSelector } from "react-redux";
 function OtherUserProfile() {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
   const [userData, setUserData] = useState(null);
+  const [connectionSent, setConnectionSent] = useState(false);
+  console.log("user data", userData);
 
   const { userId } = useParams();
 
@@ -31,6 +39,20 @@ function OtherUserProfile() {
       .then(({ data }) => setUserData(data))
       .catch(() => navigate("/profile"));
   }, [userId]);
+
+  const handleConnect = (userId) => {
+    sentConnectionRequest(loggedInUser._id, userId)
+      .then(({ data }) => {
+        console.log("Connection data: ", data);
+        if (data?.message === "Connection Request Sent") {
+          setConnectionSent(true); // Set the state to true once
+          setTimeout(() => {
+            setConnectionSent(false); // Reset the state after a delay
+          }, 2500);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <MaxWidthWrapper>
@@ -62,18 +84,48 @@ function OtherUserProfile() {
                   </div>
                 </div>
                 <div className="buttons d-flex gap-2 flex-row align-items-md-center">
-                  <Link
-                    to={`/chats?userId=${userData?._id}`}
-                    className="text-decoration-none"
-                  >
-                    <button className="message btn rounded-pill px-3 py-2">
-                      <img src={messageIcon} width={20} alt="message user" />
-                      <span>Message</span>
-                    </button>
-                  </Link>
-                  <button className="more btn rounded-pill px-3 py-2">
-                    <span>More</span>
+
+
+                <Link
+                      to={`/chats?userId=${userData?._id}`}
+                      className="text-decoration-none"
+                    >
+                      <button className="message btn rounded-pill px-3 py-2">
+                        <img src={messageIcon} width={20} alt="message user" />
+                        <span>Message</span>
+                      </button>
+                    </Link>
+
+
+
+
+
+
+
+
+
+
+
+
+                  {userData?.connectionsSent?.includes(loggedInUser._id) ? (
+                     
+                    <button className="connection-status  btn rounded-pill px-3 py-2">
+                    <span>Connected</span>
                   </button>
+                  ) : userData?.connectionsReceived?.includes(loggedInUser._id) ? (
+
+<button className=" connection-status  btn rounded-pill px-3 py-2">
+<img src={connection} width={20} alt="message user" />
+<span>Pending</span>
+</button>
+                  ) : (
+                    <button className="connection-status d-flex  btn rounded-pill px-3 py-2">
+                      <img src={connection} width={20} alt="message user" />
+                      <span onClick={() => handleConnect(userData?._id)}>
+                        Connection
+                      </span>
+                    </button>
+                  )}
                 </div>
               </div>
               <div className="details">
@@ -269,6 +321,13 @@ function OtherUserProfile() {
               </div>
             </div>
           </h4>
+        )}
+        {connectionSent && (
+          <AfterSuccessPopup
+            withoutOkButton
+            onClose={() => setConnectionSent(!connectionSent)}
+            successText="Connection Sent Successfully"
+          />
         )}
       </section>
     </MaxWidthWrapper>
