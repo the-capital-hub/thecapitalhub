@@ -121,7 +121,10 @@ const CreatePostPopUp = ({
   const handleOneLinkClick = () => {
     getStartupByFounderId(loggedInUser._id)
       .then(({ data }) => {
-        setPostText((prevPostText) => prevPostText + ` https://thecapitalhub.in/onelink/${data.oneLink}`);
+        setPostText(
+          (prevPostText) =>
+            prevPostText + ` https://thecapitalhub.in/onelink/${data.oneLink}`
+        );
       })
       .catch((error) => console.log(error));
   };
