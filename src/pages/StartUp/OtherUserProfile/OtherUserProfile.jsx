@@ -16,7 +16,10 @@ import valuationIcon from "../../../Images/StartUp/icons/ColoredCards/3Coins.svg
 import raisedFundsIcon from "../../../Images/StartUp/icons/ColoredCards/3CoinStack.svg";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getUserAndStartUpByUserIdAPI ,sentConnectionRequest} from "../../../Service/user";
+import {
+  getUserAndStartUpByUserIdAPI,
+  sentConnectionRequest,
+} from "../../../Service/user";
 import FeaturedPostsContainer from "../../../components/Investor/InvestorGlobalCards/MilestoneCard/FeaturedPostsContainer";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import AfterSuccessPopup from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
@@ -27,9 +30,10 @@ function OtherUserProfile() {
 
   const [userData, setUserData] = useState(null);
   const [connectionSent, setConnectionSent] = useState(false);
-  console.log("user data", userData);
-
+  
   const { userId } = useParams();
+  // console.log("loggedInUser:",loggedInUser._id, "useParams:", userId);
+  console.log(userData)
 
   const navigate = useNavigate();
 
@@ -38,7 +42,7 @@ function OtherUserProfile() {
     getUserAndStartUpByUserIdAPI(userId)
       .then(({ data }) => setUserData(data))
       .catch(() => navigate("/profile"));
-  }, [userId]);
+  }, [userId, connectionSent]);
 
   const handleConnect = (userId) => {
     sentConnectionRequest(loggedInUser._id, userId)
@@ -84,45 +88,34 @@ function OtherUserProfile() {
                   </div>
                 </div>
                 <div className="buttons d-flex gap-2 flex-row align-items-md-center">
-
-
-                <Link
-                      to={`/chats?userId=${userData?._id}`}
-                      className="text-decoration-none"
-                    >
-                      <button className="message btn rounded-pill px-3 py-2">
-                        <img src={messageIcon} width={20} alt="message user" />
-                        <span>Message</span>
-                      </button>
-                    </Link>
-
-
-
-
-
-
-
-
-
-
-
-
-                  {userData?.connectionsSent?.includes(loggedInUser._id) ? (
-                     
+                  <Link
+                    to={`/chats?userId=${userData?._id}`}
+                    className="text-decoration-none"
+                  >
+                    <button className="message btn rounded-pill px-3 py-2">
+                      <img src={messageIcon} width={20} alt="message user" />
+                      <span>Message</span>
+                    </button>
+                  </Link>
+                  {userData?.connections?.includes(loggedInUser._id) ? (
                     <button className="connection-status  btn rounded-pill px-3 py-2">
-                    <span>Connected</span>
-                  </button>
-                  ) : userData?.connectionsReceived?.includes(loggedInUser._id) ? (
-
-<button className=" connection-status  btn rounded-pill px-3 py-2">
-<img src={connection} width={20} alt="message user" />
-<span>Pending</span>
-</button>
-                  ) : (
+                      <span>Connected</span>
+                    </button>
+                  )
+                   : userData?.connectionsReceived?.includes(
+                    loggedInUser._id
+                    ) ? (
+                    <button className=" connection-status d-flex btn rounded-pill px-3 py-2">
+                      <img src={connection} width={20} alt="message user" />
+                      <span>Pending</span>
+                    </button>
+                  ) 
+                  : 
+                  (
                     <button className="connection-status d-flex  btn rounded-pill px-3 py-2">
                       <img src={connection} width={20} alt="message user" />
                       <span onClick={() => handleConnect(userData?._id)}>
-                        Connection
+                        Connect
                       </span>
                     </button>
                   )}
