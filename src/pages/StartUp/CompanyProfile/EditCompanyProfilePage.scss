@@ -11,7 +11,12 @@
   }
 
   .main__content {
-    flex-grow: 1;
+    // flex-grow: 1;
+    max-width: calc(100% - 0rem);
+
+    @media (min-width: 1200px) {
+      max-width: calc(100% - 26rem);
+    }
 
     display: flex;
     flex-direction: column;
@@ -104,5 +109,4 @@
     background-color: #d3f36b;
     color: black;
   }
-  
 }
