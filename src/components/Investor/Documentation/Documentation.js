@@ -13,6 +13,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { environment } from "../../../environments/environment";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
+import {
+  Business,
+  KYC,
+  Legal,
+  Pitch,
+} from "../../../Images/StartUp/Documentaion";
 
 const Documentation = () => {
   const [showModal, setShowModal] = useState(false);
@@ -65,20 +71,24 @@ const Documentation = () => {
               <Card
                 onClicked={() => navigate("/documentation/pitchdeck")}
                 text={"Pitch Deck"}
+                image={Pitch}
               />
               <Card
                 onClicked={() => navigate("/documentation/business")}
                 text={"Business"}
+                image={Business}
               />
               <Card
                 onClicked={() => navigate("/documentation/kycdetails")}
                 text={"KYC Details"}
+                image={KYC}
               />
               <Card
                 onClicked={() =>
                   navigate("/documentation/legal%20and%20compliance")
                 }
                 text={"Legal and Compliance"}
+                image={Legal}
               />
               {/* <Card
                   onClicked={() => navigate("/documentation/update")}
