@@ -7,10 +7,10 @@
 
     .image_name_section {
       display: flex;
-      align-items: center;
-      justify-content: space-around;
+      // align-items: center;
+      justify-content: flex-start;
       // flex-direction: column;
-      gap: 0.5em;
+      gap: 01em;
 
       @media (min-width: 768px) {
         justify-content: flex-start;
@@ -166,6 +166,7 @@
         .company_details_logo_container {
           height: 61px;
           width: 62px;
+          align-self: flex-start;
 
           img {
             height: 60px;

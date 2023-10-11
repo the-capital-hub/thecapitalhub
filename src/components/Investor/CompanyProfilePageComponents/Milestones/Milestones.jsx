@@ -36,7 +36,9 @@ export default function Milestones({ headingClass, containerClass, theme }) {
         <h2 className={headingClass}>Milestones</h2>
         <Link className={`see__more align-self-end ${theme}`}>See more</Link>
       </div>
-      <div className="milestone__cards__container d-flex align-items-center gap-5 pb-3">
+      <div
+        className={`milestone__cards__container d-flex align-items-center gap-5 pb-3 ${theme}`}
+      >
         {companyMilestones.map((mile, index) => {
           return (
             <MilestoneBadge
