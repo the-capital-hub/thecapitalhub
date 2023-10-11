@@ -106,43 +106,49 @@ function NotificationsPopup({ toggleVisibility }) {
       {!loading ? (
         notifications.length ? (
           <>
-            {notifications.map(
-              ({
-                _id,
-                sender: { firstName, lastName, _id: userId },
-                type,
-                createdAt,
-                isRead,
-                post,
-                connection,
-              }) => (
-                <div className="notification">
-                  <div className="content d-flex flex-column gap-2">
-                    <p className="m-0">
-                      <Link
-                        to={`/user/${userId}`}
-                        className="fw-bold"
-                        onClick={() => toggleVisibility(false)}
-                      >
-                        {firstName} {lastName}
-                      </Link>{" "}
-                      {notificationType(type, post || connection)}
-                    </p>
-                    <TimeAgo datetime={createdAt} locale="" className="fs-10" />
+            {notifications
+              .slice(0, 5)
+              .map(
+                ({
+                  _id,
+                  sender: { firstName, lastName, _id: userId },
+                  type,
+                  createdAt,
+                  isRead,
+                  post,
+                  connection,
+                }) => (
+                  <div className="notification">
+                    <div className="content d-flex flex-column gap-2">
+                      <p className="m-0">
+                        <Link
+                          to={`/user/${userId}`}
+                          className="fw-bold"
+                          onClick={() => toggleVisibility(false)}
+                        >
+                          {firstName} {lastName}
+                        </Link>{" "}
+                        {notificationType(type, post || connection)}
+                      </p>
+                      <TimeAgo
+                        datetime={createdAt}
+                        locale=""
+                        className="fs-10"
+                      />
+                    </div>
+                    <div className="actions d-flex flex-column gap-1">
+                      {!isRead && (
+                        <button
+                          className="btn btn-light btn-sm"
+                          onClick={() => markAsRead(_id)}
+                        >
+                          Mark as read
+                        </button>
+                      )}
+                    </div>
                   </div>
-                  <div className="actions d-flex flex-column gap-1">
-                    {!isRead && (
-                      <button
-                        className="btn btn-light btn-sm"
-                        onClick={() => markAsRead(_id)}
-                      >
-                        Mark as read
-                      </button>
-                    )}
-                  </div>
-                </div>
-              )
-            )}
+                )
+              )}
             {notifications.length > 5 && (
               <button
                 className="btn btn-light btn-sm"
