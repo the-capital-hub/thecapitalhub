@@ -224,7 +224,7 @@ const Connection = () => {
                                     to={`/investor/user/${receiver?._id}`}
                                     className=" text-black text-decoration-none"
                                   >
-                                    {`${receiver.firstName} ${receiver.lastName}`}
+                                    {`${receiver?.firstName} ${receiver?.lastName}`}
                                   </Link>
                                 </p>
                                 <p className="connection_designation">

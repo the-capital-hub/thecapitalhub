@@ -34,10 +34,12 @@ const RightProfileCard = ({ noProfile }) => {
               </h2>
               <span className="smallest_typo">{loggedInUser?.email}</span>
               <span className="smallest_typo">
-                {`${loggedInUser?.designation} at ${
-                  loggedInUser?.startUp?.company || investor?.companyName
-                }`}
+                {loggedInUser?.designation
+                  ? `${loggedInUser.designation} at ${loggedInUser?.startUp?.company || investor?.companyName || ''
+                  }`
+                  : ''}
               </span>
+
             </div>
             {!noProfile && (
               <Link to="/profile" className="profile_btn mt-2">

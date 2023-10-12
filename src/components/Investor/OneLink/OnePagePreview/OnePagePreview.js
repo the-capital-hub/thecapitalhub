@@ -36,12 +36,14 @@ const OnePagePreview = () => {
         <div className="box_container  pb-5">
           <section className="heading_section px-5 ">
             <h4>One Page Preview</h4>
-            <Link to={"/onelink/edit"}>
-              <button>
-                Edit &nbsp;
-                <img src={EditIcon} alt="image" />
-              </button>
-            </Link>
+            {userId === company?.founderId && (
+              <Link to="/onelink/edit">
+                <button>
+                  Edit &nbsp;
+                  <img src={EditIcon} alt="image" />
+                </button>
+              </Link>
+            )}
           </section>
           {/* <hr /> */}
           {/* <section className="dollar_rupree">
