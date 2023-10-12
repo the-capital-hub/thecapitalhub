@@ -100,7 +100,7 @@ const InvestorNavbar = (props) => {
                 />
               </div>
               <div
-                className="mobile-home-hamberger"
+                className="mobile-home-hamberger "
                 onClick={props.handleSidebarToggle}
               >
                 {props.sidebarCollapsed ? (
