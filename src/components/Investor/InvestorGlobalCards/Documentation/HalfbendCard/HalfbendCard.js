@@ -5,6 +5,8 @@ import ThreeDot from "../../../../../Images/VerticalBlackThreeDots.svg";
 import pdfIcon from "../../../../../Images/PDFIcon.png";
 import { getPdfData } from "../../../../../Service/user";
 import { useSelector } from "react-redux";
+import deleteIcon from "../../../../../Images/post/delete.png";
+
 
 const HalfbendCard = ({folderName, userId}) => {
   const [data, setData] = useState([]);
@@ -29,6 +31,9 @@ const HalfbendCard = ({folderName, userId}) => {
      console.log("pdfurl---------",pdfUrl)
      window.location.href = pdfUrl;
   };
+  const handleDeleteDoc=()=>{
+    alert("deleted")
+  }
 
   return (
     // <div className="half_bend_container">
@@ -150,7 +155,17 @@ const HalfbendCard = ({folderName, userId}) => {
                   alt="PDF Icon"
                 />
               </div>
-              <h6>{item.fileName}</h6>
+              <div className="d-flex flex-column mx-auto justify-content-center align-items-center">
+              <h6 >{item.fileName}</h6>
+              <img
+                  className="delete-img"
+                  src={deleteIcon}
+                  height={50}
+                  alt="deleteIcon"
+                  onClick={() => handleDeleteDoc(item.fileUrl)}
+                />
+              </div>
+              
             </div>
           ))}
         </div>
