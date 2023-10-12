@@ -38,7 +38,7 @@ const Documentation = () => {
               image={GreenPitch}
             />
             <Card
-              text={"Legal and compliance"}
+              text={"Legal and Compliance"}
               onClicked={() =>
                 navigate(`/onelink/${username}/documentation/legal`)
               }

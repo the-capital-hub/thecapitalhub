@@ -19,10 +19,29 @@ const FolderContents = () => {
   }, [username]);
   const title = route[0].toUpperCase() + route.slice(1);
   console.log(route);
+  let pageTitle;
+
+  switch (title) {
+    case "Legal":
+      pageTitle = "Legal and Compliance";
+      break;
+    case "Pitchdeck":
+      pageTitle = "Pitch Deck";
+      break;
+    case "Kycdetails":
+      pageTitle = "KYC Details";
+      break;
+    case "Business":
+      pageTitle = "Business";
+      break;
+    default:
+      pageTitle = "";
+      break;
+  }
   return (
     <MaxWidthWrapper>
       <div className="folderContents">
-        <h1>{title}</h1>
+        <h1>{pageTitle}</h1>
         <HalfbendCard folderName={route} userId={user?._id} />
       </div>
     </MaxWidthWrapper>
