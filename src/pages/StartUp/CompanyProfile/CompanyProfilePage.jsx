@@ -74,72 +74,72 @@ export default function CompanyProfilePage() {
       console.log(error.message);
     }
   }
-
   return (
     <MaxWidthWrapper>
       <div className="companyProfilePage__wrapper">
         {/* Main content */}
         <div className="main__content">
           <SmallProfileCard text={"Company Profile"} />
-          {!loading && (
-            <>
-              {companyData.length !== 0 ? (
-                companyData.founderId === loggedInUser._id ? (
+          <div className="edit-container">
+            {!loading && (
+              <>
+                {companyData.length !== 0 ? (
+                  companyData.founderId === loggedInUser._id ? (
+                    <div className="bg-white rounded-4 p-4">
+                      <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5">
+                        Click here to edit company details
+                      </Link>
+                    </div>
+                  ) : null
+                ) : (
                   <div className="bg-white rounded-4 p-4">
                     <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5">
-                      Click here to edit company details
+                      <button className="btn-base startup">Click here to add company details</button>
                     </Link>
-                  </div>
-                ) : null
-              ) : (
-                <div className="bg-white rounded-4 p-4">
-                  <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5">
-                    <button className="btn-base startup">Click here to add company details</button>
-                  </Link>
-                  <div className="or-text-container">
-                    <p className="text-decoration-none text-dark fs-5">Or</p>
-                  </div>
-                  <div>
-                    <p className="text-decoration-none text-dark fs-5">Choose from an existing Company</p>
+                    <div className="or-text-container">
+                      <p className="text-decoration-none text-dark fs-5">Or</p>
+                    </div>
                     <div>
-                      <input
-                        type="text"
-                        placeholder="Search company"
-                        className="search-company-input"
-                        onChange={handleSearchInputChange}
-                      />
-                      {companies.length !== 0 && (
-                        <div className="suggestion">
-                          {companies.map((company, index) => (
-                            <div
-                              className={`suggestion-item ${selectedCompanyId === company._id ? 'active' : ''}`}
-                              key={index}
-                              onClick={() => handleCompanySelection(company._id)}
-                            >
-                              <img
-                                src={company.logo || DefaultAvatar}
-                                alt={`Company Logo ${index}`}
-                                className="suggestion-logo"
-                              />
-                              {company.company}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                      <button
-                        className="btn-base startup"
-                        onClick={handleAddStartup}
-                      >
-                        Save
-                      </button>
+                      <p className="text-decoration-none text-dark fs-5">Choose from an existing Company</p>
+                      <div>
+                        <input
+                          type="text"
+                          placeholder="Search company"
+                          className="search-company-input"
+                          onChange={handleSearchInputChange}
+                        />
+                        {companies.length !== 0 && (
+                          <div className="suggestion">
+                            {companies.map((company, index) => (
+                              <div
+                                className={`suggestion-item ${selectedCompanyId === company._id ? 'active' : ''}`}
+                                key={index}
+                                onClick={() => handleCompanySelection(company._id)}
+                              >
+                                <img
+                                  src={company.logo || DefaultAvatar}
+                                  alt={`Company Logo ${index}`}
+                                  className="suggestion-logo"
+                                />
+                                {company.company}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        <button
+                          className="btn-base startup"
+                          onClick={handleAddStartup}
+                        >
+                          Save
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-            </>
-          )}
+                )}
+              </>
+            )}
 
-
+          </div>
           {!loading ? (
             companyData.length === 0 ? (
               <div className="bg-white rounded-4 p-4">
@@ -147,7 +147,7 @@ export default function CompanyProfilePage() {
               </div>
 
             ) : (
-              <CompanyProfile isOnelink={true} companyData={companyData} startup={true} />
+              <CompanyProfile isOnelink={true} companyData={companyData} startup="true" />
             )
           ) : (
             <div className="mx-auto w-100 bg-white rounded-5 p-5 d-flex justify-content-center min-vh-100">
@@ -156,7 +156,6 @@ export default function CompanyProfilePage() {
               </div>
             </div>
           )}
-
         </div>
         {/* Right side content */}
         <div className="right__content">

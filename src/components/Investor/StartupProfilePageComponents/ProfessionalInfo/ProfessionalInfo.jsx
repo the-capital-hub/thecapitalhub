@@ -7,7 +7,7 @@ import { getBase64 } from "../../../../utils/getBase64";
 import { postStartUpData, updateUserAPI } from "../../../../Service/user";
 import { loginSuccess } from "../../../../Store/features/user/userSlice";
 
-export default function ProfessionalInfo({ theme }) {
+export default function ProfessionalInfo({ theme, companyFounderId }) {
   // Fetch Global State
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const dispatch = useDispatch();
@@ -163,16 +163,19 @@ export default function ProfessionalInfo({ theme }) {
           </fieldset>
 
           {/* Company */}
-          <fieldset className={` ${theme} `}>
-            <legend className="px-2">Company</legend>
-            <input
-              type="text"
-              className="professional_form_input"
-              name="company"
-              value={professionalData.company}
-              onChange={handleTextChange}
-            />
-          </fieldset>
+          {companyFounderId === loggedInUser._id && isEditing && (
+            <fieldset className={` ${theme} `}>
+              <legend className="px-2">Company</legend>
+              <input
+                type="text"
+                className="professional_form_input"
+                name="company"
+                value={professionalData.company}
+                onChange={handleTextChange}
+              />
+            </fieldset>
+          )}
+
 
           {/* Designation */}
           <fieldset className={` ${theme} `}>

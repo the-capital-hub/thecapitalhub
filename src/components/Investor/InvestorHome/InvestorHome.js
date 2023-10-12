@@ -37,7 +37,6 @@ const InvestorHome = () => {
 
   // States for basic info
   // const [personalEditable, setPersonalEditable] = useState(false);
-  // // const [companyName, setCompanyName] = useState("");
   // const [personalData, setPersonalData] = useState({
   //   designation: loggedInUser?.designation || "",
   //   education: loggedInUser?.education || "",
@@ -45,6 +44,7 @@ const InvestorHome = () => {
   //   profilePicture: loggedInUser.profilePicture || "",
   // });
   const [colorCardData, setColorCardData] = useState(null);
+  const [companyFounderId, setCompanyFounderId] = useState("");
 
   const [field, setField] = useState("last_round_investment");
 
@@ -62,7 +62,7 @@ const InvestorHome = () => {
     if (!loggedInUser?.investor) {
       getStartupByFounderId(loggedInUser._id)
         .then(({ data }) => {
-          setCompanyName(data?.company);
+          setCompanyFounderId(data?.founderId);
           setColorCardData({
             last_round_investment: data?.colorCard?.last_round_investment,
             total_investment: data?.colorCard?.total_investment,
@@ -205,7 +205,7 @@ const InvestorHome = () => {
 
             <div className="content-70 d-flex flex-column gap-4">
               {/* Professional info component */}
-              <ProfessionalInfo theme={"startup"} />
+              <ProfessionalInfo theme={"startup"} companyFounderId={companyFounderId}/>
 
               {/* user details */}
               {/* <div className="p-2 px-md-4 py-3 box bio_container">
@@ -468,8 +468,9 @@ const InvestorHome = () => {
                 <CompanyDetailsCard
                   className=""
                   userDetails={loggedInUser}
-                  page={"edit"}
+                  page={loggedInUser._id === companyFounderId ? "edit" : ""}
                 />
+
               </div>
 
               {/* Color Cards */}
@@ -488,6 +489,7 @@ const InvestorHome = () => {
                       }
                       field={field}
                       colorCardData={colorCardData}
+                      isOneLink={loggedInUser._id !== companyFounderId}
                     />
                     <ColorCard
                       color="white"
@@ -500,6 +502,7 @@ const InvestorHome = () => {
                       }
                       field={field}
                       colorCardData={colorCardData}
+                      isOneLink={loggedInUser._id !== companyFounderId}
                     />
                     <ColorCard
                       color="white"
@@ -513,6 +516,7 @@ const InvestorHome = () => {
                       field={field}
                       colorCardData={colorCardData}
                       noRupee={true}
+                      isOneLink={loggedInUser._id !== companyFounderId}
                     />
                     <ColorCard
                       color="white"
@@ -525,6 +529,7 @@ const InvestorHome = () => {
                       }
                       field={field}
                       colorCardData={colorCardData}
+                      isOneLink={loggedInUser._id !== companyFounderId}
                     />
                     <ColorCard
                       color="white"
@@ -537,6 +542,7 @@ const InvestorHome = () => {
                       }
                       field={field}
                       colorCardData={colorCardData}
+                      isOneLink={loggedInUser._id !== companyFounderId}
                     />
                     <ColorCard
                       color="white"
@@ -549,6 +555,7 @@ const InvestorHome = () => {
                       }
                       field={field}
                       colorCardData={colorCardData}
+                      isOneLink={loggedInUser._id !== companyFounderId}
                     />
                   </div>
                 )}
