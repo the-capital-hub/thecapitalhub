@@ -144,7 +144,10 @@ const startUpSchema = new Schema(
     },
     keyFocus: {
       type: String,
-    }
+    },
+    tagline: {
+      type: String,
+    },
   },
   {
     timestamps: true,
