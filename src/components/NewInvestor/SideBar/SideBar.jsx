@@ -31,11 +31,14 @@ import { logout } from "../../../Store/Action/userAction";
 import connectionsIcon from "../../../Images/investorsidebar/connection.svg";
 import { PlusIcon } from "../SvgIcons";
 import companyProfileIcon from "../../../Images/Investor/Sidebar/company.svg";
-import { BsLink45Deg } from "react-icons/bs";
+import { BsChevronDown, BsChevronUp, BsLink45Deg } from "react-icons/bs";
+import { ModalBsLauncher } from "../../PopUp/ModalBS";
+import CommunitiesIcon from "../../Investor/ChatComponents/CommunitiesIcon";
 
 const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const [isCommunityDetailOpen, setIsCommunityDetailOpen] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -54,6 +57,10 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
 
     navigate("/login");
   };
+
+  function handleMyCommunityClick() {
+    navigate("/chats?isCommunityOpen=true");
+  }
 
   return (
     <div
@@ -182,6 +189,55 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     <span className="text-black">OneLink</span>
                   )}
                 </Link>
+              </MenuItem>
+
+              <MenuItem
+                active={location.pathname.includes("/chats")}
+                className="active-item"
+              >
+                <div className="sidebar__community d-flex gap-4 ">
+                  <div onClick={() => setSidebarCollapsed(true)}>
+                    <CommunitiesIcon
+                      width="17px"
+                      height="17px"
+                      color={`${
+                        isCommunityDetailOpen ? "#000" : "rgba(97, 97, 97, 1)"
+                      }`}
+                    />
+                  </div>
+                  {!sidebarCollapsed && (
+                    <details className="">
+                      <summary
+                        className="d-flex align-items-center gap-2"
+                        onClick={() =>
+                          setIsCommunityDetailOpen(!isCommunityDetailOpen)
+                        }
+                      >
+                        Community
+                        {isCommunityDetailOpen ? (
+                          <BsChevronUp />
+                        ) : (
+                          <BsChevronDown />
+                        )}
+                      </summary>
+                      <div className="d-flex flex-column gap-2">
+                        {/* Add new */}
+                        <ModalBsLauncher
+                          id="AddNewCommunity"
+                          className="sidebar__community__btn m-0 "
+                        >
+                          <p className="m-0">Create a Community</p>
+                        </ModalBsLauncher>
+                        <button
+                          className="sidebar__community__btn "
+                          onClick={handleMyCommunityClick}
+                        >
+                          My Community
+                        </button>
+                      </div>
+                    </details>
+                  )}
+                </div>
               </MenuItem>
 
               <MenuItem
