@@ -872,5 +872,6 @@ export const deleteDocument = async (docId) => {
     return response.data;
   } catch (error) {
     console.error("Error in delete document:", error);
+    throw error;
   }
 };
