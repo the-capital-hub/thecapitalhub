@@ -25,12 +25,13 @@ import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 
 function Profile() {
   const { username } = useParams();
+  const { userId } = useParams();
   const [user, setUser] = useState([]);
   const [colorCard, setColorCard] = useState([]);
 
   useEffect(() => {
     document.title = "Profile - One Link | The Capital Hub";
-    getUserById(username)
+    getUserById(username, userId)
       .then(({ data }) => {
         setUser(data);
         getStartupByFounderId(data._id)
@@ -40,7 +41,7 @@ function Profile() {
           .catch(() => setColorCard([]));
       })
       .catch(() => setUser([]));
-  }, [username]);
+  }, [userId, username]);
 
   return (
     <div className="my-4">

@@ -34,7 +34,7 @@ function App() {
         {StartUpRoutes()}
 
         {/* OneLink */}
-        <Route path="/onelink/:username" element={<ValidateOneLink />}>
+        <Route path="/onelink/:username/:userId" element={<ValidateOneLink />}>
           {OneLinkRoutes()}
         </Route>
 

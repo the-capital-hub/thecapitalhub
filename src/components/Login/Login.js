@@ -18,12 +18,13 @@ import {
 } from "../../Store/features/user/userSlice";
 import backArrow from "../../Images/left-arrow.png";
 import ResetPasswordPopUp from "../PopUp/RequestPasswordPopUp/RequestPasswordPopUp";
-import { Navigate } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
 
 const Login = () => {
-
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   // States for login
   const [isLoginSuccessfull, setIsLoginSuccessfull] = useState(false);
   const [isInvestorSelected, setIsInvestorSelected] = useState(false);
@@ -85,8 +86,8 @@ const Login = () => {
           setIsInvestorSelected(false);
           setIsLoginSuccessfull(false);
 
-          if (!user.investor) navigate("/profile");
-          else navigate("/investor");
+          if (!user.investor) navigate("/home");
+          else navigate("/investor/home");
         }, 2000);
 
         dispatch(loginSuccess(response.user));
@@ -101,15 +102,17 @@ const Login = () => {
       console.log(error);
     }
   };
-  const navigate = useNavigate();
 
+  // Handle close of login successful popup
   const handleClosePopup = () => {
     if (!isInvestorSelected) {
-      navigate("/profile");
+      navigate("/home");
     } else if (isInvestorSelected) {
-      navigate("/investor/profile");
+      navigate("/investor/home");
     }
   };
+
+  // Handle close of reset password popup
   const handleCloseResetPopup = () => {
     setShowResetPopUp(false);
     navigate("/login");
@@ -122,19 +125,18 @@ const Login = () => {
     document.title = "Log In | The Capital Hub";
   }, []);
 
-  const isLoggedIn = () => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    console.log("isLoggedIn-->", isLoggedIn);
-    return isLoggedIn === "true";
-  };
-  if (isLoggedIn()) {
-    if (loggedInUser.investor) {
-      return <Navigate to="/investor/home" replace />;
-    } else {
-      return <Navigate to="/home" replace />;
-    }
-  }
-
+  // const isLoggedIn = () => {
+  //   const isLoggedIn = localStorage.getItem("isLoggedIn");
+  //   console.log("isLoggedIn-->", isLoggedIn);
+  //   return isLoggedIn === "true";
+  // };
+  // if (isLoggedIn()) {
+  //   if (loggedInUser.investor) {
+  //     return <Navigate to="/investor/home" replace />;
+  //   } else {
+  //     return <Navigate to="/home" replace />;
+  //   }
+  // }
 
   return (
     <div className="container d-flex justify-content-center align-items-start py-md-5 min-vh-100">
@@ -165,8 +167,9 @@ const Login = () => {
             <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-4 gap-sm-5">
               <Link to="">
                 <button
-                  className={`btn-primaryy login_btn ${!isInvestorSelected ? "startup" : ""
-                    } `}
+                  className={`btn-primaryy login_btn ${
+                    !isInvestorSelected ? "startup" : ""
+                  } `}
                   onClick={() => setIsInvestorSelected(false)}
                 >
                   StartUp
@@ -174,8 +177,9 @@ const Login = () => {
               </Link>
               <Link to="">
                 <button
-                  className={`btn-primaryy login_btn ${isInvestorSelected ? "investor" : ""
-                    } `}
+                  className={`btn-primaryy login_btn ${
+                    isInvestorSelected ? "investor" : ""
+                  } `}
                   onClick={() => setIsInvestorSelected(true)}
                 >
                   Investor

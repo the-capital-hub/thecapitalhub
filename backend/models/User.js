@@ -140,21 +140,25 @@ const userSchema = new Schema(
       ref: "Investors",
     },
     pinnedChat: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Chats",
-    },
-  ],
-  featuredPosts: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Posts",
-    },
-  ],
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Chats",
+      },
+    ],
+    featuredPosts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Posts",
+      },
+    ],
     userStatus: {
       type: String,
       default: "inactive"
-    }
+    },
+    // isInvestor: {
+    //   type: String,
+    //   default: false,
+    // },
   },
   {
     timestamps: true,

@@ -86,7 +86,6 @@ function Home() {
     }
   }, [location]);
 
-
   return (
     <MaxWidthWrapper>
       <div className="container-fluid investor_feed_container">
@@ -96,7 +95,7 @@ function Home() {
             <div className="content-70">
               <div className="row">
                 <div className="col-12 mt-2">
-                  <div className="box start_post_container">
+                  <div className="box start_post_container border">
                     <img
                       src={loggedInUser.profilePicture}
                       alt="Image"
@@ -118,13 +117,15 @@ function Home() {
                 dataLength={allPosts.length}
                 next={fetchMorePosts}
                 hasMore={hasMore}
-                loader={<p className="container p-5 text-center my-5 bg-white rounded-5 shadow ">
-                  <div class="d-flex justify-content-center">
-                    <div class="spinner-border" role="status">
-                      <span class="visually-hidden">Loading...</span>
+                loader={
+                  <p className="container p-5 text-center my-5 bg-white rounded-5 shadow ">
+                    <div class="d-flex justify-content-center">
+                      <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
                     </div>
-                  </div>
-                </p>}
+                  </p>
+                }
               >
                 {allPosts?.map(
                   ({

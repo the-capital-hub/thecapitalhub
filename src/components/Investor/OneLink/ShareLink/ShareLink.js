@@ -6,8 +6,11 @@ import CorrectImage from "../../../../Images/Correct.svg";
 import Cross from "../../../../Images/Cross.svg";
 import { Link } from "react-router-dom";
 import IconLink from "../../SvgIcons/IconLink";
+import { useSelector } from "react-redux";
 
 const ShareLink = ({ OneLink, onExitClick, investor = false, isExitClicked }) => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
   return (
     <>
       <div className="ShareLink_container mt-3">
@@ -16,7 +19,7 @@ const ShareLink = ({ OneLink, onExitClick, investor = false, isExitClicked }) =>
             <h6>Now share all your startup details in one link</h6>
           </section>
           <hr />
-          {isExitClicked && OneLink === "" && (
+          {isExitClicked && (OneLink === undefined || OneLink === "") && (
             <div className="warning_message">Please fill company details to get the Onelink.</div>
           )}
           <Link
@@ -37,8 +40,8 @@ const ShareLink = ({ OneLink, onExitClick, investor = false, isExitClicked }) =>
                 value={
                   OneLink
                     ? investor
-                      ? "thecapitalhub.in/investor/onelink/" + OneLink
-                      : "thecapitalhub.in/onelink/" + OneLink
+                      ? "thecapitalhub.in/investor/onelink/" + OneLink + "/" + loggedInUser._id
+                      : "thecapitalhub.in/onelink/" + OneLink + "/" + loggedInUser._id
                     : ""
                 }
                 disabled

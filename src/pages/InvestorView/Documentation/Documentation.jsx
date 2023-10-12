@@ -15,6 +15,7 @@ import {
 const Documentation = () => {
   const navigate = useNavigate();
   const { username } = useParams();
+  const { userId } = useParams();
   useEffect(() => {
     document.title = "Documentation - One Link | The Capital Hub";
   }, []);
@@ -27,40 +28,40 @@ const Documentation = () => {
             {/* <Card
               text={"Financials"}
               onClicked={() =>
-                navigate(`/onelink/${username}/documentation/financials`)
+                navigate(`/onelink/${username}/${userId}/documentation/financials`)
               }
             /> */}
             <Card
               text={"Pitch Deck"}
               onClicked={() =>
-                navigate(`/onelink/${username}/documentation/pitchdeck`)
+                navigate(`/onelink/${username}/${userId}/documentation/pitchdeck`)
               }
               image={GreenPitch}
             />
             <Card
               text={"Legal and Compliance"}
               onClicked={() =>
-                navigate(`/onelink/${username}/documentation/legal`)
+                navigate(`/onelink/${username}/${userId}/documentation/legal`)
               }
               image={GreenLegal}
             />
             {/* <Card
               text={"Update"}
               onClicked={() =>
-                navigate(`/onelink/${username}/documentation/update`)
+                navigate(`/onelink/${username}/${userId}/documentation/update`)
               }
             /> */}
             <Card
               text={"KYC Details"}
               onClicked={() =>
-                navigate(`/onelink/${username}/documentation/kycdetails`)
+                navigate(`/onelink/${username}/${userId}/documentation/kycdetails`)
               }
               image={GreenKYC}
             />
             <Card
               text={"Business"}
               onClicked={() =>
-                navigate(`/onelink/${username}/documentation/business`)
+                navigate(`/onelink/${username}/${userId}/documentation/business`)
               }
               image={GreenBusiness}
             />

@@ -12,6 +12,7 @@ import {
   searchUsersController,
   addEducationController,
   addExperienceController,
+  addStartupToUserController,
 } from "../controllers/userData.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
@@ -42,5 +43,8 @@ router.get("/search", searchUsersController);
 
 router.patch("/addEducation/:userId", addEducationController);
 router.patch("/addExperience/:userId", addExperienceController);
+
+//add existing startups to user
+router.patch("/addStartUpToUser", addStartupToUserController);
 
 export default router;

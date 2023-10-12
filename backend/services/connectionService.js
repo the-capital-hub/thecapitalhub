@@ -282,23 +282,27 @@ export const getRecommendations = async (userId) => {
     const userReceivedConnections = user.connectionsReceived || " ";
     for (const connectedUserId of userConnections) {
       const connectedUser = await UserModel.findById(connectedUserId);
-      const mutualConnections = connectedUser.connections;
 
-      for (const connectionId of mutualConnections) {
-        if (
-          connectionId.toString() !== userId &&
-          !recommendations.includes(connectionId) && !userConnections.includes(connectionId)
-        ) {
-          const existsPendingConnections = await ConnectionModel.findOne({
-            $or: [
-              { sender: userId, receiver: connectionId, status: "pending" },
-              { sender: connectionId, receiver: userId, status: "pending" },
-            ],
-          });
-          if (!existsPendingConnections) recommendations.push(connectionId);
+      if (connectedUser && connectedUser.connections) { 
+        const mutualConnections = connectedUser.connections;
+
+        for (const connectionId of mutualConnections) {
+          if (
+            connectionId.toString() !== userId &&
+            !recommendations.includes(connectionId) && !userConnections.includes(connectionId)
+          ) {
+            const existsPendingConnections = await ConnectionModel.findOne({
+              $or: [
+                { sender: userId, receiver: connectionId, status: "pending" },
+                { sender: connectionId, receiver: userId, status: "pending" },
+              ],
+            });
+            if (!existsPendingConnections) recommendations.push(connectionId);
+          }
         }
       }
     }
+
     if (recommendations.length === 0) {
       const users = await UserModel.find({
         _id: {
@@ -313,21 +317,21 @@ export const getRecommendations = async (userId) => {
       });
       return {
         status: 200,
-        message: "Recommended User data retrived successfully",
+        message: "Recommended User data retrieved successfully",
         data: users,
       };
     }
     const users = await UserModel.find({ _id: { $in: recommendations } });
     return {
       status: 200,
-      message: "Recommended User data retrived successfully",
+      message: "Recommended User data retrieved successfully",
       data: users,
     };
   } catch (error) {
     console.log(error);
     return {
       status: 500,
-      message: "An error occurred while getting recomendations",
+      message: "An error occurred while getting recommendations",
     };
   }
 };

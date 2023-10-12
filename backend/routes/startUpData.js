@@ -9,6 +9,7 @@ import {
   investNowController,
   getStartupByFounderIdController,
   getAllStartupsController,
+  getStartupsBySearchController,
 } from "../controllers/startUpController.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 
@@ -29,7 +30,7 @@ router.get(
 router.post("/investNow", investNowController);
 
 // Middleware for checking token
-router.use(authenticateToken);
+// router.use(authenticateToken);
 
 // Get startup data
 router.get("/details/:userId", startUpData);
@@ -40,5 +41,6 @@ router.patch("/introMessage", editStartUpIntroMessage);
 router.put("/onePager", editOnePager);
 
 router.get("/getAllStartUps", getAllStartupsController);
+router.get("/searchStartUps/:searchQuery", getStartupsBySearchController);
 
 export default router;

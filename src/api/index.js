@@ -70,6 +70,8 @@ const API = Object.freeze({
   markNotificationAsRead: `${baseUrl}/notificaton/markMessageAsRead`,
   markAllNotificationAsRead: `${baseUrl}/notificaton/markAllNotificationsAsRead`,
   getLikeCount: `${baseUrl}/api/posts/likeCount`,
+  searchStartUps: `${baseUrl}/startup/searchStartUps`,
+  addStartUpToUser: `${baseUrl}/users/addStartUpToUser`,
 });
 
 export default API;

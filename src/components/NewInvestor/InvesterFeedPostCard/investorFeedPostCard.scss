@@ -54,14 +54,14 @@
           flex-shrink: 0;
           border-radius: 20px;
           border: 1px solid #dadada;
-          background: #eaeef2;
+          background: transparent;
           color: #373737;
           font-size: 18px;
           font-family: Poppins;
           font-weight: 500;
           line-height: 160%;
           letter-spacing: 0.42px;
-          padding: 20px 15px;
+          padding: 20px 15px 20px 60px;
 
           @media (max-width: 768px) {
             height: auto;
@@ -145,6 +145,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
 
         .kebab_menu_container {
           position: absolute;
@@ -372,7 +373,7 @@
       line-height: normal;
       margin: 0px 20px 20px 20px;
     }
-    .deleteIcon{
+    .deleteIcon {
       height: 30px;
       width: 30px;
     }
