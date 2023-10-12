@@ -10,13 +10,14 @@ import {
   getSavedPostCollections,
   postUserPost,
 } from "../../../Service/user";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
 import { useLocation } from "react-router-dom";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 const Feed = () => {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -26,7 +27,7 @@ const Feed = () => {
   const [getSavedPostData, setgetSavedPostData] = useState("");
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
-
+  const dispatch = useDispatch();
   const openPopup = () => {
     setPopupOpen(!popupOpen);
   };
@@ -65,9 +66,13 @@ const Feed = () => {
     getSavedPostCollections(loggedInUser._id).then((data) => {
       setgetSavedPostData(data);
     });
-    document.title = "Home | The Capital Hub";
     fetchMorePosts();
   }, [newPost]);
+
+  useEffect(() => {
+    document.title = "Home | The Capital Hub";
+    dispatch(setPageTitle("Home"));
+  }, []);
 
   // Repost
   const [repostLoading, setRepostLoading] = useState({
