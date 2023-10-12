@@ -10,14 +10,12 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
   const [fromSubmit, setFromSubmit] = useState(false);
   const [popupData, setPopupData] = useState("");
 
-
-
   useEffect(() => {
-   
     if (investor) {
       setFormData({
         founderId: companyData.founderId || "",
         company: companyData.companyName || "",
+        tagline: companyData.tagline || "",
         startedAtDate: companyData.startedAtDate || "",
         industryType: companyData.industry || "",
         noOfEmployees: companyData.noOfEmployees || "",
@@ -68,8 +66,8 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
       } else {
         const response = await postStartUpData(formData);
         console.log(response);
-        setPopupData("Changes saved")
-        setFromSubmit(true)
+        setPopupData("Changes saved");
+        setFromSubmit(true);
       }
     } catch (error) {
       console.log(error);
@@ -106,6 +104,18 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
             id="company"
             className="profile_form_input"
             value={formData.company || ""}
+            onChange={handleInputChange}
+          />
+        </fieldset>
+
+        <fieldset className={investor ? "investor" : "startup"}>
+          <legend>Company Tagline</legend>
+          <input
+            type="text"
+            name="tagline"
+            id="tagline"
+            className="profile_form_input"
+            value={formData.tagline || ""}
             onChange={handleInputChange}
           />
         </fieldset>
@@ -207,12 +217,12 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
         </button>
       </form>
       {fromSubmit && (
-      <AfterSuccessPopup
-            withoutOkButton
-            onClose={() => setFromSubmit(!fromSubmit)}
-            successText={popupData}
-          />
-          )}
+        <AfterSuccessPopup
+          withoutOkButton
+          onClose={() => setFromSubmit(!fromSubmit)}
+          successText={popupData}
+        />
+      )}
     </div>
   );
 }
