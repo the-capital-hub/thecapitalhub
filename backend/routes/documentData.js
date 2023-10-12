@@ -19,6 +19,6 @@ router.post("/createFolder", createFolderController);
 router.get("/getFolderByUser", getFolderByUserController);
 router.patch("/renameFolder", renameFolderController);
 router.delete("/deleteFolder", deleteFolderController);
-router.delete("/deleteDocument", deleteDocumentController);
+router.delete("/deleteDocument/:id", deleteDocumentController);
 
 export default router;
