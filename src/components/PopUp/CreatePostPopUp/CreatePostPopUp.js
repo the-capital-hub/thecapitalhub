@@ -17,16 +17,8 @@ import EasyCrop from "react-easy-crop";
 import { BsLink45Deg } from "react-icons/bs";
 import IconFile from "../../Investor/SvgIcons/IconFile";
 import IconVideo from "../../../Images/post/Video.svg";
+import {s3} from "../../../Service/awsConfig";
 
-const AWS = require("aws-sdk");
-
-AWS.config.update({
-  accessKeyId: "AKIA3ADZ252QBA67V4VO",
-  secretAccessKey: "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",
-  region: "us-east-1",
-});
-
-const s3 = new AWS.S3();
 
 const CreatePostPopUp = ({
   setPopupOpen,

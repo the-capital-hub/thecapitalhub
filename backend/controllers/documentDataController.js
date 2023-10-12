@@ -94,7 +94,8 @@ export const deleteFolderController = async (req, res) => {
 
 export const deleteDocumentController = async (req, res) => {
   try {
-    const response = await deleteDocument(req.body);
+    const documentId = req.params.id
+    const response = await deleteDocument(documentId);
     res.status(response.status).send(response);
   } catch (error) {
     console.error(error);
