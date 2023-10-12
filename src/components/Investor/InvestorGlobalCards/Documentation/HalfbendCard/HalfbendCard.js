@@ -188,7 +188,7 @@ const HalfbendCard = ({folderName, userId}) => {
           <AfterSuccessPopup
             withoutOkButton
             onClose={() => setDeleteDoc(!deleteDoc)}
-            successText="Connection Sent Successfully"
+            successText="Document Deleted Successfully"
           />
         )}
     </div>
