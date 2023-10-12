@@ -76,7 +76,7 @@ const InvestorManageAccount = () => {
             />
             <div className="box_container p-4 mt-4 row row-cols-1 row-cols-lg-2 row-cols-xl-3">
               <section className="col">
-                <div className="change_password card">
+                <div className="change_password border">
                   {/* Header */}
                   <div className="d-flex align-items-center gap-2">
                     <div className="logo">
@@ -136,7 +136,7 @@ const InvestorManageAccount = () => {
                 </div>
               </section>
               <section className="col">
-                <div className="present_account card"> 
+                <div className="present_account border">
                   {/* Header */}
                   <div className="d-flex align-items-center">
                     <div className="logo">
@@ -151,7 +151,9 @@ const InvestorManageAccount = () => {
                       <img src={loggedInUser?.profilePicture} alt="img" />
                     </div>
                     <div className="name_email">
-                      <h4 className="text-break">{loggedInUser?.firstName} {loggedInUser?.lastName}</h4>
+                      <h4 className="text-break">
+                        {loggedInUser?.firstName} {loggedInUser?.lastName}
+                      </h4>
                       <h6 className="text-break">{loggedInUser?.email}</h6>
                     </div>
                   </div>
@@ -161,8 +163,11 @@ const InvestorManageAccount = () => {
                   </div>
                 </div>
               </section>
-              <section className="col card empty_box">
-                <button className="btn logout-btn" onClick={setShowLogoutPopup}>
+              <section className="col border empty_box">
+                <button
+                  className="btn logout-btn w-100"
+                  onClick={setShowLogoutPopup}
+                >
                   Log out
                 </button>
                 {showLogoutPopup && (
