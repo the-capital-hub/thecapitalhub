@@ -29,7 +29,7 @@ const HalfbendCard = ({folderName, userId}) => {
         // console.log("data", res);
       });
     }
-  }, [loggedInUser, userId, folderName]);
+  }, [loggedInUser, userId, folderName,deleteDoc]);
 
   const openPdfInNewWindow = (pdfUrl) => {
      console.log("pdfurl---------",pdfUrl)
