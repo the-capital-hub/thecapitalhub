@@ -39,8 +39,25 @@
 
   .cards {
     display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
+    gap: 2em;
+    overflow-x: auto;
+    padding-bottom: 0.5em;
+    &::-webkit-scrollbar {
+      height: 8px;
+      margin-inline: 10dvw;
+
+      &-track {
+        border-radius: 10rem;
+        background-color: rgba(211, 243, 107, 0.2);
+        margin-inline: 10dvw;
+      }
+
+      &-thumb {
+        border-radius: 10rem;
+        background-color: rgba(211, 243, 107, 1);
+        margin-inline: 10dvw;
+      }
+    }
   }
 
   .projections {
@@ -130,7 +147,7 @@
     .cards {
       display: flex;
       align-items: center;
-      justify-content: center;
+      // justify-content: center;
     }
     .projections {
       width: 100%;
