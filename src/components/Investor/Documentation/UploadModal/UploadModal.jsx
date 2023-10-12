@@ -19,12 +19,13 @@ const UploadModal = ({ onCancel }) => {
   };
 
   const handlePdfUploadClick = async () => {
+    console.log("Test", process.env.AWS_ACCESS_KEY);
     if (fileInputRef.current.files.length > 0) {
       const file = fileInputRef.current.files[0];
       const timestamp = Date.now();
       const fileName = `${timestamp}_${file.name}`;
       const params = {
-        Bucket: "capitalhub",
+        Bucket: "capitalhubdocuments",
         Key: `documents/${fileName}`,
         Body: file,
       };
