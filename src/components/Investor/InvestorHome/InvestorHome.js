@@ -154,7 +154,7 @@ const InvestorHome = () => {
             className="w-100 profile_edit_field"
             name={fieldName}
             value={personalData[fieldName]}
-            onChange={companyNameHandler}
+            onChange={personalChangeHandler}
             rows={4}
           />
         );
