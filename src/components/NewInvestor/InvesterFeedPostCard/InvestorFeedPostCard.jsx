@@ -443,6 +443,7 @@ const FeedPostCard = ({
                           width={18}
                           alt="like post"
                           onClick={likeUnlikeHandler}
+                          style={{ cursor: "pointer" }}
                         />
                       ) : (
                         <img
@@ -450,6 +451,7 @@ const FeedPostCard = ({
                           width={18}
                           alt="like post"
                           onClick={likeUnlikeHandler}
+                          style={{ cursor: "pointer" }}
                         />
                       )}
                       <img
@@ -457,6 +459,7 @@ const FeedPostCard = ({
                         width={16}
                         alt="comment post"
                         onClick={() => setShowComment(!showComment)}
+                        style={{ cursor: "pointer" }}
                       />
                     </div>
                   </div>
@@ -472,6 +475,7 @@ const FeedPostCard = ({
                         width={12}
                         alt="reshare post"
                         onClick={() => setShowRepostOptions(!showRepostOptions)}
+                        style={{ cursor: "pointer" }}
                       />
                       {showRepostOptions && (
                         <span className="repost_options rounded shadow-sm">
@@ -535,6 +539,7 @@ const FeedPostCard = ({
                         width={16}
                         alt="save post"
                         onClick={handleUnsavePost}
+                        style={{ cursor: "pointer" }}
                       />
                     ) : (
                       <img
@@ -542,6 +547,7 @@ const FeedPostCard = ({
                         width={16}
                         alt="save post"
                         onClick={handleSavePopUp}
+                        style={{ cursor: "pointer" }}
                       />
                     )}
                   </div>
@@ -549,7 +555,15 @@ const FeedPostCard = ({
                     <div>
                       <div class="comment_container">
                         <div class="logo">
-                          <img src={RoundLogo} alt="Logo" />
+                          <img
+                            src={
+                              profilePicture ||
+                              "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
+                            }
+                            alt="Logo"
+                            style={{ width: "50px", height: "50px" }}
+                            className="rounded-circle"
+                          />
                         </div>
                         <section class="input_and_logo_section">
                           <div class="input_box">
