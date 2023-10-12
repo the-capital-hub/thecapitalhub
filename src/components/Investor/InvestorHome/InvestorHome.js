@@ -25,9 +25,16 @@ import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import ConnectionCard from "../ConnectionCard/ConnectionCard";
 
 const InvestorHome = () => {
-  const [isBioEditable, setIsBioEditable] = useState(false);
+  // Fetch loggedInUser from global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  // console.log("logged user", loggedInUser);
+  const dispatch = useDispatch();
+
+  // States for Bio
+  const [isBioEditable, setIsBioEditable] = useState(false);
   const [bioContent, setBioContent] = useState(loggedInUser?.bio || "");
+
+  // States for basic info
   const [personalEditable, setPersonalEditable] = useState(false);
   const [companyName, setCompanyName] = useState("");
   const [personalData, setPersonalData] = useState({
@@ -36,7 +43,6 @@ const InvestorHome = () => {
     experience: loggedInUser?.experience || "",
     profilePicture: loggedInUser.profilePicture || "",
   });
-  console.log("logged user", loggedInUser);
   const [colorCardData, setColorCardData] = useState(null);
 
   const [field, setField] = useState("last_round_investment");
@@ -72,8 +78,6 @@ const InvestorHome = () => {
     founderId: loggedInUser._id,
     company: loggedInUser.startUp.company,
   });
-
-  const dispatch = useDispatch();
 
   const personalEditHandler = (field) => {
     setPersonalEditable(!personalEditable);
