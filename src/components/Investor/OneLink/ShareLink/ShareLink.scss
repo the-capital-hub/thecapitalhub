@@ -6,7 +6,7 @@
     padding: 10px;
     border-radius: 40px;
     background: #fff;
-    box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
+    // box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
 
     .title_section {
       h6 {
@@ -35,6 +35,8 @@
         position: relative;
         width: 95%;
         justify-content: center;
+        background: #eaeef2;
+
 
         .left_icons {
           display: flex;
@@ -136,7 +138,7 @@
       padding: 10px;
       border-radius: 40px;
       background: #fff;
-      box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
+      // box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
 
       .title_section {
         h6 {
@@ -159,12 +161,25 @@
         .input_container {
           display: flex;
           align-items: center;
-          padding: 10px 15px;
+          padding: 5px;
           border-radius: 8px;
           margin: 20px 0;
-          position: relative;
-          width: 95%;
           justify-content: center;
+          background: #eaeef2;
+
+          input {
+            text-align: right;
+            direction: rtl;
+            flex-grow: 1;
+
+            border: none;
+            outline: none;
+            font-size: 12px;
+
+            ::placeholder {
+              color: #999;
+            }
+          }
 
           .left_icons {
             display: flex;
@@ -174,27 +189,23 @@
             background: #fd5901;
             width: 38px;
             height: 38px;
-            position: absolute;
             align-items: center;
-            left: 1.5%;
 
             svg {
               /* Add any styling for the SVG image on the left */
             }
           }
 
-          .right_icons {
+          .right_icons_onelink {
             display: flex;
             align-items: center;
+            margin: 0 5px;
 
             .right_icons_img1 {
-              margin-right: 10px;
-              background: #eaeef2;
+              // margin-right: 10px;
               width: 20px;
               height: 28px;
-              position: absolute;
               cursor: pointer;
-              right: 1%;
             }
 
             .right_icons_img2 {
@@ -215,21 +226,6 @@
               position: absolute;
               cursor: pointer;
               right: 21%;
-            }
-          }
-
-          input {
-            flex: 1;
-            border: none;
-            outline: none;
-            font-size: 14px;
-            padding: 8px;
-            border-radius: 6px;
-            background-color: #eaeef2;
-            margin-left: 22px;
-
-            ::placeholder {
-              color: #999;
             }
           }
         }
