@@ -182,7 +182,7 @@ setMsgId(data)
       const timestamp = Date.now();
       const fileName = `${timestamp}_${selectedDocument.name}`;
       const params = {
-        Bucket: "capitalhub",
+        Bucket: "capitalhubdocuments",
         Key: `documents/${fileName}`,
         Body: selectedDocument,
       };
