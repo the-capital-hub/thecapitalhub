@@ -123,11 +123,11 @@ async function getOnePager(oneLink) {
   }
 }
 
-async function getUserById(oneLink) {
+async function getUserById(oneLink, userId) {
   try {
     const onePager = await getOnePager(oneLink);
     const response = await axiosInstance.get(
-      API.getUserById + "/" + onePager.data.founderId
+      API.getUserById + "/" + userId
     );
     response.data.data.company = onePager.data.company;
     response.data.data.location = onePager.data.location;
@@ -170,7 +170,6 @@ export const getStartupByFounderId = async (founderId) => {
     console.log("Response", response);
     return response.data;
   } catch (error) {
-    console.error("Error:", error);
     throw error;
   }
 };
@@ -840,5 +839,27 @@ export const getLikeCount = async (postId) => {
     return response.data;
   } catch (error) {
     console.log("Error getting notification count : ", error);
+  }
+};
+
+export const searchStartUps = async (searchQuery) => {
+  try {
+    const response = await axiosInstance.get(`${API.searchStartUps}/${searchQuery}`);
+    return response.data;
+  } catch (error) {
+    console.log("Error getting startup details : ", error.message);
+  }
+};
+
+export const addStartUpToUser = async (userId, startUpId) => {
+  try {
+    const requestBody = {
+      userId,
+      startUpId,
+    }
+    const response = await axiosInstance.patch(`${API.addStartUpToUser}`, requestBody);
+    return response.data;
+  } catch (error) {
+    console.log("Error adding startup to user : ", error);
   }
 };

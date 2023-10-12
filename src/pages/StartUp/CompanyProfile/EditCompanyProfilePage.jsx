@@ -23,23 +23,27 @@ export default function EditCompanyProfilePage() {
   const [companyData, setCompanyData] = useState([]);
   const [isBioEditable, setIsBioEditable] = useState(false);
   const [companyDescription, setCompanyDescription] = useState(null);
-
   useEffect(() => {
     if (!loggedInUser?.investor) {
-      getStartupByFounderId(loggedInUser._id).then(({ data }) => {
-        setCompanyData(data);
-        setCompanyDescription(data.description);
-        setColorCardData({
-          last_round_investment: data.colorCard.last_round_investment,
-          total_investment: data.colorCard.total_investment,
-          no_of_investers: data.colorCard.no_of_investers,
-          fund_ask: data.colorCard.fund_ask,
-          valuation: data.colorCard.valuation,
-          raised_funds: data.colorCard.raised_funds,
+      getStartupByFounderId(loggedInUser._id)
+        .then(({ data }) => {
+          setCompanyData(data);
+          setCompanyDescription(data.description);
+          setColorCardData({
+            last_round_investment: data.colorCard.last_round_investment,
+            total_investment: data.colorCard.total_investment,
+            no_of_investors: data.colorCard.no_of_investors,
+            fund_ask: data.colorCard.fund_ask,
+            valuation: data.colorCard.valuation,
+            raised_funds: data.colorCard.raised_funds,
+          });
+        })
+        .catch((error) => {
+          console.error('Error fetching startup data:', error);
         });
-      });
     }
   }, []);
+
 
   // handleAmountChange
   const handleAmountChange = (currentfield, updatedAmount) => {
@@ -87,9 +91,8 @@ export default function EditCompanyProfilePage() {
               <span className="ms-auto">
                 <div className="d-flex gap-2">
                   <button
-                    className={`align-self-end btn-base startup ${
-                      isBioEditable ? "btn-sm" : ""
-                    }`}
+                    className={`align-self-end btn-base startup ${isBioEditable ? "btn-sm" : ""
+                      }`}
                     onClick={() => setIsBioEditable(!isBioEditable)}
                   >
                     {isBioEditable ? "Cancel" : "Edit"}
@@ -97,9 +100,8 @@ export default function EditCompanyProfilePage() {
                   </button>
                   {isBioEditable && (
                     <button
-                      className={`align-self-end btn-base startup ${
-                        isBioEditable ? "btn-sm" : ""
-                      }`}
+                      className={`align-self-end btn-base startup ${isBioEditable ? "btn-sm" : ""
+                        }`}
                       onClick={(e) => submitBioHandler(e)}
                     >
                       Save

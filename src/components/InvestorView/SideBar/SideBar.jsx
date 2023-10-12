@@ -31,12 +31,13 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   };
 
   const { username } = useParams();
+  const { userId } = useParams();
   const [user, setUser] = useState([]);
 
   const [currentTab, setCurrentTab] = useState("company");
 
   useEffect(() => {
-    getUserById(username)
+    getUserById(username, userId)
       .then(({ data }) => {
         setUser(data);
       })
