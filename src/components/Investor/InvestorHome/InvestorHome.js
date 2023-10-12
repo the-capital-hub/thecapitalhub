@@ -23,20 +23,27 @@ import CoinIcon from "../../../Images/investorView/Rectangle.png";
 import ColorCard from "../InvestorGlobalCards/ColoredCards/ColorCard";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import ConnectionCard from "../ConnectionCard/ConnectionCard";
+import ProfessionalInfo from "../StartupProfilePageComponents/ProfessionalInfo/ProfessionalInfo";
 
 const InvestorHome = () => {
-  const [isBioEditable, setIsBioEditable] = useState(false);
+  // Fetch loggedInUser from global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  // console.log("logged user", loggedInUser);
+  const dispatch = useDispatch();
+
+  // States for Bio
+  const [isBioEditable, setIsBioEditable] = useState(false);
   const [bioContent, setBioContent] = useState(loggedInUser?.bio || "");
-  const [personalEditable, setPersonalEditable] = useState(false);
-  const [companyName, setCompanyName] = useState("");
-  const [personalData, setPersonalData] = useState({
-    designation: loggedInUser?.designation || "",
-    education: loggedInUser?.education || "",
-    experience: loggedInUser?.experience || "",
-    profilePicture: loggedInUser.profilePicture || "",
-  });
-  console.log("logged user", loggedInUser);
+
+  // States for basic info
+  // const [personalEditable, setPersonalEditable] = useState(false);
+  // // const [companyName, setCompanyName] = useState("");
+  // const [personalData, setPersonalData] = useState({
+  //   designation: loggedInUser?.designation || "",
+  //   education: loggedInUser?.education || "",
+  //   experience: loggedInUser?.experience || "",
+  //   profilePicture: loggedInUser.profilePicture || "",
+  // });
   const [colorCardData, setColorCardData] = useState(null);
 
   const [field, setField] = useState("last_round_investment");
@@ -54,7 +61,7 @@ const InvestorHome = () => {
   useEffect(() => {
     if (!loggedInUser?.investor) {
       getStartupByFounderId(loggedInUser._id).then(({ data }) => {
-        setCompanyName(data?.company);
+        // setCompanyName(data?.company);
         // console.log("ssss__>", data.colorCard.last_round_investment);
         setColorCardData({
           last_round_investment: data?.colorCard?.last_round_investment,
@@ -68,111 +75,109 @@ const InvestorHome = () => {
     }
   }, []);
 
-  const [editCompanyName, setEditCompanyName] = useState({
-    founderId: loggedInUser._id,
-    company: loggedInUser.startUp.company,
-  });
+  // const [editCompanyName, setEditCompanyName] = useState({
+  //   founderId: loggedInUser._id,
+  //   company: loggedInUser.startUp.company,
+  // });
 
-  const dispatch = useDispatch();
+  // const personalEditHandler = (field) => {
+  //   setPersonalEditable(!personalEditable);
+  // };
 
-  const personalEditHandler = (field) => {
-    setPersonalEditable(!personalEditable);
-  };
+  // const submitPersonalHandler = async () => {
+  //   try {
+  //     const { profilePicture, ...newPersonalData } = personalData;
+  //     if (typeof profilePicture === "object") {
+  //       const image = await getBase64(profilePicture);
+  //       newPersonalData.profilePicture = image;
+  //     }
+  //     const {
+  //       data: { data },
+  //     } = await updateUserAPI(newPersonalData);
+  //     dispatch(loginSuccess(data));
+  //     const response = await postStartUpData(editCompanyName);
+  //     setCompanyName(editCompanyName.company);
+  //     setPersonalEditable(!personalEditable);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const submitPersonalHandler = async () => {
-    try {
-      const { profilePicture, ...newPersonalData } = personalData;
-      if (typeof profilePicture === "object") {
-        const image = await getBase64(profilePicture);
-        newPersonalData.profilePicture = image;
-      }
-      const {
-        data: { data },
-      } = await updateUserAPI(newPersonalData);
-      dispatch(loginSuccess(data));
-      const response = await postStartUpData(editCompanyName);
-      setCompanyName(editCompanyName.company);
-      setPersonalEditable(!personalEditable);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const personalChangeHandler = (e) => {
+  //   if (e.target.name === "profilePicture") {
+  //     const { name, files } = e.target;
+  //     setPersonalData({
+  //       ...personalData,
+  //       [name]: files[0],
+  //     });
+  //   } else {
+  //     const { name, value } = e.target;
+  //     setPersonalData({
+  //       ...personalData,
+  //       [name]: value,
+  //     });
+  //   }
+  // };
 
-  const personalChangeHandler = (e) => {
-    if (e.target.name === "profilePicture") {
-      const { name, files } = e.target;
-      setPersonalData({
-        ...personalData,
-        [name]: files[0],
-      });
-    } else {
-      const { name, value } = e.target;
-      setPersonalData({
-        ...personalData,
-        [name]: value,
-      });
-    }
-  };
+  // const companyNameHandler = (e) => {
+  //   const { name, value } = e.target;
+  //   setEditCompanyName({
+  //     ...editCompanyName,
+  //     [name]: value,
+  //   });
+  // };
 
-  const companyNameHandler = (e) => {
-    const { name, value } = e.target;
-    setEditCompanyName({
-      ...editCompanyName,
-      [name]: value,
-    });
-  };
-
-  const renderEditableField = (fieldName) => {
-    if (personalEditable) {
-      if (fieldName === "profilePicture") {
-        return (
-          <input
-            type="file"
-            className="w-100 profile_edit_field border-0"
-            accept="image/*"
-            name={fieldName}
-            value={personalData.fieldName}
-            onChange={personalChangeHandler}
-          />
-        );
-      }
-      if (fieldName === "company") {
-        return (
-          <input
-            type="text"
-            className="w-100 profile_edit_field"
-            name={fieldName}
-            value={editCompanyName[fieldName]}
-            onChange={companyNameHandler}
-          />
-        );
-      }
-      if (fieldName === "experience") {
-        return (
-          <textarea
-            type="text"
-            className="w-100 profile_edit_field"
-            name={fieldName}
-            value={personalData[fieldName]}
-            onChange={companyNameHandler}
-            rows={4}
-          />
-        );
-      }
-      return (
-        <input
-          type="text"
-          className="w-100 profile_edit_field"
-          name={fieldName}
-          value={personalData[fieldName]}
-          onChange={personalChangeHandler}
-        />
-      );
-    }
-    if (fieldName === "company")
-      return <span className="small_typo">{companyName}</span>;
-    return <span className="small_typo">{loggedInUser[fieldName]}</span>;
-  };
+  // const renderEditableField = (fieldName) => {
+  //   if (personalEditable) {
+  //     if (fieldName === "profilePicture") {
+  //       return (
+  //         <input
+  //           type="file"
+  //           className="w-100 profile_edit_field border-0"
+  //           accept="image/*"
+  //           name={fieldName}
+  //           value={personalData.fieldName}
+  //           onChange={personalChangeHandler}
+  //         />
+  //       );
+  //     }
+  //     if (fieldName === "company") {
+  //       return (
+  //         <input
+  //           type="text"
+  //           className="w-100 profile_edit_field"
+  //           name={fieldName}
+  //           value={editCompanyName[fieldName]}
+  //           onChange={companyNameHandler}
+  //         />
+  //       );
+  //     }
+  //     if (fieldName === "experience") {
+  //       return (
+  //         <textarea
+  //           type="text"
+  //           className="w-100 profile_edit_field"
+  //           name={fieldName}
+  //           value={personalData[fieldName]}
+  //           onChange={personalChangeHandler}
+  //           rows={4}
+  //         />
+  //       );
+  //     }
+  //     return (
+  //       <input
+  //         type="text"
+  //         className="w-100 profile_edit_field"
+  //         name={fieldName}
+  //         value={personalData[fieldName]}
+  //         onChange={personalChangeHandler}
+  //       />
+  //     );
+  //   }
+  //   if (fieldName === "company")
+  //     return <span className="small_typo">{companyName}</span>;
+  //   return <span className="small_typo">{loggedInUser[fieldName]}</span>;
+  // };
 
   const submitBioHandler = async () => {
     const {
@@ -195,8 +200,11 @@ const InvestorHome = () => {
             {/* <SmallProfileCard className={""} /> */}
 
             <div className="content-70 d-flex flex-column gap-4">
+              {/* Professional info component */}
+              <ProfessionalInfo theme={"startup"} />
+
               {/* user details */}
-              <div className="p-2 px-md-4 py-3 box bio_container">
+              {/* <div className="p-2 px-md-4 py-3 box bio_container">
                 <div className="profileContainer border-bottom pb-3">
                   <div className="image_name_section mt-2">
                     <img
@@ -218,7 +226,6 @@ const InvestorHome = () => {
                       </span>
                     </div>
 
-                    {/* Edit button */}
                     <span className="edit_btn d-flex align-self-end align-md-self-start">
                       <span className="ms-auto">
                         <button onClick={() => personalEditHandler()}>
@@ -235,24 +242,13 @@ const InvestorHome = () => {
                         )}
                       </span>
                     </span>
-                    {/* Edit button end */}
                   </div>
 
-                  {/* <div className="col-2 col-md-4 col-five">
-                          <div className=" m-4">
-                            <button className="connect_btn px-3">
-                              <img src={AddUserIcon} alt="add user" />
-                                <span className="mx-2">Connect</span>
-                            </button>
-                          </div>
-                        </div> */}
+                  
                 </div>
-                {/* <hr className="divider_hr" /> */}
+
 
                 <div className="designation mt-2 w-100">
-                  {/*this is the previous location of edit button */}
-
-                  {/* Info Table */}
                   <table className="my-3 profile_table">
                     <tbody>
                       <tr>
@@ -260,7 +256,6 @@ const InvestorHome = () => {
                           <p className="fs-6 m-0 fw-semibold">Company</p>
                         </td>
                         <td className="small_typo">
-                          {/* {companyName || "No StartUp"} */}
                           {renderEditableField("company")}
                         </td>
                       </tr>
@@ -296,9 +291,9 @@ const InvestorHome = () => {
                       )}
                     </tbody>
                   </table>
-                  {/* Info Table end */}
+                  
                 </div>
-              </div>
+              </div> */}
               {/* user details end */}
 
               {/* <div className="row">
