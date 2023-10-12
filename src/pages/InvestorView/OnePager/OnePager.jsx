@@ -183,9 +183,9 @@ const OnePager = () => {
             />
           </div>
           <hr />
-          <div className="marketCards">
+          <div className="">
             <Title title="Market (in cr)" />
-            <div className="cards">
+            <div className="market_cards">
               <MarketCard
                 title={"TAM"}
                 subtitle={"(Total Addressable Market)"}
@@ -203,13 +203,15 @@ const OnePager = () => {
               />
             </div>
           </div>
-          <div className="projections">
+
+          <div className="projections overflow-x-auto">
             <Title title={"Projections"} />
             <Table hidden={true} />
           </div>
+
           <div className="team">
             <Title title={"Team"} />
-            <div className="cards">
+            <div className="team_cards">
               {onePager?.team?.map((team, index) => (
                 <TeamsCard
                   key={index}
@@ -220,6 +222,7 @@ const OnePager = () => {
               ))}
             </div>
           </div>
+
           <div className="fundingAndContact">
             <div className="left">
               <Title title={"Funding ask (in Lakhs)"} />
