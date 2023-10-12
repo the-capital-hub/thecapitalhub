@@ -107,6 +107,9 @@ const investorSchema = new Schema(
     keyFocus: {
       type: String,
     },
+    tagline: {
+      type: String,
+    },
     oneLink: {
       type: String,
       default: function () {
