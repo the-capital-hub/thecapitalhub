@@ -72,6 +72,8 @@ const API = Object.freeze({
   getLikeCount: `${baseUrl}/api/posts/likeCount`,
   searchStartUps: `${baseUrl}/startup/searchStartUps`,
   addStartUpToUser: `${baseUrl}/users/addStartUpToUser`,
+  deleteDocument: `${baseUrl}/documentation/deleteDocument`,
+
 });
 
 export default API;

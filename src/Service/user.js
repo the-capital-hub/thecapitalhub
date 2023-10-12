@@ -863,3 +863,15 @@ export const addStartUpToUser = async (userId, startUpId) => {
     console.log("Error adding startup to user : ", error);
   }
 };
+
+export const deleteDocument = async (docId) => {
+  try {
+    const response = await axiosInstance.delete(
+      `${API.deleteDocument}/${docId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error in delete document:", error);
+    throw error;
+  }
+};
