@@ -475,7 +475,7 @@ function Profile() {
               </div>
             </div>
           </div>
-          <div className="col thirty">
+          <div className="col thirty d-none d-xl-block">
             <div className="content-30">
               <div className="row d-none d-xl-block">
                 <InvestorRightProfileCard />

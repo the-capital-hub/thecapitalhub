@@ -28,7 +28,7 @@ const InvestorNavbar = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let url = window.location.href; 
+    let url = window.location.href;
     if (window.location.href.includes("?")) {
       url = url.split("?")[0];
     }
@@ -84,6 +84,8 @@ const InvestorNavbar = (props) => {
   };
   const [mobileSearch, setMobileSearch] = useState(false);
 
+  const pageTitle = useSelector((state) => state.design.pageTitle);
+
   return (
     <>
       <div className="container pt-1  mb-4 mb-xl-0">
@@ -98,7 +100,7 @@ const InvestorNavbar = (props) => {
                 />
               </div>
               <div
-                className="mobile-home-hamberger"
+                className="mobile-home-hamberger "
                 onClick={props.handleSidebarToggle}
               >
                 {props.sidebarCollapsed ? (
@@ -106,6 +108,7 @@ const InvestorNavbar = (props) => {
                 ) : (
                   <img src={HambergerCrossIcon} alt="bar" />
                 )}
+                {/* <h1 className="ms-2">{pageTitle || url}</h1> */}
                 <h1 className="ms-2">{url}</h1>
               </div>
             </div>

@@ -22,16 +22,8 @@ import Linkify from "react-linkify";
 import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import ChatDeletePopup from "../ChatDeletePopup/ChatDeletePopup";
 import ChatDropDownMenu from "../ChatDropDownMenu/ChatDropDownMenu";
+import {s3} from "../../../../Service/awsConfig";
 
-const AWS = require("aws-sdk");
-
-AWS.config.update({
-  accessKeyId: "AKIA3ADZ252QBA67V4VO",
-  secretAccessKey: "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",
-  region: "us-east-1",
-});
-
-const s3 = new AWS.S3();
 
 const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
   // Fetch global state
@@ -193,7 +185,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
       const timestamp = Date.now();
       const fileName = `${timestamp}_${selectedDocument.name}`;
       const params = {
-        Bucket: "capitalhub",
+        Bucket: "capitalhubdocuments",
         Key: `documents/${fileName}`,
         Body: selectedDocument,
       };

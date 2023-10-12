@@ -6,17 +6,20 @@ import CorrectImage from "../../../../Images/Correct.svg";
 import Cross from "../../../../Images/Cross.svg";
 import { Link } from "react-router-dom";
 import IconLink from "../../SvgIcons/IconLink";
+import { useSelector } from "react-redux";
 
 const ShareLink = ({ OneLink, onExitClick, investor = false, isExitClicked }) => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
   return (
     <>
       <div className="ShareLink_container mt-3">
-        <div className="box_container">
+        <div className="box_container rounded-3 shadow-sm border">
           <section className="title_section">
             <h6>Now share all your startup details in one link</h6>
           </section>
           <hr />
-          {isExitClicked && OneLink === "" && (
+          {isExitClicked && (OneLink === undefined || OneLink === "") && (
             <div className="warning_message">Please fill company details to get the Onelink.</div>
           )}
           <Link
@@ -33,16 +36,17 @@ const ShareLink = ({ OneLink, onExitClick, investor = false, isExitClicked }) =>
               <input
                 type="text"
                 placeholder="Type your text here"
+                className="pe-2"
                 value={
                   OneLink
                     ? investor
-                      ? "thecapitalhub.in/investor/onelink/" + OneLink
-                      : "thecapitalhub.in/onelink/" + OneLink
+                      ? "thecapitalhub.in/investor/onelink/" + OneLink + "/" + loggedInUser._id
+                      : "thecapitalhub.in/onelink/" + OneLink + "/" + loggedInUser._id
                     : ""
                 }
                 disabled
               />
-              <div className="right_icons">
+              <div className="right_icons_onelink">
                 <img
                   className="right_icons_img1"
                   src={ExitImage}
@@ -53,8 +57,8 @@ const ShareLink = ({ OneLink, onExitClick, investor = false, isExitClicked }) =>
                   className="right_icons_img2"
                   src={CorrectImage}
                   alt="image"
-                /> */}
-                {/* <img className="right_icons_img3" src={Cross} alt="image" /> */}
+                /> 
+                <img className="right_icons_img3" src={Cross} alt="image" /> */}
               </div>
             </div>
           </Link>

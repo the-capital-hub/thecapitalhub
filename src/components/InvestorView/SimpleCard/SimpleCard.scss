@@ -1,26 +1,24 @@
 .simpleCard {
-    padding: 20px 0px;
-    padding-left: 10px;
-    h4 {
-        font-size: 13px;
-        font-weight: 300;
-    }
-    p {
-        font-size: 12px;
-        width: 400px;
-        font-weight: 200;
-        border: 1px solid black;
-        padding: 50px 50px 50px 10px;
-    }
-}
+  flex: 0 0 20rem;
 
-@media (max-width: 426px) {
-    .simpleCard {
-        padding: 0px 0px;
-        padding-left: 0px;
-        // width: 300px;
-        p {
-            width: 300px;
-        }
+  fieldset,
+  legend {
+    all: revert;
+  }
+  fieldset {
+    min-height: 150px;
+    border: 1px solid rgba(227, 227, 227, 1);
+
+    &:hover {
+      border: 1px solid rgba(211, 243, 107, 1);
     }
+  }
+  legend {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  p {
+    font-size: 12px;
+    font-weight: 400;
+  }
 }

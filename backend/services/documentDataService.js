@@ -181,9 +181,8 @@ export const deleteFolder = async (args) => {
   }
 };
 
-export const deleteDocument = async (args) => {
+export const deleteDocument = async (documentId) => {
   try {
-    const { documentId } = args;
     const document = await File.findOne({  _id: documentId });
     if (!document) {
       return {

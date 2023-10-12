@@ -39,12 +39,44 @@
 
   .cards {
     display: flex;
-    gap: 5px;
+    gap: 2em;
+    overflow-x: auto;
+    padding-bottom: 0.5em;
+    &::-webkit-scrollbar {
+      height: 8px;
+      margin-inline: 10dvw;
+
+      &-track {
+        border-radius: 10rem;
+        background-color: rgba(211, 243, 107, 0.2);
+        margin-inline: 10dvw;
+      }
+
+      &-thumb {
+        border-radius: 10rem;
+        background-color: rgba(211, 243, 107, 1);
+        margin-inline: 10dvw;
+      }
+    }
+  }
+
+  .market_cards {
+    display: flex;
+    align-items: center;
+    gap: 0.25em;
     flex-wrap: wrap;
   }
 
   .projections {
     margin-top: 30px;
+  }
+
+  .team {
+    .team_cards {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
   }
 
   .fundingAndContact {
@@ -130,7 +162,7 @@
     .cards {
       display: flex;
       align-items: center;
-      justify-content: center;
+      // justify-content: center;
     }
     .projections {
       width: 100%;

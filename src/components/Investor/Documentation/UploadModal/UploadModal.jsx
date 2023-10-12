@@ -4,16 +4,8 @@ import axios from "axios";
 import { environment } from "../../../../environments/environment";
 import AfterSuccessPopUp from "../../../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import { useSelector } from "react-redux";
+import {s3} from "../../../../Service/awsConfig";
 const baseUrl = environment.baseUrl;
-const AWS = require("aws-sdk");
-
-AWS.config.update({
-  accessKeyId: "AKIA3ADZ252QBA67V4VO",
-  secretAccessKey: "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",
-  region: "us-east-1",
-});
-
-const s3 = new AWS.S3();
 
 const UploadModal = ({ onCancel }) => {
   const [folder, setFolder] = useState("pitchdeck");
@@ -27,12 +19,13 @@ const UploadModal = ({ onCancel }) => {
   };
 
   const handlePdfUploadClick = async () => {
+    console.log("Test", process.env.AWS_ACCESS_KEY);
     if (fileInputRef.current.files.length > 0) {
       const file = fileInputRef.current.files[0];
       const timestamp = Date.now();
       const fileName = `${timestamp}_${file.name}`;
       const params = {
-        Bucket: "capitalhub",
+        Bucket: "capitalhubdocuments",
         Key: `documents/${fileName}`,
         Body: file,
       };

@@ -277,7 +277,7 @@ export const searchUsers = async (searchQuery) => {
         { userStatus: 'active' },
       ],
     });
-    
+
     const company = await StartUpModel.find({
       $or: [
         { company: { $regex: searchQuery, $options: "i" } },
@@ -349,6 +349,33 @@ export const addExperience = async (userId, experienceData) => {
     return {
       status: 500,
       message: "An error occurred while adding experience.",
+    };
+  }
+};
+
+export const addStartupToUser = async (userId, startUpId) => {
+  try {
+    const user = await UserModel.findOneAndUpdate(
+      { _id: userId },
+      { $set: { startUp: startUpId } },
+      { new: true }
+    );    
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found.",
+      }
+    }
+    return {
+      status: 200,
+      message: "Startup added to user successfully.",
+      data: user,
+    };
+  } catch (error) {
+    console.error("Error adding startups to user:", error);
+    return {
+      status: 500,
+      message: "An error occurred while adding startups to user.",
     };
   }
 };
