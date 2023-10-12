@@ -39,7 +39,6 @@ import ModalBSBody from "../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
 import Linkify from "react-linkify";
 import deleteIcon from "../../../Images/post/delete.png";
 
-
 const FeedPostCard = ({
   postId,
   description,
@@ -205,22 +204,20 @@ const FeedPostCard = ({
 
   const repostContainerRef = useRef(null);
 
-
   const handleUnsavePost = async (e) => {
     e.preventDefault();
     receiveUnSavedPostStatus();
     const requestBody = {
       userId: loggedInUser._id,
       postId: postId,
-    }
+    };
     try {
       const response = await unsavePost(requestBody);
       console.log(response);
     } catch (error) {
       console.log(error);
     }
-
-  }
+  };
 
   const [showUnsaveSuccess, setShowUnsaveSuccess] = useState(false);
   const receiveUnSavedPostStatus = () => {
@@ -241,10 +238,10 @@ const FeedPostCard = ({
     }, 2000);
   };
 
-// double click like 
-const handleDoubleClick = () => {
-  likeUnlikeHandler()
-  }
+  // double click like
+  const handleDoubleClick = () => {
+    likeUnlikeHandler();
+  };
   useEffect(() => {
     getLikeCount(postId)
       .then(({ data }) => {
@@ -252,10 +249,6 @@ const handleDoubleClick = () => {
       })
       .catch((error) => console.log(error));
   }, [liked]);
-
-
-
-
 
   const commentlikeUnlikeHandler = async (postId, commentId) => {
     try {
@@ -269,12 +262,9 @@ const handleDoubleClick = () => {
     }
   };
 
-
-
   const deleteComments = async (postId, commentId) => {
     console.log(postId, commentId);
     try {
-     
       await deleteComment(postId, commentId);
       await getPostComment({ postId }).then((res) => {
         console.log("response", res.data.data);
@@ -285,16 +275,14 @@ const handleDoubleClick = () => {
     }
   };
 
-
-
-
   return (
     <>
       <div className="row investor_feedpostcard_main_container mb-2">
         <div className="col-12">
           <div
-            className={`box feedpostcard_container mt-2 ${repostPreview && "rounded shadow-sm border"
-              }`}
+            className={`box feedpostcard_container mt-2 border ${
+              repostPreview && "rounded shadow-sm"
+            }`}
           >
             <div className="  feed_header_container border-2 border-bottom mb-3 pb-2">
               <div className="feedpostcard_content">
@@ -440,15 +428,7 @@ const handleDoubleClick = () => {
                 style={{ fontSize: "14px" }}
               >
                 {/* {likes?.length} likes */}
-                {likedBy ? (
-                  <>
-                    Liked By {likedBy}
-                  </>
-                ): 
-                 <>
-                 {likes?.length} likes
-                 </>
-                }
+                {likedBy ? <>Liked By {likedBy}</> : <>{likes?.length} likes</>}
               </span>
             )}
             {!repostPreview && (
@@ -463,6 +443,7 @@ const handleDoubleClick = () => {
                           width={18}
                           alt="like post"
                           onClick={likeUnlikeHandler}
+                          style={{ cursor: "pointer" }}
                         />
                       ) : (
                         <img
@@ -470,20 +451,23 @@ const handleDoubleClick = () => {
                           width={18}
                           alt="like post"
                           onClick={likeUnlikeHandler}
+                          style={{ cursor: "pointer" }}
                         />
                       )}
                       <img
                         src={commentIcon}
                         width={16}
                         alt="comment post"
-                         onClick={() => setShowComment(!showComment)}
+                        onClick={() => setShowComment(!showComment)}
+                        style={{ cursor: "pointer" }}
                       />
                     </div>
                   </div>
                   <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                     <span
-                      className={`repost_container rounded ${showRepostOptions ? "bg-light" : ""
-                        }`}
+                      className={`repost_container rounded ${
+                        showRepostOptions ? "bg-light" : ""
+                      }`}
                       ref={repostContainerRef}
                     >
                       <img
@@ -491,6 +475,7 @@ const handleDoubleClick = () => {
                         width={12}
                         alt="reshare post"
                         onClick={() => setShowRepostOptions(!showRepostOptions)}
+                        style={{ cursor: "pointer" }}
                       />
                       {showRepostOptions && (
                         <span className="repost_options rounded shadow-sm">
@@ -549,13 +534,20 @@ const handleDoubleClick = () => {
                     </span>
                     {/* <img src={shareIcon} width={16} alt="share post" /> */}
                     {savedPostId.includes(postId) ? (
-                      <img src={savedIcon} width={16} alt="save post" onClick={handleUnsavePost} />
+                      <img
+                        src={savedIcon}
+                        width={16}
+                        alt="save post"
+                        onClick={handleUnsavePost}
+                        style={{ cursor: "pointer" }}
+                      />
                     ) : (
                       <img
                         src={saveIcon}
                         width={16}
                         alt="save post"
                         onClick={handleSavePopUp}
+                        style={{ cursor: "pointer" }}
                       />
                     )}
                   </div>
@@ -563,7 +555,15 @@ const handleDoubleClick = () => {
                     <div>
                       <div class="comment_container">
                         <div class="logo">
-                          <img src={RoundLogo} alt="Logo" />
+                          <img
+                            src={
+                              profilePicture ||
+                              "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
+                            }
+                            alt="Logo"
+                            style={{ width: "50px", height: "50px" }}
+                            className="rounded-circle"
+                          />
                         </div>
                         <section class="input_and_logo_section">
                           <div class="input_box">
@@ -596,7 +596,10 @@ const handleDoubleClick = () => {
                             new Date(b.createdAt) - new Date(a.createdAt)
                         )
                         .map((val) => (
-                          <section className="comment_messages my-2" key={val._id}>
+                          <section
+                            className="comment_messages my-2"
+                            key={val._id}
+                          >
                             <div className="connection_item d-flex flex-column flex-md-row justify-content-between">
                               <div className="connection_left">
                                 {val.user && (
@@ -627,52 +630,46 @@ const handleDoubleClick = () => {
                             </div>
                             <p className="comment_text mb-1">{val.text}</p>
 
-
-
-
-
                             <hr className="p-0 m-0" />
-                          <div className="d-flex  justify-content-between px-2">
-                            <div className="p-2">
-                              {val?.likes.includes(loggedInUser._id) ? (
-                                <img
-                                  src={fireIcon}
-                                  width={18}
-                                  alt="like post"
-                                  onClick={() =>
-                                    commentlikeUnlikeHandler(postId, val._id)
-                                  }
-                                />
-                              ) : (
-                                <img
-                                  src={bwFireIcon}
-                                  width={18}
-                                  alt="like post"
-                                  onClick={() =>
-                                    commentlikeUnlikeHandler(postId, val._id)
-                                  }
-                                />
-                              )}
-                              <span
-                                className=" mx-3 text-secondary"
-                                style={{ fontSize: "14px" }}
-                              >
-                                {val?.likes.length} likes
-                              </span>
-                            </div>
-                            { userId === loggedInUser?._id && (
+                            <div className="d-flex  justify-content-between px-2">
+                              <div className="p-2">
+                                {val?.likes.includes(loggedInUser._id) ? (
+                                  <img
+                                    src={fireIcon}
+                                    width={18}
+                                    alt="like post"
+                                    onClick={() =>
+                                      commentlikeUnlikeHandler(postId, val._id)
+                                    }
+                                  />
+                                ) : (
+                                  <img
+                                    src={bwFireIcon}
+                                    width={18}
+                                    alt="like post"
+                                    onClick={() =>
+                                      commentlikeUnlikeHandler(postId, val._id)
+                                    }
+                                  />
+                                )}
+                                <span
+                                  className=" mx-3 text-secondary"
+                                  style={{ fontSize: "14px" }}
+                                >
+                                  {val?.likes.length} likes
+                                </span>
+                              </div>
+                              {userId === loggedInUser?._id && (
                                 <img
                                   src={deleteIcon}
                                   alt="image"
                                   className="deleteIcon py-1"
-                                  onClick={() => deleteComments(postId, val._id)}
+                                  onClick={() =>
+                                    deleteComments(postId, val._id)
+                                  }
                                 />
-                                )}
-                          </div>
-
-
-
-
+                              )}
+                            </div>
                           </section>
                         ))}
                     </div>
@@ -722,8 +719,9 @@ const handleDoubleClick = () => {
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Harassment" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio1"
               >
                 Harassment
@@ -740,8 +738,9 @@ const handleDoubleClick = () => {
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Spam" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio2"
               >
                 Spam
@@ -758,8 +757,9 @@ const handleDoubleClick = () => {
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Fraud or scam" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio3"
               >
                 Fraud or scam
@@ -776,8 +776,9 @@ const handleDoubleClick = () => {
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Hateful Speech" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio4"
               >
                 Hateful Speech

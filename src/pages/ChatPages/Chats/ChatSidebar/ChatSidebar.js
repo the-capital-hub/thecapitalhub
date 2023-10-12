@@ -77,6 +77,7 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   const handleGetMessageByChatId = (chatId) => {
     getMessageByChatId(chatId)
       .then((res) => {
+        // console.log(res.data)
         const latestMessage = res.data[res.data.length - 1];
         setLatestMessages((prevLatestMessages) => ({
           ...prevLatestMessages,
