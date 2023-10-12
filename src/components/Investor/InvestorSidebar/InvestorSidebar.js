@@ -199,9 +199,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 className="active-item"
               >
                 <div className="sidebar__community d-flex gap-4 ">
-                  <div
-                  // onClick={() => setSidebarCollapsed(true)}
-                  >
+                  <div onClick={() => setSidebarCollapsed(true)}>
                     <CommunitiesIcon
                       width="17px"
                       height="17px"
@@ -289,7 +287,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 </Link>
               </MenuItem>
 
-              <MenuItem
+              {/* <MenuItem
                 active={location.pathname.includes("/team")}
                 className="active-item"
               >
@@ -300,8 +298,8 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   <img src={GroupIcon} alt="image" width="17px" height="17px" />
                   {!sidebarCollapsed && <span>Team</span>}
                 </Link>
-              </MenuItem>
-              <MenuItem
+              </MenuItem> */}
+              {/* <MenuItem
                 active={location.pathname.includes("/customers")}
                 className="active-item"
               >
@@ -312,8 +310,8 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   <img src={Setting} alt="image" width="17px" height="17px" />
                   {!sidebarCollapsed && <span>Customers</span>}
                 </Link>
-              </MenuItem>
-              <MenuItem
+              </MenuItem> */}
+              {/* <MenuItem
                 active={location.pathname.includes("/investors")}
                 className="active-item"
               >
@@ -329,7 +327,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   />
                   {!sidebarCollapsed && <span>Investors</span>}
                 </Link>
-              </MenuItem>
+              </MenuItem> */}
               <MenuItem
                 active={location.pathname.includes("/help")}
                 className="active-item"
