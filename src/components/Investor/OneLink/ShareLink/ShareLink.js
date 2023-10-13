@@ -40,8 +40,8 @@ const ShareLink = ({ OneLink, onExitClick, investor = false, isExitClicked }) =>
                 value={
                   OneLink
                     ? investor
-                      ? "thecapitalhub.in/investor/onelink/" + OneLink + "/" + loggedInUser._id
-                      : "thecapitalhub.in/onelink/" + OneLink + "/" + loggedInUser._id
+                      ? "thecapitalhub.in/investor/onelink/" + OneLink + "/" + loggedInUser.oneLinkId
+                      : "thecapitalhub.in/onelink/" + OneLink + "/" + loggedInUser.oneLinkId
                     : ""
                 }
                 disabled

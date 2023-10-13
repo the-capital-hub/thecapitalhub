@@ -4,12 +4,11 @@ import sendIcon from "../../../../Images/Send.svg";
 import { useSelector } from "react-redux";
 import {
   getMessageByChatId,
-  getUserAndStartUpByUserIdAPI,
   addMessage,
-  markMessagesAsRead,
   getStartupByFounderId,
   getCommunityById,
-  deleteMessage
+  deleteMessage,
+  markMessagesAsReadInCommunities,
 } from "../../../../Service/user";
 import attachmentGreyIcon from "../../../../Images/Chat/attachtment-grey.svg";
 import attachmentOrangeIcon from "../../../../Images/Chat/attachment-orange.svg";
@@ -22,10 +21,10 @@ import Linkify from "react-linkify";
 import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import ChatDeletePopup from "../ChatDeletePopup/ChatDeletePopup";
 import ChatDropDownMenu from "../ChatDropDownMenu/ChatDropDownMenu";
-import {s3} from "../../../../Service/awsConfig";
+import { s3 } from "../../../../Service/awsConfig";
 
 
-const CommunityDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
+const CommunityDashboard = ({ setSendMessage, recieveMessage, cleared, isRead, setIsRead }) => {
   // Fetch global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const chatId = useSelector((state) => state.chat.chatId);
@@ -43,12 +42,12 @@ const CommunityDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
 
 
 
-  const handleSetDeletePopup=()=>{
+  const handleSetDeletePopup = () => {
     setDeletePopup(true)
   }
-  const handleIdBack=(data)=>{
-console.log(data)
-setMsgId(data)
+  const handleIdBack = (data) => {
+    console.log(data)
+    setMsgId(data)
   }
 
 
@@ -59,7 +58,7 @@ setMsgId(data)
     }
   }, [messages, recieveMessage]);
 
-  const hadilDeleteOk = async () => {
+  const handleDelete = async () => {
     console.log(msgId);
     try {
       const result = await deleteMessage(msgId);
@@ -73,15 +72,16 @@ setMsgId(data)
     }
   };
 
-  // useEffect(() => {
-  //   markMessagesAsRead(chatId, userId)
-  //     .then((response) => {
-  //       console.log(response.message);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error marking messages as read:", error);
-  //     });
-  // }, [chatId, userId, recieveMessage]);
+  useEffect(() => {
+    markMessagesAsReadInCommunities(chatId, loggedInUser._id)
+      .then((response) => {
+        console.log(response.message);
+        setIsRead(!isRead);
+      })
+      .catch((error) => {
+        console.error("Error marking messages as read:", error);
+      });
+  }, [chatId, loggedInUser._id, recieveMessage]);
 
   useEffect(() => {
     console.log(recieveMessage);
@@ -99,7 +99,7 @@ setMsgId(data)
       .catch((error) => {
         console.error("Error-->", error);
       });
-  }, [chatId, cleared, isSent,showFeaturedPostSuccess]);
+  }, [chatId, cleared, isSent, showFeaturedPostSuccess]);
 
   const [community, setCommunity] = useState([]);
 
@@ -139,9 +139,8 @@ setMsgId(data)
         groupedMessages.push({ date: "Yesterday", messages: [message] });
       } else {
         currentDate = messageDate;
-        const formattedDate = `${messageDate.getDate()}-${
-          messageDate.getMonth() + 1
-        }-${messageDate.getFullYear()}`;
+        const formattedDate = `${messageDate.getDate()}-${messageDate.getMonth() + 1
+          }-${messageDate.getFullYear()}`;
         groupedMessages.push({
           date:
             today.getDate() === messageDate.getDate() ? "Today" : formattedDate,
@@ -321,7 +320,7 @@ setMsgId(data)
                       {message.text !== "" && (
                         <div className="mymessage_container">
 
-<ChatDropDownMenu onClicks={handleSetDeletePopup} idBack={handleIdBack} id={message?._id} />
+                          <ChatDropDownMenu onClicks={handleSetDeletePopup} idBack={handleIdBack} id={message?._id} />
                           <Linkify>
                             <p>{message.text}</p>
                           </Linkify>
@@ -576,27 +575,27 @@ setMsgId(data)
           </div>
         </div>
       </section>
-      {deletePopup?<ChatDeletePopup>
+      {deletePopup ? <ChatDeletePopup>
         <div className="d-flex flex-column  justify-content-center ">
 
-        <h1>Delete permeanently</h1>
-        <hr className="p-0 m-1 "/>
-        <p>This message will be Deleted permeanently </p>
-        <div className="d-flex flex-column flex-md-row mx-auto" >
-        <button className="popup-close-button " onClick={() => setDeletePopup(false)}>Cancle</button>
-        <button className="popup-ok_button" onClick={() =>  hadilDeleteOk() }>Ok</button>
+          <h1>Delete permeanently</h1>
+          <hr className="p-0 m-1 " />
+          <p>This message will be Deleted permeanently </p>
+          <div className="d-flex flex-column flex-md-row mx-auto" >
+            <button className="popup-close-button " onClick={() => setDeletePopup(false)}>Cancle</button>
+            <button className="popup-ok_button" onClick={() => handleDelete()}>Ok</button>
 
+          </div>
         </div>
-        </div>
-      </ChatDeletePopup> :''}
-      
+      </ChatDeletePopup> : ''}
+
       {showFeaturedPostSuccess ? (
 
-      <AfterSuccessPopUp
-      onClose={() => setShowFeaturedPostSuccess(false)}
-      successText="The message has been deleted successfully."
-      />
-      ):""}
+        <AfterSuccessPopUp
+          onClose={() => setShowFeaturedPostSuccess(false)}
+          successText="The message has been deleted successfully."
+        />
+      ) : ""}
     </div>
   );
 };

@@ -3,6 +3,7 @@ import "./NavBar.scss";
 import searchIconBlack from "../../../Images/navbar/Search.svg";
 import Logo from "../../../Images/investorIcon/Logo.svg";
 import NotificationIcon from "../../../Images/investorIcon/notification.svg";
+import YellowNotificationIcon from "../../../Images/investorIcon/YellowNotificationIcon.svg";
 import MessageIcon from "../../../Images/investorIcon/message.svg";
 import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
 import HambergerIcon from "../../../Images/Hamberger.svg";
@@ -13,6 +14,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { getSearchResultsAPI } from "../../../Service/user";
 import { SearchIcon } from "../SvgIcons";
+import NotificationsPopup from "../../Investor/InvestorNavbar/NotificationsPopup/NotificationsPopup";
+import { useRef } from "react";
 
 const NavBar = (props) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -21,6 +24,8 @@ const NavBar = (props) => {
   const [searchInput, setSearchInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [inputOnFocus, setInputOnFocus] = useState(false);
+  const [toggleNotificationPopup, setToggleNotificationPopup] = useState(false);
+  const notificationPopup = useRef();
 
   const navigate = useNavigate();
 
@@ -56,6 +61,21 @@ const NavBar = (props) => {
     }, 500);
   };
   const [mobileSearch, setMobileSearch] = useState(false);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        notificationPopup.current &&
+        !notificationPopup.current.contains(event.target)
+      ) {
+        setToggleNotificationPopup(false);
+      }
+    }
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [toggleNotificationPopup]);
 
   return (
     <>
@@ -296,14 +316,35 @@ const NavBar = (props) => {
                 )}
               </div>
 
-              <Link
+              {/* <Link
                 to="/notifications"
                 className="rounded-circle notification-icon"
+              > */}
+              <div
+                className={`notification-container icon-wrapper`}
+                ref={notificationPopup}
               >
-                <div className="icon-wrapper">
-                  <img src={NotificationIcon} alt="notification" />
-                </div>
-              </Link>
+                {!toggleNotificationPopup ? (
+                  <img
+                    src={NotificationIcon}
+                    alt="notification"
+                    onClick={() => setToggleNotificationPopup((prev) => !prev)}
+                  />
+                ) : (
+                  <img
+                    src={YellowNotificationIcon}
+                    alt="notification"
+                    width={50}
+                    onClick={() => setToggleNotificationPopup((prev) => !prev)}
+                  />
+                )}
+                {toggleNotificationPopup && (
+                  <NotificationsPopup
+                    toggleVisibility={setToggleNotificationPopup}
+                  />
+                )}
+              </div>
+              {/* </Link> */}
               <Link to="/chats" className="rounded-circle message-icon">
                 <div className="icon-wrapper">
                   <img src={MessageIcon} alt="message" />

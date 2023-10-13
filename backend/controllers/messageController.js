@@ -5,6 +5,8 @@ import {
   getUnreadMessageCount,
   clearAllMessages,
   deleteMessage,
+  markMessagesAsReadInCommunities,
+  getUnreadMessageCountInCommunities
 } from "../services/messageService.js";
 
 export const addMessageController = async (req, res) => {
@@ -87,6 +89,34 @@ export const deleteMessageController = async (req, res) => {
     return res.status(500).send({
       status: 500,
       message: "An error occurred while deleting messages.",
+    });
+  }
+};
+
+export const markMessagesAsReadInCommunitiesController = async (req, res) => {
+  try {
+    const { chatId, userId } = req.params;
+    const response = await markMessagesAsReadInCommunities(chatId, userId);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while marking messages as read by communities.",
+    });
+  }
+};
+
+export const getUnreadMessageCountInCommunitiesController = async (req, res) => {
+  try {
+    const { chatId, userId } = req.params;
+    const response = await getUnreadMessageCountInCommunities(chatId, userId);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting unread message count.",
     });
   }
 };

@@ -46,7 +46,7 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
       </div>
 
       {/* Action Icons */}
-      <div className="settings_user_actions d-flex gap-2">
+      {/* <div className="settings_user_actions d-flex gap-2">
         <div
           className="d-flex justify-content-center align-items-center rounded-circle"
           style={{
@@ -67,7 +67,7 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
         >
           <IconVideo width="24px" height="24px" />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

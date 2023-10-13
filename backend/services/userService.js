@@ -53,7 +53,10 @@ export const loginUserService = async ({ phoneNumber, password }) => {
 //get User by id
 export const getUserById = async (userId) => {
   try {
-    const user = await UserModel.findById(userId).populate("startUp");
+    let user = await UserModel.findOne({ oneLinkId: userId }).populate('startUp');
+    if (!user) {
+      user = await UserModel.findById(userId).populate('startUp');
+    }
     if (!user) {
       return {
         status: 404,
