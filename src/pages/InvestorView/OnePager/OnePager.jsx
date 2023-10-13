@@ -34,7 +34,7 @@ const OnePager = () => {
     document.title = "OnePager - One Link | The Capital Hub";
     dispatch(setPageTitle("OnePager"));
   }, []);
-  
+
   useEffect(() => {
     getOnePager(username)
       .then(({ data }) => {
@@ -148,7 +148,7 @@ const OnePager = () => {
   return (
     <MaxWidthWrapper>
       <div className="border_left">
-        <div className="onePager shadow-sm border">
+        <div className="onePager shadow-sm border px-3 px-lg-5">
           <div className="d-flex justify-content-between align-items-center w-100">
             <h1>One Pager</h1>
             <button
@@ -181,15 +181,19 @@ const OnePager = () => {
               tagline={onePager.tagline}
             />
           </div>
-          <hr />
-          <div className="cards">
-            <SimpleCard title={"Problem"} text={onePager.problem} />
-            <SimpleCard title={"Solution"} text={onePager.solution} />
-            <SimpleCard
-              title={"Competitive Landscape"}
-              text={onePager.competitiveLandscape}
-            />
+          {/* <hr /> */}
+
+          <div className="simple_cards_container">
+            <div className="simple_cards">
+              <SimpleCard title={"Problem"} text={onePager.problem} />
+              <SimpleCard title={"Solution"} text={onePager.solution} />
+              <SimpleCard
+                title={"Competitive Landscape"}
+                text={onePager.competitiveLandscape}
+              />
+            </div>
           </div>
+
           <hr />
           <div className="">
             <Title title="Market (in cr)" />
@@ -212,7 +216,7 @@ const OnePager = () => {
             </div>
           </div>
 
-          <div className="projections overflow-x-auto">
+          <div className="projections">
             <Title title={"Projections"} />
             <Table hidden={true} />
           </div>
