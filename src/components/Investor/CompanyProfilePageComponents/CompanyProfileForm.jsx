@@ -16,6 +16,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
         founderId: companyData.founderId || "",
         company: companyData.companyName || "",
         tagline: companyData.tagline || "",
+        location: companyData.location || "",
         startedAtDate: companyData.startedAtDate || "",
         industryType: companyData.industry || "",
         noOfEmployees: companyData.noOfEmployees || "",
@@ -116,6 +117,18 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
             id="tagline"
             className="profile_form_input"
             value={formData.tagline || ""}
+            onChange={handleInputChange}
+          />
+        </fieldset>
+
+        <fieldset className={investor ? "investor" : "startup"}>
+          <legend>Location</legend>
+          <input
+            type="text"
+            name="location"
+            id="location"
+            className="profile_form_input"
+            value={formData.location || ""}
             onChange={handleInputChange}
           />
         </fieldset>
