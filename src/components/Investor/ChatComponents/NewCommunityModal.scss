@@ -28,14 +28,25 @@
       font-size: 0.75rem;
       cursor: pointer;
     }
+
+    &.investor {
+      border: 0.25em dotted #d3f36b;
+      color: black;
+      background-color: #d3f36baa;
+    }
   }
 
   .modal__input {
     background-color: #fafafa;
     outline: 0;
+    border: 1px solid #e7e7e7;
     transition: border 0.3s ease-in-out;
     &:focus {
       border: 1px solid #fd5901;
+    }
+
+    &.investor:focus {
+      border: 1px solid #98b445;
     }
   }
 
@@ -44,6 +55,10 @@
     &:focus-within {
       transition: border 0.3s ease-in-out;
       border: 1px solid #fd5901;
+    }
+
+    &.investor:focus-within {
+      border: 1px solid #98b445;
     }
   }
 
@@ -58,6 +73,12 @@
 
     &:active {
       transform: scale(0.95);
+    }
+
+    &.investor {
+      background: #d3f36b;
+      border: 1px solid #d3f36b;
+      color: black;
     }
   }
 

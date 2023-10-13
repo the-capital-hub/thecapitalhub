@@ -188,3 +188,71 @@
 #header .logo {
   padding: 20px;
 }
+
+// CSS for communities in investor sidebar
+
+// CSS for Community in sidebar
+.newInvestor_sidebar_container {
+  .sidebar__community {
+    details {
+      font-size: inherit;
+      font-weight: 400;
+      color: #20315f;
+      position: relative;
+
+      summary {
+        list-style-type: none;
+        font-size: inherit;
+        color: inherit;
+        transition: margin 0.15s ease-out;
+      }
+
+      &[open] summary {
+        margin-bottom: 10px;
+        color: #000;
+
+        &:hover {
+          background-color: #d3f36b;
+        }
+      }
+
+      .sidebar__community__btn {
+        outline: none;
+        border: none;
+        background-color: transparent;
+        padding-block: 0.25em;
+        padding-inline: 0;
+
+        color: #000;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-align: left;
+
+        &:hover {
+          background-color: #d3f36b;
+        }
+      }
+    }
+
+    // For responsiveness of Modal component
+    .modal {
+      margin-top: 20%;
+
+      @media (min-width: 500px) {
+        margin-top: 15%;
+      }
+
+      @media (min-width: 575px) {
+        margin-top: 13.5%;
+      }
+
+      @media (min-width: 768px) {
+        margin-top: 10%;
+      }
+
+      @media (min-width: 769px) {
+        margin-top: 0;
+      }
+    }
+  }
+}

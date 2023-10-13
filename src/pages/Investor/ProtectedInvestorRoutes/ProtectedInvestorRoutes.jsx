@@ -4,6 +4,12 @@ import "./ProtectedInvestorRoutes.scss";
 import LogOutPopUp from "../../../components/PopUp/LogOutPopUp/LogOutPopUp";
 import InvestorNavbar from "../../../components/NewInvestor/NavBar/NavBar";
 import InvestorSidebar from "../../../components/NewInvestor/SideBar/SideBar";
+import {
+  ModalBSBody,
+  ModalBSContainer,
+  ModalBSHeader,
+} from "../../../components/PopUp/ModalBS";
+import NewCommunityModal from "../../../components/Investor/ChatComponents/NewCommunityModal";
 
 function ProtectedInvestorRoutes({ children, ...props }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
@@ -48,6 +54,20 @@ function ProtectedInvestorRoutes({ children, ...props }) {
         </div>
       </div>
       <LogOutPopUp />
+
+      <div className="modals">
+        {/* Modal for creating new Community */}
+        <ModalBSContainer
+          isStatic={false}
+          id="AddNewCommunity"
+          className="z-n1"
+        >
+          <ModalBSHeader title={"Create a Community"} className={``} />
+          <ModalBSBody>
+            <NewCommunityModal theme="investor" />
+          </ModalBSBody>
+        </ModalBSContainer>
+      </div>
     </>
   );
   // } else <Navigate to="/login" replace />;

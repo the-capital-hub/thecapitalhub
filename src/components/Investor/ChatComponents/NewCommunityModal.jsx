@@ -11,7 +11,8 @@ import { getUserConnections, createCommunity } from "../../../Service/user";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getBase64 } from "../../../utils/getBase64";
-export default function NewCommunityModal() {
+
+export default function NewCommunityModal({ theme }) {
   const [getAllConnection, setGetAllConnection] = useState([]);
   const [memberIds, setMemberIds] = useState([]);
   const [name, setName] = useState();
@@ -82,7 +83,7 @@ export default function NewCommunityModal() {
 
         createCommunity(data)
           .then((res) => {
-            console.log(res)
+            console.log(res);
             setGetAllConnection(res.data);
           })
           .catch((error) => {
@@ -106,8 +107,7 @@ export default function NewCommunityModal() {
           className="visually-hidden"
           onChange={handleFileChange}
         />
-        <label htmlFor="profilePicture" className="upload__label">
-
+        <label htmlFor="profilePicture" className={`upload__label ${theme} `}>
           {previewImageUrl ? (
             <img
               src={previewImageUrl}
@@ -121,7 +121,7 @@ export default function NewCommunityModal() {
             <BsFillCameraFill
               style={{
                 fontSize: "1.5rem",
-                color: "rgba(253, 89, 1,1)",
+                color: `${theme ? "#000" : "rgba(253, 89, 1,1)"}`,
               }}
             />
           )}
@@ -159,7 +159,7 @@ export default function NewCommunityModal() {
 
       {/* Contact search */}
       <div
-        className="search__members d-flex align-items-center gap-2 p-2 rounded-2"
+        className={`search__members d-flex align-items-center gap-2 p-2 rounded-2 ${theme}`}
         style={{ backgroundColor: "#fafafa" }}
       >
         <BsSearch />
@@ -168,7 +168,7 @@ export default function NewCommunityModal() {
           name="searchContacts"
           id="searchContacts"
           placeholder="Search your contacts..."
-          className="modal__input border-0 p-1 w-100"
+          className={`modal__input border-0 p-1 w-100 ${theme}`}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
@@ -192,16 +192,18 @@ export default function NewCommunityModal() {
               />
               <h6 className="m-0">
                 {" "}
-                {`${contact?.firstName ? contact?.firstName : "name"} ${contact?.lastName ? contact?.lastName : ""
-                  }`}
+                {`${contact?.firstName ? contact?.firstName : "name"} ${
+                  contact?.lastName ? contact?.lastName : ""
+                }`}
               </h6>
               {/* <button
                 className="orange_button"
                 onClick={() => handleButtonClick(contact?._id)}
               > */}
               <button
-                className={`orange_button ${isAdded ? "added-button" : ""
-                  }`}
+                className={`orange_button ${
+                  isAdded ? "added-button" : ""
+                } ${theme} `}
                 onClick={(event) => handleButtonClick(event, contact._id)}
               >
                 {isAdded ? "Added" : "Add"}
@@ -218,9 +220,9 @@ export default function NewCommunityModal() {
         </button>
         <button
           type="submit"
-          className="orange_button "
+          className={`orange_button ${theme}`}
           data-bs-dismiss="modal"
-          onClick={event => handleSubmit(event)}
+          onClick={(event) => handleSubmit(event)}
         >
           Done
         </button>

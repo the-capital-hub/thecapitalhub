@@ -1,6 +1,7 @@
 import { UserModel } from "../models/User.js";
 import { comparePassword } from "../utils/passwordManager.js";
 import { StartUpModel } from "../models/startUp.js";
+import { InvestorModel } from "../models/Investor.js";
 import { cloudinary } from "../utils/uploadImage";
 import jwt from "jsonwebtoken";
 import { secretKey } from "../constants/config.js";
@@ -272,9 +273,11 @@ export const searchUsers = async (searchQuery) => {
           $or: [
             { username: { $regex: searchQuery, $options: "i" } },
             { email: { $regex: searchQuery, $options: "i" } },
+            { firstName: { $regex: searchQuery, $options: "i" } },
+            { lastName: { $regex: searchQuery, $options: "i" } },
           ],
         },
-        { userStatus: 'active' },
+        { userStatus: "active" },
       ],
     });
 
@@ -286,7 +289,6 @@ export const searchUsers = async (searchQuery) => {
     });
     return {
       status: 200,
-
       data: {
         users: users,
         company: company,
@@ -359,12 +361,12 @@ export const addStartupToUser = async (userId, startUpId) => {
       { _id: userId },
       { $set: { startUp: startUpId } },
       { new: true }
-    );    
+    );
     if (!user) {
       return {
         status: 404,
         message: "User not found.",
-      }
+      };
     }
     return {
       status: 200,
@@ -376,6 +378,147 @@ export const addStartupToUser = async (userId, startUpId) => {
     return {
       status: 500,
       message: "An error occurred while adding startups to user.",
+    };
+  }
+};
+
+export const getExplore = async (filters) => {
+  try {
+    const {
+      sector,
+      gender,
+      city,
+      size,
+      type
+    } = filters;
+
+    // for startups
+    if (type === "startup") {
+      const query = {};
+      if (sector) {
+        query.sector = sector
+      }
+      if (city) {
+        query.location = city;
+      }
+      if (size) {
+        query.noOfEmployees = { $gte: size };
+      }
+      const startups = await StartUpModel.find(query);
+      return {
+        status: 200,
+        message: "Startup data retrieved",
+        data: startups,
+      };
+
+      // for investors
+    } else if (type === "investor") {
+      const query = {};
+      if (sector) {
+        query.sector = sector
+      }
+      if (city) {
+        query.location = city;
+      }
+      const investors = await InvestorModel.find(query);
+      const founderIds = investors.map((investor) => investor.founderId);
+      const founderQuery = {
+        gender: gender,
+      };
+      const founders = await UserModel.find({
+        _id: { $in: founderIds },
+        ...(gender ? founderQuery : {}),
+      });
+      return {
+        status: 200,
+        message: "Investors data retrieved",
+        data: founders,
+      };
+
+      // for founder
+    } else if (type === "founder") {
+      const query = {};
+      if (sector) {
+        query.sector = sector
+      }
+      if (city) {
+        query.location = city;
+      }
+      const startups = await StartUpModel.find(query);
+      const founderIds = startups.map((startup) => startup.founderId);
+      const founderQuery = {
+        gender: gender,
+      };
+      const founders = await UserModel.find({
+        _id: { $in: founderIds },
+        ...(gender ? founderQuery : {}),
+      });
+      return {
+        status: 200,
+        message: "Founder data retrieved",
+        data: founders,
+      };
+    } else {
+      return {
+        status: 400,
+        message: "Invalid 'type' parameter",
+      };
+    }
+  } catch (error) {
+    console.error("Error getting explore results:", error);
+    return {
+      status: 500,
+      message: "An error occurred while getting explore results.",
+    };
+  }
+};
+
+export const getExploreFilters = async (type) => {
+  try {
+    if (type === "startup") {
+      // const startupSectors = await StartUpModel.distinct("sector");
+      const startupCities = await StartUpModel.distinct("location");
+      return {
+        status: 200,
+        message: "Startup filters retrieved",
+        data: {
+          // sectors: startupSectors,
+          cities: startupCities,
+        },
+      };
+    } else if (type === "investor") {
+      // const investorSectors = await InvestorModel.distinct("sector");
+      const investorCities = await InvestorModel.distinct("location");
+      return {
+        status: 200,
+        message: "Investor filters retrieved",
+        data: {
+          // sectors: investorSectors,
+          cities: investorCities,
+        },
+      };
+    } else if (type === "founder") {
+      // const founderSectors = await StartUpModel.distinct("sector");
+      const founderCities = await StartUpModel.distinct("location");
+      return {
+        status: 200,
+        message: "Founder filters retrieved",
+        data: {
+          // sectors: founderSectors,
+          cities: founderCities,
+        },
+      };
+    } else {
+      return {
+        status: 400,
+        message: "Invalid 'type' parameter",
+      };
+    }
+  } catch (error) {
+    console.error("Error getting explore filters:", error);
+    return {
+      status: 500,
+      message: "An error occurred while getting explore filters.",
     };
   }
 };

@@ -16,9 +16,11 @@ import TeamsCard from "../../../components/InvestorView/TeamsCard/TeamsCard";
 import InvestNow from "../InvestNow/InvestNow";
 import { useParams } from "react-router-dom";
 import { getOnePager } from "../../../Service/user";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { useDispatch } from "react-redux";
 
 const OnePager = () => {
   const [rupeeHighlight, setRupeeHighlight] = useState(true);
@@ -26,9 +28,14 @@ const OnePager = () => {
   const { username } = useParams();
   const [onePager, setOnePager] = useState([]);
   const [imageData, setImageData] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     document.title = "OnePager - One Link | The Capital Hub";
+    dispatch(setPageTitle("OnePager"));
+  }, []);
+  
+  useEffect(() => {
     getOnePager(username)
       .then(({ data }) => {
         setOnePager(data);
@@ -171,6 +178,7 @@ const OnePager = () => {
               description={onePager.description}
               // image={onePager.logo}
               image={imageData}
+              tagline={onePager.tagline}
             />
           </div>
           <hr />
@@ -183,9 +191,9 @@ const OnePager = () => {
             />
           </div>
           <hr />
-          <div className="marketCards">
+          <div className="">
             <Title title="Market (in cr)" />
-            <div className="cards">
+            <div className="market_cards">
               <MarketCard
                 title={"TAM"}
                 subtitle={"(Total Addressable Market)"}
@@ -203,13 +211,15 @@ const OnePager = () => {
               />
             </div>
           </div>
-          <div className="projections">
+
+          <div className="projections overflow-x-auto">
             <Title title={"Projections"} />
             <Table hidden={true} />
           </div>
+
           <div className="team">
             <Title title={"Team"} />
-            <div className="cards">
+            <div className="team_cards">
               {onePager?.team?.map((team, index) => (
                 <TeamsCard
                   key={index}
@@ -220,6 +230,7 @@ const OnePager = () => {
               ))}
             </div>
           </div>
+
           <div className="fundingAndContact">
             <div className="left">
               <Title title={"Funding ask (in Lakhs)"} />
