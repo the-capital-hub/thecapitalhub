@@ -65,6 +65,8 @@ export default function CompanyProfilePage() {
         getStartupByFounderId(loggedInUser._id)
           .then(({ data }) => {
             setCompanyData(data);
+            setSelectedCompanyId(null);
+            setCompanies([]);
           })
           .catch((error) => {
             console.error('Error fetching startup data:', error.message);
@@ -90,7 +92,44 @@ export default function CompanyProfilePage() {
                         Click here to edit company details
                       </Link>
                     </div>
-                  ) : null
+                  ) : (
+
+                    <div className="bg-white rounded-4 p-4">
+                      <p className="text-decoration-none text-dark fs-5">Choose from an existing Company</p>
+                      <div>
+                        <input
+                          type="text"
+                          placeholder="Search company"
+                          className="search-company-input"
+                          onChange={handleSearchInputChange}
+                        />
+                        {companies.length !== 0 && (
+                          <div className="suggestion">
+                            {companies.map((company, index) => (
+                              <div
+                                className={`suggestion-item ${selectedCompanyId === company._id ? 'active' : ''}`}
+                                key={index}
+                                onClick={() => handleCompanySelection(company._id)}
+                              >
+                                <img
+                                  src={company.logo || DefaultAvatar}
+                                  alt={`Company Logo ${index}`}
+                                  className="suggestion-logo"
+                                />
+                                {company.company}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        <button
+                          className="btn-base startup"
+                          onClick={handleAddStartup}
+                        >
+                          Save
+                        </button>
+                      </div>
+                    </div>
+                  )
                 ) : (
                   <div className="bg-white rounded-4 p-4">
                     <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5">
