@@ -928,7 +928,6 @@ export const fetchExploreFilteredResultsAPI = async (filtersObj) => {
     filters += filter + "=" + tempValue + "&";
   }
   filters = filters.slice(0, filters.length - 1);
-  console.log(filters);
   try {
     const response = await axiosInstance.get(
       `${API.getExploreFilteredData}?${filters}`
