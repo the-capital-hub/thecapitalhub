@@ -5,10 +5,15 @@ import {
 } from "../../../Store/features/chat/chatSlice";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import {
+  getMessageByChatId,
+  getUnreadMessageCountInCommunities,
+} from "../../../Service/user";
 
-import { getMessageByChatId } from "../../../Service/user";
+export default function CommunityCard({ community, recieveMessage, sendMessage, isRead }) {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
-export default function CommunityCard({ community }) {
   const dispatch = useDispatch();
   console.log(community);
   // Handle community click
@@ -20,6 +25,7 @@ export default function CommunityCard({ community }) {
   const [latestMessages, setLatestMessages] = useState({});
   const [latestMsgSentetName, setLatestMsgSentetName] = useState("");
   const [dates, setDates] = useState({});
+  const [unreadMessageCount, setUnreadMessageCounts] = useState(0);
 
   const formatTimestamp = (timestamp) => {
     const messageDate = new Date(timestamp);
@@ -43,6 +49,7 @@ export default function CommunityCard({ community }) {
       return messageDate.toLocaleDateString(undefined, options);
     }
   };
+
   useEffect(() => {
     getMessageByChatId(community._id)
       .then((res) => {
@@ -63,7 +70,16 @@ export default function CommunityCard({ community }) {
       .catch((error) => {
         console.error("Error-->", error);
       });
-  }, [community._id]);
+
+    getUnreadMessageCountInCommunities(community._id, loggedInUser._id)
+      .then((res) => {
+        setUnreadMessageCounts(res.data);
+      })
+      .catch((error) => {
+        console.error("Error-->", error);
+      });
+  }, [community._id, sendMessage, recieveMessage, isRead]);
+
   const messageTime = formatTimestamp(dates[community._id]);
   const inputString = latestMessages[community._id];
   console.log(latestMessages);
@@ -74,6 +90,7 @@ export default function CommunityCard({ community }) {
   } else {
     latestMessage = inputString;
   }
+
   return (
     <div
       style={{ backgroundColor: "rgba(234, 238, 242, 1)" }}
@@ -121,7 +138,13 @@ export default function CommunityCard({ community }) {
           {messageTime !== "Invalid Date" && (
             <div className="time__stamp m-0">{messageTime}</div>
           )}
+          {unreadMessageCount > 0 && (
+            <div className="notification">
+              {unreadMessageCount}
+            </div>
+          )}
         </div>
+
       </div>
     </div>
   );

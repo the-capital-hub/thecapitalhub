@@ -73,7 +73,8 @@ const API = Object.freeze({
   searchStartUps: `${baseUrl}/startup/searchStartUps`,
   addStartUpToUser: `${baseUrl}/users/addStartUpToUser`,
   deleteDocument: `${baseUrl}/documentation/deleteDocument`,
-
+  markMessagesAsReadInCommunities: `${baseUrl}/message/markMessagesAsReadInCommunities`,
+  getUnreadMessageCountInCommunities: `${baseUrl}/message/getUnreadMessageCountInCommunities`,
 });
 
 export default API;
