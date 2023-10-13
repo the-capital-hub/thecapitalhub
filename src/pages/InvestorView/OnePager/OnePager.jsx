@@ -16,9 +16,11 @@ import TeamsCard from "../../../components/InvestorView/TeamsCard/TeamsCard";
 import InvestNow from "../InvestNow/InvestNow";
 import { useParams } from "react-router-dom";
 import { getOnePager } from "../../../Service/user";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { useDispatch } from "react-redux";
 
 const OnePager = () => {
   const [rupeeHighlight, setRupeeHighlight] = useState(true);
@@ -26,9 +28,14 @@ const OnePager = () => {
   const { username } = useParams();
   const [onePager, setOnePager] = useState([]);
   const [imageData, setImageData] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     document.title = "OnePager - One Link | The Capital Hub";
+    dispatch(setPageTitle("OnePager"));
+  }, []);
+  
+  useEffect(() => {
     getOnePager(username)
       .then(({ data }) => {
         setOnePager(data);
