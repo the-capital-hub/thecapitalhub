@@ -4,12 +4,16 @@ import "./StartupExplore.scss";
 // import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import FilterBySelect from "../../../components/NewInvestor/FilterBySelect/FilterBySelect";
 import CompanyProfileList from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfileList";
+import { useDispatch } from "react-redux";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 export default function StartupExplore() {
   const [activeTab, setActiveTab] = useState("Investor");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     document.title = "Explore | The Capital Hub";
+    dispatch(setPageTitle("Explore"));
   }, []);
 
   return (
@@ -20,7 +24,7 @@ export default function StartupExplore() {
         {/* Header */}
         <div className="bg-white rounded-4 shadow-sm d-flex flex-column gap-4 px-4 py-4">
           {/* Heading */}
-          <h5 className="m-0">Find Startups by</h5>
+          <h5 className="m-0">Find {activeTab} by</h5>
 
           {/* Tabs */}
           <div className="startup_explore_tabs d-flex align-items-center border-bottom">
@@ -51,25 +55,30 @@ export default function StartupExplore() {
           </div>
 
           {/* Filters */}
-          <div className="startup_filters_container">
-            <FilterBySelect label="Sector" name="sector" />
-            <FilterBySelect label="Sub-Sector" name="subSector" />
-            <FilterBySelect label="State" name="state" />
-            <FilterBySelect label="City" name="city" />
-            <FilterBySelect label="Age" name="age" />
-            <FilterBySelect label="Business Model" name="businessModel" />
-            <FilterBySelect
-              label="Incorporation Model"
-              name="incorporationModel"
-            />
-            <FilterBySelect label="DPIIT Registered" name="dpiitRegistered" />
-            {activeTab === "Founder" && (
+          <form className="startup_filters_container">
+            {activeTab === "Investor" && (
               <>
-                <FilterBySelect label="Incubation" name="incubation" />
-                <FilterBySelect label="Incubation" name="incubation" />
+                <FilterBySelect options={[]} label="Sector" name="sector" />
+                <FilterBySelect options={[]} label="City" name="city" />
+                <FilterBySelect options={[]} label="Gender" name="gender" />
               </>
             )}
-          </div>
+            {activeTab === "Startup" && (
+              <>
+                <FilterBySelect options={[]} label="Sector" name="sector" />
+                <FilterBySelect options={[]} label="City" name="city" />
+                <FilterBySelect options={[]} label="Size" name="size" />
+              </>
+            )}
+            {activeTab === "Founder" && (
+              <>
+                <FilterBySelect options={[]} label="Sector" name="sector" />
+                <FilterBySelect options={[]} label="City" name="city" />
+                <FilterBySelect options={[]} label="Gender" name="gender" /> 
+              </>
+            )}
+            <button className="btn-capital">Filter {activeTab}</button>
+          </form>
         </div>
 
         {/* Companies List - pass filter props*/}
