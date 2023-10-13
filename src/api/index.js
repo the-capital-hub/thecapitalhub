@@ -73,7 +73,7 @@ const API = Object.freeze({
   searchStartUps: `${baseUrl}/startup/searchStartUps`,
   addStartUpToUser: `${baseUrl}/users/addStartUpToUser`,
   deleteDocument: `${baseUrl}/documentation/deleteDocument`,
-
+  getExploreFilters: `${baseUrl}/users/exploreFilters`,
 });
 
 export default API;

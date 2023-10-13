@@ -6,6 +6,7 @@ import FilterBySelect from "../../../components/NewInvestor/FilterBySelect/Filte
 import CompanyProfileList from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfileList";
 import { useDispatch } from "react-redux";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { fetchExploreFiltersAPI } from "../../../Service/user";
 
 export default function StartupExplore() {
   const [activeTab, setActiveTab] = useState("Investor");
@@ -15,6 +16,19 @@ export default function StartupExplore() {
     document.title = "Explore | The Capital Hub";
     dispatch(setPageTitle("Explore"));
   }, []);
+
+  useEffect(() => {
+    fetchFilters();
+  }, [activeTab]);
+
+  const fetchFilters = async () => {
+    try {
+      const response = await fetchExploreFiltersAPI(activeTab);
+      console.log(11111111111111111111,response);
+    } catch (error) {
+      console.log("Error fetching filters: ", error);
+    }
+  };
 
   return (
     <MaxWidthWrapper>
@@ -74,7 +88,7 @@ export default function StartupExplore() {
               <>
                 <FilterBySelect options={[]} label="Sector" name="sector" />
                 <FilterBySelect options={[]} label="City" name="city" />
-                <FilterBySelect options={[]} label="Gender" name="gender" /> 
+                <FilterBySelect options={[]} label="Gender" name="gender" />
               </>
             )}
             <button className="btn-capital">Filter {activeTab}</button>
