@@ -890,3 +890,28 @@ export const fetchExploreFiltersAPI = async (type) => {
     throw error;
   }
 };
+
+export const fetchExploreFilteredResultsAPI = async (filtersObj) => {
+  let filters = "";
+  for (const filter in filtersObj) {
+    let tempValue = filtersObj[filter];
+    if (filter === "gender" || filter === "type") {
+      tempValue = tempValue.toLowerCase();
+    }
+    if (filter === "size") {
+      tempValue = tempValue.replace("+", "");
+    }
+    filters += filter + "=" + tempValue + "&";
+  }
+  filters = filters.slice(0, filters.length - 1);
+  console.log(filters);
+  try {
+    const response = await axiosInstance.get(
+      `${API.getExploreFilteredData}?${filters}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching filtered results", error);
+    throw error;
+  }
+};

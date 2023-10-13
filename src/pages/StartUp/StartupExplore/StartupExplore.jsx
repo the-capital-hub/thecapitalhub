@@ -6,11 +6,41 @@ import FilterBySelect from "../../../components/NewInvestor/FilterBySelect/Filte
 import CompanyProfileList from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfileList";
 import { useDispatch } from "react-redux";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
-import { fetchExploreFiltersAPI } from "../../../Service/user";
+import {
+  fetchExploreFilteredResultsAPI,
+  fetchExploreFiltersAPI,
+} from "../../../Service/user";
+
+const sectorOptions = [
+  "FMCG",
+  "Restaurants",
+  "Education",
+  "Tourism",
+  "Automobile",
+  "Textile",
+  "Chemicals",
+  "Telecommunications",
+  "Oil and Gas",
+  "Renewable Energy",
+  "Investment Banking and Venture Capital",
+  "NBFC",
+  "Biotechnology",
+  "Software Development Services",
+  "Computer and Information Technology",
+  "Aerospace",
+  "Sales and Marketing",
+];
+
+const genderOptions = ["Male", "Female"];
+
+const sizeOptions = ["10+", "100+", "1000+"];
 
 export default function StartupExplore() {
   const [activeTab, setActiveTab] = useState("Investor");
   const dispatch = useDispatch();
+  const [filterOptions, setFilterOptions] = useState([]);
+  const [filters, setFilters] = useState({});
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     document.title = "Explore | The Capital Hub";
@@ -21,12 +51,35 @@ export default function StartupExplore() {
     fetchFilters();
   }, [activeTab]);
 
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setFilters({
+      ...filters,
+      [name]: value,
+    });
+  };
+
   const fetchFilters = async () => {
     try {
-      const response = await fetchExploreFiltersAPI(activeTab);
-      console.log(11111111111111111111,response);
+      const { data } = await fetchExploreFiltersAPI(activeTab);
+      setFilterOptions(data);
     } catch (error) {
       console.log("Error fetching filters: ", error);
+    }
+  };
+
+  const onSubmitFilters = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = fetchExploreFilteredResultsAPI({
+        type: activeTab,
+        ...filters,
+      });
+      console.log(data);
+      setFilteredData(data);
+      setFilters({});
+    } catch (error) {
+      console.log("Error fetching filtered results: ", error);
     }
   };
 
@@ -46,7 +99,10 @@ export default function StartupExplore() {
               className={`btn_base py-3 px-3 ${
                 activeTab === "Investor" ? "active" : ""
               }`}
-              onClick={() => setActiveTab("Investor")}
+              onClick={() => {
+                setFilters({});
+                setActiveTab("Investor");
+              }}
             >
               Investor
             </button>
@@ -54,7 +110,10 @@ export default function StartupExplore() {
               className={`btn_base py-3 px-3 ${
                 activeTab === "Startup" ? "active" : ""
               }`}
-              onClick={() => setActiveTab("Startup")}
+              onClick={() => {
+                setFilters({});
+                setActiveTab("Startup");
+              }}
             >
               Startup
             </button>
@@ -62,41 +121,94 @@ export default function StartupExplore() {
               className={`btn_base py-3 px-3 ${
                 activeTab === "Founder" ? "active" : ""
               }`}
-              onClick={() => setActiveTab("Founder")}
+              onClick={() => {
+                setFilters({});
+                setActiveTab("Founder");
+              }}
             >
               Founder
             </button>
           </div>
 
           {/* Filters */}
-          <form className="startup_filters_container">
+          <form
+            className="startup_filters_container"
+            onSubmit={onSubmitFilters}
+          >
             {activeTab === "Investor" && (
               <>
-                <FilterBySelect options={[]} label="Sector" name="sector" />
-                <FilterBySelect options={[]} label="City" name="city" />
-                <FilterBySelect options={[]} label="Gender" name="gender" />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.sectors || sectorOptions}
+                  label="Sector"
+                  name="sector"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.cities}
+                  label="City"
+                  name="city"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.genders || genderOptions}
+                  label="Gender"
+                  name="gender"
+                />
               </>
             )}
             {activeTab === "Startup" && (
               <>
-                <FilterBySelect options={[]} label="Sector" name="sector" />
-                <FilterBySelect options={[]} label="City" name="city" />
-                <FilterBySelect options={[]} label="Size" name="size" />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.sectors || sectorOptions}
+                  label="Sector"
+                  name="sector"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.cities}
+                  label="City"
+                  name="city"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.sizes || sizeOptions}
+                  label="Size"
+                  name="size"
+                />
               </>
             )}
             {activeTab === "Founder" && (
               <>
-                <FilterBySelect options={[]} label="Sector" name="sector" />
-                <FilterBySelect options={[]} label="City" name="city" />
-                <FilterBySelect options={[]} label="Gender" name="gender" />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.sectors || sectorOptions}
+                  label="Sector"
+                  name="sector"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.cities}
+                  label="City"
+                  name="city"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.genders || genderOptions}
+                  label="Gender"
+                  name="gender"
+                />
               </>
             )}
-            <button className="btn-capital">Filter {activeTab}</button>
+            <button className="btn-capital" type="submit">
+              Filter {activeTab}
+            </button>
           </form>
         </div>
 
         {/* Companies List - pass filter props*/}
-        <CompanyProfileList isStartup />
+        <CompanyProfileList isStartup data={filteredData} />
       </section>
     </MaxWidthWrapper>
   );
