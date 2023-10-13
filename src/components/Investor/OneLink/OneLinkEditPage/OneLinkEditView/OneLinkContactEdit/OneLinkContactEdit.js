@@ -48,8 +48,8 @@ const OneLinkContactEdit = ({ oneLink, page }) => {
 
   return (
     <>
-      <div className="row contact_details_container">
-        <div className="card">
+      <div className="contact_details_container">
+        <div className="card w-100">
           <div className="card-body">
             <h5 className="card-title px-2">Contact Details</h5>
             <div className="card_inputs">

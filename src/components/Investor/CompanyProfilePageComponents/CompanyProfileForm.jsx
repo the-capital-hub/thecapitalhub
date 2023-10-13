@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./CompanyProfileForm.scss";
 import { postStartUpData, postInvestorData } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
@@ -203,6 +203,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
               // value={formData.location || ""}
               onChange={handleInputChange}
               onBlur={handleDropdownBlur}
+              autoFocus
             />
           )}
           {/* Location Dropdown */}
