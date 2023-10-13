@@ -35,6 +35,7 @@ export default function CompanyProfile({
   let noOfEmployees = "200+";
   let team = [];
   let tags = [];
+  let tagline = "";
 
   if (companyData) {
     name = companyData.company || name;
@@ -49,6 +50,7 @@ export default function CompanyProfile({
     noOfEmployees = companyData.noOfEmployees || noOfEmployees;
     team = companyData.team || team;
     tags = companyData.keyFocus?.split(",").map((tag) => tag.trim()) || tags;
+    tagline = companyData.tagline || tagline;
   }
   if (investorData) {
     name = investorData.companyName || name;
@@ -63,6 +65,7 @@ export default function CompanyProfile({
     noOfEmployees = investorData.noOfEmployees || noOfEmployees;
     team = investorData.team || team;
     tags = investorData.keyFocus?.split(",").map((tag) => tag.trim()) || tags;
+    tagline = investorData.tagline || tagline;
   }
   // const company = {
   //   image: HCLImage,
@@ -89,6 +92,7 @@ export default function CompanyProfile({
           <CompanyInfo
             name={name}
             logo={logo}
+            tagline={tagline}
             location={location}
             foundedYear={new Date(foundedIn).getFullYear()}
           />

@@ -36,6 +36,7 @@ const IntroductoryMessage = ({ title, image, para, previous, input, className, i
           previousIntroductoryMessage: updatedMessages,
         });
       } else {
+        console.log(formattedMsg);
         await updateIntroMsgAPI({ introductoryMessage: formattedMsg });
       }
       setNewPara(formattedMsg);

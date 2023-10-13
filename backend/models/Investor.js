@@ -27,6 +27,9 @@ const investorSchema = new Schema(
       type: String,
       // required: true,
     },
+    sector: {
+      type: String,
+    },
     industry: {
       type: String,
       // required: true,

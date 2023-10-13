@@ -13,6 +13,8 @@ import {
   addEducation,
   addExperience,
   addStartupToUser,
+  getExplore,
+  getExploreFilters,
 } from "../services/userService.js";
 import { secretKey } from "../constants/config.js";
 
@@ -100,7 +102,7 @@ export const updateUser = async (req, res) => {
       newData,
     });
     res.status(status).json({ message, data });
-  } catch (error) {}
+  } catch (error) { }
 };
 
 export const updateUserByIdController = async (req, res) => {
@@ -108,7 +110,7 @@ export const updateUserByIdController = async (req, res) => {
     const { userId } = req.params;
     const { status, message, data } = await updateUserById(userId, req.body);
     res.status(status).json({ message, data });
-  } catch (error) {}
+  } catch (error) { }
 };
 
 export const changePasswordController = async (req, res) => {
@@ -209,6 +211,35 @@ export const addStartupToUserController = async (req, res) => {
     res.status(500).send({
       status: 500,
       message: "An error occurred while adding startups to user.",
+    });
+  }
+};
+
+export const getExploreController = async (req, res) => {
+  try {
+    const response = await getExplore(req.query);
+    res.status(response.status).send(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting explore results.",
+    });
+  }
+};
+
+export const getExploreFiltersController = async (req, res) => {
+  try {
+    const { type } = req.query;
+    const response = await getExploreFilters(type);
+    res.status(response.status).send(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting explore results.",
     });
   }
 };
