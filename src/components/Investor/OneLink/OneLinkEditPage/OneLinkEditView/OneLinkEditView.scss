@@ -274,10 +274,13 @@
     }
   }
 }
+
 .name_container {
   color: white;
   word-break: break-all;
+  min-width: 50%;
 }
+
 @media (max-width: 820px) {
   input {
     width: 100px;

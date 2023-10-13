@@ -171,6 +171,7 @@ const OnePager = () => {
               description={onePager.description}
               // image={onePager.logo}
               image={imageData}
+              tagline={onePager.tagline}
             />
           </div>
           <hr />
