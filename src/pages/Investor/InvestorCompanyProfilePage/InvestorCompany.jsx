@@ -24,7 +24,7 @@ export default function CompanyProfilePage() {
 
   return (
     <MaxWidthWrapper>
-      <div className="investor_companyProfilePage__wrapper">
+      <div className="investor_companyProfilePage__wrapper ps-lg-3">
         {/* Main content */}
         <div className="main__content">
           <SmallProfileCard text={"Company Profile"} />
