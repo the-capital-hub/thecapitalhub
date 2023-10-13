@@ -132,6 +132,14 @@ export default function StartupExplore() {
             >
               Founder
             </button>
+            {filters && (
+              <button
+                className={`btn-capital-small py-3 px-3 ms-auto`}
+                onClick={() => setFilters(null)}
+              >
+                Remove Filters
+              </button>
+            )}
           </div>
 
           {/* Filters */}
