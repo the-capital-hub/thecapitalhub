@@ -11,8 +11,8 @@ export default function CompanyProfileList({ isStartup }) {
   return (
     <div className="d-flex flex-column gap-3">
       {/* Loop company Profile here */}
-      <CompanyProfile startup={`${isStartup ? "true" : "false"}`} />
-      <CompanyProfile startup={`${isStartup ? "true" : "false"}`} />
+      <CompanyProfile short startup={`${isStartup ? "true" : "false"}`} />
+      <CompanyProfile short startup={`${isStartup ? "true" : "false"}`} />
     </div>
   );
 }
