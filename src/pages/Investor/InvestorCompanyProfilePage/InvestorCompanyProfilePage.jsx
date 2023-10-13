@@ -26,7 +26,7 @@ export default function InvestorCompanyProfilePage() {
 
   return (
     <MaxWidthWrapper>
-      <div className="editinvestorCompanyProfilePage__wrapper p-3 border-start">
+      <div className="otherInvestorCompanyProfilePage__wrapper p-3 border-start">
         {/* Main content */}
         <div className="main__content">
           <SmallProfileCard text={"Company Profile"} />
@@ -38,10 +38,10 @@ export default function InvestorCompanyProfilePage() {
           )}
         </div>
         {/* Right side content */}
-        <div className="right__content">
+        {/* <div className="right__content">
           <RecommendationCard />
           <NewsCorner />
-        </div>
+        </div> */}
       </div>
     </MaxWidthWrapper>
   );

@@ -126,9 +126,7 @@ async function getOnePager(oneLink) {
 async function getUserById(oneLink, userId) {
   try {
     const onePager = await getOnePager(oneLink);
-    const response = await axiosInstance.get(
-      API.getUserById + "/" + userId
-    );
+    const response = await axiosInstance.get(API.getUserById + "/" + userId);
     response.data.data.company = onePager.data.company;
     response.data.data.location = onePager.data.location;
     console.log("Response", response);
@@ -844,7 +842,9 @@ export const getLikeCount = async (postId) => {
 
 export const searchStartUps = async (searchQuery) => {
   try {
-    const response = await axiosInstance.get(`${API.searchStartUps}/${searchQuery}`);
+    const response = await axiosInstance.get(
+      `${API.searchStartUps}/${searchQuery}`
+    );
     return response.data;
   } catch (error) {
     console.log("Error getting startup details : ", error.message);
@@ -856,8 +856,11 @@ export const addStartUpToUser = async (userId, startUpId) => {
     const requestBody = {
       userId,
       startUpId,
-    }
-    const response = await axiosInstance.patch(`${API.addStartUpToUser}`, requestBody);
+    };
+    const response = await axiosInstance.patch(
+      `${API.addStartUpToUser}`,
+      requestBody
+    );
     return response.data;
   } catch (error) {
     console.log("Error adding startup to user : ", error);
@@ -897,6 +900,42 @@ export const getUnreadMessageCountInCommunities = async (chatId, userId) => {
     return response.data;
   } catch (error) {
     console.error("Error:", error);
+    throw error;
+  }
+};
+export const fetchExploreFiltersAPI = async (type) => {
+  try {
+    const response = await axiosInstance.get(
+      `${API.getExploreFilters}?type=${type.toLowerCase()}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error in fetching filters in explore:", error);
+    throw error;
+  }
+};
+
+export const fetchExploreFilteredResultsAPI = async (filtersObj) => {
+  let filters = "";
+  for (const filter in filtersObj) {
+    let tempValue = filtersObj[filter];
+    if (filter === "gender" || filter === "type") {
+      tempValue = tempValue.toLowerCase();
+    }
+    if (filter === "size") {
+      tempValue = tempValue.replace("+", "");
+    }
+    filters += filter + "=" + tempValue + "&";
+  }
+  filters = filters.slice(0, filters.length - 1);
+  console.log(filters);
+  try {
+    const response = await axiosInstance.get(
+      `${API.getExploreFilteredData}?${filters}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Error fetching filtered results", error);
     throw error;
   }
 };

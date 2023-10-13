@@ -10,7 +10,7 @@ export default function CompanyInfo({
   name,
   logo,
   location,
-  type,
+  tagline,
   foundedYear,
   lastFunding,
 }) {
@@ -28,7 +28,7 @@ export default function CompanyInfo({
       <div className="company__details d-flex flex-column gap-4 justify-content-around">
         <div className="company__headings">
           <h3 className="company__name">{name}</h3>
-          <p className="company__type">{type || "The Financial Company"}</p>
+          <p className="company__type">{tagline || " "}</p>
         </div>
         <div className="icon__details d-flex flex-column flex-md-row gap-4 align-items-start">
           <IconCard

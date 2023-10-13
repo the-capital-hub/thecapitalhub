@@ -35,7 +35,7 @@ const OnePagePreview = () => {
       <div className="onepagepreview_container mt-3">
         <div className="box_container  pb-5">
           <section className="heading_section px-5 ">
-            <h4>One Page Preview</h4>
+            <h4>One Pager Preview</h4>
             {userId === company?.founderId && (
               <Link to="/onelink/edit">
                 <button>
@@ -54,8 +54,9 @@ const OnePagePreview = () => {
             <section className="company_description">
               <img src={company.logo} alt="image" />
               <div className="company_text">
-                <h6>{company?.company || `Enter company description`} </h6>
-                <hr />
+                <h5>{company?.company || `Enter company description`} </h5>
+                <h6 className="mb-0">{company?.tagline}</h6>
+                <hr className="my-2" />
                 <h6>
                   {company?.description || "Eg: India’s best startup platfrom"}
                 </h6>

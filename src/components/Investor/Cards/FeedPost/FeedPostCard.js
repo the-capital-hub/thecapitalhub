@@ -840,7 +840,7 @@ const FeedPostCard = ({
             >
               X
             </button>
-            <img src={image} alt="zoomed image" />
+            <img src={image} className='popup-image' alt="zoomed image" />
           </div>
         </Modal>
       )}

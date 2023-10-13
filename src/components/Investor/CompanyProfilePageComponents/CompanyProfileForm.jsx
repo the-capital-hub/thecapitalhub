@@ -4,9 +4,51 @@ import { postStartUpData, postInvestorData } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
 import AfterSuccessPopup from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 
+const LOCATIONS = [
+  "Select Location",
+  "New Delhi",
+  "Gurgaon",
+  "Mumbai",
+  "Pune",
+  "Hyderabad",
+  "Chennai",
+  "Bengaluru",
+  "Mangalore",
+  "Kochi",
+  "Lucknow",
+  "Kolkata",
+  "Others",
+];
+
+const SECTORS = [
+  "Select Sector",
+  "FMCG",
+  "Restaurants",
+  "Education",
+  "Tourism",
+  "Automobile",
+  "Textile",
+  "Chemicals",
+  "Telecommunications",
+  "Oil and Gas",
+  "Renewable Energy",
+  "Investment Banking and Venture Capital",
+  "NBFC",
+  "Biotechnology",
+  "Software Development Services",
+  "Computer and Information Technology",
+  "Aerospace",
+  "Sales and Marketing",
+  "Pharmaceutical",
+];
+
 export default function CompanyProfileForm({ companyData, investor = false }) {
+  // States for form
   const [formData, setFormData] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [othersClicked, setOthersClicked] = useState(false);
+
+  // States for popup
   const [fromSubmit, setFromSubmit] = useState(false);
   const [popupData, setPopupData] = useState("");
 
@@ -16,8 +58,10 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
         founderId: companyData.founderId || "",
         company: companyData.companyName || "",
         tagline: companyData.tagline || "",
+        location: companyData.location || LOCATIONS[0],
         startedAtDate: companyData.startedAtDate || "",
         industryType: companyData.industry || "",
+        sector: companyData.sector || SECTORS[0],
         noOfEmployees: companyData.noOfEmployees || "",
         vision: companyData.vision || "",
         mission: companyData.mission || "",
@@ -29,6 +73,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
     }
   }, [companyData, investor]);
 
+  // Handle input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name === "siteUrl") {
@@ -47,9 +92,34 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
     }
   };
 
+  // Handle File Input change
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
+  };
+
+  // Handle Location select
+  const handleLocationSelect = (e, location) => {
+    if (location === LOCATIONS[0]) return;
+    if (location === "Others") {
+      setOthersClicked(true);
+    }
+    setFormData((prevData) => ({ ...prevData, location: location }));
+  };
+
+  // Handle Dropdown Blur
+  const handleDropdownBlur = () => {
+    setOthersClicked(false);
+    setFormData((prevData) => ({
+      ...prevData,
+      location: companyData.location,
+    }));
+  };
+
+  // Handle Sector Select
+  const handleSectorSelect = (e, sector) => {
+    if (sector === SECTORS[0]) return;
+    setFormData((prevData) => ({ ...prevData, sector: sector }));
   };
 
   const handleSubmit = async (e) => {
@@ -74,6 +144,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
     }
   };
 
+  // console.log("companyData", companyData.sector);
   return (
     <div className="profile__form">
       <form action="" className="" onSubmit={handleSubmit}>
@@ -121,6 +192,52 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
         </fieldset>
 
         <fieldset className={investor ? "investor" : "startup"}>
+          <legend>Location</legend>
+          {othersClicked && (
+            <input
+              type="text"
+              name="location"
+              id="location"
+              className="profile_form_input"
+              placeholder={formData.location + "..."}
+              // value={formData.location || ""}
+              onChange={handleInputChange}
+              onBlur={handleDropdownBlur}
+            />
+          )}
+          {/* Location Dropdown */}
+          {!othersClicked && (
+            <div className="dropdown">
+              <button
+                className="btn profile_form_input w-auto dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {formData.location}
+              </button>
+              <ul className="dropdown-menu m-0 p-0">
+                {LOCATIONS.map((location, index) => {
+                  return (
+                    <li key={`${location}${index}`} className="m-0 p-0">
+                      <button
+                        type="button"
+                        className={`btn btn-base list-btn w-100 text-start ps-3 ${
+                          investor ? "investor" : "startup"
+                        } ${location === formData.location ? "selected" : ""}`}
+                        onClick={(e) => handleLocationSelect(e, location)}
+                      >
+                        {location}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
+        </fieldset>
+
+        <fieldset className={investor ? "investor" : "startup"}>
           <legend>Established Date</legend>
           <input
             type="date"
@@ -133,15 +250,43 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
         </fieldset>
 
         <fieldset className={investor ? "investor" : "startup"}>
-          <legend>Type of Industry</legend>
-          <input
+          <legend>Sector</legend>
+          {/* <input
             type="text"
-            name="industryType"
-            id="industryType"
+            name="sector"
+            id="sector"
             className="profile_form_input"
-            value={formData.industryType || ""}
+            value={formData.sector || ""}
             onChange={handleInputChange}
-          />
+          /> */}
+          {/* sector dropdown */}
+          <div className="dropdown">
+            <button
+              className="btn profile_form_input w-auto dropdown-toggle sector_text"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <span>{formData.sector}</span>
+            </button>
+            <ul className="dropdown-menu m-0 p-0">
+              {SECTORS.map((sector, index) => {
+                return (
+                  <li key={`${sector}${index}`} className="m-0 p-0">
+                    <button
+                      type="button"
+                      className={`btn btn-base list-btn text-start ps-3 text-break ${
+                        investor ? "investor" : "startup"
+                      } ${sector === formData.sector ? "selected" : ""}`}
+                      onClick={(e) => handleSectorSelect(e, sector)}
+                    >
+                      <p className="m-0">{sector}</p>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </fieldset>
 
         <fieldset className={investor ? "investor" : "startup"}>

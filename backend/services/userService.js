@@ -273,9 +273,11 @@ export const searchUsers = async (searchQuery) => {
           $or: [
             { username: { $regex: searchQuery, $options: "i" } },
             { email: { $regex: searchQuery, $options: "i" } },
+            { firstName: { $regex: searchQuery, $options: "i" } },
+            { lastName: { $regex: searchQuery, $options: "i" } },
           ],
         },
-        { userStatus: 'active' },
+        { userStatus: "active" },
       ],
     });
 
@@ -287,7 +289,6 @@ export const searchUsers = async (searchQuery) => {
     });
     return {
       status: 200,
-
       data: {
         users: users,
         company: company,
@@ -365,7 +366,7 @@ export const addStartupToUser = async (userId, startUpId) => {
       return {
         status: 404,
         message: "User not found.",
-      }
+      };
     }
     return {
       status: 200,

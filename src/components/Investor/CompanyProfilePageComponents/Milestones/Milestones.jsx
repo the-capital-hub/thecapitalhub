@@ -22,7 +22,7 @@ export default function Milestones({ headingClass, containerClass, theme }) {
       badge: MockBadge,
     },
     {
-      milestone: "First Fund Raise",
+      milestone: "Achieved First Revenue",
       text: "₹ 10 M",
       badge: MockFundsBadge,
     },
