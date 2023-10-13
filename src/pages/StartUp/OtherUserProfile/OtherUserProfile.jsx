@@ -178,7 +178,7 @@ function OtherUserProfile() {
                   </div>
                 </div> */}
                 {/* Experience */}
-                <div className="experience rounded border shadow-sm profile_container">
+                {/* <div className="experience rounded border shadow-sm profile_container">
                   <h4 className="h4">Experience</h4>
                   <div className="single_experience row row-cols-1 row-cols-md-2 gx-2">
                     <div className="col-12 col-md-1 image">
@@ -207,9 +207,9 @@ function OtherUserProfile() {
                       </p>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 {/* Education */}
-                <div className="education rounded border shadow-sm profile_container">
+                {/* <div className="education rounded border shadow-sm profile_container">
                   <h4 className="h4">Education</h4>
                   <div className="single_education">
                     <h6 className="h6">
@@ -221,7 +221,19 @@ function OtherUserProfile() {
                     </p>
                     <p className="m-0 font_12 font_light">March 2019 - 2023</p>
                   </div>
+                </div> */}
+                {/* bio */}
+                {userData?.bio?<div className="bio rounded border shadow-sm profile_container">
+                  <h4 className="h4">Bio</h4>
+                  <div className="single_education">
+                    <h6 className="h6">
+                    {userData?.bio}
+                    </h6>
+                   
+                  </div>
                 </div>
+                :""}
+                 
                 {/* Otheruser's Featured Posts */}
                 <div className="bg-white rounded shadow-sm d-flex flex-column gap-3 p-4">
                   {/* Heading */}
