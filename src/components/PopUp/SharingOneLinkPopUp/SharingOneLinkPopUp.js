@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 const SharingOneLinkPopUp = ({ introMessage, oneLink, onClose, investor = false }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
-  const shareUrl = investor? "https://thecapitalhub.in/investor/onelink/" + oneLink + "/" + loggedInUser._id : "https://thecapitalhub.in/onelink/" + oneLink + "/" + loggedInUser._id;
+  const shareUrl = investor? "https://thecapitalhub.in/investor/onelink/" + oneLink + "/" + loggedInUser.oneLinkId : "https://thecapitalhub.in/onelink/" + oneLink + "/" + loggedInUser.oneLinkId;
   const messageForSharing = introMessage.replace(/<br\s*\/?>/g, "\n");
   const [copyStatus, setCopyStatus] = useState(""); // State for copy status
 
