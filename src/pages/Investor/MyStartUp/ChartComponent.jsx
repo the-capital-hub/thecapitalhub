@@ -31,11 +31,15 @@ const renderActiveShape = (props) => {
   const my = cy + (outerRadius + 30) * sin;
   const ex = mx + (cos >= 0 ? 1 : -1) * 22;
   const ey = my;
+ 
   const textAnchor = cos >= 0 ? "start" : "end";
+  const textSize = window.innerWidth < 768 ? 12 : 15;
+  const smallTextSize = window.innerWidth < 768 ? 10 : 12;
+  
 
   return (
     <g>
-      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
+      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill} fontSize={textSize}>
         {payload.name}
       </text>
       <Sector
@@ -67,6 +71,7 @@ const renderActiveShape = (props) => {
         y={ey}
         textAnchor={textAnchor}
         fill="#333"
+        fontSize={textSize}
       >{`PV ${value}`}</text>
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
@@ -74,6 +79,7 @@ const renderActiveShape = (props) => {
         dy={18}
         textAnchor={textAnchor}
         fill="#999"
+        fontSize={smallTextSize}
       >
         {`(Rate ${(percent * 100).toFixed(2)}%)`}
       </text>
@@ -91,15 +97,15 @@ export default function ChartComponent() {
   );
 
   return (
-    <PieChart width={400} height={400}>
+    <PieChart width={400} height={400}  >
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
         data={data}
         cx={200}
         cy={200}
-        innerRadius={60}
-        outerRadius={80}
+        innerRadius={window.innerWidth < 768 ? 45 : 80}
+        outerRadius={window.innerWidth < 768 ? 55 : 100}
         fill="#8884d8"
         dataKey="value"
         onMouseEnter={onPieEnter}

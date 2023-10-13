@@ -24,7 +24,7 @@ const Documentation = () => {
       <div className="border_left">
         <div className="documentation shadow-sm border">
           <h1>Documentation</h1>
-          <div className="docscontainer">
+          <div className="docscontainer col-7 justify-content-between mx-auto">
             {/* <Card
               text={"Financials"}
               onClicked={() =>
