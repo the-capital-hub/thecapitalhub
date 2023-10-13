@@ -89,11 +89,38 @@
       color: #fff;
     }
 
+    &.selected {
+      background-color: #fd5901;
+      color: #fff;
+    }
+
     &.investor {
+      &.selected {
+        background-color: #d3f36b;
+        color: #000;
+      }
+
       &:hover {
         background-color: #d3f36b;
         color: #000;
       }
     }
+  }
+
+  .dropdown-menu {
+    max-height: 300px;
+    scrollbar-gutter: stable;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .sector_text {
+    // max-width: 20ch;
+    // word-break: break-all;
+    text-align: start;
+    text-wrap: balance;
   }
 }
