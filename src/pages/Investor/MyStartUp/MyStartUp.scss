@@ -114,3 +114,21 @@
   background-color: transparent;
   border-radius: 10rem;
 }
+@media (max-width: 769px) {
+  .mystartup_main_container {
+    .big_card_container {
+      width: 100%;
+      .left_container,
+    .right_container {
+      width: 100%;
+      height: auto;
+    }
+    .chart_container{
+      // width: 75%;
+    }
+    
+    
+    }
+
+  }
+}
