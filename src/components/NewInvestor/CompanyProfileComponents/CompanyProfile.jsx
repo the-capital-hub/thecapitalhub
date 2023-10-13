@@ -14,6 +14,7 @@ export default function CompanyProfile({
   companyData,
   investorData,
   startup = "false",
+  short,
 }) {
   // Fetch Company Data here
   let name = "HCL";
@@ -99,18 +100,18 @@ export default function CompanyProfile({
         </div>
         <CompanyAbout
           about={description}
-          vision={vision}
-          mission={mission}
+          vision={!short && vision} 
+          mission={!short && mission}
           noOfEmployees={noOfEmployees}
         />
-        <CompanyStats colorCard={colorCard} />
+        {!short && <CompanyStats colorCard={colorCard} />}
       </div>
 
       <div className="company__section__two d-flex flex-column gap-4 pt-3 pb-5 px-5">
         <PublicLinks socialLinks={socialLinks} />
         {/* <Feedback /> */}
-        <FoundingTeam isOnelink={isOnelink} team={team} />
-        <KeyFocus tags={tags} />
+        {!short && <FoundingTeam isOnelink={isOnelink} team={team} />}
+        {!short && <KeyFocus tags={tags} />}
       </div>
     </div>
   );
