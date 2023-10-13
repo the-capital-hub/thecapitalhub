@@ -2,7 +2,7 @@ import "./Search.scss";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import connectIcon from "../../../Images/connect-button.svg";
 import companyIcon from "../../../Images/Investor/searchResult/business-and-trade.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
   getSearchResultsAPI,
@@ -12,6 +12,7 @@ import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import AfterSuccessPopup from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 function Search() {
   const [userData, setUserData] = useState(null);
@@ -24,6 +25,12 @@ function Search() {
   const queryParams = new URLSearchParams(location.search);
   const searchBy = queryParams.get("query");
   const userIdToRemove = loggedInUser._id;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    document.title = "Search Results | The Capital Hub";
+    dispatch(setPageTitle("Search Results"));
+  }, []);
 
   const handleConnect = (userId) => {
     sentConnectionRequest(loggedInUser._id, userId)
