@@ -14,6 +14,7 @@ export default function CompanyProfile({
   companyData,
   investorData,
   startup = "false",
+  short,
 }) {
   // Fetch Company Data here
   let name = "HCL";
@@ -34,6 +35,7 @@ export default function CompanyProfile({
   let noOfEmployees = "200+";
   let team = [];
   let tags = [];
+  let tagline = "";
 
   if (companyData) {
     name = companyData.company || name;
@@ -47,7 +49,8 @@ export default function CompanyProfile({
     mission = companyData.mission || mission;
     noOfEmployees = companyData.noOfEmployees || noOfEmployees;
     team = companyData.team || team;
-    tags = companyData.keyFocus?.split(',').map(tag => tag.trim()) || tags;
+    tags = companyData.keyFocus?.split(",").map((tag) => tag.trim()) || tags;
+    tagline = companyData.tagline || tagline;
   }
   if (investorData) {
     name = investorData.companyName || name;
@@ -61,7 +64,8 @@ export default function CompanyProfile({
     mission = investorData.mission || mission;
     noOfEmployees = investorData.noOfEmployees || noOfEmployees;
     team = investorData.team || team;
-    tags = investorData.keyFocus?.split(',').map(tag => tag.trim()) || tags;
+    tags = investorData.keyFocus?.split(",").map((tag) => tag.trim()) || tags;
+    tagline = investorData.tagline || tagline;
   }
   // const company = {
   //   image: HCLImage,
@@ -88,6 +92,7 @@ export default function CompanyProfile({
           <CompanyInfo
             name={name}
             logo={logo}
+            tagline={tagline}
             location={location}
             foundedYear={new Date(foundedIn).getFullYear()}
           />
@@ -95,18 +100,18 @@ export default function CompanyProfile({
         </div>
         <CompanyAbout
           about={description}
-          vision={vision}
-          mission={mission}
+          vision={!short && vision} 
+          mission={!short && mission}
           noOfEmployees={noOfEmployees}
         />
-        <CompanyStats colorCard={colorCard} />
+        {!short && <CompanyStats colorCard={colorCard} />}
       </div>
 
       <div className="company__section__two d-flex flex-column gap-4 pt-3 pb-5 px-5">
         <PublicLinks socialLinks={socialLinks} />
         {/* <Feedback /> */}
-        <FoundingTeam isOnelink={isOnelink} team={team} />
-        <KeyFocus tags={tags} />
+        {!short && <FoundingTeam isOnelink={isOnelink} team={team} />}
+        {!short && <KeyFocus tags={tags} />}
       </div>
     </div>
   );

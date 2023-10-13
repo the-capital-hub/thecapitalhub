@@ -6,6 +6,8 @@ import {
   getUnreadMessageCountController,
   clearAllMessagesController,
   deleteMessageController,
+  markMessagesAsReadInCommunitiesController,
+  getUnreadMessageCountInCommunitiesController,
 } from "../controllers/messageController.js";
 
 import { authenticateToken } from "../middlewares/authenticateToken.js";
@@ -19,5 +21,7 @@ router.patch("/markMessagesAsRead/:chatId/:userId", markMessagesAsReadController
 router.get("/getUnreadMessageCount/:chatId/:userId", getUnreadMessageCountController);
 router.patch("/clearChatMessages/:chatId", clearAllMessagesController);
 router.delete("/deleteMessage/:messageId", deleteMessageController);
+router.patch("/markMessagesAsReadInCommunities/:chatId/:userId", markMessagesAsReadInCommunitiesController);
+router.get("/getUnreadMessageCountInCommunities/:chatId/:userId", getUnreadMessageCountInCommunitiesController);
 
 export default router;

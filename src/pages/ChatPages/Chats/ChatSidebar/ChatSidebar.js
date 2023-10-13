@@ -49,6 +49,10 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
     getPinnedChat(loggedInUser._id).then((res) => {
       console.log(res.data);
       setPinnedChats(res.data);
+      res.data.forEach((chat) => {
+        handleGetMessageByChatId(chat._id);
+        handleGetUnreadMessageCount(chat._id);
+      });
     });
     getUserChats(loggedInUser._id)
       .then((res) => {
@@ -77,21 +81,31 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   const handleGetMessageByChatId = (chatId) => {
     getMessageByChatId(chatId)
       .then((res) => {
-        // console.log(res.data)
         const latestMessage = res.data[res.data.length - 1];
-        setLatestMessages((prevLatestMessages) => ({
-          ...prevLatestMessages,
-          [chatId]: latestMessage ? latestMessage.text : "",
-        }));
-        setDates((prevLatestMessages) => ({
-          ...prevLatestMessages,
-          [chatId]: latestMessage ? latestMessage.createdAt : "",
-        }));
+        if (latestMessage) {
+          let messageText = latestMessage.text;
+          if (latestMessage.video) {
+            messageText = "video";
+          } else if (latestMessage.documents) {
+            messageText = "document";
+          } else if (latestMessage.images) {
+            messageText = "image";
+          }
+          setLatestMessages((prevLatestMessages) => ({
+            ...prevLatestMessages,
+            [chatId]: messageText,
+          }));
+          setDates((prevLatestMessages) => ({
+            ...prevLatestMessages,
+            [chatId]: latestMessage.createdAt,
+          }));
+        }
       })
       .catch((error) => {
         console.error("Error-->", error);
       });
   };
+  
 
   const handleGetUnreadMessageCount = (chatId) => {
     getUnreadMessageCount(chatId, loggedInUser._id)

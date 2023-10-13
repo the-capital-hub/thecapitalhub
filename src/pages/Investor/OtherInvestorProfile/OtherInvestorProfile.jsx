@@ -33,7 +33,6 @@ export default function OtherInvestorProfile() {
       .then(({ data }) => setUserData(data))
       .catch(() => navigate("/profile"));
   }, [userId]);
-
   return (
     <MaxWidthWrapper>
       <div className="otherInvestorProfile_wrapper d-flex flex-column gap-4 px-1 px-sm-3 pb-4 border-start">
@@ -82,9 +81,9 @@ export default function OtherInvestorProfile() {
                   </div>
                 </div> */}
               {/* Experience */}
-              <Experience />
+              {/* <Experience /> */}
               {/* Education */}
-              <div className="education bg-white p-4 rounded border shadow-sm profile_container">
+              {/* <div className="education bg-white p-4 rounded border shadow-sm profile_container">
                 <h4 className="h4">Education</h4>
                 <div className="single_education">
                   <h6 className="h6">
@@ -96,7 +95,20 @@ export default function OtherInvestorProfile() {
                   </p>
                   <p className="m-0 font_12 font_light">March 2019 - 2023</p>
                 </div>
+              </div> */}
+              {/* bio */}
+              {userData?.bio?
+              <div className="bio bg-white p-4 rounded border shadow-sm profile_container">
+                <h4 className="h4">Bio</h4>
+                <div className="single_education">
+                  
+                  <h6 className="h6">
+                   {userData?.bio}
+                  </h6>
+                </div>
               </div>
+                  :""
+}
               {/* Company Details */}
               <CompanyDetailsCard
                 className="company_details profile_container"

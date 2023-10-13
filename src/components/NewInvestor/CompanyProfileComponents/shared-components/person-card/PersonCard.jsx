@@ -29,7 +29,7 @@ export default function PersonCard({ person, isFeedBack }) {
           <p className="">{person.feedback}</p>
         ) : (
           <>
-            <div className="founder">
+            <div className="person_text">
               <p className="text-muted fw-light">Designation</p>
               <h6 className="fw-medium designation">{person.designation}</h6>
             </div>

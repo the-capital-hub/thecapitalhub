@@ -42,6 +42,7 @@ const Chats = () => {
   const [recieveMessage, setRecieveMessage] = useState(null);
   const [cleared, setCleared] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isRead, setIsRead] = useState(false);
   // const [isCommunitySelected, setIsCommunitySelected] = useState(false);
   // const previousUrl = window.history.length > 1 ? window.history.go(-1) : null;
 
@@ -143,7 +144,13 @@ const Chats = () => {
               />
             </span>
             <ChatSearch />
-            <CommunitiesContainer isCommunityOpen={isCommunityOpen} />
+            <CommunitiesContainer
+              isCommunityOpen={isCommunityOpen}
+              recieveMessage={recieveMessage}
+              sendMessage={sendMessage}
+              setIsRead={setIsRead}
+              isRead={isRead}
+            />
             <ChatSidebar
               recieveMessage={recieveMessage}
               sendMessage={sendMessage}
@@ -172,6 +179,8 @@ const Chats = () => {
                   setSendMessage={setSendMessage}
                   recieveMessage={recieveMessage}
                   cleared={cleared}
+                  setIsRead={setIsRead}
+                  isRead={isRead}
                 />
               )}
             </>

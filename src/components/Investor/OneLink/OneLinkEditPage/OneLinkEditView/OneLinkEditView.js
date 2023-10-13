@@ -28,6 +28,7 @@ const OneLinkEditView = () => {
     company: "",
     description: "",
     logo: "",
+    tagline: "",
   });
   const [selectedLogo, setSelectedLogo] = useState(null);
   const [imageData, setImageData] = useState(null);
@@ -40,6 +41,7 @@ const OneLinkEditView = () => {
           company: data.company || "",
           description: data.description || "",
           logo: data.logo || "",
+          tagline: data.tagline || "",
         });
       })
       .catch(() => setCompany({}));
@@ -166,7 +168,7 @@ const OneLinkEditView = () => {
         <div className="col">
           <SmallProfileCard text={"Edit"} />
         </div>
-        <div className="box_container px-5 py-5 my-4">
+        <div className="box_container px-3 px-lg-5 py-5 my-4">
           {/* <section className="dollar_rupree">
             <img src={DollarRupeeImage} alt="image" />
           </section> */}
@@ -203,9 +205,17 @@ const OneLinkEditView = () => {
               <div className="company_text text-center text-md-start">
                 <h6>
                   <input
-                    className="name_container "
+                    className="name_container fs-5 "
                     value={formData.company}
                     onChange={(e) => handleInputChange("company", e)}
+                    onBlur={(e) => handleUpdate()}
+                  />
+                </h6>
+                <h6>
+                  <input
+                    className="name_container "
+                    value={formData.tagline}
+                    onChange={(e) => handleInputChange("tagline", e)}
                     onBlur={(e) => handleUpdate()}
                   />
                 </h6>

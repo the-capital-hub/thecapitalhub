@@ -34,8 +34,8 @@ const OnePagePreview = () => {
     <>
       <div className="onepagepreview_container mt-3">
         <div className="box_container  pb-5">
-          <section className="heading_section px-5 ">
-            <h4>One Page Preview</h4>
+          <section className="heading_section px-3 px-lg-5 ">
+            <h4>One Pager Preview</h4>
             {userId === company?.founderId && (
               <Link to="/onelink/edit">
                 <button>
@@ -50,12 +50,13 @@ const OnePagePreview = () => {
             <img src={DollarRupeeImage} alt="image" />
           </section> */}
 
-          <div className="px-5">
+          <div className="px-3 px-lg-5">
             <section className="company_description">
               <img src={company.logo} alt="image" />
               <div className="company_text">
-                <h6>{company?.company || `Enter company description`} </h6>
-                <hr />
+                <h5>{company?.company || `Enter company description`} </h5>
+                <h6 className="mb-0">{company?.tagline}</h6>
+                <hr className="my-2" />
                 <h6>
                   {company?.description || "Eg: India’s best startup platfrom"}
                 </h6>
@@ -63,15 +64,17 @@ const OnePagePreview = () => {
             </section>
           </div>
 
-          <section className="card_section px-5">
+          <section className="card_section px-3 px-lg-5">
             <OnePagePreviewCard company={company} />
           </section>
 
-          <section className="table_section px-5">
-            <Table />
+          <section className="table_section">
+            <div className="px-3 px-lg-5">
+              <Table />
+            </div>
           </section>
 
-          <div className="px-5">
+          <div className="px-3 px-lg-5">
             <section className="team_section">
               {/* <TeamCard/> */}
               {company?.team?.map((team, index) => (
@@ -85,7 +88,7 @@ const OnePagePreview = () => {
             </section>
           </div>
 
-          <section className="row fund_asking_deployment px-5">
+          <section className="row fund_asking_deployment px-3 px-lg-5">
             <div className="funding_divider">
               <FundAsking company={company} />
             </div>

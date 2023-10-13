@@ -30,7 +30,7 @@ router.get(
 router.post("/investNow", investNowController);
 
 // Middleware for checking token
-// router.use(authenticateToken);
+router.use(authenticateToken);
 
 // Get startup data
 router.get("/details/:userId", startUpData);
