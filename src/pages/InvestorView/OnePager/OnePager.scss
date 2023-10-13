@@ -15,7 +15,7 @@
   gap: 30px;
   align-items: start;
   background-color: #fff;
-  padding: 10px 30px;
+  // padding: 10px 30px;
   .currency {
     display: flex;
     gap: 10px;
@@ -37,9 +37,7 @@
     margin-top: 30px;
   }
 
-  .cards {
-    display: flex;
-    gap: 2em;
+  .simple_cards_container {
     overflow-x: auto;
     padding-bottom: 0.5em;
     &::-webkit-scrollbar {
@@ -58,6 +56,10 @@
         margin-inline: 10dvw;
       }
     }
+    .simple_cards {
+      display: flex;
+      gap: 1em;
+    }
   }
 
   .market_cards {
@@ -69,13 +71,49 @@
 
   .projections {
     margin-top: 30px;
+    max-width: 100%;
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+      height: 8px;
+      margin-inline: 10dvw;
+
+      &-track {
+        border-radius: 10rem;
+        background-color: rgba(211, 243, 107, 0.2);
+        margin-inline: 10dvw;
+      }
+
+      &-thumb {
+        border-radius: 10rem;
+        background-color: rgba(211, 243, 107, 1);
+        margin-inline: 10dvw;
+      }
+    }
   }
 
   .team {
+    max-width: 100%;
+    overflow-x: auto;
+    padding-bottom: 1em;
+    &::-webkit-scrollbar {
+      height: 8px;
+      margin-inline: 10dvw;
+
+      &-track {
+        border-radius: 10rem;
+        background-color: rgba(211, 243, 107, 0.2);
+        margin-inline: 10dvw;
+      }
+
+      &-thumb {
+        border-radius: 10rem;
+        background-color: rgba(211, 243, 107, 1);
+        margin-inline: 10dvw;
+      }
+    }
     .team_cards {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+      gap: 2em;
     }
   }
 
