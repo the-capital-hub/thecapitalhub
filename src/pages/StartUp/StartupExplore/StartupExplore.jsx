@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import "./StartupExplore.scss";
 // import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import FilterBySelect from "../../../components/NewInvestor/FilterBySelect/FilterBySelect";
@@ -40,7 +41,8 @@ export default function StartupExplore() {
   const dispatch = useDispatch();
   const [filterOptions, setFilterOptions] = useState([]);
   const [filters, setFilters] = useState({});
-  const [filteredData, setFilteredData] = useState([]);
+  const [filteredData, setFilteredData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     document.title = "Explore | The Capital Hub";
@@ -70,16 +72,18 @@ export default function StartupExplore() {
 
   const onSubmitFilters = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      const { data } = fetchExploreFilteredResultsAPI({
+      const { data } = await fetchExploreFilteredResultsAPI({
         type: activeTab,
         ...filters,
       });
-      console.log(data);
       setFilteredData(data);
-      setFilters({});
+      setFilters(null);
     } catch (error) {
       console.log("Error fetching filtered results: ", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -100,7 +104,7 @@ export default function StartupExplore() {
                 activeTab === "Investor" ? "active" : ""
               }`}
               onClick={() => {
-                setFilters({});
+                setFilters(null);
                 setActiveTab("Investor");
               }}
             >
@@ -111,7 +115,7 @@ export default function StartupExplore() {
                 activeTab === "Startup" ? "active" : ""
               }`}
               onClick={() => {
-                setFilters({});
+                setFilters(null);
                 setActiveTab("Startup");
               }}
             >
@@ -122,7 +126,7 @@ export default function StartupExplore() {
                 activeTab === "Founder" ? "active" : ""
               }`}
               onClick={() => {
-                setFilters({});
+                setFilters(null);
                 setActiveTab("Founder");
               }}
             >
@@ -208,7 +212,30 @@ export default function StartupExplore() {
         </div>
 
         {/* Companies List - pass filter props*/}
-        <CompanyProfileList isStartup data={filteredData} />
+
+        <div className="filtered-results">
+          {loading ? (
+            <SpinnerBS
+              className="container bg-white d-flex justify-content-center align-items-center p-5 rounded-4 shadow-sm"
+              colorClass="text-secondary"
+              spinnerSizeClass="xl"
+            />
+          ) : (
+            <>
+              {!filteredData?.length ? (
+                <div className="container bg-white d-flex justify-content-center align-items-center p-5 rounded-4 shadow-sm">
+                  No {activeTab} found
+                </div>
+              ) : (
+                <>
+                  {activeTab === "Startup" && (
+                    <CompanyProfileList isStartup data={filteredData} />
+                  )}
+                </>
+              )}
+            </>
+          )}
+        </div>
       </section>
     </MaxWidthWrapper>
   );
