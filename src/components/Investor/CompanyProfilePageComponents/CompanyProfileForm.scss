@@ -80,4 +80,20 @@
       color: black;
     }
   }
+
+  .list-btn {
+    width: 100%;
+    border-radius: 0%;
+    &:hover {
+      background-color: #fd5901;
+      color: #fff;
+    }
+
+    &.investor {
+      &:hover {
+        background-color: #d3f36b;
+        color: #000;
+      }
+    }
+  }
 }

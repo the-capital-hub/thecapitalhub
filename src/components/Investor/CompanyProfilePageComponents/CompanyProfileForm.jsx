@@ -4,9 +4,48 @@ import { postStartUpData, postInvestorData } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
 import AfterSuccessPopup from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 
+const LOCATIONS = [
+  "New Delhi",
+  "Gurgaon",
+  "Mumbai",
+  "Pune",
+  "Hyderabad",
+  "Chennai",
+  "Bengaluru",
+  "Mangalore",
+  "Kochi",
+  "Lucknow",
+  "Kolkata",
+  "Others",
+];
+
+const SECTORS = [
+  "FMCG",
+  "Restaurants",
+  "Education",
+  "Tourism",
+  "Automobile",
+  "Textile",
+  "Chemicals",
+  "Telecommunications",
+  "Oil and Gas",
+  "Renewable Energy",
+  "Investment Banking and Venture Capital",
+  "NBFC",
+  "Biotechnology",
+  "Software Development Services",
+  "Computer and Information Technology",
+  "Aerospace",
+  "Sales and Marketing",
+];
+
 export default function CompanyProfileForm({ companyData, investor = false }) {
+  // States for form
   const [formData, setFormData] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState(LOCATIONS[0]);
+
+  // States for popup
   const [fromSubmit, setFromSubmit] = useState(false);
   const [popupData, setPopupData] = useState("");
 
@@ -19,6 +58,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
         location: companyData.location || "",
         startedAtDate: companyData.startedAtDate || "",
         industryType: companyData.industry || "",
+        sector: companyData.sector || "",
         noOfEmployees: companyData.noOfEmployees || "",
         vision: companyData.vision || "",
         mission: companyData.mission || "",
@@ -123,14 +163,36 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
 
         <fieldset className={investor ? "investor" : "startup"}>
           <legend>Location</legend>
-          <input
+          {/* <input
             type="text"
             name="location"
             id="location"
             className="profile_form_input"
             value={formData.location || ""}
             onChange={handleInputChange}
-          />
+          /> */}
+          {/* Location Dropdown */}
+          <div className="dropdown">
+            <button
+              className="btn profile_form_input w-auto dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {selectedLocation}
+            </button>
+            <ul className="dropdown-menu m-0 p-0">
+              {LOCATIONS.map((location, index) => {
+                return (
+                  <li key={`${location}${index}`} className="m-0 p-0">
+                    <button type="button" className="btn btn-base list-btn">
+                      {location}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </fieldset>
 
         <fieldset className={investor ? "investor" : "startup"}>
@@ -146,13 +208,13 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
         </fieldset>
 
         <fieldset className={investor ? "investor" : "startup"}>
-          <legend>Type of Industry</legend>
+          <legend>Sector</legend>
           <input
             type="text"
-            name="industryType"
-            id="industryType"
+            name="sector"
+            id="sector"
             className="profile_form_input"
-            value={formData.industryType || ""}
+            value={formData.sector || ""}
             onChange={handleInputChange}
           />
         </fieldset>
