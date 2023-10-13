@@ -190,18 +190,18 @@ const MyStartUp = () => {
           </div>
         </div>
 
-        <div className="row mt-2 big_card_container">
-          <div className="col-6 left_container">
+        <div className="row mt-2 big_card_container d-flex flex-column flex-md-row mx-auto">
+          <div className="col-12 col-md-6 left_container">
             <h4 className="title_h4">Summary</h4>
             <hr />
-            <div className="chart_container">
+            <div className="chart_container  ">
               <ChartComponent />
             </div>
           </div>
           <div className="col-6 right_container">
             <h4 className="title_h4">Past Investments</h4>
             <hr />
-            <div className="two_by_two_card_container">
+            <div className="two_by_two_card_container flex-column flex-md-row ">
               <PostInvestmentCard
                 logo={logoIcon}
                 text="Investment 1"
