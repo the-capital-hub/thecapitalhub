@@ -221,8 +221,8 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
                       <button
                         type="button"
                         className={`btn btn-base list-btn w-100 text-start ps-3 ${
-                          location === formData.location ? "selected" : ""
-                        }`}
+                          investor ? "investor" : "startup"
+                        } ${location === formData.location ? "selected" : ""}`}
                         onClick={(e) => handleLocationSelect(e, location)}
                       >
                         {location}
@@ -274,8 +274,8 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
                     <button
                       type="button"
                       className={`btn btn-base list-btn text-start ps-3 text-break ${
-                        sector === formData.sector ? "selected" : ""
-                      }`}
+                        investor ? "investor" : "startup"
+                      } ${sector === formData.sector ? "selected" : ""}`}
                       onClick={(e) => handleSectorSelect(e, sector)}
                     >
                       <p className="m-0">{sector}</p>
