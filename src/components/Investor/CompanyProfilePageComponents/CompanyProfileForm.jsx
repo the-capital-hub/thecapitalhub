@@ -100,6 +100,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
 
   // Handle Location select
   const handleLocationSelect = (e, location) => {
+    if (location === LOCATIONS[0]) return;
     if (location === "Others") {
       setOthersClicked(true);
     }
@@ -117,6 +118,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
 
   // Handle Sector Select
   const handleSectorSelect = (e, sector) => {
+    if (sector === SECTORS[0]) return;
     setFormData((prevData) => ({ ...prevData, sector: sector }));
   };
 
@@ -221,8 +223,8 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
                       <button
                         type="button"
                         className={`btn btn-base list-btn w-100 text-start ps-3 ${
-                          location === formData.location ? "selected" : ""
-                        }`}
+                          investor ? "investor" : "startup"
+                        } ${location === formData.location ? "selected" : ""}`}
                         onClick={(e) => handleLocationSelect(e, location)}
                       >
                         {location}
@@ -274,8 +276,8 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
                     <button
                       type="button"
                       className={`btn btn-base list-btn text-start ps-3 text-break ${
-                        sector === formData.sector ? "selected" : ""
-                      }`}
+                        investor ? "investor" : "startup"
+                      } ${sector === formData.sector ? "selected" : ""}`}
                       onClick={(e) => handleSectorSelect(e, sector)}
                     >
                       <p className="m-0">{sector}</p>

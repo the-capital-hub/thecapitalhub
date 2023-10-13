@@ -39,11 +39,10 @@ export default function EditCompanyProfilePage() {
           });
         })
         .catch((error) => {
-          console.error('Error fetching startup data:', error);
+          console.error("Error fetching startup data:", error);
         });
     }
   }, []);
-
 
   // handleAmountChange
   const handleAmountChange = (currentfield, updatedAmount) => {
@@ -91,8 +90,9 @@ export default function EditCompanyProfilePage() {
               <span className="ms-auto">
                 <div className="d-flex gap-2">
                   <button
-                    className={`align-self-end btn-base startup ${isBioEditable ? "btn-sm" : ""
-                      }`}
+                    className={`align-self-end btn-base startup ${
+                      isBioEditable ? "btn-sm" : ""
+                    }`}
                     onClick={() => setIsBioEditable(!isBioEditable)}
                   >
                     {isBioEditable ? "Cancel" : "Edit"}
@@ -100,8 +100,9 @@ export default function EditCompanyProfilePage() {
                   </button>
                   {isBioEditable && (
                     <button
-                      className={`align-self-end btn-base startup ${isBioEditable ? "btn-sm" : ""
-                        }`}
+                      className={`align-self-end btn-base startup ${
+                        isBioEditable ? "btn-sm" : ""
+                      }`}
                       onClick={(e) => submitBioHandler(e)}
                     >
                       Save

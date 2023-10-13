@@ -95,6 +95,8 @@
     }
 
     &.investor {
+      background-color: transparent;
+
       &.selected {
         background-color: #d3f36b;
         color: #000;
