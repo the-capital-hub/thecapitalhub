@@ -100,6 +100,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
 
   // Handle Location select
   const handleLocationSelect = (e, location) => {
+    if (location === LOCATIONS[0]) return;
     if (location === "Others") {
       setOthersClicked(true);
     }
@@ -117,6 +118,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
 
   // Handle Sector Select
   const handleSectorSelect = (e, sector) => {
+    if (sector === SECTORS[0]) return;
     setFormData((prevData) => ({ ...prevData, sector: sector }));
   };
 
