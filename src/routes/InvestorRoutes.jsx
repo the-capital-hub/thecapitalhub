@@ -8,7 +8,7 @@ const InvestorConnection = lazy(() =>
 const OtherInvestorProfile = lazy(() =>
   import("../pages/Investor/OtherInvestorProfile/OtherInvestorProfile")
 );
-const InvestorCompanyProfilePage = lazy(() =>
+const InvestorCompany = lazy(() =>
   import("../pages/Investor/InvestorCompanyProfilePage/InvestorCompany")
 );
 const EditInvestorCompanyProfilePage = lazy(() =>
@@ -39,7 +39,7 @@ const Explore = lazy(() => import("../pages/Investor/Explore/Explore"));
 const InvestorProfile = lazy(() => import("../pages/Investor/Profile/Profile"));
 const MyStartUp = lazy(() => import("../pages/Investor/MyStartUp/MyStartUp"));
 
-const InvestorOtherCompanyProfilePage = lazy(() =>
+const InvestorCompanyProfilePage = lazy(() =>
   import(
     "../pages/Investor/InvestorCompanyProfilePage/InvestorCompanyProfilePage"
   )
@@ -160,7 +160,7 @@ function InvestorRoutes() {
         path="company-profile"
         element={
           <Suspense fallback={<SuspenseLoader />}>
-            <InvestorCompanyProfilePage />
+            <InvestorCompany />
           </Suspense>
         }
       />
@@ -168,7 +168,7 @@ function InvestorRoutes() {
         path="company-profile/:username"
         element={
           <Suspense fallback={<SuspenseLoader />}>
-            <InvestorOtherCompanyProfilePage />
+            <InvestorCompanyProfilePage />
           </Suspense>
         }
       />
