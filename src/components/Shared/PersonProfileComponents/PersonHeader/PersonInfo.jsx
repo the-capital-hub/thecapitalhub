@@ -19,12 +19,13 @@ export default function PersonInfo({
   return (
     <div className="person_info">
       <div className="person__profile__header d-flex flex-column flex-lg-row gap-3 ">
-        <div className="person__profile__image border">
+        <div className="person__profile__image">
           <img
             src={profilePicture || DefaultAvatar}
             alt={fullName}
             style={{ width: "110px", height: "110px" }}
             loading="lazy"
+            className="rounded-3"
           />
         </div>
 
@@ -38,7 +39,7 @@ export default function PersonInfo({
             <IconCard
               src={Location}
               alt={"location icon"}
-              text={`${location}`}
+              text={`${location || "India"}`}
               key="location"
             />
             <IconCard

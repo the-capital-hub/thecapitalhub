@@ -15,7 +15,7 @@ const PERSON = {
   mobileNumber: "+91 9876543210",
   companyName: "Company Name",
   location: "Bangalore",
-  foundedYear: "2014",
+  foundedYear: "2022",
   lastFunding: "May, 2023",
   about:
     "Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.With the vision of make in India for the world, they design and build augmented reality glasses for Defence, Enterprise, and Training sectors. In addition to hardware, they also provide their clients with end-to-end AR/VR/MR solutions that are tailored to their business needs.",
@@ -30,13 +30,11 @@ export default function PersonProfile({ theme, short, personData }) {
     lastName,
     designation,
     email,
-    mobileNumber,
+    phoneNumber,
     companyName,
     location,
-    about,
-    lastFunding,
-    foundedYear,
-  } = PERSON;
+    bio,
+  } = personData;
 
   return (
     <div className={`person_profile_wrapper bg-white shadow-sm ${theme}`}>
@@ -49,19 +47,19 @@ export default function PersonProfile({ theme, short, personData }) {
             profilePicture={profilePicture}
             companyName={companyName}
             location={location}
-            foundedYear={foundedYear}
-            lastFunding={lastFunding}
+            foundedYear={PERSON.foundedYear}
+            lastFunding={PERSON.lastFunding}
           />
           <PersonActions />
         </div>
 
         {/* Profile About */}
         <PersonAbout
-          about={about}
+          bio={bio}
           firstName={firstName}
           lastName={lastName}
           email={email}
-          mobileNumber={mobileNumber}
+          mobileNumber={phoneNumber}
         />
       </div>
 

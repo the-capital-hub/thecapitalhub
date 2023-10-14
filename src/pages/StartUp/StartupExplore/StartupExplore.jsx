@@ -108,9 +108,21 @@ export default function StartupExplore() {
       case "Startup":
         return <CompanyProfileList isStartup data={filteredData} />;
       case "Founder":
-        return <p>founder</p>;
+        return (
+          <PersonProfileList
+            theme={"startup"}
+            short={true}
+            data={filteredData}
+          />
+        );
       case "Investor":
-        return <p>Investor</p>;
+        return (
+          <PersonProfileList
+            theme={"startup"}
+            short={true}
+            data={filteredData}
+          />
+        );
       default:
         return null;
     }
