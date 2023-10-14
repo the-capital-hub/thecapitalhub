@@ -155,10 +155,16 @@ const userSchema = new Schema(
       type: String,
       default: "inactive"
     },
-    // isInvestor: {
-    //   type: String,
-    //   default: false,
-    // },
+    oneLinkId: {
+      type: String,
+      default: generateRandomNumber, 
+      unique: true,
+      required: true,
+    },
+    isInvestor: {
+      type: String,
+      default: false,
+    },
   },
   {
     timestamps: true,
@@ -190,5 +196,10 @@ userSchema.pre(
     }
   }
 );
+
+function generateRandomNumber() {
+  const randomNumber = Math.floor(100000 + Math.random() * 900000); 
+  return randomNumber.toString(); 
+}
 
 export const UserModel = model("Users", userSchema);

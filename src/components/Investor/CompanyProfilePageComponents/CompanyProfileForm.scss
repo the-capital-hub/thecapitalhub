@@ -120,7 +120,20 @@
     overflow-y: auto;
 
     &::-webkit-scrollbar {
-      display: none;
+      width: 8px;
+
+      &-track {
+        background-color: transparent;
+      }
+
+      &-thumb {
+        background-color: #fd590122;
+        border-radius: 10rem;
+
+        &:hover {
+          background-color: #fd5901;
+        }
+      }
     }
   }
 

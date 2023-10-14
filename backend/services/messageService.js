@@ -159,3 +159,50 @@ export const deleteMessage = async (messageId) => {
     };
   }
 };
+
+export const markMessagesAsReadInCommunities = async (chatId, userId) => {
+  try {
+    const result = await MessageModel.updateMany(
+      { chatId, readBy: { $ne: userId } },
+      { $push: { readBy: userId } }
+    );
+    if (result.nModified > 0) {
+      return {
+        status: 200,
+        message: "Messages marked as read by the community",
+      };
+    } else {
+      return {
+        status: 200,
+        message: "No messages found to mark as read by the community",
+      };
+    }
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while marking messages as read by the community.",
+    };
+  }
+};
+
+export const getUnreadMessageCountInCommunities = async (chatId, userId) => {
+  try {
+    const unreadCount = await MessageModel.countDocuments({
+      chatId,
+      senderId: { $ne: userId },
+      readBy: { $ne: userId }, 
+    });
+    return {
+      status: 200,
+      message: "Unread message count in community retrieved successfully",
+      data: unreadCount,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while getting unread message count.",
+    };
+  }
+};

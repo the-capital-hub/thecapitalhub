@@ -53,7 +53,10 @@ export const loginUserService = async ({ phoneNumber, password }) => {
 //get User by id
 export const getUserById = async (userId) => {
   try {
-    const user = await UserModel.findById(userId).populate("startUp");
+    let user = await UserModel.findOne({ oneLinkId: userId }).populate('startUp');
+    if (!user) {
+      user = await UserModel.findById(userId).populate('startUp');
+    }
     if (!user) {
       return {
         status: 404,
@@ -378,6 +381,33 @@ export const addStartupToUser = async (userId, startUpId) => {
     return {
       status: 500,
       message: "An error occurred while adding startups to user.",
+    };
+  }
+};
+
+export const addUserAsInvestor = async (userId, investorId) => {
+  try {
+    const user = await UserModel.findOneAndUpdate(
+      { _id: userId },
+      { $set: { investor: investorId } },
+      { new: true }
+    );
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found.",
+      };
+    }
+    return {
+      status: 200,
+      message: "Investor added to user successfully.",
+      data: user,
+    };
+  } catch (error) {
+    console.error("Error adding user as investor:", error);
+    return {
+      status: 500,
+      message: "An error occurred while adding user as investor.",
     };
   }
 };

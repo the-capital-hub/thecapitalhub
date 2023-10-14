@@ -12,7 +12,7 @@ export default function SettingsCommunityBody() {
     <>
       {isCommunitySelected ? (
         communityProfile?.community?.members?.map((member, index) => (
-          <CommunityMemberBar key={index} member={member} />
+          <CommunityMemberBar key={index} member={member} adminId={communityProfile.community.adminId}/>
         ))
       ) : (
         chatProfile?.communities?.map((community, index) => (
@@ -52,7 +52,7 @@ const CommunityBar = ({ community }) => {
 };
 
 // for community
-const CommunityMemberBar = ({ member }) => {
+const CommunityMemberBar = ({ member, adminId }) => {
   return (
     <div className="border-item px-3 py-3 d-flex align-items-center gap-2 ">
       <img
@@ -72,6 +72,7 @@ const CommunityMemberBar = ({ member }) => {
             fontWeight: "400",
           }}
         >
+          {member._id === adminId ? "Admin": "Member"}
           {/* {community?.members?.map((member) => member.firstName).join(", ")} */}
         </p>
       </div>

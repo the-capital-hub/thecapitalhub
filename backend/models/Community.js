@@ -8,6 +8,9 @@ const communitySchema = new Schema(
     communityName: {
       type: String,
     },
+    about: {
+      type: String,
+    },
     adminId: {
       type: Schema.Types.ObjectId,
         ref: "Users",

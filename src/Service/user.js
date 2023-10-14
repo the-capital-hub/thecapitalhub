@@ -867,6 +867,33 @@ export const addStartUpToUser = async (userId, startUpId) => {
   }
 };
 
+export const searchInvestors = async (searchQuery) => {
+  try {
+    const response = await axiosInstance.get(
+      `${API.searchInvestors}/${searchQuery}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Error getting investor company details : ", error.message);
+  }
+};
+
+export const addUserAsInvestor = async (userId, investorId) => {
+  try {
+    const requestBody = {
+      userId,
+      investorId,
+    };
+    const response = await axiosInstance.patch(
+      `${API.addUserAsInvestor}`,
+      requestBody
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Error adding startup to user : ", error);
+  }
+};
+
 export const deleteDocument = async (docId) => {
   try {
     const response = await axiosInstance.delete(
@@ -879,6 +906,30 @@ export const deleteDocument = async (docId) => {
   }
 };
 
+export const markMessagesAsReadInCommunities = async (chatId, userId) => {
+  try {
+    const response = await axiosInstance.patch(
+      `${API.markMessagesAsReadInCommunities}/${chatId}/${userId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+
+
+export const getUnreadMessageCountInCommunities = async (chatId, userId) => {
+  try {
+    const response = await axiosInstance.get(
+      `${API.getUnreadMessageCountInCommunities}/${chatId}/${userId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
 export const fetchExploreFiltersAPI = async (type) => {
   try {
     const response = await axiosInstance.get(

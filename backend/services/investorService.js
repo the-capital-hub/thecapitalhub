@@ -256,3 +256,28 @@ export const getOnePager = async (oneLink) => {
     };
   }
 };
+
+export const getInvestorBySearch = async (searchQuery) => {
+  try {
+    const startups = await InvestorModel.find({
+      companyName: { $regex: searchQuery, $options: 'i' },
+    });
+    if (startups.length === 0) {
+      return {
+        status: 404,
+        message: "No investor company found",
+      };
+    }
+    return {
+      status: 200,
+      message: "Investor company retrieved successfully.",
+      data: startups,
+    };
+  } catch (error) {
+    console.error("Error searching for investor:", error);
+    return {
+      status: 500,
+      message: "An error occurred while searching for investor.",
+    };
+  }
+};
