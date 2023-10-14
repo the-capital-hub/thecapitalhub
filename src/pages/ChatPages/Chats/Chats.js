@@ -195,7 +195,7 @@ const Chats = () => {
         {/*Right section chat settings */}
         {isSettingsOpen ? (
           <div className="right_section_wrapper">
-            <section className="right_section mt-3 me-3 ">
+            <section className="right_section mt-3 w-100 ">
               <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
             </section>
           </div>
