@@ -79,6 +79,9 @@ const API = Object.freeze({
   getExploreFilteredData: `${baseUrl}/users/explore`,
   searchInvestors: `${baseUrl}/investor/searchInvestors`,
   addUserAsInvestor: `${baseUrl}/users/addUserAsInvestor`,
+  updateCommunity: `${baseUrl}/community/updateCommunity`,
+  getUnAddedMembers: `${baseUrl}/community/getUnAddedMembers`,
+  addMembersToCommunity: `${baseUrl}/community/addMembersToCommunity`,
 });
 
 export default API;
