@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import { environment } from "../../../environments/environment";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { findChat, createChat } from "../../../Service/user";
 import CommunitiesContainer from "../../../components/Investor/ChatComponents/CommunitiesContainer";
 import ChatSettings from "../../../components/Investor/ChatComponents/ChatSettings/ChatSettings";
@@ -153,7 +153,9 @@ const Chats = () => {
   const renderMobieHeader = () => {
     return (
       <div className="mobile-nav border-bottom shadow-sm pb-2 px-2">
-        <img src={navBarLogo} alt="nav bar logo" />
+        <Link to="/">
+          <img src={navBarLogo} alt="nav bar logo" />
+        </Link>
         <div className="actions">
           <button
             className="btn btn-sm btn-light"
@@ -161,7 +163,7 @@ const Chats = () => {
               dispatch(resetChat());
             }}
           >
-            Messages
+            All Messages
           </button>
         </div>
       </div>
@@ -234,7 +236,7 @@ const Chats = () => {
         </div>
 
         {/* Main Chat section */}
-        <section className="main_section my-3 me-md-3">
+        <section className="main_section my-3 me-lg-3">
           {isMobileView && renderMobieHeader()}
 
           {isMobileView ? (
