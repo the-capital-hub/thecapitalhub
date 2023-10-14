@@ -77,9 +77,13 @@
     display: flex;
     justify-content: end;
 
-    transition: all 1000ms ease-in-out !important;
-    &.close-menu-Left {
-      top: 6.7rem;
+    transition: all 500ms ease-in-out !important;
+    &.close-btn-collapsed {
+      top: 20px;
+      height: 25px;
+      img {
+        height: 25px;
+      }
     }
   }
 
