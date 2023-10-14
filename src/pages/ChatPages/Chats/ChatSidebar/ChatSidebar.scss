@@ -1,5 +1,4 @@
 .chatsidebar_main_container {
-  margin-top: 0.7rem;
   border-radius: 30px;
   border: 1px solid #cfcfcf;
   background: #fff;
@@ -7,6 +6,10 @@
   height: auto;
   width: 100%;
   overflow: hidden;
+
+  @media (max-width: 820px) {
+    border-radius: 15px;
+  }
 
   .chatsidebar_content {
     display: flex;

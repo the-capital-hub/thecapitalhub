@@ -27,10 +27,18 @@ export const chatSlice = createSlice({
     setCommunityProfile: (state, action) => {
       state.communityProfile = action.payload;
     },
+    resetChat: (state) => {
+      state.chatId = initialState.chatId;
+      state.userId = initialState.userId;
+      state.isCommunitySelected = initialState.isCommunitySelected;
+      state.chatProfile = initialState.chatProfile;
+      state.communityProfile = initialState.communityProfile;
+    },
   },
 });
 
 export const {
+  resetChat,
   setChatId,
   setUserId,
   setIsCommuntySelected,

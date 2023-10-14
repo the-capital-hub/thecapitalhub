@@ -1,7 +1,7 @@
 import React from "react";
 import "./NavBar.scss";
 import searchIconBlack from "../../../Images/navbar/Search.svg";
-import Logo from "../../../Images/investorIcon/Logo.svg";
+import Logo from "../../../Images/investorIcon/new-logo.png";
 import NotificationIcon from "../../../Images/investorIcon/notification.svg";
 import YellowNotificationIcon from "../../../Images/investorIcon/YellowNotificationIcon.svg";
 import MessageIcon from "../../../Images/investorIcon/message.svg";
