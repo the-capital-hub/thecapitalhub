@@ -118,3 +118,43 @@ export const getCommunitySettings = async (communityId) => {
     };
   }
 }
+
+export const updateCommunity = async (communityId, updatedData) => {
+  try {
+    const community = await CommunityModel.findById(communityId);
+
+    if (!community) {
+      return {
+        status: 404,
+        message: 'Community not found',
+      };
+    }
+    if (updatedData.profileImage) {
+      const { url } = await cloudinary.uploader.upload(updatedData.profileImage, {
+        folder: `${process.env.CLOUDIANRY_FOLDER}/posts/images`,
+        format: 'webp',
+        unique_filename: true,
+      });
+      updatedData.profileImage = url;
+    }
+
+    community.communityName = updatedData.name || community.name;
+    community.description = updatedData.description || community.description;
+    community.about = updatedData.about || community.about;
+    community.members = updatedData.members || community.members;
+
+    await community.save();
+
+    return {
+      status: 200,
+      message: 'Community updated successfully',
+      data: community,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: 'An error occurred while updating the community',
+    };
+  }
+};

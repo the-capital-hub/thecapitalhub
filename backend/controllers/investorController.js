@@ -6,6 +6,7 @@ import {
   uploadLogo,
   addMyInterest,
   getOnePager,
+  getInvestorBySearch,
 } from "../services/investorService.js";
 
 //create Investor
@@ -111,6 +112,20 @@ export const getOnePagerController = async (req, res) => {
     res.status(500).send({
       status: 500,
       message: "An error occurred while fetching the onepager.",
+    });
+  }
+};
+
+export const getInvestorBySearchController = async (req, res) => {
+  try {
+    const { searchQuery } = req.params;
+    const response = await getInvestorBySearch(searchQuery);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while fetching investor.",
     });
   }
 };

@@ -77,6 +77,8 @@ const API = Object.freeze({
   getUnreadMessageCountInCommunities: `${baseUrl}/message/getUnreadMessageCountInCommunities`,
   getExploreFilters: `${baseUrl}/users/exploreFilters`,
   getExploreFilteredData: `${baseUrl}/users/explore`,
+  searchInvestors: `${baseUrl}/investor/searchInvestors`,
+  addUserAsInvestor: `${baseUrl}/users/addUserAsInvestor`,
 });
 
 export default API;
