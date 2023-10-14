@@ -33,7 +33,8 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
       })
       .catch((error) => {
         console.error("Error-->", error);
-      });
+      })
+      .finally(() => setChatkebabMenu(false));
   };
 
   const [user, setUser] = useState(null);
@@ -71,7 +72,7 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
 
   return (
     <>
-      <div className="chat_navbar_container">
+      <div className="chat_navbar_container position-relative">
         <div
           className="left"
           onClick={handleOpenSettingsClick}
@@ -82,7 +83,7 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
             className="rounded_img"
           />
           <div className="title_and_message">
-            <h5 className="name_title">
+            <h5 className="name_title text-capitalize">
               {user
                 ? `${user.firstName} ${user.lastName}`
                 : community?.communityName}
@@ -100,13 +101,13 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
             className="threedot"
             onClick={() => setChatkebabMenu(!chatkebabMenu)}
           />
+          {chatkebabMenu && (
+            <ul className="kebab_menu border rounded shadow-sm p-3">
+              <li onClick={handleClearChat}>Clear Chat</li>
+            </ul>
+          )}
         </div>
       </div>
-      {chatkebabMenu && (
-        <ul className="kebab_menu border rounded shadow-sm p-3">
-          <li onClick={handleClearChat}>Clear Chat</li>
-        </ul>
-      )}
     </>
   );
 };

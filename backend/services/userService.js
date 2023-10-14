@@ -385,6 +385,33 @@ export const addStartupToUser = async (userId, startUpId) => {
   }
 };
 
+export const addUserAsInvestor = async (userId, investorId) => {
+  try {
+    const user = await UserModel.findOneAndUpdate(
+      { _id: userId },
+      { $set: { investor: investorId } },
+      { new: true }
+    );
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found.",
+      };
+    }
+    return {
+      status: 200,
+      message: "Investor added to user successfully.",
+      data: user,
+    };
+  } catch (error) {
+    console.error("Error adding user as investor:", error);
+    return {
+      status: 500,
+      message: "An error occurred while adding user as investor.",
+    };
+  }
+};
+
 export const getExplore = async (filters) => {
   try {
     const {

@@ -248,9 +248,9 @@ const OnePager = () => {
                 />
               </div>
             </div>
-            <div className="right">
+            {/* <div className="right">
               <InvestNow page={"onePager"} />
-            </div>
+            </div> */}
           </div>
           <div className="buttons">
             <button onClick={handlePreviewPDF}>Preview</button>

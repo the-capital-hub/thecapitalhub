@@ -69,7 +69,16 @@ export const allPostsData = async (page, perPage) => {
     const allPosts = await PostModel.find()
       .populate({
         path: "user",
-        select: "firstName lastName designation profilePicture",
+        select: "firstName lastName designation profilePicture investor startUp",
+        populate: [{
+          path: "investor",
+          select: "companyName",
+        },
+        {
+          path: "startUp",
+          select: "company",
+        },
+        ],
       })
       .populate({
         path: "resharedPostId",
@@ -77,7 +86,7 @@ export const allPostsData = async (page, perPage) => {
         populate: {
           path: "user",
           select: "firstName lastName designation profilePicture",
-        },
+        }
       })
       .sort({ _id: -1 })
       .skip(skip)

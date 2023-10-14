@@ -9,7 +9,7 @@ import {
 } from "../../../../../Images/Investor/CompanyProfile";
 import "./CompanyStats.scss";
 
-export default function CompanyStats({colorCard}) {
+export default function CompanyStats({ colorCard }) {
   return (
     <div className="company__stats d-flex flex-column gap-4">
       <div className="stat__row d-flex flex-wrap gap-4 gap-lg-5">
@@ -19,7 +19,9 @@ export default function CompanyStats({colorCard}) {
         >
           <div className="d-flex flex-column gap-2 justify-content-center ps-2">
             <p className="small">Last Round Investment</p>
-            <p className="fw-semibold">₹ {colorCard.last_round_investment}</p>
+            <p className="fw-semibold">
+              ₹ {colorCard?.last_round_investment || ""}
+            </p>
           </div>
           <img src={About1} alt="statistics" style={{ width: "80px" }} />
         </div>
@@ -30,7 +32,7 @@ export default function CompanyStats({colorCard}) {
         >
           <div className="d-flex flex-column gap-2 justify-content-center ps-2">
             <p className="small">Total Investment</p>
-            <p className="fw-semibold">₹ {colorCard.total_investment}</p>
+            <p className="fw-semibold">₹ {colorCard?.total_investment || ""}</p>
           </div>
           <img src={About2} alt="statistics" style={{ width: "80px" }} />
         </div>
@@ -41,7 +43,7 @@ export default function CompanyStats({colorCard}) {
         >
           <div className="d-flex flex-column gap-2 justify-content-center ps-2">
             <p className="small">No. of Investors</p>
-            <p className="fw-semibold">{colorCard.no_of_investers}</p>
+            <p className="fw-semibold">{colorCard?.no_of_investers || ""}</p>
           </div>
           <img src={About3} alt="statistics" style={{ width: "80px" }} />
         </div>
@@ -53,7 +55,7 @@ export default function CompanyStats({colorCard}) {
           <div className="d-flex flex-column gap-2 justify-content-center ps-2">
             {/* <p className="small">Total Secured Loans Available</p> */}
             <p className="small">Fund Ask</p>
-            <p className="fw-semibold">₹ {colorCard.fund_ask}</p>
+            <p className="fw-semibold">₹ {colorCard?.fund_ask || ""}</p>
           </div>
           <img src={About4} alt="statistics" style={{ width: "80px" }} />
         </div>
@@ -68,7 +70,7 @@ export default function CompanyStats({colorCard}) {
           <div className="d-flex flex-column gap-2 justify-content-center ps-2">
             {/* <p className="small">Revenue</p> */}
             <p className="small">Valuation</p>
-            <p className="fw-semibold">₹{colorCard.valuation}</p>
+            <p className="fw-semibold">₹{colorCard?.valuation || ""}</p>
           </div>
           <img src={Revenue1} alt="statistics" style={{ width: "80px" }} />
         </div>
@@ -90,7 +92,7 @@ export default function CompanyStats({colorCard}) {
         >
           <div className="d-flex flex-column gap-2 justify-content-center ps-2">
             <p className="small">Raised Funds</p>
-            <p className="fw-semibold">₹ {colorCard.raised_funds}</p>
+            <p className="fw-semibold">₹ {colorCard?.raised_funds || ""}</p>
           </div>
           <img src={Revenue2} alt="statistics" style={{ width: "80px" }} />
         </div>

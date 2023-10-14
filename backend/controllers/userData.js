@@ -13,6 +13,7 @@ import {
   addEducation,
   addExperience,
   addStartupToUser,
+  addUserAsInvestor,
   getExplore,
   getExploreFilters,
 } from "../services/userService.js";
@@ -211,6 +212,21 @@ export const addStartupToUserController = async (req, res) => {
     res.status(500).send({
       status: 500,
       message: "An error occurred while adding startups to user.",
+    });
+  }
+};
+
+export const addUserAsInvestorController = async (req, res) => {
+  try {
+    const { userId, investorId } = req.body;
+    const response = await addUserAsInvestor(userId, investorId);
+    res.status(response.status).send(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while adding user as investor.",
     });
   }
 };

@@ -867,6 +867,33 @@ export const addStartUpToUser = async (userId, startUpId) => {
   }
 };
 
+export const searchInvestors = async (searchQuery) => {
+  try {
+    const response = await axiosInstance.get(
+      `${API.searchInvestors}/${searchQuery}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Error getting investor company details : ", error.message);
+  }
+};
+
+export const addUserAsInvestor = async (userId, investorId) => {
+  try {
+    const requestBody = {
+      userId,
+      investorId,
+    };
+    const response = await axiosInstance.patch(
+      `${API.addUserAsInvestor}`,
+      requestBody
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Error adding startup to user : ", error);
+  }
+};
+
 export const deleteDocument = async (docId) => {
   try {
     const response = await axiosInstance.delete(
@@ -935,6 +962,42 @@ export const fetchExploreFilteredResultsAPI = async (filtersObj) => {
     return response.data;
   } catch (error) {
     console.log("Error fetching filtered results", error);
+    throw error;
+  }
+};
+
+export const updateCommunity = async (communityId, updatedData) => {
+  try {
+    const response = await axiosInstance.patch(
+      `${API.updateCommunity}/${communityId}`, updatedData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+
+export const getUnAddedMembers = async (communityId, userId) => {
+  try {
+    const response = await axiosInstance.get(
+      `${API.getUnAddedMembers}/${communityId}/${userId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+
+export const addMembersToCommunity = async (communityId, memberIds) => {
+  try {
+    const response = await axiosInstance.patch(
+      `${API.addMembersToCommunity}/${communityId}`, {memberIds}
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
     throw error;
   }
 };

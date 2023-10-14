@@ -31,7 +31,7 @@ function PrivateRoute({ children, ...props }) {
   }
 
   if (isLoggedIn()) {
-    if (loggedInUser?.investor) {
+    if (loggedInUser.isInvestor === "true") {
       return <Navigate to="/investor/home" replace />;
     }
     return (

@@ -25,7 +25,7 @@ const Home = () => {
   };
 
   if (isLoggedIn()) {
-    if (loggedInUser.investor) {
+    if (loggedInUser.isInvestor === "true") {
       return <Navigate to="/investor/home" replace state={{ noreferer: true }} />;
     } else {
       return <Navigate to="/home" replace state={{ noreferer: true }} />;
