@@ -161,10 +161,10 @@ const userSchema = new Schema(
       unique: true,
       required: true,
     },
-    // isInvestor: {
-    //   type: String,
-    //   default: false,
-    // },
+    isInvestor: {
+      type: String,
+      default: false,
+    },
   },
   {
     timestamps: true,
