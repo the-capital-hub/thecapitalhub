@@ -70,6 +70,15 @@ export const allPostsData = async (page, perPage) => {
       .populate({
         path: "user",
         select: "firstName lastName designation profilePicture investor startUp",
+        populate: [{
+          path: "investor",
+          select: "companyName",
+        },
+        {
+          path: "startUp",
+          select: "company",
+        },
+        ],
       })
       .populate({
         path: "resharedPostId",
@@ -77,22 +86,12 @@ export const allPostsData = async (page, perPage) => {
         populate: {
           path: "user",
           select: "firstName lastName designation profilePicture",
-        },
+        }
       })
       .sort({ _id: -1 })
       .skip(skip)
       .limit(perPage);
-    for (const post of allPosts) {
-      const userId = post.user._id;
-      let user = "";
-      if (post.user.investor) {
-        user = await UserModel.findById(userId).populate("investor");
-        post.user.companyName = user.investor.companyName;
-      } else {
-        user = await UserModel.findById(userId).populate("startUp");
-        post.user.companyName = user.startUp.company;
-      }
-    }
+
     return allPosts;
   } catch (error) {
     throw new Error("Error fetching all posts");
