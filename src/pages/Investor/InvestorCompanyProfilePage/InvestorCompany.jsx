@@ -16,6 +16,7 @@ import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
 import {
   loginSuccess,
 } from "../../../Store/features/user/userSlice";
+import InvestorAfterSuccessPopUp from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
 
 export default function CompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -28,12 +29,14 @@ export default function CompanyProfilePage() {
   const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     if (loggedInUser?.investor) {
       getInvestorById(loggedInUser.investor).then(({ data }) => {
         setCompanyData(data);
+        setLoading(false);
       });
     }
-  }, []);
+  }, [loggedInUser.investor]);
 
   const handleSearchInputChange = (e) => {
     const newValue = e.target.value;
@@ -211,7 +214,7 @@ export default function CompanyProfilePage() {
             )
           ) : (
             <div className="mx-auto w-100 bg-white rounded-5 p-5 d-flex justify-content-center min-vh-100">
-              <div class="spinner-grow orange" role="status">
+              <div class="spinner-grow yellow" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>
             </div>
@@ -222,6 +225,13 @@ export default function CompanyProfilePage() {
           <RecommendationCard />
           <NewsCorner />
         </div>
+        {showSuccess && (
+          <InvestorAfterSuccessPopUp
+            withoutOkButton
+            onClose={() => setShowSuccess(!showSuccess)}
+            successText="Company Added Successfully"
+          />
+        )}
       </div>
     </MaxWidthWrapper>
   );

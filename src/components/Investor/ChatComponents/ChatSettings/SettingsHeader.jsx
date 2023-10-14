@@ -3,12 +3,14 @@ import IconClose from "../../SvgIcons/IconClose";
 import Default from "../../../../Images/Chat/default-user-avatar.webp";
 import IconVideo from "../../SvgIcons/IconVideo";
 import IconCall from "../../SvgIcons/IconCall";
+import IconEdit from "../../SvgIcons/IconEdit";
 import { useSelector } from "react-redux";
 
 export default function SettingsHeader({ setIsSettingsOpen }) {
   const chatProfile = useSelector((state) => state.chat.chatProfile);
   const communityProfile = useSelector((state) => state.chat.communityProfile);
   const isCommunitySelected = useSelector((state) => state.chat.isCommunitySelected);
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   return (
     <div className="settings_header d-flex flex-column align-items-center gap-1 border-bottom pb-4">
@@ -44,7 +46,17 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
           {isCommunitySelected ? " " : chatProfile?.user?.designation}
         </p>
       </div>
-
+      {isCommunitySelected && communityProfile?.community?.adminId === loggedInUser._id &&
+          <button
+            className="btn text-capitalize border-0 p-0 ms-auto"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#chatSettingsOffcanvas"
+            ariaControls="chatSettingsOffcanvas"
+          >
+            <IconEdit />
+          </button>
+        }
       {/* Action Icons */}
       {/* <div className="settings_user_actions d-flex gap-2">
         <div

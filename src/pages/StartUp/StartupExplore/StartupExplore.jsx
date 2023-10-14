@@ -52,6 +52,7 @@ export default function StartupExplore() {
 
   useEffect(() => {
     fetchFilters();
+    onSubmitFilters();
   }, [activeTab]);
 
   const handleOnChange = (e) => {
@@ -72,7 +73,7 @@ export default function StartupExplore() {
   };
 
   const onSubmitFilters = async (e) => {
-    e.preventDefault();
+    e?.preventDefault();
     setLoading(true);
     try {
       const { data } = await fetchExploreFilteredResultsAPI({
@@ -80,11 +81,38 @@ export default function StartupExplore() {
         ...filters,
       });
       setFilteredData(data);
-      setFilters(null);
     } catch (error) {
       console.log("Error fetching filtered results: ", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchInitialData = async () => {
+    setFilters(null);
+    setLoading(true);
+    try {
+      const { data } = await fetchExploreFilteredResultsAPI({
+        type: activeTab,
+      });
+      setFilteredData(data);
+    } catch (error) {
+      console.log("Error fetching initial filtered results: ", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case "Startup":
+        return <CompanyProfileList isStartup data={filteredData} />;
+      case "Founder":
+        return <p>founder</p>;
+      case "Investor":
+        return <p>Investor</p>;
+      default:
+        return null;
     }
   };
 
@@ -137,9 +165,9 @@ export default function StartupExplore() {
             {filters && (
               <button
                 className={`btn-capital-small py-3 px-3 ms-auto`}
-                onClick={() => setFilters(null)}
+                onClick={fetchInitialData}
               >
-                Remove Filters
+                Show All
               </button>
             )}
           </div>
@@ -237,22 +265,10 @@ export default function StartupExplore() {
                   No {activeTab} found
                 </div>
               ) : (
-                <>
-                  {activeTab === "Startup" && (
-                    <CompanyProfileList isStartup data={filteredData} />
-                  )}
-                  {(activeTab === "Founder" || activeTab === "Investor") && (
-                    <PersonProfileList
-                      theme="startup"
-                      short={true}
-                      data={filteredData}
-                    />
-                  )}
-                </>
+                renderTabContent()
               )}
             </>
           )}
-          {/* <PersonProfileList theme="startup" short={true} /> */}
         </div>
       </section>
     </MaxWidthWrapper>

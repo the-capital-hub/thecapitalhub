@@ -965,3 +965,39 @@ export const fetchExploreFilteredResultsAPI = async (filtersObj) => {
     throw error;
   }
 };
+
+export const updateCommunity = async (communityId, updatedData) => {
+  try {
+    const response = await axiosInstance.patch(
+      `${API.updateCommunity}/${communityId}`, updatedData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+
+export const getUnAddedMembers = async (communityId, userId) => {
+  try {
+    const response = await axiosInstance.get(
+      `${API.getUnAddedMembers}/${communityId}/${userId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+
+export const addMembersToCommunity = async (communityId, memberIds) => {
+  try {
+    const response = await axiosInstance.patch(
+      `${API.addMembersToCommunity}/${communityId}`, {memberIds}
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};

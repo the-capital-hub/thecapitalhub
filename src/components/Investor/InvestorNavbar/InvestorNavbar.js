@@ -1,6 +1,6 @@
 import "./investorNavbar.scss";
 import searchIconBlack from "../../../Images/navbar/Search.svg";
-import Logo from "../../../Images/investorIcon/Logo.svg";
+import Logo from "../../../Images/investorIcon/new-logo.png";
 import NotificationIcon from "../../../Images/investorIcon/notification.svg";
 import MessageIcon from "../../../Images/investorIcon/message.svg";
 import OrangeNotificationIcon from "../../../Images/investorIcon/OrangeNotificationIcon.svg";

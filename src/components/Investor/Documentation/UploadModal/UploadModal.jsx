@@ -12,40 +12,37 @@ const UploadModal = ({ onCancel }) => {
   // Fetch loggedInUser from global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
-  // State for folder
   const [folder, setFolder] = useState("pitchdeck");
-  // State for files
   const [files, setFiles] = useState([]);
-  const [filesUploadedCount, setFilesUploadedCount] = useState(0);
   const [loading, setLoading] = useState(false);
-  const fileInputRef = useRef(null);
-
-  // State for popup
+  const [uploadProgress, setUploadProgress] = useState(0); // Overall upload progress
   const [showPopUp, setShowPopUp] = useState(false);
+  const fileInputRef = useRef(null);
 
   const handleClosePopup = () => {
     setShowPopUp(false);
     onCancel(false);
   };
 
-  // Handle File select
   const handleFileSelect = (e) => {
-    setFiles(e.target.files);
+    setFiles([...e.target.files]);
   };
 
-  // Handle Remove file
-  const handleRemoveFile = (e, index) => {
-    const filesCopy = [...files].toSpliced(index, 1);
-    setFiles([...filesCopy]);
+  const handleRemoveFile = (index) => {
+    const filesCopy = [...files];
+    filesCopy.splice(index, 1);
+    setFiles(filesCopy);
   };
 
-  // Handle Upload
   const handlePdfUploadClick = async () => {
     if (files.length === 0) {
       return;
     }
+
     setLoading(true);
-    for (const file of files) {
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
       const timestamp = Date.now();
       const fileName = `${timestamp}_${file.name}`;
       const params = {
@@ -53,21 +50,33 @@ const UploadModal = ({ onCancel }) => {
         Key: `documents/${fileName}`,
         Body: file,
       };
+
+      const uploadRequest = s3.upload(params);
+
+      uploadRequest.on("httpUploadProgress", (progress) => {
+        const percent = Math.round((progress.loaded / progress.total) * 100);
+        setUploadProgress(percent);
+      });
+
       try {
-        const res = await s3.upload(params).promise();
-        console.log("Result:");
+        const res = await uploadRequest.promise();
+
         const requestBody = {
           fileUrl: res.Location,
           fileName: file.name,
           userId: loggedInUser._id,
           folderName: folder,
         };
+
         await axios
           .post(`${baseUrl}/documentation/uploadDocument`, requestBody)
           .then((response) => {
-            console.log("response", response);
             if (response.status === 200) {
-              setFilesUploadedCount(filesUploadedCount + 1);
+              setUploadProgress(0); // Reset progress for the current file
+              if (i < files.length - 1) {
+                // If there are more files to upload, show progress for the next file
+                setUploadProgress(0);
+              }
             }
           })
           .catch((error) => {
@@ -78,10 +87,12 @@ const UploadModal = ({ onCancel }) => {
         alert("Failed to Upload files");
       }
     }
+
     setLoading(false);
     setShowPopUp(true);
     setFiles([]);
   };
+
 
   // Render File list
   const renderFileList = () => (
@@ -148,6 +159,20 @@ const UploadModal = ({ onCancel }) => {
                 Upload
               </button>
             </>
+          )}
+          {uploadProgress > 0 && uploadProgress < 100 && (
+            <div className="progress mt-3">
+              <div
+                className="progress-bar"
+                role="progressbar"
+                style={{ width: `${uploadProgress}%` }}
+                aria-valuenow={uploadProgress}
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                {uploadProgress}% Complete
+              </div>
+            </div>
           )}
           {loading &&
             <div class="d-flex justify-content-center my-4">
