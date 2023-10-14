@@ -56,8 +56,8 @@ function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false })
     <div className="save_post_popup">
       <div className="popup">
         <div className="popup-content">
-          <div className='selection_input'   >
-            <h4 className="mb-5">
+          <div className='selection_input d-flex flex-column align-items-center gap-3'   >
+            <h4>
               Select the playlist in which to save the post.
             </h4>
             <select className='collection_selecter' value={selectedOption} onChange={handleOptionChange}>
@@ -71,11 +71,12 @@ function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false })
 
             </select >
             <input
+            className='w-100'
               type="text"
               placeholder="Create new collection"
               onChange={handleInputChange}
             />
-            <button onClick={handleSavePost} style={{ background: buttonColor, color: buttonText }} className="ok_button" >
+            <button onClick={handleSavePost} style={{ background: buttonColor, color: buttonText }} className="ok_button py-2 px-5" >
               Save
             </button>
             {
