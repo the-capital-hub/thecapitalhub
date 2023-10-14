@@ -4,25 +4,35 @@ import {
   Calendar,
   CircleArrow,
 } from "../../../../Images/Investor/CompanyProfile";
+import DefaultAvatar from "../../../../Images/Chat/default-user-avatar.webp";
 import IconCard from "../../../NewInvestor/CompanyProfileComponents/shared-components/icon-card/IconCard";
 
-export default function PersonInfo() {
+export default function PersonInfo({
+  fullName,
+  designation,
+  companyName,
+  profilePicture,
+  location,
+  lastFunding,
+  foundedYear,
+}) {
   return (
     <div className="person_info">
-      <div className="company__header d-flex flex-column flex-lg-row gap-2 ">
-        <div className="company__image">
+      <div className="person__profile__header d-flex flex-column flex-lg-row gap-3 ">
+        <div className="person__profile__image border">
           <img
-            src={logo}
-            alt={name}
+            src={profilePicture || DefaultAvatar}
+            alt={fullName}
             style={{ width: "110px", height: "110px" }}
             loading="lazy"
           />
         </div>
 
-        <div className="company__details d-flex flex-column gap-4 justify-content-around">
-          <div className="company__headings">
-            <h3 className="company__name">{name}</h3>
-            <p className="company__type">{tagline || " "}</p>
+        <div className="person__profile__details d-flex flex-column gap-4 justify-content-around">
+          <div className="person__profile__headings d-flex flex-column gap-1">
+            <h5 className="person__profile__name">{fullName}</h5>
+            <p className="person__profile__type">{designation}</p>
+            <p className="person__profile__type">{companyName}</p>
           </div>
           <div className="icon__details d-flex flex-column flex-md-row gap-4 align-items-start">
             <IconCard
