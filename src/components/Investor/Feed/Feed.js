@@ -49,7 +49,7 @@ const Feed = () => {
         console.log(err);
       });
   };
-
+  console.log(allPosts)
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const showPopup = queryParams.get("showPopup") === "true";
@@ -139,6 +139,8 @@ const Feed = () => {
                       designation,
                       profilePicture,
                       _id: userId,
+                      startUp,
+                      investor,
                     },
                     video,
                     image,
@@ -154,6 +156,8 @@ const Feed = () => {
                       userId={userId}
                       postId={_id}
                       designation={designation}
+                      startUpCompanyName ={startUp }
+                      investorCompanyName ={investor }
                       profilePicture={profilePicture}
                       description={description}
                       firstName={firstName}
