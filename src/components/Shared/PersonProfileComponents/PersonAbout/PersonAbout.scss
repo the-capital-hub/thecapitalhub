@@ -1,0 +1,23 @@
+.person__about {
+  h6 {
+    flex: 0 0 1ch;
+
+    @media (min-width: 992px) {
+      flex: 0 0 18ch;
+    }
+  }
+}
+
+.name_number {
+  width: 60%;
+  .personal_info_grid {
+    p {
+      font-weight: 400;
+      color: rgba(113, 113, 113, 1);
+    }
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}

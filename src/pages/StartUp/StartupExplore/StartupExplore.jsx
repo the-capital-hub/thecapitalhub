@@ -11,6 +11,7 @@ import {
   fetchExploreFilteredResultsAPI,
   fetchExploreFiltersAPI,
 } from "../../../Service/user";
+import PersonProfileList from "../../../components/Shared/PersonProfileComponents/PersonProfileList";
 
 const sectorOptions = [
   "FMCG",
@@ -107,14 +108,27 @@ export default function StartupExplore() {
       case "Startup":
         return <CompanyProfileList isStartup data={filteredData} />;
       case "Founder":
-        return <p>founder</p>;
+        return (
+          <PersonProfileList
+            theme={"startup"}
+            short={true}
+            data={filteredData}
+          />
+        );
       case "Investor":
-        return <p>Investor</p>;
+        return (
+          <PersonProfileList
+            theme={"startup"}
+            short={true}
+            data={filteredData}
+          />
+        );
       default:
         return null;
     }
   };
 
+  console.log("from explore", filteredData);
   return (
     <MaxWidthWrapper>
       <section className="startup_explore_wrapper d-flex flex-column gap-5 my-5">
