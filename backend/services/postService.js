@@ -70,6 +70,15 @@ export const allPostsData = async (page, perPage) => {
       .populate({
         path: "user",
         select: "firstName lastName designation profilePicture investor startUp",
+        populate: [{
+          path: "investor",
+          select: "companyName",
+        },
+        {
+          path: "startUp",
+          select: "company",
+        },
+        ],
       })
       .populate({
         path: "resharedPostId",
@@ -77,23 +86,12 @@ export const allPostsData = async (page, perPage) => {
         populate: {
           path: "user",
           select: "firstName lastName designation profilePicture",
-        },
+        }
       })
       .sort({ _id: -1 })
       .skip(skip)
       .limit(perPage);
-    await Promise.all(allPosts.map(async (post, index) => {
-      const userId = post.user._id;
-      let user = null;
-      if (post.user.investor) {
-        user = await UserModel.findById(userId).populate("investor");
-        allPosts[index].user.companyName = user.investor.companyName;
-      } else {
-        user = await UserModel.findById(userId).populate("startUp");
-        allPosts[index].user.companyName = user.startUp.company;
-      }
-      return post;
-    }));
+
     return allPosts;
   } catch (error) {
     throw new Error("Error fetching all posts");
