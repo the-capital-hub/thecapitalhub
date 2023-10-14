@@ -64,7 +64,11 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   }
 
   return (
-    <div className={`startup_sidebar ${sidebarCollapsed ? "collapsed" : ""}`}>
+    <div
+      className={`startup_sidebar ${sidebarCollapsed ? "collapsed" : ""}`}
+      onMouseLeave={() => setSidebarCollapsed(true)}
+      onMouseEnter={() => setSidebarCollapsed(false)}
+    >
       <div
         className={`close-menu ${!sidebarCollapsed && "close-btn-collapsed"}`}
         onClick={menuIconClick}
