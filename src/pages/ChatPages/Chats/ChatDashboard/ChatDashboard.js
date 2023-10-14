@@ -22,8 +22,7 @@ import Linkify from "react-linkify";
 import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import ChatDeletePopup from "../ChatDeletePopup/ChatDeletePopup";
 import ChatDropDownMenu from "../ChatDropDownMenu/ChatDropDownMenu";
-import {s3} from "../../../../Service/awsConfig";
-
+import { s3 } from "../../../../Service/awsConfig";
 
 const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
   // Fetch global state
@@ -336,17 +335,15 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                           onMouseEnter={handleMouseEnter}
                           onMouseLeave={handleMouseLeave}
                         >
+                          <ChatDropDownMenu
+                            onClicks={handleSetDeletePopup}
+                            idBack={handleIdBack}
+                            id={message?._id}
+                            showMenu={messageMenu}
+                          />
 
-                            <ChatDropDownMenu
-                            
-                              onClicks={handleSetDeletePopup}
-                              idBack={handleIdBack}
-                              id={message?._id}
-                              showMenu={messageMenu}
-                            />
-                    
                           <Linkify>
-                            <p className="text-break">{message.text} </p>
+                            <p className="text-break m-0">{message.text} </p>
                           </Linkify>
                         </div>
                       )}
@@ -408,7 +405,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                       {message.text !== "" && (
                         <div className="message_container text-break">
                           <Linkify>
-                            <p className="text-break">{message.text}</p>
+                            <p className="text-break m-0">{message.text}</p>
                           </Linkify>
                         </div>
                       )}
