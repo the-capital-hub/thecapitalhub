@@ -16,6 +16,8 @@ const UploadModal = ({ onCancel }) => {
   const [folder, setFolder] = useState("pitchdeck");
   // State for files
   const [files, setFiles] = useState([]);
+  const [filesUploadedCount, setFilesUploadedCount] = useState(0);
+  const [loading, setLoading] = useState(false);
   const fileInputRef = useRef(null);
 
   // State for popup
@@ -39,9 +41,11 @@ const UploadModal = ({ onCancel }) => {
 
   // Handle Upload
   const handlePdfUploadClick = async () => {
-    console.log("Test", process.env.AWS_ACCESS_KEY);
-    if (fileInputRef.current.files.length > 0) {
-      const file = fileInputRef.current.files[0];
+    if (files.length === 0) {
+      return;
+    }
+    setLoading(true);
+    for (const file of files) {
       const timestamp = Date.now();
       const fileName = `${timestamp}_${file.name}`;
       const params = {
@@ -49,7 +53,6 @@ const UploadModal = ({ onCancel }) => {
         Key: `documents/${fileName}`,
         Body: file,
       };
-
       try {
         const res = await s3.upload(params).promise();
         console.log("Result:");
@@ -64,7 +67,7 @@ const UploadModal = ({ onCancel }) => {
           .then((response) => {
             console.log("response", response);
             if (response.status === 200) {
-              setShowPopUp(true);
+              setFilesUploadedCount(filesUploadedCount + 1);
             }
           })
           .catch((error) => {
@@ -72,8 +75,12 @@ const UploadModal = ({ onCancel }) => {
           });
       } catch (error) {
         console.error("Error uploading file to S3:", error);
+        alert("Failed to Upload files");
       }
     }
+    setLoading(false);
+    setShowPopUp(true);
+    setFiles([]);
   };
 
   // Render File list
@@ -142,9 +149,16 @@ const UploadModal = ({ onCancel }) => {
               </button>
             </>
           )}
+          {loading &&
+            <div class="d-flex justify-content-center my-4">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          }
         </div>
       </div>
-      {}
+      { }
       {showPopUp && (
         <AfterSuccessPopUp savedFile={true} onClose={handleClosePopup} />
       )}
