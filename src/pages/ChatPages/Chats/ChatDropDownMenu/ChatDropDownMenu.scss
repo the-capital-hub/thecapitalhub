@@ -1,38 +1,38 @@
-.chatDropDownMenu{
-position: relative;
-width: 100%;
-margin: 0;
-padding: 0;
-button{
+.chatDropDownMenu {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  button {
     position: absolute;
     right: -16px;
     top: -11px;
-        padding: 0;
+    padding: 0;
     margin: 0;
-    .down-arrow{
-        width: 15px;
-        height: 15px;
-      } 
-}
-.delete-div{
+    .down-arrow {
+      width: 15px;
+      height: 15px;
+    }
+  }
+  .delete-message {
     position: absolute;
     top: 8px;
     right: -47px;
-    background-color: #fd5901;
+    background-color: rgb(255, 255, 255);
     border-radius: 5px;
-    color: white;
+    color: #fd5901;
     display: flex;
     justify-content: center;
     align-items: center;
-    h1{
-        font-size: 15px;
-        padding-right: 5px;
-        padding-left: 5px;
-        padding-top: 5px;
+    padding: 5px 10px;
+    h1 {
+      font-size: 15px;
+      padding-right: 5px;
+      padding-left: 5px;
+      padding-top: 5px;
     }
-}
-h1{
+  }
+  h1 {
     cursor: pointer;
-}
-    
+  }
 }
