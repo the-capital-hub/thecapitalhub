@@ -45,3 +45,36 @@
     }
   }
 }
+
+.orange_button {
+  border-radius: 5px;
+  background: #fd5901;
+  border: 1px solid #fd5901;
+  padding: 8px 25px;
+  width: auto;
+  font-size: 14px;
+  color: white;
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &.investor {
+    background: #d3f36b;
+    border: 1px solid #d3f36b;
+    color: black;
+  }
+}
+
+.cancel_button {
+  border-radius: 5px;
+  background: #e9e9e9;
+  border: 1px solid #e9e9e9;
+  padding: 8px 25px;
+  width: auto;
+  font-size: 14px;
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
