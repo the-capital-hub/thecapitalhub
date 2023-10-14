@@ -23,7 +23,7 @@ export default function Milestones({ headingClass, containerClass, theme }) {
     },
     {
       milestone: "Achieved First Revenue",
-      text: "₹ 10 M",
+      text: "",
       badge: MockFundsBadge,
     },
   ];
@@ -37,7 +37,7 @@ export default function Milestones({ headingClass, containerClass, theme }) {
         <Link className={`see__more align-self-end ${theme}`}>See more</Link>
       </div>
       <div
-        className={`milestone__cards__container d-flex align-items-center gap-5 pb-3 ${theme}`}
+        className={`milestone__cards__container d-flex align-items-stretch gap-5 pb-3 ${theme}`}
       >
         {companyMilestones.map((mile, index) => {
           return (
