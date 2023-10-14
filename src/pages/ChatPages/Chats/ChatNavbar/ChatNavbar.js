@@ -83,7 +83,7 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
             className="rounded_img"
           />
           <div className="title_and_message">
-            <h5 className="name_title">
+            <h5 className="name_title text-capitalize">
               {user
                 ? `${user.firstName} ${user.lastName}`
                 : community?.communityName}

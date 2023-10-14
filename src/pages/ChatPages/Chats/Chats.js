@@ -20,13 +20,7 @@ import {
 } from "../../../Store/features/chat/chatSlice";
 import backIcon from "../../../Images/Chat/BackIcon.svg";
 import navBarLogo from "../../../Images/investorIcon/Logo.svg";
-
 import selectAChatIcon from "../../../Images/Chat/selectAChat.png";
-import {
-  OffcanvasBSBody,
-  OffcanvasBSContainer,
-  OffcanvasBSHeader,
-} from "../../../components/PopUp/OffcanvasBS";
 
 const Chats = () => {
   // search params
@@ -159,9 +153,7 @@ const Chats = () => {
         <div className="actions">
           <button
             className="btn btn-sm btn-light"
-            onClick={() => {
-              dispatch(resetChat());
-            }}
+            onClick={() => dispatch(resetChat())}
           >
             All Messages
           </button>
