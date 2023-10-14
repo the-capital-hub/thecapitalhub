@@ -64,11 +64,16 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   }
 
   return (
-    <div
-      className={`container sidebar_container ${
-        sidebarCollapsed ? "collapsed" : ""
-      }`}
-    >
+    <div className={`startup_sidebar ${sidebarCollapsed ? "collapsed" : ""}`}>
+      {sidebarCollapsed ? (
+        <div className="close-menu" onClick={menuIconClick}>
+          <img className="close-menu-Right" src={ArrowRight} alt="image" />
+        </div>
+      ) : (
+        <div className="close-menu" onClick={menuIconClick}>
+          <img className="close-menu-Left" src={ArrowLeft} alt="image" />
+        </div>
+      )}
       <div id="header">
         <ProSidebar collapsed={sidebarCollapsed}>
           <SidebarHeader>
@@ -105,13 +110,6 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   </h3>
                   <h4>{loggedInUser?.email}</h4>
                 </>
-              )}
-            </div>
-            <div className="closemenu" onClick={menuIconClick}>
-              {sidebarCollapsed ? (
-                <img className="closemenu-Right" src={ArrowRight} alt="image" />
-              ) : (
-                <img className="closemenu-Left" src={ArrowLeft} alt="image" />
               )}
             </div>
           </SidebarHeader>
