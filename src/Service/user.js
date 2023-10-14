@@ -965,3 +965,15 @@ export const fetchExploreFilteredResultsAPI = async (filtersObj) => {
     throw error;
   }
 };
+
+export const updateCommunity = async (communityId, updatedData) => {
+  try {
+    const response = await axiosInstance.patch(
+      `${API.updateCommunity}/${communityId}`, updatedData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};

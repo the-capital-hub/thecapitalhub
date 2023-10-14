@@ -4,7 +4,9 @@ import { useSelector } from "react-redux";
 import IconEdit from "../../SvgIcons/IconEdit";
 
 export default function SettingsAbout() {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const chatProfile = useSelector((state) => state.chat.chatProfile);
+  const communityProfile = useSelector((state) => state.chat.communityProfile);
   const isCommunitySelected = useSelector(
     (state) => state.chat.isCommunitySelected
   );
@@ -24,19 +26,22 @@ export default function SettingsAbout() {
           ABOUT
         </p>
         {/* Edit button - Show only to admin */}
-        <button
-          className="btn text-capitalize border-0 p-0 ms-auto"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#chatSettingsOffcanvas"
-          ariaControls="chatSettingsOffcanvas"
-        >
-          <IconEdit />
-        </button>
+        {isCommunitySelected && communityProfile?.community?.adminId === loggedInUser._id &&
+          <button
+            className="btn text-capitalize border-0 p-0 ms-auto"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#chatSettingsOffcanvas"
+            ariaControls="chatSettingsOffcanvas"
+          >
+            <IconEdit />
+          </button>
+        }
+
       </div>
 
       <p className="m-0" style={{ fontWeight: "400", fontSize: "16px" }}>
-        {/* I’m a UI/UX designer and i love the design and also create a good design */}
+        {communityProfile?.community?.about}
 
         {isCommunitySelected ? "" : chatProfile?.user?.bio || "No About"}
       </p>

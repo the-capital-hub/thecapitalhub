@@ -4,6 +4,7 @@ import {
   getAllCommunitiesByUserId,
   getCommunitySettings,
   updateCommunity,
+  exitCommunity,
 } from "../services/communityService.js";
 
 export const createCommunityController = async (req, res) => {
@@ -72,6 +73,21 @@ export const updateCommunityController = async (req, res) => {
     return res.status(500).send({
       status: 500,
       message: "An error occurred while updating the community.",
+    });
+  }
+};
+
+
+export const exitCommunityController = async (req, res) => {
+  try {
+    const { communityId, userId } = req.params;
+    const response = await exitCommunity(userId, communityId);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while exiting the community.",
     });
   }
 };
