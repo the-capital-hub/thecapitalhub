@@ -26,7 +26,7 @@ export default function SettingsAbout() {
           ABOUT
         </p>
         {/* Edit button - Show only to admin */}
-        {isCommunitySelected && communityProfile?.community?.adminId === loggedInUser._id &&
+        {/* {isCommunitySelected && communityProfile?.community?.adminId === loggedInUser._id &&
           <button
             className="btn text-capitalize border-0 p-0 ms-auto"
             type="button"
@@ -36,7 +36,7 @@ export default function SettingsAbout() {
           >
             <IconEdit />
           </button>
-        }
+        } */}
 
       </div>
 

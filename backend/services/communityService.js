@@ -1,7 +1,7 @@
 import { CommunityModel } from "../models/Community.js";
 import { cloudinary } from "../utils/uploadImage";
 import { MessageModel } from "../models/Message.js";
-import { ConnectionModel } from "../models/Connection.js";
+import { UserModel } from "../models/User.js";
 
 export const createCommunity = async (communitydata) => {
   try {
@@ -191,6 +191,70 @@ export const exitCommunity = async (userId, communityId) => {
     return {
       status: 500,
       message: "An error occurred while exiting the community",
+    };
+  }
+};
+
+export const getUnAddedMembers = async (userId, communityId) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found",
+      };
+    }
+    const community = await CommunityModel.findById(communityId);
+    if (!community) {
+      return {
+        status: 404,
+        message: "Community not found",
+      };
+    }
+    const userConnections = user.connections;
+    const unAddedMembers = userConnections.filter(
+      (connectionId) => !community.members.includes(connectionId)
+    );
+    const unAddedMembersInfo = await UserModel.find({
+      _id: { $in: unAddedMembers },
+    }).select("firstName lastName profilePicture");
+
+    return {
+      status: 200,
+      message: "Unadded members retrieved successfully",
+      data: unAddedMembersInfo,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while retrieving unadded members",
+      data: [],
+    };
+  }
+};
+
+export const addMembersToCommunity = async (communityId, memberIds) => {
+  try {
+    const community = await CommunityModel.findById(communityId);
+    if (!community) {
+      return {
+        status: 404,
+        message: "Community not found",
+      };
+    }
+    community.members = [...new Set([...community.members, ...memberIds])];
+    await community.save();
+    return {
+      status: 200,
+      message: "Members added to the community successfully",
+      data: community,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while adding members to the community",
     };
   }
 };
