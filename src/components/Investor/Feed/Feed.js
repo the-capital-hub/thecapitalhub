@@ -49,7 +49,6 @@ const Feed = () => {
         console.log(err);
       });
   };
-
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const showPopup = queryParams.get("showPopup") === "true";
@@ -139,6 +138,7 @@ const Feed = () => {
                       designation,
                       profilePicture,
                       _id: userId,
+                      companyName,
                     },
                     video,
                     image,
@@ -154,6 +154,7 @@ const Feed = () => {
                       userId={userId}
                       postId={_id}
                       designation={designation}
+                      companyName ={companyName }
                       profilePicture={profilePicture}
                       description={description}
                       firstName={firstName}

@@ -58,6 +58,7 @@ const FeedPostCard = ({
   createdAt,
   profilePicture,
   designation,
+  companyName ,
   likes,
   userId,
   fetchAllPosts,
@@ -404,7 +405,7 @@ const FeedPostCard = ({
                     }}
                   >
                     <img src={HomeIcon} alt="logo" />
-                    {designation}, {loggedInUser?.startUp?.company}
+                    {designation}, {companyName}
                   </span>
                   <span
                     style={{
