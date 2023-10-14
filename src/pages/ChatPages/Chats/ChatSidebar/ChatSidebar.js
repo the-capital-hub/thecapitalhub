@@ -105,7 +105,6 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
         console.error("Error-->", error);
       });
   };
-  
 
   const handleGetUnreadMessageCount = (chatId) => {
     getUnreadMessageCount(chatId, loggedInUser._id)
@@ -269,7 +268,7 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
                           className="rounded_img"
                         />
                         <div className="title_and_message">
-                          <h5 className="name_title">
+                          <h5 className="name_title text-capitalize">
                             {member.firstName} {member.lastName}
                           </h5>
                           <h5 className="message_title">

@@ -11,6 +11,10 @@
   display: flex;
   flex-direction: column;
 
+  @media (max-width: 820px) {
+    border-radius: 15px;
+  }
+
   .name_title {
     color: #000;
     font-family: Poppins;
@@ -201,7 +205,6 @@
             margin-top: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
           }
-          
         }
       }
     }
@@ -209,7 +212,7 @@
 
   .chat_input_section {
     padding-bottom: 20px;
-    position: absolute;
+    // position: absolute;
     bottom: 0px;
     width: 100%;
 
@@ -299,13 +302,14 @@
             right: 10px;
             border-radius: 10px;
             background: #a7a7a7;
-            // max-width: 200px;
-            width: auto;
+            max-width: 50vw;
+            width: max-content;
 
             display: flex;
+            justify-content: space-around;
             gap: 10px;
             padding: 10px;
-            // flex-wrap: wrap;
+            flex-wrap: wrap;
 
             cursor: default;
 
@@ -331,13 +335,14 @@
       }
     }
   }
-  .popup-close-button , .popup-ok_button{
+  .popup-close-button,
+  .popup-ok_button {
     // width: 20%;
     height: 30px;
     flex-shrink: 0;
     border-radius: 10px;
-    background: #FD5901;
-    color: #FFF;
+    background: #fd5901;
+    color: #fff;
     text-align: center;
     font-family: Poppins;
     font-size: 14px;
