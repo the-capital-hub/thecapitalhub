@@ -23,8 +23,13 @@ import ChatDeletePopup from "../ChatDeletePopup/ChatDeletePopup";
 import ChatDropDownMenu from "../ChatDropDownMenu/ChatDropDownMenu";
 import { s3 } from "../../../../Service/awsConfig";
 
-
-const CommunityDashboard = ({ setSendMessage, recieveMessage, cleared, isRead, setIsRead }) => {
+const CommunityDashboard = ({
+  setSendMessage,
+  recieveMessage,
+  cleared,
+  isRead,
+  setIsRead,
+}) => {
   // Fetch global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const chatId = useSelector((state) => state.chat.chatId);
@@ -40,16 +45,13 @@ const CommunityDashboard = ({ setSendMessage, recieveMessage, cleared, isRead, s
   const [isSent, setIsSent] = useState(false);
   const [msgId, setMsgId] = useState("");
 
-
-
   const handleSetDeletePopup = () => {
-    setDeletePopup(true)
-  }
+    setDeletePopup(true);
+  };
   const handleIdBack = (data) => {
-    console.log(data)
-    setMsgId(data)
-  }
-
+    console.log(data);
+    setMsgId(data);
+  };
 
   useEffect(() => {
     if (chatMessagesContainerRef.current) {
@@ -139,8 +141,9 @@ const CommunityDashboard = ({ setSendMessage, recieveMessage, cleared, isRead, s
         groupedMessages.push({ date: "Yesterday", messages: [message] });
       } else {
         currentDate = messageDate;
-        const formattedDate = `${messageDate.getDate()}-${messageDate.getMonth() + 1
-          }-${messageDate.getFullYear()}`;
+        const formattedDate = `${messageDate.getDate()}-${
+          messageDate.getMonth() + 1
+        }-${messageDate.getFullYear()}`;
         groupedMessages.push({
           date:
             today.getDate() === messageDate.getDate() ? "Today" : formattedDate,
@@ -319,8 +322,11 @@ const CommunityDashboard = ({ setSendMessage, recieveMessage, cleared, isRead, s
                       </div>
                       {message.text !== "" && (
                         <div className="mymessage_container">
-
-                          <ChatDropDownMenu onClicks={handleSetDeletePopup} idBack={handleIdBack} id={message?._id} />
+                          <ChatDropDownMenu
+                            onClicks={handleSetDeletePopup}
+                            idBack={handleIdBack}
+                            id={message?._id}
+                          />
                           <Linkify>
                             <p>{message.text}</p>
                           </Linkify>
@@ -575,27 +581,40 @@ const CommunityDashboard = ({ setSendMessage, recieveMessage, cleared, isRead, s
           </div>
         </div>
       </section>
-      {deletePopup ? <ChatDeletePopup>
-        <div className="d-flex flex-column  justify-content-center ">
-
-          <h1>Delete permeanently</h1>
-          <hr className="p-0 m-1 " />
-          <p>This message will be Deleted permeanently </p>
-          <div className="d-flex flex-column flex-md-row mx-auto" >
-            <button className="popup-close-button " onClick={() => setDeletePopup(false)}>Cancle</button>
-            <button className="popup-ok_button" onClick={() => handleDelete()}>Ok</button>
-
+      {deletePopup ? (
+        <ChatDeletePopup>
+          <div className="d-flex flex-column  justify-content-center ">
+            <h1>Delete permanently</h1>
+            <hr className="p-0 m-1 " />
+            <p>This message will be deleted permanently.</p>
+            <div className="d-flex flex-column flex-md-row mx-auto">
+              <button
+                className="popup-close-button bg-secondary"
+                onClick={() => setDeletePopup(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="popup-ok_button"
+                onClick={() => handleDelete()}
+              >
+                Confirm
+              </button>
+            </div>
           </div>
-        </div>
-      </ChatDeletePopup> : ''}
+        </ChatDeletePopup>
+      ) : (
+        ""
+      )}
 
       {showFeaturedPostSuccess ? (
-
         <AfterSuccessPopUp
           onClose={() => setShowFeaturedPostSuccess(false)}
           successText="The message has been deleted successfully."
         />
-      ) : ""}
+      ) : (
+        ""
+      )}
     </div>
   );
 };

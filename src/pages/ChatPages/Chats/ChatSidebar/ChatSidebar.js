@@ -105,7 +105,6 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
         console.error("Error-->", error);
       });
   };
-  
 
   const handleGetUnreadMessageCount = (chatId) => {
     getUnreadMessageCount(chatId, loggedInUser._id)

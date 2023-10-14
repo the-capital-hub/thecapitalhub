@@ -13,10 +13,20 @@ import { findChat, createChat } from "../../../Service/user";
 import CommunitiesContainer from "../../../components/Investor/ChatComponents/CommunitiesContainer";
 import ChatSettings from "../../../components/Investor/ChatComponents/ChatSettings/ChatSettings";
 import CommunityDashboard from "./CommunityDashboard/CommunityDashboard";
-import { setChatId, setUserId } from "../../../Store/features/chat/chatSlice";
+import {
+  resetChat,
+  setChatId,
+  setUserId,
+} from "../../../Store/features/chat/chatSlice";
 import backIcon from "../../../Images/Chat/BackIcon.svg";
+import navBarLogo from "../../../Images/investorIcon/Logo.svg";
 
 import selectAChatIcon from "../../../Images/Chat/selectAChat.png";
+import {
+  OffcanvasBSBody,
+  OffcanvasBSContainer,
+  OffcanvasBSHeader,
+} from "../../../components/PopUp/OffcanvasBS";
 
 const Chats = () => {
   // search params
@@ -43,6 +53,8 @@ const Chats = () => {
   const [cleared, setCleared] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isRead, setIsRead] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(false);
+
   // const [isCommunitySelected, setIsCommunitySelected] = useState(false);
   // const previousUrl = window.history.length > 1 ? window.history.go(-1) : null;
 
@@ -53,6 +65,15 @@ const Chats = () => {
   // When directed to chats scroll page to top
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    function handleWindowResize() {
+      const isMobile = window.innerWidth <= 820;
+      setIsMobileView(isMobile);
+    }
+    window.addEventListener("resize", handleWindowResize);
+    handleWindowResize();
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
   }, []);
 
   const socket = useRef();
@@ -129,11 +150,65 @@ const Chats = () => {
     }
   }, [userId]);
 
+  const renderMobieHeader = () => {
+    return (
+      <div className="mobile-nav border-bottom shadow-sm pb-2 px-2">
+        <img src={navBarLogo} alt="nav bar logo" />
+        <div className="actions">
+          <button
+            className="btn btn-sm btn-light"
+            onClick={() => {
+              dispatch(resetChat());
+            }}
+          >
+            Messages
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  const renderMobileMainSection = () => {
+    return !isSettingsOpen ? (
+      <>
+        <ChatNavbar
+          isclear={setCleared}
+          cleared={cleared}
+          setIsSettingsOpen={setIsSettingsOpen}
+        />
+        {!isCommunitySelected && (
+          <ChatDashboard
+            setSendMessage={setSendMessage}
+            recieveMessage={recieveMessage}
+            cleared={cleared}
+          />
+        )}
+        {isCommunitySelected && (
+          <CommunityDashboard
+            setSendMessage={setSendMessage}
+            recieveMessage={recieveMessage}
+            cleared={cleared}
+            setIsRead={setIsRead}
+            isRead={isRead}
+          />
+        )}
+      </>
+    ) : (
+      <section className="right_section mt-3 w-100 ">
+        <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
+      </section>
+    );
+  };
+
   return (
     <>
       <div className="container-fluid chat_main_container">
         {/* Left section */}
-        <div className="left_section_wrapper mt-3 mx-3">
+        <div
+          className={`left_section_wrapper mt-3 mx-3 ${
+            isMobileView && "d-none"
+          }`}
+        >
           <section className="left_section pe-1 ">
             <span className="back_img rounded-circle shadow-sm" title="Go Back">
               <img
@@ -159,8 +234,29 @@ const Chats = () => {
         </div>
 
         {/* Main Chat section */}
-        <section className="main_section my-3 me-3">
-          {chatId ? (
+        <section className="main_section my-3 me-md-3">
+          {isMobileView && renderMobieHeader()}
+
+          {isMobileView ? (
+            chatId ? (
+              renderMobileMainSection()
+            ) : (
+              <section className="d-flex flex-column gap-3 px-1">
+                <ChatSearch />
+                <CommunitiesContainer
+                  isCommunityOpen={isCommunityOpen}
+                  recieveMessage={recieveMessage}
+                  sendMessage={sendMessage}
+                  setIsRead={setIsRead}
+                  isRead={isRead}
+                />
+                <ChatSidebar
+                  recieveMessage={recieveMessage}
+                  sendMessage={sendMessage}
+                />
+              </section>
+            )
+          ) : chatId ? (
             <>
               <ChatNavbar
                 isclear={setCleared}
@@ -193,7 +289,7 @@ const Chats = () => {
         </section>
 
         {/*Right section chat settings */}
-        {isSettingsOpen ? (
+        {!isMobileView && isSettingsOpen ? (
           <div className="right_section_wrapper">
             <section className="right_section mt-3 w-100 ">
               <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />

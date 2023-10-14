@@ -1,7 +1,27 @@
 .chat_main_container {
-  background: #eaeef2;
+  background: white;
   display: flex;
   overflow: hidden;
+  height: auto;
+  min-height: 100vh;
+
+  @media (min-width: 820px) {
+    background-color: #eaeef2;
+  }
+
+  .mobile-nav {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & > img {
+      width: 200px;
+      object-fit: contain;
+    }
+    .actions {
+    }
+  }
 
   .left_section_wrapper {
     height: 96vh;
