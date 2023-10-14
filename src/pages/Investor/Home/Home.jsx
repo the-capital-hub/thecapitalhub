@@ -136,6 +136,8 @@ function Home() {
                       designation,
                       profilePicture,
                       _id: userId,
+                      startUp,
+                      investor,
                     },
                     video,
                     image,
@@ -153,6 +155,8 @@ function Home() {
                       designation={designation}
                       profilePicture={profilePicture}
                       description={description}
+                      startUpCompanyName ={startUp }
+                      investorCompanyName ={investor }
                       firstName={firstName}
                       lastName={lastName}
                       video={video}
