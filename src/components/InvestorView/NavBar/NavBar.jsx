@@ -61,7 +61,7 @@ import React from "react";
 import "./NavBar.scss";
 import Bar from "../../../Images/investorIcon/Bar.svg";
 import searchIconBlack from "../../../Images/navbar/Search.svg";
-import Logo from "../../../Images/investorIcon/Logo.svg";
+import Logo from "../../../Images/investorIcon/new-logo.png";
 import NotificationIcon from "../../../Images/investorIcon/notification.svg";
 import MessageIcon from "../../../Images/investorIcon/message.svg";
 import profilePic from "../../../Images/investorIcon/profilePic.webp";
