@@ -82,17 +82,18 @@ export const allPostsData = async (page, perPage) => {
       .sort({ _id: -1 })
       .skip(skip)
       .limit(perPage);
-    for (const post of allPosts) {
+    await Promise.all(allPosts.map(async (post, index) => {
       const userId = post.user._id;
-      let user = "";
+      let user = null;
       if (post.user.investor) {
         user = await UserModel.findById(userId).populate("investor");
-        post.user.companyName = user.investor.companyName;
+        allPosts[index].user.companyName = user.investor.companyName;
       } else {
         user = await UserModel.findById(userId).populate("startUp");
-        post.user.companyName = user.startUp.company;
+        allPosts[index].user.companyName = user.startUp.company;
       }
-    }
+      return post;
+    }));
     return allPosts;
   } catch (error) {
     throw new Error("Error fetching all posts");
