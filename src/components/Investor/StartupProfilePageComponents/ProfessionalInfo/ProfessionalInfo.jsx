@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
 import "./ProfessionalInfo.scss";
 import DefaultAvatar from "../../../../Images/Chat/default-user-avatar.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { getBase64 } from "../../../../utils/getBase64";
-import { postStartUpData, updateUserAPI } from "../../../../Service/user";
+import { getStartupByFounderId, postStartUpData, updateUserAPI } from "../../../../Service/user";
 import { loginSuccess } from "../../../../Store/features/user/userSlice";
 
 export default function ProfessionalInfo({ theme, companyFounderId }) {
   // Fetch Global State
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const dispatch = useDispatch();
+  const [company, setCompany] = useState([]);
+
 
   // State for Professional Data
   const [professionalData, setProfessionalData] = useState({
@@ -23,6 +25,18 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
     location: loggedInUser?.location || "Bangalore, India",
   });
 
+  useEffect(() => {
+    getStartupByFounderId(loggedInUser._id)
+      .then(({ data }) => {
+        console.log(data);
+        setCompany(data);
+        setProfessionalData({
+          ...professionalData,
+          company: data.company,
+        });
+      });
+  }, []);
+  
   // State for isEditing
   const [isEditing, setIsEditing] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);

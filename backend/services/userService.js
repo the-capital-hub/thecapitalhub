@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken";
 import { secretKey } from "../constants/config.js";
 import { sendMail } from "../utils/mailHelper.js";
 import bcrypt from "bcrypt";
+import { hashPassword } from "../utils/passwordManager.js";
 
 const adminMail = "learn.capitalhub@gmail.com";
 
@@ -458,7 +459,9 @@ export const getExplore = async (filters) => {
       const founders = await UserModel.find({
         _id: { $in: founderIds },
         ...(gender ? founderQuery : {}),
-      });
+        userStatus: "active",
+      }).select("-password")
+      .populate("investor");
       return {
         status: 200,
         message: "Investors data retrieved",
@@ -482,7 +485,9 @@ export const getExplore = async (filters) => {
       const founders = await UserModel.find({
         _id: { $in: founderIds },
         ...(gender ? founderQuery : {}),
-      });
+        userStatus: "active",
+      }).select("-password")
+        .populate("startUp");
       return {
         status: 200,
         message: "Founder data retrieved",
@@ -549,6 +554,69 @@ export const getExploreFilters = async (type) => {
     return {
       status: 500,
       message: "An error occurred while getting explore filters.",
+    };
+  }
+};
+
+export const validateSecretKey = async ({ oneLinkId, secretOneLinkKey }) => {
+  try {
+    const user = await UserModel.findOne({ oneLinkId });
+
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found",
+      };
+    }
+    const secretKeyMatch = await bcrypt.compare(secretOneLinkKey, user.secretKey);
+    if (secretKeyMatch) {
+      const token = jwt.sign({}, secretKey, { expiresIn: "1h" });
+      return {
+        status: 200,
+        message: "Secret key is valid",
+        token, 
+      };
+    } else {
+      return {
+        status: 401,
+        message: "Invalid secret key",
+      };
+    }
+  } catch (error) {
+    console.error("Error validating secret key:", error);
+    return {
+      status: 500,
+      message: "An error occurred while validating the secret key.",
+    };
+  }
+};
+
+export const createSecretKey = async (userId, secretOneLinkKey) => {
+  try {
+    const hashedSecretKey = await hashPassword(secretOneLinkKey);
+    const user = await UserModel.findByIdAndUpdate(
+      userId,
+      { secretKey: hashedSecretKey },
+      { new: true }
+    );
+
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found",
+      };
+    }
+
+    return {
+      status: 200,
+      message: "Secret key created and stored successfully",
+      user: user,
+    };
+  } catch (error) {
+    console.error("Error creating and storing secret key:", error);
+    return {
+      status: 500,
+      message: "An error occurred while creating and storing the secret key.",
     };
   }
 };

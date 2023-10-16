@@ -39,7 +39,7 @@ export default function CompanyProfilePage() {
           console.error("Error fetching startup data:", error.message);
         });
     }
-    document.title = "Company Profile | The Capital Hub"
+    document.title = "Company Profile | The Capital Hub";
     dispatch(setPageTitle("Company"));
   }, []);
 
@@ -58,8 +58,10 @@ export default function CompanyProfilePage() {
     setSelectedCompanyId(null);
   };
 
-  const handleCompanySelection = (companyId) => {
+  const handleCompanySelection = (companyId, companyName) => {
     setSelectedCompanyId(companyId);
+    const searchInput = document.querySelector(".search-company-input");
+    searchInput.value = companyName;
   };
 
   const handleAddStartup = async () => {
@@ -126,7 +128,10 @@ export default function CompanyProfilePage() {
                                 }`}
                                 key={index}
                                 onClick={() =>
-                                  handleCompanySelection(company._id)
+                                  handleCompanySelection(
+                                    company._id,
+                                    company.company
+                                  )
                                 }
                               >
                                 <img
@@ -236,7 +241,7 @@ export default function CompanyProfilePage() {
         </div>
         {showSuccess && (
           <AfterSuccessPopUp
-            withoutOkButton
+            // withoutOkButton
             onClose={() => setShowSuccess(!showSuccess)}
             successText="Company Added Successfully"
           />
