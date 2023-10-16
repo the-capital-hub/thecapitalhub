@@ -8,14 +8,17 @@ import {
   getStartupByFounderId,
   searchStartUps,
   addStartUpToUser,
+  updateUserAPI
 } from "../../../Service/user";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
 import AfterSuccessPopUp from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import { useNavigate } from "react-router-dom";
 
 export default function CompanyProfilePage() {
+  const navigate = useNavigate();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [companyData, setCompanyData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -76,6 +79,21 @@ export default function CompanyProfilePage() {
       console.log(error.message);
     }
   }
+
+  const handleAddNew = async () => {
+    try {
+      const requestBody = {
+        userId: loggedInUser._id,
+        startUp: null,
+      }
+      const response = await updateUserAPI(requestBody);
+      console.log(response);
+      navigate("/company-profile/edit");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <MaxWidthWrapper>
       <div className="companyProfilePage__wrapper">
@@ -95,6 +113,14 @@ export default function CompanyProfilePage() {
                   ) : (
 
                     <div className="bg-white rounded-4 p-4">
+                      {/* <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5"> */}
+                      <button className="btn-base startup"
+                       onClick={handleAddNew}
+                       >Click here to add new company details</button>
+                      {/* </Link> */}
+                      <div className="or-text-container">
+                        <p className="text-decoration-none text-dark fs-5">Or</p>
+                      </div>
                       <p className="text-decoration-none text-dark fs-5">Choose from an existing Company</p>
                       <div>
                         <input
@@ -153,7 +179,7 @@ export default function CompanyProfilePage() {
                               <div
                                 className={`suggestion-item ${selectedCompanyId === company._id ? 'active' : ''}`}
                                 key={index}
-                                onClick={() => handleCompanySelection(company._id)}
+                                onClick={() => handleCompanySelection(company._id, company.company)}
                               >
                                 <img
                                   src={company.logo || DefaultAvatar}

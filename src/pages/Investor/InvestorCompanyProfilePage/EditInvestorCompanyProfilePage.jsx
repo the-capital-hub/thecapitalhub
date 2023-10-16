@@ -34,7 +34,10 @@ export default function EditInvestorCompanyProfilePage() {
         maximumTicketsSize: data.colorCard.maximumTicketsSize,
         seedRound: data.colorCard.seedRound,
       });
-    });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }, []);
 
   // handleAmountChange

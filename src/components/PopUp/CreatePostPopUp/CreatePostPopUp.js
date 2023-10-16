@@ -117,7 +117,7 @@ const CreatePostPopUp = ({
       .then(({ data }) => {
         setPostText(
           (prevPostText) =>
-            prevPostText + ` https://thecapitalhub.in/onelink/${data.oneLink}`
+            prevPostText + ` https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`
         );
       })
       .catch((error) => console.log(error));
