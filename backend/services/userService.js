@@ -458,7 +458,9 @@ export const getExplore = async (filters) => {
       const founders = await UserModel.find({
         _id: { $in: founderIds },
         ...(gender ? founderQuery : {}),
-      });
+        userStatus: "active",
+      }).select("-password")
+      .populate("investor");
       return {
         status: 200,
         message: "Investors data retrieved",
@@ -482,7 +484,9 @@ export const getExplore = async (filters) => {
       const founders = await UserModel.find({
         _id: { $in: founderIds },
         ...(gender ? founderQuery : {}),
-      });
+        userStatus: "active",
+      }).select("-password")
+        .populate("startUp");
       return {
         status: 200,
         message: "Founder data retrieved",

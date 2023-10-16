@@ -59,8 +59,10 @@ export default function CompanyProfilePage() {
     setSelectedCompanyId(null);
   };
 
-  const handleCompanySelection = (companyId) => {
+  const handleCompanySelection = (companyId, companyName) => {
     setSelectedCompanyId(companyId);
+    const searchInput = document.querySelector(".search-company-input");
+    searchInput.value = companyName;
   };
 
   const handleAddStartup = async () => {
@@ -137,7 +139,10 @@ export default function CompanyProfilePage() {
                                 }`}
                                 key={index}
                                 onClick={() =>
-                                  handleCompanySelection(company._id)
+                                  handleCompanySelection(
+                                    company._id,
+                                    company.companyName
+                                  )
                                 }
                               >
                                 <img
@@ -260,7 +265,7 @@ export default function CompanyProfilePage() {
         </div>
         {showSuccess && (
           <InvestorAfterSuccessPopUp
-            withoutOkButton
+            // withoutOkButton
             onClose={() => setShowSuccess(!showSuccess)}
             successText="Company Added Successfully"
           />
