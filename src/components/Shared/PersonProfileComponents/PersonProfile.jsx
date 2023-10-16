@@ -22,6 +22,7 @@ const PERSON = {
 };
 
 export default function PersonProfile({ theme, short, personData }) {
+  console.log(personData)
   let profilePicture;
   let firstName;
   let lastName;
