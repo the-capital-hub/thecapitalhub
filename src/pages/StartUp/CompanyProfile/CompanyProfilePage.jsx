@@ -39,6 +39,7 @@ export default function CompanyProfilePage() {
           console.error("Error fetching startup data:", error.message);
         });
     }
+    document.title = "Company Profile | The Capital Hub"
     dispatch(setPageTitle("Company"));
   }, []);
 
