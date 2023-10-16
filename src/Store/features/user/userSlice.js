@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   loggedInUser: JSON.parse(localStorage.getItem("loggedInUser")) || null,
   error: null,
+  recommendations: null,
 };
 
 export const userSlice = createSlice({
@@ -23,10 +24,15 @@ export const userSlice = createSlice({
       localStorage.removeItem("loggedInUser");
       state.loggedInUser = null;
       state.error = null;
+      state.recommendations = null;
+    },
+    setRecommendations: (state, action) => {
+      state.recommendations = action.payload;
     },
   },
 });
 
-export const { loginSuccess, loginFailure, logout } = userSlice.actions;
+export const { loginSuccess, loginFailure, logout, setRecommendations } =
+  userSlice.actions;
 
 export default userSlice.reducer;

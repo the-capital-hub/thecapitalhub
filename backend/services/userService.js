@@ -568,8 +568,7 @@ export const validateSecretKey = async ({ oneLinkId, secretOneLinkKey }) => {
         message: "User not found",
       };
     }
-    const secretKeyMatch = await bcrypt.compare(secretOneLinkKey, user.secretKey);
-    if (secretKeyMatch) {
+    if (secretOneLinkKey === user.secretKey) {
       const token = jwt.sign({}, secretKey, { expiresIn: "1h" });
       return {
         status: 200,
@@ -593,20 +592,18 @@ export const validateSecretKey = async ({ oneLinkId, secretOneLinkKey }) => {
 
 export const createSecretKey = async (userId, secretOneLinkKey) => {
   try {
-    const hashedSecretKey = await hashPassword(secretOneLinkKey);
+    // const hashedSecretKey = await hashPassword(secretOneLinkKey);
     const user = await UserModel.findByIdAndUpdate(
       userId,
-      { secretKey: hashedSecretKey },
+      { secretKey: secretOneLinkKey },
       { new: true }
     );
-
     if (!user) {
       return {
         status: 404,
         message: "User not found",
       };
     }
-
     return {
       status: 200,
       message: "Secret key created and stored successfully",

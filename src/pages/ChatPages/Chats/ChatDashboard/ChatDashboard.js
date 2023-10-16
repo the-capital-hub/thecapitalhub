@@ -277,7 +277,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
   const handleOnelinkClick = () => {
     getStartupByFounderId(loggedInUser._id)
       .then(({ data }) => {
-        setSendText(`https://thecapitalhub.in/onelink/${data.oneLink}`);
+        setSendText(`https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`);
       })
       .catch((error) => console.log(error));
   };
