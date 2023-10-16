@@ -105,7 +105,7 @@ export const updateUser = async (req, res) => {
       newData,
     });
     res.status(status).json({ message, data });
-  } catch (error) { }
+  } catch (error) {}
 };
 
 export const updateUserByIdController = async (req, res) => {
@@ -113,7 +113,7 @@ export const updateUserByIdController = async (req, res) => {
     const { userId } = req.params;
     const { status, message, data } = await updateUserById(userId, req.body);
     res.status(status).json({ message, data });
-  } catch (error) { }
+  } catch (error) {}
 };
 
 export const changePasswordController = async (req, res) => {
@@ -267,7 +267,7 @@ export const validateSecretKeyController = async (req, res) => {
     const { oneLinkId, secretOneLinkKey } = req.body;
     const response = await validateSecretKey({
       oneLinkId,
-      secretOneLinkKey
+      secretOneLinkKey,
     });
     res.status(response.status).send(response);
   } catch (error) {

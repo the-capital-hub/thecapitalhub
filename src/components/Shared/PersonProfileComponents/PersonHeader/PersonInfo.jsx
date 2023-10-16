@@ -51,7 +51,7 @@ export default function PersonInfo({
             <IconCard
               src={CircleArrow}
               alt={"rising arrow icon"}
-              text={`Last funding in ${lastFunding || "May, 2023"}`}
+              text={`Last Funding in ${lastFunding || "May, 2023"}`}
               key="funding"
             />
           </div>
