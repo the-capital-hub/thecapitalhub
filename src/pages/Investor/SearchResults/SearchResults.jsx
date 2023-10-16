@@ -5,9 +5,10 @@ import ResultBar from "../../../components/NewInvestor/SearchResults/ResultBar";
 import "./SearchResults.scss";
 import { useEffect, useState } from "react";
 import { getSearchResultsAPI } from "../../../Service/user";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 const SEARCHFILTERS = ["Industry", "Age", "Stage", "Startups"];
 
@@ -15,6 +16,7 @@ export default function SearchResults() {
   // Fetch Global State
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const userIdToRemove = loggedInUser._id;
+  const dispatch = useDispatch();
 
   // Retrieve Query
   const [searchParams] = useSearchParams();
@@ -46,6 +48,12 @@ export default function SearchResults() {
   useEffect(() => {
     setQuery(searchParams.get("query"));
   }, [searchParams]);
+
+  useEffect(() => {
+    dispatch(setPageTitle("Search Results"));
+    window.title = "Search Results | The Capital Hub";
+  }, []);
+
   return (
     <MaxWidthWrapper>
       <div className="search__results__wrapper px-3 border-start pb-5">

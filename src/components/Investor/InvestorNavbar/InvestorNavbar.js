@@ -17,29 +17,28 @@ import { useRef } from "react";
 
 const InvestorNavbar = (props) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const [url, setUrl] = useState("Home");
+  // const [url, setUrl] = useState("Home");
   const [searchSuggestions, setSearchSuggestions] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [inputOnFocus, setInputOnFocus] = useState(false);
   const [toggleNotificationPopup, setToggleNotificationPopup] = useState(false);
   const notificationPopup = useRef();
-
   const navigate = useNavigate();
 
-  useEffect(() => {
-    let url = window.location.href;
-    if (window.location.href.includes("?")) {
-      url = url.split("?")[0];
-    }
-    url = url.split("/");
-    const title =
-      url[url.length - 1]?.length < 16
-        ? url[url.length - 1]
-        : url[url.length - 2];
-    console.log(url[url.length - 1]?.length);
-    setUrl(title);
-  }, [window.location.href]);
+  // useEffect(() => {
+  //   let url = window.location.href;
+  //   if (window.location.href.includes("?")) {
+  //     url = url.split("?")[0];
+  //   }
+  //   url = url.split("/");
+  //   const title =
+  //     url[url.length - 1]?.length < 16
+  //       ? url[url.length - 1]
+  //       : url[url.length - 2];
+  //   console.log(url[url.length - 1]?.length);
+  //   setUrl(title);
+  // }, [window.location.href]);
 
   const searchInputHandler = async ({ target }) => {
     try {
@@ -108,8 +107,7 @@ const InvestorNavbar = (props) => {
                 ) : (
                   <img src={HambergerCrossIcon} alt="bar" />
                 )}
-                {/* <h1 className="ms-2">{pageTitle || url}</h1> */}
-                <h1 className="ms-2">{url}</h1>
+                <h1 className="ms-2">{pageTitle}</h1>
               </div>
             </div>
           </div>

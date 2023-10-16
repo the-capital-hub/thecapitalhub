@@ -4,13 +4,21 @@ import { useParams } from "react-router-dom";
 import HalfbendCard from "../InvestorGlobalCards/Documentation/HalfbendCard/HalfbendCard";
 import { getUserById } from "../../../Service/user";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { useDispatch } from "react-redux";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 const FolderContents = () => {
   const { route } = useParams();
   const { username } = useParams();
   const [user, setUser] = useState([]);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     document.title = "Documents | The Capital Hub";
+    dispatch(setPageTitle("Documents"));
+  }, []);
+
+  useEffect(() => {
     getUserById(username)
       .then(({ data }) => {
         setUser(data);

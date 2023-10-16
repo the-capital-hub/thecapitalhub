@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../../Store/Action/userAction";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 const InvestorManageAccount = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -52,12 +53,14 @@ const InvestorManageAccount = () => {
       .finally(() => setTimeout(() => setMessage(false), 3000));
   };
 
+  const dispatch = useDispatch();
   useEffect(() => {
     document.title = "Manage Account | The Capital Hub";
+    dispatch(setPageTitle("Manage Account"));
   }, []);
 
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
-  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const handleLogoutLogic = () => {
     dispatch(logout());

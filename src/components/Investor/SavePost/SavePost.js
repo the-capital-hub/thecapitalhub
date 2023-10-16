@@ -6,10 +6,14 @@ import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import NavigatedCardViewer from "./NavigatedCardViewer/NavigatedCardViewer";
 import { useEffect } from "react";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { useDispatch } from "react-redux";
 
 const SavePost = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
     document.title = "Saved Posts | The Capital Hub";
+    dispatch(setPageTitle("Saved Posts"));
   }, []);
 
   return (
