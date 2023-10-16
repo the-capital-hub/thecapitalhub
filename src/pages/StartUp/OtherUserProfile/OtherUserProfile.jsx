@@ -24,20 +24,24 @@ import FeaturedPostsContainer from "../../../components/Investor/InvestorGlobalC
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import AfterSuccessPopup from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 function OtherUserProfile() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-
+  const dispatch = useDispatch();
   const [userData, setUserData] = useState(null);
   const [connectionSent, setConnectionSent] = useState(false);
-  
+
   const { userId } = useParams();
-  // console.log("loggedInUser:",loggedInUser._id, "useParams:", userId);
-  console.log(userData)
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.title = "User Profile | The Capital Hub";
+    dispatch(setPageTitle("User Profile"));
+  }, []);
+
+  useEffect(() => { 
     window.scrollTo(0, 0);
     getUserAndStartUpByUserIdAPI(userId)
       .then(({ data }) => setUserData(data))
@@ -59,7 +63,7 @@ function OtherUserProfile() {
   };
 
   return (
-    <MaxWidthWrapper>
+    <MaxWidthWrapper containerClass="mt-5 mt-md-4">
       <section className=" other_user_profile">
         <SmallProfileCard className="mt-lg-2 mt-xl-0" text="User Details" />
         {userData ? (
@@ -101,17 +105,14 @@ function OtherUserProfile() {
                     <button className="connection-status  btn rounded-pill px-3 py-2">
                       <span>Connected</span>
                     </button>
-                  )
-                   : userData?.connectionsReceived?.includes(
-                    loggedInUser._id
+                  ) : userData?.connectionsReceived?.includes(
+                      loggedInUser._id
                     ) ? (
                     <button className=" connection-status d-flex btn rounded-pill px-3 py-2">
                       <img src={connection} width={20} alt="message user" />
                       <span>Pending</span>
                     </button>
-                  ) 
-                  : 
-                  (
+                  ) : (
                     <button className="connection-status d-flex  btn rounded-pill px-3 py-2">
                       <img src={connection} width={20} alt="message user" />
                       <span onClick={() => handleConnect(userData?._id)}>
@@ -223,17 +224,17 @@ function OtherUserProfile() {
                   </div>
                 </div> */}
                 {/* bio */}
-                {userData?.bio?<div className="bio rounded border shadow-sm profile_container">
-                  <h4 className="h4">Bio</h4>
-                  <div className="single_education">
-                    <h6 className="h6">
-                    {userData?.bio}
-                    </h6>
-                   
+                {userData?.bio ? (
+                  <div className="bio rounded border shadow-sm profile_container">
+                    <h4 className="h4">Bio</h4>
+                    <div className="single_education">
+                      <h6 className="h6">{userData?.bio}</h6>
+                    </div>
                   </div>
-                </div>
-                :""}
-                 
+                ) : (
+                  ""
+                )}
+
                 {/* Otheruser's Featured Posts */}
                 <div className="bg-white rounded shadow-sm d-flex flex-column gap-3 p-4">
                   {/* Heading */}

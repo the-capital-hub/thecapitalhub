@@ -9,14 +9,17 @@ import {
   searchStartUps,
   addStartUpToUser,
 } from "../../../Service/user";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
 import AfterSuccessPopUp from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 export default function CompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const dispatch = useDispatch();
+
   const [companyData, setCompanyData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [companies, setCompanies] = useState([]);
@@ -26,27 +29,31 @@ export default function CompanyProfilePage() {
   useEffect(() => {
     if (!loggedInUser?.investor) {
       setLoading(true);
-      getStartupByFounderId(loggedInUser._id).then(({ data }) => {
-        setCompanyData(data);
-        setLoading(false);
-      })
+      getStartupByFounderId(loggedInUser._id)
+        .then(({ data }) => {
+          setCompanyData(data);
+          setLoading(false);
+        })
         .catch((error) => {
           setLoading(false);
-          console.error('Error fetching startup data:', error.message);
+          console.error("Error fetching startup data:", error.message);
         });
     }
+    document.title = "Company Profile | The Capital Hub";
+    dispatch(setPageTitle("Company"));
   }, []);
 
   const handleSearchInputChange = (e) => {
     const newValue = e.target.value;
     // if (newValue.length > 2) {
-    searchStartUps(newValue).then(({ data }) => {
-      setCompanies(data);
-      console.log(data);
-    })
+    searchStartUps(newValue)
+      .then(({ data }) => {
+        setCompanies(data);
+        console.log(data);
+      })
       .catch(() => {
         setCompanies([]);
-      })
+      });
     // }
     setSelectedCompanyId(null);
   };
@@ -59,7 +66,10 @@ export default function CompanyProfilePage() {
 
   const handleAddStartup = async () => {
     try {
-      const response = await addStartUpToUser(loggedInUser._id, selectedCompanyId);
+      const response = await addStartUpToUser(
+        loggedInUser._id,
+        selectedCompanyId
+      );
       if (response.status === 200) {
         setShowSuccess(true);
         getStartupByFounderId(loggedInUser._id)
@@ -69,13 +79,13 @@ export default function CompanyProfilePage() {
             setCompanies([]);
           })
           .catch((error) => {
-            console.error('Error fetching startup data:', error.message);
+            console.error("Error fetching startup data:", error.message);
           });
       }
     } catch (error) {
       console.log(error.message);
     }
-  }
+  };
   return (
     <MaxWidthWrapper>
       <div className="companyProfilePage__wrapper">
@@ -88,14 +98,18 @@ export default function CompanyProfilePage() {
                 {companyData.length !== 0 ? (
                   companyData.founderId === loggedInUser._id ? (
                     <div className="bg-white rounded-4 p-4">
-                      <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5">
+                      <Link
+                        to="/company-profile/edit"
+                        className="text-decoration-none text-dark fs-5"
+                      >
                         Click here to edit company details
                       </Link>
                     </div>
                   ) : (
-
                     <div className="bg-white rounded-4 p-4">
-                      <p className="text-decoration-none text-dark fs-5">Choose from an existing Company</p>
+                      <p className="text-decoration-none text-dark fs-5">
+                        Choose from an existing Company
+                      </p>
                       <div>
                         <input
                           type="text"
@@ -107,9 +121,18 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${selectedCompanyId === company._id ? 'active' : ''}`}
+                                className={`suggestion-item ${
+                                  selectedCompanyId === company._id
+                                    ? "active"
+                                    : ""
+                                }`}
                                 key={index}
-                                onClick={() => handleCompanySelection(company._id, company.company)}
+                                onClick={() =>
+                                  handleCompanySelection(
+                                    company._id,
+                                    company.company
+                                  )
+                                }
                               >
                                 <img
                                   src={company.logo || DefaultAvatar}
@@ -132,14 +155,21 @@ export default function CompanyProfilePage() {
                   )
                 ) : (
                   <div className="bg-white rounded-4 p-4">
-                    <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5">
-                      <button className="btn-base startup">Click here to add company details</button>
+                    <Link
+                      to="/company-profile/edit"
+                      className="text-decoration-none text-dark fs-5"
+                    >
+                      <button className="btn-base startup">
+                        Click here to add company details
+                      </button>
                     </Link>
                     <div className="or-text-container">
                       <p className="text-decoration-none text-dark fs-5">Or</p>
                     </div>
                     <div>
-                      <p className="text-decoration-none text-dark fs-5">Choose from an existing Company</p>
+                      <p className="text-decoration-none text-dark fs-5">
+                        Choose from an existing Company
+                      </p>
                       <div>
                         <input
                           type="text"
@@ -151,9 +181,15 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${selectedCompanyId === company._id ? 'active' : ''}`}
+                                className={`suggestion-item ${
+                                  selectedCompanyId === company._id
+                                    ? "active"
+                                    : ""
+                                }`}
                                 key={index}
-                                onClick={() => handleCompanySelection(company._id)}
+                                onClick={() =>
+                                  handleCompanySelection(company._id)
+                                }
                               >
                                 <img
                                   src={company.logo || DefaultAvatar}
@@ -177,16 +213,18 @@ export default function CompanyProfilePage() {
                 )}
               </>
             )}
-
           </div>
           {!loading ? (
             companyData.length === 0 ? (
               <div className="bg-white rounded-4 p-4">
                 <p>No company found.</p>
               </div>
-
             ) : (
-              <CompanyProfile isOnelink={true} companyData={companyData} startup="true" />
+              <CompanyProfile
+                isOnelink={true}
+                companyData={companyData}
+                startup="true"
+              />
             )
           ) : (
             <div className="mx-auto w-100 bg-white rounded-5 p-5 d-flex justify-content-center min-vh-100">
