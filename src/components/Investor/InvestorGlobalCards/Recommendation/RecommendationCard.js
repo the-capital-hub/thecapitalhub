@@ -3,39 +3,61 @@ import AddUserIconBlack from "../../../../Images/investorIcon/Add-UserBlack.svg"
 import AfterSuccessPopup from "../../../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import InvestorAfterSuccessPopUp from "../../../PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
 import "./recommendation.scss";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import {
   getRecommendations,
   sentConnectionRequest,
 } from "../../../../Service/user";
 import { Link } from "react-router-dom";
+import { setRecommendations } from "../../../../Store/features/user/userSlice";
 
 const RecommendationCard = ({ isInvestor }) => {
+  // Fetch Global states
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    getRecommendations(loggedInUser._id)
-      .then(({ data }) => {
-        setUsers(data.slice(0, 5));
-        setLoading(false);
-      })
-      .catch(() => setUsers({}));
-  }, [loggedInUser._id]);
+  const recommendations = useSelector((state) => state.user.recommendations);
+  const dispatch = useDispatch();
 
+  // const [users, setUsers] = useState(recommendations);
+  const [loading, setLoading] = useState(false);
   const [connectionSent, setConnectionSent] = useState(false);
 
+  // Fetch recommendations
+  useEffect(() => {
+    if (recommendations === null) {
+      setLoading(true);
+      getRecommendations(loggedInUser._id)
+        .then(({ data }) => {
+          // setUsers(data.slice(0, 5));
+          dispatch(setRecommendations(data.slice(0, 5)));
+          setLoading(false);
+        })
+        .catch(() => {
+          dispatch(setRecommendations(null));
+          // setUsers({})
+        });
+    }
+  }, []);
+
+  // Handle connect
   const handleConnect = (userId) => {
     sentConnectionRequest(loggedInUser._id, userId)
       .then(({ data }) => {
         setConnectionSent(!connectionSent);
         setTimeout(() => setConnectionSent((prev) => !prev), 2500);
+
+        // Set loading to true
+        setLoading(true);
         getRecommendations(loggedInUser._id)
           .then(({ data }) => {
-            setUsers(data.slice(0, 5));
+            // setUsers(data.slice(0, 5));
+            dispatch(setRecommendations(data.slice(0, 5)));
+            setLoading(false);
           })
-          .catch(() => setUsers({}));
+          .catch(() => {
+            dispatch(setRecommendations(null));
+            // setUsers({})
+          });
       })
       .catch((error) => console.log(error));
   };
@@ -59,8 +81,8 @@ const RecommendationCard = ({ isInvestor }) => {
               </div>
             ) : (
               <>
-                {users && users.length > 0 ? (
-                  users.map((user, i) => (
+                {recommendations && recommendations.length > 0 ? (
+                  recommendations.map((user, i) => (
                     <div key={i}>
                       <div className="card-body recommendation_card_body">
                         <Link
