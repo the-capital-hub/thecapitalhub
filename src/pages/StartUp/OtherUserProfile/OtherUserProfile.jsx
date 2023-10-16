@@ -59,7 +59,7 @@ function OtherUserProfile() {
   };
 
   return (
-    <MaxWidthWrapper>
+    <MaxWidthWrapper containerClass='mt-5 mt-md-4'>
       <section className=" other_user_profile">
         <SmallProfileCard className="mt-lg-2 mt-xl-0" text="User Details" />
         {userData ? (
