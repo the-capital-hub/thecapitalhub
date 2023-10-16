@@ -16,7 +16,6 @@ import {
   addUserAsInvestor,
   getExplore,
   getExploreFilters,
-  validateSecretKey
 } from "../services/userService.js";
 import { secretKey } from "../constants/config.js";
 
