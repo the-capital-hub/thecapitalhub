@@ -3,7 +3,7 @@ import MockBadge from "../../../../Images/StartUp/Milestones/MockBadge.svg";
 import MockFundsBadge from "../../../../Images/StartUp/Milestones/MockfundsBadge.svg";
 import MilestoneBadge from "./MilestoneBadge";
 
-export default function AddMilestoneModal() {
+export default function AddMilestoneModal({ theme }) {
   const [milestoneText, setMilestoneText] = useState("");
 
   // fetch all badges data
@@ -72,11 +72,15 @@ export default function AddMilestoneModal() {
             id="milestoneText"
             placeholder="milestone text"
             value={milestoneText}
-            className="modal__input p-2 rounded-2 w-100"
+            className={`modal__input p-2 rounded-2 w-100 ${theme}`}
             onChange={handleInputChange}
           />
         </div>
-        <button className="orange_button" type="submit" data-bs-dismiss="modal">
+        <button
+          className={`orange_button ${theme}`}
+          type="submit"
+          data-bs-dismiss="modal"
+        >
           Add
         </button>
       </form>

@@ -50,6 +50,12 @@
   &:active {
     transform: scale(0.95);
   }
+
+  &.investor {
+    background-color: #d3f36b;
+    color: black;
+    border: 1px solid #d3f36b;
+  }
 }
 
 .orange__heading {
@@ -69,9 +75,16 @@
   .modal__input {
     background-color: #fafafa;
     outline: 0;
+    border: 1px solid #e7e7e7;
     transition: border 0.3s ease-in-out;
     &:focus {
       border: 1px solid #fd5901;
+    }
+
+    &.investor {
+      &:focus {
+        border: 1px solid #d3f36b;
+      }
     }
   }
 }

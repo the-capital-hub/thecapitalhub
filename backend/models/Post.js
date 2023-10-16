@@ -33,6 +33,9 @@ const postSchema = new Schema(
       required: true,
     },
     image: String,
+    images: {
+      type: Array,
+    },
     video: String,
     documentName: String,
     documentUrl: String,

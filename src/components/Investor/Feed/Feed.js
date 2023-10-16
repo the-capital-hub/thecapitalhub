@@ -49,7 +49,7 @@ const Feed = () => {
         console.log(err);
       });
   };
-  console.log(allPosts)
+  console.log(allPosts);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const showPopup = queryParams.get("showPopup") === "true";
@@ -118,9 +118,10 @@ const Feed = () => {
               </div>
             </div>
             {/* Posts container - column of <FeedPostCard /> */}
-            <div className="Posts__container d-flex flex-column gap-3">
+            <div className="posts__container d-flex flex-column gap-3">
               {/* {!loadingFeed ? ( */}
               <InfiniteScroll
+                className="m-0 p-0"
                 dataLength={allPosts.length}
                 next={fetchMorePosts}
                 hasMore={hasMore}
@@ -156,8 +157,8 @@ const Feed = () => {
                       userId={userId}
                       postId={_id}
                       designation={designation}
-                      startUpCompanyName ={startUp }
-                      investorCompanyName ={investor }
+                      startUpCompanyName={startUp}
+                      investorCompanyName={investor}
                       profilePicture={profilePicture}
                       description={description}
                       firstName={firstName}

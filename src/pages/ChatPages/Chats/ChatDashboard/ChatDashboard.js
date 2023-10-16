@@ -277,7 +277,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
   const handleOnelinkClick = () => {
     getStartupByFounderId(loggedInUser._id)
       .then(({ data }) => {
-        setSendText(`https://thecapitalhub.in/onelink/${data.oneLink}`);
+        setSendText(`https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`);
       })
       .catch((error) => console.log(error));
   };
@@ -492,6 +492,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
           <input
             type="text"
             name="introductoryMessage"
+            className="w-100"
             placeholder="Your message..."
             onChange={(e) => setSendText(e.target.value)}
             onKeyDown={handleKeyDown}

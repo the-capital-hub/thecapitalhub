@@ -16,6 +16,8 @@ import {
   addUserAsInvestor,
   getExplore,
   getExploreFilters,
+  validateSecretKey,
+  createSecretKey,
 } from "../services/userService.js";
 import { secretKey } from "../constants/config.js";
 
@@ -103,7 +105,7 @@ export const updateUser = async (req, res) => {
       newData,
     });
     res.status(status).json({ message, data });
-  } catch (error) { }
+  } catch (error) {}
 };
 
 export const updateUserByIdController = async (req, res) => {
@@ -111,7 +113,7 @@ export const updateUserByIdController = async (req, res) => {
     const { userId } = req.params;
     const { status, message, data } = await updateUserById(userId, req.body);
     res.status(status).json({ message, data });
-  } catch (error) { }
+  } catch (error) {}
 };
 
 export const changePasswordController = async (req, res) => {
@@ -256,6 +258,38 @@ export const getExploreFiltersController = async (req, res) => {
     res.status(500).send({
       status: 500,
       message: "An error occurred while getting explore results.",
+    });
+  }
+};
+
+export const validateSecretKeyController = async (req, res) => {
+  try {
+    const { oneLinkId, secretOneLinkKey } = req.body;
+    const response = await validateSecretKey({
+      oneLinkId,
+      secretOneLinkKey,
+    });
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while vaidating secret key.",
+    });
+  }
+};
+
+export const createSecretKeyController = async (req, res) => {
+  try {
+    const { secretOneLinkKey } = req.body;
+    const userId = req.userId;
+    const response = await createSecretKey(userId, secretOneLinkKey);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while creating secret key.",
     });
   }
 };

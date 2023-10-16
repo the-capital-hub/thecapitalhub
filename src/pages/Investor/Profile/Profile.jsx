@@ -116,6 +116,7 @@ function Profile() {
   const [investmentPhilosophy, setInvestmentPhilosophy] = useState(null);
 
   const [personalData, setPersonalData] = useState({
+    userId: loggedInUser._id,
     designation: loggedInUser?.designation || "",
     education: loggedInUser?.education || "",
     experience: loggedInUser?.experience || "",
@@ -123,13 +124,32 @@ function Profile() {
   });
 
   useEffect(() => {
+    if (loggedInUser) {
+      setPersonalData((prevPersonalData) => ({
+        ...prevPersonalData,
+        designation: loggedInUser.designation || "",
+        education: loggedInUser.education || "",
+        experience: loggedInUser.experience || "",
+        profilePicture: loggedInUser.profilePicture || "",
+      }));
+    }
+  }, [loggedInUser]);
+
+  useEffect(() => {
     getInvestorById(loggedInUser?.investor).then(({ data }) => {
       setInvestor(data);
       setCompanyName(data.companyName);
+      setEditCompanyName({
+        ...editCompanyName,
+        companyName: data.companyName,
+      });
       setInvestedStartups(data.startupsInvested);
       setSectorsData(data.sectorInterested);
       setInvestmentPhilosophy(data.investmentPhilosophy || "");
-    });
+    })
+      .catch((error) => {
+        console.log(error);
+      });
   }, [loggedInUser]);
 
   const dispatch = useDispatch();
@@ -145,10 +165,17 @@ function Profile() {
         const image = await getBase64(profilePicture);
         newPersonalData.profilePicture = image;
       }
-      const {
-        data: { data },
-      } = await updateUserAPI(newPersonalData);
-      dispatch(loginSuccess(data));
+      console.log(dispatch);
+      updateUserAPI({
+        userId: loggedInUser._id,
+        ...newPersonalData
+      })
+        .then(({ data }) => {
+          dispatch(loginSuccess(data.data));
+        })
+        .catch((error) => {
+          console.log(error.message);
+        })
       const response = await postInvestorData(editCompanyName);
       setCompanyName(editCompanyName.companyName);
       setPersonalEditable(!personalEditable);
@@ -195,6 +222,7 @@ function Profile() {
           />
         );
       }
+
       if (fieldName === "company") {
         return (
           <input
@@ -283,8 +311,8 @@ function Profile() {
                         <div className=" m-4">
                           <button className="connect_btn px-3">
                             <img src={AddUserIcon} alt="add user" /> */}
-                            {/* <span className="mx-2 d-none d-md-block"> */}
-                            {/* <span className="mx-2">Connect</span>
+                      {/* <span className="mx-2 d-none d-md-block"> */}
+                      {/* <span className="mx-2">Connect</span>
                           </button>
                         </div>
                       </div> */}
@@ -491,12 +519,14 @@ function Profile() {
             <h2 className="green_underline typography">Startups Invested</h2>
             <div className="">
               {/* <Link to={""}> */}
-              <ModalBsLauncher
-                id="startupsModal"
-                className={"green_button px-2 px-sm-3 "}
-              >
-                Add New
-              </ModalBsLauncher>
+              {investor?.founderId === loggedInUser._id && (
+                <ModalBsLauncher
+                  id="startupsModal"
+                  className={"green_button px-2 px-sm-3 "}
+                >
+                  Add New
+                </ModalBsLauncher>
+              )}
               {/* </Link> */}
             </div>
           </div>
@@ -524,12 +554,14 @@ function Profile() {
             <h2 className="green_underline typography">Sectors Interested</h2>
             <div className="">
               {/* <Link to={""}> */}
-              <ModalBsLauncher
-                id="sectorsModal"
-                className={"green_button px-2 px-sm-3 "}
-              >
-                Add New
-              </ModalBsLauncher>
+              {investor?.founderId === loggedInUser._id && (
+                <ModalBsLauncher
+                  id="sectorsModal"
+                  className={"green_button px-2 px-sm-3 "}
+                >
+                  Add New
+                </ModalBsLauncher>
+              )}
               {/* </Link> */}
             </div>
           </div>
@@ -554,23 +586,25 @@ function Profile() {
         </ModalBSContainer>
         <section className="investment_philosophy shadow-sm">
           <h2 className="green_underline typography">Investment Philosophy</h2>
-          <span className="ms-auto">
-            <button
-              className="edit_button"
-              onClick={() => setIsInvestmentPhilosophy(!isInvestmentPhilosophy)}
-            >
-              {isInvestmentPhilosophy ? "Cancel" : "Edit"}
-              <CiEdit />
-            </button>
-            {isInvestmentPhilosophy && (
+          {investor?.founderId === loggedInUser._id && (
+            <span className="ms-auto">
               <button
-                className="ms-2 edit_button"
-                onClick={() => submitInvestmentPhilosophyChange()}
+                className="edit_button"
+                onClick={() => setIsInvestmentPhilosophy(!isInvestmentPhilosophy)}
               >
-                Save <CiSaveUp2 />
+                {isInvestmentPhilosophy ? "Cancel" : "Edit"}
+                <CiEdit />
               </button>
-            )}
-          </span>
+              {isInvestmentPhilosophy && (
+                <button
+                  className="ms-2 edit_button"
+                  onClick={() => submitInvestmentPhilosophyChange()}
+                >
+                  Save <CiSaveUp2 />
+                </button>
+              )}
+            </span>
+          )}
           <div className="d-flex flex-column flex-md-row gap-2 w-100 px-4 py-2">
             <p>Description: </p>
             {isInvestmentPhilosophy ? (
