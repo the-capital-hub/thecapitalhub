@@ -15,6 +15,7 @@ import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidth
 import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
 import InvestorAfterSuccessPopUp from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 export default function CompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -25,6 +26,12 @@ export default function CompanyProfilePage() {
   const [companies, setCompanies] = useState([]);
   const [selectedCompanyId, setSelectedCompanyId] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
+
+  // Set page title
+  useEffect(() => {
+    document.title = "Company Profile | Investors - The Capital Hub";
+    dispatch(setPageTitle("Company Profile"));
+  }, []);
 
   useEffect(() => {
     setLoading(true);

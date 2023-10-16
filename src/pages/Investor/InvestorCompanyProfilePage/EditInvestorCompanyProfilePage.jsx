@@ -4,7 +4,7 @@ import RecommendationCard from "../../../components/Investor/InvestorGlobalCards
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import CompanyProfileForm from "../../../components/Investor/CompanyProfilePageComponents/CompanyProfileForm";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
 import RaghuImage from "../../../Images/aboutUs/Raghu.jpeg";
@@ -13,8 +13,11 @@ import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredC
 import { getInvestorById, postInvestorData } from "../../../Service/user";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import Milestones from "../../../components/Investor/CompanyProfilePageComponents/Milestones/Milestones";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 export default function EditInvestorCompanyProfilePage() {
+  const dispatch = useDispatch();
+
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const [colorCardData, setColorCardData] = useState(null);
@@ -23,6 +26,12 @@ export default function EditInvestorCompanyProfilePage() {
   const [companyData, setCompanyData] = useState([]);
   const [isBioEditable, setIsBioEditable] = useState(false);
   const [companyDescription, setCompanyDescription] = useState(null);
+
+  // Set page title
+  useEffect(() => {
+    document.title = "Edit Company Profile | Investors - The Capital Hub";
+    dispatch(setPageTitle("Edit Company"));
+  }, []);
 
   useEffect(() => {
     getInvestorById(loggedInUser.investor).then(({ data }) => {

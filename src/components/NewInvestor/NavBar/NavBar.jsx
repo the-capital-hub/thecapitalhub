@@ -18,7 +18,10 @@ import NotificationsPopup from "../../Investor/InvestorNavbar/NotificationsPopup
 import { useRef } from "react";
 
 const NavBar = (props) => {
+  // Fetch global states
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const pageTitle = useSelector((state) => state.design.pageTitle);
+
   const [url, setUrl] = useState("Home");
   const [searchSuggestions, setSearchSuggestions] = useState(false);
   const [searchInput, setSearchInput] = useState("");
@@ -99,7 +102,8 @@ const NavBar = (props) => {
                 ) : (
                   <img src={HambergerCrossIcon} alt="bar" />
                 )}
-                <h1 className="ms-2">{url}</h1>
+                {/* <h1 className="ms-2">{url}</h1> */}
+                <h1 className="ms-2">{pageTitle || url}</h1>
               </div>
             </div>
           </div>
@@ -174,7 +178,9 @@ const NavBar = (props) => {
                           ?.slice(0, 5)
                           .map(({ company, oneLink }) => (
                             <span className="single_result">
-                              <Link to={`/investor/company-profile/${oneLink}`}>{company}</Link>
+                              <Link to={`/investor/company-profile/${oneLink}`}>
+                                {company}
+                              </Link>
                             </span>
                           ))}
                         {searchSuggestions?.company?.length > 5 && (
