@@ -8,6 +8,7 @@ import {
   getInvestorById,
   searchInvestors,
   addUserAsInvestor,
+  updateUserAPI,
 } from "../../../Service/user";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -15,11 +16,13 @@ import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidth
 import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
 import InvestorAfterSuccessPopUp from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
+import { useNavigate } from "react-router-dom";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 export default function CompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [companyData, setCompanyData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -39,8 +42,15 @@ export default function CompanyProfilePage() {
       getInvestorById(loggedInUser.investor).then(({ data }) => {
         setCompanyData(data);
         setLoading(false);
-      });
+      })
+        .catch((error) => {
+          setLoading(false);
+        })
+        .finally(() => {
+          setLoading(false);
+        })
     }
+    setLoading(false);
   }, [loggedInUser.investor]);
 
   const handleSearchInputChange = (e) => {
@@ -65,7 +75,7 @@ export default function CompanyProfilePage() {
     searchInput.value = companyName;
   };
 
-  const handleAddStartup = async () => {
+  const handleAddInvestor = async () => {
     try {
       const response = await addUserAsInvestor(
         loggedInUser._id,
@@ -81,11 +91,25 @@ export default function CompanyProfilePage() {
             setCompanies([]);
           })
           .catch((error) => {
-            console.error("Error fetching startup data:", error.message);
+            console.error('Error adding as investor:', error.message);
           });
       }
     } catch (error) {
       console.log(error.message);
+    }
+  };
+
+  const handleAddNew = async () => {
+    try {
+      const requestBody = {
+        userId: loggedInUser._id,
+        investor: null,
+      };
+      const { data: response } = await updateUserAPI(requestBody);
+      dispatch(loginSuccess(response.data));
+      navigate("/investor/company-profile/edit");
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -118,9 +142,15 @@ export default function CompanyProfilePage() {
                     </div>
                   ) : (
                     <div className="bg-white rounded-4 p-4">
-                      <p className="text-decoration-none text-dark fs-5">
-                        Choose from an existing Company
-                      </p>
+                      {/* <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5"> */}
+                      <button className="btn-base investor" onClick={handleAddNew}>
+                        Click here to add new company details
+                      </button>
+                      {/* </Link> */}
+                      <div className="or-text-container">
+                        <p className="text-decoration-none text-dark fs-5">Or</p>
+                      </div>
+                      <p className="text-decoration-none text-dark fs-5">Choose from an existing Company</p>
                       <div>
                         <input
                           type="text"
@@ -157,7 +187,7 @@ export default function CompanyProfilePage() {
                         )}
                         <button
                           className="btn-base investor"
-                          onClick={handleAddStartup}
+                          onClick={handleAddInvestor}
                         >
                           Save
                         </button>
@@ -166,13 +196,8 @@ export default function CompanyProfilePage() {
                   )
                 ) : (
                   <div className="bg-white rounded-4 p-4">
-                    <Link
-                      to="/company-profile/edit"
-                      className="text-decoration-none text-dark fs-5"
-                    >
-                      <button className="btn-base investor">
-                        Click here to add company details
-                      </button>
+                    <Link to="/investor/company-profile/edit" className="text-decoration-none text-dark fs-5">
+                      <button className="btn-base investor">Click here to add company details</button>
                     </Link>
                     <div className="or-text-container">
                       <p className="text-decoration-none text-dark fs-5">Or</p>
@@ -198,8 +223,8 @@ export default function CompanyProfilePage() {
                                     : ""
                                 }`}
                                 key={index}
-                                onClick={() =>
-                                  handleCompanySelection(company._id)
+                                onClick={() => 
+                                  handleCompanySelection(company._id, company.companyName)
                                 }
                               >
                                 <img
@@ -214,7 +239,7 @@ export default function CompanyProfilePage() {
                         )}
                         <button
                           className="btn-base investor"
-                          onClick={handleAddStartup}
+                          onClick={handleAddInvestor}
                         >
                           Save
                         </button>
