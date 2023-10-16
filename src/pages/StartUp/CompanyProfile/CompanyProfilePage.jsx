@@ -17,7 +17,6 @@ import AfterSuccessPopUp from "../../../components/PopUp/AfterSuccessPopUp/After
 
 export default function CompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-
   const [companyData, setCompanyData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [companies, setCompanies] = useState([]);
@@ -52,9 +51,10 @@ export default function CompanyProfilePage() {
     setSelectedCompanyId(null);
   };
 
-  const handleCompanySelection = (companyId) => {
+  const handleCompanySelection = (companyId, companyName) => {
     setSelectedCompanyId(companyId);
-
+    const searchInput = document.querySelector(".search-company-input");
+    searchInput.value = companyName;
   };
 
   const handleAddStartup = async () => {
@@ -109,7 +109,7 @@ export default function CompanyProfilePage() {
                               <div
                                 className={`suggestion-item ${selectedCompanyId === company._id ? 'active' : ''}`}
                                 key={index}
-                                onClick={() => handleCompanySelection(company._id)}
+                                onClick={() => handleCompanySelection(company._id, company.company)}
                               >
                                 <img
                                   src={company.logo || DefaultAvatar}
@@ -203,7 +203,7 @@ export default function CompanyProfilePage() {
         </div>
         {showSuccess && (
           <AfterSuccessPopUp
-            withoutOkButton
+            // withoutOkButton
             onClose={() => setShowSuccess(!showSuccess)}
             successText="Company Added Successfully"
           />
