@@ -38,8 +38,9 @@ const genderOptions = ["Male", "Female"];
 const sizeOptions = ["10+", "100+", "1000+"];
 
 export default function StartupExplore() {
-  const [activeTab, setActiveTab] = useState("Investor");
   const dispatch = useDispatch();
+
+  const [activeTab, setActiveTab] = useState("Investor");
   const [filterOptions, setFilterOptions] = useState([]);
   const [filters, setFilters] = useState({});
   const [filteredData, setFilteredData] = useState(null);

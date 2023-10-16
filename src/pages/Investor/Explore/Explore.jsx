@@ -6,13 +6,50 @@ import FilterBySelect from "../../../components/NewInvestor/FilterBySelect/Filte
 import CompanyProfile from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfile";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import CompanyProfileList from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfileList";
+import { useDispatch } from "react-redux";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
+import PersonProfileList from "../../../components/Shared/PersonProfileComponents/PersonProfileList";
 
 function Explore() {
-  const [activeTab, setActiveTab] = useState("Startup");
+  const dispatch = useDispatch();
 
+  const [activeTab, setActiveTab] = useState("Startup");
+  const [filterOptions, setFilterOptions] = useState([]);
+  const [filters, setFilters] = useState({});
+  const [filteredData, setFilteredData] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  // Set page title
   useEffect(() => {
     document.title = "Explore | Investors - The Capital Hub";
+    dispatch(setPageTitle("Explore"));
   }, []);
+
+  // Render filter result
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case "Startup":
+        return <CompanyProfileList isStartup data={filteredData} />;
+      case "Founder":
+        return (
+          <PersonProfileList
+            theme={"startup"}
+            short={true}
+            data={filteredData}
+          />
+        );
+      case "Investor":
+        return (
+          <PersonProfileList
+            theme={"startup"}
+            short={true}
+            data={filteredData}
+          />
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <MaxWidthWrapper>
@@ -23,19 +60,28 @@ function Explore() {
           <div className="filter_by">
             <button
               className={activeTab === "Startup" ? "active" : ""}
-              onClick={() => setActiveTab("Startup")}
+              onClick={() => {
+                setFilters(null);
+                setActiveTab("Startup");
+              }}
             >
               Startup
             </button>
             <button
               className={activeTab === "Founder" ? "active" : ""}
-              onClick={() => setActiveTab("Founder")}
+              onClick={() => {
+                setFilters(null);
+                setActiveTab("Founder");
+              }}
             >
               Founder
             </button>
             <button
               className={activeTab === "Investor" ? "active" : ""}
-              onClick={() => setActiveTab("Investor")}
+              onClick={() => {
+                setFilters(null);
+                setActiveTab("Investor");
+              }}
             >
               Investor
             </button>
