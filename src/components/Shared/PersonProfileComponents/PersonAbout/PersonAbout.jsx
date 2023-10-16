@@ -7,6 +7,11 @@ export default function PersonAbout({
   lastName,
   email,
   mobileNumber,
+  startUp,
+  investor,
+  experience,
+  education,
+  designation,
 }) {
   return (
     <>
@@ -18,22 +23,47 @@ export default function PersonAbout({
         <h6 className="div__heading">Personal Information:</h6>
 
         <div className="personal_info_grid">
-          <div className="fname">
-            <p className="fw-lighter fs-5">First Name</p>
-            <p className="fw-medium fs-5 text-black">{firstName}</p>
-          </div>
-          <div className="email">
-            <p className="fw-lighter fs-5">Email Address</p>
-            <p className="fw-medium fs-5 text-black text-break">{email}</p>
-          </div>
-          <div className="lname">
-            <p className="fw-lighter fs-5">Last Name</p>
-            <p className="fw-medium fs-5 text-black">{lastName}</p>
-          </div>
-          <div className="number">
-            <p className="fw-lighter fs-5">Mobile Number</p>
-            <p className="fw-medium fs-5 text-black">{mobileNumber}</p>
-          </div>
+          <>
+            {/* <div className="">
+              <p className="fw-lighter fs-5">First Name</p>
+              <p className="fw-medium fs-5 text-black">{firstName}</p>
+            </div> */}
+            {/* <div className="">
+              <p className="fw-lighter fs-5">Email Address</p>
+              <p className="fw-medium fs-5 text-black">{email}</p>
+            </div> */}
+          </>
+          <>
+            {/* <div className="">
+              <p className="fw-lighter fs-5">Last Name</p>
+              <p className="fw-medium fs-5 text-black">{lastName}</p>
+            </div> */}
+            {/* <div className="">
+              <p className="fw-lighter fs-5">Mobile Number</p>
+              <p className="fw-medium fs-5 text-black">{mobileNumber}</p>
+            </div> */}
+<div className="">
+              <p className="fw-lighter fs-5">Education</p>
+              <p className="fw-medium fs-5 text-black">{education}</p>
+            </div>
+
+            <div className="">
+              <p className="fw-lighter fs-5">Company Name</p>
+              <p className="fw-medium fs-5 text-black">{startUp?.company?startUp?.company:investor?.companyName?investor?.companyName:"No company"}</p>
+            </div>
+
+            <div className="">
+              <p className="fw-lighter fs-5">Designation</p>
+              <p className="fw-medium fs-5 text-black">{designation}</p>
+            </div>
+
+            <div className="">
+              <p className="fw-lighter fs-5">Experience</p>
+              <p className="fw-medium fs-5 text-black">{experience}</p>
+            </div>
+
+            
+          </>
         </div>
       </article>
     </>
