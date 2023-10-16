@@ -145,8 +145,8 @@ const Chats = () => {
           console.error("Error-->", error);
         })
         .finally(() => {
-          searchParams.delete('userId');
-          setSearchParams(searchParams);
+          // searchParams.delete('userId');
+          // setSearchParams(searchParams);
         })
     }
   }, []);
