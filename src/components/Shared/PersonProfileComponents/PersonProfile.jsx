@@ -22,6 +22,7 @@ const PERSON = {
 };
 
 export default function PersonProfile({ theme, short, personData }) {
+  console.log(personData)
   let profilePicture;
   let firstName;
   let lastName;
@@ -36,7 +37,12 @@ export default function PersonProfile({ theme, short, personData }) {
   let companyName;
   let socialLinks;
   let colorCard;
+  let investor;
+  let startUp;
+  let experience;
+  let education;
 
+  
   if (personData.startUp) {
     profilePicture = personData.profilePicture;
     firstName = personData.firstName;
@@ -52,6 +58,7 @@ export default function PersonProfile({ theme, short, personData }) {
     startedAtDate = personData.startUp.startedAtDate;
     socialLinks = personData.startUp.socialLinks;
     colorCard = personData.startUp.colorCard;
+    startUp=personData.startUp;
   } else {
     profilePicture = personData.profilePicture;
     firstName = personData.firstName;
@@ -67,6 +74,9 @@ export default function PersonProfile({ theme, short, personData }) {
     startedAtDate = personData.investor.startedAtDate;
     socialLinks = personData.investor.socialLinks;
     colorCard = personData.investor.colorCard;
+    investor=personData.investor;
+    experience=personData.experience;
+    education=personData.education;
   }
 
   return (
@@ -95,6 +105,11 @@ export default function PersonProfile({ theme, short, personData }) {
           lastName={lastName}
           email={email}
           mobileNumber={phoneNumber}
+          investor={investor}
+          startUp={startUp}
+          designation={designation}
+          experience={experience}
+          education={education}
         />
       </div>
 
