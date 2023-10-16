@@ -67,12 +67,9 @@ export default function Milestones({ headingClass, containerClass, theme }) {
       {/* Modal for adding new team member */}
       <div className="addMilestoneModal__container">
         <ModalBSContainer id={"AddMilestoneModal"} modalXl>
-          <ModalBSHeader
-            title={"Add Milestone"}
-            className={"orange__heading"}
-          />
+          <ModalBSHeader title={"Add Milestone"} className={""} />
           <ModalBSBody>
-            <AddMilestoneModal />
+            <AddMilestoneModal theme={"investor"} />
           </ModalBSBody>
         </ModalBSContainer>
       </div>

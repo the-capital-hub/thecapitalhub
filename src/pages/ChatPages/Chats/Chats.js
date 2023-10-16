@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import { environment } from "../../../environments/environment";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { findChat, createChat } from "../../../Service/user";
 import CommunitiesContainer from "../../../components/Investor/ChatComponents/CommunitiesContainer";
 import ChatSettings from "../../../components/Investor/ChatComponents/ChatSettings/ChatSettings";
@@ -25,10 +25,11 @@ import selectAChatIcon from "../../../Images/Chat/selectAChat.png";
 const Chats = () => {
   // search params
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  // const userId = searchParams.get("userId" );
+  const [searchParams, setSearchParams] = useSearchParams();
+  const paramUserId = searchParams.get("userId");
   const isCommunityOpen = searchParams.get("isCommunityOpen");
   const navigate = useNavigate();
+
 
   // Fetch global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -48,6 +49,7 @@ const Chats = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isRead, setIsRead] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
+  const [loading, setLoading] = useState({ userChat: false });
 
   // const [isCommunitySelected, setIsCommunitySelected] = useState(false);
   // const previousUrl = window.history.length > 1 ? window.history.go(-1) : null;
@@ -109,12 +111,16 @@ const Chats = () => {
 
   // create chat. Pass userId and loggedInUserId
   const handleCreateChat = async () => {
-    await createChat(userId, loggedInUser._id)
+    setLoading((prev) => {
+      return { ...prev, userChat: true };
+    });
+    await createChat(paramUserId, loggedInUser._id)
       .then((res) => {
-        // setSelectedChat(res.data._id);
-        // setSelectedUser(userId);
         dispatch(setChatId(res.data._id));
-        dispatch(setUserId(userId));
+        // dispatch(setUserId(userId));
+        setLoading((prev) => {
+          return { ...prev, userChat: false };
+        });
       })
       .catch((error) => {
         console.error("Error creating chat-->", error);
@@ -124,25 +130,26 @@ const Chats = () => {
   // When userId changes findchat and set selectedChatId and selectedUserId
   // If a chat does not exist, create a new chat.
   useEffect(() => {
-    if (userId) {
-      findChat(userId, loggedInUser._id)
+    if (paramUserId) {
+      dispatch(setUserId(paramUserId));
+      findChat(paramUserId, loggedInUser._id)
         .then((res) => {
           console.log("Result", res);
           if (res.data.length === 0) {
             return handleCreateChat();
           } else {
-            // setSelectedChat(res.data._id);
-            // setSelectedUser(userId);
             dispatch(setChatId(res.data._id));
-            dispatch(setUserId(userId));
-            console.log("Chat:", res.data._id);
           }
         })
         .catch((error) => {
           console.error("Error-->", error);
-        });
+        })
+        .finally(() => {
+          // searchParams.delete('userId');
+          // setSearchParams(searchParams);
+        })
     }
-  }, [userId]);
+  }, []);
 
   const renderMobieHeader = () => {
     return (
@@ -199,9 +206,8 @@ const Chats = () => {
       <div className="container-fluid chat_main_container">
         {/* Left section */}
         <div
-          className={`left_section_wrapper mt-3 mx-3 ${
-            isMobileView && "d-none"
-          }`}
+          className={`left_section_wrapper mt-3 mx-3 ${isMobileView && "d-none"
+            }`}
         >
           <section className="left_section pe-1 ">
             <span className="back_img rounded-circle shadow-sm" title="Go Back">
@@ -250,7 +256,7 @@ const Chats = () => {
                 />
               </section>
             )
-          ) : chatId ? (
+          ) : chatId && !loading?.userChat ? (
             <>
               <ChatNavbar
                 isclear={setCleared}

@@ -23,9 +23,9 @@ function PrivateRoute({ children, ...props }) {
 
   const isLoggedIn = () => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
-    console.log("isLoggedIn-->", isLoggedIn);
     return isLoggedIn === "true";
   };
+
   if (!isLoggedIn()) {
     return <Navigate to="/login" replace />;
   }
@@ -42,8 +42,9 @@ function PrivateRoute({ children, ...props }) {
         />
 
         <div
-          className={`container-fluid investor_home_container ${sidebarCollapsed ? "sidebar-collapsed" : ""
-            }`}
+          className={`container-fluid investor_home_container ${
+            sidebarCollapsed ? "sidebar-collapsed" : ""
+          }`}
         >
           <LogOutPopUp />
 

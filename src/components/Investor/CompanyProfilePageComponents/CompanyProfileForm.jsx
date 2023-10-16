@@ -217,7 +217,11 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
               >
                 {formData.location}
               </button>
-              <ul className="dropdown-menu m-0 p-0">
+              <ul
+                className={`dropdown-menu m-0 p-0 ${
+                  investor ? "investor" : "startup"
+                }`}
+              >
                 {LOCATIONS.map((location, index) => {
                   return (
                     <li key={`${location}${index}`} className="m-0 p-0">
@@ -270,7 +274,11 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
             >
               <span>{formData.sector}</span>
             </button>
-            <ul className="dropdown-menu m-0 p-0">
+            <ul
+              className={`dropdown-menu m-0 p-0 ${
+                investor ? "investor" : "startup"
+              }`}
+            >
               {SECTORS.map((sector, index) => {
                 return (
                   <li key={`${sector}${index}`} className="m-0 p-0">

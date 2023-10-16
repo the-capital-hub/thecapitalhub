@@ -125,7 +125,6 @@ const userSchema = new Schema(
         role: String,
       },
     ],
-
     recentEducation: [
       {
         logo: String,
@@ -165,6 +164,9 @@ const userSchema = new Schema(
       type: String,
       default: false,
     },
+    secretKey: {
+      type: String,
+    }
   },
   {
     timestamps: true,

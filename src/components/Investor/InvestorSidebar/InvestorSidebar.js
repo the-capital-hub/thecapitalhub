@@ -40,6 +40,7 @@ import ExploreIcon from "../../../Images/Investor/Sidebar/explore.svg";
 const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const isMobileView = useSelector((state) => state.design.isMobileView);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [isCommunityDetailOpen, setIsCommunityDetailOpen] = useState(false);
   const location = useLocation();
@@ -61,13 +62,21 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
 
   function handleMyCommunityClick() {
     navigate("/chats?isCommunityOpen=true");
-  }
+  } 
 
   return (
     <div
       className={`startup_sidebar ${sidebarCollapsed ? "collapsed" : ""}`}
-      onMouseLeave={() => setSidebarCollapsed(true)}
-      onMouseEnter={() => setSidebarCollapsed(false)}
+      onMouseLeave={() => {
+        if (!isMobileView) {
+          setSidebarCollapsed(true);
+        }
+      }}
+      onMouseEnter={() => {
+        if (!isMobileView) {
+          setSidebarCollapsed(false);
+        }
+      }}
     >
       <div
         className={`close-menu ${!sidebarCollapsed && "close-btn-collapsed"}`}
