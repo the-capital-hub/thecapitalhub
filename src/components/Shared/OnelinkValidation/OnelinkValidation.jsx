@@ -3,11 +3,13 @@ import "./OnelinkValidation.scss";
 import IconReportPost from "../../Investor/SvgIcons/IconReportPost";
 import IconPassword from "../../Investor/SvgIcons/IconPassword";
 import MaxWidthWrapper from "../MaxWidthWrapper/MaxWidthWrapper";
+import SpinnerBS from "../Spinner/SpinnerBS";
 
 export default function OnelinkValidation() {
   // States for handling Invalid secret Key
   const [error, setError] = useState(null);
   const [pin, setPin] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // Handle invalid Secret Key
   const handleInvalid = (value) => {
@@ -82,7 +84,14 @@ export default function OnelinkValidation() {
               Cancel
             </button>
             <button type="button" className="btn_submit">
-              Submit
+              {loading ? (
+                <span className=" d-flex align-items-center gap-2">
+                  <SpinnerBS spinnerSizeClass="spinner-border-sm" />
+                  Submit
+                </span>
+              ) : (
+                "Submit"
+              )}
             </button>
           </div>
         </div>
