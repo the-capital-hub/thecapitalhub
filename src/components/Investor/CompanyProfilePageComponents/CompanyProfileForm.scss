@@ -135,6 +135,18 @@
         }
       }
     }
+
+    &.investor {
+      &::-webkit-scrollbar {
+        &-thumb {
+          background-color: #d3f36b22;
+
+          &:hover {
+            background-color: #d3f36b;
+          }
+        }
+      }
+    }
   }
 
   .sector_text {

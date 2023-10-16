@@ -17,8 +17,7 @@ import EasyCrop from "react-easy-crop";
 import { BsLink45Deg } from "react-icons/bs";
 import IconFile from "../../Investor/SvgIcons/IconFile";
 import IconVideo from "../../../Images/post/Video.svg";
-import {s3} from "../../../Service/awsConfig";
-
+import { s3 } from "../../../Service/awsConfig";
 
 const CreatePostPopUp = ({
   setPopupOpen,
@@ -243,9 +242,11 @@ const CreatePostPopUp = ({
 
   return (
     <>
-      {popupOpen && <div className="background-overlay"></div>}
+      {popupOpen && <div className="createpost-background-overlay"></div>}
       <div
-        className={`modal ${popupOpen ? "d-block" : ""}`}
+        className={`create_post_modal rounded p-2 ${
+          popupOpen ? "d-block" : ""
+        }`}
         tabIndex="-1"
         role="dialog"
       >
@@ -292,6 +293,7 @@ const CreatePostPopUp = ({
                   value={postText}
                   onChange={handleTextareaChange}
                   placeholder="Write a post..."
+                  rows={3}
                 />
                 {/* <select
                   name="category"
@@ -351,7 +353,20 @@ const CreatePostPopUp = ({
                     </button>
                   </div>
                 )}
-                {cropComplete && <img src={croppedImage} alt="" />}
+                {cropComplete && (
+                  <div className="cropped-preview w-100 d-flex justify-content-center">
+                    <img
+                      src={croppedImage}
+                      alt="cropped post"
+                      className=""
+                      style={{
+                        maxHeight: "30vh",
+                        width: "auto",
+                        objectFit: "contain",
+                      }}
+                    />
+                  </div>
+                )}
 
                 {previewVideo && (
                   <video

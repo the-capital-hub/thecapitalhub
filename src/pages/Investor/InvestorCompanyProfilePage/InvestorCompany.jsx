@@ -14,11 +14,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
-import {
-  loginSuccess,
-} from "../../../Store/features/user/userSlice";
+import { loginSuccess } from "../../../Store/features/user/userSlice";
 import InvestorAfterSuccessPopUp from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
 import { useNavigate } from "react-router-dom";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 export default function CompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -30,6 +29,12 @@ export default function CompanyProfilePage() {
   const [companies, setCompanies] = useState([]);
   const [selectedCompanyId, setSelectedCompanyId] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
+
+  // Set page title
+  useEffect(() => {
+    document.title = "Company Profile | Investors - The Capital Hub";
+    dispatch(setPageTitle("Company Profile"));
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -52,13 +57,14 @@ export default function CompanyProfilePage() {
     const newValue = e.target.value;
     console.log(newValue);
     // if (newValue.length > 2) {
-    searchInvestors(newValue).then(({ data }) => {
-      setCompanies(data);
-      console.log(data);
-    })
+    searchInvestors(newValue)
+      .then(({ data }) => {
+        setCompanies(data);
+        console.log(data);
+      })
       .catch(() => {
         setCompanies([]);
-      })
+      });
     // }
     setSelectedCompanyId(null);
   };
@@ -71,7 +77,10 @@ export default function CompanyProfilePage() {
 
   const handleAddInvestor = async () => {
     try {
-      const response = await addUserAsInvestor(loggedInUser._id, selectedCompanyId);
+      const response = await addUserAsInvestor(
+        loggedInUser._id,
+        selectedCompanyId
+      );
       if (response.status === 200) {
         dispatch(loginSuccess(response.data));
         setShowSuccess(true);
@@ -88,7 +97,7 @@ export default function CompanyProfilePage() {
     } catch (error) {
       console.log(error.message);
     }
-  }
+  };
 
   const handleAddNew = async () => {
     try {
@@ -123,13 +132,15 @@ export default function CompanyProfilePage() {
               <>
                 {companyData.length !== 0 ? (
                   companyData.founderId === loggedInUser._id ? (
-                    <div className="bg-white rounded-4 p-4">
-                      <Link to="/investor/company-profile/edit" className="text-decoration-none text-dark fs-5">
+                    <div className="bg-white rounded-4 p-4 shadow-sm border">
+                      <Link
+                        to="/investor/company-profile/edit"
+                        className="text-decoration-none text-dark fs-5"
+                      >
                         Click here to edit company details
                       </Link>
                     </div>
                   ) : (
-
                     <div className="bg-white rounded-4 p-4">
                       {/* <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5"> */}
                       <button className="btn-base investor" onClick={handleAddNew}>
@@ -151,9 +162,18 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${selectedCompanyId === company._id ? 'active' : ''}`}
+                                className={`suggestion-item ${
+                                  selectedCompanyId === company._id
+                                    ? "active"
+                                    : ""
+                                }`}
                                 key={index}
-                                onClick={() => handleCompanySelection(company._id, company.companyName)}
+                                onClick={() =>
+                                  handleCompanySelection(
+                                    company._id,
+                                    company.companyName
+                                  )
+                                }
                               >
                                 <img
                                   src={company.logo || DefaultAvatar}
@@ -183,7 +203,9 @@ export default function CompanyProfilePage() {
                       <p className="text-decoration-none text-dark fs-5">Or</p>
                     </div>
                     <div>
-                      <p className="text-decoration-none text-dark fs-5">Choose from an existing Company</p>
+                      <p className="text-decoration-none text-dark fs-5">
+                        Choose from an existing Company
+                      </p>
                       <div>
                         <input
                           type="text"
@@ -195,9 +217,15 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${selectedCompanyId === company._id ? 'active' : ''}`}
+                                className={`suggestion-item ${
+                                  selectedCompanyId === company._id
+                                    ? "active"
+                                    : ""
+                                }`}
                                 key={index}
-                                onClick={() => handleCompanySelection(company._id, company.companyName)}
+                                onClick={() => 
+                                  handleCompanySelection(company._id, company.companyName)
+                                }
                               >
                                 <img
                                   src={company.logo || DefaultAvatar}
@@ -221,7 +249,6 @@ export default function CompanyProfilePage() {
                 )}
               </>
             )}
-
           </div>
           {/* {companyData.length !== 0 ? (
             <CompanyProfile
@@ -241,9 +268,12 @@ export default function CompanyProfilePage() {
               <div className="bg-white rounded-4 p-4">
                 <p>No company found.</p>
               </div>
-
             ) : (
-              <CompanyProfile isOnelink={true} investorData={companyData} startup="false" />
+              <CompanyProfile
+                isOnelink={true}
+                investorData={companyData}
+                startup="false"
+              />
             )
           ) : (
             <div className="mx-auto w-100 bg-white rounded-5 p-5 d-flex justify-content-center min-vh-100">

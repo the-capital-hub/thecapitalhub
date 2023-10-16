@@ -492,6 +492,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
           <input
             type="text"
             name="introductoryMessage"
+            className="w-100"
             placeholder="Your message..."
             onChange={(e) => setSendText(e.target.value)}
             onKeyDown={handleKeyDown}

@@ -100,7 +100,7 @@ export default function CompanyProfile({
         </div>
         <CompanyAbout
           about={description}
-          vision={!short && vision} 
+          vision={!short && vision}
           mission={!short && mission}
           noOfEmployees={noOfEmployees}
         />

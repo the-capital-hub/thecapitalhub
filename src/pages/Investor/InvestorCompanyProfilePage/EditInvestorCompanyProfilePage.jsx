@@ -4,7 +4,7 @@ import RecommendationCard from "../../../components/Investor/InvestorGlobalCards
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import CompanyProfileForm from "../../../components/Investor/CompanyProfilePageComponents/CompanyProfileForm";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
 import RaghuImage from "../../../Images/aboutUs/Raghu.jpeg";
@@ -12,8 +12,12 @@ import CoinIcon from "../../../Images/investorView/Rectangle.png";
 import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
 import { getInvestorById, postInvestorData } from "../../../Service/user";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import Milestones from "../../../components/Investor/CompanyProfilePageComponents/Milestones/Milestones";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 export default function EditInvestorCompanyProfilePage() {
+  const dispatch = useDispatch();
+
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const [colorCardData, setColorCardData] = useState(null);
@@ -22,6 +26,12 @@ export default function EditInvestorCompanyProfilePage() {
   const [companyData, setCompanyData] = useState([]);
   const [isBioEditable, setIsBioEditable] = useState(false);
   const [companyDescription, setCompanyDescription] = useState(null);
+
+  // Set page title
+  useEffect(() => {
+    document.title = "Edit Company Profile | Investors - The Capital Hub";
+    dispatch(setPageTitle("Edit Company"));
+  }, []);
 
   useEffect(() => {
     getInvestorById(loggedInUser.investor).then(({ data }) => {
@@ -135,9 +145,15 @@ export default function EditInvestorCompanyProfilePage() {
             )}
             {/* <Link className="see__more align-self-end">See more</Link> */}
           </div>
-          {/* When integrating with backend replace below code with CoreTeam Component */}
+
           {/* Core Team */}
           <div className="core__team bg-white rounded-3 p-5 d-flex flex-column gap-4 border">
+            {/* <CoreTeam
+              companyData={companyData}
+              setCompanyData={setCompanyData}
+              theme="investor"
+            /> */}
+            {/* When integrating with backend replace below code with CoreTeam Component above */}
             <div className="d-flex align-items-center justify-content-between">
               <h2>Core Team</h2>
               <Link className="see__more align-self-end">See more</Link>
@@ -197,87 +213,11 @@ export default function EditInvestorCompanyProfilePage() {
               </div>
             </div>
           </div>
+
           {/* When integrating with backend replace below code with Milestones Component */}
           {/* Milestones */}
           <div className="milestones__component bg-white rounded-3 p-5 d-flex flex-column gap-4 border">
-            <div className="d-flex align-items-center justify-content-between">
-              <h2>Milestones</h2>
-              <Link className="see__more align-self-end">See more</Link>
-            </div>
-            <div className="milestone__cards__container d-flex align-items-center gap-5 flex-wrap">
-              <div
-                className="p-4 d-flex flex-column align-items-center gap-3 rounded-5"
-                style={{
-                  backgroundColor: "#EDEDED",
-                  width: "240px",
-                  height: "260px",
-                }}
-              >
-                {/* <img
-                  src={RaghuImage}
-                  alt={"name"}
-                  style={{ width: "50px", height: "50px" }}
-                  className="rounded-circle"
-                /> */}
-                <Link className="see__more orange align-self-end mt-auto">
-                  See more
-                </Link>
-              </div>
-              <div
-                className="p-4 d-flex flex-column align-items-center gap-3 rounded-5"
-                style={{
-                  backgroundColor: "#EDEDED",
-                  width: "240px",
-                  height: "260px",
-                }}
-              >
-                {/* <img
-                    src={RaghuImage}
-                    alt={"name"}
-                    style={{ width: "50px", height: "50px" }}
-                    className="rounded-circle"
-                  /> */}
-                <Link className="see__more orange align-self-end mt-auto">
-                  See more
-                </Link>
-              </div>
-              <div
-                className="p-4 d-flex flex-column align-items-center gap-3 rounded-5"
-                style={{
-                  backgroundColor: "#EDEDED",
-                  width: "240px",
-                  height: "260px",
-                }}
-              >
-                {/* <img
-                    src={RaghuImage}
-                    alt={"name"}
-                    style={{ width: "50px", height: "50px" }}
-                    className="rounded-circle"
-                  /> */}
-                <Link className="see__more orange align-self-end mt-auto">
-                  See more
-                </Link>
-              </div>
-              <div
-                className="p-4 d-flex flex-column align-items-center gap-3 rounded-5"
-                style={{
-                  backgroundColor: "#EDEDED",
-                  width: "240px",
-                  height: "260px",
-                }}
-              >
-                {/* <img
-                    src={RaghuImage}
-                    alt={"name"}
-                    style={{ width: "50px", height: "50px" }}
-                    className="rounded-circle"
-                  /> */}
-                <Link className="see__more orange align-self-end mt-auto">
-                  See more
-                </Link>
-              </div>
-            </div>
+            <Milestones theme={"investor"} />
           </div>
           {/* Color Cards */}
           <div className="card_holder d-flex justify-content-between flex-wrap">

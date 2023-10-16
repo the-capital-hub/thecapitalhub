@@ -49,6 +49,7 @@ const Chats = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isRead, setIsRead] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
+  const [loading, setLoading] = useState({ userChat: false });
 
   // const [isCommunitySelected, setIsCommunitySelected] = useState(false);
   // const previousUrl = window.history.length > 1 ? window.history.go(-1) : null;
@@ -110,9 +111,16 @@ const Chats = () => {
 
   // create chat. Pass userId and loggedInUserId
   const handleCreateChat = async () => {
+    setLoading((prev) => {
+      return { ...prev, userChat: true };
+    });
     await createChat(paramUserId, loggedInUser._id)
       .then((res) => {
         dispatch(setChatId(res.data._id));
+        // dispatch(setUserId(userId));
+        setLoading((prev) => {
+          return { ...prev, userChat: false };
+        });
       })
       .catch((error) => {
         console.error("Error creating chat-->", error);
@@ -248,7 +256,7 @@ const Chats = () => {
                 />
               </section>
             )
-          ) : chatId ? (
+          ) : chatId && !loading?.userChat ? (
             <>
               <ChatNavbar
                 isclear={setCleared}

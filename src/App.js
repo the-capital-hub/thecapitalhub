@@ -19,8 +19,26 @@ import BlogRoutes from "./routes/BlogRoutes";
 import PublicRoutes from "./routes/PublicRoutes";
 import EcommerceRoutes from "./routes/EcommerceRoutes";
 import NotFound404 from "./pages/Error/NotFound404/NotFound404";
+import { useDispatch } from "react-redux";
+import { setIsMobileView } from "./Store/features/design/designSlice";
+import { useEffect } from "react";
 
 function App() {
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    function handleWindowResize() {
+      const isMobile = window.innerWidth <= 820;
+      dispatch(setIsMobileView(isMobile));
+    }
+    window.addEventListener("resize", handleWindowResize);
+    handleWindowResize();
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
   return (
     <Router>
       <Routes>
