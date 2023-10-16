@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./home.scss";
 import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import InvestorRecommendationCard from "../../../components/NewInvestor/InvestorRecommendationCard/InvestorRecommendationCard";
 import InvestorRightProfileCard from "../../../components/NewInvestor/InvestorRightProfileCard/InvestorRightProfileCard";
 import InvestorCreatePostPopUp from "../../../components/NewInvestor/InvestorCreatePostPopUp/InvestorCreatePostPopUp";
@@ -17,6 +17,7 @@ import {
 } from "../../../Service/user";
 import { useLocation } from "react-router-dom";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 function Home() {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -26,10 +27,16 @@ function Home() {
   const [getSavedPostData, setgetSavedPostData] = useState("");
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
 
   const openPopup = () => {
     setPopupOpen(!popupOpen);
   };
+
+  useEffect(() => {
+    dispatch(setPageTitle("Home"));
+    window.title = "Home | The Capital Hub";
+  }, []);
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
@@ -155,8 +162,8 @@ function Home() {
                       designation={designation}
                       profilePicture={profilePicture}
                       description={description}
-                      startUpCompanyName ={startUp }
-                      investorCompanyName ={investor }
+                      startUpCompanyName={startUp}
+                      investorCompanyName={investor}
                       firstName={firstName}
                       lastName={lastName}
                       video={video}

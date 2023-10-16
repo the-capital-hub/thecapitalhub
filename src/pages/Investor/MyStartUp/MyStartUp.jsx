@@ -14,8 +14,9 @@ import ModalBSBody from "../../../components/PopUp/ModalBS/ModalBSBody/ModalBSBo
 import AddModalContent from "../../../components/NewInvestor/MyStartupsComponents/AddModalContent";
 import EditModalContent from "../../../components/NewInvestor/MyStartupsComponents/EditModalContent";
 import { getInvestorById } from "../../../Service/user";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 // Mock data for my investments
 // const investmentsData = [
@@ -50,8 +51,11 @@ import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidth
 
 const MyStartUp = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     document.title = "My Startups | Investors - The Capital Hub";
+    dispatch(setPageTitle("My Startups"));
   }, []);
 
   // Make fetch request for companies data
@@ -94,12 +98,12 @@ const MyStartUp = () => {
                 <div className="">
                   {/* <Link to={""}>Edit</Link> */}
                   {investor?.founderId === loggedInUser._id && (
-                  <ModalBsLauncher
-                    id={"myInvestmentsEditModal"}
-                    className={"green_button"}
-                  >
-                    Edit
-                  </ModalBsLauncher>
+                    <ModalBsLauncher
+                      id={"myInvestmentsEditModal"}
+                      className={"green_button"}
+                    >
+                      Edit
+                    </ModalBsLauncher>
                   )}
                 </div>
               </div>
@@ -141,23 +145,23 @@ const MyStartUp = () => {
                 <div className="">
                   {/* <Link to={""}>Add New</Link> */}
                   {investor?.founderId === loggedInUser._id && (
-                  <ModalBsLauncher
-                    id={"myInterestsAddModal"}
-                    className={"green_button"}
-                  >
-                    Add New
-                  </ModalBsLauncher>
+                    <ModalBsLauncher
+                      id={"myInterestsAddModal"}
+                      className={"green_button"}
+                    >
+                      Add New
+                    </ModalBsLauncher>
                   )}
                 </div>
                 <div className="">
                   {/* <Link to={""}>Edit</Link> */}
                   {investor?.founderId === loggedInUser._id && (
-                  <ModalBsLauncher
-                    id={"myInterestsEditModal"}
-                    className={"green_button"}
-                  >
-                    Edit
-                  </ModalBsLauncher>
+                    <ModalBsLauncher
+                      id={"myInterestsEditModal"}
+                      className={"green_button"}
+                    >
+                      Edit
+                    </ModalBsLauncher>
                   )}
                 </div>
               </div>

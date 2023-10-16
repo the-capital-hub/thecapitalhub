@@ -1,10 +1,20 @@
+import { useDispatch } from "react-redux";
 import ComingSoon from "../../../components/ComingSoon/ComingSoon";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import CompanyCardContainer from "../../../components/NewInvestor/SyndicateComponents/CompanyCardContainer";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import "./Syndicates.scss";
+import { useEffect } from "react";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 export default function Syndicates() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setPageTitle("Syndicates | The Capital Hub"));
+    window.title = "Syndicates | The Capital Hub";
+  }, []);
+
   return (
     <MaxWidthWrapper>
       <div className="syndicates__container px-3 border-start">

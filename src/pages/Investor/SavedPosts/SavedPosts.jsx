@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
@@ -7,9 +7,17 @@ import "../Syndicates/Syndicates.scss";
 import "./SavedPosts.scss";
 import NavigatedCardViewer from "../../../components/Investor/SavePost/NavigatedCardViewer/NavigatedCardViewer";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { useDispatch } from "react-redux";
 
 export default function SavedPosts() {
   const [selectedTab, setSelectedTab] = useState("startups");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    window.title = "Saved Posts | The Capital Hub";
+    dispatch(setPageTitle("Saved Posts"));
+  }, []);
 
   return (
     <MaxWidthWrapper>

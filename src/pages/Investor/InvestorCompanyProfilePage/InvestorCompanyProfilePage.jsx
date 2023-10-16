@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from "react";
 import CompanyProfile from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfile";
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getOnePager } from "../../../Service/user";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import { useParams } from "react-router-dom";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 export default function InvestorCompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   let { username } = useParams();
-  console.log(username);
   const [companyData, setCompanyData] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     document.title = "Company Profile | Investors - The Capital Hub";
+    dispatch(setPageTitle("Company Profile"));
+  }, []);
+
+  useEffect(() => {
     getOnePager(username)
       .then(({ data }) => {
         setCompanyData(data);

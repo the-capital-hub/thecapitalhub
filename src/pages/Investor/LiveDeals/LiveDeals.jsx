@@ -9,6 +9,9 @@ import "./LiveDeals.scss";
 import DealsCompany from "../../../components/NewInvestor/LiveDealsComponents/DealsCompany";
 import ComingSoon from "../../../components/ComingSoon/ComingSoon";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 const companies = [
   {
@@ -38,7 +41,14 @@ const companies = [
 ];
 
 export default function LiveDeals() {
+  const dispatch = useDispatch();
+
   // Fetch companies data here.
+
+  useEffect(() => {
+    window.title = "Live Deals | The Capital Hub";
+    dispatch(setPageTitle("Live Deals"));
+  }, []);
 
   return (
     <MaxWidthWrapper>

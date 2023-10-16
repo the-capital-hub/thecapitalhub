@@ -4,7 +4,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import { getUserAndStartUpByUserIdAPI } from "../../../Service/user";
 import messageIcon from "../../../Images/StartUp/icons/message.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import IconMessage from "../../../components/NewInvestor/SvgIcons/IconMessage";
 import ProfileHeader from "../../../components/NewInvestor/OtherInvestorProfile/ProfileHeader/ProfileHeader";
 import Experience from "../../../components/NewInvestor/OtherInvestorProfile/ProfileHeader/Experience";
@@ -20,9 +20,11 @@ import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 export default function OtherInvestorProfile() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [userData, setUserData] = useState(null);
   const { userId } = useParams();
@@ -33,6 +35,12 @@ export default function OtherInvestorProfile() {
       .then(({ data }) => setUserData(data))
       .catch(() => navigate("/profile"));
   }, [userId]);
+
+  useEffect(() => {
+    dispatch(setPageTitle("Investor Profile"));
+    window.title = "Investor Profile | The Capital Hub";
+  }, []);
+
   return (
     <MaxWidthWrapper>
       <div className="otherInvestorProfile_wrapper d-flex flex-column gap-4 px-1 px-sm-3 pb-4 border-start">
@@ -97,18 +105,16 @@ export default function OtherInvestorProfile() {
                 </div>
               </div> */}
               {/* bio */}
-              {userData?.bio?
-              <div className="bio bg-white p-4 rounded border shadow-sm profile_container">
-                <h4 className="h4">Bio</h4>
-                <div className="single_education">
-                  
-                  <h6 className="h6">
-                   {userData?.bio}
-                  </h6>
+              {userData?.bio ? (
+                <div className="bio bg-white p-4 rounded border shadow-sm profile_container">
+                  <h4 className="h4">Bio</h4>
+                  <div className="single_education">
+                    <h6 className="h6">{userData?.bio}</h6>
+                  </div>
                 </div>
-              </div>
-                  :""
-}
+              ) : (
+                ""
+              )}
               {/* Company Details */}
               <CompanyDetailsCard
                 className="company_details profile_container"

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import "../Syndicates/Syndicates.scss";
 import "./MySchedule.scss";
@@ -6,11 +6,19 @@ import ViewSelect from "../../../components/NewInvestor/MyScheduleComponents/Vie
 import CalendarContainer from "../../../components/NewInvestor/MyScheduleComponents/CalenderContainer";
 import Meetings from "../../../components/NewInvestor/MyScheduleComponents/Meetings";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { useDispatch } from "react-redux";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 const MEETINGTYPES = ["daily", "weekly", "monthly"];
 
 export default function MySchedule() {
   const [view, setView] = useState("week");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    window.title = "My Schedule | The Capital Hub";
+    dispatch(setPageTitle("My Schedule"));
+  }, []);
 
   // Fetch meetingData for user here
   const EVENTS = [
