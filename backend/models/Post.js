@@ -33,6 +33,11 @@ const postSchema = new Schema(
       required: true,
     },
     image: String,
+    images: [
+      {
+        type: String,
+      }
+    ],
     video: String,
     documentName: String,
     documentUrl: String,

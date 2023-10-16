@@ -5,13 +5,25 @@ import { addNotification, deleteNotification } from "./notificationService.js";
 
 export const createNewPost = async (data) => {
   try {
-    if (data?.image) {
-      const { url } = await cloudinary.uploader.upload(data.image, {
-        folder: `${process.env.CLOUDIANRY_FOLDER}/posts/images`,
-        format: "webp",
-        unique_filename: true,
-      });
-      data.image = url;
+    // if (data?.image) {
+    //   const { url } = await cloudinary.uploader.upload(data.image, {
+    //     folder: `${process.env.CLOUDIANRY_FOLDER}/posts/images`,
+    //     format: "webp",
+    //     unique_filename: true,
+    //   });
+    //   data.image = url;
+    // }
+    if (data?.images) {
+      const uploadedImages = await Promise.all(data.images.map(async (image) => {
+        const { url } = await cloudinary.uploader.upload(image, {
+          folder: `${process.env.CLOUDIANRY_FOLDER}/posts/images`,
+          format: "webp",
+          unique_filename: true,
+        });
+        return url;
+      }));
+
+      data.images = uploadedImages;
     }
     if (data?.video) {
       const { url } = await cloudinary.uploader.upload(data.video, {
