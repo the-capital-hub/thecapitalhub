@@ -51,7 +51,7 @@ const ChatSearch = () => {
             <img src={searchIcon} alt="Search user" width={20} height={20} />
             <input
               type="search"
-              className=""
+              className="w-100"
               placeholder="Search"
               value={searchInput}
               onChange={searchInputHandler}

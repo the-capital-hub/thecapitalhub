@@ -52,6 +52,17 @@
     }
   }
 
+  .posts__container {
+    .infinite-scroll-component__outerdiv {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      .infinite-scroll-component {
+        overflow: visible !important;
+      }
+    }
+  }
+
   .box {
     background-color: #fff;
     padding: 10px;

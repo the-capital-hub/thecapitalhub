@@ -16,6 +16,8 @@ import {
   getExploreController,
   getExploreFiltersController,
   addUserAsInvestorController,
+  validateSecretKeyController,
+  createSecretKeyController,
 } from "../controllers/userData.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
@@ -30,6 +32,9 @@ router.patch("/updateUserById/:userId", updateUserByIdController);
 router.post("/requestPasswordReset", requestPasswordResetController);
 
 router.patch("/resetPassword", resetPasswordController);
+
+//validate onelink secret key
+router.post("/validateSecretKey", validateSecretKeyController);
 
 // Authorized routes below
 router.use(authenticateToken);  
@@ -54,5 +59,8 @@ router.patch("/addUserAsInvestor", addUserAsInvestorController);
 // get explore
 router.get("/explore", getExploreController);
 router.get("/exploreFilters", getExploreFiltersController);
+
+//create secret key
+router.post("/createSecretKey", createSecretKeyController);
 
 export default router;

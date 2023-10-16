@@ -9,7 +9,7 @@
 }
 
 .name_number {
-  width: 60%;
+  width: 100%;
   .personal_info_grid {
     p {
       font-weight: 400;
@@ -17,8 +17,37 @@
     }
 
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 2rem;
+
+    .fname {
+      order: 1;
+    }
+
+    .lname {
+      order: 2;
+    }
+
+    .email {
+      order: 3;
+    }
+
+    .number {
+      order: 4;
+    }
+
+    @media (min-width: 768px) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      .lname {
+        order: 3;
+      }
+
+      .email {
+        order: 2;
+      }
+    }
   }
 }
 
