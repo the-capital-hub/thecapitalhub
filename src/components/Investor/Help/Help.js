@@ -9,10 +9,15 @@ import QuestionIcon from "../../../Images/Help/Questionmark.png";
 import AvatarIcon from "../../../Images/Help/Avatar.png";
 import { useEffect } from "react";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { useDispatch } from "react-redux";
 
 const Help = () => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     document.title = "Help | The Capital Hub";
+    dispatch(setPageTitle("Help"));
   }, []);
   return (
     <MaxWidthWrapper>

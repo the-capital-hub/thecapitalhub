@@ -9,7 +9,7 @@ function ValidateOneLink({ children, ...props }) {
   const handleSidebarToggle = () => {
     setSidebarCollapsed((prev) => !prev);
   };
-  
+
   const location = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -20,10 +20,10 @@ function ValidateOneLink({ children, ...props }) {
       <NavBarIV handleSidebarToggle={handleSidebarToggle} />
 
       <div
-        className={`container-fluid investor_view_container ${sidebarCollapsed ? "sidebar-collapsed" : ""
-          }`}
+        className={`container-fluid investor_view_container ${
+          sidebarCollapsed ? "sidebar-collapsed" : ""
+        }`}
       >
-
         <div className="sidebar">
           <SideBarIV
             sidebarCollapsed={sidebarCollapsed}
@@ -40,4 +40,3 @@ function ValidateOneLink({ children, ...props }) {
 }
 
 export default ValidateOneLink;
-
