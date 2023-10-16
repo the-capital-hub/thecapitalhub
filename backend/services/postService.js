@@ -22,7 +22,6 @@ export const createNewPost = async (data) => {
         });
         return url;
       }));
-
       data.images = uploadedImages;
     }
     if (data?.video) {
