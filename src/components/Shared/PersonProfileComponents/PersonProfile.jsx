@@ -32,12 +32,13 @@ export default function PersonProfile({ theme, short, personData }) {
     email,
     phoneNumber,
     companyName,
+    investor,
+    startUp,
     location,
     bio,
     experience,
     education,
   } = personData;
-console.log(personData)
   return (
     <div className={`person_profile_wrapper bg-white shadow-sm ${theme}`}>
       <div className="person__section__one border-bottom d-flex flex-column gap-4 py-5 px-5">
@@ -62,8 +63,8 @@ console.log(personData)
           lastName={lastName}
           email={email}
           mobileNumber={phoneNumber}
-          companyName={companyName}
-          designation={designation}
+          investor={investor}
+          startUp={startUp}          designation={designation}
           experience={experience}
           education={education}
         />

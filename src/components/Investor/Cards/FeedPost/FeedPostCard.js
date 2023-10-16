@@ -835,9 +835,9 @@ const FeedPostCard = ({
 
       {showImgagePopup && (
         <Modal>
-          <div className="image-popup-container position-relative">
+          <div className="image-popup-container ">
             <button
-              className="btn btn-sm btn-light position-absolute top-0 end-0 m-2"
+              className="btn btn-sm btn-light  top-0 end-0 m-2"
               onClick={() => setShowImgagePopup(false)}
             >
               X

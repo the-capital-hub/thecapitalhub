@@ -445,7 +445,10 @@
 
 .image-popup-container {
   width: 50vw;
-
+  position: relative;
+  button{
+    position: absolute;
+  }
   img {
     width: 100%;
     object-fit: contain;

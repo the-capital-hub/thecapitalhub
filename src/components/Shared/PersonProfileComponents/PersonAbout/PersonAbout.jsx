@@ -7,9 +7,10 @@ export default function PersonAbout({
   lastName,
   email,
   mobileNumber,
+  startUp,
+  investor,
   experience,
   education,
-  companyName,
   designation,
 }) {
   return (
@@ -48,7 +49,7 @@ export default function PersonAbout({
 
             <div className="">
               <p className="fw-lighter fs-5">Company Name</p>
-              <p className="fw-medium fs-5 text-black">{companyName}</p>
+              <p className="fw-medium fs-5 text-black">{startUp?.company?startUp?.company:investor?.companyName?investor?.companyName:"No company"}</p>
             </div>
 
             <div className="">
