@@ -9,6 +9,35 @@ import CompanyProfileList from "../../../components/NewInvestor/CompanyProfileCo
 import { useDispatch } from "react-redux";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import PersonProfileList from "../../../components/Shared/PersonProfileComponents/PersonProfileList";
+import {
+  fetchExploreFilteredResultsAPI,
+  fetchExploreFiltersAPI,
+} from "../../../Service/user";
+import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
+
+const sectorOptions = [
+  "FMCG",
+  "Restaurants",
+  "Education",
+  "Tourism",
+  "Automobile",
+  "Textile",
+  "Chemicals",
+  "Telecommunications",
+  "Oil and Gas",
+  "Renewable Energy",
+  "Investment Banking and Venture Capital",
+  "NBFC",
+  "Biotechnology",
+  "Software Development Services",
+  "Computer and Information Technology",
+  "Aerospace",
+  "Sales and Marketing",
+];
+
+const genderOptions = ["Male", "Female"];
+
+const sizeOptions = ["10+", "100+", "1000+"];
 
 function Explore() {
   const dispatch = useDispatch();
@@ -25,15 +54,68 @@ function Explore() {
     dispatch(setPageTitle("Explore"));
   }, []);
 
+  useEffect(() => {
+    fetchFilters();
+    onSubmitFilters();
+  }, [activeTab]);
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setFilters({
+      ...filters,
+      [name]: value,
+    });
+  };
+
+  const fetchFilters = async () => {
+    try {
+      const { data } = await fetchExploreFiltersAPI(activeTab);
+      setFilterOptions(data);
+    } catch (error) {
+      console.log("Error fetching filters: ", error);
+    }
+  };
+
+  const onSubmitFilters = async (e) => {
+    e?.preventDefault();
+    setLoading(true);
+    try {
+      const { data } = await fetchExploreFilteredResultsAPI({
+        type: activeTab,
+        ...filters,
+      });
+      setFilteredData(data);
+    } catch (error) {
+      console.log("Error fetching filtered results: ", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchInitialData = async () => {
+    setFilters(null);
+    setLoading(true);
+    try {
+      const { data } = await fetchExploreFilteredResultsAPI({
+        type: activeTab,
+      });
+      setFilteredData(data);
+    } catch (error) {
+      console.log("Error fetching initial filtered results: ", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Render filter result
   const renderTabContent = () => {
     switch (activeTab) {
       case "Startup":
-        return <CompanyProfileList isStartup data={filteredData} />;
+        return <CompanyProfileList isStartup={false} data={filteredData} />;
       case "Founder":
         return (
           <PersonProfileList
-            theme={"startup"}
+            theme={"investor"}
             short={true}
             data={filteredData}
           />
@@ -41,7 +123,7 @@ function Explore() {
       case "Investor":
         return (
           <PersonProfileList
-            theme={"startup"}
+            theme={"investor"}
             short={true}
             data={filteredData}
           />
@@ -53,7 +135,7 @@ function Explore() {
 
   return (
     <MaxWidthWrapper>
-      <div className="explore_container px-3 border-start">
+      <div className="explore_container px-3 border-start mb-4">
         <SmallProfileCard text="Explore" />
         <section className="filter_container border">
           <h5 className="h5">Find StartUps by</h5>
@@ -85,9 +167,92 @@ function Explore() {
             >
               Investor
             </button>
+            {filters && (
+              <button
+                className={`btn-capital-small fs-6 px-3 ms-auto`}
+                onClick={fetchInitialData}
+              >
+                Show All
+              </button>
+            )}
           </div>
-          <div className="filter_by_selections row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-2">
-            <FilterBySelect label="Sector" name="sector" />
+
+          {/* Filters */}
+          <form
+            className="investor_explore_filters_container"
+            onSubmit={onSubmitFilters}
+          >
+            {activeTab === "Investor" && (
+              <>
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.sectors || sectorOptions}
+                  label="Sector"
+                  name="sector"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.cities}
+                  label="City"
+                  name="city"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.genders || genderOptions}
+                  label="Gender"
+                  name="gender"
+                />
+              </>
+            )}
+            {activeTab === "Startup" && (
+              <>
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.sectors || sectorOptions}
+                  label="Sector"
+                  name="sector"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.cities}
+                  label="City"
+                  name="city"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.sizes || sizeOptions}
+                  label="Size"
+                  name="size"
+                />
+              </>
+            )}
+            {activeTab === "Founder" && (
+              <>
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.sectors || sectorOptions}
+                  label="Sector"
+                  name="sector"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.cities}
+                  label="City"
+                  name="city"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.genders || genderOptions}
+                  label="Gender"
+                  name="gender"
+                />
+              </>
+            )}
+            <button className="btn-capital ms-auto" type="submit">
+              Filter {activeTab}
+            </button>
+          </form>
+          {/* <FilterBySelect label="Sector" name="sector" />
             <FilterBySelect label="Sub-Sector" name="subSector" />
             <FilterBySelect label="State" name="state" />
             <FilterBySelect label="City" name="city" />
@@ -103,16 +268,29 @@ function Explore() {
                 <FilterBySelect label="Incubation" name="incubation" />
                 <FilterBySelect label="Incubation" name="incubation" />
               </>
-            )}
-          </div>
+            )} */}
         </section>
 
-        {/* Company profiles list - pass filters here */}
-        <CompanyProfileList />
-        {/* <section className="filtered_company_details">
-          <CompanyProfile />
-          <CompanyProfile />
-        </section> */}
+        {/* Filtered data list */}
+        <div className="filtered-results">
+          {loading ? (
+            <SpinnerBS
+              className="container bg-white d-flex justify-content-center align-items-center p-5 rounded-4 shadow-sm"
+              colorClass="text-secondary"
+              spinnerSizeClass="xl"
+            />
+          ) : (
+            <>
+              {!filteredData?.length ? (
+                <div className="container bg-white d-flex justify-content-center align-items-center p-5 rounded-4 shadow-sm">
+                  No {activeTab} found
+                </div>
+              ) : (
+                renderTabContent()
+              )}
+            </>
+          )}
+        </div>
       </div>
     </MaxWidthWrapper>
   );
