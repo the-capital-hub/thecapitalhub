@@ -335,7 +335,8 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   )}
                 </Link>
               </MenuItem>
-              <MenuItem
+
+              {/* <MenuItem
                 active={location.pathname.includes("/syndicates")}
                 className="active-item"
               >
@@ -343,7 +344,6 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/syndicates"
                 >
-                  {/* <img src={OnelinkIcon} alt="image" width="17px" height="17px" /> */}
                   <img
                     src={syndicateIcon}
                     alt="image"
@@ -354,8 +354,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     <span className="text-black">Syndicates</span>
                   )}
                 </Link>
-              </MenuItem>
-              <MenuItem
+              </MenuItem> */}
+
+              {/* <MenuItem
                 active={location.pathname.includes("/live-deals")}
                 className="active-item"
               >
@@ -373,7 +374,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     <span className="text-black">Live Deals</span>
                   )}
                 </Link>
-              </MenuItem>
+              </MenuItem> */}
 
               {/* <MenuItem
                 active={location.pathname.includes("/investors")}
