@@ -118,13 +118,10 @@ const Feed = () => {
               </div>
             </div>
             {/* Posts container - column of <FeedPostCard /> */}
-            <div className="Posts__container d-flex flex-column gap-3">
+            <div className="posts__container d-flex flex-column gap-3">
               {/* {!loadingFeed ? ( */}
               <InfiniteScroll
                 className="m-0 p-0"
-                style={{
-                  width: "max-content",
-                }}
                 dataLength={allPosts.length}
                 next={fetchMorePosts}
                 hasMore={hasMore}
