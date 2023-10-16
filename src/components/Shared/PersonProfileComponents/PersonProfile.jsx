@@ -69,7 +69,6 @@ export default function PersonProfile({ theme, short, personData }) {
     colorCard = personData.investor.colorCard;
   }
 
-  console.log(personData);
   return (
     <div className={`person_profile_wrapper bg-white shadow-sm ${theme}`}>
       <div className="person__section__one border-bottom d-flex flex-column gap-4 py-5 px-3 px-lg-5">
@@ -101,6 +100,7 @@ export default function PersonProfile({ theme, short, personData }) {
 
       <div className="person__section__two d-flex flex-column gap-4 pt-3 pb-5 px-3 px-lg-5">
         <PublicLinks socialLinks={socialLinks} />
+        {/* Have to make this component reusable. Right now color card title is hard coded */}
         {!short && <CompanyStats colorCard={colorCard} />}
       </div>
     </div>
