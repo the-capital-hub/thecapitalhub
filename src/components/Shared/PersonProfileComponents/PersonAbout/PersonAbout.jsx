@@ -7,6 +7,10 @@ export default function PersonAbout({
   lastName,
   email,
   mobileNumber,
+  experience,
+  education,
+  companyName,
+  designation,
 }) {
   return (
     <>
@@ -19,24 +23,45 @@ export default function PersonAbout({
 
         <div className="personal_info_grid">
           <>
-            <div className="">
+            {/* <div className="">
               <p className="fw-lighter fs-5">First Name</p>
               <p className="fw-medium fs-5 text-black">{firstName}</p>
-            </div>
-            <div className="">
+            </div> */}
+            {/* <div className="">
               <p className="fw-lighter fs-5">Email Address</p>
               <p className="fw-medium fs-5 text-black">{email}</p>
-            </div>
+            </div> */}
           </>
           <>
-            <div className="">
+            {/* <div className="">
               <p className="fw-lighter fs-5">Last Name</p>
               <p className="fw-medium fs-5 text-black">{lastName}</p>
-            </div>
-            <div className="">
+            </div> */}
+            {/* <div className="">
               <p className="fw-lighter fs-5">Mobile Number</p>
               <p className="fw-medium fs-5 text-black">{mobileNumber}</p>
+            </div> */}
+<div className="">
+              <p className="fw-lighter fs-5">Education</p>
+              <p className="fw-medium fs-5 text-black">{education}</p>
             </div>
+
+            <div className="">
+              <p className="fw-lighter fs-5">Company Name</p>
+              <p className="fw-medium fs-5 text-black">{companyName}</p>
+            </div>
+
+            <div className="">
+              <p className="fw-lighter fs-5">Designation</p>
+              <p className="fw-medium fs-5 text-black">{designation}</p>
+            </div>
+
+            <div className="">
+              <p className="fw-lighter fs-5">Experience</p>
+              <p className="fw-medium fs-5 text-black">{experience}</p>
+            </div>
+
+            
           </>
         </div>
       </article>

@@ -21,3 +21,14 @@
     gap: 2rem;
   }
 }
+
+@media (max-width: 450px) {
+  .name_number {
+    width: 100%;
+    .personal_info_grid{
+      display: grid;
+      grid-template-columns: 1fr ;
+      gap: 2rem;
+    }
+  }
+}

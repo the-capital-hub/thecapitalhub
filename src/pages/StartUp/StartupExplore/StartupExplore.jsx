@@ -87,7 +87,6 @@ export default function StartupExplore() {
       setLoading(false);
     }
   };
-
   const fetchInitialData = async () => {
     setFilters(null);
     setLoading(true);

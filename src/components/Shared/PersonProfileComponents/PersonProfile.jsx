@@ -34,8 +34,10 @@ export default function PersonProfile({ theme, short, personData }) {
     companyName,
     location,
     bio,
+    experience,
+    education,
   } = personData;
-
+console.log(personData)
   return (
     <div className={`person_profile_wrapper bg-white shadow-sm ${theme}`}>
       <div className="person__section__one border-bottom d-flex flex-column gap-4 py-5 px-5">
@@ -60,6 +62,10 @@ export default function PersonProfile({ theme, short, personData }) {
           lastName={lastName}
           email={email}
           mobileNumber={phoneNumber}
+          companyName={companyName}
+          designation={designation}
+          experience={experience}
+          education={education}
         />
       </div>
 
