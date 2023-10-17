@@ -1,4 +1,10 @@
 .investment_philosophy_wrapper {
+  &.leftBorder {
+    @media (min-width: 1200px) {
+      border-left: 1px solid #e7e7e7;
+    }
+  }
+
   .investment_philosophy_section {
     fieldset,
     legend {
