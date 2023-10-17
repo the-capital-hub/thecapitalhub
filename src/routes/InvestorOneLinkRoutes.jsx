@@ -27,7 +27,7 @@ export default function InvestorOneLinkRoutes() {
   return (
     <>
       <Route
-        path=""
+        index
         element={
           <Suspense fallback={<SuspenseLoader />}>
             <InvestorOneLinkProfile />
