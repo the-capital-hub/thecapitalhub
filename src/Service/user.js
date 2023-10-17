@@ -918,7 +918,6 @@ export const markMessagesAsReadInCommunities = async (chatId, userId) => {
   }
 };
 
-
 export const getUnreadMessageCountInCommunities = async (chatId, userId) => {
   try {
     const response = await axiosInstance.get(
@@ -969,7 +968,8 @@ export const fetchExploreFilteredResultsAPI = async (filtersObj) => {
 export const updateCommunity = async (communityId, updatedData) => {
   try {
     const response = await axiosInstance.patch(
-      `${API.updateCommunity}/${communityId}`, updatedData
+      `${API.updateCommunity}/${communityId}`,
+      updatedData
     );
     return response.data;
   } catch (error) {
@@ -993,7 +993,8 @@ export const getUnAddedMembers = async (communityId, userId) => {
 export const addMembersToCommunity = async (communityId, memberIds) => {
   try {
     const response = await axiosInstance.patch(
-      `${API.addMembersToCommunity}/${communityId}`, { memberIds }
+      `${API.addMembersToCommunity}/${communityId}`,
+      { memberIds }
     );
     return response.data;
   } catch (error) {
@@ -1004,9 +1005,9 @@ export const addMembersToCommunity = async (communityId, memberIds) => {
 
 export const createSecretKey = async (secretOneLinkKey) => {
   try {
-    const response = await axiosInstance.post(
-      `${API.createSecretKey}`, { secretOneLinkKey }
-    );
+    const response = await axiosInstance.post(`${API.createSecretKey}`, {
+      secretOneLinkKey,
+    });
     return response.data;
   } catch (error) {
     console.error("Error:", error);
@@ -1016,12 +1017,25 @@ export const createSecretKey = async (secretOneLinkKey) => {
 
 export const validateSecretKey = async (oneLinkId, secretOneLinkKey) => {
   try {
-    const response = await axiosInstance.post(
-      `${API.validateSecretKey}`, { oneLinkId, secretOneLinkKey }
-    );
+    const response = await axiosInstance.post(`${API.validateSecretKey}`, {
+      oneLinkId,
+      secretOneLinkKey,
+    });
     return response.data;
   } catch (error) {
     console.error("Error:", error);
+    throw error;
+  }
+};
+
+export const getInvestorFromOneLinkAPI = async (oneLink, userId) => {
+  try {
+    const response = await axiosInstance.get(
+      `${API.getInvestorFromOneLink}/${oneLink}/${userId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error getting investor from :", error);
     throw error;
   }
 };
