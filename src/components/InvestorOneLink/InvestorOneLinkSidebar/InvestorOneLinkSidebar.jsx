@@ -29,7 +29,7 @@ export default function InvestorOneLinkSidebar({
 
   // States
   const [user, setUser] = useState([]);
-  const [currentTab, setCurrentTab] = useState("company");
+  const [currentTab, setCurrentTab] = useState("investorProfile");
 
   // useEffect(() => {
   //     getUserById(username, userId)
@@ -107,7 +107,7 @@ export default function InvestorOneLinkSidebar({
                   className="active-item"
                   onClick={() => setCurrentTab("startupsInvested")}
                 >
-                  <Link to="">
+                  <Link to="startups-invested">
                     <IconStartupsInvested width="30px" height="30px" />
                     {!sidebarCollapsed && <span>Startups Invested</span>}
                   </Link>
@@ -119,7 +119,7 @@ export default function InvestorOneLinkSidebar({
                   className="active-item"
                   onClick={() => setCurrentTab("investment")}
                 >
-                  <Link to="">
+                  <Link to="investment-philosophy">
                     <IconInvestmentPhilosophy width="30px" height="30px" />
                     {!sidebarCollapsed && <span>Investment</span>}
                   </Link>
@@ -131,7 +131,7 @@ export default function InvestorOneLinkSidebar({
                   className="active-item"
                   onClick={() => setCurrentTab("appointment")}
                 >
-                  <Link to="">
+                  <Link to="appointment">
                     <IconAppointment width="25px" height="25px" />
                     {!sidebarCollapsed && <span>Appointment</span>}
                   </Link>
