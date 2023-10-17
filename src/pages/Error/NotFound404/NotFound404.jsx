@@ -12,9 +12,14 @@ function NotFound404() {
       <h2>Something Went Wrong</h2>
       <h5>Sorry, We can't find the page you're looking for.</h5>
 
-      <button className="btn btn-light" onClick={() => navigate(-1)}>
-        Go Back
-      </button>
+      <div className="d-flex justify-content-center gap-3">
+        <button className="btn btn-light" onClick={() => navigate(-1)}>
+          Go Back
+        </button>
+        <button className="btn btn-light" onClick={() => navigate("/")}>
+          Home
+        </button>
+      </div>
     </div>
   );
 }
