@@ -103,8 +103,8 @@ export const addMyInterestController = async (req, res) => {
 
 export const getOnePagerController = async (req, res) => {
   try {
-    const { oneLink } = req.params; 
-    const response = await getOnePager(oneLink);
+    const { oneLink, oneLinkId } = req.params; 
+    const response = await getOnePager(oneLink, oneLinkId);
     res.status(response.status).send(response);
     return response;
   } catch (error) {

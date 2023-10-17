@@ -82,6 +82,8 @@ const API = Object.freeze({
   updateCommunity: `${baseUrl}/community/updateCommunity`,
   getUnAddedMembers: `${baseUrl}/community/getUnAddedMembers`,
   addMembersToCommunity: `${baseUrl}/community/addMembersToCommunity`,
+  createSecretKey: `${baseUrl}/users/createSecretKey`,
+  validateSecretKey: `${baseUrl}/users/validateSecretKey`,
 });
 
 export default API;
