@@ -9,7 +9,11 @@ import {
   FacebookIcon,
 } from "react-share";
 import { HiOutlineClipboard } from "react-icons/hi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createSecretKey } from "../../../Service/user";
+import {
+  loginSuccess,
+} from "../../../Store/features/user/userSlice";
 
 const SharingOneLinkPopUp = ({
   introMessage,
@@ -18,10 +22,11 @@ const SharingOneLinkPopUp = ({
   investor = false,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const dispatch = useDispatch();
 
   // State for Invalid secret Key
   const [error, setError] = useState(null);
-  const [pin, setPin] = useState(null);
+  const [pin, setPin] = useState(loggedInUser.secretKey || null);
 
   const shareUrl = investor
     ? "https://thecapitalhub.in/investor/onelink/" +
@@ -45,6 +50,7 @@ const SharingOneLinkPopUp = ({
 
   // Handle invalid Secret Key
   const handleInvalid = (value) => {
+    setPin(value);
     // if value length is 0
     if (value.length === 0) {
       setError(null);
@@ -64,13 +70,15 @@ const SharingOneLinkPopUp = ({
     }
 
     // Then
-    setPin(value);
     setError(null);
   };
 
   // Handle Submit
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const {user} = await createSecretKey(pin);
+    console.log("data",user);
+    dispatch(loginSuccess(user));
   };
 
   return (
@@ -84,7 +92,7 @@ const SharingOneLinkPopUp = ({
             <fieldset className={`key rounded-2 ${"invalid"}`}>
               <legend className="key_title px-2">Assign Secret Key</legend>
               <input
-                type="password"
+                type="text"
                 minLength={4}
                 maxLength={4}
                 pattern="[0-9]{4}"
@@ -94,6 +102,7 @@ const SharingOneLinkPopUp = ({
                 className="key_input"
                 autoComplete="off"
                 onChange={(e) => handleInvalid(e.target.value)}
+                value={pin}
               />
             </fieldset>
             <em className="text-danger" style={{ fontSize: "0.75rem" }}>
@@ -118,16 +127,16 @@ const SharingOneLinkPopUp = ({
 
           <h4>Share this details via</h4>
           <div className="share-buttons">
-            <FacebookShareButton url={shareUrl} quote={messageForSharing}>
+            <FacebookShareButton url={`${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`} quote={messageForSharing}>
               <FacebookIcon size={32} round />
             </FacebookShareButton>
             <WhatsappShareButton
-              url={"\nHere is Our OneLink : " + shareUrl}
+              url={`\nHere is Our OneLink : ${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`}
               title={messageForSharing}
             >
               <WhatsappIcon size={32} round />
             </WhatsappShareButton>
-            <EmailShareButton url={shareUrl} body={messageForSharing}>
+            <EmailShareButton url={`${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`} body={messageForSharing}>
               <EmailIcon size={32} round />
             </EmailShareButton>
             {/* Clipboard icon */}
@@ -135,7 +144,7 @@ const SharingOneLinkPopUp = ({
               size={32}
               onClick={() =>
                 copyToClipboard(
-                  `${messageForSharing} \nHere is Our OneLink: ${shareUrl}`
+                  `${messageForSharing} \nHere is Our OneLink: ${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`
                 )
               }
             />

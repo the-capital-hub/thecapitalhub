@@ -993,7 +993,31 @@ export const getUnAddedMembers = async (communityId, userId) => {
 export const addMembersToCommunity = async (communityId, memberIds) => {
   try {
     const response = await axiosInstance.patch(
-      `${API.addMembersToCommunity}/${communityId}`, {memberIds}
+      `${API.addMembersToCommunity}/${communityId}`, { memberIds }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+
+export const createSecretKey = async (secretOneLinkKey) => {
+  try {
+    const response = await axiosInstance.post(
+      `${API.createSecretKey}`, { secretOneLinkKey }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+
+export const validateSecretKey = async (oneLinkId, secretOneLinkKey) => {
+  try {
+    const response = await axiosInstance.post(
+      `${API.validateSecretKey}`, { oneLinkId, secretOneLinkKey }
     );
     return response.data;
   } catch (error) {
