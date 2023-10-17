@@ -38,6 +38,7 @@ import CommunitiesIcon from "../../Investor/ChatComponents/CommunitiesIcon";
 const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const isMobileView = useSelector((state) => state.design.isMobileView);
   const [isCommunityDetailOpen, setIsCommunityDetailOpen] = useState(false);
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const location = useLocation();
@@ -64,9 +65,18 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
 
   return (
     <div
-      className={`container newInvestor_sidebar_container ${
-        sidebarCollapsed ? "collapsed" : ""
-      }`}
+      className={`container newInvestor_sidebar_container ${sidebarCollapsed ? "collapsed" : ""
+        }`}
+      onMouseLeave={() => {
+        if (!isMobileView) {
+          setSidebarCollapsed(true);
+        }
+      }}
+      onMouseEnter={() => {
+        if (!isMobileView) {
+          setSidebarCollapsed(false);
+        }
+      }}
     >
       <div id="header">
         <ProSidebar collapsed={sidebarCollapsed}>
@@ -108,13 +118,13 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 </>
               )}
             </div>
-            <div className="closemenu" onClick={menuIconClick}>
+            {/* <div className="closemenu" onClick={menuIconClick}>
               {sidebarCollapsed ? (
                 <img className="closemenu-Right" src={ArrowRight} alt="image" />
               ) : (
                 <img className="closemenu-Left" src={ArrowLeft} alt="image" />
               )}
-            </div>
+            </div> */}
           </SidebarHeader>
           <SidebarContent>
             <Menu iconShape="round">
@@ -200,9 +210,8 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     <CommunitiesIcon
                       width="17px"
                       height="17px"
-                      color={`${
-                        isCommunityDetailOpen ? "#000" : "rgba(97, 97, 97, 1)"
-                      }`}
+                      color={`${isCommunityDetailOpen ? "#000" : "rgba(97, 97, 97, 1)"
+                        }`}
                     />
                   </div>
                   {!sidebarCollapsed && (

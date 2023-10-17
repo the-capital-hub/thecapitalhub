@@ -43,40 +43,40 @@ export default function PersonProfile({ theme, short, personData }) {
   let education;
 
   
-  if (personData.startUp) {
-    profilePicture = personData.profilePicture;
-    firstName = personData.firstName;
-    lastName = personData.lastName;
-    designation = personData.designation;
-    email = personData.email;
-    phoneNumber = personData.phoneNumber;
-    bio = personData.bio;
-    isInvestor = personData.isInvestor === "true" ? true : false;
-    companyName = personData.startUp.company;
-    location = personData.startUp.location;
-    lastFunding = personData.startUp.lastFunding;
-    startedAtDate = personData.startUp.startedAtDate;
-    socialLinks = personData.startUp.socialLinks;
-    colorCard = personData.startUp.colorCard;
-    startUp=personData.startUp;
+  if (personData?.startUp) {
+    profilePicture = personData?.profilePicture;
+    firstName = personData?.firstName;
+    lastName = personData?.lastName;
+    designation = personData?.designation;
+    email = personData?.email;
+    phoneNumber = personData?.phoneNumber;
+    bio = personData?.bio;
+    isInvestor = personData?.isInvestor === "true" ? true : false;
+    companyName = personData?.startUp.company;
+    location = personData?.startUp.location;
+    lastFunding = personData?.startUp.lastFunding;
+    startedAtDate = personData?.startUp.startedAtDate;
+    socialLinks = personData?.startUp.socialLinks;
+    colorCard = personData?.startUp.colorCard;
+    startUp=personData?.startUp;
   } else {
-    profilePicture = personData.profilePicture;
-    firstName = personData.firstName;
-    lastName = personData.lastName;
-    designation = personData.designation;
-    email = personData.email;
-    phoneNumber = personData.phoneNumber;
-    bio = personData.bio;
-    isInvestor = personData.isInvestor === "true" ? true : false;
-    companyName = personData.investor.companyName;
-    location = personData.investor.location;
-    lastFunding = personData.investor.lastFunding;
-    startedAtDate = personData.investor.startedAtDate;
-    socialLinks = personData.investor.socialLinks;
-    colorCard = personData.investor.colorCard;
-    investor=personData.investor;
-    experience=personData.experience;
-    education=personData.education;
+    profilePicture = personData?.profilePicture;
+    firstName = personData?.firstName;
+    lastName = personData?.lastName;
+    designation = personData?.designation;
+    email = personData?.email;
+    phoneNumber = personData?.phoneNumber;
+    bio = personData?.bio;
+    isInvestor = personData?.isInvestor === "true" ? true : false;
+    companyName = personData?.investor?.companyName;
+    location = personData?.investor?.location;
+    lastFunding = personData?.investor?.lastFunding;
+    startedAtDate = personData?.investor?.startedAtDate;
+    socialLinks = personData?.investor?.socialLinks;
+    colorCard = personData?.investor?.colorCard;
+    investor=personData?.investor;
+    experience=personData?.experience;
+    education=personData?.education;
   }
 
   return (
