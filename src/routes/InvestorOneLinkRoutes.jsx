@@ -12,9 +12,9 @@ const InvestorOneLinkStartups = lazy(() =>
     "../pages/InvestorOneLink/InvestorOneLinkStartups/InvestorOneLinkStartups"
   )
 );
-const InvestorOneLinkInvestment = lazy(() =>
+const InvestorOneLinkPhilosophy = lazy(() =>
   import(
-    "../pages/InvestorOneLink/InvestorOneLinkInvestment/InvestorOneLinkInvestment"
+    "../pages/InvestorOneLink/InvestorOneLinkInvestment/InvestorOneLinkPhilosophy"
   )
 );
 const InvestorOneLinkAppointment = lazy(() =>
@@ -48,7 +48,7 @@ export default function InvestorOneLinkRoutes() {
         path="investment-philosophy"
         element={
           <Suspense fallback={<SuspenseLoader />}>
-            <InvestorOneLinkInvestment />
+            <InvestorOneLinkPhilosophy />
           </Suspense>
         }
       />
