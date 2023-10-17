@@ -91,7 +91,7 @@
 
   /* Style the close button */
   .cancel_button {
-    width: 30%;
+    // width: 30%;
     height: 50px;
     flex-shrink: 0;
     border-radius: 30px;
@@ -107,7 +107,9 @@
   }
 
   .ok_button {
-    width: 30%;
+    // width: 30%;
+    padding-left: 20px;
+    padding-right: 20px;
     height: 50px;
     flex-shrink: 0;
     border-radius: 30px;
