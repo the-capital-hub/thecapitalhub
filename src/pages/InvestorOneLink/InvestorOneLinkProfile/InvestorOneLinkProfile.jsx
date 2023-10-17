@@ -3,10 +3,18 @@ import "./InvestorOneLinkProfile.scss";
 import pramod from "../../../Images/aboutUs/Pramod.jpeg";
 import assets from "../../../Images/investorOneLink/profile/index";
 import { useOutletContext } from "react-router";
+import PublicLinks from "../../../components/NewInvestor/CompanyProfileComponents/company-section-two/public-links/PublicLinks";
+
 
 export default function InvestorOneLinkProfile() {
   const { investor, company } = useOutletContext();
-
+  let socialLinks = {
+    website: "",
+    facebook: "",
+    twitter: "",
+    linkedin: "",
+  };
+  console.log(company)
   return (
     <div className="investor_one_link_profile_page d-flex flex-column">
       <h1>Investor Profile</h1>
@@ -44,7 +52,7 @@ export default function InvestorOneLinkProfile() {
         <div className="social_media_section d-flex flex-column gap-1 py-2">
           <p>Social Links</p>
           <div className="link_icons d-flex flex-row flex-md-row gap-2">
-            <div className=" d-flex flex-row gap-2 align-items-center">
+            {/* <div className=" d-flex flex-row gap-2 align-items-center">
               <img src={assets.instgram} alt="Instagram" />
               <span>Instagram</span>
             </div>
@@ -55,7 +63,8 @@ export default function InvestorOneLinkProfile() {
             <div className=" d-flex flex-row gap-2 align-items-center">
               <img src={assets.twitter} alt="Twitter" />
               <span>Twitter</span>
-            </div>
+            </div> */}
+            <PublicLinks socialLinks={socialLinks} />
           </div>
         </div>
       </div>
