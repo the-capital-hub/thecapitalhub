@@ -179,34 +179,44 @@ const CreatePostPopUp = ({
     });
   };
 
-  const onCropComplete = async (croppedArea, croppedAreaPixels) => {
-    const croppedImg = await getCroppedImg(previewImage, croppedAreaPixels);
-    setCroppedImage(croppedImg);
-  };
+  // const onCropComplete = async (croppedArea, croppedAreaPixels) => {
+  //   const croppedImg = await getCroppedImg(previewImage, croppedAreaPixels);
+  //   setCroppedImage(croppedImg);
+  // };
 
   const handleSubmit = async (e) => {
+    alert("done")
     e.preventDefault();
     setPosting(true);
 
-    if (!selectedImage && !selectedVideo) {
-      if (!respostingPostId && !postText) {
-        return setPosting(false);
-      }
-    }
+    // if (!selectedImage && !selectedVideo) {
+    //   if (!respostingPostId && !postText) {
+    //     return setPosting(false);
+    //   }
+    // }
 
-    const postData = new FormData();
+    const postData = {};
+
     if (respostingPostId) {
-      postData.append("resharedPostId", respostingPostId);
+      postData.resharedPostId = respostingPostId;
     }
-    postData.append("description", postText);
-    postData.append("category", category);
-
+    postData.description = postText;
+    postData.category = category;
+    
     if (selectedImage) {
-      postData.append("image", croppedImage);
+      const imageErray=[];
+      const croppedImages= [];
+      imageErray.push(images)
+      for (let i = 0; i < imageErray.length; i++) {
+
+        const base64Data = await getBase64(imageErray[i]);
+        croppedImages.push(base64Data);
+      }
+      postData.images = croppedImages;
     }
     if (selectedVideo) {
       const video = await getBase64(selectedVideo);
-      postData.append("video", video);
+      postData.video = video;
     }
     if (selectedDocument) {
       const timestamp = Date.now();
@@ -217,9 +227,13 @@ const CreatePostPopUp = ({
         Body: selectedDocument,
       };
       const res = await s3.upload(params).promise();
-      postData.append("documentUrl", res.Location);
-      postData.append("documentName", selectedDocument.name);
+      postData.documentUrl = res.Location;
+      postData.documentName = selectedDocument.name;
     }
+
+
+
+
 
     postUserPost(postData)
       .then((response) => {
@@ -253,6 +267,9 @@ const CreatePostPopUp = ({
         .catch(() => handleClose());
     }
   }, []);
+  console.log(images)
+ 
+  // console.log(imageErray)
 
   return (
     <>
