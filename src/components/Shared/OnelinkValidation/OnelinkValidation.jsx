@@ -4,12 +4,18 @@ import IconReportPost from "../../Investor/SvgIcons/IconReportPost";
 import IconPassword from "../../Investor/SvgIcons/IconPassword";
 import MaxWidthWrapper from "../MaxWidthWrapper/MaxWidthWrapper";
 import SpinnerBS from "../Spinner/SpinnerBS";
+import { useParams } from "react-router-dom";
+import { validateSecretKey } from "../../../Service/user";
+import { useDispatch } from 'react-redux';
+import { login, logout } from '../../../Store/features/oneLink/oneLinkSlice';
 
-export default function OnelinkValidation() {
+export default function OnelinkValidation({ userId }) {
+  const dispatch = useDispatch();
   // States for handling Invalid secret Key
   const [error, setError] = useState(null);
   const [pin, setPin] = useState(null);
   const [loading, setLoading] = useState(false);
+  // const { userId } = useParams();
 
   // Handle invalid Secret Key
   const handleInvalid = (value) => {
@@ -35,6 +41,21 @@ export default function OnelinkValidation() {
     setPin(value);
     setError(null);
   };
+
+  const handlePinSubmit = async (req, res) => {
+    try {
+      const response = await validateSecretKey(userId, pin);
+      if (response.status === 200) {
+        const token = response.token;
+        dispatch(login({ oneLinkUser: token, oneLinkId: userId }));
+      } else {
+        setError("Key is invalid");
+      }
+    } catch (error) {
+      console.log(error);
+      setError("Key is invalid");
+    }
+  }
 
   return (
     <MaxWidthWrapper>
@@ -83,7 +104,7 @@ export default function OnelinkValidation() {
             <button type="button" className="btn_cancel">
               Cancel
             </button>
-            <button type="button" className="btn_submit">
+            <button type="button" className="btn_submit" onClick={handlePinSubmit}>
               {loading ? (
                 <span className=" d-flex align-items-center gap-2">
                   <SpinnerBS spinnerSizeClass="spinner-border-sm" />
