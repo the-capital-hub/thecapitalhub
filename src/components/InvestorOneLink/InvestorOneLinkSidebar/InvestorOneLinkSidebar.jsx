@@ -115,13 +115,13 @@ export default function InvestorOneLinkSidebar({
 
                 {/* Investment Philosophy */}
                 <MenuItem
-                  active={currentTab === "investment"}
+                  active={currentTab === "philosophy"}
                   className="active-item"
-                  onClick={() => setCurrentTab("investment")}
+                  onClick={() => setCurrentTab("philosophy")}
                 >
                   <Link to="investment-philosophy">
                     <IconInvestmentPhilosophy width="30px" height="30px" />
-                    {!sidebarCollapsed && <span>Investment</span>}
+                    {!sidebarCollapsed && <span>Philosophy</span>}
                   </Link>
                 </MenuItem>
 
