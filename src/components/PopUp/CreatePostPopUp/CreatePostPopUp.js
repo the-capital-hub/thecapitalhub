@@ -18,7 +18,7 @@ import { BsLink45Deg } from "react-icons/bs";
 import IconFile from "../../Investor/SvgIcons/IconFile";
 import IconVideo from "../../../Images/post/Video.svg";
 import { s3 } from "../../../Service/awsConfig";
-
+import MultiImageInput from 'react-multiple-image-input';
 const CreatePostPopUp = ({
   setPopupOpen,
   popupOpen,
@@ -34,19 +34,33 @@ const CreatePostPopUp = ({
   const [selectedDocument, setSelectedDocument] = useState(null);
   const [posting, setPosting] = useState(false);
 
-  const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [zoom, setZoom] = useState(1);
+  // const [crop, setCrop] = useState({ x: 0, y: 0 });
+  // const [zoom, setZoom] = useState(1);
   const [croppedImage, setCroppedImage] = useState(null);
+  const [images, setImages] = useState({});
+  const [imagesOpen, setImagesOpen] = useState(false);
+   const crop = {
+  unit: '%',
+  width: '50',
+  height:'50',
+  aspect: 1/1,
+  x: 130,
+  y: 50,
+};
+  
+
 
   const handleClose = () => setPopupOpen(false);
 
-  const galleryInputRef = useRef(null);
+  // const galleryInputRef = useRef(null);
   const documentInputRef = useRef(null);
   const smileeInputRef = useRef(null);
   const cameraInputRef = useRef(null);
 
   const handleGalleryButtonClick = () => {
-    galleryInputRef.current.click();
+    // galleryInputRef.current.click();
+    setImagesOpen(true)
+
   };
 
   const handleDocumentButtonClick = () => {
@@ -333,7 +347,7 @@ const CreatePostPopUp = ({
                     />
                   ))}
 
-                {previewImage && !cropComplete && (
+                {/* {previewImage && !cropComplete && (
                   <div className="d-flex flex-column justify-content-center gap-2">
                     <div className="image-cropper">
                       <EasyCrop
@@ -352,7 +366,24 @@ const CreatePostPopUp = ({
                       Crop
                     </button>
                   </div>
-                )}
+                )} */}
+                {
+                  imagesOpen?         
+                  <MultiImageInput
+                 
+                  theme={{
+                    background: '#ffffff',
+                    outlineColor: '#111111',
+                    textColor: '#040404',
+                    buttonColor: '#ff0e1f',
+                    modalColor: '#ffffff'
+                  }}
+                    images={images}
+                    setImages={setImages}
+                    cropConfig={{ crop, ruleOfThirds: false, maxWidth: 200  }}
+                  />:""
+                }
+        
                 {cropComplete && (
                   <div className="cropped-preview w-100 d-flex justify-content-center">
                     <img
@@ -391,14 +422,14 @@ const CreatePostPopUp = ({
                 <div className="modal_footer_container">
                   <div className="left_buttons">
                     {/* Image input and Icon */}
-                    <input
+                    {/* <input
                       type="file"
                       name="image"
                       style={{ display: "none" }}
                       ref={galleryInputRef}
                       onChange={handleFileChange}
                       accept="image/*"
-                    />
+                    /> */}
                     <button
                       className="white_button"
                       onClick={handleGalleryButtonClick}
