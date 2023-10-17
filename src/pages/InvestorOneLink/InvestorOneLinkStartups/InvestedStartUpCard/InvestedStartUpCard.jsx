@@ -21,13 +21,13 @@ function InvestedStartUpCard({ startUp }) {
         location={startUp?.location || "Bangalore"}
         logo={startUp?.logo || tempLogo}
         name={startUp?.name || "The Capital Hub"}
-        tagline={startUp?.tagline || "slkdfjlsdjf lkjsldfj"}
+        tagline={startUp?.tagline || "tagline"}
       />
       <fieldset className="border rounded shadow-sm">
         <legend className="px-2">About the company</legend>
-        <p className="p-2">{startUp?.bio || "Lorem..."}</p>
+        <p className="p-2">{startUp?.description || "Lorem..."}</p>
       </fieldset>
-      <PublicLinks socialLinks={startUp?.bio || socialLinks} />
+      <PublicLinks socialLinks={startUp?.publicLinks || socialLinks} />
     </div>
   );
 }

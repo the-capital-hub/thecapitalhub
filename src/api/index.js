@@ -84,6 +84,7 @@ const API = Object.freeze({
   addMembersToCommunity: `${baseUrl}/community/addMembersToCommunity`,
   createSecretKey: `${baseUrl}/users/createSecretKey`,
   validateSecretKey: `${baseUrl}/users/validateSecretKey`,
+  getInvestorFromOneLink: `${baseUrl}/investor/getOnePager`,
 });
 
 export default API;

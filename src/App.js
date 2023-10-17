@@ -65,7 +65,7 @@ function App() {
 
         {/* Investor OneLink */}
         <Route
-          path="/investor/onelink/view"
+          path="/investor/onelink/:oneLink/:userId"
           element={<InvestorOneLinkLayout />}
         >
           {InvestorOneLinkRoutes()}
