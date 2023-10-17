@@ -395,16 +395,17 @@ function Profile() {
                   </div>
                 </div>
               </div>
-              <div className="row rounded">
+
+              {/* <div className="row rounded">
                 <div className="col-12 mt-2">
                   <div className=" box personal_information rounded border shadow-sm">
                     <div className="personal_information_header">
                       <h2 className="typography green_underline">
                         Personal Information
                       </h2>
-                      {/* <button>
+                      <button>
                         Edit <CiEdit />
-                      </button> */}
+                      </button>
                     </div>
                     <div className="col-12 mt-2">
                       <div className="designation_info">
@@ -460,7 +461,8 @@ function Profile() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
+
               <div className="row">
                 <div className="col-12 mt-2">
                   <div className="box personal_information  rounded border shadow-sm">

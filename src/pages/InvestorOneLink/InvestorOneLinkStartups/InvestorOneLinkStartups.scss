@@ -1,0 +1,21 @@
+.investor-onelink-startups-invested {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  fieldset,
+  legend {
+    all: revert;
+  }
+
+  .startups-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
