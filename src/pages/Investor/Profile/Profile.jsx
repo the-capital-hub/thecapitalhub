@@ -40,6 +40,7 @@ import SectorCard from "../../../components/NewInvestor/ProfileComponents/Sector
 import AddEditModal from "../../../components/NewInvestor/ProfileComponents/AddEditModal";
 import { BsFillCloudUploadFill } from "react-icons/bs";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 function Profile() {
   const [isBioEditable, setIsBioEditable] = useState(false);
@@ -136,17 +137,18 @@ function Profile() {
   }, [loggedInUser]);
 
   useEffect(() => {
-    getInvestorById(loggedInUser?.investor).then(({ data }) => {
-      setInvestor(data);
-      setCompanyName(data.companyName);
-      setEditCompanyName({
-        ...editCompanyName,
-        companyName: data.companyName,
-      });
-      setInvestedStartups(data.startupsInvested);
-      setSectorsData(data.sectorInterested);
-      setInvestmentPhilosophy(data.investmentPhilosophy || "");
-    })
+    getInvestorById(loggedInUser?.investor)
+      .then(({ data }) => {
+        setInvestor(data);
+        setCompanyName(data.companyName);
+        setEditCompanyName({
+          ...editCompanyName,
+          companyName: data.companyName,
+        });
+        setInvestedStartups(data.startupsInvested);
+        setSectorsData(data.sectorInterested);
+        setInvestmentPhilosophy(data.investmentPhilosophy || "");
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -168,14 +170,14 @@ function Profile() {
       console.log(dispatch);
       updateUserAPI({
         userId: loggedInUser._id,
-        ...newPersonalData
+        ...newPersonalData,
       })
         .then(({ data }) => {
           dispatch(loginSuccess(data.data));
         })
         .catch((error) => {
           console.log(error.message);
-        })
+        });
       const response = await postInvestorData(editCompanyName);
       setCompanyName(editCompanyName.companyName);
       setPersonalEditable(!personalEditable);
@@ -272,6 +274,7 @@ function Profile() {
 
   useEffect(() => {
     document.title = "Profile | Investors - The Capital Hub";
+    dispatch(setPageTitle("Profile"));
   }, []);
 
   return (
@@ -392,16 +395,17 @@ function Profile() {
                   </div>
                 </div>
               </div>
-              <div className="row rounded">
+
+              {/* <div className="row rounded">
                 <div className="col-12 mt-2">
                   <div className=" box personal_information rounded border shadow-sm">
                     <div className="personal_information_header">
                       <h2 className="typography green_underline">
                         Personal Information
                       </h2>
-                      {/* <button>
+                      <button>
                         Edit <CiEdit />
-                      </button> */}
+                      </button>
                     </div>
                     <div className="col-12 mt-2">
                       <div className="designation_info">
@@ -457,7 +461,8 @@ function Profile() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
+
               <div className="row">
                 <div className="col-12 mt-2">
                   <div className="box personal_information  rounded border shadow-sm">
@@ -590,7 +595,9 @@ function Profile() {
             <span className="ms-auto">
               <button
                 className="edit_button"
-                onClick={() => setIsInvestmentPhilosophy(!isInvestmentPhilosophy)}
+                onClick={() =>
+                  setIsInvestmentPhilosophy(!isInvestmentPhilosophy)
+                }
               >
                 {isInvestmentPhilosophy ? "Cancel" : "Edit"}
                 <CiEdit />

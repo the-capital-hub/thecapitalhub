@@ -5,7 +5,7 @@ import IntroductoryMessage from "../../../components/Investor/OneLink/Introducto
 import RightProfileCard from "../../../components/NewInvestor/InvestorRightProfileCard/InvestorRightProfileCard";
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import OnePagePreview from "../../../components/Investor/OneLink/OnePagePreview/OnePagePreview";
 import SharingOneLinkPopUp from "../../../components/PopUp/SharingOneLinkPopUp/SharingOneLinkPopUp";
 import { getInvestorById } from "../../../Service/user";
@@ -13,6 +13,7 @@ import ThreeDotsImage from "../../../Images/whiteTheeeDots.svg";
 import FolderImage from "../../../Images/Folder.svg";
 import VideoImage from "../../../Images/Video.svg";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 export default function InvestorOnelink() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -20,10 +21,15 @@ export default function InvestorOnelink() {
   // const userId = loggedInUser._id;
   const [isExitClicked, setIsExitClicked] = useState(false);
   const [company, setCompany] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    document.title = "One Link | The Capital Hub";
+    dispatch(setPageTitle("One Link"));
+  }, []);
 
   // Fetch data by userId
   useEffect(() => {
-    document.title = "One Link | The Capital Hub";
     getInvestorById(loggedInUser.investor)
       .then(({ data }) => {
         setCompany(data);

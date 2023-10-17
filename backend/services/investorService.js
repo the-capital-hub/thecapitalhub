@@ -49,26 +49,26 @@ export const createInvestor = async (investorData) => {
         Minimum Invest: ${newInvestor.minimumInvest}
         Portfolio: ${newInvestor.portfolio}
       `;
-      const subject = "New Account Request";
-      const response = await sendMail(
-        user.firstName,
-        adminMail,
-        user.email,
-        subject,
-        emailMessage
-      )
-      if(response.status === 200) {
-        return {
-          status: 200,
-          message: "Investor Added",
-          data: newInvestor,
-        };
-      } else {
-        return {
-          status: 500,
-          message: "Error while sending mail",
-        };
-      }
+    const subject = "New Account Request";
+    const response = await sendMail(
+      user.firstName,
+      adminMail,
+      user.email,
+      subject,
+      emailMessage
+    )
+    if (response.status === 200) {
+      return {
+        status: 200,
+        message: "Investor Added",
+        data: newInvestor,
+      };
+    } else {
+      return {
+        status: 500,
+        message: "Error while sending mail",
+      };
+    }
   } catch (error) {
     console.error("Error creating investor:", error);
     return {
@@ -88,7 +88,7 @@ export const addSectorOfInterest = async (investorId, sectorData) => {
         message: "Investor not found",
       };
     }
-    if(sectorData.logo) {
+    if (sectorData.logo) {
       const { url } = await cloudinary.uploader.upload(sectorData.logo, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
         format: "webp",
@@ -123,7 +123,7 @@ export const addStartupInvested = async (investorId, startupData) => {
         message: "Investor not found",
       };
     }
-    if(startupData.logo) {
+    if (startupData.logo) {
       const { url } = await cloudinary.uploader.upload(startupData.logo, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
         format: "webp",
@@ -206,7 +206,7 @@ export const addMyInterest = async (investorId, data) => {
         message: "Investor not found",
       };
     }
-    if(data.logo) {
+    if (data.logo) {
       const { url } = await cloudinary.uploader.upload(data.logo, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
         format: "webp",
@@ -230,14 +230,11 @@ export const addMyInterest = async (investorId, data) => {
   }
 };
 
-export const getOnePager = async (oneLink) => {
+export const getOnePager = async (oneLink, oneLinkId) => {
   try {
-    const investor = await InvestorModel.findOne({oneLink: oneLink})
-    .populate({
-      path: 'founderId',
-      model: 'Users', 
-    });
-    if (!investor) {
+    const company = await InvestorModel.findOne({ oneLink: oneLink })
+    const investor = await UserModel.findOne({ oneLinkId });
+    if (!company || !investor) {
       return {
         status: 404,
         message: "Investor Data not found",
@@ -246,7 +243,10 @@ export const getOnePager = async (oneLink) => {
     return {
       status: 200,
       message: "Investor Data found",
-      data: investor,
+      data: {
+        company,
+        investor
+      },
     };
   } catch (error) {
     console.error("Error getting investor by ID:", error);

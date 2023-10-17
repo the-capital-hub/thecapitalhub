@@ -10,9 +10,10 @@ import {
   rejectConnectionAPI,
 } from "../../../Service/user";
 import TimeAgo from "timeago-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 const Connection = () => {
   const [selectedTab, setSelectedTab] = useState("received"); // Default to "received"
@@ -20,6 +21,7 @@ const Connection = () => {
   const [loading, setLoading] = useState(true);
   const [getAllConnection, setGetAllConnection] = useState([]); // State for accepted connections
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const dispatch = useDispatch();
 
   // Function to handle tab change
   useEffect(() => {
@@ -27,6 +29,8 @@ const Connection = () => {
       console.log("res2-->", res);
       setGetAllConnection(res.data); // Set accepted connections data
     });
+    window.title = "Connections | The Capital Hub";
+    dispatch(setPageTitle("Connections"));
   }, []);
   const handleTabChange = (tab) => {
     if (tab === "received") {

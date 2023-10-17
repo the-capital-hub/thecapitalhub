@@ -10,11 +10,12 @@ import OnePagePreview from "./OnePagePreview/OnePagePreview";
 import ThreeDotsImage from "../../../Images/whiteTheeeDots.svg";
 import FolderImage from "../../../Images/Folder.svg";
 import VideoImage from "../../../Images/Video.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { getStartupByFounderId } from "../../../Service/user";
 import SharingOneLinkPopUp from "../../PopUp/SharingOneLinkPopUp/SharingOneLinkPopUp";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 const OneLink = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -22,9 +23,15 @@ const OneLink = () => {
   const userId = loggedInUser._id;
   const [isExitClicked, setIsExitClicked] = useState(false);
   const [company, setCompany] = useState([]);
-  // Fetch data by userId
+  const dispatch = useDispatch();
+
   useEffect(() => {
     document.title = "One Link | The Capital Hub";
+    dispatch(setPageTitle("One Link"));
+  }, []);
+
+  // Fetch data by userId
+  useEffect(() => {
     getStartupByFounderId(userId)
       .then(({ data }) => {
         setCompany(data);
@@ -42,7 +49,6 @@ const OneLink = () => {
     setIsExitClicked(false);
     // navigate("/login");
   };
-
 
   return (
     <MaxWidthWrapper>

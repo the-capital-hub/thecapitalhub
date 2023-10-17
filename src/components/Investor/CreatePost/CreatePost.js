@@ -11,13 +11,16 @@ import RightProfileCard from "../InvestorGlobalCards/RightProfileCard/RightProfi
 import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import CompanyDetailsCard from "../InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 const CreatePost = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     document.title = "Create a Post | The Capital Hub";
+    dispatch(setPageTitle("Create Post"));
   }, []);
 
   return (
