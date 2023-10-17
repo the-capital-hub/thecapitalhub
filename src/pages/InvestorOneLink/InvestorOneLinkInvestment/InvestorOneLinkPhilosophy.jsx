@@ -4,10 +4,17 @@ import "./InvestorOneLinkPhilosophy.scss";
 import PhilosophyTable from "../../../components/InvestorOneLink/InvestorOneLinkPhilosophy/PhilosophyTable";
 import PhilosophyAbout from "../../../components/InvestorOneLink/InvestorOneLinkPhilosophy/PhilosophyAbout";
 import PhilosophyIncorporation from "../../../components/InvestorOneLink/InvestorOneLinkPhilosophy/PhilosophyIncorporation";
+import { useOutletContext } from "react-router-dom";
 
 export default function InvestorOneLinkInvestment() {
   // Fetch or get from state
-  let name, designation, location, image;
+  const { company, investor } = useOutletContext();
+  const { firstName, lastName, designation, location, profilePicture } =
+    investor;
+  const { investmentPhilosophy, companyName } = company;
+
+  console.log("company", company);
+  console.log("investor", investor);
 
   return (
     <div className="investment_philosophy_wrapper mb-5 ps-3 leftBorder">
@@ -18,8 +25,8 @@ export default function InvestorOneLinkInvestment() {
         {/* Header */}
         <header className="d-flex flex-column flex-md-row align-items-center gap-4">
           <img
-            src={image || DefaultAvatar}
-            alt={name || "fullName"}
+            src={profilePicture || DefaultAvatar}
+            alt={`${firstName} ${lastName}` || "fullName"}
             width={"150px"}
             height={"150px"}
             className="rounded-circle"
@@ -27,7 +34,9 @@ export default function InvestorOneLinkInvestment() {
 
           {/* text */}
           <div className="me-md-auto text-center text-md-start">
-            <h4 className="fw-semibold">{name || "fullName"}</h4>
+            <h4 className="fw-semibold">
+              {`${firstName} ${lastName}` || "fullName"}
+            </h4>
             <p className="fs-5 fw-light m-0 text-muted">
               {designation || "designation"}
             </p>
@@ -38,7 +47,7 @@ export default function InvestorOneLinkInvestment() {
         </header>
 
         {/* About */}
-        <PhilosophyAbout />
+        <PhilosophyAbout companyName={companyName} />
 
         {/* Description */}
         <div className="philosophy_description">
@@ -47,10 +56,11 @@ export default function InvestorOneLinkInvestment() {
               Description
             </legend>
             <p className="m-0 fw-light fs-6 py-4">
-              Lorem ipsum dolor sit amet consectetur. Maecenas ac elementum
+              {investmentPhilosophy ||
+                `Lorem ipsum dolor sit amet consectetur. Maecenas ac elementum
               lacus vel vitae sed nisi aliquam aliquet. Vel adipiscing placerat
               tellus faucibus diam mauris ipsum vitae. Justo adipiscing integer
-              dictum tortor viverra vel .
+              dictum tortor viverra vel .`}
             </p>
           </fieldset>
         </div>
