@@ -8,6 +8,7 @@ import {
 } from "../../../../PopUp/ModalBS";
 import { useSelector } from "react-redux";
 import SpinnerBS from "../../../../Shared/Spinner/SpinnerBS";
+import { createMeetingAPI } from "../../../../../Service/user";
 
 export default function CreateMeetingModal({
   meetings,
@@ -21,14 +22,35 @@ export default function CreateMeetingModal({
   const [title, setTitle] = useState("");
 
   // Handle create Meeting
-  function handleCreateMeeting(e) {
+  async function handleCreateMeeting(e) {
     e.preventDefault();
     // console.log("submitted");
 
+    const newMeetingData = {
+      startDateTime: String(newMeeting.startDateTime),
+      endDateTime: String(newMeeting.endDateTime),
+      title: title,
+    };
+    console.log(
+      "create",
+      newMeetingData,
+      "type",
+      typeof newMeetingData.startDateTime
+    );
+
     // Start loading
     setLoading(true);
-    setTimeout(() => setLoading(false), 2000);
+    // setTimeout(() => setLoading(false), 2000);
     // API call
+    try {
+      const response = await createMeetingAPI(newMeetingData);
+      console.log(response);
+      setLoading(false);
+      setTitle("");
+    } catch (error) {
+      console.log("Create meeting error:", error);
+      setLoading(false);
+    }
   }
 
   // Handle title
@@ -49,7 +71,7 @@ export default function CreateMeetingModal({
             <fieldset>
               <legend>Date</legend>
               <p className="m-0">
-                {newMeeting?.end.toLocaleDateString("en-IN", {
+                {newMeeting?.endDateTime.toLocaleDateString("en-IN", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
@@ -63,7 +85,7 @@ export default function CreateMeetingModal({
               <fieldset>
                 <legend>Start Time</legend>
                 <p className="m-0">
-                  {newMeeting?.start.toLocaleTimeString([], {
+                  {newMeeting?.startDateTime.toLocaleTimeString([], {
                     hour: "2-digit",
                     minute: "2-digit",
                   })}
@@ -73,7 +95,7 @@ export default function CreateMeetingModal({
               <fieldset>
                 <legend>End Time</legend>
                 <p className="m-0">
-                  {newMeeting?.end.toLocaleTimeString([], {
+                  {newMeeting?.endDateTime.toLocaleTimeString([], {
                     hour: "2-digit",
                     minute: "2-digit",
                   })}
@@ -99,7 +121,9 @@ export default function CreateMeetingModal({
             {/* Submit */}
             <button
               type="submit"
-              className="create_button d-flex justify-content-center align-items-center gap-2"
+              className={`create_button d-flex justify-content-center align-items-center gap-2 ${
+                loading ? "opacity-50" : ""
+              } `}
               disabled={loading}
             >
               {loading ? (

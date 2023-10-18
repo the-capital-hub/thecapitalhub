@@ -31,7 +31,7 @@ export default function BigCalendar({
     ({ start, end }) => {
       // console.log("start", start, "end", end);
       launchRef.current.click();
-      setNewMeeting({ start: start, end: end, title: "" });
+      setNewMeeting({ startDateTime: start, endDateTime: end, title: "" });
       // const title = window.prompt("New Meeting name");
       // if (title) {
       //   setMeetings((prev) => [...prev, { start, end, title }]);
