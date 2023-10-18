@@ -271,7 +271,9 @@ const CommunityDashboard = ({
   const handleOnelinkClick = () => {
     getStartupByFounderId(loggedInUser._id)
       .then(({ data }) => {
-        setSendText(`https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`);
+        setSendText(
+          `https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`
+        );
       })
       .catch((error) => console.log(error));
   };
@@ -472,6 +474,7 @@ const CommunityDashboard = ({
           )}
           <input
             type="text"
+            className="message"
             name="introductoryMessage"
             placeholder="Your message..."
             onChange={(e) => setSendText(e.target.value)}

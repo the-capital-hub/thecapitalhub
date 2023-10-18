@@ -23,7 +23,7 @@ export default function SavedPosts() {
     <MaxWidthWrapper>
       <div className="savedPosts__wrapper px-3 border-start pb-5 ">
         {/* Main content */}
-        <section className="section__wrapper main__content d-flex flex-column gap-5 ">
+        <section className="section__wrapper main__content d-flex flex-column gap-5">
           {/* Page indicators */}
           <div className="">
             <SmallProfileCard text="Saved Posts" />
