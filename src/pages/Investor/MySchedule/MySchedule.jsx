@@ -9,6 +9,7 @@ import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidth
 import { useDispatch, useSelector } from "react-redux";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import { getAllMeetings } from "../../../Service/user";
+import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 
 const MEETINGTYPES = ["daily", "weekly", "monthly"];
 const EVENTS = [
@@ -59,8 +60,20 @@ export default function MySchedule() {
         const { data } = await getAllMeetings(loggedInUser.oneLinkId);
         console.log("Meetings", data);
 
+        let result = [];
+
+        data.map((meeting, index) => {
+          let event = {
+            start: new Date(meeting.startDateTime),
+            end: new Date(meeting.endDateTime),
+            title: meeting.title,
+          };
+          console.log("event", event, typeof event.start);
+          result.push(event);
+        });
+
         // Save to State
-        setMeetingsData(data);
+        setMeetingsData(result);
       } catch (error) {
         console.log("Error fetching meetings", error);
       }
@@ -92,13 +105,17 @@ export default function MySchedule() {
 
           <div className="schedule__container px-3">
             {/* Scheduler */}
-            <div className="calender__div">
-              <CalendarContainer
-                view={view}
-                meetingsData={meetingsData || EVENTS}
-                setView={setView}
-              />
-            </div>
+            {meetingsData.length !== 0 ? (
+              <div className="calender__div">
+                <CalendarContainer
+                  view={view}
+                  meetingsData={meetingsData || EVENTS}
+                  setView={setView}
+                />
+              </div>
+            ) : (
+              <SpinnerBS className="d-flex w-100 justify-content-center" />
+            )}
 
             {/* Meetings */}
             <div className="meetings__div p-3 border rounded-4 d-flex flex-column gap-3">
