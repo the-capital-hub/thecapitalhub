@@ -9,10 +9,17 @@ import QuestionIcon from "../../../Images/Help/Questionmark.png";
 import AvatarIcon from "../../../Images/Help/Avatar.png";
 import { useEffect } from "react";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
 
 const Help = () => {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     document.title = "Help | The Capital Hub";
+    dispatch(setPageTitle("Help"));
   }, []);
   return (
     <MaxWidthWrapper>
@@ -44,10 +51,12 @@ const Help = () => {
                       Or choose a category to quickly find the help you need
                     </h6>
                     <section class="card-section">
-                      <div class="card">
+                    <Link to="/contactus" className=" card text-white">
+                      <div class="">
                         <img src={CustomerIcon} alt="text" />
                         <p>Contact us</p>
                       </div>
+                      </Link>
                       <div class="card">
                         <img src={EmailIcon} alt="text" />
                         <p>Mail us</p>
@@ -63,14 +72,23 @@ const Help = () => {
                     </section>
                     <div className="helpcenter">
                       <img src={FeaturedArticles} alt="Help Icon" />
-                      <h6>Featured Articles</h6>
+                      <h6>Frequently Asked Questions (FAQ)</h6>
                     </div>
                     <section className="accordion_section">
-                      <div
+                      <div className="faq-section p-2">
+                        <ul>
+                          <li>1. What is One-Link?</li>
+                          <li><p>A. One-Link is Capital HUB's new revolutionary feature, where a startup founder can share a secure link containing their company details, documentation and revenue statistics.</p></li>
+                          <li>2. What is Explore?</li>
+                          <li><p>A. Explore page allows a startup founder to view and filter startups, investors and startup founders available on Capital Hub in a systematic and organised manner.
+<br/>This allows founders to connect with investors and other startup founders on Capital HUB, boosting their elite networking and strengthening their ability to raise funds.</p></li>
+                        </ul>
+                      </div>
+                      {/* <div
                         className="accordion accordion-flush"
                         id="accordionFlushExample"
-                      >
-                        <div className="accordion-item">
+                      > */}
+                        {/* <div className="accordion-item">
                           <h2
                             className="accordion-header"
                             id="flush-headingOne"
@@ -84,7 +102,6 @@ const Help = () => {
                               aria-controls="flush-collapseOne"
                             >
                               Coming soon...
-                              {/* Guide: How to use customer relationship management */}
                             </button>
                           </h2>
                           <div
@@ -95,15 +112,11 @@ const Help = () => {
                           >
                             <div className="accordion-body">
                               This feature is coming soon.
-                              {/* Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Sed non arcu aliquet, tristique tellus ac,
-                              cursus quam. Cras vel purus quis nulla malesuada
-                              posuere. Nullam a eros a felis fringilla gravida eu
-                              et turpis. Praesent eu tellus nec arcu sagittis
-                              gravida in eget erat. */}
+                              
                             </div>
                           </div>
-                        </div>
+                        </div> */}
+
                         {/* <div className="accordion-item">
                           <h2 className="accordion-header" id="flush-headingTwo">
                             <button
@@ -197,7 +210,7 @@ const Help = () => {
                             </div>
                           </div>
                         </div> */}
-                      </div>
+                      {/* </div> */}
                     </section>
                   </div>
                 </div>

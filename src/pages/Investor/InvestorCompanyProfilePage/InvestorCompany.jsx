@@ -39,18 +39,19 @@ export default function CompanyProfilePage() {
   useEffect(() => {
     setLoading(true);
     if (loggedInUser?.investor) {
+      setLoading(true); 
       getInvestorById(loggedInUser.investor).then(({ data }) => {
         setCompanyData(data);
         setLoading(false);
       })
         .catch((error) => {
+          console.log(error.message);
           setLoading(false);
         })
         .finally(() => {
           setLoading(false);
         })
     }
-    setLoading(false);
   }, [loggedInUser.investor]);
 
   const handleSearchInputChange = (e) => {

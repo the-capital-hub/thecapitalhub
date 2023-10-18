@@ -34,6 +34,7 @@ const RecommendationCard = ({ isInvestor }) => {
         })
         .catch(() => {
           dispatch(setRecommendations({}));
+          setLoading(false);
           // setUsers({})
         });
     }
@@ -56,6 +57,7 @@ const RecommendationCard = ({ isInvestor }) => {
           })
           .catch(() => {
             dispatch(setRecommendations({}));
+            setLoading(false);
             // setUsers({})
           });
       })

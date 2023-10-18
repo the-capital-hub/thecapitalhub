@@ -19,6 +19,8 @@ import {
   Legal,
   Pitch,
 } from "../../../Images/StartUp/Documentaion";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { useDispatch } from "react-redux";
 
 const Documentation = () => {
   const [showModal, setShowModal] = useState(false);
@@ -33,6 +35,7 @@ const Documentation = () => {
   ]);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     document.title = "Documentation | The Capital Hub";
@@ -44,6 +47,7 @@ const Documentation = () => {
       }
     };
     getFolders();
+    dispatch(setPageTitle("Documentation"));
   }, []);
 
   return (

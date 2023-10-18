@@ -8,7 +8,12 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import { environment } from "../../../environments/environment";
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { findChat, createChat } from "../../../Service/user";
 import CommunitiesContainer from "../../../components/Investor/ChatComponents/CommunitiesContainer";
 import ChatSettings from "../../../components/Investor/ChatComponents/ChatSettings/ChatSettings";
@@ -29,7 +34,6 @@ const Chats = () => {
   const paramUserId = searchParams.get("userId");
   const isCommunityOpen = searchParams.get("isCommunityOpen");
   const navigate = useNavigate();
-
 
   // Fetch global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -60,6 +64,7 @@ const Chats = () => {
 
   // When directed to chats scroll page to top
   useEffect(() => {
+    window.title = "Chats | The Capital Hub";
     window.scrollTo({ top: 0, behavior: "smooth" });
     function handleWindowResize() {
       const isMobile = window.innerWidth <= 820;
@@ -147,7 +152,7 @@ const Chats = () => {
         .finally(() => {
           // searchParams.delete('userId');
           // setSearchParams(searchParams);
-        })
+        });
     }
   }, []);
 
@@ -195,7 +200,7 @@ const Chats = () => {
         )}
       </>
     ) : (
-      <section className="right_section mt-3 w-100 ">
+      <section className="right_section overflow-y-auto hide_scrollbar mt-3 w-100 ">
         <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
       </section>
     );
@@ -206,8 +211,9 @@ const Chats = () => {
       <div className="container-fluid chat_main_container">
         {/* Left section */}
         <div
-          className={`left_section_wrapper mt-3 mx-3 ${isMobileView && "d-none"
-            }`}
+          className={`left_section_wrapper mt-3 mx-3 ${
+            isMobileView && "d-none"
+          }`}
         >
           <section className="left_section pe-1 ">
             <span className="back_img rounded-circle shadow-sm" title="Go Back">

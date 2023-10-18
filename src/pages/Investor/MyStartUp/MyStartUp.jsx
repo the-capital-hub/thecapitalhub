@@ -14,8 +14,9 @@ import ModalBSBody from "../../../components/PopUp/ModalBS/ModalBSBody/ModalBSBo
 import AddModalContent from "../../../components/NewInvestor/MyStartupsComponents/AddModalContent";
 import EditModalContent from "../../../components/NewInvestor/MyStartupsComponents/EditModalContent";
 import { getInvestorById } from "../../../Service/user";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 // Mock data for my investments
 // const investmentsData = [
@@ -50,8 +51,11 @@ import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidth
 
 const MyStartUp = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     document.title = "My Startups | Investors - The Capital Hub";
+    dispatch(setPageTitle("My Startups"));
   }, []);
 
   // Make fetch request for companies data
@@ -74,144 +78,140 @@ const MyStartUp = () => {
     <MaxWidthWrapper>
       <div className="container-fluid mystartup_main_container">
         <SmallProfileCard text={"My Startup"} />
-        <div className="row mt-2 m-3">
-          <div className="col-12 startup_container p-0">
-            {/* My Investments */}
-            <div className="d-flex align-items-center justify-content-between border border-2 border-top-0 border-start-0 border-end-0 py-3 px-4 ">
-              <h4 className="title_h4 m-0 green_underline ">My Investments</h4>
-              <div className="d-flex flex-column flex-md-row text-center gap-2">
-                <div className="">
-                  {/* <Link to={""}>Add New</Link> */}
-                  {investor?.founderId === loggedInUser._id && (
-                    <ModalBsLauncher
-                      id={"myInvestmentsAddModal"}
-                      className={"green_button"}
-                    >
-                      Add New
-                    </ModalBsLauncher>
-                  )}
-                </div>
-                <div className="">
-                  {/* <Link to={""}>Edit</Link> */}
-                  {investor?.founderId === loggedInUser._id && (
+        <div className="startup_container p-0">
+          {/* My Investments */}
+          <div className="d-flex align-items-center justify-content-between border border-2 border-top-0 border-start-0 border-end-0 py-3 px-4 ">
+            <h4 className="title_h4 m-0 green_underline ">My Investments</h4>
+            <div className="d-flex flex-column flex-md-row text-center gap-2">
+              <div className="">
+                {/* <Link to={""}>Add New</Link> */}
+                {investor?.founderId === loggedInUser._id && (
+                  <ModalBsLauncher
+                    id={"myInvestmentsAddModal"}
+                    className={"green_button"}
+                  >
+                    Add New
+                  </ModalBsLauncher>
+                )}
+              </div>
+              <div className="">
+                {/* <Link to={""}>Edit</Link> */}
+                {investor?.founderId === loggedInUser._id && (
                   <ModalBsLauncher
                     id={"myInvestmentsEditModal"}
                     className={"green_button"}
                   >
                     Edit
                   </ModalBsLauncher>
-                  )}
-                </div>
+                )}
               </div>
             </div>
-            <div className="card_container border-bottom p-4 d-flex gap-5 align-items-center overflow-x-auto">
-              {investedStartups.map((company, index) => {
-                return <MyInvestmentCard key={company.id} company={company} />;
-              })}
-            </div>
-            {/* My Investments Add Modal */}
-            <ModalBSContainer id={"myInvestmentsAddModal"} isStatic={false}>
-              <ModalBSHeader title={"Add new Investment"} />
-              <ModalBSBody>
-                <AddModalContent setInvestedStartups={setInvestedStartups} />
-              </ModalBSBody>
-            </ModalBSContainer>
+          </div>
+          <div className="card_container border-bottom p-4 d-flex gap-5 align-items-center overflow-x-auto">
+            {investedStartups.map((company, index) => {
+              return <MyInvestmentCard key={company.id} company={company} />;
+            })}
+          </div>
+          {/* My Investments Add Modal */}
+          <ModalBSContainer id={"myInvestmentsAddModal"} isStatic={false}>
+            <ModalBSHeader title={"Add new Investment"} />
+            <ModalBSBody>
+              <AddModalContent setInvestedStartups={setInvestedStartups} />
+            </ModalBSBody>
+          </ModalBSContainer>
 
-            {/* My Investments Edit Modal */}
-            <ModalBSContainer
-              id={"myInvestmentsEditModal"}
-              isStatic={false}
-              modalXl
-              key={"edit investments"}
-            >
-              <ModalBSHeader title={"Edit Investments"} />
-              <ModalBSBody>
-                <EditModalContent
-                  dataArray={investedStartups}
-                  key={"investments"}
-                  setInvestedStartups={setInvestedStartups}
-                />
-              </ModalBSBody>
-            </ModalBSContainer>
+          {/* My Investments Edit Modal */}
+          <ModalBSContainer
+            id={"myInvestmentsEditModal"}
+            isStatic={false}
+            modalXl
+            key={"edit investments"}
+          >
+            <ModalBSHeader title={"Edit Investments"} />
+            <ModalBSBody>
+              <EditModalContent
+                dataArray={investedStartups}
+                key={"investments"}
+                setInvestedStartups={setInvestedStartups}
+              />
+            </ModalBSBody>
+          </ModalBSContainer>
 
-            {/* My Interests */}
-            <div className="d-flex align-items-center justify-content-between border border-2 border-top-0 border-start-0 border-end-0 py-3 px-4 ">
-              <h4 className="title_h4 m-0 green_underline">My Interests</h4>
-              <div className="d-flex  flex-column flex-md-row text-center gap-2">
-                <div className="">
-                  {/* <Link to={""}>Add New</Link> */}
-                  {investor?.founderId === loggedInUser._id && (
+          {/* My Interests */}
+          <div className="d-flex align-items-center justify-content-between border border-2 border-top-0 border-start-0 border-end-0 py-3 px-4 ">
+            <h4 className="title_h4 m-0 green_underline">My Interests</h4>
+            <div className="d-flex  flex-column flex-md-row text-center gap-2">
+              <div className="">
+                {/* <Link to={""}>Add New</Link> */}
+                {investor?.founderId === loggedInUser._id && (
                   <ModalBsLauncher
                     id={"myInterestsAddModal"}
                     className={"green_button"}
                   >
                     Add New
                   </ModalBsLauncher>
-                  )}
-                </div>
-                <div className="">
-                  {/* <Link to={""}>Edit</Link> */}
-                  {investor?.founderId === loggedInUser._id && (
+                )}
+              </div>
+              <div className="">
+                {/* <Link to={""}>Edit</Link> */}
+                {investor?.founderId === loggedInUser._id && (
                   <ModalBsLauncher
                     id={"myInterestsEditModal"}
                     className={"green_button"}
                   >
                     Edit
                   </ModalBsLauncher>
-                  )}
-                </div>
+                )}
               </div>
             </div>
-            <div className="card_container p-4 d-flex gap-5 align-items-center overflow-x-auto ">
-              {myInterests.map((company, index) => {
-                return (
-                  <MyInvestmentCard
-                    key={company.id}
-                    company={company}
-                    isInterests={true}
-                  />
-                );
-              })}
-            </div>
-            {/* My Interests Add Modal */}
-            <ModalBSContainer id={"myInterestsAddModal"} isStatic={false}>
-              <ModalBSHeader title={"Add new Interest"} />
-              <ModalBSBody>
-                <AddModalContent isInterests setMyInterests={setMyInterests} />
-              </ModalBSBody>
-            </ModalBSContainer>
-
-            {/* My Invterests Edit Modal */}
-            <ModalBSContainer
-              id={"myInterestsEditModal"}
-              isStatic={false}
-              modalXl
-              key={"edit interests"}
-            >
-              <ModalBSHeader title={"Edit Interests"} />
-              <ModalBSBody>
-                <EditModalContent
-                  dataArray={myInterests}
-                  isInterests={true}
-                  setMyInterests={setMyInterests}
-                />
-              </ModalBSBody>
-            </ModalBSContainer>
           </div>
+          <div className="card_container p-4 d-flex gap-5 align-items-center overflow-x-auto ">
+            {myInterests.map((company, index) => {
+              return (
+                <MyInvestmentCard
+                  key={company.id}
+                  company={company}
+                  isInterests={true}
+                />
+              );
+            })}
+          </div>
+          {/* My Interests Add Modal */}
+          <ModalBSContainer id={"myInterestsAddModal"} isStatic={false}>
+            <ModalBSHeader title={"Add new Interest"} />
+            <ModalBSBody>
+              <AddModalContent isInterests setMyInterests={setMyInterests} />
+            </ModalBSBody>
+          </ModalBSContainer>
+
+          {/* My Invterests Edit Modal */}
+          <ModalBSContainer
+            id={"myInterestsEditModal"}
+            isStatic={false}
+            modalXl
+            key={"edit interests"}
+          >
+            <ModalBSHeader title={"Edit Interests"} />
+            <ModalBSBody>
+              <EditModalContent
+                dataArray={myInterests}
+                isInterests={true}
+                setMyInterests={setMyInterests}
+              />
+            </ModalBSBody>
+          </ModalBSContainer>
         </div>
 
-        <div className="row mt-2 big_card_container d-flex flex-column flex-md-row mx-auto">
+        <div className="row g-1 mt-2 big_card_container d-flex flex-column flex-md-row mx-auto">
           <div className="col-12 col-md-6 left_container">
-            <h4 className="title_h4">Summary</h4>
-            <hr />
+            <h4 className="title_h4 border-bottom pb-2">Summary</h4>
             <div className="chart_container  ">
               <ChartComponent />
             </div>
           </div>
           <div className="col-6 right_container">
-            <h4 className="title_h4">Past Investments</h4>
-            <hr />
-            <div className="two_by_two_card_container flex-column flex-md-row ">
+            <h4 className="title_h4 border-bottom pb-2">Past Investments</h4>
+            <div className="two_by_two_card_container flex-column flex-md-row">
               <PostInvestmentCard
                 logo={logoIcon}
                 text="Investment 1"

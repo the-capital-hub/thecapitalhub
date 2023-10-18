@@ -24,6 +24,7 @@ import ColorCard from "../InvestorGlobalCards/ColoredCards/ColorCard";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import ConnectionCard from "../ConnectionCard/ConnectionCard";
 import ProfessionalInfo from "../StartupProfilePageComponents/ProfessionalInfo/ProfessionalInfo";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 const InvestorHome = () => {
   // Fetch loggedInUser from global state
@@ -73,11 +74,10 @@ const InvestorHome = () => {
           });
         })
         .catch((error) => {
-          console.error('Error fetching startup data:', error);
+          console.error("Error fetching startup data:", error);
         });
     }
   }, [loggedInUser._id, loggedInUser?.investor]);
-
 
   // const [editCompanyName, setEditCompanyName] = useState({
   //   founderId: loggedInUser._id,
@@ -193,6 +193,7 @@ const InvestorHome = () => {
 
   useEffect(() => {
     document.title = "Profile | The Capital Hub";
+    dispatch(setPageTitle("Profile"));
   }, []);
 
   return (
@@ -205,7 +206,10 @@ const InvestorHome = () => {
 
             <div className="content-70 d-flex flex-column gap-4">
               {/* Professional info component */}
-              <ProfessionalInfo theme={"startup"} companyFounderId={companyFounderId}/>
+              <ProfessionalInfo
+                theme={"startup"}
+                companyFounderId={companyFounderId}
+              />
 
               {/* user details */}
               {/* <div className="p-2 px-md-4 py-3 box bio_container">
@@ -470,7 +474,6 @@ const InvestorHome = () => {
                   userDetails={loggedInUser}
                   page={loggedInUser._id === companyFounderId ? "edit" : ""}
                 />
-
               </div>
 
               {/* Color Cards */}

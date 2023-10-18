@@ -4,7 +4,7 @@ import RecommendationCard from "../../../components/Investor/InvestorGlobalCards
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import CompanyProfileForm from "../../../components/Investor/CompanyProfilePageComponents/CompanyProfileForm";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
 import RaghuImage from "../../../Images/aboutUs/Raghu.jpeg";
@@ -14,10 +14,11 @@ import { getStartupByFounderId, postStartUpData } from "../../../Service/user";
 import CoreTeam from "../../../components/Investor/CompanyProfilePageComponents/CoreTeam/CoreTeam";
 import Milestones from "../../../components/Investor/CompanyProfilePageComponents/Milestones/Milestones";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 export default function EditCompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-
+  const dispatch = useDispatch();
   const [colorCardData, setColorCardData] = useState(null);
 
   const [companyData, setCompanyData] = useState([]);
@@ -42,6 +43,8 @@ export default function EditCompanyProfilePage() {
           console.error("Error fetching startup data:", error);
         });
     }
+    window.title = "Edit Company Profile | The Capital Hub";
+    dispatch(setPageTitle("Edit Company"));
   }, []);
 
   // handleAmountChange

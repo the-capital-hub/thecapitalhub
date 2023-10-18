@@ -1,3 +1,5 @@
+
+
 import React, { useEffect, useRef, useState } from "react";
 import "./createpostpopup.scss";
 import SmileeIcon from "../../../Images/Smilee.svg";
@@ -24,9 +26,9 @@ const CreatePostPopUp = ({
   popupOpen,
   setNewPost,
   respostingPostId,
+  appendDataToAllPosts,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-
   const [postText, setPostText] = useState("");
   const [category, setCategory] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
@@ -206,11 +208,9 @@ const CreatePostPopUp = ({
       postData.append("documentUrl", res.Location);
       postData.append("documentName", selectedDocument.name);
     }
-
     postUserPost(postData)
       .then((response) => {
-        console.log("response from frontend-->", response);
-        console.log("Post submitted successfully!");
+        appendDataToAllPosts(response.data)
         setPostText("");
         setSelectedImage(null);
         setSelectedVideo(null);
@@ -244,9 +244,8 @@ const CreatePostPopUp = ({
     <>
       {popupOpen && <div className="createpost-background-overlay"></div>}
       <div
-        className={`create_post_modal rounded p-2 ${
-          popupOpen ? "d-block" : ""
-        }`}
+        className={`create_post_modal rounded p-2 ${popupOpen ? "d-block" : ""
+          }`}
         tabIndex="-1"
         role="dialog"
       >

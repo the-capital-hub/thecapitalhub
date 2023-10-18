@@ -22,7 +22,6 @@ const NavBar = (props) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const pageTitle = useSelector((state) => state.design.pageTitle);
 
-  const [url, setUrl] = useState("Home");
   const [searchSuggestions, setSearchSuggestions] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -31,11 +30,6 @@ const NavBar = (props) => {
   const notificationPopup = useRef();
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const url = window.location.href.split("/");
-    setUrl(url[url.length - 1]);
-  }, [window.location.href]);
 
   const searchInputHandler = async ({ target }) => {
     try {
@@ -102,8 +96,7 @@ const NavBar = (props) => {
                 ) : (
                   <img src={HambergerCrossIcon} alt="bar" />
                 )}
-                {/* <h1 className="ms-2">{url}</h1> */}
-                <h1 className="ms-2">{pageTitle || url}</h1>
+                <h1 className="ms-2">{pageTitle}</h1>
               </div>
             </div>
           </div>

@@ -7,6 +7,7 @@ import ValidateOneLink from "./pages/InvestorView/ValidateOneLink/ValidateOneLin
 import ProtectedInvestorRoutes from "./pages/Investor/ProtectedInvestorRoutes/ProtectedInvestorRoutes";
 import BlogWrapper from "./components/Blog/BlogWrapper/BlogWrapper";
 import EcommerceLayout from "./components/ECommerace/Layout/Layout/Layout";
+import InvestorOneLinkLayout from "./pages/InvestorOneLink/InvestorOneLinkLayout/InvestorOneLinkLayout";
 
 // Pages
 import Chats from "./pages/ChatPages/Chats/Chats";
@@ -22,10 +23,11 @@ import NotFound404 from "./pages/Error/NotFound404/NotFound404";
 import { useDispatch } from "react-redux";
 import { setIsMobileView } from "./Store/features/design/designSlice";
 import { useEffect } from "react";
+import InvestorOneLinkRoutes from "./routes/InvestorOneLinkRoutes";
 
 function App() {
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     function handleWindowResize() {
@@ -59,6 +61,14 @@ function App() {
         {/* Investor */}
         <Route path="/investor" element={<ProtectedInvestorRoutes />}>
           {InvestorRoutes()}
+        </Route>
+
+        {/* Investor OneLink */}
+        <Route
+          path="/investor/onelink/:oneLink/:userId"
+          element={<InvestorOneLinkLayout />}
+        >
+          {InvestorOneLinkRoutes()}
         </Route>
 
         {/* Blogs */}
