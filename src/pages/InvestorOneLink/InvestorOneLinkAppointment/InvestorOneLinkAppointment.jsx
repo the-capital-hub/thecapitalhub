@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
 import "./InvestorOneLinkAppointment.scss";
-import IconAppointment from "../../../components/InvestorOneLink/SvgIcons/IconAppointment";
 import CalendarContainer from "../../../components/NewInvestor/MyScheduleComponents/CalenderContainer";
 import ViewSelect from "../../../components/NewInvestor/MyScheduleComponents/ViewSelect";
+import MeetingInfo from "../../../components/InvestorOneLink/InvestorOneLinkAppointment/MeetingInfo/MeetingInfo";
 
 const EVENTS = [
   {
@@ -35,7 +35,10 @@ const EVENTS = [
 
 export default function InvestorOneLinkAppointment() {
   const [view, setView] = useState("week");
+  const [files, setFiles] = useState([]);
+  const [message, setMessage] = useState("");
 
+  // handle calendar view select
   function handleViewSelect(selectedView) {
     console.log(selectedView);
     setView(selectedView);
@@ -55,7 +58,7 @@ export default function InvestorOneLinkAppointment() {
               <ViewSelect handleViewSelect={handleViewSelect} />
             </div>
 
-            <div className="calendar border rounded-4">
+            <div className="calendar">
               <CalendarContainer
                 view={view}
                 meetingsData={EVENTS}
@@ -63,23 +66,7 @@ export default function InvestorOneLinkAppointment() {
               />
             </div>
 
-            {/* <div className="time_pickers d-flex gap-4">
-              <input
-                type="time"
-                name="start"
-                id="start"
-                className="time_input"
-                required
-              />
-              <input
-                type="time"
-                name="end"
-                id="end"
-                className="time_input"
-                required
-              />
-            </div> */}
-
+            {/* Action buttons */}
             <div className="action_buttons d-flex gap-3">
               <button className="bg-transparent border fs-5 py-3 rounded-3 w-50">
                 Cancel
@@ -91,14 +78,12 @@ export default function InvestorOneLinkAppointment() {
           </div>
 
           {/* Meeting Info */}
-          <div className="meeting_info border rounded-4 p-lg-4 p-3">
-            <h4>Meeting for Startups Invested companie’s.</h4>
-
-            <div className="d-flex gap-2">
-              <IconAppointment height="20px" width="20px" />
-              <p>1 hour</p>
-            </div>
-          </div>
+          <MeetingInfo
+            files={files}
+            setFiles={setFiles}
+            message={message}
+            setMessage={setMessage}
+          />
         </div>
       </section>
     </div>
