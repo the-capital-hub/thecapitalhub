@@ -34,12 +34,20 @@ const Feed = () => {
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
+  const appendDataToAllPosts = (data) => {
+    console.log(data);
+    setAllPosts([data, ...allPosts]);
+  };
+
   const fetchMorePosts = () => {
+    console.log("post api function");
     getAllPostsAPI(page)
       .then(({ data }) => {
+        console.log("post api");
         if (data.length === 0) {
           setHasMore(false);
         } else {
+          console.log("data stored");
           setAllPosts([...allPosts, ...data]);
           setPage(page + 1);
         }
@@ -67,7 +75,8 @@ const Feed = () => {
       setgetSavedPostData(data);
     });
     fetchMorePosts();
-  }, [newPost]);
+  }, []);
+  // newPost
 
   useEffect(() => {
     document.title = "Home | The Capital Hub";
@@ -151,35 +160,37 @@ const Feed = () => {
                     likes,
                     _id,
                     resharedPostId,
-                  }) => (
-                    <FeedPostCard
-                      key={Math.random()}
-                      userId={userId}
-                      postId={_id}
-                      designation={designation}
-                      startUpCompanyName={startUp}
-                      investorCompanyName={investor}
-                      profilePicture={profilePicture}
-                      description={description}
-                      firstName={firstName}
-                      lastName={lastName}
-                      video={video}
-                      image={image}
-                      documentName={documentName}
-                      documentUrl={documentUrl}
-                      createdAt={createdAt}
-                      likes={likes}
-                      fetchAllPosts={fetchMorePosts}
-                      response={getSavedPostData}
-                      repostWithToughts={(resharedPostId) => {
-                        setRepostingPostId(resharedPostId);
-                        openPopup();
-                      }}
-                      repostInstantly={repostInstantly}
-                      repostLoading={repostLoading}
-                      resharedPostId={resharedPostId}
-                    />
-                  )
+                  }) => {
+                    return (
+                      <FeedPostCard
+                        key={_id}
+                        userId={userId}
+                        postId={_id}
+                        designation={designation}
+                        startUpCompanyName={startUp}
+                        investorCompanyName={investor}
+                        profilePicture={profilePicture}
+                        description={description}
+                        firstName={firstName}
+                        lastName={lastName}
+                        video={video}
+                        image={image}
+                        documentName={documentName}
+                        documentUrl={documentUrl}
+                        createdAt={createdAt}
+                        likes={likes}
+                        fetchAllPosts={fetchMorePosts}
+                        response={getSavedPostData}
+                        repostWithToughts={(resharedPostId) => {
+                          setRepostingPostId(resharedPostId);
+                          openPopup();
+                        }}
+                        repostInstantly={repostInstantly}
+                        repostLoading={repostLoading}
+                        resharedPostId={resharedPostId}
+                      />
+                    );
+                  }
                 )}
               </InfiniteScroll>
 
@@ -196,6 +207,7 @@ const Feed = () => {
               popupOpen
               setNewPost={setNewPost}
               respostingPostId={respostingPostId}
+              appendDataToAllPosts={appendDataToAllPosts}
             />
           )}
         </div>
