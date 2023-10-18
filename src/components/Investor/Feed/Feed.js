@@ -35,19 +35,21 @@ const Feed = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const appendDataToAllPosts = (data) => {
-    console.log(data);
     setAllPosts([data, ...allPosts]);
   };
 
+  const deletePostFilterData = (postId) => {
+    const filteredPosts = allPosts.filter((post) => post._id !== postId);
+    setAllPosts(filteredPosts);
+  };
+  
+
   const fetchMorePosts = () => {
-    console.log("post api function");
     getAllPostsAPI(page)
       .then(({ data }) => {
-        console.log("post api");
         if (data.length === 0) {
           setHasMore(false);
         } else {
-          console.log("data stored");
           setAllPosts([...allPosts, ...data]);
           setPage(page + 1);
         }
@@ -57,7 +59,6 @@ const Feed = () => {
         console.log(err);
       });
   };
-  console.log(allPosts);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const showPopup = queryParams.get("showPopup") === "true";
@@ -188,6 +189,7 @@ const Feed = () => {
                         repostInstantly={repostInstantly}
                         repostLoading={repostLoading}
                         resharedPostId={resharedPostId}
+                        deletePostFilterData={deletePostFilterData}
                       />
                     );
                   }

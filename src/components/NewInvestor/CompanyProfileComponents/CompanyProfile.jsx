@@ -104,7 +104,7 @@ export default function CompanyProfile({
           mission={!short && mission}
           noOfEmployees={noOfEmployees}
         />
-        {!short && <CompanyStats colorCard={colorCard} />}
+        {!short && <CompanyStats colorCard={colorCard} startup={startup}/>}
       </div>
 
       <div className="company__section__two d-flex flex-column gap-4 pt-3 pb-5 px-5">
