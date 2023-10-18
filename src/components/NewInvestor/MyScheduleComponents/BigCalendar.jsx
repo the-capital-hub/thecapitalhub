@@ -1,7 +1,7 @@
 import { useMemo, useCallback, useRef, useState } from "react";
 import { Calendar } from "react-big-calendar";
 import { ModalBsLauncher } from "../../PopUp/ModalBS";
-import CreateMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/CreateMeetingModal";
+import CreateMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/CreateMeetingModal/CreateMeetingModal";
 
 export default function BigCalendar({
   calendarData,

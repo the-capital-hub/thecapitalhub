@@ -4,7 +4,7 @@ import { momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./CalendarContainer.scss";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
-import CreateMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/CreateMeetingModal";
+import CreateMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/CreateMeetingModal/CreateMeetingModal";
 import { useState } from "react";
 
 // Custom event component
