@@ -175,10 +175,11 @@ export default function StartupExplore() {
             </button>
             {filters && (
               <button
-                className={`btn-capital-small py-3 px-3 ms-auto`}
+                className={`btn-capital-small p-2 p-md-3 ms-auto`}
                 onClick={fetchInitialData}
               >
-                Show All
+                <span className="d-none d-md-block">Show All</span>
+                <span className="d-md-none">X</span>
               </button>
             )}
           </div>

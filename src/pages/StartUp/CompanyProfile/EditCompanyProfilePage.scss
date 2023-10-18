@@ -1,13 +1,15 @@
 .editcompanyProfilePage__wrapper {
-  margin-inline: 1.5em;
-  margin-block: 2em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 2em;
 
-  @media (min-width: 768px) {
+  margin: 2rem 0;
+
+  @media (min-width: 820px) {
     flex-direction: row;
+    margin-inline: 1.5em;
+    margin-block: 2em;
   }
 
   .main__content {
