@@ -79,7 +79,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
       }}
     >
       <div
-        className={`close-menu ${!sidebarCollapsed && "close-btn-collapsed"}`}
+        className={`close-menu ${!sidebarCollapsed && "close-btn-collapsed"} d-lg-none`}
         onClick={menuIconClick}
       >
         {sidebarCollapsed ? (

@@ -142,7 +142,7 @@
             width: 49px;
             height: 49px;
             border-radius: 50%;
-            @media (max-width: 768px) {
+            @media (max-width: 820px) {
               width: 35px;
               height: 35px;
             }
@@ -315,6 +315,26 @@
   .container {
     .investor_navbar {
       /* right container */
+      .bar_logo_container {
+        .mobile-home-hamberger {
+          display: flex;
+          h1 {
+            color: #000;
+            font-family: Poppins;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            margin: 0;
+            margin-left: 2px;
+            text-transform: uppercase;
+          }
+        }
+        img {
+          height: 20px;
+          width: 20px;
+        }
+      }
       .navbar_right_container {
         .icons-container {
           .mobile-icon-wrapper {
