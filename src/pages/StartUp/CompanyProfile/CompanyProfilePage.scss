@@ -1,12 +1,13 @@
 .companyProfilePage__wrapper {
-  margin-inline: 1.5em;
-  margin-block: 2em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin: 2rem 0;
 
-  @media (min-width: 768px) {
+  @media (min-width: 820px) {
     flex-direction: row;
+    margin-inline: 1.5em;
+    margin-block: 2em;
   }
 
   .main__content {
@@ -72,7 +73,6 @@
     margin-right: 10px;
   }
 
-
   .suggestion-item:hover {
     background-color: #f0f0f0;
   }
@@ -80,7 +80,6 @@
   .suggestion-item.active {
     background-color: #f0f0f0;
   }
-
 
   .suggestion button {
     padding: 10px 15px;
