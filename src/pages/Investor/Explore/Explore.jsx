@@ -135,7 +135,7 @@ function Explore() {
 
   return (
     <MaxWidthWrapper>
-      <div className="explore_container px-3 border-start mb-4">
+      <div className="explore_container px-md-3 mb-4">
         <SmallProfileCard text="Explore" />
         <section className="filter_container border">
           <h5 className="h5">Find StartUps by</h5>

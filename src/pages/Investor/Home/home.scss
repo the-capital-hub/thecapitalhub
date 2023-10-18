@@ -30,6 +30,15 @@
     background: #fff;
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
   }
+
+  .infinite-scroll-component__outerdiv {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    .infinite-scroll-component {
+      overflow: visible !important;
+    }
+  }
 }
 
 @media (max-width: 768px) {
