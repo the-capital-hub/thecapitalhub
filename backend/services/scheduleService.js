@@ -97,5 +97,27 @@ export const getAllMeetings = async (oneLinkId) => {
   }
 };
 
-
-
+export const requestBookingSlotById = async (meetingId, requestData) => {
+  try {
+    const meeting = await ScheduleModel.findById(meetingId);
+    if (!meeting) {
+      return {
+        status: 404,
+        message: "Meeting not found with the provided ID.",
+      };
+    }
+    meeting.requestedBy.push(requestData);
+    await meeting.save();
+    return {
+      status: 200,
+      message: "Booking request added successfully",
+      data: meeting,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while adding the booking request.",
+    };
+  }
+};

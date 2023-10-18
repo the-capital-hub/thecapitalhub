@@ -18,9 +18,25 @@ const scheduleSchema = new Schema(
     bookedBy: {
       type: String,
     },
-    requestedBy: {
-      type: Array,
-    },
+    requestedBy: [
+      {
+        name: {
+          type: String,
+        },
+        companyName: {
+          type: String,
+        },
+        email: {
+          type: String,
+        },
+        phone: {
+          type: String,
+        },
+        description: {
+          type: String,
+        },
+      },
+    ],
   },
   {
     timestamps: true,
