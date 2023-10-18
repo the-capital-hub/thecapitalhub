@@ -1039,3 +1039,15 @@ export const getInvestorFromOneLinkAPI = async (oneLink, userId) => {
     throw error;
   }
 };
+
+export const createMeetingAPI = async (newMeeting) => {
+  try {
+    const response = await axiosInstance.post(`${API.createMeeting}`, {
+      newMeeting,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error creating Meeting:", error);
+    throw error;
+  }
+};
