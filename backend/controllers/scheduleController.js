@@ -32,20 +32,19 @@ export const getAllMeetingsController = async (req, res) => {
   }
 }
 
-// export const requestBookingSlotController = async (req, res) => {
-//   try {
-//     const userId = req.userId;
-//     const {bookingSlotId} = req.params;
-//     const response = await requestBookingSlotById(userId, bookingSlotId);
-//     res.status(response.status).send(response);
-//   } catch (error) {
-//     console.error(error);
-//     return res.status(500).json({
-//       status: 500,
-//       message: "An error occurred while requesting the booking slot.",
-//     });
-//   }
-// }
+export const requestBookingSlotController = async (req, res) => {
+  try {
+    const { meetingId } = req.params;
+    const response = await requestBookingSlotById(meetingId, req.body);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      status: 500,
+      message: "An error occurred while requesting the booking slot.",
+    });
+  }
+}
 
 
 
