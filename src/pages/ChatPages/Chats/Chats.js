@@ -200,7 +200,7 @@ const Chats = () => {
         )}
       </>
     ) : (
-      <section className="right_section mt-3 w-100 ">
+      <section className="right_section overflow-y-auto hide_scrollbar mt-3 w-100 ">
         <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
       </section>
     );

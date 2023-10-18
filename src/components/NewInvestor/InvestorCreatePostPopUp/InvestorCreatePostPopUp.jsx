@@ -20,6 +20,7 @@ const CreatePostPopUp = ({
   popupOpen,
   setNewPost,
   respostingPostId,
+  appendDataToAllPosts,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
@@ -182,10 +183,7 @@ const CreatePostPopUp = ({
     // Call the postUserPost function to make the POST request to the server
     postUserPost(postData)
       .then((response) => {
-        console.log("response from frontend-->", response);
-        // Handle the response if needed
-        console.log("Post submitted successfully!");
-        // Reset the state to clear the inputs
+        appendDataToAllPosts(response.data)
         setPostText("");
         setSelectedImage(null);
         setSelectedVideo(null);

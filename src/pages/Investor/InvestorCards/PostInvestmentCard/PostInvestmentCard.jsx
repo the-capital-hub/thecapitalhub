@@ -16,7 +16,6 @@ const PostInvestmentCard = ({ logo, text, para, images, smallText }) => {
         <img src={images} alt="Image" className="small-image" />
         <span className="small-text">{smallText}</span>
       </div>
-
     </div>
   );
 };

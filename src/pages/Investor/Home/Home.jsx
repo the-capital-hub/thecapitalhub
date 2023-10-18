@@ -33,6 +33,15 @@ function Home() {
     setPopupOpen(!popupOpen);
   };
 
+  const appendDataToAllPosts = (data) => {
+    setAllPosts([data, ...allPosts]);
+  };
+
+  const deletePostFilterData = (postId) => {
+    const filteredPosts = allPosts.filter((post) => post._id !== postId);
+    setAllPosts(filteredPosts);
+  };
+
   useEffect(() => {
     dispatch(setPageTitle("Home"));
     window.title = "Home | The Capital Hub";
@@ -59,6 +68,9 @@ function Home() {
   useEffect(() => {
     getSavedPostCollections(loggedInUser._id).then((data) => {
       setgetSavedPostData(data);
+    })
+    .catch((error) => {
+      console.log(error.message);
     });
     document.title = "Home | Investors - The Capital Hub";
     fetchMorePosts();
@@ -181,6 +193,7 @@ function Home() {
                       repostInstantly={repostInstantly}
                       repostLoading={repostLoading}
                       resharedPostId={resharedPostId}
+                      deletePostFilterData={deletePostFilterData}
                     />
                   )
                 )}
@@ -201,6 +214,7 @@ function Home() {
                 popupOpen
                 setNewPost={setNewPost}
                 respostingPostId={respostingPostId}
+                appendDataToAllPosts={appendDataToAllPosts}
               />
             )}
           </div>

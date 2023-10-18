@@ -85,6 +85,8 @@ const API = Object.freeze({
   createSecretKey: `${baseUrl}/users/createSecretKey`,
   validateSecretKey: `${baseUrl}/users/validateSecretKey`,
   getInvestorFromOneLink: `${baseUrl}/investor/getOnePager`,
+  createMeeting: `${baseUrl}/schedule/createMeeting`,
+  getAllMeetings: `${baseUrl}/schedule/getAllMeetings`,
 });
 
 export default API;

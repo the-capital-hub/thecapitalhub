@@ -1,3 +1,5 @@
+
+
 import React, { useEffect, useRef, useState } from "react";
 import "./createpostpopup.scss";
 import SmileeIcon from "../../../Images/Smilee.svg";
@@ -18,15 +20,15 @@ import { BsLink45Deg } from "react-icons/bs";
 import IconFile from "../../Investor/SvgIcons/IconFile";
 import IconVideo from "../../../Images/post/Video.svg";
 import { s3 } from "../../../Service/awsConfig";
-import MultiImageInput from 'react-multiple-image-input';
+
 const CreatePostPopUp = ({
   setPopupOpen,
   popupOpen,
   setNewPost,
   respostingPostId,
+  appendDataToAllPosts,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-
   const [postText, setPostText] = useState("");
   const [category, setCategory] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
@@ -34,33 +36,19 @@ const CreatePostPopUp = ({
   const [selectedDocument, setSelectedDocument] = useState(null);
   const [posting, setPosting] = useState(false);
 
-  // const [crop, setCrop] = useState({ x: 0, y: 0 });
-  // const [zoom, setZoom] = useState(1);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
   const [croppedImage, setCroppedImage] = useState(null);
-  const [images, setImages] = useState({});
-  const [imagesOpen, setImagesOpen] = useState(false);
-   const crop = {
-  unit: '%',
-  width: '50',
-  height:'50',
-  aspect: 1/1,
-  x: 130,
-  y: 50,
-};
-  
-
 
   const handleClose = () => setPopupOpen(false);
 
-  // const galleryInputRef = useRef(null);
+  const galleryInputRef = useRef(null);
   const documentInputRef = useRef(null);
   const smileeInputRef = useRef(null);
   const cameraInputRef = useRef(null);
 
   const handleGalleryButtonClick = () => {
-    // galleryInputRef.current.click();
-    setImagesOpen(true)
-
+    galleryInputRef.current.click();
   };
 
   const handleDocumentButtonClick = () => {
@@ -179,44 +167,34 @@ const CreatePostPopUp = ({
     });
   };
 
-  // const onCropComplete = async (croppedArea, croppedAreaPixels) => {
-  //   const croppedImg = await getCroppedImg(previewImage, croppedAreaPixels);
-  //   setCroppedImage(croppedImg);
-  // };
+  const onCropComplete = async (croppedArea, croppedAreaPixels) => {
+    const croppedImg = await getCroppedImg(previewImage, croppedAreaPixels);
+    setCroppedImage(croppedImg);
+  };
 
   const handleSubmit = async (e) => {
-    alert("done")
     e.preventDefault();
     setPosting(true);
 
-    // if (!selectedImage && !selectedVideo) {
-    //   if (!respostingPostId && !postText) {
-    //     return setPosting(false);
-    //   }
-    // }
-
-    const postData = {};
-
-    if (respostingPostId) {
-      postData.resharedPostId = respostingPostId;
-    }
-    postData.description = postText;
-    postData.category = category;
-    
-    if (selectedImage) {
-      const imageErray=[];
-      const croppedImages= [];
-      imageErray.push(images)
-      for (let i = 0; i < imageErray.length; i++) {
-
-        const base64Data = await getBase64(imageErray[i]);
-        croppedImages.push(base64Data);
+    if (!selectedImage && !selectedVideo) {
+      if (!respostingPostId && !postText) {
+        return setPosting(false);
       }
-      postData.images = croppedImages;
+    }
+
+    const postData = new FormData();
+    if (respostingPostId) {
+      postData.append("resharedPostId", respostingPostId);
+    }
+    postData.append("description", postText);
+    postData.append("category", category);
+
+    if (selectedImage) {
+      postData.append("image", croppedImage);
     }
     if (selectedVideo) {
       const video = await getBase64(selectedVideo);
-      postData.video = video;
+      postData.append("video", video);
     }
     if (selectedDocument) {
       const timestamp = Date.now();
@@ -227,18 +205,12 @@ const CreatePostPopUp = ({
         Body: selectedDocument,
       };
       const res = await s3.upload(params).promise();
-      postData.documentUrl = res.Location;
-      postData.documentName = selectedDocument.name;
+      postData.append("documentUrl", res.Location);
+      postData.append("documentName", selectedDocument.name);
     }
-
-
-
-
-
     postUserPost(postData)
       .then((response) => {
-        console.log("response from frontend-->", response);
-        console.log("Post submitted successfully!");
+        appendDataToAllPosts(response.data)
         setPostText("");
         setSelectedImage(null);
         setSelectedVideo(null);
@@ -267,17 +239,13 @@ const CreatePostPopUp = ({
         .catch(() => handleClose());
     }
   }, []);
-  console.log(images)
- 
-  // console.log(imageErray)
 
   return (
     <>
       {popupOpen && <div className="createpost-background-overlay"></div>}
       <div
-        className={`create_post_modal rounded p-2 ${
-          popupOpen ? "d-block" : ""
-        }`}
+        className={`create_post_modal rounded p-2 ${popupOpen ? "d-block" : ""
+          }`}
         tabIndex="-1"
         role="dialog"
       >
@@ -364,7 +332,7 @@ const CreatePostPopUp = ({
                     />
                   ))}
 
-                {/* {previewImage && !cropComplete && (
+                {previewImage && !cropComplete && (
                   <div className="d-flex flex-column justify-content-center gap-2">
                     <div className="image-cropper">
                       <EasyCrop
@@ -383,24 +351,7 @@ const CreatePostPopUp = ({
                       Crop
                     </button>
                   </div>
-                )} */}
-                {
-                  imagesOpen?         
-                  <MultiImageInput
-                 
-                  theme={{
-                    background: '#ffffff',
-                    outlineColor: '#111111',
-                    textColor: '#040404',
-                    buttonColor: '#ff0e1f',
-                    modalColor: '#ffffff'
-                  }}
-                    images={images}
-                    setImages={setImages}
-                    cropConfig={{ crop, ruleOfThirds: false, maxWidth: 200  }}
-                  />:""
-                }
-        
+                )}
                 {cropComplete && (
                   <div className="cropped-preview w-100 d-flex justify-content-center">
                     <img
@@ -439,14 +390,14 @@ const CreatePostPopUp = ({
                 <div className="modal_footer_container">
                   <div className="left_buttons">
                     {/* Image input and Icon */}
-                    {/* <input
+                    <input
                       type="file"
                       name="image"
                       style={{ display: "none" }}
                       ref={galleryInputRef}
                       onChange={handleFileChange}
                       accept="image/*"
-                    /> */}
+                    />
                     <button
                       className="white_button"
                       onClick={handleGalleryButtonClick}

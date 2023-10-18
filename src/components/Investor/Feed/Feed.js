@@ -34,6 +34,16 @@ const Feed = () => {
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
+  const appendDataToAllPosts = (data) => {
+    setAllPosts([data, ...allPosts]);
+  };
+
+  const deletePostFilterData = (postId) => {
+    const filteredPosts = allPosts.filter((post) => post._id !== postId);
+    setAllPosts(filteredPosts);
+  };
+  
+
   const fetchMorePosts = () => {
     getAllPostsAPI(page)
       .then(({ data }) => {
@@ -49,7 +59,6 @@ const Feed = () => {
         console.log(err);
       });
   };
-  console.log(allPosts);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const showPopup = queryParams.get("showPopup") === "true";
@@ -67,7 +76,8 @@ const Feed = () => {
       setgetSavedPostData(data);
     });
     fetchMorePosts();
-  }, [newPost]);
+  }, []);
+  // newPost
 
   useEffect(() => {
     document.title = "Home | The Capital Hub";
@@ -151,35 +161,38 @@ const Feed = () => {
                     likes,
                     _id,
                     resharedPostId,
-                  }) => (
-                    <FeedPostCard
-                      key={Math.random()}
-                      userId={userId}
-                      postId={_id}
-                      designation={designation}
-                      startUpCompanyName={startUp}
-                      investorCompanyName={investor}
-                      profilePicture={profilePicture}
-                      description={description}
-                      firstName={firstName}
-                      lastName={lastName}
-                      video={video}
-                      image={image}
-                      documentName={documentName}
-                      documentUrl={documentUrl}
-                      createdAt={createdAt}
-                      likes={likes}
-                      fetchAllPosts={fetchMorePosts}
-                      response={getSavedPostData}
-                      repostWithToughts={(resharedPostId) => {
-                        setRepostingPostId(resharedPostId);
-                        openPopup();
-                      }}
-                      repostInstantly={repostInstantly}
-                      repostLoading={repostLoading}
-                      resharedPostId={resharedPostId}
-                    />
-                  )
+                  }) => {
+                    return (
+                      <FeedPostCard
+                        key={_id}
+                        userId={userId}
+                        postId={_id}
+                        designation={designation}
+                        startUpCompanyName={startUp}
+                        investorCompanyName={investor}
+                        profilePicture={profilePicture}
+                        description={description}
+                        firstName={firstName}
+                        lastName={lastName}
+                        video={video}
+                        image={image}
+                        documentName={documentName}
+                        documentUrl={documentUrl}
+                        createdAt={createdAt}
+                        likes={likes}
+                        fetchAllPosts={fetchMorePosts}
+                        response={getSavedPostData}
+                        repostWithToughts={(resharedPostId) => {
+                          setRepostingPostId(resharedPostId);
+                          openPopup();
+                        }}
+                        repostInstantly={repostInstantly}
+                        repostLoading={repostLoading}
+                        resharedPostId={resharedPostId}
+                        deletePostFilterData={deletePostFilterData}
+                      />
+                    );
+                  }
                 )}
               </InfiniteScroll>
 
@@ -196,6 +209,7 @@ const Feed = () => {
               popupOpen
               setNewPost={setNewPost}
               respostingPostId={respostingPostId}
+              appendDataToAllPosts={appendDataToAllPosts}
             />
           )}
         </div>

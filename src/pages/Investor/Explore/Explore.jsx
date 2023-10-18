@@ -135,7 +135,7 @@ function Explore() {
 
   return (
     <MaxWidthWrapper>
-      <div className="explore_container px-3 border-start mb-4">
+      <div className="explore_container px-md-3 mb-4">
         <SmallProfileCard text="Explore" />
         <section className="filter_container border">
           <h5 className="h5">Find StartUps by</h5>
@@ -169,10 +169,11 @@ function Explore() {
             </button>
             {filters && (
               <button
-                className={`btn-capital-small fs-6 px-3 ms-auto`}
+                className={`btn-capital-small p-2 p-md-3 ms-auto`}
                 onClick={fetchInitialData}
               >
-                Show All
+                <span className="d-none d-md-block">Show All</span>
+                <span className="d-md-none">X</span>
               </button>
             )}
           </div>

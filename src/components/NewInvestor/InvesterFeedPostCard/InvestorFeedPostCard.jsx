@@ -62,6 +62,7 @@ const FeedPostCard = ({
   repostLoading,
   repostPreview,
   resharedPostId,
+  deletePostFilterData,
 }) => {
   const [showComment, setShowComment] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -72,6 +73,9 @@ const FeedPostCard = ({
   const [showSuccess, setShowSuccess] = useState(false);
   const [showSavePopUp, setshowSavePopUp] = useState(false);
   const [likedBy, setLikedBy] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+
   const handleCloseSavePopup = () => {
     setshowSavePopUp(false);
   };
@@ -191,8 +195,10 @@ const FeedPostCard = ({
   // Delete post
   const deletePost = async (postId) => {
     try {
+      setLoading(true);
       await deletePostAPI(postId);
-      await fetchAllPosts();
+      deletePostFilterData(postId);
+      setLoading(false);
     } catch (error) {
       console.log("Error deleting post : ", error);
     }
@@ -282,10 +288,16 @@ const FeedPostCard = ({
       <div className="row investor_feedpostcard_main_container mb-2">
         <div className="col-12">
           <div
-            className={`box feedpostcard_container mt-2 border ${
-              repostPreview && "rounded shadow-sm"
-            }`}
+            className={`box feedpostcard_container mt-2 border ${repostPreview && "rounded shadow-sm"
+              }`}
           >
+            {loading &&
+              <div class="d-flex justify-content-center my-4">
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            }
             <div className="  feed_header_container border-2 border-bottom mb-3 pb-2">
               <div className="feedpostcard_content">
                 <Link to={`/user/${userId}`} className="rounded-circle">
@@ -316,7 +328,7 @@ const FeedPostCard = ({
                       }}
                     >
                       <img src={HomeIcon} alt="logo" />
-                      {designation}, {investorCompanyName?.company?investorCompanyName?.company:startUpCompanyName?.company}
+                      {designation}, {investorCompanyName?.company ? investorCompanyName?.company : startUpCompanyName?.company}
                     </span>
                     <span
                       style={{
@@ -467,9 +479,8 @@ const FeedPostCard = ({
                   </div>
                   <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                     <span
-                      className={`repost_container rounded ${
-                        showRepostOptions ? "bg-light" : ""
-                      }`}
+                      className={`repost_container rounded ${showRepostOptions ? "bg-light" : ""
+                        }`}
                       ref={repostContainerRef}
                     >
                       <img
@@ -721,9 +732,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Harassment" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio1"
               >
                 Harassment
@@ -740,9 +750,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Spam" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio2"
               >
                 Spam
@@ -759,9 +768,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Fraud or scam" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio3"
               >
                 Fraud or scam
@@ -778,9 +786,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Hateful Speech" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio4"
               >
                 Hateful Speech

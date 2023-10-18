@@ -65,16 +65,16 @@
   .time__stamp {
     font-size: 0.8rem;
   }
-}
 
-.notification {
-  background: red;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 13px;
-  color: #fff;
+  .notification {
+    background: red;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    color: #fff;
+  }
 }

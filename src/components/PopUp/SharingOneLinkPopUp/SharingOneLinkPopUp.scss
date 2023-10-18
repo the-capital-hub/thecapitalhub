@@ -80,12 +80,30 @@
     }
 
     .assign_btn {
-      border: 1px solid #fd5901;
-      background-color: #fd5901;
-      color: white;
+      
       padding: 0.25em 1em;
       border-radius: 5px;
     }
+
+    .startup {
+      border: 1px solid #fd5901;
+      background-color: #fd5901;
+      color: white;
+    }
+
+    .investor {
+      border: 1px solid #d3f36b;
+      background-color: #d3f36b;
+      color: black;
+    }
+
+    .success-message {
+      color: green;
+      font-size: 16px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
   }
 
   /* Center the buttons */
