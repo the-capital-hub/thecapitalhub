@@ -21,9 +21,9 @@ export default function SavedPosts() {
 
   return (
     <MaxWidthWrapper>
-      <div className="savedPosts__wrapper px-3 border-start pb-5 ">
+      <div className="savedPosts__wrapper px-md-3 pb-lg-5 ">
         {/* Main content */}
-        <section className="section__wrapper main__content d-flex flex-column gap-5">
+        <section className="section__wrapper main__content d-flex flex-column gap-3">
           {/* Page indicators */}
           <div className="">
             <SmallProfileCard text="Saved Posts" />
@@ -40,7 +40,7 @@ export default function SavedPosts() {
           </div>
         </section>
         {/* Right side content */}
-        <aside className="aside__content d-flex flex-column gap-3">
+        <aside className="aside__content d-none d-lg-flex flex-column gap-3">
           <RightProfileCard />
           <RecommendationCard />
           <NewsCorner />

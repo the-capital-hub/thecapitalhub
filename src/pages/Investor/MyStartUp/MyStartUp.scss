@@ -24,7 +24,8 @@
     width: 99%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
+
     .left_container,
     .right_container {
       border-radius: 10px;
@@ -32,7 +33,8 @@
       background: #fff;
       width: 49%;
       padding: 15px;
-      height: 30rem;
+      height: max-content;
+      max-height: 30rem;
     }
     .left_container {
       .chart_container {
@@ -43,10 +45,26 @@
     }
 
     .right_container {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap:10px;
+
       .two_by_two_card_container {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        overflow-y: scroll;
+        
+        @media (min-width: 821px) {
+          overflow-y: visible;
+          overflow-x: auto;
+          flex-wrap: wrap;
+
+          .postinvestment-card-container{
+            width: 100%;
+          }
+        }
       }
     }
   }
@@ -119,16 +137,13 @@
     .big_card_container {
       width: 100%;
       .left_container,
-    .right_container {
-      width: 100%;
-      height: auto;
+      .right_container {
+        width: 100%;
+        height: auto;
+      }
+      .chart_container {
+        // width: 75%;
+      }
     }
-    .chart_container{
-      // width: 75%;
-    }
-    
-    
-    }
-
   }
 }
