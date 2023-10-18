@@ -1,6 +1,7 @@
 import {
   createMeeting,
   getAllMeetings,
+  requestBookingSlotById,
 } from "../services/scheduleService.js";
 
 export const createMeetingController = async (req, res) => {
@@ -19,7 +20,7 @@ export const createMeetingController = async (req, res) => {
 
 export const getAllMeetingsController = async (req, res) => {
   try {
-    const {oneLinkId} = req.params; 
+    const { oneLinkId } = req.params;
     const response = await getAllMeetings(oneLinkId);
     res.status(response.status).send(response);
   } catch (error) {
@@ -30,3 +31,21 @@ export const getAllMeetingsController = async (req, res) => {
     });
   }
 }
+
+// export const requestBookingSlotController = async (req, res) => {
+//   try {
+//     const userId = req.userId;
+//     const {bookingSlotId} = req.params;
+//     const response = await requestBookingSlotById(userId, bookingSlotId);
+//     res.status(response.status).send(response);
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({
+//       status: 500,
+//       message: "An error occurred while requesting the booking slot.",
+//     });
+//   }
+// }
+
+
+

@@ -97,5 +97,35 @@ export const getAllMeetings = async (oneLinkId) => {
   }
 };
 
+// export const requestBookingSlotById = async (userId, bookingSlotId) => {
+//   try {
+//     const bookingSlot = await ScheduleModel.findById(bookingSlotId);
 
+//     if (!bookingSlot) {
+//       return {
+//         status: 404,
+//         message: "Booking slot not found.",
+//       };
+//     }
+//     if (bookingSlot.requestedBy.includes(userId)) {
+//       return {
+//         status: 400,
+//         message: "User has already requested this slot.",
+//       };
+//     }
+//     bookingSlot.requestedBy.push(userId);
+//     await bookingSlot.save();
 
+//     return {
+//       status: 200,
+//       message: "Booking slot requested successfully",
+//       data: bookingSlot,
+//     };
+//   } catch (error) {
+//     console.error(error);
+//     return {
+//       status: 500,
+//       message: "An error occurred while requesting the booking slot.",
+//     };
+//   }
+// };
