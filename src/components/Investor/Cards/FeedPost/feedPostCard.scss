@@ -157,7 +157,7 @@
             list-style-type: none;
             top: 30px;
             right: 20px;
-
+            height: max-content;
             background-color: white;
 
             li {
@@ -446,7 +446,7 @@
 .image-popup-container {
   width: 50vw;
   position: relative;
-  button{
+  button {
     position: absolute;
   }
   img {
