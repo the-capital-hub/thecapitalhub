@@ -61,32 +61,11 @@ export const getAllMeetings = async (oneLinkId) => {
     }
 
     const meetings = await ScheduleModel.find({ userId: user._id });
-    const formattedMeetings = meetings.map((meeting) => {
-      const startDateTime = new Date(meeting.startDateTime);
-      const endDateTime = new Date(meeting.endDateTime);
-
-      const formattedMeeting = {
-        startYear: startDateTime.getFullYear(),
-        startMonth: startDateTime.getMonth() + 1,
-        startDay: startDateTime.getDate(),
-        startHour: startDateTime.getHours(),
-        startMin: startDateTime.getMinutes(),
-        endYear: endDateTime.getFullYear(),
-        endMonth: endDateTime.getMonth() + 1,
-        endDay: endDateTime.getDate(),
-        endHour: endDateTime.getHours(),
-        endMin: endDateTime.getMinutes(),
-        title: meeting.title,
-        bookedBy: meeting.bookedBy,
-        requestedBy: meeting.requestedBy,
-      };
-      return formattedMeeting;
-    });
 
     return {
       status: 200,
       message: "Meetings retrieved successfully",
-      data: formattedMeetings,
+      data: meetings,
     };
   } catch (error) {
     console.error(error);
