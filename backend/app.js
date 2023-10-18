@@ -19,6 +19,7 @@ import chatData from "./routes/chatRoutes.js";
 import messageData from "./routes/messageRoutes.js";
 import communityData from "./routes/communityRoutes.js";
 import notificationData from "./routes/notificationRoutes.js";
+import scheduleRoutes from "./routes/scheduleRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -39,6 +40,7 @@ app.use("/chat", chatData);
 app.use("/message", messageData);
 app.use("/community", communityData);
 app.use("/notificaton", notificationData);
+app.use("/schedule", scheduleRoutes);
 
 // documentation upload
 

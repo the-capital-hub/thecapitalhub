@@ -42,6 +42,7 @@ export const createNewPost = async (data) => {
     }
     const newPost = new PostModel(data);
     await newPost.save();
+    await newPost.populate('user');
     return newPost;
   } catch (error) {
     console.error(error);
