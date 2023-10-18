@@ -23,6 +23,8 @@ const SharingOneLinkPopUp = ({
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const dispatch = useDispatch();
+  const [isSecretKeyAssigned, setIsSecretKeyAssigned] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // State for Invalid secret Key
   const [error, setError] = useState(null);
@@ -30,13 +32,13 @@ const SharingOneLinkPopUp = ({
 
   const shareUrl = investor
     ? "https://thecapitalhub.in/investor/onelink/" +
-      oneLink +
-      "/" +
-      loggedInUser.oneLinkId
+    oneLink +
+    "/" +
+    loggedInUser.oneLinkId
     : "https://thecapitalhub.in/onelink/" +
-      oneLink +
-      "/" +
-      loggedInUser.oneLinkId;
+    oneLink +
+    "/" +
+    loggedInUser.oneLinkId;
   const messageForSharing = introMessage.replace(/<br\s*\/?>/g, "\n");
   const [copyStatus, setCopyStatus] = useState(""); // State for copy status
 
@@ -75,10 +77,20 @@ const SharingOneLinkPopUp = ({
 
   // Handle Submit
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const {user} = await createSecretKey(pin);
-    console.log("data",user);
-    dispatch(loginSuccess(user));
+    try {
+      e.preventDefault();
+      setLoading(true);
+      const { user } = await createSecretKey(pin);
+      dispatch(loginSuccess(user));
+      setIsSecretKeyAssigned(true);
+      setTimeout(() => {
+        setIsSecretKeyAssigned(false);
+      }, 2000);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -88,6 +100,9 @@ const SharingOneLinkPopUp = ({
           <p className="text_section">{messageForSharing}</p>
 
           {/* Assign Secret Key */}
+          {isSecretKeyAssigned && (
+            <p className="success-message">Secret key assigned successfully!</p>
+          )}
           <form onSubmit={handleSubmit} className="">
             <fieldset className={`key rounded-2 ${"invalid"}`}>
               <legend className="key_title px-2">Assign Secret Key</legend>
@@ -108,11 +123,16 @@ const SharingOneLinkPopUp = ({
             <em className="text-danger" style={{ fontSize: "0.75rem" }}>
               {error}
             </em>
-            <button type="submit" className="assign_btn">
-              Assign
+            <button
+              type="submit"
+              className={`assign_btn ${investor ? "investor" : "startup"}`}
+              disabled={loading}
+            >
+              {loading ? "Processing..." : "Assign"}
             </button>
-          </form>
 
+          </form>
+          {/* )} */}
           <h6>
             Click here for:{" "}
             <a
