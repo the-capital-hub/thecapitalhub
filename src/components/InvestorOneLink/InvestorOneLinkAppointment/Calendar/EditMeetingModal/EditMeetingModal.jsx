@@ -1,61 +1,39 @@
 import React, { useRef, useState } from "react";
-import "./CreateMeetingModal.scss";
+import "./EditMeetingModal.scss";
 import {
+  ModalBSBody,
   ModalBSContainer,
   ModalBSHeader,
-  ModalBSBody,
-  ModalBSFooter,
 } from "../../../../PopUp/ModalBS";
-import { useSelector } from "react-redux";
 import SpinnerBS from "../../../../Shared/Spinner/SpinnerBS";
-import { createMeetingAPI } from "../../../../../Service/user";
+import { deleteMeeting } from "../../../../../Service/user";
 
-export default function CreateMeetingModal({
-  meetings,
-  newMeeting,
-  setMeetings,
-}) {
+export default function EditMeetingModal({ selectedMeeting, setMeetings }) {
+  // States for loading and alert
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
-  const [title, setTitle] = useState("");
   const closeRef = useRef();
 
-  // Handle create Meeting
-  async function handleCreateMeeting(e) {
+  //   Handle Edit meeting
+  async function handleEditMeeting(e) {
     e.preventDefault();
-    // console.log("submitted");
+  }
 
-    const newMeetingData = {
-      start: newMeeting.start,
-      end: newMeeting.end,
-      title: title,
-    };
-
-    // Start loading
+  //   handle delete meeting
+  async function handleDeleteMeeting(e) {
     setLoading(true);
 
-    // API call
     try {
-      const { data } = await createMeetingAPI(newMeetingData);
-      // console.log("created", data);
+      const { data } = await deleteMeeting(selectedMeeting._id);
+      //   console.log("deleted meeting", data);
 
-      // Revert loading and title
+      // Revert loading
       setLoading(false);
-      setTitle("");
+      setAlert({ success: "Meeting Removed!" });
 
-      // set success alert
-      setAlert({ success: "Meeting Created!" });
-      // Update Calender meetings
-      setMeetings((prev) => {
-        return [
-          ...prev,
-          {
-            ...data,
-            start: new Date(data.start),
-            end: new Date(data.end),
-          },
-        ];
-      });
+      // Update calendar Meetings
+      setMeetings((prev) => prev.filter((meeting) => meeting._id !== data._id));
+
       setTimeout(() => {
         closeRef.current.click();
       }, 2000);
@@ -63,14 +41,12 @@ export default function CreateMeetingModal({
         setAlert(null);
       }, 2500);
     } catch (error) {
-      console.log("Create meeting error:", error);
+      console.log("Error deleting meeting", error);
 
-      // Revert loading and title
+      //   Revert Loading
       setLoading(false);
-      setTitle("");
+      setAlert({ error: "Error removing Meeting! Please try again." });
 
-      // set Error alert
-      setAlert({ error: "Error creating a meeting! Please try again." });
       setTimeout(() => {
         closeRef.current.click();
       }, 2000);
@@ -80,27 +56,22 @@ export default function CreateMeetingModal({
     }
   }
 
-  // Handle title
-  function handleTitle(e) {
-    setTitle(e.target.value);
-  }
-
   return (
-    <div className="create_meeting_modal_wrapper">
-      <ModalBSContainer id={"createMeetingModal"}>
-        <ModalBSHeader title={"Create Meeting"} closeRef={closeRef} />
+    <div className="edit_meeting_modal_wrapper">
+      <ModalBSContainer id={"editMeetingModal"}>
+        <ModalBSHeader title={"Delete Meeting"} closeRef={closeRef} />
         <ModalBSBody>
           {!alert ? (
             <form
-              onSubmit={handleCreateMeeting}
-              className="newMeeting_form d-flex flex-column gap-3 py-3"
+              onSubmit={handleEditMeeting}
+              className="edit_meeting_form d-flex flex-column gap-3 py-3"
             >
               {/* Time */}
               <div className="d-flex justify-content-around gap-3">
                 <fieldset className="w-50">
                   <legend>Start Time</legend>
                   <p className="m-0">
-                    {newMeeting?.start.toLocaleTimeString([], {
+                    {selectedMeeting?.start.toLocaleTimeString([], {
                       hour: "2-digit",
                       minute: "2-digit",
                     })}
@@ -110,7 +81,7 @@ export default function CreateMeetingModal({
                 <fieldset className="w-50">
                   <legend>End Time</legend>
                   <p className="m-0">
-                    {newMeeting?.end.toLocaleTimeString([], {
+                    {selectedMeeting?.end.toLocaleTimeString([], {
                       hour: "2-digit",
                       minute: "2-digit",
                     })}
@@ -122,7 +93,7 @@ export default function CreateMeetingModal({
               <fieldset>
                 <legend>Date</legend>
                 <p className="m-0">
-                  {newMeeting?.end.toLocaleDateString("en-IN", {
+                  {selectedMeeting?.end.toLocaleDateString("en-IN", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
@@ -134,33 +105,28 @@ export default function CreateMeetingModal({
               {/* Title */}
               <fieldset>
                 <legend>Title</legend>
-                <input
-                  type="text"
-                  id="title"
-                  name="title"
-                  className="meeting_input"
-                  placeholder="Enter Title"
-                  onChange={handleTitle}
-                  value={title}
-                  required
-                />
+                <p className="m-0">{selectedMeeting?.title}</p>
               </fieldset>
 
               {/* Submit */}
               <button
-                type="submit"
-                className={`create_button d-flex justify-content-center align-items-center gap-2 ${
+                type="button"
+                className={`btn btn-danger d-flex justify-content-center align-items-center gap-2 ${
                   loading ? "opacity-50" : ""
                 } `}
                 disabled={loading}
+                onClick={handleDeleteMeeting}
               >
                 {loading ? (
                   <>
-                    <SpinnerBS spinnerSizeClass="spinner-border-sm" />
+                    <SpinnerBS
+                      spinnerSizeClass="spinner-border-sm"
+                      colorClass={"text-white"}
+                    />
                     <span className="text-muted">Please wait</span>
                   </>
                 ) : (
-                  "Create"
+                  "Delete"
                 )}
               </button>
             </form>

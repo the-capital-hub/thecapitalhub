@@ -7,7 +7,8 @@
 
   .two_col_container {
     display: grid;
-    grid-template-columns: 67.5% 30%;
+    // grid-template-columns: 67.5% 30%;
+    grid-template-columns: 100%;
     justify-content: space-between;
   }
 

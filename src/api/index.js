@@ -89,6 +89,7 @@ const API = Object.freeze({
   getAllMeetings: `${baseUrl}/schedule/getAllMeetings`,
   deleteMeeting: `${baseUrl}/schedule/deleteMeeting`,
   removeConnection: `${baseUrl}/connections/removeConnection`,
+  requestMeeting: `${baseUrl}/schedule/requestBookingSlot`,
 });
 
 export default API;
