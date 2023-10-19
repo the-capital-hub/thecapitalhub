@@ -63,11 +63,11 @@
   }
 
   .grow_in {
-    animation: grow-in 1s linear 0 1 normal forwards;
+    animation: growIn 0.25s linear forwards;
   }
 
   // Grow in animation
-  @keyframes grow-in {
+  @keyframes growIn {
     from {
       transform: scale(0);
     }

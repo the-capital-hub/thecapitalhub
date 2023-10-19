@@ -2,6 +2,7 @@ import { useMemo, useCallback, useRef, useState } from "react";
 import { Calendar } from "react-big-calendar";
 import { ModalBsLauncher } from "../../PopUp/ModalBS";
 import CreateMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/CreateMeetingModal/CreateMeetingModal";
+import moment from "moment";
 
 export default function BigCalendar({
   calendarData,
@@ -29,6 +30,11 @@ export default function BigCalendar({
   // Handle Slot Select
   const handleSelectSlot = useCallback(
     ({ start, end }) => {
+      // Check if selected slot is in the past
+      if (moment(start, "min").isBefore(moment(), "min")) {
+        window.alert("Unable to travel to past!");
+        return;
+      }
       // console.log("start", start, "end", end);
       launchRef.current.click();
       setNewMeeting({ startDateTime: start, endDateTime: end, title: "" });
@@ -42,7 +48,7 @@ export default function BigCalendar({
 
   // Handle Select event
   const handleSelectEvent = useCallback((meeting) => {
-    // console.log(meeting);
+    console.log("to delete", meeting);
     const confirmation = window.confirm(
       "Are you sure you want to delete this event?"
     );
