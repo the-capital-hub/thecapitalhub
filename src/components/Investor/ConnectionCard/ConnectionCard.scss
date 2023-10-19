@@ -25,13 +25,16 @@
     padding: 20px;
     border-radius: 15px;
     text-align: center;
+
     img {
       height: 50px;
       width: 50px;
     }
+
     h1 {
       font-size: 20px;
     }
+
     button {
       flex-shrink: 0;
       border-radius: 10px;
@@ -49,4 +52,9 @@
       // bottom: 9px;
     }
   }
+
+  .single-card:hover {
+    cursor: pointer;
+  }
+
 }

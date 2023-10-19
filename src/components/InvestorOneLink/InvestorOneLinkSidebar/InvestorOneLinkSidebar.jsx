@@ -16,6 +16,8 @@ import IconStartupsInvested from "../SvgIcons/IconStartupsInvested";
 import IconInvestmentPhilosophy from "../SvgIcons/IconInvestmentPhil";
 import IconAppointment from "../SvgIcons/IconAppointment";
 import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
+import { useOutletContext } from "react-router";
+import { getInvestorFromOneLinkAPI } from "../../../Service/user";
 
 import "./InvestorOneLinkSidebar.scss";
 
@@ -24,20 +26,20 @@ export default function InvestorOneLinkSidebar({
   setSidebarCollapsed,
 }) {
   // get params
-  const { username } = useParams();
+  const { oneLink } = useParams();
   const { userId } = useParams();
+  const [investorData, setInvestorData] = useState(null);
 
+  useEffect(() => {
+    getInvestorFromOneLinkAPI(oneLink, userId)
+      .then(({ data }) => {
+        console.log(data);
+        setInvestorData(data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
   // States
-  const [user, setUser] = useState([]);
   const [currentTab, setCurrentTab] = useState("investorProfile");
-
-  // useEffect(() => {
-  //     getUserById(username, userId)
-  //       .then(({ data }) => {
-  //         setUser(data);
-  //       })
-  //       .catch(() => setUser([]));
-  //   }, [username]);
 
   const menuIconClick = () => {
     setSidebarCollapsed(!sidebarCollapsed);
@@ -57,19 +59,19 @@ export default function InvestorOneLinkSidebar({
               <div className="logotext">
                 <>
                   <img
-                    src={user.profilePicture || DefaultAvatar}
+                    src={investorData?.investor?.profilePicture || DefaultAvatar}
                     alt="image"
                     className="rounded-circle"
                   />
                   <h3
                     className={`${sidebarCollapsed ? "invisible" : "visible"}`}
                   >
-                    {user?.firstName} {user?.lastName}
+                    {investorData?.investor?.firstName} {investorData?.investor?.lastName}
                   </h3>
                   <h4
                     className={`${sidebarCollapsed ? "invisible" : "visible"}`}
                   >
-                    {user?.email}
+                    {investorData?.investor?.email}
                   </h4>
                 </>
               </div>

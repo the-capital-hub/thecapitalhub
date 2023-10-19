@@ -2,6 +2,9 @@ import { useMemo, useCallback, useRef, useState } from "react";
 import { Calendar } from "react-big-calendar";
 import { ModalBsLauncher } from "../../PopUp/ModalBS";
 import CreateMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/CreateMeetingModal/CreateMeetingModal";
+import moment from "moment";
+import EditMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/EditMeetingModal/EditMeetingModal";
+import RequestMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/RequestMeetingModal/RequestMeetingModal";
 
 export default function BigCalendar({
   calendarData,
@@ -9,11 +12,15 @@ export default function BigCalendar({
   view,
   setView,
   meetingsData,
+  investor,
 }) {
   // States for meetings
   const [meetings, setMeetings] = useState(meetingsData);
   const [newMeeting, setNewMeeting] = useState(null);
-  const launchRef = useRef();
+  const [selectedMeeting, setSelectedMeeting] = useState(null);
+  const createRef = useRef();
+  const editRef = useRef();
+  const requestRef = useRef();
 
   const {
     defaultDate,
@@ -29,30 +36,28 @@ export default function BigCalendar({
   // Handle Slot Select
   const handleSelectSlot = useCallback(
     ({ start, end }) => {
+      // Check if selected slot is in the past
+      if (moment(start, "min").isBefore(moment(), "min")) {
+        window.alert("Unable to travel to past!");
+        return;
+      }
       // console.log("start", start, "end", end);
-      launchRef.current.click();
-      setNewMeeting({ startDateTime: start, endDateTime: end, title: "" });
-      // const title = window.prompt("New Meeting name");
-      // if (title) {
-      //   setMeetings((prev) => [...prev, { start, end, title }]);
-      // }
+      setNewMeeting({ start, end, title: "" });
+      createRef.current.click();
     },
     [setMeetings]
   );
 
   // Handle Select event
   const handleSelectEvent = useCallback((meeting) => {
-    // console.log(meeting);
-    const confirmation = window.confirm(
-      "Are you sure you want to delete this event?"
-    );
-    if (confirmation) {
-      setMeetings((prev) => {
-        const meetings = [...prev];
-        const selectedMeetingIndex = [...prev].indexOf(meeting);
-        meetings.splice(selectedMeetingIndex, 1);
-        return meetings;
-      });
+    // console.log("to delete", meeting);
+
+    // Set selectedMeeting
+    setSelectedMeeting(meeting);
+    if (investor) {
+      editRef.current.click();
+    } else {
+      requestRef.current.click();
     }
   }, []);
 
@@ -70,9 +75,9 @@ export default function BigCalendar({
         timeslots={4}
         defaultView="week"
         view={view}
-        onView={setView}
+        onView={(newView) => setView(newView)}
         views={views}
-        selectable
+        selectable={investor}
         onSelectEvent={handleSelectEvent}
         onSelectSlot={handleSelectSlot}
         scrollToTime={scrollToTime}
@@ -82,14 +87,23 @@ export default function BigCalendar({
         endAccessor="end"
       />
 
-      <ModalBsLauncher id={"createMeetingModal"} launchRef={launchRef} />
+      <ModalBsLauncher id={"createMeetingModal"} launchRef={createRef} />
+      <ModalBsLauncher id={"editMeetingModal"} launchRef={editRef} />
+      <ModalBsLauncher id={"requestMeetingModal"} launchRef={requestRef} />
 
       {/*Create Meeting Modal */}
       <CreateMeetingModal
         meetings={meetings}
         newMeeting={newMeeting}
-        setNewMeeting={setNewMeeting}
+        setMeetings={setMeetings}
       />
+      {/* Edit/Delete Meeting Modal */}
+      <EditMeetingModal
+        selectedMeeting={selectedMeeting}
+        setMeetings={setMeetings}
+      />
+      {/* Request Meeting Modal */}
+      <RequestMeetingModal selectedMeeting={selectedMeeting} />
     </>
   );
 }

@@ -23,7 +23,7 @@ router.get("/getPendingConnectionRequests/", getPendingConnectionRequestsControl
 router.patch("/acceptConnectionRequest/:connectionId", acceptConnectionRequestController);
 router.patch("/rejectConnectionRequest/:connectionId", rejectConnectionRequestController);
 router.get("/getUserConnections/:userId", getUserConnectionsController);
-router.delete("/removeConnection/:connectionId", removeConnectionController);
+router.delete("/removeConnection/:otherUserId", removeConnectionController);
 
 router.get("/getRecommendations/:userId", getRecommendationsController);
 

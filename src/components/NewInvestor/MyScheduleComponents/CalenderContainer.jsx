@@ -4,8 +4,6 @@ import { momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./CalendarContainer.scss";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
-import CreateMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/CreateMeetingModal/CreateMeetingModal";
-import { useState } from "react";
 
 // Custom event component
 const EventComponent = ({ event }) => {
@@ -48,13 +46,13 @@ const EventComponent = ({ event }) => {
         height: "100%",
       }}
     >
-      <p className="event__text small fw-light lh-base ">{title}</p>
-      <p className="event__text small fw-light lh-base ">{date}</p>
-      <p className="event__text small fw-light lh-base ">
+      <p className="event__text small fw-light lh-base m-0 ">{title}</p>
+      <p className="event__text small fw-light lh-base m-0 ">{date}</p>
+      <p className="event__text small fw-light lh-base m-0 ">
         {startTime}-{endTime}
       </p>
       <div className="meeting__flag">
-        <p className=" small fw-light lh-base text-black bg-white px-2 rounded-pill text-capitalize">
+        <p className=" small fw-light lh-base text-black m-0 bg-white px-2 rounded-pill text-capitalize">
           {meetingFlag}
         </p>
       </div>
@@ -90,7 +88,12 @@ const calendarData = {
 const mlocalizer = momentLocalizer(moment);
 
 // Calendar Container
-export default function CalendarContainer({ view, meetingsData, setView }) {
+export default function CalendarContainer({
+  view,
+  meetingsData,
+  setView,
+  investor = true,
+}) {
   return (
     <div className="calendar__container">
       <BigCalendar
@@ -99,6 +102,7 @@ export default function CalendarContainer({ view, meetingsData, setView }) {
         view={view}
         setView={setView}
         meetingsData={meetingsData}
+        investor={investor}
       />
     </div>
   );
