@@ -3,6 +3,7 @@ import { Calendar } from "react-big-calendar";
 import { ModalBsLauncher } from "../../PopUp/ModalBS";
 import CreateMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/CreateMeetingModal/CreateMeetingModal";
 import moment from "moment";
+import EditMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/EditMeetingModal/EditMeetingModal";
 
 export default function BigCalendar({
   calendarData,
@@ -14,7 +15,9 @@ export default function BigCalendar({
   // States for meetings
   const [meetings, setMeetings] = useState(meetingsData);
   const [newMeeting, setNewMeeting] = useState(null);
-  const launchRef = useRef();
+  const [selectedMeeting, setSelectedMeeting] = useState(null);
+  const launchCreateRef = useRef();
+  const launchEditRef = useRef();
 
   const {
     defaultDate,
@@ -49,17 +52,21 @@ export default function BigCalendar({
   // Handle Select event
   const handleSelectEvent = useCallback((meeting) => {
     console.log("to delete", meeting);
-    const confirmation = window.confirm(
-      "Are you sure you want to delete this event?"
-    );
-    if (confirmation) {
-      setMeetings((prev) => {
-        const meetings = [...prev];
-        const selectedMeetingIndex = [...prev].indexOf(meeting);
-        meetings.splice(selectedMeetingIndex, 1);
-        return meetings;
-      });
-    }
+
+    // Set selectedMeeting
+    setSelectedMeeting(meeting);
+
+    // const confirmation = window.confirm(
+    //   "Are you sure you want to delete this event?"
+    // );
+    // if (confirmation) {
+    //   setMeetings((prev) => {
+    //     const meetings = [...prev];
+    //     const selectedMeetingIndex = [...prev].indexOf(meeting);
+    //     meetings.splice(selectedMeetingIndex, 1);
+    //     return meetings;
+    //   });
+    // }
   }, []);
 
   return (
@@ -88,7 +95,8 @@ export default function BigCalendar({
         endAccessor="end"
       />
 
-      <ModalBsLauncher id={"createMeetingModal"} launchRef={launchRef} />
+      <ModalBsLauncher id={"createMeetingModal"} launchRef={launchCreateRef} />
+      <ModalBsLauncher id={"editMeetingModal"} launchRef={launchEditRef} />
 
       {/*Create Meeting Modal */}
       <CreateMeetingModal
@@ -96,6 +104,8 @@ export default function BigCalendar({
         newMeeting={newMeeting}
         setMeetings={setMeetings}
       />
+      {/* Edit/Delete Meeting Modal */}
+      <EditMeetingModal selectedMeeting={selectedMeeting} />
     </>
   );
 }
