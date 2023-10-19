@@ -141,7 +141,7 @@ function Explore() {
           <h5 className="h5">Find StartUps by</h5>
           <div className="filter_by">
             <button
-              className={activeTab === "Startup" ? "active" : ""}
+              className= {activeTab === "Startup" ? "active" : "s_f_i_button "}
               onClick={() => {
                 setFilters(null);
                 setActiveTab("Startup");
@@ -150,7 +150,7 @@ function Explore() {
               Startup
             </button>
             <button
-              className={activeTab === "Founder" ? "active" : ""}
+              className={activeTab === "Founder" ? "active" : "s_f_i_button "}
               onClick={() => {
                 setFilters(null);
                 setActiveTab("Founder");
@@ -159,7 +159,7 @@ function Explore() {
               Founder
             </button>
             <button
-              className={activeTab === "Investor" ? "active" : ""}
+              className={activeTab === "Investor" ? "active" : "s_f_i_button "}
               onClick={() => {
                 setFilters(null);
                 setActiveTab("Investor");
