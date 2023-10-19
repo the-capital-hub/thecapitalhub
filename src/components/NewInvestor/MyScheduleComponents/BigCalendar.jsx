@@ -16,8 +16,8 @@ export default function BigCalendar({
   const [meetings, setMeetings] = useState(meetingsData);
   const [newMeeting, setNewMeeting] = useState(null);
   const [selectedMeeting, setSelectedMeeting] = useState(null);
-  const launchCreateRef = useRef();
-  const launchEditRef = useRef();
+  const createRef = useRef();
+  const editRef = useRef();
 
   const {
     defaultDate,
@@ -39,34 +39,19 @@ export default function BigCalendar({
         return;
       }
       // console.log("start", start, "end", end);
-      launchRef.current.click();
-      setNewMeeting({ startDateTime: start, endDateTime: end, title: "" });
-      // const title = window.prompt("New Meeting name");
-      // if (title) {
-      //   setMeetings((prev) => [...prev, { start, end, title }]);
-      // }
+      setNewMeeting({ start, end, title: "" });
+      createRef.current.click();
     },
     [setMeetings]
   );
 
   // Handle Select event
   const handleSelectEvent = useCallback((meeting) => {
-    console.log("to delete", meeting);
+    // console.log("to delete", meeting);
 
     // Set selectedMeeting
     setSelectedMeeting(meeting);
-
-    // const confirmation = window.confirm(
-    //   "Are you sure you want to delete this event?"
-    // );
-    // if (confirmation) {
-    //   setMeetings((prev) => {
-    //     const meetings = [...prev];
-    //     const selectedMeetingIndex = [...prev].indexOf(meeting);
-    //     meetings.splice(selectedMeetingIndex, 1);
-    //     return meetings;
-    //   });
-    // }
+    editRef.current.click();
   }, []);
 
   return (
@@ -95,8 +80,8 @@ export default function BigCalendar({
         endAccessor="end"
       />
 
-      <ModalBsLauncher id={"createMeetingModal"} launchRef={launchCreateRef} />
-      <ModalBsLauncher id={"editMeetingModal"} launchRef={launchEditRef} />
+      <ModalBsLauncher id={"createMeetingModal"} launchRef={createRef} />
+      <ModalBsLauncher id={"editMeetingModal"} launchRef={editRef} />
 
       {/*Create Meeting Modal */}
       <CreateMeetingModal
@@ -105,7 +90,10 @@ export default function BigCalendar({
         setMeetings={setMeetings}
       />
       {/* Edit/Delete Meeting Modal */}
-      <EditMeetingModal selectedMeeting={selectedMeeting} />
+      <EditMeetingModal
+        selectedMeeting={selectedMeeting}
+        setMeetings={setMeetings}
+      />
     </>
   );
 }

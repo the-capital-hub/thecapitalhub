@@ -26,8 +26,8 @@ export default function CreateMeetingModal({
     // console.log("submitted");
 
     const newMeetingData = {
-      startDateTime: newMeeting.startDateTime,
-      endDateTime: newMeeting.endDateTime,
+      start: newMeeting.start,
+      end: newMeeting.end,
       title: title,
     };
 
@@ -36,23 +36,23 @@ export default function CreateMeetingModal({
 
     // API call
     try {
-      const response = await createMeetingAPI(newMeetingData);
-      console.log(response);
+      const { data } = await createMeetingAPI(newMeetingData);
+      console.log("created", data);
 
       // Revert loading and title
       setLoading(false);
       setTitle("");
 
       // set success alert
-      setAlert("Meeting Created!");
+      setAlert({ success: "Meeting Created!" });
       // Update Calender meetings
       setMeetings((prev) => {
         return [
           ...prev,
           {
-            start: newMeeting.startDateTime,
-            end: newMeeting.endDateTime,
-            title: title,
+            ...data,
+            start: new Date(data.start),
+            end: new Date(data.end),
           },
         ];
       });
@@ -70,7 +70,7 @@ export default function CreateMeetingModal({
       setTitle("");
 
       // set Error alert
-      setAlert("Error creating a meeting! Please try again.");
+      setAlert({ error: "Error creating a meeting! Please try again." });
       setTimeout(() => {
         closeRef.current.click();
       }, 2000);
@@ -100,7 +100,7 @@ export default function CreateMeetingModal({
                 <fieldset className="w-50">
                   <legend>Start Time</legend>
                   <p className="m-0">
-                    {newMeeting?.startDateTime.toLocaleTimeString([], {
+                    {newMeeting?.start.toLocaleTimeString([], {
                       hour: "2-digit",
                       minute: "2-digit",
                     })}
@@ -110,7 +110,7 @@ export default function CreateMeetingModal({
                 <fieldset className="w-50">
                   <legend>End Time</legend>
                   <p className="m-0">
-                    {newMeeting?.endDateTime.toLocaleTimeString([], {
+                    {newMeeting?.end.toLocaleTimeString([], {
                       hour: "2-digit",
                       minute: "2-digit",
                     })}
@@ -122,7 +122,7 @@ export default function CreateMeetingModal({
               <fieldset>
                 <legend>Date</legend>
                 <p className="m-0">
-                  {newMeeting?.endDateTime.toLocaleDateString("en-IN", {
+                  {newMeeting?.end.toLocaleDateString("en-IN", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
@@ -166,7 +166,12 @@ export default function CreateMeetingModal({
             </form>
           ) : (
             <div className="d-flex p-5 justify-content-center align-items-center grow_in">
-              <h4>{alert}</h4>
+              {alert.success && (
+                <h4 className="text-center">{alert.success}</h4>
+              )}
+              {alert.error && (
+                <h4 className="text-center text-danger">{alert.error}</h4>
+              )}
             </div>
           )}
         </ModalBSBody>

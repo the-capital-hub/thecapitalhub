@@ -45,7 +45,7 @@ export default function MySchedule() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const [view, setView] = useState("week");
-  const [meetingsData, setMeetingsData] = useState([]);
+  const [meetingsData, setMeetingsData] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -60,15 +60,12 @@ export default function MySchedule() {
         const { data } = await getAllMeetings(loggedInUser.oneLinkId);
         // console.log("Meetings", data);
 
-        let result = [];
-
-        data.map((meeting, index) => {
-          let event = {
-            start: new Date(meeting.startDateTime),
-            end: new Date(meeting.endDateTime),
-            title: meeting.title,
+        const result = data.map((meeting, index) => {
+          return {
+            ...meeting,
+            start: new Date(meeting.start),
+            end: new Date(meeting.end),
           };
-          result.push(event);
         });
 
         // Save to State
@@ -103,7 +100,7 @@ export default function MySchedule() {
 
           <div className="schedule__container px-3">
             {/* Scheduler */}
-            {meetingsData.length !== 0 ? (
+            {meetingsData ? (
               <div className="calender__div">
                 <CalendarContainer
                   view={view}

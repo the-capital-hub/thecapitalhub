@@ -14,7 +14,7 @@ export default function InvestorOneLinkAppointment() {
   const [view, setView] = useState("week");
   const [files, setFiles] = useState([]);
   const [message, setMessage] = useState("");
-  const [meetingsData, setMeetingsData] = useState([]);
+  const [meetingsData, setMeetingsData] = useState(null);
 
   // Fetch meetingData for user here
   useEffect(() => {
@@ -23,15 +23,12 @@ export default function InvestorOneLinkAppointment() {
         const { data } = await getAllMeetings(userId);
         // console.log("Meetings", data);
 
-        let result = [];
-
-        data.map((meeting, index) => {
-          let event = {
-            start: new Date(meeting.startDateTime),
-            end: new Date(meeting.endDateTime),
-            title: meeting.title,
+        const result = data.map((meeting, index) => {
+          return {
+            ...meeting,
+            start: new Date(meeting.start),
+            end: new Date(meeting.end),
           };
-          result.push(event);
         });
 
         // Save to State
@@ -66,7 +63,7 @@ export default function InvestorOneLinkAppointment() {
 
             <div className="calendar">
               {/* Scheduler */}
-              {meetingsData.length !== 0 ? (
+              {meetingsData ? (
                 <div className="calender__div">
                   <CalendarContainer
                     view={view}

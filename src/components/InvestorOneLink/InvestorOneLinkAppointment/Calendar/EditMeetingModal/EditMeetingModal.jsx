@@ -1,10 +1,60 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "./EditMeetingModal.scss";
+import {
+  ModalBSBody,
+  ModalBSContainer,
+  ModalBSHeader,
+} from "../../../../PopUp/ModalBS";
+import SpinnerBS from "../../../../Shared/Spinner/SpinnerBS";
+import { deleteMeeting } from "../../../../../Service/user";
 
-export default function EditMeetingModal({ selectedMeeting }) {
+export default function EditMeetingModal({ selectedMeeting, setMeetings }) {
   // States for loading and alert
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
+  const closeRef = useRef();
+
+  //   Handle Edit meeting
+  async function handleEditMeeting(e) {
+    e.preventDefault();
+  }
+
+  //   handle delete meeting
+  async function handleDeleteMeeting(e) {
+    setLoading(true);
+
+    try {
+      const { data } = await deleteMeeting(selectedMeeting._id);
+      console.log("deleted meeting", data);
+
+      // Revert loading
+      setLoading(false);
+      setAlert({ success: "Meeting Removed!" });
+
+      // Update calendar Meetings
+      setMeetings((prev) => prev.filter((meeting) => meeting._id !== data._id));
+
+      setTimeout(() => {
+        closeRef.current.click();
+      }, 2000);
+      setTimeout(() => {
+        setAlert(null);
+      }, 2500);
+    } catch (error) {
+      console.log("Error deleting meeting", error);
+
+      //   Revert Loading
+      setLoading(false);
+      setAlert({ error: "Error removing Meeting! Please try again." });
+
+      setTimeout(() => {
+        closeRef.current.click();
+      }, 2000);
+      setTimeout(() => {
+        setAlert(null);
+      }, 2500);
+    }
+  }
 
   return (
     <div className="edit_meeting_modal_wrapper">
@@ -13,7 +63,7 @@ export default function EditMeetingModal({ selectedMeeting }) {
         <ModalBSBody>
           {!alert ? (
             <form
-              onSubmit={handleCreateMeeting}
+              onSubmit={handleEditMeeting}
               className="edit_meeting_form d-flex flex-column gap-3 py-3"
             >
               {/* Time */}
@@ -60,25 +110,34 @@ export default function EditMeetingModal({ selectedMeeting }) {
 
               {/* Submit */}
               <button
-                type="submit"
-                className={`create_button d-flex justify-content-center align-items-center gap-2 ${
+                type="button"
+                className={`btn btn-danger d-flex justify-content-center align-items-center gap-2 ${
                   loading ? "opacity-50" : ""
                 } `}
                 disabled={loading}
+                onClick={handleDeleteMeeting}
               >
                 {loading ? (
                   <>
-                    <SpinnerBS spinnerSizeClass="spinner-border-sm" />
+                    <SpinnerBS
+                      spinnerSizeClass="spinner-border-sm"
+                      colorClass={"text-white"}
+                    />
                     <span className="text-muted">Please wait</span>
                   </>
                 ) : (
-                  "Create"
+                  "Delete"
                 )}
               </button>
             </form>
           ) : (
             <div className="d-flex p-5 justify-content-center align-items-center grow_in">
-              <h4>{alert}</h4>
+              {alert.success && (
+                <h4 className="text-center">{alert.success}</h4>
+              )}
+              {alert.error && (
+                <h4 className="text-center text-danger">{alert.error}</h4>
+              )}
             </div>
           )}
         </ModalBSBody>
