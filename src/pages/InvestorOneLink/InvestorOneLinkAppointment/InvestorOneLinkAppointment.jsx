@@ -69,6 +69,7 @@ export default function InvestorOneLinkAppointment() {
                     view={view}
                     meetingsData={meetingsData}
                     setView={setView}
+                    investor={false}
                   />
                 </div>
               ) : (
@@ -88,12 +89,12 @@ export default function InvestorOneLinkAppointment() {
           </div>
 
           {/* Meeting Info */}
-          <MeetingInfo
+          {/* <MeetingInfo
             files={files}
             setFiles={setFiles}
             message={message}
             setMessage={setMessage}
-          />
+          /> */}
         </div>
       </section>
     </div>

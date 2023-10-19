@@ -4,6 +4,7 @@ import { ModalBsLauncher } from "../../PopUp/ModalBS";
 import CreateMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/CreateMeetingModal/CreateMeetingModal";
 import moment from "moment";
 import EditMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/EditMeetingModal/EditMeetingModal";
+import RequestMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/RequestMeetingModal/RequestMeetingModal";
 
 export default function BigCalendar({
   calendarData,
@@ -11,6 +12,7 @@ export default function BigCalendar({
   view,
   setView,
   meetingsData,
+  investor,
 }) {
   // States for meetings
   const [meetings, setMeetings] = useState(meetingsData);
@@ -18,6 +20,7 @@ export default function BigCalendar({
   const [selectedMeeting, setSelectedMeeting] = useState(null);
   const createRef = useRef();
   const editRef = useRef();
+  const requestRef = useRef();
 
   const {
     defaultDate,
@@ -51,7 +54,11 @@ export default function BigCalendar({
 
     // Set selectedMeeting
     setSelectedMeeting(meeting);
-    editRef.current.click();
+    if (investor) {
+      editRef.current.click();
+    } else {
+      requestRef.current.click();
+    }
   }, []);
 
   return (
@@ -70,7 +77,7 @@ export default function BigCalendar({
         view={view}
         onView={(newView) => setView(newView)}
         views={views}
-        selectable
+        selectable={investor}
         onSelectEvent={handleSelectEvent}
         onSelectSlot={handleSelectSlot}
         scrollToTime={scrollToTime}
@@ -82,6 +89,7 @@ export default function BigCalendar({
 
       <ModalBsLauncher id={"createMeetingModal"} launchRef={createRef} />
       <ModalBsLauncher id={"editMeetingModal"} launchRef={editRef} />
+      <ModalBsLauncher id={"requestMeetingModal"} launchRef={requestRef} />
 
       {/*Create Meeting Modal */}
       <CreateMeetingModal
@@ -94,6 +102,8 @@ export default function BigCalendar({
         selectedMeeting={selectedMeeting}
         setMeetings={setMeetings}
       />
+      {/* Request Meeting Modal */}
+      <RequestMeetingModal selectedMeeting={selectedMeeting} />
     </>
   );
 }

@@ -37,7 +37,7 @@ export default function CreateMeetingModal({
     // API call
     try {
       const { data } = await createMeetingAPI(newMeetingData);
-      console.log("created", data);
+      // console.log("created", data);
 
       // Revert loading and title
       setLoading(false);
@@ -85,6 +85,7 @@ export default function CreateMeetingModal({
     setTitle(e.target.value);
   }
 
+  console.log(newMeeting);
   return (
     <div className="create_meeting_modal_wrapper">
       <ModalBSContainer id={"createMeetingModal"}>

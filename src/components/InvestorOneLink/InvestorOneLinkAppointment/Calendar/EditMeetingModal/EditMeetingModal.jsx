@@ -25,7 +25,7 @@ export default function EditMeetingModal({ selectedMeeting, setMeetings }) {
 
     try {
       const { data } = await deleteMeeting(selectedMeeting._id);
-      console.log("deleted meeting", data);
+      //   console.log("deleted meeting", data);
 
       // Revert loading
       setLoading(false);

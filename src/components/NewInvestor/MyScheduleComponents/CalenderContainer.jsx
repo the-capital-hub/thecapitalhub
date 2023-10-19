@@ -88,7 +88,12 @@ const calendarData = {
 const mlocalizer = momentLocalizer(moment);
 
 // Calendar Container
-export default function CalendarContainer({ view, meetingsData, setView }) {
+export default function CalendarContainer({
+  view,
+  meetingsData,
+  setView,
+  investor = true,
+}) {
   return (
     <div className="calendar__container">
       <BigCalendar
@@ -97,6 +102,7 @@ export default function CalendarContainer({ view, meetingsData, setView }) {
         view={view}
         setView={setView}
         meetingsData={meetingsData}
+        investor={investor}
       />
     </div>
   );
