@@ -48,13 +48,13 @@ const EventComponent = ({ event }) => {
         height: "100%",
       }}
     >
-      <p className="event__text small fw-light lh-base ">{title}</p>
-      <p className="event__text small fw-light lh-base ">{date}</p>
-      <p className="event__text small fw-light lh-base ">
+      <p className="event__text small fw-light lh-base m-0 ">{title}</p>
+      <p className="event__text small fw-light lh-base m-0 ">{date}</p>
+      <p className="event__text small fw-light lh-base m-0 ">
         {startTime}-{endTime}
       </p>
       <div className="meeting__flag">
-        <p className=" small fw-light lh-base text-black bg-white px-2 rounded-pill text-capitalize">
+        <p className=" small fw-light lh-base text-black m-0 bg-white px-2 rounded-pill text-capitalize">
           {meetingFlag}
         </p>
       </div>

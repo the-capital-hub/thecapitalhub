@@ -70,7 +70,7 @@ export default function BigCalendar({
         timeslots={4}
         defaultView="week"
         view={view}
-        onView={setView}
+        onView={(newView) => setView(newView)}
         views={views}
         selectable
         onSelectEvent={handleSelectEvent}
@@ -88,7 +88,7 @@ export default function BigCalendar({
       <CreateMeetingModal
         meetings={meetings}
         newMeeting={newMeeting}
-        setNewMeeting={setNewMeeting}
+        setMeetings={setMeetings}
       />
     </>
   );

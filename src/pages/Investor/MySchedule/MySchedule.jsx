@@ -58,7 +58,7 @@ export default function MySchedule() {
     async function getMeetings() {
       try {
         const { data } = await getAllMeetings(loggedInUser.oneLinkId);
-        console.log("Meetings", data);
+        // console.log("Meetings", data);
 
         let result = [];
 
@@ -68,7 +68,6 @@ export default function MySchedule() {
             end: new Date(meeting.endDateTime),
             title: meeting.title,
           };
-          console.log("event", event, typeof event.start);
           result.push(event);
         });
 
@@ -82,12 +81,11 @@ export default function MySchedule() {
     getMeetings();
   }, []);
 
-  function handleViewSelect(selectedView) {
-    console.log(selectedView);
-    setView(selectedView);
-  }
+  // function handleViewSelect(selectedView) {
+  //   console.log(selectedView);
+  //   setView(selectedView);
+  // }
 
-  console.log("from state", meetingsData);
   return (
     <MaxWidthWrapper>
       <div className="mySchedule__wrapper px-3 border-start">
@@ -97,7 +95,7 @@ export default function MySchedule() {
         <section className="section__wrapper bg-white rounded-3 border mb-5 pb-5 d-flex flex-column gap-5">
           {/* View Select */}
           <div className="d-flex flex-column flex-lg-row gap-4 justify-content-between align-items-center border-bottom p-3">
-            <ViewSelect handleViewSelect={handleViewSelect} />
+            <ViewSelect setView={setView} view={view} />
             <button className="btn-capital lh-1 py-0 py-md-3">
               Create Meeting
             </button>

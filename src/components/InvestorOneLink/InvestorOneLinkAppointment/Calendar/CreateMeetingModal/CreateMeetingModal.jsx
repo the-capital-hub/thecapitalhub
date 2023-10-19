@@ -13,11 +13,8 @@ import { createMeetingAPI } from "../../../../../Service/user";
 export default function CreateMeetingModal({
   meetings,
   newMeeting,
-  setNewMeeting,
+  setMeetings,
 }) {
-  // Fetch loggedInUser
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
-
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
   const [title, setTitle] = useState("");
@@ -29,8 +26,8 @@ export default function CreateMeetingModal({
     // console.log("submitted");
 
     const newMeetingData = {
-      startDateTime: String(newMeeting.startDateTime),
-      endDateTime: String(newMeeting.endDateTime),
+      startDateTime: newMeeting.startDateTime,
+      endDateTime: newMeeting.endDateTime,
       title: title,
     };
 
@@ -48,21 +45,38 @@ export default function CreateMeetingModal({
 
       // set success alert
       setAlert("Meeting Created!");
+      // Update Calender meetings
+      setMeetings((prev) => {
+        return [
+          ...prev,
+          {
+            start: newMeeting.startDateTime,
+            end: newMeeting.endDateTime,
+            title: title,
+          },
+        ];
+      });
       setTimeout(() => {
         closeRef.current.click();
-        setAlert(null);
       }, 2000);
+      setTimeout(() => {
+        setAlert(null);
+      }, 2500);
     } catch (error) {
       console.log("Create meeting error:", error);
+
+      // Revert loading and title
       setLoading(false);
       setTitle("");
 
-      // set success alert
+      // set Error alert
       setAlert("Error creating a meeting! Please try again.");
       setTimeout(() => {
         closeRef.current.click();
-        setAlert(null);
       }, 2000);
+      setTimeout(() => {
+        setAlert(null);
+      }, 2500);
     }
   }
 
@@ -81,6 +95,29 @@ export default function CreateMeetingModal({
               onSubmit={handleCreateMeeting}
               className="newMeeting_form d-flex flex-column gap-3 py-3"
             >
+              {/* Time */}
+              <div className="d-flex justify-content-around gap-3">
+                <fieldset className="w-50">
+                  <legend>Start Time</legend>
+                  <p className="m-0">
+                    {newMeeting?.startDateTime.toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </p>
+                </fieldset>
+
+                <fieldset className="w-50">
+                  <legend>End Time</legend>
+                  <p className="m-0">
+                    {newMeeting?.endDateTime.toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </p>
+                </fieldset>
+              </div>
+
               {/* Date */}
               <fieldset>
                 <legend>Date</legend>
@@ -93,29 +130,6 @@ export default function CreateMeetingModal({
                   })}
                 </p>
               </fieldset>
-
-              {/* Time */}
-              <div className="d-flex justify-content-around gap-3">
-                <fieldset>
-                  <legend>Start Time</legend>
-                  <p className="m-0">
-                    {newMeeting?.startDateTime.toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </p>
-                </fieldset>
-
-                <fieldset>
-                  <legend>End Time</legend>
-                  <p className="m-0">
-                    {newMeeting?.endDateTime.toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </p>
-                </fieldset>
-              </div>
 
               {/* Title */}
               <fieldset>
@@ -151,7 +165,7 @@ export default function CreateMeetingModal({
               </button>
             </form>
           ) : (
-            <div className="d-flex p-5 justify-content-center align-items-center">
+            <div className="d-flex p-5 justify-content-center align-items-center grow_in">
               <h4>{alert}</h4>
             </div>
           )}

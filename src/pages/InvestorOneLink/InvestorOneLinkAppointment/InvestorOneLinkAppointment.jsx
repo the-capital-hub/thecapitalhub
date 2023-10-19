@@ -1,48 +1,54 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
 import "./InvestorOneLinkAppointment.scss";
 import CalendarContainer from "../../../components/NewInvestor/MyScheduleComponents/CalenderContainer";
 import ViewSelect from "../../../components/NewInvestor/MyScheduleComponents/ViewSelect";
 import MeetingInfo from "../../../components/InvestorOneLink/InvestorOneLinkAppointment/MeetingInfo/MeetingInfo";
-
-const EVENTS = [
-  {
-    start: new Date(2023, 8, 18, 9, 30),
-    end: new Date(2023, 8, 18, 12, 45),
-    title: "Work",
-  },
-  {
-    start: new Date(2023, 8, 19, 10, 0),
-    end: new Date(2023, 8, 19, 11, 30),
-    title: "Test Event",
-  },
-  {
-    start: new Date(2023, 8, 20, 12, 0),
-    end: new Date(2023, 8, 20, 13, 0),
-    title: "Test Event",
-  },
-  {
-    start: new Date(2023, 8, 21, 13, 30),
-    end: new Date(2023, 8, 21, 16, 45),
-    title: "Test Event",
-  },
-  {
-    start: new Date(2023, 8, 22, 15, 30),
-    end: new Date(2023, 8, 22, 16, 45),
-    title: "Test Event",
-  },
-];
+import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
+import { getAllMeetings } from "../../../Service/user";
+import { useParams } from "react-router-dom";
 
 export default function InvestorOneLinkAppointment() {
+  // Get params
+  const { userId } = useParams();
+
   const [view, setView] = useState("week");
   const [files, setFiles] = useState([]);
   const [message, setMessage] = useState("");
+  const [meetingsData, setMeetingsData] = useState([]);
 
-  // handle calendar view select
-  function handleViewSelect(selectedView) {
-    console.log(selectedView);
-    setView(selectedView);
-  }
+  // Fetch meetingData for user here
+  useEffect(() => {
+    async function getMeetings() {
+      try {
+        const { data } = await getAllMeetings(userId);
+        // console.log("Meetings", data);
+
+        let result = [];
+
+        data.map((meeting, index) => {
+          let event = {
+            start: new Date(meeting.startDateTime),
+            end: new Date(meeting.endDateTime),
+            title: meeting.title,
+          };
+          result.push(event);
+        });
+
+        // Save to State
+        setMeetingsData(result);
+      } catch (error) {
+        console.log("Error fetching meetings", error);
+      }
+    }
+
+    getMeetings();
+  }, []);
+
+  // // handle calendar view select
+  // function handleViewSelect(selectedView) {
+  //   console.log(selectedView);
+  //   setView(selectedView);
+  // }
 
   return (
     <div className="appointment_wrapper mb-5 ps-3 leftBorder">
@@ -55,15 +61,22 @@ export default function InvestorOneLinkAppointment() {
           {/* Calendar */}
           <div className="calendar d-flex flex-column gap-4">
             <div className="d-flex flex-column flex-lg-row gap-4 justify-content-between align-items-center border-bottom p-3">
-              <ViewSelect handleViewSelect={handleViewSelect} />
+              <ViewSelect setView={setView} view={view} />
             </div>
 
             <div className="calendar">
-              <CalendarContainer
-                view={view}
-                meetingsData={EVENTS}
-                setView={setView}
-              />
+              {/* Scheduler */}
+              {meetingsData.length !== 0 ? (
+                <div className="calender__div">
+                  <CalendarContainer
+                    view={view}
+                    meetingsData={meetingsData}
+                    setView={setView}
+                  />
+                </div>
+              ) : (
+                <SpinnerBS className="d-flex w-100 justify-content-center" />
+              )}
             </div>
 
             {/* Action buttons */}

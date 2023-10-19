@@ -41,4 +41,39 @@
 
     padding: 1em 1.5em;
   }
+
+  .modal {
+    margin-top: 20%;
+
+    @media (min-width: 500px) {
+      margin-top: 15%;
+    }
+
+    @media (min-width: 575px) {
+      margin-top: 13.5%;
+    }
+
+    @media (min-width: 768px) {
+      margin-top: 10%;
+    }
+
+    @media (min-width: 769px) {
+      margin-top: 0;
+    }
+  }
+
+  .grow_in {
+    animation: grow-in 1s linear 0 1 normal forwards;
+  }
+
+  // Grow in animation
+  @keyframes grow-in {
+    from {
+      transform: scale(0);
+    }
+
+    to {
+      transform: scale(1);
+    }
+  }
 }
