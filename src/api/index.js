@@ -87,6 +87,7 @@ const API = Object.freeze({
   getInvestorFromOneLink: `${baseUrl}/investor/getOnePager`,
   createMeeting: `${baseUrl}/schedule/createMeeting`,
   getAllMeetings: `${baseUrl}/schedule/getAllMeetings`,
+  deleteMeeting: `${baseUrl}/schedule/deleteMeeting`,
 });
 
 export default API;
