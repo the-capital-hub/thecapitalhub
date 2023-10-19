@@ -1064,3 +1064,15 @@ export const getAllMeetings = async (oneLinkId) => {
     throw error;
   }
 };
+
+export const deleteMeeting = async (meetingId) => {
+  try {
+    const response = await axiosInstance.delete(
+      `${API.deleteMeeting}/${meetingId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error getting meetings:", error);
+    throw error;
+  }
+};
