@@ -37,16 +37,20 @@ export default function InvestorOneLinkProfile() {
         </div>
         <div className="bio_section shadow-sm">
           <h1 className="px-2 rounded-pill">Bio</h1>
+          <div className="experience_data d-flex flex-column flex-md-row gap-2 gap-md-4 p-3">
+            <p>{investor?.bio}</p>
+          </div>
         </div>
         <div className="experience_section ">
           <h1 className="px-2 rounded-pill">Current Experience</h1>
           <div className="experience_data d-flex flex-column flex-md-row gap-2 gap-md-4 p-3">
-            <h2>Experience:</h2>
-            <p>
+            {/* <h3>Experience:</h3> */}
+            {/* <p>
               5+ Years building various startups <br />
               Mentored 21 startups <br />
               Growth $ 10M+
-            </p>
+            </p> */}
+            <p>{investor?.experience}</p>
           </div>
         </div>
         <div className="social_media_section d-flex flex-column gap-1 py-2">

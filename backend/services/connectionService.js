@@ -235,28 +235,43 @@ export const getUserConnections = async (userId) => {
 };
 
 //remove accepted connection
-export const removeConnection = async (connectionId) => {
+export const removeConnection = async (loggedUserId, otherUserId) => {
   try {
-    const connection = await ConnectionModel.findById(connectionId);
-    if (!connection) {
-      return {
-        status: 404,
-        message: "Connection not found",
-      };
-    }
-    if (connection.status === "accepted") {
-      await UserModel.findByIdAndUpdate(connection.sender, {
-        $pull: { connections: connection.receiver },
-      });
-      await UserModel.findByIdAndUpdate(connection.receiver, {
-        $pull: { connections: connection.sender },
-      });
-    }
-    await ConnectionModel.findByIdAndRemove(connectionId);
+    // const connection = await ConnectionModel.findById(connectionId);
+    // if (!connection) {
+    //   return {
+    //     status: 404,
+    //     message: "Connection not found",
+    //   };
+    // }
+    // if (connection.status === "accepted") {
+    //   await UserModel.findByIdAndUpdate(connection.sender, {
+    //     $pull: { connections: connection.receiver },
+    //   });
+    //   await UserModel.findByIdAndUpdate(connection.receiver, {
+    //     $pull: { connections: connection.sender },
+    //   });
+    // }
+    // await ConnectionModel.findByIdAndRemove(connectionId);
+    await ConnectionModel.deleteMany({
+      sender: loggedUserId,
+      receiver: otherUserId,
+    });
+    await ConnectionModel.deleteMany({
+      sender: otherUserId,
+      receiver: loggedUserId,
+    });
+    await UserModel.findOneAndUpdate(
+      { _id: loggedUserId },
+      { $pull: { connections: otherUserId } }
+    );
+    await UserModel.findOneAndUpdate(
+      { _id: otherUserId },
+      { $pull: { connections: loggedUserId } }
+    );
     return {
       status: 200,
       message: "Connection Removed",
-      data: connection,
     };
   } catch (error) {
     console.log(error);
@@ -283,7 +298,7 @@ export const getRecommendations = async (userId) => {
     for (const connectedUserId of userConnections) {
       const connectedUser = await UserModel.findById(connectedUserId);
 
-      if (connectedUser && connectedUser.connections) { 
+      if (connectedUser && connectedUser.connections) {
         const mutualConnections = connectedUser.connections;
 
         for (const connectionId of mutualConnections) {

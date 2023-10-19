@@ -1076,3 +1076,15 @@ export const deleteMeeting = async (meetingId) => {
     throw error;
   }
 };
+
+export const removeConnection = async (userId) => {
+  try {
+    const response = await axiosInstance.delete(
+      `${API.removeConnection}/${userId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error getting meetings:", error);
+    throw error;
+  }
+};
