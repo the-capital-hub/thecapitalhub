@@ -20,6 +20,7 @@
         padding: 0em 0.5em;
         border-radius: 10rem;
         box-shadow: 0 0 10px 2px rgb(0, 0, 0, 0.05);
+        font-size: 0.85rem;
       }
 
       .meeting_input {
@@ -101,6 +102,21 @@
 
     &:hover {
       transform: scale(0.95) !important;
+    }
+  }
+
+  .grow_in {
+    animation: growIn 0.25s linear forwards;
+  }
+
+  // Grow in animation
+  @keyframes growIn {
+    from {
+      transform: scale(0);
+    }
+
+    to {
+      transform: scale(1);
     }
   }
 }

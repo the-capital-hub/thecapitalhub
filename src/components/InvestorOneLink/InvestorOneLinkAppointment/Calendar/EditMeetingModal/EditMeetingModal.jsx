@@ -132,10 +132,10 @@ export default function EditMeetingModal({ selectedMeeting, setMeetings }) {
             </form>
           ) : (
             <div className="d-flex p-5 justify-content-center align-items-center grow_in">
-              {alert.success && (
+              {alert?.success && (
                 <h4 className="text-center">{alert.success}</h4>
               )}
-              {alert.error && (
+              {alert?.error && (
                 <h4 className="text-center text-danger">{alert.error}</h4>
               )}
             </div>
