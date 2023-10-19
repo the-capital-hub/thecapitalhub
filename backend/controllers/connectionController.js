@@ -118,8 +118,9 @@ export const getUserConnectionsController = async (req, res) => {
 // Remove a connection
 export const removeConnectionController = async (req, res) => {
   try {
-    const { connectionId } = req.params;
-    const response = await removeConnection(connectionId);
+    const userId = req.userId;
+    const { otherUserId } = req.params;
+    const response = await removeConnection(userId, otherUserId);
     return res.status(response.status).send(response);
   } catch (error) {
     console.error(error);

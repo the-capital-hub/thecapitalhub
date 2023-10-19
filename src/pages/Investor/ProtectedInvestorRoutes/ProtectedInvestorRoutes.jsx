@@ -10,8 +10,11 @@ import {
   ModalBSHeader,
 } from "../../../components/PopUp/ModalBS";
 import NewCommunityModal from "../../../components/Investor/ChatComponents/NewCommunityModal";
+import { useSelector } from "react-redux";
 
 function ProtectedInvestorRoutes({ children, ...props }) {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   const handleSidebarToggle = () => {
     setSidebarCollapsed((prev) => !prev);
@@ -20,57 +23,58 @@ function ProtectedInvestorRoutes({ children, ...props }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
-  // const isLoggedIn = () => {
-  //   const isLoggedIn = localStorage.getItem("isLoggedIn");
-  //   console.log("isLoggedIn-->", isLoggedIn);
-  //   return isLoggedIn === "true";
-  // };
-  // if (!isLoggedIn()) {
-  //   return <Navigate to="/login" replace />;
-  // }
+  const isLoggedIn = () => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    return isLoggedIn === "true";
+  };
+  if (!isLoggedIn()) {
+    return <Navigate to="/login" replace />;
+  }
 
-  // if (isLoggedIn()) {
-  return (
-    <>
-      <InvestorNavbar
-        handleSidebarToggle={handleSidebarToggle}
-        sidebarCollapsed={sidebarCollapsed}
-      />
+  if (isLoggedIn()) {
+    if (loggedInUser.isInvestor === "false") {
+      return <Navigate to="/home" replace />;
+    }
+    return (
+      <>
+        <InvestorNavbar
+          handleSidebarToggle={handleSidebarToggle}
+          sidebarCollapsed={sidebarCollapsed}
+        />
 
-      <div
-        className={`container-fluid newInvestor_container ${
-          sidebarCollapsed ? "sidebar-collapsed" : ""
-        }`}
-      >
-        <div className="sidebar">
-          <InvestorSidebar
-            sidebarCollapsed={sidebarCollapsed}
-            setSidebarCollapsed={handleSidebarToggle}
-          />
-        </div>
-
-        <div className="content">
-          <Outlet />
-        </div>
-      </div>
-      <LogOutPopUp />
-
-      <div className="modals">
-        {/* Modal for creating new Community */}
-        <ModalBSContainer
-          isStatic={false}
-          id="AddNewCommunity"
-          className="z-n1"
+        <div
+          className={`container-fluid newInvestor_container ${sidebarCollapsed ? "sidebar-collapsed" : ""
+            }`}
         >
-          <ModalBSHeader title={"Create a Community"} className={``} />
-          <ModalBSBody>
-            <NewCommunityModal theme="investor" />
-          </ModalBSBody>
-        </ModalBSContainer>
-      </div>
-    </>
-  );
-  // } else <Navigate to="/login" replace />;
+          <div className="sidebar">
+            <InvestorSidebar
+              sidebarCollapsed={sidebarCollapsed}
+              setSidebarCollapsed={handleSidebarToggle}
+            />
+          </div>
+
+          <div className="content">
+            <Outlet />
+          </div>
+        </div>
+        <LogOutPopUp />
+
+        <div className="modals">
+          {/* Modal for creating new Community */}
+          <ModalBSContainer
+            isStatic={false}
+            id="AddNewCommunity"
+            className="z-n1"
+          >
+            <ModalBSHeader title={"Create a Community"} className={``} />
+            <ModalBSBody>
+              <NewCommunityModal theme="investor" />
+            </ModalBSBody>
+          </ModalBSContainer>
+        </div>
+      </>
+    );
+  } else <Navigate to="/login" replace />;
 }
 
 export default ProtectedInvestorRoutes;
