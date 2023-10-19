@@ -45,7 +45,7 @@ export default function MySchedule() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const [view, setView] = useState("week");
-  const [meetingsData, setMeetingsData] = useState([]);
+  const [meetingsData, setMeetingsData] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -58,18 +58,14 @@ export default function MySchedule() {
     async function getMeetings() {
       try {
         const { data } = await getAllMeetings(loggedInUser.oneLinkId);
-        console.log("Meetings", data);
+        // console.log("Meetings", data);
 
-        let result = [];
-
-        data.map((meeting, index) => {
-          let event = {
-            start: new Date(meeting.startDateTime),
-            end: new Date(meeting.endDateTime),
-            title: meeting.title,
+        const result = data.map((meeting, index) => {
+          return {
+            ...meeting,
+            start: new Date(meeting.start),
+            end: new Date(meeting.end),
           };
-          console.log("event", event, typeof event.start);
-          result.push(event);
         });
 
         // Save to State
@@ -82,12 +78,11 @@ export default function MySchedule() {
     getMeetings();
   }, []);
 
-  function handleViewSelect(selectedView) {
-    console.log(selectedView);
-    setView(selectedView);
-  }
+  // function handleViewSelect(selectedView) {
+  //   console.log(selectedView);
+  //   setView(selectedView);
+  // }
 
-  console.log("from state", meetingsData);
   return (
     <MaxWidthWrapper>
       <div className="mySchedule__wrapper px-3 border-start">
@@ -97,7 +92,7 @@ export default function MySchedule() {
         <section className="section__wrapper bg-white rounded-3 border mb-5 pb-5 d-flex flex-column gap-5">
           {/* View Select */}
           <div className="d-flex flex-column flex-lg-row gap-4 justify-content-between align-items-center border-bottom p-3">
-            <ViewSelect handleViewSelect={handleViewSelect} />
+            <ViewSelect setView={setView} view={view} />
             <button className="btn-capital lh-1 py-0 py-md-3">
               Create Meeting
             </button>
@@ -105,7 +100,7 @@ export default function MySchedule() {
 
           <div className="schedule__container px-3">
             {/* Scheduler */}
-            {meetingsData.length !== 0 ? (
+            {meetingsData ? (
               <div className="calender__div">
                 <CalendarContainer
                   view={view}

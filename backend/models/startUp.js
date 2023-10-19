@@ -36,6 +36,9 @@ const startUpSchema = new Schema(
     description: {
       type: String,
     },
+    briefIntroduction: {
+      type: String,
+    },
     startedAtDate: {
       type: String,
     },
@@ -57,8 +60,14 @@ const startUpSchema = new Schema(
     solution: {
       type: String,
     },
+    marketLandscape: {
+      type: String,
+    },
     competitiveLandscape: {
       type: String,
+    },
+    competitors: {
+      type: Array,
     },
     growthStrategy: {
       type: String,
@@ -102,10 +111,18 @@ const startUpSchema = new Schema(
       type: Number,
       // required: true
     },
-    fundingAsk: {
-      type: Number,
-      // required: true
-    },
+    fundingAsk: [
+      {
+        requiredFor: String,
+        Amount: String,
+      }
+    ],
+    roadMap: [
+      {
+        date: String,
+        milestone: String,
+      }
+    ],
     preFundingAsk: {
       type: Number,
       // required: true

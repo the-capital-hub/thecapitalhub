@@ -2,12 +2,12 @@ import "./CommunitiesContainer.scss";
 import CommunityCard from "./CommunityCard";
 import { useState } from "react";
 import CommunitiesIcon from "./CommunitiesIcon";
-// import ModalBsLauncher from "../../PopUp/ModalBS/ModalBsLauncher/ModalBsLauncher";
-// import ModalBSBody from "../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
-// import ModalBSContainer from "../../PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
-// import ModalBSHeader from "../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
-// import { AiOutlineUsergroupAdd } from "react-icons/ai";
-// import NewCommunityModal from "../ChatComponents/NewCommunityModal";
+import ModalBsLauncher from "../../PopUp/ModalBS/ModalBsLauncher/ModalBsLauncher";
+import ModalBSBody from "../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
+import ModalBSContainer from "../../PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
+import ModalBSHeader from "../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
+import { AiOutlineUsergroupAdd } from "react-icons/ai";
+import NewCommunityModal from "../ChatComponents/NewCommunityModal";
 import { getAllCommunity } from "../../../Service/user";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -42,24 +42,24 @@ export default function CommunitiesContainer({ isCommunityOpen, recieveMessage, 
       </summary>
       <div className="communities__chats d-flex flex-column pb-4 border-top">
         {/* Add new */}
-        {/* <ModalBsLauncher
+        <ModalBsLauncher
           id="AddNewCommunity"
           className="new__community d-flex align-items-center gap-3 px-4 py-4 border-bottom "
         >
           {" "}
           <AiOutlineUsergroupAdd style={{ fontSize: "1.75rem" }} />{" "}
-          <h5 className="m-0">New Community</h5>{" "}
-        </ModalBsLauncher> */}
+          <h5 className="m-0">Create New Community</h5>{" "}
+        </ModalBsLauncher>
         {/* Add new Modal */}
-        {/* <ModalBSContainer isStatic={false} id="AddNewCommunity">
+        <ModalBSContainer isStatic={false} id="AddNewCommunity">
           <ModalBSHeader
             title={"Create a Community"}
-            className={"orange__heading"}
+            className={loggedInUser.isInvestor === "true" ? "yellow__heading" : "orange__heading"}
           />
           <ModalBSBody>
-            <NewCommunityModal />
+            <NewCommunityModal theme={loggedInUser.isInvestor === "true" ? "investor" : ""} />
           </ModalBSBody>
-        </ModalBSContainer> */}
+        </ModalBSContainer>
 
         {/* Render communities list */}
         <div className="my__communities d-flex flex-column gap-4 px-3 pt-4">

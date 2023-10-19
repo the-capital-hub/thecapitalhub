@@ -13,8 +13,6 @@ export default function InvestorOneLinkInvestment() {
     investor;
   const { investmentPhilosophy, companyName } = company;
 
-  console.log("company", company);
-  console.log("investor", investor);
 
   return (
     <div className="investment_philosophy_wrapper mb-5 ps-3 leftBorder">

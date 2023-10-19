@@ -1076,3 +1076,27 @@ export const deleteMeeting = async (meetingId) => {
     throw error;
   }
 };
+
+export const removeConnection = async (userId) => {
+  try {
+    const response = await axiosInstance.delete(
+      `${API.removeConnection}/${userId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error getting meetings:", error);
+  }
+};
+
+export const requestMeetingAPI = async (meetingId, requestData) => {
+  try {
+    const response = await axiosInstance.post(
+      `${API.requestMeeting}/${meetingId}`,
+      requestData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error requesting meeting:", error);
+    throw error;
+  }
+};
