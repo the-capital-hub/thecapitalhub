@@ -3,21 +3,21 @@ import { UserModel } from "../models/User.js";
 
 export const createMeeting = async (userId, meetingData) => {
   try {
-    const startDateTime = new Date(meetingData.startDateTime);
-    const endDateTime = new Date(meetingData.endDateTime);
+    const start = new Date(meetingData.start);
+    const end = new Date(meetingData.end);
     const existingMeeting = await ScheduleModel.findOne({
       userId: userId,
       $or: [
         {
           $and: [
-            { startDateTime: { $lte: startDateTime } },
-            { endDateTime: { $gt: startDateTime } },
+            { start: { $lte: start } },
+            { end: { $gt: start } },
           ],
         },
         {
           $and: [
-            { startDateTime: { $lt: endDateTime } },
-            { endDateTime: { $gte: endDateTime } },
+            { start: { $lt: end } },
+            { end: { $gte: end } },
           ],
         },
       ],
@@ -97,6 +97,74 @@ export const requestBookingSlotById = async (meetingId, requestData) => {
     return {
       status: 500,
       message: "An error occurred while adding the booking request.",
+    };
+  }
+};
+
+export const deleteMeeting = async (meetingId, userId) => {
+  try {
+    const meeting = await ScheduleModel.findOneAndDelete({
+      _id: meetingId,
+      userId: userId,
+    });
+    if (!meeting) {
+      return {
+        status: 404,
+        message: "Meeting not found with the provided ID.",
+      };
+    }
+
+    return {
+      status: 200,
+      message: "Meeting deleted successfully",
+      data: meeting,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while deleting the meeting.",
+    };
+  }
+};
+
+export const acceptRequestById = async (meetingId, requestId) => {
+  try {
+    const meeting = await ScheduleModel.findById(meetingId);
+    if (!meeting) {
+      return {
+        status: 404,
+        message: "Meeting not found with the provided ID.",
+      };
+    }
+    const requestToAccept = meeting.requestedBy.find(
+      (request) => request._id.toString() === requestId
+    );
+    if (!requestToAccept) {
+      return {
+        status: 404,
+        message: "Request not found with the provided ID for this meeting.",
+      };
+    }
+    meeting.bookedBy = {
+      name: requestToAccept.name,
+      companyName: requestToAccept.companyName,
+      email: requestToAccept.email,
+      phone: requestToAccept.phone,
+      description: requestToAccept.description,
+      oneLink: requestToAccept.oneLink,
+    };
+    await meeting.save();
+    return {
+      status: 200,
+      message: "Request accepted successfully",
+      data: meeting,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while accepting the request.",
     };
   }
 };

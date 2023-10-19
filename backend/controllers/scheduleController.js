@@ -2,6 +2,8 @@ import {
   createMeeting,
   getAllMeetings,
   requestBookingSlotById,
+  deleteMeeting,
+  acceptRequestById,
 } from "../services/scheduleService.js";
 
 export const createMeetingController = async (req, res) => {
@@ -46,5 +48,31 @@ export const requestBookingSlotController = async (req, res) => {
   }
 }
 
+export const deleteMeetingController = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { meetingId } = req.params;
+    const response = await deleteMeeting(meetingId, userId);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      status: 500,
+      message: "An error occurred while deleting the meeting.",
+    });
+  }
+};
 
-
+export const acceptRequestController = async (req, res) => {
+  try {
+    const { meetingId, requestId } = req.params;
+    const response = await acceptRequestById(meetingId, requestId);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      status: 500,
+      message: "An error occurred while accepting the request.",
+    });
+  }
+};
