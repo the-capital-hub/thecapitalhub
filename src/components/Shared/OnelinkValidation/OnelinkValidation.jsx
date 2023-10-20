@@ -6,8 +6,8 @@ import MaxWidthWrapper from "../MaxWidthWrapper/MaxWidthWrapper";
 import SpinnerBS from "../Spinner/SpinnerBS";
 import { useParams } from "react-router-dom";
 import { validateSecretKey } from "../../../Service/user";
-import { useDispatch } from 'react-redux';
-import { login, logout } from '../../../Store/features/oneLink/oneLinkSlice';
+import { useDispatch } from "react-redux";
+import { login, logout } from "../../../Store/features/oneLink/oneLinkSlice";
 
 export default function OnelinkValidation({ userId }) {
   const dispatch = useDispatch();
@@ -15,6 +15,7 @@ export default function OnelinkValidation({ userId }) {
   const [error, setError] = useState(null);
   const [pin, setPin] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   // const { userId } = useParams();
 
   // Handle invalid Secret Key
@@ -42,7 +43,9 @@ export default function OnelinkValidation({ userId }) {
     setError(null);
   };
 
-  const handlePinSubmit = async (req, res) => {
+  const handlePinSubmit = async (e) => {
+    e.preventDefault();
+
     try {
       const response = await validateSecretKey(userId, pin);
       if (response.status === 200) {
@@ -55,12 +58,15 @@ export default function OnelinkValidation({ userId }) {
       console.log(error);
       setError("Key is invalid");
     }
-  }
+  };
 
   return (
     <MaxWidthWrapper>
       <div className="onelink_validation_page d-flex justify-content-center align-items-center">
-        <div className="key_container bg-white rounded-5 shadow p-3 py-5 p-lg-5 d-flex flex-column gap-5">
+        <form
+          onSubmit={handlePinSubmit}
+          className="key_container bg-white rounded-5 shadow p-3 py-5 p-lg-5 d-flex flex-column gap-5"
+        >
           {/* Headings */}
           <div className="">
             <h3 className="orange fw-bold">One Link</h3>
@@ -71,7 +77,7 @@ export default function OnelinkValidation({ userId }) {
           <div className="d-flex flex-column gap-3">
             <div className="d-flex justify-content-between align-items-center secret_input_container shadow-sm">
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="pin"
                 id="pin"
                 minLength={4}
@@ -84,7 +90,14 @@ export default function OnelinkValidation({ userId }) {
                 autoComplete="off"
                 onChange={(e) => handleInvalid(e.target.value)}
               />
-              <IconPassword />
+              <button
+                type="button"
+                className="border-0 bg-transparent p-0"
+                style={{ outline: "none" }}
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                <IconPassword />
+              </button>
             </div>
 
             {error && (
@@ -104,7 +117,11 @@ export default function OnelinkValidation({ userId }) {
             <button type="button" className="btn_cancel">
               Cancel
             </button>
-            <button type="button" className="btn_submit" onClick={handlePinSubmit}>
+            <button
+              type="button"
+              className="btn_submit"
+              // onClick={handlePinSubmit}
+            >
               {loading ? (
                 <span className=" d-flex align-items-center gap-2">
                   <SpinnerBS spinnerSizeClass="spinner-border-sm" />
@@ -115,7 +132,7 @@ export default function OnelinkValidation({ userId }) {
               )}
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </MaxWidthWrapper>
   );
