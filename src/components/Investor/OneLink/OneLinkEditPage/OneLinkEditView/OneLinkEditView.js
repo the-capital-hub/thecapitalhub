@@ -19,6 +19,7 @@ import {
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { getBase64 } from "../../../../../utils/getBase64";
+import camimg from "../../../../../Images/Camera.png"
 
 const OneLinkEditView = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -164,15 +165,15 @@ const OneLinkEditView = () => {
 
   return (
     <>
-      {/* <div className="editview_container">
+       {/* <div className="editview_container"> 
         <div className="col">
           <SmallProfileCard text={"Edit"} />
         </div>
-        <div className="box_container px-3 px-lg-5 py-5 my-4"> */}
-      {/* <section className="dollar_rupree">
+        <div className="box_container px-3 px-lg-5 py-5 my-4"> 
+       <section className="dollar_rupree">
             <img src={DollarRupeeImage} alt="image" />
-          </section> */}
-      {/* <div className="download_preview">
+          </section> 
+       <div className="download_preview">
             <section className="company_description">
               <div
                 className="mx-2 my-2 my-md-0"
@@ -267,9 +268,9 @@ const OneLinkEditView = () => {
                 />
               </div>
             </section>
-          </div> */}
+          </div> 
 
-      {/* <section className="button_preview_download_section pdf-hidden">
+      <section className="button_preview_download_section pdf-hidden">
             <div className="download_button_container">
               <button onClick={handlePreviewPDF}>Preview</button>
               <button className="download_button" onClick={handleDownloadPDF}>
@@ -279,12 +280,21 @@ const OneLinkEditView = () => {
           </section>
         </div>
       </div> */}
+
+
+
+
+
+
       <section className="one_link_edit_view_section w-100 p-3 rounded">
-        <section className="img_company_data d-flex flex-column flex-md-row w-100 justify-content-between align-items-center gap-3">
+        <div className="download_preview p-5 ">
+
+        <section className=" img_company_data d-flex flex-column flex-md-row w-100 justify-content-between align-items-center gap-3">
           <div className="img_right ">
             <label htmlFor="logoImg" className="position-relative">
               <img src={selectedLogo || imageData} alt="image" role="button" />
-              <span className="position-absolute text-dark py-1 px-2">
+              <span className="position-absolute text-dark py-1 px-2 d-flex flex-column justify-content-center align-items-center">
+
                 Upload Company Logo
               </span>
             </label>
@@ -299,7 +309,7 @@ const OneLinkEditView = () => {
             />
           </div>
           <div className="compant_data d-flex flex-column gap-3 ">
-            <div className="startup_Name_inp shadow-sm">
+            <div className="startup_Name_inp">
               <h5>Startup Name</h5>
               <input
                 type="text"
@@ -309,7 +319,7 @@ const OneLinkEditView = () => {
               />
             </div>
             <div className="location_data_div d-flex flex-column flex-md-row gap-3 w-100 ">
-              <div className="country shadow-sm w-100 ">
+              <div className="country  w-100 ">
                 <h5>City, Country</h5>
                 <input
                   type="text"
@@ -318,13 +328,13 @@ const OneLinkEditView = () => {
                   className=" px-3"
                 />
               </div>
-              <div className="founded shadow-sm w-100 ">
+              <div className="founded  w-100 ">
                 <h5>Founded Date</h5>
                 <input
                   type="date"
                   id="founded_date"
                   name="founded_date"
-                  className=" px-3"
+                  className=" px-3 w-100"
                 />
               </div>
             </div>
@@ -335,12 +345,12 @@ const OneLinkEditView = () => {
           </div>
         </section>
         <section className="link_section">
-          <div className="one_link">
+          <div className="web_link">
             <h5>Website Link</h5>
             <input
               type="text"
-              id="startup_name"
-              name="startup_name"
+              id="website_link"
+              name="website_link"
               className="w-100 px-3"
             />
           </div>
@@ -350,8 +360,8 @@ const OneLinkEditView = () => {
               <h5>Link 1</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="link_1"
+                name="link_1"
                 className="w-100 px-3"
               />
             </div>
@@ -360,8 +370,8 @@ const OneLinkEditView = () => {
               <h5>Link 2</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="link_2"
+                name="link_2"
                 className="w-100 px-3"
               />
             </div>
@@ -370,8 +380,8 @@ const OneLinkEditView = () => {
               <h5>Link 3</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="link_3"
+                name="link_3"
                 className="w-100 px-3"
               />
             </div>
@@ -379,9 +389,10 @@ const OneLinkEditView = () => {
         </section>
         <div className="about_company_section my-3">
           <h5>About Company</h5>
-          <textarea type="text" className="m-0 fs-6" />
+          <textarea type="text" className="m-0 fs-6 w-100" />
         </div>
-        <section className="card_section">
+        <hr className="my-3"/>
+        <section className="card_section ">
           <OnePagePreviewCard company={company} page={"oneLinkEdit"} />
         </section>
         <h4>Market Size (in Billions $)</h4>
@@ -390,8 +401,8 @@ const OneLinkEditView = () => {
               <h5>Total Addressable Market:</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="total_addressable_market"
+                name="total_addressable_market"
                 className="w-100 px-3"
                 placeholder="Enter here"
               />
@@ -401,8 +412,8 @@ const OneLinkEditView = () => {
               <h5>Service Addressable Market:</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="service_addressable_market"
+                name="service_addressable_market"
                 className="w-100 px-3"
                 placeholder="Enter here"
               />
@@ -412,8 +423,8 @@ const OneLinkEditView = () => {
               <h5>Service Obtainable Market:</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="service_obtainable_market"
+                name="service_obtainable_market"
                 className="w-100 px-3"
                 placeholder="Enter here"
               />
@@ -425,8 +436,8 @@ const OneLinkEditView = () => {
               <h5>Competitor name 1</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="competitor_1"
+                name="competitor_1"
                 className="w-100 px-3"
               />
             </div>
@@ -435,8 +446,8 @@ const OneLinkEditView = () => {
               <h5>Competitor name 2</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="competitor_2"
+                name="competitor_2"
                 className="w-100 px-3"
               />
             </div>
@@ -445,8 +456,8 @@ const OneLinkEditView = () => {
               <h5>Competitor name 3</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="competitor_2"
+                name="competitor_2"
                 className="w-100 px-3"
               />
             </div>
@@ -461,8 +472,8 @@ const OneLinkEditView = () => {
               <h5>Required For</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="required_1"
+                name="required_1"
                 className="w-100 px-3"
               />
             </div>
@@ -471,8 +482,8 @@ const OneLinkEditView = () => {
               <h5>Amount</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="amount_1"
+                name="amount_1"
                 className="w-100 px-3"
               />
             </div>
@@ -483,8 +494,8 @@ const OneLinkEditView = () => {
               <h5>Required For</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="required_2"
+                name="required_2"
                 className="w-100 px-3"
               />
             </div>
@@ -493,8 +504,8 @@ const OneLinkEditView = () => {
               <h5>Amount</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="amount_2"
+                name="amount_2"
                 className="w-100 px-3"
               />
             </div>
@@ -505,8 +516,8 @@ const OneLinkEditView = () => {
               <h5>Required For</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="required_3"
+                name="required_3"
                 className="w-100 px-3"
               />
             </div>
@@ -515,8 +526,8 @@ const OneLinkEditView = () => {
               <h5>Amount</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="amount_3"
+                name="amount_3"
                 className="w-100 px-3"
               />
             </div>
@@ -528,8 +539,8 @@ const OneLinkEditView = () => {
           <div className="Roadmap w-100">
           <h5>Date</h5>              <input
                 type="date"
-                id="startup_name"
-                name="startup_name"
+                id="date_1"
+                name="date_1"
                 className="w-100 px-3"
               />
             </div>
@@ -538,8 +549,8 @@ const OneLinkEditView = () => {
               <h5>Milestone 1</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="milestone_1"
+                name="milestone_1"
                 className="w-100 px-3"
               />
             </div>
@@ -549,8 +560,8 @@ const OneLinkEditView = () => {
           <div className="Roadmap w-100">
           <h5>Date</h5>              <input
                 type="date"
-                id="startup_name"
-                name="startup_name"
+                id="date_2"
+                name="date_2"
                 className="w-100 px-3"
               />
             </div>
@@ -559,8 +570,8 @@ const OneLinkEditView = () => {
               <h5>Milestone 2</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="milestone_2"
+                name="milestone_2"
                 className="w-100 px-3"
               />
             </div>
@@ -571,8 +582,8 @@ const OneLinkEditView = () => {
               <h5>Date</h5>
               <input
                 type="date"
-                id="startup_name"
-                name="startup_name"
+                id="date_3"
+                name="date_3"
                 className="w-100 px-3"
               />
             </div>
@@ -581,14 +592,14 @@ const OneLinkEditView = () => {
               <h5>Milestone 3</h5>
               <input
                 type="text"
-                id="startup_name"
-                name="startup_name"
+                id="milestone_3"
+                name="milestone_3"
                 className="w-100 px-3"
               />
             </div>
           </div>
         </section>
-        <section className="team_section d-flex flex-column flex-md-row">
+        <section className="team_section d-flex  flex-row gap-3">
           {company?.team?.map((team, index) => (
             <TeamCard
               index={index + 1}
@@ -600,6 +611,7 @@ const OneLinkEditView = () => {
             />
           ))}
         </section>
+        </div>
         <section className="button_preview_download_section pdf-hidden">
             <div className="download_button_container">
               <button onClick={handlePreviewPDF}>Preview</button>
@@ -608,7 +620,7 @@ const OneLinkEditView = () => {
               </button>
             </div>
           </section>
-      </section>
+      </section> 
     </>
   );
 };
