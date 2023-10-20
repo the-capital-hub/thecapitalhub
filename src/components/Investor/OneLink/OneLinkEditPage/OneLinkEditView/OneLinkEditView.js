@@ -164,15 +164,15 @@ const OneLinkEditView = () => {
 
   return (
     <>
-      <div className="editview_container">
+      {/* <div className="editview_container">
         <div className="col">
           <SmallProfileCard text={"Edit"} />
         </div>
-        <div className="box_container px-3 px-lg-5 py-5 my-4">
-          {/* <section className="dollar_rupree">
+        <div className="box_container px-3 px-lg-5 py-5 my-4"> */}
+      {/* <section className="dollar_rupree">
             <img src={DollarRupeeImage} alt="image" />
           </section> */}
-          <div className="download_preview">
+      {/* <div className="download_preview">
             <section className="company_description">
               <div
                 className="mx-2 my-2 my-md-0"
@@ -267,9 +267,9 @@ const OneLinkEditView = () => {
                 />
               </div>
             </section>
-          </div>
+          </div> */}
 
-          <section className="button_preview_download_section pdf-hidden">
+      {/* <section className="button_preview_download_section pdf-hidden">
             <div className="download_button_container">
               <button onClick={handlePreviewPDF}>Preview</button>
               <button className="download_button" onClick={handleDownloadPDF}>
@@ -278,7 +278,337 @@ const OneLinkEditView = () => {
             </div>
           </section>
         </div>
-      </div>
+      </div> */}
+      <section className="one_link_edit_view_section w-100 p-3 rounded">
+        <section className="img_company_data d-flex flex-column flex-md-row w-100 justify-content-between align-items-center gap-3">
+          <div className="img_right ">
+            <label htmlFor="logoImg" className="position-relative">
+              <img src={selectedLogo || imageData} alt="image" role="button" />
+              <span className="position-absolute text-dark py-1 px-2">
+                Upload Company Logo
+              </span>
+            </label>
+            <input
+              type="file"
+              value=""
+              id="logoImg"
+              name="logo"
+              onChange={logoOnChangeHandler}
+              accept=".jpg, .jpeg, .png, .webp, .svg"
+              hidden
+            />
+          </div>
+          <div className="compant_data d-flex flex-column gap-3 ">
+            <div className="startup_Name_inp shadow-sm">
+              <h5>Startup Name</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+            <div className="location_data_div d-flex flex-column flex-md-row gap-3 w-100 ">
+              <div className="country shadow-sm w-100 ">
+                <h5>City, Country</h5>
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  className=" px-3"
+                />
+              </div>
+              <div className="founded shadow-sm w-100 ">
+                <h5>Founded Date</h5>
+                <input
+                  type="date"
+                  id="founded_date"
+                  name="founded_date"
+                  className=" px-3"
+                />
+              </div>
+            </div>
+            <div className="tags_inp">
+              <h5>Tags</h5>
+              <input type="text" id="tags" name="tags" className=" px-3" />
+            </div>
+          </div>
+        </section>
+        <section className="link_section">
+          <div className="one_link">
+            <h5>Website Link</h5>
+            <input
+              type="text"
+              id="startup_name"
+              name="startup_name"
+              className="w-100 px-3"
+            />
+          </div>
+            <h4>Social Links</h4>
+          <div className="social_links d-flex flex-column flex-md-row justify-content-between gap-3">
+            <div className="links w-100">
+              <h5>Link 1</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+
+            <div className="links w-100">
+              <h5>Link 2</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+
+            <div className="links w-100">
+              <h5>Link 3</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+          </div>
+        </section>
+        <div className="about_company_section my-3">
+          <h5>About Company</h5>
+          <textarea type="text" className="m-0 fs-6" />
+        </div>
+        <section className="card_section">
+          <OnePagePreviewCard company={company} page={"oneLinkEdit"} />
+        </section>
+        <h4>Market Size (in Billions $)</h4>
+        <section className="market_size d-flex flex-column flex-md-row justify-content-between gap-3">
+        <div className="market w-100">
+              <h5>Total Addressable Market:</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+                placeholder="Enter here"
+              />
+            </div>
+
+            <div className="market w-100">
+              <h5>Service Addressable Market:</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+                placeholder="Enter here"
+              />
+            </div>
+
+            <div className="market w-100">
+              <h5>Service Obtainable Market:</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+                placeholder="Enter here"
+              />
+            </div>
+        </section>
+        <h4>Social Links</h4>
+        <section className="competitor_social_link d-flex flex-column flex-md-row justify-content-between gap-3">
+        <div className="competitor_link w-100">
+              <h5>Competitor name 1</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+
+            <div className="competitor_link w-100">
+              <h5>Competitor name 2</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+
+            <div className="competitor_link w-100">
+              <h5>Competitor name 3</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+        </section>
+        <section className="table_section">
+          <Table page={"oneLinkEditPage"} />
+        </section>
+        <h4>Fund Asking</h4>
+        <section className="fund_sking_section  d-flex flex-column  justify-content-between gap-3">
+          <div className="d-flex flex-md-row flex-column w-100 gap-2 ">
+          <div className="fund_asking w-100">
+              <h5>Required For</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+
+            <div className="fund_asking w-100">
+              <h5>Amount</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+          </div>
+
+          <div className="d-flex flex-md-row flex-column w-100 gap-2">
+          <div className="fund_asking w-100">
+              <h5>Required For</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+
+            <div className="fund_asking w-100">
+              <h5>Amount</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+          </div>
+
+          <div className="d-flex flex-md-row flex-column w-100 gap-2">
+          <div className="fund_asking w-100">
+              <h5>Required For</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+
+            <div className="fund_asking w-100">
+              <h5>Amount</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+          </div>
+        </section>
+        <h4>Roadmap</h4>
+        <section className="roadmap_section  d-flex flex-column  justify-content-between gap-3">
+        <div className="d-flex flex-md-row flex-column w-100 gap-2">
+          <div className="Roadmap w-100">
+          <h5>Date</h5>              <input
+                type="date"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+
+            <div className="Roadmap w-100">
+              <h5>Milestone 1</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+          </div>
+
+          <div className="d-flex flex-md-row flex-column w-100 gap-2">
+          <div className="Roadmap w-100">
+          <h5>Date</h5>              <input
+                type="date"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+
+            <div className="Roadmap w-100">
+              <h5>Milestone 2</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+          </div>
+
+          <div className="d-flex flex-md-row flex-column w-100 gap-2">
+          <div className="Roadmap w-100">
+              <h5>Date</h5>
+              <input
+                type="date"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+
+            <div className="Roadmap w-100">
+              <h5>Milestone 3</h5>
+              <input
+                type="text"
+                id="startup_name"
+                name="startup_name"
+                className="w-100 px-3"
+              />
+            </div>
+          </div>
+        </section>
+        <section className="team_section d-flex flex-column flex-md-row">
+          {company?.team?.map((team, index) => (
+            <TeamCard
+              index={index + 1}
+              profile={team?.image}
+              name={team?.name}
+              designation={team?.designation}
+              company={company}
+              page={"oneLinkEdit"}
+            />
+          ))}
+        </section>
+        <section className="button_preview_download_section pdf-hidden">
+            <div className="download_button_container">
+              <button onClick={handlePreviewPDF}>Preview</button>
+              <button className="download_button" onClick={handleDownloadPDF}>
+                Download
+              </button>
+            </div>
+          </section>
+      </section>
     </>
   );
 };
