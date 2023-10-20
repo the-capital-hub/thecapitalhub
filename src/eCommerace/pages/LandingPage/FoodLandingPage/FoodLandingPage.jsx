@@ -3,46 +3,46 @@ import "./foodLandingPage.scss";
 import assets from "../../../../Images/Ecommerace/FoodLandingPage/index";
 import Reviewcarousel from "../../../../components/ECommerace/FoodLandingPage/ReviewCarousel/Reviewcarousel";
 import ScrollableComponent from "../../../../components/ECommerace/FoodLandingPage/ScrollableComponent/ScrollableComponent";
-
+import { Helmet } from 'react-helmet';
 function FoodLandingPage() {
   const reviews = [
     {
-      text: "Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit proin risus Sit purus ante dictum in malesuada id.Lorem ipsum dolor sit amet consectetur. .  ",
+      text: "Our dining experience at The Capital Hub was exceptional. Delicious food beautifully presented with fresh, high-quality ingredients. Impeccable service and a cozy, welcoming atmosphere. We'll be back for more!",
       star: 1,
       img: assets.JackSon,
       name: "Jack Son",
       work: "UI Designer",
     },
     {
-      text: "Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit proin risus Sit purus ante dictum in malesuada id.Lorem ipsum dolor sit amet consectetur. .  ",
+      text: "We were delighted with our recent food order from The Capital Hub! Exquisite flavors, top-notch presentation, and prompt, hot, and fresh delivery. Thank you for consistently delivering such delicious meals to our doorstep. We'll definitely be ordering again!",
       star: 2,
       img: assets.JackSon,
       name: "Jack Son",
       work: "UI Designer",
     },
     {
-      text: "Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit proin risus Sit purus ante dictum in malesuada id.Lorem ipsum dolor sit amet consectetur. .  ",
+      text: "Our dining experience at The Capital Hub was exceptional. Delicious food beautifully presented with fresh, high-quality ingredients. Impeccable service and a cozy, welcoming atmosphere. We'll be back for more!",
       star: 3,
       img: assets.JackSon,
       name: "Jack Son",
       work: "UI Designer",
     },
     {
-      text: "Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit proin risus Sit purus ante dictum in malesuada id.Lorem ipsum dolor sit amet consectetur. .  ",
+      text: "We were delighted with our recent food order from The Capital Hub! Exquisite flavors, top-notch presentation, and prompt, hot, and fresh delivery. Thank you for consistently delivering such delicious meals to our doorstep. We'll definitely be ordering again!",
       star: 4,
       img: assets.JackSon,
       name: "Jack Son",
       work: "UI Designer",
     },
     {
-      text: "Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit proin risus Sit purus ante dictum in malesuada id.Lorem ipsum dolor sit amet consectetur. .  ",
+      text: "Our dining experience at The Capital Hub was exceptional. Delicious food beautifully presented with fresh, high-quality ingredients. Impeccable service and a cozy, welcoming atmosphere. We'll be back for more!",
       star: 5,
       img: assets.JackSon,
       name: "Jack Son",
       work: "UI Designer",
     },
     {
-      text: "Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit proin risus Sit purus ante dictum in malesuada id.Lorem ipsum dolor sit amet consectetur. .  ",
+      text: "We were delighted with our recent food order from The Capital Hub! Exquisite flavors, top-notch presentation, and prompt, hot, and fresh delivery. Thank you for consistently delivering such delicious meals to our doorstep. We'll definitely be ordering again!",
       star: 0,
       img: assets.JackSon,
       name: "Jack Son",
@@ -52,14 +52,22 @@ function FoodLandingPage() {
 
   return (
     <div className="landing-page container-fluid">
+<Helmet>
+        <meta charSet="utf-8" />
+        <title>Food-Tech</title>
+        <meta name="description" content="Discover a world of culinary convenience with our food tech platform.
+Order delicious meals, reserve tables, connect with fellow foodies, and track your orders
+seamlessly. Get up to 50% off during the festival season. Prioritize your well-being with our
+high-quality, delicious, and fresh ingredients. Join our satisfied customers who have
+experienced exceptional dining and food delivery. Order from The Capital Hub today!" />
+      </Helmet>
       <div className="frist-section d-flex flex-column  justify-content-evenly flex-md-row ">
         <div className="left-section d-flex flex-column justify-content-evenly md-p-3   ">
           <p className="fw-bold"># 1 Food Delivery Services</p>
           <h1>Fresh Food At </h1>
           <h1 className="text-orange">Your Fingertips</h1>
           <h6>
-            Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit
-            proin risus Sit purus ante dictum in malesuada id.
+          Elevate Your Culinary Adventures with Capital HUB
           </h6>
           <button>Order now</button>
         </div>
@@ -72,44 +80,45 @@ function FoodLandingPage() {
       <div className="second-section d-flex flex-column align-items-center  container ">
         <h3>Best Features</h3>
         <h1>Our Best Features For You</h1>
-        <p>
+        {/* <p>
           Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit
           proin risus Sit purus ante dictum in malesuada id.
-        </p>
+        </p> */}
         <div className="main-box d-flex flex-column  justify-content-center flex-md-row ">
           <div className="inner-box">
             <img src={assets.foodBox} alt="foodBox" />
-            <h5>Order Food</h5>
+            <h5>Order Food with Ease</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur. At consequat purus
-              hendrerit proin risus Sit purus ante dictum in malesuada id.
+            Satisfy your cravings with just a few clicks! Our food tech platform delivers
+delicious meals right to your doorstep, providing unmatched convenience
             </p>
           </div>
 
           <div className="inner-box">
             <img src={assets.roundBox} alt="roundBox" />
-            <h5>Book Table</h5>
+            <h5>"Book Tables at Top Restaurants</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur. At consequat purus
-              hendrerit proin risus Sit purus ante dictum in malesuada id.
+            "Reserve your seat effortlessly and indulge in culinary excellence at the finest
+restaurants in town. Elevate your dining experience with our user-friendly 'book table'
+feature.
             </p>
           </div>
 
           <div className="inner-box">
             <img src={assets.Group} alt="Group" />
-            <h5>Connect With Foodies</h5>
+            <h5>Connect with Foodies</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur. At consequat purus
-              hendrerit proin risus Sit purus ante dictum in malesuada id.
+            Join our vibrant foodie community to share recipes, discover hidden gems,
+and savour the joy of food together. Connect with like-minded culinary enthusiasts.
             </p>
           </div>
 
           <div className="inner-box">
             <img src={assets.box} alt="box" />
-            <h5>Track Your Order</h5>
+            <h5>Track Your Order in Real-Time</h5>
             <p>
-              Lorem ipsum dolor sit amet consectetur. At consequat purus
-              hendrerit proin risus Sit purus ante dictum in malesuada id.
+            "Stay informed with transparent, real-time order tracking. Witness your meal's
+journey from the kitchen to your doorstep with precision at your fingertips
             </p>
           </div>
         </div>
@@ -123,8 +132,9 @@ function FoodLandingPage() {
           </h1>
           <h1>Festival Season!</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit
-            proin risus Sit purus ante dictum in malesuada id.{" "}
+          Celebrate the festive spirit with joy and savings! Enjoy exclusive offers of up
+to 50% off on a wide range of products and experiences during this festival season. Don't
+miss out.
           </p>
           <button>Order now</button>
         </div>
@@ -144,10 +154,11 @@ function FoodLandingPage() {
             />
           </div>
           <div className="right-section d-flex    align-self-center flex-column container">
-            <h1>The Best Quality Food For Your Health</h1>
+            <h1>"High-Quality Food for Your Health</h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur. At consequat purus
-              hendrerit proin risus Sit purus ante dictum in malesuada id.{" "}
+            Description 6: "Prioritize your well-being with our commitment to providing the highest quality
+food. Nourish your body and delight your taste buds with the harmonious pairing of health
+and taste
             </p>
             <button>Learn more</button>
           </div>
@@ -171,10 +182,10 @@ function FoodLandingPage() {
       </div>
       <div className="last text-center m-5">
         <h1>Subscribe Now</h1>
-        <p>
+        {/* <p>
           Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit
           proin risus Sit purus ante dictum in malesuada id.{" "}
-        </p>
+        </p> */}
 
         <div className=" input-div rounded-pill d-flex  shadow-lg  flex-row mx-md-auto ">
           <input
