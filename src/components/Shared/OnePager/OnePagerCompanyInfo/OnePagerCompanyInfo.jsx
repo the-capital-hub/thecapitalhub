@@ -91,7 +91,7 @@ export default function OnePagerCompanyInfo({
                   style={{ outline: "none" }}
                 />
                 <a
-                  href="#"
+                  href={link}
                   target="_blank"
                   className="btn-capital px-4 text-decoration-none visit_btn"
                 >
