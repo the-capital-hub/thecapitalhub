@@ -21,6 +21,17 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { useDispatch } from "react-redux";
+import OnePagerCompanyLogo from "../../../components/Shared/OnePager/OnePagerCompanyLogo/OnePagerCompanyLogo";
+import OnePagerCompanyInfo from "../../../components/Shared/OnePager/OnePagerCompanyInfo/OnePagerCompanyInfo";
+import OnePagerCompanyAbout from "../../../components/Shared/OnePager/OnePagerCompanyAbout/OnePagerCompanyAbout";
+import OnePagerMarketSize from "../../../components/Shared/OnePager/OnePagerMarketSize/OnePagerMarketSize";
+import OnePagerSocialLinks from "../../../components/Shared/OnePager/OnePagerSocialLinks/OnePagerSocialLinks";
+import OnePagerFundAsking from "../../../components/Shared/OnePager/OnePagerFundAsking/OnePagerFundAsking";
+import OnePagerRoadmap from "../../../components/Shared/OnePager/OnePagerRoadmap/OnePagerRoadmap";
+import OnePagerTable from "../../../components/Shared/OnePager/OnePagerProjections/OnePagerTable";
+import OnePagerProjections from "../../../components/Shared/OnePager/OnePagerProjections/OnePagerProjections";
+import OnePagerTeam from "../../../components/Shared/OnePager/OnePagerTeam/OnePagerTeam";
+import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 
 const OnePager = () => {
   const [rupeeHighlight, setRupeeHighlight] = useState(true);
@@ -43,6 +54,8 @@ const OnePager = () => {
       })
       .catch(() => setOnePager([]));
   }, [username]);
+
+  // Change Highlight
   const changeHighlight = (currency) => {
     if (currency === "rupee") {
       setDollarHighlight(false);
@@ -54,6 +67,7 @@ const OnePager = () => {
     }
   };
 
+  // Handle download PDF
   const handleDownloadPDF = () => {
     const element = document.querySelector(".onePager");
     const buttons = document.querySelectorAll(".buttons button");
@@ -91,6 +105,7 @@ const OnePager = () => {
     });
   };
 
+  // Handle preview PDF
   const handlePreviewPDF = () => {
     const element = document.querySelector(".onePager");
     const buttons = document.querySelectorAll(".buttons button");
@@ -147,116 +162,74 @@ const OnePager = () => {
 
   return (
     <MaxWidthWrapper>
-      <div className="border_left">
-        <div className="onePager shadow-sm border px-3 px-lg-5">
-          <div className="d-flex justify-content-between align-items-center w-100">
-            <h1>One Pager</h1>
-            <button
-              className="download-button me-5"
-              onClick={handleDownloadPDF}
-            >
-              Download
-            </button>
-          </div>
-          {/* <div className="currency">
-            <span
-              className={rupeeHighlight && "highlighted"}
-              onClick={() => changeHighlight("rupee")}
-            >
-              ₹
-            </span>
-            <span
-              className={dollarHighlight && "highlighted"}
-              onClick={() => changeHighlight("dollar")}
-            >
-              $
-            </span>
-          </div> */}
-          <div className="companyDetails">
-            <CompanyDetails
-              companyName={onePager.company}
-              description={onePager.description}
-              // image={onePager.logo}
-              image={imageData}
-              tagline={onePager.tagline}
+      <div className="border_left ps-xl-3 mb-5">
+        {onePager.length !== 0 ? (
+          <div
+            className="onePager_wrapper d-flex flex-column gap-4"
+            theme="investor"
+          >
+            {/* onePager Company Logo */}
+            <OnePagerCompanyLogo image={onePager?.logo} />
+
+            {/* onePager company info */}
+            <OnePagerCompanyInfo
+              company={onePager.company}
+              location={onePager.location}
+              startedAtDate={onePager.startedAtDate}
+              keyFocus={onePager.keyFocus}
+              socialLinks={onePager.socialLinks}
             />
-          </div>
-          {/* <hr /> */}
 
-          <div className="simple_cards_container">
-            <div className="simple_cards">
-              <SimpleCard title={"Problem"} text={onePager.problem} />
-              <SimpleCard title={"Solution"} text={onePager.solution} />
-              <SimpleCard
-                title={"Competitive Landscape"}
-                text={onePager.competitiveLandscape}
-              />
-            </div>
-          </div>
+            {/* onePager companay about */}
+            <OnePagerCompanyAbout
+              description={onePager.description}
+              problem={onePager.problem}
+              solution={onePager.solution}
+            />
 
-          <hr />
-          <div className="">
-            <Title title="Market (in cr)" />
-            <div className="market_cards">
-              <MarketCard
-                title={"TAM"}
-                subtitle={"(Total Addressable Market)"}
-                amount={onePager.TAM}
-              />
-              <MarketCard
-                title={"SAM"}
-                subtitle={"(Servicable Addressable Market)"}
-                amount={onePager.SAM}
-              />
-              <MarketCard
-                title={"SOM"}
-                subtitle={"(Serviceable Obtainable Market)"}
-                amount={onePager.SOM}
-              />
-            </div>
-          </div>
+            {/* onePager Market info */}
+            <div className="bg-white rounded-4 border shadow-sm">
+              <div className="border-bottom">
+                <div className="px-3 px-lg-4 py-5 d-flex flex-column gap-5">
+                  {/* Market Size */}
+                  <OnePagerMarketSize />
+                  {/* Social Links */}
+                  <OnePagerSocialLinks />
+                  {/* Projections */}
+                  <OnePagerProjections />
+                  {/* Fund Asking */}
+                  <OnePagerFundAsking />
+                  {/* Roadmap */}
+                  <OnePagerRoadmap />
+                  {/* Team */}
+                  <OnePagerTeam team={onePager.team} />
+                </div>
+              </div>
 
-          <div className="projections">
-            <Title title={"Projections"} />
-            <Table hidden={true} />
-          </div>
-
-          <div className="team">
-            <Title title={"Team"} />
-            <div className="team_cards">
-              {onePager?.team?.map((team, index) => (
-                <TeamsCard
-                  key={index}
-                  image={team.image}
-                  name={team.name}
-                  designation={team.designation}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="fundingAndContact">
-            <div className="left">
-              <Title title={"Funding ask (in Lakhs)"} />
-              <div className="box">
-                <h1>{onePager.fundingAsk || `Enter Funding Amount`}</h1>
-                <hr />
-                <ImagePlaceholder
-                  text={
-                    "Upload image a piechart showing how you utilize the funding amount"
-                  }
-                />
+              {/* Action buttons */}
+              <div className="onePager_action_buttons px-3 px-lg-4 py-5 d-flex align-items-center justify-content-center justify-content-md-end">
+                <div className="action_buttons_container d-flex flex-column flex-md-row gap-4">
+                  <button
+                    type="button"
+                    className="text-black rounded-pill onePager_action_save"
+                  >
+                    Save Draft
+                  </button>
+                  <button
+                    type="button"
+                    className="text-white rounded-pill onePager_action_publish"
+                  >
+                    Publish
+                  </button>
+                </div>
               </div>
             </div>
-            {/* <div className="right">
-              <InvestNow page={"onePager"} />
-            </div> */}
+
+            {/* OnePager End */}
           </div>
-          <div className="buttons">
-            <button onClick={handlePreviewPDF}>Preview</button>
-            {/* <button onClick={handleDownloadPDF}>Download</button> */}
-          </div>
-        </div>
+        ) : (
+          <SpinnerBS className={"d-flex justify-content-center w-100 py-5"} />
+        )}
       </div>
     </MaxWidthWrapper>
   );
