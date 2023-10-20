@@ -93,9 +93,9 @@ export default function MySchedule() {
           {/* View Select */}
           <div className="d-flex flex-column flex-lg-row gap-4 justify-content-between align-items-center border-bottom p-3">
             <ViewSelect setView={setView} view={view} />
-            <button className="btn-capital lh-1 py-0 py-md-3">
+            {/* <button className="btn-capital lh-1 py-0 py-md-3">
               Create Meeting
-            </button>
+            </button> */}
           </div>
 
           <div className="schedule__container px-3">
