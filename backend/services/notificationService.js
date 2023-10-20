@@ -1,6 +1,6 @@
 import { NotificationModel } from "../models/Notification.js";
 
-export const addNotification = async (recipient, sender, type, post = null, connection = null) => {
+export const addNotification = async (recipient, sender, type, post = null, connection = null, meetingId = null) => {
   try {
     const notification = new NotificationModel({
       recipient,
@@ -8,6 +8,7 @@ export const addNotification = async (recipient, sender, type, post = null, conn
       type,
       post,
       connection,
+      meetingId
     });
     if (sender === recipient) {
       return;
@@ -99,6 +100,7 @@ export const deleteNotification = async (recipient, sender, type, id) => {
           $or: [
             { connection: id },
             { post: id },
+            { meetingId: id },
           ],
         },
         { recipient, sender, type },
@@ -119,3 +121,21 @@ export const deleteNotification = async (recipient, sender, type, id) => {
   }
 };
 
+export const getUnreadNotificationCount = async (userId) => {
+  try {
+    const unreadCount = await NotificationModel.countDocuments({
+      recipient: userId,
+      isRead: false,
+    });
+    return {
+      status: 200,
+      message: "Unread notification count retrieved",
+      data: { unreadCount },
+    };
+  } catch (error) {
+    return {
+      status: 500,
+      message: "An error occurred while getting the unread notification count",
+    };
+  }
+};

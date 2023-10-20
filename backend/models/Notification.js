@@ -10,12 +10,12 @@ const notificationSchema = new Schema({
   sender: {
     type: Schema.Types.ObjectId,
     ref: "Users", 
-    required: true,
+    // required: true,
   },
 
   type: {
     type: String,
-    enum: ["connectionRequest", "connectionAccepted", "postLiked", "postShared", "postCommented"],
+    enum: ["connectionRequest", "connectionAccepted", "postLiked", "postShared", "postCommented", "meetingRequest"],
     required: true,
   },
   post: {
@@ -25,6 +25,10 @@ const notificationSchema = new Schema({
   connection: {
     type: Schema.Types.ObjectId,
     ref: "Connections",
+  },
+  meetingId: {
+    type: Schema.Types.ObjectId,
+    ref: "Schedule",
   },
   createdAt: {
     type: Date,
