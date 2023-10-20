@@ -335,19 +335,24 @@
     border-radius: 10px;
     height: 69px;
   }
+  h4{
+    margin-top: 10px;
+    font-size: 20px;
+  }
   .img_company_data {
     .img_right {
       border: 1px solid red;
-      height: 120px;
+      // height: 120px;
       img {
-        width: 120px;
-        height: 120px;
+        width: 194px;
+        height: 203px;
       }
       span {
         top: 35%;
-        font-size: 10px;
+        font-size: 20px;
         left: 16px;
         text-align: center;
+       
       }
     }
     .compant_data {
