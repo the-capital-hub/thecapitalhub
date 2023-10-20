@@ -91,11 +91,18 @@ export default function MySchedule() {
         </div> */}
         <section className="section__wrapper bg-white rounded-3 border mb-5 pb-5 d-flex flex-column gap-5">
           {/* View Select */}
-          <div className="d-flex flex-column flex-lg-row gap-4 justify-content-between align-items-center border-bottom p-3">
-            <ViewSelect setView={setView} view={view} />
-            <button className="btn-capital lh-1 py-0 py-md-3">
-              Create Meeting
-            </button>
+          <div className="d-flex flex-column flex-lg-row justify-content-between align-items-center border-bottom p-3">
+            <div className="d-flex align-items-center">
+              <ViewSelect setView={setView} view={view} />
+            </div>
+            <div className="mt-3 mt-lg-0">
+              <button className="btn-capital lh-1 py-2 py-md-3 me-2">
+                View requests
+              </button>
+              <button className="btn-capital lh-1 py-2 py-md-3">
+                Create Meeting
+              </button>
+            </div>
           </div>
 
           <div className="schedule__container px-3">

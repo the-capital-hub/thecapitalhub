@@ -1,6 +1,6 @@
 import { NotificationModel } from "../models/Notification.js";
 
-export const addNotification = async (recipient, sender, type, post = null, connection = null) => {
+export const addNotification = async (recipient, sender, type, post = null, connection = null, meetingId = null) => {
   try {
     const notification = new NotificationModel({
       recipient,
@@ -8,6 +8,7 @@ export const addNotification = async (recipient, sender, type, post = null, conn
       type,
       post,
       connection,
+      meetingId
     });
     if (sender === recipient) {
       return;

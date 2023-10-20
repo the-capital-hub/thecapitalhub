@@ -1,5 +1,6 @@
 import { ScheduleModel } from "../models/Schedule.js";
 import { UserModel } from "../models/User.js";
+import { addNotification } from "./notificationService.js";
 
 export const createMeeting = async (userId, meetingData) => {
   try {
@@ -87,6 +88,8 @@ export const requestBookingSlotById = async (meetingId, requestData) => {
     }
     meeting.requestedBy.push(requestData);
     await meeting.save();
+    const type = "meetingRequest";
+    await addNotification(meeting.userId, null, type, null, null, meeting._id);
     return {
       status: 200,
       message: "Booking request added successfully",
