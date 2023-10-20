@@ -18,18 +18,29 @@ import {
     UniqueFeatures,
   } from "../../../../Images/Ecommerace/FtechlandingPage";
   import "./FtechLandingPage.scss";
+  import { Helmet } from 'react-helmet';
+
   
   function FtechLandingPage() {
     return (
       <section className="landing-page container-fluid">
+        <Helmet>
+        <meta charSet="utf-8" />
+        <title>Simplify EMI and Loan Payments with Innovative Fintech Solutions
+</title>
+        <meta name="description" content=": Experience hassle-free financial management with our fintech solutions.
+Say goodbye to the stress of making loan payments on time and join our community for
+financial ease and security" />
+      </Helmet>
         <section className="intro">
           <h1 className="h1">
-            <span className="blue">EMI and loan payments made simple</span>
-            <span className="orange">, for you</span>
+            <span className="blue">Simplify EMI and Loan Payments with Innovative Fintech Solutions</span>
+            {/* <span className="orange">, for you</span> */}
           </h1>
           <p className="text-center my-2 my-lg-4">
-            Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit
-            proin risus Sit purus ante dictum in malesuada id.
+          Experience the ease of managing your finances with our fintech solutions.
+We make EMI and loan payments simple, tailored just for you. Say hello to hassle-free,
+stress-free financial management!
           </p>
           <div className="intro-main-img">
             <img src={IntroMain} alt="introduction image" className="mx-auto" />
@@ -38,13 +49,13 @@ import {
           <div className="short-description">
             <h2>
               <span className="blue">
-                At UIPE you won't have to worry about making
+              No More Late Payments
               </span>
-              <span className="orange"> loan payments on time !</span>
+              {/* <span className="orange"> loan payments on time !</span> */}
             </h2>
             <p className="text-center my-2 my-lg-4">
-              Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit
-              proin risus Sit purus ante dictum in malesuada id.
+            With our innovative fintech solutions, say goodbye to the stress of making
+loan payments on time! Experience financial freedom and peace of mind like never before
             </p>
           </div>
           <div className="feature-cards flex-column flex-md-row">
@@ -139,12 +150,13 @@ import {
           <div className="header row justify-content-between align-items-center">
             <div className="short-details col-md-5 text-white">
               <h2>
-                <span>Join us and never experience</span>
-                <span className="light-orange"> EMI problems again!</span>
+                <span>Join Our Fintech Community</span>
+                {/* <span className="light-orange"> EMI problems again!</span> */}
               </h2>
               <p>
-                Lorem ipsum dolor sit amet consectetur. At consequat purus
-                hendrerit proin risus Sit purus ante dictum in malesuada id.{" "}
+              Join us and wave goodbye to EMI woes with our cutting-edge fintech
+solutions. Say hello to financial ease and security like never before. Join our community
+today and never worry about EMI problems again!
               </p>
             </div>
             <div className="img-container col-md-4">
