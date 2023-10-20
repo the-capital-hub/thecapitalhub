@@ -48,7 +48,6 @@ export default function MySchedule() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const viewReq = useRef();
 
-
   const [view, setView] = useState("week");
   const [meetingsData, setMeetingsData] = useState(null);
   const dispatch = useDispatch();
@@ -101,7 +100,7 @@ export default function MySchedule() {
 
   const handleViewRequestClick = () => {
     viewReq.current.click();
-  }
+  };
 
   return (
     <MaxWidthWrapper>
@@ -117,7 +116,10 @@ export default function MySchedule() {
                 <ViewSelect setView={setView} view={view} />
               </div>
               <div className="mt-3 mt-lg-0">
-                <button className="btn-capital lh-1 py-2 py-md-3 me-2" onClick={handleViewRequestClick}>
+                <button
+                  className="btn-capital lh-1 py-2 py-md-3 me-2"
+                  onClick={handleViewRequestClick}
+                >
                   View requests
                 </button>
                 <button className="btn-capital lh-1 py-2 py-md-3">

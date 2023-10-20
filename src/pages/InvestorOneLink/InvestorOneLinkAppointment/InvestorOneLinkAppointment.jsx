@@ -78,14 +78,14 @@ export default function InvestorOneLinkAppointment() {
             </div>
 
             {/* Action buttons */}
-            <div className="action_buttons d-flex gap-3">
+            {/* <div className="action_buttons d-flex gap-3">
               <button className="bg-transparent border fs-5 py-3 rounded-3 w-50">
                 Cancel
               </button>
               <button className="btn-capital fs-5 py-3 w-50">
                 Create a Schedule
               </button>
-            </div>
+            </div> */}
           </div>
 
           {/* Meeting Info */}
