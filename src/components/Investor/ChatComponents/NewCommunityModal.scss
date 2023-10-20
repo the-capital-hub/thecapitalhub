@@ -7,7 +7,7 @@
     clip: rect(1px, 1px, 1px, 1px);
   }
 
-  input.visually-hidden:is(:focus, :focus-within) + label {
+  input.visually-hidden:is(:focus, :focus-within)+label {
     color: rgba(253, 89, 1, 1);
   }
 
@@ -41,6 +41,7 @@
     outline: 0;
     border: 1px solid #e7e7e7;
     transition: border 0.3s ease-in-out;
+
     &:focus {
       border: 1px solid #fd5901;
     }
@@ -52,6 +53,7 @@
 
   .search__members {
     border: 1px solid rgba(0, 0, 0, 0.1);
+
     &:focus-within {
       transition: border 0.3s ease-in-out;
       border: 1px solid #fd5901;
@@ -94,11 +96,28 @@
       transform: scale(0.95);
     }
   }
+
   img {
     height: 70px;
     width: 70px;
     border-radius: 50%;
   }
+
+  .success-message {
+    color: green;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+
+  .contacts-container {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+    padding: 5px;
+  }
+
 }
 
 .added-members {

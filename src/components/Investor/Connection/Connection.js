@@ -8,6 +8,7 @@ import {
   getUserConnections,
   pendingConnectionRequestsAPI,
   rejectConnectionAPI,
+  removeConnection,
 } from "../../../Service/user";
 import TimeAgo from "timeago-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -98,6 +99,25 @@ const Connection = () => {
     }
   };
 
+  const showRemoveConfirmation = () => {
+    return window.confirm("Are you sure you want to remove this connection?");
+  };
+
+  // removeConnectionHandler
+  const handleRemoveConnection = async (userId) => {
+    if (showRemoveConfirmation()) {
+      try {
+        await removeConnection(userId);
+        getUserConnections(loggedInUser._id).then((res) => {
+          setGetAllConnection(res.data);
+        });
+      } catch (error) {
+        console.log("Error removing connection: ", error);
+      }
+    }
+  };
+
+
   return (
     <MaxWidthWrapper>
       <div className="connection_main_container">
@@ -109,27 +129,24 @@ const Connection = () => {
               <nav className="connection_nav">
                 <a
                   href="#"
-                  className={`connection_nav_link ${
-                    selectedTab === "received" ? "active" : ""
-                  }`}
+                  className={`connection_nav_link ${selectedTab === "received" ? "active" : ""
+                    }`}
                   onClick={() => handleTabChange("received")}
                 >
                   Received
                 </a>
                 <a
                   href="#"
-                  className={`connection_nav_link ${
-                    selectedTab === "sent" ? "active" : ""
-                  }`}
+                  className={`connection_nav_link ${selectedTab === "sent" ? "active" : ""
+                    }`}
                   onClick={() => handleTabChange("sent")}
                 >
                   Sent
                 </a>
                 <a
                   href="#"
-                  className={`connection_nav_link ${
-                    selectedTab === "accepted" ? "active" : ""
-                  }`}
+                  className={`connection_nav_link ${selectedTab === "accepted" ? "active" : ""
+                    }`}
                   onClick={() => handleTabChange("accepted")}
                 >
                   Accepted
@@ -277,9 +294,8 @@ const Connection = () => {
                                 to={`/user/${data._id}`}
                                 className=" text-black text-decoration-none"
                               >
-                                {`${data.firstName ? data.firstName : "name"} ${
-                                  data.lastName ? data.lastName : ""
-                                }`}
+                                {`${data.firstName ? data.firstName : "name"} ${data.lastName ? data.lastName : ""
+                                  }`}
                               </Link>
                             </p>
                             <p className="connection_designation">
@@ -295,7 +311,12 @@ const Connection = () => {
                           </div>
                         </div>
                         <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-center">
-                          {/* You can add buttons or other elements for accepted connections */}
+                          <button
+                            onClick={() => handleRemoveConnection(data._id)}
+                            className="py-2 px-3 rounded-5"
+                          >
+                            Remove Connection
+                          </button>
                         </div>
                       </div>
                     ))

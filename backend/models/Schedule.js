@@ -6,17 +6,34 @@ const scheduleSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Users",
     },
-    startDateTime: {
+    start: {
       type: Date,
     },
-    endDateTime: {
+    end: {
       type: Date,
     },
     title: {
       type: String,
     },
     bookedBy: {
-      type: String,
+      name: {
+        type: String,
+      },
+      companyName: {
+        type: String,
+      },
+      email: {
+        type: String,
+      },
+      phone: {
+        type: String,
+      },
+      description: {
+        type: String,
+      },
+      oneLink: {
+        type: String,
+      },
     },
     requestedBy: [
       {
@@ -33,6 +50,9 @@ const scheduleSchema = new Schema(
           type: String,
         },
         description: {
+          type: String,
+        },
+        oneLink: {
           type: String,
         },
       },
