@@ -290,8 +290,11 @@
   }
 
   .visit_link {
-    // flex: 0 0 23rem;
     font-size: 1rem;
+
+    @media (min-width: 1200px) {
+      flex: 1 0 23rem;
+    }
   }
 
   .visit_btn {
