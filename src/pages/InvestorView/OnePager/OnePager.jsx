@@ -21,16 +21,17 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { useDispatch } from "react-redux";
-import OnePagerCompanyLogo from "../../../components/Shared/OnePager/OnePagerCompanyLogo/OnePagerCompanyLogo";
-import OnePagerCompanyInfo from "../../../components/Shared/OnePager/OnePagerCompanyInfo/OnePagerCompanyInfo";
-import OnePagerCompanyAbout from "../../../components/Shared/OnePager/OnePagerCompanyAbout/OnePagerCompanyAbout";
-import OnePagerMarketSize from "../../../components/Shared/OnePager/OnePagerMarketSize/OnePagerMarketSize";
-import OnePagerSocialLinks from "../../../components/Shared/OnePager/OnePagerSocialLinks/OnePagerSocialLinks";
-import OnePagerFundAsking from "../../../components/Shared/OnePager/OnePagerFundAsking/OnePagerFundAsking";
-import OnePagerRoadmap from "../../../components/Shared/OnePager/OnePagerRoadmap/OnePagerRoadmap";
-import OnePagerTable from "../../../components/Shared/OnePager/OnePagerProjections/OnePagerTable";
-import OnePagerProjections from "../../../components/Shared/OnePager/OnePagerProjections/OnePagerProjections";
-import OnePagerTeam from "../../../components/Shared/OnePager/OnePagerTeam/OnePagerTeam";
+import {
+  OnePagerCompanyLogo,
+  OnePagerCompanyInfo,
+  OnePagerCompanyAbout,
+  OnePagerMarketSize,
+  OnePagerSocialLinks,
+  OnePagerProjections,
+  OnePagerFundAsking,
+  OnePagerRoadmap,
+  OnePagerTeam,
+} from "../../../components/Shared/OnePager";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 
 const OnePager = () => {
@@ -169,7 +170,7 @@ const OnePager = () => {
             theme="investor"
           >
             {/* onePager Company Logo */}
-            <OnePagerCompanyLogo image={onePager?.logo} />
+            <OnePagerCompanyLogo image={onePager.logo} />
 
             {/* onePager company info */}
             <OnePagerCompanyInfo
@@ -180,7 +181,7 @@ const OnePager = () => {
               socialLinks={onePager.socialLinks}
             />
 
-            {/* onePager companay about */}
+            {/* onePager company about */}
             <OnePagerCompanyAbout
               description={onePager.description}
               problem={onePager.problem}
