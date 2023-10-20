@@ -111,7 +111,8 @@ const startUpSchema = new Schema(
       type: Number,
       // required: true
     },
-    fundingAsk: [
+    fundingAsk: Number,
+    fundingsAsk: [
       {
         requiredFor: String,
         Amount: String,
