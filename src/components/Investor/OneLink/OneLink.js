@@ -16,6 +16,18 @@ import { getStartupByFounderId } from "../../../Service/user";
 import SharingOneLinkPopUp from "../../PopUp/SharingOneLinkPopUp/SharingOneLinkPopUp";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import {
+  OnePagerCompanyAbout,
+  OnePagerCompanyInfo,
+  OnePagerCompanyLogo,
+  OnePagerFundAsking,
+  OnePagerMarketSize,
+  OnePagerProjections,
+  OnePagerRoadmap,
+  OnePagerSocialLinks,
+  OnePagerTeam,
+} from "../../Shared/OnePager";
+import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 
 const OneLink = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -54,14 +66,16 @@ const OneLink = () => {
     <MaxWidthWrapper>
       <div className="onelink_container">
         <div className="onelink_intro_container mt-sm-4 mt-md-2 mt-xxl-2">
-          <div className="main__content">
-            <SmallProfileCard text={"One Link"} />
-            <ShareLink
+          {/* Main content */}
+          {company.length !== 0 ? (
+            <div className="main__content onePager_wrapper d-flex flex-column gap-4">
+              {/* <SmallProfileCard text={"One Link"} /> */}
+              {/* <ShareLink
               OneLink={company?.oneLink}
               onExitClick={handleExitClick}
               isExitClicked={isExitClicked}
-            />
-            <IntroductoryMessage
+            /> */}
+              {/* <IntroductoryMessage
               title={"Introductory message"}
               image={{
                 threeDots: ThreeDotsImage,
@@ -73,15 +87,90 @@ const OneLink = () => {
               input={true}
               isExitClicked={isExitClicked}
               setCompany={setCompany}
-            />
-          </div>
+            /> */}
+
+              {/* New OnePager start*/}
+              {/* onePager Company Logo */}
+              <OnePagerCompanyLogo image={company.logo} />
+
+              {/* onePager company info */}
+              <OnePagerCompanyInfo
+                company={company.company}
+                location={company.location}
+                startedAtDate={company.startedAtDate}
+                keyFocus={company.keyFocus}
+                socialLinks={company.socialLinks}
+              />
+
+              {/* New OnePager end */}
+            </div>
+          ) : (
+            <SpinnerBS className={"d-flex justify-content-center w-100 py-5"} />
+          )}
+
+          {/* Rightside content */}
           <div className="right__content">
             <RightProfileCard />
             <RecommendationCard />
             {/* <NewsCorner /> */}
           </div>
         </div>
-        <OnePagePreview show={true} />
+        {/* <OnePagePreview show={true} /> */}
+
+        {/* New OnePager start */}
+        {company.length !== 0 ? (
+          <div className="onePager_wrapper d-flex flex-column gap-4">
+            {/* onePager company about */}
+            <OnePagerCompanyAbout
+              description={company.description}
+              problem={company.problem}
+              solution={company.solution}
+              showEdit={true}
+            />
+
+            {/* onePager Market info */}
+            <div className="bg-white rounded-4 border shadow-sm">
+              <div className="border-bottom">
+                <div className="px-3 px-lg-4 py-5 d-flex flex-column gap-5">
+                  {/* Market Size */}
+                  <OnePagerMarketSize />
+                  {/* Social Links */}
+                  <OnePagerSocialLinks />
+                  {/* Projections */}
+                  <OnePagerProjections />
+                  {/* Fund Asking */}
+                  <OnePagerFundAsking />
+                  {/* Roadmap */}
+                  <OnePagerRoadmap />
+                  {/* Team */}
+                  <OnePagerTeam team={company.team} />
+                </div>
+              </div>
+
+              {/* Action buttons */}
+              <div className="onePager_action_buttons px-3 px-lg-4 py-5 d-flex align-items-center justify-content-center justify-content-md-end">
+                <div className="action_buttons_container d-flex flex-column flex-md-row gap-4">
+                  <button
+                    type="button"
+                    className="text-black rounded-pill onePager_action_save"
+                  >
+                    Save Draft
+                  </button>
+                  <button
+                    type="button"
+                    className="text-white rounded-pill onePager_action_publish"
+                  >
+                    Publish
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <SpinnerBS className={"d-flex justify-content-center w-100 py-5"} />
+        )}
+
+        {/* New OnePager end */}
         {isExitClicked && company.introductoryMessage && (
           <SharingOneLinkPopUp
             introMessage={company.introductoryMessage}

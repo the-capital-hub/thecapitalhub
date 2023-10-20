@@ -34,6 +34,12 @@ const scheduleSchema = new Schema(
       oneLink: {
         type: String,
       },
+      start: {
+        type: Date,
+      },
+      end: {
+        type: Date,
+      },
     },
     requestedBy: [
       {
@@ -54,6 +60,12 @@ const scheduleSchema = new Schema(
         },
         oneLink: {
           type: String,
+        },
+        start: {
+          type: Date,
+        },
+        end: {
+          type: Date,
         },
       },
     ],

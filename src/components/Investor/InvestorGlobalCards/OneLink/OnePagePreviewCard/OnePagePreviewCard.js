@@ -124,25 +124,25 @@ const OnePagePreviewCard = ({ company, page }) => {
         company?.solution || "Enter the solution your startup is offering",
     },
     {
-      field: "competitiveLandscape",
-      title: "3.Competitive Landscape",
+      field: "marketLandscape",
+      title: "3.Market Landscape",
       content: company?.competitiveLandscape || "Mention your competitors",
     },
-    {
-      field: "growthModel",
-      title: "4.Revenue Model",
-      content: company?.growthModel || "Your startup’s revenue model",
-    },
-    {
-      field: "growthStrategy",
-      title: "5.Growth Strategy",
-      content: company?.growthStrategy || "Your Growth startegy",
-    },
-    {
-      field: "marketTraction",
-      title: "6.Market Traction",
-      content: company?.marketTraction || "Your Market traction",
-    },
+    // {
+    //   field: "growthModel",
+    //   title: "4.Revenue Model",
+    //   content: company?.growthModel || "Your startup’s revenue model",
+    // },
+    // {
+    //   field: "growthStrategy",
+    //   title: "5.Growth Strategy",
+    //   content: company?.growthStrategy || "Your Growth startegy",
+    // },
+    // {
+    //   field: "marketTraction",
+    //   title: "6.Market Traction",
+    //   content: company?.marketTraction || "Your Market traction",
+    // },
     // { title: "7.Business Model", content: "Your Business Model" },
   ];
 
@@ -164,12 +164,12 @@ const OnePagePreviewCard = ({ company, page }) => {
 
   return (
     <>
-      <div className="onepage_card_container">
+      <div className="onepage_card_container ">
         {cardData.map((card, index) => (
-          <div className="" key={index}>
-            <div className="card m-0">
+          <div className="card_item" key={index} >
+            <div className="card m-0  ">
               <div
-                className="card-body "
+                className="card-body   "
                 onClick={() => setEditableIndex(index)}
               >
                 <h5 className="card-title px-2">{card.title}</h5>

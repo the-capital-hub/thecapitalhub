@@ -50,8 +50,15 @@ export default function BigCalendar({
 
   // Handle Select event
   const handleSelectEvent = useCallback((meeting) => {
-    // console.log("to delete", meeting);
+    if (!investor) {
+      // Check if selected slot is in the past
+      if (moment(meeting.start, "min").isBefore(moment(), "min")) {
+        window.alert("Unable to travel to past!");
+        return;
+      }
+    }
 
+    // console.log("to delete", meeting);
     // Set selectedMeeting
     setSelectedMeeting(meeting);
     if (investor) {

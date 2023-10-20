@@ -1100,3 +1100,40 @@ export const requestMeetingAPI = async (meetingId, requestData) => {
     throw error;
   }
 };
+
+export const getAllMeetingRequests = async () => {
+  try {
+    const response = await axiosInstance.get(
+      `${API.getAllMeetingRequests}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error getting meeting requests:", error);
+    throw error;
+  }
+};
+
+export const acceptMeetingRequest = async (meetingId, requestId) => {
+  try {
+    const response = await axiosInstance.post(
+      `${API.acceptMeetingRequest}/${meetingId}/${requestId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error accepting request:", error);
+    throw error;
+  }
+};
+
+export const getNotificationCount = async () => {
+  try {
+    const response = await axiosInstance.get(
+      `${API.getNotificationCount}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error accepting request:", error);
+    throw error;
+  }
+};
+

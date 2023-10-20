@@ -7,13 +7,18 @@ import {
 } from "../../../../PopUp/ModalBS";
 import SpinnerBS from "../../../../Shared/Spinner/SpinnerBS";
 import { deleteMeeting } from "../../../../../Service/user";
+import Linkify from "react-linkify";
 
 export default function EditMeetingModal({ selectedMeeting, setMeetings }) {
   // States for loading and alert
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
   const closeRef = useRef();
+  const [showMoreDetails, setShowMoreDetails] = useState(false);
 
+  const toggleShowMore = () => {
+    setShowMoreDetails(!showMoreDetails);
+  };
   //   Handle Edit meeting
   async function handleEditMeeting(e) {
     e.preventDefault();
@@ -108,12 +113,47 @@ export default function EditMeetingModal({ selectedMeeting, setMeetings }) {
                 <p className="m-0">{selectedMeeting?.title}</p>
               </fieldset>
 
+              {selectedMeeting?.bookedBy && (
+                <fieldset>
+                  <legend>Booked By</legend>
+                  <div>
+                    <p className="m-0">
+                      <span className="booked-by-name">
+                        {selectedMeeting?.bookedBy.name}
+                      </span>
+                      {showMoreDetails ? (
+                        <span className="view-more" onClick={toggleShowMore}>
+                          View Less
+                        </span>
+                      ) : (
+                        <span className="view-more" onClick={toggleShowMore}>
+                          View More
+                        </span>
+                      )}
+                    </p>
+                    {showMoreDetails && (
+                      <div className="booked-by-details">
+                        <p><strong>Company:</strong> {selectedMeeting?.bookedBy.companyName}</p>
+                        <p><strong>Email:</strong> {selectedMeeting?.bookedBy.email}</p>
+                        <p><strong>Phone:</strong> {selectedMeeting?.bookedBy.phone}</p>
+                        <p><strong>Agenda:</strong> {selectedMeeting?.bookedBy.description}</p>
+                        <p><strong>OneLink:</strong>
+                          <Linkify>
+                            {selectedMeeting?.bookedBy.oneLink}
+                          </Linkify>
+                        </p>
+
+                      </div>
+                    )}
+                  </div>
+                </fieldset>
+              )}
+
               {/* Submit */}
               <button
                 type="button"
-                className={`btn btn-danger d-flex justify-content-center align-items-center gap-2 ${
-                  loading ? "opacity-50" : ""
-                } `}
+                className={`btn btn-danger d-flex justify-content-center align-items-center gap-2 ${loading ? "opacity-50" : ""
+                  } `}
                 disabled={loading}
                 onClick={handleDeleteMeeting}
               >

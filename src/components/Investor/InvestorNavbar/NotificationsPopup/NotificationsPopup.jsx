@@ -71,6 +71,17 @@ function NotificationsPopup({ toggleVisibility }) {
           </span>
         );
       }
+      case "meetingRequest": {
+        return (
+          <span>
+            You have a new{" "}
+            <Link to={`/investor/my-schedule?view=true`} className="fw-bold">
+              meeting
+            </Link>
+            {" "} request
+          </span>
+        );
+      }
       default: {
         return "";
       }
@@ -111,7 +122,7 @@ function NotificationsPopup({ toggleVisibility }) {
               .map(
                 ({
                   _id,
-                  sender: { firstName, lastName, _id: userId },
+                  sender,
                   type,
                   createdAt,
                   isRead,
@@ -122,11 +133,11 @@ function NotificationsPopup({ toggleVisibility }) {
                     <div className="content d-flex flex-column gap-2">
                       <p className="m-0">
                         <Link
-                          to={`/user/${userId}`}
+                          to={`/user/${sender?._id}`}
                           className="fw-bold"
                           onClick={() => toggleVisibility(false)}
                         >
-                          {firstName} {lastName}
+                          {sender?.firstName} {sender?.lastName}
                         </Link>{" "}
                         {notificationType(type, post || connection)}
                       </p>
