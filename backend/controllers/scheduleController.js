@@ -4,6 +4,7 @@ import {
   requestBookingSlotById,
   deleteMeeting,
   acceptRequestById,
+  getAllRequestedByForUser,
 } from "../services/scheduleService.js";
 
 export const createMeetingController = async (req, res) => {
@@ -73,6 +74,20 @@ export const acceptRequestController = async (req, res) => {
     return res.status(500).json({
       status: 500,
       message: "An error occurred while accepting the request.",
+    });
+  }
+};
+
+export const getAllRequestedByForUserController = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const response = await getAllRequestedByForUser(userId);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      status: 500,
+      message: "An error occurred while retrieving 'requested by' data for the user.",
     });
   }
 };

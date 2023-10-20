@@ -1,27 +1,35 @@
 import { ScheduleModel } from "../models/Schedule.js";
 import { UserModel } from "../models/User.js";
+import { addNotification, deleteNotification } from "./notificationService.js";
 
 export const createMeeting = async (userId, meetingData) => {
   try {
-    const start = new Date(meetingData.start);
-    const end = new Date(meetingData.end);
+    const startDate = new Date(meetingData.start);
+    const endDate = new Date(meetingData.end);
     const existingMeeting = await ScheduleModel.findOne({
       userId: userId,
       $or: [
         {
           $and: [
-            { start: { $lte: start } },
-            { end: { $gt: start } },
+            { start: { $lte: startDate } },
+            { end: { $gt: startDate } },
           ],
         },
         {
           $and: [
-            { start: { $lt: end } },
-            { end: { $gte: end } },
+            { start: { $lt: endDate } },
+            { end: { $gte: endDate } },
+          ],
+        },
+        {
+          $and: [
+            { start: { $gte: startDate } },
+            { end: { $lte: endDate } },
           ],
         },
       ],
     });
+
     if (existingMeeting) {
       return {
         status: 409,
@@ -85,8 +93,19 @@ export const requestBookingSlotById = async (meetingId, requestData) => {
         message: "Meeting not found with the provided ID.",
       };
     }
+    if (meeting.bookedBy && meeting.bookedBy.name) {
+      return {
+        status: 400,
+        message: "Meeting is already booked.",
+      };
+    }
+
+    requestData.start = meeting.start;
+    requestData.end = meeting.end;
     meeting.requestedBy.push(requestData);
     await meeting.save();
+    const type = "meetingRequest";
+    await addNotification(meeting.userId, null, type, null, null, meeting._id);
     return {
       status: 200,
       message: "Booking request added successfully",
@@ -107,6 +126,8 @@ export const deleteMeeting = async (meetingId, userId) => {
       _id: meetingId,
       userId: userId,
     });
+    const type = "meetingRequest";
+    deleteNotification(meeting.userId, null, type, meetingId);
     if (!meeting) {
       return {
         status: 404,
@@ -137,6 +158,8 @@ export const acceptRequestById = async (meetingId, requestId) => {
         message: "Meeting not found with the provided ID.",
       };
     }
+    const type = "meetingRequest";
+    deleteNotification(meeting.userId, null, type, meetingId);
     const requestToAccept = meeting.requestedBy.find(
       (request) => request._id.toString() === requestId
     );
@@ -146,6 +169,7 @@ export const acceptRequestById = async (meetingId, requestId) => {
         message: "Request not found with the provided ID for this meeting.",
       };
     }
+    meeting.requestedBy = [];
     meeting.bookedBy = {
       name: requestToAccept.name,
       companyName: requestToAccept.companyName,
@@ -153,6 +177,8 @@ export const acceptRequestById = async (meetingId, requestId) => {
       phone: requestToAccept.phone,
       description: requestToAccept.description,
       oneLink: requestToAccept.oneLink,
+      start: requestToAccept.start,
+      end: requestToAccept.end,
     };
     await meeting.save();
     return {
@@ -165,6 +191,41 @@ export const acceptRequestById = async (meetingId, requestId) => {
     return {
       status: 500,
       message: "An error occurred while accepting the request.",
+    };
+  }
+};
+
+export const getAllRequestedByForUser = async (userId) => {
+  try {
+    const userMeetings = await ScheduleModel.find({ userId: userId });
+    const userRequestedBy = [];
+    userMeetings.forEach((meeting) => {
+      meeting.requestedBy.forEach((request) => {
+        userRequestedBy.push({
+          _id: request._id,
+          meetingId: meeting._id,
+          name: request.name,
+          companyName: request.companyName,
+          email: request.email,
+          phone: request.phone,
+          agenda: request.description,
+          oneLink: request.oneLink,
+          start: request.start,
+          end: request.end,
+        });
+      });
+    });
+
+    return {
+      status: 200,
+      message: "All 'requested by' data for the user retrieved successfully",
+      data: userRequestedBy,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while retrieving 'requested by' data for the user.",
     };
   }
 };

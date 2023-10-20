@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
-import { getSearchResultsAPI } from "../../../Service/user";
+import { getSearchResultsAPI, getNotificationCount } from "../../../Service/user";
 import NotificationsPopup from "./NotificationsPopup/NotificationsPopup";
 import { useRef } from "react";
 
@@ -25,6 +25,16 @@ const InvestorNavbar = (props) => {
   const [toggleNotificationPopup, setToggleNotificationPopup] = useState(false);
   const notificationPopup = useRef();
   const navigate = useNavigate();
+  const [notificationCount, setNotificationCount] = useState(0);
+
+  useEffect(() => {
+    getNotificationCount()
+      .then(({ data }) => {
+        console.log(data.unreadCount);
+        setNotificationCount(data.unreadCount)
+      })
+      .catch((error) => console.error(error));
+  }, []);
 
   // useEffect(() => {
   //   let url = window.location.href;
@@ -344,6 +354,9 @@ const InvestorNavbar = (props) => {
                     width={50}
                     onClick={() => setToggleNotificationPopup((prev) => !prev)}
                   />
+                )}
+                {!toggleNotificationPopup && notificationCount > 0 && (
+                  <div className="notification-count">{notificationCount}</div>
                 )}
                 {toggleNotificationPopup && (
                   <NotificationsPopup
