@@ -69,7 +69,7 @@ const OnePager = () => {
 
   // Handle download PDF
   const handleDownloadPDF = () => {
-    const element = document.querySelector(".onePager");
+    const element = document.querySelector(".onePager_wrapper");
     const buttons = document.querySelectorAll(".buttons button");
     buttons.forEach((button) => {
       button.style.display = "none";
@@ -107,7 +107,7 @@ const OnePager = () => {
 
   // Handle preview PDF
   const handlePreviewPDF = () => {
-    const element = document.querySelector(".onePager");
+    const element = document.querySelector(".onePager_wrapper");
     const buttons = document.querySelectorAll(".buttons button");
     buttons.forEach((button) => {
       button.style.display = "none";
@@ -212,14 +212,16 @@ const OnePager = () => {
                   <button
                     type="button"
                     className="text-black rounded-pill onePager_action_save"
+                    onClick={handlePreviewPDF}
                   >
-                    Save Draft
+                    Preview
                   </button>
                   <button
                     type="button"
                     className="text-white rounded-pill onePager_action_publish"
+                    onClick={handleDownloadPDF}
                   >
-                    Publish
+                    Download
                   </button>
                 </div>
               </div>
