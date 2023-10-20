@@ -316,11 +316,13 @@
 
 .one_link_edit_view_section {
   background: #fff;
+
   input {
     border: none;
     outline: none;
     color: black;
   }
+
   h5 {
     position: absolute;
     font-size: 10px;
@@ -331,30 +333,36 @@
     padding: 2px;
     color: #fd5901;
   }
+
   input {
     border-radius: 10px;
     height: 69px;
   }
-  h4{
+
+  h4 {
     margin-top: 10px;
     font-size: 20px;
   }
+
   .img_company_data {
     .img_right {
       border: 1px solid red;
+
       // height: 120px;
       img {
         width: 194px;
         height: 203px;
       }
+
       span {
         top: 35%;
         font-size: 20px;
         left: 16px;
         text-align: center;
-       
+
       }
     }
+
     .compant_data {
       width: 100%;
 
@@ -362,138 +370,176 @@
         position: relative;
         border: 1px solid #e2e2e2;
         border-radius: 10px;
-        
+
       }
-      .location_data_div{
-        .country{   
+
+      .location_data_div {
+        .country {
           position: relative;
           border: 1px solid #e2e2e2;
           border-radius: 10px;
         }
-        .founded{
+
+        .founded {
           position: relative;
           border: 1px solid #e2e2e2;
           border-radius: 10px;
         }
-       
+
       }
-      .tags_inp{
+
+      .tags_inp {
         position: relative;
-          border: 1px solid #e2e2e2;
-          border-radius: 10px;
+        border: 1px solid #e2e2e2;
+        border-radius: 10px;
       }
     }
   }
-  .link_section{
-    .web_link{
+
+  .link_section {
+    .web_link {
       position: relative;
-          border: 1px solid #e2e2e2;
-          border-radius: 10px;
-          margin-top: 20px;
+      border: 1px solid #e2e2e2;
+      border-radius: 10px;
+      margin-top: 20px;
     }
-    .social_links{
-      .links{
+
+    .social_links {
+      .links {
         position: relative;
         border: 1px solid #e2e2e2;
         border-radius: 10px;
         margin-top: 20px;
       }
-     
+
     }
   }
-  .about_company_section{
+
+  .about_company_section {
     position: relative;
-        border: 1px solid #e2e2e2;
-        border-radius: 10px;
-        margin-top: 20px;
-        textarea{
-          color: rgba(0, 0, 0, 0.63);
-          font-family: Poppins;
-          font-size: 12px;
-          font-style: normal;
-          font-weight: 400;
-          line-height: normal;
-          outline: none;
-          border: none;
-          min-height: calc(140px - 32px);
-          border-radius: 10px;
-        }
-  }
-  .market_size{
-    .market{
-      position: relative;
-      border: 1px solid #e2e2e2;
+    border: 1px solid #e2e2e2;
+    border-radius: 10px;
+    margin-top: 20px;
+
+    textarea {
+      color: rgba(0, 0, 0, 0.63);
+      font-family: Poppins;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      outline: none;
+      border: none;
+      min-height: calc(140px - 32px);
       border-radius: 10px;
-      margin-top: 20px;
     }
-  
   }
-  .competitor_social_link{
-    .competitor_link{
+
+  .market_size {
+    .market {
       position: relative;
       border: 1px solid #e2e2e2;
       border-radius: 10px;
       margin-top: 20px;
-    
     }
 
   }
-  .table_section{
+
+  .competitor_social_link {
+    .competitor_link {
+      position: relative;
+      border: 1px solid #e2e2e2;
+      border-radius: 10px;
+      margin-top: 20px;
+
+    }
+
+  }
+
+  .table_section {
     overflow-x: auto;
   }
-  .fund_sking_section{
-    .fund_asking{
+
+  .fund_sking_section {
+    .fund_asking {
       position: relative;
       border: 1px solid #e2e2e2;
       border-radius: 10px;
       margin-top: 20px;
     }
   }
-  .roadmap_section{
-.Roadmap{
-  position: relative;
-  border: 1px solid #e2e2e2;
-  border-radius: 10px;
-  margin-top: 20px;
-}
+
+  .add_row_btn {
+    margin-top: 10px;
+    padding: 0.25em 1em;
+    border-radius: 5px;
   }
-  .team_section{
+  .delete_row_btn {
+    margin-top: 10px;
+    padding: 0.15em 0.5em; /* Adjust the padding */
+    border-radius: 5px;
+    font-size: 14px; /* Adjust the font size */
+    border: none; /* Remove the border */
+    background: transparent; /* Make the background transparent */
+    cursor: pointer; /* Change cursor on hover */
+  }
+  
+  
+
+  .startup {
+    border: 1px solid #fd5901;
+    background-color: #fd5901;
+    color: white;
+  }
+  .roadmap_section {
+    .Roadmap {
+      position: relative;
+      border: 1px solid #e2e2e2;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+  }
+
+  .team_section {
     overflow-x: auto;
   }
+
   .button_preview_download_section {
-          .download_button_container {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 2rem;
-            margin: 15px;
+    .download_button_container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 2rem;
+      margin: 15px;
+    }
+
+    button {
+      border-radius: 50px;
+      width: 25%;
+      min-width: 150px;
+      max-width: 250px;
+      height: 60px;
+      flex-shrink: 0;
+      // margin-bottom: 10px;
+      background-color: #fff;
+      border-radius: 50px;
+      border: 1px solid #fd5901;
+      color: #fd5901;
+      // margin-right: 10px;
+    }
+
+    .download_button {
+      background: #fd5901;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+      border: none;
+      color: #fff;
+      width: 25%;
+      min-width: 150px;
+      max-width: 250px;
+    }
   }
-  button {
-            border-radius: 50px;
-            width: 25%;
-            min-width: 150px;
-            max-width: 250px;
-            height: 60px;
-            flex-shrink: 0;
-            // margin-bottom: 10px;
-            background-color: #fff;
-            border-radius: 50px;
-            border: 1px solid #fd5901;
-            color: #fd5901;
-            // margin-right: 10px;
-          }
-  .download_button {
-            background: #fd5901;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 10px;
-            border: none;
-            color: #fff;
-            width: 25%;
-            min-width: 150px;
-            max-width: 250px;
-  }    
-}
 }

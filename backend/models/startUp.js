@@ -111,13 +111,16 @@ const startUpSchema = new Schema(
       type: Number,
       // required: true
     },
-    fundingAsk: Number,
-    fundingsAsk: [
-      {
-        requiredFor: String,
-        Amount: String,
-      }
-    ],
+    fundingAsk: {
+      type: Number,
+      // required: true
+    },
+    // fundingsAsk: [
+    //   {
+    //     requiredFor: String,
+    //     Amount: String,
+    //   }
+    // ],
     roadMap: [
       {
         date: String,
