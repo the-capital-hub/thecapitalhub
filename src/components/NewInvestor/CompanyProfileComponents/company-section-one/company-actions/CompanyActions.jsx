@@ -1,7 +1,10 @@
 import { Bookmark } from "../../../../../Images/Investor/CompanyProfile";
 import "./CompanyActions.scss";
+import { useLocation } from "react-router-dom";
 
 export default function CompanyActions({ isOnelink = false }) {
+  let location = useLocation();
+
   return (
     <div className="company__actions d-flex flex-column justify-content-end ">
       {isOnelink ? (
@@ -19,7 +22,9 @@ export default function CompanyActions({ isOnelink = false }) {
             Connect with the Founder
           </button>
         )}
-        <button className="btn-capital actions-btn">Invest Now</button>
+        {!location.pathname === "/company-profile" && (
+          <button className="btn-capital actions-btn">Invest Now</button>
+        )}
       </div>
     </div>
   );

@@ -227,6 +227,7 @@
   --color-main-light: rgba(253, 89, 1, 0.2);
   --color-link-button: rgba(253, 89, 1, 1);
   --color-button-text: white;
+  --color-market-border: rgba(231, 231, 231, 1);
 }
 
 .onePager_wrapper[theme="investor"] {
@@ -234,6 +235,7 @@
   --color-main: rgba(148, 193, 0, 1);
   --color-main-light: rgba(148, 193, 0, 0.2);
   --color-button-text: black;
+  --color-market-border: rgba(148, 193, 0, 1);
 }
 
 .onePager_wrapper {
@@ -328,7 +330,8 @@
   }
 
   .main_border {
-    border: 2px solid var(--color-main);
+    border: 2px solid var(--color-market-border);
+    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.05);
   }
 
   .three_col_grid {
