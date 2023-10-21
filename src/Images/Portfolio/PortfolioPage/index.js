@@ -6,6 +6,12 @@ import impactshall from './impactshaal.png'
 import men from './men.png'
 import startup from './startup.png'
 import yesgobus from "./yesgobus.png"
+import uipe from './uipe.jpg'
+import uipe_logo from './uipe_logo.png'
+import tiffinbuddy_logo from './tiffinbuddy-logo.jpg'
+import tiffinbuddy from './tiffinbuddy.jpg'
+
+ 
 
 export default {
     books,
@@ -15,6 +21,10 @@ export default {
     impactshall,
     men,
     startup,
-    yesgobus
+    yesgobus,
+    uipe,
+    uipe_logo,
+    tiffinbuddy_logo,
+    tiffinbuddy
 
 }

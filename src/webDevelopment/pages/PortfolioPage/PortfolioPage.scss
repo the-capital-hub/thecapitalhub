@@ -22,6 +22,8 @@
       }
       p {
         padding: 10px;
+        padding-bottom: 20px;
+
       }
     }
     .box_one {
@@ -45,10 +47,20 @@
       }
     }
     .box_five {
-      background-image: url("../../../Images/Portfolio/PortfolioPage/books.png");
+      background-image: url("../../../Images/Portfolio/PortfolioPage/uipe.jpg");
+      img {
+        width: 80px;
+        height: 80px;
+        padding: 10px;
+      }
     }
     .box_six {
-      background-image: url("../../../Images/Portfolio/PortfolioPage/startup.png");
+      background-image: url("../../../Images/Portfolio/PortfolioPage/tiffinbuddy.jpg");
+      img {
+        width: 80px;
+        height: 80px;
+        padding: 10px;
+      }
     }
   }
   .botton_section {
