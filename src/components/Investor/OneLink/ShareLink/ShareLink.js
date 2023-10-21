@@ -8,7 +8,12 @@ import { Link } from "react-router-dom";
 import IconLink from "../../SvgIcons/IconLink";
 import { useSelector } from "react-redux";
 
-const ShareLink = ({ OneLink, onExitClick, investor = false, isExitClicked }) => {
+const ShareLink = ({
+  OneLink,
+  onExitClick,
+  investor = false,
+  isExitClicked,
+}) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   return (
@@ -20,7 +25,9 @@ const ShareLink = ({ OneLink, onExitClick, investor = false, isExitClicked }) =>
           </section>
           <hr />
           {isExitClicked && (OneLink === undefined || OneLink === "") && (
-            <div className="warning_message">Please fill company details to get the Onelink.</div>
+            <div className="warning_message">
+              Please fill company details to get the Onelink.
+            </div>
           )}
           <Link
             // to={"/onelink/" + oneLink.OneLink}
@@ -40,8 +47,14 @@ const ShareLink = ({ OneLink, onExitClick, investor = false, isExitClicked }) =>
                 value={
                   OneLink
                     ? investor
-                      ? "thecapitalhub.in/investor/onelink/" + OneLink + "/" + loggedInUser.oneLinkId
-                      : "thecapitalhub.in/onelink/" + OneLink + "/" + loggedInUser.oneLinkId
+                      ? "thecapitalhub.in/investor/onelink/" +
+                        OneLink +
+                        "/" +
+                        loggedInUser.oneLinkId
+                      : "thecapitalhub.in/onelink/" +
+                        OneLink +
+                        "/" +
+                        loggedInUser.oneLinkId
                     : ""
                 }
                 disabled
