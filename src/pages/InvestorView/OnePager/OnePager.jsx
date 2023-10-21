@@ -163,7 +163,7 @@ const OnePager = () => {
 
   return (
     <MaxWidthWrapper>
-      <div className="border_left ps-xl-3 mb-5">
+      <div className=" ps-xl-3 mb-5">
         {onePager.length !== 0 ? (
           <div
             className="onePager_wrapper d-flex flex-column gap-4"

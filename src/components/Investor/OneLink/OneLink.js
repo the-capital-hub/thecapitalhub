@@ -67,15 +67,18 @@ const OneLink = () => {
       <div className="onelink_container">
         <div className="onelink_intro_container mt-sm-4 mt-md-2 mt-xxl-2">
           {/* Main content */}
-          {company.length !== 0 ? (
-            <div className="main__content onePager_wrapper d-flex flex-column gap-4">
-              {/* <SmallProfileCard text={"One Link"} /> */}
-              {/* <ShareLink
+
+          <div className="main__content">
+            {/* <SmallProfileCard text={"One Link"} /> */}
+            {/* ShareLink */}
+            <ShareLink
               OneLink={company?.oneLink}
               onExitClick={handleExitClick}
               isExitClicked={isExitClicked}
-            /> */}
-              {/* <IntroductoryMessage
+            />
+
+            {/* Introductory message */}
+            <IntroductoryMessage
               title={"Introductory message"}
               image={{
                 threeDots: ThreeDotsImage,
@@ -87,26 +90,8 @@ const OneLink = () => {
               input={true}
               isExitClicked={isExitClicked}
               setCompany={setCompany}
-            /> */}
-
-              {/* New OnePager start*/}
-              {/* onePager Company Logo */}
-              <OnePagerCompanyLogo image={company.logo} />
-
-              {/* onePager company info */}
-              <OnePagerCompanyInfo
-                company={company.company}
-                location={company.location}
-                startedAtDate={company.startedAtDate}
-                keyFocus={company.keyFocus}
-                socialLinks={company.socialLinks}
-              />
-
-              {/* New OnePager end */}
-            </div>
-          ) : (
-            <SpinnerBS className={"d-flex justify-content-center w-100 py-5"} />
-          )}
+            />
+          </div>
 
           {/* Rightside content */}
           <div className="right__content">
@@ -120,6 +105,18 @@ const OneLink = () => {
         {/* New OnePager start */}
         {company.length !== 0 ? (
           <div className="onePager_wrapper d-flex flex-column gap-4">
+            <OnePagerCompanyLogo image={company.logo} />
+
+            {/* onePager company info */}
+            <OnePagerCompanyInfo
+              company={company.company}
+              location={company.location}
+              startedAtDate={company.startedAtDate}
+              keyFocus={company.keyFocus}
+              socialLinks={company.socialLinks}
+              showEdit={true}
+            />
+
             {/* onePager company about */}
             <OnePagerCompanyAbout
               description={company.description}
@@ -148,7 +145,7 @@ const OneLink = () => {
               </div>
 
               {/* Action buttons */}
-              <div className="onePager_action_buttons px-3 px-lg-4 py-5 d-flex align-items-center justify-content-center justify-content-md-end">
+              {/* <div className="onePager_action_buttons px-3 px-lg-4 py-5 d-flex align-items-center justify-content-center justify-content-md-end">
                 <div className="action_buttons_container d-flex flex-column flex-md-row gap-4">
                   <button
                     type="button"
@@ -163,7 +160,7 @@ const OneLink = () => {
                     Publish
                   </button>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         ) : (

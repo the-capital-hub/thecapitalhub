@@ -335,7 +335,7 @@ function Company() {
 
     // Newer version of company profile
     <MaxWidthWrapper>
-      <div className="border_left">
+      <div className="">
         <div className="company__profile__container m-3 mt-5 mt-xl-3">
           {onePager.length !== 0 ? (
             <CompanyProfile isOnelink={true} companyData={onePager} />

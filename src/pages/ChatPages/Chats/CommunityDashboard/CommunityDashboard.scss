@@ -1,5 +1,6 @@
 .community_dashboard_container {
-  height: 85vh;
+  // -190px because chat nav is fixed to 106px and there is some margin at the top and bottom.
+  height: calc(100vh - 190px);
   border-radius: 30px;
   border: 1px solid #cfcfcf;
   background: #fff;
@@ -13,6 +14,10 @@
 
   @media (max-width: 820px) {
     border-radius: 15px;
+  }
+
+  @media (min-width: 821px) {
+    height: 85vh;
   }
 
   .name_title {

@@ -8,12 +8,16 @@
     // width: 300px;
     // background-color: #eaeef2;
     position: fixed;
-    top: calc(80px + 6%);
+    top: calc(80px + 0%);
     left: 0;
     bottom: 0;
     z-index: 10;
     transition: width 0.3s ease;
     overflow: scroll;
+
+    @media (min-width: 821px) {
+      top: calc(80px + 5%);
+    }
 
     // Add class for sidebar in fixed position
     &.fixed {

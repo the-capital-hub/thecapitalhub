@@ -62,7 +62,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
 
   function handleMyCommunityClick() {
     navigate("/chats?isCommunityOpen=true");
-  } 
+  }
 
   return (
     <div
@@ -79,7 +79,9 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
       }}
     >
       <div
-        className={`close-menu ${!sidebarCollapsed && "close-btn-collapsed"} d-lg-none`}
+        className={`close-menu ${
+          !sidebarCollapsed && "close-btn-collapsed"
+        } d-none`}
         onClick={menuIconClick}
       >
         {sidebarCollapsed ? (
