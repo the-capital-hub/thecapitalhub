@@ -8,9 +8,6 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function ValidateOneLink({ children, ...props }) {
-  // Fetch loggedInUser
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
-
   const { userId } = useParams();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const handleSidebarToggle = () => {
@@ -30,7 +27,7 @@ function ValidateOneLink({ children, ...props }) {
 
   return (
     <>
-      {!loggedInUser._id === "64e9fd9d4e368da2bf3e721f" &&
+      {!userId === "184455" &&
       (!oneLinkUser || !oneLinkLoggedIn || userId !== oneLinkId) ? (
         <OneLinkValidation userId={userId} />
       ) : (
