@@ -27,8 +27,7 @@ function ValidateOneLink({ children, ...props }) {
 
   return (
     <>
-      {!userId === "184455" &&
-      (!oneLinkUser || !oneLinkLoggedIn || userId !== oneLinkId) ? (
+      {!oneLinkUser || !oneLinkLoggedIn || userId !== oneLinkId ? (
         <OneLinkValidation userId={userId} />
       ) : (
         <>
