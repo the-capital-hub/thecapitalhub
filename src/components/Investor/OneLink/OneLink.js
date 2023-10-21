@@ -145,7 +145,7 @@ const OneLink = () => {
               </div>
 
               {/* Action buttons */}
-              <div className="onePager_action_buttons px-3 px-lg-4 py-5 d-flex align-items-center justify-content-center justify-content-md-end">
+              {/* <div className="onePager_action_buttons px-3 px-lg-4 py-5 d-flex align-items-center justify-content-center justify-content-md-end">
                 <div className="action_buttons_container d-flex flex-column flex-md-row gap-4">
                   <button
                     type="button"
@@ -160,7 +160,7 @@ const OneLink = () => {
                     Publish
                   </button>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         ) : (
