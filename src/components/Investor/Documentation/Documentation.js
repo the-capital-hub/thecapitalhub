@@ -12,6 +12,15 @@ import UploadModal from "./UploadModal/UploadModal";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { environment } from "../../../environments/environment";
+import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
+import {
+  Business,
+  KYC,
+  Legal,
+  Pitch,
+} from "../../../Images/StartUp/Documentaion";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { useDispatch } from "react-redux";
 
 const Documentation = () => {
   const [showModal, setShowModal] = useState(false);
@@ -26,8 +35,10 @@ const Documentation = () => {
   ]);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    document.title = "Documentation | The Capital Hub";
     const getFolders = async () => {
       try {
         const res = await axios.get(`${baseURL}`);
@@ -36,53 +47,68 @@ const Documentation = () => {
       }
     };
     getFolders();
+    dispatch(setPageTitle("Documentation"));
   }, []);
 
   return (
-    <>
-      <SmallProfileCard text={"Documentation"} />
-      <div className="documentationStartup">
-        {showModal && <UploadModal onCancel={setShowModal} folders={folders} />}
-        <div className="left">
-          <IntroductoryMessage
-            title={"Uplod your document"}
-            para={
-              "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
-            }
-          />
-          <UploadContainer onClicked={setShowModal} />
-          <div className="cards">
-            <Card
-              onClicked={() => navigate("/documentation/financials")}
-              text={"Financials"}
+    <MaxWidthWrapper>
+      <div className="documentation-wrapper">
+        {/* Main content */}
+        <div className="left-content">
+          <SmallProfileCard text={"Documentation"} />
+          <div className="documentationStartup">
+            {showModal && (
+              <UploadModal onCancel={setShowModal} folders={folders} />
+            )}
+            <IntroductoryMessage
+              title={"Upload your document"}
+              // para={
+              //   "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
+              // }
             />
-            <Card
-              onClicked={() => navigate("/documentation/pitchdeck")}
-              text={"Pitch Deck"}
-            />
-            <Card
-              onClicked={() => navigate("/documentation/legal")}
-              text={"Legal"}
-            />
-            <Card
-              onClicked={() => navigate("/documentation/update")}
-              text={"Update"}
-            />
-            <Card
-              onClicked={() => navigate("/documentation/kycdetails")}
-              text={"KYC Details"}
-            />
-            <Card onClicked={() => navigate("/documentation/business")} text={"Business"} />
+            <UploadContainer onClicked={setShowModal} />
+            <div className="cards px-xxl-4 bg-white py-5 rounded-4">
+              {/* <Card
+                  onClicked={() => navigate("/documentation/financials")}
+                  text={"Financials"}
+                /> */}
+              <Card
+                onClicked={() => navigate("/documentation/pitchdeck")}
+                text={"Pitch Deck"}
+                image={Pitch}
+              />
+              <Card
+                onClicked={() => navigate("/documentation/business")}
+                text={"Business"}
+                image={Business}
+              />
+              <Card
+                onClicked={() => navigate("/documentation/kycdetails")}
+                text={"KYC Details"}
+                image={KYC}
+              />
+              <Card
+                onClicked={() =>
+                  navigate("/documentation/legal%20and%20compliance")
+                }
+                text={"Legal and Compliance"}
+                image={Legal}
+              />
+              {/* <Card
+                  onClicked={() => navigate("/documentation/update")}
+                  text={"Update"}
+                /> */}
+            </div>
           </div>
         </div>
-
-        <div className="right">
+        {/* Right content */}
+        <div className="right-content">
           <RightProfileCard />
           <RecommendationCard />
           <NewsCorner />
         </div>
       </div>
-    </>
+    </MaxWidthWrapper>
     // <div className="container-fluid investorHome_main_container">
     //   <div className="row mt-2">
     //     <div className="col">

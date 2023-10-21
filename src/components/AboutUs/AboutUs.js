@@ -2,8 +2,12 @@ import "./aboutus.scss";
 import CoInvestorCard from "../Card/AboutUs/CoInvestor/CoInvestorCard";
 import MeetOurTeam from "../Card/AboutUs/MeetOurTeam/MeetOurTeam";
 import PramodImage from "../../Images/aboutUs/Pramod.jpeg";
+import { useEffect } from "react";
 
 const AboutUs = () => {
+  useEffect(() => {
+    document.title = "About Us | The Capital Hub";
+  }, []);
   return (
     <>
       <div className="container-fluid aboutus_container">
@@ -60,8 +64,7 @@ const AboutUs = () => {
             </div>
           </div>
 
-          <div className="founder_section mb-5">
-            {/* <h1>Founder</h1> */}
+          {/* <div className="founder_section mb-5">
             <div className="founder_container">
               <div className="image rounded-circle">
                 <img src="" alt="founder" className="rounded-circle" />
@@ -87,10 +90,9 @@ const AboutUs = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="founder_section mb-5">
-            {/* <h1>Founder</h1> */}
+          {/* <div className="founder_section mb-5">
             <div className="founder_container">
               <div className="image rounded-circle">
                 <img src="" alt="image" className="rounded-circle" />
@@ -116,7 +118,7 @@ const AboutUs = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="about_us_title_text">
             <h2>Our Story</h2>

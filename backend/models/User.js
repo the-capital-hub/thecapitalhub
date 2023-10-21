@@ -104,9 +104,68 @@ const userSchema = new Schema(
         ref: "Users",
       },
     ],
+    connectionsSent: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Users",
+      },
+    ],
+    connectionsReceived: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Users",
+      },
+    ],
+    recentExperience: [
+      {
+        logo: String,
+        companyName: String,
+        location: String,
+        experienceDuration: String,
+        role: String,
+      },
+    ],
+    recentEducation: [
+      {
+        logo: String,
+        collegeName: String,
+        location: String,
+        passoutYear: Number,
+        course: String,
+      },
+    ],
+    investor: {
+      type: Schema.Types.ObjectId,
+      ref: "Investors",
+    },
+    pinnedChat: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Chats",
+      },
+    ],
+    featuredPosts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Posts",
+      },
+    ],
     userStatus: {
       type: String,
       default: "inactive"
+    },
+    oneLinkId: {
+      type: String,
+      default: generateRandomNumber, 
+      unique: true,
+      required: true,
+    },
+    isInvestor: {
+      type: String,
+      default: false,
+    },
+    secretKey: {
+      type: String,
     }
   },
   {
@@ -139,5 +198,10 @@ userSchema.pre(
     }
   }
 );
+
+function generateRandomNumber() {
+  const randomNumber = Math.floor(100000 + Math.random() * 900000); 
+  return randomNumber.toString(); 
+}
 
 export const UserModel = model("Users", userSchema);

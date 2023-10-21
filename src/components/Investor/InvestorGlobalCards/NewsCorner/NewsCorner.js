@@ -1,21 +1,31 @@
 import React from "react";
 import "./newscorner.scss";
 import { Link } from "react-router-dom";
+import startupOneImage from "../../../../Images/blog/1 AsPGU1Q42C9lsVRoMg91Nw.webp";
+import startupTwoImage from "../../../../Images/blog/eighttips.webp";
+import startupThreeImage from "../../../../Images/blog/threefive.webp";
 
 const NewsCorner = ({ title, btnlink }) => {
+  // Fetch news items
   const newsItems = [
     {
       title:
         "Why Mentoring Matters: Why Angel Investors Should Prioritize Mentorship Before Investing in a Startup",
       btnlink: "/blog/startupOne",
+      image: startupOneImage,
+      id: 1,
     },
     {
       title: "8 Tips to start raising Angel investments for startups",
       btnlink: "/blog/startupTwo",
+      image: startupTwoImage,
+      id: 2,
     },
     {
       title: "HOW TO BUILD A GREAT STARTUP by Pramod Badiger",
       btnlink: "/blog/startupThree",
+      image: startupThreeImage,
+      id: 3,
     },
   ];
   return (
@@ -29,25 +39,38 @@ const NewsCorner = ({ title, btnlink }) => {
               </div>
             </div>
             {newsItems.map((item, index) => (
-              <div className="card-body newscorner_card_body ">
-                <div className="newscorner_card_text">
+              <div className="card-body newscorner_card_body " key={item.id}>
+                <div className="newscorner_card_text d-flex flex-column gap-1">
                   <h4 className="smallest_typo">
                     {item.title
                       ? item.title
                       : " Cellbell startup has raised to $10 million dollor funding"}
                   </h4>
+                  <div className="newsImage__container">
+                    <img
+                      src={item.image}
+                      alt="News"
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                        objectFit: "contain",
+                      }}
+                    />
+                  </div>
                   <Link
                     to={item.btnlink ? item.btnlink : ""}
                     style={{ textDecoration: "none" }}
+                    target="_blank"
+                    className="d-flex justify-content-center align-items-center mt-1 show__more__link mx-auto"
                   >
-                    <button>
-                      <span>Show more</span>
+                    <button className="d-flex align-items-center justify-content-center show__more">
+                      <span className="text-center">Show more</span>
                     </button>
                   </Link>
                 </div>
               </div>
             ))}
-            <hr className="hr" />
+            {/* <hr className="hr" /> */}
             {/* <div className="card-body newscorner_card_body ">
               <div className="newscorner_card_text">
                 <h4 className="smallest_typo">

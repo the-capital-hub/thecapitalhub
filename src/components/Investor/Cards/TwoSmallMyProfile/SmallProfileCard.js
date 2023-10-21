@@ -11,7 +11,6 @@ const SmallProfileCard = ({ text, width }) => {
     return date.toLocaleDateString("en-US", options);
   };
   const formattedDate = formatDate(new Date().toDateString());
-
   return (
     <div className="container-fluid small_card_container">
       <div

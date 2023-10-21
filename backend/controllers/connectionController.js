@@ -7,7 +7,8 @@ import {
   removeConnection,
   cancelConnectionRequest,
   getSentPendingConnectionRequests,
-} from "../services/connectionService.js"; 
+  getRecommendations,
+} from "../services/connectionService.js";
 
 //send connect request 
 export const sendConnectionRequestController = async (req, res) => {
@@ -27,8 +28,8 @@ export const sendConnectionRequestController = async (req, res) => {
 // get sent pending connection request of a user
 export const getSentPendingConnectionRequestsController = async (req, res) => {
   try {
-    const { userId } = req.params;
-    const response = await getSentPendingConnectionRequests(userId);
+    // const { userId } = req.params;
+    const response = await getSentPendingConnectionRequests(req.userId);
     return res.status(response.status).send(response);
   } catch (error) {
     console.error(error);
@@ -57,8 +58,8 @@ export const cancelConnectionRequestController = async (req, res) => {
 // Get pending connection requests received by a user
 export const getPendingConnectionRequestsController = async (req, res) => {
   try {
-    const { userId } = req.params;
-    const response = await getPendingConnectionRequests(userId);
+    // const { userId } = req.params;
+    const response = await getPendingConnectionRequests(req.userId);
     return res.status(response.status).send(response);
   } catch (error) {
     console.error(error);
@@ -117,8 +118,9 @@ export const getUserConnectionsController = async (req, res) => {
 // Remove a connection
 export const removeConnectionController = async (req, res) => {
   try {
-    const { connectionId } = req.params;
-    const response = await removeConnection(connectionId);
+    const userId = req.userId;
+    const { otherUserId } = req.params;
+    const response = await removeConnection(userId, otherUserId);
     return res.status(response.status).send(response);
   } catch (error) {
     console.error(error);
@@ -126,5 +128,18 @@ export const removeConnectionController = async (req, res) => {
       status: 500,
       message: "An error occurred while removing the connection.",
     });
+  }
+};
+
+export const getRecommendationsController = async (req, res) => {
+  try {
+    const response = await getRecommendations(req.params.userId);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurrecd while getting recommendations"
+    })
   }
 };

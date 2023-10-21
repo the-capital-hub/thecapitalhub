@@ -8,6 +8,12 @@ const commentSchema = new Schema(
       required: true,
     },
     text: String,
+    likes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Users",
+      },
+    ],
   },
   {
     timestamps: true,
@@ -27,7 +33,12 @@ const postSchema = new Schema(
       required: true,
     },
     image: String,
+    images: {
+      type: Array,
+    },
     video: String,
+    documentName: String,
+    documentUrl: String,
     likes: [
       {
         type: Schema.Types.ObjectId,
@@ -35,6 +46,13 @@ const postSchema = new Schema(
       },
     ],
     comments: [commentSchema],
+    resharedPostId: {
+      type: Schema.Types.ObjectId,
+      ref: "Posts",
+    },
+    resharedCount: {
+      type: Number,
+    }
   },
   {
     timestamps: true,

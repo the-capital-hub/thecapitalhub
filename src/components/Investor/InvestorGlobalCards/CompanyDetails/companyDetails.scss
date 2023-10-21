@@ -1,6 +1,5 @@
 .company_details_container {
   .company_details {
-
     /* height: 400px; */
     &.mt-4 {
       margin-top: 4rem;
@@ -8,7 +7,14 @@
 
     .image_name_section {
       display: flex;
-      align-items: center;
+      // align-items: center;
+      justify-content: flex-start;
+      // flex-direction: column;
+      gap: 01em;
+
+      @media (min-width: 768px) {
+        justify-content: flex-start;
+      }
 
       &.mt-2 {
         margin-top: 2rem;
@@ -35,15 +41,53 @@
       font-size: 18px;
       font-family: Poppins;
       cursor: pointer;
-
     }
 
     .description {
-      width: 98%;
+      border: 1px solid #ccc;
+      padding: 6px;
+      outline: none;
+      transition: all 0.2s ease-in-out;
+
+      &:focus {
+        border: 1px solid rgba(253, 89, 1, 1);
+      }
+    }
+
+    .social-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .input-group {
+      display: flex;
+      align-items: center;
+    }
+
+    .input-group label {
+      width: 120px;
+      font-size: 14px;
+      margin-right: 10px;
+    }
+
+    .input-group input {
+      flex: 1;
+      padding: 6px;
+      border: 1px solid #ccc;
+      // border-radius: 10px;
+      font-size: 14px;
+
+      outline: none;
+      transition: all 0.2s ease-in-out;
+
+      &:focus {
+        border: 1px solid rgba(253, 89, 1, 1);
+      }
     }
 
     .company_details_logo_container {
-      height: 105px;
+      height: 150px;
       width: 150px;
       border-radius: 50%;
       // background: #f6f6f6;
@@ -103,7 +147,7 @@
     padding: 10px;
     border-radius: 40px;
     background: #fff;
-    box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
+    // box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
   }
 
   p {
@@ -122,9 +166,10 @@
         .company_details_logo_container {
           height: 61px;
           width: 62px;
+          align-self: flex-start;
 
           img {
-            height: 40px;
+            height: 60px;
             width: 60px;
           }
         }
@@ -207,10 +252,11 @@
 @media (max-width: 1025px) {
   .company_details_container {
     .company_details {
-      width: 98%;
+      // width: 100%;
 
       .image_name_section {
-        .company_details_logo_container {}
+        .company_details_logo_container {
+        }
       }
     }
   }

@@ -3,37 +3,48 @@ import "./HalfbendCard.scss";
 import ThreeDot from "../../../../../Images/VerticalBlackThreeDots.svg";
 // import folderIcon from "../../../../../Images/Folder.png";
 import pdfIcon from "../../../../../Images/PDFIcon.png";
-import { getPdfData } from "../../../../../Service/user";
+import { getPdfData,deleteDocument } from "../../../../../Service/user";
 import { useSelector } from "react-redux";
+import deleteIcon from "../../../../../Images/post/delete.png";
+import AfterSuccessPopup from "../../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+
+
 
 const HalfbendCard = ({folderName, userId}) => {
   const [data, setData] = useState([]);
   const [user, setUser] = useState([]);
+  const [deleteDoc, setDeleteDoc] = useState(false);
+
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   console.log("user",userId)
   useEffect(() => {
-    getPdfData(loggedInUser?._id || userId, folderName).then((res) => {
-      setData(res.data);
-      // console.log("data", res);
-    });
-  }, [loggedInUser, userId, folderName]);
+    if (userId) {
+      getPdfData(userId, folderName).then((res) => {
+        setData(res.data);
+        // console.log("data", res);
+      });
+    } else {
+      getPdfData(loggedInUser._id, folderName).then((res) => {
+        setData(res.data);
+        // console.log("data", res);
+      });
+    }
+  }, [loggedInUser, userId, folderName,deleteDoc]);
 
   const openPdfInNewWindow = (pdfUrl) => {
-    // // Convert the binary data to a Blob
-    // const pdfBlob = new Blob([pdfData], { type: "application/pdf" });
-
-    // // Create a URL for the Blob
-    // const pdfUrl = URL.createObjectURL(pdfBlob);
-
-    // // Open the PDF in a new window
-    const newWindow = window.open("", "_blank");
-    newWindow.document.write(
-      '<iframe width="100%" height="100%" src="' + pdfUrl + '"></iframe>'
-    );
-
-    // Release the temporary URL after opening the PDF
-    URL.revokeObjectURL(pdfUrl);
+     console.log("pdfurl---------",pdfUrl)
+     window.location.href = pdfUrl;
   };
+  const handleDeleteDoc=(id)=>{
+    try {
+      deleteDocument(id).then((res) => {
+      console.log(res)
+        setDeleteDoc(true)
+      });
+    } catch (error) {
+      console.log("Error in delete document:",error.response.data.message)
+    }
+  }
 
   return (
     // <div className="half_bend_container">
@@ -141,25 +152,45 @@ const HalfbendCard = ({folderName, userId}) => {
     <div className="half_bend_container row">
       <div className="box_container mt-4">
         <div className="row">
-          {data.map((item) => (
+          {data?.map((item) => (
+            
             <div
               className="col-md-4 d-flex justify-content-center align-items-center main_col"
               key={item.fileName}
-              onClick={() => openPdfInNewWindow(item.fileUrl)}
+             
             >
-              <div className="custom-card">
+              <div className="custom-card"  onClick={() => openPdfInNewWindow(item.fileUrl)}>
                 <img
                   className="mx-3 my-1"
                   src={pdfIcon}
                   height={50}
                   alt="PDF Icon"
+                  
                 />
               </div>
-              <h6>{item.fileName}</h6>
+              <div className="d-flex flex-column mx-auto justify-content-center align-items-center">
+              <h6 >{item.fileName}</h6>
+              <img
+                  className="delete-img"
+                  src={deleteIcon}
+                  height={50}
+                  alt="deleteIcon"
+                  onClick={() => handleDeleteDoc(item._id)}
+                />
+              </div>
+              
             </div>
           ))}
+          
         </div>
       </div>
+      {deleteDoc && (
+          <AfterSuccessPopup
+            withoutOkButton
+            onClose={() => setDeleteDoc(!deleteDoc)}
+            successText="Document Deleted Successfully"
+          />
+        )}
     </div>
   );
 };

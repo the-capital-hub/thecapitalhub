@@ -3,10 +3,20 @@ import "./rightProfileCard.scss";
 // import LoopIcon from "../../../../Images/investorIcon/LoopIcon.svg";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { getInvestorById } from "../../../../Service/user";
 
-const RightProfileCard = () => {
+const RightProfileCard = ({ noProfile }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  console.log(loggedInUser);
+  const [investor, setInvestor] = useState(null);
+  useEffect(() => {
+    if (loggedInUser?.investor) {
+      getInvestorById(loggedInUser?.investor).then(({ data }) => {
+        setInvestor(data);
+      });
+    }
+  }, [loggedInUser]);
+
   return (
     <>
       <div className="col-12 view_profile_container">
@@ -14,8 +24,8 @@ const RightProfileCard = () => {
           <div className="view_profile_name_section mt-2">
             <img
               src={loggedInUser.profilePicture}
-              width={100}
-              className="rounded-circle"
+              style={{ width: "100px", height: "100px" }}
+              className="rounded-circle profile-image"
               alt="profileimage"
             />
             <div className="right_profile_text flex_content">
@@ -24,14 +34,20 @@ const RightProfileCard = () => {
               </h2>
               <span className="smallest_typo">{loggedInUser?.email}</span>
               <span className="smallest_typo">
-                {`${loggedInUser?.designation} at ${loggedInUser?.startUp?.company}`}
+                {loggedInUser?.designation
+                  ? `${loggedInUser.designation} at ${loggedInUser?.startUp?.company || investor?.companyName || ''
+                  }`
+                  : ''}
               </span>
+
             </div>
-            <Link to="/profile" className="profile_btn mt-2">
-              View Profile
-            </Link>
+            {!noProfile && (
+              <Link to="/profile" className="profile_btn mt-2">
+                View Profile
+              </Link>
+            )}
             <Link
-              to="/investor/manage-account"
+              to="/manage-account"
               className="profile_btn mt-1 manage_acount_btn"
             >
               Manage Account

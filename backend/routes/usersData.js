@@ -9,6 +9,15 @@ import {
   changePasswordController,
   requestPasswordResetController,
   resetPasswordController,
+  searchUsersController,
+  addEducationController,
+  addExperienceController,
+  addStartupToUserController,
+  getExploreController,
+  getExploreFiltersController,
+  addUserAsInvestorController,
+  validateSecretKeyController,
+  createSecretKeyController,
 } from "../controllers/userData.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
@@ -24,8 +33,11 @@ router.post("/requestPasswordReset", requestPasswordResetController);
 
 router.patch("/resetPassword", resetPasswordController);
 
+//validate onelink secret key
+router.post("/validateSecretKey", validateSecretKeyController);
+
 // Authorized routes below
-router.use(authenticateToken);
+router.use(authenticateToken);  
 
 // Profile Page
 router.patch("/updateFounder", updateUser);
@@ -35,5 +47,20 @@ router.get("/getUser", getUsersController);
 router.patch("/changePassword", changePasswordController);
 
 
+router.get("/search", searchUsersController);
+
+router.patch("/addEducation/:userId", addEducationController);
+router.patch("/addExperience/:userId", addExperienceController);
+
+//add existing startups to user
+router.patch("/addStartUpToUser", addStartupToUserController);
+router.patch("/addUserAsInvestor", addUserAsInvestorController);
+
+// get explore
+router.get("/explore", getExploreController);
+router.get("/exploreFilters", getExploreFiltersController);
+
+//create secret key
+router.post("/createSecretKey", createSecretKeyController);
 
 export default router;

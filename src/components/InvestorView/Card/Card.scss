@@ -1,30 +1,30 @@
 .investorsCard {
-    margin: 0px;
-    background-color: white;
-    border-radius: 25px;
-    box-shadow: 1px 1px 5px lightgray;
-    padding: 20px 10px 0px 10px;
-    width: 250px;
-    height: 250px;
-    .container {
-        display: flex;
-        height: 200px;
-        align-items: start;
-        flex-direction: column;
-        justify-content: end;
-        .wrapper {
-            // color: white;
-            // background-color: black;
-            width: 100%;
-            p {
-                margin: 0;
-                font-size: 15px;
-                font-weight: 600;
-                text-decoration: underline;
-            }
-        }
+  margin: 0px;
+  background-color: white;
+  border-radius: 25px;
+  box-shadow: 1px 1px 5px lightgray;
+  padding: 20px 10px 0px 10px;
+  width: 285px;
+  height: 265px;
+  .folder_container {
+    display: flex;
+    height: 200px;
+    align-items: start;
+    flex-direction: column;
+    justify-content: end;
+    .folder_footer {
+      // color: white;
+      // background-color: black;
+      width: 100%;
+      p {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: underline;
+      }
     }
-    &:hover {
-        cursor: pointer;
-    }
+  }
+  &:hover {
+    cursor: pointer;
+  }
 }

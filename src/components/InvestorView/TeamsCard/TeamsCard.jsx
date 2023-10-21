@@ -3,7 +3,13 @@ import "./TeamsCard.scss";
 const TeamsCard = ({ image, name, designation }) => {
   return (
     <div className="TeamsCard">
-      <img src={image} width={100} alt="" className="rounded-4" />
+      <img
+        src={image}
+        width={"100px"}
+        height={"100px"}
+        alt={name}
+        className="rounded-4 object-fit-cover"
+      />
       <div className="details">
         <div className="about">
           <p>{name || `Name`}</p>

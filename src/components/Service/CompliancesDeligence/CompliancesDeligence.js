@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./CompliancesDeligence.scss";
 import serviceSixIcon from "../../../Images/service/Group 15404.svg";
 import BackIcon from "../../../Images/BackIcon.svg";
 import { Link } from "react-router-dom";
 
 const CompliancesDeligence = () => {
+  useEffect(() => {
+    document.title = "Compliance Diligence Service | The Capital Hub";
+  }, []);
   return (
     <>
       <div className="container complience_main_container">

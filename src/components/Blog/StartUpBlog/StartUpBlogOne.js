@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./style.scss";
 import BlogImageOne from "../../../Images/blog/Rectangle 1271.png";
 import SearchIcon from "../../../Images/blog/Combined-Shape.svg";
@@ -9,22 +9,25 @@ import inIcon from "../../../Images/blog/typcn_social-instagram.svg";
 import BlogoneImage from "../../../Images/blog/1 AsPGU1Q42C9lsVRoMg91Nw.webp";
 
 const StartUpBlogOne = () => {
+  useEffect(() => {
+    document.title = "Why mentoring matters? Blog | The Capital Hub";
+  }, []);
   window.scrollTo({ top: 0, behavior: "smooth" });
   return (
     <>
       <div className="container blog_detailed_container">
         <div className="category_section">
-          <span className="blog">Blog</span> >{" "}
+          <span className="blog">Blog</span> {"> "}
           <span className="category">Start Up</span>
         </div>
         <hr />
 
         <div className="row">
           <div className="col-lg-12 col-md-12 seventy ">
-            <h1 className="headingOne">
+            <h2 className="headingOne">
               Why Mentoring Matters: Why Angel Investors Should Prioritize
               Mentorship Before Investing in a Startup
-            </h1>
+            </h2>
 
             <div className="time_icon">
               <span>Published on May 1, 2023</span>
@@ -35,8 +38,17 @@ const StartUpBlogOne = () => {
               </div>
             </div>
             <div className="col-12 image_section">
-              <img src={BlogoneImage} alt="img" />
-              <p>The Power of Mentorship in Startups:</p>
+              <div className="d-flex">
+                <img
+                  src={BlogoneImage}
+                  width={"100%"}
+                  style={{ maxWidth: "600px", objectFit: "contain" }}
+                  className="mx-auto my-lg-3"
+                  alt="img"
+                />
+              </div>
+
+              <u>The Power of Mentorship in Startups:</u>
               <p>
                 How Growthive Is Empowering Angel Investors to Be More Than Just
                 Funders
@@ -65,7 +77,15 @@ const StartUpBlogOne = () => {
                 mentorship is a critical component of success for many
                 entrepreneurs.
               </p>
-
+              <div className="d-flex">
+                <img
+                  src="https://img.freepik.com/free-vector/businesswomen-presenting-graph-colleague_74855-2353.jpg?size=626&ext=jpg&ga=GA1.1.176513024.1692192688&semt=ais"
+                  width={"100%"}
+                  style={{ maxWidth: "600px", objectFit: "contain" }}
+                  className="mx-auto my-lg-3"
+                  alt="img"
+                />
+              </div>
               <p>
                 The benefits of mentorship are many. First, mentors can provide
                 valuable advice and guidance based on their own experiences.
@@ -103,6 +123,15 @@ const StartUpBlogOne = () => {
                 startups on a deeper level and to make more informed investment
                 decisions down the road.
               </p>
+              <div className="d-flex">
+                <img
+                  src="https://img.freepik.com/free-vector/hand-drawn-flat-design-innovation-concept_23-2149149286.jpg?w=996&t=st=1693218161~exp=1693218761~hmac=8781da4f49ba7978b238936a183b3803f2acfe33143758a3afc5fa9f9ee879c6"
+                  width={"100%"}
+                  style={{ maxWidth: "600px", objectFit: "contain" }}
+                  className="mx-auto my-lg-3"
+                  alt="img"
+                />
+              </div>
               <p>
                 In conclusion, the power of mentorship in startups cannot be
                 overstated. Mentorship can provide valuable advice, guidance,
@@ -130,26 +159,26 @@ const StartUpBlogOne = () => {
               <p>Let’s Build a Valuable venture together.</p>
               <a href="http://thecapitalhub.in/">thecapitalhub.in</a>
 
-              <h1 className="inside_seventy_heading">About the author :</h1>
+              <h2 className="inside_seventy_heading">About the author :</h2>
 
               <p>
-                <b>Pramod Badiger</b> is a dynamic entrepreneur and the <b>founder and CEO
-                of Capital HUB.</b> Capital HUB is a company that helps startups
-                raise angel investments and helps investors invest in
-                high-growth startups. As a founder, Pramod is passionate about
-                connecting startups with potential investors and providing them
-                with the resources and support they need to succeed. He is also
-                building an angel networking platform to bridge the gap between
-                startups and angel investors, making it easier for them to
-                connect and collaborate. With his deep understanding of the
-                startup ecosystem and his ability to identify and capitalize on
-                new opportunities, Pramod is well-positioned to lead Capital HUB
-                to success.
+                <b>Pramod Badiger</b> is a dynamic entrepreneur and the{" "}
+                <b>founder and CEO of The Capital HUB.</b> The Capital HUB is a
+                company that helps startups raise angel investments and helps
+                investors invest in high-growth startups. As a founder, Pramod
+                is passionate about connecting startups with potential investors
+                and providing them with the resources and support they need to
+                succeed. He is also building an angel networking platform to
+                bridge the gap between startups and angel investors, making it
+                easier for them to connect and collaborate. With his deep
+                understanding of the startup ecosystem and his ability to
+                identify and capitalize on new opportunities, Pramod is
+                well-positioned to lead Capital HUB to success.
               </p>
 
-              {/* <h1 className="inside_seventy_heading">
+              {/* <h2 className="inside_seventy_heading">
                 How to learn about the Web Development ?
-              </h1> */}
+              </h2> */}
               {/* <p>
                 Lorem ipsum dolor sit amet consectetur. At consequat purus
                 hendrerit proin risus Sit purus ante dictum in malesuada
@@ -163,9 +192,9 @@ const StartUpBlogOne = () => {
                 hendrerit proin risus Sit purus ante dictum in malesuada id.{" "}
               </p> */}
 
-              {/* <h1 className="inside_seventy_heading">
+              {/* <h2 className="inside_seventy_heading">
                 Top web development courses in India
-              </h1> */}
+              </h2> */}
 
               {/* <ol>
                 <li>Capital Hub</li>
@@ -200,7 +229,7 @@ const StartUpBlogOne = () => {
             </div>
 
             <div className="popular_article">
-              <h1>Popular Articles</h1>
+              <h2>Popular Articles</h2>
               <PopularArticle image={BlogImageOne} button={"Stock Market"} />
               <PopularArticle image={BlogImageOne} button={"Stock Market"} />
               <PopularArticle image={BlogImageOne} button={"Stock Market"} />

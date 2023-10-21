@@ -1,4 +1,9 @@
 .profile_main_container {
+  // border: 0;
+  // @media (min-width: 1000px) {
+  //   border-left: 1px solid rgba(230, 230, 230, 1);
+  // }
+
   .typography {
     color: #000;
     font-size: 20px;
@@ -254,7 +259,7 @@
 @media (max-width: 820px) {
   .profile_main_container {
     .image_name_section {
-      flex-direction: column;
+      // flex-direction: column;
     }
   }
 }
@@ -276,8 +281,8 @@
       }
     }
 
-  .width_hundred{
-    width: 98%;
-  }
+    .width_hundred {
+      width: 98%;
+    }
   }
 }

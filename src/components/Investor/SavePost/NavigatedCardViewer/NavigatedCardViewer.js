@@ -1,107 +1,123 @@
-// NavigatedCardViewer.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./NavigatedCardViewer.scss";
 import FeedPostCard from "../../Cards/FeedPost/FeedPostCard";
-import { useEffect } from "react";
-import { getSavedPostsAPI } from "../../../../Service/user";
+import {
+  getSavedPostCollections,
+  getSavedPostsAPI,
+  getSavedPostsByCollection,
+} from "../../../../Service/user";
+import { useSelector } from "react-redux";
+import SavedPostSmallCard from "../../InvestorGlobalCards/SavedPostSmallCard/SavedPostSmallCard";
 
 const NavigatedCardViewer = () => {
   const [activeHeader, setActiveHeader] = useState("startup");
+  const [loading, setLoading] = useState(false);
   const [allPosts, setAllPosts] = useState(null);
-  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [headerTabs, setHeaderTabs] = useState([]);
+  const [collectionName, setCollectionName] = useState(null);
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const handleHeaderClick = (header) => {
-    setFilteredPosts(allPosts.filter(({ category }) => category === header));
     setActiveHeader(header);
+    setCollectionName(header);
+    setLoading(true);
   };
 
   useEffect(() => {
-    getSavedPostsAPI()
-      .then(({ data: { data } }) => {
-        setAllPosts(data);
-        setFilteredPosts(
-          data.filter(({ category }) => category === activeHeader)
-        );
+    setLoading(true);
+    getSavedPostCollections(loggedInUser._id)
+      .then((res) => {
+        const collectionHeaders = res.data.map((val) => val.name);
+        setHeaderTabs(collectionHeaders);
+        setActiveHeader(collectionHeaders[0]);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
-        setAllPosts([]);
+        setLoading(false);
       });
-  }, []);
+  }, [loggedInUser]);
+
+  useEffect(() => {
+    if (headerTabs.length > 0) {
+      setCollectionName(headerTabs[0]);
+    }
+  }, [headerTabs]);
+
+  useEffect(() => {
+    if (collectionName) {
+      setLoading(true);
+      getSavedPostsByCollection(loggedInUser._id, collectionName)
+        .then((data) => {
+          console.log(data);
+          setAllPosts(data.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setAllPosts([]);
+          setLoading(false);
+        });
+    }
+  }, [loggedInUser, collectionName, activeHeader]);
 
   return (
-    <div className="navigated_box_container ">
+    <div className="navigated_box_container">
       <div className="navigated-card-viewer">
         <div className="navigation-header border-bottom">
-          <div
-            className={`nav-item ${activeHeader === "startup" ? "active" : ""}`}
-            onClick={() => handleHeaderClick("startup")}
-          >
-            Startup
-          </div>
-          <div
-            className={`nav-item ${
-              activeHeader === "investor" ? "active" : ""
-            }`}
-            onClick={() => handleHeaderClick("investor")}
-          >
-            Investor
-          </div>
-          <div
-            className={`nav-item ${
-              activeHeader === "learning" ? "active" : ""
-            }`}
-            onClick={() => handleHeaderClick("learning")}
-          >
-            Learning
-          </div>
-          <div
-            className={`nav-item ${activeHeader === "fund" ? "active" : ""}`}
-            onClick={() => handleHeaderClick("fund")}
-          >
-            Fund
-          </div>
-          <div
-            className={`nav-item ${activeHeader === "other" ? "active" : ""}`}
-            onClick={() => handleHeaderClick("other")}
-          >
-            Other
-          </div>
+          {headerTabs.map((header) => (
+            <div
+              key={header}
+              className={`nav-item ${activeHeader === header ? "active" : ""}`}
+              onClick={() => handleHeaderClick(header)}
+            >
+              {header}
+            </div>
+          ))}
         </div>
-        <div className="row row-cols-1">
-          {allPosts ? (
-            filteredPosts.length ? (
-              filteredPosts.map(
-                (
-                  {
-                    description,
-                    user: { firstName, lastName, profilePicture },
-                    video,
-                    image,
-                    createdAt,
+        <div className="card-viewer">
+          {loading ? (
+            <div className="d-flex justify-content-center align-items-center w-100">
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          ) : allPosts && allPosts.length > 0 ? (
+            allPosts.map(
+              (
+                {
+                  description,
+                  user: {
+                    firstName,
+                    lastName,
+                    profilePicture,
+                    designation,
+                    _id: userId,
                   },
-                  index
-                ) => (
-                  <FeedPostCard
-                    key={index}
-                    description={description}
-                    profilePicture={profilePicture}
-                    firstName={firstName}
-                    lastName={lastName}
-                    video={video}
-                    image={image}
-                    createdAt={createdAt}
-                  />
-                )
+                  video,
+                  image,
+                  createdAt,
+                },
+                index
+              ) => (
+                <SavedPostSmallCard
+                  activeHeader={activeHeader}
+                  userId={userId}
+                  key={index}
+                  description={description}
+                  profilePicture={profilePicture}
+                  firstName={firstName}
+                  lastName={lastName}
+                  video={video}
+                  image={image}
+                  createdAt={createdAt}
+                  designation={designation}
+                />
               )
-            ) : (
-              <p className="container p-5 text-center my-5 bg-white mx-auto ">
-                {`No posts saved for ${activeHeader}`}
-              </p>
             )
           ) : (
-            <p className="container p-5 text-center my-5 bg-white mx-auto ">
-              Loading...
+            <p className="container p-5 text-center my-5 bg-white mx-auto">
+              No posts saved
             </p>
           )}
         </div>

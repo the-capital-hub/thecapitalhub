@@ -1,73 +1,102 @@
 .uploadModal {
-    position: absolute;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  z-index: 500;
+  .blackbg {
+    background: #000;
+    height: 100vh;
+    width: 100%;
+    opacity: 0.2;
     top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: fixed;
-    z-index: 1;
-    .blackbg {
-        background: #000;
-        height: 100vh;
-        width: 100%;
-        opacity: 0.2;
-        top: 0;
-    }
-    .modalcontainer {
+  }
+  .modalcontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .modalwrapper {
+      background-color: #fff;
+      border-radius: 25px;
+      padding: 30px 60px;
+      position: absolute;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      // justify-content: center;
+      right: 0;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      height: 70%;
+      width: 40%;
+      margin: auto;
+      gap: 30px;
+      .foldernames {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        .modalwrapper {
-            background-color: #fff;
-            border-radius: 25px;
-            padding: 20px 60px;
-            position: absolute;
-            top: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            right: 0;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            height: 50%;
-            width: 40%;
-            margin: auto;
-            gap: 30px;
-            .foldernames {
-                display: flex;
-                gap: 20px;
-                flex-wrap: wrap;
-            }
-            input {
-                width: 250px;
-            }
-            select {
-                padding: 10px 20px;
-                border-radius: 25px;
-                outline: none;
-            }
-            button {
-                color: white;
-                background-color: #fd5901;
-                padding: 10px 30px;
-                border-radius: 25px;
-                border: none;
-                outline: none;
-            }
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      input {
+        width: 250px;
+      }
+      select {
+        padding: 10px 20px;
+        border-radius: 25px;
+        outline: none;
+      }
+
+      .upload_button {
+        color: white;
+        background-color: #fd5901;
+        padding: 10px 30px;
+        border-radius: 25px;
+        border: none;
+        outline: none;
+      }
+
+      .visually-hiden {
+        position: absolute !important;
+        height: 1px;
+        width: 1px;
+        overflow: hidden;
+        clip: rect(1px, 1px, 1px, 1px);
+      }
+
+      .doc_upload_label {
+        color: #000;
+        border-radius: 10px;
+        border: 0.125em dashed #fd5901;
+        background-color: #fd590144;
+        padding: 1em 2.5em;
+        cursor: pointer;
+      }
+
+      .file_list_button {
+        svg {
+          color: transparent;
         }
+        &:hover {
+          svg {
+            color: #fd5901;
+          }
+        }
+      }
     }
+  }
 }
 
 @media (max-width: 768px) {
-    .uploadModal {
-        .modalcontainer {
-            .modalwrapper {
-                width: 80%;
-                align-items: center;
-                justify-content: center;
-            }
-        }
+  .uploadModal {
+    .modalcontainer {
+      .modalwrapper {
+        width: 80%;
+        align-items: center;
+        justify-content: center;
+      }
     }
+  }
 }

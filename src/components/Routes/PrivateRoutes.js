@@ -1,11 +1,21 @@
-import { Outlet, Navigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Outlet, Navigate, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import InvestorNavbar from "../Investor/InvestorNavbar/InvestorNavbar";
 import InvestorSidebar from "../Investor/InvestorSidebar/InvestorSidebar";
 import "./style.scss";
 import LogOutPopUp from "../PopUp/LogOutPopUp/LogOutPopUp";
+import { ModalBSContainer, ModalBSBody, ModalBSHeader } from "../PopUp/ModalBS";
+import NewCommunityModal from "../Investor/ChatComponents/NewCommunityModal";
+import { useSelector } from "react-redux";
 
 function PrivateRoute({ children, ...props }) {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   const handleSidebarToggle = () => {
     setSidebarCollapsed((prev) => !prev);
@@ -13,14 +23,17 @@ function PrivateRoute({ children, ...props }) {
 
   const isLoggedIn = () => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
-    console.log("isLoggedIn-->", isLoggedIn);
     return isLoggedIn === "true";
   };
+
   if (!isLoggedIn()) {
     return <Navigate to="/login" replace />;
   }
 
   if (isLoggedIn()) {
+    if (loggedInUser.isInvestor === "true") {
+      return <Navigate to="/investor/home" replace />;
+    }
     return (
       <>
         <InvestorNavbar
@@ -44,6 +57,23 @@ function PrivateRoute({ children, ...props }) {
 
           <div className="content">
             <Outlet />
+          </div>
+
+          <div className="modals">
+            {/* Modal for creating new Community */}
+            <ModalBSContainer
+              isStatic={false}
+              id="AddNewCommunity"
+              className="z-n1"
+            >
+              <ModalBSHeader
+                title={"Create a Community"}
+                className={"orange__heading"}
+              />
+              <ModalBSBody>
+                <NewCommunityModal />
+              </ModalBSBody>
+            </ModalBSContainer>
           </div>
         </div>
       </>

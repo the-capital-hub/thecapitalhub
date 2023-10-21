@@ -41,7 +41,7 @@
 //                 </span>
 //               </div>
 //               <div className="icon-wrapper">
-//                 <Link to={"/investor/manage-account"}>
+//                 <Link to={"/manage-account"}>
 //                   {" "}
 //                   <img className="profile-pic" src={profilePic} alt="Profile" />
 //                 </Link>
@@ -61,7 +61,7 @@ import React from "react";
 import "./NavBar.scss";
 import Bar from "../../../Images/investorIcon/Bar.svg";
 import searchIconBlack from "../../../Images/navbar/Search.svg";
-import Logo from "../../../Images/investorIcon/Logo.svg";
+import Logo from "../../../Images/investorIcon/new-logo.png";
 import NotificationIcon from "../../../Images/investorIcon/notification.svg";
 import MessageIcon from "../../../Images/investorIcon/message.svg";
 import profilePic from "../../../Images/investorIcon/profilePic.webp";
@@ -74,7 +74,7 @@ const NavBar = (props) => {
     <>
       <div className="container pt-1">
         <div className="row investor_view_navbar ">
-          <div className="col-12 d-flex justify-content-center">
+          <div className="col-12 d-flex ms-5">
             <div className="row bar_logo_container ">
               <div className="logo_container">
                 <img src={Logo} alt="bar" />
@@ -118,7 +118,7 @@ const NavBar = (props) => {
                 </span>
               </div>
               <div className="icon-wrapper">
-                <Link to={"/investor/manage-account"}>
+                <Link to={"/manage-account"}>
                   {" "}
                   <img className="profile-pic" src={profilePic} alt="Profile" />
                 </Link>

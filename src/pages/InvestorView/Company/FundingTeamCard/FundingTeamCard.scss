@@ -1,5 +1,5 @@
-.fundingteamcard-component {
-  width: 30%;
+.fundingteamcard_component {
+  width: 25%;
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 20px;
@@ -74,6 +74,7 @@
       }
       .connect_button {
         button {
+          display: flex;
           border-radius: 7.217px;
           background: #d3f36b;
           padding: 10px 20px;
@@ -95,7 +96,7 @@
 }
 
 @media (max-width: 820px) {
-  .fundingteamcard-component {
+  .fundingteamcard_component {
     min-width: 200px;
     .card-body {
       .designation_connect {

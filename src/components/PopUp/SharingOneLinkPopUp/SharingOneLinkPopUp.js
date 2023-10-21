@@ -6,20 +6,91 @@ import {
   EmailShareButton,
   WhatsappIcon,
   EmailIcon,
-  FacebookIcon
+  FacebookIcon,
 } from "react-share";
-import { HiOutlineClipboard } from 'react-icons/hi'
+import { HiOutlineClipboard } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
+import { createSecretKey } from "../../../Service/user";
+import {
+  loginSuccess,
+} from "../../../Store/features/user/userSlice";
 
-const SharingOneLinkPopUp = ({ introMessage, oneLink, onClose }) => {
-  const shareUrl = "https://thecapitalhub.in/onelink/" + oneLink;
+const SharingOneLinkPopUp = ({
+  introMessage,
+  oneLink,
+  onClose,
+  investor = false,
+}) => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const dispatch = useDispatch();
+  const [isSecretKeyAssigned, setIsSecretKeyAssigned] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // State for Invalid secret Key
+  const [error, setError] = useState(null);
+  const [pin, setPin] = useState(loggedInUser.secretKey || null);
+
+  const shareUrl = investor
+    ? "https://thecapitalhub.in/investor/onelink/" +
+    oneLink +
+    "/" +
+    loggedInUser.oneLinkId
+    : "https://thecapitalhub.in/onelink/" +
+    oneLink +
+    "/" +
+    loggedInUser.oneLinkId;
   const messageForSharing = introMessage.replace(/<br\s*\/?>/g, "\n");
   const [copyStatus, setCopyStatus] = useState(""); // State for copy status
 
   // Function to handle copying to clipboard
   const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text)
+    navigator.clipboard
+      .writeText(text)
       .then(() => setCopyStatus("Copied!"))
       .catch(() => setCopyStatus("Copy failed"));
+  };
+
+  // Handle invalid Secret Key
+  const handleInvalid = (value) => {
+    setPin(value);
+    // if value length is 0
+    if (value.length === 0) {
+      setError(null);
+      return;
+    }
+    // console.log("val-->", value, /[0-9]{4}/.test(value));
+
+    // if value length is < 4
+    if (value.length < 4) {
+      return;
+    }
+
+    // Test for numeric values
+    if (!/[0-9]{4}/.test(value)) {
+      setError("Please enter Valid 4 digit Key");
+      return;
+    }
+
+    // Then
+    setError(null);
+  };
+
+  // Handle Submit
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      setLoading(true);
+      const { user } = await createSecretKey(pin);
+      dispatch(loginSuccess(user));
+      setIsSecretKeyAssigned(true);
+      setTimeout(() => {
+        setIsSecretKeyAssigned(false);
+      }, 2000);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -28,21 +99,75 @@ const SharingOneLinkPopUp = ({ introMessage, oneLink, onClose }) => {
         <div className="popup-content">
           <p className="text_section">{messageForSharing}</p>
 
-          <h6>Click here for: <a href={shareUrl}>OneLink</a></h6>
+          {/* Assign Secret Key */}
+          {isSecretKeyAssigned && (
+            <p className="success-message">Secret key assigned successfully!</p>
+          )}
+          <form onSubmit={handleSubmit} className="">
+            <fieldset className={`key rounded-2 ${"invalid"}`}>
+              <legend className="key_title px-2">Assign Secret Key</legend>
+              <input
+                type="text"
+                minLength={4}
+                maxLength={4}
+                pattern="[0-9]{4}"
+                inputMode="numeric"
+                placeholder="4 digit Key"
+                required
+                className="key_input"
+                autoComplete="off"
+                onChange={(e) => handleInvalid(e.target.value)}
+                value={pin}
+              />
+            </fieldset>
+            <em className="text-danger" style={{ fontSize: "0.75rem" }}>
+              {error}
+            </em>
+            <button
+              type="submit"
+              className={`assign_btn ${investor ? "investor" : "startup"}`}
+              disabled={loading}
+            >
+              {loading ? "Processing..." : "Assign"}
+            </button>
+
+          </form>
+          {/* )} */}
+          <h6>
+            Click here for:{" "}
+            <a
+              href={shareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="share_link"
+            >
+              OneLink
+            </a>
+          </h6>
 
           <h4>Share this details via</h4>
           <div className="share-buttons">
-            <FacebookShareButton url={shareUrl} quote={messageForSharing}>
+            <FacebookShareButton url={`${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`} quote={messageForSharing}>
               <FacebookIcon size={32} round />
             </FacebookShareButton>
-            <WhatsappShareButton url={"\n Here is Our OneLink : "+shareUrl} title={messageForSharing}>
+            <WhatsappShareButton
+              url={`\nHere is Our OneLink : ${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`}
+              title={messageForSharing}
+            >
               <WhatsappIcon size={32} round />
             </WhatsappShareButton>
-            <EmailShareButton url={shareUrl} body={messageForSharing}>
+            <EmailShareButton url={`${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`} body={messageForSharing}>
               <EmailIcon size={32} round />
             </EmailShareButton>
             {/* Clipboard icon */}
-            <HiOutlineClipboard size={32} onClick={() => copyToClipboard(`${messageForSharing} \n Here is Our OneLink: ${shareUrl}`)} />
+            <HiOutlineClipboard
+              size={32}
+              onClick={() =>
+                copyToClipboard(
+                  `${messageForSharing} \nHere is Our OneLink: ${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`
+                )
+              }
+            />
             {copyStatus && <p>{copyStatus}</p>}
           </div>
 

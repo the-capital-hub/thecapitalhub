@@ -4,17 +4,24 @@ import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
 import { CiEdit } from "react-icons/ci";
 import { Link } from "react-router-dom";
-import MileStoneCard from "../InvestorGlobalCards/MilestoneCard/MileStoneCard";
+import FeaturedPostsContainer from "../InvestorGlobalCards/MilestoneCard/FeaturedPostsContainer";
 import { SidebarContext } from "../../Sidebar/SidebarContext";
 import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import RightProfileCard from "../InvestorGlobalCards/RightProfileCard/RightProfileCard";
 import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import CompanyDetailsCard from "../InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 const CreatePost = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    document.title = "Create a Post | The Capital Hub";
+    dispatch(setPageTitle("Create Post"));
+  }, []);
 
   return (
     <div className="container-fluid createpost_container">

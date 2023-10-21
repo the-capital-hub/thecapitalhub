@@ -1,0 +1,465 @@
+.container {
+  .my-investor_navbar {
+    height: 80px;
+    left: 60px;
+    top: 39px;
+    background: #ffffff;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+
+    @media (min-width: 768px) {
+      border-radius: 20px;
+    }
+
+    .bar_logo_container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      .logo_container {
+        width: auto;
+
+        img {
+          height: 45px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+
+      .mobile-home-hamberger {
+        display: none;
+      }
+    }
+
+    /* right container */
+    .navbar_right_container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      .search_container {
+        .searchbar-container {
+          display: flex;
+          align-items: center;
+          position: relative;
+          margin-right: 10px;
+
+          .searchbar-input {
+            height: 49px;
+            background: rgba(205, 205, 205, 1);
+            border-radius: 20px;
+            border: none;
+            transition: width 0.4s ease;
+            padding: 0 15px;
+            outline: none;
+          }
+
+          .investor-searchbar-button {
+            position: absolute;
+            right: -5px;
+            top: 0;
+            width: 48px;
+            height: 49px;
+            background: #d3f36b;
+            border: none;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            cursor: pointer;
+          }
+        }
+
+        .search_results {
+          display: flex;
+          width: 100%;
+          flex-direction: column;
+          gap: 5px;
+
+          .single_result:nth-child(6),
+          .single_result:nth-child(13) {
+            border-bottom: none;
+          }
+
+          a {
+            text-decoration: none;
+            color: #6c757d;
+
+            &:hover {
+              color: #d3f36b;
+            }
+          }
+
+          .single_result {
+            border-bottom: 1px solid lightgrey;
+            padding: 2px 0;
+            transition: padding-left ease 0.2s;
+
+            &:hover {
+              // background-color: rgb(221, 221, 221);
+              border-radius: 5px;
+              padding-left: 10px;
+            }
+          }
+        }
+      }
+
+      .icons-container {
+        display: flex;
+        align-items: center;
+
+        .notification-container {
+          position: relative;
+
+          .notification-count {
+            position: absolute;
+            background: red;
+            bottom: 0;
+            right: 0;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 13px;
+            color: #fff;
+          }
+        }
+
+        @media (min-width: 821px) {
+          gap: 15px;
+          margin: 0 15px;
+        }
+
+        .mobile-icon-wrapper {
+          display: none;
+
+          @media (min-width: 768px) {
+            background: #eaeef2;
+          }
+        }
+
+        .icon-wrapper {
+          width: 49px;
+          height: 49px;
+          // left: 1397px;
+          // top: 49px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          @media (min-width: 768px) {
+            // margin-left: 1.5rem;
+            background: #eaeef2;
+          }
+
+          .notification-icon,
+          .message-icon {
+            font-weight: bold;
+            font-size: 20px;
+          }
+
+          .profile-pic {
+            width: 49px;
+            height: 49px;
+            border-radius: 50%;
+
+            @media (max-width: 768px) {
+              width: 35px;
+              height: 35px;
+            }
+          }
+
+          .me {
+            position: absolute;
+            width: 23px;
+            height: 23px;
+            /* left: 1589px; */
+            top: 65px;
+
+            font-family: "Poppins";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 22px;
+            /* identical to box height */
+            color: #8f8f8f;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 820px) {
+  .container {
+    .my-investor_navbar {
+      .bar_logo_container {
+        .logo_container {
+          display: none;
+
+          img {}
+        }
+
+        .mobile-home-hamberger {
+          display: flex;
+
+          h1 {
+            color: #000;
+            font-family: Poppins;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            margin: 0;
+            margin-left: 2px;
+            text-transform: uppercase;
+          }
+        }
+
+        img {
+          height: 20px;
+          width: 20px;
+        }
+      }
+
+      /* right container */
+      .navbar_right_container {
+        .search_container {
+          .searchbar-container {
+            display: none;
+          }
+        }
+
+        .icons-container {
+
+          .mobile-icon-wrapper {
+            display: flex;
+            width: 49px;
+            height: 49px;
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            .search_container {
+              // top: 500px;
+              left: -300px;
+              top: 60px;
+              background-color: white;
+
+              // top: calc(100% + 255px);
+
+              width: 350px;
+              min-height: 80px;
+
+              .searchbar-container {
+                display: flex;
+                align-items: center;
+                position: relative;
+                margin-right: 10px;
+
+                .searchbar-input {
+                  height: 49px;
+                  width: 310px;
+                  background: #eaeef2;
+                  border-radius: 20px;
+                  border: none;
+                  transition: width 0.4s ease;
+                  padding: 0 15px;
+                  outline: none;
+                }
+
+                .investor-searchbar-button {
+                  position: absolute;
+                  right: -5px;
+                  top: 0;
+                  width: 48px;
+                  height: 49px;
+                  background: #d3f36b;
+                  border: none;
+                  border-top-right-radius: 20px;
+                  border-bottom-right-radius: 20px;
+                  cursor: pointer;
+                }
+              }
+
+              .search_results {
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                gap: 5px;
+
+                .single_result:nth-child(6),
+                .single_result:nth-child(13) {
+                  border-bottom: none;
+                }
+
+                a {
+                  text-decoration: none;
+                  color: #6c757d;
+
+                  &:hover {
+                    color: #d3f36b;
+                  }
+                }
+
+                .single_result {
+                  border-bottom: 1px solid lightgrey;
+                  padding: 2px 0;
+                  transition: padding-left ease 0.2s;
+
+                  &:hover {
+                    // background-color: rgb(221, 221, 221);
+                    border-radius: 5px;
+                    padding-left: 10px;
+                  }
+                }
+              }
+            }
+
+          }
+
+          .icon-wrapper {
+
+            .notification-icon,
+            .message-icon {}
+
+            .profile-pic {}
+
+            .me {}
+          }
+
+
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .container {
+    .my-investor_navbar {
+      .bar_logo_container {
+        .mobile-home-hamberger {
+          display: flex;
+
+          h1 {
+            color: #000;
+            font-family: Poppins;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            margin: 0;
+            margin-left: 2px;
+            text-transform: uppercase;
+          }
+        }
+
+        img {
+          height: 20px;
+          width: 20px;
+        }
+      }
+
+      /* right container */
+      .navbar_right_container {
+        .icons-container {
+          .mobile-icon-wrapper {
+            .search_container {
+              left: auto;
+              margin-right: 20px;
+              top: 60px;
+              background-color: white;
+
+              width: 350px;
+              min-height: 80px;
+
+              .searchbar-container {
+                display: flex;
+                align-items: center;
+                position: relative;
+                margin-right: 10px;
+
+                .searchbar-input {
+                  height: 49px;
+                  width: 310px;
+                  background: #eaeef2;
+                  border-radius: 20px;
+                  border: none;
+                  transition: width 0.4s ease;
+                  padding: 0 15px;
+                  outline: none;
+                }
+
+                .investor-searchbar-button {
+                  position: absolute;
+                  right: -5px;
+                  top: 0;
+                  width: 48px;
+                  height: 49px;
+                  background: #d3f36b;
+                  border: none;
+                  border-top-right-radius: 20px;
+                  border-bottom-right-radius: 20px;
+                  cursor: pointer;
+                }
+              }
+
+              .search_results {
+                display: flex;
+                width: 100%;
+                flex-direction: column;
+                gap: 5px;
+
+                .single_result:nth-child(6),
+                .single_result:nth-child(13) {
+                  border-bottom: none;
+                }
+
+                a {
+                  text-decoration: none;
+                  color: #6c757d;
+
+                  &:hover {
+                    color: #d3f36b;
+                  }
+                }
+
+                .single_result {
+                  border-bottom: 1px solid lightgrey;
+                  padding: 2px 0;
+                  transition: padding-left ease 0.2s;
+
+                  &:hover {
+                    // background-color: rgb(221, 221, 221);
+                    border-radius: 5px;
+                    padding-left: 10px;
+                  }
+                }
+              }
+            }
+          }
+
+          .icon-wrapper {
+
+            .notification-icon,
+            .message-icon {}
+
+            .profile-pic {}
+
+            .me {}
+          }
+        }
+      }
+    }
+  }
+}

@@ -9,6 +9,15 @@ import {
   changePassword,
   requestPasswordReset,
   resetPassword,
+  searchUsers,
+  addEducation,
+  addExperience,
+  addStartupToUser,
+  addUserAsInvestor,
+  getExplore,
+  getExploreFilters,
+  validateSecretKey,
+  createSecretKey,
 } from "../services/userService.js";
 import { secretKey } from "../constants/config.js";
 
@@ -145,5 +154,142 @@ export const resetPasswordController = async (req, res) => {
     return res
       .status(500)
       .json({ message: "An error occurred while resetting the password" });
+  }
+};
+
+export const searchUsersController = async (req, res) => {
+  try {
+    const { searchQuery } = req.query;
+    const response = await searchUsers(searchQuery);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ message: "An error occurred while resetting the password" });
+  }
+};
+
+// add education
+export const addEducationController = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const response = await addEducation(userId, req.body);
+    res.status(response.status).send(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while adding education.",
+    });
+  }
+};
+
+//add experience
+export const addExperienceController = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const response = await addExperience(userId, req.body);
+    res.status(response.status).send(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while adding experience.",
+    });
+  }
+};
+
+//add startup to user
+export const addStartupToUserController = async (req, res) => {
+  try {
+    const { userId, startUpId } = req.body;
+    const response = await addStartupToUser(userId, startUpId);
+    res.status(response.status).send(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while adding startups to user.",
+    });
+  }
+};
+
+export const addUserAsInvestorController = async (req, res) => {
+  try {
+    const { userId, investorId } = req.body;
+    const response = await addUserAsInvestor(userId, investorId);
+    res.status(response.status).send(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while adding user as investor.",
+    });
+  }
+};
+
+export const getExploreController = async (req, res) => {
+  try {
+    const response = await getExplore(req.query);
+    res.status(response.status).send(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting explore results.",
+    });
+  }
+};
+
+export const getExploreFiltersController = async (req, res) => {
+  try {
+    const { type } = req.query;
+    const response = await getExploreFilters(type);
+    res.status(response.status).send(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting explore results.",
+    });
+  }
+};
+
+export const validateSecretKeyController = async (req, res) => {
+  try {
+    const { oneLinkId, secretOneLinkKey } = req.body;
+    const response = await validateSecretKey({
+      oneLinkId,
+      secretOneLinkKey,
+    });
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while vaidating secret key.",
+    });
+  }
+};
+
+export const createSecretKeyController = async (req, res) => {
+  try {
+    const { secretOneLinkKey } = req.body;
+    const userId = req.userId;
+    const response = await createSecretKey(userId, secretOneLinkKey);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while creating secret key.",
+    });
   }
 };

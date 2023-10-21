@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./style.scss";
 import serviceOneIcon from "../../Images/service/Group 15409.svg";
 import BackIcon from "../../Images/BackIcon.svg";
@@ -7,6 +7,9 @@ import InvestorIcon from "../../Images/ourInvestor/InvestorIcon.png";
 import OurInvestorCard from "../Card/OurInvestorCard/OurInvestorCard";
 
 const OurInvestor = () => {
+  useEffect(() => {
+    document.title = "Our Investors | The Capital Hub";
+  }, []);
   return (
     <>
       <div className="container investor_main_container">

@@ -4,9 +4,20 @@ import {
   getAllPosts,
   getSinglePost,
   savePostController,
+  getAllSavedPostCollectionsController,
+  getSavedPostsByCollectionController,
   likeUnlikePostController,
   commentOnPostController,
   getCommentsController,
+  getLikeCountController,
+  getUsersWhoLikedPostController,
+  deletedPostController,
+  addToFeaturedPostController,
+  getFeaturedPostsByUserController,
+  removeFromFeaturedPostController,
+  deleteCommentController,
+  unsavePostController,
+  toggleCommentLikeController
 } from "../controllers/postController.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
@@ -20,10 +31,22 @@ router.get("/getSinglePost/:id", getSinglePost);
 router.post("/newPost", createPost);
 // router.patch("/oldsavePost/:postId", savePost);
 router.patch("/savePost/:postId", savePostController);
-// router.get("/savedPosts", getSavedPosts);
+router.patch("/unsavePost", unsavePostController);
+router.get("/getSavedPostCollections/:userId", getAllSavedPostCollectionsController);
+router.post("/getSavedPostsByCollection/:userId", getSavedPostsByCollectionController);
 
 router.post("/likeUnlikePost/:postId", likeUnlikePostController);
+router.get('/likeCount/:postId', getLikeCountController);
+router.get('/likedUsers/:postId', getUsersWhoLikedPostController);
 router.post("/comment/:postId", commentOnPostController);
 router.get("/getComments/:postId", getCommentsController);
+router.post("/toggleLikeComment/:postId/:commentId", toggleCommentLikeController);
+router.delete("/deleteComment/:postId/:commentId", deleteCommentController);
+
+router.delete("/deletePost/:postId", deletedPostController);
+
+router.post("/addToFeaturedPost/:postId", addToFeaturedPostController);
+router.get("/getFeaturedPostsByUser/:userId", getFeaturedPostsByUserController);
+router.delete("/removeFromFeaturedPost/:postId", removeFromFeaturedPostController);
 
 export default router;

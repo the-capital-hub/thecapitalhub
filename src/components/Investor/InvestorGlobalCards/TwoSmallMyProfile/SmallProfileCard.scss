@@ -25,17 +25,18 @@
     }
 
     .boxOne {
-      width: 16rem;
+      width: fit-content;
       height: 6rem;
-      padding: 30px;
+      padding: 30px 50px;
     }
 
     .boxTwo {
-      width: 16rem;
+      width: fit-content;
       height: 6rem;
-      padding: 30px;
+      padding: 30px 40px;
       flex-direction: row;
       align-items: center;
+      gap: 0.5em;
     }
 
     .boxTwo img {

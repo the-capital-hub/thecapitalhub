@@ -31,10 +31,13 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   };
 
   const { username } = useParams();
+  const { userId } = useParams();
   const [user, setUser] = useState([]);
 
+  const [currentTab, setCurrentTab] = useState("company");
+
   useEffect(() => {
-    getUserById(username)
+    getUserById(username, userId)
       .then(({ data }) => {
         setUser(data);
       })
@@ -52,10 +55,18 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           <SidebarHeader>
             <div className="logotext">
               {sidebarCollapsed ? (
-                <img className="rounded-circle" src={user.profilePicture} alt="image" />
+                <img
+                  className="rounded-circle"
+                  src={user.profilePicture}
+                  alt="image"
+                />
               ) : (
                 <>
-                  <img src={user.profilePicture} alt="image" className="rounded-circle" />
+                  <img
+                    src={user.profilePicture}
+                    alt="image"
+                    className="rounded-circle"
+                  />
                   <h3>
                     {user?.firstName} {user?.lastName}
                   </h3>
@@ -74,24 +85,11 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           <SidebarContent>
             <Menu iconShape="round">
               <MenuItem
-                active={location.pathname.slice(-8).includes("/profile")}
+                active={currentTab === "company"}
                 className="active-item"
+                onClick={() => setCurrentTab("company")}
               >
                 <Link to="">
-                  <img
-                    src={profileIcon}
-                    alt="image"
-                    width="17px"
-                    height="17px"
-                  />
-                  {!sidebarCollapsed && <span>Profile</span>}
-                </Link>
-              </MenuItem>
-              <MenuItem
-                active={location.pathname.includes("/company")}
-                className="active-item"
-              >
-                <Link to="company">
                   {/* <img src={OnelinkIcon} alt="image" width="17px" height="17px" /> */}
                   <img
                     src={companyIcon}
@@ -103,8 +101,24 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 </Link>
               </MenuItem>
               <MenuItem
-                active={location.pathname.includes("/onepager")}
+                active={currentTab === "profile"}
                 className="active-item"
+                onClick={() => setCurrentTab("profile")}
+              >
+                <Link to="profile">
+                  <img
+                    src={profileIcon}
+                    alt="image"
+                    width="17px"
+                    height="17px"
+                  />
+                  {!sidebarCollapsed && <span>Profile</span>}
+                </Link>
+              </MenuItem>
+              <MenuItem
+                active={currentTab === "onePager"}
+                className="active-item"
+                onClick={() => setCurrentTab("onePager")}
               >
                 <Link to="onepager">
                   <img src={BookIcon} alt="image" width="17px" height="17px" />
@@ -112,8 +126,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 </Link>
               </MenuItem>
               <MenuItem
-                active={location.pathname.includes("/documentation")}
+                active={currentTab === "documentation"}
                 className="active-item"
+                onClick={() => setCurrentTab("documentation")}
               >
                 <Link to="documentation">
                   <img
@@ -125,12 +140,32 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   {!sidebarCollapsed && <span>Documentation</span>}
                 </Link>
               </MenuItem>
+
+              {/* Invest now */}
+              <div className="pt-2">
+                <MenuItem
+                  active={currentTab === "investNow"}
+                  onClick={() => setCurrentTab("investNow")}
+                  className="active-item invest_now"
+                >
+                  <Link to="investnow">
+                    <img
+                      src={investIcon}
+                      alt="image"
+                      width="17px"
+                      height="17px"
+                    />
+                    {!sidebarCollapsed && <span>Invest Now</span>}
+                  </Link>
+                </MenuItem>
+              </div>
             </Menu>
           </SidebarContent>
-          <SidebarFooter>
+          {/* <SidebarFooter>
             <Menu iconShape="round">
               <MenuItem
-                active={location.pathname.includes("/investnow")}
+                active={currentTab === "investNow"}
+                onClick={() => setCurrentTab("investNow")}
                 className="active-item invest_now"
               >
                 <Link to="investnow">
@@ -144,7 +179,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 </Link>
               </MenuItem>
             </Menu>
-          </SidebarFooter>
+          </SidebarFooter> */}
         </ProSidebar>
       </div>
     </div>

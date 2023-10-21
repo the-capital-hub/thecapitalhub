@@ -8,12 +8,16 @@
     // width: 300px;
     // background-color: #eaeef2;
     position: fixed;
-    top: 11.5%;
+    top: calc(80px + 0%);
     left: 0;
     bottom: 0;
-    z-index: 1;
+    z-index: 10;
     transition: width 0.3s ease;
     overflow: scroll;
+
+    @media (min-width: 821px) {
+      top: calc(80px + 5%);
+    }
 
     // Add class for sidebar in fixed position
     &.fixed {
@@ -41,6 +45,7 @@
     transition: margin-left 0.3s ease;
     margin-top: 5%;
     overflow: hidden;
+    min-height: 100dvh; // Added when main content was too short and white space filled screen
   }
 
   // Add a class to handle the sidebar collapsed state
@@ -85,9 +90,7 @@
       .sidebar {
         width: 0;
         opacity: 0;
-        transition:
-          width 0.3s ease,
-          opacity 0.3s ease;
+        transition: width 0.3s ease, opacity 0.3s ease;
       }
 
       .content {
@@ -99,9 +102,9 @@
 
 @media (max-width: 468px) {
   .investor_home_container {
-    background-color: white;
+    background-color: #eaeef2;
     .sidebar {
-      top: 11.5%;
+      top: 70px;
       left: 0;
       bottom: 0;
       // Add class for sidebar in fixed position
@@ -118,9 +121,10 @@
       // flex: 1;
       margin-left: 0px;
       transition: margin-left 0.3s ease;
-      margin-top: 16%;
+      // margin-top: 16%;
       max-width: 100%;
       overflow: hidden;
+      background-color: #eaeef2;
     }
 
     // Add a class to handle the sidebar collapsed state
@@ -128,9 +132,7 @@
       .sidebar {
         width: 0;
         opacity: 0;
-        transition:
-          width 0.3s ease,
-          opacity 0.3s ease;
+        transition: width 0.3s ease, opacity 0.3s ease;
       }
 
       .content {

@@ -2,6 +2,14 @@ import { Schema, model } from "mongoose";
 
 const startUpSchema = new Schema(
   {
+    colorCard: {
+      last_round_investment: String,
+      total_investment: String,
+      no_of_investers: String,
+      fund_ask: String,
+      valuation: String,
+      raised_funds: String,
+    },
     company: {
       type: String,
       required: true,
@@ -12,6 +20,9 @@ const startUpSchema = new Schema(
     },
     introductoryMessage: {
       type: String,
+    },
+    previousIntroductoryMessage: {
+      type: Array,
     },
     sector: {
       type: String,
@@ -25,14 +36,38 @@ const startUpSchema = new Schema(
     description: {
       type: String,
     },
+    briefIntroduction: {
+      type: String,
+    },
+    startedAtDate: {
+      type: String,
+    },
+    industryType: {
+      type: String,
+    },
+    noOfEmployees: {
+      type: Number,
+    },
+    vision: {
+      type: String,
+    },
+    mission: {
+      type: String,
+    },
     problem: {
       type: String,
     },
     solution: {
       type: String,
     },
+    marketLandscape: {
+      type: String,
+    },
     competitiveLandscape: {
       type: String,
+    },
+    competitors: {
+      type: Array,
     },
     growthStrategy: {
       type: String,
@@ -48,13 +83,13 @@ const startUpSchema = new Schema(
     },
     team: {
       type: Array,
-      default: [
-        {
-          name: String,
-          designation: String,
-          image: String,
-        },
-      ],
+      // default: [
+      //   {
+      //     name: String,
+      //     designation: String,
+      //     image: String,
+      //   },
+      // ],
     },
     TAM: {
       type: Number,
@@ -80,6 +115,18 @@ const startUpSchema = new Schema(
       type: Number,
       // required: true
     },
+    // fundingsAsk: [
+    //   {
+    //     requiredFor: String,
+    //     Amount: String,
+    //   }
+    // ],
+    roadMap: [
+      {
+        date: String,
+        milestone: String,
+      }
+    ],
     preFundingAsk: {
       type: Number,
       // required: true
@@ -99,6 +146,12 @@ const startUpSchema = new Schema(
       phoneNumber: String,
       email: String,
     },
+    socialLinks: {
+      website: String,
+      linkedin: String,
+      twitter: String,
+      instagram: String,
+    },
     portfolio: String,
     investorProposals: {
       type: Array,
@@ -109,6 +162,12 @@ const startUpSchema = new Schema(
           phone: String,
         },
       ],
+    },
+    keyFocus: {
+      type: String,
+    },
+    tagline: {
+      type: String,
     },
   },
   {

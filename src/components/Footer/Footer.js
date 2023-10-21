@@ -4,6 +4,7 @@ import FbIcon from "../../Images/Fb.svg";
 import TwIcon from "../../Images/Tw.svg";
 import InIcon from "../../Images/In.svg";
 import YtIcon from "../../Images/Yt.svg";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -30,7 +31,10 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="http://thecapitalhub.in/contactus" className="text-white">
+                <a
+                  href="http://thecapitalhub.in/contactus"
+                  className="text-white"
+                >
                   Contact Us
                 </a>
               </li>
@@ -45,25 +49,25 @@ const Footer = () => {
             <h4>Policies</h4>
             <ul className="list-unstyled">
               <li>
-                <a href="#" className="text-white">
+                <Link to="/security-safeguard" className="text-white">
                   Security safeguards
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-white">
+              <Link to="/term-of-service"  className="text-white">
                   Terms of service
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-white">
+              <Link to="/privacy"  className="text-white">
                   Privacy
-                </a>
+                </Link>
               </li>
-              <li>
+              {/* <li>
                 <a href="#" className="text-white">
                   Accessibility
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="col-md-2 col-sm-6 footer_list_item">
@@ -73,10 +77,18 @@ const Footer = () => {
               information about our services
             </p>
             <div className="d-flex justify-content-start">
-              <img src={FbIcon} alt="img" style={{ margin: "0px 2px" }} />
-              <img src={TwIcon} alt="img" style={{ margin: "0px 2px" }} />
-              <img src={InIcon} alt="img" style={{ margin: "0px 2px" }} />
-              <img src={YtIcon} alt="img" style={{ margin: "0px 2px" }} />
+              <a href="https://www.facebook.com/p/Capital-HUB-100086708877527/">
+                <img src={FbIcon} alt="img" style={{ margin: "0px 2px" }} />
+              </a>
+              <a href="https://twitter.com/TheCapitalHub_">
+                <img src={TwIcon} alt="img" style={{ margin: "0px 2px" }} />
+              </a>
+              <a href="https://instagram.com/capitalhub_official?igshid=MzRlODBiNWFlZA==">
+                <img src={InIcon} alt="img" style={{ margin: "0px 2px" }} />
+              </a>
+              <a href="https://www.youtube.com/@huboriginals4179/featured">
+                <img src={YtIcon} alt="img" style={{ margin: "0px 2px" }} />
+              </a>
             </div>
           </div>
           {/* <div className="col-md-3 col-sm-6 footer_list_item">

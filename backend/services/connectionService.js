@@ -1,5 +1,6 @@
 import { ConnectionModel } from "../models/Connection.js";
 import { UserModel } from "../models/User.js";
+import { addNotification, deleteNotification } from "./notificationService.js";
 
 //send connect request
 export const sendConnectionRequest = async (senderId, receiverId) => {
@@ -13,16 +14,25 @@ export const sendConnectionRequest = async (senderId, receiverId) => {
       return {
         status: 400,
         message: "Connection request already sent",
-        data: []
+        data: [],
       };
     }
-
     const connection = new ConnectionModel({
       sender: senderId,
       receiver: receiverId,
       status: "pending",
     });
     await connection.save();
+    await UserModel.findOneAndUpdate(
+      { _id: connection.sender },
+      { $push: { connectionsSent: connection.receiver } }
+    );
+    await UserModel.findOneAndUpdate(
+      { _id: connection.receiver },
+      { $push: { connectionsReceived: connection.sender } }
+    );
+    const type = "connectionRequest";
+    await addNotification(receiverId, senderId, type, null, connection._id);
     return {
       status: 200,
       message: "Connection Request Sent",
@@ -43,7 +53,7 @@ export const getSentPendingConnectionRequests = async (userId) => {
     const sentRequests = await ConnectionModel.find({
       sender: userId,
       status: "pending",
-    }).populate("receiver", "firstName lastName");
+    }).populate("receiver", "firstName lastName profilePicture designation");
     if (sentRequests.length === 0) {
       return {
         status: 200,
@@ -60,7 +70,8 @@ export const getSentPendingConnectionRequests = async (userId) => {
     console.error(error);
     return {
       status: 500,
-      message: "An error occurred while getting sent pending connection requests.",
+      message:
+        "An error occurred while getting sent pending connection requests.",
     };
   }
 };
@@ -76,6 +87,16 @@ export const cancelConnectionRequest = async (connectionId) => {
       };
     }
     await ConnectionModel.findByIdAndRemove(connectionId);
+    const type = "connectionRequest";
+    await deleteNotification(connection.receiver, connection.sender, type, connection._id);
+    await UserModel.findOneAndUpdate(
+      { _id: connection.sender },
+      { $pull: { connectionsSent: connection.receiver } }
+    );
+    await UserModel.findOneAndUpdate(
+      { _id: connection.receiver },
+      { $pull: { connectionsReceived: connection.sender } }
+    );
     return {
       status: 200,
       message: "Connection Request Canceled",
@@ -96,19 +117,21 @@ export const getPendingConnectionRequests = async (userId) => {
     const pendingRequests = await ConnectionModel.find({
       receiver: userId,
       status: "pending",
-    }).populate("sender", "firstName lastName");
+    })
+      .populate("sender", "firstName lastName profilePicture designation")
+      .sort({ _id: "-1" });
 
     return {
       status: 200,
       message: "Pending requests retrived successfully",
       data: pendingRequests,
-    }
+    };
   } catch (error) {
     console.log(error);
     return {
       status: 500,
       message: "An error occurred while getting pending connection request.",
-    }
+    };
   }
 };
 
@@ -122,23 +145,33 @@ export const acceptConnectionRequest = async (connectionId) => {
     );
     await UserModel.findOneAndUpdate(
       { _id: connection.sender },
-      { $push: { connections: connection.receiver } },
+      { $pull: { connectionsSent: connection.receiver } }
+    );
+    await UserModel.findOneAndUpdate(
+      { _id: connection.sender },
+      { $push: { connections: connection.receiver } }
     );
     await UserModel.findOneAndUpdate(
       { _id: connection.receiver },
-      { $push: { connections: connection.sender } },
+      { $pull: { connectionsReceived: connection.sender } }
     );
+    await UserModel.findOneAndUpdate(
+      { _id: connection.receiver },
+      { $push: { connections: connection.sender } }
+    );
+    const type = "connectionAccepted";
+    await addNotification(connection.sender, connection.receiver, type, null, connection._id);
     return {
       status: 200,
       message: "Connection Accepted",
       data: connection,
-    }
+    };
   } catch (error) {
     console.log(error);
     return {
       status: 500,
       message: "An error occurred while accepting the connection request.",
-    }
+    };
   }
 };
 
@@ -150,24 +183,37 @@ export const rejectConnectionRequest = async (connectionId) => {
       { status: "rejected" },
       { new: true }
     );
+    await UserModel.findOneAndUpdate(
+      { _id: connection.sender },
+      { $pull: { connectionsSent: connection.receiver } }
+    );
+    await UserModel.findOneAndUpdate(
+      { _id: connection.receiver },
+      { $pull: { connectionsReceived: connection.sender } }
+    );
+    const type = "connectionAccepted";
+    await deleteNotification(connection.sender, connection.receiver, type, connection._id);
     return {
       status: 200,
       message: "Connection Rejected",
       data: connection,
-    }
+    };
   } catch (error) {
     console.log(error);
     return {
       status: 500,
       message: "An error occurred while rejecting the connection request.",
-    }
+    };
   }
 };
 
 //get all user connections
 export const getUserConnections = async (userId) => {
   try {
-    const user = await UserModel.findById(userId).populate("connections", "firstName lastName");
+    const user = await UserModel.findById(userId).populate(
+      "connections",
+      "firstName lastName profilePicture designation"
+    );
     if (!user) {
       return {
         status: 404,
@@ -184,35 +230,48 @@ export const getUserConnections = async (userId) => {
     return {
       status: 500,
       message: "An error occurred while getting user connections.",
-    }
+    };
   }
 };
 
 //remove accepted connection
-export const removeConnection = async (connectionId) => {
+export const removeConnection = async (loggedUserId, otherUserId) => {
   try {
-    const connection = await ConnectionModel.findById(connectionId);
-    if (!connection) {
-      return {
-        status: 404,
-        message: "Connection not found",
-      };
-    }
-    if (connection.status === "accepted") {
-      await UserModel.findByIdAndUpdate(
-        connection.sender,
-        { $pull: { connections: connection.receiver } }
-      );
-      await UserModel.findByIdAndUpdate(
-        connection.receiver,
-        { $pull: { connections: connection.sender } }
-      );
-    }
-    await ConnectionModel.findByIdAndRemove(connectionId);
+    // const connection = await ConnectionModel.findById(connectionId);
+    // if (!connection) {
+    //   return {
+    //     status: 404,
+    //     message: "Connection not found",
+    //   };
+    // }
+    // if (connection.status === "accepted") {
+    //   await UserModel.findByIdAndUpdate(connection.sender, {
+    //     $pull: { connections: connection.receiver },
+    //   });
+    //   await UserModel.findByIdAndUpdate(connection.receiver, {
+    //     $pull: { connections: connection.sender },
+    //   });
+    // }
+    // await ConnectionModel.findByIdAndRemove(connectionId);
+    await ConnectionModel.deleteMany({
+      sender: loggedUserId,
+      receiver: otherUserId,
+    });
+    await ConnectionModel.deleteMany({
+      sender: otherUserId,
+      receiver: loggedUserId,
+    });
+    await UserModel.findOneAndUpdate(
+      { _id: loggedUserId },
+      { $pull: { connections: otherUserId } }
+    );
+    await UserModel.findOneAndUpdate(
+      { _id: otherUserId },
+      { $pull: { connections: loggedUserId } }
+    );
     return {
       status: 200,
       message: "Connection Removed",
-      data: connection,
     };
   } catch (error) {
     console.log(error);
@@ -223,3 +282,71 @@ export const removeConnection = async (connectionId) => {
   }
 };
 
+export const getRecommendations = async (userId) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found",
+      };
+    }
+    const recommendations = [];
+    const userConnections = user.connections;
+    const userSentConnections = user.connectionsSent || " ";
+    const userReceivedConnections = user.connectionsReceived || " ";
+    for (const connectedUserId of userConnections) {
+      const connectedUser = await UserModel.findById(connectedUserId);
+
+      if (connectedUser && connectedUser.connections) {
+        const mutualConnections = connectedUser.connections;
+
+        for (const connectionId of mutualConnections) {
+          if (
+            connectionId.toString() !== userId &&
+            !recommendations.includes(connectionId) && !userConnections.includes(connectionId)
+          ) {
+            const existsPendingConnections = await ConnectionModel.findOne({
+              $or: [
+                { sender: userId, receiver: connectionId, status: "pending" },
+                { sender: connectionId, receiver: userId, status: "pending" },
+              ],
+            });
+            if (!existsPendingConnections) recommendations.push(connectionId);
+          }
+        }
+      }
+    }
+
+    if (recommendations.length === 0) {
+      const users = await UserModel.find({
+        _id: {
+          $nin: [
+            ...userConnections,
+            userId,
+            ...userSentConnections,
+            ...userReceivedConnections
+          ]
+        },
+        userStatus: "active",
+      });
+      return {
+        status: 200,
+        message: "Recommended User data retrieved successfully",
+        data: users,
+      };
+    }
+    const users = await UserModel.find({ _id: { $in: recommendations } });
+    return {
+      status: 200,
+      message: "Recommended User data retrieved successfully",
+      data: users,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      status: 500,
+      message: "An error occurred while getting recommendations",
+    };
+  }
+};

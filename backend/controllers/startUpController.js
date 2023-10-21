@@ -5,6 +5,8 @@ import {
   updateStartUpData,
   investNowService,
   getStartupByFounderId,
+  getAllStartups,
+  getStartupsBySearch,
 } from "../services/startUpService.js";
 import { getStartUpData } from "../services/userService.js";
 
@@ -13,6 +15,7 @@ export const createStartUpController = async (req, res) => {
   try {
     const response = await createStartup(req.body);
     res.status(response.status).send(response);
+    return response
   } catch (error) {
     console.error(error);
     res.status(500).send({
@@ -72,9 +75,7 @@ export const editStartUpOneLink = async (req, res) => {
 export const editStartUpIntroMessage = async (req, res) => {
   try {
     const { introductoryMessage } = req.body;
-    const { status, ...data } = await updateStartUpData(req.userId, {
-      introductoryMessage,
-    });
+    const { status, ...data } = await updateStartUpData(req.userId, introductoryMessage);
     res.status(status).send({
       message: data.message,
       data: { introductoryMessage: data.data.introductoryMessage },
@@ -133,6 +134,36 @@ export const getStartupByFounderIdController = async (req, res) => {
     res.status(500).send({
       status: 500,
       message: "An error occurred while getting company.",
+    });
+  }
+};
+
+// get all startups
+export const getAllStartupsController = async (req, res) => {
+  try {
+    const response = await getAllStartups();
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while fetching all startups.",
+    });
+  }
+};
+
+
+// get startup by search
+export const getStartupsBySearchController = async (req, res) => {
+  try {
+    const { searchQuery } = req.params;
+    const response = await getStartupsBySearch(searchQuery);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while fetching startups.",
     });
   }
 };

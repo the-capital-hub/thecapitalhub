@@ -8,6 +8,17 @@ import {
   commentOnPost,
   getComments,
   savePost,
+  getAllSavedPostCollections,
+  getSavedPostsByCollection,
+  getLikeCount,
+  getUsersWhoLikedPost,
+  deletePost,
+  addToFeaturedPost,
+  getFeaturedPostsByUser,
+  removeFromFeaturedPost,
+  deleteComment,
+  unsavePost,
+  toggleCommentLike,
 } from "../services/postService";
 
 export const createPost = async (req, res) => {
@@ -28,13 +39,16 @@ export const createPost = async (req, res) => {
 
 export const getAllPosts = async (req, res) => {
   try {
-    const data = await allPostsData();
+    const { page, perPage } = req.query;
+    const pageNumber = parseInt(page) || 1;
+    const postsPerPage = parseInt(perPage) || 10; 
+    const data = await allPostsData(pageNumber, postsPerPage);
     if (!data.length) {
       res.status(404).send({
         message: "No Posts yet",
       });
     } else {
-      res.send({ message: "Posts fetched succesfully", data });
+      res.send({ message: "Posts fetched successfully", data });
     }
   } catch (err) {
     res.status(500).send(err);
@@ -85,13 +99,12 @@ export const getSinglePost = async (req, res) => {
 //   }
 // };
 
-
 // like or unlike a post
 export const likeUnlikePostController = async (req, res) => {
   try {
     const { postId } = req.params;
-    const { userId } = req.body;
-    const response = await likeUnlikePost(postId, userId);
+    // const { userId } = req.body;
+    const response = await likeUnlikePost(postId, req.userId);
     return res.status(response.status).send(response);
   } catch (error) {
     console.error(error);
@@ -118,6 +131,7 @@ export const commentOnPostController = async (req, res) => {
   }
 };
 
+//get comments
 export const getCommentsController = async (req, res) => {
   try {
     const { postId } = req.params;
@@ -144,6 +158,169 @@ export const savePostController = async (req, res) => {
     return res.status(500).send({
       status: 500,
       message: "An error occurred while saving the post.",
+    });
+  }
+};
+
+export const unsavePostController = async (req, res) => {
+  try {
+    const { userId, postId } = req.body;
+    const response = await unsavePost(userId, postId);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while unsaving the post.",
+    });
+  }
+};
+
+//get saved post
+export const getAllSavedPostCollectionsController = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const response = await getAllSavedPostCollections(userId);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting saved post collections.",
+    });
+  }
+};
+
+//get saved post by collection
+export const getSavedPostsByCollectionController = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const { collectionName } = req.body;
+    const response = await getSavedPostsByCollection(userId, collectionName);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred getting saved post.",
+    });
+  }
+};
+
+//get likes count
+export const getLikeCountController = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const result = await getLikeCount(postId);
+    return res.status(result.status).json(result);
+  } catch (error) {
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting likes count.",
+    });
+  }
+};
+
+//get users who liked the post
+export const getUsersWhoLikedPostController = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const result = await getUsersWhoLikedPost(postId);
+    return res.status(result.status).json(result);
+  } catch (error) {
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting liked users.",
+    });
+  }
+};
+
+//delete post
+export const deletedPostController = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const userId = req.userId;
+    const result = await deletePost(postId, userId);
+    return res.status(result.status).json(result);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while deleting posts.",
+    });
+  }
+};
+
+export const addToFeaturedPostController = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const userId = req.userId;
+    const result = await addToFeaturedPost(postId, userId);
+    return res.status(result.status).json(result);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while adding post as featured.",
+    });
+  }
+};
+
+export const getFeaturedPostsByUserController = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const result = await getFeaturedPostsByUser(userId);
+    return res.status(result.status).json(result);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting featured post.",
+    });
+  }
+};
+
+export const removeFromFeaturedPostController = async (req, res) => {
+  try {
+    const { postId } = req.params;
+    const userId = req.userId;
+    const result = await removeFromFeaturedPost(postId, userId);
+    return res.status(result.status).json(result);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while removing featured post.",
+    });
+  }
+};
+
+export const deleteCommentController = async (req, res) => {
+  try {
+    const { postId, commentId } = req.params;
+    const userId = req.userId;
+    const result = await deleteComment(postId, commentId, userId);
+    return res.status(result.status).json(result);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      status: 500,
+      message: "An error occurred while deleting the comment.",
+    });
+  }
+};
+
+export const toggleCommentLikeController = async (req, res) => {
+  try {
+    const { postId, commentId } = req.params;
+    const userId = req.userId;
+    const response = await toggleCommentLike(postId, commentId, userId);
+    return res.status(response.status).json(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      status: 500,
+      message: "An error occurred while liking the comment.",
     });
   }
 };

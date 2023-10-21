@@ -1,116 +1,225 @@
 import React, { useEffect, useState } from "react";
 import "./feed.scss";
 // import profilePic from "../../../Images/investorIcon/profilePic.webp";
-import SmallProfileCard from "../Cards/TwoSmallMyProfile/SmallProfileCard";
+import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import RightProfileCard from "../InvestorGlobalCards/RightProfileCard/RightProfileCard";
-import RecommendationCard from "../Cards/Recommendation/RecommendationCard";
 import FeedPostCard from "../Cards/FeedPost/FeedPostCard";
 import CreatePostPopUp from "../../PopUp/CreatePostPopUp/CreatePostPopUp";
-import { getAllPostsAPI } from "../../../Service/user";
-import { useSelector } from "react-redux";
+import {
+  getAllPostsAPI,
+  getSavedPostCollections,
+  postUserPost,
+} from "../../../Service/user";
+import { useDispatch, useSelector } from "react-redux";
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
+import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
+import { useLocation } from "react-router-dom";
+import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
+import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 const Feed = () => {
   const [popupOpen, setPopupOpen] = useState(false);
-  const [allPosts, setAllPosts] = useState(null);
+  const [allPosts, setAllPosts] = useState([]);
   const [newPost, setNewPost] = useState(false);
+  const [loadingFeed, setLoadingFeed] = useState(false);
+  const [getSavedPostData, setgetSavedPostData] = useState("");
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
   const openPopup = () => {
     setPopupOpen(!popupOpen);
   };
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
-  useEffect(() => {
-    getAllPostsAPI()
+  const appendDataToAllPosts = (data) => {
+    setAllPosts([data, ...allPosts]);
+  };
+
+  const deletePostFilterData = (postId) => {
+    const filteredPosts = allPosts.filter((post) => post._id !== postId);
+    setAllPosts(filteredPosts);
+  };
+  
+
+  const fetchMorePosts = () => {
+    getAllPostsAPI(page)
       .then(({ data }) => {
-        setAllPosts(data);
+        if (data.length === 0) {
+          setHasMore(false);
+        } else {
+          setAllPosts([...allPosts, ...data]);
+          setPage(page + 1);
+        }
       })
       .catch((err) => {
+        setHasMore(false);
         console.log(err);
-        setAllPosts([]);
       });
-  }, [newPost]);
+  };
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const showPopup = queryParams.get("showPopup") === "true";
 
-  const savePostHandler = async (postId) => {
-    try {
-      // api call for savin a post
-    } catch (error) {}
+  useEffect(() => {
+    if (showPopup) {
+      setPopupOpen(true);
+      const urlWithoutQuery = location.pathname;
+      window.history.replaceState({}, "", urlWithoutQuery);
+    }
+  }, [location]);
+
+  useEffect(() => {
+    getSavedPostCollections(loggedInUser._id).then((data) => {
+      setgetSavedPostData(data);
+    });
+    fetchMorePosts();
+  }, []);
+  // newPost
+
+  useEffect(() => {
+    document.title = "Home | The Capital Hub";
+    dispatch(setPageTitle("Home"));
+  }, []);
+
+  // Repost
+  const [repostLoading, setRepostLoading] = useState({
+    instant: false,
+    withThoughts: false,
+  });
+  const [respostingPostId, setRepostingPostId] = useState("");
+
+  const repostInstantly = (resharedPostId) => {
+    setRepostLoading({ ...repostLoading, instant: true });
+    postUserPost({ resharedPostId })
+      .then(() => fetchMorePosts())
+      .catch((err) => console.log(err))
+      .finally(() => setRepostLoading({ ...repostLoading, instant: false }));
   };
 
   return (
-    <>
-      <div className="container-fluid feed_container">
-        <div className="row mt-2">
-          <div className="col">
-            <SmallProfileCard text={"Home"} />
-            <div className="content-70">
-              <div className="row">
-                <div className="col-12 mt-2">
-                  <div className="box start_post_container">
-                    <img
-                      src={loggedInUser.profilePicture}
-                      alt="Image"
-                      className="rounded-circle"
-                    />
-                    <div className="w-100 me-4" onClick={openPopup}>
-                      <input
-                        className="px-3"
-                        type="text"
-                        placeholder="Write a post..."
-                        style={{ pointerEvents: "none" }}
-                      />
-                    </div>
-                  </div>
-                </div>
+    <MaxWidthWrapper>
+      <div className=" feed_container">
+        <div className="main_content">
+          <div className="Posts__column d-flex flex-column gap-4">
+            {/* Small Profile Card */}
+            <SmallProfileCard className="d-none d-md-block" text={"Home"} />
+            {/* Write a Post */}
+            <div className="bg-white rounded-5 start_post_container">
+              <img
+                src={loggedInUser.profilePicture}
+                alt="Image"
+                className="rounded-circle"
+                style={{ width: "50px", height: "50px" }}
+              />
+              <div
+                className="w-auto flex-grow-1 me-4"
+                onClick={openPopup}
+                style={{ cursor: "pointer" }}
+              >
+                <input
+                  className="px-3 flex-grow-1"
+                  type="text"
+                  placeholder="Write a post..."
+                  style={{ pointerEvents: "none" }}
+                />
               </div>
-              {allPosts ? (
-                allPosts.map(
+            </div>
+            {/* Posts container - column of <FeedPostCard /> */}
+            <div className="posts__container d-flex flex-column gap-3">
+              {/* {!loadingFeed ? ( */}
+              <InfiniteScroll
+                className="m-0 p-0"
+                dataLength={allPosts.length}
+                next={fetchMorePosts}
+                hasMore={hasMore}
+                loader={
+                  <div className="container p-5 text-center my-5 bg-white rounded-5 shadow-sm ">
+                    <SpinnerBS />
+                  </div>
+                }
+              >
+                {allPosts?.map(
                   ({
                     description,
-                    user: { firstName, lastName, designation, profilePicture },
+                    user: {
+                      firstName,
+                      lastName,
+                      designation,
+                      profilePicture,
+                      _id: userId,
+                      startUp,
+                      investor,
+                    },
                     video,
                     image,
+                    documentUrl,
+                    documentName,
                     createdAt,
-                  }) => (
-                    <FeedPostCard
-                      key={Math.random()}
-                      designation={designation}
-                      profilePicture={profilePicture}
-                      description={description}
-                      firstName={firstName}
-                      lastName={lastName}
-                      video={video}
-                      image={image}
-                      createdAt={createdAt}
-                    />
-                  )
-                )
-              ) : (
-                <p className="container p-5 text-center my-5 bg-white rounded-5 shadow ">
-                  Loading...
-                </p>
-              )}
+                    likes,
+                    _id,
+                    resharedPostId,
+                  }) => {
+                    return (
+                      <FeedPostCard
+                        key={_id}
+                        userId={userId}
+                        postId={_id}
+                        designation={designation}
+                        startUpCompanyName={startUp}
+                        investorCompanyName={investor}
+                        profilePicture={profilePicture}
+                        description={description}
+                        firstName={firstName}
+                        lastName={lastName}
+                        video={video}
+                        image={image}
+                        documentName={documentName}
+                        documentUrl={documentUrl}
+                        createdAt={createdAt}
+                        likes={likes}
+                        fetchAllPosts={fetchMorePosts}
+                        response={getSavedPostData}
+                        repostWithToughts={(resharedPostId) => {
+                          setRepostingPostId(resharedPostId);
+                          openPopup();
+                        }}
+                        repostInstantly={repostInstantly}
+                        repostLoading={repostLoading}
+                        resharedPostId={resharedPostId}
+                        deletePostFilterData={deletePostFilterData}
+                      />
+                    );
+                  }
+                )}
+              </InfiniteScroll>
+
+              {/* ) : (
+                <div className="container p-5 text-center my-5 bg-white rounded-5 shadow-sm ">
+                  <SpinnerBS />
+                </div>
+              )} */}
             </div>
-            {popupOpen && (
-              <CreatePostPopUp
-                setPopupOpen={setPopupOpen}
-                popupOpen
-                setNewPost={setNewPost}
-              />
-            )}
           </div>
-          <div className="col   d-none d-xl-block">
-            <div className="content-30">
-              <div className="row">
-                <RightProfileCard />
-                <RecommendationCard />
-                <NewsCorner />
-              </div>
-            </div>
-          </div>
+          {popupOpen && (
+            <CreatePostPopUp
+              setPopupOpen={setPopupOpen}
+              popupOpen
+              setNewPost={setNewPost}
+              respostingPostId={respostingPostId}
+              appendDataToAllPosts={appendDataToAllPosts}
+            />
+          )}
+        </div>
+        <div className="right_content">
+          <RightProfileCard />
+          <RecommendationCard />
+          <NewsCorner />
         </div>
       </div>
-    </>
+    </MaxWidthWrapper>
   );
 };
 

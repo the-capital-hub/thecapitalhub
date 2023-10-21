@@ -1,0 +1,199 @@
+.chat_main_container {
+  background: white;
+  display: flex;
+  overflow: hidden;
+  height: 100vh;
+
+  @media (min-width: 821px) {
+    background-color: #eaeef2;
+  }
+
+  .mobile-nav {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    a img {
+      width: 200px;
+      object-fit: contain;
+      max-width: 50vw;
+    }
+    .actions {
+    }
+  }
+
+  .left_section_wrapper {
+    height: 96vh;
+    overflow-y: auto;
+    position: relative;
+
+    .back_img {
+      width: fit-content;
+      padding: 10px;
+      height: max-content;
+      background: #eaeef2;
+      cursor: pointer;
+      position: fixed;
+      z-index: 10;
+      top: 25px;
+      left: 35px;
+    }
+
+    @media (min-width: 768px) {
+      flex: 0 0 22rem;
+    }
+
+    @media (min-width: 1200px) {
+      flex: 0 0 24rem;
+    }
+
+    @media (min-width: 1440px) {
+      flex: 0 0 28rem;
+    }
+
+    scrollbar-width: thick;
+    scrollbar-color: #fd5901 transparent;
+
+    &::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #fd5901;
+      border-radius: 10rem;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #fd5901;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+      border-radius: 10rem;
+    }
+
+    .left_section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 0 0 22rem;
+      gap: 1em;
+    }
+  }
+
+  .main_section {
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    .select-chat-container {
+      height: 100%;
+      border-radius: 30px;
+      border: 1px solid #cfcfcf;
+      background: #fff;
+      box-shadow: 4px 4px 30px 0px rgba(0, 0, 0, 0.11);
+      color: rgba(253, 89, 1, 0.69);
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        display: block;
+        object-fit: contain;
+        width: 75%;
+        max-width: 700px;
+        height: auto;
+      }
+    }
+
+    .mobileView_chat_sidebar {
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #fd590144;
+        border-radius: 10rem;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: #fd5901;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
+        border-radius: 10rem;
+      }
+    }
+  }
+
+  .right_section_wrapper {
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
+    flex: 0 0 22rem;
+    gap: 1em;
+    height: 98dvh;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(253, 89, 1, 0.05);
+      border-radius: 10rem;
+
+      &:hover {
+        background-color: rgba(253, 89, 1, 0.8);
+      }
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+      border-radius: 10rem;
+    }
+
+    @media (min-width: 768px) {
+      flex: 0 0 22rem;
+    }
+
+    @media (min-width: 1200px) {
+      flex: 0 0 24rem;
+    }
+
+    @media (min-width: 1440px) {
+      flex: 0 0 28rem;
+    }
+
+    .chat_settings {
+      width: 100%;
+      min-height: 85dvh;
+    }
+
+    .text_orange {
+      color: rgba(253, 89, 1, 1);
+    }
+
+    .orange_underline {
+      text-decoration: underline;
+      text-decoration-color: rgba(253, 89, 1, 1);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.25em;
+    }
+  }
+
+  // CSS for Add new community modal
+  .addNewCommunity_modal_wrapper {
+    .modal {
+      .modal-body {
+        max-height: 85dvh;
+      }
+    }
+  }
+}

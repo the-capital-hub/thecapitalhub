@@ -17,8 +17,13 @@
     gap: 10px;
     align-items: center;
 
+    .profile-image {
+      border: 2px solid #fd5901;
+    }
+
     .manage_acount_btn {
-      background: #c9c9c9 !important;
+      background: #fd5901;
+      color: #fff;
     }
 
     .right_view_profile_card {

@@ -1,9 +1,51 @@
 .register_container {
+  .login_buttons_row {
+    // margin-top: 20px;
+    // display: flex;
+    // flex-direction: row;
+    // justify-content: center;
+    // align-items: center;
+    // width: 70%;
+    // gap: 10px;
+  }
+
+  .login_btn {
+    width: 150px;
+    height: 50px;
+    padding: 10px 40px;
+    font-weight: 500;
+    font-size: 18px;
+
+    border: 1px solid transparent;
+    border-radius: 10rem;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: transparent;
+
+    transition: all 0.15s ease-in-out;
+
+    &:active {
+      box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25) inset;
+    }
+
+    &.startup {
+      border: 1px solid #fd5901;
+      background-color: #fd5901;
+      color: white;
+    }
+
+    &.investor {
+      border: 1px solid #d3f36b;
+      background-color: #d3f36b;
+      color: black;
+    }
+  }
+
   .register_heading {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     flex-direction: column;
+
     .backArrow {
       position: absolute;
       top: 16%;
@@ -34,11 +76,13 @@
     justify-content: center;
     flex-direction: column;
     padding-top: 5%;
+    gap: 2em;
+
     .backArrow {
       height: 25px;
       width: 25px;
       cursor: pointer;
-    }   
+    }
 
     h1 {
       font-family: "Poppins";
@@ -133,6 +177,23 @@
     background: #fd5901;
     border-radius: 10px;
     border: none;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+
+    &:active {
+      box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25) inset;
+    }
+
+    &.startup {
+      border: 1px solid #fd5901;
+      background-color: #fd5901;
+      color: white;
+    }
+
+    &.investor {
+      border: 1px solid #d3f36b;
+      background-color: #d3f36b;
+      color: black;
+    }
   }
 
   .submit_btn {
@@ -175,6 +236,14 @@
       height: 30px;
       margin: 10px;
     }
+  }
+
+  .orange {
+    color: #fd5901;
+  }
+
+  .green {
+    color: #d3f36b;
   }
 }
 
@@ -223,6 +292,7 @@
           line-height: normal;
         }
       }
+
       input[type="tel"] {
         width: 100%;
         padding: 15px;

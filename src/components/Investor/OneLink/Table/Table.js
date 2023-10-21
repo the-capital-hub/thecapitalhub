@@ -1,6 +1,8 @@
 import React from "react";
 import "./table.scss";
 
+const YEARS = ["2023", "2024", "2025", "2026", "2027"];
+
 const Table = ({ hidden, page }) => {
   return (
     <>
@@ -10,79 +12,101 @@ const Table = ({ hidden, page }) => {
         <table>
           <tr>
             <th>Revenue:</th>
-            <td>
+            {YEARS.map((year, index) => {
+              return (
+                <td className="" key={`revenue${year}${index}`}>
+                  {page === "oneLinkEditPage" ? (
+                    <input className="table_input" placeholder={year} />
+                  ) : (
+                    `${year}`
+                  )}
+                </td>
+              );
+            })}
+            {/* <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
             </td>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
             </td>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
             </td>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
             </td>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
-            </td>
+            </td> */}
           </tr>
           <tr>
             <th>Expense:</th>
-            <td>
+            {YEARS.map((year, index) => {
+              return (
+                <td className="" key={`expense${year}${index}`}>
+                  {page === "oneLinkEditPage" ? (
+                    <input className="table_input" placeholder={year} />
+                  ) : (
+                    `${year}`
+                  )}
+                </td>
+              );
+            })}
+            {/* <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
             </td>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
             </td>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
             </td>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
             </td>
             <td>
               {page === "oneLinkEditPage" ? (
-                <input placeholder="1000" />
+                <input className="table_input" placeholder="1000" />
               ) : (
                 "1000"
               )}
-            </td>
+            </td> */}
           </tr>
         </table>
       </div>

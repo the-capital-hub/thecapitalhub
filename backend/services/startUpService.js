@@ -1,11 +1,20 @@
 import { UserModel } from "../models/User.js";
 import { StartUpModel } from "../models/startUp.js";
 import { sendMail } from "../utils/mailHelper.js";
+import { cloudinary } from "../utils/uploadImage";
 
 const adminMail = "learn.capitalhub@gmail.com";
 
 export const createStartup = async (startUpData) => {
   try {
+    if (startUpData?.logo) {
+      const { url } = await cloudinary.uploader.upload(startUpData.logo, {
+        folder: `${process.env.CLOUDIANRY_FOLDER}/users/profilePictures`,
+        format: "webp",
+        unique_filename: true,
+      });
+      startUpData.logo = url;
+    }
     let existingCompany = await StartUpModel.findOne({
       founderId: startUpData.founderId,
     });
@@ -17,6 +26,7 @@ export const createStartup = async (startUpData) => {
       return {
         status: 200,
         message: "Startup Updated",
+        data: existingCompany,
       };
     }
     const newStartUp = new StartUpModel({
@@ -44,25 +54,26 @@ export const createStartup = async (startUpData) => {
         Previous Funding: ${newStartUp.preFundingAsk}
         Number of Funding Rounds: ${newStartUp.numberOfFundingRounds}
       `;
-      const subject = "New Account Request";
-      const response = await sendMail(
-        user.firstName,
-        adminMail,
-        user.email,
-        subject,
-        emailMessage
-      )
-      if(response.status === 200) {
-        return {
-          status: 200,
-          message: "Startup Added",
-        };
-      } else {
-        return {
-          status: 500,
-          message: "Error while sending mail",
-        };
-      }
+    const subject = "New Account Request";
+    const response = await sendMail(
+      user.firstName,
+      adminMail,
+      user.email,
+      subject,
+      emailMessage
+    )
+    if (response.status === 200) {
+      return {
+        status: 200,
+        message: "Startup Added",
+        data: newStartUp,
+      };
+    } else {
+      return {
+        status: 500,
+        message: "Error while sending mail",
+      };
+    }
   } catch (error) {
     console.error("Error creating company:", error);
     return {
@@ -95,7 +106,7 @@ export const getOnePager = async (oneLink) => {
   }
 };
 
-export const updateStartUpData = async (founderId, data) => {
+export const updateStartUpData = async (founderId, introductoryMessage) => {
   try {
     const startUp = await StartUpModel.findOne({ founderId });
     if (!startUp) {
@@ -106,7 +117,12 @@ export const updateStartUpData = async (founderId, data) => {
     }
     const updatedData = await StartUpModel.findOneAndUpdate(
       { founderId },
-      data,
+      {
+        $push: {
+          previousIntroductoryMessage: startUp.introductoryMessage || introductoryMessage,
+        },
+        introductoryMessage: introductoryMessage,
+      },
       { new: true }
     );
     return {
@@ -152,7 +168,7 @@ export const investNowService = async (args) => {
         message: "Recipient user not found.",
       };
     }
-    
+
     const emailMessage = `
       Hello ${toUser.firstName},
       
@@ -204,17 +220,23 @@ export const investNowService = async (args) => {
 
 export const getStartupByFounderId = async (founderId) => {
   try {
-    const company = await StartUpModel.findOne({ founderId });
-    if (!company) {
+    const user = await UserModel.findById(founderId).populate("startUp");
+    if (!user) {
       return {
         status: 404,
-        message: "StartUp not found.",
+        message: "User not found.",
+      };
+    }
+    if (!user.startUp) {
+      return {
+        status: 404,
+        message: "User does not have a startup.",
       };
     }
     return {
       status: 200,
       message: "StartUp details retrieved successfully.",
-      data: company,
+      data: user.startUp,
     };
   } catch (err) {
     console.error("Error getting StartUp details:", err);
@@ -224,3 +246,46 @@ export const getStartupByFounderId = async (founderId) => {
     };
   }
 }
+
+// Get All Startups
+export const getAllStartups = async () => {
+  try {
+    const startups = await StartUpModel.find();
+    return {
+      status: 200,
+      message: "Startups retrieved successfully.",
+      data: startups,
+    };
+  } catch (error) {
+    console.error("Error getting all startups:", error);
+    return {
+      status: 500,
+      message: "An error occurred while getting all startups.",
+    };
+  }
+};
+
+export const getStartupsBySearch = async (searchQuery) => {
+  try {
+    const startups = await StartUpModel.find({
+      company: { $regex: searchQuery, $options: 'i' },
+    });
+    if (startups.length === 0) {
+      return {
+        status: 404,
+        message: "No startups found",
+      };
+    }
+    return {
+      status: 200,
+      message: "Startups retrieved successfully.",
+      data: startups,
+    };
+  } catch (error) {
+    console.error("Error searching for startups:", error);
+    return {
+      status: 500,
+      message: "An error occurred while searching for startups.",
+    };
+  }
+};

@@ -14,9 +14,12 @@ import { firebase, auth } from "../../firebase";
 import SelectWhatYouAre from "../PopUp/SelectWhatYouAre/SelectWhatYouAre";
 import StartUpForm from "../PopUp/StartUpForm/StartUpForm";
 import InvestorForm from "../PopUp/InvestorForm/InvestorForm";
+// import { Navigate } from "react-router-dom";
+// import { useSelector } from "react-redux";
 
 const Register = () => {
   const [isMobileVerified, setIsMobileVerified] = useState(false);
+  // const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showErrorPopup, setShowErrorPopup] = useState(false);
@@ -202,6 +205,10 @@ const Register = () => {
     setShowInvestor(true);
   };
 
+  useEffect(() => {
+    document.title = "Register | The Capital Hub";
+  }, []);
+
   return (
     <>
       <div className="row d-flex register_container">
@@ -324,7 +331,7 @@ const Register = () => {
                 />
               </div>
             </div>
-{/* 
+            {/* 
             <div className="form-check">
               <input
                 type="checkbox"
@@ -354,7 +361,7 @@ const Register = () => {
             </h3>
           </form>
 
-          <div className="line-container">
+          {/* <div className="line-container">
             <hr className="line" />
             <span className="text">Or continue with</span>
             <hr className="line" />
@@ -365,7 +372,7 @@ const Register = () => {
               <img src={FIcon} alt="image" />
               <img src={AIcon} alt="image" />
             </div>
-          </div>
+          </div> */}
         </div>
         {isSubmitted && (
           <AfterRegisterPopUp onClose={handleClosePopup} register={true} />

@@ -1,17 +1,49 @@
 import React, { useState } from "react";
 import "./IntroductoryMessage.scss";
 import Send from "../../../../Images/Send.svg";
-import { updateIntroMsgAPI } from "../../../../Service/user";
+import { updateIntroMsgAPI, postInvestorData } from "../../../../Service/user";
+import { useSelector } from "react-redux";
 
-const IntroductoryMessage = ({ title, image, para, input, className }) => {
+const IntroductoryMessage = ({ title, image, para, previous, input, className, isExitClicked, setCompany, investor = false }) => {
   const [newIntroMsg, setNewIntroMsg] = useState("");
   const [newPara, setNewPara] = useState("");
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const [showPreviousMessages, setShowPreviousMessages] = useState(false);
+
+  const togglePreviousMessages = () => {
+    setShowPreviousMessages(!showPreviousMessages);
+  };
+  let top3Previous = [];
+  if (previous) {
+    const sortedPrevious = [...previous];
+    top3Previous = sortedPrevious.slice(0, 3);
+  }
 
   const submitNewIMHandler = async () => {
     try {
       const formattedMsg = newIntroMsg.replace(/\n/g, "<br/>");
-      await updateIntroMsgAPI({ introductoryMessage: formattedMsg });
+      if (investor) {
+        let updatedMessages = previous;
+
+        if (previous) {
+          updatedMessages = [...previous, formattedMsg];
+        } else {
+          updatedMessages = [formattedMsg];
+        }
+        await postInvestorData({
+          founderId: loggedInUser._id,
+          introductoryMessage: formattedMsg,
+          previousIntroductoryMessage: updatedMessages,
+        });
+      } else {
+        console.log(formattedMsg);
+        await updateIntroMsgAPI({ introductoryMessage: formattedMsg });
+      }
       setNewPara(formattedMsg);
+      setCompany((prevCompany) => ({
+        ...prevCompany,
+        introductoryMessage: formattedMsg,
+      }));
       setNewIntroMsg("");
     } catch (error) {
       console.error("Error updating intro: ", error);
@@ -20,19 +52,46 @@ const IntroductoryMessage = ({ title, image, para, input, className }) => {
 
   return (
     <div className={`introductory_message_container mt-3 ${className}`}>
-      <div className="box_container">
+      <div className="box_container rounded-3 border shadow-sm">
         <section className="title_section">
           <div
-            className={`title_wrapper ${
-              !para ? "title-only-border" : "default-border"
-            }`}
+            className={`title_wrapper ${!para ? "title-only-border" : "default-border"
+              }`}
           >
             <h6>{title}</h6>
+            {para && (
+              <button
+                className={`toggle-button ${investor ? 'investor' : 'startup'}`}
+                onClick={togglePreviousMessages}>
+                {showPreviousMessages ? "Hide Previous Messages" : "Show Previous Messages"}
+              </button>
+            )}
           </div>
         </section>
-        {para && (
+        {isExitClicked && newPara === "" && (para === undefined || para === "") && (
+          <div className="warning_message">Please enter an introductory message.</div>
+        )}
+        {(para || newPara) && (
           <section className="text_section">
+            {showPreviousMessages &&
+              <>
+                <p><strong>Previous Introductory Message:</strong></p>
+                {previous && previous.length > 0 ? (
+                  top3Previous?.map((message, index) => (
+                    <p
+                      key={index}
+                      dangerouslySetInnerHTML={{ __html: message }}
+                    />
+                  ))
+                ) : (
+                  <p>No previous introductory messages.</p>
+                )}
+                <hr />
+              </>
+            }
+
             <p dangerouslySetInnerHTML={{ __html: newPara || para }} />
+
           </section>
         )}
         {input && (
