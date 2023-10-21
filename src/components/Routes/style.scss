@@ -15,6 +15,10 @@
     transition: width 0.3s ease;
     overflow: scroll;
 
+    @media (min-width: 821px) {
+      top: calc(80px + 5%);
+    }
+
     // Add class for sidebar in fixed position
     &.fixed {
       position: absolute;

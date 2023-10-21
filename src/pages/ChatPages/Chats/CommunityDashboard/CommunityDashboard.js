@@ -330,7 +330,7 @@ const CommunityDashboard = ({
                             id={message?._id}
                           />
                           <Linkify>
-                            <p>{message.text}</p>
+                            <p className="text-break">{message.text}</p>
                           </Linkify>
                         </div>
                       )}
@@ -389,7 +389,7 @@ const CommunityDashboard = ({
                       {message.text !== "" && (
                         <div className="message_container">
                           <Linkify>
-                            <p>{message.text}</p>
+                            <p className="text-break">{message.text}</p>
                           </Linkify>
                         </div>
                       )}
