@@ -19,7 +19,7 @@ import {
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { getBase64 } from "../../../../../utils/getBase64";
-import camimg from "../../../../../Images/Camera.png"
+import camimg from "../../../../../Images/Camera.png";
 
 const OneLinkEditView = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -88,7 +88,6 @@ const OneLinkEditView = () => {
       socialLinks: updatedSocialLinks,
     });
   };
-
 
   const handleUpdate = (logo) => {
     if (logo) {
@@ -185,21 +184,18 @@ const OneLinkEditView = () => {
     handleUpdate(logo);
   };
 
-
   const [fundingAskRows, setFundingAskRows] = useState([
-    { required: '', amount: '' },
+    { required: "", amount: "" },
   ]);
 
-  const [roadMapRows, setRoadMapRows] = useState([
-    { date: '', milestone: '' },
-  ]);
+  const [roadMapRows, setRoadMapRows] = useState([{ date: "", milestone: "" }]);
 
   const addRow = () => {
-    setFundingAskRows([...fundingAskRows, { required: '', amount: '' }]);
+    setFundingAskRows([...fundingAskRows, { required: "", amount: "" }]);
   };
 
   const addRodMapRow = () => {
-    setRoadMapRows([...roadMapRows, { date: '', milestone: '' }]);
+    setRoadMapRows([...roadMapRows, { date: "", milestone: "" }]);
   };
 
   const deleteRow = (index) => {
@@ -344,20 +340,20 @@ const OneLinkEditView = () => {
         </div>
       </div> */}
 
-
-
-
-
-
       <section className="one_link_edit_view_section w-100 p-3 rounded">
         <div className="download_preview p-5 ">
-
           <section className=" img_company_data d-flex flex-column flex-md-row w-100 justify-content-between align-items-center gap-3">
             <div className="img_right ">
               <label htmlFor="logoImg" className="position-relative">
-                <img src={selectedLogo || imageData} alt="image" role="button" />
-                <span className="position-absolute text-dark py-1 px-2 d-flex flex-column justify-content-center align-items-center" style={{ fontSize: "15px", padding: "4px" }}>
-
+                <img
+                  src={selectedLogo || imageData}
+                  alt="image"
+                  role="button"
+                />
+                <span
+                  className="position-absolute text-dark py-1 px-2 d-flex flex-column justify-content-center align-items-center"
+                  style={{ fontSize: "15px", padding: "4px" }}
+                >
                   Upload Company Logo
                 </span>
               </label>
@@ -412,7 +408,11 @@ const OneLinkEditView = () => {
               </div>
               <div className="tags_inp">
                 <h5>Tags</h5>
-                <input type="text" id="tags" name="tags" className=" px-3"
+                <input
+                  type="text"
+                  id="tags"
+                  name="tags"
+                  className=" px-3"
                   value={formData.tagline}
                   onChange={(e) => handleInputChange("tagline", e)}
                   onBlur={(e) => handleUpdate()}
@@ -477,7 +477,9 @@ const OneLinkEditView = () => {
           </section>
           <div className="about_company_section my-3">
             <h5>About Company</h5>
-            <textarea type="text" className="m-0 fs-6 w-100"
+            <textarea
+              type="text"
+              className="m-0 fs-6 w-100"
               value={formData.description}
               onChange={(e) => handleInputChange("description", e)}
               onBlur={(e) => handleUpdate()}
@@ -569,13 +571,22 @@ const OneLinkEditView = () => {
           <h4>Fund Asking</h4>
           <section className="fund_sking_section  d-flex flex-column  justify-content-between gap-3">
             {fundingAskRows.map((row, index) => (
-              <div className="d-flex flex-md-row flex-column w-100 gap-2" key={index}>
+              <div
+                className="d-flex flex-md-row flex-column w-100 gap-2"
+                key={index}
+              >
                 <div className="fund_asking w-100">
                   <h5>Required For</h5>
                   <input
                     type="text"
                     value={row.required}
-                    onChange={(e) => handleFundingAskInputChange(index, 'required', e.target.value)}
+                    onChange={(e) =>
+                      handleFundingAskInputChange(
+                        index,
+                        "required",
+                        e.target.value
+                      )
+                    }
                     className="w-100 px-3"
                   />
                 </div>
@@ -585,7 +596,9 @@ const OneLinkEditView = () => {
                   <input
                     type="text"
                     value={row.amount}
-                    onChange={(e) => handleInputChange(index, 'amount', e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange(index, "amount", e.target.value)
+                    }
                     className="w-100 px-3"
                   />
                 </div>
@@ -599,22 +612,28 @@ const OneLinkEditView = () => {
                 )}
               </div>
             ))}
-
           </section>
-          <button onClick={addRow} className="add_row_btn startup">+ Add Row</button>
-          <hr/>
+          <button onClick={addRow} className="add_row_btn startup">
+            + Add Row
+          </button>
+          <hr />
 
           <h4>Roadmap</h4>
           <section className="roadmap_section d-flex flex-column justify-content-between gap-3">
             {roadMapRows.map((row, index) => (
-              <div className="d-flex flex-md-row flex-column w-100 gap-2" key={index}>
+              <div
+                className="d-flex flex-md-row flex-column w-100 gap-2"
+                key={index}
+              >
                 <div className="Roadmap w-100">
                   <h5>Date</h5>
                   <input
                     type="date"
                     name={`date_${index}`}
                     value={row.date}
-                    onChange={(e) => handleRoadMapInputChange(index, "date", e.target.value)}
+                    onChange={(e) =>
+                      handleRoadMapInputChange(index, "date", e.target.value)
+                    }
                     className="w-100 px-3"
                   />
                 </div>
@@ -625,7 +644,13 @@ const OneLinkEditView = () => {
                     type="text"
                     name={`milestone_${index}`}
                     value={row.milestone}
-                    onChange={(e) => handleRoadMapInputChange(index, "milestone", e.target.value)}
+                    onChange={(e) =>
+                      handleRoadMapInputChange(
+                        index,
+                        "milestone",
+                        e.target.value
+                      )
+                    }
                     className="w-100 px-3"
                   />
                 </div>
@@ -644,7 +669,7 @@ const OneLinkEditView = () => {
           <button className="add_row_btn startup" onClick={addRodMapRow}>
             + Add Row
           </button>
-          <hr/>
+          <hr />
           <section className="team_section d-flex  flex-row gap-3">
             {company?.team?.map((team, index) => (
               <TeamCard
