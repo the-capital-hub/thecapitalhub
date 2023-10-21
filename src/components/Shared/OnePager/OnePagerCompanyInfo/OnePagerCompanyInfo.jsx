@@ -13,6 +13,7 @@ export default function OnePagerCompanyInfo({
 }) {
   const { website, ...otherLinks } = socialLinks;
   const links = Object.values(otherLinks);
+  const tags = keyFocus.split(",");
   // console.log(links);
 
   return (
@@ -67,12 +68,24 @@ export default function OnePagerCompanyInfo({
       {/* Tags */}
       <fieldset>
         <legend>Tags</legend>
-        <input
+        {/* <input
           type="text"
           readOnly
           value={keyFocus}
           className="onePager_input shadow-sm"
-        />
+        /> */}
+        <div className="onePager_input d-flex gap-3 align-items-center shadow-sm flex-wrap">
+          {tags.map((tag, index) => {
+            return (
+              <div
+                className="rounded d-flex align-items-center justify-content-center flex-wrap px-3 py-2 tag"
+                key={tag}
+              >
+                <p className="m-0 small">{tag}</p>
+              </div>
+            );
+          })}
+        </div>
       </fieldset>
 
       {/* Website Link */}

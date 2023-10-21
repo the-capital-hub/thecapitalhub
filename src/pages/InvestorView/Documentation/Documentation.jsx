@@ -21,7 +21,7 @@ const Documentation = () => {
   }, []);
   return (
     <MaxWidthWrapper>
-      <div className="border_left">
+      <div className="">
         <div className="documentation shadow-sm border">
           <h1>Documentation</h1>
           <div className="docscontainer col-7 justify-content-between mx-auto">
@@ -34,7 +34,9 @@ const Documentation = () => {
             <Card
               text={"Pitch Deck"}
               onClicked={() =>
-                navigate(`/onelink/${username}/${userId}/documentation/pitchdeck`)
+                navigate(
+                  `/onelink/${username}/${userId}/documentation/pitchdeck`
+                )
               }
               image={GreenPitch}
             />
@@ -54,14 +56,18 @@ const Documentation = () => {
             <Card
               text={"KYC Details"}
               onClicked={() =>
-                navigate(`/onelink/${username}/${userId}/documentation/kycdetails`)
+                navigate(
+                  `/onelink/${username}/${userId}/documentation/kycdetails`
+                )
               }
               image={GreenKYC}
             />
             <Card
               text={"Business"}
               onClicked={() =>
-                navigate(`/onelink/${username}/${userId}/documentation/business`)
+                navigate(
+                  `/onelink/${username}/${userId}/documentation/business`
+                )
               }
               image={GreenBusiness}
             />
