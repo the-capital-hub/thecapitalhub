@@ -6,7 +6,7 @@ function PortfolioPage() {
   return (
     <div className="PortfolioPage_page px-3">
       <div className="top_section ">
-        <div className="box box_one">
+        <div className="box box_one ">
           <img src={assets.impactshall} alt="impactshall" />
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
