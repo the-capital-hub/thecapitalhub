@@ -81,19 +81,19 @@ const OneLinkEditView = () => {
       .catch(() => setCompany({}));
   }, []);
 
-  useEffect(() => {
-    // Fetch the image data from the URL
-    fetch(company?.logo)
-      .then((response) => response.blob())
-      .then((blob) => {
-        // Create a URL for the blob data
-        const blobUrl = URL.createObjectURL(blob);
-        setImageData(blobUrl);
-      })
-      .catch((error) => {
-        console.error("Error fetching image:", error);
-      });
-  }, [company?.logo]);
+  // useEffect(() => {
+  //   // Fetch the image data from the URL
+  //   fetch(company?.logo)
+  //     .then((response) => response.blob())
+  //     .then((blob) => {
+  //       // Create a URL for the blob data
+  //       const blobUrl = URL.createObjectURL(blob);
+  //       setImageData(blobUrl);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching image:", error);
+  //     });
+  // }, [company?.logo]);
 
   const handleInputChange = (field, event) => {
     const updatedValue = event.target.value;
@@ -127,7 +127,7 @@ const OneLinkEditView = () => {
 
   const handleDownloadPDF = () => {
     const element = document.querySelector(".download_preview");
-    const buttons = document.querySelectorAll(".buttons button");
+    const buttons = document.querySelectorAll("button");
     buttons.forEach((button) => {
       button.style.display = "none";
     });
@@ -136,7 +136,8 @@ const OneLinkEditView = () => {
       removeContainer: true,
       backgroundColor: "#ffffff",
       scale: window.devicePixelRatio,
-      useCORS: false,
+      useCORS: true,
+      windowWidth: '1400px'
     }).then((canvas) => {
       const contentDataURL = canvas.toDataURL("image/png");
       const imgWidth = 210;
@@ -164,12 +165,17 @@ const OneLinkEditView = () => {
 
   const handlePreviewPDF = () => {
     const container = document.querySelector(".download_preview");
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+      button.style.display = "none";
+    });
     html2canvas(container, {
       allowTaint: false,
       removeContainer: true,
       backgroundColor: "#ffffff",
       scale: window.devicePixelRatio,
-      useCORS: false,
+      useCORS: true,
+      windowWidth: '1400px'
     }).then((canvas) => {
       const contentDataURL = canvas.toDataURL("image/png");
       const imgWidth = 210;
@@ -191,6 +197,9 @@ const OneLinkEditView = () => {
       const blob = pdf.output("blob");
       const blobUrl = URL.createObjectURL(blob);
       window.open(blobUrl, "_blank");
+      buttons.forEach((button) => {
+        button.style.display = "block";
+      });
     });
   };
 
@@ -400,7 +409,7 @@ const OneLinkEditView = () => {
             <div className="img_right ">
               <label htmlFor="logoImg" className="position-relative">
                 <img
-                  src={selectedLogo || imageData}
+                  src={selectedLogo || company?.logo}
                   alt="image"
                   role="button"
                 />
