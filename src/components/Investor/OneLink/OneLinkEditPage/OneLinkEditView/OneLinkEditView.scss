@@ -346,22 +346,36 @@
 
   .img_company_data {
     .img_right {
+      position: relative;
       border: 1px solid red;
+      display: inline-block;
+    }
 
-      // height: 120px;
+    .img_right label:hover span {
+      display: block !important;
+    }
+
+    .img_right label {
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+
       img {
         width: 194px;
         height: 203px;
       }
 
       span {
-        top: 35%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         font-size: 20px;
-        left: 16px;
         text-align: center;
-
+        display: none !important;
       }
     }
+
 
     .compant_data {
       width: 100%;
@@ -474,23 +488,30 @@
     padding: 0.25em 1em;
     border-radius: 5px;
   }
+
   .delete_row_btn {
     margin-top: 10px;
-    padding: 0.15em 0.5em; /* Adjust the padding */
+    padding: 0.15em 0.5em;
+    /* Adjust the padding */
     border-radius: 5px;
-    font-size: 14px; /* Adjust the font size */
-    border: none; /* Remove the border */
-    background: transparent; /* Make the background transparent */
-    cursor: pointer; /* Change cursor on hover */
+    font-size: 14px;
+    /* Adjust the font size */
+    border: none;
+    /* Remove the border */
+    background: transparent;
+    /* Make the background transparent */
+    cursor: pointer;
+    /* Change cursor on hover */
   }
-  
-  
+
+
 
   .startup {
     border: 1px solid #fd5901;
     background-color: #fd5901;
     color: white;
   }
+
   .roadmap_section {
     .Roadmap {
       position: relative;
@@ -541,5 +562,15 @@
       min-width: 150px;
       max-width: 250px;
     }
+  }
+
+  .save_btn {
+    margin-top: 10px;
+    padding: 0.25em 1em;
+    border-radius: 5px;
+    border: 1px solid #fd5901;
+    background-color: #fd5901;
+    color: white;
+    font-size: 20px;
   }
 }

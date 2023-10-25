@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import SmallProfileCard from "../../../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import OneLinkMarketSection from "../OneLinkMarketSection/OneLinkMarketSection";
 import OneLinkContactEdit from "./OneLinkContactEdit/OneLinkContactEdit";
+import AfterSuccessPopUp from "../../../../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import { useSelector } from "react-redux";
 import {
   getStartupByFounderId,
@@ -30,7 +31,7 @@ const OneLinkEditView = () => {
     description: "",
     location: "",
     logo: "",
-    tagline: "",
+    keyFocus: "",
     socialLinks: "",
     TAM: "",
     SAM: "",
@@ -38,6 +39,23 @@ const OneLinkEditView = () => {
   });
   const [selectedLogo, setSelectedLogo] = useState(null);
   const [imageData, setImageData] = useState(null);
+  const [fundingAskRows, setFundingAskRows] = useState([
+    { required: "", amount: "" },
+  ]);
+  const [roadMapRows, setRoadMapRows] = useState([{ date: "", milestone: "" }]);
+  const [competitorData, setCompetitorData] = useState([
+    { name: "" },
+  ]);
+
+  const initialData = {
+    rows: [
+      { label: "Revenue", values: [""] },
+      { label: "Expense", values: [""] },
+    ],
+  };
+
+  const [tableData, setTableData] = useState(initialData);
+
 
   useEffect(() => {
     getStartupByFounderId(userId)
@@ -47,7 +65,7 @@ const OneLinkEditView = () => {
           company: data.company || "",
           description: data.description || "",
           logo: data.logo || "",
-          tagline: data.tagline || "",
+          keyFocus: data.keyFocus || "",
           location: data.location || "",
           socialLinks: data.socialLinks || [],
           TAM: data.TAM || "",
@@ -55,23 +73,27 @@ const OneLinkEditView = () => {
           SOM: data.SOM || "",
           startedAtDate: data.startedAtDate || "",
         });
+        setFundingAskRows(data.fundingsAsk || fundingAskRows);
+        setRoadMapRows(data.roadMap || roadMapRows);
+        setCompetitorData(data.competitors || competitorData);
+        setTableData(data.projections.length > 0 ? data.projections[0] : tableData);
       })
       .catch(() => setCompany({}));
-  }, [userId]);
+  }, []);
 
-  useEffect(() => {
-    // Fetch the image data from the URL
-    fetch(company?.logo)
-      .then((response) => response.blob())
-      .then((blob) => {
-        // Create a URL for the blob data
-        const blobUrl = URL.createObjectURL(blob);
-        setImageData(blobUrl);
-      })
-      .catch((error) => {
-        console.error("Error fetching image:", error);
-      });
-  }, [company?.logo]);
+  // useEffect(() => {
+  //   // Fetch the image data from the URL
+  //   fetch(company?.logo)
+  //     .then((response) => response.blob())
+  //     .then((blob) => {
+  //       // Create a URL for the blob data
+  //       const blobUrl = URL.createObjectURL(blob);
+  //       setImageData(blobUrl);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching image:", error);
+  //     });
+  // }, [company?.logo]);
 
   const handleInputChange = (field, event) => {
     const updatedValue = event.target.value;
@@ -105,7 +127,7 @@ const OneLinkEditView = () => {
 
   const handleDownloadPDF = () => {
     const element = document.querySelector(".download_preview");
-    const buttons = document.querySelectorAll(".buttons button");
+    const buttons = document.querySelectorAll("button");
     buttons.forEach((button) => {
       button.style.display = "none";
     });
@@ -114,7 +136,8 @@ const OneLinkEditView = () => {
       removeContainer: true,
       backgroundColor: "#ffffff",
       scale: window.devicePixelRatio,
-      useCORS: false,
+      useCORS: true,
+      windowWidth: '1400px'
     }).then((canvas) => {
       const contentDataURL = canvas.toDataURL("image/png");
       const imgWidth = 210;
@@ -142,12 +165,17 @@ const OneLinkEditView = () => {
 
   const handlePreviewPDF = () => {
     const container = document.querySelector(".download_preview");
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+      button.style.display = "none";
+    });
     html2canvas(container, {
       allowTaint: false,
       removeContainer: true,
       backgroundColor: "#ffffff",
       scale: window.devicePixelRatio,
-      useCORS: false,
+      useCORS: true,
+      windowWidth: '1400px'
     }).then((canvas) => {
       const contentDataURL = canvas.toDataURL("image/png");
       const imgWidth = 210;
@@ -169,6 +197,9 @@ const OneLinkEditView = () => {
       const blob = pdf.output("blob");
       const blobUrl = URL.createObjectURL(blob);
       window.open(blobUrl, "_blank");
+      buttons.forEach((button) => {
+        button.style.display = "block";
+      });
     });
   };
 
@@ -183,12 +214,6 @@ const OneLinkEditView = () => {
     });
     handleUpdate(logo);
   };
-
-  const [fundingAskRows, setFundingAskRows] = useState([
-    { required: "", amount: "" },
-  ]);
-
-  const [roadMapRows, setRoadMapRows] = useState([{ date: "", milestone: "" }]);
 
   const addRow = () => {
     setFundingAskRows([...fundingAskRows, { required: "", amount: "" }]);
@@ -221,6 +246,44 @@ const OneLinkEditView = () => {
     updatedRows[index][field] = value;
     setRoadMapRows(updatedRows);
   };
+
+  // Competitor Input Change 
+  const handleCompetitorInputChange = (index, value) => {
+    const updatedCompetitorData = [...competitorData];
+    updatedCompetitorData[index].name = value;
+    setCompetitorData(updatedCompetitorData);
+  };
+
+  // Add Competitor
+  const addCompetitor = () => {
+    const updatedCompetitorData = [...competitorData, { name: "" }];
+    setCompetitorData(updatedCompetitorData);
+  };
+
+  // Delete Competitor
+  const deleteCompetitor = (index) => {
+    const updatedCompetitorData = competitorData.filter((_, i) => i !== index);
+    setCompetitorData(updatedCompetitorData);
+  };
+
+  const [fromSubmit, setFromSubmit] = useState(false);
+  const [popupData, setPopupData] = useState("");
+
+  const handleSubmit = async () => {
+    postStartUpData({
+      fundingsAsk: fundingAskRows,
+      roadMap: roadMapRows,
+      competitors: competitorData,
+      projections: tableData,
+      founderId: loggedInUser._id,
+    })
+      .then(({ data }) => {
+        setPopupData("Changes saved");
+        setFromSubmit(true);
+      })
+      .catch((err) => console.log(err));
+
+  }
 
   return (
     <>
@@ -346,7 +409,7 @@ const OneLinkEditView = () => {
             <div className="img_right ">
               <label htmlFor="logoImg" className="position-relative">
                 <img
-                  src={selectedLogo || imageData}
+                  src={selectedLogo || company?.logo}
                   alt="image"
                   role="button"
                 />
@@ -413,8 +476,9 @@ const OneLinkEditView = () => {
                   id="tags"
                   name="tags"
                   className=" px-3"
-                  value={formData.tagline}
-                  onChange={(e) => handleInputChange("tagline", e)}
+                  style={{ width: '100%' }}
+                  value={formData.keyFocus}
+                  onChange={(e) => handleInputChange("keyFocus", e)}
                   onBlur={(e) => handleUpdate()}
                 />
               </div>
@@ -535,42 +599,35 @@ const OneLinkEditView = () => {
           </section>
           <h4>Competitor</h4>
           <section className="competitor_social_link d-flex flex-column flex-md-row justify-content-between gap-3">
-            <div className="competitor_link w-100">
-              <h5>Competitor name 1</h5>
-              <input
-                type="text"
-                id="competitor_1"
-                name="competitor_1"
-                className="w-100 px-3"
-              />
-            </div>
-
-            <div className="competitor_link w-100">
-              <h5>Competitor name 2</h5>
-              <input
-                type="text"
-                id="competitor_2"
-                name="competitor_2"
-                className="w-100 px-3"
-              />
-            </div>
-
-            <div className="competitor_link w-100">
-              <h5>Competitor name 3</h5>
-              <input
-                type="text"
-                id="competitor_2"
-                name="competitor_2"
-                className="w-100 px-3"
-              />
-            </div>
+            {competitorData?.map((competitor, index) => (
+              <div className="competitor_link w-100" key={index}>
+                <h5>Competitor name {index + 1}</h5>
+                <input
+                  type="text"
+                  value={competitor.name}
+                  onChange={(e) => handleCompetitorInputChange(index, e.target.value)}
+                  className="w-100 px-3"
+                />
+                {index > 0 && (
+                  <button
+                    className="delete_row_btn"
+                    onClick={() => deleteCompetitor(index)}
+                  >
+                    X
+                  </button>
+                )}
+              </div>
+            ))}
           </section>
+          <button onClick={addCompetitor} className="add_row_btn startup">
+            + Add Competitor
+          </button>
           <section className="table_section">
-            <Table page={"oneLinkEditPage"} />
+            <Table page={"oneLinkEditPage"} setTable={setTableData} data={tableData} />
           </section>
           <h4>Fund Asking</h4>
           <section className="fund_sking_section  d-flex flex-column  justify-content-between gap-3">
-            {fundingAskRows.map((row, index) => (
+            {fundingAskRows?.map((row, index) => (
               <div
                 className="d-flex flex-md-row flex-column w-100 gap-2"
                 key={index}
@@ -597,7 +654,7 @@ const OneLinkEditView = () => {
                     type="text"
                     value={row.amount}
                     onChange={(e) =>
-                      handleInputChange(index, "amount", e.target.value)
+                      handleFundingAskInputChange(index, "amount", e.target.value)
                     }
                     className="w-100 px-3"
                   />
@@ -620,7 +677,7 @@ const OneLinkEditView = () => {
 
           <h4>Roadmap</h4>
           <section className="roadmap_section d-flex flex-column justify-content-between gap-3">
-            {roadMapRows.map((row, index) => (
+            {roadMapRows?.map((row, index) => (
               <div
                 className="d-flex flex-md-row flex-column w-100 gap-2"
                 key={index}
@@ -682,6 +739,9 @@ const OneLinkEditView = () => {
               />
             ))}
           </section>
+          <button className="save_btn btn-lg d-block mx-auto mt-3" onClick={handleSubmit}>
+            Save
+          </button>
         </div>
         <section className="button_preview_download_section pdf-hidden">
           <div className="download_button_container">
@@ -691,6 +751,13 @@ const OneLinkEditView = () => {
             </button>
           </div>
         </section>
+        {fromSubmit && (
+          <AfterSuccessPopUp
+            withoutOkButton
+            onClose={() => setFromSubmit(!fromSubmit)}
+            successText={popupData}
+          />
+        )}
       </section>
     </>
   );

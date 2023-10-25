@@ -41,6 +41,10 @@ const SecuritySafeGuard = lazy(() =>
   import("../components/SecuritySafeGuard/SecuritySafeGuard")
 );
 
+const PortfolioPage = lazy(() =>
+  import("../webDevelopment/pages/PortfolioPage/PortfolioPage")
+);
+
 function PublicRoutes() {
   return (
     <>
@@ -193,6 +197,18 @@ function PublicRoutes() {
           </Suspense>
         }
       />
+
+<Route
+        path="/web-development/portfolio"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            {/* <Navbar /> */}
+            <PortfolioPage />
+            <Footer />
+          </Suspense>
+        }
+      />
+
       <Route path="/signup" element={<Register />} />
       <Route path="/login" element={<Login />} />
     </>

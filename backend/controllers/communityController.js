@@ -7,6 +7,7 @@ import {
   exitCommunity,
   getUnAddedMembers,
   addMembersToCommunity,
+  deleteCommunity,
 } from "../services/communityService.js";
 
 export const createCommunityController = async (req, res) => {
@@ -111,7 +112,7 @@ export const getUnAddedMembersController = async (req, res) => {
 export const addMembersToCommunityController = async (req, res) => {
   try {
     const { communityId } = req.params;
-    const { memberIds } = req.body; 
+    const { memberIds } = req.body;
     const response = await addMembersToCommunity(communityId, memberIds);
     return res.status(response.status).send(response);
   } catch (error) {
@@ -119,6 +120,21 @@ export const addMembersToCommunityController = async (req, res) => {
     return res.status(500).send({
       status: 500,
       message: "An error occurred while adding members to the community.",
+    });
+  }
+};
+
+export const deleteCommunityController = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { communityId } = req.params;
+    const response = await deleteCommunity(communityId, userId);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while deleting the community.",
     });
   }
 };

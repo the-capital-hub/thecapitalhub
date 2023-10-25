@@ -66,12 +66,13 @@ function Home() {
   };
 
   useEffect(() => {
-    getSavedPostCollections(loggedInUser._id).then((data) => {
-      setgetSavedPostData(data);
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
+    getSavedPostCollections(loggedInUser._id)
+      .then((data) => {
+        setgetSavedPostData(data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
     document.title = "Home | Investors - The Capital Hub";
     fetchMorePosts();
   }, [newPost]);
@@ -108,27 +109,23 @@ function Home() {
   return (
     <MaxWidthWrapper>
       <div className="container-fluid investor_feed_container">
-        <div className="row mt-2">
-          <div className="col">
+        <div className="row mt-2 px-2">
+          <div className="col px-0">
             <InvestorSmallProfilecard text={"Home"} />
             <div className="content-70">
-              <div className="row">
-                <div className="col-12 mt-2">
-                  <div className="box start_post_container border">
-                    <img
-                      src={loggedInUser.profilePicture}
-                      alt="Image"
-                      className="rounded-circle"
-                    />
-                    <div className="w-100 me-4" onClick={openPopup}>
-                      <input
-                        className="px-3"
-                        type="text"
-                        placeholder="Write a post..."
-                        style={{ pointerEvents: "none" }}
-                      />
-                    </div>
-                  </div>
+              <div className="box start_post_container border">
+                <img
+                  src={loggedInUser.profilePicture}
+                  alt="Image"
+                  className="rounded-circle"
+                />
+                <div className="w-100 me-4" onClick={openPopup}>
+                  <input
+                    className="px-3"
+                    type="text"
+                    placeholder="Write a post..."
+                    style={{ pointerEvents: "none" }}
+                  />
                 </div>
               </div>
               {/* {!loadingFeed ? ( */}
@@ -208,17 +205,8 @@ function Home() {
                 </p>
               )}*/}
             </div>
-            {popupOpen && (
-              <InvestorCreatePostPopUp
-                setPopupOpen={setPopupOpen}
-                popupOpen
-                setNewPost={setNewPost}
-                respostingPostId={respostingPostId}
-                appendDataToAllPosts={appendDataToAllPosts}
-              />
-            )}
           </div>
-          <div className="col   d-none d-xl-block">
+          <div className="col d-none d-xl-block">
             <div className="content-30">
               <div className="row">
                 <InvestorRightProfileCard />
@@ -229,6 +217,15 @@ function Home() {
           </div>
         </div>
       </div>
+      {popupOpen && (
+        <InvestorCreatePostPopUp
+          setPopupOpen={setPopupOpen}
+          popupOpen
+          setNewPost={setNewPost}
+          respostingPostId={respostingPostId}
+          appendDataToAllPosts={appendDataToAllPosts}
+        />
+      )}
     </MaxWidthWrapper>
   );
 }

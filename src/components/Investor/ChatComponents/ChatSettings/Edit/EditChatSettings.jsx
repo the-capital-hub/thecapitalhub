@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./EditChatSettings.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCommunity, getUnAddedMembers, addMembersToCommunity, getCommunitySettings } from "../../../../../Service/user";
 import {
-  setCommunityProfile,
-} from "../../../../../Store/features/chat/chatSlice";
+  updateCommunity,
+  getUnAddedMembers,
+  addMembersToCommunity,
+  getCommunitySettings,
+} from "../../../../../Service/user";
+import { setCommunityProfile } from "../../../../../Store/features/chat/chatSlice";
 
 export default function EditChatSettings({ theme = "startup" }) {
-
   const [addedMembers, setAddedMembers] = useState([]);
   const [memberIds, setMemberIds] = useState([]);
 
@@ -46,9 +48,13 @@ export default function EditChatSettings({ theme = "startup" }) {
   const [unAddedMembers, setUnAddedMembers] = useState([]);
 
   useEffect(() => {
-    getUnAddedMembers(chatId, loggedInUser._id).then(({ data }) => {
-      setUnAddedMembers(data);
-    });
+    getUnAddedMembers(chatId, loggedInUser._id)
+      .then(({ data }) => {
+        setUnAddedMembers(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, [chatId, loggedInUser._id]);
 
   const handleButtonClick = (event, memberId) => {
@@ -85,7 +91,7 @@ export default function EditChatSettings({ theme = "startup" }) {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
   return (
     <div className="edit_settings_container d-flex flex-column gap-3">
       <fieldset className="edit_about rounded-2">
@@ -99,13 +105,16 @@ export default function EditChatSettings({ theme = "startup" }) {
           onChange={handleTextAreaChange}
         />
       </fieldset>
-
-      <button type="button" data-bs-dismiss="offcanvas" className={`btn-base ${theme}`} onClick={handleSave}>
+      <button
+        type="button"
+        data-bs-dismiss="offcanvas"
+        className={`btn-base ${theme}`}
+        onClick={handleSave}
+      >
         Save
       </button>
-      <hr/>
+      <hr />
       Add New members:
-
       {/* Display added members */}
       <div className="added-members">
         {addedMembers.length > 0 && (
@@ -121,7 +130,6 @@ export default function EditChatSettings({ theme = "startup" }) {
           </div>
         )}
       </div>
-
       {/* members */}
       <div className="top__contacts p-2 d-flex flex-column gap-2 ">
         {unAddedMembers?.map((member, index) => {
@@ -137,21 +145,23 @@ export default function EditChatSettings({ theme = "startup" }) {
                 src={member?.profilePicture}
                 alt="contact"
                 className="img-fluid"
-                style={{ maxWidth: '60px', borderRadius: '50%' }}
+                style={{ maxWidth: "60px", borderRadius: "50%" }}
               />
 
               <h6 className="m-0">
                 {" "}
-                {`${member?.firstName ? member?.firstName : "name"} ${member?.lastName ? member?.lastName : ""
-                  }`}
+                {`${member?.firstName ? member?.firstName : "name"} ${
+                  member?.lastName ? member?.lastName : ""
+                }`}
               </h6>
               {/* <button
                 className="orange_button"
                 onClick={() => handleButtonClick(contact?._id)}
               > */}
               <button
-                className={`orange_button ${isAdded ? "added-button" : ""
-                  } ${theme} `}
+                className={`orange_button ${
+                  isAdded ? "added-button" : ""
+                } ${theme} `}
                 onClick={(event) => handleButtonClick(event, member._id)}
               >
                 {isAdded ? "Added" : "Add"}
@@ -173,7 +183,6 @@ export default function EditChatSettings({ theme = "startup" }) {
           Done
         </button>
       </div>
-
     </div>
   );
 }

@@ -9,9 +9,10 @@ import {
 } from "../../../Images/Investor/CompanyProfile";
 import { getUserConnections, createCommunity } from "../../../Service/user";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getBase64 } from "../../../utils/getBase64";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
+import { resetChat } from "../../../Store/features/chat/chatSlice";
 
 export default function NewCommunityModal({ theme }) {
   const [getAllConnection, setGetAllConnection] = useState([]);
@@ -26,13 +27,16 @@ export default function NewCommunityModal({ theme }) {
   const [success, setSuccess] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setLoading(true);
-    getUserConnections(loggedInUser._id).then((res) => {
-      setGetAllConnection(res.data);
-      setFilteredConnections(res.data);
-      setLoading(false);
-    })
+    getUserConnections(loggedInUser._id)
+      .then((res) => {
+        setGetAllConnection(res.data);
+        setFilteredConnections(res.data);
+        setLoading(false);
+      })
       .catch((error) => {
         console.error(error.message);
       });
@@ -98,6 +102,7 @@ export default function NewCommunityModal({ theme }) {
         setAddedMembers([]);
         setName("");
         setSelectedFile(null);
+        dispatch(resetChat());
       }
     } catch (error) {
       console.error(error.message);
@@ -107,7 +112,7 @@ export default function NewCommunityModal({ theme }) {
   }
 
   return (
-    <form className="newCommunity__modal d-flex flex-column gap-3 p-3 ">
+    <form className="newCommunity__modal d-flex flex-column gap-3 p-md-3 ">
       {/* Profile picture input */}
       <div className="mx-auto">
         <input
@@ -140,7 +145,7 @@ export default function NewCommunityModal({ theme }) {
       </div>
 
       {/* Name input */}
-      <div className=" py-3">
+      <div className="py-3">
         <input
           type="text"
           name="communityName"
@@ -186,11 +191,9 @@ export default function NewCommunityModal({ theme }) {
       </div>
 
       {/* Top contacts */}
-      <div className="top__contacts p-2 d-flex flex-column gap-2 ">
+      <div className="top__contacts p-md-2 d-flex flex-column gap-2 ">
         {loading ? (
-          <SpinnerBS
-            colorClass={"text-dark"}
-          />
+          <SpinnerBS colorClass={"text-dark"} />
         ) : (
           <div className="contacts-container">
             {filteredConnections?.map((contact, index) => {
@@ -209,16 +212,18 @@ export default function NewCommunityModal({ theme }) {
                   />
                   <h6 className="m-0">
                     {" "}
-                    {`${contact?.firstName ? contact?.firstName : "name"} ${contact?.lastName ? contact?.lastName : ""
-                      }`}
+                    {`${contact?.firstName ? contact?.firstName : "name"} ${
+                      contact?.lastName ? contact?.lastName : ""
+                    }`}
                   </h6>
                   {/* <button
                 className="orange_button"
                 onClick={() => handleButtonClick(contact?._id)}
               > */}
                   <button
-                    className={`orange_button ${isAdded ? "added-button" : ""
-                      } ${theme} `}
+                    className={`orange_button ${
+                      isAdded ? "added-button" : ""
+                    } ${theme} `}
                     onClick={(event) => handleButtonClick(event, contact._id)}
                   >
                     {isAdded ? "Added" : "Add"}
@@ -230,11 +235,11 @@ export default function NewCommunityModal({ theme }) {
         )}
       </div>
       {/* Community Created Success message */}
-      {success &&
+      {success && (
         <p className="success-message d-flex justify-content-center align-items-center">
           Community created successfully!
         </p>
-      }
+      )}
 
       {/* Cancel/Done */}
       <div className="d-flex justify-content-center align-items-center gap-2">
@@ -252,14 +257,18 @@ export default function NewCommunityModal({ theme }) {
           type="submit"
           className={`orange_button ${theme}`}
           onClick={(event) => handleSubmit(event)}
-        // data-bs-dismiss="modal"
+          // data-bs-dismiss="modal"
         >
           {loading ? (
             <SpinnerBS
-              colorClass={loggedInUser.isInvestor==="true" ? "text-dark" : "text-light"}
+              colorClass={
+                loggedInUser.isInvestor === "true" ? "text-dark" : "text-light"
+              }
               spinnerSizeClass="spinner-border-sm"
             />
-          ) : "Done"}
+          ) : (
+            "Done"
+          )}
         </button>
       </div>
     </form>
