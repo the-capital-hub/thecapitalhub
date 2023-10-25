@@ -12,7 +12,13 @@ import { getAllCommunity } from "../../../Service/user";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-export default function CommunitiesContainer({ isCommunityOpen, recieveMessage, sendMessage, isRead, setIsRead }) {
+export default function CommunitiesContainer({
+  isCommunityOpen,
+  recieveMessage,
+  sendMessage,
+  isRead,
+  setIsRead,
+}) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [getCommunity, setGetCommunity] = useState([]);
 
@@ -35,7 +41,7 @@ export default function CommunitiesContainer({ isCommunityOpen, recieveMessage, 
         />
         <h4
           className="m-0 text-capitalize "
-        // style={{ color: " rgba(159, 159, 159, 1)" }}
+          // style={{ color: " rgba(159, 159, 159, 1)" }}
         >
           community
         </h4>
@@ -50,8 +56,8 @@ export default function CommunitiesContainer({ isCommunityOpen, recieveMessage, 
           <AiOutlineUsergroupAdd style={{ fontSize: "1.75rem" }} />{" "}
           <h5 className="m-0">Create New Community</h5>{" "}
         </ModalBsLauncher>
-        {/* Add new Modal */}
-        <ModalBSContainer isStatic={false} id="AddNewCommunity">
+        {/* Add new Modal is added to chats.js because it was not triggered in mobileview */}
+        {/* <ModalBSContainer isStatic={false} id="AddNewCommunity">
           <ModalBSHeader
             title={"Create a Community"}
             className={loggedInUser.isInvestor === "true" ? "yellow__heading" : "orange__heading"}
@@ -59,20 +65,22 @@ export default function CommunitiesContainer({ isCommunityOpen, recieveMessage, 
           <ModalBSBody>
             <NewCommunityModal theme={loggedInUser.isInvestor === "true" ? "investor" : ""} />
           </ModalBSBody>
-        </ModalBSContainer>
+        </ModalBSContainer> */}
 
         {/* Render communities list */}
         <div className="my__communities d-flex flex-column gap-4 px-3 pt-4">
           <h5 className="m-0">My Communities</h5>
           {getCommunity?.data?.map((community, index) => {
-            return <CommunityCard
-              community={community}
-              key={community._id}
-              recieveMessage={recieveMessage}
-              sendMessage={sendMessage}
-              setIsRead={setIsRead}
-              isRead={isRead}
-            />;
+            return (
+              <CommunityCard
+                community={community}
+                key={community._id}
+                recieveMessage={recieveMessage}
+                sendMessage={sendMessage}
+                setIsRead={setIsRead}
+                isRead={isRead}
+              />
+            );
           })}
         </div>
       </div>

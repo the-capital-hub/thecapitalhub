@@ -47,7 +47,7 @@ function Profile() {
     <div className="my-4">
       <MaxWidthWrapper>
         {user.length !== 0 ? (
-          <div className="profile_main_container ms-lg-3 ps-lg-3">
+          <div className="profile_main_container">
             {/* Added d-flex flex-column gap-3 here. Easy to manipulate - Srihari */}
             <div className="mb-5 d-flex flex-column gap-3">
               {/* Profile Header */}

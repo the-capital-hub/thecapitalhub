@@ -26,6 +26,12 @@ import {
 import backIcon from "../../../Images/Chat/BackIcon.svg";
 import navBarLogo from "../../../Images/investorIcon/Logo.svg";
 import selectAChatIcon from "../../../Images/Chat/selectAChat.png";
+import {
+  ModalBSBody,
+  ModalBSContainer,
+  ModalBSHeader,
+} from "../../../components/PopUp/ModalBS";
+import NewCommunityModal from "../../../components/Investor/ChatComponents/NewCommunityModal";
 
 const Chats = () => {
   // search params
@@ -247,19 +253,21 @@ const Chats = () => {
             chatId ? (
               renderMobileMainSection()
             ) : (
-              <section className="d-flex flex-column gap-3 px-1">
-                <ChatSearch />
-                <CommunitiesContainer
-                  isCommunityOpen={isCommunityOpen}
-                  recieveMessage={recieveMessage}
-                  sendMessage={sendMessage}
-                  setIsRead={setIsRead}
-                  isRead={isRead}
-                />
-                <ChatSidebar
-                  recieveMessage={recieveMessage}
-                  sendMessage={sendMessage}
-                />
+              <section className="overflow-y-auto mobileView_chat_sidebar">
+                <div className="d-flex flex-column gap-3 px-1">
+                  <ChatSearch />
+                  <CommunitiesContainer
+                    isCommunityOpen={isCommunityOpen}
+                    recieveMessage={recieveMessage}
+                    sendMessage={sendMessage}
+                    setIsRead={setIsRead}
+                    isRead={isRead}
+                  />
+                  <ChatSidebar
+                    recieveMessage={recieveMessage}
+                    sendMessage={sendMessage}
+                  />
+                </div>
               </section>
             )
           ) : chatId && !loading?.userChat ? (
@@ -304,6 +312,25 @@ const Chats = () => {
         ) : (
           ""
         )}
+
+        {/* Modal */}
+        <div className="addNewCommunity_modal_wrapper">
+          <ModalBSContainer isStatic={false} id="AddNewCommunity">
+            <ModalBSHeader
+              title={"Create a Community"}
+              className={
+                loggedInUser.isInvestor === "true"
+                  ? "yellow__heading"
+                  : "orange__heading"
+              }
+            />
+            <ModalBSBody>
+              <NewCommunityModal
+                theme={loggedInUser.isInvestor === "true" ? "investor" : ""}
+              />
+            </ModalBSBody>
+          </ModalBSContainer>
+        </div>
       </div>
     </>
   );

@@ -1,0 +1,32 @@
+.portfolio_header {
+  .right_section {
+    h1 {
+      font-size: 40px;
+      font-weight: 600;
+      font-family: Poppins;
+      margin: 0px;
+    }
+  }
+  .left_section {
+    img {
+      width: 22px;
+      height: 23px;
+    }
+  }
+}
+@media (max-width: 426px) {
+  .portfolio_header {
+    .right_section {
+      h1 {
+        font-size: 20px;
+        font-weight: 400;
+      }
+    }
+    .left_section {
+      img {
+        width: 15px;
+        height: 16px;
+      }
+    }
+  }
+}
