@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import IconDelete from "../../SvgIcons/IconDelete";
 import Modal from "../../../PopUp/Modal/Modal";
 import { useState } from "react";
-import { deleteCommunityAPI } from "../../../../Service/user";
+import { deleteCommunityAPI, exitCommunityAPI } from "../../../../Service/user";
 import { resetChat } from "../../../../Store/features/chat/chatSlice";
+import IconExit from "../../SvgIcons/IconExit";
 
 export default function SettingsHeader({ setIsSettingsOpen }) {
   const chatProfile = useSelector((state) => state.chat.chatProfile);
@@ -18,7 +19,7 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
   );
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
-  const [showDeleteCommunity, setShowDeleteCommunity] = useState(false);
+  const [showModal, setShowModal] = useState({});
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState({});
 
@@ -36,7 +37,12 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
       setMessage("Community deleted");
       setTimeout(() => {
         setMessage("");
-        setShowDeleteCommunity(false);
+        setShowModal((prev) => {
+          return {
+            ...prev,
+            deleteCommunity: false,
+          };
+        });
         dispatch(resetChat());
         setIsSettingsOpen(false);
       }, 1500);
@@ -48,6 +54,43 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
         return {
           ...prev,
           submitting: false,
+        };
+      });
+    }
+  };
+
+  const handleExitCommunity = async () => {
+    setLoading((prev) => {
+      return {
+        ...prev,
+        exitting: true,
+      };
+    });
+    try {
+      await exitCommunityAPI(
+        communityProfile?.community?._id,
+        loggedInUser?._id
+      );
+      setMessage("Exited from community");
+      setTimeout(() => {
+        setMessage("");
+        setShowModal((prev) => {
+          return {
+            ...prev,
+            exitCommunity: false,
+          };
+        });
+        dispatch(resetChat());
+        setIsSettingsOpen(false);
+      }, 1500);
+    } catch (error) {
+      console.log(error);
+      setMessage("Error exitting from community. Try again.");
+    } finally {
+      setLoading((prev) => {
+        return {
+          ...prev,
+          exitting: false,
         };
       });
     }
@@ -135,14 +178,76 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
                 height: "50px",
                 backgroundColor: "rgba(234, 238, 242, 1)",
               }}
-              onClick={() => setShowDeleteCommunity(true)}
+              onClick={() =>
+                setShowModal((prev) => {
+                  return {
+                    ...prev,
+                    deleteCommunity: true,
+                  };
+                })
+              }
             >
               <IconDelete width="24px" height="24px" />
             </div>
           )}
+        {isCommunitySelected && (
+          <div
+            className="d-flex justify-content-center align-items-center rounded-circle text-white bg-danger"
+            style={{
+              width: "50px",
+              height: "50px",
+              backgroundColor: "rgba(234, 238, 242, 1)",
+            }}
+            onClick={() =>
+              setShowModal((prev) => {
+                return {
+                  ...prev,
+                  exitCommunity: true,
+                };
+              })
+            }
+          >
+            <IconExit width="24px" height="24px" />
+          </div>
+        )}
       </div>
 
-      {showDeleteCommunity && (
+      {showModal?.exitCommunity && (
+        <Modal className="d-flex flex-column gap-2">
+          <h3 className="text-center border-bottom ">Confirm exit</h3>
+          <p>
+            Are you sure you want to exit{" "}
+            {communityProfile?.community?.communityName}
+          </p>
+          <p className="text-center text-success">{message}</p>
+          <div className="buttons-container d-flex gap-5 mx-auto">
+            <buton
+              className="btn btn-secondary"
+              onClick={() =>
+                setShowModal((prev) => {
+                  return {
+                    ...prev,
+                    exitCommunity: false,
+                  };
+                })
+              }
+            >
+              Cancel
+            </buton>
+            {!message && (
+              <button
+                className="btn btn-danger"
+                onClick={handleExitCommunity}
+                disabled={loading.exitting}
+              >
+                {loading?.exitting ? "Exiting..." : "Exit"}
+              </button>
+            )}
+          </div>
+        </Modal>
+      )}
+
+      {showModal?.deleteCommunity && (
         <Modal className="d-flex flex-column gap-2">
           <h3 className="text-center border-bottom ">Confirm delete</h3>
           <p>
@@ -153,7 +258,14 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
           <div className="buttons-container d-flex gap-5 mx-auto">
             <buton
               className="btn btn-secondary"
-              onClick={() => setShowDeleteCommunity(false)}
+              onClick={() =>
+                setShowModal((prev) => {
+                  return {
+                    ...prev,
+                    deleteCommunity: false,
+                  };
+                })
+              }
             >
               Cancel
             </buton>

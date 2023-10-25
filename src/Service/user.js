@@ -1144,3 +1144,15 @@ export const deleteCommunityAPI = async (communityId) => {
     throw error;
   }
 };
+
+export const exitCommunityAPI = async (communityId, userId) => {
+  try {
+    const res = await axiosInstance.patch(
+      `${API.exitCommunity}/${communityId}/${userId}`
+    );
+    return res.data;
+  } catch (error) {
+    console.error("Error exiting community:", error);
+    throw error;
+  }
+};
