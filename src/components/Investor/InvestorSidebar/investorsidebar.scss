@@ -48,7 +48,22 @@
     .pro-sidebar {
       width: 100%;
       min-width: 100%;
+      overflow-y: auto;
+      max-height: 80vh;
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(
+          211,
+          211,
+          211,
+          0.555
+        ); /* Set the background color for the thumb (the draggable part) */
+      }
     }
+
     .pro-sidebar.collapsed {
       width: 65px;
       min-width: 40px;
@@ -243,7 +258,4 @@
       }
     }
   }
-}
-
-@media only screen and (max-width: 820px) {
 }

@@ -43,8 +43,6 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
   useEffect(() => {
     setCommunity(null);
     setUser(null);
-    console.log("Selected", isCommunitySelected);
-    console.log("Selected", chatId);
     if (isCommunitySelected) {
       getCommunityById(chatId)
         .then((res) => {
