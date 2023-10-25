@@ -7,9 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 import IconDelete from "../../SvgIcons/IconDelete";
 import Modal from "../../../PopUp/Modal/Modal";
 import { useState } from "react";
-import { deleteCommunityAPI, exitCommunityAPI } from "../../../../Service/user";
+import {
+  deleteCommunityAPI,
+  exitCommunityAPI,
+  updateCommunity,
+} from "../../../../Service/user";
 import { resetChat } from "../../../../Store/features/chat/chatSlice";
 import IconExit from "../../SvgIcons/IconExit";
+import "./styles.scss";
+import { getBase64 } from "../../../../utils/getBase64";
 
 export default function SettingsHeader({ setIsSettingsOpen }) {
   const chatProfile = useSelector((state) => state.chat.chatProfile);
@@ -96,6 +102,19 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
     }
   };
 
+  const handleProfileImageChange = async (e) => {
+    try {
+      let profileImage = e.target.files[0];
+      if (profileImage) {
+        profileImage = await getBase64(profileImage);
+      }
+      await updateCommunity(communityProfile?.community?._id, { profileImage });
+      window.reload();
+    } catch (error) {
+      console.log("Error updating image: ", error);
+    }
+  };
+
   return (
     <div className="settings_header d-flex flex-column align-items-center gap-1 border-bottom pb-4">
       <button
@@ -106,15 +125,33 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
       </button>
 
       {/* Profile picture */}
-      <img
-        src={
-          (isCommunitySelected
-            ? communityProfile?.community?.profileImage
-            : chatProfile?.user?.profilePicture) || Default
-        }
-        alt={"user name"}
-        style={{ width: "70px", height: "70px", borderRadius: "50%" }}
-      />
+      <div className="img-container">
+        <label htmlFor="updateProfilePic" className="update-dp-label">
+          {isCommunitySelected && (
+            <div className="upload-img-cover">
+              <p className="m-auto">Edit</p>
+            </div>
+          )}
+          <img
+            src={
+              (isCommunitySelected
+                ? communityProfile?.community?.profileImage
+                : chatProfile?.user?.profilePicture) || Default
+            }
+            alt={"user name"}
+            style={{ width: "70px", height: "70px", borderRadius: "50%" }}
+          />
+        </label>
+        {isCommunitySelected && (
+          <input
+            type="file"
+            hidden
+            id="updateProfilePic"
+            accept=".png, .jpeg, .jpg"
+            onChange={handleProfileImageChange}
+          />
+        )}
+      </div>
 
       {/* Name and designation */}
       <div className="settings_user_text d-flex flex-column align-items-center">
