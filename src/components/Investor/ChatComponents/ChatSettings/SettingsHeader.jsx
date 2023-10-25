@@ -9,7 +9,9 @@ import { useSelector } from "react-redux";
 export default function SettingsHeader({ setIsSettingsOpen }) {
   const chatProfile = useSelector((state) => state.chat.chatProfile);
   const communityProfile = useSelector((state) => state.chat.communityProfile);
-  const isCommunitySelected = useSelector((state) => state.chat.isCommunitySelected);
+  const isCommunitySelected = useSelector(
+    (state) => state.chat.isCommunitySelected
+  );
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   return (
@@ -23,7 +25,11 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
 
       {/* Profile picture */}
       <img
-        src={(isCommunitySelected ? communityProfile?.community?.profileImage : chatProfile?.user?.profilePicture) || Default}
+        src={
+          (isCommunitySelected
+            ? communityProfile?.community?.profileImage
+            : chatProfile?.user?.profilePicture) || Default
+        }
         alt={"user name"}
         style={{ width: "70px", height: "70px", borderRadius: "50%" }}
       />
@@ -46,7 +52,8 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
           {isCommunitySelected ? " " : chatProfile?.user?.designation}
         </p>
       </div>
-      {isCommunitySelected && communityProfile?.community?.adminId === loggedInUser._id &&
+      {/* {isCommunitySelected &&
+        communityProfile?.community?.adminId === loggedInUser._id && (
           <button
             className="btn text-capitalize border-0 p-0 ms-auto"
             type="button"
@@ -56,7 +63,7 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
           >
             <IconEdit />
           </button>
-        }
+        )} */}
       {/* Action Icons */}
       {/* <div className="settings_user_actions d-flex gap-2">
         <div
