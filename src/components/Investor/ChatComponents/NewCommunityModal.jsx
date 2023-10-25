@@ -112,7 +112,7 @@ export default function NewCommunityModal({ theme }) {
   }
 
   return (
-    <form className="newCommunity__modal d-flex flex-column gap-3 p-3 ">
+    <form className="newCommunity__modal d-flex flex-column gap-3 p-md-3 ">
       {/* Profile picture input */}
       <div className="mx-auto">
         <input
@@ -145,7 +145,7 @@ export default function NewCommunityModal({ theme }) {
       </div>
 
       {/* Name input */}
-      <div className=" py-3">
+      <div className="py-3">
         <input
           type="text"
           name="communityName"
@@ -191,7 +191,7 @@ export default function NewCommunityModal({ theme }) {
       </div>
 
       {/* Top contacts */}
-      <div className="top__contacts p-2 d-flex flex-column gap-2 ">
+      <div className="top__contacts p-md-2 d-flex flex-column gap-2 ">
         {loading ? (
           <SpinnerBS colorClass={"text-dark"} />
         ) : (
