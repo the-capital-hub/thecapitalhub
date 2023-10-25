@@ -21,13 +21,13 @@ export default function CommunitiesContainer({
 }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [getCommunity, setGetCommunity] = useState([]);
+  const chatProfile = useSelector((state) => state.chat.chatProfile);
 
   useEffect(() => {
     getAllCommunity(loggedInUser?._id).then((res) => {
       setGetCommunity(res);
     });
-  }, []);
-  console.log(getCommunity.data);
+  }, [chatProfile]);
 
   return (
     <details
