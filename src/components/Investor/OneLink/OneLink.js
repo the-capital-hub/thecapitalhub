@@ -130,15 +130,15 @@ const OneLink = () => {
               <div className="border-bottom">
                 <div className="px-3 px-lg-4 py-5 d-flex flex-column gap-5">
                   {/* Market Size */}
-                  <OnePagerMarketSize />
+                  <OnePagerMarketSize companyData={company} />
                   {/* Social Links */}
-                  <OnePagerSocialLinks />
+                  <OnePagerSocialLinks companyData={company} />
                   {/* Projections */}
-                  <OnePagerProjections />
+                  <OnePagerProjections companyData={company} />
                   {/* Fund Asking */}
-                  <OnePagerFundAsking />
+                  <OnePagerFundAsking companyData={company} />
                   {/* Roadmap */}
-                  <OnePagerRoadmap />
+                  <OnePagerRoadmap companyData={company} />
                   {/* Team */}
                   <OnePagerTeam team={company.team} />
                 </div>

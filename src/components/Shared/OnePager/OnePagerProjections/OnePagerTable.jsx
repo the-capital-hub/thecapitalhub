@@ -1,7 +1,7 @@
 import React from "react";
 import "./OnePagerTable.scss";
 
-export default function OnePagerTable({ heading }) {
+export default function OnePagerTable({ heading, data }) {
   return (
     <div className="onePager_table_wrapper">
       <div className="table_container overflow-x-auto pb-2">
@@ -9,80 +9,21 @@ export default function OnePagerTable({ heading }) {
           <tbody>
             <tr>
               <td className="text-center fw-semibold">{heading}</td>
-              <td>
-                <div
-                  className="w-50 border-end d-flex align-items-center"
-                  style={{ minHeight: "50%" }}
-                >
-                  <p
-                    className="m-0 text-muted ps-3"
-                    style={{ fontSize: "12px" }}
+              {data?.map((amount, index) => (
+                <td key={index}>
+                  <div
+                    className="w-50 border-end d-flex align-items-center"
+                    style={{ minHeight: "50%" }}
                   >
-                    Amount
+                    <p className="m-0 text-muted ps-3" style={{ fontSize: "12px" }}>
+                      Amount
+                    </p>
+                  </div>
+                  <p className="m-0 ps-3" style={{ fontSize: "14px" }}>
+                    {amount}
                   </p>
-                </div>
-                {/* Amount here */}
-              </td>
-
-              <td>
-                <div
-                  className="w-50 border-end d-flex align-items-center"
-                  style={{ minHeight: "50%" }}
-                >
-                  <p
-                    className="m-0 text-muted ps-3"
-                    style={{ fontSize: "12px" }}
-                  >
-                    Amount
-                  </p>
-                </div>
-                {/* Amount here */}
-              </td>
-
-              <td>
-                <div
-                  className="w-50 border-end d-flex align-items-center"
-                  style={{ minHeight: "50%" }}
-                >
-                  <p
-                    className="m-0 text-muted ps-3"
-                    style={{ fontSize: "12px" }}
-                  >
-                    Amount
-                  </p>
-                </div>
-                {/* Amount here */}
-              </td>
-
-              <td>
-                <div
-                  className="w-50 border-end d-flex align-items-center"
-                  style={{ minHeight: "50%" }}
-                >
-                  <p
-                    className="m-0 text-muted ps-3"
-                    style={{ fontSize: "12px" }}
-                  >
-                    Amount
-                  </p>
-                </div>
-                {/* Amount here */}
-              </td>
-
-              <td>
-                <div
-                  className="w-50 border-end d-flex align-items-center"
-                  style={{ minHeight: "50%" }}
-                >
-                  <p
-                    className="m-0 text-muted ps-3"
-                    style={{ fontSize: "12px" }}
-                  >
-                    Amount
-                  </p>
-                </div>
-                {/* Amount here */}
-              </td>
+                </td>
+              ))}
             </tr>
           </tbody>
         </table>

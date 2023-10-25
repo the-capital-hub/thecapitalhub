@@ -136,7 +136,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
       } else {
         const response = await postStartUpData(formData);
         console.log(response);
-        setPopupData("Changes saved");
+        setPopupData("Changes saved");
         setFromSubmit(true);
       }
     } catch (error) {
