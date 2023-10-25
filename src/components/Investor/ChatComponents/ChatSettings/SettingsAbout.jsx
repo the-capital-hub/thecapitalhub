@@ -26,18 +26,18 @@ export default function SettingsAbout() {
           ABOUT
         </p>
         {/* Edit button - Show only to admin */}
-        {/* {isCommunitySelected && communityProfile?.community?.adminId === loggedInUser._id &&
-          <button
-            className="btn text-capitalize border-0 p-0 ms-auto"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#chatSettingsOffcanvas"
-            ariaControls="chatSettingsOffcanvas"
-          >
-            <IconEdit />
-          </button>
-        } */}
-
+        {isCommunitySelected &&
+          communityProfile?.community?.adminId === loggedInUser._id && (
+            <button
+              className="btn text-capitalize border-0 p-0 ms-auto"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#chatSettingsOffcanvas"
+              ariaControls="chatSettingsOffcanvas"
+            >
+              <IconEdit />
+            </button>
+          )}
       </div>
 
       <p className="m-0" style={{ fontWeight: "400", fontSize: "16px" }}>

@@ -1103,9 +1103,7 @@ export const requestMeetingAPI = async (meetingId, requestData) => {
 
 export const getAllMeetingRequests = async () => {
   try {
-    const response = await axiosInstance.get(
-      `${API.getAllMeetingRequests}`
-    );
+    const response = await axiosInstance.get(`${API.getAllMeetingRequests}`);
     return response.data;
   } catch (error) {
     console.error("Error getting meeting requests:", error);
@@ -1127,9 +1125,7 @@ export const acceptMeetingRequest = async (meetingId, requestId) => {
 
 export const getNotificationCount = async () => {
   try {
-    const response = await axiosInstance.get(
-      `${API.getNotificationCount}`
-    );
+    const response = await axiosInstance.get(`${API.getNotificationCount}`);
     return response.data;
   } catch (error) {
     console.error("Error accepting request:", error);
@@ -1137,3 +1133,26 @@ export const getNotificationCount = async () => {
   }
 };
 
+export const deleteCommunityAPI = async (communityId) => {
+  try {
+    const res = await axiosInstance.delete(
+      `${API.deleteCommunity}/${communityId}`
+    );
+    return res.data;
+  } catch (error) {
+    console.error("Error deleting community:", error);
+    throw error;
+  }
+};
+
+export const exitCommunityAPI = async (communityId, userId) => {
+  try {
+    const res = await axiosInstance.patch(
+      `${API.exitCommunity}/${communityId}/${userId}`
+    );
+    return res.data;
+  } catch (error) {
+    console.error("Error exiting community:", error);
+    throw error;
+  }
+};
