@@ -156,7 +156,7 @@ function NotificationsPopup({ toggleVisibility }) {
                           <span className="d-none d-md-block">
                             Mark as read
                           </span>
-                          <span className="d-md-none">✔</span>
+                          <span className="d-md-none text-secondary">✔</span>
                         </button>
                       )}
                     </div>
