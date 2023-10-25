@@ -258,3 +258,26 @@ export const addMembersToCommunity = async (communityId, memberIds) => {
     };
   }
 };
+
+export const deleteCommunity = async (communityId, userId) => {
+  try {
+    console.log(communityId, userId);
+    const community = await CommunityModel.findOneAndDelete({ _id: communityId, adminId: userId });
+    if (!community) {
+      return {
+        status: 403,
+        message: 'You are not authorized to delete this community',
+      };
+    }
+    return {
+      status: 200,
+      message: 'Community deleted successfully',
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: 'An error occurred while deleting the community',
+    };
+  }
+};
