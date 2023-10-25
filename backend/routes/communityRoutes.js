@@ -8,6 +8,7 @@ import {
   exitCommunityController,
   getUnAddedMembersController,
   addMembersToCommunityController,
+  deleteCommunityController,
 } from "../controllers/communityController.js";
 
 import { authenticateToken } from "../middlewares/authenticateToken.js";
@@ -23,5 +24,6 @@ router.patch("/updateCommunity/:communityId", updateCommunityController);
 router.patch("/exitCommunity/:communityId/:userId", exitCommunityController);
 router.get("/getUnAddedMembers/:communityId/:userId", getUnAddedMembersController);
 router.patch("/addMembersToCommunity/:communityId", addMembersToCommunityController);
+router.delete("/deleteCommunity/:communityId", deleteCommunityController);
 
 export default router;

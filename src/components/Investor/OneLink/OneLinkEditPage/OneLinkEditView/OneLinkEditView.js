@@ -597,7 +597,7 @@ const OneLinkEditView = () => {
                     type="text"
                     value={row.amount}
                     onChange={(e) =>
-                      handleInputChange(index, "amount", e.target.value)
+                      handleFundingAskInputChange(index, "amount", e.target.value)
                     }
                     className="w-100 px-3"
                   />
@@ -682,6 +682,9 @@ const OneLinkEditView = () => {
               />
             ))}
           </section>
+          <button className="save_btn btn-lg d-block mx-auto mt-3">
+           Save
+          </button>
         </div>
         <section className="button_preview_download_section pdf-hidden">
           <div className="download_button_container">
