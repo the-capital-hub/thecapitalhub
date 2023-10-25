@@ -87,7 +87,7 @@ export default function CompanyProfile({
 
   return (
     <div className="company__profile bg-white shadow-sm" startup={startup}>
-      <div className="company__section__one border-bottom d-flex flex-column gap-4 py-5 px-5">
+      <div className="company__section__one border-bottom d-flex flex-column gap-4 p-3 p-md-5">
         <div className="company__info d-flex flex-column flex-xl-row gap-4 justify-content-between position-relative">
           <CompanyInfo
             name={name}
