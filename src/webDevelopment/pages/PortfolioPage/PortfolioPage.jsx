@@ -1,12 +1,19 @@
 import React from "react";
 import "./PortfolioPage.scss";
 import assets from "../../../Images/Portfolio/PortfolioPage";
+import Header from "../../../components/portfolio/Layout/Header/Header";
+import { Link } from "react-router-dom";
+import Navbar from "../../../components/Navbar/Navbar";
+
 
 function PortfolioPage() {
   return (
+    <div className="PortfolioPage_page_container">
+    <Navbar/>
+    <Header/>
     <div className="PortfolioPage_page px-3">
       <div className="top_section ">
-        <div className="box box_one ">
+        <Link to="http://impactshaala-testsite.tech/" className="box box_one ">
           <img src={assets.impactshall} alt="impactshall" />
           <p>
             ImpactShala serves as a groundbreaking platform, connecting
@@ -17,8 +24,8 @@ function PortfolioPage() {
             enriches educational experiences but also fosters impactful projects
             that contribute positively to society.
           </p>
-        </div>
-        <div className="box box_two">
+        </Link>
+        <Link to="https://thecapitalhub.in/" className="box box_two">
           <img src={assets.capitalHub} alt="capitalHub" />
           <p>
             The Capital Hub offers a dynamic platform where startup founders and
@@ -30,8 +37,8 @@ function PortfolioPage() {
             system empowers startups to thrive and innovate in the competitive
             business landscape.
           </p>
-        </div>
-        <div className="box box_three ">
+        </Link>
+        <Link to="https://yesgobus.com/" className="box box_three ">
           <img src={assets.yesgobus} alt="yesgobus" />
           <p>
             YesGoBus is a leading transportation company that offers a seamless
@@ -39,8 +46,8 @@ function PortfolioPage() {
             and wide range of options make traveling convenient and hassle-free.
             With YesGoBus, you can easily plan your journeys with confidence.
           </p>
-        </div>
-        <div className="box box_four">
+        </Link>
+        <Link to="https://mafarmretailer.com/" className="box box_four">
           <img src={assets.circleIcon} alt="circleIcon" />
           <p>
             Mayakshi Farm Retailer is an innovative platform empowering small
@@ -50,23 +57,23 @@ function PortfolioPage() {
             contributing to economic growth. Mayakshi Farm Retailer is a
             catalyst for community-driven commerce.
           </p>
-        </div>
-        <div className="box box_five">
+        </Link>
+        <Link to="https://uipe.pro/" className="box box_five">
           <img src={assets.uipe_logo} alt="UIPE" />
           <p className="text-dark">
             Experience the ease of managing your finances with our fintech
             solutions. We make EMI and loan payments simple, tailored just for
             you. Say hello to hassle-free, stress-free financial management!
           </p>
-        </div>
-        <div className="box box_six">
+        </Link>
+        <Link to="mailto:investments@capitalhub.in" className="box box_six">
           <img src={assets.tiffinbuddy_logo} alt="tiffinbuddy" />
           <p>
             Tiffin Buddy is your go-to destination for wholesome, home-cooked
             lunchboxes that cater to your health-conscious needs. Enjoy
             delicious, nutritious meals conveniently delivered to your Canteen.
           </p>
-        </div>
+        </Link>
       </div>
       <div className="botton_section d-flex flex-column justify-content-center  ">
         <h1>
@@ -75,6 +82,7 @@ function PortfolioPage() {
         <p>Looking for your next startup adventure?</p>
         <button className="px-3 py-2">Start your search</button>
       </div>
+    </div>
     </div>
   );
 }
