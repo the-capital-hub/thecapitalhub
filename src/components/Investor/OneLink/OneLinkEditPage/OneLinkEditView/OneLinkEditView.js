@@ -31,7 +31,7 @@ const OneLinkEditView = () => {
     description: "",
     location: "",
     logo: "",
-    tagline: "",
+    keyFocus: "",
     socialLinks: "",
     TAM: "",
     SAM: "",
@@ -65,7 +65,7 @@ const OneLinkEditView = () => {
           company: data.company || "",
           description: data.description || "",
           logo: data.logo || "",
-          tagline: data.tagline || "",
+          keyFocus: data.keyFocus || "",
           location: data.location || "",
           socialLinks: data.socialLinks || [],
           TAM: data.TAM || "",
@@ -476,8 +476,9 @@ const OneLinkEditView = () => {
                   id="tags"
                   name="tags"
                   className=" px-3"
-                  value={formData.tagline}
-                  onChange={(e) => handleInputChange("tagline", e)}
+                  style={{ width: '100%' }}
+                  value={formData.keyFocus}
+                  onChange={(e) => handleInputChange("keyFocus", e)}
                   onBlur={(e) => handleUpdate()}
                 />
               </div>
