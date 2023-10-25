@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function OnePagerSocialLinks() {
+export default function OnePagerSocialLinks({ companyData }) {
   return (
     <div className="social_links">
-      <h4 className="main_color">Social Links</h4>
+      <h4 className="main_color">Competitors</h4>
       <div className="three_col_grid gap-3">
         <fieldset>
           <legend className="main_color">Competitor name 1</legend>
