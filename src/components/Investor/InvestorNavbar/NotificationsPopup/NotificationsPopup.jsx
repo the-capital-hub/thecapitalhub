@@ -77,8 +77,8 @@ function NotificationsPopup({ toggleVisibility }) {
             You have a new{" "}
             <Link to={`/investor/my-schedule?view=true`} className="fw-bold">
               meeting
-            </Link>
-            {" "} request
+            </Link>{" "}
+            request
           </span>
         );
       }
@@ -153,7 +153,10 @@ function NotificationsPopup({ toggleVisibility }) {
                           className="btn btn-light btn-sm"
                           onClick={() => markAsRead(_id)}
                         >
-                          Mark as read
+                          <span className="d-none d-md-block">
+                            Mark as read
+                          </span>
+                          <span className="d-md-none">✔</span>
                         </button>
                       )}
                     </div>
