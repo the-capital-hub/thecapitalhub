@@ -221,7 +221,7 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
           </p>
           <p className="text-center text-success">{message}</p>
           <div className="buttons-container d-flex gap-5 mx-auto">
-            <buton
+            <button
               className="btn btn-secondary"
               onClick={() =>
                 setShowModal((prev) => {
@@ -233,7 +233,7 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
               }
             >
               Cancel
-            </buton>
+            </button>
             {!message && (
               <button
                 className="btn btn-danger"
