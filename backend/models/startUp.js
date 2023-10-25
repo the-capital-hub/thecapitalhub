@@ -115,12 +115,12 @@ const startUpSchema = new Schema(
       type: Number,
       // required: true
     },
-    // fundingsAsk: [
-    //   {
-    //     requiredFor: String,
-    //     Amount: String,
-    //   }
-    // ],
+    fundingsAsk: [
+      {
+        required: String,
+        amount: String,
+      }
+    ],
     roadMap: [
       {
         date: String,
@@ -168,6 +168,9 @@ const startUpSchema = new Schema(
     },
     tagline: {
       type: String,
+    },
+    projections: {
+      type: Array,
     },
   },
   {
