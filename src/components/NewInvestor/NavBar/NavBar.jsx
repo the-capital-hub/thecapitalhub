@@ -357,6 +357,7 @@ const NavBar = (props) => {
                   <NotificationsPopup
                     setNotificationCount={setNotificationCount}
                     toggleVisibility={setToggleNotificationPopup}
+                    notificationCount={notificationCount}
                   />
                 )}
               </div>

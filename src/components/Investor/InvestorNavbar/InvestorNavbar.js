@@ -365,6 +365,7 @@ const InvestorNavbar = (props) => {
                   <NotificationsPopup
                     toggleVisibility={setToggleNotificationPopup}
                     setNotificationCount={setNotificationCount}
+                    notificationCount={notificationCount}
                   />
                 )}
               </div>

@@ -10,7 +10,11 @@ import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 import TimeAgo from "timeago-react";
 import { Link, useNavigate } from "react-router-dom";
 
-function NotificationsPopup({ toggleVisibility, setNotificationCount }) {
+function NotificationsPopup({
+  toggleVisibility,
+  setNotificationCount,
+  notificationCount,
+}) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -92,6 +96,7 @@ function NotificationsPopup({ toggleVisibility, setNotificationCount }) {
     try {
       await markNotificationAsReadAPI(id);
       await fetchNotifications();
+      setNotificationCount(notificationCount--);
     } catch (error) {
       console.log("Error marking notification as read", error);
     }
