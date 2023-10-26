@@ -383,6 +383,7 @@ const InvestorNavbar = (props) => {
                     className="profile-pic rounded-circle"
                     src={loggedInUser.profilePicture}
                     alt="Profile"
+                    style={{objectFit:"cover"}}
                   />
                 </Link>
                 {/* <span className="me">Me</span> */}

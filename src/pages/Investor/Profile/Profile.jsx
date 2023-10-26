@@ -230,7 +230,7 @@ function Profile() {
             type="text"
             className="w-100"
             name={fieldName}
-            value={editCompanyName.fieldName}
+            value={editCompanyName["companyName"]}
             onChange={companyNameHandler}
           />
         );
@@ -240,7 +240,7 @@ function Profile() {
           type="text"
           className="w-100"
           name={fieldName}
-          value={personalData.fieldName}
+          value={personalData[fieldName]}
           onChange={personalChangeHandler}
         />
       );
@@ -294,6 +294,7 @@ function Profile() {
                             src={loggedInUser.profilePicture}
                             alt="profileimage"
                             className="rounded-circle"
+                            style={{ objectFit: "cover" }}
                           />
                           <div className="flex-grow-1 left_profile_text flex_content ms-3">
                             <h2 className="typography">

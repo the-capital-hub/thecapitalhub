@@ -1,15 +1,32 @@
 .investor_feed_container {
+  display: flex;
+  gap: 2rem;
+
+  .main_content{
+    flex-grow: 1;
+
+    .posts_col{
+      max-width: 700px;
+      margin-inline: auto;
+    }
+  }
+
+  .right_content{
+    flex: 0 0 24rem;
+  }
+
+
   .start_post_container {
     display: flex;
     align-items: center;
-    width: 750px;
+    // width: 750px;
     height: 100px;
     cursor: pointer;
 
     img {
       flex-shrink: 0;
       width: 50px;
-      height: auto;
+      height: 50px;
       margin-left: 10px;
     }
 

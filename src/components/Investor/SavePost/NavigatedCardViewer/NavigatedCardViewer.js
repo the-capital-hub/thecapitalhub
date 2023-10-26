@@ -97,6 +97,7 @@ const NavigatedCardViewer = () => {
                   video,
                   image,
                   createdAt,
+                  _id,
                 },
                 index
               ) => (
@@ -112,6 +113,9 @@ const NavigatedCardViewer = () => {
                   image={image}
                   createdAt={createdAt}
                   designation={designation}
+                  postId={_id}
+                  setAllPosts={setAllPosts}
+                  allPosts={allPosts}
                 />
               )
             )

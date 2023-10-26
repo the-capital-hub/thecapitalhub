@@ -24,7 +24,7 @@ const RightProfileCard = ({ noProfile }) => {
           <div className="view_profile_name_section mt-2">
             <img
               src={loggedInUser.profilePicture}
-              style={{ width: "100px", height: "100px" }}
+              style={{ width: "100px", height: "100px", objectFit:"cover" }}
               className="rounded-circle profile-image"
               alt="profileimage"
             />
