@@ -1,8 +1,8 @@
 export const setThemeColor = () => {
-  const themeValue = JSON.parse(localStorage.getItem("loggedInUser"))
-    ?.isInvestor
-    ? "investor"
-    : "startup";
+  const themeValue =
+    JSON.parse(localStorage.getItem("loggedInUser"))?.isInvestor === "true"
+      ? "investor"
+      : "startup";
 
   document.documentElement.style.setProperty(
     "--currentTheme",
@@ -15,6 +15,10 @@ export const setThemeColor = () => {
   document.documentElement.style.setProperty(
     "--currentTheme-light",
     `var(--${themeValue}-light)`
+  );
+  document.documentElement.style.setProperty(
+    "--currentTheme-text",
+    `var(--${themeValue}-text)`
   );
   return console.log("Theme set to : ", themeValue);
 };

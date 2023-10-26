@@ -65,7 +65,7 @@
     }
 
     &::-webkit-scrollbar-thumb:hover {
-      background-color: var(--currentTheme);
+      background-color: var(--currentTheme-dark);
     }
 
     &::-webkit-scrollbar-track {
@@ -124,7 +124,7 @@
       }
 
       &::-webkit-scrollbar-thumb:hover {
-        background-color: var(--currentTheme);
+        background-color: var(--currentTheme-dark);
       }
 
       &::-webkit-scrollbar-track {
