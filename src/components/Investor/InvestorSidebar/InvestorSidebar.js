@@ -79,8 +79,9 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
       }}
     >
       <div
-        className={`close-menu ${!sidebarCollapsed && "close-btn-collapsed"
-          } d-none`}
+        className={`close-menu ${
+          !sidebarCollapsed && "close-btn-collapsed"
+        } d-none`}
         onClick={menuIconClick}
       >
         {sidebarCollapsed ? (
@@ -216,10 +217,11 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     <CommunitiesIcon
                       width="17px"
                       height="17px"
-                      color={`${isCommunityDetailOpen
+                      color={`${
+                        isCommunityDetailOpen
                           ? "#fd5901"
                           : "rgba(97, 97, 97, 1)"
-                        }`}
+                      }`}
                     />
                   </div>
                   {!sidebarCollapsed && (
@@ -352,7 +354,18 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   {!sidebarCollapsed && <span>Help</span>}
                 </Link>
               </MenuItem>
-
+              <MenuItem
+                // active={location.pathname.includes("")}
+                className="active-item"
+              >
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)}
+                  to="/"
+                >
+                  <img src={HomeIcon} alt="image" />
+                  {!sidebarCollapsed && <span>Go-to Platform</span>}
+                </Link>
+              </MenuItem>
               <hr className="hr-above-support" />
               {/* <MenuItem
                 active={location.pathname.includes("/support")}

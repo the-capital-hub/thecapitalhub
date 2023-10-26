@@ -6,31 +6,15 @@ import ManageTeamIcon from "../../Images/Group 8.svg";
 import ManageClientIcon from "../../Images/Group 9.svg";
 import ManageInvestortIcon from "../../Images/Group 10.svg";
 import MentorIcon from "../../Images/Group 13.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import WhyChooseUsCard from "../Card/Home/WhyChooseUs/WhyChooseUsCard";
 import OurStartUp from "./OurStartUp/OurStartUp";
 import CoInvestor from "./CoInvestor/CoInvestor";
 import OurCollabration from "./OurCollabration/OurCollabration";
 import { featuresData } from "../../constants/LandingPageFeatures";
 import Features from "../WebsiteComponents/LandingPage/Features/Features";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 
 const Home = () => {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const isLoggedIn = () => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    console.log("isLoggedIn-->", isLoggedIn);
-    return isLoggedIn === "true";
-  };
-
-  if (isLoggedIn()) {
-    if (loggedInUser.isInvestor === "true") {
-      return <Navigate to="/investor/home" replace state={{ noreferer: true }} />;
-    } else {
-      return <Navigate to="/home" replace state={{ noreferer: true }} />;
-    }
-  }
   return (
     <>
       {/* Hero section */}

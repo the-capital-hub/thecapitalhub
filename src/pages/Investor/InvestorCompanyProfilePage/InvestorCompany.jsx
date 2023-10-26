@@ -139,14 +139,14 @@ export default function CompanyProfilePage() {
                         to="/investor/company-profile/edit"
                         className="text-decoration-none text-dark fs-5"
                       >
-                        Click here to edit company details
+                        Edit company details
                       </Link>
                     </div>
                   ) : (
                     <div className="bg-white rounded-4 p-4">
                       {/* <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5"> */}
                       <button className="btn-base investor" onClick={handleAddNew}>
-                        Click here to add new company details
+                        Add new company details
                       </button>
                       {/* </Link> */}
                       <div className="or-text-container">
@@ -198,7 +198,7 @@ export default function CompanyProfilePage() {
                 ) : (
                   <div className="bg-white rounded-4 p-4">
                     <Link to="/investor/company-profile/edit" className="text-decoration-none text-dark fs-5">
-                      <button className="btn-base investor">Click here to add company details</button>
+                      <button className="btn-base investor">Add company details</button>
                     </Link>
                     <div className="or-text-container">
                       <p className="text-decoration-none text-dark fs-5">Or</p>
