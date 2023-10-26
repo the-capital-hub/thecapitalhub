@@ -128,7 +128,7 @@ export default function CommunityCard({
         <div className="d-flex flex-column justify-content-between gap-1">
           <h5
             className="m-0 text-capitalize text__clip--15"
-            style={{ color: "var(--currentTheme-text)" }}
+            style={{ color: "var(--currentTheme-dark)" }}
           >
             {community?.communityName}
           </h5>

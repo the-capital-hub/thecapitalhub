@@ -78,19 +78,19 @@
     scrollbar-gutter: stable;
 
     scrollbar-width: thick;
-    scrollbar-color: #fd5901 transparent;
+    scrollbar-color: var(--currentTheme) transparent;
 
     &::-webkit-scrollbar {
       width: 12px;
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: #fd5901;
+      background-color: var(--currentTheme);
       border-radius: 10rem;
     }
 
     &::-webkit-scrollbar-thumb:hover {
-      background-color: #fd5901;
+      background-color: var(--currentTheme-dark);
     }
 
     &::-webkit-scrollbar-track {

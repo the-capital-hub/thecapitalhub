@@ -109,7 +109,7 @@
       }
 
       h3 {
-        color: var(--currentTheme-text);
+        color: var(--currentTheme-dark);
       }
     }
 
@@ -180,12 +180,12 @@
     }
 
     .text_orange {
-      color: var(--currentTheme-text);
+      color: var(--currentTheme-dark);
     }
 
     .orange_underline {
       text-decoration: underline;
-      text-decoration-color: var(--currentTheme-text);
+      text-decoration-color: var(--currentTheme-dark);
       text-decoration-thickness: 1px;
       text-underline-offset: 0.25em;
     }

@@ -9,12 +9,12 @@ export const setThemeColor = () => {
     `var(--${themeValue})`
   );
   document.documentElement.style.setProperty(
-    "--currentTheme-text",
-    `var(--${themeValue}-text)`
+    "--currentTheme-dark",
+    `var(--${themeValue}-dark)`
   );
   document.documentElement.style.setProperty(
-    "--currentTheme-bg",
-    `var(--${themeValue}-bg)`
+    "--currentTheme-light",
+    `var(--${themeValue}-light)`
   );
   return console.log("Theme set to : ", themeValue);
 };

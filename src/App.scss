@@ -3,16 +3,16 @@
   --thumbBG: #7e7e7e;
 
   --startup: #fd5901;
-  --startup-bg: #fd5901;
-  --startup-text: #fd5901;
+  --startup-light: #fd5901;
+  --startup-dark: #fd5901;
 
   --investor: rgb(211, 243, 107);
-  --investor-text: rgb(165, 190, 82);
-  --investor-bg: rgb(211, 243, 107);
+  --investor-dark: rgb(165, 190, 82);
+  --investor-light: rgb(211, 243, 107);
 
   --currentTheme: var(--startup);
-  --currentTheme-text: var(--startup-text);
-  --currentTheme-bg: var(--startup-bg);
+  --currentTheme-dark: var(--startup-dark);
+  --currentTheme-light: var(--startup-light);
 }
 
 ::-webkit-scrollbar {
