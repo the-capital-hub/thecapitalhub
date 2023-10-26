@@ -8,7 +8,7 @@ import { s3 } from "../../../../Service/awsConfig";
 import IconDelete from "../../SvgIcons/IconDelete";
 const baseUrl = environment.baseUrl;
 
-const UploadModal = ({ onCancel }) => {
+const UploadModal = ({ onCancel , fetchFolder }) => {
   // Fetch loggedInUser from global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
@@ -38,6 +38,7 @@ const UploadModal = ({ onCancel }) => {
   };
 
   const handlePdfUploadClick = async () => {
+    
     if (files.length === 0) {
       return;
     }
@@ -74,6 +75,7 @@ const UploadModal = ({ onCancel }) => {
         await axios
           .post(`${baseUrl}/documentation/uploadDocument`, requestBody)
           .then((response) => {
+            fetchFolder()
             if (response.status === 200) {
               setUploadProgress(0); // Reset progress for the current file
               if (i < files.length - 1) {
