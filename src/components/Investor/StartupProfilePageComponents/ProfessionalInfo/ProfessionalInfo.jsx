@@ -4,7 +4,11 @@ import "./ProfessionalInfo.scss";
 import DefaultAvatar from "../../../../Images/Chat/default-user-avatar.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { getBase64 } from "../../../../utils/getBase64";
-import { getStartupByFounderId, postStartUpData, updateUserAPI } from "../../../../Service/user";
+import {
+  getStartupByFounderId,
+  postStartUpData,
+  updateUserAPI,
+} from "../../../../Service/user";
 import { loginSuccess } from "../../../../Store/features/user/userSlice";
 
 export default function ProfessionalInfo({ theme, companyFounderId }) {
@@ -12,7 +16,6 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const dispatch = useDispatch();
   const [company, setCompany] = useState([]);
-
 
   // State for Professional Data
   const [professionalData, setProfessionalData] = useState({
@@ -39,7 +42,7 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
         console.error(error);
       });
   }, []);
-  
+
   // State for isEditing
   const [isEditing, setIsEditing] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -100,7 +103,7 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
           <img
             src={professionalData.profilePicture || DefaultAvatar}
             alt={professionalData.fullName}
-            style={{ width: "90px", height: "90px" }}
+            style={{ width: "90px", height: "90px", objectFit: "cover" }}
             className="rounded-circle"
           />
           <div className="d-flex flex-column justify-content-center gap-1 ">
@@ -192,7 +195,6 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
               />
             </fieldset>
           )}
-
 
           {/* Designation */}
           <fieldset className={` ${theme} `}>
