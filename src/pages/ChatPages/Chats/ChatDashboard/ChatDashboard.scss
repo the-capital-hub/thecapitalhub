@@ -78,19 +78,19 @@
     scrollbar-gutter: stable;
 
     scrollbar-width: thick;
-    scrollbar-color: #fd5901 transparent;
+    scrollbar-color: var(--currentTheme) transparent;
 
     &::-webkit-scrollbar {
       width: 12px;
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: #fd5901;
+      background-color: var(--currentTheme);
       border-radius: 10rem;
     }
 
     &::-webkit-scrollbar-thumb:hover {
-      background-color: #fd5901;
+      background-color: var(--currentTheme-dark);
     }
 
     &::-webkit-scrollbar-track {
@@ -178,8 +178,8 @@
 
         .mymessage_container {
           max-width: 60%;
-          background-color: #fd5901;
-          color: white;
+          background-color: var(--currentTheme);
+          color: var(--currentTheme-text);
           padding: 10px 20px;
           border-top-left-radius: 20px;
           border-bottom-right-radius: 20px;
@@ -346,8 +346,8 @@
     height: 30px;
     flex-shrink: 0;
     border-radius: 10px;
-    background: #fd5901;
-    color: #fff;
+    background: var(--currentTheme);
+    color: var(--currentTheme-text);
     text-align: center;
     font-family: Poppins;
     font-size: 14px;
