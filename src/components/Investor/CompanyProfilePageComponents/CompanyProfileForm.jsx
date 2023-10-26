@@ -4,6 +4,8 @@ import { postStartUpData, postInvestorData } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
 import AfterSuccessPopup from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import { useDispatch, useSelector } from "react-redux";
+import { loginSuccess } from "../../../Store/Action/userAction";
+import { Response } from "aws-sdk";
 
 const LOCATIONS = [
   "Select Location",
@@ -48,6 +50,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [othersClicked, setOthersClicked] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const dispatch = useDispatch();
 
   // States for popup
   const [fromSubmit, setFromSubmit] = useState(false);
@@ -134,9 +137,17 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
       if (investor) {
         const response = await postInvestorData({
           ...formData,
+          companyName: formData.company,
           founderId: companyData.founderId || loggedInUser._id,
         });
         console.log(response);
+        const user = {
+          ...loggedInUser,
+          investor: response.data._id,
+        }
+        dispatch(loginSuccess(user));
+        setPopupData("Changes saved");
+        setFromSubmit(true);
       } else {
         const response = await postStartUpData({
           ...formData,
