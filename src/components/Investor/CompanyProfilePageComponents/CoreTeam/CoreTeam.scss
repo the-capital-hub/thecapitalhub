@@ -85,6 +85,10 @@
     }
   }
 
+  .modal-body {
+    min-height: 70vh;
+  }
+
   .team_member_modal {
     .edit_remove_team {
       flex: 0 0 45%;

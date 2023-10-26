@@ -20,9 +20,9 @@ export default function CompanyInfo({
         <img
           src={logo}
           alt={name}
-          style={{ width: "110px", height: "110px" }}
+          style={{ width: "110px", height: "110px", objectFit: "cover" }}
           loading="lazy"
-          className="rounded border border-light" 
+          className="rounded border border-light"
         />
       </div>
 

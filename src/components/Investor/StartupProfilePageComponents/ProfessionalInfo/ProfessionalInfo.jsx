@@ -4,15 +4,19 @@ import "./ProfessionalInfo.scss";
 import DefaultAvatar from "../../../../Images/Chat/default-user-avatar.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { getBase64 } from "../../../../utils/getBase64";
-import { getStartupByFounderId, postStartUpData, updateUserAPI } from "../../../../Service/user";
+import {
+  getStartupByFounderId,
+  postStartUpData,
+  updateUserAPI,
+} from "../../../../Service/user";
 import { loginSuccess } from "../../../../Store/features/user/userSlice";
+import IconCloudUpload from "../../SvgIcons/IconCloudUpload";
 
 export default function ProfessionalInfo({ theme, companyFounderId }) {
   // Fetch Global State
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const dispatch = useDispatch();
   const [company, setCompany] = useState([]);
-
 
   // State for Professional Data
   const [professionalData, setProfessionalData] = useState({
@@ -21,7 +25,7 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
     experience: loggedInUser?.experience || "",
     profilePicture: loggedInUser.profilePicture || "",
     fullName: loggedInUser?.firstName + " " + loggedInUser?.lastName || "",
-    company: loggedInUser?.startUp.company || "",
+    company: "",
     location: loggedInUser?.location || "Bangalore, India",
   });
 
@@ -34,9 +38,12 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
           ...professionalData,
           company: data.company,
         });
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }, []);
-  
+
   // State for isEditing
   const [isEditing, setIsEditing] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -97,7 +104,7 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
           <img
             src={professionalData.profilePicture || DefaultAvatar}
             alt={professionalData.fullName}
-            style={{ width: "90px", height: "90px" }}
+            style={{ width: "90px", height: "90px", objectFit: "cover" }}
             className="rounded-circle"
           />
           <div className="d-flex flex-column justify-content-center gap-1 ">
@@ -170,7 +177,11 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
             />
             <div className="professional_form_input d-flex align-items-center gap-4">
               <label htmlFor="profilePicture" style={{ cursor: "pointer" }}>
-                Upload Picture
+                <IconCloudUpload
+                  color={theme === "startup" ? "#fd5901" : "#b2cc5d"}
+                  height="1.75rem"
+                  width="1.75rem"
+                />
               </label>
               <p className="m-0 fs-6 fw-light">{selectedFile?.name}</p>
             </div>
@@ -189,7 +200,6 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
               />
             </fieldset>
           )}
-
 
           {/* Designation */}
           <fieldset className={` ${theme} `}>

@@ -1,5 +1,6 @@
 .chat_dashboard_container {
-  height: 85vh;
+  // -190px because chat nav is fixed to 106px and there is some margin at the top and bottom.
+  height: calc(100vh - 190px);
   border-radius: 30px;
   border: 1px solid #cfcfcf;
   background: #fff;
@@ -13,6 +14,10 @@
 
   @media (max-width: 820px) {
     border-radius: 15px;
+  }
+
+  @media (min-width: 821px) {
+    height: 85vh;
   }
 
   .name_title {
@@ -73,19 +78,19 @@
     scrollbar-gutter: stable;
 
     scrollbar-width: thick;
-    scrollbar-color: #fd5901 transparent;
+    scrollbar-color: var(--currentTheme) transparent;
 
     &::-webkit-scrollbar {
       width: 12px;
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: #fd5901;
+      background-color: var(--currentTheme);
       border-radius: 10rem;
     }
 
     &::-webkit-scrollbar-thumb:hover {
-      background-color: #fd5901;
+      background-color: var(--currentTheme-dark);
     }
 
     &::-webkit-scrollbar-track {
@@ -154,27 +159,27 @@
 
     .my_message_main {
       align-self: flex-end;
-      
+
       .image_profile {
         height: 50px;
         width: 50px;
         border-radius: 50%;
       }
-      
+
       .my_messages {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-end;
-        
+
         .time_name_image {
           display: flex;
         }
-        
+
         .mymessage_container {
           max-width: 60%;
-          background-color: #fd5901;
-          color: white;
+          background-color: var(--currentTheme);
+          color: var(--currentTheme-text);
           padding: 10px 20px;
           border-top-left-radius: 20px;
           border-bottom-right-radius: 20px;
@@ -341,8 +346,8 @@
     height: 30px;
     flex-shrink: 0;
     border-radius: 10px;
-    background: #fd5901;
-    color: #fff;
+    background: var(--currentTheme);
+    color: var(--currentTheme-text);
     text-align: center;
     font-family: Poppins;
     font-size: 14px;

@@ -48,6 +48,12 @@
         border-radius: 25px;
         outline: none;
       }
+      .name_input{
+        border: 1px solid black;
+      }
+      .name_input:focus {
+        outline:none;
+    }
 
       .upload_button {
         color: white;

@@ -62,7 +62,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
 
   function handleMyCommunityClick() {
     navigate("/chats?isCommunityOpen=true");
-  } 
+  }
 
   return (
     <div
@@ -79,7 +79,9 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
       }}
     >
       <div
-        className={`close-menu ${!sidebarCollapsed && "close-btn-collapsed"} d-lg-none`}
+        className={`close-menu ${
+          !sidebarCollapsed && "close-btn-collapsed"
+        } d-none`}
         onClick={menuIconClick}
       >
         {sidebarCollapsed ? (
@@ -100,7 +102,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   {" "}
                   <img
                     className="rounded-circle"
-                    style={{ width: "50px", height: "50px" }}
+                    style={{ width: "50px", height: "50px", objectFit:"cover" }}
                     src={loggedInUser.profilePicture}
                     alt="User profile"
                   />
@@ -114,7 +116,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     {" "}
                     <img
                       className="rounded-circle"
-                      style={{ width: "70px", height: "70px" }}
+                      style={{ width: "70px", height: "70px", objectFit:"cover" }}
                       src={loggedInUser.profilePicture}
                       alt="image"
                     />
@@ -352,9 +354,20 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   {!sidebarCollapsed && <span>Help</span>}
                 </Link>
               </MenuItem>
-
-              <hr className="hr-above-support" />
               <MenuItem
+                // active={location.pathname.includes("")}
+                className="active-item"
+              >
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)}
+                  to="/"
+                >
+                  <img src={HomeIcon} alt="image" />
+                  {!sidebarCollapsed && <span>Go-to Platform</span>}
+                </Link>
+              </MenuItem>
+              <hr className="hr-above-support" />
+              {/* <MenuItem
                 active={location.pathname.includes("/support")}
                 className="active-item"
               >
@@ -365,7 +378,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   <img src={Support} alt="image" width="17px" height="17px" />
                   {!sidebarCollapsed && <span>Support</span>}
                 </Link>
-              </MenuItem>
+              </MenuItem> */}
             </Menu>
           </SidebarContent>
           <SidebarFooter>

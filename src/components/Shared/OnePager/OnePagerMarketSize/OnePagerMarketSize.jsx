@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function OnePagerMarketSize() {
+export default function OnePagerMarketSize({ companyData }) {
   return (
     <div className="market_size">
       <h4 className="main_color">Market Size (in Billions $)</h4>
@@ -10,7 +10,7 @@ export default function OnePagerMarketSize() {
           <input
             type="text"
             readOnly
-            value={""}
+            value={companyData?.TAM}
             className="onePager_input shadow-sm main_border"
           />
         </fieldset>
@@ -20,7 +20,7 @@ export default function OnePagerMarketSize() {
           <input
             type="text"
             readOnly
-            value={""}
+            value={companyData?.SAM}
             className="onePager_input shadow-sm main_border"
           />
         </fieldset>
@@ -30,7 +30,7 @@ export default function OnePagerMarketSize() {
           <input
             type="text"
             readOnly
-            value={""}
+            value={companyData?.SOM}
             className="onePager_input shadow-sm main_border"
           />
         </fieldset>

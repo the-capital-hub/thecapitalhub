@@ -4,10 +4,12 @@ import {
   getStartupByFounderId,
   postStartUpData,
   uploadLogo,
+  postInvestorData,
 } from "../../../../Service/user";
 import { getBase64 } from "../../../../utils/getBase64";
 import IconEdit from "../../SvgIcons/IconEdit";
 import IconDeleteFill from "../../SvgIcons/IconDeleteFill";
+import { useSelector } from "react-redux";
 
 export default function AddTeamMemberModal({
   companyData,
@@ -25,6 +27,7 @@ export default function AddTeamMemberModal({
   const [selectedFile, setSelectedFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   // Fetch current core team members here
   const { team: currentTeam } = companyData;
@@ -98,24 +101,40 @@ export default function AddTeamMemberModal({
           ...previousData,
           team: [...editedTeam],
         }));
+        if (loggedInUser.isInvestor === "true") {
+          const response = await postInvestorData({
+            founderId: companyData.founderId,
+            team: [...editedTeam],
+          });
+          console.log(response);
+        } else {
+          const response = await postStartUpData({
+            founderId: companyData.founderId,
+            team: [...editedTeam],
+          });
+          console.log(response);
+        }
 
-        const response = await postStartUpData({
-          founderId: companyData.founderId,
-          team: [...editedTeam],
-        });
-        console.log(response);
       } else {
         // If not editing then Adding new member
         setCompanyData((previousData) => ({
           ...previousData,
           team: [...previousData.team, updatedTeamMember],
         }));
+        if (loggedInUser.isInvestor === "true") {
+          const response = await postInvestorData({
+            founderId: companyData.founderId,
+            team: [...companyData.team, updatedTeamMember],
+          });
+          console.log(response);
+        } else {
+          const response = await postStartUpData({
+            founderId: companyData.founderId,
+            team: [...companyData.team, updatedTeamMember],
+          });
+          console.log(response);
+        }
 
-        const response = await postStartUpData({
-          founderId: companyData.founderId,
-          team: [...companyData.team, updatedTeamMember],
-        });
-        console.log(response);
       }
 
       setMember(initialMemberState);
@@ -152,12 +171,23 @@ export default function AddTeamMemberModal({
           ...previousData,
           team: [...newTeam],
         }));
-        const response = await postStartUpData({
-          founderId: companyData.founderId,
-          team: [...newTeam],
-        });
 
-        console.log(response);
+        if (loggedInUser.isInvestor === "true") {
+          const response = await postInvestorData({
+            founderId: companyData.founderId,
+            team: [...newTeam],
+          });
+
+          console.log(response);
+        } else {
+          const response = await postStartUpData({
+            founderId: companyData.founderId,
+            team: [...newTeam],
+          });
+
+          console.log(response);
+        }
+
         setMember(initialMemberState);
         setSelectedFile(null);
         setIsEditing(false);
@@ -186,41 +216,41 @@ export default function AddTeamMemberModal({
           {/* Loop current team member here */}
           {currentTeam
             ? currentTeam.map((member, index) => {
-                return (
-                  <div
-                    className="d-flex align-items-center justify-content-around p-2 bg-light rounded-3"
-                    key={`${member.name}${index}`}
-                  >
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        objectFit: "cover",
-                      }}
-                      className="rounded-circle"
-                    />
-                    <h6 className="m-0 flex-grow-1 text-center" style={{}}>
-                      {member.name}
-                    </h6>
-                    <div className="d-flex gap-2">
-                      <button
-                        className={`modal_edit_btn ${theme}`}
-                        onClick={(e) => handleSelectClick(e, member, index)}
-                      >
-                        <IconEdit />
-                      </button>
-                      <button
-                        className={`modal_delete_btn ${theme}`}
-                        onClick={(e) => handleDeleteClick(e, member, index)}
-                      >
-                        <IconDeleteFill />
-                      </button>
-                    </div>
+              return (
+                <div
+                  className="d-flex align-items-center justify-content-around p-2 bg-light rounded-3"
+                  key={`${member.name}${index}`}
+                >
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      objectFit: "cover",
+                    }}
+                    className="rounded-circle"
+                  />
+                  <h6 className="m-0 flex-grow-1 text-center" style={{}}>
+                    {member.name}
+                  </h6>
+                  <div className="d-flex gap-2">
+                    <button
+                      className={`modal_edit_btn ${theme}`}
+                      onClick={(e) => handleSelectClick(e, member, index)}
+                    >
+                      <IconEdit />
+                    </button>
+                    <button
+                      className={`modal_delete_btn ${theme}`}
+                      onClick={(e) => handleDeleteClick(e, member, index)}
+                    >
+                      <IconDeleteFill />
+                    </button>
                   </div>
-                );
-              })
+                </div>
+              );
+            })
             : ""}
         </div>
       </div>
@@ -254,9 +284,8 @@ export default function AddTeamMemberModal({
                 <BsFillCameraFill
                   style={{
                     fontSize: "1.5rem",
-                    color: `${
-                      theme === "investor" ? "black" : "rgba(253, 89, 1,1)"
-                    }`,
+                    color: `${theme === "investor" ? "black" : "rgba(253, 89, 1,1)"
+                      }`,
                   }}
                 />
               )}
@@ -277,6 +306,7 @@ export default function AddTeamMemberModal({
               value={member.name}
               className={`modal__input p-2 rounded-2 w-100 ${theme}`}
               onChange={handleInputChange}
+              style={{ color: 'black' }}
             />
           </div>
           {/* Designation input */}
@@ -289,6 +319,7 @@ export default function AddTeamMemberModal({
               value={member.designation}
               className={`modal__input p-2 rounded-2 w-100 ${theme}`}
               onChange={handleInputChange}
+              style={{ color: 'black' }}
             />
           </div>
           <button

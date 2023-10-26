@@ -10,7 +10,11 @@ import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 import TimeAgo from "timeago-react";
 import { Link, useNavigate } from "react-router-dom";
 
-function NotificationsPopup({ toggleVisibility }) {
+function NotificationsPopup({
+  toggleVisibility,
+  setNotificationCount,
+  notificationCount,
+}) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -77,8 +81,8 @@ function NotificationsPopup({ toggleVisibility }) {
             You have a new{" "}
             <Link to={`/investor/my-schedule?view=true`} className="fw-bold">
               meeting
-            </Link>
-            {" "} request
+            </Link>{" "}
+            request
           </span>
         );
       }
@@ -92,6 +96,7 @@ function NotificationsPopup({ toggleVisibility }) {
     try {
       await markNotificationAsReadAPI(id);
       await fetchNotifications();
+      setNotificationCount(notificationCount--);
     } catch (error) {
       console.log("Error marking notification as read", error);
     }
@@ -101,6 +106,7 @@ function NotificationsPopup({ toggleVisibility }) {
     try {
       await markAllNotificationsReadAPI();
       await fetchNotifications();
+      setNotificationCount(0);
     } catch (error) {
       console.log("Error marking all notifications as read: ", error);
     }
@@ -153,7 +159,10 @@ function NotificationsPopup({ toggleVisibility }) {
                           className="btn btn-light btn-sm"
                           onClick={() => markAsRead(_id)}
                         >
-                          Mark as read
+                          <span className="d-none d-md-block">
+                            Mark as read
+                          </span>
+                          <span className="d-md-none text-secondary">✔</span>
                         </button>
                       )}
                     </div>

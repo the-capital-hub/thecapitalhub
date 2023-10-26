@@ -136,7 +136,7 @@ export const updateCommunity = async (communityId, updatedData) => {
         format: 'webp',
         unique_filename: true,
       });
-      updatedData.profileImage = url;
+      community.profileImage = url;
     }
 
     community.communityName = updatedData.communityName || community.communityName;
@@ -178,8 +178,7 @@ export const exitCommunity = async (userId, communityId) => {
         message: "User is not a member of the community",
       };
     }
-    community.members = community.members.filter((memberId) => memberId !== userId);
-
+    community.members = community.members.filter((memberId) => memberId.toString() !== userId);
     await community.save();
 
     return {
@@ -255,6 +254,29 @@ export const addMembersToCommunity = async (communityId, memberIds) => {
     return {
       status: 500,
       message: "An error occurred while adding members to the community",
+    };
+  }
+};
+
+export const deleteCommunity = async (communityId, userId) => {
+  try {
+    console.log(communityId, userId);
+    const community = await CommunityModel.findOneAndDelete({ _id: communityId, adminId: userId });
+    if (!community) {
+      return {
+        status: 403,
+        message: 'You are not authorized to delete this community',
+      };
+    }
+    return {
+      status: 200,
+      message: 'Community deleted successfully',
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: 'An error occurred while deleting the community',
     };
   }
 };

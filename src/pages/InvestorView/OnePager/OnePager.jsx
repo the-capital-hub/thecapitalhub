@@ -71,7 +71,7 @@ const OnePager = () => {
   // Handle download PDF
   const handleDownloadPDF = () => {
     const element = document.querySelector(".onePager_wrapper");
-    const buttons = document.querySelectorAll(".buttons button");
+    const buttons = document.querySelectorAll("button");
     buttons.forEach((button) => {
       button.style.display = "none";
     });
@@ -80,7 +80,8 @@ const OnePager = () => {
       removeContainer: true,
       backgroundColor: "#ffffff",
       scale: window.devicePixelRatio,
-      useCORS: false,
+      useCORS: true,
+      windowWidth: '1400px',
     }).then((canvas) => {
       const contentDataURL = canvas.toDataURL("image/png");
       const imgWidth = 210;
@@ -118,7 +119,8 @@ const OnePager = () => {
       removeContainer: true,
       backgroundColor: "#ffffff",
       scale: window.devicePixelRatio,
-      useCORS: false,
+      useCORS: true,
+      windowWidth: '1400px',
     }).then((canvas) => {
       const contentDataURL = canvas.toDataURL("image/png");
       console.log(contentDataURL);
@@ -163,7 +165,7 @@ const OnePager = () => {
 
   return (
     <MaxWidthWrapper>
-      <div className="border_left ps-xl-3 mb-5">
+      <div className=" ps-xl-3 mb-5">
         {onePager.length !== 0 ? (
           <div
             className="onePager_wrapper d-flex flex-column gap-4"
@@ -193,15 +195,15 @@ const OnePager = () => {
               <div className="border-bottom">
                 <div className="px-3 px-lg-4 py-5 d-flex flex-column gap-5">
                   {/* Market Size */}
-                  <OnePagerMarketSize />
+                  <OnePagerMarketSize companyData={onePager} />
                   {/* Social Links */}
-                  <OnePagerSocialLinks />
+                  <OnePagerSocialLinks companyData={onePager} />
                   {/* Projections */}
-                  <OnePagerProjections />
+                  <OnePagerProjections companyData={onePager} />
                   {/* Fund Asking */}
-                  <OnePagerFundAsking />
+                  <OnePagerFundAsking companyData={onePager} />
                   {/* Roadmap */}
-                  <OnePagerRoadmap />
+                  <OnePagerRoadmap companyData={onePager} />
                   {/* Team */}
                   <OnePagerTeam team={onePager.team} />
                 </div>

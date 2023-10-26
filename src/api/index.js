@@ -93,6 +93,10 @@ const API = Object.freeze({
   getAllMeetingRequests: `${baseUrl}/schedule/getAllRequests`,
   acceptMeetingRequest: `${baseUrl}/schedule/acceptMeetingRequest`,
   getNotificationCount: `${baseUrl}/notificaton/getNotificationCount`,
+  deleteCommunity: `${baseUrl}/community/deleteCommunity`,
+  exitCommunity: `${baseUrl}/community/exitCommunity`,
+  getfolders: `${baseUrl}/documentation/getFolderByUser`,
+
 });
 
 export default API;
