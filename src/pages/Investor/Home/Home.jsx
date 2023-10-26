@@ -118,6 +118,7 @@ function Home() {
                   src={loggedInUser.profilePicture}
                   alt="Image"
                   className="rounded-circle"
+                  style={{ objectFit: "cover" }}
                 />
                 <div className="w-100 me-4" onClick={openPopup}>
                   <input

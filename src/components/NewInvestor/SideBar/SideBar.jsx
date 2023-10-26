@@ -90,7 +90,11 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 >
                   <img
                     className="rounded-circle"
-                    style={{ width: "60px", height: "60px" }}
+                    style={{
+                      width: "60px",
+                      height: "60px",
+                      objectFit: "cover",
+                    }}
                     src={loggedInUser.profilePicture}
                     alt="User profile"
                   />
@@ -107,6 +111,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                       style={{
                         width: "60px",
                         height: "60px",
+                        objectFit: "cover",
                       }}
                       src={loggedInUser.profilePicture}
                       alt="User profile"

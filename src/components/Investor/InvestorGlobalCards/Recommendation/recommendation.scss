@@ -110,5 +110,9 @@
     .right_view_profile {
       width: 100%;
     }
+
+    .card_wrapper + .card_wrapper{
+      border-top: 1px solid #DCDCDC;
+    }
   }
 }
