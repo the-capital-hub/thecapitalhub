@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import ThreeDot from "../../../../Images/VerticalBlackThreeDots.svg";
 import { Link } from "react-router-dom";
+import IconKebabMenu from "../../SvgIcons/IconKebabMenu";
 const SavedPostSmallCard = ({
   activeHeader,
   key,
@@ -13,6 +14,10 @@ const SavedPostSmallCard = ({
   userId,
 }) => {
   console.log("user", firstName, lastName, profilePicture, image);
+
+  // State for KebabMenu
+  const [showKebabMenu, setShowKebabMenu] = useState(false);
+
   return (
     <>
       {/* <div className="card-viewer"> */}
@@ -47,13 +52,17 @@ const SavedPostSmallCard = ({
               <span className="card_heading">{designation}</span>
             </div>
           </div>
+
+          {/* Kebab menu */}
           <div>
-            <img
+            {/* <img
               src={ThreeDot}
               alt="Three Dot"
               className="img-fluid"
               style={{ width: "20px", height: "20px" }}
-            />
+            /> */}
+            <button className="btn p-0 m-0" onClick={() => setShowKebabMenu(true)}><IconKebabMenu /></button>
+            
           </div>
         </div>
         {image ? (
