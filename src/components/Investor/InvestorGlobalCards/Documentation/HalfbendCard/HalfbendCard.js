@@ -160,24 +160,37 @@ const HalfbendCard = ({folderName, userId}) => {
              
             >
               <div className="custom-card"  onClick={() => openPdfInNewWindow(item.fileUrl)}>
-                <img
-                  className="mx-3 my-1"
+                <div className="d-flex justify-content-between">
+                <span className="d-flex "> 
+              <img
+                  className="pdfIcon-img"
                   src={pdfIcon}
                   height={50}
-                  alt="PDF Icon"
-                  
-                />
-              </div>
-              <div className="d-flex flex-column mx-auto justify-content-center align-items-center">
-              <h6 >{item.fileName}</h6>
-              <img
-                  className="delete-img"
+                  alt="pdfIcon"
+                  onClick={() => handleDeleteDoc(item._id)}
+                /> <h6 >{item.fileName}</h6></span>
+                 <img
+                  className="delete-img "
                   src={deleteIcon}
                   height={50}
                   alt="deleteIcon"
                   onClick={() => handleDeleteDoc(item._id)}
                 />
+                  
+                </div>
+             
+                <img
+                  className="inner_img my-1"
+                  src={item.fileUrl}
+                  height={50}
+                  alt="PDF Icon"
+                  
+                />
               </div>
+              {/* <div className="d-flex flex-column mx-auto justify-content-center align-items-center">
+              <h6 >{item.fileName}</h6>
+             
+              </div> */}
               
             </div>
           ))}
