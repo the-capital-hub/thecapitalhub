@@ -3,6 +3,7 @@ import "./CompanyProfileForm.scss";
 import { postStartUpData, postInvestorData } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
 import AfterSuccessPopup from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import InvestorAfterSuccessPopup from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../../Store/Action/userAction";
 import { Response } from "aws-sdk";
@@ -54,6 +55,8 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
 
   // States for popup
   const [fromSubmit, setFromSubmit] = useState(false);
+  const [investorfromSubmit, setInvestorfromSubmit] = useState(false);
+
   const [popupData, setPopupData] = useState("");
 
   useEffect(() => {
@@ -147,7 +150,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
         }
         dispatch(loginSuccess(user));
         setPopupData("Changes saved");
-        setFromSubmit(true);
+        setInvestorfromSubmit(true);
       } else {
         const response = await postStartUpData({
           ...formData,
@@ -385,8 +388,15 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
       </form>
       {fromSubmit && (
         <AfterSuccessPopup
-          withoutOkButton
+          // withoutOkButton
           onClose={() => setFromSubmit(!fromSubmit)}
+          successText={popupData}
+        />
+      )}
+      {investorfromSubmit && (
+        <InvestorAfterSuccessPopup
+          // withoutOkButton
+          onClose={() => setInvestorfromSubmit(!investorfromSubmit)}
           successText={popupData}
         />
       )}

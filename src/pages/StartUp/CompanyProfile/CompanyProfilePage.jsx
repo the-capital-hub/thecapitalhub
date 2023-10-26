@@ -146,8 +146,8 @@ export default function CompanyProfilePage() {
                             {companies.map((company, index) => (
                               <div
                                 className={`suggestion-item ${selectedCompanyId === company._id
-                                    ? "active"
-                                    : ""
+                                  ? "active"
+                                  : ""
                                   }`}
                                 key={index}
                                 onClick={() =>
@@ -205,8 +205,8 @@ export default function CompanyProfilePage() {
                             {companies.map((company, index) => (
                               <div
                                 className={`suggestion-item ${selectedCompanyId === company._id
-                                    ? "active"
-                                    : ""
+                                  ? "active"
+                                  : ""
                                   }`}
                                 key={index}
                                 onClick={() =>

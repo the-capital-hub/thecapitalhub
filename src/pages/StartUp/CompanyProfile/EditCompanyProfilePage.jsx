@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./EditCompanyProfilePage.scss";
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
@@ -15,15 +15,18 @@ import CoreTeam from "../../../components/Investor/CompanyProfilePageComponents/
 import Milestones from "../../../components/Investor/CompanyProfilePageComponents/Milestones/Milestones";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import backIcon from "../../../Images/Chat/BackIcon.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function EditCompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const dispatch = useDispatch();
   const [colorCardData, setColorCardData] = useState(null);
-
+  const navigate = useNavigate();
   const [companyData, setCompanyData] = useState([]);
   const [isBioEditable, setIsBioEditable] = useState(false);
   const [companyDescription, setCompanyDescription] = useState(null);
+  
   useEffect(() => {
     if (loggedInUser?.isInvestor === "false") {
       getStartupByFounderId(loggedInUser._id)
@@ -77,11 +80,24 @@ export default function EditCompanyProfilePage() {
     }
   };
 
+  const handleSaveAll = (e) => {
+    submitBioHandler(e);
+  }
+
   return (
     <MaxWidthWrapper>
       <div className="editcompanyProfilePage__wrapper">
         {/* Main content */}
+
         <div className="main__content">
+          <span className="back_img rounded-circle shadow-sm" title="Go Back">
+            <img
+              src={backIcon}
+              width={20}
+              height={20}
+              onClick={() => navigate(-1)}
+            />
+          </span>
           <SmallProfileCard text={"Company Profile"} />
           <div className="bg-white rounded-5 p-5">
             <CompanyProfileForm companyData={companyData} />
@@ -93,9 +109,8 @@ export default function EditCompanyProfilePage() {
               <span className="ms-auto">
                 <div className="d-flex gap-2">
                   <button
-                    className={`align-self-end btn-base startup ${
-                      isBioEditable ? "btn-sm" : ""
-                    }`}
+                    className={`align-self-end btn-base startup ${isBioEditable ? "btn-sm" : ""
+                      }`}
                     onClick={() => setIsBioEditable(!isBioEditable)}
                   >
                     {isBioEditable ? "Cancel" : "Edit"}
@@ -103,9 +118,8 @@ export default function EditCompanyProfilePage() {
                   </button>
                   {isBioEditable && (
                     <button
-                      className={`align-self-end btn-base startup ${
-                        isBioEditable ? "btn-sm" : ""
-                      }`}
+                      className={`align-self-end btn-base startup ${isBioEditable ? "btn-sm" : ""
+                        }`}
                       onClick={(e) => submitBioHandler(e)}
                     >
                       Save
@@ -151,7 +165,7 @@ export default function EditCompanyProfilePage() {
           </div>
           {/* Milestones */}
           <div className="milestones__component bg-white rounded-5 p-5 d-flex flex-column gap-4">
-            <Milestones />
+            <Milestones theme={"startup"} />
           </div>
           {/* Color Cards */}
           <div className="card_holder d-flex justify-content-between flex-wrap">
@@ -229,6 +243,10 @@ export default function EditCompanyProfilePage() {
               colorCardData={colorCardData}
             />
           </div>
+          <button
+            className={`align-self-end btn-base startup`}
+            onClick={handleSaveAll}
+          > Save ALL </button>
         </div>
         {/* Right side content */}
         <div className="right__content">

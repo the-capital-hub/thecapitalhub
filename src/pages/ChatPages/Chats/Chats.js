@@ -32,6 +32,7 @@ import {
   ModalBSHeader,
 } from "../../../components/PopUp/ModalBS";
 import NewCommunityModal from "../../../components/Investor/ChatComponents/NewCommunityModal";
+import { setThemeColor } from "../../../utils/setThemeColor";
 
 const Chats = () => {
   // search params
@@ -78,16 +79,9 @@ const Chats = () => {
     }
     window.addEventListener("resize", handleWindowResize);
     handleWindowResize();
-    console.log(
-      11111111111111111,
-      JSON.parse(localStorage.getItem("loggedInUser"))?.isInvestor
-    );
-    document.documentElement.style.setProperty(
-      "--currentTheme",
-      JSON.parse(localStorage.getItem("loggedInUser"))?.isInvestor
-        ? "var(--investor)"
-        : "var(--startup)"
-    );
+    
+    setThemeColor();
+
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };

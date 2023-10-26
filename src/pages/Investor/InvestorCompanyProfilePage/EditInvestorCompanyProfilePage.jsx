@@ -14,9 +14,13 @@ import { getInvestorById, postInvestorData } from "../../../Service/user";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import Milestones from "../../../components/Investor/CompanyProfilePageComponents/Milestones/Milestones";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import CoreTeam from "../../../components/Investor/CompanyProfilePageComponents/CoreTeam/CoreTeam";
+import { useNavigate } from "react-router-dom";
+import backIcon from "../../../Images/Chat/BackIcon.svg";
 
 export default function EditInvestorCompanyProfilePage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
@@ -36,6 +40,7 @@ export default function EditInvestorCompanyProfilePage() {
   useEffect(() => {
     getInvestorById(loggedInUser.investor).then(({ data }) => {
       setCompanyData(data);
+      setCompanyDescription(data.description);
       setColorCardData({
         averageInvestment: data.colorCard.averageInvestment,
         total_investment: data.colorCard.total_investment,
@@ -45,9 +50,9 @@ export default function EditInvestorCompanyProfilePage() {
         seedRound: data.colorCard.seedRound,
       });
     })
-    .catch((error) => {
-      console.log(error);
-    })
+      .catch((error) => {
+        console.log(error);
+      })
   }, []);
 
   // handleAmountChange
@@ -83,11 +88,23 @@ export default function EditInvestorCompanyProfilePage() {
     }
   };
 
+  const handleSaveAll = (e) => {
+    submitBioHandler(e);
+  }
+
   return (
     <MaxWidthWrapper>
       <div className="editinvestorCompanyProfilePage__wrapper p-3 border-start">
         {/* Main content */}
         <div className="main__content">
+          <span className="back_img rounded-circle shadow-sm" title="Go Back">
+            <img
+              src={backIcon}
+              width={20}
+              height={20}
+              onClick={() => navigate(-1)}
+            />
+          </span>
           <SmallProfileCard text={"Company Profile"} />
           {/* Company profile form */}
           <div className="bg-white rounded-3 p-5 border">
@@ -100,9 +117,8 @@ export default function EditInvestorCompanyProfilePage() {
               <span className="ms-auto">
                 <div className="d-flex gap-2">
                   <button
-                    className={`align-self-end btn-base investor ${
-                      isBioEditable ? "btn-sm" : ""
-                    }`}
+                    className={`align-self-end btn-base investor ${isBioEditable ? "btn-sm" : ""
+                      }`}
                     onClick={() => setIsBioEditable(!isBioEditable)}
                   >
                     {isBioEditable ? "Cancel" : "Edit"}
@@ -110,9 +126,8 @@ export default function EditInvestorCompanyProfilePage() {
                   </button>
                   {isBioEditable && (
                     <button
-                      className={`align-self-end btn-base investor ${
-                        isBioEditable ? "btn-sm" : ""
-                      }`}
+                      className={`align-self-end btn-base investor ${isBioEditable ? "btn-sm" : ""
+                        }`}
                       onClick={(e) => submitBioHandler(e)}
                     >
                       Save
@@ -148,13 +163,13 @@ export default function EditInvestorCompanyProfilePage() {
 
           {/* Core Team */}
           <div className="core__team bg-white rounded-3 p-5 d-flex flex-column gap-4 border">
-            {/* <CoreTeam
+            <CoreTeam
               companyData={companyData}
               setCompanyData={setCompanyData}
               theme="investor"
-            /> */}
+            />
             {/* When integrating with backend replace below code with CoreTeam Component above */}
-            <div className="d-flex align-items-center justify-content-between">
+            {/* <div className="d-flex align-items-center justify-content-between">
               <h2>Core Team</h2>
               <Link className="see__more align-self-end">See more</Link>
             </div>
@@ -211,7 +226,7 @@ export default function EditInvestorCompanyProfilePage() {
                 <h5>Raghu</h5>
                 <p>Web Developer</p>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* When integrating with backend replace below code with Milestones Component */}
@@ -304,6 +319,10 @@ export default function EditInvestorCompanyProfilePage() {
               noRupee={true}
             />
           </div>
+          <button
+            className={`align-self-end btn-base investor`}
+            onClick={handleSaveAll}
+          > Save ALL </button>
         </div>
         {/* Right side content */}
         <div className="right__content">
