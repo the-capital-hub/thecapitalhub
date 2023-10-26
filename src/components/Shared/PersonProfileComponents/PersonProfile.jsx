@@ -42,7 +42,6 @@ export default function PersonProfile({ theme, short, personData }) {
   let experience;
   let education;
 
-  
   if (personData?.startUp) {
     profilePicture = personData?.profilePicture;
     firstName = personData?.firstName;
@@ -58,7 +57,9 @@ export default function PersonProfile({ theme, short, personData }) {
     startedAtDate = personData?.startUp.startedAtDate;
     socialLinks = personData?.startUp.socialLinks;
     colorCard = personData?.startUp.colorCard;
-    startUp=personData?.startUp;
+    startUp = personData?.startUp;
+    experience = personData?.experience;
+    education = personData?.education;
   } else {
     profilePicture = personData?.profilePicture;
     firstName = personData?.firstName;
@@ -74,9 +75,9 @@ export default function PersonProfile({ theme, short, personData }) {
     startedAtDate = personData?.investor?.startedAtDate;
     socialLinks = personData?.investor?.socialLinks;
     colorCard = personData?.investor?.colorCard;
-    investor=personData?.investor;
-    experience=personData?.experience;
-    education=personData?.education;
+    investor = personData?.investor;
+    experience = personData?.experience;
+    education = personData?.education;
   }
 
   return (
