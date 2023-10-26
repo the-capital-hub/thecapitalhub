@@ -12,7 +12,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
-import { getSearchResultsAPI, getNotificationCount } from "../../../Service/user";
+import {
+  getSearchResultsAPI,
+  getNotificationCount,
+} from "../../../Service/user";
 import { SearchIcon } from "../SvgIcons";
 import NotificationsPopup from "../../Investor/InvestorNavbar/NotificationsPopup/NotificationsPopup";
 import { useRef } from "react";
@@ -36,12 +39,11 @@ const NavBar = (props) => {
     getNotificationCount()
       .then(({ data }) => {
         console.log(data.unreadCount);
-        setNotificationCount(data.unreadCount)
+        setNotificationCount(data.unreadCount);
       })
       .catch((error) => console.error(error));
   }, []);
 
-  
   const searchInputHandler = async ({ target }) => {
     try {
       setLoading(true);
@@ -353,6 +355,7 @@ const NavBar = (props) => {
                 )}
                 {toggleNotificationPopup && (
                   <NotificationsPopup
+                    setNotificationCount={setNotificationCount}
                     toggleVisibility={setToggleNotificationPopup}
                   />
                 )}
