@@ -78,6 +78,16 @@ const Chats = () => {
     }
     window.addEventListener("resize", handleWindowResize);
     handleWindowResize();
+    console.log(
+      11111111111111111,
+      JSON.parse(localStorage.getItem("loggedInUser"))?.isInvestor
+    );
+    document.documentElement.style.setProperty(
+      "--currentTheme",
+      JSON.parse(localStorage.getItem("loggedInUser"))?.isInvestor
+        ? "var(--investor)"
+        : "var(--startup)"
+    );
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };
@@ -297,7 +307,7 @@ const Chats = () => {
           ) : (
             <div className="select-chat-container">
               <img src={selectAChatIcon} alt="select a chat" />
-              <h3 className="orange">Select a message</h3>
+              <h3>Select a message</h3>
             </div>
           )}
         </section>

@@ -25,7 +25,6 @@ import { setIsMobileView } from "./Store/features/design/designSlice";
 import { useEffect } from "react";
 import InvestorOneLinkRoutes from "./routes/InvestorOneLinkRoutes";
 
-
 function App() {
   const dispatch = useDispatch();
 
@@ -37,6 +36,7 @@ function App() {
     }
     window.addEventListener("resize", handleWindowResize);
     handleWindowResize();
+
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };
@@ -81,8 +81,6 @@ function App() {
         <Route path="/e-commerce" element={<EcommerceLayout />}>
           {EcommerceRoutes()}
         </Route>
-
-        
 
         {/* 404 Not Found */}
         <Route path="*" element={<NotFound404 />} />

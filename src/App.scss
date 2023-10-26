@@ -1,12 +1,14 @@
-.container-fluid {
-  margin: 0;
-  padding: 0;
-}
-
 :root {
   --scrollbarBG: #eee;
   --thumbBG: #7e7e7e;
+
+  --startup: #fd5901;
+  --investor: rgb(211, 243, 107);
+
+  --currentTheme: var(--startup);
+  --currentTheme_dark: darken(--currentTheme, 10%);
 }
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -26,8 +28,22 @@
   scrollbar-width: none;
 }
 
+.container-fluid {
+  margin: 0;
+  padding: 0;
+}
+
 .btn-xs {
   --bs-btn-padding-y: 0.25rem;
   --bs-btn-padding-x: 0.5rem;
   --bs-btn-font-size: 0.75rem;
+}
+
+.investor_text {
+  color: rgb(211, 243, 107);
+}
+
+.investor_bg {
+  color: rgb(26, 26, 26);
+  background-color: rgb(211, 243, 107);
 }
