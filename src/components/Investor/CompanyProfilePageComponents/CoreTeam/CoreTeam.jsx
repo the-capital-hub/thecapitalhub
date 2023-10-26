@@ -22,7 +22,7 @@ export default function CoreTeam({ companyData, setCompanyData, theme }) {
     <div className=" d-flex flex-column gap-4">
       <div className="d-flex align-items-center justify-content-between">
         <h2>Core Team</h2>
-        <Link className="see__more align-self-end">See more</Link>
+        {/* <Link className="see__more align-self-end">See more</Link> */}
       </div>
       <div
         className={`team__cards__container d-flex align-items-center gap-5 pb-3 ${theme} `}
