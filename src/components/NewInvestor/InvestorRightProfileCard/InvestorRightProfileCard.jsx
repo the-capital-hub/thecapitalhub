@@ -9,13 +9,13 @@ import { getInvestorById } from "../../../Service/user";
 const RightProfileCard = ({ noProfile }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [investor, setInvestor] = useState(null);
-    useEffect(() => {
-      if(loggedInUser?.investor) {
-        getInvestorById(loggedInUser?.investor).then(({data}) => {
-          setInvestor(data);
-        });
-      }
-    }, [loggedInUser]);
+  useEffect(() => {
+    if (loggedInUser?.investor) {
+      getInvestorById(loggedInUser?.investor).then(({ data }) => {
+        setInvestor(data);
+      });
+    }
+  }, [loggedInUser]);
 
   return (
     <>
@@ -24,7 +24,7 @@ const RightProfileCard = ({ noProfile }) => {
           <div className="view_profile_name_section mt-2">
             <img
               src={loggedInUser.profilePicture}
-              style={{ width: "100px", height: "100px" }}
+              style={{ width: "100px", height: "100px", objectFit: "cover" }}
               className="rounded-circle profile-image"
               alt="profileimage"
             />

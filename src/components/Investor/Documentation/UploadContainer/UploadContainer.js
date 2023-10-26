@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 const baseUrl = environment.baseUrl;
 
-const UploadContainer = ({ onClicked }) => {
+const UploadContainer = ({ onClicked  }) => {
   const fileInputRef = useRef(null);
   const [isFileOver, setIsFileOver] = useState(false);
   const [thumbnailUrl, setThumbnailUrl] = useState(null);

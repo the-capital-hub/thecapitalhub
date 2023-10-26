@@ -3,6 +3,10 @@ import "./CompanyProfileForm.scss";
 import { postStartUpData, postInvestorData } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
 import AfterSuccessPopup from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import InvestorAfterSuccessPopup from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
+import { useDispatch, useSelector } from "react-redux";
+import { loginSuccess } from "../../../Store/features/user/userSlice";
+import { Response } from "aws-sdk";
 
 const LOCATIONS = [
   "Select Location",
@@ -39,7 +43,6 @@ const SECTORS = [
   "Computer and Information Technology",
   "Aerospace",
   "Sales and Marketing",
-  "Pharmaceutical",
 ];
 
 export default function CompanyProfileForm({ companyData, investor = false }) {
@@ -47,15 +50,19 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
   const [formData, setFormData] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [othersClicked, setOthersClicked] = useState(false);
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const dispatch = useDispatch();
 
   // States for popup
   const [fromSubmit, setFromSubmit] = useState(false);
+  const [investorfromSubmit, setInvestorfromSubmit] = useState(false);
+
   const [popupData, setPopupData] = useState("");
 
   useEffect(() => {
     if (investor) {
       setFormData({
-        founderId: companyData.founderId || "",
+        founderId: companyData.founderId || loggedInUser._id,
         company: companyData.companyName || "",
         tagline: companyData.tagline || "",
         location: companyData.location || LOCATIONS[0],
@@ -131,10 +138,25 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
         formData.logo = logo;
       }
       if (investor) {
-        const response = await postInvestorData(formData);
+        const response = await postInvestorData({
+          ...formData,
+          companyName: formData.company,
+          founderId: companyData.founderId || loggedInUser._id,
+        });
         console.log(response);
+        const user = {
+          ...loggedInUser,
+          investor: response.data._id,
+        };
+        console.log("from form", user);
+        dispatch(loginSuccess(user));
+        setPopupData("Changes saved");
+        setInvestorfromSubmit(true);
       } else {
-        const response = await postStartUpData(formData);
+        const response = await postStartUpData({
+          ...formData,
+          founderId: companyData.founderId || loggedInUser._id,
+        });
         console.log(response);
         setPopupData("Changes saved");
         setFromSubmit(true);
@@ -372,8 +394,15 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
       </form>
       {fromSubmit && (
         <AfterSuccessPopup
-          withoutOkButton
+          // withoutOkButton
           onClose={() => setFromSubmit(!fromSubmit)}
+          successText={popupData}
+        />
+      )}
+      {investorfromSubmit && (
+        <InvestorAfterSuccessPopup
+          // withoutOkButton
+          onClose={() => setInvestorfromSubmit(!investorfromSubmit)}
           successText={popupData}
         />
       )}

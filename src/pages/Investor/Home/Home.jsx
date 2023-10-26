@@ -109,93 +109,93 @@ function Home() {
   return (
     <MaxWidthWrapper>
       <div className="container-fluid investor_feed_container">
-        <div className="row mt-2 px-2">
-          <div className="col px-0">
-            <InvestorSmallProfilecard text={"Home"} />
-            <div className="content-70">
-              <div className="box start_post_container border">
-                <img
-                  src={loggedInUser.profilePicture}
-                  alt="Image"
-                  className="rounded-circle"
+        <div className="main_content">
+          {/* <InvestorSmallProfilecard text={"Home"} /> */}
+          <div className="posts_col">
+            <div className="box start_post_container border">
+              <img
+                src={loggedInUser.profilePicture}
+                alt="Image"
+                className="rounded-circle"
+                style={{ objectFit: "cover" }}
+              />
+              <div className="w-100 me-4" onClick={openPopup}>
+                <input
+                  className="px-3"
+                  type="text"
+                  placeholder="Write a post..."
+                  style={{ pointerEvents: "none" }}
                 />
-                <div className="w-100 me-4" onClick={openPopup}>
-                  <input
-                    className="px-3"
-                    type="text"
-                    placeholder="Write a post..."
-                    style={{ pointerEvents: "none" }}
-                  />
-                </div>
               </div>
-              {/* {!loadingFeed ? ( */}
-              <InfiniteScroll
-                dataLength={allPosts.length}
-                next={fetchMorePosts}
-                hasMore={hasMore}
-                loader={
-                  <p className="container p-5 text-center my-5 bg-white rounded-5 shadow ">
-                    <div class="d-flex justify-content-center">
-                      <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                      </div>
+            </div>
+            {/* {!loadingFeed ? ( */}
+            <InfiniteScroll
+              dataLength={allPosts.length}
+              next={fetchMorePosts}
+              hasMore={hasMore}
+              loader={
+                <p className="container p-5 text-center my-5 bg-white rounded-5 shadow ">
+                  <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
                     </div>
-                  </p>
-                }
-              >
-                {allPosts?.map(
-                  ({
-                    description,
-                    user: {
-                      firstName,
-                      lastName,
-                      designation,
-                      profilePicture,
-                      _id: userId,
-                      startUp,
-                      investor,
-                    },
-                    video,
-                    image,
-                    documentUrl,
-                    documentName,
-                    createdAt,
-                    likes,
-                    _id,
-                    resharedPostId,
-                  }) => (
-                    <InvestorFeedPostCard
-                      key={Math.random()}
-                      userId={userId}
-                      postId={_id}
-                      designation={designation}
-                      profilePicture={profilePicture}
-                      description={description}
-                      startUpCompanyName={startUp}
-                      investorCompanyName={investor}
-                      firstName={firstName}
-                      lastName={lastName}
-                      video={video}
-                      image={image}
-                      documentName={documentName}
-                      documentUrl={documentUrl}
-                      createdAt={createdAt}
-                      likes={likes}
-                      fetchAllPosts={fetchMorePosts}
-                      response={getSavedPostData}
-                      repostWithToughts={(resharedPostId) => {
-                        setRepostingPostId(resharedPostId);
-                        openPopup();
-                      }}
-                      repostInstantly={repostInstantly}
-                      repostLoading={repostLoading}
-                      resharedPostId={resharedPostId}
-                      deletePostFilterData={deletePostFilterData}
-                    />
-                  )
-                )}
-              </InfiniteScroll>
-              {/* ) : (
+                  </div>
+                </p>
+              }
+            >
+              {allPosts?.map(
+                ({
+                  description,
+                  user: {
+                    firstName,
+                    lastName,
+                    designation,
+                    profilePicture,
+                    _id: userId,
+                    startUp,
+                    investor,
+                  },
+                  video,
+                  image,
+                  documentUrl,
+                  documentName,
+                  createdAt,
+                  likes,
+                  _id,
+                  resharedPostId,
+                }) => (
+                  <InvestorFeedPostCard
+                    key={Math.random()}
+                    userId={userId}
+                    postId={_id}
+                    designation={designation}
+                    profilePicture={profilePicture}
+                    description={description}
+                    startUpCompanyName={startUp}
+                    investorCompanyName={investor}
+                    firstName={firstName}
+                    lastName={lastName}
+                    video={video}
+                    image={image}
+                    documentName={documentName}
+                    documentUrl={documentUrl}
+                    createdAt={createdAt}
+                    likes={likes}
+                    fetchAllPosts={fetchMorePosts}
+                    response={getSavedPostData}
+                    repostWithToughts={(resharedPostId) => {
+                      setRepostingPostId(resharedPostId);
+                      openPopup();
+                    }}
+                    repostInstantly={repostInstantly}
+                    repostLoading={repostLoading}
+                    resharedPostId={resharedPostId}
+                    deletePostFilterData={deletePostFilterData}
+                  />
+                )
+              )}
+            </InfiniteScroll>
+            {/* ) : (
                 <p className="container p-5 text-center my-5 bg-white rounded-5 shadow ">
                   <div class="d-flex justify-content-center">
                     <div class="spinner-border" role="status">
@@ -204,17 +204,12 @@ function Home() {
                   </div>
                 </p>
               )}*/}
-            </div>
           </div>
-          <div className="col d-none d-xl-block">
-            <div className="content-30">
-              <div className="row">
-                <InvestorRightProfileCard />
-                <RecommendationCard isInvestor={true} />
-                <NewsCorner />
-              </div>
-            </div>
-          </div>
+        </div>
+        <div className="right_content d-none d-xl-block">
+          <InvestorRightProfileCard />
+          <RecommendationCard isInvestor={true} />
+          <NewsCorner />
         </div>
       </div>
       {popupOpen && (

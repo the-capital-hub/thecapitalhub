@@ -19,11 +19,13 @@ import {
 import backArrow from "../../Images/left-arrow.png";
 import ResetPasswordPopUp from "../PopUp/RequestPasswordPopUp/RequestPasswordPopUp";
 // import { Navigate } from "react-router-dom";
+import SpinnerBS from "../Shared/Spinner/SpinnerBS";
 
 const Login = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   // States for login
   const [isLoginSuccessfull, setIsLoginSuccessfull] = useState(false);
@@ -53,7 +55,7 @@ const Login = () => {
   // Handle Submit
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setLoading(true);
     try {
       const { phoneNumber, password } = inputValues;
       const response = await postUserLogin(inputValues);
@@ -103,6 +105,8 @@ const Login = () => {
 
       // dispatch(loginFailure(error.response.data.error));
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -256,7 +260,12 @@ const Login = () => {
                 type="submit"
                 className={` ${isInvestorSelected ? "investor" : "startup"}`}
               >
-                Log In
+                {loading ? (
+                  <SpinnerBS spinnerSizeClass="spinner-border-sm" >
+                  </SpinnerBS>
+                ) : (
+                  "Login"
+                )}
               </button>
             </div>
             <h3 className="already_have_account_mobile">

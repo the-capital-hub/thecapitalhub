@@ -33,8 +33,10 @@
         font-weight: 600;
         line-height: normal;
       }
+
       .para-image {
         display: flex;
+
         .para {
           p {
             color: #343434;
@@ -46,6 +48,7 @@
             text-align: start;
           }
         }
+
         .image-sec {
           img {
             margin-top: -16%;
@@ -81,6 +84,7 @@
         }
       }
     }
+
     .explore_service {
       h1 {
         color: #000;
@@ -161,6 +165,15 @@
         }
       }
     }
+
+    .btn_red {
+      margin-top: 10px;
+      padding: 0.25em 1em;
+      border-radius: 5px;
+      border: 1px solid #fd5901;
+      background-color: #fd5901;
+      color: white;
+    }
   }
 }
 
@@ -188,6 +201,7 @@
 
       .heading_section_fund {
         margin-top: 3rem;
+
         h1 {
           font-size: 28px;
           margin-top: 20px;
@@ -216,6 +230,7 @@
           @media (max-width: 820px) {
             flex-direction: column-reverse;
           }
+
           .para {
             p {
               color: #343434;
@@ -227,6 +242,7 @@
               text-align: start;
             }
           }
+
           .image-sec {
             img {
               margin-top: 0%;

@@ -85,7 +85,7 @@ const RecommendationCard = ({ isInvestor }) => {
               <>
                 {recommendations && recommendations.length > 0 ? (
                   recommendations.map((user, i) => (
-                    <div key={i}>
+                    <div className="card_wrapper" key={i}>
                       <div className="card-body recommendation_card_body">
                         <Link
                           to={
@@ -99,6 +99,7 @@ const RecommendationCard = ({ isInvestor }) => {
                             src={user.profilePicture}
                             alt="img"
                             className="rounded-circle"
+                            style={{objectFit:"cover"}}
                           />
                         </Link>
                         <div className="recommendation_card_text">
@@ -119,7 +120,7 @@ const RecommendationCard = ({ isInvestor }) => {
                           <span>Connect</span>
                         </button>
                       </div>
-                      <hr className="hr" />
+                      {/* <hr className="hr" /> */}
                     </div>
                   ))
                 ) : (

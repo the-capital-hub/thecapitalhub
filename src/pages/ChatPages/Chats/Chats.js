@@ -32,6 +32,7 @@ import {
   ModalBSHeader,
 } from "../../../components/PopUp/ModalBS";
 import NewCommunityModal from "../../../components/Investor/ChatComponents/NewCommunityModal";
+import { setThemeColor } from "../../../utils/setThemeColor";
 
 const Chats = () => {
   // search params
@@ -78,6 +79,9 @@ const Chats = () => {
     }
     window.addEventListener("resize", handleWindowResize);
     handleWindowResize();
+    
+    setThemeColor();
+
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };
@@ -297,7 +301,7 @@ const Chats = () => {
           ) : (
             <div className="select-chat-container">
               <img src={selectAChatIcon} alt="select a chat" />
-              <h3 className="orange">Select a message</h3>
+              <h3>Select a message</h3>
             </div>
           )}
         </section>

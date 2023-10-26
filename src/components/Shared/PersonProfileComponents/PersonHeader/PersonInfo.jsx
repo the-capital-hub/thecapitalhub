@@ -23,7 +23,7 @@ export default function PersonInfo({
           <img
             src={profilePicture || DefaultAvatar}
             alt={fullName}
-            style={{ width: "110px", height: "110px" }}
+            style={{ width: "110px", height: "110px", objectFit: "cover" }}
             loading="lazy"
             className="rounded-3"
           />

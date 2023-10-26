@@ -20,10 +20,15 @@ import {
   Pitch,
 } from "../../../Images/StartUp/Documentaion";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getFoldersApi } from "../../../Service/user";
 
 const Documentation = () => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
   const [showModal, setShowModal] = useState(false);
+  const [folderName, setFolderName] = useState([]);
+
   const baseURL = environment.baseUrl;
   const [folders, setFolders] = useState([
     "Financials",
@@ -36,6 +41,20 @@ const Documentation = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const getFolders = () => {
+    getFoldersApi(loggedInUser._id)
+      .then((data) => {
+        console.log(data.data);
+        setFolderName(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    getFolders(); // Call the getFolders function to fetch data
+  }, []);
 
   useEffect(() => {
     document.title = "Documentation | The Capital Hub";
@@ -58,7 +77,7 @@ const Documentation = () => {
           <SmallProfileCard text={"Documentation"} />
           <div className="documentationStartup">
             {showModal && (
-              <UploadModal onCancel={setShowModal} folders={folders} />
+              <UploadModal onCancel={setShowModal} fetchFolder={getFolders} />
             )}
             <IntroductoryMessage
               title={"Upload your document"}
@@ -66,18 +85,21 @@ const Documentation = () => {
               //   "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
               // }
             />
-            <UploadContainer onClicked={setShowModal} />
+            <UploadContainer onClicked={setShowModal} fetchFolder={getFolders}/>
             <div className="cards px-xxl-4 bg-white py-5 rounded-4">
               {/* <Card
                   onClicked={() => navigate("/documentation/financials")}
                   text={"Financials"}
                 /> */}
-              <Card
-                onClicked={() => navigate("/documentation/pitchdeck")}
-                text={"Pitch Deck"}
-                image={Pitch}
-              />
-              <Card
+              {folderName.map((folder, index) => (
+                <Card
+                  key={index}
+                  onClicked={() => navigate(`/documentation/${folder}`)}
+                  text={folder}
+                  image={Pitch}
+                />
+              ))}
+              {/* <Card
                 onClicked={() => navigate("/documentation/business")}
                 text={"Business"}
                 image={Business}
@@ -93,7 +115,7 @@ const Documentation = () => {
                 }
                 text={"Legal and Compliance"}
                 image={Legal}
-              />
+              /> */}
               {/* <Card
                   onClicked={() => navigate("/documentation/update")}
                   text={"Update"}

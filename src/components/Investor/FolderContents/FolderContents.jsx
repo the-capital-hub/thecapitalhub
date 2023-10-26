@@ -31,7 +31,7 @@ const FolderContents = () => {
   let pageTitle;
 
   switch (title) {
-    case "Legal":
+    case "Legal and compliance":
       pageTitle = "Legal and Compliance";
       break;
     case "Pitchdeck":
@@ -51,13 +51,13 @@ const FolderContents = () => {
     <MaxWidthWrapper>
       <div className="folderContents">
         <div className="w-100 d-flex justify-content-center align-items-center border-bottom px-2">
-          <h1 className="flex-grow-1">{pageTitle}</h1>
           <button
-            className="btn btn-light text-secondary"
+            className="btn btn-light text-secondary mx-3"
             onClick={() => navigate(-1)}
           >
             Back
           </button>
+          <h1 className="flex-grow-1">{pageTitle}</h1>
         </div>
         <HalfbendCard folderName={route} userId={user?._id} />
       </div>

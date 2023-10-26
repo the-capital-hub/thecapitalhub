@@ -11,7 +11,12 @@ import {
   getUnreadMessageCountInCommunities,
 } from "../../../Service/user";
 
-export default function CommunityCard({ community, recieveMessage, sendMessage, isRead }) {
+export default function CommunityCard({
+  community,
+  recieveMessage,
+  sendMessage,
+  isRead,
+}) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const dispatch = useDispatch();
@@ -93,7 +98,6 @@ export default function CommunityCard({ community, recieveMessage, sendMessage, 
 
   return (
     <div
-      style={{ backgroundColor: "rgba(234, 238, 242, 1)" }}
       className="community__card d-flex align-items-center gap-2 py-2 px-2 rounded-4 "
       key={community.id}
       onClick={() => handleCommunityClick(community._id)}
@@ -124,7 +128,7 @@ export default function CommunityCard({ community, recieveMessage, sendMessage, 
         <div className="d-flex flex-column justify-content-between gap-1">
           <h5
             className="m-0 text-capitalize text__clip--15"
-            style={{ color: "#fd5901" }}
+            style={{ color: "var(--currentTheme-dark)" }}
           >
             {community?.communityName}
           </h5>
@@ -139,12 +143,9 @@ export default function CommunityCard({ community, recieveMessage, sendMessage, 
             <div className="time__stamp m-0">{messageTime}</div>
           )}
           {unreadMessageCount > 0 && (
-            <div className="notification">
-              {unreadMessageCount}
-            </div>
+            <div className="notification">{unreadMessageCount}</div>
           )}
         </div>
-
       </div>
     </div>
   );

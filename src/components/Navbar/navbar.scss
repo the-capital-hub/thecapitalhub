@@ -104,7 +104,7 @@ $secondary-color: #1b2430;
       align-items: center;
       padding: 10px;
       gap: 10px;
-      width: 155px;
+      min-width: 155px;
       height: 47px;
       left: 1185px;
       top: 73px;
@@ -124,9 +124,8 @@ $secondary-color: #1b2430;
       left: 0;
       background-color: #fff;
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-      li{
-      margin-bottom: .7rem;
-
+      li {
+        margin-bottom: 0.7rem;
       }
     }
 
