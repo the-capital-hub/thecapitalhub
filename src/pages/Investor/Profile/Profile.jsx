@@ -29,7 +29,7 @@ import ModalBSHeader from "../../../components/PopUp/ModalBS/ModalBSHeader/Modal
 import ModalBSBody from "../../../components/PopUp/ModalBS/ModalBSBody/ModalBSBody";
 import ModalBSFooter from "../../../components/PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
 import InvestedCard from "../../../components/NewInvestor/ProfileComponents/InvestedCard";
-import { loginSuccess } from "../../../Store/Action/userAction";
+import { loginSuccess } from "../../../Store/features/user/userSlice";
 import {
   getInvestorById,
   updateUserAPI,
@@ -111,7 +111,6 @@ function Profile() {
   //     image: Sunbank,
   //   },
   // ];
-
   const [bioContent, setBioContent] = useState(loggedInUser?.bio || "");
   const [personalEditable, setPersonalEditable] = useState(false);
   const [investmentPhilosophy, setInvestmentPhilosophy] = useState(null);
@@ -255,7 +254,8 @@ function Profile() {
     const {
       data: { data },
     } = await updateUserAPI({ bio: bioContent });
-    dispatch(loginSuccess(data));
+    console.log(data);
+    dispatch(loginSuccess(data)); // this is not updating the store
     setIsBioEditable(!isBioEditable);
   };
 
