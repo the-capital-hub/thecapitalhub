@@ -3,7 +3,7 @@
   border: 1px solid #cfcfcf;
 
   &[open] .communities__header {
-    color: #fd5901;
+    color: var(--currentTheme);
   }
 
   .new__community {
@@ -40,7 +40,7 @@
 }
 
 .orange__heading {
-  color: #fd5901;
+  color: var(--currentTheme_dark);
 }
 
 .text__clip {
