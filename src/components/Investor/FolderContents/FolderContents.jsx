@@ -31,7 +31,7 @@ const FolderContents = () => {
   let pageTitle;
 
   switch (title) {
-    case "Legal":
+    case "Legal and compliance":
       pageTitle = "Legal and Compliance";
       break;
     case "Pitchdeck":

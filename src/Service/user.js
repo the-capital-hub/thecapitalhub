@@ -1156,3 +1156,15 @@ export const exitCommunityAPI = async (communityId, userId) => {
     throw error;
   }
 };
+
+export const getFoldersApi = async ( userId) => {
+  try {
+    const res = await axiosInstance.get(
+      `${API.getfolders}/${userId}`
+    );
+    return res.data;
+  } catch (error) {
+    console.error("Error in getfolders:", error);
+    throw error;
+  }
+};

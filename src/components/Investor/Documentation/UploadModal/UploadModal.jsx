@@ -19,6 +19,9 @@ const UploadModal = ({ onCancel }) => {
   const [showPopUp, setShowPopUp] = useState(false);
   const fileInputRef = useRef(null);
 
+  const [folderName, setFolderName] = useState("");
+
+
   const handleClosePopup = () => {
     setShowPopUp(false);
     onCancel(false);
@@ -65,7 +68,7 @@ const UploadModal = ({ onCancel }) => {
           fileUrl: res.Location,
           fileName: file.name,
           userId: loggedInUser._id,
-          folderName: folder,
+          folderName: folder==="Other"?folderName:folder,
         };
 
         await axios
@@ -132,8 +135,20 @@ const UploadModal = ({ onCancel }) => {
             <option value="business">Business</option>
             <option value="kycdetails">KYC Details</option>
             <option value="legal and compliance">Legal and Compliance</option>
+            <option value="Other">Other</option>
+
             {/* <option value="update">Update</option> */}
           </select>
+
+          {folder==="Other" && (
+            <input
+            className="name_input rounded-pill px-3 py-2 "
+              type="text"
+              placeholder="Enter folder name"
+              value={folderName}
+              onChange={(e) => setFolderName(e.target.value)}
+            />
+        )}
 
           {folder && (
             <>

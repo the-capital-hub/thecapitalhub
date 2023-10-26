@@ -20,9 +20,12 @@ import {
   Pitch,
 } from "../../../Images/StartUp/Documentaion";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {getFoldersApi}from "../../../Service/user"
 
 const Documentation = () => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
   const [showModal, setShowModal] = useState(false);
   const baseURL = environment.baseUrl;
   const [folders, setFolders] = useState([
@@ -37,6 +40,23 @@ const Documentation = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const getFolders = () => {
+    getFoldersApi(loggedInUser._id)
+      .then((data) => {
+        console.log(data); 
+     
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+   
+      getFolders(); // Call the getFolders function to fetch data
+     
+  }, [])
+  
+
   useEffect(() => {
     document.title = "Documentation | The Capital Hub";
     const getFolders = async () => {
@@ -49,6 +69,9 @@ const Documentation = () => {
     getFolders();
     dispatch(setPageTitle("Documentation"));
   }, []);
+
+
+
 
   return (
     <MaxWidthWrapper>
