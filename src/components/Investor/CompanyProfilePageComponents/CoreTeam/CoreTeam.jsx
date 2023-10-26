@@ -28,7 +28,7 @@ export default function CoreTeam({ companyData, setCompanyData, theme }) {
         className={`team__cards__container d-flex align-items-center gap-5 pb-3 ${theme} `}
       >
         {team && team.length > 0 ? (
-          team.map((member, index) => (
+          team?.map((member, index) => (
             <CoreTeamCard
               key={index}
               image={member.image}

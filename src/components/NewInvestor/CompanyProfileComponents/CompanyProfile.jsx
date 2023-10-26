@@ -1,5 +1,6 @@
 import CompanyInfo from "./company-section-one/company-info/CompanyInfo";
 import HCLImage from "../../../Images/Investor/CompanyProfile/HCL.png";
+import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
 import CompanyActions from "./company-section-one/company-actions/CompanyActions";
 import CompanyStats from "./company-section-one/company-stats/CompanyStats";
 import PublicLinks from "./company-section-two/public-links/PublicLinks";
@@ -18,10 +19,10 @@ export default function CompanyProfile({
 }) {
   // Fetch Company Data here
   let name = "HCL";
-  let logo = HCLImage;
+  let logo = DefaultAvatar;
   let location = "Bangalore";
   let description =
-    "Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.With the vision of make in India for the world, they design and build augmented reality glasses for Defence, Enterprise, and Training sectors. In addition to hardware, they also provide their clients with end-to-end AR/VR/MR solutions that are tailored to their business needs.";
+    "No description";
   let socialLinks = {
     website: "",
     facebook: "",
@@ -30,9 +31,9 @@ export default function CompanyProfile({
   };
   let colorCard = "";
   let foundedIn = "2014";
-  let vision = "Vision";
-  let mission = "Mission";
-  let noOfEmployees = "200+";
+  let vision = "";
+  let mission = "";
+  let noOfEmployees = "";
   let team = [];
   let tags = [];
   let tagline = "";
