@@ -8,7 +8,7 @@ import { s3 } from "../../../../Service/awsConfig";
 import IconDelete from "../../SvgIcons/IconDelete";
 const baseUrl = environment.baseUrl;
 
-const UploadModal = ({ onCancel }) => {
+const UploadModal = ({ onCancel , fetchFolder }) => {
   // Fetch loggedInUser from global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
@@ -18,6 +18,9 @@ const UploadModal = ({ onCancel }) => {
   const [uploadProgress, setUploadProgress] = useState(0); // Overall upload progress
   const [showPopUp, setShowPopUp] = useState(false);
   const fileInputRef = useRef(null);
+
+  const [folderName, setFolderName] = useState("");
+
 
   const handleClosePopup = () => {
     setShowPopUp(false);
@@ -35,6 +38,7 @@ const UploadModal = ({ onCancel }) => {
   };
 
   const handlePdfUploadClick = async () => {
+    
     if (files.length === 0) {
       return;
     }
@@ -65,12 +69,13 @@ const UploadModal = ({ onCancel }) => {
           fileUrl: res.Location,
           fileName: file.name,
           userId: loggedInUser._id,
-          folderName: folder,
+          folderName: folder==="Other"?folderName:folder,
         };
 
         await axios
           .post(`${baseUrl}/documentation/uploadDocument`, requestBody)
           .then((response) => {
+            fetchFolder()
             if (response.status === 200) {
               setUploadProgress(0); // Reset progress for the current file
               if (i < files.length - 1) {
@@ -132,8 +137,20 @@ const UploadModal = ({ onCancel }) => {
             <option value="business">Business</option>
             <option value="kycdetails">KYC Details</option>
             <option value="legal and compliance">Legal and Compliance</option>
+            <option value="Other">Other</option>
+
             {/* <option value="update">Update</option> */}
           </select>
+
+          {folder==="Other" && (
+            <input
+            className="name_input rounded-pill px-3 py-2 "
+              type="text"
+              placeholder="Enter folder name"
+              value={folderName}
+              onChange={(e) => setFolderName(e.target.value)}
+            />
+        )}
 
           {folder && (
             <>

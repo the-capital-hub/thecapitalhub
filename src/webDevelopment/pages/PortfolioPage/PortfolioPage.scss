@@ -4,6 +4,7 @@
 
 }
 
+
 .PortfolioPage_page {
   .top_section {
     display: grid;
@@ -30,6 +31,8 @@
       p {
         padding: 10px;
         padding-bottom: 20px;
+        text-shadow: 1px 1px lightgray;
+
 
       }
     }
@@ -131,7 +134,7 @@
     .PortfolioPage_page {
       .top_section {
         .box{
-          height: 318px;
+          height: 424px;
         }
       }
     }
