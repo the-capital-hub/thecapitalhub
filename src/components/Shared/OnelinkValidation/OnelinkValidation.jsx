@@ -45,7 +45,7 @@ export default function OnelinkValidation({ userId }) {
 
   const handlePinSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       const response = await validateSecretKey(userId, pin);
       if (response.status === 200) {
@@ -57,6 +57,8 @@ export default function OnelinkValidation({ userId }) {
     } catch (error) {
       console.log(error);
       setError("Key is invalid");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -120,12 +122,12 @@ export default function OnelinkValidation({ userId }) {
             <button
               type="button"
               className="btn_submit"
-              // onClick={handlePinSubmit}
+              onClick={handlePinSubmit}
             >
               {loading ? (
                 <span className=" d-flex align-items-center gap-2">
                   <SpinnerBS spinnerSizeClass="spinner-border-sm" />
-                  Submit
+                  Please wait...
                 </span>
               ) : (
                 "Submit"
