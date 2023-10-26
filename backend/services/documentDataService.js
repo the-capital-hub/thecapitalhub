@@ -57,17 +57,15 @@ export const createFolder = async (args) => {
 
 export const getFolderByUser = async (userId) => {
   try {
-    const folders = await Folder.find({userId: userId});
-    if(folders.length === 0) {
-      return {
-        status: 404,
-        message: "No Folders found.",
-      };
-    }
+    const files = await File.find({ userId: userId });
+    const folders = Array.from(new Set(files.map(files => files.folderName)));
+    const defaultFolderNames = ["pitchdeck", "business", "kycdetails", "legal and compliance"];
+    const allFolderNamesSet = new Set([...defaultFolderNames, ...folders]);
+    const allFolderNames = [...allFolderNamesSet];
     return {
       status: 200,
-      message: "Folder details retrieved successfully.",
-      data: folders,
+      message: "Folder Created",
+      data: allFolderNames,
     };
   } catch (error) {
     console.error("Error getting folders:", error);
@@ -103,9 +101,9 @@ export const uploadDocument = async (args) => {
 
 export const getDocumentByUser = async (args) => {
   try {
-    const {userId, folderName} = args;
-    const file = await File.find({userId: userId, folderName: folderName});
-    if(!file) {
+    const { userId, folderName } = args;
+    const file = await File.find({ userId: userId, folderName: folderName });
+    if (!file) {
       return {
         status: 404,
         message: "Document not found.",
@@ -128,18 +126,18 @@ export const getDocumentByUser = async (args) => {
 export const renameFolder = async (args) => {
   try {
     const { folderId, newFolderName } = args;
-    const folder = await Folder.findOne({_id: folderId });
-    
+    const folder = await Folder.findOne({ _id: folderId });
+
     if (!folder) {
       return {
         status: 404,
         message: "Folder not found.",
       };
     }
-    
+
     folder.folderName = newFolderName;
     await folder.save();
-    
+
     return {
       status: 200,
       message: "Folder renamed successfully.",
@@ -165,7 +163,7 @@ export const deleteFolder = async (args) => {
         message: "Folder not found.",
       };
     }
-    
+
     await File.deleteMany({ folderId: folderId });
     await Folder.deleteOne({ _id: folder._id });
     return {
@@ -183,7 +181,7 @@ export const deleteFolder = async (args) => {
 
 export const deleteDocument = async (documentId) => {
   try {
-    const document = await File.findOne({  _id: documentId });
+    const document = await File.findOne({ _id: documentId });
     if (!document) {
       return {
         status: 404,

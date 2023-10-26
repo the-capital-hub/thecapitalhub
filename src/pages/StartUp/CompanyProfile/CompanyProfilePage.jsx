@@ -120,7 +120,7 @@ export default function CompanyProfilePage() {
                         to="/company-profile/edit"
                         className="text-decoration-none text-dark fs-5"
                       >
-                        Click here to edit company details
+                        Edit company details
                       </Link>
                     </div>
                   ) : (
@@ -128,7 +128,7 @@ export default function CompanyProfilePage() {
                       {/* <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5"> */}
                       <button className="btn-base startup"
                         onClick={handleAddNew}
-                      >Click here to add new company details</button>
+                      >Add new company details</button>
                       {/* </Link> */}
                       <div className="or-text-container">
                         <p className="text-decoration-none text-dark fs-5">Or</p>
@@ -183,7 +183,7 @@ export default function CompanyProfilePage() {
                       className="text-decoration-none text-dark fs-5"
                     >
                       <button className="btn-base startup">
-                        Click here to add company details
+                        Add company details
                       </button>
                     </Link>
                     <div className="or-text-container">

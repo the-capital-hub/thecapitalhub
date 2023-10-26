@@ -277,6 +277,7 @@ export default function AddTeamMemberModal({
               value={member.name}
               className={`modal__input p-2 rounded-2 w-100 ${theme}`}
               onChange={handleInputChange}
+              style={{ color: 'black' }}
             />
           </div>
           {/* Designation input */}
@@ -289,6 +290,7 @@ export default function AddTeamMemberModal({
               value={member.designation}
               className={`modal__input p-2 rounded-2 w-100 ${theme}`}
               onChange={handleInputChange}
+              style={{ color: 'black' }}
             />
           </div>
           <button
