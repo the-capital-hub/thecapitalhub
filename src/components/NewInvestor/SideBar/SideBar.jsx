@@ -65,8 +65,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
 
   return (
     <div
-      className={`container newInvestor_sidebar_container ${sidebarCollapsed ? "collapsed" : ""
-        }`}
+      className={`container newInvestor_sidebar_container ${
+        sidebarCollapsed ? "collapsed" : ""
+      }`}
       onMouseLeave={() => {
         if (!isMobileView) {
           setSidebarCollapsed(true);
@@ -210,8 +211,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     <CommunitiesIcon
                       width="17px"
                       height="17px"
-                      color={`${isCommunityDetailOpen ? "#000" : "rgba(97, 97, 97, 1)"
-                        }`}
+                      color={`${
+                        isCommunityDetailOpen ? "#000" : "rgba(97, 97, 97, 1)"
+                      }`}
                     />
                   </div>
                   {!sidebarCollapsed && (
@@ -344,7 +346,18 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   )}
                 </Link>
               </MenuItem>
-
+              <MenuItem
+                // active={location.pathname.includes("")}
+                className="active-item"
+              >
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)}
+                  to="/"
+                >
+                  <img src={HomeIcon} alt="image" />
+                  {!sidebarCollapsed && <span>Go-to Platform</span>}
+                </Link>
+              </MenuItem>
               {/* <MenuItem
                 active={location.pathname.includes("/syndicates")}
                 className="active-item"

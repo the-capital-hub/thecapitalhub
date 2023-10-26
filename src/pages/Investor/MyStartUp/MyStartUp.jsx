@@ -71,7 +71,10 @@ const MyStartUp = () => {
       setInvestor(data);
       setInvestedStartups(data.startupsInvested);
       setMyInterests(data.myInterests);
-    });
+    })
+      .catch((error) => {
+        console.error(error);
+      });
   }, [loggedInUser]);
 
   return (
@@ -108,9 +111,12 @@ const MyStartUp = () => {
             </div>
           </div>
           <div className="card_container border-bottom p-4 d-flex gap-5 align-items-center overflow-x-auto">
-            {investedStartups.map((company, index) => {
+
+            {investedStartups.length > 0 ? investedStartups?.map((company, index) => {
               return <MyInvestmentCard key={company.id} company={company} />;
-            })}
+            })
+              : "No Data Found."
+            }
           </div>
           {/* My Investments Add Modal */}
           <ModalBSContainer id={"myInvestmentsAddModal"} isStatic={false}>
@@ -166,7 +172,7 @@ const MyStartUp = () => {
             </div>
           </div>
           <div className="card_container p-4 d-flex gap-5 align-items-center overflow-x-auto ">
-            {myInterests.map((company, index) => {
+            {myInterests.length > 0 ? myInterests?.map((company, index) => {
               return (
                 <MyInvestmentCard
                   key={company.id}
@@ -174,7 +180,9 @@ const MyStartUp = () => {
                   isInterests={true}
                 />
               );
-            })}
+            })
+              : "No Data Found."
+            }
           </div>
           {/* My Interests Add Modal */}
           <ModalBSContainer id={"myInterestsAddModal"} isStatic={false}>

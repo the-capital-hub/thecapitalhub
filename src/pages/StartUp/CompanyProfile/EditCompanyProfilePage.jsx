@@ -25,7 +25,7 @@ export default function EditCompanyProfilePage() {
   const [isBioEditable, setIsBioEditable] = useState(false);
   const [companyDescription, setCompanyDescription] = useState(null);
   useEffect(() => {
-    if (!loggedInUser?.investor) {
+    if (loggedInUser?.isInvestor === "false") {
       getStartupByFounderId(loggedInUser._id)
         .then(({ data }) => {
           setCompanyData(data);

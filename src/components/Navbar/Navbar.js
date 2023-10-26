@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./navbar.scss";
 import Logo from "../../Images/Logo.svg";
 import { RxCross2 } from "react-icons/rx";
 import { FaBars } from "react-icons/fa";
 import HambergerIcon from "../../Images/Hamberger.svg";
+import { useSelector } from "react-redux";
 
 function Navbar() {
   const [clicked, setClicked] = useState(false);
@@ -29,6 +30,21 @@ function Navbar() {
   const handleMouseOver = () => {
     setHideDropDown(true);
   };
+
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const isLoggedInLocal = localStorage.getItem("isLoggedIn");
+
+  const navigate = useNavigate();
+
+  const isLoggedIn = () => {
+    if (!isLoggedInLocal || !loggedInUser) return navigate("/login");
+    if (isLoggedInLocal.isInvestor === "true") {
+      return navigate("/investor/home");
+    } else {
+      return navigate("/home");
+    }
+  };
+
   return (
     <div className="container nav_container">
       <nav className={`nav ${isScrolling ? "scrolling-nav" : ""}`}>
@@ -171,13 +187,24 @@ function Navbar() {
               </Link>
             </li>
             <li>
-              <Link
-                to="/signup"
+              <button
                 className={"loginbtn"}
-                onClick={() => setSelectedLink("login")}
+                onClick={() => {
+                  setSelectedLink("login");
+                  isLoggedIn();
+                }}
+                style={{
+                  fontSize: "14px",
+                }}
               >
-                Log in
-              </Link>
+                {loggedInUser && isLoggedInLocal ? (
+                  <>
+                    {loggedInUser?.firstName} {loggedInUser?.lastName}
+                  </>
+                ) : (
+                  "Log in"
+                )}
+              </button>
             </li>
           </ul>
         </div>

@@ -3,6 +3,9 @@ import "./CompanyProfileForm.scss";
 import { postStartUpData, postInvestorData } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
 import AfterSuccessPopup from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import { useDispatch, useSelector } from "react-redux";
+import { loginSuccess } from "../../../Store/Action/userAction";
+import { Response } from "aws-sdk";
 
 const LOCATIONS = [
   "Select Location",
@@ -39,7 +42,6 @@ const SECTORS = [
   "Computer and Information Technology",
   "Aerospace",
   "Sales and Marketing",
-  "Pharmaceutical",
 ];
 
 export default function CompanyProfileForm({ companyData, investor = false }) {
@@ -47,6 +49,8 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
   const [formData, setFormData] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [othersClicked, setOthersClicked] = useState(false);
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const dispatch = useDispatch();
 
   // States for popup
   const [fromSubmit, setFromSubmit] = useState(false);
@@ -55,7 +59,7 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
   useEffect(() => {
     if (investor) {
       setFormData({
-        founderId: companyData.founderId || "",
+        founderId: companyData.founderId || loggedInUser._id,
         company: companyData.companyName || "",
         tagline: companyData.tagline || "",
         location: companyData.location || LOCATIONS[0],
@@ -131,10 +135,24 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
         formData.logo = logo;
       }
       if (investor) {
-        const response = await postInvestorData(formData);
+        const response = await postInvestorData({
+          ...formData,
+          companyName: formData.company,
+          founderId: companyData.founderId || loggedInUser._id,
+        });
         console.log(response);
+        const user = {
+          ...loggedInUser,
+          investor: response.data._id,
+        }
+        dispatch(loginSuccess(user));
+        setPopupData("Changes saved");
+        setFromSubmit(true);
       } else {
-        const response = await postStartUpData(formData);
+        const response = await postStartUpData({
+          ...formData,
+          founderId: companyData.founderId || loggedInUser._id,
+        });
         console.log(response);
         setPopupData("Changes saved");
         setFromSubmit(true);
@@ -218,18 +236,16 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
                 {formData.location}
               </button>
               <ul
-                className={`dropdown-menu m-0 p-0 ${
-                  investor ? "investor" : "startup"
-                }`}
+                className={`dropdown-menu m-0 p-0 ${investor ? "investor" : "startup"
+                  }`}
               >
                 {LOCATIONS.map((location, index) => {
                   return (
                     <li key={`${location}${index}`} className="m-0 p-0">
                       <button
                         type="button"
-                        className={`btn btn-base list-btn w-100 text-start ps-3 ${
-                          investor ? "investor" : "startup"
-                        } ${location === formData.location ? "selected" : ""}`}
+                        className={`btn btn-base list-btn w-100 text-start ps-3 ${investor ? "investor" : "startup"
+                          } ${location === formData.location ? "selected" : ""}`}
                         onClick={(e) => handleLocationSelect(e, location)}
                       >
                         {location}
@@ -275,18 +291,16 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
               <span>{formData.sector}</span>
             </button>
             <ul
-              className={`dropdown-menu m-0 p-0 ${
-                investor ? "investor" : "startup"
-              }`}
+              className={`dropdown-menu m-0 p-0 ${investor ? "investor" : "startup"
+                }`}
             >
               {SECTORS.map((sector, index) => {
                 return (
                   <li key={`${sector}${index}`} className="m-0 p-0">
                     <button
                       type="button"
-                      className={`btn btn-base list-btn text-start ps-3 text-break ${
-                        investor ? "investor" : "startup"
-                      } ${sector === formData.sector ? "selected" : ""}`}
+                      className={`btn btn-base list-btn text-start ps-3 text-break ${investor ? "investor" : "startup"
+                        } ${sector === formData.sector ? "selected" : ""}`}
                       onClick={(e) => handleSectorSelect(e, sector)}
                     >
                       <p className="m-0">{sector}</p>
@@ -363,9 +377,8 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
 
         <button
           type="submit"
-          className={`align-self-end btn-base ${
-            investor ? "investor" : "startup"
-          }`}
+          className={`align-self-end btn-base ${investor ? "investor" : "startup"
+            }`}
         >
           Save
         </button>
