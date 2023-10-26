@@ -21,7 +21,7 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
     experience: loggedInUser?.experience || "",
     profilePicture: loggedInUser.profilePicture || "",
     fullName: loggedInUser?.firstName + " " + loggedInUser?.lastName || "",
-    company: loggedInUser?.startUp.company || "",
+    company: "",
     location: loggedInUser?.location || "Bangalore, India",
   });
 
@@ -34,6 +34,9 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
           ...professionalData,
           company: data.company,
         });
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }, []);
   

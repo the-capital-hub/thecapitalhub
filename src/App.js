@@ -8,7 +8,6 @@ import ProtectedInvestorRoutes from "./pages/Investor/ProtectedInvestorRoutes/Pr
 import BlogWrapper from "./components/Blog/BlogWrapper/BlogWrapper";
 import EcommerceLayout from "./components/ECommerace/Layout/Layout/Layout";
 import InvestorOneLinkLayout from "./pages/InvestorOneLink/InvestorOneLinkLayout/InvestorOneLinkLayout";
-import PortfolioLayout from "./components/portfolio/Layout/Layout/Layout"
 
 // Pages
 import Chats from "./pages/ChatPages/Chats/Chats";
@@ -25,7 +24,6 @@ import { useDispatch } from "react-redux";
 import { setIsMobileView } from "./Store/features/design/designSlice";
 import { useEffect } from "react";
 import InvestorOneLinkRoutes from "./routes/InvestorOneLinkRoutes";
-import PortfolioRoutes from "./routes/PortfolioRoutes";
 
 
 function App() {
@@ -84,10 +82,7 @@ function App() {
           {EcommerceRoutes()}
         </Route>
 
-        {/* web-development  */}
-        <Route path="/web_development" element={<PortfolioLayout/>}>
-        {PortfolioRoutes()}
-        </Route>
+        
 
         {/* 404 Not Found */}
         <Route path="*" element={<NotFound404 />} />

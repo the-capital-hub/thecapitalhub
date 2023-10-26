@@ -27,7 +27,7 @@ const WebDevelopment = () => {
           <section className="heading_section_fund">
             <div className="title_and_image">
               <img src={serviceThreeIcon} alt="image" />
-              <h2>WebDevelopment</h2>
+              <h2>Web Development</h2>
             </div>
             <h1>
               We offer the best
@@ -52,6 +52,14 @@ const WebDevelopment = () => {
                   HUB today!
                   <br />
                   <br />
+                  <Link to={"/web-development/portfolio"}>
+                    <button className="btn_red">
+                      Go to Portfolio
+                    </button>
+                  </Link>
+                  <br />
+                  <br />
+                  <br />
                   Development services offered:
                 </p>
               </div>
@@ -60,6 +68,7 @@ const WebDevelopment = () => {
               </div>
             </div>
           </section>
+
           <section className="explore_service">
             <h1 style={{ color: "#FD5901" }}>Explore</h1>
             <h1>Development services offered</h1>
@@ -106,6 +115,7 @@ const WebDevelopment = () => {
               HUB today!
             </p>
           </section>
+
         </div>
       </div>
     </>

@@ -16,6 +16,7 @@ import { resetChat } from "../../../../Store/features/chat/chatSlice";
 import IconExit from "../../SvgIcons/IconExit";
 import "./styles.scss";
 import { getBase64 } from "../../../../utils/getBase64";
+import { setCommunityProfile } from "../../../../Store/features/chat/chatSlice";
 
 export default function SettingsHeader({ setIsSettingsOpen }) {
   const chatProfile = useSelector((state) => state.chat.chatProfile);
@@ -108,8 +109,21 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
       if (profileImage) {
         profileImage = await getBase64(profileImage);
       }
-      await updateCommunity(communityProfile?.community?._id, { profileImage });
-      window.reload();
+      const { data: response } = await updateCommunity(communityProfile?.community?._id, { profileImage });
+      console.log(response);
+      const updatedData = {
+        profileImage: response.profileImage,
+      };
+      const updatedCommunityProfile = {
+        ...communityProfile,
+        community: {
+          ...communityProfile.community,
+          ...updatedData,
+        },
+      };
+      console.log(updatedCommunityProfile);
+      dispatch(setCommunityProfile(updatedCommunityProfile));
+      // window.reload();
     } catch (error) {
       console.log("Error updating image: ", error);
     }

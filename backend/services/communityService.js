@@ -136,7 +136,7 @@ export const updateCommunity = async (communityId, updatedData) => {
         format: 'webp',
         unique_filename: true,
       });
-      updatedData.profileImage = url;
+      community.profileImage = url;
     }
 
     community.communityName = updatedData.communityName || community.communityName;
@@ -178,8 +178,7 @@ export const exitCommunity = async (userId, communityId) => {
         message: "User is not a member of the community",
       };
     }
-    community.members = community.members.filter((memberId) => memberId !== userId);
-
+    community.members = community.members.filter((memberId) => memberId.toString() !== userId);
     await community.save();
 
     return {
