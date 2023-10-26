@@ -50,9 +50,9 @@ export default function EditInvestorCompanyProfilePage() {
         seedRound: data.colorCard.seedRound,
       });
     })
-    .catch((error) => {
-      console.log(error);
-    })
+      .catch((error) => {
+        console.log(error);
+      })
   }, []);
 
   // handleAmountChange
@@ -88,12 +88,16 @@ export default function EditInvestorCompanyProfilePage() {
     }
   };
 
+  const handleSaveAll = (e) => {
+    submitBioHandler(e);
+  }
+
   return (
     <MaxWidthWrapper>
       <div className="editinvestorCompanyProfilePage__wrapper p-3 border-start">
         {/* Main content */}
         <div className="main__content">
-        <span className="back_img rounded-circle shadow-sm" title="Go Back">
+          <span className="back_img rounded-circle shadow-sm" title="Go Back">
             <img
               src={backIcon}
               width={20}
@@ -113,9 +117,8 @@ export default function EditInvestorCompanyProfilePage() {
               <span className="ms-auto">
                 <div className="d-flex gap-2">
                   <button
-                    className={`align-self-end btn-base investor ${
-                      isBioEditable ? "btn-sm" : ""
-                    }`}
+                    className={`align-self-end btn-base investor ${isBioEditable ? "btn-sm" : ""
+                      }`}
                     onClick={() => setIsBioEditable(!isBioEditable)}
                   >
                     {isBioEditable ? "Cancel" : "Edit"}
@@ -123,9 +126,8 @@ export default function EditInvestorCompanyProfilePage() {
                   </button>
                   {isBioEditable && (
                     <button
-                      className={`align-self-end btn-base investor ${
-                        isBioEditable ? "btn-sm" : ""
-                      }`}
+                      className={`align-self-end btn-base investor ${isBioEditable ? "btn-sm" : ""
+                        }`}
                       onClick={(e) => submitBioHandler(e)}
                     >
                       Save
@@ -317,6 +319,10 @@ export default function EditInvestorCompanyProfilePage() {
               noRupee={true}
             />
           </div>
+          <button
+            className={`align-self-end btn-base investor`}
+            onClick={handleSaveAll}
+          > Save ALL </button>
         </div>
         {/* Right side content */}
         <div className="right__content">

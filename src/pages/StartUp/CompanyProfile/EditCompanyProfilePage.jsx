@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./EditCompanyProfilePage.scss";
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
@@ -26,6 +26,7 @@ export default function EditCompanyProfilePage() {
   const [companyData, setCompanyData] = useState([]);
   const [isBioEditable, setIsBioEditable] = useState(false);
   const [companyDescription, setCompanyDescription] = useState(null);
+  
   useEffect(() => {
     if (loggedInUser?.isInvestor === "false") {
       getStartupByFounderId(loggedInUser._id)
@@ -78,6 +79,10 @@ export default function EditCompanyProfilePage() {
       console.log(error);
     }
   };
+
+  const handleSaveAll = (e) => {
+    submitBioHandler(e);
+  }
 
   return (
     <MaxWidthWrapper>
@@ -238,6 +243,10 @@ export default function EditCompanyProfilePage() {
               colorCardData={colorCardData}
             />
           </div>
+          <button
+            className={`align-self-end btn-base startup`}
+            onClick={handleSaveAll}
+          > Save ALL </button>
         </div>
         {/* Right side content */}
         <div className="right__content">
