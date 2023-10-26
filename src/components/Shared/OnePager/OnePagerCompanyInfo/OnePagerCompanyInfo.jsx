@@ -11,9 +11,9 @@ export default function OnePagerCompanyInfo({
   socialLinks,
   showEdit,
 }) {
-  const { website, ...otherLinks } = socialLinks;
+  const { website, ...otherLinks } = socialLinks   || {};;
   const links = Object.values(otherLinks);
-  const tags = keyFocus.split(",");
+  const tags = keyFocus ? keyFocus.split(",") : [];
   // console.log(links);
 
   return (

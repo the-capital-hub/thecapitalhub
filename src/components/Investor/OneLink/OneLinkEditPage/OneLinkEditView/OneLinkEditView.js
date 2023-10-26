@@ -492,7 +492,7 @@ const OneLinkEditView = () => {
                 id="website_link"
                 name="website_link"
                 className="w-100 px-3"
-                value={formData.socialLinks.website}
+                value={formData.socialLinks?.website}
                 onChange={(e) => handleSocialLinkChange("website", e)}
                 onBlur={(e) => handleUpdate()}
               />
