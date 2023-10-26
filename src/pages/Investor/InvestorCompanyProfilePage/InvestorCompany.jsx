@@ -38,8 +38,8 @@ export default function CompanyProfilePage() {
 
   useEffect(() => {
     setLoading(true);
-    if (loggedInUser?.investor) {
-      setLoading(true); 
+    if (loggedInUser?.isInvestor === "true") {
+      setLoading(true);
       getInvestorById(loggedInUser.investor).then(({ data }) => {
         setCompanyData(data);
         setLoading(false);
@@ -52,6 +52,7 @@ export default function CompanyProfilePage() {
           setLoading(false);
         })
     }
+    setLoading(false);
   }, [loggedInUser.investor]);
 
   const handleSearchInputChange = (e) => {
@@ -163,11 +164,10 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${
-                                  selectedCompanyId === company._id
+                                className={`suggestion-item ${selectedCompanyId === company._id
                                     ? "active"
                                     : ""
-                                }`}
+                                  }`}
                                 key={index}
                                 onClick={() =>
                                   handleCompanySelection(
@@ -218,13 +218,12 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${
-                                  selectedCompanyId === company._id
+                                className={`suggestion-item ${selectedCompanyId === company._id
                                     ? "active"
                                     : ""
-                                }`}
+                                  }`}
                                 key={index}
-                                onClick={() => 
+                                onClick={() =>
                                   handleCompanySelection(company._id, company.companyName)
                                 }
                               >
