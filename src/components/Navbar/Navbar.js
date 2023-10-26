@@ -194,10 +194,16 @@ function Navbar() {
                   isLoggedIn();
                 }}
                 style={{
-                  fontSize: "14px"
+                  fontSize: "14px",
                 }}
               >
-                {loggedInUser && isLoggedInLocal ? "My account" : "Log in"}
+                {loggedInUser && isLoggedInLocal ? (
+                  <>
+                    {loggedInUser?.firstName} {loggedInUser?.lastName}
+                  </>
+                ) : (
+                  "Log in"
+                )}
               </button>
             </li>
           </ul>
