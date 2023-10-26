@@ -150,6 +150,21 @@
         display: flex;
         margin-inline-start: 0.5em;
       }
+
+      .kebabMenu_container{
+        // svg{
+        //   border: 1px solid red;
+        // }
+
+        .kebab_menu{
+          position: absolute;
+          top: 0;
+          left: 80%;
+          z-index: 10;
+
+          background-color: #fff;
+        }
+      }
     }
   }
 }
