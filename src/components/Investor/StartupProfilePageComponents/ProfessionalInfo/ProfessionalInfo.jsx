@@ -10,6 +10,7 @@ import {
   updateUserAPI,
 } from "../../../../Service/user";
 import { loginSuccess } from "../../../../Store/features/user/userSlice";
+import IconCloudUpload from "../../SvgIcons/IconCloudUpload";
 
 export default function ProfessionalInfo({ theme, companyFounderId }) {
   // Fetch Global State
@@ -176,7 +177,11 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
             />
             <div className="professional_form_input d-flex align-items-center gap-4">
               <label htmlFor="profilePicture" style={{ cursor: "pointer" }}>
-                Upload Picture
+                <IconCloudUpload
+                  color={theme === "startup" ? "#fd5901" : "#b2cc5d"}
+                  height="1.75rem"
+                  width="1.75rem"
+                />
               </label>
               <p className="m-0 fs-6 fw-light">{selectedFile?.name}</p>
             </div>

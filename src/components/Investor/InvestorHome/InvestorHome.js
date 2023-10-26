@@ -17,7 +17,7 @@ import {
   updateUserAPI,
   postStartUpData,
 } from "../../../Service/user";
-import { loginSuccess } from "../../../Store/Action/userAction";
+import { loginSuccess } from "../../../Store/features/user/userSlice";
 import { getBase64 } from "../../../utils/getBase64";
 import CoinIcon from "../../../Images/investorView/Rectangle.png";
 import ColorCard from "../InvestorGlobalCards/ColoredCards/ColorCard";
@@ -444,9 +444,9 @@ const InvestorHome = () => {
               <div className="box personal_information">
                 <div className="personal_information_header">
                   <h2 className="typography">Connections</h2>
-                  <div className="milestone_see_more">
+                  {/* <div className="milestone_see_more">
                     <Link to={""}>See more</Link>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="col-12 mt-2 milestones">
                   <ConnectionCard userId={loggedInUser._id} />
@@ -457,9 +457,9 @@ const InvestorHome = () => {
               <div className="box personal_information">
                 <div className="personal_information_header">
                   <h2 className="typography">Featured posts</h2>
-                  <div className="milestone_see_more">
+                  {/* <div className="milestone_see_more">
                     <Link to={""}>See more</Link>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="mt-2 milestones">
                   <FeaturedPostsContainer userId={loggedInUser._id} />

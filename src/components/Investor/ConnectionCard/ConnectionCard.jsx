@@ -33,25 +33,30 @@ function ConnectionCard({ userId }) {
       ) : connections.length > 0 ? (
         <>
           {connections.map((item, index) => (
-
-            <div className="single-card d-flex flex-column align-items-center justify-content-between" key={index}>
-              <div onClick={() => navigate(`/user/${item._id}`)}>
-                <img src={item?.profilePicture} alt="" className="rounded-pill" />
-                <h1 className="mt-2">{item?.firstName} {item?.lastName}</h1>
-                <p className="mb-2">{item?.designation}</p>
-                <button>Connected</button>
+            <div className="single-card " key={index}>
+              <div
+                className="d-flex flex-column align-items-center justify-content-between gap-3 h-100"
+                onClick={() => navigate(`/user/${item._id}`)}
+              >
+                <img
+                  src={item?.profilePicture}
+                  alt=""
+                  className="rounded-pill"
+                />
+                <h1 className="m-0" style={{ minHeight: "50px" }}>
+                  {item?.firstName} {item?.lastName}
+                </h1>
+                <p className="m-0">{item?.designation}</p>
+                <button className="mt-auto px-3">Connected</button>
               </div>
             </div>
-
           ))}
         </>
       ) : (
         <p>No connections found.</p>
-      )
-      }
-    </div >
+      )}
+    </div>
   );
 }
 
 export default ConnectionCard;
-
