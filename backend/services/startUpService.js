@@ -2,6 +2,7 @@ import { UserModel } from "../models/User.js";
 import { StartUpModel } from "../models/startUp.js";
 import { sendMail } from "../utils/mailHelper.js";
 import { cloudinary } from "../utils/uploadImage";
+import { MilestoneModel } from "../models/MileStones.js";
 
 const adminMail = "learn.capitalhub@gmail.com";
 
@@ -289,3 +290,115 @@ export const getStartupsBySearch = async (searchQuery) => {
     };
   }
 };
+
+export const createMilestone = async (milestoneData) => {
+  try {
+    const milestone = new MilestoneModel({
+      ...milestoneData
+    });
+    await milestone.save();
+    return {
+      status: 200,
+      message: "Minestone Added",
+      data: milestone,
+    }
+  } catch (error) {
+    console.error("Error creating minestone:", error);
+    return {
+      status: 500,
+      message: "An error occurred while creating minestone.",
+    };
+  }
+}
+
+export const getMileStone = async () => {
+  try {
+    const milestones = await MilestoneModel.find();
+    return {
+      status: 200,
+      message: "Minestone retrived",
+      data: milestones,
+    }
+  } catch (error) {
+    console.error("Error getting minestone:", error);
+    return {
+      status: 500,
+      message: "An error occurred while getting minestone.",
+    };
+  }
+}
+
+export const addMilestoneToUser = async (userId, milestoneId) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found.",
+      };
+    }
+    const startUp = await StartUpModel.findById(user.startUp);
+    const milestone = await MilestoneModel.findById(milestoneId);
+    if (!milestone) {
+      return {
+        status: 404,
+        message: "Milestone not found.",
+      };
+    }
+    if (startUp.milestones.includes(milestoneId)) {
+      return {
+        status: 400,
+        message: "Milestone is already associated with the startup.",
+      };
+    }
+    startUp.milestones.push(milestone);
+    await startUp.save();
+    return {
+      status: 200,
+      message: "Milestone added to the user successfully.",
+      data: user,
+    };
+  } catch (error) {
+    console.error("Error adding milestone to the user:", error);
+    return {
+      status: 500,
+      message: "An error occurred while adding milestone to the user.",
+    };
+  }
+}
+
+export const getUserMilestones = async (oneLinkId) => {
+  try {
+    const user = await UserModel.findOne({ oneLinkId: oneLinkId });
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found.",
+      };
+    }
+    const startUp = await StartUpModel.findById(user.startUp);
+    if (!startUp) {
+      return {
+        status: 404,
+        message: "Startup not found for the user.",
+      };
+    }
+    const milestoneIds = startUp.milestones;
+    const milestones = await MilestoneModel.find({ _id: { $in: milestoneIds } });
+    return {
+      status: 200,
+      message: "Milestones retrieved successfully for the user's startup.",
+      data: {
+        milestones,
+        userJoinedDate: user.createdAt,
+        startUpFoundedDate: startUp.startedAtDate,
+      },
+    };
+  } catch (error) {
+    console.error("Error getting milestones for the user:", error);
+    return {
+      status: 500,
+      message: "An error occurred while getting milestones for the user.",
+    };
+  }
+}

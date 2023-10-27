@@ -88,9 +88,10 @@ $secondary-color: #1b2430;
     }
 
     .loginbtn {
-      border: 2px solid $primary-color;
+      border: 2px solid var(--currentTheme);
       border-radius: 50px;
-      color: #fff !important;
+      // color: #fff !important;
+      color: var(--currentTheme-text);
       text-align: center;
       font-family: "Poppins";
       font-style: normal;
@@ -109,7 +110,8 @@ $secondary-color: #1b2430;
       left: 1185px;
       top: 73px;
 
-      background: $primary-color;
+      // background: $primary-color;
+      background: var(--currentTheme);
       border-radius: 50px;
 
       &:hover::after {
@@ -173,9 +175,10 @@ $secondary-color: #1b2430;
       }
 
       .mobile_loginbtn {
-        border: 2px solid $primary-color;
+        border: 2px solid var(--currentTheme);
         border-radius: 50px;
-        color: #fff !important;
+        // color: #fff !important;
+        color: var(--currentTheme-text);
         text-align: center;
         font-family: "Poppins";
         font-style: normal;
@@ -192,7 +195,8 @@ $secondary-color: #1b2430;
         height: 37px;
         left: 1185px;
         top: 73px;
-        background: $primary-color;
+        // background: $primary-color;
+        background: var(--currentTheme);
         border-radius: 50px;
         text-decoration: none;
 
