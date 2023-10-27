@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import "./HalfbendCard.scss";
 import ThreeDot from "../../../../../Images/VerticalBlackThreeDots.svg";
@@ -8,6 +9,7 @@ import { useSelector } from "react-redux";
 import deleteIcon from "../../../../../Images/post/delete.png";
 import AfterSuccessPopup from "../../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 
+import axios from "axios";
 
 
 const HalfbendCard = ({folderName, userId}) => {
@@ -31,10 +33,39 @@ const HalfbendCard = ({folderName, userId}) => {
     }
   }, [loggedInUser, userId, folderName,deleteDoc]);
 
-  const openPdfInNewWindow = (pdfUrl) => {
-     console.log("pdfurl---------",pdfUrl)
-     window.location.href = pdfUrl;
-  };
+  const openPdfInNewWindow = (fileUrl) => {
+    //  console.log("pdfurl---------",pdfUrl)
+    //  window.location.href = pdfUrl;
+
+
+     const imageUrl = 'https://res.cloudinary.com/drjt9guif/image/upload/c_scale,q_100,w_265/v1692955323/TheCapitalHub/users/profilePictures/wprwfl9rsdkyfptag0hw.webp'; // Your image URL
+
+    //  fetch(fileUrl)
+    //  .then((response) => {
+    //    if (!response.ok) {
+    //      throw new Error('Network response was not ok');
+    //    }
+    //    return response.blob();
+    //  })
+    //  .then((blob) => {
+    //    const blobUrl = URL.createObjectURL(blob);
+    //    const newWindow = window.open(blobUrl, '_blank');
+    //    if (!newWindow) {
+    //      alert('Failed to open the image in a new window. Please allow pop-ups for this site.');
+    //    }
+    //  })
+    //  .catch((error) => {
+    //    console.error('Error fetching image:', error);
+    //  });;
+
+
+    let newWindow = window.open();
+    
+        newWindow.location = fileUrl;
+  }
+
+
+  
   const handleDeleteDoc=(id)=>{
     try {
       deleteDocument(id).then((res) => {
@@ -160,37 +191,24 @@ const HalfbendCard = ({folderName, userId}) => {
              
             >
               <div className="custom-card"  onClick={() => openPdfInNewWindow(item.fileUrl)}>
-                <div className="d-flex justify-content-between">
-                <span className="d-flex "> 
-              <img
-                  className="pdfIcon-img"
-                  src={pdfIcon}
-                  height={50}
-                  alt="pdfIcon"
-                  onClick={() => handleDeleteDoc(item._id)}
-                /> <h6 >{item.fileName}</h6></span>
-                 <img
-                  className="delete-img "
-                  src={deleteIcon}
-                  height={50}
-                  alt="deleteIcon"
-                  onClick={() => handleDeleteDoc(item._id)}
-                />
-                  
-                </div>
-             
                 <img
-                  className="inner_img my-1"
-                  src={item.fileUrl}
+                  className="mx-3 my-1"
+                  src={pdfIcon}
                   height={50}
                   alt="PDF Icon"
                   
                 />
               </div>
-              {/* <div className="d-flex flex-column mx-auto justify-content-center align-items-center">
+              <div className="d-flex flex-column mx-auto justify-content-center align-items-center">
               <h6 >{item.fileName}</h6>
-             
-              </div> */}
+              <img
+                  className="delete-img"
+                  src={deleteIcon}
+                  height={50}
+                  alt="deleteIcon"
+                  onClick={() => handleDeleteDoc(item._id)}
+                />
+              </div>
               
             </div>
           ))}
