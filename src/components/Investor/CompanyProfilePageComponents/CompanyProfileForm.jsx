@@ -45,7 +45,11 @@ const SECTORS = [
   "Sales and Marketing",
 ];
 
-export default function CompanyProfileForm({ companyData, investor = false, isSaveAll }) {
+export default function CompanyProfileForm({
+  companyData,
+  investor = false,
+  isSaveAll,
+}) {
   // States for form
   const [formData, setFormData] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
@@ -61,7 +65,7 @@ export default function CompanyProfileForm({ companyData, investor = false, isSa
 
   useEffect(() => {
     if (isSaveAll) {
-      const event = new Event('submit', { cancelable: true });
+      const event = new Event("submit", { cancelable: true });
       handleSubmit(event);
     }
   }, [isSaveAll]);
@@ -247,16 +251,18 @@ export default function CompanyProfileForm({ companyData, investor = false, isSa
                 {formData.location}
               </button>
               <ul
-                className={`dropdown-menu m-0 p-0 ${investor ? "investor" : "startup"
-                  }`}
+                className={`dropdown-menu m-0 p-0 ${
+                  investor ? "investor" : "startup"
+                }`}
               >
                 {LOCATIONS.map((location, index) => {
                   return (
                     <li key={`${location}${index}`} className="m-0 p-0">
                       <button
                         type="button"
-                        className={`btn btn-base list-btn w-100 text-start ps-3 ${investor ? "investor" : "startup"
-                          } ${location === formData.location ? "selected" : ""}`}
+                        className={`btn btn-base list-btn w-100 text-start ps-3 ${
+                          investor ? "investor" : "startup"
+                        } ${location === formData.location ? "selected" : ""}`}
                         onClick={(e) => handleLocationSelect(e, location)}
                       >
                         {location}
@@ -302,16 +308,18 @@ export default function CompanyProfileForm({ companyData, investor = false, isSa
               <span>{formData.sector}</span>
             </button>
             <ul
-              className={`dropdown-menu m-0 p-0 ${investor ? "investor" : "startup"
-                }`}
+              className={`dropdown-menu m-0 p-0 ${
+                investor ? "investor" : "startup"
+              }`}
             >
               {SECTORS.map((sector, index) => {
                 return (
                   <li key={`${sector}${index}`} className="m-0 p-0">
                     <button
                       type="button"
-                      className={`btn btn-base list-btn text-start ps-3 text-break ${investor ? "investor" : "startup"
-                        } ${sector === formData.sector ? "selected" : ""}`}
+                      className={`btn btn-base list-btn text-start ps-3 text-break ${
+                        investor ? "investor" : "startup"
+                      } ${sector === formData.sector ? "selected" : ""}`}
                       onClick={(e) => handleSectorSelect(e, sector)}
                     >
                       <p className="m-0">{sector}</p>
@@ -386,10 +394,56 @@ export default function CompanyProfileForm({ companyData, investor = false, isSa
           />
         </fieldset>
 
+        {!investor && (
+          <fieldset className={investor ? "investor" : "startup"}>
+            <legend className="fw-bolder">TAM</legend>
+            <input
+              type="text"
+              name="TAM"
+              id="TAM"
+              className="profile_form_input fw-bold"
+              value={formData.TAM || ""}
+              onChange={handleInputChange}
+              placeholder="TAM"
+            />
+          </fieldset>
+        )}
+
+        {!investor && (
+          <fieldset className={investor ? "investor" : "startup"}>
+            <legend className="fw-bolder">SAM</legend>
+            <input
+              type="text"
+              name="SAM"
+              id="SAM"
+              className="profile_form_input fw-bold"
+              value={formData.SAM || ""}
+              onChange={handleInputChange}
+              placeholder="SAM"
+            />
+          </fieldset>
+        )}
+
+        {!investor && (
+          <fieldset className={investor ? "investor" : "startup"}>
+            <legend className="fw-bolder">SOM</legend>
+            <input
+              type="text"
+              name="SOM"
+              id="SOM"
+              className="profile_form_input fw-bold"
+              value={formData.SOM || ""}
+              onChange={handleInputChange}
+              placeholder="SOM"
+            />
+          </fieldset>
+        )}
+
         <button
           type="submit"
-          className={`align-self-end btn-base ${investor ? "investor" : "startup"
-            }`}
+          className={`align-self-end btn-base ${
+            investor ? "investor" : "startup"
+          }`}
         >
           Save
         </button>
