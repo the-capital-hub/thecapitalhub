@@ -36,6 +36,7 @@ export default function ChatSettings({ setIsSettingsOpen }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const chatProfile = useSelector((state) => state.chat.chatProfile);
   const communityProfile = useSelector((state) => state.chat.communityProfile);
+  const [showAllMedia, setShowAllMedia] = useState(false);
 
   useEffect(() => {
     if (isCommunitySelected) {
@@ -118,15 +119,27 @@ export default function ChatSettings({ setIsSettingsOpen }) {
               : chatProfile?.images?.length}
             )
           </p>
-          <p
-            className="text-capitalize m-0 orange_underline text_orange ms-auto"
-            style={{ fontSize: "12px", fontWeight: "400" }}
-          >
-            show all
-          </p>
+          {(
+            isCommunitySelected
+              ? communityProfile?.images?.length
+              : chatProfile?.images?.length
+          ) ? (
+            <p
+              className="text-capitalize m-0 orange_underline text_orange ms-auto"
+              style={{ fontSize: "12px", fontWeight: "400" }}
+              onClick={() => setShowAllMedia(true)}
+            >
+              show all
+            </p>
+          ) : (
+            ""
+          )}
         </SettingsBlackHeader>
         <SettingsBlackBody>
-          <SettingsMediaBody />
+          <SettingsMediaBody
+            toggleModal={setShowAllMedia}
+            showModal={showAllMedia}
+          />
         </SettingsBlackBody>
       </div>
 

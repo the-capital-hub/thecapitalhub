@@ -114,7 +114,6 @@ export default function AddTeamMemberModal({
           });
           console.log(response);
         }
-
       } else {
         // If not editing then Adding new member
         setCompanyData((previousData) => ({
@@ -134,7 +133,6 @@ export default function AddTeamMemberModal({
           });
           console.log(response);
         }
-
       }
 
       setMember(initialMemberState);
@@ -206,6 +204,8 @@ export default function AddTeamMemberModal({
     setImagePreview(null);
   }
 
+  console.log(1111111111111, member);
+
   return (
     <div className="team_member_modal d-flex flex-column flex-lg-row gap-4 justify-content-around py-3">
       {/* Edit/Remove modal */}
@@ -216,41 +216,41 @@ export default function AddTeamMemberModal({
           {/* Loop current team member here */}
           {currentTeam
             ? currentTeam.map((member, index) => {
-              return (
-                <div
-                  className="d-flex align-items-center justify-content-around p-2 bg-light rounded-3"
-                  key={`${member.name}${index}`}
-                >
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    style={{
-                      width: "50px",
-                      height: "50px",
-                      objectFit: "cover",
-                    }}
-                    className="rounded-circle"
-                  />
-                  <h6 className="m-0 flex-grow-1 text-center" style={{}}>
-                    {member.name}
-                  </h6>
-                  <div className="d-flex gap-2">
-                    <button
-                      className={`modal_edit_btn ${theme}`}
-                      onClick={(e) => handleSelectClick(e, member, index)}
-                    >
-                      <IconEdit />
-                    </button>
-                    <button
-                      className={`modal_delete_btn ${theme}`}
-                      onClick={(e) => handleDeleteClick(e, member, index)}
-                    >
-                      <IconDeleteFill />
-                    </button>
+                return (
+                  <div
+                    className="d-flex align-items-center justify-content-around p-2 bg-light rounded-3"
+                    key={`${member.name}${index}`}
+                  >
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        objectFit: "cover",
+                      }}
+                      className="rounded-circle"
+                    />
+                    <h6 className="m-0 flex-grow-1 text-center" style={{}}>
+                      {member.name}
+                    </h6>
+                    <div className="d-flex gap-2">
+                      <button
+                        className={`modal_edit_btn ${theme}`}
+                        onClick={(e) => handleSelectClick(e, member, index)}
+                      >
+                        <IconEdit />
+                      </button>
+                      <button
+                        className={`modal_delete_btn ${theme}`}
+                        onClick={(e) => handleDeleteClick(e, member, index)}
+                      >
+                        <IconDeleteFill />
+                      </button>
+                    </div>
                   </div>
-                </div>
-              );
-            })
+                );
+              })
             : ""}
         </div>
       </div>
@@ -272,6 +272,7 @@ export default function AddTeamMemberModal({
               accept="image/*"
               className="visually-hidden"
               onChange={handleFileChange}
+              required
             />
             <label htmlFor="image" className={`upload__label ${theme} `}>
               {imagePreview ? (
@@ -279,13 +280,20 @@ export default function AddTeamMemberModal({
                   src={imagePreview}
                   alt="Selected"
                   className="preview-image"
+                  style={{
+                    width: "70px",
+                    height: "70px",
+                    objectFit: "contain",
+                    borderRadius: "100px",
+                  }}
                 />
               ) : (
                 <BsFillCameraFill
                   style={{
                     fontSize: "1.5rem",
-                    color: `${theme === "investor" ? "black" : "rgba(253, 89, 1,1)"
-                      }`,
+                    color: `${
+                      theme === "investor" ? "black" : "rgba(253, 89, 1,1)"
+                    }`,
                   }}
                 />
               )}
@@ -306,7 +314,8 @@ export default function AddTeamMemberModal({
               value={member.name}
               className={`modal__input p-2 rounded-2 w-100 ${theme}`}
               onChange={handleInputChange}
-              style={{ color: 'black' }}
+              style={{ color: "black" }}
+              required
             />
           </div>
           {/* Designation input */}
@@ -319,12 +328,13 @@ export default function AddTeamMemberModal({
               value={member.designation}
               className={`modal__input p-2 rounded-2 w-100 ${theme}`}
               onChange={handleInputChange}
-              style={{ color: 'black' }}
+              style={{ color: "black" }}
+              required
             />
           </div>
           <button
+            disabled={!member.designation || !member.name}
             className={`orange_button ${theme}`}
-            // onClick={handleAddTeamMember}
             data-bs-dismiss="modal"
             type="submit"
           >
