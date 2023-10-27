@@ -11,6 +11,7 @@ import {
   postInvestorData,
 } from "../../../Service/user";
 import { useSelector } from "react-redux";
+import "./AddEditModal.scss";
 
 export default function AddEditModal({
   dataArray,
@@ -308,29 +309,29 @@ export default function AddEditModal({
 
             {isStartups ? (
               <>
-              <div className="invested__company__description">
-                <textarea
-                  name="description"
-                  id="description"
-                  rows={8}
-                  className="p-2 w-100 rounded-3 modal__input"
-                  placeholder="description..."
-                  value={formData.description}
-                  onChange={handleInputChange}
-                ></textarea>
-              </div>
-              <div className="invested__company__name ">
-              <input
-                type="number"
-                name="equity"
-                id="equity"
-                placeholder="Equity"
-                className="p-2 w-100 rounded-3 modal__input"
-                value={formData.equity}
-                onChange={handleInputChange}
-              />
-            </div>
-            </>
+                <div className="invested__company__description">
+                  <textarea
+                    name="description"
+                    id="description"
+                    rows={8}
+                    className="p-2 w-100 rounded-3 modal__input"
+                    placeholder="description..."
+                    value={formData.description}
+                    onChange={handleInputChange}
+                  ></textarea>
+                </div>
+                <div className="invested__company__name ">
+                  <input
+                    type="number"
+                    name="equity"
+                    id="equity"
+                    placeholder="Equity"
+                    className="p-2 w-100 rounded-3 modal__input"
+                    value={formData.equity}
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </>
             ) : (
               ""
             )}

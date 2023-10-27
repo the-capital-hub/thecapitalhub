@@ -331,7 +331,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                       </div>
                       {message.text !== "" && (
                         <div
-                          className="mymessage_container text-break position-relative "
+                          className="mymessage_container text-break text-start position-relative "
                           onMouseEnter={handleMouseEnter}
                           onMouseLeave={handleMouseLeave}
                         >
@@ -343,12 +343,12 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                           />
 
                           <Linkify>
-                            <p className="text-break m-0">{message.text} </p>
+                            <p className="text-break text-start m-0">{message.text} </p>
                           </Linkify>
                         </div>
                       )}
                       {message?.image && (
-                        <div className="mymessage_container">
+                        <div className="mymessage_container img">
                           <img
                             src={message.image}
                             className="image-message"
@@ -405,7 +405,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                       {message.text !== "" && (
                         <div className="message_container text-break">
                           <Linkify>
-                            <p className="text-break m-0">{message.text}</p>
+                            <p className="text-break text-start m-0">{message.text}</p>
                           </Linkify>
                         </div>
                       )}
