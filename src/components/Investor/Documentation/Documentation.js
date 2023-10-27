@@ -69,6 +69,17 @@ const Documentation = () => {
     dispatch(setPageTitle("Documentation"));
   }, []);
 
+  // let imageToShow;
+
+  // switch (title) {
+  //   case 'Title 1':
+  //     imageToShow = 
+  //     break;
+  //   // Add more cases for other titles if needed
+  //   default:
+  //     imageToShow = null;
+  // }
+
   return (
     <MaxWidthWrapper>
       <div className="documentation-wrapper">
@@ -77,7 +88,7 @@ const Documentation = () => {
           <SmallProfileCard text={"Documentation"} />
           <div className="documentationStartup">
             {showModal && (
-              <UploadModal onCancel={setShowModal} fetchFolder={getFolders} />
+              <UploadModal onCancel={setShowModal} fetchFolder={getFolders}  />
             )}
             <IntroductoryMessage
               title={"Upload your document"}
@@ -91,14 +102,37 @@ const Documentation = () => {
                   onClicked={() => navigate("/documentation/financials")}
                   text={"Financials"}
                 /> */}
-              {folderName.map((folder, index) => (
-                <Card
-                  key={index}
-                  onClicked={() => navigate(`/documentation/${folder}`)}
-                  text={folder}
-                  image={Pitch}
-                />
-              ))}
+{folderName.map((folder, index) => {
+  let imageToShow;
+
+  switch (folder) {
+    case 'pitchdeck':
+      imageToShow = Pitch; 
+      break;
+    case 'business':
+      imageToShow = Business; 
+      break;
+    case 'kycdetails':
+      imageToShow = KYC; 
+      break;
+    case 'legal and compliance':
+      imageToShow = Legal; 
+      break;
+    default:
+      imageToShow = Pitch;
+  }
+
+
+  return (
+    <Card
+      key={index}
+      onClicked={() => navigate(`/documentation/${folder}`)}
+      text={folder}
+      image={imageToShow}
+    />
+  );
+})}
+
               {/* <Card
                 onClicked={() => navigate("/documentation/business")}
                 text={"Business"}
@@ -130,6 +164,10 @@ const Documentation = () => {
           <NewsCorner />
         </div>
       </div>
+      
+
+    
+
     </MaxWidthWrapper>
     // <div className="container-fluid investorHome_main_container">
     //   <div className="row mt-2">

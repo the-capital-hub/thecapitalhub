@@ -1,11 +1,14 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./UploadModal.scss";
 import axios from "axios";
 import { environment } from "../../../../environments/environment";
 import AfterSuccessPopUp from "../../../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import { useSelector } from "react-redux";
-import { s3 } from "../../../../Service/awsConfig";
+import { s3  } from "../../../../Service/awsConfig";
 import IconDelete from "../../SvgIcons/IconDelete";
+import { getFoldersApi } from "../../../../Service/user";
+
+
 const baseUrl = environment.baseUrl;
 
 const UploadModal = ({ onCancel , fetchFolder }) => {
@@ -20,7 +23,22 @@ const UploadModal = ({ onCancel , fetchFolder }) => {
   const fileInputRef = useRef(null);
 
   const [folderName, setFolderName] = useState("");
+  const [folderSelector, setFolderSelector] = useState([]);
 
+
+  useEffect(() => {
+    const getFolders = () => {
+      getFoldersApi(loggedInUser._id)
+        .then((data) => {
+          console.log(data.data);
+          setFolderSelector(data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getFolders()
+  }, []);
 
   const handleClosePopup = () => {
     setShowPopUp(false);
@@ -119,7 +137,6 @@ const UploadModal = ({ onCancel , fetchFolder }) => {
       })}
     </ol>
   );
-
   return (
     <div className="uploadModal">
       <div className="blackbg" onClick={() => onCancel(false)}></div>
@@ -127,20 +144,27 @@ const UploadModal = ({ onCancel , fetchFolder }) => {
         <div className="modalwrapper">
           <h1>Select your folder</h1>
 
-          <select
+          {/* <select
             onChange={(e) => setFolder(e.target.value)}
             name="Folder"
             id=""
           >
-            {/* <option value="financials">Financials</option> */}
             <option value="pitchdeck">Pitch Deck</option>
             <option value="business">Business</option>
             <option value="kycdetails">KYC Details</option>
             <option value="legal and compliance">Legal and Compliance</option>
             <option value="Other">Other</option>
 
-            {/* <option value="update">Update</option> */}
-          </select>
+          </select> */}
+<select onChange={(e) => setFolder(e.target.value)} name="Folder" id="">
+  {folderSelector?.map((item, index) => (
+    <option key={index} value={item}>
+      {item}
+    </option>
+  ))}
+  <option value="Other">Other</option>
+</select>
+
 
           {folder==="Other" && (
             <input
