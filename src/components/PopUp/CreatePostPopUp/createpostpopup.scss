@@ -36,15 +36,17 @@
   padding: 10px;
 }
 
-.modal-body {
-  max-height: 50vh;
-  overflow-y: auto;
+.create_post_modal{
+  .modal-body {
+    max-height: 50vh;
+    overflow-y: auto;
 
-  .createpost_text_area {
-    textarea {
-      width: 100%;
-      background-color: #fbfbfb;
-      border: 1px solid #e0e0e0;
+    .createpost_text_area {
+      textarea {
+        width: 100%;
+        background-color: #fbfbfb;
+        border: 1px solid #e0e0e0;
+      }
     }
   }
 }

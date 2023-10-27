@@ -97,7 +97,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     width="17px"
                     height="17px"
                   />
-                  {!sidebarCollapsed && <span>Company</span>}
+                  {!sidebarCollapsed && <span className={currentTab === "company" ? "items-active" : ""}>Company</span>}
                 </Link>
               </MenuItem>
               <MenuItem
@@ -112,7 +112,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     width="17px"
                     height="17px"
                   />
-                  {!sidebarCollapsed && <span>Profile</span>}
+                  {!sidebarCollapsed && <span className={currentTab === "profile" ? "items-active" : ""}>Profile</span>}
                 </Link>
               </MenuItem>
               <MenuItem
@@ -122,7 +122,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
               >
                 <Link to="onepager">
                   <img src={BookIcon} alt="image" width="17px" height="17px" />
-                  {!sidebarCollapsed && <span>One Pager</span>}
+                  {!sidebarCollapsed && <span className={currentTab === "onePager" ? "items-active" : ""}>One Pager</span>}
                 </Link>
               </MenuItem>
               <MenuItem
@@ -137,7 +137,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     width="17px"
                     height="17px"
                   />
-                  {!sidebarCollapsed && <span>Documentation</span>}
+                  {!sidebarCollapsed && <span className={currentTab === "documentation" ? "items-active" : ""}>Documentation</span>}
                 </Link>
               </MenuItem>
 
@@ -155,7 +155,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                       width="17px"
                       height="17px"
                     />
-                    {!sidebarCollapsed && <span>Invest Now</span>}
+                    {!sidebarCollapsed && <span className={"items-active"}>Invest Now</span>}
                   </Link>
                 </MenuItem>
               </div>

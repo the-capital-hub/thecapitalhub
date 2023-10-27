@@ -45,7 +45,11 @@ const SECTORS = [
   "Sales and Marketing",
 ];
 
-export default function CompanyProfileForm({ companyData, investor = false }) {
+export default function CompanyProfileForm({
+  companyData,
+  investor = false,
+  isSaveAll,
+}) {
   // States for form
   const [formData, setFormData] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
@@ -58,6 +62,13 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
   const [investorfromSubmit, setInvestorfromSubmit] = useState(false);
 
   const [popupData, setPopupData] = useState("");
+
+  useEffect(() => {
+    if (isSaveAll) {
+      const event = new Event("submit", { cancelable: true });
+      handleSubmit(event);
+    }
+  }, [isSaveAll]);
 
   useEffect(() => {
     if (investor) {
@@ -382,6 +393,51 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
             placeholder="Finance, AR, VR, AI"
           />
         </fieldset>
+
+        {!investor && (
+          <fieldset className={investor ? "investor" : "startup"}>
+            <legend className="fw-bolder">TAM</legend>
+            <input
+              type="text"
+              name="TAM"
+              id="TAM"
+              className="profile_form_input fw-bold"
+              value={formData.TAM || ""}
+              onChange={handleInputChange}
+              placeholder="TAM"
+            />
+          </fieldset>
+        )}
+
+        {!investor && (
+          <fieldset className={investor ? "investor" : "startup"}>
+            <legend className="fw-bolder">SAM</legend>
+            <input
+              type="text"
+              name="SAM"
+              id="SAM"
+              className="profile_form_input fw-bold"
+              value={formData.SAM || ""}
+              onChange={handleInputChange}
+              placeholder="SAM"
+            />
+          </fieldset>
+        )}
+
+        {!investor && (
+          <fieldset className={investor ? "investor" : "startup"}>
+            <legend className="fw-bolder">SOM</legend>
+            <input
+              type="text"
+              name="SOM"
+              id="SOM"
+              className="profile_form_input fw-bold"
+              value={formData.SOM || ""}
+              onChange={handleInputChange}
+              placeholder="SOM"
+            />
+          </fieldset>
+        )}
 
         <button
           type="submit"

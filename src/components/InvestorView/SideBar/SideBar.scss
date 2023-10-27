@@ -219,13 +219,19 @@
 
 .investor_view_sidebar {
   #header .pro-sidebar-inner .pro-sidebar-layout .active {
-    background: #d3f36b;
+    background: #fd5901;
   }
+  
+   .items-active {
+    color: white !important; 
+  }
+  
   a:hover {
     color: grey !important;
   }
   .invest_now {
-    background: #d3f36b;
+    background: #fd5901;
+    color: white !important;
     // border-radius: 20px;
   }
 }

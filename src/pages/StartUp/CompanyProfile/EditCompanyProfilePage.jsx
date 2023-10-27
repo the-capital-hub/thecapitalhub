@@ -17,6 +17,7 @@ import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidth
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import backIcon from "../../../Images/Chat/BackIcon.svg";
 import { useNavigate } from "react-router-dom";
+import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 
 export default function EditCompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -26,7 +27,7 @@ export default function EditCompanyProfilePage() {
   const [companyData, setCompanyData] = useState([]);
   const [isBioEditable, setIsBioEditable] = useState(false);
   const [companyDescription, setCompanyDescription] = useState(null);
-  
+
   useEffect(() => {
     if (loggedInUser?.isInvestor === "false") {
       getStartupByFounderId(loggedInUser._id)
@@ -79,9 +80,17 @@ export default function EditCompanyProfilePage() {
       console.log(error);
     }
   };
+  const [isSaveAll, setIsSaveAll] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSaveAll = (e) => {
+    setLoading(true);
     submitBioHandler(e);
+    setIsSaveAll(true);
+    setTimeout(() => {
+      setIsSaveAll(false);
+      setLoading(false);
+    }, 1000);
   }
 
   return (
@@ -100,7 +109,7 @@ export default function EditCompanyProfilePage() {
           </span>
           <SmallProfileCard text={"Company Profile"} />
           <div className="bg-white rounded-5 p-5">
-            <CompanyProfileForm companyData={companyData} />
+            <CompanyProfileForm companyData={companyData} isSaveAll={isSaveAll} />
           </div>
           {/* Company Description */}
           <div className="paragraph__component bg-white rounded-5 p-5 d-flex flex-column gap-4">
@@ -246,7 +255,16 @@ export default function EditCompanyProfilePage() {
           <button
             className={`align-self-end btn-base startup`}
             onClick={handleSaveAll}
-          > Save ALL </button>
+          >
+             {loading ? (
+            <SpinnerBS
+              colorClass={"text-light"}
+              spinnerSizeClass="spinner-border-sm"
+            />
+          ) : (
+            "Save all"
+          )}
+          </button>
         </div>
         {/* Right side content */}
         <div className="right__content">
