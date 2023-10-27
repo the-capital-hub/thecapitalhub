@@ -78,7 +78,7 @@ function App() {
         </Route>
 
         {/* E-Commerce */}
-        <Route path="/e-commerce" element={<EcommerceLayout />}>
+        <Route path="/landing-page" element={<EcommerceLayout />}>
           {EcommerceRoutes()}
         </Route>
 
