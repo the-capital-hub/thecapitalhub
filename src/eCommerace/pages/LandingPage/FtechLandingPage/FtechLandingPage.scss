@@ -169,13 +169,14 @@
             font-size: 14px;
           }
   
-          button {
+          .LinkBtn {
             margin-top: auto;
             border: 1.5px solid black;
             border-radius: 50px;
             background-color: white;
             padding: 5px 20px;
             font-size: 14px;
+            text-decoration: none;
             &:hover {
               box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             }
@@ -236,7 +237,7 @@
               color: #5c59c1;
             }
   
-            button {
+            .LinkBtn {
               margin-top: auto;
               align-self: end;
               position: relative;
