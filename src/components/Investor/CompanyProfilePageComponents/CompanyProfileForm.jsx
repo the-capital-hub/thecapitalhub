@@ -58,10 +58,11 @@ export default function CompanyProfileForm({ companyData, investor = false, isSa
   const [investorfromSubmit, setInvestorfromSubmit] = useState(false);
 
   const [popupData, setPopupData] = useState("");
-  
+
   useEffect(() => {
-    if(isSaveAll) {
-      handleSubmit();
+    if (isSaveAll) {
+      const event = new Event('submit', { cancelable: true });
+      handleSubmit(event);
     }
   }, [isSaveAll]);
 
@@ -135,8 +136,8 @@ export default function CompanyProfileForm({ companyData, investor = false, isSa
     setFormData((prevData) => ({ ...prevData, sector: sector }));
   };
 
-  const handleSubmit = async () => {
-    // e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     try {
       if (selectedFile) {
@@ -246,18 +247,16 @@ export default function CompanyProfileForm({ companyData, investor = false, isSa
                 {formData.location}
               </button>
               <ul
-                className={`dropdown-menu m-0 p-0 ${
-                  investor ? "investor" : "startup"
-                }`}
+                className={`dropdown-menu m-0 p-0 ${investor ? "investor" : "startup"
+                  }`}
               >
                 {LOCATIONS.map((location, index) => {
                   return (
                     <li key={`${location}${index}`} className="m-0 p-0">
                       <button
                         type="button"
-                        className={`btn btn-base list-btn w-100 text-start ps-3 ${
-                          investor ? "investor" : "startup"
-                        } ${location === formData.location ? "selected" : ""}`}
+                        className={`btn btn-base list-btn w-100 text-start ps-3 ${investor ? "investor" : "startup"
+                          } ${location === formData.location ? "selected" : ""}`}
                         onClick={(e) => handleLocationSelect(e, location)}
                       >
                         {location}
@@ -303,18 +302,16 @@ export default function CompanyProfileForm({ companyData, investor = false, isSa
               <span>{formData.sector}</span>
             </button>
             <ul
-              className={`dropdown-menu m-0 p-0 ${
-                investor ? "investor" : "startup"
-              }`}
+              className={`dropdown-menu m-0 p-0 ${investor ? "investor" : "startup"
+                }`}
             >
               {SECTORS.map((sector, index) => {
                 return (
                   <li key={`${sector}${index}`} className="m-0 p-0">
                     <button
                       type="button"
-                      className={`btn btn-base list-btn text-start ps-3 text-break ${
-                        investor ? "investor" : "startup"
-                      } ${sector === formData.sector ? "selected" : ""}`}
+                      className={`btn btn-base list-btn text-start ps-3 text-break ${investor ? "investor" : "startup"
+                        } ${sector === formData.sector ? "selected" : ""}`}
                       onClick={(e) => handleSectorSelect(e, sector)}
                     >
                       <p className="m-0">{sector}</p>
@@ -391,9 +388,8 @@ export default function CompanyProfileForm({ companyData, investor = false, isSa
 
         <button
           type="submit"
-          className={`align-self-end btn-base ${
-            investor ? "investor" : "startup"
-          }`}
+          className={`align-self-end btn-base ${investor ? "investor" : "startup"
+            }`}
         >
           Save
         </button>
