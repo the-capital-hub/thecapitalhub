@@ -338,7 +338,7 @@ function Company() {
       <div className="">
         <div className="company__profile__container m-3 mt-5 mt-xl-3">
           {onePager.length !== 0 ? (
-            <CompanyProfile isOnelink={true} companyData={onePager} />
+            <CompanyProfile isOnelink={true} companyData={onePager} startup={"true"}/>
           ) : (
             <div className="bg-white rounded-4 border p-lg-4 shadow-sm d-flex justify-content-center min-vh-100">
               <div class="spinner-border" role="status">

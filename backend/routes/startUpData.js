@@ -10,6 +10,10 @@ import {
   getStartupByFounderIdController,
   getAllStartupsController,
   getStartupsBySearchController,
+  createMilestoneController,
+  getMileStoneController,
+  addMilestoneToUserController,
+  getUserMilestonesController,
 } from "../controllers/startUpController.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 
@@ -29,8 +33,11 @@ router.get(
 
 router.post("/investNow", investNowController);
 
+
+router.post("/createMilestone", createMilestoneController);
+
 // Middleware for checking token
-router.use(authenticateToken);
+// router.use(authenticateToken);
 
 // Get startup data
 router.get("/details/:userId", startUpData);
@@ -42,5 +49,10 @@ router.put("/onePager", editOnePager);
 
 router.get("/getAllStartUps", getAllStartupsController);
 router.get("/searchStartUps/:searchQuery", getStartupsBySearchController);
+router.get("/getAllMileStone", getMileStoneController);
+
+//milestone 
+router.post("/addMilestoneToUser", addMilestoneToUserController);
+router.get("/getUserMilestones/:oneLinkId", getUserMilestonesController);
 
 export default router;

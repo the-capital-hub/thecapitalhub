@@ -7,6 +7,10 @@ import {
   getStartupByFounderId,
   getAllStartups,
   getStartupsBySearch,
+  createMilestone,
+  getMileStone,
+  addMilestoneToUser,
+  getUserMilestones,
 } from "../services/startUpService.js";
 import { getStartUpData } from "../services/userService.js";
 
@@ -164,6 +168,61 @@ export const getStartupsBySearchController = async (req, res) => {
     res.status(500).send({
       status: 500,
       message: "An error occurred while fetching startups.",
+    });
+  }
+};
+
+export const createMilestoneController = async (req, res) => {
+  try {
+    const response = await createMilestone(req.body);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while creating minestone.",
+    });
+  }
+};
+
+export const getMileStoneController = async (req, res) => {
+  try {
+    const response = await getMileStone();
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting minestone.",
+    });
+  }
+};
+
+export const addMilestoneToUserController = async (req, res) => {
+  try {
+    const { milestoneId } = req.body;
+    const userId = req.userId;
+    const response = await addMilestoneToUser(userId, milestoneId);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while adding minestone to user.",
+    });
+  }
+};
+
+export const getUserMilestonesController = async (req, res) => {
+  try {
+    const { oneLinkId } = req.params;
+    const response = await getUserMilestones(oneLinkId);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting minestons of user.",
     });
   }
 };
