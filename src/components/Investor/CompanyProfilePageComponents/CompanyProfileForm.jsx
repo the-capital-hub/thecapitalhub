@@ -65,7 +65,8 @@ export default function CompanyProfileForm({
 
   useEffect(() => {
     if (isSaveAll) {
-      handleSubmit();
+      const event = new Event("submit", { cancelable: true });
+      handleSubmit(event);
     }
   }, [isSaveAll]);
 
@@ -139,9 +140,8 @@ export default function CompanyProfileForm({
     setFormData((prevData) => ({ ...prevData, sector: sector }));
   };
 
-  // Handle Submit
-  const handleSubmit = async () => {
-    // e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     try {
       if (selectedFile) {
