@@ -7,8 +7,8 @@ function Header() {
       <nav>
         <div className="nav d-none d-md-flex">
           <NavLink to="/">Home</NavLink>
-          <NavLink to="/contact-us">Contact Us</NavLink>
-          <NavLink to="/about-us">About Us</NavLink>
+          <NavLink to="/contactus">Contact Us</NavLink>
+          <NavLink to="/about">About Us</NavLink>
         </div>
       
       </nav>
