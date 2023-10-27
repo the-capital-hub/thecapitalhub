@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MockBadge from "../../../../Images/StartUp/Milestones/MockBadge.svg";
 import MockFundsBadge from "../../../../Images/StartUp/Milestones/MockfundsBadge.svg";
 import MilestoneBadge from "./MilestoneBadge";
 import "./AddMilestoneModal.scss";
+import { getAllMileStoneAPI } from "../../../../Service/user";
 
 const allBadges = [
   {
@@ -33,7 +34,29 @@ const allBadges = [
 
 const ACTIONS = { add: "add", remove: "remove" };
 
-export default function AddMilestoneModal({ theme }) {
+export default function AddMilestoneModal({ theme, userMilestones }) {
+  const [allMilestones, setAllMilestones] = useState(null);
+
+  // fetch all milestones
+  useEffect(() => {
+    async function getAllMilestones() {
+      try {
+        const { data } = await getAllMileStoneAPI();
+        let milestones = data.map((milestone) => ({
+          ...milestone,
+          badge: MockBadge,
+        }));
+
+        console.log("milestones", milestones);
+        setAllMilestones(milestones);
+      } catch (error) {
+        console.log("Error fetching milestones:", error);
+      }
+    }
+
+    getAllMilestones();
+  }, []);
+
   return (
     <div className="milestone_modal_container d-flex gap-3">
       <div className="d-flex flex-column gap-3">
@@ -42,15 +65,16 @@ export default function AddMilestoneModal({ theme }) {
           <div
             className={`badges__container d-flex gap-4 p-3 overflow-x-auto ${theme}`}
           >
-            {allBadges.slice(0, 3).map((badge, index) => {
+            {userMilestones?.map((mile, index) => {
               return (
                 <MilestoneBadge
-                  badge={badge.badge}
-                  milestone={badge.milestone}
+                  badge={mile.badge}
+                  milestone={mile.text}
                   isMini
-                  key={`${badge.milestone}${index}`}
+                  key={`${mile.text}${index}`}
                   theme={theme}
                   action={ACTIONS.remove}
+                  milestoneId={mile._id}
                 />
               );
             })}
@@ -62,15 +86,16 @@ export default function AddMilestoneModal({ theme }) {
           <div
             className={`badges__container d-flex gap-4 p-3 overflow-x-auto ${theme}`}
           >
-            {allBadges.map((badge, index) => {
+            {allMilestones?.map((mile, index) => {
               return (
                 <MilestoneBadge
-                  badge={badge.badge}
-                  milestone={badge.milestone}
+                  badge={mile.badge}
+                  milestone={mile.text}
                   isMini
-                  key={`${badge.milestone}${index}`}
+                  key={`${mile.text}${index}`}
                   theme={theme}
                   action={ACTIONS.add}
+                  milestoneId={mile?._id}
                 />
               );
             })}

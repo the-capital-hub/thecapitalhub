@@ -1168,3 +1168,33 @@ export const getFoldersApi = async ( userId) => {
     throw error;
   }
 };
+
+export const getAllMileStoneAPI = async () => {
+  try{
+    const response = await axiosInstance.get(`${API.getAllMileStone}`);
+    return response.data;
+  } catch (error){
+    console.error("Error fetching all milestones:", error);
+    throw error;
+  }
+}
+
+export const getUserMilestonesAPI = async (onelinkId) => {
+  try {
+    const response = await axiosInstance.get(`${API.getUserMilestones}/${onelinkId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user milestones:", error);
+    throw error;
+  }
+}
+
+export const addMilestoneToUserAPI = async (milestoneId) => {
+  try {
+    const response = await axiosInstance.post(`${API.addMilestoneToUser}`, milestoneId);
+    return response.data;
+  } catch (error) {
+    console.error("Error adding milestone to user:", error);
+    throw error;
+  }
+}

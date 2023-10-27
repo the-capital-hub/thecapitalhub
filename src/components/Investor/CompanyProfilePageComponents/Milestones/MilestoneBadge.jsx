@@ -4,6 +4,7 @@ import "./MilestoneBadge.scss";
 import IconEdit from "../../SvgIcons/IconEdit";
 import IconDeleteFill from "../../SvgIcons/IconDeleteFill";
 import { PlusIcon } from "../../../NewInvestor/SvgIcons";
+import { addMilestoneToUserAPI } from "../../../../Service/user";
 
 export default function MilestoneBadge({
   badge,
@@ -12,12 +13,23 @@ export default function MilestoneBadge({
   isMini,
   theme,
   action,
+  milestoneId,
 }) {
   // handle remove milestone
-  async function handleRemoveMilestone() {}
+  async function handleRemoveMilestone(e, milestoneId) {}
 
   // handle add milestone
-  async function handleAddMilestone() {}
+  async function handleAddMilestone(e, milestoneId) {
+    console.log("milestoneId", milestoneId);
+    try {
+      const { data } = await addMilestoneToUserAPI({
+        milestoneId: milestoneId,
+      });
+      console.log("After add milestone", data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div
@@ -63,7 +75,7 @@ export default function MilestoneBadge({
       {isMini && action === "add" && (
         <button
           className={`action_badge btn border-0 ${theme}`}
-          onClick={handleRemoveMilestone}
+          onClick={handleAddMilestone}
         >
           <PlusIcon height="1.5rem" width="1.5rem" />
         </button>
@@ -71,7 +83,7 @@ export default function MilestoneBadge({
       {isMini && action === "remove" && (
         <button
           className={`action_badge btn border-0 ${theme}`}
-          onClick={handleAddMilestone}
+          onClick={handleRemoveMilestone}
         >
           <IconDeleteFill />
         </button>
