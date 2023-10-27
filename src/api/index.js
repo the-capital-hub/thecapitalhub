@@ -96,7 +96,9 @@ const API = Object.freeze({
   deleteCommunity: `${baseUrl}/community/deleteCommunity`,
   exitCommunity: `${baseUrl}/community/exitCommunity`,
   getfolders: `${baseUrl}/documentation/getFolderByUser`,
-
+  getAllMileStone: `${baseUrl}/startup/getAllMileStone`,
+  getUserMilestones: `${baseUrl}/startup/getUserMilestones`,
+  addMilestoneToUser: `${baseUrl}/startup/addMilestoneToUser`,
 });
 
 export default API;

@@ -21,8 +21,7 @@ export default function CompanyProfile({
   let name = "HCL";
   let logo = DefaultAvatar;
   let location = "Bangalore";
-  let description =
-    "No description";
+  let description = "No description";
   let socialLinks = {
     website: "",
     facebook: "",
@@ -37,6 +36,9 @@ export default function CompanyProfile({
   let team = [];
   let tags = [];
   let tagline = "";
+  let tam = "";
+  let sam = "";
+  let som = "";
 
   if (companyData) {
     name = companyData.company || name;
@@ -52,6 +54,9 @@ export default function CompanyProfile({
     team = companyData.team || team;
     tags = companyData.keyFocus?.split(",").map((tag) => tag.trim()) || tags;
     tagline = companyData.tagline || tagline;
+    tam = companyData.TAM || "";
+    sam = companyData.SAM || "";
+    som = companyData.SOM || "";
   }
   if (investorData) {
     name = investorData.companyName || name;
@@ -105,7 +110,15 @@ export default function CompanyProfile({
           mission={!short && mission}
           noOfEmployees={noOfEmployees}
         />
-        {!short && <CompanyStats colorCard={colorCard} startup={startup}/>}
+        {!short && (
+          <CompanyStats
+            colorCard={colorCard}
+            startup={startup}
+            sam={sam}
+            tam={tam}
+            som={som}
+          />
+        )}
       </div>
 
       <div className="company__section__two d-flex flex-column gap-4 pt-3 pb-5 px-5">

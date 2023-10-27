@@ -1,5 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./MilestoneBadge.scss";
+import IconEdit from "../../SvgIcons/IconEdit";
+import IconDeleteFill from "../../SvgIcons/IconDeleteFill";
+import { PlusIcon } from "../../../NewInvestor/SvgIcons";
+import { addMilestoneToUserAPI } from "../../../../Service/user";
 
 export default function MilestoneBadge({
   badge,
@@ -7,13 +12,31 @@ export default function MilestoneBadge({
   text,
   isMini,
   theme,
+  action,
+  milestoneId,
 }) {
+  // handle remove milestone
+  async function handleRemoveMilestone(e, milestoneId) {}
+
+  // handle add milestone
+  async function handleAddMilestone(e, milestoneId) {
+    console.log("milestoneId", milestoneId);
+    try {
+      const { data } = await addMilestoneToUserAPI({
+        milestoneId: milestoneId,
+      });
+      console.log("After add milestone", data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div
-      className="badge_container p-4 d-flex flex-column align-items-center gap-3 rounded-5"
+      className={`badge_container p-4 d-flex flex-column align-items-center gap-3 rounded-5 position-relative ${theme}`}
       style={{
         backgroundColor: "#EDEDED",
-        width: `${isMini ? "160px" : "260px"}`,
+        flex: `0 0 ${isMini ? "200px" : "260px"}`,
       }}
     >
       <div
@@ -34,7 +57,12 @@ export default function MilestoneBadge({
         />
       </div>
       <div className="text-center">
-        <h5 className={`${isMini ? "fs-6" : ""}`}>{milestone}</h5>
+        <h5
+          className={`text-capitalize ${isMini ? "fs-6" : ""}`}
+          style={{ minHeight: `${isMini ? "60px" : "none"}` }}
+        >
+          {milestone}
+        </h5>
         {isMini ? "" : <p>{text}</p>}
       </div>
       {isMini ? (
@@ -43,6 +71,22 @@ export default function MilestoneBadge({
         <Link className={`see__more orange align-self-end mt-auto ${theme}`}>
           See more
         </Link>
+      )}
+      {isMini && action === "add" && (
+        <button
+          className={`action_badge btn border-0 ${theme}`}
+          onClick={handleAddMilestone}
+        >
+          <PlusIcon height="1.5rem" width="1.5rem" />
+        </button>
+      )}
+      {isMini && action === "remove" && (
+        <button
+          className={`action_badge btn border-0 ${theme}`}
+          onClick={handleRemoveMilestone}
+        >
+          <IconDeleteFill />
+        </button>
       )}
     </div>
   );

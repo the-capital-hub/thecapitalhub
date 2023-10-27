@@ -1,89 +1,107 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MockBadge from "../../../../Images/StartUp/Milestones/MockBadge.svg";
 import MockFundsBadge from "../../../../Images/StartUp/Milestones/MockfundsBadge.svg";
 import MilestoneBadge from "./MilestoneBadge";
+import "./AddMilestoneModal.scss";
+import { getAllMileStoneAPI } from "../../../../Service/user";
 
-export default function AddMilestoneModal({ theme }) {
-  const [milestoneText, setMilestoneText] = useState("");
+const allBadges = [
+  {
+    milestone: "Joining Capital HUB",
+    badge: MockBadge,
+  },
+  {
+    milestone: "Founded company",
+    badge: MockBadge,
+  },
+  {
+    milestone: "Earned first revenue",
+    badge: MockFundsBadge,
+  },
+  {
+    milestone: "Hired first full-time team member",
+    badge: MockBadge,
+  },
+  {
+    milestone: "Raised first round of funding",
+    badge: MockFundsBadge,
+  },
+  {
+    milestone: "Got first client",
+    badge: MockBadge,
+  },
+];
 
-  // fetch all badges data
-  const allBadges = [
-    {
-      milestone: "Founded in",
-      badge: MockBadge,
-    },
-    {
-      milestone: "First Fund Raise",
-      badge: MockFundsBadge,
-    },
-    {
-      milestone: "First Fund Raise",
-      badge: MockFundsBadge,
-    },
-    {
-      milestone: "First Fund Raise",
-      badge: MockFundsBadge,
-    },
-    {
-      milestone: "First Fund Raise",
-      badge: MockFundsBadge,
-    },
-  ];
+const ACTIONS = { add: "add", remove: "remove" };
 
-  // handleChange
-  function handleInputChange(e) {
-    setMilestoneText(e.target.value);
-  }
+export default function AddMilestoneModal({ theme, userMilestones }) {
+  const [allMilestones, setAllMilestones] = useState(null);
 
-  // handle AddMilestone
-  function handleAddMilestone(e) {
-    e.preventDefault();
-  }
+  // fetch all milestones
+  useEffect(() => {
+    async function getAllMilestones() {
+      try {
+        const { data } = await getAllMileStoneAPI();
+        let milestones = data.map((milestone) => ({
+          ...milestone,
+          badge: MockBadge,
+        }));
+
+        console.log("milestones", milestones);
+        setAllMilestones(milestones);
+      } catch (error) {
+        console.log("Error fetching milestones:", error);
+      }
+    }
+
+    getAllMilestones();
+  }, []);
 
   return (
-    <div className="d-flex flex-column gap-3">
-      <div className="d-flex flex-column gap-3 p-3 bg-light rounded-3">
-        <h5>Select Milestone</h5>
-        <div className="badges__container d-flex gap-4 flex-wrap p-3">
-          {allBadges.map((badge, index) => {
-            return (
-              <MilestoneBadge
-                badge={badge.badge}
-                milestone={badge.milestone}
-                milestoneWidth="200px"
-                isMini
-                key={`${badge.milestone}${index}`}
-              />
-            );
-          })}
+    <div className="milestone_modal_container d-flex gap-3">
+      <div className="d-flex flex-column gap-3">
+        <div className="d-flex flex-column gap-3 p-3 bg-light rounded-3">
+          <h5>Current Milestones</h5>
+          <div
+            className={`badges__container d-flex gap-4 p-3 overflow-x-auto ${theme}`}
+          >
+            {userMilestones?.map((mile, index) => {
+              return (
+                <MilestoneBadge
+                  badge={mile.badge}
+                  milestone={mile.text}
+                  isMini
+                  key={`${mile.text}${index}`}
+                  theme={theme}
+                  action={ACTIONS.remove}
+                  milestoneId={mile._id}
+                />
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="d-flex flex-column gap-3 p-3 bg-light rounded-3">
+          <h5>Add Milestones</h5>
+          <div
+            className={`badges__container d-flex gap-4 p-3 overflow-x-auto ${theme}`}
+          >
+            {allMilestones?.map((mile, index) => {
+              return (
+                <MilestoneBadge
+                  badge={mile.badge}
+                  milestone={mile.text}
+                  isMini
+                  key={`${mile.text}${index}`}
+                  theme={theme}
+                  action={ACTIONS.add}
+                  milestoneId={mile?._id}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
-
-      {/* form */}
-      <form
-        onSubmit={handleAddMilestone}
-        className="d-flex align-items-center justify-content-center gap-4 p-4"
-      >
-        {/* milestoneText input */}
-        <div className="">
-          <input
-            type="text"
-            name="milestoneText"
-            id="milestoneText"
-            placeholder="milestone text"
-            value={milestoneText}
-            className={`modal__input p-2 rounded-2 w-100 ${theme}`}
-            onChange={handleInputChange}
-          />
-        </div>
-        <button
-          className={`orange_button ${theme}`}
-          type="submit"
-          data-bs-dismiss="modal"
-        >
-          Add
-        </button>
-      </form>
     </div>
   );
 }

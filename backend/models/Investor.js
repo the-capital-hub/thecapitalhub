@@ -48,13 +48,13 @@ const investorSchema = new Schema(
     },
     team: {
       type: Array,
-      default: [
-        {
-          name: String,
-          designation: String,
-          image: String,
-        },
-      ],
+      // default: [
+      //   {
+      //     name: String,
+      //     designation: String,
+      //     image: String,
+      //   },
+      // ],
     },
     maximumInvest: {
       type: Number,

@@ -6,6 +6,7 @@ import { RxCross2 } from "react-icons/rx";
 import { FaBars } from "react-icons/fa";
 import HambergerIcon from "../../Images/Hamberger.svg";
 import { useSelector } from "react-redux";
+import { setThemeColor } from "../../utils/setThemeColor";
 
 function Navbar() {
   const [clicked, setClicked] = useState(false);
@@ -14,6 +15,7 @@ function Navbar() {
   const [hideDropdown, setHideDropDown] = useState(false);
 
   useEffect(() => {
+    setThemeColor();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -68,7 +70,13 @@ function Navbar() {
                 className={"mobile_loginbtn"}
                 onClick={() => setSelectedLink("login")}
               >
-                Log in
+                {loggedInUser && isLoggedInLocal ? (
+                  <>
+                    {loggedInUser?.firstName}
+                  </>
+                ) : (
+                  "Log in"
+                )}
               </Link>
             </li>
           </div>

@@ -6,10 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import {
-  GreenBusiness,
-  GreenKYC,
-  GreenLegal,
-  GreenPitch,
+  Business,
+  KYC,
+  Legal,
+  Pitch,
 } from "../../../Images/StartUp/Documentaion";
 
 const Documentation = () => {
@@ -38,14 +38,14 @@ const Documentation = () => {
                   `/onelink/${username}/${userId}/documentation/pitchdeck`
                 )
               }
-              image={GreenPitch}
+              image={Pitch}
             />
             <Card
               text={"Legal and Compliance"}
               onClicked={() =>
                 navigate(`/onelink/${username}/${userId}/documentation/legal`)
               }
-              image={GreenLegal}
+              image={Legal}
             />
             {/* <Card
               text={"Update"}
@@ -60,7 +60,7 @@ const Documentation = () => {
                   `/onelink/${username}/${userId}/documentation/kycdetails`
                 )
               }
-              image={GreenKYC}
+              image={KYC}
             />
             <Card
               text={"Business"}
@@ -69,7 +69,7 @@ const Documentation = () => {
                   `/onelink/${username}/${userId}/documentation/business`
                 )
               }
-              image={GreenBusiness}
+              image={Business}
             />
           </div>
         </div>
