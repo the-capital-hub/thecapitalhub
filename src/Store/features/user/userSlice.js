@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setThemeColor } from "../../../utils/setThemeColor";
 
 const initialState = {
   loggedInUser: JSON.parse(localStorage.getItem("loggedInUser")) || null,
@@ -13,6 +14,10 @@ export const userSlice = createSlice({
     loginSuccess: (state, action) => {
       localStorage.setItem("loggedInUser", JSON.stringify(action.payload));
       state.loggedInUser = action.payload;
+      setThemeColor(
+        action.payload.isInvestor === "true" ? "investor" : "startup"
+      );
+
       state.error = null;
     },
     loginFailure: (state, action) => {
@@ -25,6 +30,7 @@ export const userSlice = createSlice({
       state.loggedInUser = null;
       state.error = null;
       state.recommendations = null;
+      setThemeColor("startup");
     },
     setRecommendations: (state, action) => {
       state.recommendations = action.payload;
