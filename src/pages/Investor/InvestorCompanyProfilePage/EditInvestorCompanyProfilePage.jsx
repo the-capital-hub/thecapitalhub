@@ -17,6 +17,7 @@ import { setPageTitle } from "../../../Store/features/design/designSlice";
 import CoreTeam from "../../../components/Investor/CompanyProfilePageComponents/CoreTeam/CoreTeam";
 import { useNavigate } from "react-router-dom";
 import backIcon from "../../../Images/Chat/BackIcon.svg";
+import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 
 export default function EditInvestorCompanyProfilePage() {
   const dispatch = useDispatch();
@@ -66,10 +67,7 @@ export default function EditInvestorCompanyProfilePage() {
     }));
   };
 
-  // Handle Form submit
-  function handleFormSubmit(e) {
-    e.preventDefault();
-  }
+
 
   // Handle Description submit
   const submitBioHandler = async (e) => {
@@ -88,8 +86,17 @@ export default function EditInvestorCompanyProfilePage() {
     }
   };
 
+  const [isSaveAll, setIsSaveAll] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const handleSaveAll = (e) => {
+    setLoading(true);
     submitBioHandler(e);
+    setIsSaveAll(true);
+    setTimeout(() => {
+      setIsSaveAll(false);
+      setLoading(false);
+    }, 1000);
   }
 
   return (
@@ -108,7 +115,7 @@ export default function EditInvestorCompanyProfilePage() {
           <SmallProfileCard text={"Company Profile"} />
           {/* Company profile form */}
           <div className="bg-white rounded-3 p-5 border">
-            <CompanyProfileForm companyData={companyData} investor={true} />
+            <CompanyProfileForm companyData={companyData} investor={true} isSaveAll={isSaveAll} />
           </div>
           {/* Company Description */}
           <div className="paragraph__component bg-white rounded-3 p-5 d-flex flex-column gap-4 border">
@@ -322,7 +329,16 @@ export default function EditInvestorCompanyProfilePage() {
           <button
             className={`align-self-end btn-base investor`}
             onClick={handleSaveAll}
-          > Save ALL </button>
+          >
+            {loading ? (
+              <SpinnerBS
+                colorClass={"text-dark"}
+                spinnerSizeClass="spinner-border-sm"
+              />
+            ) : (
+              "Save all"
+            )}
+          </button>
         </div>
         {/* Right side content */}
         <div className="right__content">

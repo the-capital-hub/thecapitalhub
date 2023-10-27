@@ -45,7 +45,11 @@ const SECTORS = [
   "Sales and Marketing",
 ];
 
-export default function CompanyProfileForm({ companyData, investor = false }) {
+export default function CompanyProfileForm({
+  companyData,
+  investor = false,
+  isSaveAll,
+}) {
   // States for form
   const [formData, setFormData] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
@@ -58,6 +62,12 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
   const [investorfromSubmit, setInvestorfromSubmit] = useState(false);
 
   const [popupData, setPopupData] = useState("");
+
+  useEffect(() => {
+    if (isSaveAll) {
+      handleSubmit();
+    }
+  }, [isSaveAll]);
 
   useEffect(() => {
     if (investor) {
@@ -130,8 +140,8 @@ export default function CompanyProfileForm({ companyData, investor = false }) {
   };
 
   // Handle Submit
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    // e.preventDefault();
 
     try {
       if (selectedFile) {
