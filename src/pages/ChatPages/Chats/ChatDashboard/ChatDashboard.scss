@@ -177,6 +177,7 @@
         }
 
         .mymessage_container {
+          width: fit-content;
           max-width: 60%;
           background-color: var(--currentTheme);
           color: var(--currentTheme-text);
@@ -192,6 +193,12 @@
 
           a {
             color: white;
+          }
+
+          @media (min-width: 821px) {
+            &.img {
+              max-width: 30%;
+            }
           }
 
           .video-message {

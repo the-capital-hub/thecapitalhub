@@ -1,10 +1,15 @@
 import "./BSCarousel.scss";
 
-function BSCarousel({ className, id = "defaultCarousel", images }) {
+function BSCarousel({
+  className,
+  id = "defaultCarousel",
+  dataLength,
+  children,
+}) {
   return (
-    <div id={id} className={`carousel slide ${className}`}>
+    <div id={id} className={`custom-bs-carousel carousel carousel-dark slide ${className}`}>
       <div className="carousel-indicators">
-        {images?.map((_, i) => (
+        {new Array(dataLength).fill(null)?.map((_, i) => (
           <button
             key={i}
             type="button"
@@ -16,13 +21,7 @@ function BSCarousel({ className, id = "defaultCarousel", images }) {
           ></button>
         ))}
       </div>
-      <div className="carousel-inner">
-        {images?.map((image, i) => (
-          <div key={i} className={`carousel-item ${!i && "active"}`}>
-            <img src={image} className="d-block w-100" alt="..." />
-          </div>
-        ))}
-      </div>
+      <div className="carousel-inner">{children}</div>
       <button
         className="carousel-control-prev"
         type="button"

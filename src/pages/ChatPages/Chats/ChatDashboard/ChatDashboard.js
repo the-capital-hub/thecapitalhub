@@ -348,7 +348,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                         </div>
                       )}
                       {message?.image && (
-                        <div className="mymessage_container">
+                        <div className="mymessage_container img">
                           <img
                             src={message.image}
                             className="image-message"
