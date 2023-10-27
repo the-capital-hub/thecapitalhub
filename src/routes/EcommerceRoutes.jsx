@@ -37,7 +37,7 @@ function EcommerceRoutes() {
         }
       />
       <Route
-        path="f-tech"
+        path="fintech"
         element={
           <Suspense fallback={<SuspenseLoader />}>
             <FtechLandingPage />
@@ -45,7 +45,7 @@ function EcommerceRoutes() {
         }
       />
       <Route
-        path="transport"
+        path="logistics"
         element={
           <Suspense fallback={<SuspenseLoader />}>
             <TransportLandingPage />

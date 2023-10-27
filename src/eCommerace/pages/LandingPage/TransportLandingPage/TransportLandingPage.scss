@@ -1,5 +1,4 @@
 .transport-landing-page {
-  background-color: #fdfdfd;
   .first-section {
     gap: 10px;
     .inner-section {
@@ -8,7 +7,7 @@
         h6 {
           color: #583cea;
         }
-        button {
+        .LinkBtn {
           background: #583cea;
           border-radius: 40px;
           padding: 10px 20px;
@@ -16,6 +15,8 @@
           outline: none;
           width: max-content;
           border: none;
+          text-decoration: none;
+
 
           &:hover {
             background-color: #7158f1;
@@ -38,7 +39,7 @@
     p {
       text-align: start;
     }
-    button {
+    .LinkBtn {
       background: #583cea;
       border-radius: 40px;
       padding: 10px 20px;
@@ -46,6 +47,8 @@
       outline: none;
       width: max-content;
       border: none;
+      text-decoration: none;
+
 
       &:hover {
         background-color: #7158f1;
@@ -109,7 +112,7 @@
         font-size: 48px;
       }
       padding: 10px;
-      button {
+      .LinkBtn {
         background: #583cea;
         border-radius: 40px;
         padding: 10px 20px;
@@ -117,6 +120,8 @@
         outline: none;
         width: max-content;
         border: none;
+        text-decoration: none;
+
 
         &:hover {
           background-color: #7158f1;
@@ -139,7 +144,7 @@
     .left-section {
       padding: 10px;
       text-align: start;
-      button {
+      .LinkBtn {
         background: #583cea;
         border-radius: 40px;
         padding: 10px 20px;
@@ -147,6 +152,7 @@
         outline: none;
         width: max-content;
         border: none;
+        text-decoration: none;
 
         &:hover {
           background-color: #7158f1;

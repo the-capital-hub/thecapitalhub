@@ -3,7 +3,8 @@ import "./foodLandingPage.scss";
 import assets from "../../../../Images/Ecommerace/FoodLandingPage/index";
 import Reviewcarousel from "../../../../components/ECommerace/FoodLandingPage/ReviewCarousel/Reviewcarousel";
 import ScrollableComponent from "../../../../components/ECommerace/FoodLandingPage/ScrollableComponent/ScrollableComponent";
-import { Helmet } from 'react-helmet';
+import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 function FoodLandingPage() {
   const reviews = [
     {
@@ -51,25 +52,26 @@ function FoodLandingPage() {
   ];
 
   return (
-    <div className="landing-page container-fluid">
-<Helmet>
+    <div className="food_landing-page_Container container-fluid">
+      <Helmet>
         <meta charSet="utf-8" />
         <title>Food-Tech</title>
-        <meta name="description" content="Discover a world of culinary convenience with our food tech platform.
+        <meta
+          name="description"
+          content="Discover a world of culinary convenience with our food tech platform.
 Order delicious meals, reserve tables, connect with fellow foodies, and track your orders
 seamlessly. Get up to 50% off during the festival season. Prioritize your well-being with our
 high-quality, delicious, and fresh ingredients. Join our satisfied customers who have
-experienced exceptional dining and food delivery. Order from The Capital Hub today!" />
+experienced exceptional dining and food delivery. Order from The Capital Hub today!"
+        />
       </Helmet>
       <div className="frist-section d-flex flex-column  justify-content-evenly flex-md-row ">
         <div className="left-section d-flex flex-column justify-content-evenly md-p-3   ">
           <p className="fw-bold"># 1 Food Delivery Services</p>
           <h1>Fresh Food At </h1>
           <h1 className="text-orange">Your Fingertips</h1>
-          <h6>
-          Elevate Your Culinary Adventures with Capital HUB
-          </h6>
-          <button>Order now</button>
+          <h6>Elevate Your Culinary Adventures with Capital HUB</h6>
+          <Link to="/web-development" className="LinkBtn">Taking Us</Link>
         </div>
         <div className="right-section py-2    d-flex justify-content-evenly">
           <img src={assets.multifoods} alt="multiFood" />
@@ -77,7 +79,7 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
         <img src={assets.downArrow} alt="downArrow" className="down-arrow" />
       </div>
 
-      <div className="second-section d-flex flex-column align-items-center  container ">
+      <div className="second-section d-flex flex-column align-items-center   ">
         <h3>Best Features</h3>
         <h1>Our Best Features For You</h1>
         {/* <p>
@@ -89,8 +91,9 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
             <img src={assets.foodBox} alt="foodBox" />
             <h5>Order Food with Ease</h5>
             <p>
-            Satisfy your cravings with just a few clicks! Our food tech platform delivers
-delicious meals right to your doorstep, providing unmatched convenience
+              Satisfy your cravings with just a few clicks! Our food tech
+              platform delivers delicious meals right to your doorstep,
+              providing unmatched convenience
             </p>
           </div>
 
@@ -98,9 +101,9 @@ delicious meals right to your doorstep, providing unmatched convenience
             <img src={assets.roundBox} alt="roundBox" />
             <h5>"Book Tables at Top Restaurants</h5>
             <p>
-            "Reserve your seat effortlessly and indulge in culinary excellence at the finest
-restaurants in town. Elevate your dining experience with our user-friendly 'book table'
-feature.
+              Reserve your seat effortlessly and indulge in culinary excellence
+              at the finest restaurants in town. Elevate your dining experience
+              with our user-friendly 'book table' feature.
             </p>
           </div>
 
@@ -108,8 +111,9 @@ feature.
             <img src={assets.Group} alt="Group" />
             <h5>Connect with Foodies</h5>
             <p>
-            Join our vibrant foodie community to share recipes, discover hidden gems,
-and savour the joy of food together. Connect with like-minded culinary enthusiasts.
+              Join our vibrant foodie community to share recipes, discover
+              hidden gems, and savour the joy of food together. Connect with
+              like-minded culinary enthusiasts.
             </p>
           </div>
 
@@ -117,8 +121,9 @@ and savour the joy of food together. Connect with like-minded culinary enthusias
             <img src={assets.box} alt="box" />
             <h5>Track Your Order in Real-Time</h5>
             <p>
-            "Stay informed with transparent, real-time order tracking. Witness your meal's
-journey from the kitchen to your doorstep with precision at your fingertips
+              Stay informed with transparent, real-time order tracking. Witness
+              your meal's journey from the kitchen to your doorstep with
+              precision at your fingertips
             </p>
           </div>
         </div>
@@ -132,11 +137,11 @@ journey from the kitchen to your doorstep with precision at your fingertips
           </h1>
           <h1>Festival Season!</h1>
           <p>
-          Celebrate the festive spirit with joy and savings! Enjoy exclusive offers of up
-to 50% off on a wide range of products and experiences during this festival season. Don't
-miss out.
+            Celebrate the festive spirit with joy and savings! Enjoy exclusive
+            offers of up to 50% off on a wide range of products and experiences
+            during this festival season. Don't miss out.
           </p>
-          <button>Order now</button>
+          <Link to="/web-development" className="LinkBtn">Taking Us</Link>
         </div>
         <div className="right-section">
           <img src={assets.foodVessel} alt="foodVessel" className="w-75 mb-5" />
@@ -154,13 +159,13 @@ miss out.
             />
           </div>
           <div className="right-section d-flex    align-self-center flex-column container">
-            <h1>"High-Quality Food for Your Health</h1>
+            <h1>High-Quality Food for Your Health</h1>
             <p>
-            Description 6: "Prioritize your well-being with our commitment to providing the highest quality
-food. Nourish your body and delight your taste buds with the harmonious pairing of health
-and taste
+              Description 6: "Prioritize your well-being with our commitment to
+              providing the highest quality food. Nourish your body and delight
+              your taste buds with the harmonious pairing of health and taste
             </p>
-            <button>Learn more</button>
+            <Link to="/web-development" className="LinkBtn">Taking Us</Link>
           </div>
         </div>
       </div>
@@ -170,7 +175,7 @@ and taste
         </h1>
         <ScrollableComponent />
         <div className=" d-flex justify-content-center  my-3">
-          <button className="">View more</button>
+        <Link to="/web-development" className="LinkBtn">Taking Us</Link>
         </div>
       </div>
       <div className="fifth-section">
@@ -187,7 +192,7 @@ and taste
           proin risus Sit purus ante dictum in malesuada id.{" "}
         </p> */}
 
-        <div className=" input-div rounded-pill d-flex  shadow-lg  flex-row mx-md-auto ">
+        <div className=" input-div rounded-pill d-flex justify-content-center  shadow-lg  flex-row mx-md-auto ">
           <input
             type="text"
             name="search"
