@@ -43,6 +43,7 @@
         .card_text {
           display: grid;
           grid-template-columns: 25% auto;
+          gap: 1em;
 
           @media (min-width: 435px) {
             grid-template-columns: 18% auto;
