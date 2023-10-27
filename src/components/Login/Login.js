@@ -82,7 +82,6 @@ const Login = () => {
           }
         }
 
-
         // No errors, Set loginsuccessfull to true
         setIsLoginSuccessfull(true);
 
@@ -174,8 +173,9 @@ const Login = () => {
             <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-4 gap-sm-5">
               <Link to="">
                 <button
-                  className={`btn-primaryy login_btn ${!isInvestorSelected ? "startup" : ""
-                    } `}
+                  className={`btn-primaryy login_btn ${
+                    !isInvestorSelected ? "startup" : ""
+                  } `}
                   onClick={() => setIsInvestorSelected(false)}
                 >
                   StartUp
@@ -183,8 +183,9 @@ const Login = () => {
               </Link>
               <Link to="">
                 <button
-                  className={`btn-primaryy login_btn ${isInvestorSelected ? "investor" : ""
-                    } `}
+                  className={`btn-primaryy login_btn ${
+                    isInvestorSelected ? "investor" : ""
+                  } `}
                   onClick={() => setIsInvestorSelected(true)}
                 >
                   Investor
@@ -261,8 +262,7 @@ const Login = () => {
                 className={` ${isInvestorSelected ? "investor" : "startup"}`}
               >
                 {loading ? (
-                  <SpinnerBS spinnerSizeClass="spinner-border-sm" >
-                  </SpinnerBS>
+                  <SpinnerBS spinnerSizeClass="spinner-border-sm"></SpinnerBS>
                 ) : (
                   "Login"
                 )}

@@ -1,5 +1,6 @@
-export const setThemeColor = () => {
+export const setThemeColor = (custom) => {
   const themeValue =
+    custom ||
     JSON.parse(localStorage.getItem("loggedInUser"))?.isInvestor === "true"
       ? "investor"
       : "startup";
