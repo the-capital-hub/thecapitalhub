@@ -20,7 +20,7 @@ export default function MilestoneBadge({
   async function handleAddMilestone() {}
 
   return (
-    <button
+    <div
       className={`badge_container p-4 d-flex flex-column align-items-center gap-3 rounded-5 position-relative ${theme}`}
       style={{
         backgroundColor: "#EDEDED",
@@ -76,6 +76,6 @@ export default function MilestoneBadge({
           <IconDeleteFill />
         </button>
       )}
-    </button>
+    </div>
   );
 }
