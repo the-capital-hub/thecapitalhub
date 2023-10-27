@@ -4,6 +4,7 @@
     align-items: center;
     height: 90vh;
     width: 100%;
+
     .investNowContainer {
         display: flex;
         // position: absolute;
@@ -23,18 +24,21 @@
         // margin-top: 100px;
         padding: 50px;
         border-radius: 25px;
+
         .inputs {
             display: flex;
             flex-direction: column;
             gap: 20px;
             align-items: center;
             justify-content: center;
+
             button {
                 font-size: 13px;
                 padding: 10px 50px;
                 outline: none;
                 border-radius: 10px;
-                background: #d3f36b;
+                background: #fd5901;
+                color: white;
                 border: none;
             }
         }
@@ -54,6 +58,7 @@
         .investNowContainer {
             margin-left: 0px;
             width: 320px;
+
             .inputs {
                 width: 200px;
             }

@@ -169,7 +169,7 @@ const OnePager = () => {
         {onePager.length !== 0 ? (
           <div
             className="onePager_wrapper d-flex flex-column gap-4"
-            theme="investor"
+            theme="startup"
           >
             {/* onePager Company Logo */}
             <OnePagerCompanyLogo image={onePager.logo} />

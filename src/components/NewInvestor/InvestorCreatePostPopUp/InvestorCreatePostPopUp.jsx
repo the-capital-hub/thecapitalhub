@@ -13,7 +13,7 @@ import FeedPostCard from "../../Investor/Cards/FeedPost/FeedPostCard";
 import EasyCrop from "react-easy-crop";
 import IconFile from "../../Investor/SvgIcons/IconFile";
 import { BsLink45Deg } from "react-icons/bs";
-import {s3} from "../../../Service/awsConfig";
+import { s3 } from "../../../Service/awsConfig";
 
 const CreatePostPopUp = ({
   setPopupOpen,

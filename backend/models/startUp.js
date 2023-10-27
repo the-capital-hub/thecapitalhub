@@ -172,6 +172,12 @@ const startUpSchema = new Schema(
     projections: {
       type: Array,
     },
+    milestones: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Milestones",
+      },
+    ],
   },
   {
     timestamps: true,

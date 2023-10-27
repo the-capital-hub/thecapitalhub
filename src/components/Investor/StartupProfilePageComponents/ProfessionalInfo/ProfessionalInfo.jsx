@@ -5,7 +5,9 @@ import DefaultAvatar from "../../../../Images/Chat/default-user-avatar.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { getBase64 } from "../../../../utils/getBase64";
 import {
+  getInvestorById,
   getStartupByFounderId,
+  postInvestorData,
   postStartUpData,
   updateUserAPI,
 } from "../../../../Service/user";
@@ -15,6 +17,7 @@ import IconCloudUpload from "../../SvgIcons/IconCloudUpload";
 export default function ProfessionalInfo({ theme, companyFounderId }) {
   // Fetch Global State
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const isInvestor = loggedInUser.isInvestor;
   const dispatch = useDispatch();
   const [company, setCompany] = useState([]);
 
@@ -29,24 +32,39 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
     location: loggedInUser?.location || "Bangalore, India",
   });
 
-  useEffect(() => {
-    getStartupByFounderId(loggedInUser._id)
-      .then(({ data }) => {
-        console.log(data);
-        setCompany(data);
-        setProfessionalData({
-          ...professionalData,
-          company: data.company,
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
-
   // State for isEditing
   const [isEditing, setIsEditing] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+
+  // Fetch professional data
+  useEffect(() => {
+    if (isInvestor) {
+      getInvestorById(loggedInUser?.investor)
+        .then(({ data }) => {
+          console.log("investorById", data);
+          setProfessionalData({
+            ...professionalData,
+            company: data.companyName,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      getStartupByFounderId(loggedInUser._id)
+        .then(({ data }) => {
+          console.log(data);
+          setCompany(data);
+          setProfessionalData({
+            ...professionalData,
+            company: data.company,
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, []);
 
   // Handle Text Change
   function handleTextChange(e) {
@@ -56,6 +74,7 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
     });
   }
 
+  // Handle File change
   function handleFileChange(e) {
     const file = e.target.files[0];
     setSelectedFile(file);
@@ -87,7 +106,13 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
       } = await updateUserAPI(editedData);
 
       dispatch(loginSuccess(data));
-      const response = await postStartUpData(editedCompanyName);
+
+      if (isInvestor) {
+        const response = await postInvestorData(editedCompanyName);
+      } else {
+        const response = await postStartUpData(editedCompanyName);
+      }
+
       setIsEditing(false);
       setSelectedFile(null);
     } catch (error) {
@@ -96,7 +121,11 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
   }
 
   return (
-    <section className="professional_info_section d-flex flex-column gap-3 p-2 px-md-4 py-4 bg-white rounded-5 shadow-sm">
+    <section
+      className={`professional_info_section d-flex flex-column gap-3 p-2 px-md-4 py-4 bg-white shadow-sm ${
+        theme === "investor" ? "rounded-3 border" : "rounded-5"
+      }`}
+    >
       {/* header */}
       <header className="p-0 pb-4 border-bottom d-flex flex-column flex-md-row align-items-center justify-content-between">
         {/* profile picture and name */}

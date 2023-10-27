@@ -52,7 +52,6 @@ export default function CompanyProfilePage() {
           setLoading(false);
         })
     }
-    setLoading(false);
   }, [loggedInUser.investor]);
 
   const handleSearchInputChange = (e) => {
@@ -102,18 +101,23 @@ export default function CompanyProfilePage() {
   };
 
   const handleAddNew = async () => {
-    try {
-      const requestBody = {
-        userId: loggedInUser._id,
-        investor: null,
-      };
-      const { data: response } = await updateUserAPI(requestBody);
-      dispatch(loginSuccess(response.data));
-      navigate("/investor/company-profile/edit");
-    } catch (error) {
-      console.log(error);
+    const confirmed = window.confirm("Are you sure you want to add a new company?");
+
+    if (confirmed) {
+      try {
+        const requestBody = {
+          userId: loggedInUser._id,
+          investor: null,
+        };
+        const { data: response } = await updateUserAPI(requestBody);
+        dispatch(loginSuccess(response.data));
+        navigate("/investor/company-profile/edit");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
+
 
   return (
     <MaxWidthWrapper>
@@ -133,7 +137,8 @@ export default function CompanyProfilePage() {
             {!loading && (
               <>
                 {companyData.length !== 0 ? (
-                  companyData.founderId === loggedInUser._id ? (
+                  // companyData.founderId === loggedInUser._id ? (
+                  <>
                     <div className="bg-white rounded-4 p-4 shadow-sm border">
                       <Link
                         to="/investor/company-profile/edit"
@@ -142,16 +147,17 @@ export default function CompanyProfilePage() {
                         Edit company details
                       </Link>
                     </div>
-                  ) : (
+                    <p></p>
+                    {/* ) : ( */}
                     <div className="bg-white rounded-4 p-4">
                       {/* <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5"> */}
-                      <button className="btn-base investor" onClick={handleAddNew}>
+                      {/* <button className="btn-base investor" onClick={handleAddNew}>
                         Add new company details
-                      </button>
+                      </button> */}
                       {/* </Link> */}
-                      <div className="or-text-container">
+                      {/* <div className="or-text-container">
                         <p className="text-decoration-none text-dark fs-5">Or</p>
-                      </div>
+                      </div> */}
                       <p className="text-decoration-none text-dark fs-5">Choose from an existing Company</p>
                       <div>
                         <input
@@ -165,8 +171,8 @@ export default function CompanyProfilePage() {
                             {companies.map((company, index) => (
                               <div
                                 className={`suggestion-item ${selectedCompanyId === company._id
-                                    ? "active"
-                                    : ""
+                                  ? "active"
+                                  : ""
                                   }`}
                                 key={index}
                                 onClick={() =>
@@ -194,7 +200,8 @@ export default function CompanyProfilePage() {
                         </button>
                       </div>
                     </div>
-                  )
+                    {/* ) */}
+                  </>
                 ) : (
                   <div className="bg-white rounded-4 p-4">
                     <Link to="/investor/company-profile/edit" className="text-decoration-none text-dark fs-5">
@@ -219,8 +226,8 @@ export default function CompanyProfilePage() {
                             {companies.map((company, index) => (
                               <div
                                 className={`suggestion-item ${selectedCompanyId === company._id
-                                    ? "active"
-                                    : ""
+                                  ? "active"
+                                  : ""
                                   }`}
                                 key={index}
                                 onClick={() =>
@@ -282,6 +289,9 @@ export default function CompanyProfilePage() {
               </div>
             </div>
           )}
+          <button className="btn-base investor" onClick={handleAddNew}>
+            Create new company profile
+          </button>
         </div>
         {/* Right side content */}
         <div className="right__content">
