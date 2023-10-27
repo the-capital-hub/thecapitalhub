@@ -19,6 +19,7 @@ import {
   } from "../../../../Images/Ecommerace/FtechlandingPage";
   import "./FtechLandingPage.scss";
   import { Helmet } from 'react-helmet';
+  import { Link } from "react-router-dom";
 
   
   function FtechLandingPage() {
@@ -126,7 +127,8 @@ loan payments on time! Experience financial freedom and peace of mind like never
                 Explain how your company provides a centralized platform to track
                 and manage all EMIs.
               </p>
-              <button>Learn More</button>
+              {/* <button>Learn More</button> */}
+              <Link to="/web-development" className="LinkBtn">Taking Us</Link>
             </div>
             <div className="help-card">
               <p className="count">02.</p>
@@ -135,13 +137,15 @@ loan payments on time! Experience financial freedom and peace of mind like never
                 Emphasize the benefit of receiving timely alerts for due dates,
                 payment reminders, and any changes in terms or interest rates.
               </p>
-              <button>Learn More</button>
+              {/* <button>Learn More</button> */}
+              <Link to="/web-development" className="LinkBtn">Taking Us</Link>
             </div>
             <div className="help-card">
               <p className="count">03.</p>
               <h6 className="title">0 Interest loans</h6>
               <p>0 Interest loans, to help you repay loans on time</p>
-              <button className="btn">Learn More</button>
+              {/* <button className="btn">Learn More</button> */}
+              <Link to="/web-development" className="LinkBtn">Taking Us</Link>
             </div>
           </div>
         </section>
@@ -177,9 +181,10 @@ today and never worry about EMI problems again!
                   Never have to worry about tracking and planning your EMIs and
                   finances by yourself anymore!
                 </p>
-                <button className="btn btn-primary rounded-pill text-white px-4 py-1 fs-12">
+                {/* <button className="btn btn-primary rounded-pill text-white px-4 py-1 fs-12">
                   Learn More
-                </button>
+                </button> */}
+                <Link to="/web-development" className="LinkBtn btn btn-primary rounded-pill text-white px-4 py-1 fs-12">Taking Us</Link>
               </div>
             </div>
             <div className="join-us-card rounded-4">
@@ -194,9 +199,10 @@ today and never worry about EMI problems again!
                 <p className="fs-14">
                   Our 0 interest loans will help you stay ahead of your payments!
                 </p>
-                <button className="btn btn-primary rounded-pill text-white px-4 py-1 fs-12">
+                {/* <button className="btn btn-primary rounded-pill text-white px-4 py-1 fs-12">
                   Learn More
-                </button>
+                </button> */}
+                <Link to="/web-development" className="LinkBtn btn btn-primary rounded-pill text-white px-4 py-1 fs-12">Taking Us</Link>
               </div>
             </div>
             <div className="join-us-card rounded-4">
@@ -212,9 +218,7 @@ today and never worry about EMI problems again!
                   Ensure your Cibil score is always top-notch, and never have to
                   worry about not being credit-worthy in the future!
                 </p>
-                <button className="btn btn-primary rounded-pill text-white px-4 py-1 fs-12">
-                  Learn More
-                </button>
+                <Link to="/web-development" className="LinkBtn btn btn-primary rounded-pill text-white px-4 py-1 fs-12">Taking Us</Link>
               </div>
             </div>
             <div className="join-us-card rounded-4">
@@ -230,9 +234,10 @@ today and never worry about EMI problems again!
                   Save on additional interest, late fees and the like with our
                   platform!
                 </p>
-                <button className="btn btn-primary rounded-pill text-white px-4 py-1 fs-12">
+                {/* <button className="btn btn-primary rounded-pill text-white px-4 py-1 fs-12">
                   Learn More
-                </button>
+                </button> */}
+                <Link to="/web-development" className="LinkBtn btn btn-primary rounded-pill text-white px-4 py-1 fs-12">Taking Us</Link>
               </div>
             </div>
           </div>
