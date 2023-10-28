@@ -1,6 +1,10 @@
 import React from "react";
 
-export default function OffcanvasBSHeader({ title, classNames }) {
+export default function OffcanvasBSHeader({ title, classNames, onClose }) {
+  function handleCloseClick() {
+    onClose();
+  }
+
   return (
     <div className={`offcanvas-header ${classNames}`}>
       <h5 className="offcanvas-title" id="offcanvasLabel">
@@ -11,6 +15,7 @@ export default function OffcanvasBSHeader({ title, classNames }) {
         class="btn-close"
         data-bs-dismiss="offcanvas"
         ariaLabel="Close"
+        onClick={handleCloseClick}
       ></button>
     </div>
   );
