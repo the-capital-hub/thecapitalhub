@@ -172,6 +172,10 @@ const startUpSchema = new Schema(
     projections: {
       type: Array,
     },
+    age: {
+      type: String,
+      default: "",
+    },
     milestones: [
       {
         type: Schema.Types.ObjectId,
