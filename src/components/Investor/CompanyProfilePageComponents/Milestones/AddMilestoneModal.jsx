@@ -34,7 +34,11 @@ const allBadges = [
 
 const ACTIONS = { add: "add", remove: "remove" };
 
-export default function AddMilestoneModal({ theme, userMilestones }) {
+export default function AddMilestoneModal({
+  theme,
+  userMilestones,
+  setUserMilestones,
+}) {
   const [allMilestones, setAllMilestones] = useState(null);
 
   // fetch all milestones
@@ -68,13 +72,12 @@ export default function AddMilestoneModal({ theme, userMilestones }) {
             {userMilestones?.map((mile, index) => {
               return (
                 <MilestoneBadge
-                  badge={mile.badge}
-                  milestone={mile.text}
+                  milestone={mile}
                   isMini
                   key={`${mile.text}${index}`}
                   theme={theme}
                   action={ACTIONS.remove}
-                  milestoneId={mile._id}
+                  setUserMilestones={setUserMilestones}
                 />
               );
             })}
@@ -89,13 +92,12 @@ export default function AddMilestoneModal({ theme, userMilestones }) {
             {allMilestones?.map((mile, index) => {
               return (
                 <MilestoneBadge
-                  badge={mile.badge}
-                  milestone={mile.text}
+                  milestone={mile}
                   isMini
                   key={`${mile.text}${index}`}
                   theme={theme}
                   action={ACTIONS.add}
-                  milestoneId={mile?._id}
+                  setUserMilestones={setUserMilestones}
                 />
               );
             })}

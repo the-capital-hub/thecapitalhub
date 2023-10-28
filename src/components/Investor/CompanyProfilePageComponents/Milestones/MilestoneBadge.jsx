@@ -1,31 +1,40 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./MilestoneBadge.scss";
-import IconEdit from "../../SvgIcons/IconEdit";
 import IconDeleteFill from "../../SvgIcons/IconDeleteFill";
 import { PlusIcon } from "../../../NewInvestor/SvgIcons";
 import { addMilestoneToUserAPI } from "../../../../Service/user";
+import { useSelector } from "react-redux";
+
+const DATEOPTIONS = {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
 
 export default function MilestoneBadge({
-  badge,
-  milestone,
-  text,
   isMini,
   theme,
   action,
-  milestoneId,
+  setUserMilestones,
+  milestone,
 }) {
+  const { createdAt } = useSelector((state) => state.user.loggedInUser);
+  const { badge, text, _id: milestoneId } = milestone;
+
+  // States for loading
+
   // handle remove milestone
   async function handleRemoveMilestone(e, milestoneId) {}
 
   // handle add milestone
   async function handleAddMilestone(e, milestoneId) {
-    console.log("milestoneId", milestoneId);
     try {
       const { data } = await addMilestoneToUserAPI({
         milestoneId: milestoneId,
       });
-      console.log("After add milestone", data);
+      // console.log("After add milestone", data);
+      setUserMilestones((prev) => [...prev, milestone]);
     } catch (error) {
       console.log(error);
     }
@@ -61,9 +70,17 @@ export default function MilestoneBadge({
           className={`text-capitalize ${isMini ? "fs-6" : ""}`}
           style={{ minHeight: `${isMini ? "60px" : "none"}` }}
         >
-          {milestone}
+          {text}
         </h5>
-        {isMini ? "" : <p>{text}</p>}
+        {isMini ? (
+          ""
+        ) : (
+          <p>
+            {text === "Joining Capital HUB"
+              ? new Date(createdAt).toLocaleDateString([], DATEOPTIONS)
+              : ""}
+          </p>
+        )}
       </div>
       {isMini ? (
         ""
@@ -75,7 +92,7 @@ export default function MilestoneBadge({
       {isMini && action === "add" && (
         <button
           className={`action_badge btn border-0 ${theme}`}
-          onClick={handleAddMilestone}
+          onClick={(e) => handleAddMilestone(e, milestoneId)}
         >
           <PlusIcon height="1.5rem" width="1.5rem" />
         </button>
@@ -83,7 +100,7 @@ export default function MilestoneBadge({
       {isMini && action === "remove" && (
         <button
           className={`action_badge btn border-0 ${theme}`}
-          onClick={handleRemoveMilestone}
+          onClick={(e) => handleRemoveMilestone(e, milestoneId)}
         >
           <IconDeleteFill />
         </button>
