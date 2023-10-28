@@ -22,16 +22,15 @@ export default function Questionnaire() {
   async function fetchQuestion(query) {
     try {
       const { data, message } = await getQuestionsAPI(query);
-      console.log(data, message);
+      //   console.log(data, message);
       setQuestion(data);
       if (!data) {
         setAlert(message);
+        setTimeout(() => {
+          setAlert(null);
+          setOption(null);
+        }, 2000);
       }
-
-      setTimeout(() => {
-        setAlert(null);
-        setOption(null);
-      }, 2000);
     } catch (error) {
       console.error("Error fetching Question:", error);
     }
