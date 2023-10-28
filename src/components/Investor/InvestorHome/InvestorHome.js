@@ -267,7 +267,7 @@ const InvestorHome = () => {
               </div>
             </div>
           </div>
-          <div className="thirty">
+          <div className="thirty d-none d-xl-block">
             <RightProfileCard />
             <RecommendationCard />
             <NewsCorner />

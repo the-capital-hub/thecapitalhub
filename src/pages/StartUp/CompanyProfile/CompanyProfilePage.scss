@@ -1,8 +1,20 @@
 .companyProfilePage__wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-between;
   margin: 2rem 0;
+
+  display: grid;
+  grid-template-columns: 100%;
+  justify-content: space-between;
+
+  @media (min-width: 1360px) {
+    grid-template-columns: calc(100% - 22rem) 21rem;
+  }
+
+  @media (min-width: 1360px) {
+    grid-template-columns: calc(100% - 26rem) 24rem;
+  }
 
   @media (min-width: 820px) {
     flex-direction: row;
@@ -12,10 +24,6 @@
 
   .main__content {
     max-width: 100%;
-
-    @media (min-width: 1360px) {
-      max-width: calc(100% - 26rem);
-    }
 
     // border: 1px solid red;
 
@@ -27,14 +35,8 @@
   .right__content {
     display: none;
 
-    // @media (min-width: 1200px) {
-    //   display: block;
-    //   flex: 0 0 20rem;
-    // }
-
     @media (min-width: 1360px) {
       display: block;
-      flex: 0 0 24rem;
     }
   }
 }
