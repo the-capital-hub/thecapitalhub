@@ -156,7 +156,7 @@ const userSchema = new Schema(
     },
     oneLinkId: {
       type: String,
-      default: generateRandomNumber, 
+      default: generateRandomNumber,
       unique: true,
       required: true,
     },
@@ -166,7 +166,32 @@ const userSchema = new Schema(
     },
     secretKey: {
       type: String,
-    }
+    },
+
+    //startup user
+    yearsOfExperience: {
+      type: String,
+    },
+    previousExits: {
+      type: String,
+    },
+    diversityMetrics: [
+      {
+        type: String,
+      },
+    ],
+    //investor user
+    sectorPreferences: [
+      {
+        type: String,
+      },
+    ],
+    investmentSize: {
+      type: String,
+    },
+    investmentStage: {
+      type: String,
+    },
   },
   {
     timestamps: true,
@@ -200,8 +225,8 @@ userSchema.pre(
 );
 
 function generateRandomNumber() {
-  const randomNumber = Math.floor(100000 + Math.random() * 900000); 
-  return randomNumber.toString(); 
+  const randomNumber = Math.floor(100000 + Math.random() * 900000);
+  return randomNumber.toString();
 }
 
 export const UserModel = model("Users", userSchema);
