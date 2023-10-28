@@ -344,22 +344,19 @@ export default function StartupExplore() {
                   onChange={handleOnChange}
                   options={filterOptions?.productStage || productStageOptions}
                   label="Product Stage"
-                  name="productStage
-                  "
+                  name="productStage"
                 />
                 <FilterBySelect
                   onChange={handleOnChange}
                   options={filterOptions?.stage || stageOptions}
                   label="Stage"
-                  name="stage
-                  "
+                  name="stage"
                 />
                 <FilterBySelect
                   onChange={handleOnChange}
                   options={filterOptions?.age || ageOptions}
                   label="Age"
-                  name="age
-                  "
+                  name="age"
                 />
               </>
             )}

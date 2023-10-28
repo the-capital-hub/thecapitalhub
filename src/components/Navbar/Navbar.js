@@ -65,10 +65,13 @@ function Navbar() {
           </div>
           <div>
             <li>
-              <Link
-                to="/signup"
+              <button
+                // to="/signup"
                 className={"mobile_loginbtn"}
-                onClick={() => setSelectedLink("login")}
+                onClick={() => {
+                  setSelectedLink("login");
+                  isLoggedIn();
+                }}
               >
                 {loggedInUser && isLoggedInLocal ? (
                   <>
@@ -77,7 +80,7 @@ function Navbar() {
                 ) : (
                   "Log in"
                 )}
-              </Link>
+              </button>
             </li>
           </div>
         </div>

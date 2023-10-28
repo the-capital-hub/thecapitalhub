@@ -415,11 +415,22 @@ export const addUserAsInvestor = async (userId, investorId) => {
 export const getExplore = async (filters) => {
   try {
     const {
+      type,
       sector,
       gender,
       city,
       size,
-      type
+      yearsOfExperience,
+      previousExits,
+      diversityMetrics,
+      sectorPreference,
+      investmentSize,
+      investmentStage,
+      fundingRaised,
+      productStage,
+      stage,
+      age,
+      education,
     } = filters;
 
     // for startups
@@ -433,6 +444,18 @@ export const getExplore = async (filters) => {
       }
       if (size) {
         query.noOfEmployees = { $gte: size };
+      }
+      if (fundingRaised) {
+        query.fundingRaised = fundingRaised;
+      }
+      if (productStage) {
+        query.productStage = productStage;
+      }
+      if (stage) {
+        query.stage = stage;
+      }
+      if (age) {
+        query.age = age;
       }
       const startups = await StartUpModel.find(query);
       return {
@@ -452,12 +475,22 @@ export const getExplore = async (filters) => {
       }
       const investors = await InvestorModel.find(query);
       const founderIds = investors.map((investor) => investor.founderId);
-      const founderQuery = {
-        gender: gender,
-      };
+      const founderQuery = {};
+      if (gender) {
+        founderQuery.gender = gender;
+      }
+      if (sectorPreference) {
+        founderQuery.sectorPreference = { $in: size };
+      }
+      if (investmentSize) {
+        founderQuery.investmentSize = investmentSize;
+      }
+      if (investmentStage) {
+        founderQuery.investmentStage = investmentStage;
+      }
       const founders = await UserModel.find({
         _id: { $in: founderIds },
-        ...(gender ? founderQuery : {}),
+        ...founderQuery,
         userStatus: "active",
       }).select("-password")
         .populate("investor");
@@ -478,12 +511,25 @@ export const getExplore = async (filters) => {
       }
       const startups = await StartUpModel.find(query);
       const founderIds = startups.map((startup) => startup.founderId);
-      const founderQuery = {
-        gender: gender,
-      };
+      const founderQuery = {};
+      if (gender) {
+        founderQuery.gender = gender;
+      }
+      if (previousExits) {
+        founderQuery.previousExits = previousExits;
+      }
+      if (yearsOfExperience) {
+        founderQuery.yearsOfExperience = yearsOfExperience;
+      }
+      if (education) {
+        founderQuery.education = education;
+      }
+      if (diversityMetrics) {
+        founderQuery.diversityMetrics = { $in: diversityMetrics };
+      }
       const founders = await UserModel.find({
         _id: { $in: founderIds },
-        ...(gender ? founderQuery : {}),
+        ...founderQuery,
         userStatus: "active",
       }).select("-password")
         .populate("startUp");

@@ -39,6 +39,93 @@ const genderOptions = ["Male", "Female"];
 
 const sizeOptions = ["10+", "100+", "1000+"];
 
+const ageOptions = ["0-2", "2-3", "4-5", "5-10", "10+"];
+
+const stageOptions = [
+  "Pre-seed",
+  "Seed",
+  "Series A",
+  "Series B",
+  "Series C",
+  "Series D and Beyond",
+];
+
+const investmentStageOptions = [
+  "Seed Stage",
+  "Series A",
+  "Series B",
+  "Series C",
+  "Series D and Beyond",
+  "Early-stage (Seed to Series A)",
+  "Growth-stage (Series B and Beyond)",
+];
+
+const fundingRaisedOptions = [
+  "Less than ₹10 Lakh",
+  "₹10 Lakh - ₹50 Lakh",
+  "₹50 Lakh - ₹1 Crore",
+  "More than ₹1 Crore",
+];
+
+const productStageOptions = [
+  "Concept/Idea",
+  "Prototype",
+  "Minimum Viable Product (MVP)",
+  "Beta Testing",
+  "Fully Developed Product",
+];
+
+const investmentSizeOptions = [
+  "Micro-investments (< ₹10,000)",
+  "Small Investments (₹10,000 - ₹50,000)",
+  "Moderate Investments (₹50,000 - ₹2 Lakhs)",
+  "Significant Investments (₹2 Lakhs - ₹10 Lakhs)",
+  "Large Investments (₹10 Lakhs - ₹1 Crore)",
+  "Major Investments (₹1 Crore and above)",
+];
+
+
+// const sectorPreferenceOptions = [];
+
+const previousExitsOptions = [
+  "Successful IPO",
+  "Acquisition by a Larger Company",
+  "Merger",
+  "No Previous Exit Experience",
+];
+
+const yearsOfExperienceOptions = [
+  "0-2 years",
+  "2-5 years",
+  "5-10 years",
+  "10-15 years",
+  "15+ years",
+];
+
+const educationOptions = [
+  "Computer Science Engineering",
+  "Electrical and Electronics Engineering",
+  "Mechanical Engineering",
+  "Civil Engineering",
+  "Chemical Engineering",
+  "Aerospace Engineering",
+  "Biomedical Engineering",
+  "Environmental Engineering",
+  "Software Engineering",
+  "MBA in Marketing",
+  "MBA in Finance",
+  "MBA in Data Science",
+];
+
+const diversityMetricsOptions = [
+  "Gender Diversity",
+  "Ethnic Diversity",
+  "Age Diversity",
+  "LGBTQ+ Inclusivity",
+  "Disability Inclusivity",
+  "Socioeconomic Diversity",
+];
+
 function Explore() {
   const dispatch = useDispatch();
 
@@ -141,7 +228,7 @@ function Explore() {
           <h5 className="h5">Find StartUps by</h5>
           <div className="filter_by">
             <button
-              className= {activeTab === "Startup" ? "active" : "s_f_i_button "}
+              className={activeTab === "Startup" ? "active" : "s_f_i_button "}
               onClick={() => {
                 setFilters(null);
                 setActiveTab("Startup");
@@ -203,6 +290,24 @@ function Explore() {
                   label="Gender"
                   name="gender"
                 />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.sectors || sectorOptions}
+                  label="Sector Preference"
+                  name="sectorPreference"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.investmentSize || investmentSizeOptions}
+                  label="Investment Size"
+                  name="investmentSize"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.investmentStage || investmentStageOptions}
+                  label="Investment Stage"
+                  name="investmentStage"
+                />
               </>
             )}
             {activeTab === "Startup" && (
@@ -225,6 +330,31 @@ function Explore() {
                   label="Size"
                   name="size"
                 />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.fundingRaised || fundingRaisedOptions}
+                  label="Funding Raised"
+                  name="fundingRaised"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.productStage || productStageOptions}
+                  label="Product Stage"
+                  name="productStage"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.stage || stageOptions}
+                  label="Stage"
+                  name="stage"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.age || ageOptions}
+                  label="Age"
+                  name="age
+                  "
+                />
               </>
             )}
             {activeTab === "Founder" && (
@@ -246,6 +376,30 @@ function Explore() {
                   options={filterOptions?.genders || genderOptions}
                   label="Gender"
                   name="gender"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.previousExits || previousExitsOptions}
+                  label="Previous Exits"
+                  name="previousExits"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.yearsOfExperience || yearsOfExperienceOptions}
+                  label="Years of Experience"
+                  name="yearsOfExperience"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.education || educationOptions}
+                  label="Education"
+                  name="education"
+                />
+                <FilterBySelect
+                  onChange={handleOnChange}
+                  options={filterOptions?.diversityMetrics || diversityMetricsOptions}
+                  label="Diversity Metrics"
+                  name="diversityMetrics"
                 />
               </>
             )}
