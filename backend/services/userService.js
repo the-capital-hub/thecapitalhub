@@ -7,7 +7,6 @@ import jwt from "jsonwebtoken";
 import { secretKey } from "../constants/config.js";
 import { sendMail } from "../utils/mailHelper.js";
 import bcrypt from "bcrypt";
-import { hashPassword } from "../utils/passwordManager.js";
 
 const adminMail = "learn.capitalhub@gmail.com";
 
@@ -461,7 +460,7 @@ export const getExplore = async (filters) => {
         ...(gender ? founderQuery : {}),
         userStatus: "active",
       }).select("-password")
-      .populate("investor");
+        .populate("investor");
       return {
         status: 200,
         message: "Investors data retrieved",
@@ -573,7 +572,7 @@ export const validateSecretKey = async ({ oneLinkId, secretOneLinkKey }) => {
       return {
         status: 200,
         message: "Secret key is valid",
-        token, 
+        token,
       };
     } else {
       return {
@@ -614,6 +613,36 @@ export const createSecretKey = async (userId, secretOneLinkKey) => {
     return {
       status: 500,
       message: "An error occurred while creating and storing the secret key.",
+    };
+  }
+};
+
+export const googleLogin = async (credential) => {
+  try {
+    const { email } = jwt.decode(credential);
+    const user = await UserModel.findOne({ email: email });
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found.",
+      }
+    }
+    const token = jwt.sign(
+      { userId: user._id, email: user.email },
+      secretKey
+    );
+    user.password = undefined;
+    return {
+      status: 200,
+      message: "Google Login successfull",
+      data: user,
+      token: token,
+    };
+  } catch (error) {
+    console.error("Error login:", error);
+    return {
+      status: 500,
+      message: "An error occurred while login using google.",
     };
   }
 };
