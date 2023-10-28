@@ -100,6 +100,7 @@ const API = Object.freeze({
   getUserMilestones: `${baseUrl}/startup/getUserMilestones`,
   addMilestoneToUser: `${baseUrl}/startup/addMilestoneToUser`,
   deleteUserMilestone: `${baseUrl}/startup/deleteUserMilestone`,
+  googleLogin: `${baseUrl}/users/googleLogin`,
 });
 
 export default API;
