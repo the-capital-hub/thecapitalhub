@@ -1225,3 +1225,13 @@ export const googleLoginAPI = async (credential) => {
     throw error;
   }
 };
+
+export const getQuestionsAPI = async (query) => {
+  try {
+    const response = await axiosInstance.get(`${API.getQuestions}/${query}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching question:", error);
+    throw error;
+  }
+};
