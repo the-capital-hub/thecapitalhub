@@ -1,33 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./MilestoneBadge.scss";
-import IconEdit from "../../SvgIcons/IconEdit";
 import IconDeleteFill from "../../SvgIcons/IconDeleteFill";
 import { PlusIcon } from "../../../NewInvestor/SvgIcons";
-import { addMilestoneToUserAPI } from "../../../../Service/user";
+import {
+  addMilestoneToUserAPI,
+  deleteUserMilestoneAPI,
+} from "../../../../Service/user";
+import { useSelector } from "react-redux";
+import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
+
+const DATEOPTIONS = {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+};
 
 export default function MilestoneBadge({
-  badge,
-  milestone,
-  text,
   isMini,
   theme,
   action,
-  milestoneId,
+  setUserMilestones,
+  milestone,
 }) {
+  const { createdAt, oneLinkId } = useSelector(
+    (state) => state.user.loggedInUser
+  );
+  const { badge, text, _id: milestoneId } = milestone;
+
+  // States for loading
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState(null);
+
   // handle remove milestone
-  async function handleRemoveMilestone(e, milestoneId) {}
+  async function handleRemoveMilestone(e, milestoneId, oneLinkId) {
+    setLoading(true);
+    try {
+      const response = await deleteUserMilestoneAPI(oneLinkId, milestoneId);
+      // console.log("response from delete", response);
+      setUserMilestones((prev) => {
+        return prev.filter((elem) => elem._id !== milestoneId);
+      });
+      setLoading(false);
+    } catch (error) {
+      console.error("Error deleting milestone:", error);
+      setAlert("Error removing milestone! Please try again.");
+      setTimeout(() => {
+        setAlert(null);
+        setLoading(false);
+      }, 2000);
+    }
+  }
 
   // handle add milestone
   async function handleAddMilestone(e, milestoneId) {
-    console.log("milestoneId", milestoneId);
+    setLoading(true);
     try {
       const { data } = await addMilestoneToUserAPI({
         milestoneId: milestoneId,
       });
-      console.log("After add milestone", data);
+      // console.log("After add milestone", data);
+      setUserMilestones((prev) => [...prev, milestone]);
+      setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error("Error adding milestone to user", error);
+      setAlert("Error Adding milestone! Please try again.");
+      setTimeout(() => {
+        setAlert(null);
+        setLoading(false);
+      }, 2000);
     }
   }
 
@@ -61,9 +102,17 @@ export default function MilestoneBadge({
           className={`text-capitalize ${isMini ? "fs-6" : ""}`}
           style={{ minHeight: `${isMini ? "60px" : "none"}` }}
         >
-          {milestone}
+          {text}
         </h5>
-        {isMini ? "" : <p>{text}</p>}
+        {isMini ? (
+          ""
+        ) : (
+          <p>
+            {text === "Joining Capital HUB"
+              ? new Date(createdAt).toLocaleDateString([], DATEOPTIONS)
+              : ""}
+          </p>
+        )}
       </div>
       {isMini ? (
         ""
@@ -75,18 +124,42 @@ export default function MilestoneBadge({
       {isMini && action === "add" && (
         <button
           className={`action_badge btn border-0 ${theme}`}
-          onClick={handleAddMilestone}
+          onClick={(e) => handleAddMilestone(e, milestoneId)}
         >
-          <PlusIcon height="1.5rem" width="1.5rem" />
+          {loading ? (
+            <SpinnerBS
+              spinnerSizeClass="spinner-border-sm"
+              colorClass={`${
+                theme === "investor" ? "text-black" : "text-white"
+              }`}
+            />
+          ) : (
+            <PlusIcon height="1.5rem" width="1.5rem" />
+          )}
         </button>
       )}
-      {isMini && action === "remove" && (
+      {isMini && action === "remove" && text !== "Joining Capital HUB" && (
         <button
           className={`action_badge btn border-0 ${theme}`}
-          onClick={handleRemoveMilestone}
+          onClick={(e) => handleRemoveMilestone(e, milestoneId, oneLinkId)}
+          disabled={loading}
         >
-          <IconDeleteFill />
+          {loading ? (
+            <SpinnerBS
+              spinnerSizeClass="spinner-border-sm"
+              colorClass={`${
+                theme === "investor" ? "text-black" : "text-white"
+              }`}
+            />
+          ) : (
+            <IconDeleteFill />
+          )}
         </button>
+      )}
+      {alert && (
+        <div className="position-absolute m-2 d-flex justify-content-center align-items-center rounded-5 alert_text small text-danger text-center">
+          <em>{alert}</em>
+        </div>
       )}
     </div>
   );

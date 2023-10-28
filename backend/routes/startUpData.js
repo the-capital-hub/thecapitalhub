@@ -38,7 +38,7 @@ router.post("/investNow", investNowController);
 router.post("/createMilestone", createMilestoneController);
 
 // Middleware for checking token
-// router.use(authenticateToken);
+router.use(authenticateToken);
 
 // Get startup data
 router.get("/details/:userId", startUpData);

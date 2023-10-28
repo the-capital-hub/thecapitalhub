@@ -1198,3 +1198,13 @@ export const addMilestoneToUserAPI = async (milestoneId) => {
     throw error;
   }
 }
+
+export const deleteUserMilestoneAPI = async (oneLinkId, milestoneId) => {
+  try {
+    const response = await axiosInstance.delete(`${API.deleteUserMilestone}/${oneLinkId}/${milestoneId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting milestone:", error);
+    throw error;
+  }
+}
