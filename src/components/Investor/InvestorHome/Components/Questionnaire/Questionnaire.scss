@@ -1,0 +1,10 @@
+.questionnaire_wrapper {
+  .offcanvas {
+    --bs-offcanvas-width: min(95dvw, 600px);
+  }
+
+  .user_textarea {
+    background-color: #efefef;
+    outline: 0;
+  }
+}

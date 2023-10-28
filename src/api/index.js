@@ -100,6 +100,7 @@ const API = Object.freeze({
   getUserMilestones: `${baseUrl}/startup/getUserMilestones`,
   addMilestoneToUser: `${baseUrl}/startup/addMilestoneToUser`,
   deleteUserMilestone: `${baseUrl}/startup/deleteUserMilestone`,
+  getQuestions: `${baseUrl}/question/getQuestions`,
 });
 
 export default API;

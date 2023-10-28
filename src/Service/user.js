@@ -1157,11 +1157,9 @@ export const exitCommunityAPI = async (communityId, userId) => {
   }
 };
 
-export const getFoldersApi = async ( userId) => {
+export const getFoldersApi = async (userId) => {
   try {
-    const res = await axiosInstance.get(
-      `${API.getfolders}/${userId}`
-    );
+    const res = await axiosInstance.get(`${API.getfolders}/${userId}`);
     return res.data;
   } catch (error) {
     console.error("Error in getfolders:", error);
@@ -1170,41 +1168,58 @@ export const getFoldersApi = async ( userId) => {
 };
 
 export const getAllMileStoneAPI = async () => {
-  try{
+  try {
     const response = await axiosInstance.get(`${API.getAllMileStone}`);
     return response.data;
-  } catch (error){
+  } catch (error) {
     console.error("Error fetching all milestones:", error);
     throw error;
   }
-}
+};
 
 export const getUserMilestonesAPI = async (onelinkId) => {
   try {
-    const response = await axiosInstance.get(`${API.getUserMilestones}/${onelinkId}`);
+    const response = await axiosInstance.get(
+      `${API.getUserMilestones}/${onelinkId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error fetching user milestones:", error);
     throw error;
   }
-}
+};
 
 export const addMilestoneToUserAPI = async (milestoneId) => {
   try {
-    const response = await axiosInstance.post(`${API.addMilestoneToUser}`, milestoneId);
+    const response = await axiosInstance.post(
+      `${API.addMilestoneToUser}`,
+      milestoneId
+    );
     return response.data;
   } catch (error) {
     console.error("Error adding milestone to user:", error);
     throw error;
   }
-}
+};
 
 export const deleteUserMilestoneAPI = async (oneLinkId, milestoneId) => {
   try {
-    const response = await axiosInstance.delete(`${API.deleteUserMilestone}/${oneLinkId}/${milestoneId}`);
+    const response = await axiosInstance.delete(
+      `${API.deleteUserMilestone}/${oneLinkId}/${milestoneId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error deleting milestone:", error);
     throw error;
   }
-}
+};
+
+export const getQuestionsAPI = async (query) => {
+  try {
+    const response = await axiosInstance.get(`${API.getQuestions}/${query}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching question:", error);
+    throw error;
+  }
+};
