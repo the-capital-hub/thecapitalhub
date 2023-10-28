@@ -6,7 +6,7 @@ import FIcon from "../../Images/Group 23.svg";
 import AIcon from "../../Images/Group 24.svg";
 import PhoneInput from "react-phone-number-input";
 import { Link, useNavigate } from "react-router-dom";
-import { postUserLogin } from "../../Service/user";
+import { googleLoginAPI, postUserLogin } from "../../Service/user";
 import AfterSuccessPopUp from "../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import InvestorAfterSuccessPopUp from "../PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
 import ErrorPopUp from "../PopUp/ErrorPopUp/ErrorPopUp";
@@ -134,10 +134,33 @@ const Login = () => {
   // Google sign in
   const googleUserVerifyHandler = async ({ credential }) => {
     try {
-      // const { data, token } = await googleLoginAPI(credential);
-      console.log({ credential });
-      // send dispatch login success here using the data and token
-      // navigate to home
+      const { data, token } = await googleLoginAPI(credential);
+      localStorage.setItem("accessToken", token);
+      localStorage.setItem("isLoggedIn", "true");
+      if (!isInvestorSelected) {
+        if (data.isInvestor === "true") {
+          setError("Invalid credentials");
+          return;
+        }
+      }
+      if (isInvestorSelected) {
+        if (data.isInvestor === "false") {
+          setError("Invalid credentials");
+          return;
+        }
+      }
+
+      setIsLoginSuccessfull(true);
+
+      setTimeout(() => {
+        setIsInvestorSelected(false);
+        setIsLoginSuccessfull(false);
+
+        if (!data.investor) navigate("/home");
+        else navigate("/investor/home");
+      }, 2000);
+
+      dispatch(loginSuccess(data));
     } catch (error) {
       console.log(error);
     }

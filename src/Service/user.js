@@ -1214,6 +1214,18 @@ export const deleteUserMilestoneAPI = async (oneLinkId, milestoneId) => {
   }
 };
 
+export const googleLoginAPI = async (credential) => {
+  try {
+    const response = await axiosInstance.post(`${API.googleLogin}`, {
+      credential,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error google sign in:", error);
+    throw error;
+  }
+};
+
 export const getQuestionsAPI = async (query) => {
   try {
     const response = await axiosInstance.get(`${API.getQuestions}/${query}`);

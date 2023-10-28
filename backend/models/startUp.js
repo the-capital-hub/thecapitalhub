@@ -174,7 +174,6 @@ const startUpSchema = new Schema(
     },
     age: {
       type: String,
-      default: "",
     },
     milestones: [
       {
@@ -182,6 +181,15 @@ const startUpSchema = new Schema(
         ref: "Milestones",
       },
     ],
+    fundingRaised: {
+      type: String,
+    },
+    productStage: {
+      type: String,
+    },
+    stage: {
+      type: String,
+    },
   },
   {
     timestamps: true,
