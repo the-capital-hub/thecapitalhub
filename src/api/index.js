@@ -99,6 +99,7 @@ const API = Object.freeze({
   getAllMileStone: `${baseUrl}/startup/getAllMileStone`,
   getUserMilestones: `${baseUrl}/startup/getUserMilestones`,
   addMilestoneToUser: `${baseUrl}/startup/addMilestoneToUser`,
+  deleteUserMilestone: `${baseUrl}/startup/deleteUserMilestone`,
 });
 
 export default API;
