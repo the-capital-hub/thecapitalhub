@@ -14,6 +14,7 @@ import {
   getMileStoneController,
   addMilestoneToUserController,
   getUserMilestonesController,
+  deleteUserMilestoneController,
 } from "../controllers/startUpController.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 
@@ -54,5 +55,7 @@ router.get("/getAllMileStone", getMileStoneController);
 //milestone 
 router.post("/addMilestoneToUser", addMilestoneToUserController);
 router.get("/getUserMilestones/:oneLinkId", getUserMilestonesController);
+router.delete("/deleteUserMilestone/:oneLinkId/:milestoneId", deleteUserMilestoneController);
+
 
 export default router;

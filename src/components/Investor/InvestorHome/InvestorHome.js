@@ -25,6 +25,7 @@ import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import ConnectionCard from "../ConnectionCard/ConnectionCard";
 import ProfessionalInfo from "../StartupProfilePageComponents/ProfessionalInfo/ProfessionalInfo";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import Questionnaire from "./Components/Questionnaire/Questionnaire";
 
 const InvestorHome = () => {
   // Fetch loggedInUser from global state
@@ -100,6 +101,17 @@ const InvestorHome = () => {
                 theme={"startup"}
                 companyFounderId={companyFounderId}
               />
+
+              {/* offcanvas trigger - Add missing details. Show if details are missing */}
+              <button
+                className="btn border-0 bg-white rounded-5 shadow-sm lh-1 py-4 fs-5"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#questionnaireOffCanvas"
+                ariaControls="offcanvasTop"
+                style={{ color: "#fd5901" }}
+              >
+                Add missing details
+              </button>
 
               {/* Bio */}
               <div className="box personal_information pb-4">
@@ -267,12 +279,15 @@ const InvestorHome = () => {
               </div>
             </div>
           </div>
-          <div className="thirty">
+          <div className="thirty d-none d-xl-block">
             <RightProfileCard />
             <RecommendationCard />
             <NewsCorner />
           </div>
         </div>
+
+        {/* OffCanvas for questionnaire */}
+        <Questionnaire />
       </div>
     </MaxWidthWrapper>
   );

@@ -1,0 +1,51 @@
+.questionnaire_wrapper {
+  .offcanvas {
+    --bs-offcanvas-width: min(95dvw, 600px);
+  }
+
+  //   component styles
+  .chat_box {
+    min-height: 65px;
+    margin-inline: 16px;
+    padding: 8px;
+    border: 1px solid #e7e7e7;
+    border-radius: 5px;
+    box-shadow: 5px 5px 30px 0px rgba(0, 0, 0, 0.05);
+  }
+
+  .orange_button {
+    background-color: rgba(253, 89, 1, 1);
+    border: 1px solid rgba(253, 89, 1, 1);
+    color: white;
+    padding: 1em 2em;
+    border-radius: 10rem;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 0.85rem;
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  .user_input_container {
+    margin-top: 5em;
+  }
+
+  .user_input {
+    background-color: #efefef;
+    outline: 0;
+  }
+
+  .send_btn {
+    width: 70px;
+    height: 70px;
+    background-color: rgba(253, 89, 1, 1);
+    border: 1px solid transparent;
+    border-radius: 50%;
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function OffcanvasBSBody({ children }) {
-  return <div className="offcanvas-body">{children}</div>;
+export default function OffcanvasBSBody({ children, bodyClass }) {
+  return <div className={`offcanvas-body ${bodyClass}`}>{children}</div>;
 }
