@@ -11,6 +11,7 @@ import {
   getMileStone,
   addMilestoneToUser,
   getUserMilestones,
+  deleteUserMilestone,
 } from "../services/startUpService.js";
 import { getStartUpData } from "../services/userService.js";
 
@@ -223,6 +224,20 @@ export const getUserMilestonesController = async (req, res) => {
     res.status(500).send({
       status: 500,
       message: "An error occurred while getting minestons of user.",
+    });
+  }
+};
+
+export const deleteUserMilestoneController = async (req, res) => {
+  try {
+    const { oneLinkId, milestoneId } = req.params;
+    const response = await deleteUserMilestone(oneLinkId, milestoneId);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while deleting user minestons.",
     });
   }
 };

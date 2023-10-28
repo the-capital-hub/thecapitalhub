@@ -402,3 +402,28 @@ export const getUserMilestones = async (oneLinkId) => {
     };
   }
 }
+
+export const deleteUserMilestone = async (oneLinkId, milestoneId) => {
+  try {
+    const user = await UserModel.findOne({ oneLinkId: oneLinkId });
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found.",
+      };
+    }
+    const startUp = await StartUpModel.findById(user.startUp);
+    startUp.milestones = startUp.milestones.filter((id) => id.toString() !== milestoneId);
+    await startUp.save();
+    return {
+      status: 200,
+      message: "Milestone deleted successfully.",
+    };
+  } catch (error) {
+    console.error("Error deleting user milestone:", error);
+    return {
+      status: 500,
+      message: "An error occurred while deleting user milestoner.",
+    };
+  }
+}
