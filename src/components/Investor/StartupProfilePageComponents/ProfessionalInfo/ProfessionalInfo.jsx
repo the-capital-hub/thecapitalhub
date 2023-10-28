@@ -17,7 +17,7 @@ import IconCloudUpload from "../../SvgIcons/IconCloudUpload";
 export default function ProfessionalInfo({ theme, companyFounderId }) {
   // Fetch Global State
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const isInvestor = loggedInUser.isInvestor;
+  const isInvestor = loggedInUser.isInvestor === "true" ? true : false;
   const dispatch = useDispatch();
   const [company, setCompany] = useState([]);
 

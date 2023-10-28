@@ -172,12 +172,24 @@ const startUpSchema = new Schema(
     projections: {
       type: Array,
     },
+    age: {
+      type: String,
+    },
     milestones: [
       {
         type: Schema.Types.ObjectId,
         ref: "Milestones",
       },
     ],
+    fundingRaised: {
+      type: String,
+    },
+    productStage: {
+      type: String,
+    },
+    stage: {
+      type: String,
+    },
   },
   {
     timestamps: true,

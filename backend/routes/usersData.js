@@ -18,6 +18,7 @@ import {
   addUserAsInvestorController,
   validateSecretKeyController,
   createSecretKeyController,
+  googleLoginController,
 } from "../controllers/userData.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
@@ -35,6 +36,8 @@ router.patch("/resetPassword", resetPasswordController);
 
 //validate onelink secret key
 router.post("/validateSecretKey", validateSecretKeyController);
+
+router.post("/googleLogin", googleLoginController);
 
 // Authorized routes below
 router.use(authenticateToken);  

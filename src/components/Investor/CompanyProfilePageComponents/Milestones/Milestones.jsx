@@ -17,30 +17,20 @@ import { getUserMilestonesAPI } from "../../../../Service/user";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 
 // Mock data array
-// const companyMilestones = [
-//   {
-//     milestone: "Founded in",
-//     text: "Sept, 2022",
-//     badge: MockBadge,
-//   },
-//   {
-//     milestone: "Achieved First Revenue",
-//     text: "",
-//     badge: MockFundsBadge,
-//   },
-// ];
-
-const DATEOPTIONS = {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-};
+const companyMilestones = [
+  {
+    text: "Founded in",
+    badge: MockBadge,
+  },
+  {
+    text: "Achieved First Revenue",
+    badge: MockFundsBadge,
+  },
+];
 
 export default function Milestones({ headingClass, containerClass, theme }) {
   let { pathname } = useLocation();
-  const { oneLinkId, createdAt } = useSelector(
-    (state) => state.user.loggedInUser
-  );
+  const { oneLinkId } = useSelector((state) => state.user.loggedInUser);
 
   const [userMilestones, setUserMilestones] = useState(null);
 
@@ -54,9 +44,10 @@ export default function Milestones({ headingClass, containerClass, theme }) {
           badge: MockBadge,
         }));
         // console.log("user's milestones", data);
-        setUserMilestones(data);
+        setUserMilestones(data.milestones);
       } catch (error) {
         console.log("Error fetching user's milestones:", error);
+        setUserMilestones(companyMilestones);
       }
     }
 
@@ -67,31 +58,26 @@ export default function Milestones({ headingClass, containerClass, theme }) {
     <div className={` d-flex flex-column gap-4 ${containerClass} `}>
       <div className="d-flex align-items-center justify-content-between">
         <h2 className={headingClass}>Milestones</h2>
-        <Link className={`see__more align-self-end ${theme}`}>See more</Link>
+        {/* <Link className={`see__more align-self-end ${theme}`}>See more</Link> */}
       </div>
       <div
         className={`milestone__cards__container d-flex align-items-stretch gap-5 pb-3 ${theme}`}
       >
         {userMilestones ? (
-          userMilestones.milestones.map((mile, index) => {
+          userMilestones.map((mile, index) => {
             return (
               <MilestoneBadge
-                badge={mile.badge}
-                milestone={mile.text}
-                text={
-                  mile.text === "Joining Capital HUB"
-                    ? new Date(createdAt).toLocaleDateString([], DATEOPTIONS)
-                    : ""
-                }
+                milestone={mile}
                 key={`${mile.milestone}${index}`}
                 theme={theme}
-                date
               />
             );
           })
         ) : (
           <SpinnerBS
-            className={"d-flex justify-content-center align-items-center py-5"}
+            className={
+              "d-flex justify-content-center align-items-center py-5 w-100"
+            }
           />
         )}
       </div>
@@ -118,7 +104,8 @@ export default function Milestones({ headingClass, containerClass, theme }) {
           <ModalBSBody>
             <AddMilestoneModal
               theme={theme}
-              userMilestones={userMilestones?.milestones}
+              userMilestones={userMilestones}
+              setUserMilestones={setUserMilestones}
             />
           </ModalBSBody>
         </ModalBSContainer>
