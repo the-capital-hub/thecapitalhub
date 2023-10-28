@@ -131,18 +131,37 @@ const Login = () => {
     document.title = "Log In | The Capital Hub";
   }, []);
 
-  // const isLoggedIn = () => {
-  //   const isLoggedIn = localStorage.getItem("isLoggedIn");
-  //   console.log("isLoggedIn-->", isLoggedIn);
-  //   return isLoggedIn === "true";
-  // };
-  // if (isLoggedIn()) {
-  //   if (loggedInUser.investor) {
-  //     return <Navigate to="/investor/home" replace />;
-  //   } else {
-  //     return <Navigate to="/home" replace />;
-  //   }
-  // }
+  // Google sign in
+  const googleUserVerifyHandler = async ({ credential }) => {
+    try {
+      // const { data, token } = await googleLoginAPI(credential);
+      console.log({ credential });
+      // send dispatch login success here using the data and token
+      // navigate to home
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (window.google && window.google.accounts) {
+      const googleAccounts = window.google.accounts;
+      googleAccounts.id.initialize({
+        client_id: process.env.REACT_APP_GOOGLE_OAUTH_ID,
+        callback: googleUserVerifyHandler,
+      });
+
+      googleAccounts.id.renderButton(document.getElementById("googlesignin"), {
+        // theme: "filled_blue",
+        // shape: "circle",
+        ux_mode: "popup",
+        // text: "continue_with",
+        size: "large",
+      });
+    } else {
+      console.error("Google Accounts API is not available.");
+    }
+  }, []);
 
   return (
     <div className="container d-flex justify-content-center align-items-start py-md-5 min-vh-100">
@@ -195,7 +214,7 @@ const Login = () => {
           </div>
 
           <h3 className="already_have_account">
-            I don’t have an account?{" "}
+            Don't have an account?{" "}
             <Link
               to={"/signup"}
               className={isInvestorSelected ? "green" : "orange"}
@@ -269,19 +288,22 @@ const Login = () => {
               </button>
             </div>
             <h3 className="already_have_account_mobile">
-              I don’t have an account? &nbsp;
+              I don't have an account? &nbsp;
               <Link to={"/signup"} style={{ color: "red" }}>
                 Create account
               </Link>
             </h3>
           </form>
 
-          {/* <div className="line-container">
+          <div className="line-container">
             <hr className="line" />
-            <span className="text">Or continue with</span>
+            <span className="text mx-2">OR</span>
             <hr className="line" />
           </div>
-          <div className="row">
+          <div className="social-login-container d-flex flex-column justify-content-center">
+            <div id="googlesignin" className="mx-auto"></div>
+          </div>
+          {/* <div className="row">
             <div className="col d-flex justify-content-center align-items-center login_icons">
               <img src={GIcon} alt="image" />
               <img src={FIcon} alt="image" />
