@@ -1,6 +1,6 @@
 import React from "react";
 import LocationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
-import EmailIcon from "../../../../Images/investorIcon/message.svg";
+import EmailIcon from "../../../../Images/investorIcon/email.svg";
 import TweeterIcon from "../../../../Images/investorIcon/Tweeter.svg";
 import IntagramIcon from "../../../../Images/investorIcon/Instagram.svg";
 import LinkedinIcon from "../../../../Images/investorIcon/Linkedin.svg";
@@ -65,11 +65,52 @@ const CompanyDetailsCard = ({
         >
           {/* Company details header */}
 
-          <div className="image_name_section">
-            <span className="company_details_logo_container">
+          <div className="image_name_section d-flex flex-column flex-md-row align-items-start align-items-md-center" >
+            <span className="company_details_logo_container d-none d-md-block">
               <img src={onePager.logo || LogoX} alt="profileimage" />
             </span>
-            <div className="left_profile_text flex_content">
+
+
+<div className="d-flex  justify-content-between w-100 d-md-none d-flex">
+
+<span className="company_details_logo_container d-md-none d-flex">
+              <img src={onePager.logo || LogoX} alt="profileimage  d-md-none d-flex" />
+            </span>
+
+
+            {page === "edit" ? (
+              <span className="align-self-start ms-auto d-md-none d-block pt-2">
+                <div className="">
+                  <button
+                    className="edit-btn "
+                    onClick={() =>
+                      setIsDescriptionEditable(!isDescriptionEditable)
+                    }
+                  >
+                    {isDescriptionEditable ? "Cancel" : "Edit"}
+                    <CiEdit />
+                  </button>
+                  {isDescriptionEditable && (
+                    <button
+                      className="edit-btn ms-2"
+                      onClick={() => submitDescriptionHandler()}
+                    >
+                      Save <CiSaveUp2 />
+                    </button>
+                  )}
+                </div>
+              </span>
+            ) : (
+              ""
+            )}
+
+
+</div>
+
+
+
+
+            <div className="left_profile_text flex_content ms-md-0 ms-2">
               <h2 className="typography m-2">
                 {onePager.company || `The Capital Hub`}
               </h2>
@@ -144,10 +185,10 @@ const CompanyDetailsCard = ({
 
             {/* Edit button */}
             {page === "edit" ? (
-              <span className="align-self-start ms-auto">
+              <span className="align-self-start ms-auto ">
                 <div className="">
                   <button
-                    className="edit-btn"
+                    className="edit-btn d-none d-md-block"
                     onClick={() =>
                       setIsDescriptionEditable(!isDescriptionEditable)
                     }

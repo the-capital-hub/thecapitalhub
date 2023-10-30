@@ -69,7 +69,7 @@ function PortfolioPage() {
               you. Say hello to hassle-free, stress-free financial management!
             </p>
           </Link>
-          <Link to="mailto:investments@capitalhub.in" className="box box_six">
+          <Link to="https://tiffinbuddy.in/" className="box box_six">
             <img src={assets.tiffinbuddy_logo} alt="tiffinbuddy" />
             <p>
               Tiffin Buddy is your go-to destination for wholesome, home-cooked

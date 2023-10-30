@@ -318,7 +318,7 @@ const Login = () => {
             </h3>
           </form>
 
-          <div className="line-container">
+          <div className="line-container m-auto">
             <hr className="line" />
             <span className="text mx-2">OR</span>
             <hr className="line" />

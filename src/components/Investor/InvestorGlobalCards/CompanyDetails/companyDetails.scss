@@ -10,7 +10,7 @@
       // align-items: center;
       justify-content: flex-start;
       // flex-direction: column;
-      gap: 01em;
+      // gap: 01em;
 
       @media (min-width: 768px) {
         justify-content: flex-start;
@@ -41,6 +41,7 @@
       font-size: 18px;
       font-family: Poppins;
       cursor: pointer;
+      margin-left: -4px;
     }
 
     .description {
