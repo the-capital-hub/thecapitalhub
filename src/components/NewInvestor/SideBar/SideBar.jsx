@@ -35,6 +35,7 @@ import { BsChevronDown, BsChevronUp, BsLink45Deg } from "react-icons/bs";
 import { ModalBsLauncher } from "../../PopUp/ModalBS";
 import CommunitiesIcon from "../../Investor/ChatComponents/CommunitiesIcon";
 
+// Investor Sidebar
 const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -63,6 +64,30 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
     navigate("/chats?isCommunityOpen=true");
   }
 
+  const [touchStartX, setTouchStartX] = useState(null);
+  const [touchEndX, setTouchEndX] = useState(null);
+
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEndX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX && touchEndX) {
+      const deltaX = touchEndX - touchStartX;
+      if (deltaX < -50) {
+        setSidebarCollapsed(false); // Expand the sidebar
+      } else if (deltaX > 50) {
+        setSidebarCollapsed(true); // Collapse the sidebar
+      }
+      setTouchStartX(null);
+      setTouchEndX(null);
+    }
+  };
+
   return (
     <div
       className={`container newInvestor_sidebar_container ${
@@ -78,6 +103,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           setSidebarCollapsed(false);
         }
       }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       <div id="header">
         <ProSidebar collapsed={sidebarCollapsed}>
