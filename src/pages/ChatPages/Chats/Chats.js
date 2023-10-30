@@ -22,6 +22,7 @@ import {
   resetChat,
   setChatId,
   setUserId,
+  setIsCommuntySelected,
 } from "../../../Store/features/chat/chatSlice";
 import backIcon from "../../../Images/Chat/BackIcon.svg";
 import navBarLogo from "../../../Images/investorIcon/Logo.svg";
@@ -152,9 +153,11 @@ const Chats = () => {
       findChat(paramUserId, loggedInUser._id)
         .then((res) => {
           console.log("Result", res);
+          dispatch(setIsCommuntySelected(false));
           if (res.data.length === 0) {
             return handleCreateChat();
           } else {
+
             dispatch(setChatId(res.data._id));
           }
         })
@@ -162,8 +165,8 @@ const Chats = () => {
           console.error("Error-->", error);
         })
         .finally(() => {
-          // searchParams.delete('userId');
-          // setSearchParams(searchParams);
+          searchParams.delete('userId');
+          setSearchParams(searchParams);
         });
     }
   }, [paramUserId]);
@@ -231,9 +234,8 @@ const Chats = () => {
       <div className="container-fluid chat_main_container">
         {/* Left section */}
         <div
-          className={`left_section_wrapper mt-3 mx-3 ${
-            isMobileView && "d-none"
-          }`}
+          className={`left_section_wrapper mt-3 mx-3 ${isMobileView && "d-none"
+            }`}
         >
           <section className="left_section pe-1 ">
             <span className="back_img rounded-circle shadow-sm" title="Go Back">

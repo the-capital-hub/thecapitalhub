@@ -42,7 +42,7 @@ export default function CommunitiesContainer({
         />
         <h4
           className="m-0 text-capitalize "
-          // style={{ color: " rgba(159, 159, 159, 1)" }}
+        // style={{ color: " rgba(159, 159, 159, 1)" }}
         >
           community
         </h4>
