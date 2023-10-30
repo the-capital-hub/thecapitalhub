@@ -66,7 +66,7 @@ export const getUnansweredQuestion = async (userId, questionType) => {
     if (!question) {
       return {
         status: 200,
-        message: "No unanswered questions found.",
+        message: "Thank you, You have answered all the questions",
         data: null,
       };
     }
