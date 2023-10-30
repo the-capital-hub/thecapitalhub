@@ -3,6 +3,9 @@
   --color-text: #fff;
   --color-shadow: rgba(0, 0, 0, 0.05);
 
+  scrollbar-gutter: stable;
+  overflow-y: auto;
+
   .offcanvas {
     --bs-offcanvas-width: min(95dvw, 600px);
   }

@@ -3,20 +3,27 @@ import OffcanvasBSContainer from "../../../../PopUp/OffcanvasBS/OffcanvasBSConta
 import OffcanvasBSHeader from "../../../../PopUp/OffcanvasBS/OffcanvasBSHeader/OffcanvasBSHeader";
 import OffcanvasBSBody from "../../../../PopUp/OffcanvasBS/OffcanvasBSBody/OffcanvasBSBody";
 import "./Questionnaire.scss";
-import IconSend from "../../../SvgIcons/IconSend";
 import Greeting from "./Greeting/Greeting";
 import {
   answerQuestionAPI,
   getQuestionsAPI,
 } from "../../../../../Service/user";
+import UserInput from "./UserInput/UserInput";
+import CurrentQuestion from "./CurrentQuestion/CurrentQuestion";
+import Categories from "./Categories/Categories";
+import History from "./History/History";
+import { useDispatch } from "react-redux";
+import { updateLoggedInUser } from "../../../../../Store/features/user/userSlice";
 
-const OPTIONS = {
+export const OPTIONS = {
   company: { text: "Company", endpoint: "Startup" },
   personal: { text: "Personal", endpoint: "Personal" },
 };
 
 export default function Questionnaire() {
-  const [answer, setAnswer] = useState("");
+  const dispatch = useDispatch();
+
+  const [answer, setAnswer] = useState(null);
   const [question, setQuestion] = useState(null);
   // State for company and personal soptions
   const [option, setOption] = useState(null);
@@ -43,7 +50,7 @@ export default function Questionnaire() {
   }
 
   //   handle Option
-  function handleOption(e, option) {
+  function handleOptionSelect(e, option) {
     setOption(option.text);
     fetchQuestion(option.endpoint);
   }
@@ -58,6 +65,7 @@ export default function Questionnaire() {
 
   // handle Post Answer
   async function handlePostAnswer(e) {
+    e.preventDefault();
     console.log("answer is", answer);
     const answerObject = {
       questionId: question._id,
@@ -72,8 +80,14 @@ export default function Questionnaire() {
       setHistory((prev) => {
         let copy = [...prev];
         copy.push({ question: question.question, ...answerObject });
-        setHistory(copy);
+        return [...copy];
       });
+
+      // If personal, update loggedInUser
+      // dispatch(updateLoggedInUser())
+
+      // Clear answer
+      setAnswer(null);
 
       // fetch next Question
       fetchQuestion(option.endpoint);
@@ -82,9 +96,20 @@ export default function Questionnaire() {
     }
   }
 
+  // Handle Back to categories
+  function handleBackToCategories() {
+    if (!answer) {
+      setQuestion(null);
+      setOption(null);
+    } else {
+      setQuestion(null);
+      setOption(null);
+    }
+  }
+
   //   clearStates
   function clearStates() {
-    setAnswer("");
+    setAnswer(null);
     setQuestion(null);
     setOption(null);
     setAlert(null);
@@ -100,104 +125,37 @@ export default function Questionnaire() {
             <div className=" d-flex flex-column justify-content-end gap-3 ">
               <Greeting />
               {/* options */}
-              <div className="chat_box d-flex align-items-start gap-4 p-0 border-0 shadow-none">
-                {(option === "Company" || option === null) && (
-                  <button
-                    type="button"
-                    className="category_button"
-                    onClick={(e) => handleOption(e, OPTIONS.company)}
-                  >
-                    {OPTIONS.company.text}
-                  </button>
-                )}
-                {(option === "Personal" || option === null) && (
-                  <button
-                    type="button"
-                    className="category_button"
-                    onClick={(e) => handleOption(e, OPTIONS.personal)}
-                  >
-                    {OPTIONS.personal.text}
-                  </button>
-                )}
-              </div>
+              <Categories
+                handleOptionSelect={handleOptionSelect}
+                option={option}
+              />
             </div>
 
             {/* History */}
-            {history?.length > 0 &&
-              history?.map((data, index) => {
-                return (
-                  <div
-                    className="d-flex flex-column gap-3"
-                    key={data.questionId}
-                  >
-                    <div className="chat_box">
-                      <p className="m-0">{data.question}</p>
-                    </div>
-                    <div className="answer_box">
-                      <p className="m-0">{data.answer}</p>
-                    </div>
-                  </div>
-                );
-              })}
+            <History history={history} />
 
             {/* Current Question */}
-            <div className="current_question mt-5">
-              {question && (
-                <div className="chat_box">
-                  <p className="m-0">{question.question}</p>
-                </div>
-              )}
-              {/* Options */}
-              {question && (
-                <div className="d-flex gap-3 align-items-center flex-wrap mx-3">
-                  {question?.options?.map((option) => {
-                    return (
-                      <button
-                        type="button"
-                        className={`option_button ${
-                          option === answer && "selected"
-                        }`}
-                        key={option}
-                        onClick={() => setAnswer(option)}
-                      >
-                        {option}
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-            {/* Answer for current Question */}
+            <CurrentQuestion
+              question={question}
+              answer={answer}
+              setAnswer={setAnswer}
+              handleBackToCategories={handleBackToCategories}
+            />
 
             {/* Alert */}
             {alert && (
               <div className="chat_box">
-                <em>{alert}</em>
+                <em className="">{alert}</em>
               </div>
             )}
 
             {/* User Input */}
-            <div className="user_input_container border-top p-3 d-flex align-items-center gap-3">
-              <textarea
-                type="text"
-                name="answer"
-                id="answer"
-                placeholder="Type here..."
-                className="user_input border-0 px-3 py-4 rounded-4"
-                value={answer}
-                onChange={handleAnswerChange}
-                autoFocus
-                rows={1}
-                disabled={question?.options?.length > 0}
-              />
-              <button
-                type="button"
-                className="send_btn d-flex align-items-center justify-content-center"
-                onClick={handlePostAnswer}
-              >
-                <IconSend style={{ marginLeft: "8px" }} />
-              </button>
-            </div>
+            <UserInput
+              answer={answer}
+              question={question}
+              handleAnswerChange={handleAnswerChange}
+              handlePostAnswer={handlePostAnswer}
+            />
           </div>
         </OffcanvasBSBody>
       </OffcanvasBSContainer>

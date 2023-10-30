@@ -35,10 +35,18 @@ export const userSlice = createSlice({
     setRecommendations: (state, action) => {
       state.recommendations = action.payload;
     },
+    updateLoggedInUser: (state, action) => {
+      state.loggedInUser = { ...state.loggedInUser, ...action.payload };
+    },
   },
 });
 
-export const { loginSuccess, loginFailure, logout, setRecommendations } =
-  userSlice.actions;
+export const {
+  loginSuccess,
+  loginFailure,
+  logout,
+  setRecommendations,
+  updateLoggedInUser,
+} = userSlice.actions;
 
 export default userSlice.reducer;
