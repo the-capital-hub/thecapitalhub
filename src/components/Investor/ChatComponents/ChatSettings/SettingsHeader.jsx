@@ -17,6 +17,7 @@ import IconExit from "../../SvgIcons/IconExit";
 import "./styles.scss";
 import { getBase64 } from "../../../../utils/getBase64";
 import { setCommunityProfile } from "../../../../Store/features/chat/chatSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function SettingsHeader({ setIsSettingsOpen }) {
   const chatProfile = useSelector((state) => state.chat.chatProfile);
@@ -29,6 +30,7 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
   const [showModal, setShowModal] = useState({});
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState({});
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -129,6 +131,14 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
     }
   };
 
+  const handleGoToUserProfile = () => {
+    if (loggedInUser.isInvestor === "false") {
+      navigate(`/user/${chatProfile.user._id}`);
+    } else {
+      navigate(`/investor/user/${chatProfile.user._id}`);
+    }
+  }
+
   return (
     <div className="settings_header d-flex flex-column align-items-center gap-1 border-bottom pb-4">
       <button
@@ -153,7 +163,8 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
                 : chatProfile?.user?.profilePicture) || Default
             }
             alt={"user name"}
-            style={{ width: "70px", height: "70px", borderRadius: "50%" }}
+            style={{ width: "70px", height: "70px", borderRadius: "50%", cursor: "pointer" }}
+            onClick={handleGoToUserProfile}
           />
         </label>
         {isCommunitySelected && (
@@ -169,7 +180,7 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
 
       {/* Name and designation */}
       <div className="settings_user_text d-flex flex-column align-items-center">
-        <h5 style={{ fontSize: "20px", fontWeight: "500" }}>
+        <h5 style={{ fontSize: "20px", fontWeight: "500", cursor: "pointer" }} onClick={handleGoToUserProfile}>
           {isCommunitySelected
             ? communityProfile?.community?.communityName
             : `${chatProfile?.user?.firstName} ${chatProfile?.user?.lastName}`}
