@@ -98,14 +98,14 @@ export const answerQuestion = async (questionId, answer, userId) => {
         message: "Question not found.",
       };
     }
-    if (question.type === "Personal") {
+    if (question.schema === "user") {
       user[question.fieldName] = answer;
       await user.save();
-    } else if (question.type === "Startup") {
+    } else if (question.schema === "startup") {
       const startup = await StartUpModel.findById(user.startUp);
       startup[question.fieldName] = answer;
       await startup.save();
-    } else if (question.type === "Investor") {
+    } else if (question.schema === "investor") {
       const investor = await InvestorModel.findById(user.investor);
       investor[question.fieldName] = answer;
       await investor.save();

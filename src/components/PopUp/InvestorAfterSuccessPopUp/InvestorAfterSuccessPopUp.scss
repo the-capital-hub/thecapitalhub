@@ -20,7 +20,13 @@
     border-radius: 8px;
     position: relative;
     width: 40%;
+    flex-direction: column;
 
+    img {
+      max-width: 60px;
+      margin: 0 auto;
+    }
+    
     h1 {
       color: #000;
       font-family: Poppins;
@@ -71,6 +77,7 @@
     font-weight: 600;
     line-height: normal;
     border: none;
+    margin: 0 auto;
   }
 }
 

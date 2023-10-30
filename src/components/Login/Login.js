@@ -135,6 +135,7 @@ const Login = () => {
   const googleUserVerifyHandler = async ({ credential }) => {
     try {
       const { data, token } = await googleLoginAPI(credential);
+      console.log(data, token);
       localStorage.setItem("accessToken", token);
       localStorage.setItem("isLoggedIn", "true");
       if (!isInvestorSelected) {

@@ -33,6 +33,8 @@ import {
 } from "../../../components/PopUp/ModalBS";
 import NewCommunityModal from "../../../components/Investor/ChatComponents/NewCommunityModal";
 import { setThemeColor } from "../../../utils/setThemeColor";
+import { AiOutlineHome } from "react-icons/ai";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const Chats = () => {
   // search params
@@ -79,7 +81,7 @@ const Chats = () => {
     }
     window.addEventListener("resize", handleWindowResize);
     handleWindowResize();
-    
+
     setThemeColor();
 
     return () => {
@@ -164,22 +166,30 @@ const Chats = () => {
           // setSearchParams(searchParams);
         });
     }
-  }, []);
+  }, [paramUserId]);
 
   const renderMobieHeader = () => {
     return (
       <div className="mobile-nav border-bottom shadow-sm pb-2 px-2">
+        <button
+          className="btn btn-sm btn-light"
+          onClick={() => dispatch(resetChat())}
+        >
+          <IoMdArrowRoundBack /> Back
+        </button>
         <Link to="/">
           <img src={navBarLogo} alt="nav bar logo" />
         </Link>
-        <div className="actions">
-          <button
-            className="btn btn-sm btn-light"
-            onClick={() => dispatch(resetChat())}
-          >
-            All Messages
-          </button>
-        </div>
+        <button
+          className="btn btn-sm btn-light"
+          onClick={() =>
+            navigate(
+              loggedInUser?.isInvestor === "true" ? "/investor/home" : "/home"
+            )
+          }
+        >
+          <AiOutlineHome /> Home
+        </button>
       </div>
     );
   };

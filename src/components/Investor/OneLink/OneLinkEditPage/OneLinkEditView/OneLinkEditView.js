@@ -7,7 +7,7 @@ import Table from "../../Table/Table";
 import TeamCard from "../../../InvestorGlobalCards/OneLink/TeamCard/TeamCard";
 import FundAsking from "../../Table/FundAsking/FundAsking";
 import FundDeployment from "../../Table/FundDeployment/FundDeployment";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SmallProfileCard from "../../../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import OneLinkMarketSection from "../OneLinkMarketSection/OneLinkMarketSection";
 import OneLinkContactEdit from "./OneLinkContactEdit/OneLinkContactEdit";
@@ -21,6 +21,8 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { getBase64 } from "../../../../../utils/getBase64";
 import camimg from "../../../../../Images/Camera.png";
+import backIcon from "../../../../../Images/Chat/BackIcon.svg";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const OneLinkEditView = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -43,9 +45,7 @@ const OneLinkEditView = () => {
     { required: "", amount: "" },
   ]);
   const [roadMapRows, setRoadMapRows] = useState([{ date: "", milestone: "" }]);
-  const [competitorData, setCompetitorData] = useState([
-    { name: "" },
-  ]);
+  const [competitorData, setCompetitorData] = useState([{ name: "" }]);
 
   const initialData = {
     rows: [
@@ -56,6 +56,7 @@ const OneLinkEditView = () => {
 
   const [tableData, setTableData] = useState(initialData);
 
+  const navigate = useNavigate();
 
   useEffect(() => {
     getStartupByFounderId(userId)
@@ -76,7 +77,9 @@ const OneLinkEditView = () => {
         setFundingAskRows(data.fundingsAsk || fundingAskRows);
         setRoadMapRows(data.roadMap || roadMapRows);
         setCompetitorData(data.competitors || competitorData);
-        setTableData(data.projections.length > 0 ? data.projections[0] : tableData);
+        setTableData(
+          data.projections.length > 0 ? data.projections[0] : tableData
+        );
       })
       .catch(() => setCompany({}));
   }, []);
@@ -137,7 +140,7 @@ const OneLinkEditView = () => {
       backgroundColor: "#ffffff",
       scale: window.devicePixelRatio,
       useCORS: true,
-      windowWidth: '1400px'
+      windowWidth: "1400px",
     }).then((canvas) => {
       const contentDataURL = canvas.toDataURL("image/png");
       const imgWidth = 210;
@@ -175,7 +178,7 @@ const OneLinkEditView = () => {
       backgroundColor: "#ffffff",
       scale: window.devicePixelRatio,
       useCORS: true,
-      windowWidth: '1400px'
+      windowWidth: "1400px",
     }).then((canvas) => {
       const contentDataURL = canvas.toDataURL("image/png");
       const imgWidth = 210;
@@ -247,7 +250,7 @@ const OneLinkEditView = () => {
     setRoadMapRows(updatedRows);
   };
 
-  // Competitor Input Change 
+  // Competitor Input Change
   const handleCompetitorInputChange = (index, value) => {
     const updatedCompetitorData = [...competitorData];
     updatedCompetitorData[index].name = value;
@@ -282,8 +285,7 @@ const OneLinkEditView = () => {
         setFromSubmit(true);
       })
       .catch((err) => console.log(err));
-
-  }
+  };
 
   return (
     <>
@@ -402,8 +404,15 @@ const OneLinkEditView = () => {
           </section>
         </div>
       </div> */}
-
       <section className="one_link_edit_view_section w-100 p-3 rounded">
+        <span className="back_img rounded-circle shadow-sm" title="Go Back">
+          <img
+            src={backIcon}
+            width={20}
+            height={20}
+            onClick={() => navigate(-1)}
+          />
+        </span>
         <div className="download_preview p-5 ">
           <section className=" img_company_data d-flex flex-column flex-md-row w-100 justify-content-between align-items-center gap-3">
             <div className="img_right ">
@@ -476,7 +485,7 @@ const OneLinkEditView = () => {
                   id="tags"
                   name="tags"
                   className=" px-3"
-                  style={{ width: '100%' }}
+                  style={{ width: "100%" }}
                   value={formData.keyFocus}
                   onChange={(e) => handleInputChange("keyFocus", e)}
                   onBlur={(e) => handleUpdate()}
@@ -605,7 +614,9 @@ const OneLinkEditView = () => {
                 <input
                   type="text"
                   value={competitor.name}
-                  onChange={(e) => handleCompetitorInputChange(index, e.target.value)}
+                  onChange={(e) =>
+                    handleCompetitorInputChange(index, e.target.value)
+                  }
                   className="w-100 px-3"
                 />
                 {index > 0 && (
@@ -613,7 +624,7 @@ const OneLinkEditView = () => {
                     className="delete_row_btn"
                     onClick={() => deleteCompetitor(index)}
                   >
-                    X
+                    <RiDeleteBin6Line />
                   </button>
                 )}
               </div>
@@ -623,7 +634,11 @@ const OneLinkEditView = () => {
             + Add Competitor
           </button>
           <section className="table_section">
-            <Table page={"oneLinkEditPage"} setTable={setTableData} data={tableData} />
+            <Table
+              page={"oneLinkEditPage"}
+              setTable={setTableData}
+              data={tableData}
+            />
           </section>
           <h4>Fund Asking</h4>
           <section className="fund_sking_section  d-flex flex-column  justify-content-between gap-3">
@@ -654,7 +669,11 @@ const OneLinkEditView = () => {
                     type="text"
                     value={row.amount}
                     onChange={(e) =>
-                      handleFundingAskInputChange(index, "amount", e.target.value)
+                      handleFundingAskInputChange(
+                        index,
+                        "amount",
+                        e.target.value
+                      )
                     }
                     className="w-100 px-3"
                   />
@@ -739,7 +758,10 @@ const OneLinkEditView = () => {
               />
             ))}
           </section>
-          <button className="save_btn btn-lg d-block mx-auto mt-3" onClick={handleSubmit}>
+          <button
+            className="save_btn btn-lg d-block mx-auto mt-3"
+            onClick={handleSubmit}
+          >
             Save
           </button>
         </div>
