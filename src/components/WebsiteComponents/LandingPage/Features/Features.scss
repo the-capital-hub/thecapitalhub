@@ -50,7 +50,7 @@
       border-radius: 10px;
 
       width: 210px;
-      padding-block: 0.5em;
+      height: 60px;
       text-align: center;
       font-size: 18px;
       line-height: 1rem;
@@ -92,16 +92,17 @@
 
   .slide-left {
     // transition: transform 2s ease-in-out;
-    transform: translateX(-30%);
+    transform: translateX(-20dvw);
   }
 
   .slide-right {
     // transition: transform 2s ease-in-out;
-    transform: translateX(30%);
+    transform: translateX(20dvw);
   }
 
   .slide-reset {
     transition: transform 0.75s ease-in-out;
     transform: translateX(0px);
+    display: block;
   }
 }

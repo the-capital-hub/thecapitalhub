@@ -50,37 +50,49 @@
       color: #fd5901;
     }
 
-    .key,
-    .key_title {
-      all: revert;
-      padding: 0;
-    }
-
-    .key {
-      width: 10ch;
-      margin-inline: auto;
-      border: 1px solid #e7e7e7;
-      transition: border 0.15s ease-in;
-
-      &:focus-within {
-        border: 1px solid #fd5901;
+    .key_form {
+      align-self: center;
+      fieldset,
+      legend {
+        all: revert;
+        padding: 0;
       }
 
-      .key_input {
-        border: none;
-        outline: none;
-        font-size: 1rem;
-        padding: 0.5em 0.75em;
-        text-align: center;
+      .key {
+        width: 25ch;
+        max-width: 90%;
+        margin-inline: auto;
+        border: 1px solid #e7e7e7;
+        transition: border 0.15s ease-in;
 
-        background-color: transparent;
-        color: black;
-        // border: 1px solid blue;
+        &:focus-within {
+          border: 1px solid #fd5901;
+        }
+
+        .key_input {
+          width: 15ch;
+
+          border: none;
+          outline: none;
+          font-size: 1rem;
+          padding: 0.5em 0.75em;
+          text-align: center;
+
+          background-color: transparent;
+          color: black;
+          // border: 1px solid blue;
+        }
+      }
+    }
+
+    .alert_text {
+      display: block;
+      &:empty {
+        display: none;
       }
     }
 
     .assign_btn {
-      
       padding: 0.25em 1em;
       border-radius: 5px;
     }
@@ -103,7 +115,6 @@
       font-weight: bold;
       margin: 10px 0;
     }
-
   }
 
   /* Center the buttons */
