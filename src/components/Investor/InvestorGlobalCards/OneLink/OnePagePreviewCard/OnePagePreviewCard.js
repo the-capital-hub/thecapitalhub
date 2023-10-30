@@ -112,38 +112,38 @@ const OnePagePreviewCard = ({ company, page }) => {
   const cardData = [
     {
       field: "problem",
-      title: "1.Problem",
+      title: "Problem",
       content:
         company?.problem ||
         `Enter the problem statement your startup is addressing`,
     },
     {
       field: "solution",
-      title: "2.Solution",
+      title: "Solution",
       content:
         company?.solution || "Enter the solution your startup is offering",
     },
     {
       field: "marketLandscape",
-      title: "3.Market Landscape",
+      title: "Market Landscape",
       content: company?.competitiveLandscape || "Mention your competitors",
     },
     // {
     //   field: "growthModel",
-    //   title: "4.Revenue Model",
+    //   title: "Revenue Model",
     //   content: company?.growthModel || "Your startup’s revenue model",
     // },
     // {
     //   field: "growthStrategy",
-    //   title: "5.Growth Strategy",
+    //   title: "Growth Strategy",
     //   content: company?.growthStrategy || "Your Growth startegy",
     // },
     // {
     //   field: "marketTraction",
-    //   title: "6.Market Traction",
+    //   title: "Market Traction",
     //   content: company?.marketTraction || "Your Market traction",
     // },
-    // { title: "7.Business Model", content: "Your Business Model" },
+    // { title: "Business Model", content: "Your Business Model" },
   ];
 
   const handleUpdate = (field, newValue) => {
@@ -164,15 +164,15 @@ const OnePagePreviewCard = ({ company, page }) => {
 
   return (
     <>
-      <div className="onepage_card_container ">
+      <div className="onepage_card_container">
         {cardData.map((card, index) => (
           <div className="card_item" key={index} >
-            <div className="card m-0  ">
+            <div className="card m-0">
               <div
-                className="card-body   "
+                className="card-body"
                 onClick={() => setEditableIndex(index)}
               >
-                <h5 className="card-title px-2">{card.title}</h5>
+                <h5 className="card-title">{card.title}</h5>
                 {page === "oneLinkEdit" ? (
                   editableIndex === index ? (
                     <textarea

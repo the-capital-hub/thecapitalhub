@@ -102,6 +102,7 @@ const API = Object.freeze({
   deleteUserMilestone: `${baseUrl}/startup/deleteUserMilestone`,
   getQuestions: `${baseUrl}/question/getQuestions`,
   googleLogin: `${baseUrl}/users/googleLogin`,
+  answerQuestion: `${baseUrl}/question/answerQuestion`,
 });
 
 export default API;

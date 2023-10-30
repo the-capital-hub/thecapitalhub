@@ -5,6 +5,7 @@ import PersonAbout from "./PersonAbout/PersonAbout";
 import PublicLinks from "../../NewInvestor/CompanyProfileComponents/company-section-two/public-links/PublicLinks";
 import CompanyStats from "../../NewInvestor/CompanyProfileComponents/company-section-one/company-stats/CompanyStats";
 import "./PersonProfile.scss";
+import { useSelector } from "react-redux";
 
 const PERSON = {
   profilePicture: "",
@@ -22,7 +23,8 @@ const PERSON = {
 };
 
 export default function PersonProfile({ theme, short, personData }) {
-  console.log(personData)
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
   let profilePicture;
   let firstName;
   let lastName;
@@ -96,7 +98,11 @@ export default function PersonProfile({ theme, short, personData }) {
             }
             lastFunding={lastFunding || PERSON.lastFunding}
           />
-          <PersonActions person={`${isInvestor ? "Investor" : "Founder"}`} />
+          <PersonActions
+            person={`${isInvestor ? "Investor" : "Founder"}`}
+            userId={personData._id}
+            isInvestor={loggedInUser?.isInvestor === "true"}
+          />
         </div>
 
         {/* Profile About */}

@@ -3,26 +3,39 @@ import OffcanvasBSContainer from "../../../../PopUp/OffcanvasBS/OffcanvasBSConta
 import OffcanvasBSHeader from "../../../../PopUp/OffcanvasBS/OffcanvasBSHeader/OffcanvasBSHeader";
 import OffcanvasBSBody from "../../../../PopUp/OffcanvasBS/OffcanvasBSBody/OffcanvasBSBody";
 import "./Questionnaire.scss";
-import IconSend from "../../../SvgIcons/IconSend";
 import Greeting from "./Greeting/Greeting";
-import { getQuestionsAPI } from "../../../../../Service/user";
+import {
+  answerQuestionAPI,
+  getQuestionsAPI,
+} from "../../../../../Service/user";
+import UserInput from "./UserInput/UserInput";
+import CurrentQuestion from "./CurrentQuestion/CurrentQuestion";
+import Categories from "./Categories/Categories";
+import History from "./History/History";
+import { useDispatch } from "react-redux";
+import { updateLoggedInUser } from "../../../../../Store/features/user/userSlice";
 
-const OPTIONS = {
+export const OPTIONS = {
   company: { text: "Company", endpoint: "Startup" },
   personal: { text: "Personal", endpoint: "Personal" },
 };
 
 export default function Questionnaire() {
+  const dispatch = useDispatch();
+
   const [answer, setAnswer] = useState("");
   const [question, setQuestion] = useState(null);
+  // State for company and personal soptions
   const [option, setOption] = useState(null);
   const [alert, setAlert] = useState(null);
+  // State for history
+  const [history, setHistory] = useState([]);
 
   //   Fetch Questions
   async function fetchQuestion(query) {
     try {
       const { data, message } = await getQuestionsAPI(query);
-      //   console.log(data, message);
+      console.log(data, message);
       setQuestion(data);
       if (!data) {
         setAlert(message);
@@ -37,14 +50,90 @@ export default function Questionnaire() {
   }
 
   //   handle Option
-  function handleOption(e, option) {
+  function handleOptionSelect(e, option) {
+    // console.log("selected categry", option);
     setOption(option.text);
     fetchQuestion(option.endpoint);
   }
 
   // Handle answer change
   function handleAnswerChange(e) {
+    // Auto resize text area
+    e.target.style.height = "auto";
+    e.target.style.height = e.target.scrollHeight + "px";
+
+    // Set Answer
     setAnswer(e.target.value);
+  }
+
+  // Handle Answer Select
+  function handleAnswerSelect(e, option) {
+    if (answer.includes(option)) {
+      // Deselect answer
+      let index = answer.indexOf(option);
+      setAnswer((prev) => {
+        let copy = [...prev];
+        copy.splice(index, 1);
+        return [...copy];
+      });
+    } else {
+      // Set Answer
+      if (question.isMultipleOption) {
+        if (!answer) {
+          setAnswer([option]);
+        } else {
+          setAnswer((prev) => {
+            let copy = [...prev];
+            copy.push(option);
+            return [...copy];
+          });
+        }
+      } else {
+        setAnswer(option);
+      }
+    }
+  }
+
+  // handle Post Answer
+  async function handlePostAnswer(e) {
+    e.preventDefault();
+    console.log("answer is", answer);
+    const answerObject = {
+      questionId: question._id,
+      answer: answer,
+    };
+
+    try {
+      const { data } = await answerQuestionAPI(answerObject);
+      console.log("Response from answerPost", data);
+
+      // update history
+      setHistory((prev) => {
+        let copy = [...prev];
+        copy.push({ question: question.question, ...answerObject });
+        return [...copy];
+      });
+
+      // If personal, update loggedInUser
+      if (question.schema === "user") {
+        let fieldName = question.fieldName;
+        dispatch(updateLoggedInUser({ [fieldName]: answer }));
+      }
+
+      // Clear answer
+      setAnswer("");
+      // fetch next Question
+      fetchQuestion(question.type);
+    } catch (error) {
+      console.error("Error posting Question:", error);
+    }
+  }
+
+  // Handle Back to categories
+  function handleBackToCategories() {
+    setQuestion(null);
+    setOption(null);
+    setAnswer("");
   }
 
   //   clearStates
@@ -53,6 +142,7 @@ export default function Questionnaire() {
     setQuestion(null);
     setOption(null);
     setAlert(null);
+    setHistory([]);
   }
 
   return (
@@ -64,59 +154,37 @@ export default function Questionnaire() {
             <div className=" d-flex flex-column justify-content-end gap-3 ">
               <Greeting />
               {/* options */}
-              <div className="chat_box d-flex align-items-start gap-4 p-0 border-0 shadow-none">
-                {(option === "Company" || option === null) && (
-                  <button
-                    type="button"
-                    className="orange_button"
-                    onClick={(e) => handleOption(e, OPTIONS.company)}
-                  >
-                    {OPTIONS.company.text}
-                  </button>
-                )}
-                {(option === "Personal" || option === null) && (
-                  <button
-                    type="button"
-                    className="orange_button"
-                    onClick={(e) => handleOption(e, OPTIONS.personal)}
-                  >
-                    {OPTIONS.personal.text}
-                  </button>
-                )}
-              </div>
+              <Categories
+                handleOptionSelect={handleOptionSelect}
+                option={option}
+              />
             </div>
 
-            {/* Chat Area */}
-            {question && (
-              <div className="chat_box">
-                <p>{question.question}</p>
-              </div>
-            )}
+            {/* History */}
+            <History history={history} />
+
+            {/* Current Question */}
+            <CurrentQuestion
+              question={question}
+              answer={answer}
+              handleAnswerSelect={handleAnswerSelect}
+              handleBackToCategories={handleBackToCategories}
+            />
+
+            {/* Alert */}
             {alert && (
               <div className="chat_box">
-                <em>{alert}</em>
+                <em className="">{alert}</em>
               </div>
             )}
 
             {/* User Input */}
-            <div className="user_input_container border-top p-3 d-flex align-items-center gap-3">
-              <input
-                type="text"
-                name="answer"
-                id="answer"
-                placeholder="Type here..."
-                className="user_input border-0 px-3 py-4 rounded-4 flex-grow-1"
-                value={answer}
-                onChange={handleAnswerChange}
-                autoFocus
-              />
-              <button
-                type="button"
-                className="send_btn d-flex align-items-center justify-content-center"
-              >
-                <IconSend style={{ marginLeft: "8px" }} />
-              </button>
-            </div>
+            <UserInput
+              answer={answer}
+              question={question}
+              handleAnswerChange={handleAnswerChange}
+              handlePostAnswer={handlePostAnswer}
+            />
           </div>
         </OffcanvasBSBody>
       </OffcanvasBSContainer>
