@@ -269,32 +269,52 @@ export const resetPassword = async (token, newPassword) => {
 
 //search user/ company
 export const searchUsers = async (searchQuery) => {
+  const regex = new RegExp(`^${searchQuery}`, "i");
   try {
     const users = await UserModel.find({
       $and: [
         {
           $or: [
-            { username: { $regex: searchQuery, $options: "i" } },
-            { email: { $regex: searchQuery, $options: "i" } },
-            { firstName: { $regex: searchQuery, $options: "i" } },
-            { lastName: { $regex: searchQuery, $options: "i" } },
+            { firstName: { $regex: regex } },
+            { lastName: { $regex: regex } },
           ],
         },
         { userStatus: "active" },
       ],
     });
 
+    const companyIds = users.map((user) => user.startUp);
     const company = await StartUpModel.find({
       $or: [
-        { company: { $regex: searchQuery, $options: "i" } },
-        { oneLink: { $regex: searchQuery, $options: "i" } },
+        { company: { $regex: regex } },
+        { oneLink: { $regex: regex } },
+        { _id: { $in: companyIds } }
       ],
     });
+
+    const investorCompanyIds = users.map((user) => user.investor);
+    const investor = await InvestorModel.aggregate([
+      {
+        $match: {
+          $or: [
+            { companyName: { $regex: regex } },
+            { oneLink: { $regex: regex } },
+            { _id: { $in: investorCompanyIds } }
+          ],
+        },
+      },
+      {
+        $addFields: {
+          company: "$companyName", 
+        },
+      },
+    ]);
+
     return {
       status: 200,
       data: {
         users: users,
-        company: company,
+        company: company.concat(investor),
       },
     };
   } catch (error) {

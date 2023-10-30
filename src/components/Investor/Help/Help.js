@@ -12,6 +12,7 @@ import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import Faq from "./components/Faq/Faq";
 
 
 const Help = () => {
@@ -75,7 +76,8 @@ const Help = () => {
                       <h6>Frequently Asked Questions (FAQ)</h6>
                     </div>
                     <section className="accordion_section">
-                      <div className="faq-section p-2">
+                    <Faq/>
+                      {/* <div className="faq-section p-2">
                         <ul>
                           <li>1. What is One-Link?</li>
                           <li><p>A. One-Link is Capital HUB's new revolutionary feature, where a startup founder can share a secure link containing their company details, documentation and revenue statistics.</p></li>
@@ -83,7 +85,7 @@ const Help = () => {
                           <li><p>A. Explore page allows a startup founder to view and filter startups, investors and startup founders available on Capital Hub in a systematic and organised manner.
 <br/>This allows founders to connect with investors and other startup founders on Capital HUB, boosting their elite networking and strengthening their ability to raise funds.</p></li>
                         </ul>
-                      </div>
+                      </div> */}
                       {/* <div
                         className="accordion accordion-flush"
                         id="accordionFlushExample"

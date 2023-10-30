@@ -20,15 +20,9 @@ export default function Greeting() {
       {/* Intro */}
       <div className="chat_box">
         <p className="m-0">
-          Hi, I am capital hub chat assistant and I will help you complete
-          pending information in your profile.
+          Hello, I am Lupe, Your Capital Hub chat assistant!
         </p>
-      </div>
-
-      <div className="chat_box">
-        <p className="m-0">
-          Start by picking the category to fill your information
-        </p>
+        <p className="m-0">I am here to help you complete your profile.</p>
       </div>
     </>
   );

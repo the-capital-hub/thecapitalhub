@@ -1235,3 +1235,16 @@ export const getQuestionsAPI = async (query) => {
     throw error;
   }
 };
+
+export const answerQuestionAPI = async (answerObject) => {
+  try {
+    const response = await axiosInstance.post(
+      `${API.answerQuestion}`,
+      answerObject
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating answer:", error);
+    throw error;
+  }
+};
