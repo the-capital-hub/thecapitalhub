@@ -493,18 +493,14 @@
   }
 
   .delete_row_btn {
-    margin-top: 10px;
-    padding: 0.15em 0.5em;
-    /* Adjust the padding */
     border-radius: 5px;
     font-size: 14px;
-    /* Adjust the font size */
+    position: absolute;
+    right: 0;
+    top: 0;
     border: none;
-    /* Remove the border */
     background: transparent;
-    /* Make the background transparent */
     cursor: pointer;
-    /* Change cursor on hover */
   }
 
   .startup {

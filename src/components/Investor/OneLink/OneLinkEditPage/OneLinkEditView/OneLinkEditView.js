@@ -22,6 +22,7 @@ import jsPDF from "jspdf";
 import { getBase64 } from "../../../../../utils/getBase64";
 import camimg from "../../../../../Images/Camera.png";
 import backIcon from "../../../../../Images/Chat/BackIcon.svg";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const OneLinkEditView = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -623,7 +624,7 @@ const OneLinkEditView = () => {
                     className="delete_row_btn"
                     onClick={() => deleteCompetitor(index)}
                   >
-                    X
+                    <RiDeleteBin6Line />
                   </button>
                 )}
               </div>
