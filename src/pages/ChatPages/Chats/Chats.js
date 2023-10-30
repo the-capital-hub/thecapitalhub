@@ -164,7 +164,7 @@ const Chats = () => {
           // setSearchParams(searchParams);
         });
     }
-  }, []);
+  }, [paramUserId]);
 
   const renderMobieHeader = () => {
     return (
