@@ -22,12 +22,12 @@ shipping needs."
       <div className="first-section d-flex flex-column   ">
         <div className="inner-section d-flex flex-column  justify-content-evenly flex-md-row">
           <div className="left-section  d-flex flex-column justify-content-evenly  ">
-            <h6>#1 Logistic Platform</h6>
+            {/* <h6>#1 Logistic Platform</h6> */}
             <h1>Seamless Logistics Solutions </h1>
             <p>
-            From doorstep pickups to global deliveries, entrust your shipments to our reliable services and let your worries take a back seat.
+            From doorstep pickups to global deliveries, entrust your logistic applications handle the shipments and let your worries take a back seat.
             </p>
-            <Link to="/web-development" className="LinkBtn">Taking Us</Link>
+            <Link to="/web-development" className="LinkBtn">Contact us</Link>
           </div>
           <div className="right-section">
             <img src={assets.transport} alt="transport" />
@@ -44,18 +44,14 @@ shipping needs."
         <div className="right-section d-flex flex-column">
           <h1>Efficient and Sustainable Transportation</h1>
           <p>
-            Our shared vision and mission in logistics are dedicated to
-            creating efficient, sustainable, and seamless transportation
-            solutions. We connect businesses and individuals, ensuring timely
-            deliveries, fostering global connectivity, and prioritizing customer
-            satisfaction and environmental responsibility
+Our shared vision and mission in logistics are dedicated to creating efficient, sustainable, and seamless transportation solutions. We connect businesses and individuals, ensuring timely deliveries, fostering global connectivity, and prioritizing customer satisfaction and environmental responsibility
           </p>
           {/* <p>
             Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit
             proin risus Sit purus ante dictum in malesuada id. it purus ante
             dictum in malesuada id.
           </p> */}
-          <Link to="/web-development" className="LinkBtn">Taking Us</Link>
+          <Link to="/web-development" className="LinkBtn">Contact us</Link>
           <div className="number-div d-flex flex-column  justify-content-evenly flex-md-row">
             <div className="users">
               <h3>255k+</h3>
@@ -75,17 +71,14 @@ shipping needs."
 
       <div className="thired-section d-flex flex-column  justify-content-evenly flex-md-row align-items-center">
         <div className="left-section p-md-5  m-md-5  d-flex flex-column align-items-center align-items-md-start w-100">
-          <h1>Customizable Pick-Up and Delivery</h1>
+          <h1>Customizable Pick-Up and Delivery -> Customizable Pick-Up and Delivery Features</h1>
           <p>
-            Empower your logistics experience by choosing pick-up and delivery
-            locations that suit your convenience. With our customizable options,
-            you're in control for a seamless and personalized shipping
-            experience
+          Empower your logistics experience by choosing pick-up and delivery locations in the application as per convenience. With our customizable options, you're in control for a seamless and personalized shipping experience"
           </p>
           <div className="buttons d-flex flex-column flex-md-row gap-2 align-items-center  py-auto ">
-            <button>Streamlined Logistics Management</button>
+            <button>efficient and sustainable transportation</button>
             <p className="mt-3">&#x27F6;</p>
-            <button>Destination Location</button>
+            <button>Applications for efficient transportations</button>
           </div>
         </div>
         <div className="right-section w-100">
@@ -104,7 +97,7 @@ shipping needs."
             Our platform streamlines communication, tracking, and management for
             greater efficiency and control over all your logistics needs
           </p>
-          <Link to="/web-development" className="LinkBtn">Taking Us</Link>
+          <Link to="/web-development" className="LinkBtn">Contact us</Link>
         </div>
       </div>
 
@@ -117,7 +110,7 @@ shipping needs."
             globe, we're your trusted partner for seamless and reliable
             deliveries.
           </p>
-          <Link to="/web-development" className="LinkBtn">Taking Us</Link>
+          <Link to="/web-development" className="LinkBtn">Contact us</Link>
         </div>
 
         <div className="right-section">
@@ -126,10 +119,10 @@ shipping needs."
       </div>
 
       <div className="last-section">
-        <div className="left-section">
+        {/* <div className="left-section">
           <h1>What our Customer’s say about us</h1>
-          {/* <p>What our Customer’s say about us</p>
-            <button>View more</button> */}
+          <p>What our Customer’s say about us</p>
+            <button>View more</button> 
           <p>
             The Capital Hub has consistently delivered on their promise of
             reliable logistics solutions. Their services have earned our trust,
@@ -142,7 +135,7 @@ shipping needs."
             satisfaction and peace of mind. We rely on them for all our shipping
             requirements
           </p>
-        </div>
+        </div> */}
         {/* <div className="right-section">
             <p>I loved there work because of the staff working very carefully and the transport is the good i liked there wotk</p>
             <hr />
