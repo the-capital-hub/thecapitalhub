@@ -24,12 +24,6 @@ export default function Greeting() {
         </p>
         <p className="m-0">I am here to help you complete your profile.</p>
       </div>
-
-      <div className="chat_box">
-        <p className="m-0">
-          Start by picking the category to fill your information.
-        </p>
-      </div>
     </>
   );
 }
