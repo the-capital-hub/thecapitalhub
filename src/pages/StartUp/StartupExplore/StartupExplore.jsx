@@ -82,7 +82,6 @@ const investmentSizeOptions = [
   "Major Investments (₹1 Crore and above)",
 ];
 
-
 // const sectorPreferenceOptions = [];
 
 const previousExitsOptions = [
@@ -123,7 +122,6 @@ const diversityMetricsOptions = [
   "Disability Inclusivity",
   "Socioeconomic Diversity",
 ];
-
 
 export default function StartupExplore() {
   const dispatch = useDispatch();
@@ -229,8 +227,9 @@ export default function StartupExplore() {
           {/* Tabs */}
           <div className="startup_explore_tabs d-flex align-items-center border-bottom">
             <button
-              className={`btn_base py-3 px-3 ${activeTab === "Investor" ? "active" : ""
-                }`}
+              className={`btn_base py-3 px-3 ${
+                activeTab === "Investor" ? "active" : ""
+              }`}
               onClick={() => {
                 setFilters(null);
                 setActiveTab("Investor");
@@ -239,8 +238,9 @@ export default function StartupExplore() {
               Investor
             </button>
             <button
-              className={`btn_base py-3 px-3 ${activeTab === "Startup" ? "active" : ""
-                }`}
+              className={`btn_base py-3 px-3 ${
+                activeTab === "Startup" ? "active" : ""
+              }`}
               onClick={() => {
                 setFilters(null);
                 setActiveTab("Startup");
@@ -249,8 +249,9 @@ export default function StartupExplore() {
               Startup
             </button>
             <button
-              className={`btn_base py-3 px-3 ${activeTab === "Founder" ? "active" : ""
-                }`}
+              className={`btn_base py-3 px-3 ${
+                activeTab === "Founder" ? "active" : ""
+              }`}
               onClick={() => {
                 setFilters(null);
                 setActiveTab("Founder");
@@ -277,38 +278,48 @@ export default function StartupExplore() {
             {activeTab === "Investor" && (
               <>
                 <FilterBySelect
+                  value={filters?.sector}
                   onChange={handleOnChange}
                   options={filterOptions?.sectors || sectorOptions}
                   label="Sector"
                   name="sector"
                 />
                 <FilterBySelect
+                  value={filters?.city}
                   onChange={handleOnChange}
                   options={filterOptions?.cities}
                   label="City"
                   name="city"
                 />
                 <FilterBySelect
+                  value={filters?.gender}
                   onChange={handleOnChange}
                   options={filterOptions?.genders || genderOptions}
                   label="Gender"
                   name="gender"
                 />
                 <FilterBySelect
+                  value={filters?.sectorPreference}
                   onChange={handleOnChange}
                   options={filterOptions?.sectors || sectorOptions}
                   label="Sector Preference"
                   name="sectorPreference"
                 />
                 <FilterBySelect
+                  value={filters?.investmentSize}
                   onChange={handleOnChange}
-                  options={filterOptions?.investmentSize || investmentSizeOptions}
+                  options={
+                    filterOptions?.investmentSize || investmentSizeOptions
+                  }
                   label="Investment Size"
                   name="investmentSize"
                 />
                 <FilterBySelect
+                  value={filters?.investmentStage}
                   onChange={handleOnChange}
-                  options={filterOptions?.investmentStage || investmentStageOptions}
+                  options={
+                    filterOptions?.investmentStage || investmentStageOptions
+                  }
                   label="Investment Stage"
                   name="investmentStage"
                 />
@@ -317,42 +328,49 @@ export default function StartupExplore() {
             {activeTab === "Startup" && (
               <>
                 <FilterBySelect
+                  value={filters?.sector}
                   onChange={handleOnChange}
                   options={filterOptions?.sectors || sectorOptions}
                   label="Sector"
                   name="sector"
                 />
                 <FilterBySelect
+                  value={filters?.city}
                   onChange={handleOnChange}
                   options={filterOptions?.cities}
                   label="City"
                   name="city"
                 />
                 <FilterBySelect
+                  value={filters?.size}
                   onChange={handleOnChange}
                   options={filterOptions?.sizes || sizeOptions}
                   label="Size"
                   name="size"
                 />
                 <FilterBySelect
+                  value={filters?.fundingRaised}
                   onChange={handleOnChange}
                   options={filterOptions?.fundingRaised || fundingRaisedOptions}
                   label="Funding Raised"
                   name="fundingRaised"
                 />
                 <FilterBySelect
+                  value={filters?.productStage}
                   onChange={handleOnChange}
                   options={filterOptions?.productStage || productStageOptions}
                   label="Product Stage"
                   name="productStage"
                 />
                 <FilterBySelect
+                  value={filters?.stage}
                   onChange={handleOnChange}
                   options={filterOptions?.stage || stageOptions}
                   label="Stage"
                   name="stage"
                 />
                 <FilterBySelect
+                  value={filters?.age}
                   onChange={handleOnChange}
                   options={filterOptions?.age || ageOptions}
                   label="Age"
@@ -363,44 +381,55 @@ export default function StartupExplore() {
             {activeTab === "Founder" && (
               <>
                 <FilterBySelect
+                  value={filters?.sector}
                   onChange={handleOnChange}
                   options={filterOptions?.sectors || sectorOptions}
                   label="Sector"
                   name="sector"
                 />
                 <FilterBySelect
+                  value={filters?.city}
                   onChange={handleOnChange}
                   options={filterOptions?.cities}
                   label="City"
                   name="city"
                 />
                 <FilterBySelect
+                  value={filters?.gender}
                   onChange={handleOnChange}
                   options={filterOptions?.genders || genderOptions}
                   label="Gender"
                   name="gender"
                 />
                 <FilterBySelect
+                  value={filters?.previousExits}
                   onChange={handleOnChange}
                   options={filterOptions?.previousExits || previousExitsOptions}
                   label="Previous Exits"
                   name="previousExits"
                 />
                 <FilterBySelect
+                  value={filters?.yearsOfExperience}
                   onChange={handleOnChange}
-                  options={filterOptions?.yearsOfExperience || yearsOfExperienceOptions}
+                  options={
+                    filterOptions?.yearsOfExperience || yearsOfExperienceOptions
+                  }
                   label="Years of Experience"
                   name="yearsOfExperience"
                 />
                 <FilterBySelect
+                  value={filters?.education}
                   onChange={handleOnChange}
                   options={filterOptions?.education || educationOptions}
                   label="Education"
                   name="education"
                 />
                 <FilterBySelect
+                  value={filters?.diversityMetrics}
                   onChange={handleOnChange}
-                  options={filterOptions?.diversityMetrics || diversityMetricsOptions}
+                  options={
+                    filterOptions?.diversityMetrics || diversityMetricsOptions
+                  }
                   label="Diversity Metrics"
                   name="diversityMetrics"
                 />
