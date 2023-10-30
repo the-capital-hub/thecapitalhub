@@ -1242,6 +1242,7 @@ export const answerQuestionAPI = async (answerObject) => {
       `${API.answerQuestion}`,
       answerObject
     );
+    return response.data;
   } catch (error) {
     console.error("Error updating answer:", error);
     throw error;

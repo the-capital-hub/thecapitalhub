@@ -18,8 +18,11 @@ const OPTIONS = {
 export default function Questionnaire() {
   const [answer, setAnswer] = useState("");
   const [question, setQuestion] = useState(null);
+  // State for company and personal soptions
   const [option, setOption] = useState(null);
   const [alert, setAlert] = useState(null);
+  // State for history
+  const [history, setHistory] = useState([]);
 
   //   Fetch Questions
   async function fetchQuestion(query) {
@@ -62,8 +65,18 @@ export default function Questionnaire() {
     };
 
     try {
-      const response = await answerQuestionAPI(answerObject);
-      console.log("Response from answerPost", response);
+      const { data } = await answerQuestionAPI(answerObject);
+      console.log("Response from answerPost", data);
+
+      // update history
+      setHistory((prev) => {
+        let copy = [...prev];
+        copy.push({ question: question.question, ...answerObject });
+        setHistory(copy);
+      });
+
+      // fetch next Question
+      fetchQuestion(option.endpoint);
     } catch (error) {
       console.error("Error posting Question:", error);
     }
@@ -75,6 +88,7 @@ export default function Questionnaire() {
     setQuestion(null);
     setOption(null);
     setAlert(null);
+    setHistory([]);
   }
 
   return (
@@ -90,7 +104,7 @@ export default function Questionnaire() {
                 {(option === "Company" || option === null) && (
                   <button
                     type="button"
-                    className="orange_button"
+                    className="category_button"
                     onClick={(e) => handleOption(e, OPTIONS.company)}
                   >
                     {OPTIONS.company.text}
@@ -99,7 +113,7 @@ export default function Questionnaire() {
                 {(option === "Personal" || option === null) && (
                   <button
                     type="button"
-                    className="orange_button"
+                    className="category_button"
                     onClick={(e) => handleOption(e, OPTIONS.personal)}
                   >
                     {OPTIONS.personal.text}
@@ -108,31 +122,51 @@ export default function Questionnaire() {
               </div>
             </div>
 
-            {/* Chat Area */}
-            {question && (
-              <div className="chat_box">
-                <p className="m-0">{question.question}</p>
-              </div>
-            )}
-            {/* Options */}
-            {question?.options.length !== 0 && (
-              <div className="d-flex gap-3 align-items-center flex-wrap mx-3">
-                {question?.options.map((option) => {
-                  return (
-                    <button
-                      type="button"
-                      className={`option_button ${
-                        option === answer && "selected"
-                      }`}
-                      key={option}
-                      onClick={() => setAnswer(option)}
-                    >
-                      {option}
-                    </button>
-                  );
-                })}
-              </div>
-            )}
+            {/* History */}
+            {history?.length > 0 &&
+              history?.map((data, index) => {
+                return (
+                  <div
+                    className="d-flex flex-column gap-3"
+                    key={data.questionId}
+                  >
+                    <div className="chat_box">
+                      <p className="m-0">{data.question}</p>
+                    </div>
+                    <div className="answer_box">
+                      <p className="m-0">{data.answer}</p>
+                    </div>
+                  </div>
+                );
+              })}
+
+            {/* Current Question */}
+            <div className="current_question mt-5 d-flex flex-column gap-3">
+              {question && (
+                <div className="chat_box">
+                  <p className="m-0">{question.question}</p>
+                </div>
+              )}
+              {/* Options */}
+              {question?.options.length !== 0 && (
+                <div className="d-flex gap-3 align-items-center flex-wrap mx-3">
+                  {question?.options.map((option) => {
+                    return (
+                      <button
+                        type="button"
+                        className={`option_button ${
+                          option === answer && "selected"
+                        }`}
+                        key={option}
+                        onClick={() => setAnswer(option)}
+                      >
+                        {option}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
 
             {alert && (
               <div className="chat_box">
