@@ -621,7 +621,7 @@ const OneLinkEditView = () => {
                 />
                 {index > 0 && (
                   <button
-                    className="delete_row_btn"
+                    className="delete_row_btn delete_insideText"
                     onClick={() => deleteCompetitor(index)}
                   >
                     <RiDeleteBin6Line />
@@ -683,7 +683,7 @@ const OneLinkEditView = () => {
                     className="delete_row_btn"
                     onClick={() => deleteRow(index)}
                   >
-                    X
+                    <RiDeleteBin6Line />
                   </button>
                 )}
               </div>
@@ -736,7 +736,7 @@ const OneLinkEditView = () => {
                     className="delete_row_btn"
                     onClick={() => deleteRoadMapRow(index)}
                   >
-                    X
+                    <RiDeleteBin6Line />
                   </button>
                 )}
               </div>

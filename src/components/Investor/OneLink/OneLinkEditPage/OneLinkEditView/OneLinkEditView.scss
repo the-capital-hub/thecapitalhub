@@ -497,12 +497,15 @@
   .delete_row_btn {
     border-radius: 5px;
     font-size: 14px;
-    position: absolute;
-    right: 0;
-    top: 0;
     border: none;
     background: transparent;
     cursor: pointer;
+  }
+
+  .delete_insideText {
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 
   .startup {
