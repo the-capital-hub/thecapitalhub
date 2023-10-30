@@ -15,7 +15,7 @@ export default function UserInput({
         id="answer"
         placeholder="Type here..."
         className="user_input border-0 px-3 py-4 rounded-4"
-        value={answer}
+        value={question?.options?.length > 0 ? "" : answer}
         onChange={handleAnswerChange}
         autoFocus
         rows={1}

@@ -1,9 +1,10 @@
 import React from "react";
+import IconTick from "../../../../SvgIcons/IconTick";
 
 export default function CurrentQuestion({
   question,
   answer,
-  setAnswer,
+  handleAnswerSelect,
   handleBackToCategories,
 }) {
   return (
@@ -15,16 +16,23 @@ export default function CurrentQuestion({
       )}
       {/* Options */}
       {question && (
-        <div className="d-flex gap-3 align-items-center flex-wrap mx-3">
+        <div className="d-flex gap-3 align-items-center flex-wrap mx-3 ">
           {question?.options?.map((option) => {
             return (
               <button
-                type="button"
-                className={`option_button ${option === answer && "selected"}`}
                 key={option}
-                onClick={() => setAnswer(option)}
+                type="button"
+                className={`position-relative option_button ${
+                  (option === answer || answer.includes(option)) && "selected"
+                }`}
+                onClick={(e) => handleAnswerSelect(e, option)}
               >
                 {option}
+                {(option === answer || answer.includes(option)) && (
+                  <div className="position-absolute select_badge">
+                    <IconTick />
+                  </div>
+                )}
               </button>
             );
           })}
@@ -34,7 +42,7 @@ export default function CurrentQuestion({
       {question && (
         <button
           type="button"
-          className="option_button align-self-start mx-3"
+          className="option_button back_button align-self-start mx-3"
           onClick={handleBackToCategories}
         >
           Go back to Categories

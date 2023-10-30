@@ -23,7 +23,7 @@ export const OPTIONS = {
 export default function Questionnaire() {
   const dispatch = useDispatch();
 
-  const [answer, setAnswer] = useState(null);
+  const [answer, setAnswer] = useState("");
   const [question, setQuestion] = useState(null);
   // State for company and personal soptions
   const [option, setOption] = useState(null);
@@ -57,10 +57,40 @@ export default function Questionnaire() {
 
   // Handle answer change
   function handleAnswerChange(e) {
+    // Auto resize text area
     e.target.style.height = "auto";
     e.target.style.height = e.target.scrollHeight + "px";
 
+    // Set Answer
     setAnswer(e.target.value);
+  }
+
+  // Handle Answer Select
+  function handleAnswerSelect(e, option) {
+    if (answer.includes(option)) {
+      // Deselect answer
+      let index = answer.indexOf(option);
+      setAnswer((prev) => {
+        let copy = [...prev];
+        copy.splice(index, 1);
+        return [...copy];
+      });
+    } else {
+      // Set Answer
+      if (question.isMultipleOption) {
+        if (!answer) {
+          setAnswer([option]);
+        } else {
+          setAnswer((prev) => {
+            let copy = [...prev];
+            copy.push(option);
+            return [...copy];
+          });
+        }
+      } else {
+        setAnswer(option);
+      }
+    }
   }
 
   // handle Post Answer
@@ -84,10 +114,13 @@ export default function Questionnaire() {
       });
 
       // If personal, update loggedInUser
-      // dispatch(updateLoggedInUser())
+      if (question.type === OPTIONS.personal.text) {
+        let fieldName = question.fieldName;
+        dispatch(updateLoggedInUser({ [fieldName]: answer }));
+      }
 
       // Clear answer
-      setAnswer(null);
+      setAnswer("");
 
       // fetch next Question
       fetchQuestion(option.endpoint);
@@ -98,18 +131,14 @@ export default function Questionnaire() {
 
   // Handle Back to categories
   function handleBackToCategories() {
-    if (!answer) {
-      setQuestion(null);
-      setOption(null);
-    } else {
-      setQuestion(null);
-      setOption(null);
-    }
+    setQuestion(null);
+    setOption(null);
+    setAnswer("");
   }
 
   //   clearStates
   function clearStates() {
-    setAnswer(null);
+    setAnswer("");
     setQuestion(null);
     setOption(null);
     setAlert(null);
@@ -138,7 +167,7 @@ export default function Questionnaire() {
             <CurrentQuestion
               question={question}
               answer={answer}
-              setAnswer={setAnswer}
+              handleAnswerSelect={handleAnswerSelect}
               handleBackToCategories={handleBackToCategories}
             />
 
