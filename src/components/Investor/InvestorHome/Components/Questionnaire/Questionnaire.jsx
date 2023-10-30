@@ -122,9 +122,8 @@ export default function Questionnaire() {
 
       // Clear answer
       setAnswer("");
-
       // fetch next Question
-      fetchQuestion(option.endpoint);
+      fetchQuestion(question.type);
     } catch (error) {
       console.error("Error posting Question:", error);
     }
