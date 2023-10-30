@@ -175,7 +175,7 @@ const Chats = () => {
           className="btn btn-sm btn-light"
           onClick={() => dispatch(resetChat())}
         >
-          <IoMdArrowRoundBack />
+          <IoMdArrowRoundBack /> Back
         </button>
         <Link to="/">
           <img src={navBarLogo} alt="nav bar logo" />
@@ -188,7 +188,7 @@ const Chats = () => {
             )
           }
         >
-          <AiOutlineHome />
+          <AiOutlineHome /> Home
         </button>
       </div>
     );
