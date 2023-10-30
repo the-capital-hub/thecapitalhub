@@ -37,6 +37,7 @@ import NewCommunityModal from "../ChatComponents/NewCommunityModal";
 import companyProfileIcon from "../../../Images/StartUp/Sidebar/companyProfile.svg";
 import ExploreIcon from "../../../Images/Investor/Sidebar/explore.svg";
 
+// Startup Sidebar
 const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -64,6 +65,30 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
     navigate("/chats?isCommunityOpen=true");
   }
 
+  const [touchStartX, setTouchStartX] = useState(null);
+  const [touchEndX, setTouchEndX] = useState(null);
+
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEndX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX && touchEndX) {
+      const deltaX = touchEndX - touchStartX;
+      if (deltaX < -50) {
+        setSidebarCollapsed(false); // Expand the sidebar
+      } else if (deltaX > 50) {
+        setSidebarCollapsed(true); // Collapse the sidebar
+      }
+      setTouchStartX(null);
+      setTouchEndX(null);
+    }
+  };
+
   return (
     <div
       className={`startup_sidebar ${sidebarCollapsed ? "collapsed" : ""}`}
@@ -77,6 +102,9 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           setSidebarCollapsed(false);
         }
       }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       <div
         className={`close-menu ${
@@ -102,7 +130,11 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   {" "}
                   <img
                     className="rounded-circle"
-                    style={{ width: "50px", height: "50px", objectFit:"cover" }}
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      objectFit: "cover",
+                    }}
                     src={loggedInUser.profilePicture}
                     alt="User profile"
                   />
@@ -116,7 +148,11 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     {" "}
                     <img
                       className="rounded-circle"
-                      style={{ width: "70px", height: "70px", objectFit:"cover" }}
+                      style={{
+                        width: "70px",
+                        height: "70px",
+                        objectFit: "cover",
+                      }}
                       src={loggedInUser.profilePicture}
                       alt="image"
                     />

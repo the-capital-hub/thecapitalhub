@@ -327,7 +327,8 @@
     z-index: 10;
   }
 
-  input {
+  input,
+  textarea {
     border: none;
     outline: none;
     color: black;
@@ -344,7 +345,8 @@
     color: #fd5901;
   }
 
-  input {
+  input,
+  textarea {
     border-radius: 10px;
     height: 69px;
   }
