@@ -124,7 +124,7 @@ export default function CommunityCard({
           />
         )}
       </span>
-      <div className="d-flex justify-content-between w-100">
+      <div className="d-flex justify-content-between w-100" >
         <div className="d-flex flex-column justify-content-between gap-1">
           <h5
             className="m-0 text-capitalize text__clip--15"
