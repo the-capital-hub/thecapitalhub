@@ -141,16 +141,16 @@ export default function Questionnaire() {
               })}
 
             {/* Current Question */}
-            <div className="current_question mt-5 d-flex flex-column gap-3">
+            <div className="current_question mt-5">
               {question && (
                 <div className="chat_box">
                   <p className="m-0">{question.question}</p>
                 </div>
               )}
               {/* Options */}
-              {question?.options.length !== 0 && (
+              {question && (
                 <div className="d-flex gap-3 align-items-center flex-wrap mx-3">
-                  {question?.options.map((option) => {
+                  {question?.options?.map((option) => {
                     return (
                       <button
                         type="button"
@@ -167,7 +167,9 @@ export default function Questionnaire() {
                 </div>
               )}
             </div>
+            {/* Answer for current Question */}
 
+            {/* Alert */}
             {alert && (
               <div className="chat_box">
                 <em>{alert}</em>
@@ -186,7 +188,7 @@ export default function Questionnaire() {
                 onChange={handleAnswerChange}
                 autoFocus
                 rows={1}
-                disabled={question?.options.length !== 0}
+                disabled={question?.options?.length > 0}
               />
               <button
                 type="button"
