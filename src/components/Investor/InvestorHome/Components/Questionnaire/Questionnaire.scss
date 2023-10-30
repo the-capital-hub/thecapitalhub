@@ -1,22 +1,41 @@
 .questionnaire_wrapper {
+  --color-main: rgba(253, 89, 1, 1);
+  --color-text: #fff;
+  --color-shadow: rgba(0, 0, 0, 0.05);
+
   .offcanvas {
     --bs-offcanvas-width: min(95dvw, 600px);
   }
 
   //   component styles
   .chat_box {
-    min-height: 65px;
+    // min-height: 65px;
     margin-inline: 16px;
     padding: 8px;
     border: 1px solid #e7e7e7;
     border-radius: 5px;
+    border-bottom-left-radius: 0px;
     box-shadow: 5px 5px 30px 0px rgba(0, 0, 0, 0.05);
   }
 
-  .orange_button {
-    background-color: rgba(253, 89, 1, 1);
-    border: 1px solid rgba(253, 89, 1, 1);
-    color: white;
+  .answer_box {
+    align-self: flex-end;
+    margin-inline: 16px;
+    padding-inline: 1em;
+    padding-block: 1em;
+    border: 1px solid var(--color-main);
+    border-radius: 5px;
+    border-bottom-right-radius: 0px;
+    box-shadow: 5px 5px 30px 0px rgba(0, 0, 0, 0.05);
+
+    background-color: var(--color-main);
+    color: var(--color-text);
+  }
+
+  .category_button {
+    background-color: var(--color-main);
+    border: 1px solid var(--color-main);
+    color: var(--color-text);
     padding: 1em 2em;
     border-radius: 10rem;
     font-size: 1rem;
@@ -28,6 +47,32 @@
     }
   }
 
+  .option_button {
+    cursor: pointer;
+    outline: none;
+    border: 1px solid rgba(96, 96, 96, 0.19);
+    color: rgba(121, 121, 121, 1);
+    background-color: transparent;
+    box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.05);
+    font-size: 1rem;
+    line-height: normal;
+
+    padding: 0.75em 1.5em;
+    border-radius: 10rem;
+
+    &:hover {
+      border: 1px solid var(--color-main);
+      background-color: var(--color-main);
+      color: var(--color-text);
+    }
+
+    &.selected {
+      border: 1px solid var(--color-main);
+      background-color: var(--color-main);
+      color: var(--color-text);
+    }
+  }
+
   .user_input_container {
     margin-top: 5em;
   }
@@ -35,12 +80,14 @@
   .user_input {
     background-color: #efefef;
     outline: 0;
+    width: 100%;
+    resize: none;
   }
 
   .send_btn {
-    width: 70px;
+    flex: 0 0 70px;
     height: 70px;
-    background-color: rgba(253, 89, 1, 1);
+    background-color: var(--color-main);
     border: 1px solid transparent;
     border-radius: 50%;
 
