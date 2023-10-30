@@ -51,6 +51,7 @@ export default function Questionnaire() {
 
   //   handle Option
   function handleOptionSelect(e, option) {
+    // console.log("selected categry", option);
     setOption(option.text);
     fetchQuestion(option.endpoint);
   }
@@ -114,7 +115,7 @@ export default function Questionnaire() {
       });
 
       // If personal, update loggedInUser
-      if (question.type === OPTIONS.personal.text) {
+      if (question.schema === "user") {
         let fieldName = question.fieldName;
         dispatch(updateLoggedInUser({ [fieldName]: answer }));
       }
