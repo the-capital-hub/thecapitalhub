@@ -413,7 +413,7 @@ const OneLinkEditView = () => {
             onClick={() => navigate(-1)}
           />
         </span>
-        <div className="download_preview p-5 ">
+        <div className="download_preview p-md-5 ">
           <section className=" img_company_data d-flex flex-column flex-md-row w-100 justify-content-between align-items-center gap-3">
             <div className="img_right ">
               <label htmlFor="logoImg" className="position-relative">
@@ -552,7 +552,7 @@ const OneLinkEditView = () => {
             <h5>About Company</h5>
             <textarea
               type="text"
-              className="m-0 fs-6 w-100"
+              className="m-0 fs-6 w-100 text-dark p-3"
               value={formData.description}
               onChange={(e) => handleInputChange("description", e)}
               onBlur={(e) => handleUpdate()}
