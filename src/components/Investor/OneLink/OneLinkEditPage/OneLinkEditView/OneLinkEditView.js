@@ -552,7 +552,7 @@ const OneLinkEditView = () => {
             <h5>About Company</h5>
             <textarea
               type="text"
-              className="m-0 fs-6 w-100"
+              className="m-0 fs-6 w-100 text-dark p-3"
               value={formData.description}
               onChange={(e) => handleInputChange("description", e)}
               onBlur={(e) => handleUpdate()}
