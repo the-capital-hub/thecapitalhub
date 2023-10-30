@@ -122,9 +122,9 @@ export default function MySchedule() {
                 >
                   View requests
                 </button>
-                <button className="btn-capital lh-1 py-2 py-md-3">
+                {/* <button className="btn-capital lh-1 py-2 py-md-3">
                   Create Meeting
-                </button>
+                </button> */}
               </div>
             </div>
 

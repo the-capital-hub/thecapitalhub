@@ -22,6 +22,7 @@ export default function InvestorOnelink() {
   const [isExitClicked, setIsExitClicked] = useState(false);
   const [company, setCompany] = useState([]);
   const dispatch = useDispatch();
+  // const [isUpdated, setIsUpdated] = useState(false);
 
   useEffect(() => {
     document.title = "One Link | The Capital Hub";

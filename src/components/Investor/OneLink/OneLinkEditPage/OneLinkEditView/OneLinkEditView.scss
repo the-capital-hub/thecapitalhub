@@ -317,7 +317,18 @@
 .one_link_edit_view_section {
   background: #fff;
 
-  input {
+  .back_img {
+    width: fit-content;
+    padding: 10px;
+    height: max-content;
+    background: #eaeef2;
+    cursor: pointer;
+    position: fixed;
+    z-index: 10;
+  }
+
+  input,
+  textarea {
     border: none;
     outline: none;
     color: black;
@@ -334,7 +345,8 @@
     color: #fd5901;
   }
 
-  input {
+  input,
+  textarea {
     border-radius: 10px;
     height: 69px;
   }
@@ -376,7 +388,6 @@
       }
     }
 
-
     .compant_data {
       width: 100%;
 
@@ -384,7 +395,6 @@
         position: relative;
         border: 1px solid #e2e2e2;
         border-radius: 10px;
-
       }
 
       .location_data_div {
@@ -399,7 +409,6 @@
           border: 1px solid #e2e2e2;
           border-radius: 10px;
         }
-
       }
 
       .tags_inp {
@@ -425,7 +434,6 @@
         border-radius: 10px;
         margin-top: 20px;
       }
-
     }
   }
 
@@ -456,7 +464,6 @@
       border-radius: 10px;
       margin-top: 20px;
     }
-
   }
 
   .competitor_social_link {
@@ -465,9 +472,7 @@
       border: 1px solid #e2e2e2;
       border-radius: 10px;
       margin-top: 20px;
-
     }
-
   }
 
   .table_section {
@@ -490,21 +495,15 @@
   }
 
   .delete_row_btn {
-    margin-top: 10px;
-    padding: 0.15em 0.5em;
-    /* Adjust the padding */
     border-radius: 5px;
     font-size: 14px;
-    /* Adjust the font size */
+    position: absolute;
+    right: 0;
+    top: 0;
     border: none;
-    /* Remove the border */
     background: transparent;
-    /* Make the background transparent */
     cursor: pointer;
-    /* Change cursor on hover */
   }
-
-
 
   .startup {
     border: 1px solid #fd5901;

@@ -140,7 +140,7 @@ function Search() {
                   </div>
                 </div>
               ) : CompanyData?.length === 0 ? (
-                <h6 className="text-center">No Companys Found</h6>
+                <h6 className="text-center">No Companies Found</h6>
               ) : (
                 CompanyData?.map((company, index) => (
                   <div

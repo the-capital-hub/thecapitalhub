@@ -12,6 +12,7 @@ import {
 } from "../../../Service/user";
 import { useSelector } from "react-redux";
 import "./AddEditModal.scss";
+import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 
 export default function AddEditModal({
   dataArray,
@@ -32,6 +33,7 @@ export default function AddEditModal({
   const [isEdited, setIsEdited] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
   const [isNewImage, setNewImage] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (event) => {
     console.log(testformData);
@@ -60,6 +62,7 @@ export default function AddEditModal({
   //handle add and edit
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     try {
       if (isEdited) {
         const { data: investor } = await getInvestorById(
@@ -123,6 +126,8 @@ export default function AddEditModal({
       resetFormData();
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -163,6 +168,10 @@ export default function AddEditModal({
   };
 
   const handleDelete = async (index) => {
+    const confirmed = window.confirm("Are you sure you want to delete this item?");
+    if (!confirmed) {
+      return;
+    }
     try {
       const { data: investor } = await getInvestorById(loggedInUser?.investor);
       if (isStartups) {
@@ -347,9 +356,18 @@ export default function AddEditModal({
               <button
                 className="btn green_button w-auto fs-6 ms-2"
                 type="submit"
-                data-bs-dismiss="modal"
+              // data-bs-dismiss="modal"
               >
-                Save
+                {loading ? (
+                  <SpinnerBS
+                    colorClass={
+                      loggedInUser.isInvestor === "true" ? "text-dark" : "text-light"
+                    }
+                    spinnerSizeClass="spinner-border-sm"
+                  />
+                ) : (
+                  "Save"
+                )}
               </button>
             </div>
           </div>

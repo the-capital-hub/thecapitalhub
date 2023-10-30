@@ -287,9 +287,8 @@ const FeedPostCard = ({
       <div className="row investor_feedpostcard_main_container mb-2">
         <div className="col-12">
           <div
-            className={`box feedpostcard_container mt-2 border ${
-              repostPreview && "rounded shadow-sm"
-            }`}
+            className={`box feedpostcard_container mt-2 border ${repostPreview && "rounded shadow-sm"
+              }`}
           >
             {loading && (
               <div class="d-flex justify-content-center my-4">
@@ -375,7 +374,12 @@ const FeedPostCard = ({
                         {userId === loggedInUser?._id && (
                           <li onClick={() => deletePost(postId)}>Delete</li>
                         )}
-                        <li onClick={() => setShowReportModal(true)}>Report</li>
+                        <li
+                          data-bs-toggle="modal"
+                          data-bs-target="#reportPostModal"
+                          onClick={() => setShowReportModal(true)}>
+                          Report
+                        </li>
                       </ul>
                     )}
                   </div>
@@ -488,9 +492,8 @@ const FeedPostCard = ({
                   </div>
                   <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                     <span
-                      className={`repost_container rounded ${
-                        showRepostOptions ? "bg-light" : ""
-                      }`}
+                      className={`repost_container rounded ${showRepostOptions ? "bg-light" : ""
+                        }`}
                       ref={repostContainerRef}
                     >
                       <img
@@ -742,9 +745,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Harassment" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio1"
               >
                 Harassment
@@ -761,9 +763,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Spam" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio2"
               >
                 Spam
@@ -780,9 +781,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Fraud or scam" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio3"
               >
                 Fraud or scam
@@ -799,12 +799,11 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Hateful Speech" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio4"
               >
-                Hateful Speech
+                Hateful Speechh
               </label>
             </div>
           </div>
@@ -816,17 +815,26 @@ const FeedPostCard = ({
             rather than reporting.
           </span>
         </ModalBSBody>
-        <ModalBSFooter cancel cancelClass="cancel_button btn">
+        <ModalBSFooter >
           {!filingReport ? (
             <button
               type="submit"
               className="submit_button btn"
               onClick={reportSubmitHandler}
+              style={{
+                backgroundColor: '#d3f36b',
+                color: 'black'
+              }}
             >
               Submit report
             </button>
           ) : (
-            <button class="submit_button btn" type="button" disabled>
+            <button class="submit_button btn" type="button" disabled
+            style={{
+              backgroundColor: '#d3f36b',
+              color: 'black' 
+            }}
+            >
               <span role="status" className="me-1">
                 Submit report
               </span>

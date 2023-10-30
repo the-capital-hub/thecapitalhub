@@ -27,7 +27,7 @@ function getEmptyFields(data) {
   const emptyFields = [];
   if (data && Object.keys(data).length > 0) {
     for (const key in data) {
-      if (!data[key]) {
+      if (!data[key] || (Array.isArray(data[key]) && data[key].length === 0)) {
         emptyFields.push(key);
       }
     }
@@ -51,14 +51,16 @@ export const getUnansweredQuestion = async (userId, questionType) => {
     } else if (questionType === "Startup") {
       if (user.startUp) {
         const startup = await StartUpModel.findById(user.startUp);
+        const userEmptyFields = getEmptyFields(user);
         const emptyFields = getEmptyFields(startup);
-        question = await QuestionModel.findOne({ type: "Startup", fieldName: { $in: emptyFields } });
+        question = await QuestionModel.findOne({ type: "Startup", fieldName: { $in: emptyFields.concat(userEmptyFields) } });
       }
     } else if (questionType === "Investor") {
       if (user.investor) {
         const investor = await InvestorModel.findById(user.investor);
+        const userEmptyFields = getEmptyFields(user);
         const emptyFields = getEmptyFields(investor);
-        question = await QuestionModel.findOne({ type: "Investor", fieldName: { $in: emptyFields } });
+        question = await QuestionModel.findOne({ type: "Investor", fieldName: { $in: emptyFields.concat(userEmptyFields) } });
       }
     }
     if (!question) {
@@ -98,14 +100,14 @@ export const answerQuestion = async (questionId, answer, userId) => {
         message: "Question not found.",
       };
     }
-    if (question.type === "Personal") {
+    if (question.schema === "user") {
       user[question.fieldName] = answer;
       await user.save();
-    } else if (question.type === "Startup") {
+    } else if (question.schema === "startup") {
       const startup = await StartUpModel.findById(user.startUp);
       startup[question.fieldName] = answer;
       await startup.save();
-    } else if (question.type === "Investor") {
+    } else if (question.schema === "investor") {
       const investor = await InvestorModel.findById(user.investor);
       investor[question.fieldName] = answer;
       await investor.save();

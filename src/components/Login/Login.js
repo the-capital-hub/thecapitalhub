@@ -135,21 +135,21 @@ const Login = () => {
   const googleUserVerifyHandler = async ({ credential }) => {
     try {
       const { data, token } = await googleLoginAPI(credential);
+      console.log(data, token);
       localStorage.setItem("accessToken", token);
       localStorage.setItem("isLoggedIn", "true");
-      if (!isInvestorSelected) {
-        if (data.isInvestor === "true") {
-          setError("Invalid credentials");
-          return;
-        }
-      }
-      if (isInvestorSelected) {
-        if (data.isInvestor === "false") {
-          setError("Invalid credentials");
-          return;
-        }
-      }
-
+      // if (!isInvestorSelected) {
+      //   if (data.isInvestor === "true") {
+      //     setError("Invalid credentials");
+      //     return;
+      //   }
+      // }
+      // if (isInvestorSelected) {
+      //   if (data.isInvestor === "false") {
+      //     setError("Invalid credentials");
+      //     return;
+      //   }
+      // }
       setIsLoginSuccessfull(true);
 
       setTimeout(() => {
@@ -162,6 +162,7 @@ const Login = () => {
 
       dispatch(loginSuccess(data));
     } catch (error) {
+      navigate("/signup");
       console.log(error);
     }
   };

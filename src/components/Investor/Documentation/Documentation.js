@@ -88,50 +88,50 @@ const Documentation = () => {
           <SmallProfileCard text={"Documentation"} />
           <div className="documentationStartup">
             {showModal && (
-              <UploadModal onCancel={setShowModal} fetchFolder={getFolders}  />
+              <UploadModal onCancel={setShowModal} fetchFolder={getFolders} />
             )}
             <IntroductoryMessage
               title={"Upload your document"}
-              // para={
-              //   "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
-              // }
+            // para={
+            //   "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
+            // }
             />
-            <UploadContainer onClicked={setShowModal} fetchFolder={getFolders}/>
+            <UploadContainer onClicked={setShowModal} fetchFolder={getFolders} />
             <div className="cards px-xxl-4 bg-white py-5 rounded-4">
               {/* <Card
                   onClicked={() => navigate("/documentation/financials")}
                   text={"Financials"}
                 /> */}
-{folderName.map((folder, index) => {
-  let imageToShow;
+              {folderName.map((folder, index) => {
+                let imageToShow;
 
-  switch (folder) {
-    case 'pitchdeck':
-      imageToShow = Pitch; 
-      break;
-    case 'business':
-      imageToShow = Business; 
-      break;
-    case 'kycdetails':
-      imageToShow = KYC; 
-      break;
-    case 'legal and compliance':
-      imageToShow = Legal; 
-      break;
-    default:
-      imageToShow = Pitch;
-  }
+                switch (folder) {
+                  case 'pitchdeck':
+                    imageToShow = Pitch;
+                    break;
+                  case 'business':
+                    imageToShow = Business;
+                    break;
+                  case 'kycdetails':
+                    imageToShow = KYC;
+                    break;
+                  case 'legal and compliance':
+                    imageToShow = Legal;
+                    break;
+                  default:
+                    imageToShow = Pitch;
+                }
 
 
-  return (
-    <Card
-      key={index}
-      onClicked={() => navigate(`/documentation/${folder}`)}
-      text={folder}
-      image={imageToShow}
-    />
-  );
-})}
+                return (
+                  <Card
+                    key={index}
+                    onClicked={() => navigate(`/documentation/${folder}`)}
+                    text={folder}
+                    image={imageToShow}
+                  />
+                );
+              })}
 
               {/* <Card
                 onClicked={() => navigate("/documentation/business")}
@@ -164,9 +164,9 @@ const Documentation = () => {
           <NewsCorner />
         </div>
       </div>
-      
 
-    
+
+
 
     </MaxWidthWrapper>
     // <div className="container-fluid investorHome_main_container">
