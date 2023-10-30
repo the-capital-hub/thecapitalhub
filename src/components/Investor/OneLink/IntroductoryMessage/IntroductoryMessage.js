@@ -3,12 +3,14 @@ import "./IntroductoryMessage.scss";
 import Send from "../../../../Images/Send.svg";
 import { updateIntroMsgAPI, postInvestorData } from "../../../../Service/user";
 import { useSelector } from "react-redux";
+import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 
 const IntroductoryMessage = ({ title, image, para, previous, input, className, isExitClicked, setCompany, investor = false }) => {
   const [newIntroMsg, setNewIntroMsg] = useState("");
   const [newPara, setNewPara] = useState("");
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [showPreviousMessages, setShowPreviousMessages] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const togglePreviousMessages = () => {
     setShowPreviousMessages(!showPreviousMessages);
@@ -16,10 +18,11 @@ const IntroductoryMessage = ({ title, image, para, previous, input, className, i
   let top3Previous = [];
   if (previous) {
     const sortedPrevious = [...previous];
-    top3Previous = sortedPrevious.slice(0, 3);
+    top3Previous = sortedPrevious.slice(-3);
   }
 
   const submitNewIMHandler = async () => {
+    setLoading(true);
     try {
       const formattedMsg = newIntroMsg.replace(/\n/g, "<br/>");
       if (investor) {
@@ -43,10 +46,13 @@ const IntroductoryMessage = ({ title, image, para, previous, input, className, i
       setCompany((prevCompany) => ({
         ...prevCompany,
         introductoryMessage: formattedMsg,
+        previousIntroductoryMessage: [...previous, formattedMsg],
       }));
       setNewIntroMsg("");
     } catch (error) {
       console.error("Error updating intro: ", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -111,7 +117,15 @@ const IntroductoryMessage = ({ title, image, para, previous, input, className, i
                 }}
               />
               <div className="right_icons" onClick={submitNewIMHandler}>
-                <img src={Send} alt="Send" />
+                {loading ? (
+                  <SpinnerBS
+                    // colorClass={}
+                    spinnerSizeClass="spinner-border-sm"
+                  />
+                ) : (
+                  <img src={Send} alt="Send" />
+                )}
+
               </div>
             </div>
           </section>

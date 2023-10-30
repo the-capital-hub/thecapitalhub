@@ -4,14 +4,14 @@ import axios from "axios";
 import { environment } from "../../../../environments/environment";
 import AfterSuccessPopUp from "../../../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import { useSelector } from "react-redux";
-import { s3  } from "../../../../Service/awsConfig";
+import { s3 } from "../../../../Service/awsConfig";
 import IconDelete from "../../SvgIcons/IconDelete";
 import { getFoldersApi } from "../../../../Service/user";
 
 
 const baseUrl = environment.baseUrl;
 
-const UploadModal = ({ onCancel , fetchFolder }) => {
+const UploadModal = ({ onCancel, fetchFolder }) => {
   // Fetch loggedInUser from global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
@@ -30,8 +30,10 @@ const UploadModal = ({ onCancel , fetchFolder }) => {
     const getFolders = () => {
       getFoldersApi(loggedInUser._id)
         .then((data) => {
-          console.log(data.data);
-          setFolderSelector(data.data);
+          const folders = data.data;
+          folders.push("Other");
+          console.log(folders);
+          setFolderSelector(folders);
         })
         .catch((error) => {
           console.log(error);
@@ -55,8 +57,24 @@ const UploadModal = ({ onCancel , fetchFolder }) => {
     setFiles(filesCopy);
   };
 
+  function getContentType(fileExtension) {
+    const contentTypeMap = {
+      txt: 'text/plain',
+      png: 'image/png',
+      jpg: 'image/jpeg',
+      jpeg: 'image/jpeg',
+      pdf: 'application/pdf',
+      pdfxml: 'application/vnd.adobe.pdfxml',
+      docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    };
+
+    return contentTypeMap[fileExtension] || 'application/octet-stream';
+  }
+
+
   const handlePdfUploadClick = async () => {
-    
+
     if (files.length === 0) {
       return;
     }
@@ -67,10 +85,15 @@ const UploadModal = ({ onCancel , fetchFolder }) => {
       const file = files[i];
       const timestamp = Date.now();
       const fileName = `${timestamp}_${file.name}`;
+      const fileExtension = file.name.split('.').pop();
+      const contentType = getContentType(fileExtension);
+
       const params = {
         Bucket: "capitalhubdocuments",
         Key: `documents/${fileName}`,
         Body: file,
+        ContentDisposition: "inline",
+        ContentType: contentType
       };
 
       const uploadRequest = s3.upload(params);
@@ -87,7 +110,7 @@ const UploadModal = ({ onCancel , fetchFolder }) => {
           fileUrl: res.Location,
           fileName: file.name,
           userId: loggedInUser._id,
-          folderName: folder==="Other"?folderName:folder,
+          folderName: folder === "Other" ? folderName : folder,
         };
 
         await axios
@@ -156,25 +179,25 @@ const UploadModal = ({ onCancel , fetchFolder }) => {
             <option value="Other">Other</option>
 
           </select> */}
-<select onChange={(e) => setFolder(e.target.value)} name="Folder" id="">
-  {folderSelector?.map((item, index) => (
-    <option key={index} value={item}>
-      {item}
-    </option>
-  ))}
-  <option value="Other">Other</option>
-</select>
+          <select onChange={(e) => setFolder(e.target.value)} name="Folder" id="">
+            {folderSelector?.map((item, index) => (
+              <option key={index} value={item}>
+                {item}
+              </option>
+            ))}
+            {/* <option value="Other">Other</option> */}
+          </select>
 
 
-          {folder==="Other" && (
+          {folder === "Other" && (
             <input
-            className="name_input rounded-pill px-3 py-2 "
+              className="name_input rounded-pill px-3 py-2 "
               type="text"
               placeholder="Enter folder name"
               value={folderName}
               onChange={(e) => setFolderName(e.target.value)}
             />
-        )}
+          )}
 
           {folder && (
             <>
@@ -185,9 +208,11 @@ const UploadModal = ({ onCancel , fetchFolder }) => {
                     id="files"
                     ref={fileInputRef}
                     multiple
+                    accept=".txt, .png, .jpg, .jpeg, .pdf, .pdfxml, .docx, .xlsx"
                     onChange={handleFileSelect}
                     className="visually-hidden"
                   />
+
                   <label htmlFor="files" className="doc_upload_label">
                     Select Files
                   </label>
