@@ -5,7 +5,10 @@ import OffcanvasBSBody from "../../../../PopUp/OffcanvasBS/OffcanvasBSBody/Offca
 import "./Questionnaire.scss";
 import IconSend from "../../../SvgIcons/IconSend";
 import Greeting from "./Greeting/Greeting";
-import { getQuestionsAPI } from "../../../../../Service/user";
+import {
+  answerQuestionAPI,
+  getQuestionsAPI,
+} from "../../../../../Service/user";
 
 const OPTIONS = {
   company: { text: "Company", endpoint: "Startup" },
@@ -22,7 +25,7 @@ export default function Questionnaire() {
   async function fetchQuestion(query) {
     try {
       const { data, message } = await getQuestionsAPI(query);
-      //   console.log(data, message);
+      console.log(data, message);
       setQuestion(data);
       if (!data) {
         setAlert(message);
@@ -48,6 +51,22 @@ export default function Questionnaire() {
     e.target.style.height = e.target.scrollHeight + "px";
 
     setAnswer(e.target.value);
+  }
+
+  // handle Post Answer
+  async function handlePostAnswer(e) {
+    console.log("answer is", answer);
+    const answerObject = {
+      questionId: question._id,
+      answer: answer,
+    };
+
+    try {
+      const response = await answerQuestionAPI(answerObject);
+      console.log("Response from answerPost", response);
+    } catch (error) {
+      console.error("Error posting Question:", error);
+    }
   }
 
   //   clearStates
@@ -95,6 +114,26 @@ export default function Questionnaire() {
                 <p className="m-0">{question.question}</p>
               </div>
             )}
+            {/* Options */}
+            {question?.options.length !== 0 && (
+              <div className="d-flex gap-3 align-items-center flex-wrap mx-3">
+                {question?.options.map((option) => {
+                  return (
+                    <button
+                      type="button"
+                      className={`option_button ${
+                        option === answer && "selected"
+                      }`}
+                      key={option}
+                      onClick={() => setAnswer(option)}
+                    >
+                      {option}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+
             {alert && (
               <div className="chat_box">
                 <em>{alert}</em>
@@ -113,10 +152,12 @@ export default function Questionnaire() {
                 onChange={handleAnswerChange}
                 autoFocus
                 rows={1}
+                disabled={question?.options.length !== 0}
               />
               <button
                 type="button"
                 className="send_btn d-flex align-items-center justify-content-center"
+                onClick={handlePostAnswer}
               >
                 <IconSend style={{ marginLeft: "8px" }} />
               </button>
