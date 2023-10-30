@@ -12,11 +12,14 @@ export default function Features({ dataObject, btnClass, ltr }) {
     triggerOnce: true,
     fallbackInView: true,
     threshold: 0.25,
+    // rootMargin: "-5%",
   });
 
   return (
     <div
-      className={`features_container ${inView ? "opacity-1" : "opacity-0"} `}
+      className={`features_container ${
+        inView ? "opacity-1" : "opacity-0"
+      } overflow-hidden`}
       ref={ref}
     >
       <div
@@ -55,7 +58,12 @@ export default function Features({ dataObject, btnClass, ltr }) {
             inView ? "slide-reset" : ""
           } `}
         >
-          <img className="img-fluid" src={image} alt={heading} loading="lazy" />
+          <img
+            className="img-fluid"
+            src={image}
+            alt={heading}
+            loading="eager"
+          />
         </div>
       </div>
     </div>

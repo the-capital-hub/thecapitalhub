@@ -44,6 +44,9 @@ export default function Questionnaire() {
 
   // Handle answer change
   function handleAnswerChange(e) {
+    e.target.style.height = "auto";
+    e.target.style.height = e.target.scrollHeight + "px";
+
     setAnswer(e.target.value);
   }
 
@@ -89,7 +92,7 @@ export default function Questionnaire() {
             {/* Chat Area */}
             {question && (
               <div className="chat_box">
-                <p>{question.question}</p>
+                <p className="m-0">{question.question}</p>
               </div>
             )}
             {alert && (
@@ -100,15 +103,16 @@ export default function Questionnaire() {
 
             {/* User Input */}
             <div className="user_input_container border-top p-3 d-flex align-items-center gap-3">
-              <input
+              <textarea
                 type="text"
                 name="answer"
                 id="answer"
                 placeholder="Type here..."
-                className="user_input border-0 px-3 py-4 rounded-4 flex-grow-1"
+                className="user_input border-0 px-3 py-4 rounded-4"
                 value={answer}
                 onChange={handleAnswerChange}
                 autoFocus
+                rows={1}
               />
               <button
                 type="button"
