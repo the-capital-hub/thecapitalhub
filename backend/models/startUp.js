@@ -137,6 +137,7 @@ const startUpSchema = new Schema(
     },
     oneLink: {
       type: String,
+      unique: true,
       default: function () {
         return this.company.split(" ").join("").toLowerCase();
       },
@@ -195,5 +196,19 @@ const startUpSchema = new Schema(
     timestamps: true,
   }
 );
+
+startUpSchema.pre('save', async function (next) {
+  const doc = this;
+  const originalOneLink = doc.oneLink;
+  const count = await StartUpModel.countDocuments({ oneLink: originalOneLink });
+  if (count > 0) {
+    let suffix = 1;
+    while (await StartUpModel.countDocuments({ oneLink: originalOneLink + suffix }) > 0) {
+      suffix++;
+    }
+    doc.oneLink = originalOneLink + suffix;
+  }
+  next();
+});
 
 export const StartUpModel = model("StartUps", startUpSchema);

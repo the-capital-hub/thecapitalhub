@@ -115,6 +115,7 @@ const investorSchema = new Schema(
     },
     oneLink: {
       type: String,
+      unique: true,
       default: function () {
         return this.companyName.split(" ").join("").toLowerCase();
       },
@@ -124,5 +125,19 @@ const investorSchema = new Schema(
     timestamps: true,
   }
 );
+
+investorSchema.pre('save', async function (next) {
+  const doc = this;
+  const originalOneLink = doc.oneLink;
+  const count = await InvestorModel.countDocuments({ oneLink: originalOneLink });
+  if (count > 0) {
+    let suffix = 1;
+    while (await InvestorModel.countDocuments({ oneLink: originalOneLink + suffix }) > 0) {
+      suffix++;
+    }
+    doc.oneLink = originalOneLink + suffix;
+  }
+  next();
+});
 
 export const InvestorModel = model("Investors", investorSchema);
