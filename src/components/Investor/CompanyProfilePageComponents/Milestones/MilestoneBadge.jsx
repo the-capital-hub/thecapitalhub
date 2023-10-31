@@ -114,13 +114,13 @@ export default function MilestoneBadge({
           </p>
         )}
       </div>
-      {isMini ? (
-        ""
-      ) : (
-        <Link className={`see__more orange align-self-end mt-auto ${theme}`}>
-          See more
-        </Link>
-      )}
+      {isMini
+        ? ""
+        : ""
+          // <Link className={`see__more orange align-self-end mt-auto ${theme}`}>
+          //   See more
+          // </Link>
+      }
       {isMini && action === "add" && (
         <button
           className={`action_badge btn border-0 ${theme}`}

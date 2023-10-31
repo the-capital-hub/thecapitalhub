@@ -3,6 +3,7 @@ import {
   createQuestionsController,
   getUnansweredQuestionController,
   answerQuestionController,
+  getUnansweredQuestionCountController,
 } from "../controllers/questionController.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 
@@ -15,5 +16,6 @@ router.use(authenticateToken);
 //get unanswered questions
 router.get("/getQuestions/:questionType", getUnansweredQuestionController);
 router.post("/answerQuestion", answerQuestionController);
+router.get("/getQuestionCount", getUnansweredQuestionCountController);
 
 export default router;
