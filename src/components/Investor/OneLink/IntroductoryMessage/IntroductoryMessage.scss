@@ -163,6 +163,16 @@
   margin-top: 8px;
   margin-right: 8px;
   margin-bottom: 8px;
+
+  &.startup {
+    background-color: #fd5901;
+    color: #fff;
+  }
+
+  &.investor {
+    background-color: #d3f36b;
+    color: #000;
+  }
 }
 
 @media (max-width: 768px) {
@@ -173,14 +183,4 @@
     margin-right: 6px;
     margin-bottom: 6px;
   }
-}
-
-.startup {
-  background-color: #fd5901;
-  color: #fff;
-}
-
-.investor {
-  background-color: #d3f36b;
-  color: #000;
 }
