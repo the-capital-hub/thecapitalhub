@@ -9,11 +9,16 @@ export default function ResultBar({
   description,
   isCompany,
   param,
+  isInvestor = false
 }) {
+  const linkTo = isCompany ? `/investor/company-profile/${param}` : `/investor/user/${param}`;
+  const link = isInvestor ? `${linkTo}?investor=1` : linkTo;
+
   return (
     <Link
       className="Link"
-      to={isCompany ? `/investor/company-profile/${param}` : `/investor/user/${param}`}
+      // to={isCompany ? `/investor/company-profile/${param}` : `/investor/user/${param}`}
+      to={link}
     >
       <div className="result__bar d-flex align-items-center gap-3 p-3">
         <img
