@@ -18,6 +18,7 @@ import {
 import NotificationsPopup from "./NotificationsPopup/NotificationsPopup";
 import { useRef } from "react";
 
+// Startup navbar
 const InvestorNavbar = (props) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   // const [url, setUrl] = useState("Home");
