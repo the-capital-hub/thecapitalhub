@@ -108,7 +108,7 @@ const MyInvestmentCard = ({
   }
 
   return (
-    <div className="investment-card-container border rounded-3 position-relative">
+    <div className="investment-card-container border rounded-4 position-relative">
       <div className="d-flex flex-column py-2 px-3 border-bottom ">
         <div className="left">
           {/* Logo */}

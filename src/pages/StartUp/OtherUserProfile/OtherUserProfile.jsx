@@ -68,7 +68,7 @@ function OtherUserProfile() {
         <SmallProfileCard className="mt-lg-2 mt-xl-0" text="User Details" />
         {userData ? (
           <>
-            <div className="profile rounded border shadow-sm">
+            <div className="profile rounded-4 border shadow-sm">
               <div className="short_details d-flex flex-column flex-md-row align-items-center justify-content-between">
                 <div className="d-flex flex-column w-100 flex-md-row align-items-center justify-content-between ">
                   <img
@@ -153,11 +153,11 @@ function OtherUserProfile() {
             </div>
             <div className="row row-cols-auto row-cols-lg-2 g-0 gx-md-4 two_column_wrapper mb-4">
               <div className="left_container p-0 pe-md-auto d-flex flex-column gap-3 col-12 col-lg-8">
-                {/* <div className="about rounded border shadow-sm profile_container">
+                {/* <div className="about rounded-4 border shadow-sm profile_container">
                   <h4 className="h4">About</h4>
                   <p className="text-secondary">{userData?.bio}</p>
                 </div>
-                <div className="personal_information rounded border shadow-sm profile_container">
+                <div className="personal_information rounded-4 border shadow-sm profile_container">
                   <h4 className="h4">Personal Information</h4>
                   <div className="details w-100 m-0 p-0 col-md-9 row row-cols-1 row-cols-md-2">
                     <div className="d-flex flex-column mb-1 mb-md-3 p-0">
@@ -179,7 +179,7 @@ function OtherUserProfile() {
                   </div>
                 </div> */}
                 {/* Experience */}
-                {/* <div className="experience rounded border shadow-sm profile_container">
+                {/* <div className="experience rounded-4 border shadow-sm profile_container">
                   <h4 className="h4">Experience</h4>
                   <div className="single_experience row row-cols-1 row-cols-md-2 gx-2">
                     <div className="col-12 col-md-1 image">
@@ -210,7 +210,7 @@ function OtherUserProfile() {
                   </div>
                 </div> */}
                 {/* Education */}
-                {/* <div className="education rounded border shadow-sm profile_container">
+                {/* <div className="education rounded-4 border shadow-sm profile_container">
                   <h4 className="h4">Education</h4>
                   <div className="single_education">
                     <h6 className="h6">
@@ -225,7 +225,7 @@ function OtherUserProfile() {
                 </div> */}
                 {/* bio */}
                 {userData?.bio ? (
-                  <div className="bio rounded border shadow-sm profile_container">
+                  <div className="bio rounded-4 border shadow-sm profile_container">
                     <h4 className="h4">Bio</h4>
                     <div className="single_education">
                       <h6 className="h6">{userData?.bio}</h6>
@@ -236,7 +236,7 @@ function OtherUserProfile() {
                 )}
 
                 {/* Otheruser's Featured Posts */}
-                <div className="bg-white rounded shadow-sm d-flex flex-column gap-3 p-4">
+                <div className="bg-white rounded-4 shadow-sm d-flex flex-column gap-3 p-4">
                   {/* Heading */}
                   <div className="d-flex justify-content-between">
                     <h4>Featured Posts</h4>
@@ -253,7 +253,7 @@ function OtherUserProfile() {
                 {/* Company Details */}
                 <div className="company_details_container shadow-sm rounded">
                   <CompanyDetailsCard
-                    className="company_details rounded border profile_container"
+                    className="company_details rounded-4 border profile_container"
                     userDetails={userData}
                   />
                 </div>

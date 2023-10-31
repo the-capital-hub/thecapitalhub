@@ -6,7 +6,7 @@
     height: fit-content;
     background-color: #fff;
     padding: 10px;
-    border-radius: 40px;
+    border-radius: var(--border-radius);
     background: #fff;
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
     // display: flex;
@@ -19,7 +19,7 @@
     .change_password {
       background-color: #f9f9f9;
       padding: 20px;
-      border-radius: 20px;
+      border-radius: var(--border-radius);
       flex: 1;
       display: flex;
       flex-direction: column;

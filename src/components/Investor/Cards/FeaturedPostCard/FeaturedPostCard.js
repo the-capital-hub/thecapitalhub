@@ -79,7 +79,7 @@ const FeaturedPostCard = ({
     <>
       <div className="featuredpostcard_main_container mb-2">
         {/* <div className="col-12"> */}
-        <div className=" featuredpostcard_container mt-2 rounded-5 shadow-sm border">
+        <div className=" featuredpostcard_container mt-2 rounded-4 shadow-sm border">
           <div className="feed_header_container p-2 border-bottom ">
             <div className="feedpostcard_content w-100">
               <Link to={`/user/${userId}`} className="rounded-circle">

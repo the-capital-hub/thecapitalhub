@@ -1,7 +1,7 @@
 .chat_dashboard_container {
   // -190px because chat nav is fixed to 106px and there is some margin at the top and bottom.
   height: calc(100vh - 190px);
-  border-radius: 30px;
+  border-radius: var(--border-radius);
   border: 1px solid #cfcfcf;
   background: #fff;
   box-shadow: 4px 4px 30px 0px rgba(0, 0, 0, 0.11);
@@ -352,7 +352,7 @@
     // width: 20%;
     height: 30px;
     flex-shrink: 0;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     background: var(--currentTheme);
     color: var(--currentTheme-text);
     text-align: center;

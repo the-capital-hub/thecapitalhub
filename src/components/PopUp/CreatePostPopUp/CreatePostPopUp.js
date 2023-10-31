@@ -244,7 +244,7 @@ const CreatePostPopUp = ({
     <>
       {popupOpen && <div className="createpost-background-overlay"></div>}
       <div
-        className={`create_post_modal rounded p-2 ${popupOpen ? "d-block" : ""
+        className={`create_post_modal rounded-4 p-2 ${popupOpen ? "d-block" : ""
           }`}
         tabIndex="-1"
         role="dialog"

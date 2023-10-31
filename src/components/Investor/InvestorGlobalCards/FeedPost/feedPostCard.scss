@@ -8,7 +8,7 @@
         p {
           height: 258px;
           flex-shrink: 0;
-          border-radius: 20px;
+          border-radius: var(--border-radius);
           border: 1px solid #dadada;
           background: #eaeef2;
           color: #373737;
@@ -100,7 +100,7 @@
   .box {
     background-color: #fff;
     padding: 10px;
-    border-radius: 40px;
+    border-radius: var(--border-radius);
     background: #fff;
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
   }

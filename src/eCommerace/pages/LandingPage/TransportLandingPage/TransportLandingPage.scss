@@ -33,7 +33,7 @@
   }
   .second-section {
     background-color: #121212;
-    border-radius: 20px;
+    border-radius: var(--border-radius);
     color: white;
     h1,
     p {

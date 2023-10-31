@@ -23,7 +23,7 @@ export default function CompanyDescription({
   return (
     <div
       className={`paragraph__component bg-white p-5 d-flex flex-column gap-4  ${
-        isInvestor === "true" ? "rounded-3 border" : "rounded-5"
+        isInvestor === "true" ? "rounded-4 border" : "rounded-4"
       } `}
     >
       <div className="d-flex flex-column-reverse flex-sm-row align-items-sm-center justify-content-between gap-3 gap-md-0">

@@ -3,7 +3,7 @@ import companyLogo from "../../../../Images/dummy/companyLogo.png";
 
 export default function Experience() {
   return (
-    <div className="experience bg-white p-4 rounded border shadow-sm profile_container">
+    <div className="experience bg-white p-4 rounded-4 border shadow-sm profile_container">
       <h4 className="h4">Experience</h4>
       <div className="single_experience row row-cols-1 row-cols-md-2 gx-2">
         <div className="col-12 col-md-1 image">

@@ -51,7 +51,7 @@ export default function InvestorOneLinkAppointment() {
     <div className="appointment_wrapper mb-5 ps-3 leftBorder">
       <h2 className="mb-3">Schedule an appointment</h2>
 
-      <section className="appointment_section px-3 py-4 px-lg-4 bg-white rounded border d-flex flex-column gap-4">
+      <section className="appointment_section px-3 py-4 px-lg-4 bg-white rounded-4 border d-flex flex-column gap-4">
         <h4 className="div__heading">Select Date & Time</h4>
 
         <div className="two_col_container">
@@ -79,7 +79,7 @@ export default function InvestorOneLinkAppointment() {
 
             {/* Action buttons */}
             {/* <div className="action_buttons d-flex gap-3">
-              <button className="bg-transparent border fs-5 py-3 rounded-3 w-50">
+              <button className="bg-transparent border fs-5 py-3 rounded-4 w-50">
                 Cancel
               </button>
               <button className="btn-capital fs-5 py-3 w-50">

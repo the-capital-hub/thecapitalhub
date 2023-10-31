@@ -134,7 +134,7 @@ function Home() {
               next={fetchMorePosts}
               hasMore={hasMore}
               loader={
-                <p className="container p-5 text-center my-5 bg-white rounded-5 shadow ">
+                <p className="container p-5 text-center my-5 bg-white rounded-4 shadow ">
                   <div class="d-flex justify-content-center">
                     <div class="spinner-border" role="status">
                       <span class="visually-hidden">Loading...</span>
@@ -196,7 +196,7 @@ function Home() {
               )}
             </InfiniteScroll>
             {/* ) : (
-                <p className="container p-5 text-center my-5 bg-white rounded-5 shadow ">
+                <p className="container p-5 text-center my-5 bg-white rounded-4 shadow ">
                   <div class="d-flex justify-content-center">
                     <div class="spinner-border" role="status">
                       <span class="visually-hidden">Loading...</span>

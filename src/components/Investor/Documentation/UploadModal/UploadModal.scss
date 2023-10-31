@@ -19,7 +19,7 @@
     justify-content: center;
     .modalwrapper {
       background-color: #fff;
-      border-radius: 25px;
+      border-radius: var(--border-radius);
       padding: 30px 60px;
       position: absolute;
       top: 0;

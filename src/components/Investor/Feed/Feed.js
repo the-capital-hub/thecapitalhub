@@ -107,7 +107,7 @@ const Feed = () => {
             {/* Small Profile Card */}
             <SmallProfileCard className="d-none d-md-block" text={"Home"} />
             {/* Write a Post */}
-            <div className="bg-white rounded-5 start_post_container">
+            <div className="bg-white rounded-4 start_post_container">
               <img
                 src={loggedInUser.profilePicture}
                 alt="Image"
@@ -197,7 +197,7 @@ const Feed = () => {
               </InfiniteScroll>
 
               {/* ) : (
-                <div className="container p-5 text-center my-5 bg-white rounded-5 shadow-sm ">
+                <div className="container p-5 text-center my-5 bg-white rounded-4 shadow-sm ">
                   <SpinnerBS />
                 </div>
               )} */}

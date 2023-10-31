@@ -2,7 +2,7 @@
 .startups_section_btn {
     margin-top: 0 !important;
     margin-left: 0 !important;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     background: #A782EC;
     box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
     display: flex;
@@ -64,7 +64,7 @@
     width: 268px;
     height: 303px;
     background: #b0b0b0;
-    border-radius: 40px;
+    border-radius: var(--border-radius);
 }
 
 @media (max-width: 820px) {
@@ -102,7 +102,7 @@
             width: 159px;
             height: 179px;
             background: #b0b0b0;
-            border-radius: 40px;
+            border-radius: var(--border-radius);
             margin-right: 20px;
         }
     }

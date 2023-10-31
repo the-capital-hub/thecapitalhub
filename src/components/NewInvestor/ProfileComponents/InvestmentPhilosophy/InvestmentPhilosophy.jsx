@@ -88,7 +88,7 @@ export default function InvestmentPhilosophy() {
       </div>
 
       {/* Recent Experience */}
-      <div className="recent_experience border rounded mx-md-4 shadow-sm">
+      <div className="recent_experience border rounded-4 mx-md-4 shadow-sm">
         <div className="flex-md-row header">
           <h5 className="green_underline h5">Recent Experience</h5>
           <div className="green_button">
@@ -159,7 +159,7 @@ export default function InvestmentPhilosophy() {
       </div>
 
       {/* Education */}
-      <div className="education border rounded mx-md-4 shadow-sm">
+      <div className="education border rounded-4 mx-md-4 shadow-sm">
         <div className="flex-md-row header">
           <h5 className="green_underline h5">Education</h5>
           <div className="green_button">

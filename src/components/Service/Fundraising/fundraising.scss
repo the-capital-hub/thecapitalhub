@@ -110,7 +110,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            border-radius: 10px;
+            border-radius: var(--border-radius);
             border: 1px solid #EBEBEB;
             background: #FCFDFF;
             box-shadow: 4px 4px 30px 0px rgba(0, 0, 0, 0.07);

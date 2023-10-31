@@ -190,13 +190,13 @@ export default function AddEditModal({
 
   return (
     <div className="profile__modal__content">
-      <div className="border rounded-3 p-2 w-100 overflow-y-auto">
+      <div className="border rounded-4 p-2 w-100 overflow-y-auto">
         <h5 className="green_underline">{heading}: </h5>
         <div className="d-flex flex-column gap-3 p-0 p-sm-2 w-100">
           {dataArray.map((startUp, index) => {
             return (
               <div
-                className="border rounded-3 p-2 d-flex justify-content-between align-items-center"
+                className="border rounded-4 p-2 d-flex justify-content-between align-items-center"
                 key={index}
               >
                 <img

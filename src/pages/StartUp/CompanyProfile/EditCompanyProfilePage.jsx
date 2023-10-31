@@ -147,7 +147,7 @@ export default function EditCompanyProfilePage() {
           </span>
           {/* <SmallProfileCard text={"Company Profile"} /> */}
 
-          <div className="bg-white rounded-5 p-5">
+          <div className="bg-white rounded-4 p-5">
             <CompanyProfileForm
               companyData={companyData}
               isSaveAll={isSaveAll}
@@ -168,7 +168,7 @@ export default function EditCompanyProfilePage() {
           />
 
           {/* Core Team */}
-          <div className="core__team bg-white rounded-5 p-5">
+          <div className="core__team bg-white rounded-4 p-5">
             <CoreTeam
               companyData={companyData}
               setCompanyData={setCompanyData}
@@ -177,7 +177,7 @@ export default function EditCompanyProfilePage() {
           </div>
 
           {/* Milestones */}
-          <div className="milestones__component bg-white rounded-5 p-5 d-flex flex-column gap-4">
+          <div className="milestones__component bg-white rounded-4 p-5 d-flex flex-column gap-4">
             <Milestones theme={"startup"} />
           </div>
 

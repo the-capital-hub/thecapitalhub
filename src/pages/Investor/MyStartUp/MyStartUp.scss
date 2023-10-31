@@ -1,6 +1,6 @@
 .mystartup_main_container {
   .startup_container {
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     border: 1px solid #eaeaea;
     background: #fff;
     // width: 99%;
@@ -28,7 +28,7 @@
 
     .left_container,
     .right_container {
-      border-radius: 10px;
+      border-radius: var(--border-radius);
       border: 1px solid #dfdfdf;
       background: #fff;
       width: 49%;

@@ -61,7 +61,7 @@ const ChatSearch = () => {
           </div>
           <div className="search-results-wrapper">
             {inputOnFocus && searchSuggestions && !mobileSearch && (
-              <div className="search_results rounded-5 border shadow-sm p-4 position-absolute bg-white">
+              <div className="search_results rounded-4 border shadow-sm p-4 position-absolute bg-white">
                 {!loading ? (
                   searchSuggestions && (
                     <>

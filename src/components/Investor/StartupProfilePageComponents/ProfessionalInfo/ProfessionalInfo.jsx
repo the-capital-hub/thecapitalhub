@@ -124,7 +124,7 @@ console.log(professionalData.company)
   return (
     <section
       className={`professional_info_section d-flex flex-column gap-3 p-2 px-md-4 py-4 bg-white shadow-sm ${
-        theme === "investor" ? "rounded-3 border" : "rounded-5"
+        theme === "investor" ? "rounded-4 border" : "rounded-4"
       }`}
     >
       {/* header */}
