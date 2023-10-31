@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import CompanyProfile from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfile";
 import Filters from "../../../components/NewInvestor/SearchResults/Filters";
 import ResultBar from "../../../components/NewInvestor/SearchResults/ResultBar";
@@ -58,7 +58,13 @@ export default function SearchResults() {
     <MaxWidthWrapper>
       <div className="search__results__wrapper px-3 border-start pb-5">
         <div className="pb-4 pt-2">
-          <Filters filterLabels={SEARCHFILTERS} />
+          {/* <Filters filterLabels={SEARCHFILTERS} /> */}
+          <span className="bg-white rounded shadow-sm p-2 d-flex flex-wrap gap-2">
+            <p className="m-0 p-0">Didn't find what you are looking for?</p>
+            <Link to="/investor/explore" className="">
+              Head over to Explore
+            </Link>
+          </span>
           {/* <h1>Search Filters</h1> */}
         </div>
         <div className="search__results d-flex flex-column gap-5">
