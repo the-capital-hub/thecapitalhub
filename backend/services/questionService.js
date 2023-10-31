@@ -125,3 +125,42 @@ export const answerQuestion = async (questionId, answer, userId) => {
     };
   }
 }
+
+export const getUnansweredQuestionCount = async (userId) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found.",
+      };
+    }
+    let companyQuestionCount = 0;
+    const emptyFields = getEmptyFields(user);
+    const personalQuestionCount = await QuestionModel.countDocuments({ type: "Personal", fieldName: { $in: emptyFields } });
+    if (user.isInvestor === "true") {
+      const investor = await InvestorModel.findById(user.investor);
+      const companyEmptyField = getEmptyFields(investor);
+      companyQuestionCount = await QuestionModel.countDocuments({ type: "Investor", fieldName: { $in: emptyFields.concat(companyEmptyField) } });
+    } else {
+      const startup = await StartUpModel.findById(user.startUp);
+      const companyEmptyField = getEmptyFields(startup);
+      companyQuestionCount = await QuestionModel.countDocuments({ type: "Startup", fieldName: { $in: emptyFields.concat(companyEmptyField) } });
+    }
+    return {
+      status: 200,
+      message: "Questions Count retrived successfully",
+      data: {
+        personalQuestionCount,
+        companyQuestionCount,
+        total: personalQuestionCount + companyQuestionCount
+      }
+    }
+  } catch (error) {
+    console.error("Error getting question count:", error);
+    return {
+      status: 500,
+      message: "An error occurred while getting question count.",
+    };
+  }
+}

@@ -305,7 +305,8 @@ export const searchUsers = async (searchQuery) => {
       },
       {
         $addFields: {
-          company: "$companyName", 
+          company: "$companyName",
+          isInvestor: true,
         },
       },
     ]);
