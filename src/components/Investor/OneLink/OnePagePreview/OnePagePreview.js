@@ -69,8 +69,12 @@ const OnePagePreview = () => {
           </section>
 
           <section className="table_section">
-            <div className="px-3 px-lg-5">
-              <Table />
+            <div className="px-3 px-lg-5 w-100">
+              {/* <Table /> */}
+              <div className="dummy_one">
+                <h6>Projections</h6>
+                <p className="p-3">What are your revenue projections and sales projections for the next three years?</p>
+                </div>
             </div>
           </section>
 
