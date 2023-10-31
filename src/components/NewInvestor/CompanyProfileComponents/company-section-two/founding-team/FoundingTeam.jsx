@@ -41,6 +41,9 @@ const defaultPeople = [
 export default function FoundingTeam({ isOnelink = false, team }) {
   const [people, setPeople] = useState(team || defaultPeople);
 
+  useEffect(() => {
+    setPeople(team || [])
+  }, [team]);
   // useEffect(() => {
   //   if (isOnelink) {
   //     setPeople(team);

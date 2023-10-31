@@ -120,6 +120,7 @@ export default function SearchResults() {
                         key={_id}
                         param={oneLink}
                         isCompany
+                        isInvestor={comp.isInvestor}
                       />
                     );
                   })
