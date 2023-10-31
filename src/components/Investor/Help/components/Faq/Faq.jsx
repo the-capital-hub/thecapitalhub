@@ -331,345 +331,594 @@ export default function Faq() {
 
 
 
-{/* 
+
 
 
 
       <div className="accordion-item">
-        <h2 className="accordion-header" id="headingThree">
+        <h2 className="accordion-header" id="h12">
           <button
             className="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseThree"
+            data-bs-target="#c12"
             aria-expanded="false"
-            aria-controls="collapseThree"
+            aria-controls="c12"
           >
-            Is the "One Like" feature visible to other users on CapitalHub?
+             Can I upload documents to CapitalHub for my startup or investment profile?
           </button>
         </h2>
         <div
-          id="collapseThree"
+          id="c12"
           className="accordion-collapse collapse"
-          aria-labelledby="headingThree"
+          aria-labelledby="h12"
           data-bs-parent="#accordionExample"
         >
           <div className="accordion-body">
             <p>
-              No, the "One Like" feature is a private action. It does not
-              display your interest to other users, maintaining your privacy
+            Yes, CapitalHub allows users to upload relevant documents, such as business plans, pitch decks, financial statements, and more, to enhance their profiles.
+
             </p>
           </div>
         </div>
       </div>
 
       <div className="accordion-item">
-        <h2 className="accordion-header" id="headingThree">
+        <h2 className="accordion-header" id="h13">
           <button
             className="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseThree"
+            data-bs-target="#c13"
             aria-expanded="false"
-            aria-controls="collapseThree"
+            aria-controls="c13"
           >
-            Is the "One Like" feature visible to other users on CapitalHub?
+             How do I upload documents to my CapitalHub profile?
           </button>
         </h2>
         <div
-          id="collapseThree"
+          id="c13"
           className="accordion-collapse collapse"
-          aria-labelledby="headingThree"
+          aria-labelledby="h13"
           data-bs-parent="#accordionExample"
         >
           <div className="accordion-body">
             <p>
-              No, the "One Like" feature is a private action. It does not
-              display your interest to other users, maintaining your privacy
+            To upload documents, access your profile, and look for the "Document Upload" section. Follow the instructions to upload and manage your files.
+
             </p>
           </div>
         </div>
       </div>
 
       <div className="accordion-item">
-        <h2 className="accordion-header" id="headingThree">
+        <h2 className="accordion-header" id="h14">
           <button
             className="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseThree"
+            data-bs-target="#c14"
             aria-expanded="false"
-            aria-controls="collapseThree"
+            aria-controls="c14"
           >
-            Is the "One Like" feature visible to other users on CapitalHub?
+            Are there any restrictions on the types of documents I can upload?
+
           </button>
         </h2>
         <div
-          id="collapseThree"
+          id="c14"
           className="accordion-collapse collapse"
-          aria-labelledby="headingThree"
+          aria-labelledby="h14"
           data-bs-parent="#accordionExample"
         >
           <div className="accordion-body">
             <p>
-              No, the "One Like" feature is a private action. It does not
-              display your interest to other users, maintaining your privacy
+            While CapitalHub generally accepts a wide range of document types, it's important to adhere to any guidelines or restrictions outlined on the platform.
             </p>
           </div>
         </div>
       </div>
 
       <div className="accordion-item">
-        <h2 className="accordion-header" id="headingThree">
+        <h2 className="accordion-header" id="h15">
           <button
             className="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseThree"
+            data-bs-target="#c15"
             aria-expanded="false"
-            aria-controls="collapseThree"
+            aria-controls="c15"
           >
-            Is the "One Like" feature visible to other users on CapitalHub?
+            Are the uploaded documents visible to all users, or can I control who accesses them?
           </button>
         </h2>
         <div
-          id="collapseThree"
+          id="c15"
           className="accordion-collapse collapse"
-          aria-labelledby="headingThree"
+          aria-labelledby="h15"
           data-bs-parent="#accordionExample"
         >
           <div className="accordion-body">
             <p>
-              No, the "One Like" feature is a private action. It does not
-              display your interest to other users, maintaining your privacy
+            You can typically control the visibility of your documents. You can choose to share them with specific users or make them public on your profile.
+
             </p>
           </div>
         </div>
       </div>
 
       <div className="accordion-item">
-        <h2 className="accordion-header" id="headingThree">
+        <h2 className="accordion-header" id="h16">
           <button
             className="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseThree"
+            data-bs-target="#c16"
             aria-expanded="false"
-            aria-controls="collapseThree"
+            aria-controls="c16"
           >
-            Is the "One Like" feature visible to other users on CapitalHub?
+           What is the "Create Post" feature on CapitalHub?
           </button>
         </h2>
         <div
-          id="collapseThree"
+          id="c16"
           className="accordion-collapse collapse"
-          aria-labelledby="headingThree"
+          aria-labelledby="h16"
           data-bs-parent="#accordionExample"
         >
           <div className="accordion-body">
             <p>
-              No, the "One Like" feature is a private action. It does not
-              display your interest to other users, maintaining your privacy
+            The "Create Post" feature allows users to share updates, insights, and information with the CapitalHub community through posts.
+
             </p>
           </div>
         </div>
       </div>
 
       <div className="accordion-item">
-        <h2 className="accordion-header" id="headingThree">
+        <h2 className="accordion-header" id="h17">
           <button
             className="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseThree"
+            data-bs-target="#c17"
             aria-expanded="false"
-            aria-controls="collapseThree"
+            aria-controls="c17"
           >
-            Is the "One Like" feature visible to other users on CapitalHub?
+            How do I create a post on CapitalHub? 
           </button>
         </h2>
         <div
-          id="collapseThree"
+          id="c17"
           className="accordion-collapse collapse"
-          aria-labelledby="headingThree"
+          aria-labelledby="h17"
           data-bs-parent="#accordionExample"
         >
           <div className="accordion-body">
             <p>
-              No, the "One Like" feature is a private action. It does not
-              display your interest to other users, maintaining your privacy
+            To create a post, log in to your CapitalHub account, navigate to the "Create Post" section, and follow the provided prompts to compose and share your content.
+
             </p>
           </div>
         </div>
       </div>
 
       <div className="accordion-item">
-        <h2 className="accordion-header" id="headingThree">
+        <h2 className="accordion-header" id="h18">
           <button
             className="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseThree"
+            data-bs-target="#c18"
             aria-expanded="false"
-            aria-controls="collapseThree"
+            aria-controls="c18"
           >
-            Is the "One Like" feature visible to other users on CapitalHub?
+            What can I post on CapitalHub using the "Create Post" feature?
           </button>
         </h2>
         <div
-          id="collapseThree"
+          id="c18"
           className="accordion-collapse collapse"
-          aria-labelledby="headingThree"
+          aria-labelledby="h18"
           data-bs-parent="#accordionExample"
         >
           <div className="accordion-body">
             <p>
-              No, the "One Like" feature is a private action. It does not
-              display your interest to other users, maintaining your privacy
+            You can share a variety of content, including news, articles, updates about your startup, investment insights, industry trends, and more.
+
             </p>
           </div>
         </div>
       </div>
 
       <div className="accordion-item">
-        <h2 className="accordion-header" id="headingThree">
+        <h2 className="accordion-header" id="h19">
           <button
             className="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseThree"
+            data-bs-target="#c19"
             aria-expanded="false"
-            aria-controls="collapseThree"
+            aria-controls="c19"
           >
-            Is the "One Like" feature visible to other users on CapitalHub?
+            Are there any guidelines or restrictions for the content I post on CapitalHub?
           </button>
         </h2>
         <div
-          id="collapseThree"
+          id="c19"
           className="accordion-collapse collapse"
-          aria-labelledby="headingThree"
+          aria-labelledby="h19"
           data-bs-parent="#accordionExample"
         >
           <div className="accordion-body">
             <p>
-              No, the "One Like" feature is a private action. It does not
-              display your interest to other users, maintaining your privacy
+            CapitalHub typically has community guidelines to ensure that the content shared is relevant, respectful, and compliant with platform policies.
+
             </p>
           </div>
         </div>
       </div>
 
       <div className="accordion-item">
-        <h2 className="accordion-header" id="headingThree">
+        <h2 className="accordion-header" id="h20">
           <button
             className="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseThree"
+            data-bs-target="#c20"
             aria-expanded="false"
-            aria-controls="collapseThree"
+            aria-controls="c20"
           >
-            Is the "One Like" feature visible to other users on CapitalHub?
+           What is the "Create Community" feature, and how does it work?
           </button>
         </h2>
         <div
-          id="collapseThree"
+          id="c20"
           className="accordion-collapse collapse"
-          aria-labelledby="headingThree"
+          aria-labelledby="h20"
           data-bs-parent="#accordionExample"
         >
           <div className="accordion-body">
             <p>
-              No, the "One Like" feature is a private action. It does not
-              display your interest to other users, maintaining your privacy
+            "Create Community" allows users to establish their own dedicated community spaces within CapitalHub, tailored to specific interests or industries.
+
             </p>
           </div>
         </div>
       </div>
 
       <div className="accordion-item">
-        <h2 className="accordion-header" id="headingThree">
+        <h2 className="accordion-header" id="h21">
           <button
             className="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseThree"
+            data-bs-target="#c21"
             aria-expanded="false"
-            aria-controls="collapseThree"
+            aria-controls="c21"
           >
-            Is the "One Like" feature visible to other users on CapitalHub?
+            How can I create a community on CapitalHub?
           </button>
         </h2>
         <div
-          id="collapseThree"
+          id="c21"
           className="accordion-collapse collapse"
-          aria-labelledby="headingThree"
+          aria-labelledby="h21"
           data-bs-parent="#accordionExample"
         >
           <div className="accordion-body">
             <p>
-              No, the "One Like" feature is a private action. It does not
-              display your interest to other users, maintaining your privacy
+            To create a community, go to the "Create Community" section, provide the necessary details, and customize your community's settings and preferences.
+
             </p>
           </div>
         </div>
       </div>
 
       <div className="accordion-item">
-        <h2 className="accordion-header" id="headingThree">
+        <h2 className="accordion-header" id="h22">
           <button
             className="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseThree"
+            data-bs-target="#c22"
             aria-expanded="false"
-            aria-controls="collapseThree"
+            aria-controls="c22"
           >
-            Is the "One Like" feature visible to other users on CapitalHub?
+             What are some use cases for creating a community on CapitalHub?
           </button>
         </h2>
         <div
-          id="collapseThree"
+          id="c22"
           className="accordion-collapse collapse"
-          aria-labelledby="headingThree"
+          aria-labelledby="h22"
           data-bs-parent="#accordionExample"
         >
           <div className="accordion-body">
             <p>
-              No, the "One Like" feature is a private action. It does not
-              display your interest to other users, maintaining your privacy
+            You can create a community to discuss industry-specific topics, connect with like-minded individuals, or facilitate discussions around a particular niche.
+
             </p>
           </div>
         </div>
-      </div> */}
-{/* 
+      </div> 
+
       <div className="accordion-item">
-        <h2 className="accordion-header" id="headingThree">
+        <h2 className="accordion-header" id="h23">
           <button
             className="accordion-button collapsed"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#collapseThree"
+            data-bs-target="#c23"
             aria-expanded="false"
-            aria-controls="collapseThree"
+            aria-controls="c23"
           >
-            Is the "One Like" feature visible to other users on CapitalHub?
+            Can I invite specific users to join my community, or is it open to all CapitalHub members? 
           </button>
         </h2>
         <div
-          id="collapseThree"
+          id="c23"
           className="accordion-collapse collapse"
-          aria-labelledby="headingThree"
+          aria-labelledby="h23"
           data-bs-parent="#accordionExample"
         >
           <div className="accordion-body">
             <p>
-              No, the "One Like" feature is a private action. It does not
-              display your interest to other users, maintaining your privacy
+            Depending on your preferences, you can make your community public and open to all members or send invitations to specific users to join.
             </p>
           </div>
         </div>
-      </div> */}
+      </div> 
+
+      <div className="accordion-item">
+        <h2 className="accordion-header" id="h24">
+          <button
+            className="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#c24"
+            aria-expanded="false"
+            aria-controls="c24"
+          >
+            What is the "My Community" feature, and how does it help me manage my community? 
+          </button>
+        </h2>
+        <div
+          id="c24"
+          className="accordion-collapse collapse"
+          aria-labelledby="h24"
+          data-bs-parent="#accordionExample"
+        >
+          <div className="accordion-body">
+            <p>
+            "My Community" is a dashboard that allows community administrators to oversee and customize their community, manage members, and moderate content.
+
+            </p>
+          </div>
+        </div>
+      </div> 
+
+      <div className="accordion-item">
+        <h2 className="accordion-header" id="h25">
+          <button
+            className="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#c25"
+            aria-expanded="false"
+            aria-controls="c25"
+          >
+           How do I access the "My Community" dashboard as a community administrator?
+          </button>
+        </h2>
+        <div
+          id="c25"
+          className="accordion-collapse collapse"
+          aria-labelledby="h25"
+          data-bs-parent="#accordionExample"
+        >
+          <div className="accordion-body">
+            <p>
+              
+            As an administrator, you can access the "My Community" dashboard by visiting your community and clicking on the administrative options.
+
+            </p>
+          </div>
+        </div>
+      </div> 
+
+      <div className="accordion-item">
+        <h2 className="accordion-header" id="h26">
+          <button
+            className="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#c26"
+            aria-expanded="false"
+            aria-controls="c26"
+          >
+           Can I customize the look and feel of my community using "My Community"?
+          </button>
+        </h2>
+        <div
+          id="c26"
+          className="accordion-collapse collapse"
+          aria-labelledby="h26"
+          data-bs-parent="#accordionExample"
+        >
+          <div className="accordion-body">
+            <p>
+            Yes, "My Community" typically provides customization options for the community's appearance, rules, and settings.
+
+            </p>
+          </div>
+        </div>
+      </div> 
+
+      <div className="accordion-item">
+        <h2 className="accordion-header" id="h27">
+          <button
+            className="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#c27"
+            aria-expanded="false"
+            aria-controls="c27"
+          >
+            What tools are available in "My Community" for member management and moderation?
+          </button>
+        </h2>
+        <div
+          id="c27"
+          className="accordion-collapse collapse"
+          aria-labelledby="h27"
+          data-bs-parent="#accordionExample"
+        >
+          <div className="accordion-body">
+            <p>
+            "My Community" often offers tools for member invites, content moderation, member roles, and other features to help you maintain a positive community environment.
+            </p>
+          </div>
+        </div>
+      </div> 
+
+      <div className="accordion-item">
+        <h2 className="accordion-header" id="h28">
+          <button
+            className="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#c28"
+            aria-expanded="false"
+            aria-controls="c28"
+          >
+            What is the "Saved Posts" feature on CapitalHub?
+          </button>
+        </h2>
+        <div
+          id="c28"
+          className="accordion-collapse collapse"
+          aria-labelledby="h28"
+          data-bs-parent="#accordionExample"
+        >
+          <div className="accordion-body">
+            <p>
+            he "Saved Posts" feature allows users to bookmark and organize posts that they find interesting and want to revisit later.
+
+            </p>
+          </div>
+        </div>
+      </div> 
+
+      <div className="accordion-item">
+        <h2 className="accordion-header" id="h29">
+          <button
+            className="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#c29"
+            aria-expanded="false"
+            aria-controls="c29"
+          >
+             How do I save a post on CapitalHub for future reference?
+          </button>
+        </h2>
+        <div
+          id="c29"
+          className="accordion-collapse collapse"
+          aria-labelledby="h29"
+          data-bs-parent="#accordionExample"
+        >
+          <div className="accordion-body">
+            <p>
+            To save a post, you can typically click on a "Save" or "Bookmark" option associated with the post.
+            </p>
+          </div>
+        </div>
+      </div> 
+
+      <div className="accordion-item">
+        <h2 className="accordion-header" id="h30">
+          <button
+            className="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#c30"
+            aria-expanded="false"
+            aria-controls="c30"
+          >
+           Can I organize and categorize my saved posts?
+          </button>
+        </h2>
+        <div
+          id="c30"
+          className="accordion-collapse collapse"
+          aria-labelledby="h30"
+          data-bs-parent="#accordionExample"
+        >
+          <div className="accordion-body">
+            <p>
+            Depending on the platform's features, you may have options to create folders or tags to categorize and organize your saved posts for easier access.
+
+            </p>
+          </div>
+        </div>
+      </div> 
+
+      <div className="accordion-item">
+        <h2 className="accordion-header" id="h31">
+          <button
+            className="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#c31"
+            aria-expanded="false"
+            aria-controls="c31"
+          >
+            Are saved posts visible to other users on CapitalHub?
+          </button>
+        </h2>
+        <div
+          id="c31"
+          className="accordion-collapse collapse"
+          aria-labelledby="h31"
+          data-bs-parent="#accordionExample"
+        >
+          <div className="accordion-body">
+            <p>
+            Saved posts are generally private and visible only to you. They serve as a personal collection of content you wish to revisit.
+            </p>
+          </div>
+        </div>
+      </div> 
+
+      <div className="accordion-item">
+        <h2 className="accordion-header" id="h32">
+          <button
+            className="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#c32"
+            aria-expanded="false"
+            aria-controls="c32"
+          >
+            Can I unsave or remove posts from my saved posts collection? 
+          </button>
+        </h2>
+        <div
+          id="c32"
+          className="accordion-collapse collapse"
+          aria-labelledby="h32"
+          data-bs-parent="#accordionExample"
+        >
+          <div className="accordion-body">
+            <p>
+            Yes, you can typically unsave or remove posts from your saved posts collection at any time
+            </p>
+          </div>
+        </div>
+      </div> 
+
 
 
     </div>

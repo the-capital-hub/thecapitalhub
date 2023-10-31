@@ -34,6 +34,7 @@ function Profile() {
     getUserById(username, userId)
       .then(({ data }) => {
         setUser(data);
+        console.log("userss", data);
         getStartupByFounderId(data._id)
           .then(({ data }) => {
             setColorCard(data.colorCard);
@@ -245,6 +246,7 @@ function Profile() {
                   headingClass={"typography"}
                   containerClass={"p-3"}
                   theme="investor"
+                  oneLink={userId}
                 />
                 {/* <div className="personal_information_header">
                       <h2 className="typography">Milestones</h2>

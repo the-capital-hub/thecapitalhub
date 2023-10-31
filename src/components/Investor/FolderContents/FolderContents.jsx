@@ -10,6 +10,7 @@ import { setPageTitle } from "../../../Store/features/design/designSlice";
 const FolderContents = () => {
   const { route } = useParams();
   const { username } = useParams();
+  const { userId } = useParams();
   const [user, setUser] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -59,7 +60,7 @@ const FolderContents = () => {
           </button>
           <h1 className="flex-grow-1">{title}</h1>
         </div>
-        <HalfbendCard folderName={route} userId={user?._id} />
+        <HalfbendCard folderName={route} userId={userId} />
       </div>
     </MaxWidthWrapper>
   );

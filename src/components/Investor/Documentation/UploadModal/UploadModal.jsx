@@ -28,7 +28,7 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
 
   useEffect(() => {
     const getFolders = () => {
-      getFoldersApi(loggedInUser._id)
+      getFoldersApi(loggedInUser.oneLinkId)
         .then((data) => {
           const folders = data.data;
           folders.push("Other");

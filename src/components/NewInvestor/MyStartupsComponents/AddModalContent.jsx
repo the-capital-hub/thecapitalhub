@@ -7,10 +7,13 @@ import {
   addMyInterest,
 } from "../../../Service/user";
 import { useSelector } from "react-redux";
+import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
+import { useRef } from "react";
 
 export default function AddModalContent({ isInterests = false, setInvestedStartups, setMyInterests }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [interestLogo, setInterestLogo] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     companyImage: "",
     name: "",
@@ -19,37 +22,46 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
     ask: "",
     commitment: "",
   });
+  const closeButton = useRef();
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
-    if (isInterests) {
-      const logo = await getBase64(interestLogo);
-      const newInterestData = {
-        logo: logo,
-        name: formData.name,
-        ask: formData.ask,
-        commitment: formData.commitment,
-        investedEquity: formData.equity,
-      };
-      const response = await addMyInterest(
-        loggedInUser?.investor,
-        newInterestData
-      );
-      console.log(response.data.myInterests);
-      setMyInterests(response.data.myInterests);
-    } else {
-      const logo = await getBase64(formData.companyImage);
-      const newStartUpData = {
-        logo: logo,
-        name: formData.name,
-        description: formData.description,
-        investedEquity: formData.equity,
-      };
-      const response = await addStartupInvested(
-        loggedInUser?.investor,
-        newStartUpData
-      );
-      setInvestedStartups(response.data.startupsInvested);
+    try {
+      if (isInterests) {
+        const logo = await getBase64(interestLogo);
+        const newInterestData = {
+          logo: logo,
+          name: formData.name,
+          ask: formData.ask,
+          commitment: formData.commitment,
+          investedEquity: formData.equity,
+        };
+        const response = await addMyInterest(
+          loggedInUser?.investor,
+          newInterestData
+        );
+        console.log(response.data.myInterests);
+        setMyInterests(response.data.myInterests);
+      } else {
+        const logo = await getBase64(formData.companyImage);
+        const newStartUpData = {
+          logo: logo,
+          name: formData.name,
+          description: formData.description,
+          investedEquity: formData.equity,
+        };
+        const response = await addStartupInvested(
+          loggedInUser?.investor,
+          newStartUpData
+        );
+        setInvestedStartups(response.data.startupsInvested);
+        closeButton.current.click();
+      }
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -190,15 +202,21 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
               onChange={handleInputChange}
             />
           </div>
-
           <button
             type="submit"
             className="green_button w-auto mx-auto fs-6"
-            data-bs-dismiss="modal"
           >
-            Save
+            {loading ? (
+              <SpinnerBS
+                colorClass={"text-dark"}
+                spinnerSizeClass="spinner-border-sm"
+              />
+            ) : (
+              "Save"
+            )}
           </button>
         </form>
+        <button data-bs-dismiss="modal" style={{ display: "none" }} ref={closeButton}></button>
       </div>
     </div>
   );

@@ -38,10 +38,10 @@ async function getUser() {
   }
 }
 
-async function getPdfData(userId, folderName) {
+async function getPdfData(oneLinkId, folderName) {
   try {
     const requestBody = {
-      userId,
+      oneLinkId,
       folderName,
     };
     const response = await axiosInstance.post(API.getDocument, requestBody);
