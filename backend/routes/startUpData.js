@@ -36,6 +36,7 @@ router.post("/investNow", investNowController);
 
 
 router.post("/createMilestone", createMilestoneController);
+router.get("/getUserMilestones/:oneLinkId", getUserMilestonesController);
 
 // Middleware for checking token
 router.use(authenticateToken);
@@ -54,7 +55,6 @@ router.get("/getAllMileStone", getMileStoneController);
 
 //milestone 
 router.post("/addMilestoneToUser", addMilestoneToUserController);
-router.get("/getUserMilestones/:oneLinkId", getUserMilestonesController);
 router.delete("/deleteUserMilestone/:oneLinkId/:milestoneId", deleteUserMilestoneController);
 
 

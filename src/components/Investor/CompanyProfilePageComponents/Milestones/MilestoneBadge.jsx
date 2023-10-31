@@ -22,10 +22,14 @@ export default function MilestoneBadge({
   action,
   setUserMilestones,
   milestone,
+  joinedDate,
+  companyFoundedDate,
 }) {
-  const { createdAt, oneLinkId } = useSelector(
-    (state) => state.user.loggedInUser
-  );
+  // const { createdAt, oneLinkId } = useSelector(
+  //   (state) => state.user.loggedInUser
+  // );
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
   const { badge, text, _id: milestoneId } = milestone;
 
   // States for loading
@@ -109,7 +113,10 @@ export default function MilestoneBadge({
         ) : (
           <p>
             {text === "Joining Capital HUB"
-              ? new Date(createdAt).toLocaleDateString([], DATEOPTIONS)
+              ? new Date(joinedDate).toLocaleDateString([], DATEOPTIONS)
+              : ""}
+            {text === "Founded company"
+              ? new Date(companyFoundedDate).toLocaleDateString([], DATEOPTIONS)
               : ""}
           </p>
         )}
@@ -117,9 +124,9 @@ export default function MilestoneBadge({
       {isMini
         ? ""
         : ""
-          // <Link className={`see__more orange align-self-end mt-auto ${theme}`}>
-          //   See more
-          // </Link>
+        // <Link className={`see__more orange align-self-end mt-auto ${theme}`}>
+        //   See more
+        // </Link>
       }
       {isMini && action === "add" && (
         <button
@@ -129,9 +136,8 @@ export default function MilestoneBadge({
           {loading ? (
             <SpinnerBS
               spinnerSizeClass="spinner-border-sm"
-              colorClass={`${
-                theme === "investor" ? "text-black" : "text-white"
-              }`}
+              colorClass={`${theme === "investor" ? "text-black" : "text-white"
+                }`}
             />
           ) : (
             <PlusIcon height="1.5rem" width="1.5rem" />
@@ -141,15 +147,14 @@ export default function MilestoneBadge({
       {isMini && action === "remove" && text !== "Joining Capital HUB" && (
         <button
           className={`action_badge btn border-0 ${theme}`}
-          onClick={(e) => handleRemoveMilestone(e, milestoneId, oneLinkId)}
+          onClick={(e) => handleRemoveMilestone(e, milestoneId, loggedInUser?.oneLinkId)}
           disabled={loading}
         >
           {loading ? (
             <SpinnerBS
               spinnerSizeClass="spinner-border-sm"
-              colorClass={`${
-                theme === "investor" ? "text-black" : "text-white"
-              }`}
+              colorClass={`${theme === "investor" ? "text-black" : "text-white"
+                }`}
             />
           ) : (
             <IconDeleteFill />

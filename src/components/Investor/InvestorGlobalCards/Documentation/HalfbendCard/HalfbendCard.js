@@ -4,7 +4,7 @@ import "./HalfbendCard.scss";
 import ThreeDot from "../../../../../Images/VerticalBlackThreeDots.svg";
 // import folderIcon from "../../../../../Images/Folder.png";
 import pdfIcon from "../../../../../Images/PDFIcon.png";
-import { getPdfData,deleteDocument } from "../../../../../Service/user";
+import { getPdfData, deleteDocument } from "../../../../../Service/user";
 import { useSelector } from "react-redux";
 import deleteIcon from "../../../../../Images/post/delete.png";
 import AfterSuccessPopup from "../../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
@@ -12,33 +12,32 @@ import AfterSuccessPopup from "../../../../../components/PopUp/AfterSuccessPopUp
 import axios from "axios";
 
 
-const HalfbendCard = ({folderName, userId}) => {
+const HalfbendCard = ({ folderName, userId }) => {
   const [data, setData] = useState([]);
   const [user, setUser] = useState([]);
   const [deleteDoc, setDeleteDoc] = useState(false);
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  console.log("user",userId)
+  console.log("user", userId)
   useEffect(() => {
-    if (userId) {
+    if (userId !== undefined) {
       getPdfData(userId, folderName).then((res) => {
         setData(res.data);
         // console.log("data", res);
-      });
+      }).catch((error) => console.error(error.message));
     } else {
-      getPdfData(loggedInUser._id, folderName).then((res) => {
+      getPdfData(loggedInUser?.oneLinkId, folderName).then((res) => {
         setData(res.data);
         // console.log("data", res);
-      });
+      }).catch((error) => console.error(error.message));
     }
-  }, [loggedInUser, userId, folderName,deleteDoc]);
+  }, [loggedInUser, userId, folderName, deleteDoc]);
 
   const openPdfInNewWindow = (fileUrl) => {
     //  console.log("pdfurl---------",pdfUrl)
     //  window.location.href = pdfUrl;
 
 
-     const imageUrl = 'https://res.cloudinary.com/drjt9guif/image/upload/c_scale,q_100,w_265/v1692955323/TheCapitalHub/users/profilePictures/wprwfl9rsdkyfptag0hw.webp'; // Your image URL
 
     //  fetch(fileUrl)
     //  .then((response) => {
@@ -60,20 +59,20 @@ const HalfbendCard = ({folderName, userId}) => {
 
 
     let newWindow = window.open();
-    
-        newWindow.location = fileUrl;
+
+    newWindow.location = fileUrl;
   }
 
 
-  
-  const handleDeleteDoc=(id)=>{
+
+  const handleDeleteDoc = (id) => {
     try {
       deleteDocument(id).then((res) => {
-      console.log(res)
+        console.log(res)
         setDeleteDoc(true)
       });
     } catch (error) {
-      console.log("Error in delete document:",error.response.data.message)
+      console.log("Error in delete document:", error.response.data.message)
     }
   }
 
@@ -184,44 +183,46 @@ const HalfbendCard = ({folderName, userId}) => {
       <div className="box_container mt-4">
         <div className="row">
           {data?.map((item) => (
-            
+
             <div
               className="col-md-4 d-flex justify-content-center align-items-center main_col"
               key={item.fileName}
-             
+
             >
-              <div className="custom-card"  onClick={() => openPdfInNewWindow(item.fileUrl)}>
+              <div className="custom-card" onClick={() => openPdfInNewWindow(item.fileUrl)}>
                 <img
                   className="mx-3 my-1"
                   src={pdfIcon}
                   height={50}
                   alt="PDF Icon"
-                  
+
                 />
               </div>
               <div className="d-flex flex-column mx-auto justify-content-center align-items-center">
-              <h6 >{item.fileName}</h6>
-              <img
-                  className="delete-img"
-                  src={deleteIcon}
-                  height={50}
-                  alt="deleteIcon"
-                  onClick={() => handleDeleteDoc(item._id)}
-                />
+                <h6 >{item.fileName}</h6>
+                {loggedInUser?._id === item.userId &&
+                  <img
+                    className="delete-img"
+                    src={deleteIcon}
+                    height={50}
+                    alt="deleteIcon"
+                    onClick={() => handleDeleteDoc(item._id)}
+                  />
+                }
               </div>
-              
+
             </div>
           ))}
-          
+
         </div>
       </div>
       {deleteDoc && (
-          <AfterSuccessPopup
-            withoutOkButton
-            onClose={() => setDeleteDoc(!deleteDoc)}
-            successText="Document Deleted Successfully"
-          />
-        )}
+        <AfterSuccessPopup
+          withoutOkButton
+          onClose={() => setDeleteDoc(!deleteDoc)}
+          successText="Document Deleted Successfully"
+        />
+      )}
     </div>
   );
 };

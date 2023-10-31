@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import { NavBar, SideBar, Card } from "../../../components/InvestorView";
 import "./Documentation.scss";
@@ -11,6 +11,7 @@ import {
   Legal,
   Pitch,
 } from "../../../Images/StartUp/Documentaion";
+import { getFoldersApi } from "../../../Service/user";
 
 const Documentation = () => {
   const navigate = useNavigate();
@@ -19,6 +20,24 @@ const Documentation = () => {
   useEffect(() => {
     document.title = "Documentation - One Link | The Capital Hub";
   }, []);
+
+  const [folderName, setFolderName] = useState([]);
+
+  const getFolders = () => {
+    getFoldersApi(userId)
+      .then((data) => {
+        console.log(data.data);
+        setFolderName(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getFolders();
+  }, []);
+
   return (
     <MaxWidthWrapper>
       <div className="">
@@ -31,7 +50,7 @@ const Documentation = () => {
                 navigate(`/onelink/${username}/${userId}/documentation/financials`)
               }
             /> */}
-            <Card
+            {/* <Card
               text={"Pitch Deck"}
               onClicked={() =>
                 navigate(
@@ -46,14 +65,14 @@ const Documentation = () => {
                 navigate(`/onelink/${username}/${userId}/documentation/legal`)
               }
               image={Legal}
-            />
+            /> */}
             {/* <Card
               text={"Update"}
               onClicked={() =>
                 navigate(`/onelink/${username}/${userId}/documentation/update`)
               }
             /> */}
-            <Card
+            {/* <Card
               text={"KYC Details"}
               onClicked={() =>
                 navigate(
@@ -70,7 +89,35 @@ const Documentation = () => {
                 )
               }
               image={Business}
-            />
+            /> */}
+            {folderName.map((folder, index) => {
+              let imageToShow;
+
+              switch (folder) {
+                case 'pitchdeck':
+                  imageToShow = Pitch;
+                  break;
+                case 'business':
+                  imageToShow = Business;
+                  break;
+                case 'kycdetails':
+                  imageToShow = KYC;
+                  break;
+                case 'legal and compliance':
+                  imageToShow = Legal;
+                  break;
+                default:
+                  imageToShow = Pitch;
+              }
+              return (
+                <Card
+                  key={index}
+                  onClicked={() => navigate(`/onelink/${username}/${userId}/documentation/${folder}`)}
+                  text={folder}
+                  image={imageToShow}
+                />
+              );
+            })}
           </div>
         </div>
       </div>

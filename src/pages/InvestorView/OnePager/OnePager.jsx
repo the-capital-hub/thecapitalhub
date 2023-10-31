@@ -83,7 +83,7 @@ const OnePager = () => {
       useCORS: true,
       windowWidth: '1400px',
     }).then((canvas) => {
-      const contentDataURL = canvas.toDataURL("image/png");
+      const contentDataURL = canvas.toDataURL("image/png", 0.7);
       const imgWidth = 210;
       const pageHeight = 295;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
@@ -91,13 +91,13 @@ const OnePager = () => {
       let pdf = new jsPDF("p", "mm", "a4");
       let position = 5;
 
-      pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+      pdf.addImage(contentDataURL, "JPEG", 0, position, imgWidth, imgHeight);
       heightLeft -= pageHeight;
 
       while (heightLeft >= 0) {
         position = heightLeft - imgHeight;
         pdf.addPage();
-        pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+        pdf.addImage(contentDataURL, "JPEG", 0, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
       }
       pdf.save(`${username}.pdf`);
@@ -110,7 +110,7 @@ const OnePager = () => {
   // Handle preview PDF
   const handlePreviewPDF = () => {
     const element = document.querySelector(".onePager_wrapper");
-    const buttons = document.querySelectorAll(".buttons button");
+    const buttons = document.querySelectorAll(".button");
     buttons.forEach((button) => {
       button.style.display = "none";
     });
@@ -122,7 +122,7 @@ const OnePager = () => {
       useCORS: true,
       windowWidth: '1400px',
     }).then((canvas) => {
-      const contentDataURL = canvas.toDataURL("image/png");
+      const contentDataURL = canvas.toDataURL("image/png", 0.7);
       console.log(contentDataURL);
       const imgWidth = 210;
       const pageHeight = 295;
@@ -131,13 +131,13 @@ const OnePager = () => {
       let pdf = new jsPDF("p", "mm", "a4");
       let position = 5;
 
-      pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+      pdf.addImage(contentDataURL, "JPEG", 0, position, imgWidth, imgHeight);
       heightLeft -= pageHeight;
 
       while (heightLeft >= 0) {
         position = heightLeft - imgHeight;
         pdf.addPage();
-        pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+        pdf.addImage(contentDataURL, "JPEG", 0, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
       }
       const blob = pdf.output("blob");
@@ -212,13 +212,15 @@ const OnePager = () => {
               {/* Action buttons */}
               <div className="onePager_action_buttons px-3 px-lg-4 py-5 d-flex align-items-center justify-content-center justify-content-md-end">
                 <div className="action_buttons_container d-flex flex-column flex-md-row gap-4">
-                  <button
-                    type="button"
-                    className="text-black rounded-pill onePager_action_save"
-                    onClick={handlePreviewPDF}
-                  >
-                    Preview
-                  </button>
+                  <div className="preview_button">
+                    <button
+                      type="button"
+                      className="text-black rounded-pill onePager_action_save"
+                      onClick={handlePreviewPDF}
+                    >
+                      Preview
+                    </button>
+                  </div>
                   <button
                     type="button"
                     className="text-white rounded-pill onePager_action_publish"

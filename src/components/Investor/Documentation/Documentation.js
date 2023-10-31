@@ -43,7 +43,7 @@ const Documentation = () => {
   const dispatch = useDispatch();
 
   const getFolders = () => {
-    getFoldersApi(loggedInUser._id)
+    getFoldersApi(loggedInUser.oneLinkId)
       .then((data) => {
         console.log(data.data);
         setFolderName(data.data);
