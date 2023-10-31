@@ -59,6 +59,10 @@ function Search() {
       <div className="serach_main_container">
         <SmallProfileCard text={"Search"} />
         <section className="content_section mt-4">
+          <span className="bg-white rounded-4 shadow-sm px-3 py-2 m-md-3 d-flex flex-wrap gap-2">
+            <p className="m-0 p-0">Didn't find what you are looking for?</p>
+            <Link to="/explore">Head over to Explore</Link>
+          </span>
           <div className="row">
             <div className="col-12 mt-2 box p-4">
               <h4>People</h4>
