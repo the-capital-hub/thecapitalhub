@@ -94,6 +94,28 @@
       display: flex;
       // justify-content: center;
       overflow-x: auto;
+      .dummy_one{
+        position: relative;
+        width: 100%;
+        margin-top: 20px;
+        border-radius: 10px;
+        border: 1px solid #adb5bd7c;
+        background: #fff;
+        min-height: 140px;
+h6{
+  background-color: #fff;
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  border-radius: 5px;
+  color: #ff772f;
+  text-align: center;
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;}
+      }
 
       &::-webkit-scrollbar {
         height: 8px;
@@ -191,6 +213,8 @@
       }
       .table_section {
         overflow-x: auto;
+
+
       }
     }
   }
