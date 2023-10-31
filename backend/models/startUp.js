@@ -137,9 +137,10 @@ const startUpSchema = new Schema(
     },
     oneLink: {
       type: String,
-      default: function () {
-        return this.company.split(" ").join("").toLowerCase();
-      },
+      unique: true,
+      // default: function () {
+      //   return this.company.split(" ").join("").toLowerCase();
+      // },
     },
     contactDetails: {
       fullName: String,
@@ -195,5 +196,6 @@ const startUpSchema = new Schema(
     timestamps: true,
   }
 );
+
 
 export const StartUpModel = model("StartUps", startUpSchema);

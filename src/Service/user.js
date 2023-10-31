@@ -38,10 +38,10 @@ async function getUser() {
   }
 }
 
-async function getPdfData(userId, folderName) {
+async function getPdfData(oneLinkId, folderName) {
   try {
     const requestBody = {
-      userId,
+      oneLinkId,
       folderName,
     };
     const response = await axiosInstance.post(API.getDocument, requestBody);
@@ -1245,6 +1245,16 @@ export const answerQuestionAPI = async (answerObject) => {
     return response.data;
   } catch (error) {
     console.error("Error updating answer:", error);
+    throw error;
+  }
+};
+
+export const getQuestionCountAPI = async () => {
+  try {
+    const response = await axiosInstance.get(`${API.getQuestionCount}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching count:", error);
     throw error;
   }
 };

@@ -85,6 +85,7 @@ const FeaturedPostsContainer = ({ userId }) => {
                   createdAt={createdAt}
                   likes={likes}
                   setIsDeleteSuccessful={setIsDeleteSuccessful}
+                  isNotEditable
                 />
               )
             )

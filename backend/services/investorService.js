@@ -22,9 +22,14 @@ export const createInvestor = async (investorData) => {
         data: existingCompany,
       };
     }
+
+    let oneLink = investorData.companyName.split(" ").join("").toLowerCase();
+    const isOneLinkExists = await InvestorModel.countDocuments({ oneLink: oneLink });
     const newInvestor = new InvestorModel({
       ...investorData,
+      oneLink: isOneLinkExists === 1 ? oneLink + isOneLinkExists + 1 : oneLink,
     });
+
     await newInvestor.save();
     const { founderId } = newInvestor;
     const user = await UserModel.findByIdAndUpdate(founderId, {

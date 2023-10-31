@@ -10,6 +10,7 @@ import { getBase64 } from "../../../../utils/getBase64";
 import IconEdit from "../../SvgIcons/IconEdit";
 import IconDeleteFill from "../../SvgIcons/IconDeleteFill";
 import { useSelector } from "react-redux";
+import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 
 export default function AddTeamMemberModal({
   companyData,
@@ -28,6 +29,7 @@ export default function AddTeamMemberModal({
   const [imagePreview, setImagePreview] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const [loading, setLoading] = useState(false);
 
   // Fetch current core team members here
   const { team: currentTeam } = companyData;
@@ -61,6 +63,7 @@ export default function AddTeamMemberModal({
 
   // handle AddTeamMember
   const handleAddTeamMember = async (e) => {
+    setLoading(true);
     e.preventDefault();
     let index = member.index;
     let profileImage = "";
@@ -141,6 +144,8 @@ export default function AddTeamMemberModal({
       setImagePreview(null);
     } catch (error) {
       console.error("Error adding team member:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -216,41 +221,41 @@ export default function AddTeamMemberModal({
           {/* Loop current team member here */}
           {currentTeam
             ? currentTeam.map((member, index) => {
-                return (
-                  <div
-                    className="d-flex align-items-center justify-content-around p-2 bg-light rounded-3"
-                    key={`${member.name}${index}`}
-                  >
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        objectFit: "cover",
-                      }}
-                      className="rounded-circle"
-                    />
-                    <h6 className="m-0 flex-grow-1 text-center" style={{}}>
-                      {member.name}
-                    </h6>
-                    <div className="d-flex gap-2">
-                      <button
-                        className={`modal_edit_btn ${theme}`}
-                        onClick={(e) => handleSelectClick(e, member, index)}
-                      >
-                        <IconEdit />
-                      </button>
-                      <button
-                        className={`modal_delete_btn ${theme}`}
-                        onClick={(e) => handleDeleteClick(e, member, index)}
-                      >
-                        <IconDeleteFill />
-                      </button>
-                    </div>
+              return (
+                <div
+                  className="d-flex align-items-center justify-content-around p-2 bg-light rounded-3"
+                  key={`${member.name}${index}`}
+                >
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      objectFit: "cover",
+                    }}
+                    className="rounded-circle"
+                  />
+                  <h6 className="m-0 flex-grow-1 text-center" style={{}}>
+                    {member.name}
+                  </h6>
+                  <div className="d-flex gap-2">
+                    <button
+                      className={`modal_edit_btn ${theme}`}
+                      onClick={(e) => handleSelectClick(e, member, index)}
+                    >
+                      <IconEdit />
+                    </button>
+                    <button
+                      className={`modal_delete_btn ${theme}`}
+                      onClick={(e) => handleDeleteClick(e, member, index)}
+                    >
+                      <IconDeleteFill />
+                    </button>
                   </div>
-                );
-              })
+                </div>
+              );
+            })
             : ""}
         </div>
       </div>
@@ -291,9 +296,8 @@ export default function AddTeamMemberModal({
                 <BsFillCameraFill
                   style={{
                     fontSize: "1.5rem",
-                    color: `${
-                      theme === "investor" ? "black" : "rgba(253, 89, 1,1)"
-                    }`,
+                    color: `${theme === "investor" ? "black" : "rgba(253, 89, 1,1)"
+                      }`,
                   }}
                 />
               )}
@@ -335,10 +339,18 @@ export default function AddTeamMemberModal({
           <button
             disabled={!member.designation || !member.name}
             className={`orange_button ${theme}`}
-            data-bs-dismiss="modal"
+            // data-bs-dismiss="modal"
             type="submit"
           >
-            {isEditing ? "Update" : "Add"}
+            {loading ? (
+              <SpinnerBS
+                colorClass={theme === "investor" ? "text-dark" : "text-light"}
+                spinnerSizeClass="spinner-border-sm"
+              />
+            ) : (
+              isEditing ? "Update" : "Add"
+            )}
+
           </button>
           <button
             type="button"

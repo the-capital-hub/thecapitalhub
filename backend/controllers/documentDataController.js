@@ -29,7 +29,7 @@ export const createFolderController = async (req, res) => {
 
 export const getFolderByUserController = async (req, res) => {
   try {
-    const response = await getFolderByUser(req.params.userId);
+    const response = await getFolderByUser(req.params.oneLinkId);
     res.status(200).send(response);
   } catch (error) {
     console.error(error);

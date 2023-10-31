@@ -82,6 +82,7 @@
   }
 
   .list-btn {
+    line-height: 1;
     width: 100%;
     border-radius: 0%;
     &.startup {
@@ -155,5 +156,6 @@
     // word-break: break-all;
     text-align: start;
     text-wrap: balance;
+    line-height: 1;
   }
 }

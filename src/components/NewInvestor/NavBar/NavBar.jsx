@@ -182,10 +182,10 @@ const NavBar = (props) => {
                         )}
                         {searchSuggestions?.company
                           ?.slice(0, 5)
-                          .map(({ company, oneLink }) => (
+                          .map((company) => (
                             <span className="single_result">
-                              <Link to={`/investor/company-profile/${oneLink}`}>
-                                {company}
+                              <Link to={company.isInvestor ? `/investor/company-profile/${company.oneLink}?investor=1` : `/investor/company-profile/${company.oneLink}`}>
+                                {company.company}
                               </Link>
                             </span>
                           ))}
