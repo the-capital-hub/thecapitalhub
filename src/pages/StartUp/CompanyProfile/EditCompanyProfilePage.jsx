@@ -64,6 +64,14 @@ export default function EditCompanyProfilePage() {
   //   e.preventDefault();
   // }
 
+  // Handle Description Change
+  const handleDescriptionChange = (e) => {
+    e.target.style.height = "auto";
+    e.target.style.height = e.target.scrollHeight + 3 + "px";
+
+    setCompanyDescription(e.target.value);
+  };
+
   // Handle Description submit
   const submitBioHandler = async (e) => {
     e.preventDefault();
@@ -91,7 +99,7 @@ export default function EditCompanyProfilePage() {
       setIsSaveAll(false);
       setLoading(false);
     }, 1000);
-  }
+  };
 
   return (
     <MaxWidthWrapper>
@@ -109,7 +117,10 @@ export default function EditCompanyProfilePage() {
           </span>
           <SmallProfileCard text={"Company Profile"} />
           <div className="bg-white rounded-5 p-5">
-            <CompanyProfileForm companyData={companyData} isSaveAll={isSaveAll} />
+            <CompanyProfileForm
+              companyData={companyData}
+              isSaveAll={isSaveAll}
+            />
           </div>
           {/* Company Description */}
           <div className="paragraph__component bg-white rounded-5 p-5 d-flex flex-column gap-4">
@@ -118,17 +129,22 @@ export default function EditCompanyProfilePage() {
               <span className="ms-auto">
                 <div className="d-flex gap-2">
                   <button
-                    className={`align-self-end btn-base startup ${isBioEditable ? "btn-sm" : ""
-                      }`}
-                    onClick={() => setIsBioEditable(!isBioEditable)}
+                    className={`align-self-end btn-base startup ${
+                      isBioEditable ? "btn-sm" : ""
+                    }`}
+                    onClick={() => {
+                      setCompanyDescription(companyData.description);
+                      setIsBioEditable(!isBioEditable);
+                    }}
                   >
                     {isBioEditable ? "Cancel" : "Edit"}
                     {/* <CiEdit /> */}
                   </button>
                   {isBioEditable && (
                     <button
-                      className={`align-self-end btn-base startup ${isBioEditable ? "btn-sm" : ""
-                        }`}
+                      className={`align-self-end btn-base startup ${
+                        isBioEditable ? "btn-sm" : ""
+                      }`}
                       onClick={(e) => submitBioHandler(e)}
                     >
                       Save
@@ -153,7 +169,7 @@ export default function EditCompanyProfilePage() {
                 value={companyDescription}
                 name="bio"
                 rows={8}
-                onChange={(e) => setCompanyDescription(e.target.value)}
+                onChange={handleDescriptionChange}
                 className="p-2 rounded-3"
               />
             ) : (
@@ -256,14 +272,14 @@ export default function EditCompanyProfilePage() {
             className={`align-self-end btn-base startup`}
             onClick={handleSaveAll}
           >
-             {loading ? (
-            <SpinnerBS
-              colorClass={"text-light"}
-              spinnerSizeClass="spinner-border-sm"
-            />
-          ) : (
-            "Save all"
-          )}
+            {loading ? (
+              <SpinnerBS
+                colorClass={"text-light"}
+                spinnerSizeClass="spinner-border-sm"
+              />
+            ) : (
+              "Save all"
+            )}
           </button>
         </div>
         {/* Right side content */}

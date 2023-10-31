@@ -18,6 +18,7 @@ import CoreTeam from "../../../components/Investor/CompanyProfilePageComponents/
 import { useNavigate } from "react-router-dom";
 import backIcon from "../../../Images/Chat/BackIcon.svg";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
+import CompanyDescription from "../../../components/Investor/CompanyProfilePageComponents/CompanyDescription/CompanyDescription";
 
 export default function EditInvestorCompanyProfilePage() {
   const dispatch = useDispatch();
@@ -32,6 +33,8 @@ export default function EditInvestorCompanyProfilePage() {
   const [isBioEditable, setIsBioEditable] = useState(false);
   const [companyDescription, setCompanyDescription] = useState(null);
 
+  // States for popup
+
   // Set page title
   useEffect(() => {
     document.title = "Edit Company Profile | Investors - The Capital Hub";
@@ -39,21 +42,22 @@ export default function EditInvestorCompanyProfilePage() {
   }, []);
 
   useEffect(() => {
-    getInvestorById(loggedInUser.investor).then(({ data }) => {
-      setCompanyData(data);
-      setCompanyDescription(data.description);
-      setColorCardData({
-        averageInvestment: data.colorCard.averageInvestment,
-        total_investment: data.colorCard.total_investment,
-        no_of_investments: data.colorCard.no_of_investments,
-        minimumTicketsSize: data.colorCard.minimumTicketsSize,
-        maximumTicketsSize: data.colorCard.maximumTicketsSize,
-        seedRound: data.colorCard.seedRound,
-      });
-    })
+    getInvestorById(loggedInUser.investor)
+      .then(({ data }) => {
+        setCompanyData(data);
+        setCompanyDescription(data.description);
+        setColorCardData({
+          averageInvestment: data.colorCard.averageInvestment,
+          total_investment: data.colorCard.total_investment,
+          no_of_investments: data.colorCard.no_of_investments,
+          minimumTicketsSize: data.colorCard.minimumTicketsSize,
+          maximumTicketsSize: data.colorCard.maximumTicketsSize,
+          seedRound: data.colorCard.seedRound,
+        });
+      })
       .catch((error) => {
         console.log(error);
-      })
+      });
   }, []);
 
   // handleAmountChange
@@ -67,7 +71,13 @@ export default function EditInvestorCompanyProfilePage() {
     }));
   };
 
+  // Handle Description Change
+  const handleDescriptionChange = (e) => {
+    e.target.style.height = "auto";
+    e.target.style.height = e.target.scrollHeight + 3 + "px";
 
+    setCompanyDescription(e.target.value);
+  };
 
   // Handle Description submit
   const submitBioHandler = async (e) => {
@@ -97,7 +107,7 @@ export default function EditInvestorCompanyProfilePage() {
       setIsSaveAll(false);
       setLoading(false);
     }, 1000);
-  }
+  };
 
   return (
     <MaxWidthWrapper>
@@ -115,58 +125,22 @@ export default function EditInvestorCompanyProfilePage() {
           <SmallProfileCard text={"Company Profile"} />
           {/* Company profile form */}
           <div className="bg-white rounded-3 p-5 border">
-            <CompanyProfileForm companyData={companyData} investor={true} isSaveAll={isSaveAll} />
+            <CompanyProfileForm
+              companyData={companyData}
+              investor={true}
+              isSaveAll={isSaveAll}
+            />
           </div>
           {/* Company Description */}
-          <div className="paragraph__component bg-white rounded-3 p-5 d-flex flex-column gap-4 border">
-            <div className="d-flex flex-column-reverse flex-sm-row align-items-sm-center justify-content-between">
-              <h2>Company Description</h2>
-              <span className="ms-auto">
-                <div className="d-flex gap-2">
-                  <button
-                    className={`align-self-end btn-base investor ${isBioEditable ? "btn-sm" : ""
-                      }`}
-                    onClick={() => setIsBioEditable(!isBioEditable)}
-                  >
-                    {isBioEditable ? "Cancel" : "Edit"}
-                    {/* <CiEdit /> */}
-                  </button>
-                  {isBioEditable && (
-                    <button
-                      className={`align-self-end btn-base investor ${isBioEditable ? "btn-sm" : ""
-                        }`}
-                      onClick={(e) => submitBioHandler(e)}
-                    >
-                      Save
-                      {/* <CiSaveUp2 /> */}
-                    </button>
-                  )}
-                </div>
-              </span>
-            </div>
-            {/* <p>
-              A little about myself. “Dejection is a sign of failure but it
-              becomes the cause of success”. I wrote this when I was 16 years old
-              and that’s exactly when I idealised the reality of life. In this
-              current world, success is defined in many ways, some of which
-              include money, fame and power. I believe that success is just the
-              beginning of a new problem. Every step of our lives we work hard to
-              solve an issue and every time we end up with a new problem.
-            </p> */}
-            {isBioEditable ? (
-              <textarea
-                value={companyDescription}
-                name="bio"
-                onChange={(e) => setCompanyDescription(e.target.value)}
-              />
-            ) : (
-              <p className="small_typo">
-                {companyDescription ||
-                  "Click on edit to add company description"}
-              </p>
-            )}
-            {/* <Link className="see__more align-self-end">See more</Link> */}
-          </div>
+          <CompanyDescription
+            companyData={companyData}
+            companyDescription={companyDescription}
+            setCompanyDescription={setCompanyDescription}
+            isBioEditable={isBioEditable}
+            setIsBioEditable={setIsBioEditable}
+            submitBioHandler={submitBioHandler}
+            handleDescriptionChange={handleDescriptionChange}
+          />
 
           {/* Core Team */}
           <div className="core__team bg-white rounded-3 p-5 d-flex flex-column gap-4 border">
@@ -175,72 +149,13 @@ export default function EditInvestorCompanyProfilePage() {
               setCompanyData={setCompanyData}
               theme="investor"
             />
-            {/* When integrating with backend replace below code with CoreTeam Component above */}
-            {/* <div className="d-flex align-items-center justify-content-between">
-              <h2>Core Team</h2>
-              <Link className="see__more align-self-end">See more</Link>
-            </div>
-            <div className="team__cards__container d-flex align-items-center gap-5 flex-wrap">
-              <div
-                className="p-4 d-flex flex-column align-items-center gap-3 rounded-5"
-                style={{ backgroundColor: "#EDEDED" }}
-              >
-                <img
-                  src={RaghuImage}
-                  alt={"name"}
-                  style={{ width: "50px", height: "50px" }}
-                  className="rounded-circle"
-                />
-                <h5>Raghu</h5>
-                <p>Web Developer</p>
-              </div>
-              <div
-                className="p-4 d-flex flex-column align-items-center gap-3 rounded-5"
-                style={{ backgroundColor: "#EDEDED" }}
-              >
-                <img
-                  src={RaghuImage}
-                  alt={"name"}
-                  style={{ width: "50px", height: "50px" }}
-                  className="rounded-circle"
-                />
-                <h5>Raghu</h5>
-                <p>Web Developer</p>
-              </div>
-              <div
-                className="p-4 d-flex flex-column  align-items-center gap-3 rounded-5"
-                style={{ backgroundColor: "#EDEDED" }}
-              >
-                <img
-                  src={RaghuImage}
-                  alt={"name"}
-                  style={{ width: "50px", height: "50px" }}
-                  className="rounded-circle"
-                />
-                <h5>Raghu</h5>
-                <p>Web Developer</p>
-              </div>
-              <div
-                className="p-4 d-flex flex-column  align-items-center gap-3 rounded-5"
-                style={{ backgroundColor: "#EDEDED" }}
-              >
-                <img
-                  src={RaghuImage}
-                  alt={"name"}
-                  style={{ width: "50px", height: "50px" }}
-                  className="rounded-circle"
-                />
-                <h5>Raghu</h5>
-                <p>Web Developer</p>
-              </div>
-            </div> */}
           </div>
 
-          {/* When integrating with backend replace below code with Milestones Component */}
           {/* Milestones */}
           <div className="milestones__component bg-white rounded-3 p-5 d-flex flex-column gap-4 border">
             <Milestones theme={"investor"} />
           </div>
+
           {/* Color Cards */}
           <div className="card_holder d-flex justify-content-between flex-wrap">
             <ColorCard

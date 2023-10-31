@@ -130,7 +130,7 @@ export default function CompanyProfileForm({
     setOthersClicked(false);
     setFormData((prevData) => ({
       ...prevData,
-      location: companyData.location,
+      location: formData.location || companyData.location,
     }));
   };
 
@@ -305,7 +305,7 @@ export default function CompanyProfileForm({
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <span>{formData.sector}</span>
+              {formData.sector}
             </button>
             <ul
               className={`dropdown-menu m-0 p-0 ${
