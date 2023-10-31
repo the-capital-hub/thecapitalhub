@@ -212,13 +212,15 @@ const OnePager = () => {
               {/* Action buttons */}
               <div className="onePager_action_buttons px-3 px-lg-4 py-5 d-flex align-items-center justify-content-center justify-content-md-end">
                 <div className="action_buttons_container d-flex flex-column flex-md-row gap-4">
-                  <button
-                    type="button"
-                    className="text-black rounded-pill onePager_action_save"
-                    onClick={handlePreviewPDF}
-                  >
-                    Preview
-                  </button>
+                  <div className="preview_button">
+                    <button
+                      type="button"
+                      className="text-black rounded-pill onePager_action_save"
+                      onClick={handlePreviewPDF}
+                    >
+                      Preview
+                    </button>
+                  </div>
                   <button
                     type="button"
                     className="text-white rounded-pill onePager_action_publish"

@@ -5,6 +5,7 @@ import "./InvestNow.scss";
 import { useParams } from "react-router-dom";
 import { getOnePager, investNow } from "../../../Service/user";
 import { getUserById } from "../../../Service/user";
+import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 
 const InvestNow = ({ page }) => {
   const [user, setUser] = useState({});
@@ -20,6 +21,8 @@ const InvestNow = ({ page }) => {
   }, [username]);
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // State variables to store input data
   const [fullName, setFullName] = useState("");
@@ -27,6 +30,7 @@ const InvestNow = ({ page }) => {
   const [email, setEmail] = useState("");
 
   const handleSubmit = async () => {
+    setLoading(true);
     await getOnePager(username)
       .then(({ data }) => {
         setOnePager(data);
@@ -38,8 +42,19 @@ const InvestNow = ({ page }) => {
       fromUserMobile: mobileNumber,
       toUserId: onePager.founderId,
     };
-    const response = await investNow(requestBody);
-    if (response.status === 200) setShowModal(true);
+    try {
+      const response = await investNow(requestBody);
+      console.log(response);
+      if (response.status === 200) {
+        setShowModal(true);
+        setLoading(false);
+        setIsSubmitted(true);
+      }
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -89,7 +104,20 @@ const InvestNow = ({ page }) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <button onClick={handleSubmit}>Show Interest</button>
+              {isSubmitted ?
+                <button>Submitted</button>
+                :
+                <button onClick={handleSubmit}>
+                  {loading ? (
+                    <SpinnerBS
+                      colorClass={"text-light"}
+                      spinnerSizeClass="spinner-border-sm"
+                    />
+                  ) : (
+                    "Show Interest"
+                  )}
+                </button>
+              }
             </div>
           </>
         )}

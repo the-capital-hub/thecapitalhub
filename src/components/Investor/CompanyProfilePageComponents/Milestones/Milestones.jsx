@@ -28,11 +28,16 @@ const companyMilestones = [
   },
 ];
 
-export default function Milestones({ headingClass, containerClass, theme }) {
+export default function Milestones({ headingClass, containerClass, theme, oneLink }) {
   let { pathname } = useLocation();
-  const { oneLinkId } = useSelector((state) => state.user.loggedInUser);
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  // const oneLinkId = loggedInUser ? loggedInUser.oneLinkId : oneLink;
+  // const { oneLinkId } = useSelector((state) => state.user.loggedInUser) ?? { oneLinkId: oneLink };
+
 
   const [userMilestones, setUserMilestones] = useState(null);
+  const [joinedDate, setJoinedDate] = useState(null);
+  const [companyFoundedDate, setCompanyFoundedDate] = useState(null);
 
   // fetch user's milestones
   useEffect(() => {
@@ -45,14 +50,16 @@ export default function Milestones({ headingClass, containerClass, theme }) {
         }));
         // console.log("user's milestones", data);
         setUserMilestones(data.milestones);
+        setJoinedDate(data.userJoinedDate);
+        setCompanyFoundedDate(data.startUpFoundedDate);
       } catch (error) {
         console.log("Error fetching user's milestones:", error);
         setUserMilestones(companyMilestones);
       }
     }
 
-    fetchUserMilestones(oneLinkId);
-  }, []);
+    fetchUserMilestones(oneLink || loggedInUser.oneLinkId);
+  }, [loggedInUser?.oneLinkId, oneLink]);
 
   return (
     <div className={` d-flex flex-column gap-4 ${containerClass} `}>
@@ -70,6 +77,8 @@ export default function Milestones({ headingClass, containerClass, theme }) {
                 milestone={mile}
                 key={`${mile.milestone}${index}`}
                 theme={theme}
+                joinedDate={joinedDate}
+                companyFoundedDate={companyFoundedDate}
               />
             );
           })
@@ -95,21 +104,25 @@ export default function Milestones({ headingClass, containerClass, theme }) {
         ""
       )}
       {/* Modal for adding new team member */}
-      <div className="addMilestoneModal__container">
-        <ModalBSContainer id={"AddMilestoneModal"} modalXl>
-          <ModalBSHeader
-            title={"Add/Edit Milestone"}
-            className={`${theme === "investor" ? "" : "orange__heading"}`}
-          />
-          <ModalBSBody>
-            <AddMilestoneModal
-              theme={theme}
-              userMilestones={userMilestones}
-              setUserMilestones={setUserMilestones}
+      {!pathname.includes("onelink") ? (
+        <div className="addMilestoneModal__container">
+          <ModalBSContainer id={"AddMilestoneModal"} modalXl>
+            <ModalBSHeader
+              title={"Add/Edit Milestone"}
+              className={`${theme === "investor" ? "" : "orange__heading"}`}
             />
-          </ModalBSBody>
-        </ModalBSContainer>
-      </div>
+            <ModalBSBody>
+              <AddMilestoneModal
+                theme={theme}
+                userMilestones={userMilestones}
+                setUserMilestones={setUserMilestones}
+              />
+            </ModalBSBody>
+          </ModalBSContainer>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
