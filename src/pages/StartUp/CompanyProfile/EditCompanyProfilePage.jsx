@@ -18,6 +18,9 @@ import { setPageTitle } from "../../../Store/features/design/designSlice";
 import backIcon from "../../../Images/Chat/BackIcon.svg";
 import { useNavigate } from "react-router-dom";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
+import CompanyDescription from "../../../components/Investor/CompanyProfilePageComponents/CompanyDescription/CompanyDescription";
+import AfterSuccessPopUp from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import ErrorPopUp from "../../../components/PopUp/ErrorPopUp/ErrorPopUp";
 
 export default function EditCompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -27,6 +30,11 @@ export default function EditCompanyProfilePage() {
   const [companyData, setCompanyData] = useState([]);
   const [isBioEditable, setIsBioEditable] = useState(false);
   const [companyDescription, setCompanyDescription] = useState(null);
+
+  // States for popup
+  const [showPopup, setShowPopup] = useState({ success: false, error: false });
+  const [isSaveAll, setIsSaveAll] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (loggedInUser?.isInvestor === "false") {
@@ -49,7 +57,7 @@ export default function EditCompanyProfilePage() {
     }
     window.title = "Edit Company Profile | The Capital Hub";
     dispatch(setPageTitle("Edit Company"));
-  }, []);
+  }, [isSaveAll]);
 
   // handleAmountChange
   const handleAmountChange = (currentfield, updatedAmount) => {
@@ -67,7 +75,7 @@ export default function EditCompanyProfilePage() {
   // Handle Description Change
   const handleDescriptionChange = (e) => {
     e.target.style.height = "auto";
-    e.target.style.height = e.target.scrollHeight + 3 + "px";
+    e.target.style.height = e.target.scrollHeight + 2 + "px";
 
     setCompanyDescription(e.target.value);
   };
@@ -75,6 +83,9 @@ export default function EditCompanyProfilePage() {
   // Handle Description submit
   const submitBioHandler = async (e) => {
     e.preventDefault();
+    // Set Loading
+    setLoading(true);
+
     const companyData = {
       description: companyDescription,
       founderId: loggedInUser._id,
@@ -83,13 +94,19 @@ export default function EditCompanyProfilePage() {
       const response = await postStartUpData(companyData);
       if (response.status === 200) {
         setIsBioEditable(false);
+        setLoading(false);
+        handleShowPopup({ success: true });
+        setCompanyData((prev) => ({
+          ...prev,
+          description: companyDescription,
+        }));
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
+      handleShowPopup({ error: true });
     }
   };
-  const [isSaveAll, setIsSaveAll] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const handleSaveAll = (e) => {
     setLoading(true);
@@ -99,6 +116,19 @@ export default function EditCompanyProfilePage() {
       setIsSaveAll(false);
       setLoading(false);
     }, 1000);
+  };
+
+  // handle show popup
+  const handleShowPopup = (popupType) => {
+    setShowPopup((prev) => ({ ...prev, ...popupType }));
+    setTimeout(() => {
+      handlePopupClose();
+    }, 2000);
+  };
+
+  // handle popup close
+  const handlePopupClose = () => {
+    setShowPopup({ success: false, error: false });
   };
 
   return (
@@ -115,71 +145,28 @@ export default function EditCompanyProfilePage() {
               onClick={() => navigate(-1)}
             />
           </span>
-          <SmallProfileCard text={"Company Profile"} />
+          {/* <SmallProfileCard text={"Company Profile"} /> */}
+
           <div className="bg-white rounded-5 p-5">
             <CompanyProfileForm
               companyData={companyData}
               isSaveAll={isSaveAll}
+              handleShowPopup={handleShowPopup}
             />
           </div>
-          {/* Company Description */}
-          <div className="paragraph__component bg-white rounded-5 p-5 d-flex flex-column gap-4">
-            <div className="d-flex flex-row flex-sm-row align-items-sm-center justify-content-between">
-              <h2>Company Description</h2>
-              <span className="ms-auto">
-                <div className="d-flex gap-2">
-                  <button
-                    className={`align-self-end btn-base startup ${
-                      isBioEditable ? "btn-sm" : ""
-                    }`}
-                    onClick={() => {
-                      setCompanyDescription(companyData.description);
-                      setIsBioEditable(!isBioEditable);
-                    }}
-                  >
-                    {isBioEditable ? "Cancel" : "Edit"}
-                    {/* <CiEdit /> */}
-                  </button>
-                  {isBioEditable && (
-                    <button
-                      className={`align-self-end btn-base startup ${
-                        isBioEditable ? "btn-sm" : ""
-                      }`}
-                      onClick={(e) => submitBioHandler(e)}
-                    >
-                      Save
-                      {/* <CiSaveUp2 /> */}
-                    </button>
-                  )}
-                </div>
-              </span>
-            </div>
 
-            {/* <p>
-              A little about myself. “Dejection is a sign of failure but it
-              becomes the cause of success”. I wrote this when I was 16 years old
-              and that’s exactly when I idealised the reality of life. In this
-              current world, success is defined in many ways, some of which
-              include money, fame and power. I believe that success is just the
-              beginning of a new problem. Every step of our lives we work hard to
-              solve an issue and every time we end up with a new problem.
-            </p> */}
-            {isBioEditable ? (
-              <textarea
-                value={companyDescription}
-                name="bio"
-                rows={8}
-                onChange={handleDescriptionChange}
-                className="p-2 rounded-3"
-              />
-            ) : (
-              <p className="small_typo">
-                {companyDescription ||
-                  "Click on edit to add company description"}
-              </p>
-            )}
-            {/* <Link className="see__more align-self-end">See more</Link> */}
-          </div>
+          {/* Company Description */}
+          <CompanyDescription
+            companyData={companyData}
+            companyDescription={companyDescription}
+            setCompanyDescription={setCompanyDescription}
+            isBioEditable={isBioEditable}
+            setIsBioEditable={setIsBioEditable}
+            submitBioHandler={submitBioHandler}
+            handleDescriptionChange={handleDescriptionChange}
+            loading={loading}
+          />
+
           {/* Core Team */}
           <div className="core__team bg-white rounded-5 p-5">
             <CoreTeam
@@ -188,10 +175,12 @@ export default function EditCompanyProfilePage() {
               theme="startup"
             />
           </div>
+
           {/* Milestones */}
           <div className="milestones__component bg-white rounded-5 p-5 d-flex flex-column gap-4">
             <Milestones theme={"startup"} />
           </div>
+
           {/* Color Cards */}
           <div className="card_holder d-flex justify-content-between flex-wrap">
             <ColorCard
@@ -287,6 +276,20 @@ export default function EditCompanyProfilePage() {
           <RecommendationCard />
           <NewsCorner />
         </div>
+
+        {/* Popups */}
+        {showPopup.success && (
+          <AfterSuccessPopUp
+            successText={"Changes Saved"}
+            onClose={handlePopupClose}
+          />
+        )}
+        {showPopup.error && (
+          <ErrorPopUp
+            message={"Error While Saving! Please try again"}
+            onClose={handlePopupClose}
+          />
+        )}
       </div>
     </MaxWidthWrapper>
   );

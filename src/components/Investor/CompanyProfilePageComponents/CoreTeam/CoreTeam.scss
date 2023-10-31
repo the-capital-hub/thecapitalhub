@@ -65,25 +65,25 @@
 }
 
 .addCoreTeamModal__container {
-  .modal {
-    margin-top: 20%;
+  // .modal {
+  //   margin-top: 20%;
 
-    @media (min-width: 500px) {
-      margin-top: 15%;
-    }
+  //   @media (min-width: 500px) {
+  //     margin-top: 15%;
+  //   }
 
-    @media (min-width: 575px) {
-      margin-top: 13.5%;
-    }
+  //   @media (min-width: 575px) {
+  //     margin-top: 13.5%;
+  //   }
 
-    @media (min-width: 768px) {
-      margin-top: 10%;
-    }
+  //   @media (min-width: 768px) {
+  //     margin-top: 10%;
+  //   }
 
-    @media (min-width: 769px) {
-      margin-top: 0;
-    }
-  }
+  //   @media (min-width: 769px) {
+  //     margin-top: 0;
+  //   }
+  // }
 
   .modal-body {
     min-height: 70vh;

@@ -5,7 +5,7 @@ import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCor
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import CompanyProfileForm from "../../../components/Investor/CompanyProfilePageComponents/CompanyProfileForm";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
 import RaghuImage from "../../../Images/aboutUs/Raghu.jpeg";
 import CoinIcon from "../../../Images/investorView/Rectangle.png";
@@ -19,6 +19,8 @@ import { useNavigate } from "react-router-dom";
 import backIcon from "../../../Images/Chat/BackIcon.svg";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import CompanyDescription from "../../../components/Investor/CompanyProfilePageComponents/CompanyDescription/CompanyDescription";
+import ErrorPopUp from "../../../components/PopUp/ErrorPopUp/ErrorPopUp";
+import InvestorAfterSuccessPopUp from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
 
 export default function EditInvestorCompanyProfilePage() {
   const dispatch = useDispatch();
@@ -34,6 +36,9 @@ export default function EditInvestorCompanyProfilePage() {
   const [companyDescription, setCompanyDescription] = useState(null);
 
   // States for popup
+  const [showPopup, setShowPopup] = useState({ success: false, error: false });
+  const [loading, setLoading] = useState(false);
+  const [isSaveAll, setIsSaveAll] = useState(false);
 
   // Set page title
   useEffect(() => {
@@ -58,7 +63,7 @@ export default function EditInvestorCompanyProfilePage() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [isSaveAll]);
 
   // handleAmountChange
   const handleAmountChange = (currentfield, updatedAmount) => {
@@ -82,22 +87,30 @@ export default function EditInvestorCompanyProfilePage() {
   // Handle Description submit
   const submitBioHandler = async (e) => {
     e.preventDefault();
+    // Set Loading
+    setLoading(true);
     const companyData = {
       description: companyDescription,
       founderId: loggedInUser._id,
     };
+
     try {
       const response = await postInvestorData(companyData);
       if (response.status === 200) {
         setIsBioEditable(false);
+        setLoading(false);
+        handleShowPopup({ success: true });
+        setCompanyData((prev) => ({
+          ...prev,
+          description: companyDescription,
+        }));
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
+      handleShowPopup({ error: true });
     }
   };
-
-  const [isSaveAll, setIsSaveAll] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const handleSaveAll = (e) => {
     setLoading(true);
@@ -107,6 +120,19 @@ export default function EditInvestorCompanyProfilePage() {
       setIsSaveAll(false);
       setLoading(false);
     }, 1000);
+  };
+
+  // handle show popup
+  const handleShowPopup = (popupType) => {
+    setShowPopup((prev) => ({ ...prev, ...popupType }));
+    setTimeout(() => {
+      handlePopupClose();
+    }, 2000);
+  };
+
+  // handle popup close
+  const handlePopupClose = () => {
+    setShowPopup({ success: false, error: false });
   };
 
   return (
@@ -122,15 +148,18 @@ export default function EditInvestorCompanyProfilePage() {
               onClick={() => navigate(-1)}
             />
           </span>
-          <SmallProfileCard text={"Company Profile"} />
+          {/* <SmallProfileCard text={"Company Profile"} /> */}
           {/* Company profile form */}
+
           <div className="bg-white rounded-3 p-5 border">
             <CompanyProfileForm
               companyData={companyData}
               investor={true}
+              handleShowPopup={handleShowPopup}
               isSaveAll={isSaveAll}
             />
           </div>
+
           {/* Company Description */}
           <CompanyDescription
             companyData={companyData}
@@ -140,6 +169,7 @@ export default function EditInvestorCompanyProfilePage() {
             setIsBioEditable={setIsBioEditable}
             submitBioHandler={submitBioHandler}
             handleDescriptionChange={handleDescriptionChange}
+            loading={loading}
           />
 
           {/* Core Team */}
@@ -259,6 +289,20 @@ export default function EditInvestorCompanyProfilePage() {
         <div className="right__content">
           <RecommendationCard isInvestor={true} />
         </div>
+
+        {/* Popups */}
+        {showPopup.success && (
+          <InvestorAfterSuccessPopUp
+            successText={"Changes Saved"}
+            onClose={handlePopupClose}
+          />
+        )}
+        {showPopup.error && (
+          <ErrorPopUp
+            message={"Error While Saving! Please try again"}
+            onClose={handlePopupClose}
+          />
+        )}
       </div>
     </MaxWidthWrapper>
   );

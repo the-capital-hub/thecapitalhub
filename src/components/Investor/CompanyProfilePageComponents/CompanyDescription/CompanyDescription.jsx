@@ -1,4 +1,6 @@
 import React from "react";
+import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
+import { useSelector } from "react-redux";
 
 export default function CompanyDescription({
   companyData,
@@ -8,20 +10,35 @@ export default function CompanyDescription({
   setIsBioEditable,
   submitBioHandler,
   handleDescriptionChange,
+  loading,
 }) {
+  // fetch isInvestor
+  const { isInvestor } = useSelector((state) => state.user.loggedInUser);
+
+  function handleResize(e) {
+    e.target.style.height = "auto";
+    e.target.style.height = e.target.scrollHeight + 2 + "px";
+  }
+
   return (
-    <div className="paragraph__component bg-white rounded-3 p-5 d-flex flex-column gap-4 border">
+    <div
+      className={`paragraph__component bg-white p-5 d-flex flex-column gap-4  ${
+        isInvestor === "true" ? "rounded-3 border" : "rounded-5"
+      } `}
+    >
       <div className="d-flex flex-column-reverse flex-sm-row align-items-sm-center justify-content-between gap-3 gap-md-0">
         <h2>Company Description</h2>
         <span className="ms-auto">
           <div className="d-flex gap-2 justify-content-end flex-wrap flex-md-nowrap">
             <button
               type="button"
-              className={`align-self-end btn-base investor ${
-                isBioEditable ? "btn-sm" : ""
-              }`}
+              className={`align-self-end btn-base ${
+                isInvestor === "true" ? "investor" : "startup"
+              } ${isBioEditable ? "btn-sm" : ""}`}
               onClick={() => {
-                setCompanyDescription(companyData.description);
+                if (isBioEditable) {
+                  setCompanyDescription(companyData.description);
+                }
                 setIsBioEditable(!isBioEditable);
               }}
             >
@@ -30,12 +47,21 @@ export default function CompanyDescription({
             </button>
             {isBioEditable && (
               <button
-                className={`align-self-end btn-base investor ${
-                  isBioEditable ? "btn-sm" : ""
-                }`}
+                className={`align-self-end btn-base ${
+                  isInvestor === "true" ? "investor" : "startup"
+                } ${isBioEditable ? "btn-sm" : ""}`}
                 onClick={(e) => submitBioHandler(e)}
               >
-                Save
+                {loading ? (
+                  <SpinnerBS
+                    colorClass={`${
+                      isInvestor === "true" ? "text-dark" : "text-white"
+                    }`}
+                    spinnerSizeClass="spinner-border-sm"
+                  />
+                ) : (
+                  "Save"
+                )}
                 {/* <CiSaveUp2 /> */}
               </button>
             )}
@@ -56,8 +82,10 @@ export default function CompanyDescription({
           value={companyDescription}
           name="bio"
           onChange={handleDescriptionChange}
-          className="editPage_textarea p-2"
-          rows={4}
+          className="description_textarea p-2"
+          onFocus={handleResize}
+          autoFocus
+          // rows={4}
         />
       ) : (
         <p className="small_typo">
