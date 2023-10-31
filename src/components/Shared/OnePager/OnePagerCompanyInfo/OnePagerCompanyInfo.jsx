@@ -11,7 +11,7 @@ export default function OnePagerCompanyInfo({
   socialLinks,
   showEdit,
 }) {
-  const { website, ...otherLinks } = socialLinks   || {};;
+  const { website, ...otherLinks } = socialLinks || {};
   const links = Object.values(otherLinks);
   const tags = keyFocus ? keyFocus.split(",") : [];
   // console.log(links);
@@ -91,12 +91,29 @@ export default function OnePagerCompanyInfo({
       {/* Website Link */}
       <fieldset>
         <legend>Website Link</legend>
-        <input
+        {/* <input
           type="url"
           readOnly
           value={website}
           className="onePager_input shadow-sm text-break"
-        />
+        /> */}
+
+        <div className="onePager_input d-flex justify-content-between align-items-center shadow-sm visit_link">
+          <input
+            type="text"
+            readOnly
+            value={website}
+            className="border-0 w-75 text-break fs-5 link__text__clip"
+            style={{ outline: "none" }}
+          />
+          <a
+            href={website}
+            target="_blank"
+            className="btn-capital px-4 text-decoration-none visit_btn"
+          >
+            Visit
+          </a>
+        </div>
       </fieldset>
 
       {/* Social Links */}

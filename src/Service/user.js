@@ -1248,3 +1248,13 @@ export const answerQuestionAPI = async (answerObject) => {
     throw error;
   }
 };
+
+export const getQuestionCountAPI = async () => {
+  try {
+    const response = await axiosInstance.get(`${API.getQuestionCount}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching count:", error);
+    throw error;
+  }
+};

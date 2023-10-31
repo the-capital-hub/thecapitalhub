@@ -14,13 +14,18 @@ import Categories from "./Categories/Categories";
 import History from "./History/History";
 import { useDispatch } from "react-redux";
 import { updateLoggedInUser } from "../../../../../Store/features/user/userSlice";
+import SpinnerBS from "../../../../Shared/Spinner/SpinnerBS";
 
 export const OPTIONS = {
   company: { text: "Company", endpoint: "Startup" },
   personal: { text: "Personal", endpoint: "Personal" },
 };
 
-export default function Questionnaire() {
+export default function Questionnaire({
+  countData,
+  setCountData,
+  handleRefetch,
+}) {
   const dispatch = useDispatch();
 
   const [answer, setAnswer] = useState("");
@@ -30,13 +35,21 @@ export default function Questionnaire() {
   const [alert, setAlert] = useState(null);
   // State for history
   const [history, setHistory] = useState([]);
+  // State for loading
+  const [loading, setLoading] = useState(false);
+  // State for presenting categories
+  const [showCategories, setShowCategories] = useState(false);
 
   //   Fetch Questions
   async function fetchQuestion(query) {
+    setLoading(true);
+
     try {
       const { data, message } = await getQuestionsAPI(query);
       console.log(data, message);
       setQuestion(data);
+      setLoading(false);
+
       if (!data) {
         setAlert(message);
         setTimeout(() => {
@@ -46,6 +59,7 @@ export default function Questionnaire() {
       }
     } catch (error) {
       console.error("Error fetching Question:", error);
+      setLoading(false);
     }
   }
 
@@ -54,6 +68,7 @@ export default function Questionnaire() {
     // console.log("selected categry", option);
     setOption(option.text);
     fetchQuestion(option.endpoint);
+    setShowCategories(false);
   }
 
   // Handle answer change
@@ -98,6 +113,10 @@ export default function Questionnaire() {
   async function handlePostAnswer(e) {
     e.preventDefault();
     console.log("answer is", answer);
+
+    // set loading
+    setLoading(true);
+
     const answerObject = {
       questionId: question._id,
       answer: answer,
@@ -122,10 +141,27 @@ export default function Questionnaire() {
 
       // Clear answer
       setAnswer("");
+      // Update count
+      setCountData((prev) => {
+        if (question.type === "Startup") {
+          return {
+            ...prev,
+            companyQuestionCount: countData.companyQuestionCount - 1,
+          };
+        }
+
+        if (question.type === "Personal") {
+          return {
+            ...prev,
+            personalQuestionCount: countData.personalQuestionCount - 1,
+          };
+        }
+      });
       // fetch next Question
       fetchQuestion(question.type);
     } catch (error) {
       console.error("Error posting Question:", error);
+      setLoading(false);
     }
   }
 
@@ -134,15 +170,17 @@ export default function Questionnaire() {
     setQuestion(null);
     setOption(null);
     setAnswer("");
+    setShowCategories(true);
   }
 
-  //   clearStates
+  //   clear States
   function clearStates() {
     setAnswer("");
     setQuestion(null);
     setOption(null);
     setAlert(null);
     setHistory([]);
+    handleRefetch();
   }
 
   return (
@@ -151,32 +189,60 @@ export default function Questionnaire() {
         <OffcanvasBSHeader onClose={clearStates} />
         <OffcanvasBSBody bodyClass="p-0">
           <div className="questionnaire_body_wrapper h-100 pb-4 d-flex flex-column justify-content-end gap-3">
-            <div className=" d-flex flex-column justify-content-end gap-3 ">
-              <Greeting />
-              {/* options */}
-              <Categories
-                handleOptionSelect={handleOptionSelect}
-                option={option}
-              />
-            </div>
+            <div
+              className="d-flex flex-column-reverse gap-3 overflow-y-auto chat_col"
+              style={{ scrollbarGutter: "stable", overflowAnchor: "none" }}
+            >
+              {/* Alert */}
+              {alert && (
+                <div className="chat_box">
+                  <em className="">{alert}</em>
+                </div>
+              )}
 
-            {/* History */}
-            <History history={history} />
+              {showCategories && (
+                <div className="d-flex flex-column gap-3">
+                  <Categories
+                    handleOptionSelect={handleOptionSelect}
+                    option={option}
+                    countData={countData}
+                  />
+                </div>
+              )}
 
-            {/* Current Question */}
-            <CurrentQuestion
-              question={question}
-              answer={answer}
-              handleAnswerSelect={handleAnswerSelect}
-              handleBackToCategories={handleBackToCategories}
-            />
+              {/* Current Question */}
+              {!loading ? (
+                <CurrentQuestion
+                  question={question}
+                  answer={answer}
+                  handleAnswerSelect={handleAnswerSelect}
+                  handleBackToCategories={handleBackToCategories}
+                  loading={loading}
+                />
+              ) : (
+                <div className="d-flex justify-content-center align-items-center py-3">
+                  <SpinnerBS
+                    spinnerClass="spinner-grow"
+                    colorClass={"color_main"}
+                  />
+                </div>
+              )}
 
-            {/* Alert */}
-            {alert && (
-              <div className="chat_box">
-                <em className="">{alert}</em>
+              {/* History */}
+              <div className="d-flex flex-column gap-3">
+                <History history={history} />
               </div>
-            )}
+
+              <div className=" d-flex flex-column justify-content-end gap-3 ">
+                <Greeting />
+                {/* options */}
+                <Categories
+                  handleOptionSelect={handleOptionSelect}
+                  option={option}
+                  countData={countData}
+                />
+              </div>
+            </div>
 
             {/* User Input */}
             <UserInput
