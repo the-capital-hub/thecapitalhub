@@ -3,14 +3,28 @@
   --color-text: #fff;
   --color-shadow: rgba(0, 0, 0, 0.05);
 
-  scrollbar-gutter: stable;
-  overflow-y: auto;
-
   .offcanvas {
     --bs-offcanvas-width: min(95dvw, 600px);
   }
 
   //   component styles
+
+  .chat_col {
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10rem;
+      background-color: var(--color-main);
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 10rem;
+      background-color: transparent;
+    }
+  }
+
   .chat_box {
     // min-height: 65px;
     margin-inline: 16px;
@@ -30,6 +44,7 @@
     font-size: 1rem;
     font-weight: 600;
     line-height: 0.85rem;
+    width: fit-content;
 
     &:active {
       transform: scale(0.98);
@@ -136,5 +151,9 @@
     &:active {
       transform: scale(0.98);
     }
+  }
+
+  .color_main {
+    color: var(--color-main);
   }
 }

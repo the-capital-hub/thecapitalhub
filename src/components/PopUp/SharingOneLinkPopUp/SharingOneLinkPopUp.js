@@ -45,7 +45,12 @@ const SharingOneLinkPopUp = ({
     navigator.clipboard
       .writeText(text)
       .then(() => setCopyStatus("Copied!"))
-      .catch(() => setCopyStatus("Copy failed"));
+      .catch(() => setCopyStatus("Copy failed"))
+      .finally(() =>
+        setTimeout(() => {
+          setCopyStatus("");
+        }, 1000)
+      );
   };
 
   // Handle invalid Secret Key
@@ -146,7 +151,7 @@ const SharingOneLinkPopUp = ({
           </h6>
 
           <h4>Share this details via</h4>
-          <div className="share-buttons">
+          <div className="share-buttons d-flex justify-content-center align-items-center position-relative">
             <FacebookShareButton
               url={`${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`}
               quote={messageForSharing}
@@ -168,13 +173,20 @@ const SharingOneLinkPopUp = ({
             {/* Clipboard icon */}
             <HiOutlineClipboard
               size={32}
+              style={{
+                minWidth: "32px",
+              }}
               onClick={() =>
                 copyToClipboard(
                   `${messageForSharing} \nHere is Our OneLink: ${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`
                 )
               }
             />
-            {copyStatus && <p>{copyStatus}</p>}
+            {copyStatus && (
+              <p className="position-absolute bg-white rounded m-0 border shadow px-3 py-2">
+                {copyStatus}
+              </p>
+            )}
           </div>
 
           <button className="close-button" onClick={onClose}>

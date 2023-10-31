@@ -16,7 +16,7 @@ router.get("/getDocument", getDocumentList);
 router.post("/uploadDocument", uploadDocumentController);
 router.post("/getDocumentsByUser", getDocumentByUserController);
 router.post("/createFolder", createFolderController);
-router.get("/getFolderByUser/:userId", getFolderByUserController);
+router.get("/getFolderByUser/:oneLinkId", getFolderByUserController);
 router.patch("/renameFolder", renameFolderController);
 router.delete("/deleteFolder", deleteFolderController);
 router.delete("/deleteDocument/:id", deleteDocumentController);

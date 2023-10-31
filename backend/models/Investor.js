@@ -115,9 +115,10 @@ const investorSchema = new Schema(
     },
     oneLink: {
       type: String,
-      default: function () {
-        return this.companyName.split(" ").join("").toLowerCase();
-      },
+      unique: true,
+      // default: function () {
+      //   return this.companyName.split(" ").join("").toLowerCase();
+      // },
     },
   },
   {

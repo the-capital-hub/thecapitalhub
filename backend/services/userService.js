@@ -55,7 +55,7 @@ export const getUserById = async (userId) => {
   try {
     let user = await UserModel.findOne({ oneLinkId: userId }).populate('startUp');
     if (!user) {
-      user = await UserModel.findById(userId).populate('startUp');
+      user = await UserModel.findById(userId).populate(['startUp', 'investor']);
     }
     if (!user) {
       return {
@@ -305,7 +305,8 @@ export const searchUsers = async (searchQuery) => {
       },
       {
         $addFields: {
-          company: "$companyName", 
+          company: "$companyName",
+          isInvestor: true,
         },
       },
     ]);

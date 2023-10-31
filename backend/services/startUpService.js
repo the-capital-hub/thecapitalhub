@@ -30,9 +30,13 @@ export const createStartup = async (startUpData) => {
         data: existingCompany,
       };
     }
+    let oneLink = startUpData.company.split(" ").join("").toLowerCase();
+    const isOneLinkExists = await StartUpModel.countDocuments({ oneLink: oneLink });
     const newStartUp = new StartUpModel({
       ...startUpData,
+      oneLink: isOneLinkExists === 1 ? oneLink + isOneLinkExists + 1 : oneLink,
     });
+
     await newStartUp.save();
     const { founderId } = newStartUp;
     const user = await UserModel.findByIdAndUpdate(founderId, {

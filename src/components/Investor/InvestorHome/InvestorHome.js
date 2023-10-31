@@ -16,6 +16,7 @@ import {
   getStartupByFounderId,
   updateUserAPI,
   postStartUpData,
+  getQuestionCountAPI,
 } from "../../../Service/user";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
 import { getBase64 } from "../../../utils/getBase64";
@@ -26,7 +27,10 @@ import ConnectionCard from "../ConnectionCard/ConnectionCard";
 import ProfessionalInfo from "../StartupProfilePageComponents/ProfessionalInfo/ProfessionalInfo";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import Questionnaire from "./Components/Questionnaire/Questionnaire";
+import OnBoardUser from "../../OnBoardUser/OnBoardUser";
+import { onboardingSteps } from "../../OnBoardUser/steps";
 
+// Startup profile page
 const InvestorHome = () => {
   // Fetch loggedInUser from global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -41,7 +45,12 @@ const InvestorHome = () => {
   const [colorCardData, setColorCardData] = useState(null);
   const [companyFounderId, setCompanyFounderId] = useState("");
 
+  // State for color card
   const [field, setField] = useState("last_round_investment");
+
+  // State for question count
+  const [countData, setCountData] = useState(null);
+  const [refetch, setRefetch] = useState(false);
 
   const handleAmountChange = (currentfield, updatedAmount) => {
     console.log(field);
@@ -53,6 +62,23 @@ const InvestorHome = () => {
     }));
   };
 
+  // Fetch Questions count
+  useEffect(() => {
+    async function fetchQuestionsCount() {
+      try {
+        const { data } = await getQuestionCountAPI();
+        console.log("count", data);
+        setCountData(data);
+      } catch (error) {
+        console.error("Error fetching count:", error);
+        throw error;
+      }
+    }
+
+    fetchQuestionsCount();
+  }, [refetch]);
+
+  // Fetch startup data
   useEffect(() => {
     if (!loggedInUser?.investor) {
       getStartupByFounderId(loggedInUser._id)
@@ -87,11 +113,16 @@ const InvestorHome = () => {
     dispatch(setPageTitle("Profile"));
   }, []);
 
+  // Handle Refetch count
+  function handleRefetch() {
+    setRefetch(!refetch);
+  }
+
   return (
     <MaxWidthWrapper>
       <div className="investorHome_main_container my-5">
-        <div className=" two_column_wrapper">
-          <div className=" seventy d-flex flex-column gap-3">
+        <div className="two_column_wrapper">
+          <div className="seventy d-flex flex-column gap-3">
             {/* Small Profile Card */}
             {/* <SmallProfileCard className={""} /> */}
 
@@ -103,15 +134,20 @@ const InvestorHome = () => {
               />
 
               {/* offcanvas trigger - Add missing details. Show if details are missing */}
-              <button
-                className="btn border-0 bg-white rounded-5 shadow-sm lh-1 py-4 fs-5"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#questionnaireOffCanvas"
-                ariaControls="offcanvasTop"
-                style={{ color: "#fd5901" }}
-              >
-                Add missing details
-              </button>
+              {countData?.total ? (
+                <button
+                  id="missingDetails"
+                  className="btn border-0 bg-white rounded-5 shadow-sm lh-1 py-4 fs-5"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#questionnaireOffCanvas"
+                  ariaControls="offcanvasTop"
+                  style={{ color: "#fd5901" }}
+                >
+                  Add missing details {countData && `(${countData.total})`}
+                </button>
+              ) : (
+                ""
+              )}
 
               {/* Bio */}
               <div className="box personal_information pb-4">
@@ -156,7 +192,7 @@ const InvestorHome = () => {
               {/* Bio end */}
 
               <div className="box personal_information">
-                <div className="personal_information_header">
+                <div className="personal_information_header connections-container">
                   <h2 className="typography">Connections</h2>
                   {/* <div className="milestone_see_more">
                     <Link to={""}>See more</Link>
@@ -287,8 +323,13 @@ const InvestorHome = () => {
         </div>
 
         {/* OffCanvas for questionnaire */}
-        <Questionnaire />
+        <Questionnaire
+          countData={countData}
+          setCountData={setCountData}
+          handleRefetch={handleRefetch}
+        />
       </div>
+      <OnBoardUser steps={onboardingSteps.startUp.profilePage} />
     </MaxWidthWrapper>
   );
 };

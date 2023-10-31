@@ -103,6 +103,7 @@ const API = Object.freeze({
   getQuestions: `${baseUrl}/question/getQuestions`,
   googleLogin: `${baseUrl}/users/googleLogin`,
   answerQuestion: `${baseUrl}/question/answerQuestion`,
+  getQuestionCount: `${baseUrl}/question/getQuestionCount`,
 });
 
 export default API;
