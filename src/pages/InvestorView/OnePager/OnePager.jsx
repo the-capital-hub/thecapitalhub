@@ -83,7 +83,7 @@ const OnePager = () => {
       useCORS: true,
       windowWidth: '1400px',
     }).then((canvas) => {
-      const contentDataURL = canvas.toDataURL("image/png");
+      const contentDataURL = canvas.toDataURL("image/png", 0.7);
       const imgWidth = 210;
       const pageHeight = 295;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
@@ -91,13 +91,13 @@ const OnePager = () => {
       let pdf = new jsPDF("p", "mm", "a4");
       let position = 5;
 
-      pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+      pdf.addImage(contentDataURL, "JPEG", 0, position, imgWidth, imgHeight);
       heightLeft -= pageHeight;
 
       while (heightLeft >= 0) {
         position = heightLeft - imgHeight;
         pdf.addPage();
-        pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+        pdf.addImage(contentDataURL, "JPEG", 0, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
       }
       pdf.save(`${username}.pdf`);
@@ -110,7 +110,7 @@ const OnePager = () => {
   // Handle preview PDF
   const handlePreviewPDF = () => {
     const element = document.querySelector(".onePager_wrapper");
-    const buttons = document.querySelectorAll(".buttons button");
+    const buttons = document.querySelectorAll(".button");
     buttons.forEach((button) => {
       button.style.display = "none";
     });
@@ -122,7 +122,7 @@ const OnePager = () => {
       useCORS: true,
       windowWidth: '1400px',
     }).then((canvas) => {
-      const contentDataURL = canvas.toDataURL("image/png");
+      const contentDataURL = canvas.toDataURL("image/png", 0.7);
       console.log(contentDataURL);
       const imgWidth = 210;
       const pageHeight = 295;
@@ -131,13 +131,13 @@ const OnePager = () => {
       let pdf = new jsPDF("p", "mm", "a4");
       let position = 5;
 
-      pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+      pdf.addImage(contentDataURL, "JPEG", 0, position, imgWidth, imgHeight);
       heightLeft -= pageHeight;
 
       while (heightLeft >= 0) {
         position = heightLeft - imgHeight;
         pdf.addPage();
-        pdf.addImage(contentDataURL, "PNG", 0, position, imgWidth, imgHeight);
+        pdf.addImage(contentDataURL, "JPEG", 0, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
       }
       const blob = pdf.output("blob");
