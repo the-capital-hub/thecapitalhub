@@ -26,7 +26,10 @@ import ConnectionCard from "../ConnectionCard/ConnectionCard";
 import ProfessionalInfo from "../StartupProfilePageComponents/ProfessionalInfo/ProfessionalInfo";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import Questionnaire from "./Components/Questionnaire/Questionnaire";
+import OnBoardUser from "../../OnBoardUser/OnBoardUser";
+import { onboardingSteps } from "../../OnBoardUser/steps";
 
+// Startup profile page
 const InvestorHome = () => {
   // Fetch loggedInUser from global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -90,8 +93,8 @@ const InvestorHome = () => {
   return (
     <MaxWidthWrapper>
       <div className="investorHome_main_container my-5">
-        <div className=" two_column_wrapper">
-          <div className=" seventy d-flex flex-column gap-3">
+        <div className="two_column_wrapper">
+          <div className="seventy d-flex flex-column gap-3">
             {/* Small Profile Card */}
             {/* <SmallProfileCard className={""} /> */}
 
@@ -104,6 +107,7 @@ const InvestorHome = () => {
 
               {/* offcanvas trigger - Add missing details. Show if details are missing */}
               <button
+                id="missingDetails"
                 className="btn border-0 bg-white rounded-5 shadow-sm lh-1 py-4 fs-5"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#questionnaireOffCanvas"
@@ -156,7 +160,7 @@ const InvestorHome = () => {
               {/* Bio end */}
 
               <div className="box personal_information">
-                <div className="personal_information_header">
+                <div className="personal_information_header connections-container">
                   <h2 className="typography">Connections</h2>
                   {/* <div className="milestone_see_more">
                     <Link to={""}>See more</Link>
@@ -289,6 +293,7 @@ const InvestorHome = () => {
         {/* OffCanvas for questionnaire */}
         <Questionnaire />
       </div>
+      <OnBoardUser steps={onboardingSteps.startUp.profilePage} />
     </MaxWidthWrapper>
   );
 };
