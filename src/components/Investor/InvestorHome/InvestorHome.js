@@ -16,6 +16,7 @@ import {
   getStartupByFounderId,
   updateUserAPI,
   postStartUpData,
+  getQuestionCountAPI,
 } from "../../../Service/user";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
 import { getBase64 } from "../../../utils/getBase64";
@@ -44,7 +45,12 @@ const InvestorHome = () => {
   const [colorCardData, setColorCardData] = useState(null);
   const [companyFounderId, setCompanyFounderId] = useState("");
 
+  // State for color card
   const [field, setField] = useState("last_round_investment");
+
+  // State for question count
+  const [countData, setCountData] = useState(null);
+  const [refetch, setRefetch] = useState(false);
 
   const handleAmountChange = (currentfield, updatedAmount) => {
     console.log(field);
@@ -56,6 +62,23 @@ const InvestorHome = () => {
     }));
   };
 
+  // Fetch Questions count
+  useEffect(() => {
+    async function fetchQuestionsCount() {
+      try {
+        const { data } = await getQuestionCountAPI();
+        console.log("count", data);
+        setCountData(data);
+      } catch (error) {
+        console.error("Error fetching count:", error);
+        throw error;
+      }
+    }
+
+    fetchQuestionsCount();
+  }, [refetch]);
+
+  // Fetch startup data
   useEffect(() => {
     if (!loggedInUser?.investor) {
       getStartupByFounderId(loggedInUser._id)
@@ -90,6 +113,11 @@ const InvestorHome = () => {
     dispatch(setPageTitle("Profile"));
   }, []);
 
+  // Handle Refetch count
+  function handleRefetch() {
+    setRefetch(!refetch);
+  }
+
   return (
     <MaxWidthWrapper>
       <div className="investorHome_main_container my-5">
@@ -106,16 +134,20 @@ const InvestorHome = () => {
               />
 
               {/* offcanvas trigger - Add missing details. Show if details are missing */}
-              <button
-                id="missingDetails"
-                className="btn border-0 bg-white rounded-5 shadow-sm lh-1 py-4 fs-5"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#questionnaireOffCanvas"
-                ariaControls="offcanvasTop"
-                style={{ color: "#fd5901" }}
-              >
-                Add missing details
-              </button>
+              {countData?.total ? (
+                <button
+                  id="missingDetails"
+                  className="btn border-0 bg-white rounded-5 shadow-sm lh-1 py-4 fs-5"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#questionnaireOffCanvas"
+                  ariaControls="offcanvasTop"
+                  style={{ color: "#fd5901" }}
+                >
+                  Add missing details {countData && `(${countData.total})`}
+                </button>
+              ) : (
+                ""
+              )}
 
               {/* Bio */}
               <div className="box personal_information pb-4">
@@ -291,7 +323,11 @@ const InvestorHome = () => {
         </div>
 
         {/* OffCanvas for questionnaire */}
-        <Questionnaire />
+        <Questionnaire
+          countData={countData}
+          setCountData={setCountData}
+          handleRefetch={handleRefetch}
+        />
       </div>
       <OnBoardUser steps={onboardingSteps.startUp.profilePage} />
     </MaxWidthWrapper>

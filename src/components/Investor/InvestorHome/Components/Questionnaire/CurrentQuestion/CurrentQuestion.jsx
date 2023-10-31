@@ -1,11 +1,13 @@
 import React from "react";
 import IconTick from "../../../../SvgIcons/IconTick";
+import SpinnerBS from "../../../../../Shared/Spinner/SpinnerBS";
 
 export default function CurrentQuestion({
   question,
   answer,
   handleAnswerSelect,
   handleBackToCategories,
+  loading,
 }) {
   return (
     <div className="current_question mt-5">
@@ -47,6 +49,11 @@ export default function CurrentQuestion({
         >
           Go back to Categories
         </button>
+      )}
+      {loading && (
+        <div className="d-flex justify-content-center align-items-center py-3">
+          <SpinnerBS spinnerClass="spinner-grow" colorClass={"color_main"} />
+        </div>
       )}
     </div>
   );
