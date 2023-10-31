@@ -23,7 +23,7 @@ const Documentation = () => {
     <MaxWidthWrapper>
       <div className="">
         <div className="documentation shadow-sm border">
-          <h1>Documentation</h1>
+          <h1 className="px-md-5">Documentation</h1>
           <div className="docscontainer col-7 justify-content-between mx-auto">
             {/* <Card
               text={"Financials"}

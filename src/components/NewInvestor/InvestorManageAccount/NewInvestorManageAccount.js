@@ -78,6 +78,22 @@ const InvestorManageAccount = () => {
               text={"Manage Account"}
             />
             <div className="box_container mt-4 row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+            <section className="col card empty_box d-lg-none d-flex m-0">
+                <button
+                  className="btn investor-logout-btn"
+                  onClick={setShowLogoutPopup}
+                >
+                  Log out
+                </button>
+                {showLogoutPopup && (
+                  <LogOutPopUp
+                    setShowLogoutPopup={setShowLogoutPopup} // Make sure this prop is passed correctly
+                    handleLogoutLogic={handleLogoutLogic}
+                    showLogoutPopup
+                    isInvestor={true}
+                  />
+                )}
+                 </section>
               <section className="col">
                 <div className="change_password card">
                   {/* Header */}
@@ -171,7 +187,7 @@ const InvestorManageAccount = () => {
                   </div>
                 </div>
               </section>
-              <section className="col card empty_box">
+              <section className="col card empty_box d-none d-lg-flex ">
                 <button
                   className="btn investor-logout-btn"
                   onClick={setShowLogoutPopup}
