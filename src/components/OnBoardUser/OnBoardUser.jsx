@@ -36,7 +36,7 @@ function OnBoardUser({
       scrollToFirstStep
       showProgress
       showBackButton
-      hideCloseButton={true}
+      // hideCloseButton={true}
       callback={({ action, index, lifecycle }) => {
         if (action === "close" || action === "reset") {
           handleTourClose();
