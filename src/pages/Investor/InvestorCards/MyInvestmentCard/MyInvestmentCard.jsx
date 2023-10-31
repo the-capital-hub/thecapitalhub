@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./MyInvestmentCard.scss";
 import InvestedIcon from "../../../../Images/investorIcon/Ellipse 192.svg";
 import { useState } from "react";
@@ -6,6 +6,7 @@ import { BsFillCloudUploadFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { getInvestorById, postInvestorData, uploadLogo } from "../../../../Service/user";
 import { getBase64 } from "../../../../utils/getBase64";
+import SpinnerBS from "../../../../components/Shared/Spinner/SpinnerBS";
 
 const MyInvestmentCard = ({
   company,
@@ -13,12 +14,15 @@ const MyInvestmentCard = ({
   editMode = false,
   updateCompanies,
   index,
-  setInvestedStartups, 
+  setInvestedStartups,
   setMyInterests,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   // Save company rendered in modal tp state
   const [currCompany, setCurrCompany] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const closeButton = useRef();
+
   useEffect(() => {
     setCurrCompany(company);
   }, [company]);
@@ -56,42 +60,51 @@ const MyInvestmentCard = ({
 
   // Pass updated currCompany to EditModalContent.jsx
   const handleSave = async (currCompany) => {
-    if (isInterests) {
-      console.log(currCompany);
-      console.log(index);
-      const { data: investor } = await getInvestorById(
-        loggedInUser?.investor
-      );
-      const editMyInterests = investor.myInterests[index];
-      editMyInterests.name = currCompany.name;
-      editMyInterests.ask = currCompany.ask;
-      editMyInterests.commitment = currCompany.commitment;
-      editMyInterests.investedEquity = currCompany.investedEquity;
-      if (currCompany.logo instanceof Blob) {
-        const logo = await getBase64(currCompany.logo);
-        const { url } = await uploadLogo({ logo });
-        editMyInterests.logo = url;
+    setLoading(true);
+    try {
+      if (isInterests) {
+        console.log(currCompany);
+        console.log(index);
+        const { data: investor } = await getInvestorById(
+          loggedInUser?.investor
+        );
+        const editMyInterests = investor.myInterests[index];
+        editMyInterests.name = currCompany.name;
+        editMyInterests.ask = currCompany.ask;
+        editMyInterests.commitment = currCompany.commitment;
+        editMyInterests.investedEquity = currCompany.investedEquity;
+        if (currCompany.logo instanceof Blob) {
+          const logo = await getBase64(currCompany.logo);
+          const { url } = await uploadLogo({ logo });
+          editMyInterests.logo = url;
+        }
+        investor.myInterests[index] = editMyInterests;
+        const { data: response } = await postInvestorData(investor);
+        setMyInterests(response.myInterests);
+      } else {
+        const { data: investor } = await getInvestorById(
+          loggedInUser?.investor
+        );
+        const editedStartUp = investor.startupsInvested[index];
+        editedStartUp.name = currCompany.name;
+        editedStartUp.description = currCompany.description;
+        editedStartUp.investedEquity = currCompany.investedEquity;
+        if (currCompany.logo instanceof Blob) {
+          const logo = await getBase64(currCompany.logo);
+          const { url } = await uploadLogo({ logo });
+          editedStartUp.logo = url;
+        }
+        investor.startupsInvested[index] = editedStartUp;
+        const { data: response } = await postInvestorData(investor);
+        setInvestedStartups(response.startupsInvested);
       }
-      investor.myInterests[index] = editMyInterests;
-      const { data: response } = await postInvestorData(investor);
-      setMyInterests(response.myInterests);
-    } else {
-      const { data: investor } = await getInvestorById(
-        loggedInUser?.investor
-      );
-      const editedStartUp = investor.startupsInvested[index];
-      editedStartUp.name = currCompany.name;
-      editedStartUp.description = currCompany.description;
-      editedStartUp.investedEquity = currCompany.investedEquity;
-      if (currCompany.logo instanceof Blob) {
-        const logo = await getBase64(currCompany.logo);
-        const { url } = await uploadLogo({ logo });
-        editedStartUp.logo = url;
-      }
-      investor.startupsInvested[index] = editedStartUp;
-      const { data: response } = await postInvestorData(investor);
-      setInvestedStartups(response.startupsInvested);
+      closeButton.current.click();
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setLoading(false);
     }
+
   }
 
   return (
@@ -271,13 +284,22 @@ const MyInvestmentCard = ({
         <button
           className="green_button save__button position-absolute start-50 translate-middle-x "
           onClick={() => handleSave(currCompany)}
-          data-bs-dismiss="modal"
+        // data-bs-dismiss="modal"
         >
-          Save
+          {loading ? (
+            <SpinnerBS
+              colorClass={"text-dark"}
+              spinnerSizeClass="spinner-border-sm"
+            />
+          ) : (
+            "Save"
+          )}
         </button>
       ) : (
         ""
       )}
+      <button data-bs-dismiss="modal" style={{ display: "none" }} ref={closeButton}></button>
+
     </div>
   );
 };
