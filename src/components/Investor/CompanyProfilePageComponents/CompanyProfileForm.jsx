@@ -2,11 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import "./CompanyProfileForm.scss";
 import { postStartUpData, postInvestorData } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
-import AfterSuccessPopup from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
-import InvestorAfterSuccessPopup from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
 import { Response } from "aws-sdk";
+import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 
 const LOCATIONS = [
   "Select Location",
@@ -49,6 +48,7 @@ export default function CompanyProfileForm({
   companyData,
   investor = false,
   isSaveAll,
+  handleShowPopup,
 }) {
   // States for form
   const [formData, setFormData] = useState("");
@@ -57,11 +57,8 @@ export default function CompanyProfileForm({
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const dispatch = useDispatch();
 
-  // States for popup
-  const [fromSubmit, setFromSubmit] = useState(false);
-  const [investorfromSubmit, setInvestorfromSubmit] = useState(false);
-
-  const [popupData, setPopupData] = useState("");
+  // State for loading
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (isSaveAll) {
@@ -130,7 +127,9 @@ export default function CompanyProfileForm({
     setOthersClicked(false);
     setFormData((prevData) => ({
       ...prevData,
-      location: companyData.location,
+      location:
+        (formData.location !== "Others" && formData.location) ||
+        companyData.location,
     }));
   };
 
@@ -140,8 +139,11 @@ export default function CompanyProfileForm({
     setFormData((prevData) => ({ ...prevData, sector: sector }));
   };
 
+  // handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // set loading
+    setLoading(true);
 
     try {
       if (selectedFile) {
@@ -161,19 +163,24 @@ export default function CompanyProfileForm({
         };
         console.log("from form", user);
         dispatch(loginSuccess(user));
-        setPopupData("Changes saved");
-        setInvestorfromSubmit(true);
+        // Show success popup
+        setLoading(false);
+        handleShowPopup({ success: true });
       } else {
         const response = await postStartUpData({
           ...formData,
           founderId: companyData.founderId || loggedInUser._id,
         });
         console.log(response);
-        setPopupData("Changes saved");
-        setFromSubmit(true);
+        // Show success popup
+        setLoading(false);
+        handleShowPopup({ success: true });
       }
     } catch (error) {
       console.log(error);
+      // Show error popup
+      setLoading(false);
+      handleShowPopup({ error: true });
     }
   };
 
@@ -305,7 +312,7 @@ export default function CompanyProfileForm({
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <span>{formData.sector}</span>
+              {formData.sector}
             </button>
             <ul
               className={`dropdown-menu m-0 p-0 ${
@@ -445,10 +452,17 @@ export default function CompanyProfileForm({
             investor ? "investor" : "startup"
           }`}
         >
-          Save
+          {loading ? (
+            <SpinnerBS
+              colorClass={`${investor ? "text-dark" : "text-white"}`}
+              spinnerSizeClass="spinner-border-sm"
+            />
+          ) : (
+            "Save"
+          )}
         </button>
       </form>
-      {fromSubmit && (
+      {/* {fromSubmit && (
         <AfterSuccessPopup
           // withoutOkButton
           onClose={() => setFromSubmit(!fromSubmit)}
@@ -461,7 +475,7 @@ export default function CompanyProfileForm({
           onClose={() => setInvestorfromSubmit(!investorfromSubmit)}
           successText={popupData}
         />
-      )}
+      )} */}
     </div>
   );
 }
