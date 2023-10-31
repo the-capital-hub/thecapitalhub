@@ -9,11 +9,21 @@ export default function OnePagerCompanyAbout({
   marketLandscape,
   showEdit,
 }) {
+  // Handle resize
+  function handleResize(e) {
+    if (e.target.style.height <= "220px") {
+      e.target.style.height = "auto";
+      e.target.style.height = e.target.scrollHeight + 2 + "px";
+    }
+  }
+
   return (
     <div className="onePager_company_about gap-5 px-3 px-lg-4 py-5 bg-white rounded-4 border shadow-sm">
       <fieldset className="span_full">
         <legend className="d-flex align-items-center pb-2">
-          Brief Introduction (Up to 250 characters ){" "}
+          <p className="m-0" style={{ flex: "0 0 65%" }}>
+            Brief Introduction (Up to 250 characters ){" "}
+          </p>
           {showEdit && (
             <Link
               to={"/onelink/edit"}
@@ -30,6 +40,8 @@ export default function OnePagerCompanyAbout({
           readOnly
           value={description || "Brief Introduction"}
           className="onePager_input about_input shadow-sm"
+          onFocus={handleResize}
+          autoFocus
         />
       </fieldset>
 
@@ -40,6 +52,8 @@ export default function OnePagerCompanyAbout({
           readOnly
           value={problem || "Problem"}
           className="onePager_input about_input shadow-sm"
+          onFocus={handleResize}
+          autoFocus
         />
       </fieldset>
 
@@ -50,6 +64,8 @@ export default function OnePagerCompanyAbout({
           readOnly
           value={solution || "Solution"}
           className="onePager_input about_input shadow-sm"
+          onFocus={handleResize}
+          autoFocus
         />
       </fieldset>
 
@@ -60,6 +76,8 @@ export default function OnePagerCompanyAbout({
           readOnly
           value={"Market Landscape"}
           className="onePager_input about_input shadow-sm"
+          onFocus={handleResize}
+          autoFocus
         />
       </fieldset>
     </div>
