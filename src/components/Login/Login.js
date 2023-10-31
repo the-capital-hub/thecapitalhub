@@ -209,7 +209,7 @@ const Login = () => {
           <Link className="d-lg-none" to="/">
             <img className="backArrow" src={backArrow} alt="arrow_back" />
           </Link>
-          <span className="welcome">Welcome back!</span>
+          <span className="welcome w-100 text-center">Welcome back!</span>
 
           <div className="login_buttons_row d-flex flex-column align-items-center gap-3">
             <h1 className="mt-5">Login</h1>
