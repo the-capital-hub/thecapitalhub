@@ -3,6 +3,7 @@ import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import File from "../models/File.js";
 import Folder from "../models/Folder.js";
+import { UserModel } from "../models/User.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -55,9 +56,10 @@ export const createFolder = async (args) => {
   }
 };
 
-export const getFolderByUser = async (userId) => {
+export const getFolderByUser = async (oneLinkId) => {
   try {
-    const files = await File.find({ userId: userId });
+    const user = await UserModel.findOne({ oneLinkId: oneLinkId });
+    const files = await File.find({ userId: user._id });
     const folders = Array.from(new Set(files.map(files => files.folderName)));
     const defaultFolderNames = ["pitchdeck", "business", "kycdetails", "legal and compliance"];
     const allFolderNamesSet = new Set([...defaultFolderNames, ...folders]);
@@ -101,8 +103,9 @@ export const uploadDocument = async (args) => {
 
 export const getDocumentByUser = async (args) => {
   try {
-    const { userId, folderName } = args;
-    const file = await File.find({ userId: userId, folderName: folderName });
+    const { oneLinkId, folderName } = args;
+    const user = await UserModel.findOne({ oneLinkId: oneLinkId });
+    const file = await File.find({ userId: user._id, folderName: folderName });
     if (!file) {
       return {
         status: 404,

@@ -41,7 +41,7 @@ function OtherUserProfile() {
     dispatch(setPageTitle("User Profile"));
   }, []);
 
-  useEffect(() => { 
+  useEffect(() => {
     window.scrollTo(0, 0);
     getUserAndStartUpByUserIdAPI(userId)
       .then(({ data }) => setUserData(data))
@@ -106,8 +106,8 @@ function OtherUserProfile() {
                       <span>Connected</span>
                     </button>
                   ) : userData?.connectionsReceived?.includes(
-                      loggedInUser._id
-                    ) ? (
+                    loggedInUser._id
+                  ) ? (
                     <button className=" connection-status d-flex btn rounded-pill px-3 py-2">
                       <img src={connection} width={20} alt="message user" />
                       <span>Pending</span>
@@ -128,7 +128,7 @@ function OtherUserProfile() {
                     Current Company
                   </span>
                   <span className="col-md-9 value text-secondary">
-                    {userData?.startUp?.company}
+                    {userData?.startUp?.company || userData?.investor?.companyName}
                   </span>
                 </div>
                 <div className="single_details row row-cols-1 row-cols-md-2 ">
