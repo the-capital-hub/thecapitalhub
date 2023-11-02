@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Joyride from "react-joyride";
+import "./OnBoardUser.scss";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 function OnBoardUser({
@@ -28,14 +29,34 @@ function OnBoardUser({
     }
   };
 
+  // Beacon Component
+  const CustomBeaconComponent = ({
+    ariaLabel,
+    onClick,
+    onMouseEnter,
+    title,
+    beaconRef,
+  }) => (
+    <span
+      className="custom-joyride-beacon"
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      title={title}
+      aria-label={ariaLabel}
+      ref={beaconRef}
+    ></span>
+  );
+
   return (
     <Joyride
       steps={steps}
       run={run}
       continuous
+      // beaconComponent={CustomBe  aconComponent}
       scrollToFirstStep
       showProgress
       showBackButton
+      // disableOverlayClose
       // hideCloseButton={true}
       callback={({ action, index, lifecycle }) => {
         if (action === "close" || action === "reset") {
