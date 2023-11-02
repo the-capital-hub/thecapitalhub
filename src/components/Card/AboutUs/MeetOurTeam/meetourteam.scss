@@ -12,7 +12,7 @@ $logo-size: 100px;
 
 
     .card {
-        border-radius: 29.965px;
+        border-radius: var(--border-radius);
         background: #DBDBDB;
         width: $card-width;
         // margin-bottom: 20px;

@@ -287,7 +287,7 @@ const FeedPostCard = ({
       <div className="row investor_feedpostcard_main_container mb-2">
         <div className="col-12">
           <div
-            className={`box feedpostcard_container mt-2 border ${repostPreview && "rounded shadow-sm"
+            className={`box feedpostcard_container mt-2 border ${repostPreview && "rounded-4 shadow-sm"
               }`}
           >
             {loading && (
@@ -504,7 +504,7 @@ const FeedPostCard = ({
                         style={{ cursor: "pointer" }}
                       />
                       {showRepostOptions && (
-                        <span className="repost_options rounded shadow-sm">
+                        <span className="repost_options rounded-4 shadow-sm">
                           <button
                             className="single_option btn text-start py-1 px-1 rounded border-bottom"
                             onClick={() => repostWithToughts(postId)}

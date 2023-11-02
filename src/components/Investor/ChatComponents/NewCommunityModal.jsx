@@ -175,7 +175,7 @@ export default function NewCommunityModal({ theme }) {
 
       {/* Contact search */}
       <div
-        className={`search__members d-flex align-items-center gap-2 p-2 rounded-2 ${theme}`}
+        className={`search__members d-flex align-items-center gap-2 p-2 rounded-4 ${theme}`}
         style={{ backgroundColor: "#fafafa" }}
       >
         <BsSearch />
@@ -202,7 +202,7 @@ export default function NewCommunityModal({ theme }) {
               );
               return (
                 <div
-                  className="p-2 d-flex justify-content-between align-items-center rounded-2 bg-light"
+                  className="p-2 d-flex justify-content-between align-items-center rounded-4 bg-light"
                   key={contact?._id}
                 >
                   <img

@@ -6,7 +6,7 @@
   .main_inner-section {
     background-color: #fff;
     padding: 15px;
-    border-radius: 15px;
+    border-radius: var(--border-radius);
     .user_data_section {
       img {
         width: 75px;
@@ -35,7 +35,7 @@
       height: 206px;
       background-color: #fbfbfb;
       border: 0.5px solid #e2e2e2;
-      border-radius: 10px;
+      border-radius: var(--border-radius);
       h1{
         position: absolute;
         background-color: #fbfbfb;
@@ -51,7 +51,7 @@
         height: 206px;
         background-color: #fbfbfb;
         border: 0.5px solid #e2e2e2;
-        border-radius: 10px;
+        border-radius: var(--border-radius);
         h1{
             position: absolute;
             background-color: #fbfbfb;

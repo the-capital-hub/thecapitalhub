@@ -6,14 +6,14 @@
       flex-shrink: 0;
       margin-left: 12px;
       margin-top: 12px;
-      border-radius: 20px;
+      border-radius: var(--border-radius);
       background: #fff;
       box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
 
       .box {
         background-color: #fff;
         padding: 10px;
-        border-radius: 40px;
+        border-radius: var(--border-radius);
         background: #fff;
       }
 
@@ -181,14 +181,14 @@
       flex-shrink: 0;
       margin-left: 0px !important;
       margin-top: 12px;
-      border-radius: 20px;
+      border-radius: var(--border-radius);
       background: #fff;
       box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
 
       .box {
         background-color: #fff;
         padding: 0px;
-        border-radius: 40px;
+        border-radius: var(--border-radius);
         background: #fff;
       }
 

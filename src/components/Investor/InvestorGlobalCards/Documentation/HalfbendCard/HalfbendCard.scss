@@ -3,14 +3,14 @@
   .box_container {
     width: 750px;
     background-color: #fff;
-    border-radius: 40px;
+    border-radius: var(--border-radius);
     background: #fff;
     // box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
 
     .custom-card {
       padding: 20px 5px;
       margin-bottom: 10px;
-      border-radius: 20px;
+      border-radius: var(--border-radius);
       border: 1px solid #ccc;
       position: relative;
       overflow: hidden;

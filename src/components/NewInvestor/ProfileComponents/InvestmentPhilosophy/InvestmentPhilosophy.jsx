@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { getInvestorById, postInvestorData } from "../../../../Service/user";
 import { useSelector } from "react-redux";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
-import { Link } from "react-router-dom";
 import InvestmentDetailCard from "../../InvestmentDetailCard/InvestmentDetailCard";
 import linkSectorIcon from "../../../../Images/Investor/Profile/link_sector.png";
 import educationIcon from "../../../../Images/Investor/Profile/iit_education.svg";
@@ -12,6 +11,10 @@ import ticketSizeIcon from "../../../../Images/Investor/Profile/ticket_size.svg"
 import seedRoundIcon from "../../../../Images/Investor/Profile/seed_round.svg";
 import totalInvestmentIcon from "../../../../Images/Investor/Profile/total_investment.png";
 import "./InvestmentPhilosophy.scss";
+import { ModalBsLauncher } from "../../../PopUp/ModalBS";
+import ExperienceModal from "./Modals/ExperienceModal/ExperienceModal";
+import EducationModal from "./Modals/EducationModal/EducationModal";
+import ExperienceCard from "./ExperienceCard/ExperienceCard";
 
 export default function InvestmentPhilosophy() {
   // Fetch loggedInUser from global state
@@ -88,24 +91,24 @@ export default function InvestmentPhilosophy() {
       </div>
 
       {/* Recent Experience */}
-      <div className="recent_experience border rounded mx-md-4 shadow-sm">
+      <div className="recent_experience border rounded-4 mx-md-4 shadow-sm">
         <div className="flex-md-row header">
           <h5 className="green_underline h5">Recent Experience</h5>
           <div className="green_button">
-            <Link to={""}>
+            <ModalBsLauncher id={"experienceModal"}>
               <span>Add </span>
               <span className="d-none d-md-inline-block">Experience</span>
-            </Link>
+            </ModalBsLauncher>
           </div>
         </div>
         <div className="experience_cards">
-          <div className="experience_card py-2 mt-1 row row-cols-1 row-cols-md-2">
+          {/* <div className="experience_card py-2 mt-1 row row-cols-1 row-cols-md-2">
             <div className="img_container rounded d-flex align-items-center justify-content-center mx-auto col-6 col-md-2">
               <img
                 className="rounded-circle"
                 src={linkSectorIcon}
                 height={100}
-                alt="experience image"
+                alt="experience"
               />
             </div>
             <div className="description mt-1 mt-md-0 col-md-9 row row-cols-1 row-cols-md-2 row-cols-xl-3">
@@ -133,7 +136,7 @@ export default function InvestmentPhilosophy() {
                 className="rounded-circle"
                 src={linkSectorIcon}
                 height={100}
-                alt="experience image"
+                alt="experience"
               />
             </div>
             <div className="description mt-1 mt-md-0 col-md-9 row row-cols-1 row-cols-md-2 row-cols-xl-3">
@@ -154,29 +157,34 @@ export default function InvestmentPhilosophy() {
                 <p className="m-0">UI/UX Designer</p>
               </div>
             </div>
-          </div>
+          </div> */}
+
+          {/* Loop cards here */}
+          {loggedInUser?.recentExperience.map((data, index) => {
+            return <ExperienceCard data={data} key={data._id} />;
+          })}
         </div>
       </div>
 
       {/* Education */}
-      <div className="education border rounded mx-md-4 shadow-sm">
+      <div className="education border rounded-4 mx-md-4 shadow-sm">
         <div className="flex-md-row header">
           <h5 className="green_underline h5">Education</h5>
           <div className="green_button">
-            <Link to={""}>
+            <ModalBsLauncher id={"educationModal"}>
               <span>Add </span>
               <span className="d-none d-md-inline-block">Education</span>
-            </Link>
+            </ModalBsLauncher>
           </div>
         </div>
         <div className="experience_cards">
-          <div className="experience_card py-2 mt-1 row row-cols-1 row-cols-md-2">
+          {/* <div className="experience_card py-2 mt-1 row row-cols-1 row-cols-md-2">
             <div className="img_container rounded d-flex align-items-center justify-content-center mx-auto col-6 col-md-2">
               <img
                 className="rounded-circle"
                 src={educationIcon}
                 height={100}
-                alt="education image"
+                alt="education"
               />
             </div>
             <div className="description mt-1 mt-md-0 col-md-9 row row-cols-1 row-cols-md-2 row-cols-xl-3">
@@ -197,7 +205,14 @@ export default function InvestmentPhilosophy() {
                 <p className="m-0">B.Tech, Computer Science And Engineering.</p>
               </div>
             </div>
-          </div>
+          </div> */}
+
+          {/* loop cards here */}
+          {loggedInUser?.recentEducation.map((data, index) => {
+            return (
+              <ExperienceCard isExperience={false} data={data} key={data._id} />
+            );
+          })}
         </div>
       </div>
 
@@ -243,6 +258,10 @@ export default function InvestmentPhilosophy() {
       <button className="green_button btn mx-3">
         Book Your Appointment Now
       </button>
+
+      {/* Modals */}
+      <ExperienceModal />
+      <EducationModal />
     </section>
   );
 }

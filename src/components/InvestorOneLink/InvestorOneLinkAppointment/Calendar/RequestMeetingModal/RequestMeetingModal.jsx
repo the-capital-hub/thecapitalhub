@@ -182,7 +182,7 @@ export default function RequestMeetingModal({ selectedMeeting }) {
                 <button
                   type="button"
                   data-bs-dismiss="modal"
-                  className="bg-transparent border fs-6 py-3 rounded-3 w-50"
+                  className="bg-transparent border fs-6 py-3 rounded-4 w-50"
                   onClick={() => setRequestData(REQUEST)}
                 >
                   Cancel

@@ -11,6 +11,7 @@ import {
   getUnreadMessageCount,
   togglePinMessage,
   getPinnedChat,
+  getLastMessage,
 } from "../../../../Service/user";
 import { useLocation } from "react-router-dom";
 import {
@@ -79,9 +80,9 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   };
 
   const handleGetMessageByChatId = (chatId) => {
-    getMessageByChatId(chatId)
+    getLastMessage(chatId)
       .then((res) => {
-        const latestMessage = res.data[res.data.length - 1];
+        const latestMessage = res.data;
         if (latestMessage) {
           let messageText = latestMessage.text;
           if (latestMessage.video) {

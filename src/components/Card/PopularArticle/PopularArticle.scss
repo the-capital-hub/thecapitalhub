@@ -3,20 +3,20 @@
     border: 1px solid #ddd;
     width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
+    border-radius: var(--border-radius);
     margin-bottom: 20px;
   }
   
   .left-column {
     flex: 0 0 auto;
     width: 50%;
-    border-radius: 20px 0 0 20px; /* Rounded border on the left side */
+    border-radius: 1rem 0 0 1rem; /* Rounded border on the left side */
   }
   
   .blog-card-image {
     max-width: 100%;
     height: auto;
-    border-radius: 20px 0 0 20px; /* Rounded border on the left side */
+    border-radius: 1rem 0 0 1rem; /* Rounded border on the left side */
   }
   
   .right-column {
@@ -33,7 +33,7 @@
     padding: 15px;
     cursor: pointer;
     background: rgba(253, 89, 1, 0.2);
-    border-radius: 25.591px;
+    border-radius: var(--border-radius);
   }
   
   .blog-card-title {

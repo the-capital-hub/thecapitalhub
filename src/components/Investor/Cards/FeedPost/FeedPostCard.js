@@ -371,7 +371,7 @@ const FeedPostCard = ({
       <div className="feedpostcard_main_container mb-2">
         <div
           className={`box feedpostcard_container mt-2 ${
-            repostPreview && "rounded shadow-sm border"
+            repostPreview && "rounded-4 shadow-sm border"
           }`}
         >
           {loading && (
@@ -610,7 +610,7 @@ const FeedPostCard = ({
                 {/* Repost and Save posts */}
                 <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                   <span
-                    className={`repost_container rounded ${
+                    className={`repost_container rounded-4 ${
                       showRepostOptions ? "bg-light" : ""
                     }`}
                     ref={repostContainerRef}

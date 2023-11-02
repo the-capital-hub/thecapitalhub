@@ -1,5 +1,5 @@
 .investment_philosophy {
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     background: #fff;
     padding: 20px 0;
     // margin: 0 20px 20px 20px;
@@ -33,7 +33,7 @@
 
     .recent_experience,
     .education {
-      border-radius: 10px;
+      border-radius: var(--border-radius);
       background: #fff;
       padding: 20px;
 
@@ -64,7 +64,7 @@
       }
     }
     .investment_details_cards {
-      border-radius: 10px;
+      border-radius: var(--border-radius);
       background: #fff;
       padding: 20px;
       margin: 20px;

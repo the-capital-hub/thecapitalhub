@@ -67,7 +67,7 @@ export default function OnelinkValidation({ userId }) {
       <div className="onelink_validation_page d-flex justify-content-center align-items-center">
         <form
           onSubmit={handlePinSubmit}
-          className="key_container bg-white rounded-5 shadow p-3 py-5 p-lg-5 d-flex flex-column gap-5"
+          className="key_container bg-white rounded-4 shadow p-3 py-5 p-lg-5 d-flex flex-column gap-5"
         >
           {/* Headings */}
           <div className="">

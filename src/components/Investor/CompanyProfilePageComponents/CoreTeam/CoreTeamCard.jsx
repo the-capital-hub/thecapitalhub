@@ -4,7 +4,7 @@ import "./CoreTeamCard.scss";
 export default function CoreTeamCard({ image, name, designation }) {
   return (
     <div
-      className="p-4 d-flex flex-column align-items-center gap-3 rounded-5 core_team_card"
+      className="p-4 d-flex flex-column align-items-center gap-3 rounded-4 core_team_card"
       style={{ backgroundColor: "#EDEDED" }}
     >
       <img

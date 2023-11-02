@@ -1,7 +1,7 @@
 .investorsCard {
   margin: 0px;
   background-color: white;
-  border-radius: 25px;
+  border-radius: var(--border-radius);
   box-shadow: 1px 1px 5px lightgray;
   padding: 20px 10px 0px 10px;
   width: 285px;

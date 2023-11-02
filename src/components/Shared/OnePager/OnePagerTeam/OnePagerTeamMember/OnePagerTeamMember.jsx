@@ -6,7 +6,7 @@ export default function OnePagerTeamMember({ member }) {
   const { image, name, designation } = member;
 
   return (
-    <div className="onePager_team_member rounded py-3 ps-3 pe-1 border d-flex align-items-center gap-2">
+    <div className="onePager_team_member rounded-4 py-3 ps-3 pe-1 border d-flex align-items-center gap-2">
       {/* Image placeholder and ProfilePicture */}
       <div
         className="border rounded bg-light d-flex flex-column justify-content-center align-items-center"

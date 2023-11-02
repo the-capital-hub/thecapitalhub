@@ -109,7 +109,7 @@ export default function MySchedule() {
           {/* <div className="pb-4 pt-2">
           <SmallProfileCard text="My Schedule" />
         </div> */}
-          <section className="section__wrapper bg-white rounded-3 border mb-5 pb-5 d-flex flex-column gap-5">
+          <section className="section__wrapper bg-white rounded-4 border mb-5 pb-5 d-flex flex-column gap-5">
             {/* View Select */}
             <div className="d-flex flex-column flex-lg-row justify-content-between align-items-center border-bottom p-3">
               <div className="d-flex align-items-center">

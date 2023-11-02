@@ -19,7 +19,7 @@ export default function InvestorOneLinkInvestment() {
       <h2 className="mb-3">Investment Philosophy</h2>
 
       {/* Main content */}
-      <section className="investment_philosophy_section px-3 py-4 px-lg-4 bg-white rounded border d-flex flex-column gap-4">
+      <section className="investment_philosophy_section px-3 py-4 px-lg-4 bg-white rounded-4 border d-flex flex-column gap-4">
         {/* Header */}
         <header className="d-flex flex-column flex-md-row align-items-center gap-4">
           <img

@@ -223,7 +223,7 @@ export default function AddTeamMemberModal({
             ? currentTeam.map((member, index) => {
               return (
                 <div
-                  className="d-flex align-items-center justify-content-around p-2 bg-light rounded-3"
+                  className="d-flex align-items-center justify-content-around p-2 bg-light rounded-4"
                   key={`${member.name}${index}`}
                 >
                   <img
@@ -261,7 +261,7 @@ export default function AddTeamMemberModal({
       </div>
 
       {/* Add modal */}
-      <div className="add_team d-flex flex-column gap-3 bg-light rounded-3 shadow-sm py-3">
+      <div className="add_team d-flex flex-column gap-3 bg-light rounded-4 shadow-sm py-3">
         <h5 className="m-0 text-center">Add new Member</h5>
 
         <form

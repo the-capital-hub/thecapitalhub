@@ -88,7 +88,7 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
 
   return (
     <div className="d-flex flex-column gap-3">
-      <div className="border rounded-3 p-3">
+      <div className="border rounded-4 p-3">
         <h5 className="green_underline">Add new: </h5>
 
         <form onSubmit={handleSubmit} className="d-flex flex-column gap-4">

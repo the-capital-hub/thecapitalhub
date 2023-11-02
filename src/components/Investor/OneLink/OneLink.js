@@ -31,7 +31,6 @@ import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 
 const OneLink = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  console.log(loggedInUser);
   const userId = loggedInUser._id;
   const [isExitClicked, setIsExitClicked] = useState(false);
   const [company, setCompany] = useState([]);
@@ -40,7 +39,8 @@ const OneLink = () => {
   useEffect(() => {
     document.title = "One Link | The Capital Hub";
     dispatch(setPageTitle("One Link"));
-  }, []);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [company]);
 
   // Fetch data by userId
   useEffect(() => {

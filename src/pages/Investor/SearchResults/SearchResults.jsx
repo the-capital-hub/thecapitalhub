@@ -59,7 +59,7 @@ export default function SearchResults() {
       <div className="search__results__wrapper px-3 border-start pb-5">
         <div className="pb-4 pt-2">
           {/* <Filters filterLabels={SEARCHFILTERS} /> */}
-          <span className="bg-white rounded shadow-sm p-2 d-flex flex-wrap gap-2">
+          <span className="bg-white rounded-4 shadow-sm p-2 d-flex flex-wrap gap-2">
             <p className="m-0 p-0">Didn't find what you are looking for?</p>
             <Link to="/investor/explore" className="">
               Head over to Explore
@@ -70,7 +70,7 @@ export default function SearchResults() {
         <div className="search__results d-flex flex-column gap-5">
           {/* People Results */}
           <section className="people__results">
-            <div className="results__container bg-white shadow-sm rounded-3 pb-4">
+            <div className="results__container bg-white shadow-sm rounded-4 pb-4">
               {/* Category */}
               <div className="p-4 border-bottom">
                 <h3 className="m-0">{"People"}</h3>
@@ -108,7 +108,7 @@ export default function SearchResults() {
           </section>
           {/* Company Results */}
           <section className="companies__results">
-            <div className="results__container bg-white shadow-sm rounded-3 pb-4">
+            <div className="results__container bg-white shadow-sm rounded-4 pb-4">
               {/* Category */}
               <div className="p-4 border-bottom">
                 <h3 className="m-0">{"Company"}</h3>

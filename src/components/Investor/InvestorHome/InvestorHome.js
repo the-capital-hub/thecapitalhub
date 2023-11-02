@@ -28,7 +28,7 @@ import ProfessionalInfo from "../StartupProfilePageComponents/ProfessionalInfo/P
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import Questionnaire from "./Components/Questionnaire/Questionnaire";
 import OnBoardUser from "../../OnBoardUser/OnBoardUser";
-import { onboardingSteps } from "../../OnBoardUser/steps";
+import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
 
 // Startup profile page
 const InvestorHome = () => {
@@ -137,7 +137,7 @@ const InvestorHome = () => {
               {countData?.total ? (
                 <button
                   id="missingDetails"
-                  className="btn border-0 bg-white rounded-5 shadow-sm lh-1 py-4 fs-5"
+                  className="btn border-0 bg-white rounded-4 shadow-sm lh-1 py-4 fs-5"
                   data-bs-toggle="offcanvas"
                   data-bs-target="#questionnaireOffCanvas"
                   ariaControls="offcanvasTop"
@@ -329,7 +329,7 @@ const InvestorHome = () => {
           handleRefetch={handleRefetch}
         />
       </div>
-      <OnBoardUser steps={onboardingSteps.startUp.profilePage} />
+      <OnBoardUser steps={startupOnboardingSteps.profilePage} />
     </MaxWidthWrapper>
   );
 };

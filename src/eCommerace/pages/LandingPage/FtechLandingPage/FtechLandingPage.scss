@@ -55,7 +55,7 @@
         .feature-card {
           height: 200px;
           width: 220px;
-          border-radius: 20px;
+          border-radius: var(--border-radius);
           box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
           padding: 20px;
           text-align: center;
@@ -136,13 +136,16 @@
           background-color: #0d224e;
           color: white;
         }
-  
+        .help-card:nth-child(4) {
+          background-color: #0d224e;
+          color: white;
+        }
         .help-card {
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 20px;
-          border-radius: 20px;
+          border-radius: var(--border-radius);
           width: 300px;
           height: 330px;
           padding: 20px 30px 40px 30px;
@@ -223,7 +226,7 @@
   
         .join-us-card {
           height: 400px;
-          width: 300px;
+          width: 400px;
           background-color: white;
           display: flex;
           flex-direction: column;

@@ -22,7 +22,7 @@ import RajuImage from "../../../Images/Rectangle 1895.png";
 
 function Company() {
   return (
-    <div className="company_container border rounded shadow-sm">
+    <div className="company_container border rounded-4 shadow-sm">
       <div className="row">
         <div className="col-lg-7 col-md-12">
           <div className="image_name_section mt-2">

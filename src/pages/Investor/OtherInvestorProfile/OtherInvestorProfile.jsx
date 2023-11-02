@@ -54,7 +54,7 @@ export default function OtherInvestorProfile() {
             <ProfileHeader userData={userData} />
           </section>
         ) : (
-          <div className="bg-white rounded border py-4 w-100">
+          <div className="bg-white rounded-4 border py-4 w-100">
             <SpinnerBS />
           </div>
         )}
@@ -63,11 +63,11 @@ export default function OtherInvestorProfile() {
           {userData ? (
             <section className="main_section d-flex flex-column gap-3">
               {/* About */}
-              {/* <div className="about rounded border shadow-sm profile_container">
+              {/* <div className="about rounded-4 border shadow-sm profile_container">
                   <h4 className="h4">About</h4>
                   <p className="text-secondary">{userData?.bio}</p>
                 </div>
-                <div className="personal_information rounded border shadow-sm profile_container">
+                <div className="personal_information rounded-4 border shadow-sm profile_container">
                   <h4 className="h4">Personal Information</h4>
                   <div className="details w-100 m-0 p-0 col-md-9 row row-cols-1 row-cols-md-2">
                     <div className="d-flex flex-column mb-1 mb-md-3 p-0">
@@ -91,7 +91,7 @@ export default function OtherInvestorProfile() {
               {/* Experience */}
               {/* <Experience /> */}
               {/* Education */}
-              {/* <div className="education bg-white p-4 rounded border shadow-sm profile_container">
+              {/* <div className="education bg-white p-4 rounded-4 border shadow-sm profile_container">
                 <h4 className="h4">Education</h4>
                 <div className="single_education">
                   <h6 className="h6">
@@ -106,7 +106,7 @@ export default function OtherInvestorProfile() {
               </div> */}
               {/* bio */}
               {userData?.bio ? (
-                <div className="bio bg-white p-4 rounded border shadow-sm profile_container">
+                <div className="bio bg-white p-4 rounded-4 border shadow-sm profile_container">
                   <h4 className="h4">Bio</h4>
                   <div className="single_education">
                     <h6 className="h6">{userData?.bio}</h6>
@@ -168,7 +168,7 @@ export default function OtherInvestorProfile() {
               </div>
             </section>
           ) : (
-            <div className="bg-white rounded border py-4 w-100">
+            <div className="bg-white rounded-4 border py-4 w-100">
               <SpinnerBS />
             </div>
           )}
