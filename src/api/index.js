@@ -110,6 +110,7 @@ const API = Object.freeze({
   deleteRecentEducation: `${baseUrl}/users/deleteEducation`,
   updateRecentExperience: `${baseUrl}/users/updateExperience`,
   deleteRecentExperience: `${baseUrl}/users/deleteExperience`,
+  getLastMessage: `${baseUrl}/message/getLastMessage`,
 });
 
 export default API;

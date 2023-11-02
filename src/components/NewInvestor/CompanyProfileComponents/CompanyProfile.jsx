@@ -39,6 +39,7 @@ export default function CompanyProfile({
   let tam = "";
   let sam = "";
   let som = "";
+  let founderId = "";
 
   if (companyData) {
     name = companyData.company || name;
@@ -57,6 +58,7 @@ export default function CompanyProfile({
     tam = companyData.TAM || "";
     sam = companyData.SAM || "";
     som = companyData.SOM || "";
+    founderId = companyData.founderId || "";
   }
   if (investorData) {
     name = investorData.companyName || name;
@@ -72,6 +74,7 @@ export default function CompanyProfile({
     team = investorData.team || team;
     tags = investorData.keyFocus?.split(",").map((tag) => tag.trim()) || tags;
     tagline = investorData.tagline || tagline;
+    founderId = companyData.founderId || "";
   }
   // const company = {
   //   image: HCLImage,
@@ -102,7 +105,7 @@ export default function CompanyProfile({
             location={location}
             foundedYear={new Date(foundedIn).getFullYear()}
           />
-          <CompanyActions isOnelink={isOnelink} />
+          <CompanyActions isOnelink={isOnelink} founderId={founderId}/>
         </div>
         <CompanyAbout
           about={description}
