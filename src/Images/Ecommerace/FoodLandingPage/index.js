@@ -14,6 +14,9 @@ import icecream from './icecream.png'
 import chicken from './chicken.png'
 import burger from './burger.png'
 import pizza from './pizza.png'
+import halfMobile from './halfMobile.png'
+import sinfleMobile from './sinfleMobile.png'
+import twoMobile from './twoMobile.png'
 
 
 
@@ -34,5 +37,8 @@ export default {
     icecream,
     chicken,
     burger,
-    pizza
+    pizza,
+    halfMobile,
+    sinfleMobile,
+    twoMobile
 }

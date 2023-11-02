@@ -74,7 +74,7 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
           <Link to="/web-development" className="LinkBtn">Taking Us</Link>
         </div>
         <div className="right-section py-2    d-flex justify-content-evenly">
-          <img src={assets.multifoods} alt="multiFood" />
+          <img src={assets.twoMobile} alt="twoMobile" />
         </div>
         <img src={assets.downArrow} alt="downArrow" className="down-arrow" />
       </div>
@@ -144,7 +144,7 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
           <Link to="/web-development" className="LinkBtn">Taking Us</Link>
         </div>
         <div className="right-section">
-          <img src={assets.foodVessel} alt="foodVessel" className="w-75 mb-5" />
+          <img src={assets.halfMobile} alt="halfMobile" className="w-75 " />
         </div>
       </div>
 
@@ -153,9 +153,9 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
         <div className="inner d-flex flex-column   align-self-center flex-md-row">
           <div className="left-section d-flex    justify-content-center flex-column">
             <img
-              src={assets.womenWithFood}
-              alt="womenWithFood"
-              className="w-75 mb-5 mx-auto"
+              src={assets.sinfleMobile}
+              alt="sinfleMobile"
+              className="w-50 mb-5 mx-auto"
             />
           </div>
           <div className="right-section d-flex    align-self-center flex-column container">

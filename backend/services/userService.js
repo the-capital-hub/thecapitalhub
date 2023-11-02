@@ -337,6 +337,14 @@ export const addEducation = async (userId, educationData) => {
         message: "User not found",
       };
     }
+    if (educationData?.logo) {
+      const { url } = await cloudinary.uploader.upload(educationData.logo, {
+        folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
+        format: "webp",
+        unique_filename: true,
+      });
+      educationData.logo = url;
+    }
     user.recentEducation.push(educationData);
     await user.save();
     return {
@@ -362,6 +370,14 @@ export const addExperience = async (userId, experienceData) => {
         status: 404,
         message: "User not found",
       };
+    }
+    if (experienceData?.logo) {
+      const { url } = await cloudinary.uploader.upload(experienceData.logo, {
+        folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
+        format: "webp",
+        unique_filename: true,
+      });
+      experienceData.logo = url;
     }
     user.recentExperience.push(experienceData);
     await user.save();
@@ -710,6 +726,147 @@ export const googleLogin = async (credential) => {
     return {
       status: 500,
       message: "An error occurred while login using google.",
+    };
+  }
+};
+
+// Update Education
+export const updateEducation = async (userId, educationId, updatedData) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found",
+      };
+    }
+    const education = user.recentEducation.id(educationId);
+    if (!education) {
+      return {
+        status: 404,
+        message: "Education entry not found",
+      };
+    }
+    if (updatedData?.logo) {
+      const { url } = await cloudinary.uploader.upload(updatedData.logo, {
+        folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
+        format: "webp",
+        unique_filename: true,
+      });
+      updatedData.logo = url;
+    }
+
+    education.set(updatedData);
+    await user.save();
+
+    return {
+      status: 200,
+      message: "Education updated",
+      data: user.recentEducation,
+    };
+  } catch (error) {
+    console.error("Error updating education:", error);
+    return {
+      status: 500,
+      message: "An error occurred while updating education.",
+    };
+  }
+};
+
+// Delete Education
+export const deleteEducation = async (userId, educationId) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found",
+      };
+    }
+    user.recentEducation = user.recentEducation.filter(
+      (education) => education._id.toString() !== educationId
+    );
+    await user.save();
+    return {
+      status: 200,
+      message: "Education deleted",
+      data: user.recentEducation,
+    };
+  } catch (error) {
+    console.error("Error deleting education:", error);
+    return {
+      status: 500,
+      message: "An error occurred while deleting education.",
+    };
+  }
+};
+
+// Update Experience
+export const updateExperience = async (userId, experienceId, updatedData) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found",
+      };
+    }
+    const experience = user.recentExperience.id(experienceId);
+    if (!experience) {
+      return {
+        status: 404,
+        message: "Experience entry not found",
+      };
+    }
+    if (updatedData?.logo) {
+      const { url } = await cloudinary.uploader.upload(updatedData.logo, {
+        folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
+        format: "webp",
+        unique_filename: true,
+      });
+      updatedData.logo = url;
+    }
+
+    experience.set(updatedData);
+    await user.save();
+
+    return {
+      status: 200,
+      message: "Experience updated",
+      data: user.recentExperience,
+    };
+  } catch (error) {
+    console.error("Error updating experience:", error);
+    return {
+      status: 500,
+      message: "An error occurred while updating experience.",
+    };
+  }
+};
+
+export const deleteExperience = async (userId, experienceId) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found",
+      };
+    }
+    user.recentExperience = user.recentExperience.filter(
+      (experience) => experience._id.toString() !== experienceId
+    );
+    await user.save();
+    return {
+      status: 200,
+      message: "Experience deleted",
+      data: user.recentExperience,
+    };
+  } catch (error) {
+    console.error("Error deleting experience:", error);
+    return {
+      status: 500,
+      message: "An error occurred while deleting experience.",
     };
   }
 };

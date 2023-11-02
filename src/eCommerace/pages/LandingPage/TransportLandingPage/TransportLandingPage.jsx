@@ -30,7 +30,7 @@ shipping needs."
             <Link to="/web-development" className="LinkBtn">Contact us</Link>
           </div>
           <div className="right-section">
-            <img src={assets.transport} alt="transport" />
+            <img src={assets.twoMobile} alt="transport" />
           </div>
         </div>
         {/* working place on coustomer button */}
@@ -39,7 +39,7 @@ shipping needs."
 
       <div className="second-section container d-flex flex-column  justify-content-evenly flex-md-row p-5 align-items-center">
         <div className="left-section  ">
-          <img src={assets.whiteTruck} alt="white-truck" />
+          <img src={assets.mobileLocation} alt="white-truck" />
         </div>
         <div className="right-section d-flex flex-column">
           <h1>Efficient and Sustainable Transportation</h1>
@@ -88,7 +88,7 @@ Our shared vision and mission in logistics are dedicated to creating efficient, 
 
       <div className="fourth-section  d-flex flex-column  justify-content-center align-items-center gap-5 flex-md-row">
         <div className="left-section">
-          <img src={assets.international} alt="international" />
+          <img src={assets.singleMobile} alt="international" />
         </div>
         <div className="right-section d-flex flex-column gap-5">
           <h1>Streamlined Logistics Management</h1>
@@ -113,8 +113,8 @@ Our shared vision and mission in logistics are dedicated to creating efficient, 
           <Link to="/web-development" className="LinkBtn">Contact us</Link>
         </div>
 
-        <div className="right-section">
-          <img src={assets.location} alt="international" />
+        <div className="right-section ">
+          <img src={assets.bookingDetails} alt="international" />
         </div>
       </div>
 
