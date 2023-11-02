@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import {
   getMessageByChatId,
   getUnreadMessageCountInCommunities,
+  getLastMessage,
 } from "../../../Service/user";
 
 export default function CommunityCard({
@@ -56,9 +57,9 @@ export default function CommunityCard({
   };
 
   useEffect(() => {
-    getMessageByChatId(community._id)
+    getLastMessage(community._id)
       .then((res) => {
-        const latestMessage = res.data[res.data.length - 1];
+        const latestMessage = res.data;
         setLatestMsgSentetName(
           latestMessage.senderId.firstName,
           latestMessage.senderId.lastName
@@ -83,7 +84,7 @@ export default function CommunityCard({
       .catch((error) => {
         console.error("Error-->", error);
       });
-  }, [community._id, sendMessage, recieveMessage, isRead]);
+  }, [community._id, sendMessage, recieveMessage, isRead, loggedInUser._id]);
 
   const messageTime = formatTimestamp(dates[community._id]);
   const inputString = latestMessages[community._id];
