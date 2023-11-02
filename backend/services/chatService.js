@@ -52,6 +52,7 @@ export const getUserChats = async (userId) => {
       }
     }
     const chatDetails = [];
+
     for (const chat of chats) {
       const lastMessage = await MessageModel.findOne({ chatId: chat._id })
         .sort({ createdAt: -1 })
@@ -71,6 +72,7 @@ export const getUserChats = async (userId) => {
       }
       return 0;
     });
+
     return {
       status: 200,
       message: "User's Chats Retrieved",
@@ -164,11 +166,34 @@ export const getPinnedChats = async (userId) => {
         message: "User not found",
       };
     }
-    const pinnedChatIds = user.pinnedChat;
+    // const pinnedChatIds = user.pinnedChat;
+    const pinnedChatDetails = [];
+
+    for (const chat of user.pinnedChat) {
+      const lastMessage = await MessageModel.findOne({ chatId: chat._id })
+        .sort({ createdAt: -1 })
+        .limit(1);
+      pinnedChatDetails.push({
+        chat,
+        lastMessage,
+      });
+    }
+
+    pinnedChatDetails.sort((a, b) => {
+      if (a.lastMessage && b.lastMessage) {
+        return b.lastMessage.createdAt - a.lastMessage.createdAt;
+      } else if (a.lastMessage) {
+        return -1;
+      } else if (b.lastMessage) {
+        return 1;
+      }
+      return 0;
+    });
+
     return {
       status: 200,
       message: "Pinned chats retrieved successfully",
-      data: pinnedChatIds,
+      data: pinnedChatDetails.map((chatDetail) => chatDetail.chat),
     };
   } catch (error) {
     console.error(error);

@@ -67,11 +67,34 @@ export const getAllCommunitiesByUserId = async (userId) => {
     })
       .exec();
 
+    const chatDetails = [];
+
+    for (const chat of communities) {
+      const lastMessage = await MessageModel.findOne({ chatId: chat._id })
+        .sort({ createdAt: -1 })
+        .limit(1);
+      chatDetails.push({
+        chat,
+        lastMessage,
+      });
+    }
+    chatDetails.sort((a, b) => {
+      if (a.lastMessage && b.lastMessage) {
+        return b.lastMessage.createdAt - a.lastMessage.createdAt;
+      } else if (a.lastMessage) {
+        return -1;
+      } else if (b.lastMessage) {
+        return 1;
+      }
+      return 0;
+    });
+
     return {
       status: 200,
       message: 'Communities retrieved successfully',
-      data: communities,
+      data: chatDetails.map((chatDetail) => chatDetail.chat),
     };
+
   } catch (error) {
     console.error(error);
     return {

@@ -8,12 +8,13 @@ import {
   deleteMessageController,
   markMessagesAsReadInCommunitiesController,
   getUnreadMessageCountInCommunitiesController,
+  getLastMessageController,
 } from "../controllers/messageController.js";
 
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
 
-router.use(authenticateToken);
+// router.use(authenticateToken);
 
 router.post("/addMessage", addMessageController);
 router.get("/getMessages/:chatId", getMessagesController);
@@ -23,5 +24,8 @@ router.patch("/clearChatMessages/:chatId", clearAllMessagesController);
 router.delete("/deleteMessage/:messageId", deleteMessageController);
 router.patch("/markMessagesAsReadInCommunities/:chatId/:userId", markMessagesAsReadInCommunitiesController);
 router.get("/getUnreadMessageCountInCommunities/:chatId/:userId", getUnreadMessageCountInCommunitiesController);
+
+router.get("/getLastMessage/:chatId", getLastMessageController);
+
 
 export default router;

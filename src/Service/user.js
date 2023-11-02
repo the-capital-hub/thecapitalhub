@@ -1335,3 +1335,15 @@ export const deleteRecentExperience = async (experienceId) => {
     throw error;
   }
 };
+
+export const getLastMessage = async (chatId) => {
+  try {
+    const response = await axiosInstance.get(
+      `${API.getLastMessage}/${chatId}
+      `);
+    return response.data;
+  } catch (error) {
+    console.error("Error getting last message:", error);
+    throw error;
+  }
+};
