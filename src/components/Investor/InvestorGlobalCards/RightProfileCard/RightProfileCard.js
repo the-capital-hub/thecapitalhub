@@ -24,7 +24,7 @@ const RightProfileCard = ({ noProfile }) => {
           <div className="view_profile_name_section mt-2">
             <img
               src={loggedInUser.profilePicture}
-              style={{ width: "100px", height: "100px", objectFit:"cover" }}
+              style={{ width: "100px", height: "100px", objectFit: "cover" }}
               className="rounded-circle profile-image"
               alt="profileimage"
             />
@@ -35,20 +35,25 @@ const RightProfileCard = ({ noProfile }) => {
               <span className="smallest_typo">{loggedInUser?.email}</span>
               <span className="smallest_typo">
                 {loggedInUser?.designation
-                  ? `${loggedInUser.designation} at ${loggedInUser?.startUp?.company || investor?.companyName || ''
-                  }`
-                  : ''}
+                  ? `${loggedInUser.designation} at ${
+                      loggedInUser?.startUp?.company ||
+                      investor?.companyName ||
+                      ""
+                    }`
+                  : ""}
               </span>
-
             </div>
             {!noProfile && (
-              <Link to="/profile" className="profile_btn mt-2">
+              <Link
+                to="/profile"
+                className="btn profile_btn mt-2 manage_acount_btn"
+              >
                 View Profile
               </Link>
             )}
             <Link
               to="/manage-account"
-              className="profile_btn mt-1 manage_acount_btn"
+              className="btn profile_btn mt-1 manage_acount_btn"
             >
               Manage Account
             </Link>

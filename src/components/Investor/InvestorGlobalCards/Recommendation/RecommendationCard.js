@@ -113,7 +113,7 @@ const RecommendationCard = ({ isInvestor }) => {
                           )}
                         </div>
                         <button
-                          className="connect_button"
+                          className="btn connect_button"
                           onClick={() => handleConnect(user._id)}
                         >
                           <img src={AddUserIconBlack} alt="add user" />
