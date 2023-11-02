@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { getInvestorById, postInvestorData } from "../../../../Service/user";
 import { useSelector } from "react-redux";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
-import { Link } from "react-router-dom";
 import InvestmentDetailCard from "../../InvestmentDetailCard/InvestmentDetailCard";
 import linkSectorIcon from "../../../../Images/Investor/Profile/link_sector.png";
 import educationIcon from "../../../../Images/Investor/Profile/iit_education.svg";
