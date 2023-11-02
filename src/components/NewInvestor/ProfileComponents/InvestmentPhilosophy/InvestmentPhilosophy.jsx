@@ -14,6 +14,7 @@ import "./InvestmentPhilosophy.scss";
 import { ModalBsLauncher } from "../../../PopUp/ModalBS";
 import ExperienceModal from "./Modals/ExperienceModal/ExperienceModal";
 import EducationModal from "./Modals/EducationModal/EducationModal";
+import ExperienceCard from "./ExperienceCard/ExperienceCard";
 
 export default function InvestmentPhilosophy() {
   // Fetch loggedInUser from global state
@@ -101,7 +102,7 @@ export default function InvestmentPhilosophy() {
           </div>
         </div>
         <div className="experience_cards">
-          <div className="experience_card py-2 mt-1 row row-cols-1 row-cols-md-2">
+          {/* <div className="experience_card py-2 mt-1 row row-cols-1 row-cols-md-2">
             <div className="img_container rounded d-flex align-items-center justify-content-center mx-auto col-6 col-md-2">
               <img
                 className="rounded-circle"
@@ -156,7 +157,10 @@ export default function InvestmentPhilosophy() {
                 <p className="m-0">UI/UX Designer</p>
               </div>
             </div>
-          </div>
+          </div> */}
+
+          {/* Loop cards here */}
+          <ExperienceCard />
         </div>
       </div>
 
@@ -172,7 +176,7 @@ export default function InvestmentPhilosophy() {
           </div>
         </div>
         <div className="experience_cards">
-          <div className="experience_card py-2 mt-1 row row-cols-1 row-cols-md-2">
+          {/* <div className="experience_card py-2 mt-1 row row-cols-1 row-cols-md-2">
             <div className="img_container rounded d-flex align-items-center justify-content-center mx-auto col-6 col-md-2">
               <img
                 className="rounded-circle"
@@ -199,7 +203,9 @@ export default function InvestmentPhilosophy() {
                 <p className="m-0">B.Tech, Computer Science And Engineering.</p>
               </div>
             </div>
-          </div>
+          </div> */}
+          {/* loop cards here */}
+          <ExperienceCard isExperience={false} />
         </div>
       </div>
 

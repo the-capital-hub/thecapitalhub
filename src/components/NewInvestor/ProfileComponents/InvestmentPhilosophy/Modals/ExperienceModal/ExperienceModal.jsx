@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "./ExperienceModal.scss";
 import {
   ModalBSBody,
@@ -8,26 +8,82 @@ import {
 import IconCloudUpload from "../../../../../Investor/SvgIcons/IconCloudUpload";
 import IconDeleteFill from "../../../../../Investor/SvgIcons/IconDeleteFill";
 import IconEdit from "../../../../../Investor/SvgIcons/IconEdit";
+import { getBase64 } from "../../../../../../utils/getBase64";
 
-export default function ExperienceModal() {
+const initialForm = {
+  logo: "",
+  companyName: "",
+  location: "",
+  experienceDuration: "",
+  role: "",
+};
+
+export default function ExperienceModal({ data }) {
+  // States for inputs
+  const [preview, setPreview] = useState(null);
+  const [formData, setFormData] = useState(initialForm);
+  const [isEditing, setIsEditing] = useState(false);
+
+  //   State for loading
+  const [loading, setLoading] = useState(false);
+
+  //   Ref for close button
+  const closeRef = useRef(null);
+
   // Handle file change
-  function handleFileChange(e) {
-    const file = e.target.files[0];
+  async function handleFileChange(e) {
+    let newFile = e.target.files[0];
+    if (!newFile) {
+      return;
+    }
+
+    let previewImage = URL.createObjectURL(newFile);
+    try {
+      let baseImage = await getBase64(newFile);
+
+      // Set State
+      setFormData((prev) => ({ ...prev, logo: baseImage }));
+    } catch (error) {
+      console.log("Error getting base64:", error);
+    }
+
+    // Set State
+    setPreview(previewImage);
   }
 
   // Handle Input change
   function handleInputChange(e) {
     const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   }
+
+  //   Handle Edit click
+  function handleEditClick(e) {}
+
+  // Handle delete click
+  function handleDeleteClick(e) {}
 
   // Handle Submit
   async function handleSubmit(e) {
     e.preventDefault();
   }
+
+  //   Clear States
+  function clearStates() {
+    setFormData(initialForm);
+    setIsEditing(false);
+    setLoading(false);
+    setPreview(null);
+  }
+
   return (
     <div className="experience_modal_wrapper">
       <ModalBSContainer id={"experienceModal"} isStatic={false} modalXl>
-        <ModalBSHeader title={"Add/Edit Experience"} />
+        <ModalBSHeader
+          title={"Add/Edit Experience"}
+          closeCallback={clearStates}
+          closeRef={closeRef}
+        />
         <ModalBSBody>
           <div className="experience_modal_body d-flex flex-column flex-lg-row justify-content-between gap-3 ">
             {/* Current Experience */}
@@ -36,7 +92,7 @@ export default function ExperienceModal() {
               {/* loop current experiences here */}
               <div className="border rounded-4 p-2 d-flex align-items-center justify-content-between">
                 <img
-                  src=""
+                  src={data?.logo}
                   alt="companyName"
                   height={"40px"}
                   width={"40px"}
@@ -44,13 +100,21 @@ export default function ExperienceModal() {
                   style={{ objectFit: "cover" }}
                 />
 
-                <h6 className="m-0">{"Company Name"}</h6>
+                <h6 className="m-0">{data?.companyName || "Company Name"}</h6>
 
                 <div className="d-flex align-items-center gap-2">
-                  <button type="button" className="btn green_button px-3">
+                  <button
+                    type="button"
+                    className="btn green_button px-3"
+                    onClick={handleEditClick}
+                  >
                     <IconEdit />
                   </button>
-                  <button type="button" className="btn btn-danger">
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={handleDeleteClick}
+                  >
                     <IconDeleteFill />
                   </button>
                 </div>
@@ -64,15 +128,25 @@ export default function ExperienceModal() {
             >
               <h5 className="green_underline">Update Experience</h5>
 
-              <fieldset>
-                <legend className="upload__label">
-                  <IconCloudUpload height="2.5rem" width="2.5rem" />
-                </legend>
+              <fieldset className="" style={{ cursor: "pointer" }}>
+                <label htmlFor="logo" className="upload__label">
+                  {preview ? (
+                    <img
+                      src={preview}
+                      alt={"logo"}
+                      height={75}
+                      width={75}
+                      className="rounded-circle"
+                    />
+                  ) : (
+                    <IconCloudUpload height="2.5rem" width="2.5rem" />
+                  )}
+                </label>
                 <input
                   type="file"
                   name="logo"
                   id="logo"
-                  accept="*/image"
+                  accept="image/*"
                   className="visually-hidden"
                   onChange={handleFileChange}
                 />
