@@ -12,6 +12,8 @@ import {
   fetchExploreFiltersAPI,
 } from "../../../Service/user";
 import PersonProfileList from "../../../components/Shared/PersonProfileComponents/PersonProfileList";
+import OnBoardUser from "../../../components/OnBoardUser/OnBoardUser";
+import { startupOnboardingSteps } from "../../../components/OnBoardUser/steps/startup";
 
 const sectorOptions = [
   "FMCG",
@@ -220,7 +222,7 @@ export default function StartupExplore() {
         {/* <SmallProfileCard/> */}
 
         {/* Header */}
-        <div className="bg-white rounded-4 shadow-sm d-flex flex-column gap-4 px-4 py-4">
+        <div className="filter_container bg-white rounded-4 shadow-sm d-flex flex-column gap-4 px-4 py-4">
           {/* Heading */}
           <h5 className="m-0">Find {activeTab} by</h5>
 
@@ -435,7 +437,7 @@ export default function StartupExplore() {
                 />
               </>
             )}
-            <button className="btn-capital" type="submit">
+            <button className="filter_button btn-capital" type="submit">
               Filter {activeTab}
             </button>
           </form>
@@ -463,6 +465,7 @@ export default function StartupExplore() {
           )}
         </div>
       </section>
+      <OnBoardUser steps={startupOnboardingSteps.explorePage} />
     </MaxWidthWrapper>
   );
 }
