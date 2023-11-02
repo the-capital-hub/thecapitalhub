@@ -4,7 +4,7 @@ import logoIcon from "../../../Images/manageAccount/Group 15186.svg";
 import profileIcon from "../../../Images/investorIcon/profilePic.webp";
 import profileIconRaghu from "../../../Images/aboutUs/Raghu.jpeg";
 import profileIconRaju from "../../../Images/Rectangle 1895.png";
-
+import { Link } from 'react-router-dom';
 import { changePasswordAPI } from "../../../Service/user";
 import { useEffect, useState } from "react";
 import LogOutPopUp from "../../PopUp/LogOutPopUp/LogOutPopUp";
@@ -78,7 +78,7 @@ const InvestorManageAccount = () => {
               text={"Manage Account"}
             />
             <div className="box_container mt-4 row row-cols-1 row-cols-lg-2 row-cols-xl-3">
-            <section className="col card empty_box d-lg-none d-flex m-0">
+              <section className="col card empty_box d-lg-none d-flex m-0">
                 <button
                   className="btn investor-logout-btn"
                   onClick={setShowLogoutPopup}
@@ -93,7 +93,7 @@ const InvestorManageAccount = () => {
                     isInvestor={true}
                   />
                 )}
-                 </section>
+              </section>
               <section className="col">
                 <div className="change_password card">
                   {/* Header */}
@@ -181,9 +181,11 @@ const InvestorManageAccount = () => {
                   </div>
                   {/* Footer */}
                   <div className="footer">
-                    <button className="investor-btn-delete">
-                      Delete account
-                    </button>
+                    <Link to="/investor/profile">
+                      <button className="investor-btn-delete">
+                        View profile
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </section>
