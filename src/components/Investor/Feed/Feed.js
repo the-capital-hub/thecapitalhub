@@ -18,6 +18,8 @@ import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import OnBoardUser from "../../OnBoardUser/OnBoardUser";
+import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
 
 const Feed = () => {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -42,7 +44,6 @@ const Feed = () => {
     const filteredPosts = allPosts.filter((post) => post._id !== postId);
     setAllPosts(filteredPosts);
   };
-  
 
   const fetchMorePosts = () => {
     getAllPostsAPI(page)
@@ -110,7 +111,7 @@ const Feed = () => {
             <div className="bg-white rounded-4 start_post_container">
               <img
                 src={loggedInUser.profilePicture}
-                alt="Image"
+                alt="Profile"
                 className="rounded-circle"
                 style={{ width: "50px", height: "50px" }}
               />
@@ -219,6 +220,7 @@ const Feed = () => {
           <NewsCorner />
         </div>
       </div>
+      <OnBoardUser steps={startupOnboardingSteps.homePage} />
     </MaxWidthWrapper>
   );
 };

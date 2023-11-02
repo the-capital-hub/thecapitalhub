@@ -18,6 +18,8 @@ import {
 import { useLocation } from "react-router-dom";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import OnBoardUser from "../../../components/OnBoardUser/OnBoardUser";
+import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
 
 function Home() {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -115,7 +117,7 @@ function Home() {
             <div className="box start_post_container border">
               <img
                 src={loggedInUser.profilePicture}
-                alt="Image"
+                alt="Profile"
                 className="rounded-circle"
                 style={{ objectFit: "cover" }}
               />
@@ -221,6 +223,7 @@ function Home() {
           appendDataToAllPosts={appendDataToAllPosts}
         />
       )}
+      <OnBoardUser steps={investorOnboardingSteps.homePage} />
     </MaxWidthWrapper>
   );
 }
