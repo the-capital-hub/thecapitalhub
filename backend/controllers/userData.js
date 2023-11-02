@@ -19,6 +19,10 @@ import {
   validateSecretKey,
   createSecretKey,
   googleLogin,
+  updateEducation,
+  updateExperience,
+  deleteEducation,
+  deleteExperience
 } from "../services/userService.js";
 import { secretKey } from "../constants/config.js";
 
@@ -306,6 +310,70 @@ export const googleLoginController = async (req, res) => {
     res.status(500).send({
       status: 500,
       message: "An error occurred while login.",
+    });
+  }
+};
+
+export const updateEducationController = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { educationId } = req.params;
+    const response = await updateEducation(userId, educationId, req.body);
+    res.status(response.status).send(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while updating education.",
+    });
+  }
+};
+
+export const deleteEducationController = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { educationId } = req.params;
+    const response = await deleteEducation(userId, educationId);
+    res.status(response.status).send(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while deleting education.",
+    });
+  }
+};
+
+export const updateExperienceController = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { experienceId } = req.params;
+    const response = await updateExperience(userId, experienceId, req.body);
+    res.status(response.status).send(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while updating experience.",
+    });
+  }
+};
+
+export const deleteExperienceController = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const { experienceId } = req.params;
+    const response = await deleteExperience(userId, experienceId);
+    res.status(response.status).send(response);
+    return response;
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({
+      status: 500,
+      message: "An error occurred while deleting experience.",
     });
   }
 };

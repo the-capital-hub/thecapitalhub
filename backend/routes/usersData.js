@@ -19,6 +19,10 @@ import {
   validateSecretKeyController,
   createSecretKeyController,
   googleLoginController,
+  updateEducationController,
+  updateExperienceController,
+  deleteEducationController,
+  deleteExperienceController
 } from "../controllers/userData.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
@@ -40,7 +44,7 @@ router.post("/validateSecretKey", validateSecretKeyController);
 router.post("/googleLogin", googleLoginController);
 
 // Authorized routes below
-router.use(authenticateToken);  
+router.use(authenticateToken);
 
 // Profile Page
 router.patch("/updateFounder", updateUser);
@@ -54,6 +58,10 @@ router.get("/search", searchUsersController);
 
 router.patch("/addEducation/:userId", addEducationController);
 router.patch("/addExperience/:userId", addExperienceController);
+router.patch("/updateEducation/:educationId", updateEducationController);
+router.delete("/deleteEducation/:educationId", deleteEducationController);
+router.patch("/updateExperience/:experienceId", updateExperienceController);
+router.delete("/deleteExperience/:experienceId", deleteExperienceController);
 
 //add existing startups to user
 router.patch("/addStartUpToUser", addStartupToUserController);
