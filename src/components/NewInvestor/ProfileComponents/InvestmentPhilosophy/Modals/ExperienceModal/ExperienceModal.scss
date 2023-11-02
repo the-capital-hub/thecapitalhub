@@ -53,5 +53,13 @@
         }
       }
     }
+
+    .green_button {
+      &:active {
+        background-color: #d3f36b !important;
+        border: 1px solid #d3f36b !important;
+        transform: scale(0.95);
+      }
+    }
   }
 }

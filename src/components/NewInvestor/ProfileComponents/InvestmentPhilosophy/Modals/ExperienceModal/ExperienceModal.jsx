@@ -9,6 +9,16 @@ import IconCloudUpload from "../../../../../Investor/SvgIcons/IconCloudUpload";
 import IconDeleteFill from "../../../../../Investor/SvgIcons/IconDeleteFill";
 import IconEdit from "../../../../../Investor/SvgIcons/IconEdit";
 import { getBase64 } from "../../../../../../utils/getBase64";
+import SpinnerBS from "../../../../../Shared/Spinner/SpinnerBS";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addRecentExperience,
+  deleteRecentExperience,
+} from "../../../../../../Service/user";
+import {
+  loginSuccess,
+  updateLoggedInUser,
+} from "../../../../../../Store/features/user/userSlice";
 
 const initialForm = {
   logo: "",
@@ -18,7 +28,13 @@ const initialForm = {
   role: "",
 };
 
-export default function ExperienceModal({ data }) {
+export default function ExperienceModal() {
+  // Fetch experience from global state
+  const { recentExperience, _id: userId } = useSelector(
+    (state) => state.user.loggedInUser
+  );
+  const dispatch = useDispatch();
+
   // States for inputs
   const [preview, setPreview] = useState(null);
   const [formData, setFormData] = useState(initialForm);
@@ -58,14 +74,47 @@ export default function ExperienceModal({ data }) {
   }
 
   //   Handle Edit click
-  function handleEditClick(e) {}
+  function handleEditClick(e, data) {
+    setFormData(data);
+    setPreview(data.logo);
+  }
 
   // Handle delete click
-  function handleDeleteClick(e) {}
+  async function handleDeleteClick(e, data) {
+    let confirmed = window.confirm(
+      `Are you sure you want to delete - "${data.companyName}"?`
+    );
+    if (confirmed) {
+      try {
+        const response = await deleteRecentExperience(data._id);
+        console.log("del response", response);
+        dispatch(updateLoggedInUser(response.data));
+      } catch (error) {
+        console.error("Error deleting Experience:", error);
+      }
+    } else {
+      return;
+    }
+  }
 
   // Handle Submit
   async function handleSubmit(e) {
     e.preventDefault();
+
+    console.log("add exp", formData);
+
+    // Set loading
+    setLoading(true);
+
+    try {
+      const { data } = await addRecentExperience(userId, formData);
+      console.log("Add response", data);
+      dispatch(loginSuccess(data));
+      setLoading(false);
+    } catch (error) {
+      console.error("Error saving Experience:", error);
+      setLoading(false);
+    }
   }
 
   //   Clear States
@@ -90,35 +139,44 @@ export default function ExperienceModal({ data }) {
             <div className="current_experience rounded-4 border p-2 p-lg-3 oveflow-y-auto d-flex flex-column gap-3">
               <h5 className="green_underline">Current Experience</h5>
               {/* loop current experiences here */}
-              <div className="border rounded-4 p-2 d-flex align-items-center justify-content-between">
-                <img
-                  src={data?.logo}
-                  alt="companyName"
-                  height={"40px"}
-                  width={"40px"}
-                  className="rounded-circle"
-                  style={{ objectFit: "cover" }}
-                />
-
-                <h6 className="m-0">{data?.companyName || "Company Name"}</h6>
-
-                <div className="d-flex align-items-center gap-2">
-                  <button
-                    type="button"
-                    className="btn green_button px-3"
-                    onClick={handleEditClick}
+              {recentExperience?.map((data, index) => {
+                return (
+                  <div
+                    className="border rounded-4 p-2 d-flex align-items-center justify-content-between"
+                    key={data._id}
                   >
-                    <IconEdit />
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={handleDeleteClick}
-                  >
-                    <IconDeleteFill />
-                  </button>
-                </div>
-              </div>
+                    <img
+                      src={data?.logo}
+                      alt="companyName"
+                      height={"40px"}
+                      width={"40px"}
+                      className="rounded-circle"
+                      style={{ objectFit: "cover" }}
+                    />
+
+                    <h6 className="m-0">
+                      {data?.companyName || "Company Name"}
+                    </h6>
+
+                    <div className="d-flex align-items-center gap-2">
+                      <button
+                        type="button"
+                        className="btn green_button px-3"
+                        onClick={(e) => handleEditClick(e, data)}
+                      >
+                        <IconEdit />
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={(e) => handleDeleteClick(e, data)}
+                      >
+                        <IconDeleteFill />
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
 
             {/* Experience form */}
@@ -160,6 +218,7 @@ export default function ExperienceModal({ data }) {
                   name="companyName"
                   id="companyName"
                   className="p-2 w-100 rounded-3 modal__input"
+                  value={formData.companyName}
                   onChange={handleInputChange}
                 />
               </fieldset>
@@ -172,6 +231,7 @@ export default function ExperienceModal({ data }) {
                   name="location"
                   id="location"
                   className="p-2 w-100 rounded-3 modal__input"
+                  value={formData.location}
                   onChange={handleInputChange}
                 />
               </fieldset>
@@ -181,9 +241,10 @@ export default function ExperienceModal({ data }) {
                 <legend className="ps-1">Experience</legend>
                 <input
                   type="text"
-                  name="experience"
-                  id="experience"
+                  name="experienceDuration"
+                  id="experienceDuration"
                   className="p-2 w-100 rounded-3 modal__input"
+                  value={formData.experienceDuration}
                   onChange={handleInputChange}
                 />
               </fieldset>
@@ -196,16 +257,25 @@ export default function ExperienceModal({ data }) {
                   name="role"
                   id="role"
                   className="p-2 w-100 rounded-3 modal__input"
+                  value={formData.role}
                   onChange={handleInputChange}
                 />
               </fieldset>
 
               <div className="d-flex gap-3 align-items-center">
-                <button type="button" className="green_button">
+                <button
+                  type="button"
+                  className="green_button"
+                  onClick={() => clearStates()}
+                >
                   Clear
                 </button>
                 <button type="submit" className="green_button">
-                  Save
+                  {loading ? (
+                    <SpinnerBS spinnerSizeClass="spinner-border-sm" />
+                  ) : (
+                    "Save"
+                  )}
                 </button>
               </div>
             </form>

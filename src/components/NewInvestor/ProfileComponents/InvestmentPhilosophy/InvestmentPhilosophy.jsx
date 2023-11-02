@@ -160,7 +160,9 @@ export default function InvestmentPhilosophy() {
           </div> */}
 
           {/* Loop cards here */}
-          <ExperienceCard />
+          {loggedInUser?.recentExperience.map((data, index) => {
+            return <ExperienceCard data={data} key={data._id} />;
+          })}
         </div>
       </div>
 
@@ -204,8 +206,13 @@ export default function InvestmentPhilosophy() {
               </div>
             </div>
           </div> */}
+
           {/* loop cards here */}
-          <ExperienceCard isExperience={false} />
+          {loggedInUser?.recentEducation.map((data, index) => {
+            return (
+              <ExperienceCard isExperience={false} data={data} key={data._id} />
+            );
+          })}
         </div>
       </div>
 

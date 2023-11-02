@@ -15,6 +15,7 @@ const EDUCATION = {
 };
 
 export default function ExperienceCard({ data, isExperience = true }) {
+  // console.log(data);
   return (
     <div className="experience_card py-2 mt-1 row row-cols-1 row-cols-md-2">
       <div className="img_container rounded d-flex align-items-center justify-content-center mx-auto col-6 col-md-2">
