@@ -168,7 +168,9 @@ export default function AddEditModal({
   };
 
   const handleDelete = async (index) => {
-    const confirmed = window.confirm("Are you sure you want to delete this item?");
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this item?"
+    );
     if (!confirmed) {
       return;
     }
@@ -263,7 +265,7 @@ export default function AddEditModal({
                             ? formData.companyImage
                             : URL.createObjectURL(formData.companyImage)
                         }
-                        alt="Selected Image"
+                        alt="Selected"
                         style={{ maxWidth: "100%", maxHeight: "70px" }}
                       />
                     )}
@@ -297,7 +299,7 @@ export default function AddEditModal({
                           ? sectorLogo
                           : URL.createObjectURL(sectorLogo)
                       }
-                      alt="Selected Image"
+                      alt="Selected"
                       style={{ maxWidth: "100%", maxHeight: "200px" }}
                     />
                   )}
@@ -356,12 +358,14 @@ export default function AddEditModal({
               <button
                 className="btn green_button w-auto fs-6 ms-2"
                 type="submit"
-              // data-bs-dismiss="modal"
+                // data-bs-dismiss="modal"
               >
                 {loading ? (
                   <SpinnerBS
                     colorClass={
-                      loggedInUser.isInvestor === "true" ? "text-dark" : "text-light"
+                      loggedInUser.isInvestor === "true"
+                        ? "text-dark"
+                        : "text-light"
                     }
                     spinnerSizeClass="spinner-border-sm"
                   />

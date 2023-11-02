@@ -31,7 +31,27 @@ const explorePage = [
   },
 ];
 
+const homePage = [
+  {
+    target: ".start_post_container",
+    content: "Welcome to Home! You can create a post from here.",
+  },
+  {
+    target: ".investor_profile_container",
+    content: "Manage your Profile from here.",
+  },
+  {
+    target: ".recommendation_main_container",
+    content: "Connect with People who have similar interests.",
+  },
+  {
+    target: ".newscorner_container",
+    content: "Read our top blog articles.",
+  },
+];
+
 // Keep this in the bottom
 export const investorOnboardingSteps = {
   explorePage,
+  homePage,
 };

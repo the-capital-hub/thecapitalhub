@@ -1,6 +1,11 @@
 import "./ModalBSHeader.scss";
 
-function ModalBSHeader({ title, label, className, closeRef }) {
+function ModalBSHeader({ title, label, className, closeRef, closeCallback }) {
+  // Callback function when close is clicked
+  function handleClose() {
+    closeCallback();
+  }
+
   return (
     <div className={`modal-header ${className}`}>
       <h1 className="modal-title fs-5" id={label || "modalLabel"}>
@@ -12,6 +17,7 @@ function ModalBSHeader({ title, label, className, closeRef }) {
         data-bs-dismiss="modal"
         aria-label="Close"
         ref={closeRef}
+        onClick={handleClose}
       ></button>
     </div>
   );
