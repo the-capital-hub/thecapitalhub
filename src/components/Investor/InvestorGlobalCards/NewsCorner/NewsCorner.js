@@ -28,6 +28,7 @@ const NewsCorner = ({ title, btnlink }) => {
       id: 3,
     },
   ];
+
   return (
     <>
       <div className="newscorner_container">
@@ -39,8 +40,14 @@ const NewsCorner = ({ title, btnlink }) => {
               </div>
             </div>
             {newsItems.map((item, index) => (
-              <div className="card-body newscorner_card_body " key={item.id}>
-                <div className="newscorner_card_text d-flex flex-column gap-1">
+              <Link
+                to={item.btnlink ? item.btnlink : ""}
+                style={{ textDecoration: "none" }}
+                target="_blank"
+                className="card-body newscorner_card_body "
+                key={item.id}
+              >
+                <div className="newscorner_card_text d-flex align-items-center gap-1">
                   <h4 className="smallest_typo">
                     {item.title
                       ? item.title
@@ -51,24 +58,24 @@ const NewsCorner = ({ title, btnlink }) => {
                       src={item.image}
                       alt="News"
                       style={{
-                        width: "100%",
+                        width: "100px",
                         height: "auto",
                         objectFit: "contain",
                       }}
                     />
                   </div>
-                  <Link
-                    to={item.btnlink ? item.btnlink : ""}
-                    style={{ textDecoration: "none" }}
-                    target="_blank"
-                    className="d-flex justify-content-center align-items-center mt-1 show__more__link mx-auto"
-                  >
-                    <button className="d-flex align-items-center justify-content-center show__more">
-                      <span className="text-center">Show more</span>
-                    </button>
-                  </Link>
+                  {/* <Link
+                      to={item.btnlink ? item.btnlink : ""}
+                      style={{ textDecoration: "none" }}
+                      target="_blank"
+                      className="d-flex justify-content-center align-items-center mt-1 show__more__link mx-auto"
+                    >
+                      <button className="d-flex align-items-center justify-content-center show__more">
+                        <span className="text-center">Show more</span>
+                      </button>
+                    </Link> */}
                 </div>
-              </div>
+              </Link>
             ))}
             {/* <hr className="hr" /> */}
             {/* <div className="card-body newscorner_card_body ">

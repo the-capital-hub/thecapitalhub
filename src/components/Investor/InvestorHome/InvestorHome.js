@@ -28,7 +28,7 @@ import ProfessionalInfo from "../StartupProfilePageComponents/ProfessionalInfo/P
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import Questionnaire from "./Components/Questionnaire/Questionnaire";
 import OnBoardUser from "../../OnBoardUser/OnBoardUser";
-import { onboardingSteps } from "../../OnBoardUser/steps";
+import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
 
 // Startup profile page
 const InvestorHome = () => {
@@ -329,7 +329,7 @@ const InvestorHome = () => {
           handleRefetch={handleRefetch}
         />
       </div>
-      <OnBoardUser steps={onboardingSteps.startUp.profilePage} />
+      <OnBoardUser steps={startupOnboardingSteps.profilePage} />
     </MaxWidthWrapper>
   );
 };
