@@ -9,7 +9,7 @@
   .key_container {
     .secret_input_container {
       border: 1px solid #e7e7e7;
-      border-radius: 10px;
+      border-radius: var(--border-radius);
       padding: 2em 1.5em;
       transition: border 0.15s ease-in;
 

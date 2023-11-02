@@ -151,7 +151,7 @@ const InvestorNavbar = (props) => {
                 </button>
               </form>
               {inputOnFocus && searchSuggestions && !mobileSearch && (
-                <div className="search_results rounded-5 border shadow-sm p-4 position-absolute bg-white">
+                <div className="search_results rounded-4 border shadow-sm p-4 position-absolute bg-white">
                   {!loading ? (
                     searchSuggestions && (
                       <>
@@ -233,7 +233,7 @@ const InvestorNavbar = (props) => {
                 </span>
 
                 {mobileSearch && (
-                  <div className="search_container rounded shadow-sm border p-3 position-absolute d-flex flex-column">
+                  <div className="search_container rounded-4 shadow-sm border p-3 position-absolute d-flex flex-column">
                     <form
                       onSubmit={searchSubmitHandler}
                       className="searchbar-container "
@@ -384,7 +384,7 @@ const InvestorNavbar = (props) => {
                     className="profile-pic rounded-circle"
                     src={loggedInUser.profilePicture}
                     alt="Profile"
-                    style={{objectFit:"cover"}}
+                    style={{ objectFit: "cover" }}
                   />
                 </Link>
                 {/* <span className="me">Me</span> */}

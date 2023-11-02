@@ -29,7 +29,7 @@ const FileBar = ({ children, fileType, fileCount }) => (
   <div className="d-flex gap-2">
     <div className="px-3 py-3 d-flex align-items-center gap-2 w-100 ">
       <div
-        className="bg-white rounded-3 d-flex justify-content-center align-items-center"
+        className="bg-white rounded-4 d-flex justify-content-center align-items-center"
         style={{ width: "40px", height: "40px" }}
       >
         {children}

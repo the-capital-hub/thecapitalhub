@@ -16,7 +16,7 @@
       max-width: 50%;
       max-height: 100%;
       background-color: white;
-      border-radius: 20px;
+      border-radius: var(--border-radius);
       background: #fff;
   
       .back_and_home {
@@ -44,7 +44,7 @@
         justify-content: center; /* Adjust as needed */
         align-items: center;
         background-color: white;
-        border-radius: 10px;
+        border-radius: var(--border-radius);
         padding: 0px 20px 10px 20px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   

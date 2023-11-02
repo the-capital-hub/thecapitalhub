@@ -69,13 +69,13 @@ export default function EditModalContent({ dataArray, isInterests, setInvestedSt
 
   return (
     <div className="edit__modal__body">
-      <div className="current_list d-flex flex-column gap-4 border rounded-3 p-3 ">
+      <div className="current_list d-flex flex-column gap-4 border rounded-4 p-3 ">
         <h5 className="m-0 green_underline">My Investments</h5>
         <div className="d-flex flex-column gap-3">
           {companies?.map((company, index) => {
             return (
               <div
-                className="border rounded-3 p-2 d-flex justify-content-between align-items-center"
+                className="border rounded-4 p-2 d-flex justify-content-between align-items-center"
                 key={company.id}
               >
                 <img
@@ -108,7 +108,7 @@ export default function EditModalContent({ dataArray, isInterests, setInvestedSt
         </div>
       </div>
 
-      <div className=" d-flex justify-content-center align-items-start gap-4 border rounded-3 p-3 pb-5">
+      <div className=" d-flex justify-content-center align-items-start gap-4 border rounded-4 p-3 pb-5">
         <MyInvestmentCard
           company={editingCompany}
           isInterests={isInterests}

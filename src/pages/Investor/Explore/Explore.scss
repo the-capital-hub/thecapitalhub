@@ -9,7 +9,7 @@
 
   .filter_container {
     --color-investor: rgb(211, 243, 107);
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     background: #fff;
     padding: 20px;
     box-shadow: 0 0.125rem 0.25rem rgba(black, 0.075);

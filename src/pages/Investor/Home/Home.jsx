@@ -18,6 +18,8 @@ import {
 import { useLocation } from "react-router-dom";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import OnBoardUser from "../../../components/OnBoardUser/OnBoardUser";
+import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
 
 function Home() {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -115,7 +117,7 @@ function Home() {
             <div className="box start_post_container border">
               <img
                 src={loggedInUser.profilePicture}
-                alt="Image"
+                alt="Profile"
                 className="rounded-circle"
                 style={{ objectFit: "cover" }}
               />
@@ -134,7 +136,7 @@ function Home() {
               next={fetchMorePosts}
               hasMore={hasMore}
               loader={
-                <p className="container p-5 text-center my-5 bg-white rounded-5 shadow ">
+                <p className="container p-5 text-center my-5 bg-white rounded-4 shadow ">
                   <div class="d-flex justify-content-center">
                     <div class="spinner-border" role="status">
                       <span class="visually-hidden">Loading...</span>
@@ -196,7 +198,7 @@ function Home() {
               )}
             </InfiniteScroll>
             {/* ) : (
-                <p className="container p-5 text-center my-5 bg-white rounded-5 shadow ">
+                <p className="container p-5 text-center my-5 bg-white rounded-4 shadow ">
                   <div class="d-flex justify-content-center">
                     <div class="spinner-border" role="status">
                       <span class="visually-hidden">Loading...</span>
@@ -221,6 +223,7 @@ function Home() {
           appendDataToAllPosts={appendDataToAllPosts}
         />
       )}
+      <OnBoardUser steps={investorOnboardingSteps.homePage} />
     </MaxWidthWrapper>
   );
 }

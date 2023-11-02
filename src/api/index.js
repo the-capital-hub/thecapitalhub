@@ -104,6 +104,13 @@ const API = Object.freeze({
   googleLogin: `${baseUrl}/users/googleLogin`,
   answerQuestion: `${baseUrl}/question/answerQuestion`,
   getQuestionCount: `${baseUrl}/question/getQuestionCount`,
+  addRecentExperience: `${baseUrl}/users/addExperience`,
+  addRecentEducation: `${baseUrl}/users/addEducation`,
+  updateRecentEducation: `${baseUrl}/users/updateEducation`,
+  deleteRecentEducation: `${baseUrl}/users/deleteEducation`,
+  updateRecentExperience: `${baseUrl}/users/updateExperience`,
+  deleteRecentExperience: `${baseUrl}/users/deleteExperience`,
+  getLastMessage: `${baseUrl}/message/getLastMessage`,
 });
 
 export default API;

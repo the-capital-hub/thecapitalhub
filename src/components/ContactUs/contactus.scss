@@ -43,7 +43,7 @@ $card-width: 30%;
 
   .container {
     form {
-      border-radius: 20px;
+      border-radius: var(--border-radius);
       border: 1px solid #e7e7e7;
       background: #f9f9f9;
       padding: 20px;
@@ -96,7 +96,7 @@ $card-width: 30%;
 
     .card {
       flex: 1;
-      border-radius: 20px;
+      border-radius: var(--border-radius);
       border: 1px solid #e7e7e7;
       background: #f9f9f9;
       width: $card-width;

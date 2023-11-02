@@ -17,7 +17,7 @@
 }
 
 .card_layout {
-  border-radius: 30px;
+  border-radius: var(--border-radius);
   background: #f0f0f0;
   flex: 0 0 23%;
   margin-left: 2rem;

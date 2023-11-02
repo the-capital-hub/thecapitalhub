@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function ProfileHeader({ userData }) {
   return (
-    <div className="profile rounded border shadow-sm">
+    <div className="profile rounded-4 border shadow-sm">
       <div className="short_details d-flex flex-column flex-md-row align-items-center justify-content-between">
         <div className="d-flex flex-column w-100 flex-md-row align-items-center justify-content-between ">
           <img

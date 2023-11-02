@@ -5,7 +5,7 @@ export default function InvestedCard({ startUp }) {
     "One classical breakdown of economic activity distinguishes three sectors: Primary: involves the retrieval and production of raw-material commodities, such as corn, coal, wood or iron";
 
   return (
-    <div className="invested_card border rounded " id={startUp.id}>
+    <div className="invested_card border rounded-4 " id={startUp.id}>
       <div className="card_title">
         <img src={startUp.logo || "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"} alt="startup icon" width={50} />
         <h5 className="green_underline pb-2">{startUp.name}</h5>

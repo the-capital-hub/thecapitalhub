@@ -323,7 +323,7 @@ function Profile() {
             </div>
           </div>
         ) : (
-          <div className="d-flex w-100 min-vh-100 justify-content-center bg-white border shadow-sm rounded-3 pt-5 ">
+          <div className="d-flex w-100 min-vh-100 justify-content-center bg-white border shadow-sm rounded-4 pt-5 ">
             <SpinnerBS colorClass={"text-black"} />
           </div>
         )}

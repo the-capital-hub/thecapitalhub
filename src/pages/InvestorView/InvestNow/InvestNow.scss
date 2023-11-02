@@ -23,7 +23,7 @@
         // margin-left: 300px;
         // margin-top: 100px;
         padding: 50px;
-        border-radius: 25px;
+        border-radius: var(--border-radius);
 
         .inputs {
             display: flex;

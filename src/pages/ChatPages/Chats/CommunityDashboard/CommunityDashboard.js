@@ -141,9 +141,8 @@ const CommunityDashboard = ({
         groupedMessages.push({ date: "Yesterday", messages: [message] });
       } else {
         currentDate = messageDate;
-        const formattedDate = `${messageDate.getDate()}-${
-          messageDate.getMonth() + 1
-        }-${messageDate.getFullYear()}`;
+        const formattedDate = `${messageDate.getDate()}-${messageDate.getMonth() + 1
+          }-${messageDate.getFullYear()}`;
         groupedMessages.push({
           date:
             today.getDate() === messageDate.getDate() ? "Today" : formattedDate,
@@ -336,6 +335,11 @@ const CommunityDashboard = ({
                       )}
                       {message?.image && (
                         <div className="mymessage_container">
+                          <ChatDropDownMenu
+                            onClicks={handleSetDeletePopup}
+                            idBack={handleIdBack}
+                            id={message?._id}
+                          />
                           <img
                             src={message.image}
                             className="image-message"
@@ -345,6 +349,11 @@ const CommunityDashboard = ({
                       )}
                       {message?.video && (
                         <div className="mymessage_container">
+                          <ChatDropDownMenu
+                            onClicks={handleSetDeletePopup}
+                            idBack={handleIdBack}
+                            id={message?._id}
+                          />
                           <video controls className="video-message">
                             <source src={message?.video} type={"video/mp4"} />
                             Your browser does not support the video tag.
@@ -353,6 +362,11 @@ const CommunityDashboard = ({
                       )}
                       {message.documentUrl && (
                         <div className="mymessage_container">
+                          <ChatDropDownMenu
+                            onClicks={handleSetDeletePopup}
+                            idBack={handleIdBack}
+                            id={message?._id}
+                          />
                           <a
                             href={message.documentUrl}
                             target="_blank"

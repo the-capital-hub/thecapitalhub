@@ -94,7 +94,7 @@ export default function EditChatSettings({ theme = "startup" }) {
   };
   return (
     <div className="edit_settings_container d-flex flex-column gap-3">
-      <fieldset className="edit_about rounded-2">
+      <fieldset className="edit_about rounded-4">
         <legend className="px-2 py-1 bg-white rounded-pill">About</legend>
         <textarea
           name="about"
@@ -138,7 +138,7 @@ export default function EditChatSettings({ theme = "startup" }) {
           );
           return (
             <div
-              className="p-2 d-flex justify-content-between align-items-center rounded-2 bg-light"
+              className="p-2 d-flex justify-content-between align-items-center rounded-4 bg-light"
               key={member?._id}
             >
               <img

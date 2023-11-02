@@ -23,7 +23,7 @@
     width: 357px;
     height: 375px;
     border: 1px solid #dbdbdb;
-    border-radius: 20px;
+    border-radius: var(--border-radius);
     color: #fff;
     background: #fff;
 
@@ -183,7 +183,7 @@
       width: 310px;
       height: 365px;
       border: 1px solid #e3e3e3;
-      border-radius: 10px;
+      border-radius: var(--border-radius);
       color: #fff;
       background: #fcfcfc;
 

@@ -382,13 +382,12 @@
 .plato_form_control {
   width: 100%;
   padding: 15px;
-  border-radius: 3px;
   background-color: #fff;
   padding: 18px 17px;
   gap: 10px;
   height: 54px;
   border: 2px solid #000000;
-  border-radius: 10px;
+  border-radius: var(--border-radius);
 
   &.first_name {
     width: 100%;

@@ -191,7 +191,7 @@ export const getUnreadMessageCountInCommunities = async (chatId, userId) => {
     const unreadCount = await MessageModel.countDocuments({
       chatId,
       senderId: { $ne: userId },
-      readBy: { $ne: userId }, 
+      readBy: { $ne: userId },
     });
     return {
       status: 200,
@@ -203,6 +203,29 @@ export const getUnreadMessageCountInCommunities = async (chatId, userId) => {
     return {
       status: 500,
       message: "An error occurred while getting unread message count.",
+    };
+  }
+};
+
+export const getLastMessage = async (chatId) => {
+  try {
+    const lastMessage = await MessageModel.findOne({ chatId }).sort({ createdAt: -1 }).populate('senderId');
+    if (!lastMessage) {
+      return {
+        status: 404,
+        message: "No messages found in the chat",
+      };
+    }
+    return {
+      status: 200,
+      message: "Last message retrieved successfully",
+      data: lastMessage,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while getting the last message.",
     };
   }
 };

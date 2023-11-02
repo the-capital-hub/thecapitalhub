@@ -78,7 +78,7 @@ export default function MilestoneBadge({
 
   return (
     <div
-      className={`badge_container p-4 d-flex flex-column align-items-center gap-3 rounded-5 position-relative ${theme}`}
+      className={`badge_container p-4 d-flex flex-column align-items-center gap-3 rounded-4 position-relative ${theme}`}
       style={{
         backgroundColor: "#EDEDED",
         flex: `0 0 ${isMini ? "200px" : "260px"}`,
@@ -162,7 +162,7 @@ export default function MilestoneBadge({
         </button>
       )}
       {alert && (
-        <div className="position-absolute m-2 d-flex justify-content-center align-items-center rounded-5 alert_text small text-danger text-center">
+        <div className="position-absolute m-2 d-flex justify-content-center align-items-center rounded-4 alert_text small text-danger text-center">
           <em>{alert}</em>
         </div>
       )}

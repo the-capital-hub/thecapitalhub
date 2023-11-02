@@ -5,6 +5,13 @@ import Reviewcarousel from "../../../../components/ECommerace/FoodLandingPage/Re
 import ScrollableComponent from "../../../../components/ECommerace/FoodLandingPage/ScrollableComponent/ScrollableComponent";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import {
+  InvestEasy,
+  Diversify,
+  InsureRight,
+} from "../../../../Images/Ecommerace/FtechlandingPage";
+import pramodImg from "../../../../Images/aboutUs/Pramod.jpeg";
+
 function FoodLandingPage() {
   const reviews = [
     {
@@ -55,7 +62,8 @@ function FoodLandingPage() {
     <div className="food_landing-page_Container container-fluid">
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Food-Tech</title>
+        <title>Build your food delivery application with Capital HUB!
+</title>
         <meta
           name="description"
           content="Discover a world of culinary convenience with our food tech platform.
@@ -67,67 +75,49 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
       </Helmet>
       <div className="frist-section d-flex flex-column  justify-content-evenly flex-md-row ">
         <div className="left-section d-flex flex-column justify-content-evenly md-p-3   ">
-          <p className="fw-bold"># 1 Food Delivery Services</p>
-          <h1>Fresh Food At </h1>
-          <h1 className="text-orange">Your Fingertips</h1>
-          <h6>Elevate Your Culinary Adventures with Capital HUB</h6>
+          {/* <p className="fw-bold"># 1 Food Delivery Services</p> */}
+          <h1>Build your food delivery 
+ </h1>
+          <h1 className="text-orange">application with Capital HUB!</h1>
+          <h6> Build your business as Capital HUB builds your application. Enable food delivery applications with the smoothest user interface available in the market. </h6>
           <Link to="/web-development" className="LinkBtn">Taking Us</Link>
         </div>
         <div className="right-section py-2    d-flex justify-content-evenly">
-          <img src={assets.multifoods} alt="multiFood" />
+          <img src={assets.twoMobile} alt="twoMobile" />
         </div>
         <img src={assets.downArrow} alt="downArrow" className="down-arrow" />
       </div>
 
-      <div className="second-section d-flex flex-column align-items-center   ">
-        <h3>Best Features</h3>
-        <h1>Our Best Features For You</h1>
-        {/* <p>
-          Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit
-          proin risus Sit purus ante dictum in malesuada id.
-        </p> */}
-        <div className="main-box d-flex flex-column  justify-content-center flex-md-row ">
-          <div className="inner-box">
-            <img src={assets.foodBox} alt="foodBox" />
-            <h5>Order Food with Ease</h5>
-            <p>
-              Satisfy your cravings with just a few clicks! Our food tech
-              platform delivers delicious meals right to your doorstep,
-              providing unmatched convenience
-            </p>
-          </div>
 
-          <div className="inner-box">
-            <img src={assets.roundBox} alt="roundBox" />
-            <h5>"Book Tables at Top Restaurants</h5>
-            <p>
-              Reserve your seat effortlessly and indulge in culinary excellence
-              at the finest restaurants in town. Elevate your dining experience
-              with our user-friendly 'book table' feature.
-            </p>
-          </div>
 
-          <div className="inner-box">
-            <img src={assets.Group} alt="Group" />
-            <h5>Connect with Foodies</h5>
-            <p>
-              Join our vibrant foodie community to share recipes, discover
-              hidden gems, and savour the joy of food together. Connect with
-              like-minded culinary enthusiasts.
-            </p>
-          </div>
+      <div className="short-description text-center">
+        <h2 className="mx-auto">Pay your development fee in tranches</h2>
+        <p className="text-center my-2 my-lg-4">
+          Capital HUB supports the startup ecosystem by accepting payment in
+          tranches of three. Final payment is made only after the product is
+          complete.
+        </p>
+      </div>
 
-          <div className="inner-box">
-            <img src={assets.box} alt="box" />
-            <h5>Track Your Order in Real-Time</h5>
-            <p>
-              Stay informed with transparent, real-time order tracking. Witness
-              your meal's journey from the kitchen to your doorstep with
-              precision at your fingertips
-            </p>
-          </div>
+      <div className="feature-cards flex-column flex-md-row">
+        <div className="feature-card">
+          <img src={InsureRight} alt="Insure Right" />
+          <h6>Simple Landing Page</h6>
+          <p>₹15,000 - ₹30,000*</p>
+        </div>
+        <div className="feature-card">
+          <img src={Diversify} alt="Diversify Well" />
+          <h6> Full-Fledged web application</h6>
+          <p>₹50,000 - ₹2,00,000*</p>
+        </div>
+        <div className="feature-card">
+          <img src={InvestEasy} alt="Invest Easy" />
+          <h6>Web application plus mobile application</h6>
+          <p>₹2,00,000 - ₹5,00,000*</p>
         </div>
       </div>
+
+      
 
       <div className="third-section d-flex   justify-content-center flex-column flex-md-row">
         <div className="left-section">
@@ -144,7 +134,7 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
           <Link to="/web-development" className="LinkBtn">Taking Us</Link>
         </div>
         <div className="right-section">
-          <img src={assets.foodVessel} alt="foodVessel" className="w-75 mb-5" />
+          <img src={assets.halfMobile} alt="halfMobile" className="w-75 " />
         </div>
       </div>
 
@@ -153,9 +143,9 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
         <div className="inner d-flex flex-column   align-self-center flex-md-row">
           <div className="left-section d-flex    justify-content-center flex-column">
             <img
-              src={assets.womenWithFood}
-              alt="womenWithFood"
-              className="w-75 mb-5 mx-auto"
+              src={assets.sinfleMobile}
+              alt="sinfleMobile"
+              className="w-50 mb-5 mx-auto"
             />
           </div>
           <div className="right-section d-flex    align-self-center flex-column container">
@@ -169,13 +159,74 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
           </div>
         </div>
       </div>
-      <div className=" two-scroll-section  ">
+      {/* <div className=" two-scroll-section  ">
         <h1>
           Menu That Always Make <br /> You Fall In Love
         </h1>
         <ScrollableComponent />
         <div className=" d-flex justify-content-center  my-3">
         <Link to="/web-development" className="LinkBtn">Taking Us</Link>
+        </div>
+      </div> */}
+
+
+<div className="help-cards flex-column flex-md-row ">
+        <div className="help-card">
+          <p className="count">01.</p>
+          <h6 className="title">Regular updates from our Product Manager</h6>
+
+          <Link to="/web-development" className="LinkBtn">
+            Taking Us
+          </Link>
+        </div>
+        <div className="help-card">
+          <p className="count">02.</p>
+          <h6 className="title">Technical recommendation from core team</h6>
+
+          <Link to="/web-development" className="LinkBtn">
+            Taking Us
+          </Link>
+        </div>
+        <div className="help-card">
+          <p className="count">03.</p>
+          <h6 className="title">
+            Specialised and unique startup business consulting
+          </h6>
+
+          <Link to="/web-development" className="LinkBtn">
+            Taking Us
+          </Link>
+        </div>
+        <div className="help-card">
+          <p className="count">04.</p>
+          <h6 className="title">Deployment handled by the Capital HUB team</h6>
+
+          <Link to="/web-development" className="LinkBtn">
+            Taking Us
+          </Link>
+        </div>
+      </div>
+
+
+
+      <div className="card_bg">
+        <div className="join-us-card rounded-4 mx-auto ">
+          <img
+            className="rounded "
+            src={pramodImg}
+            width={350}
+            alt="Cost Savings"
+          />
+          <div className="p-3  mx-auto text-center">
+            <h6 className="mx-auto">pramod Badiger</h6>
+            <p className="fs-14 mx-auto">Connect with our expert</p>
+            <Link
+              to="https://www.linkedin.com/in/pramod-badiger-a3226618b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              className="LinkBtn btn btn-primary rounded-pill text-white px-4 py-1 fs-12 mx-auto"
+            >
+              Connect
+            </Link>
+          </div>
         </div>
       </div>
       <div className="fifth-section">

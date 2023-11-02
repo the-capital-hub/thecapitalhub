@@ -8,7 +8,7 @@
   --font-primary: "Poppins", sans-serif;
 
   // Border-radius
-  --border-radius: 10px;
+  --border-radius: 1rem;
 
   h1,
   h2,
@@ -62,7 +62,7 @@
 
     border: 1px solid var(--color-primary);
     outline: none;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     cursor: pointer;
 
     &:focus,

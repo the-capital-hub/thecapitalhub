@@ -8,6 +8,7 @@ export default function PersonActions({
   userId,
   isInvestor,
 }) {
+  const linkTo = isInvestor ? `/investor/user/${userId}` : `/user/${userId}`;
   return (
     <div className="d-flex flex-column justify-content-end ">
       {/* <button className="person_bookmark position-absolute top-0 right-0 me-4">
@@ -15,7 +16,7 @@ export default function PersonActions({
       </button> */}
 
       <div className="d-flex flex-column-reverse flex-md-row align-items-start gap-3 mt-3 mb-3 mt-lg-0">
-        <Link to={`/${isInvestor ? "investor" : ""}/user/${userId}`}>
+        <Link to={linkTo}>
           <button className="btn-capital-outline actions-btn">
             Connect with the {person}
           </button>

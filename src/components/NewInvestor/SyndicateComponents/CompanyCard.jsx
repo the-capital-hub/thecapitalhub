@@ -11,7 +11,7 @@ import User from "./User";
 
 export default function CompanyCard({ company, text = "Group" }) {
   return (
-    <div className="company__card card border rounded-3">
+    <div className="company__card card border rounded-4">
       <div className="card-header m-0 p-0 d-flex align-items-center bg-transparent">
         <div className="card__image__container">
           <img src={company.image} alt={company.name} className="card__image" />

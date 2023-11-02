@@ -52,7 +52,7 @@ function Profile() {
             <ProfessionalInfo theme={"investor"} />
 
             {/* Bio Start */}
-            <div className="box personal_information rounded-3 border shadow-sm">
+            <div className="box personal_information rounded-4 border shadow-sm">
               <div className="personal_information_header">
                 <h2 className="typography green_underline">Bio</h2>
                 <span className="ms-auto">

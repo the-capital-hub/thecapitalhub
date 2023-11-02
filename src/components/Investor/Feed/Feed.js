@@ -18,6 +18,8 @@ import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import OnBoardUser from "../../OnBoardUser/OnBoardUser";
+import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
 
 const Feed = () => {
   const [popupOpen, setPopupOpen] = useState(false);
@@ -42,7 +44,6 @@ const Feed = () => {
     const filteredPosts = allPosts.filter((post) => post._id !== postId);
     setAllPosts(filteredPosts);
   };
-  
 
   const fetchMorePosts = () => {
     getAllPostsAPI(page)
@@ -107,10 +108,10 @@ const Feed = () => {
             {/* Small Profile Card */}
             <SmallProfileCard className="d-none d-md-block" text={"Home"} />
             {/* Write a Post */}
-            <div className="bg-white rounded-5 start_post_container">
+            <div className="bg-white rounded-4 start_post_container">
               <img
                 src={loggedInUser.profilePicture}
-                alt="Image"
+                alt="Profile"
                 className="rounded-circle"
                 style={{ width: "50px", height: "50px" }}
               />
@@ -197,7 +198,7 @@ const Feed = () => {
               </InfiniteScroll>
 
               {/* ) : (
-                <div className="container p-5 text-center my-5 bg-white rounded-5 shadow-sm ">
+                <div className="container p-5 text-center my-5 bg-white rounded-4 shadow-sm ">
                   <SpinnerBS />
                 </div>
               )} */}
@@ -219,6 +220,7 @@ const Feed = () => {
           <NewsCorner />
         </div>
       </div>
+      <OnBoardUser steps={startupOnboardingSteps.homePage} />
     </MaxWidthWrapper>
   );
 };

@@ -22,7 +22,7 @@ export default function PersonCard({ person, isFeedBack }) {
   }
 
   return (
-    <div className="personCard__container d-flex flex-column gap-2 p-2 rounded-3">
+    <div className="personCard__container d-flex flex-column gap-2 p-2 rounded-4">
       <CardHead {...personHead} />
       <CardBody>
         {isFeedBack ? (

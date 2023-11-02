@@ -58,7 +58,7 @@ const IntroductoryMessage = ({ title, image, para, previous, input, className, i
 
   return (
     <div className={`introductory_message_container mt-3 ${className}`}>
-      <div className="box_container rounded-3 border shadow-sm">
+      <div className="box_container rounded-4 border shadow-sm">
         <section className="title_section">
           <div
             className={`title_wrapper ${!para ? "title-only-border" : "default-border"

@@ -114,6 +114,10 @@ export default function Questionnaire({
     e.preventDefault();
     console.log("answer is", answer);
 
+    if (!answer) {
+      return;
+    }
+
     // set loading
     setLoading(true);
 
@@ -180,6 +184,7 @@ export default function Questionnaire({
     setOption(null);
     setAlert(null);
     setHistory([]);
+    setShowCategories(false);
     handleRefetch();
   }
 
@@ -218,6 +223,7 @@ export default function Questionnaire({
                   handleAnswerSelect={handleAnswerSelect}
                   handleBackToCategories={handleBackToCategories}
                   loading={loading}
+                  handlePostAnswer={handlePostAnswer}
                 />
               ) : (
                 <div className="d-flex justify-content-center align-items-center py-3">

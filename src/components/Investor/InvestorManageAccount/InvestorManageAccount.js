@@ -2,7 +2,7 @@ import "./InvestorManageAccount.scss";
 import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import logoIcon from "../../../Images/manageAccount/Group 15186.svg";
 import profileIcon from "../../../Images/investorIcon/profilePic.webp";
-
+import { Link } from 'react-router-dom';
 import { changePasswordAPI } from "../../../Service/user";
 import { useEffect, useState } from "react";
 import LogOutPopUp from "../../PopUp/LogOutPopUp/LogOutPopUp";
@@ -162,7 +162,9 @@ const InvestorManageAccount = () => {
                   </div>
                   {/* Footer */}
                   <div className="footer">
-                    <button className="btn-delete">Delete account</button>
+                    <Link to="/profile">
+                      <button className="btn-delete">View profile</button>
+                    </Link>
                   </div>
                 </div>
               </section>

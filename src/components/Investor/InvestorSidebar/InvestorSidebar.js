@@ -154,7 +154,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                         objectFit: "cover",
                       }}
                       src={loggedInUser.profilePicture}
-                      alt="image"
+                      alt="Profile"
                     />
                   </Link>
                   <h3 className="">
@@ -174,6 +174,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="home?showPopup=true"
+                  id="createAPost"
                 >
                   {sidebarCollapsed ? (
                     <>
@@ -211,6 +212,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/company-profile"
+                  id="sidebar_companyProfile"
                 >
                   <img src={companyProfileIcon} alt="image" />
                   {!sidebarCollapsed && <span>Company</span>}
@@ -225,6 +227,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/explore"
+                  id="sidebar_explore"
                 >
                   <img src={ExploreIcon} alt="image" />
                   {!sidebarCollapsed && <span>Explore</span>}
@@ -238,6 +241,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/onelink"
+                  id="sidebar_oneLink"
                 >
                   {/* <img src={OnelinkIcon} alt="image" width="17px" height="17px" /> */}
                   <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} />
@@ -248,7 +252,10 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 active={location.pathname.includes("/chats")}
                 className="active-item"
               >
-                <div className="sidebar__community d-flex gap-4 ">
+                <div
+                  className="sidebar__community d-flex gap-4 "
+                  id="sidebar_community"
+                >
                   <div onClick={() => setSidebarCollapsed(true)}>
                     <CommunitiesIcon
                       width="17px"
@@ -301,6 +308,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/documentation"
+                  id="sidebar_documentation"
                 >
                   <img src={BookIcon} alt="image" width="17px" height="17px" />
                   {!sidebarCollapsed && <span>Documentation</span>}
@@ -313,6 +321,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/savePost"
+                  id="sidebar_savedPosts"
                 >
                   <img src={SaveIcon} alt="image" width="17px" height="17px" />
                   {!sidebarCollapsed && <span>Saved posts</span>}
@@ -326,6 +335,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/connection"
+                  id="sidebar_connections"
                 >
                   <img
                     src={connectionsIcon}
