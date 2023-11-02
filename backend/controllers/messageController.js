@@ -6,7 +6,8 @@ import {
   clearAllMessages,
   deleteMessage,
   markMessagesAsReadInCommunities,
-  getUnreadMessageCountInCommunities
+  getUnreadMessageCountInCommunities,
+  getLastMessage,
 } from "../services/messageService.js";
 
 export const addMessageController = async (req, res) => {
@@ -117,6 +118,20 @@ export const getUnreadMessageCountInCommunitiesController = async (req, res) => 
     return res.status(500).send({
       status: 500,
       message: "An error occurred while getting unread message count.",
+    });
+  }
+};
+
+export const getLastMessageController = async (req, res) => {
+  try {
+    const { chatId } = req.params;
+    const response = await getLastMessage(chatId);
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting the last message.",
     });
   }
 };
