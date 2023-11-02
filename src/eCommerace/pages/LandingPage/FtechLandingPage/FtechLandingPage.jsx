@@ -232,7 +232,7 @@ financial ease and security" />
               <img
                 className="rounded"
                 src={pramodImg}
-                width={300}
+                width={400}
                 alt="Cost Savings"
               />
               <div className="p-3 ">
