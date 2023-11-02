@@ -11,21 +11,6 @@ const steps = [
 
 */
 
-const profilePage = [
-  {
-    target: ".professional_info_section",
-    content: "some text here",
-  },
-  {
-    target: "#missingDetails",
-    content: "some text here",
-  },
-  {
-    target: ".milestones",
-    content: "some text here",
-  },
-];
-
 const explorePage = [
   {
     target: ".filter_container",
@@ -33,11 +18,11 @@ const explorePage = [
       "Greetings! You've arrived at the exploration area of The Capital Hub.",
   },
   {
-    target: ".startup_explore_tabs",
+    target: ".filter_by",
     content: "Select the category you're interested in.",
   },
   {
-    target: ".startup_filters_container",
+    target: ".investor_explore_filters_container",
     content: "Customize your search by applying filters.",
   },
   {
@@ -47,7 +32,6 @@ const explorePage = [
 ];
 
 // Keep this in the bottom
-export const startupOnboardingSteps = {
-  profilePage,
+export const investorOnboardingSteps = {
   explorePage,
 };

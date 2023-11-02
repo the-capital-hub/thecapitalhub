@@ -14,6 +14,8 @@ import {
   fetchExploreFiltersAPI,
 } from "../../../Service/user";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
+import OnBoardUser from "../../../components/OnBoardUser/OnBoardUser";
+import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
 
 const sectorOptions = [
   "FMCG",
@@ -474,6 +476,7 @@ function Explore() {
           )}
         </div>
       </div>
+      <OnBoardUser steps={investorOnboardingSteps.explorePage} />
     </MaxWidthWrapper>
   );
 }
