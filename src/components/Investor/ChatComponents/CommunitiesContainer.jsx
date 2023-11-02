@@ -28,7 +28,7 @@ export default function CommunitiesContainer({
     getAllCommunity(loggedInUser?._id).then((res) => {
       setGetCommunity(res);
     });
-  }, [chatProfile, chatId]);
+  }, [chatProfile, chatId, sendMessage, recieveMessage]);
 
   return (
     <details

@@ -15,6 +15,9 @@
     font-size: 1rem;
     line-height: 0.75rem;
 
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+
     &.active {
       //   text-decoration: underline;
       //   text-decoration-color: rgba(253, 89, 1, 1);
@@ -22,8 +25,6 @@
       //   text-underline-offset: 0.25em;
       color: rgba(253, 89, 1, 1);
       border: 1px solid rgba(0, 0, 0, 0.1);
-      border-top-right-radius: 10px;
-      border-top-left-radius: 10px;
       border-bottom: 0;
       box-shadow: 0 -5px 5px -5px rgb(222, 226, 230),
         5px 0px 5px -5px rgb(222, 226, 230),

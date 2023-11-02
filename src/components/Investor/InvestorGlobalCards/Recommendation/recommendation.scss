@@ -83,6 +83,10 @@
         justify-content: start;
         align-items: flex-start;
 
+        &:hover {
+          background-color: var(--hover-bg-grey);
+        }
+
         img {
           width: 45px;
           height: 45px;
@@ -111,8 +115,8 @@
       width: 100%;
     }
 
-    .card_wrapper + .card_wrapper{
-      border-top: 1px solid #DCDCDC;
+    .card_wrapper + .card_wrapper {
+      border-top: 1px solid #dcdcdc;
     }
   }
 }

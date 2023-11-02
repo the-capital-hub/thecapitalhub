@@ -1258,3 +1258,92 @@ export const getQuestionCountAPI = async () => {
     throw error;
   }
 };
+
+export const addRecentExperience = async (userId, experienceData) => {
+  try {
+    const response = await axiosInstance.patch(
+      `${API.addRecentExperience}/${userId}`,
+      experienceData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error adding recent experience:", error);
+    throw error;
+  }
+};
+
+export const addRecentEducation = async (userId, educationData) => {
+  try {
+    const response = await axiosInstance.patch(
+      `${API.addRecentEducation}/${userId}`,
+      educationData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error adding recent education:", error);
+    throw error;
+  }
+};
+
+export const updateRecentEducation = async (educationId, updatedData) => {
+  try {
+    const response = await axiosInstance.patch(
+      `${API.updateRecentEducation}/${educationId}`,
+      updatedData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating recent education:", error);
+    throw error;
+  }
+};
+
+export const deleteRecentEducation = async (educationId) => {
+  try {
+    const response = await axiosInstance.delete(
+      `${API.deleteRecentEducation}/${educationId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting recent education:", error);
+    throw error;
+  }
+};
+
+export const updateRecentExperience = async (experienceId, updatedData) => {
+  try {
+    const response = await axiosInstance.patch(
+      `${API.updateRecentExperience}/${experienceId}`,
+      updatedData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating recent experience:", error);
+    throw error;
+  }
+};
+
+
+export const deleteRecentExperience = async (experienceId) => {
+  try {
+    const response = await axiosInstance.delete(
+      `${API.deleteRecentExperience}/${experienceId}
+      `);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting recent experience:", error);
+    throw error;
+  }
+};
+
+export const getLastMessage = async (chatId) => {
+  try {
+    const response = await axiosInstance.get(
+      `${API.getLastMessage}/${chatId}
+      `);
+    return response.data;
+  } catch (error) {
+    console.error("Error getting last message:", error);
+    throw error;
+  }
+};

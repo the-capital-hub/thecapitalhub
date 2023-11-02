@@ -141,9 +141,8 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
         groupedMessages.push({ date: "Yesterday", messages: [message] });
       } else {
         currentDate = messageDate;
-        const formattedDate = `${messageDate.getDate()}-${
-          messageDate.getMonth() + 1
-        }-${messageDate.getFullYear()}`;
+        const formattedDate = `${messageDate.getDate()}-${messageDate.getMonth() + 1
+          }-${messageDate.getFullYear()}`;
         groupedMessages.push({
           date:
             today.getDate() === messageDate.getDate() ? "Today" : formattedDate,
@@ -349,6 +348,12 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                       )}
                       {message?.image && (
                         <div className="mymessage_container img">
+                          <ChatDropDownMenu
+                            onClicks={handleSetDeletePopup}
+                            idBack={handleIdBack}
+                            id={message?._id}
+                            showMenu={messageMenu}
+                          />
                           <img
                             src={message.image}
                             className="image-message"
@@ -358,6 +363,12 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                       )}
                       {message?.video && (
                         <div className="mymessage_container">
+                          <ChatDropDownMenu
+                            onClicks={handleSetDeletePopup}
+                            idBack={handleIdBack}
+                            id={message?._id}
+                            showMenu={messageMenu}
+                          />
                           <video controls className="video-message">
                             <source src={message?.video} type={"video/mp4"} />
                             Your browser does not support the video tag.
@@ -366,6 +377,12 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                       )}
                       {message.documentUrl && (
                         <div className="mymessage_container text-break">
+                          <ChatDropDownMenu
+                            onClicks={handleSetDeletePopup}
+                            idBack={handleIdBack}
+                            id={message?._id}
+                            showMenu={messageMenu}
+                          />
                           <a
                             href={message.documentUrl}
                             target="_blank"
