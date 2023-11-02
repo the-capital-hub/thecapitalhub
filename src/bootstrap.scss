@@ -1,0 +1,11 @@
+// Change bootstrap defaults
+// $secondary: #anyColor;
+
+// Bootstrap Classes
+.container-fluid {
+  margin: 0;
+  padding: 0;
+}
+
+// Import must in the bottom
+@import "bootstrap/scss/bootstrap.scss";
