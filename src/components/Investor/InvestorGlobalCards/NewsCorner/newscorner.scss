@@ -65,7 +65,7 @@
     align-items: flex;
 
     &:hover {
-      background-color: rgb(240, 240, 240);
+      background-color: var(--hover-bg-grey);
     }
 
     img {
