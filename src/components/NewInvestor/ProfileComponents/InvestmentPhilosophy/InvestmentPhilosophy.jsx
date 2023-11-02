@@ -12,6 +12,8 @@ import ticketSizeIcon from "../../../../Images/Investor/Profile/ticket_size.svg"
 import seedRoundIcon from "../../../../Images/Investor/Profile/seed_round.svg";
 import totalInvestmentIcon from "../../../../Images/Investor/Profile/total_investment.png";
 import "./InvestmentPhilosophy.scss";
+import { ModalBsLauncher } from "../../../PopUp/ModalBS";
+import ExperienceModal from "./Modals/ExperienceModal/ExperienceModal";
 
 export default function InvestmentPhilosophy() {
   // Fetch loggedInUser from global state
@@ -92,10 +94,10 @@ export default function InvestmentPhilosophy() {
         <div className="flex-md-row header">
           <h5 className="green_underline h5">Recent Experience</h5>
           <div className="green_button">
-            <Link to={""}>
+            <ModalBsLauncher id={"experienceModal"}>
               <span>Add </span>
               <span className="d-none d-md-inline-block">Experience</span>
-            </Link>
+            </ModalBsLauncher>
           </div>
         </div>
         <div className="experience_cards">
@@ -105,7 +107,7 @@ export default function InvestmentPhilosophy() {
                 className="rounded-circle"
                 src={linkSectorIcon}
                 height={100}
-                alt="experience image"
+                alt="experience"
               />
             </div>
             <div className="description mt-1 mt-md-0 col-md-9 row row-cols-1 row-cols-md-2 row-cols-xl-3">
@@ -133,7 +135,7 @@ export default function InvestmentPhilosophy() {
                 className="rounded-circle"
                 src={linkSectorIcon}
                 height={100}
-                alt="experience image"
+                alt="experience"
               />
             </div>
             <div className="description mt-1 mt-md-0 col-md-9 row row-cols-1 row-cols-md-2 row-cols-xl-3">
@@ -163,10 +165,10 @@ export default function InvestmentPhilosophy() {
         <div className="flex-md-row header">
           <h5 className="green_underline h5">Education</h5>
           <div className="green_button">
-            <Link to={""}>
+            <ModalBsLauncher id={"educationModal"}>
               <span>Add </span>
               <span className="d-none d-md-inline-block">Education</span>
-            </Link>
+            </ModalBsLauncher>
           </div>
         </div>
         <div className="experience_cards">
@@ -176,7 +178,7 @@ export default function InvestmentPhilosophy() {
                 className="rounded-circle"
                 src={educationIcon}
                 height={100}
-                alt="education image"
+                alt="education"
               />
             </div>
             <div className="description mt-1 mt-md-0 col-md-9 row row-cols-1 row-cols-md-2 row-cols-xl-3">
@@ -243,6 +245,9 @@ export default function InvestmentPhilosophy() {
       <button className="green_button btn mx-3">
         Book Your Appointment Now
       </button>
+
+      {/* Modals */}
+      <ExperienceModal />
     </section>
   );
 }
