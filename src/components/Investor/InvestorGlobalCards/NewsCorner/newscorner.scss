@@ -62,7 +62,11 @@
   .newscorner_card_body {
     display: flex;
     justify-content: start;
-    align-items: flex-start;
+    align-items: flex;
+
+    &:hover {
+      background-color: rgb(240, 240, 240);
+    }
 
     img {
       width: 30px;
