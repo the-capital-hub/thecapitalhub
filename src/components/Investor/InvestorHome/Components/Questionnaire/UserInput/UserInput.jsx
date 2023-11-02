@@ -19,7 +19,7 @@ export default function UserInput({
         onChange={handleAnswerChange}
         autoFocus
         rows={1}
-        disabled={question?.options?.length > 0}
+        disabled={!question || question?.options?.length > 0}
       />
       <button
         type="submit"
