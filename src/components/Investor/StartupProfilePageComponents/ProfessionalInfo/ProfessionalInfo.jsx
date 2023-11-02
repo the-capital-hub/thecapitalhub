@@ -37,7 +37,7 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
   const [selectedFile, setSelectedFile] = useState(null);
 
   // Fetch professional data
-  console.log(loggedInUser)
+  console.log(loggedInUser);
   useEffect(() => {
     if (isInvestor) {
       getInvestorById(loggedInUser?.investor)
@@ -95,7 +95,7 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
       founderId: loggedInUser._id,
       company: professionalData.company,
     };
-console.log(professionalData.company)
+    console.log(professionalData.company);
     try {
       if (selectedFile) {
         const profilePicture = await getBase64(selectedFile);
