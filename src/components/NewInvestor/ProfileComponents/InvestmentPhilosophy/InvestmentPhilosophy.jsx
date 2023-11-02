@@ -14,6 +14,7 @@ import totalInvestmentIcon from "../../../../Images/Investor/Profile/total_inves
 import "./InvestmentPhilosophy.scss";
 import { ModalBsLauncher } from "../../../PopUp/ModalBS";
 import ExperienceModal from "./Modals/ExperienceModal/ExperienceModal";
+import EducationModal from "./Modals/EducationModal/EducationModal";
 
 export default function InvestmentPhilosophy() {
   // Fetch loggedInUser from global state
@@ -248,6 +249,7 @@ export default function InvestmentPhilosophy() {
 
       {/* Modals */}
       <ExperienceModal />
+      <EducationModal />
     </section>
   );
 }
