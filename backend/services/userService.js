@@ -337,6 +337,14 @@ export const addEducation = async (userId, educationData) => {
         message: "User not found",
       };
     }
+    if (educationData?.logo) {
+      const { url } = await cloudinary.uploader.upload(educationData.logo, {
+        folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
+        format: "webp",
+        unique_filename: true,
+      });
+      educationData.logo = url;
+    }
     user.recentEducation.push(educationData);
     await user.save();
     return {
@@ -362,6 +370,14 @@ export const addExperience = async (userId, experienceData) => {
         status: 404,
         message: "User not found",
       };
+    }
+    if (experienceData?.logo) {
+      const { url } = await cloudinary.uploader.upload(experienceData.logo, {
+        folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
+        format: "webp",
+        unique_filename: true,
+      });
+      experienceData.logo = url;
     }
     user.recentExperience.push(experienceData);
     await user.save();
