@@ -12,6 +12,7 @@ import pramodImg from "../../../../Images/aboutUs/Pramod.jpeg";
 import tchLogo from "../../../../Images/RoundLogo.png";
 import ContactForm from "../../../Components/Shared/ContactForm/ContactForm";
 import ServiceStats from "../../../Components/Shared/ServiceStats/ServiceStats";
+import OurClients from "../../../Components/Shared/OurClients/OurClients";
 
 function TransportLandingPage() {
   return (
@@ -331,6 +332,9 @@ function TransportLandingPage() {
             </div>
         </div> */}
       </div>
+
+      {/* OurClients */}
+      <OurClients />
 
       {/* contact form */}
       <div className="container">

@@ -13,6 +13,7 @@ import {
 import pramodImg from "../../../../Images/aboutUs/Pramod.jpeg";
 import ContactForm from "../../../Components/Shared/ContactForm/ContactForm";
 import ServiceStats from "../../../Components/Shared/ServiceStats/ServiceStats";
+import OurClients from "../../../Components/Shared/OurClients/OurClients";
 
 function FoodLandingPage() {
   const reviews = [
@@ -148,7 +149,7 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
 
       <div className="container mx-auto forth-section d-flex flex-column ">
         <h4 className="mx-auto mt-5 mb-3">About Us</h4>
-        <div className="inner d-flex flex-column   align-self-center flex-md-row">
+        <div className="inner d-flex flex-column align-self-center flex-md-row">
           <div className="left-section d-flex    justify-content-center flex-column">
             <img
               src={assets.sinfleMobile}
@@ -156,13 +157,13 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
               className="w-50 mb-5 mx-auto"
             />
           </div>
-          <div className="right-section d-flex    align-self-center flex-column container">
-            <h1>High-Quality Food for Your Health</h1>
-            <p>
+          <div className="right-section d-flex  align-self-center flex-column container">
+            <h1>Responsive and Smooth Interface for Foodies</h1>
+            {/* <p>
               Prioritize your well-being with our commitment to providing the
               highest quality food. Nourish your body and delight your taste
               buds with the harmonious pairing of health and taste
-            </p>
+            </p> */}
             <Link to="/contactus" className="LinkBtn">
               Contact Us
             </Link>
@@ -270,6 +271,9 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
           </Link>
         </div>
       </section>
+
+      {/* OurClients */}
+      <OurClients />
 
       {/* Contact form */}
       <div className="container mx-auto">

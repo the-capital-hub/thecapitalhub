@@ -10,14 +10,16 @@ const Footer = ({ className }) => {
   return (
     <div className={`container-fluid footer_container ${className}`}>
       <div className="container">
-        <div className="row">
-          <div className="col-md-3 col-sm-12 d-flex justify-content-center align-items-center ">
-            {/* <p>
+        <div className="row justify-content-center">
+          {/* <div className="col-md-3 col-sm-12 d-flex justify-content-center align-items-center ">
+            <p>
               Lorem ipsum dolor sit amet consectetur. Magna integer enim vitae
               vulputate eu vitae tristique.raju
-            </p> */}
-          </div>
-          <div className="col-md-2 col-sm-6 footer_list_item">
+            </p>
+          </div> */}
+
+          {/* General */}
+          {/* <div className="col-md-2 col-sm-6 footer_list_item">
             <h4>General</h4>
             <ul className="list-unstyled">
               <li>
@@ -38,14 +40,16 @@ const Footer = ({ className }) => {
                   Contact Us
                 </a>
               </li>
-              {/* <li>
+              <li>
                 <a href="#" className="text-white">
                   Courses
                 </a>
-              </li> */}
+              </li>
             </ul>
-          </div>
-          <div className="col-md-2 col-sm-6 footer_list_item">
+          </div> */}
+
+          {/* Policies */}
+          {/* <div className="col-md-2 col-sm-6 footer_list_item">
             <h4>Policies</h4>
             <ul className="list-unstyled">
               <li>
@@ -63,20 +67,23 @@ const Footer = ({ className }) => {
                   Privacy
                 </Link>
               </li>
-              {/* <li>
+
+              <li>
                 <a href="#" className="text-white">
                   Accessibility
                 </a>
-              </li> */}
+              </li>
             </ul>
-          </div>
-          <div className="col-md-2 col-sm-6 footer_list_item">
+          </div> */}
+
+          {/* Social links */}
+          <div className="col-md-6 col-sm-6 text-center footer_list_item">
             <h4>Get in touch</h4>
             <p>
               Follow us on social media and stay updated with the latest
               information about our services
             </p>
-            <div className="d-flex justify-content-start">
+            <div className="d-flex justify-content-center gap-3">
               <a href="https://www.facebook.com/p/Capital-HUB-100086708877527/">
                 <img src={FbIcon} alt="img" style={{ margin: "0px 2px" }} />
               </a>
@@ -91,6 +98,8 @@ const Footer = ({ className }) => {
               </a>
             </div>
           </div>
+
+          {/* News letter */}
           {/* <div className="col-md-3 col-sm-6 footer_list_item">
             <h4>Subscribe to our Newsletter</h4>
             <p>

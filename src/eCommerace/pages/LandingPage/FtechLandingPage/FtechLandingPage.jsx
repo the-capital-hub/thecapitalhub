@@ -23,6 +23,7 @@ import { Link } from "react-router-dom";
 import pramodImg from "../../../../Images/aboutUs/Pramod.jpeg";
 import ContactForm from "../../../Components/Shared/ContactForm/ContactForm";
 import ServiceStats from "../../../Components/Shared/ServiceStats/ServiceStats";
+import OurClients from "../../../Components/Shared/OurClients/OurClients";
 
 function FtechLandingPage() {
   return (
@@ -39,7 +40,7 @@ financial ease and security"
       </Helmet>
 
       {/* Hero section */}
-      <section className="intro">
+      <section className="intro container mx-auto ">
         <h1 className="h1">
           <span className="blue">
             {" "}
@@ -87,7 +88,7 @@ financial ease and security"
       {/* Service Stats */}
       <ServiceStats />
 
-      <section className="financial-planner row justify-content-center justify-content-md-around">
+      <section className="container mx-auto financial-planner row justify-content-center justify-content-md-around">
         <div className="col-md-7">
           <h3 className="mb-4">
             <span className="blue">
@@ -122,7 +123,7 @@ financial ease and security"
         </div>
       </section>
 
-      <section className="how-we-help">
+      <section className="how-we-help container mx-auto ">
         <h2 className="blue">Here's how we build your project</h2>
         <div className="help-cards">
           <div className="help-card">
@@ -164,8 +165,8 @@ financial ease and security"
         </div>
       </section>
 
-      <section className="join-us">
-        <div className="header row justify-content-between align-items-center">
+      <section className="join-us ">
+        <div className="container mx-auto header row justify-content-between align-items-center">
           <div className="short-details col-md-5 text-white">
             <h2>
               <span>Be part of the Capital Hub Platform</span>
@@ -253,7 +254,7 @@ financial ease and security"
         </div>
       </section>
 
-      <section className="contact-our-team container my-5 row justify-content-around bg-black rounded-4 p-2 p-md-5 py-3 align-items-center mb-4">
+      <section className="contact-our-team container mx-auto  my-5 row justify-content-around bg-black rounded-4 p-2 p-md-5 py-3 align-items-center mb-4">
         <div className="col-8 col-md-4">
           <img
             className="rounded-circle"
@@ -286,7 +287,8 @@ financial ease and security"
           </Link>
         </div>
       </section>
-      <section className="trusted-security">
+
+      <section className="trusted-security container mx-auto ">
         <h3>
           <span className="blue">Trusted security</span>
           <span className="orange"> measures</span>
@@ -312,7 +314,8 @@ financial ease and security"
           </div>
         </div>
       </section>
-      <section className="mobile-apps row gap-3 flex-column-reverse flex-md-row justify-content-center align-items-center pt-5">
+
+      <section className="container mx-auto mobile-apps row gap-3 flex-column-reverse flex-md-row justify-content-center align-items-center pt-5">
         <img
           className="col-6 col-md-3"
           src={ManageYourFinance}
@@ -331,6 +334,9 @@ financial ease and security"
           </div>
         </div>
       </section>
+
+      {/* OurClients */}
+      <OurClients />
 
       {/* Contact form */}
       <div className="container">
