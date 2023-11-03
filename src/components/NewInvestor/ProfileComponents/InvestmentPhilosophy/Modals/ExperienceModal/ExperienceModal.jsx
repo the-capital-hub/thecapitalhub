@@ -6,20 +6,18 @@ import {
   ModalBSHeader,
 } from "../../../../../PopUp/ModalBS";
 import IconCloudUpload from "../../../../../Investor/SvgIcons/IconCloudUpload";
-import IconDeleteFill from "../../../../../Investor/SvgIcons/IconDeleteFill";
-import IconEdit from "../../../../../Investor/SvgIcons/IconEdit";
 import { getBase64 } from "../../../../../../utils/getBase64";
 import SpinnerBS from "../../../../../Shared/Spinner/SpinnerBS";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addRecentExperience,
-  deleteRecentExperience,
   updateRecentExperience,
 } from "../../../../../../Service/user";
 import {
   loginSuccess,
   updateLoggedInUser,
 } from "../../../../../../Store/features/user/userSlice";
+import CurrentExperience from "./CurrentExperience";
 
 const initialForm = {
   logo: "",
@@ -43,7 +41,6 @@ export default function ExperienceModal() {
 
   //   State for loading
   const [loading, setLoading] = useState(false);
-  const [deleting, setDeleting] = useState(false);
 
   //   Ref for close button
   const closeRef = useRef(null);
@@ -83,28 +80,6 @@ export default function ExperienceModal() {
     setIsEditing(true);
   }
 
-  // Handle delete click
-  async function handleDeleteClick(e, data) {
-    let confirmed = window.confirm(
-      `Are you sure you want to delete - "${data.companyName}"?`
-    );
-    if (confirmed) {
-      // Set deleting
-      setDeleting(true);
-      try {
-        const response = await deleteRecentExperience(data._id);
-        console.log("del response", response);
-        dispatch(updateLoggedInUser({ recentExperience: response.data }));
-      } catch (error) {
-        console.error("Error deleting Experience:", error);
-      } finally {
-        setDeleting(false);
-      }
-    } else {
-      return;
-    }
-  }
-
   // Handle Submit
   async function handleSubmit(e) {
     e.preventDefault();
@@ -138,7 +113,7 @@ export default function ExperienceModal() {
       } catch (error) {
         console.error("Error saving Experience:", error);
       } finally {
-        setLoading(false);
+        clearStates();
       }
     }
   }
@@ -168,46 +143,13 @@ export default function ExperienceModal() {
               {/* loop current experiences here */}
               {recentExperience?.map((data, index) => {
                 return (
-                  <div
-                    className="border rounded-4 p-2 d-flex align-items-center justify-content-between"
+                  <CurrentExperience
+                    data={data}
                     key={data._id}
-                  >
-                    <img
-                      src={data?.logo}
-                      alt="companyName"
-                      height={"40px"}
-                      width={"40px"}
-                      className="rounded-circle"
-                      style={{ objectFit: "cover" }}
-                    />
-
-                    <h6 className="m-0">
-                      {data?.companyName || "Company Name"}
-                    </h6>
-
-                    <div className="d-flex  gap-2">
-                      <button
-                        type="button"
-                        className="btn green_button px-3 d-flex align-items-center justify-content-center"
-                        onClick={(e) => handleEditClick(e, data)}
-                        disabled={loading}
-                      >
-                        <IconEdit height="1.125rem" width="1.125rem" />
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-danger d-flex align-items-center justify-content-center"
-                        onClick={(e) => handleDeleteClick(e, data)}
-                        disabled={loading}
-                      >
-                        {deleting ? (
-                          <SpinnerBS spinnerSizeClass="spinner-border-sm" />
-                        ) : (
-                          <IconDeleteFill height="1.125rem" width="1.125rem" />
-                        )}
-                      </button>
-                    </div>
-                  </div>
+                    loading={loading}
+                    handleEditClick={handleEditClick}
+                    clearStates={clearStates}
+                  />
                 );
               })}
             </div>

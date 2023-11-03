@@ -6,13 +6,10 @@ import {
   ModalBSHeader,
 } from "../../../../../PopUp/ModalBS";
 import IconCloudUpload from "../../../../../Investor/SvgIcons/IconCloudUpload";
-import IconDeleteFill from "../../../../../Investor/SvgIcons/IconDeleteFill";
-import IconEdit from "../../../../../Investor/SvgIcons/IconEdit";
 import { useDispatch, useSelector } from "react-redux";
 import { getBase64 } from "../../../../../../utils/getBase64";
 import {
   addRecentEducation,
-  deleteRecentEducation,
   updateRecentEducation,
 } from "../../../../../../Service/user";
 import {
@@ -44,7 +41,6 @@ export default function EducationModal() {
 
   //   State for loading
   const [loading, setLoading] = useState(false);
-  const [deleting, setDeleting] = useState(false);
 
   //   Ref for close button
   const closeRef = useRef(null);
@@ -93,7 +89,7 @@ export default function EducationModal() {
 
     if (isEditing) {
       const { _id: educationId, ...updatedData } = formData;
-      console.log("edit", educationId, updatedData);
+      // console.log("edit", educationId, updatedData);
 
       try {
         const { data } = await updateRecentEducation(educationId, updatedData);
@@ -106,7 +102,7 @@ export default function EducationModal() {
       }
     } else {
       try {
-        console.log("add edu", formData);
+        // console.log("add edu", formData);
 
         const { data } = await addRecentEducation(userId, formData);
         console.log("Add response", data);
@@ -114,7 +110,7 @@ export default function EducationModal() {
       } catch (error) {
         console.error("Error saving Education:", error);
       } finally {
-        setLoading(false);
+        clearStates();
       }
     }
   }
@@ -149,6 +145,7 @@ export default function EducationModal() {
                     key={data._id}
                     loading={loading}
                     handleEditClick={handleEditClick}
+                    clearStates={clearStates}
                   />
                 );
               })}
