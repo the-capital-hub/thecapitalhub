@@ -6,19 +6,18 @@ import {
   ModalBSHeader,
 } from "../../../../../PopUp/ModalBS";
 import IconCloudUpload from "../../../../../Investor/SvgIcons/IconCloudUpload";
-import IconDeleteFill from "../../../../../Investor/SvgIcons/IconDeleteFill";
-import IconEdit from "../../../../../Investor/SvgIcons/IconEdit";
 import { getBase64 } from "../../../../../../utils/getBase64";
 import SpinnerBS from "../../../../../Shared/Spinner/SpinnerBS";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addRecentExperience,
-  deleteRecentExperience,
+  updateRecentExperience,
 } from "../../../../../../Service/user";
 import {
   loginSuccess,
   updateLoggedInUser,
 } from "../../../../../../Store/features/user/userSlice";
+import CurrentExperience from "./CurrentExperience";
 
 const initialForm = {
   logo: "",
@@ -49,6 +48,7 @@ export default function ExperienceModal() {
   // Handle file change
   async function handleFileChange(e) {
     let newFile = e.target.files[0];
+    // console.log(newFile);
     if (!newFile) {
       return;
     }
@@ -77,43 +77,44 @@ export default function ExperienceModal() {
   function handleEditClick(e, data) {
     setFormData(data);
     setPreview(data.logo);
-  }
-
-  // Handle delete click
-  async function handleDeleteClick(e, data) {
-    let confirmed = window.confirm(
-      `Are you sure you want to delete - "${data.companyName}"?`
-    );
-    if (confirmed) {
-      try {
-        const response = await deleteRecentExperience(data._id);
-        console.log("del response", response);
-        dispatch(updateLoggedInUser(response.data));
-      } catch (error) {
-        console.error("Error deleting Experience:", error);
-      }
-    } else {
-      return;
-    }
+    setIsEditing(true);
   }
 
   // Handle Submit
   async function handleSubmit(e) {
     e.preventDefault();
 
-    console.log("add exp", formData);
-
     // Set loading
     setLoading(true);
 
-    try {
-      const { data } = await addRecentExperience(userId, formData);
-      console.log("Add response", data);
-      dispatch(loginSuccess(data));
-      setLoading(false);
-    } catch (error) {
-      console.error("Error saving Experience:", error);
-      setLoading(false);
+    if (isEditing) {
+      const { _id: experienceId, ...updatedData } = formData;
+      // console.log("edit", experienceId, updatedData);
+
+      try {
+        const { data } = await updateRecentExperience(
+          experienceId,
+          updatedData
+        );
+        // console.log("update response", data);
+        dispatch(updateLoggedInUser({ recentExperience: data }));
+      } catch (error) {
+        console.error("Error saving Experience:", error);
+      } finally {
+        clearStates();
+      }
+    } else {
+      try {
+        // console.log("add exp", formData);
+
+        const { data } = await addRecentExperience(userId, formData);
+        // console.log("Add response", data);
+        dispatch(loginSuccess(data));
+      } catch (error) {
+        console.error("Error saving Experience:", error);
+      } finally {
+        clearStates();
+      }
     }
   }
 
@@ -123,6 +124,7 @@ export default function ExperienceModal() {
     setIsEditing(false);
     setLoading(false);
     setPreview(null);
+    setIsEditing(false);
   }
 
   return (
@@ -141,40 +143,13 @@ export default function ExperienceModal() {
               {/* loop current experiences here */}
               {recentExperience?.map((data, index) => {
                 return (
-                  <div
-                    className="border rounded-4 p-2 d-flex align-items-center justify-content-between"
+                  <CurrentExperience
+                    data={data}
                     key={data._id}
-                  >
-                    <img
-                      src={data?.logo}
-                      alt="companyName"
-                      height={"40px"}
-                      width={"40px"}
-                      className="rounded-circle"
-                      style={{ objectFit: "cover" }}
-                    />
-
-                    <h6 className="m-0">
-                      {data?.companyName || "Company Name"}
-                    </h6>
-
-                    <div className="d-flex align-items-center gap-2">
-                      <button
-                        type="button"
-                        className="btn green_button px-3"
-                        onClick={(e) => handleEditClick(e, data)}
-                      >
-                        <IconEdit />
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-danger"
-                        onClick={(e) => handleDeleteClick(e, data)}
-                      >
-                        <IconDeleteFill />
-                      </button>
-                    </div>
-                  </div>
+                    loading={loading}
+                    handleEditClick={handleEditClick}
+                    clearStates={clearStates}
+                  />
                 );
               })}
             </div>
@@ -267,14 +242,19 @@ export default function ExperienceModal() {
                   type="button"
                   className="green_button"
                   onClick={() => clearStates()}
+                  disabled={loading}
                 >
                   Clear
                 </button>
-                <button type="submit" className="green_button">
+                <button
+                  type="submit"
+                  className="green_button"
+                  disabled={loading}
+                >
                   {loading ? (
                     <SpinnerBS spinnerSizeClass="spinner-border-sm" />
                   ) : (
-                    "Save"
+                    <>{isEditing ? "Update" : "Save"}</>
                   )}
                 </button>
               </div>
