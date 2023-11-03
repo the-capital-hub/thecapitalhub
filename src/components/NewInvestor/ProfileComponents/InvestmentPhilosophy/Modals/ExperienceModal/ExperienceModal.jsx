@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addRecentExperience,
   deleteRecentExperience,
+  updateRecentExperience,
 } from "../../../../../../Service/user";
 import {
   loginSuccess,
@@ -42,6 +43,7 @@ export default function ExperienceModal() {
 
   //   State for loading
   const [loading, setLoading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   //   Ref for close button
   const closeRef = useRef(null);
@@ -49,6 +51,7 @@ export default function ExperienceModal() {
   // Handle file change
   async function handleFileChange(e) {
     let newFile = e.target.files[0];
+    console.log(newFile);
     if (!newFile) {
       return;
     }
@@ -77,6 +80,7 @@ export default function ExperienceModal() {
   function handleEditClick(e, data) {
     setFormData(data);
     setPreview(data.logo);
+    setIsEditing(true);
   }
 
   // Handle delete click
@@ -85,12 +89,16 @@ export default function ExperienceModal() {
       `Are you sure you want to delete - "${data.companyName}"?`
     );
     if (confirmed) {
+      // Set deleting
+      setDeleting(true);
       try {
         const response = await deleteRecentExperience(data._id);
         console.log("del response", response);
-        dispatch(updateLoggedInUser(response.data));
+        dispatch(updateLoggedInUser({ recentExperience: response.data }));
       } catch (error) {
         console.error("Error deleting Experience:", error);
+      } finally {
+        setDeleting(false);
       }
     } else {
       return;
@@ -101,19 +109,37 @@ export default function ExperienceModal() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    console.log("add exp", formData);
-
     // Set loading
     setLoading(true);
 
-    try {
-      const { data } = await addRecentExperience(userId, formData);
-      console.log("Add response", data);
-      dispatch(loginSuccess(data));
-      setLoading(false);
-    } catch (error) {
-      console.error("Error saving Experience:", error);
-      setLoading(false);
+    if (isEditing) {
+      const { _id: experienceId, ...updatedData } = formData;
+      console.log("edit", experienceId, updatedData);
+
+      try {
+        const { data } = await updateRecentExperience(
+          experienceId,
+          updatedData
+        );
+        console.log("update response", data);
+        dispatch(updateLoggedInUser({ recentExperience: data }));
+      } catch (error) {
+        console.error("Error saving Experience:", error);
+      } finally {
+        clearStates();
+      }
+    } else {
+      try {
+        console.log("add exp", formData);
+
+        const { data } = await addRecentExperience(userId, formData);
+        console.log("Add response", data);
+        dispatch(loginSuccess(data));
+      } catch (error) {
+        console.error("Error saving Experience:", error);
+      } finally {
+        setLoading(false);
+      }
     }
   }
 
@@ -123,6 +149,7 @@ export default function ExperienceModal() {
     setIsEditing(false);
     setLoading(false);
     setPreview(null);
+    setIsEditing(false);
   }
 
   return (
@@ -158,20 +185,26 @@ export default function ExperienceModal() {
                       {data?.companyName || "Company Name"}
                     </h6>
 
-                    <div className="d-flex align-items-center gap-2">
+                    <div className="d-flex  gap-2">
                       <button
                         type="button"
-                        className="btn green_button px-3"
+                        className="btn green_button px-3 d-flex align-items-center justify-content-center"
                         onClick={(e) => handleEditClick(e, data)}
+                        disabled={loading}
                       >
-                        <IconEdit />
+                        <IconEdit height="1.125rem" width="1.125rem" />
                       </button>
                       <button
                         type="button"
-                        className="btn btn-danger"
+                        className="btn btn-danger d-flex align-items-center justify-content-center"
                         onClick={(e) => handleDeleteClick(e, data)}
+                        disabled={loading}
                       >
-                        <IconDeleteFill />
+                        {deleting ? (
+                          <SpinnerBS spinnerSizeClass="spinner-border-sm" />
+                        ) : (
+                          <IconDeleteFill height="1.125rem" width="1.125rem" />
+                        )}
                       </button>
                     </div>
                   </div>
@@ -267,14 +300,19 @@ export default function ExperienceModal() {
                   type="button"
                   className="green_button"
                   onClick={() => clearStates()}
+                  disabled={loading}
                 >
                   Clear
                 </button>
-                <button type="submit" className="green_button">
+                <button
+                  type="submit"
+                  className="green_button"
+                  disabled={loading}
+                >
                   {loading ? (
                     <SpinnerBS spinnerSizeClass="spinner-border-sm" />
                   ) : (
-                    "Save"
+                    <>{isEditing ? "Update" : "Save"}</>
                   )}
                 </button>
               </div>
