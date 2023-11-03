@@ -1,4 +1,12 @@
 .food_landing-page_Container {
+  .LinkBtn {
+    background: #ff7a00;
+    border: none;
+    &:hover {
+      background-color: #f19f52;
+      color: white;
+    }
+  }
   .frist-section {
     background-color: #e6e8dd;
     border-radius: 30px;

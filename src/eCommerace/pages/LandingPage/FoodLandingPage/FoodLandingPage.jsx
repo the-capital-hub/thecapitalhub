@@ -209,7 +209,7 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
         </div>
       </div>
 
-      <div className="card_bg p-md-5 py-2 mb-4">
+      {/* <div className="card_bg p-md-5 py-2 mb-4">
         <div className="join-us-card rounded-4 mx-auto ">
           <img
             className="rounded "
@@ -228,7 +228,41 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
             </Link>
           </div>
         </div>
-      </div>
+      </div> */}
+
+<section className="contact-our-team row justify-content-around bg-black rounded-4 p-2 p-md-5 align-items-center mb-4">
+        <div className="col-8 col-md-3">
+          <img
+            className="rounded-circle"
+            src={pramodImg}
+            width={250}
+            height={250}
+            style={{ objectFit: "cover" }}
+            alt="Cost Savings"
+          />
+        </div>
+        <div className="col-10 col-md-8 d-flex flex-column gap-3">
+          <h3 className="text-white">
+            "Dejection is a sign of failure but it becomes the cause of success"
+          </h3>
+          <p className="text-secondary">
+            Founder and CEO of The Capital HUB, is a dynamic
+            entrepreneur known for his innovative approach. He values structured
+            processes but enjoys unscripted conversations, balancing formality
+            and informality. Pramod is a visionary who dives deep into details
+            and foresees the future, offering steadfast support to founders in
+            shaping their dreams with conviction and individuality at
+            Capital HUB.
+          </p>
+          <h4 className="text-light">Pramod Badiger</h4>
+          <Link
+            to="https://www.linkedin.com/in/pramod-badiger-a3226618b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            className="LinkBtn btn btn-primary rounded-pill text-white px-4 py-2 fs-12 w-50"
+          >
+            Connect with our Expert
+          </Link>
+        </div>
+      </section>
 
       {/* <div className="fifth-section">
         <h1>See What Our Lovely</h1>
