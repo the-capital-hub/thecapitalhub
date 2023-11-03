@@ -123,7 +123,7 @@ financial ease and security"
             <h6 className="title">Regular updates from our Product Manager</h6>
 
             <Link to="/web-development" className="LinkBtn">
-              Taking Us
+            Contact Us
             </Link>
           </div>
           <div className="help-card">
@@ -131,7 +131,7 @@ financial ease and security"
             <h6 className="title">Technical recommendation from core team</h6>
 
             <Link to="/web-development" className="LinkBtn">
-              Taking Us
+            Contact Us
             </Link>
           </div>
           <div className="help-card">
@@ -141,7 +141,7 @@ financial ease and security"
             </h6>
 
             <Link to="/web-development" className="LinkBtn">
-              Taking Us
+            Contact Us
             </Link>
           </div>
           <div className="help-card">
@@ -149,7 +149,7 @@ financial ease and security"
             <h6 className="title">Deployment handled by the Capital HUB team</h6>
 
             <Link to="/web-development" className="LinkBtn">
-              Taking Us
+              Contact Us
             </Link>
           </div>
           
@@ -229,7 +229,7 @@ financial ease and security"
             <img
               className="rounded"
               src={pramodImg}
-              width={400}
+              width={351}
               alt="Cost Savings"
             />
             <div className="p-3 ">
