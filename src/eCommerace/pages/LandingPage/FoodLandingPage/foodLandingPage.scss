@@ -1,4 +1,12 @@
 .food_landing-page_Container {
+  .LinkBtn {
+    background: #ff7a00;
+    border: none;
+    &:hover {
+      background-color: #f19f52;
+      color: white;
+    }
+  }
   .frist-section {
     background-color: #e6e8dd;
     border-radius: 30px;
@@ -239,7 +247,7 @@ margin: 10px;
   .help-cards {
     display: flex;
     gap: 40px;
-    // flex-wrap: wrap;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     margin-top: 30px;
@@ -306,11 +314,11 @@ margin: 10px;
 
   .card_bg{
     border-radius: 15px;
-    padding: 20px;
+    // padding: 20px;
      background-color: #5c6ff6;
      .join-us-card {
        height: 400px;
-       width: 350px;
+       width: 351px;
        background-color: white;
        display: flex;
        flex-direction: column;

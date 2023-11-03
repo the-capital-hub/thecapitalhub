@@ -5,17 +5,17 @@ import Logo from "../../../../Images/Logo.svg";
 
 function Header() {
   return (
-    <header>
+    <header className="container">
       <nav>
-        <div className="nav d-none d-md-flex justify-content-center align-items-center">
+        <div className="nav  justify-content-center align-items-center">
           <NavLink to="/" ><img src={Logo} alt="Logo"/></NavLink>
-          <NavLink to="/contactus">Contact Us</NavLink>
-          <NavLink to="/about">About Us</NavLink>
+          {/* <NavLink to="/contactus " className='d-none d-md-flex'>Contact Us</NavLink> */}
+          {/* <NavLink to="/about " className='d-none d-md-flex'>About Us</NavLink> */}
         </div>
       
       </nav>
-      <Link to="/web-development">
-        <button className="btn login-btn py-2">Contact us</button>
+      <Link to="/contactus" >
+        <button className="btn login-btn py-md-1">Contact us</button>
       </Link>
     </header>
   );
