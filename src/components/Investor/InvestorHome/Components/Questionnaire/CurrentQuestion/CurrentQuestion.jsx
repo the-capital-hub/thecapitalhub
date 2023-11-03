@@ -8,6 +8,7 @@ export default function CurrentQuestion({
   handleAnswerSelect,
   handleBackToCategories,
   loading,
+  handlePostAnswer,
 }) {
   return (
     <div className="current_question mt-5">
@@ -40,16 +41,28 @@ export default function CurrentQuestion({
           })}
         </div>
       )}
-      {/* Go back to categories */}
-      {question && (
-        <button
-          type="button"
-          className="option_button back_button align-self-start mx-3"
-          onClick={handleBackToCategories}
-        >
-          Go back to Categories
-        </button>
-      )}
+      <div className="d-flex align-items-center gap-3 mx-3">
+        {/* Submit button for questions with options */}
+        {question?.options.length && (
+          <button
+            type="submit"
+            className="option_button back_button align-self-start"
+            onClick={handlePostAnswer}
+          >
+            Submit
+          </button>
+        )}
+        {/* Go back to categories */}
+        {question && (
+          <button
+            type="button"
+            className="option_button back_button align-self-start"
+            onClick={handleBackToCategories}
+          >
+            Back
+          </button>
+        )}
+      </div>
       {loading && (
         <div className="d-flex justify-content-center align-items-center py-3">
           <SpinnerBS spinnerClass="spinner-grow" colorClass={"color_main"} />
