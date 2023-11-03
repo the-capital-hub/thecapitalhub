@@ -48,7 +48,7 @@ export default function ExperienceModal() {
   // Handle file change
   async function handleFileChange(e) {
     let newFile = e.target.files[0];
-    console.log(newFile);
+    // console.log(newFile);
     if (!newFile) {
       return;
     }
@@ -89,14 +89,14 @@ export default function ExperienceModal() {
 
     if (isEditing) {
       const { _id: experienceId, ...updatedData } = formData;
-      console.log("edit", experienceId, updatedData);
+      // console.log("edit", experienceId, updatedData);
 
       try {
         const { data } = await updateRecentExperience(
           experienceId,
           updatedData
         );
-        console.log("update response", data);
+        // console.log("update response", data);
         dispatch(updateLoggedInUser({ recentExperience: data }));
       } catch (error) {
         console.error("Error saving Experience:", error);
@@ -105,10 +105,10 @@ export default function ExperienceModal() {
       }
     } else {
       try {
-        console.log("add exp", formData);
+        // console.log("add exp", formData);
 
         const { data } = await addRecentExperience(userId, formData);
-        console.log("Add response", data);
+        // console.log("Add response", data);
         dispatch(loginSuccess(data));
       } catch (error) {
         console.error("Error saving Experience:", error);

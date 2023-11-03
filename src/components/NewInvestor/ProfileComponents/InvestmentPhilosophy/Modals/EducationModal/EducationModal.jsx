@@ -41,6 +41,7 @@ export default function EducationModal() {
 
   //   State for loading
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   //   Ref for close button
   const closeRef = useRef(null);
@@ -48,7 +49,7 @@ export default function EducationModal() {
   // Handle file change
   async function handleFileChange(e) {
     let newFile = e.target.files[0];
-    console.log(newFile);
+    // console.log(newFile);
     if (!newFile) {
       return;
     }
@@ -70,7 +71,26 @@ export default function EducationModal() {
   // Handle Input change
   function handleInputChange(e) {
     const { name, value } = e.target;
+
     setFormData((prev) => ({ ...prev, [name]: value }));
+
+    if (name === "passoutYear") {
+      if (value.length === 0) {
+        setError(null);
+        return;
+      }
+
+      // if value length is < 4
+      if (value.length < 4) {
+        setError(null);
+        return;
+      }
+      // Test for numeric values
+      if (!/[0-9]{4}/.test(value)) {
+        setError("Please enter Valid Graduation Year");
+        return;
+      }
+    }
   }
 
   //   Handle Edit click
@@ -93,7 +113,7 @@ export default function EducationModal() {
 
       try {
         const { data } = await updateRecentEducation(educationId, updatedData);
-        console.log("update response", data);
+        // console.log("update response", data);
         dispatch(updateLoggedInUser({ recentEducation: data }));
       } catch (error) {
         console.error("Error saving Education:", error);
@@ -105,7 +125,7 @@ export default function EducationModal() {
         // console.log("add edu", formData);
 
         const { data } = await addRecentEducation(userId, formData);
-        console.log("Add response", data);
+        // console.log("Add response", data);
         dispatch(loginSuccess(data));
       } catch (error) {
         console.error("Error saving Education:", error);
@@ -179,6 +199,7 @@ export default function EducationModal() {
                   accept="*/image"
                   className="visually-hidden"
                   onChange={handleFileChange}
+                  required
                 />
               </fieldset>
 
@@ -192,6 +213,7 @@ export default function EducationModal() {
                   className="p-2 w-100 rounded-3 modal__input"
                   value={formData.schoolName}
                   onChange={handleInputChange}
+                  required
                 />
               </fieldset>
 
@@ -205,20 +227,27 @@ export default function EducationModal() {
                   className="p-2 w-100 rounded-3 modal__input"
                   value={formData.location}
                   onChange={handleInputChange}
+                  required
                 />
               </fieldset>
 
               {/* Passed out */}
               <fieldset>
-                <legend className="ps-1">Graduation</legend>
+                <legend className="ps-1">Graduation Year</legend>
                 <input
                   type="text"
+                  minLength={4}
+                  maxLength={4}
                   name="passoutYear"
                   id="passoutYear"
-                  className="p-2 w-100 rounded-3 modal__input"
+                  className={`p-2 w-100 rounded-3 modal__input ${
+                    error ? "error" : ""
+                  }`}
                   value={formData.passoutYear}
                   onChange={handleInputChange}
+                  required
                 />
+                <em className="small text-danger error_alert">{error}</em>
               </fieldset>
 
               {/* Course */}
@@ -231,6 +260,7 @@ export default function EducationModal() {
                   className="p-2 w-100 rounded-3 modal__input"
                   value={formData.course}
                   onChange={handleInputChange}
+                  required
                 />
               </fieldset>
 
