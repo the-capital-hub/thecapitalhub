@@ -26,7 +26,7 @@ export default function CurrentEducation({
       setDeleting(true);
       try {
         const response = await deleteRecentEducation(data._id);
-        console.log("del response", response);
+        // console.log("del response", response);
         dispatch(updateLoggedInUser({ recentEducation: response.data }));
       } catch (error) {
         console.error("Error deleting Education:", error);

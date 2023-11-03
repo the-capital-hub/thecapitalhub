@@ -60,12 +60,10 @@ export default function EducationModal() {
 
       // Set State
       setFormData((prev) => ({ ...prev, logo: baseImage }));
+      setPreview(previewImage);
     } catch (error) {
       console.log("Error getting base64:", error);
     }
-
-    // Set State
-    setPreview(previewImage);
   }
 
   // Handle Input change
@@ -75,20 +73,12 @@ export default function EducationModal() {
     setFormData((prev) => ({ ...prev, [name]: value }));
 
     if (name === "passoutYear") {
-      if (value.length === 0) {
-        setError(null);
-        return;
-      }
-
-      // if value length is < 4
-      if (value.length < 4) {
-        setError(null);
-        return;
-      }
       // Test for numeric values
       if (!/[0-9]{4}/.test(value)) {
         setError("Please enter Valid Graduation Year");
         return;
+      } else {
+        setError(null);
       }
     }
   }
@@ -103,6 +93,9 @@ export default function EducationModal() {
   // Handle Submit
   async function handleSubmit(e) {
     e.preventDefault();
+    if (error) {
+      return;
+    }
 
     // Set loading
     setLoading(true);
@@ -142,6 +135,7 @@ export default function EducationModal() {
     setLoading(false);
     setPreview(null);
     setIsEditing(false);
+    setError(null);
   }
 
   return (
@@ -198,7 +192,7 @@ export default function EducationModal() {
                   id="edulogo"
                   accept="*/image"
                   className="visually-hidden"
-                  onChange={handleFileChange}
+                  onInput={handleFileChange}
                   required
                 />
               </fieldset>
@@ -240,9 +234,7 @@ export default function EducationModal() {
                   maxLength={4}
                   name="passoutYear"
                   id="passoutYear"
-                  className={`p-2 w-100 rounded-3 modal__input ${
-                    error ? "error" : ""
-                  }`}
+                  className={`p-2 w-100 rounded-3 modal__input `}
                   value={formData.passoutYear}
                   onChange={handleInputChange}
                   required

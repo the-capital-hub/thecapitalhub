@@ -26,7 +26,7 @@ export default function CurrentExperience({
       setDeleting(true);
       try {
         const response = await deleteRecentExperience(data._id);
-        console.log("del response", response);
+        // console.log("del response", response);
         dispatch(updateLoggedInUser({ recentExperience: response.data }));
       } catch (error) {
         console.error("Error deleting Experience:", error);
