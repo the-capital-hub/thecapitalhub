@@ -26,6 +26,7 @@
       input.visually-hidden:is(:focus, :focus-within) + label {
         color: rgba(140, 90, 201, 1);
       }
+
       .upload__label {
         width: 150px;
         height: 150px;
@@ -43,6 +44,7 @@
           cursor: pointer;
         }
       }
+
       .modal__input {
         outline: none;
         border: 1px solid rgba(0, 0, 0, 0.2);
@@ -50,6 +52,16 @@
 
         &:focus {
           border-color: rgba(140, 90, 201, 1);
+        }
+      }
+
+      .error {
+        background-color: #ffa3a3;
+      }
+
+      .error_alert {
+        &:empty {
+          display: none;
         }
       }
     }

@@ -102,63 +102,6 @@ export default function InvestmentPhilosophy() {
           </div>
         </div>
         <div className="experience_cards">
-          {/* <div className="experience_card py-2 mt-1 row row-cols-1 row-cols-md-2">
-            <div className="img_container rounded d-flex align-items-center justify-content-center mx-auto col-6 col-md-2">
-              <img
-                className="rounded-circle"
-                src={linkSectorIcon}
-                height={100}
-                alt="experience"
-              />
-            </div>
-            <div className="description mt-1 mt-md-0 col-md-9 row row-cols-1 row-cols-md-2 row-cols-xl-3">
-              <div className="d-flex flex-column mb-1 mb-md-3">
-                <p className="text-secondary mb-1">Company Name</p>
-                <p className="m-0">The Capital HUB, India</p>
-              </div>
-              <div className="d-flex flex-column mb-1 mb-md-3">
-                <p className="text-secondary mb-1">Location</p>
-                <p className="m-0">Bangalore, India</p>
-              </div>
-              <div className="d-flex flex-column mb-1 mb-md-3">
-                <p className="text-secondary mb-1">Experience</p>
-                <p className="m-0">2Years 2 months, Present Full Time.</p>
-              </div>
-              <div className="d-flex flex-column mb-1 mb-md-3">
-                <p className="text-secondary mb-1">Role</p>
-                <p className="m-0">UI/UX Designer</p>
-              </div>
-            </div>
-          </div>
-          <div className="experience_card py-2 mt-1 row row-cols-1 row-cols-md-2">
-            <div className="img_container rounded d-flex align-items-center justify-content-center mx-auto col-6 col-md-2">
-              <img
-                className="rounded-circle"
-                src={linkSectorIcon}
-                height={100}
-                alt="experience"
-              />
-            </div>
-            <div className="description mt-1 mt-md-0 col-md-9 row row-cols-1 row-cols-md-2 row-cols-xl-3">
-              <div className="d-flex flex-column mb-1 mb-md-3">
-                <p className="text-secondary mb-1">Company Name</p>
-                <p className="m-0">The Capital HUB, India</p>
-              </div>
-              <div className="d-flex flex-column mb-1 mb-md-3">
-                <p className="text-secondary mb-1">Location</p>
-                <p className="m-0">Bangalore, India</p>
-              </div>
-              <div className="d-flex flex-column mb-1 mb-md-3">
-                <p className="text-secondary mb-1">Experience</p>
-                <p className="m-0">2Years 2 months, Present Full Time.</p>
-              </div>
-              <div className="d-flex flex-column mb-1 mb-md-3">
-                <p className="text-secondary mb-1">Role</p>
-                <p className="m-0">UI/UX Designer</p>
-              </div>
-            </div>
-          </div> */}
-
           {/* Loop cards here */}
           {loggedInUser?.recentExperience.map((data, index) => {
             return <ExperienceCard data={data} key={data._id} />;
@@ -178,35 +121,6 @@ export default function InvestmentPhilosophy() {
           </div>
         </div>
         <div className="experience_cards">
-          {/* <div className="experience_card py-2 mt-1 row row-cols-1 row-cols-md-2">
-            <div className="img_container rounded d-flex align-items-center justify-content-center mx-auto col-6 col-md-2">
-              <img
-                className="rounded-circle"
-                src={educationIcon}
-                height={100}
-                alt="education"
-              />
-            </div>
-            <div className="description mt-1 mt-md-0 col-md-9 row row-cols-1 row-cols-md-2 row-cols-xl-3">
-              <div className="d-flex flex-column mb-1 mb-md-3">
-                <p className="text-secondary mb-1">College Name</p>
-                <p className="m-0">IIIT, India</p>
-              </div>
-              <div className="d-flex flex-column mb-1 mb-md-3">
-                <p className="text-secondary mb-1">Location</p>
-                <p className="m-0">Bangalore, India</p>
-              </div>
-              <div className="d-flex flex-column mb-1 mb-md-3">
-                <p className="text-secondary mb-1">Passed Out</p>
-                <p className="m-0">2010 - 2014</p>
-              </div>
-              <div className="d-flex flex-column mb-1 mb-md-3">
-                <p className="text-secondary mb-1">Course</p>
-                <p className="m-0">B.Tech, Computer Science And Engineering.</p>
-              </div>
-            </div>
-          </div> */}
-
           {/* loop cards here */}
           {loggedInUser?.recentEducation.map((data, index) => {
             return (
