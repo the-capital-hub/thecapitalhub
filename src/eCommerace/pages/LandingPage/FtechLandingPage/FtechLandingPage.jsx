@@ -123,7 +123,7 @@ financial ease and security"
             <h6 className="title">Regular updates from our Product Manager</h6>
 
             <Link to="/web-development" className="LinkBtn">
-              Taking Us
+            Contact Us
             </Link>
           </div>
           <div className="help-card">
@@ -131,7 +131,7 @@ financial ease and security"
             <h6 className="title">Technical recommendation from core team</h6>
 
             <Link to="/web-development" className="LinkBtn">
-              Taking Us
+            Contact Us
             </Link>
           </div>
           <div className="help-card">
@@ -141,7 +141,7 @@ financial ease and security"
             </h6>
 
             <Link to="/web-development" className="LinkBtn">
-              Taking Us
+            Contact Us
             </Link>
           </div>
           <div className="help-card">
@@ -149,7 +149,7 @@ financial ease and security"
             <h6 className="title">Deployment handled by the Capital HUB team</h6>
 
             <Link to="/web-development" className="LinkBtn">
-              Taking Us
+              Contact Us
             </Link>
           </div>
           
@@ -225,19 +225,17 @@ financial ease and security"
                 <Link to="/web-development" className="LinkBtn btn btn-primary rounded-pill text-white px-4 py-1 fs-12">Taking Us</Link>
               </div>
             </div> */}
-          <div className="join-us-card rounded-4">
+          {/* <div className="join-us-card rounded-4">
             <img
               className="rounded"
               src={pramodImg}
-              width={400}
+              width={351}
               alt="Cost Savings"
             />
             <div className="p-3 ">
               <h6 className="mx-auto">pramod Badiger</h6>
               <p className="fs-14 mx-auto">Connect with our expert</p>
-              {/* <button className="btn btn-primary rounded-pill text-white px-4 py-1 fs-12">
-                  Learn More
-                </button> */}
+             
               <Link
                 to="https://www.linkedin.com/in/pramod-badiger-a3226618b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                 className="LinkBtn btn btn-primary rounded-pill text-white px-4 py-1 fs-12 mx-auto"
@@ -245,7 +243,43 @@ financial ease and security"
                 Connect
               </Link>
             </div>
-          </div>
+          </div> */}
+        </div>
+      </section>
+
+
+
+      <section className="contact-our-team container my-5 row justify-content-around bg-black rounded-4 p-2 p-md-5 align-items-center mb-4">
+        <div className="col-8 col-md-3">
+          <img
+            className="rounded-circle"
+            src={pramodImg}
+            width={250}
+            height={250}
+            style={{ objectFit: "cover" }}
+            alt="Cost Savings"
+          />
+        </div>
+        <div className="col-10 col-md-8 d-flex flex-column gap-3">
+          <h3 className="text-white">
+            "Dejection is a sign of failure but it becomes the cause of success"
+          </h3>
+          <p className="text-secondary">
+            Founder and CEO of The Capital HUB, is a dynamic
+            entrepreneur known for his innovative approach. He values structured
+            processes but enjoys unscripted conversations, balancing formality
+            and informality. Pramod is a visionary who dives deep into details
+            and foresees the future, offering steadfast support to founders in
+            shaping their dreams with conviction and individuality at
+            Capital HUB.
+          </p>
+          <h4 className="text-light">Pramod Badiger</h4>
+          <Link
+            to="https://www.linkedin.com/in/pramod-badiger-a3226618b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            className="LinkBtn btn btn-primary rounded-pill text-white px-4 py-2 fs-12 w-50"
+          >
+            Connect with our Expert
+          </Link>
         </div>
       </section>
       <section className="trusted-security">
