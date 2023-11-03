@@ -1,4 +1,13 @@
 .food_landing-page_Container {
+  --color-primary: #ff7a00;
+  --color-primary-text: #fff;
+  --color-form-primary: #ff7a00;
+  --color-form-btn-text: #fff;
+
+  &.container-fluid {
+    padding: 0;
+  }
+
   .LinkBtn {
     background: #ff7a00;
     border: none;
@@ -6,11 +15,20 @@
       background-color: #f19f52;
       color: white;
     }
+
+    @media (min-width: 992px) {
+      width: 75%;
+    }
+
+    @media (min-width: 1200px) {
+      width: 50%;
+    }
   }
   .frist-section {
     background-color: #e6e8dd;
     border-radius: 30px;
     margin: 20px;
+    margin-bottom: 0;
     padding: 15px;
     position: relative;
 
@@ -37,7 +55,6 @@
         border: none;
         text-decoration: none;
 
-
         &:hover {
           background-color: #f19f52;
           color: white;
@@ -48,15 +65,17 @@
     .right-section {
       img {
         width: 70%;
+        flex: 0 0 300px;
+        height: auto;
       }
     }
-    .down-arrow{
-width: 45px;
-height: 60px;
-position: absolute;
-bottom: -30px;
-left: 42%;
-margin: 10px;
+    .down-arrow {
+      width: 45px;
+      height: 60px;
+      position: absolute;
+      bottom: -30px;
+      left: 42%;
+      margin: 10px;
     }
   }
 
@@ -173,7 +192,6 @@ margin: 10px;
         border: none;
         text-decoration: none;
 
-
         &:hover {
           background-color: #f19f52;
           color: white;
@@ -234,15 +252,12 @@ margin: 10px;
       border: none;
       text-decoration: none;
 
-
       &:hover {
         background-color: #f19f52;
         color: white;
       }
     }
   }
-
-
 
   .help-cards {
     display: flex;
@@ -298,7 +313,7 @@ margin: 10px;
         border-radius: 50px;
         background-color: #ff7a00;
         color: white;
-        
+
         padding: 5px 20px;
         font-size: 14px;
         text-decoration: none;
@@ -312,42 +327,42 @@ margin: 10px;
     }
   }
 
-  .card_bg{
+  .card_bg {
     border-radius: 15px;
     // padding: 20px;
-     background-color: #5c6ff6;
-     .join-us-card {
-       height: 400px;
-       width: 351px;
-       background-color: white;
-       display: flex;
-       flex-direction: column;
-       justify-content: center;
-       // margin-left: 50%;
-       align-items: center;
-       img{
-         align-self: center;
-       }
-       & > div {
-         display: flex;
-         flex-direction: column;
-         align-items: start;
-         flex-grow: 1;
-         h6 {
-           font-weight: 600;
-           color: #5c59c1;
-         }
-   
-         .LinkBtn {
-           background: #ff7a00;
-           margin-top: auto;
-           align-self: end;
-           position: relative;
-           right: 10px;
-         }
-       }
-     }
-   }
+    background-color: #5c6ff6;
+    .join-us-card {
+      height: 400px;
+      width: 351px;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      // margin-left: 50%;
+      align-items: center;
+      img {
+        align-self: center;
+      }
+      & > div {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        flex-grow: 1;
+        h6 {
+          font-weight: 600;
+          color: #5c59c1;
+        }
+
+        .LinkBtn {
+          background: #ff7a00;
+          margin-top: auto;
+          align-self: end;
+          position: relative;
+          right: 10px;
+        }
+      }
+    }
+  }
 
   .fifth-section {
     background-color: #383838;
@@ -397,18 +412,17 @@ margin: 10px;
 @media (min-width: 768px) {
   .food_landing-page_Container {
     .frist-section {
-
-      .down-arrow{
+      .down-arrow {
         width: 45px;
         height: 60px;
         position: absolute;
         bottom: -30px;
         left: 48.5%;
         margin: 10px;
-            }
+      }
     }
-    .two-scroll-section{
-      h1{
+    .two-scroll-section {
+      h1 {
         margin: 30px;
       }
     }

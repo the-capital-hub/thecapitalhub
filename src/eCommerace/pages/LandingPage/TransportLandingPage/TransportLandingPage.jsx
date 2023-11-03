@@ -10,10 +10,13 @@ import {
 } from "../../../../Images/Ecommerace/FtechlandingPage";
 import pramodImg from "../../../../Images/aboutUs/Pramod.jpeg";
 import tchLogo from "../../../../Images/RoundLogo.png";
+import ContactForm from "../../../Components/Shared/ContactForm/ContactForm";
+import ServiceStats from "../../../Components/Shared/ServiceStats/ServiceStats";
+import OurClients from "../../../Components/Shared/OurClients/OurClients";
 
 function TransportLandingPage() {
   return (
-    <div className="transport-landing-page container container-md-fluid">
+    <div className="transport-landing-page container-fluid">
       <Helmet>
         <meta charSet="utf-8" />
         <title> Build your logistics application with Capital HUB!</title>
@@ -22,7 +25,9 @@ function TransportLandingPage() {
           content="Experience efficient, sustainable, and reliable transportation solutions with Capital Hub. Send your belongings worldwide, with customizable pick-up and delivery options, and simplified logistics management. See why our customers trust us for their shipping needs."
         />
       </Helmet>
-      <div className="first-section d-flex flex-column   ">
+
+      {/* Hero section */}
+      <div className="container mx-auto first-section d-flex flex-column   ">
         <div className="inner-section d-flex flex-column justify-content-evenly flex-md-row">
           <div className="left-section d-flex flex-column justify-content-center gap-4">
             {/* <h6>#1 Logistic Platform</h6> */}
@@ -36,7 +41,7 @@ function TransportLandingPage() {
               deliveries, and watch your worries fade away.
             </p>
             <div className="d-flex gap-3 mb-3">
-              <Link to="/web-development" className="LinkBtn shadow-sm">
+              <Link to="/contactus" className="LinkBtn shadow-sm">
                 Say Hello
               </Link>
               <Link
@@ -55,7 +60,10 @@ function TransportLandingPage() {
         <div className="img-button">{/* <button>Customers</button> */}</div>
       </div>
 
-      <div className="second-section container d-flex flex-column  justify-content-evenly flex-md-row p-5 align-items-center">
+      {/* Service Stats */}
+      <ServiceStats />
+
+      <div className="second-section container mx-auto d-flex flex-column  justify-content-evenly flex-md-row p-5 align-items-center">
         <div className="left-section  ">
           <img src={assets.mobileLocation} alt="white-truck" />
         </div>
@@ -72,7 +80,7 @@ function TransportLandingPage() {
             proin risus Sit purus ante dictum in malesuada id. it purus ante
             dictum in malesuada id.
           </p> */}
-          <Link to="/web-development" className="LinkBtn">
+          <Link to="/contactus" className="LinkBtn">
             Get in touch
           </Link>
           {/* <div className="number-div d-flex flex-column  justify-content-evenly flex-md-row">
@@ -92,7 +100,7 @@ function TransportLandingPage() {
         </div>
       </div>
 
-      <div className="thired-section d-flex flex-column  justify-content-evenly flex-md-row align-items-center">
+      <div className="container mx-auto thired-section d-flex flex-column  justify-content-evenly flex-md-row align-items-center">
         <div className="left-section p-md-5  m-md-5  d-flex flex-column align-items-center align-items-md-start w-100">
           <h1>
             {/* Customizable Pick-Up and Delivery -&gt;  */} Customizable
@@ -115,7 +123,7 @@ function TransportLandingPage() {
         </div>
       </div>
 
-      <div className="short-description text-center">
+      <div className="container mx-auto short-description text-center">
         <h2 className="mx-auto">Pay your development fee in tranches</h2>
         <p className="text-center my-2 my-lg-4">
           Capital HUB supports the startup ecosystem by accepting payment in
@@ -124,7 +132,7 @@ function TransportLandingPage() {
         </p>
       </div>
 
-      <div className="feature-cards flex-column flex-md-row">
+      <div className="container mx-auto feature-cards flex-column flex-md-row">
         <div className="feature-card">
           <img src={InsureRight} alt="Insure Right" />
           <h6>Simple Landing Page</h6>
@@ -142,7 +150,7 @@ function TransportLandingPage() {
         </div>
       </div>
 
-      <div className="fourth-section  d-flex flex-column  justify-content-center align-items-center gap-5 flex-md-row">
+      <div className="container mx-auto fourth-section  d-flex flex-column  justify-content-center align-items-center gap-5 flex-md-row">
         <div className="left-section">
           <img src={assets.singleMobile} alt="international" />
         </div>
@@ -153,13 +161,13 @@ function TransportLandingPage() {
             platform streamlines communication, tracking, and management for
             greater efficiency and control over all your logistics needs
           </p>
-          <Link to="/web-development" className="LinkBtn">
+          <Link to="/contactus" className="LinkBtn">
             Contact Our Team
           </Link>
         </div>
       </div>
 
-      <div className="help-cards flex-column flex-md-row ">
+      <div className="container mx-auto help-cards flex-column flex-md-row flex-md-wrap ">
         <div className="help-card">
           <p className="count">01.</p>
           <h6 className="title">
@@ -223,8 +231,8 @@ function TransportLandingPage() {
         </div>
       </div> */}
 
-      <section className="contact-our-team row justify-content-around bg-black rounded-4 p-2 p-md-5 align-items-center">
-        <div className="col-8 col-md-3">
+      <section className="container mx-auto contact-our-team row justify-content-around bg-black rounded-4 p-2 p-md-5 py-3 align-items-center">
+        <div className="col-8 col-md-4">
           <img
             className="rounded-circle"
             src={pramodImg}
@@ -234,18 +242,18 @@ function TransportLandingPage() {
             alt="Cost Savings"
           />
         </div>
-        <div className="col-10 col-md-8 d-flex flex-column gap-3">
+        <div className="col-10 col-md-6 mt-3 mt-md-0 d-flex flex-column gap-3">
           <h3 className="text-white">
             "Dejection is a sign of failure but it becomes the cause of success"
           </h3>
           <p className="text-secondary">
-            Founder and CEO of The Capital HUB, is a dynamic
-            entrepreneur known for his innovative approach. He values structured
-            processes but enjoys unscripted conversations, balancing formality
-            and informality. Pramod is a visionary who dives deep into details
-            and foresees the future, offering steadfast support to founders in
-            shaping their dreams with conviction and individuality at
-            Capital HUB.
+            Founder and CEO of The Capital HUB, is a dynamic entrepreneur known
+            for his innovative approach. He values structured processes but
+            enjoys unscripted conversations, balancing formality and
+            informality. Pramod is a visionary who dives deep into details and
+            foresees the future, offering steadfast support to founders in
+            shaping their dreams with conviction and individuality at Capital
+            HUB.
           </p>
           <h4 className="text-light">Pramod Badiger</h4>
           <Link
@@ -257,7 +265,7 @@ function TransportLandingPage() {
         </div>
       </section>
 
-      <div className="fifth-section  d-flex flex-column  justify-content-center align-items-center gap-5 flex-md-row">
+      <div className="container mx-auto fifth-section  d-flex flex-column  justify-content-center align-items-center gap-5 flex-md-row">
         <div className="left-section d-flex flex-column gap-3">
           <h1>Be part of the Capital Hub Platform</h1>
           <img
@@ -291,7 +299,7 @@ function TransportLandingPage() {
         </div>
       </div>
 
-      <div className="last-section">
+      <div className="container mx-auto last-section">
         {/* <div className="left-section">
           <h1>What our Customer’s say about us</h1>
           <p>What our Customer’s say about us</p>
@@ -323,6 +331,14 @@ function TransportLandingPage() {
                 </div>
             </div>
         </div> */}
+      </div>
+
+      {/* OurClients */}
+      <OurClients />
+
+      {/* contact form */}
+      <div className="container">
+        <ContactForm />
       </div>
     </div>
   );
