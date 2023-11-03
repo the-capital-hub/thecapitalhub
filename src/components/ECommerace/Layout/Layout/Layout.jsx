@@ -4,7 +4,6 @@ import "./Layout.scss";
 // import Footer from "../Footer/Footer";
 import Footer from "../../../../components/Footer/Footer";
 
-
 function Layout() {
   return (
     <>
@@ -12,7 +11,7 @@ function Layout() {
       <main className="body">
         <Outlet />
       </main>
-      <Footer />
+      <Footer className="bg-black" />
     </>
   );
 }
