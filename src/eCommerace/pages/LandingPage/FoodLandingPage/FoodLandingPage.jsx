@@ -209,7 +209,7 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
         </div>
       </div>
 
-      <div className="card_bg p-md-5 py-2">
+      <div className="card_bg p-md-5 py-2 mb-4">
         <div className="join-us-card rounded-4 mx-auto ">
           <img
             className="rounded "
@@ -237,14 +237,14 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
         </h1>
         <Reviewcarousel reviews={reviews} />
       </div> */}
-      <div className="last text-center m-5">
-        <h1>Subscribe Now</h1>
+      {/* <div className="last text-center m-5">
+        <h1>Subscribe Now</h1> */}
         {/* <p>
           Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit
           proin risus Sit purus ante dictum in malesuada id.{" "}
         </p> */}
 
-        <div className=" input-div rounded-pill d-flex justify-content-center  shadow-lg  flex-row mx-md-auto ">
+        {/* <div className=" input-div rounded-pill d-flex justify-content-center  shadow-lg  flex-row mx-md-auto ">
           <input
             type="text"
             name="search"
@@ -254,7 +254,7 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
           />
           <button className="rounded-pill">Subscribe</button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
