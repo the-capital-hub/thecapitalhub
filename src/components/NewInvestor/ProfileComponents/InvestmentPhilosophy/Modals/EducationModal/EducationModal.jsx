@@ -20,6 +20,7 @@ import {
   updateLoggedInUser,
 } from "../../../../../../Store/features/user/userSlice";
 import SpinnerBS from "../../../../../Shared/Spinner/SpinnerBS";
+import CurrentEducation from "./CurrentEducation";
 
 const initialForm = {
   logo: "",
@@ -83,28 +84,6 @@ export default function EducationModal() {
     setIsEditing(true);
   }
 
-  // Handle delete click
-  async function handleDeleteClick(e, data) {
-    let confirmed = window.confirm(
-      `Are you sure you want to delete - "${data.companyName}"?`
-    );
-    if (confirmed) {
-      // Set deleting
-      setDeleting(true);
-      try {
-        const response = await deleteRecentEducation(data._id);
-        console.log("del response", response);
-        dispatch(updateLoggedInUser({ recentEducation: response.data }));
-      } catch (error) {
-        console.error("Error deleting Education:", error);
-      } finally {
-        setDeleting(false);
-      }
-    } else {
-      return;
-    }
-  }
-
   // Handle Submit
   async function handleSubmit(e) {
     e.preventDefault();
@@ -127,7 +106,7 @@ export default function EducationModal() {
       }
     } else {
       try {
-        console.log("add exp", formData);
+        console.log("add edu", formData);
 
         const { data } = await addRecentEducation(userId, formData);
         console.log("Add response", data);
@@ -165,44 +144,12 @@ export default function EducationModal() {
               {/* loop current education here */}
               {recentEducation?.map((data, index) => {
                 return (
-                  <div
-                    className="border rounded-4 p-2 d-flex align-items-center justify-content-between"
+                  <CurrentEducation
+                    data={data}
                     key={data._id}
-                  >
-                    <img
-                      src={data.logo}
-                      alt="Institution logo"
-                      height={"40px"}
-                      width={"40px"}
-                      className="rounded-circle"
-                      style={{ objectFit: "cover" }}
-                    />
-
-                    <h6 className="m-0">{data.schoolName}</h6>
-
-                    <div className="d-flex align-items-center gap-2">
-                      <button
-                        type="button"
-                        className="btn green_button px-3 d-flex align-items-center justify-content-center"
-                        onClick={(e) => handleEditClick(e, data)}
-                        disabled={loading}
-                      >
-                        <IconEdit height="1.125rem" width="1.125rem" />
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-danger d-flex align-items-center justify-content-center"
-                        onClick={(e) => handleDeleteClick(e, data)}
-                        disabled={loading}
-                      >
-                        {deleting ? (
-                          <SpinnerBS spinnerSizeClass="spinner-border-sm" />
-                        ) : (
-                          <IconDeleteFill height="1.125rem" width="1.125rem" />
-                        )}
-                      </button>
-                    </div>
-                  </div>
+                    loading={loading}
+                    handleEditClick={handleEditClick}
+                  />
                 );
               })}
             </div>
@@ -246,6 +193,7 @@ export default function EducationModal() {
                   name="schoolName"
                   id="schoolName"
                   className="p-2 w-100 rounded-3 modal__input"
+                  value={formData.schoolName}
                   onChange={handleInputChange}
                 />
               </fieldset>
@@ -258,6 +206,7 @@ export default function EducationModal() {
                   name="location"
                   id="location"
                   className="p-2 w-100 rounded-3 modal__input"
+                  value={formData.location}
                   onChange={handleInputChange}
                 />
               </fieldset>
@@ -270,6 +219,7 @@ export default function EducationModal() {
                   name="passoutYear"
                   id="passoutYear"
                   className="p-2 w-100 rounded-3 modal__input"
+                  value={formData.passoutYear}
                   onChange={handleInputChange}
                 />
               </fieldset>
@@ -282,6 +232,7 @@ export default function EducationModal() {
                   name="course"
                   id="course"
                   className="p-2 w-100 rounded-3 modal__input"
+                  value={formData.course}
                   onChange={handleInputChange}
                 />
               </fieldset>
