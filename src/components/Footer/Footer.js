@@ -6,9 +6,9 @@ import InIcon from "../../Images/In.svg";
 import YtIcon from "../../Images/Yt.svg";
 import { Link } from "react-router-dom";
 
-const Footer = () => {
+const Footer = ({ className }) => {
   return (
-    <div className="container-fluid footer_container">
+    <div className={`container-fluid footer_container ${className}`}>
       <div className="container">
         <div className="row">
           <div className="col-md-3 col-sm-12 d-flex justify-content-center align-items-center ">
@@ -54,12 +54,12 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-              <Link to="/term-of-service"  className="text-white">
+                <Link to="/term-of-service" className="text-white">
                   Terms of service
                 </Link>
               </li>
               <li>
-              <Link to="/privacy"  className="text-white">
+                <Link to="/privacy" className="text-white">
                   Privacy
                 </Link>
               </li>
