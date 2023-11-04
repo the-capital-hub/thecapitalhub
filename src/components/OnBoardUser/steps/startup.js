@@ -58,10 +58,9 @@ const homePage = [
     content:
       "Your profile page describes everything relevant about you as a Professional.",
     placement: "auto",
-    placementBeacon: "right",
   },
   {
-    target: "#createAPost",
+    target: "#sidebar_createAPost",
     title: "Create A Post",
     content: "Share your thoughts with other Founders and Investors.",
     placement: "auto",

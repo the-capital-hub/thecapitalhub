@@ -4,13 +4,13 @@ import logoIcon from "../../../Images/manageAccount/Group 15186.svg";
 import profileIcon from "../../../Images/investorIcon/profilePic.webp";
 import profileIconRaghu from "../../../Images/aboutUs/Raghu.jpeg";
 import profileIconRaju from "../../../Images/Rectangle 1895.png";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { changePasswordAPI } from "../../../Service/user";
 import { useEffect, useState } from "react";
 import LogOutPopUp from "../../PopUp/LogOutPopUp/LogOutPopUp";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../../../Store/Action/userAction";
+import { logout } from "../../../Store/features/user/userSlice";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 
