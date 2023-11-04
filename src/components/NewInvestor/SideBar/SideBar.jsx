@@ -27,7 +27,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import LogOutPopUp from "../../PopUp/LogOutPopUp/LogOutPopUp";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { logout } from "../../../Store/Action/userAction";
+import { logout } from "../../../Store/features/user/userSlice";
 import connectionsIcon from "../../../Images/investorsidebar/connection.svg";
 import { PlusIcon } from "../SvgIcons";
 import companyProfileIcon from "../../../Images/Investor/Sidebar/company.svg";

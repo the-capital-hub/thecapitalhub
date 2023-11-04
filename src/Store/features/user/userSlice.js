@@ -5,6 +5,7 @@ const initialState = {
   loggedInUser: JSON.parse(localStorage.getItem("loggedInUser")) || null,
   error: null,
   recommendations: null,
+  company: null,
 };
 
 export const userSlice = createSlice({
@@ -38,6 +39,12 @@ export const userSlice = createSlice({
     updateLoggedInUser: (state, action) => {
       state.loggedInUser = { ...state.loggedInUser, ...action.payload };
     },
+    setUserCompany: (state, action) => {
+      state.company = action.payload;
+    },
+    updateUserCompany: (state, action) => {
+      state.company = { ...state.company, ...action.payload };
+    },
   },
 });
 
@@ -47,6 +54,18 @@ export const {
   logout,
   setRecommendations,
   updateLoggedInUser,
+  setUserCompany,
+  updateUserCompany,
 } = userSlice.actions;
+
+// LoggedInUser selectors
+export const getIsInvestor = (state) => {
+  return state.user.loggedInUser.isInvestor === "true" ? true : false;
+};
+
+// company selectors
+export const getCompanyName = (state) => state.user.company?.company;
+export const getColorCardData = (state) => state.user.company?.colorCard;
+export const getCompanyFounderId = (state) => state.user.company?.founderId;
 
 export default userSlice.reducer;
