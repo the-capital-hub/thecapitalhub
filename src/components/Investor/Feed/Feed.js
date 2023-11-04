@@ -22,6 +22,9 @@ import OnBoardUser from "../../OnBoardUser/OnBoardUser";
 import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
 
 const Feed = () => {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const dispatch = useDispatch();
+
   const [popupOpen, setPopupOpen] = useState(false);
   const [allPosts, setAllPosts] = useState([]);
   const [newPost, setNewPost] = useState(false);
@@ -29,12 +32,11 @@ const Feed = () => {
   const [getSavedPostData, setgetSavedPostData] = useState("");
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
-  const dispatch = useDispatch();
+
+  // Methods
   const openPopup = () => {
     setPopupOpen(!popupOpen);
   };
-
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const appendDataToAllPosts = (data) => {
     setAllPosts([data, ...allPosts]);
@@ -60,6 +62,7 @@ const Feed = () => {
         console.log(err);
       });
   };
+
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const showPopup = queryParams.get("showPopup") === "true";

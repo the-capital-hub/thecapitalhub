@@ -66,7 +66,7 @@ function OtherUserProfile() {
     <div className="mt-5 mt-md-4">
       <MaxWidthWrapper>
         <section className="other_user_profile">
-          {/* <SmallProfileCard className="mt-lg-2 mt-xl-0" text="User Details" /> */}
+          <SmallProfileCard className="mt-lg-2 mt-xl-0" text="User Details" />
           {userData ? (
             <>
               <div className="row profile rounded-4 border shadow-sm">
