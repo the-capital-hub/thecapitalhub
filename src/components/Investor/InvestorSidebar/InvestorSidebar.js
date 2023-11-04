@@ -25,27 +25,27 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import LogOutPopUp from "../../PopUp/LogOutPopUp/LogOutPopUp";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { logout } from "../../../Store/Action/userAction";
+import { logout } from "../../../Store/features/user/userSlice";
 import connectionsIcon from "../../../Images/investorsidebar/connection.svg";
 import CommunitiesIcon from "../ChatComponents/CommunitiesIcon";
 import ModalBsLauncher from "../../PopUp/ModalBS/ModalBsLauncher/ModalBsLauncher";
-import ModalBSBody from "../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
-import ModalBSContainer from "../../PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
-import ModalBSHeader from "../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
-import { AiOutlineUsergroupAdd } from "react-icons/ai";
-import NewCommunityModal from "../ChatComponents/NewCommunityModal";
 import companyProfileIcon from "../../../Images/StartUp/Sidebar/companyProfile.svg";
 import ExploreIcon from "../../../Images/Investor/Sidebar/explore.svg";
 
 // Startup Sidebar
 const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const dispatch = useDispatch();
+
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const isMobileView = useSelector((state) => state.design.isMobileView);
+
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [isCommunityDetailOpen, setIsCommunityDetailOpen] = useState(false);
+
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Methods
   const menuIconClick = () => {
     setSidebarCollapsed(true);
   };
@@ -113,9 +113,9 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
         onClick={menuIconClick}
       >
         {sidebarCollapsed ? (
-          <img className="close-menu-right" src={ArrowRight} alt="image" />
+          <img className="close-menu-right" src={ArrowRight} alt="right icon" />
         ) : (
-          <img className="close-menu-left" src={ArrowLeft} alt="image" />
+          <img className="close-menu-left" src={ArrowLeft} alt="right icon" />
         )}
       </div>
       <div id="header">
@@ -174,19 +174,19 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="home?showPopup=true"
-                  id="createAPost"
+                  id="sidebar_createAPost"
                 >
                   {sidebarCollapsed ? (
                     <>
                       <button className="plus_btn">
-                        <img src={PlusIcon} alt="image" />
+                        <img src={PlusIcon} alt="Plus icon" />
                       </button>
                     </>
                   ) : (
                     <>
                       <button className="create_post px-3">
                         <span className="ms-0">Create a post</span>
-                        <img src={PlusIcon} alt="image" />
+                        <img src={PlusIcon} alt="Plus icon" />
                       </button>
                     </>
                   )}
@@ -200,7 +200,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/home"
                 >
-                  <img src={HomeIcon} alt="image" />
+                  <img src={HomeIcon} alt="Home" />
                   {!sidebarCollapsed && <span>Home</span>}
                 </Link>
               </MenuItem>
@@ -214,7 +214,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/company-profile"
                   id="sidebar_companyProfile"
                 >
-                  <img src={companyProfileIcon} alt="image" />
+                  <img src={companyProfileIcon} alt="company" />
                   {!sidebarCollapsed && <span>Company</span>}
                 </Link>
               </MenuItem>
@@ -229,7 +229,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/explore"
                   id="sidebar_explore"
                 >
-                  <img src={ExploreIcon} alt="image" />
+                  <img src={ExploreIcon} alt="explore" />
                   {!sidebarCollapsed && <span>Explore</span>}
                 </Link>
               </MenuItem>
@@ -310,7 +310,12 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/documentation"
                   id="sidebar_documentation"
                 >
-                  <img src={BookIcon} alt="image" width="17px" height="17px" />
+                  <img
+                    src={BookIcon}
+                    alt="documentation"
+                    width="17px"
+                    height="17px"
+                  />
                   {!sidebarCollapsed && <span>Documentation</span>}
                 </Link>
               </MenuItem>
@@ -323,7 +328,12 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/savePost"
                   id="sidebar_savedPosts"
                 >
-                  <img src={SaveIcon} alt="image" width="17px" height="17px" />
+                  <img
+                    src={SaveIcon}
+                    alt="saved posts"
+                    width="17px"
+                    height="17px"
+                  />
                   {!sidebarCollapsed && <span>Saved posts</span>}
                 </Link>
               </MenuItem>
@@ -339,7 +349,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 >
                   <img
                     src={connectionsIcon}
-                    alt="image"
+                    alt="connections"
                     width="17px"
                     height="17px"
                   />
@@ -396,7 +406,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   //  onClick={() => setSidebarCollapsed(true)}
                   to="/help"
                 >
-                  <img src={Setting} alt="image" width="17px" height="17px" />
+                  <img src={Setting} alt="help" width="17px" height="17px" />
                   {!sidebarCollapsed && <span>Help</span>}
                 </Link>
               </MenuItem>
@@ -408,7 +418,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/"
                 >
-                  <img src={HomeIcon} alt="image" />
+                  <img src={HomeIcon} alt="go to platform" />
                   {!sidebarCollapsed && <span>Go-to Platform</span>}
                 </Link>
               </MenuItem>
@@ -430,7 +440,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           <SidebarFooter>
             <Menu iconShape="round">
               <MenuItem onClick={handleLogout}>
-                <img src={ExitIcon} alt="image" width="17px" height="17px" />
+                <img src={ExitIcon} alt="logout" width="17px" height="17px" />
                 {!sidebarCollapsed && <span>Log out</span>}
               </MenuItem>
             </Menu>
