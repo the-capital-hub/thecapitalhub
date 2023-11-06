@@ -4,7 +4,7 @@ import OnePagerTeamMember from "./OnePagerTeamMember/OnePagerTeamMember";
 
 export default function OnePagerTeam({ team }) {
   // Mock data array
-  let dataArray = [1, 1, 1, 1, 1, 1, 1];
+  // let dataArray = [1, 1, 1, 1, 1, 1, 1];
 
   return (
     <div className="onePager_Team pb-2">
