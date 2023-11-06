@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./login.scss";
 import RegisterIcon from "../../Images/Group 21.svg";
-import GIcon from "../../Images/Group 22.svg";
-import FIcon from "../../Images/Group 23.svg";
-import AIcon from "../../Images/Group 24.svg";
+// import GIcon from "../../Images/Group 22.svg";
+// import FIcon from "../../Images/Group 23.svg";
+// import AIcon from "../../Images/Group 24.svg";
 import PhoneInput from "react-phone-number-input";
 import { Link, useNavigate } from "react-router-dom";
 import { googleLoginAPI, postUserLogin } from "../../Service/user";
@@ -22,7 +22,7 @@ import ResetPasswordPopUp from "../PopUp/RequestPasswordPopUp/RequestPasswordPop
 import SpinnerBS from "../Shared/Spinner/SpinnerBS";
 
 const Login = () => {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  // const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -198,9 +198,9 @@ const Login = () => {
           <h3>Welcome back!</h3>
           <img
             src={RegisterIcon}
-            alt="image"
+            alt="register"
             className="img-fluid"
-            loading="lazy"
+            loading="eager"
           />
         </div>
 

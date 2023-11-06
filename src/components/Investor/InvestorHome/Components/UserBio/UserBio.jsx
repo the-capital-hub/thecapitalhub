@@ -28,12 +28,22 @@ export default function UserBio() {
         <div className="personal_information_header">
           <h2 className="typography">Bio</h2>
           <span className="ms-auto">
-            <button onClick={() => setIsBioEditable(!isBioEditable)}>
+            <button
+              type="button"
+              onClick={() => {
+                setBioContent(userBio);
+                setIsBioEditable(!isBioEditable);
+              }}
+            >
               {isBioEditable ? "Cancel" : "Edit"}
               <CiEdit />
             </button>
             {isBioEditable && (
-              <button className="ms-2" onClick={() => submitBioHandler()}>
+              <button
+                type="submit"
+                className="ms-2"
+                onClick={() => submitBioHandler()}
+              >
                 Save <CiSaveUp2 />
               </button>
             )}

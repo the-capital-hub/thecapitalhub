@@ -38,6 +38,7 @@
     fieldset,
     legend {
       all: revert;
+      margin: 0;
     }
 
     fieldset {
@@ -46,7 +47,10 @@
       background-color: transparent;
       padding: 0;
       position: relative;
-      width: 80%;
+      width: 100%;
+      @media (min-width: 1400px) {
+        width: 80%;
+      }
 
       &:focus-within.startup {
         transition: border 0.15s ease-in-out;

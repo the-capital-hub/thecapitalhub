@@ -41,13 +41,10 @@ function TransportLandingPage() {
               deliveries, and watch your worries fade away.
             </p>
             <div className="d-flex gap-3 mb-3">
-              <Link to="/contactus" className="LinkBtn shadow-sm">
+              <Link to="" className="LinkBtn shadow-sm">
                 Say Hello
               </Link>
-              <Link
-                to="/web-development/portfolio"
-                className="LinkBtn LinkBtn-white shadow-sm"
-              >
+              <Link to="" className="LinkBtn LinkBtn-white shadow-sm">
                 Our Portfolio
               </Link>
             </div>
@@ -80,7 +77,7 @@ function TransportLandingPage() {
             proin risus Sit purus ante dictum in malesuada id. it purus ante
             dictum in malesuada id.
           </p> */}
-          <Link to="/contactus" className="LinkBtn">
+          <Link to="" className="LinkBtn">
             Get in touch
           </Link>
           {/* <div className="number-div d-flex flex-column  justify-content-evenly flex-md-row">
@@ -161,13 +158,13 @@ function TransportLandingPage() {
             platform streamlines communication, tracking, and management for
             greater efficiency and control over all your logistics needs
           </p>
-          <Link to="/contactus" className="LinkBtn">
+          <Link to="" className="LinkBtn">
             Contact Our Team
           </Link>
         </div>
       </div>
 
-      <div className="container mx-auto help-cards flex-column flex-md-row flex-md-wrap ">
+      <div className=" mx-auto help-cards flex-column flex-md-row flex-md-wrap ">
         <div className="help-card">
           <p className="count">01.</p>
           <h6 className="title">
@@ -282,13 +279,10 @@ function TransportLandingPage() {
             into the fast lane of success!
           </p>
           <div className="d-flex gap-3 mb-3">
-            <Link to="/web-development" className="LinkBtn shadow-sm">
+            <Link to="" className="LinkBtn shadow-sm">
               Get started
             </Link>
-            <Link
-              to="/web-development/portfolio"
-              className="LinkBtn LinkBtn-white shadow-sm"
-            >
+            <Link to="" className="LinkBtn LinkBtn-white shadow-sm">
               Our Portfolio
             </Link>
           </div>
@@ -334,11 +328,11 @@ function TransportLandingPage() {
       </div>
 
       {/* OurClients */}
-      <OurClients />
+      <OurClients className="bg-dark" />
 
       {/* contact form */}
-      <div className="container">
-        <ContactForm />
+      <div className="container row m-0 mx-auto">
+        <ContactForm className="col-12 col-md-8 mx-auto" />
       </div>
     </div>
   );
