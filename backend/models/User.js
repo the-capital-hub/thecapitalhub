@@ -128,7 +128,7 @@ const userSchema = new Schema(
     recentEducation: [
       {
         logo: String,
-        collegeName: String,
+        schoolName: String,
         location: String,
         passoutYear: Number,
         course: String,

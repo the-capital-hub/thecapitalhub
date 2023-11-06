@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./ConnectionCard.scss";
-import testimg from "../../../Images/aboutUs/Pramod.jpeg";
 import { getUserConnections } from "../../../Service/user";
 import { useNavigate } from "react-router-dom";
+import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
+import { useSelector } from "react-redux";
 
-function ConnectionCard({ userId }) {
+function ConnectionCard() {
+  // Fetch from store
+  const userId = useSelector((state) => state.user.loggedInUser._id);
+
   const [connections, setConnections] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -25,11 +29,11 @@ function ConnectionCard({ userId }) {
   return (
     <div className="ConnectionCard_container m-3 pb-2 d-flex flex-md-row justify-content-start gap-4">
       {loading ? (
-        <div className="d-flex justify-content-center">
-          <div className="spinner-border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        </div>
+        <SpinnerBS
+          className={
+            "d-flex justify-content-center align-items-center w-100 py-5"
+          }
+        />
       ) : connections.length > 0 ? (
         <>
           {connections.map((item, index) => (

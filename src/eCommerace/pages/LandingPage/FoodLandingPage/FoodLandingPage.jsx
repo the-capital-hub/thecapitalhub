@@ -11,6 +11,9 @@ import {
   InsureRight,
 } from "../../../../Images/Ecommerace/FtechlandingPage";
 import pramodImg from "../../../../Images/aboutUs/Pramod.jpeg";
+import ContactForm from "../../../Components/Shared/ContactForm/ContactForm";
+import ServiceStats from "../../../Components/Shared/ServiceStats/ServiceStats";
+import OurClients from "../../../Components/Shared/OurClients/OurClients";
 
 function FoodLandingPage() {
   const reviews = [
@@ -59,7 +62,7 @@ function FoodLandingPage() {
   ];
 
   return (
-    <div className="food_landing-page_Container container">
+    <div className="food_landing-page_Container container-fluid">
       <Helmet>
         <meta charSet="utf-8" />
         <title>Build your food delivery application with Capital HUB!</title>
@@ -72,18 +75,20 @@ high-quality, delicious, and fresh ingredients. Join our satisfied customers who
 experienced exceptional dining and food delivery. Order from The Capital Hub today!"
         />
       </Helmet>
-      <div className="frist-section d-flex flex-column  justify-content-evenly flex-md-row ">
-        <div className="left-section d-flex flex-column justify-content-evenly md-p-3   ">
+
+      {/* First section */}
+      <div className="frist-section container mx-auto d-flex flex-column justify-content-evenly flex-md-row ">
+        <div className="left-section d-flex flex-column justify-content-evenly p-md-3">
           {/* <p className="fw-bold"># 1 Food Delivery Services</p> */}
           <h1>Build your food delivery</h1>
           <h1 className="text-orange">application with Capital HUB!</h1>
-          <h6>
+          <h6 className="mt-2">
             {" "}
             Build your business as Capital HUB builds your application. Enable
             food delivery applications with the smoothest user interface
             available in the market.{" "}
           </h6>
-          <Link to="/contactus" className="LinkBtn">
+          <Link to="/contactus" className="LinkBtn mt-2">
             Contact Us
           </Link>
         </div>
@@ -93,7 +98,10 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
         <img src={assets.downArrow} alt="downArrow" className="down-arrow" />
       </div>
 
-      <div className="short-description text-center">
+      {/* Service Stats */}
+      <ServiceStats />
+
+      <div className="container mx-auto short-description text-center pt-4">
         <h2 className="mx-auto">Pay your development fee in tranches</h2>
         <p className="text-center my-2 my-lg-4">
           Capital HUB supports the startup ecosystem by accepting payment in
@@ -102,7 +110,7 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
         </p>
       </div>
 
-      <div className="feature-cards flex-column flex-md-row">
+      <div className="container mx-auto feature-cards flex-column flex-md-row">
         <div className="feature-card">
           <img src={InsureRight} alt="Insure Right" />
           <h6>Simple Landing Page</h6>
@@ -120,7 +128,7 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
         </div>
       </div>
 
-      <div className="third-section d-flex   justify-content-center flex-column flex-md-row rounded">
+      <div className="third-section d-flex justify-content-center flex-column flex-md-row rounded">
         {/* <div className="left-section">
           <h6>Best Features</h6>
           <h1>
@@ -139,9 +147,9 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
         </div>
       </div>
 
-      <div className="forth-section d-flex flex-column ">
+      <div className="container mx-auto forth-section d-flex flex-column ">
         <h4 className="mx-auto mt-5 mb-3">About Us</h4>
-        <div className="inner d-flex flex-column   align-self-center flex-md-row">
+        <div className="inner d-flex flex-column align-self-center flex-md-row">
           <div className="left-section d-flex    justify-content-center flex-column">
             <img
               src={assets.sinfleMobile}
@@ -149,13 +157,13 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
               className="w-50 mb-5 mx-auto"
             />
           </div>
-          <div className="right-section d-flex    align-self-center flex-column container">
-            <h1>High-Quality Food for Your Health</h1>
-            <p>
+          <div className="right-section d-flex  align-self-center flex-column container">
+            <h1>Responsive and Smooth Interface for Foodies</h1>
+            {/* <p>
               Prioritize your well-being with our commitment to providing the
               highest quality food. Nourish your body and delight your taste
               buds with the harmonious pairing of health and taste
-            </p>
+            </p> */}
             <Link to="/contactus" className="LinkBtn">
               Contact Us
             </Link>
@@ -172,7 +180,7 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
         </div>
       </div> */}
 
-      <div className="help-cards flex-column flex-md-row ">
+      <div className="container mx-auto help-cards flex-column flex-md-row ">
         <div className="help-card">
           <p className="count">01.</p>
           <h6 className="title">Regular updates from our Product Manager</h6>
@@ -230,8 +238,8 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
         </div>
       </div> */}
 
-<section className="contact-our-team row justify-content-around bg-black rounded-4 p-2 p-md-5 align-items-center mb-4">
-        <div className="col-8 col-md-3">
+      <section className="container mx-auto contact-our-team row justify-content-around bg-black rounded-4 p-2 p-md-5 py-3 align-items-center mb-4">
+        <div className="col-8 col-md-4">
           <img
             className="rounded-circle"
             src={pramodImg}
@@ -241,28 +249,36 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
             alt="Cost Savings"
           />
         </div>
-        <div className="col-10 col-md-8 d-flex flex-column gap-3">
+        <div className="col-10 col-md-6 mt-3 mt-md-0 d-flex flex-column gap-3">
           <h3 className="text-white">
             "Dejection is a sign of failure but it becomes the cause of success"
           </h3>
           <p className="text-secondary">
-            Founder and CEO of The Capital HUB, is a dynamic
-            entrepreneur known for his innovative approach. He values structured
-            processes but enjoys unscripted conversations, balancing formality
-            and informality. Pramod is a visionary who dives deep into details
-            and foresees the future, offering steadfast support to founders in
-            shaping their dreams with conviction and individuality at
-            Capital HUB.
+            Founder and CEO of The Capital HUB, is a dynamic entrepreneur known
+            for his innovative approach. He values structured processes but
+            enjoys unscripted conversations, balancing formality and
+            informality. Pramod is a visionary who dives deep into details and
+            foresees the future, offering steadfast support to founders in
+            shaping their dreams with conviction and individuality at Capital
+            HUB.
           </p>
           <h4 className="text-light">Pramod Badiger</h4>
           <Link
             to="https://www.linkedin.com/in/pramod-badiger-a3226618b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-            className="LinkBtn btn btn-primary rounded-pill text-white px-4 py-2 fs-12 w-50"
+            className="LinkBtn btn btn-primary rounded-pill text-white px-4 py-2 fs-12 "
           >
             Connect with our Expert
           </Link>
         </div>
       </section>
+
+      {/* OurClients */}
+      <OurClients />
+
+      {/* Contact form */}
+      <div className="container mx-auto">
+        <ContactForm />
+      </div>
 
       {/* <div className="fifth-section">
         <h1>See What Our Lovely</h1>
@@ -273,12 +289,12 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
       </div> */}
       {/* <div className="last text-center m-5">
         <h1>Subscribe Now</h1> */}
-        {/* <p>
+      {/* <p>
           Lorem ipsum dolor sit amet consectetur. At consequat purus hendrerit
           proin risus Sit purus ante dictum in malesuada id.{" "}
         </p> */}
 
-        {/* <div className=" input-div rounded-pill d-flex justify-content-center  shadow-lg  flex-row mx-md-auto ">
+      {/* <div className=" input-div rounded-pill d-flex justify-content-center  shadow-lg  flex-row mx-md-auto ">
           <input
             type="text"
             name="search"

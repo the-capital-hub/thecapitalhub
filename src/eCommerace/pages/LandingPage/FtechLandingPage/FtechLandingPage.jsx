@@ -21,6 +21,9 @@ import "./FtechLandingPage.scss";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import pramodImg from "../../../../Images/aboutUs/Pramod.jpeg";
+import ContactForm from "../../../Components/Shared/ContactForm/ContactForm";
+import ServiceStats from "../../../Components/Shared/ServiceStats/ServiceStats";
+import OurClients from "../../../Components/Shared/OurClients/OurClients";
 
 function FtechLandingPage() {
   return (
@@ -30,22 +33,22 @@ function FtechLandingPage() {
         <title> Build your FinTech application with Capital HUB!</title>
         <meta
           name="description"
-          content=": Experience hassle-free financial management with our fintech solutions.
+          content="Experience hassle-free financial management with our fintech solutions.
 Say goodbye to the stress of making loan payments on time and join our community for
 financial ease and security"
         />
       </Helmet>
-      <section className="intro">
-        <h1 className="h1">
-          <span className="blue">
-            {" "}
-            Build your FinTech application with Capital HUB!
-          </span>
+
+      {/* Hero section */}
+      <section className="intro container mx-auto ">
+        <h2>
+          Build your FinTech application with Capital HUB!
           {/* <span className="orange">, for you</span> */}
-        </h1>
-        <p className="text-center my-2 my-lg-4">
-          Build your business as Capital HUB builds your application.
-        </p>
+        </h2>
+        <h6 className="text-center my-2 my-lg-4">
+          {/* Build your business as Capital HUB builds your application. */}
+          Let Capital HUB Shape Your App, While You Shape Your Success!{" "}
+        </h6>
         <div className="intro-main-img">
           <img src={IntroMain} alt="introduction image" className="mx-auto" />
           <img src={IntroGetLoan} alt="get a loan" className="mx-auto mb-5" />
@@ -80,7 +83,10 @@ financial ease and security"
         </div>
       </section>
 
-      <section className="financial-planner row justify-content-center justify-content-md-around">
+      {/* Service Stats */}
+      <ServiceStats />
+
+      <section className="container mx-auto financial-planner row justify-content-center justify-content-md-around">
         <div className="col-md-7">
           <h3 className="mb-4">
             <span className="blue">
@@ -94,19 +100,19 @@ financial ease and security"
               <div className="img">
                 <img src={CompanyBG} alt="Company Background" />
               </div>
-              <p> Credit-score tracking .</p>
+              <p className="m-0">Credit-score tracking</p>
             </div>
             <div className="helping-bullet">
               <div className="img">
                 <img src={TeamExp} alt="Team Experience" />
               </div>
-              <p>Payment gateway integration .</p>
+              <p className="m-0">Payment gateway integration</p>
             </div>
             <div className="helping-bullet">
               <div className="img">
                 <img src={UniqueFeatures} alt="Unique Features" />
               </div>
-              <p>Multi-factor authentication.</p>
+              <p className="m-0">Multi-factor authentication</p>
             </div>
           </div>
         </div>
@@ -115,51 +121,56 @@ financial ease and security"
         </div>
       </section>
 
-      <section className="how-we-help">
+      <section className="how-we-help container mx-auto ">
         <h2 className="blue">Here's how we build your project</h2>
         <div className="help-cards">
           <div className="help-card">
             <p className="count">01.</p>
-            <h6 className="title">Regular updates from our Product Manager</h6>
+            <h6 className="title">
+              Stay Informed with Our Product Manager's Timely Insights and
+              Updates
+            </h6>
 
-            <Link to="/web-development" className="LinkBtn">
-            Contact Us
-            </Link>
+            {/* <Link to="/contactus" className="LinkBtn">
+              Contact Us
+            </Link> */}
           </div>
           <div className="help-card">
             <p className="count">02.</p>
-            <h6 className="title">Technical recommendation from core team</h6>
+            <h6 className="title">
+              Expert Tech Insights and recommendations from Our Core Team
+            </h6>
 
-            <Link to="/web-development" className="LinkBtn">
-            Contact Us
-            </Link>
+            {/* <Link to="/contactus" className="LinkBtn">
+              Contact Us
+            </Link> */}
           </div>
           <div className="help-card">
             <p className="count">03.</p>
             <h6 className="title">
-              Specialised and unique startup business consulting
+              Specialised and unique Startup Business Consulting That Sets You
+              Apart
             </h6>
 
-            <Link to="/web-development" className="LinkBtn">
-            Contact Us
-            </Link>
+            {/* <Link to="/contactus" className="LinkBtn">
+              Contact Us
+            </Link> */}
           </div>
           <div className="help-card">
             <p className="count">04.</p>
-            <h6 className="title">Deployment handled by the Capital HUB team</h6>
+            <h6 className="title">
+              Hassle-Free Deployment Managed by Capital HUB Team
+            </h6>
 
-            <Link to="/web-development" className="LinkBtn">
+            {/* <Link to="/contactus" className="LinkBtn">
               Contact Us
-            </Link>
+            </Link> */}
           </div>
-          
-
-          
         </div>
       </section>
 
-      <section className="join-us">
-        <div className="header row justify-content-between align-items-center">
+      <section className="join-us ">
+        <div className="container mx-auto header row justify-content-between align-items-center">
           <div className="short-details col-md-5 text-white">
             <h2>
               <span>Be part of the Capital Hub Platform</span>
@@ -247,10 +258,8 @@ financial ease and security"
         </div>
       </section>
 
-
-
-      <section className="contact-our-team container my-5 row justify-content-around bg-black rounded-4 p-2 p-md-5 align-items-center mb-4">
-        <div className="col-8 col-md-3">
+      <section className="contact-our-team container mx-auto  my-5 row justify-content-around bg-black rounded-4 p-2 p-md-5 py-3 align-items-center mb-4">
+        <div className="col-8 col-md-4">
           <img
             className="rounded-circle"
             src={pramodImg}
@@ -260,29 +269,31 @@ financial ease and security"
             alt="Cost Savings"
           />
         </div>
-        <div className="col-10 col-md-8 d-flex flex-column gap-3">
+        <div className="col-10 col-md-6 mt-3 mt-md-0 d-flex flex-column gap-3">
           <h3 className="text-white">
             "Dejection is a sign of failure but it becomes the cause of success"
           </h3>
           <p className="text-secondary">
-            Founder and CEO of The Capital HUB, is a dynamic
-            entrepreneur known for his innovative approach. He values structured
-            processes but enjoys unscripted conversations, balancing formality
-            and informality. Pramod is a visionary who dives deep into details
-            and foresees the future, offering steadfast support to founders in
-            shaping their dreams with conviction and individuality at
-            Capital HUB.
+            Founder and CEO of The Capital HUB, is a dynamic entrepreneur known
+            for his innovative approach. He values structured processes but
+            enjoys unscripted conversations, balancing formality and
+            informality. Pramod is a visionary who dives deep into details and
+            foresees the future, offering steadfast support to founders in
+            shaping their dreams with conviction and individuality at Capital
+            HUB.
           </p>
           <h4 className="text-light">Pramod Badiger</h4>
           <Link
+            target="_blank"
             to="https://www.linkedin.com/in/pramod-badiger-a3226618b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-            className="LinkBtn btn btn-primary rounded-pill text-white px-4 py-2 fs-12 w-50"
+            className="LinkBtn btn btn-primary rounded-pill text-white px-4 py-2 fs-12 expert_button "
           >
             Connect with our Expert
           </Link>
         </div>
       </section>
-      <section className="trusted-security">
+
+      <section className="trusted-security container mx-auto ">
         <h3>
           <span className="blue">Trusted security</span>
           <span className="orange"> measures</span>
@@ -308,7 +319,8 @@ financial ease and security"
           </div>
         </div>
       </section>
-      <section className="mobile-apps row gap-3 flex-column-reverse flex-md-row justify-content-center align-items-center pt-5">
+
+      <section className="container mx-auto mobile-apps row gap-3 flex-column-reverse flex-md-row justify-content-center align-items-center pt-5">
         <img
           className="col-6 col-md-3"
           src={ManageYourFinance}
@@ -327,6 +339,14 @@ financial ease and security"
           </div>
         </div>
       </section>
+
+      {/* OurClients */}
+      <OurClients className="bg-dark" />
+
+      {/* Contact form */}
+      <div className="container row m-0">
+        <ContactForm className="col-12 col-md-8 mx-auto" />
+      </div>
     </section>
   );
 }

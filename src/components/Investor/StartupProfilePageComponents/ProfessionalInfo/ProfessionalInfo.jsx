@@ -6,20 +6,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBase64 } from "../../../../utils/getBase64";
 import {
   getInvestorById,
-  getStartupByFounderId,
   postInvestorData,
   postStartUpData,
   updateUserAPI,
 } from "../../../../Service/user";
-import { loginSuccess } from "../../../../Store/features/user/userSlice";
+import {
+  getCompanyFounderId,
+  getCompanyName,
+  getIsInvestor,
+  loginSuccess,
+  updateUserCompany,
+} from "../../../../Store/features/user/userSlice";
 import IconCloudUpload from "../../SvgIcons/IconCloudUpload";
 
-export default function ProfessionalInfo({ theme, companyFounderId }) {
+export default function ProfessionalInfo({ theme }) {
   // Fetch Global State
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const isInvestor = loggedInUser.isInvestor === "true" ? true : false;
+  const companyFounderId = useSelector(getCompanyFounderId);
+  const isInvestor = useSelector(getIsInvestor);
+  const companyName = useSelector(getCompanyName);
   const dispatch = useDispatch();
-  const [company, setCompany] = useState([]);
+
+  console.log("companyName", companyName);
 
   // State for Professional Data
   const [professionalData, setProfessionalData] = useState({
@@ -28,7 +36,7 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
     experience: loggedInUser?.experience || "",
     profilePicture: loggedInUser.profilePicture || "",
     fullName: loggedInUser?.firstName + " " + loggedInUser?.lastName || "",
-    company: "",
+    company: companyName,
     location: loggedInUser?.location || "Bangalore, India",
   });
 
@@ -37,35 +45,35 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
   const [selectedFile, setSelectedFile] = useState(null);
 
   // Fetch professional data
-  console.log(loggedInUser);
   useEffect(() => {
     if (isInvestor) {
       getInvestorById(loggedInUser?.investor)
         .then(({ data }) => {
           console.log("investorById", data);
-          setProfessionalData({
-            ...professionalData,
+          setProfessionalData((prev) => ({
+            ...prev,
             company: data.companyName,
-          });
+          }));
         })
         .catch((error) => {
           console.log(error);
         });
     } else {
-      getStartupByFounderId(loggedInUser._id)
-        .then(({ data }) => {
-          console.log(data);
-          setCompany(data);
-          setProfessionalData({
-            ...professionalData,
-            company: data.company,
-          });
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      // getStartupByFounderId(loggedInUser._id)
+      //   .then(({ data }) => {
+      //     console.log(data);
+      //     // setCompany(data);
+      //     setProfessionalData({
+      //       ...professionalData,
+      //       company: data.company,
+      //     });
+      //   })
+      //   .catch((error) => {
+      //     console.error(error);
+      //   });
+      setProfessionalData((prev) => ({ ...prev, company: companyName }));
     }
-  }, []);
+  }, [setProfessionalData, companyName, isInvestor]);
 
   // Handle Text Change
   function handleTextChange(e) {
@@ -111,7 +119,9 @@ export default function ProfessionalInfo({ theme, companyFounderId }) {
       if (isInvestor) {
         const response = await postInvestorData(editedCompanyName);
       } else {
-        const response = await postStartUpData(editedCompanyName);
+        const { data } = await postStartUpData(editedCompanyName);
+        console.log("post startup", data.company);
+        dispatch(updateUserCompany({ company: data.company }));
       }
 
       setIsEditing(false);

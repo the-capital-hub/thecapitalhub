@@ -1,4 +1,13 @@
 .transport-landing-page {
+  --color-primary: #583cea;
+  --color-primary-text: #fff;
+  --color-form-primary: #583cea;
+  --color-form-btn-text: white;
+
+  &.container-fluid {
+    padding: 0;
+  }
+
   display: flex;
   flex-direction: column;
   gap: 20px;

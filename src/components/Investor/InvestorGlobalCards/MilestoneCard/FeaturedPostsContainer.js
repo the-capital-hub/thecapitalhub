@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./style.scss";
-import { getAllPostsAPI, getFeaturedPost } from "../../../../Service/user";
+import { getFeaturedPost } from "../../../../Service/user";
 import FeaturedPostCard from "../../Cards/FeaturedPostCard/FeaturedPostCard";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 
 const FeaturedPostsContainer = ({ userId }) => {
   const [allPosts, setAllPosts] = useState(null);
@@ -24,41 +25,41 @@ const FeaturedPostsContainer = ({ userId }) => {
       });
   }, [userId, isDeleteSuccessful]);
 
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  // const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
-  const [popupOpen, setPopupOpen] = useState(false);
+  // const [popupOpen, setPopupOpen] = useState(false);
 
-  const [newPost, setNewPost] = useState(false);
-  const openPopup = () => {
-    setPopupOpen(!popupOpen);
-  };
-  const [visibleCards, setVisibleCards] = useState(4);
-  const [allCards] = useState([
-    "Card 1",
-    "Card 2",
-    "Card 3",
-    "Card 4",
-    "Card 5",
-    "Card 6",
-    "Card 7",
-    "Card 8",
-    "Card 9",
-    "Card 10",
-    "Card 11",
-    "Card 12",
-    "Card 13",
-    "Card 14",
-    "Card 15",
-    "Card 16",
-    "Card 17",
-    "Card 18",
-    "Card 19",
-    "Card 20",
-  ]);
+  // const [newPost, setNewPost] = useState(false);
+  // const openPopup = () => {
+  //   setPopupOpen(!popupOpen);
+  // };
+  // const [visibleCards, setVisibleCards] = useState(4);
+  // const [allCards] = useState([
+  //   "Card 1",
+  //   "Card 2",
+  //   "Card 3",
+  //   "Card 4",
+  //   "Card 5",
+  //   "Card 6",
+  //   "Card 7",
+  //   "Card 8",
+  //   "Card 9",
+  //   "Card 10",
+  //   "Card 11",
+  //   "Card 12",
+  //   "Card 13",
+  //   "Card 14",
+  //   "Card 15",
+  //   "Card 16",
+  //   "Card 17",
+  //   "Card 18",
+  //   "Card 19",
+  //   "Card 20",
+  // ]);
 
-  const handleSeeMore = () => {
-    setVisibleCards((prevVisibleCards) => prevVisibleCards + 4);
-  };
+  // const handleSeeMore = () => {
+  //   setVisibleCards((prevVisibleCards) => prevVisibleCards + 4);
+  // };
 
   useEffect(() => {
     document.title = "Featured Post | The Capital Hub";
@@ -93,11 +94,11 @@ const FeaturedPostsContainer = ({ userId }) => {
             <h6 className="text-muted">No Featured Posts</h6>
           )
         ) : (
-          <div class="d-flex justify-content-center">
-            <div class="spinner-border" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
-          </div>
+          <SpinnerBS
+            className={
+              "d-flex justify-content-center align-items-center w-100 py-5"
+            }
+          />
         )}
       </div>
     </div>

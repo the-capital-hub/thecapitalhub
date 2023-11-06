@@ -10,7 +10,7 @@ const EXPERIENCE = {
 const EDUCATION = {
   schoolName: "Institution",
   location: "Location",
-  passoutYear: "Graduation",
+  passoutYear: "Graduation Year",
   course: "Specialization",
 };
 

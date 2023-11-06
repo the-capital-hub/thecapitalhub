@@ -370,13 +370,14 @@ const FeedPostCard = ({
     <>
       <div className="feedpostcard_main_container mb-2">
         <div
-          className={`box feedpostcard_container mt-2 ${repostPreview && "rounded-4 shadow-sm border"
-            }`}
+          className={`box feedpostcard_container mt-2 ${
+            repostPreview && "rounded-4 shadow-sm border"
+          }`}
         >
           {loading && (
-            <div class="d-flex justify-content-center my-4">
-              <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
+            <div className="d-flex justify-content-center my-4">
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
               </div>
             </div>
           )}
@@ -483,7 +484,7 @@ const FeedPostCard = ({
                         data-bs-toggle="modal"
                         data-bs-target="#reportPostModal"
                         className="d-flex align-items-center gap-2"
-                      // onClick={() => setShowReportModal(true)}
+                        // onClick={() => setShowReportModal(true)}
                       >
                         <IconReportPost />
                         <span>Report</span>
@@ -611,8 +612,9 @@ const FeedPostCard = ({
                 {/* Repost and Save posts */}
                 <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                   <span
-                    className={`repost_container rounded-4 ${showRepostOptions ? "bg-light" : ""
-                      }`}
+                    className={`repost_container rounded-4 ${
+                      showRepostOptions ? "bg-light" : ""
+                    }`}
                     ref={repostContainerRef}
                   >
                     <img
@@ -635,10 +637,12 @@ const FeedPostCard = ({
                             />
                           ) : (
                             <div
-                              class="spinner-border text-secondary"
+                              className="spinner-border text-secondary"
                               role="status"
                             >
-                              <span class="visually-hidden">Loading...</span>
+                              <span className="visually-hidden">
+                                Loading...
+                              </span>
                             </div>
                           )}
                           <div className="d-flex flex-column g-1 ">
@@ -661,10 +665,12 @@ const FeedPostCard = ({
                             />
                           ) : (
                             <div
-                              class="spinner-border text-secondary"
+                              className="spinner-border text-secondary"
                               role="status"
                             >
-                              <span class="visually-hidden">Loading...</span>
+                              <span className="visually-hidden">
+                                Loading...
+                              </span>
                             </div>
                           )}
                           <div className="d-flex flex-column g-1 ">
@@ -699,12 +705,12 @@ const FeedPostCard = ({
                 {/* Show Comments */}
                 {showComment && (
                   <div>
-                    <div class="comment_container">
-                      <div class="logo">
+                    <div className="comment_container">
+                      <div className="logo">
                         <img src={loggedInUser.profilePicture} alt="Logo" />
                       </div>
-                      <section class="input_and_logo_section">
-                        <div class="input_box">
+                      <section className="input_and_logo_section">
+                        <div className="input_box">
                           <input
                             type="text"
                             placeholder="Add Comment"
@@ -717,12 +723,12 @@ const FeedPostCard = ({
                               }
                             }}
                           />
-                          <div class="icons comment_icons">
-                            <span class="image_icon">
-                              <img src={ImageIcon} alt="image" />
+                          <div className="icons comment_icons">
+                            <span className="image_icon">
+                              <img src={ImageIcon} alt="gallery icon" />
                             </span>
-                            <span class="smiley_icon">
-                              <img src={SmileeIcon} alt="photo" />
+                            <span className="smiley_icon">
+                              <img src={SmileeIcon} alt="smiley icon" />
                             </span>
                           </div>
                         </div>
@@ -808,7 +814,7 @@ const FeedPostCard = ({
                               >
                                 <img
                                   src={deleteIcon}
-                                  alt="image"
+                                  alt="delete icon"
                                   className="deleteIcon py-1"
                                 />
                               </p>
@@ -872,9 +878,9 @@ const FeedPostCard = ({
         <ModalBSBody>
           <h6 className="h6">Select a reason that applies</h6>
           <div className="reasons_container">
-            <div class="form-check form-check-inline m-0">
+            <div className="form-check form-check-inline m-0">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="radio"
                 name="reportReason"
                 onChange={({ target }) => setReportReason(target.value)}
@@ -883,16 +889,17 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
-                  }`}
-                for="inlineRadio1"
+                className={`form-check-label ${
+                  reportReason === "Harassment" && "bg-secondary text-white"
+                }`}
+                htmlFor="inlineRadio1"
               >
                 Harassment
               </label>
             </div>
-            <div class="form-check form-check-inline m-0">
+            <div className="form-check form-check-inline m-0">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="radio"
                 name="reportReason"
                 onChange={({ target }) => setReportReason(target.value)}
@@ -901,16 +908,17 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
-                  }`}
-                for="inlineRadio2"
+                className={`form-check-label ${
+                  reportReason === "Spam" && "bg-secondary text-white"
+                }`}
+                htmlFor="inlineRadio2"
               >
                 Spam
               </label>
             </div>
-            <div class="form-check form-check-inline m-0">
+            <div className="form-check form-check-inline m-0">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="radio"
                 name="reportReason"
                 onChange={({ target }) => setReportReason(target.value)}
@@ -919,16 +927,17 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
-                  }`}
-                for="inlineRadio3"
+                className={`form-check-label ${
+                  reportReason === "Fraud or scam" && "bg-secondary text-white"
+                }`}
+                htmlFor="inlineRadio3"
               >
                 Fraud or scam
               </label>
             </div>
-            <div class="form-check form-check-inline m-0">
+            <div className="form-check form-check-inline m-0">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="radio"
                 name="reportReason"
                 onChange={({ target }) => setReportReason(target.value)}
@@ -937,9 +946,10 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
-                  }`}
-                for="inlineRadio4"
+                className={`form-check-label ${
+                  reportReason === "Hateful Speech" && "bg-secondary text-white"
+                }`}
+                htmlFor="inlineRadio4"
               >
                 Hateful Speech
               </label>
@@ -963,12 +973,12 @@ const FeedPostCard = ({
               Submit report
             </button>
           ) : (
-            <button class="submit_button btn" type="button" disabled>
+            <button className="submit_button btn" type="button" disabled>
               <span role="status" className="me-1">
                 Submit report
               </span>
               <span
-                class="spinner-border spinner-border-sm"
+                className="spinner-border spinner-border-sm"
                 aria-hidden="true"
               ></span>
             </button>
