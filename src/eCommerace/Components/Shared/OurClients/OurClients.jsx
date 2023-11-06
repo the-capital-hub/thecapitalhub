@@ -4,6 +4,15 @@ import { Link } from "react-router-dom";
 import assets from "../../../../Images/Portfolio/PortfolioPage";
 
 export default function OurClients({ className }) {
+  const scrollToContact = () => {
+    const contactElement = document.getElementById("contact-us");
+    if (contactElement) {
+      window.scrollTo({
+        top: contactElement.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  }; 
   return (
     <div className={`our_clients_wrapper w-100 ${className}`}>
       <div className="our_clients_container container mx-auto px-5 py-5">
@@ -11,7 +20,11 @@ export default function OurClients({ className }) {
           <h4>Our Clients</h4>
           <p>We do game-changing work for game-changing companies.</p>
           {/* <Link to={"/contactus"} className="text-capitalize work_button"> */}
-          <Link to={""} className="text-capitalize work_button">
+          <Link
+            to={""}
+            onClick={scrollToContact}
+            className="text-capitalize work_button"
+          >
             Work with us
           </Link>
         </div>
