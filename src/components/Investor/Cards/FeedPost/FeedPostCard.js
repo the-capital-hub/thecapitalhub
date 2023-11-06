@@ -344,11 +344,11 @@ const FeedPostCard = ({
 
   useEffect(() => {
     getLikeCount(postId)
-      .then(({ data }) => {
-        setLikedBy(data.likedBy);
+      .then((data) => {
+        setLikedBy(data?.data.likedBy);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [liked, postId]);
 
   const singleClickTimer = useRef(null);
   const [showImgagePopup, setShowImgagePopup] = useState(false);
