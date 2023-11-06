@@ -193,7 +193,7 @@ export default function ProfessionalInfo({ theme }) {
           </div>
 
           {/* Experience */}
-          <div className="text_field d-flex gap-3 gap-lg-3 align-items-center">
+          <div className="text_field d-flex gap-3 gap-lg-3 align-items-start">
             <h6 className="m-0">Experience</h6>
             <p className="m-0">{professionalData.experience}</p>
           </div>
@@ -202,7 +202,7 @@ export default function ProfessionalInfo({ theme }) {
 
       {/* Edit form */}
       {isEditing && (
-        <form>
+        <form className="">
           {/* profilePicture*/}
           <fieldset className={` ${theme} `}>
             <legend className="px-2">Profile Picture</legend>

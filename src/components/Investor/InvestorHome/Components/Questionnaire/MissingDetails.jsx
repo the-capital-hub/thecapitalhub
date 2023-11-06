@@ -29,11 +29,11 @@ export default function MissingDetails() {
   }
 
   return (
-    <>
+    <div className="bg-white rounded-4 shadow-sm lh-1 d-flex flex-column">
       {countData?.total ? (
         <button
           id="missingDetails"
-          className="btn border-0 bg-white rounded-4 shadow-sm lh-1 py-4 fs-5"
+          className="btn border-0 fs-5 py-3"
           data-bs-toggle="offcanvas"
           data-bs-target="#questionnaireOffCanvas"
           ariaControls="offcanvasTop"
@@ -51,6 +51,6 @@ export default function MissingDetails() {
         setCountData={setCountData}
         handleRefetch={handleRefetch}
       />
-    </>
+    </div>
   );
 }
