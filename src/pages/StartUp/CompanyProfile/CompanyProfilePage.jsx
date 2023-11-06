@@ -8,7 +8,7 @@ import {
   getStartupByFounderId,
   searchStartUps,
   addStartUpToUser,
-  updateUserAPI
+  updateUserAPI,
 } from "../../../Service/user";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -44,7 +44,7 @@ export default function CompanyProfilePage() {
     }
     document.title = "Company Profile | The Capital Hub";
     dispatch(setPageTitle("Company"));
-  }, []);
+  }, [dispatch]);
 
   const handleSearchInputChange = (e) => {
     const newValue = e.target.value;
@@ -95,14 +95,14 @@ export default function CompanyProfilePage() {
       const requestBody = {
         userId: loggedInUser._id,
         startUp: null,
-      }
+      };
       const response = await updateUserAPI(requestBody);
       console.log(response);
       navigate("/company-profile/edit");
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <MaxWidthWrapper>
@@ -126,14 +126,21 @@ export default function CompanyProfilePage() {
                   ) : (
                     <div className="bg-white rounded-4 p-4">
                       {/* <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5"> */}
-                      <button className="btn-base startup"
+                      <button
+                        className="btn-base startup"
                         onClick={handleAddNew}
-                      >Add new company details</button>
+                      >
+                        Add new company details
+                      </button>
                       {/* </Link> */}
                       <div className="or-text-container">
-                        <p className="text-decoration-none text-dark fs-5">Or</p>
+                        <p className="text-decoration-none text-dark fs-5">
+                          Or
+                        </p>
                       </div>
-                      <p className="text-decoration-none text-dark fs-5">Choose from an existing Company</p>
+                      <p className="text-decoration-none text-dark fs-5">
+                        Choose from an existing Company
+                      </p>
                       <div>
                         <input
                           type="text"
@@ -145,10 +152,11 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${selectedCompanyId === company._id
-                                  ? "active"
-                                  : ""
-                                  }`}
+                                className={`suggestion-item ${
+                                  selectedCompanyId === company._id
+                                    ? "active"
+                                    : ""
+                                }`}
                                 key={index}
                                 onClick={() =>
                                   handleCompanySelection(
@@ -204,13 +212,17 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${selectedCompanyId === company._id
-                                  ? "active"
-                                  : ""
-                                  }`}
+                                className={`suggestion-item ${
+                                  selectedCompanyId === company._id
+                                    ? "active"
+                                    : ""
+                                }`}
                                 key={index}
                                 onClick={() =>
-                                  handleCompanySelection(company._id, company.company)
+                                  handleCompanySelection(
+                                    company._id,
+                                    company.company
+                                  )
                                 }
                               >
                                 <img
