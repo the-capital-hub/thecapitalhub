@@ -33,7 +33,7 @@ function FtechLandingPage() {
         <title> Build your FinTech application with Capital HUB!</title>
         <meta
           name="description"
-          content=": Experience hassle-free financial management with our fintech solutions.
+          content="Experience hassle-free financial management with our fintech solutions.
 Say goodbye to the stress of making loan payments on time and join our community for
 financial ease and security"
         />
@@ -41,16 +41,14 @@ financial ease and security"
 
       {/* Hero section */}
       <section className="intro container mx-auto ">
-        <h1 className="h1">
-          <span className="blue">
-            {" "}
-            Build your FinTech application with Capital HUB!
-          </span>
+        <h2>
+          Build your FinTech application with Capital HUB!
           {/* <span className="orange">, for you</span> */}
-        </h1>
-        <p className="text-center my-2 my-lg-4">
-          Build your business as Capital HUB builds your application.
-        </p>
+        </h2>
+        <h6 className="text-center my-2 my-lg-4">
+          {/* Build your business as Capital HUB builds your application. */}
+          Let Capital HUB Shape Your App, While You Shape Your Success!{" "}
+        </h6>
         <div className="intro-main-img">
           <img src={IntroMain} alt="introduction image" className="mx-auto" />
           <img src={IntroGetLoan} alt="get a loan" className="mx-auto mb-5" />
@@ -102,19 +100,19 @@ financial ease and security"
               <div className="img">
                 <img src={CompanyBG} alt="Company Background" />
               </div>
-              <p> Credit-score tracking .</p>
+              <p className="m-0">Credit-score tracking</p>
             </div>
             <div className="helping-bullet">
               <div className="img">
                 <img src={TeamExp} alt="Team Experience" />
               </div>
-              <p>Payment gateway integration .</p>
+              <p className="m-0">Payment gateway integration</p>
             </div>
             <div className="helping-bullet">
               <div className="img">
                 <img src={UniqueFeatures} alt="Unique Features" />
               </div>
-              <p>Multi-factor authentication.</p>
+              <p className="m-0">Multi-factor authentication</p>
             </div>
           </div>
         </div>
@@ -128,39 +126,45 @@ financial ease and security"
         <div className="help-cards">
           <div className="help-card">
             <p className="count">01.</p>
-            <h6 className="title">Regular updates from our Product Manager</h6>
+            <h6 className="title">
+              Stay Informed with Our Product Manager's Timely Insights and
+              Updates
+            </h6>
 
-            <Link to="/contactus" className="LinkBtn">
+            {/* <Link to="/contactus" className="LinkBtn">
               Contact Us
-            </Link>
+            </Link> */}
           </div>
           <div className="help-card">
             <p className="count">02.</p>
-            <h6 className="title">Technical recommendation from core team</h6>
+            <h6 className="title">
+              Expert Tech Insights and recommendations from Our Core Team
+            </h6>
 
-            <Link to="/contactus" className="LinkBtn">
+            {/* <Link to="/contactus" className="LinkBtn">
               Contact Us
-            </Link>
+            </Link> */}
           </div>
           <div className="help-card">
             <p className="count">03.</p>
             <h6 className="title">
-              Specialised and unique startup business consulting
+              Specialised and unique Startup Business Consulting That Sets You
+              Apart
             </h6>
 
-            <Link to="/contactus" className="LinkBtn">
+            {/* <Link to="/contactus" className="LinkBtn">
               Contact Us
-            </Link>
+            </Link> */}
           </div>
           <div className="help-card">
             <p className="count">04.</p>
             <h6 className="title">
-              Deployment handled by the Capital HUB team
+              Hassle-Free Deployment Managed by Capital HUB Team
             </h6>
 
-            <Link to="/contactus" className="LinkBtn">
+            {/* <Link to="/contactus" className="LinkBtn">
               Contact Us
-            </Link>
+            </Link> */}
           </div>
         </div>
       </section>
@@ -280,6 +284,7 @@ financial ease and security"
           </p>
           <h4 className="text-light">Pramod Badiger</h4>
           <Link
+            target="_blank"
             to="https://www.linkedin.com/in/pramod-badiger-a3226618b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
             className="LinkBtn btn btn-primary rounded-pill text-white px-4 py-2 fs-12 expert_button "
           >
@@ -336,11 +341,11 @@ financial ease and security"
       </section>
 
       {/* OurClients */}
-      <OurClients />
+      <OurClients className="bg-dark" />
 
       {/* Contact form */}
-      <div className="container">
-        <ContactForm />
+      <div className="container row m-0">
+        <ContactForm className="col-12 col-md-8 mx-auto" />
       </div>
     </section>
   );
