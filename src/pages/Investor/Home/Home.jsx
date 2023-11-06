@@ -54,6 +54,7 @@ function Home() {
   const fetchMorePosts = () => {
     getAllPostsAPI(page)
       .then(({ data }) => {
+        console.log(data)
         if (data.length === 0) {
         } else {
           setAllPosts([...allPosts, ...data]);
