@@ -836,7 +836,8 @@ export const getLikeCount = async (postId) => {
     const response = await axiosInstance.get(`${API.getLikeCount}/${postId}`);
     return response.data;
   } catch (error) {
-    console.log("Error getting notification count : ", error);
+    console.log("Error getting like count : ", error);
+    throw error;
   }
 };
 
