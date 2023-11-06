@@ -297,7 +297,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                           <p className="m-0">Create a Community</p>
                         </ModalBsLauncher>
                         <button
-                          className="sidebar__community__btn "
+                          className="sidebar__community__btn shadow-none"
                           onClick={handleMyCommunityClick}
                         >
                           My Community

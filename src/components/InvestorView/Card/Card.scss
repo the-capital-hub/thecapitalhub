@@ -4,8 +4,13 @@
   border-radius: var(--border-radius);
   box-shadow: 1px 1px 5px lightgray;
   padding: 20px 10px 0px 10px;
-  width: 285px;
+  width: 245px;
   height: 265px;
+
+  @media (min-width: 375px) {
+    width: 285px;
+  }
+
   .folder_container {
     display: flex;
     height: 200px;
