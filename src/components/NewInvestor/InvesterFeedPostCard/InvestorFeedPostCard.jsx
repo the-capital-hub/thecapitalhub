@@ -256,7 +256,7 @@ console.log(error)
       .then(({ data }) => {
         setLikedBy(data?.likedBy);
       })
-      .catch((error) => console.log(error));
+      .catch(error=>{console.log(error);})
   }, [liked]);
 
   const commentlikeUnlikeHandler = async (postId, commentId) => {
