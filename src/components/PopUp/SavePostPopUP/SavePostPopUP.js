@@ -44,6 +44,7 @@ function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false })
     try {
       const data = await savePostByUserIdAPI(loggedInUser._id, selectedOption ? selectedOption : inputValue, postId);
       if (data?.message) {
+        console.log(data)
         onClose()
         savedPostStatus()
       }

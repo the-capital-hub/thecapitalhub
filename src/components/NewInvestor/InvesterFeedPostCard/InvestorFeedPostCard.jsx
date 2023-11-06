@@ -105,7 +105,9 @@ const FeedPostCard = ({
         await getPostComment({ postId }).then((res) => {
           console.log("response", res.data.data);
           setComments(res.data.data);
-        });
+        }).catch((error)=>{
+console.log(error)
+        })
       }
 
       console.log("Comment submitted successfully:", response.data.status);
@@ -126,10 +128,10 @@ const FeedPostCard = ({
 
       const fetchSavedPostData = async () => {
         try {
-          if (response.data && response.data.length > 0) {
-            const allSavedPostDataIds = response.data.reduce(
+          if (response?.data && response?.data.length > 0) {
+            const allSavedPostDataIds = response?.data.reduce(
               (acc, collection) => {
-                if (collection.posts && Array.isArray(collection.posts)) {
+                if (collection?.posts && Array.isArray(collection.posts)) {
                   acc = acc.concat(collection.posts);
                 }
                 return acc;
@@ -149,7 +151,7 @@ const FeedPostCard = ({
       setLiked(likes?.includes(loggedInUser._id) || null);
 
       getPostComment({ postId }).then((res) => {
-        setComments(res.data.data);
+        setComments(res?.data.data);
       });
     }
     const outsideClickHandler = (event) => {
@@ -252,7 +254,7 @@ const FeedPostCard = ({
   useEffect(() => {
     getLikeCount(postId)
       .then(({ data }) => {
-        setLikedBy(data.likedBy);
+        setLikedBy(data?.likedBy);
       })
       .catch((error) => console.log(error));
   }, [liked]);
@@ -730,7 +732,7 @@ const FeedPostCard = ({
       </div>
 
       <ModalBSContainer showModal={showReportModal} id="reportPostModal">
-        <ModalBSHeader title="Report Post" />
+        <ModalBSHeader title="Report Post"  closeCallback={handleCloseSavePopup}/>
         <ModalBSBody>
           <h6 className="h6">Select a reason that applies</h6>
           <div className="reasons_container">
@@ -803,7 +805,7 @@ const FeedPostCard = ({
                   }`}
                 for="inlineRadio4"
               >
-                Hateful Speechh
+                Hateful Speech
               </label>
             </div>
           </div>
