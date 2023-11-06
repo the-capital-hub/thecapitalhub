@@ -35,7 +35,7 @@ function NotificationsPopup({
 
   useEffect(() => {
     fetchNotifications();
-  });
+  }, []);
 
   const notificationType = (type, _id) => {
     switch (type) {
