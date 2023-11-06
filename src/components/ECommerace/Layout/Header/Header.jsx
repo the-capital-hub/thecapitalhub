@@ -15,7 +15,7 @@ function Header() {
         </div>
       </nav>
       {/* <Link to="/contactus" > */}
-      <Link to="">
+      <Link to="/landing-page/food">
         <button className="btn login-btn py-md-1">Contact us</button>
       </Link>
     </header>
