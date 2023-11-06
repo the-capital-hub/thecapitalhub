@@ -93,9 +93,9 @@ const Footer = ({ className }) => {
               <a href="https://instagram.com/capitalhub_official?igshid=MzRlODBiNWFlZA==">
                 <img src={InIcon} alt="img" style={{ margin: "0px 2px" }} />
               </a>
-              <a href="https://www.youtube.com/@huboriginals4179/featured">
+              {/* <a href="https://www.youtube.com/@huboriginals4179/featured">
                 <img src={YtIcon} alt="img" style={{ margin: "0px 2px" }} />
-              </a>
+              </a> */}
             </div>
           </div>
 
