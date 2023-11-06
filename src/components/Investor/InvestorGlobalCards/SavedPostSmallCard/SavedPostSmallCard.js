@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import ThreeDot from "../../../../Images/VerticalBlackThreeDots.svg";
+// import ThreeDot from "../../../../Images/VerticalBlackThreeDots.svg";
 import { Link } from "react-router-dom";
 import IconKebabMenu from "../../SvgIcons/IconKebabMenu";
 import IconDeleteFill from "../../SvgIcons/IconDeleteFill";
 import { useSelector } from "react-redux";
 import { unsavePost } from "../../../../Service/user";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
-
 
 const SavedPostSmallCard = ({
   activeHeader,
@@ -47,13 +46,12 @@ const SavedPostSmallCard = ({
     return () => {
       document.removeEventListener("click", outsideClickHandler);
     };
-  }, [])
+  }, []);
 
   // Handle Remove from saved
-  async function handleRemoveFromSaved(e){
-
+  async function handleRemoveFromSaved(e) {
     setLoading(true);
-    
+
     const requestBody = {
       userId: loggedInUser._id,
       postId: postId,
@@ -66,16 +64,14 @@ const SavedPostSmallCard = ({
       // Set allPosts
       // setShowKebabMenu(false);
       setLoading(false);
-      const updatedSavedPosts = allPosts.filter(({_id}) => _id !== postId);
-      console.log("after remove",updatedSavedPosts)
+      const updatedSavedPosts = allPosts.filter(({ _id }) => _id !== postId);
+      console.log("after remove", updatedSavedPosts);
       setAllPosts(updatedSavedPosts);
-
     } catch (error) {
       console.log(error);
       setShowKebabMenu(false);
       setLoading(false);
     }
-
   }
 
   return (
@@ -96,7 +92,7 @@ const SavedPostSmallCard = ({
             >
               <img
                 src={profilePicture}
-                alt="Card Image"
+                alt="Profile"
                 className="img-fluid mr-2"
                 style={{
                   width: "30px",
@@ -114,21 +110,49 @@ const SavedPostSmallCard = ({
           </div>
 
           {/* Kebab menu */}
-          <div className="kebabMenu_container position-relative" ref={kebabMenuContainerRef}>
+          <div
+            className="kebabMenu_container position-relative"
+            ref={kebabMenuContainerRef}
+          >
             {/* <img
               src={ThreeDot}
               alt="Three Dot"
               className="img-fluid"
               style={{ width: "20px", height: "20px" }}
             /> */}
-            <button className="btn border-0 p-0 m-0" onClick={() => setShowKebabMenu(!showKebabMenu)}><IconKebabMenu /></button>
-            {showKebabMenu && 
-            <div className="kebab_menu d-flex flex-column gap-3 border rounded p-2">
-              <button className="btn border-0 p-0 m-0 d-flex align-items-center gap-2" onClick={handleRemoveFromSaved}>
-                {!loading && <><IconDeleteFill height="1rem" width="1rem" color="#8b1f1f" /><span className="" style={{fontSize:"14px"}}>Remove</span></>}
-                {loading && <><SpinnerBS spinnerSizeClass="spinner-border-sm" /><span style={{fontSize:"14px"}}>please wait</span></>}
-              </button>
-            </div> }
+            <button
+              className="btn border-0 p-0 m-0"
+              onClick={() => setShowKebabMenu(!showKebabMenu)}
+            >
+              <IconKebabMenu />
+            </button>
+            {showKebabMenu && (
+              <div className="kebab_menu d-flex flex-column gap-3 border rounded p-2">
+                <button
+                  className="btn border-0 p-0 m-0 d-flex align-items-center gap-2"
+                  onClick={handleRemoveFromSaved}
+                >
+                  {!loading && (
+                    <>
+                      <IconDeleteFill
+                        height="1rem"
+                        width="1rem"
+                        color="#8b1f1f"
+                      />
+                      <span className="" style={{ fontSize: "14px" }}>
+                        Remove
+                      </span>
+                    </>
+                  )}
+                  {loading && (
+                    <>
+                      <SpinnerBS spinnerSizeClass="spinner-border-sm" />
+                      <span style={{ fontSize: "14px" }}>please wait</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            )}
           </div>
         </div>
         {image ? (
