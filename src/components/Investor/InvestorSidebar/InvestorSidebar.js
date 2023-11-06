@@ -95,6 +95,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
       onMouseLeave={() => {
         if (!isMobileView) {
           setSidebarCollapsed(true);
+          setIsCommunityDetailOpen(false);
         }
       }}
       onMouseEnter={() => {
@@ -256,7 +257,12 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   className="sidebar__community d-flex gap-4 "
                   id="sidebar_community"
                 >
-                  <div onClick={() => setSidebarCollapsed(true)}>
+                  <div
+                    onClick={() => {
+                      setSidebarCollapsed(true);
+                      setIsCommunityDetailOpen(false);
+                    }}
+                  >
                     <CommunitiesIcon
                       width="17px"
                       height="17px"
