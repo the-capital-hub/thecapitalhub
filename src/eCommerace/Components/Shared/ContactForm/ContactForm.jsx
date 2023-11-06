@@ -11,7 +11,7 @@ export default function ContactForm({ className }) {
 
   return (
     <div
-      className={`contact_form_wrapper px-2 pt-3 pb-5 d-flex flex-column ${className}`}
+      className={`contact_form_wrapper px-2 pt-3 pb-5 d-flex flex-column ${className}`} id="contact-us"
     >
       <h2 className="form_heading text-capitalize mb-3">Let's talk!</h2>
       <form onSubmit={handleSubmit} className="contact_form">

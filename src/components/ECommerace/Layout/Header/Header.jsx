@@ -5,7 +5,15 @@ import Logo from "../../../../Images/Logo.svg";
 
 function Header() {
   const location = useLocation();
-
+  const scrollToContact = () => {
+    const contactElement = document.getElementById("contact-us");
+    if (contactElement) {
+      window.scrollTo({
+        top: contactElement.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  };
   return (
     <header className="container">
       <nav>
@@ -18,7 +26,7 @@ function Header() {
           {/* <NavLink to="/about " className='d-none d-md-flex'>About Us</NavLink> */}
         </div>
       </nav>
-      <Link to={location.pathname}>
+      <Link to={`${location.pathname}`} onClick={scrollToContact}>
         <button className="btn login-btn px-3 py-md-1">Contact Us</button>
       </Link>
     </header>

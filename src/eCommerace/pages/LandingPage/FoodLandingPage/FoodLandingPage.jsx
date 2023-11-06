@@ -16,6 +16,16 @@ import ServiceStats from "../../../Components/Shared/ServiceStats/ServiceStats";
 import OurClients from "../../../Components/Shared/OurClients/OurClients";
 
 function FoodLandingPage() {
+  const scrollToContact = () => {
+    const contactElement = document.getElementById("contact-us");
+    if (contactElement) {
+      window.scrollTo({
+        top: contactElement.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  };
+
   const reviews = [
     {
       text: "Our dining experience at The Capital Hub was exceptional. Delicious food beautifully presented with fresh, high-quality ingredients. Impeccable service and a cozy, welcoming atmosphere. We'll be back for more!",
@@ -87,7 +97,7 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
             food delivery applications with the smoothest user interface
             available in the market.{" "}
           </h6>
-          <Link to="" className="LinkBtn mt-2">
+          <Link to="" onClick={scrollToContact} className="LinkBtn mt-2">
             Contact Us
           </Link>
         </div>
