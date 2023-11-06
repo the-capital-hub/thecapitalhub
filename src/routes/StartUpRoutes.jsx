@@ -53,6 +53,9 @@ const EditCompanyProfilePage = lazy(() =>
 const StartupExplore = lazy(() =>
   import("../pages/StartUp/StartupExplore/StartupExplore")
 );
+const OtherCompanyProfilePage = lazy(() =>
+  import("../pages/StartUp/CompanyProfile/OtherCompanyProfilePage")
+);
 
 function StartUpRoutes() {
   return (
@@ -233,6 +236,16 @@ function StartUpRoutes() {
           </Suspense>
         }
       />
+
+      <Route
+        path="/company-profile/:founderId"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <OtherCompanyProfilePage />
+          </Suspense>
+        }
+      />
+
       <Route
         path="/explore"
         element={
