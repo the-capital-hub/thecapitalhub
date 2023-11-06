@@ -1,10 +1,10 @@
 import CompanyInfo from "./company-section-one/company-info/CompanyInfo";
-import HCLImage from "../../../Images/Investor/CompanyProfile/HCL.png";
+// import HCLImage from "../../../Images/Investor/CompanyProfile/HCL.png";
 import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
 import CompanyActions from "./company-section-one/company-actions/CompanyActions";
 import CompanyStats from "./company-section-one/company-stats/CompanyStats";
 import PublicLinks from "./company-section-two/public-links/PublicLinks";
-import Feedback from "./company-section-two/feedback/Feedback";
+// import Feedback from "./company-section-two/feedback/Feedback";
 import FoundingTeam from "./company-section-two/founding-team/FoundingTeam";
 import KeyFocus from "./company-section-two/key-focus/KeyFocus";
 import CompanyAbout from "./company-section-one/company-about/CompanyAbout";
@@ -105,7 +105,7 @@ export default function CompanyProfile({
             location={location}
             foundedYear={new Date(foundedIn).getFullYear()}
           />
-          <CompanyActions isOnelink={isOnelink} founderId={founderId}/>
+          <CompanyActions isOnelink={isOnelink} founderId={founderId} />
         </div>
         <CompanyAbout
           about={description}
@@ -124,7 +124,7 @@ export default function CompanyProfile({
         )}
       </div>
 
-      <div className="company__section__two d-flex flex-column gap-4 pt-3 pb-5 px-5">
+      <div className="company__section__two d-flex flex-column gap-4 pt-3 pb-5 px-3 px-md-5">
         <PublicLinks socialLinks={socialLinks} />
         {/* <Feedback /> */}
         {!short && <FoundingTeam isOnelink={isOnelink} team={team} />}

@@ -5,11 +5,23 @@ import { updateIntroMsgAPI, postInvestorData } from "../../../../Service/user";
 import { useSelector } from "react-redux";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 
-const IntroductoryMessage = ({ title, image, para, previous, input, className, isExitClicked, setCompany, investor = false }) => {
+const IntroductoryMessage = ({
+  title,
+  image,
+  para,
+  previous,
+  input,
+  className,
+  isExitClicked,
+  setCompany,
+  investor = false,
+  showPreviousIM = false,
+}) => {
   const [newIntroMsg, setNewIntroMsg] = useState("");
   const [newPara, setNewPara] = useState("");
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const [showPreviousMessages, setShowPreviousMessages] = useState(false);
+  const [showPreviousMessages, setShowPreviousMessages] =
+    useState(showPreviousIM);
   const [loading, setLoading] = useState(false);
 
   const togglePreviousMessages = () => {
@@ -57,31 +69,41 @@ const IntroductoryMessage = ({ title, image, para, previous, input, className, i
   };
 
   return (
-    <div className={`introductory_message_container mt-3 ${className}`}>
+    <div className={`introductory_message_container ${className}`}>
       <div className="box_container rounded-4 border shadow-sm">
         <section className="title_section">
           <div
-            className={`title_wrapper ${!para ? "title-only-border" : "default-border"
-              }`}
+            className={`title_wrapper ${
+              !para ? "title-only-border" : "default-border"
+            }`}
           >
             <h6>{title}</h6>
             {para && (
               <button
-                className={`toggle-button ${investor ? 'investor' : 'startup'}`}
-                onClick={togglePreviousMessages}>
-                {showPreviousMessages ? "Hide Previous Messages" : "Show Previous Messages"}
+                className={`toggle-button ${investor ? "investor" : "startup"}`}
+                onClick={togglePreviousMessages}
+              >
+                {showPreviousMessages
+                  ? "Hide Previous Messages"
+                  : "Show Previous Messages"}
               </button>
             )}
           </div>
         </section>
-        {isExitClicked && newPara === "" && (para === undefined || para === "") && (
-          <div className="warning_message">Please enter an introductory message.</div>
-        )}
+        {isExitClicked &&
+          newPara === "" &&
+          (para === undefined || para === "") && (
+            <div className="warning_message">
+              Please enter an introductory message.
+            </div>
+          )}
         {(para || newPara) && (
           <section className="text_section">
-            {showPreviousMessages &&
+            {showPreviousMessages && (
               <>
-                <p><strong>Previous Introductory Message:</strong></p>
+                <p>
+                  <strong>Previous Introductory Message:</strong>
+                </p>
                 {previous && previous.length > 0 ? (
                   top3Previous?.map((message, index) => (
                     <p
@@ -94,10 +116,9 @@ const IntroductoryMessage = ({ title, image, para, previous, input, className, i
                 )}
                 <hr />
               </>
-            }
+            )}
 
             <p dangerouslySetInnerHTML={{ __html: newPara || para }} />
-
           </section>
         )}
         {input && (
@@ -125,7 +146,6 @@ const IntroductoryMessage = ({ title, image, para, previous, input, className, i
                 ) : (
                   <img src={Send} alt="Send" />
                 )}
-
               </div>
             </div>
           </section>

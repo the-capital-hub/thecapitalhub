@@ -10,12 +10,12 @@ import {
 import ArrowLeft from "../../../Images/investorsidebar/ArrowLeft.svg";
 import ArrowRight from "../../../Images/investorsidebar/ArrowRight.svg";
 import Setting from "../../../Images/investorsidebar/Settings.svg";
-import Support from "../../../Images/investorsidebar/Support.svg";
+// import Support from "../../../Images/investorsidebar/Support.svg";
 import HomeIcon from "../../../Images/investorIcon/home.svg";
 import BookIcon from "../../../Images/investorIcon/Book.svg";
 import ExitIcon from "../../../Images/investorIcon/Exit.svg";
-import GroupIcon from "../../../Images/investorIcon/Group.svg";
-import InvestorIcon from "../../../Images/investorIcon/Pot.svg";
+// import GroupIcon from "../../../Images/investorIcon/Group.svg";
+// import InvestorIcon from "../../../Images/investorIcon/Pot.svg";
 import SaveIcon from "../../../Images/investorIcon/Save.svg";
 import PlusIcon from "../../../Images/investorIcon/Plus.svg";
 import { BsLink45Deg, BsChevronDown, BsChevronUp } from "react-icons/bs";

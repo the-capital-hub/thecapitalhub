@@ -17,24 +17,30 @@ import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
 import AfterSuccessPopUp from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import { useNavigate } from "react-router-dom";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import {
+  getUserCompanyData,
+  setUserCompany,
+} from "../../../Store/features/user/userSlice";
 
 export default function CompanyProfilePage() {
   const navigate = useNavigate();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const userCompanyData = useSelector(getUserCompanyData);
   const dispatch = useDispatch();
 
-  const [companyData, setCompanyData] = useState([]);
+  const [companyData, setCompanyData] = useState(userCompanyData);
   const [loading, setLoading] = useState(false);
   const [companies, setCompanies] = useState([]);
   const [selectedCompanyId, setSelectedCompanyId] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
-    if (!loggedInUser?.investor) {
+    if (!userCompanyData) {
       setLoading(true);
       getStartupByFounderId(loggedInUser._id)
         .then(({ data }) => {
           setCompanyData(data);
+          dispatch(setUserCompany(data));
           setLoading(false);
         })
         .catch((error) => {
@@ -44,7 +50,7 @@ export default function CompanyProfilePage() {
     }
     document.title = "Company Profile | The Capital Hub";
     dispatch(setPageTitle("Company"));
-  }, [dispatch]);
+  }, [dispatch, userCompanyData]);
 
   const handleSearchInputChange = (e) => {
     const newValue = e.target.value;
@@ -113,8 +119,8 @@ export default function CompanyProfilePage() {
           <div className="edit-container">
             {!loading && (
               <>
-                {companyData.length !== 0 ? (
-                  companyData.founderId === loggedInUser._id ? (
+                {companyData?.length !== 0 ? (
+                  companyData?.founderId === loggedInUser._id ? (
                     <div className="bg-white rounded-4 p-4">
                       <Link
                         to="/company-profile/edit"
@@ -249,7 +255,7 @@ export default function CompanyProfilePage() {
             )}
           </div>
           {!loading ? (
-            companyData.length === 0 ? (
+            companyData?.length === 0 ? (
               <div className="bg-white rounded-4 p-4">
                 <p>No company found.</p>
               </div>
