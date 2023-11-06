@@ -11,7 +11,7 @@ export default function OnePagerTeam({ team }) {
       <h4 className="main_color">Team</h4>
       <div className="onePager_teamMember_container">
         {/* Loop team members here */}
-        {team.map((member, index) => {
+        {team?.map((member, index) => {
           return (
             <OnePagerTeamMember
               key={`${member.name}${index}`}

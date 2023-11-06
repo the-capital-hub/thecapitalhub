@@ -136,37 +136,37 @@ export default function InvestmentPhilosophy() {
           className="col"
           img={totalInvestmentIcon}
           title="Total Investment"
-          amount="1 Crore"
+          amount={investor?.colorCard?.total_investment || "0"}
         />
         <InvestmentDetailCard
           className="col"
           img={avgInvestmentIcon}
           title="Average Investment"
-          amount="50 Lakhs"
+          amount={investor?.colorCard?.averageInvestment || "0"}
         />
         <InvestmentDetailCard
           className="col"
           img={noOfInvestmentIcon}
           title="No.of Investment"
-          amount="10"
+          amount={investor?.colorCard?.no_of_investments || "0"}
         />
         <InvestmentDetailCard
           className="col"
           img={ticketSizeIcon}
           title="Minimum Tickets Size"
-          amount="25 Lakhs"
+          amount={investor?.colorCard?.minimumTicketsSize || "0"}
         />
         <InvestmentDetailCard
           className="col"
           img={ticketSizeIcon}
           title="Maximum Tickets Size"
-          amount="50 Lakhs"
+          amount={investor?.colorCard?.maximumTicketsSize || "0"}
         />
         <InvestmentDetailCard
           className="col"
           img={seedRoundIcon}
           title="Seed Round"
-          amount="10"
+          amount={investor?.colorCard?.seedRound || "0"}
         />
       </div>
       <button className="green_button btn mx-3">
