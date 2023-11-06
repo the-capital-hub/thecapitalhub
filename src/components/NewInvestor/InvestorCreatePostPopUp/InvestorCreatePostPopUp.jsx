@@ -6,7 +6,7 @@ import ThreeDotsIcon from "../../../Images/ThreeDots.svg";
 import CameraIcon from "../../../Images/Camera.svg";
 import IconVideo from "../../../Images/post/Video.svg";
 import { useSelector } from "react-redux";
-import { getSinglePostAPI, postUserPost } from "../../../Service/user";
+import { getSinglePostAPI, postUserPost, getInvestorById } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
 import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import FeedPostCard from "../../Investor/Cards/FeedPost/FeedPostCard";
@@ -56,6 +56,17 @@ const CreatePostPopUp = ({
   const handleSmileeButtonClick = () => {
     smileeInputRef.current.click();
   };
+
+  const   handleOneLinkClick=()=>{
+    getInvestorById(loggedInUser.investor)
+    .then(({ data }) => {
+      setPostText(
+        (prevPostText) =>
+          prevPostText + ` https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`
+      );
+    })
+    .catch((error) => console.log(error));
+  }
 
   const [previewImage, setPreviewImage] = useState("");
   const [previewVideo, setPreviewVideo] = useState("");
@@ -183,6 +194,7 @@ const CreatePostPopUp = ({
     // Call the postUserPost function to make the POST request to the server
     postUserPost(postData)
       .then((response) => {
+        console.log(response.data)
         appendDataToAllPosts(response.data)
         setPostText("");
         setSelectedImage(null);
@@ -393,7 +405,7 @@ const CreatePostPopUp = ({
                     {/* <button className="white_button">
                       <img src={ThreeDotsIcon} alt="Button 4" />
                     </button> */}
-                    <button className="white_button">
+                    <button className="white_button" onClick={handleOneLinkClick} >
                       {/* <img src={ThreeDotsIcon} alt="Button 4" /> */}
                       <BsLink45Deg
                         height={"59px"}
