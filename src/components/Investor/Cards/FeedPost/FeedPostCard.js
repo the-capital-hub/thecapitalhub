@@ -41,7 +41,7 @@ import ModalBSHeader from "../../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
 import ModalBSFooter from "../../../PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
 import ModalBSBody from "../../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
 import { BiMessageSquareAdd } from "react-icons/bi";
-import IconComponent_add from "../../SvgIcons/IconComponent_add";
+import IconComponentAdd from "../../SvgIcons/IconComponentAdd";
 import Linkify from "react-linkify";
 import IconDelete from "../../SvgIcons/IconDelete";
 import IconReportPost from "../../SvgIcons/IconReportPost";
@@ -344,11 +344,11 @@ const FeedPostCard = ({
 
   useEffect(() => {
     getLikeCount(postId)
-      .then(({ data }) => {
-        setLikedBy(data.likedBy);
+      .then((data) => {
+        setLikedBy(data?.data.likedBy);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [liked, postId]);
 
   const singleClickTimer = useRef(null);
   const [showImgagePopup, setShowImgagePopup] = useState(false);
@@ -465,16 +465,16 @@ const FeedPostCard = ({
                       {userId === loggedInUser?._id && (
                         <li
                           onClick={() => handleAddToFeatured(postId)}
-                          className="d-flex align-items-center gap-2"
+                          className="d-flex align-items-center gap-1"
                         >
-                          <IconComponent_add />
+                          <IconComponentAdd />
                           <span>Featured</span>
                         </li>
                       )}
                       {userId === loggedInUser?._id && (
                         <li
                           onClick={() => deletePost(postId)}
-                          className="d-flex align-items-center gap-2"
+                          className="d-flex align-items-center gap-1"
                         >
                           <IconDelete />
                           <span>Delete</span>
@@ -483,7 +483,7 @@ const FeedPostCard = ({
                       <li
                         data-bs-toggle="modal"
                         data-bs-target="#reportPostModal"
-                        className="d-flex align-items-center gap-2"
+                        className="d-flex align-items-center gap-1"
                         // onClick={() => setShowReportModal(true)}
                       >
                         <IconReportPost />
@@ -528,7 +528,7 @@ const FeedPostCard = ({
                     style={{ maxHeight: "350px", objectFit: "contain" }}
                     width={!repostPreview ? "100%" : "50%"}
                     src={image}
-                    alt="post-image"
+                    alt="Post media"
                     onClick={handleImageOnClick}
                   />
                 </span>

@@ -14,6 +14,18 @@ import FolderImage from "../../../Images/Folder.svg";
 import VideoImage from "../../../Images/Video.svg";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import {
+  OnePagerCompanyAbout,
+  OnePagerCompanyInfo,
+  OnePagerCompanyLogo,
+  OnePagerFundAsking,
+  OnePagerMarketSize,
+  OnePagerProjections,
+  OnePagerRoadmap,
+  OnePagerSocialLinks,
+  OnePagerTeam,
+} from "../../../components/Shared/OnePager";
+import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 
 export default function InvestorOnelink() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -84,7 +96,31 @@ export default function InvestorOnelink() {
         </div>
 
         {/* Onepage Preview */}
-        <OnePagePreview show={true} />
+        {/* <OnePagePreview show={true} /> */}
+
+        {company.length !== 0 ? (
+          <div className="onePager_wrapper d-flex flex-column gap-4" theme="investor">
+            <OnePagerCompanyLogo image={company.logo} />
+            <OnePagerCompanyInfo
+              company={company.companyName}
+              location={company.location}
+              startedAtDate={company.startedAtDate}
+              keyFocus={company.keyFocus}
+              socialLinks={company.socialLinks}
+              showEdit={false}
+            />
+            {/* <OnePagerCompanyAbout
+              description={company.description}
+              problem={company.problem}
+              solution={company.solution}
+              showEdit={true}
+            /> */}
+          </div>
+        ) : (
+          <SpinnerBS className={"d-flex justify-content-center w-100 py-5"} />
+        )}
+
+
         {isExitClicked && company.introductoryMessage && (
           <SharingOneLinkPopUp
             introMessage={company.introductoryMessage}

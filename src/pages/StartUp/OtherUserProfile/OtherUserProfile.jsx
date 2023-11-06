@@ -1,28 +1,27 @@
-import "./OtherUserProfile.scss";
-import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
-import messageIcon from "../../../Images/StartUp/icons/message.svg";
 import connection from "../../../Images/StartUp/icons/connection-user.png";
+import messageIcon from "../../../Images/StartUp/icons/message.svg";
+import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
+import "./OtherUserProfile.scss";
 
-import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
-import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
-import companyLogo from "../../../Images/dummy/companyLogo.png";
-import CompanyDetailsCard from "../../../components/Investor/InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
-import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
-import lastRoundInvIcon from "../../../Images/StartUp/icons/ColoredCards/isoSideCoin.svg";
-import totalInvIcon from "../../../Images/StartUp/icons/ColoredCards/oneHandSideCoin.svg";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import raisedFundsIcon from "../../../Images/StartUp/icons/ColoredCards/3CoinStack.svg";
+import valuationIcon from "../../../Images/StartUp/icons/ColoredCards/3Coins.svg";
 import noOfInvIcon from "../../../Images/StartUp/icons/ColoredCards/Investors.svg";
 import fundAskIcon from "../../../Images/StartUp/icons/ColoredCards/fundAsk.svg";
-import valuationIcon from "../../../Images/StartUp/icons/ColoredCards/3Coins.svg";
-import raisedFundsIcon from "../../../Images/StartUp/icons/ColoredCards/3CoinStack.svg";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import lastRoundInvIcon from "../../../Images/StartUp/icons/ColoredCards/isoSideCoin.svg";
+import totalInvIcon from "../../../Images/StartUp/icons/ColoredCards/oneHandSideCoin.svg";
 import {
   getUserAndStartUpByUserIdAPI,
   sentConnectionRequest,
 } from "../../../Service/user";
+import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
+import CompanyDetailsCard from "../../../components/Investor/InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
 import FeaturedPostsContainer from "../../../components/Investor/InvestorGlobalCards/MilestoneCard/FeaturedPostsContainer";
-import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
+import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import AfterSuccessPopup from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
@@ -39,7 +38,7 @@ function OtherUserProfile() {
   useEffect(() => {
     window.title = "User Profile | The Capital Hub";
     dispatch(setPageTitle("User Profile"));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -241,12 +240,12 @@ function OtherUserProfile() {
                     {/* Heading */}
                     <div className="d-flex justify-content-between">
                       <h4>Featured Posts</h4>
-                      <Link
+                      {/* <Link
                         className="fs-6 text-decoration-none"
                         style={{ color: "#717171" }}
                       >
                         See More
-                      </Link>
+                      </Link> */}
                     </div>
                     {/* Featured Posts container */}
                     <FeaturedPostsContainer userId={userId} />

@@ -408,6 +408,7 @@ const OneLinkEditView = () => {
         <span className="back_img rounded-circle shadow-sm" title="Go Back">
           <img
             src={backIcon}
+            alt="go back"
             width={20}
             height={20}
             onClick={() => navigate(-1)}
@@ -419,7 +420,7 @@ const OneLinkEditView = () => {
               <label htmlFor="logoImg" className="position-relative">
                 <img
                   src={selectedLogo || company?.logo}
-                  alt="image"
+                  alt="Selected logo or previous logo"
                   role="button"
                 />
                 <span

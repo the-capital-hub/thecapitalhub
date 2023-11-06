@@ -59,23 +59,24 @@ const CompanyDetailsCard = ({
     <>
       <div className={`${className} company_details_container `}>
         <div
-          className={`p-2 p-md-4 company_details box ${isOnelink ? "border" : ""
-            } `}
+          className={`px-2 px-md-4 py-4 company_details box ${
+            isOnelink ? "border" : ""
+          } `}
         >
           {/* Company details header */}
 
-          <div className="image_name_section d-flex flex-column flex-md-row align-items-start align-items-md-center" >
+          <div className="image_name_section d-flex flex-column flex-md-row align-items-start align-items-md-center">
             <span className="company_details_logo_container d-none d-md-block">
               <img src={onePager.logo || LogoX} alt="profileimage" />
             </span>
 
-
             <div className="d-flex  justify-content-between w-100 d-md-none d-flex">
-
               <span className="company_details_logo_container d-md-none d-flex">
-                <img src={onePager.logo || userDetails?.investor?.logo || LogoX} alt="profileimage  d-md-none d-flex" />
+                <img
+                  src={onePager.logo || userDetails?.investor?.logo || LogoX}
+                  alt="profileimage  d-md-none d-flex"
+                />
               </span>
-
 
               {page === "edit" ? (
                 <span className="align-self-start ms-auto d-md-none d-block pt-2">
@@ -102,12 +103,7 @@ const CompanyDetailsCard = ({
               ) : (
                 ""
               )}
-
-
             </div>
-
-
-
 
             <div className="left_profile_text flex_content ms-md-0 ms-2">
               <h2 className="typography m-2">
@@ -136,7 +132,10 @@ const CompanyDetailsCard = ({
               </span>
               <div className="small_typo social_icon mt-3">
                 <a
-                  href={socialLinks?.website || userDetails?.investor?.socialLinks?.website}
+                  href={
+                    socialLinks?.website ||
+                    userDetails?.investor?.socialLinks?.website
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -147,7 +146,10 @@ const CompanyDetailsCard = ({
                   />
                 </a>
                 <a
-                  href={socialLinks?.linkedin || userDetails?.investor?.socialLinks?.linkedin}
+                  href={
+                    socialLinks?.linkedin ||
+                    userDetails?.investor?.socialLinks?.linkedin
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -158,7 +160,10 @@ const CompanyDetailsCard = ({
                   />
                 </a>
                 <a
-                  href={socialLinks?.twitter || userDetails?.investor?.socialLinks?.twitter}
+                  href={
+                    socialLinks?.twitter ||
+                    userDetails?.investor?.socialLinks?.twitter
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -169,7 +174,10 @@ const CompanyDetailsCard = ({
                   />
                 </a>
                 <a
-                  href={socialLinks?.instagram || userDetails?.investor?.socialLinks?.instagram}
+                  href={
+                    socialLinks?.instagram ||
+                    userDetails?.investor?.socialLinks?.instagram
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -183,9 +191,9 @@ const CompanyDetailsCard = ({
             </div>
 
             {/* Edit button */}
-            {page === "edit" ? (
-              <span className="align-self-start ms-auto ">
-                <div className="">
+            {/* {page === "edit" ? (
+              <span className="align-self-start ms-auto">
+                <div className="border ">
                   <button
                     className="edit-btn d-none d-md-block"
                     onClick={() =>
@@ -207,7 +215,7 @@ const CompanyDetailsCard = ({
               </span>
             ) : (
               ""
-            )}
+            )} */}
           </div>
 
           {/* Company details text */}
@@ -319,7 +327,12 @@ const CompanyDetailsCard = ({
                 </div>
               </>
             ) : (
-              <p className="small_typo">{descriptionContent || userDetails?.startUp?.description || userDetails?.investor?.description || "No description"}</p>
+              <p className="small_typo">
+                {descriptionContent ||
+                  userDetails?.startUp?.description ||
+                  userDetails?.investor?.description ||
+                  "No description"}
+              </p>
             )}
           </div>
         </div>

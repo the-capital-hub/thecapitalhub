@@ -96,7 +96,7 @@ function NotificationsPopup({
     try {
       await markNotificationAsReadAPI(id);
       await fetchNotifications();
-      setNotificationCount(notificationCount--);
+      setNotificationCount((prev) => prev - 1);
     } catch (error) {
       console.log("Error marking notification as read", error);
     }

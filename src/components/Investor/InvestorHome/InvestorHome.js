@@ -23,8 +23,8 @@ import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import ConnectionCard from "../ConnectionCard/ConnectionCard";
 import ProfessionalInfo from "../StartupProfilePageComponents/ProfessionalInfo/ProfessionalInfo";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
-import OnBoardUser from "../../OnBoardUser/OnBoardUser";
-import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
+// import OnBoardUser from "../../OnBoardUser/OnBoardUser";
+// import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
 import ColorCards from "./Components/ColorCards/ColorCards";
 import UserBio from "./Components/UserBio/UserBio";
 import MissingDetails from "./Components/Questionnaire/MissingDetails";
@@ -127,7 +127,7 @@ const InvestorHome = () => {
           handleRefetch={handleRefetch}
         /> */}
       </div>
-      <OnBoardUser steps={startupOnboardingSteps.profilePage} />
+      {/* <OnBoardUser steps={startupOnboardingSteps.profilePage} /> */}
     </MaxWidthWrapper>
   );
 };

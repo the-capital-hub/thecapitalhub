@@ -12,7 +12,7 @@ import {
 import { Link } from "react-router-dom";
 import { setRecommendations } from "../../../../Store/features/user/userSlice";
 
-const RecommendationCard = ({ isInvestor }) => {
+const RecommendationCard = ({ isInvestor, maxCount = 5 }) => {
   // Fetch Global states
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const recommendations = useSelector((state) => state.user.recommendations);
@@ -84,7 +84,7 @@ const RecommendationCard = ({ isInvestor }) => {
             ) : (
               <>
                 {recommendations && recommendations.length > 0 ? (
-                  recommendations.map((user, i) => (
+                  recommendations.slice(0, maxCount).map((user, i) => (
                     <div className="card_wrapper" key={i}>
                       <div className="card-body recommendation_card_body">
                         <Link
@@ -99,7 +99,7 @@ const RecommendationCard = ({ isInvestor }) => {
                             src={user.profilePicture}
                             alt="img"
                             className="rounded-circle"
-                            style={{objectFit:"cover"}}
+                            style={{ objectFit: "cover" }}
                           />
                         </Link>
                         <div className="recommendation_card_text">

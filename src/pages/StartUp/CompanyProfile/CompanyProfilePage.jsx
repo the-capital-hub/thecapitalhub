@@ -8,7 +8,7 @@ import {
   getStartupByFounderId,
   searchStartUps,
   addStartUpToUser,
-  updateUserAPI
+  updateUserAPI,
 } from "../../../Service/user";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -17,24 +17,30 @@ import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
 import AfterSuccessPopUp from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import { useNavigate } from "react-router-dom";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import {
+  getUserCompanyData,
+  setUserCompany,
+} from "../../../Store/features/user/userSlice";
 
 export default function CompanyProfilePage() {
   const navigate = useNavigate();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const userCompanyData = useSelector(getUserCompanyData);
   const dispatch = useDispatch();
 
-  const [companyData, setCompanyData] = useState([]);
+  const [companyData, setCompanyData] = useState(userCompanyData);
   const [loading, setLoading] = useState(false);
   const [companies, setCompanies] = useState([]);
   const [selectedCompanyId, setSelectedCompanyId] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
-    if (!loggedInUser?.investor) {
+    if (!userCompanyData) {
       setLoading(true);
       getStartupByFounderId(loggedInUser._id)
         .then(({ data }) => {
           setCompanyData(data);
+          dispatch(setUserCompany(data));
           setLoading(false);
         })
         .catch((error) => {
@@ -44,7 +50,7 @@ export default function CompanyProfilePage() {
     }
     document.title = "Company Profile | The Capital Hub";
     dispatch(setPageTitle("Company"));
-  }, []);
+  }, [dispatch, userCompanyData]);
 
   const handleSearchInputChange = (e) => {
     const newValue = e.target.value;
@@ -95,14 +101,14 @@ export default function CompanyProfilePage() {
       const requestBody = {
         userId: loggedInUser._id,
         startUp: null,
-      }
+      };
       const response = await updateUserAPI(requestBody);
       console.log(response);
       navigate("/company-profile/edit");
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <MaxWidthWrapper>
@@ -113,8 +119,8 @@ export default function CompanyProfilePage() {
           <div className="edit-container">
             {!loading && (
               <>
-                {companyData.length !== 0 ? (
-                  companyData.founderId === loggedInUser._id ? (
+                {companyData?.length !== 0 ? (
+                  companyData?.founderId === loggedInUser._id ? (
                     <div className="bg-white rounded-4 p-4">
                       <Link
                         to="/company-profile/edit"
@@ -126,14 +132,21 @@ export default function CompanyProfilePage() {
                   ) : (
                     <div className="bg-white rounded-4 p-4">
                       {/* <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5"> */}
-                      <button className="btn-base startup"
+                      <button
+                        className="btn-base startup"
                         onClick={handleAddNew}
-                      >Add new company details</button>
+                      >
+                        Add new company details
+                      </button>
                       {/* </Link> */}
                       <div className="or-text-container">
-                        <p className="text-decoration-none text-dark fs-5">Or</p>
+                        <p className="text-decoration-none text-dark fs-5">
+                          Or
+                        </p>
                       </div>
-                      <p className="text-decoration-none text-dark fs-5">Choose from an existing Company</p>
+                      <p className="text-decoration-none text-dark fs-5">
+                        Choose from an existing Company
+                      </p>
                       <div>
                         <input
                           type="text"
@@ -145,10 +158,11 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${selectedCompanyId === company._id
-                                  ? "active"
-                                  : ""
-                                  }`}
+                                className={`suggestion-item ${
+                                  selectedCompanyId === company._id
+                                    ? "active"
+                                    : ""
+                                }`}
                                 key={index}
                                 onClick={() =>
                                   handleCompanySelection(
@@ -204,13 +218,17 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${selectedCompanyId === company._id
-                                  ? "active"
-                                  : ""
-                                  }`}
+                                className={`suggestion-item ${
+                                  selectedCompanyId === company._id
+                                    ? "active"
+                                    : ""
+                                }`}
                                 key={index}
                                 onClick={() =>
-                                  handleCompanySelection(company._id, company.company)
+                                  handleCompanySelection(
+                                    company._id,
+                                    company.company
+                                  )
                                 }
                               >
                                 <img
@@ -237,7 +255,7 @@ export default function CompanyProfilePage() {
             )}
           </div>
           {!loading ? (
-            companyData.length === 0 ? (
+            companyData?.length === 0 ? (
               <div className="bg-white rounded-4 p-4">
                 <p>No company found.</p>
               </div>

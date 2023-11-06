@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getQuestionCountAPI } from "../../../../../Service/user";
 import Questionnaire from "./Questionnaire";
 
-export default function MissingDetails() {
+export default function MissingDetails({ isInvestor = false }) {
   // State for question count
   const [countData, setCountData] = useState(null);
   const [refetch, setRefetch] = useState(false);
@@ -29,15 +29,18 @@ export default function MissingDetails() {
   }
 
   return (
-    <>
+    <div className="bg-white rounded-4 shadow-sm lh-1 d-flex flex-column">
       {countData?.total ? (
         <button
           id="missingDetails"
-          className="btn border-0 bg-white rounded-4 shadow-sm lh-1 py-4 fs-5"
+          className="btn border-0 fs-5 py-3"
           data-bs-toggle="offcanvas"
           data-bs-target="#questionnaireOffCanvas"
           ariaControls="offcanvasTop"
-          style={{ color: "#fd5901" }}
+          style={{
+            color: isInvestor ? "#000" : "#fd5901",
+            backgroundColor: isInvestor ? "#d3f36b" : "#fff"
+          }}
         >
           Add missing details {countData && `(${countData.total})`}
         </button>
@@ -50,7 +53,8 @@ export default function MissingDetails() {
         countData={countData}
         setCountData={setCountData}
         handleRefetch={handleRefetch}
+        isInvestor={isInvestor}
       />
-    </>
+    </div>
   );
 }

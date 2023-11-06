@@ -3,15 +3,17 @@ import "./ContactForm.scss";
 
 const APP_TYPES = ["Website", "Mobile Application", "Website and Mobile App"];
 
-export default function ContactForm() {
+export default function ContactForm({ className }) {
   // handle submit
   async function handleSubmit(e) {
     e.preventDefault();
   }
 
   return (
-    <div className="contact_form_wrapper px-2 pt-3 pb-5 d-flex flex-column">
-      <h1 className="form_heading text-capitalize mb-3">collaborate with us</h1>
+    <div
+      className={`contact_form_wrapper px-2 pt-3 pb-5 d-flex flex-column ${className}`} id="contact-us"
+    >
+      <h2 className="form_heading text-capitalize mb-3">Let's talk!</h2>
       <form onSubmit={handleSubmit} className="contact_form">
         {/* Name */}
         <div className="form_div">

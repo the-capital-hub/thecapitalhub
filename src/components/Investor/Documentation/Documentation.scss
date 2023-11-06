@@ -1,12 +1,14 @@
 .documentation-wrapper {
-  margin-inline: 1.5em;
-  margin-block: 2em;
+  margin-inline: 0;
+  margin-block: 2.5em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 2em;
 
-  @media (min-width: 768px) {
+  @media (min-width: 992px) {
+    margin-inline: 1.5em;
+    margin-block: 2em;
     flex-direction: row;
   }
 
@@ -23,8 +25,10 @@
       gap: 30px;
 
       .cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
         gap: 2em;
 
         & > * {

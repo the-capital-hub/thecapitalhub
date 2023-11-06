@@ -16,6 +16,16 @@ import ServiceStats from "../../../Components/Shared/ServiceStats/ServiceStats";
 import OurClients from "../../../Components/Shared/OurClients/OurClients";
 
 function FoodLandingPage() {
+  const scrollToContact = () => {
+    const contactElement = document.getElementById("contact-us");
+    if (contactElement) {
+      window.scrollTo({
+        top: contactElement.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  };
+
   const reviews = [
     {
       text: "Our dining experience at The Capital Hub was exceptional. Delicious food beautifully presented with fresh, high-quality ingredients. Impeccable service and a cozy, welcoming atmosphere. We'll be back for more!",
@@ -83,12 +93,11 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
           <h1>Build your food delivery</h1>
           <h1 className="text-orange">application with Capital HUB!</h1>
           <h6 className="mt-2">
-            {" "}
             Build your business as Capital HUB builds your application. Enable
             food delivery applications with the smoothest user interface
             available in the market.{" "}
           </h6>
-          <Link to="/contactus" className="LinkBtn mt-2">
+          <Link to="" onClick={scrollToContact} className="LinkBtn mt-2">
             Contact Us
           </Link>
         </div>
@@ -164,7 +173,7 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
               highest quality food. Nourish your body and delight your taste
               buds with the harmonious pairing of health and taste
             </p> */}
-            <Link to="/contactus" className="LinkBtn">
+            <Link to="" onClick={scrollToContact} className="LinkBtn">
               Contact Us
             </Link>
           </div>
@@ -180,40 +189,47 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
         </div>
       </div> */}
 
-      <div className="container mx-auto help-cards flex-column flex-md-row ">
+      <div className="container-fluid mx-auto help-cards flex-column flex-md-row">
         <div className="help-card">
           <p className="count">01.</p>
-          <h6 className="title">Regular updates from our Product Manager</h6>
+          <h6 className="title">
+            Stay Informed with Our Product Manager's Timely Insights and Updates
+          </h6>
 
-          <Link to="/contactus" className="LinkBtn">
-            Contact Us
-          </Link>
+          {/* <Link to="/contactus" className="LinkBtn">
+              Contact Us
+            </Link> */}
         </div>
         <div className="help-card">
           <p className="count">02.</p>
-          <h6 className="title">Technical recommendation from core team</h6>
+          <h6 className="title">
+            Expert Tech Insights and recommendations from Our Core Team
+          </h6>
 
-          <Link to="/contactus" className="LinkBtn">
-            Contact Us
-          </Link>
+          {/* <Link to="/contactus" className="LinkBtn">
+              Contact Us
+            </Link> */}
         </div>
         <div className="help-card">
           <p className="count">03.</p>
           <h6 className="title">
-            Specialised and unique startup business consulting
+            Specialised and unique Startup Business Consulting That Sets You
+            Apart
           </h6>
 
-          <Link to="/contactus" className="LinkBtn">
-            Contact Us
-          </Link>
+          {/* <Link to="/contactus" className="LinkBtn">
+              Contact Us
+            </Link> */}
         </div>
         <div className="help-card">
           <p className="count">04.</p>
-          <h6 className="title">Deployment handled by the Capital HUB team</h6>
+          <h6 className="title">
+            Hassle-Free Deployment Managed by Capital HUB Team
+          </h6>
 
-          <Link to="/contactus" className="LinkBtn">
-            Contact Us
-          </Link>
+          {/* <Link to="/contactus" className="LinkBtn">
+              Contact Us
+            </Link> */}
         </div>
       </div>
 
@@ -277,7 +293,7 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
 
       {/* Contact form */}
       <div className="container mx-auto">
-        <ContactForm />
+        <ContactForm className="col-12 col-md-8 mx-auto" />
       </div>
 
       {/* <div className="fifth-section">
