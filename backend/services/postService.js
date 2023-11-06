@@ -39,6 +39,7 @@ export const createNewPost = async (data) => {
       });
       const type = "postShared";
       await addNotification(sharedPost.user, data.user, type, data.resharedPostId);
+      data.resharedPostId = await PostModel.findById(data.resharedPostId).populate('user');
     }
     const newPost = new PostModel(data);
     await newPost.save();

@@ -1,6 +1,9 @@
 .questionnaire_wrapper {
-  --color-main: rgba(253, 89, 1, 1);
-  --color-text: #fff;
+  --color-main-investor: #d3f36b;
+  --color-main-startup: rgba(253, 89, 1, 1);
+  --color-text-investor: #000;
+  --color-text-startup: #fff;
+  // --color-text: #fff;
   --color-shadow: rgba(0, 0, 0, 0.05);
 
   .offcanvas {
@@ -99,6 +102,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
     svg {
       fill: var(--color-main);
     }
@@ -110,7 +114,7 @@
     gap: 1rem;
 
     &:empty,
-    & > div:empty {
+    &>div:empty {
       display: none !important;
     }
   }
@@ -156,4 +160,16 @@
   .color_main {
     color: var(--color-main);
   }
+}
+
+.questionnaire_wrapper[theme="investor"] {
+  --color-main: var(--color-main-investor);
+  --color-text: var(--color-text-investor);
+  --color-shadow: rgba(0, 0, 0, 0.05);
+}
+
+.questionnaire_wrapper[theme="startup"] {
+  --color-main: var(--color-main-startup);
+  --color-text: var(--color-text-startup);
+  --color-shadow: rgba(0, 0, 0, 0.05);
 }
