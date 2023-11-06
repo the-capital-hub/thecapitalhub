@@ -73,7 +73,7 @@ const Documentation = () => {
 
   // switch (title) {
   //   case 'Title 1':
-  //     imageToShow = 
+  //     imageToShow =
   //     break;
   //   // Add more cases for other titles if needed
   //   default:
@@ -92,11 +92,14 @@ const Documentation = () => {
             )}
             <IntroductoryMessage
               title={"Upload your document"}
-            // para={
-            //   "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
-            // }
+              // para={
+              //   "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
+              // }
             />
-            <UploadContainer onClicked={setShowModal} fetchFolder={getFolders} />
+            <UploadContainer
+              onClicked={setShowModal}
+              fetchFolder={getFolders}
+            />
             <div className="cards px-xxl-4 bg-white py-5 rounded-4">
               {/* <Card
                   onClicked={() => navigate("/documentation/financials")}
@@ -106,22 +109,21 @@ const Documentation = () => {
                 let imageToShow;
 
                 switch (folder) {
-                  case 'pitchdeck':
+                  case "pitchdeck":
                     imageToShow = Pitch;
                     break;
-                  case 'business':
+                  case "business":
                     imageToShow = Business;
                     break;
-                  case 'kycdetails':
+                  case "kycdetails":
                     imageToShow = KYC;
                     break;
-                  case 'legal and compliance':
+                  case "legal and compliance":
                     imageToShow = Legal;
                     break;
                   default:
                     imageToShow = Pitch;
                 }
-
 
                 return (
                   <Card
@@ -164,10 +166,6 @@ const Documentation = () => {
           <NewsCorner />
         </div>
       </div>
-
-
-
-
     </MaxWidthWrapper>
     // <div className="container-fluid investorHome_main_container">
     //   <div className="row mt-2">

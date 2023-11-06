@@ -25,6 +25,7 @@ export default function Questionnaire({
   countData,
   setCountData,
   handleRefetch,
+  isInvestor,
 }) {
   const dispatch = useDispatch();
 
@@ -66,8 +67,12 @@ export default function Questionnaire({
   //   handle Option
   function handleOptionSelect(e, option) {
     // console.log("selected categry", option);
+    let endpoint = "Personal";
+    if (option.text === "Company") {
+      endpoint = isInvestor ? "Investor" : "Startup"
+    }
     setOption(option.text);
-    fetchQuestion(option.endpoint);
+    fetchQuestion(endpoint);
     setShowCategories(false);
   }
 
@@ -189,7 +194,7 @@ export default function Questionnaire({
   }
 
   return (
-    <div className="questionnaire_wrapper">
+    <div className="questionnaire_wrapper" theme={isInvestor ? "investor" : "startup"}>
       <OffcanvasBSContainer id="questionnaireOffCanvas">
         <OffcanvasBSHeader onClose={clearStates} />
         <OffcanvasBSBody bodyClass="p-0">

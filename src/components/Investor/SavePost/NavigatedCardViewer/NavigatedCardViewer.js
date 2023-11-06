@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./NavigatedCardViewer.scss";
-import FeedPostCard from "../../Cards/FeedPost/FeedPostCard";
+// import FeedPostCard from "../../Cards/FeedPost/FeedPostCard";
 import {
   getSavedPostCollections,
-  getSavedPostsAPI,
   getSavedPostsByCollection,
 } from "../../../../Service/user";
 import { useSelector } from "react-redux";
 import SavedPostSmallCard from "../../InvestorGlobalCards/SavedPostSmallCard/SavedPostSmallCard";
+import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 
 const NavigatedCardViewer = () => {
   const [activeHeader, setActiveHeader] = useState("startup");
@@ -77,7 +77,7 @@ const NavigatedCardViewer = () => {
         </div>
         <div className="card-viewer">
           {loading ? (
-            <div className="d-flex justify-content-center align-items-center w-100">
+            <div className="d-flex py-5 justify-content-center align-items-center w-100">
               <div className="spinner-border" role="status">
                 <span className="visually-hidden">Loading...</span>
               </div>
@@ -119,10 +119,16 @@ const NavigatedCardViewer = () => {
                 />
               )
             )
-          ) : (
+          ) : allPosts?.length === 0 ? (
             <p className="container p-5 text-center my-5 bg-white mx-auto">
               No posts saved
             </p>
+          ) : (
+            <SpinnerBS
+              className={
+                "d-flex py-5 justify-content-center align-items-center w-100"
+              }
+            />
           )}
         </div>
       </div>

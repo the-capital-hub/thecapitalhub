@@ -29,7 +29,7 @@
     }
 
     .connection_nav {
-      a {
+      button {
         margin-right: 20px;
         text-decoration: none;
         color: #000;
@@ -39,6 +39,13 @@
         font-weight: 400;
         line-height: 160%; /* 32px */
         letter-spacing: 0.8px;
+        border: 0;
+        outline: 0;
+        background-color: transparent;
+
+        &:active {
+          box-shadow: none;
+        }
       }
       .active {
         color: #fd5901;

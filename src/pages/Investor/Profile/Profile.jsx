@@ -15,6 +15,7 @@ import ProfessionalInfo from "../../../components/Investor/StartupProfilePageCom
 import StartupsInvested from "../../../components/NewInvestor/ProfileComponents/StartupsInvested/StartupsInvested";
 import SectorsInterested from "../../../components/NewInvestor/ProfileComponents/SectorsInterested/SectorsInterested";
 import InvestmentPhilosophy from "../../../components/NewInvestor/ProfileComponents/InvestmentPhilosophy/InvestmentPhilosophy";
+import MissingDetails from "../../../components/Investor/InvestorHome/Components/Questionnaire/MissingDetails";
 
 function Profile() {
   // Fetch loggedInUser from global state
@@ -50,6 +51,8 @@ function Profile() {
 
             {/* Professional Info */}
             <ProfessionalInfo theme={"investor"} />
+
+            <MissingDetails isInvestor={true} />
 
             {/* Bio Start */}
             <div className="box personal_information rounded-4 border shadow-sm">

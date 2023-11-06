@@ -350,7 +350,7 @@ export const getPostComment = async ({ postId }) => {
     return response;
   } catch (error) {
     console.error("Error:", error);
-    throw error;
+    // throw error;
   }
 };
 
@@ -834,9 +834,10 @@ export const markAllNotificationsReadAPI = async () => {
 export const getLikeCount = async (postId) => {
   try {
     const response = await axiosInstance.get(`${API.getLikeCount}/${postId}`);
-    return response.data;
+    return response?.data;
   } catch (error) {
-    console.log("Error getting notification count : ", error);
+    console.log("Error getting like count : ", error);
+    throw error;
   }
 };
 
