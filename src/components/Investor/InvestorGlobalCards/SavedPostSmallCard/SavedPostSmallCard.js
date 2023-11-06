@@ -63,10 +63,11 @@ const SavedPostSmallCard = ({
 
       // Set allPosts
       // setShowKebabMenu(false);
-      setLoading(false);
+
       const updatedSavedPosts = allPosts.filter(({ _id }) => _id !== postId);
       console.log("after remove", updatedSavedPosts);
       setAllPosts(updatedSavedPosts);
+      setLoading(false);
     } catch (error) {
       console.log(error);
       setShowKebabMenu(false);
@@ -129,10 +130,10 @@ const SavedPostSmallCard = ({
             {showKebabMenu && (
               <div className="kebab_menu d-flex flex-column gap-3 border rounded p-2">
                 <button
-                  className="btn border-0 p-0 m-0 d-flex align-items-center gap-2"
+                  className="btn border-0 p-0 m-0 d-flex align-items-center gap-2 shadow-none "
                   onClick={handleRemoveFromSaved}
                 >
-                  {!loading && (
+                  {!loading ? (
                     <>
                       <IconDeleteFill
                         height="1rem"
@@ -143,11 +144,10 @@ const SavedPostSmallCard = ({
                         Remove
                       </span>
                     </>
-                  )}
-                  {loading && (
+                  ) : (
                     <>
                       <SpinnerBS spinnerSizeClass="spinner-border-sm" />
-                      <span style={{ fontSize: "14px" }}>please wait</span>
+                      <span style={{ fontSize: "12px" }}>Removing</span>
                     </>
                   )}
                 </button>
