@@ -4,7 +4,7 @@
   --color-form-primary: #0d224e;
   --color-form-btn-text: white;
 
-  background-color: #f5f7ff;
+  // background-color: #f5f7ff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,8 +21,12 @@
       font-size: 52px;
       text-align: center;
     }
-    p {
-      color: #424242;
+    h2 {
+      margin-bottom: 0;
+    }
+    h6 {
+      color: var(--color-primary);
+      color: #535353;
     }
     .intro-main-img {
       display: flex;
@@ -152,7 +156,8 @@
         gap: 20px;
         border-radius: var(--border-radius);
         width: 300px;
-        height: 330px;
+        // height: 330px;
+        height: 300px;
         padding: 20px 30px 40px 30px;
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
         background-color: white;
