@@ -14,7 +14,7 @@ const SavePost = () => {
   useEffect(() => {
     document.title = "Saved Posts | The Capital Hub";
     dispatch(setPageTitle("Saved Posts"));
-  }, []);
+  }, [dispatch]);
 
   return (
     <MaxWidthWrapper>

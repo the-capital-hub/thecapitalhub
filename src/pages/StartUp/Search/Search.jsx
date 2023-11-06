@@ -24,13 +24,13 @@ function Search() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const searchBy = queryParams.get("query");
-  const userIdToRemove = loggedInUser._id;
+  // const userIdToRemove = loggedInUser._id;
   const dispatch = useDispatch();
 
   useEffect(() => {
     document.title = "Search Results | The Capital Hub";
     dispatch(setPageTitle("Search Results"));
-  }, []);
+  });
 
   const handleConnect = (userId) => {
     sentConnectionRequest(loggedInUser._id, userId)
@@ -85,7 +85,7 @@ function Search() {
                       <img
                         src={`${users?.profilePicture}`}
                         className="people_img rounded-circle"
-                        alt="people image"
+                        alt="user Profile"
                       />
                       <div className="d-flex flex-column justify-content-center">
                         <Link
@@ -152,13 +152,20 @@ function Search() {
                     className="people_container d-flex flex-column flex-md-row justify-content-center align-items-center justify-content-md-between align-items-center"
                   >
                     <div className="short_desc d-flex">
-                      <img
-                        src={`${company?.logo ? company?.logo : companyIcon}`}
-                        className="people_img rounded-circle"
-                        alt="company image"
-                      />
+                      <Link to={`/company-profile/${company?.founderId}`}>
+                        <img
+                          src={`${company?.logo ? company?.logo : companyIcon}`}
+                          className="people_img rounded-circle"
+                          alt="company logo"
+                        />
+                      </Link>
                       <div className="d-flex flex-column justify-content-center">
-                        <h5>{`${company?.company}`}</h5>
+                        <Link
+                          to={`/company-profile/${company?.founderId}`}
+                          className="people_name_link"
+                        >
+                          <h5>{`${company?.company}`}</h5>
+                        </Link>
                         <p>{`${
                           company?.description ? company?.description : ""
                         }`}</p>

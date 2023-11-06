@@ -1,12 +1,12 @@
 import React from "react";
 import "./OneLink.scss";
-import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
+// import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import RightProfileCard from "../InvestorGlobalCards/RightProfileCard/RightProfileCard";
 import RecommendationCard from "../InvestorGlobalCards/Recommendation/RecommendationCard";
-import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
+// import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import ShareLink from "./ShareLink/ShareLink";
 import IntroductoryMessage from "./IntroductoryMessage/IntroductoryMessage";
-import OnePagePreview from "./OnePagePreview/OnePagePreview";
+// import OnePagePreview from "./OnePagePreview/OnePagePreview";
 import ThreeDotsImage from "../../../Images/whiteTheeeDots.svg";
 import FolderImage from "../../../Images/Folder.svg";
 import VideoImage from "../../../Images/Video.svg";
@@ -40,7 +40,7 @@ const OneLink = () => {
     document.title = "One Link | The Capital Hub";
     dispatch(setPageTitle("One Link"));
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [company]);
+  }, [company, dispatch]);
 
   // Fetch data by userId
   useEffect(() => {
@@ -90,13 +90,14 @@ const OneLink = () => {
               input={true}
               isExitClicked={isExitClicked}
               setCompany={setCompany}
+              showPreviousIM={true}
             />
           </div>
 
           {/* Rightside content */}
           <div className="right__content">
             <RightProfileCard />
-            <RecommendationCard />
+            <RecommendationCard maxCount={3} />
             {/* <NewsCorner /> */}
           </div>
         </div>
