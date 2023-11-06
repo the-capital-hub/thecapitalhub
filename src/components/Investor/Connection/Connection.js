@@ -67,7 +67,7 @@ const Connection = () => {
     document.title = "Connections | The Capital Hub";
     dispatch(setPageTitle("Connections"));
     getReceivedConnections();
-  }, []);
+  }, [dispatch]);
 
   // Function to accept a connection
   const acceptConnectionHandler = async (connectionId) => {
@@ -117,7 +117,6 @@ const Connection = () => {
     }
   };
 
-
   return (
     <MaxWidthWrapper>
       <div className="connection_main_container">
@@ -127,30 +126,30 @@ const Connection = () => {
             <div className="col-12 mt-2 box  p-4">
               <h4>Manage Connections</h4>
               <nav className="connection_nav">
-                <a
-                  href="#"
-                  className={`connection_nav_link ${selectedTab === "received" ? "active" : ""
-                    }`}
+                <button
+                  className={`connection_nav_link ${
+                    selectedTab === "received" ? "active" : ""
+                  }`}
                   onClick={() => handleTabChange("received")}
                 >
                   Received
-                </a>
-                <a
-                  href="#"
-                  className={`connection_nav_link ${selectedTab === "sent" ? "active" : ""
-                    }`}
+                </button>
+                <button
+                  className={`connection_nav_link ${
+                    selectedTab === "sent" ? "active" : ""
+                  }`}
                   onClick={() => handleTabChange("sent")}
                 >
                   Sent
-                </a>
-                <a
-                  href="#"
-                  className={`connection_nav_link ${selectedTab === "accepted" ? "active" : ""
-                    }`}
+                </button>
+                <button
+                  className={`connection_nav_link ${
+                    selectedTab === "accepted" ? "active" : ""
+                  }`}
                   onClick={() => handleTabChange("accepted")}
                 >
                   Accepted
-                </a>
+                </button>
               </nav>
               <hr />
               <div className="connection_list">
@@ -175,7 +174,8 @@ const Connection = () => {
                             <Link to={`/user/${sender?._id}`}>
                               <img
                                 src={sender.profilePicture}
-                                alt="Connection"
+                                alt={`${sender.firstName} ${sender.lastName}`}
+                                style={{ objectFit: "cover" }}
                               />
                             </Link>
                             <div className="body_container">
@@ -235,7 +235,8 @@ const Connection = () => {
                               <Link to={`/user/${receiver?._id}`}>
                                 <img
                                   src={receiver?.profilePicture}
-                                  alt="Connection"
+                                  alt={`${receiver?.firstName} ${receiver?.lastName}`}
+                                  style={{ objectFit: "cover" }}
                                 />
                               </Link>
                               <div className="body_container">
@@ -286,7 +287,11 @@ const Connection = () => {
                         {/* Render the accepted connection content here */}
                         <div className="connection_left">
                           <Link to={`/user/${data._id}`}>
-                            <img src={data.profilePicture} alt="Connection" />
+                            <img
+                              src={data.profilePicture}
+                              alt={`${data.firstName} ${data.lastname}`}
+                              style={{ objectFit: "cover" }}
+                            />
                           </Link>
                           <div className="body_container">
                             <p className="connection_name h5">
@@ -294,8 +299,9 @@ const Connection = () => {
                                 to={`/user/${data._id}`}
                                 className=" text-black text-decoration-none"
                               >
-                                {`${data.firstName ? data.firstName : "name"} ${data.lastName ? data.lastName : ""
-                                  }`}
+                                {`${data.firstName ? data.firstName : "name"} ${
+                                  data.lastName ? data.lastName : ""
+                                }`}
                               </Link>
                             </p>
                             <p className="connection_designation">
