@@ -173,7 +173,7 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
               highest quality food. Nourish your body and delight your taste
               buds with the harmonious pairing of health and taste
             </p> */}
-            <Link to="" className="LinkBtn">
+            <Link to="" onClick={scrollToContact} className="LinkBtn">
               Contact Us
             </Link>
           </div>
