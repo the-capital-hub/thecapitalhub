@@ -253,11 +253,11 @@ console.log(error)
   };
   useEffect(() => {
     getLikeCount(postId)
-      .then(({ data }) => {
-        setLikedBy(data?.likedBy);
+      .then((data) => {
+        setLikedBy(data.data?.likedBy);
       })
-      .catch(error=>{console.log(error);})
-  }, [liked]);
+      .catch((error) => console.log(error));
+  }, [liked, postId]);
 
   const commentlikeUnlikeHandler = async (postId, commentId) => {
     try {
@@ -832,10 +832,10 @@ console.log(error)
             </button>
           ) : (
             <button class="submit_button btn" type="button" disabled
-            style={{
-              backgroundColor: '#d3f36b',
-              color: 'black' 
-            }}
+              style={{
+                backgroundColor: '#d3f36b',
+                color: 'black'
+              }}
             >
               <span role="status" className="me-1">
                 Submit report
