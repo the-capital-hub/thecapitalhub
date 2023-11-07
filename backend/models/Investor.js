@@ -120,6 +120,12 @@ const investorSchema = new Schema(
       //   return this.companyName.split(" ").join("").toLowerCase();
       // },
     },
+    milestones: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Milestones",
+      },
+    ],
   },
   {
     timestamps: true,
