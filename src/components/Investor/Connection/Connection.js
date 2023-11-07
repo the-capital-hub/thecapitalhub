@@ -119,7 +119,7 @@ const Connection = () => {
 
   return (
     <MaxWidthWrapper>
-      <div className="connection_main_container">
+      <div className="connection_main_container mb-4">
         <SmallProfileCard text={"Connections"} />
         <section className="content_section mt-4">
           <div className="row">

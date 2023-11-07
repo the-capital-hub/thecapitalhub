@@ -260,7 +260,7 @@ function OtherUserProfile() {
                     />
                   </div>
                   {/* Color Cards */}
-                  <div className="coloured_cards row row-cols-1 row-cols-md-2 row-cols-lg-3 gap-3">
+                  <div className="coloured_cards">
                     <ColorCard
                       color="white"
                       background="#BB98FF"
