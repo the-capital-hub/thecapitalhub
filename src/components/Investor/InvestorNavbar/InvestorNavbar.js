@@ -122,7 +122,7 @@ const InvestorNavbar = (props) => {
                 ) : (
                   <img src={HambergerCrossIcon} alt="bar" />
                 )}
-                <h1 className="ms-2">{pageTitle}</h1>
+                <h1 className="ms-2 text-break">{pageTitle}</h1>
               </div>
             </div>
           </div>
