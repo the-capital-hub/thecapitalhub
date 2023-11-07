@@ -28,10 +28,18 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const location = useLocation();
 
+  // console.log("onelink pathname", location.pathname.split("/").slice(-1)[0]);
+
   const { username } = useParams();
   const { userId } = useParams();
   const [user, setUser] = useState([]);
-  const [currentTab, setCurrentTab] = useState("company");
+  const [currentTab, setCurrentTab] = useState(
+    location.pathname.split("/").slice(-1)[0] === userId
+      ? "company"
+      : location.pathname.includes("documentation")
+      ? "documentation"
+      : location.pathname.split("/").slice(-1)[0]
+  );
 
   // States for touch events
   const [touchStartX, setTouchStartX] = useState(null);
@@ -227,8 +235,8 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
               {/* Invest now */}
               <div className="pt-2">
                 <MenuItem
-                  active={currentTab === "investNow"}
-                  onClick={() => setCurrentTab("investNow")}
+                  active={currentTab === "investnow"}
+                  onClick={() => setCurrentTab("investnow")}
                   className="active-item invest_now"
                 >
                   <Link to="investnow">
