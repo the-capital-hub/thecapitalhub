@@ -151,16 +151,21 @@
         margin-inline-start: 0.5em;
       }
 
-      .kebabMenu_container{
+      .kebabMenu_container {
         // svg{
         //   border: 1px solid red;
         // }
 
-        .kebab_menu{
+        .kebab_menu {
           position: absolute;
-          top: 0;
-          left: 80%;
+          top: 100%;
+          left: -150%;
           z-index: 10;
+
+          @media (min-width: 768px) {
+            top: 0%;
+            left: 80%;
+          }
 
           background-color: #fff;
         }

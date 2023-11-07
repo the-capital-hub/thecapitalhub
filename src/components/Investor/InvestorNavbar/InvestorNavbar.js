@@ -59,6 +59,7 @@ const InvestorNavbar = (props) => {
       setLoading(true);
       setSearchInput(target.value);
       const { data } = await getSearchResultsAPI(target.value);
+      console.log("search suggestions", data);
       setSearchSuggestions(data);
     } catch (error) {
       console.error("Error getting search results : ", error);
@@ -121,7 +122,7 @@ const InvestorNavbar = (props) => {
                 ) : (
                   <img src={HambergerCrossIcon} alt="bar" />
                 )}
-                <h1 className="ms-2">{pageTitle}</h1>
+                <h1 className="ms-2 text-break">{pageTitle}</h1>
               </div>
             </div>
           </div>
@@ -193,9 +194,11 @@ const InvestorNavbar = (props) => {
                         )}
                         {searchSuggestions?.company
                           ?.slice(0, 5)
-                          .map(({ company }) => (
+                          .map(({ company, founderId }) => (
                             <span className="single_result">
-                              <Link to={`#`}>{company}</Link>
+                              <Link to={`/company-profile/${founderId}`}>
+                                {company}
+                              </Link>
                             </span>
                           ))}
                         {searchSuggestions?.company?.length > 5 && (

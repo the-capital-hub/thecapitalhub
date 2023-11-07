@@ -11,7 +11,7 @@ const OneLinkEditPage = () => {
   useEffect(() => {
     document.title = "Edit One Link | The Capital Hub";
     dispatch(setPageTitle("Edit One-Link"));
-  }, []);
+  }, [dispatch]);
   return (
     <MaxWidthWrapper>
       <div className="editpage_container">

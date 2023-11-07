@@ -1,7 +1,7 @@
 // icon:component_add | System UIcons https://systemuicons.com/ | Corey Ginnivan
 import * as React from "react";
 
-function IconComponent_add(props) {
+function IconComponentAdd(props) {
   return (
     <svg
       viewBox="0 0 21 21"
@@ -23,4 +23,4 @@ function IconComponent_add(props) {
   );
 }
 
-export default IconComponent_add;
+export default IconComponentAdd;

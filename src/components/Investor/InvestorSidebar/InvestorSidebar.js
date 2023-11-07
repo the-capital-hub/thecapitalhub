@@ -10,12 +10,12 @@ import {
 import ArrowLeft from "../../../Images/investorsidebar/ArrowLeft.svg";
 import ArrowRight from "../../../Images/investorsidebar/ArrowRight.svg";
 import Setting from "../../../Images/investorsidebar/Settings.svg";
-import Support from "../../../Images/investorsidebar/Support.svg";
+// import Support from "../../../Images/investorsidebar/Support.svg";
 import HomeIcon from "../../../Images/investorIcon/home.svg";
 import BookIcon from "../../../Images/investorIcon/Book.svg";
 import ExitIcon from "../../../Images/investorIcon/Exit.svg";
-import GroupIcon from "../../../Images/investorIcon/Group.svg";
-import InvestorIcon from "../../../Images/investorIcon/Pot.svg";
+// import GroupIcon from "../../../Images/investorIcon/Group.svg";
+// import InvestorIcon from "../../../Images/investorIcon/Pot.svg";
 import SaveIcon from "../../../Images/investorIcon/Save.svg";
 import PlusIcon from "../../../Images/investorIcon/Plus.svg";
 import { BsLink45Deg, BsChevronDown, BsChevronUp } from "react-icons/bs";
@@ -95,6 +95,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
       onMouseLeave={() => {
         if (!isMobileView) {
           setSidebarCollapsed(true);
+          setIsCommunityDetailOpen(false);
         }
       }}
       onMouseEnter={() => {
@@ -256,7 +257,12 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   className="sidebar__community d-flex gap-4 "
                   id="sidebar_community"
                 >
-                  <div onClick={() => setSidebarCollapsed(true)}>
+                  <div
+                    onClick={() => {
+                      setSidebarCollapsed(true);
+                      setIsCommunityDetailOpen(false);
+                    }}
+                  >
                     <CommunitiesIcon
                       width="17px"
                       height="17px"
@@ -291,7 +297,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                           <p className="m-0">Create a Community</p>
                         </ModalBsLauncher>
                         <button
-                          className="sidebar__community__btn "
+                          className="sidebar__community__btn shadow-none"
                           onClick={handleMyCommunityClick}
                         >
                           My Community

@@ -23,7 +23,10 @@ const Table = ({ hidden, page, setTable, data }) => {
   };
 
   const addRow = () => {
-    const columnName = prompt("Enter a name for the new row:", `Row ${tableData.rows.length + 1}`);
+    const columnName = prompt(
+      "Enter a name for the new row:",
+      `Row ${tableData.rows.length + 1}`
+    );
 
     if (columnName !== null) {
       const newRow = {
@@ -40,9 +43,10 @@ const Table = ({ hidden, page, setTable, data }) => {
     const updatedData = {
       rows: tableData.rows.map((row, rIndex) => ({
         ...row,
-        values: rIndex === rowIndex
-          ? row.values.map((v, cIndex) => (cIndex === colIndex ? value : v))
-          : row.values,
+        values:
+          rIndex === rowIndex
+            ? row.values.map((v, cIndex) => (cIndex === colIndex ? value : v))
+            : row.values,
       })),
     };
     setTableData(updatedData);
@@ -82,7 +86,11 @@ const Table = ({ hidden, page, setTable, data }) => {
       </div>
       <div>
         {page === "oneLinkEditPage" && (
-          <button onClick={addRow} className="add_row_btn startup" style={{ marginRight: "10px" }}>
+          <button
+            onClick={addRow}
+            className="add_row_btn startup"
+            style={{ marginRight: "10px" }}
+          >
             + Add Row
           </button>
         )}

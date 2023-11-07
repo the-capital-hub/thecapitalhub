@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./ShareLink.scss";
-import LinkImage from "../../../../Images/LinkImage.svg";
+// import LinkImage from "../../../../Images/LinkImage.svg";
 import ExitImage from "../../../../Images/Exit.svg";
-import CorrectImage from "../../../../Images/Correct.svg";
-import Cross from "../../../../Images/Cross.svg";
+// import CorrectImage from "../../../../Images/Correct.svg";
+// import Cross from "../../../../Images/Cross.svg";
 import { Link } from "react-router-dom";
 import IconLink from "../../SvgIcons/IconLink";
 import { useSelector } from "react-redux";
@@ -18,7 +18,7 @@ const ShareLink = ({
 
   return (
     <>
-      <div className="ShareLink_container mt-3">
+      <div className="ShareLink_container mt-3 mt-md-0">
         <div className="box_container rounded-4 shadow-sm border">
           <section className="title_section">
             <h6>Now share all your startup details in one link</h6>
@@ -63,7 +63,7 @@ const ShareLink = ({
                 <img
                   className="right_icons_img1"
                   src={ExitImage}
-                  alt="image"
+                  alt="Share Icon"
                   onClick={onExitClick}
                 />
                 {/* <img
