@@ -84,8 +84,9 @@
 
 @media (max-width: 426px) {
   .colorcard-component {
-    width: 100%;
+    width: 94%;
     margin: 0;
+    margin-inline: auto;
     flex-direction: row !important;
   }
 }

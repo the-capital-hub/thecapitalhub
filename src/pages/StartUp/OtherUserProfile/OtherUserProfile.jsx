@@ -68,7 +68,7 @@ function OtherUserProfile() {
           <SmallProfileCard className="mt-lg-2 mt-xl-0" text="User Details" />
           {userData ? (
             <>
-              <div className="row profile rounded-4 border shadow-sm">
+              <div className="profile rounded-4 border shadow-sm">
                 <div className="short_details d-flex flex-column flex-md-row align-items-center justify-content-between">
                   <div className="d-flex flex-column w-100 flex-md-row align-items-center justify-content-between ">
                     <img
@@ -251,7 +251,7 @@ function OtherUserProfile() {
                     <FeaturedPostsContainer userId={userId} />
                   </div>
                   {/* Company Details */}
-                  <div className="company_details_container shadow-sm rounded">
+                  <div className="company_details_container shadow-sm rounded-4">
                     <CompanyDetailsCard
                       className="company_details rounded-4 border profile_container"
                       userDetails={userData}
