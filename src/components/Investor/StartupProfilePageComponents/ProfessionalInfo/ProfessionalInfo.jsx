@@ -11,9 +11,9 @@ import {
   updateUserAPI,
 } from "../../../../Service/user";
 import {
-  getCompanyFounderId,
-  getCompanyName,
-  getIsInvestor,
+  selectCompanyFounderId,
+  selectCompanyName,
+  selectIsInvestor,
   loginSuccess,
   updateUserCompany,
 } from "../../../../Store/features/user/userSlice";
@@ -22,9 +22,9 @@ import IconCloudUpload from "../../SvgIcons/IconCloudUpload";
 export default function ProfessionalInfo({ theme }) {
   // Fetch Global State
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const companyFounderId = useSelector(getCompanyFounderId);
-  const isInvestor = useSelector(getIsInvestor);
-  const companyName = useSelector(getCompanyName);
+  const companyFounderId = useSelector(selectCompanyFounderId);
+  const isInvestor = useSelector(selectIsInvestor);
+  const companyName = useSelector(selectCompanyName);
   const dispatch = useDispatch();
 
   console.log("companyName", companyName);

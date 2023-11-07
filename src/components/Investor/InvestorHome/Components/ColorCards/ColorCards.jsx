@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import CoinIcon from "../../../../../Images/investorView/Rectangle.png";
 import ColorCard from "../../../InvestorGlobalCards/ColoredCards/ColorCard";
 import { useSelector } from "react-redux";
-import { getColorCardData } from "../../../../../Store/features/user/userSlice";
+import { selectColorCardData } from "../../../../../Store/features/user/userSlice";
 
 export default function ColorCards() {
   // Fetch from store
-  const colorCard = useSelector(getColorCardData);
+  const colorCard = useSelector(selectColorCardData);
   const companyFounderId = useSelector(
     (state) => state.user.loggedInUser.founderId
   );
