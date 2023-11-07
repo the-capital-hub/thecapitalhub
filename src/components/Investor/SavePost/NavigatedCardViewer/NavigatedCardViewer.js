@@ -98,6 +98,7 @@ const NavigatedCardViewer = () => {
                   image,
                   createdAt,
                   _id,
+                  resharedPostId
                 },
                 index
               ) => (
@@ -116,6 +117,7 @@ const NavigatedCardViewer = () => {
                   postId={_id}
                   setAllPosts={setAllPosts}
                   allPosts={allPosts}
+                  resharedPostId={resharedPostId}
                 />
               )
             )
