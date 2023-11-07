@@ -186,9 +186,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 </Link>
               </MenuItem>
               <MenuItem
-                active={currentTab === "onePager"}
+                active={currentTab === "onepager"}
                 className="active-item"
-                onClick={() => setCurrentTab("onePager")}
+                onClick={() => setCurrentTab("onepager")}
               >
                 <Link to="onepager">
                   <img
@@ -200,7 +200,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   {!sidebarCollapsed && (
                     <span
                       className={
-                        currentTab === "onePager" ? "items-active" : ""
+                        currentTab === "onepager" ? "items-active" : ""
                       }
                     >
                       One Pager
