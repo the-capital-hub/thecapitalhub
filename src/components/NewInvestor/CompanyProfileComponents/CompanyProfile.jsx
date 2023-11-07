@@ -76,7 +76,7 @@ export default function CompanyProfile({
     tagline = investorData.tagline || tagline;
     founderId = investorData.founderId || "";
   }
-  console.log(investorData.founderId)
+  // console.log(investorData.founderId)
   // const company = {
   //   image: HCLImage,
   //   name: "HCL",

@@ -68,14 +68,16 @@ function OtherUserProfile() {
           <SmallProfileCard className="mt-lg-2 mt-xl-0" text="User Details" />
           {userData ? (
             <>
-              <div className="profile rounded-4 border shadow-sm">
+              <div className="row profile rounded-4 border shadow-sm">
                 <div className="short_details d-flex flex-column flex-md-row align-items-center justify-content-between">
                   <div className="d-flex flex-column w-100 flex-md-row align-items-center justify-content-between ">
                     <img
                       src={userData.profilePicture}
                       width={100}
+                      height={100}
                       alt="profileimage"
                       className="rounded-circle"
+                      style={{ objectFit: "cover" }}
                     />
                     <div className="flex-grow-1 left_profile_text mt-2 mt-md-0 me-auto me-md-0 ms-md-4">
                       <h3 className="typography h3">
@@ -312,7 +314,7 @@ function OtherUserProfile() {
                     />
                   </div>
                 </div>
-                <div className="right_container">
+                <div className="right_container p-0">
                   <RecommendationCard />
                   <NewsCorner />
                 </div>

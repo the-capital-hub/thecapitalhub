@@ -17,6 +17,11 @@
   .profile {
     background-color: white;
     padding: 20px;
+
+    @media (max-width: 767px) {
+      margin: 0;
+    }
+
     .short_details {
       width: 100%;
       padding-bottom: 10px;
