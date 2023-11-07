@@ -304,9 +304,11 @@ const InvestorNavbar = (props) => {
                               )}
                               {searchSuggestions?.company
                                 ?.slice(0, 5)
-                                .map(({ company }) => (
+                                .map(({ company, founderId }) => (
                                   <span className="single_result">
-                                    <Link to={`#`}>{company}</Link>
+                                    <Link to={`/company-profile/${founderId}`}>
+                                      {company}
+                                    </Link>
                                   </span>
                                 ))}
                               {searchSuggestions?.company?.length > 5 && (

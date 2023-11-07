@@ -4,11 +4,15 @@
   margin: 0;
   position: relative;
 
+  &.container-fluid {
+    padding: 0;
+  }
+
   .sidebar {
     // width: 300px;
     // background-color: #eaeef2;
     position: fixed;
-    top: calc(80px + -1%);
+    top: calc(80px + -2%);
     left: 0;
     bottom: 0;
     z-index: 100;

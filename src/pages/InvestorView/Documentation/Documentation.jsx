@@ -43,7 +43,7 @@ const Documentation = () => {
       <div className="">
         <div className="documentation shadow-sm border">
           <h1 className="px-md-5">Documentation</h1>
-          <div className="docscontainer col-7 justify-content-between mx-auto">
+          <div className="docscontainer col-12 col-xl-10 justify-content-around mx-auto">
             {/* <Card
               text={"Financials"}
               onClicked={() =>
@@ -94,16 +94,16 @@ const Documentation = () => {
               let imageToShow;
 
               switch (folder) {
-                case 'pitchdeck':
+                case "pitchdeck":
                   imageToShow = Pitch;
                   break;
-                case 'business':
+                case "business":
                   imageToShow = Business;
                   break;
-                case 'kycdetails':
+                case "kycdetails":
                   imageToShow = KYC;
                   break;
-                case 'legal and compliance':
+                case "legal and compliance":
                   imageToShow = Legal;
                   break;
                 default:
@@ -112,7 +112,11 @@ const Documentation = () => {
               return (
                 <Card
                   key={index}
-                  onClicked={() => navigate(`/onelink/${username}/${userId}/documentation/${folder}`)}
+                  onClicked={() =>
+                    navigate(
+                      `/onelink/${username}/${userId}/documentation/${folder}`
+                    )
+                  }
                   text={folder}
                   image={imageToShow}
                 />
