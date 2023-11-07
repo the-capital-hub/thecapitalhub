@@ -59,15 +59,15 @@ export const {
 } = userSlice.actions;
 
 // LoggedInUser selectors
-export const getIsInvestor = (state) => {
+export const selectIsInvestor = (state) => {
   return state.user.loggedInUser.isInvestor === "true" ? true : false;
 };
-export const getLoggedInUserId = (state) => state.user.loggedInUser._id;
+export const selectLoggedInUserId = (state) => state.user.loggedInUser._id;
 
 // company selectors
-export const getUserCompanyData = (state) => state.user.company;
-export const getCompanyName = (state) => state.user.company?.company;
-export const getColorCardData = (state) => state.user.company?.colorCard;
-export const getCompanyFounderId = (state) => state.user.company?.founderId;
+export const selectUserCompanyData = (state) => state.user.company;
+export const selectCompanyName = (state) => state.user.company?.company;
+export const selectColorCardData = (state) => state.user.company?.colorCard;
+export const selectCompanyFounderId = (state) => state.user.company?.founderId;
 
 export default userSlice.reducer;

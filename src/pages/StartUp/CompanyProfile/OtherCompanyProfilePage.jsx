@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
-import { getLoggedInUserId } from "../../../Store/features/user/userSlice";
+import { selectLoggedInUserId } from "../../../Store/features/user/userSlice";
 
 export default function OtherCompanyProfilePage() {
   // get founderId from params
@@ -18,7 +18,7 @@ export default function OtherCompanyProfilePage() {
   const navigate = useNavigate();
 
   // Fetch from redux store
-  const loggedInUserId = useSelector(getLoggedInUserId);
+  const loggedInUserId = useSelector(selectLoggedInUserId);
 
   // States
   const [loading, setLoading] = useState(false);
