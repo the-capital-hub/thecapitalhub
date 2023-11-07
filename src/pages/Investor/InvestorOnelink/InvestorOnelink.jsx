@@ -86,12 +86,13 @@ export default function InvestorOnelink() {
               isExitClicked={isExitClicked}
               setCompany={setCompany}
               investor
+              showPreviousIM={true}
             />
           </div>
           {/* Right Side content */}
           <div className="right_content">
             <RightProfileCard />
-            <RecommendationCard />
+            <RecommendationCard maxCount={3} />
           </div>
         </div>
 

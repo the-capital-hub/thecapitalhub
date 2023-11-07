@@ -3,7 +3,12 @@ import "./ModalBSHeader.scss";
 function ModalBSHeader({ title, label, className, closeRef, closeCallback }) {
   // Callback function when close is clicked
   function handleClose() {
-    closeCallback();
+    if (closeCallback) {
+      closeCallback(); // If closeCallback exists, call it
+    } else {
+      // Implement default behavior to close the modal
+      console.log("Close functionality not implemented");
+    }
   }
 
   return (

@@ -20,8 +20,9 @@ const SavedPostSmallCard = ({
   postId,
   allPosts,
   setAllPosts,
+  resharedPostId,
 }) => {
-  // console.log("user", firstName, lastName, profilePicture, image);
+  console.log("user", resharedPostId);
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
@@ -155,18 +156,95 @@ const SavedPostSmallCard = ({
             )}
           </div>
         </div>
-        {image ? (
+         {image ? (
           <img
             src={image}
             alt="Post"
             className="img-fluid mb-2 rounded-4"
             style={{ width: "18rem", maxHeight: "18rem", objectFit: "contain" }}
           />
+        ) : resharedPostId?.image ? (
+          <>
+            <div key={key} className="card border rounded-4 p-3 ">
+              <div className="d-flex pb-3">
+                <Link
+                  to={`/user/${userId}`}
+                  className="img-fluid mr-2"
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    borderRadius: "50%",
+                  }}
+                >
+                  <img
+                    src={profilePicture}
+                    alt="Profile"
+                    className="img-fluid mr-2"
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      borderRadius: "50%",
+                    }}
+                  />
+                </Link>
+                <div>
+                  <span className="card_heading">
+                    {firstName} {lastName}
+                  </span>
+                  <span className="card_heading">{designation}</span>
+                </div>
+              </div>
+              <img
+                src={resharedPostId.image}
+                alt="Post"
+                className="img-fluid mb-2 rounded-4"
+                style={{
+                  width: "18rem",
+                  maxHeight: "18rem",
+                  objectFit: "contain",
+                }}
+              />
+            </div>
+          </>
         ) : (
           ""
-        )}
-        <p className="savedPost__text mt-2">{description}</p>
+        )} 
+
+{description ? (
+  <p className="savedPost__text mt-2">{description}</p>
+) : resharedPostId?.description ? (
+  <div key={key} className="card border rounded-4 p-3">
+    <div className="d-flex pb-3">
+      <Link
+        to={`/user/${userId}`}
+        className="img-fluid mr-2"
+        style={{
+          width: "30px",
+          height: "30px",
+          borderRadius: "50%",
+        }}
+      >
+        <img
+          src={profilePicture}
+          alt="Profile"
+          className="img-fluid mr-2"
+          style={{
+            width: "30px",
+            height: "30px",
+            borderRadius: "50%",
+          }}
+        />
+      </Link>
+      <div>
+        <span className="card_heading">
+          {firstName} {lastName}
+        </span>
+        <span className="card_heading">{designation}</span>
       </div>
+    </div>
+    <p>{resharedPostId.description}</p>
+  </div>
+) : ""}      </div>
       {/* </div> */}
     </>
   );

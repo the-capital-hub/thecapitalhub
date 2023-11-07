@@ -74,7 +74,7 @@ export default function CompanyProfile({
     team = investorData.team || team;
     tags = investorData.keyFocus?.split(",").map((tag) => tag.trim()) || tags;
     tagline = investorData.tagline || tagline;
-    founderId = investorData.founderId || "";
+    founderId = investorData?.founderId || "";
   }
   // console.log(investorData.founderId)
   // const company = {

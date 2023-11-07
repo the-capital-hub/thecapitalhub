@@ -13,6 +13,7 @@ import {
 import { useSelector } from "react-redux";
 import "./AddEditModal.scss";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
+import Modal from '../../../components/PopUp/Modal/Modal'
 
 export default function AddEditModal({
   dataArray,
@@ -34,6 +35,14 @@ export default function AddEditModal({
   const [editIndex, setEditIndex] = useState(null);
   const [isNewImage, setNewImage] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [deleteConfirmIndex, setDeleteConfirmIndex] = useState();
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
+
+
+
+
+
 
   const handleInputChange = (event) => {
     console.log(testformData);
@@ -160,6 +169,7 @@ export default function AddEditModal({
       companyImage: "",
       name: "",
       description: "",
+      equity:""
     });
     setSectorLogo(null);
     setIsEdited(false);
@@ -167,28 +177,42 @@ export default function AddEditModal({
     setNewImage(false);
   };
 
-  const handleDelete = async (index) => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this item?"
-    );
-    if (!confirmed) {
+  const handleDelete = () => {
+
+    if (!deleteConfirm) {
       return;
     }
-    try {
-      const { data: investor } = await getInvestorById(loggedInUser?.investor);
-      if (isStartups) {
-        investor.startupsInvested.splice(index, 1);
-        const { data: response } = await postInvestorData(investor);
-        setInvestedStartups(response.startupsInvested);
-      } else {
-        investor.sectorInterested.splice(index, 1);
-        const { data: response } = await postInvestorData(investor);
-        setSectorsData(response.sectorInterested);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  
+    getInvestorById(loggedInUser?.investor)
+      .then(({ data: investor }) => {
+        if (isStartups) {
+          setModalOpen(false);
+          setDeleteConfirm(false)
+          investor.startupsInvested.splice(deleteConfirmIndex, 1);
+          return postInvestorData(investor);
+        } else {
+          setModalOpen(false);
+          setDeleteConfirm(false)
+          investor.sectorInterested.splice(deleteConfirmIndex, 1);
+          return postInvestorData(investor);
+        }
+      })
+      .then(({ data: response }) => {
+        if (isStartups) {
+          setModalOpen(false);
+          setDeleteConfirm(false)
+          setInvestedStartups(response.startupsInvested);
+        } else {
+          setModalOpen(false);
+          setDeleteConfirm(false)
+          setSectorsData(response.sectorInterested);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+  
 
   return (
     <div className="profile__modal__content">
@@ -219,7 +243,9 @@ export default function AddEditModal({
                   </button>
                   <button
                     className="btn btn-danger"
-                    onClick={() => handleDelete(index)}
+                    // onClick={() => handleDelete(index)}
+                    onClick={() => {setDeleteConfirmIndex(index); setModalOpen(true)}}
+
                   >
                     <AiFillDelete style={{ color: "", backgroundColor: "" }} />
                   </button>
@@ -377,6 +403,15 @@ export default function AddEditModal({
           </div>
         </form>
       </div>
+      {modalOpen&&
+      <Modal >
+        <h5 className="py-2">Are you sure you want to delete this item?</h5>
+        <div className="d-flex flex-row gap-3 mx-auto">
+        <button className="btn btn-danger text-dark" onClick={()=>{handleDelete();setDeleteConfirm(true)}} >Ok</button>
+        <button className="btn green_button px-3 "  onClick={() => setModalOpen(false)} >Cancle</button>
+        </div>
+      </Modal> 
+}
     </div>
   );
 }
