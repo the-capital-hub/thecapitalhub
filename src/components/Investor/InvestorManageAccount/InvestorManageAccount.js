@@ -1,8 +1,8 @@
 import "./InvestorManageAccount.scss";
 import SmallProfileCard from "../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import logoIcon from "../../../Images/manageAccount/Group 15186.svg";
-import profileIcon from "../../../Images/investorIcon/profilePic.webp";
-import { Link } from 'react-router-dom';
+// import profileIcon from "../../../Images/investorIcon/profilePic.webp";
+import { Link } from "react-router-dom";
 import { changePasswordAPI } from "../../../Service/user";
 import { useEffect, useState } from "react";
 import LogOutPopUp from "../../PopUp/LogOutPopUp/LogOutPopUp";
@@ -58,7 +58,7 @@ const InvestorManageAccount = () => {
   useEffect(() => {
     document.title = "Manage Account | The Capital Hub";
     dispatch(setPageTitle("Manage Account"));
-  }, []);
+  }, [dispatch]);
 
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const navigate = useNavigate();
@@ -77,7 +77,7 @@ const InvestorManageAccount = () => {
               className="mt-5 mt-xl-3"
               text={"Manage Account"}
             />
-            <div className="box_container p-4 mt-4 row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+            <div className="box_container p-4 mt-4 row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-gap-3">
               <section className="col">
                 <div className="change_password border">
                   {/* Header */}
