@@ -349,7 +349,7 @@ export const addMilestoneToUser = async (userId, milestoneId) => {
         message: "Milestone not found.",
       };
     }
-    if (startUp.milestones.includes(milestoneId)) {
+    if (startUp.milestones?.includes(milestoneId)) {
       return {
         status: 400,
         message: "Milestone is already associated with the startup.",
