@@ -47,7 +47,7 @@ export default function OtherCompanyProfilePage() {
 
   return (
     <MaxWidthWrapper>
-      <div className="otherCompanyProfilePage_wrapper my-4 mt-xl-5">
+      <div className="otherCompanyProfilePage_wrapper mb-4 mt-5">
         {/* Main Content */}
         <div className="main_content">
           {loading ? (
