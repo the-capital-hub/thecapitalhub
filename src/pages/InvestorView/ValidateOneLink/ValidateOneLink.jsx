@@ -1,4 +1,4 @@
-import { Outlet, Navigate, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import NavBarIV from "../../../components/InvestorView/NavBar/NavBar";
 import SideBarIV from "../../../components/InvestorView/SideBar/SideBar";
@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 function ValidateOneLink({ children, ...props }) {
   const { userId } = useParams();
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   const handleSidebarToggle = () => {
     setSidebarCollapsed((prev) => !prev);
   };

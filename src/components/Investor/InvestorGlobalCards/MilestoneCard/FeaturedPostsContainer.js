@@ -61,9 +61,9 @@ const FeaturedPostsContainer = ({ userId }) => {
   //   setVisibleCards((prevVisibleCards) => prevVisibleCards + 4);
   // };
 
-  useEffect(() => {
-    document.title = "Featured Post | The Capital Hub";
-  }, []);
+  // useEffect(() => {
+  //   document.title = "Featured Post | The Capital Hub";
+  // }, []);
 
   return (
     <div className="card-container ">

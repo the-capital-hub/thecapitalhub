@@ -38,6 +38,7 @@ import ModalBSFooter from "../../PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
 import ModalBSBody from "../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
 import Linkify from "react-linkify";
 import deleteIcon from "../../../Images/post/delete.png";
+import Modal from "../../PopUp/Modal/Modal";
 
 const FeedPostCard = ({
   postId,
@@ -251,6 +252,22 @@ console.log(error)
   const handleDoubleClick = () => {
     likeUnlikeHandler();
   };
+  const singleClickTimer = useRef(null);
+  const [showImgagePopup, setShowImgagePopup] = useState(false);
+
+  const handleImageOnClick = () => {
+    if (!singleClickTimer.current) {
+      singleClickTimer.current = setTimeout(() => {
+        setShowImgagePopup(true);
+        singleClickTimer.current = null;
+      }, 300);
+    } else {
+      likeUnlikeHandler();
+      clearTimeout(singleClickTimer.current);
+      singleClickTimer.current = null;
+    }
+  };
+
   useEffect(() => {
     getLikeCount(postId)
       .then((data) => {
@@ -410,14 +427,16 @@ console.log(error)
                 </Linkify>
                 {image && (
                   <span className="d-flex">
-                    <img
-                      className="mx-auto"
-                      style={{ maxHeight: "350px", objectFit: "contain" }}
-                      width={!repostPreview ? "100%" : "50%"}
-                      src={image}
-                      alt="post-image"
-                      onDoubleClick={handleDoubleClick}
-                    />
+                   <img
+  className="mx-auto"
+  style={{ maxHeight: "350px", objectFit: "contain" }}
+  width={!repostPreview ? "100%" : "50%"}
+  src={image}
+  alt="post-image"
+  onClick={handleImageOnClick}
+  onDoubleClick={handleDoubleClick}
+/>
+
                   </span>
                 )}
                 {video && (
@@ -730,6 +749,19 @@ console.log(error)
           />
         )}
       </div>
+      {showImgagePopup && (
+        <Modal>
+          <div className="image-popup-container ">
+            <button
+              className="btn btn-sm btn-light  top-0 end-0 m-2"
+              onClick={() => setShowImgagePopup(false)}
+            >
+              X
+            </button>
+            <img src={image} className="popup-image" alt="zoomed image" />
+          </div>
+        </Modal>
+      )}
 
       <ModalBSContainer showModal={showReportModal} id="reportPostModal">
         <ModalBSHeader title="Report Post"  closeCallback={handleCloseSavePopup}/>

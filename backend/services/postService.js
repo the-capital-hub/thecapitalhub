@@ -436,6 +436,17 @@ export const getSavedPostsByCollection = async (userId, collectionName) => {
         select: "firstName lastName profilePicture designation",
       })
       .exec();
+    for (let i = 0; i < savedPosts.length; i++) {
+      if (savedPosts[i].resharedPostId) {
+        const resharedPost = await PostModel.findById(savedPosts[i].resharedPostId)
+          .populate({
+            path: "user",
+            select: "firstName lastName profilePicture designation",
+          })
+          .exec();
+        savedPosts[i].resharedPostId = resharedPost;
+      }
+    }
     return {
       status: 200,
       message: `Saved posts retrieved successfully`,

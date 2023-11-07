@@ -1,67 +1,67 @@
 .investNow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  width: 100%;
+
+  .investNowContainer {
     display: flex;
-    justify-content: center;
+    // position: absolute;
+    // top: 0;
+    // bottom: 0;
+    // left: 0;
+    // right: 0;
+    // margin: auto;
+    // height: 50%;
+    flex-direction: column;
+    gap: 20px;
     align-items: center;
-    height: 90vh;
-    width: 100%;
+    justify-content: center;
+    background-color: white;
+    width: 500px;
+    // margin-left: 300px;
+    // margin-top: 100px;
+    padding: 50px;
+    border-radius: var(--border-radius);
 
-    .investNowContainer {
-        display: flex;
-        // position: absolute;
-        // top: 0;
-        // bottom: 0;
-        // left: 0;
-        // right: 0;
-        // margin: auto;
-        // height: 50%;
-        flex-direction: column;
-        gap: 20px;
-        align-items: center;
-        justify-content: center;
-        background-color: white;
-        width: 500px;
-        // margin-left: 300px;
-        // margin-top: 100px;
-        padding: 50px;
-        border-radius: var(--border-radius);
+    .inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
 
-        .inputs {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-            justify-content: center;
-
-            button {
-                font-size: 13px;
-                padding: 10px 50px;
-                outline: none;
-                border-radius: 10px;
-                background: #fd5901;
-                color: white;
-                border: none;
-            }
-        }
+      button {
+        font-size: 13px;
+        padding: 10px 50px;
+        outline: none;
+        border-radius: 10px;
+        background: #fd5901;
+        color: white;
+        border: none;
+      }
     }
+  }
 }
 
 @media (max-width: 1024px) {
-    .investNow {
-        .investNowContainer {
-            margin-left: 100px;
-        }
+  .investNow {
+    .investNowContainer {
+      margin-left: 100px;
     }
+  }
 }
 
 @media (max-width: 820px) {
-    .investNow {
-        .investNowContainer {
-            margin-left: 0px;
-            width: 320px;
+  .investNow {
+    .investNowContainer {
+      margin-left: 0px;
+      width: 320px;
 
-            .inputs {
-                width: 200px;
-            }
-        }
+      .inputs {
+        width: 200px;
+      }
     }
+  }
 }

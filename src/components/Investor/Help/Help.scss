@@ -1,4 +1,9 @@
 .help_main_container {
+  margin-top: 1rem;
+  @media (min-width: 1600px) {
+    margin-top: 0;
+  }
+
   .box_container {
     height: 100%;
     background-color: #fff;
@@ -124,15 +129,18 @@
     }
 
     .card-section {
-      display: flex;
       max-width: 100%;
       max-height: 100%;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
       margin-bottom: 5%;
 
-      @media (max-width: 820px) {
-        flex-direction: column;
-        align-items: center;
+      @media (min-width: 768px) {
+        flex-direction: row;
+        // align-items: center;
       }
 
       .card {
@@ -175,19 +183,20 @@
       align-items: center;
       margin-top: 5%;
       margin-bottom: 5%;
-      .faq-section{
-        background:#eaeef2;
+      .faq-section {
+        background: #eaeef2;
         border-radius: var(--border-radius);
-        ul{
+        ul {
           list-style-type: none;
           padding-left: 5px;
-          p{
+          p {
             font-size: 14px;
             color: #485b65;
             padding: 0;
           }
         }
-      }      .accordion {
+      }
+      .accordion {
         width: 80% !important;
       }
 

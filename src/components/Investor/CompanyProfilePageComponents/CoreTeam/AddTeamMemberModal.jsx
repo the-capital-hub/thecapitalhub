@@ -32,7 +32,7 @@ export default function AddTeamMemberModal({
   const [loading, setLoading] = useState(false);
 
   // Fetch current core team members here
-  const { team: currentTeam } = companyData;
+  // const { team: currentTeam } = companyData;
   // console.log(currentTeam);
 
   // handleChange
@@ -209,18 +209,18 @@ export default function AddTeamMemberModal({
     setImagePreview(null);
   }
 
-  console.log(1111111111111, member);
+  // console.log(1111111111111, member);
 
   return (
     <div className="team_member_modal d-flex flex-column flex-lg-row gap-4 justify-content-around py-3">
       {/* Edit/Remove modal */}
 
-      <div className="edit_remove_team d-flex flex-column gap-3 overflow-y-auto py-3">
-        <h5 className="m-0 text-center">Select member to edit</h5>
-        <div className="d-flex flex-column gap-3">
-          {/* Loop current team member here */}
-          {currentTeam
-            ? currentTeam.map((member, index) => {
+      {companyData?.team?.length > 0 ? (
+        <div className="edit_remove_team d-flex flex-column gap-3 overflow-y-auto py-3">
+          <h5 className="m-0 text-center">Select member to edit</h5>
+          <div className="d-flex flex-column gap-3">
+            {/* Loop current team member here */}
+            {companyData?.team?.map((member, index) => {
               return (
                 <div
                   className="d-flex align-items-center justify-content-around p-2 bg-light rounded-4"
@@ -255,10 +255,11 @@ export default function AddTeamMemberModal({
                   </div>
                 </div>
               );
-            })
-            : ""}
+            })}
+          </div>
         </div>
-      </div>
+      ) : null}
+
 
       {/* Add modal */}
       <div className="add_team d-flex flex-column gap-3 bg-light rounded-4 shadow-sm py-3">

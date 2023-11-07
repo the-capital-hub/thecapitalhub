@@ -74,8 +74,10 @@ function OtherUserProfile() {
                     <img
                       src={userData.profilePicture}
                       width={100}
+                      height={100}
                       alt="profileimage"
                       className="rounded-circle"
+                      style={{ objectFit: "cover" }}
                     />
                     <div className="flex-grow-1 left_profile_text mt-2 mt-md-0 me-auto me-md-0 ms-md-4">
                       <h3 className="typography h3">
@@ -251,14 +253,14 @@ function OtherUserProfile() {
                     <FeaturedPostsContainer userId={userId} />
                   </div>
                   {/* Company Details */}
-                  <div className="company_details_container shadow-sm rounded">
+                  <div className="company_details_container shadow-sm rounded-4">
                     <CompanyDetailsCard
                       className="company_details rounded-4 border profile_container"
                       userDetails={userData}
                     />
                   </div>
                   {/* Color Cards */}
-                  <div className="coloured_cards row row-cols-1 row-cols-md-2 row-cols-lg-3 gap-3">
+                  <div className="coloured_cards">
                     <ColorCard
                       color="white"
                       background="#BB98FF"
@@ -312,7 +314,7 @@ function OtherUserProfile() {
                     />
                   </div>
                 </div>
-                <div className="right_container">
+                <div className="right_container p-0">
                   <RecommendationCard />
                   <NewsCorner />
                 </div>
