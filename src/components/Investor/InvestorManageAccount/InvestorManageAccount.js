@@ -168,20 +168,22 @@ const InvestorManageAccount = () => {
                   </div>
                 </div>
               </section>
-              <section className="col border empty_box">
-                <button
-                  className="btn logout-btn w-100"
-                  onClick={setShowLogoutPopup}
-                >
-                  Log out
-                </button>
-                {showLogoutPopup && (
-                  <LogOutPopUp
-                    setShowLogoutPopup={setShowLogoutPopup} // Make sure this prop is passed correctly
-                    handleLogoutLogic={handleLogoutLogic}
-                    showLogoutPopup
-                  />
-                )}
+              <section className="col">
+                <div class="border empty_box">
+                  <button
+                    className="btn logout-btn w-100"
+                    onClick={setShowLogoutPopup}
+                  >
+                    Log out
+                  </button>
+                  {showLogoutPopup && (
+                    <LogOutPopUp
+                      setShowLogoutPopup={setShowLogoutPopup} // Make sure this prop is passed correctly
+                      handleLogoutLogic={handleLogoutLogic}
+                      showLogoutPopup
+                    />
+                  )}
+                </div>
                 {/* <div className="d-flex align-items-center">
                   <div className="logo">
                     <img src={logoIcon} alt="img" />
