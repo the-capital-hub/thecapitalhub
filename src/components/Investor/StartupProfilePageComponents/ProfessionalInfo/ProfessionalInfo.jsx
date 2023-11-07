@@ -156,7 +156,7 @@ export default function ProfessionalInfo({ theme }) {
 
         {/* Edit button */}
         <span className="edit_btn d-flex align-self-end align-md-self-start ">
-          <span className="ms-auto">
+          <span className="ms-auto d-flex flex-md-row flex-column gap-2">
             <button onClick={() => setIsEditing(!isEditing)}>
               {isEditing ? "Cancel" : "Edit"}
               <CiEdit />
