@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react";
 import { Navigate, Route } from "react-router-dom";
 import SuspenseLoader from "../components/SuspenseLoader/SuspenseLoader";
+import SinglePost from "../components/SinglePost/SinglePost";
 
 const InvestorConnection = lazy(() =>
   import("../components/NewInvestor/InvestorConnection/InvestorConnection")
@@ -181,6 +182,18 @@ function InvestorRoutes() {
           </Suspense>
         }
       />
+
+<Route
+  path="post/:_id"
+  element={
+    <Suspense fallback={<SuspenseLoader />}>
+      <SinglePost />
+    </Suspense>
+  }
+/>
+
+
+
     </>
   );
 }
