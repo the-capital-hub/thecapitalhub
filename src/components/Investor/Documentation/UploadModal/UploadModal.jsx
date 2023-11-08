@@ -230,14 +230,17 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
             </>
           )}
           {uploadProgress > 0 && uploadProgress < 100 && (
-            <div className="progress mt-3">
+            <div
+              className="progress"
+              role="progressbar"
+              aria-label="Upload Progress"
+              aria-valuenow={uploadProgress}
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
               <div
-                className="progress-bar"
-                role="progressbar"
+                className="progress-bar bg_orange"
                 style={{ width: `${uploadProgress}%` }}
-                aria-valuenow={uploadProgress}
-                aria-valuemin="0"
-                aria-valuemax="100"
               >
                 {uploadProgress}% Complete
               </div>
