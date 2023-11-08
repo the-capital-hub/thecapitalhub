@@ -61,7 +61,7 @@ export default function InvestorCompanyProfilePage() {
               <CompanyProfile companyData={companyData} />
 
             ) : investorData.length !== 0 ? (
-              <CompanyProfile investorData={investorData} />
+              <CompanyProfile investorData={investorData} isStartup="false" />
             ) : (
               <div>No data available</div>
             )

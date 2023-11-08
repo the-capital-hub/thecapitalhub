@@ -17,6 +17,7 @@ export default function CompanyProfile({
   investorData,
   startup = "false",
   short,
+  isStartup = "true"
 }) {
   // Fetch Company Data here
   let name = "HCL";
@@ -118,7 +119,7 @@ export default function CompanyProfile({
         {!short && (
           <CompanyStats
             colorCard={colorCard}
-            startup={startup}
+            startup={isStartup}
             sam={sam}
             tam={tam}
             som={som}
