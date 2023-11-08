@@ -191,11 +191,11 @@ const CompanyDetailsCard = ({
             </div>
 
             {/* Edit button */}
-            {/* {page === "edit" ? (
-              <span className="align-self-start ms-auto">
-                <div className="border ">
+            {page === "edit" ? (
+              <span className="align-self-start ms-auto d-none d-md-block">
+                <div className="">
                   <button
-                    className="edit-btn d-none d-md-block"
+                    className="edit-btn"
                     onClick={() =>
                       setIsDescriptionEditable(!isDescriptionEditable)
                     }
@@ -215,7 +215,7 @@ const CompanyDetailsCard = ({
               </span>
             ) : (
               ""
-            )} */}
+            )}
           </div>
 
           {/* Company details text */}
