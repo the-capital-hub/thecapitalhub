@@ -33,50 +33,62 @@ export default function BigCalendar({
     scrollToTime,
     views,
     components,
-  } = useMemo(() => calendarData);
+  } = useMemo(() => calendarData, [calendarData]);
 
   // Handle Slot Select
-  const handleSelectSlot = useCallback(
-    ({ start, end }) => {
-      // Check if selected slot is in the past
-      if (moment(start, "min").isBefore(moment(), "min")) {
-        // window.alert("Unable to travel to past!");
-        setAlert("Unable to travel to past!");
-        setTimeout(() => {
-          setAlert(null);
-        }, 2000);
-        return;
-      }
-      // console.log("start", start, "end", end);
-      setNewMeeting({ start, end, title: "" });
-      createRef.current.click();
-    },
-    [setMeetings]
-  );
+  const handleSelectSlot = useCallback(({ start, end }) => {
+    // Check if selected slot is in the past
+    if (moment(start, "min").isBefore(moment(), "min")) {
+      // window.alert("Unable to travel to past!");
+      setAlert("Unable to travel to past!");
+      setTimeout(() => {
+        setAlert(null);
+      }, 2000);
+      return;
+    }
+    // console.log("start", start, "end", end);
+    setNewMeeting({ start, end, title: "" });
+    createRef.current.click();
+  }, []);
 
   // Handle Select event
-  const handleSelectEvent = useCallback((meeting) => {
-    if (!investor) {
-      // Check if selected slot is in the past
-      if (moment(meeting.start, "min").isBefore(moment(), "min")) {
-        // window.alert("Unable to travel to past!");
-        setAlert("Unable to travel to past!");
-        setTimeout(() => {
-          setAlert(null);
-        }, 2000);
-        return;
-      }
-    }
+  const handleSelectEvent = useCallback(
+    (meeting) => {
+      console.log("selected meeting", meeting);
+      if (!investor) {
+        // Check if selected slot is in the past
+        if (moment(meeting.start, "min").isBefore(moment(), "min")) {
+          // window.alert("Unable to travel to past!");
+          setAlert("Unable to travel to past!");
+          setTimeout(() => {
+            setAlert(null);
+          }, 2000);
+          return;
+        }
 
-    // console.log("to delete", meeting);
-    // Set selectedMeeting
-    setSelectedMeeting(meeting);
-    if (investor) {
-      editRef.current.click();
-    } else {
-      requestRef.current.click();
-    }
-  }, []);
+        // Check if meeting is Booked
+        if (meeting.requestedBy.length) {
+          setAlert(
+            "The meeting slot has been filled. Please select a different one."
+          );
+          setTimeout(() => {
+            setAlert(null);
+          }, 2000);
+          return;
+        }
+      }
+
+      // console.log("to delete", meeting);
+      // Set selectedMeeting
+      setSelectedMeeting(meeting);
+      if (investor) {
+        editRef.current.click();
+      } else {
+        requestRef.current.click();
+      }
+    },
+    [investor]
+  );
 
   return (
     <>

@@ -7,7 +7,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 
 // Custom event component
 const EventComponent = ({ event }) => {
-  const { title, start, end } = event;
+  const { title, start, end, requestedBy } = event;
   const date = moment(start).format("ddd MMM DD");
   const startTime =
     moment(start).minutes() === 0
@@ -18,15 +18,17 @@ const EventComponent = ({ event }) => {
       ? moment(end).format("ha")
       : moment(end).format("h:ma");
 
-  const dayColors = [
-    "rgba(81, 81, 81, 1)",
-    "rgba(255, 144, 84, 1)",
-    "rgba(173, 133, 238, 1)",
-    "rgba(131, 188, 187, 1)",
-    "rgba(65, 140, 253, 1)",
-    "#ff6600",
-    "rgba(131, 188, 187, 1)",
-  ];
+  // const dayColors = [
+  //   "rgba(81, 81, 81, 1)",
+  //   "rgba(255, 144, 84, 1)",
+  //   "rgba(173, 133, 238, 1)",
+  //   "rgba(131, 188, 187, 1)",
+  //   "rgba(65, 140, 253, 1)",
+  //   "#ff6600",
+  //   "rgba(131, 188, 187, 1)",
+  // ];
+
+  const eventBg = { booked: "rgb(102 93 86)", available: "rgb(255, 102, 0)" };
 
   let meetingFlag;
   if (moment(start, "day").isBefore(moment(), "day")) {
@@ -41,7 +43,9 @@ const EventComponent = ({ event }) => {
     <div
       className="custom__event"
       style={{
-        backgroundColor: `${dayColors[moment(start).day()]}`,
+        backgroundColor: `${
+          requestedBy.length ? eventBg.booked : eventBg.available
+        }`,
         width: "100%",
         height: "100%",
       }}
