@@ -293,7 +293,7 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
 
       {/* Contact form */}
       <div className="container mx-auto">
-        <ContactForm className="col-12 col-md-8 mx-auto" />
+        <ContactForm className="col-12 col-md-8 mx-auto" page={"food"} />
       </div>
 
       {/* <div className="fifth-section">

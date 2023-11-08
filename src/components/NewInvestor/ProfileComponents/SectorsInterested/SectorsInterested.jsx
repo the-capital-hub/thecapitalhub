@@ -38,14 +38,14 @@ export default function SectorsInterested() {
         <div className="header border-bottom p-4">
           <h2 className="green_underline typography">Sectors Interested</h2>
           <div className="">
-            {investor?.founderId === loggedInUser._id && (
+            {/* {investor?.founderId === loggedInUser._id && ( */}
               <ModalBsLauncher
                 id="sectorsModal"
                 className={"green_button px-2 px-sm-3 "}
               >
                 Add New
               </ModalBsLauncher>
-            )}
+            {/* )} */}
           </div>
         </div>
         {/* Loop cards from here onwards */}

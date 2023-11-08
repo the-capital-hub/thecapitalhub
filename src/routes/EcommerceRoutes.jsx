@@ -27,7 +27,7 @@ function EcommerceRoutes() {
             <FoodLandingPage />
           </Suspense>
         }
-      />
+      ></Route>
       <Route
         path="nike"
         element={
@@ -43,7 +43,7 @@ function EcommerceRoutes() {
             <FtechLandingPage />
           </Suspense>
         }
-      />
+      ></Route>
       <Route
         path="logistics"
         element={
@@ -51,7 +51,7 @@ function EcommerceRoutes() {
             <TransportLandingPage />
           </Suspense>
         }
-      />
+      ></Route>
     </>
   );
 }

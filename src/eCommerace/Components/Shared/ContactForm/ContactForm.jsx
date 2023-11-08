@@ -7,8 +7,7 @@ import SpinnerBS from "../../../../components/Shared/Spinner/SpinnerBS";
 
 const baseUrl = environment.baseUrl;
 const APP_TYPES = ["Website", "Mobile Application", "Website and Mobile App"];
-
-export default function ContactForm({ className }) {
+export default function ContactForm({ className, page }) {
   const initialData = {
     name: "",
     email: "",
@@ -40,6 +39,7 @@ export default function ContactForm({ className }) {
       inquiryType: formData.typeOfApplication,
       description: formData.comments,
       isEcom: true,
+      page: page,
     };
 
     axios
