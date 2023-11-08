@@ -121,7 +121,7 @@ export default function CompanyProfilePage() {
               <>
                 {companyData?.length !== 0 ? (
                   companyData?.founderId === loggedInUser._id ? (
-                    <div className="bg-white rounded-4 p-4">
+                    <div className="bg-white rounded-4 p-4 shadow-sm">
                       <Link
                         to="/company-profile/edit"
                         className="text-decoration-none text-dark fs-5"

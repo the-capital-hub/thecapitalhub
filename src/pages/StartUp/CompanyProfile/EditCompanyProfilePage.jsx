@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./EditCompanyProfilePage.scss";
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
-import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
+// import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import CompanyProfileForm from "../../../components/Investor/CompanyProfilePageComponents/CompanyProfileForm";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { CiEdit, CiSaveUp2 } from "react-icons/ci";
-import RaghuImage from "../../../Images/aboutUs/Raghu.jpeg";
+// import { Link } from "react-router-dom";
+// import { CiEdit, CiSaveUp2 } from "react-icons/ci";
+// import RaghuImage from "../../../Images/aboutUs/Raghu.jpeg";
 import CoinIcon from "../../../Images/investorView/Rectangle.png";
 import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
 import { getStartupByFounderId, postStartUpData } from "../../../Service/user";
@@ -143,11 +143,12 @@ export default function EditCompanyProfilePage() {
               width={20}
               height={20}
               onClick={() => navigate(-1)}
+              alt=""
             />
           </span>
           {/* <SmallProfileCard text={"Company Profile"} /> */}
 
-          <div className="bg-white rounded-4 p-5">
+          <div className="bg-white rounded-4 py-5 px-3 px-md-5">
             <CompanyProfileForm
               companyData={companyData}
               isSaveAll={isSaveAll}
@@ -168,7 +169,7 @@ export default function EditCompanyProfilePage() {
           />
 
           {/* Core Team */}
-          <div className="core__team bg-white rounded-4 p-5">
+          <div className="core__team bg-white rounded-4 py-5 px-3 px-md-5">
             <CoreTeam
               companyData={companyData}
               setCompanyData={setCompanyData}
@@ -177,7 +178,7 @@ export default function EditCompanyProfilePage() {
           </div>
 
           {/* Milestones */}
-          <div className="milestones__component bg-white rounded-4 p-5 d-flex flex-column gap-4">
+          <div className="milestones__component bg-white rounded-4 py-5 px-3 px-md-5 d-flex flex-column gap-4">
             <Milestones theme={"startup"} />
           </div>
 
