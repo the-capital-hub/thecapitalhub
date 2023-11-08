@@ -5,6 +5,7 @@ import IconDeleteFill from "../../../../../Investor/SvgIcons/IconDeleteFill";
 import { deleteRecentExperience } from "../../../../../../Service/user";
 import { updateLoggedInUser } from "../../../../../../Store/features/user/userSlice";
 import { useDispatch } from "react-redux";
+import Modal from "../../../../../PopUp/Modal/Modal";
 
 export default function CurrentExperience({
   data,
@@ -15,13 +16,15 @@ export default function CurrentExperience({
   const dispatch = useDispatch();
 
   const [deleting, setDeleting] = useState(false);
+  const [confirmModal, setConfirmModal] = useState(false);
+
 
   // Handle delete click
   async function handleDeleteClick(e, data) {
-    let confirmed = window.confirm(
-      `Are you sure you want to delete - "${data.companyName}"?`
-    );
-    if (confirmed) {
+    // let confirmed = window.confirm(
+    //   `Are you sure you want to delete - "${data.companyName}"?`
+    // );
+    if (data) {
       // Set deleting
       setDeleting(true);
       try {
@@ -67,7 +70,7 @@ export default function CurrentExperience({
         <button
           type="button"
           className="btn btn-danger d-flex align-items-center justify-content-center"
-          onClick={(e) => handleDeleteClick(e, data)}
+          onClick={() => setConfirmModal(true)}
           disabled={loading}
         >
           {deleting ? (
@@ -77,6 +80,20 @@ export default function CurrentExperience({
           )}
         </button>
       </div>
+      {confirmModal &&
+      <Modal>
+        <div className="py-3">
+
+        <h4> Are you sure you want to delete - {data.companyName}?</h4>
+        <div className="d-flex justify-content-center  gap-2 mx-auto py-2">
+        <button className="btn btn-danger" onClick={(e) => handleDeleteClick(e, data)}  >Ok</button>
+          <button className="btn" style={{ backgroundColor: "#d3f36b" }} onClick={() => setConfirmModal(false)}>Cancel</button>
+
+        </div>
+        </div>
+
+      </Modal>
+      }
     </div>
   );
 }

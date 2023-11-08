@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
+// import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import "../Syndicates/Syndicates.scss";
 import "./MySchedule.scss";
 import ViewSelect from "../../../components/NewInvestor/MyScheduleComponents/ViewSelect";

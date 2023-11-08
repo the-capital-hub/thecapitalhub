@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
-import IconFolder from "../../../SvgIcons/IconFolder";
-import IconAppointment from "../../../SvgIcons/IconAppointment";
-import IconFileUpload from "../../../SvgIcons/IconFileUpload";
+// import IconFolder from "../../../SvgIcons/IconFolder";
+// import IconAppointment from "../../../SvgIcons/IconAppointment";
+// import IconFileUpload from "../../../SvgIcons/IconFileUpload";
 import {
   ModalBSBody,
   ModalBSContainer,
@@ -10,6 +10,7 @@ import {
 import "./RequestMeetingModal.scss";
 import { requestMeetingAPI } from "../../../../../Service/user";
 import SpinnerBS from "../../../../Shared/Spinner/SpinnerBS";
+// import Modal from "../../../../PopUp/Modal/Modal";
 
 const REQUEST = {
   name: "",

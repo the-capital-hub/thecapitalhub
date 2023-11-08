@@ -8,6 +8,7 @@ export default function OnePagerCompanyAbout({
   solution,
   marketLandscape,
   showEdit,
+  editMode = false,
 }) {
   // Handle resize
   function handleResize(e) {
@@ -35,50 +36,74 @@ export default function OnePagerCompanyAbout({
           )}
         </legend>
 
-        <textarea
-          type="text"
-          readOnly
-          value={description || "Brief Introduction"}
-          className="onePager_input about_input shadow-sm"
-          onchange={handleResize}
-          // autoFocus
-        />
+        {editMode ? (
+          <textarea
+            type="text"
+            readOnly
+            value={description || "Brief Introduction"}
+            className="onePager_input about_input shadow-sm"
+            onchange={handleResize}
+            // autoFocus
+          />
+        ) : (
+          <div className="onePager_input about_input shadow-sm">
+            <p className="m-0">{description || "Brief Introduction"}</p>
+          </div>
+        )}
       </fieldset>
 
       <fieldset>
         <legend>Problem</legend>
-        <textarea
-          type="text"
-          readOnly
-          value={problem || "Problem"}
-          className="onePager_input about_input shadow-sm"
-          onChange={handleResize}
-          // autoFocus
-        />
+        {editMode ? (
+          <textarea
+            type="text"
+            readOnly
+            value={problem || "Problem"}
+            className="onePager_input about_input shadow-sm"
+            onChange={handleResize}
+            // autoFocus
+          />
+        ) : (
+          <div className="onePager_input about_input shadow-sm">
+            <p className="m-0">{problem || "Problem"}</p>
+          </div>
+        )}
       </fieldset>
 
       <fieldset>
         <legend>Solution</legend>
-        <textarea
-          type="text"
-          readOnly
-          value={solution || "Solution"}
-          className="onePager_input about_input shadow-sm"
-          onChange={handleResize}
-          // autoFocus
-        />
+        {editMode ? (
+          <textarea
+            type="text"
+            readOnly
+            value={solution || "Solution"}
+            className="onePager_input about_input shadow-sm"
+            onChange={handleResize}
+            // autoFocus
+          />
+        ) : (
+          <div className="onePager_input about_input shadow-sm">
+            <p className="m-0">{solution || "Solution"}</p>
+          </div>
+        )}
       </fieldset>
 
       <fieldset className="span_full">
         <legend>Market Landscape</legend>
-        <textarea
-          type="text"
-          readOnly
-          value={"Market Landscape"}
-          className="onePager_input about_input shadow-sm"
-          onChange={handleResize}
-          // autoFocus
-        />
+        {editMode ? (
+          <textarea
+            type="text"
+            readOnly
+            value={"Market Landscape"}
+            className="onePager_input about_input shadow-sm"
+            onChange={handleResize}
+            // autoFocus
+          />
+        ) : (
+          <div className="onePager_input about_input shadow-sm">
+            <p className="m-0">{marketLandscape || "Market Landscape"}</p>
+          </div>
+        )}
       </fieldset>
     </div>
   );

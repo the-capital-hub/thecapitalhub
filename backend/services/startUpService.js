@@ -316,13 +316,26 @@ export const createMilestone = async (milestoneData) => {
   }
 }
 
-export const getMileStone = async () => {
+export const getMileStone = async (userId) => {
   try {
     const milestones = await MilestoneModel.find();
+    const user = await UserModel.findById(userId);
+    let userMilestones = [];
+    if (user.isInvestor === "true") {
+      const investor = await InvestorModel.findById(user.investor);
+      userMilestones = investor.milestones;
+    } else {
+      const startUp = await StartUpModel.findById(user.startUp);
+      userMilestones = startUp.milestones;
+    }
+    userMilestones.push("653b906d69fc4c33f7a8f71c");
+    const filteredMilestones = milestones.filter((milestone) =>
+      !userMilestones.includes(milestone._id),
+    );
     return {
       status: 200,
       message: "Minestone retrived",
-      data: milestones,
+      data: filteredMilestones,
     }
   } catch (error) {
     console.error("Error getting minestone:", error);
@@ -410,6 +423,7 @@ export const getUserMilestones = async (oneLinkId) => {
         };
       }
       const milestoneIds = investor.milestones;
+      milestoneIds.push("653b906d69fc4c33f7a8f71c");
       const milestones = await MilestoneModel.find({ _id: { $in: milestoneIds } });
       return {
         status: 200,
@@ -429,6 +443,7 @@ export const getUserMilestones = async (oneLinkId) => {
         };
       }
       const milestoneIds = startUp.milestones;
+      milestoneIds.push("653b906d69fc4c33f7a8f71c");
       const milestones = await MilestoneModel.find({ _id: { $in: milestoneIds } });
       return {
         status: 200,
@@ -459,9 +474,16 @@ export const deleteUserMilestone = async (oneLinkId, milestoneId) => {
         message: "User not found.",
       };
     }
-    const startUp = await StartUpModel.findById(user.startUp);
-    startUp.milestones = startUp.milestones.filter((id) => id.toString() !== milestoneId);
-    await startUp.save();
+    if (user.isInvestor === "true") {
+      const investor = await InvestorModel.findById(user.investor);
+      investor.milestones = investor.milestones.filter((id) => id.toString() !== milestoneId);
+      await investor.save();
+    } else {
+      const startUp = await StartUpModel.findById(user.startUp);
+      startUp.milestones = startUp.milestones.filter((id) => id.toString() !== milestoneId);
+      await startUp.save();
+    }
+
     return {
       status: 200,
       message: "Milestone deleted successfully.",
