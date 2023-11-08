@@ -88,25 +88,25 @@ const MyStartUp = () => {
             <div className="d-flex flex-column flex-md-row text-center gap-2">
               <div className="">
                 {/* <Link to={""}>Add New</Link> */}
-                {investor?.founderId === loggedInUser._id && (
+                {/* {investor?.founderId === loggedInUser._id && ( */}
                   <ModalBsLauncher
                     id={"myInvestmentsAddModal"}
                     className={"green_button"}
                   >
                     Add New
                   </ModalBsLauncher>
-                )}
+                {/* )} */}
               </div>
               <div className="">
                 {/* <Link to={""}>Edit</Link> */}
-                {investor?.founderId === loggedInUser._id && (
+                {/* {investor?.founderId === loggedInUser._id && ( */}
                   <ModalBsLauncher
                     id={"myInvestmentsEditModal"}
                     className={"green_button"}
                   >
                     Edit
                   </ModalBsLauncher>
-                )}
+                {/* )} */}
               </div>
             </div>
           </div>
@@ -149,25 +149,25 @@ const MyStartUp = () => {
             <div className="d-flex  flex-column flex-md-row text-center gap-2">
               <div className="">
                 {/* <Link to={""}>Add New</Link> */}
-                {investor?.founderId === loggedInUser._id && (
+                {/* {investor?.founderId === loggedInUser._id && ( */}
                   <ModalBsLauncher
                     id={"myInterestsAddModal"}
                     className={"green_button"}
                   >
                     Add New
                   </ModalBsLauncher>
-                )}
+                {/* )} */}
               </div>
               <div className="">
                 {/* <Link to={""}>Edit</Link> */}
-                {investor?.founderId === loggedInUser._id && (
+                {/* {investor?.founderId === loggedInUser._id && ( */}
                   <ModalBsLauncher
                     id={"myInterestsEditModal"}
                     className={"green_button"}
                   >
                     Edit
                   </ModalBsLauncher>
-                )}
+                {/* )} */}
               </div>
             </div>
           </div>

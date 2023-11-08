@@ -22,7 +22,7 @@ export default function CompanyDescription({
 
   return (
     <div
-      className={`paragraph__component bg-white p-5 d-flex flex-column gap-4  ${
+      className={`paragraph__component bg-white py-5 px-3 px-md-5 d-flex flex-column gap-4  ${
         isInvestor === "true" ? "rounded-4 border" : "rounded-4"
       } `}
     >

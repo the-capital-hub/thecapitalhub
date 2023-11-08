@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import CompanyInfo from "./company-section-one/company-info/CompanyInfo";
 // import HCLImage from "../../../Images/Investor/CompanyProfile/HCL.png";
 import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";

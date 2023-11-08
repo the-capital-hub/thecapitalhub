@@ -345,7 +345,7 @@ financial ease and security"
 
       {/* Contact form */}
       <div className="container row m-0">
-        <ContactForm className="col-12 col-md-8 mx-auto" />
+        <ContactForm className="col-12 col-md-8 mx-auto" page={"fintech"} />
       </div>
     </section>
   );

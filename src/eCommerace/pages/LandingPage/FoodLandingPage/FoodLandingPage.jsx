@@ -1,8 +1,8 @@
 import React from "react";
 import "./foodLandingPage.scss";
 import assets from "../../../../Images/Ecommerace/FoodLandingPage/index";
-import Reviewcarousel from "../../../../components/ECommerace/FoodLandingPage/ReviewCarousel/Reviewcarousel";
-import ScrollableComponent from "../../../../components/ECommerace/FoodLandingPage/ScrollableComponent/ScrollableComponent";
+// import Reviewcarousel from "../../../../components/ECommerace/FoodLandingPage/ReviewCarousel/Reviewcarousel";
+// import ScrollableComponent from "../../../../components/ECommerace/FoodLandingPage/ScrollableComponent/ScrollableComponent";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import {
@@ -293,7 +293,7 @@ experienced exceptional dining and food delivery. Order from The Capital Hub tod
 
       {/* Contact form */}
       <div className="container mx-auto">
-        <ContactForm className="col-12 col-md-8 mx-auto" />
+        <ContactForm className="col-12 col-md-8 mx-auto" page={"food"} />
       </div>
 
       {/* <div className="fifth-section">
