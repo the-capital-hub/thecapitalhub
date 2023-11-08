@@ -511,13 +511,17 @@ export const getExplore = async (filters) => {
         query.location = city;
       }
       const investors = await InvestorModel.find(query);
-      const founderIds = investors.map((investor) => investor.founderId);
+      const users = await UserModel.find();
+      const filteredUsers = users.filter((user) => {
+        return investors.some((investor) => user?.investor?.toString() === investor._id.toString());
+      });
+      const founderIds = filteredUsers.map((investor) => investor._id);
       const founderQuery = {};
       if (gender) {
         founderQuery.gender = gender;
       }
       if (sectorPreference) {
-        founderQuery.sectorPreference = { $in: size };
+        founderQuery.sectorPreferences = { $in: [sectorPreference] };
       }
       if (investmentSize) {
         founderQuery.investmentSize = investmentSize;
@@ -562,7 +566,7 @@ export const getExplore = async (filters) => {
         founderQuery.education = education;
       }
       if (diversityMetrics) {
-        founderQuery.diversityMetrics = { $in: diversityMetrics };
+        founderQuery.diversityMetrics = { $in: [diversityMetrics] };
       }
       const founders = await UserModel.find({
         _id: { $in: founderIds },

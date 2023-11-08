@@ -292,6 +292,7 @@ export default function CompanyProfilePage() {
                 isOnelink={true}
                 investorData={companyData}
                 startup="false"
+                isStartup="false"
               />
             )
           ) : (

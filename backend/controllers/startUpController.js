@@ -188,7 +188,8 @@ export const createMilestoneController = async (req, res) => {
 
 export const getMileStoneController = async (req, res) => {
   try {
-    const response = await getMileStone();
+    const userId = req.userId;
+    const response = await getMileStone(userId);
     res.status(response.status).send(response);
   } catch (error) {
     console.error("Error:", error);

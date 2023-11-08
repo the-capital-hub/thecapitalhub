@@ -78,6 +78,7 @@ export default function AddMilestoneModal({
                   theme={theme}
                   action={ACTIONS.remove}
                   setUserMilestones={setUserMilestones}
+                  setAllMilestones={setAllMilestones}
                 />
               );
             })}
@@ -98,6 +99,7 @@ export default function AddMilestoneModal({
                   theme={theme}
                   action={ACTIONS.add}
                   setUserMilestones={setUserMilestones}
+                  setAllMilestones={setAllMilestones}
                 />
               );
             })}
