@@ -78,6 +78,7 @@
         border: 0.125em dashed #fd5901;
         background-color: #fd590144;
         padding: 1em 2.5em;
+        text-align: center;
         cursor: pointer;
       }
 
@@ -99,6 +100,15 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  .progress {
+    width: 200px;
+    flex: 0 0 20px;
+  }
+
+  .bg_orange {
+    background-color: #fd5901;
   }
 }
 

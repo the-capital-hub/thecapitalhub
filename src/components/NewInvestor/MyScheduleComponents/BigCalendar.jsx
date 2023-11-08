@@ -5,6 +5,7 @@ import CreateMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment
 import moment from "moment";
 import EditMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/EditMeetingModal/EditMeetingModal";
 import RequestMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/RequestMeetingModal/RequestMeetingModal";
+import AlertModal from "./Components/AlertModal/AlertModal";
 
 export default function BigCalendar({
   calendarData,
@@ -18,6 +19,7 @@ export default function BigCalendar({
   const [meetings, setMeetings] = useState(meetingsData);
   const [newMeeting, setNewMeeting] = useState(null);
   const [selectedMeeting, setSelectedMeeting] = useState(null);
+  const [alert, setAlert] = useState(null);
   const createRef = useRef();
   const editRef = useRef();
   const requestRef = useRef();
@@ -31,42 +33,62 @@ export default function BigCalendar({
     scrollToTime,
     views,
     components,
-  } = useMemo(() => calendarData);
+  } = useMemo(() => calendarData, [calendarData]);
 
   // Handle Slot Select
-  const handleSelectSlot = useCallback(
-    ({ start, end }) => {
-      // Check if selected slot is in the past
-      if (moment(start, "min").isBefore(moment(), "min")) {
-        window.alert("Unable to travel to past!");
-        return;
-      }
-      // console.log("start", start, "end", end);
-      setNewMeeting({ start, end, title: "" });
-      createRef.current.click();
-    },
-    [setMeetings]
-  );
+  const handleSelectSlot = useCallback(({ start, end }) => {
+    // Check if selected slot is in the past
+    if (moment(start, "min").isBefore(moment(), "min")) {
+      // window.alert("Unable to travel to past!");
+      setAlert("Unable to travel to past!");
+      setTimeout(() => {
+        setAlert(null);
+      }, 2000);
+      return;
+    }
+    // console.log("start", start, "end", end);
+    setNewMeeting({ start, end, title: "" });
+    createRef.current.click();
+  }, []);
 
   // Handle Select event
-  const handleSelectEvent = useCallback((meeting) => {
-    if (!investor) {
-      // Check if selected slot is in the past
-      if (moment(meeting.start, "min").isBefore(moment(), "min")) {
-        window.alert("Unable to travel to past!");
-        return;
-      }
-    }
+  const handleSelectEvent = useCallback(
+    (meeting) => {
+      console.log("selected meeting", meeting);
+      if (!investor) {
+        // Check if selected slot is in the past
+        if (moment(meeting.start, "min").isBefore(moment(), "min")) {
+          // window.alert("Unable to travel to past!");
+          setAlert("Unable to travel to past!");
+          setTimeout(() => {
+            setAlert(null);
+          }, 2000);
+          return;
+        }
 
-    // console.log("to delete", meeting);
-    // Set selectedMeeting
-    setSelectedMeeting(meeting);
-    if (investor) {
-      editRef.current.click();
-    } else {
-      requestRef.current.click();
-    }
-  }, []);
+        // Check if meeting is Booked
+        if (meeting.requestedBy.length) {
+          setAlert(
+            "The meeting slot has been filled. Please select a different one."
+          );
+          setTimeout(() => {
+            setAlert(null);
+          }, 2000);
+          return;
+        }
+      }
+
+      // console.log("to delete", meeting);
+      // Set selectedMeeting
+      setSelectedMeeting(meeting);
+      if (investor) {
+        editRef.current.click();
+      } else {
+        requestRef.current.click();
+      }
+    },
+    [investor]
+  );
 
   return (
     <>
@@ -111,6 +133,9 @@ export default function BigCalendar({
       />
       {/* Request Meeting Modal */}
       <RequestMeetingModal selectedMeeting={selectedMeeting} />
+
+      {/* Alert Modal */}
+      {alert && <AlertModal alertMessage={alert} />}
     </>
   );
 }

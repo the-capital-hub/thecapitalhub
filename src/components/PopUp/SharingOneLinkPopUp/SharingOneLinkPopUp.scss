@@ -34,7 +34,7 @@
     }
 
     .text_section {
-      padding: 20px;
+      padding: 10px;
 
       color: #515151;
       font-family: Poppins;
@@ -44,6 +44,10 @@
       line-height: 160%;
       /* 33.6px */
       letter-spacing: 0.84px;
+
+      @media (min-width: 375px) {
+        padding: 20px;
+      }
     }
 
     .share_link {
