@@ -183,14 +183,14 @@ function InvestorRoutes() {
         }
       />
 
-<Route
-  path="post/:_id"
-  element={
-    <Suspense fallback={<SuspenseLoader />}>
-      <SinglePost />
-    </Suspense>
-  }
-/>
+      <Route
+        path="post/:_id"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <SinglePost />
+          </Suspense>
+        }
+      />
 
 
 

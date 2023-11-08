@@ -32,7 +32,10 @@ export default function OtherInvestorProfile() {
   useEffect(() => {
     window.scrollTo(0, 0);
     getUserAndStartUpByUserIdAPI(userId)
-      .then(({ data }) => setUserData(data))
+      .then(({ data }) => {
+        console.log(data);
+        setUserData(data)
+      })
       .catch(() => navigate("/profile"));
   }, [userId]);
 
