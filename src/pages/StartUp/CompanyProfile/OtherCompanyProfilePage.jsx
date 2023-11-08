@@ -39,20 +39,24 @@ export default function OtherCompanyProfilePage() {
       getInvestorById(founderId)
         .then(({ data }) => {
           setInvestorData(data);
+          setCompanyData([]);
           setLoading(false);
         })
         .catch((error) => {
           setLoading(false);
+          setInvestorData([]);
           console.error("Error fetching investor company data:", error.message);
         });
     } else {
       getStartupByFounderId(founderId)
         .then(({ data }) => {
           setCompanyData(data);
+          setInvestorData([]);
           setLoading(false);
         })
         .catch((error) => {
           setLoading(false);
+          setCompanyData([]);
           console.error("Error fetching startup data:", error.message);
         });
     }
@@ -70,7 +74,7 @@ export default function OtherCompanyProfilePage() {
               <CompanyProfile companyData={companyData} startup="true" />
 
             ) : investorData.length !== 0 ? (
-              <CompanyProfile investorData={investorData} startup="true" />
+              <CompanyProfile investorData={investorData} isStartup="false" />
             ) : (
               <div>No data available</div>
             )
