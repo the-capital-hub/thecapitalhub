@@ -18,6 +18,7 @@ import { loginSuccess } from "../../../Store/features/user/userSlice";
 import InvestorAfterSuccessPopUp from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
 import { useNavigate } from "react-router-dom";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import Modal from "../../../components/PopUp/Modal/Modal";
 
 export default function CompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -29,6 +30,16 @@ export default function CompanyProfilePage() {
   const [companies, setCompanies] = useState([]);
   const [selectedCompanyId, setSelectedCompanyId] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [confirmModal, setConfirmModal] = useState(false);
+  // const [isTrue, setIsTrue] = useState(false);
+
+
+  // const handleClick = () => {
+  //   setIsTrue(true);
+  //   setTimeout(() => {
+  //     setIsTrue(false);
+  //   }, 3000);
+  // };
 
   // Set page title
   useEffect(() => {
@@ -100,10 +111,11 @@ export default function CompanyProfilePage() {
     }
   };
 
-  const handleAddNew = async () => {
-    const confirmed = window.confirm("Are you sure you want to add a new company?");
+  const handleAddNew = async (isTrue) => {
+    // const confirmed = window.confirm("Are you sure you want to add a new company?");
+    setConfirmModal(false)
 
-    if (confirmed) {
+    if (isTrue) {
       try {
         const requestBody = {
           userId: loggedInUser._id,
@@ -289,9 +301,10 @@ export default function CompanyProfilePage() {
               </div>
             </div>
           )}
-          <button className="btn-base investor" onClick={handleAddNew}>
-            Create new company profile
-          </button>
+         <button className="btn-base investor" onClick={() => setConfirmModal(true)}>
+  Create new company profile
+</button>
+
         </div>
         {/* Right side content */}
         <div className="right__content">
@@ -306,6 +319,20 @@ export default function CompanyProfilePage() {
           />
         )}
       </div>
+      {confirmModal &&
+      <Modal>
+        <div className="py-3">
+
+        <h4>Are you sure you want to add a new company?</h4>
+        <div className="d-flex justify-content-center  gap-2 mx-auto py-2">
+        <button className="btn btn-danger" onClick={() => { handleAddNew(true);  }}>Ok</button>
+          <button className="btn" style={{ backgroundColor: "#d3f36b" }} onClick={() => setConfirmModal(false)}>Cancel</button>
+
+        </div>
+        </div>
+
+      </Modal>
+      }
     </MaxWidthWrapper>
   );
 }
