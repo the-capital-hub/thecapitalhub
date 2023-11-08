@@ -24,6 +24,7 @@ export default function MilestoneBadge({
   milestone,
   joinedDate,
   companyFoundedDate,
+  setAllMilestones,
 }) {
   // const { createdAt, oneLinkId } = useSelector(
   //   (state) => state.user.loggedInUser
@@ -45,6 +46,7 @@ export default function MilestoneBadge({
       setUserMilestones((prev) => {
         return prev.filter((elem) => elem._id !== milestoneId);
       });
+      setAllMilestones((prev) => [...prev, milestone]);
       setLoading(false);
     } catch (error) {
       console.error("Error deleting milestone:", error);
@@ -65,6 +67,9 @@ export default function MilestoneBadge({
       });
       // console.log("After add milestone", data);
       setUserMilestones((prev) => [...prev, milestone]);
+      setAllMilestones((prev) => {
+        return prev.filter((elem) => elem._id !== milestoneId);
+      });
       setLoading(false);
     } catch (error) {
       console.error("Error adding milestone to user", error);
