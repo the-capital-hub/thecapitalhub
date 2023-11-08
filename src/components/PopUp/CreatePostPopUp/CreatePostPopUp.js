@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useRef, useState } from "react";
 import "./createpostpopup.scss";
 import SmileeIcon from "../../../Images/Smilee.svg";
@@ -118,7 +116,8 @@ const CreatePostPopUp = ({
       .then(({ data }) => {
         setPostText(
           (prevPostText) =>
-            prevPostText + ` https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`
+            prevPostText +
+            ` https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`
         );
       })
       .catch((error) => console.log(error));
@@ -210,7 +209,7 @@ const CreatePostPopUp = ({
     }
     postUserPost(postData)
       .then((response) => {
-        appendDataToAllPosts(response.data)
+        appendDataToAllPosts(response.data);
         setPostText("");
         setSelectedImage(null);
         setSelectedVideo(null);
@@ -244,8 +243,9 @@ const CreatePostPopUp = ({
     <>
       {popupOpen && <div className="createpost-background-overlay"></div>}
       <div
-        className={`create_post_modal rounded-4 p-2 ${popupOpen ? "d-block" : ""
-          }`}
+        className={`create_post_modal rounded-4 p-2 ${
+          popupOpen ? "d-block" : ""
+        }`}
         tabIndex="-1"
         role="dialog"
       >
@@ -258,6 +258,8 @@ const CreatePostPopUp = ({
                   <img
                     src={loggedInUser.profilePicture}
                     width={80}
+                    height={80}
+                    style={{ objectFit: "cover" }}
                     className="rounded-circle"
                     alt="profile pic"
                   />

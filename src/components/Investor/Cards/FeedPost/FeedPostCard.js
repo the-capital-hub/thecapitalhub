@@ -393,8 +393,10 @@ const FeedPostCard = ({
                     "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
                   }
                   width={50}
+                  height={50}
                   className="rounded-circle"
                   alt="logo"
+                  style={{ objectFit: "cover" }}
                 />
               </Link>
               {/* Poster's Information */}
