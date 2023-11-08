@@ -35,13 +35,13 @@ const ContactUs = () => {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(contactForm);
     const requestBody = {
       name: contactForm.name,
       email: contactForm.email.trim(),
       mobile: contactForm.mobileNumber,
       inquiryType: contactForm.category,
       description: contactForm.description,
+      isEcom: false,
     };
     axios
       .post(`${baseUrl}/contactUs`, requestBody)
