@@ -269,7 +269,7 @@ const NavBar = (props) => {
                                   <span
                                     key={_id}
                                     className="single_result"
-                                    onClick={() => navigate(`/user/${_id}`)}
+                                    onClick={() => navigate(`/investor/user/${_id}`)}
                                   >
                                     {firstName} {lastName}
                                   </span>
@@ -290,13 +290,22 @@ const NavBar = (props) => {
                               {!!searchSuggestions?.company?.length && (
                                 <span className="mt-2">Companies</span>
                               )}
-                              {searchSuggestions?.company
-                                ?.slice(0, 5)
-                                .map(({ company }) => (
-                                  <span className="single_result">
-                                    <Link to={`#`}>{company}</Link>
+                              {searchSuggestions && searchSuggestions.company
+                                ? searchSuggestions.company.slice(0, 5).map((item, index) => (
+                                  <span className="single_result" key={index}>
+                                    <Link
+                                      to={
+                                        item.company.isInvestor
+                                          ? `/investor/company-profile/${item.oneLink}?investor=1`
+                                          : `/investor/company-profile/${item.oneLink}`
+                                      }
+                                    >
+                                      {item.company}
+                                    </Link>
                                   </span>
-                                ))}
+                                ))
+                                : null}
+
                               {searchSuggestions?.company?.length > 5 && (
                                 <span className="w-100 d-flex justify-content-center">
                                   <button

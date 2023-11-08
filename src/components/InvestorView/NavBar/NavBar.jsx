@@ -59,22 +59,22 @@
 
 import React from "react";
 import "./NavBar.scss";
-import Bar from "../../../Images/investorIcon/Bar.svg";
-import searchIconBlack from "../../../Images/navbar/Search.svg";
+// import Bar from "../../../Images/investorIcon/Bar.svg";
+// import searchIconBlack from "../../../Images/navbar/Search.svg";
 import Logo from "../../../Images/investorIcon/new-logo.png";
-import NotificationIcon from "../../../Images/investorIcon/notification.svg";
-import MessageIcon from "../../../Images/investorIcon/message.svg";
-import profilePic from "../../../Images/investorIcon/profilePic.webp";
-import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
+// import NotificationIcon from "../../../Images/investorIcon/notification.svg";
+// import MessageIcon from "../../../Images/investorIcon/message.svg";
+// import profilePic from "../../../Images/investorIcon/profilePic.webp";
+// import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
 import HambergerIcon from "../../../Images/Hamberger.svg";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const NavBar = (props) => {
   return (
     <>
       <div className="container pt-1">
         <div className="row investor_view_navbar ">
-          <div className="col-12 d-flex ms-5">
+          <div className="col-12 d-flex ms-4">
             <div className="row bar_logo_container ">
               <div className="logo_container">
                 <img src={Logo} alt="bar" />

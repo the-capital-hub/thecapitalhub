@@ -49,17 +49,17 @@ function NotificationsPopup({
         return (
           <span>
             liked your{" "}
-            <Link to={`/posts/${_id}`} className="fw-bold">
+            <Link to={loggedInUser.isInvestor === "true" ? `/investor/post/${_id}` : `/posts/${_id}`} className="fw-bold">
               post
             </Link>
-          </span>
+          </span >
         );
       }
       case "postShared": {
         return (
           <span>
             shared your{" "}
-            <Link to={`/posts/${_id}`} className="fw-bold">
+            <Link to={loggedInUser.isInvestor === "true" ? `/investor/post/${_id}` : `/posts/${_id}`} className="fw-bold">
               post
             </Link>
           </span>
@@ -69,7 +69,7 @@ function NotificationsPopup({
         return (
           <span>
             commented on your{" "}
-            <Link to={`/posts/${_id}`} className="fw-bold">
+            <Link to={loggedInUser.isInvestor === "true" ? `/investor/post/${_id}` : `/posts/${_id}`} className="fw-bold">
               post
             </Link>
           </span>
@@ -139,7 +139,7 @@ function NotificationsPopup({
                     <div className="content d-flex flex-column gap-2">
                       <p className="m-0">
                         <Link
-                          to={`/user/${sender?._id}`}
+                          to={loggedInUser.isInvestor === "true" ? `/investor/user/${sender?._id}` : `/user/${sender?._id}`}
                           className="fw-bold"
                           onClick={() => toggleVisibility(false)}
                         >

@@ -11,7 +11,7 @@ export default function OnePagerCompanyAbout({
 }) {
   // Handle resize
   function handleResize(e) {
-    if (e.target.style.height <= "220px") {
+    if (e.target.style.height <= "200px") {
       e.target.style.height = "auto";
       e.target.style.height = e.target.scrollHeight + 2 + "px";
     }
@@ -40,8 +40,8 @@ export default function OnePagerCompanyAbout({
           readOnly
           value={description || "Brief Introduction"}
           className="onePager_input about_input shadow-sm"
-          onFocus={handleResize}
-          autoFocus
+          onchange={handleResize}
+          // autoFocus
         />
       </fieldset>
 
@@ -52,8 +52,8 @@ export default function OnePagerCompanyAbout({
           readOnly
           value={problem || "Problem"}
           className="onePager_input about_input shadow-sm"
-          onFocus={handleResize}
-          autoFocus
+          onChange={handleResize}
+          // autoFocus
         />
       </fieldset>
 
@@ -64,8 +64,8 @@ export default function OnePagerCompanyAbout({
           readOnly
           value={solution || "Solution"}
           className="onePager_input about_input shadow-sm"
-          onFocus={handleResize}
-          autoFocus
+          onChange={handleResize}
+          // autoFocus
         />
       </fieldset>
 
@@ -76,8 +76,8 @@ export default function OnePagerCompanyAbout({
           readOnly
           value={"Market Landscape"}
           className="onePager_input about_input shadow-sm"
-          onFocus={handleResize}
-          autoFocus
+          onChange={handleResize}
+          // autoFocus
         />
       </fieldset>
     </div>

@@ -1,4 +1,5 @@
 .otherCompanyProfilePage_wrapper {
+  margin-block: 2rem;
   display: grid;
   grid-template-columns: 100%;
   justify-content: space-between;
@@ -15,6 +16,13 @@
     flex-direction: row;
     margin-inline: 1.5em;
     margin-block: 2em;
+  }
+
+  .right_content {
+    display: none;
+    @media (min-width: 1360px) {
+      display: block;
+    }
   }
 
   //   CSS for company profile

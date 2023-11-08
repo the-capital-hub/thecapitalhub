@@ -354,7 +354,7 @@ function TransportLandingPage() {
 
       {/* contact form */}
       <div className="container row m-0 mx-auto">
-        <ContactForm className="col-12 col-md-8 mx-auto" />
+        <ContactForm className="col-12 col-md-8 mx-auto" page={"logistics"} />
       </div>
     </div>
   );

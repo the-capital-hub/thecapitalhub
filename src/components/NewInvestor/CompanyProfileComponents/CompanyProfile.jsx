@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import CompanyInfo from "./company-section-one/company-info/CompanyInfo";
 // import HCLImage from "../../../Images/Investor/CompanyProfile/HCL.png";
 import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
@@ -76,7 +77,7 @@ export default function CompanyProfile({
     tagline = investorData.tagline || tagline;
     founderId = investorData?.founderId || "";
   }
-  console.log(investorData?.founderId)
+  // console.log(investorData.founderId)
   // const company = {
   //   image: HCLImage,
   //   name: "HCL",

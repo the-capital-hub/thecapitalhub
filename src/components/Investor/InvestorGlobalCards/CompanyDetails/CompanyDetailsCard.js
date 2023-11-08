@@ -220,7 +220,7 @@ const CompanyDetailsCard = ({
 
           {/* Company details text */}
 
-          <div className="company_details mt-4">
+          <div className="company_details px-2 px-md-0 mt-4">
             {page === "edit" ? (
               <>
                 {/* This is the previous location of the edit button */}

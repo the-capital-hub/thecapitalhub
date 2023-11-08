@@ -127,9 +127,13 @@
 @media (max-width: 820px) {
   .container {
     .investor_view_navbar {
+      // width: 100%;
       .bar_logo_container {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
         .logo_container {
-          display: none;
+          // display: none;
 
           img {
           }
@@ -137,6 +141,7 @@
 
         .mobile-home-hamberger {
           display: flex;
+          width: fit-content;
           h1 {
             color: #000;
             font-family: Poppins;

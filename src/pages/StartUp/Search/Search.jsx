@@ -13,6 +13,10 @@ import { Link } from "react-router-dom";
 import AfterSuccessPopup from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import {
+  selectCompanyFounderId,
+  selectLoggedInUserId,
+} from "../../../Store/features/user/userSlice";
 
 function Search() {
   const [userData, setUserData] = useState(null);
@@ -20,7 +24,9 @@ function Search() {
   const [connectionSent, setConnectionSent] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const loggedInUserId = useSelector(selectLoggedInUserId);
+  const companyFounderId = useSelector(selectCompanyFounderId);
+
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const searchBy = queryParams.get("query");
@@ -33,7 +39,7 @@ function Search() {
   });
 
   const handleConnect = (userId) => {
-    sentConnectionRequest(loggedInUser._id, userId)
+    sentConnectionRequest(loggedInUserId, userId)
       .then(({ data }) => {
         setConnectionSent(true); // Set the state to true once
         setTimeout(() => {
@@ -56,17 +62,19 @@ function Search() {
 
   return (
     <MaxWidthWrapper>
-      <div className="serach_main_container">
+      <div className="serach_main_container my-4">
         <SmallProfileCard text={"Search"} />
         <section className="content_section mt-4">
           <span className="bg-white rounded-4 shadow-sm px-3 py-2 m-md-3 d-flex flex-wrap gap-2">
             <p className="m-0 p-0">Didn't find what you are looking for?</p>
-            <Link to="/explore">Head over to Explore</Link>
+            <Link to="/explore" className="explore_link">
+              Head over to Explore
+            </Link>
           </span>
           <div className="row">
             <div className="col-12 mt-2 box p-4">
               <h4>People</h4>
-              <hr />
+              <hr className="mb-0 p-0" />
               {loading ? (
                 <div class="d-flex justify-content-center my-4">
                   <div class="spinner-border" role="status">
@@ -81,15 +89,27 @@ function Search() {
                     key={index}
                     className="people_container d-flex flex-column flex-md-row justify-content-center align-items-center justify-content-md-between align-items-center"
                   >
-                    <div className="short_desc d-flex">
-                      <img
-                        src={`${users?.profilePicture}`}
-                        className="people_img rounded-circle"
-                        alt="user Profile"
-                      />
+                    <div className="short_desc d-flex w-100">
+                      <Link
+                        to={
+                          users._id === loggedInUserId
+                            ? "/profile"
+                            : `/user/${users?._id}`
+                        }
+                      >
+                        <img
+                          src={`${users?.profilePicture}`}
+                          className="people_img rounded-circle"
+                          alt="user Profile"
+                        />
+                      </Link>
                       <div className="d-flex flex-column justify-content-center">
                         <Link
-                          to={`/user/${users?._id}`}
+                          to={
+                            users._id === loggedInUserId
+                              ? "/profile"
+                              : `/user/${users?._id}`
+                          }
                           className="people_name_link "
                         >
                           <h5>{`${users?.firstName} ${users?.lastName}`} </h5>
@@ -99,25 +119,23 @@ function Search() {
                         }`}</p>
                       </div>
                     </div>
-                    {users?.connectionsSent?.includes(loggedInUser._id) ? (
+                    {users?.connectionsSent?.includes(loggedInUserId) ? (
                       <Link to="/chats" className="text-decoration-none">
                         <button className="d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white">
                           {/* <img src={connectIcon} alt="connect-user" /> */}
                           <span>Message</span>
                         </button>
                       </Link>
-                    ) : users?.connectionsReceived?.includes(
-                        loggedInUser._id
-                      ) ? (
+                    ) : users?.connectionsReceived?.includes(loggedInUserId) ? (
                       <button className="d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white">
                         <img src={connectIcon} alt="connect-user" />
                         <span>Pending</span>
                       </button>
-                    ) : users?.connections?.includes(loggedInUser._id) ? (
+                    ) : users?.connections?.includes(loggedInUserId) ? (
                       <button className="d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white">
                         <span>Connected</span>
                       </button>
-                    ) : (
+                    ) : users._id !== loggedInUserId ? (
                       <button
                         className="d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white"
                         onClick={() => handleConnect(users?._id)}
@@ -125,6 +143,8 @@ function Search() {
                         <img src={connectIcon} alt="connect-user" />
                         <span>Connect</span>
                       </button>
+                    ) : (
+                      ""
                     )}
                   </div>
                 ))
@@ -136,7 +156,7 @@ function Search() {
           <div className="row">
             <div className="col-12 mt-2 box p-4">
               <h4>Company</h4>
-              <hr />
+              <hr className="mb-0 p-0" />
               {loading ? (
                 <div class="d-flex justify-content-center my-4">
                   <div class="spinner-border" role="status">
@@ -151,8 +171,14 @@ function Search() {
                     key={index}
                     className="people_container d-flex flex-column flex-md-row justify-content-center align-items-center justify-content-md-between align-items-center"
                   >
-                    <div className="short_desc d-flex">
-                      <Link to={`/company-profile/${company?.founderId}`}>
+                    <div className="short_desc d-flex flex-column flex-md-row">
+                      <Link
+                        to={
+                          companyFounderId === company?.founderId
+                            ? "/company-profile"
+                            : `/company-profile/${company?.founderId}`
+                        }
+                      >
                         <img
                           src={`${company?.logo ? company?.logo : companyIcon}`}
                           className="people_img rounded-circle"
@@ -161,8 +187,12 @@ function Search() {
                       </Link>
                       <div className="d-flex flex-column justify-content-center">
                         <Link
-                          to={`/company-profile/${company?.founderId}`}
-                          className="people_name_link"
+                          to={
+                            companyFounderId === company?.founderId
+                              ? "/company-profile"
+                              : `/company-profile/${company?.founderId}`
+                          }
+                          className="people_name_link result_company_link"
                         >
                           <h5>{`${company?.company}`}</h5>
                         </Link>

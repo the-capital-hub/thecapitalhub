@@ -14,14 +14,14 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Faq from "./components/Faq/Faq";
 
-
 const Help = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     document.title = "Help | The Capital Hub";
     dispatch(setPageTitle("Help"));
-  }, []);
+  }, [dispatch]);
+
   return (
     <MaxWidthWrapper>
       <div className="help_main_container">
@@ -52,11 +52,11 @@ const Help = () => {
                       Or choose a category to quickly find the help you need
                     </h6>
                     <section class="card-section">
-                    <Link to="/contactus" className=" card text-white">
-                      <div class="">
-                        <img src={CustomerIcon} alt="text" />
-                        <p>Contact us</p>
-                      </div>
+                      <Link to="/contactus" className=" card text-white">
+                        <div class="">
+                          <img src={CustomerIcon} alt="text" />
+                          <p>Contact us</p>
+                        </div>
                       </Link>
                       <div class="card">
                         <img src={EmailIcon} alt="text" />
@@ -76,7 +76,7 @@ const Help = () => {
                       <h6>Frequently Asked Questions (FAQ)</h6>
                     </div>
                     <section className="accordion_section">
-                    <Faq/>
+                      <Faq />
                       {/* <div className="faq-section p-2">
                         <ul>
                           <li>1. What is One-Link?</li>
@@ -90,7 +90,7 @@ const Help = () => {
                         className="accordion accordion-flush"
                         id="accordionFlushExample"
                       > */}
-                        {/* <div className="accordion-item">
+                      {/* <div className="accordion-item">
                           <h2
                             className="accordion-header"
                             id="flush-headingOne"
@@ -119,7 +119,7 @@ const Help = () => {
                           </div>
                         </div> */}
 
-                        {/* <div className="accordion-item">
+                      {/* <div className="accordion-item">
                           <h2 className="accordion-header" id="flush-headingTwo">
                             <button
                               className="accordion-button collapsed"

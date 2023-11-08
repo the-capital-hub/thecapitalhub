@@ -118,14 +118,28 @@
 
   .designation_list {
     color: #000;
-    font-size: 20px;
+    font-size: 16px;
     font-family: Poppins;
     font-weight: 500;
-    padding-right: 50px;
+    padding-right: 25px;
+
+    @media (min-width: 768px) {
+      font-size: 20px;
+      padding-right: 50px;
+    }
   }
 
   table tr td {
     padding-bottom: 0.5rem;
+  }
+
+  table {
+    tr {
+      td {
+        // text-align: start;
+        vertical-align: top;
+      }
+    }
   }
 
   .personal_information_header {
