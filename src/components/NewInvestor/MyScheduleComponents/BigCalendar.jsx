@@ -5,6 +5,7 @@ import CreateMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment
 import moment from "moment";
 import EditMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/EditMeetingModal/EditMeetingModal";
 import RequestMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/RequestMeetingModal/RequestMeetingModal";
+import AlertModal from "./Components/AlertModal/AlertModal";
 
 export default function BigCalendar({
   calendarData,
@@ -18,6 +19,7 @@ export default function BigCalendar({
   const [meetings, setMeetings] = useState(meetingsData);
   const [newMeeting, setNewMeeting] = useState(null);
   const [selectedMeeting, setSelectedMeeting] = useState(null);
+  const [alert, setAlert] = useState(null);
   const createRef = useRef();
   const editRef = useRef();
   const requestRef = useRef();
@@ -38,7 +40,11 @@ export default function BigCalendar({
     ({ start, end }) => {
       // Check if selected slot is in the past
       if (moment(start, "min").isBefore(moment(), "min")) {
-        window.alert("Unable to travel to past!");
+        // window.alert("Unable to travel to past!");
+        setAlert("Unable to travel to past!");
+        setTimeout(() => {
+          setAlert(null);
+        }, 2000);
         return;
       }
       // console.log("start", start, "end", end);
@@ -53,7 +59,11 @@ export default function BigCalendar({
     if (!investor) {
       // Check if selected slot is in the past
       if (moment(meeting.start, "min").isBefore(moment(), "min")) {
-        window.alert("Unable to travel to past!");
+        // window.alert("Unable to travel to past!");
+        setAlert("Unable to travel to past!");
+        setTimeout(() => {
+          setAlert(null);
+        }, 2000);
         return;
       }
     }
@@ -111,6 +121,9 @@ export default function BigCalendar({
       />
       {/* Request Meeting Modal */}
       <RequestMeetingModal selectedMeeting={selectedMeeting} />
+
+      {/* Alert Modal */}
+      {alert && <AlertModal alertMessage={alert} />}
     </>
   );
 }
