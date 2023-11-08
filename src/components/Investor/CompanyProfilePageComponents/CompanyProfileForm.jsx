@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./CompanyProfileForm.scss";
 import { postStartUpData, postInvestorData } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
-import { Response } from "aws-sdk";
+// import { Response } from "aws-sdk";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 
 const LOCATIONS = [

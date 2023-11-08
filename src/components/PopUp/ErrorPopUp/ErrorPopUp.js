@@ -8,7 +8,7 @@ const ErrorPopUp = ({ onClose, message }) => {
       <div className="popup">
         <div className="popup-content">
           <div className="image_text">
-            <img src={CrossRedIcon} alt="image" className="m-2"/>
+            <img src={CrossRedIcon} alt="Error Icon" className="m-2" />
             <h1>{message}</h1>
           </div>
         </div>
