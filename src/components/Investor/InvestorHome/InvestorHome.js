@@ -14,7 +14,7 @@ import CompanyDetailsCard from "../InvestorGlobalCards/CompanyDetails/CompanyDet
 import { useDispatch, useSelector } from "react-redux";
 import { getStartupByFounderId } from "../../../Service/user";
 import {
-  getCompanyFounderId,
+  selectCompanyFounderId,
   setUserCompany,
 } from "../../../Store/features/user/userSlice";
 // import CoinIcon from "../../../Images/investorView/Rectangle.png";
@@ -34,7 +34,7 @@ const InvestorHome = () => {
   // Fetch loggedInUser from global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const loggedInUserId = useSelector((state) => state.user.loggedInUser._id);
-  const companyFounderId = useSelector(getCompanyFounderId);
+  const companyFounderId = useSelector(selectCompanyFounderId);
   const dispatch = useDispatch();
 
   // Update title

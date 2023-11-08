@@ -48,12 +48,12 @@
         border-radius: 25px;
         outline: none;
       }
-      .name_input{
+      .name_input {
         border: 1px solid black;
       }
       .name_input:focus {
-        outline:none;
-    }
+        outline: none;
+      }
 
       .upload_button {
         color: white;
@@ -83,15 +83,22 @@
 
       .file_list_button {
         svg {
-          color: transparent;
+          color: #fd5901;
         }
-        &:hover {
-          svg {
-            color: #fd5901;
-          }
-        }
+        // &:hover {
+        //   svg {
+        //     color: #fd5901;
+        //   }
+        // }
       }
     }
+  }
+
+  .uploaded_file_name {
+    width: 15ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 

@@ -325,5 +325,12 @@
 }
 
 .company__profile__container {
-  background-color: #f9faf3;
+  background-color: transparent;
+
+  // CSS to reduce gap when action buttons are hidden
+  .company__actions {
+    .action__buttons:empty {
+      display: none !important;
+    }
+  }
 }

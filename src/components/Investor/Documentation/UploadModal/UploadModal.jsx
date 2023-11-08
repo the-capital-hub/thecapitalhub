@@ -8,7 +8,6 @@ import { s3 } from "../../../../Service/awsConfig";
 import IconDelete from "../../SvgIcons/IconDelete";
 import { getFoldersApi } from "../../../../Service/user";
 
-
 const baseUrl = environment.baseUrl;
 
 const UploadModal = ({ onCancel, fetchFolder }) => {
@@ -25,7 +24,6 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
   const [folderName, setFolderName] = useState("");
   const [folderSelector, setFolderSelector] = useState([]);
 
-
   useEffect(() => {
     const getFolders = () => {
       getFoldersApi(loggedInUser.oneLinkId)
@@ -39,7 +37,7 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
           console.log(error);
         });
     };
-    getFolders()
+    getFolders();
   }, []);
 
   const handleClosePopup = () => {
@@ -59,22 +57,20 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
 
   function getContentType(fileExtension) {
     const contentTypeMap = {
-      txt: 'text/plain',
-      png: 'image/png',
-      jpg: 'image/jpeg',
-      jpeg: 'image/jpeg',
-      pdf: 'application/pdf',
-      pdfxml: 'application/vnd.adobe.pdfxml',
-      docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      txt: "text/plain",
+      png: "image/png",
+      jpg: "image/jpeg",
+      jpeg: "image/jpeg",
+      pdf: "application/pdf",
+      pdfxml: "application/vnd.adobe.pdfxml",
+      docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     };
 
-    return contentTypeMap[fileExtension] || 'application/octet-stream';
+    return contentTypeMap[fileExtension] || "application/octet-stream";
   }
 
-
   const handlePdfUploadClick = async () => {
-
     if (files.length === 0) {
       return;
     }
@@ -85,7 +81,7 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
       const file = files[i];
       const timestamp = Date.now();
       const fileName = `${timestamp}_${file.name}`;
-      const fileExtension = file.name.split('.').pop();
+      const fileExtension = file.name.split(".").pop();
       const contentType = getContentType(fileExtension);
 
       const params = {
@@ -93,7 +89,7 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
         Key: `documents/${fileName}`,
         Body: file,
         ContentDisposition: "inline",
-        ContentType: contentType
+        ContentType: contentType,
       };
 
       const uploadRequest = s3.upload(params);
@@ -116,7 +112,7 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
         await axios
           .post(`${baseUrl}/documentation/uploadDocument`, requestBody)
           .then((response) => {
-            fetchFolder()
+            fetchFolder();
             if (response.status === 200) {
               setUploadProgress(0); // Reset progress for the current file
               if (i < files.length - 1) {
@@ -139,23 +135,27 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
     setFiles([]);
   };
 
-
   // Render File list
   const renderFileList = () => (
     <ol className="list-group list-group-numbered">
       {[...files].map((file, index) => {
         return (
-          <button
-            type="button"
-            className="list-group-item list-group-item-action file_list_button d-flex "
+          <div
+            role="button"
+            className="list-group-item list-group-item-action file_list_button d-flex align-items-center "
             key={index}
-            onClick={(e) => handleRemoveFile(e, index)}
           >
-            <span className="text-start">{file.name}</span>{" "}
-            <span className="ms-auto ps-4">
+            <p className="text-start uploaded_file_name m-0 lh-1">
+              {file.name}
+            </p>{" "}
+            <button
+              type="button"
+              className="btn border-0 ms-auto m-0 p-0"
+              onClick={(e) => handleRemoveFile(e, index)}
+            >
               <IconDelete />
-            </span>
-          </button>
+            </button>
+          </div>
         );
       })}
     </ol>
@@ -179,7 +179,11 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
             <option value="Other">Other</option>
 
           </select> */}
-          <select onChange={(e) => setFolder(e.target.value)} name="Folder" id="">
+          <select
+            onChange={(e) => setFolder(e.target.value)}
+            name="Folder"
+            id=""
+          >
             {folderSelector?.map((item, index) => (
               <option key={index} value={item}>
                 {item}
@@ -187,7 +191,6 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
             ))}
             {/* <option value="Other">Other</option> */}
           </select>
-
 
           {folder === "Other" && (
             <input
@@ -240,16 +243,16 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
               </div>
             </div>
           )}
-          {loading &&
+          {loading && (
             <div class="d-flex justify-content-center my-4">
               <div class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>
             </div>
-          }
+          )}
         </div>
       </div>
-      { }
+      {}
       {showPopUp && (
         <AfterSuccessPopUp savedFile={true} onClose={handleClosePopup} />
       )}

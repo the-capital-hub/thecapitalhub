@@ -10,10 +10,11 @@ import {
 } from "../../Service/user";
 import RightProfileCard from "../Investor/InvestorGlobalCards/RightProfileCard/RightProfileCard";
 import RecommendationCard from "../Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
-import NewsCorner from "../Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
+// import NewsCorner from "../Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
 import CreatePostPopUp from "../PopUp/CreatePostPopUp/CreatePostPopUp";
 import { useSelector } from "react-redux";
 import SpinnerBS from "../Shared/Spinner/SpinnerBS";
+import MaxWidthWrapper from "../Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 function SinglePost() {
   const [postData, setPostData] = useState(null);
@@ -62,54 +63,56 @@ function SinglePost() {
   const [getSavedPostData, setgetSavedPostData] = useState("");
 
   return (
-    <div className="single-post-page">
-      {!postLoading ? (
-        <>
-          <FeedPostCard
-            userId={postData?.user?._id}
-            postId={postData?._id}
-            designation={postData?.user?.designation}
-            profilePicture={postData?.user?.profilePicture}
-            description={postData?.description}
-            firstName={postData?.user?.firstName}
-            lastName={postData?.user?.lastName}
-            video={postData?.video}
-            image={postData?.image}
-            documentName={postData?.documentName}
-            documentUrl={postData?.documentUrl}
-            createdAt={postData?.createdAt}
-            likes={postData?.likes}
-            response={getSavedPostData}
-            repostWithToughts={(resharedPostId) => {
-              setRepostingPostId(resharedPostId);
-              openPopup();
-            }}
-            repostInstantly={repostInstantly}
-            resharedPostId={postData?.resharedPostId}
-          />
-          {popupOpen && (
-            <CreatePostPopUp
-              setPopupOpen={setPopupOpen}
-              popupOpen
-              setNewPost={setNewPost}
-              respostingPostId={respostingPostId}
+    <MaxWidthWrapper>
+      <div className="single-post-page">
+        {!postLoading ? (
+          <>
+            <FeedPostCard
+              userId={postData?.user?._id}
+              postId={postData?._id}
+              designation={postData?.user?.designation}
+              profilePicture={postData?.user?.profilePicture}
+              description={postData?.description}
+              firstName={postData?.user?.firstName}
+              lastName={postData?.user?.lastName}
+              video={postData?.video}
+              image={postData?.image}
+              documentName={postData?.documentName}
+              documentUrl={postData?.documentUrl}
+              createdAt={postData?.createdAt}
+              likes={postData?.likes}
+              response={getSavedPostData}
+              repostWithToughts={(resharedPostId) => {
+                setRepostingPostId(resharedPostId);
+                openPopup();
+              }}
+              repostInstantly={repostInstantly}
+              resharedPostId={postData?.resharedPostId}
             />
-          )}
-        </>
-      ) : (
-        <div className="loader">
-          <SpinnerBS
-            colorClass={"text-secondary"}
-            spinnerSizeClass="spinner-border-lg"
-          />
+            {popupOpen && (
+              <CreatePostPopUp
+                setPopupOpen={setPopupOpen}
+                popupOpen
+                setNewPost={setNewPost}
+                respostingPostId={respostingPostId}
+              />
+            )}
+          </>
+        ) : (
+          <div className="loader">
+            <SpinnerBS
+              colorClass={"text-secondary"}
+              spinnerSizeClass="spinner-border-lg"
+            />
+          </div>
+        )}
+        <div className="right-sidebar d-none d-lg-block">
+          <RightProfileCard />
+          <RecommendationCard />
+          {/* <NewsCorner /> */}
         </div>
-      )}
-      <div className="right-sidebar d-none d-lg-block">
-        <RightProfileCard />
-        <RecommendationCard />
-        {/* <NewsCorner /> */}
       </div>
-    </div>
+    </MaxWidthWrapper>
   );
 }
 

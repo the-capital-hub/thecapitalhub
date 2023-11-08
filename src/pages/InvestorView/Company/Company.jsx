@@ -1,39 +1,40 @@
-import profilePic from "../../../Images/investorView/Logo.png";
-import saved from "../../../Images/investorView/saved.svg";
-import CoinIcon from "../../../Images/investorView/Rectangle.png";
+// import profilePic from "../../../Images/investorView/Logo.png";
+// import saved from "../../../Images/investorView/saved.svg";
+// import CoinIcon from "../../../Images/investorView/Rectangle.png";
 
-import LocationIcon from "../../../Images/investorView/location.svg";
-import calenderIcon from "../../../Images/investorView/calenderIcon.svg";
-import upgraphIcon from "../../../Images/investorView/upgraphIcon.svg";
-import googleIcon from "../../../Images/investorView/Google svg(1).svg";
-import fbIcon from "../../../Images/investorView/Facebook svg.svg";
-import twIcon from "../../../Images/investorView/tw.svg";
-import lnIcon from "../../../Images/investorView/ln.svg";
-import feedbackIcon from "../../../Images/investorIcon/profilePic.webp";
+// import LocationIcon from "../../../Images/investorView/location.svg";
+// import calenderIcon from "../../../Images/investorView/calenderIcon.svg";
+// import upgraphIcon from "../../../Images/investorView/upgraphIcon.svg";
+// import googleIcon from "../../../Images/investorView/Google svg(1).svg";
+// import fbIcon from "../../../Images/investorView/Facebook svg.svg";
+// import twIcon from "../../../Images/investorView/tw.svg";
+// import lnIcon from "../../../Images/investorView/ln.svg";
+// import feedbackIcon from "../../../Images/investorIcon/profilePic.webp";
 
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import "./Company.scss";
-import CardComponent from "./CardComponent/CardComponent";
-import FeedbackCard from "./FeedbackCard/FeedbackCard";
-import FundingTeamCard from "./FundingTeamCard/FundingTeamCard";
+// import CardComponent from "./CardComponent/CardComponent";
+// import FeedbackCard from "./FeedbackCard/FeedbackCard";
+// import FundingTeamCard from "./FundingTeamCard/FundingTeamCard";
 import { useParams } from "react-router-dom";
 import { getOnePager } from "../../../Service/user";
 import { useState, useEffect } from "react";
-import RaghuImage from "../../../Images/aboutUs/Raghu.jpeg";
-import UpmaImage from "../../../Images/aboutUs/Upma.jpg";
-import PreetiImage from "../../../Images/aboutUs/Preeti.jpg";
-import RajuImage from "../../../Images/Rectangle 1895.png";
-import AdithyaImage from "../../../Images/aboutUs/developers/Adithya.png";
-import ShahabasImage from "../../../Images/aboutUs/developers/Shahabas.jpg";
-import SrihariImage from "../../../Images/aboutUs/developers/Srihari.jpg";
-import JijinImage from "../../../Images/aboutUs/developers/Jijin.jpg";
+// import RaghuImage from "../../../Images/aboutUs/Raghu.jpeg";
+// import UpmaImage from "../../../Images/aboutUs/Upma.jpg";
+// import PreetiImage from "../../../Images/aboutUs/Preeti.jpg";
+// import RajuImage from "../../../Images/Rectangle 1895.png";
+// import AdithyaImage from "../../../Images/aboutUs/developers/Adithya.png";
+// import ShahabasImage from "../../../Images/aboutUs/developers/Shahabas.jpg";
+// import SrihariImage from "../../../Images/aboutUs/developers/Srihari.jpg";
+// import JijinImage from "../../../Images/aboutUs/developers/Jijin.jpg";
 
-import TweeterIcon from "../../../Images/investorIcon/Tweeter.svg";
-import IntagramIcon from "../../../Images/investorIcon/Instagram.svg";
-import LinkedinIcon from "../../../Images/investorIcon/Linkedin.svg";
-import WebIcon from "../../../Images/investorIcon/WebIcon.svg";
+// import TweeterIcon from "../../../Images/investorIcon/Tweeter.svg";
+// import IntagramIcon from "../../../Images/investorIcon/Instagram.svg";
+// import LinkedinIcon from "../../../Images/investorIcon/Linkedin.svg";
+// import WebIcon from "../../../Images/investorIcon/WebIcon.svg";
 import CompanyProfile from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfile";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 
 function Company() {
   const { username } = useParams();
@@ -335,18 +336,16 @@ function Company() {
 
     // Newer version of company profile
     <MaxWidthWrapper>
-      <div className="">
-        <div className="company__profile__container m-3 mt-5 mt-xl-3">
-          {onePager.length !== 0 ? (
-            <CompanyProfile isOnelink={true} companyData={onePager} startup={"true"}/>
-          ) : (
-            <div className="bg-white rounded-4 border p-lg-4 shadow-sm d-flex justify-content-center min-vh-100">
-              <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-            </div>
-          )}
-        </div>
+      <div className="company__profile__container mx-lg-3 my-4 my-xl-3">
+        {onePager.length !== 0 ? (
+          <CompanyProfile
+            isOnelink={true}
+            companyData={onePager}
+            startup={"true"}
+          />
+        ) : (
+          <SpinnerBS className="bg-white rounded-4 border p-lg-4 shadow-sm d-flex justify-content-center min-vh-100" />
+        )}
       </div>
     </MaxWidthWrapper>
   );

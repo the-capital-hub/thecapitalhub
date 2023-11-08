@@ -33,13 +33,15 @@ export default function MissingDetails({ isInvestor = false }) {
       {countData?.total ? (
         <button
           id="missingDetails"
-          className="btn border-0 fs-5 py-3"
+          className={`btn rounded-4 fs-5 py-3 ${
+            isInvestor ? "border" : "border-0"
+          } `}
           data-bs-toggle="offcanvas"
           data-bs-target="#questionnaireOffCanvas"
           ariaControls="offcanvasTop"
           style={{
             color: isInvestor ? "#000" : "#fd5901",
-            backgroundColor: isInvestor ? "#d3f36b" : "#fff"
+            backgroundColor: isInvestor ? "#d3f36b" : "#fff",
           }}
         >
           Add missing details {countData && `(${countData.total})`}

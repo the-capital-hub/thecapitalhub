@@ -56,7 +56,10 @@ export default function StartupsInvested() {
         </div>
         {/* Startups Modal */}
         <ModalBSContainer id="startupsModal" isStatic={false} modalXl>
-          <ModalBSHeader title="Add/Edit Startups Invested" />
+          <ModalBSHeader 
+          title="Add/Edit Startups Invested"
+         
+           />
           <ModalBSBody>
             <AddEditModal
               dataArray={investedStartups}

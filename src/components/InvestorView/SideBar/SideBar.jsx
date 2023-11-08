@@ -24,17 +24,26 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
+  const isMobileView = useSelector((state) => state.design.isMobileView);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const location = useLocation();
-  const menuIconClick = () => {
-    setSidebarCollapsed(!sidebarCollapsed);
-  };
+
+  // console.log("onelink pathname", location.pathname.split("/").slice(-1)[0]);
 
   const { username } = useParams();
   const { userId } = useParams();
   const [user, setUser] = useState([]);
+  const [currentTab, setCurrentTab] = useState(
+    location.pathname.split("/").slice(-1)[0] === userId
+      ? "company"
+      : location.pathname.includes("documentation")
+      ? "documentation"
+      : location.pathname.split("/").slice(-1)[0]
+  );
 
-  const [currentTab, setCurrentTab] = useState("company");
+  // States for touch events
+  const [touchStartX, setTouchStartX] = useState(null);
+  const [touchEndX, setTouchEndX] = useState(null);
 
   useEffect(() => {
     getUserById(username, userId)
@@ -44,11 +53,50 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
       .catch(() => setUser([]));
   }, [username]);
 
+  const menuIconClick = () => {
+    setSidebarCollapsed(!sidebarCollapsed);
+  };
+
+  // Methods for touch events
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEndX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX && touchEndX) {
+      const deltaX = touchEndX - touchStartX;
+      if (deltaX < -50) {
+        setSidebarCollapsed(false); // Expand the sidebar
+      } else if (deltaX > 50) {
+        setSidebarCollapsed(true); // Collapse the sidebar
+      }
+      setTouchStartX(null);
+      setTouchEndX(null);
+    }
+  };
+
   return (
     <div
       className={`container sidebar_container investor_view_sidebar ${
         sidebarCollapsed ? "collapsed" : ""
       }`}
+      onMouseLeave={() => {
+        if (!isMobileView) {
+          setSidebarCollapsed(true);
+        }
+      }}
+      onMouseEnter={() => {
+        if (!isMobileView) {
+          setSidebarCollapsed(false);
+        }
+      }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       <div id="header">
         <ProSidebar collapsed={sidebarCollapsed}>
@@ -58,29 +106,39 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <img
                   className="rounded-circle"
                   src={user.profilePicture}
-                  alt="image"
+                  alt="user profile"
                 />
               ) : (
                 <>
                   <img
                     src={user.profilePicture}
-                    alt="image"
+                    alt="user profile"
                     className="rounded-circle"
                   />
-                  <h3>
+                  <h3 className="fs-6 mt-2">
                     {user?.firstName} {user?.lastName}
                   </h3>
-                  <h4>{user?.email}</h4>
+                  <h4 className="" style={{ fontSize: "12px" }}>
+                    {user?.email}
+                  </h4>
                 </>
               )}
             </div>
-            <div className="closemenu" onClick={menuIconClick}>
+            {/* <div className="closemenu" onClick={menuIconClick}>
               {sidebarCollapsed ? (
-                <img className="closemenu-Right" src={ArrowRight} alt="image" />
+                <img
+                  className="closemenu-Right"
+                  src={ArrowRight}
+                  alt="open sidebar"
+                />
               ) : (
-                <img className="closemenu-Left" src={ArrowLeft} alt="image" />
+                <img
+                  className="closemenu-Left"
+                  src={ArrowLeft}
+                  alt="close sidebar"
+                />
               )}
-            </div>
+            </div> */}
           </SidebarHeader>
           <SidebarContent>
             <Menu iconShape="round">
@@ -93,11 +151,17 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   {/* <img src={OnelinkIcon} alt="image" width="17px" height="17px" /> */}
                   <img
                     src={companyIcon}
-                    alt="image"
+                    alt="Company"
                     width="17px"
                     height="17px"
                   />
-                  {!sidebarCollapsed && <span className={currentTab === "company" ? "items-active" : ""}>Company</span>}
+                  {!sidebarCollapsed && (
+                    <span
+                      className={currentTab === "company" ? "items-active" : ""}
+                    >
+                      Company
+                    </span>
+                  )}
                 </Link>
               </MenuItem>
               <MenuItem
@@ -108,21 +172,40 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link to="profile">
                   <img
                     src={profileIcon}
-                    alt="image"
+                    alt="Profile"
                     width="17px"
                     height="17px"
                   />
-                  {!sidebarCollapsed && <span className={currentTab === "profile" ? "items-active" : ""}>Profile</span>}
+                  {!sidebarCollapsed && (
+                    <span
+                      className={currentTab === "profile" ? "items-active" : ""}
+                    >
+                      Profile
+                    </span>
+                  )}
                 </Link>
               </MenuItem>
               <MenuItem
-                active={currentTab === "onePager"}
+                active={currentTab === "onepager"}
                 className="active-item"
-                onClick={() => setCurrentTab("onePager")}
+                onClick={() => setCurrentTab("onepager")}
               >
                 <Link to="onepager">
-                  <img src={BookIcon} alt="image" width="17px" height="17px" />
-                  {!sidebarCollapsed && <span className={currentTab === "onePager" ? "items-active" : ""}>One Pager</span>}
+                  <img
+                    src={BookIcon}
+                    alt="OnePager"
+                    width="17px"
+                    height="17px"
+                  />
+                  {!sidebarCollapsed && (
+                    <span
+                      className={
+                        currentTab === "onepager" ? "items-active" : ""
+                      }
+                    >
+                      One Pager
+                    </span>
+                  )}
                 </Link>
               </MenuItem>
               <MenuItem
@@ -133,29 +216,39 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link to="documentation">
                   <img
                     src={documentationIcon}
-                    alt="image"
+                    alt="Documentation"
                     width="17px"
                     height="17px"
                   />
-                  {!sidebarCollapsed && <span className={currentTab === "documentation" ? "items-active" : ""}>Documentation</span>}
+                  {!sidebarCollapsed && (
+                    <span
+                      className={
+                        currentTab === "documentation" ? "items-active" : ""
+                      }
+                    >
+                      Documentation
+                    </span>
+                  )}
                 </Link>
               </MenuItem>
 
               {/* Invest now */}
               <div className="pt-2">
                 <MenuItem
-                  active={currentTab === "investNow"}
-                  onClick={() => setCurrentTab("investNow")}
+                  active={currentTab === "investnow"}
+                  onClick={() => setCurrentTab("investnow")}
                   className="active-item invest_now"
                 >
                   <Link to="investnow">
                     <img
                       src={investIcon}
-                      alt="image"
+                      alt="Invest Now"
                       width="17px"
                       height="17px"
                     />
-                    {!sidebarCollapsed && <span className={"items-active"}>Invest Now</span>}
+                    {!sidebarCollapsed && (
+                      <span className={"items-active"}>Invest Now</span>
+                    )}
                   </Link>
                 </MenuItem>
               </div>

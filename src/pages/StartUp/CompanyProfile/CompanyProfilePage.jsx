@@ -18,14 +18,14 @@ import AfterSuccessPopUp from "../../../components/PopUp/AfterSuccessPopUp/After
 import { useNavigate } from "react-router-dom";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import {
-  getUserCompanyData,
+  selectUserCompanyData,
   setUserCompany,
 } from "../../../Store/features/user/userSlice";
 
 export default function CompanyProfilePage() {
   const navigate = useNavigate();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const userCompanyData = useSelector(getUserCompanyData);
+  const userCompanyData = useSelector(selectUserCompanyData);
   const dispatch = useDispatch();
 
   const [companyData, setCompanyData] = useState(userCompanyData);
