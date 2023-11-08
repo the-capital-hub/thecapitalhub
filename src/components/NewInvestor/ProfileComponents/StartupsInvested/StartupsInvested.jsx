@@ -38,14 +38,14 @@ export default function StartupsInvested() {
         <div className="header border-bottom p-4 ">
           <h2 className="green_underline typography">Startups Invested</h2>
           <div className="">
-            {investor?.founderId === loggedInUser._id && (
+            {/* {investor?.founderId === loggedInUser._id && ( */}
               <ModalBsLauncher
                 id="startupsModal"
                 className={"green_button px-2 px-sm-3 "}
               >
                 Add New
               </ModalBsLauncher>
-            )}
+            {/* )} */}
           </div>
         </div>
         {/* Loop cards here */}
