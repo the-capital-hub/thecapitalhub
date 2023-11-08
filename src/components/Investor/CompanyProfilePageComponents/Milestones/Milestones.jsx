@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./Milestones.scss";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import MilestoneBadge from "./MilestoneBadge";
 import MockBadge from "../../../../Images/StartUp/Milestones/MockBadge.svg";
 import MockFundsBadge from "../../../../Images/StartUp/Milestones/MockfundsBadge.svg";
 import {
   ModalBSBody,
   ModalBSContainer,
-  ModalBSFooter,
   ModalBSHeader,
   ModalBsLauncher,
 } from "../../../PopUp/ModalBS";
@@ -28,12 +27,16 @@ const companyMilestones = [
   },
 ];
 
-export default function Milestones({ headingClass, containerClass, theme, oneLink }) {
+export default function Milestones({
+  headingClass,
+  containerClass,
+  theme,
+  oneLink,
+}) {
   let { pathname } = useLocation();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   // const oneLinkId = loggedInUser ? loggedInUser.oneLinkId : oneLink;
   // const { oneLinkId } = useSelector((state) => state.user.loggedInUser) ?? { oneLinkId: oneLink };
-
 
   const [userMilestones, setUserMilestones] = useState(null);
   const [joinedDate, setJoinedDate] = useState(null);
