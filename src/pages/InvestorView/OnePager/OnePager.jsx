@@ -81,7 +81,7 @@ const OnePager = () => {
       backgroundColor: "#ffffff",
       scale: window.devicePixelRatio,
       useCORS: true,
-      windowWidth: '1400px',
+      windowWidth: "1400px",
     }).then((canvas) => {
       const contentDataURL = canvas.toDataURL("image/png", 0.7);
       const imgWidth = 210;
@@ -120,7 +120,7 @@ const OnePager = () => {
       backgroundColor: "#ffffff",
       scale: window.devicePixelRatio,
       useCORS: true,
-      windowWidth: '1400px',
+      windowWidth: "1400px",
     }).then((canvas) => {
       const contentDataURL = canvas.toDataURL("image/png", 0.7);
       console.log(contentDataURL);
@@ -165,7 +165,7 @@ const OnePager = () => {
 
   return (
     <MaxWidthWrapper>
-      <div className=" ps-xl-3 mb-5">
+      <div className="onePager_pdf_outer ps-xl-3 mb-5">
         {onePager.length !== 0 ? (
           <div
             className="onePager_wrapper d-flex flex-column gap-4"

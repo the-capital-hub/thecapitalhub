@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react";
 import { Route } from "react-router-dom";
 import SuspenseLoader from "../components/SuspenseLoader/SuspenseLoader";
+import ThankYouPage from "../eCommerace/pages/LandingPage/ThankYouPage/ThankYouPage";
 
 const FoodLandingPage = lazy(() =>
   import("../eCommerace/pages/LandingPage/FoodLandingPage/FoodLandingPage")
@@ -29,6 +30,14 @@ function EcommerceRoutes() {
         }
       />
       <Route
+        path="food/thank-you"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <ThankYouPage />
+          </Suspense>
+        }
+      />
+      <Route
         path="nike"
         element={
           <Suspense fallback={<SuspenseLoader />}>
@@ -45,10 +54,27 @@ function EcommerceRoutes() {
         }
       />
       <Route
+        path="fintech/thank-you"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <ThankYouPage />
+          </Suspense>
+        }
+      />
+
+      <Route
         path="logistics"
         element={
           <Suspense fallback={<SuspenseLoader />}>
             <TransportLandingPage />
+          </Suspense>
+        }
+      />
+      <Route
+        path="logistics/thank-you"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <ThankYouPage />
           </Suspense>
         }
       />

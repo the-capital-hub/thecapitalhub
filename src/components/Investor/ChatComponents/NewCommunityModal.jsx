@@ -1,12 +1,12 @@
 import "./NewCommunityModal.scss";
 import { BsSearch, BsFillCameraFill } from "react-icons/bs";
-import {
-  userFive,
-  userOne,
-  userTwo,
-  userFour,
-  userThree,
-} from "../../../Images/Investor/CompanyProfile";
+// import {
+//   userFive,
+//   userOne,
+//   userTwo,
+//   userFour,
+//   userThree,
+// } from "../../../Images/Investor/CompanyProfile";
 import { getUserConnections, createCommunity } from "../../../Service/user";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

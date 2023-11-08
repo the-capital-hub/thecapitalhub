@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import "./ContactForm.scss";
 import { environment } from "../../../../environments/environment";
 import axios from "axios";
-import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+// import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import SpinnerBS from "../../../../components/Shared/Spinner/SpinnerBS";
+// import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import ErrorPopUp from "../../../../components/PopUp/ErrorPopUp/ErrorPopUp";
+
 const baseUrl = environment.baseUrl;
 const APP_TYPES = ["Website", "Mobile Application", "Website and Mobile App"];
+
 export default function ContactForm({ className, page }) {
   const initialData = {
     name: "",
@@ -17,6 +22,7 @@ export default function ContactForm({ className, page }) {
   const [formData, setFormData] = useState({ ...initialData });
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   // Handle form input changes
   function handleInputChange(e) {
@@ -47,14 +53,19 @@ export default function ContactForm({ className, page }) {
         console.log("response", response);
         if (response.status === 200) {
           console.log("form submitted");
-          setFormSubmitted(true);
+          // setFormSubmitted(true);
           setFormData({ ...initialData });
           setLoading(false);
+          navigate(`/landing-page/${page}/thank-you`);
         }
       })
       .catch((error) => {
         console.error("Error sending mail:", error);
         setLoading(false);
+        setFormSubmitted(true);
+        setTimeout(() => {
+          setFormSubmitted(false);
+        }, 2000);
       });
   }
 
@@ -63,9 +74,16 @@ export default function ContactForm({ className, page }) {
       className={`contact_form_wrapper px-2 pt-3 pb-5 d-flex flex-column ${className}`}
       id="contact-us"
     >
-      {formSubmitted && (
+      {/* {formSubmitted && (
         <AfterSuccessPopUp
           contactFrom
+          onClose={() => setFormSubmitted(!formSubmitted)}
+        />
+      )} */}
+
+      {formSubmitted && (
+        <ErrorPopUp
+          message={"Error submitting your information! Please try again."}
           onClose={() => setFormSubmitted(!formSubmitted)}
         />
       )}
@@ -155,6 +173,12 @@ export default function ContactForm({ className, page }) {
         </div>
 
         {/* Action Button */}
+        {/* <Link
+          to={`/landing-page/${page}/thank-you`}
+          target="_blank"
+          rel="noopener noreferrer"
+          ref={thankYouRef}
+        ></Link> */}
         <button
           type="submit"
           className="btn fs-5 border-0 send_button full_span"
