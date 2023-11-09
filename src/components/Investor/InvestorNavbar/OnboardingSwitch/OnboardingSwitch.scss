@@ -1,0 +1,30 @@
+.onboarding_switch_wrapper {
+  .form-check-input {
+    cursor: pointer;
+
+    height: 30px;
+    width: 50px;
+    position: relative;
+    --bs-border-color: var(--currentTheme) !important;
+    border-width: 2px;
+    background-image: url("../../../../Images/StartUp/Navbar/OrangeCircle.svg");
+
+    &:focus {
+      box-shadow: 0 0 0 0.25rem #fd590133;
+      border-color: var(--currentTheme);
+      background-image: url("../../../../Images/StartUp/Navbar/OrangeCircle.svg");
+
+      &:checked {
+        background-color: var(--currentTheme);
+        border-color: var(--currentTheme);
+        background-image: url("../../../../Images/StartUp/Navbar/WhiteCircle.svg");
+      }
+    }
+
+    &:checked {
+      background-color: var(--currentTheme);
+      border-color: var(--currentTheme);
+      background-image: url("../../../../Images/StartUp/Navbar/WhiteCircle.svg");
+    }
+  }
+}

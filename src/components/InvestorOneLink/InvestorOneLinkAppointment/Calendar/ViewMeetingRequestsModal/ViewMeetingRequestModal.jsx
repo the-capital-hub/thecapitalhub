@@ -50,7 +50,7 @@ export default function ViewMeetingRequestModal({ setMeetings }) {
   //   },
   // ];
 
-  console.log("Meeting requests", meetingRequests);
+  // console.log("Meeting requests", meetingRequests);
 
   return (
     <div className="view_meeting_modal_wrapper">
