@@ -9,10 +9,7 @@ import {
 import { getAllMeetingRequests } from "../../../../../Service/user";
 import MeetingRequest from "./MeetingRequest/MeetingRequest";
 
-export default function ViewMeetingRequestModal({
-  selectedMeeting,
-  setMeetings,
-}) {
+export default function ViewMeetingRequestModal({ setMeetings }) {
   // States for loading and alert
   // const [loading, setLoading] = useState(false);
   // const [alert, setAlert] = useState(null);
@@ -66,6 +63,7 @@ export default function ViewMeetingRequestModal({
                 request={request}
                 key={request._id}
                 setMeetingRequests={setMeetingRequests}
+                setMeetings={setMeetings}
               />
             ))
           ) : (

@@ -6,6 +6,7 @@ import moment from "moment";
 import EditMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/EditMeetingModal/EditMeetingModal";
 import RequestMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/RequestMeetingModal/RequestMeetingModal";
 import AlertModal from "./Components/AlertModal/AlertModal";
+import ViewMeetingRequestModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/ViewMeetingRequestsModal/ViewMeetingRequestModal";
 
 export default function BigCalendar({
   calendarData,
@@ -136,6 +137,8 @@ export default function BigCalendar({
         selectedMeeting={selectedMeeting}
         setMeetings={setMeetings}
       />
+      {/* View Meeting requests */}
+      <ViewMeetingRequestModal setMeetings={setMeetings} />
 
       {/* Alert Modal */}
       {alert && <AlertModal alertMessage={alert} />}

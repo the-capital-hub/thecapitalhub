@@ -4,7 +4,12 @@ import SpinnerBS from "../../../../../Shared/Spinner/SpinnerBS";
 import { acceptMeetingRequest } from "../../../../../../Service/user";
 import { formatDateTime } from "../../../../../../utils/Calendar";
 
-export default function MeetingRequest({ request, setMeetingRequests }) {
+export default function MeetingRequest({
+  request,
+  setMeetingRequests,
+  setMeetings,
+}) {
+  // States for loading, alert and view more button
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -27,6 +32,22 @@ export default function MeetingRequest({ request, setMeetingRequests }) {
         setMeetingRequests((prev) =>
           prev.filter((request) => request.meetingId !== data._id)
         );
+        // Set meetings
+        setMeetings((prev) => {
+          let copy = prev.map((meeting) => {
+            if (meeting._id === data._id) {
+              return {
+                ...meeting,
+                ...data,
+                start: new Date(data.start),
+                end: new Date(data.end),
+              };
+            }
+            return meeting;
+          });
+
+          return copy;
+        });
       }, 2500);
     } catch (error) {
       console.error("Error:", error);
@@ -34,85 +55,92 @@ export default function MeetingRequest({ request, setMeetingRequests }) {
     }
   };
 
-  return !alert ? (
-    <div className="meeting-request">
-      <div className="request-details">
-        <span className="request-name">{request.name}</span>
-        <div className="request-dates">
-          <p>
-            <strong>Agenda:</strong> {request.agenda}
-          </p>
-          <p>
-            <strong>Start:</strong> {formatDateTime(request.start)}
-          </p>
-          <p>
-            <strong>End:</strong> {formatDateTime(request.end)}
-          </p>
-          {expanded && (
-            <>
+  return (
+    <>
+      {!alert ? (
+        <div className="meeting-request">
+          {/* Request Details */}
+          <div className="request-details">
+            <h4 className="request-name">{request.name}</h4>
+            <div className="request-dates">
               <p>
-                <strong>Company:</strong> {request.companyName}
-              </p>
-              <Linkify>
-                <p>
-                  <strong>Onelink:</strong> {request.oneLink}
-                </p>
-              </Linkify>
-              <p>
-                <strong>Phone:</strong> {request.phone}
+                <strong>Agenda:</strong> {request.agenda}
               </p>
               <p>
-                <strong>Email:</strong> {request.email}
+                <strong>Start:</strong> {formatDateTime(request.start)}
               </p>
-            </>
+              <p>
+                <strong>End:</strong> {formatDateTime(request.end)}
+              </p>
+              {expanded && (
+                <>
+                  <p>
+                    <strong>Company:</strong> {request.companyName}
+                  </p>
+                  <Linkify>
+                    <p>
+                      <strong>Onelink:</strong> {request.oneLink}
+                    </p>
+                  </Linkify>
+                  <p>
+                    <strong>Phone:</strong> {request.phone}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {request.email}
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Action buttons */}
+          <div className="request-actions">
+            <button
+              type="button"
+              className="view_button"
+              onClick={() => setExpanded(!expanded)}
+              disabled={loading}
+            >
+              {expanded ? "Hide Details" : "View More"}
+            </button>
+            <button
+              type="button"
+              className="create_button"
+              onClick={() => handleAccept(request.meetingId, request._id)}
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <SpinnerBS
+                    spinnerSizeClass="spinner-border-sm"
+                    colorClass={"text-black"}
+                  />
+                  <span className="text-muted" style={{ fontSize: "12px" }}>
+                    Please wait..
+                  </span>
+                </>
+              ) : (
+                "Accept"
+              )}
+            </button>
+            <button
+              type="button"
+              className="btn btn-danger"
+              style={{ borderRadius: "10px" }}
+              disabled={loading}
+            >
+              Decline
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="d-flex p-5 justify-content-center align-items-center grow_in">
+          {alert?.success && <h4 className="text-center">{alert.success}</h4>}
+          {alert?.error && (
+            <h4 className="text-center text-danger">{alert.error}</h4>
           )}
         </div>
-      </div>
-      <div className="request-actions">
-        <button
-          type="button"
-          className="view_button"
-          onClick={() => setExpanded(!expanded)}
-          disabled={loading}
-        >
-          {expanded ? "Hide Details" : "View More"}
-        </button>
-        <button
-          type="button"
-          className="create_button"
-          onClick={() => handleAccept(request.meetingId, request._id)}
-          disabled={loading}
-        >
-          {loading ? (
-            <>
-              <SpinnerBS
-                spinnerSizeClass="spinner-border-sm"
-                colorClass={"text-black"}
-              />
-              <span className="text-muted" style={{ fontSize: "12px" }}>
-                Please wait..
-              </span>
-            </>
-          ) : (
-            "Accept"
-          )}
-        </button>
-        <button
-          type="button"
-          className="btn btn-danger"
-          style={{ borderRadius: "10px" }}
-          disabled={loading}
-        >
-          Decline
-        </button>
-      </div>
-    </div>
-  ) : (
-    <div className="d-flex p-5 justify-content-center align-items-center grow_in">
-      {alert?.success && <h4 className="text-center">{alert.success}</h4>}
-      {alert?.error && (
-        <h4 className="text-center text-danger">{alert.error}</h4>
       )}
-    </div>
+    </>
   );
 }
