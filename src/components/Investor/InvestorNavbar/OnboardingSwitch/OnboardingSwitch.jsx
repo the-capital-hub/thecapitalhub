@@ -1,7 +1,29 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./OnboardingSwitch.scss";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectIsMobileView,
+  setShowOnboarding,
+} from "../../../../Store/features/design/designSlice";
 
 export default function OnboardingSwitch() {
+  const isMobileView = useSelector(selectIsMobileView);
+  const dispatch = useDispatch();
+
+  const switchRef = useRef();
+
+  function handleSwitchClick(e) {
+    const { checked } = e.target;
+
+    if (isMobileView) {
+      dispatch(setShowOnboarding(false));
+      switchRef.current.checked = false;
+      return;
+    }
+
+    dispatch(setShowOnboarding(checked));
+  }
+
   return (
     <div className="onboarding_switch_wrapper">
       <div className="form-check form-switch">
@@ -10,6 +32,9 @@ export default function OnboardingSwitch() {
           type="checkbox"
           role="switch"
           id="onboardingToggle"
+          defaultChecked={false}
+          onClick={handleSwitchClick}
+          ref={switchRef}
         />
       </div>
     </div>

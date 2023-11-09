@@ -17,12 +17,16 @@ import { useLocation } from "react-router-dom";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { setPageTitle } from "../../../Store/features/design/designSlice";
+import {
+  selectShowOnboarding,
+  setPageTitle,
+} from "../../../Store/features/design/designSlice";
 import OnBoardUser from "../../OnBoardUser/OnBoardUser";
 import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
 
 const Feed = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const showOnboarding = useSelector(selectShowOnboarding);
   const dispatch = useDispatch();
 
   const [popupOpen, setPopupOpen] = useState(false);
@@ -223,7 +227,11 @@ const Feed = () => {
           <NewsCorner />
         </div>
       </div>
-      <OnBoardUser steps={startupOnboardingSteps.homePage} />
+      {showOnboarding ? (
+        <OnBoardUser steps={startupOnboardingSteps.homePage} />
+      ) : (
+        ""
+      )}
     </MaxWidthWrapper>
   );
 };
