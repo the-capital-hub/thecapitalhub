@@ -8,11 +8,10 @@ import Meetings from "../../../components/NewInvestor/MyScheduleComponents/Meeti
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
-import { getAllMeetings } from "../../../Service/user";
-import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
-import MeetingRequestModal from "../../../components/InvestorOneLink/InvestorOneLinkAppointment/Calendar/MeetingRequestsModal/ViewMeetingRequestModal";
+import ViewMeetingRequestModal from "../../../components/InvestorOneLink/InvestorOneLinkAppointment/Calendar/ViewMeetingRequestsModal/ViewMeetingRequestModal";
 import { ModalBsLauncher } from "../../../components/PopUp/ModalBS";
 import { useSearchParams } from "react-router-dom";
+import { selectUserOneLinkId } from "../../../Store/features/user/userSlice";
 
 const MEETINGTYPES = ["daily", "weekly", "monthly"];
 const EVENTS = [
@@ -45,17 +44,17 @@ const EVENTS = [
 
 export default function MySchedule() {
   // Fetch loggedInUser
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const oneLinkId = useSelector(selectUserOneLinkId);
   const viewReq = useRef();
 
   const [view, setView] = useState("week");
-  const [meetingsData, setMeetingsData] = useState(null);
+  // const [meetingsData, setMeetingsData] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
     window.title = "My Schedule | The Capital Hub";
     dispatch(setPageTitle("My Schedule"));
-  }, []);
+  }, [dispatch]);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const isView = searchParams.get("view");
@@ -68,30 +67,30 @@ export default function MySchedule() {
     }
   }, [isView, searchParams, setSearchParams]);
 
-  // Fetch meetingData for user here
-  useEffect(() => {
-    async function getMeetings() {
-      try {
-        const { data } = await getAllMeetings(loggedInUser.oneLinkId);
-        // console.log("Meetings", data);
+  // // Fetch meetingData for user here
+  // useEffect(() => {
+  //   async function getMeetings() {
+  //     try {
+  //       const { data } = await getAllMeetings(oneLinkId);
+  //       // console.log("Meetings", data);
 
-        const result = data.map((meeting, index) => {
-          return {
-            ...meeting,
-            start: new Date(meeting.start),
-            end: new Date(meeting.end),
-          };
-        });
+  //       const result = data.map((meeting, index) => {
+  //         return {
+  //           ...meeting,
+  //           start: new Date(meeting.start),
+  //           end: new Date(meeting.end),
+  //         };
+  //       });
 
-        // Save to State
-        setMeetingsData(result);
-      } catch (error) {
-        console.log("Error fetching meetings", error);
-      }
-    }
+  //       // Save to State
+  //       setMeetingsData(result);
+  //     } catch (error) {
+  //       console.log("Error fetching meetings", error);
+  //     }
+  //   }
 
-    getMeetings();
-  }, []);
+  //   getMeetings();
+  // }, [oneLinkId]);
 
   // function handleViewSelect(selectedView) {
   //   console.log(selectedView);
@@ -130,17 +129,13 @@ export default function MySchedule() {
 
             <div className="schedule__container px-3">
               {/* Scheduler */}
-              {meetingsData ? (
-                <div className="calender__div">
-                  <CalendarContainer
-                    view={view}
-                    meetingsData={meetingsData || EVENTS}
-                    setView={setView}
-                  />
-                </div>
-              ) : (
-                <SpinnerBS className="d-flex w-100 justify-content-center" />
-              )}
+              <div className="calender__div">
+                <CalendarContainer
+                  view={view}
+                  setView={setView}
+                  oneLinkId={oneLinkId}
+                />
+              </div>
 
               {/* Meetings */}
               <div className="meetings__div p-3 border rounded-4 d-flex flex-column gap-3">
@@ -159,7 +154,7 @@ export default function MySchedule() {
           </section>
         </div>
         <ModalBsLauncher id={"meetingRequestsModal"} launchRef={viewReq} />
-        <MeetingRequestModal />
+        <ViewMeetingRequestModal />
       </>
     </MaxWidthWrapper>
   );

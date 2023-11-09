@@ -6,6 +6,7 @@ import moment from "moment";
 import EditMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/EditMeetingModal/EditMeetingModal";
 import RequestMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/RequestMeetingModal/RequestMeetingModal";
 import AlertModal from "./Components/AlertModal/AlertModal";
+import ViewMeetingRequestModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/ViewMeetingRequestsModal/ViewMeetingRequestModal";
 
 export default function BigCalendar({
   calendarData,
@@ -67,7 +68,7 @@ export default function BigCalendar({
         }
 
         // Check if meeting is Booked
-        if (meeting.requestedBy.length) {
+        if (meeting.bookedBy) {
           setAlert(
             "The meeting slot has been filled. Please select a different one."
           );
@@ -132,7 +133,12 @@ export default function BigCalendar({
         setMeetings={setMeetings}
       />
       {/* Request Meeting Modal */}
-      <RequestMeetingModal selectedMeeting={selectedMeeting} />
+      <RequestMeetingModal
+        selectedMeeting={selectedMeeting}
+        setMeetings={setMeetings}
+      />
+      {/* View Meeting requests */}
+      <ViewMeetingRequestModal setMeetings={setMeetings} />
 
       {/* Alert Modal */}
       {alert && <AlertModal alertMessage={alert} />}

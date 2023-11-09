@@ -21,7 +21,7 @@ const REQUEST = {
   oneLink: "",
 };
 
-export default function RequestMeetingModal({ selectedMeeting }) {
+export default function RequestMeetingModal({ selectedMeeting, setMeetings }) {
   //   const [files, setFiles] = useState(null);
   const closeRef = useRef();
   const [requestData, setRequestData] = useState(REQUEST);
@@ -53,7 +53,19 @@ export default function RequestMeetingModal({ selectedMeeting }) {
         selectedMeeting._id,
         requestData
       );
-      console.log("response", data);
+      // console.log("response", data);
+
+      // Set Meetings data
+      setMeetings((prev) => {
+        let copy = [...prev];
+        copy.forEach((meeting) => {
+          if (meeting._id === data._id) {
+            meeting.requestedBy = data.requestedBy;
+          }
+        });
+
+        return [...copy];
+      });
 
       // Revert loading and request data
       setLoading(false);
@@ -190,7 +202,7 @@ export default function RequestMeetingModal({ selectedMeeting }) {
                 </button>
                 <button
                   type="submit"
-                  className={`btn-capital fs-6 py-3 w-50 d-flex justify-content-center align-items-center gap-2 ${
+                  className={`btn-capital fs-6 py-3 w-50 rounded-4 d-flex justify-content-center align-items-center gap-2 ${
                     loading ? "opacity-50" : ""
                   }`}
                   disabled={loading}

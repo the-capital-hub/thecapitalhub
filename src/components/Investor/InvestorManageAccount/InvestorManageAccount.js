@@ -77,8 +77,9 @@ const InvestorManageAccount = () => {
               className="mt-5 mt-xl-3"
               text={"Manage Account"}
             />
-            <div className="box_container p-4 mt-4 row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-gap-3">
-              <section className="col">
+            <div className="box_container p-4 mt-4 row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-gap-3 flex-lg-row">
+              {/* Change Password */}
+              <section className="col password_section">
                 <div className="change_password border">
                   {/* Header */}
                   <div className="d-flex align-items-center gap-2">
@@ -138,7 +139,9 @@ const InvestorManageAccount = () => {
                   </form>
                 </div>
               </section>
-              <section className="col">
+
+              {/* Present Accounts */}
+              <section className="col present_accounts_section">
                 <div className="present_account border">
                   {/* Header */}
                   <div className="d-flex align-items-center">
@@ -168,7 +171,9 @@ const InvestorManageAccount = () => {
                   </div>
                 </div>
               </section>
-              <section className="col">
+
+              {/* Logout Section */}
+              <section className="col logout_section">
                 <div class="border empty_box">
                   <button
                     className="btn logout-btn w-100"
@@ -184,7 +189,8 @@ const InvestorManageAccount = () => {
                     />
                   )}
                 </div>
-                {/* <div className="d-flex align-items-center">
+              </section>
+              {/* <div className="d-flex align-items-center">
                   <div className="logo">
                     <img src={logoIcon} alt="img" />
                   </div>
@@ -252,7 +258,6 @@ const InvestorManageAccount = () => {
                     </div>
                   </div>
                 </section> */}
-              </section>
             </div>
           </div>
         </div>

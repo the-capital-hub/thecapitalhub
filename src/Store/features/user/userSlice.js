@@ -63,6 +63,7 @@ export const selectIsInvestor = (state) => {
   return state.user.loggedInUser.isInvestor === "true" ? true : false;
 };
 export const selectLoggedInUserId = (state) => state.user.loggedInUser._id;
+export const selectUserOneLinkId = (state) => state.user.loggedInUser.oneLinkId;
 
 // company selectors
 export const selectUserCompanyData = (state) => state.user.company;
