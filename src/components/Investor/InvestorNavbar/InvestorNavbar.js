@@ -17,10 +17,13 @@ import {
 } from "../../../Service/user";
 import NotificationsPopup from "./NotificationsPopup/NotificationsPopup";
 import { useRef } from "react";
+import OnboardingSwitch from "./OnboardingSwitch/OnboardingSwitch";
 
 // Startup navbar
 const InvestorNavbar = (props) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const isMobileView = useSelector((state) => state.design.isMobileView);
+
   // const [url, setUrl] = useState("Home");
   const [searchSuggestions, setSearchSuggestions] = useState(false);
   const [searchInput, setSearchInput] = useState("");
@@ -126,6 +129,8 @@ const InvestorNavbar = (props) => {
               </div>
             </div>
           </div>
+
+          {/* Navbar right */}
           <div className="navbar_right_container">
             <div className="search_container position-relative">
               <form
@@ -196,7 +201,13 @@ const InvestorNavbar = (props) => {
                           ?.slice(0, 5)
                           .map(({ company, founderId, _id, isInvestor }) => (
                             <span className="single_result">
-                              <Link to={isInvestor ? `/company-profile/${_id}?investor=1` : `/company-profile/${founderId}`}>
+                              <Link
+                                to={
+                                  isInvestor
+                                    ? `/company-profile/${_id}?investor=1`
+                                    : `/company-profile/${founderId}`
+                                }
+                              >
                                 {company}
                               </Link>
                             </span>
@@ -226,7 +237,9 @@ const InvestorNavbar = (props) => {
                 </div>
               )}
             </div>
+
             <div className="icons-container">
+              {/* Search for mobile view start*/}
               <div className="mobile-icon-wrapper position-relative ">
                 <span
                   className="notification-icon"
@@ -341,11 +354,16 @@ const InvestorNavbar = (props) => {
                   </div>
                 )}
               </div>
+              {/* Search for mobile view start*/}
+
+              {/* Onboarding Tutorial */}
+              {isMobileView ? "" : <OnboardingSwitch />}
 
               {/* <Link
                 to="/notifications"
                 className="rounded-circle notification-icon"
               > */}
+              {/* Notification */}
               <div
                 className={`notification-container icon-wrapper`}
                 ref={notificationPopup}

@@ -22,6 +22,20 @@
     }
     /* Add this to align boxes horizontally */
 
+    @media (max-width: 991px) {
+      .password_section {
+        order: 2;
+      }
+
+      .present_accounts_section {
+        order: 1;
+      }
+
+      .logout_section {
+        order: 3;
+      }
+    }
+
     .change_password {
       background-color: #f9f9f9;
       padding: 20px;
@@ -327,4 +341,9 @@
     height: 100%;
     margin-bottom: 20%;
   }
+
+  // // CSS for logout section
+  // .logout_section {
+  //   order: 3;
+  // }
 }

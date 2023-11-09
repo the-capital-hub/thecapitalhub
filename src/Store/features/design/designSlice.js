@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   pageTitle: "",
   isMobileView: "",
+  showOnboarding: false,
 };
 
 export const designSlice = createSlice({
@@ -15,9 +16,17 @@ export const designSlice = createSlice({
     setIsMobileView: (state, action) => {
       state.isMobileView = action.payload;
     },
+    setShowOnboarding: (state, action) => {
+      state.showOnboarding = action.payload;
+    },
   },
 });
 
-export const { setPageTitle, setIsMobileView } = designSlice.actions;
+// Selectors
+export const selectShowOnboarding = (state) => state.design.showOnboarding;
+export const selectIsMobileView = (state) => state.design.isMobileView;
+
+export const { setPageTitle, setIsMobileView, setShowOnboarding } =
+  designSlice.actions;
 
 export default designSlice.reducer;
