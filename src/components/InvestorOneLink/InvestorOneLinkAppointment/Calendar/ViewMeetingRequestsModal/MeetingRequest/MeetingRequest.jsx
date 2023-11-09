@@ -4,25 +4,30 @@ import SpinnerBS from "../../../../../Shared/Spinner/SpinnerBS";
 import { acceptMeetingRequest } from "../../../../../../Service/user";
 import { formatDateTime } from "../../../../../../utils/Calendar";
 
-export default function MeetingRequest({ request }) {
+export default function MeetingRequest({ request, setMeetingRequests }) {
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
   const handleAccept = async (meetingId, requestId) => {
+    setLoading(true);
+
     try {
-      setLoading(true);
-      const response = await acceptMeetingRequest(meetingId, requestId);
-      if (response.status === 200) {
-        setLoading(false);
-        setAlert({ success: "Request Accepted!" });
-        // setTimeout(() => {
-        //   closeRef.current.click();
-        // }, 2000);
-        setTimeout(() => {
-          setAlert(null);
-        }, 2500);
-      }
+      const { data } = await acceptMeetingRequest(meetingId, requestId);
+      console.log("Req accept response", data);
+
+      setLoading(false);
+      setAlert({ success: "Request Accepted!" });
+      // setTimeout(() => {
+      //   closeRef.current.click();
+      // }, 2000);
+      setTimeout(() => {
+        setAlert(null);
+        // Set Meeting Requests data
+        setMeetingRequests((prev) =>
+          prev.filter((request) => request.meetingId !== data._id)
+        );
+      }, 2500);
     } catch (error) {
       console.error("Error:", error);
       setAlert({ error: "Error Accepting Request! Please try again." });
@@ -64,12 +69,19 @@ export default function MeetingRequest({ request }) {
         </div>
       </div>
       <div className="request-actions">
-        <button className="view_button" onClick={() => setExpanded(!expanded)}>
+        <button
+          type="button"
+          className="view_button"
+          onClick={() => setExpanded(!expanded)}
+          disabled={loading}
+        >
           {expanded ? "Hide Details" : "View More"}
         </button>
         <button
+          type="button"
           className="create_button"
           onClick={() => handleAccept(request.meetingId, request._id)}
+          disabled={loading}
         >
           {loading ? (
             <>
@@ -77,11 +89,21 @@ export default function MeetingRequest({ request }) {
                 spinnerSizeClass="spinner-border-sm"
                 colorClass={"text-black"}
               />
-              <span className="text-muted">Please wait..</span>
+              <span className="text-muted" style={{ fontSize: "12px" }}>
+                Please wait..
+              </span>
             </>
           ) : (
             "Accept"
           )}
+        </button>
+        <button
+          type="button"
+          className="btn btn-danger"
+          style={{ borderRadius: "10px" }}
+          disabled={loading}
+        >
+          Decline
         </button>
       </div>
     </div>

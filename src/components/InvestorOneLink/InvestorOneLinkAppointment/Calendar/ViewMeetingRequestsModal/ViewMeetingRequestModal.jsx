@@ -15,54 +15,18 @@ export default function ViewMeetingRequestModal({
 }) {
   // States for loading and alert
   // const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState(null);
+  // const [alert, setAlert] = useState(null);
   const closeRef = useRef();
   // const [expandedRequest, setExpandedRequest] = useState("null");
-
   const [meetingRequests, setMeetingRequests] = useState([]);
+
   useEffect(() => {
     getAllMeetingRequests()
       .then(({ data }) => {
         setMeetingRequests(data);
       })
       .catch((error) => console.log(error));
-  }, [alert]);
-
-  // const formatDateTime = (dateTime) => {
-  //   const options = {
-  //     year: "numeric",
-  //     month: "numeric",
-  //     day: "numeric",
-  //     hour: "numeric",
-  //     minute: "numeric",
-  //   };
-
-  //   // Parse the original date
-  //   const originalDate = new Date(dateTime);
-
-  //   // Format the date
-  //   return originalDate.toLocaleDateString("en-US", options);
-  // };
-
-  // const handleAccept = async (meetingId, requestId) => {
-  //   try {
-  //     setLoading(true);
-  //     const response = await acceptMeetingRequest(meetingId, requestId);
-  //     console.log("meet accept response", response);
-  //     if (response.status === 200) {
-  //       setLoading(false);
-  //       setAlert({ success: "Request Accepted!" });
-  //       setTimeout(() => {
-  //         closeRef.current.click();
-  //       }, 2000);
-  //       setTimeout(() => {
-  //         setAlert(null);
-  //       }, 2500);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // };
+  }, []);
 
   // const meetingRequests = [
   //   {
@@ -89,7 +53,7 @@ export default function ViewMeetingRequestModal({
   //   },
   // ];
 
-  // console.log("Meeting requests", meetingRequests);
+  console.log("Meeting requests", meetingRequests);
 
   return (
     <div className="view_meeting_modal_wrapper">
@@ -98,7 +62,11 @@ export default function ViewMeetingRequestModal({
         <ModalBSBody>
           {meetingRequests && meetingRequests.length > 0 ? (
             meetingRequests.map((request) => (
-              <MeetingRequest request={request} key={request._id} />
+              <MeetingRequest
+                request={request}
+                key={request._id}
+                setMeetingRequests={setMeetingRequests}
+              />
             ))
           ) : (
             <div className="no-requests-found">

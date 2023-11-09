@@ -53,7 +53,7 @@ export default function RequestMeetingModal({ selectedMeeting, setMeetings }) {
         selectedMeeting._id,
         requestData
       );
-      console.log("response", data);
+      // console.log("response", data);
 
       // Set Meetings data
       setMeetings((prev) => {
