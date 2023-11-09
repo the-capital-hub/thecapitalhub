@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./InvestorOneLinkAppointment.scss";
 import CalendarContainer from "../../../components/NewInvestor/MyScheduleComponents/CalenderContainer";
 import ViewSelect from "../../../components/NewInvestor/MyScheduleComponents/ViewSelect";
-import MeetingInfo from "../../../components/InvestorOneLink/InvestorOneLinkAppointment/MeetingInfo/MeetingInfo";
-import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
-import { getAllMeetings } from "../../../Service/user";
+// import MeetingInfo from "../../../components/InvestorOneLink/InvestorOneLinkAppointment/MeetingInfo/MeetingInfo";
+// import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import { useParams } from "react-router-dom";
 
 export default function InvestorOneLinkAppointment() {
@@ -12,40 +11,11 @@ export default function InvestorOneLinkAppointment() {
   const { userId } = useParams();
 
   const [view, setView] = useState("week");
-  const [files, setFiles] = useState([]);
-  const [message, setMessage] = useState("");
-  const [meetingsData, setMeetingsData] = useState(null);
+  // const [files, setFiles] = useState([]);
+  // const [message, setMessage] = useState("");
 
   // Fetch meetingData for user here
-  useEffect(() => {
-    async function getMeetings() {
-      try {
-        const { data } = await getAllMeetings(userId);
-        // console.log("Meetings", data);
-
-        const result = data.map((meeting, index) => {
-          return {
-            ...meeting,
-            start: new Date(meeting.start),
-            end: new Date(meeting.end),
-          };
-        });
-
-        // Save to State
-        setMeetingsData(result);
-      } catch (error) {
-        console.log("Error fetching meetings", error);
-      }
-    }
-
-    getMeetings();
-  }, []);
-
-  // // handle calendar view select
-  // function handleViewSelect(selectedView) {
-  //   console.log(selectedView);
-  //   setView(selectedView);
-  // }
+  // const { meetingsData } = useGetAllMeetings(userId);
 
   return (
     <div className="appointment_wrapper mb-5 ps-3 leftBorder">
@@ -63,18 +33,15 @@ export default function InvestorOneLinkAppointment() {
 
             <div className="calendar">
               {/* Scheduler */}
-              {meetingsData ? (
-                <div className="calender__div">
-                  <CalendarContainer
-                    view={view}
-                    meetingsData={meetingsData}
-                    setView={setView}
-                    investor={false}
-                  />
-                </div>
-              ) : (
-                <SpinnerBS className="d-flex w-100 justify-content-center" />
-              )}
+
+              <div className="calender__div">
+                <CalendarContainer
+                  view={view}
+                  setView={setView}
+                  investor={false}
+                  oneLinkId={userId}
+                />
+              </div>
             </div>
 
             {/* Action buttons */}

@@ -67,7 +67,7 @@ export default function BigCalendar({
         }
 
         // Check if meeting is Booked
-        if (meeting.requestedBy.length) {
+        if (meeting.bookedBy) {
           setAlert(
             "The meeting slot has been filled. Please select a different one."
           );
@@ -132,7 +132,10 @@ export default function BigCalendar({
         setMeetings={setMeetings}
       />
       {/* Request Meeting Modal */}
-      <RequestMeetingModal selectedMeeting={selectedMeeting} />
+      <RequestMeetingModal
+        selectedMeeting={selectedMeeting}
+        setMeetings={setMeetings}
+      />
 
       {/* Alert Modal */}
       {alert && <AlertModal alertMessage={alert} />}
