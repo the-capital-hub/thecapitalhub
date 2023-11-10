@@ -10,17 +10,8 @@ import PhilosophyDetails from "../../../components/InvestorOneLink/InvestorOneLi
 export default function InvestorOneLinkInvestment() {
   // Fetch or get from state
   const { company, investor } = useOutletContext();
-  const {
-    firstName,
-    lastName,
-    designation,
-    location,
-    profilePicture,
-    founderAlmaMaterMatters,
-    roleAsAInvestor,
-    importanceOfManagament,
-    sectorPreferences,
-  } = investor;
+  const { firstName, lastName, designation, location, profilePicture } =
+    investor;
   const { companyName } = company;
 
   return (
@@ -57,12 +48,7 @@ export default function InvestorOneLinkInvestment() {
         <PhilosophyAbout companyName={companyName} />
 
         {/* Details */}
-        <PhilosophyDetails
-          founderAlmaMaterMatters={founderAlmaMaterMatters}
-          roleAsAInvestor={roleAsAInvestor}
-          importanceOfManagament={importanceOfManagament}
-          sectorPreferences={sectorPreferences}
-        />
+        <PhilosophyDetails />
 
         {/* Incorporation */}
         <PhilosophyIncorporation />

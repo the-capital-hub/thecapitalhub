@@ -70,6 +70,8 @@ export const selectUserRecentExperience = (state) =>
   state.user.loggedInUser.recentExperience;
 export const selectUserRecentEducation = (state) =>
   state.user.loggedInUser.recentEducation;
+
+// Investment philosophy selectors
 export const selectUserSectorPreferences = (state) =>
   state.user.loggedInUser.sectorPreferences;
 export const selectImportanceOfManagament = (state) =>
@@ -78,6 +80,22 @@ export const selectRoleAsAInvestor = (state) =>
   state.user.loggedInUser.roleAsAInvestor;
 export const selectFounderAlmaMaterMatters = (state) =>
   state.user.loggedInUser.founderAlmaMaterMatters;
+export const selectRiskManagementInInvestments = (state) =>
+  state.user.loggedInUser.riskManagementInInvestments;
+export const selectGuideOnSellingInvestments = (state) =>
+  state.user.loggedInUser.guideOnSellingInvestments;
+export const selectTimingInInvestmentDecisions = (state) =>
+  state.user.loggedInUser.timingInInvestmentDecisions;
+export const selectMacroeconomicFactorsInfluenceInvestments = (state) =>
+  state.user.loggedInUser.macroeconomicFactorsInfluenceInvestments;
+export const selectAssessCompanyCompetitiveAdvantage = (state) =>
+  state.user.loggedInUser.assessCompanyCompetitiveAdvantage;
+export const selectIndustryTrendsHoldInYourStrategy = (state) =>
+  state.user.loggedInUser.industryTrendsHoldInYourStrategy;
+export const selectEvaluateCompanyGrowthPotential = (state) =>
+  state.user.loggedInUser.evaluateCompanyGrowthPotential;
+export const selectWeightGaveToTechnologicalInnovation = (state) =>
+  state.user.loggedInUser.weightGaveToTechnologicalInnovation;
 
 // company state selectors
 export const selectUserCompanyData = (state) => state.user.company;

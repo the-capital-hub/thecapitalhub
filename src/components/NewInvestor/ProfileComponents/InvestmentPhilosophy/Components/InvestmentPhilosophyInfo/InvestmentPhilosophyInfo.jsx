@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import {
   loginSuccess,
+  selectAssessCompanyCompetitiveAdvantage,
   selectCompanyFounderId,
+  selectEvaluateCompanyGrowthPotential,
   selectFounderAlmaMaterMatters,
+  selectGuideOnSellingInvestments,
   selectImportanceOfManagament,
+  selectIndustryTrendsHoldInYourStrategy,
   selectLoggedInUserId,
+  selectMacroeconomicFactorsInfluenceInvestments,
+  selectRiskManagementInInvestments,
   selectRoleAsAInvestor,
+  selectTimingInInvestmentDecisions,
   selectUserSectorPreferences,
+  selectWeightGaveToTechnologicalInnovation,
 } from "../../../../../../Store/features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
@@ -18,12 +26,7 @@ import { updateUserAPI } from "../../../../../../Service/user";
 import SpinnerBS from "../../../../../Shared/Spinner/SpinnerBS";
 import InvestorAfterSuccessPopUp from "../../../../../PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
 import ErrorPopUp from "../../../../../PopUp/ErrorPopUp/ErrorPopUp";
-
-const LEGENDS = [
-  "What is the importance of Management?",
-  "What role do you play as an Investor? Are you more passive or active?",
-  "How much does Founder's alma mater matter?",
-];
+import { TEXT_QUESTIONS } from "../../../../../../constants/Investor/ProfilePage";
 
 export default function InvestmentPhilosophyInfo() {
   const loggedInUserId = useSelector(selectLoggedInUserId);
@@ -32,6 +35,30 @@ export default function InvestmentPhilosophyInfo() {
   const importanceOfManagament = useSelector(selectImportanceOfManagament);
   const roleAsAInvestor = useSelector(selectRoleAsAInvestor);
   const founderAlmaMaterMatters = useSelector(selectFounderAlmaMaterMatters);
+  const riskManagementInInvestments = useSelector(
+    selectRiskManagementInInvestments
+  );
+  const guideOnSellingInvestments = useSelector(
+    selectGuideOnSellingInvestments
+  );
+  const timingInInvestmentDecisions = useSelector(
+    selectTimingInInvestmentDecisions
+  );
+  const macroeconomicFactorsInfluenceInvestments = useSelector(
+    selectMacroeconomicFactorsInfluenceInvestments
+  );
+  const assessCompanyCompetitiveAdvantage = useSelector(
+    selectAssessCompanyCompetitiveAdvantage
+  );
+  const industryTrendsHoldInYourStrategy = useSelector(
+    selectIndustryTrendsHoldInYourStrategy
+  );
+  const evaluateCompanyGrowthPotential = useSelector(
+    selectEvaluateCompanyGrowthPotential
+  );
+  const weightGaveToTechnologicalInnovation = useSelector(
+    selectWeightGaveToTechnologicalInnovation
+  );
 
   const dispatch = useDispatch();
 
@@ -48,13 +75,35 @@ export default function InvestmentPhilosophyInfo() {
     // Set loading
     setLoading(true);
 
-    const { importanceOfManagament, roleAsAInvestor, founderAlmaMaterMatters } =
-      e.target;
+    const {
+      importanceOfManagament,
+      roleAsAInvestor,
+      founderAlmaMaterMatters,
+      riskManagementInInvestments,
+      guideOnSellingInvestments,
+      timingInInvestmentDecisions,
+      macroeconomicFactorsInfluenceInvestments,
+      assessCompanyCompetitiveAdvantage,
+      industryTrendsHoldInYourStrategy,
+      evaluateCompanyGrowthPotential,
+      weightGaveToTechnologicalInnovation,
+    } = e.target;
 
     let updatedData = {
       importanceOfManagament: importanceOfManagament.value,
       roleAsAInvestor: roleAsAInvestor.value,
       founderAlmaMaterMatters: founderAlmaMaterMatters.value,
+      riskManagementInInvestments: riskManagementInInvestments.value,
+      guideOnSellingInvestments: guideOnSellingInvestments.value,
+      timingInInvestmentDecisions: timingInInvestmentDecisions.value,
+      macroeconomicFactorsInfluenceInvestments:
+        macroeconomicFactorsInfluenceInvestments.value,
+      assessCompanyCompetitiveAdvantage:
+        assessCompanyCompetitiveAdvantage.value,
+      industryTrendsHoldInYourStrategy: industryTrendsHoldInYourStrategy.value,
+      evaluateCompanyGrowthPotential: evaluateCompanyGrowthPotential.value,
+      weightGaveToTechnologicalInnovation:
+        weightGaveToTechnologicalInnovation.value,
       sectorPreferences: selectedSectors,
     };
 
@@ -138,7 +187,7 @@ export default function InvestmentPhilosophyInfo() {
           <InfoField
             data={importanceOfManagament}
             isEditing={isEditing}
-            legend={LEGENDS[0]}
+            legend={TEXT_QUESTIONS[0]}
             name={"importanceOfManagament"}
             key={"importanceOfManagament"}
           />
@@ -146,7 +195,7 @@ export default function InvestmentPhilosophyInfo() {
           <InfoField
             data={roleAsAInvestor}
             isEditing={isEditing}
-            legend={LEGENDS[1]}
+            legend={TEXT_QUESTIONS[1]}
             name={"roleAsAInvestor"}
             key={"roleAsAInvestor"}
           />
@@ -154,9 +203,73 @@ export default function InvestmentPhilosophyInfo() {
           <InfoField
             data={founderAlmaMaterMatters}
             isEditing={isEditing}
-            legend={LEGENDS[2]}
+            legend={TEXT_QUESTIONS[2]}
             name={"founderAlmaMaterMatters"}
             key={"founderAlmaMaterMatters"}
+          />
+
+          <InfoField
+            data={riskManagementInInvestments}
+            isEditing={isEditing}
+            legend={TEXT_QUESTIONS[3]}
+            name={"riskManagementInInvestments"}
+            key={"riskManagementInInvestments"}
+          />
+
+          <InfoField
+            data={guideOnSellingInvestments}
+            isEditing={isEditing}
+            legend={TEXT_QUESTIONS[4]}
+            name={"guideOnSellingInvestments"}
+            key={"guideOnSellingInvestments"}
+          />
+
+          <InfoField
+            data={timingInInvestmentDecisions}
+            isEditing={isEditing}
+            legend={TEXT_QUESTIONS[5]}
+            name={"timingInInvestmentDecisions"}
+            key={"timingInInvestmentDecisions"}
+          />
+
+          <InfoField
+            data={macroeconomicFactorsInfluenceInvestments}
+            isEditing={isEditing}
+            legend={TEXT_QUESTIONS[6]}
+            name={"macroeconomicFactorsInfluenceInvestments"}
+            key={"macroeconomicFactorsInfluenceInvestments"}
+          />
+
+          <InfoField
+            data={assessCompanyCompetitiveAdvantage}
+            isEditing={isEditing}
+            legend={TEXT_QUESTIONS[7]}
+            name={"assessCompanyCompetitiveAdvantage"}
+            key={"assessCompanyCompetitiveAdvantage"}
+          />
+
+          <InfoField
+            data={industryTrendsHoldInYourStrategy}
+            isEditing={isEditing}
+            legend={TEXT_QUESTIONS[8]}
+            name={"industryTrendsHoldInYourStrategy"}
+            key={"industryTrendsHoldInYourStrategy"}
+          />
+
+          <InfoField
+            data={evaluateCompanyGrowthPotential}
+            isEditing={isEditing}
+            legend={TEXT_QUESTIONS[9]}
+            name={"evaluateCompanyGrowthPotential"}
+            key={"evaluateCompanyGrowthPotential"}
+          />
+
+          <InfoField
+            data={weightGaveToTechnologicalInnovation}
+            isEditing={isEditing}
+            legend={TEXT_QUESTIONS[10]}
+            name={"weightGaveToTechnologicalInnovation"}
+            key={"weightGaveToTechnologicalInnovation"}
           />
         </div>
       </form>
