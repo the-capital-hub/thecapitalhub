@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 export default function CompanyActions({ isOnelink = false, founderId }) {
   let location = useLocation();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const linkTo = loggedInUser.isInvestor === "true" ? `/investor/user/${founderId}` : `/user/${founderId}`;
+  const linkTo = loggedInUser?.isInvestor === "true" ? `/investor/user/${founderId}` : `/user/${founderId}`;
 
   return (
     <div className="company__actions d-flex flex-column justify-content-end ">

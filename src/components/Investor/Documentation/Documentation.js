@@ -22,12 +22,14 @@ import {
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getFoldersApi } from "../../../Service/user";
+import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 
 const Documentation = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const [showModal, setShowModal] = useState(false);
   const [folderName, setFolderName] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const baseURL = environment.baseUrl;
   const [folders, setFolders] = useState([
@@ -43,12 +45,17 @@ const Documentation = () => {
   const dispatch = useDispatch();
 
   const getFolders = () => {
+    setLoading(true);
     getFoldersApi(loggedInUser.oneLinkId)
       .then((data) => {
         console.log(data.data);
         setFolderName(data.data);
+        setLoading(false);
+
       })
       .catch((error) => {
+        setLoading(false);
+
         console.log(error);
       });
   };
@@ -92,9 +99,9 @@ const Documentation = () => {
             )}
             <IntroductoryMessage
               title={"Upload your document"}
-              // para={
-              //   "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
-              // }
+            // para={
+            //   "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
+            // }
             />
             <UploadContainer
               onClicked={setShowModal}
@@ -105,6 +112,15 @@ const Documentation = () => {
                   onClicked={() => navigate("/documentation/financials")}
                   text={"Financials"}
                 /> */}
+              {loading &&
+                <SpinnerBS
+                  className={
+                    "d-flex py-5 justify-content-center align-items-center w-100"
+                  }
+                />
+              }
+
+
               {folderName.map((folder, index) => {
                 let imageToShow;
 
