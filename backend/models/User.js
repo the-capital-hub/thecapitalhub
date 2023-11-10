@@ -186,6 +186,15 @@ const userSchema = new Schema(
         type: String,
       },
     ],
+    importanceOfManagament: {
+      type: String,
+    },
+    roleAsAInvestor: {
+      type: String,
+    },
+    founderAlmaMaterMatters: {
+      type: String,
+    },
     investmentSize: {
       type: String,
     },
