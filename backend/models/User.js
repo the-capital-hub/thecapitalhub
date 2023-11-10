@@ -195,6 +195,30 @@ const userSchema = new Schema(
     founderAlmaMaterMatters: {
       type: String,
     },
+    riskManagementInInvestments : {
+      type: String,
+    },
+    guideOnSellingInvestments: {
+      type: String,
+    },
+    timingInInvestmentDecisions : {
+      type: String,
+    },
+    macroeconomicFactorsInfluenceInvestments : {
+      type: String,
+    },
+    assessCompanyCompetitiveAdvantage : {
+      type: String,
+    },
+    industryTrendsHoldInYourStrategy : {
+      type: String,
+    },
+    evaluateCompanyGrowthPotential : {
+      type: String,
+    },
+    weightGaveToTechnologicalInnovation : {
+      type: String,
+    },
     investmentSize: {
       type: String,
     },
