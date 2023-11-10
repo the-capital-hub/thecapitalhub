@@ -68,7 +68,7 @@ const Table = ({ hidden, page, setTable, data }) => {
                     {page === "oneLinkEditPage" ? (
                       <input
                         className="table_input"
-                        placeholder={value}
+                        placeholder="0"
                         value={value}
                         onChange={(e) =>
                           handleValueChange(rowIndex, colIndex, e.target.value)
