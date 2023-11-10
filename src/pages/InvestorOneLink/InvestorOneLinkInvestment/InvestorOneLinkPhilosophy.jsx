@@ -5,14 +5,23 @@ import PhilosophyTable from "../../../components/InvestorOneLink/InvestorOneLink
 import PhilosophyAbout from "../../../components/InvestorOneLink/InvestorOneLinkPhilosophy/PhilosophyAbout";
 import PhilosophyIncorporation from "../../../components/InvestorOneLink/InvestorOneLinkPhilosophy/PhilosophyIncorporation";
 import { useOutletContext } from "react-router-dom";
+import PhilosophyDetails from "../../../components/InvestorOneLink/InvestorOneLinkPhilosophy/PhilosophyDetails";
 
 export default function InvestorOneLinkInvestment() {
   // Fetch or get from state
   const { company, investor } = useOutletContext();
-  const { firstName, lastName, designation, location, profilePicture } =
-    investor;
-  const { investmentPhilosophy, companyName } = company;
-
+  const {
+    firstName,
+    lastName,
+    designation,
+    location,
+    profilePicture,
+    founderAlmaMaterMatters,
+    roleAsAInvestor,
+    importanceOfManagament,
+    sectorPreferences,
+  } = investor;
+  const { companyName } = company;
 
   return (
     <div className="investment_philosophy_wrapper mb-5 ps-3 leftBorder">
@@ -47,21 +56,13 @@ export default function InvestorOneLinkInvestment() {
         {/* About */}
         <PhilosophyAbout companyName={companyName} />
 
-        {/* Description */}
-        <div className="philosophy_description">
-          <fieldset className="fieldbox border rounded-3 shadow-sm">
-            <legend className="px-3 py-1 rounded-pill bg-white">
-              Description
-            </legend>
-            <p className="m-0 fw-light fs-6 py-4">
-              {investmentPhilosophy ||
-                `Lorem ipsum dolor sit amet consectetur. Maecenas ac elementum
-              lacus vel vitae sed nisi aliquam aliquet. Vel adipiscing placerat
-              tellus faucibus diam mauris ipsum vitae. Justo adipiscing integer
-              dictum tortor viverra vel .`}
-            </p>
-          </fieldset>
-        </div>
+        {/* Details */}
+        <PhilosophyDetails
+          founderAlmaMaterMatters={founderAlmaMaterMatters}
+          roleAsAInvestor={roleAsAInvestor}
+          importanceOfManagament={importanceOfManagament}
+          sectorPreferences={sectorPreferences}
+        />
 
         {/* Incorporation */}
         <PhilosophyIncorporation />

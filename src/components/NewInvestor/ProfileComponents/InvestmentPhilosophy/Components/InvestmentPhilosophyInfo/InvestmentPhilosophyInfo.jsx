@@ -20,9 +20,9 @@ import InvestorAfterSuccessPopUp from "../../../../../PopUp/InvestorAfterSuccess
 import ErrorPopUp from "../../../../../PopUp/ErrorPopUp/ErrorPopUp";
 
 const LEGENDS = [
-  "What is the importance of management?",
-  "What role do you play as an investor? Are you more passive or active?",
-  "How much does founder's alma mater matter?",
+  "What is the importance of Management?",
+  "What role do you play as an Investor? Are you more passive or active?",
+  "How much does Founder's alma mater matter?",
 ];
 
 export default function InvestmentPhilosophyInfo() {
@@ -127,7 +127,7 @@ export default function InvestmentPhilosophyInfo() {
         <div className="philosophy_info d-flex flex-column gap-4 w-100 px-4 py-2">
           {/* Select field */}
           <fieldset className="">
-            <legend>What are your industries of preference?</legend>
+            <legend>What are your Industries of preference?</legend>
             <SectorPreferences
               isEditing={isEditing}
               setSelectedSectors={setSelectedSectors}
