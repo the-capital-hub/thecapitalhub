@@ -12,9 +12,9 @@ export default function OffcanvasBSHeader({ title, classNames, onClose }) {
       </h5>
       <button
         type="button"
-        class="btn-close"
+        className="btn-close"
         data-bs-dismiss="offcanvas"
-        ariaLabel="Close"
+        aria-label="Close"
         onClick={handleCloseClick}
       ></button>
     </div>

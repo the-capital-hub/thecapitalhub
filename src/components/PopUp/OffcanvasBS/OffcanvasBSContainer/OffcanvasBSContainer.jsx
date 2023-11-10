@@ -16,7 +16,7 @@ export default function OffcanvasBSContainer({
       tabIndex="-1"
       data-bs-backdrop="static"
       id={id}
-      ariaLabelledby="offcanvasLabel"
+      aria-labelledby="offcanvasLabel"
     >
       {children}
     </div>

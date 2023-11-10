@@ -31,6 +31,7 @@ export const userSlice = createSlice({
       state.loggedInUser = null;
       state.error = null;
       state.recommendations = null;
+      state.company = null;
       setThemeColor("startup");
     },
     setRecommendations: (state, action) => {
@@ -58,17 +59,31 @@ export const {
   updateUserCompany,
 } = userSlice.actions;
 
-// LoggedInUser selectors
+// LoggedInUser state selectors
 export const selectIsInvestor = (state) => {
   return state.user.loggedInUser.isInvestor === "true" ? true : false;
 };
 export const selectLoggedInUserId = (state) => state.user.loggedInUser._id;
 export const selectUserOneLinkId = (state) => state.user.loggedInUser.oneLinkId;
+export const selectUserInvestor = (state) => state.user.loggedInUser?.investor;
+export const selectUserRecentExperience = (state) =>
+  state.user.loggedInUser.recentExperience;
+export const selectUserRecentEducation = (state) =>
+  state.user.loggedInUser.recentEducation;
 
-// company selectors
+// company state selectors
 export const selectUserCompanyData = (state) => state.user.company;
-export const selectCompanyName = (state) => state.user.company?.company;
+export const selectCompanyName = (state) =>
+  state.user.loggedInUser.isInvestor === "true"
+    ? state.user.company?.companyName
+    : state.user.company?.company;
 export const selectColorCardData = (state) => state.user.company?.colorCard;
 export const selectCompanyFounderId = (state) => state.user.company?.founderId;
+export const selectUserStartupsInvested = (state) =>
+  state.user.company?.startupsInvested;
+export const selectUserSectorInterested = (state) =>
+  state.user.company?.sectorInterested;
+export const selectUserInvestmentPhilosophy = (state) =>
+  state.user.company?.investmentPhilosophy;
 
 export default userSlice.reducer;
