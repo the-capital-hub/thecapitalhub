@@ -36,7 +36,7 @@ export default function SectorsInterested() {
         </div>
         {/* Loop cards from here onwards */}
         <div className="interested_cards px-3 py-5 ">
-          {sectorsData?.map((sector, index) => {
+          {userSectorInterested?.map((sector, index) => {
             return <SectorCard key={sector._id} sector={sector} />;
           })}
         </div>

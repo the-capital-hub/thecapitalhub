@@ -37,7 +37,7 @@ export default function StartupsInvested() {
         </div>
         {/* Loop cards here */}
         <div className="invested_cards px-3 py-4">
-          {investedStartups?.map((startUp, index) => {
+          {userStartupsInvested?.map((startUp, index) => {
             return <InvestedCard startUp={startUp} key={startUp._id} />;
           })}
         </div>

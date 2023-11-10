@@ -70,6 +70,14 @@ export const selectUserRecentExperience = (state) =>
   state.user.loggedInUser.recentExperience;
 export const selectUserRecentEducation = (state) =>
   state.user.loggedInUser.recentEducation;
+export const selectUserSectorPreferences = (state) =>
+  state.user.loggedInUser.sectorPreferences;
+export const selectImportanceOfManagament = (state) =>
+  state.user.loggedInUser.importanceOfManagament;
+export const selectRoleAsAInvestor = (state) =>
+  state.user.loggedInUser.roleAsAInvestor;
+export const selectFounderAlmaMaterMatters = (state) =>
+  state.user.loggedInUser.founderAlmaMaterMatters;
 
 // company state selectors
 export const selectUserCompanyData = (state) => state.user.company;
@@ -83,7 +91,7 @@ export const selectUserStartupsInvested = (state) =>
   state.user.company?.startupsInvested;
 export const selectUserSectorInterested = (state) =>
   state.user.company?.sectorInterested;
-export const selectUserInvestmentPhilosophy = (state) =>
-  state.user.company?.investmentPhilosophy;
+// export const selectUserInvestmentPhilosophy = (state) =>
+//   state.user.company?.investmentPhilosophy;
 
 export default userSlice.reducer;
