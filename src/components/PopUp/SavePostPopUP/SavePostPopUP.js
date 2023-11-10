@@ -1,21 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import "./SavePostPopUP.scss";
-
-import { useState } from 'react';
-import {
-  getSavedPostCollections,
-  savePostByUserIdAPI
-} from "../../../Service/user";
-import { useEffect } from 'react';
+import { getSavedPostCollections, savePostByUserIdAPI } from "../../../Service/user";
 import { useSelector } from 'react-redux';
 
-
 function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false }) {
-
   const [selectedOption, setSelectedOption] = useState("");
-  const options = ["Option 1", "Option 2", "Option 3", "Option 4"];
   const [collectionOptions, setCollectionOptions] = useState([]);
-
   const [inputValue, setInputValue] = useState('');
   const [postSaveError, setPostSaveError] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -26,33 +16,31 @@ function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false })
   useEffect(() => {
     getSavedPostCollections(loggedInUser._id)
       .then((res) => {
-        // console.log(res?.data)
-        setCollectionOptions(res)
-      })
+        setCollectionOptions(res);
+      });
+  }, []);
 
-  }, [])
-  console.log(collectionOptions)
-
-  
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
+
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
-  }
+  };
+
   const handleSavePost = async () => {
     try {
       const data = await savePostByUserIdAPI(loggedInUser._id, selectedOption ? selectedOption : inputValue, postId);
       if (data?.message) {
-        console.log(data)
-        onClose()
-        savedPostStatus()
+        onClose();
+        savedPostStatus();
       }
     } catch (err) {
-      console.log(err?.response?.data?.message)
-      setPostSaveError(true)
+      console.log(err?.response?.data?.message);
+      setPostSaveError(true);
     }
-  }
+  };
+
   return (
     <div className="save_post_popup">
       <div className="popup">
@@ -69,30 +57,28 @@ function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false })
                   <hr />
                 </option>
               ))}
-
-            </select >
-            <input
-            className='w-100'
-              type="text"
-              placeholder="Create new collection"
-              onChange={handleInputChange}
-            />
+              <option value="Other">{collectionOptions.length === 0 ? "Create New" : "Other"}</option>
+            </select>
+            {selectedOption === "Other" && (
+              <input
+                className='w-100'
+                type="text"
+                placeholder="Create new collection"
+                onChange={handleInputChange}
+              />
+            )}
             <button onClick={handleSavePost} style={{ background: buttonColor, color: buttonText }} className="ok_button py-2 px-5" >
               Save
             </button>
-            {
-              postSaveError ? <h6>Post is already in the collection</h6> : ""
-            }
-
+            {postSaveError && <h6>Post is already in the collection</h6>}
           </div>
           <button className="close-button" onClick={onClose}>
             X
           </button>
         </div>
       </div>
-
     </div>
-  )
+  );
 }
 
-export default SavePostPopUP
+export default SavePostPopUP;

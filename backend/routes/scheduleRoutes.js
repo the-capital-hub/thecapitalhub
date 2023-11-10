@@ -6,6 +6,7 @@ import {
   deleteMeetingController,
   acceptRequestController,
   getAllRequestedByForUserController,
+  rejectRequestController,
 } from "../controllers/scheduleController.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 
@@ -19,6 +20,7 @@ router.use(authenticateToken);
 router.post("/createMeeting", createMeetingController);
 router.delete("/deleteMeeting/:meetingId", deleteMeetingController);
 router.post("/acceptMeetingRequest/:meetingId/:requestId", acceptRequestController);
+router.delete("/rejectMeetingRequest/:meetingId/:requestId", rejectRequestController);
 router.get("/getAllRequests", getAllRequestedByForUserController);
 
 export default router;
