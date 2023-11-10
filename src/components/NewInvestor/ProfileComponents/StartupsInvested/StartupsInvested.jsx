@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   ModalBSBody,
   ModalBSContainer,
@@ -7,30 +7,17 @@ import {
 } from "../../../PopUp/ModalBS";
 import AddEditModal from "../AddEditModal";
 import { useSelector } from "react-redux";
-import { getInvestorById } from "../../../../Service/user";
 import InvestedCard from "../InvestedCard";
 import "./StartupsInvested.scss";
+import { selectUserStartupsInvested } from "../../../../Store/features/user/userSlice";
 
 export default function StartupsInvested() {
   // Fetch loggedInUser from global state
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
-
-  // State for Investor
-  const [investor, setInvestor] = useState(null);
+  const userStartupsInvested = useSelector(selectUserStartupsInvested);
 
   // States for Invested Startups
-  const [investedStartups, setInvestedStartups] = useState([]);
-
-  useEffect(() => {
-    getInvestorById(loggedInUser?.investor)
-      .then(({ data }) => {
-        setInvestor(data);
-        setInvestedStartups(data.startupsInvested);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [loggedInUser]);
+  const [investedStartups, setInvestedStartups] =
+    useState(userStartupsInvested);
 
   return (
     <>
@@ -39,27 +26,24 @@ export default function StartupsInvested() {
           <h2 className="green_underline typography">Startups Invested</h2>
           <div className="">
             {/* {investor?.founderId === loggedInUser._id && ( */}
-              <ModalBsLauncher
-                id="startupsModal"
-                className={"green_button px-2 px-sm-3 "}
-              >
-                Add New
-              </ModalBsLauncher>
+            <ModalBsLauncher
+              id="startupsModal"
+              className={"green_button px-2 px-sm-3 "}
+            >
+              Add New
+            </ModalBsLauncher>
             {/* )} */}
           </div>
         </div>
         {/* Loop cards here */}
         <div className="invested_cards px-3 py-4">
-          {investedStartups.map((startUp, index) => {
-            return <InvestedCard startUp={startUp} key={startUp.id} />;
+          {userStartupsInvested?.map((startUp, index) => {
+            return <InvestedCard startUp={startUp} key={startUp._id} />;
           })}
         </div>
         {/* Startups Modal */}
         <ModalBSContainer id="startupsModal" isStatic={false} modalXl>
-          <ModalBSHeader 
-          title="Add/Edit Startups Invested"
-         
-           />
+          <ModalBSHeader title="Add/Edit Startups Invested" />
           <ModalBSBody>
             <AddEditModal
               dataArray={investedStartups}

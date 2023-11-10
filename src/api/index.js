@@ -111,6 +111,7 @@ const API = Object.freeze({
   updateRecentExperience: `${baseUrl}/users/updateExperience`,
   deleteRecentExperience: `${baseUrl}/users/deleteExperience`,
   getLastMessage: `${baseUrl}/message/getLastMessage`,
+  rejectMeetingRequest: `${baseUrl}/schedule/rejectMeetingRequest`,
 });
 
 export default API;

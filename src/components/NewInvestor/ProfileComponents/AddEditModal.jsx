@@ -13,7 +13,7 @@ import {
 import { useSelector } from "react-redux";
 import "./AddEditModal.scss";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
-import Modal from '../../../components/PopUp/Modal/Modal'
+import Modal from "../../../components/PopUp/Modal/Modal";
 
 export default function AddEditModal({
   dataArray,
@@ -38,11 +38,6 @@ export default function AddEditModal({
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteConfirmIndex, setDeleteConfirmIndex] = useState();
   const [deleteConfirm, setDeleteConfirm] = useState(false);
-
-
-
-
-
 
   const handleInputChange = (event) => {
     console.log(testformData);
@@ -169,7 +164,7 @@ export default function AddEditModal({
       companyImage: "",
       name: "",
       description: "",
-      equity:""
+      equity: "",
     });
     setSectorLogo(null);
     setIsEdited(false);
@@ -178,21 +173,20 @@ export default function AddEditModal({
   };
 
   const handleDelete = () => {
-
     if (!deleteConfirm) {
       return;
     }
-  
+
     getInvestorById(loggedInUser?.investor)
       .then(({ data: investor }) => {
         if (isStartups) {
           setModalOpen(false);
-          setDeleteConfirm(false)
+          setDeleteConfirm(false);
           investor.startupsInvested.splice(deleteConfirmIndex, 1);
           return postInvestorData(investor);
         } else {
           setModalOpen(false);
-          setDeleteConfirm(false)
+          setDeleteConfirm(false);
           investor.sectorInterested.splice(deleteConfirmIndex, 1);
           return postInvestorData(investor);
         }
@@ -200,11 +194,11 @@ export default function AddEditModal({
       .then(({ data: response }) => {
         if (isStartups) {
           setModalOpen(false);
-          setDeleteConfirm(false)
+          setDeleteConfirm(false);
           setInvestedStartups(response.startupsInvested);
         } else {
           setModalOpen(false);
-          setDeleteConfirm(false)
+          setDeleteConfirm(false);
           setSectorsData(response.sectorInterested);
         }
       })
@@ -212,14 +206,13 @@ export default function AddEditModal({
         console.log(error);
       });
   };
-  
 
   return (
     <div className="profile__modal__content">
       <div className="border rounded-4 p-2 w-100 overflow-y-auto">
         <h5 className="green_underline">{heading}: </h5>
         <div className="d-flex flex-column gap-3 p-0 p-sm-2 w-100">
-          {dataArray.map((startUp, index) => {
+          {dataArray?.map((startUp, index) => {
             return (
               <div
                 className="border rounded-4 p-2 d-flex justify-content-between align-items-center"
@@ -244,8 +237,10 @@ export default function AddEditModal({
                   <button
                     className="btn btn-danger"
                     // onClick={() => handleDelete(index)}
-                    onClick={() => {setDeleteConfirmIndex(index); setModalOpen(true)}}
-
+                    onClick={() => {
+                      setDeleteConfirmIndex(index);
+                      setModalOpen(true);
+                    }}
                   >
                     <AiFillDelete style={{ color: "", backgroundColor: "" }} />
                   </button>
@@ -403,15 +398,28 @@ export default function AddEditModal({
           </div>
         </form>
       </div>
-      {modalOpen&&
-      <Modal >
-        <h5 className="py-2">Are you sure you want to delete this item?</h5>
-        <div className="d-flex flex-row gap-3 mx-auto">
-        <button className="btn btn-danger text-dark" onClick={()=>{handleDelete();setDeleteConfirm(true)}} >Ok</button>
-        <button className="btn green_button px-3 "  onClick={() => setModalOpen(false)} >Cancle</button>
-        </div>
-      </Modal> 
-}
+      {modalOpen && (
+        <Modal>
+          <h5 className="py-2">Are you sure you want to delete this item?</h5>
+          <div className="d-flex flex-row gap-3 mx-auto">
+            <button
+              className="btn btn-danger text-dark"
+              onClick={() => {
+                handleDelete();
+                setDeleteConfirm(true);
+              }}
+            >
+              Ok
+            </button>
+            <button
+              className="btn green_button px-3 "
+              onClick={() => setModalOpen(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }

@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserAPI } from "../../../../../Service/user";
-import { loginSuccess } from "../../../../../Store/features/user/userSlice";
+import {
+  loginSuccess,
+  selectIsInvestor,
+} from "../../../../../Store/features/user/userSlice";
 
 export default function UserBio() {
   // Fetch from store
   const userBio = useSelector((state) => state.user.loggedInUser.bio);
+  const isInvestor = useSelector(selectIsInvestor);
   const dispatch = useDispatch();
 
   // States for Bio
@@ -24,7 +28,11 @@ export default function UserBio() {
 
   return (
     <div>
-      <div className="box personal_information pb-4">
+      <div
+        className={`box personal_information pb-4 ${
+          isInvestor ? "rounded-4 border shadow-sm" : ""
+        } `}
+      >
         <div className="personal_information_header">
           <h2 className="typography">Bio</h2>
           <span className="ms-auto">
@@ -58,6 +66,7 @@ export default function UserBio() {
                 onChange={(e) => setBioContent(e.target.value)}
                 className="profile_edit_field"
                 rows={5}
+                autoFocus
               />
             ) : (
               <p className="small_typo">

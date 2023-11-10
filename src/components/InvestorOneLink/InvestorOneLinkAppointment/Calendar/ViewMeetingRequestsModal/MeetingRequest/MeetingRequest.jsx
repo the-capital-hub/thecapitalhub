@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import Linkify from "react-linkify";
 import SpinnerBS from "../../../../../Shared/Spinner/SpinnerBS";
-import { acceptMeetingRequest } from "../../../../../../Service/user";
+import {
+  acceptMeetingRequest,
+  rejectMeetingRequestAPI,
+} from "../../../../../../Service/user";
 import { formatDateTime } from "../../../../../../utils/Calendar";
 
 export default function MeetingRequest({
@@ -13,13 +16,14 @@ export default function MeetingRequest({
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   const handleAccept = async (meetingId, requestId) => {
     setLoading(true);
 
     try {
       const { data } = await acceptMeetingRequest(meetingId, requestId);
-      console.log("Req accept response", data);
+      // console.log("Req accept response", data);
 
       setLoading(false);
       setAlert({ success: "Request Accepted!" });
@@ -52,6 +56,49 @@ export default function MeetingRequest({
     } catch (error) {
       console.error("Error:", error);
       setAlert({ error: "Error Accepting Request! Please try again." });
+      setLoading(false);
+      setTimeout(() => {
+        setAlert(null);
+      }, 2500);
+    }
+  };
+
+  const handleDecline = async (meetingId, requestId) => {
+    setDeleting(true);
+
+    try {
+      const { data } = await rejectMeetingRequestAPI(meetingId, requestId);
+      console.log("decline response", data);
+      setDeleting(false);
+      setAlert({ success: "Request Declined!" });
+      setTimeout(() => {
+        setAlert(null);
+        // Set Meeting Requests data
+        setMeetingRequests((prev) =>
+          prev.filter((request) => request._id !== requestId)
+        );
+        // Set meetings
+        setMeetings((prev) => {
+          let copy = prev.map((meeting) => {
+            if (meeting._id === data._id) {
+              return {
+                ...meeting,
+                requestedBy: data.requestedBy,
+              };
+            }
+            return meeting;
+          });
+
+          return copy;
+        });
+      }, 2500);
+    } catch (error) {
+      console.error("Error:", error);
+      setAlert({ error: "Error Accepting Request! Please try again." });
+      setDeleting(false);
+      setTimeout(() => {
+        setAlert(null);
+      }, 2500);
     }
   };
 
@@ -99,7 +146,7 @@ export default function MeetingRequest({
               type="button"
               className="view_button"
               onClick={() => setExpanded(!expanded)}
-              disabled={loading}
+              disabled={loading || deleting}
             >
               {expanded ? "Hide Details" : "View More"}
             </button>
@@ -107,7 +154,7 @@ export default function MeetingRequest({
               type="button"
               className="create_button"
               onClick={() => handleAccept(request.meetingId, request._id)}
-              disabled={loading}
+              disabled={loading || deleting}
             >
               {loading ? (
                 <>
@@ -125,11 +172,24 @@ export default function MeetingRequest({
             </button>
             <button
               type="button"
-              className="btn btn-danger"
+              className="btn btn-danger d-flex align-items-center gap-2"
               style={{ borderRadius: "10px" }}
-              disabled={loading}
+              onClick={() => handleDecline(request.meetingId, request._id)}
+              disabled={loading || deleting}
             >
-              Decline
+              {deleting ? (
+                <>
+                  <SpinnerBS
+                    spinnerSizeClass="spinner-border-sm"
+                    colorClass={"text-white"}
+                  />
+                  <span className="text-white-50" style={{ fontSize: "12px" }}>
+                    Please wait..
+                  </span>
+                </>
+              ) : (
+                "Decline"
+              )}
             </button>
           </div>
         </div>

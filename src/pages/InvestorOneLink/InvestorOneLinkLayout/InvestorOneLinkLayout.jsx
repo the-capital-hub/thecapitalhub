@@ -7,7 +7,7 @@ import InvestorOneLinkSidebar from "../../../components/InvestorOneLink/Investor
 import { getInvestorFromOneLinkAPI } from "../../../Service/user";
 import { useDispatch } from "react-redux";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 import OneLinkValidation from "../../../components/Shared/OnelinkValidation/OnelinkValidation";
 
 export default function InvestorOneLinkLayout() {
@@ -16,7 +16,9 @@ export default function InvestorOneLinkLayout() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const oneLinkUser = useSelector((state) => state.onelink?.oneLinkUser);
-  const oneLinkLoggedIn = useSelector((state) => state.onelink?.oneLinkLoggedIn);
+  const oneLinkLoggedIn = useSelector(
+    (state) => state.onelink?.oneLinkLoggedIn
+  );
   const oneLinkId = useSelector((state) => state.onelink?.oneLinkId);
 
   const handleSidebarToggle = () => {
@@ -31,6 +33,7 @@ export default function InvestorOneLinkLayout() {
       .then(({ data }) => {
         setInvestorData(data);
         setLoading(false);
+        console.log("InvestorData", data);
       })
       .catch((error) => navigate("/"));
   }, []);
@@ -49,7 +52,11 @@ export default function InvestorOneLinkLayout() {
           <NavBar handleSidebarToggle={handleSidebarToggle} />
 
           {loading === false ? (
-            <div className={`container-fluid investor_view_container ${sidebarCollapsed ? "sidebar-collapsed" : ""}`}>
+            <div
+              className={`container-fluid investor_view_container ${
+                sidebarCollapsed ? "sidebar-collapsed" : ""
+              }`}
+            >
               <div className="sidebar">
                 <InvestorOneLinkSidebar
                   sidebarCollapsed={sidebarCollapsed}

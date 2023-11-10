@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { getInvestorById } from "../../../../Service/user";
 import {
   ModalBSBody,
   ModalBSContainer,
@@ -10,27 +9,14 @@ import {
 import SectorCard from "../SectorCard";
 import AddEditModal from "../AddEditModal";
 import "./SectorsInterested.scss";
+import { selectUserSectorInterested } from "../../../../Store/features/user/userSlice";
 
 export default function SectorsInterested() {
   // Fetch loggedInUser from global state
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
-
-  // State for Investor
-  const [investor, setInvestor] = useState(null);
+  const userSectorInterested = useSelector(selectUserSectorInterested);
 
   // States for sectors Interested
-  const [sectorsData, setSectorsData] = useState([]);
-
-  useEffect(() => {
-    getInvestorById(loggedInUser?.investor)
-      .then(({ data }) => {
-        setInvestor(data);
-        setSectorsData(data.sectorInterested);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [loggedInUser]);
+  const [sectorsData, setSectorsData] = useState(userSectorInterested);
 
   return (
     <>
@@ -39,19 +25,19 @@ export default function SectorsInterested() {
           <h2 className="green_underline typography">Sectors Interested</h2>
           <div className="">
             {/* {investor?.founderId === loggedInUser._id && ( */}
-              <ModalBsLauncher
-                id="sectorsModal"
-                className={"green_button px-2 px-sm-3 "}
-              >
-                Add New
-              </ModalBsLauncher>
+            <ModalBsLauncher
+              id="sectorsModal"
+              className={"green_button px-2 px-sm-3 "}
+            >
+              Add New
+            </ModalBsLauncher>
             {/* )} */}
           </div>
         </div>
         {/* Loop cards from here onwards */}
         <div className="interested_cards px-3 py-5 ">
-          {sectorsData.map((sector, index) => {
-            return <SectorCard key={sector.id} sector={sector} />;
+          {userSectorInterested?.map((sector, index) => {
+            return <SectorCard key={sector._id} sector={sector} />;
           })}
         </div>
         {/* Sectors Modal */}
