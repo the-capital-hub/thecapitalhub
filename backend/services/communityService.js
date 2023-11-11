@@ -1,5 +1,5 @@
 import { CommunityModel } from "../models/Community.js";
-import { cloudinary } from "../utils/uploadImage";
+import { cloudinary } from "../utils/uploadImage.js";
 import { MessageModel } from "../models/Message.js";
 import { UserModel } from "../models/User.js";
 
