@@ -31,6 +31,7 @@ export const userSlice = createSlice({
       state.loggedInUser = null;
       state.error = null;
       state.recommendations = null;
+      state.company = null;
       setThemeColor("startup");
     },
     setRecommendations: (state, action) => {
@@ -58,17 +59,57 @@ export const {
   updateUserCompany,
 } = userSlice.actions;
 
-// LoggedInUser selectors
+// LoggedInUser state selectors
 export const selectIsInvestor = (state) => {
   return state.user.loggedInUser.isInvestor === "true" ? true : false;
 };
 export const selectLoggedInUserId = (state) => state.user.loggedInUser._id;
 export const selectUserOneLinkId = (state) => state.user.loggedInUser.oneLinkId;
+export const selectUserInvestor = (state) => state.user.loggedInUser?.investor;
+export const selectUserRecentExperience = (state) =>
+  state.user.loggedInUser.recentExperience;
+export const selectUserRecentEducation = (state) =>
+  state.user.loggedInUser.recentEducation;
 
-// company selectors
+// Investment philosophy selectors
+export const selectUserSectorPreferences = (state) =>
+  state.user.loggedInUser.sectorPreferences;
+export const selectImportanceOfManagament = (state) =>
+  state.user.loggedInUser.importanceOfManagament;
+export const selectRoleAsAInvestor = (state) =>
+  state.user.loggedInUser.roleAsAInvestor;
+export const selectFounderAlmaMaterMatters = (state) =>
+  state.user.loggedInUser.founderAlmaMaterMatters;
+export const selectRiskManagementInInvestments = (state) =>
+  state.user.loggedInUser.riskManagementInInvestments;
+export const selectGuideOnSellingInvestments = (state) =>
+  state.user.loggedInUser.guideOnSellingInvestments;
+export const selectTimingInInvestmentDecisions = (state) =>
+  state.user.loggedInUser.timingInInvestmentDecisions;
+export const selectMacroeconomicFactorsInfluenceInvestments = (state) =>
+  state.user.loggedInUser.macroeconomicFactorsInfluenceInvestments;
+export const selectAssessCompanyCompetitiveAdvantage = (state) =>
+  state.user.loggedInUser.assessCompanyCompetitiveAdvantage;
+export const selectIndustryTrendsHoldInYourStrategy = (state) =>
+  state.user.loggedInUser.industryTrendsHoldInYourStrategy;
+export const selectEvaluateCompanyGrowthPotential = (state) =>
+  state.user.loggedInUser.evaluateCompanyGrowthPotential;
+export const selectWeightGaveToTechnologicalInnovation = (state) =>
+  state.user.loggedInUser.weightGaveToTechnologicalInnovation;
+
+// company state selectors
 export const selectUserCompanyData = (state) => state.user.company;
-export const selectCompanyName = (state) => state.user.company?.company;
+export const selectCompanyName = (state) =>
+  state.user.loggedInUser.isInvestor === "true"
+    ? state.user.company?.companyName
+    : state.user.company?.company;
 export const selectColorCardData = (state) => state.user.company?.colorCard;
 export const selectCompanyFounderId = (state) => state.user.company?.founderId;
+export const selectUserStartupsInvested = (state) =>
+  state.user.company?.startupsInvested;
+export const selectUserSectorInterested = (state) =>
+  state.user.company?.sectorInterested;
+// export const selectUserInvestmentPhilosophy = (state) =>
+//   state.user.company?.investmentPhilosophy;
 
 export default userSlice.reducer;

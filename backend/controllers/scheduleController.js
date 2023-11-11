@@ -5,6 +5,7 @@ import {
   deleteMeeting,
   acceptRequestById,
   getAllRequestedByForUser,
+  rejectRequestById ,
 } from "../services/scheduleService.js";
 
 export const createMeetingController = async (req, res) => {
@@ -88,6 +89,20 @@ export const getAllRequestedByForUserController = async (req, res) => {
     return res.status(500).json({
       status: 500,
       message: "An error occurred while retrieving 'requested by' data for the user.",
+    });
+  }
+};
+
+export const rejectRequestController = async (req, res) => {
+  try {
+    const { meetingId, requestId } = req.params;
+    const response = await rejectRequestById(meetingId, requestId);
+    res.status(response.status).send(response);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      status: 500,
+      message: "An error occurred while rejecting the request.",
     });
   }
 };

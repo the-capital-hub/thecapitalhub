@@ -7,31 +7,42 @@ import { getPdfData, deleteDocument } from "../../../../../Service/user";
 import { useSelector } from "react-redux";
 import deleteIcon from "../../../../../Images/post/delete.png";
 import AfterSuccessPopup from "../../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
-
+import SpinnerBS from "../../../../Shared/Spinner/SpinnerBS";
 // import axios from "axios";
 
 const HalfbendCard = ({ folderName, userId }) => {
   const [data, setData] = useState([]);
   // const [user, setUser] = useState([]);
   const [deleteDoc, setDeleteDoc] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   console.log("user", userId);
   useEffect(() => {
+    setLoading(true);
     if (userId !== undefined) {
       getPdfData(userId, folderName)
         .then((res) => {
           setData(res.data);
           // console.log("data", res);
+          setLoading(false);
         })
-        .catch((error) => console.error(error.message));
+        .catch((error) => {
+          setLoading(false);
+          console.error(error.message)
+        });
     } else {
       getPdfData(loggedInUser?.oneLinkId, folderName)
         .then((res) => {
           setData(res.data);
           // console.log("data", res);
+          setLoading(false);
         })
-        .catch((error) => console.error(error.message));
+        .catch((error) => {
+          setLoading(false);
+
+          console.error(error.message)
+        });
     }
   }, [loggedInUser, userId, folderName, deleteDoc]);
 
@@ -179,7 +190,15 @@ const HalfbendCard = ({ folderName, userId }) => {
     <div className="half_bend_container row">
       <div className="box_container mt-4">
         <div className="row">
-          {data?.map((item) => (
+          {loading &&
+            <SpinnerBS
+              className={
+                "d-flex py-5 justify-content-center align-items-center w-100"
+              }
+            />
+          }
+
+          {!loading && data?.map((item) => (
             <div
               className="col-md-4 d-flex justify-content-center align-items-center main_col"
               key={item.fileName}

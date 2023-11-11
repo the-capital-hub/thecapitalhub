@@ -213,8 +213,14 @@ const SavedPostSmallCard = ({
 {description ? (
   <p className="savedPost__text mt-2">{description}</p>
 ) : resharedPostId?.description ? (
-  <div key={key} className="card border rounded-4 p-3">
-    <div className="d-flex pb-3">
+<div
+  key={key}
+  className="card border rounded-4 p-3"
+  style={{
+    // flex: 'none',
+    flex: window.innerWidth <= 767 ? 'none' : '0 0 20rem',
+  }}
+>    <div className="d-flex pb-3">
       <Link
         to={`/user/${userId}`}
         className="img-fluid mr-2"
@@ -242,7 +248,10 @@ const SavedPostSmallCard = ({
         <span className="card_heading">{designation}</span>
       </div>
     </div>
+    <div className="d-block">
+
     <p>{resharedPostId.description}</p>
+    </div>
   </div>
 ) : ""}      </div>
       {/* </div> */}

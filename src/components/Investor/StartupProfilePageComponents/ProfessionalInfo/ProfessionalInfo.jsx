@@ -5,7 +5,6 @@ import DefaultAvatar from "../../../../Images/Chat/default-user-avatar.webp";
 import { useDispatch, useSelector } from "react-redux";
 import { getBase64 } from "../../../../utils/getBase64";
 import {
-  getInvestorById,
   postInvestorData,
   postStartUpData,
   updateUserAPI,
@@ -27,7 +26,7 @@ export default function ProfessionalInfo({ theme }) {
   const companyName = useSelector(selectCompanyName);
   const dispatch = useDispatch();
 
-  console.log("companyName", companyName);
+  // console.log("companyName", companyName);
 
   // State for Professional Data
   const [professionalData, setProfessionalData] = useState({
@@ -47,30 +46,8 @@ export default function ProfessionalInfo({ theme }) {
   // Fetch professional data
   useEffect(() => {
     if (isInvestor) {
-      getInvestorById(loggedInUser?.investor)
-        .then(({ data }) => {
-          console.log("investorById", data);
-          setProfessionalData((prev) => ({
-            ...prev,
-            company: data.companyName,
-          }));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      setProfessionalData((prev) => ({ ...prev, company: companyName }));
     } else {
-      // getStartupByFounderId(loggedInUser._id)
-      //   .then(({ data }) => {
-      //     console.log(data);
-      //     // setCompany(data);
-      //     setProfessionalData({
-      //       ...professionalData,
-      //       company: data.company,
-      //     });
-      //   })
-      //   .catch((error) => {
-      //     console.error(error);
-      //   });
       setProfessionalData((prev) => ({ ...prev, company: companyName }));
     }
   }, [setProfessionalData, companyName, isInvestor]);
@@ -99,11 +76,6 @@ export default function ProfessionalInfo({ theme }) {
       experience: professionalData.experience,
     };
 
-    let editedCompanyName = {
-      founderId: loggedInUser._id,
-      company: professionalData.company,
-    };
-    console.log(professionalData.company);
     try {
       if (selectedFile) {
         const profilePicture = await getBase64(selectedFile);
@@ -114,13 +86,24 @@ export default function ProfessionalInfo({ theme }) {
         data: { data },
       } = await updateUserAPI(editedData);
 
+      // Set new loggedInUser data
       dispatch(loginSuccess(data));
 
       if (isInvestor) {
-        const response = await postInvestorData(editedCompanyName);
+        let editedCompanyName = {
+          founderId: loggedInUser._id,
+          companyName: professionalData.company,
+        };
+        const { data } = await postInvestorData(editedCompanyName);
+        // console.log("post Investor", data);
+        dispatch(updateUserCompany({ companyName: data.companyName }));
       } else {
+        let editedCompanyName = {
+          founderId: loggedInUser._id,
+          company: professionalData.company,
+        };
         const { data } = await postStartUpData(editedCompanyName);
-        console.log("post startup", data.company);
+        // console.log("post startup", data.company);
         dispatch(updateUserCompany({ company: data.company }));
       }
 

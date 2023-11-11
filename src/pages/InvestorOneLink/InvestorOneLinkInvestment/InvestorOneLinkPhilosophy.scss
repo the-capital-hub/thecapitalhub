@@ -56,5 +56,17 @@
     .minus-mt {
       margin-top: -45px;
     }
+
+    // Sectors
+    .sector_tag {
+      background-color: #d3f36b;
+      color: #222;
+      font-size: 1.125rem;
+      line-height: 0.75rem;
+      // font-weight: 500;
+      padding: 0.75em 1.5em;
+      border-radius: 8px;
+      border: 1px solid #94c100;
+    }
   }
 }
