@@ -23,9 +23,9 @@ export default function InvestmentPhilosophy() {
 
       {/* Investment Details */}
       <InvestmentDetails />
-      <button className="green_button btn mx-3">
+      {/* <button className="green_button btn mx-3">
         Book Your Appointment Now
-      </button>
+      </button> */}
 
       {/* Modals */}
       <ExperienceModal />
