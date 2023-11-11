@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import { secretKey } from "../constants/config";
-import { UserModel } from "../models/User";
+import { secretKey } from "../constants/config.js";
+import { UserModel } from "../models/User.js";
 
 export const authenticateToken = async (req, res, next) => {
   const token = req.headers?.authorization?.replace("Bearer ", "");
