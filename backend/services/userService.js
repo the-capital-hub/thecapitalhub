@@ -2,7 +2,7 @@ import { UserModel } from "../models/User.js";
 import { comparePassword } from "../utils/passwordManager.js";
 import { StartUpModel } from "../models/startUp.js";
 import { InvestorModel } from "../models/Investor.js";
-import { cloudinary } from "../utils/uploadImage";
+import { cloudinary } from "../utils/uploadImage.js";
 import jwt from "jsonwebtoken";
 import { secretKey } from "../constants/config.js";
 import { sendMail } from "../utils/mailHelper.js";
