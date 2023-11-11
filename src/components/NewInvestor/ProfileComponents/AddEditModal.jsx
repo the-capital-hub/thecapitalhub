@@ -303,6 +303,7 @@ export default function AddEditModal({
                   className="visually-hidden"
                   onChange={handleSectorLogoChange}
                 />
+                  <label htmlFor="sectorLogo" className="text-black fw-lighter">
                 <div className="upload__label p-2">
                   <BsFillCloudUploadFill
                     style={{
@@ -310,21 +311,20 @@ export default function AddEditModal({
                       color: "rgba(140, 90, 201, 1)",
                     }}
                   />
-                  <label htmlFor="sectorLogo" className="text-black fw-lighter">
                     Upload Image
-                  </label>
                   {sectorLogo && (
                     <img
-                      src={
-                        isEdited && isNewImage
-                          ? sectorLogo
-                          : URL.createObjectURL(sectorLogo)
-                      }
-                      alt="Selected"
-                      style={{ maxWidth: "100%", maxHeight: "200px" }}
+                    src={
+                      isEdited && isNewImage
+                      ? sectorLogo
+                      : URL.createObjectURL(sectorLogo)
+                    }
+                    alt="Selected"
+                    style={{ maxWidth: "100%", maxHeight: "200px" }}
                     />
-                  )}
+                    )}
                 </div>
+                    </label>
               </div>
             )}
             <div className="invested__company__name ">

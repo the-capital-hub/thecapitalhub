@@ -102,6 +102,7 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
                 className="visually-hidden"
                 onChange={handleInterestLogo}
               />
+                <label htmlFor="interestLogo" className="text-black fw-lighter">
               <div className="upload__label p-2">
                 <BsFillCloudUploadFill
                   style={{
@@ -109,8 +110,7 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
                     color: "rgba(140, 90, 201, 1)",
                   }}
                 />
-                <label htmlFor="interestLogo" className="text-black fw-lighter">
-                  Upload Image
+                  <p>Upload Image</p>
                   {interestLogo && (
                     <img
                       src={URL.createObjectURL(interestLogo)
@@ -119,8 +119,8 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
                       style={{ maxWidth: "100%", maxHeight: "70px" }}
                     />
                   )}
-                </label>
               </div>
+                </label>
             </div>
           ) : (
             <div className="upload__image mt-4">
@@ -132,6 +132,7 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
                 className="visually-hidden"
                 onChange={handleInputChange}
               />
+                <label htmlFor="companyImage" className="text-black fw-lighter">
               <div className="upload__label p-2">
                 <BsFillCloudUploadFill
                   style={{
@@ -139,8 +140,7 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
                     color: "rgba(140, 90, 201, 1)",
                   }}
                 />
-                <label htmlFor="companyImage" className="text-black fw-lighter">
-                  Upload Image
+                  <p>Upload Image</p>
                   {formData.companyImage && (
                     <img
                       src={URL.createObjectURL(formData.companyImage)
@@ -149,8 +149,8 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
                       style={{ maxWidth: "100%", maxHeight: "70px" }}
                     />
                   )}
-                </label>
               </div>
+                </label>
             </div>
           )}
           <div className="">
