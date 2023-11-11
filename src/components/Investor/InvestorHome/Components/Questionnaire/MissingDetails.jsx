@@ -38,7 +38,7 @@ export default function MissingDetails({ isInvestor = false }) {
           } `}
           data-bs-toggle="offcanvas"
           data-bs-target="#questionnaireOffCanvas"
-          ariaControls="offcanvasTop"
+          aria-controls="offcanvasTop"
           style={{
             color: isInvestor ? "#000" : "#fd5901",
             backgroundColor: isInvestor ? "#d3f36b" : "#fff",

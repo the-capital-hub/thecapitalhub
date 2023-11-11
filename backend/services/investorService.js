@@ -1,7 +1,7 @@
 import { UserModel } from "../models/User.js";
 import { InvestorModel } from "../models/Investor.js";
 import { sendMail } from "../utils/mailHelper.js";
-import { cloudinary } from "../utils/uploadImage";
+import { cloudinary } from "../utils/uploadImage.js";
 
 const adminMail = "learn.capitalhub@gmail.com";
 

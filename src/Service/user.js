@@ -1324,12 +1324,12 @@ export const updateRecentExperience = async (experienceId, updatedData) => {
   }
 };
 
-
 export const deleteRecentExperience = async (experienceId) => {
   try {
     const response = await axiosInstance.delete(
       `${API.deleteRecentExperience}/${experienceId}
-      `);
+      `
+    );
     return response.data;
   } catch (error) {
     console.error("Error deleting recent experience:", error);
@@ -1341,10 +1341,23 @@ export const getLastMessage = async (chatId) => {
   try {
     const response = await axiosInstance.get(
       `${API.getLastMessage}/${chatId}
-      `);
+      `
+    );
     return response.data;
   } catch (error) {
     console.error("Error getting last message:", error);
+    throw error;
+  }
+};
+
+export const rejectMeetingRequestAPI = async (meetingId, requestId) => {
+  try {
+    const response = await axiosInstance.delete(
+      `${API.rejectMeetingRequest}/${meetingId}/${requestId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error declining meeting:", error);
     throw error;
   }
 };

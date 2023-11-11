@@ -40,7 +40,12 @@ const CompanyDetailsCard = ({
         setSocialLinks(data.socialLinks);
         setLocationData(data.location);
       })
-      .catch(() => setOnePager([]));
+      .catch(() => {
+        setOnePager([]);
+        setDescriptionContent("");
+        setSocialLinks("");
+        setLocationData("");
+      });
   }, [userDetails]);
 
   // Submit Changes
@@ -59,9 +64,8 @@ const CompanyDetailsCard = ({
     <>
       <div className={`${className} company_details_container `}>
         <div
-          className={`px-2 px-md-4 py-4 company_details box ${
-            isOnelink ? "border" : ""
-          } `}
+          className={`px-2 px-md-4 py-4 company_details box ${isOnelink ? "border" : ""
+            } `}
         >
           {/* Company details header */}
 
@@ -107,7 +111,7 @@ const CompanyDetailsCard = ({
 
             <div className="left_profile_text flex_content ms-md-0 ms-2">
               <h2 className="typography m-2">
-                {onePager.company || userDetails?.investor?.companyName || ""}
+                {onePager.company || userDetails?.investor?.companyName || "No company found"}
               </h2>
               {/* <span className="small_typo m-2">
                       {onePager.description}

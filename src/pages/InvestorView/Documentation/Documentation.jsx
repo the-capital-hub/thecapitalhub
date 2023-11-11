@@ -12,6 +12,7 @@ import {
   Pitch,
 } from "../../../Images/StartUp/Documentaion";
 import { getFoldersApi } from "../../../Service/user";
+import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 
 const Documentation = () => {
   const navigate = useNavigate();
@@ -20,17 +21,21 @@ const Documentation = () => {
   useEffect(() => {
     document.title = "Documentation - One Link | The Capital Hub";
   }, []);
+  const [loading, setLoading] = useState(false);
 
   const [folderName, setFolderName] = useState([]);
 
   const getFolders = () => {
+    setLoading(true);
     getFoldersApi(userId)
       .then((data) => {
         console.log(data.data);
         setFolderName(data.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   };
 
@@ -90,7 +95,15 @@ const Documentation = () => {
               }
               image={Business}
             /> */}
-            {folderName.map((folder, index) => {
+
+            {loading &&
+              <SpinnerBS
+                className={
+                  "d-flex py-5 justify-content-center align-items-center w-100"
+                }
+              />
+            }
+            {!loading && folderName.map((folder, index) => {
               let imageToShow;
 
               switch (folder) {

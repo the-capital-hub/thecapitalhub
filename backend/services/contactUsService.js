@@ -1,4 +1,4 @@
-import { sendMail } from "../utils/mailHelper";
+import { sendMail } from "../utils/mailHelper.js";
 const adminMail = "learn.capitalhub@gmail.com";
 
 export const contactUs = async (args) => {

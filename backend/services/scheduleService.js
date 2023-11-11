@@ -229,3 +229,39 @@ export const getAllRequestedByForUser = async (userId) => {
     };
   }
 };
+
+export const rejectRequestById = async (meetingId, requestId) => {
+  try {
+    const meeting = await ScheduleModel.findById(meetingId);
+    if (!meeting) {
+      return {
+        status: 404,
+        message: "Meeting not found with the provided ID.",
+      };
+    }
+    const type = "meetingRequest";
+    deleteNotification(meeting.userId, null, type, meetingId);
+    const requestToRejectIndex = meeting.requestedBy.findIndex(
+      (request) => request._id.toString() === requestId
+    );
+    if (requestToRejectIndex === -1) {
+      return {
+        status: 404,
+        message: "Request not found with the provided ID for this meeting.",
+      };
+    }
+    meeting.requestedBy.splice(requestToRejectIndex, 1);
+    await meeting.save();
+    return {
+      status: 200,
+      message: "Request rejected successfully",
+      data: meeting,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while rejecting the request.",
+    };
+  }
+};
