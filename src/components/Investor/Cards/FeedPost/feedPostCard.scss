@@ -152,6 +152,14 @@
         .kebab_menu_container {
           position: absolute;
           cursor: pointer;
+
+          @media (max-width: 420px) {
+            img {
+              width: 20px;
+              transform: rotate(90deg);
+            }
+          }
+
           ul.kebab_menu {
             position: absolute;
             list-style-type: none;
@@ -159,6 +167,9 @@
             right: 20px;
             height: max-content;
             background-color: white;
+            @media (max-width: 420px) {
+              right: 5px;
+            }
 
             li {
               margin-bottom: 6px;

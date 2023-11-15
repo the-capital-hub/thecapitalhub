@@ -375,7 +375,7 @@ const FeedPostCard = ({
                 </div>
               </div>
               {!repostPreview && (
-                <div className="three_dot px-2 px-md-4">
+                <div className="three_dot px-md-4">
                   <div
                     className="kebab_menu_container"
                     ref={kebabMenuContainerRef}
@@ -383,7 +383,7 @@ const FeedPostCard = ({
                     <img
                       src={ThreeODotIcon}
                       alt="dot"
-                      className="me-3 p-2"
+                      className="me-md-3 p-md-2"
                       onClick={() => {
                         setKebabMenuVisible(!kebabMenuVisible);
                       }}
