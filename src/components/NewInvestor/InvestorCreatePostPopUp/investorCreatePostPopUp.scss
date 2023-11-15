@@ -43,6 +43,12 @@
       // height: 200px;
       background-color: #fbfbfb;
       border: 1px solid #e0e0e0;
+      border-radius: var(--border-radius);
+      outline: none;
+
+      &:focus {
+        border-color: var(--currentTheme-dark);
+      }
     }
   }
 }
@@ -215,7 +221,7 @@
 }
 
 @media (max-width: 575px) {
-  .modal {
+  .investor_create_post_modal.modal {
     .modal-dialog {
       margin-inline: 0;
     }

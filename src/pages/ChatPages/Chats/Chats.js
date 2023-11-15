@@ -176,7 +176,8 @@ const Chats = () => {
       <div className="mobile-nav border-bottom shadow-sm pb-2 px-2">
         <button
           className="btn btn-sm btn-light"
-          onClick={() => dispatch(resetChat())}
+          // onClick={() => dispatch(resetChat())}
+          onClick={() => navigate(-1)}
         >
           <IoMdArrowRoundBack /> Back
         </button>

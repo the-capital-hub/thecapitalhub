@@ -75,6 +75,11 @@ const FeedPostCard = ({
   const [showSavePopUp, setshowSavePopUp] = useState(false);
   const [likedBy, setLikedBy] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
+  const toggleDescription = () => {
+    setExpanded(!expanded);
+  };
 
   const handleCloseSavePopup = () => {
     setshowSavePopUp(false);
@@ -375,7 +380,7 @@ const FeedPostCard = ({
                 </div>
               </div>
               {!repostPreview && (
-                <div className="three_dot px-2 px-md-4">
+                <div className="three_dot px-md-4">
                   <div
                     className="kebab_menu_container"
                     ref={kebabMenuContainerRef}
@@ -383,7 +388,7 @@ const FeedPostCard = ({
                     <img
                       src={ThreeODotIcon}
                       alt="dot"
-                      className="me-3 p-2"
+                      className="me-md-3 p-md-2"
                       onClick={() => {
                         setKebabMenuVisible(!kebabMenuVisible);
                       }}
@@ -422,7 +427,20 @@ const FeedPostCard = ({
                         overflowWrap: "break-word",
                       }}
                     >
-                      {description}{" "}
+                      {/* {description}{" "} */}
+                      {expanded
+                      ? description
+                      : description.split(" ").slice(0, 15)}
+                    {!expanded &&
+                      description.split(" ").length > 15 &&
+                      !expanded && (
+                        <span
+                          style={{ color: "blue", cursor: "pointer" }}
+                          onClick={toggleDescription}
+                        >
+                           ...Read more
+                        </span>
+                      )}
                       {documentUrl && (
                         <a href={documentUrl} className="mx-auto">
                           {documentName}
@@ -761,6 +779,7 @@ const FeedPostCard = ({
             <button
               className="btn btn-sm btn-light  top-0 end-0 m-2"
               onClick={() => setShowImgagePopup(false)}
+              style={{width:"30px"}}
             >
               X
             </button>
