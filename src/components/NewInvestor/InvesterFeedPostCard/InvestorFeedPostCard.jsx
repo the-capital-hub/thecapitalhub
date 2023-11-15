@@ -75,6 +75,11 @@ const FeedPostCard = ({
   const [showSavePopUp, setshowSavePopUp] = useState(false);
   const [likedBy, setLikedBy] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
+  const toggleDescription = () => {
+    setExpanded(!expanded);
+  };
 
   const handleCloseSavePopup = () => {
     setshowSavePopUp(false);
@@ -422,7 +427,20 @@ const FeedPostCard = ({
                         overflowWrap: "break-word",
                       }}
                     >
-                      {description}{" "}
+                      {/* {description}{" "} */}
+                      {expanded
+                      ? description
+                      : description.split(" ").slice(0, 15)}
+                    {!expanded &&
+                      description.split(" ").length > 15 &&
+                      !expanded && (
+                        <span
+                          style={{ color: "blue", cursor: "pointer" }}
+                          onClick={toggleDescription}
+                        >
+                           ...Read more
+                        </span>
+                      )}
                       {documentUrl && (
                         <a href={documentUrl} className="mx-auto">
                           {documentName}
@@ -761,6 +779,7 @@ const FeedPostCard = ({
             <button
               className="btn btn-sm btn-light  top-0 end-0 m-2"
               onClick={() => setShowImgagePopup(false)}
+              style={{width:"30px"}}
             >
               X
             </button>
