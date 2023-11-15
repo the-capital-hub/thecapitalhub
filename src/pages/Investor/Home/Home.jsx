@@ -47,14 +47,14 @@ function Home() {
   useEffect(() => {
     dispatch(setPageTitle("Home"));
     window.title = "Home | The Capital Hub";
-  }, []);
+  }, [dispatch]);
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const fetchMorePosts = () => {
     getAllPostsAPI(page)
       .then(({ data }) => {
-        console.log(data)
+        console.log(data);
         if (data.length === 0) {
         } else {
           setAllPosts([...allPosts, ...data]);
@@ -111,7 +111,7 @@ function Home() {
 
   return (
     <MaxWidthWrapper>
-      <div className="container-fluid investor_feed_container">
+      <div className="investor_feed_container">
         <div className="main_content w-100">
           {/* <InvestorSmallProfilecard text={"Home"} /> */}
           <div className="posts_col">
