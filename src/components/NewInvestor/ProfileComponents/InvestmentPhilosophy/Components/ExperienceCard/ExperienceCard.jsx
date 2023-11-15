@@ -18,15 +18,17 @@ export default function ExperienceCard({ data, isExperience = true }) {
   // console.log(data);
   return (
     <div className="experience_card py-2 mt-1 row row-cols-1 row-cols-md-2">
-      <div className="img_container rounded d-flex align-items-center justify-content-center mx-auto col-6 col-md-2">
-        <img
-          className="rounded-circle"
-          src={data?.logo}
-          height={100}
-          width={100}
-          alt="Institution logo"
-        />
-      </div>
+      {isExperience && (
+        <div className="img_container rounded d-flex align-items-center justify-content-center mx-auto col-6 col-md-2">
+          <img
+            className="rounded-circle"
+            src={data?.logo}
+            height={100}
+            width={100}
+            alt="Institution logo"
+          />
+        </div>
+      )}
       <div className="description mt-1 mt-md-0 col-md-9 row row-cols-1 row-cols-md-2 row-cols-xl-3">
         <div className="d-flex flex-column mb-1 mb-md-3">
           <p className="text-secondary mb-1">

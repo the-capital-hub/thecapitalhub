@@ -13,7 +13,7 @@ export default function InvestmentDetails() {
 
   return (
     <>
-      <div className="investment_details_cards row row-cols-1 row-cols-md-2 row-cols-lg-2 g-3 border">
+      <div className="investment_details_cards mx-md-4 row row-cols-1 row-cols-md-2 row-cols-lg-2 g-3 border">
         <InvestmentDetailCard
           className="col"
           img={totalInvestmentIcon}

@@ -205,13 +205,13 @@
         .logo_container {
           display: none;
 
-          img {}
+          img {
+          }
         }
 
         .mobile-home-hamberger {
           display: flex;
           margin-left: 15px;
-
 
           h1 {
             color: #000;
@@ -241,7 +241,6 @@
         }
 
         .icons-container {
-
           .mobile-icon-wrapper {
             display: flex;
             width: 49px;
@@ -326,20 +325,19 @@
                 }
               }
             }
-
           }
 
           .icon-wrapper {
-
             .notification-icon,
-            .message-icon {}
+            .message-icon {
+            }
 
-            .profile-pic {}
+            .profile-pic {
+            }
 
-            .me {}
+            .me {
+            }
           }
-
-
         }
       }
     }
@@ -453,13 +451,15 @@
           }
 
           .icon-wrapper {
-
             .notification-icon,
-            .message-icon {}
+            .message-icon {
+            }
 
-            .profile-pic {}
+            .profile-pic {
+            }
 
-            .me {}
+            .me {
+            }
           }
         }
       }
