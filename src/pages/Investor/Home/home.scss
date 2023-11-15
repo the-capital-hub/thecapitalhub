@@ -1,20 +1,28 @@
 .investor_feed_container {
-  display: flex;
-  gap: 2rem;
+  // display: flex;
+  // gap: 2rem;
+  justify-content: space-between;
 
-  .main_content{
-    flex-grow: 1;
+  display: grid;
+  grid-template-columns: 100%;
 
-    .posts_col{
+  @media (min-width: 1320px) {
+    grid-template-columns: calc(100% - 24rem) 24rem;
+  }
+
+  .main_content {
+    // flex-grow: 1;
+    max-width: 100%;
+
+    .posts_col {
       max-width: 700px;
       margin-inline: auto;
     }
   }
 
-  .right_content{
-    flex: 0 0 24rem;
-  }
-
+  // .right_content {
+  //   flex: 0 0 24rem;
+  // }
 
   .start_post_container {
     display: flex;

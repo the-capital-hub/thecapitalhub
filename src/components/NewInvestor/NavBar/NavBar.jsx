@@ -96,6 +96,7 @@ const NavBar = (props) => {
               <div className="logo_container">
                 <img
                   src={Logo}
+                  height={""}
                   onClick={() => navigate("/investor/home")}
                   alt="the capital hub logo"
                 />

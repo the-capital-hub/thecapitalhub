@@ -112,7 +112,7 @@ function Home() {
   return (
     <MaxWidthWrapper>
       <div className="investor_feed_container">
-        <div className="main_content w-100">
+        <div className="main_content">
           {/* <InvestorSmallProfilecard text={"Home"} /> */}
           <div className="posts_col">
             <div className="box start_post_container border">
