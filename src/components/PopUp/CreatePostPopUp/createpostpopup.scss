@@ -11,7 +11,7 @@
     margin-left: 10px;
 
     h2 {
-      font-size: 22.611px;
+      font-size: 1rem;
       font-family: Poppins;
       font-weight: 500;
       line-height: 160%;
@@ -182,7 +182,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     /* Adjust the background color of the popup */
     z-index: 10000;
-    width: 90%;
+    // width: 90%;
   }
 
   .createpost_modal_footer {
@@ -229,6 +229,19 @@
       .post_button_container {
         margin-inline: auto;
       }
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .create_post_modal {
+    width: 100%;
+    .modal-dialog {
+      margin-inline: 0;
+    }
+
+    .modal-body {
+      padding-inline: 0;
     }
   }
 }
