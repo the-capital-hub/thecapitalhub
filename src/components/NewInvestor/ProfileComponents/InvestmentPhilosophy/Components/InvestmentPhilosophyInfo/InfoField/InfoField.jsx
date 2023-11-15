@@ -1,6 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 export default function InfoField({ isEditing, data, name, legend }) {
+  const isMobileView = useSelector((state) => state.design.isMobileView);
+
   //  Handle Info Change
   function handleInfoChange(e) {
     // const { name, value } = e.target;
@@ -15,13 +18,13 @@ export default function InfoField({ isEditing, data, name, legend }) {
   return (
     <fieldset className="">
       <legend>{legend}</legend>
-      {isEditing ? (
+      {isEditing || !data ? (
         <textarea
-          defaultValue={data}
+          defaultValue={data || "Add your answer"}
           name={name}
           onChange={handleInfoChange}
           className="profile_edit_field w-100"
-          rows={5}
+          rows={isMobileView ? 5 : 3}
         />
       ) : (
         <p className="text-secondary">
