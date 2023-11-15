@@ -46,7 +46,7 @@ function ProtectedInvestorRoutes({ children, ...props }) {
         />
 
         <div
-          className={`container-fluid p-0 newInvestor_container ${
+          className={`container-fluid newInvestor_container ${
             sidebarCollapsed ? "sidebar-collapsed" : ""
           }`}
         >
