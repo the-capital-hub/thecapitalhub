@@ -30,21 +30,31 @@ function OnBoardUser({
   };
 
   // Beacon Component
-  const CustomBeaconComponent = ({
-    ariaLabel,
-    onClick,
-    onMouseEnter,
-    title,
-    beaconRef,
-  }) => (
-    <span
-      className="custom-joyride-beacon"
+  // const CustomBeaconComponent = ({
+  //   ariaLabel,
+  //   onClick,
+  //   onMouseEnter,
+  //   title,
+  //   beaconRef,
+  // }) => (
+  //   <span
+  //     className="custom-joyride-beacon"
+  //     onClick={onClick}
+  //     onMouseEnter={onMouseEnter}
+  //     title={title}
+  //     aria-label={ariaLabel}
+  //     ref={beaconRef}
+  //   ></span>
+  // );
+
+  const CustomButton = ({ onClick, title, isActive }) => (
+    <button
+      className={`custom-joyride-button${isActive ? ' active' : ''} px-3 py-2`}
       onClick={onClick}
-      onMouseEnter={onMouseEnter}
-      title={title}
-      aria-label={ariaLabel}
-      ref={beaconRef}
-    ></span>
+      type="button"
+    >
+      {"Start Tutorial"}
+    </button>
   );
 
   return (
@@ -53,6 +63,8 @@ function OnBoardUser({
       run={run}
       continuous
       // beaconComponent={CustomBe  aconComponent}
+      beaconComponent={CustomButton}
+
       scrollToFirstStep
       showProgress
       showBackButton
@@ -71,6 +83,7 @@ function OnBoardUser({
       styles={{
         options: {
           primaryColor: "var(--currentTheme)",
+          
         },
       }}
       {...props}
