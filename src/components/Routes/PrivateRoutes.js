@@ -45,7 +45,7 @@ function PrivateRoute({ children, ...props }) {
         />
 
         <div
-          className={`container-fluid investor_home_container position-relative ${
+          className={`container-fluid p-0 investor_home_container position-relative ${
             sidebarCollapsed ? "sidebar-collapsed" : ""
           }`}
         >
