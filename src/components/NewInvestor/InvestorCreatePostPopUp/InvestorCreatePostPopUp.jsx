@@ -235,7 +235,9 @@ const CreatePostPopUp = ({
     <>
       {popupOpen && <div className="background-overlay"></div>}
       <div
-        className={`modal ${popupOpen ? "d-block" : ""}`}
+        className={`investor_create_post_modal modal ${
+          popupOpen ? "d-block" : ""
+        }`}
         tabIndex="-1"
         role="dialog"
       >

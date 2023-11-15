@@ -1,19 +1,22 @@
 .feed_container {
   margin-block: 2rem;
-  margin-inline: 0.5rem;
-  display: flex;
+  // margin-inline: 0.5rem;
+  // display: flex;
   justify-content: space-between;
-  gap: 1.5rem;
+  // gap: 1.5rem;
 
-  @media (min-width: 768px) {
-    margin-inline: 1.5rem;
+  display: grid;
+  grid-template-columns: 100%;
+
+  @media (min-width: 1320px) {
+    grid-template-columns: calc(100% - 26rem) 24rem;
   }
 
   .right_content {
     display: none;
-    @media (min-width: 1200px) {
+    @media (min-width: 1320px) {
       display: block;
-      flex: 0 0 24rem;
+      // flex: 0 0 24rem;
       // margin-left: 1rem;
     }
   }
