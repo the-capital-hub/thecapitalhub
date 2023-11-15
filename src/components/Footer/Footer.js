@@ -125,6 +125,17 @@ const Footer = ({ className }) => {
 
             </div>
           </div> */}
+          <a
+            href="https://madewithloveinindia.org"
+            target="_blank"
+            className="text-center my-3 mx-2"
+          >
+            Made with{" "}
+            <span aria-label="Love" style={{ color: "#f43f5e" }}>
+              &#x1F9E1;
+            </span>{" "}
+            in India by Capital Hub
+          </a>
         </div>
       </div>
     </div>

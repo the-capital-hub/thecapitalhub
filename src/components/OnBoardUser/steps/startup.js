@@ -58,6 +58,8 @@ const homePage = [
     content:
       "Your profile page describes everything relevant about you as a Professional.",
     placement: "auto",
+
+    
   },
   {
     target: "#sidebar_createAPost",

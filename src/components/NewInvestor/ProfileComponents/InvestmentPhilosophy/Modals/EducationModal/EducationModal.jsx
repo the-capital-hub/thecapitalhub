@@ -5,9 +5,9 @@ import {
   ModalBSContainer,
   ModalBSHeader,
 } from "../../../../../PopUp/ModalBS";
-import IconCloudUpload from "../../../../../Investor/SvgIcons/IconCloudUpload";
+// import IconCloudUpload from "../../../../../Investor/SvgIcons/IconCloudUpload";
 import { useDispatch, useSelector } from "react-redux";
-import { getBase64 } from "../../../../../../utils/getBase64";
+// import { getBase64 } from "../../../../../../utils/getBase64";
 import {
   addRecentEducation,
   updateRecentEducation,
@@ -35,7 +35,7 @@ export default function EducationModal() {
   const dispatch = useDispatch();
 
   // States for inputs
-  const [preview, setPreview] = useState(null);
+  // const [preview, setPreview] = useState(null);
   const [formData, setFormData] = useState(initialForm);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -47,24 +47,24 @@ export default function EducationModal() {
   const closeRef = useRef(null);
 
   // Handle file change
-  async function handleFileChange(e) {
-    let newFile = e.target.files[0];
-    // console.log(newFile);
-    if (!newFile) {
-      return;
-    }
+  // async function handleFileChange(e) {
+  //   let newFile = e.target.files[0];
+  //   // console.log(newFile);
+  //   if (!newFile) {
+  //     return;
+  //   }
 
-    let previewImage = URL.createObjectURL(newFile);
-    try {
-      let baseImage = await getBase64(newFile);
+  //   // let previewImage = URL.createObjectURL(newFile);
+  //   try {
+  //     let baseImage = await getBase64(newFile);
 
-      // Set State
-      setFormData((prev) => ({ ...prev, logo: baseImage }));
-      setPreview(previewImage);
-    } catch (error) {
-      console.log("Error getting base64:", error);
-    }
-  }
+  //     // Set State
+  //     setFormData((prev) => ({ ...prev, logo: baseImage }));
+  //     // setPreview(previewImage);
+  //   } catch (error) {
+  //     console.log("Error getting base64:", error);
+  //   }
+  // }
 
   // Handle Input change
   function handleInputChange(e) {
@@ -86,7 +86,7 @@ export default function EducationModal() {
   //   Handle Edit click
   function handleEditClick(e, data) {
     setFormData(data);
-    setPreview(data.logo);
+    // setPreview(data.logo);
     setIsEditing(true);
   }
 
@@ -133,7 +133,7 @@ export default function EducationModal() {
     setFormData(initialForm);
     setIsEditing(false);
     setLoading(false);
-    setPreview(null);
+    // setPreview(null);
     setIsEditing(false);
     setError(null);
   }
@@ -172,7 +172,7 @@ export default function EducationModal() {
             >
               <h5 className="green_underline">Update Education</h5>
 
-              <fieldset>
+              {/* <fieldset>
                 <label htmlFor="edulogo" className="upload__label">
                   {preview ? (
                     <img
@@ -190,12 +190,11 @@ export default function EducationModal() {
                   type="file"
                   name="logo"
                   id="edulogo"
-                  accept="*/image"
                   className="visually-hidden"
                   onInput={handleFileChange}
                   required
                 />
-              </fieldset>
+              </fieldset> */}
 
               {/* School Name */}
               <fieldset>

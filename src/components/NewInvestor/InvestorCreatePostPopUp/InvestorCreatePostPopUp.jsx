@@ -6,7 +6,11 @@ import ThreeDotsIcon from "../../../Images/ThreeDots.svg";
 import CameraIcon from "../../../Images/Camera.svg";
 import IconVideo from "../../../Images/post/Video.svg";
 import { useSelector } from "react-redux";
-import { getSinglePostAPI, postUserPost, getInvestorById } from "../../../Service/user";
+import {
+  getSinglePostAPI,
+  postUserPost,
+  getInvestorById,
+} from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
 import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import FeedPostCard from "../../Investor/Cards/FeedPost/FeedPostCard";
@@ -57,16 +61,17 @@ const CreatePostPopUp = ({
     smileeInputRef.current.click();
   };
 
-  const   handleOneLinkClick=()=>{
+  const handleOneLinkClick = () => {
     getInvestorById(loggedInUser.investor)
-    .then(({ data }) => {
-      setPostText(
-        (prevPostText) =>
-          prevPostText + ` https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`
-      );
-    })
-    .catch((error) => console.log(error));
-  }
+      .then(({ data }) => {
+        setPostText(
+          (prevPostText) =>
+            prevPostText +
+            ` https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`
+        );
+      })
+      .catch((error) => console.log(error));
+  };
 
   const [previewImage, setPreviewImage] = useState("");
   const [previewVideo, setPreviewVideo] = useState("");
@@ -153,7 +158,6 @@ const CreatePostPopUp = ({
     setCroppedImage(croppedImg);
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setPosting(true);
@@ -194,8 +198,8 @@ const CreatePostPopUp = ({
     // Call the postUserPost function to make the POST request to the server
     postUserPost(postData)
       .then((response) => {
-        console.log(response.data)
-        appendDataToAllPosts(response.data)
+        console.log(response.data);
+        appendDataToAllPosts(response.data);
         setPostText("");
         setSelectedImage(null);
         setSelectedVideo(null);
@@ -231,7 +235,9 @@ const CreatePostPopUp = ({
     <>
       {popupOpen && <div className="background-overlay"></div>}
       <div
-        className={`modal ${popupOpen ? "d-block" : ""}`}
+        className={`investor_create_post_modal modal ${
+          popupOpen ? "d-block" : ""
+        }`}
         tabIndex="-1"
         role="dialog"
       >
@@ -242,7 +248,9 @@ const CreatePostPopUp = ({
                 <div className="ceatepost_img_name">
                   <img
                     src={loggedInUser.profilePicture}
-                    width={80}
+                    width={50}
+                    height={50}
+                    style={{ objectFit: "cover" }}
                     className="rounded-circle"
                     alt="profile pic"
                   />
@@ -341,90 +349,87 @@ const CreatePostPopUp = ({
             </div>
             <div className="createpost_modal_footer">
               <div className="modal_footer_container mt-4 mb-3">
-                <div className="modal_footer_container">
-                  <div className="left_buttons">
-                    <input
-                      type="file"
-                      name="image"
-                      style={{ display: "none" }}
-                      ref={galleryInputRef}
-                      onChange={handleFileChange}
-                      accept="image/*"
-                    />
-                    <button
-                      className="white_button"
-                      onClick={handleGalleryButtonClick}
-                    >
-                      <img src={GallaryIcon} alt="Button 1" />
-                    </button>
+                <div className="left_buttons">
+                  <input
+                    type="file"
+                    name="image"
+                    style={{ display: "none" }}
+                    ref={galleryInputRef}
+                    onChange={handleFileChange}
+                    accept="image/*"
+                  />
+                  <button
+                    className="white_button"
+                    onClick={handleGalleryButtonClick}
+                  >
+                    <img src={GallaryIcon} alt="Button 1" />
+                  </button>
 
-                    <input
-                      type="file"
-                      name="video"
-                      style={{ display: "none" }}
-                      ref={cameraInputRef}
-                      onChange={handleFileChange}
-                      accept="video/*"
-                    />
-                    <button
-                      className="white_button"
-                      onClick={handleCameraButtonClick}
-                    >
-                      <img src={IconVideo} alt="Button 2" />
-                    </button>
+                  <input
+                    type="file"
+                    name="video"
+                    style={{ display: "none" }}
+                    ref={cameraInputRef}
+                    onChange={handleFileChange}
+                    accept="video/*"
+                  />
+                  <button
+                    className="white_button"
+                    onClick={handleCameraButtonClick}
+                  >
+                    <img src={IconVideo} alt="Button 2" />
+                  </button>
 
-                    <input
-                      type="file"
-                      name="document"
-                      style={{ display: "none" }}
-                      ref={documentInputRef}
-                      onChange={handleFileChange}
-                    />
-                    <button
-                      className="white_button"
-                      onClick={handleDocumentButtonClick}
-                    >
-                      {/* <img src={CameraIcon} alt="Button 2" /> */}
-                      <IconFile width="16px" height="16px" />
-                    </button>
+                  <input
+                    type="file"
+                    name="document"
+                    style={{ display: "none" }}
+                    ref={documentInputRef}
+                    onChange={handleFileChange}
+                  />
+                  <button
+                    className="white_button"
+                    onClick={handleDocumentButtonClick}
+                  >
+                    {/* <img src={CameraIcon} alt="Button 2" /> */}
+                    <IconFile width="16px" height="16px" />
+                  </button>
 
-                    <input
-                      type="file"
-                      name="document"
-                      style={{ display: "none" }}
-                      ref={smileeInputRef}
-                      onChange={handleFileChange}
-                    />
-                    {/* <button
+                  <input
+                    type="file"
+                    name="document"
+                    style={{ display: "none" }}
+                    ref={smileeInputRef}
+                    onChange={handleFileChange}
+                  />
+                  {/* <button
                       className="white_button"
                       onClick={handleSmileeButtonClick}
                     >
                       <img src={SmileeIcon} alt="Button 3" />
                     </button> */}
 
-                    {/* <button className="white_button">
+                  {/* <button className="white_button">
                       <img src={ThreeDotsIcon} alt="Button 4" />
                     </button> */}
-                    <button className="white_button" onClick={handleOneLinkClick} >
-                      {/* <img src={ThreeDotsIcon} alt="Button 4" /> */}
-                      <BsLink45Deg
-                        height={"59px"}
-                        width={"59px"}
-                        size={"20px"}
-                      />
+                  <button className="white_button" onClick={handleOneLinkClick}>
+                    {/* <img src={ThreeDotsIcon} alt="Button 4" /> */}
+                    <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} />
+                  </button>
+                </div>
+                <div className="post_button_container">
+                  {posting ? (
+                    <button className="investor-post_button" disabled>
+                      Posting...
                     </button>
-                  </div>
-                  <div className="post_button_container">
-                    {posting ? (
-                      <button className="investor-post_button" disabled>
-                        Posting...
-                      </button>
-                    ) : (
-                      <button className="investor-post_button" onClick={handleSubmit}>
-                        Post
-                      </button>
-                    )}
-                  </div>
+                  ) : (
+                    <button
+                      className="investor-post_button"
+                      onClick={handleSubmit}
+                    >
+                      Post
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
