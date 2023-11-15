@@ -6,6 +6,9 @@ import {
   loginSuccess,
   selectIsInvestor,
 } from "../../../../../Store/features/user/userSlice";
+import SpinnerBS from "../../../../Shared/Spinner/SpinnerBS";
+import InvestorAfterSuccessPopUp from "../../../../PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
+import ErrorPopUp from "../../../../PopUp/ErrorPopUp/ErrorPopUp";
 
 export default function UserBio() {
   // Fetch from store
@@ -16,14 +19,29 @@ export default function UserBio() {
   // States for Bio
   const [isBioEditable, setIsBioEditable] = useState(false);
   const [bioContent, setBioContent] = useState(userBio || "");
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState(null);
 
   // Submit Bio
   const submitBioHandler = async () => {
-    const {
-      data: { data },
-    } = await updateUserAPI({ bio: bioContent });
-    dispatch(loginSuccess(data));
-    setIsBioEditable(!isBioEditable);
+    setLoading(true);
+
+    try {
+      const {
+        data: { data },
+      } = await updateUserAPI({ bio: bioContent });
+      dispatch(loginSuccess(data));
+      setIsBioEditable(!isBioEditable);
+      setAlert({ success: "Changes Saved!" });
+    } catch (error) {
+      console.error("Error saving bio:", error);
+      setAlert({ error: "Error saving Bio! Please try again." });
+    } finally {
+      setLoading(false);
+      setTimeout(() => {
+        setAlert(null);
+      }, 2000);
+    }
   };
 
   return (
@@ -35,13 +53,14 @@ export default function UserBio() {
       >
         <div className="personal_information_header">
           <h2 className="typography">Bio</h2>
-          <span className="ms-auto">
+          <span className="ms-auto d-flex align-items-center gap-2">
             <button
               type="button"
               onClick={() => {
                 setBioContent(userBio);
                 setIsBioEditable(!isBioEditable);
               }}
+              disabled={loading}
             >
               {isBioEditable ? "Cancel" : "Edit"}
               <CiEdit />
@@ -49,10 +68,17 @@ export default function UserBio() {
             {isBioEditable && (
               <button
                 type="submit"
-                className="ms-2"
+                className="ms-2 d-flex justify-content-center align-items-center gap-2"
                 onClick={() => submitBioHandler()}
+                disabled={loading}
               >
-                Save <CiSaveUp2 />
+                {loading ? (
+                  <SpinnerBS spinnerSizeClass="spinner-border-sm" />
+                ) : (
+                  <>
+                    <span>Save</span> <CiSaveUp2 />
+                  </>
+                )}
               </button>
             )}
           </span>
@@ -79,6 +105,15 @@ export default function UserBio() {
       <Link to={""}>See more</Link>
     </div> */}
       </div>
+      {alert?.success && (
+        <InvestorAfterSuccessPopUp
+          successText={alert.success}
+          onClose={() => setAlert(null)}
+        />
+      )}
+      {alert?.error && (
+        <ErrorPopUp message={alert.error} onClose={() => setAlert(null)} />
+      )}
     </div>
   );
 }
