@@ -67,7 +67,9 @@
     border-radius: var(--border-radius);
     background: #fff;
     padding: 20px;
-    margin: 20px;
+    // margin: 20px;
+    margin-inline: 0px;
+    margin-block: 0px;
     box-shadow: 0 0.125rem 0.25rem rgba(#000, 0.075);
   }
 }

@@ -3,7 +3,7 @@ import locationIcon from "../../../Images/investorIcon/octicon_location-16.svg";
 import HomeIcon from "../../../Images/HomeIcon.svg";
 import ThreeODotIcon from "../../../Images/ThreeDotIcon.svg";
 import "./investorFeedPostCard.scss";
-import shareIcon from "../../../Images/post/share.png";
+// import shareIcon from "../../../Images/post/share.png";
 import fireIcon from "../../../Images/post/like-fire.png";
 import bwFireIcon from "../../../Images/post/unlike-fire.png";
 import commentIcon from "../../../Images/post/comment.svg";
@@ -27,7 +27,7 @@ import {
 } from "../../../Service/user";
 import SmileeIcon from "../../../Images/Group 15141(1).svg";
 import ImageIcon from "../../../Images/Group 15141.svg";
-import RoundLogo from "../../../Images/RoundLogo.png";
+// import RoundLogo from "../../../Images/RoundLogo.png";
 import { Link } from "react-router-dom";
 import SavePostPopUP from "../../../components/PopUp/SavePostPopUP/SavePostPopUP";
 import InvestorAfterSuccessPopUp from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
@@ -103,12 +103,14 @@ const FeedPostCard = ({
         text: commentText,
       });
       if (response.data.status === 200) {
-        await getPostComment({ postId }).then((res) => {
-          console.log("response", res.data.data);
-          setComments(res.data.data);
-        }).catch((error)=>{
-console.log(error)
-        })
+        await getPostComment({ postId })
+          .then((res) => {
+            console.log("response", res.data.data);
+            setComments(res.data.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
 
       console.log("Comment submitted successfully:", response.data.status);
@@ -306,8 +308,9 @@ console.log(error)
       <div className="row investor_feedpostcard_main_container mb-2">
         <div className="col-12">
           <div
-            className={`box feedpostcard_container mt-2 border ${repostPreview && "rounded-4 shadow-sm"
-              }`}
+            className={`box feedpostcard_container mt-2 border ${
+              repostPreview && "rounded-4 shadow-sm"
+            }`}
           >
             {loading && (
               <div class="d-flex justify-content-center my-4">
@@ -325,8 +328,10 @@ console.log(error)
                       "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
                     }
                     width={50}
+                    height={50}
                     className="rounded-circle"
                     alt="logo"
+                    style={{ objectFit: "cover" }}
                   />
                 </Link>
                 <div className="feedpostcart_text_header my-1">
@@ -396,7 +401,8 @@ console.log(error)
                         <li
                           data-bs-toggle="modal"
                           data-bs-target="#reportPostModal"
-                          onClick={() => setShowReportModal(true)}>
+                          onClick={() => setShowReportModal(true)}
+                        >
                           Report
                         </li>
                       </ul>
@@ -427,16 +433,15 @@ console.log(error)
                 </Linkify>
                 {image && (
                   <span className="d-flex">
-                   <img
-  className="mx-auto"
-  style={{ maxHeight: "350px", objectFit: "contain" }}
-  width={!repostPreview ? "100%" : "50%"}
-  src={image}
-  alt="post-image"
-  onClick={handleImageOnClick}
-  onDoubleClick={handleDoubleClick}
-/>
-
+                    <img
+                      className="mx-auto"
+                      style={{ maxHeight: "350px", objectFit: "contain" }}
+                      width={!repostPreview ? "100%" : "50%"}
+                      src={image}
+                      alt="post media"
+                      onClick={handleImageOnClick}
+                      onDoubleClick={handleDoubleClick}
+                    />
                   </span>
                 )}
                 {video && (
@@ -513,8 +518,9 @@ console.log(error)
                   </div>
                   <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                     <span
-                      className={`repost_container rounded ${showRepostOptions ? "bg-light" : ""
-                        }`}
+                      className={`repost_container rounded ${
+                        showRepostOptions ? "bg-light" : ""
+                      }`}
                       ref={repostContainerRef}
                     >
                       <img
@@ -628,10 +634,10 @@ console.log(error)
                             />
                             <div class="icons">
                               <span class="image_icon">
-                                <img src={ImageIcon} alt="image" />
+                                <img src={ImageIcon} alt="media" />
                               </span>
                               <span class="smiley_icon">
-                                <img src={SmileeIcon} alt="photo" />
+                                <img src={SmileeIcon} alt="smiley" />
                               </span>
                             </div>
                           </div>
@@ -709,7 +715,7 @@ console.log(error)
                               {userId === loggedInUser?._id && (
                                 <img
                                   src={deleteIcon}
-                                  alt="image"
+                                  alt="Delete"
                                   className="deleteIcon py-1"
                                   onClick={() =>
                                     deleteComments(postId, val._id)
@@ -758,13 +764,16 @@ console.log(error)
             >
               X
             </button>
-            <img src={image} className="popup-image" alt="zoomed image" />
+            <img src={image} className="popup-image" alt="fullscreen preview" />
           </div>
         </Modal>
       )}
 
       <ModalBSContainer showModal={showReportModal} id="reportPostModal">
-        <ModalBSHeader title="Report Post"  closeCallback={handleCloseSavePopup}/>
+        <ModalBSHeader
+          title="Report Post"
+          closeCallback={handleCloseSavePopup}
+        />
         <ModalBSBody>
           <h6 className="h6">Select a reason that applies</h6>
           <div className="reasons_container">
@@ -779,8 +788,9 @@ console.log(error)
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Harassment" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio1"
               >
                 Harassment
@@ -797,8 +807,9 @@ console.log(error)
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Spam" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio2"
               >
                 Spam
@@ -815,8 +826,9 @@ console.log(error)
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Fraud or scam" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio3"
               >
                 Fraud or scam
@@ -833,8 +845,9 @@ console.log(error)
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Hateful Speech" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio4"
               >
                 Hateful Speech
@@ -849,24 +862,27 @@ console.log(error)
             rather than reporting.
           </span>
         </ModalBSBody>
-        <ModalBSFooter >
+        <ModalBSFooter>
           {!filingReport ? (
             <button
               type="submit"
               className="submit_button btn"
               onClick={reportSubmitHandler}
               style={{
-                backgroundColor: '#d3f36b',
-                color: 'black'
+                backgroundColor: "#d3f36b",
+                color: "black",
               }}
             >
               Submit report
             </button>
           ) : (
-            <button class="submit_button btn" type="button" disabled
+            <button
+              class="submit_button btn"
+              type="button"
+              disabled
               style={{
-                backgroundColor: '#d3f36b',
-                color: 'black'
+                backgroundColor: "#d3f36b",
+                color: "black",
               }}
             >
               <span role="status" className="me-1">

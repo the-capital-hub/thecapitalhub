@@ -43,16 +43,16 @@ export default function CurrentEducation({
 
   return (
     <div className="border rounded-4 p-2 d-flex align-items-center justify-content-between">
-      <img
+      {/* <img
         src={data.logo}
         alt="Institution logo"
         height={"40px"}
         width={"40px"}
         className="rounded-circle"
         style={{ objectFit: "cover" }}
-      />
+      /> */}
 
-      <h6 className="m-0">{data.schoolName}</h6>
+      <h6 className="m-0">{data.course}</h6>
 
       <div className="d-flex align-items-center gap-2">
         <button
@@ -76,20 +76,28 @@ export default function CurrentEducation({
           )}
         </button>
       </div>
-      {confirmModal &&
-      <Modal>
-        <div className="py-3">
-
-        <h4> Are you sure you want to delete - {data.schoolName}?</h4>
-        <div className="d-flex justify-content-center  gap-2 mx-auto py-2">
-        <button className="btn btn-danger" onClick={(e) => handleDeleteClick(e, data)}  >Ok</button>
-          <button className="btn" style={{ backgroundColor: "#d3f36b" }} onClick={() => setConfirmModal(false)}>Cancel</button>
-
-        </div>
-        </div>
-
-      </Modal>
-      }
+      {confirmModal && (
+        <Modal>
+          <div className="py-3">
+            <h4> Are you sure you want to delete - {data.schoolName}?</h4>
+            <div className="d-flex justify-content-center  gap-2 mx-auto py-2">
+              <button
+                className="btn btn-danger"
+                onClick={(e) => handleDeleteClick(e, data)}
+              >
+                Ok
+              </button>
+              <button
+                className="btn"
+                style={{ backgroundColor: "#d3f36b" }}
+                onClick={() => setConfirmModal(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }
