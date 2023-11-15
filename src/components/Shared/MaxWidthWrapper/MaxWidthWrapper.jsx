@@ -4,5 +4,5 @@ export default function MaxWidthWrapper({
   children,
   containerClass = "container",
 }) {
-  return <div className={`${containerClass} mx-auto`}>{children}</div>;
+  return <div className={`${containerClass} mx-auto p-0`}>{children}</div>;
 }
