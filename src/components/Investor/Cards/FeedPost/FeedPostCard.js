@@ -81,6 +81,11 @@ const FeedPostCard = ({
   const [showSavePopUp, setshowSavePopUp] = useState(false);
   const [likedBy, setLikedBy] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
+  const toggleDescription = () => {
+    setExpanded(!expanded);
+  };
 
   const handleCloseSavePopup = () => {
     setshowSavePopUp(false);
@@ -505,7 +510,20 @@ const FeedPostCard = ({
               <Linkify>
                 {description && (
                   <p style={{ fontSize: "15px" }} className="text-break">
-                    {description}{" "}
+                    {/* {description} */}
+                    {expanded
+                      ? description
+                      : description.split(" ").slice(0, 15)}
+                    {!expanded &&
+                      description.split(" ").length > 15 &&
+                      !expanded && (
+                        <span
+                          style={{ color: "blue", cursor: "pointer" }}
+                          onClick={toggleDescription}
+                        >
+                           ...Read more
+                        </span>
+                      )}
                     {documentUrl && (
                       <a
                         href={documentUrl}

@@ -4,7 +4,9 @@
       transform: scale(1);
     }
     55% {
-      background-color: rgba(255, 100, 100, 0.9);
+      // background-color: rgba(255, 100, 100, 0.9);
+      background-color: #D3F36B;
+
       transform: scale(1.6);
     }
   }
@@ -16,6 +18,13 @@
   height: 1rem;
   width: 1rem;
   z-index: 0 !important;
+}
+.custom-joyride-button{
+  background-color: #D3F36B;
+  border: none;
+  border-radius: 10px;
+  
+
 }
 
 [x-placement="bottom"] {
