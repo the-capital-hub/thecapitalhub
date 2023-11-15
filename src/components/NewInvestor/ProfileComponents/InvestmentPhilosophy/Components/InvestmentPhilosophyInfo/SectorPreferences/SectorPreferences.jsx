@@ -48,7 +48,34 @@ export default function SectorPreferences({
             );
           })
         ) : (
-          <p className="text-muted">No selected preference</p>
+          <>
+            <p className="text-muted w-100 mb-0">
+              Please select your preference:
+            </p>
+            {sectorOptions.map((sector, index) => {
+              return (
+                <span key={sector} className="investor-check-wrapper shadow-sm">
+                  <input
+                    type="checkbox"
+                    className="btn-check"
+                    id={sector}
+                    name={sector}
+                    onClick={handleSectorSelect}
+                    autoComplete="off"
+                    defaultChecked={userSectorPreferences.includes(sector)}
+                  />
+                  <label className="btn btn-outline-primary" htmlFor={sector}>
+                    {sector}
+                  </label>
+                </span>
+              );
+            })}
+            <span className="w-100 d-flex align-items-center">
+              <button type="submit" className="ms-auto green_button">
+                Save
+              </button>
+            </span>
+          </>
         )
       ) : (
         sectorOptions.map((sector, index) => {

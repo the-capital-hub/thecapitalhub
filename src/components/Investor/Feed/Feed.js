@@ -109,7 +109,7 @@ const Feed = () => {
 
   return (
     <MaxWidthWrapper>
-      <div className=" feed_container">
+      <div className="mx-0 feed_container">
         <div className="main_content">
           <div className="Posts__column d-flex flex-column gap-4">
             {/* Small Profile Card */}

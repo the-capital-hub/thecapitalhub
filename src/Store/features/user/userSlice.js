@@ -39,6 +39,9 @@ export const userSlice = createSlice({
     },
     updateLoggedInUser: (state, action) => {
       state.loggedInUser = { ...state.loggedInUser, ...action.payload };
+      let userData = JSON.parse(localStorage.getItem("loggedInUser"));
+      userData = { ...userData, ...action.payload };
+      localStorage.setItem("loggedInUser", JSON.stringify(userData));
     },
     setUserCompany: (state, action) => {
       state.company = action.payload;

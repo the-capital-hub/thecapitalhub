@@ -90,20 +90,20 @@ export default function InvestmentPhilosophyInfo() {
     } = e.target;
 
     let updatedData = {
-      importanceOfManagament: importanceOfManagament.value,
-      roleAsAInvestor: roleAsAInvestor.value,
-      founderAlmaMaterMatters: founderAlmaMaterMatters.value,
-      riskManagementInInvestments: riskManagementInInvestments.value,
-      guideOnSellingInvestments: guideOnSellingInvestments.value,
-      timingInInvestmentDecisions: timingInInvestmentDecisions.value,
+      importanceOfManagament: importanceOfManagament?.value,
+      roleAsAInvestor: roleAsAInvestor?.value,
+      founderAlmaMaterMatters: founderAlmaMaterMatters?.value,
+      riskManagementInInvestments: riskManagementInInvestments?.value,
+      guideOnSellingInvestments: guideOnSellingInvestments?.value,
+      timingInInvestmentDecisions: timingInInvestmentDecisions?.value,
       macroeconomicFactorsInfluenceInvestments:
-        macroeconomicFactorsInfluenceInvestments.value,
+        macroeconomicFactorsInfluenceInvestments?.value,
       assessCompanyCompetitiveAdvantage:
-        assessCompanyCompetitiveAdvantage.value,
-      industryTrendsHoldInYourStrategy: industryTrendsHoldInYourStrategy.value,
-      evaluateCompanyGrowthPotential: evaluateCompanyGrowthPotential.value,
+        assessCompanyCompetitiveAdvantage?.value,
+      industryTrendsHoldInYourStrategy: industryTrendsHoldInYourStrategy?.value,
+      evaluateCompanyGrowthPotential: evaluateCompanyGrowthPotential?.value,
       weightGaveToTechnologicalInnovation:
-        weightGaveToTechnologicalInnovation.value,
+        weightGaveToTechnologicalInnovation?.value,
       sectorPreferences: selectedSectors,
     };
 
@@ -114,7 +114,7 @@ export default function InvestmentPhilosophyInfo() {
       console.log("Response", data.data);
       dispatch(loginSuccess(data.data));
       setLoading(false);
-      setIsEditing(!isEditing);
+      setIsEditing(false);
       // Alert
       setAlert({ success: "Changes Saved" });
       setTimeout(() => {
@@ -123,7 +123,7 @@ export default function InvestmentPhilosophyInfo() {
     } catch (error) {
       console.log(error);
       setLoading(false);
-      setIsEditing(!isEditing);
+      setIsEditing(false);
       // Alert
       setAlert({ error: "Error saving changes! Please try again." });
       setTimeout(() => {
@@ -190,6 +190,7 @@ export default function InvestmentPhilosophyInfo() {
             legend={TEXT_QUESTIONS[0]}
             name={"importanceOfManagament"}
             key={"importanceOfManagament"}
+            loading={loading}
           />
 
           <InfoField
@@ -198,6 +199,7 @@ export default function InvestmentPhilosophyInfo() {
             legend={TEXT_QUESTIONS[1]}
             name={"roleAsAInvestor"}
             key={"roleAsAInvestor"}
+            loading={loading}
           />
 
           <InfoField
@@ -206,6 +208,7 @@ export default function InvestmentPhilosophyInfo() {
             legend={TEXT_QUESTIONS[2]}
             name={"founderAlmaMaterMatters"}
             key={"founderAlmaMaterMatters"}
+            loading={loading}
           />
 
           <InfoField
@@ -214,6 +217,7 @@ export default function InvestmentPhilosophyInfo() {
             legend={TEXT_QUESTIONS[3]}
             name={"riskManagementInInvestments"}
             key={"riskManagementInInvestments"}
+            loading={loading}
           />
 
           <InfoField
@@ -222,6 +226,7 @@ export default function InvestmentPhilosophyInfo() {
             legend={TEXT_QUESTIONS[4]}
             name={"guideOnSellingInvestments"}
             key={"guideOnSellingInvestments"}
+            loading={loading}
           />
 
           <InfoField
@@ -230,6 +235,7 @@ export default function InvestmentPhilosophyInfo() {
             legend={TEXT_QUESTIONS[5]}
             name={"timingInInvestmentDecisions"}
             key={"timingInInvestmentDecisions"}
+            loading={loading}
           />
 
           <InfoField
@@ -238,6 +244,7 @@ export default function InvestmentPhilosophyInfo() {
             legend={TEXT_QUESTIONS[6]}
             name={"macroeconomicFactorsInfluenceInvestments"}
             key={"macroeconomicFactorsInfluenceInvestments"}
+            loading={loading}
           />
 
           <InfoField
@@ -246,6 +253,7 @@ export default function InvestmentPhilosophyInfo() {
             legend={TEXT_QUESTIONS[7]}
             name={"assessCompanyCompetitiveAdvantage"}
             key={"assessCompanyCompetitiveAdvantage"}
+            loading={loading}
           />
 
           <InfoField
@@ -254,6 +262,7 @@ export default function InvestmentPhilosophyInfo() {
             legend={TEXT_QUESTIONS[8]}
             name={"industryTrendsHoldInYourStrategy"}
             key={"industryTrendsHoldInYourStrategy"}
+            loading={loading}
           />
 
           <InfoField
@@ -262,6 +271,7 @@ export default function InvestmentPhilosophyInfo() {
             legend={TEXT_QUESTIONS[9]}
             name={"evaluateCompanyGrowthPotential"}
             key={"evaluateCompanyGrowthPotential"}
+            loading={loading}
           />
 
           <InfoField
@@ -270,6 +280,7 @@ export default function InvestmentPhilosophyInfo() {
             legend={TEXT_QUESTIONS[10]}
             name={"weightGaveToTechnologicalInnovation"}
             key={"weightGaveToTechnologicalInnovation"}
+            loading={loading}
           />
         </div>
       </form>

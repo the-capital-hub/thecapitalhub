@@ -19,7 +19,7 @@ import {
   deleteComment,
   unsavePost,
   toggleCommentLike,
-} from "../services/postService";
+} from "../services/postService.js";
 
 export const createPost = async (req, res) => {
   try {

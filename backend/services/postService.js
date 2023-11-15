@@ -1,6 +1,6 @@
-import { PostModel } from "../models/Post";
-import { UserModel } from "../models/User";
-import { cloudinary } from "../utils/uploadImage";
+import { PostModel } from "../models/Post.js";
+import { UserModel } from "../models/User.js";
+import { cloudinary } from "../utils/uploadImage.js";
 import { addNotification, deleteNotification } from "./notificationService.js";
 
 export const createNewPost = async (data) => {

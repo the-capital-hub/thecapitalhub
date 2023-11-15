@@ -77,7 +77,7 @@ const InvestorManageAccount = () => {
               className="mt-5 mt-xl-3"
               text={"Manage Account"}
             />
-            <div className="box_container mt-4 row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+            <div className="box_container mt-lg-4 row row-cols-1 row-cols-lg-2 row-cols-xl-3">
               <section className="col card empty_box d-lg-none d-flex m-0">
                 <button
                   className="btn investor-logout-btn"

@@ -96,6 +96,7 @@ const NavBar = (props) => {
               <div className="logo_container">
                 <img
                   src={Logo}
+                  height={""}
                   onClick={() => navigate("/investor/home")}
                   alt="the capital hub logo"
                 />
@@ -184,7 +185,13 @@ const NavBar = (props) => {
                           ?.slice(0, 5)
                           .map((company) => (
                             <span className="single_result">
-                              <Link to={company.isInvestor ? `/investor/company-profile/${company.oneLink}?investor=1` : `/investor/company-profile/${company.oneLink}`}>
+                              <Link
+                                to={
+                                  company.isInvestor
+                                    ? `/investor/company-profile/${company.oneLink}?investor=1`
+                                    : `/investor/company-profile/${company.oneLink}`
+                                }
+                              >
                                 {company.company}
                               </Link>
                             </span>
@@ -269,7 +276,9 @@ const NavBar = (props) => {
                                   <span
                                     key={_id}
                                     className="single_result"
-                                    onClick={() => navigate(`/investor/user/${_id}`)}
+                                    onClick={() =>
+                                      navigate(`/investor/user/${_id}`)
+                                    }
                                   >
                                     {firstName} {lastName}
                                   </span>
@@ -291,19 +300,24 @@ const NavBar = (props) => {
                                 <span className="mt-2">Companies</span>
                               )}
                               {searchSuggestions && searchSuggestions.company
-                                ? searchSuggestions.company.slice(0, 5).map((item, index) => (
-                                  <span className="single_result" key={index}>
-                                    <Link
-                                      to={
-                                        item.company.isInvestor
-                                          ? `/investor/company-profile/${item.oneLink}?investor=1`
-                                          : `/investor/company-profile/${item.oneLink}`
-                                      }
-                                    >
-                                      {item.company}
-                                    </Link>
-                                  </span>
-                                ))
+                                ? searchSuggestions.company
+                                    .slice(0, 5)
+                                    .map((item, index) => (
+                                      <span
+                                        className="single_result"
+                                        key={index}
+                                      >
+                                        <Link
+                                          to={
+                                            item.company.isInvestor
+                                              ? `/investor/company-profile/${item.oneLink}?investor=1`
+                                              : `/investor/company-profile/${item.oneLink}`
+                                          }
+                                        >
+                                          {item.company}
+                                        </Link>
+                                      </span>
+                                    ))
                                 : null}
 
                               {searchSuggestions?.company?.length > 5 && (
