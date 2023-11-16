@@ -17,7 +17,7 @@ import {
 } from "../../../Service/user";
 import { useLocation } from "react-router-dom";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
-import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { setPageTitle,  selectInvestorCreatePostModal} from "../../../Store/features/design/designSlice";
 import OnBoardUser from "../../../components/OnBoardUser/OnBoardUser";
 import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
 
@@ -30,7 +30,13 @@ function Home() {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
+  const isInvestorCreatePostModalOpen = useSelector(selectInvestorCreatePostModal);
 
+  useEffect(() => {
+    setPopupOpen(isInvestorCreatePostModalOpen);
+  }, [isInvestorCreatePostModalOpen]);
+  
+  
   const openPopup = () => {
     setPopupOpen(!popupOpen);
   };
@@ -55,7 +61,7 @@ function Home() {
     getAllPostsAPI(page)
       .then(({ data }) => {
         console.log(data);
-        if (data.length === 0) {
+        if (data?.length === 0) {
         } else {
           setAllPosts([...allPosts, ...data]);
           setPage(page + 1);

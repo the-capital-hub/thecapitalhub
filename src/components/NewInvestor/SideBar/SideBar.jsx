@@ -388,7 +388,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/"
                 >
                   <img src={HomeIcon} alt="image" />
-                  {!sidebarCollapsed && <span>Go-to Platform</span>}
+                  {!sidebarCollapsed && <span>Learn More</span>}
                 </Link>
               </MenuItem>
               {/* <MenuItem

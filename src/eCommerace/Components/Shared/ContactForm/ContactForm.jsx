@@ -101,6 +101,7 @@ export default function ContactForm({ className, page }) {
             className="form_input"
             value={formData.name}
             onChange={handleInputChange}
+            required
           />
         </div>
 
@@ -116,6 +117,7 @@ export default function ContactForm({ className, page }) {
             className="form_input"
             value={formData.email}
             onChange={handleInputChange}
+            required
           />
         </div>
 
@@ -131,6 +133,7 @@ export default function ContactForm({ className, page }) {
             className="form_input"
             value={formData.mobileNumber}
             onChange={handleInputChange}
+            required
           />
         </div>
 
@@ -169,6 +172,7 @@ export default function ContactForm({ className, page }) {
             className="form_input"
             value={formData.comments}
             onChange={handleInputChange}
+            required
           />
         </div>
 
