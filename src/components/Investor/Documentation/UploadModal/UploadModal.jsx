@@ -29,7 +29,7 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
       getFoldersApi(loggedInUser.oneLinkId)
         .then((data) => {
           const folders = data.data;
-          folders.push("Other");
+          folders.push("New Folder");
           console.log(folders);
           setFolderSelector(folders);
         })
@@ -106,7 +106,7 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
           fileUrl: res.Location,
           fileName: file.name,
           userId: loggedInUser._id,
-          folderName: folder === "Other" ? folderName : folder,
+          folderName: folder === "New Folder" ? folderName : folder,
         };
 
         await axios
@@ -192,7 +192,7 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
             {/* <option value="Other">Other</option> */}
           </select>
 
-          {folder === "Other" && (
+          {folder === "New Folder" && (
             <input
               className="name_input rounded-pill px-3 py-2 "
               type="text"

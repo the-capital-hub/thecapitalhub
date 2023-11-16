@@ -54,7 +54,7 @@ const Feed = () => {
   const fetchMorePosts = () => {
     getAllPostsAPI(page)
       .then(({ data }) => {
-        if (data.length === 0) {
+        if (data?.length === 0) {
           setHasMore(false);
         } else {
           setAllPosts([...allPosts, ...data]);

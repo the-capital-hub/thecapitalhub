@@ -425,7 +425,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/"
                 >
                   <img src={HomeIcon} alt="go to platform" />
-                  {!sidebarCollapsed && <span>Go-to Platform</span>}
+                  {!sidebarCollapsed && <span>Learn More</span>}
                 </Link>
               </MenuItem>
               <hr className="hr-above-support" />
