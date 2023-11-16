@@ -1,6 +1,6 @@
 import "./CommunitiesContainer.scss";
 import CommunityCard from "./CommunityCard";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import CommunitiesIcon from "./CommunitiesIcon";
 import ModalBsLauncher from "../../PopUp/ModalBS/ModalBsLauncher/ModalBsLauncher";
 import ModalBSBody from "../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
@@ -23,12 +23,21 @@ export default function CommunitiesContainer({
   const [getCommunity, setGetCommunity] = useState([]);
   const chatProfile = useSelector((state) => state.chat.chatProfile);
   const chatId = useSelector((state) => state.chat.chatId);
+  const launchRef = useRef();
 
   useEffect(() => {
     getAllCommunity(loggedInUser?._id).then((res) => {
       setGetCommunity(res);
     });
   }, [chatProfile, chatId, sendMessage, recieveMessage]);
+
+
+  const openAddNewCommunityModal = () => {
+    // Trigger the ModalBsLauncher programmatically
+    if (launchRef.current) {
+      launchRef.current.click();
+    }
+  };
 
   return (
     <details
@@ -40,22 +49,21 @@ export default function CommunitiesContainer({
         <CommunitiesIcon
           style={{ height: "30px", width: "30px", color: "currentColor" }}
         />
-        <h4
-          className="m-0 text-capitalize "
-        // style={{ color: " rgba(159, 159, 159, 1)" }}
-        >
-          community
-        </h4>
+        <div className="d-flex align-items-center justify-content-between w-100">
+          <h4 className="m-0 text-capitalize">Community</h4>
+
+          <AiOutlineUsergroupAdd
+            style={{ fontSize: "1.5rem", cursor: "pointer" }}
+            onClick={openAddNewCommunityModal}
+          />
+        </div>
       </summary>
       <div className="communities__chats d-flex flex-column pb-4 border-top">
         {/* Add new */}
         <ModalBsLauncher
           id="AddNewCommunity"
-          className="new__community d-flex align-items-center gap-3 px-4 py-4 border-bottom "
+          launchRef={launchRef}
         >
-          {" "}
-          <AiOutlineUsergroupAdd style={{ fontSize: "1.75rem" }} />{" "}
-          <h5 className="m-0">Create New Community</h5>{" "}
         </ModalBsLauncher>
         {/* Add new Modal is added to chats.js because it was not triggered in mobileview */}
         {/* <ModalBSContainer isStatic={false} id="AddNewCommunity">
