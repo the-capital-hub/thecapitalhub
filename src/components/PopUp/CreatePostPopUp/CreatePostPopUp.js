@@ -248,7 +248,7 @@ const CreatePostPopUp = ({
     <>
       {popupOpen && <div className="createpost-background-overlay"></div>}
       <div
-        className={`create_post_modal rounded-4 p-2 ${
+        className={`create_post_modal rounded-4 p-md-2 ${
           popupOpen ? "d-block" : ""
         }`}
         tabIndex="-1"
@@ -262,8 +262,8 @@ const CreatePostPopUp = ({
                 <div className="ceatepost_img_name">
                   <img
                     src={loggedInUser.profilePicture}
-                    width={80}
-                    height={80}
+                    width={50}
+                    height={50}
                     style={{ objectFit: "cover" }}
                     className="rounded-circle"
                     alt="profile pic"
@@ -394,93 +394,84 @@ const CreatePostPopUp = ({
             {/* create post modal footer - Icons and Post button */}
             <div className="createpost_modal_footer">
               <div className="modal_footer_container mt-4 mb-3">
-                <div className="modal_footer_container">
-                  <div className="left_buttons">
-                    {/* Image input and Icon */}
-                    <input
-                      type="file"
-                      name="image"
-                      style={{ display: "none" }}
-                      ref={galleryInputRef}
-                      onChange={handleFileChange}
-                      accept="image/*"
-                    />
-                    <button
-                      className="white_button"
-                      onClick={handleGalleryButtonClick}
-                    >
-                      <img src={GallaryIcon} alt="Button 1" />
-                    </button>
+                <div className="left_buttons">
+                  {/* Image input and Icon */}
+                  <input
+                    type="file"
+                    name="image"
+                    style={{ display: "none" }}
+                    ref={galleryInputRef}
+                    onChange={handleFileChange}
+                    accept="image/*"
+                  />
+                  <button
+                    className="white_button"
+                    onClick={handleGalleryButtonClick}
+                  >
+                    <img src={GallaryIcon} alt="Button 1" />
+                  </button>
 
-                    {/* Video input and Icon */}
-                    <input
-                      type="file"
-                      name="video"
-                      style={{ display: "none" }}
-                      ref={cameraInputRef}
-                      onChange={handleFileChange}
-                      accept="video/*"
-                    />
-                    <button
-                      className="white_button"
-                      onClick={handleCameraButtonClick}
-                    >
-                      <img src={IconVideo} alt="Button 2" />
-                    </button>
+                  {/* Video input and Icon */}
+                  <input
+                    type="file"
+                    name="video"
+                    style={{ display: "none" }}
+                    ref={cameraInputRef}
+                    onChange={handleFileChange}
+                    accept="video/*"
+                  />
+                  <button
+                    className="white_button"
+                    onClick={handleCameraButtonClick}
+                  >
+                    <img src={IconVideo} alt="Button 2" />
+                  </button>
 
-                    {/* Document input and Icon */}
-                    <input
-                      type="file"
-                      name="document"
-                      style={{ display: "none" }}
-                      ref={documentInputRef}
-                      onChange={handleFileChange}
-                    />
-                    <button
-                      className="white_button"
-                      onClick={handleDocumentButtonClick}
-                    >
-                      {/* <img src={CameraIcon} alt="Button 2" /> */}
-                      <IconFile width="16px" height="16px" />
-                    </button>
+                  {/* Document input and Icon */}
+                  <input
+                    type="file"
+                    name="document"
+                    style={{ display: "none" }}
+                    ref={documentInputRef}
+                    onChange={handleFileChange}
+                  />
+                  <button
+                    className="white_button"
+                    onClick={handleDocumentButtonClick}
+                  >
+                    {/* <img src={CameraIcon} alt="Button 2" /> */}
+                    <IconFile width="16px" height="16px" />
+                  </button>
 
-                    {/* <input
+                  {/* <input
                       type="file"
                       name="document"
                       style={{ display: "none" }}
                       ref={smileeInputRef}
                       onChange={handleFileChange}
                     /> */}
-                    {/* <button
+                  {/* <button
                       className="white_button"
                       onClick={handleSmileeButtonClick}
                     >
                       <img src={SmileeIcon} alt="Button 3" />
                     </button> */}
 
-                    <button
-                      className="white_button"
-                      onClick={handleOneLinkClick}
-                    >
-                      {/* <img src={ThreeDotsIcon} alt="Button 4" /> */}
-                      <BsLink45Deg
-                        height={"59px"}
-                        width={"59px"}
-                        size={"20px"}
-                      />
+                  <button className="white_button" onClick={handleOneLinkClick}>
+                    {/* <img src={ThreeDotsIcon} alt="Button 4" /> */}
+                    <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} />
+                  </button>
+                </div>
+                <div className="post_button_container">
+                  {posting ? (
+                    <button className="post_button" disabled>
+                      Posting...
                     </button>
-                  </div>
-                  <div className="post_button_container">
-                    {posting ? (
-                      <button className="post_button" disabled>
-                        Posting...
-                      </button>
-                    ) : (
-                      <button className="post_button" onClick={handleSubmit}>
-                        Post
-                      </button>
-                    )}
-                  </div>
+                  ) : (
+                    <button className="post_button" onClick={handleSubmit}>
+                      Post
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
