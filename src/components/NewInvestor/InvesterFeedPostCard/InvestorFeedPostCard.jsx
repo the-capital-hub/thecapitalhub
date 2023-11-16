@@ -7,7 +7,7 @@ import "./investorFeedPostCard.scss";
 import fireIcon from "../../../Images/post/like-fire.png";
 import bwFireIcon from "../../../Images/post/unlike-fire.png";
 import commentIcon from "../../../Images/post/comment.svg";
-import repostIcon from "../../../Images/post/repost.svg";
+import repostIcon from "../../../Images/post/repostBlack.svg";
 import repostWithThoughtsIcon from "../../../Images/post/repost-with-thoughts.svg";
 import repostInstantlyIcon from "../../../Images/post/repost-grey.svg";
 import saveIcon from "../../../Images/post/save.svg";
@@ -436,18 +436,19 @@ const FeedPostCard = ({
                     >
                       {/* {description}{" "} */}
                       {expanded
-                        ? description
-                        : description.split(" ").slice(0, 15)}
-                      {!expanded &&
-                        description.split(" ").length > 15 &&
-                        !expanded && (
-                          <span
-                            style={{ color: "blue", cursor: "pointer" }}
-                            onClick={toggleDescription}
-                          >
-                            ...Read more
-                          </span>
-                        )}
+                      ? description
+                      : description.split(" ").slice(0, 15).join(" ")}
+                    {!expanded &&
+                      description.split(" ").length > 15 &&
+                      !expanded && (
+                        <span
+                          style={{ color: "blue", cursor: "pointer" }}
+                          onClick={toggleDescription}
+                        >
+                           ...Read more
+                        </span>
+                      )}
+                     
                       {documentUrl && (
                         <a href={documentUrl} className="mx-auto">
                           {documentName}

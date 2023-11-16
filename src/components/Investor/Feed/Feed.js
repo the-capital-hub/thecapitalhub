@@ -20,6 +20,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {
   selectShowOnboarding,
   setPageTitle,
+  selectCreatePostModal,
 } from "../../../Store/features/design/designSlice";
 import OnBoardUser from "../../OnBoardUser/OnBoardUser";
 import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
@@ -27,6 +28,8 @@ import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
 const Feed = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const showOnboarding = useSelector(selectShowOnboarding);
+  const isCreatePostModalOpen = useSelector(selectCreatePostModal);
+
   const dispatch = useDispatch();
 
   const [popupOpen, setPopupOpen] = useState(false);
@@ -36,6 +39,12 @@ const Feed = () => {
   const [getSavedPostData, setgetSavedPostData] = useState("");
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    setPopupOpen(isCreatePostModalOpen);
+  }, [isCreatePostModalOpen]);
+  
+  
 
   // Methods
   const openPopup = () => {
@@ -111,7 +120,7 @@ const Feed = () => {
     <MaxWidthWrapper>
       <div className="mx-0 feed_container">
         <div className="main_content">
-          <div className="Posts__column d-flex flex-column gap-4">
+          <div className="Posts__column d-flex flex-column gap-2">
             {/* Small Profile Card */}
             <SmallProfileCard className="d-none d-md-block" text={"Home"} />
             {/* Write a Post */}

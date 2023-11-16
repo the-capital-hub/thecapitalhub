@@ -5,7 +5,7 @@ import GallaryIcon from "../../../Images/Gallary.svg";
 import ThreeDotsIcon from "../../../Images/ThreeDots.svg";
 import CameraIcon from "../../../Images/Camera.svg";
 import IconVideo from "../../../Images/post/Video.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getSinglePostAPI,
   postUserPost,
@@ -18,6 +18,7 @@ import EasyCrop from "react-easy-crop";
 import IconFile from "../../Investor/SvgIcons/IconFile";
 import { BsLink45Deg } from "react-icons/bs";
 import { s3 } from "../../../Service/awsConfig";
+import { toggleinvestorCreatePostModal } from "../../../Store/features/design/designSlice";
 
 const CreatePostPopUp = ({
   setPopupOpen,
@@ -27,6 +28,8 @@ const CreatePostPopUp = ({
   appendDataToAllPosts,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
+  const dispatch = useDispatch();
 
   const [postText, setPostText] = useState(""); // Store the textarea data
   const [category, setCategory] = useState("");
@@ -38,7 +41,9 @@ const CreatePostPopUp = ({
   const [zoom, setZoom] = useState(1);
   const [croppedImage, setCroppedImage] = useState(null);
 
-  const handleClose = () => setPopupOpen(false);
+  const handleClose = () => {setPopupOpen(false);
+    dispatch(toggleinvestorCreatePostModal());
+  }
 
   const galleryInputRef = useRef(null);
   const cameraInputRef = useRef(null);
@@ -208,6 +213,7 @@ const CreatePostPopUp = ({
         setNewPost(Math.random());
         // Close the popup after successful submission
         handleClose();
+        dispatch(toggleinvestorCreatePostModal());
       })
       .catch((error) => {
         // Handle error if needed
