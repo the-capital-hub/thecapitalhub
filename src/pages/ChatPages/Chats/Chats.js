@@ -186,11 +186,12 @@ const Chats = () => {
         </Link>
         <button
           className="btn btn-sm btn-light"
-          onClick={() =>
-            navigate(
-              loggedInUser?.isInvestor === "true" ? "/investor/home" : "/home"
-            )
-          }
+          // onClick={() =>
+          //   navigate(
+          //     loggedInUser?.isInvestor === "true" ? "/investor/home" : "/home"
+          //   )
+          // }
+          onClick={() => dispatch(resetChat())}
         >
           <AiOutlineHome /> Home
         </button>
