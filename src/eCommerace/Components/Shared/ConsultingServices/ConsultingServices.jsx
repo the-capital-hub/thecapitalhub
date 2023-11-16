@@ -6,7 +6,7 @@ export default function ConsultingServices() {
   const { inView, ref } = useInView({
     triggerOnce: true,
     fallbackInView: true,
-    threshold: 0.5,
+    threshold: 0.25,
     // rootMargin: "-5%",
   });
 

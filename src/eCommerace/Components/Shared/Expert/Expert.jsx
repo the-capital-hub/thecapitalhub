@@ -14,7 +14,7 @@ export default function Expert() {
 
   return (
     <section
-      className={`container mx-auto contact-our-team row justify-content-around bg-black rounded-4 p-2 p-md-5 py-3 align-items-center ${
+      className={`container mx-auto contact-our-team row justify-content-around bg-black rounded-4 px-2 px-md-5 py-5 align-items-center ${
         inView ? "" : ""
       } overflow-hidden`}
       ref={ref}

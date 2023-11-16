@@ -70,7 +70,7 @@ financial ease and security"
       <FtechPartOfPlatform />
 
       {/* Expert */}
-      <div className="my-4 overflow-hidden">
+      <div className="py-4 overflow-hidden">
         <Expert />
       </div>
 
