@@ -18,6 +18,7 @@ import {
 import NotificationsPopup from "./NotificationsPopup/NotificationsPopup";
 import { useRef } from "react";
 import OnboardingSwitch from "./OnboardingSwitch/OnboardingSwitch";
+import { selectNotificationtModal } from "../../../Store/features/design/designSlice";
 
 // Startup navbar
 const InvestorNavbar = (props) => {
@@ -33,6 +34,7 @@ const InvestorNavbar = (props) => {
   const notificationPopup = useRef();
   const navigate = useNavigate();
   const [notificationCount, setNotificationCount] = useState(0);
+  const isNotificationModalOpen = useSelector(selectNotificationtModal);
 
   useEffect(() => {
     getNotificationCount()
@@ -70,6 +72,14 @@ const InvestorNavbar = (props) => {
     setLoading(false);
   };
 
+  
+  
+  useEffect(() => {
+    setToggleNotificationPopup(true); 
+    console.log(isNotificationModalOpen)  }, [isNotificationModalOpen]);
+
+  
+  
   useEffect(() => {
     function handleClickOutside(event) {
       if (

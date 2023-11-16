@@ -7,7 +7,7 @@ import shareIcon from "../../../../Images/post/share.png";
 import fireIcon from "../../../../Images/post/like-fire.png";
 import bwFireIcon from "../../../../Images/post/unlike-fire.png";
 import commentIcon from "../../../../Images/post/comment.svg";
-import repostIcon from "../../../../Images/post/repost.svg";
+import repostIcon from "../../../../Images/post/repostBlack.svg";
 import repostWithThoughtsIcon from "../../../../Images/post/repost-with-thoughts.svg";
 import repostInstantlyIcon from "../../../../Images/post/repost-grey.svg";
 import saveIcon from "../../../../Images/post/save.svg";
@@ -46,6 +46,7 @@ import Linkify from "react-linkify";
 import IconDelete from "../../SvgIcons/IconDelete";
 import IconReportPost from "../../SvgIcons/IconReportPost";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
+import { useNavigate } from "react-router-dom";
 
 const FeedPostCard = ({
   postId,
@@ -71,8 +72,9 @@ const FeedPostCard = ({
   repostPreview,
   resharedPostId,
   deletePostFilterData,
+  isSinglePost = false,
 }) => {
-  const [showComment, setShowComment] = useState(false);
+  const [showComment, setShowComment] = useState(isSinglePost);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
@@ -82,6 +84,7 @@ const FeedPostCard = ({
   const [likedBy, setLikedBy] = useState(null);
   const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const navigate = useNavigate();
 
   const toggleDescription = () => {
     setExpanded(!expanded);
@@ -129,16 +132,29 @@ const FeedPostCard = ({
 
   const sendComment = async () => {
     try {
-      const response = await sendPostComment({
-        // postId: JSON.stringify(postId),
-        // userId: JSON.stringify(loggedInUser._id),
-        // text: JSON.stringify(commentText),
+      const commentTextTemp = commentText;
+      setCommentText("");
+      const commentBody = {
+        postId: postId,
+        user: {
+          _id: loggedInUser._id,
+          profilePicture: loggedInUser.profilePicture,
+          firstName: loggedInUser.firstName,
+          lastName: loggedInUser.lastName,
+          designation: loggedInUser.designation,
+        },
+        text: commentTextTemp,
+      }
+      setComments((prev) => [...prev, commentBody]);
 
+      const requestBody = {
         postId: postId,
         userId: loggedInUser._id,
-        text: commentText,
-      });
-      if (response.data.status === "200") {
+        text: commentTextTemp,
+      }
+      const response = await sendPostComment(requestBody);
+
+      if (response) {
         await getPostComment({ postId }).then((res) => {
           console.log("response", res.data.data);
           setComments(res.data.data);
@@ -147,7 +163,6 @@ const FeedPostCard = ({
 
       console.log("Comment submitted successfully:", response.data);
 
-      setCommentText("");
     } catch (error) {
       console.error("Error submitting comment:", error);
     }
@@ -288,13 +303,13 @@ const FeedPostCard = ({
 
   // Delete comment
   const deleteComments = async (postId, commentId) => {
-    console.log(postId, commentId);
     try {
+      const updatedComments = comments.filter(comment => comment._id !== commentId);
+      setComments(updatedComments);
       await deleteComment(postId, commentId);
-      await getPostComment({ postId }).then((res) => {
-        console.log("response", res.data.data);
-        setComments(res.data.data);
-      });
+      // await getPostComment({ postId }).then((res) => {
+      //   setComments(res.data.data);
+      // });
     } catch (error) {
       console.log("Error deleting comment : ", error);
     }
@@ -309,7 +324,11 @@ const FeedPostCard = ({
     try {
       setLoading(true);
       await deletePostAPI(postId);
-      deletePostFilterData(postId);
+      if (isSinglePost) {
+        loggedInUser.isInvestor === "true" ? navigate("/investor/home") : navigate("/home");
+      } else {
+        deletePostFilterData(postId);
+      }
       setLoading(false);
     } catch (error) {
       console.log("Error deleting post : ", error);
@@ -375,9 +394,8 @@ const FeedPostCard = ({
     <>
       <div className="feedpostcard_main_container mb-2">
         <div
-          className={`box feedpostcard_container mt-2 ${
-            repostPreview && "rounded-4 shadow-sm border"
-          }`}
+          className={`box feedpostcard_container mt-2 ${repostPreview && "rounded-4 shadow-sm border"
+            }`}
         >
           {loading && (
             <div className="d-flex justify-content-center my-4">
@@ -491,7 +509,7 @@ const FeedPostCard = ({
                         data-bs-toggle="modal"
                         data-bs-target="#reportPostModal"
                         className="d-flex align-items-center gap-1"
-                        // onClick={() => setShowReportModal(true)}
+                      // onClick={() => setShowReportModal(true)}
                       >
                         <IconReportPost />
                         <span>Report</span>
@@ -513,7 +531,7 @@ const FeedPostCard = ({
                     {/* {description} */}
                     {expanded
                       ? description
-                      : description.split(" ").slice(0, 15)}
+                      : description.split(" ").slice(0, 15).join(" ")}
                     {!expanded &&
                       description.split(" ").length > 15 &&
                       !expanded && (
@@ -521,7 +539,7 @@ const FeedPostCard = ({
                           style={{ color: "blue", cursor: "pointer" }}
                           onClick={toggleDescription}
                         >
-                           ...Read more
+                          ...Read more
                         </span>
                       )}
                     {documentUrl && (
@@ -632,9 +650,8 @@ const FeedPostCard = ({
                 {/* Repost and Save posts */}
                 <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                   <span
-                    className={`repost_container rounded-4 ${
-                      showRepostOptions ? "bg-light" : ""
-                    }`}
+                    className={`repost_container rounded-4 ${showRepostOptions ? "bg-light" : ""
+                      }`}
                     ref={repostContainerRef}
                   >
                     <img
@@ -757,9 +774,9 @@ const FeedPostCard = ({
 
                     {/* Comments */}
                     {comments
-                      .sort(
-                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-                      )
+                      // .sort(
+                      //   (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                      // )
                       .map((val) => (
                         <section
                           className="comment_messages my-2"
@@ -802,7 +819,7 @@ const FeedPostCard = ({
                           <hr className="p-0 m-0" />
                           <div className="d-flex  justify-content-between px-2">
                             <div className="p-2">
-                              {val?.likes.includes(loggedInUser._id) ? (
+                              {val?.likes?.includes(loggedInUser._id) ? (
                                 <img
                                   src={fireIcon}
                                   width={18}
@@ -825,10 +842,10 @@ const FeedPostCard = ({
                                 className=" mx-3 text-secondary"
                                 style={{ fontSize: "14px" }}
                               >
-                                {val?.likes.length} likes
+                                {val?.likes?.length} likes
                               </span>
                             </div>
-                            {userId === loggedInUser?._id && (
+                            {val.user._id === loggedInUser?._id && (
                               <p
                                 onClick={() => deleteComments(postId, val._id)}
                               >
@@ -909,9 +926,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${
-                  reportReason === "Harassment" && "bg-secondary text-white"
-                }`}
+                className={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
+                  }`}
                 htmlFor="inlineRadio1"
               >
                 Harassment
@@ -928,9 +944,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${
-                  reportReason === "Spam" && "bg-secondary text-white"
-                }`}
+                className={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
+                  }`}
                 htmlFor="inlineRadio2"
               >
                 Spam
@@ -947,9 +962,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${
-                  reportReason === "Fraud or scam" && "bg-secondary text-white"
-                }`}
+                className={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
+                  }`}
                 htmlFor="inlineRadio3"
               >
                 Fraud or scam
@@ -966,9 +980,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${
-                  reportReason === "Hateful Speech" && "bg-secondary text-white"
-                }`}
+                className={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
+                  }`}
                 htmlFor="inlineRadio4"
               >
                 Hateful Speech

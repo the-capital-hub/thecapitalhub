@@ -15,6 +15,7 @@ import CreatePostPopUp from "../PopUp/CreatePostPopUp/CreatePostPopUp";
 import { useSelector } from "react-redux";
 import SpinnerBS from "../Shared/Spinner/SpinnerBS";
 import MaxWidthWrapper from "../Shared/MaxWidthWrapper/MaxWidthWrapper";
+import InvestorRightProfileCard from "../../components/NewInvestor/InvestorRightProfileCard/InvestorRightProfileCard";
 
 function SinglePost() {
   const [postData, setPostData] = useState(null);
@@ -39,7 +40,7 @@ function SinglePost() {
         console.log("Error showing single post : ", err);
         navigate("/");
       });
-  }, []);
+  }, [_id]);
 
   const [repostLoading, setRepostLoading] = useState({
     instant: false,
@@ -88,6 +89,7 @@ function SinglePost() {
               }}
               repostInstantly={repostInstantly}
               resharedPostId={postData?.resharedPostId}
+              isSinglePost={true}
             />
             {popupOpen && (
               <CreatePostPopUp
@@ -107,8 +109,18 @@ function SinglePost() {
           </div>
         )}
         <div className="right-sidebar d-none d-lg-block">
-          <RightProfileCard />
-          <RecommendationCard />
+          {loggedInUser.isInvestor === "true" ? (
+            <>
+              <InvestorRightProfileCard />
+              <RecommendationCard isInvestor={true} />
+            </>
+          ) : (
+            <>
+              <RightProfileCard />
+              <RecommendationCard />
+            </>
+          )}
+
           {/* <NewsCorner /> */}
         </div>
       </div>

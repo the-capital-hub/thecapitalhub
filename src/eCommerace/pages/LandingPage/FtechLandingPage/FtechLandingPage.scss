@@ -3,6 +3,8 @@
   --color-primary-text: #fff;
   --color-form-primary: #0d224e;
   --color-form-btn-text: white;
+  --color-helpCard-dark: #0d224e;
+  --color-ripple: 92, 111, 246;
 
   // background-color: #f5f7ff;
   display: flex;
@@ -129,7 +131,7 @@
   }
 
   .how-we-help {
-    padding: 40px 0;
+    // padding: 40px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
