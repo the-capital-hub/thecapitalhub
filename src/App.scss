@@ -115,7 +115,7 @@ button {
 // shake animation
 .shake {
   &:hover {
-    animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    animation: shake 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
     perspective: 1000px;
@@ -125,6 +125,11 @@ button {
 // Ripple animation
 .ripple-out {
   animation: rippleOut 2s linear infinite;
+}
+
+// Fade In
+.fadeIn {
+  animation: fadeIn 0.75s linear forwards;
 }
 
 // Keyframes
@@ -164,5 +169,17 @@ button {
       0 0 0 1rem rgba(var(--color-ripple), 0.2),
       0 0 0 2rem rgba(var(--color-ripple), 0.2),
       0 0 0 3rem rgba(var(--color-ripple), 0);
+  }
+}
+
+// Fade in
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }

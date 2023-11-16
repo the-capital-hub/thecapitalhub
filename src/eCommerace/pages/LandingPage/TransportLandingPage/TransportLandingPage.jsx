@@ -18,7 +18,7 @@ import TransportStreamlined from "./Components/TransportStreamlined/TransportStr
 import TransportPartOfPlatform from "./Components/TransportPartOfPlatform/TransportPartOfPlatform";
 import TransportBuildingApplications from "./Components/TransportBuildingApplications/TransportBuildingApplications";
 import TransportPickupDelivery from "./Components/TransportPickupDelivery/TransportPickupDelivery";
-import TransportDevFee from "./Components/TransportDevFee/TransportDevFee";
+import DevelopmentFee from "../../../Components/Shared/DevelopmentFee/DevelopmentFee";
 import ConsultingServices from "../../../Components/Shared/ConsultingServices/ConsultingServices";
 import Expert from "../../../Components/Shared/Expert/Expert";
 
@@ -47,7 +47,7 @@ function TransportLandingPage() {
       <TransportPickupDelivery image={assets.map} />
 
       {/* Development Fee */}
-      <TransportDevFee />
+      <DevelopmentFee />
 
       {/* Transport Streamlined */}
       <TransportStreamlined image={assets.singleMobile} />

@@ -55,6 +55,7 @@ export default function Expert() {
         <Link
           to="https://www.linkedin.com/in/pramod-badiger-a3226618b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
           className="LinkBtn btn btn-primary rounded-pill text-white px-4 py-2 fs-12"
+          style={{ width: "max-content" }}
         >
           Connect with our Expert
         </Link>

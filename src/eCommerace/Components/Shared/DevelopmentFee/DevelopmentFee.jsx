@@ -3,8 +3,9 @@ import {
   InsureRight,
   Diversify,
   InvestEasy,
-} from "../../../../../../Images/Ecommerace/FtechlandingPage";
+} from "../../../../Images/Ecommerace/FtechlandingPage";
 import { useInView } from "react-intersection-observer";
+import "./DevelopmentFee.scss";
 
 export default function TransportDevFee() {
   const { inView, ref } = useInView({
