@@ -23,16 +23,6 @@ import ConsultingServices from "../../../Components/Shared/ConsultingServices/Co
 import Expert from "../../../Components/Shared/Expert/Expert";
 
 function TransportLandingPage() {
-  const scrollToContact = () => {
-    const contactElement = document.getElementById("contact-us");
-    if (contactElement) {
-      window.scrollTo({
-        top: contactElement.offsetTop,
-        behavior: "smooth",
-      });
-    }
-  };
-
   return (
     <div className="transport-landing-page container-fluid overflow-x-hidden">
       <Helmet>
