@@ -7,7 +7,7 @@ import shareIcon from "../../../../Images/post/share.png";
 import fireIcon from "../../../../Images/post/like-fire.png";
 import bwFireIcon from "../../../../Images/post/unlike-fire.png";
 import commentIcon from "../../../../Images/post/comment.svg";
-import repostIcon from "../../../../Images/post/repost.svg";
+import repostIcon from "../../../../Images/post/repostBlack.svg";
 import repostWithThoughtsIcon from "../../../../Images/post/repost-with-thoughts.svg";
 import repostInstantlyIcon from "../../../../Images/post/repost-grey.svg";
 import saveIcon from "../../../../Images/post/save.svg";
@@ -513,7 +513,7 @@ const FeedPostCard = ({
                     {/* {description} */}
                     {expanded
                       ? description
-                      : description.split(" ").slice(0, 15)}
+                      : description.split(" ").slice(0, 15).join(" ")}
                     {!expanded &&
                       description.split(" ").length > 15 &&
                       !expanded && (

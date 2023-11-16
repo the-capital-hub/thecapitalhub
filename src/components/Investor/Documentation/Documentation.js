@@ -123,29 +123,36 @@ const Documentation = () => {
 
               {folderName.map((folder, index) => {
                 let imageToShow;
+                let folderName;
+
 
                 switch (folder) {
                   case "pitchdeck":
                     imageToShow = Pitch;
+                    folderName ="Pitch Deck";
                     break;
                   case "business":
                     imageToShow = Business;
+                    folderName ="Business";
                     break;
                   case "kycdetails":
                     imageToShow = KYC;
+                    folderName ="KYC Details";
                     break;
                   case "legal and compliance":
                     imageToShow = Legal;
+                    folderName ="Legal And Compliance";
                     break;
                   default:
                     imageToShow = Pitch;
+                    folderName =folder;
                 }
 
                 return (
                   <Card
                     key={index}
                     onClicked={() => navigate(`/documentation/${folder}`)}
-                    text={folder}
+                    text={folderName}
                     image={imageToShow}
                   />
                 );

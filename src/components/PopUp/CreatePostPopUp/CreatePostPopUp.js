@@ -4,7 +4,7 @@ import SmileeIcon from "../../../Images/Smilee.svg";
 import GallaryIcon from "../../../Images/Gallary.svg";
 import ThreeDotsIcon from "../../../Images/ThreeDots.svg";
 import CameraIcon from "../../../Images/Camera.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getSinglePostAPI,
   postUserPost,
@@ -18,6 +18,7 @@ import { BsLink45Deg } from "react-icons/bs";
 import IconFile from "../../Investor/SvgIcons/IconFile";
 import IconVideo from "../../../Images/post/Video.svg";
 import { s3 } from "../../../Service/awsConfig";
+import { toggleCreatePostModal } from "../../../Store/features/design/designSlice";
 
 const CreatePostPopUp = ({
   setPopupOpen,
@@ -37,8 +38,11 @@ const CreatePostPopUp = ({
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedImage, setCroppedImage] = useState(null);
+  const dispatch = useDispatch();
 
-  const handleClose = () => setPopupOpen(false);
+  const handleClose = () =>{ setPopupOpen(false);
+    dispatch(toggleCreatePostModal());
+  }
 
   const galleryInputRef = useRef(null);
   const documentInputRef = useRef(null);
@@ -217,6 +221,7 @@ const CreatePostPopUp = ({
         setCroppedImage(null);
         setNewPost(Math.random());
         handleClose();
+        dispatch(toggleCreatePostModal());
       })
       .catch((error) => {
         console.error("Error submitting post:", error);
