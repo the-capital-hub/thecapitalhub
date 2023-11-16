@@ -1,36 +1,56 @@
 import React from "react";
 import "./OurClients.scss";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import assets from "../../../../Images/Portfolio/PortfolioPage";
+import { useInView } from "react-intersection-observer";
 
 export default function OurClients({ className }) {
-  const scrollToContact = () => {
-    const contactElement = document.getElementById("contact-us");
-    if (contactElement) {
-      window.scrollTo({
-        top: contactElement.offsetTop,
-        behavior: "smooth",
-      });
-    }
-  }; 
+  // const scrollToContact = () => {
+  //   const contactElement = document.getElementById("contact-us");
+  //   if (contactElement) {
+  //     window.scrollTo({
+  //       top: contactElement.offsetTop,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // };
+
+  const { inView, ref } = useInView({
+    triggerOnce: true,
+    fallbackInView: true,
+    threshold: 0.5,
+    // rootMargin: "-5%",
+  });
+
   return (
-    <div className={`our_clients_wrapper w-100 ${className}`}>
+    <div
+      className={`our_clients_wrapper w-100 ${className} ${inView ? "" : ""} `}
+      ref={ref}
+    >
       <div className="our_clients_container container mx-auto px-5 py-5">
-        <div className="clients_heading">
+        <div
+          className={`clients_heading slide-left ${
+            inView ? "slide-reset" : ""
+          }`}
+        >
           <h4>Our Clients</h4>
           <p>We do game-changing work for game-changing companies.</p>
           {/* <Link to={"/contactus"} className="text-capitalize work_button"> */}
-          <Link
-            to={""}
-            onClick={scrollToContact}
+          <a
+            href="#contact-us"
+            // onClick={scrollToContact}
             className="text-capitalize work_button"
           >
-            Work with us
-          </Link>
+            <span>Work with us</span>
+          </a>
         </div>
 
         {/* Client Logos */}
-        <div className="client_logos d-flex flex-wrap gap-3 gap-lg-4">
+        <div
+          className={`client_logos d-flex flex-wrap gap-3 gap-lg-4 short-slide-right ${
+            inView ? "short-slide-reset" : ""
+          } `}
+        >
           <img src={assets.yesgobus} alt="logo" width={100} height={80} />
           <img
             src={assets.impactshaala}

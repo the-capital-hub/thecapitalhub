@@ -1,8 +1,11 @@
 .transport-landing-page {
-  --color-primary: #583cea;
+  --color-primary: #5a3deb;
+  --color-primary-light: #583cea11;
   --color-primary-text: #fff;
   --color-form-primary: #583cea;
   --color-form-btn-text: white;
+  --color-helpCard-dark: #0d224e;
+  --color-ripple: 90, 61, 235;
 
   &.container-fluid {
     padding: 0;
@@ -345,40 +348,131 @@
   }
 
   // CSS related to intersection observer
-  transition: opacity 0.75s ease-in-out;
 
   .opacity-0 {
+    transition: opacity 1s ease-in;
     opacity: 0;
   }
 
   .opacity-1 {
+    transition: opacity 1s ease-in;
     opacity: 1;
   }
 
   .slide-left {
     // transition: transform 2s ease-in-out;
-    transform: translateX(-20dvw);
+    transform: translateX(-5dvw);
+    opacity: 0;
   }
 
   .slide-right {
     // transition: transform 2s ease-in-out;
-    transform: translateX(20dvw);
+    transform: translateX(5dvw);
+    opacity: 0;
   }
 
   .slide-down {
     // transition: transform 2s ease-in-out;
-    transform: translateY(-20dvw);
+    transform: translateY(-5dvw);
+    opacity: 0;
   }
 
   .slide-up {
     // transition: transform 2s ease-in-out;
-    transform: translateY(20dvw);
+    transform: translateY(5dvw);
+    opacity: 0;
   }
 
   .slide-reset {
-    transition: transform 0.75s ease-in-out;
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
     transform: translateX(0px);
     transform: translateY((0px));
+    opacity: 1;
     display: block;
+  }
+
+  // shorter slide
+  .short-slide-left {
+    // transition: transform 2s ease-in-out;
+    transform: translateX(-2dvw);
+    opacity: 0;
+  }
+
+  .short-slide-right {
+    // transition: transform 2s ease-in-out;
+    transform: translateX(2dvw);
+    opacity: 0;
+  }
+
+  .short-slide-down {
+    // transition: transform 2s ease-in-out;
+    transform: translateY(-2dvw);
+    opacity: 0;
+  }
+
+  .short-slide-up {
+    // transition: transform 2s ease-in-out;
+    transform: translateY(2dvw);
+    opacity: 0;
+  }
+
+  .short-slide-reset {
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+    transform: translateX(0px);
+    transform: translateY((0px));
+    opacity: 1;
+    display: block;
+  }
+
+  // shake animation
+  .shake {
+    &:hover {
+      animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+      perspective: 1000px;
+    }
+  }
+  @keyframes shake {
+    10%,
+    90% {
+      transform: translate3d(-1px, 0px, -0px);
+    }
+
+    20%,
+    80% {
+      transform: translate3d(2px, -0px, 0px);
+    }
+
+    30%,
+    50%,
+    70% {
+      transform: translate3d(-1px, 0px, 0px);
+    }
+
+    40%,
+    60% {
+      transform: translate3d(2px, 0px, 0px);
+    }
+  }
+
+  .ripple-out {
+    animation: rippleOut 2s linear infinite;
+  }
+
+  // ripple animation
+  @keyframes rippleOut {
+    0% {
+      box-shadow: 0 0 0 0rem rgba(var(--color-ripple), 0.2),
+        0 0 0 0.5rem rgba(var(--color-ripple), 0.2),
+        0 0 0 1rem rgba(var(--color-ripple), 0.2),
+        0 0 0 2rem rgba(var(--color-ripple), 0.2);
+    }
+    100% {
+      box-shadow: 0 0 0 0.5rem rgba(var(--color-ripple), 0.2),
+        0 0 0 1rem rgba(var(--color-ripple), 0.2),
+        0 0 0 2rem rgba(var(--color-ripple), 0.2),
+        0 0 0 3rem rgba(var(--color-ripple), 0);
+    }
   }
 }
