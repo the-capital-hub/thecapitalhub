@@ -98,29 +98,37 @@ const FeedPostCard = ({
 
   const sendComment = async () => {
     try {
-      const response = await sendPostComment({
-        // postId: JSON.stringify(postId),
-        // userId: JSON.stringify(loggedInUser._id),
-        // text: JSON.stringify(commentText),
+      const commentTextTemp = commentText;
+      setCommentText("");
+      const commentBody = {
+        postId: postId,
+        user: {
+          _id: loggedInUser._id,
+          profilePicture: loggedInUser.profilePicture,
+          firstName: loggedInUser.firstName,
+          lastName: loggedInUser.lastName,
+          designation: loggedInUser.designation,
+        },
+        text: commentTextTemp,
+      }
+      setComments((prev) => [...prev, commentBody]);
 
+      const requestBody = {
         postId: postId,
         userId: loggedInUser._id,
-        text: commentText,
-      });
-      if (response.data.status === 200) {
-        await getPostComment({ postId })
-          .then((res) => {
-            console.log("response", res.data.data);
-            setComments(res.data.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        text: commentTextTemp,
+      }
+      const response = await sendPostComment(requestBody);
+
+      if (response) {
+        await getPostComment({ postId }).then((res) => {
+          console.log("response", res.data.data);
+          setComments(res.data.data);
+        });
       }
 
-      console.log("Comment submitted successfully:", response.data.status);
+      console.log("Comment submitted successfully:", response.data);
 
-      setCommentText("");
     } catch (error) {
       console.error("Error submitting comment:", error);
     }
@@ -296,13 +304,13 @@ const FeedPostCard = ({
   };
 
   const deleteComments = async (postId, commentId) => {
-    console.log(postId, commentId);
     try {
+      const updatedComments = comments.filter(comment => comment._id !== commentId);
+      setComments(updatedComments);
       await deleteComment(postId, commentId);
-      await getPostComment({ postId }).then((res) => {
-        console.log("response", res.data.data);
-        setComments(res.data.data);
-      });
+      // await getPostComment({ postId }).then((res) => {
+      //   setComments(res.data.data);
+      // });
     } catch (error) {
       console.log("Error investor deleting comment : ", error);
     }
@@ -313,9 +321,8 @@ const FeedPostCard = ({
       <div className="row investor_feedpostcard_main_container mb-2">
         <div className="col-12">
           <div
-            className={`box feedpostcard_container mt-2 border ${
-              repostPreview && "rounded-4 shadow-sm"
-            }`}
+            className={`box feedpostcard_container mt-2 border ${repostPreview && "rounded-4 shadow-sm"
+              }`}
           >
             {loading && (
               <div class="d-flex justify-content-center my-4">
@@ -429,18 +436,18 @@ const FeedPostCard = ({
                     >
                       {/* {description}{" "} */}
                       {expanded
-                      ? description
-                      : description.split(" ").slice(0, 15)}
-                    {!expanded &&
-                      description.split(" ").length > 15 &&
-                      !expanded && (
-                        <span
-                          style={{ color: "blue", cursor: "pointer" }}
-                          onClick={toggleDescription}
-                        >
-                           ...Read more
-                        </span>
-                      )}
+                        ? description
+                        : description.split(" ").slice(0, 15)}
+                      {!expanded &&
+                        description.split(" ").length > 15 &&
+                        !expanded && (
+                          <span
+                            style={{ color: "blue", cursor: "pointer" }}
+                            onClick={toggleDescription}
+                          >
+                            ...Read more
+                          </span>
+                        )}
                       {documentUrl && (
                         <a href={documentUrl} className="mx-auto">
                           {documentName}
@@ -536,9 +543,8 @@ const FeedPostCard = ({
                   </div>
                   <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                     <span
-                      className={`repost_container rounded ${
-                        showRepostOptions ? "bg-light" : ""
-                      }`}
+                      className={`repost_container rounded ${showRepostOptions ? "bg-light" : ""
+                        }`}
                       ref={repostContainerRef}
                     >
                       <img
@@ -662,10 +668,10 @@ const FeedPostCard = ({
                         </section>
                       </div>
                       {comments
-                        .sort(
-                          (a, b) =>
-                            new Date(b.createdAt) - new Date(a.createdAt)
-                        )
+                        // .sort(
+                        //   (a, b) =>
+                        //     new Date(b.createdAt) - new Date(a.createdAt)
+                        // )
                         .map((val) => (
                           <section
                             className="comment_messages my-2"
@@ -704,7 +710,7 @@ const FeedPostCard = ({
                             <hr className="p-0 m-0" />
                             <div className="d-flex  justify-content-between px-2">
                               <div className="p-2">
-                                {val?.likes.includes(loggedInUser._id) ? (
+                                {val?.likes?.includes(loggedInUser._id) ? (
                                   <img
                                     src={fireIcon}
                                     width={18}
@@ -727,10 +733,10 @@ const FeedPostCard = ({
                                   className=" mx-3 text-secondary"
                                   style={{ fontSize: "14px" }}
                                 >
-                                  {val?.likes.length} likes
+                                  {val?.likes?.length} likes
                                 </span>
                               </div>
-                              {userId === loggedInUser?._id && (
+                              {val?.user._id === loggedInUser?._id && (
                                 <img
                                   src={deleteIcon}
                                   alt="Delete"
@@ -779,7 +785,7 @@ const FeedPostCard = ({
             <button
               className="btn btn-sm btn-light  top-0 end-0 m-2"
               onClick={() => setShowImgagePopup(false)}
-              style={{width:"30px"}}
+              style={{ width: "30px" }}
             >
               X
             </button>
@@ -807,9 +813,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Harassment" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio1"
               >
                 Harassment
@@ -826,9 +831,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Spam" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio2"
               >
                 Spam
@@ -845,9 +849,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Fraud or scam" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio3"
               >
                 Fraud or scam
@@ -864,9 +867,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
-                  reportReason === "Hateful Speech" && "bg-secondary text-white"
-                }`}
+                class={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
+                  }`}
                 for="inlineRadio4"
               >
                 Hateful Speech

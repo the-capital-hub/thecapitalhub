@@ -115,8 +115,15 @@ export const allPostsData = async (page, perPage) => {
 export const singlePostData = async (_id) => {
   try {
     const post = await PostModel.findOne({ _id })
-      .populate("resharedPostId user")
+      .populate("user")
       .exec();
+    const resharedPost = await PostModel.findById(post.resharedPostId)
+      .populate({
+        path: "user",
+        select: "firstName lastName profilePicture designation",
+      })
+      .exec();
+    post.resharedPostId = resharedPost;
     return post;
   } catch (error) {
     console.error(error);
@@ -286,11 +293,17 @@ export const getComments = async (postId) => {
         message: "Post not found",
       };
     }
-    const comments = post.comments;
+    const sortedComments = post.comments.sort((a, b) => {
+      if (b.likes.length !== a.likes.length) {
+        return b.likes.length - a.likes.length;
+      } else {
+        return b.createdAt - a.createdAt;
+      }
+    });
     return {
       status: 200,
       message: "Comments retrieved successfully",
-      data: comments,
+      data: sortedComments,
     };
   } catch (error) {
     console.error(error);
