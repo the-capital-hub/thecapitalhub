@@ -55,7 +55,7 @@ function Home() {
     getAllPostsAPI(page)
       .then(({ data }) => {
         console.log(data);
-        if (data.length === 0) {
+        if (data?.length === 0) {
         } else {
           setAllPosts([...allPosts, ...data]);
           setPage(page + 1);
