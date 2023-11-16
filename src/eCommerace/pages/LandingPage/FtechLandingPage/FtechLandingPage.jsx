@@ -59,7 +59,7 @@ financial ease and security"
       {/* Features */}
       <FtechFeatures />
 
-      <section className="overflow-hidden">
+      <section className="">
         <div className="how-we-help container mx-auto">
           <h2 className="blue">Here's how we build your project</h2>
         </div>
@@ -84,7 +84,7 @@ financial ease and security"
       <OurClients className="bg-dark" />
 
       {/* Contact form */}
-      <div className="container row m-0">
+      <div className="container row m-0 overflow-hidden">
         <ContactForm className="col-12 col-md-8 mx-auto" page={"fintech"} />
       </div>
     </section>

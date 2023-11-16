@@ -12,7 +12,7 @@ export default function ConsultingServices() {
 
   return (
     <div
-      className={`mx-auto help-cards flex-column flex-md-row flex-md-wrap py-5 px-5 ${
+      className={`mx-auto help-cards flex-column flex-md-row flex-md-wrap py-5 px-md-5 ${
         inView ? "" : ""
       } overflow-hidden`}
       ref={ref}

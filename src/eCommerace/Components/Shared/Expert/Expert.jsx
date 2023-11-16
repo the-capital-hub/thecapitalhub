@@ -16,7 +16,7 @@ export default function Expert() {
     <section
       className={`container mx-auto contact-our-team row justify-content-around bg-black rounded-4 p-2 p-md-5 py-3 align-items-center ${
         inView ? "" : ""
-      }`}
+      } overflow-hidden`}
       ref={ref}
     >
       <div className={`col-8 col-md-4 ${inView ? "" : ""}`}>

@@ -24,7 +24,9 @@ export default function OurClients({ className }) {
 
   return (
     <div
-      className={`our_clients_wrapper w-100 ${className} ${inView ? "" : ""} `}
+      className={`our_clients_wrapper w-100 ${className} ${
+        inView ? "" : ""
+      } overflow-hidden `}
       ref={ref}
     >
       <div className="our_clients_container container mx-auto px-5 py-5">
