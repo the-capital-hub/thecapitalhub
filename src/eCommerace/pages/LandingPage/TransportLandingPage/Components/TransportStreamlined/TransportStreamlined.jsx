@@ -1,13 +1,13 @@
 import React from "react";
 import { useInView } from "react-intersection-observer";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
-export default function TransportStreamlined({ scrollToContact, image }) {
+export default function TransportStreamlined({ image }) {
   // Intersection Observer
   const { inView, ref } = useInView({
     triggerOnce: true,
     fallbackInView: true,
-    threshold: 0.25,
+    threshold: 0.5,
     // rootMargin: "-5%",
   });
 
@@ -18,12 +18,16 @@ export default function TransportStreamlined({ scrollToContact, image }) {
       } overflow-hidden `}
       ref={ref}
     >
-      <div className={`left-section slide-down ${inView ? "slide-reset" : ""}`}>
+      <div
+        className={`left-section slide-down ${
+          inView ? "slide-reset opacity-1" : "opacity-0"
+        }`}
+      >
         <img src={image} alt="international" />
       </div>
       <div
         className={`right-section d-flex flex-column gap-3 slide-right ${
-          inView ? "slide-reset" : ""
+          inView ? "slide-reset opacity-1" : "opacity-0"
         }`}
       >
         <h1>Streamlined Logistics Management</h1>
@@ -32,9 +36,9 @@ export default function TransportStreamlined({ scrollToContact, image }) {
           platform streamlines communication, tracking, and management for
           greater efficiency and control over all your logistics needs
         </p>
-        <Link to="" onClick={scrollToContact} className="LinkBtn">
+        <a href="#contact-us" className="LinkBtn">
           Contact Our Team
-        </Link>
+        </a>
       </div>
     </div>
   );
