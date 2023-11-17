@@ -19,11 +19,13 @@ import {
 import { SearchIcon } from "../SvgIcons";
 import NotificationsPopup from "../../Investor/InvestorNavbar/NotificationsPopup/NotificationsPopup";
 import { useRef } from "react";
+import { selectNotificationtModal } from "../../../Store/features/design/designSlice";
 
 const NavBar = (props) => {
   // Fetch global states
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const pageTitle = useSelector((state) => state.design.pageTitle);
+  const isNotificationModalOpen = useSelector(selectNotificationtModal);
 
   const [searchSuggestions, setSearchSuggestions] = useState(false);
   const [searchInput, setSearchInput] = useState("");
@@ -359,29 +361,37 @@ const NavBar = (props) => {
                 className={`notification-container icon-wrapper`}
                 ref={notificationPopup}
               >
-                {!toggleNotificationPopup ? (
-                  <img
-                    src={NotificationIcon}
-                    alt="notification"
-                    onClick={() => setToggleNotificationPopup((prev) => !prev)}
-                  />
+                {isNotificationModalOpen || toggleNotificationPopup ? (
+                  <>
+                    <img
+                      src={YellowNotificationIcon}
+                      alt="notification"
+                      width={50}
+                      onClick={() =>
+                        setToggleNotificationPopup((prev) => !prev)
+                      }
+                    />
+                    <NotificationsPopup
+                      setNotificationCount={setNotificationCount}
+                      toggleVisibility={setToggleNotificationPopup}
+                      notificationCount={notificationCount}
+                    />
+                  </>
                 ) : (
-                  <img
-                    src={YellowNotificationIcon}
-                    alt="notification"
-                    width={50}
-                    onClick={() => setToggleNotificationPopup((prev) => !prev)}
-                  />
-                )}
-                {!toggleNotificationPopup && notificationCount > 0 && (
-                  <div className="notification-count">{notificationCount}</div>
-                )}
-                {toggleNotificationPopup && (
-                  <NotificationsPopup
-                    setNotificationCount={setNotificationCount}
-                    toggleVisibility={setToggleNotificationPopup}
-                    notificationCount={notificationCount}
-                  />
+                  <>
+                    <img
+                      src={NotificationIcon}
+                      alt="notification"
+                      onClick={() =>
+                        setToggleNotificationPopup((prev) => !prev)
+                      }
+                    />
+                    {!toggleNotificationPopup && notificationCount > 0 && (
+                      <div className="notification-count">
+                        {notificationCount}
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
               {/* </Link> */}

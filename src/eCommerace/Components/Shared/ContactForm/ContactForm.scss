@@ -2,6 +2,19 @@
   margin-inline: auto;
   max-width: 1200px;
 
+  h1 {
+    font-size: 36px !important;
+    font-weight: 800;
+
+    @media (min-width: 768px) {
+      font-size: 40px !important;
+    }
+
+    @media (min-width: 992px) {
+      font-size: 50px !important;
+    }
+  }
+
   .form_heading {
     font-size: 2.75rem;
     font-weight: 600;

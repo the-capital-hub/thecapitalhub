@@ -1,4 +1,10 @@
-import { Outlet, Navigate, useLocation, NavLink, useNavigate } from "react-router-dom";
+import {
+  Outlet,
+  Navigate,
+  useLocation,
+  NavLink,
+  useNavigate,
+} from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./ProtectedInvestorRoutes.scss";
 import LogOutPopUp from "../../../components/PopUp/LogOutPopUp/LogOutPopUp";
@@ -15,8 +21,10 @@ import { HiOutlineHome } from "react-icons/hi2";
 import { BsGraphUpArrow } from "react-icons/bs";
 import { FiUsers } from "react-icons/fi";
 import { CiBellOn, CiSquarePlus } from "react-icons/ci";
-import { toggleinvestorCreatePostModal } from "../../../Store/features/design/designSlice";
-
+import {
+  toggleNotificationModal,
+  toggleinvestorCreatePostModal,
+} from "../../../Store/features/design/designSlice";
 
 function ProtectedInvestorRoutes({ children, ...props }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -48,6 +56,11 @@ function ProtectedInvestorRoutes({ children, ...props }) {
       navigate("/investor/home");
       dispatch(toggleinvestorCreatePostModal());
     };
+
+    // Handle toggle notification
+    const handleToggleNotificationModal = () => {
+      dispatch(toggleNotificationModal());
+    };
     return (
       <>
         <InvestorNavbar
@@ -56,8 +69,9 @@ function ProtectedInvestorRoutes({ children, ...props }) {
         />
 
         <div
-          className={`container-fluid p-0 newInvestor_container ${sidebarCollapsed ? "sidebar-collapsed" : ""
-            }`}
+          className={`container-fluid p-0 newInvestor_container ${
+            sidebarCollapsed ? "sidebar-collapsed" : ""
+          }`}
         >
           <div className="sidebar">
             <InvestorSidebar
@@ -85,7 +99,10 @@ function ProtectedInvestorRoutes({ children, ...props }) {
             <span style={{ fontSize: "10px" }}>Connection</span>
           </div>
 
-          <div className="d-flex flex-column align-items-center mx-3" onClick={handleToggleCreatePostModal}>
+          <div
+            className="d-flex flex-column align-items-center mx-3"
+            onClick={handleToggleCreatePostModal}
+          >
             <CiSquarePlus size={"25px"} />
             <span style={{ fontSize: "10px" }}>Post</span>
           </div>
@@ -97,15 +114,13 @@ function ProtectedInvestorRoutes({ children, ...props }) {
             <span style={{ fontSize: "10px" }}>MyStartups</span>
           </div>
 
-
-          <div className="d-flex flex-column align-items-center mx-3"
-          //  onClick={handleToggleNotificationModal}
+          <div
+            className="d-flex flex-column align-items-center mx-3"
+            onClick={handleToggleNotificationModal}
           >
             <CiBellOn size={"25px"} />
             <span style={{ fontSize: "10px" }}>Notification</span>
-            
           </div>
-
         </div>
 
         <LogOutPopUp />

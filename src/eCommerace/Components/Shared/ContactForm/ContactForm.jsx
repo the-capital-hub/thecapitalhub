@@ -87,7 +87,7 @@ export default function ContactForm({ className, page }) {
           onClose={() => setFormSubmitted(!formSubmitted)}
         />
       )}
-      <h2 className="form_heading text-capitalize mb-3">Let's talk!</h2>
+      <h1 className="form_heading text-capitalize mb-3">Let's talk!</h1>
       <form onSubmit={handleSubmit} className="contact_form">
         {/* Name */}
         <div className="form_div">

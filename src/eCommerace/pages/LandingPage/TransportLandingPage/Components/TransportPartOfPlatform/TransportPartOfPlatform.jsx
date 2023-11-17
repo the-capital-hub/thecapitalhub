@@ -1,7 +1,7 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 import tchLogo from "../../../../../../Images/RoundLogo.png";
 import { useInView } from "react-intersection-observer";
+import { Link } from "react-router-dom";
 
 export default function TransportPartOfPlatform({ image }) {
   const { inView, ref } = useInView({
@@ -24,11 +24,13 @@ export default function TransportPartOfPlatform({ image }) {
         }`}
       >
         <h1>Be part of the Capital Hub Platform</h1>
-        <img
-          src={tchLogo}
-          alt="Capital Hub"
-          className="d-md-none mx-auto capital-hub-logo"
-        />
+        <Link to={"/"} className="mx-auto">
+          <img
+            src={tchLogo}
+            alt="Capital Hub"
+            className="d-md-none mx-auto capital-hub-logo"
+          />
+        </Link>
         <p>
           {/* Working with Capital Hub gives you access to a community of 30+
         startup founders and 80+ angel investors to boost your network

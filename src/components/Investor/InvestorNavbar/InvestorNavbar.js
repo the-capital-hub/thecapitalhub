@@ -365,7 +365,7 @@ const InvestorNavbar = (props) => {
                 to="/notifications"
                 className="rounded-circle notification-icon"
               > */}
-            
+
               {/* Notification */}
               <div
                 className={`notification-container icon-wrapper`}
@@ -381,25 +381,27 @@ const InvestorNavbar = (props) => {
                         setToggleNotificationPopup((prev) => !prev)
                       }
                     />
+                    <NotificationsPopup
+                      toggleVisibility={setToggleNotificationPopup}
+                      setNotificationCount={setNotificationCount}
+                      notificationCount={notificationCount}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <img
+                      src={NotificationIcon}
+                      alt="notification"
+                      onClick={() =>
+                        setToggleNotificationPopup((prev) => !prev)
+                      }
+                    />
                     {!toggleNotificationPopup && notificationCount > 0 && (
                       <div className="notification-count">
                         {notificationCount}
                       </div>
                     )}
-                    {(toggleNotificationPopup || isNotificationModalOpen) && (
-                      <NotificationsPopup
-                        toggleVisibility={setToggleNotificationPopup}
-                        setNotificationCount={setNotificationCount}
-                        notificationCount={notificationCount}
-                      />
-                    )}
                   </>
-                ) : (
-                  <img
-                    src={NotificationIcon}
-                    alt="notification"
-                    onClick={() => setToggleNotificationPopup((prev) => !prev)}
-                  />
                 )}
               </div>
 
