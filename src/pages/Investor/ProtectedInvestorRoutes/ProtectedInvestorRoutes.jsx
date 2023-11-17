@@ -107,10 +107,7 @@ function ProtectedInvestorRoutes({ children, ...props }) {
             <span style={{ fontSize: "10px" }}>Post</span>
           </div>
 
-          <div
-            className="d-flex flex-column align-items-center mx-3"
-            onClick={handleToggleNotificationModal}
-          >
+          <div className="d-flex flex-column align-items-center mx-3">
             <NavLink to="/investor/mystartups">
               <BsGraphUpArrow size={"20px"} />
             </NavLink>
@@ -119,7 +116,7 @@ function ProtectedInvestorRoutes({ children, ...props }) {
 
           <div
             className="d-flex flex-column align-items-center mx-3"
-            //  onClick={handleToggleNotificationModal}
+            onClick={handleToggleNotificationModal}
           >
             <CiBellOn size={"25px"} />
             <span style={{ fontSize: "10px" }}>Notification</span>

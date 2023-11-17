@@ -371,19 +371,11 @@ const NavBar = (props) => {
                         setToggleNotificationPopup((prev) => !prev)
                       }
                     />
-
-                    {!toggleNotificationPopup && notificationCount > 0 && (
-                      <div className="notification-count">
-                        {notificationCount}
-                      </div>
-                    )}
-                    {(toggleNotificationPopup || isNotificationModalOpen) && (
-                      <NotificationsPopup
-                        setNotificationCount={setNotificationCount}
-                        toggleVisibility={setToggleNotificationPopup}
-                        notificationCount={notificationCount}
-                      />
-                    )}
+                    <NotificationsPopup
+                      setNotificationCount={setNotificationCount}
+                      toggleVisibility={setToggleNotificationPopup}
+                      notificationCount={notificationCount}
+                    />
                   </>
                 ) : (
                   <>
