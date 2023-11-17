@@ -85,21 +85,45 @@ function ProtectedInvestorRoutes({ children, ...props }) {
           </div>
         </div>
 
-        <div className="mobile-bottom-toolbar container p-2 shadow d-flex gap-3 justify-content-center border-top  px-3 d-md-none">
-          <NavLink to="/investor/home">
-            <HiOutlineHome size={"22px"} />
-          </NavLink>{" "}
-          |
-          <NavLink to="/investor/mystartups">
-            <BsGraphUpArrow size={"20px"} />
-          </NavLink>{" "}
-          |
-          <CiSquarePlus size={"25px"} onClick={handleToggleCreatePostModal} />
-          |
-          <CiBellOn size={"25px"} onClick={handleToggleNotificationModal} />|
-          <NavLink to="/investor/connection">
-            <FiUsers size={"22px"} />
-          </NavLink>{" "}
+        <div className="mobile-bottom-toolbar container p-2 shadow d-flex gap-1 justify-content-center border-top  px-3 d-md-none">
+          <div className="d-flex flex-column align-items-center mx-3">
+            <NavLink to="/investor/home">
+              <HiOutlineHome size={"22px"} />
+            </NavLink>
+            <span style={{ fontSize: "10px" }}>Home</span>
+          </div>
+          <div className="d-flex flex-column align-items-center mx-3">
+            <NavLink to="/investor/connection">
+              <FiUsers size={"22px"} />
+            </NavLink>
+            <span style={{ fontSize: "10px" }}>Connection</span>
+          </div>
+
+          <div
+            className="d-flex flex-column align-items-center mx-3"
+            onClick={handleToggleCreatePostModal}
+          >
+            <CiSquarePlus size={"25px"} />
+            <span style={{ fontSize: "10px" }}>Post</span>
+          </div>
+
+          <div
+            className="d-flex flex-column align-items-center mx-3"
+            onClick={handleToggleNotificationModal}
+          >
+            <NavLink to="/investor/mystartups">
+              <BsGraphUpArrow size={"20px"} />
+            </NavLink>
+            <span style={{ fontSize: "10px" }}>MyStartups</span>
+          </div>
+
+          <div
+            className="d-flex flex-column align-items-center mx-3"
+            //  onClick={handleToggleNotificationModal}
+          >
+            <CiBellOn size={"25px"} />
+            <span style={{ fontSize: "10px" }}>Notification</span>
+          </div>
         </div>
 
         <LogOutPopUp />

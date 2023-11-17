@@ -9,8 +9,9 @@ import {
 import { getBase64 } from "../../../../utils/getBase64";
 import IconEdit from "../../SvgIcons/IconEdit";
 import IconDeleteFill from "../../SvgIcons/IconDeleteFill";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
+import { setUserCompany } from "../../../../Store/features/user/userSlice";
 
 export default function AddTeamMemberModal({
   companyData,
@@ -30,6 +31,7 @@ export default function AddTeamMemberModal({
   const [isEditing, setIsEditing] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   // Fetch current core team members here
   // const { team: currentTeam } = companyData;
@@ -110,12 +112,13 @@ export default function AddTeamMemberModal({
             team: [...editedTeam],
           });
           console.log(response);
+          dispatch(setUserCompany(response.data));
         } else {
           const response = await postStartUpData({
             founderId: companyData.founderId,
             team: [...editedTeam],
           });
-          console.log(response);
+          dispatch(setUserCompany(response.data));
         }
       } else {
         // If not editing then Adding new member
@@ -128,13 +131,15 @@ export default function AddTeamMemberModal({
             founderId: companyData.founderId,
             team: [...companyData.team, updatedTeamMember],
           });
-          console.log(response);
+          dispatch(setUserCompany(response.data));
         } else {
           const response = await postStartUpData({
             founderId: companyData.founderId,
             team: [...companyData.team, updatedTeamMember],
           });
-          console.log(response);
+          console.log(response.data);
+          dispatch(setUserCompany(response.data));
+
         }
       }
 
@@ -182,6 +187,7 @@ export default function AddTeamMemberModal({
           });
 
           console.log(response);
+          dispatch(setUserCompany(response.data));
         } else {
           const response = await postStartUpData({
             founderId: companyData.founderId,
@@ -189,6 +195,7 @@ export default function AddTeamMemberModal({
           });
 
           console.log(response);
+          dispatch(setUserCompany(response.data));
         }
 
         setMember(initialMemberState);
