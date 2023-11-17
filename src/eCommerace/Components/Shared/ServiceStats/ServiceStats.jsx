@@ -22,7 +22,7 @@ export default function ServiceStats() {
               inView ? "slide-reset" : ""
             }`}
           >
-            20+
+            <span className="animate_count animate_count_up-20"></span>+
           </h4>
           <p
             className={`text-capitalize short-slide-up ${
@@ -39,7 +39,7 @@ export default function ServiceStats() {
               inView ? "slide-reset" : ""
             }`}
           >
-            40+
+            <span className="animate_count animate_count_up-40"></span>+
           </h4>
           <p
             className={`text-capitalize short-slide-up ${
@@ -56,7 +56,7 @@ export default function ServiceStats() {
               inView ? "slide-reset" : ""
             }`}
           >
-            #1
+            #<span className="animate_count animate_count_down-1"></span>
           </h4>
           <p
             className={`text-capitalize short-slide-up ${
@@ -73,7 +73,7 @@ export default function ServiceStats() {
               inView ? "slide-reset" : ""
             }`}
           >
-            10X
+            <span className="animate_count animate_count_up-10"></span>X
           </h4>
           <p
             className={`text-capitalize short-slide-up ${

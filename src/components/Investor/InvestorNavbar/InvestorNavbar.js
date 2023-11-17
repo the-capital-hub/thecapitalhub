@@ -72,14 +72,11 @@ const InvestorNavbar = (props) => {
     setLoading(false);
   };
 
-  
-  
   useEffect(() => {
-    setToggleNotificationPopup(true); 
-    console.log(isNotificationModalOpen)  }, [isNotificationModalOpen]);
+    setToggleNotificationPopup(true);
+    console.log(isNotificationModalOpen);
+  }, [isNotificationModalOpen]);
 
-  
-  
   useEffect(() => {
     function handleClickOutside(event) {
       if (
