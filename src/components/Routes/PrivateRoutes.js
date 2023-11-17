@@ -27,8 +27,8 @@ function PrivateRoute({ children, ...props }) {
     navigate("/home");
     dispatch(toggleCreatePostModal());
   };
-  
-  
+
+
   const handleToggleNotificationModal = () => {
     dispatch(toggleNotificationModal());
   };
@@ -66,9 +66,8 @@ function PrivateRoute({ children, ...props }) {
         />
 
         <div
-          className={`container-fluid p-0 investor_home_container position-relative ${
-            sidebarCollapsed ? "sidebar-collapsed" : ""
-          }`}
+          className={`container-fluid p-0 investor_home_container position-relative ${sidebarCollapsed ? "sidebar-collapsed" : ""
+            }`}
         >
           <LogOutPopUp />
 
@@ -83,22 +82,40 @@ function PrivateRoute({ children, ...props }) {
             <Outlet />
           </div>
 
-          <div className="mobile-bottom-toolbar container p-2 shadow d-flex gap-3 justify-content-center border-top  px-3 d-md-none">
-            <NavLink to="/home">
-              <HiOutlineHome size={"22px"} />
-            </NavLink>{" "}
-            |
-            <NavLink to="/onelink/edit">
-              <BsLink45Deg size={"25px"} />
-            </NavLink>{" "}
-            |
-              <CiSquarePlus size={"25px"} onClick={handleToggleCreatePostModal} />
-            |
-            <CiBellOn size={"25px"}  onClick={handleToggleNotificationModal}/>|
-            <NavLink to="/connection">
-              <FiUsers size={"22px"} />
-            </NavLink>{" "}
+          <div className="mobile-bottom-toolbar container p-2 shadow d-flex gap-1 justify-content-center border-top  px-3 d-md-none">
+            <div className="d-flex flex-column align-items-center mx-3">
+              <NavLink to="/home">
+                <HiOutlineHome size={"22px"} />
+              </NavLink>
+              <span style={{ fontSize: "10px" }}>Home</span>
+            </div>
+            <div className="d-flex flex-column align-items-center mx-3">
+              <NavLink to="/connection">
+                <FiUsers size={"22px"} />
+              </NavLink>
+              <span style={{ fontSize: "10px" }}>Connection</span>
+            </div>
+
+
+            <div className="d-flex flex-column align-items-center mx-3" onClick={handleToggleCreatePostModal}>
+              <CiSquarePlus size={"25px"} />
+              <span style={{ fontSize: "10px" }}>Post</span>
+            </div>
+
+            <div className="d-flex flex-column align-items-center mx-3">
+              <NavLink to="/onelink/edit">
+                <BsLink45Deg size={"25px"} />
+              </NavLink>
+              <span style={{ fontSize: "10px" }}>OneLink</span>
+            </div>
+
+            <div className="d-flex flex-column align-items-center mx-3" onClick={handleToggleNotificationModal}>
+              <CiBellOn size={"25px"} />
+              <span style={{ fontSize: "10px" }}>Notification</span>
+            </div>
+
           </div>
+
 
           <div className="modals">
             {/* Modal for creating new Community */}
