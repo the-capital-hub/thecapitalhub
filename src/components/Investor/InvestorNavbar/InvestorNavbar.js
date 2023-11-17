@@ -72,14 +72,6 @@ const InvestorNavbar = (props) => {
     setLoading(false);
   };
 
-  
-  
-  useEffect(() => {
-    setToggleNotificationPopup(true); 
-    console.log(isNotificationModalOpen)  }, [isNotificationModalOpen]);
-
-  
-  
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -373,36 +365,44 @@ const InvestorNavbar = (props) => {
                 to="/notifications"
                 className="rounded-circle notification-icon"
               > */}
+            
               {/* Notification */}
               <div
                 className={`notification-container icon-wrapper`}
                 ref={notificationPopup}
               >
-                {!toggleNotificationPopup ? (
+                {isNotificationModalOpen || toggleNotificationPopup ? (
+                  <>
+                    <img
+                      src={OrangeNotificationIcon}
+                      alt="notification"
+                      width={50}
+                      onClick={() =>
+                        setToggleNotificationPopup((prev) => !prev)
+                      }
+                    />
+                    {!toggleNotificationPopup && notificationCount > 0 && (
+                      <div className="notification-count">
+                        {notificationCount}
+                      </div>
+                    )}
+                    {(toggleNotificationPopup || isNotificationModalOpen) && (
+                      <NotificationsPopup
+                        toggleVisibility={setToggleNotificationPopup}
+                        setNotificationCount={setNotificationCount}
+                        notificationCount={notificationCount}
+                      />
+                    )}
+                  </>
+                ) : (
                   <img
                     src={NotificationIcon}
                     alt="notification"
                     onClick={() => setToggleNotificationPopup((prev) => !prev)}
                   />
-                ) : (
-                  <img
-                    src={OrangeNotificationIcon}
-                    alt="notification"
-                    width={50}
-                    onClick={() => setToggleNotificationPopup((prev) => !prev)}
-                  />
-                )}
-                {!toggleNotificationPopup && notificationCount > 0 && (
-                  <div className="notification-count">{notificationCount}</div>
-                )}
-                {toggleNotificationPopup && (
-                  <NotificationsPopup
-                    toggleVisibility={setToggleNotificationPopup}
-                    setNotificationCount={setNotificationCount}
-                    notificationCount={notificationCount}
-                  />
                 )}
               </div>
+
               {/* </Link> */}
               <Link to="/chats" className="rounded-circle message-icon">
                 <div className="icon-wrapper">
