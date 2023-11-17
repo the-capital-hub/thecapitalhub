@@ -25,7 +25,10 @@ export default function TransportHero({ image }) {
           }`}
         >
           {/* <h6>#1 Logistic Platform</h6> */}
-          <h1> Build your logistics application with Capital HUB!</h1>
+          <h1 className="">
+            {" "}
+            Build your logistics application with Capital HUB!
+          </h1>
           <p>
             {/* Build your business as Capital HUB builds your application. Enable
         doorstep pickups and global deliveries and let your worries take a

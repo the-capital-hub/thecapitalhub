@@ -18,7 +18,10 @@ export default function ServiceStats() {
       >
         <div className={`stats_div ${inView ? "" : ""}`}>
           <h4 className={`text-captalize ${inView ? "slide-reset" : ""}`}>
-            <span className="animate_count animate_count_up-20"></span>+
+            <span
+              className={`${inView ? "animate_count animate_count_up-20" : ""}`}
+            ></span>
+            +
           </h4>
           <p className={`text-capitalize ${inView ? "short-slide-reset" : ""}`}>
             fundraising done
@@ -27,7 +30,10 @@ export default function ServiceStats() {
 
         <div className={`stats_div ${inView ? "" : ""}`}>
           <h4 className={`text-captalize ${inView ? "slide-reset" : ""}`}>
-            <span className="animate_count animate_count_up-40"></span>+
+            <span
+              className={`${inView ? "animate_count animate_count_up-40" : ""}`}
+            ></span>
+            +
           </h4>
           <p className={`text-capitalize ${inView ? "short-slide-reset" : ""}`}>
             Development Clients
@@ -36,7 +42,12 @@ export default function ServiceStats() {
 
         <div className={`stats_div ${inView ? "" : ""}`}>
           <h4 className={`text-captalize ${inView ? "slide-reset" : ""}`}>
-            #<span className="animate_count animate_count_down-1"></span>
+            #
+            <span
+              className={`${
+                inView ? "animate_count animate_count_down-1" : ""
+              }`}
+            ></span>
           </h4>
           <p className={`text-capitalize ${inView ? "short-slide-reset" : ""}`}>
             Lowest Market Rate
@@ -45,7 +56,10 @@ export default function ServiceStats() {
 
         <div className={`stats_div ${inView ? "" : ""}`}>
           <h4 className={`text-captalize ${inView ? "slide-reset" : ""}`}>
-            <span className="animate_count animate_count_up-10"></span>X
+            <span
+              className={`${inView ? "animate_count animate_count_up-10" : ""}`}
+            ></span>
+            X
           </h4>
           <p className={`text-capitalize ${inView ? "short-slide-reset" : ""}`}>
             Faster Delivery

@@ -18,7 +18,7 @@ export default function FtechHero() {
         {({ inView, ref }) => (
           <div className="" ref={ref}>
             <h2
-              className={`short-slide-left ${
+              className={`text-center short-slide-left ${
                 inView ? "short-slide-reset" : ""
               }`}
             >
