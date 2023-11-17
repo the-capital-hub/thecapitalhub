@@ -142,6 +142,19 @@ button {
   animation: growIn-short 1s linear forwards;
 }
 
+// Delay classes
+.delay-0 {
+  transition-delay: calc(0 * 250ms);
+}
+
+.delay-1 {
+  transition-delay: calc(1 * 250ms);
+}
+
+.delay-2 {
+  transition-delay: calc(2 * 250ms);
+}
+
 // Keyframes
 // Shake keyframe
 @keyframes shake {
