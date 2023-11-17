@@ -123,11 +123,11 @@ const Connection = () => {
         <SmallProfileCard text={"Connections"} />
         <section className="content_section mt-4">
           <div className="row">
-            <div className="col-12 mt-2 box  p-4">
+            <div className="col-12 mt-2 box p-3 p-md-4 ">
               <h4>Manage Connections</h4>
               <nav className="connection_nav">
                 <button
-                  className={`connection_nav_link ${
+                  className={`connection_nav_link fs-6 ${
                     selectedTab === "received" ? "active" : ""
                   }`}
                   onClick={() => handleTabChange("received")}
@@ -135,7 +135,7 @@ const Connection = () => {
                   Received
                 </button>
                 <button
-                  className={`connection_nav_link ${
+                  className={`connection_nav_link fs-6  ${
                     selectedTab === "sent" ? "active" : ""
                   }`}
                   onClick={() => handleTabChange("sent")}
@@ -143,7 +143,7 @@ const Connection = () => {
                   Sent
                 </button>
                 <button
-                  className={`connection_nav_link ${
+                  className={`connection_nav_link fs-6  ${
                     selectedTab === "accepted" ? "active" : ""
                   }`}
                   onClick={() => handleTabChange("accepted")}
