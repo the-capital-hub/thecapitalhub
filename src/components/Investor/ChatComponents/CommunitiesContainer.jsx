@@ -28,7 +28,7 @@ export default function CommunitiesContainer({
   useEffect(() => {
     getAllCommunity(loggedInUser?._id).then((res) => {
       setGetCommunity(res);
-    });
+    }).catch((error) => console.error("Error", error));
   }, [chatProfile, chatId, sendMessage, recieveMessage]);
 
 

@@ -134,7 +134,7 @@ const Footer = ({ className }) => {
             <span aria-label="Love" style={{ color: "#f43f5e" }}>
               &#x1F9E1;
             </span>{" "}
-            in India by Capital Hub
+            in India by <Link to="/">Capital Hub</Link>
           </a>
         </div>
       </div>

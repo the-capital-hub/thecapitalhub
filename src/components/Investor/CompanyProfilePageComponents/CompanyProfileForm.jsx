@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
 // import { Response } from "aws-sdk";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
+import { setUserCompany } from "../../../Store/features/user/userSlice";
 
 const LOCATIONS = [
   "Select Location",
@@ -161,8 +162,8 @@ export default function CompanyProfileForm({
           ...loggedInUser,
           investor: response.data._id,
         };
-        console.log("from form", user);
         dispatch(loginSuccess(user));
+        dispatch(setUserCompany(response.data));
         // Show success popup
         setLoading(false);
         handleShowPopup({ success: true });
@@ -171,7 +172,7 @@ export default function CompanyProfileForm({
           ...formData,
           founderId: companyData.founderId || loggedInUser._id,
         });
-        console.log(response);
+        dispatch(setUserCompany(response.data));
         // Show success popup
         setLoading(false);
         handleShowPopup({ success: true });
@@ -258,18 +259,16 @@ export default function CompanyProfileForm({
                 {formData.location}
               </button>
               <ul
-                className={`dropdown-menu m-0 p-0 ${
-                  investor ? "investor" : "startup"
-                }`}
+                className={`dropdown-menu m-0 p-0 ${investor ? "investor" : "startup"
+                  }`}
               >
                 {LOCATIONS.map((location, index) => {
                   return (
                     <li key={`${location}${index}`} className="m-0 p-0">
                       <button
                         type="button"
-                        className={`btn btn-base list-btn w-100 text-start ps-3 ${
-                          investor ? "investor" : "startup"
-                        } ${location === formData.location ? "selected" : ""}`}
+                        className={`btn btn-base list-btn w-100 text-start ps-3 ${investor ? "investor" : "startup"
+                          } ${location === formData.location ? "selected" : ""}`}
                         onClick={(e) => handleLocationSelect(e, location)}
                       >
                         {location}
@@ -315,18 +314,16 @@ export default function CompanyProfileForm({
               {formData.sector}
             </button>
             <ul
-              className={`dropdown-menu m-0 p-0 ${
-                investor ? "investor" : "startup"
-              }`}
+              className={`dropdown-menu m-0 p-0 ${investor ? "investor" : "startup"
+                }`}
             >
               {SECTORS.map((sector, index) => {
                 return (
                   <li key={`${sector}${index}`} className="m-0 p-0">
                     <button
                       type="button"
-                      className={`btn btn-base list-btn text-start ps-3 text-break ${
-                        investor ? "investor" : "startup"
-                      } ${sector === formData.sector ? "selected" : ""}`}
+                      className={`btn btn-base list-btn text-start ps-3 text-break ${investor ? "investor" : "startup"
+                        } ${sector === formData.sector ? "selected" : ""}`}
                       onClick={(e) => handleSectorSelect(e, sector)}
                     >
                       <p className="m-0">{sector}</p>
@@ -448,9 +445,8 @@ export default function CompanyProfileForm({
 
         <button
           type="submit"
-          className={`align-self-end btn-base ${
-            investor ? "investor" : "startup"
-          }`}
+          className={`align-self-end btn-base ${investor ? "investor" : "startup"
+            }`}
         >
           {loading ? (
             <SpinnerBS

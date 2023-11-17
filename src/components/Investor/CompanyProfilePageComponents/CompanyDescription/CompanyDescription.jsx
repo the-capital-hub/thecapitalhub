@@ -1,6 +1,6 @@
 import React from "react";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function CompanyDescription({
   companyData,
@@ -14,6 +14,7 @@ export default function CompanyDescription({
 }) {
   // fetch isInvestor
   const { isInvestor } = useSelector((state) => state.user.loggedInUser);
+  const dispatch = useDispatch();
 
   function handleResize(e) {
     e.target.style.height = "auto";

@@ -21,6 +21,7 @@ import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import CompanyDescription from "../../../components/Investor/CompanyProfilePageComponents/CompanyDescription/CompanyDescription";
 import AfterSuccessPopUp from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import ErrorPopUp from "../../../components/PopUp/ErrorPopUp/ErrorPopUp";
+import { setUserCompany } from "../../../Store/features/user/userSlice";
 
 export default function EditCompanyProfilePage() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -45,7 +46,7 @@ export default function EditCompanyProfilePage() {
           setColorCardData({
             last_round_investment: data.colorCard.last_round_investment,
             total_investment: data.colorCard.total_investment,
-            no_of_investors: data.colorCard.no_of_investors,
+            no_of_investers: data.colorCard.no_of_investers,
             fund_ask: data.colorCard.fund_ask,
             valuation: data.colorCard.valuation,
             raised_funds: data.colorCard.raised_funds,
@@ -100,6 +101,7 @@ export default function EditCompanyProfilePage() {
           ...prev,
           description: companyDescription,
         }));
+        dispatch(setUserCompany(response.data));
       }
     } catch (error) {
       console.log(error);

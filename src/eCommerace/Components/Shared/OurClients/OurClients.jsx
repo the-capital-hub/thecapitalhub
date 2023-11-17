@@ -35,7 +35,7 @@ export default function OurClients({ className }) {
             inView ? "slide-reset" : ""
           }`}
         >
-          <h4>Our Clients</h4>
+          <h1>Our Clients</h1>
           <p>We do game-changing work for game-changing companies.</p>
           {/* <Link to={"/contactus"} className="text-capitalize work_button"> */}
           <a
