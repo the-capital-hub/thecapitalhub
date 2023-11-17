@@ -1,6 +1,19 @@
 .our_clients_wrapper {
   background-color: var(--color-primary);
 
+  h1 {
+    font-size: 36px !important;
+    font-weight: 800;
+
+    @media (min-width: 768px) {
+      font-size: 40px !important;
+    }
+
+    @media (min-width: 992px) {
+      font-size: 50px !important;
+    }
+  }
+
   .our_clients_container {
     max-width: 1200px !important;
     display: grid;
@@ -43,6 +56,20 @@
         flex-direction: row;
         align-items: center;
         gap: 0.5em;
+        transition: 0.5s;
+
+        span {
+          transition: 0.5s;
+        }
+
+        &:hover {
+          box-shadow: inset 10em 0 0 0 var(--color-primary-text);
+
+          span {
+            color: var(--color-primary);
+            transform: translateY(-0.125em);
+          }
+        }
       }
     }
 

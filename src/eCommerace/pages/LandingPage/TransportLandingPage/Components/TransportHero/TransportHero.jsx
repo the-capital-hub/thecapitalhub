@@ -1,13 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 
-export default function TransportHero({ scrollToContact, image }) {
+export default function TransportHero({ image }) {
   // Intersection Observer
   const { inView, ref } = useInView({
     triggerOnce: true,
     fallbackInView: true,
-    threshold: 0.25,
+    threshold: 0.5,
     // rootMargin: "-5%",
   });
 
@@ -21,11 +21,14 @@ export default function TransportHero({ scrollToContact, image }) {
       <div className="inner-section d-flex flex-column justify-content-evenly flex-md-row">
         <div
           className={`left-section d-flex flex-column justify-content-center gap-4 slide-left ${
-            inView ? "slide-reset" : ""
+            inView ? "slide-reset opacity-1" : "opacity-0"
           }`}
         >
           {/* <h6>#1 Logistic Platform</h6> */}
-          <h1> Build your logistics application with Capital HUB!</h1>
+          <h1 className="">
+            {" "}
+            Build your logistics application with Capital HUB!
+          </h1>
           <p>
             {/* Build your business as Capital HUB builds your application. Enable
         doorstep pickups and global deliveries and let your worries take a
@@ -35,20 +38,26 @@ export default function TransportHero({ scrollToContact, image }) {
             and watch your worries fade away.
           </p>
           <div className="d-flex gap-3 mb-3">
-            <Link to="" onClick={scrollToContact} className="LinkBtn shadow-sm">
+            <a
+              href="#contact-us"
+              // onClick={scrollToContact}
+              className="LinkBtn shadow-sm"
+            >
               Say Hello
-            </Link>
-            <Link
-              to=""
-              onClick={scrollToContact}
+            </a>
+            <a
+              href="#contact-us"
+              // onClick={scrollToContact}
               className="LinkBtn LinkBtn-white shadow-sm"
             >
               Our Portfolio
-            </Link>
+            </a>
           </div>
         </div>
         <div
-          className={`right-section slide-up ${inView ? "slide-reset" : ""}`}
+          className={`right-section slide-up  ${
+            inView ? "slide-reset opacity-1" : "opacity-0"
+          }`}
         >
           <img src={image} alt="transport" />
         </div>

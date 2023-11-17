@@ -118,15 +118,21 @@ $secondary-color: #1b2430;
 
 .btn1 {
   background: #fd5901;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  // box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 50px;
   justify-content: center;
   align-items: center;
   padding: 10px 40px;
-  border: #fd5901;
+  border: 1px solid #fd5901;
   color: #fff;
   width: 210px;
   height: 60px;
+  transition: 0.5s ease;
+
+  &:hover {
+    box-shadow: inset 14em 0 0 0 #fff;
+    color: #fd5901;
+  }
 }
 
 .btn2 {
@@ -140,11 +146,13 @@ $secondary-color: #1b2430;
   background: transparent;
   width: 210px;
   height: 60px;
+  color: #000;
+  transition: 0.5s ease;
 
   &:hover {
-    background: transparent;
-    color: #000;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    // background: transparent;
+    box-shadow: inset 14em 0 0 0 #333;
+    color: #d3f36b;
   }
 }
 

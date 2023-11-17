@@ -60,24 +60,29 @@ export const getCommunityById = async (communityId) => {
 
 export const getAllCommunitiesByUserId = async (userId) => {
   try {
-    const communities = await CommunityModel.find({ members: userId }).populate({
-      path: "members",
-      model: "Users",
-      select: "firstName lastName profilePicture",
-    })
-      .exec();
+    const communities = await CommunityModel.find({ members: userId })
+      .populate({
+        path: "members",
+        model: "Users",
+        select: "firstName lastName profilePicture",
+      })
+      .lean();
 
-    const chatDetails = [];
+    const chatIds = communities.map(chat => chat._id);
 
-    for (const chat of communities) {
-      const lastMessage = await MessageModel.findOne({ chatId: chat._id })
-        .sort({ createdAt: -1 })
-        .limit(1);
-      chatDetails.push({
+    const lastMessagesPromises = chatIds.map(chatId =>
+      MessageModel.findOne({ chatId }).sort({ createdAt: -1 }).limit(1).lean()
+    );
+
+    const lastMessages = await Promise.all(lastMessagesPromises);
+
+    const chatDetails = communities.map((chat, index) => {
+      return {
         chat,
-        lastMessage,
-      });
-    }
+        lastMessage: lastMessages[index],
+      };
+    });
+
     chatDetails.sort((a, b) => {
       if (a.lastMessage && b.lastMessage) {
         return b.lastMessage.createdAt - a.lastMessage.createdAt;
@@ -106,24 +111,21 @@ export const getAllCommunitiesByUserId = async (userId) => {
 
 export const getCommunitySettings = async (communityId) => {
   try {
-    const community = await CommunityModel.findById(communityId).populate('members');
-    //fetch images
-    const images = await MessageModel.find({
-      chatId: communityId,
-      image: { $ne: null },
-    });
+    const community = await CommunityModel.findById(communityId).populate('members').lean();
 
-    // Fetch videos
-    const videos = await MessageModel.find({
+    const mediaMessages = await MessageModel.find({
       chatId: communityId,
-      video: { $ne: null },
-    });
+      $or: [
+        { image: { $ne: null } },
+        { video: { $ne: null } },
+        { documentUrl: { $ne: null } },
+      ],
+    }).select('image video documentUrl').lean();
 
-    // Fetch documents
-    const documents = await MessageModel.find({
-      chatId: communityId,
-      documentUrl: { $ne: null },
-    });
+    const images = mediaMessages.filter(message => message.image !== null);
+    const videos = mediaMessages.filter(message => message.video !== null);
+    const documents = mediaMessages.filter(message => message.documentUrl !== null);
+
     return {
       status: 200,
       message: "Community settings retrieved successfully.",
@@ -131,7 +133,7 @@ export const getCommunitySettings = async (communityId) => {
         community,
         images,
         videos,
-        documents
+        documents,
       },
     };
   } catch (error) {
@@ -141,7 +143,8 @@ export const getCommunitySettings = async (communityId) => {
       message: "An error occurred while getting community settings.",
     };
   }
-}
+};
+
 
 export const updateCommunity = async (communityId, updatedData) => {
   try {

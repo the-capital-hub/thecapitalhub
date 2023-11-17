@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./ColorCard.scss";
 import { postStartUpData, postInvestorData } from "../../../../Service/user";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserCompany } from "../../../../Store/features/user/userSlice";
 
 const ColorCard = ({
   color,
@@ -21,6 +22,7 @@ const ColorCard = ({
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedAmount, setEditedAmount] = useState(amount);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setEditedAmount(amount);
@@ -45,6 +47,8 @@ const ColorCard = ({
       postInvestorData(updatedData)
         .then((res) => {
           console.log("Res-->", res);
+          dispatch(setUserCompany(res.data));
+
         })
         .catch((error) => {
           console.error("Error-->", error);
@@ -53,6 +57,7 @@ const ColorCard = ({
       postStartUpData(updatedData)
         .then((res) => {
           console.log("Res-->", res);
+          dispatch(setUserCompany(res.data));
         })
         .catch((error) => {
           console.error("Error-->", error);
@@ -81,7 +86,7 @@ const ColorCard = ({
           ) : (
             <span
               className="rupee-sign"
-              onClick={onAmountChange ? handleEditClick : () => {}}
+              onClick={onAmountChange ? handleEditClick : () => { }}
             >
               {!noRupee && "₹"} {editedAmount}{" "}
               {!isOneLink && !isNotEditable && (

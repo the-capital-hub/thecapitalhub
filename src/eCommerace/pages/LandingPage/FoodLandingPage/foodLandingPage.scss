@@ -1,11 +1,26 @@
 .food_landing-page_Container {
-  --color-primary: #ff7a00;
+  --color-primary: #ff7b00;
   --color-primary-text: #fff;
   --color-form-primary: #ff7a00;
   --color-form-btn-text: #fff;
+  --color-helpCard-dark: #383838;
+  --color-ripple: 255, 123, 0;
 
   &.container-fluid {
     padding: 0;
+  }
+
+  h1 {
+    font-size: 36px !important;
+    font-weight: 800;
+
+    @media (min-width: 768px) {
+      font-size: 40px !important;
+    }
+
+    @media (min-width: 992px) {
+      font-size: 50px !important;
+    }
   }
 
   .LinkBtn {
@@ -34,13 +49,11 @@
 
     .left-section {
       // width: fit-content;
-
-      // flex-wrap: wrap;
-      h1 {
-        font-size: 50px;
-        font-weight: 800;
+      flex: 0 0 60%;
+      @media (min-width: 992px) {
+        flex: auto;
       }
-
+      // flex-wrap: wrap;
       .text-orange {
         color: #ff7a00;
       }
