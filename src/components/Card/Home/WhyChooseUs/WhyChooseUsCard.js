@@ -22,8 +22,8 @@ const WhyChooseUsCard = () => {
         <InView {...options}>
           {({ inView, ref }) => (
             <div
-              className={`col-md-6 b why_chooseus_card mb-69 slide-up ${
-                inView ? "slide-reset delay-0" : ""
+              className={`col-md-6 b why_chooseus_card mb-69 short-slide-up ${
+                inView ? "short-slide-reset delay-0" : ""
               }`}
               ref={ref}
             >
@@ -43,8 +43,8 @@ const WhyChooseUsCard = () => {
         <InView {...options}>
           {({ inView, ref }) => (
             <div
-              className={`col-md-6 b why_chooseus_card mb-69 slide-up ${
-                inView ? "slide-reset delay-1" : ""
+              className={`col-md-6 b why_chooseus_card mb-69 short-slide-up ${
+                inView ? "short-slide-reset delay-1" : ""
               }`}
               ref={ref}
             >
@@ -64,8 +64,8 @@ const WhyChooseUsCard = () => {
         <InView {...options}>
           {({ inView, ref }) => (
             <div
-              className={`col-md-6 b why_chooseus_card mb-69 slide-up ${
-                inView ? "slide-reset delay-2" : ""
+              className={`col-md-6 b why_chooseus_card mb-69 short-slide-up ${
+                inView ? "short-slide-reset delay-2" : ""
               }`}
               ref={ref}
             >
@@ -85,8 +85,8 @@ const WhyChooseUsCard = () => {
         <InView {...options}>
           {({ inView, ref }) => (
             <div
-              className={`col-md-6 b why_chooseus_card mb-69 slide-up ${
-                inView ? "slide-reset delay-0" : ""
+              className={`col-md-6 b why_chooseus_card mb-69 short-slide-up ${
+                inView ? "short-slide-reset delay-0" : ""
               }`}
               ref={ref}
             >
@@ -107,8 +107,8 @@ const WhyChooseUsCard = () => {
         <InView {...options}>
           {({ inView, ref }) => (
             <div
-              className={`col-md-6 b why_chooseus_card mb-69 slide-up ${
-                inView ? "slide-reset delay-1" : ""
+              className={`col-md-6 b why_chooseus_card mb-69 short-slide-up ${
+                inView ? "short-slide-reset delay-1" : ""
               }`}
               ref={ref}
             >
@@ -129,8 +129,8 @@ const WhyChooseUsCard = () => {
         <InView {...options}>
           {({ inView, ref }) => (
             <div
-              className={`col-md-6 b why_chooseus_card mb-69 slide-up ${
-                inView ? "slide-reset delay-2" : ""
+              className={`col-md-6 b why_chooseus_card mb-69 short-slide-up ${
+                inView ? "short-slide-reset delay-2" : ""
               }`}
               ref={ref}
             >
