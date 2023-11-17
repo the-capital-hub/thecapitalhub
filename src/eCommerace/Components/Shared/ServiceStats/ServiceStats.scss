@@ -44,7 +44,7 @@
 // Count down
 .animate_count_down-1 {
   // transition: --num 5s ease-in-out;
-  animation: countDown-1 2s ease-in-out 1s 1 forwards;
+  animation: countDown-1 2s ease-out 0.25s 1 forwards;
 }
 @keyframes countDown-1 {
   from {
@@ -58,7 +58,7 @@
 // Count up
 .animate_count_up-10 {
   // transition: --num 5s ease-in-out;
-  animation: countUp-10 2s ease-in-out 1s 1 forwards;
+  animation: countUp-10 2s ease-out 0.25s 1 forwards;
 }
 @keyframes countUp-10 {
   from {
@@ -71,7 +71,7 @@
 
 .animate_count_up-20 {
   // transition: --num 5s ease-in-out;
-  animation: countUp-20 2s ease-in-out 1s 1 forwards;
+  animation: countUp-20 2s ease-out 0.25s 1 forwards;
 }
 @keyframes countUp-20 {
   from {
@@ -84,12 +84,13 @@
 
 .animate_count_up-40 {
   // transition: --num 5s ease-in-out;
-  animation: countUp-40 2s ease-in-out 1s 1 forwards;
+  animation: countUp-40 2s ease-out 0.25s 1 forwards;
 }
 @keyframes countUp-40 {
   from {
     --num: 0;
   }
+
   to {
     --num: 40;
   }
