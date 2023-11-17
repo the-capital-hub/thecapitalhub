@@ -13,6 +13,19 @@
   align-items: center;
   padding: 0;
 
+  h1 {
+    font-size: 36px !important;
+    font-weight: 800;
+
+    @media (min-width: 768px) {
+      font-size: 40px !important;
+    }
+
+    @media (min-width: 992px) {
+      font-size: 50px !important;
+    }
+  }
+
   .intro {
     display: flex;
     flex-direction: column;

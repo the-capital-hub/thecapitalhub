@@ -21,6 +21,7 @@ import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import CompanyDescription from "../../../components/Investor/CompanyProfilePageComponents/CompanyDescription/CompanyDescription";
 import ErrorPopUp from "../../../components/PopUp/ErrorPopUp/ErrorPopUp";
 import InvestorAfterSuccessPopUp from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
+import { setUserCompany } from "../../../Store/features/user/userSlice";
 
 export default function EditInvestorCompanyProfilePage() {
   const dispatch = useDispatch();
@@ -104,6 +105,7 @@ export default function EditInvestorCompanyProfilePage() {
           ...prev,
           description: companyDescription,
         }));
+        dispatch(setUserCompany(response.data));
       }
     } catch (error) {
       console.log(error);

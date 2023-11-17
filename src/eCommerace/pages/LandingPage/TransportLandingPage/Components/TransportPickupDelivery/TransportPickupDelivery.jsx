@@ -14,7 +14,7 @@ export default function TransportPickupDelivery({ image }) {
       className="container mx-auto thired-section d-flex flex-column  justify-content-evenly flex-md-row align-items-center overflow-hidden"
       ref={ref}
     >
-      <div className="left-section p-md-5  m-md-5  d-flex flex-column align-items-center align-items-md-start w-100">
+      <div className="left-section p-lg-5 m-md-5 d-flex flex-column align-items-center align-items-md-start w-100">
         <h1 className={`slide-left ${inView ? "slide-reset" : ""}`}>
           {/* Customizable Pick-Up and Delivery -&gt;  */} Customizable Pick-Up
           and Delivery Features

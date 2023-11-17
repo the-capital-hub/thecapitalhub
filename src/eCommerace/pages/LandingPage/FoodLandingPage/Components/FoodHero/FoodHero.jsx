@@ -24,15 +24,16 @@ export default function FoodHero({ twoMobile, downArrow }) {
                 inView ? "short-slide-reset" : ""
               }`}
             >
-              Build your food delivery
+              Build your food delivery{" "}
+              <span className="text-orange">application with Capital HUB!</span>
             </h1>
-            <h1
+            {/* <h1
               className={`text-orange short-slide-left ${
                 inView ? "short-slide-reset" : ""
               }`}
             >
               application with Capital HUB!
-            </h1>
+            </h1> */}
             <h6 className={`mt-2 slide-left ${inView ? "slide-reset" : ""}`}>
               Build your business as Capital HUB builds your application. Enable
               food delivery applications with the smoothest user interface
@@ -53,7 +54,11 @@ export default function FoodHero({ twoMobile, downArrow }) {
             }`}
             ref={ref}
           >
-            <img src={twoMobile} alt="twoMobile" />
+            <img
+              src={twoMobile}
+              alt="twoMobile"
+              style={{ objectFit: "contain" }}
+            />
           </div>
         )}
       </InView>

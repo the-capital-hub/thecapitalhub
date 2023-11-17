@@ -37,31 +37,36 @@ export const createChat = async (senderId, recieverId) => {
 export const getUserChats = async (userId) => {
   try {
     const user = await UserModel.findById(userId);
-    const pinnedChatIds = user.pinnedChat
+    const pinnedChatIds = user.pinnedChat;
 
     const chats = await ChatModel.find({
       members: { $in: [userId] },
       _id: { $nin: pinnedChatIds },
-    }).populate('members');
+    }).lean().populate('members');
 
     if (chats.length === 0) {
       return {
         status: 404,
         message: "Chats not found",
         data: [],
-      }
+      };
     }
-    const chatDetails = [];
 
-    for (const chat of chats) {
-      const lastMessage = await MessageModel.findOne({ chatId: chat._id })
-        .sort({ createdAt: -1 })
-        .limit(1);
-      chatDetails.push({
+    const chatIds = chats.map(chat => chat._id);
+
+    const lastMessagesPromises = chatIds.map(chatId =>
+      MessageModel.findOne({ chatId }).sort({ createdAt: -1 }).limit(1).lean()
+    );
+
+    const lastMessages = await Promise.all(lastMessagesPromises);
+
+    const chatDetails = chats.map((chat, index) => {
+      return {
         chat,
-        lastMessage,
-      });
-    }
+        lastMessage: lastMessages[index],
+      };
+    });
+
     chatDetails.sort((a, b) => {
       if (a.lastMessage && b.lastMessage) {
         return b.lastMessage.createdAt - a.lastMessage.createdAt;
@@ -77,15 +82,16 @@ export const getUserChats = async (userId) => {
       status: 200,
       message: "User's Chats Retrieved",
       data: chatDetails.map((chatDetail) => chatDetail.chat),
-    }
+    };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return {
       status: 500,
       message: "An error occurred while fetching user's chats.",
     };
   }
 };
+
 
 export const findChat = async (firstId, secondId) => {
   try {
@@ -116,22 +122,25 @@ export const findChat = async (firstId, secondId) => {
 // Pin or Unpin a Chat
 export const togglePinChat = async (userId, chatId) => {
   try {
-    const userDetails = await UserModel.findById(userId).exec();
+    const userDetails = await UserModel.findById(userId).lean();
     if (!userDetails) {
       return {
         status: 404,
         message: "User not found",
       };
     }
+
     const pinnedChatIds = userDetails.pinnedChat;
     const isChatPinned = pinnedChatIds.includes(chatId);
+
     const update = isChatPinned
       ? { $pull: { pinnedChat: chatId } }
       : { $push: { pinnedChat: chatId } };
-    const user = await UserModel.findByIdAndUpdate(
-      userId,
+
+    const user = await UserModel.findOneAndUpdate(
+      { _id: userId },
       update,
-      { new: true }
+      { new: true, lean: true }
     );
 
     return {
@@ -148,6 +157,7 @@ export const togglePinChat = async (userId, chatId) => {
   }
 };
 
+
 // Get Pinned Chats
 export const getPinnedChats = async (userId) => {
   try {
@@ -158,7 +168,8 @@ export const getPinnedChats = async (userId) => {
           path: "members",
           model: "Users"
         }
-      });
+      })
+      .lean();
 
     if (!user) {
       return {
@@ -166,18 +177,21 @@ export const getPinnedChats = async (userId) => {
         message: "User not found",
       };
     }
-    // const pinnedChatIds = user.pinnedChat;
-    const pinnedChatDetails = [];
 
-    for (const chat of user.pinnedChat) {
-      const lastMessage = await MessageModel.findOne({ chatId: chat._id })
-        .sort({ createdAt: -1 })
-        .limit(1);
-      pinnedChatDetails.push({
+    const pinnedChatIds = user.pinnedChat.map(chat => chat._id);
+
+    const lastMessagesPromises = pinnedChatIds.map(chatId =>
+      MessageModel.findOne({ chatId }).sort({ createdAt: -1 }).limit(1).lean()
+    );
+
+    const lastMessages = await Promise.all(lastMessagesPromises);
+
+    const pinnedChatDetails = user.pinnedChat.map((chat, index) => {
+      return {
         chat,
-        lastMessage,
-      });
-    }
+        lastMessage: lastMessages[index],
+      };
+    });
 
     pinnedChatDetails.sort((a, b) => {
       if (a.lastMessage && b.lastMessage) {
@@ -206,28 +220,24 @@ export const getPinnedChats = async (userId) => {
 
 export const getChatSettings = async (loggedUserId, otherUserId, chatId) => {
   try {
-    const user = await UserModel.findById(otherUserId);
+    const user = await UserModel.findById(otherUserId).lean();
     const communities = await CommunityModel.find({
       members: { $all: [loggedUserId, otherUserId] },
-    }).populate('members');
+    }).lean().populate('members');
 
-    //fetch images
-    const images = await MessageModel.find({
+    const mediaMessages = await MessageModel.find({
       chatId: chatId,
-      image: { $ne: null },
-    });
+      $or: [
+        { image: { $ne: null } },
+        { video: { $ne: null } },
+        { documentUrl: { $ne: null } },
+      ],
+    }).select('image video documentUrl');
 
-    // Fetch videos
-    const videos = await MessageModel.find({
-      chatId: chatId,
-      video: { $ne: null },
-    });
+    const images = mediaMessages.filter(message => message.image !== null);
+    const videos = mediaMessages.filter(message => message.video !== null);
+    const documents = mediaMessages.filter(message => message.documentUrl !== null);
 
-    // Fetch documents
-    const documents = await MessageModel.find({
-      chatId: chatId,
-      documentUrl: { $ne: null },
-    });
     return {
       status: 200,
       message: "Chat settings retrieved successfully.",
@@ -236,7 +246,7 @@ export const getChatSettings = async (loggedUserId, otherUserId, chatId) => {
         communities,
         images,
         videos,
-        documents
+        documents,
       },
     };
   } catch (error) {
@@ -246,4 +256,4 @@ export const getChatSettings = async (loggedUserId, otherUserId, chatId) => {
       message: "An error occurred while getting chat settings.",
     };
   }
-}
+};

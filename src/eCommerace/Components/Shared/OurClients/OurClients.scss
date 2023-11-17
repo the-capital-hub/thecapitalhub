@@ -1,6 +1,19 @@
 .our_clients_wrapper {
   background-color: var(--color-primary);
 
+  h1 {
+    font-size: 36px !important;
+    font-weight: 800;
+
+    @media (min-width: 768px) {
+      font-size: 40px !important;
+    }
+
+    @media (min-width: 992px) {
+      font-size: 50px !important;
+    }
+  }
+
   .our_clients_container {
     max-width: 1200px !important;
     display: grid;
