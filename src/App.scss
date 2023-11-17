@@ -137,6 +137,11 @@ button {
   animation: rotateInRight 1s linear forwards;
 }
 
+// short grow in
+.growIn-short {
+  animation: growIn-short 1s linear forwards;
+}
+
 // Keyframes
 // Shake keyframe
 @keyframes shake {
@@ -200,5 +205,15 @@ button {
     opacity: 1;
     transform: rotate(0) translateY(0px) scale(1);
     // transform: translateY(0px);
+  }
+}
+
+// Grow In short
+@keyframes growIn-short {
+  from {
+    transform: scale(0.9);
+  }
+  to {
+    transform: scale(1);
   }
 }
