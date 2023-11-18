@@ -184,9 +184,13 @@ export default function StartupExplore() {
 
           {/* Filters */}
           <form
-            className="startup_filters_container"
+            
             onSubmit={onSubmitFilters}
           >
+
+            <div className="startup_filters_container">
+
+            
             {activeTab === "Investor" && (
               <>
                 <FilterBySelect
@@ -347,10 +351,17 @@ export default function StartupExplore() {
                 />
               </>
             )}
-            <button className="filter_button btn-capital" type="submit">
+            </div>
+            <div className="d-flex flex-column flex-md-row gap-2 py-3">
+
+            <input type="text" className="search-filter-input" placeholder="Search"/>
+            <button className="filter_button btn-capital " type="submit">
               Filter {activeTab}
             </button>
+            </div>
           </form>
+         
+
         </div>
 
         {/* Companies List - pass filter props*/}
