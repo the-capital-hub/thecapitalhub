@@ -268,9 +268,10 @@ function Explore() {
 
           {/* Filters */}
           <form
-            className="investor_explore_filters_container"
+            
             onSubmit={onSubmitFilters}
           >
+             <div className="investor_explore_filters_container">
             {activeTab === "Investor" && (
               <>
                 <FilterBySelect
@@ -432,9 +433,17 @@ function Explore() {
                 />
               </>
             )}
-            <button className="btn-capital ms-auto" type="submit">
-              Filter {activeTab}
-            </button>
+            </div>
+            <div className="d-flex flex-column flex-md-row gap-2 py-3">
+              <input
+                type="text"
+                className="search-filter-input"
+                placeholder="Search"
+              />
+              <button className="btn-capital  " type="submit">
+                Filter {activeTab}
+              </button>
+            </div>
           </form>
           {/* <FilterBySelect label="Sector" name="sector" />
             <FilterBySelect label="Sub-Sector" name="subSector" />
