@@ -268,177 +268,179 @@ function Explore() {
 
           {/* Filters */}
           <form
-            
+
             onSubmit={onSubmitFilters}
           >
-             <div className="investor_explore_filters_container">
-            {activeTab === "Investor" && (
-              <>
-                <FilterBySelect
-                  value={filters?.sector}
-                  onChange={handleOnChange}
-                  options={filterOptions?.sectors || sectorOptions}
-                  label="Sector"
-                  name="sector"
-                />
-                <FilterBySelect
-                  value={filters?.city}
-                  onChange={handleOnChange}
-                  options={filterOptions?.cities}
-                  label="City"
-                  name="city"
-                />
-                <FilterBySelect
-                  value={filters?.gender}
-                  onChange={handleOnChange}
-                  options={filterOptions?.genders || genderOptions}
-                  label="Gender"
-                  name="gender"
-                />
-                <FilterBySelect
-                  value={filters?.sectorPreference}
-                  onChange={handleOnChange}
-                  options={filterOptions?.sectors || sectorOptions}
-                  label="Sector Preference"
-                  name="sectorPreference"
-                />
-                <FilterBySelect
-                  value={filters?.investmentSize}
-                  onChange={handleOnChange}
-                  options={
-                    filterOptions?.investmentSize || investmentSizeOptions
-                  }
-                  label="Investment Size"
-                  name="investmentSize"
-                />
-                <FilterBySelect
-                  value={filters?.investmentStage}
-                  onChange={handleOnChange}
-                  options={
-                    filterOptions?.investmentStage || investmentStageOptions
-                  }
-                  label="Investment Stage"
-                  name="investmentStage"
-                />
-              </>
-            )}
-            {activeTab === "Startup" && (
-              <>
-                <FilterBySelect
-                  value={filters?.sector}
-                  onChange={handleOnChange}
-                  options={filterOptions?.sectors || sectorOptions}
-                  label="Sector"
-                  name="sector"
-                />
-                <FilterBySelect
-                  value={filters?.city}
-                  onChange={handleOnChange}
-                  options={filterOptions?.cities}
-                  label="City"
-                  name="city"
-                />
-                <FilterBySelect
-                  value={filters?.size}
-                  onChange={handleOnChange}
-                  options={filterOptions?.sizes || sizeOptions}
-                  label="Size"
-                  name="size"
-                />
-                <FilterBySelect
-                  value={filters?.fundingRaised}
-                  onChange={handleOnChange}
-                  options={filterOptions?.fundingRaised || fundingRaisedOptions}
-                  label="Funding Raised"
-                  name="fundingRaised"
-                />
-                <FilterBySelect
-                  value={filters?.productStage}
-                  onChange={handleOnChange}
-                  options={filterOptions?.productStage || productStageOptions}
-                  label="Product Stage"
-                  name="productStage"
-                />
-                <FilterBySelect
-                  value={filters?.stage}
-                  onChange={handleOnChange}
-                  options={filterOptions?.stage || stageOptions}
-                  label="Stage"
-                  name="stage"
-                />
-                <FilterBySelect
-                  value={filters?.age}
-                  onChange={handleOnChange}
-                  options={filterOptions?.age || ageOptions}
-                  label="Age"
-                  name="age
+            <div className="investor_explore_filters_container">
+              {activeTab === "Investor" && (
+                <>
+                  <FilterBySelect
+                    value={filters?.sector}
+                    onChange={handleOnChange}
+                    options={filterOptions?.sectors || sectorOptions}
+                    label="Sector"
+                    name="sector"
+                  />
+                  <FilterBySelect
+                    value={filters?.city}
+                    onChange={handleOnChange}
+                    options={filterOptions?.cities}
+                    label="City"
+                    name="city"
+                  />
+                  <FilterBySelect
+                    value={filters?.gender}
+                    onChange={handleOnChange}
+                    options={filterOptions?.genders || genderOptions}
+                    label="Gender"
+                    name="gender"
+                  />
+                  <FilterBySelect
+                    value={filters?.sectorPreference}
+                    onChange={handleOnChange}
+                    options={filterOptions?.sectors || sectorOptions}
+                    label="Sector Preference"
+                    name="sectorPreference"
+                  />
+                  <FilterBySelect
+                    value={filters?.investmentSize}
+                    onChange={handleOnChange}
+                    options={
+                      filterOptions?.investmentSize || investmentSizeOptions
+                    }
+                    label="Investment Size"
+                    name="investmentSize"
+                  />
+                  <FilterBySelect
+                    value={filters?.investmentStage}
+                    onChange={handleOnChange}
+                    options={
+                      filterOptions?.investmentStage || investmentStageOptions
+                    }
+                    label="Investment Stage"
+                    name="investmentStage"
+                  />
+                </>
+              )}
+              {activeTab === "Startup" && (
+                <>
+                  <FilterBySelect
+                    value={filters?.sector}
+                    onChange={handleOnChange}
+                    options={filterOptions?.sectors || sectorOptions}
+                    label="Sector"
+                    name="sector"
+                  />
+                  <FilterBySelect
+                    value={filters?.city}
+                    onChange={handleOnChange}
+                    options={filterOptions?.cities}
+                    label="City"
+                    name="city"
+                  />
+                  <FilterBySelect
+                    value={filters?.size}
+                    onChange={handleOnChange}
+                    options={filterOptions?.sizes || sizeOptions}
+                    label="Size"
+                    name="size"
+                  />
+                  <FilterBySelect
+                    value={filters?.fundingRaised}
+                    onChange={handleOnChange}
+                    options={filterOptions?.fundingRaised || fundingRaisedOptions}
+                    label="Funding Raised"
+                    name="fundingRaised"
+                  />
+                  <FilterBySelect
+                    value={filters?.productStage}
+                    onChange={handleOnChange}
+                    options={filterOptions?.productStage || productStageOptions}
+                    label="Product Stage"
+                    name="productStage"
+                  />
+                  <FilterBySelect
+                    value={filters?.stage}
+                    onChange={handleOnChange}
+                    options={filterOptions?.stage || stageOptions}
+                    label="Stage"
+                    name="stage"
+                  />
+                  <FilterBySelect
+                    value={filters?.age}
+                    onChange={handleOnChange}
+                    options={filterOptions?.age || ageOptions}
+                    label="Age"
+                    name="age
                   "
-                />
-              </>
-            )}
-            {activeTab === "Founder" && (
-              <>
-                <FilterBySelect
-                  value={filters?.sector}
-                  onChange={handleOnChange}
-                  options={filterOptions?.sectors || sectorOptions}
-                  label="Sector"
-                  name="sector"
-                />
-                <FilterBySelect
-                  value={filters?.city}
-                  onChange={handleOnChange}
-                  options={filterOptions?.cities}
-                  label="City"
-                  name="city"
-                />
-                <FilterBySelect
-                  value={filters?.gender}
-                  onChange={handleOnChange}
-                  options={filterOptions?.genders || genderOptions}
-                  label="Gender"
-                  name="gender"
-                />
-                <FilterBySelect
-                  value={filters?.previousExits}
-                  onChange={handleOnChange}
-                  options={filterOptions?.previousExits || previousExitsOptions}
-                  label="Previous Exits"
-                  name="previousExits"
-                />
-                <FilterBySelect
-                  value={filters?.yearsOfExperience}
-                  onChange={handleOnChange}
-                  options={
-                    filterOptions?.yearsOfExperience || yearsOfExperienceOptions
-                  }
-                  label="Years of Experience"
-                  name="yearsOfExperience"
-                />
-                <FilterBySelect
-                  value={filters?.education}
-                  onChange={handleOnChange}
-                  options={filterOptions?.education || educationOptions}
-                  label="Education"
-                  name="education"
-                />
-                <FilterBySelect
-                  value={filters?.diversityMetrics}
-                  onChange={handleOnChange}
-                  options={
-                    filterOptions?.diversityMetrics || diversityMetricsOptions
-                  }
-                  label="Diversity Metrics"
-                  name="diversityMetrics"
-                />
-              </>
-            )}
+                  />
+                </>
+              )}
+              {activeTab === "Founder" && (
+                <>
+                  <FilterBySelect
+                    value={filters?.sector}
+                    onChange={handleOnChange}
+                    options={filterOptions?.sectors || sectorOptions}
+                    label="Sector"
+                    name="sector"
+                  />
+                  <FilterBySelect
+                    value={filters?.city}
+                    onChange={handleOnChange}
+                    options={filterOptions?.cities}
+                    label="City"
+                    name="city"
+                  />
+                  <FilterBySelect
+                    value={filters?.gender}
+                    onChange={handleOnChange}
+                    options={filterOptions?.genders || genderOptions}
+                    label="Gender"
+                    name="gender"
+                  />
+                  <FilterBySelect
+                    value={filters?.previousExits}
+                    onChange={handleOnChange}
+                    options={filterOptions?.previousExits || previousExitsOptions}
+                    label="Previous Exits"
+                    name="previousExits"
+                  />
+                  <FilterBySelect
+                    value={filters?.yearsOfExperience}
+                    onChange={handleOnChange}
+                    options={
+                      filterOptions?.yearsOfExperience || yearsOfExperienceOptions
+                    }
+                    label="Years of Experience"
+                    name="yearsOfExperience"
+                  />
+                  <FilterBySelect
+                    value={filters?.education}
+                    onChange={handleOnChange}
+                    options={filterOptions?.education || educationOptions}
+                    label="Education"
+                    name="education"
+                  />
+                  <FilterBySelect
+                    value={filters?.diversityMetrics}
+                    onChange={handleOnChange}
+                    options={
+                      filterOptions?.diversityMetrics || diversityMetricsOptions
+                    }
+                    label="Diversity Metrics"
+                    name="diversityMetrics"
+                  />
+                </>
+              )}
             </div>
             <div className="d-flex flex-column flex-md-row gap-2 py-3">
               <input
-                type="text"
+                type="search"
                 className="search-filter-input"
                 placeholder="Search"
+                name="searchQuery"
+                onChange={handleOnChange}
               />
               <button className="btn-capital  " type="submit">
                 Filter {activeTab}
