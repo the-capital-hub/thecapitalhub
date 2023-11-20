@@ -468,6 +468,7 @@ export const getExplore = async (filters) => {
       stage,
       age,
       education,
+      searchQuery,
     } = filters;
 
     // for startups
@@ -493,6 +494,9 @@ export const getExplore = async (filters) => {
       }
       if (age) {
         query.age = age;
+      }
+      if (searchQuery) {
+        query.company = { $regex: new RegExp(`^${searchQuery}`, 'i') };
       }
       const startups = await StartUpModel.find(query);
       return {
@@ -528,6 +532,9 @@ export const getExplore = async (filters) => {
       }
       if (investmentStage) {
         founderQuery.investmentStage = investmentStage;
+      }
+      if (searchQuery) {
+        founderQuery.firstName = { $regex: new RegExp(`^${searchQuery}`, 'i') };
       }
       const founders = await UserModel.find({
         _id: { $in: founderIds },
@@ -567,6 +574,9 @@ export const getExplore = async (filters) => {
       }
       if (diversityMetrics) {
         founderQuery.diversityMetrics = { $in: [diversityMetrics] };
+      }
+      if (searchQuery) {
+        founderQuery.firstName = { $regex: new RegExp(`^${searchQuery}`, 'i') };
       }
       const founders = await UserModel.find({
         _id: { $in: founderIds },
