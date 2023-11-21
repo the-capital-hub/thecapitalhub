@@ -43,8 +43,6 @@ const Feed = () => {
   useEffect(() => {
     setPopupOpen(isCreatePostModalOpen);
   }, [isCreatePostModalOpen]);
-  
-  
 
   // Methods
   const openPopup = () => {
