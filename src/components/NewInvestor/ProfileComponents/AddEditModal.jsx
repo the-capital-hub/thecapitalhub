@@ -228,12 +228,15 @@ export default function AddEditModal({
                 />
                 <h6 className="green_underline ">{startUp.name}</h6>
                 <div className="d-flex gap-2">
-                  <button
-                    className="btn green_button px-3"
-                    onClick={() => handleEdit(index)}
-                  >
-                    <CiEdit style={{ color: "", backgroundColor: "" }} />
-                  </button>
+                  {!startUp.companyId &&
+                    <button
+                      className="btn green_button px-3"
+                      onClick={() => handleEdit(index)}
+                    >
+                      <CiEdit style={{ color: "", backgroundColor: "" }} />
+                    </button>
+                  }
+
                   <button
                     className="btn btn-danger"
                     // onClick={() => handleDelete(index)}
@@ -303,28 +306,28 @@ export default function AddEditModal({
                   className="visually-hidden"
                   onChange={handleSectorLogoChange}
                 />
-                  <label htmlFor="sectorLogo" className="text-black fw-lighter">
-                <div className="upload__label p-2">
-                  <BsFillCloudUploadFill
-                    style={{
-                      fontSize: "1.5rem",
-                      color: "rgba(140, 90, 201, 1)",
-                    }}
-                  />
-                    Upload Image
-                  {sectorLogo && (
-                    <img
-                    src={
-                      isEdited && isNewImage
-                      ? sectorLogo
-                      : URL.createObjectURL(sectorLogo)
-                    }
-                    alt="Selected"
-                    style={{ maxWidth: "100%", maxHeight: "200px" }}
+                <label htmlFor="sectorLogo" className="text-black fw-lighter">
+                  <div className="upload__label p-2">
+                    <BsFillCloudUploadFill
+                      style={{
+                        fontSize: "1.5rem",
+                        color: "rgba(140, 90, 201, 1)",
+                      }}
                     />
+                    Upload Image
+                    {sectorLogo && (
+                      <img
+                        src={
+                          isEdited && isNewImage
+                            ? sectorLogo
+                            : URL.createObjectURL(sectorLogo)
+                        }
+                        alt="Selected"
+                        style={{ maxWidth: "100%", maxHeight: "200px" }}
+                      />
                     )}
-                </div>
-                    </label>
+                  </div>
+                </label>
               </div>
             )}
             <div className="invested__company__name ">
@@ -379,7 +382,7 @@ export default function AddEditModal({
               <button
                 className="btn green_button w-auto fs-6 ms-2"
                 type="submit"
-                // data-bs-dismiss="modal"
+              // data-bs-dismiss="modal"
               >
                 {loading ? (
                   <SpinnerBS

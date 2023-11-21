@@ -18,16 +18,14 @@ import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {
-  selectShowOnboarding,
   setPageTitle,
   selectCreatePostModal,
 } from "../../../Store/features/design/designSlice";
-import OnBoardUser from "../../OnBoardUser/OnBoardUser";
 import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
+import TutorialTrigger from "../../Shared/TutorialTrigger/TutorialTrigger";
 
 const Feed = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const showOnboarding = useSelector(selectShowOnboarding);
   const isCreatePostModalOpen = useSelector(selectCreatePostModal);
 
   const dispatch = useDispatch();
@@ -43,8 +41,6 @@ const Feed = () => {
   useEffect(() => {
     setPopupOpen(isCreatePostModalOpen);
   }, [isCreatePostModalOpen]);
-  
-  
 
   // Methods
   const openPopup = () => {
@@ -99,7 +95,7 @@ const Feed = () => {
   useEffect(() => {
     document.title = "Home | The Capital Hub";
     dispatch(setPageTitle("Home"));
-  }, []);
+  }, [dispatch]);
 
   // Repost
   const [repostLoading, setRepostLoading] = useState({
@@ -123,6 +119,10 @@ const Feed = () => {
           <div className="Posts__column d-flex flex-column gap-2">
             {/* Small Profile Card */}
             <SmallProfileCard className="d-none d-md-block" text={"Home"} />
+
+            {/* Onboarding popup */}
+            <TutorialTrigger steps={startupOnboardingSteps.homePage} />
+
             {/* Write a Post */}
             <div className="bg-white rounded-4 start_post_container">
               <img
@@ -144,6 +144,7 @@ const Feed = () => {
                 />
               </div>
             </div>
+
             {/* Posts container - column of <FeedPostCard /> */}
             <div className="posts__container d-flex flex-column gap-3">
               {/* {!loadingFeed ? ( */}
@@ -236,11 +237,11 @@ const Feed = () => {
           <NewsCorner />
         </div>
       </div>
-      {showOnboarding ? (
+      {/* {showOnboarding ? (
         <OnBoardUser steps={startupOnboardingSteps.homePage} />
       ) : (
         ""
-      )}
+      )} */}
     </MaxWidthWrapper>
   );
 };

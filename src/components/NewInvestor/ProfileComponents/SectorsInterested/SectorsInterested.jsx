@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   ModalBSBody,
@@ -10,6 +10,7 @@ import SectorCard from "../SectorCard";
 import AddEditModal from "../AddEditModal";
 import "./SectorsInterested.scss";
 import { selectUserSectorInterested } from "../../../../Store/features/user/userSlice";
+import { getInvestorById } from "../../../../Service/user";
 
 export default function SectorsInterested() {
   // Fetch loggedInUser from global state
@@ -17,6 +18,15 @@ export default function SectorsInterested() {
 
   // States for sectors Interested
   const [sectorsData, setSectorsData] = useState(userSectorInterested);
+
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  useEffect(() => {
+    getInvestorById(loggedInUser.investor)
+      .then(({ data }) => {
+        setSectorsData(data.sectorInterested);
+      })
+      .catch(() => setSectorsData([]));
+  }, [loggedInUser.investor]);
 
   return (
     <>
@@ -36,7 +46,7 @@ export default function SectorsInterested() {
         </div>
         {/* Loop cards from here onwards */}
         <div className="interested_cards px-3 py-5 ">
-          {userSectorInterested?.map((sector, index) => {
+          {sectorsData?.map((sector, index) => {
             return <SectorCard key={sector._id} sector={sector} />;
           })}
         </div>

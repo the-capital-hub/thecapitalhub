@@ -26,6 +26,7 @@ export default function OnePagerCompanyInfo({
             <Link
               to={"/onelink/edit"}
               className="text-black text-decoration-none fs-5 ms-auto d-flex align-items-center gap-2"
+              id="oneLinkEdit"
             >
               <IconEditCapital />
               <span>Edit</span>
@@ -110,6 +111,7 @@ export default function OnePagerCompanyInfo({
             href={website}
             target="_blank"
             className="btn-capital px-4 text-decoration-none visit_btn"
+            rel="noreferrer"
           >
             Visit
           </a>
@@ -138,6 +140,7 @@ export default function OnePagerCompanyInfo({
                   href={link}
                   target="_blank"
                   className="btn-capital px-4 text-decoration-none visit_btn"
+                  rel="noreferrer"
                 >
                   Visit
                 </a>

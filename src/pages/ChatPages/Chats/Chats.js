@@ -36,6 +36,8 @@ import NewCommunityModal from "../../../components/Investor/ChatComponents/NewCo
 import { setThemeColor } from "../../../utils/setThemeColor";
 import { AiOutlineHome } from "react-icons/ai";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
+import { startupOnboardingSteps } from "../../../components/OnBoardUser/steps/startup";
 
 const Chats = () => {
   // search params
@@ -157,7 +159,6 @@ const Chats = () => {
           if (res.data.length === 0) {
             return handleCreateChat();
           } else {
-
             dispatch(setChatId(res.data._id));
           }
         })
@@ -165,7 +166,7 @@ const Chats = () => {
           console.error("Error-->", error);
         })
         .finally(() => {
-          searchParams.delete('userId');
+          searchParams.delete("userId");
           setSearchParams(searchParams);
         });
     }
@@ -233,11 +234,19 @@ const Chats = () => {
 
   return (
     <>
-      <div className="container-fluid chat_main_container">
+      {/* Onboarding popup */}
+      <TutorialTrigger
+        steps={startupOnboardingSteps.chatsPage}
+        fromUp={true}
+        isChatPage={true}
+      />
+
+      <div className="container-fluid chat_main_container position-relative">
         {/* Left section */}
         <div
-          className={`left_section_wrapper mt-3 mx-3 ${isMobileView && "d-none"
-            }`}
+          className={`left_section_wrapper mt-3 mx-3 ${
+            isMobileView && "d-none"
+          }`}
         >
           <section className="left_section pe-1 ">
             <span className="back_img rounded-circle shadow-sm" title="Go Back">
@@ -246,6 +255,7 @@ const Chats = () => {
                 width={20}
                 height={20}
                 onClick={() => navigate(-1)}
+                alt=""
               />
             </span>
             <ChatSearch />

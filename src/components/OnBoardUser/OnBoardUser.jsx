@@ -6,8 +6,10 @@ import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 function OnBoardUser({
   steps,
   run = true,
+  setRun,
   scrollOffset,
   noBodyRoll,
+  isChatPage,
   ...props
 }) {
   // Pass in no body roll to disable scroll on body
@@ -15,10 +17,11 @@ function OnBoardUser({
     if (noBodyRoll && run) {
       disableBodyScroll(document.body);
     }
-  }, [run]);
+  }, [run, noBodyRoll]);
 
   const handleTourClose = () => {
     enableBodyScroll(document.body);
+    setRun(false);
   };
 
   // Action for the current step is triggered on pressing of next button
@@ -49,7 +52,7 @@ function OnBoardUser({
 
   const CustomButton = ({ onClick, title, isActive }) => (
     <button
-      className={`custom-joyride-button${isActive ? ' active' : ''} px-3 py-2`}
+      className={`custom-joyride-button${isActive ? " active" : ""} px-3 py-2`}
       onClick={onClick}
       type="button"
     >
@@ -62,10 +65,9 @@ function OnBoardUser({
       steps={steps}
       run={run}
       continuous
-      // beaconComponent={CustomBe  aconComponent}
+      // beaconComponent={CustomBeaconComponent}
       beaconComponent={CustomButton}
-
-      scrollToFirstStep
+      // scrollToFirstStep
       showProgress
       showBackButton
       // disableOverlayClose
@@ -73,6 +75,10 @@ function OnBoardUser({
       callback={({ action, index, lifecycle }) => {
         if (action === "close" || action === "reset") {
           handleTourClose();
+        } else if (isChatPage && index === 2 && action === "next") {
+          document.querySelector(".user_chat").click();
+        } else if (isChatPage && index === 3 && action === "next") {
+          document.querySelector(".chat_navbar_container > .left").click();
         } else if (action === "next" && lifecycle === "complete") {
           handleAction(index);
         }
@@ -83,7 +89,6 @@ function OnBoardUser({
       styles={{
         options: {
           primaryColor: "var(--currentTheme)",
-          
         },
       }}
       {...props}

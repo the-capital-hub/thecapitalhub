@@ -1,9 +1,13 @@
 import "./Card.scss";
-import { threeblackdots } from "../../../Images/InvestorsView";
+// import { threeblackdots } from "../../../Images/InvestorsView";
 
 const Card = ({ text, onClicked, image }) => {
   return (
-    <div onClick={onClicked} className="investorsCard">
+    <div
+      onClick={onClicked}
+      className="investorsCard"
+      id={text.split(" ").join("_")}
+    >
       <div className="folder_container">
         <img
           src={image}

@@ -3,11 +3,13 @@ import "./OnboardingSwitch.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectIsMobileView,
+  selectShowOnboarding,
   setShowOnboarding,
 } from "../../../../Store/features/design/designSlice";
 
 export default function OnboardingSwitch() {
   const isMobileView = useSelector(selectIsMobileView);
+  const showOnboarding = useSelector(selectShowOnboarding);
   const dispatch = useDispatch();
 
   const switchRef = useRef();
@@ -33,6 +35,7 @@ export default function OnboardingSwitch() {
           role="switch"
           id="onboardingToggle"
           defaultChecked={false}
+          checked={showOnboarding}
           onClick={handleSwitchClick}
           ref={switchRef}
         />
