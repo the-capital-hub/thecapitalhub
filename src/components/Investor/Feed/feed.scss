@@ -8,13 +8,13 @@
   display: grid;
   grid-template-columns: 100%;
 
-  @media (min-width: 1320px) {
+  @media (min-width: 1200px) {
     grid-template-columns: calc(100% - 26rem) 24rem;
   }
 
   .right_content {
     display: none;
-    @media (min-width: 1320px) {
+    @media (min-width: 1200px) {
       display: block;
       // flex: 0 0 24rem;
       // margin-left: 1rem;
@@ -23,7 +23,7 @@
 
   .main_content {
     // max-width: calc(100% - 26rem);
-    flex-grow: 1;
+    // flex-grow: 1;
 
     .Posts__column {
       max-width: 700px;
