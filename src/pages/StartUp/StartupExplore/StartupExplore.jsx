@@ -5,17 +5,14 @@ import "./StartupExplore.scss";
 // import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import FilterBySelect from "../../../components/NewInvestor/FilterBySelect/FilterBySelect";
 import CompanyProfileList from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfileList";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectShowOnboarding,
-  setPageTitle,
-} from "../../../Store/features/design/designSlice";
+import { useDispatch } from "react-redux";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 import {
   fetchExploreFilteredResultsAPI,
   fetchExploreFiltersAPI,
 } from "../../../Service/user";
 import PersonProfileList from "../../../components/Shared/PersonProfileComponents/PersonProfileList";
-import OnBoardUser from "../../../components/OnBoardUser/OnBoardUser";
+// import OnBoardUser from "../../../components/OnBoardUser/OnBoardUser";
 import { startupOnboardingSteps } from "../../../components/OnBoardUser/steps/startup";
 import {
   sectorOptions,
@@ -32,9 +29,10 @@ import {
   stageOptions,
   yearsOfExperienceOptions,
 } from "../../../constants/Startups/ExplorePage";
+import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
 
 export default function StartupExplore() {
-  const showOnboarding = useSelector(selectShowOnboarding);
+  // const showOnboarding = useSelector(selectShowOnboarding);
 
   const dispatch = useDispatch();
 
@@ -131,6 +129,9 @@ export default function StartupExplore() {
       <section className="startup_explore_wrapper d-flex flex-column gap-5 my-5">
         {/* <SmallProfileCard/> */}
 
+        {/* Onboarding popup */}
+        <TutorialTrigger steps={startupOnboardingSteps.explorePage} />
+
         {/* Header */}
         <div className="filter_container bg-white rounded-4 shadow-sm d-flex flex-column gap-4 px-4 py-4">
           {/* Heading */}
@@ -139,8 +140,9 @@ export default function StartupExplore() {
           {/* Tabs */}
           <div className="startup_explore_tabs d-flex align-items-center border-bottom">
             <button
-              className={`btn_base py-3 px-3 ${activeTab === "Investor" ? "active" : ""
-                }`}
+              className={`btn_base py-3 px-3 ${
+                activeTab === "Investor" ? "active" : ""
+              }`}
               onClick={() => {
                 setFilters(null);
                 setActiveTab("Investor");
@@ -149,8 +151,9 @@ export default function StartupExplore() {
               Investor
             </button>
             <button
-              className={`btn_base py-3 px-3 ${activeTab === "Startup" ? "active" : ""
-                }`}
+              className={`btn_base py-3 px-3 ${
+                activeTab === "Startup" ? "active" : ""
+              }`}
               onClick={() => {
                 setFilters(null);
                 setActiveTab("Startup");
@@ -159,8 +162,9 @@ export default function StartupExplore() {
               Startup
             </button>
             <button
-              className={`btn_base py-3 px-3 ${activeTab === "Founder" ? "active" : ""
-                }`}
+              className={`btn_base py-3 px-3 ${
+                activeTab === "Founder" ? "active" : ""
+              }`}
               onClick={() => {
                 setFilters(null);
                 setActiveTab("Founder");
@@ -180,14 +184,8 @@ export default function StartupExplore() {
           </div>
 
           {/* Filters */}
-          <form
-
-            onSubmit={onSubmitFilters}
-          >
-
+          <form onSubmit={onSubmitFilters}>
             <div className="startup_filters_container">
-
-
               {activeTab === "Investor" && (
                 <>
                   <FilterBySelect
@@ -264,7 +262,9 @@ export default function StartupExplore() {
                   <FilterBySelect
                     value={filters?.fundingRaised}
                     onChange={handleOnChange}
-                    options={filterOptions?.fundingRaised || fundingRaisedOptions}
+                    options={
+                      filterOptions?.fundingRaised || fundingRaisedOptions
+                    }
                     label="Funding Raised"
                     name="fundingRaised"
                   />
@@ -317,7 +317,9 @@ export default function StartupExplore() {
                   <FilterBySelect
                     value={filters?.previousExits}
                     onChange={handleOnChange}
-                    options={filterOptions?.previousExits || previousExitsOptions}
+                    options={
+                      filterOptions?.previousExits || previousExitsOptions
+                    }
                     label="Previous Exits"
                     name="previousExits"
                   />
@@ -325,7 +327,8 @@ export default function StartupExplore() {
                     value={filters?.yearsOfExperience}
                     onChange={handleOnChange}
                     options={
-                      filterOptions?.yearsOfExperience || yearsOfExperienceOptions
+                      filterOptions?.yearsOfExperience ||
+                      yearsOfExperienceOptions
                     }
                     label="Years of Experience"
                     name="yearsOfExperience"
@@ -350,14 +353,18 @@ export default function StartupExplore() {
               )}
             </div>
             <div className="d-flex flex-column flex-md-row gap-2 py-3">
-
-              <input type="search" className="search-filter-input" placeholder="Search" name="searchQuery" onChange={handleOnChange} />
+              <input
+                type="search"
+                className="search-filter-input"
+                placeholder="Search"
+                name="searchQuery"
+                onChange={handleOnChange}
+              />
               <button className="filter_button btn-capital " type="submit">
                 Filter {activeTab}
               </button>
             </div>
           </form>
-
         </div>
 
         {/* Companies List - pass filter props*/}
@@ -382,11 +389,11 @@ export default function StartupExplore() {
           )}
         </div>
       </section>
-      {showOnboarding ? (
+      {/* {showOnboarding ? (
         <OnBoardUser steps={startupOnboardingSteps.explorePage} />
       ) : (
         ""
-      )}
+      )} */}
     </MaxWidthWrapper>
   );
 }

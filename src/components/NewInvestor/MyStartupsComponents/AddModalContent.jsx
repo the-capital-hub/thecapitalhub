@@ -5,12 +5,18 @@ import { getBase64 } from "../../../utils/getBase64";
 import {
   addStartupInvested,
   addMyInterest,
+  searchStartUps,
+  // uploadLogo,
 } from "../../../Service/user";
 import { useSelector } from "react-redux";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import { useRef } from "react";
-
-export default function AddModalContent({ isInterests = false, setInvestedStartups, setMyInterests }) {
+import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
+export default function AddModalContent({
+  isInterests = false,
+  setInvestedStartups,
+  setMyInterests,
+}) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [interestLogo, setInterestLogo] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -21,21 +27,36 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
     equity: "",
     ask: "",
     commitment: "",
+    companyId: "",
+    companyOnelink: "",
   });
+  const [companies, setCompanies] = useState([]);
   const closeButton = useRef();
-
+  const [selectedCompanyId, setSelectedCompanyId] = useState(null);
+  const [disabled, setDisabled] = useState(false);
+  const [logo, setLogo] = useState(null);
   const handleSubmit = async (e) => {
-    setLoading(true);
     e.preventDefault();
+    if (formData.description && formData.description.length > 400) {
+      alert("Maximum allowed characters for description is 400.");
+      return;
+    }
+    setLoading(true);
+
     try {
       if (isInterests) {
-        const logo = await getBase64(interestLogo);
+        const companyLogo = selectedCompanyId
+          ? logo
+          : await getBase64(interestLogo);
         const newInterestData = {
-          logo: logo,
+          logo: companyLogo,
           name: formData.name,
           ask: formData.ask,
           commitment: formData.commitment,
           investedEquity: formData.equity,
+          companyId: formData.companyId,
+          companyOnelink: formData.companyOnelink,
+          isExisting: selectedCompanyId ? true : false,
         };
         const response = await addMyInterest(
           loggedInUser?.investor,
@@ -44,12 +65,17 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
         console.log(response.data.myInterests);
         setMyInterests(response.data.myInterests);
       } else {
-        const logo = await getBase64(formData.companyImage);
+        const companyLogo = selectedCompanyId
+          ? logo
+          : await getBase64(formData.companyImage);
         const newStartUpData = {
-          logo: logo,
+          logo: companyLogo,
           name: formData.name,
           description: formData.description,
           investedEquity: formData.equity,
+          companyId: formData.companyId,
+          companyOnelink: formData.companyOnelink,
+          isExisting: selectedCompanyId ? true : false,
         };
         const response = await addStartupInvested(
           loggedInUser?.investor,
@@ -63,21 +89,36 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   const handleInterestLogo = (e) => {
     setInterestLogo(e.target.files[0]);
-  }
+  };
 
   const handleInputChange = (event) => {
     const { name, value, type, files } = event.target;
-    console.log(name);
     if (type === "file") {
       setFormData({
         ...formData,
         [name]: files[0],
       });
+      setLogo(null);
     } else {
+      if (name === "name") {
+        searchStartUps(value)
+          .then(({ data }) => {
+            setCompanies(data);
+            console.log(data);
+          })
+          .catch(() => {
+            setCompanies([]);
+          });
+        setSelectedCompanyId(null);
+        setDisabled(false);
+        setLogo(null);
+      } else {
+        setCompanies([]);
+      }
       setFormData({
         ...formData,
         [name]: value,
@@ -85,6 +126,28 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
     }
   };
 
+  const handleCompanySelection = (
+    companyId,
+    companyName,
+    description,
+    companyOnelink,
+    companyLogo
+  ) => {
+    setSelectedCompanyId(companyId);
+    // const searchInput = document.querySelector(".");
+    // searchInput.value = companyName;
+    setFormData({
+      ...formData,
+      name: companyName,
+      description: description,
+      companyId: companyId,
+      companyOnelink: companyOnelink,
+      companyImage: "",
+    });
+    setInterestLogo("");
+    setLogo(companyLogo);
+    setDisabled(true);
+  };
 
   return (
     <div className="d-flex flex-column gap-3">
@@ -101,26 +164,33 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
                 accept="image/*"
                 className="visually-hidden"
                 onChange={handleInterestLogo}
+                disabled={disabled}
               />
-                <label htmlFor="interestLogo" className="text-black fw-lighter">
-              <div className="upload__label p-2">
-                <BsFillCloudUploadFill
-                  style={{
-                    fontSize: "1.5rem",
-                    color: "rgba(140, 90, 201, 1)",
-                  }}
-                />
+              <label htmlFor="interestLogo" className="text-black fw-lighter">
+                <div className="upload__label p-2">
+                  <BsFillCloudUploadFill
+                    style={{
+                      fontSize: "1.5rem",
+                      color: "rgba(140, 90, 201, 1)",
+                    }}
+                  />
                   <p>Upload Image</p>
                   {interestLogo && (
                     <img
-                      src={URL.createObjectURL(interestLogo)
-                      }
-                      alt="Selected Image"
+                      src={URL.createObjectURL(interestLogo)}
+                      alt="Selected Interest's media"
                       style={{ maxWidth: "100%", maxHeight: "70px" }}
                     />
                   )}
-              </div>
-                </label>
+                  {logo && (
+                    <img
+                      src={logo}
+                      alt="Selected logo"
+                      style={{ maxWidth: "100%", maxHeight: "70px" }}
+                    />
+                  )}
+                </div>
+              </label>
             </div>
           ) : (
             <div className="upload__image mt-4">
@@ -131,26 +201,33 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
                 accept="image/*"
                 className="visually-hidden"
                 onChange={handleInputChange}
+                disabled={disabled}
               />
-                <label htmlFor="companyImage" className="text-black fw-lighter">
-              <div className="upload__label p-2">
-                <BsFillCloudUploadFill
-                  style={{
-                    fontSize: "1.5rem",
-                    color: "rgba(140, 90, 201, 1)",
-                  }}
-                />
+              <label htmlFor="companyImage" className="text-black fw-lighter">
+                <div className="upload__label p-2">
+                  <BsFillCloudUploadFill
+                    style={{
+                      fontSize: "1.5rem",
+                      color: "rgba(140, 90, 201, 1)",
+                    }}
+                  />
                   <p>Upload Image</p>
                   {formData.companyImage && (
                     <img
-                      src={URL.createObjectURL(formData.companyImage)
-                      }
-                      alt="Selected Image"
+                      src={URL.createObjectURL(formData.companyImage)}
+                      alt="Selected company media"
                       style={{ maxWidth: "100%", maxHeight: "70px" }}
                     />
                   )}
-              </div>
-                </label>
+                  {logo && (
+                    <img
+                      src={logo}
+                      alt="Selected logo"
+                      style={{ maxWidth: "100%", maxHeight: "70px" }}
+                    />
+                  )}
+                </div>
+              </label>
             </div>
           )}
           <div className="">
@@ -161,7 +238,38 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
               placeholder={`company name...`}
               className="p-2 w-100 rounded-3 modal__input"
               onChange={handleInputChange}
+              value={formData.name}
             />
+            <div className="company_exsisting__container">
+              {companies.length !== 0 && (
+                <div className="suggestion">
+                  {companies.map((company, index) => (
+                    <div
+                      className={`suggestion-item ${
+                        selectedCompanyId === company._id ? "active" : ""
+                      }`}
+                      key={index}
+                      onClick={() =>
+                        handleCompanySelection(
+                          company._id,
+                          company.company,
+                          company.description,
+                          company.oneLink,
+                          company.logo
+                        )
+                      }
+                    >
+                      <img
+                        src={company.logo || DefaultAvatar}
+                        alt={`Company Logo ${index}`}
+                        className="suggestion-logo"
+                      />
+                      {company.company}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="">
@@ -172,6 +280,8 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
               className="p-2 w-100 rounded-3 modal__input"
               placeholder={`${isInterests ? "ask..." : "description..."}`}
               onChange={handleInputChange}
+              value={isInterests ? formData.ask : formData.description}
+              disabled={isInterests ? false : disabled}
             ></textarea>
           </div>
 
@@ -202,10 +312,7 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
               onChange={handleInputChange}
             />
           </div>
-          <button
-            type="submit"
-            className="green_button w-auto mx-auto fs-6"
-          >
+          <button type="submit" className="green_button w-auto mx-auto fs-6">
             {loading ? (
               <SpinnerBS
                 colorClass={"text-dark"}
@@ -216,7 +323,11 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
             )}
           </button>
         </form>
-        <button data-bs-dismiss="modal" style={{ display: "none" }} ref={closeButton}></button>
+        <button
+          data-bs-dismiss="modal"
+          style={{ display: "none" }}
+          ref={closeButton}
+        ></button>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import RecommendationCard from "../InvestorGlobalCards/Recommendation/Recommenda
 import NewsCorner from "../InvestorGlobalCards/NewsCorner/NewsCorner";
 import IntroductoryMessage from "../OneLink/IntroductoryMessage/IntroductoryMessage";
 import UploadContainer from "./UploadContainer/UploadContainer";
-import HalfbendCard from "../InvestorGlobalCards/Documentation/HalfbendCard/HalfbendCard";
+// import HalfbendCard from "../InvestorGlobalCards/Documentation/HalfbendCard/HalfbendCard";
 import { Card } from "../../InvestorView";
 import UploadModal from "./UploadModal/UploadModal";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +23,8 @@ import { setPageTitle } from "../../../Store/features/design/designSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getFoldersApi } from "../../../Service/user";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
+import TutorialTrigger from "../../Shared/TutorialTrigger/TutorialTrigger";
+import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
 
 const Documentation = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -51,7 +53,6 @@ const Documentation = () => {
         console.log(data.data);
         setFolderName(data.data);
         setLoading(false);
-
       })
       .catch((error) => {
         setLoading(false);
@@ -93,15 +94,19 @@ const Documentation = () => {
         {/* Main content */}
         <div className="left-content">
           <SmallProfileCard text={"Documentation"} />
+
+          {/* Onboarding popup */}
+          <TutorialTrigger steps={startupOnboardingSteps.documentationPage} />
+
           <div className="documentationStartup">
             {showModal && (
               <UploadModal onCancel={setShowModal} fetchFolder={getFolders} />
             )}
             <IntroductoryMessage
               title={"Upload your document"}
-            // para={
-            //   "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
-            // }
+              // para={
+              //   "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
+              // }
             />
             <UploadContainer
               onClicked={setShowModal}
@@ -112,40 +117,38 @@ const Documentation = () => {
                   onClicked={() => navigate("/documentation/financials")}
                   text={"Financials"}
                 /> */}
-              {loading &&
+              {loading && (
                 <SpinnerBS
                   className={
                     "d-flex py-5 justify-content-center align-items-center w-100"
                   }
                 />
-              }
-
+              )}
 
               {folderName.map((folder, index) => {
                 let imageToShow;
                 let folderName;
 
-
                 switch (folder) {
                   case "pitchdeck":
                     imageToShow = Pitch;
-                    folderName ="Pitch Deck";
+                    folderName = "Pitch Deck";
                     break;
                   case "business":
                     imageToShow = Business;
-                    folderName ="Business";
+                    folderName = "Business";
                     break;
                   case "kycdetails":
                     imageToShow = KYC;
-                    folderName ="KYC Details";
+                    folderName = "KYC Details";
                     break;
                   case "legal and compliance":
                     imageToShow = Legal;
-                    folderName ="Legal And Compliance";
+                    folderName = "Legal And Compliance";
                     break;
                   default:
                     imageToShow = Pitch;
-                    folderName =folder;
+                    folderName = folder;
                 }
 
                 return (

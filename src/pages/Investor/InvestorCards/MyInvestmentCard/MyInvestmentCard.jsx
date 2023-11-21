@@ -4,7 +4,11 @@ import InvestedIcon from "../../../../Images/investorIcon/Ellipse 192.svg";
 import { useState } from "react";
 import { BsFillCloudUploadFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import { getInvestorById, postInvestorData, uploadLogo } from "../../../../Service/user";
+import {
+  getInvestorById,
+  postInvestorData,
+  uploadLogo,
+} from "../../../../Service/user";
 import { getBase64 } from "../../../../utils/getBase64";
 import SpinnerBS from "../../../../components/Shared/Spinner/SpinnerBS";
 
@@ -60,7 +64,12 @@ const MyInvestmentCard = ({
 
   // Pass updated currCompany to EditModalContent.jsx
   const handleSave = async (currCompany) => {
+    if (currCompany.description && currCompany.description.length > 400) {
+      alert("Maximum allowed characters for description is 400.");
+      return;
+    }
     setLoading(true);
+
     try {
       if (isInterests) {
         console.log(currCompany);
@@ -104,8 +113,7 @@ const MyInvestmentCard = ({
     } finally {
       setLoading(false);
     }
-
-  }
+  };
 
   return (
     <div className="investment-card-container border rounded-4 position-relative">
@@ -161,8 +169,13 @@ const MyInvestmentCard = ({
           // Description
           <div className="">
             <p
-              className={`m-0 mt-2 ${editMode ? "d-none" : "d-block"} `}
-              style={{ color: "rgba(74, 74, 74, 1)" }}
+              className={`m-0 mt-2  ${editMode ? "d-none" : "d-block"} `}
+              style={{
+                color: "rgba(74, 74, 74, 1)",
+                maxHeight: "100px",
+                minHeight: "100px",
+                overflowY: "auto",
+              }}
             >
               {currCompany?.description}
             </p>
@@ -172,8 +185,9 @@ const MyInvestmentCard = ({
               name="description"
               rows={6}
               value={currCompany?.description}
-              className={`modal__input mt-2 w-100 rounded-2 p-2  ${editMode ? "d-block" : "d-none"
-                } `}
+              className={`modal__input mt-2 w-100 rounded-2 p-2  ${
+                editMode ? "d-block" : "d-none"
+              } `}
               onChange={(e) => handleInputChange(e, currCompany?.id)}
             />
           </div>
@@ -195,8 +209,9 @@ const MyInvestmentCard = ({
               name="ask"
               rows={3}
               value={currCompany?.ask}
-              className={`modal__input mt-2 w-100 rounded-2 p-2 ${editMode ? "d-block" : "d-none"
-                } `}
+              className={`modal__input mt-2 w-100 rounded-2 p-2 ${
+                editMode ? "d-block" : "d-none"
+              } `}
               onChange={(e) => handleInputChange(e, currCompany?.id)}
             />
           </div>
@@ -206,12 +221,13 @@ const MyInvestmentCard = ({
       {/* Equity */}
       {!isInterests ? (
         <div className="bottom d-flex align-items-center py-4 px-3 gap-2 ">
-          <img src={InvestedIcon} alt="Image" className="small-image" />
+          <img src={InvestedIcon} alt="" className="small-image" />
           <p className="m-0 " style={{ color: "rgba(74, 74, 74, 1)" }}>
             Invested:{" "}
             <span
-              className={`equity text-decoration-underline ms-2 ${editMode ? "d-none" : ""
-                }`}
+              className={`equity text-decoration-underline ms-2 ${
+                editMode ? "d-none" : ""
+              }`}
             >
               {currCompany?.investedEquity}%
             </span>{" "}
@@ -223,8 +239,9 @@ const MyInvestmentCard = ({
               value={currCompany?.investedEquity}
               min={0}
               max={100}
-              className={`modal__input rounded-2 mx-2 p-2 ${editMode ? "" : "d-none"
-                }`}
+              className={`modal__input rounded-2 mx-2 p-2 ${
+                editMode ? "" : "d-none"
+              }`}
               onChange={(e) => handleInputChange(e, currCompany?.id)}
             />
             <strong>Equity</strong>
@@ -244,8 +261,9 @@ const MyInvestmentCard = ({
                 type="text"
                 name="commitment"
                 id="commitment"
-                className={`modal__input p-2 mx-1 w-50 rounded-2 ${editMode ? "d-inline" : "d-none"
-                  } `}
+                className={`modal__input p-2 mx-1 w-50 rounded-2 ${
+                  editMode ? "d-inline" : "d-none"
+                } `}
                 value={currCompany?.commitment}
                 onChange={(e) => handleInputChange(e, currCompany?.id)}
               />
@@ -253,12 +271,13 @@ const MyInvestmentCard = ({
           </div>
 
           <div className="bottom d-flex align-items-center py-2 px-3 gap-2">
-            <img src={InvestedIcon} alt="Image" className="small-image" />
+            <img src={InvestedIcon} alt="" className="small-image" />
             <p className="m-0 " style={{ color: "rgba(74, 74, 74, 1)" }}>
               Invested:{" "}
               <span
-                className={`equity text-decoration-underline ms-2 ${editMode ? "d-none" : ""
-                  }`}
+                className={`equity text-decoration-underline ms-2 ${
+                  editMode ? "d-none" : ""
+                }`}
               >
                 {currCompany?.investedEquity}%
               </span>{" "}
@@ -270,8 +289,9 @@ const MyInvestmentCard = ({
                 min={0}
                 max={100}
                 value={currCompany?.investedEquity}
-                className={`modal__input rounded-2 mx-2 p-2  ${editMode ? "" : "d-none"
-                  }`}
+                className={`modal__input rounded-2 mx-2 p-2  ${
+                  editMode ? "" : "d-none"
+                }`}
                 onChange={(e) => handleInputChange(e, currCompany?.id)}
               />
               <strong>Equity</strong>
@@ -284,7 +304,7 @@ const MyInvestmentCard = ({
         <button
           className="green_button save__button position-absolute start-50 translate-middle-x "
           onClick={() => handleSave(currCompany)}
-        // data-bs-dismiss="modal"
+          // data-bs-dismiss="modal"
         >
           {loading ? (
             <SpinnerBS
@@ -298,8 +318,11 @@ const MyInvestmentCard = ({
       ) : (
         ""
       )}
-      <button data-bs-dismiss="modal" style={{ display: "none" }} ref={closeButton}></button>
-
+      <button
+        data-bs-dismiss="modal"
+        style={{ display: "none" }}
+        ref={closeButton}
+      ></button>
     </div>
   );
 };

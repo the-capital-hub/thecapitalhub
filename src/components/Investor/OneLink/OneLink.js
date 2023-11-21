@@ -28,6 +28,8 @@ import {
   OnePagerTeam,
 } from "../../Shared/OnePager";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
+import TutorialTrigger from "../../Shared/TutorialTrigger/TutorialTrigger";
+import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
 
 const OneLink = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -70,6 +72,10 @@ const OneLink = () => {
 
           <div className="main__content">
             {/* <SmallProfileCard text={"One Link"} /> */}
+
+            {/* Onboarding popup */}
+            <TutorialTrigger steps={startupOnboardingSteps.oneLinkPage} />
+
             {/* ShareLink */}
             <ShareLink
               OneLink={company?.oneLink}

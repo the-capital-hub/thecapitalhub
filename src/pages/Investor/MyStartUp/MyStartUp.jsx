@@ -6,7 +6,7 @@ import logoIcon from "../../../Images/investorIcon/Rectangle 1577.png";
 import EyeLikeImage from "../../../Images/investorIcon/Ellipse 192.svg";
 import ChartComponent from "./ChartComponent";
 import PostInvestmentCard from "../InvestorCards/PostInvestmentCard/PostInvestmentCard";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import ModalBsLauncher from "../../../components/PopUp/ModalBS/ModalBsLauncher/ModalBsLauncher";
 import ModalBSContainer from "../../../components/PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
 import ModalBSHeader from "../../../components/PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
@@ -56,7 +56,7 @@ const MyStartUp = () => {
   useEffect(() => {
     document.title = "My Startups | Investors - The Capital Hub";
     dispatch(setPageTitle("My Startups"));
-  }, []);
+  }, [dispatch]);
 
   // Make fetch request for companies data
 
@@ -67,11 +67,12 @@ const MyStartUp = () => {
   const [investor, setInvestor] = useState([]);
 
   useEffect(() => {
-    getInvestorById(loggedInUser?.investor).then(({ data }) => {
-      setInvestor(data);
-      setInvestedStartups(data.startupsInvested);
-      setMyInterests(data.myInterests);
-    })
+    getInvestorById(loggedInUser?.investor)
+      .then(({ data }) => {
+        setInvestor(data);
+        setInvestedStartups(data.startupsInvested);
+        setMyInterests(data.myInterests);
+      })
       .catch((error) => {
         console.error(error);
       });
@@ -89,34 +90,35 @@ const MyStartUp = () => {
               <div className="">
                 {/* <Link to={""}>Add New</Link> */}
                 {/* {investor?.founderId === loggedInUser._id && ( */}
-                  <ModalBsLauncher
-                    id={"myInvestmentsAddModal"}
-                    className={"green_button"}
-                  >
-                    Add New
-                  </ModalBsLauncher>
+                <ModalBsLauncher
+                  id={"myInvestmentsAddModal"}
+                  className={"green_button"}
+                >
+                  Add New
+                </ModalBsLauncher>
                 {/* )} */}
               </div>
               <div className="">
                 {/* <Link to={""}>Edit</Link> */}
                 {/* {investor?.founderId === loggedInUser._id && ( */}
-                  <ModalBsLauncher
-                    id={"myInvestmentsEditModal"}
-                    className={"green_button"}
-                  >
-                    Edit
-                  </ModalBsLauncher>
+                <ModalBsLauncher
+                  id={"myInvestmentsEditModal"}
+                  className={"green_button"}
+                >
+                  Edit
+                </ModalBsLauncher>
                 {/* )} */}
               </div>
             </div>
           </div>
           <div className="card_container border-bottom p-4 d-flex gap-5 align-items-center overflow-x-auto">
-
-            {investedStartups.length > 0 ? investedStartups?.map((company, index) => {
-              return <MyInvestmentCard key={company.id} company={company} />;
-            })
-              : "No Data Found."
-            }
+            {investedStartups.length > 0
+              ? investedStartups?.map((company, index) => {
+                  return (
+                    <MyInvestmentCard key={company.id} company={company} />
+                  );
+                })
+              : "No Data Found."}
           </div>
           {/* My Investments Add Modal */}
           <ModalBSContainer id={"myInvestmentsAddModal"} isStatic={false}>
@@ -150,39 +152,39 @@ const MyStartUp = () => {
               <div className="">
                 {/* <Link to={""}>Add New</Link> */}
                 {/* {investor?.founderId === loggedInUser._id && ( */}
-                  <ModalBsLauncher
-                    id={"myInterestsAddModal"}
-                    className={"green_button"}
-                  >
-                    Add New
-                  </ModalBsLauncher>
+                <ModalBsLauncher
+                  id={"myInterestsAddModal"}
+                  className={"green_button"}
+                >
+                  Add New
+                </ModalBsLauncher>
                 {/* )} */}
               </div>
               <div className="">
                 {/* <Link to={""}>Edit</Link> */}
                 {/* {investor?.founderId === loggedInUser._id && ( */}
-                  <ModalBsLauncher
-                    id={"myInterestsEditModal"}
-                    className={"green_button"}
-                  >
-                    Edit
-                  </ModalBsLauncher>
+                <ModalBsLauncher
+                  id={"myInterestsEditModal"}
+                  className={"green_button"}
+                >
+                  Edit
+                </ModalBsLauncher>
                 {/* )} */}
               </div>
             </div>
           </div>
           <div className="card_container p-4 d-flex gap-5 align-items-center overflow-x-auto ">
-            {myInterests.length > 0 ? myInterests?.map((company, index) => {
-              return (
-                <MyInvestmentCard
-                  key={company.id}
-                  company={company}
-                  isInterests={true}
-                />
-              );
-            })
-              : "No Data Found."
-            }
+            {myInterests.length > 0
+              ? myInterests?.map((company, index) => {
+                  return (
+                    <MyInvestmentCard
+                      key={company.id}
+                      company={company}
+                      isInterests={true}
+                    />
+                  );
+                })
+              : "No Data Found."}
           </div>
           {/* My Interests Add Modal */}
           <ModalBSContainer id={"myInterestsAddModal"} isStatic={false}>

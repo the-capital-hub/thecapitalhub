@@ -85,7 +85,7 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
       const contentType = getContentType(fileExtension);
 
       const params = {
-        Bucket: "capitalhubdocuments",
+        Bucket: "thecapitalhubdocuments",
         Key: `documents/${fileName}`,
         Body: file,
         ContentDisposition: "inline",
