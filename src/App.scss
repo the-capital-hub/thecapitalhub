@@ -230,3 +230,37 @@ button {
     transform: scale(1);
   }
 }
+
+// slideUP keyframe
+.slideUp {
+  animation: slideUp 0.5s ease-out forwards;
+  // opacity: 0.5;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(2dvw);
+    // opacity: 0.5;
+  }
+  to {
+    transform: translate(0px);
+    opacity: 1;
+  }
+}
+
+// slideUP keyframe
+.slideDown {
+  animation: slideDown 0.5s ease-out forwards;
+  // opacity: 0.5;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-2dvw);
+    // opacity: 0.5;
+  }
+  to {
+    transform: translate(0px);
+    opacity: 1;
+  }
+}

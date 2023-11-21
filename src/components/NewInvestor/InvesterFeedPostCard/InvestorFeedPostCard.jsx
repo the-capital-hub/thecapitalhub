@@ -110,14 +110,14 @@ const FeedPostCard = ({
           designation: loggedInUser.designation,
         },
         text: commentTextTemp,
-      }
+      };
       setComments((prev) => [...prev, commentBody]);
 
       const requestBody = {
         postId: postId,
         userId: loggedInUser._id,
         text: commentTextTemp,
-      }
+      };
       const response = await sendPostComment(requestBody);
 
       if (response) {
@@ -128,7 +128,6 @@ const FeedPostCard = ({
       }
 
       console.log("Comment submitted successfully:", response.data);
-
     } catch (error) {
       console.error("Error submitting comment:", error);
     }
@@ -305,7 +304,9 @@ const FeedPostCard = ({
 
   const deleteComments = async (postId, commentId) => {
     try {
-      const updatedComments = comments.filter(comment => comment._id !== commentId);
+      const updatedComments = comments.filter(
+        (comment) => comment._id !== commentId
+      );
       setComments(updatedComments);
       await deleteComment(postId, commentId);
       // await getPostComment({ postId }).then((res) => {
@@ -321,8 +322,9 @@ const FeedPostCard = ({
       <div className="row investor_feedpostcard_main_container mb-2">
         <div className="col-12">
           <div
-            className={`box feedpostcard_container mt-2 border ${repostPreview && "rounded-4 shadow-sm"
-              }`}
+            className={`box feedpostcard_container mt-2 border ${
+              repostPreview && "rounded-4 shadow-sm"
+            }`}
           >
             {loading && (
               <div class="d-flex justify-content-center my-4">
@@ -387,7 +389,7 @@ const FeedPostCard = ({
                 </div>
               </div>
               {!repostPreview && (
-                <div className="three_dot px-md-4">
+                <div className="three_dot pe-2 px-md-4">
                   <div
                     className="kebab_menu_container"
                     ref={kebabMenuContainerRef}
@@ -436,19 +438,19 @@ const FeedPostCard = ({
                     >
                       {/* {description}{" "} */}
                       {expanded
-                      ? description
-                      : description.split(" ").slice(0, 15).join(" ")}
-                    {!expanded &&
-                      description.split(" ").length > 15 &&
-                      !expanded && (
-                        <span
-                          style={{ color: "blue", cursor: "pointer" }}
-                          onClick={toggleDescription}
-                        >
-                           ...Read more
-                        </span>
-                      )}
-                     
+                        ? description
+                        : description.split(" ").slice(0, 15).join(" ")}
+                      {!expanded &&
+                        description.split(" ").length > 15 &&
+                        !expanded && (
+                          <span
+                            style={{ color: "blue", cursor: "pointer" }}
+                            onClick={toggleDescription}
+                          >
+                            ...Read more
+                          </span>
+                        )}
+
                       {documentUrl && (
                         <a href={documentUrl} className="mx-auto">
                           {documentName}
@@ -544,8 +546,9 @@ const FeedPostCard = ({
                   </div>
                   <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                     <span
-                      className={`repost_container rounded ${showRepostOptions ? "bg-light" : ""
-                        }`}
+                      className={`repost_container rounded ${
+                        showRepostOptions ? "bg-light" : ""
+                      }`}
                       ref={repostContainerRef}
                     >
                       <img
@@ -814,8 +817,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Harassment" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio1"
               >
                 Harassment
@@ -832,8 +836,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Spam" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio2"
               >
                 Spam
@@ -850,8 +855,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Fraud or scam" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio3"
               >
                 Fraud or scam
@@ -868,8 +874,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
-                  }`}
+                class={`form-check-label ${
+                  reportReason === "Hateful Speech" && "bg-secondary text-white"
+                }`}
                 for="inlineRadio4"
               >
                 Hateful Speech

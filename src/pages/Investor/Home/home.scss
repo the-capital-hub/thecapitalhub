@@ -6,7 +6,7 @@
   display: grid;
   grid-template-columns: 100%;
 
-  @media (min-width: 1320px) {
+  @media (min-width: 1200px) {
     grid-template-columns: calc(100% - 26rem) 24rem;
   }
 

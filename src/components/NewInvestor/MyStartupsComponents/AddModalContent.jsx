@@ -6,13 +6,17 @@ import {
   addStartupInvested,
   addMyInterest,
   searchStartUps,
-  uploadLogo,
+  // uploadLogo,
 } from "../../../Service/user";
 import { useSelector } from "react-redux";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import { useRef } from "react";
 import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
-export default function AddModalContent({ isInterests = false, setInvestedStartups, setMyInterests }) {
+export default function AddModalContent({
+  isInterests = false,
+  setInvestedStartups,
+  setMyInterests,
+}) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [interestLogo, setInterestLogo] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -34,14 +38,16 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.description && formData.description.length > 400) {
-      alert('Maximum allowed characters for description is 400.');
+      alert("Maximum allowed characters for description is 400.");
       return;
     }
     setLoading(true);
 
     try {
       if (isInterests) {
-        const companyLogo = selectedCompanyId ? logo : await getBase64(interestLogo);
+        const companyLogo = selectedCompanyId
+          ? logo
+          : await getBase64(interestLogo);
         const newInterestData = {
           logo: companyLogo,
           name: formData.name,
@@ -59,7 +65,9 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
         console.log(response.data.myInterests);
         setMyInterests(response.data.myInterests);
       } else {
-        const companyLogo = selectedCompanyId ? logo : await getBase64(formData.companyImage);
+        const companyLogo = selectedCompanyId
+          ? logo
+          : await getBase64(formData.companyImage);
         const newStartUpData = {
           logo: companyLogo,
           name: formData.name,
@@ -81,11 +89,11 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   const handleInterestLogo = (e) => {
     setInterestLogo(e.target.files[0]);
-  }
+  };
 
   const handleInputChange = (event) => {
     const { name, value, type, files } = event.target;
@@ -118,7 +126,13 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
     }
   };
 
-  const handleCompanySelection = (companyId, companyName, description, companyOnelink, companyLogo) => {
+  const handleCompanySelection = (
+    companyId,
+    companyName,
+    description,
+    companyOnelink,
+    companyLogo
+  ) => {
     setSelectedCompanyId(companyId);
     // const searchInput = document.querySelector(".");
     // searchInput.value = companyName;
@@ -128,7 +142,7 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
       description: description,
       companyId: companyId,
       companyOnelink: companyOnelink,
-      companyImage: ""
+      companyImage: "",
     });
     setInterestLogo("");
     setLogo(companyLogo);
@@ -163,16 +177,15 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
                   <p>Upload Image</p>
                   {interestLogo && (
                     <img
-                      src={URL.createObjectURL(interestLogo)
-                      }
-                      alt="Selected Image"
+                      src={URL.createObjectURL(interestLogo)}
+                      alt="Selected Interest's media"
                       style={{ maxWidth: "100%", maxHeight: "70px" }}
                     />
                   )}
                   {logo && (
                     <img
                       src={logo}
-                      alt="Selected Image"
+                      alt="Selected logo"
                       style={{ maxWidth: "100%", maxHeight: "70px" }}
                     />
                   )}
@@ -189,7 +202,6 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
                 className="visually-hidden"
                 onChange={handleInputChange}
                 disabled={disabled}
-
               />
               <label htmlFor="companyImage" className="text-black fw-lighter">
                 <div className="upload__label p-2">
@@ -202,16 +214,15 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
                   <p>Upload Image</p>
                   {formData.companyImage && (
                     <img
-                      src={URL.createObjectURL(formData.companyImage)
-                      }
-                      alt="Selected Image"
+                      src={URL.createObjectURL(formData.companyImage)}
+                      alt="Selected company media"
                       style={{ maxWidth: "100%", maxHeight: "70px" }}
                     />
                   )}
                   {logo && (
                     <img
                       src={logo}
-                      alt="Selected Image"
+                      alt="Selected logo"
                       style={{ maxWidth: "100%", maxHeight: "70px" }}
                     />
                   )}
@@ -234,10 +245,9 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
                 <div className="suggestion">
                   {companies.map((company, index) => (
                     <div
-                      className={`suggestion-item ${selectedCompanyId === company._id
-                        ? "active"
-                        : ""
-                        }`}
+                      className={`suggestion-item ${
+                        selectedCompanyId === company._id ? "active" : ""
+                      }`}
                       key={index}
                       onClick={() =>
                         handleCompanySelection(
@@ -245,7 +255,7 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
                           company.company,
                           company.description,
                           company.oneLink,
-                          company.logo,
+                          company.logo
                         )
                       }
                     >
@@ -302,11 +312,7 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
               onChange={handleInputChange}
             />
           </div>
-          <button
-            type="submit"
-            className="green_button w-auto mx-auto fs-6"
-          >
-
+          <button type="submit" className="green_button w-auto mx-auto fs-6">
             {loading ? (
               <SpinnerBS
                 colorClass={"text-dark"}
@@ -317,7 +323,11 @@ export default function AddModalContent({ isInterests = false, setInvestedStartu
             )}
           </button>
         </form>
-        <button data-bs-dismiss="modal" style={{ display: "none" }} ref={closeButton}></button>
+        <button
+          data-bs-dismiss="modal"
+          style={{ display: "none" }}
+          ref={closeButton}
+        ></button>
       </div>
     </div>
   );
