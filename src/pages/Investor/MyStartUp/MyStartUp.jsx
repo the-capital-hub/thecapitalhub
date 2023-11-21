@@ -117,6 +117,7 @@ const MyStartUp = () => {
             })
               : "No Data Found."
             }
+            
           </div>
           {/* My Investments Add Modal */}
           <ModalBSContainer id={"myInvestmentsAddModal"} isStatic={false}>
