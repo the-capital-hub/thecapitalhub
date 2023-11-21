@@ -93,7 +93,7 @@ export const addSectorOfInterest = async (investorId, sectorData) => {
         message: "Investor not found",
       };
     }
-    if (sectorData.logo) {
+    if (sectorData.logo && !sectorData.isExisting) {
       const { url } = await cloudinary.uploader.upload(sectorData.logo, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
         format: "webp",
@@ -128,7 +128,7 @@ export const addStartupInvested = async (investorId, startupData) => {
         message: "Investor not found",
       };
     }
-    if (startupData.logo) {
+    if (startupData.logo && !startupData.isExisting) {
       const { url } = await cloudinary.uploader.upload(startupData.logo, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
         format: "webp",

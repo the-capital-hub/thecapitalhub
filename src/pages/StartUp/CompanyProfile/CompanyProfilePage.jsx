@@ -84,6 +84,7 @@ export default function CompanyProfilePage() {
         getStartupByFounderId(loggedInUser._id)
           .then(({ data }) => {
             setCompanyData(data);
+            dispatch(setUserCompany(data));
             setSelectedCompanyId(null);
             setCompanies([]);
           })
@@ -158,11 +159,10 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${
-                                  selectedCompanyId === company._id
+                                className={`suggestion-item ${selectedCompanyId === company._id
                                     ? "active"
                                     : ""
-                                }`}
+                                  }`}
                                 key={index}
                                 onClick={() =>
                                   handleCompanySelection(
@@ -218,11 +218,10 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${
-                                  selectedCompanyId === company._id
+                                className={`suggestion-item ${selectedCompanyId === company._id
                                     ? "active"
                                     : ""
-                                }`}
+                                  }`}
                                 key={index}
                                 onClick={() =>
                                   handleCompanySelection(

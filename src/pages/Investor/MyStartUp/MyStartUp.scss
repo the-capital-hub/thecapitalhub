@@ -14,11 +14,13 @@
       font-weight: 500;
       line-height: normal;
     }
+
     // .card_container {
     //   display: flex;
     //   justify-content: space-between;
     // }
   }
+
   .big_card_container {
     margin-bottom: 2rem;
     width: 99%;
@@ -36,6 +38,7 @@
       height: max-content;
       max-height: 30rem;
     }
+
     .left_container {
       .chart_container {
         display: flex;
@@ -48,26 +51,27 @@
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      gap:10px;
+      gap: 10px;
 
       .two_by_two_card_container {
         display: flex;
         justify-content: space-between;
         align-items: center;
         overflow-y: scroll;
-        
+
         @media (min-width: 821px) {
           overflow-y: visible;
           overflow-x: auto;
           flex-wrap: wrap;
 
-          .postinvestment-card-container{
+          .postinvestment-card-container {
             width: 100%;
           }
         }
       }
     }
   }
+
   .green_button {
     border-radius: 5px;
     background: #d3f36b;
@@ -132,15 +136,18 @@
   background-color: transparent;
   border-radius: 10rem;
 }
+
 @media (max-width: 769px) {
   .mystartup_main_container {
     .big_card_container {
       width: 100%;
+
       .left_container,
       .right_container {
         width: 100%;
         height: auto;
       }
+
       .chart_container {
         // width: 75%;
       }

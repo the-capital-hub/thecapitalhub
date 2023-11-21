@@ -60,7 +60,12 @@ const MyInvestmentCard = ({
 
   // Pass updated currCompany to EditModalContent.jsx
   const handleSave = async (currCompany) => {
+    if (currCompany.description && currCompany.description.length > 400) {
+      alert('Maximum allowed characters for description is 400.');
+      return;
+    }
     setLoading(true);
+
     try {
       if (isInterests) {
         console.log(currCompany);
@@ -161,8 +166,13 @@ const MyInvestmentCard = ({
           // Description
           <div className="">
             <p
-              className={`m-0 mt-2 ${editMode ? "d-none" : "d-block"} `}
-              style={{ color: "rgba(74, 74, 74, 1)" }}
+              className={`m-0 mt-2  ${editMode ? "d-none" : "d-block"} `}
+              style={{
+                color: "rgba(74, 74, 74, 1)",
+                maxHeight: "100px",
+                minHeight: "100px",
+                overflowY: "auto",
+              }}
             >
               {currCompany?.description}
             </p>
