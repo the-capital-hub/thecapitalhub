@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ModalBSBody,
   ModalBSContainer,
@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import InvestedCard from "../InvestedCard";
 import "./StartupsInvested.scss";
 import { selectUserStartupsInvested } from "../../../../Store/features/user/userSlice";
+import { getInvestorById } from "../../../../Service/user";
 
 export default function StartupsInvested() {
   // Fetch loggedInUser from global state
@@ -18,6 +19,15 @@ export default function StartupsInvested() {
   // States for Invested Startups
   const [investedStartups, setInvestedStartups] =
     useState(userStartupsInvested);
+
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  useEffect(() => {
+    getInvestorById(loggedInUser.investor)
+      .then(({ data }) => {
+        setInvestedStartups(data.startupsInvested);
+      })
+      .catch(() => setInvestedStartups([]));
+  })
 
   return (
     <>
@@ -37,7 +47,7 @@ export default function StartupsInvested() {
         </div>
         {/* Loop cards here */}
         <div className="invested_cards px-3 py-4">
-          {userStartupsInvested?.map((startUp, index) => {
+          {investedStartups?.map((startUp, index) => {
             return <InvestedCard startUp={startUp} key={startUp._id} />;
           })}
         </div>

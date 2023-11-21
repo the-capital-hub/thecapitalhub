@@ -79,6 +79,8 @@ const investorSchema = new Schema(
         description: String,
         logo: String,
         investedEquity: String,
+        companyId: String,
+        companyOnelink: String,
       },
     ],
     myInterests: [
@@ -88,6 +90,8 @@ const investorSchema = new Schema(
         ask: String,
         commitment: String,
         investedEquity: String,
+        companyId: String,
+        companyOnelink: String,
       },
     ],
     investmentPhilosophy: {
