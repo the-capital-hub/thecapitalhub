@@ -191,7 +191,7 @@ const CreatePostPopUp = ({
       const timestamp = Date.now();
       const fileName = `${timestamp}_${selectedDocument.name}`;
       const params = {
-        Bucket: "capitalhubdocuments",
+        Bucket: "thecapitalhubdocuments",
         Key: `documents/${fileName}`,
         Body: selectedDocument,
       };
