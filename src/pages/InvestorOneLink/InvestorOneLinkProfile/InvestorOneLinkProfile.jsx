@@ -16,8 +16,10 @@ export default function InvestorOneLinkProfile() {
   console.log(company);
   return (
     <div className="investor_one_link_profile_page d-flex flex-column">
-      <h1>Investor Profile</h1>
-      <div className="main_inner-section d-flex flex-column gap-3">
+      <h1 className="mb-3 px-3 px-xxl-0 fw-bold page_heading">
+        Investor Profile
+      </h1>
+      <div className="main_inner-section d-flex flex-column gap-3 p-3">
         <div className="user_data_section d-flex flex-row gap-3 py-3">
           <img
             src={investor?.profilePicture}
