@@ -1,10 +1,9 @@
 import React from "react";
 import "./InvestorOneLinkProfile.scss";
-import pramod from "../../../Images/aboutUs/Pramod.jpeg";
-import assets from "../../../Images/investorOneLink/profile/index";
+// import pramod from "../../../Images/aboutUs/Pramod.jpeg";
+// import assets from "../../../Images/investorOneLink/profile/index";
 import { useOutletContext } from "react-router";
 import PublicLinks from "../../../components/NewInvestor/CompanyProfileComponents/company-section-two/public-links/PublicLinks";
-
 
 export default function InvestorOneLinkProfile() {
   const { investor, company } = useOutletContext();
@@ -14,7 +13,7 @@ export default function InvestorOneLinkProfile() {
     twitter: "",
     linkedin: "",
   };
-  console.log(company)
+  console.log(company);
   return (
     <div className="investor_one_link_profile_page d-flex flex-column">
       <h1>Investor Profile</h1>

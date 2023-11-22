@@ -4,31 +4,38 @@ import {
   Menu,
   MenuItem,
   SidebarHeader,
-  SidebarFooter,
+  // SidebarFooter,
   SidebarContent,
 } from "react-pro-sidebar";
 import { Link, useParams } from "react-router-dom";
-import { getUserById } from "../../../Service/user";
-import ArrowLeft from "../../../Images/investorsidebar/ArrowLeft.svg";
-import ArrowRight from "../../../Images/investorsidebar/ArrowRight.svg";
+// import { getUserById } from "../../../Service/user";
+// import ArrowLeft from "../../../Images/investorsidebar/ArrowLeft.svg";
+// import ArrowRight from "../../../Images/investorsidebar/ArrowRight.svg";
 import IconProfile from "../SvgIcons/IconProfile";
 import IconStartupsInvested from "../SvgIcons/IconStartupsInvested";
 import IconInvestmentPhilosophy from "../SvgIcons/IconInvestmentPhil";
 import IconAppointment from "../SvgIcons/IconAppointment";
 import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
-import { useOutletContext } from "react-router";
+// import { useOutletContext } from "react-router";
 import { getInvestorFromOneLinkAPI } from "../../../Service/user";
-
 import "./InvestorOneLinkSidebar.scss";
+import { useSelector } from "react-redux";
+import { selectIsMobileView } from "../../../Store/features/design/designSlice";
 
 export default function InvestorOneLinkSidebar({
   sidebarCollapsed,
   setSidebarCollapsed,
 }) {
+  const isMobileView = useSelector(selectIsMobileView);
+
   // get params
   const { oneLink } = useParams();
   const { userId } = useParams();
   const [investorData, setInvestorData] = useState(null);
+
+  // States for touch events
+  const [touchStartX, setTouchStartX] = useState(null);
+  const [touchEndX, setTouchEndX] = useState(null);
 
   useEffect(() => {
     getInvestorFromOneLinkAPI(oneLink, userId)
@@ -41,8 +48,30 @@ export default function InvestorOneLinkSidebar({
   // States
   const [currentTab, setCurrentTab] = useState("investorProfile");
 
-  const menuIconClick = () => {
-    setSidebarCollapsed(!sidebarCollapsed);
+  // const menuIconClick = () => {
+  //   setSidebarCollapsed(!sidebarCollapsed);
+  // };
+
+  // Methods for touch events
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEndX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX && touchEndX) {
+      const deltaX = touchEndX - touchStartX;
+      if (deltaX < -50) {
+        setSidebarCollapsed(false); // Expand the sidebar
+      } else if (deltaX > 50) {
+        setSidebarCollapsed(true); // Collapse the sidebar
+      }
+      setTouchStartX(null);
+      setTouchEndX(null);
+    }
   };
 
   return (
@@ -51,6 +80,19 @@ export default function InvestorOneLinkSidebar({
         className={`container sidebar_container investor_onelink_view_sidebar  ${
           sidebarCollapsed ? "collapsed" : ""
         }`}
+        onMouseLeave={() => {
+          if (!isMobileView) {
+            setSidebarCollapsed(true);
+          }
+        }}
+        onMouseEnter={() => {
+          if (!isMobileView) {
+            setSidebarCollapsed(false);
+          }
+        }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <div id="header">
           <ProSidebar collapsed={sidebarCollapsed}>
@@ -59,14 +101,17 @@ export default function InvestorOneLinkSidebar({
               <div className="logotext">
                 <>
                   <img
-                    src={investorData?.investor?.profilePicture || DefaultAvatar}
-                    alt="image"
+                    src={
+                      investorData?.investor?.profilePicture || DefaultAvatar
+                    }
+                    alt="Profile"
                     className="rounded-circle"
                   />
                   <h3
                     className={`${sidebarCollapsed ? "invisible" : "visible"}`}
                   >
-                    {investorData?.investor?.firstName} {investorData?.investor?.lastName}
+                    {investorData?.investor?.firstName}{" "}
+                    {investorData?.investor?.lastName}
                   </h3>
                   <h4
                     className={`${sidebarCollapsed ? "invisible" : "visible"}`}
@@ -75,17 +120,13 @@ export default function InvestorOneLinkSidebar({
                   </h4>
                 </>
               </div>
-              <div className="closemenu" onClick={menuIconClick}>
+              {/* <div className="closemenu" onClick={menuIconClick}>
                 {sidebarCollapsed ? (
-                  <img
-                    className="closemenu-Right"
-                    src={ArrowRight}
-                    alt="image"
-                  />
+                  <img className="closemenu-Right" src={ArrowRight} alt="" />
                 ) : (
-                  <img className="closemenu-Left" src={ArrowLeft} alt="image" />
+                  <img className="closemenu-Left" src={ArrowLeft} alt="" />
                 )}
-              </div>
+              </div> */}
             </SidebarHeader>
 
             {/* Sidebar Content */}
