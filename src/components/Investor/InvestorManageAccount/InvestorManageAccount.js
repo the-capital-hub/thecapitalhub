@@ -97,6 +97,13 @@ const InvestorManageAccount = () => {
     const storedAccounts = JSON.parse(localStorage.getItem("StartupAccounts")) || [];
     const updatedAccounts = storedAccounts.filter((account) => account.user._id !== removeAccountDetails._id);
     localStorage.setItem("StartupAccounts", JSON.stringify(updatedAccounts));
+    if (loggedInUser && loggedInUser._id === removeAccountDetails._id) {
+      const updatedLoggedInUser = updatedAccounts.length > 0 ? updatedAccounts[0].user : null;
+      dispatch(loginSuccess(updatedLoggedInUser));
+      if (updatedLoggedInUser === null) {
+        handleLogoutLogic();
+      }
+    }
   }
 
   return (
@@ -273,12 +280,14 @@ const InvestorManageAccount = () => {
                       </>
                     ))}
                     <div className="footer">
-                      <button
-                        className="btn btn-delete "
-                        onClick={handleSwitchAccount}
-                      >
-                        {isSubmitting ? "Switching Account...." : "Switch Account"}
-                      </button>
+                      {otherAccounts.length > 1 &&
+                        <button
+                          className="btn btn-delete "
+                          onClick={handleSwitchAccount}
+                        >
+                          {isSubmitting ? "Switching Account...." : "Switch Account"}
+                        </button>
+                      }
                       <Link to="/login">
                         <button
                           className="btn btn-delete "
