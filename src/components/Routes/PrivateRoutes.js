@@ -78,7 +78,7 @@ function PrivateRoute({ children, ...props }) {
             />
           </div>
 
-          <div className="content">
+          <div className="content pb-5 pb-mb-0">
             <Outlet />
           </div>
 

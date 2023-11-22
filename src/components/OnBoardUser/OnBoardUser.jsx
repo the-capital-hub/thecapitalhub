@@ -52,7 +52,7 @@ function OnBoardUser({
 
   const CustomButton = ({ onClick, title, isActive }) => (
     <button
-      className={`custom-joyride-button${isActive ? " active" : ""} px-3 py-2`}
+      className={`custom-joyride-button${isActive ? " active" : ""} px-3 py-2 d-none d-md-block`}
       onClick={onClick}
       type="button"
     >
