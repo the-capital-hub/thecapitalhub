@@ -80,7 +80,7 @@ function ProtectedInvestorRoutes({ children, ...props }) {
             />
           </div>
 
-          <div className="content">
+          <div className="content pb-5 pb-md-0">
             <Outlet />
           </div>
         </div>
