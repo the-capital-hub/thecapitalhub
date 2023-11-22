@@ -13,10 +13,12 @@ import { logout } from "../../../Store/features/user/userSlice";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
+import deleteIcon from "../../../Images/post/delete.png";
 
 const InvestorManageAccount = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const otherAccounts = JSON.parse(localStorage.getItem("StartupAccounts")) || [];
+  const otherAccounts =
+    JSON.parse(localStorage.getItem("StartupAccounts")) || [];
   const [selectedAccount, setSelectedAcc] = useState(loggedInUser);
   const [selectedAccountFull, setSelectedAccFull] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -75,7 +77,9 @@ const InvestorManageAccount = () => {
 
   const handleSwitchAccount = () => {
     if (selectedAccountFull) {
-      const confirmSwitch = window.confirm("Are you sure you want to switch account?");
+      const confirmSwitch = window.confirm(
+        "Are you sure you want to switch account?"
+      );
       setIsSubmitting(true);
       if (confirmSwitch) {
         setTimeout(() => {
@@ -90,21 +94,26 @@ const InvestorManageAccount = () => {
   const handleSelectedAccount = (account) => {
     setSelectedAcc(account.user);
     setSelectedAccFull(account);
-  }
+  };
 
   //remove acc
   const handleRemoveAccount = (removeAccountDetails) => {
-    const storedAccounts = JSON.parse(localStorage.getItem("StartupAccounts")) || [];
-    const updatedAccounts = storedAccounts.filter((account) => account.user._id !== removeAccountDetails._id);
+    console.log("delete account");
+    const storedAccounts =
+      JSON.parse(localStorage.getItem("StartupAccounts")) || [];
+    const updatedAccounts = storedAccounts.filter(
+      (account) => account.user._id !== removeAccountDetails._id
+    );
     localStorage.setItem("StartupAccounts", JSON.stringify(updatedAccounts));
     if (loggedInUser && loggedInUser._id === removeAccountDetails._id) {
-      const updatedLoggedInUser = updatedAccounts.length > 0 ? updatedAccounts[0].user : null;
+      const updatedLoggedInUser =
+        updatedAccounts.length > 0 ? updatedAccounts[0].user : null;
       dispatch(loginSuccess(updatedLoggedInUser));
       if (updatedLoggedInUser === null) {
         handleLogoutLogic();
       }
     }
-  }
+  };
 
   return (
     <MaxWidthWrapper>
@@ -248,9 +257,7 @@ const InvestorManageAccount = () => {
                     </div>
                     <div className="header_text">Accounts</div>
                   </div>
-                  <p>
-
-                  </p>
+                  <p></p>
                   <section className="existing_accounts">
                     {otherAccounts?.map((account) => (
                       <>
@@ -258,36 +265,56 @@ const InvestorManageAccount = () => {
                           <div className="left_section">
                             <div className="d-flex align-items-center">
                               <div className="profile_image">
-                                <img src={account.user.profilePicture} alt="img" />
+                                <img
+                                  src={account.user.profilePicture}
+                                  alt="img"
+                                />
                               </div>
                               <div className="name_email">
-                                <h4>{account.user.firstName} {account.user.lastName}</h4>
+                                <h4>
+                                  {account.user.firstName}{" "}
+                                  {account.user.lastName}
+                                </h4>
                                 <h6>{account.user.email}</h6>
                               </div>
                             </div>
                           </div>
-                          <div className="right_section">
+                          <div className="right_section d-flex flex-column ">
                             <label className="checkbox_container">
                               <input
                                 type="checkbox"
-                                checked={account.user._id === selectedAccount._id}
+                                checked={
+                                  account.user._id === selectedAccount._id
+                                }
                                 onClick={() => handleSelectedAccount(account)}
                               />
                               <span className="checkmark"></span>
                             </label>
+                            <button
+                              className="img-btn pt-2"
+                              onClick={() => handleRemoveAccount(account)}
+                            >
+                              <img
+                                src={deleteIcon}
+                                alt="delete icon"
+                                className="deleteIcon"
+                              />
+                            </button>
                           </div>
                         </div>
                       </>
                     ))}
                     <div className="footer">
-                      {otherAccounts.length > 1 &&
+                      {otherAccounts.length > 1 && (
                         <button
                           className="btn btn-delete "
                           onClick={handleSwitchAccount}
                         >
-                          {isSubmitting ? "Switching Account...." : "Switch Account"}
+                          {isSubmitting
+                            ? "Switching Account...."
+                            : "Switch Account"}
                         </button>
-                      }
+                      )}
                       <Link to="/login">
                         <button
                           className="btn btn-delete "
@@ -304,7 +331,7 @@ const InvestorManageAccount = () => {
           </div>
         </div>
       </div>
-    </MaxWidthWrapper >
+    </MaxWidthWrapper>
   );
 };
 
