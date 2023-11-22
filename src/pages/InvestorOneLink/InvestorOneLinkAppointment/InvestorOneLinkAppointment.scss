@@ -1,9 +1,9 @@
 .appointment_wrapper {
-  &.leftBorder {
-    @media (min-width: 1200px) {
-      border-left: 1px solid #e7e7e7;
-    }
-  }
+  // &.leftBorder {
+  //   @media (min-width: 1200px) {
+  //     border-left: 1px solid #e7e7e7;
+  //   }
+  // }
 
   .two_col_container {
     display: grid;
@@ -88,5 +88,12 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  .page_heading {
+    font-size: 28px;
+    @media (min-width: 1200px) {
+      font-size: 32px;
+    }
   }
 }
