@@ -9,7 +9,7 @@ import { validateSecretKey } from "../../../Service/user";
 import { useDispatch } from "react-redux";
 import { login, logout } from "../../../Store/features/oneLink/oneLinkSlice";
 
-export default function OnelinkValidation({ userId }) {
+export default function OnelinkValidation({ userId, theme = "startup" }) {
   const dispatch = useDispatch();
   // States for handling Invalid secret Key
   const [error, setError] = useState(null);
@@ -64,7 +64,7 @@ export default function OnelinkValidation({ userId }) {
 
   return (
     <MaxWidthWrapper>
-      <div className="onelink_validation_page d-flex justify-content-center align-items-center">
+      <div className="onelink_validation_page  d-flex justify-content-center align-items-center" theme={theme}>
         <form
           onSubmit={handlePinSubmit}
           className="key_container bg-white rounded-4 shadow p-3 py-5 p-lg-5 d-flex flex-column gap-5"
@@ -115,17 +115,14 @@ export default function OnelinkValidation({ userId }) {
           </div>
 
           {/* Action buttons */}
-          <div className="d-flex flex-column flex-md-row align-items-center gap-3 align-self-md-end">
-            <button type="button" className="btn_cancel">
-              Cancel
-            </button>
+          <div className="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 ">
             <button
               type="button"
               className="btn_submit"
               onClick={handlePinSubmit}
             >
               {loading ? (
-                <span className=" d-flex align-items-center gap-2">
+                <span className="d-flex align-items-center gap-2">
                   <SpinnerBS spinnerSizeClass="spinner-border-sm" />
                   Please wait...
                 </span>
@@ -134,6 +131,7 @@ export default function OnelinkValidation({ userId }) {
               )}
             </button>
           </div>
+
         </form>
       </div>
     </MaxWidthWrapper>

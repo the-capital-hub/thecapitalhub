@@ -46,7 +46,7 @@ export default function InvestorOneLinkLayout() {
     <div className="investor_onelink_layout_wrapper">
       {/* Top Navbar */}
       {!oneLinkUser || !oneLinkLoggedIn || userId !== oneLinkId ? (
-        <OneLinkValidation userId={userId} />
+        <OneLinkValidation userId={userId} theme={"investor"}/>
       ) : (
         <>
           <NavBar handleSidebarToggle={handleSidebarToggle} />
