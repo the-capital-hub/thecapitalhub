@@ -1,9 +1,9 @@
 .investment_philosophy_wrapper {
-  &.leftBorder {
-    @media (min-width: 1200px) {
-      border-left: 1px solid #e7e7e7;
-    }
-  }
+  // &.leftBorder {
+  //   @media (min-width: 1200px) {
+  //     border-left: 1px solid #e7e7e7;
+  //   }
+  // }
 
   .investment_philosophy_section {
     fieldset,
@@ -67,6 +67,13 @@
       padding: 0.75em 1.5em;
       border-radius: 8px;
       border: 1px solid #94c100;
+    }
+  }
+
+  .page_heading {
+    font-size: 28px;
+    @media (min-width: 1200px) {
+      font-size: 32px;
     }
   }
 }

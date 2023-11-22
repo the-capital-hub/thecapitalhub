@@ -13,9 +13,17 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../../Store/features/user/userSlice";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { loginSuccess } from "../../../Store/features/user/userSlice";
+import deleteIcon from "../../../Images/post/delete.png";
 
 const InvestorManageAccount = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const [otherAccounts, setOtherAccounts] = useState(JSON.parse(localStorage.getItem("InvestorAccounts")) || []);
+
+  const [selectedAccount, setSelectedAcc] = useState(loggedInUser);
+  const [selectedAccountFull, setSelectedAccFull] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const initialForm = {
     oldPassword: "",
     newPassword: "",
@@ -68,34 +76,64 @@ const InvestorManageAccount = () => {
     navigate("/login");
   };
 
+  const handleSwitchAccount = () => {
+    if (selectedAccountFull) {
+      const confirmSwitch = window.confirm("Are you sure you want to switch account?");
+      setIsSubmitting(true);
+      if (confirmSwitch) {
+        setTimeout(() => {
+          dispatch(loginSuccess(selectedAccountFull.user));
+          localStorage.setItem("accessToken", selectedAccountFull.token);
+          setIsSubmitting(false);
+        }, 2000);
+      }
+    }
+  };
+
+  const handleSelectedAccount = (account) => {
+    setSelectedAcc(account.user);
+    setSelectedAccFull(account);
+  }
+
+  //remove acc
+  const handleRemoveAccount = (removeAccountDetails) => {
+    const shouldRemove = window.confirm("Are you sure you want to remove this account?");
+    if (!shouldRemove) {
+      return;
+    }
+    const storedAccounts =
+      JSON.parse(localStorage.getItem("InvestorAccounts")) || [];
+    const updatedAccounts = storedAccounts.filter(
+      (account) => account.user._id !== removeAccountDetails.user._id
+    );
+    setOtherAccounts(updatedAccounts);
+    localStorage.setItem("InvestorAccounts", JSON.stringify(updatedAccounts));
+    if (loggedInUser && loggedInUser._id === removeAccountDetails.user._id) {
+      const updatedLoggedInUser =
+        updatedAccounts.length > 0 ? updatedAccounts[0].user : null;
+      if (updatedLoggedInUser === null) {
+        handleLogoutLogic();
+        navigate("/login");
+      } else {
+        dispatch(loginSuccess(updatedLoggedInUser));
+      }
+    }
+  };
+
+
   return (
     <MaxWidthWrapper>
-      <div className="manage_account_container">
+      <div className="investor_manage_account_container">
         <div className="row">
           <div className="col">
             <SmallProfileCard
               className="mt-5 mt-xl-3"
               text={"Manage Account"}
             />
-            <div className="box_container mt-lg-4 row row-cols-1 row-cols-lg-2 row-cols-xl-3">
-              <section className="col card empty_box d-lg-none d-flex m-0">
-                <button
-                  className="btn investor-logout-btn"
-                  onClick={setShowLogoutPopup}
-                >
-                  Log out
-                </button>
-                {showLogoutPopup && (
-                  <LogOutPopUp
-                    setShowLogoutPopup={setShowLogoutPopup} // Make sure this prop is passed correctly
-                    handleLogoutLogic={handleLogoutLogic}
-                    showLogoutPopup
-                    isInvestor={true}
-                  />
-                )}
-              </section>
-              <section className="col">
-                <div className="change_password card">
+            <div className="box_container p-4 mt-4 row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-gap-3 flex-lg-row">
+              {/* Change Password */}
+              <section className="col password_section">
+                <div className="change_password border">
                   {/* Header */}
                   <div className="d-flex align-items-center gap-2">
                     <div className="logo">
@@ -147,18 +185,17 @@ const InvestorManageAccount = () => {
                     {/* Footer */}
                     <div className="footer w-100">
                       {message && <p className="text-center">{message}</p>}
-                      <button
-                        type="submit"
-                        className="investor-change-password w-100"
-                      >
+                      <button type="submit" className="w-100">
                         Save Changes
                       </button>
                     </div>
                   </form>
                 </div>
               </section>
-              <section className="col">
-                <div className="present_account card">
+
+              {/* Present Accounts */}
+              <section className="col present_accounts_section">
+                <div className="present_account border">
                   {/* Header */}
                   <div className="d-flex align-items-center">
                     <div className="logo">
@@ -170,28 +207,45 @@ const InvestorManageAccount = () => {
                   {/* Body */}
                   <div className="d-flex align-items-center">
                     <div className="profile_image">
-                      <img src={loggedInUser.profilePicture} alt="img" />
+                      <img src={loggedInUser?.profilePicture} alt="img" />
                     </div>
                     <div className="name_email">
-                      <h4>
-                        {loggedInUser.firstName} {loggedInUser.lastName}
+                      <h4 className="text-break">
+                        {loggedInUser?.firstName} {loggedInUser?.lastName}
                       </h4>
-                      <h6>{loggedInUser.email}</h6>
+                      <h6 className="text-break">{loggedInUser?.email}</h6>
                     </div>
                   </div>
                   {/* Footer */}
                   <div className="footer">
-                    <Link to="/investor/profile">
-                      <button className="investor-btn-delete">
-                        View profile
-                      </button>
+                    <Link to="/profile">
+                      <button className="btn-delete">View profile</button>
                     </Link>
+                    <button
+                      className=" btn-delete"
+                      onClick={setShowLogoutPopup}
+                      style={{ marginLeft: "10px" }}
+                    >
+                      Log out
+                    </button>
+                    {showLogoutPopup && (
+                      <LogOutPopUp
+                        setShowLogoutPopup={setShowLogoutPopup} // Make sure this prop is passed correctly
+                        handleLogoutLogic={handleLogoutLogic}
+                        showLogoutPopup
+                        isInvestor={true}
+                      />
+                    )}
                   </div>
                 </div>
               </section>
-              <section className="col card empty_box d-none d-lg-flex ">
+
+              {/* Logout Section */}
+              <section className="col present_accounts_section">
+                <div className="present_account border">
+                  {/* <div class="border empty_box">
                 <button
-                  className="btn investor-logout-btn"
+                  className="btn logout-btn w-100"
                   onClick={setShowLogoutPopup}
                 >
                   Log out
@@ -201,83 +255,82 @@ const InvestorManageAccount = () => {
                     setShowLogoutPopup={setShowLogoutPopup} // Make sure this prop is passed correctly
                     handleLogoutLogic={handleLogoutLogic}
                     showLogoutPopup
-                    isInvestor={true}
                   />
                 )}
-                {/* <div className="d-flex align-items-center">
-                  <div className="logo">
-                    <img src={logoIcon} alt="img" />
+              </div> */}
+                  <div className="d-flex align-items-center">
+                    <div className="logo">
+                      <img src={logoIcon} alt="img" />
+                    </div>
+                    <div className="header_text">Accounts</div>
                   </div>
-                  <div className="header_text">Accounts</div>
+                  <p>
+
+                  </p>
+                  <section className="existing_accounts">
+                    {otherAccounts?.map((account) => (
+                      <>
+                        <div className="small_card">
+                          <div className="left_section">
+                            <div className="d-flex align-items-center">
+                              <div className="profile_image">
+                                <img src={account.user.profilePicture} alt="img" />
+                              </div>
+                              <div className="name_email">
+                                <h4>{account.user.firstName} {account.user.lastName}</h4>
+                                <h6>{account.user.email}</h6>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="right_section d-flex flex-column">
+                            <label className="checkbox_container">
+                              <input
+                                type="checkbox"
+                                checked={account.user._id === selectedAccount._id}
+                                onClick={() => handleSelectedAccount(account)}
+                              />
+                              <span className="checkmark"></span>
+                            </label>
+                            <button
+                              className="img-btn pt-2"
+                              onClick={() => handleRemoveAccount(account)}
+                            >
+                              <img
+                                src={deleteIcon}
+                                alt="delete icon"
+                                className="deleteIcon"
+                              />
+                            </button>
+                          </div>
+                        </div>
+                      </>
+                    ))}
+                    <div className="footer">
+                      {otherAccounts.length > 1 &&
+                        <button
+                          className="btn btn-delete "
+                          onClick={handleSwitchAccount}
+                        >
+                          {isSubmitting ? "Switching Account...." : "Switch Account"}
+                        </button>
+                      }
+                      <Link to="/login">
+                        <button
+                          className="btn btn-delete "
+                          style={{ marginLeft: "10px" }}
+                        >
+                          Add account
+                        </button>
+                      </Link>
+                    </div>
+                  </section>
                 </div>
-                <p>
-                  Add another account - so you can switch between them easily.
-                </p>
-                <section className="existing_accounts">
-                  <div className="small_card">
-                    <div className="left_section">
-                      <div className="d-flex align-items-center">
-                        <div className="profile_image">
-                          <img src={profileIcon} alt="img" />
-                        </div>
-                        <div className="name_email">
-                          <h4>Pramod Badiger</h4>
-                          <h6>Pramodbadiger@gmail.com</h6>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="right_section">
-                      <label className="checkbox_container">
-                        <input type="checkbox" checked />
-                        <span className="checkmark"></span>
-                      </label>
-                    </div>
-                  </div>
-                  <div className="small_card">
-                    <div className="left_section">
-                      <div className="d-flex align-items-center">
-                        <div className="profile_image">
-                          <img src={profileIconRaghu} alt="img" />
-                        </div>
-                        <div className="name_email">
-                          <h4>Raghu</h4>
-                          <h6>raghu@gmail.com</h6>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="right_section">
-                      <label className="checkbox_container">
-                        <input type="checkbox" />
-                        <span className="checkmark"></span>
-                      </label>
-                    </div>
-                  </div>
-                  <div className="small_card">
-                    <div className="left_section">
-                      <div className="d-flex align-items-center">
-                        <div className="profile_image">
-                          <img src={profileIconRaju} alt="img" />
-                        </div>
-                        <div className="name_email">
-                          <h4>Raju Prasain</h4>
-                          <h6>raju@gmail.com</h6>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="right_section">
-                      <label className="checkbox_container">
-                        <input type="checkbox" />
-                        <span className="checkmark"></span>
-                      </label>
-                    </div>
-                  </div>
-                </section> */}
               </section>
             </div>
           </div>
         </div>
       </div>
-    </MaxWidthWrapper>
+    </MaxWidthWrapper >
   );
 };
 

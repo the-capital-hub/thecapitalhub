@@ -5,13 +5,13 @@ import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidth
 import "./InvestorOneLinkLayout.scss";
 import InvestorOneLinkSidebar from "../../../components/InvestorOneLink/InvestorOneLinkSidebar/InvestorOneLinkSidebar";
 import { getInvestorFromOneLinkAPI } from "../../../Service/user";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import { useSelector } from "react-redux";
 import OneLinkValidation from "../../../components/Shared/OnelinkValidation/OnelinkValidation";
 
 export default function InvestorOneLinkLayout() {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   const [investorData, setInvestorData] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ export default function InvestorOneLinkLayout() {
     <div className="investor_onelink_layout_wrapper">
       {/* Top Navbar */}
       {!oneLinkUser || !oneLinkLoggedIn || userId !== oneLinkId ? (
-        <OneLinkValidation userId={userId} />
+        <OneLinkValidation userId={userId} theme={"investor"}/>
       ) : (
         <>
           <NavBar handleSidebarToggle={handleSidebarToggle} />
