@@ -15,8 +15,10 @@ export default function InvestorOneLinkInvestment() {
   const { companyName } = company;
 
   return (
-    <div className="investment_philosophy_wrapper mb-5 ps-3 leftBorder">
-      <h2 className="mb-3">Investment Philosophy</h2>
+    <div className="investment_philosophy_wrapper mb-5">
+      <h2 className="mb-3 px-3 px-xxl-0 fw-bold page_heading">
+        Investment Philosophy
+      </h2>
 
       {/* Main content */}
       <section className="investment_philosophy_section px-3 py-4 px-lg-4 bg-white rounded-4 border d-flex flex-column gap-4">
