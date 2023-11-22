@@ -2,6 +2,8 @@
   --color-bg: rgba(234, 238, 242, 1);
   --color-startup: rgba(253, 89, 1, 1);
   --color-investor: rgba(211, 243, 107, 1);
+  --color-text-investor: #000;
+  --color-text-startup: #fff;
 
   min-height: 100dvh;
   background-color: var(--color-bg);
@@ -14,12 +16,12 @@
       transition: border 0.15s ease-in;
 
       &:focus-within {
-        border: 1px solid var(--color-startup);
+        border: 1px solid var(--color-main);
 
         svg {
           path {
             transition: all 0.15s ease-in;
-            stroke: var(--color-startup);
+            stroke: var(--color-main);
           }
         }
       }
@@ -58,9 +60,9 @@
     }
 
     .btn_submit {
-      border: 1px solid var(--color-startup);
-      background-color: var(--color-startup);
-      color: white;
+      border: 1px solid var(--color-main);
+      background-color: var(--color-main);
+      color: var( --color-text);
       border-radius: 10rem;
       padding: 1em 3em;
       font-size: 1rem;
@@ -69,6 +71,17 @@
   }
 
   .orange {
-    color: var(--color-startup);
+    color: var(--color-main);
   }
+}
+
+
+.onelink_validation_page[theme="investor"] {
+  --color-main: var(--color-investor);
+  --color-text: var(--color-text-investor);
+}
+
+.onelink_validation_page[theme="startup"] {
+  --color-main: var(--color-startup);
+  --color-text: var(--color-text-startup);
 }

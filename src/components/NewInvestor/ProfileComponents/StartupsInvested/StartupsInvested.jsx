@@ -9,25 +9,28 @@ import AddEditModal from "../AddEditModal";
 import { useSelector } from "react-redux";
 import InvestedCard from "../InvestedCard";
 import "./StartupsInvested.scss";
-import { selectUserStartupsInvested } from "../../../../Store/features/user/userSlice";
+import {
+  selectUserInvestor,
+  selectUserStartupsInvested,
+} from "../../../../Store/features/user/userSlice";
 import { getInvestorById } from "../../../../Service/user";
 
 export default function StartupsInvested() {
   // Fetch loggedInUser from global state
   const userStartupsInvested = useSelector(selectUserStartupsInvested);
+  const userInvestor = useSelector(selectUserInvestor);
 
   // States for Invested Startups
   const [investedStartups, setInvestedStartups] =
     useState(userStartupsInvested);
 
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
   useEffect(() => {
-    getInvestorById(loggedInUser.investor)
+    getInvestorById(userInvestor)
       .then(({ data }) => {
         setInvestedStartups(data.startupsInvested);
       })
       .catch(() => setInvestedStartups([]));
-  })
+  }, [userInvestor]);
 
   return (
     <>

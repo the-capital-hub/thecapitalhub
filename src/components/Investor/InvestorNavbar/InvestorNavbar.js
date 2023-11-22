@@ -43,7 +43,7 @@ const InvestorNavbar = (props) => {
         setNotificationCount(data.unreadCount);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [loggedInUser._id]);
 
   // useEffect(() => {
   //   let url = window.location.href;

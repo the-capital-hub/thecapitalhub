@@ -1,22 +1,42 @@
 /* InvestorManageAccount.scss */
-.manage_account_container {
+.investor_manage_account_container {
   height: 100%;
   min-height: 90vh;
+  // margin-block: 1rem;
+
+  @media (min-width: 1600px) {
+    margin-top: 0;
+  }
+
   .box_container {
-    display: flex;
-    flex-direction: column-reverse;
     height: fit-content;
     background-color: #fff;
     padding: 10px;
     border-radius: var(--border-radius);
     background: #fff;
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
+
     // display: flex;
     // flex-direction: column;
     @media (min-width: 1000px) {
       flex-direction: row;
     }
+
     /* Add this to align boxes horizontally */
+
+    @media (max-width: 991px) {
+      .password_section {
+        order: 2;
+      }
+
+      .present_accounts_section {
+        order: 1;
+      }
+
+      .logout_section {
+        order: 3;
+      }
+    }
 
     .change_password {
       background-color: #f9f9f9;
@@ -29,12 +49,15 @@
       @media (max-width: 768px) {
         margin: 5px;
       }
+
       form {
         display: flex;
         gap: 7px;
+
         .form-input {
           display: flex;
           flex-direction: column;
+
           label {
             color: #666;
             font-family: Poppins;
@@ -56,10 +79,10 @@
           }
         }
 
-        .investor-change-password {
+        button {
           border-radius: 10px;
-          background: #D3F36B;
-          color: #050505;
+          background: #d3f36b;
+          color: #000;
           font-family: Poppins;
           font-size: 12px;
           font-style: normal;
@@ -77,14 +100,26 @@
       // margin: 20px;
       background-color: #f9f9f9;
       padding: 20px;
-      border-radius: var(--border-radius);
+      border-radius: 20px;
       flex: 1;
       display: flex;
       flex-direction: column;
 
+      .btn-delete {
+        /* Styles for the delete button */
+        color: #000;
+        background-color: #d3f36b;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 16px;
+        cursor: pointer;
+        margin-top: 2rem;
+      }
+
       @media (max-width: 768px) {
         margin: 5px;
       }
+
       .header_text {
         color: #3d3c3c;
         font-family: Poppins;
@@ -101,6 +136,7 @@
         margin-bottom: 10px;
 
         .logo {
+
           /* Styles for the logo */
           img {
             /* Add your logo styles here */
@@ -120,6 +156,7 @@
       }
 
       .profile_image {
+
         /* Styles for the profile image */
         img {
           /* Add your profile image styles here */
@@ -153,6 +190,7 @@
           font-style: normal;
           font-weight: 400;
           line-height: normal;
+
           @media (max-width: 768px) {
             font-size: 12px;
           }
@@ -162,11 +200,12 @@
       .footer {
         display: flex;
         justify-content: center;
+        // justify-content: space-between; 
 
-        .investor-btn-delete {
+        .btn-delete {
           /* Styles for the delete button */
           color: #000;
-          background-color: #D3F36B;
+          background-color: #d3f36b;
           border: none;
           border-radius: 5px;
           padding: 8px 16px;
@@ -178,18 +217,20 @@
 
     .empty_box {
       // margin: 20px;
+      display: flex;
       height: fit-content;
       background-color: #f9f9f9;
-      border-radius: var(--border-radius);
+      border-radius: 20px;
       padding: 20px;
+
       @media (max-width: 768px) {
         margin: 5px;
       }
 
-      .investor-logout-btn {
+      .logout-btn {
         /* Styles for the delete button */
         color: #000;
-        background-color: #D3F36B;
+        background-color: #d3f36b;
         border: none;
         border-radius: 5px;
         padding: 8px 16px;
@@ -206,113 +247,127 @@
         margin-left: 10px;
       }
 
-      .existing_accounts {
-        /* Styles for the Existing Account section */
-        .small_card {
-          /* Styles for the small horizontal card */
+
+    }
+
+    .existing_accounts {
+
+      /* Styles for the Existing Account section */
+      .small_card {
+        /* Styles for the small horizontal card */
+        display: flex;
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+
+        .left_section {
+          /* Styles for the left section of the card */
+          flex: 1;
           display: flex;
           align-items: center;
-          border: 1px solid #ccc;
-          border-radius: 10px;
-          padding: 10px;
-          margin-bottom: 10px;
 
-          .left_section {
-            /* Styles for the left section of the card */
-            flex: 1;
-            display: flex;
-            align-items: center;
+          .profile_image {
 
-            .profile_image {
-              /* Styles for the profile image in the left section */
-              img {
-                /* Add your profile image styles here */
-                width: 40px;
-                /* Adjust as needed */
-                height: 40px;
-                /* Adjust as needed */
-                border-radius: 50%;
-                margin-right: 10px;
-              }
-            }
-
-            .name_email {
-              /* Styles for the name and email */
-              /* Add your name and email styles here */
-              margin-left: 10px;
-
-              h4 {
-                margin: 0;
-                color: #000;
-                font-family: Poppins;
-                font-size: 20px;
-                font-style: normal;
-                font-weight: 600;
-                line-height: normal;
-              }
-
-              h6 {
-                color: #8d8d8d;
-                font-family: Poppins;
-                font-size: 16px;
-                font-style: normal;
-                font-weight: 400;
-                line-height: normal;
-                @media (max-width: 768px) {
-                  font-size: 12px;
-                }
-              }
+            /* Styles for the profile image in the left section */
+            img {
+              /* Add your profile image styles here */
+              width: 40px;
+              /* Adjust as needed */
+              height: 40px;
+              /* Adjust as needed */
+              border-radius: 50%;
+              margin-right: 10px;
             }
           }
 
-          .right_section {
-            /* Styles for the right section of the card */
-            .checkbox_container {
-              /* Styles for the rounded checkbox (assuming you have an input checkbox styled as a rounded checkbox) */
-              position: relative;
-              width: 20px;
+          .name_email {
+            /* Styles for the name and email */
+            /* Add your name and email styles here */
+            margin-left: 10px;
+
+            h4 {
+              margin: 0;
+              color: #000;
+              font-family: Poppins;
+              font-size: 20px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: normal;
+            }
+
+            h6 {
+              color: #8d8d8d;
+              font-family: Poppins;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+
+              @media (max-width: 768px) {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+
+        .right_section {
+
+          .checkbox_container {
+            /* Styles for the rounded checkbox (assuming you have an input checkbox styled as a rounded checkbox) */
+            position: relative;
+            width: 20px;
+            height: 20px;
+
+            input[type="checkbox"] {
+              /* Hide the default checkbox */
+              position: absolute;
+              opacity: 0;
+              cursor: pointer;
+            }
+
+            .checkmark {
+              /* Styles for the checkbox icon */
+              position: absolute;
+              top: 0;
+              left: 0;
               height: 20px;
+              width: 20px;
+              background-color: #fff;
+              border: 1px solid #ccc;
+              border-radius: 50%;
 
-              input[type="checkbox"] {
-                /* Hide the default checkbox */
+              /* Custom checkbox icon (a dot) */
+              &::before {
+                content: "";
                 position: absolute;
-                opacity: 0;
-                cursor: pointer;
-              }
-
-              .checkmark {
-                /* Styles for the checkbox icon */
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 20px;
-                width: 20px;
-                background-color: #fff;
-                border: 1px solid #ccc;
+                display: none;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 8px;
+                height: 8px;
                 border-radius: 50%;
-
-                /* Custom checkbox icon (a dot) */
-                &::before {
-                  content: "";
-                  position: absolute;
-                  display: none;
-                  top: 50%;
-                  left: 50%;
-                  transform: translate(-50%, -50%);
-                  width: 8px;
-                  height: 8px;
-                  border-radius: 50%;
-                  background: red;
-                  /* Adjust as needed */
-                }
-              }
-
-              /* Show the custom checkbox icon when checked */
-              input[type="checkbox"]:checked + .checkmark::before {
-                display: block;
+                background: #d3f36b;
+                /* Adjust as needed */
               }
             }
+
+            /* Show the custom checkbox icon when checked */
+            input[type="checkbox"]:checked+.checkmark::before {
+              display: block;
+            }
           }
+
+          .img-btn{
+            border: none;
+            background:none;
+            margin-left: -8px;
+                        .deleteIcon{
+                          width: 25px;
+                        }
+                      }
         }
       }
     }
@@ -322,4 +377,9 @@
     height: 100%;
     margin-bottom: 20%;
   }
+
+  // // CSS for logout section
+  // .logout_section {
+  //   order: 3;
+  // }
 }

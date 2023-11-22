@@ -78,7 +78,7 @@ function PrivateRoute({ children, ...props }) {
             />
           </div>
 
-          <div className="content">
+          <div className="content pb-5 pb-mb-0">
             <Outlet />
           </div>
 
@@ -93,7 +93,7 @@ function PrivateRoute({ children, ...props }) {
               <NavLink to="/connection">
                 <FiUsers size={"22px"} />
               </NavLink>
-              <span style={{ fontSize: "10px" }}>Connection</span>
+              <span style={{ fontSize: "10px" }}>Connections</span>
             </div>
 
 
@@ -106,7 +106,7 @@ function PrivateRoute({ children, ...props }) {
               <NavLink to="/onelink/edit">
                 <BsLink45Deg size={"25px"} />
               </NavLink>
-              <span style={{ fontSize: "10px" }}>OneLink</span>
+              <span style={{ fontSize: "10px" }}>{"OneLink"}</span>
             </div>
 
             <div className="d-flex flex-column align-items-center mx-3" onClick={handleToggleNotificationModal}>

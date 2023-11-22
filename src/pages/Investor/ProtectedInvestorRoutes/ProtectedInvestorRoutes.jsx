@@ -80,7 +80,7 @@ function ProtectedInvestorRoutes({ children, ...props }) {
             />
           </div>
 
-          <div className="content">
+          <div className="content pb-5 pb-md-0">
             <Outlet />
           </div>
         </div>
@@ -96,7 +96,7 @@ function ProtectedInvestorRoutes({ children, ...props }) {
             <NavLink to="/investor/connection">
               <FiUsers size={"22px"} />
             </NavLink>
-            <span style={{ fontSize: "10px" }}>Connection</span>
+            <span style={{ fontSize: "10px" }}>Connections</span>
           </div>
 
           <div
@@ -111,7 +111,7 @@ function ProtectedInvestorRoutes({ children, ...props }) {
             <NavLink to="/investor/mystartups">
               <BsGraphUpArrow size={"20px"} />
             </NavLink>
-            <span style={{ fontSize: "10px" }}>MyStartups</span>
+            <span style={{ fontSize: "10px" }}>{"My_Startups"}</span>
           </div>
 
           <div

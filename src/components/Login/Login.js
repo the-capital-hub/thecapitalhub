@@ -82,6 +82,16 @@ const Login = () => {
           }
         }
 
+        const storedAccountsKey = user.isInvestor === "true" ? "InvestorAccounts" : "StartupAccounts";
+
+        const storedAccounts = JSON.parse(localStorage.getItem(storedAccountsKey)) || [];
+        const isAccountExists = storedAccounts.some((account) => account.user._id === user._id);
+
+        if (!isAccountExists) {
+          storedAccounts.push(response);
+          localStorage.setItem(storedAccountsKey, JSON.stringify(storedAccounts));
+        }
+
         // No errors, Set loginsuccessfull to true
         setIsLoginSuccessfull(true);
 
@@ -216,9 +226,8 @@ const Login = () => {
             <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-4 gap-sm-5">
               <Link to="">
                 <button
-                  className={`btn-primaryy login_btn ${
-                    !isInvestorSelected ? "startup" : ""
-                  } `}
+                  className={`btn-primaryy login_btn ${!isInvestorSelected ? "startup" : ""
+                    } `}
                   onClick={() => setIsInvestorSelected(false)}
                 >
                   StartUp
@@ -226,9 +235,8 @@ const Login = () => {
               </Link>
               <Link to="">
                 <button
-                  className={`btn-primaryy login_btn ${
-                    isInvestorSelected ? "investor" : ""
-                  } `}
+                  className={`btn-primaryy login_btn ${isInvestorSelected ? "investor" : ""
+                    } `}
                   onClick={() => setIsInvestorSelected(true)}
                 >
                   Investor
