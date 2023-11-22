@@ -14,6 +14,7 @@ import { logout } from "../../../Store/features/user/userSlice";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
+import deleteIcon from "../../../Images/post/delete.png";
 
 const InvestorManageAccount = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -269,7 +270,7 @@ const InvestorManageAccount = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="right_section">
+                          <div className="right_section d-flex flex-column">
                             <label className="checkbox_container">
                               <input
                                 type="checkbox"
@@ -278,6 +279,16 @@ const InvestorManageAccount = () => {
                               />
                               <span className="checkmark"></span>
                             </label>
+                            <button
+                              className="img-btn pt-2"
+                              onClick={() => handleRemoveAccount(account)}
+                            >
+                              <img
+                                src={deleteIcon}
+                                alt="delete icon"
+                                className="deleteIcon"
+                              />
+                            </button>
                           </div>
                         </div>
                       </>
