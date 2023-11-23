@@ -34,7 +34,7 @@ export default function OtherInvestorProfile() {
     getUserAndStartUpByUserIdAPI(userId)
       .then(({ data }) => {
         console.log(data);
-        setUserData(data)
+        setUserData(data);
       })
       .catch(() => navigate("/profile"));
   }, [userId]);

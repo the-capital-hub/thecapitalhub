@@ -104,6 +104,9 @@
       flex: 1;
       display: flex;
       flex-direction: column;
+      @media (max-width: 768px) {
+        padding: 7px;
+      }
 
       .btn-delete {
         /* Styles for the delete button */
@@ -117,7 +120,7 @@
       }
 
       @media (max-width: 768px) {
-        margin: 5px;
+        margin: 0px;
       }
 
       .header_text {
@@ -165,6 +168,7 @@
           height: 60px;
           /* Adjust as needed */
           border-radius: 50%;
+          
         }
       }
 
@@ -257,64 +261,16 @@
         /* Styles for the small horizontal card */
         display: flex;
         align-items: center;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        padding: 10px;
-        margin-bottom: 10px;
+        // border: 1px solid #ccc;
+        // border-radius: 10px;
+        // padding: 10px;
+        // margin-bottom: 10px;
 
         .left_section {
           /* Styles for the left section of the card */
           flex: 1;
           display: flex;
           align-items: center;
-
-          .profile_image {
-
-            /* Styles for the profile image in the left section */
-            img {
-              /* Add your profile image styles here */
-              width: 40px;
-              /* Adjust as needed */
-              height: 40px;
-              /* Adjust as needed */
-              border-radius: 50%;
-              margin-right: 10px;
-            }
-          }
-
-          .name_email {
-            /* Styles for the name and email */
-            /* Add your name and email styles here */
-            margin-left: 10px;
-
-            h4 {
-              margin: 0;
-              color: #000;
-              font-family: Poppins;
-              font-size: 20px;
-              font-style: normal;
-              font-weight: 600;
-              line-height: normal;
-            }
-
-            h6 {
-              color: #8d8d8d;
-              font-family: Poppins;
-              font-size: 16px;
-              font-style: normal;
-              font-weight: 400;
-              line-height: normal;
-
-              @media (max-width: 768px) {
-                font-size: 12px;
-              }
-            }
-          }
-        }
-
-        .right_section {
-
-          /* Styles for the right section of the card */
           .checkbox_container {
             /* Styles for the rounded checkbox (assuming you have an input checkbox styled as a rounded checkbox) */
             position: relative;
@@ -360,12 +316,75 @@
               display: block;
             }
           }
+          .profile_image {
+
+            /* Styles for the profile image in the left section */
+            img {
+              /* Add your profile image styles here */
+              width: 40px;
+              /* Adjust as needed */
+              height: 40px;
+              /* Adjust as needed */
+              border-radius: 50%;
+              margin-right: 10px;
+              @media (max-width: 768px) {
+                width: 35px;
+                height: 35px;
+                margin-right: 6px;
+              }
+            }
+          }
+
+          .name_email {
+            /* Styles for the name and email */
+            /* Add your name and email styles here */
+            margin-left: 10px;
+            @media (max-width: 768px) {
+              margin-left: 0px;
+            }
+
+            h4 {
+              margin: 0;
+              color: #000;
+              font-family: Poppins;
+              font-size: 20px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: normal;
+              @media (max-width: 768px) {
+                font-size: 16px;
+                width: 170px;
+              }
+            }
+
+            h6 {
+              color: #8d8d8d;
+              font-family: Poppins;
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+
+              @media (max-width: 768px) {
+                font-size: 10px;
+              }
+            }
+          }
+        }
+
+        .right_section {
+
+          /* Styles for the right section of the card */
+          
           .img-btn{
 border: none;
 background:none;
 margin-left: -8px;
             .deleteIcon{
               width: 25px;
+              @media (max-width: 768px) {
+                width: 18px;
+              }
             }
           }
 
