@@ -1,4 +1,4 @@
-import { Outlet, Navigate, useLocation, NavLink, useNavigate } from "react-router-dom";
+import { Outlet, Navigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import InvestorNavbar from "../Investor/InvestorNavbar/InvestorNavbar";
 import InvestorSidebar from "../Investor/InvestorSidebar/InvestorSidebar";
@@ -6,34 +6,11 @@ import "./style.scss";
 import LogOutPopUp from "../PopUp/LogOutPopUp/LogOutPopUp";
 import { ModalBSContainer, ModalBSBody, ModalBSHeader } from "../PopUp/ModalBS";
 import NewCommunityModal from "../Investor/ChatComponents/NewCommunityModal";
-import { useDispatch, useSelector } from "react-redux";
-import { HiOutlineHome } from "react-icons/hi2";
-import { BsLink45Deg } from "react-icons/bs";
-import { FiUsers } from "react-icons/fi";
-import { CiBellOn, CiSquarePlus } from "react-icons/ci";
-import {
-  toggleCreatePostModal, toggleNotificationModal,
-} from "../../Store/features/design/designSlice";
-
+import { useSelector } from "react-redux";
+import MobileNavbar from "../Shared/MobileNavbar/MobileNavbar";
 
 function PrivateRoute({ children, ...props }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-
-
-  const handleToggleCreatePostModal = () => {
-    navigate("/home");
-    dispatch(toggleCreatePostModal());
-  };
-
-
-  const handleToggleNotificationModal = () => {
-    dispatch(toggleNotificationModal());
-  };
-
-
 
   const location = useLocation();
   useEffect(() => {
@@ -66,8 +43,9 @@ function PrivateRoute({ children, ...props }) {
         />
 
         <div
-          className={`container-fluid p-0 investor_home_container position-relative ${sidebarCollapsed ? "sidebar-collapsed" : ""
-            }`}
+          className={`container-fluid p-0 investor_home_container position-relative ${
+            sidebarCollapsed ? "sidebar-collapsed" : ""
+          }`}
         >
           <LogOutPopUp />
 
@@ -82,40 +60,8 @@ function PrivateRoute({ children, ...props }) {
             <Outlet />
           </div>
 
-          <div className="mobile-bottom-toolbar container p-2 shadow d-flex gap-1 justify-content-center border-top  px-3 d-md-none">
-            <div className="d-flex flex-column align-items-center mx-3">
-              <NavLink to="/home">
-                <HiOutlineHome size={"22px"} />
-              </NavLink>
-              <span style={{ fontSize: "10px" }}>Home</span>
-            </div>
-            <div className="d-flex flex-column align-items-center mx-3">
-              <NavLink to="/connection">
-                <FiUsers size={"22px"} />
-              </NavLink>
-              <span style={{ fontSize: "10px" }}>Connections</span>
-            </div>
-
-
-            <div className="d-flex flex-column align-items-center mx-3" onClick={handleToggleCreatePostModal}>
-              <CiSquarePlus size={"25px"} />
-              <span style={{ fontSize: "10px" }}>Post</span>
-            </div>
-
-            <div className="d-flex flex-column align-items-center mx-3">
-              <NavLink to="/onelink/edit">
-                <BsLink45Deg size={"25px"} />
-              </NavLink>
-              <span style={{ fontSize: "10px" }}>{"OneLink"}</span>
-            </div>
-
-            <div className="d-flex flex-column align-items-center mx-3" onClick={handleToggleNotificationModal}>
-              <CiBellOn size={"25px"} />
-              <span style={{ fontSize: "10px" }}>Notification</span>
-            </div>
-
-          </div>
-
+          {/* Mobile Navbar */}
+          <MobileNavbar />
 
           <div className="modals">
             {/* Modal for creating new Community */}

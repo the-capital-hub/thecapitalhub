@@ -9,7 +9,7 @@ import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
 import HambergerIcon from "../../../Images/Hamberger.svg";
 import HambergerCrossIcon from "../../../Images/investorsidebar/FontX.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
 import {
@@ -20,12 +20,18 @@ import { SearchIcon } from "../SvgIcons";
 import NotificationsPopup from "../../Investor/InvestorNavbar/NotificationsPopup/NotificationsPopup";
 import { useRef } from "react";
 import { selectNotificationtModal } from "../../../Store/features/design/designSlice";
+import {
+  selectUnreadNotifications,
+  selectUserProfilePicture,
+  setUnreadNotifications,
+} from "../../../Store/features/user/userSlice";
 
 const NavBar = (props) => {
   // Fetch global states
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const userProfilePicture = useSelector(selectUserProfilePicture);
   const pageTitle = useSelector((state) => state.design.pageTitle);
   const isNotificationModalOpen = useSelector(selectNotificationtModal);
+  const unreadNotifications = useSelector(selectUnreadNotifications);
 
   const [searchSuggestions, setSearchSuggestions] = useState(false);
   const [searchInput, setSearchInput] = useState("");
@@ -33,15 +39,15 @@ const NavBar = (props) => {
   const [inputOnFocus, setInputOnFocus] = useState(false);
   const [toggleNotificationPopup, setToggleNotificationPopup] = useState(false);
   const notificationPopup = useRef();
-  const [notificationCount, setNotificationCount] = useState(0);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getNotificationCount()
       .then(({ data }) => {
-        console.log(data.unreadCount);
-        setNotificationCount(data.unreadCount);
+        // console.log(data.unreadCount);
+        dispatch(setUnreadNotifications(data.unreadCount));
       })
       .catch((error) => console.error(error));
   }, []);
@@ -372,9 +378,7 @@ const NavBar = (props) => {
                       }
                     />
                     <NotificationsPopup
-                      setNotificationCount={setNotificationCount}
                       toggleVisibility={setToggleNotificationPopup}
-                      notificationCount={notificationCount}
                     />
                   </>
                 ) : (
@@ -386,9 +390,9 @@ const NavBar = (props) => {
                         setToggleNotificationPopup((prev) => !prev)
                       }
                     />
-                    {!toggleNotificationPopup && notificationCount > 0 && (
+                    {!toggleNotificationPopup && unreadNotifications > 0 && (
                       <div className="notification-count">
-                        {notificationCount}
+                        {unreadNotifications}
                       </div>
                     )}
                   </>
@@ -406,7 +410,7 @@ const NavBar = (props) => {
                   {" "}
                   <img
                     className="profile-pic rounded-circle"
-                    src={loggedInUser.profilePicture}
+                    src={userProfilePicture}
                     alt="Profile"
                     style={{ objectFit: "cover" }}
                   />
