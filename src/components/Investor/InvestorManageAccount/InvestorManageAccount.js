@@ -17,8 +17,7 @@ import deleteIcon from "../../../Images/post/delete.png";
 
 const InvestorManageAccount = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const otherAccounts =
-    JSON.parse(localStorage.getItem("StartupAccounts")) || [];
+  const [otherAccounts, setOtherAccounts] = useState(JSON.parse(localStorage.getItem("StartupAccounts")) || []);
   const [selectedAccount, setSelectedAcc] = useState(loggedInUser);
   const [selectedAccountFull, setSelectedAccFull] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -98,19 +97,25 @@ const InvestorManageAccount = () => {
 
   //remove acc
   const handleRemoveAccount = (removeAccountDetails) => {
-    console.log("delete account");
+    const shouldRemove = window.confirm("Are you sure you want to remove this account?");
+    if (!shouldRemove) {
+      return;
+    }
     const storedAccounts =
       JSON.parse(localStorage.getItem("StartupAccounts")) || [];
     const updatedAccounts = storedAccounts.filter(
-      (account) => account.user._id !== removeAccountDetails._id
+      (account) => account.user._id !== removeAccountDetails.user._id
     );
+    setOtherAccounts(updatedAccounts);
     localStorage.setItem("StartupAccounts", JSON.stringify(updatedAccounts));
-    if (loggedInUser && loggedInUser._id === removeAccountDetails._id) {
+    if (loggedInUser && loggedInUser._id === removeAccountDetails.user._id) {
       const updatedLoggedInUser =
         updatedAccounts.length > 0 ? updatedAccounts[0].user : null;
-      dispatch(loginSuccess(updatedLoggedInUser));
       if (updatedLoggedInUser === null) {
         handleLogoutLogic();
+        navigate("/login");
+      } else {
+        dispatch(loginSuccess(updatedLoggedInUser));
       }
     }
   };

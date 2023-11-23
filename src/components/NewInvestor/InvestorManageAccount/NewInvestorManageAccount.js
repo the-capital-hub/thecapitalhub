@@ -18,7 +18,10 @@ import deleteIcon from "../../../Images/post/delete.png";
 
 const InvestorManageAccount = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const otherAccounts = JSON.parse(localStorage.getItem("InvestorAccounts")) || [];
+  const [otherAccounts, setOtherAccounts] = useState(
+    JSON.parse(localStorage.getItem("InvestorAccounts")) || []
+  );
+
   const [selectedAccount, setSelectedAcc] = useState(loggedInUser);
   const [selectedAccountFull, setSelectedAccFull] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -77,7 +80,9 @@ const InvestorManageAccount = () => {
 
   const handleSwitchAccount = () => {
     if (selectedAccountFull) {
-      const confirmSwitch = window.confirm("Are you sure you want to switch account?");
+      const confirmSwitch = window.confirm(
+        "Are you sure you want to switch account?"
+      );
       setIsSubmitting(true);
       if (confirmSwitch) {
         setTimeout(() => {
@@ -92,22 +97,34 @@ const InvestorManageAccount = () => {
   const handleSelectedAccount = (account) => {
     setSelectedAcc(account.user);
     setSelectedAccFull(account);
-  }
+  };
 
   //remove acc
   const handleRemoveAccount = (removeAccountDetails) => {
-    const storedAccounts = JSON.parse(localStorage.getItem("InvestorAccounts")) || [];
-    const updatedAccounts = storedAccounts.filter((account) => account.user._id !== removeAccountDetails._id);
+    const shouldRemove = window.confirm(
+      "Are you sure you want to remove this account?"
+    );
+    if (!shouldRemove) {
+      return;
+    }
+    const storedAccounts =
+      JSON.parse(localStorage.getItem("InvestorAccounts")) || [];
+    const updatedAccounts = storedAccounts.filter(
+      (account) => account.user._id !== removeAccountDetails.user._id
+    );
+    setOtherAccounts(updatedAccounts);
     localStorage.setItem("InvestorAccounts", JSON.stringify(updatedAccounts));
-    if (loggedInUser && loggedInUser._id === removeAccountDetails._id) {
-      const updatedLoggedInUser = updatedAccounts.length > 0 ? updatedAccounts[0].user : null;
-      dispatch(loginSuccess(updatedLoggedInUser));
+    if (loggedInUser && loggedInUser._id === removeAccountDetails.user._id) {
+      const updatedLoggedInUser =
+        updatedAccounts.length > 0 ? updatedAccounts[0].user : null;
       if (updatedLoggedInUser === null) {
         handleLogoutLogic();
+        navigate("/login");
+      } else {
+        dispatch(loginSuccess(updatedLoggedInUser));
       }
     }
-  }
-
+  };
 
   return (
     <MaxWidthWrapper>
@@ -205,9 +222,9 @@ const InvestorManageAccount = () => {
                     </div>
                   </div>
                   {/* Footer */}
-                  <div className="footer">
-                    <Link to="/profile">
-                      <button className="btn-delete">View profile</button>
+                  <div className="footer d-flex flex-wrap">
+                    <Link to="/profile" className="btn-delete">
+                      <button className="btn">View profile</button>
                     </Link>
                     <button
                       className=" btn-delete"
@@ -252,9 +269,7 @@ const InvestorManageAccount = () => {
                     </div>
                     <div className="header_text">Accounts</div>
                   </div>
-                  <p>
-
-                  </p>
+                  <p></p>
                   <section className="existing_accounts">
                     {otherAccounts?.map((account) => (
                       <>
@@ -264,7 +279,9 @@ const InvestorManageAccount = () => {
                             <label className="checkbox_container me-2">
                               <input
                                 type="checkbox"
-                                checked={account.user._id === selectedAccount._id}
+                                checked={
+                                  account.user._id === selectedAccount._id
+                                }
                                 onClick={() => handleSelectedAccount(account)}
                               />
                               <span className="checkmark"></span>
@@ -306,14 +323,16 @@ const InvestorManageAccount = () => {
                       </>
                     ))}
                     <div className="footer">
-                      {otherAccounts.length > 1 &&
+                      {otherAccounts.length > 1 && (
                         <button
                           className="btn btn-delete "
                           onClick={handleSwitchAccount}
                         >
-                          {isSubmitting ? "Switching Account...." : "Switch Account"}
+                          {isSubmitting
+                            ? "Switching Account...."
+                            : "Switch Account"}
                         </button>
-                      }
+                      )}
                       <Link to="/login">
                         <button
                           className="btn btn-delete "
@@ -330,7 +349,7 @@ const InvestorManageAccount = () => {
           </div>
         </div>
       </div>
-    </MaxWidthWrapper >
+    </MaxWidthWrapper>
   );
 };
 
