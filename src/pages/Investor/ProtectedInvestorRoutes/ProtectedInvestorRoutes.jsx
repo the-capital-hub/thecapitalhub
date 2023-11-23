@@ -1,10 +1,4 @@
-import {
-  Outlet,
-  Navigate,
-  useLocation,
-  NavLink,
-  useNavigate,
-} from "react-router-dom";
+import { Outlet, Navigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./ProtectedInvestorRoutes.scss";
 import LogOutPopUp from "../../../components/PopUp/LogOutPopUp/LogOutPopUp";
@@ -16,20 +10,17 @@ import {
   ModalBSHeader,
 } from "../../../components/PopUp/ModalBS";
 import NewCommunityModal from "../../../components/Investor/ChatComponents/NewCommunityModal";
-import { useDispatch, useSelector } from "react-redux";
-import { HiOutlineHome } from "react-icons/hi2";
-import { BsGraphUpArrow } from "react-icons/bs";
-import { FiUsers } from "react-icons/fi";
-import { CiBellOn, CiSquarePlus } from "react-icons/ci";
-import {
-  toggleNotificationModal,
-  toggleinvestorCreatePostModal,
-} from "../../../Store/features/design/designSlice";
+import { useSelector } from "react-redux";
+// import {
+//   toggleNotificationModal,
+//   toggleinvestorCreatePostModal,
+// } from "../../../Store/features/design/designSlice";
+import MobileNavbar from "../../../components/Shared/MobileNavbar/MobileNavbar";
 
 function ProtectedInvestorRoutes({ children, ...props }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
 
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   const handleSidebarToggle = () => {
@@ -52,15 +43,6 @@ function ProtectedInvestorRoutes({ children, ...props }) {
       return <Navigate to="/home" replace />;
     }
 
-    const handleToggleCreatePostModal = () => {
-      navigate("/investor/home");
-      dispatch(toggleinvestorCreatePostModal());
-    };
-
-    // Handle toggle notification
-    const handleToggleNotificationModal = () => {
-      dispatch(toggleNotificationModal());
-    };
     return (
       <>
         <InvestorNavbar
@@ -85,43 +67,8 @@ function ProtectedInvestorRoutes({ children, ...props }) {
           </div>
         </div>
 
-        <div className="mobile-bottom-toolbar container p-2 shadow d-flex gap-1 justify-content-center border-top  px-3 d-md-none">
-          <div className="d-flex flex-column align-items-center mx-3">
-            <NavLink to="/investor/home">
-              <HiOutlineHome size={"22px"} />
-            </NavLink>
-            <span style={{ fontSize: "10px" }}>Home</span>
-          </div>
-          <div className="d-flex flex-column align-items-center mx-3">
-            <NavLink to="/investor/connection">
-              <FiUsers size={"22px"} />
-            </NavLink>
-            <span style={{ fontSize: "10px" }}>Connections</span>
-          </div>
-
-          <div
-            className="d-flex flex-column align-items-center mx-3"
-            onClick={handleToggleCreatePostModal}
-          >
-            <CiSquarePlus size={"25px"} />
-            <span style={{ fontSize: "10px" }}>Post</span>
-          </div>
-
-          <div className="d-flex flex-column align-items-center mx-3">
-            <NavLink to="/investor/mystartups">
-              <BsGraphUpArrow size={"20px"} />
-            </NavLink>
-            <span style={{ fontSize: "10px" }}>{"My_Startups"}</span>
-          </div>
-
-          <div
-            className="d-flex flex-column align-items-center mx-3"
-            onClick={handleToggleNotificationModal}
-          >
-            <CiBellOn size={"25px"} />
-            <span style={{ fontSize: "10px" }}>Notification</span>
-          </div>
-        </div>
+        {/* Mobile Navbar */}
+        <MobileNavbar isInvestor={true} />
 
         <LogOutPopUp />
 

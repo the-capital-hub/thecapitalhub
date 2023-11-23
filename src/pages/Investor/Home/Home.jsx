@@ -12,16 +12,28 @@ import RecommendationCard from "../../../components/Investor/InvestorGlobalCards
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
 import {
   getAllPostsAPI,
+  getInvestorById,
   getSavedPostCollections,
   postUserPost,
 } from "../../../Service/user";
 import { useLocation } from "react-router-dom";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
-import { setPageTitle,  selectInvestorCreatePostModal} from "../../../Store/features/design/designSlice";
+import {
+  setPageTitle,
+  selectInvestorCreatePostModal,
+} from "../../../Store/features/design/designSlice";
 import OnBoardUser from "../../../components/OnBoardUser/OnBoardUser";
 import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
+import {
+  selectIsInvestor,
+  selectUserInvestor,
+  setUserCompany,
+} from "../../../Store/features/user/userSlice";
 
 function Home() {
+  const isInvestor = useSelector(selectIsInvestor);
+  const userInvestor = useSelector(selectUserInvestor);
+
   const [popupOpen, setPopupOpen] = useState(false);
   const [allPosts, setAllPosts] = useState([]);
   const [newPost, setNewPost] = useState(false);
@@ -30,13 +42,14 @@ function Home() {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
-  const isInvestorCreatePostModalOpen = useSelector(selectInvestorCreatePostModal);
+  const isInvestorCreatePostModalOpen = useSelector(
+    selectInvestorCreatePostModal
+  );
 
   useEffect(() => {
     setPopupOpen(isInvestorCreatePostModalOpen);
   }, [isInvestorCreatePostModalOpen]);
-  
-  
+
   const openPopup = () => {
     setPopupOpen(!popupOpen);
   };
@@ -52,8 +65,19 @@ function Home() {
 
   useEffect(() => {
     dispatch(setPageTitle("Home"));
-    window.title = "Home | The Capital Hub";
-  }, [dispatch]);
+    window.title = "Home | Investors - The Capital Hub";
+
+    // Fetch company data
+    if (isInvestor) {
+      getInvestorById(userInvestor)
+        .then(({ data }) => {
+          dispatch(setUserCompany(data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [dispatch, isInvestor, userInvestor]);
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
@@ -82,7 +106,6 @@ function Home() {
       .catch((error) => {
         console.log(error.message);
       });
-    document.title = "Home | Investors - The Capital Hub";
     fetchMorePosts();
   }, [newPost]);
 

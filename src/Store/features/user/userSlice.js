@@ -6,6 +6,7 @@ const initialState = {
   error: null,
   recommendations: null,
   company: null,
+  unreadNotifications: null,
 };
 
 export const userSlice = createSlice({
@@ -49,6 +50,12 @@ export const userSlice = createSlice({
     updateUserCompany: (state, action) => {
       state.company = { ...state.company, ...action.payload };
     },
+    setUnreadNotifications: (state, action) => {
+      state.unreadNotifications = action.payload;
+    },
+    decrementUnreadNotifications: (state, action) => {
+      state.unreadNotifications = state.unreadNotifications - 1;
+    },
   },
 });
 
@@ -60,6 +67,8 @@ export const {
   updateLoggedInUser,
   setUserCompany,
   updateUserCompany,
+  setUnreadNotifications,
+  decrementUnreadNotifications,
 } = userSlice.actions;
 
 // LoggedInUser state selectors
@@ -67,12 +76,18 @@ export const selectIsInvestor = (state) => {
   return state.user.loggedInUser.isInvestor === "true" ? true : false;
 };
 export const selectLoggedInUserId = (state) => state.user.loggedInUser._id;
+export const selectUserProfilePicture = (state) =>
+  state.user.loggedInUser.profilePicture;
 export const selectUserOneLinkId = (state) => state.user.loggedInUser.oneLinkId;
 export const selectUserInvestor = (state) => state.user.loggedInUser?.investor;
 export const selectUserRecentExperience = (state) =>
   state.user.loggedInUser.recentExperience;
 export const selectUserRecentEducation = (state) =>
   state.user.loggedInUser.recentEducation;
+
+// unread Notifications selector
+export const selectUnreadNotifications = (state) =>
+  state.user.unreadNotifications;
 
 // Investment philosophy selectors
 export const selectUserSectorPreferences = (state) =>
@@ -114,5 +129,6 @@ export const selectUserSectorInterested = (state) =>
   state.user.company?.sectorInterested;
 // export const selectUserInvestmentPhilosophy = (state) =>
 //   state.user.company?.investmentPhilosophy;
+export const selectMyInterests = (state) => state.user.company?.myInterests;
 
 export default userSlice.reducer;
