@@ -173,7 +173,7 @@ const MyStartUp = () => {
               </div>
             </div>
           </div>
-          <div className="card_container p-4 d-flex gap-5 align-items-center overflow-x-auto ">
+          <div className="card_container p-4 d-flex gap-5 overflow-x-auto ">
             {myInterests.length > 0
               ? myInterests?.map((company, index) => {
                   return (

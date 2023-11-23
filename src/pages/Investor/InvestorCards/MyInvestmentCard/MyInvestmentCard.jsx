@@ -116,8 +116,8 @@ const MyInvestmentCard = ({
   };
 
   return (
-    <div className="investment-card-container border rounded-4 position-relative">
-      <div className="d-flex flex-column py-2 px-3 border-bottom ">
+    <div className="investment-card-container border rounded-4 position-relative d-flex flex-column">
+      <div className="d-flex flex-column py-2 px-3 border-bottom flex-grow-1">
         <div className="left">
           {/* Logo */}
           {!editMode ? (
@@ -249,7 +249,7 @@ const MyInvestmentCard = ({
         </div>
       ) : (
         <div className="">
-          <div className="d-flex align-items-center py-2 px-3 border-bottom">
+          <div className="d-flex align-items-center py-2 px-3">
             {/* Interests Commitment */}
             <p className={`m-0`}>
               <strong>My Commitment:</strong>{" "}
@@ -270,7 +270,7 @@ const MyInvestmentCard = ({
             </p>
           </div>
 
-          <div className="bottom d-flex align-items-center py-2 px-3 gap-2">
+          {/* <div className="bottom d-flex align-items-center py-2 px-3 gap-2">
             <img src={InvestedIcon} alt="" className="small-image" />
             <p className="m-0 " style={{ color: "rgba(74, 74, 74, 1)" }}>
               Invested:{" "}
@@ -281,7 +281,6 @@ const MyInvestmentCard = ({
               >
                 {currCompany?.investedEquity}%
               </span>{" "}
-              {/* Interests Equity input */}
               <input
                 type="number"
                 name="investedEquity"
@@ -296,7 +295,7 @@ const MyInvestmentCard = ({
               />
               <strong>Equity</strong>
             </p>
-          </div>
+          </div> */}
         </div>
       )}
 
