@@ -115,7 +115,7 @@ const MyStartUp = () => {
             {investedStartups.length > 0
               ? investedStartups?.map((company, index) => {
                   return (
-                    <MyInvestmentCard key={company.id} company={company} />
+                    <MyInvestmentCard key={company.name} company={company} />
                   );
                 })
               : "No Data Found."}
@@ -178,7 +178,7 @@ const MyStartUp = () => {
               ? myInterests?.map((company, index) => {
                   return (
                     <MyInvestmentCard
-                      key={company.id}
+                      key={company.name}
                       company={company}
                       isInterests={true}
                     />

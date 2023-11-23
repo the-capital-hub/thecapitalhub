@@ -125,10 +125,15 @@ export default function SelectCommitmentModal({ interestData, founderId }) {
                 type="button"
                 className="btn btn-base cancel"
                 data-bs-dismiss="modal"
+                disabled={loading}
               >
                 Cancel
               </button>
-              <button type="submit" className="btn btn-base save">
+              <button
+                type="submit"
+                className="btn btn-base save"
+                disabled={loading}
+              >
                 {loading ? (
                   <SpinnerBS spinnerSizeClass="spinner-border-sm" />
                 ) : (

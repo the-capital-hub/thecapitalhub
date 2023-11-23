@@ -81,7 +81,7 @@ export default function EditModalContent({
             return (
               <div
                 className="border rounded-4 p-2 d-flex justify-content-between align-items-center"
-                key={company.id}
+                key={company.name}
               >
                 <img
                   src={company.logo}
