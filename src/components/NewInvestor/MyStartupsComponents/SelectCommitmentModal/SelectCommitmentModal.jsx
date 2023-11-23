@@ -100,6 +100,25 @@ export default function SelectCommitmentModal({ interestData, founderId }) {
                 </ul>
               </div>
             </fieldset>
+
+            {/* Alerts */}
+            {alert?.success && (
+              <span
+                className="fs-5 text-center growIn-short"
+                style={{ animationDuration: "0.25s" }}
+              >
+                {alert.success}
+              </span>
+            )}
+            {alert?.error && (
+              <span
+                className="fs-5 text-danger text-center growIn-short"
+                style={{ animationDuration: "0.25s" }}
+              >
+                {alert.error}
+              </span>
+            )}
+
             {/* Action buttons */}
             <div className="d-flex align-items-center gap-3 ms-auto">
               <button
@@ -117,22 +136,6 @@ export default function SelectCommitmentModal({ interestData, founderId }) {
                 )}
               </button>
             </div>
-            {alert?.success && (
-              <span
-                className="fs-5 text-center growIn-short"
-                style={{ animationDuration: "0.25s" }}
-              >
-                {"alert.success"}
-              </span>
-            )}
-            {alert?.error && (
-              <span
-                className="fs-5 text-danger text-center growIn-short"
-                style={{ animationDuration: "0.25s" }}
-              >
-                {alert.error}
-              </span>
-            )}
           </form>
         </ModalBSBody>
       </ModalBSContainer>

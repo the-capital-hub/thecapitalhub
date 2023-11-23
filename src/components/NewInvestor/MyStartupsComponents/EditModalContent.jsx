@@ -6,7 +6,12 @@ import "./EditModalContent.scss";
 import { getInvestorById, postInvestorData } from "../../../Service/user";
 import { useSelector } from "react-redux";
 
-export default function EditModalContent({ dataArray, isInterests, setInvestedStartups, setMyInterests }) {
+export default function EditModalContent({
+  dataArray,
+  isInterests,
+  setInvestedStartups,
+  setMyInterests,
+}) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   // Save companies data to state.
   const [companies, setCompanies] = useState([]);
@@ -85,7 +90,6 @@ export default function EditModalContent({ dataArray, isInterests, setInvestedSt
                   onClick={() => setEditingCompany(company)}
                 />
 
-
                 <h6
                   className="green_underline "
                   style={{ cursor: "pointer" }}
@@ -94,8 +98,7 @@ export default function EditModalContent({ dataArray, isInterests, setInvestedSt
                   {company.name}
                 </h6>
                 <div className="d-flex gap-2">
-                  {!company.companyId &&
-
+                  {
                     <button
                       className="green_button px-3"
                       onClick={() => handleEditClick(company, index)}
@@ -103,7 +106,10 @@ export default function EditModalContent({ dataArray, isInterests, setInvestedSt
                       <CiEdit style={{ color: "", backgroundColor: "" }} />
                     </button>
                   }
-                  <button className="btn btn-danger" onClick={() => handleDelete(index)}>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleDelete(index)}
+                  >
                     <AiFillDelete style={{ color: "", backgroundColor: "" }} />
                   </button>
                 </div>
