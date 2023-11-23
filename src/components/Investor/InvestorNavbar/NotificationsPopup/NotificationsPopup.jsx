@@ -5,25 +5,30 @@ import {
   markAllNotificationsReadAPI,
   markNotificationAsReadAPI,
 } from "../../../../Service/user";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 import TimeAgo from "timeago-react";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  decrementUnreadNotifications,
+  selectIsInvestor,
+  selectLoggedInUserId,
+  setUnreadNotifications,
+} from "../../../../Store/features/user/userSlice";
 
-function NotificationsPopup({
-  toggleVisibility,
-  setNotificationCount,
-  notificationCount,
-}) {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+function NotificationsPopup({ toggleVisibility }) {
+  const loggedInUserId = useSelector(selectLoggedInUserId);
+  const isInvestor = useSelector(selectIsInvestor);
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const fetchNotifications = async () => {
     setLoading(true);
     try {
-      const res = await fetchNotificationsAPI(loggedInUser?._id);
+      const res = await fetchNotificationsAPI(loggedInUserId);
       // console.log(loggedInUser?._id);
       setNotifications(res.data);
     } catch (error) {
@@ -50,11 +55,7 @@ function NotificationsPopup({
           <span>
             liked your{" "}
             <Link
-              to={
-                loggedInUser.isInvestor === "true"
-                  ? `/investor/post/${_id}`
-                  : `/posts/${_id}`
-              }
+              to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
               className="fw-bold"
             >
               post
@@ -67,11 +68,7 @@ function NotificationsPopup({
           <span>
             shared your{" "}
             <Link
-              to={
-                loggedInUser.isInvestor === "true"
-                  ? `/investor/post/${_id}`
-                  : `/posts/${_id}`
-              }
+              to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
               className="fw-bold"
             >
               post
@@ -84,11 +81,7 @@ function NotificationsPopup({
           <span>
             commented on your{" "}
             <Link
-              to={
-                loggedInUser.isInvestor === "true"
-                  ? `/investor/post/${_id}`
-                  : `/posts/${_id}`
-              }
+              to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
               className="fw-bold"
             >
               post
@@ -117,7 +110,7 @@ function NotificationsPopup({
     try {
       await markNotificationAsReadAPI(id);
       await fetchNotifications();
-      setNotificationCount((prev) => prev - 1);
+      dispatch(decrementUnreadNotifications());
     } catch (error) {
       console.log("Error marking notification as read", error);
     }
@@ -127,7 +120,7 @@ function NotificationsPopup({
     try {
       await markAllNotificationsReadAPI();
       await fetchNotifications();
-      setNotificationCount(0);
+      dispatch(setUnreadNotifications(0));
     } catch (error) {
       console.log("Error marking all notifications as read: ", error);
     }
@@ -161,7 +154,7 @@ function NotificationsPopup({
                       <p className="m-0">
                         <Link
                           to={
-                            loggedInUser.isInvestor === "true"
+                            isInvestor
                               ? `/investor/user/${sender?._id}`
                               : `/user/${sender?._id}`
                           }

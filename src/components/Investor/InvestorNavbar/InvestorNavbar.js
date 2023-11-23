@@ -8,7 +8,7 @@ import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
 import HambergerIcon from "../../../Images/Hamberger.svg";
 import HambergerCrossIcon from "../../../Images/investorsidebar/FontX.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
 import {
@@ -18,12 +18,27 @@ import {
 import NotificationsPopup from "./NotificationsPopup/NotificationsPopup";
 import { useRef } from "react";
 import OnboardingSwitch from "./OnboardingSwitch/OnboardingSwitch";
-import { selectNotificationtModal } from "../../../Store/features/design/designSlice";
+import {
+  selectIsMobileView,
+  selectNotificationtModal,
+} from "../../../Store/features/design/designSlice";
+import {
+  selectLoggedInUserId,
+  selectUnreadNotifications,
+  selectUserProfilePicture,
+  setUnreadNotifications,
+} from "../../../Store/features/user/userSlice";
 
 // Startup navbar
 const InvestorNavbar = (props) => {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const isMobileView = useSelector((state) => state.design.isMobileView);
+  const loggedInUserId = useSelector(selectLoggedInUserId);
+  const userProfilePicture = useSelector(selectUserProfilePicture);
+  const isMobileView = useSelector(selectIsMobileView);
+  const isNotificationModalOpen = useSelector(selectNotificationtModal);
+  const unreadNotifications = useSelector(selectUnreadNotifications);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // const [url, setUrl] = useState("Home");
   const [searchSuggestions, setSearchSuggestions] = useState(false);
@@ -32,18 +47,16 @@ const InvestorNavbar = (props) => {
   const [inputOnFocus, setInputOnFocus] = useState(false);
   const [toggleNotificationPopup, setToggleNotificationPopup] = useState(false);
   const notificationPopup = useRef();
-  const navigate = useNavigate();
-  const [notificationCount, setNotificationCount] = useState(0);
-  const isNotificationModalOpen = useSelector(selectNotificationtModal);
 
   useEffect(() => {
     getNotificationCount()
       .then(({ data }) => {
         console.log(data.unreadCount);
-        setNotificationCount(data.unreadCount);
+        // setNotificationCount(data.unreadCount);
+        dispatch(setUnreadNotifications(data.unreadCount));
       })
       .catch((error) => console.error(error));
-  }, [loggedInUser._id]);
+  }, [loggedInUserId, dispatch]);
 
   // useEffect(() => {
   //   let url = window.location.href;
@@ -383,8 +396,6 @@ const InvestorNavbar = (props) => {
                     />
                     <NotificationsPopup
                       toggleVisibility={setToggleNotificationPopup}
-                      setNotificationCount={setNotificationCount}
-                      notificationCount={notificationCount}
                     />
                   </>
                 ) : (
@@ -396,9 +407,9 @@ const InvestorNavbar = (props) => {
                         setToggleNotificationPopup((prev) => !prev)
                       }
                     />
-                    {!toggleNotificationPopup && notificationCount > 0 && (
+                    {!toggleNotificationPopup && unreadNotifications > 0 && (
                       <div className="notification-count">
-                        {notificationCount}
+                        {unreadNotifications}
                       </div>
                     )}
                   </>
@@ -417,7 +428,7 @@ const InvestorNavbar = (props) => {
                   {" "}
                   <img
                     className="profile-pic rounded-circle"
-                    src={loggedInUser.profilePicture}
+                    src={userProfilePicture}
                     alt="Profile"
                     style={{ objectFit: "cover" }}
                   />
