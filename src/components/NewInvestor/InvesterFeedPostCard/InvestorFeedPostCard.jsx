@@ -335,7 +335,14 @@ const FeedPostCard = ({
             )}
             <div className="  feed_header_container border-2 border-bottom mb-3 pb-2">
               <div className="feedpostcard_content">
-                <Link to={`/user/${userId}`} className="rounded-circle">
+                <Link
+                  to={`${
+                    loggedInUser?.isInvestor === "true"
+                      ? `/investor/user/${userId}`
+                      : `/user/${userId}`
+                  }`}
+                  className="rounded-circle"
+                >
                   <img
                     src={
                       profilePicture ||
@@ -350,7 +357,11 @@ const FeedPostCard = ({
                 </Link>
                 <div className="feedpostcart_text_header my-1">
                   <Link
-                    to={`/user/${userId}`}
+                    to={`${
+                      loggedInUser?.isInvestor === "true"
+                        ? `/investor/user/${userId}`
+                        : `/user/${userId}`
+                    }`}
                     className="text-decoration-none"
                     style={{ fontSize: "18px", fontWeight: 600, color: "#000" }}
                   >
