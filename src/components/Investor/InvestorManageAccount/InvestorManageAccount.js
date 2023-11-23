@@ -264,51 +264,72 @@ const InvestorManageAccount = () => {
                   </div>
                   <p></p>
                   <section className="existing_accounts">
-                    {otherAccounts?.map((account) => (
-                      <>
-                        <div className="small_card">
-                          <div className="left_section">
-                            <div className="d-flex align-items-center">
-                              <div className="profile_image">
-                                <img
-                                  src={account.user.profilePicture}
-                                  alt="img"
-                                />
-                              </div>
-                              <div className="name_email">
-                                <h4>
-                                  {account.user.firstName}{" "}
-                                  {account.user.lastName}
-                                </h4>
-                                <h6>{account.user.email}</h6>
+                    {otherAccounts?.map((account) => {
+                      const fullmname =
+                        account.user.firstName + " " + account.user.lastName;
+                      const shouldTruncate =
+                        window.innerWidth <= 600 &&
+                        !account.user.email.includes("com");
+
+                      return (
+                        <>
+                          <div className="small_card">
+                            <div className="left_section">
+                              <div className="d-flex align-items-center">
+                                <label className="checkbox_container me-2">
+                                  <input
+                                    type="checkbox"
+                                    checked={
+                                      account.user._id === selectedAccount._id
+                                    }
+                                    onClick={() =>
+                                      handleSelectedAccount(account)
+                                    }
+                                  />
+                                  <span className="checkmark"></span>
+                                </label>
+                                <div className="profile_image">
+                                  <img
+                                    src={account.user.profilePicture}
+                                    alt="img"
+                                  />
+                                </div>
+                                <div className="name_email">
+                                  <h4>
+                                    {fullmname}
+                                    {/* {account.user.lastName} */}
+                                  </h4>
+                                  <h6>
+                                    {" "}
+                                    {window.innerWidth <= 600
+                                      ?  account.user.email.slice(0, 21) ===
+                                      account.user.email
+                                    ? account.user.email
+                                    : account.user.email.slice(0, 21) + "..."
+                                      : account.user.email.slice(0, 23) ===
+                                        account.user.email
+                                      ? account.user.email
+                                      : account.user.email.slice(0, 23) + "..."}
+                                  </h6>
+                                </div>
                               </div>
                             </div>
+                            <div className="right_section d-flex flex-column ">
+                              <button
+                                className="img-btn  pt-md-2"
+                                onClick={() => handleRemoveAccount(account)}
+                              >
+                                <img
+                                  src={deleteIcon}
+                                  alt="delete icon"
+                                  className="deleteIcon"
+                                />
+                              </button>
+                            </div>
                           </div>
-                          <div className="right_section d-flex flex-column ">
-                            <label className="checkbox_container">
-                              <input
-                                type="checkbox"
-                                checked={
-                                  account.user._id === selectedAccount._id
-                                }
-                                onClick={() => handleSelectedAccount(account)}
-                              />
-                              <span className="checkmark"></span>
-                            </label>
-                            <button
-                              className="img-btn pt-2"
-                              onClick={() => handleRemoveAccount(account)}
-                            >
-                              <img
-                                src={deleteIcon}
-                                alt="delete icon"
-                                className="deleteIcon"
-                              />
-                            </button>
-                          </div>
-                        </div>
-                      </>
-                    ))}
+                        </>
+                      );
+                    })}
                     <div className="footer">
                       {otherAccounts.length > 1 && (
                         <button
