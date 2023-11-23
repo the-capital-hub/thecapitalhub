@@ -148,6 +148,7 @@ export default function EditInvestorCompanyProfilePage() {
               width={20}
               height={20}
               onClick={() => navigate(-1)}
+              alt=""
             />
           </span>
           {/* <SmallProfileCard text={"Company Profile"} /> */}

@@ -43,15 +43,6 @@ function ProtectedInvestorRoutes({ children, ...props }) {
       return <Navigate to="/home" replace />;
     }
 
-    // const handleToggleCreatePostModal = () => {
-    //   navigate("/investor/home");
-    //   dispatch(toggleinvestorCreatePostModal());
-    // };
-
-    // // Handle toggle notification
-    // const handleToggleNotificationModal = () => {
-    //   dispatch(toggleNotificationModal());
-    // };
     return (
       <>
         <InvestorNavbar

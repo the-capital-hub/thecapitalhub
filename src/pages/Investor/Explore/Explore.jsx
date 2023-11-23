@@ -140,7 +140,7 @@ function Explore() {
   useEffect(() => {
     document.title = "Explore | Investors - The Capital Hub";
     dispatch(setPageTitle("Explore"));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     fetchFilters();
@@ -267,10 +267,7 @@ function Explore() {
           </div>
 
           {/* Filters */}
-          <form
-
-            onSubmit={onSubmitFilters}
-          >
+          <form onSubmit={onSubmitFilters}>
             <div className="investor_explore_filters_container">
               {activeTab === "Investor" && (
                 <>
@@ -348,7 +345,9 @@ function Explore() {
                   <FilterBySelect
                     value={filters?.fundingRaised}
                     onChange={handleOnChange}
-                    options={filterOptions?.fundingRaised || fundingRaisedOptions}
+                    options={
+                      filterOptions?.fundingRaised || fundingRaisedOptions
+                    }
                     label="Funding Raised"
                     name="fundingRaised"
                   />
@@ -402,7 +401,9 @@ function Explore() {
                   <FilterBySelect
                     value={filters?.previousExits}
                     onChange={handleOnChange}
-                    options={filterOptions?.previousExits || previousExitsOptions}
+                    options={
+                      filterOptions?.previousExits || previousExitsOptions
+                    }
                     label="Previous Exits"
                     name="previousExits"
                   />
@@ -410,7 +411,8 @@ function Explore() {
                     value={filters?.yearsOfExperience}
                     onChange={handleOnChange}
                     options={
-                      filterOptions?.yearsOfExperience || yearsOfExperienceOptions
+                      filterOptions?.yearsOfExperience ||
+                      yearsOfExperienceOptions
                     }
                     label="Years of Experience"
                     name="yearsOfExperience"
