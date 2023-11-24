@@ -1,0 +1,26 @@
+.funding_wrapper {
+  .two_col_wrapper {
+    display: grid;
+    grid-template-columns: 100%;
+    justify-content: space-between;
+
+    @media (min-width: 1200px) {
+      grid-template-columns: calc(100% - 26rem) 24rem;
+    }
+  }
+
+  // component classes
+  .funding_textarea {
+    width: 100%;
+    border-radius: var(--border-radius);
+    border: 1px solid #e7e7e7;
+    outline: 0;
+    transition: 0.25s;
+
+    padding: 0.5em;
+
+    &:focus {
+      border: 1px solid #fd5901;
+    }
+  }
+}
