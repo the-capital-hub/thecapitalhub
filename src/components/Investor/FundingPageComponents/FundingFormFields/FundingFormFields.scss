@@ -1,0 +1,44 @@
+.funding_form_field {
+  // Show edit button on hover
+  .edit-field-btn {
+    visibility: visible;
+    pointer-events: all;
+
+    @media (min-width: 1200px) {
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+  &:hover {
+    .edit-field-btn {
+      visibility: visible;
+      pointer-events: all;
+    }
+  }
+
+  .orange-button {
+    border-radius: 10px;
+    background: #fd5901;
+    border: 1px solid #fd5901;
+
+    padding: 8px 25px;
+    font-size: 16px;
+    color: white;
+    transition: 0.25s;
+
+    &:hover {
+      background-color: #fd590133;
+      color: #fd5901;
+    }
+
+    &:active {
+      background-color: #fd5901;
+      border: 1px solid #fd5901;
+      color: white;
+    }
+  }
+
+  .orange {
+    color: #fd5901;
+  }
+}

@@ -23,6 +23,7 @@ import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/Af
 import ChatDeletePopup from "../ChatDeletePopup/ChatDeletePopup";
 import ChatDropDownMenu from "../ChatDropDownMenu/ChatDropDownMenu";
 import { s3 } from "../../../../Service/awsConfig";
+import { IoCheckmarkDone } from "react-icons/io5";
 
 const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
   // Fetch global state
@@ -52,15 +53,12 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
     setDeletePopup(true);
   };
   const handleIdBack = (data) => {
-    console.log(data);
     setMsgId(data);
   };
 
   const hadilDeleteOk = async () => {
-    console.log(msgId);
     try {
       const result = await deleteMessage(msgId);
-      console.log("delete message Result:", result);
       if (result) {
         setShowFeaturedPostSuccess(true);
         setDeletePopup(false);
@@ -79,16 +77,13 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
 
   useEffect(() => {
     markMessagesAsRead(chatId, userId)
-      .then((response) => {
-        console.log(response.message);
-      })
+      .then((response) => {})
       .catch((error) => {
         console.error("Error marking messages as read:", error);
       });
   }, [chatId, userId, recieveMessage]);
 
   useEffect(() => {
-    console.log(recieveMessage);
     if (recieveMessage !== null && recieveMessage?.chatId === chatId) {
       setMessages((prevMessages) => [...prevMessages, recieveMessage]);
     }
@@ -98,7 +93,6 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
     getMessageByChatId(chatId)
       .then((res) => {
         setMessages(res.data);
-        console.log(res.data);
       })
       .catch((error) => {
         console.error("Error-->", error);
@@ -109,7 +103,6 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
     getUserAndStartUpByUserIdAPI(userId)
       .then((res) => {
         setUser(res.data);
-        console.log(res.data);
       })
       .catch((error) => {
         console.error("Error-->", error);
@@ -141,8 +134,9 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
         groupedMessages.push({ date: "Yesterday", messages: [message] });
       } else {
         currentDate = messageDate;
-        const formattedDate = `${messageDate.getDate()}-${messageDate.getMonth() + 1
-          }-${messageDate.getFullYear()}`;
+        const formattedDate = `${messageDate.getDate()}-${
+          messageDate.getMonth() + 1
+        }-${messageDate.getFullYear()}`;
         groupedMessages.push({
           date:
             today.getDate() === messageDate.getDate() ? "Today" : formattedDate,
@@ -179,7 +173,6 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
       message.video = video;
     }
     if (selectedDocument) {
-      console.log("doc");
       const timestamp = Date.now();
       const fileName = `${timestamp}_${selectedDocument.name}`;
       const params = {
@@ -191,7 +184,6 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
         const res = await s3.upload(params).promise();
         message.documentName = selectedDocument.name;
         message.documentUrl = res.Location;
-        console.log(res.Location);
       } catch (error) {
         console.error("Error uploading file to S3:", error);
       }
@@ -201,7 +193,6 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
       .then(({ data }) => {
         // setMessages([...messages, data]);
         setIsSent(!isSent);
-        console.log(data);
       })
       .catch((error) => {
         console.error("Error-->", error);
@@ -276,7 +267,9 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
   const handleOnelinkClick = () => {
     getStartupByFounderId(loggedInUser._id)
       .then(({ data }) => {
-        setSendText(`https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`);
+        setSendText(
+          `https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`
+        );
       })
       .catch((error) => console.log(error));
   };
@@ -304,9 +297,10 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
       <div className="chat_messages_group" ref={chatMessagesContainerRef}>
         {groupedMessages.map((group) => (
           <div key={group.date}>
-            <h6 className="date_header">{group.date}</h6>
+            <h6 className="date_header px-3 py-1 bg-light rounded shadow-sm">{group.date}</h6>
             <div className="chat_messages">
-              {group.messages.map((message) =>
+              {group.messages.map((message, idx) =>
+                // My messages
                 message.senderId._id === loggedInUser._id ? (
                   <section
                     className="my_message_main text-break"
@@ -314,137 +308,123 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                   >
                     <div className="my_messages">
                       <div className="time_name_image">
-                        <div className="time_name">
-                          <h6 className="name_title">
-                            {loggedInUser?.firstName} {loggedInUser?.lastName}
-                          </h6>
-                          <h6 className="time">
-                            {formatTime(new Date(message.createdAt))}
-                          </h6>
-                        </div>
-                        <img
-                          className="image_profile"
-                          src={loggedInUser?.profilePicture}
-                          alt=""
-                        />
-                      </div>
-                      {message.text !== "" && (
-                        <div
-                          className="mymessage_container text-break text-start position-relative "
-                          onMouseEnter={handleMouseEnter}
-                          onMouseLeave={handleMouseLeave}
-                        >
-                          <ChatDropDownMenu
-                            onClicks={handleSetDeletePopup}
-                            idBack={handleIdBack}
-                            id={message?._id}
-                            showMenu={messageMenu}
-                          />
+                        {!idx && (
+                          <div className="time_name d-flex gap-2 align-items-center me-2 mb-2">
+                            <h6 className="name_title">
+                              {loggedInUser?.firstName} {loggedInUser?.lastName}
+                            </h6>
 
-                          <Linkify>
-                            <p className="text-break text-start m-0">{message.text} </p>
-                          </Linkify>
-                        </div>
-                      )}
-                      {message?.image && (
-                        <div className="mymessage_container img">
-                          <ChatDropDownMenu
-                            onClicks={handleSetDeletePopup}
-                            idBack={handleIdBack}
-                            id={message?._id}
-                            showMenu={messageMenu}
-                          />
+                            <img
+                              className="image_profile"
+                              src={loggedInUser?.profilePicture}
+                              alt=""
+                            />
+                          </div>
+                        )}
+                      </div>
+                      <div
+                        className="mymessage_container text-break text-start position-relative "
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                      >
+                        {message.text !== "" && (
+                          <>
+                            <ChatDropDownMenu
+                              onClicks={handleSetDeletePopup}
+                              idBack={handleIdBack}
+                              id={message?._id}
+                              showMenu={messageMenu}
+                            />
+                            <Linkify>
+                              <p className="text-break text-start m-0">
+                                {message.text}
+                              </p>
+                            </Linkify>
+                          </>
+                        )}
+                        {message?.documentUrl && (
+                          <>
+                            <a
+                              href={message.documentUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-break"
+                            >
+                              <img
+                                className="p-1 rounded-circle"
+                                src={documentIcon}
+                                alt="upload document"
+                              />
+                              <p className="text-break">
+                                {message.documentName}
+                              </p>
+                            </a>
+                          </>
+                        )}
+                        {message?.image && (
                           <img
                             src={message.image}
                             className="image-message"
                             alt="message image"
                           />
-                        </div>
-                      )}
-                      {message?.video && (
-                        <div className="mymessage_container">
-                          <ChatDropDownMenu
-                            onClicks={handleSetDeletePopup}
-                            idBack={handleIdBack}
-                            id={message?._id}
-                            showMenu={messageMenu}
-                          />
+                        )}
+                        {message?.video && (
                           <video controls className="video-message">
                             <source src={message?.video} type={"video/mp4"} />
                             Your browser does not support the video tag.
                           </video>
-                        </div>
-                      )}
-                      {message.documentUrl && (
-                        <div className="mymessage_container text-break">
-                          <ChatDropDownMenu
-                            onClicks={handleSetDeletePopup}
-                            idBack={handleIdBack}
-                            id={message?._id}
-                            showMenu={messageMenu}
+                        )}
+                        <span className="msg-time">
+                          <IoCheckmarkDone
+                            color={message?.read ? "#009b00" : "white"}
+                            size={15}
                           />
-                          <a
-                            href={message.documentUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-break"
-                          >
-                            <img
-                              className="p-1 rounded-circle"
-                              src={documentIcon}
-                              alt="upload document"
-                            />
-                            <p className="text-break">{message.documentName}</p>
-                          </a>
-                        </div>
-                      )}
+                          {formatTime(new Date(message.createdAt))}
+                        </span>
+                      </div>
                     </div>
                   </section>
                 ) : (
+                  // Others messages
                   <section
-                    className="other_sender text-break"
+                    className="other_sender text-break d-flex flex-column"
                     key={message._id}
                   >
-                    <img
-                      className="image_profile"
-                      src={user?.profilePicture}
-                      alt=""
-                    />
-                    <div className="other_messages">
-                      <div className="time_name">
-                        <h6 className="name_title">
-                          {user?.firstName} {user?.lastName}{" "}
-                        </h6>{" "}
-                        <h6 className="time">
-                          {formatTime(new Date(message.createdAt))}
-                        </h6>
+                    {!idx && (
+                      <div className="d-flex align-items-center gap-2 mb-2">
+                        <img
+                          className="image_profile"
+                          src={user?.profilePicture}
+                          alt=""
+                        />
+                        <span className="name_title">
+                          {user?.firstName} {user?.lastName}
+                        </span>
                       </div>
-                      {message.text !== "" && (
-                        <div className="message_container text-break">
+                    )}
+                    <div className="other_messages">
+                      <div className="message_container text-break">
+                        {message.text !== "" && (
                           <Linkify>
-                            <p className="text-break text-start m-0">{message.text}</p>
+                            <p className="text-break w-100 text-start m-0">
+                              {message.text}
+                            </p>
                           </Linkify>
-                        </div>
-                      )}
-                      {message?.image && (
-                        <div className="message_container">
+                        )}
+                        {message?.image && (
                           <img
                             src={message.image}
                             className="image-message"
                             alt="message image"
                           />
-                        </div>
-                      )}
-                      {message?.video && (
-                        <div className="message_container">
+                        )}
+                        {message?.video && (
                           <video controls className="video-message">
                             <source src={message?.video} type={"video/mp4"} />
                             Your browser does not support the video tag.
                           </video>
-                        </div>
-                      )}
-                      {message.documentUrl && (
-                        <div className="message_container text-break">
+                        )}
+                        {message.documentUrl && (
                           <a
                             href={message.documentUrl}
                             target="_blank"
@@ -458,8 +438,15 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                             />
                             <p className="text-break">{message.documentName}</p>
                           </a>
-                        </div>
-                      )}
+                        )}
+                        <span className="msg-time">
+                          {/* <IoCheckmarkDone
+                            color={message?.read ? "#009b00" : "white"}
+                            size={15}
+                          /> */}
+                          {formatTime(new Date(message.createdAt))}
+                        </span>
+                      </div>
                     </div>
                   </section>
                 )

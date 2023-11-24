@@ -28,6 +28,8 @@ import { setPageTitle } from "../../../Store/features/design/designSlice";
 import ColorCards from "./Components/ColorCards/ColorCards";
 import UserBio from "./Components/UserBio/UserBio";
 import MissingDetails from "./Components/Questionnaire/MissingDetails";
+import AchievementsComponents from "../AchievementsPageComponents/AchievementsComponents";
+import { Link } from "react-router-dom";
 
 // Startup profile page
 const InvestorHome = () => {
@@ -83,6 +85,20 @@ const InvestorHome = () => {
                 </div>
                 <div className="col-12 mt-2 milestones">
                   <ConnectionCard />
+                </div>
+              </div>
+
+
+              {/* achievements */}
+              <div className="box personal_information">
+                <div className="personal_information_header ">
+                  <h2 className="typography">Achievements</h2>
+                  <div className="milestone_see_more">
+                    <Link to={"/profile/achievements"}>See more</Link>
+                  </div>
+                </div>
+                <div className="col-12 mt-2 milestones">
+                  <AchievementsComponents />
                 </div>
               </div>
 

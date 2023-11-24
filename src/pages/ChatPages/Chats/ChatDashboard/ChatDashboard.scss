@@ -23,9 +23,9 @@
   .name_title {
     color: #000;
     font-family: Poppins;
-    font-size: 15px;
+    font-size: 14px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 400;
     line-height: normal;
   }
 
@@ -77,6 +77,11 @@
     overflow-y: auto;
     scrollbar-gutter: stable;
 
+    .date_header{
+      width: max-content;
+      margin: auto;
+    }
+
     scrollbar-width: thick;
     scrollbar-color: var(--currentTheme) transparent;
 
@@ -110,8 +115,8 @@
       max-width: 60%;
 
       .image_profile {
-        height: 50px;
-        width: 50px;
+        height: 40px;
+        width: 40px;
         border-radius: 50%;
       }
 
@@ -120,6 +125,17 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
+
+        .msg-time {
+          font-size: 10px;
+          color: rgb(112, 112, 112);
+          text-align: end;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          justify-content: flex-end;
+          width: 100%;
+        }
 
         .message_container {
           background-color: #eaeef2;
@@ -161,8 +177,8 @@
       align-self: flex-end;
 
       .image_profile {
-        height: 50px;
-        width: 50px;
+        height: 40px;
+        width: 40px;
         border-radius: 50%;
       }
 
@@ -171,6 +187,18 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-end;
+        overflow: hidden !important;
+
+        .msg-time {
+          font-size: 10px;
+          color: rgb(255, 255, 255);
+          text-align: end;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          justify-content: flex-end;
+          width: 100%;
+        }
 
         .time_name_image {
           display: flex;
@@ -186,10 +214,23 @@
           border-bottom-right-radius: 20px;
           border-bottom-left-radius: 20px;
           margin-bottom: 10px;
-          margin-right: 50px;
+          // margin-right: 50px;
+          margin-right: 10px;
           display: flex;
           flex-direction: column;
-          align-items: center;
+          align-items: stretch;
+
+          .chatDropDownMenu {
+            display: none;
+            overflow: visible;
+          }
+
+          &:hover,
+          &:active {
+            .chatDropDownMenu {
+              display: block;
+            }
+          }
 
           a {
             color: white;

@@ -7,6 +7,9 @@ import fbIcon from "../../../Images/blog/typcn_social-facebook.svg";
 import twIcon from "../../../Images/blog/typcn_social-twitter.svg";
 import inIcon from "../../../Images/blog/typcn_social-instagram.svg";
 import BlogoneImage from "../../../Images/blog/1 AsPGU1Q42C9lsVRoMg91Nw.webp";
+import { Link } from "react-router-dom";
+import Pramod from "../../../Images/aboutUs/Pramod.jpeg";
+
 
 const StartUpBlogOne = () => {
   useEffect(() => {
@@ -29,9 +32,36 @@ const StartUpBlogOne = () => {
               Mentorship Before Investing in a Startup
             </h2>
 
-            <div className="time_icon">
-              <span>Published on May 1, 2023</span>
-              <div className="social_icon_container">
+            
+
+            <div className="time_icon w-">
+              <div className="d-flex flex-row align-items-center">
+                <Link
+                  to="/user/64e9fd9d4e368da2bf3e721f"
+                  className="text-dark text-decoration-none"
+                >
+                  <img
+                    className="user rounded-pill mx-2"
+                    src={Pramod}
+                    alt="img"
+                    width={60}
+                    height={60}
+                  />
+                </Link>
+                <div className="py-2">
+                  <Link
+                    to="/user/64e9fd9d4e368da2bf3e721f"
+                    className="text-dark text-decoration-none"
+                  >
+                    <p className="m-0">
+                      <b>Pramod Badiger</b>
+                    </p>
+                  </Link>
+                  <span>Published on May 1, 2023</span>
+                </div>
+              </div>
+
+              <div className="social_icon_container d-flex flex-row justify-content-end">
                 <img className="social_icon" src={fbIcon} alt="img" />
                 <img className="social_icon" src={twIcon} alt="img" />
                 <img className="social_icon" src={inIcon} alt="img" />
