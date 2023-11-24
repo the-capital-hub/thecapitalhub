@@ -19,12 +19,16 @@ import {
 import { SearchIcon } from "../SvgIcons";
 import NotificationsPopup from "../../Investor/InvestorNavbar/NotificationsPopup/NotificationsPopup";
 import { useRef } from "react";
-import { selectNotificationtModal } from "../../../Store/features/design/designSlice";
+import {
+  selectIsMobileView,
+  selectNotificationtModal,
+} from "../../../Store/features/design/designSlice";
 import {
   selectUnreadNotifications,
   selectUserProfilePicture,
   setUnreadNotifications,
 } from "../../../Store/features/user/userSlice";
+import OnboardingSwitch from "../../Investor/InvestorNavbar/OnboardingSwitch/OnboardingSwitch";
 
 const NavBar = (props) => {
   // Fetch global states
@@ -32,6 +36,7 @@ const NavBar = (props) => {
   const pageTitle = useSelector((state) => state.design.pageTitle);
   const isNotificationModalOpen = useSelector(selectNotificationtModal);
   const unreadNotifications = useSelector(selectUnreadNotifications);
+  const isMobileView = useSelector(selectIsMobileView);
 
   const [searchSuggestions, setSearchSuggestions] = useState(false);
   const [searchInput, setSearchInput] = useState("");
@@ -359,6 +364,10 @@ const NavBar = (props) => {
                 )}
               </div>
 
+              {/* Onboarding Tutorial */}
+              {isMobileView ? "" : <OnboardingSwitch />}
+
+              {/* Notifications */}
               {/* <Link
                 to="/notifications"
                 className="rounded-circle notification-icon"

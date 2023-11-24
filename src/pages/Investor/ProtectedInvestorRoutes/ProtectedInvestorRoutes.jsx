@@ -27,13 +27,16 @@ function ProtectedInvestorRoutes({ children, ...props }) {
     setSidebarCollapsed((prev) => !prev);
   };
   const location = useLocation();
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location]);
+
   const isLoggedIn = () => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     return isLoggedIn === "true";
   };
+
   if (!isLoggedIn()) {
     return <Navigate to="/login" replace />;
   }

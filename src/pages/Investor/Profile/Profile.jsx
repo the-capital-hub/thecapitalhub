@@ -20,6 +20,7 @@ import {
   setUserCompany,
 } from "../../../Store/features/user/userSlice";
 import { getInvestorById } from "../../../Service/user";
+import AchievementsComponent from "../../../components/NewInvestor/ProfileComponents/AchievementsComponent/AchievementsComponent";
 
 function Profile() {
   // Fetch loggedInUser from global state
@@ -61,6 +62,8 @@ function Profile() {
             {/* Bio */}
             <UserBio />
 
+            {/* Achievements */}
+            <AchievementsComponent />
             {/* Startups Invested In */}
             <StartupsInvested />
 

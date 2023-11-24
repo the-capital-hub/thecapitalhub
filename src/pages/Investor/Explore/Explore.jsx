@@ -16,6 +16,7 @@ import {
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import OnBoardUser from "../../../components/OnBoardUser/OnBoardUser";
 import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
+import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
 
 const sectorOptions = [
   "FMCG",
@@ -225,6 +226,10 @@ function Explore() {
     <MaxWidthWrapper>
       <div className="explore_container px-md-3 mb-4">
         <SmallProfileCard text="Explore" />
+
+        {/* Onboarding popup */}
+        <TutorialTrigger steps={investorOnboardingSteps.explorePage} />
+
         <section className="filter_container border">
           <h5 className="h5">Find StartUps by</h5>
           <div className="filter_by">
@@ -489,7 +494,7 @@ function Explore() {
           )}
         </div>
       </div>
-      <OnBoardUser steps={investorOnboardingSteps.explorePage} />
+      {/* <OnBoardUser steps={investorOnboardingSteps.explorePage} /> */}
     </MaxWidthWrapper>
   );
 }
