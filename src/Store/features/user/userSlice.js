@@ -130,5 +130,7 @@ export const selectUserSectorInterested = (state) =>
 // export const selectUserInvestmentPhilosophy = (state) =>
 //   state.user.company?.investmentPhilosophy;
 export const selectMyInterests = (state) => state.user.company?.myInterests;
+export const selectFundingQuestions = (state) =>
+  state.user.company?.fundingViaCapitalhubQuestions;
 
 export default userSlice.reducer;

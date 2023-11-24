@@ -6,10 +6,12 @@ import {
   selectShowOnboarding,
   setShowOnboarding,
 } from "../../../../Store/features/design/designSlice";
+import { selectIsInvestor } from "../../../../Store/features/user/userSlice";
 
 export default function OnboardingSwitch() {
   const isMobileView = useSelector(selectIsMobileView);
   const showOnboarding = useSelector(selectShowOnboarding);
+  const isInvestor = useSelector(selectIsInvestor);
   const dispatch = useDispatch();
 
   const switchRef = useRef();
@@ -30,7 +32,7 @@ export default function OnboardingSwitch() {
     <div className="onboarding_switch_wrapper">
       <div className="form-check form-switch">
         <input
-          className="form-check-input"
+          className={`form-check-input ${isInvestor && "investor"}`}
           type="checkbox"
           role="switch"
           id="onboardingToggle"
