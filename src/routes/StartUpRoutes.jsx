@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import PrivateRoute from "../components/Routes/PrivateRoutes";
 import SinglePost from "../components/SinglePost/SinglePost";
 import SuspenseLoader from "../components/SuspenseLoader/SuspenseLoader";
+import FundingInfo from "../pages/StartUp/Funding/FundingInfo";
 
 const InvestorHome = lazy(() =>
   import("../components/Investor/InvestorHome/InvestorHome")
@@ -269,7 +270,15 @@ function StartUpRoutes() {
         path="/profile/achievements"
         element={
           <Suspense fallback={<SuspenseLoader />}>
-            <ProfileAchievements/>
+            <ProfileAchievements />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/funding"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <FundingInfo />
           </Suspense>
         }
       />

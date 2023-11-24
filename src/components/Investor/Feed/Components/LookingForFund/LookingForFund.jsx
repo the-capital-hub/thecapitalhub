@@ -1,5 +1,6 @@
 import React from "react";
 import "./LookingForFund.scss";
+import { Link } from "react-router-dom";
 
 export default function LookingForFund() {
   return (
@@ -7,12 +8,12 @@ export default function LookingForFund() {
       <div className="d-flex align-items-center justify-content-around justify-content-md-between px-md-4 flex-wrap gap-3">
         <p className="m-0 fs-3">Looking for Funding?</p>
 
-        <button
-          type="button"
+        <Link
+          to={"/funding"}
           className="btn orange_button d-flex align-items-center justify-content-center"
         >
           <span>Click Here</span>
-        </button>
+        </Link>
       </div>
     </div>
   );
