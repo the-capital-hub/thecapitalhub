@@ -77,6 +77,11 @@
     overflow-y: auto;
     scrollbar-gutter: stable;
 
+    .date_header{
+      width: max-content;
+      margin: auto;
+    }
+
     scrollbar-width: thick;
     scrollbar-color: var(--currentTheme) transparent;
 
@@ -123,8 +128,13 @@
 
         .msg-time {
           font-size: 10px;
-          color: rgb(122, 122, 122);
-          margin: -10px 10px 10px 0;
+          color: rgb(112, 112, 112);
+          text-align: end;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          justify-content: flex-end;
+          width: 100%;
         }
 
         .message_container {
@@ -181,8 +191,13 @@
 
         .msg-time {
           font-size: 10px;
-          color: rgb(122, 122, 122);
-          margin: -10px 10px 10px 0;
+          color: rgb(255, 255, 255);
+          text-align: end;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          justify-content: flex-end;
+          width: 100%;
         }
 
         .time_name_image {
@@ -203,7 +218,7 @@
           margin-right: 10px;
           display: flex;
           flex-direction: column;
-          align-items: center;
+          align-items: stretch;
 
           .chatDropDownMenu {
             display: none;
