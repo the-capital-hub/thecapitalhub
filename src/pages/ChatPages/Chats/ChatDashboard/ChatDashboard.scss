@@ -77,6 +77,11 @@
     overflow-y: auto;
     scrollbar-gutter: stable;
 
+    .date_header{
+      width: max-content;
+      margin: auto;
+    }
+
     scrollbar-width: thick;
     scrollbar-color: var(--currentTheme) transparent;
 

@@ -297,7 +297,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
       <div className="chat_messages_group" ref={chatMessagesContainerRef}>
         {groupedMessages.map((group) => (
           <div key={group.date}>
-            <h6 className="date_header">{group.date}</h6>
+            <h6 className="date_header px-3 py-1 bg-light rounded shadow-sm">{group.date}</h6>
             <div className="chat_messages">
               {group.messages.map((message, idx) =>
                 // My messages
