@@ -23,6 +23,7 @@ import {
 } from "../../../Store/features/design/designSlice";
 import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
 import TutorialTrigger from "../../Shared/TutorialTrigger/TutorialTrigger";
+import LookingForFund from "./Components/LookingForFund/LookingForFund";
 
 const Feed = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -122,6 +123,9 @@ const Feed = () => {
 
             {/* Onboarding popup */}
             <TutorialTrigger steps={startupOnboardingSteps.homePage} />
+
+            {/* Looking for funding */}
+            <LookingForFund />
 
             {/* Write a Post */}
             <div className="bg-white rounded-4 start_post_container">
