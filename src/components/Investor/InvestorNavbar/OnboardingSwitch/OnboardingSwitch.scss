@@ -10,7 +10,7 @@
     // background-image: url("../../../../Images/StartUp/Navbar/OrangeCircle.svg");
 
     &:focus {
-      box-shadow: 0 0 0 0.25rem #fd590133; //#fd590133;
+      box-shadow: 0 0 0 0.25rem var(--currentTheme-light); //#fd590133;
       border-color: var(--currentTheme);
       background-image: url("../../../../Images/StartUp/Navbar/OrangeCircle.svg");
 

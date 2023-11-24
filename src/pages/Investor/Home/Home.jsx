@@ -66,7 +66,7 @@ function Home() {
 
   useEffect(() => {
     dispatch(setPageTitle("Home"));
-    window.title = "Home | Investors - The Capital Hub";
+    document.title = "Home | Investors - The Capital Hub";
 
     // Fetch company data
     if (isInvestor) {

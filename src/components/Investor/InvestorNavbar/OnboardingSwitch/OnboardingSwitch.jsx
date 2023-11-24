@@ -36,7 +36,7 @@ export default function OnboardingSwitch() {
           type="checkbox"
           role="switch"
           id="onboardingToggle"
-          // defaultChecked={false}
+          defaultChecked={false}
           checked={showOnboarding}
           onClick={handleSwitchClick}
           ref={switchRef}
