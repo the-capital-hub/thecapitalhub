@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./home.scss";
-import profilePic from "../../../Images/investorIcon/profilePic.webp";
+// import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDispatch, useSelector } from "react-redux";
 // import InvestorRecommendationCard from "../../../components/NewInvestor/InvestorRecommendationCard/InvestorRecommendationCard";
 import InvestorRightProfileCard from "../../../components/NewInvestor/InvestorRightProfileCard/InvestorRightProfileCard";
 import InvestorCreatePostPopUp from "../../../components/NewInvestor/InvestorCreatePostPopUp/InvestorCreatePostPopUp";
-import InvestorSmallProfilecard from "../../../components/NewInvestor/InvestorSmallProfilecard/InvestorSmallProfilecard";
+// import InvestorSmallProfilecard from "../../../components/NewInvestor/InvestorSmallProfilecard/InvestorSmallProfilecard";
 import InvestorFeedPostCard from "../../../components/NewInvestor/InvesterFeedPostCard/InvestorFeedPostCard";
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
@@ -22,13 +22,14 @@ import {
   setPageTitle,
   selectInvestorCreatePostModal,
 } from "../../../Store/features/design/designSlice";
-import OnBoardUser from "../../../components/OnBoardUser/OnBoardUser";
+// import OnBoardUser from "../../../components/OnBoardUser/OnBoardUser";
 import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
 import {
   selectIsInvestor,
   selectUserInvestor,
   setUserCompany,
 } from "../../../Store/features/user/userSlice";
+import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
 
 function Home() {
   const isInvestor = useSelector(selectIsInvestor);
@@ -143,7 +144,11 @@ function Home() {
       <div className="investor_feed_container">
         <div className="main_content">
           {/* <InvestorSmallProfilecard text={"Home"} /> */}
-          <div className="posts_col">
+          <div className="posts_col d-flex flex-column gap-3">
+            {/* Onboarding popup */}
+            <TutorialTrigger steps={investorOnboardingSteps.homePage} />
+
+            {/* Write a post */}
             <div className="box start_post_container border">
               <img
                 src={loggedInUser.profilePicture}
@@ -253,7 +258,7 @@ function Home() {
           appendDataToAllPosts={appendDataToAllPosts}
         />
       )}
-      <OnBoardUser steps={investorOnboardingSteps.homePage} />
+      {/* <OnBoardUser steps={investorOnboardingSteps.homePage} /> */}
     </MaxWidthWrapper>
   );
 }

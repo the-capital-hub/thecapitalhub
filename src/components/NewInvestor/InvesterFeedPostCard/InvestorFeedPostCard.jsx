@@ -327,9 +327,9 @@ const FeedPostCard = ({
             }`}
           >
             {loading && (
-              <div class="d-flex justify-content-center my-4">
-                <div class="spinner-border" role="status">
-                  <span class="visually-hidden">Loading...</span>
+              <div className="d-flex justify-content-center my-4">
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
                 </div>
               </div>
             )}
@@ -582,10 +582,12 @@ const FeedPostCard = ({
                               />
                             ) : (
                               <div
-                                class="spinner-border text-secondary"
+                                className="spinner-border text-secondary"
                                 role="status"
                               >
-                                <span class="visually-hidden">Loading...</span>
+                                <span className="visually-hidden">
+                                  Loading...
+                                </span>
                               </div>
                             )}
                             <div className="d-flex flex-column g-1 ">
@@ -608,10 +610,12 @@ const FeedPostCard = ({
                               />
                             ) : (
                               <div
-                                class="spinner-border text-secondary"
+                                className="spinner-border text-secondary"
                                 role="status"
                               >
-                                <span class="visually-hidden">Loading...</span>
+                                <span className="visually-hidden">
+                                  Loading...
+                                </span>
                               </div>
                             )}
                             <div className="d-flex flex-column g-1 ">
@@ -645,8 +649,8 @@ const FeedPostCard = ({
                   </div>
                   {showComment && (
                     <div>
-                      <div class="comment_container">
-                        <div class="logo">
+                      <div className="comment_container">
+                        <div className="logo">
                           <img
                             src={
                               profilePicture ||
@@ -657,8 +661,8 @@ const FeedPostCard = ({
                             className="rounded-circle"
                           />
                         </div>
-                        <section class="input_and_logo_section">
-                          <div class="input_box">
+                        <section className="input_and_logo_section">
+                          <div className="input_box">
                             <input
                               type="text"
                               placeholder="Add Comment"
@@ -671,11 +675,11 @@ const FeedPostCard = ({
                                 }
                               }}
                             />
-                            <div class="icons">
-                              <span class="image_icon">
+                            <div className="icons">
+                              <span className="image_icon">
                                 <img src={ImageIcon} alt="media" />
                               </span>
-                              <span class="smiley_icon">
+                              <span className="smiley_icon">
                                 <img src={SmileeIcon} alt="smiley" />
                               </span>
                             </div>
@@ -817,9 +821,9 @@ const FeedPostCard = ({
         <ModalBSBody>
           <h6 className="h6">Select a reason that applies</h6>
           <div className="reasons_container">
-            <div class="form-check form-check-inline m-0">
+            <div className="form-check form-check-inline m-0">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="radio"
                 name="reportReason"
                 onChange={({ target }) => setReportReason(target.value)}
@@ -828,17 +832,17 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
+                className={`form-check-label ${
                   reportReason === "Harassment" && "bg-secondary text-white"
                 }`}
-                for="inlineRadio1"
+                htmlFor="inlineRadio1"
               >
                 Harassment
               </label>
             </div>
-            <div class="form-check form-check-inline m-0">
+            <div className="form-check form-check-inline m-0">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="radio"
                 name="reportReason"
                 onChange={({ target }) => setReportReason(target.value)}
@@ -847,17 +851,17 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
+                className={`form-check-label ${
                   reportReason === "Spam" && "bg-secondary text-white"
                 }`}
-                for="inlineRadio2"
+                htmlFor="inlineRadio2"
               >
                 Spam
               </label>
             </div>
-            <div class="form-check form-check-inline m-0">
+            <div className="form-check form-check-inline m-0">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="radio"
                 name="reportReason"
                 onChange={({ target }) => setReportReason(target.value)}
@@ -866,17 +870,17 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
+                className={`form-check-label ${
                   reportReason === "Fraud or scam" && "bg-secondary text-white"
                 }`}
-                for="inlineRadio3"
+                htmlFor="inlineRadio3"
               >
                 Fraud or scam
               </label>
             </div>
-            <div class="form-check form-check-inline m-0">
+            <div className="form-check form-check-inline m-0">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="radio"
                 name="reportReason"
                 onChange={({ target }) => setReportReason(target.value)}
@@ -885,10 +889,10 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                class={`form-check-label ${
+                className={`form-check-label ${
                   reportReason === "Hateful Speech" && "bg-secondary text-white"
                 }`}
-                for="inlineRadio4"
+                htmlFor="inlineRadio4"
               >
                 Hateful Speech
               </label>
@@ -917,7 +921,7 @@ const FeedPostCard = ({
             </button>
           ) : (
             <button
-              class="submit_button btn"
+              className="submit_button btn"
               type="button"
               disabled
               style={{
@@ -929,7 +933,7 @@ const FeedPostCard = ({
                 Submit report
               </span>
               <span
-                class="spinner-border spinner-border-sm"
+                className="spinner-border spinner-border-sm"
                 aria-hidden="true"
               ></span>
             </button>
