@@ -65,7 +65,7 @@ export default function MobileNavbar({ isInvestor }) {
           </>
         ) : (
           <>
-            <NavLink to="/onelink/edit">
+            <NavLink to="/onelink">
               <BsLink45Deg size={"25px"} />
             </NavLink>
             <span style={{ fontSize: "10px" }}>{"OneLink"}</span>

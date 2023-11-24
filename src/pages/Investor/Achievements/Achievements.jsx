@@ -84,7 +84,7 @@ function Achievements() {
     },
   ];
   return (
-    <section className="startup_achievements_section d-flex flex-column align-items-evenly    py-2 my-5 my-md-3 mx-2 mx-md-5 bg-white shadow-sm rounded-4   ">
+    <section className="investor_achievements_section d-flex flex-column align-items-evenly    py-2 my-5 my-md-3 mx-2 mx-md-5 bg-white shadow-sm rounded-4   ">
         <div className="achievements_users  d-flex flex-md-row  gap-4 mx-auto  ">
           {user_data.map((item, index) => (
             <div

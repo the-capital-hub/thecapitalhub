@@ -246,7 +246,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 >
                   {/* <img src={OnelinkIcon} alt="image" width="17px" height="17px" /> */}
                   <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} />
-                  {!sidebarCollapsed && <span>One link</span>}
+                  {!sidebarCollapsed && <span>Onelink</span>}
                 </Link>
               </MenuItem>
               <MenuItem
