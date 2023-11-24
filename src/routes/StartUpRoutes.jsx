@@ -56,6 +56,9 @@ const StartupExplore = lazy(() =>
 const OtherCompanyProfilePage = lazy(() =>
   import("../pages/StartUp/CompanyProfile/OtherCompanyProfilePage")
 );
+const ProfileAchievements = lazy(() =>
+  import("../pages/StartUp/Achievements/Achievements")
+);
 
 function StartUpRoutes() {
   return (
@@ -259,6 +262,14 @@ function StartUpRoutes() {
         element={
           <Suspense fallback={<SuspenseLoader />}>
             <SinglePost />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/profile/achievements"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <ProfileAchievements/>
           </Suspense>
         }
       />
