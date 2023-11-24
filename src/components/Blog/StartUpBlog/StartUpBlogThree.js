@@ -14,6 +14,9 @@ import threeFiveImage from "../../../Images/blog/threefive.webp";
 import threeSixImage from "../../../Images/blog/threesix.webp";
 import threeSevenImage from "../../../Images/blog/threeseven.webp";
 import threeEightImage from "../../../Images/blog/threeeight.webp";
+import { Link } from "react-router-dom";
+import Pramod from "../../../Images/aboutUs/Pramod.jpeg";
+
 
 const StartUpBlogThree = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -36,9 +39,36 @@ const StartUpBlogThree = () => {
               HOW TO BUILD A GREAT STARTUP by Pramod Badiger
             </h2>
 
-            <div className="time_icon">
-              <span>Published on Jan 21, 2023</span>
-              <div className="social_icon_container">
+           
+
+            <div className="time_icon w-">
+              <div className="d-flex flex-row align-items-center">
+                <Link
+                  to="/user/64e9fd9d4e368da2bf3e721f"
+                  className="text-dark text-decoration-none"
+                >
+                  <img
+                    className="user rounded-pill mx-2"
+                    src={Pramod}
+                    alt="img"
+                    width={60}
+                    height={60}
+                  />
+                </Link>
+                <div className="py-2">
+                  <Link
+                    to="/user/64e9fd9d4e368da2bf3e721f"
+                    className="text-dark text-decoration-none"
+                  >
+                    <p className="m-0">
+                      <b>Pramod Badiger</b>
+                    </p>
+                  </Link>
+                  <span>Published on Jan 21, 2023</span>
+                </div>
+              </div>
+
+              <div className="social_icon_container d-flex flex-row justify-content-end">
                 <img className="social_icon" src={fbIcon} alt="img" />
                 <img className="social_icon" src={twIcon} alt="img" />
                 <img className="social_icon" src={inIcon} alt="img" />

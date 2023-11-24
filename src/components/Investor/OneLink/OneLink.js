@@ -40,7 +40,7 @@ const OneLink = () => {
 
   useEffect(() => {
     document.title = "One Link | The Capital Hub";
-    dispatch(setPageTitle("One Link"));
+    dispatch(setPageTitle("OneLink"));
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [company, dispatch]);
 

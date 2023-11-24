@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 import { Navigate, Route } from "react-router-dom";
 import SuspenseLoader from "../components/SuspenseLoader/SuspenseLoader";
 import SinglePost from "../components/SinglePost/SinglePost";
+import Achievements from "../pages/Investor/Achievements/Achievements";
 
 const InvestorConnection = lazy(() =>
   import("../components/NewInvestor/InvestorConnection/InvestorConnection")
@@ -192,6 +193,14 @@ function InvestorRoutes() {
         }
       />
 
+<Route
+        path="profile/achievements"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <Achievements />
+          </Suspense>
+        }
+      />
 
 
     </>
