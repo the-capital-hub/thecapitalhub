@@ -191,6 +191,13 @@ const startUpSchema = new Schema(
     stage: {
       type: String,
     },
+    fundingViaCapitalhubQuestions: {
+      targetMarket: String,
+      whyRightTimeForYourStartUp: String,
+      competitiveAdvantage: String,
+      biggestCompetitors: String,
+      revenueGenerated: String,
+    }
   },
   {
     timestamps: true,
