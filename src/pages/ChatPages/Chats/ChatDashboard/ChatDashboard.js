@@ -141,8 +141,9 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
         groupedMessages.push({ date: "Yesterday", messages: [message] });
       } else {
         currentDate = messageDate;
-        const formattedDate = `${messageDate.getDate()}-${messageDate.getMonth() + 1
-          }-${messageDate.getFullYear()}`;
+        const formattedDate = `${messageDate.getDate()}-${
+          messageDate.getMonth() + 1
+        }-${messageDate.getFullYear()}`;
         groupedMessages.push({
           date:
             today.getDate() === messageDate.getDate() ? "Today" : formattedDate,
@@ -276,7 +277,9 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
   const handleOnelinkClick = () => {
     getStartupByFounderId(loggedInUser._id)
       .then(({ data }) => {
-        setSendText(`https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`);
+        setSendText(
+          `https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`
+        );
       })
       .catch((error) => console.log(error));
   };
@@ -306,7 +309,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
           <div key={group.date}>
             <h6 className="date_header">{group.date}</h6>
             <div className="chat_messages">
-              {group.messages.map((message) =>
+              {group.messages.map((message, idx) =>
                 message.senderId._id === loggedInUser._id ? (
                   <section
                     className="my_message_main text-break"
@@ -314,19 +317,19 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                   >
                     <div className="my_messages">
                       <div className="time_name_image">
-                        <div className="time_name">
-                          <h6 className="name_title">
-                            {loggedInUser?.firstName} {loggedInUser?.lastName}
-                          </h6>
-                          <h6 className="time">
-                            {formatTime(new Date(message.createdAt))}
-                          </h6>
-                        </div>
-                        <img
-                          className="image_profile"
-                          src={loggedInUser?.profilePicture}
-                          alt=""
-                        />
+                        {!idx && (
+                          <div className="time_name d-flex gap-2 align-items-center me-2 mb-2">
+                            <h6 className="name_title">
+                              {loggedInUser?.firstName} {loggedInUser?.lastName}
+                            </h6>
+
+                            <img
+                              className="image_profile"
+                              src={loggedInUser?.profilePicture}
+                              alt=""
+                            />
+                          </div>
+                        )}
                       </div>
                       {message.text !== "" && (
                         <div
@@ -342,7 +345,9 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                           />
 
                           <Linkify>
-                            <p className="text-break text-start m-0">{message.text} </p>
+                            <p className="text-break text-start m-0">
+                              {message.text}
+                            </p>
                           </Linkify>
                         </div>
                       )}
@@ -398,31 +403,40 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                           </a>
                         </div>
                       )}
+                      <span className="msg-time">
+                        {formatTime(new Date(message.createdAt))}
+                      </span>
                     </div>
                   </section>
                 ) : (
                   <section
-                    className="other_sender text-break"
+                    className="other_sender text-break d-flex flex-column"
                     key={message._id}
                   >
-                    <img
-                      className="image_profile"
-                      src={user?.profilePicture}
-                      alt=""
-                    />
-                    <div className="other_messages">
-                      <div className="time_name">
-                        <h6 className="name_title">
-                          {user?.firstName} {user?.lastName}{" "}
-                        </h6>{" "}
-                        <h6 className="time">
-                          {formatTime(new Date(message.createdAt))}
-                        </h6>
+                    {!idx && (
+                      <div className="d-flex align-items-center gap-2 mb-2">
+                        <img
+                          className="image_profile"
+                          src={user?.profilePicture}
+                          alt=""
+                        />
+                        <span className="name_title">
+                          {user?.firstName} {user?.lastName}
+                        </span>
                       </div>
+                    )}
+                    <div className="other_messages">
+                      {/* <div className="time_name"> */}
+                      {/* <h6 className="time">
+                        {formatTime(new Date(message.createdAt))}
+                      </h6> */}
+                      {/* </div> */}
                       {message.text !== "" && (
                         <div className="message_container text-break">
                           <Linkify>
-                            <p className="text-break text-start m-0">{message.text}</p>
+                            <p className="text-break text-start m-0">
+                              {message.text}
+                            </p>
                           </Linkify>
                         </div>
                       )}
@@ -460,6 +474,9 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                           </a>
                         </div>
                       )}
+                      <span className="msg-time">
+                        {formatTime(new Date(message.createdAt))}
+                      </span>
                     </div>
                   </section>
                 )

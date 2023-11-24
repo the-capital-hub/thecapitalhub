@@ -12,6 +12,8 @@ import {
 import { getBase64 } from "../../../../utils/getBase64";
 import SpinnerBS from "../../../../components/Shared/Spinner/SpinnerBS";
 
+const commitmentOptions = ["N.A", "Soft commitment", "Due diligence phase"];
+
 const MyInvestmentCard = ({
   company,
   isInterests = false,
@@ -60,6 +62,13 @@ const MyInvestmentCard = ({
         return { ...prevCurrCompany, ask: value };
       });
     }
+  }
+
+  // Handle commitment select
+  function handleCommitmentSelect(e, option) {
+    setCurrCompany((prevCurrCompany) => {
+      return { ...prevCurrCompany, commitment: option };
+    });
   }
 
   // Pass updated currCompany to EditModalContent.jsx
@@ -116,8 +125,8 @@ const MyInvestmentCard = ({
   };
 
   return (
-    <div className="investment-card-container border rounded-4 position-relative">
-      <div className="d-flex flex-column py-2 px-3 border-bottom ">
+    <div className="investment-card-container border rounded-4 position-relative d-flex flex-column">
+      <div className="d-flex flex-column py-2 px-3 border-bottom flex-grow-1">
         <div className="left">
           {/* Logo */}
           {!editMode ? (
@@ -249,7 +258,7 @@ const MyInvestmentCard = ({
         </div>
       ) : (
         <div className="">
-          <div className="d-flex align-items-center py-2 px-3 border-bottom">
+          <div className="d-flex align-items-center py-2 px-3">
             {/* Interests Commitment */}
             <p className={`m-0`}>
               <strong>My Commitment:</strong>{" "}
@@ -257,7 +266,7 @@ const MyInvestmentCard = ({
                 {currCompany?.commitment}
               </span>
               {/* Interests Commitment input */}
-              <input
+              {/* <input
                 type="text"
                 name="commitment"
                 id="commitment"
@@ -266,11 +275,42 @@ const MyInvestmentCard = ({
                 } `}
                 value={currCompany?.commitment}
                 onChange={(e) => handleInputChange(e, currCompany?.id)}
-              />
+              /> */}
             </p>
+            <div
+              className={`dropdown ${
+                editMode ? "" : "d-none"
+              } flex-grow-1 ms-2`}
+            >
+              <button
+                className="btn commitment_form_input dropdown-toggle text-start d-flex align-items-center"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {currCompany?.commitment}
+              </button>
+              <ul className={`dropdown-menu m-0 p-0 w-100`}>
+                {commitmentOptions.map((option, index) => {
+                  return (
+                    <li key={`${option}${index}`} className="m-0 p-0">
+                      <button
+                        type="button"
+                        className={`btn list-btn w-100 text-start ps-3 rounded-0 ${
+                          option === currCompany?.commitment ? "selected" : ""
+                        }`}
+                        onClick={(e) => handleCommitmentSelect(e, option)}
+                      >
+                        {option}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
           </div>
 
-          <div className="bottom d-flex align-items-center py-2 px-3 gap-2">
+          {/* <div className="bottom d-flex align-items-center py-2 px-3 gap-2">
             <img src={InvestedIcon} alt="" className="small-image" />
             <p className="m-0 " style={{ color: "rgba(74, 74, 74, 1)" }}>
               Invested:{" "}
@@ -281,7 +321,6 @@ const MyInvestmentCard = ({
               >
                 {currCompany?.investedEquity}%
               </span>{" "}
-              {/* Interests Equity input */}
               <input
                 type="number"
                 name="investedEquity"
@@ -296,7 +335,7 @@ const MyInvestmentCard = ({
               />
               <strong>Equity</strong>
             </p>
-          </div>
+          </div> */}
         </div>
       )}
 

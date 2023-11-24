@@ -10,6 +10,7 @@ import FoundingTeam from "./company-section-two/founding-team/FoundingTeam";
 import KeyFocus from "./company-section-two/key-focus/KeyFocus";
 import CompanyAbout from "./company-section-one/company-about/CompanyAbout";
 import "./CompanyProfile.scss";
+import SelectCommitmentModal from "../MyStartupsComponents/SelectCommitmentModal/SelectCommitmentModal";
 
 export default function CompanyProfile({
   isOnelink,
@@ -17,7 +18,7 @@ export default function CompanyProfile({
   investorData,
   startup = "false",
   short,
-  isStartup = "true"
+  isStartup = "true",
 }) {
   // Fetch Company Data here
   let name = "HCL";
@@ -43,6 +44,17 @@ export default function CompanyProfile({
   let som = "";
   let founderId = "";
 
+  // Interests Data
+  let interestData = {
+    logo: "",
+    name: "",
+    ask: "",
+    commitment: "",
+    investedEquity: "",
+    companyId: "",
+    companyOnelink: "",
+  };
+
   if (companyData) {
     name = companyData.company || name;
     logo = companyData.logo || logo;
@@ -61,6 +73,16 @@ export default function CompanyProfile({
     sam = companyData.SAM || "";
     som = companyData.SOM || "";
     founderId = companyData.founderId || "";
+
+    interestData = {
+      logo: companyData?.logo,
+      name: companyData?.company,
+      ask: companyData?.colorCard?.fund_ask,
+      commitment: "",
+      investedEquity: "",
+      companyId: companyData?._id,
+      companyOnelink: companyData?.oneLink,
+    };
   }
   if (investorData) {
     name = investorData.companyName || name;
@@ -98,41 +120,53 @@ export default function CompanyProfile({
   // };
 
   return (
-    <div className="company__profile bg-white shadow-sm" startup={startup}>
-      <div className="company__section__one border-bottom d-flex flex-column gap-4 p-3 p-md-5">
-        <div className="company__info d-flex flex-column flex-xl-row gap-4 justify-content-between position-relative">
-          <CompanyInfo
-            name={name}
-            logo={logo}
-            tagline={tagline}
-            location={location}
-            foundedYear={new Date(foundedIn).getFullYear()}
+    <>
+      <div className="company__profile bg-white shadow-sm" startup={startup}>
+        <div className="company__section__one border-bottom d-flex flex-column gap-4 p-3 p-md-5">
+          <div className="company__info d-flex flex-column flex-xxl-row gap-4 justify-content-between position-relative">
+            <CompanyInfo
+              name={name}
+              logo={logo}
+              tagline={tagline}
+              location={location}
+              foundedYear={new Date(foundedIn).getFullYear()}
+            />
+            <CompanyActions
+              isOnelink={isOnelink}
+              founderId={founderId}
+              companyId={interestData.companyId}
+            />
+          </div>
+          <CompanyAbout
+            about={description}
+            vision={!short && vision}
+            mission={!short && mission}
+            noOfEmployees={noOfEmployees}
           />
-          <CompanyActions isOnelink={isOnelink} founderId={founderId} />
+          {!short && (
+            <CompanyStats
+              colorCard={colorCard}
+              startup={isStartup}
+              sam={sam}
+              tam={tam}
+              som={som}
+            />
+          )}
         </div>
-        <CompanyAbout
-          about={description}
-          vision={!short && vision}
-          mission={!short && mission}
-          noOfEmployees={noOfEmployees}
-        />
-        {!short && (
-          <CompanyStats
-            colorCard={colorCard}
-            startup={isStartup}
-            sam={sam}
-            tam={tam}
-            som={som}
-          />
-        )}
+
+        <div className="company__section__two d-flex flex-column gap-4 pt-3 pb-5 px-3 px-md-5">
+          <PublicLinks socialLinks={socialLinks} />
+          {/* <Feedback /> */}
+          {!short && <FoundingTeam isOnelink={isOnelink} team={team} />}
+          {!short && <KeyFocus tags={tags} />}
+        </div>
       </div>
 
-      <div className="company__section__two d-flex flex-column gap-4 pt-3 pb-5 px-3 px-md-5">
-        <PublicLinks socialLinks={socialLinks} />
-        {/* <Feedback /> */}
-        {!short && <FoundingTeam isOnelink={isOnelink} team={team} />}
-        {!short && <KeyFocus tags={tags} />}
-      </div>
-    </div>
+      {/* Select Commitment Modal */}
+      <SelectCommitmentModal
+        interestData={interestData}
+        founderId={founderId}
+      />
+    </>
   );
 }
