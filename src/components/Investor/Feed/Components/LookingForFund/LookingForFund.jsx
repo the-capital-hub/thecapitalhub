@@ -4,7 +4,7 @@ import "./LookingForFund.scss";
 export default function LookingForFund() {
   return (
     <div className="looking_for_fund_wrapper bg-black text-white py-4">
-      <div className="d-flex align-items-center justify-content-around flex-wrap gap-3">
+      <div className="d-flex align-items-center justify-content-around justify-content-md-between px-md-4 flex-wrap gap-3">
         <p className="m-0 fs-3">Looking for Funding?</p>
 
         <button
