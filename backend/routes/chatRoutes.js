@@ -3,9 +3,10 @@ import {
   createChatController,
   getUserChatsController,
   findChatController,
-  togglePinChatController, 
+  togglePinChatController,
   getPinnedChatsController,
   getChatSettingsController,
+  getAllChatsController,
 } from "../controllers/chatController.js";
 
 import { authenticateToken } from "../middlewares/authenticateToken.js";
@@ -19,5 +20,6 @@ router.get("/findChat/:firstId/:secondId", findChatController);
 router.patch("/togglePin/:userId/:chatId", togglePinChatController);
 router.get("/getPinnedChat/:userId", getPinnedChatsController);
 router.get("/getChatSettings/:loggedUserId/:otherUserId/:chatId", getChatSettingsController);
+router.get("/getAllChats/:userId", getAllChatsController);
 
 export default router;
