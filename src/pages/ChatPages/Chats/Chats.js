@@ -1,5 +1,4 @@
 import "./Chats.scss";
-
 import ChatSearch from "./ChatSearch/ChatSearch";
 import ChatSidebar from "./ChatSidebar/ChatSidebar";
 import ChatNavbar from "./ChatNavbar/ChatNavbar";
@@ -10,7 +9,7 @@ import { io } from "socket.io-client";
 import { environment } from "../../../environments/environment";
 import {
   Link,
-  useLocation,
+  // useLocation,
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
@@ -41,7 +40,7 @@ import { startupOnboardingSteps } from "../../../components/OnBoardUser/steps/st
 
 const Chats = () => {
   // search params
-  const location = useLocation();
+  // const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const paramUserId = searchParams.get("userId");
   const isCommunityOpen = searchParams.get("isCommunityOpen");
@@ -49,7 +48,7 @@ const Chats = () => {
 
   // Fetch global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const userId = useSelector((state) => state.chat.userId);
+  // const userId = useSelector((state) => state.chat.userId);
   const chatId = useSelector((state) => state.chat.chatId);
   const isCommunitySelected = useSelector(
     (state) => state.chat.isCommunitySelected
