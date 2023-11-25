@@ -41,6 +41,7 @@ import {
   selectIsInvestor,
   selectLoggedInUserId,
 } from "../../../Store/features/user/userSlice";
+import IconTCH from "../../../components/Investor/SvgIcons/IconTCH";
 
 const Chats = () => {
   // search params
@@ -333,6 +334,9 @@ const Chats = () => {
               <div className="select-chat-container">
                 <img src={selectAChatIcon} alt="select a chat" />
                 <h3>Select a message</h3>
+                <span className="tch_svg">
+                  <IconTCH />
+                </span>
               </div>
             )}
           </section>

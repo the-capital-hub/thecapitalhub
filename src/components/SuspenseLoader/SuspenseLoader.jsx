@@ -1,3 +1,4 @@
+// import IconTCH from "../Investor/SvgIcons/IconTCH";
 import "./SuspenseLoader.scss";
 
 function SuspenseLoader() {
@@ -6,6 +7,9 @@ function SuspenseLoader() {
       <div className="spinner-border" role="status">
         <span className="visually-hidden">Loading...</span>
       </div>
+      {/* <span className="tch_svg">
+        <IconTCH />
+      </span> */}
     </div>
   );
 }
