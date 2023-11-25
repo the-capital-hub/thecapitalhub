@@ -257,3 +257,206 @@ export const getChatSettings = async (loggedUserId, otherUserId, chatId) => {
     };
   }
 };
+
+
+// export const getAllChats = async (userId) => {
+//   try {
+
+//     // all chat
+//     const user = await UserModel.findById(userId);
+//     const pinnedChatIds = user.pinnedChat;
+
+//     const chats = await ChatModel.find({
+//       members: { $in: [userId] },
+//       _id: { $nin: pinnedChatIds },
+//     }).lean().populate('members');
+
+//     const chatIds = chats.map(chat => chat._id);
+
+//     const lastMessagesPromises = chatIds.map(chatId =>
+//       MessageModel.findOne({ chatId }).sort({ createdAt: -1 }).limit(1).lean()
+//     );
+
+//     const lastMessages = await Promise.all(lastMessagesPromises);
+
+//     const chatDetails = chats.map((chat, index) => {
+//       return {
+//         chat,
+//         lastMessage: lastMessages[index],
+//       };
+//     });
+
+//     chatDetails.sort((a, b) => {
+//       if (a.lastMessage && b.lastMessage) {
+//         return b.lastMessage.createdAt - a.lastMessage.createdAt;
+//       } else if (a.lastMessage) {
+//         return -1;
+//       } else if (b.lastMessage) {
+//         return 1;
+//       }
+//       return 0;
+//     });
+
+//     //pinned chat
+//     const _user = await UserModel.findById(userId)
+//       .populate({
+//         path: "pinnedChat",
+//         populate: {
+//           path: "members",
+//           model: "Users"
+//         }
+//       })
+//       .lean();
+
+//     const _pinnedChatIds = _user.pinnedChat.map(chat => chat._id);
+
+//     const _lastMessagesPromises = _pinnedChatIds.map(chatId =>
+//       MessageModel.findOne({ chatId }).sort({ createdAt: -1 }).limit(1).lean()
+//     );
+
+//     const _lastMessages = await Promise.all(_lastMessagesPromises);
+
+//     const pinnedChatDetails = _user.pinnedChat.map((chat, index) => {
+//       return {
+//         chat,
+//         lastMessage: _lastMessages[index],
+//       };
+//     });
+
+//     pinnedChatDetails.sort((a, b) => {
+//       if (a.lastMessage && b.lastMessage) {
+//         return b.lastMessage.createdAt - a.lastMessage.createdAt;
+//       } else if (a.lastMessage) {
+//         return -1;
+//       } else if (b.lastMessage) {
+//         return 1;
+//       }
+//       return 0;
+//     });
+
+//     // communities 
+//     const communities = await CommunityModel.find({ members: userId })
+//       .populate({
+//         path: "members",
+//         model: "Users",
+//         select: "firstName lastName profilePicture",
+//       })
+//       .lean();
+
+//     const _chatIds = communities.map(chat => chat._id);
+
+//     const clastMessagesPromises = _chatIds.map(chatId =>
+//       MessageModel.findOne({ chatId }).sort({ createdAt: -1 }).limit(1).lean()
+//     );
+
+//     const clastMessages = await Promise.all(clastMessagesPromises);
+
+//     const _chatDetails = communities.map((chat, index) => {
+//       return {
+//         chat,
+//         lastMessage: clastMessages[index],
+//       };
+//     });
+
+//     _chatDetails.sort((a, b) => {
+//       if (a.lastMessage && b.lastMessage) {
+//         return b.lastMessage.createdAt - a.lastMessage.createdAt;
+//       } else if (a.lastMessage) {
+//         return -1;
+//       } else if (b.lastMessage) {
+//         return 1;
+//       }
+//       return 0;
+//     });
+
+//     return {
+//       status: 200,
+//       data: {
+//         allChats: chatDetails.map((chatDetail) => chatDetail.chat),
+//         pinnedChat: pinnedChatDetails.map((chatDetail) => chatDetail.chat),
+//         communities: _chatDetails.map((chatDetail) => chatDetail.chat),
+//       }
+//     }
+
+//   } catch (error) {
+//     console.error(error);
+//     return {
+//       status: 500,
+//       message: "An error occurred while getting chats.",
+//     };
+//   }
+// };
+
+export const getAllChats = async (userId) => {
+  try {
+    // all chat
+    const user = await UserModel.findById(userId);
+    const pinnedChatIds = user.pinnedChat;
+
+    const [chats, pinnedChats, communities] = await Promise.all([
+      ChatModel.find({
+        members: { $in: [userId] },
+        _id: { $nin: pinnedChatIds },
+      }).lean().populate('members'),
+
+      UserModel.findById(userId)
+        .populate({
+          path: "pinnedChat",
+          populate: {
+            path: "members",
+            model: "Users"
+          }
+        })
+        .lean(),
+
+      CommunityModel.find({ members: userId })
+        .populate({
+          path: "members",
+          model: "Users",
+          select: "firstName lastName profilePicture",
+        })
+        .lean()
+    ]);
+
+    const chatDetails = getChatDetails(chats, userId);
+    const pinnedChatDetails = getChatDetails(pinnedChats.pinnedChat, userId);
+    const communityDetails = getChatDetails(communities, userId);
+
+    return {
+      status: 200,
+      data: {
+        allChats: chatDetails.map((chatDetail) => chatDetail.chat),
+        pinnedChat: pinnedChatDetails.map((chatDetail) => chatDetail.chat),
+        communities: communityDetails.map((chatDetail) => chatDetail.chat),
+      }
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while getting chats.",
+    };
+  }
+};
+
+const getChatDetails = (chats, userId) => {
+  return chats.map((chat) => {
+    const lastMessage = MessageModel.findOne({ chatId: chat._id })
+      .sort({ createdAt: -1 })
+      .limit(1)
+      .lean()
+      .populate('senderId');
+
+    return { chat, lastMessage };
+  })
+    .sort((a, b) => {
+      if (a.lastMessage && b.lastMessage) {
+        return b.lastMessage.createdAt - a.lastMessage.createdAt;
+      } else if (a.lastMessage) {
+        return -1;
+      } else if (b.lastMessage) {
+        return 1;
+      }
+      return 0;
+    });
+};
