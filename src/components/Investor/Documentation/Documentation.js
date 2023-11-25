@@ -25,6 +25,8 @@ import { getFoldersApi } from "../../../Service/user";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import TutorialTrigger from "../../Shared/TutorialTrigger/TutorialTrigger";
 import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
+import toast, { Toaster } from 'react-hot-toast';
+import achievement from "../../../Images/Investor/Achievements/img_1.png";
 
 const Documentation = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -87,6 +89,21 @@ const Documentation = () => {
   //   default:
   //     imageToShow = null;
   // }
+  const notify = () => toast.custom((t) => (
+    <div class=" rounded-3 max-w-md  bg-white shadow-lg rounded-lg pointer-events-auto d-flex border ring-1 ring-dark ring-opacity-25
+    <?php echo $t.visible ? 'fade-in' : 'fade-out'; ?>">
+      <div className="p-2  d-flex align-items-center gap-2">
+
+      <img
+                src={achievement}
+                alt="Profile"
+                className="rounded-circle"
+                style={{ width: "50px", height: "50px" }}
+              />
+              <h6 className="m-0 fs-semibold">You have completed a achievement</h6>
+      </div>
+  </div>
+  ))
 
   return (
     <MaxWidthWrapper>
@@ -102,6 +119,10 @@ const Documentation = () => {
             {showModal && (
               <UploadModal onCancel={setShowModal} fetchFolder={getFolders} />
             )}
+            {/* <div>
+      <button onClick={notify}>Make me a toast</button>
+      <Toaster />
+    </div> */}
             <IntroductoryMessage
               title={"Upload your document"}
               // para={

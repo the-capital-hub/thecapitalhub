@@ -94,7 +94,7 @@ export const addSectorOfInterest = async (investorId, sectorData) => {
       };
     }
     if (sectorData.logo && !sectorData.isExisting) {
-      const { url } = await cloudinary.uploader.upload(sectorData.logo, {
+      const { secure_url } = await cloudinary.uploader.upload(sectorData.logo, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
         format: "webp",
         unique_filename: true,
@@ -129,7 +129,7 @@ export const addStartupInvested = async (investorId, startupData) => {
       };
     }
     if (startupData.logo && !startupData.isExisting) {
-      const { url } = await cloudinary.uploader.upload(startupData.logo, {
+      const { secure_url } = await cloudinary.uploader.upload(startupData.logo, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
         format: "webp",
         unique_filename: true,
@@ -182,7 +182,7 @@ export const getInvestorById = async (investorId) => {
 
 export const uploadLogo = async (logo) => {
   try {
-    const { url } = await cloudinary.uploader.upload(logo, {
+    const { secure_url } = await cloudinary.uploader.upload(logo, {
       folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
       format: "webp",
       unique_filename: true,
@@ -212,7 +212,7 @@ export const addMyInterest = async (investorId, data) => {
       };
     }
     if (data.logo) {
-      const { url } = await cloudinary.uploader.upload(data.logo, {
+      const { secure_url } = await cloudinary.uploader.upload(data.logo, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
         format: "webp",
         unique_filename: true,

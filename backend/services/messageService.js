@@ -4,20 +4,20 @@ import { cloudinary } from "../utils/uploadImage.js";
 export const addMessage = async (chatId, senderId, text, documentName, documentUrl, image, video) => {
   try {
     if (image) {
-      const { url } = await cloudinary.uploader.upload(image, {
+      const { secure_url } = await cloudinary.uploader.upload(image, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/posts/images`,
         format: "webp",
         unique_filename: true,
       });
-      image = url;
+      image = secure_url;
     }
     if (video) {
-      const { url } = await cloudinary.uploader.upload(video, {
+      const { secure_url } = await cloudinary.uploader.upload(video, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/posts/videos`,
         resource_type: "video",
         unique_filename: true,
       });
-      video = url;
+      video = secure_url;
     }
     const message = new MessageModel({
       chatId,

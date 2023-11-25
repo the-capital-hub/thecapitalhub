@@ -6,7 +6,7 @@ import { addNotification, deleteNotification } from "./notificationService.js";
 export const createNewPost = async (data) => {
   try {
     if (data?.image) {
-      const { url } = await cloudinary.uploader.upload(data.image, {
+      const { secure_url } = await cloudinary.uploader.upload(data.image, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/posts/images`,
         format: "webp",
         unique_filename: true,
@@ -15,7 +15,7 @@ export const createNewPost = async (data) => {
     }
     if (data?.images) {
       const uploadedImages = await Promise.all(data.images.map(async (image) => {
-        const { url } = await cloudinary.uploader.upload(image, {
+        const { secure_url } = await cloudinary.uploader.upload(image, {
           folder: `${process.env.CLOUDIANRY_FOLDER}/posts/images`,
           format: "webp",
           unique_filename: true,
@@ -25,7 +25,7 @@ export const createNewPost = async (data) => {
       data.images = uploadedImages;
     }
     if (data?.video) {
-      const { url } = await cloudinary.uploader.upload(data.video, {
+      const { secure_url } = await cloudinary.uploader.upload(data.video, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/posts/videos`,
         resource_type: "video",
         // format: "webm",
