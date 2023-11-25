@@ -30,7 +30,6 @@ export default function CommunitiesContainer({
   useEffect(() => {
     getAllCommunity(loggedInUserId)
       .then((res) => {
-        console.log("communityContainer", res);
         setGetCommunity(res);
       })
       .catch((error) => console.error("Error", error));

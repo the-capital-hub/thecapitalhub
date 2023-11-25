@@ -350,18 +350,18 @@ const Chats = () => {
           ) : (
             ""
           )}
-          {/* Modal */}
-          <div className="addNewCommunity_modal_wrapper">
-            <ModalBSContainer isStatic={false} id="AddNewCommunity">
-              <ModalBSHeader
-                title={"Create a Community"}
-                className={isInvestor ? "yellow__heading" : "orange__heading"}
-              />
-              <ModalBSBody>
-                <NewCommunityModal theme={isInvestor ? "investor" : ""} />
-              </ModalBSBody>
-            </ModalBSContainer>
-          </div>
+        </div>
+        {/* Modal */}
+        <div className="addNewCommunity_modal_wrapper">
+          <ModalBSContainer isStatic={false} id="AddNewCommunity">
+            <ModalBSHeader
+              title={"Create a Community"}
+              className={isInvestor ? "yellow__heading" : "orange__heading"}
+            />
+            <ModalBSBody>
+              <NewCommunityModal theme={isInvestor ? "investor" : ""} />
+            </ModalBSBody>
+          </ModalBSContainer>
         </div>
       </div>
     </>
