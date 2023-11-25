@@ -1,13 +1,13 @@
 import React from "react";
 import "./ChatSidebar.scss";
-import profileImage from "../../../../Images/Pramod.jpeg";
+// import profileImage from "../../../../Images/Pramod.jpeg";
 import pinIcon from "../../../../Images/Chat/Pin.svg";
 import messageIcon from "../../../../Images/Chat/Chat.svg";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getUserChats,
-  getMessageByChatId,
+  // getMessageByChatId,
   getUnreadMessageCount,
   togglePinMessage,
   getPinnedChat,
@@ -19,9 +19,10 @@ import {
   setUserId,
   setIsCommuntySelected,
 } from "../../../../Store/features/chat/chatSlice";
+import { selectLoggedInUserId } from "../../../../Store/features/user/userSlice";
 
 const ChatSidebar = ({ recieveMessage, sendMessage }) => {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const loggedInUserId = useSelector(selectLoggedInUserId);
   const dispatch = useDispatch();
 
   const [chats, setChats] = useState([]);
@@ -37,7 +38,7 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
 
   // Handle PinClick
   const handlePinClick = (chatId) => {
-    togglePinMessage(loggedInUser._id, chatId).then((res) => {
+    togglePinMessage(loggedInUserId, chatId).then((res) => {
       console.log(res);
       setPinnedChat(true);
       setTimeout(() => {
@@ -47,7 +48,7 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   };
 
   useEffect(() => {
-    getPinnedChat(loggedInUser._id).then((res) => {
+    getPinnedChat(loggedInUserId).then((res) => {
       console.log(res.data);
       setPinnedChats(res.data);
       res.data.forEach((chat) => {
@@ -55,7 +56,7 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
         handleGetUnreadMessageCount(chat._id);
       });
     });
-    getUserChats(loggedInUser._id)
+    getUserChats(loggedInUserId)
       .then((res) => {
         setChats(res.data);
         console.log(res.data);
@@ -67,7 +68,13 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
       .catch((error) => {
         console.error("Error-->", error);
       });
-  }, [loggedInUser, sendMessage, recieveMessage, selectedUserChat, pinnedChat]);
+  }, [
+    loggedInUserId,
+    sendMessage,
+    recieveMessage,
+    selectedUserChat,
+    pinnedChat,
+  ]);
 
   // Handle selected chat
   const handleSelectedChat = (chatId, userId) => {
@@ -108,7 +115,7 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   };
 
   const handleGetUnreadMessageCount = (chatId) => {
-    getUnreadMessageCount(chatId, loggedInUser._id)
+    getUnreadMessageCount(chatId, loggedInUserId)
       .then((res) => {
         setUnreadMessageCounts((prevUnreadMessageCounts) => ({
           ...prevUnreadMessageCounts,
@@ -148,7 +155,7 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
       <div className="chatsidebar_main_container">
         <div className="chatsidebar_content py-2 ">
           <span style={{ margin: "5px 20px" }}>
-            <img src={pinIcon} /> PINNED
+            <img src={pinIcon} alt="" /> PINNED
           </span>
           {/* <div className="person_wise_chat mt-2"> */}
           {/* <section className="user_chat mt-3">
@@ -181,7 +188,7 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
           {pinnedChats?.map((chat, index) => (
             <div key={index} className="person_wise_chat mt-2">
               {chat.members.map((member) => {
-                if (member._id !== loggedInUser._id) {
+                if (member._id !== loggedInUserId) {
                   const inputString = latestMessages[chat._id];
                   const unreadMessageCount = unreadMessageCounts[chat._id];
                   const messageTime = formatTimestamp(dates[chat._id]);
@@ -239,12 +246,12 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
           ))}
           {/* </div> */}
           <span style={{ margin: "10px 0 5px 20px" }}>
-            <img src={messageIcon} /> ALL MESSAGE
+            <img src={messageIcon} alt="" /> ALL MESSAGE
           </span>
           {chats.map((chat, index) => (
             <div key={index} className="person_wise_chat mt-2">
               {chat.members.map((member) => {
-                if (member._id !== loggedInUser._id) {
+                if (member._id !== loggedInUserId) {
                   const inputString = latestMessages[chat._id];
                   const unreadMessageCount = unreadMessageCounts[chat._id];
                   const messageTime = formatTimestamp(dates[chat._id]);

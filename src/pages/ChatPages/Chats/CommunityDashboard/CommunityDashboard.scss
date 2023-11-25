@@ -107,7 +107,11 @@
     .other_sender {
       align-self: flex-start;
       display: flex;
-      max-width: 60%;
+      max-width: 90%;
+
+      @media (min-width: 768px) {
+        max-width: 60%;
+      }
 
       .image_profile {
         height: 50px;
@@ -177,7 +181,11 @@
         }
 
         .mymessage_container {
-          max-width: 60%;
+          max-width: 90%;
+          @media (min-width: 768px) {
+            max-width: 60%;
+          }
+
           background-color: var(--currentTheme);
           color: var(--currentTheme-text);
           padding: 10px 20px;
