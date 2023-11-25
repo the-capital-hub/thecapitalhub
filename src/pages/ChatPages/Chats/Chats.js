@@ -56,8 +56,8 @@ const Chats = () => {
   );
   const dispatch = useDispatch();
 
-  const [selectedChat, setSelectedChat] = useState(null);
-  const [selectedUser, setSelectedUser] = useState(null);
+  // const [selectedChat, setSelectedChat] = useState(null);
+  // const [selectedUser, setSelectedUser] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [sendMessage, setSendMessage] = useState(null);
   const [recieveMessage, setRecieveMessage] = useState(null);
@@ -241,123 +241,124 @@ const Chats = () => {
         isChatPage={true}
       />
 
-      <div className="container-fluid chat_main_container position-relative">
-        {/* Left section */}
-        <div
-          className={`left_section_wrapper mt-3 mx-3 ${
-            isMobileView && "d-none"
-          }`}
-        >
-          <section className="left_section pe-1 ">
-            <span className="back_img rounded-circle shadow-sm" title="Go Back">
-              <img
-                src={backIcon}
-                width={20}
-                height={20}
-                onClick={() => navigate(-1)}
-                alt=""
+      <div class="chat-page-wrapper">
+        <div className="container-xxl chat_main_container position-relative">
+          {/* Left section */}
+          <div
+            className={`left_section_wrapper mt-3 mx-3 ${
+              isMobileView && "d-none"
+            }`}
+          >
+            <section className="left_section pe-1 ">
+              <span
+                className="back_img rounded-circle shadow-sm"
+                title="Go Back"
+              >
+                <img
+                  src={backIcon}
+                  width={20}
+                  height={20}
+                  onClick={() => navigate(-1)}
+                  alt=""
+                />
+              </span>
+              <ChatSearch />
+              <CommunitiesContainer
+                isCommunityOpen={isCommunityOpen}
+                recieveMessage={recieveMessage}
+                sendMessage={sendMessage}
+                setIsRead={setIsRead}
+                isRead={isRead}
               />
-            </span>
-            <ChatSearch />
-            <CommunitiesContainer
-              isCommunityOpen={isCommunityOpen}
-              recieveMessage={recieveMessage}
-              sendMessage={sendMessage}
-              setIsRead={setIsRead}
-              isRead={isRead}
-            />
-            <ChatSidebar
-              recieveMessage={recieveMessage}
-              sendMessage={sendMessage}
-            />
-          </section>
-        </div>
-
-        {/* Main Chat section */}
-        <section className="main_section my-3 me-lg-3">
-          {isMobileView && renderMobieHeader()}
-
-          {isMobileView ? (
-            chatId ? (
-              renderMobileMainSection()
-            ) : (
-              <section className="overflow-y-auto mobileView_chat_sidebar">
-                <div className="d-flex flex-column gap-3 px-1">
-                  <ChatSearch />
-                  <CommunitiesContainer
-                    isCommunityOpen={isCommunityOpen}
+              <ChatSidebar
+                recieveMessage={recieveMessage}
+                sendMessage={sendMessage}
+              />
+            </section>
+          </div>
+          {/* Main Chat section */}
+          <section className="main_section my-3">
+            {isMobileView && renderMobieHeader()}
+            {isMobileView ? (
+              chatId ? (
+                renderMobileMainSection()
+              ) : (
+                <section className="overflow-y-auto mobileView_chat_sidebar">
+                  <div className="d-flex flex-column gap-3 px-1">
+                    <ChatSearch />
+                    <CommunitiesContainer
+                      isCommunityOpen={isCommunityOpen}
+                      recieveMessage={recieveMessage}
+                      sendMessage={sendMessage}
+                      setIsRead={setIsRead}
+                      isRead={isRead}
+                    />
+                    <ChatSidebar
+                      recieveMessage={recieveMessage}
+                      sendMessage={sendMessage}
+                    />
+                  </div>
+                </section>
+              )
+            ) : chatId && !loading?.userChat ? (
+              <>
+                <ChatNavbar
+                  isclear={setCleared}
+                  cleared={cleared}
+                  setIsSettingsOpen={setIsSettingsOpen}
+                />
+                {!isCommunitySelected && (
+                  <ChatDashboard
+                    setSendMessage={setSendMessage}
                     recieveMessage={recieveMessage}
-                    sendMessage={sendMessage}
+                    cleared={cleared}
+                  />
+                )}
+                {isCommunitySelected && (
+                  <CommunityDashboard
+                    setSendMessage={setSendMessage}
+                    recieveMessage={recieveMessage}
+                    cleared={cleared}
                     setIsRead={setIsRead}
                     isRead={isRead}
                   />
-                  <ChatSidebar
-                    recieveMessage={recieveMessage}
-                    sendMessage={sendMessage}
-                  />
-                </div>
+                )}
+              </>
+            ) : (
+              <div className="select-chat-container">
+                <img src={selectAChatIcon} alt="select a chat" />
+                <h3>Select a message</h3>
+              </div>
+            )}
+          </section>
+          {/*Right section chat settings */}
+          {!isMobileView && isSettingsOpen ? (
+            <div className="right_section_wrapper ms-lg-3">
+              <section className="right_section mt-3 w-100 ">
+                <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
               </section>
-            )
-          ) : chatId && !loading?.userChat ? (
-            <>
-              <ChatNavbar
-                isclear={setCleared}
-                cleared={cleared}
-                setIsSettingsOpen={setIsSettingsOpen}
-              />
-              {!isCommunitySelected && (
-                <ChatDashboard
-                  setSendMessage={setSendMessage}
-                  recieveMessage={recieveMessage}
-                  cleared={cleared}
-                />
-              )}
-              {isCommunitySelected && (
-                <CommunityDashboard
-                  setSendMessage={setSendMessage}
-                  recieveMessage={recieveMessage}
-                  cleared={cleared}
-                  setIsRead={setIsRead}
-                  isRead={isRead}
-                />
-              )}
-            </>
-          ) : (
-            <div className="select-chat-container">
-              <img src={selectAChatIcon} alt="select a chat" />
-              <h3>Select a message</h3>
             </div>
+          ) : (
+            ""
           )}
-        </section>
-
-        {/*Right section chat settings */}
-        {!isMobileView && isSettingsOpen ? (
-          <div className="right_section_wrapper">
-            <section className="right_section mt-3 w-100 ">
-              <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
-            </section>
-          </div>
-        ) : (
-          ""
-        )}
-
-        {/* Modal */}
-        <div className="addNewCommunity_modal_wrapper">
-          <ModalBSContainer isStatic={false} id="AddNewCommunity">
-            <ModalBSHeader
-              title={"Create a Community"}
-              className={
-                loggedInUser.isInvestor === "true"
-                  ? "yellow__heading"
-                  : "orange__heading"
-              }
-            />
-            <ModalBSBody>
-              <NewCommunityModal
-                theme={loggedInUser.isInvestor === "true" ? "investor" : ""}
+          {/* Modal */}
+          <div className="addNewCommunity_modal_wrapper">
+            <ModalBSContainer isStatic={false} id="AddNewCommunity">
+              <ModalBSHeader
+                title={"Create a Community"}
+                className={
+                  loggedInUser.isInvestor === "true"
+                    ? "yellow__heading"
+                    : "orange__heading"
+                }
               />
-            </ModalBSBody>
-          </ModalBSContainer>
+              <ModalBSBody>
+                <NewCommunityModal
+                  theme={loggedInUser.isInvestor === "true" ? "investor" : ""}
+                />
+              </ModalBSBody>
+            </ModalBSContainer>
+          </div>
         </div>
       </div>
     </>
