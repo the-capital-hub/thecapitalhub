@@ -37,6 +37,10 @@ import { AiOutlineHome } from "react-icons/ai";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
 import { startupOnboardingSteps } from "../../../components/OnBoardUser/steps/startup";
+import {
+  selectIsInvestor,
+  selectLoggedInUserId,
+} from "../../../Store/features/user/userSlice";
 
 const Chats = () => {
   // search params
@@ -47,7 +51,8 @@ const Chats = () => {
   const navigate = useNavigate();
 
   // Fetch global state
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const loggedInUserId = useSelector(selectLoggedInUserId);
+  const isInvestor = useSelector(selectIsInvestor);
   // const userId = useSelector((state) => state.chat.userId);
   const chatId = useSelector((state) => state.chat.chatId);
   const isCommunitySelected = useSelector(
@@ -102,7 +107,7 @@ const Chats = () => {
 
   useEffect(() => {
     socket.current = io(environment.baseUrl);
-    socket.current.emit("new-user-add", loggedInUser?._id);
+    socket.current.emit("new-user-add", loggedInUserId);
     socket.current.on("get-users", (users) => {
       setOnlineUsers(users);
     });
@@ -110,7 +115,7 @@ const Chats = () => {
       disconnectFromServer();
       disconnectSocket();
     };
-  }, [loggedInUser]);
+  }, [loggedInUserId]);
 
   useEffect(() => {
     console.log("recieve");
@@ -133,8 +138,9 @@ const Chats = () => {
     setLoading((prev) => {
       return { ...prev, userChat: true };
     });
-    await createChat(paramUserId, loggedInUser._id)
+    await createChat(paramUserId, loggedInUserId)
       .then((res) => {
+        console.log("from create chat:", res.data);
         dispatch(setChatId(res.data._id));
         // dispatch(setUserId(userId));
         setLoading((prev) => {
@@ -151,7 +157,7 @@ const Chats = () => {
   useEffect(() => {
     if (paramUserId) {
       dispatch(setUserId(paramUserId));
-      findChat(paramUserId, loggedInUser._id)
+      findChat(paramUserId, loggedInUserId)
         .then((res) => {
           console.log("Result", res);
           dispatch(setIsCommuntySelected(false));
@@ -169,7 +175,7 @@ const Chats = () => {
           setSearchParams(searchParams);
         });
     }
-  }, [paramUserId]);
+  }, [paramUserId, loggedInUserId, dispatch]);
 
   const renderMobieHeader = () => {
     return (
@@ -240,8 +246,8 @@ const Chats = () => {
         isChatPage={true}
       />
 
-      <div class="chat-page-wrapper">
-        <div className="container-xxl chat_main_container position-relative">
+      <div className="chat-page-wrapper">
+        <div className="container-xxl p-0 chat_main_container position-relative fadeIn-025">
           {/* Left section */}
           <div
             className={`left_section_wrapper mt-3 mx-3 ${
@@ -345,16 +351,10 @@ const Chats = () => {
             <ModalBSContainer isStatic={false} id="AddNewCommunity">
               <ModalBSHeader
                 title={"Create a Community"}
-                className={
-                  loggedInUser.isInvestor === "true"
-                    ? "yellow__heading"
-                    : "orange__heading"
-                }
+                className={isInvestor ? "yellow__heading" : "orange__heading"}
               />
               <ModalBSBody>
-                <NewCommunityModal
-                  theme={loggedInUser.isInvestor === "true" ? "investor" : ""}
-                />
+                <NewCommunityModal theme={isInvestor ? "investor" : ""} />
               </ModalBSBody>
             </ModalBSContainer>
           </div>
