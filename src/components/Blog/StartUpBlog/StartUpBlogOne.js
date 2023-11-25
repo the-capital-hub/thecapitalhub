@@ -10,12 +10,15 @@ import BlogoneImage from "../../../Images/blog/1 AsPGU1Q42C9lsVRoMg91Nw.webp";
 import { Link } from "react-router-dom";
 import Pramod from "../../../Images/aboutUs/Pramod.jpeg";
 
-
 const StartUpBlogOne = () => {
   useEffect(() => {
     document.title = "Why mentoring matters? Blog | The Capital Hub";
   }, []);
   window.scrollTo({ top: 0, behavior: "smooth" });
+  let loggedInUser = localStorage.getItem("loggedInUser");
+  if (loggedInUser) {
+    loggedInUser = JSON.parse(loggedInUser);
+  }
   return (
     <>
       <div className="container blog_detailed_container">
@@ -31,8 +34,6 @@ const StartUpBlogOne = () => {
               Why Mentoring Matters: Why Angel Investors Should Prioritize
               Mentorship Before Investing in a Startup
             </h2>
-
-            
 
             <div className="time_icon w-">
               <div className="d-flex flex-row align-items-center">
@@ -50,7 +51,11 @@ const StartUpBlogOne = () => {
                 </Link>
                 <div className="py-2">
                   <Link
-                    to="/user/64e9fd9d4e368da2bf3e721f"
+                    to={
+                      loggedInUser?.isInvestor === "true"
+                        ? "/investor/user/64e9fd9d4e368da2bf3e721f"
+                        : "/user/64e9fd9d4e368da2bf3e721f"
+                    }
                     className="text-dark text-decoration-none"
                   >
                     <p className="m-0">
