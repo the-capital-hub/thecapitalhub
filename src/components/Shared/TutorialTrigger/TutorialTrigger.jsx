@@ -50,7 +50,7 @@ export default function TutorialTrigger({ steps, fromUp, isChatPage = false }) {
             fromUp ? "slideDown position-absolute top-0 start-0 z-3" : "slideUp"
           }`}
         >
-          <div className="d-flex align-items-center gap-3 justify-content-around">
+          <div className="container mx-auto d-flex align-items-center gap-3 justify-content-around">
             <p className="m-0">
               Welcome User! Would you like us to show you around?
             </p>
