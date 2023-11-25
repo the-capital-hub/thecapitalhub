@@ -6,12 +6,12 @@ import { UserModel } from "../models/User.js";
 export const createCommunity = async (communitydata) => {
   try {
     if (communitydata.profileImage) {
-      const { url } = await cloudinary.uploader.upload(communitydata.profileImage, {
+      const { secure_url } = await cloudinary.uploader.upload(communitydata.profileImage, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/posts/images`,
         format: "webp",
         unique_filename: true,
       });
-      communitydata.profileImage = url;
+      communitydata.profileImage = secure_url;
     }
     const members = [...new Set(communitydata.members)];
     const newCommunity = new CommunityModel({
@@ -157,12 +157,12 @@ export const updateCommunity = async (communityId, updatedData) => {
       };
     }
     if (updatedData.profileImage) {
-      const { url } = await cloudinary.uploader.upload(updatedData.profileImage, {
+      const { secure_url } = await cloudinary.uploader.upload(updatedData.profileImage, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/posts/images`,
         format: 'webp',
         unique_filename: true,
       });
-      community.profileImage = url;
+      community.profileImage = secure_url;
     }
 
     community.communityName = updatedData.communityName || community.communityName;

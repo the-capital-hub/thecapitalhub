@@ -3,14 +3,15 @@ import CommunityCard from "./CommunityCard";
 import { useRef, useState } from "react";
 import CommunitiesIcon from "./CommunitiesIcon";
 import ModalBsLauncher from "../../PopUp/ModalBS/ModalBsLauncher/ModalBsLauncher";
-import ModalBSBody from "../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
-import ModalBSContainer from "../../PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
-import ModalBSHeader from "../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
+// import ModalBSBody from "../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
+// import ModalBSContainer from "../../PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
+// import ModalBSHeader from "../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
-import NewCommunityModal from "../ChatComponents/NewCommunityModal";
+// import NewCommunityModal from "../ChatComponents/NewCommunityModal";
 import { getAllCommunity } from "../../../Service/user";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { selectLoggedInUserId } from "../../../Store/features/user/userSlice";
 
 export default function CommunitiesContainer({
   isCommunityOpen,
@@ -19,18 +20,20 @@ export default function CommunitiesContainer({
   isRead,
   setIsRead,
 }) {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const loggedInUserId = useSelector(selectLoggedInUserId);
+
   const [getCommunity, setGetCommunity] = useState([]);
   const chatProfile = useSelector((state) => state.chat.chatProfile);
   const chatId = useSelector((state) => state.chat.chatId);
   const launchRef = useRef();
 
   useEffect(() => {
-    getAllCommunity(loggedInUser?._id).then((res) => {
-      setGetCommunity(res);
-    }).catch((error) => console.error("Error", error));
-  }, [chatProfile, chatId, sendMessage, recieveMessage]);
-
+    getAllCommunity(loggedInUserId)
+      .then((res) => {
+        setGetCommunity(res);
+      })
+      .catch((error) => console.error("Error", error));
+  }, [chatProfile, chatId, sendMessage, recieveMessage, loggedInUserId]);
 
   const openAddNewCommunityModal = () => {
     // Trigger the ModalBsLauncher programmatically
@@ -63,8 +66,7 @@ export default function CommunitiesContainer({
         <ModalBsLauncher
           id="AddNewCommunity"
           launchRef={launchRef}
-        >
-        </ModalBsLauncher>
+        ></ModalBsLauncher>
         {/* Add new Modal is added to chats.js because it was not triggered in mobileview */}
         {/* <ModalBSContainer isStatic={false} id="AddNewCommunity">
           <ModalBSHeader

@@ -1,5 +1,4 @@
 import "./Chats.scss";
-
 import ChatSearch from "./ChatSearch/ChatSearch";
 import ChatSidebar from "./ChatSidebar/ChatSidebar";
 import ChatNavbar from "./ChatNavbar/ChatNavbar";
@@ -10,7 +9,7 @@ import { io } from "socket.io-client";
 import { environment } from "../../../environments/environment";
 import {
   Link,
-  useLocation,
+  // useLocation,
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
@@ -38,26 +37,32 @@ import { AiOutlineHome } from "react-icons/ai";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
 import { startupOnboardingSteps } from "../../../components/OnBoardUser/steps/startup";
+import {
+  selectIsInvestor,
+  selectLoggedInUserId,
+} from "../../../Store/features/user/userSlice";
+import IconTCH from "../../../components/Investor/SvgIcons/IconTCH";
 
 const Chats = () => {
   // search params
-  const location = useLocation();
+  // const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const paramUserId = searchParams.get("userId");
   const isCommunityOpen = searchParams.get("isCommunityOpen");
   const navigate = useNavigate();
 
   // Fetch global state
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const userId = useSelector((state) => state.chat.userId);
+  const loggedInUserId = useSelector(selectLoggedInUserId);
+  const isInvestor = useSelector(selectIsInvestor);
+  // const userId = useSelector((state) => state.chat.userId);
   const chatId = useSelector((state) => state.chat.chatId);
   const isCommunitySelected = useSelector(
     (state) => state.chat.isCommunitySelected
   );
   const dispatch = useDispatch();
 
-  const [selectedChat, setSelectedChat] = useState(null);
-  const [selectedUser, setSelectedUser] = useState(null);
+  // const [selectedChat, setSelectedChat] = useState(null);
+  // const [selectedUser, setSelectedUser] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [sendMessage, setSendMessage] = useState(null);
   const [recieveMessage, setRecieveMessage] = useState(null);
@@ -103,7 +108,7 @@ const Chats = () => {
 
   useEffect(() => {
     socket.current = io(environment.baseUrl);
-    socket.current.emit("new-user-add", loggedInUser?._id);
+    socket.current.emit("new-user-add", loggedInUserId);
     socket.current.on("get-users", (users) => {
       setOnlineUsers(users);
     });
@@ -111,7 +116,7 @@ const Chats = () => {
       disconnectFromServer();
       disconnectSocket();
     };
-  }, [loggedInUser]);
+  }, [loggedInUserId]);
 
   useEffect(() => {
     console.log("recieve");
@@ -134,8 +139,9 @@ const Chats = () => {
     setLoading((prev) => {
       return { ...prev, userChat: true };
     });
-    await createChat(paramUserId, loggedInUser._id)
+    await createChat(paramUserId, loggedInUserId)
       .then((res) => {
+        console.log("from create chat:", res.data);
         dispatch(setChatId(res.data._id));
         // dispatch(setUserId(userId));
         setLoading((prev) => {
@@ -152,7 +158,7 @@ const Chats = () => {
   useEffect(() => {
     if (paramUserId) {
       dispatch(setUserId(paramUserId));
-      findChat(paramUserId, loggedInUser._id)
+      findChat(paramUserId, loggedInUserId)
         .then((res) => {
           console.log("Result", res);
           dispatch(setIsCommuntySelected(false));
@@ -170,7 +176,7 @@ const Chats = () => {
           setSearchParams(searchParams);
         });
     }
-  }, [paramUserId]);
+  }, [paramUserId, loggedInUserId, dispatch]);
 
   const renderMobieHeader = () => {
     return (
@@ -241,121 +247,119 @@ const Chats = () => {
         isChatPage={true}
       />
 
-      <div className="container-fluid chat_main_container position-relative">
-        {/* Left section */}
-        <div
-          className={`left_section_wrapper mt-3 mx-3 ${
-            isMobileView && "d-none"
-          }`}
-        >
-          <section className="left_section pe-1 ">
-            <span className="back_img rounded-circle shadow-sm" title="Go Back">
-              <img
-                src={backIcon}
-                width={20}
-                height={20}
-                onClick={() => navigate(-1)}
-                alt=""
+      <div className="chat-page-wrapper">
+        <div className="container-xxl p-0 chat_main_container position-relative fadeIn-025">
+          {/* Left section */}
+          <div
+            className={`left_section_wrapper mt-3 mx-3 ${
+              isMobileView && "d-none"
+            }`}
+          >
+            <section className="left_section pe-1 ">
+              <span
+                className="back_img rounded-circle shadow-sm"
+                title="Go Back"
+              >
+                <img
+                  src={backIcon}
+                  width={20}
+                  height={20}
+                  onClick={() => navigate(-1)}
+                  alt=""
+                />
+              </span>
+              <ChatSearch />
+              <CommunitiesContainer
+                isCommunityOpen={isCommunityOpen}
+                recieveMessage={recieveMessage}
+                sendMessage={sendMessage}
+                setIsRead={setIsRead}
+                isRead={isRead}
               />
-            </span>
-            <ChatSearch />
-            <CommunitiesContainer
-              isCommunityOpen={isCommunityOpen}
-              recieveMessage={recieveMessage}
-              sendMessage={sendMessage}
-              setIsRead={setIsRead}
-              isRead={isRead}
-            />
-            <ChatSidebar
-              recieveMessage={recieveMessage}
-              sendMessage={sendMessage}
-            />
-          </section>
-        </div>
-
-        {/* Main Chat section */}
-        <section className="main_section my-3 me-lg-3">
-          {isMobileView && renderMobieHeader()}
-
-          {isMobileView ? (
-            chatId ? (
-              renderMobileMainSection()
-            ) : (
-              <section className="overflow-y-auto mobileView_chat_sidebar">
-                <div className="d-flex flex-column gap-3 px-1">
-                  <ChatSearch />
-                  <CommunitiesContainer
-                    isCommunityOpen={isCommunityOpen}
+              <ChatSidebar
+                recieveMessage={recieveMessage}
+                sendMessage={sendMessage}
+              />
+            </section>
+          </div>
+          {/* Main Chat section */}
+          <section className="main_section my-3">
+            {isMobileView && renderMobieHeader()}
+            {isMobileView ? (
+              chatId ? (
+                renderMobileMainSection()
+              ) : (
+                <section className="overflow-y-auto mobileView_chat_sidebar">
+                  <div className="d-flex flex-column gap-3 px-1">
+                    <ChatSearch />
+                    <CommunitiesContainer
+                      isCommunityOpen={isCommunityOpen}
+                      recieveMessage={recieveMessage}
+                      sendMessage={sendMessage}
+                      setIsRead={setIsRead}
+                      isRead={isRead}
+                    />
+                    <ChatSidebar
+                      recieveMessage={recieveMessage}
+                      sendMessage={sendMessage}
+                    />
+                  </div>
+                </section>
+              )
+            ) : chatId && !loading?.userChat ? (
+              <>
+                <ChatNavbar
+                  isclear={setCleared}
+                  cleared={cleared}
+                  setIsSettingsOpen={setIsSettingsOpen}
+                />
+                {!isCommunitySelected && (
+                  <ChatDashboard
+                    setSendMessage={setSendMessage}
                     recieveMessage={recieveMessage}
-                    sendMessage={sendMessage}
+                    cleared={cleared}
+                  />
+                )}
+                {isCommunitySelected && (
+                  <CommunityDashboard
+                    setSendMessage={setSendMessage}
+                    recieveMessage={recieveMessage}
+                    cleared={cleared}
                     setIsRead={setIsRead}
                     isRead={isRead}
                   />
-                  <ChatSidebar
-                    recieveMessage={recieveMessage}
-                    sendMessage={sendMessage}
-                  />
-                </div>
+                )}
+              </>
+            ) : (
+              <div className="select-chat-container">
+                <img src={selectAChatIcon} alt="select a chat" />
+                <h3>Select a message</h3>
+                <span className="tch_svg">
+                  <IconTCH />
+                </span>
+              </div>
+            )}
+          </section>
+          {/*Right section chat settings */}
+          {!isMobileView && isSettingsOpen ? (
+            <div className="right_section_wrapper ms-lg-3">
+              <section className="right_section mt-3 w-100 ">
+                <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
               </section>
-            )
-          ) : chatId && !loading?.userChat ? (
-            <>
-              <ChatNavbar
-                isclear={setCleared}
-                cleared={cleared}
-                setIsSettingsOpen={setIsSettingsOpen}
-              />
-              {!isCommunitySelected && (
-                <ChatDashboard
-                  setSendMessage={setSendMessage}
-                  recieveMessage={recieveMessage}
-                  cleared={cleared}
-                />
-              )}
-              {isCommunitySelected && (
-                <CommunityDashboard
-                  setSendMessage={setSendMessage}
-                  recieveMessage={recieveMessage}
-                  cleared={cleared}
-                  setIsRead={setIsRead}
-                  isRead={isRead}
-                />
-              )}
-            </>
-          ) : (
-            <div className="select-chat-container">
-              <img src={selectAChatIcon} alt="select a chat" />
-              <h3>Select a message</h3>
             </div>
+          ) : (
+            ""
           )}
-        </section>
-
-        {/*Right section chat settings */}
-        {!isMobileView && isSettingsOpen ? (
-          <div className="right_section_wrapper">
-            <section className="right_section mt-3 w-100 ">
-              <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
-            </section>
-          </div>
-        ) : (
-          ""
-        )}
-
+        </div>
         {/* Modal */}
         <div className="addNewCommunity_modal_wrapper">
           <ModalBSContainer isStatic={false} id="AddNewCommunity">
             <ModalBSHeader
               title={"Create a Community"}
-              className={
-                loggedInUser.isInvestor === "true"
-                  ? "yellow__heading"
-                  : "orange__heading"
-              }
+              className={isInvestor ? "yellow__heading" : "orange__heading"}
             />
             <ModalBSBody>
-              <NewCommunityModal
-                theme={loggedInUser.isInvestor === "true" ? "investor" : ""}
-              />
+              <NewCommunityModal theme={isInvestor ? "investor" : ""} />
             </ModalBSBody>
           </ModalBSContainer>
         </div>

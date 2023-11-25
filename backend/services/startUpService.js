@@ -10,7 +10,7 @@ const adminMail = "learn.capitalhub@gmail.com";
 export const createStartup = async (startUpData) => {
   try {
     if (startUpData?.logo) {
-      const { url } = await cloudinary.uploader.upload(startUpData.logo, {
+      const { secure_url } = await cloudinary.uploader.upload(startUpData.logo, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/users/profilePictures`,
         format: "webp",
         unique_filename: true,
