@@ -10,7 +10,7 @@
     // background-image: url("../../../../Images/StartUp/Navbar/OrangeCircle.svg");
 
     &:focus {
-      box-shadow: 0 0 0 0.25rem #fd590133;
+      box-shadow: 0 0 0 0.25rem var(--currentTheme-light); //#fd590133;
       border-color: var(--currentTheme);
       background-image: url("../../../../Images/StartUp/Navbar/OrangeCircle.svg");
 
@@ -25,6 +25,27 @@
       background-color: var(--currentTheme);
       border-color: var(--currentTheme);
       background-image: url("../../../../Images/StartUp/Navbar/WhiteCircle.svg");
+    }
+
+    // Investor theme
+    &.investor {
+      &:focus {
+        box-shadow: 0 0 0 0.25rem var(--currentTheme-dark); //#fd590133;
+        border-color: var(--currentTheme-dark);
+        background-image: url("../../../../Images/StartUp/Navbar/GreenCircle.svg");
+
+        &:checked {
+          background-color: var(--currentTheme);
+          border-color: var(--currentTheme-dark);
+          background-image: url("../../../../Images/StartUp/Navbar/WhiteCircle.svg");
+        }
+      }
+
+      &:checked {
+        background-color: var(--currentTheme);
+        border-color: var(--currentTheme-dark);
+        background-image: url("../../../../Images/StartUp/Navbar/WhiteCircle.svg");
+      }
     }
   }
 }

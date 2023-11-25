@@ -7,19 +7,19 @@ import {
   SidebarFooter,
   SidebarContent,
 } from "react-pro-sidebar";
-import ArrowLeft from "../../../Images/investorsidebar/ArrowLeft.svg";
-import ArrowRight from "../../../Images/investorsidebar/ArrowRight.svg";
-import Setting from "../../../Images/investorsidebar/Settings.svg";
-import Support from "../../../Images/investorsidebar/Support.svg";
+// import ArrowLeft from "../../../Images/investorsidebar/ArrowLeft.svg";
+// import ArrowRight from "../../../Images/investorsidebar/ArrowRight.svg";
+// import Setting from "../../../Images/investorsidebar/Settings.svg";
+// import Support from "../../../Images/investorsidebar/Support.svg";
 import HomeIcon from "../../../Images/investorIcon/home.svg";
 import myStartUpIcon from "../../../Images/Investor/Sidebar/MyStartUps.svg";
 import exploreIcon from "../../../Images/Investor/Sidebar/explore.svg";
-import syndicateIcon from "../../../Images/Investor/Sidebar/syndicates.svg";
-import liveDealsIcon from "../../../Images/Investor/Sidebar/Live Deals.svg";
+// import syndicateIcon from "../../../Images/Investor/Sidebar/syndicates.svg";
+// import liveDealsIcon from "../../../Images/Investor/Sidebar/Live Deals.svg";
 import mySchedulesIcon from "../../../Images/Investor/Sidebar/My Schedules.svg";
 import savedPostsIcon from "../../../Images/Investor/Sidebar/SavedPosts.svg";
 import ExitIcon from "../../../Images/investorIcon/Exit.svg";
-import InvestorIcon from "../../../Images/investorIcon/Pot.svg";
+// import InvestorIcon from "../../../Images/investorIcon/Pot.svg";
 // import PlusIcon from "../../../Images/investorIcon/Plus.svg";
 import "react-pro-sidebar/dist/css/styles.css";
 import "./SideBar.scss";
@@ -44,9 +44,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const menuIconClick = () => {
-    setSidebarCollapsed(true);
-  };
+  // const menuIconClick = () => {
+  //   setSidebarCollapsed(true);
+  // };
 
   const handleLogout = () => {
     // Step 3: Show the logout popup
@@ -169,6 +169,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/home?showPopup=true"
+                  id="sidebar_createAPost"
                 >
                   {sidebarCollapsed ? (
                     <>
@@ -197,8 +198,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/home"
+                  id="sidebar_home"
                 >
-                  <img src={HomeIcon} alt="image" />
+                  <img src={HomeIcon} alt="link to Home" />
                   {!sidebarCollapsed && (
                     <span className="text-black">Home</span>
                   )}
@@ -212,8 +214,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/company-profile"
+                  id="sidebar_companyProfile"
                 >
-                  <img src={companyProfileIcon} alt="image" />
+                  <img src={companyProfileIcon} alt="link to Company Profile" />
                   {!sidebarCollapsed && (
                     <span className="text-black">Company</span>
                   )}
@@ -227,6 +230,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/onelink"
+                  id="sidebar_onelink"
                 >
                   <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} />
                   {!sidebarCollapsed && (
@@ -239,7 +243,10 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 active={location.pathname.includes("/chats")}
                 className="active-item"
               >
-                <div className="sidebar__community d-flex gap-4 ">
+                <div
+                  className="sidebar__community d-flex gap-4 "
+                  id="sidebar_community"
+                >
                   <div onClick={() => setSidebarCollapsed(true)}>
                     <CommunitiesIcon
                       width="17px"
@@ -291,10 +298,11 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/explore"
+                  id="sidebar_explore"
                 >
                   <img
                     src={exploreIcon}
-                    alt="image"
+                    alt="link for Explore"
                     width="17px"
                     height="17px"
                   />
@@ -310,10 +318,11 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/mystartups"
+                  id="sidebar_myStartups"
                 >
                   <img
                     src={myStartUpIcon}
-                    alt="image"
+                    alt="link for My Startups"
                     width="17px"
                     height="17px"
                   />
@@ -329,10 +338,11 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/my-schedule"
+                  id="sidebar_mySchedule"
                 >
                   <img
                     src={mySchedulesIcon}
-                    alt="image"
+                    alt="link for My Schedules"
                     width="17px"
                     height="17px"
                   />
@@ -348,10 +358,11 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/saved-posts"
+                  id="sidebar_savedPosts"
                 >
                   <img
                     src={savedPostsIcon}
-                    alt="image"
+                    alt="link for Saved Posts"
                     width="17px"
                     height="17px"
                   />
@@ -367,10 +378,11 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/investor/connection"
+                  id="sidebar_connections"
                 >
                   <img
                     src={connectionsIcon}
-                    alt="image"
+                    alt="link for Connections"
                     width="17px"
                     height="17px"
                   />
@@ -387,7 +399,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/"
                 >
-                  <img src={HomeIcon} alt="image" />
+                  <img src={HomeIcon} alt="link to main landing page" />
                   {!sidebarCollapsed && <span>Learn More</span>}
                 </Link>
               </MenuItem>
@@ -478,7 +490,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           <SidebarFooter>
             <Menu iconShape="round">
               <MenuItem onClick={handleLogout}>
-                <img src={ExitIcon} alt="image" width="17px" height="17px" />
+                <img src={ExitIcon} alt="logout" width="17px" height="17px" />
                 {!sidebarCollapsed && (
                   <span className="text-black">Log out</span>
                 )}

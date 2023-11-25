@@ -12,7 +12,10 @@ function MeeshoBlog() {
       "Meesho: Revolutionising E-Commerce for Entrepreneurs | Blog | The Capital Hub";
   }, []);
   window.scrollTo({ top: 0, behavior: "smooth" });
-
+  let loggedInUser = localStorage.getItem("loggedInUser");
+  if (loggedInUser) {
+    loggedInUser = JSON.parse(loggedInUser);
+  }
   return (
     <>
       <div className="container blog_detailed_container">
@@ -47,7 +50,11 @@ function MeeshoBlog() {
                 </Link>
                 <div className="py-2">
                   <Link
-                    to="/user/64e9fd9d4e368da2bf3e721f"
+                     to={
+                      loggedInUser?.isInvestor === "true"
+                        ? "/investor/user/64e9fd9d4e368da2bf3e721f"
+                        : "/user/64e9fd9d4e368da2bf3e721f"
+                    }
                     className="text-dark text-decoration-none"
                   >
                     <p className="m-0">

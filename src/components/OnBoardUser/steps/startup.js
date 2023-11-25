@@ -15,14 +15,20 @@ const profilePage = [
   {
     target: ".professional_info_section",
     content: "some text here",
+    placement: "auto",
+    disableBeacon: true,
   },
   {
     target: "#missingDetails",
     content: "some text here",
+    placement: "auto",
+    disableBeacon: true,
   },
   {
     target: ".milestones",
     content: "some text here",
+    placement: "auto",
+    disableBeacon: true,
   },
 ];
 

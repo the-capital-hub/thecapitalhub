@@ -17,13 +17,16 @@ import threeEightImage from "../../../Images/blog/threeeight.webp";
 import { Link } from "react-router-dom";
 import Pramod from "../../../Images/aboutUs/Pramod.jpeg";
 
-
 const StartUpBlogThree = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
   useEffect(() => {
     document.title =
       "HOW TO BUILD A GREAT STARTUP by Pramod Badiger | The Capital Hub";
   }, []);
+  let loggedInUser = localStorage.getItem("loggedInUser");
+  if (loggedInUser) {
+    loggedInUser = JSON.parse(loggedInUser);
+  }
   return (
     <>
       <div className="container blog_detailed_container">
@@ -38,8 +41,6 @@ const StartUpBlogThree = () => {
             <h2 className="headingOne">
               HOW TO BUILD A GREAT STARTUP by Pramod Badiger
             </h2>
-
-           
 
             <div className="time_icon w-">
               <div className="d-flex flex-row align-items-center">
@@ -57,7 +58,11 @@ const StartUpBlogThree = () => {
                 </Link>
                 <div className="py-2">
                   <Link
-                    to="/user/64e9fd9d4e368da2bf3e721f"
+                    to={
+                      loggedInUser?.isInvestor === "true"
+                        ? "/investor/user/64e9fd9d4e368da2bf3e721f"
+                        : "/user/64e9fd9d4e368da2bf3e721f"
+                    }
                     className="text-dark text-decoration-none"
                   >
                     <p className="m-0">
