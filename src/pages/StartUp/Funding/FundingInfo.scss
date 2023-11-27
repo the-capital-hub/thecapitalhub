@@ -49,4 +49,17 @@
   .orange {
     color: #fd5901;
   }
+
+  .back-btn {
+    .back-icon {
+      width: 0px;
+      transition: 0.25s ease-in-out;
+    }
+
+    &:hover {
+      .back-icon {
+        width: 16px;
+      }
+    }
+  }
 }
