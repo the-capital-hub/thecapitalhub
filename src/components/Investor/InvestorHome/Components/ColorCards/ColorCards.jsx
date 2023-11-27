@@ -2,18 +2,22 @@ import React, { useState } from "react";
 import CoinIcon from "../../../../../Images/investorView/Rectangle.png";
 import ColorCard from "../../../InvestorGlobalCards/ColoredCards/ColorCard";
 import { useSelector } from "react-redux";
-import { selectColorCardData } from "../../../../../Store/features/user/userSlice";
+import {
+  selectColorCardData,
+  selectCompanyFounderId,
+  selectLoggedInUserId,
+} from "../../../../../Store/features/user/userSlice";
 
-export default function ColorCards() {
+export default function ColorCards({ colorCardInfo, isNotEditable = false }) {
   // Fetch from store
   const colorCard = useSelector(selectColorCardData);
-  const companyFounderId = useSelector(
-    (state) => state.user.loggedInUser.founderId
-  );
-  const loggedInUserId = useSelector((state) => state.user.loggedInUser._id);
+  const companyFounderId = useSelector(selectCompanyFounderId);
+  const loggedInUserId = useSelector(selectLoggedInUserId);
 
   // State for color card
-  const [colorCardData, setColorCardData] = useState(colorCard);
+  const [colorCardData, setColorCardData] = useState(
+    colorCard || colorCardInfo
+  );
   const [field, setField] = useState("last_round_investment");
 
   // handle amount change
@@ -43,6 +47,7 @@ export default function ColorCards() {
             field={field}
             colorCardData={colorCardData}
             isOneLink={loggedInUserId !== companyFounderId}
+            isNotEditable={isNotEditable}
           />
           <ColorCard
             color="white"
@@ -56,6 +61,7 @@ export default function ColorCards() {
             field={field}
             colorCardData={colorCardData}
             isOneLink={loggedInUserId !== companyFounderId}
+            isNotEditable={isNotEditable}
           />
           <ColorCard
             color="white"
@@ -70,6 +76,7 @@ export default function ColorCards() {
             colorCardData={colorCardData}
             noRupee={true}
             isOneLink={loggedInUserId !== companyFounderId}
+            isNotEditable={isNotEditable}
           />
           <ColorCard
             color="white"
@@ -81,6 +88,7 @@ export default function ColorCards() {
             field={field}
             colorCardData={colorCardData}
             isOneLink={loggedInUserId !== companyFounderId}
+            isNotEditable={isNotEditable}
           />
           <ColorCard
             color="white"
@@ -92,6 +100,7 @@ export default function ColorCards() {
             field={field}
             colorCardData={colorCardData}
             isOneLink={loggedInUserId !== companyFounderId}
+            isNotEditable={isNotEditable}
           />
           <ColorCard
             color="white"
@@ -105,6 +114,7 @@ export default function ColorCards() {
             field={field}
             colorCardData={colorCardData}
             isOneLink={loggedInUserId !== companyFounderId}
+            isNotEditable={isNotEditable}
           />
         </div>
       )}

@@ -73,17 +73,18 @@ export const {
 
 // LoggedInUser state selectors
 export const selectIsInvestor = (state) => {
-  return state.user.loggedInUser.isInvestor === "true" ? true : false;
+  return state.user.loggedInUser?.isInvestor === "true" ? true : false;
 };
-export const selectLoggedInUserId = (state) => state.user.loggedInUser._id;
+export const selectLoggedInUserId = (state) => state.user.loggedInUser?._id;
 export const selectUserProfilePicture = (state) =>
-  state.user.loggedInUser.profilePicture;
-export const selectUserOneLinkId = (state) => state.user.loggedInUser.oneLinkId;
+  state.user.loggedInUser?.profilePicture;
+export const selectUserOneLinkId = (state) =>
+  state.user.loggedInUser?.oneLinkId;
 export const selectUserInvestor = (state) => state.user.loggedInUser?.investor;
 export const selectUserRecentExperience = (state) =>
-  state.user.loggedInUser.recentExperience;
+  state.user.loggedInUser?.recentExperience;
 export const selectUserRecentEducation = (state) =>
-  state.user.loggedInUser.recentEducation;
+  state.user.loggedInUser?.recentEducation;
 
 // unread Notifications selector
 export const selectUnreadNotifications = (state) =>

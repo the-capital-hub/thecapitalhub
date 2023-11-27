@@ -45,11 +45,19 @@ const StartUpBlogThree = () => {
             <div className="time_icon w-">
               <div className="d-flex flex-row align-items-center">
                 <Link
-                  to="/user/64e9fd9d4e368da2bf3e721f"
+                  to={
+                    loggedInUser
+                      ? loggedInUser?.isInvestor === "true"
+                        ? "/investor/user/64e9fd9d4e368da2bf3e721f"
+                        : "/user/64e9fd9d4e368da2bf3e721f"
+                      : "/author-profile/64e9fd9d4e368da2bf3e721f"
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-dark text-decoration-none"
                 >
                   <img
-                    className="user rounded-pill mx-2"
+                    className="user rounded-pill mx-2 object-fit-cover"
                     src={Pramod}
                     alt="img"
                     width={60}
@@ -59,10 +67,14 @@ const StartUpBlogThree = () => {
                 <div className="py-2">
                   <Link
                     to={
-                      loggedInUser?.isInvestor === "true"
-                        ? "/investor/user/64e9fd9d4e368da2bf3e721f"
-                        : "/user/64e9fd9d4e368da2bf3e721f"
+                      loggedInUser
+                        ? loggedInUser?.isInvestor === "true"
+                          ? "/investor/user/64e9fd9d4e368da2bf3e721f"
+                          : "/user/64e9fd9d4e368da2bf3e721f"
+                        : "/author-profile/64e9fd9d4e368da2bf3e721f"
                     }
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-dark text-decoration-none"
                   >
                     <p className="m-0">
