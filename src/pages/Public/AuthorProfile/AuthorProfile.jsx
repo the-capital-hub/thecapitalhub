@@ -3,13 +3,13 @@ import "./AuthorProfile.scss";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { useParams } from "react-router-dom";
 import { getUserAndStartUpByUserIdAPI } from "../../../Service/user";
-import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import ProfessionalInfoDisplay from "../../../components/Investor/StartupProfilePageComponents/ProfessionalInfo/ProfessionalInfoDisplay";
 import UserBio from "../../../components/Investor/InvestorHome/Components/UserBio/UserBio";
 import ConnectionCard from "../../../components/Investor/ConnectionCard/ConnectionCard";
 import CompanyDetailsCard from "../../../components/Investor/InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
 import ColorCards from "../../../components/Investor/InvestorHome/Components/ColorCards/ColorCards";
 import TCHLogoLoader from "../../../components/Shared/TCHLoaders/TCHLogoLoader/TCHLogoLoader";
+import LoginPopup from "../../../components/Shared/LoginPopup/LoginPopup";
 
 export default function AuthorProfile() {
   const { userId } = useParams();
@@ -39,7 +39,7 @@ export default function AuthorProfile() {
   };
 
   return (
-    <div className="author-profile-wrapper">
+    <div className="author-profile-wrapper position-relative">
       <MaxWidthWrapper>
         {loading ? (
           <div className="" style={{ height: "80vh" }}>
@@ -98,6 +98,19 @@ export default function AuthorProfile() {
           </div>
         )}
       </MaxWidthWrapper>
+
+      {/* login popup */}
+      {!loading && (
+        <LoginPopup>
+          <p className="m-0 fs-4 text-center">
+            Connect with{" "}
+            <span className="fw-bold">
+              {userData.firstName} {userData.lastName}
+            </span>{" "}
+            on <span className="text-primary">Capital HUB</span>
+          </p>
+        </LoginPopup>
+      )}
     </div>
   );
 }
