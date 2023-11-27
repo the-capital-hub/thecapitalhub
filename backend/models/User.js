@@ -167,6 +167,12 @@ const userSchema = new Schema(
     secretKey: {
       type: String,
     },
+    achievements: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Achievement',
+      },
+    ],
 
     //startup user
     yearsOfExperience: {
@@ -195,28 +201,28 @@ const userSchema = new Schema(
     founderAlmaMaterMatters: {
       type: String,
     },
-    riskManagementInInvestments : {
+    riskManagementInInvestments: {
       type: String,
     },
     guideOnSellingInvestments: {
       type: String,
     },
-    timingInInvestmentDecisions : {
+    timingInInvestmentDecisions: {
       type: String,
     },
-    macroeconomicFactorsInfluenceInvestments : {
+    macroeconomicFactorsInfluenceInvestments: {
       type: String,
     },
-    assessCompanyCompetitiveAdvantage : {
+    assessCompanyCompetitiveAdvantage: {
       type: String,
     },
-    industryTrendsHoldInYourStrategy : {
+    industryTrendsHoldInYourStrategy: {
       type: String,
     },
-    evaluateCompanyGrowthPotential : {
+    evaluateCompanyGrowthPotential: {
       type: String,
     },
-    weightGaveToTechnologicalInnovation : {
+    weightGaveToTechnologicalInnovation: {
       type: String,
     },
     investmentSize: {
