@@ -99,7 +99,7 @@ export const addSectorOfInterest = async (investorId, sectorData) => {
         format: "webp",
         unique_filename: true,
       });
-      sectorData.logo = url;
+      sectorData.logo = secure_url;
     }
     investor.sectorInterested.push(sectorData);
     await investor.save();
@@ -134,7 +134,7 @@ export const addStartupInvested = async (investorId, startupData) => {
         format: "webp",
         unique_filename: true,
       });
-      startupData.logo = url;
+      startupData.logo = secure_url;
     }
     investor.startupsInvested.push(startupData);
     await investor.save();
@@ -190,7 +190,7 @@ export const uploadLogo = async (logo) => {
     return {
       status: 200,
       message: "Upload successfull",
-      url: url,
+      url: secure_url,
     };
   } catch (error) {
     console.error("Error uploading:", error);
@@ -217,7 +217,7 @@ export const addMyInterest = async (investorId, data) => {
         format: "webp",
         unique_filename: true,
       });
-      data.logo = url;
+      data.logo = secure_url;
     }
     investor.myInterests.push(data);
     await investor.save();

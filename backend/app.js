@@ -21,6 +21,7 @@ import communityData from "./routes/communityRoutes.js";
 import notificationData from "./routes/notificationRoutes.js";
 import scheduleRoutes from "./routes/scheduleRoutes.js";
 import questionsRoutes from "./routes/questionsRoute.js";
+import achievementRoutes from "./routes/achievementRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -28,7 +29,7 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
 app.use(express.static("public"));
-app.use(cors()); 
+app.use(cors());
 
 app.use("/users", usersData);
 app.use("/api/posts", postData);
@@ -43,6 +44,7 @@ app.use("/community", communityData);
 app.use("/notificaton", notificationData);
 app.use("/schedule", scheduleRoutes);
 app.use("/question", questionsRoutes);
+app.use("/achievement", achievementRoutes);
 
 // documentation upload
 
