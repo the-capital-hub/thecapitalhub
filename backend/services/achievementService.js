@@ -1,4 +1,4 @@
-import { AchievementsModel } from "../models/Achievement";
+import { AchievementsModel } from "../models/Achievement.js";
 import { UserModel } from "../models/User.js";
 
 export const createAchievement = async (achievementData) => {
