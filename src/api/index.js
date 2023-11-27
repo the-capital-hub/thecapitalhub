@@ -112,6 +112,7 @@ const API = Object.freeze({
   deleteRecentExperience: `${baseUrl}/users/deleteExperience`,
   getLastMessage: `${baseUrl}/message/getLastMessage`,
   rejectMeetingRequest: `${baseUrl}/schedule/rejectMeetingRequest`,
+  getUserAchievements: `${baseUrl}/achievement/getUserAchievements`,
 });
 
 export default API;

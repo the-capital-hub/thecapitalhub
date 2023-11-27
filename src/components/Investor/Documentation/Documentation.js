@@ -94,15 +94,15 @@ const Documentation = () => {
     <?php echo $t.visible ? 'fade-in' : 'fade-out'; ?>">
       <div className="p-2  d-flex align-items-center gap-2">
 
-      <img
-                src={achievement}
-                alt="Profile"
-                className="rounded-circle"
-                style={{ width: "50px", height: "50px" }}
-              />
-              <h6 className="m-0 fs-semibold">You have completed a achievement</h6>
+        <img
+          src={achievement}
+          alt="Profile"
+          className="rounded-circle"
+          style={{ width: "50px", height: "50px" }}
+        />
+        <h6 className="m-0 fs-semibold">It's just paperwork....</h6>
       </div>
-  </div>
+    </div>
   ))
 
   return (
@@ -117,17 +117,21 @@ const Documentation = () => {
 
           <div className="documentationStartup">
             {showModal && (
-              <UploadModal onCancel={setShowModal} fetchFolder={getFolders} />
+              <UploadModal
+                onCancel={setShowModal}
+                fetchFolder={getFolders}
+                notify={notify}
+              />
             )}
-            {/* <div>
-      <button onClick={notify}>Make me a toast</button>
-      <Toaster />
-    </div> */}
+            <div>
+              {/* <button onClick={notify}>Make me a toast</button> */}
+              <Toaster />
+            </div>
             <IntroductoryMessage
               title={"Upload your document"}
-              // para={
-              //   "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
-              // }
+            // para={
+            //   "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
+            // }
             />
             <UploadContainer
               onClicked={setShowModal}
