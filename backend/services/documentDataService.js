@@ -88,9 +88,18 @@ export const uploadDocument = async (args) => {
       fileUrl: fileUrl,
     });
     await file.save();
+    const user = await UserModel.findById(userId);
+    let isFirst = false;
+    const documentAchivementId = "656468a249186bca517cd0d3";
+    if (!user.achievements.includes(documentAchivementId)) {
+      user.achievements.push(documentAchivementId);
+      await user.save();
+      isFirst = true;
+    }
     return {
       status: 200,
       message: "Document Uploaded",
+      isFirst,
     };
   } catch (error) {
     console.error("Error uploading document:", error);

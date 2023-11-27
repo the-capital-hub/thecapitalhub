@@ -408,10 +408,20 @@ export const addStartupToUser = async (userId, startUpId) => {
         message: "User not found.",
       };
     }
+
+    let isFirst = false;
+    const achievementId = "6564687349186bca517cd0cd";
+    if (!user.achievements.includes(achievementId)) {
+      user.achievements.push(achievementId);
+      await user.save();
+      isFirst = true;
+    }
+
     return {
       status: 200,
       message: "Startup added to user successfully.",
       data: user,
+      isFirst,
     };
   } catch (error) {
     console.error("Error adding startups to user:", error);

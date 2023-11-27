@@ -1361,3 +1361,16 @@ export const rejectMeetingRequestAPI = async (meetingId, requestId) => {
     throw error;
   }
 };
+
+
+export const getUserAchievements = async () => {
+  try {
+    const response = await axiosInstance.get(
+      `${API.getUserAchievements}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error declining meeting:", error);
+    throw error;
+  }
+};

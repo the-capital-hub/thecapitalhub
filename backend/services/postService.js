@@ -11,7 +11,7 @@ export const createNewPost = async (data) => {
         format: "webp",
         unique_filename: true,
       });
-      data.image = url;
+      data.image = secure_url;
     }
     if (data?.images) {
       const uploadedImages = await Promise.all(data.images.map(async (image) => {
@@ -20,7 +20,7 @@ export const createNewPost = async (data) => {
           format: "webp",
           unique_filename: true,
         });
-        return url;
+        return secure_url;
       }));
       data.images = uploadedImages;
     }
@@ -31,7 +31,7 @@ export const createNewPost = async (data) => {
         // format: "webm",
         unique_filename: true,
       });
-      data.video = url;
+      data.video = secure_url;
     }
     if (data.resharedPostId) {
       const sharedPost = await PostModel.findByIdAndUpdate(data.resharedPostId, {

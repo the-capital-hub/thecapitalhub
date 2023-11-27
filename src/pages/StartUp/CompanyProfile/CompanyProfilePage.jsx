@@ -21,6 +21,8 @@ import {
   selectUserCompanyData,
   setUserCompany,
 } from "../../../Store/features/user/userSlice";
+import toast, { Toaster } from 'react-hot-toast';
+import achievement from "../../../Images/Investor/Achievements/img_1.png";
 
 export default function CompanyProfilePage() {
   const navigate = useNavigate();
@@ -79,6 +81,9 @@ export default function CompanyProfilePage() {
         loggedInUser._id,
         selectedCompanyId
       );
+      if (response.isFirst) {
+        notify();
+      }
       if (response.status === 200) {
         setShowSuccess(true);
         getStartupByFounderId(loggedInUser._id)
@@ -110,6 +115,22 @@ export default function CompanyProfilePage() {
       console.log(error);
     }
   };
+
+  const notify = () => toast.custom((t) => (
+    <div class=" rounded-3 max-w-md  bg-white shadow-lg rounded-lg pointer-events-auto d-flex border ring-1 ring-dark ring-opacity-25
+    <?php echo $t.visible ? 'fade-in' : 'fade-out'; ?>">
+      <div className="p-2  d-flex align-items-center gap-2">
+
+        <img
+          src={achievement}
+          alt="Profile"
+          className="rounded-circle"
+          style={{ width: "50px", height: "50px" }}
+        />
+        <h6 className="m-0 fs-semibold">Employer....</h6>
+      </div>
+    </div>
+  ))
 
   return (
     <MaxWidthWrapper>
@@ -160,8 +181,8 @@ export default function CompanyProfilePage() {
                             {companies.map((company, index) => (
                               <div
                                 className={`suggestion-item ${selectedCompanyId === company._id
-                                    ? "active"
-                                    : ""
+                                  ? "active"
+                                  : ""
                                   }`}
                                 key={index}
                                 onClick={() =>
@@ -219,8 +240,8 @@ export default function CompanyProfilePage() {
                             {companies.map((company, index) => (
                               <div
                                 className={`suggestion-item ${selectedCompanyId === company._id
-                                    ? "active"
-                                    : ""
+                                  ? "active"
+                                  : ""
                                   }`}
                                 key={index}
                                 onClick={() =>
@@ -253,6 +274,7 @@ export default function CompanyProfilePage() {
               </>
             )}
           </div>
+          <Toaster />
           {!loading ? (
             companyData?.length === 0 ? (
               <div className="bg-white rounded-4 p-4">
