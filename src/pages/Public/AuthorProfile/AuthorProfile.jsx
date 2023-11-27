@@ -9,6 +9,7 @@ import UserBio from "../../../components/Investor/InvestorHome/Components/UserBi
 import ConnectionCard from "../../../components/Investor/ConnectionCard/ConnectionCard";
 import CompanyDetailsCard from "../../../components/Investor/InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
 import ColorCards from "../../../components/Investor/InvestorHome/Components/ColorCards/ColorCards";
+import TCHLogoLoader from "../../../components/Shared/TCHLoaders/TCHLogoLoader/TCHLogoLoader";
 
 export default function AuthorProfile() {
   const { userId } = useParams();
@@ -41,7 +42,13 @@ export default function AuthorProfile() {
     <div className="author-profile-wrapper">
       <MaxWidthWrapper>
         {loading ? (
-          <SpinnerBS />
+          <div className="" style={{ height: "80vh" }}>
+            <TCHLogoLoader
+              className={
+                "d-flex justify-content-center align-items-center h-100"
+              }
+            />
+          </div>
         ) : (
           <div className="profile-container d-flex flex-column gap-4">
             {/* Professional Info */}
