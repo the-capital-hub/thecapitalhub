@@ -14,12 +14,15 @@ import {
 } from "../../../Store/features/user/userSlice";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import { postStartUpData } from "../../../Service/user";
+import { useNavigate } from "react-router-dom";
+import IconChevronBack from "../../../components/Investor/SvgIcons/IconChevronBack";
 
 export default function FundingInfo() {
   const loggedInUserId = useSelector(selectLoggedInUserId);
   const fundingViaCapitalHubQuestions = useSelector(selectFundingQuestions);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
 
@@ -69,6 +72,11 @@ export default function FundingInfo() {
     }
   }
 
+  // Handle back
+  function handleBack() {
+    navigate(-1);
+  }
+
   return (
     <div className="funding_wrapper my-4 mx-lg-3 mx-xl-0">
       <MaxWidthWrapper>
@@ -76,10 +84,20 @@ export default function FundingInfo() {
           {/* Main content */}
           <div className="main_content">
             <div className="funding_form_container d-flex flex-column gap-3 bg-white rounded-4 shadow-sm py-4">
-              <h2 className="px-4 border-bottom pb-4 m-0">
-                "Apply for Funding" with{" "}
-                <span style={{ color: "#fd5901" }}>Capital HUB</span>
-              </h2>
+              <div className="px-4 border-bottom pb-4 d-flex align-items-center justify-content-between">
+                <h2 className="m-0">
+                  "Apply for Funding" with{" "}
+                  <span style={{ color: "#fd5901" }}>Capital HUB</span>
+                </h2>
+                <button
+                  type="button"
+                  className="btn btn-secondary rounded-2 back-btn d-flex justify-content-center align-items-center gap-1"
+                  onClick={handleBack}
+                >
+                  <IconChevronBack className="back-icon" />
+                  Back
+                </button>
+              </div>
 
               {/* Form */}
               <form

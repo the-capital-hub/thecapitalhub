@@ -44,6 +44,9 @@ const SecuritySafeGuard = lazy(() =>
 const PortfolioPage = lazy(() =>
   import("../webDevelopment/pages/PortfolioPage/PortfolioPage")
 );
+const AuthorProfile = lazy(() =>
+  import("../pages/Public/AuthorProfile/AuthorProfile")
+);
 
 function PublicRoutes() {
   return (
@@ -211,6 +214,15 @@ function PublicRoutes() {
 
       <Route path="/signup" element={<Register />} />
       <Route path="/login" element={<Login />} />
+
+      <Route
+        path="/author-profile/:userId"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <AuthorProfile />
+          </Suspense>
+        }
+      />
     </>
   );
 }
