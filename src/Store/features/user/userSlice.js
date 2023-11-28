@@ -1,11 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { setThemeColor } from "../../../utils/setThemeColor";
+import { getInvestorById, getStartupByFounderId } from "../../../Service/user";
+
+// Async Thunk for companyData
+export const fetchCompanyData = createAsyncThunk(
+  "user/companyData",
+  async (userId, isInvestor) => {
+    try {
+      if (isInvestor) {
+        const { data } = await getStartupByFounderId(userId);
+        return data;
+      } else {
+        const { data } = await getInvestorById(userId);
+        return data;
+      }
+    } catch (error) {
+      console.error("Error fetching company details:", error);
+    }
+  }
+);
 
 const initialState = {
   loggedInUser: JSON.parse(localStorage.getItem("loggedInUser")) || null,
   error: null,
   recommendations: null,
-  company: null,
+  company: JSON.parse(localStorage.getItem("userCompanyData")) || null,
   unreadNotifications: null,
 };
 
@@ -29,6 +48,7 @@ export const userSlice = createSlice({
     },
     logout: (state) => {
       localStorage.removeItem("loggedInUser");
+      localStorage.removeItem("userCompanyData");
       state.loggedInUser = null;
       state.error = null;
       state.recommendations = null;
@@ -45,10 +65,14 @@ export const userSlice = createSlice({
       localStorage.setItem("loggedInUser", JSON.stringify(userData));
     },
     setUserCompany: (state, action) => {
+      localStorage.setItem("userCompanyData", JSON.stringify(action.payload));
       state.company = action.payload;
     },
     updateUserCompany: (state, action) => {
       state.company = { ...state.company, ...action.payload };
+      let userCompany = JSON.parse(localStorage.getItem("userCompanyData"));
+      userCompany = { ...userCompany, ...action.payload };
+      localStorage.setItem("userCompanyData", JSON.stringify(userCompany));
     },
     setUnreadNotifications: (state, action) => {
       state.unreadNotifications = action.payload;
@@ -56,6 +80,13 @@ export const userSlice = createSlice({
     decrementUnreadNotifications: (state, action) => {
       state.unreadNotifications = state.unreadNotifications - 1;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchCompanyData.fulfilled, (state, action) => {
+      localStorage.setItem("userCompanyData", JSON.stringify(action.payload));
+      state.company = action.payload;
+      state.error = null;
+    });
   },
 });
 
