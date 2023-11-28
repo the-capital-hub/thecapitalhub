@@ -4,16 +4,24 @@ import { fundingQuestions } from "../../../../constants/Startups/FundingInfo";
 import "./FundingForm.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  selectFundingQuestions,
+  //   selectFundingQuestions,
   selectLoggedInUserId,
+  selectUserEmail,
+  selectUserName,
   setUserCompany,
 } from "../../../../Store/features/user/userSlice";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
-import { postStartUpData } from "../../../../Service/user";
+import {
+  postStartUpData,
+  submitFundingToMailAPI,
+} from "../../../../Service/user";
+import toast from "react-hot-toast";
 
 export default function FundingForm({ setShowForm }) {
   const loggedInUserId = useSelector(selectLoggedInUserId);
-  const fundingViaCapitalHubQuestions = useSelector(selectFundingQuestions);
+  const userName = useSelector(selectUserName);
+  const userEmail = useSelector(selectUserEmail);
+  //   const fundingViaCapitalHubQuestions = useSelector(selectFundingQuestions);
 
   const dispatch = useDispatch();
 
@@ -43,7 +51,7 @@ export default function FundingForm({ setShowForm }) {
       },
       founderId: loggedInUserId,
     };
-
+    // Save to startUpData
     try {
       //   console.log("Save All", updatedData);
       const { data } = await postStartUpData(updatedData);
@@ -51,6 +59,28 @@ export default function FundingForm({ setShowForm }) {
       dispatch(setUserCompany(data));
     } catch (error) {
       console.error("Error Saving funding info:", error);
+    }
+    // Submit to Email
+    try {
+      let fundingAnswers = {
+        fundingViaCapitalhubQuestions: {
+          targetMarket: targetMarket.value,
+          whyRightTimeForYourStartUp: whyRightTimeForYourStartUp.value,
+          competitiveAdvantage: competitiveAdvantage.value,
+          biggestCompetitors: biggestCompetitors.value,
+          revenueGenerated: revenueGenerated.value,
+        },
+        name: userName,
+        email: userEmail,
+      };
+      const response = await submitFundingToMailAPI(fundingAnswers);
+      console.log(response);
+      toast.success(response.message, {
+        duration: 3000,
+        position: "top-center",
+      });
+    } catch (error) {
+      console.error("Error Submitting to email:", error);
     } finally {
       setLoading(false);
       setShowForm(false);
@@ -63,17 +93,7 @@ export default function FundingForm({ setShowForm }) {
       className="px-3 px-lg-5 d-flex flex-column gap-4 "
     >
       {Object.keys(fundingQuestions).map((question, index) => {
-        return (
-          <FundingFormFields
-            question={question}
-            key={question}
-            answer={
-              fundingViaCapitalHubQuestions
-                ? fundingViaCapitalHubQuestions[question]
-                : undefined
-            }
-          />
-        );
+        return <FundingFormFields question={question} key={question} />;
       })}
       <div className="d-flex align-items-center gap-4">
         <button

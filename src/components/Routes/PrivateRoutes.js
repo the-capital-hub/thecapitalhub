@@ -8,6 +8,7 @@ import { ModalBSContainer, ModalBSBody, ModalBSHeader } from "../PopUp/ModalBS";
 import NewCommunityModal from "../Investor/ChatComponents/NewCommunityModal";
 import { useSelector } from "react-redux";
 import MobileNavbar from "../Shared/MobileNavbar/MobileNavbar";
+import { Toaster } from "react-hot-toast";
 
 function PrivateRoute({ children, ...props }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -79,6 +80,13 @@ function PrivateRoute({ children, ...props }) {
               </ModalBSBody>
             </ModalBSContainer>
           </div>
+
+          {/* React Hot Toast */}
+          <Toaster
+            containerStyle={{
+              top: "100px",
+            }}
+          />
         </div>
       </>
     );

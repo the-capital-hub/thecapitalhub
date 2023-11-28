@@ -14,7 +14,7 @@ import "./FundingFormFields.scss";
 
 const MAXWORDCOUNT = 250;
 
-export default function FundingFormFields({ question, loading, answer }) {
+export default function FundingFormFields({ question }) {
   const isMobileView = useSelector(selectIsMobileView);
   // const fundingViaCapitalHubQuestions = useSelector(selectFundingQuestions);
   // const loggedInUserId = useSelector(selectLoggedInUserId);
@@ -96,10 +96,10 @@ export default function FundingFormFields({ question, loading, answer }) {
           id={question}
           rows={isMobileView ? 8 : 5}
           className="funding_textarea"
-          defaultValue={answer}
           onChange={handleInputChange}
           ref={textRef}
           style={{ resize: "none" }}
+          required
         ></textarea>
       </fieldset>
       {/* {(editMode || !answer) && (
