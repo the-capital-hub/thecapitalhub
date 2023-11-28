@@ -1,8 +1,9 @@
 import express from "express";
-import { contactUsController } from "../controllers/contactUsController.js";
+import { contactUsController, lookingForFundingMailController } from "../controllers/contactUsController.js";
 
 const router = express.Router();
 
 router.post("/", contactUsController);
+router.post("/lookingForFundingMail", lookingForFundingMailController);
 
 export default router;
