@@ -83,12 +83,12 @@ export default function MobileNavbar({ isInvestor }) {
           <span
             class="position-absolute translate-middle rounded-circle text-white d-flex justify-content-center align-items-center"
             style={{
-              width: "22px",
-              height: "22px",
+              width: "20px",
+              height: "20px",
               backgroundColor: "red",
-              top: "0px",
+              top: "5px",
               right: "-10px",
-              fontSize: "16px",
+              fontSize: "12px",
             }}
           >
             {unreadNotifications}
