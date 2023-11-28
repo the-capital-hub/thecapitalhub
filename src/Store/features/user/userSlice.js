@@ -151,6 +151,7 @@ export const selectWeightGaveToTechnologicalInnovation = (state) =>
   state.user.loggedInUser.weightGaveToTechnologicalInnovation;
 
 // company state selectors
+export const selectCompanyDataId = (state) => state.user.company?._id;
 export const selectUserCompanyData = (state) => state.user.company;
 export const selectCompanyName = (state) =>
   state.user.loggedInUser.isInvestor === "true"

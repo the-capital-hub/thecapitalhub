@@ -18,15 +18,16 @@ import AfterSuccessPopUp from "../../../components/PopUp/AfterSuccessPopUp/After
 import { useNavigate } from "react-router-dom";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import {
+  selectLoggedInUserId,
   selectUserCompanyData,
   setUserCompany,
 } from "../../../Store/features/user/userSlice";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 import achievement from "../../../Images/Investor/Achievements/img_1.png";
 
 export default function CompanyProfilePage() {
   const navigate = useNavigate();
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const loggedInUserId = useSelector(selectLoggedInUserId);
   const userCompanyData = useSelector(selectUserCompanyData);
   const dispatch = useDispatch();
 
@@ -39,7 +40,7 @@ export default function CompanyProfilePage() {
   useEffect(() => {
     if (!userCompanyData) {
       setLoading(true);
-      getStartupByFounderId(loggedInUser._id)
+      getStartupByFounderId(loggedInUserId)
         .then(({ data }) => {
           setCompanyData(data);
           dispatch(setUserCompany(data));
@@ -52,7 +53,7 @@ export default function CompanyProfilePage() {
     }
     document.title = "Company Profile | The Capital Hub";
     dispatch(setPageTitle("Company"));
-  }, [dispatch, userCompanyData]);
+  }, [dispatch, userCompanyData, loggedInUserId]);
 
   const handleSearchInputChange = (e) => {
     const newValue = e.target.value;
@@ -78,7 +79,7 @@ export default function CompanyProfilePage() {
   const handleAddStartup = async () => {
     try {
       const response = await addStartUpToUser(
-        loggedInUser._id,
+        loggedInUserId,
         selectedCompanyId
       );
       if (response.isFirst) {
@@ -86,7 +87,7 @@ export default function CompanyProfilePage() {
       }
       if (response.status === 200) {
         setShowSuccess(true);
-        getStartupByFounderId(loggedInUser._id)
+        getStartupByFounderId(loggedInUserId)
           .then(({ data }) => {
             setCompanyData(data);
             dispatch(setUserCompany(data));
@@ -105,7 +106,7 @@ export default function CompanyProfilePage() {
   const handleAddNew = async () => {
     try {
       const requestBody = {
-        userId: loggedInUser._id,
+        userId: loggedInUserId,
         startUp: null,
       };
       const response = await updateUserAPI(requestBody);
@@ -116,21 +117,23 @@ export default function CompanyProfilePage() {
     }
   };
 
-  const notify = () => toast.custom((t) => (
-    <div class=" rounded-3 max-w-md  bg-white shadow-lg rounded-lg pointer-events-auto d-flex border ring-1 ring-dark ring-opacity-25
-    <?php echo $t.visible ? 'fade-in' : 'fade-out'; ?>">
-      <div className="p-2  d-flex align-items-center gap-2">
-
-        <img
-          src={achievement}
-          alt="Profile"
-          className="rounded-circle"
-          style={{ width: "50px", height: "50px" }}
-        />
-        <h6 className="m-0 fs-semibold">Employer....</h6>
+  const notify = () =>
+    toast.custom((t) => (
+      <div
+        class=" rounded-3 max-w-md  bg-white shadow-lg rounded-lg pointer-events-auto d-flex border ring-1 ring-dark ring-opacity-25
+    <?php echo $t.visible ? 'fade-in' : 'fade-out'; ?>"
+      >
+        <div className="p-2  d-flex align-items-center gap-2">
+          <img
+            src={achievement}
+            alt="Profile"
+            className="rounded-circle"
+            style={{ width: "50px", height: "50px" }}
+          />
+          <h6 className="m-0 fs-semibold">Employer....</h6>
+        </div>
       </div>
-    </div>
-  ))
+    ));
 
   return (
     <MaxWidthWrapper>
@@ -142,7 +145,7 @@ export default function CompanyProfilePage() {
             {!loading && (
               <>
                 {companyData?.length !== 0 ? (
-                  companyData?.founderId === loggedInUser._id ? (
+                  companyData?.founderId === loggedInUserId ? (
                     <div className="bg-white rounded-4 p-4 shadow-sm">
                       <Link
                         to="/company-profile/edit"
@@ -180,10 +183,11 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${selectedCompanyId === company._id
-                                  ? "active"
-                                  : ""
-                                  }`}
+                                className={`suggestion-item ${
+                                  selectedCompanyId === company._id
+                                    ? "active"
+                                    : ""
+                                }`}
                                 key={index}
                                 onClick={() =>
                                   handleCompanySelection(
@@ -239,10 +243,11 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${selectedCompanyId === company._id
-                                  ? "active"
-                                  : ""
-                                  }`}
+                                className={`suggestion-item ${
+                                  selectedCompanyId === company._id
+                                    ? "active"
+                                    : ""
+                                }`}
                                 key={index}
                                 onClick={() =>
                                   handleCompanySelection(
