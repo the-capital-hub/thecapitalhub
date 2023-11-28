@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   loginSuccess,
   loginFailure,
+  fetchCompanyData,
 } from "../../Store/features/user/userSlice";
 import backArrow from "../../Images/left-arrow.png";
 import ResetPasswordPopUp from "../PopUp/RequestPasswordPopUp/RequestPasswordPopUp";
@@ -82,14 +83,21 @@ const Login = () => {
           }
         }
 
-        const storedAccountsKey = user.isInvestor === "true" ? "InvestorAccounts" : "StartupAccounts";
+        const storedAccountsKey =
+          user.isInvestor === "true" ? "InvestorAccounts" : "StartupAccounts";
 
-        const storedAccounts = JSON.parse(localStorage.getItem(storedAccountsKey)) || [];
-        const isAccountExists = storedAccounts.some((account) => account.user._id === user._id);
+        const storedAccounts =
+          JSON.parse(localStorage.getItem(storedAccountsKey)) || [];
+        const isAccountExists = storedAccounts.some(
+          (account) => account.user._id === user._id
+        );
 
         if (!isAccountExists) {
           storedAccounts.push(response);
-          localStorage.setItem(storedAccountsKey, JSON.stringify(storedAccounts));
+          localStorage.setItem(
+            storedAccountsKey,
+            JSON.stringify(storedAccounts)
+          );
         }
 
         // No errors, Set loginsuccessfull to true
@@ -105,6 +113,13 @@ const Login = () => {
         }, 2000);
 
         dispatch(loginSuccess(response.user));
+        // Fetch company data asynchronously
+        let isInvestor = response.user.isInvestor === "true" ? true : false;
+        if (isInvestor) {
+          dispatch(fetchCompanyData(response.user.investor, isInvestor));
+        } else {
+          dispatch(fetchCompanyData(response.user._id, isInvestor));
+        }
       }
 
       console.log("JWT Token:", token);
@@ -226,8 +241,9 @@ const Login = () => {
             <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-4 gap-sm-5">
               <Link to="">
                 <button
-                  className={`btn-primaryy login_btn ${!isInvestorSelected ? "startup" : ""
-                    } `}
+                  className={`btn-primaryy login_btn ${
+                    !isInvestorSelected ? "startup" : ""
+                  } `}
                   onClick={() => setIsInvestorSelected(false)}
                 >
                   StartUp
@@ -235,8 +251,9 @@ const Login = () => {
               </Link>
               <Link to="">
                 <button
-                  className={`btn-primaryy login_btn ${isInvestorSelected ? "investor" : ""
-                    } `}
+                  className={`btn-primaryy login_btn ${
+                    isInvestorSelected ? "investor" : ""
+                  } `}
                   onClick={() => setIsInvestorSelected(true)}
                 >
                   Investor
