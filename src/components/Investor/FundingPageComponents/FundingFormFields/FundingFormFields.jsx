@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { fundingQuestions } from "../../../../constants/Startups/FundingInfo";
 import { selectIsMobileView } from "../../../../Store/features/design/designSlice";
 import { useSelector } from "react-redux";
@@ -14,7 +14,7 @@ import "./FundingFormFields.scss";
 
 const MAXWORDCOUNT = 250;
 
-export default function FundingFormFields({ question, loading, answer }) {
+export default function FundingFormFields({ question }) {
   const isMobileView = useSelector(selectIsMobileView);
   // const fundingViaCapitalHubQuestions = useSelector(selectFundingQuestions);
   // const loggedInUserId = useSelector(selectLoggedInUserId);
@@ -22,6 +22,7 @@ export default function FundingFormFields({ question, loading, answer }) {
 
   // const [editMode, setEditMode] = useState(false);
   // const [saving, setSaving] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   const textRef = useRef();
 
   // useEffect(() => {
@@ -44,6 +45,10 @@ export default function FundingFormFields({ question, loading, answer }) {
     let words = value.split(" ");
     if (words.length > MAXWORDCOUNT) {
       textRef.current.value = words.slice(0, words.length - 1).join(" ");
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 3000);
     } else {
       return;
     }
@@ -96,12 +101,17 @@ export default function FundingFormFields({ question, loading, answer }) {
           id={question}
           rows={isMobileView ? 8 : 5}
           className="funding_textarea"
-          defaultValue={answer}
           onChange={handleInputChange}
           ref={textRef}
           style={{ resize: "none" }}
+          required
         ></textarea>
       </fieldset>
+      {showAlert && (
+        <div className="alert alert-danger py-2" role="alert">
+          Word limit exceeded! Please complete in 250 words or less.
+        </div>
+      )}
       {/* {(editMode || !answer) && (
         <button
           type="button"
