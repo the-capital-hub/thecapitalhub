@@ -24,6 +24,7 @@ function Notifications() {
   const [notifications, setNotifications] = useState([]);
   const loggedInUserId = useSelector(selectLoggedInUserId);
   const isInvestor = useSelector(selectIsInvestor);
+  // const isInvestor = loggedInUser.isInvestor === "true";
 
   useEffect(() => {
     document.title = "Notifications | The Capital Hub";
@@ -158,9 +159,7 @@ function Notifications() {
                           <div className="people_container d-flex flex-column flex-md-row justify-content-center align-items-center justify-content-md-between align-items-center border-bottom">
                             <div className="short_desc d-flex align-items-center w-100 my-3 mx-5 p-0">
                               <img
-                                src={
-                                  "https://plus.unsplash.com/premium_photo-1701095037761-d27cc0e89971?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                }
+                                src={sender?.profilePicture}
                                 className="people_img rounded-circle"
                                 alt="user Profile"
                                 width={50}
