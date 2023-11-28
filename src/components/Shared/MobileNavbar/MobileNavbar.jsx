@@ -33,13 +33,13 @@ export default function MobileNavbar({ isInvestor }) {
   return (
     <div className="mobile-bottom-toolbar container p-2 shadow d-flex gap-1 justify-content-center border-top  px-3 d-md-none">
       <div className="d-flex flex-column align-items-center mx-3">
-        <NavLink to="/investor/home">
+        <NavLink to={isInvestor ? "/investor/home" : "/home"}>
           <HiOutlineHome size={"22px"} />
         </NavLink>
         <span style={{ fontSize: "10px" }}>Home</span>
       </div>
       <div className="d-flex flex-column align-items-center mx-3">
-        <NavLink to="/investor/connection">
+        <NavLink to={isInvestor ? "/investor/connection" : "/connection"}>
           <FiUsers size={"22px"} />
         </NavLink>
         <span style={{ fontSize: "10px" }}>Connections</span>
@@ -83,12 +83,12 @@ export default function MobileNavbar({ isInvestor }) {
           <span
             class="position-absolute translate-middle rounded-circle text-white d-flex justify-content-center align-items-center"
             style={{
-              width: "22px",
-              height: "22px",
+              width: "20px",
+              height: "20px",
               backgroundColor: "red",
-              top: "0px",
+              top: "5px",
               right: "-10px",
-              fontSize: "16px",
+              fontSize: "10px",
             }}
           >
             {unreadNotifications}

@@ -1362,15 +1362,25 @@ export const rejectMeetingRequestAPI = async (meetingId, requestId) => {
   }
 };
 
-
 export const getUserAchievements = async () => {
   try {
-    const response = await axiosInstance.get(
-      `${API.getUserAchievements}`
-    );
+    const response = await axiosInstance.get(`${API.getUserAchievements}`);
     return response.data;
   } catch (error) {
     console.error("Error declining meeting:", error);
+    throw error;
+  }
+};
+
+export const submitFundingToMailAPI = async (fundingAnswers) => {
+  try {
+    const response = await axiosInstance.post(
+      `${API.submitFundingToMail}`,
+      fundingAnswers
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error submitting to mail:", error);
     throw error;
   }
 };

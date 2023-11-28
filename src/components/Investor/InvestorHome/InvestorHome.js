@@ -14,6 +14,7 @@ import CompanyDetailsCard from "../InvestorGlobalCards/CompanyDetails/CompanyDet
 import { useDispatch, useSelector } from "react-redux";
 import { getStartupByFounderId } from "../../../Service/user";
 import {
+  selectCompanyDataId,
   selectCompanyFounderId,
   setUserCompany,
 } from "../../../Store/features/user/userSlice";
@@ -37,6 +38,7 @@ const InvestorHome = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const loggedInUserId = useSelector((state) => state.user.loggedInUser._id);
   const companyFounderId = useSelector(selectCompanyFounderId);
+  const companyDataId = useSelector(selectCompanyDataId);
   const dispatch = useDispatch();
 
   // Update title
@@ -47,16 +49,16 @@ const InvestorHome = () => {
 
   // Fetch startup company data
   useEffect(() => {
-    getStartupByFounderId(loggedInUserId)
-      .then(({ data }) => {
-        dispatch(setUserCompany(data));
-      })
-      .catch((error) => {
-        console.error("Error fetching startup data:", error);
-      });
-  }, [loggedInUserId, dispatch]);
-
-  console.log("home was rendered");
+    if (!companyDataId) {
+      getStartupByFounderId(loggedInUserId)
+        .then(({ data }) => {
+          dispatch(setUserCompany(data));
+        })
+        .catch((error) => {
+          console.error("Error fetching startup data:", error);
+        });
+    }
+  }, [loggedInUserId, dispatch, companyDataId]);
 
   return (
     <MaxWidthWrapper>

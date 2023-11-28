@@ -1,4 +1,5 @@
 import { NotificationModel } from "../models/Notification.js";
+import { PostModel } from "../models/Post.js";
 
 export const addNotification = async (recipient, sender, type, post = null, connection = null, meetingId = null) => {
   try {
@@ -27,20 +28,40 @@ export const addNotification = async (recipient, sender, type, post = null, conn
 export const getNotificationsByUserId = async (userId) => {
   try {
     const notifications = await NotificationModel.find({ recipient: userId })
-      .populate("sender", "firstName lastName")
+      .populate({
+        path: "sender",
+        select: "firstName lastName profilePicture",
+      })
       .sort({ _id: -1 });
+
+    const filteredNotifications = await Promise.all(
+      notifications.map(async (notification) => {
+        if (notification.post) {
+          const postExists = await PostModel.exists({ _id: notification.post });
+          if (!postExists) {
+            return null;
+          }
+        }
+        return notification;
+      })
+    );
+
+    const validNotifications = filteredNotifications.filter((notification) => notification !== null);
+
     return {
       status: 200,
-      message: "Notification retrived",
-      data: notifications
-    }
+      message: "Notifications retrieved",
+      data: validNotifications,
+    };
   } catch (error) {
     return {
       status: 500,
-      message: "An error occured while getting the notifications",
-    }
+      message: "An error occurred while getting the notifications",
+    };
   }
-}
+};
+
+
 
 export const markMessageAsRead = async (messageId) => {
   try {

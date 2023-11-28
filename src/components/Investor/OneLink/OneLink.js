@@ -30,10 +30,16 @@ import {
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import TutorialTrigger from "../../Shared/TutorialTrigger/TutorialTrigger";
 import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
+import {
+  selectCompanyDataId,
+  selectLoggedInUserId,
+  selectUserCompanyData,
+} from "../../../Store/features/user/userSlice";
 
 const OneLink = () => {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const userId = loggedInUser._id;
+  const loggedInUserId = useSelector(selectLoggedInUserId);
+  const companyDataId = useSelector(selectCompanyDataId);
+  const userCompanyData = useSelector(selectUserCompanyData);
   const [isExitClicked, setIsExitClicked] = useState(false);
   const [company, setCompany] = useState([]);
   const dispatch = useDispatch();
@@ -46,12 +52,16 @@ const OneLink = () => {
 
   // Fetch data by userId
   useEffect(() => {
-    getStartupByFounderId(userId)
-      .then(({ data }) => {
-        setCompany(data);
-      })
-      .catch(() => setCompany([]));
-  }, [userId]);
+    if (!companyDataId) {
+      getStartupByFounderId(loggedInUserId)
+        .then(({ data }) => {
+          setCompany(data);
+        })
+        .catch(() => setCompany([]));
+    } else {
+      setCompany(userCompanyData);
+    }
+  }, [loggedInUserId, companyDataId, userCompanyData]);
 
   // HandleExitClick
   const handleExitClick = () => {

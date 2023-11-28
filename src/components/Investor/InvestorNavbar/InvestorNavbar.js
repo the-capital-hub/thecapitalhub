@@ -253,6 +253,113 @@ const InvestorNavbar = (props) => {
               )}
             </div>
 
+            {/* Search for mobile view start*/}
+            {mobileSearch && (
+              <div className="search_container_mobile rounded-4 shadow-sm border p-3 position-absolute d-flex flex-column">
+                <form
+                  onSubmit={searchSubmitHandler}
+                  className="searchbar-container "
+                >
+                  <input
+                    type="text"
+                    className="searchbar-input"
+                    placeholder="Search"
+                    value={searchInput}
+                    onChange={searchInputHandler}
+                    onFocus={() => setInputOnFocus(true)}
+                    onBlurCapture={(e) =>
+                      setTimeout(() => {
+                        searchInputBlurHandler(e);
+                      }, 500)
+                    }
+                  />
+                  <button
+                    type="submit"
+                    className="searchbar-button d-flex align-items-center justify-content-center"
+                  >
+                    <img src={searchIcon} alt="search" />
+                  </button>
+                </form>
+                {inputOnFocus && searchSuggestions && mobileSearch && (
+                  <div className="search_results py-4 px-2">
+                    {!loading ? (
+                      searchSuggestions && (
+                        <>
+                          {!searchSuggestions?.company?.length &&
+                            !searchSuggestions?.users?.length && (
+                              <h6 className="h6 text-center w-100 text-secondary">
+                                No Suggestions.
+                              </h6>
+                            )}
+                          {!!searchSuggestions?.users?.length && (
+                            <span className="">Users</span>
+                          )}
+                          {searchSuggestions?.users
+                            ?.slice(0, 5)
+                            .map(({ firstName, lastName, _id }) => (
+                              <span
+                                key={_id}
+                                className="single_result"
+                                onClick={() => navigate(`/user/${_id}`)}
+                              >
+                                {firstName} {lastName}
+                              </span>
+                            ))}
+                          {searchSuggestions?.users?.length > 5 && (
+                            <span className="w-100 d-flex justify-content-center">
+                              <button
+                                className="btn btn-xs btn-light"
+                                onClick={() => {
+                                  searchSubmitHandler();
+                                  searchInputBlurHandler();
+                                }}
+                              >
+                                Show more
+                              </button>
+                            </span>
+                          )}
+                          {!!searchSuggestions?.company?.length && (
+                            <span className="mt-2">Companies</span>
+                          )}
+                          {searchSuggestions?.company
+                            ?.slice(0, 5)
+                            .map(({ company, founderId }) => (
+                              <span className="single_result">
+                                <Link to={`/company-profile/${founderId}`}>
+                                  {company}
+                                </Link>
+                              </span>
+                            ))}
+                          {searchSuggestions?.company?.length > 5 && (
+                            <span className="w-100 d-flex justify-content-center">
+                              <button
+                                className="btn btn-xs btn-light"
+                                onClick={() => {
+                                  searchSubmitHandler();
+                                  searchInputBlurHandler();
+                                }}
+                              >
+                                Show more
+                              </button>
+                            </span>
+                          )}
+                        </>
+                      )
+                    ) : (
+                      <div class="d-flex justify-content-center">
+                        <div
+                          class="spinner-border text-secondary"
+                          role="status"
+                        >
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+
             <div className="icons-container">
               {/* Search for mobile view start*/}
               <div className="mobile-icon-wrapper position-relative ">
@@ -262,114 +369,7 @@ const InvestorNavbar = (props) => {
                 >
                   <img src={searchIconBlack} alt="search" />
                 </span>
-
-                {mobileSearch && (
-                  <div className="search_container rounded-4 shadow-sm border p-3 position-absolute d-flex flex-column">
-                    <form
-                      onSubmit={searchSubmitHandler}
-                      className="searchbar-container "
-                    >
-                      <input
-                        type="text"
-                        className="searchbar-input"
-                        placeholder="Search"
-                        value={searchInput}
-                        onChange={searchInputHandler}
-                        onFocus={() => setInputOnFocus(true)}
-                        onBlurCapture={(e) =>
-                          setTimeout(() => {
-                            searchInputBlurHandler(e);
-                          }, 500)
-                        }
-                      />
-                      <button
-                        type="submit"
-                        className="searchbar-button d-flex align-items-center justify-content-center"
-                      >
-                        <img src={searchIcon} alt="search" />
-                      </button>
-                    </form>
-                    {inputOnFocus && searchSuggestions && mobileSearch && (
-                      <div className="search_results py-4 px-2">
-                        {!loading ? (
-                          searchSuggestions && (
-                            <>
-                              {!searchSuggestions?.company?.length &&
-                                !searchSuggestions?.users?.length && (
-                                  <h6 className="h6 text-center w-100 text-secondary">
-                                    No Suggestions.
-                                  </h6>
-                                )}
-                              {!!searchSuggestions?.users?.length && (
-                                <span className="">Users</span>
-                              )}
-                              {searchSuggestions?.users
-                                ?.slice(0, 5)
-                                .map(({ firstName, lastName, _id }) => (
-                                  <span
-                                    key={_id}
-                                    className="single_result"
-                                    onClick={() => navigate(`/user/${_id}`)}
-                                  >
-                                    {firstName} {lastName}
-                                  </span>
-                                ))}
-                              {searchSuggestions?.users?.length > 5 && (
-                                <span className="w-100 d-flex justify-content-center">
-                                  <button
-                                    className="btn btn-xs btn-light"
-                                    onClick={() => {
-                                      searchSubmitHandler();
-                                      searchInputBlurHandler();
-                                    }}
-                                  >
-                                    Show more
-                                  </button>
-                                </span>
-                              )}
-                              {!!searchSuggestions?.company?.length && (
-                                <span className="mt-2">Companies</span>
-                              )}
-                              {searchSuggestions?.company
-                                ?.slice(0, 5)
-                                .map(({ company, founderId }) => (
-                                  <span className="single_result">
-                                    <Link to={`/company-profile/${founderId}`}>
-                                      {company}
-                                    </Link>
-                                  </span>
-                                ))}
-                              {searchSuggestions?.company?.length > 5 && (
-                                <span className="w-100 d-flex justify-content-center">
-                                  <button
-                                    className="btn btn-xs btn-light"
-                                    onClick={() => {
-                                      searchSubmitHandler();
-                                      searchInputBlurHandler();
-                                    }}
-                                  >
-                                    Show more
-                                  </button>
-                                </span>
-                              )}
-                            </>
-                          )
-                        ) : (
-                          <div class="d-flex justify-content-center">
-                            <div
-                              class="spinner-border text-secondary"
-                              role="status"
-                            >
-                              <span class="visually-hidden">Loading...</span>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                )}
               </div>
-              {/* Search for mobile view start*/}
 
               {/* Onboarding Tutorial */}
               {isMobileView ? "" : <OnboardingSwitch />}
