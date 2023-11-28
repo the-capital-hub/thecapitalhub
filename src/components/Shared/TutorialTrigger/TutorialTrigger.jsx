@@ -9,7 +9,12 @@ import OnBoardUser from "../../OnBoardUser/OnBoardUser";
 import "./TutorialTrigger.scss";
 import { selectIsInvestor } from "../../../Store/features/user/userSlice";
 
-export default function TutorialTrigger({ steps, fromUp, isChatPage = false }) {
+export default function TutorialTrigger({
+  steps,
+  fromUp,
+  isChatPage = false,
+  className,
+}) {
   const showOnboarding = useSelector(selectShowOnboarding);
   const isMobileView = useSelector(selectIsMobileView);
   const isInvestor = useSelector(selectIsInvestor);
@@ -44,7 +49,7 @@ export default function TutorialTrigger({ steps, fromUp, isChatPage = false }) {
     <>
       {showTrigger && !run && !isMobileView && (
         <div
-          className={`tutorial_trigger w-100 rounded-4 bg-white py-4 shadow-sm ${
+          className={`tutorial_trigger w-100 rounded-4 bg-white py-4 shadow-sm ${className} ${
             isInvestor && !isChatPage ? "border" : ""
           } ${
             fromUp ? "slideDown position-absolute top-0 start-0 z-3" : "slideUp"

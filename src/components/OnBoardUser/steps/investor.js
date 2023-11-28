@@ -89,8 +89,7 @@ const homePage = [
   {
     target: "#sidebar_myStartups",
     title: "My Startups",
-    content:
-      "Every document related to your business can be uploaded here to reflect on your OneLink",
+    content: "Add or Edit your Investments and Interests from here.",
     placement: "auto",
     disableBeacon: true,
   },
@@ -98,7 +97,7 @@ const homePage = [
     target: "#sidebar_mySchedule",
     title: "My Schedule",
     content:
-      "Every document related to your business can be uploaded here to reflect on your OneLink",
+      "Manage meetings with Fund Seekers or Interested individuals from here.",
     placement: "auto",
     disableBeacon: true,
   },
@@ -119,8 +118,42 @@ const homePage = [
   },
 ];
 
+const myStartupsPage = [
+  {
+    target: "#myInvestmentsCards",
+    title: "My Investments",
+    content: "Information about your Investments can be seen here.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: "#editInvestments",
+    title: "Add New / Edit Investment",
+    content:
+      "Add a new Investment or Edit information of an existing Investment from here.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: "#myInterestsCards",
+    title: "My Interests",
+    content: "Information about your Interests can be seen here.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: "#editInterests",
+    title: "Add New / Edit Interest",
+    content:
+      "Add a new Interest or Edit information of an existing Interest from here.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+];
+
 // Keep this in the bottom
 export const investorOnboardingSteps = {
   explorePage,
   homePage,
+  myStartupsPage,
 };
