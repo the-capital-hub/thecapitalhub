@@ -88,7 +88,7 @@ export default function MobileNavbar({ isInvestor }) {
               backgroundColor: "red",
               top: "5px",
               right: "-10px",
-              fontSize: "12px",
+              fontSize: "10px",
             }}
           >
             {unreadNotifications}
