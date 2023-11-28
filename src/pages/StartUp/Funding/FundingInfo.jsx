@@ -55,10 +55,11 @@ export default function FundingInfo() {
                 </button>
               </div>
               {/* Form */}
-              {!showForm && fundingViaCapitalHubQuestions && (
+              {!showForm && fundingViaCapitalHubQuestions ? (
                 <FundingPreviousData setShowForm={setShowForm} />
+              ) : (
+                <FundingForm setShowForm={setShowForm} />
               )}
-              {showForm && <FundingForm setShowForm={setShowForm} />}
             </div>
           </div>
           {/* Right Content */}
