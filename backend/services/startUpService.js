@@ -10,12 +10,12 @@ const adminMail = "learn.capitalhub@gmail.com";
 export const createStartup = async (startUpData) => {
   try {
     if (startUpData?.logo) {
-      const { url } = await cloudinary.uploader.upload(startUpData.logo, {
+      const { secure_url } = await cloudinary.uploader.upload(startUpData.logo, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/users/profilePictures`,
         format: "webp",
         unique_filename: true,
       });
-      startUpData.logo = url;
+      startUpData.logo = secure_url;
     }
     let existingCompany = await StartUpModel.findOne({
       founderId: startUpData.founderId,
@@ -44,42 +44,42 @@ export const createStartup = async (startUpData) => {
       startUp: newStartUp._id,
       gender: startUpData.gender,
     });
-    const emailMessage = `
-        A new user has requested for an account:
+    // const emailMessage = `
+    //     A new user has requested for an account:
         
-        User Details:
-        User ID: ${user._id}
-        Name: ${user.firstName} ${user.lastName}
-        Email: ${user.email}
-        Mobile: ${user.phoneNumber}
+    //     User Details:
+    //     User ID: ${user._id}
+    //     Name: ${user.firstName} ${user.lastName}
+    //     Email: ${user.email}
+    //     Mobile: ${user.phoneNumber}
 
-        Startup Details:
-        Company Name: ${newStartUp.company}
-        Sector: ${newStartUp.sector}
-        Funding Ask: ${newStartUp.fundingAsk}
-        Previous Funding: ${newStartUp.preFundingAsk}
-        Number of Funding Rounds: ${newStartUp.numberOfFundingRounds}
-      `;
-    const subject = "New Account Request";
-    const response = await sendMail(
-      user.firstName,
-      adminMail,
-      user.email,
-      subject,
-      emailMessage
-    )
-    if (response.status === 200) {
+    //     Startup Details:
+    //     Company Name: ${newStartUp.company}
+    //     Sector: ${newStartUp.sector}
+    //     Funding Ask: ${newStartUp.fundingAsk}
+    //     Previous Funding: ${newStartUp.preFundingAsk}
+    //     Number of Funding Rounds: ${newStartUp.numberOfFundingRounds}
+    //   `;
+    // const subject = "New Account Request";
+    // const response = await sendMail(
+    //   user.firstName,
+    //   adminMail,
+    //   user.email,
+    //   subject,
+    //   emailMessage
+    // )
+    // if (response.status === 200) {
       return {
         status: 200,
         message: "Startup Added",
         data: newStartUp,
       };
-    } else {
-      return {
-        status: 500,
-        message: "Error while sending mail",
-      };
-    }
+    // } else {
+    //   return {
+    //     status: 500,
+    //     message: "Error while sending mail",
+    //   };
+    // }
   } catch (error) {
     console.error("Error creating company:", error);
     return {

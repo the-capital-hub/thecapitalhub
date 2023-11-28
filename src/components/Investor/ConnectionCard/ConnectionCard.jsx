@@ -4,10 +4,11 @@ import { getUserConnections } from "../../../Service/user";
 import { useNavigate } from "react-router-dom";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import { useSelector } from "react-redux";
+import { selectLoggedInUserId } from "../../../Store/features/user/userSlice";
 
-function ConnectionCard() {
+function ConnectionCard({ userIdData }) {
   // Fetch from store
-  const userId = useSelector((state) => state.user.loggedInUser._id);
+  const userId = useSelector(selectLoggedInUserId);
 
   const [connections, setConnections] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -15,7 +16,7 @@ function ConnectionCard() {
 
   useEffect(() => {
     setLoading(true);
-    getUserConnections(userId)
+    getUserConnections(userId || userIdData)
       .then((data) => {
         setConnections(data.data);
         setLoading(false);
@@ -24,7 +25,7 @@ function ConnectionCard() {
         console.log(err);
         setLoading(false);
       });
-  }, [userId]);
+  }, [userId, userIdData]);
 
   return (
     <div className="ConnectionCard_container m-3 pb-2 d-flex flex-md-row justify-content-start gap-4">

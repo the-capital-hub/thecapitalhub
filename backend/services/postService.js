@@ -6,32 +6,32 @@ import { addNotification, deleteNotification } from "./notificationService.js";
 export const createNewPost = async (data) => {
   try {
     if (data?.image) {
-      const { url } = await cloudinary.uploader.upload(data.image, {
+      const { secure_url } = await cloudinary.uploader.upload(data.image, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/posts/images`,
         format: "webp",
         unique_filename: true,
       });
-      data.image = url;
+      data.image = secure_url;
     }
     if (data?.images) {
       const uploadedImages = await Promise.all(data.images.map(async (image) => {
-        const { url } = await cloudinary.uploader.upload(image, {
+        const { secure_url } = await cloudinary.uploader.upload(image, {
           folder: `${process.env.CLOUDIANRY_FOLDER}/posts/images`,
           format: "webp",
           unique_filename: true,
         });
-        return url;
+        return secure_url;
       }));
       data.images = uploadedImages;
     }
     if (data?.video) {
-      const { url } = await cloudinary.uploader.upload(data.video, {
+      const { secure_url } = await cloudinary.uploader.upload(data.video, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/posts/videos`,
         resource_type: "video",
         // format: "webm",
         unique_filename: true,
       });
-      data.video = url;
+      data.video = secure_url;
     }
     if (data.resharedPostId) {
       const sharedPost = await PostModel.findByIdAndUpdate(data.resharedPostId, {

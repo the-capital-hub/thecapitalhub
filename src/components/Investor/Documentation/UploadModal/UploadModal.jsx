@@ -10,7 +10,7 @@ import { getFoldersApi } from "../../../../Service/user";
 
 const baseUrl = environment.baseUrl;
 
-const UploadModal = ({ onCancel, fetchFolder }) => {
+const UploadModal = ({ onCancel, fetchFolder, notify }) => {
   // Fetch loggedInUser from global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
@@ -119,7 +119,11 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
                 // If there are more files to upload, show progress for the next file
                 setUploadProgress(0);
               }
+              if (response.data.isFirst) {
+                notify();
+              }
             }
+
           })
           .catch((error) => {
             console.error("Error uploading file:", error);
@@ -255,7 +259,7 @@ const UploadModal = ({ onCancel, fetchFolder }) => {
           )}
         </div>
       </div>
-      {}
+      { }
       {showPopUp && (
         <AfterSuccessPopUp savedFile={true} onClose={handleClosePopup} />
       )}

@@ -1,0 +1,8 @@
+{
+  "appId": "com.thecapitalhub.app",
+  "appName": "The Capital Hub",
+  "webDir": "build",
+  "server": {
+    "androidScheme": "https"
+  }
+}

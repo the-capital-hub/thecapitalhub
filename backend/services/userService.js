@@ -82,12 +82,12 @@ export const getUserById = async (userId) => {
 export const updateUserData = async ({ userId, newData }) => {
   try {
     if (newData?.profilePicture) {
-      const { url } = await cloudinary.uploader.upload(newData.profilePicture, {
+      const { secure_url } = await cloudinary.uploader.upload(newData.profilePicture, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
         format: "webp",
         unique_filename: true,
       });
-      newData.profilePicture = url;
+      newData.profilePicture = secure_url;
     }
     const data = await UserModel.findByIdAndUpdate(
       userId,
@@ -338,12 +338,12 @@ export const addEducation = async (userId, educationData) => {
       };
     }
     if (educationData?.logo) {
-      const { url } = await cloudinary.uploader.upload(educationData.logo, {
+      const { secure_url } = await cloudinary.uploader.upload(educationData.logo, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
         format: "webp",
         unique_filename: true,
       });
-      educationData.logo = url;
+      educationData.logo = secure_url;
     }
     user.recentEducation.push(educationData);
     await user.save();
@@ -372,12 +372,12 @@ export const addExperience = async (userId, experienceData) => {
       };
     }
     if (experienceData?.logo) {
-      const { url } = await cloudinary.uploader.upload(experienceData.logo, {
+      const { secure_url } = await cloudinary.uploader.upload(experienceData.logo, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
         format: "webp",
         unique_filename: true,
       });
-      experienceData.logo = url;
+      experienceData.logo = secure_url;
     }
     user.recentExperience.push(experienceData);
     await user.save();
@@ -408,10 +408,20 @@ export const addStartupToUser = async (userId, startUpId) => {
         message: "User not found.",
       };
     }
+
+    let isFirst = false;
+    const achievementId = "6564687349186bca517cd0cd";
+    if (!user.achievements.includes(achievementId)) {
+      user.achievements.push(achievementId);
+      await user.save();
+      isFirst = true;
+    }
+
     return {
       status: 200,
       message: "Startup added to user successfully.",
       data: user,
+      isFirst,
     };
   } catch (error) {
     console.error("Error adding startups to user:", error);
@@ -762,12 +772,12 @@ export const updateEducation = async (userId, educationId, updatedData) => {
       };
     }
     if (updatedData?.logo) {
-      const { url } = await cloudinary.uploader.upload(updatedData.logo, {
+      const { secure_url } = await cloudinary.uploader.upload(updatedData.logo, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
         format: "webp",
         unique_filename: true,
       });
-      updatedData.logo = url;
+      updatedData.logo = secure_url;
     }
 
     education.set(updatedData);
@@ -833,12 +843,12 @@ export const updateExperience = async (userId, experienceId, updatedData) => {
       };
     }
     if (updatedData?.logo) {
-      const { url } = await cloudinary.uploader.upload(updatedData.logo, {
+      const { secure_url } = await cloudinary.uploader.upload(updatedData.logo, {
         folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
         format: "webp",
         unique_filename: true,
       });
-      updatedData.logo = url;
+      updatedData.logo = secure_url;
     }
 
     experience.set(updatedData);

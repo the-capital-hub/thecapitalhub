@@ -7,10 +7,11 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
-  getMessageByChatId,
+  // getMessageByChatId,
   getUnreadMessageCountInCommunities,
   getLastMessage,
 } from "../../../Service/user";
+import { selectLoggedInUserId } from "../../../Store/features/user/userSlice";
 
 export default function CommunityCard({
   community,
@@ -18,10 +19,10 @@ export default function CommunityCard({
   sendMessage,
   isRead,
 }) {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const loggedInUserId = useSelector(selectLoggedInUserId);
 
   const dispatch = useDispatch();
-  console.log(community);
+  // console.log(community);
   // Handle community click
   function handleCommunityClick(communityId) {
     dispatch(setChatId(communityId));
@@ -77,18 +78,18 @@ export default function CommunityCard({
         console.error("Error-->", error);
       });
 
-    getUnreadMessageCountInCommunities(community._id, loggedInUser._id)
+    getUnreadMessageCountInCommunities(community._id, loggedInUserId)
       .then((res) => {
         setUnreadMessageCounts(res.data);
       })
       .catch((error) => {
         console.error("Error-->", error);
       });
-  }, [community._id, sendMessage, recieveMessage, isRead, loggedInUser._id]);
+  }, [community._id, sendMessage, recieveMessage, isRead, loggedInUserId]);
 
   const messageTime = formatTimestamp(dates[community._id]);
   const inputString = latestMessages[community._id];
-  console.log(latestMessages);
+  // console.log(latestMessages);
   const numberOfCharacters = 13;
   let latestMessage;
   if (inputString?.length > numberOfCharacters) {
@@ -125,7 +126,7 @@ export default function CommunityCard({
           />
         )}
       </span>
-      <div className="d-flex justify-content-between w-100" >
+      <div className="d-flex justify-content-between w-100">
         <div className="d-flex flex-column justify-content-between gap-1">
           <h5
             className="m-0 text-capitalize text__clip--15"

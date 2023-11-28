@@ -78,7 +78,6 @@ const InvestorHome = () => {
 
               <div className="box personal_information">
                 <div className="personal_information_header connections-container">
-                  <h2 className="typography">Connections</h2>
                   {/* <div className="milestone_see_more">
                     <Link to={""}>See more</Link>
                   </div> */}
@@ -87,7 +86,6 @@ const InvestorHome = () => {
                   <ConnectionCard />
                 </div>
               </div>
-
 
               {/* achievements */}
               <div className="box personal_information">
