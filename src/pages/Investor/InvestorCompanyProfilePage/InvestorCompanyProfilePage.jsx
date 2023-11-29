@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import CompanyProfile from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfile";
-import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
+// import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
 import { useDispatch, useSelector } from "react-redux";
 import { getOnePager, getInvestorFromOneLinkAPI } from "../../../Service/user";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
-import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
+// import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import { useParams } from "react-router-dom";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
@@ -24,7 +24,7 @@ export default function InvestorCompanyProfilePage() {
   useEffect(() => {
     document.title = "Company Profile | Investors - The Capital Hub";
     dispatch(setPageTitle("Company Profile"));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (isInvestor === "1") {
