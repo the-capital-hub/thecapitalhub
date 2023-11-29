@@ -22,22 +22,22 @@
       // margin-top: 30px;
       border: none;
       border-radius: 8px;
-  
+
       font-size: 16px;
       line-height: 16px;
       text-align: center;
       padding: 0.75em 2.5em;
-  
+
       &:active {
         transition: transform 0.15s ease-in-out;
         transform: scale(0.95);
       }
-  
+
       &.startup {
         background-color: #fd5901;
         color: white;
       }
-  
+
       &.investor {
         background-color: #d3f36b;
         color: black;
@@ -51,7 +51,7 @@
 
     display: flex;
     flex-direction: column;
-    gap: 3em;
+    gap: 2rem;
   }
 
   .right__content {

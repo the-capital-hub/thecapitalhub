@@ -21,6 +21,8 @@ import {
 } from "../../../Store/features/user/userSlice";
 import { getInvestorById } from "../../../Service/user";
 import AchievementsComponent from "../../../components/NewInvestor/ProfileComponents/AchievementsComponent/AchievementsComponent";
+import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
+import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
 
 function Profile() {
   // Fetch loggedInUser from global state
@@ -52,6 +54,12 @@ function Profile() {
         <div className="two_col_wrapper">
           <div className="main_content">
             {/* <SmallProfileCard /> */}
+
+            {/* Onboarding popup */}
+            <TutorialTrigger
+              steps={investorOnboardingSteps.profilePage}
+              className={""}
+            />
 
             {/* Professional Info */}
             <ProfessionalInfo theme={"investor"} />

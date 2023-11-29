@@ -62,7 +62,7 @@ export default function TutorialTrigger({
             <div className="d-flex flex-wrap gap-2 align-items-center">
               <button
                 type="button"
-                className="btn btn-primary"
+                className={`btn ${isInvestor ? "btn-investor" : "btn-startup"}`}
                 onClick={handleStartTour}
               >
                 Start Tour
