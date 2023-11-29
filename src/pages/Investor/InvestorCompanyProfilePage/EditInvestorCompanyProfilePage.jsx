@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./EditInvestorCompanyProfilePage.scss";
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
-import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
-import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
+// import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
+// import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import CompanyProfileForm from "../../../components/Investor/CompanyProfilePageComponents/CompanyProfileForm";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
-import { CiEdit, CiSaveUp2 } from "react-icons/ci";
-import RaghuImage from "../../../Images/aboutUs/Raghu.jpeg";
+// import { Link, useLocation } from "react-router-dom";
+// import { CiEdit, CiSaveUp2 } from "react-icons/ci";
+// import RaghuImage from "../../../Images/aboutUs/Raghu.jpeg";
 import CoinIcon from "../../../Images/investorView/Rectangle.png";
 import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
 import { getInvestorById, postInvestorData } from "../../../Service/user";
@@ -21,15 +21,21 @@ import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import CompanyDescription from "../../../components/Investor/CompanyProfilePageComponents/CompanyDescription/CompanyDescription";
 import ErrorPopUp from "../../../components/PopUp/ErrorPopUp/ErrorPopUp";
 import InvestorAfterSuccessPopUp from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
-import { setUserCompany } from "../../../Store/features/user/userSlice";
+import {
+  selectLoggedInUserId,
+  selectUserCompanyData,
+  selectUserInvestor,
+  setUserCompany,
+} from "../../../Store/features/user/userSlice";
 import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
 import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
 
 export default function EditInvestorCompanyProfilePage() {
+  const loggedInUserId = useSelector(selectLoggedInUserId);
+  const userInvestor = useSelector(selectUserInvestor);
+  const userCompanyData = useSelector(selectUserCompanyData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const [colorCardData, setColorCardData] = useState(null);
 
@@ -47,26 +53,39 @@ export default function EditInvestorCompanyProfilePage() {
   useEffect(() => {
     document.title = "Edit Company Profile | Investors - The Capital Hub";
     dispatch(setPageTitle("Edit Company"));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    getInvestorById(loggedInUser.investor)
-      .then(({ data }) => {
-        setCompanyData(data);
-        setCompanyDescription(data.description);
-        setColorCardData({
-          averageInvestment: data.colorCard.averageInvestment,
-          total_investment: data.colorCard.total_investment,
-          no_of_investments: data.colorCard.no_of_investments,
-          minimumTicketsSize: data.colorCard.minimumTicketsSize,
-          maximumTicketsSize: data.colorCard.maximumTicketsSize,
-          seedRound: data.colorCard.seedRound,
+    if (!userCompanyData) {
+      getInvestorById(userInvestor)
+        .then(({ data }) => {
+          setCompanyData(data);
+          setCompanyDescription(data.description);
+          setColorCardData({
+            averageInvestment: data.colorCard.averageInvestment,
+            total_investment: data.colorCard.total_investment,
+            no_of_investments: data.colorCard.no_of_investments,
+            minimumTicketsSize: data.colorCard.minimumTicketsSize,
+            maximumTicketsSize: data.colorCard.maximumTicketsSize,
+            seedRound: data.colorCard.seedRound,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      })
-      .catch((error) => {
-        console.log(error);
+    } else {
+      setCompanyData(userCompanyData);
+      setCompanyDescription(userCompanyData.description);
+      setColorCardData({
+        averageInvestment: userCompanyData.colorCard.averageInvestment,
+        total_investment: userCompanyData.colorCard.total_investment,
+        no_of_investments: userCompanyData.colorCard.no_of_investments,
+        minimumTicketsSize: userCompanyData.colorCard.minimumTicketsSize,
+        maximumTicketsSize: userCompanyData.colorCard.maximumTicketsSize,
+        seedRound: userCompanyData.colorCard.seedRound,
       });
-  }, [isSaveAll]);
+    }
+  }, [isSaveAll, userInvestor, userCompanyData]);
 
   // handleAmountChange
   const handleAmountChange = (currentfield, updatedAmount) => {
@@ -94,7 +113,7 @@ export default function EditInvestorCompanyProfilePage() {
     setLoading(true);
     const companyData = {
       description: companyDescription,
-      founderId: loggedInUser._id,
+      founderId: loggedInUserId,
     };
 
     try {

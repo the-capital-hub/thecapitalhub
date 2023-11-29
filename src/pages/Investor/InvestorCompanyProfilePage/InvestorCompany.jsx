@@ -18,6 +18,7 @@ import {
   loginSuccess,
   selectIsInvestor,
   selectLoggedInUserId,
+  selectUserCompanyData,
   selectUserInvestor,
 } from "../../../Store/features/user/userSlice";
 import InvestorAfterSuccessPopUp from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
@@ -31,6 +32,7 @@ export default function CompanyProfilePage() {
   const loggedInUserId = useSelector(selectLoggedInUserId);
   const userInvestor = useSelector(selectUserInvestor);
   const isInvestor = useSelector(selectIsInvestor);
+  const userCompanyData = useSelector(selectUserCompanyData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -56,8 +58,7 @@ export default function CompanyProfilePage() {
   }, [dispatch]);
 
   useEffect(() => {
-    setLoading(true);
-    if (isInvestor) {
+    if (isInvestor && !userCompanyData) {
       setLoading(true);
       getInvestorById(userInvestor)
         .then(({ data }) => {
@@ -71,8 +72,10 @@ export default function CompanyProfilePage() {
         .finally(() => {
           setLoading(false);
         });
+    } else {
+      setCompanyData(userCompanyData);
     }
-  }, [isInvestor, userInvestor]);
+  }, [isInvestor, userInvestor, userCompanyData]);
 
   const handleSearchInputChange = (e) => {
     const newValue = e.target.value;

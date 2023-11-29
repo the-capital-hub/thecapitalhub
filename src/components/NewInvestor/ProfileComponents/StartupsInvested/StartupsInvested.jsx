@@ -25,12 +25,16 @@ export default function StartupsInvested() {
     useState(userStartupsInvested);
 
   useEffect(() => {
-    getInvestorById(userInvestor)
-      .then(({ data }) => {
-        setInvestedStartups(data.startupsInvested);
-      })
-      .catch(() => setInvestedStartups([]));
-  }, [userInvestor]);
+    if (!userStartupsInvested) {
+      getInvestorById(userInvestor)
+        .then(({ data }) => {
+          setInvestedStartups(data.startupsInvested);
+        })
+        .catch(() => setInvestedStartups([]));
+    } else {
+      setInvestedStartups(userStartupsInvested);
+    }
+  }, [userInvestor, userStartupsInvested]);
 
   return (
     <>

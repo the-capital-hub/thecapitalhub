@@ -1,9 +1,9 @@
 import "./Explore.scss";
 import { useState, useEffect } from "react";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
-import Company from "../../../components/NewInvestor/Company/Company";
+// import Company from "../../../components/NewInvestor/Company/Company";
 import FilterBySelect from "../../../components/NewInvestor/FilterBySelect/FilterBySelect";
-import CompanyProfile from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfile";
+// import CompanyProfile from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfile";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import CompanyProfileList from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfileList";
 import { useDispatch } from "react-redux";
@@ -14,7 +14,7 @@ import {
   fetchExploreFiltersAPI,
 } from "../../../Service/user";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
-import OnBoardUser from "../../../components/OnBoardUser/OnBoardUser";
+// import OnBoardUser from "../../../components/OnBoardUser/OnBoardUser";
 import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
 import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
 
