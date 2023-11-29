@@ -15,6 +15,7 @@ import InvestmentPhilosophy from "../../../components/NewInvestor/ProfileCompone
 import MissingDetails from "../../../components/Investor/InvestorHome/Components/Questionnaire/MissingDetails";
 import UserBio from "../../../components/Investor/InvestorHome/Components/UserBio/UserBio";
 import {
+  selectCompanyDataId,
   selectIsInvestor,
   selectUserInvestor,
   setUserCompany,
@@ -29,6 +30,7 @@ function Profile() {
   // const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const isInvestor = useSelector(selectIsInvestor);
   const userInvestor = useSelector(selectUserInvestor);
+  const companyDataId = useSelector(selectCompanyDataId);
   const dispatch = useDispatch();
 
   // Update page title
@@ -37,7 +39,7 @@ function Profile() {
     dispatch(setPageTitle("Profile"));
 
     // Fetch company data
-    if (isInvestor) {
+    if (isInvestor && !companyDataId) {
       getInvestorById(userInvestor)
         .then(({ data }) => {
           dispatch(setUserCompany(data));
@@ -46,7 +48,7 @@ function Profile() {
           console.log(error);
         });
     }
-  }, [dispatch, isInvestor, userInvestor]);
+  }, [dispatch, isInvestor, userInvestor, companyDataId]);
 
   return (
     <MaxWidthWrapper>

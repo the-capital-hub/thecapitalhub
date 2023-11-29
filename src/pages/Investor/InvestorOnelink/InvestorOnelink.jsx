@@ -28,9 +28,14 @@ import {
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
 import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
+import {
+  selectUserCompanyData,
+  selectUserInvestor,
+} from "../../../Store/features/user/userSlice";
 
 export default function InvestorOnelink() {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const userInvestor = useSelector(selectUserInvestor);
+  const userCompanyData = useSelector(selectUserCompanyData);
   //   console.log(loggedInUser);
   // const userId = loggedInUser._id;
   const [isExitClicked, setIsExitClicked] = useState(false);
@@ -41,16 +46,20 @@ export default function InvestorOnelink() {
   useEffect(() => {
     document.title = "One Link | The Capital Hub";
     dispatch(setPageTitle("One Link"));
-  }, []);
+  }, [dispatch]);
 
   // Fetch data by userId
   useEffect(() => {
-    getInvestorById(loggedInUser.investor)
-      .then(({ data }) => {
-        setCompany(data);
-      })
-      .catch(() => setCompany([]));
-  }, [loggedInUser]);
+    if (!userCompanyData) {
+      getInvestorById(userInvestor)
+        .then(({ data }) => {
+          setCompany(data);
+        })
+        .catch(() => setCompany([]));
+    } else {
+      setCompany(userCompanyData);
+    }
+  }, [userInvestor, userCompanyData]);
 
   // HandleExitClick
   const handleExitClick = () => {

@@ -9,24 +9,31 @@ import {
 import SectorCard from "../SectorCard";
 import AddEditModal from "../AddEditModal";
 import "./SectorsInterested.scss";
-import { selectUserSectorInterested } from "../../../../Store/features/user/userSlice";
+import {
+  selectUserInvestor,
+  selectUserSectorInterested,
+} from "../../../../Store/features/user/userSlice";
 import { getInvestorById } from "../../../../Service/user";
 
 export default function SectorsInterested() {
   // Fetch loggedInUser from global state
   const userSectorInterested = useSelector(selectUserSectorInterested);
+  const userInvestor = useSelector(selectUserInvestor);
 
   // States for sectors Interested
   const [sectorsData, setSectorsData] = useState(userSectorInterested);
 
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
   useEffect(() => {
-    getInvestorById(loggedInUser.investor)
-      .then(({ data }) => {
-        setSectorsData(data.sectorInterested);
-      })
-      .catch(() => setSectorsData([]));
-  }, [loggedInUser.investor]);
+    if (!userSectorInterested) {
+      getInvestorById(userInvestor)
+        .then(({ data }) => {
+          setSectorsData(data.sectorInterested);
+        })
+        .catch(() => setSectorsData([]));
+    } else {
+      setSectorsData(userSectorInterested);
+    }
+  }, [userInvestor, userSectorInterested]);
 
   return (
     <>
