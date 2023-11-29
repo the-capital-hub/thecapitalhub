@@ -238,20 +238,20 @@ const Login = () => {
 
           <div className="login_buttons_row d-flex flex-column align-items-center gap-3">
             <h1 className="mt-5">Login</h1>
-            <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-4 gap-sm-5">
+            <div className="d-flex flex-row justify-content-between align-items-center gap-4 gap-sm-5">
               <Link to="">
                 <button
-                  className={`btn-primaryy login_btn ${
+                  className={`login_btn ${
                     !isInvestorSelected ? "startup" : ""
                   } `}
                   onClick={() => setIsInvestorSelected(false)}
                 >
-                  StartUp
+                  Start Up
                 </button>
               </Link>
               <Link to="">
                 <button
-                  className={`btn-primaryy login_btn ${
+                  className={`login_btn ${
                     isInvestorSelected ? "investor" : ""
                   } `}
                   onClick={() => setIsInvestorSelected(true)}
@@ -272,13 +272,13 @@ const Login = () => {
             </Link>
           </h3>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
             <div className="row">
               <div className="col-md-12 col input-container">
                 <label htmlFor="mobile">Mobile Number</label>
                 <PhoneInput
                   placeholder="Mobile Number"
-                  className="form-control plato_form_control"
+                  className="form-control plato_form_control rounded-3"
                   defaultCountry="IN"
                   countryCallingCodeEditable={false}
                   initialValueFormat="national"
@@ -296,7 +296,7 @@ const Login = () => {
                   type="password"
                   id="password"
                   name="password"
-                  className="form-control"
+                  className="form-control rounded-3"
                   required
                   placeholder="Password"
                   onChange={(e) => handleInputChange(e, "password")}

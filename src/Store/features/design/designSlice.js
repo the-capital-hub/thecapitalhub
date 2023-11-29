@@ -9,8 +9,7 @@ const initialState = {
   showCreatePostModal: false,
   showInvestorCreatePostModal: false,
   showNotificationModal: false,
-
-
+  isMobileApp: false,
 };
 
 export const designSlice = createSlice({
@@ -35,21 +34,27 @@ export const designSlice = createSlice({
     toggleNotificationModal: (state) => {
       state.showNotificationModal = !state.showNotificationModal;
     },
+    setIsMobileApp: (state, action) => {
+      state.isMobileApp = action.payload;
+    },
   },
 });
 
 // Selectors
 export const selectShowOnboarding = (state) => state.design.showOnboarding;
 export const selectIsMobileView = (state) => state.design.isMobileView;
-export const selectCreatePostModal = (state) => state.design.showCreatePostModal;
-export const selectInvestorCreatePostModal = (state) => state.design.showInvestorCreatePostModal;
-export const selectNotificationtModal = (state) => state.design.showNotificationModal;
-
-
+export const selectCreatePostModal = (state) =>
+  state.design.showCreatePostModal;
+export const selectInvestorCreatePostModal = (state) =>
+  state.design.showInvestorCreatePostModal;
+export const selectNotificationtModal = (state) =>
+  state.design.showNotificationModal;
+export const selectIsMobileApp = (state) => state.design.isMobileApp;
 
 export const {
   setPageTitle,
   setIsMobileView,
+  setIsMobileApp,
   setShowOnboarding,
   toggleCreatePostModal,
   toggleinvestorCreatePostModal,
