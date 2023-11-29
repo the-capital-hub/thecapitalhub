@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./login.scss";
 import RegisterIcon from "../../Images/Group 21.svg";
-// import GIcon from "../../Images/Group 22.svg";
+import GIcon from "../../Images/Group 22.svg";
 // import FIcon from "../../Images/Group 23.svg";
 // import AIcon from "../../Images/Group 24.svg";
 import PhoneInput from "react-phone-number-input";
@@ -21,12 +21,25 @@ import backArrow from "../../Images/left-arrow.png";
 import ResetPasswordPopUp from "../PopUp/RequestPasswordPopUp/RequestPasswordPopUp";
 // import { Navigate } from "react-router-dom";
 import SpinnerBS from "../Shared/Spinner/SpinnerBS";
+import { selectIsMobileApp } from "../../Store/features/design/designSlice";
+import { GoogleAuth } from "@codetrix-studio/capacitor-google-auth";
 
 const Login = () => {
   // const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
+  const isMobileApp = useSelector(selectIsMobileApp);
+
+  useEffect(() => {
+    GoogleAuth.initialize({
+      clientId: '556993160670-mb0ek9ukp41t6402t61vkktpmek415qe.apps.googleusercontent.com',
+      scopes: ['profile', 'email'],
+      grantOfflineAccess: true,
+    });
+  })
+
 
   // States for login
   const [isLoginSuccessfull, setIsLoginSuccessfull] = useState(false);
@@ -212,6 +225,14 @@ const Login = () => {
     }
   }, []);
 
+
+  const googleLoginHandle = async () => {
+    let googleUser = await GoogleAuth.signIn();
+    console.log(googleUser.authentication.idToken);
+    const credential = googleUser.authentication.idToken;
+    googleUserVerifyHandler({ credential });
+  }
+
   return (
     <div className="container d-flex justify-content-center align-items-start py-md-5 min-vh-100">
       <div className="row d-flex register_container w-100 ">
@@ -231,29 +252,29 @@ const Login = () => {
 
         {/* Right side form */}
         <div className="col-lg-6 col-md-12 register_heading_right">
-          <Link className="d-lg-none" to="/">
-            <img className="backArrow" src={backArrow} alt="arrow_back" />
-          </Link>
+          {!isMobileApp && (
+            <Link className="d-lg-none" to="/">
+              <img className="backArrow" src={backArrow} alt="arrow_back" />
+            </Link>
+          )}
           <span className="welcome w-100 text-center">Welcome back!</span>
 
           <div className="login_buttons_row d-flex flex-column align-items-center gap-3">
             <h1 className="mt-5">Login</h1>
-            <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-4 gap-sm-5">
+            <div className="d-flex flex-row justify-content-between align-items-center gap-4 gap-sm-5">
               <Link to="">
                 <button
-                  className={`btn-primaryy login_btn ${
-                    !isInvestorSelected ? "startup" : ""
-                  } `}
+                  className={`login_btn ${!isInvestorSelected ? "startup" : ""
+                    } `}
                   onClick={() => setIsInvestorSelected(false)}
                 >
-                  StartUp
+                  Start Up
                 </button>
               </Link>
               <Link to="">
                 <button
-                  className={`btn-primaryy login_btn ${
-                    isInvestorSelected ? "investor" : ""
-                  } `}
+                  className={`login_btn ${isInvestorSelected ? "investor" : ""
+                    } `}
                   onClick={() => setIsInvestorSelected(true)}
                 >
                   Investor
@@ -272,13 +293,13 @@ const Login = () => {
             </Link>
           </h3>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
             <div className="row">
               <div className="col-md-12 col input-container">
                 <label htmlFor="mobile">Mobile Number</label>
                 <PhoneInput
                   placeholder="Mobile Number"
-                  className="form-control plato_form_control"
+                  className="form-control plato_form_control rounded-3"
                   defaultCountry="IN"
                   countryCallingCodeEditable={false}
                   initialValueFormat="national"
@@ -296,7 +317,7 @@ const Login = () => {
                   type="password"
                   id="password"
                   name="password"
-                  className="form-control"
+                  className="form-control rounded-3"
                   required
                   placeholder="Password"
                   onChange={(e) => handleInputChange(e, "password")}
@@ -350,7 +371,11 @@ const Login = () => {
             <hr className="line" />
           </div>
           <div className="social-login-container d-flex flex-column justify-content-center">
-            <div id="googlesignin" className="mx-auto"></div>
+            {isMobileApp ?
+              <img src={GIcon} alt="image" onClick={googleLoginHandle} />
+              :
+              <div id="googlesignin" className="mx-auto"></div>
+            }
           </div>
           {/* <div className="row">
             <div className="col d-flex justify-content-center align-items-center login_icons">

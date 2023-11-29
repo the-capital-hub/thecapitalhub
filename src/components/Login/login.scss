@@ -1,4 +1,22 @@
 .register_container {
+
+  .social-login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .google_signin {
+
+    cursor: pointer;
+  }
+
+  .google_signin img {
+    margin-right: 8px;
+  }
+
   .login_buttons_row {
     // margin-top: 20px;
     // display: flex;
@@ -37,6 +55,13 @@
       border: 1px solid #d3f36b;
       background-color: #d3f36b;
       color: black;
+    }
+
+    @media (max-width: 500px) {
+      max-width: 100px;
+      height: 40px;
+      font-size: 14px;
+      padding: 10px;
     }
   }
 
