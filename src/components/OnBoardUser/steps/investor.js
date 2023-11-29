@@ -244,6 +244,48 @@ const mySchedulePage = [
   },
 ];
 
+const savedPostsPage = [
+  {
+    target: ".navigation-header",
+    title: "Collections",
+    content: "Navigate through your collections",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: ".card-viewer",
+    title: "Saved Posts",
+    content:
+      "List of Saved Posts from your collection. Each post can be removed from the collection here.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+];
+
+const connectionsPage = [
+  {
+    target: ".content_section",
+    title: "Connections",
+    content: "Manage your Connections on Capital HUB from here.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: ".connection_nav",
+    title: "Connections",
+    content: "Switch between Received, Sent and Accepted connection requests.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: ".connection_list",
+    title: "Connection Requests",
+    content: "Manage your Received, Sent and Accepted connection requests.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+];
+
 // Keep this in the bottom
 export const investorOnboardingSteps = {
   explorePage,
@@ -251,4 +293,6 @@ export const investorOnboardingSteps = {
   myStartupsPage,
   profilePage,
   mySchedulePage,
+  savedPostsPage,
+  connectionsPage,
 };
