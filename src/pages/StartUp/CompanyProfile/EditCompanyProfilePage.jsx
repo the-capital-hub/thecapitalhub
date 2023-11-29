@@ -21,13 +21,19 @@ import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import CompanyDescription from "../../../components/Investor/CompanyProfilePageComponents/CompanyDescription/CompanyDescription";
 import AfterSuccessPopUp from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import ErrorPopUp from "../../../components/PopUp/ErrorPopUp/ErrorPopUp";
-import { setUserCompany } from "../../../Store/features/user/userSlice";
+import {
+  selectLoggedInUserId,
+  selectUserCompanyData,
+  setUserCompany,
+} from "../../../Store/features/user/userSlice";
 
 export default function EditCompanyProfilePage() {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const loggedInUserId = useSelector(selectLoggedInUserId);
+  const userCompanyData = useSelector(selectUserCompanyData);
   const dispatch = useDispatch();
-  const [colorCardData, setColorCardData] = useState(null);
   const navigate = useNavigate();
+
+  const [colorCardData, setColorCardData] = useState(null);
   const [companyData, setCompanyData] = useState([]);
   const [isBioEditable, setIsBioEditable] = useState(false);
   const [companyDescription, setCompanyDescription] = useState(null);
@@ -38,8 +44,8 @@ export default function EditCompanyProfilePage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (loggedInUser?.isInvestor === "false") {
-      getStartupByFounderId(loggedInUser._id)
+    if (!userCompanyData) {
+      getStartupByFounderId(loggedInUserId)
         .then(({ data }) => {
           setCompanyData(data);
           setCompanyDescription(data.description);
@@ -55,10 +61,21 @@ export default function EditCompanyProfilePage() {
         .catch((error) => {
           console.error("Error fetching startup data:", error);
         });
+    } else {
+      setCompanyData(userCompanyData);
+      setCompanyDescription(userCompanyData.description);
+      setColorCardData({
+        last_round_investment: userCompanyData.colorCard.last_round_investment,
+        total_investment: userCompanyData.colorCard.total_investment,
+        no_of_investers: userCompanyData.colorCard.no_of_investers,
+        fund_ask: userCompanyData.colorCard.fund_ask,
+        valuation: userCompanyData.colorCard.valuation,
+        raised_funds: userCompanyData.colorCard.raised_funds,
+      });
     }
     window.title = "Edit Company Profile | The Capital Hub";
     dispatch(setPageTitle("Edit Company"));
-  }, [isSaveAll]);
+  }, [isSaveAll, dispatch, loggedInUserId, userCompanyData]);
 
   // handleAmountChange
   const handleAmountChange = (currentfield, updatedAmount) => {
@@ -89,7 +106,7 @@ export default function EditCompanyProfilePage() {
 
     const companyData = {
       description: companyDescription,
-      founderId: loggedInUser._id,
+      founderId: loggedInUserId,
     };
     try {
       const response = await postStartUpData(companyData);

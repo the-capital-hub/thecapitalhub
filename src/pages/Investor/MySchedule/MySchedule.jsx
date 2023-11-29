@@ -12,6 +12,8 @@ import ViewMeetingRequestModal from "../../../components/InvestorOneLink/Investo
 import { ModalBsLauncher } from "../../../components/PopUp/ModalBS";
 import { useSearchParams } from "react-router-dom";
 import { selectUserOneLinkId } from "../../../Store/features/user/userSlice";
+import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
+import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
 
 const MEETINGTYPES = ["daily", "weekly", "monthly"];
 const EVENTS = [
@@ -108,6 +110,13 @@ export default function MySchedule() {
           {/* <div className="pb-4 pt-2">
           <SmallProfileCard text="My Schedule" />
         </div> */}
+
+          {/* Onboarding popup */}
+          <TutorialTrigger
+            steps={investorOnboardingSteps.mySchedulePage}
+            className={"mb-3"}
+          />
+
           <section className="section__wrapper bg-white rounded-4 border mb-5 pb-5 d-flex flex-column gap-5">
             {/* View Select */}
             <div className="d-flex flex-column flex-lg-row justify-content-between align-items-center border-bottom p-3">
@@ -118,6 +127,7 @@ export default function MySchedule() {
                 <button
                   className="btn-capital lh-1 py-2 py-md-3 me-2"
                   onClick={handleViewRequestClick}
+                  id="viewRequests"
                 >
                   View requests
                 </button>

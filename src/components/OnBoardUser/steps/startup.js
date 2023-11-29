@@ -134,14 +134,14 @@ const oneLinkPage = [
   {
     target: ".ShareLink_container",
     title: "Share OneLink",
-    content: "Share your oneLink from here",
+    content: "Share your oneLink from here.",
     placement: "auto",
     disableBeacon: true,
   },
   {
     target: ".introductory_message_container",
     title: "Introductory Message",
-    content: "Add or Edit your Introductory message from here",
+    content: "Add or Edit your Introductory message from here.",
     placement: "right-start",
     disableBeacon: true,
   },

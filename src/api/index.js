@@ -113,6 +113,7 @@ const API = Object.freeze({
   getLastMessage: `${baseUrl}/message/getLastMessage`,
   rejectMeetingRequest: `${baseUrl}/schedule/rejectMeetingRequest`,
   getUserAchievements: `${baseUrl}/achievement/getUserAchievements`,
+  submitFundingToMail: `${baseUrl}/contactUs/lookingForFundingMail`,
 });
 
 export default API;

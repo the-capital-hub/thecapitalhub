@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CompanyInfo from "./company-section-one/company-info/CompanyInfo";
 // import HCLImage from "../../../Images/Investor/CompanyProfile/HCL.png";
 import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
@@ -11,6 +11,7 @@ import KeyFocus from "./company-section-two/key-focus/KeyFocus";
 import CompanyAbout from "./company-section-one/company-about/CompanyAbout";
 import "./CompanyProfile.scss";
 import SelectCommitmentModal from "../MyStartupsComponents/SelectCommitmentModal/SelectCommitmentModal";
+import { useLocation } from "react-router-dom";
 
 export default function CompanyProfile({
   isOnelink,
@@ -20,6 +21,8 @@ export default function CompanyProfile({
   short,
   isStartup = "true",
 }) {
+  const { pathname } = useLocation();
+
   // Fetch Company Data here
   let name = "HCL";
   let logo = DefaultAvatar;
@@ -163,10 +166,12 @@ export default function CompanyProfile({
       </div>
 
       {/* Select Commitment Modal */}
-      <SelectCommitmentModal
-        interestData={interestData}
-        founderId={founderId}
-      />
+      {!(pathname === "/investor/company-profile") && (
+        <SelectCommitmentModal
+          interestData={interestData}
+          founderId={founderId}
+        />
+      )}
     </>
   );
 }

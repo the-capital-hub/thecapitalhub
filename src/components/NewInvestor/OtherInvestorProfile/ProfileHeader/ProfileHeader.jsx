@@ -12,7 +12,7 @@ export default function ProfileHeader({ userData }) {
             width={150}
             height={150}
             alt="profile"
-            className="rounded-circle"
+            className="rounded-circle object-fit-cover"
           />
           <div className="flex-grow-1 left_profile_text mt-2 mt-md-0 me-auto me-md-0 ms-md-4">
             <h3 className="typography h3">
@@ -46,7 +46,9 @@ export default function ProfileHeader({ userData }) {
         <div className="single_details row row-cols-1 row-cols-md-2 ">
           <span className="col-md-3 label fw-bold">Current Company</span>
           <span className="col-md-9 value text-secondary">
-            {userData?.startUp?.company || userData?.investor?.companyName || ""}
+            {userData?.startUp?.company ||
+              userData?.investor?.companyName ||
+              ""}
           </span>
         </div>
         <div className="single_details row row-cols-1 row-cols-md-2 ">

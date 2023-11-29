@@ -116,6 +116,9 @@ export const selectUserRecentExperience = (state) =>
   state.user.loggedInUser?.recentExperience;
 export const selectUserRecentEducation = (state) =>
   state.user.loggedInUser?.recentEducation;
+export const selectUserName = (state) =>
+  state.user.loggedInUser?.firstName + " " + state.user.loggedInUser?.lastName;
+export const selectUserEmail = (state) => state.user.loggedInUser?.email;
 
 // unread Notifications selector
 export const selectUnreadNotifications = (state) =>
@@ -148,6 +151,7 @@ export const selectWeightGaveToTechnologicalInnovation = (state) =>
   state.user.loggedInUser.weightGaveToTechnologicalInnovation;
 
 // company state selectors
+export const selectCompanyDataId = (state) => state.user.company?._id;
 export const selectUserCompanyData = (state) => state.user.company;
 export const selectCompanyName = (state) =>
   state.user.loggedInUser.isInvestor === "true"

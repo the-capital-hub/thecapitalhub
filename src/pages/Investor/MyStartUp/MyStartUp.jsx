@@ -17,6 +17,9 @@ import { getInvestorById } from "../../../Service/user";
 import { useDispatch, useSelector } from "react-redux";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
+import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
+import { selectUserInvestor } from "../../../Store/features/user/userSlice";
 
 // Mock data for my investments
 // const investmentsData = [
@@ -50,7 +53,7 @@ import { setPageTitle } from "../../../Store/features/design/designSlice";
 // ];
 
 const MyStartUp = () => {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const userInvestor = useSelector(selectUserInvestor);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -64,27 +67,37 @@ const MyStartUp = () => {
   // const [companyData, setCompanyData] = useState(investmentsData);
   const [investedStartups, setInvestedStartups] = useState([]);
   const [myInterests, setMyInterests] = useState([]);
-  const [investor, setInvestor] = useState([]);
+  // const [investor, setInvestor] = useState([]);
 
   useEffect(() => {
-    getInvestorById(loggedInUser?.investor)
+    getInvestorById(userInvestor)
       .then(({ data }) => {
-        setInvestor(data);
+        // setInvestor(data);
         setInvestedStartups(data.startupsInvested);
         setMyInterests(data.myInterests);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, [loggedInUser]);
+  }, [userInvestor]);
 
   return (
     <MaxWidthWrapper>
       <div className="container-fluid mystartup_main_container">
         <SmallProfileCard text={"My Startup"} />
+
+        {/* Onboarding popup */}
+        <TutorialTrigger
+          steps={investorOnboardingSteps.myStartupsPage}
+          className={"mb-3"}
+        />
+
         <div className="startup_container p-0">
           {/* My Investments */}
-          <div className="d-flex align-items-center justify-content-between border border-2 border-top-0 border-start-0 border-end-0 py-3 px-4 ">
+          <div
+            className="d-flex align-items-center justify-content-between border border-2 border-top-0 border-start-0 border-end-0 py-3 px-4 "
+            id="editInvestments"
+          >
             <h4 className="title_h4 m-0 green_underline ">My Investments</h4>
             <div className="d-flex flex-column flex-md-row text-center gap-2">
               <div className="">
@@ -111,7 +124,10 @@ const MyStartUp = () => {
               </div>
             </div>
           </div>
-          <div className="card_container border-bottom p-4 d-flex gap-5 align-items-center overflow-x-auto">
+          <div
+            className="card_container border-bottom p-4 d-flex gap-5 align-items-center overflow-x-auto"
+            id="myInvestmentsCards"
+          >
             {investedStartups.length > 0
               ? investedStartups?.map((company, index) => {
                   return (
@@ -146,7 +162,10 @@ const MyStartUp = () => {
           </ModalBSContainer>
 
           {/* My Interests */}
-          <div className="d-flex align-items-center justify-content-between border border-2 border-top-0 border-start-0 border-end-0 py-3 px-4 ">
+          <div
+            className="d-flex align-items-center justify-content-between border border-2 border-top-0 border-start-0 border-end-0 py-3 px-4 "
+            id="editInterests"
+          >
             <h4 className="title_h4 m-0 green_underline">My Interests</h4>
             <div className="d-flex  flex-column flex-md-row text-center gap-2">
               <div className="">
@@ -173,7 +192,10 @@ const MyStartUp = () => {
               </div>
             </div>
           </div>
-          <div className="card_container p-4 d-flex gap-5 overflow-x-auto ">
+          <div
+            className="card_container p-4 d-flex gap-5 overflow-x-auto "
+            id="myInterestsCards"
+          >
             {myInterests.length > 0
               ? myInterests?.map((company, index) => {
                   return (
