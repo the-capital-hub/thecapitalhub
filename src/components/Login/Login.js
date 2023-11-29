@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./login.scss";
 import RegisterIcon from "../../Images/Group 21.svg";
-// import GIcon from "../../Images/Group 22.svg";
+import GIcon from "../../Images/Group 22.svg";
 // import FIcon from "../../Images/Group 23.svg";
 // import AIcon from "../../Images/Group 24.svg";
 import PhoneInput from "react-phone-number-input";
@@ -22,6 +22,7 @@ import ResetPasswordPopUp from "../PopUp/RequestPasswordPopUp/RequestPasswordPop
 // import { Navigate } from "react-router-dom";
 import SpinnerBS from "../Shared/Spinner/SpinnerBS";
 import { selectIsMobileApp } from "../../Store/features/design/designSlice";
+import { GoogleAuth } from "@codetrix-studio/capacitor-google-auth";
 
 const Login = () => {
   // const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -30,6 +31,15 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const isMobileApp = useSelector(selectIsMobileApp);
+
+  useEffect(() => {
+    GoogleAuth.initialize({
+      clientId: '556993160670-mb0ek9ukp41t6402t61vkktpmek415qe.apps.googleusercontent.com',
+      scopes: ['profile', 'email'],
+      grantOfflineAccess: true,
+    });
+  })
+
 
   // States for login
   const [isLoginSuccessfull, setIsLoginSuccessfull] = useState(false);
@@ -215,6 +225,14 @@ const Login = () => {
     }
   }, []);
 
+
+  const googleLoginHandle = async () => {
+    let googleUser = await GoogleAuth.signIn();
+    console.log(googleUser.authentication.idToken);
+    const credential = googleUser.authentication.idToken;
+    googleUserVerifyHandler({ credential });
+  }
+
   return (
     <div className="container d-flex justify-content-center align-items-start py-md-5 min-vh-100">
       <div className="row d-flex register_container w-100 ">
@@ -246,9 +264,8 @@ const Login = () => {
             <div className="d-flex flex-row justify-content-between align-items-center gap-4 gap-sm-5">
               <Link to="">
                 <button
-                  className={`login_btn ${
-                    !isInvestorSelected ? "startup" : ""
-                  } `}
+                  className={`login_btn ${!isInvestorSelected ? "startup" : ""
+                    } `}
                   onClick={() => setIsInvestorSelected(false)}
                 >
                   Start Up
@@ -256,9 +273,8 @@ const Login = () => {
               </Link>
               <Link to="">
                 <button
-                  className={`login_btn ${
-                    isInvestorSelected ? "investor" : ""
-                  } `}
+                  className={`login_btn ${isInvestorSelected ? "investor" : ""
+                    } `}
                   onClick={() => setIsInvestorSelected(true)}
                 >
                   Investor
@@ -355,7 +371,11 @@ const Login = () => {
             <hr className="line" />
           </div>
           <div className="social-login-container d-flex flex-column justify-content-center">
-            <div id="googlesignin" className="mx-auto"></div>
+            {isMobileApp ?
+              <img src={GIcon} alt="image" onClick={googleLoginHandle} />
+              :
+              <div id="googlesignin" className="mx-auto"></div>
+            }
           </div>
           {/* <div className="row">
             <div className="col d-flex justify-content-center align-items-center login_icons">
