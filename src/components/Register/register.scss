@@ -68,6 +68,10 @@
     }
   }
 
+  .otp-verify-btn {
+    border: 1px solid rgb(196, 196, 196) !important;
+  }
+
   label {
     font-family: "Poppins";
     font-style: normal;
@@ -300,7 +304,7 @@
         }
 
         // Style the box when it has a value
-        .otp-box{
+        .otp-box {
           border-color: #000;
         }
         .has-value {
@@ -375,6 +379,9 @@
     }
 
     .register_heading_right {
+      display: flex;
+      flex-direction: column;
+      gap: 15px !important;
       .backArrow_mobile {
         display: block;
         position: absolute;
@@ -391,8 +398,12 @@
         font-size: 24px;
       }
 
+      .form-control {
+        border: 1px solid rgb(196, 196, 196) !important;
+      }
+
       label {
-        color: #000;
+        color: #000000;
         font-family: Poppins;
         font-size: 15px;
         font-style: normal;

@@ -246,7 +246,7 @@ const Register = () => {
 
         <form onSubmit={handleFormSubmit}>
           <div className="row">
-            <div className="col-lg-6 col-md-12 form-group">
+            <div className="col-lg-6 col-md-12 form-group mb-2">
               <label htmlFor="firstname">First Name</label>
               <input
                 type="text"
@@ -259,7 +259,7 @@ const Register = () => {
                 onChange={(e) => handleInputChange(e, "firstName")}
               />
             </div>
-            <div className="col-lg-6 col-md-12 form-group">
+            <div className="col-lg-6 col-md-12 form-group mb-2">
               <label htmlFor="lastname">Last Name</label>
               <input
                 type="text"
@@ -275,12 +275,12 @@ const Register = () => {
           </div>
 
           <div className="row">
-            <div className="col-md-12 input-container form-group">
+            <div className="col-md-12 input-container form-group mb-2">
               <label htmlFor="mobile">Mobile Number</label>
               <div className="input-group">
                 <PhoneInput
                   placeholder="Mobile Number"
-                  className="form-control plato_form_control"
+                  className="form-control plato_form_control rounded-start-3"
                   defaultCountry="IN"
                   countryCallingCodeEditable={false}
                   initialValueFormat="national"
@@ -289,7 +289,7 @@ const Register = () => {
                   value={inputValues.phoneNumber}
                 />
                 <button
-                  className="btn btn-secondary"
+                  className="btn btn-light rounded-end-3 otp-verify-btn"
                   onClick={() => handleVerifyMobile(inputValues.phoneNumber)}
                   style={{ zIndex: 0 }}
                 >
@@ -304,7 +304,7 @@ const Register = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-12 form-group">
+            <div className="col-md-12 form-group mb-2">
               <label htmlFor="email">Email</label>
               <input
                 type="email"
@@ -320,7 +320,7 @@ const Register = () => {
           </div>
 
           <div className="row">
-            <div className="col-md-12 form-group">
+            <div className="col-md-12 form-group mb-2">
               <label htmlFor="password">Password</label>
               <input
                 type="password"
@@ -338,7 +338,7 @@ const Register = () => {
           <div className="submit_btn mt-3">
             <button
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-primary text-white"
               onClick={handleClick}
             >
               Create Account
