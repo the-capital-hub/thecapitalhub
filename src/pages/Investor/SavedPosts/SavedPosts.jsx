@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
-import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
+// import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import RightProfileCard from "../../../components/NewInvestor/InvestorRightProfileCard/InvestorRightProfileCard";
 import "../Syndicates/Syndicates.scss";
 import "./SavedPosts.scss";
@@ -9,15 +9,17 @@ import NavigatedCardViewer from "../../../components/Investor/SavePost/Navigated
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import { useDispatch } from "react-redux";
+import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
+import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
 
 export default function SavedPosts() {
-  const [selectedTab, setSelectedTab] = useState("startups");
+  // const [selectedTab, setSelectedTab] = useState("startups");
   const dispatch = useDispatch();
 
   useEffect(() => {
     window.title = "Saved Posts | The Capital Hub";
     dispatch(setPageTitle("Saved Posts"));
-  }, []);
+  }, [dispatch]);
 
   return (
     <MaxWidthWrapper>
@@ -25,9 +27,16 @@ export default function SavedPosts() {
         {/* Main content */}
         <section className="section__wrapper main__content d-flex flex-column gap-3">
           {/* Page indicators */}
-          <div className="">
+          {/* <div className="">
             <SmallProfileCard text="Saved Posts" />
-          </div>
+          </div> */}
+
+          {/* Onboarding popup */}
+          <TutorialTrigger
+            steps={investorOnboardingSteps.savedPostsPage}
+            className={""}
+          />
+
           {/* Saved posts heading */}
           <div className="savedPosts__heading">
             <h4 className="bg-white border rounded-4 shadow-sm p-3">

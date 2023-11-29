@@ -40,7 +40,9 @@ const Syndicates = lazy(() =>
 const Explore = lazy(() => import("../pages/Investor/Explore/Explore"));
 const InvestorProfile = lazy(() => import("../pages/Investor/Profile/Profile"));
 const MyStartUp = lazy(() => import("../pages/Investor/MyStartUp/MyStartUp"));
-
+const Notifications = lazy(() =>
+  import("../pages/StartUp/Notifications/Notifications")
+);
 const InvestorCompanyProfilePage = lazy(() =>
   import(
     "../pages/Investor/InvestorCompanyProfilePage/InvestorCompanyProfilePage"
@@ -193,7 +195,7 @@ function InvestorRoutes() {
         }
       />
 
-<Route
+      <Route
         path="profile/achievements"
         element={
           <Suspense fallback={<SuspenseLoader />}>
@@ -202,7 +204,16 @@ function InvestorRoutes() {
         }
       />
 
+<Route
+  path="notifications" 
+  element={
+    <Suspense fallback={<SuspenseLoader />}>
+      <Notifications />
+    </Suspense>
+  }
+/>
 
+     
     </>
   );
 }

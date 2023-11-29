@@ -15,29 +15,33 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { selectLoggedInUserId } from "../../../Store/features/user/userSlice";
+import TutorialTrigger from "../../Shared/TutorialTrigger/TutorialTrigger";
+import { investorOnboardingSteps } from "../../OnBoardUser/steps/investor";
 
 const Connection = () => {
   const [selectedTab, setSelectedTab] = useState("received"); // Default to "received"
   const [receivedConnections, setReceivedConnections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [getAllConnection, setGetAllConnection] = useState([]); // State for accepted connections
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const loggedInUserId = useSelector(selectLoggedInUserId);
   const dispatch = useDispatch();
 
   // Function to handle tab change
   useEffect(() => {
-    getUserConnections(loggedInUser._id).then((res) => {
+    getUserConnections(loggedInUserId).then((res) => {
       console.log("res2-->", res);
       setGetAllConnection(res.data); // Set accepted connections data
     });
     window.title = "Connections | The Capital Hub";
     dispatch(setPageTitle("Connections"));
-  }, []);
+  }, [dispatch, loggedInUserId]);
+
   const handleTabChange = (tab) => {
     if (tab === "received") {
       getReceivedConnections();
     } else if (tab === "accepted") {
-      getUserConnections(loggedInUser._id).then((res) => {
+      getUserConnections(loggedInUserId).then((res) => {
         console.log("res-->", res);
         setGetAllConnection(res.data); // Set accepted connections data
       });
@@ -109,7 +113,7 @@ const Connection = () => {
     if (showRemoveConfirmation()) {
       try {
         await removeConnection(userId);
-        getUserConnections(loggedInUser._id).then((res) => {
+        getUserConnections(loggedInUserId).then((res) => {
           setGetAllConnection(res.data);
         });
       } catch (error) {
@@ -122,35 +126,45 @@ const Connection = () => {
     <MaxWidthWrapper>
       <div className="investor_connection_main_container">
         <SmallProfileCard text={"Connections"} />
+
+        {/* Onboarding popup */}
+        <TutorialTrigger
+          steps={investorOnboardingSteps.connectionsPage}
+          className={""}
+        />
+
         <section className="content_section mt-4">
           <div className="row">
             <div className="col-12 mt-2 box  p-4">
               <h4>Manage Connections</h4>
               <nav className="connection_nav">
-                <a
-                  href="#"
-                  className={`connection_nav_link ${selectedTab === "received" ? "active" : ""
-                    }`}
+                <span
+                  id="received"
+                  className={`connection_nav_link ${
+                    selectedTab === "received" ? "active" : ""
+                  }`}
                   onClick={() => handleTabChange("received")}
                 >
                   Received
-                </a>
-                <a
-                  href="#"
-                  className={`connection_nav_link ${selectedTab === "sent" ? "active" : ""
-                    }`}
+                </span>
+                <span
+                  id="sent"
+                  className={`connection_nav_link ${
+                    selectedTab === "sent" ? "active" : ""
+                  }`}
                   onClick={() => handleTabChange("sent")}
                 >
                   Sent
-                </a>
-                <a
-                  href="#"
-                  className={`connection_nav_link ${selectedTab === "accepted" ? "active" : ""
-                    }`}
+                </span>
+                <span
+                  id="accepted"
+                  className={`connection_nav_link ${
+                    selectedTab === "accepted" ? "active" : ""
+                  }`}
                   onClick={() => handleTabChange("accepted")}
                 >
                   Accepted
-                </a>
+                </span>
               </nav>
               <hr />
               <div className="connection_list">
@@ -294,8 +308,9 @@ const Connection = () => {
                                 to={`/investor/user/${data._id}`}
                                 className=" text-black text-decoration-none"
                               >
-                                {`${data.firstName ? data.firstName : "name"} ${data.lastName ? data.lastName : ""
-                                  }`}
+                                {`${data.firstName ? data.firstName : "name"} ${
+                                  data.lastName ? data.lastName : ""
+                                }`}
                               </Link>
                             </p>
                             <p className="connection_designation">

@@ -51,6 +51,7 @@ export default function UserBio({ canEdit = true, bioText = "" }) {
         className={`box personal_information ${canEdit ? "pb-4" : ""} ${
           isInvestor ? "rounded-4 border shadow-sm" : ""
         } `}
+        id="userBio"
       >
         <div className="personal_information_header">
           <h2 className="typography">Bio</h2>

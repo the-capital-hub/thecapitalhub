@@ -19,6 +19,7 @@ import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidth
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
 import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
+import { selectUserInvestor } from "../../../Store/features/user/userSlice";
 
 // Mock data for my investments
 // const investmentsData = [
@@ -52,7 +53,7 @@ import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/i
 // ];
 
 const MyStartUp = () => {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const userInvestor = useSelector(selectUserInvestor);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -66,19 +67,19 @@ const MyStartUp = () => {
   // const [companyData, setCompanyData] = useState(investmentsData);
   const [investedStartups, setInvestedStartups] = useState([]);
   const [myInterests, setMyInterests] = useState([]);
-  const [investor, setInvestor] = useState([]);
+  // const [investor, setInvestor] = useState([]);
 
   useEffect(() => {
-    getInvestorById(loggedInUser?.investor)
+    getInvestorById(userInvestor)
       .then(({ data }) => {
-        setInvestor(data);
+        // setInvestor(data);
         setInvestedStartups(data.startupsInvested);
         setMyInterests(data.myInterests);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, [loggedInUser]);
+  }, [userInvestor]);
 
   return (
     <MaxWidthWrapper>
