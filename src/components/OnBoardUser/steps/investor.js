@@ -39,6 +39,58 @@ const explorePage = [
   },
 ];
 
+const profilePage = [
+  {
+    target: ".professional_info_section",
+    title: "Profile Page",
+    content: "Add or Edit your professional information here.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: "#missingDetails",
+    title: "Fill-in Information",
+    content: "Complete your profile setup with the Capital HUB chat assistant.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: "#userBio",
+    title: "Bio",
+    content: "Add or Edit information about yourself.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: ".AchievementsComponent",
+    title: "Acheivements",
+    content: "Showcase your accomplishments with Capital HUB to everyone!",
+    placement: "right-center",
+    disableBeacon: true,
+  },
+  {
+    target: ".startups_invested",
+    title: "Startups Invested",
+    content: "Add information about the Startups you have Invested in.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: ".sector_interested",
+    title: "Sectors Interested",
+    content: "Add or edit Sectors that intrigue you here.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: ".investment_philosophy",
+    title: "Investment Philosophy",
+    content: "Fill information about your Investment Philosophy here.",
+    placement: "right-start",
+    disableBeacon: true,
+  },
+];
+
 const homePage = [
   {
     target: ".pro-sidebar-header",
@@ -156,4 +208,5 @@ export const investorOnboardingSteps = {
   explorePage,
   homePage,
   myStartupsPage,
+  profilePage,
 };
