@@ -203,10 +203,52 @@ const myStartupsPage = [
   },
 ];
 
+const mySchedulePage = [
+  {
+    target: ".view__selector",
+    title: "My Schedule",
+    content: "Switch Calendar views between 'Day', 'Week' and 'Month'.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: ".calendar__container",
+    title: "Calendar",
+    content:
+      "Create meetings by dragging over a time slot on the calendar. Click on a created meeting to know more information.",
+    placement: "right-start",
+    disableBeacon: true,
+  },
+  {
+    target: ".rbc-toolbar",
+    title: "Calendar",
+    content: "Got to previous or next Day, Week or Month from here.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: "#viewRequests",
+    title: "View Requests",
+    content:
+      "View details about a meeting request by clicking here. You can Accept or Decline the request from here as well.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: ".meetings__div",
+    title: "Meetings",
+    content:
+      "Find your regularly scheduled meetings organized by their frequency here.",
+    placement: "left-start",
+    disableBeacon: true,
+  },
+];
+
 // Keep this in the bottom
 export const investorOnboardingSteps = {
   explorePage,
   homePage,
   myStartupsPage,
   profilePage,
+  mySchedulePage,
 };
