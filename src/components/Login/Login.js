@@ -21,12 +21,15 @@ import backArrow from "../../Images/left-arrow.png";
 import ResetPasswordPopUp from "../PopUp/RequestPasswordPopUp/RequestPasswordPopUp";
 // import { Navigate } from "react-router-dom";
 import SpinnerBS from "../Shared/Spinner/SpinnerBS";
+import { selectIsMobileApp } from "../../Store/features/design/designSlice";
 
 const Login = () => {
   // const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
+  const isMobileApp = useSelector(selectIsMobileApp);
 
   // States for login
   const [isLoginSuccessfull, setIsLoginSuccessfull] = useState(false);
@@ -231,9 +234,11 @@ const Login = () => {
 
         {/* Right side form */}
         <div className="col-lg-6 col-md-12 register_heading_right">
-          <Link className="d-lg-none" to="/">
-            <img className="backArrow" src={backArrow} alt="arrow_back" />
-          </Link>
+          {!isMobileApp && (
+            <Link className="d-lg-none" to="/">
+              <img className="backArrow" src={backArrow} alt="arrow_back" />
+            </Link>
+          )}
           <span className="welcome w-100 text-center">Welcome back!</span>
 
           <div className="login_buttons_row d-flex flex-column align-items-center gap-3">
