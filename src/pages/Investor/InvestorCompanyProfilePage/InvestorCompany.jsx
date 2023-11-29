@@ -24,6 +24,8 @@ import InvestorAfterSuccessPopUp from "../../../components/PopUp/InvestorAfterSu
 import { useNavigate } from "react-router-dom";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import Modal from "../../../components/PopUp/Modal/Modal";
+import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
+import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
 
 export default function CompanyProfilePage() {
   const loggedInUserId = useSelector(selectLoggedInUserId);
@@ -143,6 +145,13 @@ export default function CompanyProfilePage() {
         {/* Main content */}
         <div className="main__content">
           <SmallProfileCard text={"Company Profile"} />
+
+          {/* Onboarding popup */}
+          <TutorialTrigger
+            steps={investorOnboardingSteps.companyProfilePage}
+            className={""}
+          />
+
           {/* <div className="bg-white rounded-4 p-4 border shadow-sm mt-0 mt-md-3">
             <Link
               to={"/investor/company-profile/edit"}
@@ -157,7 +166,10 @@ export default function CompanyProfilePage() {
                 {companyData.length !== 0 ? (
                   // companyData.founderId === loggedInUser._id ? (
                   <>
-                    <div className="bg-white rounded-4 p-4 shadow-sm border">
+                    <div
+                      className="bg-white rounded-4 p-4 shadow-sm border"
+                      id="editCompanyDetails"
+                    >
                       <Link
                         to="/investor/company-profile/edit"
                         className="text-decoration-none text-dark fs-5"
@@ -167,7 +179,7 @@ export default function CompanyProfilePage() {
                     </div>
                     <p></p>
                     {/* ) : ( */}
-                    <div className="bg-white rounded-4 p-4">
+                    <div className="bg-white rounded-4 p-4" id="chooseCompany">
                       {/* <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5"> */}
                       {/* <button className="btn-base investor" onClick={handleAddNew}>
                         Add new company details
@@ -323,6 +335,7 @@ export default function CompanyProfilePage() {
           <button
             className="btn-base investor"
             onClick={() => setConfirmModal(true)}
+            id="createCompanyProfile"
           >
             Create new company profile
           </button>

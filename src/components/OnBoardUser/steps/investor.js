@@ -286,6 +286,61 @@ const connectionsPage = [
   },
 ];
 
+const companyProfilePage = [
+  {
+    target: "#editCompanyDetails",
+    title: "Company Profile",
+    content: "Click here to information in your Company Profile.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: "#chooseCompany",
+    title: "Select Company Profile",
+    content: "Select an existing profile of your Company.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: ".company__profile",
+    title: "Company Profile",
+    content: "Your Company Profile with all the relevant information.",
+    placement: "right-start",
+    disableBeacon: true,
+  },
+  {
+    target: "#createCompanyProfile",
+    title: "Create your Company Profile",
+    content: "Click here to create a new Company Profile.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+];
+
+const oneLinkPage = [
+  {
+    target: ".ShareLink_container",
+    title: "Share OneLink",
+    content: "Share your oneLink from here.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: ".introductory_message_container",
+    title: "Introductory Message",
+    content: "Add or Edit your Introductory message from here.",
+    placement: "right-start",
+    disableBeacon: true,
+  },
+  {
+    target: ".onePager_wrapper",
+    title: "One-Pager Preview",
+    content: "This is the OnePager Preview. Check your One-Link details here.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+];
+
 // Keep this in the bottom
 export const investorOnboardingSteps = {
   explorePage,
@@ -295,4 +350,6 @@ export const investorOnboardingSteps = {
   mySchedulePage,
   savedPostsPage,
   connectionsPage,
+  companyProfilePage,
+  oneLinkPage,
 };
