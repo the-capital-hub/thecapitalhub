@@ -46,12 +46,11 @@ export default function InvestorCompanyProfilePage() {
           setCompanyData([]);
         });
     }
-
   }, [username, isInvestor, loggedInUser.oneLinkId]);
 
   return (
     <MaxWidthWrapper>
-      <div className="otherInvestorCompanyProfilePage__wrapper p-3 border-start">
+      <div className="otherInvestorCompanyProfilePage__wrapper px-3 pb-5 border-start">
         {/* Main content */}
         <div className="main__content">
           <SmallProfileCard text={"Company Profile"} />
@@ -59,7 +58,6 @@ export default function InvestorCompanyProfilePage() {
           {companyData.length !== 0 || investorData.length !== 0 ? (
             companyData.length !== 0 ? (
               <CompanyProfile companyData={companyData} />
-
             ) : investorData.length !== 0 ? (
               <CompanyProfile investorData={investorData} isStartup="false" />
             ) : (

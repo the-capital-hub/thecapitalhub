@@ -48,9 +48,9 @@ export default function OtherInvestorProfile() {
     <MaxWidthWrapper>
       <div className="otherInvestorProfile_wrapper d-flex flex-column gap-4 px-1 px-sm-3 pb-4 border-start">
         {/* Small profile Section */}
-        <section className="">
+        {/* <section className="">
           <SmallProfileCard text="User Details" />
-        </section>
+        </section> */}
         {/* Profile Header section */}
         {userData ? (
           <section className="otherInvestor_header">
