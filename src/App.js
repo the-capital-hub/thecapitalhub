@@ -22,16 +22,30 @@ import EcommerceRoutes from "./routes/EcommerceRoutes";
 import NotFound404 from "./pages/Error/NotFound404/NotFound404";
 import { useDispatch } from "react-redux";
 import {
+  setIsMobileApp,
   setIsMobileView,
   setShowOnboarding,
 } from "./Store/features/design/designSlice";
 import { useEffect } from "react";
 import InvestorOneLinkRoutes from "./routes/InvestorOneLinkRoutes";
+import { Capacitor } from "@capacitor/core";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // Boolean for whether running on mobile application
+    const currentPlatform = Capacitor.getPlatform();
+
+    if (currentPlatform === "android" || currentPlatform === "ios") {
+      dispatch(setIsMobileApp(true));
+      console.log(`Running on ${currentPlatform}`);
+    } else {
+      dispatch(setIsMobileApp(false));
+      console.log("Not running on Android or iOS");
+    }
+
+    // Handle mobile size for web app
     window.scrollTo({ top: 0, behavior: "smooth" });
     function handleWindowResize() {
       const isMobile = window.innerWidth <= 820;
