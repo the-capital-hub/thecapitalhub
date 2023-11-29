@@ -22,6 +22,8 @@ import CompanyDescription from "../../../components/Investor/CompanyProfilePageC
 import ErrorPopUp from "../../../components/PopUp/ErrorPopUp/ErrorPopUp";
 import InvestorAfterSuccessPopUp from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
 import { setUserCompany } from "../../../Store/features/user/userSlice";
+import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
+import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
 
 export default function EditInvestorCompanyProfilePage() {
   const dispatch = useDispatch();
@@ -139,7 +141,7 @@ export default function EditInvestorCompanyProfilePage() {
 
   return (
     <MaxWidthWrapper>
-      <div className="editinvestorCompanyProfilePage__wrapper p-3 border-start">
+      <div className="editinvestorCompanyProfilePage__wrapper px-3 pb-5 border-start">
         {/* Main content */}
         <div className="main__content">
           <span className="back_img rounded-circle shadow-sm" title="Go Back">
@@ -154,7 +156,16 @@ export default function EditInvestorCompanyProfilePage() {
           {/* <SmallProfileCard text={"Company Profile"} /> */}
           {/* Company profile form */}
 
-          <div className="bg-white rounded-4 p-5 border">
+          {/* Onboarding popup */}
+          <TutorialTrigger
+            steps={investorOnboardingSteps.companyProfileEditPage}
+            className={""}
+          />
+
+          <div
+            className="bg-white rounded-4 p-5 border"
+            id="profileFormContainer"
+          >
             <CompanyProfileForm
               companyData={companyData}
               investor={true}

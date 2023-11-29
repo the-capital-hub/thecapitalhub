@@ -341,6 +341,44 @@ const oneLinkPage = [
   },
 ];
 
+const companyProfileEditPage = [
+  {
+    target: "#profileFormContainer",
+    title: "Company Information",
+    content: "Add or Edit primary details about your Company in this form.",
+    placement: "right-start",
+    disableBeacon: true,
+  },
+  {
+    target: ".paragraph__component",
+    title: "Company Description",
+    content: "Add or Edit a short description of what your Company is about.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: ".core__team",
+    title: "Core Team",
+    content: "Add or Edit members of your Core Team.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: ".milestones__component",
+    title: "Milestones",
+    content: "Add or Edit Milestones you have accomplished with Capital HUB.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+  {
+    target: ".card_holder",
+    title: "Investment Overview",
+    content: "Edit details about Investement details here.",
+    placement: "auto",
+    disableBeacon: true,
+  },
+];
+
 // Keep this in the bottom
 export const investorOnboardingSteps = {
   explorePage,
@@ -352,4 +390,5 @@ export const investorOnboardingSteps = {
   connectionsPage,
   companyProfilePage,
   oneLinkPage,
+  companyProfileEditPage,
 };
