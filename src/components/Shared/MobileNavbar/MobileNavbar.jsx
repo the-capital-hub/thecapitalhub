@@ -1,4 +1,5 @@
 import { BsGraphUpArrow, BsLink45Deg } from "react-icons/bs";
+import { IoCompassOutline } from "react-icons/io5";
 import { CiBellOn, CiSquarePlus } from "react-icons/ci";
 import { FiUsers } from "react-icons/fi";
 import { HiOutlineHome } from "react-icons/hi2";
@@ -73,7 +74,27 @@ export default function MobileNavbar({ isInvestor }) {
         )}
       </div>
 
-      <div
+      <div className="d-flex flex-column align-items-center mx-3">
+        {isInvestor ? (
+          <>
+            <NavLink to="/investor/explore">
+              <IoCompassOutline size={"20px"} />
+            </NavLink>
+            <span style={{ fontSize: "10px" }} className="text-center">
+              {"Explore"}
+            </span>
+          </>
+        ) : (
+          <>
+            <NavLink to="/explore">
+              <IoCompassOutline size={"25px"} />
+            </NavLink>
+            <span style={{ fontSize: "10px" }}>{"Explore"}</span>
+          </>
+        )}
+      </div>
+
+      {/* <div
         className="d-flex flex-column align-items-center mx-3 position-relative"
         onClick={handleToggleNotificationModal}
       >
@@ -94,7 +115,7 @@ export default function MobileNavbar({ isInvestor }) {
             {unreadNotifications}
           </span>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }
