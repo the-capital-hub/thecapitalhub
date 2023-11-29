@@ -183,8 +183,8 @@ const Chats = () => {
       <div className="mobile-nav border-bottom shadow-sm pb-2 px-2">
         <button
           className="btn btn-sm btn-light"
-          // onClick={() => dispatch(resetChat())}
-          onClick={() => navigate(-1)}
+          onClick={() => dispatch(resetChat())}
+          // onClick={() => navigate(-1)}
         >
           <IoMdArrowRoundBack /> Back
         </button>
@@ -193,12 +193,12 @@ const Chats = () => {
         </Link>
         <button
           className="btn btn-sm btn-light"
-          // onClick={() =>
-          //   navigate(
-          //     loggedInUser?.isInvestor === "true" ? "/investor/home" : "/home"
-          //   )
-          // }
-          onClick={() => dispatch(resetChat())}
+          onClick={() =>
+            navigate(
+              isInvestor === "true" ? "/investor/home" : "/home"
+            )
+          }
+          // onClick={() => dispatch(resetChat())}
         >
           <AiOutlineHome /> Home
         </button>
@@ -334,9 +334,9 @@ const Chats = () => {
               <div className="select-chat-container">
                 <img src={selectAChatIcon} alt="select a chat" />
                 <h3>Select a message</h3>
-                <span className="tch_svg">
+                {/* <span className="tch_svg">
                   <IconTCH />
-                </span>
+                </span> */}
               </div>
             )}
           </section>
