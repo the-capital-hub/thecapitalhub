@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 //   toggleinvestorCreatePostModal,
 // } from "../../../Store/features/design/designSlice";
 import MobileNavbar from "../../../components/Shared/MobileNavbar/MobileNavbar";
+import { setThemeColor } from "../../../utils/setThemeColor";
 
 function ProtectedInvestorRoutes({ children, ...props }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -27,6 +28,10 @@ function ProtectedInvestorRoutes({ children, ...props }) {
     setSidebarCollapsed((prev) => !prev);
   };
   const location = useLocation();
+
+  useEffect(() => {
+    setThemeColor();
+  }, []);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });

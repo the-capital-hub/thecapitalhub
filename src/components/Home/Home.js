@@ -14,8 +14,16 @@ import WhyChooseUsCard from "../Card/Home/WhyChooseUs/WhyChooseUsCard";
 import { featuresData } from "../../constants/LandingPageFeatures";
 import Features from "../WebsiteComponents/LandingPage/Features/Features";
 import LandingHero from "../WebsiteComponents/LandingPage/LandingHero/LandingHero";
+import { selectIsMobileApp } from "../../Store/features/design/designSlice";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 const Home = () => {
+  const isMobileApp = useSelector(selectIsMobileApp);
+  if (isMobileApp) {
+    return <Navigate to='login' />
+  }
+
   return (
     <>
       {/* Hero section */}

@@ -1,9 +1,10 @@
 export const setThemeColor = (custom) => {
-  const themeValue =
-    custom ||
-    JSON.parse(localStorage.getItem("loggedInUser"))?.isInvestor === "true"
-      ? "investor"
-      : "startup";
+  console.log("custom from themeColor", custom);
+  const themeValue = custom
+    ? custom
+    : JSON.parse(localStorage.getItem("loggedInUser"))?.isInvestor === "true"
+    ? "investor"
+    : "startup";
 
   document.documentElement.style.setProperty(
     "--currentTheme",

@@ -7,8 +7,8 @@ node_modules
 .pnp.js
 
 # mobile applications
-/android
-/ios
+# /android
+# /ios
 
 # testing
 /coverage

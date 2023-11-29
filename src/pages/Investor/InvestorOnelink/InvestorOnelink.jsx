@@ -26,9 +26,16 @@ import {
   OnePagerTeam,
 } from "../../../components/Shared/OnePager";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
+import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
+import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
+import {
+  selectUserCompanyData,
+  selectUserInvestor,
+} from "../../../Store/features/user/userSlice";
 
 export default function InvestorOnelink() {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const userInvestor = useSelector(selectUserInvestor);
+  const userCompanyData = useSelector(selectUserCompanyData);
   //   console.log(loggedInUser);
   // const userId = loggedInUser._id;
   const [isExitClicked, setIsExitClicked] = useState(false);
@@ -39,16 +46,20 @@ export default function InvestorOnelink() {
   useEffect(() => {
     document.title = "One Link | The Capital Hub";
     dispatch(setPageTitle("One Link"));
-  }, []);
+  }, [dispatch]);
 
   // Fetch data by userId
   useEffect(() => {
-    getInvestorById(loggedInUser.investor)
-      .then(({ data }) => {
-        setCompany(data);
-      })
-      .catch(() => setCompany([]));
-  }, [loggedInUser]);
+    if (!userCompanyData) {
+      getInvestorById(userInvestor)
+        .then(({ data }) => {
+          setCompany(data);
+        })
+        .catch(() => setCompany([]));
+    } else {
+      setCompany(userCompanyData);
+    }
+  }, [userInvestor, userCompanyData]);
 
   // HandleExitClick
   const handleExitClick = () => {
@@ -68,6 +79,13 @@ export default function InvestorOnelink() {
           {/* Main Content */}
           <div className="main_content">
             <SmallProfileCard text={"One Link"} />
+
+            {/* Onboarding popup */}
+            <TutorialTrigger
+              steps={investorOnboardingSteps.oneLinkPage}
+              className={""}
+            />
+
             <ShareLink
               OneLink={company?.oneLink}
               onExitClick={handleExitClick}
@@ -100,7 +118,10 @@ export default function InvestorOnelink() {
         {/* <OnePagePreview show={true} /> */}
 
         {company.length !== 0 ? (
-          <div className="onePager_wrapper d-flex flex-column gap-4" theme="investor">
+          <div
+            className="onePager_wrapper d-flex flex-column gap-4"
+            theme="investor"
+          >
             <OnePagerCompanyLogo image={company.logo} />
             <OnePagerCompanyInfo
               company={company.companyName}
@@ -120,7 +141,6 @@ export default function InvestorOnelink() {
         ) : (
           <SpinnerBS className={"d-flex justify-content-center w-100 py-5"} />
         )}
-
 
         {isExitClicked && company.introductoryMessage && (
           <SharingOneLinkPopUp

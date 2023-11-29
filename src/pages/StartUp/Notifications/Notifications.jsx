@@ -121,17 +121,17 @@ function Notifications() {
       <div className="notificaitons_container">
         {/* <ComingSoon /> */}
         <div className="d-flex gap-md-3 gap-2 py-4  px-2 mt-3 data_selector">
-          <button
-            className={` fs-6 rounded-pill py-md-3 px-md-5 py-2 px-4  ${
-              selectedTab === "All" ? "active" : ""
-            }`}
-            onClick={() => handleTabChange("All")}
-          >
+        <button
+  className={`fs-6 rounded-pill py-md-3 px-md-5 py-2 px-4 ${
+    selectedTab === "All" ? `active${isInvestor ? "investors" : "startup"}` : ""
+  } `}
+  onClick={() => handleTabChange("All")}
+>
             All
           </button>
           <button
             className={` fs-6  rounded-pill py-md-3 px-md-5 py-2 px-4 ${
-              selectedTab === "MY Post" ? "active" : ""
+              selectedTab === "MY Post" ? `active${isInvestor ? "investors" : "startup"}` : ""
             }`}
             onClick={() => handleTabChange("MY Post")}
           >

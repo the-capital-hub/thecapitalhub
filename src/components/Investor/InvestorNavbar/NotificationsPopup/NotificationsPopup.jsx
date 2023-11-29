@@ -192,7 +192,10 @@ function NotificationsPopup({ toggleVisibility }) {
                 className="btn btn-light btn-sm"
                 onClick={() => {
                   toggleVisibility(false);
-                  navigate("/notifications");
+                  navigate( isInvestor
+                    ? `/investor/notifications`
+                    : "/notifications");
+                  
                 }}
               >
                 Show all notifications

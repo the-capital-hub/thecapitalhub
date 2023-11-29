@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./OtherInvestorProfile.scss";
-import { useNavigate, useParams, Link } from "react-router-dom";
-import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
+import { useNavigate, useParams } from "react-router-dom";
+// import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import { getUserAndStartUpByUserIdAPI } from "../../../Service/user";
-import messageIcon from "../../../Images/StartUp/icons/message.svg";
-import { useDispatch, useSelector } from "react-redux";
-import IconMessage from "../../../components/NewInvestor/SvgIcons/IconMessage";
+// import messageIcon from "../../../Images/StartUp/icons/message.svg";
+import { useDispatch } from "react-redux";
+// import IconMessage from "../../../components/NewInvestor/SvgIcons/IconMessage";
 import ProfileHeader from "../../../components/NewInvestor/OtherInvestorProfile/ProfileHeader/ProfileHeader";
-import Experience from "../../../components/NewInvestor/OtherInvestorProfile/ProfileHeader/Experience";
+// import Experience from "../../../components/NewInvestor/OtherInvestorProfile/ProfileHeader/Experience";
 import CompanyDetailsCard from "../../../components/Investor/InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
 import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
 import lastRoundInvIcon from "../../../Images/StartUp/icons/ColoredCards/isoSideCoin.svg";
@@ -42,15 +42,15 @@ export default function OtherInvestorProfile() {
   useEffect(() => {
     dispatch(setPageTitle("Investor Profile"));
     window.title = "Investor Profile | The Capital Hub";
-  }, []);
+  }, [dispatch]);
 
   return (
     <MaxWidthWrapper>
       <div className="otherInvestorProfile_wrapper d-flex flex-column gap-4 px-1 px-sm-3 pb-4 border-start">
         {/* Small profile Section */}
-        <section className="">
+        {/* <section className="">
           <SmallProfileCard text="User Details" />
-        </section>
+        </section> */}
         {/* Profile Header section */}
         {userData ? (
           <section className="otherInvestor_header">

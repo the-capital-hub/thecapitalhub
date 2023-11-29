@@ -5,6 +5,7 @@ import { updateUserAPI } from "../../../../../Service/user";
 import {
   loginSuccess,
   selectIsInvestor,
+  selectUserBio,
 } from "../../../../../Store/features/user/userSlice";
 import SpinnerBS from "../../../../Shared/Spinner/SpinnerBS";
 import InvestorAfterSuccessPopUp from "../../../../PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
@@ -13,7 +14,7 @@ import AfterSuccessPopUp from "../../../../PopUp/AfterSuccessPopUp/AfterSuccessP
 
 export default function UserBio({ canEdit = true, bioText = "" }) {
   // Fetch from store
-  const userBio = useSelector((state) => state.user.loggedInUser?.bio);
+  const userBio = useSelector(selectUserBio);
   const isInvestor = useSelector(selectIsInvestor);
   const dispatch = useDispatch();
 
@@ -51,6 +52,7 @@ export default function UserBio({ canEdit = true, bioText = "" }) {
         className={`box personal_information ${canEdit ? "pb-4" : ""} ${
           isInvestor ? "rounded-4 border shadow-sm" : ""
         } `}
+        id="userBio"
       >
         <div className="personal_information_header">
           <h2 className="typography">Bio</h2>

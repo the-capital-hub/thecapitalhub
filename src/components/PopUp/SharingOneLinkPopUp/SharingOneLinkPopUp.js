@@ -12,6 +12,8 @@ import { HiOutlineClipboard } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { createSecretKey } from "../../../Service/user";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
+import { selectIsMobileApp } from "../../../Store/features/design/designSlice";
+import { Link } from "react-router-dom";
 
 const SharingOneLinkPopUp = ({
   introMessage,
@@ -23,20 +25,23 @@ const SharingOneLinkPopUp = ({
   const dispatch = useDispatch();
   const [isSecretKeyAssigned, setIsSecretKeyAssigned] = useState(false);
   const [loading, setLoading] = useState(false);
+  const isMobileApp = useSelector(selectIsMobileApp);
 
   // State for Invalid secret Key
   const [error, setError] = useState(null);
   const [pin, setPin] = useState(loggedInUser.secretKey || null);
 
   const shareUrl = investor
-    ? "https://thecapitalhub.in/investor/onelink/" +
-      oneLink +
-      "/" +
-      loggedInUser.oneLinkId
-    : "https://thecapitalhub.in/onelink/" +
-      oneLink +
-      "/" +
-      loggedInUser.oneLinkId;
+    ? "/investor/onelink/" +
+    oneLink +
+    "/" +
+    loggedInUser.oneLinkId
+    : "/onelink/" +
+    oneLink +
+    "/" +
+    loggedInUser.oneLinkId;
+  const targetAttribute = isMobileApp ? '_self' : '_blank';
+
   const messageForSharing = introMessage.replace(/<br\s*\/?>/g, "\n");
   const [copyStatus, setCopyStatus] = useState(""); // State for copy status
 
@@ -140,14 +145,15 @@ const SharingOneLinkPopUp = ({
           {/* )} */}
           <h6>
             Click here for:{" "}
-            <a
-              href={shareUrl}
-              target="_blank"
+            <Link
+              to={shareUrl}
+              // target="_blank"
+              target={targetAttribute}
               rel="noopener noreferrer"
               className="share_link"
             >
               OneLink
-            </a>
+            </Link>
           </h6>
 
           <h4>Share this details via</h4>

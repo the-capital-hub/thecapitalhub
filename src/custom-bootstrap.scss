@@ -1,6 +1,29 @@
 // Change bootstrap defaults
 // $danger: yellow;
-$primary: #fd5901;
+$primary: #0d6efd;
+$secondary: #6c757d;
+$success: #198754;
+$info: #0dcaf0;
+$warning: #ffc107;
+$danger: #dc3545;
+$light: #f8f9fa;
+$dark: #212529;
+$startup: #fd5901;
+$investor: #d3f36b;
+
+// theme colors
+$theme-colors: (
+  primary: $primary,
+  secondary: $secondary,
+  success: $success,
+  info: $info,
+  warning: $warning,
+  danger: $danger,
+  light: $light,
+  dark: $dark,
+  startup: $startup,
+  investor: $investor,
+);
 
 // Bootstrap Classes
 .container-fluid {

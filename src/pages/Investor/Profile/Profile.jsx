@@ -15,18 +15,22 @@ import InvestmentPhilosophy from "../../../components/NewInvestor/ProfileCompone
 import MissingDetails from "../../../components/Investor/InvestorHome/Components/Questionnaire/MissingDetails";
 import UserBio from "../../../components/Investor/InvestorHome/Components/UserBio/UserBio";
 import {
+  selectCompanyDataId,
   selectIsInvestor,
   selectUserInvestor,
   setUserCompany,
 } from "../../../Store/features/user/userSlice";
 import { getInvestorById } from "../../../Service/user";
 import AchievementsComponent from "../../../components/NewInvestor/ProfileComponents/AchievementsComponent/AchievementsComponent";
+import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
+import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
 
 function Profile() {
   // Fetch loggedInUser from global state
   // const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const isInvestor = useSelector(selectIsInvestor);
   const userInvestor = useSelector(selectUserInvestor);
+  const companyDataId = useSelector(selectCompanyDataId);
   const dispatch = useDispatch();
 
   // Update page title
@@ -35,7 +39,7 @@ function Profile() {
     dispatch(setPageTitle("Profile"));
 
     // Fetch company data
-    if (isInvestor) {
+    if (isInvestor && !companyDataId) {
       getInvestorById(userInvestor)
         .then(({ data }) => {
           dispatch(setUserCompany(data));
@@ -44,7 +48,7 @@ function Profile() {
           console.log(error);
         });
     }
-  }, [dispatch, isInvestor, userInvestor]);
+  }, [dispatch, isInvestor, userInvestor, companyDataId]);
 
   return (
     <MaxWidthWrapper>
@@ -52,6 +56,12 @@ function Profile() {
         <div className="two_col_wrapper">
           <div className="main_content">
             {/* <SmallProfileCard /> */}
+
+            {/* Onboarding popup */}
+            <TutorialTrigger
+              steps={investorOnboardingSteps.profilePage}
+              className={""}
+            />
 
             {/* Professional Info */}
             <ProfessionalInfo theme={"investor"} />

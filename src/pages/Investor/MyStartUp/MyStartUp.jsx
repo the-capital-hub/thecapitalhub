@@ -19,6 +19,11 @@ import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidth
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
 import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
+import {
+  selectMyInterests,
+  selectUserInvestor,
+  selectUserStartupsInvested,
+} from "../../../Store/features/user/userSlice";
 
 // Mock data for my investments
 // const investmentsData = [
@@ -52,7 +57,9 @@ import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/i
 // ];
 
 const MyStartUp = () => {
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const userInvestor = useSelector(selectUserInvestor);
+  const userStartupsInvested = useSelector(selectUserStartupsInvested);
+  const userMyInterests = useSelector(selectMyInterests);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -64,21 +71,27 @@ const MyStartUp = () => {
 
   // Save fetched data to state.
   // const [companyData, setCompanyData] = useState(investmentsData);
-  const [investedStartups, setInvestedStartups] = useState([]);
-  const [myInterests, setMyInterests] = useState([]);
-  const [investor, setInvestor] = useState([]);
+  const [investedStartups, setInvestedStartups] =
+    useState(userStartupsInvested);
+  const [myInterests, setMyInterests] = useState(userMyInterests);
+  // const [investor, setInvestor] = useState([]);
 
   useEffect(() => {
-    getInvestorById(loggedInUser?.investor)
-      .then(({ data }) => {
-        setInvestor(data);
-        setInvestedStartups(data.startupsInvested);
-        setMyInterests(data.myInterests);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [loggedInUser]);
+    if (!userMyInterests || !userStartupsInvested) {
+      getInvestorById(userInvestor)
+        .then(({ data }) => {
+          // setInvestor(data);
+          setInvestedStartups(data.startupsInvested);
+          setMyInterests(data.myInterests);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      setInvestedStartups(userStartupsInvested);
+      setMyInterests(userMyInterests);
+    }
+  }, [userInvestor, userStartupsInvested, userMyInterests]);
 
   return (
     <MaxWidthWrapper>
@@ -127,7 +140,7 @@ const MyStartUp = () => {
             className="card_container border-bottom p-4 d-flex gap-5 align-items-center overflow-x-auto"
             id="myInvestmentsCards"
           >
-            {investedStartups.length > 0
+            {investedStartups?.length > 0
               ? investedStartups?.map((company, index) => {
                   return (
                     <MyInvestmentCard key={company.name} company={company} />
@@ -195,7 +208,7 @@ const MyStartUp = () => {
             className="card_container p-4 d-flex gap-5 overflow-x-auto "
             id="myInterestsCards"
           >
-            {myInterests.length > 0
+            {myInterests?.length > 0
               ? myInterests?.map((company, index) => {
                   return (
                     <MyInvestmentCard
