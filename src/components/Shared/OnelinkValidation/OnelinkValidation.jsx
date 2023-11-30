@@ -4,10 +4,11 @@ import IconReportPost from "../../Investor/SvgIcons/IconReportPost";
 import IconPassword from "../../Investor/SvgIcons/IconPassword";
 import MaxWidthWrapper from "../MaxWidthWrapper/MaxWidthWrapper";
 import SpinnerBS from "../Spinner/SpinnerBS";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { validateSecretKey } from "../../../Service/user";
-import { useDispatch } from "react-redux";
-import { login, logout } from "../../../Store/features/oneLink/oneLinkSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../../Store/features/oneLink/oneLinkSlice";
+import { selectIsMobileApp } from "../../../Store/features/design/designSlice";
 
 export default function OnelinkValidation({ userId, theme = "startup" }) {
   const dispatch = useDispatch();
@@ -17,6 +18,8 @@ export default function OnelinkValidation({ userId, theme = "startup" }) {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   // const { userId } = useParams();
+  const isMobileApp = useSelector(selectIsMobileApp);
+  const navigate = useNavigate();
 
   // Handle invalid Secret Key
   const handleInvalid = (value) => {
@@ -61,6 +64,10 @@ export default function OnelinkValidation({ userId, theme = "startup" }) {
       setLoading(false);
     }
   };
+
+  const handleBack = () => {
+    navigate(-1);
+  }
 
   return (
     <MaxWidthWrapper>
@@ -116,6 +123,14 @@ export default function OnelinkValidation({ userId, theme = "startup" }) {
 
           {/* Action buttons */}
           <div className="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 ">
+            {isMobileApp &&
+              <button
+                type="button"
+                className="btn_cancel"
+                onClick={handleBack}
+              > Back
+              </button>
+            }
             <button
               type="button"
               className="btn_submit"

@@ -8,12 +8,14 @@ import {
   selectLoggedInUserId,
   selectUserEmail,
   selectUserName,
-  setUserCompany,
+  // setUserCompany,
+  loginSuccess
 } from "../../../../Store/features/user/userSlice";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 import {
-  postStartUpData,
+  // postStartUpData,
   submitFundingToMailAPI,
+  updateUserById
 } from "../../../../Service/user";
 import toast from "react-hot-toast";
 
@@ -49,14 +51,16 @@ export default function FundingForm({ setShowForm }) {
         biggestCompetitors: biggestCompetitors.value,
         revenueGenerated: revenueGenerated.value,
       },
-      founderId: loggedInUserId,
+      // founderId: loggedInUserId,
     };
     // Save to startUpData
     try {
       //   console.log("Save All", updatedData);
-      const { data } = await postStartUpData(updatedData);
+      // const { data } = await postStartUpData(updatedData);
       //   console.log("answers:", data);
-      dispatch(setUserCompany(data));
+      // dispatch(setUserCompany(data));
+      const { data: response } = await updateUserById(loggedInUserId, updatedData);
+      dispatch(loginSuccess(response.data));
     } catch (error) {
       console.error("Error Saving funding info:", error);
     }

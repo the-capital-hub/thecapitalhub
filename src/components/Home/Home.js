@@ -20,8 +20,16 @@ import { Navigate } from "react-router-dom";
 
 const Home = () => {
   const isMobileApp = useSelector(selectIsMobileApp);
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+
   if (isMobileApp) {
-    return <Navigate to='login' />
+    if (loggedInUser && loggedInUser.isInvestor === "true") {
+      return <Navigate to='/investor/home' />
+    } else if (loggedInUser && loggedInUser.isInvestor === "false") {
+      return <Navigate to='/home' />
+    } else {
+      return <Navigate to='login' />
+    }
   }
 
   return (
