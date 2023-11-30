@@ -44,7 +44,7 @@ export default function CommunitiesContainer({
 
   return (
     <details
-      className="communities__wrapper d-flex flex-column bg-white rounded-4 shadow-sm"
+      className="communities__wrapper d-flex flex-column bg-white rounded-4 shadow-sm overflow-hidden"
       open={isCommunityOpen}
     >
       <summary className="communities__header d-flex align-items-center gap-2 py-3 px-4 ">
@@ -61,7 +61,7 @@ export default function CommunitiesContainer({
           />
         </div>
       </summary>
-      <div className="communities__chats d-flex flex-column pb-4 border-top">
+      <div className="communities__chats d-flex flex-column border-top">
         {/* Add new */}
         <ModalBsLauncher
           id="AddNewCommunity"
@@ -79,8 +79,8 @@ export default function CommunitiesContainer({
         </ModalBSContainer> */}
 
         {/* Render communities list */}
-        <div className="my__communities d-flex flex-column gap-4 px-3 pt-4">
-          <h5 className="m-0">My Communities</h5>
+        <div className="my__communities d-flex flex-column">
+          <h5 className="px-3 m-0 py-3">My Communities</h5>
           {getCommunity?.data?.map((community, index) => {
             return (
               <CommunityCard
