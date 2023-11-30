@@ -132,7 +132,7 @@ const Feed = () => {
               <img
                 src={loggedInUser.profilePicture}
                 alt="Profile"
-                className="rounded-circle"
+                className="rounded-circle object-fit-cover"
                 style={{ width: "50px", height: "50px" }}
               />
               <div
