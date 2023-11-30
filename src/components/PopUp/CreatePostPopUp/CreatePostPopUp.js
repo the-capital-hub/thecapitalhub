@@ -40,9 +40,10 @@ const CreatePostPopUp = ({
   const [croppedImage, setCroppedImage] = useState(null);
   const dispatch = useDispatch();
 
-  const handleClose = () =>{ setPopupOpen(false);
+  const handleClose = () => {
+    setPopupOpen(false);
     dispatch(toggleCreatePostModal());
-  }
+  };
 
   const galleryInputRef = useRef(null);
   const documentInputRef = useRef(null);

@@ -57,6 +57,7 @@ function NotificationsPopup({ toggleVisibility }) {
             <Link
               to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
               className="fw-bold"
+              onClick={() => toggleVisibility(false)}
             >
               post
             </Link>
@@ -70,6 +71,7 @@ function NotificationsPopup({ toggleVisibility }) {
             <Link
               to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
               className="fw-bold"
+              onClick={() => toggleVisibility(false)}
             >
               post
             </Link>
@@ -83,6 +85,7 @@ function NotificationsPopup({ toggleVisibility }) {
             <Link
               to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
               className="fw-bold"
+              onClick={() => toggleVisibility(false)}
             >
               post
             </Link>
@@ -93,7 +96,11 @@ function NotificationsPopup({ toggleVisibility }) {
         return (
           <span>
             You have a new{" "}
-            <Link to={`/investor/my-schedule?view=true`} className="fw-bold">
+            <Link
+              to={`/investor/my-schedule?view=true`}
+              className="fw-bold"
+              onClick={() => toggleVisibility(false)}
+            >
               meeting
             </Link>{" "}
             request
@@ -126,6 +133,21 @@ function NotificationsPopup({ toggleVisibility }) {
     }
   };
 
+  // Handle Notification click
+  function handleNotificationClick(e, type, _id) {
+    // Gaurd clause that checks if event is coming from notification div. If it is not , we do nothing.
+    if (!e.target.classList.contains("notification")) {
+      return;
+    }
+
+    if (type.includes("post")) {
+      navigate(isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`);
+      toggleVisibility(false);
+    } else {
+      return;
+    }
+  }
+
   return (
     <div className="notifications-popup border shadow-sm rounded-4 bg-white">
       <div className="d-flex justify-content-between align-items-center py-1 border-bottom border-2">
@@ -149,7 +171,11 @@ function NotificationsPopup({ toggleVisibility }) {
                   post,
                   connection,
                 }) => (
-                  <div className="notification" key={_id}>
+                  <div
+                    className="notification"
+                    key={_id}
+                    onClick={(e) => handleNotificationClick(e, type, post)}
+                  >
                     <div className="content d-flex flex-column gap-2">
                       <p className="m-0">
                         <Link
@@ -192,10 +218,9 @@ function NotificationsPopup({ toggleVisibility }) {
                 className="btn btn-light btn-sm"
                 onClick={() => {
                   toggleVisibility(false);
-                  navigate( isInvestor
-                    ? `/investor/notifications`
-                    : "/notifications");
-                  
+                  navigate(
+                    isInvestor ? `/investor/notifications` : "/notifications"
+                  );
                 }}
               >
                 Show all notifications
