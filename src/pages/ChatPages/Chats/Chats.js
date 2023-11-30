@@ -3,7 +3,7 @@ import ChatSearch from "./ChatSearch/ChatSearch";
 import ChatSidebar from "./ChatSidebar/ChatSidebar";
 import ChatNavbar from "./ChatNavbar/ChatNavbar";
 import ChatDashboard from "./ChatDashboard/ChatDashboard";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import { environment } from "../../../environments/environment";
@@ -135,7 +135,7 @@ const Chats = () => {
   }, [sendMessage]);
 
   // create chat. Pass userId and loggedInUserId
-  const handleCreateChat = async () => {
+  const handleCreateChat = useCallback(async () => {
     setLoading((prev) => {
       return { ...prev, userChat: true };
     });
@@ -143,7 +143,6 @@ const Chats = () => {
       .then((res) => {
         console.log("from create chat:", res.data);
         dispatch(setChatId(res.data._id));
-        // dispatch(setUserId(userId));
         setLoading((prev) => {
           return { ...prev, userChat: false };
         });
@@ -151,7 +150,7 @@ const Chats = () => {
       .catch((error) => {
         console.error("Error creating chat-->", error);
       });
-  };
+  }, [paramUserId, loggedInUserId, dispatch]);
 
   // When userId changes findchat and set selectedChatId and selectedUserId
   // If a chat does not exist, create a new chat.
@@ -178,7 +177,7 @@ const Chats = () => {
     }
   }, [paramUserId, loggedInUserId, dispatch]);
 
-  const renderMobieHeader = () => {
+  const renderMobileHeader = useMemo(() => {
     return (
       <div className="mobile-nav border-bottom shadow-sm pb-2 px-2">
         <button
@@ -194,9 +193,7 @@ const Chats = () => {
         <button
           className="btn btn-sm btn-light"
           onClick={() =>
-            navigate(
-              isInvestor === "true" ? "/investor/home" : "/home"
-            )
+            navigate(isInvestor === "true" ? "/investor/home" : "/home")
           }
           // onClick={() => dispatch(resetChat())}
         >
@@ -204,9 +201,9 @@ const Chats = () => {
         </button>
       </div>
     );
-  };
+  }, [dispatch, isInvestor, navigate]);
 
-  const renderMobileMainSection = () => {
+  const renderMobileMainSection = useMemo(() => {
     return !isSettingsOpen ? (
       <>
         <ChatNavbar
@@ -236,7 +233,17 @@ const Chats = () => {
         <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
       </section>
     );
-  };
+  }, [
+    isSettingsOpen,
+    setCleared,
+    cleared,
+    setIsSettingsOpen,
+    setSendMessage,
+    recieveMessage,
+    isCommunitySelected,
+    setIsRead,
+    isRead,
+  ]);
 
   return (
     <>
@@ -284,10 +291,10 @@ const Chats = () => {
           </div>
           {/* Main Chat section */}
           <section className="main_section my-3">
-            {isMobileView && renderMobieHeader()}
+            {isMobileView && renderMobileHeader}
             {isMobileView ? (
               chatId ? (
-                renderMobileMainSection()
+                renderMobileMainSection
               ) : (
                 <section className="overflow-y-auto mobileView_chat_sidebar">
                   <div className="d-flex flex-column gap-3 px-1">
@@ -308,11 +315,7 @@ const Chats = () => {
               )
             ) : chatId && !loading?.userChat ? (
               <>
-                <ChatNavbar
-                  isclear={setCleared}
-                  cleared={cleared}
-                  setIsSettingsOpen={setIsSettingsOpen}
-                />
+                <ChatNavbar />
                 {!isCommunitySelected && (
                   <ChatDashboard
                     setSendMessage={setSendMessage}
@@ -336,7 +339,7 @@ const Chats = () => {
                 <h3>Select a message</h3>
                 {/* <span className="tch_svg">
                   <IconTCH />
-                </span> */}
+                 </span> */}
               </div>
             )}
           </section>
