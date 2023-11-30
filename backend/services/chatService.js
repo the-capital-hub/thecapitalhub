@@ -397,7 +397,7 @@ export const getAllChats = async (userId) => {
       ChatModel.find({
         members: { $in: [userId] },
         _id: { $nin: pinnedChatIds },
-      }).lean().populate('members'),
+      }).populate('members'),
 
       UserModel.findById(userId)
         .populate({
@@ -407,7 +407,7 @@ export const getAllChats = async (userId) => {
             model: "Users"
           }
         })
-        .lean(),
+      ,
 
       CommunityModel.find({ members: userId })
         .populate({
@@ -415,19 +415,43 @@ export const getAllChats = async (userId) => {
           model: "Users",
           select: "firstName lastName profilePicture",
         })
-        .lean()
+
     ]);
 
-    const chatDetails = getChatDetails(chats, userId);
-    const pinnedChatDetails = getChatDetails(pinnedChats.pinnedChat, userId);
-    const communityDetails = getChatDetails(communities, userId);
+    const chatDetails = await getChatDetails(chats, userId);
+    const pinnedChatDetails = await getChatDetails(pinnedChats.pinnedChat, userId);
+    const communityDetails = await getChatDetails(communities, userId);
+
+    //last messages
+    const allChatLastMessage = createLastMessageObject(chatDetails);
+    const allPinnedChatLastMessages = createLastMessageObject(pinnedChatDetails);
+    const allCommunityChatLastMessage = createLastMessageObject(communityDetails);
+
+    //last messages date
+    const allChatLastMessageDates = createLastMessageDateObject(chatDetails);
+    const allPinnedChatLastMessagesDates = createLastMessageDateObject(pinnedChatDetails);
+    const allCommunityChatLastMessageDates = createLastMessageDateObject(communityDetails);
+
+    // Unread message counts
+    const allChatsUnreadMessageCount = await calculateUnreadMessageCount(chats, userId);
+    const allPinnedChatUnreadMessageCount = await calculateUnreadMessageCount(pinnedChats.pinnedChat, userId);
+    const allCommunityChatUnreadMessageCount = await calculateUnreadMessageCount(communities, userId);
 
     return {
       status: 200,
       data: {
         allChats: chatDetails.map((chatDetail) => chatDetail.chat),
+        allChatLastMessage,
+        allChatLastMessageDates,
+        allChatsUnreadMessageCount,
         pinnedChat: pinnedChatDetails.map((chatDetail) => chatDetail.chat),
+        allPinnedChatLastMessages,
+        allPinnedChatLastMessagesDates,
+        allPinnedChatUnreadMessageCount,
         communities: communityDetails.map((chatDetail) => chatDetail.chat),
+        allCommunityChatLastMessage,
+        allCommunityChatLastMessageDates,
+        allCommunityChatUnreadMessageCount,
       }
     };
   } catch (error) {
@@ -439,24 +463,62 @@ export const getAllChats = async (userId) => {
   }
 };
 
-const getChatDetails = (chats, userId) => {
-  return chats.map((chat) => {
-    const lastMessage = MessageModel.findOne({ chatId: chat._id })
+const getChatDetails = async (chats, userId) => {
+  const details = await Promise.all(chats.map(async (chat) => {
+    const lastMessage = await MessageModel.findOne({ chatId: chat._id })
       .sort({ createdAt: -1 })
       .limit(1)
-      .lean()
       .populate('senderId');
 
     return { chat, lastMessage };
-  })
-    .sort((a, b) => {
-      if (a.lastMessage && b.lastMessage) {
-        return b.lastMessage.createdAt - a.lastMessage.createdAt;
-      } else if (a.lastMessage) {
-        return -1;
-      } else if (b.lastMessage) {
-        return 1;
-      }
-      return 0;
+  }));
+
+  return details.sort((a, b) => {
+    if (a.lastMessage && b.lastMessage) {
+      return b.lastMessage.createdAt - a.lastMessage.createdAt;
+    } else if (a.lastMessage) {
+      return -1;
+    } else if (b.lastMessage) {
+      return 1;
+    }
+    return 0;
+  });
+};
+
+const createLastMessageObject = (chatDetails) => {
+  const lastMessageObject = {};
+  chatDetails.forEach((chatDetail) => {
+    const { chat, lastMessage } = chatDetail;
+    if (lastMessage) {
+      lastMessageObject[chat._id] = lastMessage.text;
+    }
+  });
+  return lastMessageObject;
+};
+
+
+const createLastMessageDateObject = (chatDetails) => {
+  const lastMessageDateObject = {};
+  chatDetails.forEach((chatDetail) => {
+    const { chat, lastMessage } = chatDetail;
+    if (lastMessage) {
+      lastMessageDateObject[chat._id] = lastMessage.createdAt;
+    }
+  });
+  return lastMessageDateObject;
+};
+
+
+const calculateUnreadMessageCount = async (chats, userId) => {
+  const unreadMessageCount = {};
+
+  for (const chat of chats) {
+    const unreadCount = await MessageModel.countDocuments({
+      chatId: chat._id,
+      senderId: { $ne: userId },
+      read: false,
     });
+    unreadMessageCount[chat._id] = unreadCount;
+  }
+  return unreadMessageCount;
 };
