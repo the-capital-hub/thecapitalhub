@@ -20,6 +20,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {
   setPageTitle,
   selectCreatePostModal,
+  toggleCreatePostModal,
 } from "../../../Store/features/design/designSlice";
 import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
 import TutorialTrigger from "../../Shared/TutorialTrigger/TutorialTrigger";
@@ -46,6 +47,7 @@ const Feed = () => {
   // Methods
   const openPopup = () => {
     setPopupOpen(!popupOpen);
+    dispatch(toggleCreatePostModal());
   };
 
   const appendDataToAllPosts = (data) => {
