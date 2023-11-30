@@ -231,6 +231,13 @@ const userSchema = new Schema(
     investmentStage: {
       type: String,
     },
+    fundingViaCapitalhubQuestions: {
+      targetMarket: String,
+      whyRightTimeForYourStartUp: String,
+      competitiveAdvantage: String,
+      biggestCompetitors: String,
+      revenueGenerated: String,
+    }
   },
   {
     timestamps: true,

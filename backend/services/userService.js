@@ -135,7 +135,7 @@ export const getStartUpData = async (userId) => {
 
 export const updateUserById = async (userId, newData) => {
   try {
-    const data = await UserModel.findByIdAndUpdate(userId, { ...newData });
+    const data = await UserModel.findByIdAndUpdate(userId, { ...newData }, { new: true });
     return {
       status: 200,
       message: "User updated succesfully",
@@ -674,6 +674,16 @@ export const validateSecretKey = async ({ oneLinkId, secretOneLinkKey }) => {
         message: "User not found",
       };
     }
+
+    if (!user.secretKey) {
+      const token = jwt.sign({}, secretKey, { expiresIn: "1h" });
+      return {
+        status: 200,
+        message: "Secret key is valid",
+        token,
+      };
+    }
+
     if (secretOneLinkKey === user.secretKey) {
       const token = jwt.sign({}, secretKey, { expiresIn: "1h" });
       return {

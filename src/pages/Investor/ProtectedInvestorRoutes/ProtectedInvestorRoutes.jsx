@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 // } from "../../../Store/features/design/designSlice";
 import MobileNavbar from "../../../components/Shared/MobileNavbar/MobileNavbar";
 import { setThemeColor } from "../../../utils/setThemeColor";
+import { Toaster } from "react-hot-toast";
 
 function ProtectedInvestorRoutes({ children, ...props }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -59,9 +60,8 @@ function ProtectedInvestorRoutes({ children, ...props }) {
         />
 
         <div
-          className={`container-fluid p-0 newInvestor_container ${
-            sidebarCollapsed ? "sidebar-collapsed" : ""
-          }`}
+          className={`container-fluid p-0 newInvestor_container ${sidebarCollapsed ? "sidebar-collapsed" : ""
+            }`}
         >
           <div className="sidebar">
             <InvestorSidebar
@@ -93,6 +93,12 @@ function ProtectedInvestorRoutes({ children, ...props }) {
             </ModalBSBody>
           </ModalBSContainer>
         </div>
+
+        <Toaster
+          containerStyle={{
+            top: "100px",
+          }}
+        />
       </>
     );
   } else <Navigate to="/login" replace />;
