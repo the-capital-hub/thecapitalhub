@@ -119,6 +119,7 @@ export const selectUserRecentEducation = (state) =>
 export const selectUserName = (state) =>
   state.user.loggedInUser?.firstName + " " + state.user.loggedInUser?.lastName;
 export const selectUserEmail = (state) => state.user.loggedInUser?.email;
+export const selectUserBio = (state) => state.user.loggedInUser?.bio;
 
 // unread Notifications selector
 export const selectUnreadNotifications = (state) =>

@@ -5,6 +5,7 @@ import { updateUserAPI } from "../../../../../Service/user";
 import {
   loginSuccess,
   selectIsInvestor,
+  selectUserBio,
 } from "../../../../../Store/features/user/userSlice";
 import SpinnerBS from "../../../../Shared/Spinner/SpinnerBS";
 import InvestorAfterSuccessPopUp from "../../../../PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
@@ -13,7 +14,7 @@ import AfterSuccessPopUp from "../../../../PopUp/AfterSuccessPopUp/AfterSuccessP
 
 export default function UserBio({ canEdit = true, bioText = "" }) {
   // Fetch from store
-  const userBio = useSelector((state) => state.user.loggedInUser?.bio);
+  const userBio = useSelector(selectUserBio);
   const isInvestor = useSelector(selectIsInvestor);
   const dispatch = useDispatch();
 

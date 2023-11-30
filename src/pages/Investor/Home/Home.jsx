@@ -25,15 +25,21 @@ import {
 // import OnBoardUser from "../../../components/OnBoardUser/OnBoardUser";
 import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
 import {
+  selectCompanyDataId,
   selectIsInvestor,
+  selectLoggedInUserId,
   selectUserInvestor,
+  selectUserProfilePicture,
   setUserCompany,
 } from "../../../Store/features/user/userSlice";
 import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
 
 function Home() {
+  const loggedInUserId = useSelector(selectLoggedInUserId);
+  const userProfilePicture = useSelector(selectUserProfilePicture);
   const isInvestor = useSelector(selectIsInvestor);
   const userInvestor = useSelector(selectUserInvestor);
+  const companyDataId = useSelector(selectCompanyDataId);
 
   const [popupOpen, setPopupOpen] = useState(false);
   const [allPosts, setAllPosts] = useState([]);
@@ -69,7 +75,7 @@ function Home() {
     document.title = "Home | Investors - The Capital Hub";
 
     // Fetch company data
-    if (isInvestor) {
+    if (isInvestor && !companyDataId) {
       getInvestorById(userInvestor)
         .then(({ data }) => {
           dispatch(setUserCompany(data));
@@ -78,9 +84,7 @@ function Home() {
           console.log(error);
         });
     }
-  }, [dispatch, isInvestor, userInvestor]);
-
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  }, [dispatch, isInvestor, userInvestor, companyDataId]);
 
   const fetchMorePosts = () => {
     getAllPostsAPI(page)
@@ -100,7 +104,7 @@ function Home() {
   };
 
   useEffect(() => {
-    getSavedPostCollections(loggedInUser._id)
+    getSavedPostCollections(loggedInUserId)
       .then((data) => {
         setgetSavedPostData(data);
       })
@@ -108,7 +112,7 @@ function Home() {
         console.log(error.message);
       });
     fetchMorePosts();
-  }, [newPost]);
+  }, [newPost, loggedInUserId]);
 
   console.log(allPosts?.[0]);
 
@@ -151,7 +155,7 @@ function Home() {
             {/* Write a post */}
             <div className="box start_post_container border">
               <img
-                src={loggedInUser.profilePicture}
+                src={userProfilePicture}
                 alt="Profile"
                 className="rounded-circle"
                 style={{ objectFit: "cover" }}
