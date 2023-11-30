@@ -1,6 +1,6 @@
 .chat_dashboard_container {
   // -190px because chat nav is fixed to 106px and there is some margin at the top and bottom.
-  height: calc(100vh - 190px);
+  height: calc(100vh - 170px);
   border-radius: var(--border-radius);
   border: 1px solid #cfcfcf;
   background: #fff;
@@ -86,7 +86,7 @@
     scrollbar-color: var(--currentTheme) transparent;
 
     &::-webkit-scrollbar {
-      width: 12px;
+      width: 4px;
     }
 
     &::-webkit-scrollbar-thumb {
@@ -142,14 +142,18 @@
 
         .message_container {
           background-color: #eaeef2;
-          padding: 10px 20px;
-          border-top-right-radius: 20px;
-          border-bottom-right-radius: 20px;
-          border-bottom-left-radius: 20px;
-          margin-bottom: 10px;
+          padding: 5px 10px;
+          border-top-right-radius: 10px;
+          border-bottom-right-radius: 10px;
+          border-bottom-left-radius: 10px;
+          margin-bottom: 5px;
           display: flex;
           flex-direction: column;
           align-items: center;
+
+          p {
+            font-size: 14px;
+          }
 
           a {
             // color: rgb(93, 93, 93);
@@ -216,16 +220,20 @@
 
           background-color: var(--currentTheme);
           color: var(--currentTheme-text);
-          padding: 10px 20px;
-          border-top-left-radius: 20px;
-          border-bottom-right-radius: 20px;
-          border-bottom-left-radius: 20px;
-          margin-bottom: 10px;
+          padding: 5px 10px;
+          border-top-left-radius: 10px;
+          border-bottom-right-radius: 10px;
+          border-bottom-left-radius: 10px;
+          margin-bottom: 5px;
           // margin-right: 50px;
           margin-right: 10px;
           display: flex;
           flex-direction: column;
           align-items: stretch;
+
+          p {
+            font-size: 14px;
+          }
 
           .chatDropDownMenu {
             display: none;
@@ -271,7 +279,7 @@
   }
 
   .chat_input_section {
-    padding-bottom: 20px;
+    // padding-bottom: 20px;
     // position: absolute;
     bottom: 0px;
     width: 100%;

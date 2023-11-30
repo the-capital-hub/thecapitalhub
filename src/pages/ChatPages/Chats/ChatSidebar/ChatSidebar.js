@@ -20,6 +20,7 @@ import {
   setIsCommuntySelected,
 } from "../../../../Store/features/chat/chatSlice";
 import { selectLoggedInUserId } from "../../../../Store/features/user/userSlice";
+import IconPin from "../../../../components/Investor/SvgIcons/IconPin";
 
 const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   const loggedInUserId = useSelector(selectLoggedInUserId);
@@ -210,12 +211,22 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
                           {messageTime !== "Invalid Date" && (
                             <div className="time">{messageTime}</div>
                           )}
-                          <img
+                          {/* <img
                             src={pinIcon}
                             className="pt-1 px-1 ms-auto"
                             onClick={() => handlePinClick(chat._id)}
                             alt="Pin"
-                          />
+                          /> */}
+                          <span
+                            className="pt-1 px-1 ms-auto"
+                            onClick={() => handlePinClick(chat._id)}
+                            style={{
+                              color: "var(--currentTheme)",
+                              opacity: "0.75",
+                            }}
+                          >
+                            <IconPin />
+                          </span>
                           {unreadMessageCount > 0 && (
                             <div className="notification">
                               {unreadMessageCount}

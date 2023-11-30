@@ -74,7 +74,7 @@
       scrollbar-color: var(--currentTheme) transparent;
 
       &::-webkit-scrollbar {
-        width: 12px;
+        width: 4px;
       }
 
       &::-webkit-scrollbar-thumb {
@@ -133,7 +133,7 @@
 
       .mobileView_chat_sidebar {
         &::-webkit-scrollbar {
-          width: 8px;
+          width: 4px;
         }
 
         &::-webkit-scrollbar-thumb {
