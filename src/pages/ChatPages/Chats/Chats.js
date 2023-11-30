@@ -294,7 +294,7 @@ const Chats = () => {
             {isMobileView && renderMobileHeader}
             {isMobileView ? (
               chatId ? (
-                renderMobileMainSection()
+                renderMobileMainSection
               ) : (
                 <section className="overflow-y-auto mobileView_chat_sidebar">
                   <div className="d-flex flex-column gap-3 px-1">
@@ -315,7 +315,7 @@ const Chats = () => {
               )
             ) : chatId && !loading?.userChat ? (
               <>
-                {renderMobileHeader}
+                <ChatNavbar />
                 {!isCommunitySelected && (
                   <ChatDashboard
                     setSendMessage={setSendMessage}
