@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import "./ChatSidebar.scss";
 // import profileImage from "../../../../Images/Pramod.jpeg";
 import pinIcon from "../../../../Images/Chat/Pin.svg";
@@ -27,9 +27,9 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
 
   const [chats, setChats] = useState([]);
   const [pinnedChats, setPinnedChats] = useState([]);
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const chatUserId = queryParams.get("userId");
+  // const location = useLocation();
+  // const queryParams = new URLSearchParams(location.search);
+  // const chatUserId = queryParams.get("userId");
   const [latestMessages, setLatestMessages] = useState({});
   const [unreadMessageCounts, setUnreadMessageCounts] = useState({});
   const [dates, setDates] = useState({});
@@ -39,7 +39,6 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   // Handle PinClick
   const handlePinClick = (chatId) => {
     togglePinMessage(loggedInUserId, chatId).then((res) => {
-      console.log(res);
       setPinnedChat(true);
       setTimeout(() => {
         setPinnedChat(false);
@@ -48,26 +47,30 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   };
 
   useEffect(() => {
-    getPinnedChat(loggedInUserId).then((res) => {
-      console.log(res.data);
-      setPinnedChats(res.data);
-      res.data.forEach((chat) => {
-        handleGetMessageByChatId(chat._id);
-        handleGetUnreadMessageCount(chat._id);
-      });
-    });
-    getUserChats(loggedInUserId)
-      .then((res) => {
-        setChats(res.data);
-        console.log(res.data);
-        res.data.forEach((chat) => {
+    const fetchData = async () => {
+      try {
+        const [pinnedChatResponse, userChatsResponse] = await Promise.all([
+          getPinnedChat(loggedInUserId),
+          getUserChats(loggedInUserId),
+        ]);
+
+        setPinnedChats(pinnedChatResponse.data);
+        pinnedChatResponse.data.forEach((chat) => {
           handleGetMessageByChatId(chat._id);
           handleGetUnreadMessageCount(chat._id);
         });
-      })
-      .catch((error) => {
+
+        setChats(userChatsResponse.data);
+        userChatsResponse.data.forEach((chat) => {
+          handleGetMessageByChatId(chat._id);
+          handleGetUnreadMessageCount(chat._id);
+        });
+      } catch (error) {
         console.error("Error-->", error);
-      });
+      }
+    };
+
+    fetchData();
   }, [
     loggedInUserId,
     sendMessage,
@@ -77,55 +80,62 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   ]);
 
   // Handle selected chat
-  const handleSelectedChat = (chatId, userId) => {
-    console.log(userId);
-    dispatch(setChatId(chatId));
-    dispatch(setUserId(userId));
-    dispatch(setIsCommuntySelected(false));
+  const handleSelectedChat = useMemo(
+    () => (chatId, userId) => {
+      dispatch(setChatId(chatId));
+      dispatch(setUserId(userId));
+      dispatch(setIsCommuntySelected(false));
+      setSelectedUserChat(userId);
+    },
+    [dispatch]
+  );
 
-    setSelectedUserChat(userId);
-  };
-
-  const handleGetMessageByChatId = (chatId) => {
-    getLastMessage(chatId)
-      .then((res) => {
-        const latestMessage = res.data;
-        if (latestMessage) {
-          let messageText = latestMessage.text;
-          if (latestMessage.video) {
-            messageText = "video";
-          } else if (latestMessage.documents) {
-            messageText = "document";
-          } else if (latestMessage.images) {
-            messageText = "image";
+  const handleGetMessageByChatId = useMemo(
+    () => (chatId) => {
+      getLastMessage(chatId)
+        .then((res) => {
+          const latestMessage = res.data;
+          if (latestMessage) {
+            let messageText = latestMessage.text;
+            if (latestMessage.video) {
+              messageText = "video";
+            } else if (latestMessage.documents) {
+              messageText = "document";
+            } else if (latestMessage.images) {
+              messageText = "image";
+            }
+            setLatestMessages((prevLatestMessages) => ({
+              ...prevLatestMessages,
+              [chatId]: messageText,
+            }));
+            setDates((prevLatestMessages) => ({
+              ...prevLatestMessages,
+              [chatId]: latestMessage.createdAt,
+            }));
           }
-          setLatestMessages((prevLatestMessages) => ({
-            ...prevLatestMessages,
-            [chatId]: messageText,
-          }));
-          setDates((prevLatestMessages) => ({
-            ...prevLatestMessages,
-            [chatId]: latestMessage.createdAt,
-          }));
-        }
-      })
-      .catch((error) => {
-        console.error("Error-->", error);
-      });
-  };
+        })
+        .catch((error) => {
+          console.error("Error-->", error);
+        });
+    },
+    []
+  );
 
-  const handleGetUnreadMessageCount = (chatId) => {
-    getUnreadMessageCount(chatId, loggedInUserId)
-      .then((res) => {
-        setUnreadMessageCounts((prevUnreadMessageCounts) => ({
-          ...prevUnreadMessageCounts,
-          [chatId]: res.data,
-        }));
-      })
-      .catch((error) => {
-        console.error("Error-->", error);
-      });
-  };
+  const handleGetUnreadMessageCount = useMemo(
+    () => (chatId) => {
+      getUnreadMessageCount(chatId, loggedInUserId)
+        .then((res) => {
+          setUnreadMessageCounts((prevUnreadMessageCounts) => ({
+            ...prevUnreadMessageCounts,
+            [chatId]: res.data,
+          }));
+        })
+        .catch((error) => {
+          console.error("Error-->", error);
+        });
+    },
+    [loggedInUserId]
+  );
 
   const formatTimestamp = (timestamp) => {
     const messageDate = new Date(timestamp);
@@ -157,34 +167,6 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
           <span style={{ margin: "5px 20px" }}>
             <img src={pinIcon} alt="" /> PINNED
           </span>
-          {/* <div className="person_wise_chat mt-2"> */}
-          {/* <section className="user_chat mt-3">
-              <div className="left">
-                <img src={profileImage} className="rounded_img" />
-                <div className="title_and_message">
-                  <h5 className="name_title">Raju</h5>
-                  <h5 className="message_title">Hey Hi! there what’s up</h5>
-                </div>
-              </div>
-              <div className="right">
-                <div className="time">09:00 am</div>
-                <div className="notification">2</div>
-          
-              </div>
-            </section>
-            <section className="user_chat mt-3">
-              <div className="left">
-                <img src={profileImage} className="rounded_img" />
-                <div className="title_and_message">
-                  <h5 className="name_title">Raju</h5>
-                  <h5 className="message_title">Hey Hi! there what’s up</h5>
-                </div>
-              </div>
-              <div className="right">
-                <div className="time">09:00 am</div>
-                <div className="notification">2</div>
-              </div>
-            </section> */}
           {pinnedChats?.map((chat, index) => (
             <div key={index} className="person_wise_chat mt-2">
               {chat.members.map((member) => {
