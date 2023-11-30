@@ -51,10 +51,10 @@ export default function AddMilestoneModal({
           badge: MockBadge,
         }));
 
-        console.log("milestones", milestones);
+        // console.log("milestones", milestones);
         setAllMilestones(milestones);
       } catch (error) {
-        console.log("Error fetching milestones:", error);
+        console.error("Error fetching milestones:", error);
       }
     }
 

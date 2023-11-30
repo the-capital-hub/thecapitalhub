@@ -79,6 +79,7 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
           <img
             src={user?.profilePicture || community?.profileImage}
             className="rounded_img"
+            alt={`${user?.firstName} ${user?.lastName}`}
           />
           <div className="title_and_message">
             <h5 className="name_title text-capitalize">
@@ -98,6 +99,7 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
             src={threeDotIcon}
             className="threedot"
             onClick={() => setChatkebabMenu(!chatkebabMenu)}
+            alt=""
           />
           {chatkebabMenu && (
             <ul className="kebab_menu border rounded shadow-sm p-3">

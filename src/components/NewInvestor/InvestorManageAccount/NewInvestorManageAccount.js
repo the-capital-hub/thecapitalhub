@@ -15,6 +15,8 @@ import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
 import deleteIcon from "../../../Images/post/delete.png";
+import { fetchCompanyData } from "../../../Store/features/user/userSlice";
+import toast from "react-hot-toast";
 
 const InvestorManageAccount = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -87,8 +89,14 @@ const InvestorManageAccount = () => {
       if (confirmSwitch) {
         setTimeout(() => {
           dispatch(loginSuccess(selectedAccountFull.user));
+          let isInvestor = selectedAccountFull.user.isInvestor === "true" ? true : false;
+          dispatch(fetchCompanyData(selectedAccountFull.user.investor, isInvestor));
           localStorage.setItem("accessToken", selectedAccountFull.token);
           setIsSubmitting(false);
+          toast.success("Account switched successfully", {
+            duration: 3000,
+            position: "top-center",
+          });
         }, 2000);
       }
     }
@@ -276,16 +284,16 @@ const InvestorManageAccount = () => {
                         <div className="small_card">
                           <div className="left_section">
                             <div className="d-flex align-items-center">
-                            <label className="checkbox_container me-2">
-                              <input
-                                type="checkbox"
-                                checked={
-                                  account.user._id === selectedAccount._id
-                                }
-                                onClick={() => handleSelectedAccount(account)}
-                              />
-                              <span className="checkmark"></span>
-                            </label>
+                              <label className="checkbox_container me-2">
+                                <input
+                                  type="checkbox"
+                                  checked={
+                                    account.user._id === selectedAccount._id
+                                  }
+                                  onClick={() => handleSelectedAccount(account)}
+                                />
+                                <span className="checkmark"></span>
+                              </label>
 
                               <div className="profile_image">
                                 <img src={account.user.profilePicture} alt="img" />
@@ -293,13 +301,13 @@ const InvestorManageAccount = () => {
                               <div className="name_email">
                                 <h4>{account.user.firstName} {account.user.lastName}</h4>
                                 <h6>
-                                {window.innerWidth <= 600
-                                      ?  account.user.email.slice(0, 21) ===
+                                  {window.innerWidth <= 600
+                                    ? account.user.email.slice(0, 21) ===
                                       account.user.email
-                                    ? account.user.email
-                                    : account.user.email.slice(0, 21) + "..."
-                                      : account.user.email.slice(0, 23) ===
-                                        account.user.email
+                                      ? account.user.email
+                                      : account.user.email.slice(0, 21) + "..."
+                                    : account.user.email.slice(0, 23) ===
+                                      account.user.email
                                       ? account.user.email
                                       : account.user.email.slice(0, 23) + "..."}
                                 </h6>
@@ -307,7 +315,7 @@ const InvestorManageAccount = () => {
                             </div>
                           </div>
                           <div className="right_section d-flex flex-column">
-                            
+
                             <button
                               className="img-btn  pt-md-2"
                               onClick={() => handleRemoveAccount(account)}

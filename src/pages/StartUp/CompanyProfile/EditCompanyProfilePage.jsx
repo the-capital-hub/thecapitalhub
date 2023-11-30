@@ -65,12 +65,12 @@ export default function EditCompanyProfilePage() {
       setCompanyData(userCompanyData);
       setCompanyDescription(userCompanyData.description);
       setColorCardData({
-        last_round_investment: userCompanyData.colorCard.last_round_investment,
-        total_investment: userCompanyData.colorCard.total_investment,
-        no_of_investers: userCompanyData.colorCard.no_of_investers,
-        fund_ask: userCompanyData.colorCard.fund_ask,
-        valuation: userCompanyData.colorCard.valuation,
-        raised_funds: userCompanyData.colorCard.raised_funds,
+        last_round_investment: userCompanyData.colorCard?.last_round_investment,
+        total_investment: userCompanyData.colorCard?.total_investment,
+        no_of_investers: userCompanyData.colorCard?.no_of_investers,
+        fund_ask: userCompanyData.colorCard?.fund_ask,
+        valuation: userCompanyData.colorCard?.valuation,
+        raised_funds: userCompanyData.colorCard?.raised_funds,
       });
     }
     window.title = "Edit Company Profile | The Capital Hub";

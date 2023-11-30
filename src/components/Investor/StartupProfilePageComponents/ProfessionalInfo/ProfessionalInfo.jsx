@@ -38,6 +38,7 @@ export default function ProfessionalInfo({ theme }) {
   // State for isEditing
   const [isEditing, setIsEditing] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // Fetch professional data
   useEffect(() => {
@@ -46,7 +47,7 @@ export default function ProfessionalInfo({ theme }) {
     } else {
       setProfessionalData((prev) => ({ ...prev, company: companyName }));
     }
-  }, [setProfessionalData, companyName, isInvestor]);
+  }, [companyName, isInvestor]);
 
   // Handle Text Change
   function handleTextChange(e) {
@@ -65,6 +66,7 @@ export default function ProfessionalInfo({ theme }) {
   // Handle Submit
   async function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true);
 
     let editedData = {
       designation: professionalData.designation,
@@ -81,9 +83,19 @@ export default function ProfessionalInfo({ theme }) {
       const {
         data: { data },
       } = await updateUserAPI(editedData);
-
+      console.log("data updateUserAPI", data);
       // Set new loggedInUser data
       dispatch(loginSuccess(data));
+      // Set local state
+      setProfessionalData((prev) => ({
+        ...prev,
+        designation: data?.designation,
+        education: data?.education,
+        experience: data?.experience,
+        profilePicture: data?.profilePicture,
+        fullName: data?.firstName + " " + data?.lastName,
+        location: data?.location,
+      }));
 
       if (isInvestor) {
         let editedCompanyName = {
@@ -102,11 +114,12 @@ export default function ProfessionalInfo({ theme }) {
         // console.log("post startup", data.company);
         dispatch(updateUserCompany({ company: data.company }));
       }
-
-      setIsEditing(false);
-      setSelectedFile(null);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsEditing(false);
+      setLoading(false);
+      setSelectedFile(null);
     }
   }
 
@@ -125,6 +138,7 @@ export default function ProfessionalInfo({ theme }) {
         handleTextChange={handleTextChange}
         handleFileChange={handleFileChange}
         handleSubmit={handleSubmit}
+        loading={loading}
       />
     </section>
   );
