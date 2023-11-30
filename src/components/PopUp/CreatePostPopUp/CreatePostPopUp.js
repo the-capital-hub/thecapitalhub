@@ -227,7 +227,7 @@ const CreatePostPopUp = ({
         setNewPost(Math.random());
         handleClose();
         dispatch(toggleCreatePostModal());
-        console.log(!loggedInUser.achievements.includes('6564684649186bca517cd0c9'));
+        
         if (!loggedInUser.achievements.includes('6564684649186bca517cd0c9')) {
           const achievements = [...loggedInUser.achievements];
           achievements.push('6564684649186bca517cd0c9');

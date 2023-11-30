@@ -38,7 +38,7 @@ const RecommendationCard = ({ isInvestor, maxCount = 5 }) => {
           // setUsers({})
         });
     }
-  }, []);
+  }, [dispatch, loggedInUser._id, recommendations]);
 
   // Handle connect
   const handleConnect = (userId) => {

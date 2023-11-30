@@ -125,7 +125,7 @@ const Documentation = () => {
             )}
             <div>
               {/* <button onClick={notify}>Make me a toast</button> */}
-              <Toaster />
+              {/* <Toaster /> */}
             </div>
             <IntroductoryMessage
               title={"Upload your document"}

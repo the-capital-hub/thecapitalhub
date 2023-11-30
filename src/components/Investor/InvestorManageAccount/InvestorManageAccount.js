@@ -14,6 +14,8 @@ import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
 import deleteIcon from "../../../Images/post/delete.png";
+import { fetchCompanyData } from "../../../Store/features/user/userSlice";
+import toast from "react-hot-toast";
 
 const InvestorManageAccount = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -83,8 +85,14 @@ const InvestorManageAccount = () => {
       if (confirmSwitch) {
         setTimeout(() => {
           dispatch(loginSuccess(selectedAccountFull.user));
+          let isInvestor = selectedAccountFull.user.isInvestor === "true" ? true : false;
+          dispatch(fetchCompanyData(selectedAccountFull.user._id, isInvestor));
           localStorage.setItem("accessToken", selectedAccountFull.token);
           setIsSubmitting(false);
+          toast.success("Account switched successfully", {
+            duration: 3000,
+            position: "top-center",
+          });
         }, 2000);
       }
     }
@@ -302,14 +310,14 @@ const InvestorManageAccount = () => {
                                   <h6>
                                     {" "}
                                     {window.innerWidth <= 600
-                                      ?  account.user.email.slice(0, 21) ===
-                                      account.user.email
-                                    ? account.user.email
-                                    : account.user.email.slice(0, 21) + "..."
+                                      ? account.user.email.slice(0, 21) ===
+                                        account.user.email
+                                        ? account.user.email
+                                        : account.user.email.slice(0, 21) + "..."
                                       : account.user.email.slice(0, 23) ===
                                         account.user.email
-                                      ? account.user.email
-                                      : account.user.email.slice(0, 23) + "..."}
+                                        ? account.user.email
+                                        : account.user.email.slice(0, 23) + "..."}
                                   </h6>
                                 </div>
                               </div>

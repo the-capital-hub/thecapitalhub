@@ -142,29 +142,41 @@ export const acceptConnectionRequest = async (connectionId) => {
       connectionId,
       { status: "accepted" },
       { new: true }
-    );
-    await UserModel.findOneAndUpdate(
-      { _id: connection.sender },
-      { $pull: { connectionsSent: connection.receiver } }
-    );
-    await UserModel.findOneAndUpdate(
-      { _id: connection.sender },
-      { $push: { connections: connection.receiver } }
-    );
-    await UserModel.findOneAndUpdate(
-      { _id: connection.receiver },
-      { $pull: { connectionsReceived: connection.sender } }
-    );
-    await UserModel.findOneAndUpdate(
-      { _id: connection.receiver },
-      { $push: { connections: connection.sender } }
-    );
+    ).populate('sender receiver');
+
+    await connection.sender.populate("startUp");
+    await connection.sender.populate("investor");
+    await connection.receiver.populate("startUp");
+    await connection.receiver.populate("investor");
+    const { sender, receiver } = connection;
+    let isFirst = false;
+    if (sender.startUp?.founderId.toString() === sender._id.toString() || sender.investor?.founderId.toString() === sender._id.toString()) {
+      if (!sender.achievements.includes('6568616cef0982c58957e779')) {
+        await UserModel.findByIdAndUpdate(sender._id, { $push: { achievements: '6568616cef0982c58957e779' } });
+      }
+    }
+    if (receiver.startUp?.founderId.toString() === receiver._id.toString() || receiver.investor?.founderId.toString() === receiver._id.toString()) {
+      if (!receiver.achievements.includes('6568616cef0982c58957e779')) {
+        await UserModel.findByIdAndUpdate(receiver._id, { $push: { achievements: '6568616cef0982c58957e779' } });
+        isFirst = true;
+      }
+    }
+    await UserModel.findByIdAndUpdate(sender._id, {
+      $pull: { connectionsSent: receiver._id },
+      $push: { connections: receiver._id },
+    });
+    await UserModel.findByIdAndUpdate(receiver._id, {
+      $pull: { connectionsReceived: sender._id },
+      $push: { connections: sender._id },
+    });
+
     const type = "connectionAccepted";
     await addNotification(connection.sender, connection.receiver, type, null, connection._id);
     return {
       status: 200,
       message: "Connection Accepted",
       data: connection,
+      isFirst: isFirst,
     };
   } catch (error) {
     console.log(error);
