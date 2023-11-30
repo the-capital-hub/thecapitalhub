@@ -315,7 +315,11 @@ const Chats = () => {
               )
             ) : chatId && !loading?.userChat ? (
               <>
-                <ChatNavbar />
+                <ChatNavbar
+                  isclear={setCleared}
+                  cleared={cleared}
+                  setIsSettingsOpen={setIsSettingsOpen}
+                />
                 {!isCommunitySelected && (
                   <ChatDashboard
                     setSendMessage={setSendMessage}

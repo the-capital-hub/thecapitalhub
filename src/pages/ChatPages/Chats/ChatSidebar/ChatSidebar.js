@@ -20,6 +20,7 @@ import {
   setIsCommuntySelected,
 } from "../../../../Store/features/chat/chatSlice";
 import { selectLoggedInUserId } from "../../../../Store/features/user/userSlice";
+import IconPin from "../../../../components/Investor/SvgIcons/IconPin";
 
 const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   const loggedInUserId = useSelector(selectLoggedInUserId);
@@ -163,132 +164,151 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   return (
     <>
       <div className="chatsidebar_main_container">
-        <div className="chatsidebar_content py-2 ">
-          <span style={{ margin: "5px 20px" }}>
+        <div className="chatsidebar_content pt-2 ">
+          {/* previous style for below span style={{ margin: "5px 20px" }} */}
+          <span className="m-3 mt-1">
             <img src={pinIcon} alt="" /> PINNED
           </span>
-          {pinnedChats?.map((chat, index) => (
-            <div key={index} className="person_wise_chat mt-2">
-              {chat.members.map((member) => {
-                if (member._id !== loggedInUserId) {
-                  const inputString = latestMessages[chat._id];
-                  const unreadMessageCount = unreadMessageCounts[chat._id];
-                  const messageTime = formatTimestamp(dates[chat._id]);
-                  const numberOfCharacters = 13;
-                  let latestMessage;
-                  if (inputString?.length > numberOfCharacters) {
-                    latestMessage =
-                      inputString.substring(0, numberOfCharacters) + "...";
-                  } else {
-                    latestMessage = inputString;
-                  }
-                  return (
-                    <section
-                      className="user_chat mt-3"
-                      key={member._id}
-                      onClick={() => handleSelectedChat(chat._id, member._id)}
-                    >
-                      <div className="left d-flex justify-content-between">
-                        <img
-                          src={member.profilePicture}
-                          alt="Profile"
-                          className="rounded_img"
-                        />
-                        <div className="title_and_message">
-                          <h5 className="name_title">
-                            {member.firstName} {member.lastName}
-                          </h5>
-                          <h5 className="message_title">
-                            {latestMessage || "No messages yet"}
-                          </h5>
-                        </div>
-                      </div>
-                      <div className="right">
-                        {messageTime !== "Invalid Date" && (
-                          <div className="time">{messageTime}</div>
-                        )}
-                        <img
-                          src={pinIcon}
-                          className="pt-1 px-1 ms-auto"
-                          onClick={() => handlePinClick(chat._id)}
-                          alt="Pin"
-                        />
-                        {unreadMessageCount > 0 && (
-                          <div className="notification">
-                            {unreadMessageCount}
+          {/* Pinned Chats */}
+          <div className="d-flex flex-column" id="pinnedChats">
+            {pinnedChats?.map((chat, index) => (
+              <div key={index} className="person_wise_chat">
+                {chat.members.map((member) => {
+                  if (member._id !== loggedInUserId) {
+                    const inputString = latestMessages[chat._id];
+                    const unreadMessageCount = unreadMessageCounts[chat._id];
+                    const messageTime = formatTimestamp(dates[chat._id]);
+                    const numberOfCharacters = 20;
+                    let latestMessage;
+                    if (inputString?.length > numberOfCharacters) {
+                      latestMessage =
+                        inputString.substring(0, numberOfCharacters) + "...";
+                    } else {
+                      latestMessage = inputString;
+                    }
+                    return (
+                      <section
+                        className="user_chat"
+                        key={member._id}
+                        onClick={() => handleSelectedChat(chat._id, member._id)}
+                      >
+                        <div className="left d-flex justify-content-between">
+                          <img
+                            src={member.profilePicture}
+                            alt="Profile"
+                            className="rounded_img"
+                          />
+                          <div className="title_and_message">
+                            <h5 className="name_title">
+                              {member.firstName} {member.lastName}
+                            </h5>
+                            <h5 className="message_title">
+                              {latestMessage || "No messages yet"}
+                            </h5>
                           </div>
-                        )}
-                      </div>
-                    </section>
-                  );
-                }
-                return null;
-              })}
-            </div>
-          ))}
-          {/* </div> */}
-          <span style={{ margin: "10px 0 5px 20px" }}>
+                        </div>
+                        <div className="right">
+                          {messageTime !== "Invalid Date" && (
+                            <div className="time">{messageTime}</div>
+                          )}
+                          {/* <img
+                            src={pinIcon}
+                            className="pt-1 px-1 ms-auto"
+                            onClick={() => handlePinClick(chat._id)}
+                            alt="Pin"
+                          /> */}
+                          <span
+                            className="pt-1 px-1 ms-auto"
+                            onClick={() => handlePinClick(chat._id)}
+                            style={{
+                              color: "var(--currentTheme)",
+                              opacity: "0.75",
+                            }}
+                          >
+                            <IconPin />
+                          </span>
+                          {unreadMessageCount > 0 && (
+                            <div className="notification">
+                              {unreadMessageCount}
+                            </div>
+                          )}
+                        </div>
+                      </section>
+                    );
+                  }
+                  return null;
+                })}
+              </div>
+            ))}
+          </div>
+
+          {/* Normal Chats */}
+          {/* previous style for below span style={{ margin: "10px 0 5px 20px" }} */}
+          <span className="m-3">
             <img src={messageIcon} alt="" /> ALL MESSAGE
           </span>
-          {chats.map((chat, index) => (
-            <div key={index} className="person_wise_chat mt-2">
-              {chat.members.map((member) => {
-                if (member._id !== loggedInUserId) {
-                  const inputString = latestMessages[chat._id];
-                  const unreadMessageCount = unreadMessageCounts[chat._id];
-                  const messageTime = formatTimestamp(dates[chat._id]);
-                  const numberOfCharacters = 13;
-                  let latestMessage;
-                  if (inputString?.length > numberOfCharacters) {
-                    latestMessage =
-                      inputString.substring(0, numberOfCharacters) + "...";
-                  } else {
-                    latestMessage = inputString;
-                  }
-                  return (
-                    <section
-                      className="user_chat mt-3 "
-                      key={member._id}
-                      onClick={() => handleSelectedChat(chat._id, member._id)}
-                    >
-                      <div className="left">
-                        <img
-                          src={member.profilePicture}
-                          alt="Profile"
-                          className="rounded_img"
-                        />
-                        <div className="title_and_message">
-                          <h5 className="name_title text-capitalize">
-                            {member.firstName} {member.lastName}
-                          </h5>
-                          <h5 className="message_title">
-                            {latestMessage || "No messages yet"}
-                          </h5>
-                        </div>
-                      </div>
-                      <div className="right">
-                        {messageTime !== "Invalid Date" && (
-                          <div className="time">{messageTime}</div>
-                        )}
-                        <img
-                          src={pinIcon}
-                          className="pt-1 px-1 "
-                          onClick={() => handlePinClick(chat._id)}
-                          alt="Pin"
-                        />
-                        {unreadMessageCount > 0 && (
-                          <div className="notification">
-                            {unreadMessageCount}
+
+          <div className="d-flex flex-column" id="normalChats">
+            {chats.map((chat, index) => (
+              <div key={index} className="person_wise_chat">
+                {chat.members.map((member) => {
+                  if (member._id !== loggedInUserId) {
+                    const inputString = latestMessages[chat._id];
+                    const unreadMessageCount = unreadMessageCounts[chat._id];
+                    const messageTime = formatTimestamp(dates[chat._id]);
+                    const numberOfCharacters = 13;
+                    let latestMessage;
+                    if (inputString?.length > numberOfCharacters) {
+                      latestMessage =
+                        inputString.substring(0, numberOfCharacters) + "...";
+                    } else {
+                      latestMessage = inputString;
+                    }
+                    return (
+                      <section
+                        className="user_chat"
+                        key={member._id}
+                        onClick={() => handleSelectedChat(chat._id, member._id)}
+                      >
+                        <div className="left">
+                          <img
+                            src={member.profilePicture}
+                            alt="Profile"
+                            className="rounded_img"
+                          />
+                          <div className="title_and_message">
+                            <h5 className="name_title text-capitalize">
+                              {member.firstName} {member.lastName}
+                            </h5>
+                            <h5 className="message_title">
+                              {latestMessage || "No messages yet"}
+                            </h5>
                           </div>
-                        )}
-                      </div>
-                    </section>
-                  );
-                }
-                return null;
-              })}
-            </div>
-          ))}
+                        </div>
+                        <div className="right">
+                          {messageTime !== "Invalid Date" && (
+                            <div className="time">{messageTime}</div>
+                          )}
+                          <img
+                            src={pinIcon}
+                            className="pt-1 px-1 "
+                            onClick={() => handlePinClick(chat._id)}
+                            alt="Pin"
+                          />
+                          {unreadMessageCount > 0 && (
+                            <div className="notification">
+                              {unreadMessageCount}
+                            </div>
+                          )}
+                        </div>
+                      </section>
+                    );
+                  }
+                  return null;
+                })}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>

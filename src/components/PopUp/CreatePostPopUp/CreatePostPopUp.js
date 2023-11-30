@@ -47,7 +47,7 @@ const CreatePostPopUp = ({
   const handleClose = () => {
     setPopupOpen(false);
     dispatch(toggleCreatePostModal());
-  }
+  };
 
   const galleryInputRef = useRef(null);
   const documentInputRef = useRef(null);

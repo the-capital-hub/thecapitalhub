@@ -1,4 +1,4 @@
-import { Bookmark } from "../../../../../Images/Investor/CompanyProfile";
+// import { Bookmark } from "../../../../../Images/Investor/CompanyProfile";
 import "./CompanyActions.scss";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -65,13 +65,13 @@ export default function CompanyActions({
 
   return (
     <div className="company__actions d-flex flex-column justify-content-end">
-      {isOnelink ? (
+      {/* {isOnelink ? (
         ""
       ) : (
         <button className="bookmark position-absolute top-0 right-0 me-4">
           <img src={Bookmark} alt="bookmark icon" />
         </button>
-      )}
+      )} */}
       <div className="action__buttons d-flex flex-column flex-md-row align-items-start gap-3 mt-3 mb-3 mt-lg-0">
         {isOnelink ? (
           ""
@@ -80,34 +80,38 @@ export default function CompanyActions({
             {/* Condition 1 -  check if path is either a company-profile page or explore page.
              Condition 2 - check if loggedInUser's myIntersts has the current company in it.
              Render Show Interest Button of condition 1 is true and condition 2 is false*/}
-            {(location.pathname.includes("/investor/company-profile") ||
-              location.pathname.includes("/investor/explore")) &&
-            !myInterestsIds?.includes(companyId) ? (
-              <button
-                className="btn-capital text-center"
-                data-bs-toggle="modal"
-                data-bs-target={`#selectCommitmentModal${founderId}`}
-              >
-                Show Interest
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="d-flex align-items-center gap-2 btn btn-danger fw-bold fs-6"
-                onClick={(e) => handleUninterest(e, companyId)}
-              >
-                {loading ? (
-                  <>
-                    <SpinnerBS
-                      spinnerSizeClass="spinner-border-sm"
-                      colorClass={"text-white"}
-                    />
-                    <span>Please wait</span>
-                  </>
+            {location.pathname.includes("/investor") && (
+              <>
+                {(location.pathname.includes("/investor/company-profile") ||
+                  location.pathname.includes("/investor/explore")) &&
+                !myInterestsIds?.includes(companyId) ? (
+                  <button
+                    className="btn-capital text-center"
+                    data-bs-toggle="modal"
+                    data-bs-target={`#selectCommitmentModal${founderId}`}
+                  >
+                    Show Interest
+                  </button>
                 ) : (
-                  "Uninterest"
+                  <button
+                    type="button"
+                    className="d-flex align-items-center gap-2 btn btn-danger fw-bold fs-6"
+                    onClick={(e) => handleUninterest(e, companyId)}
+                  >
+                    {loading ? (
+                      <>
+                        <SpinnerBS
+                          spinnerSizeClass="spinner-border-sm"
+                          colorClass={"text-white"}
+                        />
+                        <span>Please wait</span>
+                      </>
+                    ) : (
+                      "Uninterest"
+                    )}
+                  </button>
                 )}
-              </button>
+              </>
             )}
             <Link to={linkTo}>
               <button className="btn-capital-outline actions-btn">

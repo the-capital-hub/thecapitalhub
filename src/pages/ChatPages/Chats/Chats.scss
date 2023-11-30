@@ -1,5 +1,5 @@
 .chat-page-wrapper {
-  background-color: #eaeef2;
+  background-color: #dbdbdb;
 
   .chat_main_container {
     background: white;
@@ -12,7 +12,7 @@
     }
 
     @media (min-width: 821px) {
-      background-color: #eaeef2;
+      background-color: #dbdbdb;
     }
 
     .mobile-nav {
@@ -74,7 +74,7 @@
       scrollbar-color: var(--currentTheme) transparent;
 
       &::-webkit-scrollbar {
-        width: 12px;
+        width: 4px;
       }
 
       &::-webkit-scrollbar-thumb {
@@ -133,7 +133,7 @@
 
       .mobileView_chat_sidebar {
         &::-webkit-scrollbar {
-          width: 8px;
+          width: 4px;
         }
 
         &::-webkit-scrollbar-thumb {

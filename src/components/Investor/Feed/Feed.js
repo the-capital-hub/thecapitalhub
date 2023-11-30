@@ -20,6 +20,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {
   setPageTitle,
   selectCreatePostModal,
+  toggleCreatePostModal,
 } from "../../../Store/features/design/designSlice";
 import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
 import TutorialTrigger from "../../Shared/TutorialTrigger/TutorialTrigger";
@@ -46,6 +47,7 @@ const Feed = () => {
   // Methods
   const openPopup = () => {
     setPopupOpen(!popupOpen);
+    dispatch(toggleCreatePostModal());
   };
 
   const appendDataToAllPosts = (data) => {
@@ -132,7 +134,7 @@ const Feed = () => {
               <img
                 src={loggedInUser.profilePicture}
                 alt="Profile"
-                className="rounded-circle"
+                className="rounded-circle object-fit-cover"
                 style={{ width: "50px", height: "50px" }}
               />
               <div
