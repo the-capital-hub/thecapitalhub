@@ -36,14 +36,14 @@ const Documentation = () => {
   const [loading, setLoading] = useState(false);
 
   const baseURL = environment.baseUrl;
-  const [folders, setFolders] = useState([
-    "Financials",
-    "Pitch Deck",
-    "Legal",
-    "Update",
-    "KYC Details",
-    "Business",
-  ]);
+  // const [folders, setFolders] = useState([
+  //   "Financials",
+  //   "Pitch Deck",
+  //   "Legal",
+  //   "Update",
+  //   "KYC Details",
+  //   "Business",
+  // ]);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
