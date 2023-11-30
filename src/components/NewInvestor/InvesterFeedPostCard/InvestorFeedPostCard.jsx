@@ -653,16 +653,16 @@ const FeedPostCard = ({
                         <div className="logo">
                           <img
                             src={
-                              profilePicture ||
+                              loggedInUser.profilePicture ||
                               "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
                             }
                             alt="Logo"
-                            style={{ width: "50px", height: "50px" }}
+                            style={{ width: "46px", height: "46px" }}
                             className="rounded-circle"
                           />
                         </div>
                         <section className="input_and_logo_section">
-                          <div className="input_box">
+                          <div className="input_box px-1">
                             <input
                               type="text"
                               placeholder="Add Comment"
@@ -675,14 +675,14 @@ const FeedPostCard = ({
                                 }
                               }}
                             />
-                            <div className="icons">
+                            {/* <div className="icons">
                               <span className="image_icon">
                                 <img src={ImageIcon} alt="media" />
                               </span>
                               <span className="smiley_icon">
                                 <img src={SmileeIcon} alt="smiley" />
                               </span>
-                            </div>
+                            </div> */}
                           </div>
                         </section>
                       </div>

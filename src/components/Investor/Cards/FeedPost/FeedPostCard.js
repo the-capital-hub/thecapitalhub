@@ -47,6 +47,8 @@ import IconDelete from "../../SvgIcons/IconDelete";
 import IconReportPost from "../../SvgIcons/IconReportPost";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 import { useNavigate } from "react-router-dom";
+import { selectIsMobileView } from "../../../../Store/features/design/designSlice";
+import { selectIsInvestor } from "../../../../Store/features/user/userSlice";
 
 const FeedPostCard = ({
   postId,
@@ -85,6 +87,8 @@ const FeedPostCard = ({
   const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const navigate = useNavigate();
+  const isMobileView = useSelector(selectIsMobileView);
+  const isInvestor = useSelector(selectIsInvestor);
 
   const toggleDescription = () => {
     setExpanded(!expanded);
@@ -393,6 +397,10 @@ const FeedPostCard = ({
     }
   };
 
+  const handleSingleImage = () => {
+    navigate(isInvestor ? `/investor/post/${postId}` : `/posts/${postId}`);
+  };
+
   return (
     <>
       <div className="feedpostcard_main_container mb-2">
@@ -571,10 +579,13 @@ const FeedPostCard = ({
                     width={!repostPreview ? "100%" : "50%"}
                     src={image}
                     alt="Post media"
-                    onClick={handleImageOnClick}
+                    onClick={
+                      isMobileView ? handleSingleImage : handleImageOnClick
+                    }
                   />
                 </span>
               )}
+
               {/* Video */}
               {video && (
                 <span className="d-flex">
@@ -752,7 +763,7 @@ const FeedPostCard = ({
                         <img src={loggedInUser.profilePicture} alt="Logo" />
                       </div>
                       <section className="input_and_logo_section">
-                        <div className="input_box">
+                        <div className="input_box px-1">
                           <input
                             type="text"
                             placeholder="Add Comment"
@@ -765,14 +776,14 @@ const FeedPostCard = ({
                               }
                             }}
                           />
-                          <div className="icons comment_icons">
+                          {/* <div className="icons comment_icons">
                             <span className="image_icon">
                               <img src={ImageIcon} alt="gallery icon" />
                             </span>
                             <span className="smiley_icon">
                               <img src={SmileeIcon} alt="smiley icon" />
                             </span>
-                          </div>
+                          </div> */}
                         </div>
                       </section>
                     </div>
