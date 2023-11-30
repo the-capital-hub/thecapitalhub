@@ -155,14 +155,17 @@ export default function CompanyProfilePage() {
                       </Link>
                     </div>
                   ) : (
-                    <div className="bg-white rounded-4 p-4">
+                    <div className="bg-white rounded-4 p-4 ">
                       {/* <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5"> */}
+                      <div class="text-center">
+
                       <button
-                        className="btn-base startup"
+                        className="btn-base startup "
                         onClick={handleAddNew}
                       >
                         Add new company details
                       </button>
+                      </div>
                       {/* </Link> */}
                       <div className="or-text-container">
                         <p className="text-decoration-none text-dark fs-5">
