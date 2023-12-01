@@ -88,8 +88,9 @@ const UploadModal = ({ onCancel, fetchFolder, notify }) => {
         Bucket: "thecapitalhubdocuments",
         Key: `documents/${fileName}`,
         Body: file,
-        ContentDisposition: "inline",
-        ContentType: contentType,
+        //uncomment this if you want to display the uploaded documents in separte window
+        // ContentDisposition: "inline",
+        // ContentType: contentType,
       };
 
       const uploadRequest = s3.upload(params);
