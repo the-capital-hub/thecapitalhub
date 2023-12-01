@@ -268,7 +268,14 @@ export default function CompanyProfilePage() {
               </>
             )}
           </div>
-          <Toaster />
+          <Toaster
+            containerStyle={{
+              top: "100px",
+            }}
+            toastOptions={{
+              duration: 10000,
+            }}
+          />
           {!loading ? (
             companyData?.length === 0 ? (
               <div className="bg-white rounded-4 p-4">
