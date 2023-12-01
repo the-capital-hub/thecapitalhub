@@ -88,29 +88,34 @@ export default function Questionnaire({
 
   // Handle Answer Select
   function handleAnswerSelect(e, option) {
-    if (answer.includes(option)) {
-      // Deselect answer
-      let index = answer.indexOf(option);
-      setAnswer((prev) => {
-        let copy = [...prev];
-        copy.splice(index, 1);
-        return [...copy];
-      });
-    } else {
-      // Set Answer
-      if (question.isMultipleOption) {
-        if (!answer) {
+    if (question.isMultipleOption) {
+      if (option === "None") {
+        // If "None" is selected, clear all other options
+        setAnswer(["None"]);
+      } else {
+        if (answer.includes("None")) {
+          // If "None" is already selected, remove it 
           setAnswer([option]);
+        } else if (answer.includes(option)) {
+          // Deselect answer
+          let index = answer.indexOf(option);
+          setAnswer((prev) => {
+            let copy = [...prev];
+            copy.splice(index, 1);
+            return [...copy];
+          });
         } else {
+          // Set Answer
           setAnswer((prev) => {
             let copy = [...prev];
             copy.push(option);
             return [...copy];
           });
         }
-      } else {
-        setAnswer(option);
       }
+    } else {
+      // For single-option questions
+      setAnswer(option);
     }
   }
 
