@@ -22,6 +22,8 @@ import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/Af
 import ChatDeletePopup from "../ChatDeletePopup/ChatDeletePopup";
 import ChatDropDownMenu from "../ChatDropDownMenu/ChatDropDownMenu";
 import { s3 } from "../../../../Service/awsConfig";
+import { Offcanvas } from "react-bootstrap";
+import AttachmentPreview from "../../../../components/Investor/ChatComponents/ChatAttachments/AttachmentPreview/AttachmentPreview";
 
 const CommunityDashboard = ({
   setSendMessage,
@@ -44,6 +46,7 @@ const CommunityDashboard = ({
   const chatMessagesContainerRef = useRef(null);
   const [isSent, setIsSent] = useState(false);
   const [msgId, setMsgId] = useState("");
+  const [showPreview, setShowPreview] = useState(false);
 
   const handleSetDeletePopup = () => {
     setDeletePopup(true);
@@ -141,8 +144,9 @@ const CommunityDashboard = ({
         groupedMessages.push({ date: "Yesterday", messages: [message] });
       } else {
         currentDate = messageDate;
-        const formattedDate = `${messageDate.getDate()}-${messageDate.getMonth() + 1
-          }-${messageDate.getFullYear()}`;
+        const formattedDate = `${messageDate.getDate()}-${
+          messageDate.getMonth() + 1
+        }-${messageDate.getFullYear()}`;
         groupedMessages.push({
           date:
             today.getDate() === messageDate.getDate() ? "Today" : formattedDate,
@@ -232,6 +236,7 @@ const CommunityDashboard = ({
     return new Intl.DateTimeFormat("en-US", options).format(date);
   };
 
+  //
   const [showAttachDocs, setShowAttachDocs] = useState(false);
   const attachDocContainerRef = useRef();
   const [selectedImage, setSelectedImage] = useState(null);
@@ -265,6 +270,7 @@ const CommunityDashboard = ({
       setSelectedDocument(file);
     }
     setShowAttachDocs(false);
+    setShowPreview(true);
   };
 
   const handleOnelinkClick = () => {
@@ -329,7 +335,9 @@ const CommunityDashboard = ({
                             id={message?._id}
                           />
                           <Linkify>
-                            <p className="text-break">{message.text}</p>
+                            <p className="text-break text-start m-0 mb-1 me-3">
+                              {message.text}
+                            </p>
                           </Linkify>
                         </div>
                       )}
@@ -343,7 +351,7 @@ const CommunityDashboard = ({
                           <img
                             src={message.image}
                             className="image-message"
-                            alt="message image"
+                            alt="message media"
                           />
                         </div>
                       )}
@@ -412,7 +420,7 @@ const CommunityDashboard = ({
                           <img
                             src={message.image}
                             className="image-message"
-                            alt="message image"
+                            alt="message media"
                           />
                         </div>
                       )}
@@ -448,19 +456,34 @@ const CommunityDashboard = ({
           </div>
         ))}
       </div>
+
+      {/* Chat Input section */}
       <section className="chat_input_section">
         <div className="chat_input_container">
-          {selectedImage && (
+          {/* Preview offcanvas */}
+          <AttachmentPreview
+            showPreview={showPreview}
+            setShowPreview={setShowPreview}
+            selectedImage={selectedImage}
+            setSelectedImage={setSelectedImage}
+            removeSelectedImage={removeSelectedImage}
+            sendText={sendText}
+            setSendText={setSendText}
+            handleKeyDown={handleKeyDown}
+            handleSend={handleSend}
+          />
+
+          {/* {selectedImage && (
             <div className="image-preview">
               <img
                 src={URL.createObjectURL(selectedImage)}
-                alt="Selected Image"
+                alt="Selected media"
               />
               <button className="remove-preview" onClick={removeSelectedImage}>
                 X
               </button>
             </div>
-          )}
+          )} */}
           {selectedVideo && (
             <div className="video-preview">
               <video controls width={200}>
@@ -486,6 +509,8 @@ const CommunityDashboard = ({
               </button>
             </div>
           )}
+
+          {/* Text input */}
           <input
             type="text"
             className="message"
@@ -496,29 +521,35 @@ const CommunityDashboard = ({
             value={sendText}
           />
           <div className="right_icons">
-            <button
-              className="attactment-container btn"
-              ref={attachDocContainerRef}
-            >
-              {!showAttachDocs ? (
-                <img
-                  src={attachmentGreyIcon}
-                  width={20}
-                  onClick={() => setShowAttachDocs(!showAttachDocs)}
-                  alt="attach"
-                />
-              ) : (
-                <img
-                  src={attachmentOrangeIcon}
-                  width={20}
-                  onClick={() => setShowAttachDocs(!showAttachDocs)}
-                  alt="attach"
-                />
-              )}
+            <div class="attactment-container">
+              <button
+                className="btn"
+                ref={attachDocContainerRef}
+                onClick={() => setShowAttachDocs(!showAttachDocs)}
+              >
+                {!showAttachDocs ? (
+                  <img
+                    src={attachmentGreyIcon}
+                    width={20}
+                    // onClick={() => setShowAttachDocs(!showAttachDocs)}
+                    alt="attach"
+                  />
+                ) : (
+                  <img
+                    src={attachmentOrangeIcon}
+                    width={20}
+                    // onClick={() => setShowAttachDocs(!showAttachDocs)}
+                    alt="attach"
+                  />
+                )}
+              </button>
               {showAttachDocs && (
                 <div className="attachment-options shadow-sm">
                   <div className="attachment-option">
-                    <label htmlFor="documentInput">
+                    <label
+                      htmlFor="documentInput"
+                      style={{ cursor: "pointer" }}
+                    >
                       <img
                         className="p-1 rounded-circle"
                         src={documentIcon}
@@ -535,7 +566,7 @@ const CommunityDashboard = ({
                     />
                   </div>
                   <div className="attachment-option">
-                    <label htmlFor="image">
+                    <label htmlFor="image" style={{ cursor: "pointer" }}>
                       <img
                         src={imageIcon}
                         alt="upload images"
@@ -553,7 +584,7 @@ const CommunityDashboard = ({
                     />
                   </div>
                   <div className="attachment-option">
-                    <label htmlFor="video">
+                    <label htmlFor="video" style={{ cursor: "pointer" }}>
                       <img
                         src={videoIcon}
                         alt="upload video"
@@ -574,7 +605,7 @@ const CommunityDashboard = ({
                     className="attachment-option"
                     onClick={handleOnelinkClick}
                   >
-                    <label htmlFor="onelink">
+                    <label htmlFor="onelink" style={{ cursor: "pointer" }}>
                       <img
                         src={onelinkIcon}
                         alt="One link"
@@ -585,7 +616,7 @@ const CommunityDashboard = ({
                   </div>
                 </div>
               )}
-            </button>
+            </div>
             <button className="btn p-0">
               <img
                 className="border-start border-2"
@@ -598,6 +629,8 @@ const CommunityDashboard = ({
           </div>
         </div>
       </section>
+
+      {/* Delete Popup */}
       {deletePopup ? (
         <ChatDeletePopup>
           <div className="d-flex flex-column  justify-content-center ">
