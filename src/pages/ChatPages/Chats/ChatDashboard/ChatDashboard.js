@@ -49,6 +49,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
   const handleMouseLeave = () => {
     setMessageMenu(true);
   };
+
   const handleSetDeletePopup = () => {
     setDeletePopup(true);
   };
@@ -338,7 +339,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                               showMenu={messageMenu}
                             />
                             <Linkify>
-                              <p className="text-break text-start m-0">
+                              <p className="text-break text-start m-0 me-3">
                                 {message.text}
                               </p>
                             </Linkify>

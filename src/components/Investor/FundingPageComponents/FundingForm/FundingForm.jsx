@@ -132,7 +132,7 @@ export default function FundingForm({ setShowForm }) {
         </button>
         <button
           type="submit"
-          className="btn btn-primary text-white py-2 fs-6 d-flex align-items-center justify-content-center gap-2 w-50"
+          className="btn btn-startup text-white py-2 fs-6 d-flex align-items-center justify-content-center gap-2 w-50"
           disabled={loading}
         >
           {loading ? (

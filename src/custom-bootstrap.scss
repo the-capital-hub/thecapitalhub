@@ -1,3 +1,7 @@
+@import "bootstrap/scss/_functions.scss";
+@import "bootstrap/scss/_variables.scss";
+@import "bootstrap/scss/_variables-dark.scss";
+
 // Change bootstrap defaults
 // $danger: yellow;
 $primary: #0d6efd;
@@ -11,6 +15,12 @@ $dark: #212529;
 $startup: #fd5901;
 $investor: #d3f36b;
 
+// Custom colors
+$custom-colors: (
+  startup: $startup,
+  investor: $investor,
+);
+
 // theme colors
 $theme-colors: (
   primary: $primary,
@@ -21,8 +31,57 @@ $theme-colors: (
   danger: $danger,
   light: $light,
   dark: $dark,
+);
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import "bootstrap/scss/_mixins.scss";
+@import "bootstrap/scss/_maps.scss";
+@import "bootstrap/scss/_utilities.scss";
+
+// Light mode
+$custom-colors-text: (
   startup: $startup,
-  investor: $investor,
+);
+$custom-colors-bg-subtle: (
+  startup: tint-color($startup, 20%),
+);
+$custom-colors-border-subtle: (
+  startup: tint-color($startup, 20%),
+);
+
+$theme-colors-text: map-merge($theme-colors-text, $custom-colors-text);
+$theme-colors-bg-subtle: map-merge(
+  $theme-colors-bg-subtle,
+  $custom-colors-bg-subtle
+);
+$theme-colors-border-subtle: map-merge(
+  $theme-colors-border-subtle,
+  $custom-colors-border-subtle
+);
+
+// Dark mode
+$custom-colors-text-dark: (
+  startup: $startup,
+);
+$custom-colors-bg-subtle-dark: (
+  startup: shade-color($startup, 40%),
+);
+$custom-colors-border-subtle-dark: (
+  startup: shade-color($startup, 40%),
+);
+
+$theme-colors-text-dark: map-merge(
+  $theme-colors-text-dark,
+  $custom-colors-text-dark
+);
+$theme-colors-bg-subtle-dark: map-merge(
+  $theme-colors-bg-subtle-dark,
+  $custom-colors-bg-subtle-dark
+);
+$theme-colors-border-subtle-dark: map-merge(
+  $theme-colors-border-subtle-dark,
+  $custom-colors-border-subtle-dark
 );
 
 // Bootstrap Classes
@@ -39,3 +98,6 @@ $theme-colors: (
 
 // Import must in the bottom
 @import "bootstrap/scss/bootstrap.scss";
+
+// Import custom styles of bs components after bootstrap.scss import
+@import "./custom-bs-components.scss";
