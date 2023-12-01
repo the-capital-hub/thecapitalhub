@@ -38,7 +38,9 @@ import ModalBSFooter from "../../PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
 import ModalBSBody from "../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
 import Linkify from "react-linkify";
 import deleteIcon from "../../../Images/post/delete.png";
-import Modal from "../../PopUp/Modal/Modal";
+import CustomModal from "../../PopUp/Modal/Modal";
+import { Modal } from "react-bootstrap";
+
 
 const FeedPostCard = ({
   postId,
@@ -76,6 +78,12 @@ const FeedPostCard = ({
   const [likedBy, setLikedBy] = useState(null);
   const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [likeModal, setLikeModal] = useState(false);
+  const [activeHeader, setActiveHeader] = useState(true);
+
+
+  const handleShow = () => setLikeModal(true);
+  const handleClose = () => setLikeModal(false);
 
   const toggleDescription = () => {
     setExpanded(!expanded);
@@ -517,7 +525,8 @@ const FeedPostCard = ({
             {likes && (
               <span
                 className=" mx-3 text-secondary"
-                style={{ fontSize: "14px" }}
+                style={{ fontSize: "14px", cursor:"pointer"  }}
+                onClick={handleShow}
               >
                 {/* {likes?.length} likes */}
                 {likedBy ? <>Liked By {likedBy}</> : <>{likes?.length} likes</>}
@@ -799,7 +808,7 @@ const FeedPostCard = ({
         )}
       </div>
       {showImgagePopup && (
-        <Modal>
+        <CustomModal>
           <div className="image-popup-container ">
             <button
               className="btn btn-sm btn-light  top-0 end-0 m-2"
@@ -810,7 +819,7 @@ const FeedPostCard = ({
             </button>
             <img src={image} className="popup-image" alt="fullscreen preview" />
           </div>
-        </Modal>
+        </CustomModal>
       )}
 
       <ModalBSContainer showModal={showReportModal} id="reportPostModal">
@@ -940,6 +949,51 @@ const FeedPostCard = ({
           )}
         </ModalBSFooter>
       </ModalBSContainer>
+      <Modal show={likeModal} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Reactions</Modal.Title>
+        </Modal.Header>
+        <div className=" reactions_investor d-flex gap-4 border-bottom border-1 py-2 px-3">
+          <h5  className={`nav-item ${activeHeader === true ? "active" : ""}`}  onClick={() =>setActiveHeader(true) }>ALL</h5>
+          <h5  className={`nav-item ${activeHeader === false ? "active" : ""}`} onClick={() =>setActiveHeader(false)}>LIKE</h5>
+        </div>
+        <Modal.Body>
+          <div className="Reactions d-flex align-items-center p-2 border-bottom border-1">
+            <img
+              src={
+                "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              }
+              alt="user"
+              width={50}
+              height={50}
+              className="rounded-pill "
+            />
+            <div className="p-1">
+              <h5>abc</h5>
+              <p className="m-0">
+                jvhhdvlhasgdkjgskjgkjg dskjds a h sdl k sl jkg lk
+              </p>
+            </div>
+          </div>
+          <div className="d-flex align-items-center p-2 border-bottom border-1">
+            <img
+              src={
+                "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              }
+              alt="user"
+              width={50}
+              height={50}
+              className="rounded-pill "
+            />
+            <div className="p-1">
+              <h5>abc</h5>
+              <p className="m-0">
+                jvhhdvlhasgdkjgskjgkjg dskjds a h sdl k sl jkg lk
+              </p>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal> 
     </>
   );
 };

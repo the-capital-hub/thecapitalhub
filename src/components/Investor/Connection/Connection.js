@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import deleteIcon from "../../../Images/post/delete.png";
 import toast from 'react-hot-toast';
 import achievement from "../../../Images/Investor/Achievements/img_1.png";
 
@@ -140,6 +141,8 @@ const Connection = () => {
     }
   };
 
+
+
   return (
     <MaxWidthWrapper>
       <div className="connection_main_container mb-4">
@@ -210,6 +213,7 @@ const Connection = () => {
                               <p className="connection_designation">
                                 {sender.designation}
                               </p>
+                              <p> {sender.startUp?.company?sender.startUp?.company:sender.investor?.company}</p>
                               <p>
                                 <TimeAgo
                                   className="connection_time"
@@ -218,8 +222,22 @@ const Connection = () => {
                                 />
                               </p>
                             </div>
+                            <div className="connection_btn mt-3 mt-md-0  d-flex  d-md-none gap-2">
+                            <button
+                              onClick={() => rejectConnectionHandler(_id)}
+                              className="ignore_button"
+                            >
+                              Ignore
+                            </button>
+                            <button
+                              onClick={() => acceptConnectionHandler(_id)}
+                              className="accept_button"
+                            >
+                              Accept
+                            </button>
                           </div>
-                          <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-center">
+                          </div>
+                          <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-cente d-none d-md-block">
                             <button
                               onClick={() => rejectConnectionHandler(_id)}
                               className="ignore_button"
@@ -271,6 +289,7 @@ const Connection = () => {
                                 <p className="connection_designation">
                                   {receiver?.designation}
                                 </p>
+                                <p> {receiver.startUp?.company?receiver.startUp?.company:receiver.investor?.company}</p>
                                 <p>
                                   <TimeAgo
                                     className="connection_time"
@@ -279,8 +298,17 @@ const Connection = () => {
                                   />
                                 </p>
                               </div>
+                              <div className="connection_right mt-3 mt-md-0  ms-auto my-auto  d-md-none d-block ">
+                          
+                          <img
+                              src={deleteIcon}
+                              alt={`delete`}
+                              onClick={() => cancelConnectionRequest(_id)}
+
+                            />
+                        </div>
                             </div>
-                            <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-center">
+                            <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-center d-none d-md-block">
                               <button
                                 onClick={() => cancelConnectionRequest(_id)}
                                 className="py-2 px-3 rounded-5"
@@ -326,6 +354,8 @@ const Connection = () => {
                             <p className="connection_designation">
                               {data.designation ? data.designation : ""}
                             </p>
+                            <p> {data.startUp?.company?data.startUp?.company:data.investor?.company}</p>
+
                             <p>
                               {/* <TimeAgo
                                 className="connection_time"
@@ -334,8 +364,17 @@ const Connection = () => {
                               /> */}
                             </p>
                           </div>
+                          <div className="connection_right mt-3 mt-md-0  ms-auto my-auto  d-md-none d-block ">
+                          
+                          <img
+                              src={deleteIcon}
+                              alt={`delete`}
+                              onClick={() => handleRemoveConnection(data._id)}
+
+                            />
                         </div>
-                        <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-center">
+                        </div>
+                        <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-center d-none d-md-block">
                           <button
                             onClick={() => handleRemoveConnection(data._id)}
                             className="py-2 px-3 rounded-5"

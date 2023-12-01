@@ -13,7 +13,7 @@ import repostInstantlyIcon from "../../../../Images/post/repost-grey.svg";
 import saveIcon from "../../../../Images/post/save.svg";
 import savedIcon from "../../../../Images/post/saved.png";
 import deleteIcon from "../../../../Images/post/delete.png";
-import Modal from "../../../PopUp/Modal/Modal";
+import CustomModal from "../../../PopUp/Modal/Modal";
 import { FaRegCommentDots, FaCommentDots } from "react-icons/fa6";
 
 import TimeAgo from "timeago-react";
@@ -50,6 +50,7 @@ import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 import { useNavigate } from "react-router-dom";
 import { selectIsMobileView } from "../../../../Store/features/design/designSlice";
 import { selectIsInvestor } from "../../../../Store/features/user/userSlice";
+import { Modal } from "react-bootstrap";
 
 const FeedPostCard = ({
   postId,
@@ -90,6 +91,11 @@ const FeedPostCard = ({
   const navigate = useNavigate();
   const isMobileView = useSelector(selectIsMobileView);
   const isInvestor = useSelector(selectIsInvestor);
+  const [likeModal, setLikeModal] = useState(false);
+  const [activeHeader, setActiveHeader] = useState(true);
+
+  const handleShow = () => setLikeModal(true);
+  const handleClose = () => setLikeModal(false);
 
   const toggleDescription = () => {
     setExpanded(!expanded);
@@ -419,7 +425,7 @@ const FeedPostCard = ({
           )}
           {/* Post Header */}
           {/* <div className="feed_header_container border-2 border-bottom mb-3 pb-2"> */}
-          <div className="feed_header_container pb-2">
+          <div className="feed_header_container pb-2 ">
             <div className="feedpostcard_content">
               {/* Poster's Profile Picture */}
               <Link to={`/user/${userId}`} className="rounded-circle">
@@ -628,7 +634,11 @@ const FeedPostCard = ({
             </div>
           </div>
           {likes && (
-            <span className=" mx-3 text-secondary" style={{ fontSize: "14px" }}>
+            <span
+              className=" mx-3 text-secondary pe-auto "
+              style={{ fontSize: "14px", cursor: "pointer" }}
+              onClick={handleShow}
+            >
               {/* {likes?.length} likes */}
               {likedBy ? <>Liked By {likedBy}</> : <>{likes?.length} likes</>}
             </span>
@@ -933,8 +943,64 @@ const FeedPostCard = ({
         )}
       </div>
 
+      <Modal show={likeModal} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Reactions</Modal.Title>
+        </Modal.Header>
+        <div className=" reactions_startup d-flex gap-4 border-bottom border-1 py-2 px-3">
+          <h5
+            className={`nav-item ${activeHeader === true ? "active" : ""}`}
+            onClick={() => setActiveHeader(true)}
+          >
+            ALL
+          </h5>
+          <h5
+            className={`nav-item ${activeHeader === false ? "active" : ""}`}
+            onClick={() => setActiveHeader(false)}
+          >
+            LIKE
+          </h5>
+        </div>
+        <Modal.Body>
+          <div className="Reactions d-flex align-items-center p-2 border-bottom border-1">
+            <img
+              src={
+                "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              }
+              alt="user"
+              width={50}
+              height={50}
+              className="rounded-pill "
+            />
+            <div className="p-1">
+              <h5>abc</h5>
+              <p className="m-0">
+                jvhhdvlhasgdkjgskjgkjg dskjds a h sdl k sl jkg lk
+              </p>
+            </div>
+          </div>
+          <div className="d-flex align-items-center p-2 border-bottom border-1">
+            <img
+              src={
+                "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              }
+              alt="user"
+              width={50}
+              height={50}
+              className="rounded-pill "
+            />
+            <div className="p-1">
+              <h5>abc</h5>
+              <p className="m-0">
+                jvhhdvlhasgdkjgskjgkjg dskjds a h sdl k sl jkg lk
+              </p>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+
       {showImgagePopup && (
-        <Modal>
+        <CustomModal>
           <div className="image-popup-container ">
             <button
               className="btn btn-sm btn-light  top-0 end-0 m-2"
@@ -944,7 +1010,7 @@ const FeedPostCard = ({
             </button>
             <img src={image} className="popup-image" alt="zoomed image" />
           </div>
-        </Modal>
+        </CustomModal>
       )}
 
       <ModalBSContainer id="reportPostModal">
