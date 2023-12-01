@@ -39,6 +39,7 @@ import ModalBSBody from "../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
 import Linkify from "react-linkify";
 import deleteIcon from "../../../Images/post/delete.png";
 import Modal from "../../PopUp/Modal/Modal";
+import { FaRegCommentDots, FaCommentDots } from "react-icons/fa6";
 
 const FeedPostCard = ({
   postId,
@@ -546,13 +547,19 @@ const FeedPostCard = ({
                           style={{ cursor: "pointer" }}
                         />
                       )}
-                      <img
-                        src={commentIcon}
-                        width={16}
-                        alt="comment post"
-                        onClick={() => setShowComment(!showComment)}
-                        style={{ cursor: "pointer" }}
-                      />
+                      {!showComment ? (
+                        <FaRegCommentDots
+                          size={20}
+                          onClick={() => setShowComment((prev) => !prev)}
+                          style={{ cursor: "pointer" }}
+                        />
+                      ) : (
+                        <FaCommentDots
+                          size={20}
+                          onClick={() => setShowComment((prev) => !prev)}
+                          style={{ cursor: "pointer" }}
+                        />
+                      )}
                     </div>
                   </div>
                   <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
@@ -648,24 +655,21 @@ const FeedPostCard = ({
                     )}
                   </div>
                   {showComment && (
-                    <div>
-                      <div className="comment_container">
+                    <div className="border-top mt-1">
+                      <div className="comment_container mb-1 border-bottom">
                         <div className="logo">
                           <img
-                            src={
-                              loggedInUser.profilePicture ||
-                              "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
-                            }
+                            src={loggedInUser.profilePicture}
                             alt="Logo"
-                            style={{ width: "46px", height: "46px" }}
-                            className="rounded-circle"
+                            className="border border-light rounded-circle p-1"
                           />
                         </div>
                         <section className="input_and_logo_section">
                           <div className="input_box px-1">
                             <input
                               type="text"
-                              placeholder="Add Comment"
+                              placeholder="Add a comment"
+                              className="fs-14"
                               value={commentText}
                               onChange={(e) => setCommentText(e.target.value)}
                               onKeyDown={(e) => {
@@ -675,64 +679,72 @@ const FeedPostCard = ({
                                 }
                               }}
                             />
-                            {/* <div className="icons">
-                              <span className="image_icon">
-                                <img src={ImageIcon} alt="media" />
-                              </span>
-                              <span className="smiley_icon">
-                                <img src={SmileeIcon} alt="smiley" />
-                              </span>
-                            </div> */}
+                            {/* <div className="icons comment_icons">
+                            <span className="image_icon">
+                              <img src={ImageIcon} alt="gallery icon" />
+                            </span>
+                            <span className="smiley_icon">
+                              <img src={SmileeIcon} alt="smiley icon" />
+                            </span>
+                          </div> */}
                           </div>
                         </section>
                       </div>
-                      {comments
-                        // .sort(
-                        //   (a, b) =>
-                        //     new Date(b.createdAt) - new Date(a.createdAt)
-                        // )
-                        .map((val) => (
-                          <section
-                            className="comment_messages my-2"
-                            key={val._id}
-                          >
-                            <div className="connection_item d-flex flex-column flex-md-row justify-content-between">
-                              <div className="connection_left">
-                                {val.user && (
-                                  <>
-                                    <img
-                                      src={val.user.profilePicture || ""}
-                                      alt="Connection"
-                                      className="comment_connection"
-                                    />
-                                    <div className="body_container">
-                                      <p className="connection_name">
-                                        {val.user.firstName +
-                                          " " +
-                                          val.user.lastName}
-                                      </p>
-                                      <p className="connection_designation">
-                                        {val.user.designation}
-                                      </p>
-                                    </div>
-                                  </>
-                                )}
-                              </div>
-                              <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-center">
-                                <span className="days_time">
+                      {comments?.length ? (
+                        <span className="fs-6 ps-2 mb-2">Comments</span>
+                      ) : (
+                        <span className="fs-6 ps-2 mb-2 w-100 d-flex justify-content-center text-center">
+                          No comments
+                        </span>
+                      )}
+                      {/* Comments */}
+                      {comments.map((val) => (
+                        <section
+                          className="single-comment row m-0 mt-2"
+                          key={val.tex}
+                        >
+                          <div className="img_container col-2 px-2">
+                            <Link to={`/user/${val.user._id}`}>
+                              <img
+                                src={val.user.profilePicture || ""}
+                                alt="Connection"
+                                className="w-100 rounded-circle border border-light"
+                              />
+                            </Link>
+                          </div>
+                          <div className="col-10 p-0 flex-grow-1">
+                            <div className="comment-details bg-light rounded-3 p-2 p-lg-3 d-flex flex-column">
+                              <header className="d-flex justify-content-between align-items-center p-0">
+                                <Link
+                                  to={`/user/${val.user._id}`}
+                                  className="text-decoration-none text-black fs-sm"
+                                >
+                                  <h6 className="fs-sm m-0">
+                                    {val.user.firstName +
+                                      " " +
+                                      val.user.lastName}
+                                  </h6>
+                                </Link>
+                                <span className="days_time fs-xs">
                                   <TimeAgo datetime={val.createdAt} locale="" />
                                 </span>
-                              </div>
+                              </header>
+                              <span className="text-secondary fs-xs m-0">
+                                {val.user?.designation}
+                                {" , "}{" "}
+                                {val.user?.startUp?.company ||
+                                  val.user?.investor?.companyName}
+                              </span>
+                              <p className="comment m-0 fs-sm mt-1">
+                                {val.text}
+                              </p>
                             </div>
-                            <p className="comment_text mb-1">{val.text}</p>
-
-                            <hr className="p-0 m-0" />
-                            <div className="d-flex  justify-content-between px-2">
-                              <div className="p-2">
+                            <div className="actions d-flex gap-2 px-1 align-items-center justify-content-between">
+                              <div>
                                 {val?.likes?.includes(loggedInUser._id) ? (
                                   <img
                                     src={fireIcon}
-                                    width={18}
+                                    width={15}
                                     alt="like post"
                                     onClick={() =>
                                       commentlikeUnlikeHandler(postId, val._id)
@@ -741,33 +753,35 @@ const FeedPostCard = ({
                                 ) : (
                                   <img
                                     src={bwFireIcon}
-                                    width={18}
+                                    width={15}
                                     alt="like post"
                                     onClick={() =>
                                       commentlikeUnlikeHandler(postId, val._id)
                                     }
                                   />
                                 )}
-                                <span
-                                  className=" mx-3 text-secondary"
-                                  style={{ fontSize: "14px" }}
-                                >
+                                <span className="mx-2 text-secondary fs-sm">
                                   {val?.likes?.length} likes
                                 </span>
                               </div>
-                              {val?.user._id === loggedInUser?._id && (
-                                <img
-                                  src={deleteIcon}
-                                  alt="Delete"
-                                  className="deleteIcon py-1"
+                              {val.user._id === loggedInUser?._id && (
+                                <span
                                   onClick={() =>
                                     deleteComments(postId, val._id)
                                   }
-                                />
+                                >
+                                  <img
+                                    src={deleteIcon}
+                                    alt="delete icon"
+                                    className="deleteIcon py-1"
+                                    width={15}
+                                  />
+                                </span>
                               )}
                             </div>
-                          </section>
-                        ))}
+                          </div>
+                        </section>
+                      ))}
                     </div>
                   )}
                 </div>
