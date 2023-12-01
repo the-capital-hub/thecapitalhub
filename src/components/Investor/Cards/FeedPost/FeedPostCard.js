@@ -819,7 +819,7 @@ const FeedPostCard = ({
                           className="single-comment row m-0 mt-2"
                           key={val.tex}
                         >
-                          <div className="img_container col-2">
+                          <div className="img_container col-2 px-2">
                             <Link to={`/user/${val.user._id}`}>
                               <img
                                 src={val.user.profilePicture || ""}
@@ -829,13 +829,13 @@ const FeedPostCard = ({
                             </Link>
                           </div>
                           <div className="col-10 p-0 flex-grow-1">
-                            <div className="comment-details bg-light rounded-3 p-2 p-lg-3 d-flex flex-column gap-1">
+                            <div className="comment-details bg-light rounded-3 p-2 p-lg-3 d-flex flex-column">
                               <header className="d-flex justify-content-between align-items-center p-0">
                                 <Link
                                   to={`/user/${val.user._id}`}
                                   className="text-decoration-none text-black fs-sm"
                                 >
-                                  <h6 className="fs-6 m-0">
+                                  <h6 className="fs-sm m-0">
                                     {val.user.firstName +
                                       " " +
                                       val.user.lastName}
