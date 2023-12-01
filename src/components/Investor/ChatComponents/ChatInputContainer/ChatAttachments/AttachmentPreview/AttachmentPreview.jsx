@@ -1,26 +1,24 @@
 import { Offcanvas } from "react-bootstrap";
 import "./AttachmentPreview.scss";
-import SendIcon from "../../../../../Images/Send.svg";
+import SendIcon from "../../../../../../Images/Send.svg";
 import { useSelector } from "react-redux";
-import { selectIsMobileView } from "../../../../../Store/features/design/designSlice";
+import { selectIsMobileView } from "../../../../../../Store/features/design/designSlice";
 
 export default function AttachmentPreview({
-  selectedImage,
-  setSelectedImage,
-  removeSelectedImage,
+  children,
   sendText,
   setSendText,
   handleKeyDown,
   handleSend,
   showPreview,
   setShowPreview,
+  clearInputs,
 }) {
   const isMobileView = useSelector(selectIsMobileView);
 
   // Handle Close
   function handleClose() {
-    setShowPreview(false);
-    setSelectedImage(null);
+    clearInputs();
   }
 
   return (
@@ -36,17 +34,7 @@ export default function AttachmentPreview({
           <Offcanvas.Title>Attachments</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className="d-flex flex-column gap-3 justify-content-between">
-          {selectedImage && (
-            <div className="image-preview">
-              <img
-                src={URL.createObjectURL(selectedImage)}
-                alt="Selected media"
-              />
-              <button className="remove-preview" onClick={removeSelectedImage}>
-                X
-              </button>
-            </div>
-          )}
+          {children}
 
           {/* Send button */}
           <div className="d-flex align-items-center gap-2 py-2 send-container">

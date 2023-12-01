@@ -23,6 +23,7 @@ import ResetPasswordPopUp from "../PopUp/RequestPasswordPopUp/RequestPasswordPop
 import SpinnerBS from "../Shared/Spinner/SpinnerBS";
 import { selectIsMobileApp } from "../../Store/features/design/designSlice";
 import { GoogleAuth } from "@codetrix-studio/capacitor-google-auth";
+import { Form } from "react-bootstrap";
 
 const Login = () => {
   // const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -51,7 +52,11 @@ const Login = () => {
     password: "",
     phoneNumber: "",
   });
+  const [staySignedIn, setStaySignedIn] = useState(false);
 
+  const handleCheckboxChange = () => {
+    setStaySignedIn(!staySignedIn);
+  };
   // Handle Input change
   const handleInputChange = (event, type) => {
     if (type !== "country" && type !== "state" && type !== "phoneNumber") {
@@ -237,7 +242,7 @@ const Login = () => {
     <div className="container d-flex justify-content-center align-items-start py-md-5 min-vh-100">
       <div className="row d-flex register_container w-100 ">
         {/* Leftside heading and hero image */}
-        <div className="col-lg-6 col-md-12 register_heading">
+        <div className="col-lg-6 col-md-12 register_heading mb-auto">
           <Link to="/">
             <img className="backArrow" src={backArrow} alt="arrow_back" />
           </Link>
@@ -326,6 +331,15 @@ const Login = () => {
               </div>
             </div>
             <div className="row mt-2">
+            <div className="d-flex gap-2 p-2">
+      <input
+        type="checkbox"
+        id="staySignedInCheckbox"
+        checked={staySignedIn}
+        onChange={handleCheckboxChange}
+      />
+      <label htmlFor="staySignedInCheckbox">Stay signed in</label>
+    </div>
               <div className="col-md-12">
                 <Link to={""} onClick={() => setShowResetPopUp(true)}>
                   Forgot Password?
@@ -357,6 +371,7 @@ const Login = () => {
                 )}
               </button>
             </div>
+        
             <h3 className="already_have_account_mobile">
               I don't have an account? &nbsp;
               <Link to={"/signup"} style={{ color: "red" }}>
