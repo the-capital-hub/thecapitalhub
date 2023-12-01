@@ -8,6 +8,14 @@ const adminMail = "learn.capitalhub@gmail.com";
 //create investor
 export const createInvestor = async (investorData) => {
   try {
+    if (investorData?.logo) {
+      const { secure_url } = await cloudinary.uploader.upload(investorData.logo, {
+        folder: `${process.env.CLOUDIANRY_FOLDER}/users/profilePictures`,
+        format: "webp",
+        unique_filename: true,
+      });
+      investorData.logo = secure_url;
+    }
     let existingCompany = await InvestorModel.findOne({
       founderId: investorData.founderId,
     });

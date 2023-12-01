@@ -15,9 +15,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import toast from "react-hot-toast";
 import deleteIcon from "../../../Images/post/delete.png";
-import toast from 'react-hot-toast';
 import achievement from "../../../Images/Investor/Achievements/img_1.png";
+import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
+import { achievementTypes } from "../../Toasts/AchievementToast/types";
 
 const Connection = () => {
   const [selectedTab, setSelectedTab] = useState("received"); // Default to "received"
@@ -72,23 +74,10 @@ const Connection = () => {
     getReceivedConnections();
   }, [dispatch]);
 
-
-  const notify = () => toast.custom((t) => (
-    <div class=" rounded-3 max-w-md  bg-white shadow-lg rounded-lg pointer-events-auto d-flex border ring-1 ring-dark ring-opacity-25
-    <?php echo $t.visible ? 'fade-in' : 'fade-out'; ?>">
-      <div className="p-2  d-flex align-items-center gap-2">
-
-        <img
-          src={achievement}
-          alt="Profile"
-          className="rounded-circle"
-          style={{ width: "50px", height: "50px" }}
-        />
-        <h6 className="m-0 fs-semibold">Pleasure doing business!....</h6>
-      </div>
-    </div>
-  ))
-
+  const notify = () =>
+    toast.custom((t) => (
+      <AchievementToast type={achievementTypes.pleasureDoingBusiness} />
+    ));
 
   // Function to accept a connection
   const acceptConnectionHandler = async (connectionId) => {
@@ -153,22 +142,25 @@ const Connection = () => {
               <h4>Manage Connections</h4>
               <nav className="connection_nav">
                 <button
-                  className={`connection_nav_link fs-6 ${selectedTab === "received" ? "active" : ""
-                    }`}
+                  className={`connection_nav_link fs-6 ${
+                    selectedTab === "received" ? "active" : ""
+                  }`}
                   onClick={() => handleTabChange("received")}
                 >
                   Received
                 </button>
                 <button
-                  className={`connection_nav_link fs-6  ${selectedTab === "sent" ? "active" : ""
-                    }`}
+                  className={`connection_nav_link fs-6  ${
+                    selectedTab === "sent" ? "active" : ""
+                  }`}
                   onClick={() => handleTabChange("sent")}
                 >
                   Sent
                 </button>
                 <button
-                  className={`connection_nav_link fs-6  ${selectedTab === "accepted" ? "active" : ""
-                    }`}
+                  className={`connection_nav_link fs-6  ${
+                    selectedTab === "accepted" ? "active" : ""
+                  }`}
                   onClick={() => handleTabChange("accepted")}
                 >
                   Accepted
@@ -347,8 +339,9 @@ const Connection = () => {
                                 to={`/user/${data._id}`}
                                 className=" text-black text-decoration-none"
                               >
-                                {`${data.firstName ? data.firstName : "name"} ${data.lastName ? data.lastName : ""
-                                  }`}
+                                {`${data.firstName ? data.firstName : "name"} ${
+                                  data.lastName ? data.lastName : ""
+                                }`}
                               </Link>
                             </p>
                             <p className="connection_designation">

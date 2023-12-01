@@ -122,7 +122,7 @@ export const findChat = async (firstId, secondId) => {
 // Pin or Unpin a Chat
 export const togglePinChat = async (userId, chatId) => {
   try {
-    const userDetails = await UserModel.findById(userId).lean();
+    const userDetails = await UserModel.findById(userId);
     if (!userDetails) {
       return {
         status: 404,
@@ -140,7 +140,7 @@ export const togglePinChat = async (userId, chatId) => {
     const user = await UserModel.findOneAndUpdate(
       { _id: userId },
       update,
-      { new: true, lean: true }
+      { new: true }
     );
 
     return {

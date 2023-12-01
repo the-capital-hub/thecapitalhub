@@ -306,6 +306,15 @@
       }
     }
   }
+  .single-comment {
+    .img_container {
+      max-width: 80px;
+      img {
+        padding: 2px;
+        max-width: 55px;
+      }
+    }
+  }
   .comment_messages {
     border-radius: 20px;
     background: #ededed;
