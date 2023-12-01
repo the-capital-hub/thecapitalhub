@@ -20,6 +20,7 @@ import {
   getStartupByFounderId,
   postStartUpData,
   updateUserById,
+  addNotificationAPI
 } from "../../../../../Service/user";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -301,6 +302,15 @@ const OneLinkEditView = () => {
           updateUserById(loggedInUser._id, updatedData)
             .then(({ data }) => {
               dispatch(loginSuccess(data.data));
+              const notificationBody = {
+                recipient: loggedInUser._id,
+                type: "achievementCompleted",
+                achievementId: "6564689149186bca517cd0d1",
+              }
+              addNotificationAPI(notificationBody)
+                .then((data) => console.log("Added"))
+                .catch((error) => console.error(error.message));
+
               toast.dismiss();
               toast.custom((t) => (
                 <AchievementToast type={achievementTypes.oneStopShop} />
