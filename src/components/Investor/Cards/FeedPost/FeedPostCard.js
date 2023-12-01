@@ -473,7 +473,7 @@ const FeedPostCard = ({
                   style={{ fontSize: "12px", fontWeight: 500, color: "#000" }}
                 >
                   {" "}
-                  <TimeAgo datetime={createdAt} locale="" />
+                  <TimeAgo className="text-secondary fs-xs" datetime={createdAt} locale="" />
                 </span>
               </div>
             </div>
