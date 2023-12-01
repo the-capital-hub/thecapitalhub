@@ -44,6 +44,15 @@ const CommunityDashboard = ({
   const chatMessagesContainerRef = useRef(null);
   const [isSent, setIsSent] = useState(false);
   const [msgId, setMsgId] = useState("");
+  // const [messageMenu, setMessageMenu] = useState(true);
+
+  // const handleMouseEnter = () => {
+  //   setMessageMenu(false);
+  // };
+
+  // const handleMouseLeave = () => {
+  //   setMessageMenu(true);
+  // };
 
   const handleSetDeletePopup = () => {
     setDeletePopup(true);
@@ -141,8 +150,9 @@ const CommunityDashboard = ({
         groupedMessages.push({ date: "Yesterday", messages: [message] });
       } else {
         currentDate = messageDate;
-        const formattedDate = `${messageDate.getDate()}-${messageDate.getMonth() + 1
-          }-${messageDate.getFullYear()}`;
+        const formattedDate = `${messageDate.getDate()}-${
+          messageDate.getMonth() + 1
+        }-${messageDate.getFullYear()}`;
         groupedMessages.push({
           date:
             today.getDate() === messageDate.getDate() ? "Today" : formattedDate,
@@ -329,7 +339,9 @@ const CommunityDashboard = ({
                             id={message?._id}
                           />
                           <Linkify>
-                            <p className="text-break">{message.text}</p>
+                            <p className="text-break text-start m-0 mb-1 me-3">
+                              {message.text}
+                            </p>
                           </Linkify>
                         </div>
                       )}
@@ -343,7 +355,7 @@ const CommunityDashboard = ({
                           <img
                             src={message.image}
                             className="image-message"
-                            alt="message image"
+                            alt="message media"
                           />
                         </div>
                       )}
@@ -412,7 +424,7 @@ const CommunityDashboard = ({
                           <img
                             src={message.image}
                             className="image-message"
-                            alt="message image"
+                            alt="message media"
                           />
                         </div>
                       )}
@@ -448,13 +460,15 @@ const CommunityDashboard = ({
           </div>
         ))}
       </div>
+
+      {/* Chat Input section */}
       <section className="chat_input_section">
         <div className="chat_input_container">
           {selectedImage && (
             <div className="image-preview">
               <img
                 src={URL.createObjectURL(selectedImage)}
-                alt="Selected Image"
+                alt="Selected media"
               />
               <button className="remove-preview" onClick={removeSelectedImage}>
                 X

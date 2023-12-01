@@ -55,6 +55,7 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
           getUserChats(loggedInUserId),
         ]);
 
+        console.log("response from pinned chats:", pinnedChatResponse.data);
         setPinnedChats(pinnedChatResponse.data);
         pinnedChatResponse.data.forEach((chat) => {
           handleGetMessageByChatId(chat._id);
