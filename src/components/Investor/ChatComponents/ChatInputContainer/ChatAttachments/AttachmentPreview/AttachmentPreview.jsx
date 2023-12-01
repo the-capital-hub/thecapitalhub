@@ -1,8 +1,8 @@
 import { Offcanvas } from "react-bootstrap";
 import "./AttachmentPreview.scss";
-import SendIcon from "../../../../../Images/Send.svg";
+import SendIcon from "../../../../../../Images/Send.svg";
 import { useSelector } from "react-redux";
-import { selectIsMobileView } from "../../../../../Store/features/design/designSlice";
+import { selectIsMobileView } from "../../../../../../Store/features/design/designSlice";
 
 export default function AttachmentPreview({
   children,
@@ -12,13 +12,13 @@ export default function AttachmentPreview({
   handleSend,
   showPreview,
   setShowPreview,
+  clearInputs,
 }) {
   const isMobileView = useSelector(selectIsMobileView);
 
   // Handle Close
   function handleClose() {
-    setShowPreview(false);
-    // setSelectedImage(null);
+    clearInputs();
   }
 
   return (

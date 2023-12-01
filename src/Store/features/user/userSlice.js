@@ -120,6 +120,9 @@ export const selectUserName = (state) =>
   state.user.loggedInUser?.firstName + " " + state.user.loggedInUser?.lastName;
 export const selectUserEmail = (state) => state.user.loggedInUser?.email;
 export const selectUserBio = (state) => state.user.loggedInUser?.bio;
+export const selectUserFirstName = (state) =>
+  state.user.loggedInUser?.firstName;
+export const selectUserLastName = (state) => state.user.loggedInUser?.lasttName;
 
 // unread Notifications selector
 export const selectUnreadNotifications = (state) =>
@@ -169,5 +172,6 @@ export const selectUserSectorInterested = (state) =>
 export const selectMyInterests = (state) => state.user.company?.myInterests;
 export const selectFundingQuestions = (state) =>
   state.user.loggedInUser?.fundingViaCapitalhubQuestions;
+export const selectUserOneLink = (state) => state.user.company?.oneLink;
 
 export default userSlice.reducer;

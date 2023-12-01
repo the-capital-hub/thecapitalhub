@@ -1,32 +1,33 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./CommunityDashboard.scss";
-import sendIcon from "../../../../Images/Send.svg";
+// import sendIcon from "../../../../Images/Send.svg";
 import { useSelector } from "react-redux";
 import {
   getMessageByChatId,
-  addMessage,
-  getStartupByFounderId,
-  getCommunityById,
+  // addMessage,
+  // getStartupByFounderId,
+  // getCommunityById,
   deleteMessage,
   markMessagesAsReadInCommunities,
 } from "../../../../Service/user";
-import attachmentGreyIcon from "../../../../Images/Chat/attachtment-grey.svg";
-import attachmentOrangeIcon from "../../../../Images/Chat/attachment-orange.svg";
-import imageIcon from "../../../../Images/Chat/image.svg";
+// import attachmentGreyIcon from "../../../../Images/Chat/attachtment-grey.svg";
+// import attachmentOrangeIcon from "../../../../Images/Chat/attachment-orange.svg";
+// import imageIcon from "../../../../Images/Chat/image.svg";
 import documentIcon from "../../../../Images/Chat/document.svg";
-import videoIcon from "../../../../Images/Chat/attachVideo.svg";
-import onelinkIcon from "../../../../Images/Chat/Onelink.svg";
-import { getBase64 } from "../../../../utils/getBase64";
+// import videoIcon from "../../../../Images/Chat/attachVideo.svg";
+// import onelinkIcon from "../../../../Images/Chat/Onelink.svg";
+// import { getBase64 } from "../../../../utils/getBase64";
 import Linkify from "react-linkify";
 import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import ChatDeletePopup from "../ChatDeletePopup/ChatDeletePopup";
 import ChatDropDownMenu from "../ChatDropDownMenu/ChatDropDownMenu";
-import { s3 } from "../../../../Service/awsConfig";
-import { Offcanvas } from "react-bootstrap";
-import AttachmentPreview from "../../../../components/Investor/ChatComponents/ChatAttachments/AttachmentPreview/AttachmentPreview";
-import ImageAttachment from "../../../../components/Investor/ChatComponents/ChatAttachments/ImageAttachment/ImageAttachment";
-import VideoAttachment from "../../../../components/Investor/ChatComponents/ChatAttachments/VideoAttachment/VideoAttachment";
-import DocumentAttachment from "../../../../components/Investor/ChatComponents/ChatAttachments/DocumentAttachment/DocumentAttachment";
+// import { s3 } from "../../../../Service/awsConfig";
+// import { Offcanvas } from "react-bootstrap";
+// import AttachmentPreview from "../../../../components/Investor/ChatComponents/ChatInputContainer/ChatAttachments/AttachmentPreview/AttachmentPreview";
+// import ImageAttachment from "../../../../components/Investor/ChatComponents/ChatInputContainer/ChatAttachments/ImageAttachment/ImageAttachment";
+// import VideoAttachment from "../../../../components/Investor/ChatComponents/ChatInputContainer/ChatAttachments/VideoAttachment/VideoAttachment";
+// import DocumentAttachment from "../../../../components/Investor/ChatComponents/ChatInputContainer/ChatAttachments/DocumentAttachment/DocumentAttachment";
+import ChatInputContainer from "../../../../components/Investor/ChatComponents/ChatInputContainer/ChatInputContainer";
 
 const CommunityDashboard = ({
   setSendMessage,
@@ -38,18 +39,20 @@ const CommunityDashboard = ({
   // Fetch global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const chatId = useSelector((state) => state.chat.chatId);
-  const isCommunitySelected = useSelector(
-    (state) => state.chat.isCommunitySelected
-  );
+  // const isCommunitySelected = useSelector(
+  //   (state) => state.chat.isCommunitySelected
+  // );
   const [showFeaturedPostSuccess, setShowFeaturedPostSuccess] = useState(false);
   const [deletePopup, setDeletePopup] = useState(false);
   const [messages, setMessages] = useState([]);
-  const [user, setUser] = useState(null);
-  const [sendText, setSendText] = useState("");
-  const chatMessagesContainerRef = useRef(null);
+  // const [user, setUser] = useState(null);
+
+  // const [sendText, setSendText] = useState("");
   const [isSent, setIsSent] = useState(false);
   const [msgId, setMsgId] = useState("");
-  const [showPreview, setShowPreview] = useState(false);
+  // const [showPreview, setShowPreview] = useState(false);
+
+  const chatMessagesContainerRef = useRef(null);
 
   const handleSetDeletePopup = () => {
     setDeletePopup(true);
@@ -109,18 +112,18 @@ const CommunityDashboard = ({
       });
   }, [chatId, cleared, isSent, showFeaturedPostSuccess]);
 
-  const [community, setCommunity] = useState([]);
+  // const [community, setCommunity] = useState([]);
 
-  useEffect(() => {
-    getCommunityById(chatId)
-      .then((res) => {
-        setCommunity(res.data);
-        setUser(null);
-      })
-      .catch((error) => {
-        console.error("Error-->", error);
-      });
-  }, [chatId, isCommunitySelected]);
+  // useEffect(() => {
+  //   getCommunityById(chatId)
+  //     .then((res) => {
+  //       setCommunity(res.data);
+  //       setUser(null);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error-->", error);
+  //     });
+  // }, [chatId, isCommunitySelected]);
 
   const groupMessagesByDate = (messages) => {
     const groupedMessages = [];
@@ -163,72 +166,72 @@ const CommunityDashboard = ({
 
   const groupedMessages = groupMessagesByDate(messages);
 
-  const handleSend = async () => {
-    if (
-      sendText?.trim() === "" &&
-      selectedImage === null &&
-      selectedVideo === null &&
-      selectedDocument === null
-    )
-      return;
-    const message = {
-      senderId: loggedInUser._id,
-      text: sendText,
-      chatId: chatId,
-    };
+  // const handleSend = async () => {
+  //   if (
+  //     sendText?.trim() === "" &&
+  //     selectedImage === null &&
+  //     selectedVideo === null &&
+  //     selectedDocument === null
+  //   )
+  //     return;
+  //   const message = {
+  //     senderId: loggedInUser._id,
+  //     text: sendText,
+  //     chatId: chatId,
+  //   };
 
-    if (selectedImage) {
-      const image = await getBase64(selectedImage);
-      message.image = image;
-    }
-    if (selectedVideo) {
-      const video = await getBase64(selectedVideo);
-      message.video = video;
-    }
-    if (selectedDocument) {
-      console.log("doc");
-      const timestamp = Date.now();
-      const fileName = `${timestamp}_${selectedDocument.name}`;
-      const params = {
-        Bucket: "thecapitalhubdocuments",
-        Key: `documents/${fileName}`,
-        Body: selectedDocument,
-      };
-      try {
-        const res = await s3.upload(params).promise();
-        message.documentName = selectedDocument.name;
-        message.documentUrl = res.Location;
-        console.log(res.Location);
-      } catch (error) {
-        console.error("Error uploading file to S3:", error);
-      }
-    }
+  //   if (selectedImage) {
+  //     const image = await getBase64(selectedImage);
+  //     message.image = image;
+  //   }
+  //   if (selectedVideo) {
+  //     const video = await getBase64(selectedVideo);
+  //     message.video = video;
+  //   }
+  //   if (selectedDocument) {
+  //     console.log("doc");
+  //     const timestamp = Date.now();
+  //     const fileName = `${timestamp}_${selectedDocument.name}`;
+  //     const params = {
+  //       Bucket: "thecapitalhubdocuments",
+  //       Key: `documents/${fileName}`,
+  //       Body: selectedDocument,
+  //     };
+  //     try {
+  //       const res = await s3.upload(params).promise();
+  //       message.documentName = selectedDocument.name;
+  //       message.documentUrl = res.Location;
+  //       console.log(res.Location);
+  //     } catch (error) {
+  //       console.error("Error uploading file to S3:", error);
+  //     }
+  //   }
 
-    addMessage(message)
-      .then(({ data }) => {
-        setIsSent(!isSent);
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error("Error-->", error);
-      });
-    message.senderId = {
-      _id: loggedInUser._id,
-      firstName: loggedInUser.fileName,
-      lastName: loggedInUser.lastName,
-      profilePicture: loggedInUser.profilePicture,
-    };
-    let recieverId = community.members;
-    recieverId = recieverId.filter((member) => member !== loggedInUser._id);
-    const createdAt = new Date().toISOString();
-    setSendMessage({ ...message, recieverId, createdAt });
-    setSendText("");
-    setSelectedImage(null);
-    setSelectedVideo(null);
-    setSelectedDocument(null);
-    setShowAttachDocs(false);
-    setShowPreview(false);
-  };
+  //   addMessage(message)
+  //     .then(({ data }) => {
+  //       setIsSent(!isSent);
+  //       console.log(data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error-->", error);
+  //     });
+  //   message.senderId = {
+  //     _id: loggedInUser._id,
+  //     firstName: loggedInUser.fileName,
+  //     lastName: loggedInUser.lastName,
+  //     profilePicture: loggedInUser.profilePicture,
+  //   };
+  //   let recieverId = community.members;
+  //   recieverId = recieverId.filter((member) => member !== loggedInUser._id);
+  //   const createdAt = new Date().toISOString();
+  //   setSendMessage({ ...message, recieverId, createdAt });
+  //   setSendText("");
+  //   setSelectedImage(null);
+  //   setSelectedVideo(null);
+  //   setSelectedDocument(null);
+  //   setShowAttachDocs(false);
+  //   setShowPreview(false);
+  // };
 
   const formatTime = (date) => {
     const options = {
@@ -241,69 +244,69 @@ const CommunityDashboard = ({
   };
 
   //
-  const [showAttachDocs, setShowAttachDocs] = useState(false);
-  const attachDocContainerRef = useRef();
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [selectedVideo, setSelectedVideo] = useState(null);
-  const [selectedDocument, setSelectedDocument] = useState(null);
+  // const [showAttachDocs, setShowAttachDocs] = useState(false);
+  // const attachDocContainerRef = useRef();
+  // const [selectedImage, setSelectedImage] = useState(null);
+  // const [selectedVideo, setSelectedVideo] = useState(null);
+  // const [selectedDocument, setSelectedDocument] = useState(null);
 
-  useEffect(() => {
-    const outsideClickHandler = (event) => {
-      if (
-        attachDocContainerRef.current &&
-        !attachDocContainerRef.current.contains(event.target)
-      ) {
-        setShowAttachDocs(false);
-      }
-    };
+  // useEffect(() => {
+  //   const outsideClickHandler = (event) => {
+  //     if (
+  //       attachDocContainerRef.current &&
+  //       !attachDocContainerRef.current.contains(event.target)
+  //     ) {
+  //       setShowAttachDocs(false);
+  //     }
+  //   };
 
-    document.addEventListener("click", outsideClickHandler);
+  //   document.addEventListener("click", outsideClickHandler);
 
-    return () => {
-      document.removeEventListener("click", outsideClickHandler);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("click", outsideClickHandler);
+  //   };
+  // }, []);
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (event.target.name === "image" && file.type.includes("image")) {
-      setSelectedImage(file);
-    } else if (event.target.name === "video" && file.type.includes("video")) {
-      setSelectedVideo(file);
-    } else if (event.target.name === "document") {
-      setSelectedDocument(file);
-    }
-    setShowAttachDocs(false);
-    setShowPreview(true);
-  };
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   if (event.target.name === "image" && file.type.includes("image")) {
+  //     setSelectedImage(file);
+  //   } else if (event.target.name === "video" && file.type.includes("video")) {
+  //     setSelectedVideo(file);
+  //   } else if (event.target.name === "document") {
+  //     setSelectedDocument(file);
+  //   }
+  //   setShowAttachDocs(false);
+  //   setShowPreview(true);
+  // };
 
-  const handleOnelinkClick = () => {
-    getStartupByFounderId(loggedInUser._id)
-      .then(({ data }) => {
-        setSendText(
-          `https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`
-        );
-      })
-      .catch((error) => console.log(error));
-  };
+  // const handleOnelinkClick = () => {
+  //   getStartupByFounderId(loggedInUser._id)
+  //     .then(({ data }) => {
+  //       setSendText(
+  //         `https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`
+  //       );
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
 
-  const removeSelectedImage = () => {
-    setSelectedImage(null);
-  };
+  // const removeSelectedImage = () => {
+  //   setSelectedImage(null);
+  // };
 
-  const removeSelectedVideo = () => {
-    setSelectedVideo(null);
-  };
+  // const removeSelectedVideo = () => {
+  //   setSelectedVideo(null);
+  // };
 
-  const removeSelectedDocument = () => {
-    setSelectedDocument(null);
-  };
+  // const removeSelectedDocument = () => {
+  //   setSelectedDocument(null);
+  // };
 
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      handleSend();
-    }
-  };
+  // const handleKeyDown = (event) => {
+  //   if (event.key === "Enter") {
+  //     handleSend();
+  //   }
+  // };
 
   return (
     <div className="community_dashboard_container">
@@ -462,149 +465,11 @@ const CommunityDashboard = ({
       </div>
 
       {/* Chat Input section */}
-      <section className="chat_input_section">
-        <div className="chat_input_container">
-          {/* Preview offcanvas */}
-          <AttachmentPreview
-            showPreview={showPreview}
-            setShowPreview={setShowPreview}
-            sendText={sendText}
-            setSendText={setSendText}
-            handleKeyDown={handleKeyDown}
-            handleSend={handleSend}
-          >
-            {/* Image Preview. */}
-            <ImageAttachment
-              selectedImage={selectedImage}
-              removeSelectedImage={removeSelectedImage}
-            />
-            {/* Video Preview */}
-            <VideoAttachment
-              selectedVideo={selectedVideo}
-              removeSelectedVideo={removeSelectedVideo}
-            />
-            {/* Document Preview */}
-            <DocumentAttachment />
-          </AttachmentPreview>
-
-          {/* Text input */}
-          <input
-            type="text"
-            className="message"
-            name="introductoryMessage"
-            placeholder="Your message..."
-            onChange={(e) => setSendText(e.target.value)}
-            onKeyDown={handleKeyDown}
-            value={showPreview ? "" : sendText}
-          />
-          <div className="right_icons">
-            <div class="attactment-container" ref={attachDocContainerRef}>
-              <button
-                className="btn"
-                onClick={() => setShowAttachDocs(!showAttachDocs)}
-              >
-                {!showAttachDocs ? (
-                  <img
-                    src={attachmentGreyIcon}
-                    width={20}
-                    // onClick={() => setShowAttachDocs(!showAttachDocs)}
-                    alt="attach"
-                  />
-                ) : (
-                  <img
-                    src={attachmentOrangeIcon}
-                    width={20}
-                    // onClick={() => setShowAttachDocs(!showAttachDocs)}
-                    alt="attach"
-                  />
-                )}
-              </button>
-              {showAttachDocs && (
-                <div className="attachment-options shadow-sm">
-                  <div className="attachment-option">
-                    <label
-                      htmlFor="documentInput"
-                      style={{ cursor: "pointer" }}
-                    >
-                      <img
-                        className="p-1 rounded-circle"
-                        src={documentIcon}
-                        alt="upload document"
-                      />
-                      <p>Document</p>
-                    </label>
-                    <input
-                      type="file"
-                      id="documentInput"
-                      name="document"
-                      hidden
-                      onChange={handleFileChange}
-                    />
-                  </div>
-                  <div className="attachment-option">
-                    <label htmlFor="image" style={{ cursor: "pointer" }}>
-                      <img
-                        src={imageIcon}
-                        alt="upload images"
-                        className="p-1 rounded-circle "
-                      />
-                      <p>Image</p>
-                    </label>
-                    <input
-                      type="file"
-                      accept="image/png, image/jpeg, image/jpg, image/svg+xml"
-                      id="image"
-                      name="image"
-                      hidden
-                      onChange={handleFileChange}
-                    />
-                  </div>
-                  <div className="attachment-option">
-                    <label htmlFor="video" style={{ cursor: "pointer" }}>
-                      <img
-                        src={videoIcon}
-                        alt="upload video"
-                        className="p-1 rounded-circle "
-                      />
-                      <p>Video</p>
-                    </label>
-                    <input
-                      type="file"
-                      accept="video/mp4,video/x-m4v,video/*"
-                      id="video"
-                      name="video"
-                      hidden
-                      onChange={handleFileChange}
-                    />
-                  </div>
-                  <div
-                    className="attachment-option"
-                    onClick={handleOnelinkClick}
-                  >
-                    <label htmlFor="onelink" style={{ cursor: "pointer" }}>
-                      <img
-                        src={onelinkIcon}
-                        alt="One link"
-                        className="p-1 rounded-circle"
-                      />
-                      <p>One Link</p>
-                    </label>
-                  </div>
-                </div>
-              )}
-            </div>
-            <button className="btn p-0">
-              <img
-                className="border-start border-2"
-                src={sendIcon}
-                alt="Send"
-                width={30}
-                onClick={() => handleSend()}
-              />
-            </button>
-          </div>
-        </div>
-      </section>
+      <ChatInputContainer
+        isSent={isSent}
+        setIsSent={setIsSent}
+        setSendMessage={setSendMessage}
+      />
 
       {/* Delete Popup */}
       {deletePopup ? (
