@@ -54,7 +54,7 @@ const Chats = () => {
   // Fetch global state
   const loggedInUserId = useSelector(selectLoggedInUserId);
   const isInvestor = useSelector(selectIsInvestor);
-  // const userId = useSelector((state) => state.chat.userId);
+  const userId = useSelector((state) => state.chat.userId);
   const chatId = useSelector((state) => state.chat.chatId);
   const isCommunitySelected = useSelector(
     (state) => state.chat.isCommunitySelected
@@ -182,8 +182,15 @@ const Chats = () => {
       <div className="mobile-nav border-bottom shadow-sm pb-2 px-2">
         <button
           className="btn btn-sm btn-light"
-          onClick={() => dispatch(resetChat())}
-          // onClick={() => navigate(-1)}
+          onClick={() => {
+            console.log(chatId);
+            if (!chatId) {
+              navigate(-1)
+            } else {
+              dispatch(resetChat())
+            }
+          }}
+
         >
           <IoMdArrowRoundBack /> Back
         </button>
@@ -195,13 +202,13 @@ const Chats = () => {
           onClick={() =>
             navigate(isInvestor === "true" ? "/investor/home" : "/home")
           }
-          // onClick={() => dispatch(resetChat())}
+        // onClick={() => dispatch(resetChat())}
         >
           <AiOutlineHome /> Home
         </button>
       </div>
     );
-  }, [dispatch, isInvestor, navigate]);
+  }, [dispatch, isInvestor, navigate, chatId]);
 
   const renderMobileMainSection = useMemo(() => {
     return !isSettingsOpen ? (
@@ -258,9 +265,8 @@ const Chats = () => {
         <div className="container-xxl p-0 chat_main_container position-relative fadeIn-025">
           {/* Left section */}
           <div
-            className={`left_section_wrapper mt-3 mx-3 ${
-              isMobileView && "d-none"
-            }`}
+            className={`left_section_wrapper mt-3 mx-3 ${isMobileView && "d-none"
+              }`}
           >
             <section className="left_section pe-1 ">
               <span

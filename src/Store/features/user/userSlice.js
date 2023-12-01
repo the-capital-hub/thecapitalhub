@@ -38,8 +38,26 @@ export const userSlice = createSlice({
       setThemeColor(
         action.payload.isInvestor === "true" ? "investor" : "startup"
       );
-
       state.error = null;
+      if (action.payload.isInvestor === "false") {
+        const startupAccounts = JSON.parse(localStorage.getItem('StartupAccounts')) || [];
+        const updatedStartupAccounts = startupAccounts.map((account) => {
+          if (account.user._id === action.payload._id) {
+            account.user = action.payload;
+          }
+          return account;
+        });
+        localStorage.setItem('StartupAccounts', JSON.stringify(updatedStartupAccounts));
+      } else {
+        const investorAccounts = JSON.parse(localStorage.getItem('InvestorAccounts')) || [];
+        const updatedInvestorAccounts = investorAccounts.map((account) => {
+          if (account.user._id === action.payload._id) {
+            account.user = action.payload;
+          }
+          return account;
+        });
+        localStorage.setItem('InvestorAccounts', JSON.stringify(updatedInvestorAccounts));
+      }
     },
     loginFailure: (state, action) => {
       localStorage.removeItem("loggedInUser");
