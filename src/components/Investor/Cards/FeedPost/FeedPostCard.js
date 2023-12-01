@@ -14,6 +14,7 @@ import saveIcon from "../../../../Images/post/save.svg";
 import savedIcon from "../../../../Images/post/saved.png";
 import deleteIcon from "../../../../Images/post/delete.png";
 import Modal from "../../../PopUp/Modal/Modal";
+import { FaRegCommentDots, FaCommentDots } from "react-icons/fa6";
 
 import TimeAgo from "timeago-react";
 import { useSelector } from "react-redux";
@@ -472,7 +473,11 @@ const FeedPostCard = ({
                   style={{ fontSize: "12px", fontWeight: 500, color: "#000" }}
                 >
                   {" "}
-                  <TimeAgo datetime={createdAt} locale="" />
+                  <TimeAgo
+                    className="text-secondary fs-xs"
+                    datetime={createdAt}
+                    locale=""
+                  />
                 </span>
               </div>
             </div>
@@ -652,13 +657,26 @@ const FeedPostCard = ({
                         style={{ cursor: "pointer" }}
                       />
                     )}
-                    <img
+                    {/* <img
                       src={commentIcon}
                       width={16}
                       alt="comment post"
                       onClick={() => setShowComment(!showComment)}
                       style={{ cursor: "pointer" }}
-                    />
+                    /> */}
+                    {!showComment ? (
+                      <FaRegCommentDots
+                        size={20}
+                        onClick={() => setShowComment((prev) => !prev)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    ) : (
+                      <FaCommentDots
+                        size={20}
+                        onClick={() => setShowComment((prev) => !prev)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    )}
                   </div>
                 </div>
 
@@ -757,16 +775,21 @@ const FeedPostCard = ({
 
                 {/* Show Comments */}
                 {showComment && (
-                  <div>
-                    <div className="comment_container">
+                  <div className="border-top mt-1">
+                    <div className="comment_container mb-1 border-bottom">
                       <div className="logo">
-                        <img src={loggedInUser.profilePicture} alt="Logo" />
+                        <img
+                          src={loggedInUser.profilePicture}
+                          alt="Logo"
+                          className="border border-light"
+                        />
                       </div>
                       <section className="input_and_logo_section">
                         <div className="input_box px-1">
                           <input
                             type="text"
-                            placeholder="Add Comment"
+                            placeholder="Add a comment"
+                            className="fs-14"
                             value={commentText}
                             onChange={(e) => setCommentText(e.target.value)}
                             onKeyDown={(e) => {
@@ -787,58 +810,57 @@ const FeedPostCard = ({
                         </div>
                       </section>
                     </div>
-
+                    {comments?.length ? (
+                      <span className="fs-6 ps-2 mb-2">Comments</span>
+                    ) : (
+                      <span className="fs-6 ps-2 mb-2 w-100 d-flex justify-content-center text-center">
+                        No comments
+                      </span>
+                    )}
                     {/* Comments */}
-                    {comments
-                      // .sort(
-                      //   (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-                      // )
-                      .map((val) => (
-                        <section
-                          className="comment_messages my-2"
-                          key={val._id}
-                        >
-                          <div className="connection_item d-flex flex-column flex-md-row justify-content-between">
-                            <div className="connection_left">
-                              {val.user && (
-                                <>
-                                  <Link to={`/user/${val.user._id}`}>
-                                    <img
-                                      src={val.user.profilePicture || ""}
-                                      alt="Connection"
-                                      className="comment_connection"
-                                    />
-                                  </Link>
-                                  <div className="body_container">
-                                    <Link
-                                      to={`/user/${val.user._id}`}
-                                      className="connection_name"
-                                    >
-                                      {val.user.firstName +
-                                        " " +
-                                        val.user.lastName}
-                                    </Link>
-                                    <p className="connection_designation">
-                                      {val.user.designation}
-                                    </p>
-                                  </div>
-                                </>
-                              )}
-                            </div>
-                            <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-center">
-                              <span className="days_time">
+                    {comments.map((val) => (
+                      <section
+                        className="single-comment row m-0 mt-2"
+                        key={val.tex}
+                      >
+                        <div className="img_container col-2 px-2">
+                          <Link to={`/user/${val.user._id}`}>
+                            <img
+                              src={val.user.profilePicture || ""}
+                              alt="Connection"
+                              className="w-100 rounded-circle border border-light"
+                            />
+                          </Link>
+                        </div>
+                        <div className="col-10 p-0 flex-grow-1">
+                          <div className="comment-details bg-light rounded-3 p-2 p-lg-3 d-flex flex-column">
+                            <header className="d-flex justify-content-between align-items-center p-0">
+                              <Link
+                                to={`/user/${val.user._id}`}
+                                className="text-decoration-none text-black fs-sm"
+                              >
+                                <h6 className="fs-sm m-0">
+                                  {val.user.firstName + " " + val.user.lastName}
+                                </h6>
+                              </Link>
+                              <span className="days_time fs-xs">
                                 <TimeAgo datetime={val.createdAt} locale="" />
                               </span>
-                            </div>
+                            </header>
+                            <span className="text-secondary fs-xs m-0">
+                              {val.user?.designation}
+                              {" , "}{" "}
+                              {val.user?.startUp?.company ||
+                                val.user?.investor?.companyName}
+                            </span>
+                            <p className="comment m-0 fs-sm mt-1">{val.text}</p>
                           </div>
-                          <p className="comment_text">{val.text}</p>
-                          <hr className="p-0 m-0" />
-                          <div className="d-flex  justify-content-between px-2">
-                            <div className="p-2">
+                          <div className="actions d-flex gap-2 px-1 align-items-center justify-content-between">
+                            <div>
                               {val?.likes?.includes(loggedInUser._id) ? (
                                 <img
                                   src={fireIcon}
-                                  width={18}
+                                  width={15}
                                   alt="like post"
                                   onClick={() =>
                                     commentlikeUnlikeHandler(postId, val._id)
@@ -847,34 +869,33 @@ const FeedPostCard = ({
                               ) : (
                                 <img
                                   src={bwFireIcon}
-                                  width={18}
+                                  width={15}
                                   alt="like post"
                                   onClick={() =>
                                     commentlikeUnlikeHandler(postId, val._id)
                                   }
                                 />
                               )}
-                              <span
-                                className=" mx-3 text-secondary"
-                                style={{ fontSize: "14px" }}
-                              >
+                              <span className="mx-2 text-secondary fs-sm">
                                 {val?.likes?.length} likes
                               </span>
                             </div>
                             {val.user._id === loggedInUser?._id && (
-                              <p
+                              <span
                                 onClick={() => deleteComments(postId, val._id)}
                               >
                                 <img
                                   src={deleteIcon}
                                   alt="delete icon"
                                   className="deleteIcon py-1"
+                                  width={15}
                                 />
-                              </p>
+                              </span>
                             )}
                           </div>
-                        </section>
-                      ))}
+                        </div>
+                      </section>
+                    ))}
                   </div>
                 )}
               </div>
