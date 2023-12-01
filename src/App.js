@@ -30,6 +30,7 @@ import { useEffect } from "react";
 import InvestorOneLinkRoutes from "./routes/InvestorOneLinkRoutes";
 import { Capacitor } from "@capacitor/core";
 import { App as CapacitorApp } from '@capacitor/app';
+import AppUrlListener from "./pages/AppUrlListener/AppUrlListener";
 
 function App() {
   const dispatch = useDispatch();
@@ -76,6 +77,7 @@ function App() {
 
   return (
     <Router>
+      <AppUrlListener />
       <Routes>
         {/* Public Routes */}
         {PublicRoutes()}
