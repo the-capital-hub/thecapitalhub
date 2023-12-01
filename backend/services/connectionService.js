@@ -53,7 +53,10 @@ export const getSentPendingConnectionRequests = async (userId) => {
     const sentRequests = await ConnectionModel.find({
       sender: userId,
       status: "pending",
-    }).populate("receiver", "firstName lastName profilePicture designation");
+    }).populate("receiver", "firstName lastName profilePicture designation startUp investor");
+    for (const request of sentRequests) {
+      await request.receiver.populate("startUp investor");
+    }
     if (sentRequests.length === 0) {
       return {
         status: 200,
@@ -118,9 +121,11 @@ export const getPendingConnectionRequests = async (userId) => {
       receiver: userId,
       status: "pending",
     })
-      .populate("sender", "firstName lastName profilePicture designation")
+      .populate("sender", "firstName lastName profilePicture designation startUp investor")
       .sort({ _id: "-1" });
-
+    for (const request of pendingRequests) {
+      await request.sender.populate("startUp investor");
+    }
     return {
       status: 200,
       message: "Pending requests retrived successfully",
@@ -224,8 +229,12 @@ export const getUserConnections = async (userId) => {
   try {
     const user = await UserModel.findById(userId).populate(
       "connections",
-      "firstName lastName profilePicture designation"
+      "firstName lastName profilePicture designation startUp investor"
     );
+    for (const connection of user.connections) {
+      await connection.populate("startUp investor");
+    }
+
     if (!user) {
       return {
         status: 404,
