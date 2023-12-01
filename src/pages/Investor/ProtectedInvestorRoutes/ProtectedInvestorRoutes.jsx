@@ -60,8 +60,9 @@ function ProtectedInvestorRoutes({ children, ...props }) {
         />
 
         <div
-          className={`container-fluid p-0 newInvestor_container ${sidebarCollapsed ? "sidebar-collapsed" : ""
-            }`}
+          className={`container-fluid p-0 newInvestor_container ${
+            sidebarCollapsed ? "sidebar-collapsed" : ""
+          }`}
         >
           <div className="sidebar">
             <InvestorSidebar
@@ -97,6 +98,9 @@ function ProtectedInvestorRoutes({ children, ...props }) {
         <Toaster
           containerStyle={{
             top: "100px",
+          }}
+          toastOptions={{
+            duration: 10000,
           }}
         />
       </>

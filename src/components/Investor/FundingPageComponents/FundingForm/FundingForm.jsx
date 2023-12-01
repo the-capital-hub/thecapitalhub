@@ -19,6 +19,8 @@ import {
 } from "../../../../Service/user";
 import toast from "react-hot-toast";
 import achievement from "../../../../Images/Investor/Achievements/img_1.png";
+import AchievementToast from "../../../Toasts/AchievementToast/AchievementToast";
+import { achievementTypes } from "../../../Toasts/AchievementToast/types";
 
 export default function FundingForm({ setShowForm }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -75,20 +77,7 @@ export default function FundingForm({ setShowForm }) {
           .then(({ data }) => {
             dispatch(loginSuccess(data.data));
             toast.custom((t) => (
-              <div
-                class=" rounded-3 max-w-md  bg-white shadow-lg rounded-lg pointer-events-auto d-flex border ring-1 ring-dark ring-opacity-25
-            <?php echo $t.visible ? 'fade-in' : 'fade-out'; ?>"
-              >
-                <div className="p-2  d-flex align-items-center gap-2">
-                  <img
-                    src={achievement}
-                    alt="Profile"
-                    className="rounded-circle"
-                    style={{ width: "50px", height: "50px" }}
-                  />
-                  <h6 className="m-0 fs-semibold">Here We Go....</h6>
-                </div>
-              </div>
+              <AchievementToast type={achievementTypes.hereWeGo} />
             ));
           })
           .catch((error) => {
