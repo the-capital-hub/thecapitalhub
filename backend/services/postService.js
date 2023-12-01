@@ -14,14 +14,16 @@ export const createNewPost = async (data) => {
       data.image = secure_url;
     }
     if (data?.images) {
-      const uploadedImages = await Promise.all(data.images.map(async (image) => {
-        const { secure_url } = await cloudinary.uploader.upload(image, {
-          folder: `${process.env.CLOUDIANRY_FOLDER}/posts/images`,
-          format: "webp",
-          unique_filename: true,
-        });
-        return secure_url;
-      }));
+      const uploadedImages = await Promise.all(
+        data.images.map(async (image) => {
+          const { secure_url } = await cloudinary.uploader.upload(image, {
+            folder: `${process.env.CLOUDIANRY_FOLDER}/posts/images`,
+            format: "webp",
+            unique_filename: true,
+          });
+          return secure_url;
+        })
+      );
       data.images = uploadedImages;
     }
     if (data?.video) {
@@ -34,18 +36,28 @@ export const createNewPost = async (data) => {
       data.video = secure_url;
     }
     if (data.resharedPostId) {
-      const sharedPost = await PostModel.findByIdAndUpdate(data.resharedPostId, {
-        $inc: { resharedCount: 1 },
-      });
+      const sharedPost = await PostModel.findByIdAndUpdate(
+        data.resharedPostId,
+        {
+          $inc: { resharedCount: 1 },
+        }
+      );
       const type = "postShared";
-      await addNotification(sharedPost.user, data.user, type, data.resharedPostId);
-      data.resharedPostId = await PostModel.findById(data.resharedPostId).populate('user');
+      await addNotification(
+        sharedPost.user,
+        data.user,
+        type,
+        data.resharedPostId
+      );
+      data.resharedPostId = await PostModel.findById(
+        data.resharedPostId
+      ).populate("user");
     }
     const newPost = new PostModel(data);
     await newPost.save();
-    await newPost.populate('user');
-    await newPost.user.populate('startUp');
-    await newPost.user.populate('investor');
+    await newPost.populate("user");
+    await newPost.user.populate("startUp");
+    await newPost.user.populate("investor");
     return newPost;
   } catch (error) {
     console.error(error);
@@ -84,15 +96,17 @@ export const allPostsData = async (page, perPage) => {
     const allPosts = await PostModel.find()
       .populate({
         path: "user",
-        select: "firstName lastName designation profilePicture investor startUp",
-        populate: [{
-          path: "investor",
-          select: "companyName",
-        },
-        {
-          path: "startUp",
-          select: "company",
-        },
+        select:
+          "firstName lastName designation profilePicture investor startUp",
+        populate: [
+          {
+            path: "investor",
+            select: "companyName",
+          },
+          {
+            path: "startUp",
+            select: "company",
+          },
         ],
       })
       .populate({
@@ -101,7 +115,7 @@ export const allPostsData = async (page, perPage) => {
         populate: {
           path: "user",
           select: "firstName lastName designation profilePicture",
-        }
+        },
       })
       .sort({ _id: -1 })
       .skip(skip)
@@ -113,12 +127,9 @@ export const allPostsData = async (page, perPage) => {
   }
 };
 
-
 export const singlePostData = async (_id) => {
   try {
-    const post = await PostModel.findOne({ _id })
-      .populate("user")
-      .exec();
+    const post = await PostModel.findOne({ _id }).populate("user").exec();
     const resharedPost = await PostModel.findById(post.resharedPostId)
       .populate({
         path: "user",
@@ -287,7 +298,17 @@ export const getComments = async (postId) => {
     const post = await PostModel.findById(postId).populate({
       path: "comments.user",
       model: "Users",
-      select: "firstName lastName designation profilePicture",
+      select: "firstName lastName designation profilePicture investor startUp",
+      populate: [
+        {
+          path: "investor",
+          select: "companyName",
+        },
+        {
+          path: "startUp",
+          select: "company",
+        },
+      ],
     });
     if (!post) {
       return {
@@ -401,7 +422,6 @@ export const unsavePost = async (userId, postId) => {
   }
 };
 
-
 //get all collections
 export const getAllSavedPostCollections = async (userId) => {
   try {
@@ -453,7 +473,9 @@ export const getSavedPostsByCollection = async (userId, collectionName) => {
       .exec();
     for (let i = 0; i < savedPosts.length; i++) {
       if (savedPosts[i].resharedPostId) {
-        const resharedPost = await PostModel.findById(savedPosts[i].resharedPostId)
+        const resharedPost = await PostModel.findById(
+          savedPosts[i].resharedPostId
+        )
           .populate({
             path: "user",
             select: "firstName lastName profilePicture designation",
@@ -503,13 +525,15 @@ export const getLikeCount = async (postId) => {
         message: "1 person liked this post",
         data: {
           count: 1,
-          likedBy: user ? user.firstName : 'Unknown User',
+          likedBy: user ? user.firstName : "Unknown User",
         },
       };
     } else {
-      const usersWhoLiked = await UserModel.find({ _id: { $in: post.likes.slice(0, 2) } });
+      const usersWhoLiked = await UserModel.find({
+        _id: { $in: post.likes.slice(0, 2) },
+      });
       const otherCount = likeCount - 2;
-      let likedBy = usersWhoLiked.map((user) => user.firstName).join(', ');
+      let likedBy = usersWhoLiked.map((user) => user.firstName).join(", ");
       if (otherCount > 0) {
         likedBy += `, and ${otherCount} others`;
       }
@@ -616,29 +640,28 @@ export const addToFeaturedPost = async (postId, userId) => {
   }
 };
 
-
 export const getFeaturedPostsByUser = async (userId) => {
   try {
-    const user = await UserModel.findById(userId).populate('featuredPosts');
+    const user = await UserModel.findById(userId).populate("featuredPosts");
 
     if (!user) {
       return {
         status: 404,
-        message: 'User not found.',
+        message: "User not found.",
         featuredPosts: [],
       };
     }
 
     return {
       status: 200,
-      message: 'Featured posts retrieved successfully.',
+      message: "Featured posts retrieved successfully.",
       user,
     };
   } catch (error) {
     console.error(error);
     return {
       status: 500,
-      message: 'An error occurred while retrieving featured posts.',
+      message: "An error occurred while retrieving featured posts.",
       featuredPosts: [],
     };
   }
@@ -655,19 +678,19 @@ export const removeFromFeaturedPost = async (postId, userId) => {
     if (!user) {
       return {
         status: 404,
-        message: 'User not found.',
+        message: "User not found.",
       };
     }
 
     return {
       status: 200,
-      message: 'Post removed from featured posts.',
+      message: "Post removed from featured posts.",
     };
   } catch (error) {
     console.error(error);
     return {
       status: 500,
-      message: 'An error occurred while removing the post from featured posts.',
+      message: "An error occurred while removing the post from featured posts.",
     };
   }
 };
@@ -679,7 +702,7 @@ export const deleteComment = async (postId, commentId, userId) => {
     if (!post) {
       return {
         status: 404,
-        message: 'Post not found.',
+        message: "Post not found.",
       };
     }
 
@@ -692,20 +715,20 @@ export const deleteComment = async (postId, commentId, userId) => {
     if (commentIndex === -1) {
       return {
         status: 404,
-        message: 'Comment not found.',
+        message: "Comment not found.",
       };
     }
     post.comments.splice(commentIndex, 1);
     await post.save();
     return {
       status: 200,
-      message: 'Comment deleted successfully.',
+      message: "Comment deleted successfully.",
     };
   } catch (error) {
     console.error(error);
     return {
       status: 500,
-      message: 'An error occurred while deleting the comment.',
+      message: "An error occurred while deleting the comment.",
     };
   }
 };
@@ -753,5 +776,3 @@ export const toggleCommentLike = async (postId, commentId, userId) => {
     };
   }
 };
-
-
