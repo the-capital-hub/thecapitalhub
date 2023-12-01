@@ -28,6 +28,7 @@ import ChatDropDownMenu from "../ChatDropDownMenu/ChatDropDownMenu";
 // import VideoAttachment from "../../../../components/Investor/ChatComponents/ChatInputContainer/ChatAttachments/VideoAttachment/VideoAttachment";
 // import DocumentAttachment from "../../../../components/Investor/ChatComponents/ChatInputContainer/ChatAttachments/DocumentAttachment/DocumentAttachment";
 import ChatInputContainer from "../../../../components/Investor/ChatComponents/ChatInputContainer/ChatInputContainer";
+import { IoCheckmarkDone } from "react-icons/io5";
 
 const CommunityDashboard = ({
   setSendMessage,
@@ -315,27 +316,32 @@ const CommunityDashboard = ({
           <div key={group.date}>
             <h6 className="date_header">{group.date}</h6>
             <div className="chat_messages">
-              {group.messages.map((message) =>
+              {group.messages.map((message, idx) =>
                 message.senderId._id === loggedInUser._id ? (
                   <section className="my_message_main" key={message._id}>
                     <div className="my_messages">
                       <div className="time_name_image">
-                        <div className="time_name">
-                          <h6 className="name_title">
-                            {loggedInUser?.firstName} {loggedInUser?.lastName}
-                          </h6>
-                          <h6 className="time">
+                        {!idx && (
+                          <div className="time_name d-flex gap-2 align-items-center me-2 mb-2">
+                            <h6 className="name_title">
+                              {loggedInUser?.firstName} {loggedInUser?.lastName}
+                            </h6>
+                            {/* <h6 className="time">
                             {formatTime(new Date(message.createdAt))}
-                          </h6>
-                        </div>
-                        <img
-                          className="image_profile"
-                          src={loggedInUser?.profilePicture}
-                          alt=""
-                        />
+                          </h6> */}
+                            <img
+                              className="image_profile"
+                              src={loggedInUser?.profilePicture}
+                              alt="user profile"
+                            />
+                          </div>
+                        )}
                       </div>
                       {message.text !== "" && (
-                        <div className="mymessage_container">
+                        <div
+                          className="mymessage_container"
+                          data-msg-type="text"
+                        >
                           <ChatDropDownMenu
                             onClicks={handleSetDeletePopup}
                             idBack={handleIdBack}
@@ -346,10 +352,20 @@ const CommunityDashboard = ({
                               {message.text}
                             </p>
                           </Linkify>
+                          <span className="msg-time">
+                            <IoCheckmarkDone
+                              color={message?.read ? "#009b00" : "white"}
+                              size={15}
+                            />
+                            {formatTime(new Date(message.createdAt))}
+                          </span>
                         </div>
                       )}
                       {message?.image && (
-                        <div className="mymessage_container">
+                        <div
+                          className="mymessage_container"
+                          data-msg-type="media"
+                        >
                           <ChatDropDownMenu
                             onClicks={handleSetDeletePopup}
                             idBack={handleIdBack}
@@ -360,10 +376,20 @@ const CommunityDashboard = ({
                             className="image-message"
                             alt="message media"
                           />
+                          <span className="msg-time">
+                            <IoCheckmarkDone
+                              color={message?.read ? "#009b00" : "white"}
+                              size={15}
+                            />
+                            {formatTime(new Date(message.createdAt))}
+                          </span>
                         </div>
                       )}
                       {message?.video && (
-                        <div className="mymessage_container">
+                        <div
+                          className="mymessage_container"
+                          data-msg-type="media"
+                        >
                           <ChatDropDownMenu
                             onClicks={handleSetDeletePopup}
                             idBack={handleIdBack}
@@ -373,10 +399,20 @@ const CommunityDashboard = ({
                             <source src={message?.video} type={"video/mp4"} />
                             Your browser does not support the video tag.
                           </video>
+                          <span className="msg-time">
+                            <IoCheckmarkDone
+                              color={message?.read ? "#009b00" : "white"}
+                              size={15}
+                            />
+                            {formatTime(new Date(message.createdAt))}
+                          </span>
                         </div>
                       )}
                       {message.documentUrl && (
-                        <div className="mymessage_container">
+                        <div
+                          className="mymessage_container"
+                          data-msg-type="doc"
+                        >
                           <ChatDropDownMenu
                             onClicks={handleSetDeletePopup}
                             idBack={handleIdBack}
@@ -394,36 +430,48 @@ const CommunityDashboard = ({
                             />
                             <p>{message.documentName}</p>
                           </a>
+                          <span className="msg-time">
+                            <IoCheckmarkDone
+                              color={message?.read ? "#009b00" : "white"}
+                              size={15}
+                            />
+                            {formatTime(new Date(message.createdAt))}
+                          </span>
                         </div>
                       )}
                     </div>
                   </section>
                 ) : (
                   <section className="other_sender" key={message._id}>
-                    <img
-                      className="image_profile"
-                      src={message.senderId?.profilePicture}
-                      alt=""
-                    />
-                    <div className="other_messages">
-                      <div className="time_name">
+                    {!idx && (
+                      <div className="time_name d-flex align-items-center gap-2 mb-2">
+                        <img
+                          className="image_profile"
+                          src={message.senderId?.profilePicture}
+                          alt=""
+                        />
                         <h6 className="name_title">
                           {message.senderId?.firstName}{" "}
                           {message.senderId?.lastName}{" "}
-                        </h6>{" "}
-                        <h6 className="time">
-                          {formatTime(new Date(message.createdAt))}
                         </h6>
+                        {/* <h6 className="time">
+                          {formatTime(new Date(message.createdAt))}
+                        </h6> */}
                       </div>
+                    )}
+                    <div className="other_messages">
                       {message.text !== "" && (
-                        <div className="message_container">
+                        <div className="message_container" data-msg-type="text">
                           <Linkify>
                             <p className="text-break">{message.text}</p>
                           </Linkify>
                         </div>
                       )}
                       {message?.image && (
-                        <div className="message_container">
+                        <div
+                          className="message_container"
+                          data-msg-type="media"
+                        >
                           <img
                             src={message.image}
                             className="image-message"
@@ -432,7 +480,10 @@ const CommunityDashboard = ({
                         </div>
                       )}
                       {message?.video && (
-                        <div className="message_container">
+                        <div
+                          className="message_container"
+                          data-msg-type="media"
+                        >
                           <video controls className="video-message">
                             <source src={message?.video} type={"video/mp4"} />
                             Your browser does not support the video tag.
@@ -440,7 +491,7 @@ const CommunityDashboard = ({
                         </div>
                       )}
                       {message.documentUrl && (
-                        <div className="message_container">
+                        <div className="message_container" data-msg-type="doc">
                           <a
                             href={message.documentUrl}
                             target="_blank"
