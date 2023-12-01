@@ -20,9 +20,10 @@ import IconFile from "../../Investor/SvgIcons/IconFile";
 import IconVideo from "../../../Images/post/Video.svg";
 import { s3 } from "../../../Service/awsConfig";
 import { toggleCreatePostModal } from "../../../Store/features/design/designSlice";
-import toast, { Toaster } from 'react-hot-toast';
-import achievement from "../../../Images/Investor/Achievements/img_1.png";
+import toast from "react-hot-toast";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
+import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
+import { achievementTypes } from "../../Toasts/AchievementToast/types";
 
 const CreatePostPopUp = ({
   setPopupOpen,
@@ -227,30 +228,21 @@ const CreatePostPopUp = ({
         setNewPost(Math.random());
         handleClose();
         dispatch(toggleCreatePostModal());
-        
-        if (!loggedInUser.achievements.includes('6564684649186bca517cd0c9')) {
+
+        if (!loggedInUser.achievements.includes("6564684649186bca517cd0c9")) {
           const achievements = [...loggedInUser.achievements];
-          achievements.push('6564684649186bca517cd0c9');
+          achievements.push("6564684649186bca517cd0c9");
           const updatedData = { achievements };
-          updateUserById(loggedInUser._id, updatedData).then(({ data }) => {
-            dispatch(loginSuccess(data.data));
-            toast.custom((t) => (
-              <div class=" rounded-3 max-w-md  bg-white shadow-lg rounded-lg pointer-events-auto d-flex border ring-1 ring-dark ring-opacity-25
-              <?php echo $t.visible ? 'fade-in' : 'fade-out'; ?>">
-                <div className="p-2  d-flex align-items-center gap-2">
-                  <img
-                    src={achievement}
-                    alt="Profile"
-                    className="rounded-circle"
-                    style={{ width: "50px", height: "50px" }}
-                  />
-                  <h6 className="m-0 fs-semibold">Yoyager !....</h6>
-                </div>
-              </div>
-            ))
-          }).catch((error) => {
-            console.error("Error updating user:", error);
-          })
+          updateUserById(loggedInUser._id, updatedData)
+            .then(({ data }) => {
+              dispatch(loginSuccess(data.data));
+              toast.custom((t) => (
+                <AchievementToast type={achievementTypes.voyager} />
+              ));
+            })
+            .catch((error) => {
+              console.error("Error updating user:", error);
+            });
         }
       })
       .catch((error) => {
@@ -278,8 +270,9 @@ const CreatePostPopUp = ({
     <>
       {popupOpen && <div className="createpost-background-overlay"></div>}
       <div
-        className={`create_post_modal rounded-4 p-md-2 ${popupOpen ? "d-block" : ""
-          }`}
+        className={`create_post_modal rounded-4 p-md-2 ${
+          popupOpen ? "d-block" : ""
+        }`}
         tabIndex="-1"
         role="dialog"
       >

@@ -25,8 +25,10 @@ import { getFoldersApi } from "../../../Service/user";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import TutorialTrigger from "../../Shared/TutorialTrigger/TutorialTrigger";
 import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 import achievement from "../../../Images/Investor/Achievements/img_1.png";
+import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
+import { achievementTypes } from "../../Toasts/AchievementToast/types";
 
 const Documentation = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -89,21 +91,8 @@ const Documentation = () => {
   //   default:
   //     imageToShow = null;
   // }
-  const notify = () => toast.custom((t) => (
-    <div class=" rounded-3 max-w-md  bg-white shadow-lg rounded-lg pointer-events-auto d-flex border ring-1 ring-dark ring-opacity-25
-    <?php echo $t.visible ? 'fade-in' : 'fade-out'; ?>">
-      <div className="p-2  d-flex align-items-center gap-2">
-
-        <img
-          src={achievement}
-          alt="Profile"
-          className="rounded-circle"
-          style={{ width: "50px", height: "50px" }}
-        />
-        <h6 className="m-0 fs-semibold">It's just paperwork....</h6>
-      </div>
-    </div>
-  ))
+  const notify = () =>
+    toast.custom((t) => <AchievementToast type={achievementTypes.paperwork} />);
 
   return (
     <MaxWidthWrapper>
@@ -129,9 +118,9 @@ const Documentation = () => {
             </div>
             <IntroductoryMessage
               title={"Upload your document"}
-            // para={
-            //   "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
-            // }
+              // para={
+              //   "As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture.As the Founder at Capital HUB, Man's all about building great start-ups from a simple idea to an elegant reality. Humbled and honored to have worked with Angels and VC's across the globe to support and grow the startup culture."
+              // }
             />
             <UploadContainer
               onClicked={setShowModal}
