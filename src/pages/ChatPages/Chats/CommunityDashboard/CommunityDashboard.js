@@ -24,6 +24,9 @@ import ChatDropDownMenu from "../ChatDropDownMenu/ChatDropDownMenu";
 import { s3 } from "../../../../Service/awsConfig";
 import { Offcanvas } from "react-bootstrap";
 import AttachmentPreview from "../../../../components/Investor/ChatComponents/ChatAttachments/AttachmentPreview/AttachmentPreview";
+import ImageAttachment from "../../../../components/Investor/ChatComponents/ChatAttachments/ImageAttachment/ImageAttachment";
+import VideoAttachment from "../../../../components/Investor/ChatComponents/ChatAttachments/VideoAttachment/VideoAttachment";
+import DocumentAttachment from "../../../../components/Investor/ChatComponents/ChatAttachments/DocumentAttachment/DocumentAttachment";
 
 const CommunityDashboard = ({
   setSendMessage,
@@ -224,6 +227,7 @@ const CommunityDashboard = ({
     setSelectedVideo(null);
     setSelectedDocument(null);
     setShowAttachDocs(false);
+    setShowPreview(false);
   };
 
   const formatTime = (date) => {
@@ -464,51 +468,24 @@ const CommunityDashboard = ({
           <AttachmentPreview
             showPreview={showPreview}
             setShowPreview={setShowPreview}
-            selectedImage={selectedImage}
-            setSelectedImage={setSelectedImage}
-            removeSelectedImage={removeSelectedImage}
             sendText={sendText}
             setSendText={setSendText}
             handleKeyDown={handleKeyDown}
             handleSend={handleSend}
-          />
-
-          {/* {selectedImage && (
-            <div className="image-preview">
-              <img
-                src={URL.createObjectURL(selectedImage)}
-                alt="Selected media"
-              />
-              <button className="remove-preview" onClick={removeSelectedImage}>
-                X
-              </button>
-            </div>
-          )} */}
-          {selectedVideo && (
-            <div className="video-preview">
-              <video controls width={200}>
-                <source
-                  src={URL.createObjectURL(selectedVideo)}
-                  type="video/mp4"
-                />
-                Your browser does not support the video tag.
-              </video>
-              <button className="remove-preview" onClick={removeSelectedVideo}>
-                X
-              </button>
-            </div>
-          )}
-          {selectedDocument && (
-            <div className="document-preview">
-              <p>{selectedDocument.name}</p>
-              <button
-                className="remove-preview"
-                onClick={removeSelectedDocument}
-              >
-                X
-              </button>
-            </div>
-          )}
+          >
+            {/* Image Preview. */}
+            <ImageAttachment
+              selectedImage={selectedImage}
+              removeSelectedImage={removeSelectedImage}
+            />
+            {/* Video Preview */}
+            <VideoAttachment
+              selectedVideo={selectedVideo}
+              removeSelectedVideo={removeSelectedVideo}
+            />
+            {/* Document Preview */}
+            <DocumentAttachment />
+          </AttachmentPreview>
 
           {/* Text input */}
           <input
@@ -518,13 +495,12 @@ const CommunityDashboard = ({
             placeholder="Your message..."
             onChange={(e) => setSendText(e.target.value)}
             onKeyDown={handleKeyDown}
-            value={sendText}
+            value={showPreview ? "" : sendText}
           />
           <div className="right_icons">
-            <div class="attactment-container">
+            <div class="attactment-container" ref={attachDocContainerRef}>
               <button
                 className="btn"
-                ref={attachDocContainerRef}
                 onClick={() => setShowAttachDocs(!showAttachDocs)}
               >
                 {!showAttachDocs ? (
