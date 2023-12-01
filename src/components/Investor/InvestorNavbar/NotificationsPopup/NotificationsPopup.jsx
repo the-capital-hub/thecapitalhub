@@ -42,7 +42,7 @@ function NotificationsPopup({ toggleVisibility }) {
     fetchNotifications();
   }, []);
 
-  const notificationType = (type, _id) => {
+  const notificationType = (type, _id, achievementId) => {
     switch (type) {
       case "connectionRequest": {
         return "sent you a connection request";
@@ -104,6 +104,20 @@ function NotificationsPopup({ toggleVisibility }) {
               meeting
             </Link>{" "}
             request
+          </span>
+        );
+      }
+      case "achievementCompleted": {
+        return (
+          <span>
+            You have earned a new achievement:
+            <Link
+              to={isInvestor ? `/investor/profile/achievements` : `/profile/achievements`}
+              className="fw-bold"
+              onClick={() => toggleVisibility(false)}
+            >
+              {achievementId?.title}
+            </Link>{" "}
           </span>
         );
       }
@@ -170,6 +184,7 @@ function NotificationsPopup({ toggleVisibility }) {
                   isRead,
                   post,
                   connection,
+                  achievementId,
                 }) => (
                   <div
                     className="notification"
@@ -189,7 +204,7 @@ function NotificationsPopup({ toggleVisibility }) {
                         >
                           {sender?.firstName} {sender?.lastName}
                         </Link>{" "}
-                        {notificationType(type, post || connection)}
+                        {notificationType(type, post || connection, achievementId)}
                       </p>
                       <TimeAgo
                         datetime={createdAt}

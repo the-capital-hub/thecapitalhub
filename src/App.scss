@@ -42,6 +42,24 @@ button {
   }
 }
 
+.fs-14,
+.fs-sm {
+  font-size: 14px;
+
+  @media (max-width: 500px) {
+    font-size: 12px;
+  }
+}
+
+.fs-xs,
+.fs-12 {
+  font-size: 12px;
+
+  @media (max-width: 500px) {
+    font-size: 10px;
+  }
+}
+
 /* Animation classes and keyframes */
 .opacity-0 {
   transition: opacity 1s ease-in;

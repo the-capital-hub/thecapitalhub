@@ -86,6 +86,9 @@ function PrivateRoute({ children, ...props }) {
             containerStyle={{
               top: "100px",
             }}
+            toastOptions={{
+              duration: 10000,
+            }}
           />
         </div>
       </>

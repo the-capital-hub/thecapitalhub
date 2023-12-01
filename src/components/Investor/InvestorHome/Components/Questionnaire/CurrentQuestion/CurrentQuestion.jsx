@@ -25,13 +25,12 @@ export default function CurrentQuestion({
               <button
                 key={option}
                 type="button"
-                className={`position-relative option_button ${
-                  (option === answer || answer.includes(option)) && "selected"
-                }`}
+                className={`position-relative option_button ${(Array.isArray(answer) ? answer.includes(option) : option === answer) && "selected"
+                  }`}
                 onClick={(e) => handleAnswerSelect(e, option)}
               >
                 {option}
-                {(option === answer || answer.includes(option)) && (
+                {(Array.isArray(answer) ? answer.includes(option) : option === answer) && (
                   <div className="position-absolute select_badge">
                     <IconTick />
                   </div>

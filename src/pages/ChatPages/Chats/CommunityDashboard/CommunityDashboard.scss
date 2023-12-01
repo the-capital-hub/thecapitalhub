@@ -102,7 +102,7 @@
   .chat_messages {
     height: 80%;
     // overflow-y: scroll;
-    overflow-x: hidden;
+    // overflow-x: hidden;
 
     .other_sender {
       align-self: flex-start;
@@ -125,6 +125,17 @@
         justify-content: flex-start;
         align-items: flex-start;
 
+        .msg-time {
+          font-size: 10px;
+          color: rgb(112, 112, 112);
+          text-align: end;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          justify-content: flex-end;
+          width: 100%;
+        }
+
         .message_container {
           background-color: #eaeef2;
           padding: 5px 10px;
@@ -135,6 +146,19 @@
           display: flex;
           flex-direction: column;
           align-items: center;
+
+          &[data-msg-type="text"] {
+            max-width: 90%;
+          }
+
+          &[data-msg-type="media"],
+          &[data-msg-type="doc"] {
+            max-width: 60%;
+          }
+
+          @media (min-width: 768px) {
+            max-width: 60%;
+          }
 
           p {
             font-size: 14px;
@@ -147,7 +171,8 @@
 
           .video-message {
             max-width: 100%;
-            height: auto;
+            // height: auto;
+            max-height: 200px;
             border-radius: 10px;
             margin-top: 10px;
             background-color: #000;
@@ -156,7 +181,8 @@
 
           .image-message {
             max-width: 100%;
-            height: auto;
+            // height: auto;
+            max-height: 200px;
             border-radius: 10px;
             margin-top: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -179,13 +205,33 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-end;
+        padding-inline-end: 0.5rem;
+
+        .msg-time {
+          font-size: 10px;
+          color: rgb(255, 255, 255);
+          text-align: end;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          justify-content: flex-end;
+          width: 100%;
+        }
 
         .time_name_image {
           display: flex;
         }
 
         .mymessage_container {
-          max-width: 90%;
+          &[data-msg-type="text"] {
+            max-width: 90%;
+          }
+
+          &[data-msg-type="media"],
+          &[data-msg-type="doc"] {
+            max-width: 60%;
+          }
+
           @media (min-width: 768px) {
             max-width: 60%;
           }
@@ -197,13 +243,26 @@
           border-bottom-right-radius: 10px;
           border-bottom-left-radius: 10px;
           margin-bottom: 5px;
-          margin-right: 50px;
+          // margin-right: 50px;
           display: flex;
           flex-direction: column;
           align-items: center;
 
+          .chatDropDownMenu {
+            display: none;
+            overflow: visible;
+          }
+
+          &:hover,
+          &:active {
+            .chatDropDownMenu {
+              display: block;
+            }
+          }
+
           p {
             font-size: 14px;
+            margin-inline-end: 1rem;
           }
 
           a {
@@ -212,7 +271,8 @@
 
           .video-message {
             max-width: 100%;
-            height: auto;
+            // height: auto;
+            max-height: 200px;
             border-radius: 10px;
             margin-top: 10px;
             background-color: #000;
@@ -221,7 +281,8 @@
 
           .image-message {
             max-width: 100%;
-            height: auto;
+            // height: auto;
+            max-height: 200px;
             border-radius: 10px;
             margin-top: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -231,111 +292,6 @@
     }
   }
 
-  .chat_input_section {
-    // padding-bottom: 20px;
-    // position: absolute;
-    bottom: 0px;
-    width: 100%;
-
-    .chat_input_container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      border: 1px solid #eaeef2;
-      background-color: #eaeef2;
-      border-radius: 8px;
-      margin: 5% 2% 0% 2%;
-
-      .image-preview,
-      .video-preview {
-        position: relative;
-        display: inline-block;
-        margin-right: 10px;
-
-        img,
-        video {
-          max-width: 200px;
-          max-height: 150px;
-        }
-
-        .remove-preview {
-          position: absolute;
-          top: 0;
-          right: 0;
-          background-color: #fff;
-          border: 1px solid #ccc;
-          border-radius: 50%;
-          padding: 4px;
-          cursor: pointer;
-        }
-      }
-
-      input {
-        flex-grow: 1;
-        border: none;
-        outline: none;
-        font-size: 14px;
-        padding: 8px;
-        border-radius: 6px;
-        background-color: #eaeef2;
-
-        @media (max-width: 420px) {
-          max-width: 70%;
-        }
-
-        ::placeholder {
-          color: #999;
-        }
-      }
-
-      .right_icons {
-        display: flex;
-        gap: 10px;
-        padding: 0 5px;
-
-        .attactment-container {
-          position: relative;
-
-          .attachment-options {
-            position: absolute;
-            bottom: 40px;
-            right: 10px;
-            border-radius: 10px;
-            background: #a7a7a7;
-            max-width: 50vw;
-            width: max-content;
-
-            display: flex;
-            justify-content: space-around;
-            gap: 10px;
-            padding: 10px;
-            flex-wrap: wrap;
-
-            cursor: default;
-
-            .attachment-option {
-              display: flex;
-              flex-direction: column;
-              gap: 5px;
-              align-items: center;
-              cursor: pointer;
-
-              img {
-                background-color: rgba(255, 255, 255, 0.6);
-              }
-
-              p {
-                margin: 0;
-                font-size: 14px;
-                color: rgb(233, 233, 233);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
   .popup-close-button,
   .popup-ok_button {
     // width: 20%;

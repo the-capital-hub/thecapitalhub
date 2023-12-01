@@ -109,6 +109,31 @@
               font-size: 12px;
             }
           }
+          .connection_btn{
+            button {
+              border: none;
+            }
+            .ignore_button {
+              border-radius: 140px;
+              background: #eaeef2;
+              width: 73px;
+              height: 29px;
+              flex-shrink: 0;
+            }
+  
+            .accept_button {
+              border-radius: 140px;
+              background: #fd5901;
+              width: 73px;
+              height: 29px;
+              flex-shrink: 0;
+              color: #fff;
+              font-family: Poppins;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+            }
+          }
         }
 
         .connection_right {
@@ -136,6 +161,11 @@
             font-style: normal;
             font-weight: 400;
             line-height: normal;
+          }
+          img{
+            width: 30px;
+            height: 30px;
+            border-radius: 0%;
           }
         }
       }

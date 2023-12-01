@@ -21,6 +21,8 @@ import {
 } from "../../../../Store/features/chat/chatSlice";
 import { selectLoggedInUserId } from "../../../../Store/features/user/userSlice";
 import IconPin from "../../../../components/Investor/SvgIcons/IconPin";
+import SpinnerBS from "../../../../components/Shared/Spinner/SpinnerBS";
+
 
 const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   const loggedInUserId = useSelector(selectLoggedInUserId);
@@ -39,12 +41,29 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
 
   // Handle PinClick
   const handlePinClick = (chatId) => {
+    const chatIndex = chats.findIndex((chat) => chat._id === chatId);
+
+    if (chatIndex !== -1) {
+      const removedChat = chats[chatIndex];
+      const updatedChats = chats.filter((chat) => chat._id !== chatId);
+      setChats(updatedChats);
+      setPinnedChats([...pinnedChats, removedChat]);
+    } else {
+      const pinnedChatIndex = pinnedChats.findIndex((chat) => chat._id === chatId);
+      if (pinnedChatIndex !== -1) {
+        const removedPinnedChat = pinnedChats[pinnedChatIndex];
+        const updatedPinnedChats = pinnedChats.filter((chat) => chat._id !== chatId);
+        setPinnedChats(updatedPinnedChats);
+        setChats([...chats, removedPinnedChat]);
+      }
+    }
+
     togglePinMessage(loggedInUserId, chatId).then((res) => {
       setPinnedChat(true);
       setTimeout(() => {
         setPinnedChat(false);
       }, 1000);
-    });
+    }).catch((error) => console.error(error.message));
   };
 
   useEffect(() => {
@@ -55,6 +74,7 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
           getUserChats(loggedInUserId),
         ]);
 
+        console.log("response from pinned chats:", pinnedChatResponse.data);
         setPinnedChats(pinnedChatResponse.data);
         pinnedChatResponse.data.forEach((chat) => {
           handleGetMessageByChatId(chat._id);

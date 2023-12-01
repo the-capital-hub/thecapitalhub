@@ -9,6 +9,7 @@ import {
   searchStartUps,
   addStartUpToUser,
   updateUserAPI,
+  addNotificationAPI,
 } from "../../../Service/user";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -24,6 +25,8 @@ import {
 } from "../../../Store/features/user/userSlice";
 import toast, { Toaster } from "react-hot-toast";
 import achievement from "../../../Images/Investor/Achievements/img_1.png";
+import { achievementTypes } from "../../../components/Toasts/AchievementToast/types";
+import AchievementToast from "../../../components/Toasts/AchievementToast/AchievementToast";
 
 export default function CompanyProfilePage() {
   const navigate = useNavigate();
@@ -84,6 +87,15 @@ export default function CompanyProfilePage() {
       );
       if (response.isFirst) {
         notify();
+        const notificationBody = {
+          recipient: loggedInUserId,
+          type: "achievementCompleted",
+          achievementId: "6564687349186bca517cd0cd",
+        }
+        addNotificationAPI(notificationBody)
+          .then((data) => console.log("Added"))
+          .catch((error) => console.error(error.message));
+
       }
       if (response.status === 200) {
         setShowSuccess(true);
@@ -118,22 +130,7 @@ export default function CompanyProfilePage() {
   };
 
   const notify = () =>
-    toast.custom((t) => (
-      <div
-        class=" rounded-3 max-w-md  bg-white shadow-lg rounded-lg pointer-events-auto d-flex border ring-1 ring-dark ring-opacity-25
-    <?php echo $t.visible ? 'fade-in' : 'fade-out'; ?>"
-      >
-        <div className="p-2  d-flex align-items-center gap-2">
-          <img
-            src={achievement}
-            alt="Profile"
-            className="rounded-circle"
-            style={{ width: "50px", height: "50px" }}
-          />
-          <h6 className="m-0 fs-semibold">Employer....</h6>
-        </div>
-      </div>
-    ));
+    toast.custom((t) => <AchievementToast type={achievementTypes.employer} />);
 
   return (
     <MaxWidthWrapper>
@@ -158,13 +155,12 @@ export default function CompanyProfilePage() {
                     <div className="bg-white rounded-4 p-4 ">
                       {/* <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5"> */}
                       <div class="text-center">
-
-                      <button
-                        className="btn-base startup "
-                        onClick={handleAddNew}
-                      >
-                        Add new company details
-                      </button>
+                        <button
+                          className="btn-base startup "
+                          onClick={handleAddNew}
+                        >
+                          Add new company details
+                        </button>
                       </div>
                       {/* </Link> */}
                       <div className="or-text-container">
@@ -186,11 +182,10 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${
-                                  selectedCompanyId === company._id
-                                    ? "active"
-                                    : ""
-                                }`}
+                                className={`suggestion-item ${selectedCompanyId === company._id
+                                  ? "active"
+                                  : ""
+                                  }`}
                                 key={index}
                                 onClick={() =>
                                   handleCompanySelection(
@@ -246,11 +241,10 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${
-                                  selectedCompanyId === company._id
-                                    ? "active"
-                                    : ""
-                                }`}
+                                className={`suggestion-item ${selectedCompanyId === company._id
+                                  ? "active"
+                                  : ""
+                                  }`}
                                 key={index}
                                 onClick={() =>
                                   handleCompanySelection(
@@ -282,7 +276,14 @@ export default function CompanyProfilePage() {
               </>
             )}
           </div>
-          <Toaster />
+          <Toaster
+            containerStyle={{
+              top: "100px",
+            }}
+            toastOptions={{
+              duration: 10000,
+            }}
+          />
           {!loading ? (
             companyData?.length === 0 ? (
               <div className="bg-white rounded-4 p-4">

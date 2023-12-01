@@ -29,6 +29,8 @@ import {
 import { useEffect } from "react";
 import InvestorOneLinkRoutes from "./routes/InvestorOneLinkRoutes";
 import { Capacitor } from "@capacitor/core";
+import { App as CapacitorApp } from '@capacitor/app';
+import AppUrlListener from "./pages/AppUrlListener/AppUrlListener";
 
 function App() {
   const dispatch = useDispatch();
@@ -60,8 +62,22 @@ function App() {
     };
   }, []);
 
+
+  //Back functionality for mobile app
+  CapacitorApp.addListener('backButton', ({ canGoBack }) => {
+    const currentUrl = window.location.href;
+    console.log("url", currentUrl);
+    if (!canGoBack || currentUrl === 'https://localhost/home' || currentUrl === 'https://localhost/investor/home') {
+      CapacitorApp.exitApp();
+    } else {
+      window.history.back();
+    }
+  });
+
+
   return (
     <Router>
+      <AppUrlListener />
       <Routes>
         {/* Public Routes */}
         {PublicRoutes()}

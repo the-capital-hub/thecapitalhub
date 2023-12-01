@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@capacitor/android": "^5.5.1",
+    "@capacitor/app": "^5.0.6",
     "@capacitor/core": "^5.5.1",
     "@capacitor/ios": "^5.5.1",
     "@codetrix-studio/capacitor-google-auth": "^3.3.6",
@@ -23,6 +24,7 @@
     "pdfjs-dist": "^3.9.179",
     "react": "^18.2.0",
     "react-big-calendar": "^1.8.2",
+    "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0",
     "react-easy-crop": "^5.0.2",
     "react-helmet": "^6.1.0",

@@ -1,7 +1,7 @@
 import { NotificationModel } from "../models/Notification.js";
 import { PostModel } from "../models/Post.js";
 
-export const addNotification = async (recipient, sender, type, post = null, connection = null, meetingId = null) => {
+export const addNotification = async (recipient, sender, type, post = null, connection = null, meetingId = null, achievementId = null) => {
   try {
     const notification = new NotificationModel({
       recipient,
@@ -9,7 +9,8 @@ export const addNotification = async (recipient, sender, type, post = null, conn
       type,
       post,
       connection,
-      meetingId
+      meetingId,
+      achievementId,
     });
     if (sender === recipient) {
       return;
@@ -31,6 +32,10 @@ export const getNotificationsByUserId = async (userId) => {
       .populate({
         path: "sender",
         select: "firstName lastName profilePicture",
+      })
+      .populate({
+        path: "achievementId",
+        select: "title description badge",
       })
       .sort({ _id: -1 });
 
