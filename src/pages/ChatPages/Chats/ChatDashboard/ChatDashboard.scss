@@ -107,7 +107,7 @@
   .chat_messages {
     height: 80%;
     // overflow-y: scroll;
-    overflow-x: hidden;
+    // overflow-x: hidden;
 
     .other_sender {
       align-self: flex-start;
@@ -194,7 +194,7 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-end;
-        overflow: hidden !important;
+        // overflow: hidden !important;
 
         .msg-time {
           font-size: 10px;
@@ -233,6 +233,7 @@
 
           p {
             font-size: 14px;
+            margin-inline-end: 1rem;
           }
 
           .chatDropDownMenu {
@@ -321,8 +322,8 @@
       .left_icon {
         margin-right: 10px;
 
-        img {
-        }
+        // img {
+        // }
       }
 
       textarea {
