@@ -327,6 +327,17 @@
       }
     }
   }
+
+  .single-comment {
+    .img_container {
+      max-width: 80px;
+      img {
+        padding: 2px;
+        max-width: 55px;
+      }
+    }
+  }
+
   .comment_messages {
     border-radius: var(--border-radius);
     background: #ededed;
@@ -343,6 +354,12 @@
           height: 60px;
           border-radius: 50%;
           margin-left: 20px;
+
+          @media (max-width: 500px) {
+            width: 40px;
+            height: 40px;
+            margin: 0;
+          }
         }
 
         img {
@@ -352,13 +369,6 @@
         }
 
         .body_container {
-          .h6 {
-            font-weight: 600;
-          }
-          p {
-            margin: 10px;
-            padding: 0;
-          }
           .connection_time {
             font-size: 12px;
           }
@@ -388,11 +398,8 @@
         .days_time {
           color: #000;
           font-family: Poppins;
-          font-size: 13px;
           font-style: normal;
-          font-weight: 400;
           line-height: normal;
-          margin-right: 10px;
         }
       }
     }
@@ -443,6 +450,40 @@
   }
 }
 
+.modal-content {
+  .modal-body {
+    overflow: auto;
+    max-height: 70vh;
+  }
+
+  .reactions_startup {
+    .nav-item {
+      // Tabs padding
+      //   border: 1px solid red;
+      cursor: pointer;
+      color: #1f1d1d;
+      font-family: Poppins;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      text-transform: capitalize;
+
+      &.active {
+        color: #fd5901;
+
+        // &::before {
+        //   content: "";
+        //   display: inline-block;
+        //   width: 3px;
+        //   height: 50%;
+        //   margin-right: 2px;
+        //   background-color: #fd5901;
+        // }
+      }
+    }
+  }
+}
 #reportPostModal {
   .reasons_container {
     display: flex;

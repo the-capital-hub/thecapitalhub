@@ -1,0 +1,61 @@
+// Offcanvas css
+.offcanvas.attachment-preview {
+  --bs-offcanvas-height: 60dvh;
+
+  .image-preview,
+  .video-preview {
+    position: relative;
+    // display: inline-block;
+    margin-right: 10px;
+    width: 200px;
+    height: 150px;
+
+    img,
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      // max-width: 200px;
+      // max-height: 150px;
+    }
+
+    .remove-preview {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: #fff;
+      border: 1px solid #ccc;
+
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      padding: 4px;
+      cursor: pointer;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .send-container {
+    background-color: #eaeef2;
+    border-radius: var(--border-radius);
+    .text-input {
+      border: none;
+      outline: none;
+      font-size: 14px;
+      padding: 8px;
+      border-radius: 6px;
+      background-color: #eaeef2;
+
+      ::placeholder {
+        color: #999;
+      }
+    }
+
+    .send-btn {
+      flex: 0 0 60px;
+    }
+  }
+}

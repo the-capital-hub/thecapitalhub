@@ -21,8 +21,9 @@ export default function FundingPreviousData({ setShowForm }) {
       {/* New Submission */}
       <button
         type="button"
-        className="btn btn-primary text-white fs-6 d-flex align-items-center justify-content-center gap-2 w-50 mx-auto"
+        className="btn btn-startup fs-6 d-flex align-items-center justify-content-center gap-2 w-50 mx-auto"
         onClick={() => setShowForm(true)}
+        data-bs-theme="dark"
       >
         New Submission
       </button>
