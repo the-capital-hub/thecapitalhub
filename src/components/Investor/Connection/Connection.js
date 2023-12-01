@@ -140,7 +140,8 @@ const Connection = () => {
       }
     }
   };
-  console.log(receivedConnections)
+
+
 
   return (
     <MaxWidthWrapper>
@@ -212,7 +213,7 @@ const Connection = () => {
                               <p className="connection_designation">
                                 {sender.designation}
                               </p>
-                              <p> {sender.designation}</p>
+                              <p> {sender.startUp?.company?sender.startUp?.company:sender.investor?.company}</p>
                               <p>
                                 <TimeAgo
                                   className="connection_time"
@@ -288,6 +289,7 @@ const Connection = () => {
                                 <p className="connection_designation">
                                   {receiver?.designation}
                                 </p>
+                                <p> {receiver.startUp?.company?receiver.startUp?.company:receiver.investor?.company}</p>
                                 <p>
                                   <TimeAgo
                                     className="connection_time"
@@ -352,6 +354,8 @@ const Connection = () => {
                             <p className="connection_designation">
                               {data.designation ? data.designation : ""}
                             </p>
+                            <p> {data.startUp?.company?data.startUp?.company:data.investor?.company}</p>
+
                             <p>
                               {/* <TimeAgo
                                 className="connection_time"
