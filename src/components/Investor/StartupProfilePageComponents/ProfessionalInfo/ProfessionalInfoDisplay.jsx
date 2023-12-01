@@ -7,6 +7,7 @@ import {
   selectCompanyFounderId,
   selectLoggedInUserId,
 } from "../../../../Store/features/user/userSlice";
+import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 
 export default function ProfessionalInfoDisplay({
   professionalData,
@@ -18,6 +19,7 @@ export default function ProfessionalInfoDisplay({
   handleTextChange,
   handleFileChange,
   canEdit = true,
+  loading,
 }) {
   const companyFounderId = useSelector(selectCompanyFounderId);
   const loggedinUserId = useSelector(selectLoggedInUserId);
@@ -25,7 +27,7 @@ export default function ProfessionalInfoDisplay({
   return (
     <>
       {/* header */}
-      <header className="p-0 pb-4 border-bottom d-flex flex-column flex-md-row align-items-center justify-content-between">
+      <header className="p-0 pb-4 border-bottom d-flex flex-column gap-3 flex-md-row align-items-center justify-content-between">
         {/* profile picture and name */}
         <div className="d-flex gap-4">
           <img
@@ -44,14 +46,20 @@ export default function ProfessionalInfoDisplay({
         {/* Edit button */}
         {canEdit && (
           <span className="edit_btn d-flex align-self-end align-md-self-start ">
-            <span className="ms-auto d-flex flex-md-row flex-column gap-2">
+            <span className="ms-auto d-flex flex-row gap-2">
               <button onClick={() => setIsEditing(!isEditing)}>
                 {isEditing ? "Cancel" : "Edit"}
                 <CiEdit />
               </button>
               {isEditing && (
                 <button className="ms-2" onClick={handleSubmit}>
-                  Save <CiSaveUp2 />
+                  {loading ? (
+                    <SpinnerBS spinnerSizeClass="spinner-border-sm" />
+                  ) : (
+                    <>
+                      Save <CiSaveUp2 />
+                    </>
+                  )}
                 </button>
               )}
             </span>

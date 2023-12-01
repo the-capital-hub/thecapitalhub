@@ -100,7 +100,7 @@ export default function CommunityCard({
 
   return (
     <div
-      className="community__card d-flex align-items-center gap-2 py-2 px-2 rounded-4 "
+      className="community__card d-flex align-items-center gap-2 py-2 px-2"
       key={community.id}
       onClick={() => handleCommunityClick(community._id)}
     >

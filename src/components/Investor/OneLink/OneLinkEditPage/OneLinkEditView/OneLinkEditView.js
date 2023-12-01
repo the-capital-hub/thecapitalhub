@@ -1,30 +1,38 @@
 import React, { useState, useEffect } from "react";
 import "./OneLinkEditView.scss";
-import DollarRupeeImage from "../../../../../Images/Dollar_rupee.svg";
-import PramodSq from "../../../../../Images/Pramod.jpeg";
+// import DollarRupeeImage from "../../../../../Images/Dollar_rupee.svg";
+// import PramodSq from "../../../../../Images/Pramod.jpeg";
 import OnePagePreviewCard from "../../../InvestorGlobalCards/OneLink/OnePagePreviewCard/OnePagePreviewCard";
 import Table from "../../Table/Table";
 import TeamCard from "../../../InvestorGlobalCards/OneLink/TeamCard/TeamCard";
-import FundAsking from "../../Table/FundAsking/FundAsking";
-import FundDeployment from "../../Table/FundDeployment/FundDeployment";
-import { Link, useNavigate } from "react-router-dom";
-import SmallProfileCard from "../../../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
-import OneLinkMarketSection from "../OneLinkMarketSection/OneLinkMarketSection";
-import OneLinkContactEdit from "./OneLinkContactEdit/OneLinkContactEdit";
+// import FundAsking from "../../Table/FundAsking/FundAsking";
+// import FundDeployment from "../../Table/FundDeployment/FundDeployment";
+import {
+  // Link,
+  useNavigate
+} from "react-router-dom";
+// import SmallProfileCard from "../../../InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
+// import OneLinkMarketSection from "../OneLinkMarketSection/OneLinkMarketSection";
+// import OneLinkContactEdit from "./OneLinkContactEdit/OneLinkContactEdit";
 import AfterSuccessPopUp from "../../../../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   getStartupByFounderId,
   postStartUpData,
+  updateUserById,
 } from "../../../../../Service/user";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { getBase64 } from "../../../../../utils/getBase64";
-import camimg from "../../../../../Images/Camera.png";
+// import camimg from "../../../../../Images/Camera.png";
 import backIcon from "../../../../../Images/Chat/BackIcon.svg";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { loginSuccess } from "../../../../../Store/features/user/userSlice";
+import toast, { Toaster } from 'react-hot-toast';
+import achievement from "../../../../../Images/Investor/Achievements/img_1.png";
 
 const OneLinkEditView = () => {
+  const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const userId = loggedInUser._id;
   const [company, setCompany] = useState({});
@@ -40,7 +48,7 @@ const OneLinkEditView = () => {
     SOM: "",
   });
   const [selectedLogo, setSelectedLogo] = useState(null);
-  const [imageData, setImageData] = useState(null);
+  // const [imageData, setImageData] = useState(null);
   const [fundingAskRows, setFundingAskRows] = useState([
     { required: "", amount: "" },
   ]);
@@ -283,6 +291,33 @@ const OneLinkEditView = () => {
       .then(({ data }) => {
         setPopupData("Changes saved");
         setFromSubmit(true);
+
+        if (!loggedInUser.achievements.includes('6564689149186bca517cd0d1')) {
+          const achievements = [...loggedInUser.achievements];
+          achievements.push('6564689149186bca517cd0d1');
+          const updatedData = { achievements };
+          updateUserById(loggedInUser._id, updatedData).then(({ data }) => {
+            dispatch(loginSuccess(data.data));
+            toast.dismiss();
+            toast.custom((t) => (
+              <div class=" rounded-3 max-w-md  bg-white shadow-lg rounded-lg pointer-events-auto d-flex border ring-1 ring-dark ring-opacity-25
+              <?php echo $t.visible ? 'fade-in' : 'fade-out'; ?>">
+                <div className="p-2  d-flex align-items-center gap-2">
+                  <img
+                    src={achievement}
+                    alt="Profile"
+                    className="rounded-circle"
+                    style={{ width: "50px", height: "50px" }}
+                  />
+                  <h6 className="m-0 fs-semibold">One-Stop Shop....</h6>
+                </div>
+              </div>
+            ))
+          }).catch((error) => {
+            console.error("Error updating user:", error);
+          })
+        }
+
       })
       .catch((err) => console.log(err));
   };
@@ -782,6 +817,7 @@ const OneLinkEditView = () => {
           />
         )}
       </section>
+      {/* <Toaster /> */}
     </>
   );
 };

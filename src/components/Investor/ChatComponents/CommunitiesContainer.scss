@@ -11,7 +11,7 @@
   }
 
   .my__communities {
-    max-height: 23rem;
+    max-height: 19rem;
     overflow-y: auto;
 
     &::-webkit-scrollbar {
@@ -58,8 +58,16 @@
 }
 
 .community__card {
-  background-color: rgba(234, 238, 242, 1);
+  // background-color: rgba(234, 238, 242, 1);
   cursor: pointer;
+
+  & + .community__card {
+    border-top: 1px solid #b4b4b4aa;
+  }
+
+  &:first-of-type {
+    border-top: 1px solid #b4b4b4aa;
+  }
 
   h5 {
     font-size: 1.125rem;

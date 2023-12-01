@@ -1,6 +1,6 @@
 .chatsidebar_main_container {
   border-radius: var(--border-radius);
-  border: 1px solid #cfcfcf;
+  border: 1px solid #e7e7e7;
   background: #fff;
   box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.06);
   height: auto;
@@ -17,22 +17,57 @@
     // overflow-y: auto;
     // height: 80dvh;
 
+    #pinnedChats {
+      .person_wise_chat:first-of-type {
+        border-top: 1px solid #b4b4b4aa;
+      }
+
+      .person_wise_chat:last-of-type {
+        border-bottom: 1px solid #b4b4b4aa;
+      }
+    }
+
+    #normalChats {
+      .person_wise_chat:first-of-type {
+        border-top: 1px solid #b4b4b4aa;
+      }
+    }
+
     .person_wise_chat {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
       cursor: pointer;
+
+      // box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 1);
+
+      &:empty {
+        display: none;
+      }
+
+      // Border for consecutive person wise chats
+      & + .person_wise_chat {
+        border-top: 1px solid #b4b4b4aa;
+      }
+
+      // Border for last person wise chat
+      // &:last-of-type {
+      //   border-bottom: 1px solid #b4b4b4;
+      // }
+
       .user_chat {
-        border-radius: var(--border-radius);
-        background: #eaeef2;
-        width: 90%;
-        height: 90px;
+        // border-radius: var(--border-radius);
+        // background: #eaeef2;
+
+        width: 100%;
+        // height: 90px;
         flex-shrink: 0;
+
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 10px;
+        padding: 0.75rem 0.75rem;
 
         .left {
           display: flex;
@@ -52,7 +87,7 @@
               margin: 0;
               color: #2f2f2f;
               font-family: Poppins;
-              font-size: 18px;
+              font-size: 16px;
               font-style: normal;
               font-weight: 500;
               line-height: normal;
@@ -94,8 +129,8 @@
       }
     }
 
-    .person_wise_chat:last-of-type {
-      padding-bottom: 1em;
-    }
+    // .person_wise_chat:last-of-type {
+    //   padding-bottom: 1em;
+    // }
   }
 }
