@@ -802,14 +802,23 @@ const FeedPostCard = ({
                         </div>
                       </section>
                     </div>
-                    <span className="fs-6 ps-2 mb-2">Comments</span>
+                    {comments?.length ? (
+                      <span className="fs-6 ps-2 mb-2">Comments</span>
+                    ) : (
+                      <span className="fs-6 ps-2 mb-2 w-100 d-flex justify-content-center text-center">
+                        No comments
+                      </span>
+                    )}
                     {/* Comments */}
                     {comments
                       // .sort(
                       //   (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
                       // )
                       .map((val) => (
-                        <section className="single-comment row m-0 mt-2">
+                        <section
+                          className="single-comment row m-0 mt-2"
+                          key={val.tex}
+                        >
                           <div className="img_container col-2">
                             <Link to={`/user/${val.user._id}`}>
                               <img
