@@ -10,6 +10,7 @@ import {
   postUserPost,
   getStartupByFounderId,
   updateUserById,
+  addNotificationAPI,
 } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
 import profilePic from "../../../Images/investorIcon/profilePic.webp";
@@ -236,6 +237,15 @@ const CreatePostPopUp = ({
           updateUserById(loggedInUser._id, updatedData)
             .then(({ data }) => {
               dispatch(loginSuccess(data.data));
+              const notificationBody = {
+                recipient: loggedInUser._id,
+                type: "achievementCompleted",
+                achievementId: "6564684649186bca517cd0c9",
+              }
+              addNotificationAPI(notificationBody)
+                .then((data) => console.log("Added"))
+                .catch((error) => console.error(error.message));
+
               toast.custom((t) => (
                 <AchievementToast type={achievementTypes.voyager} />
               ));
@@ -270,9 +280,8 @@ const CreatePostPopUp = ({
     <>
       {popupOpen && <div className="createpost-background-overlay"></div>}
       <div
-        className={`create_post_modal rounded-4 p-md-2 ${
-          popupOpen ? "d-block" : ""
-        }`}
+        className={`create_post_modal rounded-4 p-md-2 ${popupOpen ? "d-block" : ""
+          }`}
         tabIndex="-1"
         role="dialog"
       >

@@ -1,9 +1,41 @@
 import {
+  addNotification,
   getNotificationsByUserId,
   markMessageAsRead,
   markAllMessagesAsRead,
   getUnreadNotificationCount,
 } from "../services/notificationService.js";
+
+export const addNotificationController = async (req, res) => {
+  try {
+    const {
+      recipient,
+      sender,
+      type,
+      post,
+      connection,
+      meetingId,
+      achievementId,
+    } = req.body;
+
+    const response = await addNotification(
+      recipient,
+      sender,
+      type,
+      post,
+      connection,
+      meetingId,
+      achievementId);
+
+    return res.status(response.status).send(response);
+  } catch (error) {
+    console.log(error);
+    return {
+      staus: 500,
+      message: "An error occured while getting the notifications",
+    }
+  }
+}
 
 export const getNotificationsByUserIdController = async (req, res) => {
   try {
@@ -49,7 +81,7 @@ export const markAllMessagesAsReadController = async (req, res) => {
 
 export const getUnreadNotificationCountController = async (req, res) => {
   try {
-    const userId  = req.userId;
+    const userId = req.userId;
     const response = await getUnreadNotificationCount(userId);
     return res.status(response.status).json(response);
   } catch (error) {

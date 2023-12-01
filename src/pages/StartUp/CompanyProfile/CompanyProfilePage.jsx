@@ -9,6 +9,7 @@ import {
   searchStartUps,
   addStartUpToUser,
   updateUserAPI,
+  addNotificationAPI,
 } from "../../../Service/user";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -86,6 +87,15 @@ export default function CompanyProfilePage() {
       );
       if (response.isFirst) {
         notify();
+        const notificationBody = {
+          recipient: loggedInUserId,
+          type: "achievementCompleted",
+          achievementId: "6564687349186bca517cd0cd",
+        }
+        addNotificationAPI(notificationBody)
+          .then((data) => console.log("Added"))
+          .catch((error) => console.error(error.message));
+
       }
       if (response.status === 200) {
         setShowSuccess(true);
@@ -172,11 +182,10 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${
-                                  selectedCompanyId === company._id
-                                    ? "active"
-                                    : ""
-                                }`}
+                                className={`suggestion-item ${selectedCompanyId === company._id
+                                  ? "active"
+                                  : ""
+                                  }`}
                                 key={index}
                                 onClick={() =>
                                   handleCompanySelection(
@@ -232,11 +241,10 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${
-                                  selectedCompanyId === company._id
-                                    ? "active"
-                                    : ""
-                                }`}
+                                className={`suggestion-item ${selectedCompanyId === company._id
+                                  ? "active"
+                                  : ""
+                                  }`}
                                 key={index}
                                 onClick={() =>
                                   handleCompanySelection(

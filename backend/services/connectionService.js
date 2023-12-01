@@ -158,12 +158,16 @@ export const acceptConnectionRequest = async (connectionId) => {
     if (sender.startUp?.founderId.toString() === sender._id.toString() || sender.investor?.founderId.toString() === sender._id.toString()) {
       if (!sender.achievements.includes('6568616cef0982c58957e779')) {
         await UserModel.findByIdAndUpdate(sender._id, { $push: { achievements: '6568616cef0982c58957e779' } });
+        const type = "achievementCompleted";
+        await addNotification(connection.sender, null, type, null, null, null, "6568616cef0982c58957e779");
       }
     }
     if (receiver.startUp?.founderId.toString() === receiver._id.toString() || receiver.investor?.founderId.toString() === receiver._id.toString()) {
       if (!receiver.achievements.includes('6568616cef0982c58957e779')) {
         await UserModel.findByIdAndUpdate(receiver._id, { $push: { achievements: '6568616cef0982c58957e779' } });
         isFirst = true;
+        const type = "achievementCompleted";
+        await addNotification(connection.receiver, null, type, null, null, null, "6568616cef0982c58957e779");
       }
     }
     await UserModel.findByIdAndUpdate(sender._id, {
@@ -176,7 +180,7 @@ export const acceptConnectionRequest = async (connectionId) => {
     });
 
     const type = "connectionAccepted";
-    await addNotification(connection.sender, connection.receiver, type, null, connection._id);
+    await addNotification(sender._id, receiver._id, type, null, connection._id);
     return {
       status: 200,
       message: "Connection Accepted",

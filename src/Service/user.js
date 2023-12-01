@@ -1384,3 +1384,16 @@ export const submitFundingToMailAPI = async (fundingAnswers) => {
     throw error;
   }
 };
+
+export const addNotificationAPI = async (notificationData) => {
+  try {
+    const response = await axiosInstance.post(
+      `${API.addNotificationAPI}`,
+      notificationData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error adding notification:", error);
+    throw error;
+  }
+};
