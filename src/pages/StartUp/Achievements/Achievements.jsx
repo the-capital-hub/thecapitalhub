@@ -9,6 +9,9 @@ import bronze from "../../../Images/Investor/Achievements/bronze.png";
 import rectangle from "../../../Images/Investor/Achievements/Rectangle.png";
 import { getUserAchievements } from "../../../Service/user";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
+import { useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 function Achievements() {
   const [completedAchievements, setCompletedAchievements] = useState([]);
@@ -20,7 +23,7 @@ function Achievements() {
   const [activeMedal, setActiveMedal] = useState("gold");
   const [filteredAchievements, setFilteredAchievements] = useState([]);
 
-  const getAchievements = async () => {
+  const getAchievements = useCallback(async () => {
     try {
       setLoading(true);
       const response = await getUserAchievements();
@@ -46,10 +49,16 @@ function Achievements() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getAchievements();
+
+    // Update title
+    document.title = "Achievements | The Capital Hub";
+    dispatch(setPageTitle("Achievements"));
   }, []);
 
   const handleMedalClick = (medalType) => {
