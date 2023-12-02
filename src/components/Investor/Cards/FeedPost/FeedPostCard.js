@@ -86,6 +86,7 @@ const FeedPostCard = ({
   const [showSuccess, setShowSuccess] = useState(false);
   const [showSavePopUp, setshowSavePopUp] = useState(false);
   const [likedBy, setLikedBy] = useState(null);
+  const [likedByUsers, setLikedByUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const navigate = useNavigate();
@@ -384,9 +385,10 @@ const FeedPostCard = ({
     getLikeCount(postId)
       .then((data) => {
         setLikedBy(data?.data.likedBy);
+        setLikedByUser(data?.data.users);
       })
       .catch((error) => console.log(error));
-  }, [liked, postId]);
+  }, [postId]);
 
   const singleClickTimer = useRef(null);
   const [showImgagePopup, setShowImgagePopup] = useState(false);
@@ -412,9 +414,8 @@ const FeedPostCard = ({
     <>
       <div className="feedpostcard_main_container mb-2">
         <div
-          className={`box feedpostcard_container mt-2 ${
-            repostPreview && "rounded-4 shadow-sm border"
-          }`}
+          className={`box feedpostcard_container mt-2 ${repostPreview && "rounded-4 shadow-sm border"
+            }`}
         >
           {loading && (
             <div className="d-flex justify-content-center my-4">
@@ -532,7 +533,7 @@ const FeedPostCard = ({
                         data-bs-toggle="modal"
                         data-bs-target="#reportPostModal"
                         className="d-flex align-items-center gap-1"
-                        // onClick={() => setShowReportModal(true)}
+                      // onClick={() => setShowReportModal(true)}
                       >
                         <IconReportPost />
                         <span>Report</span>
@@ -627,8 +628,8 @@ const FeedPostCard = ({
                   image={resharedPostId?.image}
                   createdAt={resharedPostId?.createdAt}
                   likes={resharedPostId?.likes}
-                  startUpCompanyName={startUpCompanyName}
-                  investorCompanyName={investorCompanyName}
+                  startUpCompanyName={resharedPostId.user?.startUp}
+                  investorCompanyName={resharedPostId.user?.investor}
                 />
               )}
             </div>
@@ -637,7 +638,7 @@ const FeedPostCard = ({
             <span
               className=" mx-3 text-secondary pe-auto "
               style={{ fontSize: "14px", cursor: "pointer" }}
-              onClick={handleShow}
+              onClick={() => likedBy ? handleShow() : ""}
             >
               {/* {likes?.length} likes */}
               {likedBy ? <>Liked By {likedBy}</> : <>{likes?.length} likes</>}
@@ -693,9 +694,8 @@ const FeedPostCard = ({
                 {/* Repost and Save posts */}
                 <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                   <span
-                    className={`repost_container rounded-4 ${
-                      showRepostOptions ? "bg-light" : ""
-                    }`}
+                    className={`repost_container rounded-4 ${showRepostOptions ? "bg-light" : ""
+                      }`}
                     ref={repostContainerRef}
                   >
                     <img
@@ -962,40 +962,25 @@ const FeedPostCard = ({
           </h5>
         </div>
         <Modal.Body>
-          <div className="Reactions d-flex align-items-center p-2 border-bottom border-1">
-            <img
-              src={
-                "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              }
-              alt="user"
-              width={50}
-              height={50}
-              className="rounded-pill "
-            />
-            <div className="p-1">
-              <h5>abc</h5>
-              <p className="m-0">
-                jvhhdvlhasgdkjgskjgkjg dskjds a h sdl k sl jkg lk
-              </p>
+          {likedByUsers?.map((user) => (
+            <div className="Reactions d-flex align-items-center p-2 border-bottom border-1">
+              <img
+                src={user.profilePicture}
+                alt="user"
+                width={50}
+                height={50}
+                className="rounded-pill "
+              />
+              <div className="p-1">
+                <h5>{user.firstName} {user.lastName}</h5>
+                <p className="m-0">
+                  {user.designation}
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="d-flex align-items-center p-2 border-bottom border-1">
-            <img
-              src={
-                "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              }
-              alt="user"
-              width={50}
-              height={50}
-              className="rounded-pill "
-            />
-            <div className="p-1">
-              <h5>abc</h5>
-              <p className="m-0">
-                jvhhdvlhasgdkjgskjgkjg dskjds a h sdl k sl jkg lk
-              </p>
-            </div>
-          </div>
+
+          ))}
+
         </Modal.Body>
       </Modal>
 
@@ -1029,9 +1014,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${
-                  reportReason === "Harassment" && "bg-secondary text-white"
-                }`}
+                className={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
+                  }`}
                 htmlFor="inlineRadio1"
               >
                 Harassment
@@ -1048,9 +1032,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${
-                  reportReason === "Spam" && "bg-secondary text-white"
-                }`}
+                className={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
+                  }`}
                 htmlFor="inlineRadio2"
               >
                 Spam
@@ -1067,9 +1050,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${
-                  reportReason === "Fraud or scam" && "bg-secondary text-white"
-                }`}
+                className={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
+                  }`}
                 htmlFor="inlineRadio3"
               >
                 Fraud or scam
@@ -1086,9 +1068,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${
-                  reportReason === "Hateful Speech" && "bg-secondary text-white"
-                }`}
+                className={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
+                  }`}
                 htmlFor="inlineRadio4"
               >
                 Hateful Speech

@@ -88,7 +88,6 @@ export const createNewPost = async (data) => {
 //     throw new Error("Error fetching all posts");
 //   }
 // };
-
 export const allPostsData = async (page, perPage) => {
   try {
     const skip = (page - 1) * perPage;
@@ -112,10 +111,22 @@ export const allPostsData = async (page, perPage) => {
       .populate({
         path: "resharedPostId",
         select: "",
-        populate: {
-          path: "user",
-          select: "firstName lastName designation profilePicture",
-        },
+        populate: [
+          {
+            path: "user",
+            select: "firstName lastName designation profilePicture investor startUp",
+            populate: [
+              {
+                path: "investor",
+                select: "companyName",
+              },
+              {
+                path: "startUp",
+                select: "company",
+              },
+            ],
+          },
+        ],
       })
       .sort({ _id: -1 })
       .skip(skip)
@@ -502,55 +513,43 @@ export const getSavedPostsByCollection = async (userId, collectionName) => {
 //get like count
 export const getLikeCount = async (postId) => {
   try {
-    const post = await PostModel.findById(postId);
+    const post = await PostModel.findById(postId).populate('likes');
     if (!post) {
       return {
         status: 404,
-        message: "Post not found",
+        message: 'Post not found',
       };
     }
     const likeCount = post.likes.length;
+    let likedBy;
     if (likeCount === 0) {
-      return {
-        status: 200,
-        message: "No one has liked this post yet",
-        data: {
-          count: 0,
-        },
-      };
+      likedBy = null;
     } else if (likeCount === 1) {
-      const user = await UserModel.findById(post.likes[0]);
-      return {
-        status: 200,
-        message: "1 person liked this post",
-        data: {
-          count: 1,
-          likedBy: user ? user.firstName : "Unknown User",
-        },
-      };
+      const user = post.likes[0];
+      likedBy = user ? user.firstName : 'Unknown User';
     } else {
-      const usersWhoLiked = await UserModel.find({
-        _id: { $in: post.likes.slice(0, 2) },
-      });
+      const usersWhoLiked = post.likes.slice(0, 2);
       const otherCount = likeCount - 2;
-      let likedBy = usersWhoLiked.map((user) => user.firstName).join(", ");
+      likedBy = usersWhoLiked.map((user) => user.firstName).join(', ');
       if (otherCount > 0) {
         likedBy += `, and ${otherCount} others`;
       }
-      return {
-        status: 200,
-        message: `${likeCount} people liked this post`,
-        data: {
-          count: likeCount,
-          likedBy,
-        },
-      };
     }
+
+    return {
+      status: 200,
+      message: `${likeCount} ${likeCount === 1 ? 'person' : 'people'} liked this post`,
+      data: {
+        count: likeCount,
+        likedBy,
+        users: post.likes,
+      },
+    };
   } catch (error) {
     console.error(error);
     return {
       status: 500,
-      message: "An error occurred while fetching like count",
+      message: 'An error occurred while fetching like count',
     };
   }
 };
