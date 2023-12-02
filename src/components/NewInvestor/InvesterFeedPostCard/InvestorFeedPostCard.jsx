@@ -77,6 +77,7 @@ const FeedPostCard = ({
   const [showSuccess, setShowSuccess] = useState(false);
   const [showSavePopUp, setshowSavePopUp] = useState(false);
   const [likedBy, setLikedBy] = useState(null);
+  const [likedByUsers, setLikedByUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [likeModal, setLikeModal] = useState(false);
@@ -295,6 +296,7 @@ const FeedPostCard = ({
     getLikeCount(postId)
       .then((data) => {
         setLikedBy(data.data?.likedBy);
+        setLikedByUser(data.data?.users);
       })
       .catch((error) => console.log(error));
   }, [liked, postId]);
@@ -331,9 +333,8 @@ const FeedPostCard = ({
       <div className="row investor_feedpostcard_main_container mb-2">
         <div className="col-12">
           <div
-            className={`box feedpostcard_container mt-2 border ${
-              repostPreview && "rounded-4 shadow-sm"
-            }`}
+            className={`box feedpostcard_container mt-2 border ${repostPreview && "rounded-4 shadow-sm"
+              }`}
           >
             {loading && (
               <div className="d-flex justify-content-center my-4">
@@ -345,11 +346,10 @@ const FeedPostCard = ({
             <div className="  feed_header_container border-2 border-bottom mb-3 pb-2">
               <div className="feedpostcard_content">
                 <Link
-                  to={`${
-                    loggedInUser?.isInvestor === "true"
-                      ? `/investor/user/${userId}`
-                      : `/user/${userId}`
-                  }`}
+                  to={`${loggedInUser?.isInvestor === "true"
+                    ? `/investor/user/${userId}`
+                    : `/user/${userId}`
+                    }`}
                   className="rounded-circle"
                 >
                   <img
@@ -366,11 +366,10 @@ const FeedPostCard = ({
                 </Link>
                 <div className="feedpostcart_text_header my-1">
                   <Link
-                    to={`${
-                      loggedInUser?.isInvestor === "true"
-                        ? `/investor/user/${userId}`
-                        : `/user/${userId}`
-                    }`}
+                    to={`${loggedInUser?.isInvestor === "true"
+                      ? `/investor/user/${userId}`
+                      : `/user/${userId}`
+                      }`}
                     className="text-decoration-none"
                     style={{ fontSize: "18px", fontWeight: 600, color: "#000" }}
                   >
@@ -386,8 +385,8 @@ const FeedPostCard = ({
                     >
                       <img src={HomeIcon} alt="logo" />
                       {designation},{" "}
-                      {investorCompanyName?.company
-                        ? investorCompanyName?.company
+                      {investorCompanyName?.companyName
+                        ? investorCompanyName?.companyName
                         : startUpCompanyName?.company}
                     </span>
                     <span
@@ -519,6 +518,8 @@ const FeedPostCard = ({
                     image={resharedPostId?.image}
                     createdAt={resharedPostId?.createdAt}
                     likes={resharedPostId?.likes}
+                    startUpCompanyName={resharedPostId.user?.startUp}
+                    investorCompanyName={resharedPostId.user?.investor}
                   />
                 )}
               </div>
@@ -526,7 +527,7 @@ const FeedPostCard = ({
             {likes && (
               <span
                 className=" mx-3 text-secondary"
-                style={{ fontSize: "14px", cursor:"pointer"  }}
+                style={{ fontSize: "14px", cursor: "pointer" }}
                 onClick={handleShow}
               >
                 {/* {likes?.length} likes */}
@@ -573,9 +574,8 @@ const FeedPostCard = ({
                   </div>
                   <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                     <span
-                      className={`repost_container rounded ${
-                        showRepostOptions ? "bg-light" : ""
-                      }`}
+                      className={`repost_container rounded ${showRepostOptions ? "bg-light" : ""
+                        }`}
                       ref={repostContainerRef}
                     >
                       <img
@@ -855,9 +855,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${
-                  reportReason === "Harassment" && "bg-secondary text-white"
-                }`}
+                className={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
+                  }`}
                 htmlFor="inlineRadio1"
               >
                 Harassment
@@ -874,9 +873,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${
-                  reportReason === "Spam" && "bg-secondary text-white"
-                }`}
+                className={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
+                  }`}
                 htmlFor="inlineRadio2"
               >
                 Spam
@@ -893,9 +891,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${
-                  reportReason === "Fraud or scam" && "bg-secondary text-white"
-                }`}
+                className={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
+                  }`}
                 htmlFor="inlineRadio3"
               >
                 Fraud or scam
@@ -912,9 +909,8 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${
-                  reportReason === "Hateful Speech" && "bg-secondary text-white"
-                }`}
+                className={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
+                  }`}
                 htmlFor="inlineRadio4"
               >
                 Hateful Speech
@@ -968,46 +964,30 @@ const FeedPostCard = ({
           <Modal.Title>Reactions</Modal.Title>
         </Modal.Header>
         <div className=" reactions_investor d-flex gap-4 border-bottom border-1 py-2 px-3">
-          <h5  className={`nav-item ${activeHeader === true ? "active" : ""}`}  onClick={() =>setActiveHeader(true) }>ALL</h5>
-          <h5  className={`nav-item ${activeHeader === false ? "active" : ""}`} onClick={() =>setActiveHeader(false)}>LIKE</h5>
+          <h5 className={`nav-item ${activeHeader === true ? "active" : ""}`} onClick={() => setActiveHeader(true)}>ALL</h5>
+          <h5 className={`nav-item ${activeHeader === false ? "active" : ""}`} onClick={() => setActiveHeader(false)}>LIKE</h5>
         </div>
         <Modal.Body>
-          <div className="Reactions d-flex align-items-center p-2 border-bottom border-1">
-            <img
-              src={
-                "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              }
-              alt="user"
-              width={50}
-              height={50}
-              className="rounded-pill "
-            />
-            <div className="p-1">
-              <h5>abc</h5>
-              <p className="m-0">
-                jvhhdvlhasgdkjgskjgkjg dskjds a h sdl k sl jkg lk
-              </p>
+          {likedByUsers?.map((user) => (
+            <div className="Reactions d-flex align-items-center p-2 border-bottom border-1">
+              <img
+                src={user.profilePicture}
+                alt="user"
+                width={50}
+                height={50}
+                className="rounded-pill "
+              />
+              <div className="p-1">
+                <h5>{user.firstName} {user.lastName}</h5>
+                <p className="m-0">
+                  {user.designation}
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="d-flex align-items-center p-2 border-bottom border-1">
-            <img
-              src={
-                "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              }
-              alt="user"
-              width={50}
-              height={50}
-              className="rounded-pill "
-            />
-            <div className="p-1">
-              <h5>abc</h5>
-              <p className="m-0">
-                jvhhdvlhasgdkjgskjgkjg dskjds a h sdl k sl jkg lk
-              </p>
-            </div>
-          </div>
+
+          ))}
         </Modal.Body>
-      </Modal> 
+      </Modal>
     </>
   );
 };
