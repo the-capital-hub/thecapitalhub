@@ -1,10 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import "./ProtectedLayout.scss";
 import { selectAuthAdmin } from "../../../../Store/features/admin/selectors";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
-import { setPageTitle } from "../../../../Store/features/design/designSlice";
 
 // Admin Layout
 const ProtectedLayout = () => {
