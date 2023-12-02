@@ -168,6 +168,7 @@ const CommunityDashboard = ({
   };
 
   const groupedMessages = groupMessagesByDate(messages);
+  console.log("groupedMessages:", groupedMessages);
 
   // const handleSend = async () => {
   //   if (

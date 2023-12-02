@@ -9,7 +9,11 @@
     background: white;
     display: flex;
     overflow: hidden;
-    height: 96dvh;
+    height: 100dvh;
+
+    @media (min-width: 821px) {
+      height: 96vh;
+    }
 
     @media (min-width: 1441px) {
       max-width: 1600px;
@@ -160,6 +164,32 @@
       }
 
       .mobileView_chat_sidebar {
+        &::-webkit-scrollbar {
+          width: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: var(--currentTheme);
+          border-radius: 10rem;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+          background-color: var(--currentTheme-dark);
+        }
+
+        &::-webkit-scrollbar-track {
+          background-color: transparent;
+          border-radius: 10rem;
+        }
+      }
+
+      // Mobile view chats-col CSS
+      .chats-col {
+        height: calc(98dvh - 32px - 163px);
+        margin-top: 1rem;
+        overflow-y: auto;
+        padding-inline-end: 0.25rem;
+
         &::-webkit-scrollbar {
           width: 4px;
         }

@@ -179,7 +179,10 @@ const Chats = () => {
 
   const renderMobileHeader = useMemo(() => {
     return (
-      <div className="mobile-nav border-bottom shadow-sm pb-2 px-2">
+      <div
+        className="mobile-nav border-bottom shadow-sm pb-2 px-2"
+        style={{ height: "70px" }}
+      >
         <button
           className="btn btn-sm btn-light"
           onClick={() => {
@@ -302,9 +305,37 @@ const Chats = () => {
               chatId ? (
                 renderMobileMainSection
               ) : (
-                <section className="overflow-y-auto mobileView_chat_sidebar">
-                  <div className="d-flex flex-column gap-3 px-1">
-                    <ChatSearch />
+                // <section className="overflow-y-auto mobileView_chat_sidebar">
+                //   <div className="d-flex flex-column gap-3 px-1">
+                //     <ChatSearch />
+                //     <CommunitiesContainer
+                //       isCommunityOpen={isCommunityOpen}
+                //       recieveMessage={recieveMessage}
+                //       sendMessage={sendMessage}
+                //       setIsRead={setIsRead}
+                //       isRead={isRead}
+                //     />
+                //     <ChatSidebar
+                //       recieveMessage={recieveMessage}
+                //       sendMessage={sendMessage}
+                //     />
+                //   </div>
+                // </section>
+                <section className="left_section pe-1">
+                  {/* <span
+                    className="back_img rounded-circle shadow-sm"
+                    title="Go Back"
+                  >
+                    <img
+                      src={backIcon}
+                      width={20}
+                      height={20}
+                      onClick={() => navigate(-1)}
+                      alt=""
+                    />
+                  </span> */}
+                  <ChatSearch />
+                  <div class="chats-col">
                     <CommunitiesContainer
                       isCommunityOpen={isCommunityOpen}
                       recieveMessage={recieveMessage}
