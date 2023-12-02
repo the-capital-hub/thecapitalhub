@@ -11,9 +11,12 @@ import KeyFocus from "./company-section-two/key-focus/KeyFocus";
 import CompanyAbout from "./company-section-one/company-about/CompanyAbout";
 import "./CompanyProfile.scss";
 import SelectCommitmentModal from "../MyStartupsComponents/SelectCommitmentModal/SelectCommitmentModal";
-import { useLocation, useNavigate } from "react-router-dom";
-import { selectIsInvestor } from "../../../Store/features/user/userSlice";
-import { useSelector } from "react-redux";
+import {
+  useLocation,
+  //  useNavigate
+} from "react-router-dom";
+// import { selectIsInvestor } from "../../../Store/features/user/userSlice";
+// import { useSelector } from "react-redux";
 
 export default function CompanyProfile({
   isOnelink,
@@ -123,17 +126,17 @@ export default function CompanyProfile({
   //     "Artificial Intelligence AI",
   //   ],
   // };
-  const navigate = useNavigate();
-  const isInvestor = useSelector(selectIsInvestor);
+  // const navigate = useNavigate();
+  // const isInvestor = useSelector(selectIsInvestor);
 
 
   return (
     <>
       <div className="company__profile bg-white shadow-sm" startup={startup}>
         <div className="company__section__one border-bottom d-flex flex-column gap-4 p-3 p-md-5">
-            <h5 className="ms-auto m-0 p-0 "onClick={() =>navigate(isInvestor === "true" ? "/investor/home" : "/home")
-}
->x</h5>
+          {/* <h5 className="ms-auto m-0 p-0 " onClick={() => navigate(isInvestor === "true" ? "/investor/home" : "/home")
+          }
+          >x</h5> */}
           <div className="company__info d-flex flex-column flex-xxl-row gap-4 justify-content-between position-relative">
             <CompanyInfo
               name={name}

@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../Store/features/oneLink/oneLinkSlice";
 import { selectIsMobileApp } from "../../../Store/features/design/designSlice";
 
-export default function OnelinkValidation({ userId, theme = "startup" }) {
+export default function OnelinkValidation({ userId, theme = "startup", onelink }) {
   const dispatch = useDispatch();
   // States for handling Invalid secret Key
   const [error, setError] = useState(null);
@@ -53,7 +53,11 @@ export default function OnelinkValidation({ userId, theme = "startup" }) {
       const response = await validateSecretKey(userId, pin);
       if (response.status === 200) {
         const token = response.token;
-        dispatch(login({ oneLinkUser: token, oneLinkId: userId }));
+        // dispatch(login({ oneLinkUser: token, oneLinkId: userId }));
+        localStorage.setItem("oneLinkUser", token);
+        localStorage.setItem("oneLinkLoggedIn", true);
+        localStorage.setItem("oneLinkId", userId);
+        theme === "startup" ? navigate(`/onelink/${onelink}/${userId}`) : navigate(`/investor/onelink/${onelink}/${userId}`);
       } else {
         setError("Key is invalid");
       }
