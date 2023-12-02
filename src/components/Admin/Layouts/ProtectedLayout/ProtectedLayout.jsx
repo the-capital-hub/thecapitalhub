@@ -5,14 +5,18 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 
+let count = 0;
+
 const ProtectedLayout = () => {
   // States
   const authAdmin = useSelector(selectAuthAdmin);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
 
   // Hooks
-  const location = useLocation();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
+
+  console.log(authAdmin, count++);
 
   // Side Effects
   useEffect(() => {
@@ -23,7 +27,7 @@ const ProtectedLayout = () => {
     } else {
       setIsAuthenticating(false);
     }
-  }, [authAdmin, location.pathname, navigate]);
+  }, [authAdmin, pathname, navigate]);
 
   // JSX
   // Handling loading while authenticating
