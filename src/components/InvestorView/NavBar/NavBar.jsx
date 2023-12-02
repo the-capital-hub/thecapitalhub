@@ -59,17 +59,16 @@
 
 import React from "react";
 import "./NavBar.scss";
-// import Bar from "../../../Images/investorIcon/Bar.svg";
-// import searchIconBlack from "../../../Images/navbar/Search.svg";
 import Logo from "../../../Images/investorIcon/new-logo.png";
-// import NotificationIcon from "../../../Images/investorIcon/notification.svg";
-// import MessageIcon from "../../../Images/investorIcon/message.svg";
-// import profilePic from "../../../Images/investorIcon/profilePic.webp";
-// import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
 import HambergerIcon from "../../../Images/Hamberger.svg";
-// import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectIsInvestor } from "../../../Store/features/user/userSlice";
 
 const NavBar = (props) => {
+  const navigate = useNavigate();
+  const isInvestor = useSelector(selectIsInvestor);
+
   return (
     <>
       <div className="container pt-1">
@@ -87,44 +86,14 @@ const NavBar = (props) => {
                 {/* <h1>Home</h1> */}
               </div>
             </div>
+            <div className="ms-auto m-2 p-4 close-button" onClick={() => navigate(isInvestor === "true" ? "/investor/home" : "/home")
+            }>
+              <strong>x</strong>
+            </div>
+
           </div>
-          {/* <div className="col-7 navbar_right_container">
-            <div className="searchbar-container">
-              <input
-                type="text"
-                className="searchbar-input"
-                placeholder="Search"
-              />
-              <button className="searchbar-button">
-                <img src={searchIcon} alt="search" />
-              </button>
-            </div>
 
-            <div className="icons-container">
-              <div className="mobile-icon-wrapper ">
-                <span className="notification-icon">
-                  <img src={searchIconBlack} alt="notification" />
-                </span>
-              </div>
 
-              <div className="icon-wrapper">
-                <span className="notification-icon">
-                  <img src={NotificationIcon} alt="notification" />
-                </span>
-              </div>
-              <div className="icon-wrapper">
-                <span className="message-icon">
-                  <img src={MessageIcon} alt="message" />
-                </span>
-              </div>
-              <div className="icon-wrapper">
-                <Link to={"/manage-account"}>
-                  {" "}
-                  <img className="profile-pic" src={profilePic} alt="Profile" />
-                </Link>
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </>
