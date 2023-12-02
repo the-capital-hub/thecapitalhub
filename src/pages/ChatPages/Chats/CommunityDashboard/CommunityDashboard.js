@@ -334,41 +334,6 @@ const CommunityDashboard = ({
             </div>
           </div>
         ))}
-        {/* Delete Popup */}
-        {deletePopup ? (
-          <ChatDeletePopup>
-            <div className="d-flex flex-column  justify-content-center ">
-              <h1>Delete permanently</h1>
-              <hr className="p-0 m-1 " />
-              <p>This message will be deleted permanently.</p>
-              <div className="d-flex flex-column flex-md-row mx-auto">
-                <button
-                  className="popup-close-button bg-secondary"
-                  onClick={() => setDeletePopup(false)}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="popup-ok_button"
-                  onClick={() => handleDelete()}
-                >
-                  Confirm
-                </button>
-              </div>
-            </div>
-          </ChatDeletePopup>
-        ) : (
-          ""
-        )}
-
-        {showFeaturedPostSuccess ? (
-          <AfterSuccessPopUp
-            onClose={() => setShowFeaturedPostSuccess(false)}
-            successText="The message has been deleted successfully."
-          />
-        ) : (
-          ""
-        )}
       </div>
 
       {/* Chat Input section */}
@@ -377,6 +342,42 @@ const CommunityDashboard = ({
         setIsSent={setIsSent}
         setSendMessage={setSendMessage}
       />
+
+      {/* Delete Popup */}
+      {deletePopup ? (
+        <ChatDeletePopup>
+          <div className="d-flex flex-column  justify-content-center ">
+            <h1>Delete permanently</h1>
+            <hr className="p-0 m-1 " />
+            <p>This message will be deleted permanently.</p>
+            <div className="d-flex flex-column flex-md-row mx-auto">
+              <button
+                className="popup-close-button bg-secondary"
+                onClick={() => setDeletePopup(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="popup-ok_button"
+                onClick={() => handleDelete()}
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </ChatDeletePopup>
+      ) : (
+        ""
+      )}
+
+      {showFeaturedPostSuccess ? (
+        <AfterSuccessPopUp
+          onClose={() => setShowFeaturedPostSuccess(false)}
+          successText="The message has been deleted successfully."
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
