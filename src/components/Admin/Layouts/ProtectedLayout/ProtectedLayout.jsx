@@ -1,15 +1,17 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./ProtectedLayout.scss";
 import { selectAuthAdmin } from "../../../../Store/features/admin/selectors";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
+import { setPageTitle } from "../../../../Store/features/design/designSlice";
 
 // Admin Layout
 const ProtectedLayout = () => {
   // States
   const authAdmin = useSelector(selectAuthAdmin);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const pageTitle = useSelector((state) => state.design.pageTitle);
 
   // Hooks
   const { pathname } = useLocation();
@@ -26,6 +28,10 @@ const ProtectedLayout = () => {
     }
   }, [authAdmin, pathname, navigate]);
 
+  useEffect(() => {
+    document.title = `${pageTitle} | The Capital Hub`;
+  }, [pageTitle]);
+
   // JSX
   // Handling loading while authenticating
   if (isAuthenticating) {
@@ -35,6 +41,7 @@ const ProtectedLayout = () => {
   return (
     <div className="admin-protected-layout">
       {/* Navigation Bar */}
+      <h3 className="bg-red rounded p-2">Design Header : {pageTitle}</h3>
       <Outlet />
       {/* Footer */}
     </div>
