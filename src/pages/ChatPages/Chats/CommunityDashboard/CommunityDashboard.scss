@@ -1,6 +1,6 @@
 .community_dashboard_container {
   // -190px because chat nav is fixed to 106px and there is some margin at the top and bottom.
-  height: calc(100vh - 170px);
+  max-height: calc(100% - 70px);
   border-radius: var(--border-radius);
   border: 1px solid #cfcfcf;
   background: #fff;
@@ -16,9 +16,9 @@
     border-radius: 15px;
   }
 
-  @media (min-width: 821px) {
-    height: 85vh;
-  }
+  // @media (min-width: 821px) {
+  //   height: 85vh;
+  // }
 
   .name_title {
     color: #000;
@@ -73,7 +73,7 @@
   }
 
   .chat_messages_group {
-    height: 90%;
+    flex: 1 1 0;
     overflow-y: auto;
     scrollbar-gutter: stable;
 
@@ -97,198 +97,194 @@
       background-color: transparent;
       border-radius: 10rem;
     }
-  }
+    .chat_messages {
+      height: 80%;
+      // overflow-y: scroll;
+      // overflow-x: hidden;
 
-  .chat_messages {
-    height: 80%;
-    // overflow-y: scroll;
-    // overflow-x: hidden;
+      // .other_sender {
+      //   align-self: flex-start;
+      //   display: flex;
+      //   max-width: 90%;
 
-    .other_sender {
-      align-self: flex-start;
-      display: flex;
-      max-width: 90%;
+      //   @media (min-width: 768px) {
+      //     max-width: 60%;
+      //   }
 
-      @media (min-width: 768px) {
-        max-width: 60%;
-      }
+      //   .image_profile {
+      //     height: 50px;
+      //     width: 50px;
+      //     border-radius: 50%;
+      //   }
 
-      .image_profile {
-        height: 50px;
-        width: 50px;
-        border-radius: 50%;
-      }
+      //   .other_messages {
+      //     display: flex;
+      //     flex-direction: column;
+      //     justify-content: flex-start;
+      //     align-items: flex-start;
 
-      .other_messages {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
+      //     .msg-time {
+      //       font-size: 10px;
+      //       color: rgb(112, 112, 112);
+      //       text-align: end;
+      //       display: flex;
+      //       align-items: center;
+      //       gap: 5px;
+      //       justify-content: flex-end;
+      //       width: 100%;
+      //     }
 
-        .msg-time {
-          font-size: 10px;
-          color: rgb(112, 112, 112);
-          text-align: end;
-          display: flex;
-          align-items: center;
-          gap: 5px;
-          justify-content: flex-end;
-          width: 100%;
-        }
+      //     .message_container {
+      //       background-color: #eaeef2;
+      //       padding: 5px 10px;
+      //       border-top-right-radius: 10px;
+      //       border-bottom-right-radius: 10px;
+      //       border-bottom-left-radius: 10px;
+      //       margin-bottom: 5px;
+      //       display: flex;
+      //       flex-direction: column;
+      //       align-items: center;
 
-        .message_container {
-          background-color: #eaeef2;
-          padding: 5px 10px;
-          border-top-right-radius: 10px;
-          border-bottom-right-radius: 10px;
-          border-bottom-left-radius: 10px;
-          margin-bottom: 5px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+      //       &[data-msg-type="text"] {
+      //         max-width: 90%;
+      //       }
 
-          &[data-msg-type="text"] {
-            max-width: 90%;
-          }
+      //       &[data-msg-type="media"],
+      //       &[data-msg-type="doc"] {
+      //         max-width: 60%;
+      //       }
 
-          &[data-msg-type="media"],
-          &[data-msg-type="doc"] {
-            max-width: 60%;
-          }
+      //       @media (min-width: 768px) {
+      //         max-width: 60%;
+      //       }
 
-          @media (min-width: 768px) {
-            max-width: 60%;
-          }
+      //       p {
+      //         font-size: 14px;
+      //       }
 
-          p {
-            font-size: 14px;
-          }
+      //       a {
+      //         // color: rgb(93, 93, 93);
+      //         color: #212529;
+      //       }
 
-          a {
-            // color: rgb(93, 93, 93);
-            color: #212529;
-          }
+      //       .video-message {
+      //         max-width: 100%;
+      //         // height: auto;
+      //         max-height: 200px;
+      //         border-radius: 10px;
+      //         margin-top: 10px;
+      //         background-color: #000;
+      //         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      //       }
 
-          .video-message {
-            max-width: 100%;
-            // height: auto;
-            max-height: 200px;
-            border-radius: 10px;
-            margin-top: 10px;
-            background-color: #000;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-          }
+      //       .image-message {
+      //         max-width: 100%;
+      //         // height: auto;
+      //         max-height: 200px;
+      //         border-radius: 10px;
+      //         margin-top: 10px;
+      //         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      //       }
+      //     }
+      //   }
+      // }
 
-          .image-message {
-            max-width: 100%;
-            // height: auto;
-            max-height: 200px;
-            border-radius: 10px;
-            margin-top: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-          }
-        }
-      }
-    }
+      // .my_message_main {
+      //   align-self: flex-end;
 
-    .my_message_main {
-      align-self: flex-end;
+      //   .image_profile {
+      //     height: 50px;
+      //     width: 50px;
+      //     border-radius: 50%;
+      //   }
 
-      .image_profile {
-        height: 50px;
-        width: 50px;
-        border-radius: 50%;
-      }
+      //   .my_messages {
+      //     display: flex;
+      //     flex-direction: column;
+      //     justify-content: flex-start;
+      //     align-items: flex-end;
+      //     padding-inline-end: 0.5rem;
 
-      .my_messages {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-end;
-        padding-inline-end: 0.5rem;
+      //     .msg-time {
+      //       font-size: 10px;
+      //       color: rgb(255, 255, 255);
+      //       text-align: end;
+      //       display: flex;
+      //       align-items: center;
+      //       gap: 5px;
+      //       justify-content: flex-end;
+      //       width: 100%;
+      //     }
 
-        .msg-time {
-          font-size: 10px;
-          color: rgb(255, 255, 255);
-          text-align: end;
-          display: flex;
-          align-items: center;
-          gap: 5px;
-          justify-content: flex-end;
-          width: 100%;
-        }
+      //     .time_name_image {
+      //       display: flex;
+      //     }
 
-        .time_name_image {
-          display: flex;
-        }
+      //     .mymessage_container {
+      //       max-width: 60%;
 
-        .mymessage_container {
-          &[data-msg-type="text"] {
-            max-width: 90%;
-          }
+      //       &:not(:has(.image-message, .video-message, .document-message)) {
+      //         max-width: 90%;
+      //       }
 
-          &[data-msg-type="media"],
-          &[data-msg-type="doc"] {
-            max-width: 60%;
-          }
+      //       @media (min-width: 768px) {
+      //         max-width: 60%;
+      //       }
 
-          @media (min-width: 768px) {
-            max-width: 60%;
-          }
+      //       background-color: var(--currentTheme);
+      //       color: var(--currentTheme-text);
+      //       padding: 5px 10px;
+      //       border-top-left-radius: 10px;
+      //       border-bottom-right-radius: 10px;
+      //       border-bottom-left-radius: 10px;
+      //       margin-bottom: 5px;
+      //       // margin-right: 50px;
+      //       display: flex;
+      //       flex-direction: column;
+      //       // align-items: center;
 
-          background-color: var(--currentTheme);
-          color: var(--currentTheme-text);
-          padding: 5px 10px;
-          border-top-left-radius: 10px;
-          border-bottom-right-radius: 10px;
-          border-bottom-left-radius: 10px;
-          margin-bottom: 5px;
-          // margin-right: 50px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+      //       .chatDropDownMenu {
+      //         display: none;
+      //         overflow: visible;
+      //       }
 
-          .chatDropDownMenu {
-            display: none;
-            overflow: visible;
-          }
+      //       &:hover,
+      //       &:active {
+      //         .chatDropDownMenu {
+      //           display: block;
+      //         }
+      //       }
 
-          &:hover,
-          &:active {
-            .chatDropDownMenu {
-              display: block;
-            }
-          }
+      //       p {
+      //         font-size: 14px;
+      //         margin-inline-end: 1rem;
+      //       }
 
-          p {
-            font-size: 14px;
-            margin-inline-end: 1rem;
-          }
+      //       a {
+      //         color: white;
+      //       }
 
-          a {
-            color: white;
-          }
+      //       .video-message {
+      //         max-width: 100%;
+      //         // height: auto;
+      //         max-height: 200px;
+      //         border-radius: 10px;
+      //         margin-top: 10px;
+      //         background-color: #000;
+      //         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      //       }
 
-          .video-message {
-            max-width: 100%;
-            // height: auto;
-            max-height: 200px;
-            border-radius: 10px;
-            margin-top: 10px;
-            background-color: #000;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-          }
-
-          .image-message {
-            max-width: 100%;
-            // height: auto;
-            max-height: 200px;
-            border-radius: 10px;
-            margin-top: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-          }
-        }
-      }
+      //       .image-message {
+      //         max-width: 100%;
+      //         // height: auto;
+      //         max-height: 200px;
+      //         border-radius: 10px;
+      //         margin-top: 10px;
+      //         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      //       }
+      //     }
+      //   }
+      // }
     }
   }
 

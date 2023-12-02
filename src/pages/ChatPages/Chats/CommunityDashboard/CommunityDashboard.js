@@ -13,14 +13,14 @@ import {
 // import attachmentGreyIcon from "../../../../Images/Chat/attachtment-grey.svg";
 // import attachmentOrangeIcon from "../../../../Images/Chat/attachment-orange.svg";
 // import imageIcon from "../../../../Images/Chat/image.svg";
-import documentIcon from "../../../../Images/Chat/document.svg";
+// import documentIcon from "../../../../Images/Chat/document.svg";
 // import videoIcon from "../../../../Images/Chat/attachVideo.svg";
 // import onelinkIcon from "../../../../Images/Chat/Onelink.svg";
 // import { getBase64 } from "../../../../utils/getBase64";
-import Linkify from "react-linkify";
+// import Linkify from "react-linkify";
 import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import ChatDeletePopup from "../ChatDeletePopup/ChatDeletePopup";
-import ChatDropDownMenu from "../ChatDropDownMenu/ChatDropDownMenu";
+// import ChatDropDownMenu from "../ChatDropDownMenu/ChatDropDownMenu";
 // import { s3 } from "../../../../Service/awsConfig";
 // import { Offcanvas } from "react-bootstrap";
 // import AttachmentPreview from "../../../../components/Investor/ChatComponents/ChatInputContainer/ChatAttachments/AttachmentPreview/AttachmentPreview";
@@ -28,7 +28,9 @@ import ChatDropDownMenu from "../ChatDropDownMenu/ChatDropDownMenu";
 // import VideoAttachment from "../../../../components/Investor/ChatComponents/ChatInputContainer/ChatAttachments/VideoAttachment/VideoAttachment";
 // import DocumentAttachment from "../../../../components/Investor/ChatComponents/ChatInputContainer/ChatAttachments/DocumentAttachment/DocumentAttachment";
 import ChatInputContainer from "../../../../components/Investor/ChatComponents/ChatInputContainer/ChatInputContainer";
-import { IoCheckmarkDone } from "react-icons/io5";
+// import { IoCheckmarkDone } from "react-icons/io5";
+import MyMessage from "../../../../components/Investor/ChatComponents/ChatMessages/MyMessage/MyMessage";
+import OtherMessage from "../../../../components/Investor/ChatComponents/ChatMessages/OtherMessage/OtherMessage";
 
 const CommunityDashboard = ({
   setSendMessage,
@@ -234,15 +236,15 @@ const CommunityDashboard = ({
   //   setShowPreview(false);
   // };
 
-  const formatTime = (date) => {
-    const options = {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    };
+  // const formatTime = (date) => {
+  //   const options = {
+  //     hour: "2-digit",
+  //     minute: "2-digit",
+  //     hour12: true,
+  //   };
 
-    return new Intl.DateTimeFormat("en-US", options).format(date);
-  };
+  //   return new Intl.DateTimeFormat("en-US", options).format(date);
+  // };
 
   //
   // const [showAttachDocs, setShowAttachDocs] = useState(false);
@@ -318,201 +320,55 @@ const CommunityDashboard = ({
             <div className="chat_messages">
               {group.messages.map((message, idx) =>
                 message.senderId._id === loggedInUser._id ? (
-                  <section className="my_message_main" key={message._id}>
-                    <div className="my_messages">
-                      <div className="time_name_image">
-                        {!idx && (
-                          <div className="time_name d-flex gap-2 align-items-center me-2 mb-2">
-                            <h6 className="name_title">
-                              {loggedInUser?.firstName} {loggedInUser?.lastName}
-                            </h6>
-                            {/* <h6 className="time">
-                            {formatTime(new Date(message.createdAt))}
-                          </h6> */}
-                            <img
-                              className="image_profile"
-                              src={loggedInUser?.profilePicture}
-                              alt="user profile"
-                            />
-                          </div>
-                        )}
-                      </div>
-                      {message.text !== "" && (
-                        <div
-                          className="mymessage_container"
-                          data-msg-type="text"
-                        >
-                          <ChatDropDownMenu
-                            onClicks={handleSetDeletePopup}
-                            idBack={handleIdBack}
-                            id={message?._id}
-                          />
-                          <Linkify>
-                            <p className="text-break text-start m-0 mb-1 me-3">
-                              {message.text}
-                            </p>
-                          </Linkify>
-                          <span className="msg-time">
-                            <IoCheckmarkDone
-                              color={message?.read ? "#009b00" : "white"}
-                              size={15}
-                            />
-                            {formatTime(new Date(message.createdAt))}
-                          </span>
-                        </div>
-                      )}
-                      {message?.image && (
-                        <div
-                          className="mymessage_container"
-                          data-msg-type="media"
-                        >
-                          <ChatDropDownMenu
-                            onClicks={handleSetDeletePopup}
-                            idBack={handleIdBack}
-                            id={message?._id}
-                          />
-                          <img
-                            src={message.image}
-                            className="image-message"
-                            alt="message media"
-                          />
-                          <span className="msg-time">
-                            <IoCheckmarkDone
-                              color={message?.read ? "#009b00" : "white"}
-                              size={15}
-                            />
-                            {formatTime(new Date(message.createdAt))}
-                          </span>
-                        </div>
-                      )}
-                      {message?.video && (
-                        <div
-                          className="mymessage_container"
-                          data-msg-type="media"
-                        >
-                          <ChatDropDownMenu
-                            onClicks={handleSetDeletePopup}
-                            idBack={handleIdBack}
-                            id={message?._id}
-                          />
-                          <video controls className="video-message">
-                            <source src={message?.video} type={"video/mp4"} />
-                            Your browser does not support the video tag.
-                          </video>
-                          <span className="msg-time">
-                            <IoCheckmarkDone
-                              color={message?.read ? "#009b00" : "white"}
-                              size={15}
-                            />
-                            {formatTime(new Date(message.createdAt))}
-                          </span>
-                        </div>
-                      )}
-                      {message.documentUrl && (
-                        <div
-                          className="mymessage_container"
-                          data-msg-type="doc"
-                        >
-                          <ChatDropDownMenu
-                            onClicks={handleSetDeletePopup}
-                            idBack={handleIdBack}
-                            id={message?._id}
-                          />
-                          <a
-                            href={message.documentUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <img
-                              className="p-1 rounded-circle"
-                              src={documentIcon}
-                              alt="upload document"
-                            />
-                            <p>{message.documentName}</p>
-                          </a>
-                          <span className="msg-time">
-                            <IoCheckmarkDone
-                              color={message?.read ? "#009b00" : "white"}
-                              size={15}
-                            />
-                            {formatTime(new Date(message.createdAt))}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </section>
+                  <MyMessage
+                    handleIdBack={handleIdBack}
+                    handleSetDeletePopup={handleSetDeletePopup}
+                    message={message}
+                    idx={idx}
+                    key={message._id}
+                  />
                 ) : (
-                  <section className="other_sender" key={message._id}>
-                    {!idx && (
-                      <div className="time_name d-flex align-items-center gap-2 mb-2">
-                        <img
-                          className="image_profile"
-                          src={message.senderId?.profilePicture}
-                          alt=""
-                        />
-                        <h6 className="name_title">
-                          {message.senderId?.firstName}{" "}
-                          {message.senderId?.lastName}{" "}
-                        </h6>
-                        {/* <h6 className="time">
-                          {formatTime(new Date(message.createdAt))}
-                        </h6> */}
-                      </div>
-                    )}
-                    <div className="other_messages">
-                      {message.text !== "" && (
-                        <div className="message_container" data-msg-type="text">
-                          <Linkify>
-                            <p className="text-break">{message.text}</p>
-                          </Linkify>
-                        </div>
-                      )}
-                      {message?.image && (
-                        <div
-                          className="message_container"
-                          data-msg-type="media"
-                        >
-                          <img
-                            src={message.image}
-                            className="image-message"
-                            alt="message media"
-                          />
-                        </div>
-                      )}
-                      {message?.video && (
-                        <div
-                          className="message_container"
-                          data-msg-type="media"
-                        >
-                          <video controls className="video-message">
-                            <source src={message?.video} type={"video/mp4"} />
-                            Your browser does not support the video tag.
-                          </video>
-                        </div>
-                      )}
-                      {message.documentUrl && (
-                        <div className="message_container" data-msg-type="doc">
-                          <a
-                            href={message.documentUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <img
-                              className="p-1 rounded-circle"
-                              src={documentIcon}
-                              alt="upload document"
-                            />
-                            <p>{message.documentName}</p>
-                          </a>
-                        </div>
-                      )}
-                    </div>
-                  </section>
+                  <OtherMessage message={message} idx={idx} key={message._id} />
                 )
               )}
             </div>
           </div>
         ))}
+        {/* Delete Popup */}
+        {deletePopup ? (
+          <ChatDeletePopup>
+            <div className="d-flex flex-column  justify-content-center ">
+              <h1>Delete permanently</h1>
+              <hr className="p-0 m-1 " />
+              <p>This message will be deleted permanently.</p>
+              <div className="d-flex flex-column flex-md-row mx-auto">
+                <button
+                  className="popup-close-button bg-secondary"
+                  onClick={() => setDeletePopup(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="popup-ok_button"
+                  onClick={() => handleDelete()}
+                >
+                  Confirm
+                </button>
+              </div>
+            </div>
+          </ChatDeletePopup>
+        ) : (
+          ""
+        )}
+
+        {showFeaturedPostSuccess ? (
+          <AfterSuccessPopUp
+            onClose={() => setShowFeaturedPostSuccess(false)}
+            successText="The message has been deleted successfully."
+          />
+        ) : (
+          ""
+        )}
       </div>
 
       {/* Chat Input section */}
@@ -521,42 +377,6 @@ const CommunityDashboard = ({
         setIsSent={setIsSent}
         setSendMessage={setSendMessage}
       />
-
-      {/* Delete Popup */}
-      {deletePopup ? (
-        <ChatDeletePopup>
-          <div className="d-flex flex-column  justify-content-center ">
-            <h1>Delete permanently</h1>
-            <hr className="p-0 m-1 " />
-            <p>This message will be deleted permanently.</p>
-            <div className="d-flex flex-column flex-md-row mx-auto">
-              <button
-                className="popup-close-button bg-secondary"
-                onClick={() => setDeletePopup(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="popup-ok_button"
-                onClick={() => handleDelete()}
-              >
-                Confirm
-              </button>
-            </div>
-          </div>
-        </ChatDeletePopup>
-      ) : (
-        ""
-      )}
-
-      {showFeaturedPostSuccess ? (
-        <AfterSuccessPopUp
-          onClose={() => setShowFeaturedPostSuccess(false)}
-          successText="The message has been deleted successfully."
-        />
-      ) : (
-        ""
-      )}
     </div>
   );
 };
