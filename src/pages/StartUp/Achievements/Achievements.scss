@@ -48,24 +48,18 @@
       margin: -15px 0 0 0;
       padding: 0 10px;
     }
+    h6 {
+      margin: 0;
+    }
+    p {
+      font-size: 11px;
+    }
   }
 
   .achievements_users {
     .single-card {
       h5 {
         color: #fd5901;
-      }
-    }
-  }
-  .Achievements {
-    .single-card {
-      .text {
-        h6 {
-          margin: 0;
-        }
-        p {
-          font-size: 10px;
-        }
       }
     }
   }
