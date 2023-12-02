@@ -11,16 +11,19 @@ export const adminSlice = createSlice({
   reducers: {
     loginSuccess: (state, action) => {
       localStorage.setItem("tchAdmin", JSON.stringify(action.payload));
+      localStorage.setItem("tchAdminToken", action.payload.token);
       state.authAdmin = action.payload;
       state.error = null;
     },
     loginFailure: (state, action) => {
       localStorage.removeItem("tchAdmin");
+      localStorage.removeItem("tchAdminToken");
       state.authAdmin = null;
       state.error = action.payload;
     },
     logout: (state) => {
       localStorage.removeItem("tchAdmin");
+      localStorage.removeItem("tchAdminToken");
       state.authAdmin = null;
       state.error = null;
     },

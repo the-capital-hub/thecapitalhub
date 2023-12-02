@@ -10,6 +10,7 @@ const ProtectedLayout = () => {
   // States
   const authAdmin = useSelector(selectAuthAdmin);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const pageTitle = useSelector((state) => state.design.pageTitle);
 
   // Hooks
   const { pathname } = useLocation();
@@ -26,6 +27,10 @@ const ProtectedLayout = () => {
     }
   }, [authAdmin, pathname, navigate]);
 
+  useEffect(() => {
+    document.title = `${pageTitle} | The Capital Hub`;
+  }, [pageTitle]);
+
   // JSX
   // Handling loading while authenticating
   if (isAuthenticating) {
@@ -35,6 +40,7 @@ const ProtectedLayout = () => {
   return (
     <div className="admin-protected-layout">
       {/* Navigation Bar */}
+      <h3 className="bg-red rounded p-2">Design Header : {pageTitle}</h3>
       <Outlet />
       {/* Footer */}
     </div>
