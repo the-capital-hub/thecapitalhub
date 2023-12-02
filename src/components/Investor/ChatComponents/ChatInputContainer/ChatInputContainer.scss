@@ -1,6 +1,8 @@
 .chat_input_section {
   // padding-bottom: 20px;
   // position: absolute;
+  // flex-grow: 1;
+  margin-block-start: 1rem;
   bottom: 0px;
   width: 100%;
 
@@ -12,7 +14,7 @@
     border: 1px solid #eaeef2;
     background-color: #eaeef2;
     border-radius: 8px;
-    margin: 5% 2% 0% 2%;
+    // margin: 5% 2% 0% 2%;
 
     .image-preview,
     .video-preview,

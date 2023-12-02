@@ -403,9 +403,10 @@ const InvestorNavbar = (props) => {
                     <img
                       src={NotificationIcon}
                       alt="notification"
-                      onClick={() =>
-                        setToggleNotificationPopup((prev) => !prev)
-                      }
+                      onClick={() => {
+                        setToggleNotificationPopup((prev) => !prev);
+                        dispatch(setUnreadNotifications(0));
+                      }}
                     />
                     {!toggleNotificationPopup && unreadNotifications > 0 && (
                       <div className="notification-count">

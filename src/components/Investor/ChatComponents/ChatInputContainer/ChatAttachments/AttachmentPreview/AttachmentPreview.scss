@@ -1,14 +1,12 @@
 // Offcanvas css
 .offcanvas.attachment-preview {
-  --bs-offcanvas-height: 60dvh;
-
   .image-preview,
   .video-preview {
     position: relative;
     // display: inline-block;
     margin-right: 10px;
-    width: 200px;
-    height: 150px;
+    max-width: 100dvw;
+    max-height: 80%;
 
     img,
     video {
@@ -55,7 +53,14 @@
     }
 
     .send-btn {
-      flex: 0 0 60px;
+      flex: 0 0 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .send-img {
+        margin-left: -0.25em;
+      }
     }
   }
 }

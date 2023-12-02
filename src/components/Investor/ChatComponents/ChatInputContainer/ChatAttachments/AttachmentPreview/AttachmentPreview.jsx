@@ -26,7 +26,7 @@ export default function AttachmentPreview({
       <Offcanvas
         show={showPreview}
         onHide={handleClose}
-        placement={isMobileView ? "bottom" : "end"}
+        placement={isMobileView ? "end" : "end"}
         className="attachment-preview"
         key={"attachment-offcanvas"}
       >
@@ -37,7 +37,7 @@ export default function AttachmentPreview({
           {children}
 
           {/* Send button */}
-          <div className="d-flex align-items-center gap-2 py-2 send-container">
+          <div className="d-flex align-items-center gap-2 py-2 send-container mt-auto">
             <input
               type="text"
               className="text-input flex-grow-1"
@@ -47,9 +47,9 @@ export default function AttachmentPreview({
               onKeyDown={handleKeyDown}
               value={sendText}
             />
-            <button className="btn p-0 send-btn">
+            <button className="btn border-start border-2 p-0 send-btn">
               <img
-                className="border-start border-2"
+                className="send-img "
                 src={SendIcon}
                 alt="Send"
                 width={40}

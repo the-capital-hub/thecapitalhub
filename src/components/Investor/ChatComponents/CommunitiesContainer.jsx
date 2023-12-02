@@ -80,7 +80,7 @@ export default function CommunitiesContainer({
 
         {/* Render communities list */}
         <div className="my__communities d-flex flex-column">
-          <h5 className="px-3 m-0 py-3">My Communities</h5>
+          {/* <h5 className="px-3 m-0 py-3">My Communities</h5> */}
           {getCommunity?.data?.map((community, index) => {
             return (
               <CommunityCard

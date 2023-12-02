@@ -1,29 +1,33 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./ChatDashboard.scss";
-import sendIcon from "../../../../Images/Send.svg";
+// import sendIcon from "../../../../Images/Send.svg";
 import { useSelector } from "react-redux";
 import {
   getMessageByChatId,
-  getUserAndStartUpByUserIdAPI,
-  addMessage,
+  // getUserAndStartUpByUserIdAPI,
+  // addMessage,
   markMessagesAsRead,
-  getStartupByFounderId,
+  // getStartupByFounderId,
   deleteMessage,
 } from "../../../../Service/user";
 
-import attachmentGreyIcon from "../../../../Images/Chat/attachtment-grey.svg";
-import attachmentOrangeIcon from "../../../../Images/Chat/attachment-orange.svg";
-import imageIcon from "../../../../Images/Chat/image.svg";
-import documentIcon from "../../../../Images/Chat/document.svg";
-import videoIcon from "../../../../Images/Chat/attachVideo.svg";
-import onelinkIcon from "../../../../Images/Chat/Onelink.svg";
-import { getBase64 } from "../../../../utils/getBase64";
-import Linkify from "react-linkify";
+// import attachmentGreyIcon from "../../../../Images/Chat/attachtment-grey.svg";
+// import attachmentOrangeIcon from "../../../../Images/Chat/attachment-orange.svg";
+// import imageIcon from "../../../../Images/Chat/image.svg";
+// import documentIcon from "../../../../Images/Chat/document.svg";
+// import videoIcon from "../../../../Images/Chat/attachVideo.svg";
+// import onelinkIcon from "../../../../Images/Chat/Onelink.svg";
+// import { getBase64 } from "../../../../utils/getBase64";
+// import Linkify from "react-linkify";
 import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import ChatDeletePopup from "../ChatDeletePopup/ChatDeletePopup";
-import ChatDropDownMenu from "../ChatDropDownMenu/ChatDropDownMenu";
-import { s3 } from "../../../../Service/awsConfig";
-import { IoCheckmarkDone } from "react-icons/io5";
+// import ChatDropDownMenu from "../ChatDropDownMenu/ChatDropDownMenu";
+// import { s3 } from "../../../../Service/awsConfig";
+// import { IoCheckmarkDone } from "react-icons/io5";
+import ChatInputContainer from "../../../../components/Investor/ChatComponents/ChatInputContainer/ChatInputContainer";
+import MyMessage from "../../../../components/Investor/ChatComponents/ChatMessages/MyMessage/MyMessage";
+import OtherMessage from "../../../../components/Investor/ChatComponents/ChatMessages/OtherMessage/OtherMessage";
+import { formatMessages } from "../../../../utils/ChatsHelpers";
 
 const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
   // Fetch global state
@@ -32,23 +36,23 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
   const userId = useSelector((state) => state.chat.userId);
 
   const [messages, setMessages] = useState([]);
-  const [user, setUser] = useState(null);
-  const [sendText, setSendText] = useState("");
+  // const [user, setUser] = useState(null);
+  // const [sendText, setSendText] = useState("");
   const chatMessagesContainerRef = useRef(null);
   const [isSent, setIsSent] = useState(false);
 
   const [showFeaturedPostSuccess, setShowFeaturedPostSuccess] = useState(false);
   const [deletePopup, setDeletePopup] = useState(false);
   const [msgId, setMsgId] = useState("");
-  const [messageMenu, setMessageMenu] = useState(true);
+  // const [messageMenu, setMessageMenu] = useState(true);
 
-  const handleMouseEnter = () => {
-    setMessageMenu(false);
-  };
+  // const handleMouseEnter = () => {
+  //   setMessageMenu(false);
+  // };
 
-  const handleMouseLeave = () => {
-    setMessageMenu(true);
-  };
+  // const handleMouseLeave = () => {
+  //   setMessageMenu(true);
+  // };
 
   const handleSetDeletePopup = () => {
     setDeletePopup(true);
@@ -100,203 +104,204 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
       });
   }, [chatId, cleared, isSent, showFeaturedPostSuccess]);
 
-  useEffect(() => {
-    getUserAndStartUpByUserIdAPI(userId)
-      .then((res) => {
-        setUser(res.data);
-      })
-      .catch((error) => {
-        console.error("Error-->", error);
-      });
-  }, [userId]);
+  // useEffect(() => {
+  //   getUserAndStartUpByUserIdAPI(userId)
+  //     .then((res) => {
+  //       setUser(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error-->", error);
+  //     });
+  // }, [userId]);
 
-  const groupMessagesByDate = (messages) => {
-    const groupedMessages = [];
-    let currentDate = null;
+  // const groupMessagesByDate = (messages) => {
+  //   const groupedMessages = [];
+  //   let currentDate = null;
 
-    for (const message of messages) {
-      const messageDate = new Date(message.createdAt);
-      const today = new Date();
+  //   for (const message of messages) {
+  //     const messageDate = new Date(message.createdAt);
+  //     const today = new Date();
 
-      if (
-        currentDate &&
-        currentDate.getDate() === messageDate.getDate() &&
-        currentDate.getMonth() === messageDate.getMonth() &&
-        currentDate.getFullYear() === messageDate.getFullYear()
-      ) {
-        groupedMessages[groupedMessages.length - 1].messages.push(message);
-      } else if (
-        currentDate &&
-        currentDate.getDate() - messageDate.getDate() === 1 &&
-        currentDate.getMonth() === messageDate.getMonth() &&
-        currentDate.getFullYear() === messageDate.getFullYear()
-      ) {
-        currentDate = messageDate;
-        groupedMessages.push({ date: "Yesterday", messages: [message] });
-      } else {
-        currentDate = messageDate;
-        const formattedDate = `${messageDate.getDate()}-${
-          messageDate.getMonth() + 1
-        }-${messageDate.getFullYear()}`;
-        groupedMessages.push({
-          date:
-            today.getDate() === messageDate.getDate() ? "Today" : formattedDate,
-          messages: [message],
-        });
-      }
-    }
+  //     if (
+  //       currentDate &&
+  //       currentDate.getDate() === messageDate.getDate() &&
+  //       currentDate.getMonth() === messageDate.getMonth() &&
+  //       currentDate.getFullYear() === messageDate.getFullYear()
+  //     ) {
+  //       groupedMessages[groupedMessages.length - 1].messages.push(message);
+  //     } else if (
+  //       currentDate &&
+  //       currentDate.getDate() - messageDate.getDate() === 1 &&
+  //       currentDate.getMonth() === messageDate.getMonth() &&
+  //       currentDate.getFullYear() === messageDate.getFullYear()
+  //     ) {
+  //       currentDate = messageDate;
+  //       groupedMessages.push({ date: "Yesterday", messages: [message] });
+  //     } else {
+  //       currentDate = messageDate;
+  //       const formattedDate = `${messageDate.getDate()}-${
+  //         messageDate.getMonth() + 1
+  //       }-${messageDate.getFullYear()}`;
+  //       groupedMessages.push({
+  //         date:
+  //           today.getDate() === messageDate.getDate() ? "Today" : formattedDate,
+  //         messages: [message],
+  //       });
+  //     }
+  //   }
 
-    return groupedMessages;
-  };
+  //   return groupedMessages;
+  // };
 
-  const groupedMessages = groupMessagesByDate(messages);
+  // const groupedMessages = groupMessagesByDate(messages);
+  const formattedMessages = formatMessages(messages, loggedInUser._id);
 
-  const handleSend = async () => {
-    if (
-      sendText?.trim() === "" &&
-      selectedImage === null &&
-      selectedVideo === null &&
-      selectedDocument === null
-    )
-      return;
-    const message = {
-      senderId: loggedInUser._id,
-      text: sendText,
-      chatId: chatId,
-    };
+  // const handleSend = async () => {
+  //   if (
+  //     sendText?.trim() === "" &&
+  //     selectedImage === null &&
+  //     selectedVideo === null &&
+  //     selectedDocument === null
+  //   )
+  //     return;
+  //   const message = {
+  //     senderId: loggedInUser._id,
+  //     text: sendText,
+  //     chatId: chatId,
+  //   };
 
-    if (selectedImage) {
-      const image = await getBase64(selectedImage);
-      message.image = image;
-    }
-    if (selectedVideo) {
-      const video = await getBase64(selectedVideo);
-      message.video = video;
-    }
-    if (selectedDocument) {
-      const timestamp = Date.now();
-      const fileName = `${timestamp}_${selectedDocument.name}`;
-      const params = {
-        Bucket: "thecapitalhubdocuments",
-        Key: `documents/${fileName}`,
-        Body: selectedDocument,
-      };
-      try {
-        const res = await s3.upload(params).promise();
-        message.documentName = selectedDocument.name;
-        message.documentUrl = res.Location;
-      } catch (error) {
-        console.error("Error uploading file to S3:", error);
-      }
-    }
+  //   if (selectedImage) {
+  //     const image = await getBase64(selectedImage);
+  //     message.image = image;
+  //   }
+  //   if (selectedVideo) {
+  //     const video = await getBase64(selectedVideo);
+  //     message.video = video;
+  //   }
+  //   if (selectedDocument) {
+  //     const timestamp = Date.now();
+  //     const fileName = `${timestamp}_${selectedDocument.name}`;
+  //     const params = {
+  //       Bucket: "thecapitalhubdocuments",
+  //       Key: `documents/${fileName}`,
+  //       Body: selectedDocument,
+  //     };
+  //     try {
+  //       const res = await s3.upload(params).promise();
+  //       message.documentName = selectedDocument.name;
+  //       message.documentUrl = res.Location;
+  //     } catch (error) {
+  //       console.error("Error uploading file to S3:", error);
+  //     }
+  //   }
 
-    addMessage(message)
-      .then(({ data }) => {
-        // setMessages([...messages, data]);
-        setIsSent(!isSent);
-      })
-      .catch((error) => {
-        console.error("Error-->", error);
-      });
-    message.senderId = {
-      _id: loggedInUser._id,
-      firstName: loggedInUser.fileName,
-      lastName: loggedInUser.lastName,
-      profilePicture: loggedInUser.profilePicture,
-    };
-    const recieverId = [userId];
-    // recieverId = [{
-    //   _id: user?._id,
-    //   firstName: user.firstName,
-    //   lastName: user.lastName,
-    //   profilePicture: user.profilePicture
-    // }];
-    const createdAt = new Date().toISOString();
-    setSendMessage({ ...message, recieverId, createdAt });
-    setSendText("");
-    setSelectedImage(null);
-    setSelectedVideo(null);
-    setSelectedDocument(null);
-    setShowAttachDocs(false);
-  };
+  //   addMessage(message)
+  //     .then(({ data }) => {
+  //       // setMessages([...messages, data]);
+  //       setIsSent(!isSent);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error-->", error);
+  //     });
+  //   message.senderId = {
+  //     _id: loggedInUser._id,
+  //     firstName: loggedInUser.fileName,
+  //     lastName: loggedInUser.lastName,
+  //     profilePicture: loggedInUser.profilePicture,
+  //   };
+  //   const recieverId = [userId];
+  //   // recieverId = [{
+  //   //   _id: user?._id,
+  //   //   firstName: user.firstName,
+  //   //   lastName: user.lastName,
+  //   //   profilePicture: user.profilePicture
+  //   // }];
+  //   const createdAt = new Date().toISOString();
+  //   setSendMessage({ ...message, recieverId, createdAt });
+  //   setSendText("");
+  //   setSelectedImage(null);
+  //   setSelectedVideo(null);
+  //   setSelectedDocument(null);
+  //   setShowAttachDocs(false);
+  // };
 
-  const formatTime = (date) => {
-    const options = {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    };
+  // const formatTime = (date) => {
+  //   const options = {
+  //     hour: "2-digit",
+  //     minute: "2-digit",
+  //     hour12: true,
+  //   };
 
-    return new Intl.DateTimeFormat("en-US", options).format(date);
-  };
+  //   return new Intl.DateTimeFormat("en-US", options).format(date);
+  // };
 
-  const [showAttachDocs, setShowAttachDocs] = useState(false);
-  const attachDocContainerRef = useRef();
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [selectedVideo, setSelectedVideo] = useState(null);
-  const [selectedDocument, setSelectedDocument] = useState(null);
+  // const [showAttachDocs, setShowAttachDocs] = useState(false);
+  // const attachDocContainerRef = useRef();
+  // const [selectedImage, setSelectedImage] = useState(null);
+  // const [selectedVideo, setSelectedVideo] = useState(null);
+  // const [selectedDocument, setSelectedDocument] = useState(null);
 
-  useEffect(() => {
-    const outsideClickHandler = (event) => {
-      if (
-        attachDocContainerRef.current &&
-        !attachDocContainerRef.current.contains(event.target)
-      ) {
-        setShowAttachDocs(false);
-      }
-    };
+  // useEffect(() => {
+  //   const outsideClickHandler = (event) => {
+  //     if (
+  //       attachDocContainerRef.current &&
+  //       !attachDocContainerRef.current.contains(event.target)
+  //     ) {
+  //       setShowAttachDocs(false);
+  //     }
+  //   };
 
-    document.addEventListener("click", outsideClickHandler);
+  //   document.addEventListener("click", outsideClickHandler);
 
-    return () => {
-      document.removeEventListener("click", outsideClickHandler);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("click", outsideClickHandler);
+  //   };
+  // }, []);
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (event.target.name === "image" && file.type.includes("image")) {
-      setSelectedImage(file);
-    } else if (event.target.name === "video" && file.type.includes("video")) {
-      setSelectedVideo(file);
-    } else if (event.target.name === "document") {
-      setSelectedDocument(file);
-    }
-    setShowAttachDocs(false);
-  };
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   if (event.target.name === "image" && file.type.includes("image")) {
+  //     setSelectedImage(file);
+  //   } else if (event.target.name === "video" && file.type.includes("video")) {
+  //     setSelectedVideo(file);
+  //   } else if (event.target.name === "document") {
+  //     setSelectedDocument(file);
+  //   }
+  //   setShowAttachDocs(false);
+  // };
 
-  const handleOnelinkClick = () => {
-    getStartupByFounderId(loggedInUser._id)
-      .then(({ data }) => {
-        setSendText(
-          `https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`
-        );
-      })
-      .catch((error) => console.log(error));
-  };
+  // const handleOnelinkClick = () => {
+  //   getStartupByFounderId(loggedInUser._id)
+  //     .then(({ data }) => {
+  //       setSendText(
+  //         `https://thecapitalhub.in/onelink/${data.oneLink}/${loggedInUser.oneLinkId}`
+  //       );
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
 
-  const removeSelectedImage = () => {
-    setSelectedImage(null);
-  };
+  // const removeSelectedImage = () => {
+  //   setSelectedImage(null);
+  // };
 
-  const removeSelectedVideo = () => {
-    setSelectedVideo(null);
-  };
+  // const removeSelectedVideo = () => {
+  //   setSelectedVideo(null);
+  // };
 
-  const removeSelectedDocument = () => {
-    setSelectedDocument(null);
-  };
+  // const removeSelectedDocument = () => {
+  //   setSelectedDocument(null);
+  // };
 
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      handleSend();
-    }
-  };
+  // const handleKeyDown = (event) => {
+  //   if (event.key === "Enter") {
+  //     handleSend();
+  //   }
+  // };
 
   return (
     <div className="chat_dashboard_container">
       <div className="chat_messages_group" ref={chatMessagesContainerRef}>
-        {groupedMessages.map((group) => (
+        {formattedMessages.map((group) => (
           <div key={group.date}>
             <h6 className="date_header px-3 py-1 bg-light rounded shadow-sm">
               {group.date}
@@ -305,160 +310,170 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
               {group.messages.map((message, idx) =>
                 // My messages
                 message.senderId._id === loggedInUser._id ? (
-                  <section
-                    className="my_message_main text-break"
-                    key={message._id}
-                  >
-                    <div className="my_messages">
-                      <div className="time_name_image">
-                        {!idx && (
-                          <div className="time_name d-flex gap-2 align-items-center me-2 mb-2">
-                            <h6 className="name_title">
-                              {loggedInUser?.firstName} {loggedInUser?.lastName}
-                            </h6>
+                  // <section
+                  //   className="my_message_main text-break"
+                  //   key={message._id}
+                  // >
+                  //   <div className="my_messages">
+                  //     <div className="time_name_image">
+                  //       {!idx && (
+                  //         <div className="time_name d-flex gap-2 align-items-center me-2 mb-2">
+                  //           <h6 className="name_title">
+                  //             {loggedInUser?.firstName} {loggedInUser?.lastName}
+                  //           </h6>
 
-                            <img
-                              className="image_profile"
-                              src={loggedInUser?.profilePicture}
-                              alt=""
-                            />
-                          </div>
-                        )}
-                      </div>
-                      <div
-                        className="mymessage_container text-break text-start position-relative "
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                      >
-                        {message.text !== "" && (
-                          <>
-                            <ChatDropDownMenu
-                              onClicks={handleSetDeletePopup}
-                              idBack={handleIdBack}
-                              id={message?._id}
-                              showMenu={messageMenu}
-                            />
-                            <Linkify>
-                              <p className="text-break text-start m-0 me-3">
-                                {message.text}
-                              </p>
-                            </Linkify>
-                          </>
-                        )}
-                        {message?.documentUrl && (
-                          <>
-                            <a
-                              href={message.documentUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-break"
-                            >
-                              <img
-                                className="p-1 rounded-circle"
-                                src={documentIcon}
-                                alt="upload document"
-                              />
-                              <p className="text-break">
-                                {message.documentName}
-                              </p>
-                            </a>
-                          </>
-                        )}
-                        {message?.image && (
-                          <img
-                            src={message.image}
-                            className="image-message"
-                            alt="media message"
-                          />
-                        )}
-                        {message?.video && (
-                          <video controls className="video-message">
-                            <source src={message?.video} type={"video/mp4"} />
-                            Your browser does not support the video tag.
-                          </video>
-                        )}
-                        <span className="msg-time">
-                          <IoCheckmarkDone
-                            color={message?.read ? "#009b00" : "white"}
-                            size={15}
-                          />
-                          {formatTime(new Date(message.createdAt))}
-                        </span>
-                      </div>
-                    </div>
-                  </section>
+                  //           <img
+                  //             className="image_profile"
+                  //             src={loggedInUser?.profilePicture}
+                  //             alt=""
+                  //           />
+                  //         </div>
+                  //       )}
+                  //     </div>
+                  //     <div
+                  //       className="mymessage_container text-break text-start position-relative "
+                  //       onMouseEnter={handleMouseEnter}
+                  //       onMouseLeave={handleMouseLeave}
+                  //     >
+                  //       {message.text !== "" && (
+                  //         <>
+                  //           <ChatDropDownMenu
+                  //             onClicks={handleSetDeletePopup}
+                  //             idBack={handleIdBack}
+                  //             id={message?._id}
+                  //             showMenu={messageMenu}
+                  //           />
+                  //           <Linkify>
+                  //             <p className="text-break text-start m-0 me-3">
+                  //               {message.text}
+                  //             </p>
+                  //           </Linkify>
+                  //         </>
+                  //       )}
+                  //       {message?.documentUrl && (
+                  //         <>
+                  //           <a
+                  //             href={message.documentUrl}
+                  //             target="_blank"
+                  //             rel="noopener noreferrer"
+                  //             className="text-break"
+                  //           >
+                  //             <img
+                  //               className="p-1 rounded-circle"
+                  //               src={documentIcon}
+                  //               alt="upload document"
+                  //             />
+                  //             <p className="text-break">
+                  //               {message.documentName}
+                  //             </p>
+                  //           </a>
+                  //         </>
+                  //       )}
+                  //       {message?.image && (
+                  //         <img
+                  //           src={message.image}
+                  //           className="image-message"
+                  //           alt="media message"
+                  //         />
+                  //       )}
+                  //       {message?.video && (
+                  //         <video controls className="video-message">
+                  //           <source src={message?.video} type={"video/mp4"} />
+                  //           Your browser does not support the video tag.
+                  //         </video>
+                  //       )}
+                  //       <span className="msg-time">
+                  //         <IoCheckmarkDone
+                  //           color={message?.read ? "#009b00" : "white"}
+                  //           size={15}
+                  //         />
+                  //         {formatTime(new Date(message.createdAt))}
+                  //       </span>
+                  //     </div>
+                  //   </div>
+                  // </section>
+                  <MyMessage
+                    handleIdBack={handleIdBack}
+                    handleSetDeletePopup={handleSetDeletePopup}
+                    idx={idx}
+                    message={message}
+                    key={message._id}
+                  />
                 ) : (
                   // Others messages
-                  <section
-                    className="other_sender text-break d-flex flex-column"
+                  // <section
+                  //   className="other_sender text-break d-flex flex-column"
+                  //   key={message._id}
+                  // >
+                  //   {!idx && (
+                  //     <div className="d-flex align-items-center gap-2 mb-2">
+                  //       <img
+                  //         className="image_profile"
+                  //         src={user?.profilePicture}
+                  //         alt=""
+                  //       />
+                  //       <span className="name_title">
+                  //         {user?.firstName} {user?.lastName}
+                  //       </span>
+                  //     </div>
+                  //   )}
+                  //   <div className="other_messages">
+                  //     <div className="message_container text-break">
+                  //       {message.text !== "" && (
+                  //         <Linkify>
+                  //           <p className="text-break w-100 text-start m-0">
+                  //             {message.text}
+                  //           </p>
+                  //         </Linkify>
+                  //       )}
+                  //       {message?.image && (
+                  //         <img
+                  //           src={message.image}
+                  //           className="image-message"
+                  //           alt="media message"
+                  //         />
+                  //       )}
+                  //       {message?.video && (
+                  //         <video controls className="video-message">
+                  //           <source src={message?.video} type={"video/mp4"} />
+                  //           Your browser does not support the video tag.
+                  //         </video>
+                  //       )}
+                  //       {message.documentUrl && (
+                  //         <a
+                  //           href={message.documentUrl}
+                  //           target="_blank"
+                  //           rel="noopener noreferrer"
+                  //           className="text-break"
+                  //         >
+                  //           <img
+                  //             className="p-1 rounded-circle"
+                  //             src={documentIcon}
+                  //             alt="upload document"
+                  //           />
+                  //           <p className="text-break">{message.documentName}</p>
+                  //         </a>
+                  //       )}
+                  //       <span className="msg-time">
+                  //         {formatTime(new Date(message.createdAt))}
+                  //       </span>
+                  //     </div>
+                  //   </div>
+                  // </section>
+                  <OtherMessage
+                    message={message}
+                    idx={idx}
                     key={message._id}
-                  >
-                    {!idx && (
-                      <div className="d-flex align-items-center gap-2 mb-2">
-                        <img
-                          className="image_profile"
-                          src={user?.profilePicture}
-                          alt=""
-                        />
-                        <span className="name_title">
-                          {user?.firstName} {user?.lastName}
-                        </span>
-                      </div>
-                    )}
-                    <div className="other_messages">
-                      <div className="message_container text-break">
-                        {message.text !== "" && (
-                          <Linkify>
-                            <p className="text-break w-100 text-start m-0">
-                              {message.text}
-                            </p>
-                          </Linkify>
-                        )}
-                        {message?.image && (
-                          <img
-                            src={message.image}
-                            className="image-message"
-                            alt="media message"
-                          />
-                        )}
-                        {message?.video && (
-                          <video controls className="video-message">
-                            <source src={message?.video} type={"video/mp4"} />
-                            Your browser does not support the video tag.
-                          </video>
-                        )}
-                        {message.documentUrl && (
-                          <a
-                            href={message.documentUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-break"
-                          >
-                            <img
-                              className="p-1 rounded-circle"
-                              src={documentIcon}
-                              alt="upload document"
-                            />
-                            <p className="text-break">{message.documentName}</p>
-                          </a>
-                        )}
-                        <span className="msg-time">
-                          {/* <IoCheckmarkDone
-                            color={message?.read ? "#009b00" : "white"}
-                            size={15}
-                          /> */}
-                          {formatTime(new Date(message.createdAt))}
-                        </span>
-                      </div>
-                    </div>
-                  </section>
+                    isPersonalChat={true}
+                  />
                 )
               )}
             </div>
           </div>
         ))}
       </div>
-      <section className="chat_input_section">
+
+      {/* <section className="chat_input_section">
         <div className="chat_input_container">
           {selectedImage && (
             <div className="image-preview">
@@ -607,7 +622,13 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
             </button>
           </div>
         </div>
-      </section>
+      </section> */}
+      <ChatInputContainer
+        isSent={isSent}
+        setIsSent={setIsSent}
+        setSendMessage={setSendMessage}
+      />
+
       {deletePopup ? (
         <ChatDeletePopup>
           <div className="d-flex flex-column  justify-content-center ">
