@@ -1,3 +1,4 @@
+// Group messages by date
 export const groupMessagesByDate = (messages) => {
   const groupedMessages = [];
   let currentDate = null;
@@ -37,6 +38,7 @@ export const groupMessagesByDate = (messages) => {
   return groupedMessages;
 };
 
+// Add show name key value.
 export function formatMessages(messages, loggedInUserId) {
   let copy = groupMessagesByDate(messages);
 
@@ -62,3 +64,14 @@ export function formatMessages(messages, loggedInUserId) {
 
   return formattedMessages;
 }
+
+// Format time
+export const formatChatTime = (date) => {
+  const options = {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  };
+
+  return new Intl.DateTimeFormat("en-US", options).format(date);
+};

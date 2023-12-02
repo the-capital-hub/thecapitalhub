@@ -64,12 +64,12 @@ const CompanyDetailsCard = ({
     <>
       <div className={`${className} company_details_container `}>
         <div
-          className={`px-2 px-md-4 py-4 company_details box ${isOnelink ? "border" : ""
-            } `}
+          className={`px-2 px-md-4 py-4 company_details box ${
+            isOnelink ? "border" : ""
+          } `}
         >
           {/* Company details header */}
-
-          <div className="image_name_section d-flex flex-column flex-md-row align-items-start align-items-md-center">
+          <div className="image_name_section d-flex flex-column flex-md-row align-items-start align-items-md-center px-2 px-md-0">
             <span className="company_details_logo_container d-none d-md-block">
               <img src={onePager.logo || LogoX} alt="profileimage" />
             </span>
@@ -109,9 +109,11 @@ const CompanyDetailsCard = ({
               )}
             </div>
 
-            <div className="left_profile_text flex_content ms-md-0 ms-2">
-              <h2 className="typography m-2">
-                {onePager.company || userDetails?.investor?.companyName || "No company found"}
+            <div className="left_profile_text flex_content">
+              <h2 className="typography m-2 ms-0">
+                {onePager.company ||
+                  userDetails?.investor?.companyName ||
+                  "No company found"}
               </h2>
               {/* <span className="small_typo m-2">
                       {onePager.description}

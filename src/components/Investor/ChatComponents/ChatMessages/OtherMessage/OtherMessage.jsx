@@ -1,19 +1,9 @@
 import Linkify from "react-linkify";
 import documentIcon from "../../../../../Images/Chat/document.svg";
 import "./OtherMessage.scss";
+import { formatChatTime } from "../../../../../utils/ChatsHelpers";
 
 export default function OtherMessage({ message, idx }) {
-  // Format time
-  const formatTime = (date) => {
-    const options = {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-    };
-
-    return new Intl.DateTimeFormat("en-US", options).format(date);
-  };
-
   return (
     <section className="other_sender">
       {message?.showName && (
@@ -70,7 +60,7 @@ export default function OtherMessage({ message, idx }) {
           )}
           {/* message time */}
           <span className="msg-time">
-            {formatTime(new Date(message.createdAt))}
+            {formatChatTime(new Date(message.createdAt))}
           </span>
         </div>
 

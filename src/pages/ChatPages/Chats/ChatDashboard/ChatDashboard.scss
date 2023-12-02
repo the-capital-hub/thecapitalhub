@@ -1,6 +1,6 @@
 .chat_dashboard_container {
   // 70px is height of chat navbar and 85px is (height of mobileheader + margin-bottom)
-  max-height: calc(100% - 70px - 85px);
+  max-height: calc(100% - 80px - 85px);
   height: 100%;
   border-radius: var(--border-radius);
   border: 1px solid #cfcfcf;
@@ -19,7 +19,7 @@
 
   @media (min-width: 821px) {
     // 85px is removed because mobileheader is not rendered beyond this height
-    max-height: calc(100% - 70px);
+    max-height: calc(100% - 80px);
   }
 
   .name_title {
