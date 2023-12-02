@@ -9,6 +9,9 @@ import bronze from "../../../Images/Investor/Achievements/bronze.png";
 import rectangle from "../../../Images/Investor/Achievements/Rectangle.png";
 import { getUserAchievements } from "../../../Service/user";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
+import { useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 function Achievements() {
   const [completedAchievements, setCompletedAchievements] = useState([]);
@@ -20,7 +23,7 @@ function Achievements() {
   const [activeMedal, setActiveMedal] = useState("gold");
   const [filteredAchievements, setFilteredAchievements] = useState([]);
 
-  const getAchievements = async () => {
+  const getAchievements = useCallback(async () => {
     try {
       setLoading(true);
       const response = await getUserAchievements();
@@ -46,10 +49,16 @@ function Achievements() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getAchievements();
+
+    // Update title
+    document.title = "Achievements | The Capital Hub";
+    dispatch(setPageTitle("Achievements"));
   }, []);
 
   const handleMedalClick = (medalType) => {
@@ -109,23 +118,23 @@ function Achievements() {
           </Nav.Item>
         ))}
       </Nav>
-      <div className="Achievements d-flex flex-md-row gap-4 mx-auto">
+      <div className="Achievements">
         {loading ? (
           <div className="container p-5 text-center my-5 bg-white rounded-5 ">
             <SpinnerBS />
           </div>
         ) : filteredAchievements?.length ? (
-          <section className="row m-0 row-cols-auto justify-content-around">
+          <section className="row m-0 row-cols-2 row-cols-md-3 row-cols-lg-5 justify-content-around">
             {filteredAchievements.map((item, index) => (
               <div className="single-card col" key={index}>
                 <img src={badgeImageMap[item.badge]} alt="achievement" />
                 <div className="image_text">
-                  <img src={rectangle} alt="rectangle" />
+                  <img src={rectangle} alt="rectangle" className="w-100" />
                   <div className="text py-2 w-75">
                     <h6>{item.title}</h6>
-                    <p className="m-0">{item.description}</p>
                   </div>
                 </div>
+                <p className="description fs-xs">{item.description}</p>
               </div>
             ))}
           </section>
