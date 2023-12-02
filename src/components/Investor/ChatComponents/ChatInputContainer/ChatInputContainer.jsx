@@ -35,6 +35,7 @@ export default function ChatInputContainer({
   const userOneLink = useSelector(selectUserOneLink);
   const userOneLinkId = useSelector(selectUserOneLinkId);
   const chatId = useSelector((state) => state.chat.chatId);
+  const userId = useSelector((state) => state.chat.userId);
   const isCommunitySelected = useSelector(
     (state) => state.chat.isCommunitySelected
   );
@@ -116,8 +117,18 @@ export default function ChatInputContainer({
       lastName: userLastName,
       profilePicture: userProfilePicture,
     };
-    let recieverId = community.members;
-    recieverId = recieverId.filter((member) => member !== loggedInUserId);
+
+    // let recieverId = community.members;
+    // recieverId = recieverId.filter((member) => member !== loggedInUserId);
+
+    let recieverId;
+    if (isCommunitySelected) {
+      recieverId = community.members.filter(
+        (member) => member !== loggedInUserId
+      );
+    } else {
+      recieverId = [userId];
+    }
     const createdAt = new Date().toISOString();
     setSendMessage({ ...message, recieverId, createdAt });
     clearInputs();

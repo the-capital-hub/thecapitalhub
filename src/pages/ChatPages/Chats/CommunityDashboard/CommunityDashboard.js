@@ -31,10 +31,7 @@ import ChatInputContainer from "../../../../components/Investor/ChatComponents/C
 // import { IoCheckmarkDone } from "react-icons/io5";
 import MyMessage from "../../../../components/Investor/ChatComponents/ChatMessages/MyMessage/MyMessage";
 import OtherMessage from "../../../../components/Investor/ChatComponents/ChatMessages/OtherMessage/OtherMessage";
-import {
-  formatMessages,
-  groupMessagesByDate,
-} from "../../../../utils/ChatsHelpers";
+import { formatMessages } from "../../../../utils/ChatsHelpers";
 import { selectLoggedInUserId } from "../../../../Store/features/user/userSlice";
 
 const CommunityDashboard = ({
