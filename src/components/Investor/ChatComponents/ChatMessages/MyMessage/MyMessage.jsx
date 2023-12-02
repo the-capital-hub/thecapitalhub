@@ -1,8 +1,8 @@
-import { useSelector } from "react-redux";
-import {
-  selectUserName,
-  selectUserProfilePicture,
-} from "../../../../../Store/features/user/userSlice";
+// import { useSelector } from "react-redux";
+// import {
+//   selectUserName,
+//   selectUserProfilePicture,
+// } from "../../../../../Store/features/user/userSlice";
 import ChatDropDownMenu from "../../../../../pages/ChatPages/Chats/ChatDropDownMenu/ChatDropDownMenu";
 import Linkify from "react-linkify";
 import { IoCheckmarkDone } from "react-icons/io5";
@@ -16,19 +16,16 @@ export default function MyMessage({
   handleIdBack,
   handleSetDeletePopup,
 }) {
-  const userName = useSelector(selectUserName);
-  const userProfilePicture = useSelector(selectUserProfilePicture);
+  // const userName = useSelector(selectUserName);
+  // const userProfilePicture = useSelector(selectUserProfilePicture);
 
   return (
     <section className="my_message_main">
       <div className="my_messages">
-        <div className="time_name_image">
+        {/* <div className="time_name_image">
           {!idx && (
             <div className="time_name d-flex gap-2 align-items-center me-2 mb-2">
               <h6 className="name_title">{userName}</h6>
-              {/* <h6 className="time">
-                {formatTime(new Date(message.createdAt))}
-              </h6> */}
               <img
                 className="image_profile"
                 src={userProfilePicture}
@@ -36,7 +33,7 @@ export default function MyMessage({
               />
             </div>
           )}
-        </div>
+        </div> */}
         <div className="mymessage_container">
           <ChatDropDownMenu
             onClicks={handleSetDeletePopup}

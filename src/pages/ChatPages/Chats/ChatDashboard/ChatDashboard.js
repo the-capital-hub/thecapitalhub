@@ -460,7 +460,12 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
                   //     </div>
                   //   </div>
                   // </section>
-                  <OtherMessage message={message} idx={idx} key={message._id} />
+                  <OtherMessage
+                    message={message}
+                    idx={idx}
+                    key={message._id}
+                    isPersonalChat={true}
+                  />
                 )
               )}
             </div>

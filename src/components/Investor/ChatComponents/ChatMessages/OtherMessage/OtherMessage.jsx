@@ -3,10 +3,10 @@ import documentIcon from "../../../../../Images/Chat/document.svg";
 import "./OtherMessage.scss";
 import { formatChatTime } from "../../../../../utils/ChatsHelpers";
 
-export default function OtherMessage({ message, idx }) {
+export default function OtherMessage({ message, idx, isPersonalChat = false }) {
   return (
     <section className="other_sender">
-      {message?.showName && (
+      {!isPersonalChat && message?.showName && (
         <div className="time_name d-flex align-items-center gap-2 mb-2">
           <img
             className="image_profile"
