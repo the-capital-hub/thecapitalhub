@@ -16,7 +16,7 @@ export default function OtherMessage({ message, idx }) {
 
   return (
     <section className="other_sender">
-      {!idx && (
+      {message?.showName && (
         <div className="time_name d-flex align-items-center gap-2 mb-2">
           <img
             className="image_profile"

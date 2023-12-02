@@ -31,6 +31,11 @@ import ChatInputContainer from "../../../../components/Investor/ChatComponents/C
 // import { IoCheckmarkDone } from "react-icons/io5";
 import MyMessage from "../../../../components/Investor/ChatComponents/ChatMessages/MyMessage/MyMessage";
 import OtherMessage from "../../../../components/Investor/ChatComponents/ChatMessages/OtherMessage/OtherMessage";
+import {
+  formatMessages,
+  groupMessagesByDate,
+} from "../../../../utils/ChatsHelpers";
+import { selectLoggedInUserId } from "../../../../Store/features/user/userSlice";
 
 const CommunityDashboard = ({
   setSendMessage,
@@ -40,7 +45,7 @@ const CommunityDashboard = ({
   setIsRead,
 }) => {
   // Fetch global state
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const loggedInUserId = useSelector(selectLoggedInUserId);
   const chatId = useSelector((state) => state.chat.chatId);
   // const isCommunitySelected = useSelector(
   //   (state) => state.chat.isCommunitySelected
@@ -87,7 +92,7 @@ const CommunityDashboard = ({
   };
 
   useEffect(() => {
-    markMessagesAsReadInCommunities(chatId, loggedInUser._id)
+    markMessagesAsReadInCommunities(chatId, loggedInUserId)
       .then((response) => {
         console.log(response.message);
         setIsRead(!isRead);
@@ -95,7 +100,7 @@ const CommunityDashboard = ({
       .catch((error) => {
         console.error("Error marking messages as read:", error);
       });
-  }, [chatId, loggedInUser._id, recieveMessage]);
+  }, [chatId, loggedInUserId, recieveMessage]);
 
   useEffect(() => {
     console.log(recieveMessage);
@@ -128,47 +133,47 @@ const CommunityDashboard = ({
   //     });
   // }, [chatId, isCommunitySelected]);
 
-  const groupMessagesByDate = (messages) => {
-    const groupedMessages = [];
-    let currentDate = null;
+  // const groupMessagesByDate = (messages) => {
+  //   const groupedMessages = [];
+  //   let currentDate = null;
 
-    for (const message of messages) {
-      const messageDate = new Date(message.createdAt);
-      const today = new Date();
+  //   for (const message of messages) {
+  //     const messageDate = new Date(message.createdAt);
+  //     const today = new Date();
 
-      if (
-        currentDate &&
-        currentDate.getDate() === messageDate.getDate() &&
-        currentDate.getMonth() === messageDate.getMonth() &&
-        currentDate.getFullYear() === messageDate.getFullYear()
-      ) {
-        groupedMessages[groupedMessages.length - 1].messages.push(message);
-      } else if (
-        currentDate &&
-        currentDate.getDate() - messageDate.getDate() === 1 &&
-        currentDate.getMonth() === messageDate.getMonth() &&
-        currentDate.getFullYear() === messageDate.getFullYear()
-      ) {
-        currentDate = messageDate;
-        groupedMessages.push({ date: "Yesterday", messages: [message] });
-      } else {
-        currentDate = messageDate;
-        const formattedDate = `${messageDate.getDate()}-${
-          messageDate.getMonth() + 1
-        }-${messageDate.getFullYear()}`;
-        groupedMessages.push({
-          date:
-            today.getDate() === messageDate.getDate() ? "Today" : formattedDate,
-          messages: [message],
-        });
-      }
-    }
+  //     if (
+  //       currentDate &&
+  //       currentDate.getDate() === messageDate.getDate() &&
+  //       currentDate.getMonth() === messageDate.getMonth() &&
+  //       currentDate.getFullYear() === messageDate.getFullYear()
+  //     ) {
+  //       groupedMessages[groupedMessages.length - 1].messages.push(message);
+  //     } else if (
+  //       currentDate &&
+  //       currentDate.getDate() - messageDate.getDate() === 1 &&
+  //       currentDate.getMonth() === messageDate.getMonth() &&
+  //       currentDate.getFullYear() === messageDate.getFullYear()
+  //     ) {
+  //       currentDate = messageDate;
+  //       groupedMessages.push({ date: "Yesterday", messages: [message] });
+  //     } else {
+  //       currentDate = messageDate;
+  //       const formattedDate = `${messageDate.getDate()}-${
+  //         messageDate.getMonth() + 1
+  //       }-${messageDate.getFullYear()}`;
+  //       groupedMessages.push({
+  //         date:
+  //           today.getDate() === messageDate.getDate() ? "Today" : formattedDate,
+  //         messages: [message],
+  //       });
+  //     }
+  //   }
 
-    return groupedMessages;
-  };
+  //   return groupedMessages;
+  // };
 
-  const groupedMessages = groupMessagesByDate(messages);
-  console.log("groupedMessages:", groupedMessages);
+  // const groupedMessages = groupMessagesByDate(messages);
+  const formattedMessages = formatMessages(messages, loggedInUserId);
 
   // const handleSend = async () => {
   //   if (
@@ -315,12 +320,12 @@ const CommunityDashboard = ({
   return (
     <div className="community_dashboard_container">
       <div className="chat_messages_group" ref={chatMessagesContainerRef}>
-        {groupedMessages.map((group) => (
+        {formattedMessages.map((group) => (
           <div key={group.date}>
             <h6 className="date_header">{group.date}</h6>
             <div className="chat_messages">
               {group.messages.map((message, idx) =>
-                message.senderId._id === loggedInUser._id ? (
+                message.senderId._id === loggedInUserId ? (
                   <MyMessage
                     handleIdBack={handleIdBack}
                     handleSetDeletePopup={handleSetDeletePopup}
