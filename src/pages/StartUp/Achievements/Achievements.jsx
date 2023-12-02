@@ -118,7 +118,7 @@ function Achievements() {
           </Nav.Item>
         ))}
       </Nav>
-      <div className="Achievements d-flex flex-md-row gap-4 mx-auto">
+      <div className="Achievements">
         {loading ? (
           <div className="container p-5 text-center my-5 bg-white rounded-5 ">
             <SpinnerBS />
