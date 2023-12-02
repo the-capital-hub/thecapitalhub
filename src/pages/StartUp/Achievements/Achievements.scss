@@ -29,19 +29,24 @@
 
   .single-card {
     gap: 5px;
-    padding: 20px;
-    border-radius: 15px;
     text-align: center;
+    padding: 10px 0;
     .image_text {
       position: relative;
       text-align: center;
-      // color:
       .text {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
       }
+      img {
+        max-width: 250px;
+      }
+    }
+    .description {
+      margin: -15px 0 0 0;
+      padding: 0 10px;
     }
   }
 
