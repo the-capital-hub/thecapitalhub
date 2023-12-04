@@ -19,7 +19,9 @@ import toast from "react-hot-toast";
 
 const InvestorManageAccount = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const [otherAccounts, setOtherAccounts] = useState(JSON.parse(localStorage.getItem("StartupAccounts")) || []);
+  const [otherAccounts, setOtherAccounts] = useState(
+    JSON.parse(localStorage.getItem("StartupAccounts")) || []
+  );
   const [selectedAccount, setSelectedAcc] = useState(loggedInUser);
   const [selectedAccountFull, setSelectedAccFull] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -85,7 +87,8 @@ const InvestorManageAccount = () => {
       if (confirmSwitch) {
         setTimeout(() => {
           dispatch(loginSuccess(selectedAccountFull.user));
-          let isInvestor = selectedAccountFull.user.isInvestor === "true" ? true : false;
+          let isInvestor =
+            selectedAccountFull.user.isInvestor === "true" ? true : false;
           dispatch(fetchCompanyData(selectedAccountFull.user._id, isInvestor));
           localStorage.setItem("accessToken", selectedAccountFull.token);
           setIsSubmitting(false);
@@ -105,7 +108,9 @@ const InvestorManageAccount = () => {
 
   //remove acc
   const handleRemoveAccount = (removeAccountDetails) => {
-    const shouldRemove = window.confirm("Are you sure you want to remove this account?");
+    const shouldRemove = window.confirm(
+      "Are you sure you want to remove this account?"
+    );
     if (!shouldRemove) {
       return;
     }
@@ -224,14 +229,19 @@ const InvestorManageAccount = () => {
                     </div>
                   </div>
                   {/* Footer */}
-                  <div className="footer">
-                    <Link to="/profile">
-                      <button className="btn-delete">View profile</button>
+                  <div className="footer d-flex gap-3">
+                    <Link
+                      to="/profile"
+                      className={`btn btn-delete`}
+                      style={{
+                        backgroundColor: "var(--currentTheme)",
+                      }}
+                    >
+                      View profile
                     </Link>
                     <button
-                      className=" btn-delete"
+                      className="btn btn-delete"
                       onClick={setShowLogoutPopup}
-                      style={{ marginLeft: "10px" }}
                     >
                       Log out
                     </button>
@@ -249,21 +259,6 @@ const InvestorManageAccount = () => {
               {/* Logout Section */}
               <section className="col present_accounts_section">
                 <div className="present_account border">
-                  {/* <div class="border empty_box">
-                  <button
-                    className="btn logout-btn w-100"
-                    onClick={setShowLogoutPopup}
-                  >
-                    Log out
-                  </button>
-                  {showLogoutPopup && (
-                    <LogOutPopUp
-                      setShowLogoutPopup={setShowLogoutPopup} // Make sure this prop is passed correctly
-                      handleLogoutLogic={handleLogoutLogic}
-                      showLogoutPopup
-                    />
-                  )}
-                </div> */}
                   <div className="d-flex align-items-center">
                     <div className="logo">
                       <img src={logoIcon} alt="img" />
@@ -275,9 +270,6 @@ const InvestorManageAccount = () => {
                     {otherAccounts?.map((account) => {
                       const fullmname =
                         account.user.firstName + " " + account.user.lastName;
-                      const shouldTruncate =
-                        window.innerWidth <= 600 &&
-                        !account.user.email.includes("com");
 
                       return (
                         <>
@@ -303,28 +295,25 @@ const InvestorManageAccount = () => {
                                   />
                                 </div>
                                 <div className="name_email">
-                                  <h4>
-                                    {fullmname}
-                                    {/* {account.user.lastName} */}
-                                  </h4>
-                                  <h6>
-                                    {" "}
+                                  <h5 className="m-0">{fullmname}</h5>
+                                  <span className="fs-sm fw-semibold text-secondary">
                                     {window.innerWidth <= 600
                                       ? account.user.email.slice(0, 21) ===
                                         account.user.email
                                         ? account.user.email
-                                        : account.user.email.slice(0, 21) + "..."
+                                        : account.user.email.slice(0, 21) +
+                                          "..."
                                       : account.user.email.slice(0, 23) ===
                                         account.user.email
-                                        ? account.user.email
-                                        : account.user.email.slice(0, 23) + "..."}
-                                  </h6>
+                                      ? account.user.email
+                                      : account.user.email.slice(0, 23) + "..."}
+                                  </span>
                                 </div>
                               </div>
                             </div>
                             <div className="right_section d-flex flex-column ">
                               <button
-                                className="img-btn  pt-md-2"
+                                className="img-btn pt-md-2"
                                 onClick={() => handleRemoveAccount(account)}
                               >
                                 <img
@@ -338,10 +327,13 @@ const InvestorManageAccount = () => {
                         </>
                       );
                     })}
-                    <div className="footer">
+                    <div className="footer d-flex gap-3">
                       {otherAccounts.length > 1 && (
                         <button
-                          className="btn btn-delete "
+                          className="btn btn-delete"
+                          style={{
+                            backgroundColor: "var(--currentTheme)",
+                          }}
                           onClick={handleSwitchAccount}
                         >
                           {isSubmitting
@@ -349,13 +341,8 @@ const InvestorManageAccount = () => {
                             : "Switch Account"}
                         </button>
                       )}
-                      <Link to="/login">
-                        <button
-                          className="btn btn-delete "
-                          style={{ marginLeft: "10px" }}
-                        >
-                          Add account
-                        </button>
+                      <Link to="/login" className="btn btn-delete bg-secondary">
+                        Add account
                       </Link>
                     </div>
                   </section>
