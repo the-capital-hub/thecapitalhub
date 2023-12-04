@@ -13,19 +13,30 @@ import {
   getPinnedChat,
   getLastMessage,
 } from "../../../../Service/user";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import {
   setChatId,
   setUserId,
   setIsCommuntySelected,
+  selectPinnedChats,
+  selectChatsLastMessageDates,
+  selectChatsLastMessages,
+  selectChatsUnreadMessageCount,
+  selectPersonalChats,
+  selectIsAllChatsData,
 } from "../../../../Store/features/chat/chatSlice";
 import { selectLoggedInUserId } from "../../../../Store/features/user/userSlice";
 import IconPin from "../../../../components/Investor/SvgIcons/IconPin";
-import SpinnerBS from "../../../../components/Shared/Spinner/SpinnerBS";
-
+// import SpinnerBS from "../../../../components/Shared/Spinner/SpinnerBS";
 
 const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   const loggedInUserId = useSelector(selectLoggedInUserId);
+  const isAllChatsData = useSelector(selectIsAllChatsData);
+  const myPinnedChats = useSelector(selectPinnedChats);
+  const myPersonalChats = useSelector(selectPersonalChats);
+  const chatLastMessages = useSelector(selectChatsLastMessages);
+  const chatLastMessageDates = useSelector(selectChatsLastMessageDates);
+  const chatUnreadCounts = useSelector(selectChatsUnreadMessageCount);
   const dispatch = useDispatch();
 
   const [chats, setChats] = useState([]);
@@ -49,23 +60,30 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
       setChats(updatedChats);
       setPinnedChats([...pinnedChats, removedChat]);
     } else {
-      const pinnedChatIndex = pinnedChats.findIndex((chat) => chat._id === chatId);
+      const pinnedChatIndex = pinnedChats.findIndex(
+        (chat) => chat._id === chatId
+      );
       if (pinnedChatIndex !== -1) {
         const removedPinnedChat = pinnedChats[pinnedChatIndex];
-        const updatedPinnedChats = pinnedChats.filter((chat) => chat._id !== chatId);
+        const updatedPinnedChats = pinnedChats.filter(
+          (chat) => chat._id !== chatId
+        );
         setPinnedChats(updatedPinnedChats);
         setChats([...chats, removedPinnedChat]);
       }
     }
 
-    togglePinMessage(loggedInUserId, chatId).then((res) => {
-      setPinnedChat(true);
-      setTimeout(() => {
-        setPinnedChat(false);
-      }, 1000);
-    }).catch((error) => console.error(error.message));
+    togglePinMessage(loggedInUserId, chatId)
+      .then((res) => {
+        setPinnedChat(true);
+        setTimeout(() => {
+          setPinnedChat(false);
+        }, 1000);
+      })
+      .catch((error) => console.error(error.message));
   };
 
+  // fetch pinned and normal chats
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -99,6 +117,12 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
     selectedUserChat,
     pinnedChat,
   ]);
+
+  // useEffect(() => {
+  //   setPinnedChats(myPinnedChats)
+  //   setChats(myPersonalChats)
+  //   setLatestMessages(chatLastMessages)
+  // },[])
 
   // Handle selected chat
   const handleSelectedChat = useMemo(

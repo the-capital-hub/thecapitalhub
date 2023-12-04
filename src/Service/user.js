@@ -1397,3 +1397,13 @@ export const addNotificationAPI = async (notificationData) => {
     throw error;
   }
 };
+
+export const getAllChatsAPI = async () => {
+  try {
+    const response = await axiosInstance.get(`${API.getAllChats}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error getting all chats:", error);
+    throw error;
+  }
+};

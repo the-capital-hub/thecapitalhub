@@ -14,7 +14,7 @@ import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
 import deleteIcon from "../../../Images/post/delete.png";
-import { fetchCompanyData } from "../../../Store/features/user/userSlice";
+import { fetchCompanyData } from "../../../Store/features/user/userThunks";
 import toast from "react-hot-toast";
 
 const InvestorManageAccount = () => {

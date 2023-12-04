@@ -41,7 +41,6 @@ import {
   selectIsInvestor,
   selectLoggedInUserId,
 } from "../../../Store/features/user/userSlice";
-import IconTCH from "../../../components/Investor/SvgIcons/IconTCH";
 
 const Chats = () => {
   // search params
