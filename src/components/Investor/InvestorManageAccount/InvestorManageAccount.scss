@@ -22,22 +22,6 @@
       flex-direction: row;
     }
 
-    /* Add this to align boxes horizontally */
-
-    @media (max-width: 991px) {
-      .password_section {
-        order: 2;
-      }
-
-      .present_accounts_section {
-        order: 1;
-      }
-
-      .logout_section {
-        order: 3;
-      }
-    }
-
     .change_password {
       background-color: #f9f9f9;
       padding: 20px;
@@ -97,19 +81,19 @@
     }
 
     .present_account {
-      // margin: 20px;
       background-color: #f9f9f9;
       padding: 20px;
       border-radius: 20px;
       flex: 1;
       display: flex;
       flex-direction: column;
+
       @media (max-width: 768px) {
         padding: 7px;
+        margin: 0px;
       }
 
       .btn-delete {
-        /* Styles for the delete button */
         color: #fff;
         background-color: red;
         border: none;
@@ -117,10 +101,7 @@
         padding: 8px 16px;
         cursor: pointer;
         margin-top: 2rem;
-      }
-
-      @media (max-width: 768px) {
-        margin: 0px;
+        min-width: 45% !important;
       }
 
       .header_text {
@@ -139,7 +120,6 @@
         margin-bottom: 10px;
 
         .logo {
-
           /* Styles for the logo */
           img {
             /* Add your logo styles here */
@@ -159,7 +139,6 @@
       }
 
       .profile_image {
-
         /* Styles for the profile image */
         img {
           /* Add your profile image styles here */
@@ -168,7 +147,6 @@
           height: 60px;
           /* Adjust as needed */
           border-radius: 50%;
-          
         }
       }
 
@@ -204,7 +182,7 @@
       .footer {
         display: flex;
         justify-content: center;
-        // justify-content: space-between; 
+        // justify-content: space-between;
 
         .btn-delete {
           /* Styles for the delete button */
@@ -215,6 +193,7 @@
           padding: 8px 16px;
           cursor: pointer;
           margin-top: 2rem;
+          min-width: 45%;
         }
       }
     }
@@ -250,13 +229,12 @@
         line-height: normal;
         margin-left: 10px;
       }
-
-
     }
 
     .existing_accounts {
-
-      /* Styles for the Existing Account section */
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
       .small_card {
         /* Styles for the small horizontal card */
         display: flex;
@@ -312,12 +290,11 @@
             }
 
             /* Show the custom checkbox icon when checked */
-            input[type="checkbox"]:checked+.checkmark::before {
+            input[type="checkbox"]:checked + .checkmark::before {
               display: block;
             }
           }
           .profile_image {
-
             /* Styles for the profile image in the left section */
             img {
               /* Add your profile image styles here */
@@ -373,21 +350,19 @@
         }
 
         .right_section {
-
           /* Styles for the right section of the card */
-          
-          .img-btn{
-border: none;
-background:none;
-margin-left: -8px;
-            .deleteIcon{
+
+          .img-btn {
+            border: none;
+            background: none;
+            margin-left: -8px;
+            .deleteIcon {
               width: 25px;
               @media (max-width: 768px) {
                 width: 18px;
               }
             }
           }
-
         }
       }
     }

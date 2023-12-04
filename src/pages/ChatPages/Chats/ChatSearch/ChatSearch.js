@@ -1,45 +1,39 @@
 import { useState } from "react";
 import "./ChatSearch.scss";
-
 import searchIcon from "../../../../Images/Chat/Search.svg";
-
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getSearchResultsAPI } from "../../../../Service/user";
+import { selectLoggedInUserId } from "../../../../Store/features/user/userSlice";
+import { useSelector } from "react-redux";
+import { debounce } from "../../../../utils/debounce";
 
 const ChatSearch = () => {
-  const [searchInput, setSearchInput] = useState("");
   const [inputOnFocus, setInputOnFocus] = useState(false);
   const [searchSuggestions, setSearchSuggestions] = useState(false);
   const [loading, setLoading] = useState(false);
   const [mobileSearch, setMobileSearch] = useState(false);
+  const loggedInUserId = useSelector(selectLoggedInUserId);
 
-  const searchInputHandler = async ({ target }) => {
+  const delayedSearchInputHandler = debounce(async ({ target }) => {
+    if (!target.value) return setSearchSuggestions(null);
     try {
-      setLoading(true);
-      setSearchInput(target.value);
       const { data } = await getSearchResultsAPI(target.value);
-      console.log(data);
-      setSearchSuggestions(data);
+      setSearchSuggestions(
+        data?.users?.filter((user) => user._id !== loggedInUserId)
+      );
     } catch (error) {
       console.error("Error getting search results : ", error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-  };
+  }, 500);
 
   const searchInputBlurHandler = () => {
     setTimeout(() => {
       if (mobileSearch) setMobileSearch(false);
       setInputOnFocus(false);
       setSearchSuggestions(false);
-      setSearchInput("");
     }, 500);
-  };
-  const navigate = useNavigate();
-
-  const searchSubmitHandler = (e) => {
-    if (e) e.preventDefault();
-    if (!searchInput) return;
-    navigate(`/search?query=${searchInput}`);
   };
 
   return (
@@ -53,8 +47,11 @@ const ChatSearch = () => {
               type="search"
               className="w-100"
               placeholder="Search"
-              value={searchInput}
-              onChange={searchInputHandler}
+              // value={searchInput}
+              onChange={(e) => {
+                delayedSearchInputHandler(e);
+                setLoading(true);
+              }}
               onFocus={() => setInputOnFocus(true)}
               onBlurCapture={searchInputBlurHandler}
             />
@@ -65,15 +62,12 @@ const ChatSearch = () => {
                 {!loading ? (
                   searchSuggestions && (
                     <>
-                      {!searchSuggestions?.users?.length && (
+                      {!searchSuggestions?.length && (
                         <h6 className="h6 text-center w-100 text-secondary">
                           No Suggestions.
                         </h6>
                       )}
-                      {!!searchSuggestions?.users?.length && (
-                        <span className="">Users</span>
-                      )}
-                      {searchSuggestions?.users
+                      {searchSuggestions
                         ?.slice(0, 5)
                         .map(({ firstName, lastName, _id }) => (
                           <Link
