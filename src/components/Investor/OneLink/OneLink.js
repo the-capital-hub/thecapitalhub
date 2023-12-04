@@ -121,9 +121,9 @@ const OneLink = () => {
 
         {/* New OnePager start */}
         {company.length !== 0 ? (
-          <div className="onePager_wrapper d-flex flex-column gap-4">
-            <OnePagerCompanyLogo image={company.logo} />
-
+          <div className="onePager_wrapper d-flex flex-column gap-1">
+            {/* <OnePagerCompanyLogo image={company.logo} /> */}
+<h3 className="bg-dark rounded-3 text-light p-3 ">Edit OneLink</h3>
             {/* onePager company info */}
             <OnePagerCompanyInfo
               company={company.company}

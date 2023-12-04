@@ -1,8 +1,28 @@
 import React from "react";
 import IconMessage from "../../SvgIcons/IconMessage";
 import { Link } from "react-router-dom";
+import connection from "../../../../Images/StartUp/icons/connection-user.png";
+import messageIcon from "../../../../Images/StartUp/icons/message.svg";
+import {
+  sentConnectionRequest,
+} from "../../../../Service/user";
 
-export default function ProfileHeader({ userData }) {
+export default function ProfileHeader({ userData, loggedInUser, setConnectionSent }) {
+
+  const handleConnect = (userId) => {
+    sentConnectionRequest(loggedInUser._id, userId)
+      .then(({ data }) => {
+        console.log("Connection data: ", data);
+        if (data?.message === "Connection Request Sent") {
+          setConnectionSent(true); // Set the state to true once
+          setTimeout(() => {
+            setConnectionSent(false); // Reset the state after a delay
+          }, 2500);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div className="profile rounded-4 border shadow-sm">
       <div className="short_details d-flex flex-column flex-md-row align-items-center justify-content-between">
@@ -27,20 +47,38 @@ export default function ProfileHeader({ userData }) {
             </span>
           </div>
         </div>
-        <div className="buttons d-flex gap-2 flex-row align-items-md-center">
-          <Link
-            // to={`/chats?userId=${userData?._id}`}
-            className="text-decoration-none"
-          >
-            <button className="message btn rounded-pill px-3 py-2">
-              <IconMessage />
-              <span>Message</span>
-            </button>
-          </Link>
-          <button className="more btn rounded-pill px-3 py-2">
-            <span>More</span>
-          </button>
-        </div>
+        {loggedInUser._id !== userData?._id &&
+          <div className="buttons d-flex gap-2 flex-row align-items-md-center">
+            <Link
+              to={`/chats?userId=${userData?._id}`}
+              className="text-decoration-none"
+            >
+              <button className="message btn rounded-pill px-3 py-2">
+                <IconMessage />
+                <span>Message</span>
+              </button>
+            </Link>
+            {userData?.connections?.includes(loggedInUser._id) ? (
+              <button className="connection-status  btn rounded-pill px-3 py-2">
+                <span>Connected</span>
+              </button>
+            ) : userData?.connectionsReceived?.includes(
+              loggedInUser._id
+            ) ? (
+              <button className=" connection-status d-flex btn rounded-pill px-3 py-2">
+                {/* <img src={connection} width={20} alt="message user" /> */}
+                <span>Pending</span>
+              </button>
+            ) : (
+              <button className="connection-status d-flex  btn rounded-pill px-3 py-2">
+                {/* <img src={connection} width={20} alt="message user" /> */}
+                <span onClick={() => handleConnect(userData?._id)}>
+                  Connect
+                </span>
+              </button>
+            )}
+          </div>
+        }
       </div>
       <div className="details">
         <div className="single_details row row-cols-1 row-cols-md-2 ">

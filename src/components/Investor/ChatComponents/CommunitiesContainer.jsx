@@ -12,6 +12,7 @@ import { getAllCommunity } from "../../../Service/user";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectLoggedInUserId } from "../../../Store/features/user/userSlice";
+import { selectCommunities } from "../../../Store/features/chat/chatSlice";
 
 export default function CommunitiesContainer({
   isCommunityOpen,
@@ -21,7 +22,7 @@ export default function CommunitiesContainer({
   setIsRead,
 }) {
   const loggedInUserId = useSelector(selectLoggedInUserId);
-
+  // const communities = useSelector(selectCommunities);
   const [getCommunity, setGetCommunity] = useState([]);
   const chatProfile = useSelector((state) => state.chat.chatProfile);
   const chatId = useSelector((state) => state.chat.chatId);

@@ -21,13 +21,16 @@ import RecommendationCard from "../../../components/Investor/InvestorGlobalCards
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { useSelector } from "react-redux";
 
 export default function OtherInvestorProfile() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const [userData, setUserData] = useState(null);
   const { userId } = useParams();
+  const [connectionSent, setConnectionSent] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -37,7 +40,7 @@ export default function OtherInvestorProfile() {
         setUserData(data);
       })
       .catch(() => navigate("/profile"));
-  }, [userId]);
+  }, [userId, connectionSent]);
 
   useEffect(() => {
     dispatch(setPageTitle("Investor Profile"));
@@ -54,7 +57,7 @@ export default function OtherInvestorProfile() {
         {/* Profile Header section */}
         {userData ? (
           <section className="otherInvestor_header">
-            <ProfileHeader userData={userData} />
+            <ProfileHeader userData={userData} loggedInUser={loggedInUser} setConnectionSent={setConnectionSent} />
           </section>
         ) : (
           <div className="bg-white rounded-4 border py-4 w-100">

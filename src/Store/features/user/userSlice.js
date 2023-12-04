@@ -1,24 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { setThemeColor } from "../../../utils/setThemeColor";
-import { getInvestorById, getStartupByFounderId } from "../../../Service/user";
-
-// Async Thunk for companyData
-export const fetchCompanyData = createAsyncThunk(
-  "user/companyData",
-  async (userId, isInvestor) => {
-    try {
-      if (isInvestor) {
-        const { data } = await getStartupByFounderId(userId);
-        return data;
-      } else {
-        const { data } = await getInvestorById(userId);
-        return data;
-      }
-    } catch (error) {
-      console.error("Error fetching company details:", error);
-    }
-  }
-);
+import { fetchCompanyData } from "./userThunks";
 
 const initialState = {
   loggedInUser: JSON.parse(localStorage.getItem("loggedInUser")) || null,
@@ -40,23 +22,31 @@ export const userSlice = createSlice({
       );
       state.error = null;
       if (action.payload.isInvestor === "false") {
-        const startupAccounts = JSON.parse(localStorage.getItem('StartupAccounts')) || [];
+        const startupAccounts =
+          JSON.parse(localStorage.getItem("StartupAccounts")) || [];
         const updatedStartupAccounts = startupAccounts.map((account) => {
           if (account.user._id === action.payload._id) {
             account.user = action.payload;
           }
           return account;
         });
-        localStorage.setItem('StartupAccounts', JSON.stringify(updatedStartupAccounts));
+        localStorage.setItem(
+          "StartupAccounts",
+          JSON.stringify(updatedStartupAccounts)
+        );
       } else {
-        const investorAccounts = JSON.parse(localStorage.getItem('InvestorAccounts')) || [];
+        const investorAccounts =
+          JSON.parse(localStorage.getItem("InvestorAccounts")) || [];
         const updatedInvestorAccounts = investorAccounts.map((account) => {
           if (account.user._id === action.payload._id) {
             account.user = action.payload;
           }
           return account;
         });
-        localStorage.setItem('InvestorAccounts', JSON.stringify(updatedInvestorAccounts));
+        localStorage.setItem(
+          "InvestorAccounts",
+          JSON.stringify(updatedInvestorAccounts)
+        );
       }
     },
     loginFailure: (state, action) => {
@@ -67,6 +57,7 @@ export const userSlice = createSlice({
     logout: (state) => {
       localStorage.removeItem("loggedInUser");
       localStorage.removeItem("userCompanyData");
+      localStorage.removeItem("allChatsData");
       state.loggedInUser = null;
       state.error = null;
       state.recommendations = null;

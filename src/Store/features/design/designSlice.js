@@ -10,6 +10,7 @@ const initialState = {
   showInvestorCreatePostModal: false,
   showNotificationModal: false,
   isMobileApp: false,
+  theme: localStorage.getItem("theme") || "light",
 };
 
 export const designSlice = createSlice({
@@ -37,6 +38,15 @@ export const designSlice = createSlice({
     setIsMobileApp: (state, action) => {
       state.isMobileApp = action.payload;
     },
+    toggleTheme: (state, action) => {
+      if (state.theme === "light") {
+        localStorage.setItem("theme", "dark");
+        state.theme = "dark";
+      } else {
+        state.theme = "light";
+        localStorage.setItem("theme", "light");
+      }
+    },
   },
 });
 
@@ -50,6 +60,7 @@ export const selectInvestorCreatePostModal = (state) =>
 export const selectNotificationtModal = (state) =>
   state.design.showNotificationModal;
 export const selectIsMobileApp = (state) => state.design.isMobileApp;
+export const selectTheme = (state) => state.design.theme;
 
 export const {
   setPageTitle,
@@ -59,6 +70,7 @@ export const {
   toggleCreatePostModal,
   toggleinvestorCreatePostModal,
   toggleNotificationModal,
+  toggleTheme,
 } = designSlice.actions;
 
 export default designSlice.reducer;
