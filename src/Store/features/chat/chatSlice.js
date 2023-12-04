@@ -90,8 +90,7 @@ export const chatSlice = createSlice({
 });
 
 // AllChatsData Selectors
-export const selectIsAllChatsData = (state) =>
-  state.chat.allChatsData === null ? false : true;
+export const selectIsAllChatsData = (state) => Boolean(state.chat.allChatsData);
 // Community Selectors
 export const selectCommunities = (state) =>
   state.chat.allChatsData?.communities;

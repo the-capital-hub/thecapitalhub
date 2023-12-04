@@ -66,23 +66,25 @@ const Chats = () => {
 
   // New Fetch call
   const isAllChatsData = useSelector(selectIsAllChatsData);
+  console.log(isAllChatsData);
   const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
     const fetchallChatsData = async () => {
-      if (!isAllChatsData) {
-        setShowLoading(true);
-        try {
-          await dispatch(fetchAllChats).unwrap();
-        } catch (error) {
-          console.error("Error fetching initial all chats:", error);
-        } finally {
-          setShowLoading(false);
-        }
+      setShowLoading(true);
+      try {
+        console.log("fetching ");
+        await dispatch(fetchAllChats()).unwrap();
+      } catch (error) {
+        console.error("Error fetching initial all chats:", error);
+      } finally {
+        setShowLoading(false);
       }
     };
 
-    fetchallChatsData();
+    if (!isAllChatsData) {
+      fetchallChatsData();
+    }
   }, [isAllChatsData, dispatch]);
 
   // const [selectedChat, setSelectedChat] = useState(null);
