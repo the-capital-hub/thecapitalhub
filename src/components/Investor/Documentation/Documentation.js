@@ -126,7 +126,7 @@ const Documentation = () => {
               onClicked={setShowModal}
               fetchFolder={getFolders}
             />
-            <div className="cards px-xxl-4 bg-white py-5 rounded-4">
+            <div className="cards px-xxl-4 bg-white py-5 rounded-4 " >
               {/* <Card
                   onClicked={() => navigate("/documentation/financials")}
                   text={"Financials"}
