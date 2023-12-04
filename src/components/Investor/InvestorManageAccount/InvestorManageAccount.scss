@@ -10,10 +10,9 @@
 
   .box_container {
     height: fit-content;
-    background-color: #fff;
+    background-color: var(--white-to-grey);
     padding: 10px;
     border-radius: var(--border-radius);
-    background: #fff;
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
 
     // display: flex;
@@ -23,7 +22,7 @@
     }
 
     .change_password {
-      background-color: #f9f9f9;
+      background-color: var(--bs-light);
       padding: 20px;
       border-radius: var(--border-radius);
       flex: 1;
@@ -43,7 +42,6 @@
           flex-direction: column;
 
           label {
-            color: #666;
             font-family: Poppins;
             font-size: 13px;
             font-style: normal;
@@ -81,7 +79,7 @@
     }
 
     .present_account {
-      background-color: #f9f9f9;
+      background-color: var(--bs-light);
       padding: 20px;
       border-radius: 20px;
       flex: 1;
@@ -105,7 +103,7 @@
       }
 
       .header_text {
-        color: #3d3c3c;
+        // color: #3d3c3c;
         font-family: Poppins;
         font-size: 18px;
         font-style: normal;
@@ -157,9 +155,8 @@
 
         h4 {
           margin: 0;
-          color: #000;
           font-family: Poppins;
-          font-size: 20px;
+          font-size: 16px;
           font-style: normal;
           font-weight: 600;
           line-height: normal;
@@ -202,7 +199,7 @@
       // margin: 20px;
       display: flex;
       height: fit-content;
-      background-color: #f9f9f9;
+      background-color: var(--bs-light);
       border-radius: 20px;
       padding: 20px;
 
@@ -303,7 +300,6 @@
               height: 40px;
               /* Adjust as needed */
               border-radius: 50%;
-              margin-right: 10px;
               @media (max-width: 768px) {
                 width: 35px;
                 height: 35px;
@@ -357,7 +353,7 @@
             background: none;
             margin-left: -8px;
             .deleteIcon {
-              width: 25px;
+              width: 22px;
               @media (max-width: 768px) {
                 width: 18px;
               }
