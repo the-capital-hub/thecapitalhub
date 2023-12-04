@@ -57,6 +57,7 @@ export const userSlice = createSlice({
     logout: (state) => {
       localStorage.removeItem("loggedInUser");
       localStorage.removeItem("userCompanyData");
+      localStorage.removeItem("allChatsData");
       state.loggedInUser = null;
       state.error = null;
       state.recommendations = null;

@@ -1,5 +1,9 @@
 import { HiOutlineUserGroup } from "react-icons/hi2";
 import {
+  // selectCommunitiesLastMessageDates,
+  // selectCommunitiesLastMessages,
+  // selectCommunitiesUnreadMessageCount,
+  // selectIsAllChatsData,
   setChatId,
   setIsCommuntySelected,
 } from "../../../Store/features/chat/chatSlice";
@@ -20,6 +24,14 @@ export default function CommunityCard({
   isRead,
 }) {
   const loggedInUserId = useSelector(selectLoggedInUserId);
+  // const isAllChatsData = useSelector(selectIsAllChatsData);
+  // const communitiesLastMessages = useSelector(selectCommunitiesLastMessages);
+  // const communitiesLastMessageDates = useSelector(
+  //   selectCommunitiesLastMessageDates
+  // );
+  // const communitiesUnreadCounts = useSelector(
+  //   selectCommunitiesUnreadMessageCount
+  // );
 
   const dispatch = useDispatch();
   // console.log(community);
@@ -90,7 +102,7 @@ export default function CommunityCard({
   const messageTime = formatTimestamp(dates[community._id]);
   const inputString = latestMessages[community._id];
   // console.log(latestMessages);
-  const numberOfCharacters = 13;
+  const numberOfCharacters = 20;
   let latestMessage;
   if (inputString?.length > numberOfCharacters) {
     latestMessage = inputString.substring(0, numberOfCharacters) + "...";
