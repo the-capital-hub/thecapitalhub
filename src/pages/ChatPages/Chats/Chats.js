@@ -300,7 +300,7 @@ const Chats = () => {
                 isMobileView && "d-none"
               }`}
             >
-              <section className="left_section pe-1 ">
+              <section className="left_section">
                 <span
                   className="back_img rounded-circle shadow-sm"
                   title="Go Back"
@@ -352,7 +352,7 @@ const Chats = () => {
                   //     />
                   //   </div>
                   // </section>
-                  <section className="left_section pe-1">
+                  <section className="left_section">
                     {/* <span
                     className="back_img rounded-circle shadow-sm"
                     title="Go Back"
