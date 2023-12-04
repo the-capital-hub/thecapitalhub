@@ -82,13 +82,13 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
             alt={`${user?.firstName} ${user?.lastName}`}
           />
           <div className="title_and_message">
-            <h5 className="name_title text-capitalize">
+            <h5 className="name_title text-capitalize m-0 lh-1">
               {user
                 ? `${user.firstName} ${user.lastName}`
                 : community?.communityName}
             </h5>
 
-            <h5 className="message_title">{user?.designation}</h5>
+            <h5 className="message_title m-0">{user?.designation}</h5>
             {/* <h4 className="online">Online</h4> */}
           </div>
         </div>

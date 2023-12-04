@@ -197,9 +197,9 @@ export default function EditCompanyProfilePage() {
           </div>
 
           {/* Milestones */}
-          <div className="milestones__component bg-white rounded-4 py-5 px-3 px-md-5 d-flex flex-column gap-4">
+          {/* <div className="milestones__component bg-white rounded-4 py-5 px-3 px-md-5 d-flex flex-column gap-4">
             <Milestones theme={"startup"} />
-          </div>
+          </div> */}
 
           {/* Color Cards */}
           <div className="card_holder d-flex justify-content-between flex-wrap">

@@ -6,7 +6,7 @@ import AfterSuccessPopUp from "../../../PopUp/AfterSuccessPopUp/AfterSuccessPopU
 import { useSelector } from "react-redux";
 import { s3 } from "../../../../Service/awsConfig";
 import IconDelete from "../../SvgIcons/IconDelete";
-import { getFoldersApi } from "../../../../Service/user";
+import { getFoldersApi, addNotificationAPI } from "../../../../Service/user";
 
 const baseUrl = environment.baseUrl;
 
@@ -122,6 +122,14 @@ const UploadModal = ({ onCancel, fetchFolder, notify }) => {
               }
               if (response.data.isFirst) {
                 notify();
+                const notificationBody = {
+                  recipient: loggedInUser._id,
+                  type: "achievementCompleted",
+                  achievementId: "656468a249186bca517cd0d3",
+                }
+                addNotificationAPI(notificationBody)
+                  .then((data) => console.log("Added"))
+                  .catch((error) => console.error(error.message));
               }
             }
 

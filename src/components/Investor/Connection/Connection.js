@@ -142,25 +142,22 @@ const Connection = () => {
               <h4>Manage Connections</h4>
               <nav className="connection_nav">
                 <button
-                  className={`connection_nav_link fs-6 ${
-                    selectedTab === "received" ? "active" : ""
-                  }`}
+                  className={`connection_nav_link fs-6 ${selectedTab === "received" ? "active" : ""
+                    }`}
                   onClick={() => handleTabChange("received")}
                 >
                   Received
                 </button>
                 <button
-                  className={`connection_nav_link fs-6  ${
-                    selectedTab === "sent" ? "active" : ""
-                  }`}
+                  className={`connection_nav_link fs-6  ${selectedTab === "sent" ? "active" : ""
+                    }`}
                   onClick={() => handleTabChange("sent")}
                 >
                   Sent
                 </button>
                 <button
-                  className={`connection_nav_link fs-6  ${
-                    selectedTab === "accepted" ? "active" : ""
-                  }`}
+                  className={`connection_nav_link fs-6  ${selectedTab === "accepted" ? "active" : ""
+                    }`}
                   onClick={() => handleTabChange("accepted")}
                 >
                   Accepted
@@ -205,7 +202,7 @@ const Connection = () => {
                               <p className="connection_designation">
                                 {sender.designation}
                               </p>
-                              <p> {sender.startUp?.company?sender.startUp?.company:sender.investor?.company}</p>
+                              <p> {sender.startUp?.company ? sender.startUp?.company : sender.investor?.company}</p>
                               <p>
                                 <TimeAgo
                                   className="connection_time"
@@ -215,19 +212,19 @@ const Connection = () => {
                               </p>
                             </div>
                             <div className="connection_btn mt-3 mt-md-0  d-flex  d-md-none gap-2">
-                            <button
-                              onClick={() => rejectConnectionHandler(_id)}
-                              className="ignore_button"
-                            >
-                              Ignore
-                            </button>
-                            <button
-                              onClick={() => acceptConnectionHandler(_id)}
-                              className="accept_button"
-                            >
-                              Accept
-                            </button>
-                          </div>
+                              <button
+                                onClick={() => rejectConnectionHandler(_id)}
+                                className="ignore_button"
+                              >
+                                Ignore
+                              </button>
+                              <button
+                                onClick={() => acceptConnectionHandler(_id)}
+                                className="accept_button"
+                              >
+                                Accept
+                              </button>
+                            </div>
                           </div>
                           <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-cente d-none d-md-block">
                             <button
@@ -281,7 +278,7 @@ const Connection = () => {
                                 <p className="connection_designation">
                                   {receiver?.designation}
                                 </p>
-                                <p> {receiver.startUp?.company?receiver.startUp?.company:receiver.investor?.company}</p>
+                                <p> {receiver.startUp?.company ? receiver.startUp?.company : receiver.investor?.company}</p>
                                 <p>
                                   <TimeAgo
                                     className="connection_time"
@@ -291,14 +288,14 @@ const Connection = () => {
                                 </p>
                               </div>
                               <div className="connection_right mt-3 mt-md-0  ms-auto my-auto  d-md-none d-block ">
-                          
-                          <img
-                              src={deleteIcon}
-                              alt={`delete`}
-                              onClick={() => cancelConnectionRequest(_id)}
 
-                            />
-                        </div>
+                                <img
+                                  src={deleteIcon}
+                                  alt={`delete`}
+                                  onClick={() => cancelConnectionRequest(_id)}
+
+                                />
+                              </div>
                             </div>
                             <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-center d-none d-md-block">
                               <button
@@ -339,15 +336,14 @@ const Connection = () => {
                                 to={`/user/${data._id}`}
                                 className=" text-black text-decoration-none"
                               >
-                                {`${data.firstName ? data.firstName : "name"} ${
-                                  data.lastName ? data.lastName : ""
-                                }`}
+                                {`${data.firstName ? data.firstName : "name"} ${data.lastName ? data.lastName : ""
+                                  }`}
                               </Link>
                             </p>
                             <p className="connection_designation">
                               {data.designation ? data.designation : ""}
                             </p>
-                            <p> {data.startUp?.company?data.startUp?.company:data.investor?.company}</p>
+                            <p> {data.startUp?.company ? data.startUp?.company : data.investor?.company}</p>
 
                             <p>
                               {/* <TimeAgo
@@ -358,14 +354,14 @@ const Connection = () => {
                             </p>
                           </div>
                           <div className="connection_right mt-3 mt-md-0  ms-auto my-auto  d-md-none d-block ">
-                          
-                          <img
+
+                            <img
                               src={deleteIcon}
                               alt={`delete`}
                               onClick={() => handleRemoveConnection(data._id)}
 
                             />
-                        </div>
+                          </div>
                         </div>
                         <div className="connection_right mt-3 mt-md-0 align-items-center justify-content-center d-none d-md-block">
                           <button

@@ -179,18 +179,20 @@ const Chats = () => {
 
   const renderMobileHeader = useMemo(() => {
     return (
-      <div className="mobile-nav border-bottom shadow-sm pb-2 px-2">
+      <div
+        className="mobile-nav border-bottom shadow-sm pb-2 px-2"
+        style={{ height: "70px" }}
+      >
         <button
           className="btn btn-sm btn-light"
           onClick={() => {
             console.log(chatId);
             if (!chatId) {
-              navigate(-1)
+              navigate(-1);
             } else {
-              dispatch(resetChat())
+              dispatch(resetChat());
             }
           }}
-
         >
           <IoMdArrowRoundBack /> Back
         </button>
@@ -202,7 +204,7 @@ const Chats = () => {
           onClick={() =>
             navigate(isInvestor === "true" ? "/investor/home" : "/home")
           }
-        // onClick={() => dispatch(resetChat())}
+          // onClick={() => dispatch(resetChat())}
         >
           <AiOutlineHome /> Home
         </button>
@@ -265,8 +267,7 @@ const Chats = () => {
         <div className="container-xxl p-0 chat_main_container position-relative fadeIn-025">
           {/* Left section */}
           <div
-            className={`left_section_wrapper mt-3 mx-3 ${isMobileView && "d-none"
-              }`}
+            className={`left_section_wrapper mx-3 ${isMobileView && "d-none"}`}
           >
             <section className="left_section pe-1 ">
               <span
@@ -282,29 +283,59 @@ const Chats = () => {
                 />
               </span>
               <ChatSearch />
-              <CommunitiesContainer
-                isCommunityOpen={isCommunityOpen}
-                recieveMessage={recieveMessage}
-                sendMessage={sendMessage}
-                setIsRead={setIsRead}
-                isRead={isRead}
-              />
-              <ChatSidebar
-                recieveMessage={recieveMessage}
-                sendMessage={sendMessage}
-              />
+              <div class="chats-col">
+                <CommunitiesContainer
+                  isCommunityOpen={isCommunityOpen}
+                  recieveMessage={recieveMessage}
+                  sendMessage={sendMessage}
+                  setIsRead={setIsRead}
+                  isRead={isRead}
+                />
+                <ChatSidebar
+                  recieveMessage={recieveMessage}
+                  sendMessage={sendMessage}
+                />
+              </div>
             </section>
           </div>
           {/* Main Chat section */}
-          <section className="main_section my-3">
+          <section className="main_section">
             {isMobileView && renderMobileHeader}
             {isMobileView ? (
               chatId ? (
                 renderMobileMainSection
               ) : (
-                <section className="overflow-y-auto mobileView_chat_sidebar">
-                  <div className="d-flex flex-column gap-3 px-1">
-                    <ChatSearch />
+                // <section className="overflow-y-auto mobileView_chat_sidebar">
+                //   <div className="d-flex flex-column gap-3 px-1">
+                //     <ChatSearch />
+                //     <CommunitiesContainer
+                //       isCommunityOpen={isCommunityOpen}
+                //       recieveMessage={recieveMessage}
+                //       sendMessage={sendMessage}
+                //       setIsRead={setIsRead}
+                //       isRead={isRead}
+                //     />
+                //     <ChatSidebar
+                //       recieveMessage={recieveMessage}
+                //       sendMessage={sendMessage}
+                //     />
+                //   </div>
+                // </section>
+                <section className="left_section pe-1">
+                  {/* <span
+                    className="back_img rounded-circle shadow-sm"
+                    title="Go Back"
+                  >
+                    <img
+                      src={backIcon}
+                      width={20}
+                      height={20}
+                      onClick={() => navigate(-1)}
+                      alt=""
+                    />
+                  </span> */}
+                  <ChatSearch />
+                  <div class="chats-col">
                     <CommunitiesContainer
                       isCommunityOpen={isCommunityOpen}
                       recieveMessage={recieveMessage}
@@ -347,16 +378,13 @@ const Chats = () => {
               <div className="select-chat-container">
                 <img src={selectAChatIcon} alt="select a chat" />
                 <h3>Select a message</h3>
-                {/* <span className="tch_svg">
-                  <IconTCH />
-                 </span> */}
               </div>
             )}
           </section>
           {/*Right section chat settings */}
           {!isMobileView && isSettingsOpen ? (
             <div className="right_section_wrapper ms-lg-3">
-              <section className="right_section mt-3 w-100 ">
+              <section className="right_section w-100 ">
                 <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
               </section>
             </div>

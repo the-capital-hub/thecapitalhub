@@ -29,7 +29,6 @@ function NotificationsPopup({ toggleVisibility }) {
     setLoading(true);
     try {
       const res = await fetchNotificationsAPI(loggedInUserId);
-      // console.log(loggedInUser?._id);
       setNotifications(res.data);
     } catch (error) {
       console.log("Error loading notifications: ", error);
@@ -42,7 +41,7 @@ function NotificationsPopup({ toggleVisibility }) {
     fetchNotifications();
   }, []);
 
-  const notificationType = (type, _id) => {
+  const notificationType = (type, _id, achievementId, notificationId) => {
     switch (type) {
       case "connectionRequest": {
         return "sent you a connection request";
@@ -57,7 +56,7 @@ function NotificationsPopup({ toggleVisibility }) {
             <Link
               to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
               className="fw-bold"
-              onClick={() => toggleVisibility(false)}
+              onClick={() => handleOnClickLink(notificationId)}
             >
               post
             </Link>
@@ -71,7 +70,7 @@ function NotificationsPopup({ toggleVisibility }) {
             <Link
               to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
               className="fw-bold"
-              onClick={() => toggleVisibility(false)}
+              onClick={() => handleOnClickLink(notificationId)}
             >
               post
             </Link>
@@ -85,7 +84,7 @@ function NotificationsPopup({ toggleVisibility }) {
             <Link
               to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
               className="fw-bold"
-              onClick={() => toggleVisibility(false)}
+              onClick={() => handleOnClickLink(notificationId)}
             >
               post
             </Link>
@@ -99,7 +98,7 @@ function NotificationsPopup({ toggleVisibility }) {
             <Link
               to={`/investor/my-schedule?view=true`}
               className="fw-bold"
-              onClick={() => toggleVisibility(false)}
+              onClick={() => handleOnClickLink(notificationId)}
             >
               meeting
             </Link>{" "}
@@ -107,10 +106,33 @@ function NotificationsPopup({ toggleVisibility }) {
           </span>
         );
       }
+      case "achievementCompleted": {
+        return (
+          <span>
+            You have earned a new achievement:{" "}
+            <Link
+              to={
+                isInvestor
+                  ? `/investor/profile/achievements`
+                  : `/profile/achievements`
+              }
+              className="fw-bold"
+              onClick={() => handleOnClickLink(notificationId)}
+            >
+              {achievementId?.title}
+            </Link>
+          </span>
+        );
+      }
       default: {
         return "";
       }
     }
+  };
+
+  const handleOnClickLink = async (notificationId) => {
+    await markAsRead(notificationId);
+    toggleVisibility(false);
   };
 
   const markAsRead = async (id) => {
@@ -170,6 +192,7 @@ function NotificationsPopup({ toggleVisibility }) {
                   isRead,
                   post,
                   connection,
+                  achievementId,
                 }) => (
                   <div
                     className="notification"
@@ -185,11 +208,16 @@ function NotificationsPopup({ toggleVisibility }) {
                               : `/user/${sender?._id}`
                           }
                           className="fw-bold"
-                          onClick={() => toggleVisibility(false)}
+                          onClick={() => handleOnClickLink(_id)}
                         >
                           {sender?.firstName} {sender?.lastName}
                         </Link>{" "}
-                        {notificationType(type, post || connection)}
+                        {notificationType(
+                          type,
+                          post || connection,
+                          achievementId,
+                          _id
+                        )}
                       </p>
                       <TimeAgo
                         datetime={createdAt}
@@ -203,7 +231,7 @@ function NotificationsPopup({ toggleVisibility }) {
                           className="btn btn-light btn-sm"
                           onClick={() => markAsRead(_id)}
                         >
-                          <span className="d-none d-md-block">
+                          <span className="d-none d-md-block fs-xs text-nowrap">
                             Mark as read
                           </span>
                           <span className="d-md-none text-secondary">✔</span>

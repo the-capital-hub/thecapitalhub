@@ -15,11 +15,16 @@ export default function InvestorOneLinkLayout() {
   const [investorData, setInvestorData] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const oneLinkUser = useSelector((state) => state.onelink?.oneLinkUser);
-  const oneLinkLoggedIn = useSelector(
-    (state) => state.onelink?.oneLinkLoggedIn
-  );
-  const oneLinkId = useSelector((state) => state.onelink?.oneLinkId);
+  // const oneLinkUser = useSelector((state) => state.onelink?.oneLinkUser);
+  // const oneLinkLoggedIn = useSelector(
+  //   (state) => state.onelink?.oneLinkLoggedIn
+  // );
+  // const oneLinkId = useSelector((state) => state.onelink?.oneLinkId);
+
+  const oneLinkUser = localStorage.getItem("oneLinkUser");
+  const oneLinkLoggedIn = localStorage.getItem("oneLinkLoggedIn");
+  const oneLinkId = localStorage.getItem("oneLinkId");
+
 
   const handleSidebarToggle = () => {
     setSidebarCollapsed((prev) => !prev);
@@ -45,17 +50,16 @@ export default function InvestorOneLinkLayout() {
   return (
     <div className="investor_onelink_layout_wrapper">
       {/* Top Navbar */}
-      {!oneLinkUser || !oneLinkLoggedIn || userId !== oneLinkId ? (
-        <OneLinkValidation userId={userId} theme={"investor"}/>
+      {!oneLinkUser || oneLinkLoggedIn === 'false' || userId !== oneLinkId ? (
+        <OneLinkValidation userId={userId} theme={"investor"} onelink={oneLink} />
       ) : (
         <>
           <NavBar handleSidebarToggle={handleSidebarToggle} />
 
           {loading === false ? (
             <div
-              className={`container-fluid investor_view_container ${
-                sidebarCollapsed ? "sidebar-collapsed" : ""
-              }`}
+              className={`container-fluid investor_view_container ${sidebarCollapsed ? "sidebar-collapsed" : ""
+                }`}
             >
               <div className="sidebar">
                 <InvestorOneLinkSidebar

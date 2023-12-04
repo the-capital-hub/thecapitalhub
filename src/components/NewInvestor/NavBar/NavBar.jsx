@@ -395,9 +395,10 @@ const NavBar = (props) => {
                     <img
                       src={NotificationIcon}
                       alt="notification"
-                      onClick={() =>
-                        setToggleNotificationPopup((prev) => !prev)
-                      }
+                      onClick={() => {
+                        dispatch(setUnreadNotifications(0));
+                        setToggleNotificationPopup((prev) => !prev);
+                      }}
                     />
                     {!toggleNotificationPopup && unreadNotifications > 0 && (
                       <div className="notification-count">
