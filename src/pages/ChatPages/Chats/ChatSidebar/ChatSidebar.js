@@ -23,6 +23,12 @@ import {
   selectChatsLastMessages,
   selectChatsUnreadMessageCount,
   selectPersonalChats,
+  selectPinnedChatsLastMessageDates,
+  selectPinnedChatsLastMessages,
+  selectPinnedChatsUnreadMessageCount,
+  selectPersonalChatsLastMessages,
+  selectPersonalChatsLastMessageDates,
+  selectPersonalChatsUnreadMessageCount,
 } from "../../../../Store/features/chat/chatSlice";
 import { selectLoggedInUserId } from "../../../../Store/features/user/userSlice";
 import IconPin from "../../../../components/Investor/SvgIcons/IconPin";
@@ -30,8 +36,29 @@ import IconPin from "../../../../components/Investor/SvgIcons/IconPin";
 
 const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   const loggedInUserId = useSelector(selectLoggedInUserId);
+
+  // Pinned Chats
   const myPinnedChats = useSelector(selectPinnedChats);
+  const myPinnedChatsLastMessages = useSelector(selectPinnedChatsLastMessages);
+  const myPinnedChatsLastMessageDates = useSelector(
+    selectPinnedChatsLastMessageDates
+  );
+  const myPinnedChatsUnreadCounts = useSelector(
+    selectPinnedChatsUnreadMessageCount
+  );
+
+  // Personal Chats
   const myPersonalChats = useSelector(selectPersonalChats);
+  const myPersonalChatsLastMessages = useSelector(
+    selectPersonalChatsLastMessages
+  );
+  const myPersonalChatsLastMessageDates = useSelector(
+    selectPersonalChatsLastMessageDates
+  );
+  const myPersonalChatsUnreadCounts = useSelector(
+    selectPersonalChatsUnreadMessageCount
+  );
+
   const chatLastMessages = useSelector(selectChatsLastMessages);
   const chatLastMessageDates = useSelector(selectChatsLastMessageDates);
   const chatUnreadCounts = useSelector(selectChatsUnreadMessageCount);
@@ -203,12 +230,6 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
     }
   };
 
-  console.log(
-    "chatlastmessages",
-    chatLastMessages,
-    chatLastMessages["6538cbfc3da6278ffc037060"]
-  );
-
   return (
     <>
       <div className="chatsidebar_main_container">
@@ -223,10 +244,11 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
               <div key={index} className="person_wise_chat">
                 {chat.members.map((member) => {
                   if (member._id !== loggedInUserId) {
-                    const inputString = chatLastMessages[chat._id];
-                    const unreadMessageCount = chatUnreadCounts[chat._id];
+                    const inputString = myPinnedChatsLastMessages[chat._id];
+                    const unreadMessageCount =
+                      myPinnedChatsUnreadCounts[chat._id];
                     const messageTime = formatTimestamp(
-                      chatLastMessageDates[chat._id]
+                      myPinnedChatsLastMessageDates[chat._id]
                     );
                     const numberOfCharacters = 20;
                     let latestMessage;
@@ -303,10 +325,11 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
               <div key={index} className="person_wise_chat">
                 {chat.members.map((member) => {
                   if (member._id !== loggedInUserId) {
-                    const inputString = chatLastMessages[chat._id];
-                    const unreadMessageCount = chatUnreadCounts[chat._id];
+                    const inputString = myPersonalChatsLastMessages[chat._id];
+                    const unreadMessageCount =
+                      myPersonalChatsUnreadCounts[chat._id];
                     const messageTime = formatTimestamp(
-                      chatLastMessageDates[chat._id]
+                      myPersonalChatsLastMessageDates[chat._id]
                     );
                     const numberOfCharacters = 13;
                     let latestMessage;

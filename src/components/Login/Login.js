@@ -141,7 +141,7 @@ const Login = () => {
         }
 
         // Fetch all Chat data
-        dispatch(fetchAllChats());
+        // dispatch(fetchAllChats());
       }
 
       console.log("JWT Token:", token);

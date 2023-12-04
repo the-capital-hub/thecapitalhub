@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./CommunityDashboard.scss";
 // import sendIcon from "../../../../Images/Send.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getMessageByChatId,
   // addMessage,
@@ -33,6 +33,7 @@ import MyMessage from "../../../../components/Investor/ChatComponents/ChatMessag
 import OtherMessage from "../../../../components/Investor/ChatComponents/ChatMessages/OtherMessage/OtherMessage";
 import { formatMessages } from "../../../../utils/ChatsHelpers";
 import { selectLoggedInUserId } from "../../../../Store/features/user/userSlice";
+import { updateLastMessage } from "../../../../Store/features/chat/chatSlice";
 
 const CommunityDashboard = ({
   setSendMessage,
@@ -47,6 +48,8 @@ const CommunityDashboard = ({
   // const isCommunitySelected = useSelector(
   //   (state) => state.chat.isCommunitySelected
   // );
+  const dispatch = useDispatch();
+
   const [showFeaturedPostSuccess, setShowFeaturedPostSuccess] = useState(false);
   const [deletePopup, setDeletePopup] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -103,8 +106,15 @@ const CommunityDashboard = ({
     console.log(recieveMessage);
     if (recieveMessage !== null && recieveMessage?.chatId === chatId) {
       setMessages((prevMessages) => [...prevMessages, recieveMessage]);
+      // update last message
+      dispatch(
+        updateLastMessage({
+          chatId: recieveMessage.chatId,
+          text: recieveMessage.text,
+        })
+      );
     }
-  }, [recieveMessage, chatId]);
+  }, [recieveMessage, chatId, dispatch]);
 
   useEffect(() => {
     getMessageByChatId(chatId)

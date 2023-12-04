@@ -34,6 +34,7 @@ import companyProfileIcon from "../../../Images/Investor/Sidebar/company.svg";
 import { BsChevronDown, BsChevronUp, BsLink45Deg } from "react-icons/bs";
 import { ModalBsLauncher } from "../../PopUp/ModalBS";
 import CommunitiesIcon from "../../Investor/ChatComponents/CommunitiesIcon";
+import { clearAllChatsData } from "../../../Store/features/chat/chatSlice";
 
 // Investor Sidebar
 const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
@@ -55,6 +56,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
 
   const handleLogoutLogic = () => {
     dispatch(logout());
+    dispatch(clearAllChatsData);
     localStorage.removeItem("isLoggedIn");
 
     navigate("/login");

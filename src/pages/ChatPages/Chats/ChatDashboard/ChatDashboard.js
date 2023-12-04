@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./ChatDashboard.scss";
 // import sendIcon from "../../../../Images/Send.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getMessageByChatId,
   // getUserAndStartUpByUserIdAPI,
@@ -28,12 +28,14 @@ import ChatInputContainer from "../../../../components/Investor/ChatComponents/C
 import MyMessage from "../../../../components/Investor/ChatComponents/ChatMessages/MyMessage/MyMessage";
 import OtherMessage from "../../../../components/Investor/ChatComponents/ChatMessages/OtherMessage/OtherMessage";
 import { formatMessages } from "../../../../utils/ChatsHelpers";
+import { updateLastMessage } from "../../../../Store/features/chat/chatSlice";
 
 const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
   // Fetch global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const chatId = useSelector((state) => state.chat.chatId);
   const userId = useSelector((state) => state.chat.userId);
+  const dispatch = useDispatch();
 
   const [messages, setMessages] = useState([]);
   // const [user, setUser] = useState(null);
@@ -91,8 +93,15 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
   useEffect(() => {
     if (recieveMessage !== null && recieveMessage?.chatId === chatId) {
       setMessages((prevMessages) => [...prevMessages, recieveMessage]);
+      // update last message
+      dispatch(
+        updateLastMessage({
+          chatId: recieveMessage.chatId,
+          text: recieveMessage.text,
+        })
+      );
     }
-  }, [recieveMessage, chatId]);
+  }, [recieveMessage, chatId, dispatch]);
 
   useEffect(() => {
     getMessageByChatId(chatId)

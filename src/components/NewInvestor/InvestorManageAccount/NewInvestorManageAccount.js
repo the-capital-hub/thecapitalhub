@@ -17,6 +17,7 @@ import { loginSuccess } from "../../../Store/features/user/userSlice";
 import deleteIcon from "../../../Images/post/delete.png";
 import { fetchCompanyData } from "../../../Store/features/user/userThunks";
 import toast from "react-hot-toast";
+import { clearAllChatsData } from "../../../Store/features/chat/chatSlice";
 
 const InvestorManageAccount = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -76,6 +77,7 @@ const InvestorManageAccount = () => {
   const navigate = useNavigate();
   const handleLogoutLogic = () => {
     dispatch(logout());
+    dispatch(clearAllChatsData);
     localStorage.removeItem("isLoggedIn");
     navigate("/login");
   };

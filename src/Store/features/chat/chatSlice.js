@@ -36,6 +36,50 @@ export const chatSlice = createSlice({
       state.chatProfile = initialState.chatProfile;
       state.communityProfile = initialState.communityProfile;
     },
+    // allChatsData reducers
+    updateLastMessage: (state, action) => {
+      let localAllChatsData = JSON.parse(localStorage.getItem("allChatsData"));
+
+      let { chatId, text } = action.payload;
+      if (state.isCommunitySelected) {
+        state.allChatsData.allCommunityChatLastMessage = {
+          ...state.allChatsData.allCommunityChatLastMessage,
+          [chatId]: text,
+        };
+        localAllChatsData.allCommunityChatLastMessage = {
+          ...localAllChatsData.allCommunityChatLastMessage,
+          [chatId]: text,
+        };
+      } else {
+        if (
+          Object.keys(state.allChatsData.allPinnedChatLastMessages).includes(
+            chatId
+          )
+        ) {
+          state.allChatsData.allPinnedChatLastMessages = {
+            ...state.allChatsData.allPinnedChatLastMessages,
+            [chatId]: text,
+          };
+          localAllChatsData.allPinnedChatLastMessages = {
+            ...localAllChatsData.allPinnedChatLastMessages,
+            [chatId]: text,
+          };
+        } else {
+          state.allChatsData.allChatLastMessage = {
+            ...state.allChatsData.allChatLastMessage,
+            [chatId]: text,
+          };
+          localAllChatsData.allChatLastMessage = {
+            ...localAllChatsData.allChatLastMessage,
+            [chatId]: text,
+          };
+        }
+      }
+      localStorage.setItem(JSON.stringify(localAllChatsData));
+    },
+    clearAllChatsData: (state) => {
+      state.allChatsData = null;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAllChats.fulfilled, (state, action) => {
@@ -61,9 +105,9 @@ export const selectCommunitiesUnreadMessageCount = (state) =>
 // Pinned Chat Selectors
 export const selectPinnedChats = (state) => state.chat.allChatsData?.pinnedChat;
 export const selectPinnedChatsLastMessages = (state) =>
-  state.chat.allChatsData?.allPinnedChatLastMessage;
+  state.chat.allChatsData?.allPinnedChatLastMessages;
 export const selectPinnedChatsLastMessageDates = (state) =>
-  state.chat.allChatsData?.allPinnedChatLastMessageDates;
+  state.chat.allChatsData?.allPinnedChatLastMessagesDates;
 export const selectPinnedChatsUnreadMessageCount = (state) =>
   state.chat.allChatsData?.allPinnedChatUnreadMessageCount;
 
@@ -97,6 +141,8 @@ export const {
   setIsCommuntySelected,
   setChatProfile,
   setCommunityProfile,
+  updateLastMessage,
+  clearAllChatsData,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

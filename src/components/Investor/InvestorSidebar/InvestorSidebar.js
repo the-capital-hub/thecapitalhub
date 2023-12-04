@@ -31,6 +31,7 @@ import CommunitiesIcon from "../ChatComponents/CommunitiesIcon";
 import ModalBsLauncher from "../../PopUp/ModalBS/ModalBsLauncher/ModalBsLauncher";
 import companyProfileIcon from "../../../Images/StartUp/Sidebar/companyProfile.svg";
 import ExploreIcon from "../../../Images/Investor/Sidebar/explore.svg";
+import { clearAllChatsData } from "../../../Store/features/chat/chatSlice";
 
 // Startup Sidebar
 const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
@@ -57,6 +58,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
 
   const handleLogoutLogic = () => {
     dispatch(logout());
+    dispatch(clearAllChatsData);
     localStorage.removeItem("isLoggedIn");
     navigate("/login");
   };

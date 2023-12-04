@@ -11,7 +11,7 @@ import {
 import sendIcon from "../../../../Images/Send.svg";
 import "./ChatInputContainer.scss";
 import { getBase64 } from "../../../../utils/getBase64";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { s3 } from "../../../../Service/awsConfig";
 import {
   selectLoggedInUserId,
@@ -22,6 +22,7 @@ import {
   selectUserProfilePicture,
 } from "../../../../Store/features/user/userSlice";
 import AttachmentSelector from "./ChatAttachments/AttachmentSelector/AttachmentSelector";
+import { updateLastMessage } from "../../../../Store/features/chat/chatSlice";
 
 export default function ChatInputContainer({
   setSendMessage,
@@ -39,6 +40,7 @@ export default function ChatInputContainer({
   const isCommunitySelected = useSelector(
     (state) => state.chat.isCommunitySelected
   );
+  const dispatch = useDispatch();
 
   // State for text input
   const [sendText, setSendText] = useState("");
@@ -132,6 +134,15 @@ export default function ChatInputContainer({
     const createdAt = new Date().toISOString();
     setSendMessage({ ...message, recieverId, createdAt });
     clearInputs();
+
+    //
+    // update last message
+    dispatch(
+      updateLastMessage({
+        chatId: message.chatId,
+        text: message.text,
+      })
+    );
   };
 
   const handleFileChange = (event) => {
