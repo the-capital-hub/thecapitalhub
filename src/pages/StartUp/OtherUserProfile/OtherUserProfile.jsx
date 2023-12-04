@@ -93,36 +93,39 @@ function OtherUserProfile() {
                       </span>
                     </div>
                   </div>
-                  <div className="buttons d-flex gap-2 flex-row align-items-md-center">
-                    <Link
-                      to={`/chats?userId=${userData?._id}`}
-                      className="text-decoration-none"
-                    >
-                      <button className="message btn rounded-pill px-3 py-2">
-                        <img src={messageIcon} width={20} alt="message user" />
-                        <span>Message</span>
-                      </button>
-                    </Link>
-                    {userData?.connections?.includes(loggedInUser._id) ? (
-                      <button className="connection-status  btn rounded-pill px-3 py-2">
-                        <span>Connected</span>
-                      </button>
-                    ) : userData?.connectionsReceived?.includes(
+                  {loggedInUser._id !== userData?._id &&
+                    <div className="buttons d-flex gap-2 flex-row align-items-md-center">
+                      <Link
+                        to={`/chats?userId=${userData?._id}`}
+                        className="text-decoration-none"
+                      >
+                        <button className="message btn rounded-pill px-3 py-2">
+                          <img src={messageIcon} width={20} alt="message user" />
+                          <span>Message</span>
+                        </button>
+                      </Link>
+                      {userData?.connections?.includes(loggedInUser._id) ? (
+                        <button className="connection-status  btn rounded-pill px-3 py-2">
+                          <span>Connected</span>
+                        </button>
+                      ) : userData?.connectionsReceived?.includes(
                         loggedInUser._id
                       ) ? (
-                      <button className=" connection-status d-flex btn rounded-pill px-3 py-2">
-                        <img src={connection} width={20} alt="message user" />
-                        <span>Pending</span>
-                      </button>
-                    ) : (
-                      <button className="connection-status d-flex  btn rounded-pill px-3 py-2">
-                        <img src={connection} width={20} alt="message user" />
-                        <span onClick={() => handleConnect(userData?._id)}>
-                          Connect
-                        </span>
-                      </button>
-                    )}
-                  </div>
+                        <button className=" connection-status d-flex btn rounded-pill px-3 py-2">
+                          <img src={connection} width={20} alt="message user" />
+                          <span>Pending</span>
+                        </button>
+                      ) : (
+                        <button className="connection-status d-flex  btn rounded-pill px-3 py-2">
+                          <img src={connection} width={20} alt="message user" />
+                          <span onClick={() => handleConnect(userData?._id)}>
+                            Connect
+                          </span>
+                        </button>
+                      )}
+                    </div>
+                  }
+
                 </div>
                 <div className="details">
                   <div className="single_details row row-cols-1 row-cols-md-2 ">
