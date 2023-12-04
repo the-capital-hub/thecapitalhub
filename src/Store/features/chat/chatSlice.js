@@ -47,46 +47,47 @@ export const chatSlice = createSlice({
 
 // AllChatsData Selectors
 export const selectIsAllChatsData = (state) =>
-  state.allChatsData?.allChats === null ? false : true;
+  state.chat.allChatsData === null ? false : true;
 // Community Selectors
-export const selectCommunities = (state) => state.allChatsData?.communities;
+export const selectCommunities = (state) =>
+  state.chat.allChatsData?.communities;
 export const selectCommunitiesLastMessages = (state) =>
-  state.allChatsData?.allCommunityChatLastMessage;
+  state.chat.allChatsData?.allCommunityChatLastMessage;
 export const selectCommunitiesLastMessageDates = (state) =>
-  state.allChatsData?.allCommunityChatLastMessageDates;
+  state.chat.allChatsData?.allCommunityChatLastMessageDates;
 export const selectCommunitiesUnreadMessageCount = (state) =>
-  state.allChatsData?.allCommunityChatUnreadMessageCount;
+  state.chat.allChatsData?.allCommunityChatUnreadMessageCount;
 
 // Pinned Chat Selectors
-export const selectPinnedChats = (state) => state.allChatsData?.pinnedChat;
+export const selectPinnedChats = (state) => state.chat.allChatsData?.pinnedChat;
 export const selectPinnedChatsLastMessages = (state) =>
-  state.allChatsData?.allPinnedChatLastMessage;
+  state.chat.allChatsData?.allPinnedChatLastMessage;
 export const selectPinnedChatsLastMessageDates = (state) =>
-  state.allChatsData?.allPinnedChatLastMessageDates;
+  state.chat.allChatsData?.allPinnedChatLastMessageDates;
 export const selectPinnedChatsUnreadMessageCount = (state) =>
-  state.allChatsData?.allPinnedChatUnreadMessageCount;
+  state.chat.allChatsData?.allPinnedChatUnreadMessageCount;
 
 // Personal Chat selectors
-export const selectPersonalChats = (state) => state.allChatsData?.allChats;
+export const selectPersonalChats = (state) => state.chat.allChatsData?.allChats;
 export const selectPersonalChatsLastMessages = (state) =>
-  state.allChatsData?.allChatLastMessage;
+  state.chat.allChatsData?.allChatLastMessage;
 export const selectPersonalChatsLastMessageDates = (state) =>
-  state.allChatsData?.allChatLastMessageDates;
+  state.chat.allChatsData?.allChatLastMessageDates;
 export const selectPersonalChatsUnreadMessageCount = (state) =>
-  state.allChatsData?.allChatsUnreadMessageCount;
+  state.chat.allChatsData?.allChatsUnreadMessageCount;
 
 // Data for sidebar
 export const selectChatsLastMessages = (state) => ({
-  ...state.allChatsData?.allPinnedChatLastMessage,
-  ...state.allChatsData?.allChatLastMessage,
+  ...state.chat.allChatsData?.allPinnedChatLastMessages,
+  ...state.chat.allChatsData?.allChatLastMessage,
 });
 export const selectChatsLastMessageDates = (state) => ({
-  ...state.allChatsData?.allPinnedChatLastMessageDates,
-  ...state.allChatsData?.allChatLastMessageDates,
+  ...state.chat.allChatsData?.allPinnedChatLastMessageDates,
+  ...state.chat.allChatsData?.allChatLastMessageDates,
 });
 export const selectChatsUnreadMessageCount = (state) => ({
-  ...state.allChatsData?.allPinnedChatUnreadMessageCount,
-  ...state.allChatsData?.allChatsUnreadMessageCount,
+  ...state.chat.allChatsData?.allPinnedChatUnreadMessageCount,
+  ...state.chat.allChatsData?.allChatsUnreadMessageCount,
 });
 
 export const {

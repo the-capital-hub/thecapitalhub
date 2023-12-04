@@ -1,9 +1,8 @@
 import { HiOutlineUserGroup } from "react-icons/hi2";
 import {
-  // selectCommunitiesLastMessageDates,
-  // selectCommunitiesLastMessages,
-  // selectCommunitiesUnreadMessageCount,
-  // selectIsAllChatsData,
+  selectCommunitiesLastMessageDates,
+  selectCommunitiesLastMessages,
+  selectCommunitiesUnreadMessageCount,
   setChatId,
   setIsCommuntySelected,
 } from "../../../Store/features/chat/chatSlice";
@@ -24,14 +23,13 @@ export default function CommunityCard({
   isRead,
 }) {
   const loggedInUserId = useSelector(selectLoggedInUserId);
-  // const isAllChatsData = useSelector(selectIsAllChatsData);
-  // const communitiesLastMessages = useSelector(selectCommunitiesLastMessages);
-  // const communitiesLastMessageDates = useSelector(
-  //   selectCommunitiesLastMessageDates
-  // );
-  // const communitiesUnreadCounts = useSelector(
-  //   selectCommunitiesUnreadMessageCount
-  // );
+  const communitiesLastMessages = useSelector(selectCommunitiesLastMessages);
+  const communitiesLastMessageDates = useSelector(
+    selectCommunitiesLastMessageDates
+  );
+  const communitiesUnreadCounts = useSelector(
+    selectCommunitiesUnreadMessageCount
+  );
 
   const dispatch = useDispatch();
   // console.log(community);
@@ -99,8 +97,10 @@ export default function CommunityCard({
       });
   }, [community._id, sendMessage, recieveMessage, isRead, loggedInUserId]);
 
-  const messageTime = formatTimestamp(dates[community._id]);
-  const inputString = latestMessages[community._id];
+  const messageTime = formatTimestamp(
+    communitiesLastMessageDates[community._id]
+  );
+  const inputString = communitiesLastMessages[community._id];
   // console.log(latestMessages);
   const numberOfCharacters = 20;
   let latestMessage;
@@ -113,7 +113,7 @@ export default function CommunityCard({
   return (
     <div
       className="community__card d-flex align-items-center gap-2 py-1 px-2"
-      key={community.id}
+      key={community._id}
       onClick={() => handleCommunityClick(community._id)}
     >
       <span className="p-2 position-relative">
@@ -156,8 +156,10 @@ export default function CommunityCard({
           {messageTime !== "Invalid Date" && (
             <div className="time__stamp m-0">{messageTime}</div>
           )}
-          {unreadMessageCount > 0 && (
-            <div className="notification">{unreadMessageCount}</div>
+          {communitiesUnreadCounts[community._id] > 0 && (
+            <div className="notification">
+              {communitiesUnreadCounts[community._id]}
+            </div>
           )}
         </div>
       </div>

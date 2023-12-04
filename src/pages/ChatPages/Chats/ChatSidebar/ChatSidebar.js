@@ -23,7 +23,6 @@ import {
   selectChatsLastMessages,
   selectChatsUnreadMessageCount,
   selectPersonalChats,
-  selectIsAllChatsData,
 } from "../../../../Store/features/chat/chatSlice";
 import { selectLoggedInUserId } from "../../../../Store/features/user/userSlice";
 import IconPin from "../../../../components/Investor/SvgIcons/IconPin";
@@ -31,7 +30,6 @@ import IconPin from "../../../../components/Investor/SvgIcons/IconPin";
 
 const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   const loggedInUserId = useSelector(selectLoggedInUserId);
-  const isAllChatsData = useSelector(selectIsAllChatsData);
   const myPinnedChats = useSelector(selectPinnedChats);
   const myPersonalChats = useSelector(selectPersonalChats);
   const chatLastMessages = useSelector(selectChatsLastMessages);
@@ -205,6 +203,12 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
     }
   };
 
+  console.log(
+    "chatlastmessages",
+    chatLastMessages,
+    chatLastMessages["6538cbfc3da6278ffc037060"]
+  );
+
   return (
     <>
       <div className="chatsidebar_main_container">
@@ -215,13 +219,15 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
           </span>
           {/* Pinned Chats */}
           <div className="d-flex flex-column" id="pinnedChats">
-            {pinnedChats?.map((chat, index) => (
+            {myPinnedChats?.map((chat, index) => (
               <div key={index} className="person_wise_chat">
                 {chat.members.map((member) => {
                   if (member._id !== loggedInUserId) {
-                    const inputString = latestMessages[chat._id];
-                    const unreadMessageCount = unreadMessageCounts[chat._id];
-                    const messageTime = formatTimestamp(dates[chat._id]);
+                    const inputString = chatLastMessages[chat._id];
+                    const unreadMessageCount = chatUnreadCounts[chat._id];
+                    const messageTime = formatTimestamp(
+                      chatLastMessageDates[chat._id]
+                    );
                     const numberOfCharacters = 20;
                     let latestMessage;
                     if (inputString?.length > numberOfCharacters) {
@@ -293,13 +299,15 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
           </span>
 
           <div className="d-flex flex-column" id="normalChats">
-            {chats.map((chat, index) => (
+            {myPersonalChats?.map((chat, index) => (
               <div key={index} className="person_wise_chat">
                 {chat.members.map((member) => {
                   if (member._id !== loggedInUserId) {
-                    const inputString = latestMessages[chat._id];
-                    const unreadMessageCount = unreadMessageCounts[chat._id];
-                    const messageTime = formatTimestamp(dates[chat._id]);
+                    const inputString = chatLastMessages[chat._id];
+                    const unreadMessageCount = chatUnreadCounts[chat._id];
+                    const messageTime = formatTimestamp(
+                      chatLastMessageDates[chat._id]
+                    );
                     const numberOfCharacters = 13;
                     let latestMessage;
                     if (inputString?.length > numberOfCharacters) {

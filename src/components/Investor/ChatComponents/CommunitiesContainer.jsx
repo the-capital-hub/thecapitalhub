@@ -22,7 +22,7 @@ export default function CommunitiesContainer({
   setIsRead,
 }) {
   const loggedInUserId = useSelector(selectLoggedInUserId);
-  // const communities = useSelector(selectCommunities);
+  const communities = useSelector(selectCommunities);
   const [getCommunity, setGetCommunity] = useState([]);
   const chatProfile = useSelector((state) => state.chat.chatProfile);
   const chatId = useSelector((state) => state.chat.chatId);
@@ -82,7 +82,7 @@ export default function CommunitiesContainer({
         {/* Render communities list */}
         <div className="my__communities d-flex flex-column">
           {/* <h5 className="px-3 m-0 py-3">My Communities</h5> */}
-          {getCommunity?.data?.map((community, index) => {
+          {communities?.map((community, index) => {
             return (
               <CommunityCard
                 community={community}
