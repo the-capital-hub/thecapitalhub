@@ -20,6 +20,6 @@ router.get("/findChat/:firstId/:secondId", findChatController);
 router.patch("/togglePin/:userId/:chatId", togglePinChatController);
 router.get("/getPinnedChat/:userId", getPinnedChatsController);
 router.get("/getChatSettings/:loggedUserId/:otherUserId/:chatId", getChatSettingsController);
-router.get("/getAllChats/:userId", getAllChatsController);
+router.get("/getAllChats", getAllChatsController);
 
 export default router;

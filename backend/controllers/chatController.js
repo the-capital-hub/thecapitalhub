@@ -95,7 +95,7 @@ export const getChatSettingsController = async (req, res) => {
 
 export const getAllChatsController = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const userId = req.userId;
     const response = await getAllChats(userId);
     return res.status(response.status).send(response);
   } catch (error) {
