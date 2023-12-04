@@ -10,7 +10,7 @@ const initialState = {
   showInvestorCreatePostModal: false,
   showNotificationModal: false,
   isMobileApp: false,
-  theme: "light",
+  theme: localStorage.getItem("theme") || "light",
 };
 
 export const designSlice = createSlice({
@@ -40,9 +40,11 @@ export const designSlice = createSlice({
     },
     toggleTheme: (state, action) => {
       if (state.theme === "light") {
+        localStorage.setItem("theme", "dark");
         state.theme = "dark";
       } else {
         state.theme = "light";
+        localStorage.setItem("theme", "light");
       }
     },
   },
