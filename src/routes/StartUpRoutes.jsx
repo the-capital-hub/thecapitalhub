@@ -68,7 +68,8 @@ function StartUpRoutes() {
   const theme = useSelector(selectTheme);
 
   useEffect(() => {
-    document.body.setAttribute("data-bs-theme", theme);
+    document.body.setAttribute("data-bs-theme", "dark");
+    // document.body.setAttribute("data-bs-theme", "light");  
     return function () {
       document.body.setAttribute("data-bs-theme", "light"); // temporary
     };

@@ -286,3 +286,12 @@ button {
     opacity: 1;
   }
 }
+
+// mixins
+@mixin setBgColorAndHover($baseColor) {
+  background-color: $baseColor;
+
+  &:hover {
+    background-color: darken($baseColor, 5%);
+  }
+}

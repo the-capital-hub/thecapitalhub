@@ -1,14 +1,9 @@
 .view_profile_container {
-  .view_profile {
-    // height: 500px;
-    flex-shrink: 0;
-    border: 1px solid #dcdcdc;
-    background-color: white;
-    border-radius: var(--border-radius);
-    // box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
+  flex-shrink: 0;
+  // border: 1px solid #afafaf;
+  border-radius: var(--border-radius);
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 
   .view_profile_name_section {
     display: flex;
@@ -158,22 +153,5 @@
   .view_profile_container {
     margin-top: 20px;
     margin-bottom: 20px;
-    // // width: 1000px;
-    // height: 600px;
-    // display: flex;
-    // // justify-content: center;
-    // .view_profile {
-    //   // height: 1000px;
-    //   display: flex;
-    //   flex-direction: column;
-    //   align-items: center;
-    //   justify-content: center;
-    //   .view_profile_name_section {
-    //     width: 800px;
-    //     display: flex;
-    //     flex-direction: column;
-    //     align-items: center;
-    //   }
-    // }
   }
 }
