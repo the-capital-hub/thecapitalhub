@@ -145,13 +145,13 @@ const InvestorManageAccount = () => {
             <div className="box_container p-4 mt-4 row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-gap-3 flex-lg-row">
               {/* Change Password */}
               <section className="col password_section">
-                <div className="change_password border">
+                <div className="change_password border border-secondary-subtle">
                   {/* Header */}
                   <div className="d-flex align-items-center gap-2">
                     <div className="logo">
                       <img src={logoIcon} alt="img" />
                     </div>
-                    <div className="header_text">Change Password</div>
+                    <span className="header_text">Change Password</span>
                   </div>
                   <hr />
                   {/* Body */}
@@ -207,7 +207,7 @@ const InvestorManageAccount = () => {
 
               {/* Present Accounts */}
               <section className="col present_accounts_section">
-                <div className="present_account border">
+                <div className="present_account border border-secondary-subtle">
                   {/* Header */}
                   <div className="d-flex align-items-center">
                     <div className="logo">
@@ -225,7 +225,7 @@ const InvestorManageAccount = () => {
                       <h4 className="text-break">
                         {loggedInUser?.firstName} {loggedInUser?.lastName}
                       </h4>
-                      <h6 className="text-break">{loggedInUser?.email}</h6>
+                      <span className="text-dark text-break">{loggedInUser?.email}</span>
                     </div>
                   </div>
                   {/* Footer */}
@@ -258,14 +258,14 @@ const InvestorManageAccount = () => {
 
               {/* Logout Section */}
               <section className="col present_accounts_section">
-                <div className="present_account border">
+                <div className="present_account border border-secondary-subtle">
                   <div className="d-flex align-items-center">
                     <div className="logo">
                       <img src={logoIcon} alt="img" />
                     </div>
                     <div className="header_text">Accounts</div>
                   </div>
-                  <p></p>
+                  <hr />
                   <section className="existing_accounts">
                     {otherAccounts?.map((account) => {
                       const fullmname =
@@ -296,7 +296,7 @@ const InvestorManageAccount = () => {
                                 </div>
                                 <div className="name_email">
                                   <h5 className="m-0">{fullmname}</h5>
-                                  <span className="fs-sm fw-semibold text-secondary">
+                                  <span className="fs-sm fw-semibold text-dark">
                                     {window.innerWidth <= 600
                                       ? account.user.email.slice(0, 21) ===
                                         account.user.email

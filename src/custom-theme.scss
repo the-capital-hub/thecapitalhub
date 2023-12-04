@@ -140,6 +140,9 @@
   --bs-form-invalid-color: #dc3545;
   --bs-form-invalid-border-color: #dc3545;
 
+  // Custom colors
+  --white-to-grey: white;
+
   .card {
     --bs-card-bg: #ffffff;
   }
@@ -179,7 +182,7 @@ $color-mode-type: data;
   --bs-info: #0dcaf0;
   --bs-warning: #ffc107;
   --bs-danger: #dc3545;
-  --bs-light: #f8f9fa;
+  --bs-light: #5c5b5b;
   --bs-dark: #212529;
   --bs-startup: #926a54;
   --bs-investor: #d3f36b;
@@ -298,13 +301,21 @@ $color-mode-type: data;
   --bs-form-invalid-color: #dc3545;
   --bs-form-invalid-border-color: #dc3545;
 
+  // Custom colors
+  --white-to-grey: #2f2f2f;
+
   .card {
     --bs-card-bg: #2f2f2f;
-    // --bs-card-border-color: 
   }
 
   .btn {
     --bs-btn-bg: #979797;
     --bs-btn-hover-border-color: rgb(141, 141, 141);
+  }
+
+  .form-input {
+    label {
+      color: var(--bs-gray-100);
+    }
   }
 }
