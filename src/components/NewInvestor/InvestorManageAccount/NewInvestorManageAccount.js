@@ -15,7 +15,7 @@ import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
 import deleteIcon from "../../../Images/post/delete.png";
-import { fetchCompanyData } from "../../../Store/features/user/userSlice";
+import { fetchCompanyData } from "../../../Store/features/user/userThunks";
 import toast from "react-hot-toast";
 
 const InvestorManageAccount = () => {
@@ -89,8 +89,11 @@ const InvestorManageAccount = () => {
       if (confirmSwitch) {
         setTimeout(() => {
           dispatch(loginSuccess(selectedAccountFull.user));
-          let isInvestor = selectedAccountFull.user.isInvestor === "true" ? true : false;
-          dispatch(fetchCompanyData(selectedAccountFull.user.investor, isInvestor));
+          let isInvestor =
+            selectedAccountFull.user.isInvestor === "true" ? true : false;
+          dispatch(
+            fetchCompanyData(selectedAccountFull.user.investor, isInvestor)
+          );
           localStorage.setItem("accessToken", selectedAccountFull.token);
           setIsSubmitting(false);
           toast.success("Account switched successfully", {
@@ -296,10 +299,16 @@ const InvestorManageAccount = () => {
                               </label>
 
                               <div className="profile_image">
-                                <img src={account.user.profilePicture} alt="img" />
+                                <img
+                                  src={account.user.profilePicture}
+                                  alt="img"
+                                />
                               </div>
                               <div className="name_email">
-                                <h4>{account.user.firstName} {account.user.lastName}</h4>
+                                <h4>
+                                  {account.user.firstName}{" "}
+                                  {account.user.lastName}
+                                </h4>
                                 <h6>
                                   {window.innerWidth <= 600
                                     ? account.user.email.slice(0, 21) ===
@@ -308,14 +317,13 @@ const InvestorManageAccount = () => {
                                       : account.user.email.slice(0, 21) + "..."
                                     : account.user.email.slice(0, 23) ===
                                       account.user.email
-                                      ? account.user.email
-                                      : account.user.email.slice(0, 23) + "..."}
+                                    ? account.user.email
+                                    : account.user.email.slice(0, 23) + "..."}
                                 </h6>
                               </div>
                             </div>
                           </div>
                           <div className="right_section d-flex flex-column">
-
                             <button
                               className="img-btn  pt-md-2"
                               onClick={() => handleRemoveAccount(account)}

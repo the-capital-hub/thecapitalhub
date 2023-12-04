@@ -14,12 +14,14 @@ import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
 import deleteIcon from "../../../Images/post/delete.png";
-import { fetchCompanyData } from "../../../Store/features/user/userSlice";
+import { fetchCompanyData } from "../../../Store/features/user/userThunks";
 import toast from "react-hot-toast";
 
 const InvestorManageAccount = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const [otherAccounts, setOtherAccounts] = useState(JSON.parse(localStorage.getItem("StartupAccounts")) || []);
+  const [otherAccounts, setOtherAccounts] = useState(
+    JSON.parse(localStorage.getItem("StartupAccounts")) || []
+  );
   const [selectedAccount, setSelectedAcc] = useState(loggedInUser);
   const [selectedAccountFull, setSelectedAccFull] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -85,7 +87,8 @@ const InvestorManageAccount = () => {
       if (confirmSwitch) {
         setTimeout(() => {
           dispatch(loginSuccess(selectedAccountFull.user));
-          let isInvestor = selectedAccountFull.user.isInvestor === "true" ? true : false;
+          let isInvestor =
+            selectedAccountFull.user.isInvestor === "true" ? true : false;
           dispatch(fetchCompanyData(selectedAccountFull.user._id, isInvestor));
           localStorage.setItem("accessToken", selectedAccountFull.token);
           setIsSubmitting(false);
@@ -105,7 +108,9 @@ const InvestorManageAccount = () => {
 
   //remove acc
   const handleRemoveAccount = (removeAccountDetails) => {
-    const shouldRemove = window.confirm("Are you sure you want to remove this account?");
+    const shouldRemove = window.confirm(
+      "Are you sure you want to remove this account?"
+    );
     if (!shouldRemove) {
       return;
     }
@@ -313,11 +318,12 @@ const InvestorManageAccount = () => {
                                       ? account.user.email.slice(0, 21) ===
                                         account.user.email
                                         ? account.user.email
-                                        : account.user.email.slice(0, 21) + "..."
+                                        : account.user.email.slice(0, 21) +
+                                          "..."
                                       : account.user.email.slice(0, 23) ===
                                         account.user.email
-                                        ? account.user.email
-                                        : account.user.email.slice(0, 23) + "..."}
+                                      ? account.user.email
+                                      : account.user.email.slice(0, 23) + "..."}
                                   </h6>
                                 </div>
                               </div>

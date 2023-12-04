@@ -15,7 +15,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   loginSuccess,
   loginFailure,
-  fetchCompanyData,
 } from "../../Store/features/user/userSlice";
 import backArrow from "../../Images/left-arrow.png";
 import ResetPasswordPopUp from "../PopUp/RequestPasswordPopUp/RequestPasswordPopUp";
@@ -24,6 +23,8 @@ import SpinnerBS from "../Shared/Spinner/SpinnerBS";
 import { selectIsMobileApp } from "../../Store/features/design/designSlice";
 import { GoogleAuth } from "@codetrix-studio/capacitor-google-auth";
 import { Form } from "react-bootstrap";
+import { fetchCompanyData } from "../../Store/features/user/userThunks";
+import { fetchAllChats } from "../../Store/features/chat/chatThunks";
 
 const Login = () => {
   // const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -35,12 +36,12 @@ const Login = () => {
 
   useEffect(() => {
     GoogleAuth.initialize({
-      clientId: '556993160670-mb0ek9ukp41t6402t61vkktpmek415qe.apps.googleusercontent.com',
-      scopes: ['profile', 'email'],
+      clientId:
+        "556993160670-mb0ek9ukp41t6402t61vkktpmek415qe.apps.googleusercontent.com",
+      scopes: ["profile", "email"],
       grantOfflineAccess: true,
     });
-  })
-
+  });
 
   // States for login
   const [isLoginSuccessfull, setIsLoginSuccessfull] = useState(false);
@@ -138,6 +139,9 @@ const Login = () => {
         } else {
           dispatch(fetchCompanyData(response.user._id, isInvestor));
         }
+
+        // Fetch all Chat data
+        // dispatch(fetchAllChats());
       }
 
       console.log("JWT Token:", token);
@@ -230,13 +234,12 @@ const Login = () => {
     }
   }, []);
 
-
   const googleLoginHandle = async () => {
     let googleUser = await GoogleAuth.signIn();
     console.log(googleUser.authentication.idToken);
     const credential = googleUser.authentication.idToken;
     googleUserVerifyHandler({ credential });
-  }
+  };
 
   return (
     <div className="container d-flex justify-content-center align-items-start py-md-5 min-vh-100">
@@ -269,8 +272,9 @@ const Login = () => {
             <div className="d-flex flex-row justify-content-between align-items-center gap-4 gap-sm-5">
               <Link to="">
                 <button
-                  className={`login_btn ${!isInvestorSelected ? "startup" : ""
-                    } `}
+                  className={`login_btn ${
+                    !isInvestorSelected ? "startup" : ""
+                  } `}
                   onClick={() => setIsInvestorSelected(false)}
                 >
                   Start Up
@@ -278,8 +282,9 @@ const Login = () => {
               </Link>
               <Link to="">
                 <button
-                  className={`login_btn ${isInvestorSelected ? "investor" : ""
-                    } `}
+                  className={`login_btn ${
+                    isInvestorSelected ? "investor" : ""
+                  } `}
                   onClick={() => setIsInvestorSelected(true)}
                 >
                   Investor
@@ -331,15 +336,15 @@ const Login = () => {
               </div>
             </div>
             <div className="row mt-2">
-            <div className="d-flex gap-2 p-2">
-      <input
-        type="checkbox"
-        id="staySignedInCheckbox"
-        checked={staySignedIn}
-        onChange={handleCheckboxChange}
-      />
-      <label htmlFor="staySignedInCheckbox">Stay signed in</label>
-    </div>
+              <div className="d-flex gap-2 p-2">
+                <input
+                  type="checkbox"
+                  id="staySignedInCheckbox"
+                  checked={staySignedIn}
+                  onChange={handleCheckboxChange}
+                />
+                <label htmlFor="staySignedInCheckbox">Stay signed in</label>
+              </div>
               <div className="col-md-12">
                 <Link to={""} onClick={() => setShowResetPopUp(true)}>
                   Forgot Password?
@@ -371,7 +376,7 @@ const Login = () => {
                 )}
               </button>
             </div>
-        
+
             <h3 className="already_have_account_mobile">
               I don't have an account? &nbsp;
               <Link to={"/signup"} style={{ color: "red" }}>
@@ -386,11 +391,11 @@ const Login = () => {
             <hr className="line" />
           </div>
           <div className="social-login-container d-flex flex-column justify-content-center">
-            {isMobileApp ?
-              <img src={GIcon} alt="image" onClick={googleLoginHandle} />
-              :
+            {isMobileApp ? (
+              <img src={GIcon} alt="Google logo" onClick={googleLoginHandle} />
+            ) : (
               <div id="googlesignin" className="mx-auto"></div>
-            }
+            )}
           </div>
           {/* <div className="row">
             <div className="col d-flex justify-content-center align-items-center login_icons">

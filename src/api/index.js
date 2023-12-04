@@ -115,6 +115,7 @@ const API = Object.freeze({
   getUserAchievements: `${baseUrl}/achievement/getUserAchievements`,
   submitFundingToMail: `${baseUrl}/contactUs/lookingForFundingMail`,
   addNotificationAPI: `${baseUrl}/notificaton/addNotification`,
+  getAllChats: `${baseUrl}/chat/getAllChats`,
 });
 
 export default API;

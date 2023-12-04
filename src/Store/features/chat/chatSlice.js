@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { fetchAllChats } from "./chatThunks";
 
 const initialState = {
   chatId: "",
@@ -6,6 +7,7 @@ const initialState = {
   isCommunitySelected: false,
   chatProfile: {},
   communityProfile: {},
+  allChatsData: null,
 };
 
 export const chatSlice = createSlice({
@@ -34,6 +36,11 @@ export const chatSlice = createSlice({
       state.chatProfile = initialState.chatProfile;
       state.communityProfile = initialState.communityProfile;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchAllChats.fulfilled, (state, action) => {
+      state.allChatsData = action.payload;
+    });
   },
 });
 
