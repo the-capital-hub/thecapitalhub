@@ -109,8 +109,8 @@
 
         .chats-col {
           height: calc(98dvh - 32px - 163px);
-          overflow-y: auto;
-          padding-inline-end: 0.25rem;
+          // overflow-y: auto;
+          // padding-inline-end: 0.25rem;
 
           &::-webkit-scrollbar {
             width: 4px;
@@ -128,6 +128,58 @@
           &::-webkit-scrollbar-track {
             background-color: transparent;
             border-radius: 10rem;
+          }
+
+          #sidebarCommunities + #sidebarChats {
+            height: calc(100% - 80px);
+            // height: 100%;
+            .chatsidebar_content {
+              height: 100%;
+              overflow-y: auto;
+              &::-webkit-scrollbar {
+                width: 8px;
+              }
+
+              &::-webkit-scrollbar-thumb {
+                background-color: rgba(253, 89, 1, 0.2);
+                border-radius: 10rem;
+
+                &:hover {
+                  background-color: rgba(253, 89, 1, 0.8);
+                }
+              }
+
+              &::-webkit-scrollbar-track {
+                background-color: transparent;
+                border-radius: 10rem;
+              }
+            }
+          }
+
+          #sidebarCommunities[open] + #sidebarChats {
+            height: calc(100% - 290px - 20px);
+            // height: 100%;
+            .chatsidebar_content {
+              height: 100%;
+              overflow-y: auto;
+              &::-webkit-scrollbar {
+                width: 8px;
+              }
+
+              &::-webkit-scrollbar-thumb {
+                background-color: rgba(253, 89, 1, 0.2);
+                border-radius: 10rem;
+
+                &:hover {
+                  background-color: rgba(253, 89, 1, 0.8);
+                }
+              }
+
+              &::-webkit-scrollbar-track {
+                background-color: transparent;
+                border-radius: 10rem;
+              }
+            }
           }
         }
       }

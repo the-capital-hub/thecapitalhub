@@ -75,7 +75,7 @@ export const chatSlice = createSlice({
           };
         }
       }
-      localStorage.setItem(JSON.stringify(localAllChatsData));
+      localStorage.setItem("allChatsData", JSON.stringify(localAllChatsData));
     },
     clearAllChatsData: (state) => {
       state.allChatsData = null;

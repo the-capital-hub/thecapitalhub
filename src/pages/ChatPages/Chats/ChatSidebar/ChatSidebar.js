@@ -232,7 +232,7 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
 
   return (
     <>
-      <div className="chatsidebar_main_container">
+      <div className="chatsidebar_main_container" id="sidebarChats">
         <div className="chatsidebar_content pt-2 ">
           {/* previous style for below span style={{ margin: "5px 20px" }} */}
           <span className="m-3 mt-1">

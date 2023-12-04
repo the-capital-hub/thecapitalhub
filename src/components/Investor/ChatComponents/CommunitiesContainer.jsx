@@ -47,6 +47,7 @@ export default function CommunitiesContainer({
     <details
       className="communities__wrapper d-flex flex-column bg-white rounded-4 shadow-sm overflow-hidden"
       open={isCommunityOpen}
+      id="sidebarCommunities"
     >
       <summary className="communities__header d-flex align-items-center gap-2 py-3 px-4 ">
         {/* <HiOutlineUserGroup style={{ fontSize: "2rem" }} /> */}
