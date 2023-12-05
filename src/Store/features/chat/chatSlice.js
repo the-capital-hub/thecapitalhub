@@ -131,6 +131,11 @@ export const chatSlice = createSlice({
     clearAllChatsData: (state) => {
       state.allChatsData = null;
       state.allChatsStatus = null;
+      state.chatId = initialState.chatId;
+      state.userId = initialState.userId;
+      state.isCommunitySelected = initialState.isCommunitySelected;
+      state.chatProfile = initialState.chatProfile;
+      state.communityProfile = initialState.communityProfile;
     },
   },
   extraReducers: (builder) => {
