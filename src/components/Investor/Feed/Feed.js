@@ -130,7 +130,7 @@ const Feed = () => {
             <LookingForFund />
 
             {/* Write a Post */}
-            <div className="bg-white rounded-4 start_post_container">
+            <div className="rounded-4 start_post_container">
               <img
                 src={loggedInUser.profilePicture}
                 alt="Profile"
