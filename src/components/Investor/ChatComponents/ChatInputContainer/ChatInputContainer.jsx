@@ -11,7 +11,7 @@ import {
 import sendIcon from "../../../../Images/Send.svg";
 import "./ChatInputContainer.scss";
 import { getBase64 } from "../../../../utils/getBase64";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { s3 } from "../../../../Service/awsConfig";
 import {
   selectLoggedInUserId,
@@ -22,12 +22,13 @@ import {
   selectUserProfilePicture,
 } from "../../../../Store/features/user/userSlice";
 import AttachmentSelector from "./ChatAttachments/AttachmentSelector/AttachmentSelector";
-import { updateLastMessage } from "../../../../Store/features/chat/chatSlice";
+// import { updateLastMessage } from "../../../../Store/features/chat/chatSlice";
 
 export default function ChatInputContainer({
   setSendMessage,
   isSent,
-  setIsSent,
+  // setIsSent,
+  setMessages,
 }) {
   const loggedInUserId = useSelector(selectLoggedInUserId);
   const userFirstName = useSelector(selectUserFirstName);
@@ -40,7 +41,7 @@ export default function ChatInputContainer({
   const isCommunitySelected = useSelector(
     (state) => state.chat.isCommunitySelected
   );
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // State for text input
   const [sendText, setSendText] = useState("");
@@ -107,7 +108,7 @@ export default function ChatInputContainer({
 
     addMessage(message)
       .then(({ data }) => {
-        setIsSent(!isSent);
+        // setIsSent(!isSent);
         console.log(data);
       })
       .catch((error) => {
@@ -133,6 +134,10 @@ export default function ChatInputContainer({
     }
     const createdAt = new Date().toISOString();
     setSendMessage({ ...message, recieverId, createdAt });
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { ...message, recieverId, createdAt },
+    ]);
     clearInputs();
 
     // update last message

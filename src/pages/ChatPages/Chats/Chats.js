@@ -22,9 +22,9 @@ import {
   setChatId,
   setUserId,
   setIsCommuntySelected,
-  updateLastMessage,
+  // updateLastMessage,
   selectAllChatsStatus,
-  updateCreateChat,
+  // updateCreateChat,
 } from "../../../Store/features/chat/chatSlice";
 import backIcon from "../../../Images/Chat/BackIcon.svg";
 import navBarLogo from "../../../Images/investorIcon/Logo.svg";

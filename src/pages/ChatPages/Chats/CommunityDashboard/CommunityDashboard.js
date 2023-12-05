@@ -34,6 +34,7 @@ import OtherMessage from "../../../../components/Investor/ChatComponents/ChatMes
 import { formatMessages } from "../../../../utils/ChatsHelpers";
 import { selectLoggedInUserId } from "../../../../Store/features/user/userSlice";
 import { updateLastMessage } from "../../../../Store/features/chat/chatSlice";
+import TCHLogoLoader from "../../../../components/Shared/TCHLoaders/TCHLogoLoader/TCHLogoLoader";
 
 const CommunityDashboard = ({
   setSendMessage,
@@ -58,6 +59,7 @@ const CommunityDashboard = ({
   // const [sendText, setSendText] = useState("");
   const [isSent, setIsSent] = useState(false);
   const [msgId, setMsgId] = useState("");
+  const [loading, setLoading] = useState(false);
   // const [showPreview, setShowPreview] = useState(false);
 
   const chatMessagesContainerRef = useRef(null);
@@ -117,13 +119,15 @@ const CommunityDashboard = ({
   }, [recieveMessage, chatId, dispatch]);
 
   useEffect(() => {
+    setLoading(true);
     getMessageByChatId(chatId)
       .then((res) => {
         setMessages(res.data);
-        console.log(res.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error-->", error);
+        setLoading(false);
       });
   }, [chatId, cleared, isSent, showFeaturedPostSuccess]);
 
@@ -327,26 +331,36 @@ const CommunityDashboard = ({
   return (
     <div className="community_dashboard_container">
       <div className="chat_messages_group" ref={chatMessagesContainerRef}>
-        {formattedMessages.map((group) => (
-          <div key={group.date}>
-            <h6 className="date_header">{group.date}</h6>
-            <div className="chat_messages">
-              {group.messages.map((message, idx) =>
-                message.senderId._id === loggedInUserId ? (
-                  <MyMessage
-                    handleIdBack={handleIdBack}
-                    handleSetDeletePopup={handleSetDeletePopup}
-                    message={message}
-                    idx={idx}
-                    key={message._id}
-                  />
-                ) : (
-                  <OtherMessage message={message} idx={idx} key={message._id} />
-                )
-              )}
-            </div>
+        {loading ? (
+          <div className="d-flex h-100 justify-content-center align-items-center">
+            <TCHLogoLoader />
           </div>
-        ))}
+        ) : (
+          formattedMessages.map((group) => (
+            <div key={group.date}>
+              <h6 className="date_header">{group.date}</h6>
+              <div className="chat_messages">
+                {group.messages.map((message, idx) =>
+                  message.senderId._id === loggedInUserId ? (
+                    <MyMessage
+                      handleIdBack={handleIdBack}
+                      handleSetDeletePopup={handleSetDeletePopup}
+                      message={message}
+                      idx={idx}
+                      key={message._id}
+                    />
+                  ) : (
+                    <OtherMessage
+                      message={message}
+                      idx={idx}
+                      key={message._id}
+                    />
+                  )
+                )}
+              </div>
+            </div>
+          ))
+        )}
       </div>
 
       {/* Chat Input section */}
