@@ -66,19 +66,14 @@ const Chats = () => {
 
   // New Fetch call
   const allChatsStatus = useSelector(selectAllChatsStatus);
-  // console.log(isAllChatsData);
-  const [showLoading, setShowLoading] = useState(false);
-
   useEffect(() => {
     const fetchallChatsData = async () => {
-      setShowLoading(true);
       try {
         console.log("fetching ");
         await dispatch(fetchAllChats()).unwrap();
       } catch (error) {
         console.error("Error fetching initial all chats:", error);
       } finally {
-        setShowLoading(false);
       }
     };
 
@@ -295,8 +290,11 @@ const Chats = () => {
     isRead,
   ]);
 
-  return showLoading ? (
-    <div className="d-flex flex-column align-items-center">
+  return allChatsStatus === "loading" ? (
+    <div
+      className="d-flex flex-column align-items-center justify-content-center"
+      style={{ minHeight: "80dvh" }}
+    >
       <TCHLogoLoader />
       <h4 className="">Fetching your Chats</h4>
     </div>

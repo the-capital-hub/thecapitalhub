@@ -82,6 +82,7 @@ export const chatSlice = createSlice({
     },
     clearAllChatsData: (state) => {
       state.allChatsData = null;
+      state.allChatsStatus = null;
     },
   },
   extraReducers: (builder) => {
