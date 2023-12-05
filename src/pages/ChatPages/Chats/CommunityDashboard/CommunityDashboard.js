@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./CommunityDashboard.scss";
 // import sendIcon from "../../../../Images/Send.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getMessageByChatId,
   // addMessage,
@@ -33,6 +33,8 @@ import MyMessage from "../../../../components/Investor/ChatComponents/ChatMessag
 import OtherMessage from "../../../../components/Investor/ChatComponents/ChatMessages/OtherMessage/OtherMessage";
 import { formatMessages } from "../../../../utils/ChatsHelpers";
 import { selectLoggedInUserId } from "../../../../Store/features/user/userSlice";
+import { updateLastMessage } from "../../../../Store/features/chat/chatSlice";
+import TCHLogoLoader from "../../../../components/Shared/TCHLoaders/TCHLogoLoader/TCHLogoLoader";
 
 const CommunityDashboard = ({
   setSendMessage,
@@ -47,6 +49,8 @@ const CommunityDashboard = ({
   // const isCommunitySelected = useSelector(
   //   (state) => state.chat.isCommunitySelected
   // );
+  const dispatch = useDispatch();
+
   const [showFeaturedPostSuccess, setShowFeaturedPostSuccess] = useState(false);
   const [deletePopup, setDeletePopup] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -55,6 +59,7 @@ const CommunityDashboard = ({
   // const [sendText, setSendText] = useState("");
   const [isSent, setIsSent] = useState(false);
   const [msgId, setMsgId] = useState("");
+  const [loading, setLoading] = useState(false);
   // const [showPreview, setShowPreview] = useState(false);
 
   const chatMessagesContainerRef = useRef(null);
@@ -103,17 +108,26 @@ const CommunityDashboard = ({
     console.log(recieveMessage);
     if (recieveMessage !== null && recieveMessage?.chatId === chatId) {
       setMessages((prevMessages) => [...prevMessages, recieveMessage]);
+      // update last message
+      // dispatch(
+      //   updateLastMessage({
+      //     chatId: recieveMessage.chatId,
+      //     text: recieveMessage.text,
+      //   })
+      // );
     }
-  }, [recieveMessage, chatId]);
+  }, [recieveMessage, chatId, dispatch]);
 
   useEffect(() => {
+    setLoading(true);
     getMessageByChatId(chatId)
       .then((res) => {
         setMessages(res.data);
-        console.log(res.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error-->", error);
+        setLoading(false);
       });
   }, [chatId, cleared, isSent, showFeaturedPostSuccess]);
 
@@ -317,26 +331,36 @@ const CommunityDashboard = ({
   return (
     <div className="community_dashboard_container">
       <div className="chat_messages_group" ref={chatMessagesContainerRef}>
-        {formattedMessages.map((group) => (
-          <div key={group.date}>
-            <h6 className="date_header">{group.date}</h6>
-            <div className="chat_messages">
-              {group.messages.map((message, idx) =>
-                message.senderId._id === loggedInUserId ? (
-                  <MyMessage
-                    handleIdBack={handleIdBack}
-                    handleSetDeletePopup={handleSetDeletePopup}
-                    message={message}
-                    idx={idx}
-                    key={message._id}
-                  />
-                ) : (
-                  <OtherMessage message={message} idx={idx} key={message._id} />
-                )
-              )}
-            </div>
+        {loading ? (
+          <div className="d-flex h-100 justify-content-center align-items-center">
+            <TCHLogoLoader />
           </div>
-        ))}
+        ) : (
+          formattedMessages.map((group) => (
+            <div key={group.date}>
+              <h6 className="date_header">{group.date}</h6>
+              <div className="chat_messages">
+                {group.messages.map((message, idx) =>
+                  message.senderId._id === loggedInUserId ? (
+                    <MyMessage
+                      handleIdBack={handleIdBack}
+                      handleSetDeletePopup={handleSetDeletePopup}
+                      message={message}
+                      idx={idx}
+                      key={message._id}
+                    />
+                  ) : (
+                    <OtherMessage
+                      message={message}
+                      idx={idx}
+                      key={message._id}
+                    />
+                  )
+                )}
+              </div>
+            </div>
+          ))
+        )}
       </div>
 
       {/* Chat Input section */}

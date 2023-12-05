@@ -1,9 +1,8 @@
 import { HiOutlineUserGroup } from "react-icons/hi2";
 import {
-  // selectCommunitiesLastMessageDates,
-  // selectCommunitiesLastMessages,
-  // selectCommunitiesUnreadMessageCount,
-  // selectIsAllChatsData,
+  selectCommunitiesLastMessageDates,
+  selectCommunitiesLastMessages,
+  selectCommunitiesUnreadMessageCount,
   setChatId,
   setIsCommuntySelected,
 } from "../../../Store/features/chat/chatSlice";
@@ -24,14 +23,13 @@ export default function CommunityCard({
   isRead,
 }) {
   const loggedInUserId = useSelector(selectLoggedInUserId);
-  // const isAllChatsData = useSelector(selectIsAllChatsData);
-  // const communitiesLastMessages = useSelector(selectCommunitiesLastMessages);
-  // const communitiesLastMessageDates = useSelector(
-  //   selectCommunitiesLastMessageDates
-  // );
-  // const communitiesUnreadCounts = useSelector(
-  //   selectCommunitiesUnreadMessageCount
-  // );
+  const communitiesLastMessages = useSelector(selectCommunitiesLastMessages);
+  const communitiesLastMessageDates = useSelector(
+    selectCommunitiesLastMessageDates
+  );
+  const communitiesUnreadCounts = useSelector(
+    selectCommunitiesUnreadMessageCount
+  );
 
   const dispatch = useDispatch();
   // console.log(community);
@@ -41,10 +39,12 @@ export default function CommunityCard({
     dispatch(setIsCommuntySelected(true));
   }
 
-  const [latestMessages, setLatestMessages] = useState({});
+  const [latestMessages, setLatestMessages] = useState(communitiesLastMessages);
   const [latestMsgSentetName, setLatestMsgSentetName] = useState("");
-  const [dates, setDates] = useState({});
-  const [unreadMessageCount, setUnreadMessageCounts] = useState(0);
+  const [dates, setDates] = useState(communitiesLastMessageDates);
+  const [unreadMessageCount, setUnreadMessageCounts] = useState(
+    communitiesUnreadCounts[community._id]
+  );
 
   const formatTimestamp = (timestamp) => {
     const messageDate = new Date(timestamp);
@@ -113,7 +113,7 @@ export default function CommunityCard({
   return (
     <div
       className="community__card d-flex align-items-center gap-2 py-1 px-2"
-      key={community.id}
+      key={community._id}
       onClick={() => handleCommunityClick(community._id)}
     >
       <span className="p-2 position-relative">
