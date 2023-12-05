@@ -7,6 +7,8 @@ import ExitImage from "../../../../Images/Exit.svg";
 import { Link } from "react-router-dom";
 import IconLink from "../../SvgIcons/IconLink";
 import { useSelector } from "react-redux";
+import { RiShareBoxLine } from "react-icons/ri";
+
 
 const ShareLink = ({
   OneLink,
@@ -60,12 +62,15 @@ const ShareLink = ({
                 disabled
               />
               <div className="right_icons_onelink">
-                <img
+                {/* <img
                   className="right_icons_img1"
                   src={ExitImage}
                   alt="Share Icon"
-                  onClick={onExitClick}
-                />
+                  
+                /> */}
+                <RiShareBoxLine size={30} onClick={onExitClick}className="right_icons_img1" style={{ fill: "var(--d-l-dray)" }}
+ />
+
                 {/* <img
                   className="right_icons_img2"
                   src={CorrectImage}

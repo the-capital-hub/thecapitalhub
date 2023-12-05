@@ -1,9 +1,13 @@
 .investorsCard {
   margin: 0px;
-  background-color: white;
+  // background-color: white;
+  // background-color: var(--white-to-grey);
+  background-color: var(--bs-light);
+
   border-radius: var(--border-radius);
-  box-shadow: 1px 1px 5px lightgray;
+  box-shadow: var(--bs-box-shadow);
   padding: 20px 10px 0px 10px;
+  // border: 1px solid rgba(0, 0, 0, 0.15);
   width: 245px;
   height: 265px;
 

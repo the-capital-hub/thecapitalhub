@@ -123,7 +123,7 @@ const OneLink = () => {
         {company.length !== 0 ? (
           <div className="onePager_wrapper d-flex flex-column gap-1">
             {/* <OnePagerCompanyLogo image={company.logo} /> */}
-<h3 className="bg-dark rounded-3 text-light p-3 ">Edit OneLink</h3>
+<h3 className="onelink_head rounded-3 text-light p-3 ">Edit OneLink</h3>
             {/* onePager company info */}
             <OnePagerCompanyInfo
               company={company.company}
@@ -143,7 +143,7 @@ const OneLink = () => {
             />
 
             {/* onePager Market info */}
-            <div className="bg-white rounded-4 border shadow-sm">
+            <div className="market_info rounded-4 border shadow-sm">
               <div className="border-bottom">
                 <div className="px-3 px-lg-4 py-5 d-flex flex-column gap-5">
                   {/* Market Size */}

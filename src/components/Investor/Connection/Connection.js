@@ -138,7 +138,7 @@ const Connection = () => {
         <SmallProfileCard text={"Connections"} />
         <section className="content_section mt-4">
           <div className="row">
-            <div className="col-12 mt-2 box p-3 p-md-4 ">
+            <div className="col-12 mt-2 box p-3 p-md-4 text-dark">
               <h4>Manage Connections</h4>
               <nav className="connection_nav">
                 <button
