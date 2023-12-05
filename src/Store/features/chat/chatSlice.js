@@ -8,6 +8,7 @@ const initialState = {
   chatProfile: {},
   communityProfile: {},
   allChatsData: JSON.parse(localStorage.getItem("allChatsData")) || null,
+  allChatsStatus: null,
 };
 
 export const chatSlice = createSlice({
@@ -41,7 +42,11 @@ export const chatSlice = createSlice({
       let localAllChatsData = JSON.parse(localStorage.getItem("allChatsData"));
 
       let { chatId, text } = action.payload;
-      if (state.isCommunitySelected) {
+      if (
+        Object.keys(state.allChatsData.allCommunityChatLastMessage).includes(
+          chatId
+        )
+      ) {
         state.allChatsData.allCommunityChatLastMessage = {
           ...state.allChatsData.allCommunityChatLastMessage,
           [chatId]: text,
@@ -50,30 +55,28 @@ export const chatSlice = createSlice({
           ...localAllChatsData.allCommunityChatLastMessage,
           [chatId]: text,
         };
+      } else if (
+        Object.keys(state.allChatsData.allPinnedChatLastMessages).includes(
+          chatId
+        )
+      ) {
+        state.allChatsData.allPinnedChatLastMessages = {
+          ...state.allChatsData.allPinnedChatLastMessages,
+          [chatId]: text,
+        };
+        localAllChatsData.allPinnedChatLastMessages = {
+          ...localAllChatsData.allPinnedChatLastMessages,
+          [chatId]: text,
+        };
       } else {
-        if (
-          Object.keys(state.allChatsData.allPinnedChatLastMessages).includes(
-            chatId
-          )
-        ) {
-          state.allChatsData.allPinnedChatLastMessages = {
-            ...state.allChatsData.allPinnedChatLastMessages,
-            [chatId]: text,
-          };
-          localAllChatsData.allPinnedChatLastMessages = {
-            ...localAllChatsData.allPinnedChatLastMessages,
-            [chatId]: text,
-          };
-        } else {
-          state.allChatsData.allChatLastMessage = {
-            ...state.allChatsData.allChatLastMessage,
-            [chatId]: text,
-          };
-          localAllChatsData.allChatLastMessage = {
-            ...localAllChatsData.allChatLastMessage,
-            [chatId]: text,
-          };
-        }
+        state.allChatsData.allChatLastMessage = {
+          ...state.allChatsData.allChatLastMessage,
+          [chatId]: text,
+        };
+        localAllChatsData.allChatLastMessage = {
+          ...localAllChatsData.allChatLastMessage,
+          [chatId]: text,
+        };
       }
       localStorage.setItem("allChatsData", JSON.stringify(localAllChatsData));
     },
@@ -82,15 +85,24 @@ export const chatSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchAllChats.fulfilled, (state, action) => {
-      state.allChatsData = action.payload;
-      localStorage.setItem("allChatsData", JSON.stringify(action.payload));
-    });
+    builder
+      .addCase(fetchAllChats.fulfilled, (state, action) => {
+        state.allChatsData = action.payload;
+        state.allChatsStatus = "success";
+        localStorage.setItem("allChatsData", JSON.stringify(action.payload));
+      })
+      .addCase(fetchAllChats.pending, (state) => {
+        state.allChatsStatus = "loading";
+      })
+      .addCase(fetchAllChats.rejected, (state) => {
+        state.allChatsData = null;
+        state.allChatsStatus = "rejected";
+      });
   },
 });
 
 // AllChatsData Selectors
-export const selectIsAllChatsData = (state) => Boolean(state.chat.allChatsData);
+export const selectAllChatsStatus = (state) => state.chat.allChatsStatus;
 // Community Selectors
 export const selectCommunities = (state) =>
   state.chat.allChatsData?.communities;

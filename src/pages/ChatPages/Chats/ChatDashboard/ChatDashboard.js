@@ -93,13 +93,13 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
   useEffect(() => {
     if (recieveMessage !== null && recieveMessage?.chatId === chatId) {
       setMessages((prevMessages) => [...prevMessages, recieveMessage]);
-      // update last message
-      dispatch(
-        updateLastMessage({
-          chatId: recieveMessage.chatId,
-          text: recieveMessage.text,
-        })
-      );
+      // // update last message
+      // dispatch(
+      //   updateLastMessage({
+      //     chatId: recieveMessage.chatId,
+      //     text: recieveMessage.text,
+      //   })
+      // );
     }
   }, [recieveMessage, chatId, dispatch]);
 

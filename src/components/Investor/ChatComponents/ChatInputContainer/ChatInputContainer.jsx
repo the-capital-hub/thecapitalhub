@@ -135,14 +135,13 @@ export default function ChatInputContainer({
     setSendMessage({ ...message, recieverId, createdAt });
     clearInputs();
 
-    //
     // update last message
-    dispatch(
-      updateLastMessage({
-        chatId: message.chatId,
-        text: message.text,
-      })
-    );
+    // dispatch(
+    //   updateLastMessage({
+    //     chatId: message.chatId,
+    //     text: message.text,
+    //   })
+    // );
   };
 
   const handleFileChange = (event) => {
