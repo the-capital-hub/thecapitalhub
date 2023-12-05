@@ -142,6 +142,7 @@
 
   // Custom colors
   --white-to-grey: white;
+  --d-l-grey: var(--bs-gray-900);
 
   .card {
     --bs-card-bg: #ffffff;
@@ -249,7 +250,7 @@ $color-mode-type: data;
   --bs-body-color: #fafafa;
   --bs-body-color-rgb: 250, 250, 250;
   //   --bs-body-bg: #333;
-  --bs-body-bg: #070707;
+  --bs-body-bg: #171717;
   --bs-body-bg-rgb: 51, 51, 51;
   --bs-emphasis-color: #000;
   --bs-emphasis-color-rgb: 0, 0, 0;
@@ -303,6 +304,7 @@ $color-mode-type: data;
 
   // Custom colors
   --white-to-grey: #2f2f2f;
+  --d-l-grey: var(--bs-gray-100);
 
   .card {
     --bs-card-bg: #2f2f2f;

@@ -65,16 +65,16 @@ const ProfileAchievements = lazy(() =>
 
 function StartUpRoutes() {
   // Light and dark Theme
-  const theme = useSelector(selectTheme);
+  // const theme = useSelector(selectTheme);
 
-  useEffect(() => {
-    // document.body.setAttribute("data-bs-theme", "dark");
-    // document.body.setAttribute("data-bs-theme", "light");
-    document.body.setAttribute("data-bs-theme", theme);
-    return function () {
-      document.body.setAttribute("data-bs-theme", "light"); // temporary
-    };
-  }, [theme]);
+  // useEffect(() => {
+  //   // document.body.setAttribute("data-bs-theme", "dark");
+  //   // document.body.setAttribute("data-bs-theme", "light");
+  //   document.body.setAttribute("data-bs-theme", theme);
+  //   return () => {
+  //     document.body.setAttribute("data-bs-theme", "light"); // temporary
+  //   };
+  // }, [theme]);
 
   return (
     <Route element={<PrivateRoute />}>

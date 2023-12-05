@@ -9,14 +9,11 @@ import {
 } from "react-pro-sidebar";
 import ArrowLeft from "../../../Images/investorsidebar/ArrowLeft.svg";
 import ArrowRight from "../../../Images/investorsidebar/ArrowRight.svg";
-import Setting from "../../../Images/investorsidebar/Settings.svg";
-// import Support from "../../../Images/investorsidebar/Support.svg";
-import HomeIcon from "../../../Images/investorIcon/home.svg";
-import BookIcon from "../../../Images/investorIcon/Book.svg";
-import ExitIcon from "../../../Images/investorIcon/Exit.svg";
-// import GroupIcon from "../../../Images/investorIcon/Group.svg";
-// import InvestorIcon from "../../../Images/investorIcon/Pot.svg";
-import SaveIcon from "../../../Images/investorIcon/Save.svg";
+import { IoSettingsOutline } from "react-icons/io5";
+import { GoHome } from "react-icons/go";
+import { PiSparkleLight, PiFloppyDiskBackLight } from "react-icons/pi";
+import { HiOutlineOfficeBuilding } from "react-icons/hi";
+import { IoExitOutline } from "react-icons/io5";
 import PlusIcon from "../../../Images/investorIcon/Plus.svg";
 import { BsLink45Deg, BsChevronDown, BsChevronUp } from "react-icons/bs";
 import "react-pro-sidebar/dist/css/styles.css";
@@ -26,11 +23,10 @@ import LogOutPopUp from "../../PopUp/LogOutPopUp/LogOutPopUp";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../Store/features/user/userSlice";
-import connectionsIcon from "../../../Images/investorsidebar/connection.svg";
 import CommunitiesIcon from "../ChatComponents/CommunitiesIcon";
 import ModalBsLauncher from "../../PopUp/ModalBS/ModalBsLauncher/ModalBsLauncher";
-import companyProfileIcon from "../../../Images/StartUp/Sidebar/companyProfile.svg";
-import ExploreIcon from "../../../Images/Investor/Sidebar/explore.svg";
+import { IoCompassOutline } from "react-icons/io5";
+import { HiOutlineDocumentText, HiOutlineUserPlus } from "react-icons/hi2";
 
 // Startup Sidebar
 const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
@@ -201,7 +197,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/home"
                 >
-                  <img src={HomeIcon} alt="Home" />
+                  <GoHome size={25} />
                   {!sidebarCollapsed && <span>Home</span>}
                 </Link>
               </MenuItem>
@@ -215,7 +211,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/company-profile"
                   id="sidebar_companyProfile"
                 >
-                  <img src={companyProfileIcon} alt="company" />
+                  <HiOutlineOfficeBuilding size={25} />
                   {!sidebarCollapsed && <span>Company</span>}
                 </Link>
               </MenuItem>
@@ -230,7 +226,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/explore"
                   id="sidebar_explore"
                 >
-                  <img src={ExploreIcon} alt="explore" />
+                  <IoCompassOutline size={25} />
                   {!sidebarCollapsed && <span>Explore</span>}
                 </Link>
               </MenuItem>
@@ -245,7 +241,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   id="sidebar_oneLink"
                 >
                   {/* <img src={OnelinkIcon} alt="image" width="17px" height="17px" /> */}
-                  <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} />
+                  <BsLink45Deg size={25} />
                   {!sidebarCollapsed && <span>OneLink</span>}
                 </Link>
               </MenuItem>
@@ -264,13 +260,12 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     }}
                   >
                     <CommunitiesIcon
-                      width="17px"
-                      height="17px"
+                      width="20px"
+                      height="20px"
                       color={`${
-                        isCommunityDetailOpen
-                          ? "#fd5901"
-                          : "rgba(97, 97, 97, 1)"
+                        isCommunityDetailOpen ? "#fd5901" : "var(--d-l-grey)"
                       }`}
+                      className="me-1"
                     />
                   </div>
                   {!sidebarCollapsed && (
@@ -316,12 +311,8 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/documentation"
                   id="sidebar_documentation"
                 >
-                  <img
-                    src={BookIcon}
-                    alt="documentation"
-                    width="17px"
-                    height="17px"
-                  />
+                  <HiOutlineDocumentText size={25} />
+
                   {!sidebarCollapsed && <span>Documentation</span>}
                 </Link>
               </MenuItem>
@@ -334,12 +325,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/savePost"
                   id="sidebar_savedPosts"
                 >
-                  <img
-                    src={SaveIcon}
-                    alt="saved posts"
-                    width="17px"
-                    height="17px"
-                  />
+                  <PiFloppyDiskBackLight size={25} />
                   {!sidebarCollapsed && <span>Saved posts</span>}
                 </Link>
               </MenuItem>
@@ -353,12 +339,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/connection"
                   id="sidebar_connections"
                 >
-                  <img
-                    src={connectionsIcon}
-                    alt="connections"
-                    width="17px"
-                    height="17px"
-                  />
+                  <HiOutlineUserPlus size={25} />
                   {!sidebarCollapsed && <span>Connnections</span>}
                 </Link>
               </MenuItem>
@@ -412,7 +393,8 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   //  onClick={() => setSidebarCollapsed(true)}
                   to="/help"
                 >
-                  <img src={Setting} alt="help" width="17px" height="17px" />
+                  {/* <img src={Setting} alt="help" width="17px" height="17px" /> */}
+                  <IoSettingsOutline size={25} />
                   {!sidebarCollapsed && <span>Help</span>}
                 </Link>
               </MenuItem>
@@ -424,7 +406,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/"
                 >
-                  <img src={HomeIcon} alt="go to platform" />
+                  <PiSparkleLight size={25} />
                   {!sidebarCollapsed && <span>Learn More</span>}
                 </Link>
               </MenuItem>
@@ -446,7 +428,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           <SidebarFooter>
             <Menu iconShape="round">
               <MenuItem onClick={handleLogout}>
-                <img src={ExitIcon} alt="logout" width="17px" height="17px" />
+                <IoExitOutline size={25} />
                 {!sidebarCollapsed && <span>Log out</span>}
               </MenuItem>
             </Menu>
