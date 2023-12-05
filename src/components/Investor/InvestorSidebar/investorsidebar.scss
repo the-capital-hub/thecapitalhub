@@ -7,7 +7,7 @@
   .sidebar-main {
     width: 20%;
     height: 100vh;
-    background-color: #ffffff;
+    background-color: var(--white-to-grey);
     position: absolute;
     border-radius: 8px 8px 8px 0px;
     border: 2px solid red;
@@ -18,7 +18,7 @@
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: #20315f;
+    color: var(--d-l-grey);
   }
 
   .hr-above-support {
@@ -30,13 +30,27 @@
     display: contents;
     justify-content: center;
     align-items: center;
-  }
-  .pro-item-content a img {
-    height: 20px;
-  }
-  .pro-item-content span {
-    margin-left: 24px;
-    font-weight: 400;
+    color: var(--d-l-grey);
+    background-color: transparent !important;
+    a {
+      &:link {
+        color: var(--d-l-grey);
+      }
+      svg {
+        color: var(--d-l-grey);
+      }
+    }
+    svg,
+    img {
+      height: 20px;
+    }
+    svg {
+      height: 30 !important;
+    }
+    span {
+      margin-left: 24px;
+      font-weight: 400;
+    }
   }
 
   #header {
@@ -70,7 +84,7 @@
     }
     .pro-sidebar-inner {
       border-radius: 20px;
-      background-color: white;
+      background-color: var(--white-to-grey);
       box-shadow: 0.5px 0.866px 2px 0px rgba(0, 0, 0, 0.15);
     }
     .pro-sidebar-inner .pro-sidebar-layout {
@@ -153,8 +167,15 @@
     margin-left: -7px;
   }
   #header .pro-sidebar-inner .pro-sidebar-layout ul {
-    /* padding: 0 5px; */
     margin: auto;
+    a {
+      :link {
+        color: var(--d-l-grey) !important;
+      }
+      svg {
+        color: var(--d-l-grey);
+      }
+    }
   }
 
   #header .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item {
@@ -162,6 +183,7 @@
     margin: 10px 0px;
     font-weight: bold;
     justify-content: flex-start;
+    background-color: transparent !important;
   }
 
   #header
@@ -170,7 +192,6 @@
     ul
     .pro-inner-item
     .pro-icon-wrapper {
-    background-color: #fbf4cd;
     color: #000;
     border-radius: 3px;
   }
@@ -186,16 +207,13 @@
   }
 
   #header .pro-sidebar-inner .pro-sidebar-layout .active {
-    background-image: linear-gradient(0deg, #eef2f3 0%, #eef2f3 100%);
+    border-radius: 5px;
+    * {
+      color: var(--currentTheme) !important;
+    }
   }
 
   #header .pro-sidebar-inner .pro-sidebar-layout .active-item {
-    /* height: 48px; */
-    /* width: 48px; */
-    /* border-radius: 50%; */
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
     padding: 1px;
   }
 
@@ -208,7 +226,7 @@
     details {
       font-size: inherit;
       font-weight: 400;
-      color: #20315f;
+      color: var(--d-l-grey);
       position: relative;
 
       summary {
