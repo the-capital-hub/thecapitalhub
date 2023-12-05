@@ -24,6 +24,7 @@ import {
   setIsCommuntySelected,
   updateLastMessage,
   selectAllChatsStatus,
+  updateCreateChat,
 } from "../../../Store/features/chat/chatSlice";
 import backIcon from "../../../Images/Chat/BackIcon.svg";
 import navBarLogo from "../../../Images/investorIcon/Logo.svg";
@@ -146,12 +147,13 @@ const Chats = () => {
       console.log(data);
       setRecieveMessage(data);
       // update last message
-      dispatch(
-        updateLastMessage({
-          chatId: data.chatId,
-          text: data.text,
-        })
-      );
+      // dispatch(
+      //   updateLastMessage({
+      //     chatId: data.chatId,
+      //     text: data.text,
+      //     createdAt: data.createdAt,
+      //   })
+      // );
     });
   }, [socket, dispatch]);
 
@@ -161,12 +163,13 @@ const Chats = () => {
     if (sendMessage !== null) {
       socket.current?.emit("send-message", sendMessage);
       // update last message
-      dispatch(
-        updateLastMessage({
-          chatId: sendMessage.chatId,
-          text: sendMessage.text,
-        })
-      );
+      // dispatch(
+      //   updateLastMessage({
+      //     chatId: sendMessage.chatId,
+      //     text: sendMessage.text,
+      //     createdAt: sendMessage.createdAt,
+      //   })
+      // );
     }
   }, [sendMessage, dispatch]);
 
@@ -179,6 +182,8 @@ const Chats = () => {
       .then((res) => {
         console.log("from create chat:", res.data);
         dispatch(setChatId(res.data._id));
+        // Add to persoanl chats
+        // dispatch(updateCreateChat(res.data));
         setLoading((prev) => {
           return { ...prev, userChat: false };
         });

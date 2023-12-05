@@ -41,12 +41,13 @@ export const chatSlice = createSlice({
     updateLastMessage: (state, action) => {
       let localAllChatsData = JSON.parse(localStorage.getItem("allChatsData"));
 
-      let { chatId, text } = action.payload;
+      let { chatId, text, createdAt } = action.payload;
       if (
         Object.keys(state.allChatsData.allCommunityChatLastMessage).includes(
           chatId
         )
       ) {
+        // update last message
         state.allChatsData.allCommunityChatLastMessage = {
           ...state.allChatsData.allCommunityChatLastMessage,
           [chatId]: text,
@@ -54,6 +55,16 @@ export const chatSlice = createSlice({
         localAllChatsData.allCommunityChatLastMessage = {
           ...localAllChatsData.allCommunityChatLastMessage,
           [chatId]: text,
+        };
+
+        // update lastmessageDate
+        state.allChatsData.allCommunityChatLastMessageDates = {
+          ...state.allChatsData.allCommunityChatLastMessageDates,
+          [chatId]: createdAt,
+        };
+        localAllChatsData.allCommunityChatLastMessageDates = {
+          ...localAllChatsData.allCommunityChatLastMessageDates,
+          [chatId]: createdAt,
         };
       } else if (
         Object.keys(state.allChatsData.allPinnedChatLastMessages).includes(
@@ -68,6 +79,16 @@ export const chatSlice = createSlice({
           ...localAllChatsData.allPinnedChatLastMessages,
           [chatId]: text,
         };
+
+        // update lastmessageDate
+        state.allChatsData.allPinnedChatLastMessagesDates = {
+          ...state.allChatsData.allPinnedChatLastMessagesDates,
+          [chatId]: createdAt,
+        };
+        localAllChatsData.allPinnedChatLastMessagesDates = {
+          ...localAllChatsData.allPinnedChatLastMessagesDates,
+          [chatId]: createdAt,
+        };
       } else {
         state.allChatsData.allChatLastMessage = {
           ...state.allChatsData.allChatLastMessage,
@@ -77,9 +98,36 @@ export const chatSlice = createSlice({
           ...localAllChatsData.allChatLastMessage,
           [chatId]: text,
         };
+
+        // update lastmessageDate
+        state.allChatsData.allChatLastMessageDates = {
+          ...state.allChatsData.allChatLastMessageDates,
+          [chatId]: createdAt,
+        };
+        localAllChatsData.allChatLastMessageDates = {
+          ...localAllChatsData.allChatLastMessageDates,
+          [chatId]: createdAt,
+        };
       }
       localStorage.setItem("allChatsData", JSON.stringify(localAllChatsData));
     },
+    // updateCreateChat
+    updateCreateChat: (state, action) => {
+      let localAllChatsData = JSON.parse(localStorage.getItem("allChatsData"));
+      state.allChatsData.allChats.unshift(action.payload);
+      localAllChatsData.allChats.unshift(action.payload);
+
+      localStorage.setItem("allChatsData", JSON.stringify(localAllChatsData));
+    },
+    // updateCreateCommunity
+    updateCreateCommunity: (state, action) => {
+      let localAllChatsData = JSON.parse(localStorage.getItem("allChatsData"));
+      state.allChatsData.communities.unshift(action.payload);
+      localAllChatsData.communities.unshift(action.payload);
+
+      localStorage.setItem("allChatsData", JSON.stringify(localAllChatsData));
+    },
+    // Clear All chat
     clearAllChatsData: (state) => {
       state.allChatsData = null;
       state.allChatsStatus = null;
@@ -155,6 +203,8 @@ export const {
   setCommunityProfile,
   updateLastMessage,
   clearAllChatsData,
+  updateCreateChat,
+  updateCreateCommunity,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

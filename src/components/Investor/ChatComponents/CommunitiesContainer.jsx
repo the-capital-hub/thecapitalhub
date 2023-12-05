@@ -12,7 +12,10 @@ import { getAllCommunity } from "../../../Service/user";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectLoggedInUserId } from "../../../Store/features/user/userSlice";
-import { selectCommunities } from "../../../Store/features/chat/chatSlice";
+import {
+  // selectAllChatsStatus,
+  selectCommunities,
+} from "../../../Store/features/chat/chatSlice";
 
 export default function CommunitiesContainer({
   isCommunityOpen,
@@ -22,8 +25,9 @@ export default function CommunitiesContainer({
   setIsRead,
 }) {
   const loggedInUserId = useSelector(selectLoggedInUserId);
+  // const allChatsStatus = useSelector(selectAllChatsStatus);
   const communities = useSelector(selectCommunities);
-  const [getCommunity, setGetCommunity] = useState([]);
+  const [getCommunity, setGetCommunity] = useState(communities);
   const chatProfile = useSelector((state) => state.chat.chatProfile);
   const chatId = useSelector((state) => state.chat.chatId);
   const launchRef = useRef();
@@ -31,7 +35,7 @@ export default function CommunitiesContainer({
   useEffect(() => {
     getAllCommunity(loggedInUserId)
       .then((res) => {
-        setGetCommunity(res);
+        setGetCommunity(res.data);
       })
       .catch((error) => console.error("Error", error));
   }, [chatProfile, chatId, sendMessage, recieveMessage, loggedInUserId]);
@@ -83,7 +87,7 @@ export default function CommunitiesContainer({
         {/* Render communities list */}
         <div className="my__communities d-flex flex-column">
           {/* <h5 className="px-3 m-0 py-3">My Communities</h5> */}
-          {communities?.map((community, index) => {
+          {getCommunity?.map((community, index) => {
             return (
               <CommunityCard
                 community={community}

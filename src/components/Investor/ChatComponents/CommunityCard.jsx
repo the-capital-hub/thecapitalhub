@@ -39,10 +39,12 @@ export default function CommunityCard({
     dispatch(setIsCommuntySelected(true));
   }
 
-  const [latestMessages, setLatestMessages] = useState({});
+  const [latestMessages, setLatestMessages] = useState(communitiesLastMessages);
   const [latestMsgSentetName, setLatestMsgSentetName] = useState("");
-  const [dates, setDates] = useState({});
-  const [unreadMessageCount, setUnreadMessageCounts] = useState(0);
+  const [dates, setDates] = useState(communitiesLastMessageDates);
+  const [unreadMessageCount, setUnreadMessageCounts] = useState(
+    communitiesUnreadCounts[community._id]
+  );
 
   const formatTimestamp = (timestamp) => {
     const messageDate = new Date(timestamp);
@@ -97,10 +99,8 @@ export default function CommunityCard({
       });
   }, [community._id, sendMessage, recieveMessage, isRead, loggedInUserId]);
 
-  const messageTime = formatTimestamp(
-    communitiesLastMessageDates[community._id]
-  );
-  const inputString = communitiesLastMessages[community._id];
+  const messageTime = formatTimestamp(dates[community._id]);
+  const inputString = latestMessages[community._id];
   // console.log(latestMessages);
   const numberOfCharacters = 20;
   let latestMessage;
@@ -156,10 +156,8 @@ export default function CommunityCard({
           {messageTime !== "Invalid Date" && (
             <div className="time__stamp m-0">{messageTime}</div>
           )}
-          {communitiesUnreadCounts[community._id] > 0 && (
-            <div className="notification">
-              {communitiesUnreadCounts[community._id]}
-            </div>
+          {unreadMessageCount > 0 && (
+            <div className="notification">{unreadMessageCount}</div>
           )}
         </div>
       </div>

@@ -107,12 +107,12 @@ const CommunityDashboard = ({
     if (recieveMessage !== null && recieveMessage?.chatId === chatId) {
       setMessages((prevMessages) => [...prevMessages, recieveMessage]);
       // update last message
-      dispatch(
-        updateLastMessage({
-          chatId: recieveMessage.chatId,
-          text: recieveMessage.text,
-        })
-      );
+      // dispatch(
+      //   updateLastMessage({
+      //     chatId: recieveMessage.chatId,
+      //     text: recieveMessage.text,
+      //   })
+      // );
     }
   }, [recieveMessage, chatId, dispatch]);
 
