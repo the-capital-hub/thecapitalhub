@@ -52,7 +52,7 @@ const Help = () => {
                       Or choose a category to quickly find the help you need
                     </h6>
                     <section class="card-section">
-                      <Link to="/contactus" className=" card text-white">
+                      <Link to="/contactus" className=" card ">
                         <div class="">
                           <img src={CustomerIcon} alt="text" />
                           <p>Contact us</p>

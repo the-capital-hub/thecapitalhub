@@ -663,6 +663,7 @@ const OneLinkEditView = () => {
                     onClick={() => deleteCompetitor(index)}
                   >
                     <RiDeleteBin6Line />
+
                   </button>
                 )}
               </div>

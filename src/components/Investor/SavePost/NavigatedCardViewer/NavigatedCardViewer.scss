@@ -4,10 +4,12 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  background-color: #fff;
+  // background-color: #fff;
   //   padding: 10px;
   border-radius: var(--border-radius);
-  background: #fff;
+  // background: #fff;
+  background-color: var(--white-to-grey);
+
   box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
   flex-direction: column;
   position: relative;
@@ -101,7 +103,9 @@
     .card {
       border-radius: 10px;
       border: 1px solid #e1e1e1;
-      background: #fff;
+      // background: #fff;
+      background-color: var(--bs-light);
+
       box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
       padding: 20px;
       text-align: center;
@@ -155,7 +159,9 @@
         // svg{
         //   border: 1px solid red;
         // }
-
+.btn{
+  background-color: var(--bs-light);
+}
         .kebab_menu {
           position: absolute;
           top: 100%;

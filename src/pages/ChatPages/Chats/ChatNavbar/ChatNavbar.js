@@ -11,6 +11,7 @@ import {
   getCommunityById,
 } from "../../../../Service/user";
 import { useSelector } from "react-redux";
+import SpinnerBS from "../../../../components/Shared/Spinner/SpinnerBS";
 
 const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
   // Fetch GlobalState
@@ -21,6 +22,7 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
   );
 
   const [chatkebabMenu, setChatkebabMenu] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // When chatType changes update isCommunitySelec
 
@@ -44,22 +46,28 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
     setCommunity(null);
     setUser(null);
     if (isCommunitySelected) {
+      setLoading(true);
       getCommunityById(chatId)
         .then((res) => {
           setCommunity(res.data);
           setUser(null);
+          setLoading(false);
         })
         .catch((error) => {
           console.error("Error-->", error);
+          setLoading(false);
         });
     } else {
+      setLoading(true);
       getUserAndStartUpByUserIdAPI(userId)
         .then((res) => {
           setUser(res.data);
           setCommunity(null);
+          setLoading(false);
         })
         .catch((error) => {
           console.error("Error-->", error);
+          setLoading(false);
         });
     }
   }, [userId, isCommunitySelected, chatId]);
@@ -71,42 +79,55 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
   return (
     <>
       <div className="chat_navbar_container position-relative">
-        <div
-          className="left"
-          onClick={handleOpenSettingsClick}
-          style={{ cursor: "pointer" }}
-        >
-          <img
-            src={user?.profilePicture || community?.profileImage}
-            className="rounded_img"
-            alt={`${user?.firstName} ${user?.lastName}`}
+        {loading ? (
+          <SpinnerBS
+            colorClass={"text-light"}
+            spinnerClass="spinner-grow"
+            spinnerSizeClass="spinner=grow-sm"
+            className={
+              "d-flex h-100 w-100 justify-content-center align-items-center"
+            }
           />
-          <div className="title_and_message">
-            <h5 className="name_title text-capitalize m-0 lh-1">
-              {user
-                ? `${user.firstName} ${user.lastName}`
-                : community?.communityName}
-            </h5>
+        ) : (
+          <>
+            <div
+              className="left"
+              onClick={handleOpenSettingsClick}
+              style={{ cursor: "pointer" }}
+            >
+              <img
+                src={user?.profilePicture || community?.profileImage}
+                className="rounded_img"
+                alt={`${user?.firstName} ${user?.lastName}`}
+              />
+              <div className="title_and_message">
+                <h5 className="name_title text-capitalize m-0 lh-1">
+                  {user
+                    ? `${user.firstName} ${user.lastName}`
+                    : community?.communityName}
+                </h5>
 
-            <h5 className="message_title m-0">{user?.designation}</h5>
-            {/* <h4 className="online">Online</h4> */}
-          </div>
-        </div>
-        <div className="right ">
-          {/* <img src={CallIcon} className="call"/>
+                <h5 className="message_title m-0">{user?.designation}</h5>
+                {/* <h4 className="online">Online</h4> */}
+              </div>
+            </div>
+            <div className="right ">
+              {/* <img src={CallIcon} className="call"/>
             <img src={videoIcon} className="video"/> */}
-          <img
-            src={threeDotIcon}
-            className="threedot"
-            onClick={() => setChatkebabMenu(!chatkebabMenu)}
-            alt=""
-          />
-          {chatkebabMenu && (
-            <ul className="kebab_menu border rounded shadow-sm p-3">
-              <li onClick={handleClearChat}>Clear Chat</li>
-            </ul>
-          )}
-        </div>
+              <img
+                src={threeDotIcon}
+                className="threedot"
+                onClick={() => setChatkebabMenu(!chatkebabMenu)}
+                alt=""
+              />
+              {chatkebabMenu && (
+                <ul className="kebab_menu border rounded shadow-sm p-3">
+                  <li onClick={handleClearChat}>Clear Chat</li>
+                </ul>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </>
   );

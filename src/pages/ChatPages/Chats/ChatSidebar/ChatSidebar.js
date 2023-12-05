@@ -23,7 +23,6 @@ import {
   selectChatsLastMessages,
   selectChatsUnreadMessageCount,
   selectPersonalChats,
-  selectIsAllChatsData,
 } from "../../../../Store/features/chat/chatSlice";
 import { selectLoggedInUserId } from "../../../../Store/features/user/userSlice";
 import IconPin from "../../../../components/Investor/SvgIcons/IconPin";
@@ -31,22 +30,27 @@ import IconPin from "../../../../components/Investor/SvgIcons/IconPin";
 
 const ChatSidebar = ({ recieveMessage, sendMessage }) => {
   const loggedInUserId = useSelector(selectLoggedInUserId);
-  const isAllChatsData = useSelector(selectIsAllChatsData);
+
+  // Pinned Chats
   const myPinnedChats = useSelector(selectPinnedChats);
+
+  // Personal Chats
   const myPersonalChats = useSelector(selectPersonalChats);
+
   const chatLastMessages = useSelector(selectChatsLastMessages);
   const chatLastMessageDates = useSelector(selectChatsLastMessageDates);
   const chatUnreadCounts = useSelector(selectChatsUnreadMessageCount);
   const dispatch = useDispatch();
 
-  const [chats, setChats] = useState([]);
-  const [pinnedChats, setPinnedChats] = useState([]);
+  const [chats, setChats] = useState(myPersonalChats);
+  const [pinnedChats, setPinnedChats] = useState(myPinnedChats);
   // const location = useLocation();
   // const queryParams = new URLSearchParams(location.search);
   // const chatUserId = queryParams.get("userId");
-  const [latestMessages, setLatestMessages] = useState({});
-  const [unreadMessageCounts, setUnreadMessageCounts] = useState({});
-  const [dates, setDates] = useState({});
+  const [latestMessages, setLatestMessages] = useState(chatLastMessages);
+  const [unreadMessageCounts, setUnreadMessageCounts] =
+    useState(chatUnreadCounts);
+  const [dates, setDates] = useState(chatLastMessageDates);
   const [selectedUserChat, setSelectedUserChat] = useState(null);
   const [pinnedChat, setPinnedChat] = useState(false);
 
@@ -207,7 +211,7 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
 
   return (
     <>
-      <div className="chatsidebar_main_container">
+      <div className="chatsidebar_main_container" id="sidebarChats">
         <div className="chatsidebar_content pt-2 ">
           {/* previous style for below span style={{ margin: "5px 20px" }} */}
           <span className="m-3 mt-1">
@@ -293,7 +297,7 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
           </span>
 
           <div className="d-flex flex-column" id="normalChats">
-            {chats.map((chat, index) => (
+            {chats?.map((chat, index) => (
               <div key={index} className="person_wise_chat">
                 {chat.members.map((member) => {
                   if (member._id !== loggedInUserId) {

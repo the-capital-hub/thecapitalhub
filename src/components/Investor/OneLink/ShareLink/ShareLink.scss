@@ -2,10 +2,12 @@
   .box_container {
     // max-width: 750px;
     // height: 411px;
-    background-color: #fff;
+    // background-color: #fff;
     padding: 10px;
     border-radius: var(--border-radius);
-    background: #fff;
+    // background: #fff;
+    background-color: var(--white-to-grey);
+
     // box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
 
     .title_section {
@@ -35,7 +37,9 @@
         position: relative;
         width: 95%;
         justify-content: center;
-        background: #eaeef2;
+        // background: #eaeef2;
+        background-color: var(--bs-light);
+
 
         .left_icons {
           display: flex;
@@ -104,7 +108,9 @@
           font-size: 14px;
           padding: 8px;
           border-radius: 6px;
-          background-color: #eaeef2;
+          // background-color: #eaeef2;
+          background-color: var(--bs-light);
+
           margin-left: 30px;
 
           ::placeholder {
@@ -200,13 +206,20 @@
             display: flex;
             align-items: center;
             margin: 0 5px;
+          //   .right_icons_img1 * {
+           
+          //     cursor: pointer;
+          //     // fill:var(--d-l-dray) !important;
+          //     stroke:var(--d-l-dray) !important;
+                    //     color:var(--d-l-dray) !important;
 
-            .right_icons_img1 {
-              // margin-right: 10px;
-              width: 20px;
-              height: 28px;
-              cursor: pointer;
-            }
+
+              
+          //   }
+          //  svg{
+          //   stroke:var(--d-l-dray) !important;
+
+          //  }
 
             .right_icons_img2 {
               margin-right: 10px;

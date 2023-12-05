@@ -12,7 +12,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getBase64 } from "../../../utils/getBase64";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
-import { resetChat } from "../../../Store/features/chat/chatSlice";
+import {
+  resetChat,
+  updateCreateCommunity,
+} from "../../../Store/features/chat/chatSlice";
 
 export default function NewCommunityModal({ theme }) {
   const [getAllConnection, setGetAllConnection] = useState([]);
@@ -93,7 +96,9 @@ export default function NewCommunityModal({ theme }) {
         data.profileImage = await getBase64(selectedFile);
       }
       const response = await createCommunity(data);
+      console.log("rcreatecommunity-", response.data);
       if (response.status === 200) {
+        // dispatch(updateCreateCommunity(response.data));
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);

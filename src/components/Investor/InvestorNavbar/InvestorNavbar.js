@@ -1,12 +1,6 @@
 import "./investorNavbar.scss";
-import searchIconBlack from "../../../Images/navbar/Search.svg";
 import Logo from "../../../Images/investorIcon/new-logo.png";
-import NotificationIcon from "../../../Images/investorIcon/notification.svg";
-import MessageIcon from "../../../Images/investorIcon/message.svg";
-import OrangeNotificationIcon from "../../../Images/investorIcon/OrangeNotificationIcon.svg";
-import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
-import HambergerIcon from "../../../Images/Hamberger.svg";
-import HambergerCrossIcon from "../../../Images/investorsidebar/FontX.svg";
+import { FiSearch } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -28,6 +22,9 @@ import {
   selectUserProfilePicture,
   setUnreadNotifications,
 } from "../../../Store/features/user/userSlice";
+import { BsBell } from "react-icons/bs";
+import { AiOutlineMessage } from "react-icons/ai";
+import { MdMenu, MdMenuOpen } from "react-icons/md";
 
 // Startup navbar
 const InvestorNavbar = (props) => {
@@ -132,13 +129,23 @@ const InvestorNavbar = (props) => {
                 />
               </div>
               <div
-                className="mobile-home-hamberger "
+                className="mobile-home-hamberger"
                 onClick={props.handleSidebarToggle}
               >
                 {props.sidebarCollapsed ? (
-                  <img src={HambergerIcon} alt="bar" />
+                  <MdMenu
+                    size={25}
+                    style={{
+                      color: "var(--d-l-grey)",
+                    }}
+                  />
                 ) : (
-                  <img src={HambergerCrossIcon} alt="bar" />
+                  <MdMenuOpen
+                    size={25}
+                    style={{
+                      color: "var(--currentTheme)",
+                    }}
+                  />
                 )}
                 <h1 className="ms-2 text-break">{pageTitle}</h1>
               </div>
@@ -168,11 +175,11 @@ const InvestorNavbar = (props) => {
                   type="submit"
                   className="searchbar-button d-flex align-items-center justify-content-center"
                 >
-                  <img src={searchIcon} alt="search" />
+                  <FiSearch size={25} color="white" />
                 </button>
               </form>
               {inputOnFocus && searchSuggestions && !mobileSearch && (
-                <div className="search_results rounded-4 border shadow-sm p-4 position-absolute bg-white">
+                <div className="search_results rounded-4 border shadow-sm p-4 position-absolute">
                   {!loading ? (
                     searchSuggestions && (
                       <>
@@ -277,7 +284,7 @@ const InvestorNavbar = (props) => {
                     type="submit"
                     className="searchbar-button d-flex align-items-center justify-content-center"
                   >
-                    <img src={searchIcon} alt="search" />
+                    <FiSearch size={25} color="white" />
                   </button>
                 </form>
                 {inputOnFocus && searchSuggestions && mobileSearch && (
@@ -367,7 +374,7 @@ const InvestorNavbar = (props) => {
                   className="notification-icon"
                   onClick={() => setMobileSearch((prev) => !prev)}
                 >
-                  <img src={searchIconBlack} alt="search" />
+                  <FiSearch size={25} />
                 </span>
               </div>
 
@@ -386,10 +393,11 @@ const InvestorNavbar = (props) => {
               >
                 {isNotificationModalOpen || toggleNotificationPopup ? (
                   <>
-                    <img
-                      src={OrangeNotificationIcon}
-                      alt="notification"
-                      width={50}
+                    <BsBell
+                      size={25}
+                      style={{
+                        color: "var(--currentTheme)",
+                      }}
                       onClick={() =>
                         setToggleNotificationPopup((prev) => !prev)
                       }
@@ -400,9 +408,19 @@ const InvestorNavbar = (props) => {
                   </>
                 ) : (
                   <>
-                    <img
+                    {/* <img
                       src={NotificationIcon}
                       alt="notification"
+                      onClick={() => {
+                        setToggleNotificationPopup((prev) => !prev);
+                        dispatch(setUnreadNotifications(0));
+                      }}
+                    /> */}
+                    <BsBell
+                      size={25}
+                      style={{
+                        color: "var(--d-l-grey)",
+                      }}
                       onClick={() => {
                         setToggleNotificationPopup((prev) => !prev);
                         dispatch(setUnreadNotifications(0));
@@ -420,13 +438,21 @@ const InvestorNavbar = (props) => {
               {/* </Link> */}
               <Link to="/chats" className="rounded-circle message-icon">
                 <div className="icon-wrapper">
-                  <img src={MessageIcon} alt="message" />
+                  {/* <img src={MessageIcon} alt="message" /> */}
+                  <AiOutlineMessage
+                    size={25}
+                    style={{
+                      color: "var(--d-l-grey)",
+                    }}
+                  />
                 </div>
               </Link>
               {/* <div className="icon-wrapper d-none d-md-block"> */}
               <div className="icon-wrapper">
-                <Link to={"/manage-account"}>
-                  {" "}
+                <Link
+                  to={"/manage-account"}
+                  className="p-1 border border-light rounded-circle"
+                >
                   <img
                     className="profile-pic rounded-circle"
                     src={userProfilePicture}
