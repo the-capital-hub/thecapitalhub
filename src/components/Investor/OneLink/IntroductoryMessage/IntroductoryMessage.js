@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./IntroductoryMessage.scss";
-import Send from "../../../../Images/Send.svg";
+// import Send from "../../../../Images/Send.svg";
+import { VscSend } from "react-icons/vsc";
+
 import { updateIntroMsgAPI, postInvestorData } from "../../../../Service/user";
 import { useSelector } from "react-redux";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
@@ -144,7 +146,9 @@ const IntroductoryMessage = ({
                     spinnerSizeClass="spinner-border-sm"
                   />
                 ) : (
-                  <img src={Send} alt="Send" />
+                  // <img src={Send} alt="Send" />
+                  <VscSend size={25} style={{ fill: "var(--d-l-dray)" }} />
+
                 )}
               </div>
             </div>

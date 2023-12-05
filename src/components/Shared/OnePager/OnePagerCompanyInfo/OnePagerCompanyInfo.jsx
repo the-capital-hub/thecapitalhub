@@ -1,7 +1,9 @@
 import React from "react";
-import IconCalendar from "../../../InvestorOneLink/SvgIcons/IconCalendar";
 import { Link } from "react-router-dom";
-import IconEditCapital from "../../../InvestorOneLink/SvgIcons/IconEditCapital";
+// import IconEditCapital from "../../../InvestorOneLink/SvgIcons/IconEditCapital";
+import { FaRegEdit } from "react-icons/fa";
+import { SlCalender } from "react-icons/sl";
+
 
 export default function OnePagerCompanyInfo({
   company,
@@ -17,7 +19,7 @@ export default function OnePagerCompanyInfo({
   // console.log(links);
 
   return (
-    <div className="onePager_company_info d-flex flex-column gap-4 px-3 px-lg-4 py-5 bg-white rounded-4 border shadow-sm">
+    <div className="onePager_company_info d-flex flex-column gap-4 px-3 px-lg-4 py-5  rounded-4 border shadow-sm">
       {/* Startup Name */}
       <fieldset>
         <legend className="d-flex align-items-center pb-2">
@@ -28,7 +30,9 @@ export default function OnePagerCompanyInfo({
               className="text-black text-decoration-none fs-5 ms-auto d-flex align-items-center gap-2"
               id="oneLinkEdit"
             >
-              <IconEditCapital />
+              {/* <IconEditCapital /> */}
+              <FaRegEdit  size={20}/>
+
               <span>Edit</span>
             </Link>
           )}
@@ -61,7 +65,9 @@ export default function OnePagerCompanyInfo({
               value={startedAtDate}
               className="date_input border-0 w-100"
             />
-            <IconCalendar />
+            {/* <IconCalendar /> */}
+            <SlCalender />
+
           </div>
         </fieldset>
       </div>

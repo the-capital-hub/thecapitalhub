@@ -315,13 +315,16 @@
 // }
 
 .one_link_edit_view_section {
-  background: #fff;
+  // background: #fff;
+  background-color: var(--white-to-grey);
 
   .back_img {
     width: fit-content;
     padding: 10px;
     height: max-content;
-    background: #eaeef2;
+    // background: #eaeef2;
+    background: var(--bs-light);
+
     cursor: pointer;
     position: fixed;
     z-index: 10;
@@ -339,7 +342,7 @@
     font-size: 10px;
     top: -9px;
     left: 15px;
-    background-color: white;
+    background: var(--bs-light);
     border-radius: 5px;
     padding: 2px;
     color: #fd5901;
@@ -347,6 +350,8 @@
 
   input,
   textarea {
+    background: var(--bs-light);
+
     border-radius: 10px;
     height: 69px;
   }
@@ -399,6 +404,8 @@
 
       .location_data_div {
         .country {
+          background: var(--bs-light);
+
           position: relative;
           border: 1px solid #e2e2e2;
           border-radius: 10px;
@@ -440,6 +447,8 @@
   .about_company_section {
     position: relative;
     border: 1px solid #e2e2e2;
+    background: var(--bs-light);
+
     border-radius: 10px;
     margin-top: 20px;
 
@@ -477,6 +486,7 @@
 
   .table_section {
     overflow-x: auto;
+    
   }
 
   .fund_sking_section {
@@ -565,7 +575,9 @@
       height: 60px;
       flex-shrink: 0;
       // margin-bottom: 10px;
-      background-color: #fff;
+      // background-color: #fff;
+      background: var(--bs-light);
+ 
       border-radius: 50px;
       border: 1px solid #fd5901;
       color: #fd5901;

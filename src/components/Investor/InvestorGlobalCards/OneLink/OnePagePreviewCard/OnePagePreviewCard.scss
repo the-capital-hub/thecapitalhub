@@ -24,6 +24,9 @@
     }
 
     .card-body {
+      background: var(--bs-light);
+      border-radius: var(--border-radius);
+
       display: flex;
       // justify-content: center;
       // align-items: center;
@@ -35,7 +38,9 @@
       }
 
       .card-title {
-        background-color: #fff;
+        // background-color: #fff;
+        background: var(--bs-light);
+
         position: absolute;
         top: -10px;
         // left: 25%;
