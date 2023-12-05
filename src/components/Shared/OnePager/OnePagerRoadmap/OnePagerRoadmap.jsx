@@ -1,5 +1,7 @@
 import React from "react";
-import IconCalendar from "../../../InvestorOneLink/SvgIcons/IconCalendar";
+// import IconCalendar from "../../../InvestorOneLink/SvgIcons/IconCalendar";
+import { SlCalender } from "react-icons/sl";
+
 
 export default function OnePagerRoadmap({ companyData }) {
 
@@ -18,7 +20,9 @@ export default function OnePagerRoadmap({ companyData }) {
                   value={roadMap?.date || ""}
                   className="date_input border-0 w-100"
                 />
-                <IconCalendar />
+                {/* <IconCalendar /> */}
+                <SlCalender />
+
               </div>
             </fieldset>
             <fieldset>

@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import IconEditCapital from "../../../InvestorOneLink/SvgIcons/IconEditCapital";
+// import IconEditCapital from "../../../InvestorOneLink/SvgIcons/IconEditCapital";
+import { FaRegEdit } from "react-icons/fa";
+
 
 export default function OnePagerCompanyAbout({
   description,
@@ -19,7 +21,7 @@ export default function OnePagerCompanyAbout({
   }
 
   return (
-    <div className="onePager_company_about gap-5 px-3 px-lg-4 py-5 bg-white rounded-4 border shadow-sm">
+    <div className="onePager_company_about gap-5 px-3 px-lg-4 py-5  rounded-4 border shadow-sm">
       <fieldset className="span_full">
         <legend className="d-flex align-items-center pb-2">
           <p className="m-0" style={{ flex: "0 0 65%" }}>
@@ -30,7 +32,9 @@ export default function OnePagerCompanyAbout({
               to={"/onelink/edit"}
               className="text-black text-decoration-none fs-5 ms-auto d-flex align-items-center gap-2"
             >
-              <IconEditCapital />
+              {/* <IconEditCapital /> */}
+              <FaRegEdit size={20} />
+
               <span>Edit</span>
             </Link>
           )}

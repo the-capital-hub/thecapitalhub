@@ -3,10 +3,12 @@
   flex-direction: column;
   min-height: 90vh;
   .box {
-    background-color: #fff;
+    // background-color: #fff;
     padding: 10px;
     border-radius: var(--border-radius);
-    background: #fff;
+    // background: #fff;
+    background-color: var(--white-to-grey);
+
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
     width: 96%;
     margin-left: 2%;

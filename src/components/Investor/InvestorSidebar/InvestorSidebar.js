@@ -211,7 +211,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/company-profile"
                   id="sidebar_companyProfile"
                 >
-                  <HiOutlineOfficeBuilding size={25} />
+                  <HiOutlineOfficeBuilding size={25}  />
                   {!sidebarCollapsed && <span>Company</span>}
                 </Link>
               </MenuItem>

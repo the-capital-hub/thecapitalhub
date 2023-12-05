@@ -18,7 +18,8 @@
     align-items: center;
     justify-content: center;
     .modalwrapper {
-      background-color: #fff;
+      // background-color: #fff;
+      background-color: var(--white-to-grey);
       border-radius: var(--border-radius);
       padding: 30px 60px;
       position: absolute;

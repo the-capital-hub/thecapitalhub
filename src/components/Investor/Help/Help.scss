@@ -6,10 +6,12 @@
 
   .box_container {
     height: 100%;
-    background-color: #fff;
+    // background-color: #fff;
     padding: 10px;
     border-radius: var(--border-radius);
-    background: #fff;
+    // background: #fff;
+    background-color: var(--white-to-grey);
+
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
     margin-top: 1rem;
 
@@ -65,7 +67,8 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          background: #eaeef2;
+          // background: #eaeef2;
+          background-color: var(--bs-light);
           border-radius: 10px;
 
           img {
@@ -77,7 +80,9 @@
           input[type="text"] {
             border-radius: 10px;
             width: 75%;
-            background: #eaeef2;
+            // background: #eaeef2;
+            background-color: var(--bs-light);
+
             height: 60px;
             border: none;
             outline: none;
@@ -153,7 +158,9 @@
         align-items: center;
         border-radius: var(--border-radius);
         border: 1px solid #dfdfdf;
-        background: #eaeef2;
+        // background: #eaeef2;
+        background-color: var(--bs-light);
+
         box-shadow: 2px 2px 26px 0px rgba(0, 0, 0, 0.05);
 
         img {
@@ -162,7 +169,8 @@
         }
 
         p {
-          color: #485b65;
+          // color: #485b65;
+          text-decoration: none;
           font-family: Poppins;
           font-size: 12.494px;
           font-style: normal;
@@ -204,7 +212,9 @@
         border: none;
 
         .accordion-button {
-          background-color: #eaeef2 !important;
+          // background-color: #eaeef2 !important;
+          background-color: var(--bs-light) !important;
+
           border: none !important;
           border-radius: 10px;
 
@@ -215,12 +225,16 @@
         }
 
         .accordion-body {
-          background-color: #d6d7d9 !important;
+          // background-color: #d6d7d9 !important;
+          background-color: var(--bs-light) !important;
+
         }
       }
 
       .accordion-header {
-        background-color: #fff;
+        // background-color: #fff;
+        background-color: var(--bs-light) !important;
+
       }
     }
   }
