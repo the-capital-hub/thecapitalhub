@@ -23,6 +23,7 @@ import toast from "react-hot-toast";
 import { MdDarkMode } from "react-icons/md";
 import { GoSun } from "react-icons/go";
 import { clearAllChatsData } from "../../../Store/features/chat/chatSlice";
+import { fetchAllChats } from "../../../Store/features/chat/chatThunks";
 
 const InvestorManageAccount = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -99,6 +100,9 @@ const InvestorManageAccount = () => {
           let isInvestor =
             selectedAccountFull.user.isInvestor === "true" ? true : false;
           dispatch(fetchCompanyData(selectedAccountFull.user._id, isInvestor));
+          // fetch chats
+          dispatch(clearAllChatsData());
+          dispatch(fetchAllChats());
           localStorage.setItem("accessToken", selectedAccountFull.token);
           setIsSubmitting(false);
           toast.success("Account switched successfully", {
