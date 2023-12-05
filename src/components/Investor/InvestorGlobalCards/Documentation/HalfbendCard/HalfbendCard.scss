@@ -2,9 +2,12 @@
   margin-bottom: 1rem;
   .box_container {
     width: 750px;
-    background-color: #fff;
+    // background-color: #fff;
     border-radius: var(--border-radius);
-    background: #fff;
+    // background: #fff;
+    background-color: var(--white-to-grey);
+    
+
     // box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
 
     .custom-card {

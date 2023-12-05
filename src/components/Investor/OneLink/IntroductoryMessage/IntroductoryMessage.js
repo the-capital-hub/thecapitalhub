@@ -71,11 +71,11 @@ const IntroductoryMessage = ({
   return (
     <div className={`introductory_message_container ${className}`}>
       <div className="box_container rounded-4 border shadow-sm">
-        <section className="title_section">
+        <section className="title_section ">
           <div
             className={`title_wrapper ${
               !para ? "title-only-border" : "default-border"
-            }`}
+            } rounded-4`}
           >
             <h6>{title}</h6>
             {para && (
