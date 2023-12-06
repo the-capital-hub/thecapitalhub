@@ -143,8 +143,7 @@
   // Custom colors
   --white-to-grey: white;
   --d-l-grey: var(--bs-gray-900);
-  --tag-box:#c6c6c636;
-
+  --tag-box: #c6c6c636;
 
   // Chat page colors
   --chat-page-bg: var(--bs-gray-400);
@@ -324,6 +323,11 @@ $color-mode-type: data;
   .btn {
     --bs-btn-bg: #979797;
     --bs-btn-hover-border-color: rgb(141, 141, 141);
+  }
+
+  .btn-startup {
+    --bs-btn-bg: #{$startup};
+    --bs-btn-hover-border-color: #{tint-color($startup, 15%)};
   }
 
   .form-input {
