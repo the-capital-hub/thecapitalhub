@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PersonInfo from "./PersonHeader/PersonInfo";
 import PersonActions from "./PersonHeader/PersonActions";
 import PersonAbout from "./PersonAbout/PersonAbout";

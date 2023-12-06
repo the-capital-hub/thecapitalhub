@@ -1,3 +1,5 @@
+import { Image } from "react-bootstrap";
+
 export default function ImageAttachment({
   selectedImage,
   removeSelectedImage,
@@ -6,7 +8,11 @@ export default function ImageAttachment({
     <>
       {selectedImage && (
         <div className="image-preview">
-          <img src={URL.createObjectURL(selectedImage)} alt="Selected media" />
+          <Image
+            src={URL.createObjectURL(selectedImage)}
+            alt="Selected media"
+            fluid
+          />
           <button className="remove-preview" onClick={removeSelectedImage}>
             X
           </button>

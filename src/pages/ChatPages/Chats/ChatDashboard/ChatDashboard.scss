@@ -1,10 +1,9 @@
 .chat_dashboard_container {
   // 70px is height of chat navbar and 85px is (height of mobileheader + margin-bottom)
-  max-height: calc(100% - 80px - 85px);
+  max-height: calc(100% - 80px - 70px);
   height: 100%;
   border-radius: var(--border-radius);
-  border: 1px solid #cfcfcf;
-  background: #fff;
+  background: var(--white-to-grey);
   box-shadow: 4px 4px 30px 0px rgba(0, 0, 0, 0.11);
   text-align: center;
   position: relative;
@@ -112,180 +111,180 @@
     }
   }
 
-  .chat_messages {
-    height: 80%;
-    // overflow-y: scroll;
-    // overflow-x: hidden;
+  // .chat_messages {
+  //   height: 80%;
+  //   // overflow-y: scroll;
+  //   // overflow-x: hidden;
 
-    // .other_sender {
-    //   align-self: flex-start;
-    //   display: flex;
-    //   max-width: 90%;
-    //   @media (min-width: 768px) {
-    //     max-width: 60%;
-    //   }
+  //   // .other_sender {
+  //   //   align-self: flex-start;
+  //   //   display: flex;
+  //   //   max-width: 90%;
+  //   //   @media (min-width: 768px) {
+  //   //     max-width: 60%;
+  //   //   }
 
-    //   .image_profile {
-    //     height: 40px;
-    //     width: 40px;
-    //     border-radius: 50%;
-    //   }
+  //   //   .image_profile {
+  //   //     height: 40px;
+  //   //     width: 40px;
+  //   //     border-radius: 50%;
+  //   //   }
 
-    //   .other_messages {
-    //     display: flex;
-    //     flex-direction: column;
-    //     justify-content: flex-start;
-    //     align-items: flex-start;
+  //   //   .other_messages {
+  //   //     display: flex;
+  //   //     flex-direction: column;
+  //   //     justify-content: flex-start;
+  //   //     align-items: flex-start;
 
-    //     .msg-time {
-    //       font-size: 10px;
-    //       color: rgb(112, 112, 112);
-    //       text-align: end;
-    //       display: flex;
-    //       align-items: center;
-    //       gap: 5px;
-    //       justify-content: flex-end;
-    //       width: 100%;
-    //     }
+  //   //     .msg-time {
+  //   //       font-size: 10px;
+  //   //       color: rgb(112, 112, 112);
+  //   //       text-align: end;
+  //   //       display: flex;
+  //   //       align-items: center;
+  //   //       gap: 5px;
+  //   //       justify-content: flex-end;
+  //   //       width: 100%;
+  //   //     }
 
-    //     .message_container {
-    //       background-color: #eaeef2;
-    //       padding: 5px 10px;
-    //       border-top-right-radius: 10px;
-    //       border-bottom-right-radius: 10px;
-    //       border-bottom-left-radius: 10px;
-    //       margin-bottom: 5px;
-    //       display: flex;
-    //       flex-direction: column;
-    //       align-items: center;
+  //   //     .message_container {
+  //   //       background-color: #eaeef2;
+  //   //       padding: 5px 10px;
+  //   //       border-top-right-radius: 10px;
+  //   //       border-bottom-right-radius: 10px;
+  //   //       border-bottom-left-radius: 10px;
+  //   //       margin-bottom: 5px;
+  //   //       display: flex;
+  //   //       flex-direction: column;
+  //   //       align-items: center;
 
-    //       p {
-    //         font-size: 14px;
-    //       }
+  //   //       p {
+  //   //         font-size: 14px;
+  //   //       }
 
-    //       a {
-    //         // color: rgb(93, 93, 93);
-    //         color: #212529;
-    //       }
+  //   //       a {
+  //   //         // color: rgb(93, 93, 93);
+  //   //         color: #212529;
+  //   //       }
 
-    //       .video-message {
-    //         max-width: 100%;
-    //         height: auto;
-    //         border-radius: 10px;
-    //         margin-top: 10px;
-    //         background-color: #000;
-    //         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    //       }
+  //   //       .video-message {
+  //   //         max-width: 100%;
+  //   //         height: auto;
+  //   //         border-radius: 10px;
+  //   //         margin-top: 10px;
+  //   //         background-color: #000;
+  //   //         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  //   //       }
 
-    //       .image-message {
-    //         max-width: 100%;
-    //         height: auto;
-    //         border-radius: 10px;
-    //         margin-top: 10px;
-    //         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    //       }
-    //     }
-    //   }
-    // }
+  //   //       .image-message {
+  //   //         max-width: 100%;
+  //   //         height: auto;
+  //   //         border-radius: 10px;
+  //   //         margin-top: 10px;
+  //   //         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  //   //       }
+  //   //     }
+  //   //   }
+  //   // }
 
-    // .my_message_main {
-    //   align-self: flex-end;
+  //   // .my_message_main {
+  //   //   align-self: flex-end;
 
-    //   .image_profile {
-    //     height: 40px;
-    //     width: 40px;
-    //     border-radius: 50%;
-    //   }
+  //   //   .image_profile {
+  //   //     height: 40px;
+  //   //     width: 40px;
+  //   //     border-radius: 50%;
+  //   //   }
 
-    //   .my_messages {
-    //     display: flex;
-    //     flex-direction: column;
-    //     justify-content: flex-start;
-    //     align-items: flex-end;
-    //     // overflow: hidden !important;
+  //   //   .my_messages {
+  //   //     display: flex;
+  //   //     flex-direction: column;
+  //   //     justify-content: flex-start;
+  //   //     align-items: flex-end;
+  //   //     // overflow: hidden !important;
 
-    //     .msg-time {
-    //       font-size: 10px;
-    //       color: rgb(255, 255, 255);
-    //       text-align: end;
-    //       display: flex;
-    //       align-items: center;
-    //       gap: 5px;
-    //       justify-content: flex-end;
-    //       width: 100%;
-    //     }
+  //   //     .msg-time {
+  //   //       font-size: 10px;
+  //   //       color: rgb(255, 255, 255);
+  //   //       text-align: end;
+  //   //       display: flex;
+  //   //       align-items: center;
+  //   //       gap: 5px;
+  //   //       justify-content: flex-end;
+  //   //       width: 100%;
+  //   //     }
 
-    //     .time_name_image {
-    //       display: flex;
-    //     }
+  //   //     .time_name_image {
+  //   //       display: flex;
+  //   //     }
 
-    //     .mymessage_container {
-    //       width: fit-content;
-    //       max-width: 90%;
-    //       @media (min-width: 768px) {
-    //         max-width: 60%;
-    //       }
+  //   //     .mymessage_container {
+  //   //       width: fit-content;
+  //   //       max-width: 90%;
+  //   //       @media (min-width: 768px) {
+  //   //         max-width: 60%;
+  //   //       }
 
-    //       background-color: var(--currentTheme);
-    //       color: var(--currentTheme-text);
-    //       padding: 5px 10px;
-    //       border-top-left-radius: 10px;
-    //       border-bottom-right-radius: 10px;
-    //       border-bottom-left-radius: 10px;
-    //       margin-bottom: 5px;
-    //       // margin-right: 50px;
-    //       margin-right: 10px;
-    //       display: flex;
-    //       flex-direction: column;
-    //       align-items: stretch;
+  //   //       background-color: var(--currentTheme);
+  //   //       color: var(--currentTheme-text);
+  //   //       padding: 5px 10px;
+  //   //       border-top-left-radius: 10px;
+  //   //       border-bottom-right-radius: 10px;
+  //   //       border-bottom-left-radius: 10px;
+  //   //       margin-bottom: 5px;
+  //   //       // margin-right: 50px;
+  //   //       margin-right: 10px;
+  //   //       display: flex;
+  //   //       flex-direction: column;
+  //   //       align-items: stretch;
 
-    //       p {
-    //         font-size: 14px;
-    //         margin-inline-end: 1rem;
-    //       }
+  //   //       p {
+  //   //         font-size: 14px;
+  //   //         margin-inline-end: 1rem;
+  //   //       }
 
-    //       .chatDropDownMenu {
-    //         display: none;
-    //         overflow: visible;
-    //       }
+  //   //       .chatDropDownMenu {
+  //   //         display: none;
+  //   //         overflow: visible;
+  //   //       }
 
-    //       &:hover,
-    //       &:active {
-    //         .chatDropDownMenu {
-    //           display: block;
-    //         }
-    //       }
+  //   //       &:hover,
+  //   //       &:active {
+  //   //         .chatDropDownMenu {
+  //   //           display: block;
+  //   //         }
+  //   //       }
 
-    //       a {
-    //         color: white;
-    //       }
+  //   //       a {
+  //   //         color: white;
+  //   //       }
 
-    //       @media (min-width: 821px) {
-    //         &.img {
-    //           max-width: 30%;
-    //         }
-    //       }
+  //   //       @media (min-width: 821px) {
+  //   //         &.img {
+  //   //           max-width: 30%;
+  //   //         }
+  //   //       }
 
-    //       .video-message {
-    //         max-width: 100%;
-    //         height: auto;
-    //         border-radius: 10px;
-    //         margin-top: 10px;
-    //         background-color: #000;
-    //         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    //       }
+  //   //       .video-message {
+  //   //         max-width: 100%;
+  //   //         height: auto;
+  //   //         border-radius: 10px;
+  //   //         margin-top: 10px;
+  //   //         background-color: #000;
+  //   //         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  //   //       }
 
-    //       .image-message {
-    //         max-width: 100%;
-    //         height: auto;
-    //         border-radius: 10px;
-    //         margin-top: 10px;
-    //         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    //       }
-    //     }
-    //   }
-    // }
-  }
+  //   //       .image-message {
+  //   //         max-width: 100%;
+  //   //         height: auto;
+  //   //         border-radius: 10px;
+  //   //         margin-top: 10px;
+  //   //         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  //   //       }
+  //   //     }
+  //   //   }
+  //   // }
+  // }
 
   // .chat_input_section {
   //   // padding-bottom: 20px;

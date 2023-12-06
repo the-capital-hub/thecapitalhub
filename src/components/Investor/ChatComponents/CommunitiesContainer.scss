@@ -1,10 +1,18 @@
 .communities__wrapper {
   width: 100%;
-  border: 1px solid #cfcfcf;
+  // border: 1px solid #cfcfcf;
   margin-bottom: 1em;
+  background-color: var(--white-to-grey);
 
-  &[open] .communities__header {
-    color: var(--currentTheme-dark);
+  .communities__header {
+    color: var(--d-l-grey);
+  }
+
+  &[open] {
+    & .communities__header {
+      color: var(--currentTheme-dark);
+      border-bottom: 1px solid var(--chat-sidebar-chat-border);
+    }
   }
 
   .new__community {
@@ -61,9 +69,10 @@
 .community__card {
   // background-color: rgba(234, 238, 242, 1);
   cursor: pointer;
+  color: var(--d-l-grey);
 
   & + .community__card {
-    border-top: 1px solid #b4b4b4aa;
+    border-top: 1px solid var(--chat-sidebar-chat-border);
   }
 
   // &:first-of-type {

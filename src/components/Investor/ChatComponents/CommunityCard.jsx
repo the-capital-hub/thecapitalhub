@@ -130,8 +130,8 @@ export default function CommunityCard({
         ) : (
           <HiOutlineUserGroup
             style={{
-              height: "40px",
-              width: "40px",
+              height: "50px",
+              width: "50px",
               color: " rgba(159, 159, 159, 1)",
             }}
             className=""

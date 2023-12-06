@@ -8,7 +8,7 @@ import {
   getCommunityById,
   getStartupByFounderId,
 } from "../../../../Service/user";
-import sendIcon from "../../../../Images/Send.svg";
+// import sendIcon from "../../../../Images/Send.svg";
 import "./ChatInputContainer.scss";
 import { getBase64 } from "../../../../utils/getBase64";
 import { useSelector } from "react-redux";
@@ -22,6 +22,7 @@ import {
   selectUserProfilePicture,
 } from "../../../../Store/features/user/userSlice";
 import AttachmentSelector from "./ChatAttachments/AttachmentSelector/AttachmentSelector";
+import IconSend from "../../SvgIcons/IconSend";
 // import { updateLastMessage } from "../../../../Store/features/chat/chatSlice";
 
 export default function ChatInputContainer({
@@ -252,14 +253,15 @@ export default function ChatInputContainer({
             showAttachDocs={showAttachDocs}
             setShowAttachDocs={setShowAttachDocs}
           />
-          <button className="btn p-0">
-            <img
+          <button className="btn border-0 send-btn bg-transparent p-0 ps-2">
+            {/* <img
               className="border-start border-2"
               src={sendIcon}
               alt="Send"
               width={30}
               onClick={() => handleSend()}
-            />
+            /> */}
+            <IconSend width="25 px" height="25px" />
           </button>
         </div>
       </div>
