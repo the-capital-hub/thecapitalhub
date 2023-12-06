@@ -29,11 +29,12 @@ import MyMessage from "../../../../components/Investor/ChatComponents/ChatMessag
 import OtherMessage from "../../../../components/Investor/ChatComponents/ChatMessages/OtherMessage/OtherMessage";
 import { formatMessages } from "../../../../utils/ChatsHelpers";
 import TCHLogoLoader from "../../../../components/Shared/TCHLoaders/TCHLogoLoader/TCHLogoLoader";
+import { selectLoggedInUserId } from "../../../../Store/features/user/userSlice";
 // import { updateLastMessage } from "../../../../Store/features/chat/chatSlice";
 
 const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
   // Fetch global state
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const loggedInUserId = useSelector(selectLoggedInUserId);
   const chatId = useSelector((state) => state.chat.chatId);
   const userId = useSelector((state) => state.chat.userId);
   const dispatch = useDispatch();
@@ -167,7 +168,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
   // };
 
   // const groupedMessages = groupMessagesByDate(messages);
-  const formattedMessages = formatMessages(messages, loggedInUser._id);
+  const formattedMessages = formatMessages(messages, loggedInUserId);
 
   // const handleSend = async () => {
   //   if (
@@ -327,7 +328,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
               <div className="chat_messages">
                 {group.messages.map((message, idx) =>
                   // My messages
-                  message.senderId._id === loggedInUser._id ? (
+                  message.senderId._id === loggedInUserId ? (
                     // <section
                     //   className="my_message_main text-break"
                     //   key={message._id}

@@ -14,6 +14,7 @@ export default function TutorialTrigger({
   fromUp,
   isChatPage = false,
   className,
+  theme,
 }) {
   const showOnboarding = useSelector(selectShowOnboarding);
   const isMobileView = useSelector(selectIsMobileView);
@@ -54,6 +55,7 @@ export default function TutorialTrigger({
           } ${
             fromUp ? "slideDown position-absolute top-0 start-0 z-3" : "slideUp"
           }`}
+          data-bs-theme={theme}
         >
           <div className="container mx-auto d-flex align-items-center gap-3 justify-content-around">
             <p className="m-0">

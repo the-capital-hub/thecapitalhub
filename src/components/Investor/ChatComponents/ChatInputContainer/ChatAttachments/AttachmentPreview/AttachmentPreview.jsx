@@ -3,6 +3,7 @@ import "./AttachmentPreview.scss";
 import SendIcon from "../../../../../../Images/Send.svg";
 import { useSelector } from "react-redux";
 import { selectIsMobileView } from "../../../../../../Store/features/design/designSlice";
+import { useCallback } from "react";
 
 export default function AttachmentPreview({
   children,
@@ -17,9 +18,19 @@ export default function AttachmentPreview({
   const isMobileView = useSelector(selectIsMobileView);
 
   // Handle Close
-  function handleClose() {
+  const handleClose = useCallback(() => {
     clearInputs();
-  }
+  }, [clearInputs]);
+
+  const attachmentListRef = useCallback(
+    (node) => {
+      if (node && node.childNodes.length === 0) {
+        handleClose();
+        console.log("This is the node.", node);
+      }
+    },
+    [handleClose]
+  );
 
   return (
     <div className="attachment-preview-wrapper">
@@ -33,11 +44,16 @@ export default function AttachmentPreview({
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Attachments</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body className="d-flex flex-column gap-3 justify-content-between">
-          {children}
+        <Offcanvas.Body className="d-flex flex-column gap-3 p-0">
+          <div
+            className="attachment-list d-flex flex-column justify-content-center h-100 bg-dark"
+            ref={attachmentListRef}
+          >
+            {children}
+          </div>
 
           {/* Send button */}
-          <div className="d-flex align-items-center gap-2 py-2 send-container mt-auto">
+          <div className="d-flex align-items-center gap-2 py-2 send-container mt-auto mb-2 px-2">
             <input
               type="text"
               className="text-input flex-grow-1"
