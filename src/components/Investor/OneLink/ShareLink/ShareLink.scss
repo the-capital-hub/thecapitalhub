@@ -142,7 +142,8 @@
       background-color: #fff;
       padding: 10px;
       border-radius: var(--border-radius);
-      background: #fff;
+      // background: #fff;
+      background: var(--white-to-grey);
       // box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
 
       .title_section {
@@ -170,7 +171,7 @@
           border-radius: 8px;
           margin: 20px 0;
           justify-content: center;
-          background: #eaeef2;
+          // background: #eaeef2;
 
           input {
             // text-align: right;

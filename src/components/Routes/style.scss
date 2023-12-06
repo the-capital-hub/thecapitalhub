@@ -110,7 +110,8 @@
     transform: translateX(50%);
     box-sizing: border-box;
     // width: max-content;
-    background-color: white;
+    // background-color: white;
+    background-color: var(--white-to-grey);
 
     a {
       color: rgb(113, 113, 113);
@@ -144,7 +145,8 @@
         // margin-top: 16%;
         max-width: 100%;
         overflow: hidden;
-        background-color: #eaeef2;
+        // background-color: #eaeef2;
+        background-color: var(--bs-body-bg);
       }
 
       // Add a class to handle the sidebar collapsed state

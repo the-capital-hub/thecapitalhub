@@ -15,9 +15,10 @@
   }
 
   .profile {
-    background-color: white;
+    // background-color: white;
+    background: var(--white-to-grey);
     padding: 20px;
-
+color: gray;
     @media (max-width: 767px) {
       margin: 0;
     }
@@ -41,6 +42,12 @@
           color: white;
         }
       }
+      .left_profile_text{
+        .typography{
+          color: var(--d-l-grey);
+
+        }
+      }
     }
     .details {
       margin: 15px 0;
@@ -52,7 +59,8 @@
 
   .profile_container {
     padding: 20px;
-    background-color: white;
+    // background-color: white;
+    background: var(--white-to-grey);
   }
 
   .two_column_wrapper {
@@ -90,6 +98,12 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+  }
+  .featured_post{
+    background: var(--white-to-grey);
+    h4{
+      color: var(--d-l-grey);
+    }
   }
 }
 
