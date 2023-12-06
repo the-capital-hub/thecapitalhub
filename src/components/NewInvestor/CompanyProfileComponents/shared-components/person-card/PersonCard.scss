@@ -1,9 +1,8 @@
 .personCard__container {
-  border: 1px solid #e0e0e0;
   flex: 0 0 20rem;
   scroll-snap-align: start;
-
-  box-shadow: 7px 0px 30px 0px var(--color-card-shadow);
+  background-color: var(--bs-light);
+  box-shadow: 7px 0px 30px 0px var(--bs-box-shadow-lg);
 }
 
 .card__head {
@@ -14,7 +13,7 @@
 }
 
 .card__head__name {
-  color: #000;
+  color: var(--d-l-grey);
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 500;
@@ -30,6 +29,7 @@
 }
 
 .card__body {
+  color: var(--d-l-grey);
   p {
     color: #4e4e4e;
     font-size: 14px;

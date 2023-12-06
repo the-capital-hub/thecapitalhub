@@ -11,7 +11,7 @@ export default function OtherMessage({ message, idx, isPersonalChat = false }) {
           <img
             className="image_profile"
             src={message.senderId?.profilePicture}
-            alt=""
+            alt={`${message.senderId?.firstName} ${message.senderId?.lastName}`}
           />
           <h6 className="name_title">
             {message.senderId?.firstName} {message.senderId?.lastName}{" "}

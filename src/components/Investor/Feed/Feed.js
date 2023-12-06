@@ -160,7 +160,7 @@ const Feed = () => {
                 next={fetchMorePosts}
                 hasMore={hasMore}
                 loader={
-                  <div className="container p-5 text-center my-5 bg-white rounded-5 shadow-sm ">
+                  <div className="loader_spinner container p-5 text-center my-5  rounded-5 shadow-sm ">
                     <SpinnerBS />
                   </div>
                 }

@@ -55,6 +55,8 @@
 }
 
 .person_profile_wrapper {
+  background:var(--white-to-grey);
+
   .btn-capital {
     width: fit-content;
     background-color: var(--color-btn);
@@ -105,7 +107,7 @@
   .btn-capital-outline {
     width: fit-content;
 
-    background-color: white;
+    // background-color: white;
     border: 1px solid var(--color-btn);
     border-radius: 5px;
     outline: none;
@@ -135,5 +137,20 @@
   .main__heading {
     font-size: 1.5rem;
     font-weight: 500;
+  }
+  .person__section__one{
+    color: black;
+  //   .person__info{
+  //     .person_info{
+  //       .person__profile__header{
+  //         .person__profile__details{
+  //           .person__profile__headings{
+  //             color: black;
+             
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
   }
 }

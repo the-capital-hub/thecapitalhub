@@ -7,17 +7,40 @@ import { useSelector } from "react-redux";
 export default function SettingsFilesBody() {
   const chatProfile = useSelector((state) => state.chat.chatProfile);
   const communityProfile = useSelector((state) => state.chat.communityProfile);
-  const isCommunitySelected = useSelector((state) => state.chat.isCommunitySelected);
+  const isCommunitySelected = useSelector(
+    (state) => state.chat.isCommunitySelected
+  );
 
   return (
     <>
-      <FileBar fileType="documents" fileCount={isCommunitySelected ? communityProfile?.documents?.length : chatProfile?.documents?.length}>
+      <FileBar
+        fileType="documents"
+        fileCount={
+          isCommunitySelected
+            ? communityProfile?.documents?.length
+            : chatProfile?.documents?.length
+        }
+      >
         <IconFile color={"black"} />
       </FileBar>
-      <FileBar fileType="videos" fileCount={isCommunitySelected ? communityProfile?.videos?.length : chatProfile?.videos?.length}>
+      <FileBar
+        fileType="videos"
+        fileCount={
+          isCommunitySelected
+            ? communityProfile?.videos?.length
+            : chatProfile?.videos?.length
+        }
+      >
         <IconVideo color={"black"} />
       </FileBar>
-      <FileBar fileType="images" fileCount={isCommunitySelected ? communityProfile?.images?.length : chatProfile?.images?.length}>
+      <FileBar
+        fileType="images"
+        fileCount={
+          isCommunitySelected
+            ? communityProfile?.images?.length
+            : chatProfile?.images?.length
+        }
+      >
         <IconVideo color={"black"} />
       </FileBar>
     </>
@@ -35,7 +58,10 @@ const FileBar = ({ children, fileType, fileCount }) => (
         {children}
       </div>
       <div className="d-flex flex-column">
-        <p className="m-0 text-capitalize" style={{ fontWeight: "500" }}>
+        <p
+          className="m-0 text-capitalize"
+          style={{ fontWeight: "500", color: "var(--d-l-grey)" }}
+        >
           {fileType}
         </p>
         <p
@@ -50,7 +76,7 @@ const FileBar = ({ children, fileType, fileCount }) => (
         </p>
       </div>
       <div className="ms-auto align-self-start">
-        <IconChevronRight />
+        <IconChevronRight color={"var(--d-l-grey)"} />
       </div>
     </div>
   </div>

@@ -6,19 +6,23 @@ import { useSelector } from "react-redux";
 export default function SettingsCommunityBody() {
   const chatProfile = useSelector((state) => state.chat.chatProfile);
   const communityProfile = useSelector((state) => state.chat.communityProfile);
-  const isCommunitySelected = useSelector((state) => state.chat.isCommunitySelected);
+  const isCommunitySelected = useSelector(
+    (state) => state.chat.isCommunitySelected
+  );
 
   return (
     <>
-      {isCommunitySelected ? (
-        communityProfile?.community?.members?.map((member, index) => (
-          <CommunityMemberBar key={index} member={member} adminId={communityProfile.community.adminId}/>
-        ))
-      ) : (
-        chatProfile?.communities?.map((community, index) => (
-          <CommunityBar key={index} community={community} />
-        ))
-      )}
+      {isCommunitySelected
+        ? communityProfile?.community?.members?.map((member, index) => (
+            <CommunityMemberBar
+              key={index}
+              member={member}
+              adminId={communityProfile.community.adminId}
+            />
+          ))
+        : chatProfile?.communities?.map((community, index) => (
+            <CommunityBar key={index} community={community} />
+          ))}
     </>
   );
 }
@@ -33,7 +37,7 @@ const CommunityBar = ({ community }) => {
         style={{ width: "40px", height: "40px" }}
         className="shadow-sm rounded-circle"
       />
-      <div className="d-flex flex-column">
+      <div className="d-flex flex-column" style={{ color: "var(--d-l-grey)" }}>
         <p className="m-0" style={{ fontWeight: "500" }}>
           {community.communityName}
         </p>
@@ -61,7 +65,7 @@ const CommunityMemberBar = ({ member, adminId }) => {
         style={{ width: "40px", height: "40px" }}
         className="shadow-sm rounded-circle"
       />
-      <div className="d-flex flex-column">
+      <div className="d-flex flex-column" style={{ color: "var(--d-l-grey)" }}>
         <p className="m-0" style={{ fontWeight: "500" }}>
           {member.firstName} {member.lastName}
         </p>
@@ -72,7 +76,7 @@ const CommunityMemberBar = ({ member, adminId }) => {
             fontWeight: "400",
           }}
         >
-          {member._id === adminId ? "Admin": "Member"}
+          {member._id === adminId ? "Admin" : "Member"}
           {/* {community?.members?.map((member) => member.firstName).join(", ")} */}
         </p>
       </div>

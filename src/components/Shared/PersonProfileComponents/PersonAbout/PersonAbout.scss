@@ -13,7 +13,11 @@
   .personal_info_grid {
     p {
       font-weight: 400;
-      color: rgba(113, 113, 113, 1);
+      color: var(--bs-gray-400);
+    }
+
+    .field-text {
+      color: var(--d-l-grey);
     }
 
     display: grid;
@@ -54,9 +58,9 @@
 @media (max-width: 450px) {
   .name_number {
     width: 100%;
-    .personal_info_grid{
+    .personal_info_grid {
       display: grid;
-      grid-template-columns: 1fr ;
+      grid-template-columns: 1fr;
       gap: 2rem;
     }
   }

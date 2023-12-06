@@ -12,7 +12,8 @@
     fieldset {
       border: 1px solid #e2e2e2;
       border-radius: 10px;
-      background-color: #fbfbfb;
+      // background-color: #fbfbfb;
+      background-color: var(--bs-light);
       padding: 0;
       position: relative;
 
@@ -30,7 +31,9 @@
         border: none;
         outline: none;
         width: 100%;
-        background-color: transparent;
+        // background-color: transparent;
+        background-color: var(--bs-light);
+        border-radius: 10px;
 
         padding: 0.5em 0.75em;
         font-size: 20px;
@@ -52,6 +55,8 @@
       padding-inline: 1em;
       color: #3a3a3a;
       font-size: 12px;
+      background-color: var(--bs-light);
+      border-radius: 8px;
       font-weight: 500;
     }
   }

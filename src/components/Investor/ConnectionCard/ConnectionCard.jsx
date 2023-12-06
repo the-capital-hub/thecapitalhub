@@ -58,7 +58,7 @@ function ConnectionCard({ userIdData }) {
           ))}
         </>
       ) : (
-        <p>No connections found.</p>
+        <p className="text-secondary">No connections found.</p>
       )}
     </div>
   );

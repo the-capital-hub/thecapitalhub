@@ -91,7 +91,7 @@ const FeaturedPostsContainer = ({ userId }) => {
               )
             )
           ) : (
-            <h6 className="text-muted">No Featured Posts</h6>
+            <h6 className="text-secondary">No Featured Posts</h6>
           )
         ) : (
           <SpinnerBS

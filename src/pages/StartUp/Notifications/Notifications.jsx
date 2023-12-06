@@ -120,7 +120,7 @@ function Notifications() {
     <MaxWidthWrapper>
       <div className="notificaitons_container">
         {/* <ComingSoon /> */}
-        <div className="d-flex gap-md-3 gap-2 py-4  px-2 mt-3 data_selector">
+        {/* <div className="d-flex gap-md-3 gap-2 py-4  px-2 mt-3 data_selector">
         <button
   className={`fs-6 rounded-pill py-md-3 px-md-5 py-2 px-4 ${
     selectedTab === "All" ? `active${isInvestor ? "investors" : "startup"}` : ""
@@ -137,8 +137,8 @@ function Notifications() {
           >
             MY Post
           </button>
-        </div>
-        <div className="px-xxl-4 bg-white  rounded-4 px-3">
+        </div> */}
+        <div className="message_section px-xxl-4 mt-5 rounded-4 px-3">
           <div className="row p-0">
             <div className="col-12 mt-2 box p-0">
               {!loading ? (
@@ -178,7 +178,7 @@ function Notifications() {
                           {sender?.firstName} {sender?.lastName}
                         </Link>{" "}
                                 </h5>
-                                <p className="m-0">
+                                <p className="m-0 text-secondary">
                                   {notificationType(type, post || connection)}
                                 </p>
                               </div>

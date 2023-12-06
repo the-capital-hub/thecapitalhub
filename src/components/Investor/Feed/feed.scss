@@ -50,6 +50,7 @@
     input {
       border-radius: 20px;
       border: 1px solid #a6a6a6;
+      background-color: var(--bs-light);
       height: 55px;
       width: 100%;
       cursor: pointer;
@@ -57,6 +58,9 @@
   }
 
   .posts__container {
+    .loader_spinner{
+      background-color: var(--white-to-grey);
+    }
     .infinite-scroll-component__outerdiv {
       box-sizing: border-box;
       margin: 0;
@@ -68,10 +72,10 @@
   }
 
   .box {
-    background-color: #fff;
+    // background-color: #fff;
     padding: 10px;
     border-radius: var(--border-radius);
-    background: #fff;
+    // background: #fff;
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
   }
 

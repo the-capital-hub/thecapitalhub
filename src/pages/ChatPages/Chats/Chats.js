@@ -46,6 +46,7 @@ import {
 } from "../../../Store/features/user/userSlice";
 import { fetchAllChats } from "../../../Store/features/chat/chatThunks";
 import TCHLogoLoader from "../../../components/Shared/TCHLoaders/TCHLogoLoader/TCHLogoLoader";
+import { selectTheme } from "../../../Store/features/design/designSlice";
 
 const Chats = () => {
   // search params
@@ -58,7 +59,8 @@ const Chats = () => {
   // Fetch global state
   const loggedInUserId = useSelector(selectLoggedInUserId);
   const isInvestor = useSelector(selectIsInvestor);
-  const userId = useSelector((state) => state.chat.userId);
+  const theme = useSelector(selectTheme);
+  // const userId = useSelector((state) => state.chat.userId);
   const chatId = useSelector((state) => state.chat.chatId);
   const isCommunitySelected = useSelector(
     (state) => state.chat.isCommunitySelected
@@ -74,7 +76,6 @@ const Chats = () => {
         await dispatch(fetchAllChats()).unwrap();
       } catch (error) {
         console.error("Error fetching initial all chats:", error);
-      } finally {
       }
     };
 
@@ -221,7 +222,7 @@ const Chats = () => {
   const renderMobileHeader = useMemo(() => {
     return (
       <div
-        className="mobile-nav border-bottom shadow-sm pb-2 px-2"
+        className="mobile-nav shadow-sm pb-2 px-2"
         style={{ height: "70px" }}
       >
         <button
@@ -279,9 +280,11 @@ const Chats = () => {
         )}
       </>
     ) : (
-      <section className="right_section overflow-y-auto hide_scrollbar mt-3 w-100 ">
-        <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
-      </section>
+      <div className="right_section_wrapper overflow-y-auto">
+        <section className="right_section hide_scrollbar mt-3 w-100 ">
+          <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
+        </section>
+      </div>
     );
   }, [
     isSettingsOpen,
@@ -310,9 +313,10 @@ const Chats = () => {
         steps={startupOnboardingSteps.chatsPage}
         fromUp={true}
         isChatPage={true}
+        theme={theme}
       />
 
-      <div className="chat-page-wrapper">
+      <div className="chat-page-wrapper" data-bs-theme={theme}>
         <div className="container-xxl p-0 chat_main_container position-relative fadeIn-025">
           {/* Left section */}
           <div

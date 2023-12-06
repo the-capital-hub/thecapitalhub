@@ -45,7 +45,7 @@ const ChatSearch = () => {
             <img src={searchIcon} alt="Search user" width={20} height={20} />
             <input
               type="search"
-              className="w-100"
+              className="w-100 text-black"
               placeholder="Search"
               // value={searchInput}
               onChange={(e) => {
@@ -58,7 +58,7 @@ const ChatSearch = () => {
           </div>
           <div className="search-results-wrapper">
             {inputOnFocus && searchSuggestions && !mobileSearch && (
-              <div className="search_results rounded-4 border shadow-sm p-4 position-absolute bg-white">
+              <div className="search_results rounded-4 border shadow-sm p-4 position-absolute">
                 {!loading ? (
                   searchSuggestions && (
                     <>
@@ -72,7 +72,7 @@ const ChatSearch = () => {
                         .map(({ firstName, lastName, _id }) => (
                           <Link
                             key={_id}
-                            className="single_result"
+                            className="single_result text-body"
                             to={`/chats?userId=${_id}`}
                           >
                             {firstName} {lastName}

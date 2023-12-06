@@ -214,7 +214,7 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
       <div className="chatsidebar_main_container" id="sidebarChats">
         <div className="chatsidebar_content pt-2 ">
           {/* previous style for below span style={{ margin: "5px 20px" }} */}
-          <span className="m-3 mt-1">
+          <span className="m-3 mt-1 chat-category">
             <img src={pinIcon} alt="" /> PINNED
           </span>
           {/* Pinned Chats */}
@@ -292,7 +292,7 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
 
           {/* Normal Chats */}
           {/* previous style for below span style={{ margin: "10px 0 5px 20px" }} */}
-          <span className="m-3">
+          <span className="m-3 chat-category">
             <img src={messageIcon} alt="" /> ALL MESSAGE
           </span>
 
@@ -337,12 +337,18 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
                           {messageTime !== "Invalid Date" && (
                             <div className="time">{messageTime}</div>
                           )}
-                          <img
+                          {/* <img
                             src={pinIcon}
                             className="pt-1 px-1 "
                             onClick={() => handlePinClick(chat._id)}
                             alt="Pin"
-                          />
+                          /> */}
+                          <span
+                            className="pt-1 px-1"
+                            onClick={() => handlePinClick(chat._id)}
+                          >
+                            <IconPin color="transparent" stroke="#989898" />
+                          </span>
                           {unreadMessageCount > 0 && (
                             <div className="notification">
                               {unreadMessageCount}

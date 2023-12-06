@@ -22,7 +22,7 @@ export default function CompanyInfo({
           alt={name}
           style={{ width: "110px", height: "110px", objectFit: "cover" }}
           loading="lazy"
-          className="rounded border border-light"
+          className="rounded"
         />
       </div>
 

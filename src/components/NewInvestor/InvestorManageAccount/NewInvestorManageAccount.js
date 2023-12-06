@@ -78,7 +78,7 @@ const InvestorManageAccount = () => {
   const navigate = useNavigate();
   const handleLogoutLogic = () => {
     dispatch(logout());
-    dispatch(clearAllChatsData);
+    dispatch(clearAllChatsData());
     localStorage.removeItem("isLoggedIn");
     navigate("/login");
   };

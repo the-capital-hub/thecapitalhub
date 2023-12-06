@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PersonInfo from "./PersonHeader/PersonInfo";
 import PersonActions from "./PersonHeader/PersonActions";
 import PersonAbout from "./PersonAbout/PersonAbout";
@@ -83,8 +83,8 @@ export default function PersonProfile({ theme, short, personData }) {
   }
 
   return (
-    <div className={`person_profile_wrapper bg-white shadow-sm ${theme}`}>
-      <div className="person__section__one border-bottom d-flex flex-column gap-4 py-5 px-3 px-lg-5">
+    <div className={`person_profile_wrapper  shadow-sm ${theme}`}>
+      <div className="person__section__one border-bottom d-flex flex-column gap-4 py-5 px-3 px-lg-5 ">
         {/* Profile header */}
         <div className="person__info d-flex flex-column flex-xl-row gap-4 justify-content-between position-relative">
           <PersonInfo

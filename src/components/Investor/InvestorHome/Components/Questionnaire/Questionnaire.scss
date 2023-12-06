@@ -139,7 +139,8 @@
   }
 
   .user_input {
-    background-color: #efefef;
+    // background-color: #efefef;
+    background: var(--bs-light);
     outline: 0;
     width: 100%;
     resize: none;

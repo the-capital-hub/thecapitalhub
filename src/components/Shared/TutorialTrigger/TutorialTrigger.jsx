@@ -14,6 +14,7 @@ export default function TutorialTrigger({
   fromUp,
   isChatPage = false,
   className,
+  theme,
 }) {
   const showOnboarding = useSelector(selectShowOnboarding);
   const isMobileView = useSelector(selectIsMobileView);
@@ -49,13 +50,18 @@ export default function TutorialTrigger({
     <>
       {showTrigger && !run && !isMobileView && (
         <div
-          className={`tutorial_trigger w-100 rounded-4 bg-white py-4 shadow-sm ${className} ${
+          className={`tutorial_trigger w-100 rounded-4 py-4 shadow-sm ${className} ${
             isInvestor && !isChatPage ? "border" : ""
           } ${
             fromUp ? "slideDown position-absolute top-0 start-0 z-3" : "slideUp"
           }`}
+          style={{ backgroundColor: "var(--white-to-grey)" }}
+          data-bs-theme={theme}
         >
-          <div className="container mx-auto d-flex align-items-center gap-3 justify-content-around">
+          <div
+            className="container mx-auto d-flex align-items-center gap-3 justify-content-around"
+            style={{ color: "var(--d-l-grey)" }}
+          >
             <p className="m-0">
               Welcome User! Would you like us to show you around?
             </p>

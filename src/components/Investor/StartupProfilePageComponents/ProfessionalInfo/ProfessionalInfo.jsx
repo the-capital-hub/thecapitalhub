@@ -125,7 +125,7 @@ export default function ProfessionalInfo({ theme }) {
 
   return (
     <section
-      className={`professional_info_section d-flex flex-column gap-3 p-2 px-md-4 py-4 bg-white shadow-sm ${
+      className={`professional_info_section d-flex flex-column gap-3 p-2 px-md-4 py-4  shadow-sm ${
         theme === "investor" ? "rounded-4 border" : "rounded-4"
       }`}
     >

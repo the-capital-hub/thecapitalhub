@@ -133,9 +133,11 @@ export default function StartupExplore() {
         <TutorialTrigger steps={startupOnboardingSteps.explorePage} />
 
         {/* Header */}
-        <div className="filter_container bg-white rounded-4 shadow-sm d-flex flex-column gap-4 px-4 py-4">
+        <div className="filter_container  rounded-4 shadow-sm d-flex flex-column gap-4 px-4 py-4">
           {/* Heading */}
-          <h5 className="m-0">Find {activeTab} by</h5>
+          <h5 className="m-0 " style={{ color: "var(--d-l-grey)" }}>
+            Find {activeTab} by
+          </h5>
 
           {/* Tabs */}
           <div className="startup_explore_tabs d-flex align-items-center border-bottom">
@@ -372,7 +374,7 @@ export default function StartupExplore() {
         <div className="filtered-results">
           {loading ? (
             <SpinnerBS
-              className="container bg-white d-flex justify-content-center align-items-center p-5 rounded-4 shadow-sm"
+              className="container spinner_loader  d-flex justify-content-center align-items-center p-5 rounded-4 shadow-sm"
               colorClass="text-secondary"
               spinnerSizeClass="xl"
             />
