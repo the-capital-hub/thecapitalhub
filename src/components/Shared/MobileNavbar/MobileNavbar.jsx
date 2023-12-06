@@ -32,7 +32,7 @@ export default function MobileNavbar({ isInvestor }) {
   };
 
   return (
-    <div className="mobile-bottom-toolbar container p-2 shadow d-flex gap-1 justify-content-center border-top  px-3 d-md-none">
+    <div className="mobile-bottom-toolbar container p-2 shadow d-flex gap-1 justify-content-center border-top  px-3 d-md-none text-secondary">
       <div className="d-flex flex-column align-items-center mx-3">
         <NavLink to={isInvestor ? "/investor/home" : "/home"}>
           <HiOutlineHome size={"22px"} />
@@ -50,7 +50,7 @@ export default function MobileNavbar({ isInvestor }) {
         className="d-flex flex-column align-items-center mx-3"
         onClick={handleToggleCreatePostModal}
       >
-        <CiSquarePlus size={"25px"} />
+        <CiSquarePlus size={"25px"} style={{fill:"grey"}} />
         <span style={{ fontSize: "10px" }}>Post</span>
       </div>
 
