@@ -7,8 +7,11 @@ import {
   postInvestorData,
 } from "../../../../Service/user";
 import { getBase64 } from "../../../../utils/getBase64";
-import IconEdit from "../../SvgIcons/IconEdit";
-import IconDeleteFill from "../../SvgIcons/IconDeleteFill";
+// import IconEdit from "../../SvgIcons/IconEdit";
+// import IconDeleteFill from "../../SvgIcons/IconDeleteFill";
+import { MdDelete } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
+
 import { useDispatch, useSelector } from "react-redux";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 import { setUserCompany } from "../../../../Store/features/user/userSlice";
@@ -230,7 +233,7 @@ export default function AddTeamMemberModal({
             {companyData?.team?.map((member, index) => {
               return (
                 <div
-                  className="d-flex align-items-center justify-content-around p-2 bg-light rounded-4"
+                  className="team_member_reomve  d-flex align-items-center justify-content-around p-2  rounded-4"
                   key={`${member.name}${index}`}
                 >
                   <img
@@ -251,13 +254,17 @@ export default function AddTeamMemberModal({
                       className={`modal_edit_btn ${theme}`}
                       onClick={(e) => handleSelectClick(e, member, index)}
                     >
-                      <IconEdit />
+                      {/* <IconEdit /> */}
+                      <FaRegEdit size={10} style={{fill:"black"}}/>
+
                     </button>
                     <button
                       className={`modal_delete_btn ${theme}`}
                       onClick={(e) => handleDeleteClick(e, member, index)}
                     >
-                      <IconDeleteFill />
+                      {/* <IconDeleteFill /> */}
+                      <MdDelete size={20}/>
+
                     </button>
                   </div>
                 </div>
@@ -269,7 +276,7 @@ export default function AddTeamMemberModal({
 
 
       {/* Add modal */}
-      <div className="add_team d-flex flex-column gap-3 bg-light rounded-4 shadow-sm py-3">
+      <div className="add_team d-flex flex-column gap-3  rounded-4 shadow-sm py-3 ">
         <h5 className="m-0 text-center">Add new Member</h5>
 
         <form

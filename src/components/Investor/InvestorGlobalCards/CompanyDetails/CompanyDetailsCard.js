@@ -201,7 +201,7 @@ const CompanyDetailsCard = ({
               <span className="align-self-start ms-auto d-none d-md-block">
                 <div className="">
                   <button
-                    className="edit-btn"
+                    className="edit-btn btn"
                     onClick={() =>
                       setIsDescriptionEditable(!isDescriptionEditable)
                     }

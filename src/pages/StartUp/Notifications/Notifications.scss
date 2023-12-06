@@ -1,4 +1,7 @@
 .notificaitons_container {
+  .message_section{
+
+ background: var(--white-to-grey);
   min-height: 90vh;
   a {
     text-decoration: none;
@@ -45,5 +48,6 @@
       letter-spacing: 0.8px;
     color:black;
     }
+  }
   }
 }

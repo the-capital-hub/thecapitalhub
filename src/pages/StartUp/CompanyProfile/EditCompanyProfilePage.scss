@@ -23,6 +23,18 @@
     display: flex;
     flex-direction: column;
     gap: 2em;
+    .company_profile_form{
+      background-color: var(--white-to-grey);
+    }
+    .paragraph__component{
+      background-color: var(--white-to-grey);
+color: black;
+    }
+    .core__team{
+      background-color: var(--white-to-grey);
+      color: black;
+
+    }
   }
 
   .right__content {
@@ -38,7 +50,8 @@
     width: fit-content;
     padding: 10px;
     height: max-content;
-    background: #eaeef2;
+    // background: #eaeef2;
+    background-color: var(--bs-light);
     cursor: pointer;
     position: fixed;
     z-index: 10;

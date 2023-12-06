@@ -46,8 +46,8 @@ export default function ProfessionalInfoDisplay({
         {/* Edit button */}
         {canEdit && (
           <span className="edit_btn d-flex align-self-end align-md-self-start ">
-            <span className="ms-auto d-flex flex-row gap-2">
-              <button onClick={() => setIsEditing(!isEditing)}>
+            <span className=" ms-auto d-flex flex-row gap-2">
+              <button className=" btn" onClick={() => setIsEditing(!isEditing)}>
                 {isEditing ? "Cancel" : "Edit"}
                 <CiEdit />
               </button>

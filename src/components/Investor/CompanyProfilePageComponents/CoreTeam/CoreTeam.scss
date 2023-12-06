@@ -93,10 +93,17 @@
     .edit_remove_team {
       flex: 0 0 45%;
       scrollbar-gutter: stable;
+      color: var(--d-l-grey);
+      .team_member_reomve{
+        background: var(--bs-light);
+      }
     }
 
     .add_team {
       flex: 0 0 45%;
+      background-color: var(--white-to-grey);
+      color: var(--d-l-grey);
+
     }
   }
 
@@ -138,8 +145,9 @@
   }
 
   .modal__input {
-    color: black;
-    background-color: #fafafa;
+    // color: black;
+    // background-color: #fafafa;
+    background-color: var(--bs-light);
     border: 1px solid rgba(0, 0, 0, 0.2);
     outline: 0;
     transition: border 0.3s ease-in-out;

@@ -61,6 +61,8 @@ $color-startup-shadow: rgba(234, 238, 242, 1);
 // component classes
 .company__profile {
   // CSS for empty action buttons
+  background-color: var(--white-to-grey);
+  color: #000;
   .company__actions {
     .action__buttons {
       &:empty {
@@ -119,7 +121,7 @@ $color-startup-shadow: rgba(234, 238, 242, 1);
   .btn-capital-outline {
     width: fit-content;
 
-    background-color: white;
+    // background-color: white;
     border: 1px solid var(--color-btn);
     border-radius: 5px;
     outline: none;

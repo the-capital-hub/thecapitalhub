@@ -9,7 +9,8 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-
+background-color: var(--white-to-grey);
+color: black;
   .notification {
     border-bottom: #dcdcdc 1px solid;
     padding: 5px 10px;

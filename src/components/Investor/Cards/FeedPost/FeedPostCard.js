@@ -1,17 +1,25 @@
 import React, { useEffect } from "react";
 import locationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
 import HomeIcon from "../../../../Images/HomeIcon.svg";
-import ThreeODotIcon from "../../../../Images/ThreeDotIcon.svg";
+// import ThreeODotIcon from "../../../../Images/ThreeDotIcon.svg";
+import { PiDotsThreeBold } from "react-icons/pi";
+
 import "./feedPostCard.scss";
 import shareIcon from "../../../../Images/post/share.png";
 import fireIcon from "../../../../Images/post/like-fire.png";
 import bwFireIcon from "../../../../Images/post/unlike-fire.png";
 import commentIcon from "../../../../Images/post/comment.svg";
 import repostIcon from "../../../../Images/post/repostBlack.svg";
-import repostWithThoughtsIcon from "../../../../Images/post/repost-with-thoughts.svg";
-import repostInstantlyIcon from "../../../../Images/post/repost-grey.svg";
+// import repostWithThoughtsIcon from "../../../../Images/post/repost-with-thoughts.svg";
+import { FaRegEdit } from "react-icons/fa";
+
+// import repostInstantlyIcon from "../../../../Images/post/repost-grey.svg";
+import { BiRepost } from "react-icons/bi";
+
 import saveIcon from "../../../../Images/post/save.svg";
-import savedIcon from "../../../../Images/post/saved.png";
+// import savedIcon from "../../../../Images/post/saved.png";
+import { CiBookmark } from "react-icons/ci";
+
 import deleteIcon from "../../../../Images/post/delete.png";
 import CustomModal from "../../../PopUp/Modal/Modal";
 import { FaRegCommentDots, FaCommentDots } from "react-icons/fa6";
@@ -496,19 +504,25 @@ const FeedPostCard = ({
                   className="kebab_menu_container"
                   ref={kebabMenuContainerRef}
                 >
-                  <img
+                  {/* <img
                     src={ThreeODotIcon}
                     alt="dot"
                     className="me-md-3 p-md-2"
-                    onClick={() => {
-                      setKebabMenuVisible(!kebabMenuVisible);
-                    }}
-                    onBlurCapture={() => {
-                      setTimeout(() => {
-                        setKebabMenuVisible(false);
-                      }, 100);
-                    }}
+                   
+                  /> */}
+                  <PiDotsThreeBold 
+                  size={35}
+                  style={{fill:"black"}}
+                   onClick={() => {
+                    setKebabMenuVisible(!kebabMenuVisible);
+                  }}
+                  onBlurCapture={() => {
+                    setTimeout(() => {
+                      setKebabMenuVisible(false);
+                    }, 100);
+                  }}
                   />
+
                   {kebabMenuVisible && (
                     <ul className="kebab_menu border rounded shadow-sm p-3">
                       {userId === loggedInUser?._id && (
@@ -551,7 +565,7 @@ const FeedPostCard = ({
               {/* Text */}
               <Linkify>
                 {description && (
-                  <p style={{ fontSize: "15px" }} className="text-break">
+                  <p style={{ fontSize: "15px" }} className="text-break ">
                     {/* {description} */}
                     {expanded
                       ? description
@@ -646,7 +660,7 @@ const FeedPostCard = ({
           )}
           {!repostPreview && (
             <>
-              <hr className="mt-1 mb-2" />
+              <hr className="mt-1 mb-2 hr" style={{background:"var(--bs-light)",height:"3px"}} />
               <div className="row feedpostcard_footer mb-2">
                 {/* Like and Comment */}
                 <div className="col-8">
@@ -679,13 +693,13 @@ const FeedPostCard = ({
                       <FaRegCommentDots
                         size={20}
                         onClick={() => setShowComment((prev) => !prev)}
-                        style={{ cursor: "pointer" }}
+                        style={{ cursor: "pointer",fill:"black" }}
                       />
                     ) : (
                       <FaCommentDots
                         size={20}
                         onClick={() => setShowComment((prev) => !prev)}
-                        style={{ cursor: "pointer" }}
+                        style={{ cursor: "pointer",fill:"black" }}
                       />
                     )}
                   </div>
@@ -712,10 +726,11 @@ const FeedPostCard = ({
                           onClick={() => repostWithToughts(postId)}
                         >
                           {!repostLoading?.withThoughts ? (
-                            <img
-                              src={repostWithThoughtsIcon}
-                              alt="repost with thoughts"
+                            
+                            <FaRegEdit 
+                            size={20}
                             />
+
                           ) : (
                             <div
                               className="spinner-border text-secondary"
@@ -736,14 +751,16 @@ const FeedPostCard = ({
                           </div>
                         </button>
                         <button
-                          className="single_option btn text-start py-1 px-2 rounded border-bottom"
+                          className="single_option btn text-start py-1 ps-0 rounded border-bottom"
                           onClick={() => repostInstantly(postId)}
                         >
                           {!repostLoading?.instant ? (
-                            <img
-                              src={repostInstantlyIcon}
-                              alt="repost instantly"
-                            />
+                            // <img
+                            //   src={repostInstantlyIcon}
+                            //   alt="repost instantly"
+                            // />
+                            <BiRepost size={30} style={{transform: "rotate(90deg)"}}/>
+
                           ) : (
                             <div
                               className="spinner-border text-secondary"
@@ -765,21 +782,32 @@ const FeedPostCard = ({
                     )}
                   </span>
                   {savedPostId.includes(postId) ? (
-                    <img
-                      src={savedIcon}
-                      width={16}
-                      alt="save post"
-                      onClick={handleUnsavePost}
-                      style={{ cursor: "pointer" }}
+                    // <img
+                    //   src={savedIcon}
+                    //   width={16}
+                    //   alt="save post"
+                     
+                    // />
+                    <CiBookmark 
+                    size={20}
+                    onClick={handleUnsavePost}
+                    style={{ cursor: "pointer",fill:"black" }}
                     />
+
                   ) : (
-                    <img
-                      src={saveIcon}
-                      width={16}
-                      alt="save post"
-                      onClick={handleSavePopUp}
-                      style={{ cursor: "pointer" }}
+                    // <img
+                    //   src={saveIcon}
+                    //   width={16}
+                    //   alt="save post"
+                    //   onClick={handleSavePopUp}
+                    //   style={{ cursor: "pointer" }}
+                    // />
+                    <CiBookmark 
+                    size={20}
+                    onClick={handleSavePopUp}
+                    style={{ cursor: "pointer",fill:"black" }}
                     />
+
                   )}
                 </div>
 
@@ -843,7 +871,7 @@ const FeedPostCard = ({
                           </Link>
                         </div>
                         <div className="col-10 p-0 flex-grow-1">
-                          <div className="comment-details bg-light rounded-3 p-2 p-lg-3 d-flex flex-column">
+                          <div className="comment-details  rounded-3 p-2 p-lg-3 d-flex flex-column">
                             <header className="d-flex justify-content-between align-items-center p-0">
                               <Link
                                 to={`/user/${val.user._id}`}

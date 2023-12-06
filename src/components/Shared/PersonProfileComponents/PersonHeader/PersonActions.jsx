@@ -17,7 +17,7 @@ export default function PersonActions({
 
       <div className="d-flex flex-column-reverse flex-md-row align-items-start gap-3 mt-3 mb-3 mt-lg-0">
         <Link to={linkTo}>
-          <button className="btn-capital-outline actions-btn">
+          <button className="btn btn-capital-outline actions-btn">
             Connect with the {person}
           </button>
         </Link>

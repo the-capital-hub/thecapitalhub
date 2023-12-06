@@ -61,6 +61,7 @@ export default function UserBio({ canEdit = true, bioText = "" }) {
             <span className="ms-auto d-flex align-items-center gap-2">
               <button
                 type="button"
+                className="btn"
                 onClick={() => {
                   setBioContent(userBio);
                   setIsBioEditable(!isBioEditable);
