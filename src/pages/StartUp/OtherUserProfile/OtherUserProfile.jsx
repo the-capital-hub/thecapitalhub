@@ -241,7 +241,7 @@ function OtherUserProfile() {
                     ""
                   )}
                   {/* Otheruser's Featured Posts */}
-                  <div className="bg-white rounded-4 shadow-sm d-flex flex-column gap-3 p-4">
+                  <div className="featured_post rounded-4 shadow-sm d-flex flex-column gap-3 p-4">
                     {/* Heading */}
                     <div className="d-flex justify-content-between">
                       <h4>Featured Posts</h4>
