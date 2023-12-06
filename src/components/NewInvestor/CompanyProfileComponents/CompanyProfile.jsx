@@ -132,7 +132,7 @@ export default function CompanyProfile({
 
   return (
     <>
-      <div className="company__profile bg-white shadow-sm" startup={startup}>
+      <div className="company__profile  shadow-sm" startup={startup}>
         <div className="company__section__one border-bottom d-flex flex-column gap-4 p-3 p-md-5">
           {/* <h5 className="ms-auto m-0 p-0 " onClick={() => navigate(isInvestor === "true" ? "/investor/home" : "/home")
           }

@@ -171,7 +171,7 @@ function NotificationsPopup({ toggleVisibility }) {
   }
 
   return (
-    <div className="notifications-popup border shadow-sm rounded-4 bg-white">
+    <div className="notifications-popup border shadow-sm rounded-4 ">
       <div className="d-flex justify-content-between align-items-center py-1 border-bottom border-2">
         <span>Notifications</span>
         <button className="btn btn-xs btn-light" onClick={markAllRead}>

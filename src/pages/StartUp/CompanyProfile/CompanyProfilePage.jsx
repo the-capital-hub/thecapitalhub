@@ -143,16 +143,16 @@ export default function CompanyProfilePage() {
               <>
                 {companyData?.length !== 0 ? (
                   companyData?.founderId === loggedInUserId ? (
-                    <div className="bg-white rounded-4 p-4 shadow-sm">
+                    <div className="edit_company_text rounded-4 p-4 shadow-sm">
                       <Link
                         to="/company-profile/edit"
-                        className="text-decoration-none text-dark fs-5"
+                        className="text-decoration-none  fs-5"
                       >
                         Edit company details
                       </Link>
                     </div>
                   ) : (
-                    <div className="bg-white rounded-4 p-4 ">
+                    <div className="add_company_data rounded-4 p-4 ">
                       {/* <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5"> */}
                       <div class="text-center">
                         <button

@@ -13,7 +13,8 @@
 
         width: 220px;
 
-        background-color: white;
+        // background-color: white;
+        background-color: var(--white-to-grey);
         padding: 10px;
 
         display: flex;
@@ -64,6 +65,7 @@
           line-height: 160%;
           letter-spacing: 0.42px;
           padding: 20px;
+          background: var(--bs-light);
 
           @media (max-width: 768px) {
             height: auto;
@@ -166,7 +168,8 @@
             top: 30px;
             right: 20px;
             height: max-content;
-            background-color: white;
+            // background-color: white;
+            background-color: var(--white-to-grey);
             @media (max-width: 420px) {
               right: 5px;
             }
@@ -251,10 +254,11 @@
   }
 
   .box {
-    background-color: #fff;
+    // background-color: #fff;
     padding: 10px;
     border-radius: var(--border-radius);
-    background: #fff;
+    // background: #fff;
+    background-color: var(--white-to-grey);
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
   }
   .comment_container {
@@ -283,7 +287,8 @@
         width: 100%;
         border-radius: 170px;
         border: 1px solid #cacaca;
-        background: #fcfcfc;
+        // background: #fcfcfc;
+        background-color: var(--bs-light);
         height: 54px;
 
         input[type="text"] {
@@ -295,6 +300,8 @@
           margin-left: 3px;
           // margin-right: -90px;
           width: 100%;
+          background-color: var(--bs-light);
+
         }
 
         .icons {
@@ -329,6 +336,9 @@
   }
 
   .single-comment {
+    .comment-details{
+      background: var(--bs-light);
+    }
     .img_container {
       max-width: 80px;
       img {
@@ -448,6 +458,7 @@
     cursor: pointer; /* Optional: Add cursor pointer for icons */
     margin-right: 5px; /* Optional: Add spacing between icons */
   }
+ 
 }
 
 .modal-content {
