@@ -2,7 +2,7 @@ import CardBody from "./CardBody";
 import CardHead from "./CardHead";
 import "./PersonCard.scss";
 // import { AddUser } from "../../../../../Images/Investor/CompanyProfile";
-import { AddUserIcon } from "../../../SvgIcons";
+// import { AddUserIcon } from "../../../SvgIcons";
 
 export default function PersonCard({ person, isFeedBack }) {
   let personHead = [];
@@ -22,7 +22,7 @@ export default function PersonCard({ person, isFeedBack }) {
   }
 
   return (
-    <div className="personCard__container d-flex flex-column gap-2 p-2 rounded-4">
+    <div className="personCard__container d-flex flex-column gap-2 p-2 rounded-4 border">
       <CardHead {...personHead} />
       <CardBody>
         {isFeedBack ? (
@@ -30,7 +30,9 @@ export default function PersonCard({ person, isFeedBack }) {
         ) : (
           <>
             <div className="person_text">
-              <p className="text-muted fw-light">Designation</p>
+              <p className="fw-light" style={{ color: "var(--bs-gray-500)" }}>
+                Designation
+              </p>
               <h6 className="fw-medium designation">{person.designation}</h6>
             </div>
             {/* <button className="btn-capital-small connectNow d-flex align-items-center gap-1 ms-auto">

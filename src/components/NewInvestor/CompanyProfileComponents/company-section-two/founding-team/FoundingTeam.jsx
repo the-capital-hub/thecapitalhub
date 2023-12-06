@@ -42,7 +42,7 @@ export default function FoundingTeam({ isOnelink = false, team }) {
   const [people, setPeople] = useState(team || defaultPeople);
 
   useEffect(() => {
-    setPeople(team || [])
+    setPeople(team || []);
   }, [team]);
   // useEffect(() => {
   //   if (isOnelink) {
@@ -84,7 +84,10 @@ export default function FoundingTeam({ isOnelink = false, team }) {
   // }, [isOnelink, team]);
 
   return (
-    <div className="founding__team d-flex flex-column gap-4">
+    <div
+      className="founding__team d-flex flex-column gap-4"
+      style={{ color: "var(--d-l-grey)" }}
+    >
       <h6 className="div__heading">Founding Team</h6>
       <div className="cards__container d-flex gap-5 pb-2">
         {people.map((person) => {

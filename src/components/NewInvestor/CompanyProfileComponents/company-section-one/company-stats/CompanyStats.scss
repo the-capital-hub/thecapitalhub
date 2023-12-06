@@ -1,3 +1,6 @@
-.stat__badge {
-  flex-basis: 15rem;
+.company__stats {
+  color: var(--d-l-grey);
+  .stat__badge {
+    flex-basis: 15rem;
+  }
 }

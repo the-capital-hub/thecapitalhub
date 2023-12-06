@@ -7,9 +7,9 @@ export default function CardHead(props) {
     <div className="card__head d-flex gap-2">
       <img
         src={image}
-        alt="Profile picture"
+        alt={name}
         style={{ width: "50px", height: "50px" }}
-        className="rounded-circle"
+        className="rounded-circle object-fit-cover"
       />
       <div className="">
         <h4 className="card__head__name">{name}</h4>

@@ -24,7 +24,7 @@ import {
   setUserCompany,
 } from "../../../Store/features/user/userSlice";
 import toast, { Toaster } from "react-hot-toast";
-import achievement from "../../../Images/Investor/Achievements/img_1.png";
+// import achievement from "../../../Images/Investor/Achievements/img_1.png";
 import { achievementTypes } from "../../../components/Toasts/AchievementToast/types";
 import AchievementToast from "../../../components/Toasts/AchievementToast/AchievementToast";
 
@@ -91,11 +91,10 @@ export default function CompanyProfilePage() {
           recipient: loggedInUserId,
           type: "achievementCompleted",
           achievementId: "6564687349186bca517cd0cd",
-        }
+        };
         addNotificationAPI(notificationBody)
           .then((data) => console.log("Added"))
           .catch((error) => console.error(error.message));
-
       }
       if (response.status === 200) {
         setShowSuccess(true);
@@ -182,10 +181,11 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${selectedCompanyId === company._id
-                                  ? "active"
-                                  : ""
-                                  }`}
+                                className={`suggestion-item ${
+                                  selectedCompanyId === company._id
+                                    ? "active"
+                                    : ""
+                                }`}
                                 key={index}
                                 onClick={() =>
                                   handleCompanySelection(
@@ -241,10 +241,11 @@ export default function CompanyProfilePage() {
                           <div className="suggestion">
                             {companies.map((company, index) => (
                               <div
-                                className={`suggestion-item ${selectedCompanyId === company._id
-                                  ? "active"
-                                  : ""
-                                  }`}
+                                className={`suggestion-item ${
+                                  selectedCompanyId === company._id
+                                    ? "active"
+                                    : ""
+                                }`}
                                 key={index}
                                 onClick={() =>
                                   handleCompanySelection(
