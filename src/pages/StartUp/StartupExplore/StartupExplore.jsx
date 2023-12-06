@@ -135,7 +135,9 @@ export default function StartupExplore() {
         {/* Header */}
         <div className="filter_container  rounded-4 shadow-sm d-flex flex-column gap-4 px-4 py-4">
           {/* Heading */}
-          <h5 className="m-0 ">Find {activeTab} by</h5>
+          <h5 className="m-0 " style={{ color: "var(--d-l-grey)" }}>
+            Find {activeTab} by
+          </h5>
 
           {/* Tabs */}
           <div className="startup_explore_tabs d-flex align-items-center border-bottom">

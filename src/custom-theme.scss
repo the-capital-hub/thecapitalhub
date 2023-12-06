@@ -320,10 +320,10 @@ $color-mode-type: data;
     --bs-card-bg: #2f2f2f;
   }
 
-  .btn {
-    --bs-btn-bg: #979797;
-    --bs-btn-hover-border-color: rgb(141, 141, 141);
-  }
+  // .btn {
+  //   --bs-btn-bg: #979797;
+  //   --bs-btn-hover-border-color: rgb(141, 141, 141);
+  // }
 
   .btn-startup {
     --bs-btn-bg: #{$startup};
