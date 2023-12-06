@@ -144,6 +144,10 @@
   --white-to-grey: white;
   --d-l-grey: var(--bs-gray-900);
 
+  // Chat page colors
+  --chat-page-bg: var(--bs-gray-400);
+  --chat-sidebar-chat-border: var(--bs-gray-400);
+
   .card {
     --bs-card-bg: #ffffff;
   }
@@ -305,7 +309,11 @@ $color-mode-type: data;
   // Custom colors
   --white-to-grey: #2f2f2f;
   --d-l-grey: var(--bs-gray-100);
-  --tag-box:#979797;
+  --tag-box: #979797;
+
+  // Chat page colors
+  --chat-page-bg: var(--bs-gray-dark);
+  --chat-sidebar-chat-border: var(--bs-gray-700);
 
   .card {
     --bs-card-bg: #2f2f2f;

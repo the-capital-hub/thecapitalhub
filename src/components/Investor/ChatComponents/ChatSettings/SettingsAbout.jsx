@@ -14,10 +14,10 @@ export default function SettingsAbout() {
   return (
     <div className="settings_about d-flex flex-column gap-1 py-3 border-bottom">
       <div className="d-flex gap-1 align-items-center">
-        <IconInfoCircle />
+        <IconInfoCircle color={"var(--d-l-grey)"} />
         <p
           style={{
-            color: "rgba(128, 128, 128, 1)",
+            color: "var(--d-l-grey)",
             fontSize: "12px",
             fontWeight: "500",
           }}
@@ -29,7 +29,7 @@ export default function SettingsAbout() {
         {isCommunitySelected &&
           communityProfile?.community?.adminId === loggedInUser._id && (
             <button
-              className="btn text-capitalize border-0 p-0 ms-auto"
+              className="btn bg-transparent text-capitalize border-0 p-0 ms-auto"
               type="button"
               data-bs-toggle="offcanvas"
               data-bs-target="#chatSettingsOffcanvas"
@@ -40,7 +40,14 @@ export default function SettingsAbout() {
           )}
       </div>
 
-      <p className="m-0" style={{ fontWeight: "400", fontSize: "16px" }}>
+      <p
+        className="m-0"
+        style={{
+          fontWeight: "400",
+          fontSize: "16px",
+          color: "var(--d-l-grey)",
+        }}
+      >
         {communityProfile?.community?.about}
 
         {isCommunitySelected ? "" : chatProfile?.user?.bio || "No About"}

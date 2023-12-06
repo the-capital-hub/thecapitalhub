@@ -49,7 +49,7 @@ export default function CommunitiesContainer({
 
   return (
     <details
-      className="communities__wrapper d-flex flex-column bg-white rounded-4 shadow-sm overflow-hidden"
+      className="communities__wrapper d-flex flex-column rounded-4 shadow-sm overflow-hidden"
       open={isCommunityOpen}
       id="sidebarCommunities"
     >
@@ -67,7 +67,7 @@ export default function CommunitiesContainer({
           />
         </div>
       </summary>
-      <div className="communities__chats d-flex flex-column border-top">
+      <div className="communities__chats d-flex flex-column">
         {/* Add new */}
         <ModalBsLauncher
           id="AddNewCommunity"

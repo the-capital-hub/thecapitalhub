@@ -322,7 +322,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
         ) : (
           formattedMessages.map((group) => (
             <div key={group.date}>
-              <h6 className="date_header px-3 py-1 bg-light rounded shadow-sm">
+              <h6 className="date_header px-3 py-1 my-2 bg-light rounded shadow-sm">
                 {group.date}
               </h6>
               <div className="chat_messages">

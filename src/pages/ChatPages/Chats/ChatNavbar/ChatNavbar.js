@@ -12,6 +12,7 @@ import {
 } from "../../../../Service/user";
 import { useSelector } from "react-redux";
 import SpinnerBS from "../../../../components/Shared/Spinner/SpinnerBS";
+import { HiOutlineUserGroup } from "react-icons/hi2";
 
 const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
   // Fetch GlobalState
@@ -95,11 +96,22 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
               onClick={handleOpenSettingsClick}
               style={{ cursor: "pointer" }}
             >
-              <img
-                src={user?.profilePicture || community?.profileImage}
-                className="rounded_img"
-                alt={`${user?.firstName} ${user?.lastName}`}
-              />
+              {user?.profilePicture || community?.profileImage ? (
+                <img
+                  src={user?.profilePicture || community?.profileImage}
+                  className="rounded_img"
+                  alt={`${user?.firstName} ${user?.lastName}`}
+                />
+              ) : (
+                <HiOutlineUserGroup
+                  style={{
+                    height: "60px",
+                    width: "60px",
+                    color: " rgba(159, 159, 159, 1)",
+                  }}
+                  className=""
+                />
+              )}
               <div className="title_and_message">
                 <h5 className="name_title text-capitalize m-0 lh-1">
                   {user

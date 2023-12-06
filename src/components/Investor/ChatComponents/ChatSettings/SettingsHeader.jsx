@@ -1,8 +1,8 @@
 import IconClose from "../../SvgIcons/IconClose";
 import Default from "../../../../Images/Chat/default-user-avatar.webp";
-import IconVideo from "../../SvgIcons/IconVideo";
-import IconCall from "../../SvgIcons/IconCall";
-import IconEdit from "../../SvgIcons/IconEdit";
+// import IconVideo from "../../SvgIcons/IconVideo";
+// import IconCall from "../../SvgIcons/IconCall";
+// import IconEdit from "../../SvgIcons/IconEdit";
 import { useDispatch, useSelector } from "react-redux";
 import IconDelete from "../../SvgIcons/IconDelete";
 import Modal from "../../../PopUp/Modal/Modal";
@@ -111,7 +111,10 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
       if (profileImage) {
         profileImage = await getBase64(profileImage);
       }
-      const { data: response } = await updateCommunity(communityProfile?.community?._id, { profileImage });
+      const { data: response } = await updateCommunity(
+        communityProfile?.community?._id,
+        { profileImage }
+      );
       console.log(response);
       const updatedData = {
         profileImage: response.profileImage,
@@ -137,7 +140,7 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
     } else {
       navigate(`/investor/user/${chatProfile.user._id}`);
     }
-  }
+  };
 
   return (
     <div className="settings_header d-flex flex-column align-items-center gap-1 border-bottom pb-4">
@@ -163,7 +166,12 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
                 : chatProfile?.user?.profilePicture) || Default
             }
             alt={"user name"}
-            style={{ width: "70px", height: "70px", borderRadius: "50%", cursor: "pointer" }}
+            style={{
+              width: "70px",
+              height: "70px",
+              borderRadius: "50%",
+              cursor: "pointer",
+            }}
             onClick={handleGoToUserProfile}
           />
         </label>
@@ -180,7 +188,15 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
 
       {/* Name and designation */}
       <div className="settings_user_text d-flex flex-column align-items-center">
-        <h5 style={{ fontSize: "20px", fontWeight: "500", cursor: "pointer" }} onClick={handleGoToUserProfile}>
+        <h5
+          style={{
+            fontSize: "20px",
+            fontWeight: "500",
+            cursor: "pointer",
+            color: "var(--d-l-grey)",
+          }}
+          onClick={handleGoToUserProfile}
+        >
           {isCommunitySelected
             ? communityProfile?.community?.communityName
             : `${chatProfile?.user?.firstName} ${chatProfile?.user?.lastName}`}
@@ -188,7 +204,7 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
 
         <p
           style={{
-            color: "rgba(113, 113, 113, 1)",
+            color: "var(--d-l-grey)",
             fontSize: "18px",
             fontWeight: "400",
           }}

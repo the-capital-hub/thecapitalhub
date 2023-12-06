@@ -222,7 +222,7 @@ const Chats = () => {
   const renderMobileHeader = useMemo(() => {
     return (
       <div
-        className="mobile-nav border-bottom shadow-sm pb-2 px-2"
+        className="mobile-nav shadow-sm pb-2 px-2"
         style={{ height: "70px" }}
       >
         <button
@@ -280,9 +280,11 @@ const Chats = () => {
         )}
       </>
     ) : (
-      <section className="right_section overflow-y-auto hide_scrollbar mt-3 w-100 ">
-        <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
-      </section>
+      <div className="right_section_wrapper overflow-y-auto">
+        <section className="right_section hide_scrollbar mt-3 w-100 ">
+          <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
+        </section>
+      </div>
     );
   }, [
     isSettingsOpen,

@@ -15,7 +15,7 @@ function ChatDropDownMenu({ onClicks, id, idBack }) {
 
   return (
     <div className="chatDropDownMenu">
-      <button className="btn" onClick={handleClick}>
+      <button className="btn bg-transparent border-0" onClick={handleClick}>
         <img src={DownArrow} alt="dot" className="down-arrow" />
       </button>
       {isHovered && (

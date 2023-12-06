@@ -4,6 +4,7 @@ import SendIcon from "../../../../../../Images/Send.svg";
 import { useSelector } from "react-redux";
 import { selectIsMobileView } from "../../../../../../Store/features/design/designSlice";
 import { useCallback } from "react";
+import IconSend from "../../../../SvgIcons/IconSend";
 
 export default function AttachmentPreview({
   children,
@@ -63,15 +64,16 @@ export default function AttachmentPreview({
               onKeyDown={handleKeyDown}
               value={sendText}
             />
-            <button className="btn border-start border-2 p-0 send-btn">
-              <img
+            <button className="btn border-start border-2 send-btn p-0 send-btn">
+              {/* <img
                 className="send-img "
                 src={SendIcon}
                 alt="Send"
                 width={40}
                 height={40}
                 onClick={() => handleSend()}
-              />
+              /> */}
+              <IconSend width="25 px" height="25px" />
             </button>
           </div>
         </Offcanvas.Body>

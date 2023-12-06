@@ -3,8 +3,7 @@ import imageIcon from "../../../../../../Images/Chat/image.svg";
 import documentIcon from "../../../../../../Images/Chat/document.svg";
 import videoIcon from "../../../../../../Images/Chat/attachVideo.svg";
 import onelinkIcon from "../../../../../../Images/Chat/Onelink.svg";
-import attachmentGreyIcon from "../../../../../../Images/Chat/attachtment-grey.svg";
-import attachmentOrangeIcon from "../../../../../../Images/Chat/attachment-orange.svg";
+import IconAttach from "../../../../SvgIcons/IconAttach";
 
 export default function AttachmentSelector({
   showAttachDocs,
@@ -35,24 +34,13 @@ export default function AttachmentSelector({
   return (
     <div class="attactment-container" ref={attachDocContainerRef}>
       <button
-        className="btn"
+        className="btn border-0 bg-transparent"
         onClick={() => setShowAttachDocs(!showAttachDocs)}
       >
-        {!showAttachDocs ? (
-          <img
-            src={attachmentGreyIcon}
-            width={20}
-            // onClick={() => setShowAttachDocs(!showAttachDocs)}
-            alt="attach"
-          />
-        ) : (
-          <img
-            src={attachmentOrangeIcon}
-            width={20}
-            // onClick={() => setShowAttachDocs(!showAttachDocs)}
-            alt="attach"
-          />
-        )}
+        <IconAttach
+          size={"20px"}
+          color={`${showAttachDocs ? "var(--currentTheme)" : "#989898"}`}
+        />
       </button>
       {showAttachDocs && (
         <div className="attachment-options shadow-sm">

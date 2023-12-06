@@ -1,7 +1,7 @@
 .chatsidebar_main_container {
   border-radius: var(--border-radius);
-  border: 1px solid #e7e7e7;
-  background: #fff;
+  // border: 1px solid #e7e7e7;
+  background: var(--white-to-grey);
   box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.06);
   // height: auto;
   width: 100%;
@@ -22,19 +22,26 @@
     // overflow-y: auto;
     // max-height: calc(100dvh - 400px);
 
+    .chat-category {
+      color: var(--d-l-grey);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
     #pinnedChats {
       .person_wise_chat:first-of-type {
-        border-top: 1px solid #b4b4b4aa;
+        border-top: 1px solid var(--chat-sidebar-chat-border);
       }
 
       .person_wise_chat:last-of-type {
-        border-bottom: 1px solid #b4b4b4aa;
+        border-bottom: 1px solid var(--chat-sidebar-chat-border);
       }
     }
 
     #normalChats {
       .person_wise_chat:first-of-type {
-        border-top: 1px solid #b4b4b4aa;
+        border-top: 1px solid var(--chat-sidebar-chat-border);
       }
     }
 
@@ -53,7 +60,7 @@
 
       // Border for consecutive person wise chats
       & + .person_wise_chat {
-        border-top: 1px solid #b4b4b4aa;
+        border-top: 1px solid var(--chat-sidebar-chat-border);
       }
 
       // Border for last person wise chat
@@ -90,7 +97,7 @@
             margin-left: 10px;
             .name_title {
               margin: 0;
-              color: #2f2f2f;
+              color: var(--d-l-grey);
               font-family: Poppins;
               font-size: 16px;
               font-style: normal;
@@ -112,7 +119,7 @@
           flex-direction: column;
           align-items: flex-end;
           .time {
-            color: #2f2f2f;
+            color: var(--d-l-grey);
             font-family: Poppins;
             font-size: 11px;
             font-style: normal;

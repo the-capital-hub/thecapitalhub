@@ -92,5 +92,12 @@
         }
       }
     }
+
+    .send-btn {
+      color: #989898;
+      &:hover {
+        color: var(--currentTheme);
+      }
+    }
   }
 }
