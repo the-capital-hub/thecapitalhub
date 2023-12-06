@@ -22,6 +22,8 @@ import { fetchCompanyData } from "../../../Store/features/user/userThunks";
 import toast from "react-hot-toast";
 import { MdDarkMode } from "react-icons/md";
 import { GoSun } from "react-icons/go";
+import { clearAllChatsData } from "../../../Store/features/chat/chatSlice";
+import { fetchAllChats } from "../../../Store/features/chat/chatThunks";
 
 const InvestorManageAccount = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -81,6 +83,7 @@ const InvestorManageAccount = () => {
   const navigate = useNavigate();
   const handleLogoutLogic = () => {
     dispatch(logout());
+    dispatch(clearAllChatsData());
     localStorage.removeItem("isLoggedIn");
     navigate("/login");
   };
@@ -97,6 +100,9 @@ const InvestorManageAccount = () => {
           let isInvestor =
             selectedAccountFull.user.isInvestor === "true" ? true : false;
           dispatch(fetchCompanyData(selectedAccountFull.user._id, isInvestor));
+          // fetch chats
+          dispatch(clearAllChatsData());
+          dispatch(fetchAllChats());
           localStorage.setItem("accessToken", selectedAccountFull.token);
           setIsSubmitting(false);
           toast.success("Account switched successfully", {
@@ -268,7 +274,7 @@ const InvestorManageAccount = () => {
                     className="btn btn-dark text-capitalize mx-auto my-2"
                     onClick={() => dispatch(toggleTheme())}
                   >
-                    {theme === "light" ? <GoSun /> : <MdDarkMode />}{" "}{theme}{" "}
+                    {theme === "light" ? <GoSun /> : <MdDarkMode />} {theme}{" "}
                     mode
                   </button>
                 </div>

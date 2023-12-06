@@ -27,6 +27,7 @@ import CommunitiesIcon from "../ChatComponents/CommunitiesIcon";
 import ModalBsLauncher from "../../PopUp/ModalBS/ModalBsLauncher/ModalBsLauncher";
 import { IoCompassOutline } from "react-icons/io5";
 import { HiOutlineDocumentText, HiOutlineUserPlus } from "react-icons/hi2";
+import { clearAllChatsData } from "../../../Store/features/chat/chatSlice";
 
 // Startup Sidebar
 const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
@@ -53,6 +54,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
 
   const handleLogoutLogic = () => {
     dispatch(logout());
+    dispatch(clearAllChatsData);
     localStorage.removeItem("isLoggedIn");
     navigate("/login");
   };

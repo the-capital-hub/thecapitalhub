@@ -22,11 +22,13 @@ import {
   selectUserProfilePicture,
 } from "../../../../Store/features/user/userSlice";
 import AttachmentSelector from "./ChatAttachments/AttachmentSelector/AttachmentSelector";
+// import { updateLastMessage } from "../../../../Store/features/chat/chatSlice";
 
 export default function ChatInputContainer({
   setSendMessage,
   isSent,
-  setIsSent,
+  // setIsSent,
+  setMessages,
 }) {
   const loggedInUserId = useSelector(selectLoggedInUserId);
   const userFirstName = useSelector(selectUserFirstName);
@@ -39,6 +41,7 @@ export default function ChatInputContainer({
   const isCommunitySelected = useSelector(
     (state) => state.chat.isCommunitySelected
   );
+  // const dispatch = useDispatch();
 
   // State for text input
   const [sendText, setSendText] = useState("");
@@ -105,7 +108,7 @@ export default function ChatInputContainer({
 
     addMessage(message)
       .then(({ data }) => {
-        setIsSent(!isSent);
+        // setIsSent(!isSent);
         console.log(data);
       })
       .catch((error) => {
@@ -131,7 +134,19 @@ export default function ChatInputContainer({
     }
     const createdAt = new Date().toISOString();
     setSendMessage({ ...message, recieverId, createdAt });
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { ...message, recieverId, createdAt },
+    ]);
     clearInputs();
+
+    // update last message
+    // dispatch(
+    //   updateLastMessage({
+    //     chatId: message.chatId,
+    //     text: message.text,
+    //   })
+    // );
   };
 
   const handleFileChange = (event) => {

@@ -22,6 +22,9 @@ import {
   setChatId,
   setUserId,
   setIsCommuntySelected,
+  // updateLastMessage,
+  selectAllChatsStatus,
+  // updateCreateChat,
 } from "../../../Store/features/chat/chatSlice";
 import backIcon from "../../../Images/Chat/BackIcon.svg";
 import navBarLogo from "../../../Images/investorIcon/Logo.svg";
@@ -41,6 +44,8 @@ import {
   selectIsInvestor,
   selectLoggedInUserId,
 } from "../../../Store/features/user/userSlice";
+import { fetchAllChats } from "../../../Store/features/chat/chatThunks";
+import TCHLogoLoader from "../../../components/Shared/TCHLoaders/TCHLogoLoader/TCHLogoLoader";
 
 const Chats = () => {
   // search params
@@ -59,6 +64,24 @@ const Chats = () => {
     (state) => state.chat.isCommunitySelected
   );
   const dispatch = useDispatch();
+
+  // New Fetch call
+  const allChatsStatus = useSelector(selectAllChatsStatus);
+  useEffect(() => {
+    const fetchallChatsData = async () => {
+      try {
+        console.log("fetching ");
+        await dispatch(fetchAllChats()).unwrap();
+      } catch (error) {
+        console.error("Error fetching initial all chats:", error);
+      } finally {
+      }
+    };
+
+    if (allChatsStatus === null) {
+      fetchallChatsData();
+    }
+  }, [allChatsStatus, dispatch]);
 
   // const [selectedChat, setSelectedChat] = useState(null);
   // const [selectedUser, setSelectedUser] = useState(null);
@@ -80,7 +103,7 @@ const Chats = () => {
 
   // When directed to chats scroll page to top
   useEffect(() => {
-    window.title = "Chats | The Capital Hub";
+    document.title = "Chats | The Capital Hub";
     window.scrollTo({ top: 0, behavior: "smooth" });
     function handleWindowResize() {
       const isMobile = window.innerWidth <= 820;
@@ -105,6 +128,7 @@ const Chats = () => {
     socket.current?.emit("disconnected");
   };
 
+  // Initialize Socket
   useEffect(() => {
     socket.current = io(environment.baseUrl);
     socket.current.emit("new-user-add", loggedInUserId);
@@ -122,16 +146,32 @@ const Chats = () => {
     socket.current?.on("recieve-message", (data) => {
       console.log(data);
       setRecieveMessage(data);
+      // update last message
+      // dispatch(
+      //   updateLastMessage({
+      //     chatId: data.chatId,
+      //     text: data.text,
+      //     createdAt: data.createdAt,
+      //   })
+      // );
     });
-  }, [socket]);
+  }, [socket, dispatch]);
 
   useEffect(() => {
     console.log("Send");
     console.log(sendMessage);
     if (sendMessage !== null) {
       socket.current?.emit("send-message", sendMessage);
+      // update last message
+      // dispatch(
+      //   updateLastMessage({
+      //     chatId: sendMessage.chatId,
+      //     text: sendMessage.text,
+      //     createdAt: sendMessage.createdAt,
+      //   })
+      // );
     }
-  }, [sendMessage]);
+  }, [sendMessage, dispatch]);
 
   // create chat. Pass userId and loggedInUserId
   const handleCreateChat = useCallback(async () => {
@@ -142,6 +182,8 @@ const Chats = () => {
       .then((res) => {
         console.log("from create chat:", res.data);
         dispatch(setChatId(res.data._id));
+        // Add to persoanl chats
+        // dispatch(updateCreateChat(res.data));
         setLoading((prev) => {
           return { ...prev, userChat: false };
         });
@@ -253,7 +295,15 @@ const Chats = () => {
     isRead,
   ]);
 
-  return (
+  return allChatsStatus === "loading" ? (
+    <div
+      className="d-flex flex-column align-items-center justify-content-center"
+      style={{ minHeight: "80dvh" }}
+    >
+      <TCHLogoLoader />
+      <h4 className="">Fetching your Chats</h4>
+    </div>
+  ) : (
     <>
       {/* Onboarding popup */}
       <TutorialTrigger
@@ -268,7 +318,7 @@ const Chats = () => {
           <div
             className={`left_section_wrapper mx-3 ${isMobileView && "d-none"}`}
           >
-            <section className="left_section pe-1 ">
+            <section className="left_section">
               <span
                 className="back_img rounded-circle shadow-sm"
                 title="Go Back"
@@ -320,7 +370,7 @@ const Chats = () => {
                 //     />
                 //   </div>
                 // </section>
-                <section className="left_section pe-1">
+                <section className="left_section">
                   {/* <span
                     className="back_img rounded-circle shadow-sm"
                     title="Go Back"
@@ -391,6 +441,7 @@ const Chats = () => {
             ""
           )}
         </div>
+
         {/* Modal */}
         <div className="addNewCommunity_modal_wrapper">
           <ModalBSContainer isStatic={false} id="AddNewCommunity">
