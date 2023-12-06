@@ -114,7 +114,7 @@ export default function CompanyActions({
               </>
             )}
             <Link to={linkTo}>
-              <button className="btn-capital-outline actions-btn">
+              <button className="btn btn-capital-outline actions-btn">
                 Connect with the Founder
               </button>
             </Link>

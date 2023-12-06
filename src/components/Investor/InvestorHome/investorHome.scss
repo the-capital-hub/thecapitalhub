@@ -49,10 +49,11 @@
     }
 
     .box {
-      background-color: #fff;
+      // background-color: #fff;
       padding: 10px;
       border-radius: var(--border-radius);
-      background: #fff;
+      // background: #fff;
+      background: var(--white-to-grey);
       box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
     }
 

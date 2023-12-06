@@ -46,12 +46,19 @@
 }
 
 .edit-container {
+  .edit_company_text{
+    background-color: var(--white-to-grey);
+    a{
+      color: black;
+    }
+  }
   .search-company-input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-bottom: 10px;
+    background-color: var(--bs-light);
   }
 
   .suggestion {
@@ -136,5 +143,8 @@
       background-color: #d3f36b;
       color: black;
     }
+  }
+  .add_company_data{
+    background: var(--white-to-grey);
   }
 }

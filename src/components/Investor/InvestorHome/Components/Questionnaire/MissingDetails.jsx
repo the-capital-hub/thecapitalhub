@@ -29,7 +29,7 @@ export default function MissingDetails({ isInvestor = false }) {
   }
 
   return (
-    <div className="bg-white rounded-4 shadow-sm lh-1 d-flex flex-column">
+    <div className=" rounded-4 shadow-sm lh-1 d-flex flex-column">
       {countData?.total ? (
         <button
           id="missingDetails"
@@ -41,7 +41,7 @@ export default function MissingDetails({ isInvestor = false }) {
           aria-controls="offcanvasTop"
           style={{
             color: isInvestor ? "#000" : "#fd5901",
-            backgroundColor: isInvestor ? "#d3f36b" : "#fff",
+            backgroundColor: isInvestor ? "#d3f36b" : "var(--white-to-grey)",
           }}
         >
           Add missing details {countData && `(${countData.total})`}
