@@ -60,7 +60,7 @@
     .edit_input {
       background-color: transparent;
       width: 15ch;
-      outline: 1px solid rgba(0, 0, 0, 0.1);
+      outline: 1px solid var(--bs-border-color);
       border: none;
       margin: 0;
       font-size: 15px;

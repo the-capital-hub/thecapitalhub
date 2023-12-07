@@ -26,6 +26,7 @@ export default function CompanyDescription({
       className={`paragraph__component py-5 px-3 px-md-5 d-flex flex-column gap-4  ${
         isInvestor === "true" ? "rounded-4 border" : "rounded-4"
       } `}
+      style={{ color: "var(--d-l-grey)" }}
     >
       <div className="d-flex flex-column-reverse flex-sm-row align-items-sm-center justify-content-between gap-3 gap-md-0">
         <h2>Company Description</h2>

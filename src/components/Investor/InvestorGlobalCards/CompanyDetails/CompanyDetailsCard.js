@@ -1,6 +1,6 @@
 import React from "react";
-import LocationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
-import EmailIcon from "../../../../Images/investorIcon/email.svg";
+// import LocationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
+// import EmailIcon from "../../../../Images/investorIcon/email.svg";
 import TweeterIcon from "../../../../Images/investorIcon/Tweeter.svg";
 import IntagramIcon from "../../../../Images/investorIcon/Instagram.svg";
 import LinkedinIcon from "../../../../Images/investorIcon/Linkedin.svg";
@@ -13,6 +13,8 @@ import {
   postStartUpData,
 } from "../../../../Service/user";
 import { useState, useEffect } from "react";
+import { HiOutlineMail } from "react-icons/hi";
+import IconLocation from "../../SvgIcons/IconLocation";
 
 const CompanyDetailsCard = ({
   userDetails,
@@ -120,19 +122,11 @@ const CompanyDetailsCard = ({
                     </span> */}
               <span className="small_typo location_icon d-flex flex-column flex-lg-row gap-2">
                 <span>
-                  <img
-                    src={LocationIcon}
-                    alt="location"
-                    style={{ width: "25px", height: "25px" }}
-                  />
+                  <IconLocation className="me-1" />
                   {onePager.location || userDetails?.investor?.location}
                 </span>
                 <span>
-                  <img
-                    src={EmailIcon}
-                    alt="email icon"
-                    style={{ width: "25px", height: "25px" }}
-                  />
+                  <HiOutlineMail size={28} color="#545454" className="me-1" />
                   {userDetails?.email}
                 </span>
               </span>

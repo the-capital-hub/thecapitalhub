@@ -1,4 +1,6 @@
 .company_details_container {
+  color: var(--d-l-grey);
+
   .company_details {
     /* height: 400px; */
     &.mt-4 {
@@ -106,12 +108,12 @@
         font-size: 22px;
         font-family: Poppins;
         margin: 0.5rem;
-       
       }
 
       .small_typo {
         font-size: 16px;
         font-family: Poppins;
+        color: var(--d-l-grey);
 
         &.m-2 {
           margin: 0.5rem;
@@ -153,7 +155,6 @@
   }
 
   p {
-    color: #595959;
     font-size: 16px;
     font-family: Poppins;
     line-height: 150%;
@@ -177,8 +178,8 @@
         }
 
         .typography {
-            color: var(--d-l-grey);
-                  font-size: 20px;
+          color: var(--d-l-grey);
+          font-size: 20px;
           font-family: Poppins;
           font-weight: 600;
           margin: 0;
@@ -191,7 +192,7 @@
         }
 
         .small_typo {
-          color: #717171;
+          color: var(--d-l-grey);
           font-size: 14px;
           font-family: Poppins;
         }
@@ -212,7 +213,7 @@
       }
 
       .small_typo {
-        color: #717171;
+        color: var(--d-l-grey);
         font-size: 14px;
         font-family: Poppins;
       }
@@ -232,7 +233,7 @@
       }
 
       .small_typo {
-        color: #717171;
+        color: var(--d-l-grey);
         font-size: 14px;
         font-family: Poppins;
       }

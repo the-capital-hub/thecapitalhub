@@ -164,7 +164,12 @@ const InvestorManageAccount = () => {
                     <div className="logo">
                       <img src={logoIcon} alt="img" />
                     </div>
-                    <span className="header_text">Change Password</span>
+                    <span
+                      className="header_text"
+                      style={{ color: "var(--d-l-grey)" }}
+                    >
+                      Change Password
+                    </span>
                   </div>
                   <hr />
                   {/* Body */}
@@ -238,9 +243,7 @@ const InvestorManageAccount = () => {
                       <h4 className="text-break">
                         {loggedInUser?.firstName} {loggedInUser?.lastName}
                       </h4>
-                      <span className="text-dark text-break">
-                        {loggedInUser?.email}
-                      </span>
+                      <span className="text-break">{loggedInUser?.email}</span>
                     </div>
                   </div>
                   {/* Footer */}
@@ -320,7 +323,7 @@ const InvestorManageAccount = () => {
                                 </div>
                                 <div className="name_email">
                                   <h5 className="m-0">{fullmname}</h5>
-                                  <span className="fs-sm fw-semibold text-dark">
+                                  <span className="fs-sm fw-semibold ">
                                     {window.innerWidth <= 600
                                       ? account.user.email.slice(0, 21) ===
                                         account.user.email

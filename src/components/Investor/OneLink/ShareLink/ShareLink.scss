@@ -1,4 +1,6 @@
 .ShareLink_container {
+  color: var(--d-l-grey);
+
   .box_container {
     // max-width: 750px;
     // height: 411px;
@@ -12,7 +14,7 @@
 
     .title_section {
       h6 {
-        color: #101010;
+        color: var(--d-l-grey);
         font-family: Poppins;
         font-size: 17px;
         font-style: normal;
@@ -39,7 +41,6 @@
         justify-content: center;
         // background: #eaeef2;
         background-color: var(--bs-light);
-
 
         .left_icons {
           display: flex;
@@ -148,7 +149,7 @@
 
       .title_section {
         h6 {
-          color: #101010;
+          color: var(--d-l-grey);
           font-family: Poppins;
           font-size: 17px;
           font-style: normal;
@@ -207,20 +208,18 @@
             display: flex;
             align-items: center;
             margin: 0 5px;
-          //   .right_icons_img1 * {
-           
-          //     cursor: pointer;
-          //     // fill:var(--d-l-dray) !important;
-          //     stroke:var(--d-l-dray) !important;
-                    //     color:var(--d-l-dray) !important;
+            //   .right_icons_img1 * {
 
+            //     cursor: pointer;
+            //     // fill:var(--d-l-dray) !important;
+            //     stroke:var(--d-l-dray) !important;
+            //     color:var(--d-l-dray) !important;
 
-              
-          //   }
-          //  svg{
-          //   stroke:var(--d-l-dray) !important;
+            //   }
+            //  svg{
+            //   stroke:var(--d-l-dray) !important;
 
-          //  }
+            //  }
 
             .right_icons_img2 {
               margin-right: 10px;

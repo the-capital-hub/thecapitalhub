@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { ListGroup } from "react-bootstrap";
 import { IoDocumentAttach } from "react-icons/io5";
 // import { displayPdf } from "../../../../../../utils/getBase64";
 // import "pdfjs-dist/build/pdf.worker.entry";
-import { Document, Page } from "react-pdf";
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+// import { Document, Page, pdfjs } from "react-pdf";
+// import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+// pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
 
 export default function DocumentAttachment({
   selectedDocument,
@@ -28,18 +29,18 @@ export default function DocumentAttachment({
   //   }
   // }, [selectedDocument]);
 
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
+  // const [numPages, setNumPages] = useState(null);
+  // const [pageNumber, setPageNumber] = useState(1);
 
-  useEffect(() => {
-    if (selectedDocument && selectedDocument.type === "application/pdf") {
-    }
-  }, [selectedDocument]);
+  // useEffect(() => {
+  //   if (selectedDocument && selectedDocument.type === "application/pdf") {
+  //   }
+  // }, [selectedDocument]);
 
-  const onDocumentLoadSuccess = ({ numPages }) => {
-    setNumPages(numPages);
-    setPageNumber(1);
-  };
+  // const onDocumentLoadSuccess = ({ numPages }) => {
+  //   setNumPages(numPages);
+  //   setPageNumber(1);
+  // };
 
   return (
     <>
@@ -55,7 +56,7 @@ export default function DocumentAttachment({
             ></iframe>
           )} */}
 
-          {selectedDocument && (
+          {/* {selectedDocument && (
             <div>
               <Document
                 file={selectedDocument}
@@ -67,7 +68,7 @@ export default function DocumentAttachment({
                 Page {pageNumber} of {numPages}
               </p>
             </div>
-          )}
+          )} */}
 
           <ListGroup.Item className="d-flex gap-2 align-items-center">
             <IoDocumentAttach size={"3rem"} />

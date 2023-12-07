@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./CoreTeam.scss";
 import CoreTeamCard from "./CoreTeamCard";
-import RaghuImage from "../../../../Images/aboutUs/Raghu.jpeg";
-import { Link } from "react-router-dom";
+// import RaghuImage from "../../../../Images/aboutUs/Raghu.jpeg";
+// import { Link } from "react-router-dom";
 import {
   ModalBSBody,
   ModalBSContainer,
-  ModalBSFooter,
+  // ModalBSFooter,
   ModalBSHeader,
   ModalBsLauncher,
 } from "../../../PopUp/ModalBS";
@@ -20,7 +20,10 @@ export default function CoreTeam({ companyData, setCompanyData, theme }) {
 
   return (
     <div className=" d-flex flex-column gap-4">
-      <div className="d-flex align-items-center justify-content-between">
+      <div
+        className="d-flex align-items-center justify-content-between"
+        style={{ color: "var(--d-l-grey)" }}
+      >
         <h2>Core Team</h2>
         {/* <Link className="see__more align-self-end">See more</Link> */}
       </div>
