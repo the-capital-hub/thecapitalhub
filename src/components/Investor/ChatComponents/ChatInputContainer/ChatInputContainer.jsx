@@ -253,7 +253,10 @@ export default function ChatInputContainer({
             showAttachDocs={showAttachDocs}
             setShowAttachDocs={setShowAttachDocs}
           />
-          <button className="btn border-0 send-btn bg-transparent p-0 ps-2">
+          <button
+            className="btn border-0 send-btn bg-transparent p-0 ps-2"
+            onClick={() => handleSend()}
+          >
             {/* <img
               className="border-start border-2"
               src={sendIcon}
