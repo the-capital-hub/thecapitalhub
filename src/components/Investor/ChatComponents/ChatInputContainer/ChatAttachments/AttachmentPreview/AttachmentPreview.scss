@@ -87,16 +87,15 @@
         align-items: center;
         justify-content: center;
 
-        .send-img {
-          margin-left: -0.25em;
+        color: #989898;
+        border: 0 !important;
+        &:hover {
+          color: var(--currentTheme);
         }
-      }
-    }
-
-    .send-btn {
-      color: #989898;
-      &:hover {
-        color: var(--currentTheme);
+        &:active {
+          box-shadow: none;
+          transform: scale(1.1);
+        }
       }
     }
   }

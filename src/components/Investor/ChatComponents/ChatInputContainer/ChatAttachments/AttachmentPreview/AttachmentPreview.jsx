@@ -1,6 +1,6 @@
 import { Offcanvas } from "react-bootstrap";
 import "./AttachmentPreview.scss";
-import SendIcon from "../../../../../../Images/Send.svg";
+// import SendIcon from "../../../../../../Images/Send.svg";
 import { useSelector } from "react-redux";
 import { selectIsMobileView } from "../../../../../../Store/features/design/designSlice";
 import { useCallback } from "react";
@@ -64,7 +64,10 @@ export default function AttachmentPreview({
               onKeyDown={handleKeyDown}
               value={sendText}
             />
-            <button className="btn border-start border-2 send-btn p-0 send-btn">
+            <button
+              className="btn send-btn send-btn"
+              onClick={() => handleSend()}
+            >
               {/* <img
                 className="send-img "
                 src={SendIcon}
