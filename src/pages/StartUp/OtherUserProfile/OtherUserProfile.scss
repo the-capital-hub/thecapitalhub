@@ -26,7 +26,7 @@
     .short_details {
       width: 100%;
       padding-bottom: 10px;
-      border-bottom: 2px solid #ededed;
+      border-bottom: 2px solid var(--bs-border-color);
       .buttons {
         margin: 10px 0;
         font-size: 14px;
@@ -60,6 +60,7 @@
     padding: 20px;
     // background-color: white;
     background: var(--white-to-grey);
+    color: var(--d-l-grey);
   }
 
   .two_column_wrapper {
