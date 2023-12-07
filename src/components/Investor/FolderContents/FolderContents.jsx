@@ -53,7 +53,7 @@ const FolderContents = () => {
       <div className="folderContents">
         <div className="w-100 d-flex justify-content-center align-items-center border-bottom px-2 py-2">
           <button
-            className="btn  text-secondary mx-3"
+            className="btn  border mx-3"
             onClick={() => navigate(-1)}
           >
             Back

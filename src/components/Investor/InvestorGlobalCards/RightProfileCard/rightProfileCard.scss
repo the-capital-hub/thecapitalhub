@@ -87,7 +87,8 @@
     align-items: center;
 
     .typography {
-      color: #000;
+      // color: #000;
+      color: var(--d-l-grey);
       font-size: 20px;
       font-family: Poppins;
       font-weight: 600;

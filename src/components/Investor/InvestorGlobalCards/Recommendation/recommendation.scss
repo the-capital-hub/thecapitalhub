@@ -115,7 +115,7 @@
     }
 
     .card_wrapper + .card_wrapper {
-      border-top: 1px solid #dcdcdc;
+      border-top: 1px solid var(--bs-border-color);
     }
 
     .card_wrapper:last-of-type {

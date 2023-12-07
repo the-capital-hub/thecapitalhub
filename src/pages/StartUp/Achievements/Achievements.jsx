@@ -90,7 +90,7 @@ function Achievements() {
   ];
 
   return (
-    <section className="startup_achievements_section d-flex flex-column align-items-evenly py-2 my-5 my-md-3 mx-2 mx-md-5 bg-white shadow-sm rounded-4">
+    <section className="startup_achievements_section d-flex flex-column align-items-evenly py-2 my-5 my-md-3 mx-2 mx-md-5  shadow-sm rounded-4">
       <Nav
         variant="underline"
         fill
@@ -120,8 +120,8 @@ function Achievements() {
       </Nav>
       <div className="Achievements">
         {loading ? (
-          <div className="container p-5 text-center my-5 bg-white rounded-5 ">
-            <SpinnerBS />
+          <div className="container p-5 text-secondary  text-center my-5  rounded-5 ">
+            <SpinnerBS  />
           </div>
         ) : filteredAchievements?.length ? (
           <section className="row m-0 row-cols-2 row-cols-md-3 row-cols-lg-5 justify-content-around">
@@ -139,7 +139,7 @@ function Achievements() {
             ))}
           </section>
         ) : (
-          <h5 className="text-center my-5">No {activeMedal} achievement yet</h5>
+          <h5 className="text-center text-secondary my-5">No {activeMedal} achievement yet</h5>
         )}
       </div>
     </section>

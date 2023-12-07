@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
-import locationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
-import HomeIcon from "../../../../Images/HomeIcon.svg";
+// import locationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
+import { IoLocationOutline } from "react-icons/io5";
+
+// import HomeIcon from "../../../../Images/HomeIcon.svg";
+import { GoHome } from "react-icons/go";
+
 // import ThreeODotIcon from "../../../../Images/ThreeDotIcon.svg";
 import "./FeaturedPostCard.scss";
 import shareIcon from "../../../../Images/post/share.png";
@@ -96,7 +100,7 @@ const FeaturedPostCard = ({
               <div className="feedpostcart_text_header my-1">
                 {/* Fullname */}
                 <span
-                  style={{ fontSize: "15px", fontWeight: 600, color: "#000" }}
+                  style={{ fontSize: "15px", fontWeight: 600, color: "var( --d-l-grey)" }}
                 >
                   {firstName + " " + lastName}
                 </span>
@@ -106,26 +110,30 @@ const FeaturedPostCard = ({
                     style={{
                       fontSize: "10px",
                       fontWeight: 500,
-                      color: "#000",
+                      color: "var( --d-l-grey)",
                     }}
                   >
-                    <img src={HomeIcon} alt="logo" />
+                    {/* <img src={HomeIcon} alt="logo" /> */}
+                    <GoHome size={15}/>
+
                     {designation}, {userId.startUp?.company}
                   </span>
                   <span
                     style={{
                       fontSize: "10px",
                       fontWeight: 500,
-                      color: "#000",
+                      color: "var( --d-l-grey)",
                     }}
                   >
-                    <img src={locationIcon} alt="logo" />
+                    {/* <img src={locationIcon} alt="logo" /> */}
+                    <IoLocationOutline size={15} />
+
                     Bangalore, India
                   </span>
                 </span>
                 {/* Time ago */}
                 <span
-                  style={{ fontSize: "10px", fontWeight: 500, color: "#000" }}
+                  style={{ fontSize: "10px", fontWeight: 500, color: "var( --d-l-grey)" }}
                 >
                   <TimeAgo datetime={createdAt} locale="" />
                 </span>

@@ -27,7 +27,7 @@ export default function ProfessionalInfoDisplay({
   return (
     <>
       {/* header */}
-      <header className="p-0 pb-4 border-bottom d-flex flex-column gap-3 flex-md-row align-items-center justify-content-between">
+      <header className="professional_info_display p-0 pb-4 border-bottom d-flex flex-column gap-3 flex-md-row align-items-center justify-content-between">
         {/* profile picture and name */}
         <div className="d-flex gap-4">
           <img

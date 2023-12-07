@@ -1,6 +1,7 @@
 .startup_achievements_section {
   overflow-x: auto;
   max-width: 100%;
+  background: var(--white-to-grey);
   &::-webkit-scrollbar {
     height: 8px;
   }
@@ -19,7 +20,7 @@
   .nav-tabs {
     a {
       &:link {
-        color: black;
+        color: var(--d-l-grey);
       }
       &.active {
         color: var(--currentTheme) !important;
@@ -39,6 +40,8 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        color: var(--d-l-grey);
+
       }
       img {
         max-width: 250px;
