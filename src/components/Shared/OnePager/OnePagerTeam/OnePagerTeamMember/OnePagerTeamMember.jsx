@@ -18,7 +18,7 @@ export default function OnePagerTeamMember({ member }) {
               className="bg-white rounded-circle d-flex justify-content-center align-items-center"
               style={{ width: "60px", height: "60px" }}
             >
-              <IconCamera />
+              <IconCamera color="var(--d-l-grey)" />
             </div>
             <small>Photo</small>
           </>

@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import IconEditCapital from "../../../InvestorOneLink/SvgIcons/IconEditCapital";
-import { FaRegEdit } from "react-icons/fa";
+import IconEditCapital from "../../../InvestorOneLink/SvgIcons/IconEditCapital";
+// import { FaRegEdit } from "react-icons/fa";
 import { SlCalender } from "react-icons/sl";
-
 
 export default function OnePagerCompanyInfo({
   company,
@@ -30,10 +29,10 @@ export default function OnePagerCompanyInfo({
               className="text-black text-decoration-none fs-5 ms-auto d-flex align-items-center gap-2"
               id="oneLinkEdit"
             >
-              {/* <IconEditCapital /> */}
-              <FaRegEdit  size={20}/>
+              <IconEditCapital color="var(--d-l-grey)" />
+              {/* <FaRegEdit  size={20}/> */}
 
-              <span>Edit</span>
+              <span style={{ color: "var(--d-l-grey)" }}>Edit</span>
             </Link>
           )}
         </legend>
@@ -67,7 +66,6 @@ export default function OnePagerCompanyInfo({
             />
             {/* <IconCalendar /> */}
             <SlCalender />
-
           </div>
         </fieldset>
       </div>
