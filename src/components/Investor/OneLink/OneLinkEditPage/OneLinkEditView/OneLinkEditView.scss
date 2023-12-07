@@ -334,7 +334,7 @@
   textarea {
     border: none;
     outline: none;
-    color: black;
+    color: var(--d-l-grey);
   }
 
   h5 {
@@ -453,7 +453,7 @@
     margin-top: 20px;
 
     textarea {
-      color: rgba(0, 0, 0, 0.63);
+      color: var(--d-l-grey);
       font-family: Poppins;
       font-size: 12px;
       font-style: normal;
@@ -486,7 +486,26 @@
 
   .table_section {
     overflow-x: auto;
-    
+    padding-bottom: 0.5rem;
+
+    &::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #fd590144;
+      border-radius: 10rem;
+
+      &:hover {
+        background-color: #fd5901;
+      }
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+      border-radius: 10rem;
+      //   margin-inline: 20dvw;
+    }
   }
 
   .fund_sking_section {
@@ -577,7 +596,7 @@
       // margin-bottom: 10px;
       // background-color: #fff;
       background: var(--bs-light);
- 
+
       border-radius: 50px;
       border: 1px solid #fd5901;
       color: #fd5901;

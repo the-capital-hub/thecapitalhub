@@ -32,15 +32,9 @@ const SharingOneLinkPopUp = ({
   const [pin, setPin] = useState(loggedInUser.secretKey || null);
 
   const shareUrl = investor
-    ? "/investor/onelink/" +
-    oneLink +
-    "/" +
-    loggedInUser.oneLinkId
-    : "/onelink/" +
-    oneLink +
-    "/" +
-    loggedInUser.oneLinkId;
-  const targetAttribute = isMobileApp ? '_self' : '_blank';
+    ? "/investor/onelink/" + oneLink + "/" + loggedInUser.oneLinkId
+    : "/onelink/" + oneLink + "/" + loggedInUser.oneLinkId;
+  const targetAttribute = isMobileApp ? "_self" : "_blank";
 
   const messageForSharing = introMessage.replace(/<br\s*\/?>/g, "\n");
   const [copyStatus, setCopyStatus] = useState(""); // State for copy status
@@ -143,7 +137,7 @@ const SharingOneLinkPopUp = ({
             </button>
           </form>
           {/* )} */}
-          <h6>
+          <h6 style={{ color: "var(--d-l-grey)" }}>
             Click here for:{" "}
             <Link
               to={shareUrl}
@@ -156,7 +150,7 @@ const SharingOneLinkPopUp = ({
             </Link>
           </h6>
 
-          <h4>Share this details via</h4>
+          <h4 style={{ color: "var(--d-l-grey)" }}>Share this details via</h4>
           <div className="share-buttons d-flex justify-content-center align-items-center position-relative">
             <FacebookShareButton
               url={`${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`}
@@ -181,6 +175,7 @@ const SharingOneLinkPopUp = ({
               size={32}
               style={{
                 minWidth: "32px",
+                color: "var(--d-l-grey)",
               }}
               onClick={() =>
                 copyToClipboard(

@@ -20,7 +20,7 @@ import {
   getStartupByFounderId,
   postStartUpData,
   updateUserById,
-  addNotificationAPI
+  addNotificationAPI,
 } from "../../../../../Service/user";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -29,8 +29,8 @@ import { getBase64 } from "../../../../../utils/getBase64";
 import backIcon from "../../../../../Images/Chat/BackIcon.svg";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { loginSuccess } from "../../../../../Store/features/user/userSlice";
-import toast, { Toaster } from "react-hot-toast";
-import achievement from "../../../../../Images/Investor/Achievements/img_1.png";
+import toast from "react-hot-toast";
+// import achievement from "../../../../../Images/Investor/Achievements/img_1.png";
 import AchievementToast from "../../../../Toasts/AchievementToast/AchievementToast";
 import { achievementTypes } from "../../../../Toasts/AchievementToast/types";
 
@@ -306,7 +306,7 @@ const OneLinkEditView = () => {
                 recipient: loggedInUser._id,
                 type: "achievementCompleted",
                 achievementId: "6564689149186bca517cd0d1",
-              }
+              };
               addNotificationAPI(notificationBody)
                 .then((data) => console.log("Added"))
                 .catch((error) => console.error(error.message));
@@ -461,8 +461,12 @@ const OneLinkEditView = () => {
                   role="button"
                 />
                 <span
-                  className="position-absolute text-dark py-1 px-2 d-flex flex-column justify-content-center align-items-center"
-                  style={{ fontSize: "15px", padding: "4px" }}
+                  className="position-absolute py-1 px-2 d-flex flex-column justify-content-center align-items-center"
+                  style={{
+                    fontSize: "15px",
+                    padding: "4px",
+                    color: "var(--d-l-grey)",
+                  }}
                 >
                   Upload Company Logo
                 </span>
@@ -590,7 +594,7 @@ const OneLinkEditView = () => {
             <h5>About Company</h5>
             <textarea
               type="text"
-              className="m-0 fs-6 w-100 text-dark p-3"
+              className="m-0 fs-6 w-100 p-3"
               value={formData.description}
               onChange={(e) => handleInputChange("description", e)}
               onBlur={(e) => handleUpdate()}
@@ -663,7 +667,6 @@ const OneLinkEditView = () => {
                     onClick={() => deleteCompetitor(index)}
                   >
                     <RiDeleteBin6Line />
-
                   </button>
                 )}
               </div>
@@ -672,7 +675,7 @@ const OneLinkEditView = () => {
           <button onClick={addCompetitor} className="add_row_btn startup">
             + Add Competitor
           </button>
-          <section className="table_section">
+          <section className="table_section mt-4">
             <Table
               page={"oneLinkEditPage"}
               setTable={setTableData}
