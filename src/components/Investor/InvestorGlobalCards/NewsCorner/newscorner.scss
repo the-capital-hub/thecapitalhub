@@ -132,7 +132,7 @@
   }
 
   .newscorner_card_body + .newscorner_card_body {
-    border-top: 1px solid rgba(220, 220, 220, 1);
+    border-top: 1px solid var(--bs-border-color);
   }
 
   .newscorner_card hr {

@@ -1,5 +1,11 @@
 .professional_info_section {
   background-color: var(--white-to-grey);
+  .professional_info_display{
+    h5{
+      color: var(--d-l-grey);
+    }
+    
+  }
   p {
     color: #717171;
   }
@@ -12,6 +18,7 @@
       @media (min-width: 768px) {
         flex: 0 0 15ch;
       }
+      color: var(--d-l-grey);
 
       //   border: 1px solid;
     }
@@ -43,7 +50,7 @@
     }
 
     fieldset {
-      border: 1px solid #e2e2e2;
+      border: 1px solid var(--bs-border-color);
       border-radius: 10px;
       background-color: transparent;
       padding: 0;
@@ -87,7 +94,7 @@
     legend {
       margin-left: 2em;
       padding-inline: 1em;
-      color: #3a3a3a;
+      color:var(--d-l-grey);
       font-size: 12px;
       font-weight: 500;
     }
