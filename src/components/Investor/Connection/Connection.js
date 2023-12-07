@@ -138,7 +138,7 @@ const Connection = () => {
         <SmallProfileCard text={"Connections"} />
         <section className="content_section mt-4">
           <div className="row">
-            <div className="col-12 mt-2 box p-3 p-md-4 text-dark">
+            <div className="col-12 mt-2 box p-3 p-md-4 ">
               <h4>Manage Connections</h4>
               <nav className="connection_nav">
                 <button
@@ -168,7 +168,7 @@ const Connection = () => {
                 {loading ? (
                   <h5 className="text-center my-5">
                     <div class="d-flex justify-content-center">
-                      <div class="spinner-border" role="status">
+                      <div class="spinner-border text-secondary" role="status">
                         <span class="visually-hidden">Loading...</span>
                       </div>
                     </div>
@@ -194,7 +194,7 @@ const Connection = () => {
                               <p className="connection_name h5">
                                 <Link
                                   to={`/user/${sender?._id}`}
-                                  className=" text-black text-decoration-none"
+                                  className="  text-decoration-none"
                                 >
                                   {`${sender.firstName} ${sender.lastName}`}
                                 </Link>
@@ -244,7 +244,7 @@ const Connection = () => {
                       )
                     )
                   ) : (
-                    <h5 className="text-center my-5">
+                    <h5 className="text-center my-5 text-secondary">
                       No received connections.
                     </h5>
                   )
@@ -270,7 +270,7 @@ const Connection = () => {
                                 <p className="connection_name h5">
                                   <Link
                                     to={`/user/${receiver?._id}`}
-                                    className=" text-black text-decoration-none"
+                                    className="  text-decoration-none"
                                   >
                                     {`${receiver?.firstName} ${receiver?.lastName}`}
                                   </Link>
@@ -309,7 +309,7 @@ const Connection = () => {
                         )
                       )
                     ) : (
-                      <h5 className="text-center my-5">No sent connections.</h5>
+                      <h5 className="text-center my-5 text-secondary">No sent connections.</h5>
                     )}
                   </div>
                 ) : selectedTab === "accepted" ? (
@@ -334,7 +334,7 @@ const Connection = () => {
                             <p className="connection_name h5">
                               <Link
                                 to={`/user/${data._id}`}
-                                className=" text-black text-decoration-none"
+                                className="  text-decoration-none"
                               >
                                 {`${data.firstName ? data.firstName : "name"} ${data.lastName ? data.lastName : ""
                                   }`}
@@ -374,7 +374,7 @@ const Connection = () => {
                       </div>
                     ))
                   ) : (
-                    <h5 className="text-center my-5">
+                    <h5 className="text-center my-5 text-secondary">
                       No accepted connections.
                     </h5>
                   )

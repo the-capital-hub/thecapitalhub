@@ -65,7 +65,7 @@ function Search() {
       <div className="serach_main_container my-4">
         <SmallProfileCard text={"Search"} />
         <section className="content_section mt-4">
-          <span className="bg-white rounded-4 shadow-sm px-3 py-2 m-md-3 d-flex flex-wrap gap-2">
+          <span className=" rounded-4 shadow-sm px-3 py-2 m-md-3 d-flex flex-wrap gap-2">
             <p className="m-0 p-0">Didn't find what you are looking for?</p>
             <Link to="/explore" className="explore_link">
               Head over to Explore
@@ -123,17 +123,17 @@ function Search() {
                       <Link to="/chats" className="text-decoration-none">
                         <button className="d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white">
                           {/* <img src={connectIcon} alt="connect-user" /> */}
-                          <span>Message</span>
+                          <span className="bg-white text-dark">Message</span>
                         </button>
                       </Link>
                     ) : users?.connectionsReceived?.includes(loggedInUserId) ? (
                       <button className="d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white">
                         <img src={connectIcon} alt="connect-user" />
-                        <span>Pending</span>
+                        <span className="bg-white text-dark">Pending</span>
                       </button>
                     ) : users?.connections?.includes(loggedInUserId) ? (
                       <button className="d-flex justify-content-center align-items-center gap-2 py-2 px-3 rounded-5 border-secondary bg-white">
-                        <span>Connected</span>
+                        <span className="bg-white text-dark">Connected</span>
                       </button>
                     ) : users._id !== loggedInUserId ? (
                       <button
@@ -141,7 +141,7 @@ function Search() {
                         onClick={() => handleConnect(users?._id)}
                       >
                         <img src={connectIcon} alt="connect-user" />
-                        <span>Connect</span>
+                        <span className="bg-white text-dark">Connect</span>
                       </button>
                     ) : (
                       ""
