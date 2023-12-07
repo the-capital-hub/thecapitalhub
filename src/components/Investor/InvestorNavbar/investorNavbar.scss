@@ -85,9 +85,12 @@
           .single_result:nth-child(13) {
             border-bottom: none;
           }
+          span{
+            color: var( --darkMode-currentTheme);
+          }
           a {
             text-decoration: none;
-            color: #6c757d;
+            color: var(--d-l-grey);
             &:hover {
               color: #fd5901;
             }

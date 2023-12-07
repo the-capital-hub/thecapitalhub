@@ -37,9 +37,9 @@
   }
 
   .modal__input {
-    background-color: #fafafa;
+    background-color: var(--bs-light);
     outline: 0;
-    border: 1px solid #e7e7e7;
+    border: 1px solid var(--bs-border-color);
     transition: border 0.3s ease-in-out;
 
     &:focus {
@@ -48,6 +48,10 @@
 
     &.investor:focus {
       border: 1px solid #98b445;
+    }
+
+    &::placeholder {
+      color: #888888;
     }
   }
 
@@ -91,6 +95,7 @@
     padding: 8px 25px;
     width: auto;
     font-size: 14px;
+    color: #333;
 
     &:active {
       transform: scale(0.95);
@@ -113,11 +118,36 @@
   .contacts-container {
     max-height: 200px;
     overflow-y: auto;
-    border: 1px solid #e7e7e7;
+    border: 1px solid var(--bs-border-color);
     border-radius: 5px;
     padding: 5px;
     @media (max-width: 420px) {
       font-size: 12px;
+    }
+
+    &::-webkit-scrollbar {
+      height: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--currentTheme-dark);
+      border-radius: 10rem;
+
+      &:hover {
+        background-color: var(--currentTheme);
+      }
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+      border-radius: 10rem;
+      //   margin-inline: 20dvw;
+    }
+
+    .contact {
+      & + .contact {
+        margin-top: 0.5rem;
+      }
     }
   }
 }

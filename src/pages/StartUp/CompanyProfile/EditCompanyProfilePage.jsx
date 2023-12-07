@@ -12,7 +12,7 @@ import CoinIcon from "../../../Images/investorView/Rectangle.png";
 import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
 import { getStartupByFounderId, postStartUpData } from "../../../Service/user";
 import CoreTeam from "../../../components/Investor/CompanyProfilePageComponents/CoreTeam/CoreTeam";
-import Milestones from "../../../components/Investor/CompanyProfilePageComponents/Milestones/Milestones";
+// import Milestones from "../../../components/Investor/CompanyProfilePageComponents/Milestones/Milestones";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import backIcon from "../../../Images/Chat/BackIcon.svg";
@@ -26,6 +26,7 @@ import {
   selectUserCompanyData,
   setUserCompany,
 } from "../../../Store/features/user/userSlice";
+import IconChevronBack from "../../../components/Investor/SvgIcons/IconChevronBack";
 
 export default function EditCompanyProfilePage() {
   const loggedInUserId = useSelector(selectLoggedInUserId);
@@ -157,13 +158,14 @@ export default function EditCompanyProfilePage() {
 
         <div className="main__content">
           <span className="back_img rounded-circle shadow-sm" title="Go Back">
-            <img
+            {/* <img
               src={backIcon}
               width={20}
               height={20}
               onClick={() => navigate(-1)}
               alt=""
-            />
+            /> */}
+            <IconChevronBack width={25} height={25} color="var(--d-l-grey)" />
           </span>
           {/* <SmallProfileCard text={"Company Profile"} /> */}
 

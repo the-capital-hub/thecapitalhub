@@ -64,7 +64,7 @@ function OtherUserProfile() {
   return (
     <div className="mt-5 mt-md-4">
       <MaxWidthWrapper>
-        <section className="other_user_profile">
+        <section className="other_user_profile mx-lg-4 mx-xl-0">
           <SmallProfileCard className="mt-lg-2 mt-xl-0" text="User Details" />
           {userData ? (
             <>
@@ -83,24 +83,28 @@ function OtherUserProfile() {
                       <h3 className="typography h3">
                         {userData?.firstName} {userData?.lastName}
                       </h3>
-                      <span className="small_typo">
+                      <span className="text-secondary small_typo">
                         {userData?.designation ||
                           "Founder & CEO of The Capital Hub"}
                       </span>
                       <br />
-                      <span className="small_typo">
+                      <span className="text-secondary small_typo">
                         {userData?.location || "Bangalore , India"}
                       </span>
                     </div>
                   </div>
-                  {loggedInUser._id !== userData?._id &&
+                  {loggedInUser._id !== userData?._id && (
                     <div className="buttons d-flex gap-2 flex-row align-items-md-center">
                       <Link
                         to={`/chats?userId=${userData?._id}`}
                         className="text-decoration-none"
                       >
                         <button className="message btn rounded-pill px-3 py-2">
-                          <img src={messageIcon} width={20} alt="message user" />
+                          <img
+                            src={messageIcon}
+                            width={20}
+                            alt="message user"
+                          />
                           <span>Message</span>
                         </button>
                       </Link>
@@ -109,8 +113,8 @@ function OtherUserProfile() {
                           <span>Connected</span>
                         </button>
                       ) : userData?.connectionsReceived?.includes(
-                        loggedInUser._id
-                      ) ? (
+                          loggedInUser._id
+                        ) ? (
                         <button className=" connection-status d-flex btn rounded-pill px-3 py-2">
                           <img src={connection} width={20} alt="message user" />
                           <span>Pending</span>
@@ -124,34 +128,33 @@ function OtherUserProfile() {
                         </button>
                       )}
                     </div>
-                  }
-
+                  )}
                 </div>
                 <div className="details">
                   <div className="single_details row row-cols-1 row-cols-md-2 ">
                     <span className="col-md-3 label fw-bold">
                       Current Company
                     </span>
-                    <span className="col-md-9 value text-secondary">
+                    <span className="col-md-9 text-secondary value">
                       {userData?.startUp?.company ||
                         userData?.investor?.companyName}
                     </span>
                   </div>
                   <div className="single_details row row-cols-1 row-cols-md-2 ">
                     <span className="col-md-3 label fw-bold">Designation</span>
-                    <span className="col-md-9 value text-secondary">
+                    <span className="col-md-9 text-secondary value">
                       {userData?.designation}
                     </span>
                   </div>
                   <div className="single_details row row-cols-1 row-cols-md-2 ">
                     <span className="col-md-3 label fw-bold">Education</span>
-                    <span className="col-md-9 value text-secondary">
+                    <span className="col-md-9 text-secondary value">
                       {userData?.education}
                     </span>
                   </div>
                   <div className="single_details row row-cols-1 row-cols-md-2 ">
                     <span className="col-md-3 label fw-bold">Experience</span>
-                    <span className="col-md-9 value text-secondary">
+                    <span className="col-md-9 text-secondary value">
                       {userData?.experience}
                     </span>
                   </div>
@@ -161,25 +164,25 @@ function OtherUserProfile() {
                 <div className="left_container p-0 pe-md-auto d-flex flex-column gap-3 col-12 col-lg-8">
                   {/* <div className="about rounded-4 border shadow-sm profile_container">
                     <h4 className="h4">About</h4>
-                    <p className="text-secondary">{userData?.bio}</p>
+                    <p className="">{userData?.bio}</p>
                   </div>
                   <div className="personal_information rounded-4 border shadow-sm profile_container">
                     <h4 className="h4">Personal Information</h4>
                     <div className="details w-100 m-0 p-0 col-md-9 row row-cols-1 row-cols-md-2">
                       <div className="d-flex flex-column mb-1 mb-md-3 p-0">
-                        <p className="text-secondary mb-1">First name</p>
+                        <p className=" mb-1">First name</p>
                         <p className="m-0">{userData?.firstName}</p>
                       </div>
                       <div className="d-flex flex-column mb-1 mb-md-3 p-0">
-                        <p className="text-secondary mb-1">Last name</p>
+                        <p className=" mb-1">Last name</p>
                         <p className="m-0">{userData?.lastName}</p>
                       </div>
                       <div className="d-flex flex-column mb-1 mb-md-3 p-0">
-                        <p className="text-secondary mb-1">Email address</p>
+                        <p className=" mb-1">Email address</p>
                         <p className="m-0">{userData?.email}</p>
                       </div>
                       <div className="d-flex flex-column mb-1 mb-md-3 p-0">
-                        <p className="text-secondary mb-1">Mobile number</p>
+                        <p className=" mb-1">Mobile number</p>
                         <p className="m-0">{userData?.phoneNumber}</p>
                       </div>
                     </div>
@@ -234,14 +237,14 @@ function OtherUserProfile() {
                     <div className="bio rounded-4 border shadow-sm profile_container">
                       <h4 className="h4">Bio</h4>
                       <div className="single_education">
-                        <h6 className="h6">{userData?.bio}</h6>
+                        <h6 className="h6 text-secondary">{userData?.bio}</h6>
                       </div>
                     </div>
                   ) : (
                     ""
                   )}
                   {/* Otheruser's Featured Posts */}
-                  <div className="featured_post rounded-4 shadow-sm d-flex flex-column gap-3 p-4">
+                  <div className="featured_post border rounded-4 shadow-sm d-flex flex-column gap-3 p-4">
                     {/* Heading */}
                     <div className="d-flex justify-content-between">
                       <h4>Featured Posts</h4>

@@ -4,10 +4,11 @@
   min-height: 90vh;
   // margin-top: 2rem;
   .box {
-    background-color: #fff;
+    // background-color: #fff;
     padding: 10px;
     border-radius: var(--border-radius);
-    background: #fff;
+    // background: #fff;
+    background: var(--white-to-grey);
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
     width: 96%;
     margin-left: 2%;
@@ -15,10 +16,19 @@
 
     h4 {
       font-size: 26px;
+      color: var(--d-l-grey);
+
     }
   }
 
   .content_section {
+    span{
+      background: var(--white-to-grey);
+      p{
+        color: var(--d-l-grey);
+
+      }
+    }
     .people_container:last-child {
       border-bottom: none;
     }
@@ -33,6 +43,10 @@
       .short_desc {
         display: flex;
         gap: 15px;
+        p{
+          color: var(--d-l-grey);
+
+        }
         img {
           //   border-radius: 50% !important;
           width: 80px;
@@ -42,7 +56,7 @@
 
         .people_name_link {
           text-decoration: none;
-          color: #000000;
+          color: var(--d-l-grey);
 
           &:hover {
             color: #fd5901;

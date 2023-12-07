@@ -1,24 +1,33 @@
 import React, { useEffect } from "react";
-import locationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
-import HomeIcon from "../../../../Images/HomeIcon.svg";
+// import locationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
+import { IoLocationOutline } from "react-icons/io5";
+
+// import HomeIcon from "../../../../Images/HomeIcon.svg";
+import { GoHome } from "react-icons/go";
+
 // import ThreeODotIcon from "../../../../Images/ThreeDotIcon.svg";
 import { PiDotsThreeBold } from "react-icons/pi";
 
 import "./feedPostCard.scss";
 import shareIcon from "../../../../Images/post/share.png";
 import fireIcon from "../../../../Images/post/like-fire.png";
-import bwFireIcon from "../../../../Images/post/unlike-fire.png";
+// import bwFireIcon from "../../../../Images/post/unlike-fire.png";
+import { ImFire } from "react-icons/im";
+
 import commentIcon from "../../../../Images/post/comment.svg";
-import repostIcon from "../../../../Images/post/repostBlack.svg";
+// import repostIcon from "../../../../Images/post/repostBlack.svg";
+
 // import repostWithThoughtsIcon from "../../../../Images/post/repost-with-thoughts.svg";
 import { FaRegEdit } from "react-icons/fa";
 
 // import repostInstantlyIcon from "../../../../Images/post/repost-grey.svg";
 import { BiRepost } from "react-icons/bi";
 
-import saveIcon from "../../../../Images/post/save.svg";
+// import saveIcon from "../../../../Images/post/save.svg";
 // import savedIcon from "../../../../Images/post/saved.png";
 import { CiBookmark } from "react-icons/ci";
+import { IoMdBookmark } from "react-icons/io";
+
 
 import deleteIcon from "../../../../Images/post/delete.png";
 import CustomModal from "../../../PopUp/Modal/Modal";
@@ -455,7 +464,7 @@ const FeedPostCard = ({
                 <Link
                   to={`/user/${userId}`}
                   className="text-decoration-none"
-                  style={{ fontSize: "18px", fontWeight: 600, color: "#000" }}
+                  style={{ fontSize: "18px", fontWeight: 600, color: "var( --d-l-grey)" }}
                 >
                   {firstName + " " + lastName}
                 </Link>
@@ -464,10 +473,11 @@ const FeedPostCard = ({
                     style={{
                       fontSize: "12px",
                       fontWeight: 500,
-                      color: "#000",
+                      color: "var( --d-l-grey)",
                     }}
                   >
-                    <img src={HomeIcon} alt="logo" />
+                    {/* <img src={HomeIcon} alt="logo" /> */}
+                    <GoHome size={15} />
                     {designation},{" "}
                     {investorCompanyName?.companyName
                       ? investorCompanyName?.companyName
@@ -477,15 +487,17 @@ const FeedPostCard = ({
                     style={{
                       fontSize: "12px",
                       fontWeight: 500,
-                      color: "#000",
+                     color: "var( --d-l-grey)",
                     }}
                   >
-                    <img src={locationIcon} alt="logo" />
+                    {/* <img src={locationIcon} alt="logo" /> */}
+                    <IoLocationOutline size={15}/>
+
                     Bangalore, India
                   </span>
                 </span>
                 <span
-                  style={{ fontSize: "12px", fontWeight: 500, color: "#000" }}
+                  style={{ fontSize: "12px", fontWeight: 500,color: "var( --d-l-grey)", }}
                 >
                   {" "}
                   <TimeAgo
@@ -512,7 +524,7 @@ const FeedPostCard = ({
                   /> */}
                   <PiDotsThreeBold 
                   size={35}
-                  style={{fill:"black"}}
+                  style={{fill:"var(--d-l-grey)"}}
                    onClick={() => {
                     setKebabMenuVisible(!kebabMenuVisible);
                   }}
@@ -529,6 +541,7 @@ const FeedPostCard = ({
                         <li
                           onClick={() => handleAddToFeatured(postId)}
                           className="d-flex align-items-center gap-1"
+                          style={{color:"var(--d-l-grey)"}}
                         >
                           <IconComponentAdd />
                           <span>Featured</span>
@@ -538,6 +551,8 @@ const FeedPostCard = ({
                         <li
                           onClick={() => deletePost(postId)}
                           className="d-flex align-items-center gap-1"
+
+                          style={{color:"var(--d-l-grey)"}}
                         >
                           <IconDelete />
                           <span>Delete</span>
@@ -548,6 +563,7 @@ const FeedPostCard = ({
                         data-bs-target="#reportPostModal"
                         className="d-flex align-items-center gap-1"
                       // onClick={() => setShowReportModal(true)}
+                      style={{color:"var(--d-l-grey)"}}
                       >
                         <IconReportPost />
                         <span>Report</span>
@@ -673,14 +689,19 @@ const FeedPostCard = ({
                         onClick={likeUnlikeHandler}
                         style={{ cursor: "pointer" }}
                       />
+                      
                     ) : (
-                      <img
-                        src={bwFireIcon}
-                        width={18}
-                        alt="like post"
-                        onClick={likeUnlikeHandler}
-                        style={{ cursor: "pointer" }}
+                      // <img
+                      //   src={bwFireIcon}
+                      //   width={18}
+                      //   alt="like post"
+                      //   onClick={likeUnlikeHandler}
+                      //   style={{ cursor: "pointer" }}
+                      // />
+                      <ImFire onClick={likeUnlikeHandler}
+                        style={{ cursor: "pointer",fill:"var(--d-l-grey)"  }}
                       />
+
                     )}
                     {/* <img
                       src={commentIcon}
@@ -693,32 +714,37 @@ const FeedPostCard = ({
                       <FaRegCommentDots
                         size={20}
                         onClick={() => setShowComment((prev) => !prev)}
-                        style={{ cursor: "pointer",fill:"black" }}
+                        style={{ cursor: "pointer",fill:"var(--d-l-grey)" }}
                       />
                     ) : (
                       <FaCommentDots
                         size={20}
                         onClick={() => setShowComment((prev) => !prev)}
-                        style={{ cursor: "pointer",fill:"black" }}
+                        style={{ cursor: "pointer",fill:"var(--d-l-grey)" }}
                       />
                     )}
                   </div>
                 </div>
 
                 {/* Repost and Save posts */}
-                <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
+                <div className=" col-4 d-flex align-items-center gap-1 justify-content-end">
                   <span
                     className={`repost_container rounded-4 ${showRepostOptions ? "bg-light" : ""
                       }`}
                     ref={repostContainerRef}
                   >
-                    <img
+                    {/* <img
                       src={repostIcon}
                       width={12}
                       alt="reshare post"
                       onClick={() => setShowRepostOptions(!showRepostOptions)}
                       style={{ cursor: "pointer" }}
-                    />
+                    /> */}
+<BiRepost onClick={() => setShowRepostOptions(!showRepostOptions)}
+                      style={{ cursor: "pointer",transform: "rotate(90deg)",fill:"var(--d-l-grey)" }}
+                      size={25} 
+                      />
+
                     {showRepostOptions && (
                       <span className="repost_options border rounded shadow-sm">
                         <button
@@ -728,6 +754,7 @@ const FeedPostCard = ({
                           {!repostLoading?.withThoughts ? (
                             
                             <FaRegEdit 
+                            
                             size={20}
                             />
 
@@ -788,10 +815,10 @@ const FeedPostCard = ({
                     //   alt="save post"
                      
                     // />
-                    <CiBookmark 
+                    <IoMdBookmark 
                     size={20}
                     onClick={handleUnsavePost}
-                    style={{ cursor: "pointer",fill:"black" }}
+                    style={{ cursor: "pointer",fill:"var(--d-l-grey)"}}
                     />
 
                   ) : (
@@ -805,7 +832,7 @@ const FeedPostCard = ({
                     <CiBookmark 
                     size={20}
                     onClick={handleSavePopUp}
-                    style={{ cursor: "pointer",fill:"black" }}
+                    style={{ cursor: "pointer",fill:"var(--d-l-grey)" }}
                     />
 
                   )}
@@ -849,7 +876,7 @@ const FeedPostCard = ({
                       </section>
                     </div>
                     {comments?.length ? (
-                      <span className="fs-6 ps-2 mb-2">Comments</span>
+                      <span className="fs-6 ps-2 mb-2" style={{color:"var(--d-l-grey)"}}>Comments</span>
                     ) : (
                       <span className="fs-6 ps-2 mb-2 w-100 d-flex justify-content-center text-center">
                         No comments
@@ -875,7 +902,7 @@ const FeedPostCard = ({
                             <header className="d-flex justify-content-between align-items-center p-0">
                               <Link
                                 to={`/user/${val.user._id}`}
-                                className="text-decoration-none text-black fs-sm"
+                                className="text-decoration-none  fs-sm"
                               >
                                 <h6 className="fs-sm m-0">
                                   {val.user.firstName + " " + val.user.lastName}
@@ -885,7 +912,7 @@ const FeedPostCard = ({
                                 <TimeAgo datetime={val.createdAt} locale="" />
                               </span>
                             </header>
-                            <span className="text-secondary fs-xs m-0">
+                            <span className=" fs-xs m-0">
                               {val.user?.designation}
                               {" , "}{" "}
                               {val.user?.startUp?.company ||
@@ -905,14 +932,21 @@ const FeedPostCard = ({
                                   }
                                 />
                               ) : (
-                                <img
-                                  src={bwFireIcon}
-                                  width={15}
-                                  alt="like post"
-                                  onClick={() =>
-                                    commentlikeUnlikeHandler(postId, val._id)
-                                  }
-                                />
+                                // <img
+                                //   src={bwFireIcon}
+                                //   width={15}
+                                //   alt="like post"
+                                //   onClick={() =>
+                                //     commentlikeUnlikeHandler(postId, val._id)
+                                //   }
+                                // />
+                                <ImFire 
+                                onClick={() =>
+                                      commentlikeUnlikeHandler(postId, val._id)
+                                    }
+                                    style={{ cursor: "pointer",fill:"var(--d-l-grey)"  }}
+                                    />
+
                               )}
                               <span className="mx-2 text-secondary fs-sm">
                                 {val?.likes?.length} likes

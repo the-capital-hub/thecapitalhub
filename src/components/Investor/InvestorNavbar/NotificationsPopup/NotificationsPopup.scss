@@ -3,14 +3,13 @@
   padding: 20px;
   top: 55px;
   right: 0;
-
   width: 35vw;
 
   display: flex;
   flex-direction: column;
   gap: 10px;
-background-color: var(--white-to-grey);
-color: black;
+  background-color: var(--white-to-grey);
+  color: var(--d-l-grey);
   .notification {
     border-bottom: #dcdcdc 1px solid;
     padding: 5px 10px;
@@ -32,12 +31,12 @@ color: black;
 
     a {
       text-decoration: none;
-      color: black;
+      color: var(--darkMode-currentTheme);
     }
 
-    .actions {
-      //   font-size: 10px;
-    }
+    // .actions {
+    //   //   font-size: 10px;
+    // }
   }
 }
 

@@ -56,9 +56,10 @@
         p {
           flex-shrink: 0;
           border-radius: var(--border-radius);
-          border: 1px solid #dadada;
+          border: 1px solid var(--bs-border-color);
           // background: #eaeef2;
-          color: #373737;
+          // color: #373737;
+          color: var(--d-l-grey);
           font-size: 18px;
           font-family: Poppins;
           font-weight: 500;
@@ -338,6 +339,11 @@
   .single-comment {
     .comment-details{
       background: var(--bs-light);
+      color: var(--d-l-grey);
+      h6{
+        color: var(--d-l-grey);
+
+      }
     }
     .img_container {
       max-width: 80px;

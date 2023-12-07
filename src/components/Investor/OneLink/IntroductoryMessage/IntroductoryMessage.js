@@ -147,8 +147,7 @@ const IntroductoryMessage = ({
                   />
                 ) : (
                   // <img src={Send} alt="Send" />
-                  <VscSend size={25} style={{ fill: "var(--d-l-dray)" }} />
-
+                  <VscSend size={25} style={{ fill: "var(--d-l-grey)" }} />
                 )}
               </div>
             </div>

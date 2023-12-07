@@ -49,6 +49,7 @@
       padding: 8px;
       border-radius: 6px;
       background-color: #eaeef2;
+      color: var(--bs-body-bg);
 
       @media (max-width: 420px) {
         max-width: 70%;
@@ -108,6 +109,10 @@
         color: #989898;
         &:hover {
           color: var(--currentTheme);
+        }
+        &:active {
+          box-shadow: none;
+          transform: scale(1.1);
         }
       }
     }

@@ -203,7 +203,10 @@ export default function CompanyProfileForm({
             onChange={handleFileInputChange}
           />
           <div className="profile_form_input d-flex align-items-center gap-4">
-            <label htmlFor="companyLogo" style={{ cursor: "pointer" }}>
+            <label
+              htmlFor="companyLogo"
+              style={{ cursor: "pointer", color: "var(--d-l-grey)" }}
+            >
               Upload Picture
             </label>
             <p className="m-0 fs-6 fw-light">{selectedFile?.name}</p>

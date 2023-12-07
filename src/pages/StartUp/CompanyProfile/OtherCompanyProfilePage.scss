@@ -4,9 +4,9 @@
   grid-template-columns: 100%;
   justify-content: space-between;
 
-  @media (min-width: 1360px) {
-    grid-template-columns: calc(100% - 22rem) 21rem;
-  }
+  // @media (min-width: 1200px) {
+  //   grid-template-columns: calc(100% - 22rem) 21rem;
+  // }
 
   @media (min-width: 1360px) {
     grid-template-columns: calc(100% - 26rem) 24rem;

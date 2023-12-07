@@ -19,7 +19,8 @@
     }
 
     .typography {
-      color: #000;
+      // color: #000;
+      color: var(--d-l-grey);
       font-size: 20px;
       font-family: "Poppins";
       font-weight: 600;
@@ -110,7 +111,7 @@
     .edit_btn {
       button {
         border-radius: 131px;
-        border: 1px solid #c6c6c6;
+        border: 1px solid var(--bs-border-color);
         width: 107px;
         height: 35px;
         flex-shrink: 0;
@@ -168,7 +169,7 @@
 
     .personal_information_header button {
       border-radius: 131px;
-      border: 1px solid #c6c6c6;
+      border: 1px solid var(--bs-border-color);
       width: 107px;
       height: 35px;
       flex-shrink: 0;
@@ -210,10 +211,11 @@
 
   .profile_edit_field {
     outline: none;
-    border: 1px solid rgba(220, 220, 220, 1);
+    border: 1px solid var(--bs-border-color);
     border-radius: 5px;
     padding: 0.25em 0.75em;
-    color: #777;
+    // color: #777;
+    color: var(--d-l-grey);
 
     &:focus {
       transition: border 0.15s ease-in-out;

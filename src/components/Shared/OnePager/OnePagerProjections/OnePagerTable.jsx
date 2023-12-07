@@ -15,7 +15,7 @@ export default function OnePagerTable({ heading, data }) {
                     className="w-50 border-end d-flex align-items-center"
                     style={{ minHeight: "50%" }}
                   >
-                    <p className="m-0 text-muted ps-3" style={{ fontSize: "12px" }}>
+                    <p className="m-0 ps-3" style={{ fontSize: "12px" }}>
                       Amount
                     </p>
                   </div>

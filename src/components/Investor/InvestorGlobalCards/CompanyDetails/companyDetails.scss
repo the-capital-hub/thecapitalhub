@@ -1,5 +1,9 @@
 .company_details_container {
+  color: var(--d-l-grey);
+
   .company_details {
+    color: var(--d-l-grey);
+
     /* height: 400px; */
     &.mt-4 {
       margin-top: 4rem;
@@ -33,7 +37,7 @@
 
     .edit-btn {
       border-radius: 131px;
-      border: 1px solid #c6c6c6;
+      border: 1px solid var(--bs-border-color);
       width: 107px;
       height: 35px;
       flex-shrink: 0;
@@ -106,7 +110,6 @@
         font-size: 22px;
         font-family: Poppins;
         margin: 0.5rem;
-       
       }
 
       .small_typo {
@@ -153,7 +156,7 @@
   }
 
   p {
-    color: #595959;
+    color: var(--bs-secondary);
     font-size: 16px;
     font-family: Poppins;
     line-height: 150%;
@@ -177,8 +180,8 @@
         }
 
         .typography {
-            color: var(--d-l-grey);
-                  font-size: 20px;
+          color: var(--d-l-grey);
+          font-size: 20px;
           font-family: Poppins;
           font-weight: 600;
           margin: 0;

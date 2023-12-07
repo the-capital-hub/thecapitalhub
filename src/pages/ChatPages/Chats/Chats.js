@@ -301,10 +301,13 @@ const Chats = () => {
   return allChatsStatus === "loading" ? (
     <div
       className="d-flex flex-column align-items-center justify-content-center"
-      style={{ minHeight: "80dvh" }}
+      style={{ minHeight: "100dvh", backgroundColor: "var(--startup-bg)" }}
+      data-bs-theme={theme}
     >
       <TCHLogoLoader />
-      <h4 className="">Fetching your Chats</h4>
+      <h4 className="" style={{ color: "var(--d-l-grey)" }}>
+        Fetching your Chats
+      </h4>
     </div>
   ) : (
     <>

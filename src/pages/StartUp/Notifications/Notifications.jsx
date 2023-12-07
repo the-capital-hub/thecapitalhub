@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import "./Notifications.scss";
-import ComingSoon from "../../../components/ComingSoon/ComingSoon";
+// import ComingSoon from "../../../components/ComingSoon/ComingSoon";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import { useDispatch, useSelector } from "react-redux";
 import ThreeODotIcon from "../../../Images/ThreeDotIcon.svg";
 import {
   fetchNotificationsAPI,
-  markAllNotificationsReadAPI,
-  markNotificationAsReadAPI,
+  // markAllNotificationsReadAPI,
+  // markNotificationAsReadAPI,
 } from "../../../Service/user";
 import {
   selectIsInvestor,
@@ -16,6 +16,7 @@ import {
 } from "../../../Store/features/user/userSlice";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import { Link } from "react-router-dom";
+import { PiDotsThreeBold } from "react-icons/pi";
 
 function Notifications() {
   const dispatch = useDispatch();
@@ -63,7 +64,7 @@ function Notifications() {
       }
       case "postLiked": {
         return (
-          <span>
+          <span className="notif-link">
             liked your{" "}
             <Link
               to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
@@ -76,7 +77,7 @@ function Notifications() {
       }
       case "postShared": {
         return (
-          <span>
+          <span className="notif-link">
             shared your{" "}
             <Link
               to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
@@ -89,7 +90,7 @@ function Notifications() {
       }
       case "postCommented": {
         return (
-          <span>
+          <span className="notif-link">
             commented on your{" "}
             <Link
               to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
@@ -102,7 +103,7 @@ function Notifications() {
       }
       case "meetingRequest": {
         return (
-          <span>
+          <span className="notif-link">
             You have a new
             <Link to={`/investor/my-schedule?view=true`} className="fw-bold">
               meeting
@@ -167,25 +168,30 @@ function Notifications() {
                               />
                               <div className="d-flex flex-column justify-content-center px-2">
                                 <h5>
-                                <Link
-                          to={
-                            isInvestor
-                              ? `/investor/user/${sender?._id}`
-                              : `/user/${sender?._id}`
-                          }
-                          className="fw-bold"
-                        >
-                          {sender?.firstName} {sender?.lastName}
-                        </Link>{" "}
+                                  <Link
+                                    to={
+                                      isInvestor
+                                        ? `/investor/user/${sender?._id}`
+                                        : `/user/${sender?._id}`
+                                    }
+                                    className="fw-bold"
+                                  >
+                                    {sender?.firstName} {sender?.lastName}
+                                  </Link>{" "}
                                 </h5>
                                 <p className="m-0 text-secondary">
                                   {notificationType(type, post || connection)}
                                 </p>
                               </div>
-                              <img
+                              {/* <img
                                 src={ThreeODotIcon}
                                 alt="ThreeODotIcon"
                                 className="ms-auto px-2 "
+                              /> */}
+                              <PiDotsThreeBold
+                                size={35}
+                                style={{ fill: "var(--d-l-grey)" }}
+                                className="ms-auto"
                               />
                             </div>
                           </div>
