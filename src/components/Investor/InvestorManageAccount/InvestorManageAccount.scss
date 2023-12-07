@@ -58,6 +58,8 @@
             border-radius: 5.861px;
             border: 0.586px solid #e4e4e4;
             background: #fff;
+            color: #000;
+            outline: none;
           }
         }
 
@@ -103,7 +105,7 @@
       }
 
       .header_text {
-        // color: #3d3c3c;
+        color: var(--d-l-grey);
         font-family: Poppins;
         font-size: 18px;
         font-style: normal;
@@ -152,6 +154,7 @@
         /* Styles for the name and email */
         /* Add your name and email styles here */
         margin-left: 10px;
+        color: var(--d-l-grey);
 
         h4 {
           margin: 0;
@@ -311,6 +314,8 @@
           .name_email {
             /* Styles for the name and email */
             /* Add your name and email styles here */
+            color: var(--d-l-grey);
+
             margin-left: 10px;
             @media (max-width: 768px) {
               margin-left: 0px;
