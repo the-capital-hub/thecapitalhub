@@ -48,7 +48,6 @@ const ColorCard = ({
         .then((res) => {
           console.log("Res-->", res);
           dispatch(setUserCompany(res.data));
-
         })
         .catch((error) => {
           console.error("Error-->", error);
@@ -67,7 +66,7 @@ const ColorCard = ({
 
   return (
     <div
-      className={`${className} colorcard-component card row`}
+      className={`${className} colorcard-component card row border`}
       style={{ background }}
     >
       <div className="col-7 col-sm-6 left-content" style={{ color }}>
@@ -86,7 +85,7 @@ const ColorCard = ({
           ) : (
             <span
               className="rupee-sign"
-              onClick={onAmountChange ? handleEditClick : () => { }}
+              onClick={onAmountChange ? handleEditClick : () => {}}
             >
               {!noRupee && "₹"} {editedAmount}{" "}
               {!isOneLink && !isNotEditable && (
