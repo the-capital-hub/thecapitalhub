@@ -16,6 +16,7 @@
 
     h4 {
       font-size: 26px;
+      color: var(--d-l-grey);
     }
   }
 
@@ -34,7 +35,9 @@
       button {
         margin-right: 20px;
         text-decoration: none;
-        color: #000;
+        // color: #000;
+        color: var(--d-l-grey);
+
         font-family: Poppins;
         font-size: 20px;
         font-style: normal;
@@ -106,6 +109,11 @@
             p {
               margin: 0;
               padding: 0;
+              color: var(--d-l-grey);
+a{
+  color: var(--d-l-grey);
+
+}
             }
             .connection_time {
               font-size: 12px;

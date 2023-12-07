@@ -139,14 +139,18 @@
 
       p {
         font-size: 14px;
-        color: #444;
+        // color: #575757;
+        color: var(--d-l-grey);    
+
         padding: 0;
         margin: 0;
       }
 
       .card_heading {
-        color: #000;
-        font-family: Poppins;
+        // color: #000;
+
+color: var(--d-l-grey);    
+    font-family: Poppins;
         font-size: 14px;
         font-style: normal;
         font-weight: 500;

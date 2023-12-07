@@ -5,7 +5,9 @@ import "./HalfbendCard.scss";
 import pdfIcon from "../../../../../Images/PDFIcon.png";
 import { getPdfData, deleteDocument } from "../../../../../Service/user";
 import { useSelector } from "react-redux";
-import deleteIcon from "../../../../../Images/post/delete.png";
+// import deleteIcon from "../../../../../Images/post/delete.png";
+import { MdDelete } from "react-icons/md";
+
 import AfterSuccessPopup from "../../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import SpinnerBS from "../../../../Shared/Spinner/SpinnerBS";
 // import axios from "axios";
@@ -217,13 +219,18 @@ const HalfbendCard = ({ folderName, userId }) => {
               <div className="d-flex flex-column mx-auto justify-content-center align-items-center">
                 <h6>{item.fileName}</h6>
                 {loggedInUser?._id === item.userId && (
-                  <img
-                    className="delete-img"
-                    src={deleteIcon}
-                    height={50}
-                    alt="deleteIcon"
-                    onClick={() => handleDeleteDoc(item._id)}
+                  // <img
+                  //   className="delete-img"
+                  //   src={deleteIcon}
+                  //   height={50}
+                  //   alt="deleteIcon"
+                  //   onClick={() => handleDeleteDoc(item._id)}
+                  // />
+                  <MdDelete 
+                  size={20}
+                  onClick={() => handleDeleteDoc(item._id)}
                   />
+
                 )}
               </div>
             </div>

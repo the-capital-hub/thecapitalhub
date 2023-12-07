@@ -36,6 +36,9 @@
       width: 40%;
       margin: auto;
       gap: 30px;
+      h1{
+        color: var(--d-l-grey);
+      }
       .foldernames {
         display: flex;
         gap: 20px;
