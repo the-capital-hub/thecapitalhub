@@ -2,6 +2,8 @@
   color: var(--d-l-grey);
 
   .company_details {
+    color: var(--d-l-grey);
+
     /* height: 400px; */
     &.mt-4 {
       margin-top: 4rem;
@@ -113,7 +115,6 @@
       .small_typo {
         font-size: 16px;
         font-family: Poppins;
-        color: var(--d-l-grey);
 
         &.m-2 {
           margin: 0.5rem;
@@ -155,6 +156,7 @@
   }
 
   p {
+    color: var(--bs-secondary);
     font-size: 16px;
     font-family: Poppins;
     line-height: 150%;
@@ -192,7 +194,7 @@
         }
 
         .small_typo {
-          color: var(--d-l-grey);
+          color: #717171;
           font-size: 14px;
           font-family: Poppins;
         }
@@ -213,7 +215,7 @@
       }
 
       .small_typo {
-        color: var(--d-l-grey);
+        color: #717171;
         font-size: 14px;
         font-family: Poppins;
       }
@@ -233,7 +235,7 @@
       }
 
       .small_typo {
-        color: var(--d-l-grey);
+        color: #717171;
         font-size: 14px;
         font-family: Poppins;
       }

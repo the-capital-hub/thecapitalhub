@@ -14,7 +14,7 @@ import { getBase64 } from "../../../utils/getBase64";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import {
   resetChat,
-  updateCreateCommunity,
+  // updateCreateCommunity,
 } from "../../../Store/features/chat/chatSlice";
 
 export default function NewCommunityModal({ theme }) {
@@ -181,9 +181,9 @@ export default function NewCommunityModal({ theme }) {
       {/* Contact search */}
       <div
         className={`search__members d-flex align-items-center gap-2 p-2 rounded-4 ${theme}`}
-        style={{ backgroundColor: "#fafafa" }}
+        style={{ backgroundColor: "var(--bs-light)" }}
       >
-        <BsSearch />
+        <BsSearch color="var(--d-l-grey)" />
         <input
           type="search"
           name="searchContacts"
@@ -207,8 +207,12 @@ export default function NewCommunityModal({ theme }) {
               );
               return (
                 <div
-                  className="p-2 d-flex justify-content-between align-items-center rounded-4 bg-light"
+                  className="contact p-2 d-flex justify-content-between align-items-center rounded-4"
                   key={contact?._id}
+                  style={{
+                    color: "var(--d-l-grey)",
+                    backgroundColor: "var(--bs-light)",
+                  }}
                 >
                   <img
                     src={contact?.profilePicture}

@@ -301,7 +301,7 @@ const Chats = () => {
   return allChatsStatus === "loading" ? (
     <div
       className="d-flex flex-column align-items-center justify-content-center"
-      style={{ minHeight: "100dvh", backgroundColor: "var(--bs-body-bg)" }}
+      style={{ minHeight: "100dvh", backgroundColor: "var(--startup-bg)" }}
       data-bs-theme={theme}
     >
       <TCHLogoLoader />
