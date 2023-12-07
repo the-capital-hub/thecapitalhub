@@ -33,6 +33,7 @@ import toast from "react-hot-toast";
 // import achievement from "../../../../../Images/Investor/Achievements/img_1.png";
 import AchievementToast from "../../../../Toasts/AchievementToast/AchievementToast";
 import { achievementTypes } from "../../../../Toasts/AchievementToast/types";
+import IconChevronBack from "../../../SvgIcons/IconChevronBack";
 
 const OneLinkEditView = () => {
   const dispatch = useDispatch();
@@ -442,14 +443,19 @@ const OneLinkEditView = () => {
         </div>
       </div> */}
       <section className="one_link_edit_view_section w-100 p-3 rounded">
-        <span className="back_img rounded-circle shadow-sm" title="Go Back">
-          <img
+        <span
+          className="back_img rounded-circle shadow-sm d-flex align-items-center justify-content-center"
+          title="Go Back"
+          onClick={() => navigate(-1)}
+        >
+          {/* <img
             src={backIcon}
             alt="go back"
             width={20}
             height={20}
             onClick={() => navigate(-1)}
-          />
+          /> */}
+          <IconChevronBack width={25} height={25} color="var(--d-l-grey)" />
         </span>
         <div className="download_preview p-md-5 ">
           <section className=" img_company_data d-flex flex-column flex-md-row w-100 justify-content-between align-items-center gap-3">

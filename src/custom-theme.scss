@@ -1,3 +1,5 @@
+@import "bootstrap/scss/functions";
+
 :root,
 [data-bs-theme="light"] {
   --bs-blue: #0d6efd;
@@ -335,5 +337,10 @@ $color-mode-type: data;
     label {
       color: var(--bs-gray-100);
     }
+  }
+
+  // modal
+  .modal {
+    background-color: rgba($color: shade-color($body-bg, 50%), $alpha: 0.25);
   }
 }
