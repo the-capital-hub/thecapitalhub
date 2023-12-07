@@ -10,7 +10,7 @@
     }
 
     fieldset {
-      border: 1px solid #e2e2e2;
+      border: 1px solid var(--bs-border-color);
       border-radius: 10px;
       // background-color: #fbfbfb;
       background-color: var(--bs-light);
@@ -53,7 +53,7 @@
     legend {
       margin-left: 2em;
       padding-inline: 1em;
-      color: #3a3a3a;
+      color: var(--darkMode-currentTheme);
       font-size: 12px;
       background-color: var(--bs-light);
       border-radius: 8px;
@@ -92,7 +92,7 @@
     border-radius: 0%;
     &.startup {
       background-color: transparent;
-      color: black;
+      color: var(--d-l-grey);
 
       &:hover {
         background-color: #fd5901;

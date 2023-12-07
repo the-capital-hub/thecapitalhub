@@ -239,7 +239,7 @@ export default function ChatInputContainer({
         {/* Text input */}
         <input
           type="text"
-          className="message"
+          className="message text-black"
           name="introductoryMessage"
           placeholder="Your message..."
           onChange={(e) => setSendText(e.target.value)}
