@@ -156,7 +156,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                       alt="Profile"
                     />
                   </Link>
-                  <h3 className="">
+                  <h3 className="" style={{ color: "var(--d-l-grey)" }}>
                     {loggedInUser?.firstName} {loggedInUser?.lastName}
                   </h3>
                   <h4>{loggedInUser?.email}</h4>
@@ -213,7 +213,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/company-profile"
                   id="sidebar_companyProfile"
                 >
-                  <HiOutlineOfficeBuilding size={25}  />
+                  <HiOutlineOfficeBuilding size={25} />
                   {!sidebarCollapsed && <span>Company</span>}
                 </Link>
               </MenuItem>
@@ -412,7 +412,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   {!sidebarCollapsed && <span>Learn More</span>}
                 </Link>
               </MenuItem>
-              <hr className="hr-above-support" />
+              {/* <hr className="hr-above-support" /> */}
               {/* <MenuItem
                 active={location.pathname.includes("/support")}
                 className="active-item"
@@ -430,8 +430,10 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           <SidebarFooter>
             <Menu iconShape="round">
               <MenuItem onClick={handleLogout}>
-                <IoExitOutline size={25} />
-                {!sidebarCollapsed && <span>Log out</span>}
+                <div className="d-flex justify-content-center align-items-center">
+                  <IoExitOutline size={25} />
+                  {!sidebarCollapsed && <span>Log out</span>}
+                </div>
               </MenuItem>
             </Menu>
           </SidebarFooter>

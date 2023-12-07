@@ -13,7 +13,7 @@
   }
 
   .popup-content {
-    background-color: #fff;
+    background-color: var(--white-to-grey);
     padding: 40px;
     text-align: center;
     border-radius: var(--border-radius);
@@ -25,7 +25,7 @@
     gap: 1em;
 
     h1 {
-      color: #000;
+      color: var(--d-l-grey);
       font-family: Poppins;
       font-size: 34px;
       font-style: normal;
@@ -36,7 +36,7 @@
     .text_section {
       padding: 10px;
 
-      color: #515151;
+      color: var(--d-l-grey);
       font-family: Poppins;
       font-size: 16px;
       font-style: normal;
@@ -51,7 +51,7 @@
     }
 
     .share_link {
-      color: #fd5901;
+      color: var(--currentTheme);
     }
 
     .key_form {
@@ -68,6 +68,7 @@
         margin-inline: auto;
         border: 1px solid #e7e7e7;
         transition: border 0.15s ease-in;
+        color: var(--d-l-grey);
 
         &:focus-within {
           border: 1px solid #fd5901;
@@ -83,7 +84,7 @@
           text-align: center;
 
           background-color: transparent;
-          color: black;
+          color: var(--d-l-grey);
           // border: 1px solid blue;
         }
       }

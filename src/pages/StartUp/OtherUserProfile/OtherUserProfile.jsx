@@ -83,12 +83,12 @@ function OtherUserProfile() {
                       <h3 className="typography h3">
                         {userData?.firstName} {userData?.lastName}
                       </h3>
-                      <span className="small_typo">
+                      <span className="text-secondary small_typo">
                         {userData?.designation ||
                           "Founder & CEO of The Capital Hub"}
                       </span>
                       <br />
-                      <span className="small_typo">
+                      <span className="text-secondary small_typo">
                         {userData?.location || "Bangalore , India"}
                       </span>
                     </div>
@@ -135,26 +135,26 @@ function OtherUserProfile() {
                     <span className="col-md-3 label fw-bold">
                       Current Company
                     </span>
-                    <span className="col-md-9 value">
+                    <span className="col-md-9 text-secondary value">
                       {userData?.startUp?.company ||
                         userData?.investor?.companyName}
                     </span>
                   </div>
                   <div className="single_details row row-cols-1 row-cols-md-2 ">
                     <span className="col-md-3 label fw-bold">Designation</span>
-                    <span className="col-md-9 value">
+                    <span className="col-md-9 text-secondary value">
                       {userData?.designation}
                     </span>
                   </div>
                   <div className="single_details row row-cols-1 row-cols-md-2 ">
                     <span className="col-md-3 label fw-bold">Education</span>
-                    <span className="col-md-9 value">
+                    <span className="col-md-9 text-secondary value">
                       {userData?.education}
                     </span>
                   </div>
                   <div className="single_details row row-cols-1 row-cols-md-2 ">
                     <span className="col-md-3 label fw-bold">Experience</span>
-                    <span className="col-md-9 value">
+                    <span className="col-md-9 text-secondary value">
                       {userData?.experience}
                     </span>
                   </div>
@@ -237,7 +237,7 @@ function OtherUserProfile() {
                     <div className="bio rounded-4 border shadow-sm profile_container">
                       <h4 className="h4">Bio</h4>
                       <div className="single_education">
-                        <h6 className="h6">{userData?.bio}</h6>
+                        <h6 className="h6 text-secondary">{userData?.bio}</h6>
                       </div>
                     </div>
                   ) : (
