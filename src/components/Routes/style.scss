@@ -1,5 +1,5 @@
 .investor-private-routes {
-  background-color: var(--bs-body-bg);
+  background-color: var(--startup-bg);
   .investor_home_container {
     display: flex;
     // background-color: #eaeef2;
@@ -146,7 +146,7 @@
         max-width: 100%;
         overflow: hidden;
         // background-color: #eaeef2;
-        background-color: var(--bs-body-bg);
+        background-color: var(--startup-bg);
       }
 
       // Add a class to handle the sidebar collapsed state
