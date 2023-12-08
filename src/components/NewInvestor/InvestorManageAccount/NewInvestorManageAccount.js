@@ -19,7 +19,7 @@ import { fetchCompanyData } from "../../../Store/features/user/userThunks";
 import toast from "react-hot-toast";
 import { clearAllChatsData } from "../../../Store/features/chat/chatSlice";
 import { fetchAllChats } from "../../../Store/features/chat/chatThunks";
-import { MdDarkMode } from "react-icons/md";
+import { MdDarkMode, MdDelete } from "react-icons/md";
 import { GoSun } from "react-icons/go";
 
 const InvestorManageAccount = () => {
@@ -244,7 +244,7 @@ const InvestorManageAccount = () => {
                   {/* Footer */}
                   <div className="footer d-flex flex-wrap">
                     <Link to="/profile" className="btn-delete">
-                      <button className="btn">View profile</button>
+                      <button className="btn text-dark">View profile</button>
                     </Link>
                     <button
                       className=" btn-delete"
@@ -346,11 +346,13 @@ const InvestorManageAccount = () => {
                               className="img-btn  pt-md-2"
                               onClick={() => handleRemoveAccount(account)}
                             >
-                              <img
+                              {/* <img
                                 src={deleteIcon}
                                 alt="delete icon"
                                 className="deleteIcon"
-                              />
+                              /> */}
+                              <MdDelete size={25}/>
+
                             </button>
                           </div>
                         </div>

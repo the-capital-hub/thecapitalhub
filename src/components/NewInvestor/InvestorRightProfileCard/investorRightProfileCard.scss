@@ -2,8 +2,9 @@
   .view_profile {
     // height: 500px;
     flex-shrink: 0;
-    border: 1px solid #dcdcdc;
-    background-color: white;
+    border: 1px solid var(--bs-border-color);
+    // background-color: white;
+    background: var(--white-to-grey);
     border-radius: var(--border-radius);
     // box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
     padding-top: 2rem;
@@ -93,7 +94,8 @@
     align-items: center;
 
     .typography {
-      color: #000;
+      // color: #000;
+      color: var(--d-l-grey);
       font-size: 20px;
       font-family: Poppins;
       font-weight: 600;
