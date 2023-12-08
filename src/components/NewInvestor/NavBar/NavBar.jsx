@@ -31,7 +31,7 @@ import {
 import OnboardingSwitch from "../../Investor/InvestorNavbar/OnboardingSwitch/OnboardingSwitch";
 import { IoIosSearch, IoMdNotificationsOutline } from "react-icons/io";
 import { AiOutlineMessage } from "react-icons/ai";
-import { IoReorderThreeOutline } from "react-icons/io5";
+import { IoClose, IoReorderThreeOutline } from "react-icons/io5";
 
 const NavBar = (props) => {
   // Fetch global states
@@ -123,11 +123,11 @@ const NavBar = (props) => {
               >
                 {props.sidebarCollapsed ? (
                   // <img src={HambergerIcon} alt="bar" />
-                  <IoReorderThreeOutline size={25} style={{fill:"var(--d-l-grey)"}}/>
+                  <IoReorderThreeOutline size={25} style={{fill:"var(--d-l-grey)", stroke:"var(--d-l-grey)"}}/>
 
                 ) : (
                   // <img src={HambergerCrossIcon} alt="bar" />
-                  <IoReorderThreeOutline size={25} style={{fill:"var(--d-l-grey)"}}/>
+                  <IoClose size={25} style={{fill:"var(--d-l-grey)", stroke:"var(--d-l-grey)"}} />
 
                 )}
                 <h1 className="ms-2">{pageTitle}</h1>
