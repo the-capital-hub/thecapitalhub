@@ -23,7 +23,7 @@
   }
 
   .typography {
-    color: #000;
+    color: var(--d-l-grey);
     font-size: 20px;
     font-family: Poppins;
     font-weight: 600;
@@ -52,9 +52,8 @@
   }
 
   .box {
-    background-color: #fff;
+    background-color: var(--white-to-grey);
     padding: 10px;
-    background: #fff;
   }
 
   // .bio_container {
@@ -118,6 +117,10 @@
       font-size: 18px;
       font-family: Poppins;
       cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
@@ -166,6 +169,10 @@
     font-size: 18px;
     font-family: Poppins;
     cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .designation_info {

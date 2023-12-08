@@ -49,7 +49,7 @@ export default function OtherInvestorProfile() {
 
   return (
     <MaxWidthWrapper>
-      <div className="otherInvestorProfile_wrapper d-flex flex-column gap-4 px-1 px-sm-3 pb-4 border-start">
+      <div className="otherInvestorProfile_wrapper d-flex flex-column gap-4 px-1 px-sm-3 pb-4">
         {/* Small profile Section */}
         {/* <section className="">
           <SmallProfileCard text="User Details" />
@@ -57,11 +57,15 @@ export default function OtherInvestorProfile() {
         {/* Profile Header section */}
         {userData ? (
           <section className="otherInvestor_header">
-            <ProfileHeader userData={userData} loggedInUser={loggedInUser} setConnectionSent={setConnectionSent} />
+            <ProfileHeader
+              userData={userData}
+              loggedInUser={loggedInUser}
+              setConnectionSent={setConnectionSent}
+            />
           </section>
         ) : (
-          <div className="bg-white rounded-4 border py-4 w-100">
-            <SpinnerBS />
+          <div className="d-flex py-5 justify-content-center align-items-center w-100 white-to-grey">
+            <SpinnerBS colorClass={"d-l-grey"} />
           </div>
         )}
         <div className="two_column_wrapper">
@@ -112,10 +116,10 @@ export default function OtherInvestorProfile() {
               </div> */}
               {/* bio */}
               {userData?.bio ? (
-                <div className="bio bg-white p-4 rounded-4 border shadow-sm profile_container">
-                  <h4 className="h4">Bio</h4>
+                <div className="bio white-to-grey p-4 rounded-4 border shadow-sm profile_container">
+                  <h4 className="h4 d-l-grey">Bio</h4>
                   <div className="single_education">
-                    <h6 className="h6">{userData?.bio}</h6>
+                    <h6 className="h6 text-secondary">{userData?.bio}</h6>
                   </div>
                 </div>
               ) : (
@@ -174,8 +178,8 @@ export default function OtherInvestorProfile() {
               </div>
             </section>
           ) : (
-            <div className="bg-white rounded-4 border py-4 w-100">
-              <SpinnerBS />
+            <div className="d-flex py-5 justify-content-center align-items-center w-100 white-to-grey">
+              <SpinnerBS colorClass={"d-l-grey"} />
             </div>
           )}
           {/* Right Section */}

@@ -92,7 +92,9 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCompanyData.fulfilled, (state, action) => {
-      localStorage.setItem("userCompanyData", JSON.stringify(action.payload));
+      if (action.payload) {
+        localStorage.setItem("userCompanyData", JSON.stringify(action.payload));
+      }
       state.company = action.payload;
       state.error = null;
     });

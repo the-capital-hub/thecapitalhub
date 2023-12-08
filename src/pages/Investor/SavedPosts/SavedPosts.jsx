@@ -39,7 +39,7 @@ export default function SavedPosts() {
 
           {/* Saved posts heading */}
           <div className="savedPosts__heading">
-            <h4 className="bg-white border rounded-4 shadow-sm p-3">
+            <h4 className="white-to-grey d-l-grey border rounded-4 shadow-sm p-3">
               Find all your saved posts here.
             </h4>
           </div>

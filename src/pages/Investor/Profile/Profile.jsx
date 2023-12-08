@@ -74,6 +74,7 @@ function Profile() {
 
             {/* Achievements */}
             <AchievementsComponent />
+
             {/* Startups Invested In */}
             <StartupsInvested />
 

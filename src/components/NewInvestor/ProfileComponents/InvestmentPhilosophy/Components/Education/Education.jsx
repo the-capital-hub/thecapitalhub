@@ -13,12 +13,14 @@ export default function Education() {
       <div className="education border rounded-4 mx-md-4 shadow-sm">
         <div className="flex-md-row header">
           <h5 className="green_underline h5">Education</h5>
-          <div className="">
-            <ModalBsLauncher className={"green_button"} id={"educationModal"}>
-              <span>Add </span>
-              <span className="d-none d-md-inline-block">Education</span>
-            </ModalBsLauncher>
-          </div>
+
+          <ModalBsLauncher
+            className={"btn btn-investor w-auto"}
+            id={"educationModal"}
+          >
+            <span>Add </span>
+            <span className="d-none d-md-inline-block">Education</span>
+          </ModalBsLauncher>
         </div>
         <div className="experience_cards">
           {/* loop cards here */}

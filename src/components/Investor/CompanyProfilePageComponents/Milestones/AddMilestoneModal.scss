@@ -1,4 +1,13 @@
 .milestone_modal_container {
+  .current_milestone {
+    background: var(--white-to-grey);
+  }
+  .add_milestone{
+    background: var(--white-to-grey);
+h5{
+  color: var(--d-l-grey);
+}
+  }
   .badges__container {
     // Scrollbars
     &::-webkit-scrollbar {

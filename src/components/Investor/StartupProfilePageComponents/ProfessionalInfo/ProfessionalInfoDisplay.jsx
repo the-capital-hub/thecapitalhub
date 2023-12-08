@@ -52,7 +52,7 @@ export default function ProfessionalInfoDisplay({
                 <CiEdit />
               </button>
               {isEditing && (
-                <button className="ms-2" onClick={handleSubmit}>
+                <button className="btn ms-2" onClick={handleSubmit}>
                   {loading ? (
                     <SpinnerBS spinnerSizeClass="spinner-border-sm" />
                   ) : (

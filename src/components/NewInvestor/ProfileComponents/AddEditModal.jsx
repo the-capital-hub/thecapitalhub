@@ -1,7 +1,7 @@
 import { AiFillDelete } from "react-icons/ai";
 import { CiEdit } from "react-icons/ci";
 import { BsFillCloudUploadFill } from "react-icons/bs";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getBase64 } from "../../../utils/getBase64";
 import {
   addStartupInvested,
@@ -228,14 +228,14 @@ export default function AddEditModal({
                 />
                 <h6 className="green_underline ">{startUp.name}</h6>
                 <div className="d-flex gap-2">
-                  {!startUp.companyId &&
+                  {!startUp.companyId && (
                     <button
-                      className="btn green_button px-3"
+                      className="btn btn-investor px-3"
                       onClick={() => handleEdit(index)}
                     >
                       <CiEdit style={{ color: "", backgroundColor: "" }} />
                     </button>
-                  }
+                  )}
 
                   <button
                     className="btn btn-danger"
@@ -273,7 +273,7 @@ export default function AddEditModal({
                 <div className="">
                   <label
                     htmlFor="companyImage"
-                    className="text-black fw-lighter upload__label  "
+                    className="fw-lighter upload__label  "
                   >
                     <BsFillCloudUploadFill
                       style={{
@@ -373,16 +373,16 @@ export default function AddEditModal({
 
             <div className="d-flex justify-between">
               <button
-                className="btn green_button w-auto fs-6"
+                className="btn btn-investor w-auto fs-6"
                 type="button"
                 onClick={resetFormData}
               >
                 Clear
               </button>
               <button
-                className="btn green_button w-auto fs-6 ms-2"
+                className="btn btn-investor w-auto fs-6 ms-2"
                 type="submit"
-              // data-bs-dismiss="modal"
+                // data-bs-dismiss="modal"
               >
                 {loading ? (
                   <SpinnerBS

@@ -67,10 +67,13 @@
       color: black;
       padding: 1em 0.5em;
       width: 100%;
+      background: var(--bs-light);
     }
 
     .date_input {
       outline: none;
+      background: var(--bs-light);
+
     }
 
     .date_input::-webkit-calendar-picker-indicator {
@@ -79,10 +82,12 @@
     }
 
     .tag {
-      background-color: #eaeef2;
+      background-color: var(--tag-box);
     }
 
     .link__text__clip {
+      background: var(--bs-light);
+
       // width: 5ch;
       white-space: nowrap;
       overflow: hidden;

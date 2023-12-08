@@ -2,6 +2,9 @@ import { Schema, model } from "mongoose";
 
 const messageSchema = new Schema(
   {
+    id: {
+      type: String,
+    },
     chatId: {
       type: Schema.Types.ObjectId,
       ref: "Chats",
@@ -32,7 +35,7 @@ const messageSchema = new Schema(
     readBy: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Users", 
+        ref: "Users",
       },
     ],
   },

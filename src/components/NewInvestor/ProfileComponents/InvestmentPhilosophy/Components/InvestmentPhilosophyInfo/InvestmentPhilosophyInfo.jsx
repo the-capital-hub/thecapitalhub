@@ -144,7 +144,7 @@ export default function InvestmentPhilosophyInfo() {
             style={{ marginRight: "30px" }}
           >
             <button
-              className="edit_button"
+              className="btn edit_button"
               onClick={() => setIsEditing(!isEditing)}
               type="button"
             >
@@ -153,7 +153,7 @@ export default function InvestmentPhilosophyInfo() {
             </button>
             {isEditing && (
               <button
-                className="edit_button"
+                className="btn edit_button"
                 //   onClick={() => submitInvestmentPhilosophyChange()}
                 type="submit"
               >

@@ -1,13 +1,13 @@
 import React from "react";
 import "./NavBar.scss";
-import searchIconBlack from "../../../Images/navbar/Search.svg";
+// import searchIconBlack from "../../../Images/navbar/Search.svg";
 import Logo from "../../../Images/investorIcon/new-logo.png";
-import NotificationIcon from "../../../Images/investorIcon/notification.svg";
+// import NotificationIcon from "../../../Images/investorIcon/notification.svg";
 import YellowNotificationIcon from "../../../Images/investorIcon/YellowNotificationIcon.svg";
-import MessageIcon from "../../../Images/investorIcon/message.svg";
+// import MessageIcon from "../../../Images/investorIcon/message.svg";
 import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
-import HambergerIcon from "../../../Images/Hamberger.svg";
-import HambergerCrossIcon from "../../../Images/investorsidebar/FontX.svg";
+// import HambergerIcon from "../../../Images/Hamberger.svg";
+// import HambergerCrossIcon from "../../../Images/investorsidebar/FontX.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -29,6 +29,9 @@ import {
   setUnreadNotifications,
 } from "../../../Store/features/user/userSlice";
 import OnboardingSwitch from "../../Investor/InvestorNavbar/OnboardingSwitch/OnboardingSwitch";
+import { IoIosSearch, IoMdNotificationsOutline } from "react-icons/io";
+import { AiOutlineMessage } from "react-icons/ai";
+import { IoClose, IoReorderThreeOutline } from "react-icons/io5";
 
 const NavBar = (props) => {
   // Fetch global states
@@ -55,7 +58,7 @@ const NavBar = (props) => {
         dispatch(setUnreadNotifications(data.unreadCount));
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [dispatch]);
 
   const searchInputHandler = async ({ target }) => {
     try {
@@ -119,9 +122,23 @@ const NavBar = (props) => {
                 onClick={props.handleSidebarToggle}
               >
                 {props.sidebarCollapsed ? (
-                  <img src={HambergerIcon} alt="bar" />
+                  // <img src={HambergerIcon} alt="bar" />
+                  <IoReorderThreeOutline
+                    size={25}
+                    style={{
+                      fill: "var(--d-l-grey)",
+                      stroke: "var(--d-l-grey)",
+                    }}
+                  />
                 ) : (
-                  <img src={HambergerCrossIcon} alt="bar" />
+                  // <img src={HambergerCrossIcon} alt="bar" />
+                  <IoClose
+                    size={25}
+                    style={{
+                      fill: "var(--d-l-grey)",
+                      stroke: "var(--d-l-grey)",
+                    }}
+                  />
                 )}
                 <h1 className="ms-2">{pageTitle}</h1>
               </div>
@@ -240,7 +257,8 @@ const NavBar = (props) => {
                   className="notification-icon"
                   onClick={() => setMobileSearch((prev) => !prev)}
                 >
-                  <img src={searchIconBlack} alt="search" />
+                  {/* <img src={searchIconBlack} alt="search" /> */}
+                  <IoIosSearch size={30} style={{ fill: "var(--d-l-grey)" }} />
                 </span>
 
                 {mobileSearch && (
@@ -386,20 +404,31 @@ const NavBar = (props) => {
                         setToggleNotificationPopup((prev) => !prev)
                       }
                     />
+
                     <NotificationsPopup
                       toggleVisibility={setToggleNotificationPopup}
                     />
                   </>
                 ) : (
                   <>
-                    <img
+                    {/* <img
                       src={NotificationIcon}
                       alt="notification"
                       onClick={() => {
                         dispatch(setUnreadNotifications(0));
                         setToggleNotificationPopup((prev) => !prev);
                       }}
+                    /> */}
+
+                    <IoMdNotificationsOutline
+                      size={30}
+                      style={{ fill: "var(--d-l-grey)" }}
+                      onClick={() => {
+                        dispatch(setUnreadNotifications(0));
+                        setToggleNotificationPopup((prev) => !prev);
+                      }}
                     />
+
                     {!toggleNotificationPopup && unreadNotifications > 0 && (
                       <div className="notification-count">
                         {unreadNotifications}
@@ -411,7 +440,11 @@ const NavBar = (props) => {
               {/* </Link> */}
               <Link to="/chats" className="rounded-circle message-icon">
                 <div className="icon-wrapper">
-                  <img src={MessageIcon} alt="message" />
+                  {/* <img src={MessageIcon} alt="message" /> */}
+                  <AiOutlineMessage
+                    size={28}
+                    style={{ fill: "var(--d-l-grey)" }}
+                  />
                 </div>
               </Link>
               {/* <div className="icon-wrapper d-none d-md-block"> */}

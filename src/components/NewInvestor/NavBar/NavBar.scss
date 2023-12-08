@@ -3,13 +3,15 @@
     height: 80px;
     left: 60px;
     top: 39px;
-    background: #ffffff;
+    // background: #ffffff;
+    background: var(--white-to-grey);
+
     box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.05);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: 1;
 
     @media (min-width: 768px) {
       border-radius: 20px;
@@ -53,7 +55,9 @@
 
           .searchbar-input {
             height: 49px;
-            background: rgba(205, 205, 205, 1);
+            // background: rgba(205, 205, 205, 1);
+            background: var(--bs-light);
+
             border-radius: 20px;
             border: none;
             transition: width 0.4s ease;
@@ -115,6 +119,7 @@
 
         .notification-container {
           position: relative;
+          cursor: pointer;
 
           .notification-count {
             position: absolute;
@@ -157,7 +162,8 @@
 
           @media (min-width: 768px) {
             // margin-left: 1.5rem;
-            background: #eaeef2;
+            // background: #eaeef2;
+            background: var(--bs-light);
           }
 
           .notification-icon,
@@ -214,7 +220,8 @@
           margin-left: 15px;
 
           h1 {
-            color: #000;
+            // color: #000;
+            color: var(--d-l-grey);
             font-family: Poppins;
             font-size: 16px;
             font-style: normal;
@@ -353,7 +360,7 @@
           margin-left: 15px;
 
           h1 {
-            color: #000;
+            color: var(--d-l-grey);
             font-family: Poppins;
             font-size: 14px;
             font-style: normal;

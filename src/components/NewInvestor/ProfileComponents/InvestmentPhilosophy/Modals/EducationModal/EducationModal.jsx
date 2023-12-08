@@ -258,7 +258,7 @@ export default function EducationModal() {
               <div className="d-flex gap-3 align-items-center">
                 <button
                   type="button"
-                  className="green_button"
+                  className="btn btn-investor"
                   onClick={() => clearStates()}
                   disabled={loading}
                 >
@@ -266,7 +266,7 @@ export default function EducationModal() {
                 </button>
                 <button
                   type="submit"
-                  className="green_button"
+                  className="btn btn-investor"
                   disabled={loading}
                 >
                   {loading ? (

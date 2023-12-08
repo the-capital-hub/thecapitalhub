@@ -140,7 +140,7 @@
       p {
         font-size: 14px;
         // color: #575757;
-        color: var(--d-l-grey);    
+        color: var(--d-l-grey);
 
         padding: 0;
         margin: 0;
@@ -149,8 +149,8 @@
       .card_heading {
         // color: #000;
 
-color: var(--d-l-grey);    
-    font-family: Poppins;
+        color: var(--d-l-grey);
+        font-family: Poppins;
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
@@ -163,9 +163,9 @@ color: var(--d-l-grey);
         // svg{
         //   border: 1px solid red;
         // }
-.btn{
-  background-color: var(--bs-light);
-}
+        .btn {
+          background-color: var(--bs-light);
+        }
         .kebab_menu {
           position: absolute;
           top: 100%;
