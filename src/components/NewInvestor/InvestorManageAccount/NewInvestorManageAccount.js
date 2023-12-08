@@ -12,13 +12,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../../Store/features/user/userSlice";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
-import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { selectTheme, setPageTitle, toggleTheme } from "../../../Store/features/design/designSlice";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
 import deleteIcon from "../../../Images/post/delete.png";
 import { fetchCompanyData } from "../../../Store/features/user/userThunks";
 import toast from "react-hot-toast";
 import { clearAllChatsData } from "../../../Store/features/chat/chatSlice";
 import { fetchAllChats } from "../../../Store/features/chat/chatThunks";
+import { MdDarkMode } from "react-icons/md";
+import { GoSun } from "react-icons/go";
 
 const InvestorManageAccount = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -29,6 +31,7 @@ const InvestorManageAccount = () => {
   const [selectedAccount, setSelectedAcc] = useState(loggedInUser);
   const [selectedAccountFull, setSelectedAccFull] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const theme = useSelector(selectTheme);
 
   const initialForm = {
     oldPassword: "",
@@ -259,6 +262,15 @@ const InvestorManageAccount = () => {
                       />
                     )}
                   </div>
+                </div>
+                <div className="toggle-theme d-flex">
+                  <button
+                    className="btn btn-dark text-capitalize mx-auto my-2"
+                    onClick={() => dispatch(toggleTheme())}
+                  >
+                    {theme === "light" ? <GoSun /> : <MdDarkMode />} {theme}{" "}
+                    mode
+                  </button>
                 </div>
               </section>
 
