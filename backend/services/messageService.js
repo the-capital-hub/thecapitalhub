@@ -1,7 +1,7 @@
 import { MessageModel } from "../models/Message.js";
 import { cloudinary } from "../utils/uploadImage.js";
 
-export const addMessage = async (chatId, senderId, text, documentName, documentUrl, image, video) => {
+export const addMessage = async (id, chatId, senderId, text, documentName, documentUrl, image, video) => {
   try {
     if (image) {
       const { secure_url } = await cloudinary.uploader.upload(image, {
@@ -20,6 +20,7 @@ export const addMessage = async (chatId, senderId, text, documentName, documentU
       video = secure_url;
     }
     const message = new MessageModel({
+      id,
       chatId,
       senderId,
       text,
@@ -137,7 +138,7 @@ export const clearAllMessages = async (chatId) => {
 
 export const deleteMessage = async (messageId) => {
   try {
-    const deletedMessage = await MessageModel.findByIdAndDelete(messageId);
+    const deletedMessage = await MessageModel.findOneAndDelete({ id: messageId });
 
     if (!deletedMessage) {
       return {
