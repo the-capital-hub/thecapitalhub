@@ -196,7 +196,7 @@ const Connection = () => {
                               <p className="connection_name h5">
                                 <Link
                                   to={`/investor/user/${sender?._id}`}
-                                  className=" text-black text-decoration-none"
+                                  className="  text-decoration-none"
                                 >
                                   {`${sender.firstName} ${sender.lastName}`}
                                 </Link>
@@ -256,7 +256,7 @@ const Connection = () => {
                                 <p className="connection_name h5">
                                   <Link
                                     to={`/investor/user/${receiver?._id}`}
-                                    className=" text-black text-decoration-none"
+                                    className=" text-decoration-none"
                                   >
                                     {`${receiver?.firstName} ${receiver?.lastName}`}
                                   </Link>
@@ -306,7 +306,7 @@ const Connection = () => {
                             <p className="connection_name h5">
                               <Link
                                 to={`/investor/user/${data._id}`}
-                                className=" text-black text-decoration-none"
+                                className="  text-decoration-none"
                               >
                                 {`${data.firstName ? data.firstName : "name"} ${
                                   data.lastName ? data.lastName : ""

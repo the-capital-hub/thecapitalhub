@@ -29,8 +29,9 @@ import {
   setUnreadNotifications,
 } from "../../../Store/features/user/userSlice";
 import OnboardingSwitch from "../../Investor/InvestorNavbar/OnboardingSwitch/OnboardingSwitch";
-import { IoMdNotificationsOutline } from "react-icons/io";
+import { IoIosSearch, IoMdNotificationsOutline } from "react-icons/io";
 import { AiOutlineMessage } from "react-icons/ai";
+import { IoReorderThreeOutline } from "react-icons/io5";
 
 const NavBar = (props) => {
   // Fetch global states
@@ -121,9 +122,13 @@ const NavBar = (props) => {
                 onClick={props.handleSidebarToggle}
               >
                 {props.sidebarCollapsed ? (
-                  <img src={HambergerIcon} alt="bar" />
+                  // <img src={HambergerIcon} alt="bar" />
+                  <IoReorderThreeOutline size={25} style={{fill:"var(--d-l-grey)"}}/>
+
                 ) : (
-                  <img src={HambergerCrossIcon} alt="bar" />
+                  // <img src={HambergerCrossIcon} alt="bar" />
+                  <IoReorderThreeOutline size={25} style={{fill:"var(--d-l-grey)"}}/>
+
                 )}
                 <h1 className="ms-2">{pageTitle}</h1>
               </div>
@@ -242,7 +247,9 @@ const NavBar = (props) => {
                   className="notification-icon"
                   onClick={() => setMobileSearch((prev) => !prev)}
                 >
-                  <img src={searchIconBlack} alt="search" />
+                  {/* <img src={searchIconBlack} alt="search" /> */}
+                  <IoIosSearch size={30} style={{fill:"var(--d-l-grey)"}} />
+
                 </span>
 
                 {mobileSearch && (

@@ -116,7 +116,9 @@
 @media (max-width: 468px) {
   .new-investor-private-routes {
     .newInvestor_container {
-      background-color: #f9faf3;
+      // background-color: #f9faf3;
+      background-color: var(--investor-bg);
+
       .sidebar {
         left: 0;
         bottom: 0;

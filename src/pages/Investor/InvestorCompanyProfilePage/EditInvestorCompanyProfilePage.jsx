@@ -182,7 +182,7 @@ export default function EditInvestorCompanyProfilePage() {
           />
 
           <div
-            className="bg-white rounded-4 p-5 border"
+            className="CompanyProfileForm rounded-4 p-5 border"
             id="profileFormContainer"
           >
             <CompanyProfileForm
@@ -206,7 +206,7 @@ export default function EditInvestorCompanyProfilePage() {
           />
 
           {/* Core Team */}
-          <div className="core__team bg-white rounded-4 p-5 d-flex flex-column gap-4 border">
+          <div className="core__team  rounded-4 p-5 d-flex flex-column gap-4 border">
             <CoreTeam
               companyData={companyData}
               setCompanyData={setCompanyData}
@@ -215,7 +215,7 @@ export default function EditInvestorCompanyProfilePage() {
           </div>
 
           {/* Milestones */}
-          <div className="milestones__component bg-white rounded-4 p-5 d-flex flex-column gap-4 border">
+          <div className="milestones__component  rounded-4 p-5 d-flex flex-column gap-4 border">
             <Milestones theme={"investor"} />
           </div>
 
