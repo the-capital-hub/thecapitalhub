@@ -12,8 +12,8 @@ import {
 
 export const addMessageController = async (req, res) => {
   try {
-    const { chatId, senderId, text, documentName, documentUrl, image, video } = req.body;
-    const response = await addMessage(chatId, senderId, text, documentName, documentUrl, image, video);
+    const { id, chatId, senderId, text, documentName, documentUrl, image, video } = req.body;
+    const response = await addMessage(id, chatId, senderId, text, documentName, documentUrl, image, video);
     return res.status(response.status).send(response);
   } catch (error) {
     console.error(error);
