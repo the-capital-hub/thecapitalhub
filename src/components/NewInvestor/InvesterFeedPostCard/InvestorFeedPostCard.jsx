@@ -41,7 +41,12 @@ import deleteIcon from "../../../Images/post/delete.png";
 import { FaRegCommentDots, FaCommentDots } from "react-icons/fa6";
 import CustomModal from "../../PopUp/Modal/Modal";
 import { Modal } from "react-bootstrap";
-
+import { GoHome } from "react-icons/go";
+import { IoLocationOutline } from "react-icons/io5";
+import { BsFire, BsThreeDots } from "react-icons/bs";
+import { BiRepost } from "react-icons/bi";
+import { FaBookmark, FaRegBookmark } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 const FeedPostCard = ({
   postId,
@@ -82,7 +87,6 @@ const FeedPostCard = ({
   const [expanded, setExpanded] = useState(false);
   const [likeModal, setLikeModal] = useState(false);
   const [activeHeader, setActiveHeader] = useState(true);
-
 
   const handleShow = () => setLikeModal(true);
   const handleClose = () => setLikeModal(false);
@@ -333,8 +337,9 @@ const FeedPostCard = ({
       <div className="row investor_feedpostcard_main_container mb-2">
         <div className="col-12">
           <div
-            className={`box feedpostcard_container mt-2 border ${repostPreview && "rounded-4 shadow-sm"
-              }`}
+            className={`box feedpostcard_container mt-2 border ${
+              repostPreview && "rounded-4 shadow-sm"
+            }`}
           >
             {loading && (
               <div className="d-flex justify-content-center my-4">
@@ -346,10 +351,11 @@ const FeedPostCard = ({
             <div className="  feed_header_container border-2 border-bottom mb-3 pb-2">
               <div className="feedpostcard_content">
                 <Link
-                  to={`${loggedInUser?.isInvestor === "true"
-                    ? `/investor/user/${userId}`
-                    : `/user/${userId}`
-                    }`}
+                  to={`${
+                    loggedInUser?.isInvestor === "true"
+                      ? `/investor/user/${userId}`
+                      : `/user/${userId}`
+                  }`}
                   className="rounded-circle"
                 >
                   <img
@@ -366,12 +372,17 @@ const FeedPostCard = ({
                 </Link>
                 <div className="feedpostcart_text_header my-1">
                   <Link
-                    to={`${loggedInUser?.isInvestor === "true"
-                      ? `/investor/user/${userId}`
-                      : `/user/${userId}`
-                      }`}
+                    to={`${
+                      loggedInUser?.isInvestor === "true"
+                        ? `/investor/user/${userId}`
+                        : `/user/${userId}`
+                    }`}
                     className="text-decoration-none"
-                    style={{ fontSize: "18px", fontWeight: 600, color: "#000" }}
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: 600,
+                      color: "var(--d-l-grey)",
+                    }}
                   >
                     {firstName + " " + lastName}
                   </Link>
@@ -380,10 +391,11 @@ const FeedPostCard = ({
                       style={{
                         fontSize: "12px",
                         fontWeight: 500,
-                        color: "#000",
+                        color: "var(--d-l-grey)",
                       }}
                     >
-                      <img src={HomeIcon} alt="logo" />
+                      {/* <img src={HomeIcon} alt="logo" /> */}
+                      <GoHome size={15} />
                       {designation},{" "}
                       {investorCompanyName?.companyName
                         ? investorCompanyName?.companyName
@@ -393,15 +405,17 @@ const FeedPostCard = ({
                       style={{
                         fontSize: "12px",
                         fontWeight: 500,
-                        color: "#000",
+                        color: "var(--d-l-grey)",
                       }}
                     >
-                      <img src={locationIcon} alt="logo" />
+                      {/* <img src={locationIcon} alt="logo" /> */}
+                      <IoLocationOutline size={15} />
                       Bangalore, India
                     </span>
                   </span>
                   <span
-                    style={{ fontSize: "12px", fontWeight: 500, color: "#000" }}
+                    style={{ fontSize: "12px", fontWeight: 500 }}
+                    className="text-secondary"
                   >
                     <TimeAgo datetime={createdAt} locale="" />
                   </span>
@@ -413,7 +427,7 @@ const FeedPostCard = ({
                     className="kebab_menu_container"
                     ref={kebabMenuContainerRef}
                   >
-                    <img
+                    {/* <img
                       src={ThreeODotIcon}
                       alt="dot"
                       className="me-md-3 p-md-2"
@@ -425,7 +439,20 @@ const FeedPostCard = ({
                           setKebabMenuVisible(false);
                         }, 100);
                       }}
+                    /> */}
+                    <BsThreeDots
+                      size={25}
+                      style={{ fill: "var(--d-l-grey)" }}
+                      onClick={() => {
+                        setKebabMenuVisible(!kebabMenuVisible);
+                      }}
+                      onBlurCapture={() => {
+                        setTimeout(() => {
+                          setKebabMenuVisible(false);
+                        }, 100);
+                      }}
                     />
+
                     {kebabMenuVisible && (
                       <ul className="kebab_menu border rounded shadow-sm p-3">
                         {userId === loggedInUser?._id && (
@@ -549,42 +576,57 @@ const FeedPostCard = ({
                           style={{ cursor: "pointer" }}
                         />
                       ) : (
-                        <img
-                          src={bwFireIcon}
-                          width={18}
-                          alt="like post"
-                          onClick={likeUnlikeHandler}
-                          style={{ cursor: "pointer" }}
-                        />
+                        // <img
+                        //   src={bwFireIcon}
+                        //   width={18}
+                        //   alt="like post"
+                        //   onClick={likeUnlikeHandler}
+                        //   style={{ cursor: "pointer" }}
+                        // />
+                        <BsFire onClick={likeUnlikeHandler}
+                        style={{ cursor: "pointer",fill: "var(--d-l-grey)" }}
+                      />
+
                       )}
                       {!showComment ? (
                         <FaRegCommentDots
                           size={20}
                           onClick={() => setShowComment((prev) => !prev)}
-                          style={{ cursor: "pointer" }}
+                          style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                         />
                       ) : (
                         <FaCommentDots
                           size={20}
                           onClick={() => setShowComment((prev) => !prev)}
-                          style={{ cursor: "pointer" }}
+                          style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                         />
                       )}
                     </div>
                   </div>
                   <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
                     <span
-                      className={`repost_container rounded ${showRepostOptions ? "bg-light" : ""
-                        }`}
+                      className={`repost_container rounded ${
+                        showRepostOptions ? "bg-secondary" : ""
+                      }`}
                       ref={repostContainerRef}
                     >
-                      <img
+                      {/* <img
                         src={repostIcon}
                         width={12}
                         alt="reshare post"
                         onClick={() => setShowRepostOptions(!showRepostOptions)}
                         style={{ cursor: "pointer" }}
+                      /> */}
+                      <BiRepost
+                        size={25}
+                        onClick={() => setShowRepostOptions(!showRepostOptions)}
+                        style={{
+                          cursor: "pointer",
+                          fill: "var(--d-l-grey)",
+                          transform: " rotate(90deg)",
+                        }}
                       />
+
                       {showRepostOptions && (
                         <span className="repost_options rounded-4 shadow-sm">
                           <button
@@ -646,20 +688,28 @@ const FeedPostCard = ({
                     </span>
                     {/* <img src={shareIcon} width={16} alt="share post" /> */}
                     {savedPostId.includes(postId) ? (
-                      <img
-                        src={savedIcon}
-                        width={16}
-                        alt="save post"
+                      // <img
+                      //   src={savedIcon}
+                      //   width={16}
+                      //   alt="save post"
+                      //   onClick={handleUnsavePost}
+                      //   style={{ cursor: "pointer" }}
+                      // />
+                      <FaBookmark
                         onClick={handleUnsavePost}
-                        style={{ cursor: "pointer" }}
+                        style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                       />
                     ) : (
-                      <img
-                        src={saveIcon}
-                        width={16}
-                        alt="save post"
+                      // <img
+                      //   src={saveIcon}
+                      //   width={16}
+                      //   alt="save post"
+                      //   onClick={handleSavePopUp}
+                      //   style={{ cursor: "pointer" }}
+                      // />
+                      <FaRegBookmark
                         onClick={handleSavePopUp}
-                        style={{ cursor: "pointer" }}
+                        style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                       />
                     )}
                   </div>
@@ -722,11 +772,11 @@ const FeedPostCard = ({
                             </Link>
                           </div>
                           <div className="col-10 p-0 flex-grow-1">
-                            <div className="comment-details bg-light rounded-3 p-2 p-lg-3 d-flex flex-column">
+                            <div className="comment-details rounded-3 p-2 p-lg-3 d-flex flex-column">
                               <header className="d-flex justify-content-between align-items-center p-0">
                                 <Link
                                   to={`/user/${val.user._id}`}
-                                  className="text-decoration-none text-black fs-sm"
+                                  className="text-decoration-none  fs-sm"
                                 >
                                   <h6 className="fs-sm m-0">
                                     {val.user.firstName +
@@ -738,7 +788,7 @@ const FeedPostCard = ({
                                   <TimeAgo datetime={val.createdAt} locale="" />
                                 </span>
                               </header>
-                              <span className="text-secondary fs-xs m-0">
+                              <span className=" fs-xs m-0">
                                 {val.user?.designation}
                                 {" , "}{" "}
                                 {val.user?.startUp?.company ||
@@ -760,14 +810,17 @@ const FeedPostCard = ({
                                     }
                                   />
                                 ) : (
-                                  <img
-                                    src={bwFireIcon}
-                                    width={15}
-                                    alt="like post"
-                                    onClick={() =>
-                                      commentlikeUnlikeHandler(postId, val._id)
-                                    }
-                                  />
+                                  // <img
+                                  //   src={bwFireIcon}
+                                  //   width={15}
+                                  //   alt="like post"
+                                  //   onClick={() =>
+                                  //     commentlikeUnlikeHandler(postId, val._id)
+                                  //   }
+                                  // />
+                                  <BsFire style={{fill:"var(--d-l-grey)"}} onClick={() =>
+                                        commentlikeUnlikeHandler(postId, val._id)
+                                      }/>
                                 )}
                                 <span className="mx-2 text-secondary fs-sm">
                                   {val?.likes?.length} likes
@@ -779,12 +832,14 @@ const FeedPostCard = ({
                                     deleteComments(postId, val._id)
                                   }
                                 >
-                                  <img
+                                  {/* <img
                                     src={deleteIcon}
                                     alt="delete icon"
                                     className="deleteIcon py-1"
                                     width={15}
-                                  />
+                                  /> */}
+                                  <MdDelete style={{fill:"var(--d-l-grey)"}}/>
+
                                 </span>
                               )}
                             </div>
@@ -836,14 +891,16 @@ const FeedPostCard = ({
         </CustomModal>
       )}
 
-      <ModalBSContainer showModal={showReportModal} id="reportPostModal">
+      <ModalBSContainer showModal={showReportModal} id="reportPostModal" >
         <ModalBSHeader
           title="Report Post"
           closeCallback={handleCloseSavePopup}
-        />
-        <ModalBSBody>
+          className={"d-l-grey"}
+          />
+        <ModalBSBody           className={"d-l-grey"}
+>
           <h6 className="h6">Select a reason that applies</h6>
-          <div className="reasons_container">
+          <div className="reasons_container"  style={{color:"var(--d-l-grey)"}}>
             <div className="form-check form-check-inline m-0">
               <input
                 className="form-check-input"
@@ -855,8 +912,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
-                  }`}
+                className={`form-check-label ${
+                  reportReason === "Harassment" && "bg-secondary text-white"
+                }`}
                 htmlFor="inlineRadio1"
               >
                 Harassment
@@ -873,8 +931,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
-                  }`}
+                className={`form-check-label ${
+                  reportReason === "Spam" && "bg-secondary text-white"
+                }`}
                 htmlFor="inlineRadio2"
               >
                 Spam
@@ -891,8 +950,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
-                  }`}
+                className={`form-check-label ${
+                  reportReason === "Fraud or scam" && "bg-secondary text-white"
+                }`}
                 htmlFor="inlineRadio3"
               >
                 Fraud or scam
@@ -909,18 +969,19 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
-                  }`}
+                className={`form-check-label ${
+                  reportReason === "Hateful Speech" && "bg-secondary text-white"
+                }`}
                 htmlFor="inlineRadio4"
               >
                 Hateful Speech
               </label>
             </div>
           </div>
-          <h6 className="h6 mt-3 text-decoration-underline">
+          <h6 className="h6 mt-3 text-decoration-underline"  style={{color:"var(--d-l-grey)"}}>
             Looking for something else?
           </h6>
-          <span>
+          <span  style={{color:"var(--d-l-grey)"}}>
             Sometimes our members prefer not to see certain kinds of content,
             rather than reporting.
           </span>
@@ -964,8 +1025,18 @@ const FeedPostCard = ({
           <Modal.Title>Reactions</Modal.Title>
         </Modal.Header>
         <div className=" reactions_investor d-flex gap-4 border-bottom border-1 py-2 px-3">
-          <h5 className={`nav-item ${activeHeader === true ? "active" : ""}`} onClick={() => setActiveHeader(true)}>ALL</h5>
-          <h5 className={`nav-item ${activeHeader === false ? "active" : ""}`} onClick={() => setActiveHeader(false)}>LIKE</h5>
+          <h5
+            className={`nav-item ${activeHeader === true ? "active" : ""}`}
+            onClick={() => setActiveHeader(true)}
+          >
+            ALL
+          </h5>
+          <h5
+            className={`nav-item ${activeHeader === false ? "active" : ""}`}
+            onClick={() => setActiveHeader(false)}
+          >
+            LIKE
+          </h5>
         </div>
         <Modal.Body>
           {likedByUsers?.map((user) => (
@@ -978,13 +1049,12 @@ const FeedPostCard = ({
                 className="rounded-pill "
               />
               <div className="p-1">
-                <h5>{user.firstName} {user.lastName}</h5>
-                <p className="m-0">
-                  {user.designation}
-                </p>
+                <h5>
+                  {user.firstName} {user.lastName}
+                </h5>
+                <p className="m-0">{user.designation}</p>
               </div>
             </div>
-
           ))}
         </Modal.Body>
       </Modal>

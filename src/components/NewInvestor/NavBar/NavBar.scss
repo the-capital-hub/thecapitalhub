@@ -220,7 +220,8 @@
           margin-left: 15px;
 
           h1 {
-            color: #000;
+            // color: #000;
+            color: var(--d-l-grey);
             font-family: Poppins;
             font-size: 16px;
             font-style: normal;
@@ -359,7 +360,7 @@
           margin-left: 15px;
 
           h1 {
-            color: #000;
+            color: var(--d-l-grey);
             font-family: Poppins;
             font-size: 14px;
             font-style: normal;

@@ -19,6 +19,7 @@ import IconFile from "../../Investor/SvgIcons/IconFile";
 import { BsLink45Deg } from "react-icons/bs";
 import { s3 } from "../../../Service/awsConfig";
 import { toggleinvestorCreatePostModal } from "../../../Store/features/design/designSlice";
+import { CiImageOn, CiVideoOn } from "react-icons/ci";
 
 const CreatePostPopUp = ({
   setPopupOpen,
@@ -368,7 +369,9 @@ const CreatePostPopUp = ({
                     className="white_button"
                     onClick={handleGalleryButtonClick}
                   >
-                    <img src={GallaryIcon} alt="Button 1" />
+                    {/* <img src={GallaryIcon} alt="Button 1" /> */}
+                    <CiImageOn  size={20} />
+
                   </button>
 
                   <input
@@ -383,7 +386,9 @@ const CreatePostPopUp = ({
                     className="white_button"
                     onClick={handleCameraButtonClick}
                   >
-                    <img src={IconVideo} alt="Button 2" />
+                    {/* <img src={IconVideo} alt="Button 2" /> */}
+                    <CiVideoOn size={20} />
+
                   </button>
 
                   <input

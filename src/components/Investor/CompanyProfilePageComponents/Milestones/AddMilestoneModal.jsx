@@ -64,7 +64,7 @@ export default function AddMilestoneModal({
   return (
     <div className="milestone_modal_container d-flex gap-3">
       <div className="d-flex flex-column gap-3">
-        <div className="d-flex flex-column gap-3 p-2 px-lg-3 bg-light rounded-4">
+        <div className=" current_milestone d-flex flex-column gap-3 p-2 px-lg-3  rounded-4">
           <h5>Current Milestones</h5>
           <div
             className={`badges__container d-flex flex-wrap gap-4 p-2 px-lg-3 justify-content-center overflow-x-auto ${theme}`}
@@ -85,7 +85,7 @@ export default function AddMilestoneModal({
           </div>
         </div>
 
-        <div className="d-flex flex-column gap-3 p-2 px-lg-3 bg-light rounded-4">
+        <div className="add_milestone d-flex flex-column gap-3 p-2 px-lg-3 rounded-4">
           <h5>Add Milestones</h5>
           <div
             className={`badges__container d-flex flex-wrap gap-4 p-2 px-lg-3 justify-content-center overflow-x-auto ${theme}`}

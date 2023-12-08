@@ -175,9 +175,9 @@ function Home() {
               next={fetchMorePosts}
               hasMore={hasMore}
               loader={
-                <p className="container p-5 text-center my-5 bg-white rounded-4 shadow ">
+                <p className="spinner_loader container p-5 text-center my-5  rounded-4 shadow ">
                   <div class="d-flex justify-content-center">
-                    <div class="spinner-border" role="status">
+                    <div class="spinner-border text-secondary" role="status">
                       <span class="visually-hidden">Loading...</span>
                     </div>
                   </div>

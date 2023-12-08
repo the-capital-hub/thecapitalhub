@@ -85,7 +85,7 @@ export default function MilestoneBadge({
     <div
       className={`badge_container p-4 d-flex flex-column align-items-center gap-3 rounded-4 position-relative ${theme}`}
       style={{
-        backgroundColor: "#EDEDED",
+        backgroundColor: "var(--bs-light)",
         flex: `0 0 ${isMini ? "200px" : "260px"}`,
       }}
     >
@@ -109,7 +109,7 @@ export default function MilestoneBadge({
       <div className="text-center">
         <h5
           className={`text-capitalize ${isMini ? "fs-6" : ""}`}
-          style={{ minHeight: `${isMini ? "60px" : "none"}` }}
+          style={{ minHeight: `${isMini ? "60px" : "none"}`,color: "var(--d-l-grey)"}}
         >
           {text}
         </h5>
