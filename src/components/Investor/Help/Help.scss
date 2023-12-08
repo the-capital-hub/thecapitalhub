@@ -15,6 +15,10 @@
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
     margin-top: 1rem;
 
+    h1 {
+      color: var(--d-l-grey);
+    }
+
     .helpcenter {
       display: flex;
       justify-content: flex-start;
@@ -30,6 +34,7 @@
 
       h6 {
         margin: 0;
+        color: var(--d-l-grey);
       }
     }
 
@@ -46,7 +51,6 @@
 
         .centered-text {
           text-align: center;
-          color: #485b65;
           font-family: Poppins;
           font-size: 28px;
           font-style: normal;
@@ -214,7 +218,6 @@
         .accordion-button {
           // background-color: #eaeef2 !important;
           background-color: var(--bs-light) !important;
-
           border: none !important;
           border-radius: 10px;
 
@@ -227,14 +230,12 @@
         .accordion-body {
           // background-color: #d6d7d9 !important;
           background-color: var(--bs-light) !important;
-
         }
       }
 
       .accordion-header {
         // background-color: #fff;
         background-color: var(--bs-light) !important;
-
       }
     }
   }
