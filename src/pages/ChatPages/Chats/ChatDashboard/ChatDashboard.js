@@ -66,7 +66,11 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
     setMsgId(data);
   };
 
-  const hadilDeleteOk = async () => {
+  const handleDeleteOk = async () => {
+    if (!msgId) {
+      return;
+    }
+
     try {
       const result = await deleteMessage(msgId);
       if (result) {
@@ -665,7 +669,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
               </button>
               <button
                 className="popup-ok_button"
-                onClick={() => hadilDeleteOk()}
+                onClick={() => handleDeleteOk()}
               >
                 Ok
               </button>

@@ -80,7 +80,7 @@ export default function ChatInputContainer({
     const uniqueId = generateId();
 
     const message = {
-      _id: uniqueId,
+      id: uniqueId,
       senderId: loggedInUserId,
       text: sendText,
       chatId: chatId,
@@ -113,6 +113,7 @@ export default function ChatInputContainer({
       }
     }
 
+    console.log("message state before adding to db", message);
     addMessage(message)
       .then(({ data }) => {
         // setIsSent(!isSent);

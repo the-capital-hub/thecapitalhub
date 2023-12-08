@@ -38,7 +38,7 @@ export default function MyMessage({
           <ChatDropDownMenu
             onClicks={handleSetDeletePopup}
             idBack={handleIdBack}
-            id={message?._id}
+            id={message.id}
           />
           {/* Text */}
           {message.text !== "" && (
