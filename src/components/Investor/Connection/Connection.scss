@@ -21,6 +21,10 @@
   }
 
   .content_section {
+    hr {
+      color: var(--d-l-grey);
+    }
+
     .active {
       color: #fd5901;
       font-family: Poppins;
@@ -37,7 +41,6 @@
         text-decoration: none;
         // color: #000;
         color: var(--d-l-grey);
-
         font-family: Poppins;
         font-size: 20px;
         font-style: normal;
@@ -110,16 +113,15 @@
               margin: 0;
               padding: 0;
               color: var(--d-l-grey);
-a{
-  color: var(--d-l-grey);
-
-}
+              a {
+                color: var(--d-l-grey);
+              }
             }
             .connection_time {
               font-size: 12px;
             }
           }
-          .connection_btn{
+          .connection_btn {
             button {
               border: none;
             }
@@ -130,7 +132,7 @@ a{
               height: 29px;
               flex-shrink: 0;
             }
-  
+
             .accept_button {
               border-radius: 140px;
               background: #fd5901;
@@ -172,7 +174,7 @@ a{
             font-weight: 400;
             line-height: normal;
           }
-          img{
+          img {
             width: 30px;
             height: 30px;
             border-radius: 0%;
