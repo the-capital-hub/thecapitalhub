@@ -9,8 +9,7 @@
         right: 0;
 
         width: 220px;
-
-        background-color: white;
+background: var(--white-to-grey);
         padding: 10px;
 
         display: flex;
@@ -52,8 +51,10 @@
         p {
           flex-shrink: 0;
           border-radius: var(--border-radius);
-          border: 1px solid #dadada;
           // background: #eaeef2;
+          border: 1px solid var(--bs-border-color);
+          background: var(--bs-light);
+
           color: #373737;
           font-size: 18px;
           font-family: Poppins;
@@ -162,18 +163,19 @@
             right: 20px;
             height: max-content;
 
-            background-color: white;
-
+background: var(--white-to-grey);
             @media (max-width: 420px) {
               right: 5px;
             }
 
             li {
               margin-bottom: 6px;
-              color: rgb(92, 92, 92);
+              color: var(--d-l-grey);
               &:hover {
                 border-bottom: 1px solid #d1d1d1;
-                color: black;
+                // color: black;
+                color: var(--d-l-grey);
+
                 cursor: pointer;
               }
             }
@@ -244,10 +246,11 @@
   }
 
   .box {
-    background-color: #fff;
+    // background-color: #fff;
     padding: 10px;
     border-radius: var(--border-radius);
-    background: #fff;
+    // background: #fff;
+    background: var(--white-to-grey);
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
   }
   .comment_container {
@@ -274,7 +277,8 @@
         width: 100%;
         border-radius: 170px;
         border: 1px solid #cacaca;
-        background: #fcfcfc;
+        // background: #fcfcfc;
+        background: var(--bs-light);
         height: 54px;
 
         input[type="text"] {
@@ -284,6 +288,7 @@
           border-radius: 4px;
           outline: none;
           margin-left: 15px;
+          background: var(--bs-light);
         }
 
         .icons {
@@ -307,6 +312,14 @@
     }
   }
   .single-comment {
+    .comment-details{
+      background: var(--bs-light);
+      color: var(--d-l-grey);
+      a{
+        color: var(--d-l-grey);
+
+      }
+    }
     .img_container {
       max-width: 80px;
       img {
@@ -480,4 +493,7 @@ text-transform: capitalize;
       margin: 0;
     }
   }
+}
+.d-l-grey{
+  color: var(--d-l-grey);
 }
