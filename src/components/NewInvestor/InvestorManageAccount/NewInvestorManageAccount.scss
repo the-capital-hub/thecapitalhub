@@ -10,10 +10,11 @@
 
   .box_container {
     height: fit-content;
-    background-color: #fff;
+    // background-color: #fff;
     padding: 10px;
     border-radius: var(--border-radius);
-    background: #fff;
+    // background: #fff;
+    background: var(--white-to-grey);
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
 
     // display: flex;
@@ -39,12 +40,13 @@
     }
 
     .change_password {
-      background-color: #f9f9f9;
+      background: var(--white-to-grey);
       padding: 20px;
       border-radius: var(--border-radius);
       flex: 1;
       display: flex;
       flex-direction: column;
+      color: var(--d-l-grey);
 
       @media (max-width: 768px) {
         margin: 5px;
@@ -98,12 +100,13 @@
 
     .present_account {
       // margin: 20px;
-      background-color: #f9f9f9;
+      background: var(--white-to-grey);
       padding: 20px;
       border-radius: 20px;
       flex: 1;
       display: flex;
       flex-direction: column;
+      
       @media (max-width: 768px) {
         padding: 7px;
       }
@@ -124,7 +127,7 @@
       }
 
       .header_text {
-        color: #3d3c3c;
+        color: var(--d-l-grey);
         font-family: Poppins;
         font-size: 18px;
         font-style: normal;
@@ -178,7 +181,7 @@
 
         h4 {
           margin: 0;
-          color: #000;
+          color: var(--d-l-grey);
           font-family: Poppins;
           font-size: 20px;
           font-style: normal;
@@ -344,7 +347,7 @@
             }
             h4 {
               margin: 0;
-              color: #000;
+              color: var(--d-l-grey);
               font-family: Poppins;
               font-size: 20px;
               font-style: normal;

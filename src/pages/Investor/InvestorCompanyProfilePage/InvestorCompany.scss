@@ -74,12 +74,26 @@
 }
 
 .investor-edit-container {
+  #editCompanyDetails{
+    background: var(--white-to-grey);
+    a{
+      color: var(--d-l-grey);
+
+    }
+  }
+  #chooseCompany{
+    background: var(--white-to-grey);
+p{
+  color: var(--d-l-grey);
+}
+  }
   .search-company-input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
     border-radius: 4px;
     margin-bottom: 10px;
+    background: var(--bs-light);
+
   }
 
   .suggestion {

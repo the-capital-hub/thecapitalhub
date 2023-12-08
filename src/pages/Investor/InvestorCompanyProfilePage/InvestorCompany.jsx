@@ -170,19 +170,19 @@ export default function CompanyProfilePage() {
                   // companyData.founderId === loggedInUser._id ? (
                   <>
                     <div
-                      className="bg-white rounded-4 p-4 shadow-sm border"
+                      className=" rounded-4 p-4 shadow-sm border"
                       id="editCompanyDetails"
                     >
                       <Link
                         to="/investor/company-profile/edit"
-                        className="text-decoration-none text-dark fs-5"
+                        className="text-decoration-none  fs-5"
                       >
                         Edit company details
                       </Link>
                     </div>
                     <p></p>
                     {/* ) : ( */}
-                    <div className="bg-white rounded-4 p-4" id="chooseCompany">
+                    <div className=" rounded-4 p-4" id="chooseCompany">
                       {/* <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5"> */}
                       {/* <button className="btn-base investor" onClick={handleAddNew}>
                         Add new company details
@@ -191,14 +191,14 @@ export default function CompanyProfilePage() {
                       {/* <div className="or-text-container">
                         <p className="text-decoration-none text-dark fs-5">Or</p>
                       </div> */}
-                      <p className="text-decoration-none text-dark fs-5">
+                      <p className="text-decoration-none  fs-5">
                         Choose from an existing Company
                       </p>
                       <div>
                         <input
                           type="text"
                           placeholder="Search company"
-                          className="search-company-input"
+                          className="search-company-input border"
                           onChange={handleSearchInputChange}
                         />
                         {companies.length !== 0 && (
