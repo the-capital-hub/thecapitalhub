@@ -41,7 +41,7 @@ export default function SectorPreferences({
                   checked={true}
                   readOnly
                 />
-                <label className="btn btn-outline-primary" htmlFor={sector}>
+                <label className="btn btn-outline-investor" htmlFor={sector}>
                   {sector}
                 </label>
               </span>
@@ -64,7 +64,7 @@ export default function SectorPreferences({
                     autoComplete="off"
                     defaultChecked={userSectorPreferences.includes(sector)}
                   />
-                  <label className="btn btn-outline-primary" htmlFor={sector}>
+                  <label className="btn btn-outline-investor" htmlFor={sector}>
                     {sector}
                   </label>
                 </span>

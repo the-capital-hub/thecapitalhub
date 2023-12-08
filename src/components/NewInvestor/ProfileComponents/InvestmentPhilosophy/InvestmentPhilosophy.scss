@@ -1,6 +1,6 @@
 .investment_philosophy {
   border-radius: var(--border-radius);
-  background: #fff;
+  background: var(--white-to-grey);
   padding: 20px 0;
   // margin: 0 20px 20px 20px;
   // box-shadow: 0 0.125rem 0.25rem rgba(#000, 0.075);
@@ -11,11 +11,12 @@
   h2 {
     padding: 0 20px 20px 20px;
     width: auto;
-    border-bottom: solid 1px #dfdfdf;
+    border-bottom: solid 1px var(--bs-border-color);
   }
 
   .edit_button {
     border-radius: 131px;
+    background-color: transparent;
     border: 1px solid #c6c6c6;
     width: 107px;
     height: 35px;
@@ -25,6 +26,11 @@
     font-family: "Poppins";
     // margin-right: 30px;
     cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
   }
 
   textarea {
@@ -34,8 +40,9 @@
   .recent_experience,
   .education {
     border-radius: var(--border-radius);
-    background: #fff;
+    background: var(--white-to-grey);
     padding: 20px;
+    color: var(--d-l-grey);
 
     .header {
       display: flex;
@@ -65,7 +72,8 @@
   }
   .investment_details_cards {
     border-radius: var(--border-radius);
-    background: #fff;
+    background: var(--white-to-grey);
+    color: var(--d-l-grey);
     padding: 20px;
     // margin: 20px;
     margin-inline: 0px;
