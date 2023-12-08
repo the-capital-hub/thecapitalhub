@@ -18,8 +18,11 @@ import { useSelector } from "react-redux";
 import MobileNavbar from "../../../components/Shared/MobileNavbar/MobileNavbar";
 import { setThemeColor } from "../../../utils/setThemeColor";
 import { Toaster } from "react-hot-toast";
+import { selectTheme } from "../../../Store/features/design/designSlice";
 
 function ProtectedInvestorRoutes({ children, ...props }) {
+  const theme = useSelector(selectTheme);
+
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   // const dispatch = useDispatch();
   // const navigate = useNavigate();
@@ -54,6 +57,7 @@ function ProtectedInvestorRoutes({ children, ...props }) {
 
     return (
       <>
+            <div className="investor-private-routes" data-bs-theme={theme}>
         <InvestorNavbar
           handleSidebarToggle={handleSidebarToggle}
           sidebarCollapsed={sidebarCollapsed}
@@ -103,6 +107,7 @@ function ProtectedInvestorRoutes({ children, ...props }) {
             duration: 10000,
           }}
         />
+        </div>
       </>
     );
   } else <Navigate to="/login" replace />;
