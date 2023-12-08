@@ -76,6 +76,14 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
       if (result) {
         setShowFeaturedPostSuccess(true);
         setDeletePopup(false);
+        setMessages((prev) => {
+          return prev.filter((message) => {
+            if (message.id) {
+              return message.id !== msgId;
+            }
+            return message;
+          });
+        });
       }
     } catch (error) {
       console.error("Error likeDislike comment : ", error);
@@ -120,7 +128,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
       .catch((error) => {
         console.error("Error-->", error);
       });
-  }, [chatId, cleared, isSent, showFeaturedPostSuccess]);
+  }, [chatId, cleared, isSent]);
 
   // useEffect(() => {
   //   getUserAndStartUpByUserIdAPI(userId)
