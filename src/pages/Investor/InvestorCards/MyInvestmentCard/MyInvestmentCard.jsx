@@ -130,7 +130,7 @@ const MyInvestmentCard = ({
         <div className="left">
           {/* Logo */}
           {!editMode ? (
-            <img src={currCompany?.logo} alt="Logo" className="logo" />
+            <img src={currCompany?.logo} alt="Logo" className="logo rounded" />
           ) : (
             <div className="">
               <label
@@ -178,9 +178,10 @@ const MyInvestmentCard = ({
           // Description
           <div className="">
             <p
-              className={`m-0 mt-2  ${editMode ? "d-none" : "d-block"} `}
+              className={`m-0 mt-2 text-secondary ${
+                editMode ? "d-none" : "d-block"
+              } `}
               style={{
-                color: "rgba(74, 74, 74, 1)",
                 maxHeight: "100px",
                 minHeight: "100px",
                 overflowY: "auto",
@@ -207,8 +208,9 @@ const MyInvestmentCard = ({
               <strong>Ask:</strong>
             </p>
             <p
-              className={`m-0 ${editMode ? "d-none" : "d-block"}  `}
-              style={{ color: "rgba(74, 74, 74, 1)" }}
+              className={`m-0 text-secondary ${
+                editMode ? "d-none" : "d-block"
+              }  `}
             >
               {currCompany?.ask}
             </p>
@@ -231,10 +233,10 @@ const MyInvestmentCard = ({
       {!isInterests ? (
         <div className="bottom d-flex align-items-center py-4 px-3 gap-2 ">
           <img src={InvestedIcon} alt="" className="small-image" />
-          <p className="m-0 " style={{ color: "rgba(74, 74, 74, 1)" }}>
+          <p className="m-0 text-secondary">
             Invested:{" "}
             <span
-              className={`equity text-decoration-underline ms-2 ${
+              className={`equity d-l-grey text-decoration-underline ms-2 ${
                 editMode ? "d-none" : ""
               }`}
             >
@@ -312,7 +314,7 @@ const MyInvestmentCard = ({
 
           {/* <div className="bottom d-flex align-items-center py-2 px-3 gap-2">
             <img src={InvestedIcon} alt="" className="small-image" />
-            <p className="m-0 " style={{ color: "rgba(74, 74, 74, 1)" }}>
+            <p className="m-0 text-secondary" >
               Invested:{" "}
               <span
                 className={`equity text-decoration-underline ms-2 ${
@@ -341,7 +343,7 @@ const MyInvestmentCard = ({
 
       {editMode ? (
         <button
-          className="green_button save__button position-absolute start-50 translate-middle-x "
+          className="btn btn-investor save__button position-absolute start-50 translate-middle-x "
           onClick={() => handleSave(currCompany)}
           // data-bs-dismiss="modal"
         >

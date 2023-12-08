@@ -312,7 +312,10 @@ export default function AddModalContent({
               onChange={handleInputChange}
             />
           </div>
-          <button type="submit" className="green_button w-auto mx-auto fs-6">
+          <button
+            type="submit"
+            className="btn btn-investor w-auto mx-auto fs-6"
+          >
             {loading ? (
               <SpinnerBS
                 colorClass={"text-dark"}
