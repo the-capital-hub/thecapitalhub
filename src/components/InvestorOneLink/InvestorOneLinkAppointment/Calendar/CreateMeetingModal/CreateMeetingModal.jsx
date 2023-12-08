@@ -138,7 +138,7 @@ export default function CreateMeetingModal({
                   type="text"
                   id="title"
                   name="title"
-                  className="meeting_input"
+                  className="meeting_input bg-transparent"
                   placeholder="Enter Title"
                   onChange={handleTitle}
                   value={title}
@@ -149,7 +149,7 @@ export default function CreateMeetingModal({
               {/* Submit */}
               <button
                 type="submit"
-                className={`create_button d-flex justify-content-center align-items-center gap-2 ${
+                className={`btn btn-investor w-100 d-flex justify-content-center align-items-center gap-2 ${
                   loading ? "opacity-50" : ""
                 } `}
                 disabled={loading}

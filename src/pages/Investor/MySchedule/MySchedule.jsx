@@ -106,7 +106,7 @@ export default function MySchedule() {
   return (
     <MaxWidthWrapper>
       <>
-        <div className="mySchedule__wrapper px-3 border-start">
+        <div className="mySchedule__wrapper">
           {/* <div className="pb-4 pt-2">
           <SmallProfileCard text="My Schedule" />
         </div> */}
@@ -117,7 +117,7 @@ export default function MySchedule() {
             className={"mb-3"}
           />
 
-          <section className="section__wrapper bg-white rounded-4 border mb-5 pb-5 d-flex flex-column gap-5">
+          <section className="section__wrapper rounded-4 border mb-5 pb-5 d-flex flex-column gap-5">
             {/* View Select */}
             <div className="d-flex flex-column flex-lg-row justify-content-between align-items-center border-bottom p-3">
               <div className="d-flex align-items-center">
@@ -125,11 +125,11 @@ export default function MySchedule() {
               </div>
               <div className="mt-3 mt-lg-0">
                 <button
-                  className="btn-capital lh-1 py-2 py-md-3 me-2"
+                  className="btn btn-investor lh-1 py-2 py-md-3 me-2"
                   onClick={handleViewRequestClick}
                   id="viewRequests"
                 >
-                  View requests
+                  View Requests
                 </button>
                 {/* <button className="btn-capital lh-1 py-2 py-md-3">
                   Create Meeting
