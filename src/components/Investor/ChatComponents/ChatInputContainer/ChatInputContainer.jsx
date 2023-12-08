@@ -110,11 +110,12 @@ export default function ChatInputContainer({
     addMessage(message)
       .then(({ data }) => {
         // setIsSent(!isSent);
-        console.log(data);
+        console.log("response after adding to db", data);
       })
       .catch((error) => {
         console.error("Error-->", error);
       });
+
     message.senderId = {
       _id: loggedInUserId,
       firstName: userFirstName,
@@ -134,6 +135,7 @@ export default function ChatInputContainer({
       recieverId = [userId];
     }
     const createdAt = new Date().toISOString();
+    console.log("State of message before sending", message);
     setSendMessage({ ...message, recieverId, createdAt });
     setMessages((prevMessages) => [
       ...prevMessages,

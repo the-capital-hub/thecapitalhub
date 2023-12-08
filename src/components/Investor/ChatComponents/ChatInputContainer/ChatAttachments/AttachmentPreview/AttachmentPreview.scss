@@ -45,6 +45,8 @@
 
     .document-preview {
       position: relative;
+      max-width: 100%;
+      max-height: 60dvh;
       // color: #fafafa;
       .remove-preview {
         position: absolute;
@@ -62,6 +64,16 @@
         display: flex;
         justify-content: center;
         align-items: center;
+      }
+
+      .preview {
+        background-color: rgba(var(--bs-secondary-rgb), 1);
+        height: 350px;
+
+        .react-pdf__Page {
+          width: fit-content;
+          margin-inline: auto;
+        }
       }
     }
 
