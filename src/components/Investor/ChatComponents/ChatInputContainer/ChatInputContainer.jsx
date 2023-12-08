@@ -23,6 +23,7 @@ import {
 } from "../../../../Store/features/user/userSlice";
 import AttachmentSelector from "./ChatAttachments/AttachmentSelector/AttachmentSelector";
 import IconSend from "../../SvgIcons/IconSend";
+import { generateId } from "../../../../utils/ChatsHelpers";
 // import { updateLastMessage } from "../../../../Store/features/chat/chatSlice";
 
 export default function ChatInputContainer({
@@ -74,7 +75,12 @@ export default function ChatInputContainer({
       selectedDocument === null
     )
       return;
+
+    // Generate Random Id
+    const uniqueId = generateId();
+
     const message = {
+      _id: uniqueId,
       senderId: loggedInUserId,
       text: sendText,
       chatId: chatId,
