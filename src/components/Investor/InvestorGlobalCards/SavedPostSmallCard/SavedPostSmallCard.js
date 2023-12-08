@@ -156,7 +156,7 @@ const SavedPostSmallCard = ({
             )}
           </div>
         </div>
-         {image ? (
+        {image ? (
           <img
             src={image}
             alt="Post"
@@ -208,52 +208,55 @@ const SavedPostSmallCard = ({
           </>
         ) : (
           ""
-        )} 
-
-{description ? (
-  <p className="savedPost__text mt-2">{description}</p>
-) : resharedPostId?.description ? (
-<div
-  key={key}
-  className="card border rounded-4 p-3"
-  style={{
-    // flex: 'none',
-    flex: window.innerWidth <= 767 ? 'none' : '0 0 20rem',
-  }}
->    <div className="d-flex pb-3">
-      <Link
-        to={`/user/${userId}`}
-        className="img-fluid mr-2"
-        style={{
-          width: "30px",
-          height: "30px",
-          borderRadius: "50%",
-        }}
-      >
-        <img
-          src={profilePicture}
-          alt="Profile"
-          className="img-fluid mr-2"
-          style={{
-            width: "30px",
-            height: "30px",
-            borderRadius: "50%",
-          }}
-        />
-      </Link>
-      <div>
-        <span className="card_heading">
-          {firstName} {lastName}
-        </span>
-        <span className="card_heading">{designation}</span>
+        )}
+        {description ? (
+          <p className="savedPost__text mt-2">{description}</p>
+        ) : resharedPostId?.description ? (
+          <div
+            key={key}
+            className="card border rounded-4 p-3"
+            style={{
+              // flex: 'none',
+              flex: window.innerWidth <= 767 ? "none" : "0 0 20rem",
+            }}
+          >
+            {" "}
+            <div className="d-flex pb-3">
+              <Link
+                to={`/user/${userId}`}
+                className="img-fluid mr-2"
+                style={{
+                  width: "30px",
+                  height: "30px",
+                  borderRadius: "50%",
+                }}
+              >
+                <img
+                  src={profilePicture}
+                  alt="Profile"
+                  className="img-fluid mr-2"
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    borderRadius: "50%",
+                  }}
+                />
+              </Link>
+              <div>
+                <span className="card_heading">
+                  {firstName} {lastName}
+                </span>
+                <span className="card_heading">{designation}</span>
+              </div>
+            </div>
+            <div className="d-block">
+              <p>{resharedPostId.description}</p>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}{" "}
       </div>
-    </div>
-    <div className="d-block">
-
-    <p>{resharedPostId.description}</p>
-    </div>
-  </div>
-) : ""}      </div>
       {/* </div> */}
     </>
   );

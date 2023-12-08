@@ -117,7 +117,7 @@ const MyStartUp = () => {
                 {/* {investor?.founderId === loggedInUser._id && ( */}
                 <ModalBsLauncher
                   id={"myInvestmentsAddModal"}
-                  className={"green_button"}
+                  className={"btn btn-investor"}
                 >
                   Add New
                 </ModalBsLauncher>
@@ -128,7 +128,7 @@ const MyStartUp = () => {
                 {/* {investor?.founderId === loggedInUser._id && ( */}
                 <ModalBsLauncher
                   id={"myInvestmentsEditModal"}
-                  className={"green_button"}
+                  className={"btn btn-investor"}
                 >
                   Edit
                 </ModalBsLauncher>
@@ -150,8 +150,11 @@ const MyStartUp = () => {
           </div>
           {/* My Investments Add Modal */}
           <ModalBSContainer id={"myInvestmentsAddModal"} isStatic={false}>
-            <ModalBSHeader title={"Add new Investment"} />
-            <ModalBSBody>
+            <ModalBSHeader
+              title={"Add new Investment"}
+              className={"d-l-grey"}
+            />
+            <ModalBSBody className={"d-l-grey"}>
               <AddModalContent setInvestedStartups={setInvestedStartups} />
             </ModalBSBody>
           </ModalBSContainer>
@@ -163,8 +166,8 @@ const MyStartUp = () => {
             modalXl
             key={"edit investments"}
           >
-            <ModalBSHeader title={"Edit Investments"} />
-            <ModalBSBody>
+            <ModalBSHeader title={"Edit Investments"} className={"d-l-grey"} />
+            <ModalBSBody className={"d-l-grey"}>
               <EditModalContent
                 dataArray={investedStartups}
                 key={"investments"}
@@ -185,7 +188,7 @@ const MyStartUp = () => {
                 {/* {investor?.founderId === loggedInUser._id && ( */}
                 <ModalBsLauncher
                   id={"myInterestsAddModal"}
-                  className={"green_button"}
+                  className={"btn btn-investor"}
                 >
                   Add New
                 </ModalBsLauncher>
@@ -196,7 +199,7 @@ const MyStartUp = () => {
                 {/* {investor?.founderId === loggedInUser._id && ( */}
                 <ModalBsLauncher
                   id={"myInterestsEditModal"}
-                  className={"green_button"}
+                  className={"btn btn-investor"}
                 >
                   Edit
                 </ModalBsLauncher>
@@ -222,8 +225,8 @@ const MyStartUp = () => {
           </div>
           {/* My Interests Add Modal */}
           <ModalBSContainer id={"myInterestsAddModal"} isStatic={false}>
-            <ModalBSHeader title={"Add new Interest"} />
-            <ModalBSBody>
+            <ModalBSHeader title={"Add new Interest"} className={"d-l-grey"} />
+            <ModalBSBody className={"d-l-grey"}>
               <AddModalContent isInterests setMyInterests={setMyInterests} />
             </ModalBSBody>
           </ModalBSContainer>
@@ -235,8 +238,8 @@ const MyStartUp = () => {
             modalXl
             key={"edit interests"}
           >
-            <ModalBSHeader title={"Edit Interests"} />
-            <ModalBSBody>
+            <ModalBSHeader title={"Edit Interests"} className={"d-l-grey"} />
+            <ModalBSBody className={"d-l-grey"}>
               <EditModalContent
                 dataArray={myInterests}
                 isInterests={true}

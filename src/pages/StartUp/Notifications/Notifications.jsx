@@ -4,7 +4,7 @@ import "./Notifications.scss";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import { useDispatch, useSelector } from "react-redux";
-import ThreeODotIcon from "../../../Images/ThreeDotIcon.svg";
+// import ThreeODotIcon from "../../../Images/ThreeDotIcon.svg";
 import {
   fetchNotificationsAPI,
   // markAllNotificationsReadAPI,
@@ -122,17 +122,21 @@ function Notifications() {
       <div className="notificaitons_container">
         {/* <ComingSoon /> */}
         {/* <div className="d-flex gap-md-3 gap-2 py-4  px-2 mt-3 data_selector">
-        <button
-  className={`fs-6 rounded-pill py-md-3 px-md-5 py-2 px-4 ${
-    selectedTab === "All" ? `active${isInvestor ? "investors" : "startup"}` : ""
-  } `}
-  onClick={() => handleTabChange("All")}
->
+          <button
+            className={`fs-6 rounded-pill py-md-3 px-md-5 py-2 px-4 ${
+              selectedTab === "All"
+                ? `active${isInvestor ? "investors" : "startup"}`
+                : ""
+            } `}
+            onClick={() => handleTabChange("All")}
+          >
             All
           </button>
           <button
             className={` fs-6  rounded-pill py-md-3 px-md-5 py-2 px-4 ${
-              selectedTab === "MY Post" ? `active${isInvestor ? "investors" : "startup"}` : ""
+              selectedTab === "MY Post"
+                ? `active${isInvestor ? "investors" : "startup"}`
+                : ""
             }`}
             onClick={() => handleTabChange("MY Post")}
           >
@@ -157,7 +161,7 @@ function Notifications() {
                           post,
                           connection,
                         }) => (
-                          <div className="people_container d-flex flex-column flex-md-row justify-content-center align-items-center justify-content-md-between align-items-center border-bottom">
+                          <div className="people_container d-flex flex-column flex-md-row justify-content-center align-items-center justify-content-md-between align-items-center">
                             <div className="short_desc d-flex align-items-center w-100 my-3 mx-5 p-0">
                               <img
                                 src={sender?.profilePicture}
@@ -203,8 +207,8 @@ function Notifications() {
                 )
               ) : (
                 <SpinnerBS
-                  className="w-100 text-center"
-                  colorClass="text-secondary"
+                  className="w-100 text-center py-5"
+                  colorClass="d-l-grey"
                   spinnerSizeClass="md"
                 />
               )}

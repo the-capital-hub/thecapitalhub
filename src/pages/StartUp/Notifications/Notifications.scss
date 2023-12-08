@@ -55,4 +55,10 @@
       }
     }
   }
+
+  .people_container {
+    & + .people_container {
+      border-top: 1px solid var(--bs-border-color);
+    }
+  }
 }

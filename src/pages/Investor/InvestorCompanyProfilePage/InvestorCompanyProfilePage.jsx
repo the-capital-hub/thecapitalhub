@@ -50,7 +50,7 @@ export default function InvestorCompanyProfilePage() {
 
   return (
     <MaxWidthWrapper>
-      <div className="otherInvestorCompanyProfilePage__wrapper px-3 pb-5 border-start">
+      <div className="otherInvestorCompanyProfilePage__wrapper pb-5">
         {/* Main content */}
         <div className="main__content">
           <SmallProfileCard text={"Company Profile"} />
