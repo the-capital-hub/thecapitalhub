@@ -66,12 +66,24 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
     setMsgId(data);
   };
 
-  const hadilDeleteOk = async () => {
+  const handleDeleteOk = async () => {
+    if (!msgId) {
+      return;
+    }
+
     try {
       const result = await deleteMessage(msgId);
       if (result) {
         setShowFeaturedPostSuccess(true);
         setDeletePopup(false);
+        setMessages((prev) => {
+          return prev.filter((message) => {
+            if (message.id) {
+              return message.id !== msgId;
+            }
+            return message;
+          });
+        });
       }
     } catch (error) {
       console.error("Error likeDislike comment : ", error);
@@ -116,7 +128,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
       .catch((error) => {
         console.error("Error-->", error);
       });
-  }, [chatId, cleared, isSent, showFeaturedPostSuccess]);
+  }, [chatId, cleared, isSent]);
 
   // useEffect(() => {
   //   getUserAndStartUpByUserIdAPI(userId)
@@ -665,7 +677,7 @@ const ChatDashboard = ({ setSendMessage, recieveMessage, cleared }) => {
               </button>
               <button
                 className="popup-ok_button"
-                onClick={() => hadilDeleteOk()}
+                onClick={() => handleDeleteOk()}
               >
                 Ok
               </button>

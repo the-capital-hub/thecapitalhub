@@ -38,7 +38,7 @@ export default function InfoField({ isEditing, data, name, legend, loading }) {
         </p>
       )}
       {!data && !isEditing && (
-        <button type="submit" className="ms-auto mt-3 green_button">
+        <button type="submit" className="ms-auto mt-3 btn btn-investor">
           {loading && textRef.current.value !== "" ? (
             <SpinnerBS spinnerSizeClass="spinner-border-sm text-black" />
           ) : (

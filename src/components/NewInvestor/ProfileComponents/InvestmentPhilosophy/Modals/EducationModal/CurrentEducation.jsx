@@ -57,7 +57,7 @@ export default function CurrentEducation({
       <div className="d-flex align-items-center gap-2">
         <button
           type="button"
-          className="btn green_button px-3 d-flex align-items-center justify-content-center"
+          className="btn btn-investor px-3 d-flex align-items-center justify-content-center"
           onClick={(e) => handleEditClick(e, data)}
           disabled={loading}
         >

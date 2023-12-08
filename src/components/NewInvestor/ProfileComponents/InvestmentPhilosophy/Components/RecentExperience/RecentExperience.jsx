@@ -13,12 +13,13 @@ export default function RecentExperience() {
       <div className="recent_experience border rounded-4 mx-md-4 shadow-sm">
         <div className="flex-md-row header">
           <h5 className="green_underline h5">Recent Experience</h5>
-          <div className="green_button">
-            <ModalBsLauncher id={"experienceModal"}>
-              <span>Add </span>
-              <span className="d-none d-md-inline-block">Experience</span>
-            </ModalBsLauncher>
-          </div>
+          <ModalBsLauncher
+            id={"experienceModal"}
+            className={"btn btn-investor w-auto"}
+          >
+            <span>Add </span>
+            <span className="d-none d-md-inline-block">Experience</span>
+          </ModalBsLauncher>
         </div>
         <div className="experience_cards">
           {/* Loop cards here */}
