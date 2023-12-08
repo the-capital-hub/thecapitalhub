@@ -57,7 +57,7 @@ function ProtectedInvestorRoutes({ children, ...props }) {
 
     return (
       <>
-            <div className="investor-private-routes" data-bs-theme={theme}>
+            <div className="new-investor-private-routes" data-bs-theme={theme}>
         <InvestorNavbar
           handleSidebarToggle={handleSidebarToggle}
           sidebarCollapsed={sidebarCollapsed}

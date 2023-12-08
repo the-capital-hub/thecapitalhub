@@ -29,6 +29,8 @@ import {
   setUnreadNotifications,
 } from "../../../Store/features/user/userSlice";
 import OnboardingSwitch from "../../Investor/InvestorNavbar/OnboardingSwitch/OnboardingSwitch";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { AiOutlineMessage } from "react-icons/ai";
 
 const NavBar = (props) => {
   // Fetch global states
@@ -386,20 +388,31 @@ const NavBar = (props) => {
                         setToggleNotificationPopup((prev) => !prev)
                       }
                     />
+
                     <NotificationsPopup
                       toggleVisibility={setToggleNotificationPopup}
                     />
                   </>
                 ) : (
                   <>
-                    <img
+                    {/* <img
                       src={NotificationIcon}
                       alt="notification"
                       onClick={() => {
                         dispatch(setUnreadNotifications(0));
                         setToggleNotificationPopup((prev) => !prev);
                       }}
+                    /> */}
+
+                    <IoMdNotificationsOutline
+                      size={30}
+                      style={{fill:"var(--d-l-grey)"}}
+                      onClick={() => {
+                        dispatch(setUnreadNotifications(0));
+                        setToggleNotificationPopup((prev) => !prev);
+                      }}
                     />
+
                     {!toggleNotificationPopup && unreadNotifications > 0 && (
                       <div className="notification-count">
                         {unreadNotifications}
@@ -411,7 +424,9 @@ const NavBar = (props) => {
               {/* </Link> */}
               <Link to="/chats" className="rounded-circle message-icon">
                 <div className="icon-wrapper">
-                  <img src={MessageIcon} alt="message" />
+                  {/* <img src={MessageIcon} alt="message" /> */}
+                  <AiOutlineMessage size={28} style={{fill:"var(--d-l-grey)"}} />
+
                 </div>
               </Link>
               {/* <div className="icon-wrapper d-none d-md-block"> */}
