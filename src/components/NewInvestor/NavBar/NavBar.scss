@@ -3,7 +3,9 @@
     height: 80px;
     left: 60px;
     top: 39px;
-    background: #ffffff;
+    // background: #ffffff;
+    background: var(--white-to-grey);
+
     box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.05);
     position: fixed;
     top: 0;
@@ -53,7 +55,9 @@
 
           .searchbar-input {
             height: 49px;
-            background: rgba(205, 205, 205, 1);
+            // background: rgba(205, 205, 205, 1);
+            background: var(--bs-light);
+
             border-radius: 20px;
             border: none;
             transition: width 0.4s ease;
@@ -157,7 +161,9 @@
 
           @media (min-width: 768px) {
             // margin-left: 1.5rem;
-            background: #eaeef2;
+            // background: #eaeef2;
+            background: var(--bs-light);
+
           }
 
           .notification-icon,
