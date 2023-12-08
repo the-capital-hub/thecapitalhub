@@ -1,83 +1,67 @@
-// import { useEffect, useState } from "react";
-import { ListGroup } from "react-bootstrap";
+import { useEffect, useState } from "react";
 import { IoDocumentAttach } from "react-icons/io5";
-// import { displayPdf } from "../../../../../../utils/getBase64";
-// import "pdfjs-dist/build/pdf.worker.entry";
-// import { Document, Page, pdfjs } from "react-pdf";
-// import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-// pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
+import { Document, Page, pdfjs } from "react-pdf";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import "react-pdf/dist/esm/Page/TextLayer.css";
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.js",
+  import.meta.url
+).toString();
 
 export default function DocumentAttachment({
   selectedDocument,
   removeSelectedDocument,
 }) {
-  // const [iframeData, setIframeData] = useState(null);
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [preview, setPreview] = useState(false);
 
-  // useEffect(() => {
-  //   if (selectedDocument && selectedDocument.type === "application/pdf") {
-  //     const getPdfIframeData = async (selectedDocument) => {
-  //       try {
-  //         const data = await displayPdf(selectedDocument);
-  //         setIframeData(data);
-  //       } catch (error) {
-  //         console.error("Error displaying PDF:", error);
-  //       }
-  //     };
+  useEffect(() => {
+    if (selectedDocument && selectedDocument.type === "application/pdf") {
+      setPreview(true);
+    } else {
+      setPreview(false);
+    }
+  }, [selectedDocument]);
 
-  //     // Call function
-  //     getPdfIframeData(selectedDocument);
-  //   }
-  // }, [selectedDocument]);
-
-  // const [numPages, setNumPages] = useState(null);
-  // const [pageNumber, setPageNumber] = useState(1);
-
-  // useEffect(() => {
-  //   if (selectedDocument && selectedDocument.type === "application/pdf") {
-  //   }
-  // }, [selectedDocument]);
-
-  // const onDocumentLoadSuccess = ({ numPages }) => {
-  //   setNumPages(numPages);
-  //   setPageNumber(1);
-  // };
+  const onDocumentLoadSuccess = ({ numPages }) => {
+    setNumPages(numPages);
+    setPageNumber(1);
+  };
 
   return (
     <>
       {selectedDocument && (
-        <ListGroup className="document-preview">
-          {/* {iframeData && (
-            <iframe
-              src={iframeData}
-              id="pdfViewer"
-              width="100%"
-              height="100%"
-              title="PDF Preview"
-            ></iframe>
-          )} */}
-
-          {/* {selectedDocument && (
-            <div>
-              <Document
-                file={selectedDocument}
-                onLoadSuccess={onDocumentLoadSuccess}
-              >
-                <Page pageNumber={pageNumber} />
-              </Document>
-              <p>
-                Page {pageNumber} of {numPages}
-              </p>
+        <div className="document-preview">
+          <div className="p-0 border-0">
+            <div className="preview d-flex flex-column justify-content-center align-items-center p-2">
+              {preview ? (
+                <>
+                  <Document
+                    file={selectedDocument}
+                    onLoadSuccess={onDocumentLoadSuccess}
+                  >
+                    <Page pageNumber={pageNumber} height={300} />
+                  </Document>
+                  <p className="m-0 text-center text-white small">
+                    Page {pageNumber} of {numPages}
+                  </p>
+                </>
+              ) : (
+                <div className="d-flex flex-column justify-content-center align-items-center h-100 text-white">
+                  <IoDocumentAttach size={"6rem"} />
+                  <p className="m-0 text-center">Preview Unavailable</p>
+                </div>
+              )}
             </div>
-          )} */}
-
-          <ListGroup.Item className="d-flex gap-2 align-items-center">
-            <IoDocumentAttach size={"3rem"} />
-            <p className="m-0">{selectedDocument.name}</p>
+            <p className="m-0 py-2 text-bg-light text-center">
+              {selectedDocument.name}
+            </p>
             <button className="remove-preview" onClick={removeSelectedDocument}>
               X
             </button>
-          </ListGroup.Item>
-        </ListGroup>
+          </div>
+        </div>
       )}
     </>
   );

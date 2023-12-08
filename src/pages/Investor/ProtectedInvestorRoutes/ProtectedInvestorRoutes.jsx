@@ -57,56 +57,56 @@ function ProtectedInvestorRoutes({ children, ...props }) {
 
     return (
       <>
-            <div className="investor-private-routes" data-bs-theme={theme}>
-        <InvestorNavbar
-          handleSidebarToggle={handleSidebarToggle}
-          sidebarCollapsed={sidebarCollapsed}
-        />
+        <div className="new-investor-private-routes" data-bs-theme={theme}>
+          <InvestorNavbar
+            handleSidebarToggle={handleSidebarToggle}
+            sidebarCollapsed={sidebarCollapsed}
+          />
 
-        <div
-          className={`container-fluid p-0 newInvestor_container ${
-            sidebarCollapsed ? "sidebar-collapsed" : ""
-          }`}
-        >
-          <div className="sidebar">
-            <InvestorSidebar
-              sidebarCollapsed={sidebarCollapsed}
-              setSidebarCollapsed={handleSidebarToggle}
-            />
-          </div>
-
-          <div className="content pb-5 pb-md-0">
-            <Outlet />
-          </div>
-        </div>
-
-        {/* Mobile Navbar */}
-        <MobileNavbar isInvestor={true} />
-
-        <LogOutPopUp />
-
-        <div className="modals">
-          {/* Modal for creating new Community */}
-          <ModalBSContainer
-            isStatic={false}
-            id="AddNewCommunity"
-            className="z-n1"
+          <div
+            className={`container-fluid p-0 newInvestor_container ${
+              sidebarCollapsed ? "sidebar-collapsed" : ""
+            }`}
           >
-            <ModalBSHeader title={"Create a Community"} className={``} />
-            <ModalBSBody>
-              <NewCommunityModal theme="investor" />
-            </ModalBSBody>
-          </ModalBSContainer>
-        </div>
+            <div className="sidebar">
+              <InvestorSidebar
+                sidebarCollapsed={sidebarCollapsed}
+                setSidebarCollapsed={handleSidebarToggle}
+              />
+            </div>
 
-        <Toaster
-          containerStyle={{
-            top: "100px",
-          }}
-          toastOptions={{
-            duration: 10000,
-          }}
-        />
+            <div className="content pb-5 pb-md-0">
+              <Outlet />
+            </div>
+          </div>
+
+          {/* Mobile Navbar */}
+          <MobileNavbar isInvestor={true} />
+
+          <LogOutPopUp />
+
+          <div className="modals">
+            {/* Modal for creating new Community */}
+            <ModalBSContainer
+              isStatic={false}
+              id="AddNewCommunity"
+              className="z-n1"
+            >
+              <ModalBSHeader title={"Create a Community"} className={``} />
+              <ModalBSBody>
+                <NewCommunityModal theme="investor" />
+              </ModalBSBody>
+            </ModalBSContainer>
+          </div>
+
+          <Toaster
+            containerStyle={{
+              top: "100px",
+            }}
+            toastOptions={{
+              duration: 10000,
+            }}
+          />
         </div>
       </>
     );

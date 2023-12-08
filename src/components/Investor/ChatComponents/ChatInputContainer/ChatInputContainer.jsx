@@ -23,6 +23,7 @@ import {
 } from "../../../../Store/features/user/userSlice";
 import AttachmentSelector from "./ChatAttachments/AttachmentSelector/AttachmentSelector";
 import IconSend from "../../SvgIcons/IconSend";
+import { generateId } from "../../../../utils/ChatsHelpers";
 // import { updateLastMessage } from "../../../../Store/features/chat/chatSlice";
 
 export default function ChatInputContainer({
@@ -74,7 +75,12 @@ export default function ChatInputContainer({
       selectedDocument === null
     )
       return;
+
+    // Generate Random Id
+    const uniqueId = generateId();
+
     const message = {
+      id: uniqueId,
       senderId: loggedInUserId,
       text: sendText,
       chatId: chatId,
@@ -107,14 +113,16 @@ export default function ChatInputContainer({
       }
     }
 
+    console.log("message state before adding to db", message);
     addMessage(message)
       .then(({ data }) => {
         // setIsSent(!isSent);
-        console.log(data);
+        console.log("response after adding to db", data);
       })
       .catch((error) => {
         console.error("Error-->", error);
       });
+
     message.senderId = {
       _id: loggedInUserId,
       firstName: userFirstName,
@@ -134,6 +142,7 @@ export default function ChatInputContainer({
       recieverId = [userId];
     }
     const createdAt = new Date().toISOString();
+    console.log("State of message before sending", message);
     setSendMessage({ ...message, recieverId, createdAt });
     setMessages((prevMessages) => [
       ...prevMessages,

@@ -11,14 +11,14 @@ import {
 // import ArrowRight from "../../../Images/investorsidebar/ArrowRight.svg";
 // import Setting from "../../../Images/investorsidebar/Settings.svg";
 // import Support from "../../../Images/investorsidebar/Support.svg";
-import HomeIcon from "../../../Images/investorIcon/home.svg";
-import myStartUpIcon from "../../../Images/Investor/Sidebar/MyStartUps.svg";
-import exploreIcon from "../../../Images/Investor/Sidebar/explore.svg";
+// import HomeIcon from "../../../Images/investorIcon/home.svg";
+// import myStartUpIcon from "../../../Images/Investor/Sidebar/MyStartUps.svg";
+// import exploreIcon from "../../../Images/Investor/Sidebar/explore.svg";
 // import syndicateIcon from "../../../Images/Investor/Sidebar/syndicates.svg";
 // import liveDealsIcon from "../../../Images/Investor/Sidebar/Live Deals.svg";
-import mySchedulesIcon from "../../../Images/Investor/Sidebar/My Schedules.svg";
-import savedPostsIcon from "../../../Images/Investor/Sidebar/SavedPosts.svg";
-import ExitIcon from "../../../Images/investorIcon/Exit.svg";
+// import mySchedulesIcon from "../../../Images/Investor/Sidebar/My Schedules.svg";
+// import savedPostsIcon from "../../../Images/Investor/Sidebar/SavedPosts.svg";
+// import ExitIcon from "../../../Images/investorIcon/Exit.svg";
 // import InvestorIcon from "../../../Images/investorIcon/Pot.svg";
 // import PlusIcon from "../../../Images/investorIcon/Plus.svg";
 import "react-pro-sidebar/dist/css/styles.css";
@@ -28,13 +28,20 @@ import LogOutPopUp from "../../PopUp/LogOutPopUp/LogOutPopUp";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout } from "../../../Store/features/user/userSlice";
-import connectionsIcon from "../../../Images/investorsidebar/connection.svg";
+// import connectionsIcon from "../../../Images/investorsidebar/connection.svg";
 import { PlusIcon } from "../SvgIcons";
-import companyProfileIcon from "../../../Images/Investor/Sidebar/company.svg";
+// import companyProfileIcon from "../../../Images/Investor/Sidebar/company.svg";
 import { BsChevronDown, BsChevronUp, BsLink45Deg } from "react-icons/bs";
 import { ModalBsLauncher } from "../../PopUp/ModalBS";
 import CommunitiesIcon from "../../Investor/ChatComponents/CommunitiesIcon";
 import { clearAllChatsData } from "../../../Store/features/chat/chatSlice";
+import { GoHome } from "react-icons/go";
+import { HiOutlineOfficeBuilding } from "react-icons/hi";
+import { IoCompassOutline, IoExitOutline } from "react-icons/io5";
+import IconMyStartups from "../../Investor/SvgIcons/IconMyStartups";
+import IconClock from "../../Investor/SvgIcons/IconClock";
+import { PiFloppyDiskBackLight, PiSparkleLight } from "react-icons/pi";
+import { HiOutlineUserPlus } from "react-icons/hi2";
 
 // Investor Sidebar
 const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
@@ -98,6 +105,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
       onMouseLeave={() => {
         if (!isMobileView) {
           setSidebarCollapsed(true);
+          setIsCommunityDetailOpen(false);
         }
       }}
       onMouseEnter={() => {
@@ -147,10 +155,10 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                       alt="User profile"
                     />
                   </Link>
-                  <h3>
+                  <h3 style={{ fontSize: "20px" }} className="mt-2">
                     {loggedInUser?.firstName} {loggedInUser?.lastName}
                   </h3>
-                  <h4>{loggedInUser?.email}</h4>
+                  <h3>{loggedInUser?.email}</h3>
                 </>
               )}
             </div>
@@ -202,10 +210,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/investor/home"
                   id="sidebar_home"
                 >
-                  <img src={HomeIcon} alt="link to Home" />
-                  {!sidebarCollapsed && (
-                    <span className="text-black">Home</span>
-                  )}
+                  {/* <img src={HomeIcon} alt="link to Home" /> */}
+                  <GoHome size={25} />
+                  {!sidebarCollapsed && <span className="">Home</span>}
                 </Link>
               </MenuItem>
 
@@ -218,10 +225,9 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/investor/company-profile"
                   id="sidebar_companyProfile"
                 >
-                  <img src={companyProfileIcon} alt="link to Company Profile" />
-                  {!sidebarCollapsed && (
-                    <span className="text-black">Company</span>
-                  )}
+                  {/* <img src={companyProfileIcon} alt="link to Company Profile" /> */}
+                  <HiOutlineOfficeBuilding size={25} />
+                  {!sidebarCollapsed && <span className="">Company</span>}
                 </Link>
               </MenuItem>
 
@@ -234,10 +240,8 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/investor/onelink"
                   id="sidebar_onelink"
                 >
-                  <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} />
-                  {!sidebarCollapsed && (
-                    <span className="text-black">OneLink</span>
-                  )}
+                  <BsLink45Deg size={"25px"} />
+                  {!sidebarCollapsed && <span className="">OneLink</span>}
                 </Link>
               </MenuItem>
 
@@ -249,12 +253,19 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   className="sidebar__community d-flex gap-4 "
                   id="sidebar_community"
                 >
-                  <div onClick={() => setSidebarCollapsed(true)}>
+                  <div
+                    onClick={() => {
+                      setSidebarCollapsed(true);
+                      setIsCommunityDetailOpen(false);
+                    }}
+                  >
                     <CommunitiesIcon
-                      width="17px"
-                      height="17px"
+                      width="25px"
+                      height="25px"
                       color={`${
-                        isCommunityDetailOpen ? "#000" : "rgba(97, 97, 97, 1)"
+                        isCommunityDetailOpen
+                          ? "var(--currentTheme-dark)"
+                          : "var(--d-l-grey)"
                       }`}
                     />
                   </div>
@@ -302,15 +313,14 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/investor/explore"
                   id="sidebar_explore"
                 >
-                  <img
+                  {/* <img
                     src={exploreIcon}
                     alt="link for Explore"
                     width="17px"
                     height="17px"
-                  />
-                  {!sidebarCollapsed && (
-                    <span className="text-black">Explore</span>
-                  )}
+                  /> */}
+                  <IoCompassOutline size={25} />
+                  {!sidebarCollapsed && <span className="">Explore</span>}
                 </Link>
               </MenuItem>
               <MenuItem
@@ -322,15 +332,14 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/investor/mystartups"
                   id="sidebar_myStartups"
                 >
-                  <img
+                  {/* <img
                     src={myStartUpIcon}
                     alt="link for My Startups"
                     width="17px"
                     height="17px"
-                  />
-                  {!sidebarCollapsed && (
-                    <span className="text-black">My StartUps</span>
-                  )}
+                  /> */}
+                  <IconMyStartups height="25px" width="25px" />
+                  {!sidebarCollapsed && <span className="">My StartUps</span>}
                 </Link>
               </MenuItem>
               <MenuItem
@@ -342,15 +351,14 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/investor/my-schedule"
                   id="sidebar_mySchedule"
                 >
-                  <img
+                  {/* <img
                     src={mySchedulesIcon}
                     alt="link for My Schedules"
                     width="17px"
                     height="17px"
-                  />
-                  {!sidebarCollapsed && (
-                    <span className="text-black">My Schedules</span>
-                  )}
+                  /> */}
+                  <IconClock height="25px" width="25px" />
+                  {!sidebarCollapsed && <span className="">My Schedules</span>}
                 </Link>
               </MenuItem>
               <MenuItem
@@ -362,15 +370,14 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/investor/saved-posts"
                   id="sidebar_savedPosts"
                 >
-                  <img
+                  {/* <img
                     src={savedPostsIcon}
                     alt="link for Saved Posts"
                     width="17px"
                     height="17px"
-                  />
-                  {!sidebarCollapsed && (
-                    <span className="text-black">Saved Posts</span>
-                  )}
+                  /> */}
+                  <PiFloppyDiskBackLight size={25} />
+                  {!sidebarCollapsed && <span className="">Saved Posts</span>}
                 </Link>
               </MenuItem>
               <MenuItem
@@ -382,15 +389,14 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/investor/connection"
                   id="sidebar_connections"
                 >
-                  <img
+                  {/* <img
                     src={connectionsIcon}
                     alt="link for Connections"
                     width="17px"
                     height="17px"
-                  />
-                  {!sidebarCollapsed && (
-                    <span className="text-black">Connection</span>
-                  )}
+                  /> */}
+                  <HiOutlineUserPlus size={25} />
+                  {!sidebarCollapsed && <span className="">Connection</span>}
                 </Link>
               </MenuItem>
               <MenuItem
@@ -401,7 +407,8 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/"
                 >
-                  <img src={HomeIcon} alt="link to main landing page" />
+                  {/* <img src={HomeIcon} alt="link to main landing page" /> */}
+                  <PiSparkleLight size={25} />
                   {!sidebarCollapsed && <span>Learn More</span>}
                 </Link>
               </MenuItem>
@@ -420,7 +427,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     height="17px"
                   />
                   {!sidebarCollapsed && (
-                    <span className="text-black">Syndicates</span>
+                    <span className="">Syndicates</span>
                   )}
                 </Link>
               </MenuItem> */}
@@ -440,7 +447,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     height="17px"
                   />
                   {!sidebarCollapsed && (
-                    <span className="text-black">Live Deals</span>
+                    <span className="">Live Deals</span>
                   )}
                 </Link>
               </MenuItem> */}
@@ -492,10 +499,11 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           <SidebarFooter>
             <Menu iconShape="round">
               <MenuItem onClick={handleLogout}>
-                <img src={ExitIcon} alt="logout" width="17px" height="17px" />
-                {!sidebarCollapsed && (
-                  <span className="text-black">Log out</span>
-                )}
+                {/* <img src={ExitIcon} alt="logout" width="17px" height="17px" /> */}
+                <div className="d-flex justify-content-center align-items-center">
+                  <IoExitOutline size={25} />
+                  {!sidebarCollapsed && <span>Log out</span>}
+                </div>
               </MenuItem>
             </Menu>
           </SidebarFooter>

@@ -74,7 +74,7 @@ export default function UserBio({ canEdit = true, bioText = "" }) {
               {isBioEditable && (
                 <button
                   type="submit"
-                  className="ms-2 d-flex justify-content-center align-items-center gap-2"
+                  className="btn ms-2 d-flex justify-content-center align-items-center gap-2"
                   onClick={() => submitBioHandler()}
                   disabled={loading}
                 >
