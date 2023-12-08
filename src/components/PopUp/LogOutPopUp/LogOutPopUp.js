@@ -1,12 +1,11 @@
-import React, { useState } from "react";
 import "./LogOutPopUp.scss";
-import CorrectIcon from "../../../Images/investorsidebar/Log-out.svg";
+import { IoExitOutline } from "react-icons/io5";
 
 const LogOutPopUp = ({
   setShowLogoutPopup,
   handleLogoutLogic,
   showLogoutPopup,
-  isInvestor = false
+  isInvestor = false,
 }) => {
   const handleLogout = () => {
     handleLogoutLogic();
@@ -23,20 +22,32 @@ const LogOutPopUp = ({
 
   return (
     <>
-   {showLogoutPopup && (
+      {showLogoutPopup && (
         <div className="logout_popup">
           <div className="popup">
             <div className="popup-content ">
-              <img src={CorrectIcon} alt="image " />
+              <IoExitOutline
+                size={56}
+                style={{
+                  color: "var(--currentTheme)",
+                }}
+              />
               <h1>
                 Are you sure you want to &nbsp;
                 <span style={{ color: textColor }}>Log Out?</span>
               </h1>
               {/* <button className="ok_button">OK</button> */}
               <div className="d-flex flex-wrap gap-2 justify-content-center">
-
-              <button  className="cancel_button " onClick={handleCancel}>Cancel</button>
-              <button className="ok_button" style={{ backgroundColor: buttonColor, color: buttonText }} onClick={handleLogout}>Log out</button>
+                <button className="cancel_button " onClick={handleCancel}>
+                  Cancel
+                </button>
+                <button
+                  className="ok_button"
+                  style={{ backgroundColor: buttonColor, color: buttonText }}
+                  onClick={handleLogout}
+                >
+                  Log out
+                </button>
               </div>
             </div>
           </div>

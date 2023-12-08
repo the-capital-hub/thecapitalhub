@@ -47,7 +47,7 @@
   }
 
   .popup-content {
-    background-color: #fff;
+    background-color: var(--white-to-grey);
     padding: 40px;
     text-align: center;
     border-radius: var(--border-radius);
@@ -59,7 +59,7 @@
     }
 
     h1 {
-      color: #000;
+      color: var(--d-l-grey);
       font-family: Poppins;
       font-size: 20px;
       font-style: normal;
@@ -87,12 +87,11 @@
   /* Center the buttons */
   button {
     // margin: 10px;
-    
+    padding: 10px 30px;
   }
 
   /* Style the close button */
   .cancel_button {
-    // width: 30%;
     height: 50px;
     flex-shrink: 0;
     border-radius: 30px;
@@ -108,9 +107,6 @@
   }
 
   .ok_button {
-    // width: 30%;
-    padding-left: 20px;
-    padding-right: 20px;
     height: 50px;
     flex-shrink: 0;
     border-radius: 30px;
