@@ -5,12 +5,13 @@
   transform: translateX(50%);
   box-sizing: border-box;
   // width: max-content;
-  background-color: white;
+  // background-color: white;
+  background: var(--white-to-dgrey);
 
   a {
     color: rgb(113, 113, 113);
   }
   .active {
-    color: black;
+    color: var(--d-l-grey);
   }
 }
