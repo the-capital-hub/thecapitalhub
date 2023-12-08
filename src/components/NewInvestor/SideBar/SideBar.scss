@@ -19,11 +19,11 @@
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  color: #20315f;
+  color: var(--d-l-grey);
 }
 
 .hr-above-support {
-  color: rgba(173, 173, 173, 0.2);
+  color: var(--d-l-grey);
   border: 1px solid rgba(173, 173, 173, 0.2);
 }
 
@@ -47,9 +47,9 @@
   overflow: hidden;
 }
 
-#header .pro-sidebar {
-  /* height: 100vh; */
-}
+// #header .pro-sidebar {
+//   /* height: 100vh; */
+// }
 
 .closemenu {
   position: absolute;
@@ -73,7 +73,7 @@
 
 #header .pro-sidebar-inner {
   border-radius: 20px;
-  background-color: white;
+  background-color: var(--white-to-grey);
   box-shadow: 0.5px 0.866px 2px 0px rgba(0, 0, 0, 0.15);
 }
 
@@ -84,7 +84,7 @@
 #header .pro-sidebar-inner .pro-sidebar-layout .logotext p {
   font-size: 20px;
   padding: 0 20px;
-  color: #000;
+  color: var(--d-l-grey);
   font-weight: bold;
 }
 
@@ -105,7 +105,7 @@
   line-height: 22px;
   /* identical to box height */
 
-  color: #000000;
+  color: var(--d-l-grey);
 }
 
 .logotext h4 {
@@ -144,7 +144,7 @@
 }
 
 #header .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item {
-  color: #000;
+  color: var(--d-l-grey);
   margin: 10px 0px;
   font-weight: bold;
   justify-content: flex-start;
@@ -157,7 +157,7 @@
   .pro-inner-item
   .pro-icon-wrapper {
   background-color: #fbf4cd;
-  color: #000;
+  color: var(--d-l-grey);
   border-radius: 3px;
 }
 
@@ -168,11 +168,14 @@
   .pro-inner-item
   .pro-icon-wrapper
   .pro-item-content {
-  color: #000;
+  color: var(--d-l-grey);
 }
 
 #header .pro-sidebar-inner .pro-sidebar-layout .active {
   background-image: linear-gradient(0deg, #eef2f3 0%, #eef2f3 100%);
+  * {
+    color: var(--currentTheme-dark) !important;
+  }
 }
 
 #header .pro-sidebar-inner .pro-sidebar-layout .active-item {
@@ -197,7 +200,7 @@
     details {
       font-size: inherit;
       font-weight: 400;
-      color: black;
+      color: var(--d-l-grey);
       position: relative;
 
       summary {
@@ -209,11 +212,11 @@
 
       &[open] summary {
         margin-bottom: 10px;
-        color: #000;
+        color: var(--currentTheme-dark);
 
-        &:hover {
-          background-color: #d3f36b;
-        }
+        // &:hover {
+        //   background-color: #d3f36b;
+        // }
       }
 
       .sidebar__community__btn {
@@ -223,36 +226,36 @@
         padding-block: 0.25em;
         padding-inline: 0;
 
-        color: #000;
+        color: var(--currentTheme-dark);
         font-size: 0.85rem;
         font-weight: 500;
         text-align: left;
 
-        &:hover {
-          background-color: #d3f36b;
-        }
+        // &:hover {
+        //   background-color: #d3f36b;
+        // }
       }
     }
 
     // For responsiveness of Modal component
-    .modal {
-      margin-top: 20%;
+    // .modal {
+    //   margin-top: 20%;
 
-      @media (min-width: 500px) {
-        margin-top: 15%;
-      }
+    //   @media (min-width: 500px) {
+    //     margin-top: 15%;
+    //   }
 
-      @media (min-width: 575px) {
-        margin-top: 13.5%;
-      }
+    //   @media (min-width: 575px) {
+    //     margin-top: 13.5%;
+    //   }
 
-      @media (min-width: 768px) {
-        margin-top: 10%;
-      }
+    //   @media (min-width: 768px) {
+    //     margin-top: 10%;
+    //   }
 
-      @media (min-width: 769px) {
-        margin-top: 0;
-      }
-    }
+    //   @media (min-width: 769px) {
+    //     margin-top: 0;
+    //   }
+    // }
   }
 }

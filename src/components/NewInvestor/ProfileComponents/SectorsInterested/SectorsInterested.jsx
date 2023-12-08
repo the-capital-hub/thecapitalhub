@@ -59,7 +59,10 @@ export default function SectorsInterested() {
         </div>
         {/* Sectors Modal */}
         <ModalBSContainer id="sectorsModal" isStatic={false} modalXl>
-          <ModalBSHeader title={"Add/Edit Sectors interested"} />
+          <ModalBSHeader
+            title={"Add/Edit Sectors interested"}
+            className={"d-l-grey"}
+          />
           <ModalBSBody>
             <AddEditModal
               dataArray={sectorsData}
