@@ -1,6 +1,7 @@
 .investment-card-container {
   flex: 0 0 24rem;
-  background: #fff;
+  background: var(--white-to-grey);
+  color: var(--d-l-grey);
   box-shadow: 4px 4px 30px 0px rgba(211, 243, 107, 0.1);
   // height: 200px;
 
@@ -28,7 +29,9 @@
   }
 
   .logo {
-    max-width: 50px;
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
   }
 
   .modal__input {
@@ -61,7 +64,7 @@
     outline: none;
     width: 100%;
     background-color: transparent;
-    color: #000;
+    color: var(--d-l-grey);
 
     padding: 0.5em 0.75em;
     font-size: 1rem;

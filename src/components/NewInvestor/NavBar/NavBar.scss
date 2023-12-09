@@ -11,7 +11,7 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: 1;
 
     @media (min-width: 768px) {
       border-radius: 20px;
@@ -119,6 +119,7 @@
 
         .notification-container {
           position: relative;
+          cursor: pointer;
 
           .notification-count {
             position: absolute;
@@ -163,7 +164,6 @@
             // margin-left: 1.5rem;
             // background: #eaeef2;
             background: var(--bs-light);
-
           }
 
           .notification-icon,

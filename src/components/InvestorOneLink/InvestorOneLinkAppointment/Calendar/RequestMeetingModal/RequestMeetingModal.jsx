@@ -99,8 +99,12 @@ export default function RequestMeetingModal({ selectedMeeting, setMeetings }) {
   return (
     <div className="request_meeting_modal_wrapper">
       <ModalBSContainer id={"requestMeetingModal"}>
-        <ModalBSHeader title={"Request Meeting"} closeRef={closeRef} />
-        <ModalBSBody className={"modal_tall"}>
+        <ModalBSHeader
+          title={"Request Meeting"}
+          closeRef={closeRef}
+          className={"d-l-grey"}
+        />
+        <ModalBSBody className={"modal_tall d-l-grey"}>
           {!alert ? (
             <form
               onSubmit={handleRequestSubmit}

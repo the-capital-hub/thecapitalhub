@@ -1,13 +1,13 @@
 .mystartup_main_container {
   .startup_container {
     border-radius: var(--border-radius);
-    border: 1px solid #eaeaea;
-    background: #fff;
+    border: 1px solid var(--bs-border-color);
+    background: var(--white-to-grey);
     // width: 99%;
     // padding: 20px;
 
     .title_h4 {
-      color: #090909;
+      color: var(--d-l-grey);
       font-family: Poppins;
       font-size: 18px;
       font-style: normal;
@@ -31,8 +31,9 @@
     .left_container,
     .right_container {
       border-radius: var(--border-radius);
-      border: 1px solid #dfdfdf;
-      background: #fff;
+      border: 1px solid var(--bs-border-color);
+      background: var(--white-to-grey);
+      color: var(--d-l-grey);
       width: 49%;
       padding: 15px;
       height: max-content;
@@ -57,7 +58,26 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        overflow-y: scroll;
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+          height: 8px;
+          cursor: pointer;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: rgba(211, 243, 107, 0.2);
+          border-radius: 10rem;
+
+          &:hover {
+            background-color: rgba(211, 243, 107, 1);
+          }
+        }
+
+        &::-webkit-scrollbar-track {
+          background-color: transparent;
+          border-radius: 10rem;
+        }
 
         @media (min-width: 821px) {
           overflow-y: visible;
@@ -148,9 +168,9 @@
         height: auto;
       }
 
-      .chart_container {
-        // width: 75%;
-      }
+      // .chart_container {
+      //   // width: 75%;
+      // }
     }
   }
 }

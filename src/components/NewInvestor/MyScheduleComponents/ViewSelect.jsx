@@ -1,8 +1,9 @@
-import react from "react";
-
 export default function ViewSelect({ view, setView }) {
   return (
-    <div className="view__selector d-flex gap-2 bg-light px-2 py-3 rounded-3">
+    <div
+      className="view__selector d-flex gap-2 px-2 py-3 rounded-3"
+      style={{ backgroundColor: "var(--bs-gray-200)" }}
+    >
       {/* Day */}
       <button
         id="day"

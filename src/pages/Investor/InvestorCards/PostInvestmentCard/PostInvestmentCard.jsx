@@ -13,7 +13,7 @@ const PostInvestmentCard = ({ logo, text, para, images, smallText }) => {
 
       <hr />
       <div className="bottom">
-        <img src={images} alt="Image" className="small-image" />
+        <img src={images} alt="" className="small-image" />
         <span className="small-text">{smallText}</span>
       </div>
     </div>

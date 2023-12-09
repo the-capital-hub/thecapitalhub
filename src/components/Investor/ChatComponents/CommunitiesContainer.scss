@@ -20,7 +20,7 @@
   }
 
   .my__communities {
-    max-height: 14rem;
+    flex: 0 0 14rem;
     overflow-y: auto;
 
     &::-webkit-scrollbar {

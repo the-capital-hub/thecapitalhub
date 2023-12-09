@@ -1,14 +1,15 @@
 import React from "react";
 import IconMessage from "../../SvgIcons/IconMessage";
 import { Link } from "react-router-dom";
-import connection from "../../../../Images/StartUp/icons/connection-user.png";
-import messageIcon from "../../../../Images/StartUp/icons/message.svg";
-import {
-  sentConnectionRequest,
-} from "../../../../Service/user";
+// import connection from "../../../../Images/StartUp/icons/connection-user.png";
+// import messageIcon from "../../../../Images/StartUp/icons/message.svg";
+import { sentConnectionRequest } from "../../../../Service/user";
 
-export default function ProfileHeader({ userData, loggedInUser, setConnectionSent }) {
-
+export default function ProfileHeader({
+  userData,
+  loggedInUser,
+  setConnectionSent,
+}) {
   const handleConnect = (userId) => {
     sentConnectionRequest(loggedInUser._id, userId)
       .then(({ data }) => {
@@ -38,16 +39,16 @@ export default function ProfileHeader({ userData, loggedInUser, setConnectionSen
             <h3 className="typography h3">
               {userData?.firstName || "John"} {userData?.lastName || "Doe"}
             </h3>
-            <span className="small_typo">
-              {userData?.designation || "Founder & CEO of The Capital Hub"}
+            <span className="small_typo text-secondary">
+              {userData?.designation || "designation"}
             </span>
             <br />
-            <span className="small_typo">
-              {userData?.location || "Bangalore , India"}
+            <span className="small_typo text-secondary">
+              {userData?.location || "location"}
             </span>
           </div>
         </div>
-        {loggedInUser._id !== userData?._id &&
+        {loggedInUser._id !== userData?._id && (
           <div className="buttons d-flex gap-2 flex-row align-items-md-center">
             <Link
               to={`/chats?userId=${userData?._id}`}
@@ -62,9 +63,7 @@ export default function ProfileHeader({ userData, loggedInUser, setConnectionSen
               <button className="connection-status  btn rounded-pill px-3 py-2">
                 <span>Connected</span>
               </button>
-            ) : userData?.connectionsReceived?.includes(
-              loggedInUser._id
-            ) ? (
+            ) : userData?.connectionsReceived?.includes(loggedInUser._id) ? (
               <button className=" connection-status d-flex btn rounded-pill px-3 py-2">
                 {/* <img src={connection} width={20} alt="message user" /> */}
                 <span>Pending</span>
@@ -78,7 +77,7 @@ export default function ProfileHeader({ userData, loggedInUser, setConnectionSen
               </button>
             )}
           </div>
-        }
+        )}
       </div>
       <div className="details">
         <div className="single_details row row-cols-1 row-cols-md-2 ">
@@ -86,7 +85,7 @@ export default function ProfileHeader({ userData, loggedInUser, setConnectionSen
           <span className="col-md-9 value text-secondary">
             {userData?.startUp?.company ||
               userData?.investor?.companyName ||
-              ""}
+              "company"}
           </span>
         </div>
         <div className="single_details row row-cols-1 row-cols-md-2 ">

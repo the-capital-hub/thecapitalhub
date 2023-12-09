@@ -1,4 +1,5 @@
 import React from "react";
+import "./ChatSettings.scss";
 import SettingsHeader from "./SettingsHeader";
 import SettingsAbout from "./SettingsAbout";
 import SettingsBlackHeader from "./SettingsBlackHeader";
@@ -79,10 +80,7 @@ export default function ChatSettings({ setIsSettingsOpen }) {
   // const fileTypeCountString = fileTypeCount.toString().padStart(3, ' ');
 
   return (
-    <div
-      className="chat_settings rounded-4 shadow-sm p-3 w-100"
-      style={{ backgroundColor: "var(--white-to-grey)" }}
-    >
+    <div className="chat_settings shadow-sm p-3 w-100">
       {loading ? (
         <SpinnerBS
           className={

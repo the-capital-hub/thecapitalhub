@@ -1,5 +1,6 @@
 .new-investor-private-routes {
   background-color: var(--investor-bg);
+  min-height: 100dvh;
   .newInvestor_container {
     display: flex;
     // background-color: #f9faf3;
@@ -160,4 +161,8 @@
 // Utlities that can be called anywhere in Investor account
 .d-l-grey {
   color: var(--d-l-grey);
+}
+
+.white-to-grey {
+  background-color: var(--white-to-grey);
 }

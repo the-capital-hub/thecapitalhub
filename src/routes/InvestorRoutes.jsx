@@ -204,16 +204,14 @@ function InvestorRoutes() {
         }
       />
 
-<Route
-  path="notifications" 
-  element={
-    <Suspense fallback={<SuspenseLoader />}>
-      <Notifications />
-    </Suspense>
-  }
-/>
-
-     
+      <Route
+        path="notifications"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <Notifications />
+          </Suspense>
+        }
+      />
     </>
   );
 }

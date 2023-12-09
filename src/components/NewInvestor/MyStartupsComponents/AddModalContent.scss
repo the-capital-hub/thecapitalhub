@@ -6,7 +6,7 @@
   clip: rect(1px, 1px, 1px, 1px);
 }
 
-input.visually-hidden:is(:focus, :focus-within)+label {
+input.visually-hidden:is(:focus, :focus-within) + label {
   color: rgba(140, 90, 201, 1);
 }
 
@@ -21,6 +21,7 @@ input.visually-hidden:is(:focus, :focus-within)+label {
   border-radius: 15px;
   background-color: rgba(140, 90, 201, 0.2);
   cursor: pointer;
+  color: var(--d-l-grey);
 
   label {
     font-size: 0.75rem;
@@ -53,6 +54,25 @@ input.visually-hidden:is(:focus, :focus-within)+label {
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-top: 5px;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+      cursor: pointer;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(211, 243, 107, 0.2);
+      border-radius: 10rem;
+
+      &:hover {
+        background-color: rgba(211, 243, 107, 1);
+      }
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+      border-radius: 10rem;
+    }
   }
 
   .suggestion-item {
@@ -69,11 +89,13 @@ input.visually-hidden:is(:focus, :focus-within)+label {
   }
 
   .suggestion-item:hover {
-    background-color: #f0f0f0;
+    background-color: #c3c3c3;
+    color: var(--currentTheme-text);
   }
 
   .suggestion-item.active {
-    background-color: #f0f0f0;
+    background-color: #c3c3c3;
+    color: var(--currentTheme-text);
   }
 
   .suggestion button {
