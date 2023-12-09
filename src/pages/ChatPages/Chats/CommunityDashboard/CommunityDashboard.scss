@@ -1,6 +1,6 @@
 .community_dashboard_container {
-  // 70px is height of chat navbar and 85px is (height of mobileheader + margin-bottom)
-  max-height: calc(100% - 80px - 70px);
+  // 80px is height of chat navbar and 70px is (height of mobileheader + margin-bottom)
+  max-height: calc(100% - 80px - 0px);
   height: 100%;
   border-radius: var(--border-radius);
   // border: 1px solid #cfcfcf;

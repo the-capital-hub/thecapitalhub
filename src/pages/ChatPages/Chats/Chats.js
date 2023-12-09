@@ -219,40 +219,40 @@ const Chats = () => {
     }
   }, [paramUserId, loggedInUserId, dispatch]);
 
-  const renderMobileHeader = useMemo(() => {
-    return (
-      <div
-        className="mobile-nav shadow-sm pb-2 px-2"
-        style={{ height: "70px" }}
-      >
-        <button
-          className="btn btn-sm btn-light"
-          onClick={() => {
-            console.log(chatId);
-            if (!chatId) {
-              navigate(-1);
-            } else {
-              dispatch(resetChat());
-            }
-          }}
-        >
-          <IoMdArrowRoundBack /> Back
-        </button>
-        <Link to="/">
-          <img src={navBarLogo} alt="nav bar logo" />
-        </Link>
-        <button
-          className="btn btn-sm btn-light"
-          onClick={() =>
-            navigate(isInvestor === "true" ? "/investor/home" : "/home")
-          }
-          // onClick={() => dispatch(resetChat())}
-        >
-          <AiOutlineHome /> Home
-        </button>
-      </div>
-    );
-  }, [dispatch, isInvestor, navigate, chatId]);
+  // const renderMobileHeader = useMemo(() => {
+  //   return (
+  //     <div
+  //       className="mobile-nav shadow-sm pb-2 px-2"
+  //       style={{ height: "70px" }}
+  //     >
+  //       <button
+  //         className="btn btn-sm btn-light"
+  //         onClick={() => {
+  //           console.log(chatId);
+  //           if (!chatId) {
+  //             navigate(-1);
+  //           } else {
+  //             dispatch(resetChat());
+  //           }
+  //         }}
+  //       >
+  //         <IoMdArrowRoundBack /> Back
+  //       </button>
+  //       <Link to="/">
+  //         <img src={navBarLogo} alt="nav bar logo" />
+  //       </Link>
+  //       <button
+  //         className="btn btn-sm btn-light"
+  //         onClick={() =>
+  //           navigate(isInvestor === "true" ? "/investor/home" : "/home")
+  //         }
+  //         // onClick={() => dispatch(resetChat())}
+  //       >
+  //         <AiOutlineHome /> Home
+  //       </button>
+  //     </div>
+  //   );
+  // }, [dispatch, isInvestor, navigate, chatId]);
 
   const renderMobileMainSection = useMemo(() => {
     return !isSettingsOpen ? (
@@ -281,7 +281,7 @@ const Chats = () => {
       </>
     ) : (
       <div className="right_section_wrapper overflow-y-auto">
-        <section className="right_section hide_scrollbar mt-3 w-100 ">
+        <section className="right_section hide_scrollbar w-100 ">
           <ChatSettings setIsSettingsOpen={setIsSettingsOpen} />
         </section>
       </div>
@@ -356,7 +356,7 @@ const Chats = () => {
           </div>
           {/* Main Chat section */}
           <section className="main_section">
-            {isMobileView && renderMobileHeader}
+            {/* {isMobileView && renderMobileHeader} */}
             {isMobileView ? (
               chatId ? (
                 renderMobileMainSection
