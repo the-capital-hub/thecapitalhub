@@ -396,10 +396,10 @@ const FeedPostCard = ({
                     >
                       {/* <img src={HomeIcon} alt="logo" /> */}
                       <GoHome size={15} />
-                      {designation},{" "}
+                      {designation?designation:"No Designation"},{" "}
                       {investorCompanyName?.companyName
                         ? investorCompanyName?.companyName
-                        : startUpCompanyName?.company}
+                        : startUpCompanyName?.company?startUpCompanyName?.company:"No Company"}
                     </span>
                     <span
                       style={{

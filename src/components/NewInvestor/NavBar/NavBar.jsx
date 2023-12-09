@@ -47,7 +47,7 @@ const NavBar = (props) => {
   const [inputOnFocus, setInputOnFocus] = useState(false);
   const [toggleNotificationPopup, setToggleNotificationPopup] = useState(false);
   const notificationPopup = useRef();
-
+  console.log(toggleNotificationPopup);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -90,10 +90,7 @@ const NavBar = (props) => {
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (
-        notificationPopup.current &&
-        !notificationPopup.current.contains(event.target)
-      ) {
+      if (notificationPopup.current && !event.target.closest(".noticon")) {
         setToggleNotificationPopup(false);
       }
     }
@@ -123,12 +120,22 @@ const NavBar = (props) => {
               >
                 {props.sidebarCollapsed ? (
                   // <img src={HambergerIcon} alt="bar" />
-                  <IoReorderThreeOutline size={25} style={{fill:"var(--d-l-grey)", stroke:"var(--d-l-grey)"}}/>
-
+                  <IoReorderThreeOutline
+                    size={25}
+                    style={{
+                      fill: "var(--d-l-grey)",
+                      stroke: "var(--d-l-grey)",
+                    }}
+                  />
                 ) : (
                   // <img src={HambergerCrossIcon} alt="bar" />
-                  <IoClose size={25} style={{fill:"var(--d-l-grey)", stroke:"var(--d-l-grey)"}} />
-
+                  <IoClose
+                    size={25}
+                    style={{
+                      fill: "var(--d-l-grey)",
+                      stroke: "var(--d-l-grey)",
+                    }}
+                  />
                 )}
                 <h1 className="ms-2">{pageTitle}</h1>
               </div>
@@ -248,8 +255,7 @@ const NavBar = (props) => {
                   onClick={() => setMobileSearch((prev) => !prev)}
                 >
                   {/* <img src={searchIconBlack} alt="search" /> */}
-                  <IoIosSearch size={30} style={{fill:"var(--d-l-grey)"}} />
-
+                  <IoIosSearch size={30} style={{ fill: "var(--d-l-grey)" }} />
                 </span>
 
                 {mobileSearch && (
@@ -413,7 +419,8 @@ const NavBar = (props) => {
 
                     <IoMdNotificationsOutline
                       size={30}
-                      style={{fill:"var(--d-l-grey)"}}
+                      style={{ fill: "var(--d-l-grey)" }}
+                      className="noticon"
                       onClick={() => {
                         dispatch(setUnreadNotifications(0));
                         setToggleNotificationPopup((prev) => !prev);
@@ -432,8 +439,10 @@ const NavBar = (props) => {
               <Link to="/chats" className="rounded-circle message-icon">
                 <div className="icon-wrapper">
                   {/* <img src={MessageIcon} alt="message" /> */}
-                  <AiOutlineMessage size={28} style={{fill:"var(--d-l-grey)"}} />
-
+                  <AiOutlineMessage
+                    size={28}
+                    style={{ fill: "var(--d-l-grey)" }}
+                  />
                 </div>
               </Link>
               {/* <div className="icon-wrapper d-none d-md-block"> */}
