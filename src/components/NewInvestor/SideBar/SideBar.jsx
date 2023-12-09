@@ -399,19 +399,19 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   {!sidebarCollapsed && <span className="">Connection</span>}
                 </Link>
               </MenuItem>
-              <MenuItem
+              {/* <MenuItem
                 // active={location.pathname.includes("")}
                 className="active-item"
-              >
-                <Link
+              > */}
+                {/* <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/"
-                >
+                > */}
                   {/* <img src={HomeIcon} alt="link to main landing page" /> */}
-                  <PiSparkleLight size={25} />
+                  {/* <PiSparkleLight size={25} />
                   {!sidebarCollapsed && <span>Learn More</span>}
                 </Link>
-              </MenuItem>
+              </MenuItem> */}
               {/* <MenuItem
                 active={location.pathname.includes("/syndicates")}
                 className="active-item"

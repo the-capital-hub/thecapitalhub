@@ -133,7 +133,7 @@ const Connection = () => {
           className={""}
         />
 
-        <section className="content_section mt-4">
+        <section className="content_section ">
           <div className="row">
             <div className="col-12 mt-2 box  p-4">
               <h4>Manage Connections</h4>

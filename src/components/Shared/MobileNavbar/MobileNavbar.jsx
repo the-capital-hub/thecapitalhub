@@ -57,12 +57,16 @@ export default function MobileNavbar({ isInvestor }) {
       <div className="d-flex flex-column align-items-center mx-3">
         {isInvestor ? (
           <>
-            <NavLink to="/investor/mystartups">
+            {/* <NavLink to="/investor/mystartups">
               <BsGraphUpArrow size={"20px"} />
             </NavLink>
             <span style={{ fontSize: "10px" }} className="text-center">
               {"My Startups"}
-            </span>
+            </span> */}
+             <NavLink to="/investor/onelink">
+              <BsLink45Deg size={"25px"} />
+            </NavLink>
+            <span style={{ fontSize: "10px" }}>{"OneLink"}</span>
           </>
         ) : (
           <>
