@@ -106,11 +106,7 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
           />
         ) : (
           <>
-            <div
-              className="left"
-              onClick={handleOpenSettingsClick}
-              style={{ cursor: "pointer" }}
-            >
+            <div className="left">
               {/* Back button */}
               {isMobileView && (
                 <button
@@ -121,23 +117,33 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
                 </button>
               )}
 
-              {user?.profilePicture || community?.profileImage ? (
-                <img
-                  src={user?.profilePicture || community?.profileImage}
-                  className="rounded_img"
-                  alt={`${user?.firstName} ${user?.lastName}`}
-                />
-              ) : (
-                <HiOutlineUserGroup
-                  style={{
-                    height: "60px",
-                    width: "60px",
-                    color: " rgba(159, 159, 159, 1)",
-                  }}
-                  className=""
-                />
-              )}
-              <div className="title_and_message">
+              <div
+                className=""
+                onClick={handleOpenSettingsClick}
+                style={{ cursor: "pointer" }}
+              >
+                {user?.profilePicture || community?.profileImage ? (
+                  <img
+                    src={user?.profilePicture || community?.profileImage}
+                    className="rounded_img"
+                    alt={`${user?.firstName} ${user?.lastName}`}
+                  />
+                ) : (
+                  <HiOutlineUserGroup
+                    style={{
+                      height: "60px",
+                      width: "60px",
+                      color: " rgba(159, 159, 159, 1)",
+                    }}
+                    className=""
+                  />
+                )}
+              </div>
+              <div
+                className="title_and_message"
+                onClick={handleOpenSettingsClick}
+                style={{ cursor: "pointer" }}
+              >
                 <h5 className="name_title text-capitalize m-0 lh-1">
                   {user
                     ? `${user.firstName} ${user.lastName}`
