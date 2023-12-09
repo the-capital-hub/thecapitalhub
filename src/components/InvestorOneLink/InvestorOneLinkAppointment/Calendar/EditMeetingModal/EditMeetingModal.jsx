@@ -64,8 +64,12 @@ export default function EditMeetingModal({ selectedMeeting, setMeetings }) {
   return (
     <div className="edit_meeting_modal_wrapper">
       <ModalBSContainer id={"editMeetingModal"}>
-        <ModalBSHeader title={"Delete Meeting"} closeRef={closeRef} />
-        <ModalBSBody>
+        <ModalBSHeader
+          title={"Delete Meeting"}
+          closeRef={closeRef}
+          className={"d-l-grey"}
+        />
+        <ModalBSBody className={"d-l-grey"}>
           {!alert ? (
             <form
               onSubmit={handleEditMeeting}
@@ -133,16 +137,26 @@ export default function EditMeetingModal({ selectedMeeting, setMeetings }) {
                     </p>
                     {showMoreDetails && (
                       <div className="booked-by-details">
-                        <p><strong>Company:</strong> {selectedMeeting?.bookedBy.companyName}</p>
-                        <p><strong>Email:</strong> {selectedMeeting?.bookedBy.email}</p>
-                        <p><strong>Phone:</strong> {selectedMeeting?.bookedBy.phone}</p>
-                        <p><strong>Agenda:</strong> {selectedMeeting?.bookedBy.description}</p>
-                        <p><strong>OneLink:</strong>
-                          <Linkify>
-                            {selectedMeeting?.bookedBy.oneLink}
-                          </Linkify>
+                        <p>
+                          <strong>Company:</strong>{" "}
+                          {selectedMeeting?.bookedBy.companyName}
                         </p>
-
+                        <p>
+                          <strong>Email:</strong>{" "}
+                          {selectedMeeting?.bookedBy.email}
+                        </p>
+                        <p>
+                          <strong>Phone:</strong>{" "}
+                          {selectedMeeting?.bookedBy.phone}
+                        </p>
+                        <p>
+                          <strong>Agenda:</strong>{" "}
+                          {selectedMeeting?.bookedBy.description}
+                        </p>
+                        <p>
+                          <strong>OneLink:</strong>
+                          <Linkify>{selectedMeeting?.bookedBy.oneLink}</Linkify>
+                        </p>
                       </div>
                     )}
                   </div>
@@ -152,8 +166,9 @@ export default function EditMeetingModal({ selectedMeeting, setMeetings }) {
               {/* Submit */}
               <button
                 type="button"
-                className={`btn btn-danger d-flex justify-content-center align-items-center gap-2 ${loading ? "opacity-50" : ""
-                  } `}
+                className={`btn btn-danger d-flex justify-content-center align-items-center gap-2 ${
+                  loading ? "opacity-50" : ""
+                } `}
                 disabled={loading}
                 onClick={handleDeleteMeeting}
               >

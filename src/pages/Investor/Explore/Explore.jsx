@@ -477,14 +477,14 @@ function Explore() {
         <div className="filtered-results">
           {loading ? (
             <SpinnerBS
-              className="container bg-white d-flex justify-content-center align-items-center p-5 rounded-4 shadow-sm"
+              className="container white-to-grey d-l-grey d-flex justify-content-center align-items-center p-5 rounded-4 shadow-sm"
               colorClass="text-secondary"
               spinnerSizeClass="xl"
             />
           ) : (
             <>
               {!filteredData?.length ? (
-                <div className="container bg-white d-flex justify-content-center align-items-center p-5 rounded-4 shadow-sm">
+                <div className="container white-to-grey d-l-grey d-flex justify-content-center align-items-center p-5 rounded-4 shadow-sm">
                   No {activeTab} found
                 </div>
               ) : (

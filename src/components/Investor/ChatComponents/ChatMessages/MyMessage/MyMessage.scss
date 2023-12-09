@@ -16,7 +16,7 @@
 
     .msg-time {
       font-size: 10px;
-      color: rgb(255, 255, 255);
+      color: var(--currentTheme-text);
       text-align: end;
       display: flex;
       align-items: center;
@@ -70,7 +70,7 @@
       }
 
       a {
-        color: white;
+        color: var(--currentTheme-text);
       }
 
       .video-message {

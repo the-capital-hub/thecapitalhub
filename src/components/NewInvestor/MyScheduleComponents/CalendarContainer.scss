@@ -9,7 +9,7 @@
 // Styles for the Calendar
 
 .rbc-calendar {
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--bs-border-color);
   border-radius: 15px;
   overflow: hidden;
 }
@@ -60,7 +60,7 @@
     button:active
     .rbc-btn-group:first-of-type
     button:focus {
-    color: black;
+    color: var(--d-l-grey);
     box-shadow: none;
   }
 
@@ -70,7 +70,7 @@
 }
 
 .rbc-time-content {
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: 1px solid var(--bs-border-color);
 }
 
 // Scrollbar
@@ -98,7 +98,7 @@
 .rbc-time-content::-webkit-scrollbar-track,
 .rbc-time-header-content::-webkit-scrollbar-track {
   background: transparent;
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 1px solid var(--bs-border-color);
   border-bottom: 0;
   border-radius: 10rem;
 }
@@ -135,13 +135,17 @@
   .rbc-header.rbc-today {
     background-color: inherit;
     span {
+      padding: 0.25em;
+      border-radius: 0.25rem;
       background-color: rgba(211, 243, 107, 1);
+      color: #000;
     }
   }
 }
 
 .rbc-time-slot {
   min-height: 2rem;
+  border-color: var(--bs-border-color) !important;
 }
 
 .rbc-time-header-gutter.rbc-label {

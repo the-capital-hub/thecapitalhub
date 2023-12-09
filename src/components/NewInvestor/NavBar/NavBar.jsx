@@ -1,13 +1,13 @@
 import React from "react";
 import "./NavBar.scss";
-import searchIconBlack from "../../../Images/navbar/Search.svg";
+// import searchIconBlack from "../../../Images/navbar/Search.svg";
 import Logo from "../../../Images/investorIcon/new-logo.png";
-import NotificationIcon from "../../../Images/investorIcon/notification.svg";
+// import NotificationIcon from "../../../Images/investorIcon/notification.svg";
 import YellowNotificationIcon from "../../../Images/investorIcon/YellowNotificationIcon.svg";
-import MessageIcon from "../../../Images/investorIcon/message.svg";
+// import MessageIcon from "../../../Images/investorIcon/message.svg";
 import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
-import HambergerIcon from "../../../Images/Hamberger.svg";
-import HambergerCrossIcon from "../../../Images/investorsidebar/FontX.svg";
+// import HambergerIcon from "../../../Images/Hamberger.svg";
+// import HambergerCrossIcon from "../../../Images/investorsidebar/FontX.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -58,7 +58,7 @@ const NavBar = (props) => {
         dispatch(setUnreadNotifications(data.unreadCount));
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [dispatch]);
 
   const searchInputHandler = async ({ target }) => {
     try {

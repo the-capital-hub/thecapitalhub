@@ -34,6 +34,7 @@
       &.active {
         color: black !important;
         background-color: $color-capital;
+        border-radius: 0.25rem;
 
         &::before {
           content: "";

@@ -9,14 +9,17 @@ export default function ResultBar({
   description,
   isCompany,
   param,
-  isInvestor = false
+  isInvestor = false,
 }) {
-  const linkTo = isCompany ? `/investor/company-profile/${param}` : `/investor/user/${param}`;
+  const linkTo = isCompany
+    ? `/investor/company-profile/${param}`
+    : `/investor/user/${param}`;
   const link = isInvestor ? `${linkTo}?investor=1` : linkTo;
 
   return (
     <Link
-      className="Link"
+      className="text-decoration-none"
+      style={{ color: "var(d-l-grey)" }}
       // to={isCompany ? `/investor/company-profile/${param}` : `/investor/user/${param}`}
       to={link}
     >
@@ -27,9 +30,9 @@ export default function ResultBar({
           style={{ width: "80px", height: "80px", objectFit: "cover" }}
           className="rounded-circle border border-dangers"
         />
-        <div className="result__item__text d-flex flex-column">
+        <div className="result__item__text d-flex flex-column d-l-grey">
           <h4>{name || "BondLink"}</h4>
-          <p className="m-0" style={{ color: "rgba(74, 74, 74, 1)" }}>
+          <p className="m-0 text-secondary">
             {description ||
               "One classical breakdown of economic activity distinguishes three sectors."}
           </p>

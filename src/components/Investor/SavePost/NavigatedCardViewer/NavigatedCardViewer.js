@@ -77,11 +77,12 @@ const NavigatedCardViewer = () => {
         </div>
         <div className="card-viewer">
           {loading ? (
-            <div className="d-flex py-5 justify-content-center align-items-center w-100">
-              <div className="spinner-border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            </div>
+            <SpinnerBS
+              className={
+                "d-flex py-5 justify-content-center align-items-center w-100"
+              }
+              colorClass={"d-l-grey"}
+            />
           ) : allPosts && allPosts.length > 0 ? (
             allPosts.map(
               (
@@ -98,7 +99,7 @@ const NavigatedCardViewer = () => {
                   image,
                   createdAt,
                   _id,
-                  resharedPostId
+                  resharedPostId,
                 },
                 index
               ) => (
@@ -122,7 +123,7 @@ const NavigatedCardViewer = () => {
               )
             )
           ) : allPosts?.length === 0 ? (
-            <p className="container p-5 text-center my-5 bg-white mx-auto">
+            <p className="container p-5 text-center my-5 white-to-grey d-l-grey mx-auto">
               No posts saved
             </p>
           ) : (
@@ -130,6 +131,7 @@ const NavigatedCardViewer = () => {
               className={
                 "d-flex py-5 justify-content-center align-items-center w-100"
               }
+              colorClass={"d-l-grey"}
             />
           )}
         </div>
