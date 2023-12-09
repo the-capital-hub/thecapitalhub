@@ -28,7 +28,6 @@ import { BiRepost } from "react-icons/bi";
 import { CiBookmark } from "react-icons/ci";
 import { IoMdBookmark } from "react-icons/io";
 
-
 import deleteIcon from "../../../../Images/post/delete.png";
 import CustomModal from "../../../PopUp/Modal/Modal";
 import { FaRegCommentDots, FaCommentDots } from "react-icons/fa6";
@@ -68,6 +67,7 @@ import { useNavigate } from "react-router-dom";
 import { selectIsMobileView } from "../../../../Store/features/design/designSlice";
 import { selectIsInvestor } from "../../../../Store/features/user/userSlice";
 import { Modal } from "react-bootstrap";
+import { MdDelete } from "react-icons/md";
 
 const FeedPostCard = ({
   postId,
@@ -431,8 +431,9 @@ const FeedPostCard = ({
     <>
       <div className="feedpostcard_main_container mb-2">
         <div
-          className={`box feedpostcard_container mt-2 ${repostPreview && "rounded-4 shadow-sm border"
-            }`}
+          className={`box feedpostcard_container mt-2 ${
+            repostPreview && "rounded-4 shadow-sm border"
+          }`}
         >
           {loading && (
             <div className="d-flex justify-content-center my-4">
@@ -464,7 +465,11 @@ const FeedPostCard = ({
                 <Link
                   to={`/user/${userId}`}
                   className="text-decoration-none"
-                  style={{ fontSize: "18px", fontWeight: 600, color: "var( --d-l-grey)" }}
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: 600,
+                    color: "var( --d-l-grey)",
+                  }}
                 >
                   {firstName + " " + lastName}
                 </Link>
@@ -487,17 +492,20 @@ const FeedPostCard = ({
                     style={{
                       fontSize: "12px",
                       fontWeight: 500,
-                     color: "var( --d-l-grey)",
+                      color: "var( --d-l-grey)",
                     }}
                   >
                     {/* <img src={locationIcon} alt="logo" /> */}
-                    <IoLocationOutline size={15}/>
-
+                    <IoLocationOutline size={15} />
                     Bangalore, India
                   </span>
                 </span>
                 <span
-                  style={{ fontSize: "12px", fontWeight: 500,color: "var( --d-l-grey)", }}
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: 500,
+                    color: "var( --d-l-grey)",
+                  }}
                 >
                   {" "}
                   <TimeAgo
@@ -522,17 +530,17 @@ const FeedPostCard = ({
                     className="me-md-3 p-md-2"
                    
                   /> */}
-                  <PiDotsThreeBold 
-                  size={35}
-                  style={{fill:"var(--d-l-grey)"}}
-                   onClick={() => {
-                    setKebabMenuVisible(!kebabMenuVisible);
-                  }}
-                  onBlurCapture={() => {
-                    setTimeout(() => {
-                      setKebabMenuVisible(false);
-                    }, 100);
-                  }}
+                  <PiDotsThreeBold
+                    size={35}
+                    style={{ fill: "var(--d-l-grey)" }}
+                    onClick={() => {
+                      setKebabMenuVisible(!kebabMenuVisible);
+                    }}
+                    onBlurCapture={() => {
+                      setTimeout(() => {
+                        setKebabMenuVisible(false);
+                      }, 100);
+                    }}
                   />
 
                   {kebabMenuVisible && (
@@ -541,7 +549,7 @@ const FeedPostCard = ({
                         <li
                           onClick={() => handleAddToFeatured(postId)}
                           className="d-flex align-items-center gap-1"
-                          style={{color:"var(--d-l-grey)"}}
+                          style={{ color: "var(--d-l-grey)" }}
                         >
                           <IconComponentAdd />
                           <span>Featured</span>
@@ -551,8 +559,7 @@ const FeedPostCard = ({
                         <li
                           onClick={() => deletePost(postId)}
                           className="d-flex align-items-center gap-1"
-
-                          style={{color:"var(--d-l-grey)"}}
+                          style={{ color: "var(--d-l-grey)" }}
                         >
                           <IconDelete />
                           <span>Delete</span>
@@ -562,8 +569,8 @@ const FeedPostCard = ({
                         data-bs-toggle="modal"
                         data-bs-target="#reportPostModal"
                         className="d-flex align-items-center gap-1"
-                      // onClick={() => setShowReportModal(true)}
-                      style={{color:"var(--d-l-grey)"}}
+                        // onClick={() => setShowReportModal(true)}
+                        style={{ color: "var(--d-l-grey)" }}
                       >
                         <IconReportPost />
                         <span>Report</span>
@@ -668,7 +675,7 @@ const FeedPostCard = ({
             <span
               className=" mx-3 text-secondary pe-auto "
               style={{ fontSize: "14px", cursor: "pointer" }}
-              onClick={() => likedBy ? handleShow() : ""}
+              onClick={() => (likedBy ? handleShow() : "")}
             >
               {/* {likes?.length} likes */}
               {likedBy ? <>Liked By {likedBy}</> : <>{likes?.length} likes</>}
@@ -676,7 +683,10 @@ const FeedPostCard = ({
           )}
           {!repostPreview && (
             <>
-              <hr className="mt-1 mb-2 hr" style={{background:"var(--bs-light)",height:"3px"}} />
+              <hr
+                className="mt-1 mb-2 hr"
+                style={{ background: "var(--bs-light)", height: "3px" }}
+              />
               <div className="row feedpostcard_footer mb-2">
                 {/* Like and Comment */}
                 <div className="col-8">
@@ -689,7 +699,6 @@ const FeedPostCard = ({
                         onClick={likeUnlikeHandler}
                         style={{ cursor: "pointer" }}
                       />
-                      
                     ) : (
                       // <img
                       //   src={bwFireIcon}
@@ -698,10 +707,10 @@ const FeedPostCard = ({
                       //   onClick={likeUnlikeHandler}
                       //   style={{ cursor: "pointer" }}
                       // />
-                      <ImFire onClick={likeUnlikeHandler}
-                        style={{ cursor: "pointer",fill:"var(--d-l-grey)"  }}
+                      <ImFire
+                        onClick={likeUnlikeHandler}
+                        style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                       />
-
                     )}
                     {/* <img
                       src={commentIcon}
@@ -714,13 +723,13 @@ const FeedPostCard = ({
                       <FaRegCommentDots
                         size={20}
                         onClick={() => setShowComment((prev) => !prev)}
-                        style={{ cursor: "pointer",fill:"var(--d-l-grey)" }}
+                        style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                       />
                     ) : (
                       <FaCommentDots
                         size={20}
                         onClick={() => setShowComment((prev) => !prev)}
-                        style={{ cursor: "pointer",fill:"var(--d-l-grey)" }}
+                        style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                       />
                     )}
                   </div>
@@ -729,8 +738,9 @@ const FeedPostCard = ({
                 {/* Repost and Save posts */}
                 <div className=" col-4 d-flex align-items-center gap-1 justify-content-end">
                   <span
-                    className={`repost_container rounded-4 ${showRepostOptions ? "bg-light" : ""
-                      }`}
+                    className={`repost_container rounded-4 ${
+                      showRepostOptions ? "bg-light" : ""
+                    }`}
                     ref={repostContainerRef}
                   >
                     {/* <img
@@ -740,10 +750,15 @@ const FeedPostCard = ({
                       onClick={() => setShowRepostOptions(!showRepostOptions)}
                       style={{ cursor: "pointer" }}
                     /> */}
-<BiRepost onClick={() => setShowRepostOptions(!showRepostOptions)}
-                      style={{ cursor: "pointer",transform: "rotate(90deg)",fill:"var(--d-l-grey)" }}
-                      size={25} 
-                      />
+                    <BiRepost
+                      onClick={() => setShowRepostOptions(!showRepostOptions)}
+                      style={{
+                        cursor: "pointer",
+                        transform: "rotate(90deg)",
+                        fill: "var(--d-l-grey)",
+                      }}
+                      size={25}
+                    />
 
                     {showRepostOptions && (
                       <span className="repost_options border rounded shadow-sm">
@@ -752,12 +767,7 @@ const FeedPostCard = ({
                           onClick={() => repostWithToughts(postId)}
                         >
                           {!repostLoading?.withThoughts ? (
-                            
-                            <FaRegEdit 
-                            
-                            size={20}
-                            />
-
+                            <FaRegEdit size={20} />
                           ) : (
                             <div
                               className="spinner-border text-secondary"
@@ -786,8 +796,10 @@ const FeedPostCard = ({
                             //   src={repostInstantlyIcon}
                             //   alt="repost instantly"
                             // />
-                            <BiRepost size={30} style={{transform: "rotate(90deg)"}}/>
-
+                            <BiRepost
+                              size={30}
+                              style={{ transform: "rotate(90deg)" }}
+                            />
                           ) : (
                             <div
                               className="spinner-border text-secondary"
@@ -813,14 +825,13 @@ const FeedPostCard = ({
                     //   src={savedIcon}
                     //   width={16}
                     //   alt="save post"
-                     
-                    // />
-                    <IoMdBookmark 
-                    size={20}
-                    onClick={handleUnsavePost}
-                    style={{ cursor: "pointer",fill:"var(--d-l-grey)"}}
-                    />
 
+                    // />
+                    <IoMdBookmark
+                      size={20}
+                      onClick={handleUnsavePost}
+                      style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
+                    />
                   ) : (
                     // <img
                     //   src={saveIcon}
@@ -829,12 +840,11 @@ const FeedPostCard = ({
                     //   onClick={handleSavePopUp}
                     //   style={{ cursor: "pointer" }}
                     // />
-                    <CiBookmark 
-                    size={20}
-                    onClick={handleSavePopUp}
-                    style={{ cursor: "pointer",fill:"var(--d-l-grey)" }}
+                    <CiBookmark
+                      size={20}
+                      onClick={handleSavePopUp}
+                      style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                     />
-
                   )}
                 </div>
 
@@ -873,10 +883,22 @@ const FeedPostCard = ({
                             </span>
                           </div> */}
                         </div>
+                        <button
+                          type="button"
+                          className="btn btn-startup"
+                          onClick={() => sendComment()}
+                        >
+                          Post
+                        </button>
                       </section>
                     </div>
                     {comments?.length ? (
-                      <span className="fs-6 ps-2 mb-2" style={{color:"var(--d-l-grey)"}}>Comments</span>
+                      <span
+                        className="fs-6 ps-2 mb-2"
+                        style={{ color: "var(--d-l-grey)" }}
+                      >
+                        Comments
+                      </span>
                     ) : (
                       <span className="fs-6 ps-2 mb-2 w-100 d-flex justify-content-center text-center">
                         No comments
@@ -940,13 +962,15 @@ const FeedPostCard = ({
                                 //     commentlikeUnlikeHandler(postId, val._id)
                                 //   }
                                 // />
-                                <ImFire 
-                                onClick={() =>
-                                      commentlikeUnlikeHandler(postId, val._id)
-                                    }
-                                    style={{ cursor: "pointer",fill:"var(--d-l-grey)"  }}
-                                    />
-
+                                <ImFire
+                                  onClick={() =>
+                                    commentlikeUnlikeHandler(postId, val._id)
+                                  }
+                                  style={{
+                                    cursor: "pointer",
+                                    fill: "var(--d-l-grey)",
+                                  }}
+                                />
                               )}
                               <span className="mx-2 text-secondary fs-sm">
                                 {val?.likes?.length} likes
@@ -955,13 +979,15 @@ const FeedPostCard = ({
                             {val.user._id === loggedInUser?._id && (
                               <span
                                 onClick={() => deleteComments(postId, val._id)}
+                                style={{ cursor: "pointer" }}
                               >
-                                <img
+                                {/* <img
                                   src={deleteIcon}
                                   alt="delete icon"
                                   className="deleteIcon py-1"
                                   width={15}
-                                />
+                                /> */}
+                                <MdDelete style={{ fill: "var(--d-l-grey)" }} />
                               </span>
                             )}
                           </div>
@@ -1034,15 +1060,13 @@ const FeedPostCard = ({
                 className="rounded-pill "
               />
               <div className="p-1">
-                <h5>{user.firstName} {user.lastName}</h5>
-                <p className="m-0">
-                  {user.designation}
-                </p>
+                <h5>
+                  {user.firstName} {user.lastName}
+                </h5>
+                <p className="m-0">{user.designation}</p>
               </div>
             </div>
-
           ))}
-
         </Modal.Body>
       </Modal>
 
@@ -1076,8 +1100,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${reportReason === "Harassment" && "bg-secondary text-white"
-                  }`}
+                className={`form-check-label ${
+                  reportReason === "Harassment" && "bg-secondary text-white"
+                }`}
                 htmlFor="inlineRadio1"
               >
                 Harassment
@@ -1094,8 +1119,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${reportReason === "Spam" && "bg-secondary text-white"
-                  }`}
+                className={`form-check-label ${
+                  reportReason === "Spam" && "bg-secondary text-white"
+                }`}
                 htmlFor="inlineRadio2"
               >
                 Spam
@@ -1112,8 +1138,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${reportReason === "Fraud or scam" && "bg-secondary text-white"
-                  }`}
+                className={`form-check-label ${
+                  reportReason === "Fraud or scam" && "bg-secondary text-white"
+                }`}
                 htmlFor="inlineRadio3"
               >
                 Fraud or scam
@@ -1130,8 +1157,9 @@ const FeedPostCard = ({
                 hidden
               />
               <label
-                className={`form-check-label ${reportReason === "Hateful Speech" && "bg-secondary text-white"
-                  }`}
+                className={`form-check-label ${
+                  reportReason === "Hateful Speech" && "bg-secondary text-white"
+                }`}
                 htmlFor="inlineRadio4"
               >
                 Hateful Speech
