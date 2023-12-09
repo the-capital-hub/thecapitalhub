@@ -147,7 +147,7 @@ const InvestorNavbar = (props) => {
                     }}
                   />
                 )}
-                <h1 className="ms-2 text-break">{pageTitle}</h1>
+                <h1 className="ms-2 text-">{pageTitle}</h1>
               </div>
             </div>
           </div>
@@ -374,7 +374,12 @@ const InvestorNavbar = (props) => {
                   className="notification-icon"
                   onClick={() => setMobileSearch((prev) => !prev)}
                 >
-                  <FiSearch size={25} />
+                  <FiSearch
+                    size={25}
+                    style={{
+                      color: "var(--d-l-grey)",
+                    }}
+                  />
                 </span>
               </div>
 
