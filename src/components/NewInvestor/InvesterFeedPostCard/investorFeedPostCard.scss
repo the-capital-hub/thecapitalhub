@@ -9,7 +9,7 @@
         right: 0;
 
         width: 220px;
-background: var(--white-to-grey);
+        background: var(--white-to-grey);
         padding: 10px;
 
         display: flex;
@@ -53,9 +53,9 @@ background: var(--white-to-grey);
           border-radius: var(--border-radius);
           // background: #eaeef2;
           border: 1px solid var(--bs-border-color);
-          background: var(--bs-light);
+          background: var(--white-to-dgrey);
 
-          color: #373737;
+          color: var(--d-l-grey);
           font-size: 18px;
           font-family: Poppins;
           font-weight: 500;
@@ -163,7 +163,7 @@ background: var(--white-to-grey);
             right: 20px;
             height: max-content;
 
-background: var(--white-to-grey);
+            background: var(--white-to-grey);
             @media (max-width: 420px) {
               right: 5px;
             }
@@ -268,6 +268,7 @@ background: var(--white-to-grey);
     .input_and_logo_section {
       display: flex;
       align-items: center;
+      gap: 0.5rem;
       padding: 10px;
       width: 80%;
 
@@ -312,12 +313,11 @@ background: var(--white-to-grey);
     }
   }
   .single-comment {
-    .comment-details{
+    .comment-details {
       background: var(--bs-light);
       color: var(--d-l-grey);
-      a{
+      a {
         color: var(--d-l-grey);
-
       }
     }
     .img_container {
@@ -440,45 +440,42 @@ background: var(--white-to-grey);
     font-size: 20px; /* Adjust the icon size as needed */
     cursor: pointer; /* Optional: Add cursor pointer for icons */
     margin-right: 5px; /* Optional: Add spacing between icons */
-  }  
+  }
 }
-.modal-content{
-  .modal-body{
-
+.modal-content {
+  .modal-body {
     overflow: auto;
     max-height: 70vh;
   }
 
-  .reactions_investor{
+  .reactions_investor {
+    .nav-item {
+      // Tabs padding
+      //   border: 1px solid red;
+      cursor: pointer;
+      color: #000000;
+      font-family: Poppins;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      text-transform: capitalize;
 
+      &.active {
+        color: #d2f36b;
 
-
-.nav-item {
-// Tabs padding
-//   border: 1px solid red;
-cursor: pointer;
-color: #000000;
-font-family: Poppins;
-font-size: 18px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-text-transform: capitalize;
-
-&.active {
-  color: #d2f36b;
-
-  // &::before {
-  //   content: "";
-  //   display: inline-block;
-  //   width: 3px;
-  //   height: 50%;
-  //   margin-right: 2px;
-  //   background-color: #fd5901;
-  // }
+        // &::before {
+        //   content: "";
+        //   display: inline-block;
+        //   width: 3px;
+        //   height: 50%;
+        //   margin-right: 2px;
+        //   background-color: #fd5901;
+        // }
+      }
+    }
+  }
 }
-}
-  }}
 
 #reportPostModal {
   .reasons_container {
@@ -494,6 +491,6 @@ text-transform: capitalize;
     }
   }
 }
-.d-l-grey{
+.d-l-grey {
   color: var(--d-l-grey);
 }

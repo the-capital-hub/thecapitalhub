@@ -168,11 +168,13 @@ const MyStartUp = () => {
           >
             <ModalBSHeader title={"Edit Investments"} className={"d-l-grey"} />
             <ModalBSBody className={"d-l-grey"}>
-              <EditModalContent
-                dataArray={investedStartups}
-                key={"investments"}
-                setInvestedStartups={setInvestedStartups}
-              />
+              {investedStartups && (
+                <EditModalContent
+                  dataArray={investedStartups}
+                  key={"investments"}
+                  setInvestedStartups={setInvestedStartups}
+                />
+              )}
             </ModalBSBody>
           </ModalBSContainer>
 
@@ -240,11 +242,13 @@ const MyStartUp = () => {
           >
             <ModalBSHeader title={"Edit Interests"} className={"d-l-grey"} />
             <ModalBSBody className={"d-l-grey"}>
-              <EditModalContent
-                dataArray={myInterests}
-                isInterests={true}
-                setMyInterests={setMyInterests}
-              />
+              {myInterests && (
+                <EditModalContent
+                  dataArray={myInterests}
+                  isInterests={true}
+                  setMyInterests={setMyInterests}
+                />
+              )}
             </ModalBSBody>
           </ModalBSContainer>
         </div>

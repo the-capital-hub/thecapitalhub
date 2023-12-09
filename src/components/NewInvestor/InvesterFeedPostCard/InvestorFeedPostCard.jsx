@@ -348,7 +348,7 @@ const FeedPostCard = ({
                 </div>
               </div>
             )}
-            <div className="  feed_header_container border-2 border-bottom mb-3 pb-2">
+            <div className="  feed_header_container pb-2">
               <div className="feedpostcard_content">
                 <Link
                   to={`${
@@ -396,10 +396,12 @@ const FeedPostCard = ({
                     >
                       {/* <img src={HomeIcon} alt="logo" /> */}
                       <GoHome size={15} />
-                      {designation},{" "}
+                      {designation ? designation : "No Designation"},{" "}
                       {investorCompanyName?.companyName
                         ? investorCompanyName?.companyName
-                        : startUpCompanyName?.company}
+                        : startUpCompanyName?.company
+                        ? startUpCompanyName?.company
+                        : "No Company"}
                     </span>
                     <span
                       style={{
@@ -477,7 +479,7 @@ const FeedPostCard = ({
                   {description && (
                     <p
                       style={{
-                        fontSize: "13px",
+                        fontSize: "16px",
                         wordWrap: "break-word",
                         overflowWrap: "break-word",
                       }}
@@ -583,10 +585,10 @@ const FeedPostCard = ({
                         //   onClick={likeUnlikeHandler}
                         //   style={{ cursor: "pointer" }}
                         // />
-                        <BsFire onClick={likeUnlikeHandler}
-                        style={{ cursor: "pointer",fill: "var(--d-l-grey)" }}
-                      />
-
+                        <BsFire
+                          onClick={likeUnlikeHandler}
+                          style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
+                        />
                       )}
                       {!showComment ? (
                         <FaRegCommentDots
@@ -738,6 +740,7 @@ const FeedPostCard = ({
                                 }
                               }}
                             />
+
                             {/* <div className="icons comment_icons">
                             <span className="image_icon">
                               <img src={ImageIcon} alt="gallery icon" />
@@ -747,6 +750,13 @@ const FeedPostCard = ({
                             </span>
                           </div> */}
                           </div>
+                          <button
+                            type="button"
+                            className="btn btn-investor"
+                            onClick={() => sendComment()}
+                          >
+                            Post
+                          </button>
                         </section>
                       </div>
                       {comments?.length ? (
@@ -818,9 +828,12 @@ const FeedPostCard = ({
                                   //     commentlikeUnlikeHandler(postId, val._id)
                                   //   }
                                   // />
-                                  <BsFire style={{fill:"var(--d-l-grey)"}} onClick={() =>
-                                        commentlikeUnlikeHandler(postId, val._id)
-                                      }/>
+                                  <BsFire
+                                    style={{ fill: "var(--d-l-grey)" }}
+                                    onClick={() =>
+                                      commentlikeUnlikeHandler(postId, val._id)
+                                    }
+                                  />
                                 )}
                                 <span className="mx-2 text-secondary fs-sm">
                                   {val?.likes?.length} likes
@@ -831,6 +844,7 @@ const FeedPostCard = ({
                                   onClick={() =>
                                     deleteComments(postId, val._id)
                                   }
+                                  style={{ cursor: "pointer" }}
                                 >
                                   {/* <img
                                     src={deleteIcon}
@@ -838,8 +852,9 @@ const FeedPostCard = ({
                                     className="deleteIcon py-1"
                                     width={15}
                                   /> */}
-                                  <MdDelete style={{fill:"var(--d-l-grey)"}}/>
-
+                                  <MdDelete
+                                    style={{ fill: "var(--d-l-grey)" }}
+                                  />
                                 </span>
                               )}
                             </div>
@@ -891,16 +906,18 @@ const FeedPostCard = ({
         </CustomModal>
       )}
 
-      <ModalBSContainer showModal={showReportModal} id="reportPostModal" >
+      <ModalBSContainer showModal={showReportModal} id="reportPostModal">
         <ModalBSHeader
           title="Report Post"
           closeCallback={handleCloseSavePopup}
           className={"d-l-grey"}
-          />
-        <ModalBSBody           className={"d-l-grey"}
->
+        />
+        <ModalBSBody className={"d-l-grey"}>
           <h6 className="h6">Select a reason that applies</h6>
-          <div className="reasons_container"  style={{color:"var(--d-l-grey)"}}>
+          <div
+            className="reasons_container"
+            style={{ color: "var(--d-l-grey)" }}
+          >
             <div className="form-check form-check-inline m-0">
               <input
                 className="form-check-input"
@@ -978,10 +995,13 @@ const FeedPostCard = ({
               </label>
             </div>
           </div>
-          <h6 className="h6 mt-3 text-decoration-underline"  style={{color:"var(--d-l-grey)"}}>
+          <h6
+            className="h6 mt-3 text-decoration-underline"
+            style={{ color: "var(--d-l-grey)" }}
+          >
             Looking for something else?
           </h6>
-          <span  style={{color:"var(--d-l-grey)"}}>
+          <span style={{ color: "var(--d-l-grey)" }}>
             Sometimes our members prefer not to see certain kinds of content,
             rather than reporting.
           </span>

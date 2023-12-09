@@ -11,12 +11,12 @@
   // width: 95%;
 
   @media (max-width: 820px) {
-    border-radius: 15px;
+    border-radius: 0px;
+    padding: 10px;
   }
 
   .left {
     display: flex;
-    justify-content: center;
     align-items: center;
 
     .rounded_img {
@@ -64,12 +64,13 @@
       }
     }
   }
+
   .right {
     display: flex;
+    justify-content: flex-end;
     align-items: flex-end;
     .call,
-    .video,
-    .threedot {
+    .video {
       margin-right: 20px;
       height: 25px;
       width: 25px;

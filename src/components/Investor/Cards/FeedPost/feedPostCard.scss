@@ -281,6 +281,7 @@
       align-items: center;
       padding: 10px;
       width: 80%;
+      gap: 0.5rem;
 
       .input_box {
         display: flex;
@@ -302,7 +303,6 @@
           // margin-right: -90px;
           width: 100%;
           background-color: var(--bs-light);
-
         }
 
         .icons {
@@ -337,12 +337,11 @@
   }
 
   .single-comment {
-    .comment-details{
+    .comment-details {
       background: var(--bs-light);
       color: var(--d-l-grey);
-      h6{
+      h6 {
         color: var(--d-l-grey);
-
       }
     }
     .img_container {
@@ -464,7 +463,6 @@
     cursor: pointer; /* Optional: Add cursor pointer for icons */
     margin-right: 5px; /* Optional: Add spacing between icons */
   }
- 
 }
 
 .modal-content {

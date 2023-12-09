@@ -1,11 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./createpostpopup.scss";
-import SmileeIcon from "../../../Images/Smilee.svg";
-// import GallaryIcon from "../../../Images/Gallary.svg";
 import { CiImageOn } from "react-icons/ci";
 
-import ThreeDotsIcon from "../../../Images/ThreeDots.svg";
-import CameraIcon from "../../../Images/Camera.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getSinglePostAPI,
@@ -15,12 +11,10 @@ import {
   addNotificationAPI,
 } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
-import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import FeedPostCard from "../../Investor/Cards/FeedPost/FeedPostCard";
 import EasyCrop from "react-easy-crop";
 import { BsLink45Deg } from "react-icons/bs";
 import IconFile from "../../Investor/SvgIcons/IconFile";
-// import IconVideo from "../../../Images/post/Video.svg";
 import { CiVideoOn } from "react-icons/ci";
 
 import { s3 } from "../../../Service/awsConfig";
@@ -245,7 +239,7 @@ const CreatePostPopUp = ({
                 recipient: loggedInUser._id,
                 type: "achievementCompleted",
                 achievementId: "6564684649186bca517cd0c9",
-              }
+              };
               addNotificationAPI(notificationBody)
                 .then((data) => console.log("Added"))
                 .catch((error) => console.error(error.message));
@@ -284,8 +278,9 @@ const CreatePostPopUp = ({
     <>
       {popupOpen && <div className="createpost-background-overlay"></div>}
       <div
-        className={`create_post_modal rounded-4 p-md-2 ${popupOpen ? "d-block" : ""
-          }`}
+        className={`create_post_modal rounded-4 p-md-2 ${
+          popupOpen ? "d-block" : ""
+        }`}
         tabIndex="-1"
         role="dialog"
       >
@@ -445,8 +440,9 @@ const CreatePostPopUp = ({
                   >
                     {/* <img src={GallaryIcon} alt="Button 1" />
                      */}
-<CiImageOn size={25}/>
-
+                    <CiImageOn size={25} style={{
+                      color: 'var(--d-l-grey)'
+                    }}/>
                   </button>
 
                   {/* Video input and Icon */}
@@ -463,8 +459,9 @@ const CreatePostPopUp = ({
                     onClick={handleCameraButtonClick}
                   >
                     {/* <img src={IconVideo} alt="Button 2" /> */}
-                    <CiVideoOn size={25}/>
-
+                    <CiVideoOn size={25} style={{
+                      color: 'var(--d-l-grey)'
+                    }}/>
                   </button>
 
                   {/* Document input and Icon */}
@@ -480,7 +477,9 @@ const CreatePostPopUp = ({
                     onClick={handleDocumentButtonClick}
                   >
                     {/* <img src={CameraIcon} alt="Button 2" /> */}
-                    <IconFile width="16px" height="16px" />
+                    <IconFile width="16px" height="16px" style={{
+                      color: 'var(--d-l-grey)'
+                    }}/>
                   </button>
 
                   {/* <input
@@ -499,7 +498,9 @@ const CreatePostPopUp = ({
 
                   <button className="white_button" onClick={handleOneLinkClick}>
                     {/* <img src={ThreeDotsIcon} alt="Button 4" /> */}
-                    <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} />
+                    <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} style={{
+                      color: 'var(--d-l-grey)'
+                    }}/>
                   </button>
                 </div>
                 <div className="post_button_container">

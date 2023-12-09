@@ -47,7 +47,7 @@ const NavBar = (props) => {
   const [inputOnFocus, setInputOnFocus] = useState(false);
   const [toggleNotificationPopup, setToggleNotificationPopup] = useState(false);
   const notificationPopup = useRef();
-
+  console.log(toggleNotificationPopup);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -90,10 +90,7 @@ const NavBar = (props) => {
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (
-        notificationPopup.current &&
-        !notificationPopup.current.contains(event.target)
-      ) {
+      if (notificationPopup.current && !event.target.closest(".noticon")) {
         setToggleNotificationPopup(false);
       }
     }
@@ -423,6 +420,7 @@ const NavBar = (props) => {
                     <IoMdNotificationsOutline
                       size={30}
                       style={{ fill: "var(--d-l-grey)" }}
+                      className="noticon"
                       onClick={() => {
                         dispatch(setUnreadNotifications(0));
                         setToggleNotificationPopup((prev) => !prev);

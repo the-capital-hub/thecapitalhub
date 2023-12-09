@@ -27,7 +27,6 @@
 
         img {
           height: 45px;
-          // height: 50px;
           &:hover {
             cursor: pointer;
           }
@@ -85,8 +84,8 @@
           .single_result:nth-child(13) {
             border-bottom: none;
           }
-          span{
-            color: var( --darkMode-currentTheme);
+          span {
+            color: var(--darkMode-currentTheme);
           }
           a {
             text-decoration: none;
@@ -100,7 +99,6 @@
             padding: 2px 0;
             transition: padding-left ease 0.2s;
             &:hover {
-              // background-color: rgb(221, 221, 221);
               border-radius: 5px;
               padding-left: 10px;
             }
@@ -142,6 +140,11 @@
             background: var(--bs-light);
           }
 
+          @media (max-width: 500px) {
+            width: 40px;
+            height: 40px;
+          }
+
           .notification-icon,
           .message-icon {
             font-weight: bold;
@@ -159,13 +162,16 @@
               width: 35px;
               height: 35px;
             }
+            @media (max-width: 500px) {
+              width: 25px;
+              height: 25px;
+            }
           }
 
           .me {
             position: absolute;
             width: 23px;
             height: 23px;
-            /* left: 1589px; */
             top: 65px;
 
             font-family: "Poppins";
@@ -173,7 +179,6 @@
             font-weight: 500;
             font-size: 15px;
             line-height: 22px;
-            /* identical to box height */
             color: #8f8f8f;
           }
         }
@@ -208,9 +213,6 @@
       .bar_logo_container {
         .logo_container {
           display: none;
-
-          img {
-          }
         }
 
         .mobile-home-hamberger {
@@ -302,7 +304,6 @@
               padding: 2px 0;
               transition: padding-left ease 0.2s;
               &:hover {
-                // background-color: rgb(221, 221, 221);
                 border-radius: 5px;
                 padding-left: 10px;
               }
@@ -321,13 +322,9 @@
             flex-direction: column;
 
             .search_container {
-              // top: 500px;
               left: -300px;
               top: 60px;
               background-color: white;
-
-              // top: calc(100% + 255px);
-
               width: 350px;
               min-height: 80px;
 
@@ -389,17 +386,6 @@
                   }
                 }
               }
-            }
-          }
-          .icon-wrapper {
-            .notification-icon,
-            .message-icon {
-            }
-
-            .profile-pic {
-            }
-
-            .me {
             }
           }
         }
@@ -495,25 +481,6 @@
               // background-color: rgb(221, 221, 221);
               border-radius: 5px;
               padding-left: 10px;
-            }
-          }
-        }
-      }
-      .navbar_right_container {
-        .icons-container {
-          .mobile-icon-wrapper {
-            .search_container {
-            }
-          }
-          .icon-wrapper {
-            .notification-icon,
-            .message-icon {
-            }
-
-            .profile-pic {
-            }
-
-            .me {
             }
           }
         }
