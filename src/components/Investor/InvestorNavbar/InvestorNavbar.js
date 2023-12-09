@@ -147,7 +147,7 @@ const InvestorNavbar = (props) => {
                     }}
                   />
                 )}
-                <h1 className="ms-2 text-">{pageTitle}</h1>
+                 <h1 className="ms-2 text-break">{pageTitle}</h1>
               </div>
             </div>
           </div>
@@ -456,7 +456,7 @@ const InvestorNavbar = (props) => {
               <div className="icon-wrapper">
                 <Link
                   to={"/manage-account"}
-                  className="p-1 border border-light rounded-circle"
+                  className="p-0 p-md-1 border border-light rounded-circle"
                 >
                   <img
                     className="profile-pic rounded-circle"
