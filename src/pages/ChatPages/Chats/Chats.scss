@@ -109,78 +109,8 @@
 
         .chats-col {
           height: calc(98dvh - 32px - 163px);
-          // overflow-y: auto;
-          // padding-inline-end: 0.25rem;
-
-          &::-webkit-scrollbar {
-            width: 4px;
-          }
-
-          &::-webkit-scrollbar-thumb {
-            background-color: var(--currentTheme);
-            border-radius: 10rem;
-          }
-
-          &::-webkit-scrollbar-thumb:hover {
-            background-color: var(--currentTheme-dark);
-          }
-
-          &::-webkit-scrollbar-track {
-            background-color: transparent;
-            border-radius: 10rem;
-          }
-
-          #sidebarCommunities + #sidebarChats {
-            height: calc(100% - 80px);
-            // height: 100%;
-            .chatsidebar_content {
-              height: 100%;
-              overflow-y: auto;
-              &::-webkit-scrollbar {
-                width: 8px;
-              }
-
-              &::-webkit-scrollbar-thumb {
-                background-color: rgba(253, 89, 1, 0.2);
-                border-radius: 10rem;
-
-                &:hover {
-                  background-color: rgba(253, 89, 1, 0.8);
-                }
-              }
-
-              &::-webkit-scrollbar-track {
-                background-color: transparent;
-                border-radius: 10rem;
-              }
-            }
-          }
-
-          #sidebarCommunities[open] + #sidebarChats {
-            height: calc(100% - 290px - 20px);
-            // height: 100%;
-            .chatsidebar_content {
-              height: 100%;
-              overflow-y: auto;
-              &::-webkit-scrollbar {
-                width: 8px;
-              }
-
-              &::-webkit-scrollbar-thumb {
-                background-color: rgba(253, 89, 1, 0.2);
-                border-radius: 10rem;
-
-                &:hover {
-                  background-color: rgba(253, 89, 1, 0.8);
-                }
-              }
-
-              &::-webkit-scrollbar-track {
-                background-color: transparent;
-                border-radius: 10rem;
-              }
-            }
-          }
+          display: flex;
+          flex-direction: column;
         }
       }
     }
@@ -249,80 +179,67 @@
       }
 
       // Mobile view chats-col CSS
-      .chats-col {
-        height: calc(96dvh - 32px - 163px);
-        margin-top: 1rem;
-        // overflow-y: auto;
-        // padding-inline-end: 0.25rem;
+      .left_section {
+        display: flex;
+        flex-direction: column;
 
-        &::-webkit-scrollbar {
-          width: 4px;
-        }
+        .chats-col {
+          height: calc(98dvh - 32px - 163px);
+          display: flex;
+          flex-direction: column;
+          margin-top: 1rem;
 
-        &::-webkit-scrollbar-thumb {
-          background-color: var(--currentTheme);
-          border-radius: 10rem;
-        }
+          // #sidebarCommunities + #sidebarChats {
+          //   height: calc(100% - 60px);
+          //   // height: 100%;
+          //   .chatsidebar_content {
+          //     height: 100%;
+          //     overflow-y: auto;
+          //     &::-webkit-scrollbar {
+          //       width: 8px;
+          //     }
 
-        &::-webkit-scrollbar-thumb:hover {
-          background-color: var(--currentTheme-dark);
-        }
+          //     &::-webkit-scrollbar-thumb {
+          //       background-color: rgba(253, 89, 1, 0.2);
+          //       border-radius: 10rem;
 
-        &::-webkit-scrollbar-track {
-          background-color: transparent;
-          border-radius: 10rem;
-        }
+          //       &:hover {
+          //         background-color: rgba(253, 89, 1, 0.8);
+          //       }
+          //     }
 
-        #sidebarCommunities + #sidebarChats {
-          height: calc(100% - 60px);
-          // height: 100%;
-          .chatsidebar_content {
-            height: 100%;
-            overflow-y: auto;
-            &::-webkit-scrollbar {
-              width: 8px;
-            }
+          //     &::-webkit-scrollbar-track {
+          //       background-color: transparent;
+          //       border-radius: 10rem;
+          //     }
+          //   }
+          // }
 
-            &::-webkit-scrollbar-thumb {
-              background-color: rgba(253, 89, 1, 0.2);
-              border-radius: 10rem;
+          // #sidebarCommunities[open] + #sidebarChats {
+          //   height: calc(100% - 285px);
+          //   // height: 100%;
+          //   .chatsidebar_content {
+          //     height: 100%;
+          //     overflow-y: auto;
+          //     &::-webkit-scrollbar {
+          //       width: 8px;
+          //     }
 
-              &:hover {
-                background-color: rgba(253, 89, 1, 0.8);
-              }
-            }
+          //     &::-webkit-scrollbar-thumb {
+          //       background-color: rgba(253, 89, 1, 0.2);
+          //       border-radius: 10rem;
 
-            &::-webkit-scrollbar-track {
-              background-color: transparent;
-              border-radius: 10rem;
-            }
-          }
-        }
+          //       &:hover {
+          //         background-color: rgba(253, 89, 1, 0.8);
+          //       }
+          //     }
 
-        #sidebarCommunities[open] + #sidebarChats {
-          height: calc(100% - 285px);
-          // height: 100%;
-          .chatsidebar_content {
-            height: 100%;
-            overflow-y: auto;
-            &::-webkit-scrollbar {
-              width: 8px;
-            }
-
-            &::-webkit-scrollbar-thumb {
-              background-color: rgba(253, 89, 1, 0.2);
-              border-radius: 10rem;
-
-              &:hover {
-                background-color: rgba(253, 89, 1, 0.8);
-              }
-            }
-
-            &::-webkit-scrollbar-track {
-              background-color: transparent;
-              border-radius: 10rem;
-            }
-          }
+          //     &::-webkit-scrollbar-track {
+          //       background-color: transparent;
+          //       border-radius: 10rem;
+          //     }
+          //   }
+          // }
         }
       }
     }

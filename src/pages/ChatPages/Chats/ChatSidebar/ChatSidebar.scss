@@ -3,7 +3,7 @@
   // border: 1px solid #e7e7e7;
   background: var(--white-to-grey);
   box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.06);
-  // height: auto;
+  flex: 1 1 0;
   width: 100%;
   overflow: hidden;
 
@@ -19,8 +19,26 @@
 
     display: flex;
     flex-direction: column;
-    // overflow-y: auto;
-    // max-height: calc(100dvh - 400px);
+    height: 100%;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--currentTheme-light);
+      border-radius: 10rem;
+
+      &:hover {
+        background-color: var(--currentTheme);
+      }
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+      border-radius: 10rem;
+    }
 
     .chat-category {
       color: var(--d-l-grey);
