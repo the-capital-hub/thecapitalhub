@@ -60,6 +60,20 @@ button {
   }
 }
 
+hr {
+  color: var(--d-l-grey);
+}
+
+input,
+textarea {
+  &::placeholder {
+    color: var(--d-l-grey) !important;
+  }
+  &:disabled {
+    color: var(--d-l-grey)
+  }
+}
+
 /* Animation classes and keyframes */
 .opacity-0 {
   transition: opacity 1s ease-in;
