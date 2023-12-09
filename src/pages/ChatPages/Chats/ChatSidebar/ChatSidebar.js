@@ -26,6 +26,7 @@ import {
 } from "../../../../Store/features/chat/chatSlice";
 import { selectLoggedInUserId } from "../../../../Store/features/user/userSlice";
 import IconPin from "../../../../components/Investor/SvgIcons/IconPin";
+import { formatTimestamp } from "../../../../utils/ChatsHelpers";
 // import SpinnerBS from "../../../../components/Shared/Spinner/SpinnerBS";
 
 const ChatSidebar = ({ recieveMessage, sendMessage }) => {
@@ -186,28 +187,28 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
     [loggedInUserId]
   );
 
-  const formatTimestamp = (timestamp) => {
-    const messageDate = new Date(timestamp);
-    const currentDate = new Date();
-    const isToday =
-      messageDate.getDate() === currentDate.getDate() &&
-      messageDate.getMonth() === currentDate.getMonth() &&
-      messageDate.getFullYear() === currentDate.getFullYear();
-    const isYesterday =
-      messageDate.getDate() === currentDate.getDate() - 1 &&
-      messageDate.getMonth() === currentDate.getMonth() &&
-      messageDate.getFullYear() === currentDate.getFullYear();
-    if (isToday) {
-      const hours = messageDate.getHours();
-      const minutes = messageDate.getMinutes();
-      return `${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
-    } else if (isYesterday) {
-      return "Yesterday";
-    } else {
-      const options = { year: "numeric", month: "short", day: "numeric" };
-      return messageDate.toLocaleDateString(undefined, options);
-    }
-  };
+  // const formatTimestamp = (timestamp) => {
+  //   const messageDate = new Date(timestamp);
+  //   const currentDate = new Date();
+  //   const isToday =
+  //     messageDate.getDate() === currentDate.getDate() &&
+  //     messageDate.getMonth() === currentDate.getMonth() &&
+  //     messageDate.getFullYear() === currentDate.getFullYear();
+  //   const isYesterday =
+  //     messageDate.getDate() === currentDate.getDate() - 1 &&
+  //     messageDate.getMonth() === currentDate.getMonth() &&
+  //     messageDate.getFullYear() === currentDate.getFullYear();
+  //   if (isToday) {
+  //     const hours = messageDate.getHours();
+  //     const minutes = messageDate.getMinutes();
+  //     return `${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
+  //   } else if (isYesterday) {
+  //     return "Yesterday";
+  //   } else {
+  //     const options = { year: "numeric", month: "short", day: "numeric" };
+  //     return messageDate.toLocaleDateString(undefined, options);
+  //   }
+  // };
 
   return (
     <>

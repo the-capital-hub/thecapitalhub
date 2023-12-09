@@ -25,9 +25,11 @@ export default function EditModalContent({
 
   useEffect(() => {
     // Make Post request to update Investment data.
-    setCompanies(dataArray);
-    setEditingCompany(dataArray[0]);
-    setIndex(0);
+    if (dataArray && dataArray.length) {
+      setCompanies(dataArray);
+      setEditingCompany(dataArray[0]);
+      setIndex(0);
+    }
   }, [dataArray]);
 
   function handleEditClick(selectedCompany, index) {

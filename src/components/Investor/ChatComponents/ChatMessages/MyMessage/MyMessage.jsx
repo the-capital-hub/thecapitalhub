@@ -83,7 +83,7 @@ export default function MyMessage({
           {/* message time */}
           <span className="msg-time">
             <IoCheckmarkDone
-              color={message?.read ? "#009b00" : "white"}
+              color={message?.read ? "#009b00" : "var(--currentTheme-text)"}
               size={15}
             />
             {formatChatTime(new Date(message.createdAt))}
