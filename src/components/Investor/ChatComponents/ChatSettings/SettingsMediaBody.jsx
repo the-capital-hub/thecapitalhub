@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import Modal from "../../../PopUp/Modal/Modal";
 import BSCarousel from "../../../Carousel/BSCarousel/BSCarousel";
 import BSCarouselItem from "../../../Carousel/BSCarousel/BSCarouselItem/BSCarouselItem";
+import "./SettingsMediaBody.scss";
 
 export default function SettingsMediaBody({ toggleModal, showModal }) {
   const chatProfile = useSelector((state) => state.chat.chatProfile);
@@ -17,7 +18,7 @@ export default function SettingsMediaBody({ toggleModal, showModal }) {
   return (
     <>
       <div
-        className="px-2 py-3 d-flex gap-2"
+        className="px-2 py-3 d-flex gap-2 media-body"
         style={{ maxHeight: "20vh", overflow: "auto", maxWidth: "80vw" }}
       >
         {/* Loop media images here */}

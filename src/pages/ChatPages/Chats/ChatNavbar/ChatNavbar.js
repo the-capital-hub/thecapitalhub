@@ -1,8 +1,8 @@
 import React from "react";
 import "./ChatNavbar.scss";
-import profileImage from "../../../../Images/Pramod.jpeg";
-import CallIcon from "../../../../Images/Chat/Call.svg";
-import videoIcon from "../../../../Images/Chat/Video.svg";
+// import profileImage from "../../../../Images/Pramod.jpeg";
+// import CallIcon from "../../../../Images/Chat/Call.svg";
+// import videoIcon from "../../../../Images/Chat/Video.svg";
 import threeDotIcon from "../../../../Images/whiteTheeeDots.svg";
 import { useEffect, useState } from "react";
 import {
@@ -10,9 +10,13 @@ import {
   clearChat,
   getCommunityById,
 } from "../../../../Service/user";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SpinnerBS from "../../../../components/Shared/Spinner/SpinnerBS";
 import { HiOutlineUserGroup } from "react-icons/hi2";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import { resetChat } from "../../../../Store/features/chat/chatSlice";
+import { selectIsMobileView } from "../../../../Store/features/design/designSlice";
 
 const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
   // Fetch GlobalState
@@ -21,9 +25,12 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
   const isCommunitySelected = useSelector(
     (state) => state.chat.isCommunitySelected
   );
+  const isMobileView = useSelector(selectIsMobileView);
 
   const [chatkebabMenu, setChatkebabMenu] = useState(false);
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // When chatType changes update isCommunitySelec
 
@@ -77,6 +84,14 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
     setIsSettingsOpen(true);
   }
 
+  function handleChatBack() {
+    if (!chatId) {
+      navigate(-1);
+    } else {
+      dispatch(resetChat());
+    }
+  }
+
   return (
     <>
       <div className="chat_navbar_container position-relative">
@@ -91,28 +106,44 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
           />
         ) : (
           <>
-            <div
-              className="left"
-              onClick={handleOpenSettingsClick}
-              style={{ cursor: "pointer" }}
-            >
-              {user?.profilePicture || community?.profileImage ? (
-                <img
-                  src={user?.profilePicture || community?.profileImage}
-                  className="rounded_img"
-                  alt={`${user?.firstName} ${user?.lastName}`}
-                />
-              ) : (
-                <HiOutlineUserGroup
-                  style={{
-                    height: "60px",
-                    width: "60px",
-                    color: " rgba(159, 159, 159, 1)",
-                  }}
-                  className=""
-                />
+            <div className="left">
+              {/* Back button */}
+              {isMobileView && (
+                <button
+                  className="btn border-0 p-0 d-flex align-items-center justify-content-center me-2"
+                  onClick={handleChatBack}
+                >
+                  <IoMdArrowRoundBack size={30} />
+                </button>
               )}
-              <div className="title_and_message">
+
+              <div
+                className=""
+                onClick={handleOpenSettingsClick}
+                style={{ cursor: "pointer" }}
+              >
+                {user?.profilePicture || community?.profileImage ? (
+                  <img
+                    src={user?.profilePicture || community?.profileImage}
+                    className="rounded_img"
+                    alt={`${user?.firstName} ${user?.lastName}`}
+                  />
+                ) : (
+                  <HiOutlineUserGroup
+                    style={{
+                      height: "60px",
+                      width: "60px",
+                      color: " rgba(159, 159, 159, 1)",
+                    }}
+                    className=""
+                  />
+                )}
+              </div>
+              <div
+                className="title_and_message"
+                onClick={handleOpenSettingsClick}
+                style={{ cursor: "pointer" }}
+              >
                 <h5 className="name_title text-capitalize m-0 lh-1">
                   {user
                     ? `${user.firstName} ${user.lastName}`
@@ -124,11 +155,11 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
               </div>
             </div>
             <div className="right ">
-              {/* <img src={CallIcon} className="call"/>
-            <img src={videoIcon} className="video"/> */}
+              {/* <img src={CallIcon} className="call" />
+              <img src={videoIcon} className="video" /> */}
               <img
                 src={threeDotIcon}
-                className="threedot"
+                className="threedot me-2"
                 onClick={() => setChatkebabMenu(!chatkebabMenu)}
                 alt=""
               />

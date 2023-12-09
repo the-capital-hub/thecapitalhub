@@ -38,7 +38,7 @@ export const groupMessagesByDate = (messages) => {
   return groupedMessages;
 };
 
-// Add show name key value.
+// Add showName key value.
 export function formatMessages(messages, loggedInUserId) {
   let copy = groupMessagesByDate(messages);
 
@@ -89,3 +89,27 @@ export function generateId(length = 8) {
 
   return randomId;
 }
+
+// Format Time Stamp
+export const formatTimestamp = (timestamp) => {
+  const messageDate = new Date(timestamp);
+  const currentDate = new Date();
+  const isToday =
+    messageDate.getDate() === currentDate.getDate() &&
+    messageDate.getMonth() === currentDate.getMonth() &&
+    messageDate.getFullYear() === currentDate.getFullYear();
+  const isYesterday =
+    messageDate.getDate() === currentDate.getDate() - 1 &&
+    messageDate.getMonth() === currentDate.getMonth() &&
+    messageDate.getFullYear() === currentDate.getFullYear();
+  if (isToday) {
+    const hours = messageDate.getHours();
+    const minutes = messageDate.getMinutes();
+    return `${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
+  } else if (isYesterday) {
+    return "Yesterday";
+  } else {
+    const options = { year: "numeric", month: "short", day: "numeric" };
+    return messageDate.toLocaleDateString(undefined, options);
+  }
+};
