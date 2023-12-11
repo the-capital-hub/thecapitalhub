@@ -80,7 +80,7 @@
 
       .video-message {
         max-width: 100%;
-        max-height: 300px;
+        max-height: 200px;
         border-radius: 10px;
         margin-top: 10px;
         background-color: #000;
@@ -94,7 +94,7 @@
 
       .image-message {
         max-width: 100%;
-        max-height: 300px;
+        max-height: 200px;
         border-radius: 10px;
         margin-top: 10px;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -102,6 +102,7 @@
         img {
           width: 100%;
           height: auto;
+          max-height: 200px;
           object-fit: contain;
         }
       }
