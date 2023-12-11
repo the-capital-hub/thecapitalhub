@@ -71,11 +71,11 @@ export default function ChatSettings({ setIsSettingsOpen }) {
 
   const fileTypeCount = isCommunitySelected
     ? communityProfile?.images?.length +
-      communityProfile?.videos?.length +
-      communityProfile?.documents?.length
+    communityProfile?.videos?.length +
+    communityProfile?.documents?.length
     : chatProfile?.images?.length +
-      chatProfile?.videos?.length +
-      chatProfile?.documents?.length;
+    chatProfile?.videos?.length +
+    chatProfile?.documents?.length;
 
   // const fileTypeCountString = fileTypeCount.toString().padStart(3, ' ');
 
@@ -132,14 +132,14 @@ export default function ChatSettings({ setIsSettingsOpen }) {
               >
                 media (
                 {isCommunitySelected
-                  ? communityProfile?.images?.length
-                  : chatProfile?.images?.length}
+                  ? communityProfile?.media?.length
+                  : chatProfile?.media?.length}
                 )
               </p>
               {(
                 isCommunitySelected
-                  ? communityProfile?.images?.length
-                  : chatProfile?.images?.length
+                  ? communityProfile?.media?.length
+                  : chatProfile?.media?.length
               ) ? (
                 <p
                   className="text-capitalize m-0 orange_underline text_orange ms-auto"
