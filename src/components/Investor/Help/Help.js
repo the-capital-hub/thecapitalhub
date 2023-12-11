@@ -41,11 +41,11 @@ const Help = () => {
                         <h1 className="centered-text">
                           Hello, how can we help ?
                         </h1>
-                        <div className="search-container">
+                        {/* <div className="search-container">
                           <img src={SearchIcon} alt="svg" />
                           <input type="text" placeholder="Ask a question..." />
                           <button className="search-button">Search</button>
-                        </div>
+                        </div> */}
                       </div>
                     </section>
                     <h6 className="small_text">
