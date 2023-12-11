@@ -5,6 +5,7 @@ import { IoExitOutline } from "react-icons/io5";
 import IconUser from "../../SvgIcons/IconUser";
 import IconLock from "../../SvgIcons/IconLock";
 import "./SettingsTabs.scss";
+import { useNavigate } from "react-router-dom";
 
 export const SETTINGS_TABS = [
   {
@@ -30,6 +31,13 @@ export const SETTINGS_TABS = [
 ];
 
 export default function SettingsTabs({ activeTab, setActiveTab }) {
+  const navigate = useNavigate();
+
+  function handleTabClick(e, id) {
+    setActiveTab(id);
+    navigate("/settings");
+  }
+
   return (
     <ListGroup className="settings-tabs shadow-sm" variant="flush">
       {SETTINGS_TABS.map((tab, index) => {
@@ -39,7 +47,7 @@ export default function SettingsTabs({ activeTab, setActiveTab }) {
             key={`${index}${tab.text}`}
             action
             active={activeTab === tab.id}
-            onClick={() => setActiveTab(tab.id)}
+            onClick={(e) => handleTabClick(e, tab.id)}
           >
             {tab.icon}{" "}
             <p className="m-0" style={{ fontSize: "1.125rem" }}>

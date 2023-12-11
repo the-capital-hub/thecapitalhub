@@ -9,6 +9,7 @@ import Logout from "../../../components/Investor/UserSettingsPageComponents/Logo
 import { useSelector } from "react-redux";
 import { selectIsMobileView } from "../../../Store/features/design/designSlice";
 import IconChevronBack from "../../../components/Investor/SvgIcons/IconChevronBack";
+import { Outlet, useLocation } from "react-router-dom";
 
 const SETTINGS_CONTENT = {
   account: <Account />,
@@ -19,6 +20,7 @@ const SETTINGS_CONTENT = {
 
 export default function UserSettings() {
   const isMobileView = useSelector(selectIsMobileView);
+  const { pathname } = useLocation();
 
   const [activeTab, setActiveTab] = useState("account");
 
@@ -37,7 +39,7 @@ export default function UserSettings() {
         {isMobileView && (
           <>
             <div className="userSettings-page-container d-flex flex-column gap-3">
-              {!activeTab && (
+              {!activeTab && pathname === "/settings" && (
                 <div className="z-0" id="sidebarSettings">
                   <SettingsTabs
                     activeTab={activeTab}
@@ -47,7 +49,7 @@ export default function UserSettings() {
               )}
 
               {/* Settings Content */}
-              {activeTab && (
+              {activeTab && pathname === "/settings" && (
                 <div
                   className="setttings-content flex-grow-1"
                   id="settingsContent"
@@ -67,6 +69,9 @@ export default function UserSettings() {
                   {SETTINGS_CONTENT[activeTab]}
                 </div>
               )}
+
+              {/* outlet */}
+              <Outlet />
             </div>
           </>
         )}
@@ -83,12 +88,17 @@ export default function UserSettings() {
               </div>
 
               {/* Settings Content */}
-              <div
-                className="setttings-content flex-grow-1"
-                id="settingsContent"
-              >
-                {SETTINGS_CONTENT[activeTab]}
-              </div>
+              {pathname === "/settings" && (
+                <div
+                  className="setttings-content flex-grow-1"
+                  id="settingsContent"
+                >
+                  {SETTINGS_CONTENT[activeTab]}
+                </div>
+              )}
+
+              {/* outlet */}
+              <Outlet />
             </div>
           </>
         )}
