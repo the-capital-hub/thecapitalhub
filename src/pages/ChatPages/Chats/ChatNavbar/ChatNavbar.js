@@ -125,7 +125,7 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
                 {user?.profilePicture || community?.profileImage ? (
                   <img
                     src={user?.profilePicture || community?.profileImage}
-                    className="rounded_img"
+                    className="rounded_img object-fit-cover"
                     alt={`${user?.firstName} ${user?.lastName}`}
                   />
                 ) : (
