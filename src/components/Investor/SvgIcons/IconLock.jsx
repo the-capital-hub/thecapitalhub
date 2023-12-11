@@ -18,8 +18,8 @@ export default function IconLock(props) {
         strokeLinejoin="round"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M11.5131 18.9999H4.4869C2.56138 18.9999 1 17.3488 1 15.3104V11.1373C1 9.0989 2.56138 7.44775 4.4869 7.44775H11.5131C13.4386 7.44775 15 9.0989 15 11.1373V15.3104C15 17.3488 13.4386 18.9999 11.5131 18.9999Z"
         stroke="currentColor"
         strokeWidth="1.5"

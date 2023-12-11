@@ -8,6 +8,7 @@ import PrivacyPolicy from "../../../components/Investor/UserSettingsPageComponen
 import Logout from "../../../components/Investor/UserSettingsPageComponents/Logout/Logout";
 import { useSelector } from "react-redux";
 import { selectIsMobileView } from "../../../Store/features/design/designSlice";
+import IconChevronBack from "../../../components/Investor/SvgIcons/IconChevronBack";
 
 const SETTINGS_CONTENT = {
   account: <Account />,
@@ -36,20 +37,36 @@ export default function UserSettings() {
         {isMobileView && (
           <>
             <div className="userSettings-page-container d-flex flex-column gap-3">
-              <div className="z-0" id="sidebarSettings">
-                <SettingsTabs
-                  activeTab={activeTab}
-                  setActiveTab={setActiveTab}
-                />
-              </div>
+              {!activeTab && (
+                <div className="z-0" id="sidebarSettings">
+                  <SettingsTabs
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
+                  />
+                </div>
+              )}
 
               {/* Settings Content */}
-              <div
-                className="setttings-content flex-grow-1"
-                id="settingsContent"
-              >
-                {SETTINGS_CONTENT[activeTab]}
-              </div>
+              {activeTab && (
+                <div
+                  className="setttings-content flex-grow-1"
+                  id="settingsContent"
+                >
+                  <button
+                    type="button"
+                    className="btn btn-secondary p-0 mb-3 rounded-circle d-flex align-items-center justify-content-center"
+                    style={{ width: "45px", height: "45px" }}
+                    onClick={() => setActiveTab(null)}
+                  >
+                    <IconChevronBack
+                      height={30}
+                      width={30}
+                      style={{ marginLeft: "-4px" }}
+                    />
+                  </button>
+                  {SETTINGS_CONTENT[activeTab]}
+                </div>
+              )}
             </div>
           </>
         )}
