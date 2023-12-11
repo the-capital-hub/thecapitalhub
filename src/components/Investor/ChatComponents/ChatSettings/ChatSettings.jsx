@@ -143,7 +143,11 @@ export default function ChatSettings({ setIsSettingsOpen }) {
               ) ? (
                 <p
                   className="text-capitalize m-0 orange_underline text_orange ms-auto"
-                  style={{ fontSize: "12px", fontWeight: "400" }}
+                  style={{
+                    fontSize: "12px",
+                    fontWeight: "400",
+                    cursor: "pointer",
+                  }}
                   onClick={() => setShowAllMedia(true)}
                 >
                   show all
@@ -172,7 +176,11 @@ export default function ChatSettings({ setIsSettingsOpen }) {
               </p>
               <p
                 className="text-capitalize m-0 orange_underline text_orange ms-auto"
-                style={{ fontSize: "12px", fontWeight: "400" }}
+                style={{
+                  fontSize: "12px",
+                  fontWeight: "400",
+                  cursor: "pointer",
+                }}
               >
                 show all
               </p>

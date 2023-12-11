@@ -127,6 +127,7 @@ export default function CommunityCard({
               borderRadius: "50%",
             }}
             alt="Company Profile"
+            className="object-fit-cover"
           />
         ) : (
           <HiOutlineUserGroup
