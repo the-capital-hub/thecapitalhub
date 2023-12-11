@@ -234,9 +234,10 @@ export const getChatSettings = async (loggedUserId, otherUserId, chatId) => {
       ],
     }).select('image video documentUrl');
 
-    const images = mediaMessages.filter(message => message.image !== null);
-    const videos = mediaMessages.filter(message => message.video !== null);
-    const documents = mediaMessages.filter(message => message.documentUrl !== null);
+    const images = mediaMessages.filter(message => message.image && message.image !== null);
+    const videos = mediaMessages.filter(message => message.video && message.video !== null);
+    const documents = mediaMessages.filter(message => message.documentUrl && message.documentUrl !== null);
+    const media = mediaMessages.filter(message => message.image || message.video);
 
     return {
       status: 200,
@@ -247,6 +248,7 @@ export const getChatSettings = async (loggedUserId, otherUserId, chatId) => {
         images,
         videos,
         documents,
+        media
       },
     };
   } catch (error) {

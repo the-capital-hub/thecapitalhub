@@ -62,6 +62,9 @@ const OtherCompanyProfilePage = lazy(() =>
 const ProfileAchievements = lazy(() =>
   import("../pages/StartUp/Achievements/Achievements")
 );
+const UserSettings = lazy(() =>
+  import("../pages/StartUp/UserSettings/UserSettings")
+);
 
 function StartUpRoutes() {
   // Light and dark Theme
@@ -296,6 +299,12 @@ function StartUpRoutes() {
           </Suspense>
         }
       />
+      <Route path="/settings" element={<UserSettings />}>
+        <Route
+          path="profile-information"
+          element={<h4>Profile Information page</h4>}
+        />
+      </Route>
     </Route>
   );
 }

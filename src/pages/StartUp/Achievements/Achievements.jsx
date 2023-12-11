@@ -121,16 +121,20 @@ function Achievements() {
       <div className="Achievements">
         {loading ? (
           <div className="container p-5 text-secondary  text-center my-5  rounded-5 ">
-            <SpinnerBS  />
+            <SpinnerBS />
           </div>
         ) : filteredAchievements?.length ? (
-          <section className="row m-0 row-cols-2 row-cols-md-3 row-cols-lg-5 justify-content-around">
+          <section className="row m-0 row-cols-4 row-cols-md-5 row-cols-lg-7 justify-content-around">
             {filteredAchievements.map((item, index) => (
               <div className="single-card col" key={index}>
-                <img src={badgeImageMap[item.badge]} alt="achievement" />
+                <img
+                  src={badgeImageMap[item.badge]}
+                  alt="achievement"
+                  className="badge-icon"
+                />
                 <div className="image_text">
                   <img src={rectangle} alt="rectangle" className="w-100" />
-                  <div className="text py-2 w-75">
+                  <div className="text py-2">
                     <h6>{item.title}</h6>
                   </div>
                 </div>
@@ -139,7 +143,9 @@ function Achievements() {
             ))}
           </section>
         ) : (
-          <h5 className="text-center text-secondary my-5">No {activeMedal} achievement yet</h5>
+          <h5 className="text-center text-secondary my-5">
+            No {activeMedal} achievement yet
+          </h5>
         )}
       </div>
     </section>
