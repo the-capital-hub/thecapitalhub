@@ -62,6 +62,9 @@ const OtherCompanyProfilePage = lazy(() =>
 const ProfileAchievements = lazy(() =>
   import("../pages/StartUp/Achievements/Achievements")
 );
+const UserSettings = lazy(() =>
+  import("../pages/StartUp/UserSettings/UserSettings")
+);
 
 function StartUpRoutes() {
   // Light and dark Theme
@@ -293,6 +296,14 @@ function StartUpRoutes() {
         element={
           <Suspense fallback={<SuspenseLoader />}>
             <FundingInfo />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/settings"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <UserSettings />
           </Suspense>
         }
       />
