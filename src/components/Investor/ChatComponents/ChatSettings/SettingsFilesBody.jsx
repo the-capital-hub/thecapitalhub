@@ -3,6 +3,7 @@ import IconFile from "../../SvgIcons/IconFile";
 import IconVideo from "../../SvgIcons/IconVideo";
 import IconChevronRight from "../../SvgIcons/IconChevronRight";
 import { useSelector } from "react-redux";
+import { HiOutlineCamera } from "react-icons/hi";
 
 export default function SettingsFilesBody() {
   const chatProfile = useSelector((state) => state.chat.chatProfile);
@@ -41,7 +42,7 @@ export default function SettingsFilesBody() {
             : chatProfile?.images?.length
         }
       >
-        <IconVideo color={"black"} />
+        <HiOutlineCamera size={25} color={"black"} />
       </FileBar>
     </>
   );
