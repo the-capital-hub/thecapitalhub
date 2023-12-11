@@ -10,6 +10,8 @@ import {
   getSinglePostAPI,
   postUserPost,
   getInvestorById,
+  updateUserById,
+  addNotificationAPI
 } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
 import profilePic from "../../../Images/investorIcon/profilePic.webp";
@@ -20,6 +22,10 @@ import { BsLink45Deg } from "react-icons/bs";
 import { s3 } from "../../../Service/awsConfig";
 import { toggleinvestorCreatePostModal } from "../../../Store/features/design/designSlice";
 import { CiImageOn, CiVideoOn } from "react-icons/ci";
+import toast from "react-hot-toast";
+import { loginSuccess } from "../../../Store/features/user/userSlice";
+import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
+import { achievementTypes } from "../../Toasts/AchievementToast/types";
 
 const CreatePostPopUp = ({
   setPopupOpen,
@@ -42,7 +48,8 @@ const CreatePostPopUp = ({
   const [zoom, setZoom] = useState(1);
   const [croppedImage, setCroppedImage] = useState(null);
 
-  const handleClose = () => {setPopupOpen(false);
+  const handleClose = () => {
+    setPopupOpen(false);
     dispatch(toggleinvestorCreatePostModal());
   }
 
@@ -215,6 +222,32 @@ const CreatePostPopUp = ({
         // Close the popup after successful submission
         handleClose();
         dispatch(toggleinvestorCreatePostModal());
+
+
+        if (!loggedInUser.achievements.includes("6564684649186bca517cd0c9")) {
+          const achievements = [...loggedInUser.achievements];
+          achievements.push("6564684649186bca517cd0c9");
+          const updatedData = { achievements };
+          updateUserById(loggedInUser._id, updatedData)
+            .then(({ data }) => {
+              dispatch(loginSuccess(data.data));
+              const notificationBody = {
+                recipient: loggedInUser._id,
+                type: "achievementCompleted",
+                achievementId: "6564684649186bca517cd0c9",
+              };
+              addNotificationAPI(notificationBody)
+                .then((data) => console.log("Added"))
+                .catch((error) => console.error(error.message));
+
+              toast.custom((t) => (
+                <AchievementToast type={achievementTypes.voyager} />
+              ));
+            })
+            .catch((error) => {
+              console.error("Error updating user:", error);
+            });
+        }
       })
       .catch((error) => {
         // Handle error if needed
@@ -242,9 +275,8 @@ const CreatePostPopUp = ({
     <>
       {popupOpen && <div className="background-overlay"></div>}
       <div
-        className={`investor_create_post_modal modal ${
-          popupOpen ? "d-block" : ""
-        }`}
+        className={`investor_create_post_modal modal ${popupOpen ? "d-block" : ""
+          }`}
         tabIndex="-1"
         role="dialog"
       >
@@ -370,7 +402,7 @@ const CreatePostPopUp = ({
                     onClick={handleGalleryButtonClick}
                   >
                     {/* <img src={GallaryIcon} alt="Button 1" /> */}
-                    <CiImageOn  size={20} />
+                    <CiImageOn size={20} />
 
                   </button>
 
