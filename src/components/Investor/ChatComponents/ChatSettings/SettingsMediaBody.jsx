@@ -27,26 +27,29 @@ export default function SettingsMediaBody({ toggleModal, showModal }) {
             {media?.map(({ image, video }, index) => (
               <div
                 className="bg-white rounded-2 d-flex justify-content-center align-items-center shadow-sm p-2"
-                style={{ height: "100px" }}
+                style={{ height: "100px", width: "100px" }}
               >
-                {image &&
+                {image && (
                   <img
                     key={index}
                     src={image}
                     alt="media item"
-                    className="rounded-2 object-fit-scale"
-                    style={{ height: "90px", width: "auto", maxWidth: "90px" }}
+                    className="rounded-2 object-fit-cover"
+                    width={90}
+                    height={90}
                   />
-                }
-                {video &&
+                )}
+                {video && (
                   <video
                     alt="media item"
-                    className="rounded-2 object-fit-scale"
-                    style={{ height: "90px", width: "auto", maxWidth: "90px" }}>
+                    className="rounded-2 object-fit-cover"
+                    width={90}
+                    height={90}
+                  >
                     <source src={video} type={"video/mp4"} />
                     Your browser does not support the video tag.
                   </video>
-                }
+                )}
               </div>
             ))}
           </>
@@ -73,7 +76,7 @@ export default function SettingsMediaBody({ toggleModal, showModal }) {
             >
               {media?.map(({ image, video }, index) => (
                 <BSCarouselItem key={index} index={index}>
-                  {image &&
+                  {image && (
                     <img
                       src={image}
                       alt="media item"
@@ -84,21 +87,25 @@ export default function SettingsMediaBody({ toggleModal, showModal }) {
                         objectFit: "contain",
                       }}
                     />
-                  }
-                  {video &&
-                    <video controls
-                      alt="media item"
-                      className="rounded-2"
-                      style={{
-                        width: "50vw",
-                        height: "50vh",
-                        objectFit: "contain",
-                      }}
+                  )}
+                  {video && (
+                    <div
+                      className="d-flex align-items-center justify-content-center"
+                      style={{ width: "50vw", height: "50vh" }}
                     >
-                      <source src={video} type={"video/mp4"} />
-                      Your browser does not support the video tag.
-                    </video>
-                  }
+                      <video
+                        controls
+                        alt="media item"
+                        className="rounded-2"
+                        style={{
+                          width: "70%",
+                        }}
+                      >
+                        <source src={video} type={"video/mp4"} />
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                  )}
                 </BSCarouselItem>
               ))}
             </BSCarousel>
