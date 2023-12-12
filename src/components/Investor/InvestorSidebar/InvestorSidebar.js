@@ -125,7 +125,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
               {sidebarCollapsed ? (
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
-                  to={"/settings"}
+                  to={"/profile"}
                 >
                   {" "}
                   <img
@@ -143,7 +143,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <>
                   <Link
                     // onClick={() => setSidebarCollapsed(true)}
-                    to={"/settings"}
+                    to={"/profile"}
                   >
                     {" "}
                     <img

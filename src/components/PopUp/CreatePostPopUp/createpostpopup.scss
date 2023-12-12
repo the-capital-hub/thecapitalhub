@@ -203,8 +203,9 @@
       height: auto;
       flex-shrink: 0;
       border-radius: var(--border-radius);
-      border: 0.894px solid #e0e0e0;
-      background: #eaeef2;
+      border: 0.894px solid var(bs-border-color);
+      // background: #eaeef2;
+      background: var(--bs-light);
 
       /* footer */
       display: flex;
@@ -220,7 +221,7 @@
         margin-inline: auto;
 
         .white_button {
-          background-color: white;
+          // background-color: white;
           border: none;
           padding: 0;
           width: 42.114px;
