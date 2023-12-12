@@ -5,17 +5,26 @@
     top: 39px;
     background: var(--white-to-grey);
     box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.05);
-    border-radius: 20px;
+    border-radius: 0px;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
 
+    @media (min-width: 768px) {
+      border-radius: var(--border-radius);
+    }
+
     .close-button {
       color: var(--d-l-grey);
       cursor: pointer;
       border-radius: 5px;
+      font-size: 1.125rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .bar_logo_container {
@@ -150,6 +159,7 @@
         .mobile-home-hamberger {
           display: flex;
           width: fit-content;
+          color: var(--d-l-grey);
 
           h1 {
             color: #000;

@@ -38,7 +38,10 @@ function ValidateOneLink({ children, ...props }) {
         <OneLinkValidation userId={userId} onelink={username} />
       ) : (
         <>
-          <NavBarIV handleSidebarToggle={handleSidebarToggle} />
+          <NavBarIV
+            handleSidebarToggle={handleSidebarToggle}
+            sidebarCollapsed={sidebarCollapsed}
+          />
 
           <div
             className={`container-fluid investor_view_container ${

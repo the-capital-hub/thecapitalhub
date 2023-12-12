@@ -65,36 +65,45 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsInvestor } from "../../../Store/features/user/userSlice";
 import { selectTheme } from "../../../Store/features/design/designSlice";
+import { MdOutlineMenu, MdOutlineMenuOpen } from "react-icons/md";
 
-const NavBar = (props) => {
+const NavBar = ({ handleSidebarToggle, sidebarCollapsed }) => {
   const navigate = useNavigate();
   const isInvestor = useSelector(selectIsInvestor);
   const theme = useSelector(selectTheme);
 
   return (
     <>
-      <div className="container pt-1" data-bs-theme={theme}>
-        <div className="row investor_view_navbar ">
-          <div className="col-12 d-flex ms-4">
+      <div className="container" data-bs-theme={theme}>
+        <div className="investor_view_navbar ">
+          <div className="d-flex align-items-center h-100 ms-4">
             <div className="row bar_logo_container ">
               <div className="logo_container">
                 <img src={Logo} alt="bar" />
               </div>
               <div
                 className="mobile-home-hamberger"
-                onClick={props.handleSidebarToggle}
+                onClick={handleSidebarToggle}
               >
-                <img src={HambergerIcon} alt="bar" />
+                {sidebarCollapsed ? (
+                  <MdOutlineMenu size={25} />
+                ) : (
+                  <MdOutlineMenuOpen
+                    size={25}
+                    color="var(--darkMode-currentTheme)"
+                  />
+                )}
+                {/* <img src={HambergerIcon} alt="bar" /> */}
                 {/* <h1>Home</h1> */}
               </div>
             </div>
             <div
-              className="ms-auto m-2 p-4 close-button"
+              className="ms-auto m-2 px-2 close-button"
               onClick={() =>
                 navigate(isInvestor === "true" ? "/investor/home" : "/home")
               }
             >
-              <strong>x</strong>
+              X
             </div>
           </div>
         </div>

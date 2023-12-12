@@ -99,7 +99,7 @@ const Documentation = () => {
             {loading && (
               <SpinnerBS
                 className={
-                  "d-flex py-5 justify-content-center align-items-center w-100"
+                  "d-flex py-5 justify-content-center align-items-center w-100 vh-100"
                 }
               />
             )}

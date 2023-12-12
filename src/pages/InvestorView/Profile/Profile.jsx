@@ -19,7 +19,7 @@ import {
   Revenue2,
   // Revenue3,
 } from "../../../Images/Investor/CompanyProfile";
-import Milestones from "../../../components/Investor/CompanyProfilePageComponents/Milestones/Milestones";
+// import Milestones from "../../../components/Investor/CompanyProfilePageComponents/Milestones/Milestones";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 
@@ -231,14 +231,14 @@ function Profile() {
 
               {/* Milestones */}
 
-              <div className="border box">
+              {/* <div className="border box">
                 <Milestones
                   headingClass={"typography"}
                   containerClass={"p-3"}
                   theme="startup"
                   oneLink={userId}
-                />
-                {/* <div className="personal_information_header">
+                /> */}
+              {/* <div className="personal_information_header">
                       <h2 className="typography">Milestones</h2>
                       <div className="milestone_see_more">
                         <Link to={"/"}>See more</Link>
@@ -247,7 +247,7 @@ function Profile() {
                     <div className="col-12 mt-2">
                       <MileStoneCard userId={user._id} />
                     </div> */}
-              </div>
+              {/* </div> */}
 
               {/* Company Details */}
 
@@ -313,8 +313,8 @@ function Profile() {
             </div>
           </div>
         ) : (
-          <div className="d-flex w-100 min-vh-100 justify-content-center bg-white border shadow-sm rounded-4 pt-5 ">
-            <SpinnerBS colorClass={"text-black"} />
+          <div className="d-flex w-100 min-vh-100 justify-content-center white-to-grey border shadow-sm rounded-4 pt-5 ">
+            <SpinnerBS colorClass={"d-l-grey"} />
           </div>
         )}
       </MaxWidthWrapper>

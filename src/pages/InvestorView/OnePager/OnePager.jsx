@@ -237,7 +237,10 @@ const OnePager = () => {
             {/* OnePager End */}
           </div>
         ) : (
-          <SpinnerBS className={"d-flex justify-content-center w-100 py-5"} />
+          <SpinnerBS
+            className={"d-flex justify-content-center w-100 vh-100 py-5"}
+            colorClass={"d-l-grey"}
+          />
         )}
       </div>
     </MaxWidthWrapper>
