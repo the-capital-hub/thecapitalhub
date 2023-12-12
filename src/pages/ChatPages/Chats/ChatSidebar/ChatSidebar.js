@@ -245,7 +245,7 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
                           <img
                             src={member.profilePicture}
                             alt="Profile"
-                            className="rounded_img"
+                            className="rounded_img object-fit-cover"
                           />
                           <div className="title_and_message">
                             <h5 className="name_title">
@@ -323,7 +323,7 @@ const ChatSidebar = ({ recieveMessage, sendMessage }) => {
                           <img
                             src={member.profilePicture}
                             alt="Profile"
-                            className="rounded_img"
+                            className="rounded_img object-fit-cover"
                           />
                           <div className="title_and_message">
                             <h5 className="name_title text-capitalize">

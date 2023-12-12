@@ -50,18 +50,22 @@ export default function MyMessage({
           )}
           {/* Image */}
           {message?.image && (
-            <img
-              src={message.image}
-              className="image-message"
-              alt="message media"
-            />
+            <div className="image-message">
+              <img
+                src={message.image}
+                className="rounded"
+                alt="message media"
+              />
+            </div>
           )}
           {/* Video */}
           {message?.video && (
-            <video controls className="video-message">
-              <source src={message?.video} type={"video/mp4"} />
-              Your browser does not support the video tag.
-            </video>
+            <div className="video-message">
+              <video controls className="rounded">
+                <source src={message?.video} type={"video/mp4"} />
+                Your browser does not support the video tag.
+              </video>
+            </div>
           )}
           {/* Document */}
           {message?.documentUrl && (
