@@ -7,6 +7,7 @@ import {
   setShowOnboarding,
 } from "../../../../Store/features/design/designSlice";
 import { selectIsInvestor } from "../../../../Store/features/user/userSlice";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 export default function OnboardingSwitch() {
   const isMobileView = useSelector(selectIsMobileView);
@@ -28,20 +29,32 @@ export default function OnboardingSwitch() {
     dispatch(setShowOnboarding(checked));
   }
 
+  const renderTooltip = (props) => (
+    <Tooltip id="onboarding-tooltip" {...props}>
+      Would you like a tour inside Capital Hub?
+    </Tooltip>
+  );
+
   return (
-    <div className="onboarding_switch_wrapper">
-      <div className="form-check form-switch">
-        <input
-          className={`form-check-input ${isInvestor && "investor"}`}
-          type="checkbox"
-          role="switch"
-          id="onboardingToggle"
-          defaultChecked={false}
-          checked={showOnboarding}
-          onClick={handleSwitchClick}
-          ref={switchRef}
-        />
+    <OverlayTrigger
+      placement="auto"
+      delay={{ show: 250, hide: 400 }}
+      overlay={renderTooltip}
+    >
+      <div className="onboarding_switch_wrapper">
+        <div className="form-check form-switch">
+          <input
+            className={`form-check-input ${isInvestor && "investor"}`}
+            type="checkbox"
+            role="switch"
+            id="onboardingToggle"
+            defaultChecked={false}
+            checked={showOnboarding}
+            onClick={handleSwitchClick}
+            ref={switchRef}
+          />
+        </div>
       </div>
-    </div>
+    </OverlayTrigger>
   );
 }

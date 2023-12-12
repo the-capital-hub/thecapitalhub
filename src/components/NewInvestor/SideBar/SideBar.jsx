@@ -37,7 +37,11 @@ import CommunitiesIcon from "../../Investor/ChatComponents/CommunitiesIcon";
 import { clearAllChatsData } from "../../../Store/features/chat/chatSlice";
 import { GoHome } from "react-icons/go";
 import { HiOutlineOfficeBuilding } from "react-icons/hi";
-import { IoCompassOutline, IoExitOutline } from "react-icons/io5";
+import {
+  IoCompassOutline,
+  IoExitOutline,
+  IoSettingsOutline,
+} from "react-icons/io5";
 import IconMyStartups from "../../Investor/SvgIcons/IconMyStartups";
 import IconClock from "../../Investor/SvgIcons/IconClock";
 import { PiFloppyDiskBackLight, PiSparkleLight } from "react-icons/pi";
@@ -129,8 +133,8 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   <img
                     className="rounded-circle"
                     style={{
-                      width: "60px",
-                      height: "60px",
+                      width: "50px",
+                      height: "50px",
                       objectFit: "cover",
                     }}
                     src={loggedInUser.profilePicture}
@@ -399,16 +403,31 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   {!sidebarCollapsed && <span className="">Connection</span>}
                 </Link>
               </MenuItem>
+
+              <MenuItem
+                active={location.pathname.includes("/settings")}
+                className="active-item"
+              >
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)}
+                  to="/investor/settings"
+                  id="sidebar_settings"
+                >
+                  <IoSettingsOutline size={25} />
+                  {!sidebarCollapsed && <span className="">Settings</span>}
+                </Link>
+              </MenuItem>
+
               {/* <MenuItem
                 // active={location.pathname.includes("")}
                 className="active-item"
               > */}
-                {/* <Link
+              {/* <Link
                   // onClick={() => setSidebarCollapsed(true)}
                   to="/"
                 > */}
-                  {/* <img src={HomeIcon} alt="link to main landing page" /> */}
-                  {/* <PiSparkleLight size={25} />
+              {/* <img src={HomeIcon} alt="link to main landing page" /> */}
+              {/* <PiSparkleLight size={25} />
                   {!sidebarCollapsed && <span>Learn More</span>}
                 </Link>
               </MenuItem> */}

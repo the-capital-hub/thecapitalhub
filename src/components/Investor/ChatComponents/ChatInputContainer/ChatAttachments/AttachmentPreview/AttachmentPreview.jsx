@@ -57,7 +57,7 @@ export default function AttachmentPreview({
           <div className="d-flex align-items-center gap-2 py-2 send-container mt-auto mb-2 px-2">
             <input
               type="text"
-              className="text-input text-black flex-grow-1"
+              className="text-input flex-grow-1"
               name="introductoryMessage"
               placeholder="Your message..."
               onChange={(e) => setSendText(e.target.value)}

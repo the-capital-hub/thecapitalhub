@@ -28,6 +28,7 @@ import ModalBsLauncher from "../../PopUp/ModalBS/ModalBsLauncher/ModalBsLauncher
 import { IoCompassOutline } from "react-icons/io5";
 import { HiOutlineDocumentText, HiOutlineUserPlus } from "react-icons/hi2";
 import { clearAllChatsData } from "../../../Store/features/chat/chatSlice";
+import { FiHelpCircle } from "react-icons/fi";
 
 // Startup Sidebar
 const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
@@ -124,7 +125,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
               {sidebarCollapsed ? (
                 <Link
                   // onClick={() => setSidebarCollapsed(true)}
-                  to={"/settings"}
+                  to={"/profile"}
                 >
                   {" "}
                   <img
@@ -142,7 +143,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <>
                   <Link
                     // onClick={() => setSidebarCollapsed(true)}
-                    to={"/settings"}
+                    to={"/profile"}
                   >
                     {" "}
                     <img
@@ -396,10 +397,25 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   to="/help"
                 >
                   {/* <img src={Setting} alt="help" width="17px" height="17px" /> */}
-                  <IoSettingsOutline size={25} />
+                  <FiHelpCircle size={25} />
                   {!sidebarCollapsed && <span>Help</span>}
                 </Link>
               </MenuItem>
+
+              <MenuItem
+                active={location.pathname.includes("/settings")}
+                className="active-item"
+              >
+                <Link
+                  //  onClick={() => setSidebarCollapsed(true)}
+                  to="/settings"
+                >
+                  {/* <img src={Setting} alt="help" width="17px" height="17px" /> */}
+                  <IoSettingsOutline size={25} />
+                  {!sidebarCollapsed && <span>Settings</span>}
+                </Link>
+              </MenuItem>
+
               <MenuItem
                 // active={location.pathname.includes("")}
                 className="active-item"
