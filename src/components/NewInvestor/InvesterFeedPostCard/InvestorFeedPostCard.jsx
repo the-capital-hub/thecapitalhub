@@ -572,7 +572,7 @@ const FeedPostCard = ({
                       {liked ? (
                         <img
                           src={fireIcon}
-                          width={18}
+                          width={20}
                           alt="like post"
                           onClick={likeUnlikeHandler}
                           style={{ cursor: "pointer" }}
@@ -587,6 +587,7 @@ const FeedPostCard = ({
                         // />
                         <BsFire
                           onClick={likeUnlikeHandler}
+                          size={20}
                           style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                         />
                       )}
