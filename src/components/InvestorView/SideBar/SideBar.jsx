@@ -3,29 +3,34 @@ import {
   Menu,
   MenuItem,
   SidebarHeader,
-  SidebarFooter,
+  // SidebarFooter,
   SidebarContent,
 } from "react-pro-sidebar";
-import ArrowLeft from "../../../Images/investorsidebar/ArrowLeft.svg";
-import ArrowRight from "../../../Images/investorsidebar/ArrowRight.svg";
-import BookIcon from "../../../Images/investorIcon/Book.svg";
-import profilePic from "../../../Images/investorIcon/profilePic.webp";
+// import ArrowLeft from "../../../Images/investorsidebar/ArrowLeft.svg";
+// import ArrowRight from "../../../Images/investorsidebar/ArrowRight.svg";
+// import BookIcon from "../../../Images/investorIcon/Book.svg";
+// import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import "react-pro-sidebar/dist/css/styles.css";
 import "../../Investor/InvestorSidebar/investorsidebar.scss";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./SideBar.scss";
-import profileIcon from "../../../Images/profile.png";
-import companyIcon from "../../../Images/company.png";
-import documentationIcon from "../../../Images/documentation.png";
-import investIcon from "../../../Images/invest.png";
+// import profileIcon from "../../../Images/profile.png";
+// import companyIcon from "../../../Images/company.png";
+// import documentationIcon from "../../../Images/documentation.png";
+// import investIcon from "../../../Images/invest.png";
 import { getUserById } from "../../../Service/user";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { HiOutlineOfficeBuilding } from "react-icons/hi";
+import IconUser from "../../Investor/SvgIcons/IconUser";
+import IconFile from "../../Investor/SvgIcons/IconFile";
+import { IoDocumentsOutline } from "react-icons/io5";
+import { RiMoneyDollarCircleLine } from "react-icons/ri";
 
 const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   const isMobileView = useSelector((state) => state.design.isMobileView);
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  // const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const location = useLocation();
 
   // console.log("onelink pathname", location.pathname.split("/").slice(-1)[0]);
@@ -51,11 +56,11 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
         setUser(data);
       })
       .catch(() => setUser([]));
-  }, [username]);
+  }, [username, userId]);
 
-  const menuIconClick = () => {
-    setSidebarCollapsed(!sidebarCollapsed);
-  };
+  // const menuIconClick = () => {
+  //   setSidebarCollapsed(!sidebarCollapsed);
+  // };
 
   // Methods for touch events
   const handleTouchStart = (e) => {
@@ -149,12 +154,13 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
               >
                 <Link to="">
                   {/* <img src={OnelinkIcon} alt="image" width="17px" height="17px" /> */}
-                  <img
+                  {/* <img
                     src={companyIcon}
                     alt="Company"
                     width="17px"
                     height="17px"
-                  />
+                  /> */}
+                  <HiOutlineOfficeBuilding size={25} />
                   {!sidebarCollapsed && (
                     <span
                       className={currentTab === "company" ? "items-active" : ""}
@@ -170,12 +176,13 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 onClick={() => setCurrentTab("profile")}
               >
                 <Link to="profile">
-                  <img
+                  {/* <img
                     src={profileIcon}
                     alt="Profile"
                     width="17px"
                     height="17px"
-                  />
+                  /> */}
+                  <IconUser height={25} width={25} />
                   {!sidebarCollapsed && (
                     <span
                       className={currentTab === "profile" ? "items-active" : ""}
@@ -191,12 +198,13 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 onClick={() => setCurrentTab("onepager")}
               >
                 <Link to="onepager">
-                  <img
+                  {/* <img
                     src={BookIcon}
                     alt="OnePager"
                     width="17px"
                     height="17px"
-                  />
+                  /> */}
+                  <IconFile width={25} height={25} />
                   {!sidebarCollapsed && (
                     <span
                       className={
@@ -214,12 +222,13 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 onClick={() => setCurrentTab("documentation")}
               >
                 <Link to="documentation">
-                  <img
+                  {/* <img
                     src={documentationIcon}
                     alt="Documentation"
                     width="17px"
                     height="17px"
-                  />
+                  /> */}
+                  <IoDocumentsOutline size={25} />
                   {!sidebarCollapsed && (
                     <span
                       className={
@@ -240,12 +249,13 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   className="active-item invest_now"
                 >
                   <Link to="investnow">
-                    <img
+                    {/* <img
                       src={investIcon}
                       alt="Invest Now"
                       width="17px"
                       height="17px"
-                    />
+                    /> */}
+                    <RiMoneyDollarCircleLine size={25} />
                     {!sidebarCollapsed && (
                       <span className={"items-active"}>Invest Now</span>
                     )}

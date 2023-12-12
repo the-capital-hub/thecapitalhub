@@ -6,10 +6,12 @@ import "./ValidateOneLink.scss";
 import OneLinkValidation from "../../../components/Shared/OnelinkValidation/OnelinkValidation";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { selectTheme } from "../../../Store/features/design/designSlice";
 
 function ValidateOneLink({ children, ...props }) {
   const { userId } = useParams();
   const { username } = useParams();
+  const theme = useSelector(selectTheme);
 
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
   const handleSidebarToggle = () => {
@@ -32,15 +34,17 @@ function ValidateOneLink({ children, ...props }) {
 
   return (
     <>
-      {!oneLinkUser || oneLinkLoggedIn === 'false' || userId !== oneLinkId ? (
-        <OneLinkValidation userId={userId} onelink={username}/>
+      {!oneLinkUser || oneLinkLoggedIn === "false" || userId !== oneLinkId ? (
+        <OneLinkValidation userId={userId} onelink={username} />
       ) : (
         <>
           <NavBarIV handleSidebarToggle={handleSidebarToggle} />
 
           <div
-            className={`container-fluid investor_view_container ${sidebarCollapsed ? "sidebar-collapsed" : ""
-              }`}
+            className={`container-fluid investor_view_container ${
+              sidebarCollapsed ? "sidebar-collapsed" : ""
+            }`}
+            data-bs-theme={"dark"}
           >
             <div className="sidebar">
               <SideBarIV

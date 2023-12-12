@@ -64,14 +64,16 @@ import HambergerIcon from "../../../Images/Hamberger.svg";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsInvestor } from "../../../Store/features/user/userSlice";
+import { selectTheme } from "../../../Store/features/design/designSlice";
 
 const NavBar = (props) => {
   const navigate = useNavigate();
   const isInvestor = useSelector(selectIsInvestor);
+  const theme = useSelector(selectTheme);
 
   return (
     <>
-      <div className="container pt-1">
+      <div className="container pt-1" data-bs-theme={theme}>
         <div className="row investor_view_navbar ">
           <div className="col-12 d-flex ms-4">
             <div className="row bar_logo_container ">
@@ -86,14 +88,15 @@ const NavBar = (props) => {
                 {/* <h1>Home</h1> */}
               </div>
             </div>
-            <div className="ms-auto m-2 p-4 close-button" onClick={() => navigate(isInvestor === "true" ? "/investor/home" : "/home")
-            }>
+            <div
+              className="ms-auto m-2 p-4 close-button"
+              onClick={() =>
+                navigate(isInvestor === "true" ? "/investor/home" : "/home")
+              }
+            >
               <strong>x</strong>
             </div>
-
           </div>
-
-
         </div>
       </div>
     </>

@@ -1,15 +1,15 @@
-import profilePic from "../../../Images/investorIcon/profilePic.webp";
-import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
-import { Link } from "react-router-dom";
+// import profilePic from "../../../Images/investorIcon/profilePic.webp";
+// import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
+// import { Link } from "react-router-dom";
 import CompanyDetailsCard from "../../../components/Investor/InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
-import { useSelector } from "react-redux";
-import MileStoneCard from "../../../components/Investor/InvestorGlobalCards/MilestoneCard/FeaturedPostsContainer";
+// import { useSelector } from "react-redux";
+// import MileStoneCard from "../../../components/Investor/InvestorGlobalCards/MilestoneCard/FeaturedPostsContainer";
 import "./Profile.scss";
 import { useParams } from "react-router-dom";
 import { getUserById, getStartupByFounderId } from "../../../Service/user";
 import { useState, useEffect } from "react";
 import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
-import CoinIcon from "../../../Images/investorView/Rectangle.png";
+// import CoinIcon from "../../../Images/investorView/Rectangle.png";
 import {
   About1,
   About2,
@@ -17,7 +17,7 @@ import {
   About4,
   Revenue1,
   Revenue2,
-  Revenue3,
+  // Revenue3,
 } from "../../../Images/Investor/CompanyProfile";
 import Milestones from "../../../components/Investor/CompanyProfilePageComponents/Milestones/Milestones";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";

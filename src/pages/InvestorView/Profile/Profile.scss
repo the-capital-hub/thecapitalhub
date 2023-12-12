@@ -5,7 +5,7 @@
   // }
 
   .typography {
-    color: #000;
+    color: var(--d-l-grey);
     font-size: 20px;
     font-family: Poppins;
     font-weight: 600;
@@ -34,10 +34,11 @@
   }
 
   .box {
-    background-color: #fff;
+    background-color: var(--white-to-grey);
+    color: var(--d-l-grey);
     padding: 10px;
     border-radius: var(--border-radius);
-    background: #fff;
+    // background: #fff;
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
   }
 
@@ -117,7 +118,7 @@
   }
 
   .designation_list {
-    color: #000;
+    color: var(--d-l-grey);
     font-size: 16px;
     font-family: Poppins;
     font-weight: 500;
