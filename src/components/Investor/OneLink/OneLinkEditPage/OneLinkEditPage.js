@@ -9,8 +9,8 @@ const OneLinkEditPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    document.title = "Edit One Link | The Capital Hub";
-    dispatch(setPageTitle("Edit One-Link"));
+    document.title = "Edit OneLink | The Capital Hub";
+    dispatch(setPageTitle("Edit OneLink"));
   }, [dispatch]);
   return (
     <MaxWidthWrapper>

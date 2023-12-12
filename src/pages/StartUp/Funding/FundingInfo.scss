@@ -7,6 +7,11 @@
     @media (min-width: 1200px) {
       grid-template-columns: calc(100% - 26rem) 24rem;
     }
+
+    .funding_form_container {
+      background-color: var(--white-to-grey);
+      color: var(--d-l-grey);
+    }
   }
 
   // component classes

@@ -98,7 +98,7 @@ const Feed = () => {
   useEffect(() => {
     document.title = "Home | The Capital Hub";
     dispatch(setPageTitle("Home"));
-  }, []);
+  }, [dispatch]);
 
   // Repost
   const [repostLoading, setRepostLoading] = useState({

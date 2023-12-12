@@ -51,6 +51,9 @@ const InvestorCompanyProfilePage = lazy(() =>
 const InvestorOnelink = lazy(() =>
   import("../pages/Investor/InvestorOnelink/InvestorOnelink")
 );
+const InvestorUserSettings = lazy(() =>
+  import("../pages/Investor/InvestorUserSettings/InvestorUserSettings")
+);
 
 function InvestorRoutes() {
   return (
@@ -212,6 +215,24 @@ function InvestorRoutes() {
           </Suspense>
         }
       />
+
+      <Route
+        path="settings"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <InvestorUserSettings />
+          </Suspense>
+        }
+      >
+        <Route
+          path="profile-information"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <p>Profile Information</p>
+            </Suspense>
+          }
+        />
+      </Route>
     </>
   );
 }

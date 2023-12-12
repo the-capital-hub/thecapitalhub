@@ -393,10 +393,10 @@ const NavBar = (props) => {
               >
                 {isNotificationModalOpen || toggleNotificationPopup ? (
                   <>
-                    <img
-                      src={YellowNotificationIcon}
-                      alt="notification"
-                      width={50}
+                    <IoMdNotificationsOutline
+                      size={30}
+                      style={{ fill: "var(--currentTheme-dark)" }}
+                      className="noticon"
                       onClick={() =>
                         setToggleNotificationPopup((prev) => !prev)
                       }
@@ -408,15 +408,6 @@ const NavBar = (props) => {
                   </>
                 ) : (
                   <>
-                    {/* <img
-                      src={NotificationIcon}
-                      alt="notification"
-                      onClick={() => {
-                        dispatch(setUnreadNotifications(0));
-                        setToggleNotificationPopup((prev) => !prev);
-                      }}
-                    /> */}
-
                     <IoMdNotificationsOutline
                       size={30}
                       style={{ fill: "var(--d-l-grey)" }}

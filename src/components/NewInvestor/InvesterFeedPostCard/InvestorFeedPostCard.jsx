@@ -568,11 +568,11 @@ const FeedPostCard = ({
                 <hr className="mt-1 mb-2" />
                 <div className="row feedpostcard_footer mb-2">
                   <div className="col-8">
-                    <div className="feedpostcard_footer_like_comment d-flex gap-2">
+                    <div className="feedpostcard_footer_like_comment p-1 d-flex gap-2">
                       {liked ? (
                         <img
                           src={fireIcon}
-                          width={18}
+                          width={20}
                           alt="like post"
                           onClick={likeUnlikeHandler}
                           style={{ cursor: "pointer" }}
@@ -587,6 +587,7 @@ const FeedPostCard = ({
                         // />
                         <BsFire
                           onClick={likeUnlikeHandler}
+                          size={20}
                           style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                         />
                       )}

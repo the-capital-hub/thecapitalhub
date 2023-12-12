@@ -43,7 +43,7 @@ export default function Meetings({ meetingType, meetingsData, view }) {
   };
 
   return (
-    <details className="border bg-primary p-2 text-white rounded-3 ">
+    <details className="border bg-secondary p-2 text-white rounded-3 ">
       <summary
         className={`text-capitalize meeting__header p-1 d-flex justify-content-between align-items-center ${
           isOpen ? "border-bottom border-white" : ""

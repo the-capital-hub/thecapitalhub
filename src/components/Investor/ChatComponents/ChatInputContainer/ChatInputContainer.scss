@@ -41,7 +41,7 @@
       }
     }
 
-    input {
+    .message {
       flex-grow: 1;
       border: none;
       outline: none;
@@ -49,14 +49,14 @@
       padding: 8px;
       border-radius: 6px;
       background-color: #eaeef2;
-      color: var(--bs-body-bg);
+      color: #000;
+
+      &::placeholder {
+        color: #555 !important;
+      }
 
       @media (max-width: 420px) {
         max-width: 70%;
-      }
-
-      ::placeholder {
-        color: #999;
       }
     }
 

@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
-import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
-import "./UserSettings.scss";
-import SettingsTabs from "../../../components/Investor/UserSettingsPageComponents/SettingsTabs/SettingsTabs";
-import Account from "../../../components/Investor/UserSettingsPageComponents/Account/Account";
-import SignInAndSecurity from "../../../components/Investor/UserSettingsPageComponents/SignInAndSecurity/SignInAndSecurity";
-import PrivacyPolicy from "../../../components/Investor/UserSettingsPageComponents/PrivacyPolicy/PrivacyPolicy";
-import Logout from "../../../components/Investor/UserSettingsPageComponents/Logout/Logout";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import "./InvestorUserSettings.scss";
 import {
   selectIsMobileView,
   setPageTitle,
 } from "../../../Store/features/design/designSlice";
-import IconChevronBack from "../../../components/Investor/SvgIcons/IconChevronBack";
+import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useLocation } from "react-router-dom";
+import SettingsTabs from "../../../components/Investor/UserSettingsPageComponents/SettingsTabs/SettingsTabs";
+import IconChevronBack from "../../../components/Investor/SvgIcons/IconChevronBack";
+import Account from "../../../components/Investor/UserSettingsPageComponents/Account/Account";
+import SignInAndSecurity from "../../../components/Investor/UserSettingsPageComponents/SignInAndSecurity/SignInAndSecurity";
+import PrivacyPolicy from "../../../components/Investor/UserSettingsPageComponents/PrivacyPolicy/PrivacyPolicy";
+import Logout from "../../../components/Investor/UserSettingsPageComponents/Logout/Logout";
 
+// If settings content is different for Investor Account, create a separate component for it
 const SETTINGS_CONTENT = {
   account: <Account />,
   signInAndSecurity: <SignInAndSecurity />,
@@ -21,7 +22,7 @@ const SETTINGS_CONTENT = {
   logout: <Logout />,
 };
 
-export default function UserSettings() {
+export default function InvestorUserSettings() {
   const isMobileView = useSelector(selectIsMobileView);
   const { pathname } = useLocation();
   const dispatch = useDispatch();
@@ -42,13 +43,13 @@ export default function UserSettings() {
   }, [isMobileView]);
 
   return (
-    <div className="userSettings-page-wrapper my-5 mx-lg-3">
+    <div className="investor-userSettings-page-wrapper mt-3 mb-5 mx-lg-3">
       <MaxWidthWrapper>
         {/* Mobile View */}
         {isMobileView && (
           <>
-            <div className="userSettings-page-container d-flex flex-column gap-3">
-              {!activeTab && pathname === "/settings" && (
+            <div className="investor-userSettings-page-container d-flex flex-column gap-3">
+              {!activeTab && pathname === "/investor/settings" && (
                 <div className="z-0" id="sidebarSettings">
                   <SettingsTabs
                     activeTab={activeTab}
@@ -58,7 +59,7 @@ export default function UserSettings() {
               )}
 
               {/* Settings Content */}
-              {activeTab && pathname === "/settings" && (
+              {activeTab && pathname === "/investor/settings" && (
                 <div
                   className="setttings-content flex-grow-1"
                   id="settingsContent"
@@ -88,7 +89,7 @@ export default function UserSettings() {
         {/* Large Screen View */}
         {!isMobileView && (
           <>
-            <div className="userSettings-page-container d-flex flex-column flex-lg-row gap-3">
+            <div className="investor-userSettings-page-container d-flex flex-column flex-lg-row gap-3">
               <div className="z-0" id="sidebarSettings">
                 <SettingsTabs
                   activeTab={activeTab}
@@ -97,7 +98,7 @@ export default function UserSettings() {
               </div>
 
               {/* Settings Content */}
-              {pathname === "/settings" && (
+              {pathname === "/investor/settings" && (
                 <div
                   className="setttings-content flex-grow-1"
                   id="settingsContent"
