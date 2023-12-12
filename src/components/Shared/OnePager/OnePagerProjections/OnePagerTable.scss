@@ -1,5 +1,7 @@
 .onePager_table_wrapper {
+  color: var(--d-l-grey);
   table {
+    background-color: var(--bs-light);
     border-collapse: separate;
   }
   td {
@@ -8,7 +10,7 @@
   }
 
   td + td {
-    border-left: 1px solid #e7e7e7;
+    border-left: 1px solid var(--bs-border-color);
   }
 
   .table_container {

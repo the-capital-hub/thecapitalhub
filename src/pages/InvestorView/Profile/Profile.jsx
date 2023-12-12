@@ -1,15 +1,15 @@
-import profilePic from "../../../Images/investorIcon/profilePic.webp";
-import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
-import { Link } from "react-router-dom";
+// import profilePic from "../../../Images/investorIcon/profilePic.webp";
+// import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
+// import { Link } from "react-router-dom";
 import CompanyDetailsCard from "../../../components/Investor/InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
-import { useSelector } from "react-redux";
-import MileStoneCard from "../../../components/Investor/InvestorGlobalCards/MilestoneCard/FeaturedPostsContainer";
+// import { useSelector } from "react-redux";
+// import MileStoneCard from "../../../components/Investor/InvestorGlobalCards/MilestoneCard/FeaturedPostsContainer";
 import "./Profile.scss";
 import { useParams } from "react-router-dom";
 import { getUserById, getStartupByFounderId } from "../../../Service/user";
 import { useState, useEffect } from "react";
 import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
-import CoinIcon from "../../../Images/investorView/Rectangle.png";
+// import CoinIcon from "../../../Images/investorView/Rectangle.png";
 import {
   About1,
   About2,
@@ -17,9 +17,9 @@ import {
   About4,
   Revenue1,
   Revenue2,
-  Revenue3,
+  // Revenue3,
 } from "../../../Images/Investor/CompanyProfile";
-import Milestones from "../../../components/Investor/CompanyProfilePageComponents/Milestones/Milestones";
+// import Milestones from "../../../components/Investor/CompanyProfilePageComponents/Milestones/Milestones";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 
@@ -231,14 +231,14 @@ function Profile() {
 
               {/* Milestones */}
 
-              <div className="border box">
+              {/* <div className="border box">
                 <Milestones
                   headingClass={"typography"}
                   containerClass={"p-3"}
                   theme="startup"
                   oneLink={userId}
-                />
-                {/* <div className="personal_information_header">
+                /> */}
+              {/* <div className="personal_information_header">
                       <h2 className="typography">Milestones</h2>
                       <div className="milestone_see_more">
                         <Link to={"/"}>See more</Link>
@@ -247,7 +247,7 @@ function Profile() {
                     <div className="col-12 mt-2">
                       <MileStoneCard userId={user._id} />
                     </div> */}
-              </div>
+              {/* </div> */}
 
               {/* Company Details */}
 
@@ -313,8 +313,8 @@ function Profile() {
             </div>
           </div>
         ) : (
-          <div className="d-flex w-100 min-vh-100 justify-content-center bg-white border shadow-sm rounded-4 pt-5 ">
-            <SpinnerBS colorClass={"text-black"} />
+          <div className="d-flex w-100 min-vh-100 justify-content-center white-to-grey border shadow-sm rounded-4 pt-5 ">
+            <SpinnerBS colorClass={"d-l-grey"} />
           </div>
         )}
       </MaxWidthWrapper>

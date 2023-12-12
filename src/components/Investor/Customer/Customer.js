@@ -11,7 +11,7 @@ const Customer = () => {
   useEffect(() => {
     document.title = "Customer | The Capital Hub";
     dispatch(setPageTitle("Customer"));
-  }, []);
+  }, [dispatch]);
   return (
     <MaxWidthWrapper>
       <div className="customer_container">

@@ -12,7 +12,7 @@ const Support = () => {
   useEffect(() => {
     document.title = "Support | The Capital Hub";
     dispatch(setPageTitle("Support"));
-  }, []);
+  }, [dispatch]);
 
   return (
     <MaxWidthWrapper>

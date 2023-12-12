@@ -30,7 +30,7 @@ function Notifications() {
   useEffect(() => {
     document.title = "Notifications | The Capital Hub";
     dispatch(setPageTitle("Notifications"));
-  }, []);
+  }, [dispatch]);
 
   const handleTabChange = (tab) => {
     setSelectedTab(tab);
