@@ -160,7 +160,8 @@
     position: relative;
 
     .popup-content {
-      background-color: #fff;
+      // background-color: #fff;
+      background: var(--white-to-grey);
       padding: 40px;
       text-align: center;
       border-radius: var(--border-radius);

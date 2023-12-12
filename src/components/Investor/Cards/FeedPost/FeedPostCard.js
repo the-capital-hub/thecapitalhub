@@ -678,7 +678,11 @@ const FeedPostCard = ({
               onClick={() => (likedBy ? handleShow() : "")}
             >
               {/* {likes?.length} likes */}
-              {likedBy ? <>Liked By {likedBy}</> : <>{likes?.length} likes</>}
+              {likedBy ? (
+  <>Liked By {likedBy}</>
+) : (
+  <>{likes?.length === 1 ? `${likes.length} like` : `${likes.length} likes`}</>
+)}
             </span>
           )}
           {!repostPreview && (
