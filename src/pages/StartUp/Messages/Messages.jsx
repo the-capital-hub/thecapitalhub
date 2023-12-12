@@ -11,7 +11,7 @@ function Messages() {
   useEffect(() => {
     document.title = "Messages | The Capital Hub";
     dispatch(setPageTitle("Messages"));
-  }, []);
+  }, [dispatch]);
   return (
     <MaxWidthWrapper>
       <div className="messages_container">
