@@ -246,13 +246,18 @@
   }
 
   .onePager_input {
-    border: 1px solid #e7e7e7;
+    border: 1px solid var(--bs-border-color);
+    background-color: var(--bs-light);
     border-radius: 10px;
     outline: none;
     font-size: 1.25rem;
-    color: black;
+    color: var(--d-l-grey);
     padding: 1em 0.5em;
     width: 100%;
+
+    input {
+      background-color: var(--bs-light);
+    }
   }
 
   .date_input {
@@ -265,7 +270,8 @@
   }
 
   .tag {
-    background-color: #eaeef2;
+    // background-color: #eaeef2;
+    background-color: var(--tag-box);
   }
 
   .link__text__clip {
@@ -309,8 +315,14 @@
     flex: 0 0 2rem;
   }
 
+  .onePager_company_info {
+    background-color: var(--white-to-grey);
+  }
+
   // onePager_company_about
   .onePager_company_about {
+    background-color: var(--white-to-grey);
+
     display: grid;
     grid-template-columns: 100%;
 
@@ -324,7 +336,7 @@
 
     .about_input {
       border-radius: 5px;
-      border: 1px solid var(--color-market-border);
+      border: 1px solid var(--bs-border-color);
       min-height: 220px;
       resize: none;
     }
@@ -336,7 +348,7 @@
   }
 
   .main_border {
-    border: 2px solid var(--color-market-border);
+    border: 2px solid var(--bs-border-color);
     box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.05);
   }
 
@@ -382,9 +394,6 @@
 
     padding-block: 1em;
   }
-
-
-
 }
 
 @media (max-width: 768px) {

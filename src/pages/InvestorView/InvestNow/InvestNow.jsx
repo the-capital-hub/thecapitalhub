@@ -60,7 +60,7 @@ const InvestNow = ({ page }) => {
   return (
     <div className="investNow">
       {showModal && <ThankYouModal onCancel={() => setShowModal(false)} />}
-      <div className="investNowContainer">
+      <div className="investNowContainer shadow-sm">
         {page === "onePager" ? (
           <>
             <p>Contact Details</p>
@@ -84,7 +84,7 @@ const InvestNow = ({ page }) => {
           </>
         ) : (
           <>
-            <p>Contact Details</p>
+            <p style={{ fontSize: "1.5rem" }}>Contact Details</p>
             <div className="inputs">
               <Input
                 type={"text"}
@@ -93,7 +93,7 @@ const InvestNow = ({ page }) => {
                 onChange={(e) => setFullName(e.target.value)}
               />
               <Input
-                type={"number"}
+                type={"tel"}
                 placeholder={"Mobile number"}
                 value={mobileNumber}
                 onChange={(e) => setMobileNumber(e.target.value)}
@@ -104,9 +104,9 @@ const InvestNow = ({ page }) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              {isSubmitted ?
+              {isSubmitted ? (
                 <button>Submitted</button>
-                :
+              ) : (
                 <button onClick={handleSubmit}>
                   {loading ? (
                     <SpinnerBS
@@ -117,7 +117,7 @@ const InvestNow = ({ page }) => {
                     "Show Interest"
                   )}
                 </button>
-              }
+              )}
             </div>
           </>
         )}

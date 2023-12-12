@@ -11,7 +11,7 @@ const Team = () => {
   useEffect(() => {
     document.title = "Team | The Capital Hub";
     dispatch(setPageTitle("Team"));
-  }, []);
+  }, [dispatch]);
   return (
     <MaxWidthWrapper>
       <div className="team_container">

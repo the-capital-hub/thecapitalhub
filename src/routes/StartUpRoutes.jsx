@@ -1,11 +1,10 @@
-import { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy } from "react";
 import { Route } from "react-router-dom";
 import PrivateRoute from "../components/Routes/PrivateRoutes";
 import SinglePost from "../components/SinglePost/SinglePost";
 import SuspenseLoader from "../components/SuspenseLoader/SuspenseLoader";
-import FundingInfo from "../pages/StartUp/Funding/FundingInfo";
-import { selectTheme } from "../Store/features/design/designSlice";
-import { useSelector } from "react-redux";
+// import { selectTheme } from "../Store/features/design/designSlice";
+// import { useSelector } from "react-redux";
 
 const InvestorHome = lazy(() =>
   import("../components/Investor/InvestorHome/InvestorHome")
@@ -65,6 +64,7 @@ const ProfileAchievements = lazy(() =>
 const UserSettings = lazy(() =>
   import("../pages/StartUp/UserSettings/UserSettings")
 );
+const FundingInfo = lazy(() => import("../pages/StartUp/Funding/FundingInfo"));
 
 function StartUpRoutes() {
   // Light and dark Theme

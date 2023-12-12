@@ -106,7 +106,7 @@ function Achievements() {
             >
               <img
                 src={item.image}
-                alt="image"
+                alt={item.badge}
                 width={55}
                 height={55}
                 className={`rounded-pill ${

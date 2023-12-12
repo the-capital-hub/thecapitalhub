@@ -344,7 +344,10 @@ function Company() {
             startup={"true"}
           />
         ) : (
-          <SpinnerBS className="bg-white rounded-4 border p-lg-4 shadow-sm d-flex justify-content-center min-vh-100" />
+          <SpinnerBS
+            className="white-to-grey rounded-4 border p-lg-4 shadow-sm d-flex justify-content-center min-vh-100"
+            colorClass={"d-l-grey"}
+          />
         )}
       </div>
     </MaxWidthWrapper>

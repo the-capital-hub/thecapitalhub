@@ -1,6 +1,6 @@
 .investor_view_container {
   display: flex;
-  background-color: #eaeef2;
+  background-color: var(--startup-bg);
   margin: 0;
   position: relative;
 
@@ -10,9 +10,9 @@
 
   .sidebar {
     // width: 300px;
-    // background-color: #eaeef2;
+    // background-color: var(--startup-bg);
     position: fixed;
-    top: calc(80px + -2%);
+    top: calc(80px + -1%);
     left: 0;
     bottom: 0;
     z-index: 100;
@@ -103,7 +103,7 @@
 
 @media (max-width: 468px) {
   .investor_view_container {
-    background-color: #eaeef2;
+    background-color: var(--startup-bg);
     .sidebar {
       left: 0;
       bottom: 0;
