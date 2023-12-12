@@ -6,7 +6,10 @@ import IconUser from "../../SvgIcons/IconUser";
 import IconLock from "../../SvgIcons/IconLock";
 import "./SettingsTabs.scss";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectIsInvestor } from "../../../../Store/features/user/userSlice";
 
+// If investor and startup accounts have different content, create a separate variable for Investor
 export const SETTINGS_TABS = [
   {
     id: "account",
@@ -31,11 +34,17 @@ export const SETTINGS_TABS = [
 ];
 
 export default function SettingsTabs({ activeTab, setActiveTab }) {
+  const isInvestor = useSelector(selectIsInvestor);
   const navigate = useNavigate();
 
   function handleTabClick(e, id) {
     setActiveTab(id);
-    navigate("/settings");
+
+    if (isInvestor) {
+      navigate("/investor/settings");
+    } else {
+      navigate("/settings");
+    }
   }
 
   return (
