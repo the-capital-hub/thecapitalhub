@@ -18,7 +18,7 @@ const FolderContents = () => {
   useEffect(() => {
     document.title = "Documents | The Capital Hub";
     dispatch(setPageTitle("Documents"));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     getUserById(username)
@@ -52,10 +52,7 @@ const FolderContents = () => {
     <MaxWidthWrapper>
       <div className="folderContents">
         <div className="w-100 d-flex justify-content-center align-items-center border-bottom px-2 py-2">
-          <button
-            className="btn  border mx-3"
-            onClick={() => navigate(-1)}
-          >
+          <button className="btn  border mx-3" onClick={() => navigate(-1)}>
             Back
           </button>
           <h1 className="flex-grow-1">{title}</h1>

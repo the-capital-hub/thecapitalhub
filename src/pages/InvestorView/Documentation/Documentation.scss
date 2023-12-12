@@ -1,12 +1,13 @@
-.border_left {
-  border: 0;
-  @media (min-width: 1000px) {
-    // border-left: 1px solid rgba(230, 230, 230, 1);
-  }
-}
+// .border_left {
+//   border: 0;
+//   @media (min-width: 1000px) {
+//     // border-left: 1px solid rgba(230, 230, 230, 1);
+//   }
+// }
 
 .documentation {
-  background: white;
+  background: var(--white-to-grey);
+  color: var(--d-l-grey);
   // margin-left: 20px;
   margin-top: 15px;
   margin-bottom: 500px;

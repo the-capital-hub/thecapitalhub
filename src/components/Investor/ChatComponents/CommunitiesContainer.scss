@@ -23,6 +23,17 @@
     flex: 0 0 14rem;
     overflow-y: auto;
 
+    &:empty {
+      &::before {
+        content: "Create a Community";
+        color: var(--currentTheme-dark);
+        font-size: 1.125rem;
+        height: 100%;
+        display: grid;
+        place-items: center;
+      }
+    }
+
     &::-webkit-scrollbar {
       width: 8px;
     }

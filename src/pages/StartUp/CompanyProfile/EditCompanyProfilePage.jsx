@@ -15,7 +15,7 @@ import CoreTeam from "../../../components/Investor/CompanyProfilePageComponents/
 // import Milestones from "../../../components/Investor/CompanyProfilePageComponents/Milestones/Milestones";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
-import backIcon from "../../../Images/Chat/BackIcon.svg";
+// import backIcon from "../../../Images/Chat/BackIcon.svg";
 import { useNavigate } from "react-router-dom";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import CompanyDescription from "../../../components/Investor/CompanyProfilePageComponents/CompanyDescription/CompanyDescription";
@@ -74,7 +74,7 @@ export default function EditCompanyProfilePage() {
         raised_funds: userCompanyData.colorCard?.raised_funds,
       });
     }
-    window.title = "Edit Company Profile | The Capital Hub";
+    document.title = "Edit Company Profile | The Capital Hub";
     dispatch(setPageTitle("Edit Company"));
   }, [isSaveAll, dispatch, loggedInUserId, userCompanyData]);
 
@@ -157,7 +157,11 @@ export default function EditCompanyProfilePage() {
         {/* Main content */}
 
         <div className="main__content">
-          <span className="back_img rounded-circle shadow-sm" title="Go Back">
+          <span
+            className="back_img rounded-circle shadow-sm"
+            title="Go Back"
+            onClick={() => navigate(-1)}
+          >
             {/* <img
               src={backIcon}
               width={20}

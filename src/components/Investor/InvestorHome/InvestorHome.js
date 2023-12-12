@@ -45,7 +45,7 @@ const InvestorHome = () => {
   useEffect(() => {
     document.title = "Profile | The Capital Hub";
     dispatch(setPageTitle("Profile"));
-  });
+  }, [dispatch]);
 
   // Fetch startup company data
   useEffect(() => {

@@ -11,7 +11,7 @@ const Investors = () => {
   useEffect(() => {
     document.title = "Investors | The Capital Hub";
     dispatch(setPageTitle("Investors"));
-  }, []);
+  }, [dispatch]);
   return (
     <MaxWidthWrapper>
       <div className="investor_container">

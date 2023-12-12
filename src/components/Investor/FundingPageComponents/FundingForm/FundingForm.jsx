@@ -19,7 +19,7 @@ import {
   addNotificationAPI,
 } from "../../../../Service/user";
 import toast from "react-hot-toast";
-import achievement from "../../../../Images/Investor/Achievements/img_1.png";
+// import achievement from "../../../../Images/Investor/Achievements/img_1.png";
 import AchievementToast from "../../../Toasts/AchievementToast/AchievementToast";
 import { achievementTypes } from "../../../Toasts/AchievementToast/types";
 
@@ -81,7 +81,7 @@ export default function FundingForm({ setShowForm }) {
               recipient: loggedInUser._id,
               type: "achievementCompleted",
               achievementId: "65683ff0270e585d456c961a",
-            }
+            };
             addNotificationAPI(notificationBody)
               .then((data) => console.log("Added"))
               .catch((error) => console.error(error.message));

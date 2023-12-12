@@ -88,8 +88,8 @@
         border-radius: 6px;
         background-color: #eaeef2;
 
-        ::placeholder {
-          color: #999;
+        &::placeholder {
+          color: #555 !important;
         }
       }
 
