@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react";
 import "./OnePager.scss";
-import {
-  // Card,
-  CompanyDetails,
-  ImagePlaceholder,
-  MarketCard,
-  SimpleCard,
-  // TeamCard,
-  Title,
-} from "../../../components/InvestorView";
+import // Card,
+// CompanyDetails,
+// ImagePlaceholder,
+// MarketCard,
+// SimpleCard,
+// TeamCard,
+// Title,
+"../../../components/InvestorView";
 // import OnePagePreviewCard from "../../../components/Investor/InvestorGlobalCards/OneLink/OnePagePreviewCard/OnePagePreviewCard";
 // import OnePagePreview from "../../../components/Investor/OneLink/OnePagePreview/OnePagePreview";
-import Table from "../../../components/Investor/OneLink/Table/Table";
-import TeamsCard from "../../../components/InvestorView/TeamsCard/TeamsCard";
-import InvestNow from "../InvestNow/InvestNow";
+// import Table from "../../../components/Investor/OneLink/Table/Table";
+// import TeamsCard from "../../../components/InvestorView/TeamsCard/TeamsCard";
+// import InvestNow from "../InvestNow/InvestNow";
 import { useParams } from "react-router-dom";
 import { getOnePager } from "../../../Service/user";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
@@ -191,7 +190,10 @@ const OnePager = () => {
             />
 
             {/* onePager Market info */}
-            <div className="bg-white rounded-4 border shadow-sm">
+            <div
+              className="rounded-4 border shadow-sm"
+              style={{ backgroundColor: "var(--white-to-grey)" }}
+            >
               <div className="border-bottom">
                 <div className="px-3 px-lg-4 py-5 d-flex flex-column gap-5">
                   {/* Market Size */}

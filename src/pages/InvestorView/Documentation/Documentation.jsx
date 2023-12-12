@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
-import { NavBar, SideBar, Card } from "../../../components/InvestorView";
+// import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
+import { Card } from "../../../components/InvestorView";
 import "./Documentation.scss";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -96,45 +96,46 @@ const Documentation = () => {
               image={Business}
             /> */}
 
-            {loading &&
+            {loading && (
               <SpinnerBS
                 className={
                   "d-flex py-5 justify-content-center align-items-center w-100"
                 }
               />
-            }
-            {!loading && folderName.map((folder, index) => {
-              let imageToShow;
+            )}
+            {!loading &&
+              folderName.map((folder, index) => {
+                let imageToShow;
 
-              switch (folder) {
-                case "pitchdeck":
-                  imageToShow = Pitch;
-                  break;
-                case "business":
-                  imageToShow = Business;
-                  break;
-                case "kycdetails":
-                  imageToShow = KYC;
-                  break;
-                case "legal and compliance":
-                  imageToShow = Legal;
-                  break;
-                default:
-                  imageToShow = Pitch;
-              }
-              return (
-                <Card
-                  key={index}
-                  onClicked={() =>
-                    navigate(
-                      `/onelink/${username}/${userId}/documentation/${folder}`
-                    )
-                  }
-                  text={folder}
-                  image={imageToShow}
-                />
-              );
-            })}
+                switch (folder) {
+                  case "pitchdeck":
+                    imageToShow = Pitch;
+                    break;
+                  case "business":
+                    imageToShow = Business;
+                    break;
+                  case "kycdetails":
+                    imageToShow = KYC;
+                    break;
+                  case "legal and compliance":
+                    imageToShow = Legal;
+                    break;
+                  default:
+                    imageToShow = Pitch;
+                }
+                return (
+                  <Card
+                    key={index}
+                    onClicked={() =>
+                      navigate(
+                        `/onelink/${username}/${userId}/documentation/${folder}`
+                      )
+                    }
+                    text={folder}
+                    image={imageToShow}
+                  />
+                );
+              })}
           </div>
         </div>
       </div>

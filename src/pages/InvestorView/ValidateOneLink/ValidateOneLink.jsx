@@ -44,7 +44,7 @@ function ValidateOneLink({ children, ...props }) {
             className={`container-fluid investor_view_container ${
               sidebarCollapsed ? "sidebar-collapsed" : ""
             }`}
-            data-bs-theme={"dark"}
+            data-bs-theme={theme}
           >
             <div className="sidebar">
               <SideBarIV
