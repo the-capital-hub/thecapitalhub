@@ -6,8 +6,11 @@ import Account from "../../../components/Investor/UserSettingsPageComponents/Acc
 import SignInAndSecurity from "../../../components/Investor/UserSettingsPageComponents/SignInAndSecurity/SignInAndSecurity";
 import PrivacyPolicy from "../../../components/Investor/UserSettingsPageComponents/PrivacyPolicy/PrivacyPolicy";
 import Logout from "../../../components/Investor/UserSettingsPageComponents/Logout/Logout";
-import { useSelector } from "react-redux";
-import { selectIsMobileView } from "../../../Store/features/design/designSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectIsMobileView,
+  setPageTitle,
+} from "../../../Store/features/design/designSlice";
 import IconChevronBack from "../../../components/Investor/SvgIcons/IconChevronBack";
 import { Outlet, useLocation } from "react-router-dom";
 
@@ -21,8 +24,14 @@ const SETTINGS_CONTENT = {
 export default function UserSettings() {
   const isMobileView = useSelector(selectIsMobileView);
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
 
   const [activeTab, setActiveTab] = useState("account");
+
+  useEffect(() => {
+    document.title = "Settings | The Capital Hub";
+    dispatch(setPageTitle("Settings"));
+  }, [dispatch]);
 
   useEffect(() => {
     if (isMobileView) {

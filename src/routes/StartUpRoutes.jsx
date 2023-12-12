@@ -299,10 +299,21 @@ function StartUpRoutes() {
           </Suspense>
         }
       />
-      <Route path="/settings" element={<UserSettings />}>
+      <Route
+        path="/settings"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <UserSettings />
+          </Suspense>
+        }
+      >
         <Route
           path="profile-information"
-          element={<h4>Profile Information page</h4>}
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <p>Profile Information</p>
+            </Suspense>
+          }
         />
       </Route>
     </Route>
