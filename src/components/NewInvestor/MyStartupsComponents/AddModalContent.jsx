@@ -6,6 +6,7 @@ import {
   addStartupInvested,
   addMyInterest,
   searchStartUps,
+  addPastInvestments,
   // uploadLogo,
 } from "../../../Service/user";
 import { useSelector } from "react-redux";
@@ -14,11 +15,14 @@ import { useRef } from "react";
 import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
 export default function AddModalContent({
   isInterests = false,
+  isPastInvestments = false,
   setInvestedStartups,
   setMyInterests,
+  setPastInvestments,
 }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [interestLogo, setInterestLogo] = useState(null);
+  const [pastInvestmentLogo, setPastInvestmentLogo] = useState(null);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     companyImage: "",
@@ -35,6 +39,7 @@ export default function AddModalContent({
   const [selectedCompanyId, setSelectedCompanyId] = useState(null);
   const [disabled, setDisabled] = useState(false);
   const [logo, setLogo] = useState(null);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.description && formData.description.length > 400) {
@@ -64,6 +69,24 @@ export default function AddModalContent({
         );
         console.log(response.data.myInterests);
         setMyInterests(response.data.myInterests);
+      } else if (isPastInvestments) {
+        const companyLogo = selectedCompanyId
+          ? logo
+          : await getBase64(pastInvestmentLogo);
+        const newPastinvestments = {
+          logo: companyLogo,
+          name: formData.name,
+          description: formData.description,
+          companyId: formData.companyId,
+          companyOnelink: formData.companyOnelink,
+          isExisting: selectedCompanyId ? true : false,
+        };
+        const response = await addPastInvestments(
+          loggedInUser?.investor,
+          newPastinvestments
+        );
+        console.log(response.data.pastInvestments);
+        setPastInvestments(response.data.pastInvestments);
       } else {
         const companyLogo = selectedCompanyId
           ? logo
@@ -93,6 +116,10 @@ export default function AddModalContent({
 
   const handleInterestLogo = (e) => {
     setInterestLogo(e.target.files[0]);
+  };
+
+  const handlePastInvestmentlogoChange = (e) => {
+    setPastInvestmentLogo(e.target.files[0]);
   };
 
   const handleInputChange = (event) => {
@@ -192,44 +219,83 @@ export default function AddModalContent({
                 </div>
               </label>
             </div>
-          ) : (
-            <div className="upload__image mt-4">
-              <input
-                type="file"
-                name="companyImage"
-                id="companyImage"
-                accept="image/*"
-                className="visually-hidden"
-                onChange={handleInputChange}
-                disabled={disabled}
-              />
-              <label htmlFor="companyImage" className="text-black fw-lighter">
-                <div className="upload__label p-2">
-                  <BsFillCloudUploadFill
-                    style={{
-                      fontSize: "1.5rem",
-                      color: "rgba(140, 90, 201, 1)",
-                    }}
+          ) :
+            isPastInvestments ? (
+              <div className="upload__image mt-4">
+                <input
+                  type="file"
+                  name="pastInvestmentLogo"
+                  id="pastInvestmentLogo"
+                  accept="image/*"
+                  className="visually-hidden"
+                  onChange={handlePastInvestmentlogoChange}
+                  disabled={disabled}
+                />
+                <label htmlFor="pastInvestmentLogo" className="text-black fw-lighter">
+                  <div className="upload__label p-2">
+                    <BsFillCloudUploadFill
+                      style={{
+                        fontSize: "1.5rem",
+                        color: "rgba(140, 90, 201, 1)",
+                      }}
+                    />
+                    <p>Upload Image</p>
+                    {pastInvestmentLogo && (
+                      <img
+                        src={URL.createObjectURL(pastInvestmentLogo)}
+                        alt="Selected Interest's media"
+                        style={{ maxWidth: "100%", maxHeight: "70px" }}
+                      />
+                    )}
+                    {logo && (
+                      <img
+                        src={logo}
+                        alt="Selected logo"
+                        style={{ maxWidth: "100%", maxHeight: "70px" }}
+                      />
+                    )}
+                  </div>
+                </label>
+              </div>
+            ) :
+              (
+                <div className="upload__image mt-4">
+                  <input
+                    type="file"
+                    name="companyImage"
+                    id="companyImage"
+                    accept="image/*"
+                    className="visually-hidden"
+                    onChange={handleInputChange}
+                    disabled={disabled}
                   />
-                  <p>Upload Image</p>
-                  {formData.companyImage && (
-                    <img
-                      src={URL.createObjectURL(formData.companyImage)}
-                      alt="Selected company media"
-                      style={{ maxWidth: "100%", maxHeight: "70px" }}
-                    />
-                  )}
-                  {logo && (
-                    <img
-                      src={logo}
-                      alt="Selected logo"
-                      style={{ maxWidth: "100%", maxHeight: "70px" }}
-                    />
-                  )}
+                  <label htmlFor="companyImage" className="text-black fw-lighter">
+                    <div className="upload__label p-2">
+                      <BsFillCloudUploadFill
+                        style={{
+                          fontSize: "1.5rem",
+                          color: "rgba(140, 90, 201, 1)",
+                        }}
+                      />
+                      <p>Upload Image</p>
+                      {formData.companyImage && (
+                        <img
+                          src={URL.createObjectURL(formData.companyImage)}
+                          alt="Selected company media"
+                          style={{ maxWidth: "100%", maxHeight: "70px" }}
+                        />
+                      )}
+                      {logo && (
+                        <img
+                          src={logo}
+                          alt="Selected logo"
+                          style={{ maxWidth: "100%", maxHeight: "70px" }}
+                        />
+                      )}
+                    </div>
+                  </label>
                 </div>
-              </label>
-            </div>
-          )}
+              )}
           <div className="">
             <input
               type="text"
@@ -245,9 +311,8 @@ export default function AddModalContent({
                 <div className="suggestion">
                   {companies.map((company, index) => (
                     <div
-                      className={`suggestion-item ${
-                        selectedCompanyId === company._id ? "active" : ""
-                      }`}
+                      className={`suggestion-item ${selectedCompanyId === company._id ? "active" : ""
+                        }`}
                       key={index}
                       onClick={() =>
                         handleCompanySelection(
@@ -300,18 +365,21 @@ export default function AddModalContent({
             ""
           )}
 
-          <div className="">
-            <input
-              type="number"
-              name="equity"
-              id="equity"
-              min={0}
-              max={100}
-              placeholder={`equity...`}
-              className="p-2 w-100 rounded-3 modal__input"
-              onChange={handleInputChange}
-            />
-          </div>
+          {!isPastInvestments &&
+            <div className="">
+              <input
+                type="number"
+                name="equity"
+                id="equity"
+                min={0}
+                max={100}
+                placeholder={`equity...`}
+                className="p-2 w-100 rounded-3 modal__input"
+                onChange={handleInputChange}
+              />
+            </div>
+          }
+
           <button
             type="submit"
             className="btn btn-investor w-auto mx-auto fs-6"

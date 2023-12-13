@@ -4,18 +4,18 @@ const PostInvestmentCard = ({ logo, text, para, images, smallText }) => {
   return (
     <div className="postinvestment-card-container">
       <div className="left">
-        <img src={logo} alt="Logo" className="logo" />
+        <img src={logo} alt="Logo" className="logo" width="50" height="50"/>
         <div className="text">
           <strong>{text}</strong>
         </div>
       </div>
       <p className="para">{para}</p>
 
-      <hr />
-      <div className="bottom">
+      {/* <hr /> */}
+      {/* <div className="bottom">
         <img src={images} alt="" className="small-image" />
         <span className="small-text">{smallText}</span>
-      </div>
+      </div> */}
     </div>
   );
 };

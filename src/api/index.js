@@ -116,6 +116,7 @@ const API = Object.freeze({
   submitFundingToMail: `${baseUrl}/contactUs/lookingForFundingMail`,
   addNotificationAPI: `${baseUrl}/notificaton/addNotification`,
   getAllChats: `${baseUrl}/chat/getAllChats`,
+  addPastInvestments: `${baseUrl}/investor/addPastInvestmentsController`,
 });
 
 export default API;

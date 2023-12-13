@@ -74,15 +74,18 @@ const MyStartUp = () => {
   const [investedStartups, setInvestedStartups] =
     useState(userStartupsInvested);
   const [myInterests, setMyInterests] = useState(userMyInterests);
+  const [pastInvestment, setPastInvestment] = useState("");
+
   // const [investor, setInvestor] = useState([]);
 
   useEffect(() => {
-    if (!userMyInterests || !userStartupsInvested) {
+    if (!userMyInterests || !userStartupsInvested || !pastInvestment) {
       getInvestorById(userInvestor)
         .then(({ data }) => {
           // setInvestor(data);
           setInvestedStartups(data.startupsInvested);
           setMyInterests(data.myInterests);
+          setPastInvestment(data.pastInvestments);
         })
         .catch((error) => {
           console.error(error);
@@ -142,10 +145,10 @@ const MyStartUp = () => {
           >
             {investedStartups?.length > 0
               ? investedStartups?.map((company, index) => {
-                  return (
-                    <MyInvestmentCard key={company.name} company={company} />
-                  );
-                })
+                return (
+                  <MyInvestmentCard key={company.name} company={company} />
+                );
+              })
               : "No Data Found."}
           </div>
           {/* My Investments Add Modal */}
@@ -215,14 +218,14 @@ const MyStartUp = () => {
           >
             {myInterests?.length > 0
               ? myInterests?.map((company, index) => {
-                  return (
-                    <MyInvestmentCard
-                      key={company.name}
-                      company={company}
-                      isInterests={true}
-                    />
-                  );
-                })
+                return (
+                  <MyInvestmentCard
+                    key={company.name}
+                    company={company}
+                    isInterests={true}
+                  />
+                );
+              })
               : "No Data Found."}
           </div>
           {/* My Interests Add Modal */}
@@ -262,30 +265,70 @@ const MyStartUp = () => {
           </div>
           <div className="col-6 right_container">
             <h4 className="title_h4 border-bottom pb-2">Past Investments</h4>
+            <div className="d-flex  flex-column flex-md-row text-center gap-2">
+              <div className="">
+                <ModalBsLauncher
+                  id={"myPastInvestmentsModal"}
+                  className={"btn btn-investor"}
+                >
+                  Add New
+                </ModalBsLauncher>
+              </div>
+              <div className="">
+                <ModalBsLauncher
+                  id={"myPastInvestmentsEditModal"}
+                  className={"btn btn-investor"}
+                >
+                  Edit
+                </ModalBsLauncher>
+              </div>
+            </div>
             <div className="two_by_two_card_container flex-column flex-md-row">
-              <PostInvestmentCard
-                logo={logoIcon}
-                text="Investment 1"
-                para="Some description for Investment 1."
-                images={EyeLikeImage}
-                smallText="Small text for Investment 1."
-              />
-              <PostInvestmentCard
-                logo={logoIcon}
-                text="Investment 1"
-                para="Some description for Investment 1."
-                images={EyeLikeImage}
-                smallText="Small text for Investment 1."
-              />
-              <PostInvestmentCard
-                logo={logoIcon}
-                text="Investment 1"
-                para="Some description for Investment 1."
-                images={EyeLikeImage}
-                smallText="Small text for Investment 1."
-              />
+
+              {pastInvestment?.length > 0
+                ? pastInvestment?.map((company, index) => {
+                  return (
+                    <PostInvestmentCard
+                      logo={company.logo}
+                      text={company.name}
+                      para={company.description}
+                    // images={EyeLikeImage}
+                    // smallText="Small text for Investment 1."
+                    />
+                  );
+                })
+                : "No Data Found."}
             </div>
           </div>
+
+          {/* My Interests Add Modal */}
+          <ModalBSContainer id={"myPastInvestmentsModal"} isStatic={false}>
+            <ModalBSHeader title={"Add Past Investment"} className={"d-l-grey"} />
+            <ModalBSBody className={"d-l-grey"}>
+              <AddModalContent isPastInvestments setPastInvestments={setPastInvestment} />
+            </ModalBSBody>
+          </ModalBSContainer>
+
+          {/* My Invterests Edit Modal */}
+          <ModalBSContainer
+            id={"myPastInvestmentsEditModal"}
+            isStatic={false}
+            modalXl
+            key={"edit past investments"}
+          >
+            <ModalBSHeader title={"Edit Past Investments"} className={"d-l-grey"} />
+            <ModalBSBody className={"d-l-grey"}>
+              {myInterests && (
+                <EditModalContent
+                  // dataArray={myInterests}
+                  dataArray={pastInvestment}
+                  isPastInvestments={true}
+                  setPastInvestments={setPastInvestment}
+                />
+              )}
+            </ModalBSBody>
+          </ModalBSContainer>
+
         </div>
       </div>
     </MaxWidthWrapper>

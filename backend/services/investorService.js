@@ -294,3 +294,38 @@ export const getInvestorBySearch = async (searchQuery) => {
     };
   }
 };
+
+
+export const addPastInvestments = async (investorId, data) => {
+  try {
+    const investor = await InvestorModel.findById(investorId);
+
+    if (!investor) {
+      return {
+        status: 404,
+        message: "Investor not found",
+      };
+    }
+    if (data.logo) {
+      const { secure_url } = await cloudinary.uploader.upload(data.logo, {
+        folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
+        format: "webp",
+        unique_filename: true,
+      });
+      data.logo = secure_url;
+    }
+    investor.pastInvestments.push(data);
+    await investor.save();
+    return {
+      status: 200,
+      message: "Past Investment added",
+      data: investor,
+    };
+  } catch (error) {
+    console.error("Error adding Past Investments:", error);
+    return {
+      status: 500,
+      message: "An error occurred while adding past investment data.",
+    };
+  }
+};
