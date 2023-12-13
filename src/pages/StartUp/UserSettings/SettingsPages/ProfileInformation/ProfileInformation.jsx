@@ -42,9 +42,12 @@ function ProfileInformation() {
   };
   return (
     <section className="personal_information_section flex-grow-1 px-3">
-      <button onClick={() => navigate(-1)}><FaArrowLeft size={25} />
+      <div className="d-flex flex-row gap-2 align-items-center">
+      <button className="back_btn d-flex flex-row gap-2 align-items-center" onClick={() => navigate(-1)}><FaArrowLeft size={15} />
+      <p className="m-0">Back</p>
 </button>
-        <h2 className="pb-3">Personal Information</h2>
+        <h2 >Personal Information</h2>
+      </div>
        <form onSubmit={handleSubmit}>
         {/* profilePicture*/}
         <fieldset>
