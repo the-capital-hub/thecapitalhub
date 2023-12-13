@@ -324,11 +324,10 @@ function StartUpRoutes() {
           }
         />
         <Route
-          path="dark_mode_setting"
+          path="dark-mode"
           element={
             <Suspense fallback={<SuspenseLoader />}>
               <DarkModeSetting />
-              {/* <p>lhhkjh</p> */}
             </Suspense>
           }
         />
