@@ -12,6 +12,11 @@
   border: 1px solid var(--bs-border-color);
   border-radius: 15px;
   overflow: hidden;
+  z-index: 0;
+
+  * {
+    z-index: 0;
+  }
 }
 
 .rbc-time-view {
