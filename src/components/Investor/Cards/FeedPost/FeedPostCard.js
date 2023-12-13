@@ -1135,8 +1135,8 @@ const FeedPostCard = ({
       )}
 
       <ModalBSContainer id="reportPostModal">
-        <ModalBSHeader title="Report Post" />
-        <ModalBSBody>
+        <ModalBSHeader title="Report Post"  className={"d-l-grey"}/>
+        <ModalBSBody  className={"d-l-grey"}>
           <h6 className="h6">Select a reason that applies</h6>
           <div className="reasons_container">
             <div className="form-check form-check-inline m-0">
