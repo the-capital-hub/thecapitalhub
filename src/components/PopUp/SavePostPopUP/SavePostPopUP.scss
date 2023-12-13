@@ -46,8 +46,8 @@
       }
     
 .collection_selecter {
-  background-color: white; 
-  color: black; 
+  background: var(--white-to-grey);
+  color: var(--d-l-grey); 
   padding: 5px; 
   border-radius: 4px;
   width: 100%; 
@@ -96,15 +96,19 @@
   @media (max-width: 768px) {
     .save_post_popup {
       .popup-content {
-        background-color: #fff;
+        // background-color: #fff;
+        background: var(--white-to-grey);
+        color: var(--d-l-grey);
         padding: 40px;
         text-align: center;
         border-radius: var(--border-radius);
         position: relative;
         width: 80%;
+
   
         h1 {
           color: #000;
+          // color: var(--d-l-grey);
           font-family: Poppins;
           font-size: 16px;
           font-style: normal;
