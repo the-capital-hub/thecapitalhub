@@ -1,37 +1,17 @@
 import React, { useEffect } from "react";
-// import locationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
 import { IoLocationOutline } from "react-icons/io5";
-
-// import HomeIcon from "../../../../Images/HomeIcon.svg";
 import { GoHome } from "react-icons/go";
-
-// import ThreeODotIcon from "../../../../Images/ThreeDotIcon.svg";
 import { PiDotsThreeBold } from "react-icons/pi";
-
 import "./feedPostCard.scss";
-import shareIcon from "../../../../Images/post/share.png";
 import fireIcon from "../../../../Images/post/like-fire.png";
-// import bwFireIcon from "../../../../Images/post/unlike-fire.png";
 import { ImFire } from "react-icons/im";
-
-import commentIcon from "../../../../Images/post/comment.svg";
-// import repostIcon from "../../../../Images/post/repostBlack.svg";
-
-// import repostWithThoughtsIcon from "../../../../Images/post/repost-with-thoughts.svg";
 import { FaRegEdit } from "react-icons/fa";
-
-// import repostInstantlyIcon from "../../../../Images/post/repost-grey.svg";
 import { BiRepost } from "react-icons/bi";
-
-// import saveIcon from "../../../../Images/post/save.svg";
-// import savedIcon from "../../../../Images/post/saved.png";
+import { BsFire } from "react-icons/bs";
 import { CiBookmark } from "react-icons/ci";
 import { IoMdBookmark } from "react-icons/io";
-
-import deleteIcon from "../../../../Images/post/delete.png";
 import CustomModal from "../../../PopUp/Modal/Modal";
 import { FaRegCommentDots, FaCommentDots } from "react-icons/fa6";
-
 import TimeAgo from "timeago-react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -46,9 +26,6 @@ import {
   unsavePost,
   getLikeCount,
 } from "../../../../Service/user";
-import SmileeIcon from "../../../../Images/Group 15141(1).svg";
-import ImageIcon from "../../../../Images/Group 15141.svg";
-import RoundLogo from "../../../../Images/RoundLogo.png";
 import { Link } from "react-router-dom";
 import SavePostPopUP from "../../../../components/PopUp/SavePostPopUP/SavePostPopUP";
 import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
@@ -57,12 +34,10 @@ import ModalBSContainer from "../../../PopUp/ModalBS/ModalBSContainer/ModalBSCon
 import ModalBSHeader from "../../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
 import ModalBSFooter from "../../../PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
 import ModalBSBody from "../../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
-import { BiMessageSquareAdd } from "react-icons/bi";
 import IconComponentAdd from "../../SvgIcons/IconComponentAdd";
 import Linkify from "react-linkify";
 import IconDelete from "../../SvgIcons/IconDelete";
 import IconReportPost from "../../SvgIcons/IconReportPost";
-import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 import { useNavigate } from "react-router-dom";
 import { selectIsMobileView } from "../../../../Store/features/design/designSlice";
 import { selectIsInvestor } from "../../../../Store/features/user/userSlice";
@@ -673,16 +648,24 @@ const FeedPostCard = ({
           </div>
           {likes && (
             <span
-              className=" mx-3 text-secondary pe-auto "
-              style={{ fontSize: "14px", cursor: "pointer" }}
+              className="mx-3 text-secondary pb-2 pe-auto "
+              style={{
+                fontSize: "14px",
+                cursor: "pointer",
+              }}
               onClick={() => (likedBy ? handleShow() : "")}
             >
-              {/* {likes?.length} likes */}
               {likedBy ? (
-  <>Liked By {likedBy}</>
-) : (
-  <>{likes?.length === 1 ? `${likes.length} like` : `${likes.length} likes`}</>
-)}
+                <>
+                  <BsFire style={{ color: "orange" }} /> <span>{likedBy}</span>
+                </>
+              ) : (
+                <>
+                  {likes?.length === 1
+                    ? `${likes.length} like`
+                    : `${likes.length} likes`}
+                </>
+              )}
             </span>
           )}
           {!repostPreview && (
