@@ -11,6 +11,8 @@ export default function EditModalContent({
   isInterests,
   setInvestedStartups,
   setMyInterests,
+  isPastInvestments = false,
+  setPastInvestments,
 }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   // Save companies data to state.
@@ -58,11 +60,16 @@ export default function EditModalContent({
   const handleDelete = async (index) => {
     try {
       const { data: investor } = await getInvestorById(loggedInUser?.investor);
-      if (!isInterests) {
+      if (!isInterests && !isPastInvestments) {
         investor.startupsInvested.splice(index, 1);
         const { data: response } = await postInvestorData(investor);
         setCompanies(response.startupsInvested);
         setInvestedStartups(response.startupsInvested);
+      } else if (isPastInvestments) {
+        investor.pastInvestments.splice(index, 1);
+        const { data: response } = await postInvestorData(investor);
+        setCompanies(response.pastInvestments);
+        setPastInvestments(response.pastInvestments);
       } else {
         investor.myInterests.splice(index, 1);
         const { data: response } = await postInvestorData(investor);
@@ -131,6 +138,8 @@ export default function EditModalContent({
           key={editingCompany?.id}
           setInvestedStartups={setInvestedStartups}
           setMyInterests={setMyInterests}
+          isPastInvestments={isPastInvestments}
+          setPastInvestments={setPastInvestments}
         />
       </div>
     </div>
