@@ -94,6 +94,15 @@ const investorSchema = new Schema(
         companyOnelink: String,
       },
     ],
+    pastInvestments: [
+      {
+        logo: String,
+        name: String,
+        description: String,
+        companyId: String,
+        companyOnelink: String,
+      },
+    ],
     investmentPhilosophy: {
       type: String,
     },
