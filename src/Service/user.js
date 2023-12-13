@@ -1407,3 +1407,19 @@ export const getAllChatsAPI = async () => {
     throw error;
   }
 };
+
+export const addPastInvestments = async (
+  investorId,
+  newPastInvestmentData
+) => {
+  try {
+    const response = await axiosInstance.patch(
+      `${API.addPastInvestments}/${investorId}`,
+      newPastInvestmentData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error while adding past investments:", error);
+    throw error;
+  }
+};

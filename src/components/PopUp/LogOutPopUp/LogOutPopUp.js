@@ -17,7 +17,7 @@ const LogOutPopUp = ({
   };
 
   const buttonColor = isInvestor ? "#d3f36b" : "#fd5901";
-  const textColor = isInvestor ? "#000" : "#FD5901";
+  const textColor = isInvestor ? "var(--d-l-grey)" : "#FD5901";
   const buttonText = isInvestor ? "#000" : "#fff";
 
   return (

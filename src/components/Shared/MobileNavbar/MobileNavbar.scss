@@ -8,6 +8,14 @@
   // background-color: white;
   background: var(--white-to-dgrey);
 
+  .nav-link-text {
+    font-size: 9px;
+  }
+
+  svg {
+    flex-grow: 1;
+  }
+
   a {
     color: rgb(113, 113, 113);
   }

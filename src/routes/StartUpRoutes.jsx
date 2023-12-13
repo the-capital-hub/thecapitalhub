@@ -64,6 +64,14 @@ const ProfileAchievements = lazy(() =>
 const UserSettings = lazy(() =>
   import("../pages/StartUp/UserSettings/UserSettings")
 );
+
+const ProfileInformation = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/ProfileInformation/ProfileInformation")
+);
+const DarkModeSetting = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/DarkModeSetting/DarkModeSetting")
+);
+
 const FundingInfo = lazy(() => import("../pages/StartUp/Funding/FundingInfo"));
 
 function StartUpRoutes() {
@@ -311,7 +319,15 @@ function StartUpRoutes() {
           path="profile-information"
           element={
             <Suspense fallback={<SuspenseLoader />}>
-              <p>Profile Information</p>
+              <ProfileInformation />
+            </Suspense>
+          }
+        />
+        <Route
+          path="dark-mode"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <DarkModeSetting />
             </Suspense>
           }
         />
