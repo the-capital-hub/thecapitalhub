@@ -19,7 +19,7 @@ const ShareLink = ({
 
   return (
     <>
-      <div className="ShareLink_container mt-3 mt-md-0">
+      <div className="ShareLink_container  mt-md-0">
         <div className="box_container rounded-4 shadow-sm border">
           <section className="title_section">
             <h6>Now share all your startup details in one link</h6>
