@@ -1,17 +1,8 @@
 import React, { useEffect } from "react";
-import locationIcon from "../../../Images/investorIcon/octicon_location-16.svg";
-import HomeIcon from "../../../Images/HomeIcon.svg";
-import ThreeODotIcon from "../../../Images/ThreeDotIcon.svg";
 import "./investorFeedPostCard.scss";
-// import shareIcon from "../../../Images/post/share.png";
 import fireIcon from "../../../Images/post/like-fire.png";
-import bwFireIcon from "../../../Images/post/unlike-fire.png";
-import commentIcon from "../../../Images/post/comment.svg";
-import repostIcon from "../../../Images/post/repostBlack.svg";
 import repostWithThoughtsIcon from "../../../Images/post/repost-with-thoughts.svg";
 import repostInstantlyIcon from "../../../Images/post/repost-grey.svg";
-import saveIcon from "../../../Images/post/save.svg";
-import savedIcon from "../../../Images/post/saved.png";
 import TimeAgo from "timeago-react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -25,9 +16,6 @@ import {
   toggleLikeComment,
   deleteComment,
 } from "../../../Service/user";
-import SmileeIcon from "../../../Images/Group 15141(1).svg";
-import ImageIcon from "../../../Images/Group 15141.svg";
-// import RoundLogo from "../../../Images/RoundLogo.png";
 import { Link } from "react-router-dom";
 import SavePostPopUP from "../../../components/PopUp/SavePostPopUP/SavePostPopUP";
 import InvestorAfterSuccessPopUp from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
@@ -37,7 +25,6 @@ import ModalBSHeader from "../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
 import ModalBSFooter from "../../PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
 import ModalBSBody from "../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
 import Linkify from "react-linkify";
-import deleteIcon from "../../../Images/post/delete.png";
 import { FaRegCommentDots, FaCommentDots } from "react-icons/fa6";
 import CustomModal from "../../PopUp/Modal/Modal";
 import { Modal } from "react-bootstrap";
@@ -559,8 +546,14 @@ const FeedPostCard = ({
                 style={{ fontSize: "14px", cursor: "pointer" }}
                 onClick={handleShow}
               >
-                {/* {likes?.length} likes */}
-                {likedBy ? <>Liked By {likedBy}</> : <>{likes?.length} likes</>}
+                {likedBy ? (
+                  <>
+                    <BsFire style={{ color: "orange" }} />{" "}
+                    <span>{likedBy}</span>
+                  </>
+                ) : (
+                  <>{likes?.length} likes</>
+                )}
               </span>
             )}
             {!repostPreview && (
