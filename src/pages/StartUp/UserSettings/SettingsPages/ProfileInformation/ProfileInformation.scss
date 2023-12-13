@@ -1,6 +1,11 @@
 .personal_information_section {
-// width: 80%;
-    form {
+.back_btn{
+background:none;
+outline: none;
+border: none;
+color: var(--d-l-grey);
+} 
+   form {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
