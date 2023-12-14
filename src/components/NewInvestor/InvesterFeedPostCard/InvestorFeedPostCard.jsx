@@ -559,25 +559,31 @@ const FeedPostCard = ({
             {!repostPreview && (
               <>
                 <hr className="mt-1 mb-2" />
-                <div className="row feedpostcard_footer mb-2">
+                <div className="row feedpostcard_footer">
                   <div className="col-8">
                     <div className="feedpostcard_footer_like_comment p-1 d-flex gap-2">
                       {liked ? (
-                        <div className="d-flex flex-column align-items-center justify-content-end
-                        gap-1">
-                        <img
-                          src={fireIcon}
-                          width={20}
-                          alt="like post"
-                          onClick={likeUnlikeHandler}
-                          style={{ cursor: "pointer" }}
-                        />
-                         <p
-                          style={{ color: "var(--d-l-grey)", fontSize: "12px" }}
+                        <div
+                          className="d-flex flex-column align-items-center justify-content-end
+                        gap-1"
                         >
-                          Like
-                        </p>
-                      </div>
+                          <img
+                            src={fireIcon}
+                            width={20}
+                            alt="like post"
+                            onClick={likeUnlikeHandler}
+                            style={{ cursor: "pointer" }}
+                          />
+                          <p
+                            style={{
+                              color: "var(--d-l-grey)",
+                              fontSize: "10px",
+                            }}
+                            className="m-0"
+                          >
+                            Like
+                          </p>
+                        </div>
                       ) : (
                         // <img
                         //   src={bwFireIcon}
@@ -586,48 +592,75 @@ const FeedPostCard = ({
                         //   onClick={likeUnlikeHandler}
                         //   style={{ cursor: "pointer" }}
                         // />
-                        <div className="d-flex flex-column align-items-center justify-content-end
-                        gap-1">
-                        <BsFire
-                          onClick={likeUnlikeHandler}
-                          size={20}
-                          style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
-                        />
-                        <p
-                        style={{ color: "var(--d-l-grey)", fontSize: "12px" }}
-                      >
-                        Like
-                      </p>
-                    </div>
+                        <div
+                          className="d-flex flex-column align-items-center justify-content-end
+                        gap-1"
+                        >
+                          <BsFire
+                            onClick={likeUnlikeHandler}
+                            size={20}
+                            style={{
+                              cursor: "pointer",
+                              fill: "var(--d-l-grey)",
+                            }}
+                          />
+                          <p
+                            style={{
+                              color: "var(--d-l-grey)",
+                              fontSize: "10px",
+                            }}
+                            className="m-0"
+                          >
+                            Like
+                          </p>
+                        </div>
                       )}
                       {!showComment ? (
-                        <div className="d-flex flex-column align-items-center justify-content-end
-                        gap-1">
-                        <FaRegCommentDots
-                          size={20}
-                          onClick={() => setShowComment((prev) => !prev)}
-                          style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
-                        />
-                           <p
-                        style={{ color: "var(--d-l-grey)", fontSize: "12px" }}
-                      >
-                        Comment
-                      </p>
-                    </div>
+                        <div
+                          className="d-flex flex-column align-items-center justify-content-end
+                        gap-1"
+                        >
+                          <FaRegCommentDots
+                            size={20}
+                            onClick={() => setShowComment((prev) => !prev)}
+                            style={{
+                              cursor: "pointer",
+                              fill: "var(--d-l-grey)",
+                            }}
+                          />
+                          <p
+                            style={{
+                              color: "var(--d-l-grey)",
+                              fontSize: "10px",
+                            }}
+                            className="m-0"
+                          >
+                            Comment
+                          </p>
+                        </div>
                       ) : (
-                        <div className="d-flex flex-column align-items-center justify-content-end
-                        gap-1">
-                        <FaCommentDots
-                          size={20}
-                          onClick={() => setShowComment((prev) => !prev)}
-                          style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
-                        />
-                        <p
-                        style={{ color: "var(--d-l-grey)", fontSize: "12px" }}
-                      >
-                        Comment
-                      </p>
-                    </div>
+                        <div
+                          className="d-flex flex-column align-items-center justify-content-end
+                        gap-1"
+                        >
+                          <FaCommentDots
+                            size={20}
+                            onClick={() => setShowComment((prev) => !prev)}
+                            style={{
+                              cursor: "pointer",
+                              fill: "var(--d-l-grey)",
+                            }}
+                          />
+                          <p
+                            style={{
+                              color: "var(--d-l-grey)",
+                              fontSize: "10px",
+                            }}
+                            className="m-0"
+                          >
+                            Comment
+                          </p>
+                        </div>
                       )}
                     </div>
                   </div>
@@ -645,23 +678,28 @@ const FeedPostCard = ({
                         onClick={() => setShowRepostOptions(!showRepostOptions)}
                         style={{ cursor: "pointer" }}
                       /> */}
-                      <div className="d-flex flex-column align-items-center justify-content-end
-                        gap-1">
-                      <BiRepost
-                        size={20}
-                        onClick={() => setShowRepostOptions(!showRepostOptions)}
-                        style={{
-                          cursor: "pointer",
-                          fill: "var(--d-l-grey)",
-                          transform: " rotate(90deg)",
-                        }}
-                      />
-   <p
-                        style={{ color: "var(--d-l-grey)", fontSize: "12px" }}
+                      <div
+                        className="d-flex flex-column align-items-center justify-content-end
+                        gap-1"
                       >
-                        Repost
-                      </p>
-                    </div>
+                        <BiRepost
+                          size={20}
+                          onClick={() =>
+                            setShowRepostOptions(!showRepostOptions)
+                          }
+                          style={{
+                            cursor: "pointer",
+                            fill: "var(--d-l-grey)",
+                            transform: " rotate(90deg)",
+                          }}
+                        />
+                        <p
+                          style={{ color: "var(--d-l-grey)", fontSize: "10px" }}
+                          className="m-0"
+                        >
+                          Repost
+                        </p>
+                      </div>
                       {showRepostOptions && (
                         <span className="repost_options rounded-4 shadow-sm">
                           <button
@@ -730,20 +768,22 @@ const FeedPostCard = ({
                       //   onClick={handleUnsavePost}
                       //   style={{ cursor: "pointer" }}
                       // />
-                      <div className="d-flex flex-column align-items-center justify-content-end
-                      gap-1">
-                      <FaBookmark
-                      size={20}
-                        onClick={handleUnsavePost}
-                        style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
-                      />
-                      <p
-                      style={{ color: "var(--d-l-grey)", fontSize: "12px" }}
-                    >
-                      Save
-                    </p>
-                  </div>
-                  
+                      <div
+                        className="d-flex flex-column align-items-center justify-content-end
+                      gap-1"
+                      >
+                        <FaBookmark
+                          size={20}
+                          onClick={handleUnsavePost}
+                          style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
+                        />
+                        <p
+                          style={{ color: "var(--d-l-grey)", fontSize: "10px" }}
+                          className="m-0"
+                        >
+                          Save
+                        </p>
+                      </div>
                     ) : (
                       // <img
                       //   src={saveIcon}
@@ -752,20 +792,22 @@ const FeedPostCard = ({
                       //   onClick={handleSavePopUp}
                       //   style={{ cursor: "pointer" }}
                       // />
-                      <div className="d-flex flex-column align-items-center justify-content-end
-                      gap-1">
-                      <FaRegBookmark
-                                            size={20}
-
-                        onClick={handleSavePopUp}
-                        style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
-                      />
-                       <p
-                      style={{ color: "var(--d-l-grey)", fontSize: "12px" }}
-                    >
-                      Save
-                    </p>
-                  </div>
+                      <div
+                        className="d-flex flex-column align-items-center justify-content-end
+                      gap-1"
+                      >
+                        <FaRegBookmark
+                          size={20}
+                          onClick={handleSavePopUp}
+                          style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
+                        />
+                        <p
+                          style={{ color: "var(--d-l-grey)", fontSize: "10px" }}
+                          className="m-0"
+                        >
+                          Save
+                        </p>
+                      </div>
                     )}
                   </div>
                   {showComment && (

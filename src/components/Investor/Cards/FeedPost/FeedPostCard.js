@@ -674,7 +674,7 @@ const FeedPostCard = ({
                 className="mt-1 mb-2 hr"
                 style={{ background: "var(--bs-light)", height: "3px" }}
               />
-              <div className="row feedpostcard_footer mb-2">
+              <div className="row feedpostcard_footer">
                 {/* Like and Comment */}
                 <div className="col-8">
                   <div className="feedpostcard_footer_like_comment d-flex gap-2">
@@ -691,7 +691,8 @@ const FeedPostCard = ({
                           style={{ cursor: "pointer" }}
                         />
                         <p
-                          style={{ color: "var(--d-l-grey)", fontSize: "12px" }}
+                          style={{ color: "var(--d-l-grey)", fontSize: "10px" }}
+                          className="m-0"
                         >
                           Like
                         </p>
@@ -713,7 +714,8 @@ const FeedPostCard = ({
                           style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                         />
                         <p
-                          style={{ color: "var(--d-l-grey)", fontSize: "12px" }}
+                          style={{ color: "var(--d-l-grey)", fontSize: "10px" }}
+                          className="m-0"
                         >
                           Like
                         </p>
@@ -737,7 +739,8 @@ const FeedPostCard = ({
                           style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                         />
                         <p
-                          style={{ color: "var(--d-l-grey)", fontSize: "12px" }}
+                          style={{ color: "var(--d-l-grey)", fontSize: "10px" }}
+                          className="m-0"
                         >
                           Comment
                         </p>
@@ -753,7 +756,8 @@ const FeedPostCard = ({
                           style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                         />
                         <p
-                          style={{ color: "var(--d-l-grey)", fontSize: "12px" }}
+                          style={{ color: "var(--d-l-grey)", fontSize: "10px" }}
+                          className="m-0"
                         >
                           Comment
                         </p>
@@ -790,7 +794,10 @@ const FeedPostCard = ({
                         }}
                         size={20}
                       />
-                      <p style={{ color: "var(--d-l-grey)", fontSize: "12px" }}>
+                      <p
+                        style={{ color: "var(--d-l-grey)", fontSize: "10px" }}
+                        className="m-0"
+                      >
                         Repost
                       </p>
                     </div>
@@ -870,7 +877,10 @@ const FeedPostCard = ({
                         onClick={handleUnsavePost}
                         style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                       />
-                      <p style={{ color: "var(--d-l-grey)", fontSize: "12px" }}>
+                      <p
+                        style={{ color: "var(--d-l-grey)", fontSize: "10px" }}
+                        className="m-0"
+                      >
                         Save
                       </p>
                     </div>
@@ -891,7 +901,10 @@ const FeedPostCard = ({
                         onClick={handleSavePopUp}
                         style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                       />
-                      <p style={{ color: "var(--d-l-grey)", fontSize: "12px" }}>
+                      <p
+                        style={{ color: "var(--d-l-grey)", fontSize: "10px" }}
+                        className="m-0"
+                      >
                         Save
                       </p>
                     </div>
@@ -1135,8 +1148,8 @@ const FeedPostCard = ({
       )}
 
       <ModalBSContainer id="reportPostModal">
-        <ModalBSHeader title="Report Post"  className={"d-l-grey"}/>
-        <ModalBSBody  className={"d-l-grey"}>
+        <ModalBSHeader title="Report Post" className={"d-l-grey"} />
+        <ModalBSBody className={"d-l-grey"}>
           <h6 className="h6">Select a reason that applies</h6>
           <div className="reasons_container">
             <div className="form-check form-check-inline m-0">
