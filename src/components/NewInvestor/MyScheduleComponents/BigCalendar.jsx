@@ -15,6 +15,8 @@ export default function BigCalendar({
   setView,
   meetingsData,
   investor,
+  date,
+  setDate,
 }) {
   // States for meetings
   const [meetings, setMeetings] = useState(meetingsData);
@@ -35,6 +37,9 @@ export default function BigCalendar({
     views,
     components,
   } = useMemo(() => calendarData, [calendarData]);
+
+  // handle Navigate
+  const handleNavigate = useCallback((newDate) => setDate(newDate), [setDate]);
 
   // Handle Slot Select
   const handleSelectSlot = useCallback(({ start, end }) => {
@@ -96,6 +101,8 @@ export default function BigCalendar({
       <Calendar
         components={components}
         defaultDate={defaultDate}
+        date={date}
+        onNavigate={handleNavigate}
         events={meetings}
         localizer={localizer}
         max={max}
