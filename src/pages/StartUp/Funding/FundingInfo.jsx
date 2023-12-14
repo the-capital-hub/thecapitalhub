@@ -51,14 +51,14 @@ export default function FundingInfo() {
                 "Apply for Funding" with{" "}
                 <span style={{ color: "#fd5901" }}>Capital HUB</span>
               </h2>
-              <button
+              {/* <button
                 type="button"
                 className="btn btn-secondary rounded-2 back-btn d-flex justify-content-center align-items-center gap-1"
                 onClick={handleBack}
               >
                 <IconChevronBack className="back-icon" />
                 Back
-              </button>
+              </button> */}
             </div>
             {/* Form */}
             {!showForm && fundingViaCapitalHubQuestions ? (
