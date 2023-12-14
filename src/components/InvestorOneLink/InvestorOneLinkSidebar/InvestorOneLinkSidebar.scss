@@ -11,7 +11,6 @@
   .sidebar-main {
     width: 20%;
     height: 100vh;
-    background-color: #ffffff;
     position: absolute;
     border-radius: 8px 8px 8px 0px;
     border: 2px solid red;
@@ -99,7 +98,6 @@
 
   #header .pro-sidebar-inner {
     border-radius: 20px;
-    background-color: white;
     box-shadow: 0.5px 0.866px 2px 0px rgba(0, 0, 0, 0.15);
   }
 
@@ -184,7 +182,7 @@
     ul
     .pro-inner-item
     .pro-icon-wrapper {
-    background-color: #fbf4cd;
+    // background-color: #fbf4cd;
     color: #000;
     border-radius: 3px;
   }
@@ -201,6 +199,9 @@
 
   #header .pro-sidebar-inner .pro-sidebar-layout .active {
     background-image: linear-gradient(0deg, #eef2f3 0%, #eef2f3 100%);
+    * {
+      color: var(--d-l-grey) !important;
+    }
   }
 
   #header .pro-sidebar-inner .pro-sidebar-layout .active-item {
@@ -222,10 +223,13 @@
 
   .investor_onelink_view_sidebar {
     #header .pro-sidebar-inner .pro-sidebar-layout .active {
-      background: #d3f36b;
+      background: #bfdd5b;
+    }
+    a {
+      color: var(--bs-gray-500) !important;
     }
     a:hover {
-      color: grey !important;
+      color: var(--d-l-grey) !important;
     }
     .invest_now {
       background: #d3f36b;

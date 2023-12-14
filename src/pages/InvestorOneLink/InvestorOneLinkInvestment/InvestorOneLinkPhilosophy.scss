@@ -1,18 +1,23 @@
 .investment_philosophy_wrapper {
-  // &.leftBorder {
-  //   @media (min-width: 1200px) {
-  //     border-left: 1px solid #e7e7e7;
-  //   }
-  // }
-
   .investment_philosophy_section {
+    background-color: var(--white-to-grey);
+
+    .investor-details {
+      color: var(--d-l-grey);
+      p {
+
+      }
+    }
+
     fieldset,
     legend {
       all: revert;
+      background-color: var(--white-to-dgrey) !important;
+      color: var(--d-l-grey);
     }
 
     .fieldbox {
-      background-color: rgba(251, 251, 251, 1);
+      background-color: var(--white-to-dgrey);
       flex: 0 0 18rem;
       min-height: 70px;
 

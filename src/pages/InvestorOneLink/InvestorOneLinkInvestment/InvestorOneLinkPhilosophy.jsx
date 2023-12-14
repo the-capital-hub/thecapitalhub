@@ -21,7 +21,7 @@ export default function InvestorOneLinkInvestment() {
       </h2>
 
       {/* Main content */}
-      <section className="investment_philosophy_section px-3 py-4 px-lg-4 bg-white rounded-4 border d-flex flex-column gap-4">
+      <section className="investment_philosophy_section px-3 py-4 px-lg-4 rounded-4 border d-flex flex-column gap-4">
         {/* Header */}
         <header className="d-flex flex-column flex-md-row align-items-center gap-4">
           <img
@@ -33,14 +33,14 @@ export default function InvestorOneLinkInvestment() {
           />
 
           {/* text */}
-          <div className="me-md-auto text-center text-md-start">
+          <div className="investor-details me-md-auto text-center text-md-start">
             <h4 className="fw-semibold">
               {`${firstName} ${lastName}` || "fullName"}
             </h4>
-            <p className="fs-5 fw-light m-0 text-muted">
+            <p className="text-secondary fs-5 fw-light m-0">
               {designation || "designation"}
             </p>
-            <p className="fs-5 fw-light m-0 text-muted">
+            <p className="text-secondary fs-5 fw-light m-0">
               {location || "location"}
             </p>
           </div>
