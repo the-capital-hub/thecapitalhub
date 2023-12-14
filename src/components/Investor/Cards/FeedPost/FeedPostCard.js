@@ -39,7 +39,10 @@ import Linkify from "react-linkify";
 import IconDelete from "../../SvgIcons/IconDelete";
 import IconReportPost from "../../SvgIcons/IconReportPost";
 import { useNavigate } from "react-router-dom";
-import { selectIsMobileView } from "../../../../Store/features/design/designSlice";
+import {
+  selectIsMobileView,
+  selectVideoAutoplay,
+} from "../../../../Store/features/design/designSlice";
 import { selectIsInvestor } from "../../../../Store/features/user/userSlice";
 import { Modal } from "react-bootstrap";
 import { MdDelete } from "react-icons/md";
@@ -242,6 +245,8 @@ const FeedPostCard = ({
   }, []);
 
   const videoRef = useRef(null);
+  const isVideoAutoplay = useSelector(selectVideoAutoplay);
+
   useEffect(() => {
     const video = videoRef.current;
     let playState = null;
@@ -254,14 +259,17 @@ const FeedPostCard = ({
             playState = false;
           } else {
             video.muted = true;
-            video
-              .play()
-              .then(() => {
-                playState = true;
-              })
-              .catch((error) => {
-                console.error("Auto-play failed:", error);
-              });
+
+            if (isVideoAutoplay) {
+              video
+                .play()
+                .then(() => {
+                  playState = true;
+                })
+                .catch((error) => {
+                  console.error("Auto-play failed:", error);
+                });
+            }
           }
         });
       }, {});
@@ -272,14 +280,16 @@ const FeedPostCard = ({
         if (document.hidden || !playState) {
           video.pause();
         } else {
-          video
-            .play()
-            .then(() => {
-              playState = true;
-            })
-            .catch((error) => {
-              console.error("Auto-play failed:", error);
-            });
+          if (isVideoAutoplay) {
+            video
+              .play()
+              .then(() => {
+                playState = true;
+              })
+              .catch((error) => {
+                console.error("Auto-play failed:", error);
+              });
+          }
         }
       };
 
@@ -290,7 +300,7 @@ const FeedPostCard = ({
         document.removeEventListener("visibilitychange", onVisibilityChange);
       };
     }
-  }, [video]);
+  }, [video, isVideoAutoplay]);
 
   const likeUnlikeHandler = async () => {
     try {

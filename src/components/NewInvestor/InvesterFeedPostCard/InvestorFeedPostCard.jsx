@@ -34,6 +34,7 @@ import { BsFire, BsThreeDots } from "react-icons/bs";
 import { BiRepost } from "react-icons/bi";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import { selectVideoAutoplay } from "../../../Store/features/design/designSlice";
 
 const FeedPostCard = ({
   postId,
@@ -319,6 +320,64 @@ const FeedPostCard = ({
     }
   };
 
+  const videoRef = useRef(null);
+  const isVideoAutoplay = useSelector(selectVideoAutoplay);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    let playState = null;
+
+    if (video) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            video.pause();
+            playState = false;
+          } else {
+            video.muted = true;
+
+            if (isVideoAutoplay) {
+              video
+                .play()
+                .then(() => {
+                  playState = true;
+                })
+                .catch((error) => {
+                  console.error("Auto-play failed:", error);
+                });
+            }
+          }
+        });
+      }, {});
+
+      observer.observe(video);
+
+      const onVisibilityChange = () => {
+        if (document.hidden || !playState) {
+          video.pause();
+        } else {
+          if (isVideoAutoplay) {
+            video
+              .play()
+              .then(() => {
+                playState = true;
+              })
+              .catch((error) => {
+                console.error("Auto-play failed:", error);
+              });
+          }
+        }
+      };
+
+      document.addEventListener("visibilitychange", onVisibilityChange);
+
+      return () => {
+        observer.unobserve(video);
+        document.removeEventListener("visibilitychange", onVisibilityChange);
+      };
+    }
+  }, [video, isVideoAutoplay]);
+
   return (
     <>
       <div className="row investor_feedpostcard_main_container mb-2">
@@ -514,6 +573,7 @@ const FeedPostCard = ({
                       width={!repostPreview ? "100%" : "50%"}
                       style={{ maxWidth: "500px" }}
                       controls
+                      ref={videoRef}
                     >
                       <source alt="post-video" src={video} type="video/mp4" />
                       Your browser does not support the video tag.
