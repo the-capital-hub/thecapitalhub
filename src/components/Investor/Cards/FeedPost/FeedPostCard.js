@@ -582,8 +582,11 @@ const FeedPostCard = ({
                       description.split(" ").length > 15 &&
                       !expanded && (
                         <span
-                          style={{ color: "blue", cursor: "pointer" }}
+                          style={{
+                            cursor: "pointer",
+                          }}
                           onClick={toggleDescription}
+                          className="text-secondary"
                         >
                           ...Read more
                         </span>
