@@ -57,24 +57,21 @@
 
 // export default NavBar;
 
-import React from "react";
 import "./NavBar.scss";
 import Logo from "../../../Images/investorIcon/new-logo.png";
-import HambergerIcon from "../../../Images/Hamberger.svg";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsInvestor } from "../../../Store/features/user/userSlice";
-import { selectTheme } from "../../../Store/features/design/designSlice";
 import { MdOutlineMenu, MdOutlineMenuOpen } from "react-icons/md";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
 
 const NavBar = ({ handleSidebarToggle, sidebarCollapsed }) => {
   const navigate = useNavigate();
   const isInvestor = useSelector(selectIsInvestor);
-  const theme = useSelector(selectTheme);
 
   return (
     <>
-      <div className="container" data-bs-theme={theme}>
+      <div className="container">
         <div className="investor_view_navbar ">
           <div className="d-flex align-items-center h-100 ms-4">
             <div className="row bar_logo_container ">
@@ -90,21 +87,19 @@ const NavBar = ({ handleSidebarToggle, sidebarCollapsed }) => {
                 ) : (
                   <MdOutlineMenuOpen
                     size={25}
-                    color="var(--darkMode-currentTheme)"
+                    color="var(--investor)"
                   />
                 )}
-                {/* <img src={HambergerIcon} alt="bar" /> */}
-                {/* <h1>Home</h1> */}
               </div>
             </div>
-            <div
+            <span
               className="ms-auto m-2 px-2 close-button"
               onClick={() =>
                 navigate(isInvestor === "true" ? "/investor/home" : "/home")
               }
             >
-              X
-            </div>
+              <IoArrowBackCircleOutline size={25} />
+            </span>
           </div>
         </div>
       </div>

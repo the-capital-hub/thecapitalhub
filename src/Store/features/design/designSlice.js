@@ -10,7 +10,7 @@ const initialState = {
   showInvestorCreatePostModal: false,
   showNotificationModal: false,
   isMobileApp: false,
-  theme: localStorage.getItem("theme") || "light",
+  theme: localStorage.getItem("theme") || "dark",
 };
 
 export const designSlice = createSlice({

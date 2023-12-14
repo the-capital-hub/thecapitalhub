@@ -1,7 +1,7 @@
 .investor_onelink_layout_wrapper {
   .investor_view_container {
     display: flex;
-    background-color: #f9faf3;
+    background-color: var(--investor-bg);
     margin: 0;
     position: relative;
 
@@ -101,7 +101,7 @@
 
   @media (max-width: 468px) {
     .investor_view_container {
-      background-color: #f9faf3;
+      background-color: var(--investor-bg);
       .sidebar {
         left: 0;
         bottom: 0;
