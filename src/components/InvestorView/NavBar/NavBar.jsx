@@ -57,15 +57,18 @@
 
 // export default NavBar;
 
-import React from "react";
 import "./NavBar.scss";
 import Logo from "../../../Images/investorIcon/new-logo.png";
-import HambergerIcon from "../../../Images/Hamberger.svg";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsInvestor } from "../../../Store/features/user/userSlice";
 import { selectTheme } from "../../../Store/features/design/designSlice";
-import { MdOutlineMenu, MdOutlineMenuOpen } from "react-icons/md";
+import {
+  MdOutlineMenu,
+  MdOutlineMenuOpen,
+} from "react-icons/md";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+
 
 const NavBar = ({ handleSidebarToggle, sidebarCollapsed }) => {
   const navigate = useNavigate();
@@ -93,18 +96,16 @@ const NavBar = ({ handleSidebarToggle, sidebarCollapsed }) => {
                     color="var(--darkMode-currentTheme)"
                   />
                 )}
-                {/* <img src={HambergerIcon} alt="bar" /> */}
-                {/* <h1>Home</h1> */}
               </div>
             </div>
-            <div
+            <span
               className="ms-auto m-2 px-2 close-button"
               onClick={() =>
                 navigate(isInvestor === "true" ? "/investor/home" : "/home")
               }
             >
-              X
-            </div>
+              <IoArrowBackCircleOutline size={25} />
+            </span>
           </div>
         </div>
       </div>

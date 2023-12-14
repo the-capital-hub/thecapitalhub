@@ -49,7 +49,10 @@ export default function InvestorOneLinkLayout() {
         />
       ) : (
         <>
-          <NavBar handleSidebarToggle={handleSidebarToggle} />
+          <NavBar
+            handleSidebarToggle={handleSidebarToggle}
+            sidebarCollapsed={sidebarCollapsed}
+          />
           {!loading ? (
             <div
               className={`container-fluid investor_view_container ${
