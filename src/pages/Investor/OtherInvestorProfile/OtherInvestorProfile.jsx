@@ -38,14 +38,17 @@ export default function OtherInvestorProfile() {
       .then(({ data }) => {
         console.log(data);
         setUserData(data);
+        if (data.isInvestor === "true") {
+          dispatch(setPageTitle("Investor Profile"));
+          window.title = "Investor Profile | The Capital Hub";
+        } else {
+          dispatch(setPageTitle("StartUp Profile"));
+          window.title = "StartUp Profile | The Capital Hub";
+        }
       })
       .catch(() => navigate("/profile"));
   }, [userId, connectionSent]);
 
-  useEffect(() => {
-    dispatch(setPageTitle("Investor Profile"));
-    window.title = "Investor Profile | The Capital Hub";
-  }, [dispatch]);
 
   return (
     <MaxWidthWrapper>
@@ -138,6 +141,8 @@ export default function OtherInvestorProfile() {
                   text="Last round investment"
                   image={lastRoundInvIcon}
                   amount={userData?.startUp?.colorCard?.last_round_investment}
+                  isOneLink={true}
+
                 />
                 <ColorCard
                   color="white"
@@ -145,6 +150,8 @@ export default function OtherInvestorProfile() {
                   text="Total Investment"
                   image={totalInvIcon}
                   amount={userData?.startUp?.colorCard?.total_investment}
+                  isOneLink={true}
+
                 />
                 <ColorCard
                   color="white"
@@ -153,6 +160,8 @@ export default function OtherInvestorProfile() {
                   image={noOfInvIcon}
                   amount={userData?.startUp?.colorCard?.no_of_investers}
                   noRupee
+                  isOneLink={true}
+
                 />
                 <ColorCard
                   color="white"
@@ -160,6 +169,8 @@ export default function OtherInvestorProfile() {
                   text="Fund ask"
                   image={fundAskIcon}
                   amount={userData?.startUp?.colorCard?.fund_ask}
+                  isOneLink={true}
+
                 />
                 <ColorCard
                   color="white"
@@ -167,6 +178,8 @@ export default function OtherInvestorProfile() {
                   text="Valuation"
                   image={valuationIcon}
                   amount={userData?.startUp?.colorCard?.valuation}
+                  isOneLink={true}
+
                 />
                 <ColorCard
                   color="white"
@@ -174,6 +187,7 @@ export default function OtherInvestorProfile() {
                   text="Raised funds"
                   image={raisedFundsIcon}
                   amount={userData?.startUp?.colorCard?.raised_funds}
+                  isOneLink={true}
                 />
               </div>
             </section>
