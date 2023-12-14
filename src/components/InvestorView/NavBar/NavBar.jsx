@@ -62,22 +62,16 @@ import Logo from "../../../Images/investorIcon/new-logo.png";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectIsInvestor } from "../../../Store/features/user/userSlice";
-import { selectTheme } from "../../../Store/features/design/designSlice";
-import {
-  MdOutlineMenu,
-  MdOutlineMenuOpen,
-} from "react-icons/md";
+import { MdOutlineMenu, MdOutlineMenuOpen } from "react-icons/md";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
-
 
 const NavBar = ({ handleSidebarToggle, sidebarCollapsed }) => {
   const navigate = useNavigate();
   const isInvestor = useSelector(selectIsInvestor);
-  const theme = useSelector(selectTheme);
 
   return (
     <>
-      <div className="container" data-bs-theme={theme}>
+      <div className="container">
         <div className="investor_view_navbar ">
           <div className="d-flex align-items-center h-100 ms-4">
             <div className="row bar_logo_container ">
@@ -93,7 +87,7 @@ const NavBar = ({ handleSidebarToggle, sidebarCollapsed }) => {
                 ) : (
                   <MdOutlineMenuOpen
                     size={25}
-                    color="var(--darkMode-currentTheme)"
+                    color="var(--investor)"
                   />
                 )}
               </div>

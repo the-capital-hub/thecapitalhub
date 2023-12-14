@@ -7,6 +7,8 @@ import InvestorOneLinkSidebar from "../../../components/InvestorOneLink/Investor
 import { getInvestorFromOneLinkAPI } from "../../../Service/user";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import OneLinkValidation from "../../../components/Shared/OnelinkValidation/OnelinkValidation";
+import { selectTheme } from "../../../Store/features/design/designSlice";
+import { useSelector } from "react-redux";
 
 export default function InvestorOneLinkLayout() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
@@ -24,6 +26,7 @@ export default function InvestorOneLinkLayout() {
 
   const location = useLocation();
   const { oneLink, userId } = useParams();
+  const theme = useSelector(selectTheme);
 
   useEffect(() => {
     getInvestorFromOneLinkAPI(oneLink, userId)
@@ -39,7 +42,7 @@ export default function InvestorOneLinkLayout() {
   }, [location]);
 
   return (
-    <div className="investor_onelink_layout_wrapper">
+    <div className="investor_onelink_layout_wrapper" data-bs-theme={theme}>
       {/* Top Navbar */}
       {!oneLinkUser || oneLinkLoggedIn === "false" || userId !== oneLinkId ? (
         <OneLinkValidation
