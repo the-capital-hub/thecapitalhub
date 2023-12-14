@@ -11,7 +11,7 @@ function DarkModeSetting() {
     <div className="dark-mode-settings">
       <h4 className="m-0 px-3 py-3 d-flex align-items-center gap-2">
         <Button
-          className="back-button btn-sm d-lg-none rounded-circle border-none"
+          className="back-button btn-sm  rounded-circle border-none"
           onClick={() => navigate(-1)}
         >
           <FaArrowLeft size={15} />

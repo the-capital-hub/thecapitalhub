@@ -41,14 +41,13 @@ function ProfileInformation() {
     });
   };
   return (
-    <section className="personal_information_section flex-grow-1 px-3">
-      <div className="d-flex flex-row gap-2 align-items-center">
-      <button className="back_btn d-flex flex-row gap-2 align-items-center" onClick={() => navigate(-1)}><FaArrowLeft size={15} />
-      <p className="m-0">Back</p>
+    <section className="personal_information_section flex-grow-1 ">
+      <div className="d-flex flex-row gap-2 align-items-center border-bottom p-3">
+      <button className="back_btn " onClick={() => navigate(-1)}><FaArrowLeft size={15} />
 </button>
         <h2 >Personal Information</h2>
       </div>
-       <form onSubmit={handleSubmit}>
+       <form className="py-4 px-3" onSubmit={handleSubmit}>
         {/* profilePicture*/}
         <fieldset>
           <legend className="px-2">Profile Picture</legend>
