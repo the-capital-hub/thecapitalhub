@@ -5,6 +5,11 @@
   //   }
   // }
 
+  .appointment_section {
+    background-color: var(--white-to-grey);
+    color: var(--d-l-grey);
+  }
+
   .two_col_container {
     display: grid;
     // grid-template-columns: 67.5% 30%;

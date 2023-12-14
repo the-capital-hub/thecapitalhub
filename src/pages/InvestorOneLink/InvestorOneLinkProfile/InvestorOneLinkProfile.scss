@@ -4,7 +4,8 @@
     font-weight: 600;
   }
   .main_inner-section {
-    background-color: #fff;
+    background-color: var(--white-to-grey);
+    color: var(--d-l-grey);
     // padding: 15px;
     border-radius: var(--border-radius);
     .user_data_section {
@@ -33,12 +34,12 @@
       position: relative;
       width: 100%;
       height: 206px;
-      background-color: #fbfbfb;
+      background-color: var(--white-to-dgrey);
       border: 0.5px solid #e2e2e2;
       border-radius: var(--border-radius);
       h1 {
         position: absolute;
-        background-color: #fbfbfb;
+        background-color: var(--white-to-dgrey);
         top: -10px;
         left: 23px;
         font-size: 15px;
@@ -48,12 +49,12 @@
       position: relative;
       width: 100%;
       height: 206px;
-      background-color: #fbfbfb;
+      background-color: var(--white-to-dgrey);
       border: 0.5px solid #e2e2e2;
       border-radius: var(--border-radius);
       h1 {
         position: absolute;
-        background-color: #fbfbfb;
+        background-color: var(--white-to-dgrey);
         top: -10px;
         left: 23px;
         font-size: 15px;
