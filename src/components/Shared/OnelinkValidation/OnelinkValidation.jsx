@@ -1,23 +1,24 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./OnelinkValidation.scss";
 import IconReportPost from "../../Investor/SvgIcons/IconReportPost";
 import IconPassword from "../../Investor/SvgIcons/IconPassword";
 import MaxWidthWrapper from "../MaxWidthWrapper/MaxWidthWrapper";
 import SpinnerBS from "../Spinner/SpinnerBS";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { validateSecretKey } from "../../../Service/user";
-import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../../Store/features/oneLink/oneLinkSlice";
+import { useSelector } from "react-redux";
 import { selectIsMobileApp } from "../../../Store/features/design/designSlice";
 
-export default function OnelinkValidation({ userId, theme = "startup", onelink }) {
-  const dispatch = useDispatch();
+export default function OnelinkValidation({
+  userId,
+  theme = "startup",
+  onelink,
+}) {
   // States for handling Invalid secret Key
   const [error, setError] = useState(null);
   const [pin, setPin] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  // const { userId } = useParams();
   const isMobileApp = useSelector(selectIsMobileApp);
   const navigate = useNavigate();
 
@@ -57,7 +58,9 @@ export default function OnelinkValidation({ userId, theme = "startup", onelink }
         localStorage.setItem("oneLinkUser", token);
         localStorage.setItem("oneLinkLoggedIn", true);
         localStorage.setItem("oneLinkId", userId);
-        theme === "startup" ? navigate(`/onelink/${onelink}/${userId}`) : navigate(`/investor/onelink/${onelink}/${userId}`);
+        theme === "startup"
+          ? navigate(`/onelink/${onelink}/${userId}`)
+          : navigate(`/investor/onelink/${onelink}/${userId}`);
       } else {
         setError("Key is invalid");
       }
@@ -71,11 +74,14 @@ export default function OnelinkValidation({ userId, theme = "startup", onelink }
 
   const handleBack = () => {
     navigate(-1);
-  }
+  };
 
   return (
     <MaxWidthWrapper>
-      <div className="onelink_validation_page  d-flex justify-content-center align-items-center" theme={theme}>
+      <div
+        className="onelink_validation_page  d-flex justify-content-center align-items-center"
+        theme={theme}
+      >
         <form
           onSubmit={handlePinSubmit}
           className="key_container bg-white rounded-4 shadow p-3 py-5 p-lg-5 d-flex flex-column gap-5"
@@ -127,14 +133,11 @@ export default function OnelinkValidation({ userId, theme = "startup", onelink }
 
           {/* Action buttons */}
           <div className="d-flex flex-column flex-md-row align-items-center justify-content-center gap-3 ">
-            {isMobileApp &&
-              <button
-                type="button"
-                className="btn_cancel"
-                onClick={handleBack}
-              > Back
+            {isMobileApp && (
+              <button type="button" className="btn_cancel" onClick={handleBack}>
+                Back
               </button>
-            }
+            )}
             <button
               type="button"
               className="btn_submit"
@@ -150,7 +153,6 @@ export default function OnelinkValidation({ userId, theme = "startup", onelink }
               )}
             </button>
           </div>
-
         </form>
       </div>
     </MaxWidthWrapper>
