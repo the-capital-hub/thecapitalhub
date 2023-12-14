@@ -11,6 +11,7 @@ const initialState = {
   showNotificationModal: false,
   isMobileApp: false,
   theme: localStorage.getItem("theme") || "dark",
+  videoAutoplay: false,
 };
 
 export const designSlice = createSlice({
@@ -47,6 +48,9 @@ export const designSlice = createSlice({
         localStorage.setItem("theme", "light");
       }
     },
+    toggleVideoAutoplay: (state) => {
+      state.videoAutoplay = !state.videoAutoplay;
+    },
   },
 });
 
@@ -61,6 +65,7 @@ export const selectNotificationtModal = (state) =>
   state.design.showNotificationModal;
 export const selectIsMobileApp = (state) => state.design.isMobileApp;
 export const selectTheme = (state) => state.design.theme;
+export const selectVideoAutoplay = (state) => state.design.videoAutoplay;
 
 export const {
   setPageTitle,
@@ -71,6 +76,7 @@ export const {
   toggleinvestorCreatePostModal,
   toggleNotificationModal,
   toggleTheme,
+  toggleVideoAutoplay,
 } = designSlice.actions;
 
 export default designSlice.reducer;
