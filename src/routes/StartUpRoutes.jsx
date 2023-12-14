@@ -82,8 +82,17 @@ const AutoPlaySettings = lazy(() =>
 const ContentLanguageSettings = lazy(() =>
   import ("../pages/StartUp/UserSettings/SettingsPages/ContentLanguageSettings/ContentLanguageSettings")
 );
+
 const ManageEmailAddresses = lazy(() =>
   import ("../pages/StartUp/UserSettings/SettingsPages/ManageEmailAddresses/ManageEmailAddresses")
+);
+
+const PhoneNumberSetting = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/PhoneNumberSetting/PhoneNumberSetting")
+);
+
+const ChangePassword = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/ChangePassword/ChangePassword")
 );
 
 const FundingInfo = lazy(() => import("../pages/StartUp/Funding/FundingInfo"));
@@ -374,6 +383,22 @@ function StartUpRoutes() {
           element={
             <Suspense fallback={<SuspenseLoader />}>
               <ManageEmailAddresses />
+            </Suspense>
+          }
+        />
+        <Route
+          path="phone-number-setting"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <PhoneNumberSetting />
+            </Suspense>
+          }
+        />
+          <Route
+          path="change-password"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <ChangePassword />
             </Suspense>
           }
         />
