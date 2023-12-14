@@ -71,6 +71,20 @@ const ProfileInformation = lazy(() =>
 const DarkModeSetting = lazy(() =>
   import ("../pages/StartUp/UserSettings/SettingsPages/DarkModeSetting/DarkModeSetting")
 );
+const LanguageSettings = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/LanguageSettings/LanguageSettings")
+);
+
+const AutoPlaySettings = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/AutoPlaySettings/AutoPlaySettings")
+);
+
+const ContentLanguageSettings = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/ContentLanguageSettings/ContentLanguageSettings")
+);
+const ManageEmailAddresses = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/ManageEmailAddresses/ManageEmailAddresses")
+);
 
 const FundingInfo = lazy(() => import("../pages/StartUp/Funding/FundingInfo"));
 
@@ -328,6 +342,38 @@ function StartUpRoutes() {
           element={
             <Suspense fallback={<SuspenseLoader />}>
               <DarkModeSetting />
+            </Suspense>
+          }
+        />
+          <Route
+          path="language-settings"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <LanguageSettings />
+            </Suspense>
+          }
+        />
+         <Route
+          path="auto-play-settings"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <AutoPlaySettings />
+            </Suspense>
+          }
+        />
+          <Route
+          path="content-language-settings"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <ContentLanguageSettings />
+            </Suspense>
+          }
+        />
+        <Route
+          path="manage-email-addresses"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <ManageEmailAddresses />
             </Suspense>
           }
         />
