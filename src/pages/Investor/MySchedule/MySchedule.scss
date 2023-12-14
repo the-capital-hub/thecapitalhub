@@ -27,5 +27,11 @@
         grid-template-columns: 75% auto;
       }
     }
+
+    .date-picker {
+      border: 0;
+      background-color: transparent;
+      justify-content: center;
+    }
   }
 }

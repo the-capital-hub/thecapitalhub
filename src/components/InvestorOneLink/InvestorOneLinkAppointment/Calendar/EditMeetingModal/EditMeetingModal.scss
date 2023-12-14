@@ -1,6 +1,5 @@
 .edit_meeting_modal_wrapper {
   .edit_meeting_form {
-
     fieldset,
     legend {
       all: revert;
@@ -16,9 +15,10 @@
       }
 
       legend {
-        background-color: white;
+        background-color: var(--white-to-grey);
         padding: 0.25em 0.5em;
         border-radius: 10rem;
+        color: var(--d-l-grey);
       }
 
       .meeting_input {

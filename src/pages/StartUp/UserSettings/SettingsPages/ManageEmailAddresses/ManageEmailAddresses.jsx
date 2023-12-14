@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 function ManageEmailAddresses() {
   const navigate = useNavigate();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
- 
 
   return (
     <div className="manage_account_settings">
@@ -26,16 +25,13 @@ function ManageEmailAddresses() {
         <span className="fs-6  fw-bold">Primary email</span>
         <span className="fs-6 ">{loggedInUser?.email}</span>
         <div>
-          <Button className="add_email_btn" >
-            Add email address
-          </Button>
+          <Button className="add_email_btn">Add email address</Button>
         </div>
         <span className="fs-6 text-secondary">
           If you have a verification (e.g. verified work email), you can manage
           it in your
         </span>
       </div>
-  
     </div>
   );
 }

@@ -160,7 +160,7 @@ export default function EditInvestorCompanyProfilePage() {
 
   return (
     <MaxWidthWrapper>
-      <div className="editinvestorCompanyProfilePage__wrapper px-3 pb-5 border-start">
+      <div className="editinvestorCompanyProfilePage__wrapper pb-5">
         {/* Main content */}
         <div className="main__content">
           <span className="back_img rounded-circle shadow-sm" title="Go Back">

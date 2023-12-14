@@ -41,8 +41,15 @@ export default function CalendarContainer({
   setView,
   investor = true,
   oneLinkId,
+  date,
+  setDate,
 }) {
   const { meetingsData, loading } = useGetAllMeetings(oneLinkId);
+
+  if (view === "day") {
+    calendarData.formats.dayHeaderFormat = (date) =>
+      moment(date).format("MMMM DD, YYYY");
+  }
 
   return (
     <div className="calendar__container">
@@ -60,6 +67,8 @@ export default function CalendarContainer({
           setView={setView}
           meetingsData={meetingsData}
           investor={investor}
+          date={date}
+          setDate={setDate}
         />
       )}
     </div>
