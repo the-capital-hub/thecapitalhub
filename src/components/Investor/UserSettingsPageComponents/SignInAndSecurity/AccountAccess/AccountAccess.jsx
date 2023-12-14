@@ -32,11 +32,11 @@ export default function AccountAccess({ setActiveTab }) {
       </div>
 
       <div className="border-top px-3 py-3">
-        <SettingsBar text={"Phone Number"} />
+        <SettingsBar text={"Phone Number"} link={"phone-number-setting"} />
       </div>
 
       <div className="border-top px-3 py-3">
-        <SettingsBar text={"Change Password"} />
+        <SettingsBar text={"Change Password"} link={"change-password"}/>
       </div>
 
       <div className="border-top px-3 py-3">
