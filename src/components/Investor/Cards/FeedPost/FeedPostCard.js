@@ -39,7 +39,10 @@ import Linkify from "react-linkify";
 import IconDelete from "../../SvgIcons/IconDelete";
 import IconReportPost from "../../SvgIcons/IconReportPost";
 import { useNavigate } from "react-router-dom";
-import { selectIsMobileView } from "../../../../Store/features/design/designSlice";
+import {
+  selectIsMobileView,
+  selectVideoAutoplay,
+} from "../../../../Store/features/design/designSlice";
 import { selectIsInvestor } from "../../../../Store/features/user/userSlice";
 import { Modal } from "react-bootstrap";
 import { MdDelete } from "react-icons/md";
@@ -242,6 +245,8 @@ const FeedPostCard = ({
   }, []);
 
   const videoRef = useRef(null);
+  const isVideoAutoplay = useSelector(selectVideoAutoplay);
+
   useEffect(() => {
     const video = videoRef.current;
     let playState = null;
@@ -254,14 +259,17 @@ const FeedPostCard = ({
             playState = false;
           } else {
             video.muted = true;
-            video
-              .play()
-              .then(() => {
-                playState = true;
-              })
-              .catch((error) => {
-                console.error("Auto-play failed:", error);
-              });
+
+            if (isVideoAutoplay) {
+              video
+                .play()
+                .then(() => {
+                  playState = true;
+                })
+                .catch((error) => {
+                  console.error("Auto-play failed:", error);
+                });
+            }
           }
         });
       }, {});
@@ -272,14 +280,16 @@ const FeedPostCard = ({
         if (document.hidden || !playState) {
           video.pause();
         } else {
-          video
-            .play()
-            .then(() => {
-              playState = true;
-            })
-            .catch((error) => {
-              console.error("Auto-play failed:", error);
-            });
+          if (isVideoAutoplay) {
+            video
+              .play()
+              .then(() => {
+                playState = true;
+              })
+              .catch((error) => {
+                console.error("Auto-play failed:", error);
+              });
+          }
         }
       };
 
@@ -290,7 +300,7 @@ const FeedPostCard = ({
         document.removeEventListener("visibilitychange", onVisibilityChange);
       };
     }
-  }, [video]);
+  }, [video, isVideoAutoplay]);
 
   const likeUnlikeHandler = async () => {
     try {
@@ -572,8 +582,11 @@ const FeedPostCard = ({
                       description.split(" ").length > 15 &&
                       !expanded && (
                         <span
-                          style={{ color: "blue", cursor: "pointer" }}
+                          style={{
+                            cursor: "pointer",
+                          }}
                           onClick={toggleDescription}
+                          className="text-secondary"
                         >
                           ...Read more
                         </span>
@@ -674,7 +687,7 @@ const FeedPostCard = ({
                 className="mt-1 mb-2 hr"
                 style={{ background: "var(--bs-light)", height: "3px" }}
               />
-              <div className="row feedpostcard_footer mb-2">
+              <div className="row feedpostcard_footer">
                 {/* Like and Comment */}
                 <div className="col-8">
                   <div className="feedpostcard_footer_like_comment d-flex gap-2">
@@ -691,7 +704,8 @@ const FeedPostCard = ({
                           style={{ cursor: "pointer" }}
                         />
                         <p
-                          style={{ color: "var(--d-l-grey)", fontSize: "12px" }}
+                          style={{ color: "var(--d-l-grey)", fontSize: "10px" }}
+                          className="m-0"
                         >
                           Like
                         </p>
@@ -713,7 +727,8 @@ const FeedPostCard = ({
                           style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                         />
                         <p
-                          style={{ color: "var(--d-l-grey)", fontSize: "12px" }}
+                          style={{ color: "var(--d-l-grey)", fontSize: "10px" }}
+                          className="m-0"
                         >
                           Like
                         </p>
@@ -737,7 +752,8 @@ const FeedPostCard = ({
                           style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                         />
                         <p
-                          style={{ color: "var(--d-l-grey)", fontSize: "12px" }}
+                          style={{ color: "var(--d-l-grey)", fontSize: "10px" }}
+                          className="m-0"
                         >
                           Comment
                         </p>
@@ -753,7 +769,8 @@ const FeedPostCard = ({
                           style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                         />
                         <p
-                          style={{ color: "var(--d-l-grey)", fontSize: "12px" }}
+                          style={{ color: "var(--d-l-grey)", fontSize: "10px" }}
+                          className="m-0"
                         >
                           Comment
                         </p>
@@ -790,7 +807,10 @@ const FeedPostCard = ({
                         }}
                         size={20}
                       />
-                      <p style={{ color: "var(--d-l-grey)", fontSize: "12px" }}>
+                      <p
+                        style={{ color: "var(--d-l-grey)", fontSize: "10px" }}
+                        className="m-0"
+                      >
                         Repost
                       </p>
                     </div>
@@ -870,7 +890,10 @@ const FeedPostCard = ({
                         onClick={handleUnsavePost}
                         style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                       />
-                      <p style={{ color: "var(--d-l-grey)", fontSize: "12px" }}>
+                      <p
+                        style={{ color: "var(--d-l-grey)", fontSize: "10px" }}
+                        className="m-0"
+                      >
                         Save
                       </p>
                     </div>
@@ -891,7 +914,10 @@ const FeedPostCard = ({
                         onClick={handleSavePopUp}
                         style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                       />
-                      <p style={{ color: "var(--d-l-grey)", fontSize: "12px" }}>
+                      <p
+                        style={{ color: "var(--d-l-grey)", fontSize: "10px" }}
+                        className="m-0"
+                      >
                         Save
                       </p>
                     </div>
@@ -1135,8 +1161,8 @@ const FeedPostCard = ({
       )}
 
       <ModalBSContainer id="reportPostModal">
-        <ModalBSHeader title="Report Post"  className={"d-l-grey"}/>
-        <ModalBSBody  className={"d-l-grey"}>
+        <ModalBSHeader title="Report Post" className={"d-l-grey"} />
+        <ModalBSBody className={"d-l-grey"}>
           <h6 className="h6">Select a reason that applies</h6>
           <div className="reasons_container">
             <div className="form-check form-check-inline m-0">

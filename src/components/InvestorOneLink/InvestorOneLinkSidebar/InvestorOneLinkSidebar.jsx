@@ -4,20 +4,16 @@ import {
   Menu,
   MenuItem,
   SidebarHeader,
-  // SidebarFooter,
   SidebarContent,
 } from "react-pro-sidebar";
 import { Link, useParams } from "react-router-dom";
-// import { getUserById } from "../../../Service/user";
-// import ArrowLeft from "../../../Images/investorsidebar/ArrowLeft.svg";
-// import ArrowRight from "../../../Images/investorsidebar/ArrowRight.svg";
-import IconProfile from "../SvgIcons/IconProfile";
-import IconStartupsInvested from "../SvgIcons/IconStartupsInvested";
-import IconInvestmentPhilosophy from "../SvgIcons/IconInvestmentPhil";
-import IconAppointment from "../SvgIcons/IconAppointment";
+import { ImProfile } from "react-icons/im";
+import { FaWandMagicSparkles } from "react-icons/fa6";
+import { AiOutlineSchedule } from "react-icons/ai";
 import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
-// import { useOutletContext } from "react-router";
 import { getInvestorFromOneLinkAPI } from "../../../Service/user";
+import { RxRocket } from "react-icons/rx";
+
 import "./InvestorOneLinkSidebar.scss";
 import { useSelector } from "react-redux";
 import { selectIsMobileView } from "../../../Store/features/design/designSlice";
@@ -40,17 +36,13 @@ export default function InvestorOneLinkSidebar({
   useEffect(() => {
     getInvestorFromOneLinkAPI(oneLink, userId)
       .then(({ data }) => {
-        console.log(data);
         setInvestorData(data);
       })
       .catch((error) => console.log(error));
   }, []);
+
   // States
   const [currentTab, setCurrentTab] = useState("investorProfile");
-
-  // const menuIconClick = () => {
-  //   setSidebarCollapsed(!sidebarCollapsed);
-  // };
 
   // Methods for touch events
   const handleTouchStart = (e) => {
@@ -108,25 +100,18 @@ export default function InvestorOneLinkSidebar({
                     className="rounded-circle"
                   />
                   <h3
-                    className={`${sidebarCollapsed ? "invisible" : "visible"}`}
+                    className={`${sidebarCollapsed ? "d-none" : "visible"}`}
                   >
                     {investorData?.investor?.firstName}{" "}
                     {investorData?.investor?.lastName}
                   </h3>
                   <h4
-                    className={`${sidebarCollapsed ? "invisible" : "visible"}`}
+                    className={`${sidebarCollapsed ? "d-none" : "visible"}`}
                   >
                     {investorData?.investor?.email}
                   </h4>
                 </>
               </div>
-              {/* <div className="closemenu" onClick={menuIconClick}>
-                {sidebarCollapsed ? (
-                  <img className="closemenu-Right" src={ArrowRight} alt="" />
-                ) : (
-                  <img className="closemenu-Left" src={ArrowLeft} alt="" />
-                )}
-              </div> */}
             </SidebarHeader>
 
             {/* Sidebar Content */}
@@ -139,7 +124,7 @@ export default function InvestorOneLinkSidebar({
                   onClick={() => setCurrentTab("investorProfile")}
                 >
                   <Link to="">
-                    <IconProfile width="22px" height="22px" />
+                    <ImProfile size="22" />
                     {!sidebarCollapsed && <span>Investor Profile</span>}
                   </Link>
                 </MenuItem>
@@ -151,7 +136,7 @@ export default function InvestorOneLinkSidebar({
                   onClick={() => setCurrentTab("startupsInvested")}
                 >
                   <Link to="startups-invested">
-                    <IconStartupsInvested width="30px" height="30px" />
+                    <RxRocket size={22} />
                     {!sidebarCollapsed && <span>Startups Invested</span>}
                   </Link>
                 </MenuItem>
@@ -163,7 +148,7 @@ export default function InvestorOneLinkSidebar({
                   onClick={() => setCurrentTab("philosophy")}
                 >
                   <Link to="investment-philosophy">
-                    <IconInvestmentPhilosophy width="30px" height="30px" />
+                    <FaWandMagicSparkles size="22" />
                     {!sidebarCollapsed && <span>Philosophy</span>}
                   </Link>
                 </MenuItem>
@@ -175,7 +160,7 @@ export default function InvestorOneLinkSidebar({
                   onClick={() => setCurrentTab("appointment")}
                 >
                   <Link to="appointment">
-                    <IconAppointment width="25px" height="25px" />
+                    <AiOutlineSchedule size={22} />
                     {!sidebarCollapsed && <span>Appointment</span>}
                   </Link>
                 </MenuItem>

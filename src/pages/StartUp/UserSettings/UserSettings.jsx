@@ -11,15 +11,8 @@ import {
   selectIsMobileView,
   setPageTitle,
 } from "../../../Store/features/design/designSlice";
-import IconChevronBack from "../../../components/Investor/SvgIcons/IconChevronBack";
+// import IconChevronBack from "../../../components/Investor/SvgIcons/IconChevronBack";
 import { Outlet, useLocation } from "react-router-dom";
-
-const SETTINGS_CONTENT = {
-  account: <Account />,
-  signInAndSecurity: <SignInAndSecurity />,
-  privacyPolicy: <PrivacyPolicy />,
-  logout: <Logout />,
-};
 
 export default function UserSettings() {
   const isMobileView = useSelector(selectIsMobileView);
@@ -40,6 +33,13 @@ export default function UserSettings() {
       setActiveTab("account");
     }
   }, [isMobileView]);
+
+  const SETTINGS_CONTENT = {
+    account: <Account setActiveTab={setActiveTab} />,
+    signInAndSecurity: <SignInAndSecurity setActiveTab={setActiveTab} />,
+    privacyPolicy: <PrivacyPolicy setActiveTab={setActiveTab} />,
+    logout: <Logout setActiveTab={setActiveTab} />,
+  };
 
   return (
     <div className="userSettings-page-wrapper my-5 mx-lg-3">
@@ -63,7 +63,7 @@ export default function UserSettings() {
                   className="setttings-content flex-grow-1"
                   id="settingsContent"
                 >
-                  <button
+                  {/* <button
                     type="button"
                     className="btn btn-secondary p-0 mb-3 rounded-circle d-flex align-items-center justify-content-center"
                     style={{ width: "45px", height: "45px" }}
@@ -74,7 +74,7 @@ export default function UserSettings() {
                       width={30}
                       style={{ marginLeft: "-4px" }}
                     />
-                  </button>
+                  </button> */}
                   {SETTINGS_CONTENT[activeTab]}
                 </div>
               )}

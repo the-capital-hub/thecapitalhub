@@ -1,4 +1,7 @@
 .personal_information_section {
+  background-color: var(--white-to-grey);
+  border-radius: var(--border-radius);
+
 .back_btn{
 background:none;
 outline: none;
@@ -72,6 +75,7 @@ color: var(--d-l-grey);
             font-size: 18px;
             font-family: Poppins;
             cursor: pointer;
+            
         }
       }
 }

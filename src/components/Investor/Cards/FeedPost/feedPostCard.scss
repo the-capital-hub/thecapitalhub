@@ -27,13 +27,13 @@
           gap: 5px;
 
           &:hover {
-            background-color: #f0f0f0;
+            background-color: var(--bs-light);
           }
 
           .title {
             font-size: 12px;
             font-weight: 500;
-            color: #000;
+            color: var(--d-l-grey);
           }
           .description {
             font-size: 10px;

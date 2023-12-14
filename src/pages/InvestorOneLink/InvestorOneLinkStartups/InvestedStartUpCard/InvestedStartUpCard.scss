@@ -1,14 +1,16 @@
 .invested-startup-card {
-  background-color: white;
+  background-color: var(--white-to-grey);
 
   fieldset {
+    background-color: var(--white-to-dgrey);
+    color: var(--d-l-grey) !important;
     legend {
       font-size: 14px;
     }
 
     & > p {
       font-weight: 100;
-      color: #373737;
+      // color: #373737;
     }
   }
   .public__links {
@@ -22,7 +24,7 @@
     }
 
     a {
-        text-decoration: none;
+      text-decoration: none;
     }
   }
 }

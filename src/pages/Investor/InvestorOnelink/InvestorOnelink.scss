@@ -64,7 +64,7 @@
       border-radius: 10px;
       outline: none;
       font-size: 1.25rem;
-      color: black;
+      color: var(--d-l-grey);
       padding: 1em 0.5em;
       width: 100%;
       background: var(--bs-light);
@@ -73,7 +73,6 @@
     .date_input {
       outline: none;
       background: var(--bs-light);
-
     }
 
     .date_input::-webkit-calendar-picker-indicator {
