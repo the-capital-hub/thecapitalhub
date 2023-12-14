@@ -38,7 +38,7 @@ function ManageEmailAddresses() {
         </span>
       </div>
       <Modal
-      className="test"
+        className="test"
         show={modalShow}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
