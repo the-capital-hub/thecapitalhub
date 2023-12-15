@@ -6,6 +6,42 @@ import IconCloudUpload from "../../../Investor/SvgIcons/IconCloudUpload";
 export default function ProfileInformationForm() {
   async function handleProfileInfoSubmit(e) {
     e.preventDefault();
+
+    const {
+      designation,
+      location,
+      bio,
+      yearsOfExperience,
+      website,
+      linkedin,
+      facebook,
+      twitter,
+      instagram,
+    } = e.target;
+
+    let updatedUserData = {
+      designation: designation.value,
+      location: location.value,
+      bio: bio.value,
+      yearsOfExperience: yearsOfExperience.value,
+    };
+
+    let updatedSocialLinks = {
+      socialLinks: {
+        website: website.value,
+        linkedin: linkedin.value,
+        facebook: facebook.value,
+        twitter: twitter.value,
+        instagram: instagram.value,
+      },
+    };
+
+    console.log(
+      "user data",
+      updatedUserData,
+      "company data",
+      updatedSocialLinks
+    );
   }
 
   return (
@@ -28,7 +64,7 @@ export default function ProfileInformationForm() {
 
       <InputGroup className="flex-column flex-md-row gap-4">
         <Form.Group controlId="onelink-designation" className="form-group">
-          <Form.Label className="text-capitalize">Designation</Form.Label>
+          <Form.Label className="text-capitalize">designation</Form.Label>
           <Form.Control type="text" name="designation" />
         </Form.Group>
         <Form.Group controlId="onelink-location" className="form-group">
@@ -40,6 +76,11 @@ export default function ProfileInformationForm() {
       <Form.Group controlId="onelink-bio" className="form-group">
         <Form.Label className="text-capitalize">bio</Form.Label>
         <Form.Control as={"textarea"} rows={5} type="text" name="bio" />
+      </Form.Group>
+
+      <Form.Group controlId="onelink-yearsOfExperience" className="form-group">
+        <Form.Label className="text-capitalize">Current Experience</Form.Label>
+        <Form.Control type="text" name="yearsOfExperience" />
       </Form.Group>
 
       <div className="divider d-flex align-items-center">
