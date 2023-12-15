@@ -41,7 +41,31 @@ function NotificationsPopup({ toggleVisibility }) {
     fetchNotifications();
   }, []);
 
-  const notificationType = (type, _id, achievementId, notificationId) => {
+  const displayPost = (post) => {
+    return (
+      <>
+        {post.image && (
+          <>
+            <br />
+            <img src={post.image} alt="Post" className="img-fluid" width="100" />
+          </>
+        )}
+
+        {post.video && (
+          <>
+            <br />
+            <video width="100">
+              <source src={post.video} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </>
+        )}
+      </>
+    );
+  };
+
+
+  const notificationType = (type, post, achievementId, notificationId) => {
     switch (type) {
       case "connectionRequest": {
         return "sent you a connection request";
@@ -54,12 +78,23 @@ function NotificationsPopup({ toggleVisibility }) {
           <span>
             liked your{" "}
             <Link
-              to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
+              to={isInvestor ? `/investor/post/${post._id}` : `/posts/${post._id}`}
               className="fw-bold"
               onClick={() => handleOnClickLink(notificationId)}
             >
               post
             </Link>
+            {post.description && (
+              <>
+                <br />
+                <span className="text-muted">
+                  {post.description.length > 100
+                    ? `${post.description.slice(0, 100)}...`
+                    : post.description}
+                </span>
+              </>
+            )}
+
           </span>
         );
       }
@@ -68,12 +103,23 @@ function NotificationsPopup({ toggleVisibility }) {
           <span>
             shared your{" "}
             <Link
-              to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
+              to={isInvestor ? `/investor/post/${post._id}` : `/posts/${post._id}`}
               className="fw-bold"
               onClick={() => handleOnClickLink(notificationId)}
             >
               post
             </Link>
+            {post.description && (
+              <>
+                <br />
+                <span className="text-muted">
+                  {post.description.length > 100
+                    ? `${post.description.slice(0, 100)}...`
+                    : post.description}
+                </span>
+              </>
+            )}
+
           </span>
         );
       }
@@ -82,12 +128,23 @@ function NotificationsPopup({ toggleVisibility }) {
           <span>
             commented on your{" "}
             <Link
-              to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
+              to={isInvestor ? `/investor/post/${post._id}` : `/posts/${post._id}`}
               className="fw-bold"
               onClick={() => handleOnClickLink(notificationId)}
             >
               post
             </Link>
+            {post.description && (
+              <>
+                <br />
+                <span className="text-muted">
+                  {post.description.length > 100
+                    ? `${post.description.slice(0, 100)}...`
+                    : post.description}
+                </span>
+              </>
+            )}
+
           </span>
         );
       }
@@ -156,16 +213,22 @@ function NotificationsPopup({ toggleVisibility }) {
   };
 
   // Handle Notification click
-  function handleNotificationClick(e, type, _id) {
+  function handleNotificationClick(e, type, post) {
     // Gaurd clause that checks if event is coming from notification div. If it is not , we do nothing.
-    if (!e.target.classList.contains("notification")) {
+    if (e.target.classList.contains("user-name")) {
       return;
     }
-
     if (type.includes("post")) {
-      navigate(isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`);
+      navigate(isInvestor ? `/investor/post/${post._id}` : `/posts/${post._id}`);
       toggleVisibility(false);
-    } else {
+    } else
+      if (type.includes("connection")) {
+        navigate(isInvestor ? `/investor/connection` : `/connection`);
+        toggleVisibility(false);
+      } if (type.includes("achievementCompleted")) {
+        navigate(isInvestor ? `/investor/profile/achievements` : `/profile/achievements`);
+        toggleVisibility(false);
+      } else {
       return;
     }
   }
@@ -207,7 +270,7 @@ function NotificationsPopup({ toggleVisibility }) {
                               ? `/investor/user/${sender?._id}`
                               : `/user/${sender?._id}`
                           }
-                          className="fw-bold"
+                          className="fw-bold user-name"
                           onClick={() => handleOnClickLink(_id)}
                         >
                           {sender?.firstName} {sender?.lastName}
@@ -226,7 +289,7 @@ function NotificationsPopup({ toggleVisibility }) {
                       />
                     </div>
                     <div className="actions d-flex flex-column gap-1">
-                      {!isRead && (
+                      {/* {!isRead && (
                         <button
                           className="btn btn-light btn-sm"
                           onClick={() => markAsRead(_id)}
@@ -236,7 +299,9 @@ function NotificationsPopup({ toggleVisibility }) {
                           </span>
                           <span className="d-md-none text-secondary">✔</span>
                         </button>
-                      )}
+                      )} */}
+
+                      {post && displayPost(post)}
                     </div>
                   </div>
                 )

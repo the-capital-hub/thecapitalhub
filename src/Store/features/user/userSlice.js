@@ -181,6 +181,7 @@ export const selectUserSectorInterested = (state) =>
 // export const selectUserInvestmentPhilosophy = (state) =>
 //   state.user.company?.investmentPhilosophy;
 export const selectMyInterests = (state) => state.user.company?.myInterests;
+export const selectMyPastInvestments = (state) => state.user.company?.pastInvestments;
 export const selectFundingQuestions = (state) =>
   state.user.loggedInUser?.fundingViaCapitalhubQuestions;
 export const selectUserOneLink = (state) => state.user.company?.oneLink;

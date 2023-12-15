@@ -64,7 +64,7 @@ function ChangePassword() {
             </fieldset>
         </form>
         
-      <Button className="  forgotpassword" >Forgot password</Button>
+      <Button className="  forgotpassword" >Done</Button>
       </div>
     </div>
   );

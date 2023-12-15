@@ -40,7 +40,7 @@ export default function AccountAccess({ setActiveTab }) {
       </div>
 
       <div className="border-top px-3 py-3">
-        <SettingsBar text={"Two-Step Verification"} entry={"On"} />
+        <SettingsBar text={"Two-Step Verification"} entry={"On"} link={"two-step-verification"}/>
       </div>
     </div>
   );

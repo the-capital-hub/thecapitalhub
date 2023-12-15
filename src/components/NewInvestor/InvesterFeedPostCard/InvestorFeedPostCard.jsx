@@ -63,8 +63,10 @@ const FeedPostCard = ({
   repostPreview,
   resharedPostId,
   deletePostFilterData,
+  isSinglePost = false,
+
 }) => {
-  const [showComment, setShowComment] = useState(false);
+  const [showComment, setShowComment] = useState(isSinglePost);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
