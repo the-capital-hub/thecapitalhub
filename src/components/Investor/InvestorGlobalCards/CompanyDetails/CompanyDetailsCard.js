@@ -86,9 +86,9 @@ const CompanyDetailsCard = ({
 
               {page === "edit" ? (
                 <span className="align-self-start ms-auto d-md-none d-block pt-2">
-                  <div className="">
+                  <div className="d-flex align-items-center gap-2 flex-wrap">
                     <button
-                      className="edit-btn "
+                      className="edit-btn btn "
                       onClick={() =>
                         setIsDescriptionEditable(!isDescriptionEditable)
                       }
@@ -98,7 +98,7 @@ const CompanyDetailsCard = ({
                     </button>
                     {isDescriptionEditable && (
                       <button
-                        className="edit-btn ms-2"
+                        className="edit-btn btn ms-2"
                         onClick={() => submitDescriptionHandler()}
                       >
                         Save <CiSaveUp2 />
@@ -121,12 +121,16 @@ const CompanyDetailsCard = ({
                       {onePager.description}
                     </span> */}
               <span className="small_typo location_icon d-flex flex-column flex-lg-row gap-2">
-                <span>
-                  <IconLocation className="me-1" />
+                <span className="d-l-grey">
+                  <IconLocation className="me-1" color="var(--d-l-grey)" />
                   {onePager.location || userDetails?.investor?.location}
                 </span>
-                <span>
-                  <HiOutlineMail size={28} color="#545454" className="me-1" />
+                <span className="d-l-grey">
+                  <HiOutlineMail
+                    size={28}
+                    color="var(--d-l-grey)"
+                    className="me-1"
+                  />
                   {userDetails?.email}
                 </span>
               </span>
@@ -193,7 +197,7 @@ const CompanyDetailsCard = ({
             {/* Edit button */}
             {page === "edit" ? (
               <span className="align-self-start ms-auto d-none d-md-block">
-                <div className="">
+                <div className="d-flex align-items-center gap-2">
                   <button
                     className="edit-btn btn"
                     onClick={() =>
@@ -205,7 +209,7 @@ const CompanyDetailsCard = ({
                   </button>
                   {isDescriptionEditable && (
                     <button
-                      className="edit-btn ms-2"
+                      className="edit-btn btn ms-2"
                       onClick={() => submitDescriptionHandler()}
                     >
                       Save <CiSaveUp2 />

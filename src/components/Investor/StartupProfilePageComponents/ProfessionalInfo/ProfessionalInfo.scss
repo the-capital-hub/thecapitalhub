@@ -1,13 +1,12 @@
 .professional_info_section {
   background-color: var(--white-to-grey);
-  .professional_info_display{
-    h5{
+  .professional_info_display {
+    h5 {
       color: var(--d-l-grey);
     }
-    
   }
   p {
-    color: #717171;
+    color: var(--d-l-grey);
   }
 
   .text_field {
@@ -28,10 +27,10 @@
     button {
       border-radius: 131px;
       border: 1px solid #c6c6c6;
-      width: 107px;
+      width: fit-content;
       height: 35px;
       flex-shrink: 0;
-      color: #717171;
+      color: var(--d-l-grey);
       font-size: 18px;
       font-family: "Poppins";
       cursor: pointer;
@@ -74,7 +73,9 @@
         border: none;
         outline: none;
         width: 100%;
-        background-color: transparent;
+        background-color: var(--white-to-grey);
+        color: var(--d-l-grey);
+        border-radius: var(--border-radius);
 
         padding: 0.5em 0.75em;
         font-size: 1rem;
@@ -94,7 +95,7 @@
     legend {
       margin-left: 2em;
       padding-inline: 1em;
-      color:var(--d-l-grey);
+      color: var(--d-l-grey);
       font-size: 12px;
       font-weight: 500;
     }
