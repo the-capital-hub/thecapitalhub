@@ -38,14 +38,18 @@
     .edit-btn {
       border-radius: 131px;
       border: 1px solid var(--bs-border-color);
-      width: 107px;
+      width: fit-content;
       height: 35px;
       flex-shrink: 0;
-      color: #717171;
+      color: var(--d-l-grey);
       font-size: 18px;
       font-family: Poppins;
       cursor: pointer;
       margin-left: -4px;
+
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
     }
 
     .description {
@@ -113,6 +117,7 @@
       }
 
       .small_typo {
+        color: var(--d-l-grey);
         font-size: 16px;
         font-family: Poppins;
 
@@ -194,7 +199,7 @@
         }
 
         .small_typo {
-          color: #717171;
+          color: var(--d-l-grey);
           font-size: 14px;
           font-family: Poppins;
         }
@@ -215,7 +220,7 @@
       }
 
       .small_typo {
-        color: #717171;
+        color: var(--d-l-grey);
         font-size: 14px;
         font-family: Poppins;
       }
@@ -235,7 +240,7 @@
       }
 
       .small_typo {
-        color: #717171;
+        color: var(--d-l-grey);
         font-size: 14px;
         font-family: Poppins;
       }

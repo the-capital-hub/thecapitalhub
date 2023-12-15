@@ -161,7 +161,7 @@ const Feed = () => {
                 hasMore={hasMore}
                 loader={
                   <div className="loader_spinner container p-5 text-center my-5  rounded-5 shadow-sm ">
-                    <SpinnerBS />
+                    <SpinnerBS colorClass={"d-l-grey"} />
                   </div>
                 }
               >
