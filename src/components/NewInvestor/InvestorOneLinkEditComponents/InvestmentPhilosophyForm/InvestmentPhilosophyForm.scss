@@ -1,8 +1,18 @@
-.oneLink-edit-wrapper {
-  color: var(--d-l-grey);
+.investment-philosophy-form {
+  display: grid;
+  grid-template-columns: 100%;
 
-  h2 {
-    font-size: 1.75rem;
+  gap: 2rem;
+
+  @media (min-width: 1200px) {
+    grid-template-columns: 1fr 1fr;
+    .form-group {
+      .form-label {
+        display: flex;
+        align-items: flex-end;
+        min-height: 60px;
+      }
+    }
   }
 
   .form-group {
@@ -50,23 +60,5 @@
     // @media (min-width: 1400px) {
     //   width: 60%;
     // }
-  }
-
-  .philosophy-form {
-    display: grid;
-    grid-template-columns: 100%;
-
-    gap: 2rem;
-
-    @media (min-width: 1200px) {
-      grid-template-columns: 1fr 1fr;
-      .form-group {
-        .form-label {
-          display: flex;
-          align-items: flex-end;
-          min-height: 60px;
-        }
-      }
-    }
   }
 }

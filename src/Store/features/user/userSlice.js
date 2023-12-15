@@ -164,6 +164,8 @@ export const selectEvaluateCompanyGrowthPotential = (state) =>
   state.user.loggedInUser.evaluateCompanyGrowthPotential;
 export const selectWeightGaveToTechnologicalInnovation = (state) =>
   state.user.loggedInUser.weightGaveToTechnologicalInnovation;
+export const selectUserInvestmentPhilosophy = (state) =>
+  state.user.loggedInUser.investmentPhilosophy;
 
 // company state selectors
 export const selectCompanyDataId = (state) => state.user.company?._id;
@@ -181,7 +183,8 @@ export const selectUserSectorInterested = (state) =>
 // export const selectUserInvestmentPhilosophy = (state) =>
 //   state.user.company?.investmentPhilosophy;
 export const selectMyInterests = (state) => state.user.company?.myInterests;
-export const selectMyPastInvestments = (state) => state.user.company?.pastInvestments;
+export const selectMyPastInvestments = (state) =>
+  state.user.company?.pastInvestments;
 export const selectFundingQuestions = (state) =>
   state.user.loggedInUser?.fundingViaCapitalhubQuestions;
 export const selectUserOneLink = (state) => state.user.company?.oneLink;
