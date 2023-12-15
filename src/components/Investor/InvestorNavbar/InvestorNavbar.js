@@ -331,7 +331,7 @@ const InvestorNavbar = (props) => {
                           {searchSuggestions?.company
                             ?.slice(0, 5)
                             .map(({ company, founderId }) => (
-                              <span className="single_result">
+                              <span key={founderId} className="single_result text-secondary">
                                 <Link to={`/company-profile/${founderId}`}>
                                   {company}
                                 </Link>
