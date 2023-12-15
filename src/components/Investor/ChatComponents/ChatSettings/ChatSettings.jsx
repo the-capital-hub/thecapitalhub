@@ -193,7 +193,7 @@ export default function ChatSettings({ setIsSettingsOpen }) {
           {/* BootStrap off canvas */}
           <OffcanvasBSContainer
             id={"chatSettingsOffcanvas"}
-            containerClasses={`bg-light`}
+            containerClasses={``}
           >
             <OffcanvasBSHeader
               title={"Edit Chat Settings"}

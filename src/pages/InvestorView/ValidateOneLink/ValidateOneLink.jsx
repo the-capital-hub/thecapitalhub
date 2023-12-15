@@ -41,6 +41,7 @@ function ValidateOneLink({ children, ...props }) {
           <NavBarIV
             handleSidebarToggle={handleSidebarToggle}
             sidebarCollapsed={sidebarCollapsed}
+            data-bs-theme={theme}
           />
 
           <div

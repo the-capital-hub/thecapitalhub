@@ -333,16 +333,79 @@
               }
             }
           }
+        }
+      }
 
-          .icon-wrapper {
-            .notification-icon,
-            .message-icon {
+      .search_container_mobile {
+        left: auto;
+        top: 70px;
+
+        width: 60%;
+        right: 100px;
+        min-height: 80px;
+
+        background-color: var(--white-to-grey);
+
+        .searchbar-container {
+          display: flex;
+          align-items: center;
+          position: relative;
+          margin-right: 10px;
+
+          .searchbar-input {
+            height: 49px;
+            flex-grow: 1;
+            background: var(--bs-light);
+            border-radius: 20px;
+            border: none;
+            transition: width 0.4s ease;
+            padding: 0 15px;
+            outline: none;
+          }
+
+          .searchbar-button {
+            position: absolute;
+            right: -5px;
+            top: 0;
+            width: 48px;
+            height: 49px;
+            background: #d3f36b;
+            border: none;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            cursor: pointer;
+          }
+        }
+
+        .search_results {
+          display: flex;
+          width: 100%;
+          flex-direction: column;
+          gap: 5px;
+
+          .search-heading {
+            color: var(--d-l-grey);
+          }
+
+          .single_result:nth-child(6),
+          .single_result:nth-child(13) {
+            border-bottom: none;
+          }
+          a {
+            text-decoration: none;
+            color: #6c757d;
+            &:hover {
+              color: #d3f36b;
             }
-
-            .profile-pic {
-            }
-
-            .me {
+          }
+          .single_result {
+            border-bottom: 1px solid lightgrey;
+            padding: 2px 0;
+            transition: padding-left ease 0.2s;
+            &:hover {
+              // background-color: rgb(221, 221, 221);
+              border-radius: 5px;
+              padding-left: 10px;
             }
           }
         }
@@ -351,7 +414,7 @@
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 500px) {
   .container {
     .my-investor_navbar {
       .bar_logo_container {
@@ -456,16 +519,72 @@
               }
             }
           }
+        }
+      }
+      .search_container_mobile {
+        left: auto;
+        top: 70px;
 
-          .icon-wrapper {
-            .notification-icon,
-            .message-icon {
+        width: 100%;
+        min-height: 80px;
+        right: 0;
+
+        .searchbar-container {
+          display: flex;
+          align-items: center;
+          position: relative;
+          margin-right: 10px;
+
+          .searchbar-input {
+            height: 49px;
+            flex-grow: 1;
+            background: var(--bs-light);
+            border-radius: 20px;
+            border: none;
+            transition: width 0.4s ease;
+            padding: 0 15px;
+            outline: none;
+          }
+
+          .searchbar-button {
+            position: absolute;
+            right: -5px;
+            top: 0;
+            width: 48px;
+            height: 49px;
+            background: #d3f36b;
+            border: none;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            cursor: pointer;
+          }
+        }
+
+        .search_results {
+          display: flex;
+          width: 100%;
+          flex-direction: column;
+          gap: 5px;
+
+          .single_result:nth-child(6),
+          .single_result:nth-child(13) {
+            border-bottom: none;
+          }
+          a {
+            text-decoration: none;
+            color: #6c757d;
+            &:hover {
+              color: #d3f36b;
             }
-
-            .profile-pic {
-            }
-
-            .me {
+          }
+          .single_result {
+            border-bottom: 1px solid lightgrey;
+            padding: 2px 0;
+            transition: padding-left ease 0.2s;
+            &:hover {
+              // background-color: rgb(221, 221, 221);
+              border-radius: 5px;
+              padding-left: 10px;
             }
           }
         }

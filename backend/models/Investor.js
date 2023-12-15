@@ -139,6 +139,10 @@ const investorSchema = new Schema(
         ref: "Milestones",
       },
     ],
+    revenue: {
+      year: Number,
+      amount: Number,
+    },
   },
   {
     timestamps: true,
