@@ -12,6 +12,8 @@
       background-color: transparent !important;
       outline: none;
       border: none;
+      color: var(--d-l-grey);
+
     }
     #dropdown-basic{
         background: var(--bs-light);
@@ -55,7 +57,7 @@
   
     .goog-te-combo {
       font-size: 15px !important;
-      color: white;
+      color: var(--d-l-grey);
     }
   }
   

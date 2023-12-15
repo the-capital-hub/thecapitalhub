@@ -120,26 +120,28 @@
   flex-direction: column;
   padding-top: 20px;
   padding-bottom: 10px;
-}
-.logotext h3 {
-  height: 23px;
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 22px;
-  /* identical to box height */
+  h3 {
+    height: 23px;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 22px;
+    color: #000000;
+  }
 
-  color: #000000;
-}
+  h4 {
+    margin: 0;
+    font-size: 10px;
+    margin-bottom: 20px;
+  }
 
-.logotext h4 {
-  margin: 0;
-  font-size: 10px;
-  margin-bottom: 20px;
-}
-.logotext img {
-  width: 50px;
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 }
 .create_post {
   height: 40px;

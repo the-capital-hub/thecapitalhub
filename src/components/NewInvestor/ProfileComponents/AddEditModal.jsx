@@ -146,6 +146,7 @@ export default function AddEditModal({
           name: startUp.name,
           companyImage: startUp.logo,
           description: startUp.description,
+          equity: startUp.investedEquity,
         });
       } else {
         const sector = dataArray[index];

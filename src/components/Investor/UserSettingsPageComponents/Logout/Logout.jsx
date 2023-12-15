@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import LogOutPopUp from "../../../PopUp/LogOutPopUp/LogOutPopUp";
 import { clearAllChatsData } from "../../../../Store/features/chat/chatSlice";
-import { logout } from "../../../../Store/features/user/userSlice";
+import { logout, selectIsInvestor } from "../../../../Store/features/user/userSlice";
 import {
   selectIsMobileView,
   selectTheme,
@@ -21,6 +21,8 @@ export default function Logout({ setActiveTab }) {
   const isMobileView = useSelector(selectIsMobileView);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isInvestor = useSelector(selectIsInvestor);
+
 
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const theme = useSelector(selectTheme);
@@ -72,7 +74,7 @@ export default function Logout({ setActiveTab }) {
           </div>
           <div className="footer d-flex gap-3 ms-md-auto">
             <Link
-              to="/profile"
+              to={isInvestor?"/investor/profile":"/profile"}
               className={`btn btn-delete`}
               style={{
                 backgroundColor: "var(--currentTheme)",

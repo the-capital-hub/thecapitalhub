@@ -54,6 +54,49 @@ const InvestorOnelink = lazy(() =>
 const InvestorUserSettings = lazy(() =>
   import("../pages/Investor/InvestorUserSettings/InvestorUserSettings")
 );
+const InvestorOneLinkEdit = lazy(() =>
+  import("../pages/Investor/InvestorOneLinkEdit/InvestorOneLinkEdit")
+);
+
+const ProfileInformation = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/ProfileInformation/ProfileInformation")
+);
+
+const DarkModeSetting = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/DarkModeSetting/DarkModeSetting")
+);
+
+const LanguageSettings = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/LanguageSettings/LanguageSettings")
+);
+
+const AutoPlaySettings = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/AutoPlaySettings/AutoPlaySettings")
+);
+
+const ContentLanguageSettings = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/ContentLanguageSettings/ContentLanguageSettings")
+);
+
+const ManageEmailAddresses = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/ManageEmailAddresses/ManageEmailAddresses")
+);
+
+const PhoneNumberSetting = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/PhoneNumberSetting/PhoneNumberSetting")
+);
+
+const ChangePassword = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/ChangePassword/ChangePassword")
+);
+
+const TwoStepVerification = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/TwoStepVerification/TwoStepVerification")
+);
+
+const CloseAccount = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/CloseAccount/CloseAccount")
+);
 
 function InvestorRoutes() {
   return (
@@ -190,6 +233,15 @@ function InvestorRoutes() {
       />
 
       <Route
+        path="onelink/edit"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <InvestorOneLinkEdit />
+          </Suspense>
+        }
+      />
+
+      <Route
         path="post/:_id"
         element={
           <Suspense fallback={<SuspenseLoader />}>
@@ -228,10 +280,83 @@ function InvestorRoutes() {
           path="profile-information"
           element={
             <Suspense fallback={<SuspenseLoader />}>
-              <p>Profile Information</p>
+              <ProfileInformation/>
             </Suspense>
           }
         />
+        <Route
+          path="dark-mode"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <DarkModeSetting/>
+            </Suspense>
+          }
+        />
+          <Route
+          path="language-settings"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <LanguageSettings/>
+            </Suspense>
+          }
+        />
+         <Route
+          path="auto-play-settings"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <AutoPlaySettings />
+            </Suspense>
+          }
+        />
+          <Route
+          path="content-language-settings"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <ContentLanguageSettings />
+            </Suspense>
+          }
+        />
+        <Route
+          path="manage-email-addresses"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <ManageEmailAddresses />
+            </Suspense>
+          }
+        />
+        <Route
+          path="phone-number-setting"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <PhoneNumberSetting />
+            </Suspense>
+          }
+        />
+          <Route
+          path="change-password"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <ChangePassword />
+            </Suspense>
+          }
+        />
+  <Route
+          path="two-step-verification"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <TwoStepVerification />
+            </Suspense>
+          }
+        />
+         <Route
+          path="close-account"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <CloseAccount />
+            </Suspense>
+          }
+        />
+
       </Route>
     </>
   );

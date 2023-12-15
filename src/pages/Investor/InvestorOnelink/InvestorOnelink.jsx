@@ -32,6 +32,7 @@ import {
   selectUserCompanyData,
   selectUserInvestor,
 } from "../../../Store/features/user/userSlice";
+import { Link } from "react-router-dom";
 
 export default function InvestorOnelink() {
   const userInvestor = useSelector(selectUserInvestor);
@@ -122,7 +123,13 @@ export default function InvestorOnelink() {
             className="onePager_wrapper d-flex flex-column gap-4"
             theme="investor"
           >
-            <OnePagerCompanyLogo image={company.logo} />
+            <Link
+              to={"/investor/onelink/edit"}
+              className="fs-4 text-white bg-black rounded-4 px-3 py-4 text-center text-decoration-none"
+            >
+              Edit OneLink
+            </Link>
+            {/* <OnePagerCompanyLogo image={company.logo} /> */}
             <OnePagerCompanyInfo
               company={company.companyName}
               location={company.location}
