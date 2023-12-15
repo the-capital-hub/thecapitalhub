@@ -41,7 +41,31 @@ function NotificationsPopup({ toggleVisibility }) {
     fetchNotifications();
   }, []);
 
-  const notificationType = (type, _id, achievementId, notificationId) => {
+  const displayPost = (post) => {
+    return (
+      <>
+        {post.image && (
+          <>
+            <br />
+            <img src={post.image} alt="Post" className="img-fluid" width="100" />
+          </>
+        )}
+
+        {post.video && (
+          <>
+            <br />
+            <video width="100">
+              <source src={post.video} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </>
+        )}
+      </>
+    );
+  };
+
+
+  const notificationType = (type, post, achievementId, notificationId) => {
     switch (type) {
       case "connectionRequest": {
         return "sent you a connection request";
@@ -54,12 +78,23 @@ function NotificationsPopup({ toggleVisibility }) {
           <span>
             liked your{" "}
             <Link
-              to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
+              to={isInvestor ? `/investor/post/${post._id}` : `/posts/${post._id}`}
               className="fw-bold"
               onClick={() => handleOnClickLink(notificationId)}
             >
               post
             </Link>
+            {post.description && (
+              <>
+                <br />
+                <span className="text-muted">
+                  {post.description.length > 100
+                    ? `${post.description.slice(0, 100)}...`
+                    : post.description}
+                </span>
+              </>
+            )}
+
           </span>
         );
       }
@@ -68,12 +103,23 @@ function NotificationsPopup({ toggleVisibility }) {
           <span>
             shared your{" "}
             <Link
-              to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
+              to={isInvestor ? `/investor/post/${post._id}` : `/posts/${post._id}`}
               className="fw-bold"
               onClick={() => handleOnClickLink(notificationId)}
             >
               post
             </Link>
+            {post.description && (
+              <>
+                <br />
+                <span className="text-muted">
+                  {post.description.length > 100
+                    ? `${post.description.slice(0, 100)}...`
+                    : post.description}
+                </span>
+              </>
+            )}
+
           </span>
         );
       }
@@ -82,12 +128,23 @@ function NotificationsPopup({ toggleVisibility }) {
           <span>
             commented on your{" "}
             <Link
-              to={isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`}
+              to={isInvestor ? `/investor/post/${post._id}` : `/posts/${post._id}`}
               className="fw-bold"
               onClick={() => handleOnClickLink(notificationId)}
             >
               post
             </Link>
+            {post.description && (
+              <>
+                <br />
+                <span className="text-muted">
+                  {post.description.length > 100
+                    ? `${post.description.slice(0, 100)}...`
+                    : post.description}
+                </span>
+              </>
+            )}
+
           </span>
         );
       }
@@ -226,7 +283,7 @@ function NotificationsPopup({ toggleVisibility }) {
                       />
                     </div>
                     <div className="actions d-flex flex-column gap-1">
-                      {!isRead && (
+                      {/* {!isRead && (
                         <button
                           className="btn btn-light btn-sm"
                           onClick={() => markAsRead(_id)}
@@ -236,7 +293,9 @@ function NotificationsPopup({ toggleVisibility }) {
                           </span>
                           <span className="d-md-none text-secondary">✔</span>
                         </button>
-                      )}
+                      )} */}
+
+                      {post && displayPost(post)}
                     </div>
                   </div>
                 )
