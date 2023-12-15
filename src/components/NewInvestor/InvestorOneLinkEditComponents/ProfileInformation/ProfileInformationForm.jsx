@@ -1,20 +1,39 @@
-import { Form } from "react-bootstrap";
+import { Form, Spinner } from "react-bootstrap";
 import "./ProfileInformationForm.scss";
 import { Button, InputGroup } from "react-bootstrap";
 import IconCloudUpload from "../../../Investor/SvgIcons/IconCloudUpload";
+import { useEffect, useState } from "react";
+import { getBase64 } from "../../../../utils/getBase64";
+import { postInvestorData, updateUserAPI } from "../../../../Service/user";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loginSuccess,
+  selectUserProfilePicture,
+  selectUserSocialLinks,
+  updateUserCompany,
+} from "../../../../Store/features/user/userSlice";
 
 export default function ProfileInformationForm() {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const userProfilePicture = useSelector(selectUserProfilePicture);
+  const userSocialLinks = useSelector(selectUserSocialLinks);
+
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
   async function handleProfileInfoSubmit(e) {
     e.preventDefault();
+    setLoading(true);
 
     const {
       designation,
       location,
       bio,
-      yearsOfExperience,
+      experience,
       website,
       linkedin,
-      facebook,
+      // facebook,
       twitter,
       instagram,
     } = e.target;
@@ -23,25 +42,46 @@ export default function ProfileInformationForm() {
       designation: designation.value,
       location: location.value,
       bio: bio.value,
-      yearsOfExperience: yearsOfExperience.value,
+      experience: experience.value,
     };
+
+    if (selectedFile) {
+      const picture = await getBase64(selectedFile);
+      updatedUserData.profilePicture = picture;
+    }
 
     let updatedSocialLinks = {
       socialLinks: {
         website: website.value,
         linkedin: linkedin.value,
-        facebook: facebook.value,
+        // facebook: facebook.value,
         twitter: twitter.value,
         instagram: instagram.value,
       },
+      founderId: loggedInUser._id,
     };
 
-    console.log(
-      "user data",
-      updatedUserData,
-      "company data",
-      updatedSocialLinks
-    );
+    console.log("user data", updatedUserData);
+    console.log("company data", updatedSocialLinks);
+    // Update User data
+    try {
+      const { data } = await updateUserAPI(updatedUserData);
+      // console.log("post Investor user data", data);
+      dispatch(loginSuccess(data));
+    } catch (error) {
+      console.error("Error saving Profile Info(user)", error);
+    }
+
+    // update company data
+    try {
+      const { data } = await postInvestorData(updatedSocialLinks);
+      // console.log("post Investor", data);
+      dispatch(updateUserCompany({ socialLinks: data.socialLinks }));
+    } catch (error) {
+      console.error("Error saving profile Info(company)", error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -52,35 +92,72 @@ export default function ProfileInformationForm() {
       <Form.Group controlId="onelink-profilePicture" className="form-group">
         <p className="mb-3 fs-5">Profile Picture</p>
         <Form.Label style={{ cursor: "pointer" }} className="picture-label">
-          <IconCloudUpload height={40} width={40} />
+          {selectedFile ? (
+            <img
+              src={URL.createObjectURL(selectedFile)}
+              alt="profile"
+              width={100}
+              height={100}
+              className="rounded-circle object-fit-cover"
+            />
+          ) : userProfilePicture ? (
+            <img
+              src={userProfilePicture}
+              alt="profile"
+              width={100}
+              height={100}
+              className="rounded-circle object-fit-cover shadow-lg"
+            />
+          ) : (
+            <IconCloudUpload height={40} width={40} />
+          )}
         </Form.Label>
         <input
           type="file"
           name="profilePicture"
           id="onelink-profilePicture"
           className="visually-hidden"
+          onInput={(e) => setSelectedFile(e.target.files[0])}
         />
       </Form.Group>
 
       <InputGroup className="flex-column flex-md-row gap-4">
         <Form.Group controlId="onelink-designation" className="form-group">
           <Form.Label className="text-capitalize">designation</Form.Label>
-          <Form.Control type="text" name="designation" />
+          <Form.Control
+            type="text"
+            name="designation"
+            defaultValue={loggedInUser.designation}
+          />
         </Form.Group>
         <Form.Group controlId="onelink-location" className="form-group">
           <Form.Label className="text-capitalize">location</Form.Label>
-          <Form.Control type="text" name="location" />
+          <Form.Control
+            type="text"
+            name="location"
+            defaultValue={loggedInUser.location}
+          />
         </Form.Group>
       </InputGroup>
 
       <Form.Group controlId="onelink-bio" className="form-group">
         <Form.Label className="text-capitalize">bio</Form.Label>
-        <Form.Control as={"textarea"} rows={5} type="text" name="bio" />
+        <Form.Control
+          as={"textarea"}
+          rows={5}
+          type="text"
+          name="bio"
+          defaultValue={loggedInUser.bio}
+        />
       </Form.Group>
 
-      <Form.Group controlId="onelink-yearsOfExperience" className="form-group">
+      <Form.Group controlId="onelink-experience" className="form-group">
         <Form.Label className="text-capitalize">Current Experience</Form.Label>
-        <Form.Control type="text" name="yearsOfExperience" />
+        <Form.Control
+          type="text"
+          name="experience"
+          defaultValue={loggedInUser.experience}
+        />
       </Form.Group>
 
       <div className="divider d-flex align-items-center">
@@ -106,32 +183,60 @@ export default function ProfileInformationForm() {
       <InputGroup className="flex-column flex-md-row gap-4">
         <Form.Group controlId="onelink-website" className="form-group">
           <Form.Label className="text-capitalize">website</Form.Label>
-          <Form.Control type="url" name="website" />
+          <Form.Control
+            type="url"
+            name="website"
+            defaultValue={userSocialLinks.website}
+          />
         </Form.Group>
         <Form.Group controlId="onelink-linkedin" className="form-group">
           <Form.Label className="text-capitalize">LinkedIn</Form.Label>
-          <Form.Control type="url" name="linkedin" />
+          <Form.Control
+            type="url"
+            name="linkedin"
+            defaultValue={userSocialLinks.linkedin}
+          />
         </Form.Group>
       </InputGroup>
       <InputGroup className="flex-column flex-md-row gap-4">
-        <Form.Group controlId="onelink-facebook" className="form-group">
+        {/* <Form.Group controlId="onelink-facebook" className="form-group">
           <Form.Label className="text-capitalize">facebook</Form.Label>
           <Form.Control type="url" name="facebook" />
+        </Form.Group> */}
+        <Form.Group controlId="onelink-instagram" className="form-group">
+          <Form.Label className="text-capitalize">instagram</Form.Label>
+          <Form.Control
+            type="url"
+            name="instagram"
+            defaultValue={userSocialLinks.instagram}
+          />
         </Form.Group>
         <Form.Group controlId="onelink-twitter" className="form-group">
           <Form.Label className="text-capitalize">twitter</Form.Label>
-          <Form.Control type="url" name="twitter" />
+          <Form.Control
+            type="url"
+            name="twitter"
+            defaultValue={userSocialLinks.twitter}
+          />
         </Form.Group>
       </InputGroup>
-      <Form.Group controlId="onelink-instagram" className="form-group">
-        <Form.Label className="text-capitalize">instagram</Form.Label>
-        <Form.Control type="url" name="instagram" />
-      </Form.Group>
 
       {/* Action button */}
       <div className="d-flex">
-        <Button type="submit" variant="investor" className="ms-auto">
-          Save
+        <Button
+          type="submit"
+          variant="investor"
+          className="ms-auto d-flex align-items-center gap-2"
+          disabled={loading}
+        >
+          {loading ? (
+            <>
+              <Spinner size="sm" variant="black" />
+              {"Saving..."}
+            </>
+          ) : (
+            "Save"
+          )}
         </Button>
       </div>
     </Form>

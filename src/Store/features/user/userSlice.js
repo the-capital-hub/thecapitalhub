@@ -188,5 +188,6 @@ export const selectMyPastInvestments = (state) =>
 export const selectFundingQuestions = (state) =>
   state.user.loggedInUser?.fundingViaCapitalhubQuestions;
 export const selectUserOneLink = (state) => state.user.company?.oneLink;
+export const selectUserSocialLinks = (state) => state.user.company?.socialLinks;
 
 export default userSlice.reducer;
