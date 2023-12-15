@@ -61,7 +61,7 @@ export default function UserBio({ canEdit = true, bioText = "" }) {
             <span className="ms-auto d-flex align-items-center gap-2">
               <button
                 type="button"
-                className="btn"
+                className="btn d-flex align-items-center gap-1"
                 onClick={() => {
                   setBioContent(userBio);
                   setIsBioEditable(!isBioEditable);
@@ -74,7 +74,7 @@ export default function UserBio({ canEdit = true, bioText = "" }) {
               {isBioEditable && (
                 <button
                   type="submit"
-                  className="btn ms-2 d-flex justify-content-center align-items-center gap-2"
+                  className="btn ms-2 d-flex align-items-center gap-2"
                   onClick={() => submitBioHandler()}
                   disabled={loading}
                 >
