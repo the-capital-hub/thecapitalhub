@@ -192,39 +192,53 @@ const userSchema = new Schema(
         type: String,
       },
     ],
-    importanceOfManagament: {
-      type: String,
+    investmentPhilosophy: {
+      importanceOfManagement: String,
+      roleAsAInvestor: String,
+      founderAlmaMaterMatters: String,
+      riskManagementInInvestments: String,
+      guideOnSellingInvestments: String,
+      timingInInvestmentDecisions: String,
+      macroeconomicFactorsInfluenceInvestments: String,
+      assessCompanyCompetitiveAdvantage: String,
+      industryTrendsHoldInYourStrategy: String,
+      evaluateCompanyGrowthPotential: String,
+      weightGaveToTechnologicalInnovation: String,
     },
-    roleAsAInvestor: {
-      type: String,
-    },
-    founderAlmaMaterMatters: {
-      type: String,
-    },
-    riskManagementInInvestments: {
-      type: String,
-    },
-    guideOnSellingInvestments: {
-      type: String,
-    },
-    timingInInvestmentDecisions: {
-      type: String,
-    },
-    macroeconomicFactorsInfluenceInvestments: {
-      type: String,
-    },
-    assessCompanyCompetitiveAdvantage: {
-      type: String,
-    },
-    industryTrendsHoldInYourStrategy: {
-      type: String,
-    },
-    evaluateCompanyGrowthPotential: {
-      type: String,
-    },
-    weightGaveToTechnologicalInnovation: {
-      type: String,
-    },
+
+    // importanceOfManagament: {
+    //   type: String,
+    // },
+    // roleAsAInvestor: {
+    //   type: String,
+    // },
+    // founderAlmaMaterMatters: {
+    //   type: String,
+    // },
+    // riskManagementInInvestments: {
+    //   type: String,
+    // },
+    // guideOnSellingInvestments: {
+    //   type: String,
+    // },
+    // timingInInvestmentDecisions: {
+    //   type: String,
+    // },
+    // macroeconomicFactorsInfluenceInvestments: {
+    //   type: String,
+    // },
+    // assessCompanyCompetitiveAdvantage: {
+    //   type: String,
+    // },
+    // industryTrendsHoldInYourStrategy: {
+    //   type: String,
+    // },
+    // evaluateCompanyGrowthPotential: {
+    //   type: String,
+    // },
+    // weightGaveToTechnologicalInnovation: {
+    //   type: String,
+    // },
     investmentSize: {
       type: String,
     },

@@ -265,7 +265,7 @@ function Profile() {
                   background="#BB98FF"
                   text="Last round investment"
                   image={About1}
-                  amount={colorCard.last_round_investment}
+                  amount={colorCard?.last_round_investment || 0}
                   isOneLink={true}
                 />
                 <ColorCard
@@ -273,7 +273,7 @@ function Profile() {
                   background="#DAC191"
                   text="Total Investment"
                   image={About2}
-                  amount={colorCard.total_investment}
+                  amount={colorCard?.total_investment || 0}
                   isOneLink={true}
                 />
                 <ColorCard
@@ -281,7 +281,7 @@ function Profile() {
                   background="#DCDCDC"
                   text="No.of Investers"
                   image={About3}
-                  amount={colorCard.no_of_investers}
+                  amount={colorCard?.no_of_investers || 0}
                   isOneLink={true}
                   noRupee={true}
                 />
@@ -290,7 +290,7 @@ function Profile() {
                   background="#2B2B2B"
                   text="Fund ask"
                   image={About4}
-                  amount={colorCard.fund_ask}
+                  amount={colorCard?.fund_ask || 0}
                   isOneLink={true}
                 />
                 <ColorCard
@@ -298,7 +298,7 @@ function Profile() {
                   background="#FF7373"
                   text="Valuation"
                   image={Revenue1}
-                  amount={colorCard.valuation}
+                  amount={colorCard?.valuation || 0}
                   isOneLink={true}
                 />
                 <ColorCard
@@ -306,7 +306,7 @@ function Profile() {
                   background="#9198DA"
                   text="Raised funds"
                   image={Revenue2}
-                  amount={colorCard.raised_funds}
+                  amount={colorCard?.raised_funds || 0}
                   isOneLink={true}
                 />
               </div>

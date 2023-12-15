@@ -4,8 +4,9 @@ import "./IntroductoryMessage.scss";
 import { VscSend } from "react-icons/vsc";
 
 import { updateIntroMsgAPI, postInvestorData } from "../../../../Service/user";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
+import { setUserCompany } from "../../../../Store/features/user/userSlice";
 
 const IntroductoryMessage = ({
   title,
@@ -25,6 +26,7 @@ const IntroductoryMessage = ({
   const [showPreviousMessages, setShowPreviousMessages] =
     useState(showPreviousIM);
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const togglePreviousMessages = () => {
     setShowPreviousMessages(!showPreviousMessages);
@@ -47,14 +49,17 @@ const IntroductoryMessage = ({
         } else {
           updatedMessages = [formattedMsg];
         }
-        await postInvestorData({
+        const response = await postInvestorData({
           founderId: loggedInUser._id,
           introductoryMessage: formattedMsg,
           previousIntroductoryMessage: updatedMessages,
         });
+        dispatch(setUserCompany(response.data));
       } else {
         console.log(formattedMsg);
-        await updateIntroMsgAPI({ introductoryMessage: formattedMsg });
+        const { data: response } = await updateIntroMsgAPI({ introductoryMessage: formattedMsg });
+        console.log(response.data.data);
+        dispatch(setUserCompany(response.data.data));
       }
       setNewPara(formattedMsg);
       setCompany((prevCompany) => ({
@@ -75,9 +80,8 @@ const IntroductoryMessage = ({
       <div className="box_container rounded-4 border shadow-sm">
         <section className="title_section ">
           <div
-            className={`title_wrapper ${
-              !para ? "title-only-border" : "default-border"
-            } rounded-4`}
+            className={`title_wrapper ${!para ? "title-only-border" : "default-border"
+              } rounded-4`}
           >
             <h6>{title}</h6>
             {para && (
