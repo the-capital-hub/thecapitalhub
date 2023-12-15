@@ -1,9 +1,9 @@
-.manage_account_settings {
+.CloseAccount {
     background-color: var(--white-to-grey);
     color: var(--d-l-grey);
     border-radius: 0;
     max-width: 75%;
-
+  
     @media (min-width: 821px) {
       border-radius: var(--border-radius);
       min-width: 40vw;
@@ -16,13 +16,14 @@
       color: var(--d-l-grey);
 
     }
-    
-  .forgotpassword{
-    background-color: var(--bs-light);
-    color: var(--d-l-grey);
-    outline: none;
-    border: none;
-  }
+  
+    .two_step_verification,
+    .sent_code {
+      background-color: var(--bs-light);
+      color: var(--d-l-grey);
+      outline: none;
+      border: none;
+    }
     form {
       display: flex;
       flex-direction: column;
@@ -40,17 +41,16 @@
         background-color: transparent;
         padding: 0;
         position: relative;
-        
   
         &:focus-within {
           transition: border 0.15s ease-in-out;
           border: 1px solid #fd5901;
         }
   
-      //   &:focus-within {
-      //     transition: border 0.15s ease-in-out;
-      //     border: 1px solid rgba(178, 204, 93, 1);
-      //   }
+        //   &:focus-within {
+        //     transition: border 0.15s ease-in-out;
+        //     border: 1px solid rgba(178, 204, 93, 1);
+        //   }
   
         .professional_form_input {
           border: none;
@@ -76,21 +76,51 @@
       legend {
         margin-left: 2em;
         padding-inline: 1em;
-        color:var(--d-l-grey);
+        color: var(--d-l-grey);
         font-size: 12px;
         font-weight: 500;
       }
       button {
-          border-radius: 131px;
-          border: 1px solid var(--bs-border-color);
-          width: 107px;
-          height: 35px;
-          flex-shrink: 0;
-          color: #717171;
-          font-size: 18px;
-          font-family: Poppins;
-          cursor: pointer;
+        border-radius: 131px;
+        border: 1px solid var(--bs-border-color);
+        width: 107px;
+        height: 35px;
+        flex-shrink: 0;
+        color: #717171;
+        font-size: 18px;
+        font-family: Poppins;
+        cursor: pointer;
       }
+      .input-group{
+        margin-top: -7px;
+  
+      }
+      .form-control {
+        display: block;
+        width: 100%;
+         padding: 0;  
+        width: 1% !important;
+        outline: none !important;
+        border: none !important;
+        background: transparent !important;
+        &:focus{
+          outline: none !important;
+          box-shadow: none !important;
+    
+        }
+    }
+    #button-addon2{
+      outline: none !important;
+      border-bottom:none !important ;
+      border-top:none !important ;
+      border-right:none !important ;
+      height: 45px;
+  
+      &:hover{
+        background: transparent !important;
+      }
+     
+    }
     }
   }
   
