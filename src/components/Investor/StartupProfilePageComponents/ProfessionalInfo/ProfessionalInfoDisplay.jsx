@@ -8,6 +8,31 @@ import {
   selectLoggedInUserId,
 } from "../../../../Store/features/user/userSlice";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
+import { educationOptions } from "../../../../constants/Startups/ExplorePage";
+
+const EXPERIENCE_OPTIONS = [
+  "0",
+  "1 year",
+  "2 years",
+  "3 years",
+  "4 years",
+  "5 years",
+  "6 years",
+  "7 years",
+  "8 years",
+  "9 years",
+  "10 years",
+  "11 years",
+  "12 years",
+  "13 years",
+  "14 years",
+  "15 years",
+  "16 years",
+  "17 years",
+  "18 years",
+  "19 years",
+  "20 years",
+];
 
 export default function ProfessionalInfoDisplay({
   professionalData,
@@ -47,12 +72,18 @@ export default function ProfessionalInfoDisplay({
         {canEdit && (
           <span className="edit_btn d-flex align-self-end align-md-self-start ">
             <span className=" ms-auto d-flex flex-row gap-2">
-              <button className=" btn" onClick={() => setIsEditing(!isEditing)}>
+              <button
+                className="btn d-flex align-items-center gap-1"
+                onClick={() => setIsEditing(!isEditing)}
+              >
                 {isEditing ? "Cancel" : "Edit"}
                 <CiEdit />
               </button>
               {isEditing && (
-                <button className="btn ms-2" onClick={handleSubmit}>
+                <button
+                  className="btn ms-2 d-flex align-items-center gap-1"
+                  onClick={handleSubmit}
+                >
                   {loading ? (
                     <SpinnerBS spinnerSizeClass="spinner-border-sm" />
                   ) : (
@@ -153,26 +184,62 @@ export default function ProfessionalInfoDisplay({
           {/* Education */}
           <fieldset className={` ${theme} `}>
             <legend className="px-2">Education</legend>
-            <input
+            {/* <input
               type="text"
               className="professional_form_input"
               name="education"
               value={professionalData.education}
               onChange={handleTextChange}
-            />
+            /> */}
+            <select
+              name="education"
+              id="userEducation"
+              onChange={handleTextChange}
+              value={professionalData.education}
+              className="professional_form_input"
+            >
+              <option value="" hidden={Boolean(professionalData.education)}>
+                Education
+              </option>
+              {educationOptions.map((option, index) => {
+                return (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                );
+              })}
+            </select>
           </fieldset>
 
           {/* Experience */}
           <fieldset className={` ${theme} `}>
             <legend className="px-2">Experience</legend>
-            <textarea
+            {/* <textarea
               type="text"
               className="professional_form_input"
               name="experience"
               value={professionalData.experience}
               onChange={handleTextChange}
               rows={5}
-            />
+            /> */}
+            <select
+              name="experience"
+              id="userExperience"
+              onChange={handleTextChange}
+              value={professionalData.experience}
+              className="professional_form_input"
+            >
+              <option value="" hidden={Boolean(professionalData.experience)}>
+                Experience
+              </option>
+              {EXPERIENCE_OPTIONS.map((option, index) => {
+                return (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                );
+              })}
+            </select>
           </fieldset>
         </form>
       )}
