@@ -65,45 +65,40 @@ import { selectIsInvestor } from "../../../Store/features/user/userSlice";
 import { MdOutlineMenu, MdOutlineMenuOpen } from "react-icons/md";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 
-const NavBar = ({ handleSidebarToggle, sidebarCollapsed }) => {
+const NavBar = ({ handleSidebarToggle, sidebarCollapsed, ...props }) => {
   const navigate = useNavigate();
   const isInvestor = useSelector(selectIsInvestor);
 
   return (
-    <>
-      <div className="container">
-        <div className="investor_view_navbar ">
-          <div className="d-flex align-items-center h-100 ms-4">
-            <div className="row bar_logo_container ">
-              <div className="logo_container">
-                <img src={Logo} alt="bar" />
-              </div>
-              <div
-                className="mobile-home-hamberger"
-                onClick={handleSidebarToggle}
-              >
-                {sidebarCollapsed ? (
-                  <MdOutlineMenu size={25} />
-                ) : (
-                  <MdOutlineMenuOpen
-                    size={25}
-                    color="var(--investor)"
-                  />
-                )}
-              </div>
+    <div className="container" {...props}>
+      <div className="investor_view_navbar ">
+        <div className="d-flex align-items-center h-100 ms-4">
+          <div className="row bar_logo_container ">
+            <div className="logo_container">
+              <img src={Logo} alt="bar" />
             </div>
-            <span
-              className="ms-auto m-2 px-2 close-button"
-              onClick={() =>
-                navigate(isInvestor === "true" ? "/investor/home" : "/home")
-              }
+            <div
+              className="mobile-home-hamberger"
+              onClick={handleSidebarToggle}
             >
-              <IoArrowBackCircleOutline size={25} />
-            </span>
+              {sidebarCollapsed ? (
+                <MdOutlineMenu size={25} />
+              ) : (
+                <MdOutlineMenuOpen size={25} color="var(--investor)" />
+              )}
+            </div>
           </div>
+          <span
+            className="ms-auto m-2 px-2 close-button"
+            onClick={() =>
+              navigate(isInvestor === "true" ? "/investor/home" : "/home")
+            }
+          >
+            <IoArrowBackCircleOutline size={25} />
+          </span>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

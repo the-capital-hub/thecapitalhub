@@ -34,7 +34,10 @@ import { BsFire, BsThreeDots } from "react-icons/bs";
 import { BiRepost } from "react-icons/bi";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import { selectVideoAutoplay } from "../../../Store/features/design/designSlice";
+import {
+  selectTheme,
+  selectVideoAutoplay,
+} from "../../../Store/features/design/designSlice";
 
 const FeedPostCard = ({
   postId,
@@ -77,6 +80,8 @@ const FeedPostCard = ({
   const [expanded, setExpanded] = useState(false);
   const [likeModal, setLikeModal] = useState(false);
   const [activeHeader, setActiveHeader] = useState(true);
+
+  const theme = useSelector(selectTheme);
 
   const handleShow = () => setLikeModal(true);
   const handleClose = () => setLikeModal(false);
@@ -607,9 +612,12 @@ const FeedPostCard = ({
             </div>
             {likes && (
               <span
-                className=" mx-3 text-secondary"
-                style={{ fontSize: "14px", cursor: "pointer" }}
-                onClick={handleShow}
+                className="mx-3 text-secondary pb-2 pe-auto d-flex align-items-center gap-1"
+                style={{
+                  fontSize: "12px",
+                  cursor: "pointer",
+                }}
+                onClick={() => (likedBy ? handleShow() : "")}
               >
                 {likedBy ? (
                   <>
@@ -1200,39 +1208,43 @@ const FeedPostCard = ({
           )}
         </ModalBSFooter>
       </ModalBSContainer>
-      <Modal show={likeModal} onHide={handleClose} centered>
+      <Modal
+        show={likeModal}
+        onHide={handleClose}
+        centered
+        data-bs-theme={theme}
+        id="reactionsModalInvestor"
+      >
         <Modal.Header closeButton>
           <Modal.Title>Reactions</Modal.Title>
         </Modal.Header>
         <div className=" reactions_investor d-flex gap-4 border-bottom border-1 py-2 px-3">
-          <h5
-            className={`nav-item ${activeHeader === true ? "active" : ""}`}
+          <h6
+            className={`nav-item m-0 ${
+              activeHeader === true ? "active" : "text-secondary"
+            }`}
             onClick={() => setActiveHeader(true)}
           >
-            ALL
-          </h5>
-          <h5
-            className={`nav-item ${activeHeader === false ? "active" : ""}`}
+            All
+          </h6>
+          <h6
+            className={`nav-item m-0 ${
+              activeHeader === false ? "active" : "text-secondary"
+            }`}
             onClick={() => setActiveHeader(false)}
           >
-            LIKE
-          </h5>
+            Likes
+          </h6>
         </div>
         <Modal.Body>
           {likedByUsers?.map((user) => (
-            <div className="Reactions d-flex align-items-center p-2 border-bottom border-1">
-              <img
-                src={user.profilePicture}
-                alt="user"
-                width={50}
-                height={50}
-                className="rounded-pill "
-              />
-              <div className="p-1">
-                <h5>
+            <div className="user-list d-flex align-items-center gap-2 p-2 border-bottom border-1">
+              <img src={user.profilePicture} alt="user" />
+              <div>
+                <h6 className="m-0">
                   {user.firstName} {user.lastName}
-                </h5>
-                <p className="m-0">{user.designation}</p>
+                </h6>
+                <p className="m-0 text-secondary fs-xs">{user.designation}</p>
               </div>
             </div>
           ))}
