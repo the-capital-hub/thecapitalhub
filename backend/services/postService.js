@@ -140,14 +140,42 @@ export const allPostsData = async (page, perPage) => {
 
 export const singlePostData = async (_id) => {
   try {
-    const post = await PostModel.findOne({ _id }).populate("user").exec();
-    const resharedPost = await PostModel.findById(post.resharedPostId)
+    const post = await PostModel.findOne({ _id })
       .populate({
         path: "user",
-        select: "firstName lastName profilePicture designation",
+        select:
+          "firstName lastName designation profilePicture investor startUp",
+        populate: [
+          {
+            path: "investor",
+            select: "companyName",
+          },
+          {
+            path: "startUp",
+            select: "company",
+          },
+        ],
       })
-      .exec();
-    post.resharedPostId = resharedPost;
+      .populate({
+        path: "resharedPostId",
+        select: "",
+        populate: [
+          {
+            path: "user",
+            select: "firstName lastName designation profilePicture investor startUp",
+            populate: [
+              {
+                path: "investor",
+                select: "companyName",
+              },
+              {
+                path: "startUp",
+                select: "company",
+              },
+            ],
+          },
+        ],
+      })
     return post;
   } catch (error) {
     console.error(error);
