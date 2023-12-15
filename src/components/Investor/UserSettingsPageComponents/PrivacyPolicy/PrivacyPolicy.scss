@@ -14,8 +14,17 @@
         line-height: normal;
         text-align: center;
       }
-      .updated_text {
+      .updated_textstartup {
         color: #fd5901;
+        font-family: Poppins;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-align: center;
+      }
+      .updated_textinvestor {
+        color: #d3f36b;
         font-family: Poppins;
         font-size: 18px;
         font-style: normal;
@@ -77,9 +86,14 @@
       .decline_btn {
         background: #9c9c9c;
       }
-      .accept_btn {
+      .accept_btnstartup {
         background: #fd5901;
         margin-left: 10px;
+      }
+      .accept_btninvestor {
+        background: #d3f36b;
+        margin-left: 10px;
+        color: black;
       }
     }
   }

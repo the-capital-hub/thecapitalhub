@@ -108,18 +108,10 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
           <SidebarHeader>
             <div className="logotext">
               {sidebarCollapsed ? (
-                <img
-                  className="rounded-circle"
-                  src={user.profilePicture}
-                  alt="user profile"
-                />
+                <img src={user.profilePicture} alt="user profile" />
               ) : (
                 <>
-                  <img
-                    src={user.profilePicture}
-                    alt="user profile"
-                    className="rounded-circle"
-                  />
+                  <img src={user.profilePicture} alt="user profile" />
                   <h3 className="fs-6 mt-2">
                     {user?.firstName} {user?.lastName}
                   </h3>
