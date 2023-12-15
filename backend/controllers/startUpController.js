@@ -83,7 +83,7 @@ export const editStartUpIntroMessage = async (req, res) => {
     const { status, ...data } = await updateStartUpData(req.userId, introductoryMessage);
     res.status(status).send({
       message: data.message,
-      data: { introductoryMessage: data.data.introductoryMessage },
+      data: data,
     });
   } catch (error) {
     console.log("Error updating Introductory message: ", error);
