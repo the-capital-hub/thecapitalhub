@@ -299,14 +299,14 @@ const InvestorNavbar = (props) => {
                               </h6>
                             )}
                           {!!searchSuggestions?.users?.length && (
-                            <span className="">Users</span>
+                            <span className="search-heading">Users</span>
                           )}
                           {searchSuggestions?.users
                             ?.slice(0, 5)
                             .map(({ firstName, lastName, _id }) => (
                               <span
                                 key={_id}
-                                className="single_result"
+                                className="single_result text-secondary"
                                 onClick={() => navigate(`/user/${_id}`)}
                               >
                                 {firstName} {lastName}
@@ -326,7 +326,7 @@ const InvestorNavbar = (props) => {
                             </span>
                           )}
                           {!!searchSuggestions?.company?.length && (
-                            <span className="mt-2">Companies</span>
+                            <span className="mt-2 search-heading">Companies</span>
                           )}
                           {searchSuggestions?.company
                             ?.slice(0, 5)
