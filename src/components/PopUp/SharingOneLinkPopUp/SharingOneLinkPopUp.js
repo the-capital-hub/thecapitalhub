@@ -159,13 +159,13 @@ const SharingOneLinkPopUp = ({
               <FacebookIcon size={32} round />
             </FacebookShareButton>
             <WhatsappShareButton
-              url={`\nHere is Our OneLink : https://thecapitalhub.in/${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`}
+              url={`\nHere is Our OneLink : https://thecapitalhub.in${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`}
               title={messageForSharing}
             >
               <WhatsappIcon size={32} round />
             </WhatsappShareButton>
             <EmailShareButton
-              url={`${shareUrl} \nSecret Key: https://thecapitalhub.in/${loggedInUser.secretKey}`}
+              url={`${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`}
               body={messageForSharing}
             >
               <EmailIcon size={32} round />
@@ -179,7 +179,7 @@ const SharingOneLinkPopUp = ({
               }}
               onClick={() =>
                 copyToClipboard(
-                  `${messageForSharing} \nHere is Our OneLink: https://thecapitalhub.in/${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`
+                  `${messageForSharing} \nHere is Our OneLink: https://thecapitalhub.in${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`
                 )
               }
             />
