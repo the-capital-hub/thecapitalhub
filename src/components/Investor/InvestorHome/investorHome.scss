@@ -34,7 +34,7 @@
     }
 
     .small_typo {
-      color: #717171;
+      color: var(--d-l-grey);
       font-size: 16px;
       font-weight: 500;
       font-family: Poppins;
@@ -112,10 +112,10 @@
       button {
         border-radius: 131px;
         border: 1px solid var(--bs-border-color);
-        width: 107px;
+        width: fit-content;
         height: 35px;
         flex-shrink: 0;
-        color: #717171;
+        color: var(--d-l-grey);
         font-size: 18px;
         font-family: Poppins;
         cursor: pointer;
@@ -170,10 +170,10 @@
     .personal_information_header button {
       border-radius: 131px;
       border: 1px solid var(--bs-border-color);
-      width: 107px;
+      width: fit-content;
       height: 35px;
       flex-shrink: 0;
-      color: #717171;
+      color: var(--d-l-grey);
       font-size: 18px;
       font-family: Poppins;
       cursor: pointer;
