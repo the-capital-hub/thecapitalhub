@@ -213,18 +213,21 @@ function NotificationsPopup({ toggleVisibility }) {
   };
 
   // Handle Notification click
-  function handleNotificationClick(e, type, _id) {
+  function handleNotificationClick(e, type, post) {
     // Gaurd clause that checks if event is coming from notification div. If it is not , we do nothing.
-    if (!e.target.classList.contains("notification")) {
+    if (e.target.classList.contains("user-name")) {
       return;
     }
-
     if (type.includes("post")) {
-      navigate(isInvestor ? `/investor/post/${_id}` : `/posts/${_id}`);
+      navigate(isInvestor ? `/investor/post/${post._id}` : `/posts/${post._id}`);
       toggleVisibility(false);
-    } else {
-      return;
-    }
+    } else
+      if (type.includes("connection")) {
+        navigate(isInvestor ? `/investor/connection` : `/connection`);
+        toggleVisibility(false);
+      } else {
+        return;
+      }
   }
 
   return (
@@ -264,7 +267,7 @@ function NotificationsPopup({ toggleVisibility }) {
                               ? `/investor/user/${sender?._id}`
                               : `/user/${sender?._id}`
                           }
-                          className="fw-bold"
+                          className="fw-bold user-name"
                           onClick={() => handleOnClickLink(_id)}
                         >
                           {sender?.firstName} {sender?.lastName}
