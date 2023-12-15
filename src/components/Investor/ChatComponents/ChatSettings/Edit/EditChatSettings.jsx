@@ -95,11 +95,11 @@ export default function EditChatSettings({ theme = "startup" }) {
   return (
     <div className="edit_settings_container d-flex flex-column gap-3">
       <fieldset className="edit_about rounded-4">
-        <legend className="px-2 py-1 bg-white rounded-pill">About</legend>
+        <legend className="px-2 py-1 rounded-pill">About</legend>
         <textarea
           name="about"
           id="about"
-          rows="8"
+          rows="5"
           className="edit_chat_input"
           value={aboutText}
           onChange={handleTextAreaChange}
@@ -116,8 +116,8 @@ export default function EditChatSettings({ theme = "startup" }) {
       <hr />
       Add New members:
       {/* Display added members */}
-      <div className="added-members">
-        {addedMembers.length > 0 && (
+      {addedMembers.length > 0 && (
+        <div className="added-members">
           <div className="added-members-list">
             <strong>Added Members:</strong>
             <ul>
@@ -128,8 +128,8 @@ export default function EditChatSettings({ theme = "startup" }) {
               ))}
             </ul>
           </div>
-        )}
-      </div>
+        </div>
+      )}
       {/* members */}
       <div className="top__contacts p-2 d-flex flex-column gap-2 ">
         {unAddedMembers?.map((member, index) => {
@@ -138,14 +138,13 @@ export default function EditChatSettings({ theme = "startup" }) {
           );
           return (
             <div
-              className="p-2 d-flex justify-content-between align-items-center rounded-4 bg-light"
+              className="single-member p-2 d-flex justify-content-between align-items-center rounded-4"
               key={member?._id}
             >
               <img
                 src={member?.profilePicture}
                 alt="contact"
                 className="img-fluid"
-                style={{ maxWidth: "60px", borderRadius: "50%" }}
               />
 
               <h6 className="m-0">
