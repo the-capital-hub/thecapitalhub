@@ -37,6 +37,10 @@ export const getNotificationsByUserId = async (userId) => {
         path: "achievementId",
         select: "title description badge",
       })
+      .populate({
+        path: "post",
+        select: "image video description documentName"
+      })
       .sort({ _id: -1 });
 
     const filteredNotifications = await Promise.all(
