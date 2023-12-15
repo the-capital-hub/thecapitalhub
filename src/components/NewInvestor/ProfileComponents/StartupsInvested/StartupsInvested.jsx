@@ -45,7 +45,7 @@ export default function StartupsInvested() {
             {/* {investor?.founderId === loggedInUser._id && ( */}
             <ModalBsLauncher
               id="startupsModal"
-              className={"green_button px-2 px-sm-3 "}
+              className={"btn btn-investor px-2 px-sm-3 "}
             >
               Add New
             </ModalBsLauncher>

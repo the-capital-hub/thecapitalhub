@@ -62,7 +62,7 @@ export default function SectorPreferences({
                     name={sector}
                     onClick={handleSectorSelect}
                     autoComplete="off"
-                    defaultChecked={userSectorPreferences.includes(sector)}
+                    defaultChecked={userSectorPreferences?.includes(sector)}
                   />
                   <label className="btn btn-outline-investor" htmlFor={sector}>
                     {sector}
@@ -88,7 +88,7 @@ export default function SectorPreferences({
                 name={sector}
                 onClick={handleSectorSelect}
                 autoComplete="off"
-                defaultChecked={userSectorPreferences.includes(sector)}
+                defaultChecked={userSectorPreferences?.includes(sector)}
               />
               <label className="btn btn-outline-primary" htmlFor={sector}>
                 {sector}
