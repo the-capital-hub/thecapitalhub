@@ -23,6 +23,7 @@ import {
   selectMyInterests,
   selectUserInvestor,
   selectUserStartupsInvested,
+  selectMyPastInvestments,
 } from "../../../Store/features/user/userSlice";
 
 // Mock data for my investments
@@ -60,6 +61,7 @@ const MyStartUp = () => {
   const userInvestor = useSelector(selectUserInvestor);
   const userStartupsInvested = useSelector(selectUserStartupsInvested);
   const userMyInterests = useSelector(selectMyInterests);
+  const pastInvestments = useSelector(selectMyPastInvestments);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -74,7 +76,7 @@ const MyStartUp = () => {
   const [investedStartups, setInvestedStartups] =
     useState(userStartupsInvested);
   const [myInterests, setMyInterests] = useState(userMyInterests);
-  const [pastInvestment, setPastInvestment] = useState("");
+  const [pastInvestment, setPastInvestment] = useState(pastInvestments);
 
   // const [investor, setInvestor] = useState([]);
 
