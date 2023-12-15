@@ -12,9 +12,9 @@ export default function GeneralPreferences() {
       <div className="border-top px-3 py-3">
         <SettingsBar text={"Auto Play Videos"} link={"auto-play-settings"}/>
       </div>
-      <div className="border-top px-3 py-3">
+      {/* <div className="border-top px-3 py-3">
         <SettingsBar text={"Content Language"} link={"content-language-settings"}/>
-      </div>
+      </div> */}
     </div>
   );
 }
