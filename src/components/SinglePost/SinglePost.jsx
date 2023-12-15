@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import SpinnerBS from "../Shared/Spinner/SpinnerBS";
 import MaxWidthWrapper from "../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import InvestorRightProfileCard from "../../components/NewInvestor/InvestorRightProfileCard/InvestorRightProfileCard";
+import InvestorFeedPostCard from "../NewInvestor/InvesterFeedPostCard/InvestorFeedPostCard";
 
 function SinglePost() {
   const [postData, setPostData] = useState(null);
@@ -68,29 +69,59 @@ function SinglePost() {
       <div className="single-post-page">
         {!postLoading ? (
           <>
-            <FeedPostCard
-              userId={postData?.user?._id}
-              postId={postData?._id}
-              designation={postData?.user?.designation}
-              profilePicture={postData?.user?.profilePicture}
-              description={postData?.description}
-              firstName={postData?.user?.firstName}
-              lastName={postData?.user?.lastName}
-              video={postData?.video}
-              image={postData?.image}
-              documentName={postData?.documentName}
-              documentUrl={postData?.documentUrl}
-              createdAt={postData?.createdAt}
-              likes={postData?.likes}
-              response={getSavedPostData}
-              repostWithToughts={(resharedPostId) => {
-                setRepostingPostId(resharedPostId);
-                openPopup();
-              }}
-              repostInstantly={repostInstantly}
-              resharedPostId={postData?.resharedPostId}
-              isSinglePost={true}
-            />
+            {loggedInUser.isInvestor === "true" ?
+              <InvestorFeedPostCard
+                userId={postData?.user?._id}
+                postId={postData?._id}
+                designation={postData?.user?.designation}
+                profilePicture={postData?.user?.profilePicture}
+                startUpCompanyName={postData?.user?.startUp}
+                investorCompanyName={postData?.user?.investor}
+                description={postData?.description}
+                firstName={postData?.user?.firstName}
+                lastName={postData?.user?.lastName}
+                video={postData?.video}
+                image={postData?.image}
+                documentName={postData?.documentName}
+                documentUrl={postData?.documentUrl}
+                createdAt={postData?.createdAt}
+                likes={postData?.likes}
+                response={getSavedPostData}
+                repostWithToughts={(resharedPostId) => {
+                  setRepostingPostId(resharedPostId);
+                  openPopup();
+                }}
+                repostInstantly={repostInstantly}
+                resharedPostId={postData?.resharedPostId}
+                isSinglePost={true}
+              />
+              :
+              <FeedPostCard
+                userId={postData?.user?._id}
+                postId={postData?._id}
+                designation={postData?.user?.designation}
+                profilePicture={postData?.user?.profilePicture}
+                startUpCompanyName={postData?.user?.startUp}
+                investorCompanyName={postData?.user?.investor}
+                description={postData?.description}
+                firstName={postData?.user?.firstName}
+                lastName={postData?.user?.lastName}
+                video={postData?.video}
+                image={postData?.image}
+                documentName={postData?.documentName}
+                documentUrl={postData?.documentUrl}
+                createdAt={postData?.createdAt}
+                likes={postData?.likes}
+                response={getSavedPostData}
+                repostWithToughts={(resharedPostId) => {
+                  setRepostingPostId(resharedPostId);
+                  openPopup();
+                }}
+                repostInstantly={repostInstantly}
+                resharedPostId={postData?.resharedPostId}
+                isSinglePost={true}
+              />
+            }
             {popupOpen && (
               <CreatePostPopUp
                 setPopupOpen={setPopupOpen}

@@ -225,9 +225,12 @@ function NotificationsPopup({ toggleVisibility }) {
       if (type.includes("connection")) {
         navigate(isInvestor ? `/investor/connection` : `/connection`);
         toggleVisibility(false);
+      } if (type.includes("achievementCompleted")) {
+        navigate(isInvestor ? `/investor/profile/achievements` : `/profile/achievements`);
+        toggleVisibility(false);
       } else {
-        return;
-      }
+      return;
+    }
   }
 
   return (
