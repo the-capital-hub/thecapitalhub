@@ -661,9 +661,9 @@ const FeedPostCard = ({
           </div>
           {likes && (
             <span
-              className="mx-3 text-secondary pb-2 pe-auto "
+              className="mx-3 text-secondary pb-2 pe-auto d-flex align-items-center gap-1"
               style={{
-                fontSize: "14px",
+                fontSize: "12px",
                 cursor: "pointer",
               }}
               onClick={() => (likedBy ? handleShow() : "")}
