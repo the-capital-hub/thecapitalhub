@@ -2,7 +2,7 @@ import { Form, Spinner } from "react-bootstrap";
 import "./ProfileInformationForm.scss";
 import { Button, InputGroup } from "react-bootstrap";
 import IconCloudUpload from "../../../Investor/SvgIcons/IconCloudUpload";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { getBase64 } from "../../../../utils/getBase64";
 import { postInvestorData, updateUserAPI } from "../../../../Service/user";
 import { useDispatch, useSelector } from "react-redux";
@@ -67,7 +67,7 @@ export default function ProfileInformationForm() {
     try {
       const { data } = await updateUserAPI(updatedUserData);
       // console.log("post Investor user data", data);
-      dispatch(loginSuccess(data));
+      dispatch(loginSuccess(data.data));
     } catch (error) {
       console.error("Error saving Profile Info(user)", error);
     }

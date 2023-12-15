@@ -6,6 +6,7 @@ import { PhilosophyQuestions } from "../../../../constants/Investor/ProfilePage"
 export default function InvestmentPhilosophyForm() {
   async function handlePhilosophySubmit(e) {
     e.preventDefault();
+    console.log("phil form submitted");
   }
 
   return (
