@@ -1,7 +1,11 @@
 import React from "react";
 import './PrivacyPolicy.scss'
+import { selectIsInvestor } from "../../../../Store/features/user/userSlice";
+import { useSelector } from "react-redux";
 
 export default function PrivacyPolicy() {
+  const isInvestor = useSelector(selectIsInvestor);
+
   return(
 <>
         <div className=" term_of_service_container py-5 px-5 ">
@@ -9,7 +13,7 @@ export default function PrivacyPolicy() {
             <h1 className="term_title">
               Terms and Conditions (T&C) for The Capital Hub
             </h1>
-            <h6 className="updated_text">Last Updated: Aug 30 ,2023</h6>
+            <h6 className={`updated_text${isInvestor?"investor":"startup"}`}>Last Updated: Aug 30 ,2023</h6>
           </section>
 
           <section className="accept_the_term_section">
@@ -139,8 +143,8 @@ export default function PrivacyPolicy() {
           </section>
 
           <section className="button_section ">
-            <button className="decline_btn">Decline</button>
-            <button className="accept_btn">Accept</button>
+            <button className={`decline_btn${isInvestor?"investor":"startup"}`}>Decline</button>
+            <button className={`accept_btn${isInvestor?"investor":"startup"}`}>Accept</button>
           </section>
         </div>
     </>
