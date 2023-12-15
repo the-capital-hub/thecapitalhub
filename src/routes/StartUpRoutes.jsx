@@ -99,6 +99,10 @@ const TwoStepVerification = lazy(() =>
   import ("../pages/StartUp/UserSettings/SettingsPages/TwoStepVerification/TwoStepVerification")
 );
 
+const CloseAccount = lazy(() =>
+  import ("../pages/StartUp/UserSettings/SettingsPages/CloseAccount/CloseAccount")
+);
+
 const FundingInfo = lazy(() => import("../pages/StartUp/Funding/FundingInfo"));
 
 function StartUpRoutes() {
@@ -411,6 +415,14 @@ function StartUpRoutes() {
           element={
             <Suspense fallback={<SuspenseLoader />}>
               <TwoStepVerification />
+            </Suspense>
+          }
+        />
+         <Route
+          path="close-account"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <CloseAccount />
             </Suspense>
           }
         />

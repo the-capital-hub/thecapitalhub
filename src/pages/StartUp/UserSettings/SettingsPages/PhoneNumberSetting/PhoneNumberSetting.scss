@@ -1,4 +1,4 @@
-.manage_account_settings {
+.PhoneNumberSetting {
     background-color: var(--white-to-grey);
     color: var(--d-l-grey);
     border-radius: 0;
@@ -13,6 +13,8 @@
       background-color: transparent !important;
       outline: none;
       border: none;
+      color: var(--d-l-grey);
+
     }
     .add_phone_btn {
       background-color: var(--bs-light) !important;

@@ -17,7 +17,7 @@ function TwoStepVerification() {
 
 
   return (
-    <div className="manage_account_settings">
+    <div className="TwoStepVerification">
       <h4 className="m-0 px-3 py-3 d-flex align-items-center gap-2">
         <Button
           className="back-button btn-sm  rounded-circle border-none"

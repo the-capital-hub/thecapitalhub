@@ -77,5 +77,16 @@ color: var(--d-l-grey);
             cursor: pointer;
             
         }
+         option {
+          margin: 40px;
+          background-color: var(--d-l-grey);
+         
+          text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+          color: var(--darkMode-currentTheme);
+          &:not(:checked) {
+            color: var(--d-l-grey);
+            background-color: var(--bs-light);
+          }
+        }
       }
 }
