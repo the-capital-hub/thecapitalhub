@@ -6,38 +6,30 @@ import { FaArrowLeft } from 'react-icons/fa';
 
 function LanguageSettings() {
   const navigate = useNavigate();
-const language ='en,hi,te,ta,kn,mr,bn,gu,ml,pa,or,as,ur,kok,ne,maithili,santali,kashmiri,bodo,dogri,manipuri,khasi,garo,mizo'
+  const language = 'en,hi,te,ta,kn,mr,bn,gu,ml,pa,or,as,ur,kok,ne,maithili,santali,kashmiri,bodo,dogri,manipuri,khasi,garo,mizo'
   useEffect(() => {
-    const initGoogleTranslate = () => {
-      const translateElement = document.getElementById("google_translate_element");
-  
-      if (translateElement) {
-        translateElement.innerHTML = "";
-      }
-  
-      const script = document.createElement("script");
-      script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-      script.async = true;
-  
-      script.onload = () => {
-        window.googleTranslateElementInit = () => {
-          new window.google.translate.TranslateElement(
-            {
-              pageLanguage: 'en',
-              includedLanguages: language,
-              layout: window.google.translate.TranslateElement.InlineLayout.TOP_RIGHT,
-            },
-            'google_translate_element'
-          );
-        };
+    const translateElement = document.getElementById("google_translate_element");
+    if (translateElement) {
+      translateElement.innerHTML = "";
+    }
+    const script = document.createElement("script");
+    script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+    script.async = true;
+    document.body.appendChild(script);
+
+    script.onload = () => {
+      window.googleTranslateElementInit = () => {
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            includedLanguages: language,
+            layout: window.google.translate.TranslateElement.InlineLayout.TOP_RIGHT,
+          },
+          'google_translate_element'
+        );
       };
-  
-      document.body.appendChild(script);
     };
-  
-    initGoogleTranslate();
   }, []);
-  
 
   return (
     <div className="language-settings">
@@ -70,7 +62,7 @@ const language ='en,hi,te,ta,kn,mr,bn,gu,ml,pa,or,as,ur,kok,ne,maithili,santali,
         <div id="google_translate_element"></div>
 
         <span className="fs-6 text-secondary">
-          Let us know which language you’re most comfortable using on LinkedIn. You can change it back at any time.
+          Let us know which language you’re most comfortable using on Capital Hub. You can change it back at any time.
         </span>
       </div>
     </div>
