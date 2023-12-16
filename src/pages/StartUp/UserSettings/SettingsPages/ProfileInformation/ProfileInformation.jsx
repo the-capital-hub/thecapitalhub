@@ -5,7 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { educationOptions } from "../../../../../constants/Startups/ExplorePage";
 import { useSelector } from "react-redux";
-import { selectCompanyName, selectUserBio } from "../../../../../Store/features/user/userSlice";
+import {
+  selectCompanyName,
+  selectUserBio,
+} from "../../../../../Store/features/user/userSlice";
 
 const EXPERIENCE_OPTIONS = [
   "0",
@@ -32,7 +35,6 @@ const EXPERIENCE_OPTIONS = [
 ];
 
 function ProfileInformation() {
- 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const companyName = useSelector(selectCompanyName);
   const userBio = useSelector(selectUserBio);
@@ -47,8 +49,7 @@ function ProfileInformation() {
     company: companyName,
     location: loggedInUser?.location || "Bangalore, India",
   });
-  const [bioContent, setBioContent] = useState(userBio  || "");
-
+  const [bioContent, setBioContent] = useState(userBio || "");
 
   const navigate = useNavigate();
 
@@ -65,12 +66,10 @@ function ProfileInformation() {
     const file = e.target.files[0];
     setSelectedFile(file);
   }
- 
+
   // Event handler for form submission
   const handleSubmit = (event) => {
     event.preventDefault();
-
-   
   };
   return (
     <section className="personal_information_section flex-grow-1 ">
@@ -112,8 +111,8 @@ function ProfileInformation() {
             className="professional_form_input"
             name="Firstname"
             value={professionalData.fullName}
-            onChange={handleTextChange}    
-                  />
+            onChange={handleTextChange}
+          />
         </fieldset>
 
         {/* last Name */}
@@ -138,7 +137,7 @@ function ProfileInformation() {
             rows={5}
             value={bioContent}
             onChange={(e) => setBioContent(e.target.value)}
-            />
+          />
         </fieldset>
 
         {/* Company */}
