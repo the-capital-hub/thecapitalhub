@@ -12,6 +12,7 @@ import {
   selectUserSocialLinks,
   updateUserCompany,
 } from "../../../../Store/features/user/userSlice";
+import DividerH from "../../../Shared/DividerH/DividerH";
 
 export default function ProfileInformationForm() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -160,25 +161,7 @@ export default function ProfileInformationForm() {
         />
       </Form.Group>
 
-      <div className="divider d-flex align-items-center">
-        <span
-          className=""
-          style={{
-            flex: "1 1 0",
-            opacity: "0.5",
-            borderTop: "1px solid var(--darkMode-currentTheme)",
-          }}
-        ></span>
-        <span className="px-3 my-3 fs-6 opacity-75">Social Links</span>
-        <span
-          className=""
-          style={{
-            flex: "1 1 0",
-            opacity: "0.5",
-            borderTop: "1px solid var(--darkMode-currentTheme)",
-          }}
-        ></span>
-      </div>
+      <DividerH text={"Social Links"} />
 
       <InputGroup className="flex-column flex-md-row gap-4">
         <Form.Group controlId="onelink-website" className="form-group">

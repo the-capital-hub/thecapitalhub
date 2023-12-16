@@ -63,13 +63,18 @@
   }
 
   .revenue-inputs {
-    width: 100%;
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0px 0px 10px 10px rgba(var(--bs-investor-rgb), 0.035);
+    flex: 0 0 18rem;
+    // margin-inline: auto;
 
-    @media (min-width: 768px) {
-      width: 50%;
-    }
     .form-group {
       width: 100%;
+
+      .form-label {
+        min-height: fit-content;
+      }
     }
   }
 }

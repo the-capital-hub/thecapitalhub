@@ -56,8 +56,6 @@
     display: grid;
     grid-template-columns: 100%;
 
-    gap: 2rem;
-
     @media (min-width: 1200px) {
       grid-template-columns: 1fr 1fr;
       .form-group {

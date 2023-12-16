@@ -2,29 +2,48 @@ import { Button, Form, InputGroup, Spinner } from "react-bootstrap";
 import "./InvestmentPhilosophyForm.scss";
 import SectorPreferences from "../../ProfileComponents/InvestmentPhilosophy/Components/InvestmentPhilosophyInfo/SectorPreferences/SectorPreferences";
 import { PhilosophyQuestions } from "../../../../constants/Investor/ProfilePage";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loginSuccess,
+  selectCompanyAge,
+  selectCompanyName,
+  selectCompanyRevenue,
+  selectCompanyStage,
+  selectLoggedInUserId,
   selectUserInvestmentPhilosophy,
   selectUserSectorPreferences,
+  updateUserCompany,
 } from "../../../../Store/features/user/userSlice";
-import { updateUserAPI } from "../../../../Service/user";
+import { postInvestorData, updateUserAPI } from "../../../../Service/user";
 import FormTextArea from "./FormTextArea";
-
-const STARTUP_FIELDS = [
-  { name: "stage", label: "Stage" },
-  { name: "age", label: "Age" },
-  { name: "foundedStartup", label: "Founded Startup" },
-];
+import DividerH from "../../../Shared/DividerH/DividerH";
 
 export default function InvestmentPhilosophyForm() {
   const userSectorPreferences = useSelector(selectUserSectorPreferences);
   const userInvestmentPhilosophy = useSelector(selectUserInvestmentPhilosophy);
+  const loggedInUserId = useSelector(selectLoggedInUserId);
+  const companyName = useSelector(selectCompanyName);
+  const companyAge = useSelector(selectCompanyAge);
+  const companyStage = useSelector(selectCompanyStage);
+  const companyRevenue = useSelector(selectCompanyRevenue);
 
   const [selectedSectors, setSelectedSectors] = useState(userSectorPreferences);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+
+  const startupFields = useMemo(
+    () => [
+      { name: "stage", label: "Stage", defaultValue: companyStage },
+      { name: "age", label: "Age", defaultValue: companyAge },
+      {
+        name: "companyName",
+        label: "Founded Startup",
+        defaultValue: companyName,
+      },
+    ],
+    [companyName, companyAge, companyStage]
+  );
 
   async function handlePhilosophySubmit(e) {
     e.preventDefault();
@@ -43,6 +62,19 @@ export default function InvestmentPhilosophyForm() {
       industryTrendsHoldInYourStrategy,
       evaluateCompanyGrowthPotential,
       weightGaveToTechnologicalInnovation,
+      stage,
+      age,
+      companyName,
+      revenueYear1,
+      revenueAmount1,
+      revenueYear2,
+      revenueAmount2,
+      revenueYear3,
+      revenueAmount3,
+      revenueYear4,
+      revenueAmount4,
+      revenueYear5,
+      revenueAmount5,
     } = e.target;
 
     let updatedUserData = {
@@ -66,7 +98,23 @@ export default function InvestmentPhilosophyForm() {
       sectorPreferences: selectedSectors,
     };
 
-    console.log("phil form submitted", updatedUserData);
+    let revenueData = [
+      { year: revenueYear1.value, amount: revenueAmount1.value },
+      { year: revenueYear2.value, amount: revenueAmount2.value },
+      { year: revenueYear3.value, amount: revenueAmount3.value },
+      { year: revenueYear4.value, amount: revenueAmount4.value },
+      { year: revenueYear5.value, amount: revenueAmount5.value },
+    ];
+
+    let updatedCompanyData = {
+      founderId: loggedInUserId,
+      stage: stage.value,
+      age: age.value,
+      companyName: companyName.value,
+      revenue: revenueData,
+    };
+
+    // console.log("phil form submitted", updatedUserData);
     // Update User data
     try {
       const { data } = await updateUserAPI(updatedUserData);
@@ -74,6 +122,23 @@ export default function InvestmentPhilosophyForm() {
       dispatch(loginSuccess(data.data));
     } catch (error) {
       console.error("Error saving Investment Philosophy(user)", error);
+    }
+
+    // console.log("phil form submitted", updatedCompanyData);
+    // update company data
+    try {
+      const { data } = await postInvestorData(updatedCompanyData);
+      console.log("post Investor", data);
+      dispatch(
+        updateUserCompany({
+          stage: data.stage,
+          age: data.age,
+          companyName: data.companyName,
+          revenue: data.revenue,
+        })
+      );
+    } catch (error) {
+      console.error("Error saving profile Info(company)", error);
     } finally {
       setLoading(false);
     }
@@ -89,7 +154,7 @@ export default function InvestmentPhilosophyForm() {
         className="d-flex align-items-center gap-4 flex-wrap"
         style={{ gridColumn: "1/-1" }}
       >
-        {STARTUP_FIELDS.map(({ name, label }) => {
+        {startupFields.map(({ name, label, defaultValue }) => {
           return (
             <Form.Group
               controlId={`onelink-${name}`}
@@ -97,11 +162,17 @@ export default function InvestmentPhilosophyForm() {
               key={name}
             >
               <Form.Label>{label}</Form.Label>
-              <Form.Control type="text" name={name} defaultValue={label} />
+              <Form.Control
+                type="text"
+                name={name}
+                defaultValue={defaultValue}
+              />
             </Form.Group>
           );
         })}
       </div>
+
+      <DividerH text={"Philosophy"} />
 
       {/* Select field */}
       <fieldset className="" style={{ gridColumn: "1/-1" }}>
@@ -128,43 +199,66 @@ export default function InvestmentPhilosophyForm() {
         );
       })}
 
+      <DividerH text={"Revenue"} />
+
       {/* Revenue */}
-      <div className="d-flex flex-column" style={{ gridColumn: "1/-1" }}>
-        <div className="revenue-display">
-          <h5>Revenue</h5>
-        </div>
-        <div className="revenue-inputs d-flex flex-column flex-md-row align-items-center gap-4">
-          <Form.Group controlId="onelink-revenueYear" className="form-group">
-            <Form.Label className="">Year</Form.Label>
-            <Form.Control
-              type="number"
-              min={2010}
-              max={+String(new Date().getFullYear())}
-              name="revenueYear"
-              className="revenueYear"
-            />
-          </Form.Group>
-          <Form.Group controlId="onelink-revenueAmount" className="form-group">
-            <Form.Label className="">Amount</Form.Label>
-            <InputGroup className="justify-content-center">
-              <InputGroup.Text
-                className="text-bg-dark text-align-center d-block"
-                style={{ flex: "0 0 40px" }}
+      <div
+        className="d-flex flex-column flex-md-row gap-3 flex-wrap"
+        style={{ gridColumn: "1/-1" }}
+      >
+        {Array(5)
+          .fill(0)
+          .map(({ year, amount }, index) => {
+            return (
+              <div
+                className="revenue-inputs d-flex flex-column align-items-center gap-2 px-3 py-3"
+                key={`Slot${index}`}
               >
-                ₹
-              </InputGroup.Text>
-              <Form.Control
-                type="number"
-                min={0}
-                name="revenueAmount"
-                className="revenueAmount"
-              />
-            </InputGroup>
-          </Form.Group>
-          <Button variant="investor" className="align-self-start">
-            Add
-          </Button>
-        </div>
+                <h5 className="align-self-start m-0">
+                  Revenue Slot {index + 1}
+                </h5>
+                <Form.Group
+                  controlId={`onelink-revenueYear-${index + 1}`}
+                  className="form-group"
+                >
+                  <Form.Label className="">Year</Form.Label>
+                  <Form.Control
+                    type="number"
+                    min={2010}
+                    max={+String(new Date().getFullYear())}
+                    name={`revenueYear${index + 1}`}
+                    className="revenueYear"
+                    defaultValue={
+                      companyRevenue ? companyRevenue[index]["year"] : ""
+                    }
+                  />
+                </Form.Group>
+                <Form.Group
+                  controlId={`onelink-revenueAmount-${index + 1}`}
+                  className="form-group"
+                >
+                  <Form.Label className="">Amount</Form.Label>
+                  <InputGroup className="justify-content-center">
+                    <InputGroup.Text
+                      className="text-bg-dark text-align-center d-block"
+                      style={{ flex: "0 0 40px" }}
+                    >
+                      ₹
+                    </InputGroup.Text>
+                    <Form.Control
+                      type="number"
+                      min={0}
+                      name={`revenueAmount${index + 1}`}
+                      className="revenueAmount"
+                      defaultValue={
+                        companyRevenue ? companyRevenue[index]["amount"] : ""
+                      }
+                    />
+                  </InputGroup>
+                </Form.Group>
+              </div>
+            );
+          })}
       </div>
 
       {/* Action button */}
