@@ -18,6 +18,7 @@ import {
 import { postInvestorData, updateUserAPI } from "../../../../Service/user";
 import FormTextArea from "./FormTextArea";
 import DividerH from "../../../Shared/DividerH/DividerH";
+import toast from "react-hot-toast";
 
 export default function InvestmentPhilosophyForm() {
   const userSectorPreferences = useSelector(selectUserSectorPreferences);
@@ -114,31 +115,26 @@ export default function InvestmentPhilosophyForm() {
       revenue: revenueData,
     };
 
-    // console.log("phil form submitted", updatedUserData);
-    // Update User data
     try {
-      const { data } = await updateUserAPI(updatedUserData);
-      console.log("post Investor user data", data);
-      dispatch(loginSuccess(data.data));
-    } catch (error) {
-      console.error("Error saving Investment Philosophy(user)", error);
-    }
-
-    // console.log("phil form submitted", updatedCompanyData);
-    // update company data
-    try {
-      const { data } = await postInvestorData(updatedCompanyData);
-      console.log("post Investor", data);
+      const [userResponse, companyResponse] = await Promise.all([
+        updateUserAPI(updatedUserData),
+        postInvestorData(updatedCompanyData),
+      ]);
+      // console.log("userResponse", userResponse);
+      // console.log("companyResponse", companyResponse);
+      dispatch(loginSuccess(userResponse.data.data));
       dispatch(
         updateUserCompany({
-          stage: data.stage,
-          age: data.age,
-          companyName: data.companyName,
-          revenue: data.revenue,
+          stage: companyResponse.data.stage,
+          age: companyResponse.data.age,
+          companyName: companyResponse.data.companyName,
+          revenue: companyResponse.data.revenue,
         })
       );
+      toast.success("Changes Saved");
     } catch (error) {
-      console.error("Error saving profile Info(company)", error);
+      console.error("Error saving information", error);
+      toast.error("Error saving information. Please try again.");
     } finally {
       setLoading(false);
     }
