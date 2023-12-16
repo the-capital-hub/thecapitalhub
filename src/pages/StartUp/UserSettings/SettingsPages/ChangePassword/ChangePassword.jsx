@@ -20,51 +20,51 @@ function ChangePassword() {
           <FaArrowLeft size={15} />
         </Button>
         Change password
-
       </h4>
       <div className=" border-top px-3 py-3 d-flex flex-column gap-2">
-        <span className="fs-6 text-secondary">Create a new password that is at least 8 characters long.</span>
         <span className="fs-6 text-secondary">
-        What makes a strong password?
+          Create a new password that is at least 8 characters long.
         </span>
-        
+        <span className="fs-6 text-secondary">
+          What makes a strong password?
+        </span>
+
         <form>
-        <fieldset>
-              <legend className="px-2">Current Password</legend>
-              <input
-                type="password"
-                className="professional_form_input"
-                name="password"
-                value={current}
-                onChange={(e) => setCurrent(e.target.value)}
-              />
+          <fieldset>
+            <legend className="px-2">Current Password</legend>
+            <input
+              type="password"
+              className="professional_form_input"
+              name="password"
+              value={current}
+              onChange={(e) => setCurrent(e.target.value)}
+            />
+          </fieldset>
 
-            </fieldset>
+          <fieldset>
+            <legend className="px-2">Password</legend>
+            <input
+              type="password"
+              className="professional_form_input"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </fieldset>
 
-            <fieldset>
-              <legend className="px-2">Password</legend>
-              <input
-                type="password"
-                className="professional_form_input"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </fieldset>
-
-<fieldset>
-              <legend className="px-2">Retype Password</legend>
-              <input
-                type="password"
-                className="professional_form_input"
-                name="password"
-                value={retype}
-                onChange={(e) => setRetype(e.target.value)}
-              />
-            </fieldset>
+          <fieldset>
+            <legend className="px-2">Retype Password</legend>
+            <input
+              type="password"
+              className="professional_form_input"
+              name="password"
+              value={retype}
+              onChange={(e) => setRetype(e.target.value)}
+            />
+          </fieldset>
         </form>
-        
-      <Button className="  forgotpassword" >Done</Button>
+
+        <Button className="  forgotpassword">Done</Button>
       </div>
     </div>
   );
