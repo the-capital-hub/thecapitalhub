@@ -13,7 +13,7 @@ export const TEXT_QUESTIONS = [
 ];
 
 export const PhilosophyQuestions = {
-  importanceOfManagament: "What is the importance of Management?",
+  importanceOfManagement: "What is the importance of Management?",
   roleAsAInvestor:
     "What role do you play as an Investor? Are you more passive or active?",
   founderAlmaMaterMatters: "How much does Founder's alma mater matter?",

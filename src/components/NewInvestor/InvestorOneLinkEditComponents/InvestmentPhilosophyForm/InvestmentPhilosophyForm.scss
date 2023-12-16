@@ -61,4 +61,15 @@
     //   width: 60%;
     // }
   }
+
+  .revenue-inputs {
+    width: 100%;
+
+    @media (min-width: 768px) {
+      width: 50%;
+    }
+    .form-group {
+      width: 100%;
+    }
+  }
 }
