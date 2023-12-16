@@ -37,12 +37,8 @@ export default function InvestorOneLinkInvestment() {
             <h4 className="fw-semibold">
               {`${firstName} ${lastName}` || "fullName"}
             </h4>
-            <p className="text-secondary fs-5 fw-light m-0">
-              {designation || "designation"}
-            </p>
-            <p className="text-secondary fs-5 fw-light m-0">
-              {location || "location"}
-            </p>
+            <p className=" fs-5 fw-light m-0">{designation || "designation"}</p>
+            <p className=" fs-5 fw-light m-0">{location || "location"}</p>
           </div>
         </header>
 

@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import {
   Facebook,
   Google,
@@ -10,6 +11,8 @@ import {
 import SocialLink from "./SocialLink";
 
 export default function PublicLinks({ socialLinks }) {
+  const { pathname } = useLocation();
+
   const Icons = {
     website: Website,
     google: Google,
@@ -25,7 +28,9 @@ export default function PublicLinks({ socialLinks }) {
       className="public__links d-flex flex-column gap-4"
       style={{ color: "var(--d-l-grey)" }}
     >
-      <h6 className="div__heading">Public Links</h6>
+      {!pathname.includes("/investor/onelink/") && (
+        <h6 className="div__heading">Public Links</h6>
+      )}
       <div className="d-flex gap-3 flex-wrap">
         {socialLinks
           ? Object.keys(socialLinks).map((key, index) => {
