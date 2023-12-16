@@ -125,16 +125,16 @@
     font-family: "Poppins";
     font-style: normal;
     font-weight: 500;
-    font-size: 12px;
+    font-size: 18px;
     line-height: 22px;
     /* identical to box height */
 
-    color: #000000;
+    color: var(--d-l-grey);
   }
 
   .logotext h4 {
     margin: 0;
-    font-size: 10px;
+    font-size: 14px;
     margin-bottom: 20px;
   }
   .logotext img {
@@ -200,7 +200,8 @@
   #header .pro-sidebar-inner .pro-sidebar-layout .active {
     background-image: linear-gradient(0deg, #eef2f3 0%, #eef2f3 100%);
     * {
-      color: var(--d-l-grey) !important;
+      color: #000 !important;
+      // color: var(--d-l-grey) !important;
     }
   }
 

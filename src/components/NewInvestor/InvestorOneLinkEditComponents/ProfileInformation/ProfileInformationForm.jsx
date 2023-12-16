@@ -12,6 +12,8 @@ import {
   selectUserSocialLinks,
   updateUserCompany,
 } from "../../../../Store/features/user/userSlice";
+import DividerH from "../../../Shared/DividerH/DividerH";
+import toast from "react-hot-toast";
 
 export default function ProfileInformationForm() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -61,24 +63,24 @@ export default function ProfileInformationForm() {
       founderId: loggedInUser._id,
     };
 
-    console.log("user data", updatedUserData);
-    console.log("company data", updatedSocialLinks);
-    // Update User data
-    try {
-      const { data } = await updateUserAPI(updatedUserData);
-      // console.log("post Investor user data", data);
-      dispatch(loginSuccess(data.data));
-    } catch (error) {
-      console.error("Error saving Profile Info(user)", error);
-    }
+    // console.log("user data", updatedUserData);
+    // console.log("company data", updatedSocialLinks);
 
-    // update company data
     try {
-      const { data } = await postInvestorData(updatedSocialLinks);
-      // console.log("post Investor", data);
-      dispatch(updateUserCompany({ socialLinks: data.socialLinks }));
+      const [userResponse, companyResponse] = await Promise.all([
+        updateUserAPI(updatedUserData),
+        postInvestorData(updatedSocialLinks),
+      ]);
+      // console.log("userResponse", userResponse);
+      // console.log("companyResponse", companyResponse);
+      dispatch(loginSuccess(userResponse.data.data));
+      dispatch(
+        updateUserCompany({ socialLinks: companyResponse.data.socialLinks })
+      );
+      toast.success("Changes Saved");
     } catch (error) {
-      console.error("Error saving profile Info(company)", error);
+      console.error("Error saving information", error);
+      toast.error("Error saving information. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -160,25 +162,7 @@ export default function ProfileInformationForm() {
         />
       </Form.Group>
 
-      <div className="divider d-flex align-items-center">
-        <span
-          className=""
-          style={{
-            flex: "1 1 0",
-            opacity: "0.5",
-            borderTop: "1px solid var(--darkMode-currentTheme)",
-          }}
-        ></span>
-        <span className="px-3 my-3 fs-6 opacity-75">Social Links</span>
-        <span
-          className=""
-          style={{
-            flex: "1 1 0",
-            opacity: "0.5",
-            borderTop: "1px solid var(--darkMode-currentTheme)",
-          }}
-        ></span>
-      </div>
+      <DividerH text={"Social Links"} />
 
       <InputGroup className="flex-column flex-md-row gap-4">
         <Form.Group controlId="onelink-website" className="form-group">

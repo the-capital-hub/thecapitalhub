@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
 import "./InvestorOneLinkPhilosophy.scss";
 import PhilosophyTable from "../../../components/InvestorOneLink/InvestorOneLinkPhilosophy/PhilosophyTable";
@@ -6,6 +6,8 @@ import PhilosophyAbout from "../../../components/InvestorOneLink/InvestorOneLink
 import PhilosophyIncorporation from "../../../components/InvestorOneLink/InvestorOneLinkPhilosophy/PhilosophyIncorporation";
 import { useOutletContext } from "react-router-dom";
 import PhilosophyDetails from "../../../components/InvestorOneLink/InvestorOneLinkPhilosophy/PhilosophyDetails";
+import { useDispatch } from "react-redux";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 export default function InvestorOneLinkInvestment() {
   // Fetch or get from state
@@ -13,6 +15,12 @@ export default function InvestorOneLinkInvestment() {
   const { firstName, lastName, designation, location, profilePicture } =
     investor;
   const { companyName } = company;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    document.title = "Philosophy | The Capital Hub";
+    dispatch(setPageTitle("Philosophy"));
+  }, [dispatch]);
 
   return (
     <div className="investment_philosophy_wrapper mb-5">
@@ -37,12 +45,8 @@ export default function InvestorOneLinkInvestment() {
             <h4 className="fw-semibold">
               {`${firstName} ${lastName}` || "fullName"}
             </h4>
-            <p className="text-secondary fs-5 fw-light m-0">
-              {designation || "designation"}
-            </p>
-            <p className="text-secondary fs-5 fw-light m-0">
-              {location || "location"}
-            </p>
+            <p className=" fs-5 fw-light m-0">{designation || "designation"}</p>
+            <p className=" fs-5 fw-light m-0">{location || "location"}</p>
           </div>
         </header>
 

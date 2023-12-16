@@ -28,6 +28,7 @@ export default function InfoField({ isEditing, data, name, legend, loading }) {
           className="profile_edit_field w-100"
           rows={isMobileView ? 5 : 3}
           ref={textRef}
+          style={{ resize: "none" }}
         />
       ) : (
         <p

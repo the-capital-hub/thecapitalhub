@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PhilosophyIncorporation() {
   return (
-    <div className="philosophy_incorporation">
+    <div className="philosophy_incorporation d-l-grey">
       <h6 className="fw-semibold">Incorporation</h6>
       <div className="d-flex align-items-center gap-3 flex-wrap">
         <fieldset
