@@ -14,7 +14,6 @@
     outline: none;
     border: none;
     color: var(--d-l-grey);
-
   }
 
   .two_step_verification,
@@ -91,35 +90,32 @@
       font-family: Poppins;
       cursor: pointer;
     }
-    .input-group{
+    .input-group {
       margin-top: -7px;
-
     }
     .form-control {
       display: block;
       width: 100%;
-       padding: 0;  
+      padding: 0;
       width: 1% !important;
       outline: none !important;
       border: none !important;
       background: transparent !important;
-      &:focus{
+      &:focus {
         outline: none !important;
         box-shadow: none !important;
-  
       }
-  }
-  #button-addon2{
-    outline: none !important;
-    border-bottom:none !important ;
-    border-top:none !important ;
-    border-right:none !important ;
-    height: 45px;
-
-    &:hover{
-      background: transparent !important;
     }
-   
-  }
+    #button-addon2 {
+      outline: none !important;
+      border-bottom: none !important ;
+      border-top: none !important ;
+      border-right: none !important ;
+      height: 45px;
+
+      &:hover {
+        background: transparent !important;
+      }
+    }
   }
 }

@@ -1,34 +1,46 @@
-import React, { useEffect } from 'react';
-import './LanguageSettings.scss';
-import { Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
+import React, { useEffect } from "react";
+import "./LanguageSettings.scss";
+import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 function LanguageSettings() {
   const navigate = useNavigate();
-  const language = 'en,hi,te,ta,kn,mr,bn,gu,ml,pa,or,as,ur,kok,ne,maithili,santali,kashmiri,bodo,dogri,manipuri,khasi,garo,mizo'
+  const language =
+    "en,hi,te,ta,kn,mr,bn,gu,ml,pa,or,as,ur,kok,ne,maithili,santali,kashmiri,bodo,dogri,manipuri,khasi,garo,mizo";
   useEffect(() => {
-    const translateElement = document.getElementById("google_translate_element");
-    if (translateElement) {
-      translateElement.innerHTML = "";
-    }
-    const script = document.createElement("script");
-    script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-    script.async = true;
-    document.body.appendChild(script);
+    const initGoogleTranslate = () => {
+      const translateElement = document.getElementById(
+        "google_translate_element"
+      );
 
-    script.onload = () => {
-      window.googleTranslateElementInit = () => {
-        new window.google.translate.TranslateElement(
-          {
-            pageLanguage: 'en',
-            includedLanguages: language,
-            layout: window.google.translate.TranslateElement.InlineLayout.TOP_RIGHT,
-          },
-          'google_translate_element'
-        );
+      if (translateElement) {
+        translateElement.innerHTML = "";
+      }
+
+      const script = document.createElement("script");
+      script.src =
+        "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      script.async = true;
+
+      script.onload = () => {
+        window.googleTranslateElementInit = () => {
+          new window.google.translate.TranslateElement(
+            {
+              pageLanguage: "en",
+              includedLanguages: language,
+              layout:
+                window.google.translate.TranslateElement.InlineLayout.TOP_RIGHT,
+            },
+            "google_translate_element"
+          );
+        };
       };
+
+      document.body.appendChild(script);
     };
+
+    initGoogleTranslate();
   }, []);
 
   return (
