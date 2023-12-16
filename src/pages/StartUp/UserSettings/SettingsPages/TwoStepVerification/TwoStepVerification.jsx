@@ -28,7 +28,7 @@ function TwoStepVerification() {
       </h4>
       <div className=" border-top px-3 py-3 d-flex flex-column gap-2">
         <span className="fs-6 text-secondary">
-          Secure your LinkedIn account with two-step verification.
+          Secure your Capital Hub account with two-step verification.
         </span>
         <span className="fs-6 text-secondary d-flex flex-row gap-2">
           <GoShieldLock size={30} />

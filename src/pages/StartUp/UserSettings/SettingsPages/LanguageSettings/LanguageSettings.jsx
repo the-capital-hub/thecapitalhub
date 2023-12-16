@@ -74,8 +74,7 @@ function LanguageSettings() {
         <div id="google_translate_element"></div>
 
         <span className="fs-6 text-secondary">
-          Let us know which language you’re most comfortable using on LinkedIn.
-          You can change it back at any time.
+          Let us know which language you’re most comfortable using on Capital Hub. You can change it back at any time.
         </span>
       </div>
     </div>
