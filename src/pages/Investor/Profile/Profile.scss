@@ -236,6 +236,10 @@
     outline: none;
     border: 1px solid #8da34a;
     padding: 0.5em;
+
+    &::placeholder {
+      opacity: 0.75;
+    }
   }
 }
 
