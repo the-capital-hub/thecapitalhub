@@ -442,7 +442,7 @@ const OneLinkEditView = () => {
           </section>
         </div>
       </div> */}
-      <section className="one_link_edit_view_section w-100 p-3 rounded">
+      <section className="one_link_edit_view_section w-100 p-3 rounded-4">
         <span
           className="back_img rounded-circle shadow-sm d-flex align-items-center justify-content-center"
           title="Go Back"

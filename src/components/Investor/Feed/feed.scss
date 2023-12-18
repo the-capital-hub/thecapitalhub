@@ -1,5 +1,5 @@
 .feed_container {
-  margin-block: 2rem;
+  // margin-block: 2rem;
   // margin-inline: 0.5rem;
   // display: flex;
   justify-content: space-between;
@@ -58,7 +58,7 @@
   }
 
   .posts__container {
-    .loader_spinner{
+    .loader_spinner {
       background-color: var(--white-to-grey);
     }
     .infinite-scroll-component__outerdiv {

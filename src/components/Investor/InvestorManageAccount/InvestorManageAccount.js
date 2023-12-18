@@ -155,7 +155,7 @@ const InvestorManageAccount = () => {
               className="mt-5 mt-xl-3"
               text={"Manage Account"}
             />
-            <div className="box_container p-4 mt-4 row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-gap-3 flex-lg-row">
+            <div className="box_container p-4 row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-gap-3 flex-lg-row">
               {/* Change Password */}
               <section className="col password_section">
                 <div className="change_password border border-secondary-subtle">

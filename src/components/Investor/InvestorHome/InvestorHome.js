@@ -62,7 +62,7 @@ const InvestorHome = () => {
 
   return (
     <MaxWidthWrapper>
-      <div className="investorHome_main_container my-5">
+      <div className="investorHome_main_container ">
         <div className="two_column_wrapper">
           <div className="seventy d-flex flex-column gap-3">
             {/* Small Profile Card */}

@@ -112,10 +112,10 @@ const Documentation = () => {
                 notify={notify}
               />
             )}
-            <div>
-              {/* <button onClick={notify}>Make me a toast</button> */}
-              {/* <Toaster /> */}
-            </div>
+            {/* <div> */}
+            {/* <button onClick={notify}>Make me a toast</button> */}
+            {/* <Toaster /> */}
+            {/* </div> */}
             <IntroductoryMessage
               title={"Upload your document"}
               // para={
@@ -126,7 +126,7 @@ const Documentation = () => {
               onClicked={setShowModal}
               fetchFolder={getFolders}
             />
-            <div className="cards px-xxl-4  py-5 rounded-4 document_container " >
+            <div className="cards px-xxl-4  py-5 rounded-4 document_container ">
               {/* <Card
                   onClicked={() => navigate("/documentation/financials")}
                   text={"Financials"}

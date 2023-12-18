@@ -2,7 +2,7 @@
   // display: flex;
   // flex-direction: column;
   // justify-content: space-between;
-  margin: 2rem 0;
+  // margin: 2rem 0;
 
   display: grid;
   grid-template-columns: 100%;
@@ -19,7 +19,7 @@
   @media (min-width: 820px) {
     flex-direction: row;
     margin-inline: 1.5em;
-    margin-block: 2em;
+    // margin-block: 2em;
   }
 
   .main__content {

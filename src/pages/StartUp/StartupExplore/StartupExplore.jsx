@@ -126,7 +126,7 @@ export default function StartupExplore() {
 
   return (
     <MaxWidthWrapper>
-      <section className="startup_explore_wrapper d-flex flex-column gap-3 my-5">
+      <section className="startup_explore_wrapper d-flex flex-column gap-3 mb-4">
         {/* <SmallProfileCard/> */}
 
         {/* Onboarding popup */}

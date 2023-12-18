@@ -25,12 +25,12 @@ const Help = () => {
   return (
     <MaxWidthWrapper>
       <div className="help_main_container">
-        <div className="row mt-2">
+        <div className="row">
           <div className="col">
             <SmallProfileCard text={"Help"} />
             <div className="content-70">
               <div className="row">
-                <div className="col-12 mt-2">
+                <div className="col-12">
                   <div className="box_container">
                     <div className="helpcenter">
                       <img src={HelpIcon} alt="Help Icon" />

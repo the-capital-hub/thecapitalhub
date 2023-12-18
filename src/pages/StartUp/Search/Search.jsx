@@ -62,10 +62,10 @@ function Search() {
 
   return (
     <MaxWidthWrapper>
-      <div className="serach_main_container my-4">
+      <div className="serach_main_container">
         <SmallProfileCard text={"Search"} />
-        <section className="content_section mt-4">
-          <span className=" rounded-4 shadow-sm px-3 py-2 m-md-3 d-flex flex-wrap gap-2">
+        <section className="content_section">
+          <span className=" rounded-4 shadow-sm px-3 py-3 mx-md-3 mb-3 d-flex flex-wrap gap-2">
             <p className="m-0 p-0">Didn't find what you are looking for?</p>
             <Link to="/explore" className="explore_link">
               Head over to Explore
