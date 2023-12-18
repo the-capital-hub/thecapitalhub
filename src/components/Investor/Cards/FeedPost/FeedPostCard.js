@@ -631,7 +631,7 @@ const FeedPostCard = ({
                 <span className="d-flex">
                   <video
                     className="mx-auto"
-                    width={!repostPreview ? "100%" : "50%"}
+                    width={!repostPreview ? "100%" : "100%"}
                     style={{ maxWidth: "500px" }}
                     controls
                     ref={videoRef}
