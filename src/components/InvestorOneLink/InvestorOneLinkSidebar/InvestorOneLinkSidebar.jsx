@@ -99,15 +99,11 @@ export default function InvestorOneLinkSidebar({
                     alt="Profile"
                     className="rounded-circle"
                   />
-                  <h3
-                    className={`${sidebarCollapsed ? "d-none" : "visible"}`}
-                  >
+                  <h3 className={`${sidebarCollapsed ? "d-none" : "visible"}`}>
                     {investorData?.investor?.firstName}{" "}
                     {investorData?.investor?.lastName}
                   </h3>
-                  <h4
-                    className={`${sidebarCollapsed ? "d-none" : "visible"}`}
-                  >
+                  <h4 className={`${sidebarCollapsed ? "d-none" : "visible"}`}>
                     {investorData?.investor?.email}
                   </h4>
                 </>

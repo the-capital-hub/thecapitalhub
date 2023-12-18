@@ -78,7 +78,7 @@ function PhoneNumberSetting() {
           </span>
           <form>
             <fieldset>
-            <legend className="px-2">Phone number</legend>
+              <legend className="px-2">Phone number</legend>
               {/* <input
               type="tel"
               className="professional_form_input"

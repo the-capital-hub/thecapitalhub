@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./InvestorOneLinkProfile.scss";
 import { useOutletContext } from "react-router";
 import PublicLinks from "../../../components/NewInvestor/CompanyProfileComponents/company-section-two/public-links/PublicLinks";
+import { useDispatch } from "react-redux";
+import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 export default function InvestorOneLinkProfile() {
   const { investor, company } = useOutletContext();
@@ -11,6 +13,13 @@ export default function InvestorOneLinkProfile() {
     twitter: "",
     linkedin: "",
   };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    document.title = "Investor Profile | The Capital Hub";
+    dispatch(setPageTitle("Investor Profile"));
+  }, [dispatch]);
 
   return (
     <div className="investor_one_link_profile_page d-flex flex-column">

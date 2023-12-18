@@ -1,20 +1,10 @@
 import React, { useState } from "react";
 import {
   loginSuccess,
-  selectAssessCompanyCompetitiveAdvantage,
   selectCompanyFounderId,
-  selectEvaluateCompanyGrowthPotential,
-  selectFounderAlmaMaterMatters,
-  selectGuideOnSellingInvestments,
-  selectImportanceOfManagament,
-  selectIndustryTrendsHoldInYourStrategy,
   selectLoggedInUserId,
-  selectMacroeconomicFactorsInfluenceInvestments,
-  selectRiskManagementInInvestments,
-  selectRoleAsAInvestor,
-  selectTimingInInvestmentDecisions,
+  selectUserInvestmentPhilosophy,
   selectUserSectorPreferences,
-  selectWeightGaveToTechnologicalInnovation,
 } from "../../../../../../Store/features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
@@ -24,41 +14,14 @@ import InfoField from "./InfoField/InfoField";
 import SectorPreferences from "./SectorPreferences/SectorPreferences";
 import { updateUserAPI } from "../../../../../../Service/user";
 import SpinnerBS from "../../../../../Shared/Spinner/SpinnerBS";
-import InvestorAfterSuccessPopUp from "../../../../../PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
-import ErrorPopUp from "../../../../../PopUp/ErrorPopUp/ErrorPopUp";
-import { TEXT_QUESTIONS } from "../../../../../../constants/Investor/ProfilePage";
+import { PhilosophyQuestions } from "../../../../../../constants/Investor/ProfilePage";
+import toast from "react-hot-toast";
 
 export default function InvestmentPhilosophyInfo() {
   const loggedInUserId = useSelector(selectLoggedInUserId);
   const companyFounderId = useSelector(selectCompanyFounderId);
   const userSectorPreferences = useSelector(selectUserSectorPreferences);
-  const importanceOfManagament = useSelector(selectImportanceOfManagament);
-  const roleAsAInvestor = useSelector(selectRoleAsAInvestor);
-  const founderAlmaMaterMatters = useSelector(selectFounderAlmaMaterMatters);
-  const riskManagementInInvestments = useSelector(
-    selectRiskManagementInInvestments
-  );
-  const guideOnSellingInvestments = useSelector(
-    selectGuideOnSellingInvestments
-  );
-  const timingInInvestmentDecisions = useSelector(
-    selectTimingInInvestmentDecisions
-  );
-  const macroeconomicFactorsInfluenceInvestments = useSelector(
-    selectMacroeconomicFactorsInfluenceInvestments
-  );
-  const assessCompanyCompetitiveAdvantage = useSelector(
-    selectAssessCompanyCompetitiveAdvantage
-  );
-  const industryTrendsHoldInYourStrategy = useSelector(
-    selectIndustryTrendsHoldInYourStrategy
-  );
-  const evaluateCompanyGrowthPotential = useSelector(
-    selectEvaluateCompanyGrowthPotential
-  );
-  const weightGaveToTechnologicalInnovation = useSelector(
-    selectWeightGaveToTechnologicalInnovation
-  );
+  const userInvestmentPhilosophy = useSelector(selectUserInvestmentPhilosophy);
 
   const dispatch = useDispatch();
 
@@ -66,7 +29,6 @@ export default function InvestmentPhilosophyInfo() {
   const [isEditing, setIsEditing] = useState(false);
   const [selectedSectors, setSelectedSectors] = useState(userSectorPreferences);
   const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState(null);
 
   // Submit investment Philosophy
   const submitInvestmentPhilosophyChange = async (e) => {
@@ -90,20 +52,23 @@ export default function InvestmentPhilosophyInfo() {
     } = e.target;
 
     let updatedData = {
-      importanceOfManagament: importanceOfManagament?.value,
-      roleAsAInvestor: roleAsAInvestor?.value,
-      founderAlmaMaterMatters: founderAlmaMaterMatters?.value,
-      riskManagementInInvestments: riskManagementInInvestments?.value,
-      guideOnSellingInvestments: guideOnSellingInvestments?.value,
-      timingInInvestmentDecisions: timingInInvestmentDecisions?.value,
-      macroeconomicFactorsInfluenceInvestments:
-        macroeconomicFactorsInfluenceInvestments?.value,
-      assessCompanyCompetitiveAdvantage:
-        assessCompanyCompetitiveAdvantage?.value,
-      industryTrendsHoldInYourStrategy: industryTrendsHoldInYourStrategy?.value,
-      evaluateCompanyGrowthPotential: evaluateCompanyGrowthPotential?.value,
-      weightGaveToTechnologicalInnovation:
-        weightGaveToTechnologicalInnovation?.value,
+      investmentPhilosophy: {
+        importanceOfManagament: importanceOfManagament?.value,
+        roleAsAInvestor: roleAsAInvestor?.value,
+        founderAlmaMaterMatters: founderAlmaMaterMatters?.value,
+        riskManagementInInvestments: riskManagementInInvestments?.value,
+        guideOnSellingInvestments: guideOnSellingInvestments?.value,
+        timingInInvestmentDecisions: timingInInvestmentDecisions?.value,
+        macroeconomicFactorsInfluenceInvestments:
+          macroeconomicFactorsInfluenceInvestments?.value,
+        assessCompanyCompetitiveAdvantage:
+          assessCompanyCompetitiveAdvantage?.value,
+        industryTrendsHoldInYourStrategy:
+          industryTrendsHoldInYourStrategy?.value,
+        evaluateCompanyGrowthPotential: evaluateCompanyGrowthPotential?.value,
+        weightGaveToTechnologicalInnovation:
+          weightGaveToTechnologicalInnovation?.value,
+      },
       sectorPreferences: selectedSectors,
     };
 
@@ -113,22 +78,13 @@ export default function InvestmentPhilosophyInfo() {
       const { data } = await updateUserAPI(updatedData);
       console.log("Response", data.data);
       dispatch(loginSuccess(data.data));
-      setLoading(false);
-      setIsEditing(false);
-      // Alert
-      setAlert({ success: "Changes Saved" });
-      setTimeout(() => {
-        setAlert(null);
-      }, 2000);
+      toast.success("Changes Saved");
     } catch (error) {
-      console.log(error);
+      console.log("Error saving Investment Philosophy", error);
+      toast.error("Error saving Investment Philosophy. Please try again.");
+    } finally {
       setLoading(false);
       setIsEditing(false);
-      // Alert
-      setAlert({ error: "Error saving changes! Please try again." });
-      setTimeout(() => {
-        setAlert(null);
-      }, 2000);
     }
   };
 
@@ -184,115 +140,24 @@ export default function InvestmentPhilosophyInfo() {
           </fieldset>
 
           {/* Text fields */}
-          <InfoField
-            data={importanceOfManagament}
-            isEditing={isEditing}
-            legend={TEXT_QUESTIONS[0]}
-            name={"importanceOfManagament"}
-            key={"importanceOfManagament"}
-            loading={loading}
-          />
-
-          <InfoField
-            data={roleAsAInvestor}
-            isEditing={isEditing}
-            legend={TEXT_QUESTIONS[1]}
-            name={"roleAsAInvestor"}
-            key={"roleAsAInvestor"}
-            loading={loading}
-          />
-
-          <InfoField
-            data={founderAlmaMaterMatters}
-            isEditing={isEditing}
-            legend={TEXT_QUESTIONS[2]}
-            name={"founderAlmaMaterMatters"}
-            key={"founderAlmaMaterMatters"}
-            loading={loading}
-          />
-
-          <InfoField
-            data={riskManagementInInvestments}
-            isEditing={isEditing}
-            legend={TEXT_QUESTIONS[3]}
-            name={"riskManagementInInvestments"}
-            key={"riskManagementInInvestments"}
-            loading={loading}
-          />
-
-          <InfoField
-            data={guideOnSellingInvestments}
-            isEditing={isEditing}
-            legend={TEXT_QUESTIONS[4]}
-            name={"guideOnSellingInvestments"}
-            key={"guideOnSellingInvestments"}
-            loading={loading}
-          />
-
-          <InfoField
-            data={timingInInvestmentDecisions}
-            isEditing={isEditing}
-            legend={TEXT_QUESTIONS[5]}
-            name={"timingInInvestmentDecisions"}
-            key={"timingInInvestmentDecisions"}
-            loading={loading}
-          />
-
-          <InfoField
-            data={macroeconomicFactorsInfluenceInvestments}
-            isEditing={isEditing}
-            legend={TEXT_QUESTIONS[6]}
-            name={"macroeconomicFactorsInfluenceInvestments"}
-            key={"macroeconomicFactorsInfluenceInvestments"}
-            loading={loading}
-          />
-
-          <InfoField
-            data={assessCompanyCompetitiveAdvantage}
-            isEditing={isEditing}
-            legend={TEXT_QUESTIONS[7]}
-            name={"assessCompanyCompetitiveAdvantage"}
-            key={"assessCompanyCompetitiveAdvantage"}
-            loading={loading}
-          />
-
-          <InfoField
-            data={industryTrendsHoldInYourStrategy}
-            isEditing={isEditing}
-            legend={TEXT_QUESTIONS[8]}
-            name={"industryTrendsHoldInYourStrategy"}
-            key={"industryTrendsHoldInYourStrategy"}
-            loading={loading}
-          />
-
-          <InfoField
-            data={evaluateCompanyGrowthPotential}
-            isEditing={isEditing}
-            legend={TEXT_QUESTIONS[9]}
-            name={"evaluateCompanyGrowthPotential"}
-            key={"evaluateCompanyGrowthPotential"}
-            loading={loading}
-          />
-
-          <InfoField
-            data={weightGaveToTechnologicalInnovation}
-            isEditing={isEditing}
-            legend={TEXT_QUESTIONS[10]}
-            name={"weightGaveToTechnologicalInnovation"}
-            key={"weightGaveToTechnologicalInnovation"}
-            loading={loading}
-          />
+          {Object.keys(PhilosophyQuestions).map((question) => {
+            return (
+              <InfoField
+                data={
+                  userInvestmentPhilosophy
+                    ? userInvestmentPhilosophy[question]
+                    : null
+                }
+                isEditing={isEditing}
+                legend={PhilosophyQuestions[question]}
+                name={question}
+                key={question}
+                loading={loading}
+              />
+            );
+          })}
         </div>
       </form>
-      {alert?.success && (
-        <InvestorAfterSuccessPopUp
-          successText={alert.success}
-          onClose={() => setAlert(null)}
-        />
-      )}
-      {alert?.error && (
-        <ErrorPopUp message={alert.error} onClose={() => setAlert(null)} />
-      )}
     </>
   );
 }

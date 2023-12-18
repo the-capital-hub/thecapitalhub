@@ -29,7 +29,9 @@ function ManageEmailAddresses() {
         <span className="fs-6  fw-bold">Primary email</span>
         <span className="fs-6 ">{loggedInUser?.email}</span>
         <div>
-          <Button className="add_email_btn" onClick={() => setShowModal(true)}>Add email address</Button>
+          <Button className="add_email_btn" onClick={() => setShowModal(true)}>
+            Add email address
+          </Button>
         </div>
         <span className="fs-6 text-secondary">
           If you have a verification (e.g. verified work email), you can manage
@@ -47,7 +49,7 @@ function ManageEmailAddresses() {
           </span>
           <form>
             <fieldset>
-            <legend className="px-2">Email address</legend>
+              <legend className="px-2">Email address</legend>
               {/* <input
               type="tel"
               className="professional_form_input"

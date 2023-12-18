@@ -4,9 +4,8 @@
 
     .investor-details {
       color: var(--d-l-grey);
-      p {
-
-      }
+      // p {
+      // }
     }
 
     fieldset,
@@ -30,10 +29,11 @@
       td {
         min-width: 14rem;
         height: 120px;
+        vertical-align: middle;
       }
 
       td + td {
-        border-left: 1px solid #e7e7e7;
+        border-left: 1px solid var(--bs-border-color);
       }
 
       .table_container {
@@ -76,6 +76,7 @@
   }
 
   .page_heading {
+    color: var(--d-l-grey);
     font-size: 28px;
     @media (min-width: 1200px) {
       font-size: 32px;

@@ -4,13 +4,10 @@ import { Button, InputGroup } from "react-bootstrap";
 import { Form, useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 
-
-
 function CloseAccount() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");  
-
+  const [password, setPassword] = useState("");
 
   return (
     <div className="CloseAccount">
@@ -22,45 +19,49 @@ function CloseAccount() {
           <FaArrowLeft size={15} />
         </Button>
         Close account
-
       </h4>
       <div className=" border-top px-3 py-3 d-flex flex-column gap-2">
         <span className="fs-6 text-secondary">
-        Just a quick reminder, closing your account means you’ll your connections
+          Just a quick reminder, closing your account means you’ll your
+          connections
         </span>
         <form>
-            <fieldset>
+          <fieldset>
             <legend className="px-2">Email address</legend>
-              <input
+            <input
               type="tel"
               className="professional_form_input"
               name="Phone"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-             
-            </fieldset>
+          </fieldset>
 
-            <fieldset>
-              <legend className="px-2">Password</legend>
-              <input
-                type="password"
-                className="professional_form_input"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </fieldset>
-          </form>
+          <fieldset>
+            <legend className="px-2">Password</legend>
+            <input
+              type="password"
+              className="professional_form_input"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </fieldset>
+        </form>
 
         <div className="d-flex flex-row gap-2">
-          <Button className="two_step_verification" >Delete</Button>
-          <Button className="two_step_verification" onClick={()=>{setPassword("");setEmail("")}} >Cancel</Button>
-
+          <Button className="two_step_verification">Delete</Button>
+          <Button
+            className="two_step_verification"
+            onClick={() => {
+              setPassword("");
+              setEmail("");
+            }}
+          >
+            Cancel
+          </Button>
         </div>
       </div>
-      
-      
     </div>
   );
 }
