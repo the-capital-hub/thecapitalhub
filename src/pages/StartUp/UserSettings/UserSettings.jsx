@@ -42,7 +42,7 @@ export default function UserSettings() {
   };
 
   return (
-    <div className="userSettings-page-wrapper my-5 mx-lg-3">
+    <div className="userSettings-page-wrapper mx-lg-3">
       <MaxWidthWrapper>
         {/* Mobile View */}
         {isMobileView && (

@@ -66,13 +66,12 @@ export default function OtherCompanyProfilePage() {
 
   return (
     <MaxWidthWrapper>
-      <div className="otherCompanyProfilePage_wrapper mb-4 mt-5">
+      <div className="otherCompanyProfilePage_wrapper mb-4">
         {/* Main Content */}
         <div className="main_content">
           {companyData.length !== 0 || investorData.length !== 0 ? (
             companyData.length !== 0 ? (
               <CompanyProfile companyData={companyData} startup="true" />
-
             ) : investorData.length !== 0 ? (
               <CompanyProfile investorData={investorData} isStartup="false" />
             ) : (

@@ -77,7 +77,7 @@ const OneLink = () => {
   return (
     <MaxWidthWrapper>
       <div className="onelink_container">
-        <div className="onelink_intro_container mt-sm-4 mt-md-2 mt-xxl-2">
+        <div className="onelink_intro_container">
           {/* Main content */}
 
           <div className="main__content">

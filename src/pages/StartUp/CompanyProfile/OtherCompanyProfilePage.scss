@@ -1,5 +1,5 @@
 .otherCompanyProfilePage_wrapper {
-  margin-block: 2rem;
+  // margin-block: 2rem;
   display: grid;
   grid-template-columns: 100%;
   justify-content: space-between;
@@ -15,7 +15,7 @@
   @media (min-width: 820px) {
     flex-direction: row;
     margin-inline: 1.5em;
-    margin-block: 2em;
+    // margin-block: 2em;
   }
 
   .right_content {

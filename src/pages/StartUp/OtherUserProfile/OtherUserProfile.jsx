@@ -62,7 +62,7 @@ function OtherUserProfile() {
   };
 
   return (
-    <div className="mt-5 mt-md-4">
+    <>
       <MaxWidthWrapper>
         <section className="other_user_profile mx-lg-4 mx-xl-0">
           <SmallProfileCard className="mt-lg-2 mt-xl-0" text="User Details" />
@@ -347,7 +347,7 @@ function OtherUserProfile() {
           )}
         </section>
       </MaxWidthWrapper>
-    </div>
+    </>
   );
 }
 
