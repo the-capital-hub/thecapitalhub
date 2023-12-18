@@ -90,7 +90,7 @@ function Achievements() {
   ];
 
   return (
-    <section className="startup_achievements_section d-flex flex-column align-items-evenly py-2 my-5 my-md-3 mx-2 mx-md-5  shadow-sm rounded-4">
+    <section className="startup_achievements_section d-flex flex-column align-items-evenly py-2 mx-2 mx-md-5  shadow-sm rounded-4">
       <Nav
         variant="underline"
         fill

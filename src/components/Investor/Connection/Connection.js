@@ -130,34 +130,35 @@ const Connection = () => {
     }
   };
 
-
-
   return (
     <MaxWidthWrapper>
       <div className="connection_main_container mb-4">
         <SmallProfileCard text={"Connections"} />
-        <section className="content_section mt-4">
+        <section className="content_section">
           <div className="row">
-            <div className="col-12 mt-2 box p-3 p-md-4 ">
+            <div className="col-12 box p-3 p-md-4 ">
               <h4>Manage Connections</h4>
               <nav className="connection_nav">
                 <button
-                  className={`connection_nav_link fs-6 ${selectedTab === "received" ? "active" : ""
-                    }`}
+                  className={`connection_nav_link fs-6 ${
+                    selectedTab === "received" ? "active" : ""
+                  }`}
                   onClick={() => handleTabChange("received")}
                 >
                   Received
                 </button>
                 <button
-                  className={`connection_nav_link fs-6  ${selectedTab === "sent" ? "active" : ""
-                    }`}
+                  className={`connection_nav_link fs-6  ${
+                    selectedTab === "sent" ? "active" : ""
+                  }`}
                   onClick={() => handleTabChange("sent")}
                 >
                   Sent
                 </button>
                 <button
-                  className={`connection_nav_link fs-6  ${selectedTab === "accepted" ? "active" : ""
-                    }`}
+                  className={`connection_nav_link fs-6  ${
+                    selectedTab === "accepted" ? "active" : ""
+                  }`}
                   onClick={() => handleTabChange("accepted")}
                 >
                   Accepted
@@ -202,7 +203,12 @@ const Connection = () => {
                               <p className="connection_designation">
                                 {sender.designation}
                               </p>
-                              <p> {sender.startUp?.company ? sender.startUp?.company : sender.investor?.company}</p>
+                              <p>
+                                {" "}
+                                {sender.startUp?.company
+                                  ? sender.startUp?.company
+                                  : sender.investor?.company}
+                              </p>
                               <p>
                                 <TimeAgo
                                   className="connection_time"
@@ -278,7 +284,12 @@ const Connection = () => {
                                 <p className="connection_designation">
                                   {receiver?.designation}
                                 </p>
-                                <p> {receiver.startUp?.company ? receiver.startUp?.company : receiver.investor?.company}</p>
+                                <p>
+                                  {" "}
+                                  {receiver.startUp?.company
+                                    ? receiver.startUp?.company
+                                    : receiver.investor?.company}
+                                </p>
                                 <p>
                                   <TimeAgo
                                     className="connection_time"
@@ -288,12 +299,10 @@ const Connection = () => {
                                 </p>
                               </div>
                               <div className="connection_right mt-3 mt-md-0  ms-auto my-auto  d-md-none d-block ">
-
                                 <img
                                   src={deleteIcon}
                                   alt={`delete`}
                                   onClick={() => cancelConnectionRequest(_id)}
-
                                 />
                               </div>
                             </div>
@@ -309,7 +318,9 @@ const Connection = () => {
                         )
                       )
                     ) : (
-                      <h5 className="text-center my-5 text-secondary">No sent connections.</h5>
+                      <h5 className="text-center my-5 text-secondary">
+                        No sent connections.
+                      </h5>
                     )}
                   </div>
                 ) : selectedTab === "accepted" ? (
@@ -336,14 +347,20 @@ const Connection = () => {
                                 to={`/user/${data._id}`}
                                 className="  text-decoration-none"
                               >
-                                {`${data.firstName ? data.firstName : "name"} ${data.lastName ? data.lastName : ""
-                                  }`}
+                                {`${data.firstName ? data.firstName : "name"} ${
+                                  data.lastName ? data.lastName : ""
+                                }`}
                               </Link>
                             </p>
                             <p className="connection_designation">
                               {data.designation ? data.designation : ""}
                             </p>
-                            <p> {data.startUp?.company ? data.startUp?.company : data.investor?.company}</p>
+                            <p>
+                              {" "}
+                              {data.startUp?.company
+                                ? data.startUp?.company
+                                : data.investor?.company}
+                            </p>
 
                             <p>
                               {/* <TimeAgo
@@ -354,12 +371,10 @@ const Connection = () => {
                             </p>
                           </div>
                           <div className="connection_right mt-3 mt-md-0  ms-auto my-auto  d-md-none d-block ">
-
                             <img
                               src={deleteIcon}
                               alt={`delete`}
                               onClick={() => handleRemoveConnection(data._id)}
-
                             />
                           </div>
                         </div>

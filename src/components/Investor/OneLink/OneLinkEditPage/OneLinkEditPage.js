@@ -15,7 +15,7 @@ const OneLinkEditPage = () => {
   return (
     <MaxWidthWrapper>
       <div className="editpage_container">
-        <div className="row mt-5 mt-lg-2">
+        <div className="row">
           <OneLinkEditView />
         </div>
       </div>

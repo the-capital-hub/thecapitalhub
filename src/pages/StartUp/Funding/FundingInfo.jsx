@@ -41,7 +41,7 @@ export default function FundingInfo() {
   }
 
   return (
-    <div className="funding_wrapper my-4 mx-lg-3 mx-xl-0">
+    <div className="funding_wrapper mb-4 mx-lg-3 mx-xl-0">
       <MaxWidthWrapper>
         <div className="two_col_wrapper">
           {/* Main content */}

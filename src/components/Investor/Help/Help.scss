@@ -1,8 +1,8 @@
 .help_main_container {
-  margin-top: 1rem;
-  @media (min-width: 1600px) {
-    margin-top: 0;
-  }
+  // margin-top: 1rem;
+  // @media (min-width: 1600px) {
+  //   margin-top: 0;
+  // }
 
   .box_container {
     height: 100%;
@@ -13,7 +13,7 @@
     background-color: var(--white-to-grey);
 
     box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
-    margin-top: 1rem;
+    // margin-top: 1rem;
 
     h1 {
       color: var(--d-l-grey);

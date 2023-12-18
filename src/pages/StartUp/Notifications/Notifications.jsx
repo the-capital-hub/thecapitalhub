@@ -143,7 +143,7 @@ function Notifications() {
             MY Post
           </button>
         </div> */}
-        <div className="message_section px-xxl-4 mt-5 rounded-4 px-3">
+        <div className="message_section px-xxl-4 rounded-4 px-3">
           <div className="row p-0">
             <div className="col-12 mt-2 box p-0">
               {!loading ? (

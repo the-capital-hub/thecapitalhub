@@ -117,7 +117,7 @@ const InvestorNavbar = (props) => {
 
   return (
     <>
-      <div className="container pt-1  mb-4 mb-xl-0">
+      <div className="container">
         <div className="d-flex investor_navbar justify-content-between">
           <div className="d-flex">
             <div className="row bar_logo_container ">
@@ -147,7 +147,7 @@ const InvestorNavbar = (props) => {
                     }}
                   />
                 )}
-                 <h1 className="ms-2 text-break">{pageTitle}</h1>
+                <h1 className="ms-2 text-break">{pageTitle}</h1>
               </div>
             </div>
           </div>
@@ -326,12 +326,17 @@ const InvestorNavbar = (props) => {
                             </span>
                           )}
                           {!!searchSuggestions?.company?.length && (
-                            <span className="mt-2 search-heading">Companies</span>
+                            <span className="mt-2 search-heading">
+                              Companies
+                            </span>
                           )}
                           {searchSuggestions?.company
                             ?.slice(0, 5)
                             .map(({ company, founderId }) => (
-                              <span key={founderId} className="single_result text-secondary">
+                              <span
+                                key={founderId}
+                                className="single_result text-secondary"
+                              >
                                 <Link to={`/company-profile/${founderId}`}>
                                   {company}
                                 </Link>
