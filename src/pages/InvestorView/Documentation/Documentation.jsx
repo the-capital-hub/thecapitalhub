@@ -19,7 +19,7 @@ const Documentation = () => {
   const { username } = useParams();
   const { userId } = useParams();
   useEffect(() => {
-    document.title = "Documentation - One Link | The Capital Hub";
+    document.title = "Documentation - OneLink | The Capital Hub";
   }, []);
   const [loading, setLoading] = useState(false);
 
