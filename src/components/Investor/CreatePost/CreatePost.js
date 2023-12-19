@@ -25,12 +25,12 @@ const CreatePost = () => {
 
   return (
     <div className="container-fluid createpost_container">
-      <div className="row mt-2">
+      <div className="row">
         <div className="col">
           <SmallProfileCard />
           <div className="content-70">
             <div className="row">
-              <div className="col-12 colSize mt-2">
+              <div className="col-12 colSize">
                 <div className=" box bio_container">
                   <div className="row">
                     <div className="ceatepost_img_name">

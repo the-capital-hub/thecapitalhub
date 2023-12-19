@@ -15,7 +15,7 @@ const Team = () => {
   return (
     <MaxWidthWrapper>
       <div className="team_container">
-        <div className="content-70 py-5">
+        <div className="content-70">
           <ComingSoon />
         </div>
       </div>

@@ -15,7 +15,7 @@ const Customer = () => {
   return (
     <MaxWidthWrapper>
       <div className="customer_container">
-        <div className="content-70 py-5">
+        <div className="content-70">
           <ComingSoon />
         </div>
       </div>
