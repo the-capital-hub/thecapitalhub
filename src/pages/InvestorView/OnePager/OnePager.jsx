@@ -42,7 +42,7 @@ const OnePager = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    document.title = "OnePager - One Link | The Capital Hub";
+    document.title = "OnePager - OneLink | The Capital Hub";
     dispatch(setPageTitle("OnePager"));
   }, []);
 

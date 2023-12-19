@@ -45,8 +45,8 @@ export default function InvestorOnelink() {
   // const [isUpdated, setIsUpdated] = useState(false);
 
   useEffect(() => {
-    document.title = "One Link | The Capital Hub";
-    dispatch(setPageTitle("One Link"));
+    document.title = "OneLink | The Capital Hub";
+    dispatch(setPageTitle("OneLink"));
   }, [dispatch]);
 
   // Fetch data by userId
@@ -79,7 +79,7 @@ export default function InvestorOnelink() {
         <div className="investor_onelink_into_container">
           {/* Main Content */}
           <div className="main_content">
-            <SmallProfileCard text={"One Link"} />
+            <SmallProfileCard text={"OneLink"} />
 
             {/* Onboarding popup */}
             <TutorialTrigger

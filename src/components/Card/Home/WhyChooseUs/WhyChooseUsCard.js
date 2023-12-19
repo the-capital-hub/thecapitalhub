@@ -50,7 +50,7 @@ const WhyChooseUsCard = () => {
             >
               <div className="row d-flex justify-content-center align-item-center inside_card">
                 <img src={G2Icon} alt="img" />
-                <h2>One link</h2>
+                <h2>OneLink</h2>
                 <h4>
                   Streamline your startup's communication by sharing all vital
                   information, including pitch decks and documents, effortlessly
