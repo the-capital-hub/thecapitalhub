@@ -15,7 +15,7 @@ export default function Faq() {
             aria-expanded="true"
             aria-controls="collapseOne"
           >
-            What is the "One Like" feature on CapitalHub?
+            What is the "OneLink" feature on Capital Hub?
           </button>
         </h2>
         <div
@@ -26,7 +26,7 @@ export default function Faq() {
         >
           <div className="accordion-body">
             <p>
-              The "One Like" feature on CapitalHub allows users to express their
+              The "OneLink" feature on Capital Hub allows users to express their
               interest in a startup's profile with a single click.
             </p>
           </div>
@@ -42,7 +42,7 @@ export default function Faq() {
             aria-expanded="false"
             aria-controls="collapseTwo"
           >
-            How do I use the "One Like" feature to express interest in a
+            How do I use the "OneLink" feature to express interest in a
             startup's profile?
           </button>
         </h2>
@@ -54,7 +54,7 @@ export default function Faq() {
         >
           <div className="accordion-body">
             <p>
-              To use "One Like," simply navigate to the startup's profile and
+              To use "OneLink," simply navigate to the startup's profile and
               click the "Like" button. This action notifies the startup that you
               are interested in their project.
             </p>
@@ -71,7 +71,7 @@ export default function Faq() {
             aria-expanded="false"
             aria-controls="c3"
           >
-            Is the "One Like" feature visible to other users on CapitalHub?
+            Is the "OneLink" feature visible to other users on Capital Hub?
           </button>
         </h2>
         <div
@@ -82,7 +82,7 @@ export default function Faq() {
         >
           <div className="accordion-body">
             <p>
-              No, the "One Like" feature is a private action. It does not
+              No, the "OneLink" feature is a private action. It does not
               display your interest to other users, maintaining your privacy
             </p>
           </div>
@@ -99,7 +99,7 @@ export default function Faq() {
             aria-expanded="false"
             aria-controls="c4"
           >
-            What happens after I "One Like" a startup's profile?
+            What happens after I "OneLink" a startup's profile?
 
           </button>
         </h2>
@@ -111,7 +111,7 @@ export default function Faq() {
         >
           <div className="accordion-body">
             <p>
-            When you "One Like" a startup, they receive a notification indicating your interest. This can potentially lead to further discussions and connections.
+            When you "OneLink" a startup, they receive a notification indicating your interest. This can potentially lead to further discussions and connections.
             </p>
           </div>
         </div>
@@ -127,7 +127,7 @@ export default function Faq() {
             aria-expanded="false"
             aria-controls="c5"
           >
-             How does the "Explore" feature on CapitalHub work?
+             How does the "Explore" feature on Capital Hub work?
 
           </button>
         </h2>
@@ -301,7 +301,7 @@ export default function Faq() {
             aria-expanded="false"
             aria-controls="c11"
           >
-            Can I use the "Explore" feature to network with other users on CapitalHub?
+            Can I use the "Explore" feature to network with other users on Capital Hub?
 
           </button>
         </h2>
@@ -345,7 +345,7 @@ export default function Faq() {
             aria-expanded="false"
             aria-controls="c12"
           >
-             Can I upload documents to CapitalHub for my startup or investment profile?
+             Can I upload documents to Capital Hub for my startup or investment profile?
           </button>
         </h2>
         <div
@@ -356,7 +356,7 @@ export default function Faq() {
         >
           <div className="accordion-body">
             <p>
-            Yes, CapitalHub allows users to upload relevant documents, such as business plans, pitch decks, financial statements, and more, to enhance their profiles.
+            Yes, Capital Hub allows users to upload relevant documents, such as business plans, pitch decks, financial statements, and more, to enhance their profiles.
 
             </p>
           </div>
@@ -373,7 +373,7 @@ export default function Faq() {
             aria-expanded="false"
             aria-controls="c13"
           >
-             How do I upload documents to my CapitalHub profile?
+             How do I upload documents to my Capital Hub profile?
           </button>
         </h2>
         <div
@@ -413,7 +413,7 @@ export default function Faq() {
         >
           <div className="accordion-body">
             <p>
-            While CapitalHub generally accepts a wide range of document types, it's important to adhere to any guidelines or restrictions outlined on the platform.
+            While Capital Hub generally accepts a wide range of document types, it's important to adhere to any guidelines or restrictions outlined on the platform.
             </p>
           </div>
         </div>
@@ -457,7 +457,7 @@ export default function Faq() {
             aria-expanded="false"
             aria-controls="c16"
           >
-           What is the "Create Post" feature on CapitalHub?
+           What is the "Create Post" feature on Capital Hub?
           </button>
         </h2>
         <div
@@ -468,7 +468,7 @@ export default function Faq() {
         >
           <div className="accordion-body">
             <p>
-            The "Create Post" feature allows users to share updates, insights, and information with the CapitalHub community through posts.
+            The "Create Post" feature allows users to share updates, insights, and information with the Capital Hub community through posts.
 
             </p>
           </div>
@@ -485,7 +485,7 @@ export default function Faq() {
             aria-expanded="false"
             aria-controls="c17"
           >
-            How do I create a post on CapitalHub? 
+            How do I create a post on Capital Hub? 
           </button>
         </h2>
         <div
@@ -496,7 +496,7 @@ export default function Faq() {
         >
           <div className="accordion-body">
             <p>
-            To create a post, log in to your CapitalHub account, navigate to the "Create Post" section, and follow the provided prompts to compose and share your content.
+            To create a post, log in to your Capital Hub account, navigate to the "Create Post" section, and follow the provided prompts to compose and share your content.
 
             </p>
           </div>
@@ -513,7 +513,7 @@ export default function Faq() {
             aria-expanded="false"
             aria-controls="c18"
           >
-            What can I post on CapitalHub using the "Create Post" feature?
+            What can I post on Capital Hub using the "Create Post" feature?
           </button>
         </h2>
         <div
@@ -541,7 +541,7 @@ export default function Faq() {
             aria-expanded="false"
             aria-controls="c19"
           >
-            Are there any guidelines or restrictions for the content I post on CapitalHub?
+            Are there any guidelines or restrictions for the content I post on Capital Hub?
           </button>
         </h2>
         <div
@@ -552,7 +552,7 @@ export default function Faq() {
         >
           <div className="accordion-body">
             <p>
-            CapitalHub typically has community guidelines to ensure that the content shared is relevant, respectful, and compliant with platform policies.
+            Capital Hub typically has community guidelines to ensure that the content shared is relevant, respectful, and compliant with platform policies.
 
             </p>
           </div>
@@ -580,7 +580,7 @@ export default function Faq() {
         >
           <div className="accordion-body">
             <p>
-            "Create Community" allows users to establish their own dedicated community spaces within CapitalHub, tailored to specific interests or industries.
+            "Create Community" allows users to establish their own dedicated community spaces within Capital Hub, tailored to specific interests or industries.
 
             </p>
           </div>
@@ -597,7 +597,7 @@ export default function Faq() {
             aria-expanded="false"
             aria-controls="c21"
           >
-            How can I create a community on CapitalHub?
+            How can I create a community on Capital Hub?
           </button>
         </h2>
         <div
@@ -625,7 +625,7 @@ export default function Faq() {
             aria-expanded="false"
             aria-controls="c22"
           >
-             What are some use cases for creating a community on CapitalHub?
+             What are some use cases for creating a community on Capital Hub?
           </button>
         </h2>
         <div
@@ -653,7 +653,7 @@ export default function Faq() {
             aria-expanded="false"
             aria-controls="c23"
           >
-            Can I invite specific users to join my community, or is it open to all CapitalHub members? 
+            Can I invite specific users to join my community, or is it open to all Capital Hub members? 
           </button>
         </h2>
         <div
@@ -792,7 +792,7 @@ export default function Faq() {
             aria-expanded="false"
             aria-controls="c28"
           >
-            What is the "Saved Posts" feature on CapitalHub?
+            What is the "Saved Posts" feature on Capital Hub?
           </button>
         </h2>
         <div
@@ -820,7 +820,7 @@ export default function Faq() {
             aria-expanded="false"
             aria-controls="c29"
           >
-             How do I save a post on CapitalHub for future reference?
+             How do I save a post on Capital Hub for future reference?
           </button>
         </h2>
         <div
@@ -875,7 +875,7 @@ export default function Faq() {
             aria-expanded="false"
             aria-controls="c31"
           >
-            Are saved posts visible to other users on CapitalHub?
+            Are saved posts visible to other users on Capital Hub?
           </button>
         </h2>
         <div

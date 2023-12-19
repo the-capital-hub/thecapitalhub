@@ -12,7 +12,7 @@ const InvestNow = ({ page }) => {
   const { username } = useParams();
   const [onePager, setOnePager] = useState([]);
   useEffect(() => {
-    document.title = "Invest Now - One Link | The Capital Hub";
+    document.title = "Invest Now - OneLink | The Capital Hub";
     getUserById(username)
       .then(({ data }) => {
         setUser(data);

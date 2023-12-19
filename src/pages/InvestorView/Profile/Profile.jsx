@@ -30,7 +30,7 @@ function Profile() {
   const [colorCard, setColorCard] = useState([]);
 
   useEffect(() => {
-    document.title = "Profile - One Link | The Capital Hub";
+    document.title = "Profile - OneLink | The Capital Hub";
     getUserById(username, userId)
       .then(({ data }) => {
         setUser(data);

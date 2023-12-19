@@ -101,10 +101,10 @@ export default function AttachmentSelector({
             <label htmlFor="onelink" style={{ cursor: "pointer" }}>
               <img
                 src={onelinkIcon}
-                alt="One link"
+                alt="OneLink"
                 className="p-1 rounded-circle"
               />
-              <p>One Link</p>
+              <p>OneLink</p>
             </label>
           </div>
         </div>
