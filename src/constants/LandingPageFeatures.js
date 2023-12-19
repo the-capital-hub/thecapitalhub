@@ -7,9 +7,9 @@ import MentorIcon from "../Images/Group 13.svg";
 
 export const featuresData = {
   onelink: {
-    heading: "Create your one link now",
+    heading: "Create your OneLink now",
     desktopText: [
-      'With our innovative "One Link" feature, managing your startup\'s communication has never been easier. Say goodbye to the hassle of multiple attachments and lengthy emails.',
+      'With our innovative "OneLink" feature, managing your startup\'s communication has never been easier. Say goodbye to the hassle of multiple attachments and lengthy emails.',
       "Now, you can effortlessly share all vital information, including pitch decks,documents, and crucial updates, using just one convenient and easily accessible link. Save time and stay organized as you streamline interactions with potential investors, partners, and stakeholders. Experience the simplicity of centralized information sharing and make a lasting impression with a seamless, professional approach.",
     ],
     mobileText:

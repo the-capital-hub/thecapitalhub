@@ -28,7 +28,7 @@ function PortfolioPage() {
             </p>
           </Link>
           <Link to="https://thecapitalhub.in/" className="box box_two">
-            <img src={assets.capitalHub} alt="capitalHub" />
+            <img src={assets.capitalHub} alt="Capital Hub" />
             <p>
               The Capital Hub offers a dynamic platform where startup founders
               and investors can seamlessly network, fostering meaningful

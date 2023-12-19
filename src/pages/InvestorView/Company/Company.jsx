@@ -40,7 +40,7 @@ function Company() {
   const { username } = useParams();
   const [onePager, setOnePager] = useState([]);
   useEffect(() => {
-    document.title = "Company - One Link | The Capital Hub";
+    document.title = "Company - OneLink | The Capital Hub";
     getOnePager(username)
       .then(({ data }) => {
         setOnePager(data);
