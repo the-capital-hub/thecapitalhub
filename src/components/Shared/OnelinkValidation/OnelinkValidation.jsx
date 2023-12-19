@@ -88,7 +88,7 @@ export default function OnelinkValidation({
         >
           {/* Headings */}
           <div className="">
-            <h3 className="orange fw-bold">One Link</h3>
+            <h3 className="orange fw-bold">OneLink</h3>
             <h2 className="fw-medium">Enter Secret Key to login</h2>
           </div>
 

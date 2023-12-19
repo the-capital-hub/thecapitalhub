@@ -22,12 +22,12 @@ const ShareLink = ({
       <div className="ShareLink_container  mt-md-0">
         <div className="box_container rounded-4 shadow-sm border">
           <section className="title_section">
-            <h6>Now share all your startup details in one link</h6>
+            <h6>Now share all your startup details in OneLink</h6>
           </section>
           <hr />
           {isExitClicked && (OneLink === undefined || OneLink === "") && (
             <div className="warning_message">
-              Please fill company details to get the Onelink.
+              Please fill company details to get the OneLink.
             </div>
           )}
           <Link
