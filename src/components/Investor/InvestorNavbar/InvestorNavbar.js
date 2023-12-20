@@ -198,7 +198,8 @@ const InvestorNavbar = (props) => {
                             <Link
                               key={_id}
                               className="single_result"
-                              to={`/user/${_id}`}
+                              to={`/user/${firstName.toLowerCase()}-${lastName.toLowerCase()}`}
+                              state={{ userId: _id }}
                             >
                               {firstName} {lastName}
                             </Link>

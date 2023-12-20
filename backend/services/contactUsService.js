@@ -1,6 +1,6 @@
 import { sendMail } from "../utils/mailHelper.js";
-// const adminMail = "learn.capitalhub@gmail.com";
-const adminMail = "adithyahebbar32@gmail.com";
+const adminMail = "learn.capitalhub@gmail.com";
+// const adminMail = "adithyahebbar32@gmail.com";
 
 export const contactUs = async (args) => {
   try {
