@@ -194,12 +194,11 @@ const InvestorNavbar = (props) => {
                         )}
                         {searchSuggestions?.users
                           ?.slice(0, 5)
-                          .map(({ firstName, lastName, _id }) => (
+                          .map(({ firstName, lastName, oneLinkId, _id }) => (
                             <Link
                               key={_id}
                               className="single_result"
-                              to={`/user/${firstName.toLowerCase()}-${lastName.toLowerCase()}`}
-                              state={{ userId: _id }}
+                              to={`/user/${firstName.toLowerCase()}-${lastName.toLowerCase()}/${oneLinkId}`}
                             >
                               {firstName} {lastName}
                             </Link>
@@ -304,11 +303,11 @@ const InvestorNavbar = (props) => {
                           )}
                           {searchSuggestions?.users
                             ?.slice(0, 5)
-                            .map(({ firstName, lastName, _id }) => (
+                            .map(({ firstName, lastName, oneLinkId, _id }) => (
                               <span
                                 key={_id}
                                 className="single_result text-secondary"
-                                onClick={() => navigate(`/user/${_id}`)}
+                                onClick={() => navigate(`/user/${firstName.toLowerCase()}-${lastName.toLowerCase()}/${oneLinkId}`)}
                               >
                                 {firstName} {lastName}
                               </span>
