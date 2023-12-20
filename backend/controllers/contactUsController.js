@@ -15,7 +15,6 @@ export const contactUsController = async (req, res) => {
 
 export const lookingForFundingMailController = async (req, res) => {
 	try {
-		console.log(req.body);
 		const {
 			fundingViaCapitalhubQuestions,
 			name,
