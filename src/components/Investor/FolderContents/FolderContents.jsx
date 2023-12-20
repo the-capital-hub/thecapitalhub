@@ -29,25 +29,25 @@ const FolderContents = () => {
   }, [username]);
   const title = route[0].toUpperCase() + route.slice(1);
   console.log(route);
-  // let pageTitle;
+  let pageTitle;
 
-  // switch (title) {
-  //   case "Legal and compliance":
-  //     pageTitle = "Legal and Compliance";
-  //     break;
-  //   case "Pitchdeck":
-  //     pageTitle = "Pitch Deck";
-  //     break;
-  //   case "Kycdetails":
-  //     pageTitle = "KYC Details";
-  //     break;
-  //   case "Business":
-  //     pageTitle = "Business";
-  //     break;
-  //   default:
-  //     pageTitle = "";
-  //     break;
-  // }
+  switch (title) {
+    case "Legal and compliance":
+      pageTitle = "Legal and Compliance";
+      break;
+    case "Pitchdeck":
+      pageTitle = "Pitch Deck";
+      break;
+    case "Kycdetails":
+      pageTitle = "KYC Details";
+      break;
+    case "Business":
+      pageTitle = "Business";
+      break;
+    default:
+      pageTitle = title;
+      break;
+  }
   return (
     <MaxWidthWrapper>
       <div className="folderContents">
@@ -55,7 +55,7 @@ const FolderContents = () => {
           <button className="btn  border mx-3" onClick={() => navigate(-1)}>
             Back
           </button>
-          <h1 className="flex-grow-1">{title}</h1>
+          <h1 className="flex-grow-1">{pageTitle}</h1>
         </div>
         <HalfbendCard folderName={route} userId={userId} />
       </div>

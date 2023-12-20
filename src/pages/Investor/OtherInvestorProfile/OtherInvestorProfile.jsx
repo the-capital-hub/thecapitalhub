@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./OtherInvestorProfile.scss";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 // import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import { getUserAndStartUpByUserIdAPI } from "../../../Service/user";
 // import messageIcon from "../../../Images/StartUp/icons/message.svg";
@@ -29,7 +29,10 @@ export default function OtherInvestorProfile() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const [userData, setUserData] = useState(null);
-  const { userId } = useParams();
+  // const { userId } = useParams();
+  const location = useLocation();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { userId } = location.state || useParams();
   const [connectionSent, setConnectionSent] = useState(false);
 
   useEffect(() => {

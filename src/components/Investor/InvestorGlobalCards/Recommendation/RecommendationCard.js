@@ -90,9 +90,10 @@ const RecommendationCard = ({ isInvestor, maxCount = 5 }) => {
                         <Link
                           to={
                             isInvestor
-                              ? `/investor/user/${user._id}`
-                              : `/user/${user._id}`
+                              ? `/investor/user/${user?.firstName.toLowerCase() + "-" + user?.lastName.toLowerCase()}`
+                              : `/user/${user?.firstName.toLowerCase() + "-" + user?.lastName.toLowerCase()}`
                           }
+                          state={{ userId: user?._id }}
                           className="rounded-circle"
                         >
                           <img
