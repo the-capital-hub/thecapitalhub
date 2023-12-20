@@ -94,9 +94,8 @@ function Search() {
                         to={
                           users._id === loggedInUserId
                             ? "/profile"
-                            : `/user/${users.firstName.toLowerCase()}-${users.lastName.toLowerCase()}`
+                            : `/user/${users.firstName.toLowerCase()}-${users.lastName.toLowerCase()}/${users.oneLinkId}`
                         }
-                        state={{ userId: users._id }}
                       >
                         <img
                           src={`${users?.profilePicture}`}
@@ -109,9 +108,8 @@ function Search() {
                           to={
                             users._id === loggedInUserId
                               ? "/profile"
-                              : `/user/${users.firstName.toLowerCase()}-${users.lastName.toLowerCase()}`
+                              : `/user/${users.firstName.toLowerCase()}-${users.lastName.toLowerCase()}/${users.oneLinkId}`
                           }
-                          state={{ userId: users._id }}
                           className="people_name_link "
                         >
                           <h5>{`${users?.firstName} ${users?.lastName}`} </h5>

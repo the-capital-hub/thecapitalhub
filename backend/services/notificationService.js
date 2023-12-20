@@ -31,7 +31,7 @@ export const getNotificationsByUserId = async (userId) => {
     const notifications = await NotificationModel.find({ recipient: userId })
       .populate({
         path: "sender",
-        select: "firstName lastName profilePicture",
+        select: "firstName lastName profilePicture oneLinkId",
       })
       .populate({
         path: "achievementId",

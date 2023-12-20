@@ -66,41 +66,41 @@ const UserSettings = lazy(() =>
 );
 
 const ProfileInformation = lazy(() =>
-  import ("../pages/StartUp/UserSettings/SettingsPages/ProfileInformation/ProfileInformation")
+  import("../pages/StartUp/UserSettings/SettingsPages/ProfileInformation/ProfileInformation")
 );
 const DarkModeSetting = lazy(() =>
-  import ("../pages/StartUp/UserSettings/SettingsPages/DarkModeSetting/DarkModeSetting")
+  import("../pages/StartUp/UserSettings/SettingsPages/DarkModeSetting/DarkModeSetting")
 );
 const LanguageSettings = lazy(() =>
-  import ("../pages/StartUp/UserSettings/SettingsPages/LanguageSettings/LanguageSettings")
+  import("../pages/StartUp/UserSettings/SettingsPages/LanguageSettings/LanguageSettings")
 );
 
 const AutoPlaySettings = lazy(() =>
-  import ("../pages/StartUp/UserSettings/SettingsPages/AutoPlaySettings/AutoPlaySettings")
+  import("../pages/StartUp/UserSettings/SettingsPages/AutoPlaySettings/AutoPlaySettings")
 );
 
 const ContentLanguageSettings = lazy(() =>
-  import ("../pages/StartUp/UserSettings/SettingsPages/ContentLanguageSettings/ContentLanguageSettings")
+  import("../pages/StartUp/UserSettings/SettingsPages/ContentLanguageSettings/ContentLanguageSettings")
 );
 
 const ManageEmailAddresses = lazy(() =>
-  import ("../pages/StartUp/UserSettings/SettingsPages/ManageEmailAddresses/ManageEmailAddresses")
+  import("../pages/StartUp/UserSettings/SettingsPages/ManageEmailAddresses/ManageEmailAddresses")
 );
 
 const PhoneNumberSetting = lazy(() =>
-  import ("../pages/StartUp/UserSettings/SettingsPages/PhoneNumberSetting/PhoneNumberSetting")
+  import("../pages/StartUp/UserSettings/SettingsPages/PhoneNumberSetting/PhoneNumberSetting")
 );
 
 const ChangePassword = lazy(() =>
-  import ("../pages/StartUp/UserSettings/SettingsPages/ChangePassword/ChangePassword")
+  import("../pages/StartUp/UserSettings/SettingsPages/ChangePassword/ChangePassword")
 );
 
 const TwoStepVerification = lazy(() =>
-  import ("../pages/StartUp/UserSettings/SettingsPages/TwoStepVerification/TwoStepVerification")
+  import("../pages/StartUp/UserSettings/SettingsPages/TwoStepVerification/TwoStepVerification")
 );
 
 const CloseAccount = lazy(() =>
-  import ("../pages/StartUp/UserSettings/SettingsPages/CloseAccount/CloseAccount")
+  import("../pages/StartUp/UserSettings/SettingsPages/CloseAccount/CloseAccount")
 );
 
 const FundingInfo = lazy(() => import("../pages/StartUp/Funding/FundingInfo"));
@@ -130,6 +130,14 @@ function StartUpRoutes() {
       />
       <Route
         path="/user/:userId"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <OtherUserProfile />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/user/:username/:userId"
         element={
           <Suspense fallback={<SuspenseLoader />}>
             <OtherUserProfile />
@@ -362,7 +370,7 @@ function StartUpRoutes() {
             </Suspense>
           }
         />
-          <Route
+        <Route
           path="language-settings"
           element={
             <Suspense fallback={<SuspenseLoader />}>
@@ -370,7 +378,7 @@ function StartUpRoutes() {
             </Suspense>
           }
         />
-         <Route
+        <Route
           path="auto-play-settings"
           element={
             <Suspense fallback={<SuspenseLoader />}>
@@ -378,7 +386,7 @@ function StartUpRoutes() {
             </Suspense>
           }
         />
-          <Route
+        <Route
           path="content-language-settings"
           element={
             <Suspense fallback={<SuspenseLoader />}>
@@ -402,7 +410,7 @@ function StartUpRoutes() {
             </Suspense>
           }
         />
-          <Route
+        <Route
           path="change-password"
           element={
             <Suspense fallback={<SuspenseLoader />}>
@@ -410,7 +418,7 @@ function StartUpRoutes() {
             </Suspense>
           }
         />
-  <Route
+        <Route
           path="two-step-verification"
           element={
             <Suspense fallback={<SuspenseLoader />}>
@@ -418,7 +426,7 @@ function StartUpRoutes() {
             </Suspense>
           }
         />
-         <Route
+        <Route
           path="close-account"
           element={
             <Suspense fallback={<SuspenseLoader />}>

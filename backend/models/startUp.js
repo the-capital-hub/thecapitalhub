@@ -92,15 +92,15 @@ const startUpSchema = new Schema(
       // ],
     },
     TAM: {
-      type: Number,
+      type: String,
       // required: true
     },
     SAM: {
-      type: Number,
+      type: String,
       // required: true
     },
     SOM: {
-      type: Number,
+      type: String,
       // required: true
     },
     revenue: {
