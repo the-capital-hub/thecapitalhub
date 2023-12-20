@@ -40,21 +40,50 @@ export default function FundingForm({ setShowForm }) {
     e.preventDefault();
     setLoading(true);
 
+    // const {
+    //   targetMarket,
+    //   whyRightTimeForYourStartUp,
+    //   competitiveAdvantage,
+    //   biggestCompetitors,
+    //   revenueGenerated,
+    // } = e.target;
+
     const {
+      whoareYou,
+      yourBuildBefore,
+      whyDoingThis,
+      problem,
+      solution,
       targetMarket,
-      whyRightTimeForYourStartUp,
-      competitiveAdvantage,
-      biggestCompetitors,
-      revenueGenerated,
+      mvpProductYet,
+      gainedAnyTraction,
+      yourNextStep,
+      useTheFundingRaised,
     } = e.target;
+
+    // let updatedData = {
+    //   fundingViaCapitalhubQuestions: {
+    //     targetMarket: targetMarket.value,
+    //     whyRightTimeForYourStartUp: whyRightTimeForYourStartUp.value,
+    //     competitiveAdvantage: competitiveAdvantage.value,
+    //     biggestCompetitors: biggestCompetitors.value,
+    //     revenueGenerated: revenueGenerated.value,
+    //   },
+    //   // founderId: loggedInUserId,
+    // };
 
     let updatedData = {
       fundingViaCapitalhubQuestions: {
+        whoareYou: whoareYou.value,
+        yourBuildBefore: yourBuildBefore.value,
+        whyDoingThis: whyDoingThis.value,
+        problem: problem.value,
+        solution: solution.value,
         targetMarket: targetMarket.value,
-        whyRightTimeForYourStartUp: whyRightTimeForYourStartUp.value,
-        competitiveAdvantage: competitiveAdvantage.value,
-        biggestCompetitors: biggestCompetitors.value,
-        revenueGenerated: revenueGenerated.value,
+        mvpProductYet: mvpProductYet.value,
+        gainedAnyTraction: gainedAnyTraction.value,
+        yourNextStep: yourNextStep.value,
+        useTheFundingRaised:useTheFundingRaised.value,
       },
       // founderId: loggedInUserId,
     };
@@ -100,12 +129,24 @@ export default function FundingForm({ setShowForm }) {
     // Submit to Email
     try {
       let fundingAnswers = {
+        // fundingViaCapitalhubQuestions: {
+        //   targetMarket: targetMarket.value,
+        //   whyRightTimeForYourStartUp: whyRightTimeForYourStartUp.value,
+        //   competitiveAdvantage: competitiveAdvantage.value,
+        //   biggestCompetitors: biggestCompetitors.value,
+        //   revenueGenerated: revenueGenerated.value,
+        // },
         fundingViaCapitalhubQuestions: {
+          whoareYou: whoareYou.value,
+          yourBuildBefore: yourBuildBefore.value,
+          whyDoingThis: whyDoingThis.value,
+          problem: problem.value,
+          solution: solution.value,
           targetMarket: targetMarket.value,
-          whyRightTimeForYourStartUp: whyRightTimeForYourStartUp.value,
-          competitiveAdvantage: competitiveAdvantage.value,
-          biggestCompetitors: biggestCompetitors.value,
-          revenueGenerated: revenueGenerated.value,
+          mvpProductYet: mvpProductYet.value,
+          gainedAnyTraction: gainedAnyTraction.value,
+          yourNextStep: yourNextStep.value,
+          useTheFundingRaised:useTheFundingRaised.value,
         },
         name: userName,
         email: userEmail,
