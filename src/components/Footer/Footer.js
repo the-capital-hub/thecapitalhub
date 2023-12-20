@@ -1,16 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import "./footer.scss";
 import FbIcon from "../../Images/Fb.svg";
 import TwIcon from "../../Images/Tw.svg";
 import InIcon from "../../Images/In.svg";
 import YtIcon from "../../Images/Yt.svg";
 import { Link } from "react-router-dom";
+import { selectIsInvestor } from "../../Store/features/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectTheme, toggleTheme } from "../../Store/features/design/designSlice";
 
 const Footer = ({ className }) => {
+  const isInvestor = useSelector(selectIsInvestor);
+  const theme = useSelector(selectTheme);
+  const [selectedMode, setSelectedMode] = useState(theme);
+  const dispatch = useDispatch();
+
+  const handleModeChange = (event) => {
+    setSelectedMode(event.target.value);
+    dispatch(toggleTheme(event.target.value));
+  };
   return (
     <div className={`container-fluid footer_container ${className}`}>
       <div className="container">
         <div className="row justify-content-center">
+          <div className="d-flex flex-column justify-content-center align-items-center py-2">
+
+          <p className="m-1 ">Choose how your Capital hub experience looks for this device.
+</p>
+        <div className="onboarding_switch_wrapper ">
+        <div className="form-check form-switch ">
+          <input
+            className={`form-check-input ${isInvestor && "investor"}`}
+            type="checkbox"
+            role="switch"
+            id="onboardingToggle"
+            defaultChecked={selectedMode}
+            // checked={selectedMode === "light"}
+                        onClick={handleModeChange}
+            // ref={switchRef}
+          />
+        </div>
+      </div>
+          </div>
           {/* <div className="col-md-3 col-sm-12 d-flex justify-content-center align-items-center ">
             <p>
               Lorem ipsum dolor sit amet consectetur. Magna integer enim vitae
@@ -78,6 +109,7 @@ const Footer = ({ className }) => {
 
           {/* Social links */}
           <div className="col-md-6 col-sm-6 text-center footer_list_item">
+
             <h4>Get in touch</h4>
             <p>
               Follow us on social media and stay updated with the latest
@@ -138,6 +170,7 @@ const Footer = ({ className }) => {
           </a>
         </div>
       </div>
+    
     </div>
   );
 };

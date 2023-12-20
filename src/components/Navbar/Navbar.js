@@ -7,6 +7,7 @@ import { FaBars } from "react-icons/fa";
 import HambergerIcon from "../../Images/Hamberger.svg";
 import { useSelector } from "react-redux";
 import { setThemeColor } from "../../utils/setThemeColor";
+import { selectTheme } from "../../Store/features/design/designSlice";
 
 function Navbar() {
   const [clicked, setClicked] = useState(false);
@@ -46,9 +47,12 @@ function Navbar() {
       return navigate("/home");
     }
   };
+  const theme = useSelector(selectTheme);
 
   return (
-    <div className="container nav_container">
+  <div className="nav_bar_container" data-bs-theme={theme}>
+
+    <div className="container nav_container" >
       <nav className={`nav ${isScrolling ? "scrolling-nav" : ""}`}>
         <div className="hamberger_logo_login_container">
           <div className="logo_hamberger">
@@ -221,6 +225,8 @@ function Navbar() {
         </div>
       </nav>
     </div>
+    </div>
+
   );
 }
 
