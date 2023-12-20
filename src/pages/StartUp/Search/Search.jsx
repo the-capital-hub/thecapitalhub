@@ -94,8 +94,9 @@ function Search() {
                         to={
                           users._id === loggedInUserId
                             ? "/profile"
-                            : `/user/${users?._id}`
+                            : `/user/${users.firstName.toLowerCase()}-${users.lastName.toLowerCase()}`
                         }
+                        state={{ userId: users._id }}
                       >
                         <img
                           src={`${users?.profilePicture}`}
@@ -108,15 +109,15 @@ function Search() {
                           to={
                             users._id === loggedInUserId
                               ? "/profile"
-                              : `/user/${users?._id}`
+                              : `/user/${users.firstName.toLowerCase()}-${users.lastName.toLowerCase()}`
                           }
+                          state={{ userId: users._id }}
                           className="people_name_link "
                         >
                           <h5>{`${users?.firstName} ${users?.lastName}`} </h5>
                         </Link>
-                        <p>{`${
-                          users?.designation ? users?.designation : ""
-                        }`}</p>
+                        <p>{`${users?.designation ? users?.designation : ""
+                          }`}</p>
                       </div>
                     </div>
                     {users?.connectionsSent?.includes(loggedInUserId) ? (
@@ -196,9 +197,8 @@ function Search() {
                         >
                           <h5>{`${company?.company}`}</h5>
                         </Link>
-                        <p>{`${
-                          company?.description ? company?.description : ""
-                        }`}</p>
+                        <p>{`${company?.description ? company?.description : ""
+                          }`}</p>
                       </div>
                     </div>
                   </div>

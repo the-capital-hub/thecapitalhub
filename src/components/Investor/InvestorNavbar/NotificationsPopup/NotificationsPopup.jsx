@@ -267,9 +267,10 @@ function NotificationsPopup({ toggleVisibility }) {
                         <Link
                           to={
                             isInvestor
-                              ? `/investor/user/${sender?._id}`
-                              : `/user/${sender?._id}`
+                              ? `/investor/user/${sender?.firstName.toLowerCase() + "-" + sender?.lastName.toLowerCase()}`
+                              : `/user/${sender?.firstName.toLowerCase() + "-" + sender?.lastName.toLowerCase()}`
                           }
+                          state={{ userId: sender?._id }}
                           className="fw-bold user-name"
                           onClick={() => handleOnClickLink(_id)}
                         >
