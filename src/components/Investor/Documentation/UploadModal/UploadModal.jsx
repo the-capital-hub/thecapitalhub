@@ -197,11 +197,35 @@ const UploadModal = ({ onCancel, fetchFolder, notify }) => {
             name="Folder"
             id=""
           >
-            {folderSelector?.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))}
+ {folderSelector?.map((item, index) => {
+  let pageTitle;
+
+  switch (item) {
+    case "Legal and compliance":
+      pageTitle = "Legal and Compliance";
+      break;
+    case "pitchdeck":
+      pageTitle = "Pitch Deck";
+      break;
+    case "kycdetails":
+      pageTitle = "KYC Details";
+      break;
+    case "business":
+      pageTitle = "Business";
+      break;
+    default:
+      pageTitle = item;
+      break;
+  }
+
+  // Wrap the return statement in the map callback
+  return (
+    <option key={index} value={item}>
+      {pageTitle}
+    </option>
+  );
+})}
+
             {/* <option value="Other">Other</option> */}
           </select>
 
