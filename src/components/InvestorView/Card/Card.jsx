@@ -2,6 +2,24 @@ import "./Card.scss";
 // import { threeblackdots } from "../../../Images/InvestorsView";
 
 const Card = ({ text, onClicked, image }) => {
+  let folderName;
+
+  switch (text) {
+    case "pitchdeck":
+      folderName = "Pitch Deck";
+      break;
+    case "business":
+      folderName = "Business";
+      break;
+    case "kycdetails":
+      folderName = "KYC Details";
+      break;
+    case "legal and compliance":
+      folderName = "Legal And Compliance";
+      break;
+    default:
+      folderName = text;
+  }
   return (
     <div
       onClick={onClicked}
@@ -18,7 +36,7 @@ const Card = ({ text, onClicked, image }) => {
         {/* <img src={threeblackdots} alt="" /> */}
         <div className="folder_footer">
           <hr />
-          <p>{text}</p>
+          <p>{folderName}</p>
         </div>
       </div>
     </div>
