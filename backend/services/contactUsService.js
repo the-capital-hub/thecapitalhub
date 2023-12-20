@@ -1,6 +1,6 @@
 import { sendMail } from "../utils/mailHelper.js";
-const adminMail = "learn.capitalhub@gmail.com";
-// const adminMail = "adithyahebbar32@gmail.com";
+// const adminMail = "learn.capitalhub@gmail.com";
+const adminMail = "adithyahebbar32@gmail.com";
 
 export const contactUs = async (args) => {
   try {
@@ -139,11 +139,16 @@ export const contactUs = async (args) => {
 export const lookingForFundingMail = async (args, email, name) => {
   try {
     const {
+      whoAreYou,
+      yourBuildBefore,
+      whyDoingThis,
+      problem,
+      solution,
       targetMarket,
-      whyRightTimeForYourStartUp,
-      competitiveAdvantage,
-      biggestCompetitors,
-      revenueGenerated,
+      mvpProductYet,
+      gainedAnyTraction,
+      yourNextStep,
+      useTheFundingRaised,
     } = args;
     let emailMessage = `
     <html>
@@ -199,23 +204,43 @@ export const lookingForFundingMail = async (args, email, name) => {
     </div>
 
     <div class="question">
-      <p class="answer"><strong>What market is your startup targeting?:</strong> ${targetMarket}</p>
+      <p class="answer"><strong>Who are you?:</strong> ${whoAreYou}</p>
     </div>
 
     <div class="question">
-      <p class="answer"><strong>Why Right Time for Your Startup?:</strong> ${whyRightTimeForYourStartUp}</p>
+      <p class="answer"><strong>What have your team built before?:</strong> ${yourBuildBefore}</p>
     </div>
 
     <div class="question">
-      <p class="answer"><strong>What competitive advantage does your startup have?:</strong> ${competitiveAdvantage}</p>
+      <p class="answer"><strong>Why are you doing this?:</strong> ${whyDoingThis}</p>
     </div>
 
     <div class="question">
-      <p class="answer"><strong>Who are the biggest competitors of your startup?:</strong> ${biggestCompetitors}</p>
+      <p class="answer"><strong>What problem are you solving?:</strong> ${problem}</p>
     </div>
 
     <div class="question">
-      <p class="answer"><strong>What is the revenue that you have generated?:</strong> ${revenueGenerated}</p>
+      <p class="answer"><strong>What's your solution?:</strong> ${solution}</p>
+    </div>
+
+    <div class="question">
+      <p class="answer"><strong>Who is your target market?:</strong> ${targetMarket}</p>
+    </div>
+
+    <div class="question">
+      <p class="answer"><strong>Have you built a Minimum Viable Product (MVP) yet?:</strong> ${mvpProductYet}</p>
+    </div>
+
+    <div class="question">
+      <p class="answer"><strong>Have you gained any traction on your idea/MVP so far?:</strong> ${gainedAnyTraction}</p>
+    </div>
+
+    <div class="question">
+      <p class="answer"><strong>What are your next steps?:</strong> ${yourNextStep}</p>
+    </div>
+
+    <div class="question">
+      <p class="answer"><strong>How will you use the funding raised through Capital HUB?:</strong> ${useTheFundingRaised}</p>
     </div>
   </div>
 </body>

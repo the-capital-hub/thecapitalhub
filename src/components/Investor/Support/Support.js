@@ -19,7 +19,7 @@ const Support = () => {
       <div className="support_container">
         {/* <OnelinkValidation /> */}
 
-        <div className="content-70 py-5">
+        <div className="content-70">
           <ComingSoon />
         </div>
       </div>
