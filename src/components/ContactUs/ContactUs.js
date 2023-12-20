@@ -9,6 +9,12 @@ import twIcon from "../../Images/tw_contact.svg";
 import { environment } from "../../environments/environment";
 import axios from "axios";
 import AfterSuccessPopUp from "../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import { selectTheme } from "../../Store/features/design/designSlice";
+import { useSelector } from "react-redux";
+import { BsTelephone } from "react-icons/bs";
+import { CiLocationOn } from "react-icons/ci";
+import { VscSend } from "react-icons/vsc";
+
 const baseUrl = environment.baseUrl;
 
 const ContactUs = () => {
@@ -61,9 +67,11 @@ const ContactUs = () => {
   useEffect(() => {
     document.title = "Contact Us | The Capital Hub";
   }, []);
+  const theme = useSelector(selectTheme);
 
   return (
-    <>
+    <div className="contact_us_container" data-bs-theme={theme}>
+
       {formSubmitted && (
         <AfterSuccessPopUp
           contactFrom
@@ -147,7 +155,9 @@ const ContactUs = () => {
           </form>
           <div className="card-container card-container_contact">
             <div className="card">
-              <img src={callIcon} alt="callimg" />
+              {/* <img src={callIcon} alt="callimg" /> */}
+              <BsTelephone size={75} />
+
               <div className="text_content">
                 <h2>Customer Support</h2>
                 <span
@@ -179,7 +189,9 @@ const ContactUs = () => {
               </button>
             </div>
             <div className="card">
-              <img src={messageIcon} alt="callimg" />
+              {/* <img src={messageIcon} alt="callimg" /> */}
+              <VscSend  size={75}/>
+
               <div className="text_content">
                 <h2>Email us</h2>
                 <span
@@ -210,7 +222,10 @@ const ContactUs = () => {
               </button>
             </div>
             <div className="card">
-              <img src={mapPinIcon} alt="callimg" />
+              {/* <img src={mapPinIcon} alt="callimg" />
+               */}
+<CiLocationOn size={75}/>
+
               <div className="text_content">
                 <h2>Our address</h2>
                 <p>
@@ -240,7 +255,7 @@ const ContactUs = () => {
           </div>
         </div>
       </div>
-    </>
+      </div>
   );
 };
 

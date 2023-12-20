@@ -1,4 +1,8 @@
 $card-width: 30%;
+.contact_us_container{
+
+
+background-color: var(--startup-bg);
 
 .contactus_container {
   a{
@@ -12,7 +16,7 @@ $card-width: 30%;
     align-items: center;
 
     h2 {
-      color: #000;
+      color:var(--d-l-grey);
       font-family: Poppins;
       font-size: 38px;
       font-style: normal;
@@ -21,7 +25,7 @@ $card-width: 30%;
     }
 
     span {
-      color: #2b2b2b;
+      color:var(--d-l-grey);
       font-family: Poppins;
       font-size: 15px;
       font-style: normal;
@@ -44,8 +48,8 @@ $card-width: 30%;
   .container {
     form {
       border-radius: var(--border-radius);
-      border: 1px solid #e7e7e7;
-      background: #f9f9f9;
+      border: 1px solid var(--bs-border-color);
+      background-color: var(--white-to-grey);
       padding: 20px;
 
       .form-input {
@@ -67,8 +71,8 @@ $card-width: 30%;
           width: 100%;
           padding: 5px;
           border-radius: 5.861px;
-          border: 0.586px solid #e4e4e4;
-          background: #fff;
+          border: 1px solid var(--bs-border-color);
+          background-color: var(--bs-light);
         }
       }
 
@@ -97,8 +101,8 @@ $card-width: 30%;
     .card {
       flex: 1;
       border-radius: var(--border-radius);
-      border: 1px solid #e7e7e7;
-      background: #f9f9f9;
+      border: 1px solid var(--bs-border-color);
+      background-color: var(--white-to-grey);
       width: $card-width;
       padding: 20px;
       margin-bottom: 20px;
@@ -137,7 +141,7 @@ $card-width: 30%;
         height: 50px;
         flex-shrink: 0;
         border-radius: 40px;
-        background: #fff;
+        background-color: var(--bs-gray-300);
         color: #000;
         font-family: Poppins;
         font-size: 15px;
@@ -170,6 +174,7 @@ $card-width: 30%;
       }
     }
   }
+}
 }
 
 @media (max-width: 820px) {
