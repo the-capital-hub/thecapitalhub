@@ -4,7 +4,7 @@ import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/T
 import "./OtherUserProfile.scss";
 
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
 import raisedFundsIcon from "../../../Images/StartUp/icons/ColoredCards/3CoinStack.svg";
 import valuationIcon from "../../../Images/StartUp/icons/ColoredCards/3Coins.svg";
 import noOfInvIcon from "../../../Images/StartUp/icons/ColoredCards/Investors.svg";
@@ -31,7 +31,10 @@ function OtherUserProfile() {
   const [userData, setUserData] = useState(null);
   const [connectionSent, setConnectionSent] = useState(false);
 
-  const { userId } = useParams();
+
+  const location = useLocation();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { userId } = location.state || useParams();
 
   const navigate = useNavigate();
 
@@ -44,7 +47,7 @@ function OtherUserProfile() {
     window.scrollTo(0, 0);
     getUserAndStartUpByUserIdAPI(userId)
       .then(({ data }) => setUserData(data))
-      .catch(() => navigate("/profile"));
+      .catch((error) => console.error(error.message));
   }, [userId, connectionSent]);
 
   const handleConnect = (userId) => {
@@ -52,9 +55,9 @@ function OtherUserProfile() {
       .then(({ data }) => {
         console.log("Connection data: ", data);
         if (data?.message === "Connection Request Sent") {
-          setConnectionSent(true); // Set the state to true once
+          setConnectionSent(true);
           setTimeout(() => {
-            setConnectionSent(false); // Reset the state after a delay
+            setConnectionSent(false);
           }, 2500);
         }
       })
@@ -113,8 +116,8 @@ function OtherUserProfile() {
                           <span>Connected</span>
                         </button>
                       ) : userData?.connectionsReceived?.includes(
-                          loggedInUser._id
-                        ) ? (
+                        loggedInUser._id
+                      ) ? (
                         <button className=" connection-status d-flex btn rounded-pill px-3 py-2">
                           <img src={connection} width={20} alt="message user" />
                           <span>Pending</span>
@@ -266,7 +269,7 @@ function OtherUserProfile() {
                     />
                   </div>
                   {/* Color Cards */}
-                  <div className="coloured_cards">
+                  {/* <div className="coloured_cards">
                     <ColorCard
                       color="white"
                       background="#BB98FF"
@@ -318,7 +321,7 @@ function OtherUserProfile() {
                       image={raisedFundsIcon}
                       amount={userData?.startUp?.colorCard?.raised_funds}
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="right_container p-0">
                   <RecommendationCard />
