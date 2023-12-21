@@ -44,6 +44,7 @@ const FeedPostCard = ({
   description,
   firstName,
   lastName,
+  oneLinkId,
   video,
   image,
   documentUrl,
@@ -64,7 +65,6 @@ const FeedPostCard = ({
   resharedPostId,
   deletePostFilterData,
   isSinglePost = false,
-
 }) => {
   const [showComment, setShowComment] = useState(isSinglePost);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -404,12 +404,15 @@ const FeedPostCard = ({
             <div className="  feed_header_container pb-2">
               <div className="feedpostcard_content">
                 <Link
-                  to={`${
-                    loggedInUser?.isInvestor === "true"
-                      ? `/investor/user/${userId}`
-                      : `/user/${userId}`
-                  }`}
+                  to={`/investor/user/${
+                    firstName.toLowerCase() + "-" + lastName.toLowerCase()
+                  }/${oneLinkId}`}
                   className="rounded-circle"
+                  style={{
+                    pointerEvents: `${
+                      loggedInUser._id === userId ? "none" : "all"
+                    }`,
+                  }}
                 >
                   <img
                     src={
@@ -425,16 +428,17 @@ const FeedPostCard = ({
                 </Link>
                 <div className="feedpostcart_text_header my-1">
                   <Link
-                    to={`${
-                      loggedInUser?.isInvestor === "true"
-                        ? `/investor/user/${userId}`
-                        : `/user/${userId}`
-                    }`}
+                    to={`/investor/user/${
+                      firstName.toLowerCase() + "-" + lastName.toLowerCase()
+                    }/${oneLinkId}`}
                     className="text-decoration-none"
                     style={{
                       fontSize: "18px",
                       fontWeight: 600,
                       color: "var(--d-l-grey)",
+                      pointerEvents: `${
+                        loggedInUser._id === userId ? "none" : "all"
+                      }`,
                     }}
                   >
                     {firstName + " " + lastName}
@@ -938,10 +942,23 @@ const FeedPostCard = ({
                       {comments.map((val) => (
                         <section
                           className="single-comment row m-0 mt-2"
-                          key={val.tex}
+                          key={val.text}
                         >
                           <div className="img_container col-2 px-2">
-                            <Link to={`/user/${val.user._id}`}>
+                            <Link
+                              to={`/investor/user/${
+                                val.user.firstName?.toLowerCase() +
+                                "-" +
+                                val.user.lastName?.toLowerCase()
+                              }/${val.user.oneLinkId}`}
+                              style={{
+                                pointerEvents: `${
+                                  loggedInUser._id === val.user._id
+                                    ? "none"
+                                    : "all"
+                                }`,
+                              }}
+                            >
                               <img
                                 src={val.user.profilePicture || ""}
                                 alt="Connection"
@@ -953,8 +970,19 @@ const FeedPostCard = ({
                             <div className="comment-details rounded-3 p-2 p-lg-3 d-flex flex-column">
                               <header className="d-flex justify-content-between align-items-center p-0">
                                 <Link
-                                  to={`/user/${val.user._id}`}
+                                  to={`/investor/user/${
+                                    val.user.firstName?.toLowerCase() +
+                                    "-" +
+                                    val.user.lastName?.toLowerCase()
+                                  }/${val.user.oneLinkId}`}
                                   className="text-decoration-none  fs-sm"
+                                  style={{
+                                    pointerEvents: `${
+                                      loggedInUser._id === val.user._id
+                                        ? "none"
+                                        : "all"
+                                    }`,
+                                  }}
                                 >
                                   <h6 className="fs-sm m-0">
                                     {val.user.firstName +
