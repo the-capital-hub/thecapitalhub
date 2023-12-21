@@ -24,7 +24,7 @@ export default function CompanyStats({ colorCard, startup, tam, sam, som }) {
                 : "Average Investment"}
             </p>
             <p className="fw-semibold">
-              ₹{" "}
+              {" "}
               {startup === "true"
                 ? colorCard?.last_round_investment
                 : colorCard.averageInvestment || ""}
@@ -39,7 +39,7 @@ export default function CompanyStats({ colorCard, startup, tam, sam, som }) {
         >
           <div className="d-flex flex-column gap-2 justify-content-center ps-2">
             <p className="small">Total Investment</p>
-            <p className="fw-semibold">₹ {colorCard?.total_investment || ""}</p>
+            <p className="fw-semibold"> {colorCard?.total_investment || ""}</p>
           </div>
           <img src={About2} alt="statistics" style={{ width: "80px" }} />
         </div>
@@ -55,7 +55,7 @@ export default function CompanyStats({ colorCard, startup, tam, sam, som }) {
             <p className="fw-semibold">
               {startup === "true"
                 ? colorCard?.no_of_investers
-                : `₹ ${colorCard?.no_of_investments}` || ""}
+                : ` ${colorCard?.no_of_investments}` || ""}
             </p>
           </div>
           <img src={About3} alt="statistics" style={{ width: "80px" }} />
@@ -71,7 +71,7 @@ export default function CompanyStats({ colorCard, startup, tam, sam, som }) {
               {startup === "true" ? "Fund Ask" : "Minimum Tickets Size"}
             </p>
             <p className="fw-semibold">
-              ₹{" "}
+              {" "}
               {startup === "true"
                 ? colorCard?.fund_ask
                 : colorCard?.minimumTicketsSize || ""}
@@ -104,7 +104,7 @@ export default function CompanyStats({ colorCard, startup, tam, sam, som }) {
             <div className="d-flex flex-column gap-2 justify-content-center ps-2">
               {/* <p className="small">Total Secured Loans Available</p> */}
               <p className="small">{"SAM"}</p>
-              <p className="fw-semibold">₹ {sam}</p>
+              <p className="fw-semibold"> {sam}</p>
             </div>
             <img src={Revenue2} alt="statistics" style={{ width: "80px" }} />
           </div>
@@ -119,7 +119,7 @@ export default function CompanyStats({ colorCard, startup, tam, sam, som }) {
             <div className="d-flex flex-column gap-2 justify-content-center ps-2">
               {/* <p className="small">Total Secured Loans Available</p> */}
               <p className="small">{"SOM"}</p>
-              <p className="fw-semibold">₹ {som}</p>
+              <p className="fw-semibold"> {som}</p>
             </div>
             <img src={About4} alt="statistics" style={{ width: "80px" }} />
           </div>
@@ -139,7 +139,7 @@ export default function CompanyStats({ colorCard, startup, tam, sam, som }) {
               {startup === "true" ? "Valuation" : "Maximum Tickets Size"}
             </p>
             <p className="fw-semibold">
-              ₹
+              
               {startup === "true"
                 ? colorCard?.valuation
                 : colorCard?.maximumTicketsSize || ""}
@@ -154,7 +154,7 @@ export default function CompanyStats({ colorCard, startup, tam, sam, som }) {
         >
           <div className="d-flex flex-column gap-2 justify-content-center ps-2">
             <p className="small">PAT</p>
-            <p className="fw-semibold">-₹ 2.1 M</p>
+            <p className="fw-semibold">- 2.1 M</p>
           </div>
           <img src={Revenue2} alt="statistics" style={{ width: "80px" }} />
         </div> */}
@@ -168,7 +168,7 @@ export default function CompanyStats({ colorCard, startup, tam, sam, som }) {
               {startup === "true" ? "Raised Funds" : "Seed Round"}
             </p>
             <p className="fw-semibold">
-              ₹{" "}
+              {" "}
               {startup === "true"
                 ? colorCard?.raised_funds
                 : colorCard?.seedRound || ""}
