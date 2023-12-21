@@ -87,7 +87,7 @@ const ColorCard = ({
               className="rupee-sign"
               onClick={onAmountChange ? handleEditClick : () => {}}
             >
-              {!noRupee && "₹"} {editedAmount}{" "}
+              {!noRupee && ""} {editedAmount}{" "}
               {!isOneLink && !isNotEditable && (
                 <label htmlFor="edit" className="edit-tip">
                   Click to edit
