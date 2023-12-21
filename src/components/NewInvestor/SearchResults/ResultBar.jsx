@@ -2,6 +2,11 @@ import React from "react";
 import Default from "../../../Images/Investor/searchResult/business-and-trade.png";
 import "./ResultBar.scss";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import {
+  selectLoggedInUserId,
+  selectUserOneLink,
+} from "../../../Store/features/user/userSlice";
 
 export default function ResultBar({
   image,
@@ -10,16 +15,27 @@ export default function ResultBar({
   isCompany,
   param,
   isInvestor = false,
+  oneLinkId,
 }) {
+  const loggedInUserId = useSelector(selectLoggedInUserId);
+  const userOneLink = useSelector(selectUserOneLink);
+
   const linkTo = isCompany
     ? `/investor/company-profile/${param}`
-    : `/investor/user/${param}`;
+    : `/investor/user/${name}/${oneLinkId}`;
   const link = isInvestor ? `${linkTo}?investor=1` : linkTo;
+
+  const disableLink = isCompany
+    ? param === userOneLink
+    : param === loggedInUserId;
 
   return (
     <Link
       className="text-decoration-none"
-      style={{ color: "var(d-l-grey)" }}
+      style={{
+        color: "var(d-l-grey)",
+        pointerEvents: `${disableLink ? "none" : "all"}`,
+      }}
       // to={isCompany ? `/investor/company-profile/${param}` : `/investor/user/${param}`}
       to={link}
     >

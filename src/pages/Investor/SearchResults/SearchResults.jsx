@@ -5,7 +5,7 @@ import ResultBar from "../../../components/NewInvestor/SearchResults/ResultBar";
 import "./SearchResults.scss";
 import { useEffect, useState } from "react";
 import { getSearchResultsAPI } from "../../../Service/user";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
@@ -14,8 +14,8 @@ import { setPageTitle } from "../../../Store/features/design/designSlice";
 
 export default function SearchResults() {
   // Fetch Global State
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const userIdToRemove = loggedInUser._id;
+  // const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  // const userIdToRemove = loggedInUser._id;
   const dispatch = useDispatch();
 
   // Retrieve Query
@@ -52,14 +52,14 @@ export default function SearchResults() {
   useEffect(() => {
     dispatch(setPageTitle("Search Results"));
     document.title = "Search Results | The Capital Hub";
-  }, []);
+  }, [dispatch]);
 
   return (
     <MaxWidthWrapper>
       <div className="search__results__wrapper pb-5">
         <div className="pb-4 pt-2">
           {/* <Filters filterLabels={SEARCHFILTERS} /> */}
-          <span className="white-to-grey d-l-grey rounded-4 shadow-sm p-2 d-flex flex-wrap gap-2">
+          <span className="white-to-grey d-l-grey rounded-4 shadow-sm px-4 py-3 d-flex flex-wrap gap-2">
             <p className="m-0 p-0">Didn't find what you are looking for?</p>
             <Link
               to="/investor/explore"
@@ -88,6 +88,7 @@ export default function SearchResults() {
                       firstName,
                       lastName,
                       designation,
+                      oneLinkId,
                       _id,
                     } = person;
                     return (
@@ -97,6 +98,7 @@ export default function SearchResults() {
                         description={designation}
                         key={_id}
                         param={_id}
+                        oneLinkId={oneLinkId}
                       />
                     );
                   })
