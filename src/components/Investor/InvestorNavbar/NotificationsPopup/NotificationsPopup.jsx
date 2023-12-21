@@ -242,10 +242,10 @@ function NotificationsPopup({ toggleVisibility }) {
         </button>
       </div>
       {!loading ? (
-        notifications.length ? (
+        notifications?.length ? (
           <>
             {notifications
-              .slice(0, 5)
+              ?.slice(0, 5)
               .map(
                 ({
                   _id,

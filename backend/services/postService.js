@@ -96,7 +96,7 @@ export const allPostsData = async (page, perPage) => {
       .populate({
         path: "user",
         select:
-          "firstName lastName designation profilePicture investor startUp",
+          "firstName lastName designation profilePicture investor startUp oneLinkId",
         populate: [
           {
             path: "investor",
@@ -114,7 +114,7 @@ export const allPostsData = async (page, perPage) => {
         populate: [
           {
             path: "user",
-            select: "firstName lastName designation profilePicture investor startUp",
+            select: "firstName lastName designation profilePicture investor startUp oneLinkId",
             populate: [
               {
                 path: "investor",
@@ -144,7 +144,7 @@ export const singlePostData = async (_id) => {
       .populate({
         path: "user",
         select:
-          "firstName lastName designation profilePicture investor startUp",
+          "firstName lastName designation profilePicture investor startUp oneLinkId",
         populate: [
           {
             path: "investor",
@@ -162,7 +162,7 @@ export const singlePostData = async (_id) => {
         populate: [
           {
             path: "user",
-            select: "firstName lastName designation profilePicture investor startUp",
+            select: "firstName lastName designation profilePicture investor startUp oneLinkId",
             populate: [
               {
                 path: "investor",
