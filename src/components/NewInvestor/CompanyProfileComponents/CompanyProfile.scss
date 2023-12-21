@@ -139,6 +139,11 @@ $color-startup-shadow: rgba(234, 238, 242, 1);
     &:hover {
       transform: scale(0.95);
     }
+
+    &:active {
+      border: 1px solid var(--color-btn);
+      color: var(--color-outline-btn);
+    }
   }
 
   .div__heading {

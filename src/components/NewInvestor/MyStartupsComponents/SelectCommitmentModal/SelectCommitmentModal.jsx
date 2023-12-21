@@ -61,7 +61,7 @@ export default function SelectCommitmentModal({ interestData, founderId }) {
   return (
     <div className="select_commitment_modal_wrapper">
       <ModalBSContainer
-        id={`selectCommitmentModal${founderId}`}
+        id={`selectCommitmentModal${founderId._id}`}
         isStatic={false}
       >
         <ModalBSHeader title={interestData.name} closeRef={closeRef} />
