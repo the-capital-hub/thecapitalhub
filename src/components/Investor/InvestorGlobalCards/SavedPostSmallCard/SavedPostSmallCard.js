@@ -6,6 +6,7 @@ import IconDeleteFill from "../../SvgIcons/IconDeleteFill";
 import { useSelector } from "react-redux";
 import { unsavePost } from "../../../../Service/user";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
+import { selectLoggedInUserId } from "../../../../Store/features/user/userSlice";
 
 const SavedPostSmallCard = ({
   activeHeader,
@@ -13,6 +14,7 @@ const SavedPostSmallCard = ({
   description,
   firstName,
   lastName,
+  oneLinkId,
   profilePicture,
   designation,
   image,
@@ -24,7 +26,7 @@ const SavedPostSmallCard = ({
 }) => {
   console.log("user", resharedPostId);
 
-  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const loggedInUserId = useSelector(selectLoggedInUserId);
 
   // State for KebabMenu
   const [showKebabMenu, setShowKebabMenu] = useState(false);
@@ -54,7 +56,7 @@ const SavedPostSmallCard = ({
     setLoading(true);
 
     const requestBody = {
-      userId: loggedInUser._id,
+      userId: loggedInUserId,
       postId: postId,
     };
 
@@ -84,12 +86,15 @@ const SavedPostSmallCard = ({
         <div className="d-flex align-items-center justify-content-between mb-2">
           <div className="d-flex">
             <Link
-              to={`/user/${userId}`}
+              to={`/user/${
+                firstName.toLowerCase() + "-" + lastName.toLowerCase()
+              }/${oneLinkId}`}
               className="img-fluid mr-2"
               style={{
                 width: "30px",
                 height: "30px",
                 borderRadius: "50%",
+                pointerEvents: `${loggedInUserId === userId ? "none" : "all"}`,
               }}
             >
               <img
