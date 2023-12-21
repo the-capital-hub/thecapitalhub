@@ -81,6 +81,7 @@ const FeaturedPostsContainer = ({ userId }) => {
                   description={description}
                   firstName={user?.firstName}
                   lastName={user?.lastName}
+                  oneLinkId={user?.oneLinkId}
                   video={video}
                   image={image}
                   createdAt={createdAt}

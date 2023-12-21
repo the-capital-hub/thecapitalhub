@@ -415,7 +415,7 @@ export const getAllChats = async (userId) => {
         .populate({
           path: "members",
           model: "Users",
-          select: "firstName lastName profilePicture",
+          select: "firstName lastName profilePicture oneLinkId",
         })
 
     ]);

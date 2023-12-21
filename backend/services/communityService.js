@@ -64,7 +64,7 @@ export const getAllCommunitiesByUserId = async (userId) => {
       .populate({
         path: "members",
         model: "Users",
-        select: "firstName lastName profilePicture",
+        select: "firstName lastName profilePicture oneLinkId",
       })
       .lean();
 
@@ -245,7 +245,7 @@ export const getUnAddedMembers = async (userId, communityId) => {
     );
     const unAddedMembersInfo = await UserModel.find({
       _id: { $in: unAddedMembers },
-    }).select("firstName lastName profilePicture");
+    }).select("firstName lastName profilePicture oneLinkId");
 
     return {
       status: 200,

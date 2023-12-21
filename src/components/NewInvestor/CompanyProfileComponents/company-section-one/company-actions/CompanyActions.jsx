@@ -32,8 +32,16 @@ export default function CompanyActions({
   let myInterestsIds = myInterests?.map((interest) => interest.companyId);
 
   const linkTo = isInvestor
-    ? `/investor/user/${founderId}`
-    : `/user/${founderId}`;
+    ? `/investor/user/${
+        founderId.firstName?.toLowerCase() +
+        "-" +
+        founderId.lastName?.toLowerCase()
+      }/${founderId?.oneLinkId}`
+    : `/user/${
+        founderId.firstName?.toLowerCase() +
+        "-" +
+        founderId.lastName?.toLowerCase()
+      }/${founderId?.oneLinkId}`;
 
   // Handle Uninterst click
   const handleUninterest = async (e, companyId) => {
@@ -88,7 +96,7 @@ export default function CompanyActions({
                   <button
                     className="btn-capital text-center"
                     data-bs-toggle="modal"
-                    data-bs-target={`#selectCommitmentModal${founderId}`}
+                    data-bs-target={`#selectCommitmentModal${founderId._id}`}
                   >
                     Show Interest
                   </button>
@@ -113,11 +121,13 @@ export default function CompanyActions({
                 )}
               </>
             )}
-            <Link to={linkTo}>
-              <button className="btn btn-capital-outline actions-btn">
-                Connect with the Founder
-              </button>
-            </Link>
+            {loggedInUserId !== founderId._id && (
+              <Link to={linkTo}>
+                <button className="btn btn-capital-outline actions-btn">
+                  Connect with the Founder
+                </button>
+              </Link>
+            )}
           </>
         )}
         {!location.pathname === "/company-profile" && (

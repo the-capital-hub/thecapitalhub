@@ -508,7 +508,7 @@ export const getExplore = async (filters) => {
       if (searchQuery) {
         query.company = { $regex: new RegExp(`^${searchQuery}`, 'i') };
       }
-      const startups = await StartUpModel.find(query);
+      const startups = await StartUpModel.find(query).populate("founderId");
       return {
         status: 200,
         message: "Startup data retrieved",

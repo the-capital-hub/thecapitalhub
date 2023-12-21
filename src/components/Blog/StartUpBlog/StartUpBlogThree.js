@@ -48,9 +48,9 @@ const StartUpBlogThree = () => {
                   to={
                     loggedInUser
                       ? loggedInUser?.isInvestor === "true"
-                        ? "/investor/user/64e9fd9d4e368da2bf3e721f"
-                        : "/user/64e9fd9d4e368da2bf3e721f"
-                      : "/author-profile/64e9fd9d4e368da2bf3e721f"
+                        ? "/investor/user/pramod-badiger/184455"
+                        : "/user/pramod-badiger/184455"
+                      : "/author-profile/pramod-badiger/184455"
                   }
                   target="_blank"
                   rel="noopener noreferrer"
@@ -69,9 +69,9 @@ const StartUpBlogThree = () => {
                     to={
                       loggedInUser
                         ? loggedInUser?.isInvestor === "true"
-                          ? "/investor/user/64e9fd9d4e368da2bf3e721f"
-                          : "/user/64e9fd9d4e368da2bf3e721f"
-                        : "/author-profile/64e9fd9d4e368da2bf3e721f"
+                          ? "/investor/user/pramod-badiger/184455"
+                          : "/user/pramod-badiger/184455"
+                        : "/author-profile/pramod-badiger/184455"
                     }
                     target="_blank"
                     rel="noopener noreferrer"

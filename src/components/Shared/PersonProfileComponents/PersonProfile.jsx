@@ -100,9 +100,13 @@ export default function PersonProfile({ theme, short, personData }) {
           />
           <PersonActions
             person={`${isInvestor ? "Investor" : "Founder"}`}
-            userId={personData._id}
-            name={personData.firstName.toLowerCase() + "-" + personData.lastName.toLowerCase()}
-            oneLinkId={personData.oneLinkId}
+            userId={personData?._id}
+            name={
+              personData.firstName?.toLowerCase() +
+              "-" +
+              personData.lastName?.toLowerCase()
+            }
+            oneLinkId={personData?.oneLinkId}
             isInvestor={loggedInUser?.isInvestor === "true"}
           />
         </div>

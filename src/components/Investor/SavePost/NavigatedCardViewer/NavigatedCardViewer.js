@@ -94,6 +94,7 @@ const NavigatedCardViewer = () => {
                     profilePicture,
                     designation,
                     _id: userId,
+                    oneLinkId,
                   },
                   video,
                   image,
@@ -111,6 +112,7 @@ const NavigatedCardViewer = () => {
                   profilePicture={profilePicture}
                   firstName={firstName}
                   lastName={lastName}
+                  oneLinkId={oneLinkId}
                   video={video}
                   image={image}
                   createdAt={createdAt}

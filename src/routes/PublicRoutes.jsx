@@ -216,7 +216,7 @@ function PublicRoutes() {
       <Route path="/login" element={<Login />} />
 
       <Route
-        path="/author-profile/:userId"
+        path="/author-profile/:username/:userId"
         element={
           <Suspense fallback={<SuspenseLoader />}>
             <AuthorProfile />
