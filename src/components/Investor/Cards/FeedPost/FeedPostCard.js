@@ -997,7 +997,20 @@ const FeedPostCard = ({
                         key={val.tex}
                       >
                         <div className="img_container col-2 px-2">
-                          <Link to={`/user/${val.user._id}`}>
+                          <Link
+                            to={`/user/${
+                              val.user?.firstName.toLowerCase() +
+                              "-" +
+                              val.user?.lastName.toLowerCase()
+                            }/${val.user.oneLinkId}`}
+                            style={{
+                              pointerEvents: `${
+                                loggedInUser._id === val.user._id
+                                  ? "none"
+                                  : "all"
+                              }`,
+                            }}
+                          >
                             <img
                               src={val.user.profilePicture || ""}
                               alt="Connection"
