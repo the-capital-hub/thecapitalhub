@@ -53,6 +53,7 @@ const FeedPostCard = ({
   description,
   firstName,
   lastName,
+  oneLinkId,
   video,
   image,
   documentUrl,
@@ -435,7 +436,12 @@ const FeedPostCard = ({
           <div className="feed_header_container pb-2 ">
             <div className="feedpostcard_content">
               {/* Poster's Profile Picture */}
-              <Link to={`/user/${userId}`} className="rounded-circle">
+              <Link
+                to={`/user/${
+                  firstName.toLowerCase() + "-" + lastName.toLowerCase()
+                }/${oneLinkId}`}
+                className="rounded-circle"
+              >
                 <img
                   src={
                     profilePicture ||
@@ -652,6 +658,7 @@ const FeedPostCard = ({
                   description={resharedPostId?.description}
                   firstName={resharedPostId?.user?.firstName}
                   lastName={resharedPostId?.user?.lastName}
+                  oneLinkId={resharedPostId?.user?.oneLinkId}
                   video={resharedPostId?.video}
                   image={resharedPostId?.image}
                   createdAt={resharedPostId?.createdAt}

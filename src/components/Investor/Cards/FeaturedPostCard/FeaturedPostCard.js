@@ -86,21 +86,24 @@ const FeaturedPostCard = ({
         <div className=" featuredpostcard_container mt-2 rounded-4 shadow-sm border">
           <div className="feed_header_container p-2 border-bottom ">
             <div className="feedpostcard_content w-100">
-              <Link to={`/user/${userId}`} className="rounded-circle">
-                <img
-                  src={
-                    profilePicture ||
-                    "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
-                  }
-                  style={{ width: "50px", height: "50px" }}
-                  className="rounded-circle"
-                  alt="logo"
-                />
-              </Link>
+              <img
+                src={
+                  profilePicture ||
+                  "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
+                }
+                style={{ width: "50px", height: "50px" }}
+                className="rounded-circle"
+                alt="logo"
+              />
+
               <div className="feedpostcart_text_header my-1">
                 {/* Fullname */}
                 <span
-                  style={{ fontSize: "15px", fontWeight: 600, color: "var( --d-l-grey)" }}
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: 600,
+                    color: "var( --d-l-grey)",
+                  }}
                 >
                   {firstName + " " + lastName}
                 </span>
@@ -114,8 +117,7 @@ const FeaturedPostCard = ({
                     }}
                   >
                     {/* <img src={HomeIcon} alt="logo" /> */}
-                    <GoHome size={15}/>
-
+                    <GoHome size={15} />
                     {designation}, {userId.startUp?.company}
                   </span>
                   <span
@@ -127,13 +129,16 @@ const FeaturedPostCard = ({
                   >
                     {/* <img src={locationIcon} alt="logo" /> */}
                     <IoLocationOutline size={15} />
-
                     Bangalore, India
                   </span>
                 </span>
                 {/* Time ago */}
                 <span
-                  style={{ fontSize: "10px", fontWeight: 500, color: "var( --d-l-grey)" }}
+                  style={{
+                    fontSize: "10px",
+                    fontWeight: 500,
+                    color: "var( --d-l-grey)",
+                  }}
                 >
                   <TimeAgo datetime={createdAt} locale="" />
                 </span>
@@ -184,7 +189,7 @@ const FeaturedPostCard = ({
                     style={{ maxHeight: "350px", objectFit: "contain" }}
                     width={"100%"}
                     src={image}
-                    alt="post-image"
+                    alt="post media"
                   />
                 </span>
               )}

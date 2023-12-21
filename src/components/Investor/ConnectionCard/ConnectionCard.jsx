@@ -34,6 +34,7 @@ function ConnectionCard({ userIdData }) {
           className={
             "d-flex justify-content-center align-items-center w-100 py-5"
           }
+          colorClass={"d-l-grey"}
         />
       ) : connections.length > 0 ? (
         <>
