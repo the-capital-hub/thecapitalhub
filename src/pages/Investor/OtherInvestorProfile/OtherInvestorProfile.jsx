@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./OtherInvestorProfile.scss";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 // import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
 import { getUserAndStartUpByUserIdAPI } from "../../../Service/user";
 // import messageIcon from "../../../Images/StartUp/icons/message.svg";
@@ -30,9 +30,9 @@ export default function OtherInvestorProfile() {
 
   const [userData, setUserData] = useState(null);
   // const { userId } = useParams();
-  const location = useLocation();
+  // const location = useLocation();
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { userId } = location.state || useParams();
+  const { userId } = useParams();
   const [connectionSent, setConnectionSent] = useState(false);
 
   useEffect(() => {
@@ -50,8 +50,7 @@ export default function OtherInvestorProfile() {
         }
       })
       .catch(() => navigate("/profile"));
-  }, [userId, connectionSent]);
-
+  }, [userId, connectionSent, dispatch]);
 
   return (
     <MaxWidthWrapper>
@@ -145,7 +144,6 @@ export default function OtherInvestorProfile() {
                   image={lastRoundInvIcon}
                   amount={userData?.startUp?.colorCard?.last_round_investment}
                   isOneLink={true}
-
                 />
                 <ColorCard
                   color="white"
@@ -154,7 +152,6 @@ export default function OtherInvestorProfile() {
                   image={totalInvIcon}
                   amount={userData?.startUp?.colorCard?.total_investment}
                   isOneLink={true}
-
                 />
                 <ColorCard
                   color="white"
@@ -164,7 +161,6 @@ export default function OtherInvestorProfile() {
                   amount={userData?.startUp?.colorCard?.no_of_investers}
                   noRupee
                   isOneLink={true}
-
                 />
                 <ColorCard
                   color="white"
@@ -173,7 +169,6 @@ export default function OtherInvestorProfile() {
                   image={fundAskIcon}
                   amount={userData?.startUp?.colorCard?.fund_ask}
                   isOneLink={true}
-
                 />
                 <ColorCard
                   color="white"
@@ -182,7 +177,6 @@ export default function OtherInvestorProfile() {
                   image={valuationIcon}
                   amount={userData?.startUp?.colorCard?.valuation}
                   isOneLink={true}
-
                 />
                 <ColorCard
                   color="white"
