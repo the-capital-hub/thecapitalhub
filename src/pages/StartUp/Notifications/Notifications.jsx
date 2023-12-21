@@ -175,8 +175,16 @@ function Notifications() {
                                   <Link
                                     to={
                                       isInvestor
-                                        ? `/investor/user/${sender?.firstName.toLowerCase() + "-" + sender?.lastName.toLowerCase()}/${sender.oneLinkId}`
-                                        : `/user/${sender?.firstName.toLowerCase() + "-" + sender?.lastName.toLowerCase()}/${sender.oneLinkId}`
+                                        ? `/investor/user/${
+                                            sender?.firstName.toLowerCase() +
+                                            "-" +
+                                            sender?.lastName.toLowerCase()
+                                          }/${sender?.oneLinkId}`
+                                        : `/user/${
+                                            sender?.firstName.toLowerCase() +
+                                            "-" +
+                                            sender?.lastName.toLowerCase()
+                                          }/${sender?.oneLinkId}`
                                     }
                                     className="fw-bold"
                                   >

@@ -6,7 +6,7 @@ import Logo from "../../../Images/investorIcon/new-logo.png";
 // import YellowNotificationIcon from "../../../Images/investorIcon/YellowNotificationIcon.svg";
 // import MessageIcon from "../../../Images/investorIcon/message.svg";
 import { FiSearch } from "react-icons/fi";
-import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
+// import searchIcon from "../../../Images/investorIcon/searchIcon.svg";
 // import HambergerIcon from "../../../Images/Hamberger.svg";
 // import HambergerCrossIcon from "../../../Images/investorsidebar/FontX.svg";
 import { Link, useNavigate } from "react-router-dom";
@@ -163,11 +163,11 @@ const NavBar = (props) => {
                   type="submit"
                   className="investor-searchbar-button d-flex align-items-center justify-content-center"
                 >
-                  <FiSearch size={25} color="white" />
+                  <FiSearch size={25} color="black" />
                 </button>
               </form>
               {inputOnFocus && searchSuggestions && !mobileSearch && (
-                <div className="search_results rounded-4 border shadow-sm p-4 position-absolute bg-white">
+                <div className="search_results rounded-4 border shadow-sm p-4 position-absolute">
                   {!loading ? (
                     searchSuggestions && (
                       <>
@@ -178,15 +178,19 @@ const NavBar = (props) => {
                             </h6>
                           )}
                         {!!searchSuggestions?.users?.length && (
-                          <span className="">Users</span>
+                          <span className="search-heading">Users</span>
                         )}
                         {searchSuggestions?.users
                           ?.slice(0, 5)
-                          .map(({ firstName, lastName, _id }) => (
+                          .map(({ firstName, lastName, _id, oneLinkId }) => (
                             <Link
                               key={_id}
                               className="single_result"
-                              to={`/investor/user/${_id}`}
+                              to={`/investor/user/${
+                                firstName.toLowerCase() +
+                                "-" +
+                                lastName.toLowerCase()
+                              }/${oneLinkId}`}
                             >
                               {firstName} {lastName}
                             </Link>
@@ -205,7 +209,7 @@ const NavBar = (props) => {
                           </span>
                         )}
                         {!!searchSuggestions?.company?.length && (
-                          <span className="mt-2">Companies</span>
+                          <span className="search-heading mt-2">Companies</span>
                         )}
                         {searchSuggestions?.company
                           ?.slice(0, 5)
@@ -353,7 +357,7 @@ const NavBar = (props) => {
                   type="submit"
                   className="searchbar-button d-flex align-items-center justify-content-center"
                 >
-                  <FiSearch size={25} color="white" />
+                  <FiSearch size={25} color="black" />
                 </button>
               </form>
               {inputOnFocus && searchSuggestions && mobileSearch && (
@@ -372,11 +376,19 @@ const NavBar = (props) => {
                         )}
                         {searchSuggestions?.users
                           ?.slice(0, 5)
-                          .map(({ firstName, lastName, _id }) => (
+                          .map(({ firstName, lastName, _id, oneLinkId }) => (
                             <span
                               key={_id}
-                              className="single_result text-secondary"
-                              onClick={() => navigate(`/investor/user/${_id}`)}
+                              className="single_result"
+                              onClick={() =>
+                                navigate(
+                                  `user/${
+                                    firstName.toLowerCase() +
+                                    "-" +
+                                    lastName.toLowerCase()
+                                  }/${oneLinkId}`
+                                )
+                              }
                             >
                               {firstName} {lastName}
                             </span>
@@ -402,7 +414,7 @@ const NavBar = (props) => {
                               .slice(0, 5)
                               .map((item, index) => (
                                 <span
-                                  className="single_result text-secondary"
+                                  className="single_result"
                                   key={item.oneLink}
                                 >
                                   <Link
@@ -411,6 +423,7 @@ const NavBar = (props) => {
                                         ? `/investor/company-profile/${item.oneLink}?investor=1`
                                         : `/investor/company-profile/${item.oneLink}`
                                     }
+                                    className="d-l-grey"
                                   >
                                     {item.company}
                                   </Link>

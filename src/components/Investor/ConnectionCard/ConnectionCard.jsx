@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ConnectionCard.scss";
 import { getUserConnections } from "../../../Service/user";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import { useSelector } from "react-redux";
 import { selectLoggedInUserId } from "../../../Store/features/user/userSlice";
@@ -12,7 +12,6 @@ function ConnectionCard({ userIdData }) {
 
   const [connections, setConnections] = useState([]);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -34,14 +33,20 @@ function ConnectionCard({ userIdData }) {
           className={
             "d-flex justify-content-center align-items-center w-100 py-5"
           }
+          colorClass={"d-l-grey"}
         />
       ) : connections.length > 0 ? (
         <>
           {connections.map((item, index) => (
             <div className="single-card " key={index}>
-              <div
-                className="d-flex flex-column align-items-center justify-content-between gap-3 h-100"
-                onClick={() => navigate(`/user/${item._id}`)}
+              <Link
+                className="d-flex flex-column align-items-center justify-content-between gap-3 h-100 text-decoration-none"
+                to={`/user/${
+                  item?.firstName.toLowerCase() +
+                  "-" +
+                  item?.lastName.toLowerCase()
+                }/${item.oneLinkId}`}
+                style={{ color: "inherit" }}
               >
                 <img
                   src={item?.profilePicture}
@@ -53,7 +58,7 @@ function ConnectionCard({ userIdData }) {
                 </h1>
                 <p className="m-0">{item?.designation}</p>
                 <button className="mt-auto px-3">Connected</button>
-              </div>
+              </Link>
             </div>
           ))}
         </>

@@ -176,6 +176,7 @@ const Feed = () => {
                       _id: userId,
                       startUp,
                       investor,
+                      oneLinkId,
                     },
                     video,
                     image,
@@ -198,6 +199,7 @@ const Feed = () => {
                         description={description}
                         firstName={firstName}
                         lastName={lastName}
+                        oneLinkId={oneLinkId}
                         video={video}
                         image={image}
                         documentName={documentName}

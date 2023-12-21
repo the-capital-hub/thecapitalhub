@@ -9,14 +9,16 @@ import {
   getRecommendations,
   sentConnectionRequest,
 } from "../../../../Service/user";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { setRecommendations } from "../../../../Store/features/user/userSlice";
 
-const RecommendationCard = ({ isInvestor, maxCount = 5 }) => {
+const RecommendationCard = ({ maxCount = 5 }) => {
   // Fetch Global states
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const recommendations = useSelector((state) => state.user.recommendations);
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
+  const isInvestorAccount = pathname.includes("/investor") ? true : false;
 
   // const [users, setUsers] = useState(recommendations);
   const [loading, setLoading] = useState(false);
@@ -89,9 +91,17 @@ const RecommendationCard = ({ isInvestor, maxCount = 5 }) => {
                       <div className="card-body recommendation_card_body">
                         <Link
                           to={
-                            isInvestor
-                              ? `/investor/user/${user?.firstName.toLowerCase() + "-" + user?.lastName.toLowerCase()}/${user.oneLinkId}`
-                              : `/user/${user?.firstName.toLowerCase() + "-" + user?.lastName.toLowerCase()}/${user.oneLinkId}`
+                            isInvestorAccount
+                              ? `/investor/user/${
+                                  user?.firstName.toLowerCase() +
+                                  "-" +
+                                  user?.lastName.toLowerCase()
+                                }/${user.oneLinkId}`
+                              : `/user/${
+                                  user?.firstName.toLowerCase() +
+                                  "-" +
+                                  user?.lastName.toLowerCase()
+                                }/${user.oneLinkId}`
                           }
                           className="rounded-circle"
                         >
@@ -129,14 +139,14 @@ const RecommendationCard = ({ isInvestor, maxCount = 5 }) => {
               </>
             )}
           </div>
-          {connectionSent && !isInvestor && (
+          {connectionSent && !isInvestorAccount && (
             <AfterSuccessPopup
               withoutOkButton
               onClose={() => setConnectionSent(!connectionSent)}
               successText="Connection Sent Successfully"
             />
           )}
-          {connectionSent && isInvestor && (
+          {connectionSent && isInvestorAccount && (
             <InvestorAfterSuccessPopUp
               withoutOkButton
               onClose={() => setConnectionSent(!connectionSent)}

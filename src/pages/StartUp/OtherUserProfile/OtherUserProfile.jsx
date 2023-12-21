@@ -4,18 +4,18 @@ import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/T
 import "./OtherUserProfile.scss";
 
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
-import raisedFundsIcon from "../../../Images/StartUp/icons/ColoredCards/3CoinStack.svg";
-import valuationIcon from "../../../Images/StartUp/icons/ColoredCards/3Coins.svg";
-import noOfInvIcon from "../../../Images/StartUp/icons/ColoredCards/Investors.svg";
-import fundAskIcon from "../../../Images/StartUp/icons/ColoredCards/fundAsk.svg";
-import lastRoundInvIcon from "../../../Images/StartUp/icons/ColoredCards/isoSideCoin.svg";
-import totalInvIcon from "../../../Images/StartUp/icons/ColoredCards/oneHandSideCoin.svg";
+import { Link, useParams } from "react-router-dom";
+// import raisedFundsIcon from "../../../Images/StartUp/icons/ColoredCards/3CoinStack.svg";
+// import valuationIcon from "../../../Images/StartUp/icons/ColoredCards/3Coins.svg";
+// import noOfInvIcon from "../../../Images/StartUp/icons/ColoredCards/Investors.svg";
+// import fundAskIcon from "../../../Images/StartUp/icons/ColoredCards/fundAsk.svg";
+// import lastRoundInvIcon from "../../../Images/StartUp/icons/ColoredCards/isoSideCoin.svg";
+// import totalInvIcon from "../../../Images/StartUp/icons/ColoredCards/oneHandSideCoin.svg";
 import {
   getUserAndStartUpByUserIdAPI,
   sentConnectionRequest,
 } from "../../../Service/user";
-import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
+// import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
 import CompanyDetailsCard from "../../../components/Investor/InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
 import FeaturedPostsContainer from "../../../components/Investor/InvestorGlobalCards/MilestoneCard/FeaturedPostsContainer";
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
@@ -31,12 +31,11 @@ function OtherUserProfile() {
   const [userData, setUserData] = useState(null);
   const [connectionSent, setConnectionSent] = useState(false);
 
-
-  const location = useLocation();
+  // const location = useLocation();
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { userId } = location.state || useParams();
+  const { userId } = useParams();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     window.title = "User Profile | The Capital Hub";
@@ -116,8 +115,8 @@ function OtherUserProfile() {
                           <span>Connected</span>
                         </button>
                       ) : userData?.connectionsReceived?.includes(
-                        loggedInUser._id
-                      ) ? (
+                          loggedInUser._id
+                        ) ? (
                         <button className=" connection-status d-flex btn rounded-pill px-3 py-2">
                           <img src={connection} width={20} alt="message user" />
                           <span>Pending</span>

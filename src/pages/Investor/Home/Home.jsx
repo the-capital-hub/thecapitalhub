@@ -195,6 +195,7 @@ function Home() {
                     _id: userId,
                     startUp,
                     investor,
+                    oneLinkId,
                   },
                   video,
                   image,
@@ -216,6 +217,7 @@ function Home() {
                     investorCompanyName={investor}
                     firstName={firstName}
                     lastName={lastName}
+                    oneLinkId={oneLinkId}
                     video={video}
                     image={image}
                     documentName={documentName}

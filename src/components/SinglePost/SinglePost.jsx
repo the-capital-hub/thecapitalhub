@@ -69,7 +69,7 @@ function SinglePost() {
       <div className="single-post-page">
         {!postLoading ? (
           <>
-            {loggedInUser.isInvestor === "true" ?
+            {loggedInUser.isInvestor === "true" ? (
               <InvestorFeedPostCard
                 userId={postData?.user?._id}
                 postId={postData?._id}
@@ -80,6 +80,7 @@ function SinglePost() {
                 description={postData?.description}
                 firstName={postData?.user?.firstName}
                 lastName={postData?.user?.lastName}
+                oneLinkId={postData?.user?.oneLinkId}
                 video={postData?.video}
                 image={postData?.image}
                 documentName={postData?.documentName}
@@ -95,7 +96,7 @@ function SinglePost() {
                 resharedPostId={postData?.resharedPostId}
                 isSinglePost={true}
               />
-              :
+            ) : (
               <FeedPostCard
                 userId={postData?.user?._id}
                 postId={postData?._id}
@@ -106,6 +107,7 @@ function SinglePost() {
                 description={postData?.description}
                 firstName={postData?.user?.firstName}
                 lastName={postData?.user?.lastName}
+                oneLinkId={postData?.user?.oneLinkId}
                 video={postData?.video}
                 image={postData?.image}
                 documentName={postData?.documentName}
@@ -121,7 +123,7 @@ function SinglePost() {
                 resharedPostId={postData?.resharedPostId}
                 isSinglePost={true}
               />
-            }
+            )}
             {popupOpen && (
               <CreatePostPopUp
                 setPopupOpen={setPopupOpen}
