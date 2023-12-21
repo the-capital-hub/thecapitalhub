@@ -49,7 +49,7 @@ export const getMessages = async (chatId) => {
     const chats = await MessageModel.find({ chatId })
       .populate({
         path: 'senderId',
-        select: 'firstName lastName profilePicture',
+        select: 'firstName lastName profilePicture oneLinkId',
       })
       .exec();
     return {
