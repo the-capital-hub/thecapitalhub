@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 // import ThreeDot from "../../../../Images/VerticalBlackThreeDots.svg";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import IconKebabMenu from "../../SvgIcons/IconKebabMenu";
 import IconDeleteFill from "../../SvgIcons/IconDeleteFill";
 import { useSelector } from "react-redux";
@@ -27,6 +27,8 @@ const SavedPostSmallCard = ({
   console.log("user", resharedPostId);
 
   const loggedInUserId = useSelector(selectLoggedInUserId);
+  const { pathname } = useLocation();
+  const linkPrefix = pathname.includes("/investor") ? "/investor" : "";
 
   // State for KebabMenu
   const [showKebabMenu, setShowKebabMenu] = useState(false);
@@ -86,7 +88,7 @@ const SavedPostSmallCard = ({
         <div className="d-flex align-items-center justify-content-between mb-2">
           <div className="d-flex">
             <Link
-              to={`/user/${
+              to={`${linkPrefix}/user/${
                 firstName.toLowerCase() + "-" + lastName.toLowerCase()
               }/${oneLinkId}`}
               className="img-fluid mr-2"
@@ -173,12 +175,17 @@ const SavedPostSmallCard = ({
             <div key={key} className="card border rounded-4 p-3 ">
               <div className="d-flex pb-3">
                 <Link
-                  to={`/user/${userId}`}
+                  to={`${linkPrefix}/user/${
+                    firstName.toLowerCase() + "-" + lastName.toLowerCase()
+                  }/${oneLinkId}`}
                   className="img-fluid mr-2"
                   style={{
                     width: "30px",
                     height: "30px",
                     borderRadius: "50%",
+                    pointerEvents: `${
+                      loggedInUserId === userId ? "none" : "all"
+                    }`,
                   }}
                 >
                   <img
@@ -228,12 +235,17 @@ const SavedPostSmallCard = ({
             {" "}
             <div className="d-flex pb-3">
               <Link
-                to={`/user/${userId}`}
+                to={`${linkPrefix}/user/${
+                  firstName.toLowerCase() + "-" + lastName.toLowerCase()
+                }/${oneLinkId}`}
                 className="img-fluid mr-2"
                 style={{
                   width: "30px",
                   height: "30px",
                   borderRadius: "50%",
+                  pointerEvents: `${
+                    loggedInUserId === userId ? "none" : "all"
+                  }`,
                 }}
               >
                 <img
