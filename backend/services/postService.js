@@ -337,7 +337,7 @@ export const getComments = async (postId) => {
     const post = await PostModel.findById(postId).populate({
       path: "comments.user",
       model: "Users",
-      select: "firstName lastName designation profilePicture investor startUp",
+      select: "firstName lastName designation profilePicture investor startUp oneLinkId",
       populate: [
         {
           path: "investor",
@@ -507,7 +507,7 @@ export const getSavedPostsByCollection = async (userId, collectionName) => {
     const savedPosts = await PostModel.find({ _id: { $in: postIds } })
       .populate({
         path: "user",
-        select: "firstName lastName profilePicture designation",
+        select: "firstName lastName profilePicture designation oneLinkId",
       })
       .exec();
     for (let i = 0; i < savedPosts.length; i++) {
@@ -517,7 +517,7 @@ export const getSavedPostsByCollection = async (userId, collectionName) => {
         )
           .populate({
             path: "user",
-            select: "firstName lastName profilePicture designation",
+            select: "firstName lastName profilePicture designation oneLinkId",
           })
           .exec();
         savedPosts[i].resharedPostId = resharedPost;
@@ -594,7 +594,7 @@ export const getUsersWhoLikedPost = async (postId) => {
     }
     const likedUsers = await PostModel.findById(postId).populate({
       path: "likes",
-      select: "firstName lastName profilePicture",
+      select: "firstName lastName profilePicture oneLinkId",
     });
     return {
       status: 200,
