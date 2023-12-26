@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DefaultAvatar from "../../../../Images/Chat/default-user-avatar.webp";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
 import IconCloudUpload from "../../SvgIcons/IconCloudUpload";
@@ -9,6 +9,7 @@ import {
 } from "../../../../Store/features/user/userSlice";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 import { educationOptions } from "../../../../constants/Startups/ExplorePage";
+import EasyCrop from "react-easy-crop";
 
 const EXPERIENCE_OPTIONS = [
   "0",
@@ -45,9 +46,61 @@ export default function ProfessionalInfoDisplay({
   handleFileChange,
   canEdit = true,
   loading,
+  previewImage,
+  cropComplete,
+  setCropComplete,
+  setCroppedImage,
+  croppedImage,
 }) {
   const companyFounderId = useSelector(selectCompanyFounderId);
   const loggedinUserId = useSelector(selectLoggedInUserId);
+
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+
+  const getCroppedImg = async (imageSrc, crop) => {
+    const image = new Image();
+    image.src = imageSrc;
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = crop.width;
+    canvas.height = crop.height;
+    ctx.drawImage(
+      image,
+      crop.x,
+      crop.y,
+      crop.width,
+      crop.height,
+      0,
+      0,
+      crop.width,
+      crop.height
+    );
+
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) {
+            reject(new Error("Failed to crop image"));
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.readAsDataURL(blob);
+          reader.onloadend = () => {
+            resolve(reader.result);
+          };
+        },
+        "image/jpeg",
+        1
+      );
+    });
+  };
+
+  const onCropComplete = async (croppedArea, croppedAreaPixels) => {
+    const croppedImg = await getCroppedImg(previewImage, croppedAreaPixels);
+    setCroppedImage(croppedImg);
+  };
 
   return (
     <>
@@ -154,6 +207,41 @@ export default function ProfessionalInfoDisplay({
               <p className="m-0 fs-6 fw-light">{selectedFile?.name}</p>
             </div>
           </fieldset>
+
+          {previewImage && !cropComplete && (
+            <div className="d-flex flex-column justify-content-center gap-2">
+              <div className="image-cropper">
+                <EasyCrop
+                  image={previewImage}
+                  crop={crop}
+                  zoom={zoom}
+                  onCropChange={setCrop}
+                  onZoomChange={setZoom}
+                  onCropComplete={onCropComplete}
+                />
+              </div>
+              <button
+                className="btn btn-light btn-sm"
+                onClick={() => setCropComplete(true)}
+              >
+                Crop
+              </button>
+            </div>
+          )}
+          {cropComplete && (
+            <div className="cropped-preview w-100 d-flex justify-content-center">
+              <img
+                src={croppedImage}
+                alt="cropped post"
+                className=""
+                style={{
+                  maxHeight: "30vh",
+                  width: "auto",
+                  objectFit: "contain",
+                }}
+              />
+            </div>
+          )}
 
           {/* Company */}
           {companyFounderId === loggedinUserId && isEditing && (
