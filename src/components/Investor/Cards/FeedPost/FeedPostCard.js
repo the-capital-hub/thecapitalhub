@@ -631,7 +631,7 @@ const FeedPostCard = ({
                 <span className="d-flex">
                   <img
                     className="mx-auto"
-                    style={{ maxHeight: "350px", objectFit: "contain" }}
+                    style={{ objectFit: "contain" }}
                     width={!repostPreview ? "100%" : "50%"}
                     src={image}
                     alt="Post media"
