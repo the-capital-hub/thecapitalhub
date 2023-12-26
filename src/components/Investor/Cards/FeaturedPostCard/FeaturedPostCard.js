@@ -186,7 +186,7 @@ const FeaturedPostCard = ({
                 <span className="d-flex">
                   <img
                     className="mx-auto rounded-4 my-2 "
-                    style={{ maxHeight: "350px", objectFit: "contain" }}
+                    style={{ objectFit: "contain" }}
                     width={"100%"}
                     src={image}
                     alt="post media"
