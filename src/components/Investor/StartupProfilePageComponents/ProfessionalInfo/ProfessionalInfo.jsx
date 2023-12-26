@@ -20,6 +20,10 @@ export default function ProfessionalInfo({ theme }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const isInvestor = useSelector(selectIsInvestor);
   const companyName = useSelector(selectCompanyName);
+  const [previewImage, setPreviewImage] = useState("");
+  const [cropComplete, setCropComplete] = useState(false);
+  const [croppedImage, setCroppedImage] = useState(null);
+
   const dispatch = useDispatch();
 
   // console.log("companyName", companyName);
@@ -60,7 +64,13 @@ export default function ProfessionalInfo({ theme }) {
   // Handle File change
   function handleFileChange(e) {
     const file = e.target.files[0];
+    const objectUrl = URL.createObjectURL(file);
     setSelectedFile(file);
+    setCropComplete(false);
+    // if (e.target.name === "image" && file.type.includes("image")) {
+    setPreviewImage(objectUrl);
+    //
+    // }
   }
 
   // Handle Submit
@@ -75,8 +85,15 @@ export default function ProfessionalInfo({ theme }) {
     };
 
     try {
-      if (selectedFile) {
-        const profilePicture = await getBase64(selectedFile);
+      // if (selectedFile) {
+      //   const profilePicture = await getBase64(selectedFile);
+      //   editedData = { ...editedData, profilePicture: profilePicture };
+      // }
+      console.log(croppedImage);
+      if (croppedImage) {
+        // const profilePicture = await getBase64(croppedImage);
+        const profilePicture = croppedImage;
+
         editedData = { ...editedData, profilePicture: profilePicture };
       }
       //   console.log("from Submit", editedData, editedCompanyName);
@@ -120,6 +137,8 @@ export default function ProfessionalInfo({ theme }) {
       setIsEditing(false);
       setLoading(false);
       setSelectedFile(null);
+      setCropComplete(false);
+      setPreviewImage("");
     }
   }
 
@@ -139,6 +158,11 @@ export default function ProfessionalInfo({ theme }) {
         handleFileChange={handleFileChange}
         handleSubmit={handleSubmit}
         loading={loading}
+        previewImage={previewImage}
+        cropComplete={cropComplete}
+        setCropComplete={setCropComplete}
+        croppedImage={croppedImage}
+        setCroppedImage={setCroppedImage}
       />
     </section>
   );
