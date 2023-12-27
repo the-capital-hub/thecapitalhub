@@ -709,8 +709,8 @@ const FeedPostCard = ({
               />
               <div className="row feedpostcard_footer">
                 {/* Like and Comment */}
-                <div className="col-8">
-                  <div className="feedpostcard_footer_like_comment d-flex gap-2">
+                <div className="col-6">
+                  <div className="feedpostcard_footer_like_comment d-flex justify-content-around gap-2">
                     {liked ? (
                       <div
                         className="d-flex flex-column align-items-center justify-content-end
@@ -800,7 +800,7 @@ const FeedPostCard = ({
                 </div>
 
                 {/* Repost and Save posts */}
-                <div className=" col-4 d-flex align-items-center gap-1 justify-content-end">
+                <div className=" col-6 d-flex align-items-center gap-1 justify-content-around">
                   <span
                     className={`repost_container rounded-4 ${
                       showRepostOptions ? "bg-light" : ""
