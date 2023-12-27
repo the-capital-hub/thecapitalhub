@@ -76,8 +76,6 @@ export default function ChatInputContainer({
 
   //   Handle Send. The main send function.
   const handleSend = async () => {
-
-
     if (!loggedInUser.achievements.includes("658bb97a8a18edb75e6f4243") && (sendText.includes("https://thecapitalhub.in/onelink/") || sendText.includes("https://thecapitalhub.in/investor/onelink/"))) {
       console.log("Here");
       const achievements = [...loggedInUser.achievements];
