@@ -19,7 +19,7 @@ function PhoneNumberSetting() {
           className="back-button btn-sm  rounded-circle border-none"
           onClick={() => navigate(-1)}
         >
-          <FaArrowLeft size={15} />
+          <FaArrowLeft size={25} />
         </Button>
         Phone numbers
       </h4>

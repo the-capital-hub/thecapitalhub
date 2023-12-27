@@ -75,7 +75,7 @@ function ProfileInformation() {
     <section className="personal_information_section flex-grow-1 ">
       <div className="d-flex flex-row gap-2 align-items-center border-bottom p-3">
         <button className="back_btn " onClick={() => navigate(-1)}>
-          <FaArrowLeft size={15} />
+          <FaArrowLeft size={25} />
         </button>
         <h2>Personal Information</h2>
       </div>
