@@ -128,7 +128,7 @@ function NotificationsPopup({ toggleVisibility }) {
           <span>
             commented on your{" "}
             <Link
-              to={isInvestor ? `/investor/post/${post._id}` : `/posts/${post._id}`}
+              to={isInvestor ? `/investor/post/${post?._id}` : `/posts/${post?._id}`}
               className="fw-bold"
               onClick={() => handleOnClickLink(notificationId)}
             >

@@ -50,7 +50,7 @@ function Navbar() {
   const theme = useSelector(selectTheme);
 
   return (
-  <div className="nav_bar_container" data-bs-theme={theme}>
+  <div className="nav_bar_container" >
 
     <div className="container nav_container" >
       <nav className={`nav ${isScrolling ? "scrolling-nav" : ""}`}>
