@@ -637,8 +637,8 @@ const FeedPostCard = ({
               <>
                 <hr className="mt-1 mb-2" />
                 <div className="row feedpostcard_footer">
-                  <div className="col-8">
-                    <div className="feedpostcard_footer_like_comment p-1 d-flex gap-2">
+                  <div className="col-6">
+                    <div className="feedpostcard_footer_like_comment p-1 d-flex justify-content-around gap-2">
                       {liked ? (
                         <div
                           className="d-flex flex-column align-items-center justify-content-end
@@ -741,7 +741,7 @@ const FeedPostCard = ({
                       )}
                     </div>
                   </div>
-                  <div className=" col-4 d-flex align-items-center gap-3 justify-content-end">
+                  <div className=" col-6 d-flex align-items-center gap-3 justify-content-around">
                     <span
                       className={`repost_container rounded ${
                         showRepostOptions ? "bg-secondary" : ""
