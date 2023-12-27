@@ -54,4 +54,24 @@ export const achievementTypes = {
     description: "Connect with another startup founder",
     badge: "bronze",
   },
+  fallIntoTheDarkSide: {
+    title: "Fall into the Dark Side",
+    description: "Activate dark mode",
+    badge: "bronze",
+  },
+  showMeAround: {
+    title: "Show me around",
+    description: "Complete a tutorial",
+    badge: "bronze",
+  },
+  seeYouLaterAlligator: {
+    title: "See you later, alligator",
+    description: "Save a post",
+    badge: "bronze",
+  },
+  thisIsMe: {
+    title: "This is me",
+    description: "Share your One-Link with another founder/investor",
+    badge: "bronze",
+  },
 };

@@ -47,6 +47,7 @@ import {
 import { fetchAllChats } from "../../../Store/features/chat/chatThunks";
 import TCHLogoLoader from "../../../components/Shared/TCHLoaders/TCHLogoLoader/TCHLogoLoader";
 import { selectTheme } from "../../../Store/features/design/designSlice";
+import { Toaster } from "react-hot-toast";
 
 const Chats = () => {
   // search params
@@ -462,6 +463,15 @@ const Chats = () => {
           </ModalBSContainer>
         </div>
       </div>
+
+      <Toaster
+        containerStyle={{
+          top: "100px",
+        }}
+        toastOptions={{
+          duration: 10000,
+        }}
+      />
     </>
   );
 };
