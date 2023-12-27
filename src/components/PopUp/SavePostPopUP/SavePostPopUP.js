@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import "./SavePostPopUP.scss";
-import { getSavedPostCollections, savePostByUserIdAPI } from "../../../Service/user";
-import { useSelector } from 'react-redux';
+import { getSavedPostCollections, savePostByUserIdAPI, updateUserById, addNotificationAPI } from "../../../Service/user";
+import { useDispatch, useSelector } from 'react-redux';
+import { loginSuccess } from '../../../Store/features/user/userSlice';
+import AchievementToast from '../../Toasts/AchievementToast/AchievementToast';
+import { achievementTypes } from '../../Toasts/AchievementToast/types';
+import toast from 'react-hot-toast';
 
 function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false }) {
   const [selectedOption, setSelectedOption] = useState("");
@@ -9,6 +13,7 @@ function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false })
   const [inputValue, setInputValue] = useState('');
   const [postSaveError, setPostSaveError] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  const dispatch = useDispatch();
 
   const buttonColor = isInvestor ? "#d3f36b" : "#fd5901";
   const buttonText = isInvestor ? "#000" : "#fff";
@@ -30,10 +35,36 @@ function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false })
 
   const handleSavePost = async () => {
     try {
-      const data = await savePostByUserIdAPI(loggedInUser._id, selectedOption ? selectedOption : inputValue, postId);
+      const data = await savePostByUserIdAPI(loggedInUser._id, selectedOption !== 'Other' ? selectedOption : inputValue, postId);
       if (data?.message) {
         onClose();
         savedPostStatus();
+      }
+
+      //saved post achivement
+      if (!loggedInUser.achievements.includes("658bb9748a18edb75e6f4241")) {
+        const achievements = [...loggedInUser.achievements];
+        achievements.push("658bb9748a18edb75e6f4241");
+        const updatedData = { achievements };
+        updateUserById(loggedInUser._id, updatedData)
+          .then(({ data }) => {
+            dispatch(loginSuccess(data.data));
+            const notificationBody = {
+              recipient: loggedInUser._id,
+              type: "achievementCompleted",
+              achievementId: "658bb9748a18edb75e6f4241",
+            };
+            addNotificationAPI(notificationBody)
+              .then((data) => console.log("Added"))
+              .catch((error) => console.error(error.message));
+
+            toast.custom((t) => (
+              <AchievementToast type={achievementTypes.seeYouLaterAlligator} />
+            ));
+          })
+          .catch((error) => {
+            console.error("Error updating user:", error);
+          });
       }
     } catch (err) {
       console.log(err?.response?.data?.message);

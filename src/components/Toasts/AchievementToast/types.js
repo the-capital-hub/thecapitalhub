@@ -64,4 +64,9 @@ export const achievementTypes = {
     description: "Complete a tutorial",
     badge: "bronze",
   },
+  seeYouLaterAlligator: {
+    title: "See you later, alligator",
+    description: "Save a post",
+    badge: "bronze",
+  },
 };
