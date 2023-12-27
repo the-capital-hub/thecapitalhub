@@ -7,11 +7,14 @@ import {
   addMessage,
   getCommunityById,
   getStartupByFounderId,
+  getInvestorById,
+  updateUserById,
+  addNotificationAPI
 } from "../../../../Service/user";
 // import sendIcon from "../../../../Images/Send.svg";
 import "./ChatInputContainer.scss";
 import { getBase64 } from "../../../../utils/getBase64";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { s3 } from "../../../../Service/awsConfig";
 import {
   selectLoggedInUserId,
@@ -25,6 +28,10 @@ import AttachmentSelector from "./ChatAttachments/AttachmentSelector/AttachmentS
 import IconSend from "../../SvgIcons/IconSend";
 import { generateId } from "../../../../utils/ChatsHelpers";
 // import { updateLastMessage } from "../../../../Store/features/chat/chatSlice";
+import AchievementToast from "../../../Toasts/AchievementToast/AchievementToast";
+import toast from "react-hot-toast";
+import { loginSuccess } from "../../../../Store/features/user/userSlice";
+import { achievementTypes } from "../../../Toasts/AchievementToast/types";
 
 export default function ChatInputContainer({
   setSendMessage,
@@ -32,6 +39,7 @@ export default function ChatInputContainer({
   // setIsSent,
   setMessages,
 }) {
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const loggedInUserId = useSelector(selectLoggedInUserId);
   const userFirstName = useSelector(selectUserFirstName);
   const userLastName = useSelector(selectUserLastName);
@@ -43,7 +51,7 @@ export default function ChatInputContainer({
   const isCommunitySelected = useSelector(
     (state) => state.chat.isCommunitySelected
   );
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   // State for text input
   const [sendText, setSendText] = useState("");
@@ -68,6 +76,34 @@ export default function ChatInputContainer({
 
   //   Handle Send. The main send function.
   const handleSend = async () => {
+
+
+    if (!loggedInUser.achievements.includes("658bb97a8a18edb75e6f4243") && (sendText.includes("https://thecapitalhub.in/onelink/") || sendText.includes("https://thecapitalhub.in/investor/onelink/"))) {
+      console.log("Here");
+      const achievements = [...loggedInUser.achievements];
+      achievements.push("658bb97a8a18edb75e6f4243");
+      const updatedData = { achievements };
+      updateUserById(loggedInUser._id, updatedData)
+        .then(({ data }) => {
+          dispatch(loginSuccess(data.data));
+          const notificationBody = {
+            recipient: loggedInUser._id,
+            type: "achievementCompleted",
+            achievementId: "658bb97a8a18edb75e6f4243",
+          };
+          addNotificationAPI(notificationBody)
+            .then((data) => console.log("Added"))
+            .catch((error) => console.error(error.message));
+
+          toast.custom((t) => (
+            <AchievementToast type={achievementTypes.thisIsMe} />
+          ));
+        })
+        .catch((error) => {
+          console.error("Error updating user:", error);
+        });
+    }
+
     if (
       sendText?.trim() === "" &&
       selectedImage === null &&
@@ -172,19 +208,36 @@ export default function ChatInputContainer({
     setShowPreview(true);
   };
 
-  const handleOnelinkClick = () => {
+  const handleOnelinkClick = async () => {
     if (userOneLink) {
-      getStartupByFounderId(loggedInUserId)
-        .then(({ data }) => {
-          setSendText(
-            `https://thecapitalhub.in/onelink/${data.oneLink}/${userOneLinkId}`
-          );
-        })
-        .catch((error) => console.log(error));
+      if (loggedInUser.isInvestor === "false") {
+        getStartupByFounderId(loggedInUserId)
+          .then(({ data }) => {
+            setSendText(
+              `https://thecapitalhub.in/onelink/${data.oneLink}/${userOneLinkId}`
+            );
+          })
+          .catch((error) => console.log(error));
+      } else {
+        getInvestorById(loggedInUser.investor)
+          .then(({ data }) => {
+            setSendText(
+              `https://thecapitalhub.in/investor/onelink/${data.oneLink}/${userOneLinkId}`
+            );
+          })
+          .catch((error) => console.log(error));
+      }
     } else {
-      setSendText(
-        `https://thecapitalhub.in/onelink/${userOneLink}/${userOneLinkId}`
-      );
+      if (loggedInUser.isInvestor === 'false') {
+        setSendText(
+          `https://thecapitalhub.in/onelink/${userOneLink}/${userOneLinkId}`
+        );
+
+      } else {
+        setSendText(
+          `https://thecapitalhub.in/investor/onelink/${userOneLink}/${userOneLinkId}`
+        );
+      }
     }
   };
 

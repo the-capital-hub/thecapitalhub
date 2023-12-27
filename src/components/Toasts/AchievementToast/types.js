@@ -69,4 +69,9 @@ export const achievementTypes = {
     description: "Save a post",
     badge: "bronze",
   },
+  thisIsMe: {
+    title: "This is me",
+    description: "Share your One-Link with another founder/investor",
+    badge: "bronze",
+  },
 };
