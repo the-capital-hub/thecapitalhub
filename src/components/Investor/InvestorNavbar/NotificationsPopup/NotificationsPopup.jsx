@@ -44,18 +44,18 @@ function NotificationsPopup({ toggleVisibility }) {
   const displayPost = (post) => {
     return (
       <>
-        {post.image && (
+        {post?.image && (
           <>
             <br />
-            <img src={post.image} alt="Post" className="img-fluid" width="100" />
+            <img src={post?.image} alt="Post" className="img-fluid" width="100" />
           </>
         )}
 
-        {post.video && (
+        {post?.video && (
           <>
             <br />
             <video width="100">
-              <source src={post.video} type="video/mp4" />
+              <source src={post?.video} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </>
@@ -78,19 +78,19 @@ function NotificationsPopup({ toggleVisibility }) {
           <span>
             liked your{" "}
             <Link
-              to={isInvestor ? `/investor/post/${post._id}` : `/posts/${post._id}`}
+              to={isInvestor ? `/investor/post/${post?._id}` : `/posts/${post?._id}`}
               className="fw-bold"
               onClick={() => handleOnClickLink(notificationId)}
             >
               post
             </Link>
-            {post.description && (
+            {post?.description && (
               <>
                 <br />
                 <span className="text-muted">
-                  {post.description.length > 100
-                    ? `${post.description.slice(0, 100)}...`
-                    : post.description}
+                  {post?.description?.length > 100
+                    ? `${post?.description?.slice(0, 100)}...`
+                    : post?.description}
                 </span>
               </>
             )}
@@ -103,19 +103,19 @@ function NotificationsPopup({ toggleVisibility }) {
           <span>
             shared your{" "}
             <Link
-              to={isInvestor ? `/investor/post/${post._id}` : `/posts/${post._id}`}
+              to={isInvestor ? `/investor/post/${post?._id}` : `/posts/${post?._id}`}
               className="fw-bold"
               onClick={() => handleOnClickLink(notificationId)}
             >
               post
             </Link>
-            {post.description && (
+            {post?.description && (
               <>
                 <br />
                 <span className="text-muted">
-                  {post.description.length > 100
-                    ? `${post.description.slice(0, 100)}...`
-                    : post.description}
+                  {post?.description?.length > 100
+                    ? `${post?.description?.slice(0, 100)}...`
+                    : post?.description}
                 </span>
               </>
             )}
@@ -128,7 +128,7 @@ function NotificationsPopup({ toggleVisibility }) {
           <span>
             commented on your{" "}
             <Link
-              to={isInvestor ? `/investor/post/${post._id}` : `/posts/${post._id}`}
+              to={isInvestor ? `/investor/post/${post?._id}` : `/posts/${post?._id}`}
               className="fw-bold"
               onClick={() => handleOnClickLink(notificationId)}
             >
@@ -138,9 +138,9 @@ function NotificationsPopup({ toggleVisibility }) {
               <>
                 <br />
                 <span className="text-muted">
-                  {post.description.length > 100
-                    ? `${post.description.slice(0, 100)}...`
-                    : post.description}
+                  {post?.description?.length > 100
+                    ? `${post?.description?.slice(0, 100)}...`
+                    : post?.description}
                 </span>
               </>
             )}
