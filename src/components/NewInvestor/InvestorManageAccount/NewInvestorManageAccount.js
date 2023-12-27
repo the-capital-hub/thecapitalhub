@@ -5,7 +5,7 @@ import profileIcon from "../../../Images/investorIcon/profilePic.webp";
 import profileIconRaghu from "../../../Images/aboutUs/Raghu.jpeg";
 import profileIconRaju from "../../../Images/Rectangle 1895.png";
 import { Link } from "react-router-dom";
-import { changePasswordAPI } from "../../../Service/user";
+import { changePasswordAPI, updateUserById, addNotificationAPI } from "../../../Service/user";
 import { useEffect, useState } from "react";
 import LogOutPopUp from "../../PopUp/LogOutPopUp/LogOutPopUp";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +21,8 @@ import { clearAllChatsData } from "../../../Store/features/chat/chatSlice";
 import { fetchAllChats } from "../../../Store/features/chat/chatThunks";
 import { MdDarkMode, MdDelete } from "react-icons/md";
 import { GoSun } from "react-icons/go";
+import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
+import { achievementTypes } from "../../Toasts/AchievementToast/types";
 
 const InvestorManageAccount = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -146,6 +148,37 @@ const InvestorManageAccount = () => {
     }
   };
 
+  const changeTheme = () => {
+    dispatch(toggleTheme())
+
+    // adding achivement
+    if (!loggedInUser.achievements.includes("658bb96e8a18edb75e6f423f") && theme === 'light') {
+      const achievements = [...loggedInUser.achievements];
+      achievements.push("658bb96e8a18edb75e6f423f");
+      const updatedData = { achievements };
+      updateUserById(loggedInUser._id, updatedData)
+        .then(({ data }) => {
+          dispatch(loginSuccess(data.data));
+          const notificationBody = {
+            recipient: loggedInUser._id,
+            type: "achievementCompleted",
+            achievementId: "658bb96e8a18edb75e6f423f",
+          };
+          addNotificationAPI(notificationBody)
+            .then((data) => console.log("Added"))
+            .catch((error) => console.error(error.message));
+
+          toast.custom((t) => (
+            <AchievementToast type={achievementTypes.fallIntoTheDarkSide} />
+          ));
+        })
+        .catch((error) => {
+          console.error("Error updating user:", error);
+        });
+    }
+
+  }
+
   return (
     <MaxWidthWrapper>
       <div className="investor_manage_account_container">
@@ -266,7 +299,7 @@ const InvestorManageAccount = () => {
                 <div className="toggle-theme d-flex">
                   <button
                     className="btn btn-dark text-capitalize mx-auto my-2"
-                    onClick={() => dispatch(toggleTheme())}
+                    onClick={() => changeTheme()}
                   >
                     {theme === "light" ? <GoSun /> : <MdDarkMode />} {theme}{" "}
                     mode
@@ -335,8 +368,8 @@ const InvestorManageAccount = () => {
                                       : account.user.email.slice(0, 21) + "..."
                                     : account.user.email.slice(0, 23) ===
                                       account.user.email
-                                    ? account.user.email
-                                    : account.user.email.slice(0, 23) + "..."}
+                                      ? account.user.email
+                                      : account.user.email.slice(0, 23) + "..."}
                                 </h6>
                               </div>
                             </div>
@@ -351,7 +384,7 @@ const InvestorManageAccount = () => {
                                 alt="delete icon"
                                 className="deleteIcon"
                               /> */}
-                              <MdDelete size={25}/>
+                              <MdDelete size={25} />
 
                             </button>
                           </div>

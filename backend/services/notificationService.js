@@ -43,24 +43,19 @@ export const getNotificationsByUserId = async (userId) => {
       })
       .sort({ _id: -1 });
 
-    const filteredNotifications = await Promise.all(
-      notifications.map(async (notification) => {
-        if (notification.post) {
-          const postExists = await PostModel.exists({ _id: notification.post });
-          if (!postExists) {
-            return null;
-          }
-        }
-        return notification;
-      })
-    );
-
-    const validNotifications = filteredNotifications.filter((notification) => notification !== null);
+    const filteredNotifications = notifications?.filter(notification => {
+      return (
+        (notification.achievementId && notification.achievementId !== null) ||
+        (notification.meetingId && notification.meetingId !== null) ||
+        (notification.connection && notification.connection !== null) ||
+        (notification.post && notification.post !== null)
+      );
+    });
 
     return {
       status: 200,
       message: "Notifications retrieved",
-      data: validNotifications,
+      data: filteredNotifications,
     };
   } catch (error) {
     return {
@@ -153,14 +148,21 @@ export const deleteNotification = async (recipient, sender, type, id) => {
 
 export const getUnreadNotificationCount = async (userId) => {
   try {
-    const unreadCount = await NotificationModel.countDocuments({
-      recipient: userId,
-      isRead: false,
+
+    const notifications = await NotificationModel.find({ recipient: userId, isRead: false, }).populate("post");
+
+    const filteredNotifications = notifications?.filter(notification => {
+      return (
+        (notification.achievementId && notification.achievementId !== null) ||
+        (notification.meetingId && notification.meetingId !== null) ||
+        (notification.connection && notification.connection !== null) ||
+        (notification.post && notification.post !== null)
+      );
     });
     return {
       status: 200,
       message: "Unread notification count retrieved",
-      data: { unreadCount },
+      data: { unreadCount: filteredNotifications?.length },
     };
   } catch (error) {
     return {
