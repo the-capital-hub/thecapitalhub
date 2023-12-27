@@ -58,5 +58,10 @@ export const achievementTypes = {
     title: "Fall into the Dark Side",
     description: "Activate dark mode",
     badge: "bronze",
-  }
+  },
+  showMeAround: {
+    title: "Show me around",
+    description: "Complete a tutorial",
+    badge: "bronze",
+  },
 };

@@ -151,6 +151,7 @@ const InvestorManageAccount = () => {
   const changeTheme = () => {
     dispatch(toggleTheme())
 
+    // adding achivement
     if (!loggedInUser.achievements.includes("658bb96e8a18edb75e6f423f") && theme === 'light') {
       const achievements = [...loggedInUser.achievements];
       achievements.push("658bb96e8a18edb75e6f423f");
