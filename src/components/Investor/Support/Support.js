@@ -4,8 +4,6 @@ import { useEffect } from "react";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import { useDispatch } from "react-redux";
-import CapitalHubQuiz from "./CapitalHubQuiz/CapitalHubQuiz";
-// import OnelinkValidation from "../../Shared/OnelinkValidation/OnelinkValidation";
 
 const Support = () => {
   const dispatch = useDispatch();
@@ -18,12 +16,9 @@ const Support = () => {
   return (
     <MaxWidthWrapper>
       <div className="support_container">
-        {/* <OnelinkValidation /> */}
-
-        {/* <div className="content-70">
+        <div className="content-70">
           <ComingSoon />
-        </div> */}
-        <CapitalHubQuiz />
+        </div>
       </div>
     </MaxWidthWrapper>
   );
