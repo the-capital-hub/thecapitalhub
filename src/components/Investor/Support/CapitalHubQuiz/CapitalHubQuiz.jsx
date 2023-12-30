@@ -12,7 +12,7 @@ const mockQuiz = {
     title: "Introductive Quiz",
     poster:
       "https://images.pexels.com/photos/1072824/pexels-photo-1072824.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    duration: 60,
+    duration: 1,
     questions: [
       {
         questionNumber: "1",
@@ -252,7 +252,7 @@ export default function CapitalHubQuiz() {
       {/* Header */}
       {loading ? (
         <div className="d-flex justify-content-center align-items-center py-5">
-          <Spinner variant="primary" />
+          <Spinner variant="startup" />
         </div>
       ) : (
         <>

@@ -31,17 +31,14 @@ export default function CapitalHubQuizHeader({
     <header className="quiz-header pb-4">
       <Container className="p-0 d-flex flex-column flex-md-row gap-3 align-items-center justify-content-between">
         <Button
-          className="bg-transparent border-0 fs-4 d-flex align-items-center gap-1"
-          style={{ color: "var(--darkMode-currentTheme)" }}
+          className="bg-transparent text-startup border-0 fs-4 d-flex align-items-center gap-1"
           onClick={handleBackClick}
         >
           <MdOutlineChevronLeft />
           Back
         </Button>
 
-        <h4 className="m-0" style={{ color: "var(--darkMode-currentTheme)" }}>
-          Quiz
-        </h4>
+        <h4 className="m-0 text-startup">Quiz</h4>
 
         <div className="d-flex align-items-center gap-2">
           {ongoing && (
