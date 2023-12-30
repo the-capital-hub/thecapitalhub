@@ -26,7 +26,7 @@
   .card-footer {
     padding-inline: 1rem;
     text-align: left;
-    color: #fff;
+    color: var(--d-l-grey);
 
     @media (min-width: 768px) {
       padding-inline: 2rem;
@@ -42,7 +42,7 @@
     .option-bar {
       background-color: #c3c3c326;
       font-size: 1.25rem;
-      color: #fff;
+      color: var(--d-l-grey);
       text-align: left;
 
       border-radius: 10px;
@@ -56,7 +56,7 @@
 
   &.quiz-intro {
     min-height: 40dvh;
-    color: #fff;
+    color: var(--d-l-grey);
 
     display: flex;
     align-items: center;

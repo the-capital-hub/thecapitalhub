@@ -52,7 +52,7 @@ export default function CapitalHubQuizCard({
   }
 
   return (
-    <Card className="quiz-card" ref={cardRef}>
+    <Card className="quiz-card border" ref={cardRef}>
       <Card.Header className="py-4" style={{ minHeight: "125px" }}>
         {questionText}
       </Card.Header>

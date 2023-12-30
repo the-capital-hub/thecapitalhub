@@ -11,7 +11,7 @@ export default function CapitalHubQuizMain({ questions, stopQuiz, timerRef }) {
 
   return (
     <>
-      <div className="quiz-main mx-auto">
+      <div className="quiz-main mx-auto shadow-lg rounded-4">
         <Carousel
           className="d-flex align-items-center gap-4"
           defaultActiveIndex={0}
@@ -23,7 +23,7 @@ export default function CapitalHubQuizMain({ questions, stopQuiz, timerRef }) {
         >
           {questions?.map((question, index) => {
             return (
-              <Carousel.Item key={question.questionNumber}>
+              <Carousel.Item key={question.questionNumber} className="">
                 <CapitalHubQuizCard
                   current={index + 1}
                   total={questions.length}

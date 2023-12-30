@@ -3,7 +3,7 @@ import "./CapitalHubQuizIntro.scss";
 
 export default function CapitalHubQuizIntro({ startQuiz }) {
   return (
-    <Card className="quiz-card quiz-intro">
+    <Card className="quiz-card quiz-intro shadow-sm">
       <h4 className="m-0">{"Quiz Intro"}</h4>
       {/* {poster && <Image src={poster} alt="Quiz" fluid />} */}
       <Button

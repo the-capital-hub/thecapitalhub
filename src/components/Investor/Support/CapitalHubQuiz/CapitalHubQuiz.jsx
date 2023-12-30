@@ -12,7 +12,7 @@ const mockQuiz = {
     title: "Introductive Quiz",
     poster:
       "https://images.pexels.com/photos/1072824/pexels-photo-1072824.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    duration: 1,
+    duration: 20,
     questions: [
       {
         questionNumber: "1",

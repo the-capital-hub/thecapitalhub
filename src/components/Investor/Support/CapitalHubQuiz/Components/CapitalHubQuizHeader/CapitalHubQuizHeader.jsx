@@ -40,7 +40,7 @@ export default function CapitalHubQuizHeader({
 
         <h4 className="m-0 text-startup">Quiz</h4>
 
-        <div className="d-flex align-items-center gap-2">
+        <div className="d-flex flex-column-reverse flex-sm-row align-items-center gap-4 gap-sm-2">
           {ongoing && (
             <Button
               variant="startup"
