@@ -23,7 +23,7 @@ export default function CapitalHubQuizCard({
     }
 
     setAnswered(true);
-    if (selectedAnswer === +answer) {
+    if (selectedAnswer === answer) {
       setCorrectAnswerCount((prev) => {
         return prev + 1;
       });
@@ -53,15 +53,17 @@ export default function CapitalHubQuizCard({
 
   return (
     <Card className="quiz-card" ref={cardRef}>
-      <Card.Header className="py-4">{questionText}</Card.Header>
+      <Card.Header className="py-4" style={{ minHeight: "125px" }}>
+        {questionText}
+      </Card.Header>
       <Card.Body className="d-flex flex-column gap-4 py-3">
-        {options.map((option) => {
+        {options.map((option, index) => {
           return (
             <Alert
               variant={
                 !answered
                   ? "primary"
-                  : +answer === option.optionNumber
+                  : answer === option.optionNumber
                   ? "success"
                   : selectedAnswer === option.optionNumber
                   ? "danger"
@@ -72,7 +74,7 @@ export default function CapitalHubQuizCard({
                   ? "selected"
                   : ""
               }`}
-              key={option._id}
+              key={index}
               data-bs-option={option.optionNumber}
               onClick={() => setSelectedAnswer(option.optionNumber)}
               style={{ pointerEvents: `${answered ? "none" : "all"}` }}
@@ -91,7 +93,7 @@ export default function CapitalHubQuizCard({
           {current !== 1 && (
             <Button
               type="button"
-              variant="primary"
+              variant="startup"
               className="px-4 rounded-pill gradient-bg-light"
               onClick={handleBack}
             >
@@ -100,7 +102,7 @@ export default function CapitalHubQuizCard({
           )}
           <Button
             type="button"
-            variant="primary"
+            variant="startup"
             className="px-4 rounded-pill gradient-bg-light"
             onClick={handleAnswer}
           >
@@ -108,7 +110,7 @@ export default function CapitalHubQuizCard({
           </Button>
           <Button
             type="button"
-            variant="primary"
+            variant="startup"
             className="px-4 rounded-pill gradient-bg-light"
             onClick={handleClick}
           >

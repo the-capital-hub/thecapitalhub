@@ -23,7 +23,7 @@ export default function CapitalHubQuizMain({ questions, stopQuiz, timerRef }) {
         >
           {questions?.map((question, index) => {
             return (
-              <Carousel.Item key={question._id}>
+              <Carousel.Item key={question.questionNumber}>
                 <CapitalHubQuizCard
                   current={index + 1}
                   total={questions.length}

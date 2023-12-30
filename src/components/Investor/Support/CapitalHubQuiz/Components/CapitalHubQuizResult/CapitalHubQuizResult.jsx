@@ -13,7 +13,7 @@ export default function CapitalHubQuizResult({
     } else if (result < 0.79) {
       return "Well done!";
     } else {
-      return "Are you a Forex Savant?";
+      return "Are you a Savant?";
     }
   };
 
@@ -24,9 +24,9 @@ export default function CapitalHubQuizResult({
       backdrop="static"
       centered
       style={{
-        "--bs-modal-bg": "#110302",
+        "--bs-modal-bg": "#333",
         "--bs-modal-color": "#fff",
-        backgroundColor: "rgba(var(--bs-primary-rgb), 0.05)",
+        backgroundColor: "rgba(var(--bs-dark-rgb), 0.05)",
       }}
     >
       <Modal.Body className="d-flex flex-column align-items-center gap-3">
@@ -41,7 +41,7 @@ export default function CapitalHubQuizResult({
         <Modal.Title>{resultText(correctAnswerCount / total)}</Modal.Title>
         <Button
           type="button"
-          variant="primary"
+          variant="startup"
           className="px-4 rounded-pill gradient-bg-light"
           onClick={() => stopQuiz()}
         >

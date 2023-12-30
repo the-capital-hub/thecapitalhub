@@ -4,11 +4,11 @@ import "./CapitalHubQuizIntro.scss";
 export default function CapitalHubQuizIntro({ startQuiz }) {
   return (
     <Card className="quiz-card quiz-intro">
-      <h4 className="m-0">How much do you know about forex?</h4>
+      <h4 className="m-0">{"Quiz Intro"}</h4>
       {/* {poster && <Image src={poster} alt="Quiz" fluid />} */}
       <Button
         type="button"
-        variant="primary"
+        variant="startup"
         className="px-4 rounded-pill gradient-bg-light"
         onClick={() => startQuiz()}
       >
