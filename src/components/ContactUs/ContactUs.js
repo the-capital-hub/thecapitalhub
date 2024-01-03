@@ -168,7 +168,8 @@ const ContactUs = () => {
                   }}
                 >
                   {/* +91 8217839506 */}
-                  +91 76249 37258
+                  {/* +91 76249 37258 */}
+                  +91 6366255319, +91 8217839506
                 </span>
                 <p>
                   You may call us between Monday to Friday 9:00 am to 5:30 pm
@@ -177,7 +178,7 @@ const ContactUs = () => {
               </div>
               <button>
                 <a
-                  href="tel:+917624937258"
+                  href="tel:+918217839506"
                   style={{
                     textDecoration: "none",
                     color: "inherit",
