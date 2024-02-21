@@ -47,7 +47,9 @@
       transition: margin-left 0.3s ease;
       margin-top: 80px + 10px;
       overflow: hidden;
-      min-height: 100dvh; // Added when main content was too short and white space filled screen
+      min-height: calc(
+        100dvh - 90px
+      ); // Added when main content was too short and white space filled screen
     }
 
     // Add a class to handle the sidebar collapsed state
