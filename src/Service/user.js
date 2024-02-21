@@ -85,7 +85,7 @@ async function postStartUpData(startUpData) {
 async function postUserLogin(userData) {
   try {
     const response = await axiosInstance.post(API.loginUser, userData);
-    return response.data;
+    return response?.data;
   } catch (error) {
     console.error("Error:", error);
     throw error;
