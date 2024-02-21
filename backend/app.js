@@ -29,7 +29,10 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
 app.use(express.static("public"));
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:3000', 'https://thecapitalhub.in', 'https://localhost', 'http://localhost'],
+  credentials: true,
+}));
 
 app.use("/users", usersData);
 app.use("/api/posts", postData);
