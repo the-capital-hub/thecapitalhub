@@ -390,13 +390,13 @@ const Login = () => {
             <span className="text mx-2">OR</span>
             <hr className="line" />
           </div>
-          {/* <div className="social-login-container d-flex flex-column justify-content-center">
+          <div className="social-login-container d-flex flex-column justify-content-center">
             {isMobileApp ? (
               <img src={GIcon} alt="Google logo" onClick={googleLoginHandle} />
             ) : (
               <div id="googlesignin" className="mx-auto"></div>
             )}
-          </div> */}
+          </div>
           {/* <div className="row">
             <div className="col d-flex justify-content-center align-items-center login_icons">
               <img src={GIcon} alt="image" />

@@ -29,25 +29,7 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use(cookieParser());
 app.use(express.static("public"));
-app.use(cors({
-  origin: ['http://localhost:3000', 'https://thecapitalhub.in', 'https://localhost', 'http://localhost'],
-  credentials: true,
-}));
-
-app.use((req, res, next) => {
-  const allowedDomains = ['https://thecapitalhub.in', 'http://localhost:3000'];
-
-  const origin = req.headers.origin;
-
-  if (allowedDomains.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
-
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
-
+app.use(cors());
 
 app.use("/users", usersData);
 app.use("/api/posts", postData);
