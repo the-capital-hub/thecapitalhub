@@ -30,7 +30,7 @@ export const registerUserService = async (user) => {
     }
     const newUser = new UserModel(user);
     await newUser.save();
-    newUser.password = undefined;
+    //newUser.password = undefined;
     return newUser;
   } catch (error) {
     throw error;

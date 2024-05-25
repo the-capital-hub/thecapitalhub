@@ -62,9 +62,27 @@ async function uploadDocument(userData) {
   }
 }
 
-async function postUser(userData) {
+async function sendOTP (phoneNumber){
+  try{
+    const response = await axiosInstance.post(API.sendOtp,{phoneNumber})
+    return response.data;
+  }catch(err){
+    throw err
+  }
+}
+
+async function verifyOTP (userData){
+  try{
+    console.log(userData,API.verifyOtp)
+  const response = await axiosInstance.post(API.verifyOtp,userData);
+  return response.data
+  }catch(err){
+    throw err
+  }
+}
+async function postUser(userData,isInvestor,companyDetail) {
   try {
-    const response = await axiosInstance.post(API.postUser, userData);
+    const response = await axiosInstance.post(API.postUser, {...userData,isInvestor,...companyDetail});
     return response.data;
   } catch (error) {
     console.error("Error:", error);
@@ -443,6 +461,8 @@ export {
   getAllPostsAPI,
   getOnePager,
   getUserById,
+  sendOTP,
+  verifyOTP
 };
 export const deletePostAPI = async (postId) => {
   try {

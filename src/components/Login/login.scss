@@ -97,10 +97,10 @@
   }
 
   .register_heading_right {
-    display: flex;
+    //display: flex;
     justify-content: center;
     flex-direction: column;
-    padding-top: 5%;
+    padding-top: 1%;
     gap: 2em;
 
     .backArrow {
@@ -149,12 +149,12 @@
   input[type="text"],
   input[type="password"] {
     width: 100%;
-    padding: 15px;
+    //padding: 15px;
     border-radius: 3px;
     background-color: #fff;
-    padding: 18px 17px;
+    //padding: 18px 17px;
     gap: 10px;
-    height: 54px;
+    //height: 54px;
     border: 2px solid #000000;
     border-radius: 10px;
 
@@ -165,12 +165,12 @@
 
   input[type="tel"] {
     width: 100%;
-    padding: 15px;
+    //padding: 15px;
     border-radius: 3px;
     background-color: #fff;
-    padding: 18px 17px;
+    //padding: 18px 17px;
     gap: 10px;
-    height: 50px;
+    //height: 50px;
     border: none;
     border-radius: 10px;
     outline: none;
@@ -295,12 +295,12 @@
       input[type="text"],
       input[type="password"] {
         width: 100%;
-        padding: 15px;
+        //padding: 15px;
         border-radius: 3px;
         background-color: #fff;
-        padding: 18px 17px;
+        //padding: 18px 17px;
         gap: 10px;
-        height: 54px;
+        //height: 54px;
         border: 2px solid #000000;
         border-radius: 10px;
 
@@ -320,12 +320,12 @@
 
       input[type="tel"] {
         width: 100%;
-        padding: 15px;
+        //padding: 15px;
         border-radius: 3px;
         background-color: #fff;
-        padding: 18px 17px;
+        //padding: 18px 17px;
         gap: 10px;
-        height: 50px;
+        //height: 50px;
         border: none;
         border-radius: 10px;
         outline: none;
@@ -408,11 +408,11 @@
 
 .plato_form_control {
   width: 100%;
-  padding: 15px;
+  //padding: 15px;
   background-color: #fff;
-  padding: 18px 17px;
+  //padding: 18px 17px;
   gap: 10px;
-  height: 54px;
+  //height: 54px;
   border: 2px solid #000000;
   border-radius: var(--border-radius);
 

@@ -117,6 +117,8 @@ const API = Object.freeze({
   addNotificationAPI: `${baseUrl}/notificaton/addNotification`,
   getAllChats: `${baseUrl}/chat/getAllChats`,
   addPastInvestments: `${baseUrl}/investor/addPastInvestmentsController`,
+  sendOtp: `${baseUrl}/users/send_otp`,
+  verifyOtp: `${baseUrl}/users/verify_otp`
 });
 
 export default API;

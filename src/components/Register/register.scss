@@ -1,4 +1,5 @@
 .register_container {
+  padding-bottom: 2rem;
   .register_heading {
     display: flex;
     justify-content: flex-end;
@@ -32,10 +33,10 @@
   }
 
   .register_heading_right {
-    display: flex;
+    //display: flex;
     justify-content: center;
     flex-direction: column;
-    padding-top: 5%;
+    padding-top: 1%;
 
     .backArrow_mobile {
       display: none;
@@ -86,12 +87,12 @@
   input[type="email"],
   input[type="password"] {
     width: 100%;
-    padding: 15px;
+    //padding: 15px;
     border-radius: 3px;
     background-color: #fff;
-    padding: 18px 17px;
+    //padding: 18px 17px;
     gap: 10px;
-    height: 54px;
+    //height: 54px;
     border: 2px solid #2e2e2e;
     border-radius: 10px;
 
@@ -102,12 +103,12 @@
 
   input[type="tel"] {
     width: 100%;
-    padding: 15px;
+    //padding: 15px;
     border-radius: 3px;
     background-color: #fff;
-    padding: 18px 17px;
+    //padding: 18px 17px;
     gap: 10px;
-    height: 54px;
+    //height: 54px;
     border: none;
     border-radius: 10px;
     outline: none;
@@ -190,13 +191,13 @@
 
   // otp Verification starts
   .verification_container {
-    position: fixed;
+    //position: fixed;
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    //justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
+    //background-color: rgba(0, 0, 0, 0.5);
 
     .login_content_main {
       // position: absolute;
@@ -415,12 +416,12 @@
       input[type="tel"],
       input[type="password"] {
         width: 100%;
-        padding: 15px;
+        //padding: 15px;
         border-radius: 3px;
         background-color: #fff;
-        padding: 18px 17px;
+        //padding: 18px 17px;
         gap: 10px;
-        height: 54px;
+        //height: 54px;
         border: 2px solid #4d4d4d;
         border-radius: 10px;
 

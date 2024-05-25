@@ -22,9 +22,14 @@ import {
   updateEducation,
   updateExperience,
   deleteEducation,
-  deleteExperience
+  deleteExperience,
 } from "../services/userService.js";
+import { sendMail } from "../utils/mailHelper.js";
 import { secretKey } from "../constants/config.js";
+import { UserModel } from "../models/User.js";
+import { StartUpModel } from "../models/startUp.js";
+import axios from "axios";
+import { InvestorModel } from "../models/Investor.js";
 
 export const getUsersController = async (req, res, next) => {
   try {
@@ -35,10 +40,84 @@ export const getUsersController = async (req, res, next) => {
     return res.status(500).json({ error: "Failed to fetch data" });
   }
 };
-
+export const sendOTP = async (req, res) => {
+  try {
+    const response = await axios.post(
+      "https://auth.otpless.app/auth/otp/v1/send",
+      {
+        phoneNumber: req.body.phoneNumber,
+        otpLength: 6,
+        channel: "SMS",
+        expiry: 600,
+      },
+      {
+        headers: {
+          clientId: process.env.CLIENT_ID,
+          clientSecret: process.env.CLIENT_SECRET,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return res.status(200).send({
+      orderId: response.data.orderId,
+      message: "OTP Send successfully",
+    });
+  } catch (err) {
+    return res.status(500).json({ error: "Failed to fetch data" });
+  }
+};
+export const verifyOtp = async (req, res) => {
+  try {
+    const response = await axios.post(
+      "https://auth.otpless.app/auth/otp/v1/verify",
+      {
+        orderId: req.body.orderId,
+        otp: req.body.otp,
+        phoneNumber: req.body.phoneNumber,
+      },
+      {
+        headers: {
+          clientId: process.env.CLIENT_ID,
+          clientSecret: process.env.CLIENT_SECRET,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.data.isOTPVerified) {
+      console.log("hii");
+      return res.status(200).send({
+        isOTPVerified: response.data.isOTPVerified,
+        message: "OTP verified",
+      });
+    }
+    return res.status(200).send({
+      data: response.data,
+      message: response.data.reason,
+    });
+  } catch (err) {
+    return res.status(500).json({ error: "Failed to fetch data" });
+  }
+};
 export const registerUserController = async (req, res, next) => {
   try {
-    const { firstName, lastName, email, password, phoneNumber } = req.body;
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      phoneNumber,
+      designation,
+      gender,
+      isInvestor,
+      company,
+      industry,
+      location,
+      foundingAsk,
+      previousFounding,
+      fundedTillDate,
+      portfolio,
+      chequeSize
+    } = req.body;
 
     const newUser = await registerUserService({
       firstName,
@@ -46,11 +125,102 @@ export const registerUserController = async (req, res, next) => {
       email,
       password,
       phoneNumber,
+      isInvestor,
+      gender,
     });
 
-    return res
-      .status(201)
-      .json({ data: newUser, message: "User added successfully" });
+    const generateUniqueOneLink = async (baseLink, model) => {
+      let uniqueLink = baseLink;
+      let count = 1;
+      while (await model.countDocuments({ oneLink: uniqueLink })) {
+        uniqueLink = baseLink + count++;
+      }
+      return uniqueLink;
+    };
+
+    if (isInvestor) {
+      let existingCompany = await InvestorModel.findOne({ founderId: newUser._id });
+      let baseOneLink = company.split(" ").join("").toLowerCase();
+      const uniqueOneLink = await generateUniqueOneLink(baseOneLink, InvestorModel);
+
+      if (existingCompany) {
+        existingCompany.set({
+          companyName: company,
+          industry,
+          description: portfolio,
+          oneLink: uniqueOneLink,
+        });
+        await existingCompany.save();
+        return res.status(200).json({ message: "Investor Updated", data: existingCompany });
+      }
+
+      const newInvestor = new InvestorModel({
+        companyName: company,
+        industry,
+        description: portfolio,
+        oneLink: uniqueOneLink,
+      });
+
+      await newInvestor.save();
+      const { founderId } = newInvestor;
+      const user = await UserModel.findByIdAndUpdate(founderId, {
+        investor: newInvestor._id,
+        location,
+      });
+
+      const emailMessage = `
+        A new user has requested for an account:
+        
+        Investor Details:
+        User ID: ${user._id}
+        Name: ${user.firstName} ${user.lastName}
+        Email: ${user.email}
+        Mobile: ${user.phoneNumber}
+        Company Name: ${newInvestor.companyName}
+        Industry: ${newInvestor.industry}
+        Portfolio: ${newInvestor.portfolio}
+      `;
+      const subject = "New Account Request";
+      const adminMail = "learn.capitalhub@gmail.com";
+      const response = await sendMail(user.firstName, adminMail, user.email, subject, emailMessage);
+
+      if (response.status === 200) {
+        return res.status(200).json({ message: "Investor Added", data: newUser });
+      } else {
+        return res.status(500).json({ message: "Error while sending mail" });
+      }
+    } else {
+      let existingCompany = await StartUpModel.findOne({ founderId: newUser._id });
+      let baseOneLink = company.split(" ").join("").toLowerCase();
+      const uniqueOneLink = await generateUniqueOneLink(baseOneLink, StartUpModel);
+
+      if (existingCompany) {
+        existingCompany.set({
+          location,
+          foundingAsk,
+          company,
+          industry,
+          designation,
+          oneLink: uniqueOneLink,
+        });
+        await existingCompany.save();
+        return res.status(200).json({ message: "Startup Updated", data: existingCompany });
+      }
+
+      const newStartUp = new StartUpModel({
+        ...req.body,
+        oneLink: uniqueOneLink,
+      });
+
+      await newStartUp.save();
+      const { founderId } = newStartUp;
+      await UserModel.findByIdAndUpdate(founderId, {
+        startUp: newStartUp._id,
+        gender,
+      });
+
+      return res.status(201).json({ message: "User added successfully" });
+    }
   } catch ({ message }) {
     res.status(409).json({
       success: false,
@@ -59,6 +229,7 @@ export const registerUserController = async (req, res, next) => {
     });
   }
 };
+
 
 export const loginUserController = async (req, res, next) => {
   try {
@@ -110,7 +281,7 @@ export const updateUser = async (req, res) => {
       newData,
     });
     res.status(status).json({ message, data });
-  } catch (error) { }
+  } catch (error) {}
 };
 
 export const updateUserByIdController = async (req, res) => {
@@ -118,7 +289,7 @@ export const updateUserByIdController = async (req, res) => {
     const { userId } = req.params;
     const { status, message, data } = await updateUserById(userId, req.body);
     res.status(status).json({ message, data });
-  } catch (error) { }
+  } catch (error) {}
 };
 
 export const changePasswordController = async (req, res) => {
@@ -298,7 +469,6 @@ export const createSecretKeyController = async (req, res) => {
     });
   }
 };
-
 
 export const googleLoginController = async (req, res) => {
   try {

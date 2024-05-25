@@ -22,14 +22,17 @@ import {
   updateEducationController,
   updateExperienceController,
   deleteEducationController,
-  deleteExperienceController
+  deleteExperienceController,
+  sendOTP,
+  verifyOtp
 } from "../controllers/userData.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
 
 router.post("/login", loginUserController);
 router.post("/createUser", registerUserController);
-
+router.post("/send_otp",sendOTP);
+router.post("/verify_otp", verifyOtp)
 router.get("/getUserById/:id", getUserByIdController);
 
 router.patch("/updateUserById/:userId", updateUserByIdController);
