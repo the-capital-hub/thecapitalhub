@@ -166,7 +166,7 @@ export const updateOnePager = async ({ _id, ...data }) => {
 
 export const investNowService = async (args) => {
   try {
-    const { fromUserName, fromUserEmail, fromUserMobile, toUserId } = args;
+    const { fromUserName, fromUserEmail, fromUserMobile, toUserId,commitmentAmount } = args;
     const toUser = await UserModel.findById(toUserId);
     if (!toUser) {
       return {
@@ -179,7 +179,8 @@ export const investNowService = async (args) => {
       Hello ${toUser.firstName},
       
       You have received an investment proposal from ${fromUserName}.
-      
+      Commitment amount is ${commitmentAmount}
+
       Contact Details:
       Email: ${fromUserEmail}
       Mobile: ${fromUserMobile}

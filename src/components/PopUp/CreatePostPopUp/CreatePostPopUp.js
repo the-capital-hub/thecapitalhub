@@ -38,7 +38,7 @@ const CreatePostPopUp = ({
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [selectedDocument, setSelectedDocument] = useState(null);
   const [posting, setPosting] = useState(false);
-
+  const [postType,setPostType] = useState("public")
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedImage, setCroppedImage] = useState(null);
@@ -215,7 +215,9 @@ const CreatePostPopUp = ({
       const res = await s3.upload(params).promise();
       postData.append("documentUrl", res.Location);
       postData.append("documentName", selectedDocument.name);
+    
     }
+    postData.append("postType",postType)
     postUserPost(postData)
       .then((response) => {
         appendDataToAllPosts(response.data);
@@ -302,7 +304,10 @@ const CreatePostPopUp = ({
                     <h2>
                       {loggedInUser?.firstName} {loggedInUser.lastName}
                     </h2>
-                    <h6>Public</h6>
+                    <div style={{display:"flex",width:"110px",justifyContent:"space-between"}}>
+                    <h6 className="" style={{backgroundColor:postType==="public"&&"#fd5901",color:postType==="public"?"#fff":"grey",padding:"1px 2px",borderRadius:"2px",cursor:"pointer"}} onClick={()=>setPostType("public")}>Public</h6>
+                    <h6 style={{backgroundColor:postType==="company"&&"rgb(211, 243, 107)",color:postType==="company"?"#000":"grey",padding:"1px 2px",borderRadius:"2px",cursor:"pointer"}} onClick={()=>setPostType("company")}>Company</h6>
+                    </div>
                   </span>
                 </div>
               </div>
@@ -435,7 +440,7 @@ const CreatePostPopUp = ({
                     accept="image/*"
                   />
                   <button
-                    className="white_button"
+                    className="white_button hover-text"
                     onClick={handleGalleryButtonClick}
                   >
                     {/* <img src={GallaryIcon} alt="Button 1" />
@@ -443,6 +448,7 @@ const CreatePostPopUp = ({
                     <CiImageOn size={25} style={{
                       color: 'var(--d-l-grey)'
                     }}/>
+                    <span class="tooltip-text top">images</span>
                   </button>
 
                   {/* Video input and Icon */}
@@ -455,13 +461,14 @@ const CreatePostPopUp = ({
                     accept="video/*"
                   />
                   <button
-                    className="white_button"
+                    className="white_button hover-text"
                     onClick={handleCameraButtonClick}
                   >
                     {/* <img src={IconVideo} alt="Button 2" /> */}
                     <CiVideoOn size={25} style={{
                       color: 'var(--d-l-grey)'
                     }}/>
+                    <span class="tooltip-text top1">video</span>
                   </button>
 
                   {/* Document input and Icon */}
@@ -473,13 +480,14 @@ const CreatePostPopUp = ({
                     onChange={handleFileChange}
                   />
                   <button
-                    className="white_button"
+                    className="white_button hover-text"
                     onClick={handleDocumentButtonClick}
                   >
                     {/* <img src={CameraIcon} alt="Button 2" /> */}
                     <IconFile width="16px" height="16px" style={{
                       color: 'var(--d-l-grey)'
                     }}/>
+                    <span class="tooltip-text top2">doc</span>
                   </button>
 
                   {/* <input
@@ -496,11 +504,12 @@ const CreatePostPopUp = ({
                       <img src={SmileeIcon} alt="Button 3" />
                     </button> */}
 
-                  <button className="white_button" onClick={handleOneLinkClick}>
+                  <button className="white_button hover-text" onClick={handleOneLinkClick}>
                     {/* <img src={ThreeDotsIcon} alt="Button 4" /> */}
                     <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} style={{
                       color: 'var(--d-l-grey)'
                     }}/>
+                    <span class="tooltip-text top3">link</span>
                   </button>
                 </div>
                 <div className="post_button_container">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./login.scss";
 import RegisterIcon from "../../Images/Group 21.svg";
 import GIcon from "../../Images/Group 22.svg";
@@ -6,7 +6,7 @@ import GIcon from "../../Images/Group 22.svg";
 // import AIcon from "../../Images/Group 24.svg";
 import PhoneInput from "react-phone-number-input";
 import { Link, useNavigate } from "react-router-dom";
-import { googleLoginAPI, postUserLogin } from "../../Service/user";
+import { googleLoginAPI, postUserLogin, sendOTP, verifyOTP } from "../../Service/user";
 import AfterSuccessPopUp from "../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import InvestorAfterSuccessPopUp from "../PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
 import ErrorPopUp from "../PopUp/ErrorPopUp/ErrorPopUp";
@@ -31,6 +31,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [open,setOpen] = useState(false)
 
   const isMobileApp = useSelector(selectIsMobileApp);
 
@@ -47,7 +48,11 @@ const Login = () => {
   const [isLoginSuccessfull, setIsLoginSuccessfull] = useState(false);
   const [isInvestorSelected, setIsInvestorSelected] = useState(false);
   const [error, setError] = useState(null);
-
+  const [show,setShow] = useState(false);
+  const [orderId,setOrderId]=useState("");
+  const otpInputRefs = useRef([]);
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [showResetPopUp, setShowResetPopUp] = useState(false);
   const [inputValues, setInputValues] = useState({
     password: "",
@@ -57,6 +62,13 @@ const Login = () => {
 
   const handleCheckboxChange = () => {
     setStaySignedIn(!staySignedIn);
+  };
+  const isValidMobileNumber = (phoneNumber) => {
+    // Remove any non-digit characters from the input
+    const cleanedNumber = phoneNumber.replace(/\D/g, "");
+
+    // Check if the cleaned number starts with the country code for India (+91) and has 10 digits
+    return /^91\d{10}$/.test(cleanedNumber);
   };
   // Handle Input change
   const handleInputChange = (event, type) => {
@@ -71,91 +83,137 @@ const Login = () => {
       setInputValues({ ...inputValues, phoneNumber: event });
     }
   };
-
-  // Handle Submit
-  const handleSubmit = async (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
-    setLoading(true);
+    if (!isValidMobileNumber(inputValues.phoneNumber)) {
+      setShowErrorPopup(true);
+      setTimeout(() => {
+        setShowErrorPopup(false);
+      }, 2000);
+
+      return;
+    }
     try {
-      const { phoneNumber, password } = inputValues;
-      const response = await postUserLogin(inputValues);
-      console.log("response-->", response);
-
-      const user = response.user;
-      const token = response.token;
-      localStorage.setItem("accessToken", token);
-      localStorage.setItem("isLoggedIn", "true");
-      if (response) {
-        console.log("response--->", response);
-        // (startup is selected)Investor is not selected and user is investor
-        if (!isInvestorSelected) {
-          if (user.isInvestor === "true") {
-            setError("Invalid credentials");
+      if (!show) {
+        if (isValidMobileNumber(inputValues.phoneNumber)) {
+          // Implement your mobile number verification logic here
+          if (
+            inputValues.phoneNumber === "" ||
+            inputValues.phoneNumber.length < 10
+          )
             return;
-          }
-        }
-        // Investor is selected and user is not investor(user is startup)
-        if (isInvestorSelected) {
-          if (user.isInvestor === "false") {
-            setError("Invalid credentials");
-            return;
-          }
-        }
-
-        const storedAccountsKey =
-          user.isInvestor === "true" ? "InvestorAccounts" : "StartupAccounts";
-
-        const storedAccounts =
-          JSON.parse(localStorage.getItem(storedAccountsKey)) || [];
-        const isAccountExists = storedAccounts.some(
-          (account) => account.user._id === user._id
-        );
-
-        if (!isAccountExists) {
-          storedAccounts.push(response);
-          localStorage.setItem(
-            storedAccountsKey,
-            JSON.stringify(storedAccounts)
-          );
-        }
-
-        // No errors, Set loginsuccessfull to true
-        setIsLoginSuccessfull(true);
-
-        setTimeout(() => {
-          // Reset states
-          setIsInvestorSelected(false);
-          setIsLoginSuccessfull(false);
-
-          if (!user.investor) navigate("/home");
-          else navigate("/investor/home");
-        }, 2000);
-
-        dispatch(loginSuccess(response.user));
-        // Fetch company data asynchronously
-        let isInvestor = response.user.isInvestor === "true" ? true : false;
-        if (isInvestor) {
-          dispatch(fetchCompanyData(response.user.investor, isInvestor));
+          const res = await sendOTP(inputValues.phoneNumber);
+          setOrderId(res?.orderId);
+          setOpen(true)
+          setShow(true);
+         
         } else {
-          dispatch(fetchCompanyData(response.user._id, isInvestor));
-        }
-
-        // Fetch all Chat data
-        dispatch(fetchAllChats());
+          // Handle invalid phone number scenario
+          console.log("Invalid phone number");
+        } 
       }
-
-      console.log("JWT Token:", token);
     } catch (error) {
+      console.log(error)
       console.error("Login failed:", error.response.data.message);
       setError(error.response.data.message);
-
-      // dispatch(loginFailure(error.response.data.error));
       console.log(error);
     } finally {
       setLoading(false);
     }
   };
 
+  const ValidateOtp = async () => {
+    setLoading(true);
+    try{
+    // if (otp === null) return;
+    // const verificationCode = otp.join(""); // Join the array elements into a string
+    // const res = await verifyOTP({
+    //   otp: verificationCode,
+    //   orderId,
+    //   phoneNumber: inputValues.phoneNumber,
+    // });
+    //  if (res.isOTPVerified) {
+      setLoading(true);
+        const response = await postUserLogin(inputValues);
+        console.log("response-->", response);
+  
+        const user = response.user;
+        const token = response.token;
+        localStorage.setItem("accessToken", token);
+        localStorage.setItem("isLoggedIn", "true");
+        console.log(user,token)
+        if (response) {
+          console.log("response--->", response);
+          // (startup is selected)Investor is not selected and user is investor
+          if (!isInvestorSelected) {
+            if (user.isInvestor === "true") {
+              setError("Invalid credentials");
+              return;
+            }
+          }
+          // Investor is selected and user is not investor(user is startup)
+          if (isInvestorSelected) {
+            if (user.isInvestor === "false") {
+              setError("Invalid credentials");
+              return;
+            }
+          }
+  
+          const storedAccountsKey =
+            user.isInvestor === "true" ? "InvestorAccounts" : "StartupAccounts";
+  
+          const storedAccounts =
+            JSON.parse(localStorage.getItem(storedAccountsKey)) || [];
+          const isAccountExists = storedAccounts.some(
+            (account) => account.user._id === user._id
+          );
+  
+          if (!isAccountExists) {
+            storedAccounts.push(response);
+            localStorage.setItem(
+              storedAccountsKey,
+              JSON.stringify(storedAccounts)
+            );
+          }
+  
+          // No errors, Set loginsuccessfull to true
+          setIsLoginSuccessfull(true);
+  
+          setTimeout(() => {
+            // Reset states
+            setIsInvestorSelected(false);
+            setIsLoginSuccessfull(false);
+  
+            if (!user.investor) navigate("/home");
+            else navigate("/investor/home");
+          }, 2000);
+  
+          dispatch(loginSuccess(response.user));
+          // Fetch company data asynchronously
+          let isInvestor = response.user.isInvestor === "true" ? true : false;
+          if (isInvestor) {
+            dispatch(fetchCompanyData(response.user.investor, isInvestor));
+          } else {
+            dispatch(fetchCompanyData(response.user._id, isInvestor));
+          }
+  
+          // Fetch all Chat data
+          dispatch(fetchAllChats());
+        }
+  
+        console.log("JWT Token:", token);
+      //}
+  }catch (error) {
+    console.log(error)
+    console.error("Login failed:", error.response.data.message);
+    setError(error.response.data.message);
+
+    // dispatch(loginFailure(error.response.data.error));
+    console.log(error);
+  } finally {
+    setLoading(false);
+  }
+  };
   // Handle close of login successful popup
   const handleClosePopup = () => {
     if (!isInvestorSelected) {
@@ -169,9 +227,6 @@ const Login = () => {
   const handleCloseResetPopup = () => {
     setShowResetPopUp(false);
     navigate("/login");
-  };
-  const handleBack = () => {
-    navigate("/");
   };
 
   useEffect(() => {
@@ -213,7 +268,25 @@ const Login = () => {
       console.log(error);
     }
   };
-
+  const handleOtpChange = (event, index) => {
+    const value = event.target.value;
+    console.log(value);
+    const updatedOtp = [...otp];
+    updatedOtp[index] = value;
+    setOtp(updatedOtp);
+    if (value !== "" && index < otp.length - 1) {
+      otpInputRefs.current[index + 1].focus();
+    }
+  };
+  
+  const handleOtpKeyDown = (event, index) => {
+    if (event.key === "Backspace" && index > 0 && otp[index] === "") {
+      const updatedOtp = [...otp];
+      updatedOtp[index - 1] = "";
+      setOtp(updatedOtp);
+      otpInputRefs.current[index - 1].focus();
+    }
+  };
   useEffect(() => {
     if (window.google && window.google.accounts) {
       const googleAccounts = window.google.accounts;
@@ -293,7 +366,7 @@ const Login = () => {
             </div>
           </div>
 
-          <h3 className="already_have_account">
+          <h3 className="already_have_account" style={{paddingTop:"0.5rem"}}>
             Don't have an account?{" "}
             <Link
               to={"/signup"}
@@ -303,7 +376,45 @@ const Login = () => {
             </Link>
           </h3>
 
-          <form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
+          {show ? (
+            <div className="verification_container" style={{height:"300px",display:"flex",justifyContent:"center",alignItems:"center",marginTop:"2rem"}}>
+              <div className="login_content_main" style={{boxShadow:"none"}}>
+                <div className="login_content">
+                  <h2>Enter verification code</h2>
+                  <h6>
+                    We have just sent a verification code to your mobile number
+                  </h6>
+                  <div className="otp-container">
+                    {otp.map((value, index) => (
+                      <input
+                        key={index}
+                        type="text"
+                        value={value}
+                        onChange={(event) => handleOtpChange(event, index)}
+                        onKeyDown={(event) => handleOtpKeyDown(event, index)}
+                        className={`otp-box ${value !== "" ? "has-value" : ""}`}
+                        maxLength={1}
+                        ref={(inputRef) => {
+                          otpInputRefs.current[index] = inputRef;
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <h3>Send the code again</h3>
+                  <h3>Change phone number</h3>
+                  <div className="submit_btn mt-3">
+                    <button
+                      type="submit"
+                      className="btn btn-primary text-white"
+                      onClick={ValidateOtp}
+                    >
+                      Verify
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (<form onSubmit={handleFormSubmit} className="d-flex flex-column gap-2">
             <div className="row">
               <div className="col-md-12 col input-container">
                 <label htmlFor="mobile">Mobile Number</label>
@@ -316,11 +427,13 @@ const Login = () => {
                   autoComplete="off"
                   onChange={(e) => handleInputChange(e, "phoneNumber")}
                   value={inputValues.phoneNumber}
+                  countrySelectProps={{ native: true, style: { display: 'none' } }}
+                  international={false}
                 />
               </div>
             </div>
 
-            <div className="row">
+            {/*<div className="row">
               <div className="col-md-12">
                 <label for="password">Password</label>
                 <input
@@ -334,7 +447,7 @@ const Login = () => {
                   value={inputValues.password}
                 />
               </div>
-            </div>
+                </div>*/}
             <div className="row mt-2">
               <div className="d-flex gap-2 p-2">
                 <input
@@ -345,11 +458,11 @@ const Login = () => {
                 />
                 <label htmlFor="staySignedInCheckbox">Stay signed in</label>
               </div>
-              <div className="col-md-12">
+              {/*<div className="col-md-12">
                 <Link to={""} onClick={() => setShowResetPopUp(true)}>
                   Forgot Password?
                 </Link>
-              </div>
+              </div>*/}
             </div>
 
             {/* <div className="form-check">
@@ -372,7 +485,7 @@ const Login = () => {
                 {loading ? (
                   <SpinnerBS spinnerSizeClass="spinner-border-sm"></SpinnerBS>
                 ) : (
-                  "Login"
+                  "Send OTP"
                 )}
               </button>
             </div>
@@ -383,7 +496,7 @@ const Login = () => {
                 Create account
               </Link>
             </h3>
-          </form>
+          </form>)}
 
           <div className="line-container m-auto">
             <hr className="line" />
@@ -408,6 +521,13 @@ const Login = () => {
         {isLoginSuccessfull && !isInvestorSelected && (
           <AfterSuccessPopUp onClose={handleClosePopup} login={true} />
         )}
+        {open && (
+          <AfterSuccessPopUp
+            withoutOkButton
+            onClose={() => setOpen(!open)}
+            successText="OTP Send successfully to the mobile"
+          />
+        )}
         {isLoginSuccessfull && isInvestorSelected && (
           <InvestorAfterSuccessPopUp onClose={handleClosePopup} login={true} />
         )}
@@ -423,6 +543,12 @@ const Login = () => {
 
         {showResetPopUp && (
           <ResetPasswordPopUp onClose={handleCloseResetPopup} />
+        )}
+        {showErrorPopup && (
+          <ErrorPopUp
+            message={"Invalid mobile number. Please enter a valid mobile number."}
+            onClose={() => setShowErrorPopup(false)} // Add a handler to close the error popup
+          />
         )}
       </div>
     </div>

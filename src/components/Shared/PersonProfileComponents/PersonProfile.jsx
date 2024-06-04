@@ -6,6 +6,7 @@ import PublicLinks from "../../NewInvestor/CompanyProfileComponents/company-sect
 import CompanyStats from "../../NewInvestor/CompanyProfileComponents/company-section-one/company-stats/CompanyStats";
 import "./PersonProfile.scss";
 import { useSelector } from "react-redux";
+import CompanyDetailsCard from "../../Investor/InvestorGlobalCards/CompanyDetails/CompanyDetailsCard";
 
 const PERSON = {
   profilePicture: "",
@@ -43,6 +44,7 @@ export default function PersonProfile({ theme, short, personData }) {
   let startUp;
   let experience;
   let education;
+  let industry;
 
   if (personData?.startUp) {
     profilePicture = personData?.profilePicture;
@@ -62,6 +64,7 @@ export default function PersonProfile({ theme, short, personData }) {
     startUp = personData?.startUp;
     experience = personData?.experience;
     education = personData?.education;
+    industry = personData?.industry|| "Nun"
   } else {
     profilePicture = personData?.profilePicture;
     firstName = personData?.firstName;
@@ -80,6 +83,7 @@ export default function PersonProfile({ theme, short, personData }) {
     investor = personData?.investor;
     experience = personData?.experience;
     education = personData?.education;
+    industry = personData?.industry|| "Nun"
   }
 
   return (
@@ -97,6 +101,7 @@ export default function PersonProfile({ theme, short, personData }) {
               new Date(startedAtDate).getFullYear() || PERSON.foundedYear
             }
             lastFunding={lastFunding || PERSON.lastFunding}
+            industry = {industry|| "Nun"}
           />
           <PersonActions
             person={`${isInvestor ? "Investor" : "Founder"}`}
@@ -125,9 +130,11 @@ export default function PersonProfile({ theme, short, personData }) {
           education={education}
         />
       </div>
-
+      <div className="" style={{ padding: "0 1rem" }}>
+        <CompanyDetailsCard className="" userDetails={personData} page={""} />
+      </div>
       <div className="person__section__two d-flex flex-column gap-4 pt-3 pb-5 px-3 px-lg-5">
-        <PublicLinks socialLinks={socialLinks} />
+         {/* <PublicLinks socialLinks={socialLinks} />*/}
         {/* Have to make this component reusable. Right now color card title is hard coded */}
         {!short && <CompanyStats colorCard={colorCard} />}
       </div>

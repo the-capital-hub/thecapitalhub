@@ -15,6 +15,7 @@ export default function PersonInfo({
   location,
   lastFunding,
   foundedYear,
+  industry
 }) {
   return (
     <div className="person_info">
@@ -36,6 +37,7 @@ export default function PersonInfo({
           <div className="person__profile__headings d-flex flex-column gap-1">
             <h5 className="person__profile__name">{fullName}</h5>
             <p className="person__profile__type">{designation}</p>
+            <p className="person__profile__type">{industry}</p>
             <p className="person__profile__type">{companyName}</p>
           </div>
           <div className="icon__details d-flex flex-column flex-md-row gap-4 align-items-start">

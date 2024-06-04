@@ -84,7 +84,6 @@ export const verifyOtp = async (req, res) => {
       }
     );
     if (response.data.isOTPVerified) {
-      console.log("hii");
       return res.status(200).send({
         isOTPVerified: response.data.isOTPVerified,
         message: "OTP verified",
@@ -153,42 +152,42 @@ export const registerUserController = async (req, res, next) => {
         await existingCompany.save();
         return res.status(200).json({ message: "Investor Updated", data: existingCompany });
       }
-
-      const newInvestor = new InvestorModel({
+      const newInvestor = await InvestorModel.create({
         companyName: company,
         industry,
         description: portfolio,
         oneLink: uniqueOneLink,
+        founderId:newUser._id
       });
-
-      await newInvestor.save();
+      //await newInvestor.save();
       const { founderId } = newInvestor;
-      const user = await UserModel.findByIdAndUpdate(founderId, {
+      const user = await UserModel.findOneAndUpdate({_id:founderId}, {
         investor: newInvestor._id,
         location,
       });
-
+    //  console.log("update")
       const emailMessage = `
         A new user has requested for an account:
         
         Investor Details:
-        User ID: ${user._id}
-        Name: ${user.firstName} ${user.lastName}
-        Email: ${user.email}
-        Mobile: ${user.phoneNumber}
+        User ID: ${newUser._id}
+        Name: ${newUser.firstName} ${newUser.lastName}
+        Email: ${newUser.email}
+        Mobile: ${phoneNumber}
         Company Name: ${newInvestor.companyName}
         Industry: ${newInvestor.industry}
         Portfolio: ${newInvestor.portfolio}
       `;
       const subject = "New Account Request";
-      const adminMail = "learn.capitalhub@gmail.com";
-      const response = await sendMail(user.firstName, adminMail, user.email, subject, emailMessage);
-
+      const adminMail = "investments.capitalhub@gmail.com" 
+      //"learn.capitalhub@gmail.com";
+      const response = await sendMail(newUser.firstName, adminMail, newUser.email, subject, emailMessage);
       if (response.status === 200) {
         return res.status(200).json({ message: "Investor Added", data: newUser });
       } else {
         return res.status(500).json({ message: "Error while sending mail" });
       }
+      //return res.status(201).json({ message: "User added successfully" });
     } else {
       let existingCompany = await StartUpModel.findOne({ founderId: newUser._id });
       let baseOneLink = company.split(" ").join("").toLowerCase();
@@ -214,11 +213,9 @@ export const registerUserController = async (req, res, next) => {
 
       await newStartUp.save();
       const { founderId } = newStartUp;
-      await UserModel.findByIdAndUpdate(founderId, {
+      await UserModel.findOneAndUpdate({_id:founderId}, {
         startUp: newStartUp._id,
-        gender,
       });
-
       return res.status(201).json({ message: "User added successfully" });
     }
   } catch ({ message }) {
@@ -234,7 +231,6 @@ export const registerUserController = async (req, res, next) => {
 export const loginUserController = async (req, res, next) => {
   try {
     const { phoneNumber, password } = req.body;
-
     const user = await loginUserService({
       phoneNumber,
       password,

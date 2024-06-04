@@ -208,19 +208,10 @@ export default function EditCompanyProfilePage() {
           </div> */}
 
           {/* Color Cards */}
+          <div>
+          <h6 className="div__heading" style={{marginLeft:"1rem"}}>{`Previous Funding Round`}</h6>
           <div className="card_holder d-flex justify-content-between flex-wrap">
-            <ColorCard
-              color="white"
-              background="#BB98FF"
-              text="Last round investment"
-              image={CoinIcon}
-              amount={colorCardData?.last_round_investment || ""}
-              onAmountChange={(amount) =>
-                handleAmountChange("last_round_investment", amount)
-              }
-              field={"last_round_investment"}
-              colorCardData={colorCardData}
-            />
+
             <ColorCard
               color="white"
               background="#DAC191"
@@ -247,41 +238,59 @@ export default function EditCompanyProfilePage() {
               noRupee={true}
             />
             <ColorCard
-              color="white"
-              background="#2B2B2B"
-              text="Fund ask"
-              image={CoinIcon}
-              amount={colorCardData?.fund_ask || ""}
-              onAmountChange={(amount) =>
-                handleAmountChange("fund_ask", amount)
-              }
-              field={"fund_ask"}
-              colorCardData={colorCardData}
-            />
-            <ColorCard
-              color="white"
-              background="#FF7373"
-              text="Valuation"
-              image={CoinIcon}
-              amount={colorCardData?.valuation || ""}
-              onAmountChange={(amount) =>
-                handleAmountChange("valuation", amount)
-              }
-              field={"valuation"}
-              colorCardData={colorCardData}
-            />
-            <ColorCard
-              color="white"
-              background="#9198DA"
-              text="Raised funds"
-              image={CoinIcon}
-              amount={colorCardData?.raised_funds || ""}
-              onAmountChange={(amount) =>
-                handleAmountChange("raised_funds", amount)
-              }
-              field={"raised_funds"}
-              colorCardData={colorCardData}
-            />
+            color="white"
+            background="#BB98FF"
+            text="Valuation"
+            image={CoinIcon}
+            amount={colorCardData?.last_round_investment || ""}
+            onAmountChange={(amount) =>
+              handleAmountChange("last_round_investment", amount)
+            }
+            field={"last_round_investment"}
+            colorCardData={colorCardData}
+          />
+            </div>
+          </div>
+          <div>
+          <h6 className="div__heading" style={{marginLeft:"1rem"}}>{`Current Funding Round`}</h6>
+          <div className="card_holder d-flex justify-content-between flex-wrap">
+          <ColorCard
+            color="white"
+            background="#2B2B2B"
+            text="Fund ask"
+            image={CoinIcon}
+            amount={colorCardData?.fund_ask || ""}
+            onAmountChange={(amount) =>
+              handleAmountChange("fund_ask", amount)
+            }
+            field={"fund_ask"}
+            colorCardData={colorCardData}
+          />
+          <ColorCard
+            color="white"
+            background="#FF7373"
+            text="Valuation"
+            image={CoinIcon}
+            amount={colorCardData?.valuation || ""}
+            onAmountChange={(amount) =>
+              handleAmountChange("valuation", amount)
+            }
+            field={"valuation"}
+            colorCardData={colorCardData}
+          />
+          <ColorCard
+            color="white"
+            background="#9198DA"
+            text="Funds raised"
+            image={CoinIcon}
+            amount={colorCardData?.raised_funds || ""}
+            onAmountChange={(amount) =>
+              handleAmountChange("raised_funds", amount)
+            }
+            field={"raised_funds"}
+            colorCardData={colorCardData}
+          />
+        </div>
           </div>
           <button
             className={`align-self-end btn-base startup`}

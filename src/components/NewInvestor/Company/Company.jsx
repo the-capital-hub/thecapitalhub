@@ -112,7 +112,7 @@ function Company() {
       </div>
 
       <div className="row revenue_section">
-        <h2>Revenue Statistics (FY19)</h2>
+        <h2>Revenue Statistics</h2>
         <div className="row card_section">
           <CardComponent
             color="white"

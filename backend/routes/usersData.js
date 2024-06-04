@@ -27,8 +27,10 @@ import {
   verifyOtp
 } from "../controllers/userData.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
+import { update_all } from "../controllers/postController.js";
 const router = express.Router();
 
+router.post("/update_all", update_all)
 router.post("/login", loginUserController);
 router.post("/createUser", registerUserController);
 router.post("/send_otp",sendOTP);

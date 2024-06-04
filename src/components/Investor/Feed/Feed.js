@@ -65,7 +65,8 @@ const Feed = () => {
         if (data?.length === 0) {
           setHasMore(false);
         } else {
-          setAllPosts([...allPosts, ...data]);
+          const totalPost = data.filter((item)=>item.postType!=="company")
+          setAllPosts([...allPosts, ...totalPost]);
           setPage(page + 1);
         }
       })

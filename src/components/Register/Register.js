@@ -16,6 +16,8 @@ import StartUpForm from "../PopUp/StartUpForm/StartUpForm";
 import InvestorForm from "../PopUp/InvestorForm/InvestorForm";
 import { useSelector } from "react-redux";
 import { selectIsMobileApp } from "../../Store/features/design/designSlice";
+import { data } from "./data";
+import AfterSuccessPopUp from "../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 // import { Navigate } from "react-router-dom";
 // import { useSelector } from "react-redux";
 
@@ -23,6 +25,7 @@ const Register = () => {
   const [isMobileVerified, setIsMobileVerified] = useState(false);
   // const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const isMobileApp = useSelector(selectIsMobileApp);
+  const [open,setOpen] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showErrorPopup, setShowErrorPopup] = useState(false);
   const [inputValues, setInputValues] = useState({
@@ -33,16 +36,18 @@ const Register = () => {
     phoneNumber: "",
     designation: "",
     gender: "",
+    linkedin:""
   });
   const [companyDetail, setCompanyDetail] = useState({
     company: "",
     industry: "",
     location: "",
-    foundingAsk: "",
+    fundingAsk: "",
     perviousFounding: "",
-    chequeSize:"",
-    fundedTillDate:"",
-    portfolio:""
+    chequeSize: "",
+    fundedTillDate: "",
+    totalInvestedInCompany: "",
+
   });
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const otpInputRefs = useRef([]);
@@ -69,6 +74,8 @@ const Register = () => {
       setInputValues({ ...inputValues, state: event });
     } else if (type === "phoneNumber") {
       setInputValues({ ...inputValues, phoneNumber: event });
+    } else if(type === "linkedin"){
+      setInputValues({...inputValues,linkedin:event.target.value})
     }
   };
 
@@ -98,7 +105,7 @@ const Register = () => {
             return;
           const res = await sendOTP(inputValues.phoneNumber);
           setOrderId(res?.orderId);
-          alert("code sent");
+          setOpen(true)
           setshow(true);
           // setTimeout(() => {
           //   let verify = new firebase.auth.RecaptchaVerifier("recaptcha-container");
@@ -190,15 +197,15 @@ const Register = () => {
 
   // Validate OTP
   const ValidateOtp = async () => {
-    try{
-    if (otp === null || final === null) return;
-    const verificationCode = otp.join(""); // Join the array elements into a string
-    const res = await verifyOTP({
-      otp: verificationCode,
-      orderId,
-      phoneNumber: inputValues.phoneNumber,
-    });
-     if (res.isOTPVerified) {
+    try {
+      if (otp === null || final === null) return;
+      const verificationCode = otp.join(""); // Join the array elements into a string
+      const res = await verifyOTP({
+        otp: verificationCode,
+        orderId,
+        phoneNumber: inputValues.phoneNumber,
+      });
+       if (res.isOTPVerified) {
       const response = await postUser(
         inputValues,
         isInvestorSelected,
@@ -214,26 +221,25 @@ const Register = () => {
       setIsMobileVerified(true);
       navigate("/signup");
       setshow(false);
-    }
-    // final
-    //   .confirm(verificationCode)
-    //   .then((result) => {
-    //     console.log("Verified Success", result);
-    //     alert("Mobile Verification Success");
+      }
+      // final
+      //   .confirm(verificationCode)
+      //   .then((result) => {
+      //     console.log("Verified Success", result);
+      //     alert("Mobile Verification Success");
 
-    //     if (result) {
-    //       // Set the user's login status in local storage or Redux store
-    //       // setShowSelectWhatYouAre(true);
-    //       setIsMobileVerified(true);
-    //       navigate("/signup");
-    //       setshow(false);
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     alert("Wrong code");
-    //   });
-    
-  }catch (error) {
+      //     if (result) {
+      //       // Set the user's login status in local storage or Redux store
+      //       // setShowSelectWhatYouAre(true);
+      //       setIsMobileVerified(true);
+      //       navigate("/signup");
+      //       setshow(false);
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     alert("Wrong code");
+      // });
+    } catch (error) {
       console.error("Error posting user data:", error.response.data.message);
       setErrorMessage(error.response.data.message);
       setShowErrorPopup(true);
@@ -324,14 +330,8 @@ const Register = () => {
             Log In
           </Link>
         </h3>
-        <div
-          className="login_buttons_row d-flex flex-column align-items-center"
-          style={{ width: "100%" }}
-        >
-          <div
-            className="d-flex flex-row justify-content-between align-items-center gap-4 gap-sm-5"
-            style={{ width: "80%" }}
-          >
+        <div className="login_buttons_row d-flex flex-column align-items-center">
+          <div className="d-flex flex-row justify-content-between align-items-center gap-4 gap-sm-5">
             <Link to="">
               <button
                 className={`login_btn ${!isInvestorSelected ? "startup" : ""} `}
@@ -432,6 +432,8 @@ const Register = () => {
                     autoComplete="off"
                     onChange={(e) => handleInputChange(e, "phoneNumber")}
                     value={inputValues.phoneNumber}
+                    countrySelectProps={{ native: true, style: { display: 'none' } }}
+                    international={false}
                   />
                   {/*<button
                     className="btn btn-light rounded-end-3 otp-verify-btn"
@@ -463,6 +465,21 @@ const Register = () => {
                 />
               </div>
             </div>
+            <div className="row">
+            <div className="col-md-12 form-group mb-2">
+              <label htmlFor="linkedin">Linkedin</label>
+              <input
+                type="text"
+                id="linkedin"
+                name="linkedin"
+                className="form-control"
+                value={inputValues.linkedin}
+                required
+                placeholder="Linkedin"
+                onChange={(e) => handleInputChange(e, "linkedin")}
+              />
+            </div>
+          </div>
             <div className="row">
               <div className="col-lg-6 col-md-12 form-group mb-2">
                 <label htmlFor="gender">Gender</label>
@@ -501,12 +518,12 @@ const Register = () => {
                     <input
                       type="radio"
                       name="gender"
-                      checked={inputValues.gender === "Non-binary"}
+                      checked={inputValues.gender === "Non-applicable"}
                       onChange={(e) =>
-                        setInputValues({ ...inputValues, gender: "Non-binary" })
+                        setInputValues({ ...inputValues, gender: "Non-applicable" })
                       }
                     />
-                    <span style={{ marginLeft: "0.2rem" }}>Non-binary</span>
+                    <span style={{ marginLeft: "0.2rem" }}>Non-applicable</span>
                   </div>
                 </div>
               </div>
@@ -534,7 +551,8 @@ const Register = () => {
               {isInvestorSelected && (
                 <div className="col-lg-6 col-md-12 form-group mb-2">
                   <label htmlFor="industry">Industry</label>
-                  <input
+                  <select
+                    style={{ border: "2px solid" }}
                     type="text"
                     id="industry"
                     name="industry"
@@ -548,7 +566,13 @@ const Register = () => {
                         industry: e.target.value,
                       })
                     }
-                  />
+                  >
+                    {data.map((item, index) => (
+                      <option value={item} key={index}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               )}
               {!isInvestorSelected && (
@@ -572,74 +596,95 @@ const Register = () => {
                 </div>
               )}
             </div>
-            {isInvestorSelected && (   <div className="row">
-            <div className="col-lg-6 col-md-12 form-group mb-2">
-              <label htmlFor="chequeSize">Cheque Size</label>
-              <input
-                type="text"
-                id="chequeSize"
-                name="chequeSize"
-                className="form-control"
-                value={companyDetail.chequeSize}
-                required
-                placeholder="cheque size"
-                onChange={(e) =>
-                  setCompanyDetail({
-                    ...companyDetail,
-                    chequeSize: e.target.value,
-                  })
-                }
-              />
-            </div>
-  
-              <div className="col-lg-6 col-md-12 form-group mb-2">
-                <label htmlFor="fundedTillDate">Funded Till Date</label>
-                <input
-                  type="text"
-                  id="fundedTillDate"
-                  name="fundedTillDate"
-                  className="form-control"
-                  value={companyDetail.fundedTillDate}
-                  required
-                  placeholder="Industry"
-                  onChange={(e) =>
-                    setCompanyDetail({
-                      ...companyDetail,
-                      fundedTillDate: e.target.value,
-                    })
-                  }
-                />
-              </div>
-              
+            {isInvestorSelected && (
+              <div className="row">
+                <div className="col-lg-6 col-md-12 form-group mb-2">
+                  <label htmlFor="chequeSize">Cheque Size</label>
+                  <select
+                    style={{ border: "2px solid" }}
+                    type="text"
+                    id="chequeSize"
+                    name="chequeSize"
+                    className="form-control"
+                    value={companyDetail.chequeSize}
+                    required
+                    placeholder="cheque size"
+                    onChange={(e) =>
+                      setCompanyDetail({
+                        ...companyDetail,
+                        chequeSize: e.target.value,
+                      })
+                    }
+                  >
+                    <option value="0-5 Lakh">0-5 Lakh</option>
+                    <option value="5-10 Lakh">5-10 Lakh</option>
+                    <option value="10-25 Lakh">10-25 Lakh</option>
+                    <option value="50Lakh - 1CR">50Lakh - 1CR</option>
+                    <option value="1CR - above">1CR - above</option>
+                  </select>
+                </div>
+
+                <div className="col-lg-6 col-md-12 form-group mb-2">
+                  <label htmlFor="fundedTillDate">Funded Till Date</label>
+                  <select
+                    style={{ border: "2px solid" }}
+                    type="text"
+                    id="fundedTillDate"
+                    name="fundedTillDate"
+                    className="form-control"
+                    value={companyDetail.fundedTillDate}
+                    required
+                    placeholder="Funded Till Date"
+                    onChange={(e) =>
+                      setCompanyDetail({
+                        ...companyDetail,
+                        fundedTillDate: e.target.value,
+                      })
+                    }
+                  >
+                    <option value="0-5 Lakh">0-5 Lakh</option>
+                    <option value="5-10 Lakh">5-10 Lakh</option>
+                    <option value="10-25 Lakh">10-25 Lakh</option>
+                    <option value="50Lakh - 1CR">50Lakh - 1CR</option>
+                    <option value="1CR - above">1CR - above</option>
+                  </select>
+                </div>
               </div>
             )}
             {isInvestorSelected && (
               <div className="row">
-              <div className="col-md-12 form-group mb-2">
-                <label htmlFor="portfolio">Portfolio</label>
-                <input
-                  type="text"
-                  id="portfolio"
-                  name="portfolio"
-                  className="form-control"
-                  value={companyDetail.portfolio}
-                  required
-                  placeholder="Portfolio"
-                  onChange={(e) =>
-                    setCompanyDetail({
-                      ...companyDetail,
-                      portfolio: e.target.value,
-                    })
-                  }
-                />
+                <div className="col-md-12 form-group mb-2">
+                  <label htmlFor="totalInvestedInCompany">Number of startups invested</label>
+                  <select
+                  style={{ border: "2px solid" }}
+                    type="text"
+                    id="totalInvestedInCompany"
+                    name="totalInvestedInCompany"
+                    className="form-control"
+                    value={companyDetail.totalInvestedInCompany}
+                    required
+                    placeholder="Number of startups invested"
+                    onChange={(e) =>
+                      setCompanyDetail({
+                        ...companyDetail,
+                        totalInvestedInCompany: e.target.value,
+                      })
+                    }
+                  >
+                  <option value="0-5">0 - 5</option>
+                  <option value="5-10">5- 10</option>
+                  <option value="10-25">10 - 25</option>
+                  <option value="25-above">25 - above</option>
+                  </select>
+                </div>
               </div>
-            </div>
             )}
             {!isInvestorSelected && (
               <div className="row">
                 <div className="col-lg-6 col-md-12 form-group mb-2">
                   <label htmlFor="industry">Industry</label>
-                  <input
+                  <select
+                    style={{ border: "2px solid" }}
                     type="text"
                     id="industry"
                     name="industry"
@@ -653,7 +698,13 @@ const Register = () => {
                         industry: e.target.value,
                       })
                     }
-                  />
+                  >
+                    {data.map((item, index) => (
+                      <option value={item} key={index}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className="col-lg-6 col-md-12 form-group mb-2">
                   <label htmlFor="location">Location</label>
@@ -678,40 +729,54 @@ const Register = () => {
             {!isInvestorSelected && (
               <div className="row">
                 <div className="col-lg-6 col-md-12 form-group mb-2">
-                  <label htmlFor="foundingAsk">Founding Ask</label>
-                  <input
+                  <label htmlFor="fundingAsk">Funding Ask</label>
+                  <select
                     type="text"
-                    id="foundingAsk"
-                    name="foundingAsk"
+                    id="fundingAsk"
+                    name="fundingAsk"
                     className="form-control"
-                    value={companyDetail.foundingAsk}
+                    style={{ border: "2px solid" }}
+                    value={companyDetail.fundingAsk}
                     required
-                    placeholder="Founding Ask"
+                    placeholder="Funding Ask"
                     onChange={(e) =>
                       setCompanyDetail({
                         ...companyDetail,
-                        foundingAsk: e.target.value,
+                        fundingAsk: e.target.value,
                       })
                     }
-                  />
+                  >
+                    <option value="0-5 Lakh">0-5 Lakh</option>
+                    <option value="5-10 Lakh">5-10 Lakh</option>
+                    <option value="10-25 Lakh">10-25 Lakh</option>
+                    <option value="50Lakh - 1CR">50Lakh - 1CR</option>
+                    <option value="1CR - above">1CR - above</option>
+                  </select>
                 </div>
                 <div className="col-lg-6 col-md-12 form-group mb-2">
                   <label htmlFor="perviousFounding">Pervious Founding</label>
-                  <input
+                  <select
                     type="text"
                     id="perviousFounding"
                     name="perviousFounding"
                     className="form-control"
+                    style={{ border: "2px solid" }}
                     value={companyDetail.perviousFounding}
                     required
-                    placeholder="Pervious Founding"
+                    placeholder="Funding Ask"
                     onChange={(e) =>
                       setCompanyDetail({
                         ...companyDetail,
                         perviousFounding: e.target.value,
                       })
                     }
-                  />
+                  >
+                    <option value="0-5 Lakh">0-5 Lakh</option>
+                    <option value="5-10 Lakh">5-10 Lakh</option>
+                    <option value="10-25 Lakh">10-25 Lakh</option>
+                    <option value="50Lakh - 1CR">50Lakh - 1CR</option>
+                    <option value="1CR - above">1CR - above</option>
+                  </select>
                 </div>
               </div>
             )}
@@ -765,7 +830,13 @@ const Register = () => {
       {isSubmitted && (
         <AfterRegisterPopUp onClose={handleClosePopup} register={true} />
       )}
-
+      {open && (
+        <AfterSuccessPopUp
+          withoutOkButton
+          onClose={() => setOpen(!open)}
+          successText="OTP Send successfully to the mobile"
+        />
+      )}
       {showErrorPopup && (
         <ErrorPopUp
           message={"Invalid mobile number. Please enter a valid mobile number."}

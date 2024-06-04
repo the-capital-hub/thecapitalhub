@@ -18,10 +18,10 @@ import { useState } from "react";
 // import { likeUnlikeAPI } from "../../../../Service/user";
 // import { Link } from "react-router-dom";
 import IconDeleteFill from "../../SvgIcons/IconDeleteFill";
-import { removeFromFeaturedPost } from "../../../../Service/user";
+import { removeCompanyUpdatedPost } from "../../../../Service/user";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 
-const FeaturedPostCard = ({
+const CompanyUpdateCard = ({
   postId,
   description,
   firstName,
@@ -34,19 +34,18 @@ const FeaturedPostCard = ({
   likes,
   userId,
   setIsDeleteSuccessful,
-  postDelete
+  postDelete,
 }) => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   // States for handling remove post from featured post
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-
   // Handle remove post from featured posts
   const handleRemovePost = async (postId) => {
     // set loading = true
     setLoading(true);
-    const response = await removeFromFeaturedPost(postId);
+    const response = await removeCompanyUpdatedPost(postId);
     console.log(response);
     if (response.status === 200) {
       setIsDeleteSuccessful(true);
@@ -57,7 +56,7 @@ const FeaturedPostCard = ({
       setLoading(false);
     }
   };
- console.log(description)
+  console.log(description);
   return (
     <>
       <div className="featuredpostcard_main_container mb-2">
@@ -124,7 +123,7 @@ const FeaturedPostCard = ({
               </div>
 
               {/*Show Delete featured post if userId=loggedInUser._id */}
-              {userId === loggedInUser._id && postDelete  ? (
+              {userId === loggedInUser._id && postDelete ? (
                 <div className="align-self-start">
                   <button
                     className="btn_base_sm"
@@ -155,7 +154,7 @@ const FeaturedPostCard = ({
                 }}
                 className=""
               >
-                {description? description:"not avlabel"}
+                {description ? description : "not avlabel"}
               </p>
               {image && (
                 <span className="d-flex">
@@ -183,11 +182,10 @@ const FeaturedPostCard = ({
               )}
             </div>
           </div>
-          
         </div>
       </div>
     </>
   );
 };
 
-export default FeaturedPostCard;
+export default CompanyUpdateCard;

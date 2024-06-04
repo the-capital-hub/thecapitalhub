@@ -17,7 +17,7 @@ const HalfbendCard = ({ folderName, userId }) => {
   // const [user, setUser] = useState([]);
   const [deleteDoc, setDeleteDoc] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  console.log(window.location.href.split("/")[3])
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   console.log("user", userId);
   useEffect(() => {
@@ -218,7 +218,7 @@ const HalfbendCard = ({ folderName, userId }) => {
               </div>
               <div className="d-flex flex-column mx-auto justify-content-center align-items-center">
                 <h6>{item.fileName}</h6>
-                {loggedInUser?._id === item.userId && (
+                {loggedInUser?._id === item.userId && window.location.href.split("/")[3] === "documentation"&& (
                   // <img
                   //   className="delete-img"
                   //   src={deleteIcon}

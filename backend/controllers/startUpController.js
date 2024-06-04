@@ -110,13 +110,14 @@ export const editOnePager = async (req, res) => {
 
 export const investNowController = async (req, res) => {
   try {
-    const { fromUserName, fromUserEmail, fromUserMobile, toUserId } = req.body;
+    const { fromUserName, fromUserEmail, fromUserMobile, toUserId,commitmentAmount } = req.body;
 
     const response = await investNowService({
       fromUserName,
       fromUserEmail,
       fromUserMobile,
       toUserId,
+      commitmentAmount
     });
 
     res.status(response.status).send(response);

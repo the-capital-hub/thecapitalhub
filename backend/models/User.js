@@ -150,6 +150,10 @@ const userSchema = new Schema(
         ref: "Posts",
       },
     ],
+    companyUpdate:[{
+      type: Schema.Types.ObjectId,
+      ref: "Posts",
+    },],
     userStatus: {
       type: String,
       default: "inactive"
@@ -173,7 +177,9 @@ const userSchema = new Schema(
         ref: 'Achievement',
       },
     ],
-
+    industry:{
+      type:String
+    },
     //startup user
     yearsOfExperience: {
       type: String,
@@ -270,31 +276,31 @@ const userSchema = new Schema(
   }
 );
 
-// userSchema.pre("save", async function (next) {
-//   try {
-//     if (this.isModified && this.isModified("password")) {
-//       this.password = await hashPassword(this.password);
-//     }
-//     next();
-//   } catch (error) {
-//     throw error;
-//   }
-// });
+userSchema.pre("save", async function (next) {
+  try {
+    if (this.isModified && this.isModified("password")) {
+      this.password = await hashPassword(this.password);
+    }
+    next();
+  } catch (error) {
+    throw error;
+  }
+});
 
-// userSchema.pre(
-//   ["updateOne", "findByIdAndUpdate", "findOneAndUpdate"],
-//   async function (next) {
-//     try {
-//       const data = this.getUpdate();
-//       if (data?.password) {
-//         data.password = hashPassword(this.password);
-//       }
-//       next();
-//     } catch (error) {
-//       throw error;
-//     }
-//   }
-// );
+userSchema.pre(
+  ["updateOne", "findByIdAndUpdate", "findOneAndUpdate"],
+  async function (next) {
+    try {
+      const data = this.getUpdate();
+      if (data?.password) {
+        data.password = hashPassword(this.password);
+      }
+      next();
+    } catch (error) {
+      throw error;
+    }
+  }
+);
 
 function generateRandomNumber() {
   const randomNumber = Math.floor(100000 + Math.random() * 900000);

@@ -5,7 +5,7 @@ import FeaturedPostCard from "../../Cards/FeaturedPostCard/FeaturedPostCard";
 // import { useSelector } from "react-redux";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 
-const FeaturedPostsContainer = ({ userId }) => {
+const FeaturedPostsContainer = ({ userId,postDelete }) => {
   const [allPosts, setAllPosts] = useState(null);
   const [user, setUser] = useState(null);
   const [isDeleteSuccessful, setIsDeleteSuccessful] = useState(false);
@@ -88,6 +88,7 @@ const FeaturedPostsContainer = ({ userId }) => {
                   likes={likes}
                   setIsDeleteSuccessful={setIsDeleteSuccessful}
                   isNotEditable
+                  postDelete={postDelete}
                 />
               )
             )

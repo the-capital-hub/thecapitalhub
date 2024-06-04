@@ -71,7 +71,6 @@ const ContactUs = () => {
 
   return (
     <div className="contact_us_container" data-bs-theme={theme}>
-
       {formSubmitted && (
         <AfterSuccessPopUp
           contactFrom
@@ -153,8 +152,8 @@ const ContactUs = () => {
             </div>
             <button type="submit">Submit</button>
           </form>
-          <div className="card-container card-container_contact">
-            <div className="card">
+          <div className="card-container card-container_contact" style={{marginTop:"1rem"}}>
+            <div className="card" style={{marginRight:"1rem"}}>
               {/* <img src={callIcon} alt="callimg" /> */}
               <BsTelephone size={75} />
 
@@ -189,9 +188,9 @@ const ContactUs = () => {
                 </a>
               </button>
             </div>
-            <div className="card">
+            <div className="card" style={{marginRight:"1rem"}}>
               {/* <img src={messageIcon} alt="callimg" /> */}
-              <VscSend  size={75}/>
+              <VscSend size={75} />
 
               <div className="text_content">
                 <h2>Email us</h2>
@@ -225,7 +224,7 @@ const ContactUs = () => {
             <div className="card">
               {/* <img src={mapPinIcon} alt="callimg" />
                */}
-<CiLocationOn size={75}/>
+              <CiLocationOn size={75} />
 
               <div className="text_content">
                 <h2>Our address</h2>
@@ -256,7 +255,7 @@ const ContactUs = () => {
           </div>
         </div>
       </div>
-      </div>
+    </div>
   );
 };
 

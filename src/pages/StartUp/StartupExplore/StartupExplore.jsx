@@ -36,7 +36,7 @@ export default function StartupExplore() {
 
   const dispatch = useDispatch();
 
-  const [activeTab, setActiveTab] = useState("Investor");
+  const [activeTab, setActiveTab] = useState("Startup");
   const [filterOptions, setFilterOptions] = useState([]);
   const [filters, setFilters] = useState({});
   const [filteredData, setFilteredData] = useState(null);
@@ -98,11 +98,11 @@ export default function StartupExplore() {
       setLoading(false);
     }
   };
-
+  console.log(filteredData)
   const renderTabContent = () => {
     switch (activeTab) {
       case "Startup":
-        return <CompanyProfileList isStartup data={filteredData} />;
+        return <CompanyProfileList isStartup data={filteredData} pageName="Startup" show={true}/>;
       case "Founder":
         return (
           <PersonProfileList
@@ -113,11 +113,21 @@ export default function StartupExplore() {
         );
       case "Investor":
         return (
-          <PersonProfileList
-            theme={"startup"}
-            short={true}
-            data={filteredData}
-          />
+          // <PersonProfileList
+          //   theme={"startup"}
+          //   short={true}
+          //   data={filteredData}
+          // />
+          <div
+            className={`person_profile_wrapper  shadow-sm`}
+            style={{ borderRadius: "20px" }}
+          >
+            <div className="person__section__one d-flex flex-column gap-4 py-5 px-3 px-lg-5 ">
+              
+                <h4 style={{color:"#fff"}}>Coming soon</h4>
+    
+            </div>
+          </div>
         );
       default:
         return null;
@@ -143,17 +153,6 @@ export default function StartupExplore() {
           <div className="startup_explore_tabs d-flex align-items-center border-bottom">
             <button
               className={`btn_base py-3 px-3 ${
-                activeTab === "Investor" ? "active" : ""
-              }`}
-              onClick={() => {
-                setFilters(null);
-                setActiveTab("Investor");
-              }}
-            >
-              Investor
-            </button>
-            <button
-              className={`btn_base py-3 px-3 ${
                 activeTab === "Startup" ? "active" : ""
               }`}
               onClick={() => {
@@ -173,6 +172,17 @@ export default function StartupExplore() {
               }}
             >
               Founder
+            </button>
+            <button
+              className={`btn_base py-3 px-3 ${
+                activeTab === "Investor" ? "active" : ""
+              }`}
+              onClick={() => {
+                setFilters(null);
+                setActiveTab("Investor");
+              }}
+            >
+              Investor
             </button>
             {filters && (
               <button
@@ -281,7 +291,7 @@ export default function StartupExplore() {
                     value={filters?.stage}
                     onChange={handleOnChange}
                     options={filterOptions?.stage || stageOptions}
-                    label="Stage"
+                    label="Investment Stage"
                     name="stage"
                   />
                   <FilterBySelect
@@ -316,7 +326,7 @@ export default function StartupExplore() {
                     label="Gender"
                     name="gender"
                   />
-                  <FilterBySelect
+                  {/*<FilterBySelect
                     value={filters?.previousExits}
                     onChange={handleOnChange}
                     options={
@@ -324,7 +334,7 @@ export default function StartupExplore() {
                     }
                     label="Previous Exits"
                     name="previousExits"
-                  />
+                  />}*/}
                   <FilterBySelect
                     value={filters?.yearsOfExperience}
                     onChange={handleOnChange}
@@ -342,7 +352,7 @@ export default function StartupExplore() {
                     label="Education"
                     name="education"
                   />
-                  <FilterBySelect
+                  {/*<FilterBySelect
                     value={filters?.diversityMetrics}
                     onChange={handleOnChange}
                     options={
@@ -350,7 +360,7 @@ export default function StartupExplore() {
                     }
                     label="Diversity Metrics"
                     name="diversityMetrics"
-                  />
+                  />*/}
                 </>
               )}
             </div>

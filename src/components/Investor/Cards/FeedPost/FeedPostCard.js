@@ -25,6 +25,7 @@ import {
   toggleLikeComment,
   unsavePost,
   getLikeCount,
+  addToCompanyUpdate,
 } from "../../../../Service/user";
 import { Link } from "react-router-dom";
 import SavePostPopUP from "../../../../components/PopUp/SavePostPopUP/SavePostPopUP";
@@ -44,6 +45,7 @@ import {
   selectTheme,
   selectVideoAutoplay,
 } from "../../../../Store/features/design/designSlice";
+import { CiCirclePlus } from "react-icons/ci";
 import { selectIsInvestor } from "../../../../Store/features/user/userSlice";
 import { Modal } from "react-bootstrap";
 import { MdDelete } from "react-icons/md";
@@ -375,6 +377,7 @@ const FeedPostCard = ({
 
   // add post as featured
   const [showFeaturedPostSuccess, setShowFeaturedPostSuccess] = useState(false);
+  const [showCompanyUpdateSuccess,setShowCompanyUpdateSuccess] = useState(false)
   const handleAddToFeatured = async (postId) => {
     try {
       console.log(postId);
@@ -386,7 +389,17 @@ const FeedPostCard = ({
       console.log(error);
     }
   };
-
+  const handleAddToCompanyPost = async (postId) => {
+    try {
+      const response = await addToCompanyUpdate(postId);
+      console.log(response)
+      if (response.status === 200) {
+        setShowCompanyUpdateSuccess(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getLikeCount(postId)
       .then((data) => {
@@ -579,6 +592,14 @@ const FeedPostCard = ({
                         <IconReportPost />
                         <span>Report</span>
                       </li>
+                      {userId === loggedInUser?._id &&<li
+                        onClick={() => handleAddToCompanyPost(postId)}
+                        className="d-flex align-items-center gap-1"
+                        style={{ color: "var(--d-l-grey)" }}
+                      >
+                        <CiCirclePlus/>
+                        <span>Company</span>
+                      </li>}
                     </ul>
                   )}
                 </div>
@@ -1147,6 +1168,13 @@ const FeedPostCard = ({
             withoutOkButton
             onClose={() => setShowFeaturedPostSuccess(!showFeaturedPostSuccess)}
             successText="The post has been added as a featured post."
+          />
+        )}
+        {showCompanyUpdateSuccess && (
+          <AfterSuccessPopUp
+            withoutOkButton
+            onClose={() => setShowCompanyUpdateSuccess(!showCompanyUpdateSuccess)}
+            successText="The post has been added as a company updates."
           />
         )}
       </div>

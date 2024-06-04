@@ -2,19 +2,28 @@ import React from "react";
 // import LocationIcon from "../../../../Images/investorIcon/octicon_location-16.svg";
 // import EmailIcon from "../../../../Images/investorIcon/email.svg";
 import TweeterIcon from "../../../../Images/investorIcon/Tweeter.svg";
+import Mail from "../../../../Images/investorIcon/mail.svg";
 import IntagramIcon from "../../../../Images/investorIcon/Instagram.svg";
 import LinkedinIcon from "../../../../Images/investorIcon/Linkedin.svg";
 import WebIcon from "../../../../Images/investorIcon/WebIcon.svg";
 import LogoX from "../../../../Images/investorIcon/LogoX.png";
+import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 import "./companyDetails.scss";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
 import {
   getStartupByFounderId,
   postStartUpData,
 } from "../../../../Service/user";
+import {
+  Location,
+  Calendar,
+  CircleArrow,
+} from "../../../../Images/Investor/CompanyProfile";
 import { useState, useEffect } from "react";
 import { HiOutlineMail } from "react-icons/hi";
 import IconLocation from "../../SvgIcons/IconLocation";
+import { GiProgression } from "react-icons/gi";
+import IconCard from "../../../NewInvestor/CompanyProfileComponents/shared-components/icon-card/IconCard";
 
 const CompanyDetailsCard = ({
   userDetails,
@@ -22,6 +31,7 @@ const CompanyDetailsCard = ({
   className,
   isOnelink = false,
 }) => {
+  console.log(userDetails);
   const [isDescriptionEditable, setIsDescriptionEditable] = useState(false);
   const [descriptionContent, setDescriptionContent] = useState("");
   const [onePager, setOnePager] = useState([]);
@@ -49,7 +59,7 @@ const CompanyDetailsCard = ({
         setLocationData("");
       });
   }, [userDetails]);
-
+  console.log(onePager);
   // Submit Changes
   const submitDescriptionHandler = async () => {
     const updatedData = {
@@ -112,7 +122,7 @@ const CompanyDetailsCard = ({
             </div>
 
             <div className="left_profile_text flex_content">
-              <h2 className="typography m-2 ms-0">
+              <h2 className="typography ms-0">
                 {onePager.company ||
                   userDetails?.investor?.companyName ||
                   "No company found"}
@@ -120,11 +130,7 @@ const CompanyDetailsCard = ({
               {/* <span className="small_typo m-2">
                       {onePager.description}
                     </span> */}
-              <span className="small_typo location_icon d-flex flex-column flex-lg-row gap-2">
-                <span className="d-l-grey">
-                  <IconLocation className="me-1" color="var(--d-l-grey)" />
-                  {onePager.location || userDetails?.investor?.location}
-                </span>
+              {/*<span className="small_typo location_icon d-flex flex-column flex-lg-row gap-2">
                 <span className="d-l-grey">
                   <HiOutlineMail
                     size={28}
@@ -133,7 +139,95 @@ const CompanyDetailsCard = ({
                   />
                   {userDetails?.email}
                 </span>
-              </span>
+                  </span>*/}
+              <div
+                className="company__header d-flex flex-column flex-lg-row gap-2 "
+               
+              >
+                <div
+                  className="icon__details d-flex flex-column flex-md-row gap-2 align-items-start"
+                  style={{ flexWrap: "wrap" }}
+                >
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                      src={Location}
+                      style={{ width: "14px", height: "14px" }}
+                      alt="/"
+                    />
+                    <p
+                    className="typography"
+                      style={{
+                        fontSize: "12px",
+                        margin:"0 0 0 0.5rem"
+                      }}
+                    >
+                      {onePager.location || userDetails?.investor?.location}
+                    </p>
+                  </div>
+
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                      src={Calendar}
+                      style={{ width: "14px", height: "14px" }}
+                      alt="/"
+                    />
+                    <p
+                    className="typography"
+                    style={{
+                      fontSize: "12px",
+                      margin:"0 0 0 0.5rem"
+                    }}
+                    >
+                      {`Founded in, ${onePager?.startedAtDate?.split("-")[0]}`}
+                    </p>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                      src={CircleArrow}
+                      style={{ width: "14px", height: "14px" }}
+                      alt="/"
+                    />
+                    <p
+                    className="typography"
+                    style={{
+                      fontSize: "12px",
+                      margin:"0 0 0 0.5rem"
+                    }}
+                    >
+                      {`Last funding in ${
+                        new Date(onePager?.lastFunding).toLocaleString(
+                          "en-US",
+                          { month: "short", year: "numeric" }
+                        ) || "May, 2023"
+                      }`}
+                    </p>
+                  </div>
+                  <div
+                    className={`iconCard__container d-flex justify-content-center align-items-center gap-1`}
+                  >
+                    <GiProgression color="#898989" />
+                    <p
+                      className="icon__text typography"
+                      style={{
+                        fontSize: "12px",
+                        margin:"0 0 0 0.5rem"
+                      }}
+                    >{`Stage of funding ${onePager?.stage || "Nun"}`}</p>
+                  </div>
+                  <div
+                    className={`iconCard__container d-flex justify-content-center align-items-center gap-1`}
+                  >
+                    <HiOutlineBuildingOffice2 color="#898989" />
+                    <p
+                    className="icon__text typography"
+                    style={{
+                      fontSize: "12px",
+                      margin:"0 0 0 0.5rem"
+                    }}
+                    >{`Sector ${onePager?.sector || "Nun"}`}</p>
+                  </div>
+                </div>
+              </div>
               <div className="small_typo social_icon mt-3">
                 <a
                   href={
@@ -188,6 +282,17 @@ const CompanyDetailsCard = ({
                   <img
                     src={IntagramIcon}
                     alt="Instagram"
+                    style={{ width: "25px", height: "25px" }}
+                  />
+                </a>
+                <a
+                  href={userDetails?.email}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={Mail}
+                    alt="Mail"
                     style={{ width: "25px", height: "25px" }}
                   />
                 </a>
@@ -331,7 +436,7 @@ const CompanyDetailsCard = ({
                 </div>
               </>
             ) : (
-              <p className="small_typo">
+              <p className="typography small_typo">
                 {descriptionContent ||
                   userDetails?.startUp?.description ||
                   userDetails?.investor?.description ||

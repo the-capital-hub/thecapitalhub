@@ -26,7 +26,7 @@ export default function FundingInfo() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [showSuccess, setShoeSuccess] = useState(false)
   const [showForm, setShowForm] = useState(false);
 
   // Update document title
@@ -61,10 +61,12 @@ export default function FundingInfo() {
               </button> */}
             </div>
             {/* Form */}
-            {!showForm && fundingViaCapitalHubQuestions ? (
+            {!showForm && fundingViaCapitalHubQuestions ? showSuccess? <div style={{maxWidth:"800px",width:"100%",display:"flex",justifyContent:"center",alignItems:"center"}}>
+              <h5 style={{color:"#fff"}}>Thank you for showing interest
+              </h5></div>:(
               <FundingPreviousData setShowForm={setShowForm} />
             ) : (
-              <FundingForm setShowForm={setShowForm} />
+              <FundingForm setShowForm={setShowForm} setShoeSuccess={setShoeSuccess}/>
             )}
           </div>
 

@@ -19,21 +19,15 @@ import { setPageTitle } from "../../../Store/features/design/designSlice";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   OnePagerCompanyLogo,
-  OnePagerCompanyInfo,
-  OnePagerCompanyAbout,
-  OnePagerMarketSize,
-  OnePagerSocialLinks,
-  OnePagerProjections,
-  OnePagerFundAsking,
-  OnePagerRoadmap,
-  OnePagerTeam,
 } from "../../../components/Shared/OnePager";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
+import CompanyPost from "../../../components/Investor/InvestorGlobalCards/MilestoneCard/CompanyPost";
 
 const OnePager = () => {
+  const loggedInUserId = useSelector((state) => state?.user?.loggedInUser?._id);
   const [rupeeHighlight, setRupeeHighlight] = useState(true);
   const [dollarHighlight, setDollarHighlight] = useState(false);
   const { username } = useParams();
@@ -164,7 +158,7 @@ const OnePager = () => {
 
   return (
     <MaxWidthWrapper>
-      <div className="onePager_pdf_outer ps-xl-3 mb-5">
+      <div className="onePager_pdf_outer ps-xl-3 mb-5" style={{minHeight:"80vh"}}>
         {onePager.length !== 0 ? (
           <div
             className="onePager_wrapper d-flex flex-column gap-4"
@@ -174,44 +168,49 @@ const OnePager = () => {
             <OnePagerCompanyLogo image={onePager.logo} />
 
             {/* onePager company info */}
-            <OnePagerCompanyInfo
+            {/*<OnePagerCompanyInfo
               company={onePager.company}
               location={onePager.location}
               startedAtDate={onePager.startedAtDate}
               keyFocus={onePager.keyFocus}
               socialLinks={onePager.socialLinks}
-            />
+        />*/}
 
             {/* onePager company about */}
-            <OnePagerCompanyAbout
+            {/*<OnePagerCompanyAbout
               description={onePager.description}
               problem={onePager.problem}
               solution={onePager.solution}
-            />
-
-            {/* onePager Market info */}
+      />*/}
             <div
+              className="rounded-4 border shadow-sm"
+              style={{ backgroundColor: "var(--white-to-grey)" }}
+            >
+              <div className="personal_information_header" style={{padding:"1rem 0 0 1rem"}}>
+                <h2 className="typography" style={{color:"#fff"}}>
+                  Company update
+                </h2>
+              </div>
+              <div className="mt-2 milestones">
+                <CompanyPost userId={loggedInUserId} />
+              </div>
+            </div>
+            {/* onePager Market info */}
+            {/*<div
               className="rounded-4 border shadow-sm"
               style={{ backgroundColor: "var(--white-to-grey)" }}
             >
               <div className="border-bottom">
                 <div className="px-3 px-lg-4 py-5 d-flex flex-column gap-5">
-                  {/* Market Size */}
                   <OnePagerMarketSize companyData={onePager} />
-                  {/* Social Links */}
                   <OnePagerSocialLinks companyData={onePager} />
-                  {/* Projections */}
                   <OnePagerProjections companyData={onePager} />
-                  {/* Fund Asking */}
                   <OnePagerFundAsking companyData={onePager} />
-                  {/* Roadmap */}
                   <OnePagerRoadmap companyData={onePager} />
-                  {/* Team */}
                   <OnePagerTeam team={onePager.team} />
                 </div>
               </div>
 
-              {/* Action buttons */}
               <div className="onePager_action_buttons px-3 px-lg-4 py-5 d-flex align-items-center justify-content-center justify-content-md-end">
                 <div className="action_buttons_container d-flex flex-column flex-md-row gap-4">
                   <div className="preview_button">
@@ -232,7 +231,7 @@ const OnePager = () => {
                   </button>
                 </div>
               </div>
-            </div>
+      </div>*/}
 
             {/* OnePager End */}
           </div>

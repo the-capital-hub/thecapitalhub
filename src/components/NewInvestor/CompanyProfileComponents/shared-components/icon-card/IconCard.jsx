@@ -3,7 +3,7 @@ import "./IconCard.scss";
 export default function IconCard({ src, alt, text, isPill }) {
   return (
     <div
-      className={`iconCard__container d-flex justify-content-center align-items-center gap-1  ${
+      className={`iconCard__container d-flex align-items-center gap-1  ${
         isPill ? "pill fs-6" : ""
       } `}
     >

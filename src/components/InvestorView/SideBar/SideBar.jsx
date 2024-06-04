@@ -203,7 +203,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                         currentTab === "onepager" ? "items-active" : ""
                       }
                     >
-                      One Pager
+                    Company Updates
                     </span>
                   )}
                 </Link>

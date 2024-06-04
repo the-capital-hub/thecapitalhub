@@ -9,9 +9,17 @@ import {
   selectMyInterests,
   setUserCompany,
 } from "../../../../../Store/features/user/userSlice";
-import { postInvestorData } from "../../../../../Service/user";
+import {
+  addMessage,
+  addNotificationAPI,
+  createChat,
+  postInvestorData,
+} from "../../../../../Service/user";
 import { useState } from "react";
 import SpinnerBS from "../../../../Shared/Spinner/SpinnerBS";
+import { generateId } from "../../../../../utils/ChatsHelpers";
+import AfterSuccessPopUp from "../../../../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import { setChatId } from "../../../../../Store/features/chat/chatSlice";
 
 export default function CompanyActions({
   isOnelink = false,
@@ -20,7 +28,9 @@ export default function CompanyActions({
 }) {
   let location = useLocation();
   const dispatch = useDispatch();
-
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  const [send, setSend] = useState(false);
+  const [open, setOpen] = useState(false);
   const isInvestor = useSelector(selectIsInvestor);
   const myInterests = useSelector(selectMyInterests);
   const loggedInUserId = useSelector(selectLoggedInUserId);
@@ -71,6 +81,49 @@ export default function CompanyActions({
     }
   };
 
+  const handelOnlinkRequest = async () => {
+    try {
+      const notificationBody = {
+        recipient: loggedInUserId,
+        type: "onlinkRequest",
+        achievementId: "658bb97a8a18edb75e6f4243",
+      };
+
+      await createChat(founderId._id, loggedInUserId)
+        .then(async (res) => {
+          console.log(res);
+          if (res.message === "Chat already exists") {
+            setOpen(true);
+            return;
+          }
+          addNotificationAPI(notificationBody)
+            .then((data) => console.log(""))
+            .catch((error) => console.error(error.message));
+          console.log("founderId", founderId);
+          console.log("from create chat:", res.data);
+          dispatch(setChatId(res?.data._id));
+          const message = {
+            id: generateId(),
+            senderId: loggedInUserId,
+            text: `${loggedInUser.firstName}${loggedInUser.lastName} has send you for onlink request`,
+            chatId: res?.data?._id,
+          };
+          await addMessage(message)
+            .then(({ data }) => {
+              setSend(!send);
+              console.log("response after adding to db", data);
+            })
+            .catch((error) => {
+              console.error("Error-->", error);
+            });
+        })
+        .catch((error) => {
+          console.error("Error creating chat-->", error);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="company__actions d-flex flex-column justify-content-end">
       {/* {isOnelink ? (
@@ -123,15 +176,41 @@ export default function CompanyActions({
             )}
             {loggedInUserId !== founderId._id && (
               <Link to={linkTo}>
-                <button className="btn btn-capital-outline actions-btn">
+                <button
+                  className="btn btn-capital-outline actions-btn"
+                  style={{ fontSize: "14px", padding: 5 }}
+                >
                   Connect with the Founder
                 </button>
               </Link>
+            )}
+            {loggedInUserId !== founderId._id && (
+              <button
+                className="btn btn-capital-outline actions-btn"
+                style={{ fontSize: "14px", padding: "5px" }}
+                onClick={handelOnlinkRequest}
+              >
+                Request for onlink
+              </button>
             )}
           </>
         )}
         {!location.pathname === "/company-profile" && (
           <button className="btn-capital actions-btn">Invest Now</button>
+        )}
+        {open && (
+          <AfterSuccessPopUp
+            withoutOkButton
+            onClose={() => setOpen(!open)}
+            successText="Request send already"
+          />
+        )}
+        {send && (
+          <AfterSuccessPopUp
+            withoutOkButton
+            onClose={() => setSend(!send)}
+            successText="Request send successfully"
+          />
         )}
       </div>
     </div>

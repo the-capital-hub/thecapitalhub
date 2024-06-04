@@ -7,16 +7,17 @@ import FeaturedArticles from "../../../Images/Help/FeatureIcon.svg";
 import CustomerIcon from "../../../Images/Help/Customer.png";
 import QuestionIcon from "../../../Images/Help/Questionmark.png";
 import AvatarIcon from "../../../Images/Help/Avatar.png";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Faq from "./components/Faq/Faq";
+import HelpPopUp from "../../PopUp/HelpPopUp/HelpPopUp";
 
 const Help = () => {
   const dispatch = useDispatch();
-
+  const [open, setOpen] = useState(false)
   useEffect(() => {
     document.title = "Help | The Capital Hub";
     dispatch(setPageTitle("Help"));
@@ -52,7 +53,10 @@ const Help = () => {
                       Or choose a category to quickly find the help you need
                     </h6>
                     <section class="card-section">
-                      <Link to="/contactus" className=" card ">
+                      <Link to="/contactus" className=" card "
+                       //onClick={()=>setOpen(true)} 
+                      >
+                     
                         <div class="">
                           <img src={CustomerIcon} alt="text" />
                           <p>Contact us</p>
@@ -220,6 +224,7 @@ const Help = () => {
             </div>
           </div>
         </div>
+        {open && <HelpPopUp setOpen={setOpen}/>}
       </div>
     </MaxWidthWrapper>
   );

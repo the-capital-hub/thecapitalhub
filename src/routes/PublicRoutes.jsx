@@ -6,6 +6,7 @@ import Register from "../components/Register/Register";
 import Login from "../components/Login/Login";
 import NewPasswordPopUp from "../components/PopUp/NewPasswordPopUp/NewPasswordPopUp";
 import SuspenseLoader from "../components/SuspenseLoader/SuspenseLoader";
+import OurStartup from "../components/OurStartup/OurStartUp";
 
 // Import the other components using lazy loading
 const Home = lazy(() => import("../components/Home/Home"));
@@ -166,6 +167,16 @@ function PublicRoutes() {
           <Suspense fallback={<SuspenseLoader />}>
             <Navbar />
             <OurInvestor />
+            <Footer />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/our-startup"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <Navbar />
+            <OurStartup />
             <Footer />
           </Suspense>
         }

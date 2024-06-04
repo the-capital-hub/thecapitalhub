@@ -163,11 +163,11 @@ const ChatNavbar = ({ isclear, cleared, setIsSettingsOpen }) => {
                 onClick={() => setChatkebabMenu(!chatkebabMenu)}
                 alt=""
               />
-              {chatkebabMenu && (
+              {/*{chatkebabMenu && (
                 <ul className="kebab_menu border rounded shadow-sm p-3">
                   <li onClick={handleClearChat}>Clear Chat</li>
                 </ul>
-              )}
+              )}*/}
             </div>
           </>
         )}

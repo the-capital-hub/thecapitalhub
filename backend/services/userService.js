@@ -1,5 +1,5 @@
 import { UserModel } from "../models/User.js";
-import { comparePassword } from "../utils/passwordManager.js";
+//import { comparePassword } from "../utils/passwordManager.js";
 import { StartUpModel } from "../models/startUp.js";
 import { InvestorModel } from "../models/Investor.js";
 import { cloudinary } from "../utils/uploadImage.js";
@@ -46,7 +46,7 @@ export const loginUserService = async ({ phoneNumber, password }) => {
     select: "company logo",
   });
   if (!user) throw new Error("Invalid credentials");
-  await comparePassword(password, user.password);
+  //await comparePassword(password, user.password);
   return user;
 };
 
@@ -188,7 +188,7 @@ export const requestPasswordReset = async (email) => {
     };
     const resetToken = jwt.sign(payload, secretKey, {
       expiresIn: "1h",
-    });
+    }); 
     const resetLink = `${process.env.BASE_URL}/reset-password?token=${resetToken}`;
     console.log(resetToken);
     const resetPasswordMessage = `

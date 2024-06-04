@@ -54,7 +54,13 @@ export const createNewPost = async (data) => {
       ).populate("user");
     }
     const newPost = new PostModel(data);
-    await newPost.save();
+    const post = await newPost.save();
+
+    if (data.postType === "company") {
+      const user = await UserModel.findOne({ _id: data.user });
+       user.companyUpdate.push(post._id);
+      await user.save();
+    }
     await newPost.populate("user");
     await newPost.user.populate("startUp");
     await newPost.user.populate("investor");
@@ -114,7 +120,8 @@ export const allPostsData = async (page, perPage) => {
         populate: [
           {
             path: "user",
-            select: "firstName lastName designation profilePicture investor startUp oneLinkId",
+            select:
+              "firstName lastName designation profilePicture investor startUp oneLinkId",
             populate: [
               {
                 path: "investor",
@@ -162,7 +169,8 @@ export const singlePostData = async (_id) => {
         populate: [
           {
             path: "user",
-            select: "firstName lastName designation profilePicture investor startUp oneLinkId",
+            select:
+              "firstName lastName designation profilePicture investor startUp oneLinkId",
             populate: [
               {
                 path: "investor",
@@ -175,7 +183,7 @@ export const singlePostData = async (_id) => {
             ],
           },
         ],
-      })
+      });
     return post;
   } catch (error) {
     console.error(error);
@@ -337,7 +345,8 @@ export const getComments = async (postId) => {
     const post = await PostModel.findById(postId).populate({
       path: "comments.user",
       model: "Users",
-      select: "firstName lastName designation profilePicture investor startUp oneLinkId",
+      select:
+        "firstName lastName designation profilePicture investor startUp oneLinkId",
       populate: [
         {
           path: "investor",
@@ -541,11 +550,11 @@ export const getSavedPostsByCollection = async (userId, collectionName) => {
 //get like count
 export const getLikeCount = async (postId) => {
   try {
-    const post = await PostModel.findById(postId).populate('likes');
+    const post = await PostModel.findById(postId).populate("likes");
     if (!post) {
       return {
         status: 404,
-        message: 'Post not found',
+        message: "Post not found",
       };
     }
     const likeCount = post.likes.length;
@@ -554,11 +563,11 @@ export const getLikeCount = async (postId) => {
       likedBy = null;
     } else if (likeCount === 1) {
       const user = post.likes[0];
-      likedBy = user ? user.firstName : 'Unknown User';
+      likedBy = user ? user.firstName : "Unknown User";
     } else {
       const usersWhoLiked = post.likes.slice(0, 2);
       const otherCount = likeCount - 2;
-      likedBy = usersWhoLiked.map((user) => user.firstName).join(', ');
+      likedBy = usersWhoLiked.map((user) => user.firstName).join(", ");
       if (otherCount > 0) {
         likedBy += `, and ${otherCount} others`;
       }
@@ -566,7 +575,9 @@ export const getLikeCount = async (postId) => {
 
     return {
       status: 200,
-      message: `${likeCount} ${likeCount === 1 ? 'person' : 'people'} liked this post`,
+      message: `${likeCount} ${
+        likeCount === 1 ? "person" : "people"
+      } liked this post`,
       data: {
         count: likeCount,
         likedBy,
@@ -577,7 +588,7 @@ export const getLikeCount = async (postId) => {
     console.error(error);
     return {
       status: 500,
-      message: 'An error occurred while fetching like count',
+      message: "An error occurred while fetching like count",
     };
   }
 };
@@ -616,6 +627,11 @@ export const deletePost = async (postId, userId) => {
       _id: postId,
       user: userId,
     });
+    const user = await UserModel.findOne({_id:userId})
+    if(user.companyUpdate.includes(postId)){
+      user.companyUpdate.filter(id => id !== postId)
+      user.save()
+    }
     if (!deletedPost) {
       return {
         status: 404,
@@ -635,7 +651,37 @@ export const deletePost = async (postId, userId) => {
     };
   }
 };
-
+export const addToCompanyUpdate = async (postId, userId) => {
+  try {
+    const user = await UserModel.findOne({ _id: userId });
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found.",
+      };
+    }
+    if (user.companyUpdate.includes(postId)) {
+      return {
+        status: 400,
+        message: "Post is already in featured posts.",
+      };
+    }
+    
+    user.companyUpdate.push(postId);
+    await user.save();
+    await PostModel.findOneAndUpdate({_id:postId},{postType:"company"})
+    return {
+      status: 200,
+      message: "Post added to featured posts",
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while adding the post to featured posts.",
+    };
+  }
+};
 export const addToFeaturedPost = async (postId, userId) => {
   try {
     const user = await UserModel.findOne({ _id: userId });
@@ -667,6 +713,32 @@ export const addToFeaturedPost = async (postId, userId) => {
   }
 };
 
+export const getCompanyUpdateByUser = async (userId) => {
+  try {
+    const user = await UserModel.findById(userId).populate("companyUpdate");
+
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found.",
+        companyUpdate: [],
+      };
+    }
+
+    return {
+      status: 200,
+      message: "Featured posts retrieved successfully.",
+      user,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while retrieving featured posts.",
+      companyUpdate: [],
+    };
+  }
+};
 export const getFeaturedPostsByUser = async (userId) => {
   try {
     const user = await UserModel.findById(userId).populate("featuredPosts");
@@ -694,6 +766,33 @@ export const getFeaturedPostsByUser = async (userId) => {
   }
 };
 
+export const removeCompanyUpdatePost = async (postId, userId)=>{
+  try{
+    const user = await UserModel.findByIdAndUpdate(
+      userId,
+      { $pull: { companyUpdate: postId } },
+      { new: true }
+    );
+    await PostModel.findOneAndUpdate({_id:postId},{postType:"public"});
+    if (!user) {
+      return {
+        status: 404,
+        message: "User not found.",
+      };
+    }
+
+    return {
+      status: 200,
+      message: "Post removed from featured posts.",
+    }; 
+  }catch(error){
+    console.error(error);
+    return {
+      status: 500,
+      message: "An error occurred while removing the post from featured posts.",
+    };
+  }
+}
 export const removeFromFeaturedPost = async (postId, userId) => {
   try {
     const user = await UserModel.findByIdAndUpdate(

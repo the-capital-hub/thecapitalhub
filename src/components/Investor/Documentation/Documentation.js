@@ -70,14 +70,14 @@ const Documentation = () => {
 
   useEffect(() => {
     document.title = "Documentation | The Capital Hub";
-    const getFolders = async () => {
-      try {
-        const res = await axios.get(`${baseURL}`);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getFolders();
+    // const getFolders = async () => {
+    //   try {
+    //     const res = await axios.get(`${baseURL}`);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // };
+    // getFolders();
     dispatch(setPageTitle("Documentation"));
   }, []);
 

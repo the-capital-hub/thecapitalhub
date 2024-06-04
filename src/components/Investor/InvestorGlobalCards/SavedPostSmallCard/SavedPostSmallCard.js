@@ -24,8 +24,6 @@ const SavedPostSmallCard = ({
   setAllPosts,
   resharedPostId,
 }) => {
-  console.log("user", resharedPostId);
-
   const loggedInUserId = useSelector(selectLoggedInUserId);
   const { pathname } = useLocation();
   const linkPrefix = pathname.includes("/investor") ? "/investor" : "";
@@ -122,6 +120,7 @@ const SavedPostSmallCard = ({
           <div
             className="kebabMenu_container position-relative"
             ref={kebabMenuContainerRef}
+            style={{marginTop:"-1.2rem"}}
           >
             {/* <img
               src={ThreeDot}
@@ -131,12 +130,13 @@ const SavedPostSmallCard = ({
             /> */}
             <button
               className="btn border-0 p-0 m-0"
-              onClick={() => setShowKebabMenu(!showKebabMenu)}
+              onClick={handleRemoveFromSaved}
+       
             >
-              <IconKebabMenu />
+              <IconDeleteFill height="1.3rem" width="1.3rem" color="#8b1f1f" />
             </button>
-            {showKebabMenu && (
-              <div className="kebab_menu d-flex flex-column gap-3 border rounded p-2">
+            {/*{showKebabMenu && (
+              <div className="kebab_menu border rounded shadow-sm p-2">
                 <button
                   className="btn border-0 p-0 m-0 d-flex align-items-center gap-2 shadow-none "
                   onClick={handleRemoveFromSaved}
@@ -147,7 +147,7 @@ const SavedPostSmallCard = ({
                         height="1rem"
                         width="1rem"
                         color="#8b1f1f"
-                      />
+                  />
                       <span className="" style={{ fontSize: "14px" }}>
                         Remove
                       </span>
@@ -160,7 +160,7 @@ const SavedPostSmallCard = ({
                   )}
                 </button>
               </div>
-            )}
+            )} */}
           </div>
         </div>
         {image ? (

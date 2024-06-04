@@ -289,7 +289,6 @@ export const addMembersToCommunity = async (communityId, memberIds) => {
 
 export const deleteCommunity = async (communityId, userId) => {
   try {
-    console.log(communityId, userId);
     const community = await CommunityModel.findOneAndDelete({ _id: communityId, adminId: userId });
     if (!community) {
       return {

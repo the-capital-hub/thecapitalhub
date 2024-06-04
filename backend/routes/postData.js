@@ -13,11 +13,14 @@ import {
   getUsersWhoLikedPostController,
   deletedPostController,
   addToFeaturedPostController,
+  addToCompanyUpdateController,
   getFeaturedPostsByUserController,
+  getCompanyUpdateByUserController,
   removeFromFeaturedPostController,
   deleteCommentController,
   unsavePostController,
-  toggleCommentLikeController
+  toggleCommentLikeController,
+  removeCompanyUpdatePostController
 } from "../controllers/postController.js";
 import { authenticateToken } from "../middlewares/authenticateToken.js";
 const router = express.Router();
@@ -44,9 +47,11 @@ router.post("/toggleLikeComment/:postId/:commentId", toggleCommentLikeController
 router.delete("/deleteComment/:postId/:commentId", deleteCommentController);
 
 router.delete("/deletePost/:postId", deletedPostController);
-
+router.post("/addToCompanyUpdatePost/:postId",addToCompanyUpdateController)
 router.post("/addToFeaturedPost/:postId", addToFeaturedPostController);
 router.get("/getFeaturedPostsByUser/:userId", getFeaturedPostsByUserController);
+router.get("/getCompanyUpdatePosts/:userId",getCompanyUpdateByUserController)
 router.delete("/removeFromFeaturedPost/:postId", removeFromFeaturedPostController);
+router.delete("/removeCompanyUpdatePost/:postId",removeCompanyUpdatePostController)
 
-export default router;
+export default router; 

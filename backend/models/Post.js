@@ -52,6 +52,9 @@ const postSchema = new Schema(
     },
     resharedCount: {
       type: Number,
+    },
+    postType:{
+      type:String
     }
   },
   {

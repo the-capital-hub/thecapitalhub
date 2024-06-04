@@ -152,12 +152,12 @@ const SharingOneLinkPopUp = ({
 
           <h4 style={{ color: "var(--d-l-grey)" }}>Share this details via</h4>
           <div className="share-buttons d-flex justify-content-center align-items-center position-relative">
-            <FacebookShareButton
+            {/*<FacebookShareButton
               url={`${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`}
               quote={messageForSharing}
             >
               <FacebookIcon size={32} round />
-            </FacebookShareButton>
+        </FacebookShareButton>*/}
             <WhatsappShareButton
               url={`\nHere is Our OneLink : https://thecapitalhub.in${shareUrl} \nSecret Key: ${loggedInUser.secretKey}`}
               title={messageForSharing}

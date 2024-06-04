@@ -11,7 +11,7 @@ export const addNotificationController = async (req, res) => {
     const {
       recipient,
       sender,
-      type,
+      type, 
       post,
       connection,
       meetingId,

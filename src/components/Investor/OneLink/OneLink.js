@@ -16,18 +16,18 @@ import { getStartupByFounderId } from "../../../Service/user";
 import SharingOneLinkPopUp from "../../PopUp/SharingOneLinkPopUp/SharingOneLinkPopUp";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { setPageTitle } from "../../../Store/features/design/designSlice";
-import {
-  OnePagerCompanyAbout,
-  OnePagerCompanyInfo,
-  // OnePagerCompanyLogo,
-  OnePagerFundAsking,
-  OnePagerMarketSize,
-  OnePagerProjections,
-  OnePagerRoadmap,
-  OnePagerSocialLinks,
-  OnePagerTeam,
-} from "../../Shared/OnePager";
-import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
+// import {
+//   OnePagerCompanyAbout,
+//   OnePagerCompanyInfo,
+//   // OnePagerCompanyLogo,
+//   OnePagerFundAsking,
+//   OnePagerMarketSize,
+//   OnePagerProjections,
+//   OnePagerRoadmap,
+//   OnePagerSocialLinks,
+//   OnePagerTeam,
+// } from "../../Shared/OnePager";
+// import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import TutorialTrigger from "../../Shared/TutorialTrigger/TutorialTrigger";
 import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
 import {
@@ -35,13 +35,21 @@ import {
   selectLoggedInUserId,
   selectUserCompanyData,
 } from "../../../Store/features/user/userSlice";
+//import FeaturedPostsContainer from "../InvestorGlobalCards/MilestoneCard/FeaturedPostsContainer";
+import { PlusIcon } from "../../NewInvestor/SvgIcons";
+import CompanyPost from "../InvestorGlobalCards/MilestoneCard/CompanyPost";
+import CreatePostPopUp from "../../PopUp/CreatePostPopUp/CreatePostPopUp";
 
 const OneLink = () => {
   const loggedInUserId = useSelector(selectLoggedInUserId);
   const companyDataId = useSelector(selectCompanyDataId);
   const userCompanyData = useSelector(selectUserCompanyData);
   const [isExitClicked, setIsExitClicked] = useState(false);
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [newPost, setNewPost] = useState(false);
   const [company, setCompany] = useState([]);
+  const [respostingPostId, setRepostingPostId] = useState("");
+  const [allPosts, setAllPosts] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -73,7 +81,9 @@ const OneLink = () => {
     setIsExitClicked(false);
     // navigate("/login");
   };
-
+  const appendDataToAllPosts = (data) => {
+    setAllPosts([data, ...allPosts]);
+  };
   return (
     <MaxWidthWrapper>
       <div className="onelink_container">
@@ -106,8 +116,48 @@ const OneLink = () => {
               input={true}
               isExitClicked={isExitClicked}
               setCompany={setCompany}
-              showPreviousIM={true}
+              showPreviousIM={false}
             />
+            <div
+            className="rounded-4 border shadow-sm"
+            style={{ backgroundColor: "var(--white-to-grey)" }}
+          >
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "1rem 1rem 0 1rem",
+              }}
+              className="box personal_information"
+            >
+              <div className="personal_information_header">
+                <h2 className="typography">
+                  Company update
+                </h2>
+              </div>
+              <div
+                // onClick={() => setSidebarCollapsed(true)}
+                //to="/investor/home?showPopup=true"
+                id="sidebar_createAPost"
+              >
+                <button
+                  className="create_post_newInvestor"
+                  onClick={() => setPopupOpen(true)}
+                >
+                  {/* <span>Create a Post</span>
+                <img src={PlusIcon} alt="image" /> */}
+                  <span className="text-black ms-0">Create Post</span>
+                  {/* <img src={PlusIcon} alt="image" /> */}
+                  <PlusIcon color="black" width="24" height="24" />
+                </button>
+              </div>
+            </div>
+            <div className="mt-2 milestones">
+              <CompanyPost userId={loggedInUserId} postDelete={true} newPost={newPost}/>
+            </div>
+          </div>
           </div>
 
           {/* Rightside content */}
@@ -117,16 +167,17 @@ const OneLink = () => {
             {/* <NewsCorner /> */}
           </div>
         </div>
+
         {/* <OnePagePreview show={true} /> */}
 
         {/* New OnePager start */}
-        {company.length !== 0 ? (
+        {/*{company.length !== 0 ? (
           <div className="onePager_wrapper d-flex flex-column gap-1">
-            {/* <OnePagerCompanyLogo image={company.logo} /> */}
+            
             <h3 className="onelink_head rounded-3 text-light p-3 ">
               Edit OneLink
             </h3>
-            {/* onePager company info */}
+
             <OnePagerCompanyInfo
               company={company.company}
               location={company.location}
@@ -136,7 +187,6 @@ const OneLink = () => {
               showEdit={true}
             />
 
-            {/* onePager company about */}
             <OnePagerCompanyAbout
               description={company.description}
               problem={company.problem}
@@ -144,47 +194,28 @@ const OneLink = () => {
               showEdit={true}
             />
 
-            {/* onePager Market info */}
             <div className="market_info rounded-4 border shadow-sm">
               <div className="">
                 <div className="px-3 px-lg-4 py-5 d-flex flex-column gap-5">
-                  {/* Market Size */}
+            
                   <OnePagerMarketSize companyData={company} />
-                  {/* Social Links */}
+                
                   <OnePagerSocialLinks companyData={company} />
-                  {/* Projections */}
+             
                   <OnePagerProjections companyData={company} />
-                  {/* Fund Asking */}
+            
                   <OnePagerFundAsking companyData={company} />
-                  {/* Roadmap */}
+            
                   <OnePagerRoadmap companyData={company} />
-                  {/* Team */}
+     
                   <OnePagerTeam team={company.team} />
                 </div>
               </div>
-
-              {/* Action buttons */}
-              {/* <div className="onePager_action_buttons px-3 px-lg-4 py-5 d-flex align-items-center justify-content-center justify-content-md-end">
-                <div className="action_buttons_container d-flex flex-column flex-md-row gap-4">
-                  <button
-                    type="button"
-                    className="text-black rounded-pill onePager_action_save"
-                  >
-                    Save Draft
-                  </button>
-                  <button
-                    type="button"
-                    className="text-white rounded-pill onePager_action_publish"
-                  >
-                    Publish
-                  </button>
-                </div>
-              </div> */}
             </div>
           </div>
         ) : (
           <SpinnerBS className={"d-flex justify-content-center w-100 py-5"} />
-        )}
+        )}*/}
 
         {/* New OnePager end */}
         {isExitClicked && company.introductoryMessage && (
@@ -192,6 +223,15 @@ const OneLink = () => {
             introMessage={company.introductoryMessage}
             oneLink={company.oneLink}
             onClose={handleClosePopup}
+          />
+        )}
+        {popupOpen && (
+          <CreatePostPopUp
+            setPopupOpen={setPopupOpen}
+            popupOpen
+            setNewPost={setNewPost}
+            respostingPostId={respostingPostId}
+            appendDataToAllPosts={appendDataToAllPosts}
           />
         )}
       </div>

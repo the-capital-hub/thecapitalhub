@@ -182,6 +182,7 @@ export default function ChatInputContainer({
       ...prevMessages,
       { ...message, recieverId, createdAt },
     ]);
+    
     clearInputs();
 
     // update last message

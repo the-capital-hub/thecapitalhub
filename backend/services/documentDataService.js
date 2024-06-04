@@ -4,6 +4,7 @@ import { fileURLToPath } from "url";
 import File from "../models/File.js";
 import Folder from "../models/Folder.js";
 import { UserModel } from "../models/User.js";
+import { cloudinary } from "../utils/uploadImage.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -30,6 +31,7 @@ export const getDocumentList = () => {
 export const createFolder = async (args) => {
   try {
     const { userId, folderName } = args;
+
     const folderExists = await Folder.findOne({ userId: userId, folderName: folderName });
     if (folderExists) {
       return {
@@ -80,12 +82,17 @@ export const getFolderByUser = async (oneLinkId) => {
 
 export const uploadDocument = async (args) => {
   try {
-    const { userId, folderName, fileUrl, fileName } = args;
+    const { userId, folderName, fileName } = args;
+    const { secure_url } = await cloudinary.uploader.upload(args.files, {
+      folder: `${process.env.CLOUDIANRY_FOLDER}/startUps/logos`,
+      format: "webp",
+      unique_filename: true,
+    });
     const file = new File({
       userId: userId,
       folderName: folderName,
       fileName: fileName,
-      fileUrl: fileUrl,
+      fileUrl: secure_url,
     });
     await file.save();
     const user = await UserModel.findById(userId);

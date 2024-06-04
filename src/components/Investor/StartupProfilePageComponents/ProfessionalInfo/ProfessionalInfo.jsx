@@ -37,8 +37,9 @@ export default function ProfessionalInfo({ theme }) {
     fullName: loggedInUser?.firstName + " " + loggedInUser?.lastName || "",
     company: companyName,
     location: loggedInUser?.location || "Bangalore, India",
+    industry : loggedInUser?.industry || "Nun"
   });
-
+ console.log(loggedInUser?.industry)
   // State for isEditing
   const [isEditing, setIsEditing] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);

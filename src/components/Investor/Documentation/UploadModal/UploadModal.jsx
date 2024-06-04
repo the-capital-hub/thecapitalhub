@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { s3 } from "../../../../Service/awsConfig";
 import IconDelete from "../../SvgIcons/IconDelete";
 import { getFoldersApi, addNotificationAPI } from "../../../../Service/user";
+import { getBase64 } from "../../../../utils/getBase64";
 
 const baseUrl = environment.baseUrl;
 
@@ -76,70 +77,72 @@ const UploadModal = ({ onCancel, fetchFolder, notify }) => {
     }
 
     setLoading(true);
-
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const timestamp = Date.now();
       const fileName = `${timestamp}_${file.name}`;
       const fileExtension = file.name.split(".").pop();
-      const contentType = getContentType(fileExtension);
+      //const contentType = getContentType(fileExtension);
 
-      const params = {
-        Bucket: "thecapitalhubdocuments",
-        Key: `documents/${fileName}`,
-        Body: file,
-        //uncomment this if you want to display the uploaded documents in separte window
-        // ContentDisposition: "inline",
-        // ContentType: contentType,
-      };
-
-      const uploadRequest = s3.upload(params);
-
-      uploadRequest.on("httpUploadProgress", (progress) => {
-        const percent = Math.round((progress.loaded / progress.total) * 100);
-        setUploadProgress(percent);
-      });
+      // const params = {
+      //   Bucket: "thecapitalhubdocuments",
+      //   Key: `documents/${fileName}`,
+      //   Body: file,
+      //   //uncomment this if you want to display the uploaded documents in separte window
+      //   //ContentDisposition: "inline",
+      //   //ContentType: contentType,
+      // };
+      // const uploadRequest = s3.upload(params);
+      // uploadRequest.on("httpUploadProgress", (progress) => {
+      //   const percent = Math.round((progress.loaded / progress.total) * 100);
+      //   setUploadProgress(percent);
+      // });
 
       try {
-        const res = await uploadRequest.promise();
-
+        // console.log("upload")
+        // const res = await uploadRequest.promise();
+        // console.log(res,"upload")
+        const logo = await getBase64(files[i]);
+        
         const requestBody = {
-          fileUrl: res.Location,
-          fileName: file.name,
+          files: logo,
+          fileName: fileName,
           userId: loggedInUser._id,
           folderName: folder === "New Folder" ? folderName : folder,
         };
 
         await axios
           .post(`${baseUrl}/documentation/uploadDocument`, requestBody)
-          .then((response) => {
-            fetchFolder();
-            if (response.status === 200) {
-              setUploadProgress(0); // Reset progress for the current file
-              if (i < files.length - 1) {
-                // If there are more files to upload, show progress for the next file
-                setUploadProgress(0);
-              }
-              if (response.data.isFirst) {
-                notify();
-                const notificationBody = {
-                  recipient: loggedInUser._id,
-                  type: "achievementCompleted",
-                  achievementId: "656468a249186bca517cd0d3",
-                }
-                addNotificationAPI(notificationBody)
-                  .then((data) => console.log("Added"))
-                  .catch((error) => console.error(error.message));
-              }
-            }
+          // .then((response) => {
+          //   fetchFolder();
+          //   if (response.status === 200) {
+          //     setUploadProgress(0); // Reset progress for the current file
+          //     if (i < files.length - 1) {
+          //       // If there are more files to upload, show progress for the next file
+          //       setUploadProgress(0);
+          //     }
+          //     if (response.data.isFirst) {
+          //       notify();
+          //       const notificationBody = {
+          //         recipient: loggedInUser._id,
+          //         type: "achievementCompleted",
+          //         achievementId: "656468a249186bca517cd0d3",
+          //       }
+          //       addNotificationAPI(notificationBody)
+          //         .then((data) => console.log("Added"))
+          //         .catch((error) => console.error(error.message));
+          //     }
+          //   }
 
-          })
-          .catch((error) => {
-            console.error("Error uploading file:", error);
-          });
+          // })
+          // .catch((error) => {
+          //   console.error("Error uploading file:", error);
+          //   return
+          // });
       } catch (error) {
         console.error("Error uploading file to S3:", error);
         alert("Failed to Upload files");
+        return
       }
     }
 

@@ -197,6 +197,12 @@ const startUpSchema = new Schema(
       competitiveAdvantage: String,
       biggestCompetitors: String,
       revenueGenerated: String,
+    },
+    lastFunding:{
+      type:String
+    },
+    companyStage:{
+      type:String
     }
   },
   {

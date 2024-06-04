@@ -23,7 +23,7 @@ import toast from "react-hot-toast";
 import AchievementToast from "../../../Toasts/AchievementToast/AchievementToast";
 import { achievementTypes } from "../../../Toasts/AchievementToast/types";
 
-export default function FundingForm({ setShowForm }) {
+export default function FundingForm({ setShowForm,setShoeSuccess }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const loggedInUserId = useSelector(selectLoggedInUserId);
   const userName = useSelector(selectUserName);
@@ -162,6 +162,7 @@ export default function FundingForm({ setShowForm }) {
     } finally {
       setLoading(false);
       setShowForm(false);
+      setShoeSuccess(true)
     }
   }
 

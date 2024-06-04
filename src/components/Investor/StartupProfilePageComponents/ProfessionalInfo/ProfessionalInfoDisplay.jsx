@@ -117,6 +117,7 @@ export default function ProfessionalInfoDisplay({
           <div className="d-flex flex-column justify-content-center gap-1 ">
             <h5 className="m-0 fw-semibold">{professionalData.fullName}</h5>
             <p className="m-0">{professionalData.designation}</p>
+            <p className="m-0">{professionalData.industry}</p>
             <p className="m-0">{professionalData.location}</p>
           </div>
         </div>
@@ -272,14 +273,14 @@ export default function ProfessionalInfoDisplay({
           {/* Education */}
           <fieldset className={` ${theme} `}>
             <legend className="px-2">Education</legend>
-            {/* <input
+            <input
               type="text"
               className="professional_form_input"
               name="education"
               value={professionalData.education}
               onChange={handleTextChange}
-            /> */}
-            <select
+            /> 
+            {/*<select
               name="education"
               id="userEducation"
               onChange={handleTextChange}
@@ -296,7 +297,7 @@ export default function ProfessionalInfoDisplay({
                   </option>
                 );
               })}
-            </select>
+            </select>*/}
           </fieldset>
 
           {/* Experience */}

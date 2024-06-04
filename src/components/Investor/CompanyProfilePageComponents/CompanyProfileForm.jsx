@@ -7,6 +7,7 @@ import { loginSuccess } from "../../../Store/features/user/userSlice";
 // import { Response } from "aws-sdk";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import { setUserCompany } from "../../../Store/features/user/userSlice";
+import { BsFillCameraFill } from "react-icons/bs";
 
 const LOCATIONS = [
   "Select Location",
@@ -44,20 +45,21 @@ const SECTORS = [
   "Aerospace",
   "Sales and Marketing",
 ];
-
+const stageData = ["Ideation", "MVP", "Pre seed", "Seed", "Series A and above"];
 export default function CompanyProfileForm({
   companyData,
   investor = false,
   isSaveAll,
   handleShowPopup,
+  theme,
 }) {
   // States for form
+  const [imagePreview, setImagePreview] = useState(companyData?.logo || null);
   const [formData, setFormData] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [othersClicked, setOthersClicked] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const dispatch = useDispatch();
-
   // State for loading
   const [loading, setLoading] = useState(false);
 
@@ -83,6 +85,8 @@ export default function CompanyProfileForm({
         mission: companyData.mission || "",
         socialLinks: companyData.socialLinks || "",
         keyFocus: companyData.keyFocus || "",
+        stage: companyData.stage || stageData[0],
+        lastFunding: companyData.lastFunding || "",
       });
     } else {
       setFormData(companyData || {});
@@ -111,7 +115,9 @@ export default function CompanyProfileForm({
   // Handle File Input change
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
+    const imageUrl = URL.createObjectURL(file);
     setSelectedFile(file);
+    setImagePreview(imageUrl);
   };
 
   // Handle Location select
@@ -186,12 +192,11 @@ export default function CompanyProfileForm({
       handleShowPopup({ error: true });
     }
   };
-
   // console.log("companyData", companyData.sector);
   return (
     <div className="profile__form">
       <form action="" className="" onSubmit={handleSubmit}>
-        <fieldset className={investor ? "investor" : "startup"}>
+        {/*<fieldset className={investor ? "investor" : "startup"}>
           <legend>Company Profile Picture</legend>
           <input
             type="file"
@@ -211,8 +216,48 @@ export default function CompanyProfileForm({
             </label>
             <p className="m-0 fs-6 fw-light">{selectedFile?.name}</p>
           </div>
-        </fieldset>
-
+  </fieldset>*/}
+        <div className="mx-auto">
+          <input
+            type="file"
+            name="image"
+            id="image"
+            accept="image/*"
+            className="visually-hidden"
+            onChange={handleFileInputChange}
+            //required
+          />
+          <label htmlFor="image" className={`upload__label ${theme} `}>
+            {imagePreview || companyData?.logo ? (
+              <img
+                src={companyData?.logo}
+                alt="Selected"
+                className="preview-image"
+                style={{
+                  width: "70px",
+                  height: "70px",
+                  objectFit: "contain",
+                  borderRadius: "100px",
+                }}
+              />
+            ) : (
+              <BsFillCameraFill
+                style={{
+                  fontSize: "1.5rem",
+                  color: `${
+                    theme === "investor" ? "black" : "rgba(253, 89, 1,1)"
+                  }`,
+                }}
+              />
+            )}
+          </label>
+          <p
+            className="div__heading"
+            style={{ color: "#fff", marginBottom: "0" }}
+          >
+            Company Logo
+          </p>
+        </div>
         <fieldset className={investor ? "investor" : "startup"}>
           <legend>Company Name</legend>
           <input
@@ -451,7 +496,64 @@ export default function CompanyProfileForm({
             />
           </fieldset>
         )}
-
+        {!investor && (
+          <fieldset className={investor ? "investor" : "startup"}>
+            <legend className="fw-bolder">Last funding</legend>
+            <input
+              type="date"
+              name="lastFunding"
+              id="lastFunding"
+              className="profile_form_input fw-bold"
+              value={formData.lastFunding || ""}
+              onChange={handleInputChange}
+              placeholder="Last funding"
+            />
+          </fieldset>
+        )}
+        {!investor && (
+          <fieldset className={investor ? "investor" : "startup"}>
+            <legend>Company stage</legend>
+            <div className="dropdown">
+              <button
+                className="btn profile_form_input w-auto dropdown-toggle sector_text"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {formData.stage || stageData[0]}
+              </button>
+              <ul
+                className={`dropdown-menu m-0 p-0 ${
+                  investor ? "investor" : "startup"
+                }`}
+              >
+                {stageData.map((sector, index) => {
+                  return (
+                    <li key={`${sector}${index}`} className="m-0 p-0">
+                      <button
+                        type="button"
+                        className={`btn btn-base list-btn text-start ps-3 text-break ${
+                          investor ? "investor" : "startup"
+                        } ${
+                          sector === formData.stage ? "selected" : ""
+                        }`}
+                        onClick={(e) => {
+                          if (sector === stageData[0]) return;
+                          setFormData((prevData) => ({
+                            ...prevData,
+                            stage: sector,
+                          }));
+                        }}
+                      >
+                        <p className="m-0">{sector}</p>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </fieldset>
+        )}
         <button
           type="submit"
           className={`align-self-end btn-base ${

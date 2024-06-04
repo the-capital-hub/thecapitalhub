@@ -28,6 +28,7 @@ const InvestNow = ({ page }) => {
   const [fullName, setFullName] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [email, setEmail] = useState("");
+  const [commitmentAmount,CommitmentAmount] = useState("")
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -41,6 +42,7 @@ const InvestNow = ({ page }) => {
       fromUserEmail: email,
       fromUserMobile: mobileNumber,
       toUserId: onePager.founderId,
+      commitmentAmount
     };
     try {
       const response = await investNow(requestBody);
@@ -80,6 +82,11 @@ const InvestNow = ({ page }) => {
                 placeholder={"Email Id"}
                 value={user.email}
               />
+              <Input
+              type={"text"}
+              placeholder={"Commitment amount"}
+              value={user.commitmentAmount}
+            />
             </div>
           </>
         ) : (
@@ -104,6 +111,12 @@ const InvestNow = ({ page }) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              <Input
+              type={"text"}
+              placeholder={"Commitment amount"}
+              value={commitmentAmount}
+              onChange={(e)=>setEmail(e.target.value)}
+            />
               {isSubmitted ? (
                 <button>Submitted</button>
               ) : (

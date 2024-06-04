@@ -31,6 +31,7 @@ import UserBio from "./Components/UserBio/UserBio";
 import MissingDetails from "./Components/Questionnaire/MissingDetails";
 import AchievementsComponents from "../AchievementsPageComponents/AchievementsComponents";
 import { Link } from "react-router-dom";
+import CompanyPost from "../InvestorGlobalCards/MilestoneCard/CompanyPost";
 
 // Startup profile page
 const InvestorHome = () => {
@@ -79,18 +80,17 @@ const InvestorHome = () => {
               <UserBio />
 
               <div className="box personal_information">
-                <div className="personal_information_header connections-container">
-                  {/* <div className="milestone_see_more">
-                    <Link to={""}>See more</Link>
-                  </div> */}
-                </div>
+                <h4 style={{ color: "#fff", marginLeft: "1rem" }}>
+                  Recent Connections
+                </h4>
+
                 <div className="col-12 mt-2 milestones">
                   <ConnectionCard />
                 </div>
               </div>
 
               {/* achievements */}
-              <div className="box personal_information">
+              {/*<div className="box personal_information">
                 <div className="personal_information_header ">
                   <h2 className="typography">Achievements</h2>
                   <div className="milestone_see_more">
@@ -100,31 +100,38 @@ const InvestorHome = () => {
                 <div className="col-12 mt-2 milestones">
                   <AchievementsComponents />
                 </div>
-              </div>
+  </div>*/}
 
               {/* Featured Posts */}
               <div className="box personal_information">
                 <div className="personal_information_header">
-                  <h2 className="typography">Featured posts</h2>
+                  <h2 className="typography">Company update</h2>
                   {/* <div className="milestone_see_more">
                     <Link to={""}>See more</Link>
                   </div> */}
                 </div>
                 <div className="mt-2 milestones">
-                  <FeaturedPostsContainer userId={loggedInUserId} />
+                  <CompanyPost userId={loggedInUserId} />
                 </div>
               </div>
-              {/* Featured Posts End */}
-
+              <div className="box personal_information">
+              <div className="personal_information_header">
+                <h2 className="typography">Featured posts</h2>
+              </div>
+              <div className="mt-2 milestones">
+                <FeaturedPostsContainer userId={loggedInUserId} postDelete={true}/>
+              </div>
+            </div>
               {/* Company Details */}
               <div className="">
                 <CompanyDetailsCard
                   className=""
                   userDetails={loggedInUser}
-                  page={loggedInUserId === companyFounderId ? "edit" : ""}
+                  page={""}
                 />
               </div>
-
+              {/* Featured Posts End */}
+              
               {/* Color Cards */}
               <ColorCards />
             </div>

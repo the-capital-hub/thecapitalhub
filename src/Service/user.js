@@ -65,6 +65,7 @@ async function uploadDocument(userData) {
 async function sendOTP (phoneNumber){
   try{
     const response = await axiosInstance.post(API.sendOtp,{phoneNumber})
+    console.log(response)
     return response.data;
   }catch(err){
     throw err
@@ -701,7 +702,17 @@ export const addMyInterest = async (investorId, newInterestData) => {
     throw error;
   }
 };
-
+export const getCompanyPost = async (userId) => {
+  try{
+    const response = await axiosInstance.get(
+      `${API.getCompanyUpdatePosts}/${userId}`
+    );
+    return response.data;
+  }catch(error){
+    console.error("Error while getting featured post:", error);
+    throw error;
+  }
+}
 export const getFeaturedPost = async (userId) => {
   try {
     const response = await axiosInstance.get(
@@ -714,6 +725,17 @@ export const getFeaturedPost = async (userId) => {
   }
 };
 
+export const addToCompanyUpdate = async (postId) => {
+  try {
+    const response = await axiosInstance.post(
+      `${API.addToCompanyUpdate}/${postId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error while adding featured post:", error);
+    throw error;
+  }
+};
 export const addToFeaturedPost = async (postId) => {
   try {
     const response = await axiosInstance.post(
@@ -730,6 +752,18 @@ export const removeFromFeaturedPost = async (postId) => {
   try {
     const response = await axiosInstance.delete(
       `${API.removeFromFeaturedPost}/${postId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log("Error while removing post from featured post:", error);
+    throw error;
+  }
+};
+
+export const removeCompanyUpdatedPost = async (postId) => {
+  try {
+    const response = await axiosInstance.delete(
+      `${API.removeCompanyUpdatePost}/${postId}`
     );
     return response.data;
   } catch (error) {

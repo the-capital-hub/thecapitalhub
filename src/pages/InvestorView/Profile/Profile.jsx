@@ -258,12 +258,12 @@ function Profile() {
               />
 
               {/* Color Cards */}
-
+              <h6 className="div__heading">Current Funding</h6>
               <div className="card_holder">
                 <ColorCard
                   color="white"
                   background="#BB98FF"
-                  text="Last round investment"
+                  text="Valuation"
                   image={About1}
                   amount={colorCard?.last_round_investment || 0}
                   isOneLink={true}
@@ -304,7 +304,7 @@ function Profile() {
                 <ColorCard
                   color="white"
                   background="#9198DA"
-                  text="Raised funds"
+                  text="Funds raised"
                   image={Revenue2}
                   amount={colorCard?.raised_funds || 0}
                   isOneLink={true}

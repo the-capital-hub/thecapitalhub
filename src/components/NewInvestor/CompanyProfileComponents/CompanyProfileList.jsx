@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CompanyProfile from "./CompanyProfile";
 
-export default function CompanyProfileList({ isStartup, data }) {
+export default function CompanyProfileList({ isStartup, data,pageName,show }) {
   const [loading, setLoading] = useState(false); //Change default to true when integrating
 
   return (
@@ -12,6 +12,8 @@ export default function CompanyProfileList({ isStartup, data }) {
           short
           startup={`${isStartup ? "true" : "false"}`}
           companyData={company}
+          pageName={pageName}
+          show = {show}
         />
       ))}
     </div>

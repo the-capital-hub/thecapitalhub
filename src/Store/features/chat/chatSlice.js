@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchAllChats } from "./chatThunks";
 
+const chatData = localStorage.getItem("allChatsData")
 const initialState = {
   chatId: "",
   userId: "",
   isCommunitySelected: false,
   chatProfile: {},
   communityProfile: {},
-  allChatsData: JSON.parse(localStorage.getItem("allChatsData")) || null,
+  allChatsData: JSON.parse(chatData) || null,
   allChatsStatus: null,
 };
 

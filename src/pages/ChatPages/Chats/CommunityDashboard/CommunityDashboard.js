@@ -369,6 +369,7 @@ const CommunityDashboard = ({
       <ChatInputContainer
         isSent={isSent}
         setIsSent={setIsSent}
+        setMessages={setMessages}
         setSendMessage={setSendMessage}
       />
 

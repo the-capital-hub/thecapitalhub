@@ -87,12 +87,16 @@ function Home() {
   }, [dispatch, isInvestor, userInvestor, companyDataId]);
 
   const fetchMorePosts = () => {
+    console.log("hii")
     getAllPostsAPI(page)
       .then(({ data }) => {
         console.log(data);
         if (data?.length === 0) {
         } else {
-          setAllPosts([...allPosts, ...data]);
+          const totalPost = data.filter((item)=> item?.postType !== "company")
+          const post = allPosts.filter((item)=> item?.postType !== "company")
+          console.log(post,totalPost)
+          setAllPosts([...post, ...totalPost]);
           setPage(page + 1);
         }
       })
@@ -114,7 +118,7 @@ function Home() {
     fetchMorePosts();
   }, [newPost, loggedInUserId]);
 
-  console.log(allPosts?.[0]);
+  console.log(allPosts?.[0], 'hii');
 
   // Repost
   const [repostLoading, setRepostLoading] = useState({

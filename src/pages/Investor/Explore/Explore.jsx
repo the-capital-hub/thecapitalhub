@@ -403,15 +403,7 @@ function Explore() {
                     label="Gender"
                     name="gender"
                   />
-                  <FilterBySelect
-                    value={filters?.previousExits}
-                    onChange={handleOnChange}
-                    options={
-                      filterOptions?.previousExits || previousExitsOptions
-                    }
-                    label="Previous Exits"
-                    name="previousExits"
-                  />
+                  
                   <FilterBySelect
                     value={filters?.yearsOfExperience}
                     onChange={handleOnChange}

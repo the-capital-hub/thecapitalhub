@@ -140,7 +140,7 @@ export default function OtherInvestorProfile() {
                 <ColorCard
                   color="white"
                   background="#BB98FF"
-                  text="Last round investment"
+                  text="Valuation"
                   image={lastRoundInvIcon}
                   amount={userData?.startUp?.colorCard?.last_round_investment}
                   isOneLink={true}
@@ -181,7 +181,7 @@ export default function OtherInvestorProfile() {
                 <ColorCard
                   color="white"
                   background="#9198DA"
-                  text="Raised funds"
+                  text="Funds raised"
                   image={raisedFundsIcon}
                   amount={userData?.startUp?.colorCard?.raised_funds}
                   isOneLink={true}

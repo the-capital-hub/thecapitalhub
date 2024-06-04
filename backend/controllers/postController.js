@@ -19,8 +19,45 @@ import {
   deleteComment,
   unsavePost,
   toggleCommentLike,
+  addToCompanyUpdate,
+  getCompanyUpdateByUser,
+  removeCompanyUpdatePost,
 } from "../services/postService.js";
+import { UserModel } from "../models/User.js";
 
+export const update_all = async (req, res) => {
+  try {
+    // const data1 = await UserModel.find();
+    // const updateProduct = async (item) => {
+    //   const recaning = (Number(item.actualPrice) / 100) * 30;
+    //   await productModel.findOneAndUpdate(
+    //     { _id: item._id },
+    //     { price: Number(item.actualPrice) - recaning }
+    //   );
+    // };
+    // data1.forEach((item) => {
+    //   updateProduct(item);
+    // });
+    const data = await UserModel.updateMany(
+      {},
+      {
+        companyUpdate:[]
+      },
+      { new: true }
+    );
+
+    // const adminId = req.user.userId;
+    // const adminData = await userModel.findOne({ _id: adminId });
+    // if (!adminData) {
+    //   return res.status(400).send({ message: "You are not authorized" });
+    // }
+    // const productRequest = req.body;
+    // const productData = await productModel.create(productRequest);
+    return res.status(201).send(data);
+  } catch (err) {
+    return res.status(500).send(err.message);
+  }
+};
 export const createPost = async (req, res) => {
   try {
     const newPost = await createNewPost({
@@ -251,6 +288,20 @@ export const deletedPostController = async (req, res) => {
   }
 };
 
+export const addToCompanyUpdateController = async (req,res)=>{
+  try {
+    const { postId } = req.params;
+    const userId = req.userId;
+    const result = await addToCompanyUpdate(postId, userId);
+    return res.status(result.status).json(result);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while adding post as featured.",
+    });
+  }
+}
 export const addToFeaturedPostController = async (req, res) => {
   try {
     const { postId } = req.params;
@@ -266,6 +317,19 @@ export const addToFeaturedPostController = async (req, res) => {
   }
 };
 
+export const getCompanyUpdateByUserController = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const result = await getCompanyUpdateByUser(userId);
+    return res.status(result.status).json(result);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while getting featured post.",
+    });
+  }
+};
 export const getFeaturedPostsByUserController = async (req, res) => {
   try {
     const { userId } = req.params;
@@ -280,6 +344,20 @@ export const getFeaturedPostsByUserController = async (req, res) => {
   }
 };
 
+export const removeCompanyUpdatePostController = async (req,res) => {
+  try {
+    const { postId } = req.params;
+    const userId = req.userId;
+    const result = await removeCompanyUpdatePost(postId, userId);
+    return res.status(result.status).json(result);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      status: 500,
+      message: "An error occurred while removing featured post.",
+    });
+  } 
+}
 export const removeFromFeaturedPostController = async (req, res) => {
   try {
     const { postId } = req.params;

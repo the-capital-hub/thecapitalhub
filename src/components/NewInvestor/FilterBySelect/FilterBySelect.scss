@@ -1,4 +1,8 @@
 .filter_by_select {
+  .select{
+    width: 100%;
+    background:var(--bs-light);
+  }
   select {
     width: 100%;
     font-size: 16px;

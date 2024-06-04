@@ -14,7 +14,6 @@ const FolderContents = () => {
   const [user, setUser] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   useEffect(() => {
     document.title = "Documents | The Capital Hub";
     dispatch(setPageTitle("Documents"));

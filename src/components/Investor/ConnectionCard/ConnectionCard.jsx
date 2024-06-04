@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import { useSelector } from "react-redux";
 import { selectLoggedInUserId } from "../../../Store/features/user/userSlice";
+import messageIcon from "../../../Images/StartUp/icons/message.svg";
 
 function ConnectionCard({ userIdData }) {
   // Fetch from store
@@ -57,7 +58,21 @@ function ConnectionCard({ userIdData }) {
                   {item?.firstName} {item?.lastName}
                 </h1>
                 <p className="m-0">{item?.designation}</p>
-                <button className="mt-auto px-3">Connected</button>
+                <Link
+                to={`/chats?userId=${item?._id}`}
+                className="text-decoration-none"
+                style={{}}
+              >
+                <button className="message btn rounded-pill px-3 py-2">
+                  <img
+                    src={messageIcon}
+                    width={10}
+                    alt="message user"
+                    style={{width:"14px",height:"14px"}}
+                  />
+                  <span style={{fontSize:"14px",marginLeft:"2px"}}>Message</span>
+                </button>
+              </Link>
               </Link>
             </div>
           ))}
