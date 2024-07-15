@@ -27,8 +27,8 @@ import TutorialTrigger from "../../Shared/TutorialTrigger/TutorialTrigger";
 import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
 import toast, { Toaster } from "react-hot-toast";
 import achievement from "../../../Images/Investor/Achievements/img_1.png";
-import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
-import { achievementTypes } from "../../Toasts/AchievementToast/types";
+// import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
+// import { achievementTypes } from "../../Toasts/AchievementToast/types";
 
 const Documentation = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -54,7 +54,6 @@ const Documentation = () => {
     setLoading(true);
     getFoldersApi(loggedInUser.oneLinkId)
       .then((data) => {
-        console.log(data.data);
         setFolderName(data.data);
         setLoading(false);
       })
@@ -91,8 +90,8 @@ const Documentation = () => {
   //   default:
   //     imageToShow = null;
   // }
-  const notify = () =>
-    toast.custom((t) => <AchievementToast type={achievementTypes.paperwork} />);
+  // const notify = () =>
+  //   toast.custom((t) => <AchievementToast type={achievementTypes.paperwork} />);
 
   return (
     <MaxWidthWrapper>
@@ -109,7 +108,7 @@ const Documentation = () => {
               <UploadModal
                 onCancel={setShowModal}
                 fetchFolder={getFolders}
-                notify={notify}
+                // notify={notify}
               />
             )}
             {/* <div> */}

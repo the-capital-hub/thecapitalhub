@@ -5,8 +5,8 @@ import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserById, addNotificationAPI } from "../../Service/user";
 import { loginSuccess } from "../../Store/features/user/userSlice";
-import AchievementToast from "../Toasts/AchievementToast/AchievementToast";
-import { achievementTypes } from "../Toasts/AchievementToast/types";
+// import AchievementToast from "../Toasts/AchievementToast/AchievementToast";
+// import { achievementTypes } from "../Toasts/AchievementToast/types";
 import toast from "react-hot-toast";
 
 function OnBoardUser({
@@ -49,9 +49,9 @@ function OnBoardUser({
             .then((data) => console.log("Added"))
             .catch((error) => console.error(error.message));
 
-          toast.custom((t) => (
-            <AchievementToast type={achievementTypes.showMeAround} />
-          ));
+          // toast.custom((t) => (
+          //   <AchievementToast type={achievementTypes.showMeAround} />
+          // ));
         })
         .catch((error) => {
           console.error("Error updating user:", error);

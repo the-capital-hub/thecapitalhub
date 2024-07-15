@@ -52,7 +52,6 @@ function Notifications() {
   useEffect(() => {
     fetchNotifications();
   }, []);
-  console.log(notifications);
 
   const notificationType = (type, _id) => {
     switch (type) {

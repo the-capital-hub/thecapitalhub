@@ -20,14 +20,17 @@ import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import NewsCorner from "../../../components/Investor/InvestorGlobalCards/NewsCorner/NewsCorner";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
-import { setPageTitle } from "../../../Store/features/design/designSlice";
+import {
+  selectTheme,
+  setPageTitle,
+} from "../../../Store/features/design/designSlice";
 import { useSelector } from "react-redux";
 
 export default function OtherInvestorProfile() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-
+  const theme = useSelector(selectTheme);
   const [userData, setUserData] = useState(null);
   // const { userId } = useParams();
   // const location = useLocation();
@@ -124,7 +127,12 @@ export default function OtherInvestorProfile() {
                 <div className="bio white-to-grey p-4 rounded-4 border shadow-sm profile_container">
                   <h4 className="h4 d-l-grey">Bio</h4>
                   <div className="single_education">
-                    <h6 className="h6 text-secondary">{userData?.bio}</h6>
+                    <h6
+                      className="h6"
+                      style={{ color: theme === "dark" ? "#fff" : "#000" }}
+                    >
+                      {userData?.bio}
+                    </h6>
                   </div>
                 </div>
               ) : (
@@ -134,58 +142,81 @@ export default function OtherInvestorProfile() {
               <CompanyDetailsCard
                 className="company_details profile_container"
                 userDetails={userData}
+                theme="startup"
               />
               {/* Color cards */}
-              <div className="coloured_cards row row-cols-1 row-cols-md-2 row-cols-lg-3">
-                <ColorCard
-                  color="white"
-                  background="#BB98FF"
-                  text="Valuation"
-                  image={lastRoundInvIcon}
-                  amount={userData?.startUp?.colorCard?.last_round_investment}
-                  isOneLink={true}
-                />
-                <ColorCard
-                  color="white"
-                  background="#DAC191"
-                  text="Total Investment"
-                  image={totalInvIcon}
-                  amount={userData?.startUp?.colorCard?.total_investment}
-                  isOneLink={true}
-                />
-                <ColorCard
-                  color="white"
-                  background="#DCDCDC"
-                  text="No.of Investers"
-                  image={noOfInvIcon}
-                  amount={userData?.startUp?.colorCard?.no_of_investers}
-                  noRupee
-                  isOneLink={true}
-                />
-                <ColorCard
-                  color="white"
-                  background="#2B2B2B"
-                  text="Fund ask"
-                  image={fundAskIcon}
-                  amount={userData?.startUp?.colorCard?.fund_ask}
-                  isOneLink={true}
-                />
-                <ColorCard
-                  color="white"
-                  background="#FF7373"
-                  text="Valuation"
-                  image={valuationIcon}
-                  amount={userData?.startUp?.colorCard?.valuation}
-                  isOneLink={true}
-                />
-                <ColorCard
-                  color="white"
-                  background="#9198DA"
-                  text="Funds raised"
-                  image={raisedFundsIcon}
-                  amount={userData?.startUp?.colorCard?.raised_funds}
-                  isOneLink={true}
-                />
+              <div>
+                <h6
+                  className="div__heading"
+                  style={{
+                    color: theme === "dark" ? "#fff" : "#000",
+                    marginLeft: "0.5rem",
+                  }}
+                >
+                  Previous funding
+                </h6>
+                <div style={{ display: "flex", flexWrap: "wrap" }}>
+                  <ColorCard
+                    color="white"
+                    background="#BB98FF"
+                    text="Valuation"
+                    image={lastRoundInvIcon}
+                    amount={userData?.startUp?.colorCard?.last_round_investment}
+                    isOneLink={true}
+                  />
+                  <ColorCard
+                    color="white"
+                    background="#DAC191"
+                    text="Total Investment"
+                    image={totalInvIcon}
+                    amount={userData?.startUp?.colorCard?.total_investment}
+                    isOneLink={true}
+                  />
+                  <ColorCard
+                    color="white"
+                    background="#DCDCDC"
+                    text="No.of Investers"
+                    image={noOfInvIcon}
+                    amount={userData?.startUp?.colorCard?.no_of_investers}
+                    noRupee
+                    isOneLink={true}
+                  />
+                </div>
+                <h6
+                  className="div__heading"
+                  style={{
+                    color: theme === "dark" ? "#fff" : "#000",
+                    marginLeft: "0.5rem",
+                  }}
+                >
+                Current Funding
+                </h6>
+                <div style={{ display: "flex", flexWrap: "wrap" }}>
+                  <ColorCard
+                    color="white"
+                    background="#2B2B2B"
+                    text="Fund ask"
+                    image={fundAskIcon}
+                    amount={userData?.startUp?.colorCard?.fund_ask}
+                    isOneLink={true}
+                  />
+                  <ColorCard
+                    color="white"
+                    background="#FF7373"
+                    text="Valuation"
+                    image={valuationIcon}
+                    amount={userData?.startUp?.colorCard?.valuation}
+                    isOneLink={true}
+                  />
+                  <ColorCard
+                    color="white"
+                    background="#9198DA"
+                    text="Funds raised"
+                    image={raisedFundsIcon}
+                    amount={userData?.startUp?.colorCard?.raised_funds}
+                    isOneLink={true}
+                  />
+                </div>
               </div>
             </section>
           ) : (

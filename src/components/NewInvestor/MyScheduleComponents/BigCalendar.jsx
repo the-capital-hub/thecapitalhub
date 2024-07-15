@@ -3,10 +3,12 @@ import { Calendar } from "react-big-calendar";
 import { ModalBsLauncher } from "../../PopUp/ModalBS";
 import CreateMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/CreateMeetingModal/CreateMeetingModal";
 import moment from "moment";
-import EditMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/EditMeetingModal/EditMeetingModal";
+// import EditMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/EditMeetingModal/EditMeetingModal";
 import RequestMeetingModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/RequestMeetingModal/RequestMeetingModal";
 import AlertModal from "./Components/AlertModal/AlertModal";
-import ViewMeetingRequestModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/ViewMeetingRequestsModal/ViewMeetingRequestModal";
+import { FaArrowLeftLong, FaArrowRightLong } from 'react-icons/fa6'; 
+import { EventComponent } from "../../../utils/Calendar";
+// import ViewMeetingRequestModal from "../../InvestorOneLink/InvestorOneLinkAppointment/Calendar/ViewMeetingRequestsModal/ViewMeetingRequestModal";
 
 export default function BigCalendar({
   calendarData,
@@ -17,6 +19,8 @@ export default function BigCalendar({
   investor,
   date,
   setDate,
+  setScreen,
+  setMeeting
 }) {
   // States for meetings
   const [meetings, setMeetings] = useState(meetingsData);
@@ -60,46 +64,63 @@ export default function BigCalendar({
   // Handle Select event
   const handleSelectEvent = useCallback(
     (meeting) => {
-      console.log("selected meeting", meeting);
-      if (!investor) {
-        // Check if selected slot is in the past
-        if (moment(meeting.start, "min").isBefore(moment(), "min")) {
-          // window.alert("Unable to travel to past!");
-          setAlert("Unable to travel to past!");
-          setTimeout(() => {
-            setAlert(null);
-          }, 2000);
-          return;
-        }
+      setScreen("Event Details")
+      // console.log("selected meeting", meeting);
+      // if (!investor) {
+      //   // Check if selected slot is in the past
+      //   if (moment(meeting.start, "min").isBefore(moment(), "min")) {
+      //     // window.alert("Unable to travel to past!");
+      //     setAlert("Unable to travel to past!");
+      //     setTimeout(() => {
+      //       setAlert(null);
+      //     }, 2000);
+      //     return;
+      //   }
 
-        // Check if meeting is Booked
-        if (meeting.bookedBy) {
-          setAlert(
-            "The meeting slot has been filled. Please select a different one."
-          );
-          setTimeout(() => {
-            setAlert(null);
-          }, 2000);
-          return;
-        }
-      }
+      //   // Check if meeting is Booked
+      //   if (meeting.bookedBy) {
+      //     setAlert(
+      //       "The meeting slot has been filled. Please select a different one."
+      //     );
+      //     setTimeout(() => {
+      //       setAlert(null);
+      //     }, 2000);
+      //     return;
+      //   }
+      // }
 
       // console.log("to delete", meeting);
       // Set selectedMeeting
-      setSelectedMeeting(meeting);
-      if (investor) {
-        editRef.current.click();
-      } else {
-        requestRef.current.click();
-      }
+      setMeeting(meeting);
+      // if (investor) {
+      //   editRef.current.click();
+      // } else {
+      //   requestRef.current.click();
+      // }
     },
-    [investor]
+    []
   );
-
+  //console.log(selectedMeeting)
+  const CustomToolbar = ({ label, onNavigate }) => {
+    return (
+      <div className="rbc-toolbar">
+        <div className="rbc-btn" style={{border:"none",outline:"none"}} onClick={() => onNavigate('PREV')}>
+          <FaArrowLeftLong />
+        </div>
+        <span className="rbc-toolbar-label">{label}</span>
+        <div className="rbc-btn" style={{border:"none",outline:"none"}} onClick={() => onNavigate('NEXT')}>
+          <FaArrowRightLong />
+        </div>
+      </div>
+    );
+  };
   return (
     <>
       <Calendar
-        components={components}
+      components={{
+        toolbar: CustomToolbar, // Use the custom toolbar
+        event: EventComponent, // Use the custom event component
+      }}
         defaultDate={defaultDate}
         date={date}
         onNavigate={handleNavigate}
@@ -107,10 +128,10 @@ export default function BigCalendar({
         localizer={localizer}
         max={max}
         min={min}
-        showMultiDayTimes
+        showMultiDayTimes={false}
         step={15}
         timeslots={4}
-        defaultView="week"
+        //defaultView="week"
         view={view}
         onView={(newView) => setView(newView)}
         views={views}
@@ -135,17 +156,17 @@ export default function BigCalendar({
         setMeetings={setMeetings}
       />
       {/* Edit/Delete Meeting Modal */}
-      <EditMeetingModal
+      {/*<EditMeetingModal
         selectedMeeting={selectedMeeting}
         setMeetings={setMeetings}
-      />
+      />*/}
       {/* Request Meeting Modal */}
       <RequestMeetingModal
         selectedMeeting={selectedMeeting}
         setMeetings={setMeetings}
       />
       {/* View Meeting requests */}
-      <ViewMeetingRequestModal setMeetings={setMeetings} />
+      {/*<ViewMeetingRequestModal setMeetings={setMeetings} />*/}
 
       {/* Alert Modal */}
       {alert && <AlertModal alertMessage={alert} />}

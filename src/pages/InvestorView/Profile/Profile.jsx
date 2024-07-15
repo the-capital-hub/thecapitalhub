@@ -34,7 +34,7 @@ function Profile() {
     getUserById(username, userId)
       .then(({ data }) => {
         setUser(data);
-        console.log("userss", data);
+        //console.log("userss", data);
         getStartupByFounderId(data._id)
           .then(({ data }) => {
             setColorCard(data.colorCard);
@@ -43,7 +43,7 @@ function Profile() {
       })
       .catch(() => setUser([]));
   }, [userId, username]);
-
+  console.log(user);
   return (
     <div className="my-4">
       <MaxWidthWrapper>
@@ -255,6 +255,7 @@ function Profile() {
                 userDetails={user}
                 className={"mt-2"}
                 isOnelink={true}
+                theme="startup"
               />
 
               {/* Color Cards */}

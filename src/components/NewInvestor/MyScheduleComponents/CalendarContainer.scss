@@ -2,7 +2,7 @@
 @import "react-big-calendar/lib/addons/dragAndDrop/styles"; // if using DnD
 
 .calendar__container {
-  height: 800px;
+  height: 1000px;
   position: relative;
 }
 
@@ -12,8 +12,19 @@
   border: 1px solid var(--bs-border-color);
   border-radius: 15px;
   overflow: hidden;
+  height: 100%;
   z-index: 0;
-
+  .rbc-month-view{
+    .rbc-month-row{
+      .rbc-row-bg{
+        height: 100px;
+      }
+      .rbc-off-range-bg{
+        background-color: var(--bs-gray-dark);
+        
+      }
+    }
+  }
   * {
     z-index: 0;
   }
@@ -33,13 +44,13 @@
 
 .rbc-toolbar {
   display: flex;
-  flex-direction: row-reverse;
+  //flex-direction: row-reverse;
   //   border: 1px solid gray;
   //   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   margin: 0;
-
+  color: var(--investor);
   .rbc-toolbar-label {
     // border: 1px solid red;
     flex: 0 0 18ch;

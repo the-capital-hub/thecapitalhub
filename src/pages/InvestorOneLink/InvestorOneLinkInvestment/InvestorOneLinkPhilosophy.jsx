@@ -1,19 +1,30 @@
 import React, { useEffect } from "react";
 import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
 import "./InvestorOneLinkPhilosophy.scss";
-import PhilosophyTable from "../../../components/InvestorOneLink/InvestorOneLinkPhilosophy/PhilosophyTable";
-import PhilosophyAbout from "../../../components/InvestorOneLink/InvestorOneLinkPhilosophy/PhilosophyAbout";
-import PhilosophyIncorporation from "../../../components/InvestorOneLink/InvestorOneLinkPhilosophy/PhilosophyIncorporation";
+// import PhilosophyTable from "../../../components/InvestorOneLink/InvestorOneLinkPhilosophy/PhilosophyTable";
+// import PhilosophyAbout from "../../../components/InvestorOneLink/InvestorOneLinkPhilosophy/PhilosophyAbout";
+// import PhilosophyIncorporation from "../../../components/InvestorOneLink/InvestorOneLinkPhilosophy/PhilosophyIncorporation";
 import { useOutletContext } from "react-router-dom";
 import PhilosophyDetails from "../../../components/InvestorOneLink/InvestorOneLinkPhilosophy/PhilosophyDetails";
-import { useDispatch } from "react-redux";
-import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectTheme,
+  setPageTitle,
+} from "../../../Store/features/design/designSlice";
+import Investment from "../InvestorOneLinkProfile/Investment";
 
 export default function InvestorOneLinkInvestment() {
   // Fetch or get from state
+  const theme = useSelector(selectTheme);
   const { company, investor } = useOutletContext();
-  const { firstName, lastName, designation, location, profilePicture } =
-    investor;
+  const {
+    firstName,
+    lastName,
+    designation,
+    location,
+    profilePicture,
+    investmentPhilosophy,
+  } = investor;
   const { companyName } = company;
   const dispatch = useDispatch();
 
@@ -35,8 +46,8 @@ export default function InvestorOneLinkInvestment() {
           <img
             src={profilePicture || DefaultAvatar}
             alt={`${firstName} ${lastName}` || "fullName"}
-            width={"150px"}
-            height={"150px"}
+            width={"120px"}
+            height={"120px"}
             className="rounded-circle"
           />
 
@@ -49,21 +60,47 @@ export default function InvestorOneLinkInvestment() {
             <p className=" fs-5 fw-light m-0">{location || "location"}</p>
           </div>
         </header>
-
+        <p style={{ color: theme === "dark" ? "#fff" : "#000" }}>
+          {investmentPhilosophy}
+        </p>
         {/* About */}
-        <PhilosophyAbout companyName={companyName} />
+        {/*<PhilosophyAbout companyName={companyName} />*/}
 
         {/* Details */}
-        <PhilosophyDetails />
+        {/*<PhilosophyDetails />*/}
 
         {/* Incorporation */}
-        <PhilosophyIncorporation />
+        {/*<PhilosophyIncorporation />*/}
 
         {/* Revenue table */}
-        <PhilosophyTable />
+        {/*<PhilosophyTable />*/}
 
         {/* Section end */}
       </section>
+      <div
+      className="main_inner-section d-flex flex-column gap-3 p-3 border rounded-2"
+      style={{
+        marginTop: "1rem",
+        background: theme === "dark" ? "#2f2f2f" : "#f5f5f5",
+      }}
+      >
+        <Investment canEdit={false} />
+      </div>
+      <div
+        className="main_inner-section d-flex flex-column gap-3 p-3 border rounded-2"
+        style={{
+          marginTop: "1rem",
+          background: theme === "dark" ? "#2f2f2f" : "#f5f5f5",
+        }}
+      >
+        <h4
+          className="typography"
+          style={{ color: theme === "dark" ? "#fff" : "#000" }}
+        >
+          Investment Thesis
+        </h4>
+        <PhilosophyDetails canEdit={false} theme={theme} />
+      </div>
     </div>
   );
 }

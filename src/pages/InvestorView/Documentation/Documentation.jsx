@@ -29,7 +29,6 @@ const Documentation = () => {
     setLoading(true);
     getFoldersApi(userId)
       .then((data) => {
-        console.log(data.data);
         setFolderName(data.data);
         setLoading(false);
       })

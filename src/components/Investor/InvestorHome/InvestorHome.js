@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./investorHome.scss";
 // import profilePic from "../../../Images/investorIcon/profilePic.webp";
 // import AddUserIcon from "../../../Images/investorIcon/Add-User.svg";
@@ -28,17 +28,21 @@ import { setPageTitle } from "../../../Store/features/design/designSlice";
 // import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
 import ColorCards from "./Components/ColorCards/ColorCards";
 import UserBio from "./Components/UserBio/UserBio";
-import MissingDetails from "./Components/Questionnaire/MissingDetails";
-import AchievementsComponents from "../AchievementsPageComponents/AchievementsComponents";
-import { Link } from "react-router-dom";
+//import MissingDetails from "./Components/Questionnaire/MissingDetails";
+// import AchievementsComponents from "../AchievementsPageComponents/AchievementsComponents";
+// import { Link } from "react-router-dom";
 import CompanyPost from "../InvestorGlobalCards/MilestoneCard/CompanyPost";
+import PersonalDetail from "../StartupProfilePageComponents/ProfessionalInfo/PersonalDetail";
+import Milestones from "../Milestones/Milestones";
+import MyPost from "../InvestorGlobalCards/MilestoneCard/MyPost";
 
 // Startup profile page
 const InvestorHome = () => {
   // Fetch loggedInUser from global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const loggedInUserId = useSelector((state) => state.user.loggedInUser._id);
-  const companyFounderId = useSelector(selectCompanyFounderId);
+  const [postSection, setPostSection] = useState("myPost");
+  //const companyFounderId = useSelector(selectCompanyFounderId);
   const companyDataId = useSelector(selectCompanyDataId);
   const dispatch = useDispatch();
 
@@ -72,23 +76,21 @@ const InvestorHome = () => {
             <div className="content-70 d-flex flex-column gap-4">
               {/* Professional info component */}
               <ProfessionalInfo theme={"startup"} />
-
+              <PersonalDetail theme={"startup"} />
               {/* offcanvas trigger - Add missing details. Show if details are missing */}
-              <MissingDetails />
+              {/*<MissingDetails />/}
 
               {/* Bio */}
               <UserBio />
-
-              <div className="box personal_information">
-                <h4 style={{ color: "#fff", marginLeft: "1rem" }}>
-                  Recent Connections
-                </h4>
-
-                <div className="col-12 mt-2 milestones">
-                  <ConnectionCard />
-                </div>
+              {/* Company Details */}
+              <div className="">
+                <CompanyDetailsCard
+                  className=""
+                  userDetails={loggedInUser}
+                  page={""}
+                  theme="startup"
+                />
               </div>
-
               {/* achievements */}
               {/*<div className="box personal_information">
                 <div className="personal_information_header ">
@@ -100,40 +102,102 @@ const InvestorHome = () => {
                 <div className="col-12 mt-2 milestones">
                   <AchievementsComponents />
                 </div>
-  </div>*/}
+                 </div>*/}
 
               {/* Featured Posts */}
               <div className="box personal_information">
-                <div className="personal_information_header">
-                  <h2 className="typography">Company update</h2>
-                  {/* <div className="milestone_see_more">
-                    <Link to={""}>See more</Link>
-                  </div> */}
+                <div style={{ display: "flex" }}>
+                  <div
+                    className="personal_information_header"
+                    onClick={() => {
+                      setPostSection("myPost");
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <h2
+                      className={`typography ${
+                        postSection === "myPost" ? "active" : ""
+                      }`}
+                    >
+                      My posts
+                    </h2>
+                  </div>
+                  <div
+                    className="personal_information_header"
+                    onClick={() => {
+                      setPostSection("companyUpdate");
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <h2
+                      className={`typography ${
+                        postSection === "companyUpdate" ? "active" : ""
+                      }`}
+                    >
+                      Company update
+                    </h2>
+                    {/* <div className="milestone_see_more">
+                  <Link to={""}>See more</Link>
+                </div> */}
+                  </div>
+                  <div
+                    className="personal_information_header"
+                    onClick={() => {
+                      setPostSection("featuredPosts");
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <h2
+                      className={`typography ${
+                        postSection === "featuredPosts" ? "active" : ""
+                      }`}
+                    >
+                      Featured posts
+                    </h2>
+                  </div>
                 </div>
                 <div className="mt-2 milestones">
-                  <CompanyPost userId={loggedInUserId} />
+                  { postSection === "companyUpdate" ? (
+                    <CompanyPost userId={loggedInUserId}  postDelete={true}/>
+                  ) : postSection === "featuredPosts" ? (
+                    <FeaturedPostsContainer
+                      userId={loggedInUserId}
+                      postDelete={true}
+                    />
+                  ) : (
+                    <MyPost userId={loggedInUserId}  postDelete={true}/>
+                  )}
                 </div>
               </div>
-              <div className="box personal_information">
+              {/*<div className="box personal_information">
               <div className="personal_information_header">
                 <h2 className="typography">Featured posts</h2>
               </div>
               <div className="mt-2 milestones">
                 <FeaturedPostsContainer userId={loggedInUserId} postDelete={true}/>
               </div>
-            </div>
-              {/* Company Details */}
-              <div className="">
-                <CompanyDetailsCard
-                  className=""
-                  userDetails={loggedInUser}
-                  page={""}
-                />
+             </div>*/}
+
+
+           
+
+              <div className="box personal_information">
+                <h4 className="typography" style={{ marginLeft: "1rem" }}>
+                  Recent Connections
+                </h4>
+                <div className="col-12 mt-2 milestones">
+                  <ConnectionCard />
+                </div>
+              </div>
+              <div className="box personal_information">
+              <h4 className="typography" style={{ marginLeft: "1rem",fontFamily:'"Outfit", sans-serif' }}>
+                  Milestones
+                </h4>
+                <Milestones pageTheme="startup"/>
               </div>
               {/* Featured Posts End */}
-              
+
               {/* Color Cards */}
-              <ColorCards />
             </div>
           </div>
           <div className="thirty d-none d-xl-block">

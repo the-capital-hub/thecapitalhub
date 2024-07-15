@@ -22,13 +22,14 @@
     background-color: #eaeef2;
     background: var(--bs-light);
     gap: 5px;
-    flex: 0 0 14rem;
+    flex: 0 0 12rem;
     padding: 20px;
-    border-radius: 15px;
+    border-radius: 0.37rem;
     text-align: center;
     color: var(--d-l-grey);
 
     img {
+      border:2px solid #ffb27d;
       height: 50px;
       width: 50px;
     }

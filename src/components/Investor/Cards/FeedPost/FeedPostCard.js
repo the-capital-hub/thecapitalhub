@@ -10,7 +10,7 @@ import { BiRepost } from "react-icons/bi";
 import { BsFire } from "react-icons/bs";
 import { CiBookmark } from "react-icons/ci";
 import { IoMdBookmark } from "react-icons/io";
-import CustomModal from "../../../PopUp/Modal/Modal";
+//import CustomModal from "../../../PopUp/Modal/Modal";
 import { FaRegCommentDots, FaCommentDots } from "react-icons/fa6";
 import TimeAgo from "timeago-react";
 import { useSelector } from "react-redux";
@@ -76,6 +76,7 @@ const FeedPostCard = ({
   resharedPostId,
   deletePostFilterData,
   isSinglePost = false,
+  setPostData,
 }) => {
   const [showComment, setShowComment] = useState(isSinglePost);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -118,8 +119,7 @@ const FeedPostCard = ({
       postId: postId,
     };
     try {
-      const response = await unsavePost(requestBody);
-      console.log(response);
+      await unsavePost(requestBody);
     } catch (error) {
       console.log(error);
     }
@@ -377,10 +377,10 @@ const FeedPostCard = ({
 
   // add post as featured
   const [showFeaturedPostSuccess, setShowFeaturedPostSuccess] = useState(false);
-  const [showCompanyUpdateSuccess,setShowCompanyUpdateSuccess] = useState(false)
+  const [showCompanyUpdateSuccess, setShowCompanyUpdateSuccess] =
+    useState(false);
   const handleAddToFeatured = async (postId) => {
     try {
-      console.log(postId);
       const response = await addToFeaturedPost(postId);
       if (response.status === 200) {
         setShowFeaturedPostSuccess(true);
@@ -392,7 +392,6 @@ const FeedPostCard = ({
   const handleAddToCompanyPost = async (postId) => {
     try {
       const response = await addToCompanyUpdate(postId);
-      console.log(response)
       if (response.status === 200) {
         setShowCompanyUpdateSuccess(true);
       }
@@ -416,6 +415,25 @@ const FeedPostCard = ({
     if (!singleClickTimer.current) {
       singleClickTimer.current = setTimeout(() => {
         setShowImgagePopup(true);
+        setPostData({
+          userId,
+          designation,
+          startUpCompanyName,
+          investorCompanyName,
+          profilePicture,
+          description,
+          firstName,
+          lastName,
+          oneLinkId,
+          video,
+          image,
+          documentName,
+          documentUrl,
+          createdAt,
+          likes,
+          resharedPostId,
+        });
+        navigate("/post_detail/" + postId);
         singleClickTimer.current = null;
       }, 300);
     } else {
@@ -450,14 +468,10 @@ const FeedPostCard = ({
             <div className="feedpostcard_content">
               {/* Poster's Profile Picture */}
               <Link
-                to={`/user/${
-                  firstName.toLowerCase() + "-" + lastName.toLowerCase()
-                }/${oneLinkId}`}
+                to={`/user/${firstName?.toLowerCase() + "-" + lastName?.toLowerCase()}/${oneLinkId}`}
                 className="rounded-circle"
                 style={{
-                  pointerEvents: `${
-                    loggedInUser._id === userId ? "none" : "all"
-                  }`,
+                  pointerEvents: `${loggedInUser._id === userId ? "none" : "all"}`,
                 }}
               >
                 <img
@@ -471,25 +485,24 @@ const FeedPostCard = ({
                   alt="logo"
                   style={{ objectFit: "cover" }}
                 />
-              </Link>
+              </Link> 
+              {/* changes on 02/07/24 by aman in above link */}
+
               {/* Poster's Information */}
               <div className="feedpostcart_text_header my-1">
-                <Link
-                  to={`/user/${
-                    firstName.toLowerCase() + "-" + lastName.toLowerCase()
-                  }/${oneLinkId}`}
-                  className="text-decoration-none"
-                  style={{
-                    fontSize: "18px",
-                    fontWeight: 600,
-                    color: "var( --d-l-grey)",
-                    pointerEvents: `${
-                      loggedInUser._id === userId ? "none" : "all"
-                    }`,
-                  }}
-                >
-                  {firstName + " " + lastName}
-                </Link>
+              <Link
+                to={`/user/${firstName?.toLowerCase() + "-" + lastName?.toLowerCase()}/${oneLinkId}`}
+                className="text-decoration-none"
+                style={{
+                  fontSize: "18px",
+                  fontWeight: 600,
+                  color: "var( --d-l-grey)",
+                  pointerEvents: `${loggedInUser._id === userId ? "none" : "all"}`,
+                }}
+              >
+                {firstName + " " + lastName}
+              </Link>
+
                 <span className="d-flex flex-column flex-md-row">
                   <span
                     style={{
@@ -592,14 +605,16 @@ const FeedPostCard = ({
                         <IconReportPost />
                         <span>Report</span>
                       </li>
-                      {userId === loggedInUser?._id &&<li
-                        onClick={() => handleAddToCompanyPost(postId)}
-                        className="d-flex align-items-center gap-1"
-                        style={{ color: "var(--d-l-grey)" }}
-                      >
-                        <CiCirclePlus/>
-                        <span>Company</span>
-                      </li>}
+                      {userId === loggedInUser?._id && (
+                        <li
+                          onClick={() => handleAddToCompanyPost(postId)}
+                          className="d-flex align-items-center gap-1"
+                          style={{ color: "var(--d-l-grey)" }}
+                        >
+                          <CiCirclePlus />
+                          <span>Company</span>
+                        </li>
+                      )}
                     </ul>
                   )}
                 </div>
@@ -608,7 +623,7 @@ const FeedPostCard = ({
           </div>
 
           {/* Post Body */}
-          <div className="para_container w-100">
+          <div className="para_container w-100" onClick={handleImageOnClick}>
             <div className="para_container_text w-100">
               {/* Text */}
               <Linkify>
@@ -652,13 +667,13 @@ const FeedPostCard = ({
                 <span className="d-flex">
                   <img
                     className="mx-auto"
-                    style={{ objectFit: "contain" }}
+                    style={{ objectFit: "contain",maxHeight:"30rem" }}
                     width={!repostPreview ? "100%" : "50%"}
                     src={image}
                     alt="Post media"
-                    onClick={
-                      isMobileView ? handleSingleImage : handleImageOnClick
-                    }
+                    // onClick={
+                    //   isMobileView ? handleSingleImage : handleImageOnClick
+                    // }
                   />
                 </span>
               )}
@@ -1028,26 +1043,18 @@ const FeedPostCard = ({
                         key={val.tex}
                       >
                         <div className="img_container col-2 px-2">
-                          <Link
-                            to={`/user/${
-                              val.user?.firstName.toLowerCase() +
-                              "-" +
-                              val.user?.lastName.toLowerCase()
-                            }/${val.user.oneLinkId}`}
-                            style={{
-                              pointerEvents: `${
-                                loggedInUser._id === val.user._id
-                                  ? "none"
-                                  : "all"
-                              }`,
-                            }}
-                          >
-                            <img
-                              src={val.user.profilePicture || ""}
-                              alt="Connection"
-                              className="w-100 rounded-circle border border-light"
-                            />
-                          </Link>
+                        <Link
+                          to={`/user/${val.user?.firstName?.toLowerCase() + "-" + val.user?.lastName?.toLowerCase()}/${val.user.oneLinkId}`}
+                          style={{
+                            pointerEvents: `${loggedInUser._id === val.user._id ? "none" : "all"}`,
+                          }}
+                        >
+                          <img
+                            src={val.user.profilePicture || ""}
+                            alt="Connection"
+                            className="w-100 rounded-circle border border-light"
+                          />
+                        </Link>
                         </div>
                         <div className="col-10 p-0 flex-grow-1">
                           <div className="comment-details  rounded-3 p-2 p-lg-3 d-flex flex-column">
@@ -1173,7 +1180,9 @@ const FeedPostCard = ({
         {showCompanyUpdateSuccess && (
           <AfterSuccessPopUp
             withoutOkButton
-            onClose={() => setShowCompanyUpdateSuccess(!showCompanyUpdateSuccess)}
+            onClose={() =>
+              setShowCompanyUpdateSuccess(!showCompanyUpdateSuccess)
+            }
             successText="The post has been added as a company updates."
           />
         )}
@@ -1222,7 +1231,7 @@ const FeedPostCard = ({
         </Modal.Body>
       </Modal>
 
-      {showImgagePopup && (
+      {/*{showImgagePopup && (
         <CustomModal>
           <div className="image-popup-container ">
             <button
@@ -1234,7 +1243,7 @@ const FeedPostCard = ({
             <img src={image} className="popup-image" alt="zoomed image" />
           </div>
         </CustomModal>
-      )}
+)}*/}
 
       <ModalBSContainer id="reportPostModal">
         <ModalBSHeader title="Report Post" className={"d-l-grey"} />

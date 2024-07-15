@@ -43,6 +43,8 @@ export default function CalendarContainer({
   oneLinkId,
   date,
   setDate,
+  setScreen,
+  setMeeting
 }) {
   const { meetingsData, loading } = useGetAllMeetings(oneLinkId);
 
@@ -52,7 +54,7 @@ export default function CalendarContainer({
   }
 
   return (
-    <div className="calendar__container">
+    <div className="calendar__container rounded-4" style={{ backgroundColor: "var(--white-to-grey)",maxHeight: "40rem" }}>
       {loading ? (
         <SpinnerBS
           className={
@@ -69,6 +71,8 @@ export default function CalendarContainer({
           investor={investor}
           date={date}
           setDate={setDate}
+          setScreen={setScreen}
+          setMeeting={setMeeting}
         />
       )}
     </div>

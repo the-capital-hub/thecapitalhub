@@ -40,9 +40,8 @@ export default function AddEditModal({
   const [deleteConfirm, setDeleteConfirm] = useState(false);
 
   const handleInputChange = (event) => {
-    console.log(testformData);
     const { name, value, type, files } = event.target;
-    console.log(name);
+
     if (type === "file") {
       setNewImage(false);
       setFormData({

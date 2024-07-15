@@ -79,7 +79,7 @@ export default function InvestmentPhilosophyForm() {
     } = e.target;
 
     let updatedUserData = {
-      investmentPhilosophy: {
+      philosophy: {
         importanceOfManagement: importanceOfManagement.value,
         roleAsAInvestor: roleAsAInvestor.value,
         founderAlmaMaterMatters: founderAlmaMaterMatters.value,

@@ -67,11 +67,18 @@ const ColorCard = ({
   return (
     <div
       className={`${className} colorcard-component card row border`}
-      style={{ background }}
+      style={{
+        //backgroundColor: "rgba(255, 115, 115, 1)"
+        backgroundColor: "#333333",
+        padding: "5px 10px",
+        justifyContent:"space-between"
+      }}
     >
-      <div className="col-7 col-sm-6 left-content" style={{ color }}>
+      <div className="col-7 col-sm-6 left-content">
         <>
-          <h3 className="title">{text}</h3>
+          <h3 className="title" style={{ color: "#fff" }}>
+            {text}
+          </h3>
           {isEditMode ? (
             <input
               type="text"
@@ -86,6 +93,7 @@ const ColorCard = ({
             <span
               className="rupee-sign"
               onClick={onAmountChange ? handleEditClick : () => {}}
+              style={{ color: "#fff" }}
             >
               {!noRupee && ""} {editedAmount}{" "}
               {!isOneLink && !isNotEditable && (
@@ -97,7 +105,14 @@ const ColorCard = ({
           )}
         </>
       </div>
-      <div className="col-5 right-content">
+      <div
+        style={{
+          backgroundColor: "rgba(231, 177, 91, 0.2)",
+          borderRadius: "10px",
+          padding:"5px",
+          width:"70px"
+        }}
+      >
         <img src={image} alt="Card" width={60} />
       </div>
     </div>

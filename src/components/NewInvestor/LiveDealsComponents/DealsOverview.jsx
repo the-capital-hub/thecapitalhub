@@ -5,11 +5,11 @@ import {
 } from "../../../Images/Investor/Syndicates";
 import CompanyOverviewCard from "../../../components/NewInvestor/SyndicateComponents/CompanyOverviewCard";
 
-export default function DealsOverview({ name, about }) {
+export default function DealsOverview({ name, about,theme }) {
   return (
-    <div className="deals__overview d-flex flex-column gap-4 py-3">
-      <h6 className="div__heading my-2">Over View</h6>
-      <div className="d-flex flex-column gap-4 flex-md-row gap-md-5">
+    <div className="deals__overview gap-4">
+      <h6 className="div__heading my-2" style={{color:theme === "dark"?"#fff":"black",}}>Over View</h6>
+      <div className="d-flex flex-column gap-4 flex-md-row gap-md-5" style={{paddingTop:"10px"}}>
         <CompanyOverviewCard
           heading={"Website"}
           text={name}
@@ -17,6 +17,7 @@ export default function DealsOverview({ name, about }) {
           iconAlt={"web icon"}
           key={"web"}
           fontBase
+          theme={theme}
         />
         <CompanyOverviewCard
           heading={"Employees"}
@@ -25,6 +26,7 @@ export default function DealsOverview({ name, about }) {
           iconAlt={"users icon"}
           key={"members"}
           fontBase
+          theme={theme}
         />
         <CompanyOverviewCard
           heading={"Location"}
@@ -33,9 +35,10 @@ export default function DealsOverview({ name, about }) {
           iconAlt={"location pin icon"}
           key={"location"}
           fontBase
+          theme={theme}
         />
       </div>
-      <p className="overview__about">{about}</p>
+      <p className="overview__about" style={{color:theme === "dark"?"#fff":"black",padding:"0px"}}>{about}</p>
     </div>
   );
 }

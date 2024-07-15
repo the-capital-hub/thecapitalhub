@@ -16,7 +16,7 @@ import {
   toggleLikeComment,
   deleteComment,
 } from "../../../Service/user";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SavePostPopUP from "../../../components/PopUp/SavePostPopUP/SavePostPopUP";
 import InvestorAfterSuccessPopUp from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
 import { useRef } from "react";
@@ -65,12 +65,13 @@ const FeedPostCard = ({
   resharedPostId,
   deletePostFilterData,
   isSinglePost = false,
+  setPostData
 }) => {
   const [showComment, setShowComment] = useState(isSinglePost);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
-
+  const navigate = useNavigate();
   const [savedPostId, setSavedPostId] = useState([]);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showSavePopUp, setshowSavePopUp] = useState(false);
@@ -131,7 +132,7 @@ const FeedPostCard = ({
 
       if (response) {
         await getPostComment({ postId }).then((res) => {
-          console.log("response", res.data.data);
+          //console.log("response", res.data.data);
           setComments(res.data.data);
         });
       }
@@ -246,7 +247,7 @@ const FeedPostCard = ({
     };
     try {
       const response = await unsavePost(requestBody);
-      console.log(response);
+      //console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -281,7 +282,25 @@ const FeedPostCard = ({
   const handleImageOnClick = () => {
     if (!singleClickTimer.current) {
       singleClickTimer.current = setTimeout(() => {
-        setShowImgagePopup(true);
+        setPostData({
+          userId,
+          designation,
+          startUpCompanyName,
+          investorCompanyName,
+          profilePicture,
+          description,
+          firstName,
+          lastName,
+          oneLinkId,
+          video,
+          image,
+          documentName,
+          documentUrl,
+          createdAt,
+          likes,
+          resharedPostId,
+        });
+        navigate("/investor/post_detail/" + postId);
         singleClickTimer.current = null;
       }, 300);
     } else {
@@ -1087,20 +1106,6 @@ const FeedPostCard = ({
           />
         )}
       </div>
-      {showImgagePopup && (
-        <CustomModal>
-          <div className="image-popup-container ">
-            <button
-              className="btn btn-sm btn-light  top-0 end-0 m-2"
-              onClick={() => setShowImgagePopup(false)}
-              style={{ width: "30px" }}
-            >
-              X
-            </button>
-            <img src={image} className="popup-image" alt="fullscreen preview" />
-          </div>
-        </CustomModal>
-      )}
 
       <ModalBSContainer showModal={showReportModal} id="reportPostModal">
         <ModalBSHeader

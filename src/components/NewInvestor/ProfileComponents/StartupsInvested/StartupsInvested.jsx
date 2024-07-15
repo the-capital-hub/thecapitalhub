@@ -58,6 +58,7 @@ export default function StartupsInvested() {
             return <InvestedCard startUp={startUp} key={startUp._id} />;
           })}
         </div>
+        
         {/* Startups Modal */}
         <ModalBSContainer id="startupsModal" isStatic={false} modalXl>
           <ModalBSHeader

@@ -12,12 +12,13 @@ import { getUser, postUser, sendOTP, verifyOTP } from "../../Service/user";
 import ErrorPopUp from "../PopUp/ErrorPopUp/ErrorPopUp";
 import { firebase, auth } from "../../firebase";
 import SelectWhatYouAre from "../PopUp/SelectWhatYouAre/SelectWhatYouAre";
-import StartUpForm from "../PopUp/StartUpForm/StartUpForm";
+//import StartUpForm from "../PopUp/StartUpForm/StartUpForm";
 import InvestorForm from "../PopUp/InvestorForm/InvestorForm";
 import { useSelector } from "react-redux";
 import { selectIsMobileApp } from "../../Store/features/design/designSlice";
 import { data } from "./data";
 import AfterSuccessPopUp from "../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
+import StartUp from "../RegistrationFrom/StartUp";
 // import { Navigate } from "react-router-dom";
 // import { useSelector } from "react-redux";
 
@@ -63,6 +64,12 @@ const Register = () => {
   // useEffect(() => {
   //   let verify = new firebase.auth.RecaptchaVerifier("recaptcha-container");
   // }, []);
+  // useEffect(()=>{
+  //   const user = JSON.parse(localStorage.getItem("user_data"))
+  //   if(user){
+  //     setShowStartUp(true)
+  //   }
+  // },[])
 
   const handleInputChange = (event, type) => {
     if (type !== "country" && type !== "state" && type !== "phoneNumber") {
@@ -213,11 +220,11 @@ const Register = () => {
       );
       console.log("User data posted successfully:", response);
       localStorage.setItem("user_data", JSON.stringify(response.data));
-
-      setIsSubmitted(true);
-      // if (response) {
-      //   setShowSelectWhatYouAre(true);
-      // }
+      localStorage.setItem("accessToken", response.token);
+      //setIsSubmitted(true);
+      if (response) {
+        setShowStartUp(true);
+      }
       setIsMobileVerified(true);
       navigate("/signup");
       setshow(false);
@@ -251,7 +258,6 @@ const Register = () => {
 
   const handleOtpChange = (event, index) => {
     const value = event.target.value;
-    console.log(value);
     const updatedOtp = [...otp];
     updatedOtp[index] = value;
     setOtp(updatedOtp);
@@ -420,7 +426,7 @@ const Register = () => {
             </div>
 
             <div className="row">
-              <div className="col-md-12 input-container form-group mb-2">
+              <div className="col-lg-6 col-md-12 form-group mb-2">
                 <label htmlFor="mobile">Mobile Number</label>
                 <div className="input-group">
                   <PhoneInput
@@ -449,9 +455,7 @@ const Register = () => {
                 )}
               <div id="recaptcha-container"></div>*/}
               </div>
-            </div>
-            <div className="row">
-              <div className="col-md-12 form-group mb-2">
+              <div className="col-lg-6 col-md-12 form-group mb-2">
                 <label htmlFor="email">Email</label>
                 <input
                   type="email"
@@ -616,7 +620,6 @@ const Register = () => {
                       })
                     }
                   >
-                    <option value="0-5 Lakh">0-5 Lakh</option>
                     <option value="5-10 Lakh">5-10 Lakh</option>
                     <option value="10-25 Lakh">10-25 Lakh</option>
                     <option value="50Lakh - 1CR">50Lakh - 1CR</option>
@@ -642,7 +645,6 @@ const Register = () => {
                       })
                     }
                   >
-                    <option value="0-5 Lakh">0-5 Lakh</option>
                     <option value="5-10 Lakh">5-10 Lakh</option>
                     <option value="10-25 Lakh">10-25 Lakh</option>
                     <option value="50Lakh - 1CR">50Lakh - 1CR</option>
@@ -746,7 +748,7 @@ const Register = () => {
                       })
                     }
                   >
-                    <option value="0-5 Lakh">0-5 Lakh</option>
+                    <option value="NA">None</option>
                     <option value="5-10 Lakh">5-10 Lakh</option>
                     <option value="10-25 Lakh">10-25 Lakh</option>
                     <option value="50Lakh - 1CR">50Lakh - 1CR</option>
@@ -754,7 +756,7 @@ const Register = () => {
                   </select>
                 </div>
                 <div className="col-lg-6 col-md-12 form-group mb-2">
-                  <label htmlFor="perviousFounding">Pervious Founding</label>
+                  <label htmlFor="perviousFounding">Previous Funding</label>
                   <select
                     type="text"
                     id="perviousFounding"
@@ -771,7 +773,7 @@ const Register = () => {
                       })
                     }
                   >
-                    <option value="0-5 Lakh">0-5 Lakh</option>
+                    <option value="NA">None</option>
                     <option value="5-10 Lakh">5-10 Lakh</option>
                     <option value="10-25 Lakh">10-25 Lakh</option>
                     <option value="50Lakh - 1CR">50Lakh - 1CR</option>
@@ -813,7 +815,6 @@ const Register = () => {
             </h3>
           </form>
         )}
-
         {/* <div className="line-container">
             <hr className="line" />
             <span className="text">Or continue with</span>
@@ -844,7 +845,8 @@ const Register = () => {
         />
       )}
 
-      {showStartUp && <StartUpForm />}
+      {/*{showStartUp && <StartUpForm />}*/}
+      {showStartUp && <StartUp/>}
       {showInvestor && <InvestorForm />}
       {showSelectWhatYouAre && (
         <SelectWhatYouAre

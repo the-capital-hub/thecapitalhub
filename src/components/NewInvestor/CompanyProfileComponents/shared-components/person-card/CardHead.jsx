@@ -1,7 +1,7 @@
 import { Star } from "../../../../../Images/Investor/CompanyProfile";
 
 export default function CardHead(props) {
-  const { image, name, rating, age } = props;
+  const { image, name, rating, age,designation } = props;
 
   return (
     <div className="card__head d-flex gap-2">
@@ -13,6 +13,12 @@ export default function CardHead(props) {
       />
       <div className="">
         <h4 className="card__head__name">{name}</h4>
+        <div className="person_text">
+        {/*<p className="fw-light" style={{ color: "var(--bs-gray-500)" }}>
+          Designation
+        </p>*/}
+        <h6 className="fw-medium designation">{designation}</h6>
+      </div>
         {rating ? (
           <div className="rating d-flex gap-1">
             {/* Have to figure out how to fill svgs according to rating */}

@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 // import connection from "../../../../Images/StartUp/icons/connection-user.png";
 // import messageIcon from "../../../../Images/StartUp/icons/message.svg";
 import { sentConnectionRequest } from "../../../../Service/user";
+import { useSelector } from "react-redux";
+import { selectTheme } from "../../../../Store/features/design/designSlice";
 
 export default function ProfileHeader({
   userData,
   loggedInUser,
   setConnectionSent,
 }) {
+  const theme = useSelector(selectTheme)
   const handleConnect = (userId) => {
     sentConnectionRequest(loggedInUser._id, userId)
       .then(({ data }) => {
@@ -39,11 +42,11 @@ export default function ProfileHeader({
             <h3 className="typography h3">
               {userData?.firstName || "John"} {userData?.lastName || "Doe"}
             </h3>
-            <span className="small_typo text-secondary">
+            <span className="small_typo">
               {userData?.designation || "designation"}
             </span>
             <br />
-            <span className="small_typo text-secondary">
+            <span className="small_typo">
               {userData?.location || "location"}
             </span>
           </div>
@@ -82,7 +85,7 @@ export default function ProfileHeader({
       <div className="details">
         <div className="single_details row row-cols-1 row-cols-md-2 ">
           <span className="col-md-3 label fw-bold">Current Company</span>
-          <span className="col-md-9 value text-secondary">
+          <span className="col-md-9 value">
             {userData?.startUp?.company ||
               userData?.investor?.companyName ||
               "company"}
@@ -90,19 +93,19 @@ export default function ProfileHeader({
         </div>
         <div className="single_details row row-cols-1 row-cols-md-2 ">
           <span className="col-md-3 label fw-bold">Designation</span>
-          <span className="col-md-9 value text-secondary">
+          <span className="col-md-9 value">
             {userData?.designation || "designation"}
           </span>
         </div>
         <div className="single_details row row-cols-1 row-cols-md-2 ">
           <span className="col-md-3 label fw-bold">Education</span>
-          <span className="col-md-9 value text-secondary">
+          <span className="col-md-9 value">
             {userData?.education || "education"}
           </span>
         </div>
         <div className="single_details row row-cols-1 row-cols-md-2 ">
           <span className="col-md-3 label fw-bold">Experience</span>
-          <span className="col-md-9 value text-secondary">
+          <span className="col-md-9 value">
             {userData?.experience || "experience"}
           </span>
         </div>

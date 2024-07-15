@@ -20,8 +20,8 @@ import {
 } from "../../../../Service/user";
 import toast from "react-hot-toast";
 // import achievement from "../../../../Images/Investor/Achievements/img_1.png";
-import AchievementToast from "../../../Toasts/AchievementToast/AchievementToast";
-import { achievementTypes } from "../../../Toasts/AchievementToast/types";
+// import AchievementToast from "../../../Toasts/AchievementToast/AchievementToast";
+// import { achievementTypes } from "../../../Toasts/AchievementToast/types";
 
 export default function FundingForm({ setShowForm,setShoeSuccess }) {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -115,9 +115,9 @@ export default function FundingForm({ setShowForm,setShoeSuccess }) {
               .then((data) => console.log("Added"))
               .catch((error) => console.error(error.message));
 
-            toast.custom((t) => (
-              <AchievementToast type={achievementTypes.hereWeGo} />
-            ));
+            // toast.custom((t) => (
+            //   <AchievementToast type={achievementTypes.hereWeGo} />
+            // ));
           })
           .catch((error) => {
             console.error("Error updating user:", error);

@@ -96,7 +96,7 @@ export default function NewCommunityModal({ theme }) {
         data.profileImage = await getBase64(selectedFile);
       }
       const response = await createCommunity(data);
-      console.log("rcreatecommunity-", response.data);
+      // console.log("rcreatecommunity-", response.data);
       if (response.status === 200) {
         // dispatch(updateCreateCommunity(response.data));
         setSuccess(true);

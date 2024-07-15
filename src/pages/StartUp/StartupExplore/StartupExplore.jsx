@@ -17,19 +17,20 @@ import { startupOnboardingSteps } from "../../../components/OnBoardUser/steps/st
 import {
   sectorOptions,
   ageOptions,
-  diversityMetricsOptions,
-  educationOptions,
+  // diversityMetricsOptions,
+  // educationOptions,
   fundingRaisedOptions,
   genderOptions,
   investmentSizeOptions,
   investmentStageOptions,
-  previousExitsOptions,
+  //previousExitsOptions,
   productStageOptions,
   sizeOptions,
   stageOptions,
   yearsOfExperienceOptions,
 } from "../../../constants/Startups/ExplorePage";
 import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
+import InvestorProfileList from "../../../components/Shared/InvestorProfileComponent/InvestorProfileList";
 
 export default function StartupExplore() {
   // const showOnboarding = useSelector(selectShowOnboarding);
@@ -98,11 +99,10 @@ export default function StartupExplore() {
       setLoading(false);
     }
   };
-  console.log(filteredData)
   const renderTabContent = () => {
     switch (activeTab) {
       case "Startup":
-        return <CompanyProfileList isStartup data={filteredData} pageName="Startup" show={true}/>;
+        return <CompanyProfileList isStartup data={filteredData} pageName="Startup" show={true} companyDelete={false}/>;
       case "Founder":
         return (
           <PersonProfileList
@@ -113,21 +113,11 @@ export default function StartupExplore() {
         );
       case "Investor":
         return (
-          // <PersonProfileList
-          //   theme={"startup"}
-          //   short={true}
-          //   data={filteredData}
-          // />
-          <div
-            className={`person_profile_wrapper  shadow-sm`}
-            style={{ borderRadius: "20px" }}
-          >
-            <div className="person__section__one d-flex flex-column gap-4 py-5 px-3 px-lg-5 ">
-              
-                <h4 style={{color:"#fff"}}>Coming soon</h4>
-    
-            </div>
-          </div>
+          <InvestorProfileList
+          theme={"startup"}
+          short={true}
+          data={filteredData}
+          />
         );
       default:
         return null;
@@ -211,7 +201,7 @@ export default function StartupExplore() {
                     value={filters?.city}
                     onChange={handleOnChange}
                     options={filterOptions?.cities}
-                    label="City"
+                    label="Location"
                     name="city"
                   />
                   <FilterBySelect
@@ -221,13 +211,13 @@ export default function StartupExplore() {
                     label="Gender"
                     name="gender"
                   />
-                  <FilterBySelect
+                  {/*<FilterBySelect
                     value={filters?.sectorPreference}
                     onChange={handleOnChange}
                     options={filterOptions?.sectors || sectorOptions}
                     label="Sector Preference"
                     name="sectorPreference"
-                  />
+                  />*/}
                   <FilterBySelect
                     value={filters?.investmentSize}
                     onChange={handleOnChange}
@@ -268,7 +258,7 @@ export default function StartupExplore() {
                     value={filters?.size}
                     onChange={handleOnChange}
                     options={filterOptions?.sizes || sizeOptions}
-                    label="Size"
+                    label="Employee Size"
                     name="size"
                   />
                   <FilterBySelect
@@ -284,7 +274,7 @@ export default function StartupExplore() {
                     value={filters?.productStage}
                     onChange={handleOnChange}
                     options={filterOptions?.productStage || productStageOptions}
-                    label="Product Stage"
+                    label="Startup Stage"
                     name="productStage"
                   />
                   <FilterBySelect
@@ -298,7 +288,7 @@ export default function StartupExplore() {
                     value={filters?.age}
                     onChange={handleOnChange}
                     options={filterOptions?.age || ageOptions}
-                    label="Age"
+                    label="Age of startup"
                     name="age"
                   />
                 </>
@@ -344,13 +334,6 @@ export default function StartupExplore() {
                     }
                     label="Years of Experience"
                     name="yearsOfExperience"
-                  />
-                  <FilterBySelect
-                    value={filters?.education}
-                    onChange={handleOnChange}
-                    options={filterOptions?.education || educationOptions}
-                    label="Education"
-                    name="education"
                   />
                   {/*<FilterBySelect
                     value={filters?.diversityMetrics}

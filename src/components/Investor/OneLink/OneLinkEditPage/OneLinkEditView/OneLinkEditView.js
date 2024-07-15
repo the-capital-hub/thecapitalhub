@@ -31,8 +31,8 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { loginSuccess } from "../../../../../Store/features/user/userSlice";
 import toast from "react-hot-toast";
 // import achievement from "../../../../../Images/Investor/Achievements/img_1.png";
-import AchievementToast from "../../../../Toasts/AchievementToast/AchievementToast";
-import { achievementTypes } from "../../../../Toasts/AchievementToast/types";
+// import AchievementToast from "../../../../Toasts/AchievementToast/AchievementToast";
+// import { achievementTypes } from "../../../../Toasts/AchievementToast/types";
 import IconChevronBack from "../../../SvgIcons/IconChevronBack";
 
 const OneLinkEditView = () => {
@@ -313,9 +313,9 @@ const OneLinkEditView = () => {
                 .catch((error) => console.error(error.message));
 
               toast.dismiss();
-              toast.custom((t) => (
-                <AchievementToast type={achievementTypes.oneStopShop} />
-              ));
+              // toast.custom((t) => (
+              //   <AchievementToast type={achievementTypes.oneStopShop} />
+              // ));
             })
             .catch((error) => {
               console.error("Error updating user:", error);

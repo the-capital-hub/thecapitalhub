@@ -49,13 +49,14 @@ export default function UserBio({ canEdit = true, bioText = "" }) {
   return (
     <div>
       <div
-        className={`box personal_information ${canEdit ? "pb-4" : ""} ${
-          isInvestor ? "rounded-4 border shadow-sm" : ""
+        className={`box personal_information rounded-2 ${canEdit ? "pb-4" : ""} ${
+          isInvestor ? "rounded-2 border shadow-sm" : ""
         } `}
         id="userBio"
+      
       >
         <div className="personal_information_header">
-          <h2 className="typography">Bio</h2>
+          <h2 className="typography" >Bio</h2>
           {/* Edit button */}
           {canEdit && (
             <span className="ms-auto d-flex align-items-center gap-2">
@@ -68,8 +69,8 @@ export default function UserBio({ canEdit = true, bioText = "" }) {
                 }}
                 disabled={loading}
               >
-                {isBioEditable ? "Cancel" : "Edit"}
-                <CiEdit />
+                {/*{isBioEditable ? "Cancel" : "Edit"}*/}
+                <CiEdit style={{ color: isInvestor?"rgb(211, 243, 107)": "#ffb27d" }}/>
               </button>
               {isBioEditable && (
                 <button

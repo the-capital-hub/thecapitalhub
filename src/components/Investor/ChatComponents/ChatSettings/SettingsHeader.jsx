@@ -115,7 +115,6 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
         communityProfile?.community?._id,
         { profileImage }
       );
-      console.log(response);
       const updatedData = {
         profileImage: response.profileImage,
       };
@@ -126,7 +125,6 @@ export default function SettingsHeader({ setIsSettingsOpen }) {
           ...updatedData,
         },
       };
-      console.log(updatedCommunityProfile);
       dispatch(setCommunityProfile(updatedCommunityProfile));
       // window.reload();
     } catch (error) {

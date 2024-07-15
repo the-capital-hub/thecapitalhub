@@ -9,8 +9,8 @@ import Form from "react-bootstrap/Form";
 import { updateUserById, addNotificationAPI } from "../../../../../../../Service/user";
 import { loginSuccess } from "../../../../../../../Store/features/user/userSlice";
 import toast from "react-hot-toast";
-import AchievementToast from "../../../../../../../components/Toasts/AchievementToast/AchievementToast";
-import { achievementTypes } from "../../../../../../../components/Toasts/AchievementToast/types";
+// import AchievementToast from "../../../../../../../components/Toasts/AchievementToast/AchievementToast";
+// import { achievementTypes } from "../../../../../../../components/Toasts/AchievementToast/types";
 
 export default function DarkModeToggle() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -35,12 +35,12 @@ export default function DarkModeToggle() {
             achievementId: "658bb96e8a18edb75e6f423f",
           };
           addNotificationAPI(notificationBody)
-            .then((data) => console.log("Added"))
+            .then((data) => {})
             .catch((error) => console.error(error.message));
 
-          toast.custom((t) => (
-            <AchievementToast type={achievementTypes.fallIntoTheDarkSide} />
-          ));
+          // toast.custom((t) => (
+          //   <AchievementToast type={achievementTypes.fallIntoTheDarkSide} />
+          // ));
         })
         .catch((error) => {
           console.error("Error updating user:", error);

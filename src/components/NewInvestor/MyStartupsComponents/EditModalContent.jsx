@@ -4,7 +4,7 @@ import { CiEdit } from "react-icons/ci";
 import { useState, useEffect } from "react";
 import "./EditModalContent.scss";
 import { getInvestorById, postInvestorData } from "../../../Service/user";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function EditModalContent({
   dataArray,
@@ -17,7 +17,7 @@ export default function EditModalContent({
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   // Save companies data to state.
   const [companies, setCompanies] = useState([]);
-
+  const dispatch = useDispatch();
   // editMode to enable/disable editing.
   const [editMode, setEditMode] = useState(false);
 
@@ -65,16 +65,19 @@ export default function EditModalContent({
         const { data: response } = await postInvestorData(investor);
         setCompanies(response.startupsInvested);
         setInvestedStartups(response.startupsInvested);
+        dispatch(response.startupsInvested);
       } else if (isPastInvestments) {
         investor.pastInvestments.splice(index, 1);
         const { data: response } = await postInvestorData(investor);
         setCompanies(response.pastInvestments);
         setPastInvestments(response.pastInvestments);
+        dispatch(response.startupsInvested);
       } else {
         investor.myInterests.splice(index, 1);
         const { data: response } = await postInvestorData(investor);
         setCompanies(response.myInterests);
         setMyInterests(response.myInterests);
+        dispatch(response.startupsInvested);
       }
     } catch (error) {
       console.log(error);
@@ -107,14 +110,14 @@ export default function EditModalContent({
                   {company.name}
                 </h6>
                 <div className="d-flex gap-2">
-                  {
+                  {/*
                     <button
                       className="btn btn-investor px-3"
                       onClick={() => handleEditClick(company, index)}
                     >
                       <CiEdit style={{ color: "", backgroundColor: "" }} />
                     </button>
-                  }
+                  */}
                   <button
                     className="btn btn-danger"
                     onClick={() => handleDelete(index)}

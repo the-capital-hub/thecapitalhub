@@ -30,7 +30,7 @@ const Connection = () => {
   // Function to handle tab change
   useEffect(() => {
     getUserConnections(loggedInUserId).then((res) => {
-      console.log("res2-->", res);
+      //console.log("res2-->", res);
       setGetAllConnection(res.data); // Set accepted connections data
     });
     window.title = "Connections | The Capital Hub";
@@ -42,7 +42,7 @@ const Connection = () => {
       getReceivedConnections();
     } else if (tab === "accepted") {
       getUserConnections(loggedInUserId).then((res) => {
-        console.log("res-->", res);
+        //console.log("res-->", res);
         setGetAllConnection(res.data); // Set accepted connections data
       });
     } else {

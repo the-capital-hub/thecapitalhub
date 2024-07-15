@@ -26,12 +26,12 @@
   }
 
   .left-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: flex-start;
+    // justify-content: center;
     padding: 10px;
-
+    width: 60%;
     .title {
       margin: 0;
       font-size: 12px;
@@ -84,8 +84,9 @@
 
 @media (max-width: 426px) {
   .colorcard-component {
-    width: 100%;
+    width: 48%;
     margin: 0;
+    margin-bottom: 0.5rem;
     margin-inline: auto;
     flex-direction: row !important;
   }

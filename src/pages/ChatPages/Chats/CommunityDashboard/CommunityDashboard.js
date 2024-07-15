@@ -68,7 +68,6 @@ const CommunityDashboard = ({
     setDeletePopup(true);
   };
   const handleIdBack = (data) => {
-    console.log(data);
     setMsgId(data);
   };
 
@@ -80,7 +79,6 @@ const CommunityDashboard = ({
   }, [messages, recieveMessage]);
 
   const handleDelete = async () => {
-    console.log(msgId);
     try {
       const result = await deleteMessage(msgId);
       console.log("delete message Result:", result);

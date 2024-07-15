@@ -46,7 +46,7 @@ export const EventComponent = ({ event }) => {
     available: "rgba(45,204,255, 0.75)",
   };
 
-  const meetingBg = requestedBy.length
+  const meetingBg = requestedBy?.length
     ? eventBg.pending
     : bookedBy
     ? eventBg.booked

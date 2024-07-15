@@ -6,41 +6,40 @@ import RightProfileCard from "../../../components/NewInvestor/InvestorRightProfi
 import RecommendationCard from "../../../components/Investor/InvestorGlobalCards/Recommendation/RecommendationCard";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import { useDispatch, useSelector } from "react-redux";
-import OnePagePreview from "../../../components/Investor/OneLink/OnePagePreview/OnePagePreview";
 import SharingOneLinkPopUp from "../../../components/PopUp/SharingOneLinkPopUp/SharingOneLinkPopUp";
 import { getInvestorById } from "../../../Service/user";
 import ThreeDotsImage from "../../../Images/whiteTheeeDots.svg";
 import FolderImage from "../../../Images/Folder.svg";
 import VideoImage from "../../../Images/Video.svg";
 import SmallProfileCard from "../../../components/Investor/InvestorGlobalCards/TwoSmallMyProfile/SmallProfileCard";
-import { setPageTitle } from "../../../Store/features/design/designSlice";
 import {
-  OnePagerCompanyAbout,
-  OnePagerCompanyInfo,
-  OnePagerCompanyLogo,
-  OnePagerFundAsking,
-  OnePagerMarketSize,
-  OnePagerProjections,
-  OnePagerRoadmap,
-  OnePagerSocialLinks,
-  OnePagerTeam,
-} from "../../../components/Shared/OnePager";
-import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
+  selectTheme,
+  setPageTitle,
+} from "../../../Store/features/design/designSlice";
 import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
 import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
 import {
   selectUserCompanyData,
   selectUserInvestor,
 } from "../../../Store/features/user/userSlice";
-import { Link } from "react-router-dom";
+import InvestorPhilosophy from "../../../components/NewInvestor/InvestorPhilosophy/InvestorPhilosophy";
+import InvestmentPhilosophy from "../../../components/NewInvestor/ProfileComponents/InvestmentPhilosophy/InvestmentPhilosophy";
+import CompanyPost from "../../../components/Investor/InvestorGlobalCards/MilestoneCard/CompanyPost";
+import { PlusIcon } from "../../../components/NewInvestor/SvgIcons";
+import CreatePostPopUp from "../../../components/PopUp/CreatePostPopUp/CreatePostPopUp";
+import Milestones from "../../../components/Investor/Milestones/Milestones";
+import SubcriptionPop from "../../../components/PopUp/SubscriptionPopUp/SubcriptionPop";
 
 export default function InvestorOnelink() {
-  const userInvestor = useSelector(selectUserInvestor);
-  const userCompanyData = useSelector(selectUserCompanyData);
-  //   console.log(loggedInUser);
-  // const userId = loggedInUser._id;
+  const theme = useSelector(selectTheme);
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [newPost, setNewPost] = useState(false);
+  const [respostingPostId, setRepostingPostId] = useState("");
+  const [popPayOpen, setPopPayOpen] = useState(false);
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const [isExitClicked, setIsExitClicked] = useState(false);
   const [company, setCompany] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
   const dispatch = useDispatch();
   // const [isUpdated, setIsUpdated] = useState(false);
 
@@ -51,20 +50,20 @@ export default function InvestorOnelink() {
 
   // Fetch data by userId
   useEffect(() => {
-    if (!userCompanyData) {
-      getInvestorById(userInvestor)
-        .then(({ data }) => {
-          setCompany(data);
-        })
-        .catch(() => setCompany([]));
-    } else {
-      setCompany(userCompanyData);
-    }
-  }, [userInvestor, userCompanyData]);
+    getInvestorById(loggedInUser._id)
+      .then(({ data }) => {
+        console.log(data)
+        setCompany(data);
+      })
+      .catch(() => setCompany([]));
+  }, [loggedInUser._id]);
 
   // HandleExitClick
   const handleExitClick = () => {
-    console.log("Clilc");
+    // if (loggedInUser.subscriptionType === "Basic") {
+    //   setPopPayOpen(true);
+    //   return;
+    // }
     setIsExitClicked(true);
   };
 
@@ -72,7 +71,9 @@ export default function InvestorOnelink() {
     setIsExitClicked(false);
     // navigate("/login");
   };
-
+  const appendDataToAllPosts = (data) => {
+    setAllPosts([...data, ...allPosts]);
+  };
   return (
     <MaxWidthWrapper>
       <div className="investor_onelink_wrapper mb-4">
@@ -100,13 +101,56 @@ export default function InvestorOnelink() {
                 video: VideoImage,
               }}
               para={company.introductoryMessage}
-              previous={company?.previousIntroductoryMessage}
+              previous={company?.previousIntroductoryMessage||''}
               input={true}
               isExitClicked={isExitClicked}
               setCompany={setCompany}
               investor
-              showPreviousIM={true}
+              showPreviousIM={false}
             />
+            <InvestorPhilosophy showProfile={false} />
+            <div className="startups_invested border shadow-sm rounded-2 introductory_message_container">
+              <div className="box_container rounded-2 border shadow-sm p-4">
+                <div
+                  className="header border-bottom d-flex"
+                  style={{
+                    paddingBottom: "15px",
+                    marginBottom: "0.5rem",
+                    color: theme === "dark" ? "#fff" : "#000",
+                    width: "100%",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <h4
+                    style={{
+                      color: theme === "dark" ? "#fff" : "#000",
+                      paddingLeft: "0.5rem",
+                    }}
+                  >
+                    Feature Articles
+                  </h4>
+
+                  <div
+                    // onClick={() => setSidebarCollapsed(true)}
+                    //to="/investor/home?showPopup=true"
+                    id="sidebar_createAPost"
+                  >
+                    <button
+                      className="create_post_newInvestor"
+                      onClick={() => setPopupOpen(true)}
+                    >
+                      {/* <span>Create a Post</span>
+                    <img src={PlusIcon} alt="image" /> */}
+                      <span className="text-black ms-0">Create Post</span>
+                      {/* <img src={PlusIcon} alt="image" /> */}
+                      <PlusIcon color="black" width="24" height="24" />
+                    </button>
+                  </div>
+                </div>
+                <CompanyPost userId={loggedInUser?._id} postDelete={true} />
+              </div>
+            </div>
+            <InvestmentPhilosophy />
           </div>
           {/* Right Side content */}
           <div className="right_content">
@@ -118,7 +162,7 @@ export default function InvestorOnelink() {
         {/* Onepage Preview */}
         {/* <OnePagePreview show={true} /> */}
 
-        {company.length !== 0 ? (
+        {/*{company.length !== 0 ? (
           <div
             className="onePager_wrapper d-flex flex-column gap-4"
             theme="investor"
@@ -129,7 +173,7 @@ export default function InvestorOnelink() {
             >
               Edit OneLink
             </Link>
-            {/* <OnePagerCompanyLogo image={company.logo} /> */}
+            <OnePagerCompanyLogo image={company.logo} /> 
             <OnePagerCompanyInfo
               company={company.companyName}
               location={company.location}
@@ -138,16 +182,16 @@ export default function InvestorOnelink() {
               socialLinks={company.socialLinks}
               showEdit={false}
             />
-            {/* <OnePagerCompanyAbout
+             <OnePagerCompanyAbout
               description={company.description}
               problem={company.problem}
               solution={company.solution}
               showEdit={true}
-            /> */}
+            /> 
           </div>
         ) : (
           <SpinnerBS className={"d-flex justify-content-center w-100 py-5"} />
-        )}
+            )}*/}
 
         {isExitClicked && company.introductoryMessage && (
           <SharingOneLinkPopUp
@@ -157,7 +201,19 @@ export default function InvestorOnelink() {
             investor
           />
         )}
+        {popupOpen && (
+          <CreatePostPopUp
+            setPopupOpen={setPopupOpen}
+            popupOpen
+            setNewPost={setNewPost}
+            respostingPostId={respostingPostId}
+            appendDataToAllPosts={appendDataToAllPosts}
+          />
+        )}
       </div>
+      {popPayOpen && (
+        <SubcriptionPop popPayOpen={popPayOpen} setPopPayOpen={setPopPayOpen} />
+      )}
     </MaxWidthWrapper>
   );
 }

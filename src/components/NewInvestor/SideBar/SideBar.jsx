@@ -33,6 +33,7 @@ import { PlusIcon } from "../SvgIcons";
 // import companyProfileIcon from "../../../Images/Investor/Sidebar/company.svg";
 import { BsChevronDown, BsChevronUp, BsLink45Deg } from "react-icons/bs";
 import { ModalBsLauncher } from "../../PopUp/ModalBS";
+import { FaHandshakeAngle } from "react-icons/fa6";
 import CommunitiesIcon from "../../Investor/ChatComponents/CommunitiesIcon";
 import { clearAllChatsData } from "../../../Store/features/chat/chatSlice";
 import { GoHome } from "react-icons/go";
@@ -59,7 +60,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   // const menuIconClick = () => {
   //   setSidebarCollapsed(true);
   // };
-
+  console.log(loggedInUser.userName)
   const handleLogout = () => {
     // Step 3: Show the logout popup
     setShowLogoutPopup(true);
@@ -162,7 +163,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   <h3 style={{ fontSize: "20px" }} className="mt-2">
                     {loggedInUser?.firstName} {loggedInUser?.lastName}
                   </h3>
-                  <h3>{loggedInUser?.email}</h3>
+                  <h3>{loggedInUser?.userName}</h3>
                 </>
               )}
             </div>
@@ -234,7 +235,25 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   {!sidebarCollapsed && <span className="">Company</span>}
                 </Link>
               </MenuItem>
-
+              <MenuItem
+                active={location.pathname.includes("/live-deals")}
+                className="active-item"
+              >
+                <Link
+                  // onClick={() => setSidebarCollapsed(true)}
+                  to="/investor/live-deals"
+                  id="sidebar_myStartups"
+                >
+                  {/* <img
+                  src={myStartUpIcon}
+                  alt="link for My Startups"
+                  width="17px"
+                  height="17px"
+                /> */}
+                  <FaHandshakeAngle size={25} />
+                  {!sidebarCollapsed && <span className="">Live Deals</span>}
+                </Link>
+              </MenuItem>
               <MenuItem
                 active={location.pathname.includes("/onelink")}
                 className="active-item"

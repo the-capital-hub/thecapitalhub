@@ -18,8 +18,8 @@ import { setPageTitle } from "../../../Store/features/design/designSlice";
 import toast from "react-hot-toast";
 import deleteIcon from "../../../Images/post/delete.png";
 import achievement from "../../../Images/Investor/Achievements/img_1.png";
-import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
-import { achievementTypes } from "../../Toasts/AchievementToast/types";
+// import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
+// import { achievementTypes } from "../../Toasts/AchievementToast/types";
 
 const Connection = () => {
   const [selectedTab, setSelectedTab] = useState("received"); // Default to "received"
@@ -32,7 +32,7 @@ const Connection = () => {
   // Function to handle tab change
   useEffect(() => {
     getUserConnections(loggedInUser._id).then((res) => {
-      console.log("res2-->", res);
+      //("res2-->", res);
       setGetAllConnection(res.data); // Set accepted connections data
     });
   }, []);
@@ -41,7 +41,7 @@ const Connection = () => {
       getReceivedConnections();
     } else if (tab === "accepted") {
       getUserConnections(loggedInUser._id).then((res) => {
-        console.log("res-->", res);
+        //console.log("res-->", res);
         setGetAllConnection(res.data); // Set accepted connections data
       });
     } else {
@@ -74,17 +74,17 @@ const Connection = () => {
     getReceivedConnections();
   }, [dispatch]);
 
-  const notify = () =>
-    toast.custom((t) => (
-      <AchievementToast type={achievementTypes.pleasureDoingBusiness} />
-    ));
+  // const notify = () =>
+  //   toast.custom((t) => (
+  //     <AchievementToast type={achievementTypes.pleasureDoingBusiness} />
+  //   ));
 
   // Function to accept a connection
   const acceptConnectionHandler = async (connectionId) => {
     try {
       const response = await acceptConnectionAPI(connectionId);
       if (response.isFirst) {
-        notify();
+        // notify();
       }
       getReceivedConnections();
     } catch (error) {

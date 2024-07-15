@@ -28,6 +28,7 @@ const NavigatedCardViewer = () => {
     getSavedPostCollections(loggedInUser._id)
       .then((res) => {
         const collectionHeaders = res.data.map((val) => val.name);
+        //(res.data);
         setHeaderTabs(collectionHeaders);
         setActiveHeader(collectionHeaders[0]);
         setLoading(false);
@@ -60,7 +61,7 @@ const NavigatedCardViewer = () => {
         });
     }
   }, [loggedInUser, collectionName, activeHeader]);
-
+ console.log(headerTabs)
   return (
     <div className="navigated_box_container">
       <div className="navigated-card-viewer">

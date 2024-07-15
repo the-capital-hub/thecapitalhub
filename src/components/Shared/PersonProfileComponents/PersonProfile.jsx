@@ -131,7 +131,7 @@ export default function PersonProfile({ theme, short, personData }) {
         />
       </div>
       <div className="" style={{ padding: "0 1rem" }}>
-        <CompanyDetailsCard className="" userDetails={personData} page={""} />
+        <CompanyDetailsCard className="" userDetails={personData} page={""} theme="startup"/>
       </div>
       <div className="person__section__two d-flex flex-column gap-4 pt-3 pb-5 px-3 px-lg-5">
          {/* <PublicLinks socialLinks={socialLinks} />*/}

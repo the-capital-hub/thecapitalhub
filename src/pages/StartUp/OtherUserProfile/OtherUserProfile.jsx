@@ -24,13 +24,13 @@ import AfterSuccessPopup from "../../../components/PopUp/AfterSuccessPopUp/After
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { selectTheme, setPageTitle } from "../../../Store/features/design/designSlice";
 function OtherUserProfile() {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const dispatch = useDispatch();
   const [userData, setUserData] = useState(null);
   const [connectionSent, setConnectionSent] = useState(false);
-
+  const theme = useSelector(selectTheme)
   // const location = useLocation();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { userId } = useParams();
@@ -52,7 +52,7 @@ function OtherUserProfile() {
   const handleConnect = (userId) => {
     sentConnectionRequest(loggedInUser._id, userId)
       .then(({ data }) => {
-        console.log("Connection data: ", data);
+        //console.log("Connection data: ", data);
         if (data?.message === "Connection Request Sent") {
           setConnectionSent(true);
           setTimeout(() => {
@@ -85,12 +85,12 @@ function OtherUserProfile() {
                       <h3 className="typography h3">
                         {userData?.firstName} {userData?.lastName}
                       </h3>
-                      <span className="text-secondary small_typo">
+                      <span className="small_typo">
                         {userData?.designation ||
                           "Founder & CEO of The Capital Hub"}
                       </span>
                       <br />
-                      <span className="text-secondary small_typo">
+                      <span className="small_typo">
                         {userData?.location || "Bangalore , India"}
                       </span>
                     </div>
@@ -137,26 +137,26 @@ function OtherUserProfile() {
                     <span className="col-md-3 label fw-bold">
                       Current Company
                     </span>
-                    <span className="col-md-9 text-secondary value">
+                    <span className="col-md-9 value">
                       {userData?.startUp?.company ||
                         userData?.investor?.companyName}
                     </span>
                   </div>
                   <div className="single_details row row-cols-1 row-cols-md-2 ">
                     <span className="col-md-3 label fw-bold">Designation</span>
-                    <span className="col-md-9 text-secondary value">
+                    <span className="col-md-9 value">
                       {userData?.designation}
                     </span>
                   </div>
                   <div className="single_details row row-cols-1 row-cols-md-2 ">
                     <span className="col-md-3 label fw-bold">Education</span>
-                    <span className="col-md-9 text-secondary value">
+                    <span className="col-md-9 value">
                       {userData?.education}
                     </span>
                   </div>
                   <div className="single_details row row-cols-1 row-cols-md-2 ">
                     <span className="col-md-3 label fw-bold">Experience</span>
-                    <span className="col-md-9 text-secondary value">
+                    <span className="col-md-9 value">
                       {userData?.experience}
                     </span>
                   </div>
@@ -205,10 +205,10 @@ function OtherUserProfile() {
                       <div className="col-12 col-md-11">
                         <h5 className="h5">Data Science</h5>
                         <h6 className="h6">The capital hub</h6>
-                        <p className="m-0 text-secondary font_12">
+                        <p className="m-0 font_12">
                           Jun 2022 - Present · 1 yr 4 mos
                         </p>
-                        <p className="m-0 text-secondary font_12">
+                        <p className="m-0 font_12">
                           Bangalore, Karnataka, India
                         </p>
                         <p className="mt-2 font_14">
@@ -239,7 +239,7 @@ function OtherUserProfile() {
                     <div className="bio rounded-4 border shadow-sm profile_container">
                       <h4 className="h4">Bio</h4>
                       <div className="single_education">
-                        <h6 className="h6 text-secondary">{userData?.bio}</h6>
+                        <h6 className="h6">{userData?.bio}</h6>
                       </div>
                     </div>
                   ) : (
@@ -265,6 +265,7 @@ function OtherUserProfile() {
                     <CompanyDetailsCard
                       className="company_details rounded-4 border profile_container"
                       userDetails={userData}
+                      theme="startup"
                     />
                   </div>
                   {/* Color Cards */}
@@ -330,7 +331,7 @@ function OtherUserProfile() {
             </>
           ) : (
             <h4
-              className="h4 text-secondary w-100 my-5 text-center"
+              className="h4 w-100 my-5 text-center"
               style={{ minHeight: "90vh" }}
             >
               <div class="d-flex justify-content-center">

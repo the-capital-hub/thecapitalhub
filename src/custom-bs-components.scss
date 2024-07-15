@@ -46,3 +46,9 @@
   --bs-btn-disabled-bg: #{tint-color($investor, 50%)};
   --bs-btn-disabled-border-color: #{tint-color($investor, 50%)};
 }
+
+.btn-gray {
+  --bs-btn-bg:gray;
+  --bs-btn-hover-bg: #{tint-color(gray, 15%)};
+  --bs-btn-hover-border-color: #{tint-color(gray, 15%)};
+}

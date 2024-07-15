@@ -85,6 +85,7 @@ export default function AuthorProfile() {
                 className=""
                 userDetails={userData}
                 page={""}
+                theme="startup"
               />
             </div>
 

@@ -146,7 +146,6 @@ const Chats = () => {
   useEffect(() => {
     console.log("recieve");
     socket.current?.on("recieve-message", (data) => {
-      console.log(data);
       setRecieveMessage(data);
       // update last message
       // dispatch(

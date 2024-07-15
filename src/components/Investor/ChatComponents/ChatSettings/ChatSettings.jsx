@@ -49,7 +49,6 @@ export default function ChatSettings({ setIsSettingsOpen }) {
         .then(({ data }) => {
           dispatch(setCommunityProfile(data));
           setLoading(false);
-          console.log(data);
         })
         .catch((error) => {
           console.log(error);

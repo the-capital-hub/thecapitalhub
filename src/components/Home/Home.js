@@ -24,11 +24,11 @@ const Home = () => {
 
   if (isMobileApp) {
     if (loggedInUser && loggedInUser.isInvestor === "true") {
-      return <Navigate to='/investor/home' />
+      return <Navigate to="/investor/home" />;
     } else if (loggedInUser && loggedInUser.isInvestor === "false") {
-      return <Navigate to='/home' />
+      return <Navigate to="/home" />;
     } else {
-      return <Navigate to='login' />
+      return <Navigate to="login" />;
     }
   }
 

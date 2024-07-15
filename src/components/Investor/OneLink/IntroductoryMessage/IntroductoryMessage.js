@@ -31,6 +31,7 @@ const IntroductoryMessage = ({
   const togglePreviousMessages = () => {
     setShowPreviousMessages(!showPreviousMessages);
   };
+
   let top3Previous = [];
   if (previous) {
     const sortedPrevious = [...previous];
@@ -77,11 +78,11 @@ const IntroductoryMessage = ({
 
   return (
     <div className={`introductory_message_container ${className}`}>
-      <div className="box_container rounded-4 border shadow-sm">
+      <div className="box_container rounded-2 border shadow-sm">
         <section className="title_section ">
           <div
             className={`title_wrapper ${!para ? "title-only-border" : "default-border"
-              } rounded-4`}
+              } rounded-2`}
           >
             <h6>{title}</h6>
             {para && (
@@ -129,7 +130,7 @@ const IntroductoryMessage = ({
         )}
         {input && (
           <section className="input_section">
-            <div className="input_container">
+            <div className="input_container" style={{paddingTop:"1rem"}}>
               <textarea
                 type="text"
                 name="introductoryMessage"

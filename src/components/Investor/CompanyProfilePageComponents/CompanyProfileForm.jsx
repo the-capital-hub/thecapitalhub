@@ -4,7 +4,6 @@ import { postStartUpData, postInvestorData } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
-// import { Response } from "aws-sdk";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import { setUserCompany } from "../../../Store/features/user/userSlice";
 import { BsFillCameraFill } from "react-icons/bs";
@@ -45,7 +44,22 @@ const SECTORS = [
   "Aerospace",
   "Sales and Marketing",
 ];
-const stageData = ["Ideation", "MVP", "Pre seed", "Seed", "Series A and above"];
+const stageData = [
+  "Bootstrap",
+  "Incubated",
+  "Angel invested",
+  "Pre seed",
+  "Seed",
+  "Series A and above",
+];
+const productData = [
+  "Concept/Idea",
+  "Prototype",
+  "Minimum Viable Product(MVP)",
+  "Beta Testing",
+  "Fully Deployed Product",
+];
+
 export default function CompanyProfileForm({
   companyData,
   investor = false,
@@ -87,6 +101,7 @@ export default function CompanyProfileForm({
         keyFocus: companyData.keyFocus || "",
         stage: companyData.stage || stageData[0],
         lastFunding: companyData.lastFunding || "",
+        productStage: companyData.productStage || "",
       });
     } else {
       setFormData(companyData || {});
@@ -165,7 +180,6 @@ export default function CompanyProfileForm({
           companyName: updatedFormData.company,
           founderId: companyData.founderId || loggedInUser._id,
         });
-        console.log(response);
         const user = {
           ...loggedInUser,
           investor: response.data._id,
@@ -192,31 +206,10 @@ export default function CompanyProfileForm({
       handleShowPopup({ error: true });
     }
   };
-  // console.log("companyData", companyData.sector);
+
   return (
     <div className="profile__form">
       <form action="" className="" onSubmit={handleSubmit}>
-        {/*<fieldset className={investor ? "investor" : "startup"}>
-          <legend>Company Profile Picture</legend>
-          <input
-            type="file"
-            name="companyLogo"
-            id="companyLogo"
-            className=" visually-hidden"
-            value={""}
-            accept="image/*"
-            onChange={handleFileInputChange}
-          />
-          <div className="profile_form_input d-flex align-items-center gap-4">
-            <label
-              htmlFor="companyLogo"
-              style={{ cursor: "pointer", color: "var(--d-l-grey)" }}
-            >
-              Upload Picture
-            </label>
-            <p className="m-0 fs-6 fw-light">{selectedFile?.name}</p>
-          </div>
-  </fieldset>*/}
         <div className="mx-auto">
           <input
             type="file"
@@ -225,12 +218,11 @@ export default function CompanyProfileForm({
             accept="image/*"
             className="visually-hidden"
             onChange={handleFileInputChange}
-            //required
           />
           <label htmlFor="image" className={`upload__label ${theme} `}>
             {imagePreview || companyData?.logo ? (
               <img
-                src={companyData?.logo}
+                src={imagePreview || companyData?.logo}
                 alt="Selected"
                 className="preview-image"
                 style={{
@@ -283,6 +275,18 @@ export default function CompanyProfileForm({
         </fieldset>
 
         <fieldset className={investor ? "investor" : "startup"}>
+          <legend>Industry</legend>
+          <input
+            type="text"
+            name="industryType"
+            id="industry"
+            className="profile_form_input"
+            value={formData.industryType || ""}
+            onChange={handleInputChange}
+          />
+        </fieldset>
+
+        <fieldset className={investor ? "investor" : "startup"}>
           <legend>Location</legend>
           {othersClicked && (
             <input
@@ -291,13 +295,11 @@ export default function CompanyProfileForm({
               id="location"
               className="profile_form_input"
               placeholder={formData.location + "..."}
-              // value={formData.location || ""}
               onChange={handleInputChange}
               onBlur={handleDropdownBlur}
               autoFocus
             />
           )}
-          {/* Location Dropdown */}
           {!othersClicked && (
             <div className="dropdown">
               <button
@@ -347,15 +349,6 @@ export default function CompanyProfileForm({
 
         <fieldset className={investor ? "investor" : "startup"}>
           <legend>Sector</legend>
-          {/* <input
-            type="text"
-            name="sector"
-            id="sector"
-            className="profile_form_input"
-            value={formData.sector || ""}
-            onChange={handleInputChange}
-          /> */}
-          {/* sector dropdown */}
           <div className="dropdown">
             <button
               className="btn profile_form_input w-auto dropdown-toggle sector_text"
@@ -512,7 +505,7 @@ export default function CompanyProfileForm({
         )}
         {!investor && (
           <fieldset className={investor ? "investor" : "startup"}>
-            <legend>Company stage</legend>
+            <legend>Investment stage</legend>
             <div className="dropdown">
               <button
                 className="btn profile_form_input w-auto dropdown-toggle sector_text"
@@ -534,14 +527,54 @@ export default function CompanyProfileForm({
                         type="button"
                         className={`btn btn-base list-btn text-start ps-3 text-break ${
                           investor ? "investor" : "startup"
-                        } ${
-                          sector === formData.stage ? "selected" : ""
-                        }`}
+                        } ${sector === formData.stage ? "selected" : ""}`}
                         onClick={(e) => {
                           if (sector === stageData[0]) return;
                           setFormData((prevData) => ({
                             ...prevData,
                             stage: sector,
+                          }));
+                        }}
+                      >
+                        <p className="m-0">{sector}</p>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </fieldset>
+        )}
+        {!investor && (
+          <fieldset className={investor ? "investor" : "startup"}>
+            <legend>Product stage</legend>
+            <div className="dropdown">
+              <button
+                className="btn profile_form_input w-auto dropdown-toggle sector_text"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {formData.productStage || productData[0]}
+              </button>
+              <ul
+                className={`dropdown-menu m-0 p-0 ${
+                  investor ? "investor" : "startup"
+                }`}
+              >
+                {productData.map((sector, index) => {
+                  return (
+                    <li key={`${sector}${index}`} className="m-0 p-0">
+                      <button
+                        type="button"
+                        className={`btn btn-base list-btn text-start ps-3 text-break ${
+                          investor ? "investor" : "startup"
+                        } ${sector === formData.productStage ? "selected" : ""}`}
+                        onClick={(e) => {
+                          if (sector === productData[0]) return;
+                          setFormData((prevData) => ({
+                            ...prevData,
+                            productStage: sector,
                           }));
                         }}
                       >
@@ -570,20 +603,6 @@ export default function CompanyProfileForm({
           )}
         </button>
       </form>
-      {/* {fromSubmit && (
-        <AfterSuccessPopup
-          // withoutOkButton
-          onClose={() => setFromSubmit(!fromSubmit)}
-          successText={popupData}
-        />
-      )}
-      {investorfromSubmit && (
-        <InvestorAfterSuccessPopup
-          // withoutOkButton
-          onClose={() => setInvestorfromSubmit(!investorfromSubmit)}
-          successText={popupData}
-        />
-      )} */}
     </div>
   );
 }

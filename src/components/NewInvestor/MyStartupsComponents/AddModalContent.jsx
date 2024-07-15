@@ -135,7 +135,7 @@ export default function AddModalContent({
         searchStartUps(value)
           .then(({ data }) => {
             setCompanies(data);
-            console.log(data);
+            //console.log(data);
           })
           .catch(() => {
             setCompanies([]);

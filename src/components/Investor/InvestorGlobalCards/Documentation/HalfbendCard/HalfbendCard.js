@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./HalfbendCard.scss";
 // import ThreeDot from "../../../../../Images/VerticalBlackThreeDots.svg";
 // import folderIcon from "../../../../../Images/Folder.png";
-import pdfIcon from "../../../../../Images/PDFIcon.png";
+//import pdfIcon from "../../../../../Images/PDFIcon.png";
+import { BiSolidFilePdf } from "react-icons/bi";
 import { getPdfData, deleteDocument } from "../../../../../Service/user";
 import { useSelector } from "react-redux";
 // import deleteIcon from "../../../../../Images/post/delete.png";
@@ -17,7 +18,7 @@ const HalfbendCard = ({ folderName, userId }) => {
   // const [user, setUser] = useState([]);
   const [deleteDoc, setDeleteDoc] = useState(false);
   const [loading, setLoading] = useState(false);
-  console.log(window.location.href.split("/")[3])
+  console.log(window.location.href.split("/")[3]);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   console.log("user", userId);
   useEffect(() => {
@@ -31,7 +32,7 @@ const HalfbendCard = ({ folderName, userId }) => {
         })
         .catch((error) => {
           setLoading(false);
-          console.error(error.message)
+          console.error(error.message);
         });
     } else {
       getPdfData(loggedInUser?.oneLinkId, folderName)
@@ -43,7 +44,7 @@ const HalfbendCard = ({ folderName, userId }) => {
         .catch((error) => {
           setLoading(false);
 
-          console.error(error.message)
+          console.error(error.message);
         });
     }
   }, [loggedInUser, userId, folderName, deleteDoc]);
@@ -85,7 +86,7 @@ const HalfbendCard = ({ folderName, userId }) => {
       console.log("Error in delete document:", error.response.data.message);
     }
   };
-
+  console.log(data[0]);
   return (
     // <div className="half_bend_container">
     //   <div className="box_container mt-4">
@@ -192,49 +193,60 @@ const HalfbendCard = ({ folderName, userId }) => {
     <div className="half_bend_container row">
       <div className="box_container mt-4">
         <div className="row">
-          {loading &&
+          {loading && (
             <SpinnerBS
               className={
                 "d-flex py-5 justify-content-center align-items-center w-100"
               }
             />
-          }
+          )}
 
-          {!loading && data?.map((item) => (
-            <div
-              className="col-md-4 d-flex justify-content-center align-items-center main_col"
-              key={item.fileName}
-            >
+          {!loading &&
+            data?.map((item,index) => (
               <div
-                className="custom-card"
-                onClick={() => openPdfInNewWindow(item.fileUrl)}
+                className="col-md-4 d-flex justify-content-center align-items-center main_col "
+                key={item.fileName}
+                style={{ maxWidth: "300px", width: "100%", padding: "1rem" }}
               >
-                <img
-                  className="mx-3 my-1"
-                  src={pdfIcon}
-                  height={50}
-                  alt="PDF Icon"
-                />
-              </div>
-              <div className="d-flex flex-column mx-auto justify-content-center align-items-center">
-                <h6>{item.fileName}</h6>
-                {loggedInUser?._id === item.userId && window.location.href.split("/")[3] === "documentation"&& (
-                  // <img
-                  //   className="delete-img"
-                  //   src={deleteIcon}
-                  //   height={50}
-                  //   alt="deleteIcon"
-                  //   onClick={() => handleDeleteDoc(item._id)}
-                  // />
-                  <MdDelete 
-                  size={20}
-                  onClick={() => handleDeleteDoc(item._id)}
+                <div
+                  className="custom-card"
+                  onClick={() => openPdfInNewWindow(item.fileUrl)}
+                  style={{ width: "100%" }}
+                >
+                  <img
+                    src={item.fileUrl}
+                    //height={50}
+                    alt="PDF Icon"
+                    style={{ width: "100%",height:"10rem" }}
                   />
-
-                )}
+                  <div className="d-flex mx-auto" style={{alignItems:"center",padding:"0.5rem 0",justifyContent:"space-between"}}>
+                  <BiSolidFilePdf size={20} color="#f34646"/>
+                    <h6 style={{marginBottom:0}}>
+                      {/*{item.fileName.length > 15
+                        ? `${item.fileName.substring(0, 15)}...`
+                        : item.fileName}*/}
+                        {`${folderName}_0${index+1}`}
+                    </h6>
+                    {loggedInUser?._id === item.userId &&
+                      window.location.href.split("/")[3] ===
+                        "documentation" && (
+                        // <img
+                        //   className="delete-img"
+                        //   src={deleteIcon}
+                        //   height={50}
+                        //   alt="deleteIcon"
+                        //   onClick={() => handleDeleteDoc(item._id)}
+                        // />
+                        <MdDelete
+                          size={20}
+                          color="#f34646"
+                          onClick={() => handleDeleteDoc(item._id)}
+                        />
+                      )}
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
       {deleteDoc && (

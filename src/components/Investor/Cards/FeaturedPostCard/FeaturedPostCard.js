@@ -36,6 +36,7 @@ const FeaturedPostCard = ({
   setIsDeleteSuccessful,
   postDelete
 }) => {
+  const [expanded, setExpanded] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   // States for handling remove post from featured post
   const [error, setError] = useState("");
@@ -47,7 +48,6 @@ const FeaturedPostCard = ({
     // set loading = true
     setLoading(true);
     const response = await removeFromFeaturedPost(postId);
-    console.log(response);
     if (response.status === 200) {
       setIsDeleteSuccessful(true);
       setLoading(false);
@@ -57,61 +57,50 @@ const FeaturedPostCard = ({
       setLoading(false);
     }
   };
- console.log(description)
   return (
     <>
       <div className="featuredpostcard_main_container mb-2">
         {/* <div className="col-12"> */}
         <div className=" featuredpostcard_container mt-2 rounded-4 shadow-sm border">
           <div className="feed_header_container p-2 border-bottom ">
-            <div className="feedpostcard_content w-100">
-              <img
-                src={
-                  profilePicture ||
-                  "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
-                }
-                style={{ width: "50px", height: "50px" }}
-                className="rounded-circle"
-                alt="logo"
-              />
+            <div className="feedpostcard_content w-100" style={{ justifyContent: "space-between" }}>
+            <div style={{display:"flex"}}>
+            <img
+              src={
+                profilePicture ||
+                "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
+              }
+              style={{ width: "50px", height: "50px" }}
+              className="rounded-circle"
+              alt="logo"
+            />
 
-              <div className="feedpostcart_text_header my-1">
-                {/* Fullname */}
-                <span
-                  style={{
-                    fontSize: "15px",
-                    fontWeight: 600,
-                    color: "var( --d-l-grey)",
-                  }}
-                >
-                  {firstName + " " + lastName}
-                </span>
-                {/* Details */}
-                <span className="d-flex flex-column flex-md-row flex-wrap">
-                  <span
-                    style={{
-                      fontSize: "10px",
-                      fontWeight: 500,
-                      color: "var( --d-l-grey)",
-                    }}
-                  >
-                    {/* <img src={HomeIcon} alt="logo" /> */}
-                    <GoHome size={15} />
-                    {designation}, {userId.startUp?.company}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "10px",
-                      fontWeight: 500,
-                      color: "var( --d-l-grey)",
-                    }}
-                  >
-                    {/* <img src={locationIcon} alt="logo" /> */}
-                    <IoLocationOutline size={15} />
-                    Bangalore, India
-                  </span>
-                </span>
-                {/* Time ago */}
+            <div className="feedpostcart_text_header my-1">
+              {/* Fullname */}
+              <span
+                style={{
+                  fontSize: "15px",
+                  fontWeight: 600,
+                  color: "var( --d-l-grey)",
+                }}
+              >
+                {firstName + " " + lastName}
+              </span>
+              {/* Details */}
+              <span className="d-flex flex-column flex-md-row flex-wrap">
+              <span
+              className="d-flex"
+                style={{
+                  fontSize: "10px",
+                  fontWeight: 500,
+                  color: "var( --d-l-grey)",
+                  alignItems:"center"
+                }}
+              >
+                {/* <img src={HomeIcon} alt="logo" /> */}
+                <GoHome size={15}/>
+                <p style={{marginBottom:0}}>{designation}, {userId?.startUp?.company}</p>
+              </span>
                 <span
                   style={{
                     fontSize: "10px",
@@ -119,9 +108,23 @@ const FeaturedPostCard = ({
                     color: "var( --d-l-grey)",
                   }}
                 >
-                  <TimeAgo datetime={createdAt} locale="" />
+                  {/* <img src={locationIcon} alt="logo" /> */}
+                  <IoLocationOutline size={15} />
+                  Bangalore, India
                 </span>
-              </div>
+              </span>
+              {/* Time ago */}
+              <span
+                style={{
+                  fontSize: "10px",
+                  fontWeight: 500,
+                  color: "var( --d-l-grey)",
+                }}
+              >
+                <TimeAgo datetime={createdAt} locale="" />
+              </span>
+            </div>
+            </div>
 
               {/*Show Delete featured post if userId=loggedInUser._id */}
               {userId === loggedInUser._id && postDelete  ? (
@@ -155,13 +158,42 @@ const FeaturedPostCard = ({
                 }}
                 className=""
               >
-                {description? description:"not avlabel"}
+              {expanded
+                  ? description
+                  : description.split(" ").slice(0, 15).join(" ") }
+                {!expanded ?
+                  description.split(" ").length > 15 &&
+                  !expanded && (
+                    <span
+                      style={{
+                        cursor: "pointer",
+                      }}
+                      onClick={() => {
+                        setExpanded(!expanded);
+                      }}
+                      className="text-secondary"
+                    >
+                      ...Read more
+                    </span>
+                  ):(
+                      <span
+                        style={{
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          setExpanded(!expanded);
+                        }}
+                        className="text-secondary"
+                      >
+                        ...See Less
+                      </span>
+                    )}
               </p>
               {image && (
-                <span className="d-flex">
+                <span className="d-flex" style={{ maxHeight: "250px" }}>
                   <img
                     className="mx-auto rounded-4 my-2 "
-                    style={{ objectFit: "contain" }}
+                    style={{ objectFit: "cover" }}
                     width={"100%"}
                     src={image}
                     alt="post media"

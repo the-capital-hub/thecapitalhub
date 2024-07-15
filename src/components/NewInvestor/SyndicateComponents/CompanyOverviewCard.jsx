@@ -4,6 +4,7 @@ export default function CompanyOverviewCard({
   iconAlt,
   text,
   fontBase,
+  theme
 }) {
   // All styles based on fontBase are to make this component suitable for larger font.
   // Used in LiveDeals.jsx
@@ -14,7 +15,7 @@ export default function CompanyOverviewCard({
         fontBase ? "gap-2 me-lg-4" : "gap-1"
       }`}
     >
-      <p>{heading}</p>
+      <p style={{color:theme === "dark"?"#fff":"black"}}>{heading}</p>
       <a
         href="# "
         target="_blank"
@@ -27,7 +28,7 @@ export default function CompanyOverviewCard({
           alt={iconAlt}
           style={fontBase ? { width: "20px", height: "20px" } : {}}
         />
-        <p className={`${fontBase ? "fs-6 fw-light" : ""}`}>{text}</p>
+        <p className={`${fontBase ? "fs-6 fw-light" : ""}`} style={{color:theme === "dark"?"#fff":"black"}}>{text}</p>
       </a>
     </div>
   );

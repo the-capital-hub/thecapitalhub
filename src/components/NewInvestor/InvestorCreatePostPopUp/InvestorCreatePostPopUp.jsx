@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./investorCreatePostPopUp.scss";
-import SmileeIcon from "../../../Images/Smilee.svg";
-import GallaryIcon from "../../../Images/Gallary.svg";
-import ThreeDotsIcon from "../../../Images/ThreeDots.svg";
-import CameraIcon from "../../../Images/Camera.svg";
-import IconVideo from "../../../Images/post/Video.svg";
+// import SmileeIcon from "../../../Images/Smilee.svg";
+// import GallaryIcon from "../../../Images/Gallary.svg";
+// import ThreeDotsIcon from "../../../Images/ThreeDots.svg";
+// import CameraIcon from "../../../Images/Camera.svg";
+// import IconVideo from "../../../Images/post/Video.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getSinglePostAPI,
@@ -24,8 +24,8 @@ import { toggleinvestorCreatePostModal } from "../../../Store/features/design/de
 import { CiImageOn, CiVideoOn } from "react-icons/ci";
 import toast from "react-hot-toast";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
-import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
-import { achievementTypes } from "../../Toasts/AchievementToast/types";
+// import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
+// import { achievementTypes } from "../../Toasts/AchievementToast/types";
 
 const CreatePostPopUp = ({
   setPopupOpen,
@@ -240,9 +240,9 @@ const CreatePostPopUp = ({
                 .then((data) => console.log("Added"))
                 .catch((error) => console.error(error.message));
 
-              toast.custom((t) => (
-                <AchievementToast type={achievementTypes.voyager} />
-              ));
+              // toast.custom((t) => (
+              //   <AchievementToast type={achievementTypes.voyager} />
+              // ));
             })
             .catch((error) => {
               console.error("Error updating user:", error);

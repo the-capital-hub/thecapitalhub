@@ -1,25 +1,28 @@
 import React, { useRef, useState } from "react";
 import "./UploadContainer.scss";
 import UploadIcon from "../../../../Images/UploadIcon.svg";
-import PDFIcon from "../../../../Images/PDFIcon.png"; // Import your PDF icon
+import PDFIcon from "../../../../Images/PDFIcon.png";
 import axios from "axios";
 import AfterSuccessPopUp from "../../../PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import { environment } from "../../../../environments/environment";
 import { useSelector } from "react-redux";
+import SubcriptionPop from "../../../PopUp/SubscriptionPopUp/SubcriptionPop";
 
 const baseUrl = environment.baseUrl;
 
-const UploadContainer = ({ onClicked  }) => {
+const UploadContainer = ({ onClicked }) => {
   const fileInputRef = useRef(null);
   const [isFileOver, setIsFileOver] = useState(false);
   const [thumbnailUrl, setThumbnailUrl] = useState(null);
   const [showPopUp, setShowPopUp] = useState(false);
+  const [popPayOpen, setPopPayOpen] = useState(false);
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
 
   const handleClosePopup = () => {
     setShowPopUp(false);
     setThumbnailUrl("");
   };
+
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
     handleFile(file);
@@ -43,7 +46,6 @@ const UploadContainer = ({ onClicked  }) => {
       try {
         const fileReader = new FileReader();
         fileReader.onload = async () => {
-          const arrayBuffer = fileReader.result;
           setThumbnailUrl(PDFIcon);
         };
         fileReader.readAsArrayBuffer(file);
@@ -57,31 +59,43 @@ const UploadContainer = ({ onClicked  }) => {
     }
   };
 
-  const handleImageContainerClick = () => {
-    fileInputRef.current.click();
-  };
-
   const handlePdfUploadClick = async () => {
-    if (thumbnailUrl) {
-      const data = new FormData();
-      data.append("file", fileInputRef.current.files[0]);
-      data.append("upload_preset", "fiverr");
+    const file = fileInputRef.current?.files[0];
+
+    if (!file || file.type !== "application/pdf") {
+      console.error("The file is not a PDF or no file is selected.");
+      return;
+    }
+
+    const data = new FormData();
+    data.append("file", file);
+
+    try {
       const res = await axios.post(
-        "https://api.cloudinary.com/v1_1/dndcersc4/upload",
+        "https://api.cloudinary.com/v1_1/dndcersc4/raw/upload",
         data,
-        { withCredentials: false }
+        {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          },
+          params: {
+            folder: `${process.env.CLOUDINARY_FOLDER}/startUps/logos`,
+            resource_type: "raw" // Ensures the file is uploaded as a raw file type
+          }
+        }
       );
+
       const requestBody = {
-        fileUrl: res.data.url,
+        fileUrl: res.data.secure_url,
         fileName: res.data.original_filename,
         userId: loggedInUser._id,
         folderId: "64dc89095df364b443f04a20",
       };
+
       await axios
         .post(`${baseUrl}/documentation/uploadDocument`, requestBody)
         .then((response) => {
-          console.log("response", response);
-          if (response.status == 200) {
+          if (response.status === 200) {
             setShowPopUp(true);
           }
           const thumbnailUrl = response.data.thumbnailUrl;
@@ -90,6 +104,9 @@ const UploadContainer = ({ onClicked  }) => {
         .catch((error) => {
           console.error("Error uploading file:", error);
         });
+    } catch (error) {
+      console.error("Error processing PDF:", error);
+      setThumbnailUrl(null);
     }
   };
 
@@ -112,10 +129,9 @@ const UploadContainer = ({ onClicked  }) => {
             ref={fileInputRef}
             type="file"
             style={{ display: "none" }}
-            accept=".pdf"
+            accept="application/pdf"
             onChange={handleFileInputChange}
           />
-
           <p className="text text_upload" onClick={handlePdfUploadClick}>
             Click here to upload this pdf
           </p>
@@ -127,7 +143,6 @@ const UploadContainer = ({ onClicked  }) => {
           style={containerStyle}
           onDragOver={handleDragOver}
           onDrop={handleDrop}
-          // onClick={handleImageContainerClick}
         >
           <div className="image_container">
             <img src={UploadIcon} alt="Upload Icon" />
@@ -136,15 +151,17 @@ const UploadContainer = ({ onClicked  }) => {
             ref={fileInputRef}
             type="file"
             style={{ display: "none" }}
-            accept=".pdf"
+            accept="application/pdf"
             onChange={handleFileInputChange}
           />
-
           <p className="text">Click to upload</p>
         </div>
       )}
       {showPopUp && (
         <AfterSuccessPopUp savedFile={true} onClose={handleClosePopup} />
+      )}
+      {popPayOpen && (
+        <SubcriptionPop popPayOpen={popPayOpen} setPopPayOpen={setPopPayOpen} />
       )}
     </>
   );

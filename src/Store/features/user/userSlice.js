@@ -15,6 +15,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess: (state, action) => {
+      console.log(action)
       localStorage.setItem("loggedInUser", JSON.stringify(action.payload));
       state.loggedInUser = action.payload;
       setThemeColor(
@@ -25,7 +26,8 @@ export const userSlice = createSlice({
         const startupAccounts =
           JSON.parse(localStorage.getItem("StartupAccounts")) || [];
         const updatedStartupAccounts = startupAccounts.map((account) => {
-          if (account.user._id === action.payload._id) {
+          console.log(account)
+          if (account?.user?._id === action?.payload?._id) {
             account.user = action.payload;
           }
           return account;
@@ -165,7 +167,7 @@ export const selectEvaluateCompanyGrowthPotential = (state) =>
 export const selectWeightGaveToTechnologicalInnovation = (state) =>
   state.user.loggedInUser.weightGaveToTechnologicalInnovation;
 export const selectUserInvestmentPhilosophy = (state) =>
-  state.user.loggedInUser.investmentPhilosophy;
+  state.user.loggedInUser.philosophy;
 
 // company state selectors
 export const selectCompanyDataId = (state) => state.user.company?._id;

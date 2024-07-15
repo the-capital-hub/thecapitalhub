@@ -18,7 +18,7 @@ export default function InfoField({ isEditing, data, name, legend, loading }) {
 
   return (
     <fieldset className="d-flex flex-column">
-      <legend>{legend}</legend>
+      {/*<legend>{legend}</legend>*/}
       {isEditing || !data ? (
         <textarea
           defaultValue={data === "" ? null : data}
@@ -37,15 +37,6 @@ export default function InfoField({ isEditing, data, name, legend, loading }) {
         >
           {data || "Click on edit to add Investment Philosophy"}
         </p>
-      )}
-      {!data && !isEditing && (
-        <button type="submit" className="ms-auto mt-3 btn btn-investor">
-          {loading && textRef.current.value !== "" ? (
-            <SpinnerBS spinnerSizeClass="spinner-border-sm text-black" />
-          ) : (
-            "Save"
-          )}
-        </button>
       )}
     </fieldset>
   );

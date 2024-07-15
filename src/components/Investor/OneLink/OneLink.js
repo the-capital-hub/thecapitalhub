@@ -15,7 +15,7 @@ import { useState, useEffect } from "react";
 import { getStartupByFounderId } from "../../../Service/user";
 import SharingOneLinkPopUp from "../../PopUp/SharingOneLinkPopUp/SharingOneLinkPopUp";
 import MaxWidthWrapper from "../../Shared/MaxWidthWrapper/MaxWidthWrapper";
-import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { selectTheme, setPageTitle } from "../../../Store/features/design/designSlice";
 // import {
 //   OnePagerCompanyAbout,
 //   OnePagerCompanyInfo,
@@ -39,14 +39,18 @@ import {
 import { PlusIcon } from "../../NewInvestor/SvgIcons";
 import CompanyPost from "../InvestorGlobalCards/MilestoneCard/CompanyPost";
 import CreatePostPopUp from "../../PopUp/CreatePostPopUp/CreatePostPopUp";
+import SubcriptionPop from "../../PopUp/SubscriptionPopUp/SubcriptionPop";
 
 const OneLink = () => {
   const loggedInUserId = useSelector(selectLoggedInUserId);
+  const [popPayOpen, setPopPayOpen] = useState(false);
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const companyDataId = useSelector(selectCompanyDataId);
   const userCompanyData = useSelector(selectUserCompanyData);
   const [isExitClicked, setIsExitClicked] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
   const [newPost, setNewPost] = useState(false);
+  const theme = useSelector(selectTheme)
   const [company, setCompany] = useState([]);
   const [respostingPostId, setRepostingPostId] = useState("");
   const [allPosts, setAllPosts] = useState([]);
@@ -73,7 +77,10 @@ const OneLink = () => {
 
   // HandleExitClick
   const handleExitClick = () => {
-    console.log("Clilc");
+    // if (loggedInUser.subscriptionType === "Basic") {
+    //   setPopPayOpen(true);
+    //   return;
+    // }
     setIsExitClicked(true);
   };
 
@@ -119,45 +126,47 @@ const OneLink = () => {
               showPreviousIM={false}
             />
             <div
-            className="rounded-4 border shadow-sm"
-            style={{ backgroundColor: "var(--white-to-grey)" }}
-          >
-            <div
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "1rem 1rem 0 1rem",
-              }}
-              className="box personal_information"
+              className="rounded-4 border shadow-sm"
+              style={{ backgroundColor: "var(--white-to-grey)" }}
             >
-              <div className="personal_information_header">
-                <h2 className="typography">
-                  Company update
-                </h2>
-              </div>
               <div
-                // onClick={() => setSidebarCollapsed(true)}
-                //to="/investor/home?showPopup=true"
-                id="sidebar_createAPost"
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  padding: "1rem 1rem 0 1rem",
+                }}
+                className="box personal_information"
               >
-                <button
-                  className="create_post_newInvestor"
-                  onClick={() => setPopupOpen(true)}
+                <div className="personal_information_header">
+                  <h2 className="typography" style={{color:theme==="dark"?"#fff":"#000"}}>Company update</h2>
+                </div>
+                <div
+                  // onClick={() => setSidebarCollapsed(true)}
+                  //to="/investor/home?showPopup=true"
+                  id="sidebar_createAPost"
                 >
-                  {/* <span>Create a Post</span>
+                  <button
+                    className="create_post_newInvestor"
+                    onClick={() => setPopupOpen(true)}
+                  >
+                    {/* <span>Create a Post</span>
                 <img src={PlusIcon} alt="image" /> */}
-                  <span className="text-black ms-0">Create Post</span>
-                  {/* <img src={PlusIcon} alt="image" /> */}
-                  <PlusIcon color="black" width="24" height="24" />
-                </button>
+                    <span className="text-black ms-0">Create Post</span>
+                    {/* <img src={PlusIcon} alt="image" /> */}
+                    <PlusIcon color="black" width="24" height="24" />
+                  </button>
+                </div>
+              </div>
+              <div className="mt-2 milestones">
+                <CompanyPost
+                  userId={loggedInUserId}
+                  postDelete={true}
+                  newPost={newPost}
+                />
               </div>
             </div>
-            <div className="mt-2 milestones">
-              <CompanyPost userId={loggedInUserId} postDelete={true} newPost={newPost}/>
-            </div>
-          </div>
           </div>
 
           {/* Rightside content */}
@@ -233,6 +242,9 @@ const OneLink = () => {
             respostingPostId={respostingPostId}
             appendDataToAllPosts={appendDataToAllPosts}
           />
+        )}
+        {popPayOpen && (
+          <SubcriptionPop popPayOpen={popPayOpen} setPopPayOpen={setPopPayOpen} />
         )}
       </div>
     </MaxWidthWrapper>

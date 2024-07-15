@@ -21,8 +21,8 @@ import { clearAllChatsData } from "../../../Store/features/chat/chatSlice";
 import { fetchAllChats } from "../../../Store/features/chat/chatThunks";
 import { MdDarkMode, MdDelete } from "react-icons/md";
 import { GoSun } from "react-icons/go";
-import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
-import { achievementTypes } from "../../Toasts/AchievementToast/types";
+// import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
+// import { achievementTypes } from "../../Toasts/AchievementToast/types";
 
 const InvestorManageAccount = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -168,9 +168,9 @@ const InvestorManageAccount = () => {
             .then((data) => console.log("Added"))
             .catch((error) => console.error(error.message));
 
-          toast.custom((t) => (
-            <AchievementToast type={achievementTypes.fallIntoTheDarkSide} />
-          ));
+          // toast.custom((t) => (
+          //   <AchievementToast type={achievementTypes.fallIntoTheDarkSide} />
+          // ));
         })
         .catch((error) => {
           console.error("Error updating user:", error);
@@ -362,14 +362,14 @@ const InvestorManageAccount = () => {
                                 </h4>
                                 <h6>
                                   {window.innerWidth <= 600
-                                    ? account.user.email.slice(0, 21) ===
-                                      account.user.email
-                                      ? account.user.email
-                                      : account.user.email.slice(0, 21) + "..."
-                                    : account.user.email.slice(0, 23) ===
-                                      account.user.email
-                                      ? account.user.email
-                                      : account.user.email.slice(0, 23) + "..."}
+                                    ? account?.user?.email?.slice(0, 21) ===
+                                      account?.user?.email
+                                      ? account?.user?.email
+                                      : account?.user?.email?.slice(0, 21) + "..."
+                                    : account?.user?.email?.slice(0, 23) ===
+                                      account?.user?.email
+                                      ? account?.user?.email
+                                      : account?.user?.email?.slice(0, 23) + "..."}
                                 </h6>
                               </div>
                             </div>

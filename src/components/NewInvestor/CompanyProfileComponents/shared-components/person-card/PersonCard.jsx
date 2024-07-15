@@ -12,36 +12,32 @@ export default function PersonCard({ person, isFeedBack }) {
       image: person.image,
       name: person.name,
       rating: person.rating,
+      designation: person.designation,
     };
   } else {
     personHead = {
       image: person.image,
       name: person.name,
       age: person.age,
+      designation: person.designation,
     };
   }
 
   return (
-    <div className="personCard__container d-flex flex-column gap-2 p-2 rounded-4 border">
-      <CardHead {...personHead} />
-      <CardBody>
-        {isFeedBack ? (
-          <p className="">{person.feedback}</p>
-        ) : (
+    <div className="personCard__container d-flex flex-column gap-2 px-4 pt-4 rounded-4 border" style={{height:"6rem"}}>
+      <CardHead {...personHead} person={person} />
+      {/*<CardBody>{isFeedBack && <p className="">{person.feedback}</p>}</CardBody>*/}
+    </div>
+  );
+}
+
+{
+  /*}: (
           <>
-            <div className="person_text">
-              <p className="fw-light" style={{ color: "var(--bs-gray-500)" }}>
-                Designation
-              </p>
-              <h6 className="fw-medium designation">{person.designation}</h6>
-            </div>
+
             {/* <button className="btn-capital-small connectNow d-flex align-items-center gap-1 ms-auto">
               <AddUserIcon />
               <p>Connect Now</p>
-            </button> */}
-          </>
-        )}
-      </CardBody>
-    </div>
-  );
+            </button> 
+            </>*/
 }

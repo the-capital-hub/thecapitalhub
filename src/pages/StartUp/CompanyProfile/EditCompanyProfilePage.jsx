@@ -8,13 +8,25 @@ import { useDispatch, useSelector } from "react-redux";
 // import { Link } from "react-router-dom";
 // import { CiEdit, CiSaveUp2 } from "react-icons/ci";
 // import RaghuImage from "../../../Images/aboutUs/Raghu.jpeg";
+import {
+  About2,
+  About3,
+  Revenue1,
+  Revenue2,
+} from "../../../Images/Investor/CompanyProfile";
+import revenue from "../../../Images/Investor/CompanyProfile/image 83-1.png";
+import revenue2 from "../../../Images/Investor/CompanyProfile/image 83-6.png";
+import revenue3 from "../../../Images/Investor/CompanyProfile/image 83-5.png";
 import CoinIcon from "../../../Images/investorView/Rectangle.png";
 import ColorCard from "../../../components/Investor/InvestorGlobalCards/ColoredCards/ColorCard";
 import { getStartupByFounderId, postStartUpData } from "../../../Service/user";
 import CoreTeam from "../../../components/Investor/CompanyProfilePageComponents/CoreTeam/CoreTeam";
 // import Milestones from "../../../components/Investor/CompanyProfilePageComponents/Milestones/Milestones";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
-import { setPageTitle } from "../../../Store/features/design/designSlice";
+import {
+  selectTheme,
+  setPageTitle,
+} from "../../../Store/features/design/designSlice";
 // import backIcon from "../../../Images/Chat/BackIcon.svg";
 import { useNavigate } from "react-router-dom";
 import SpinnerBS from "../../../components/Shared/Spinner/SpinnerBS";
@@ -33,12 +45,11 @@ export default function EditCompanyProfilePage() {
   const userCompanyData = useSelector(selectUserCompanyData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const theme = useSelector(selectTheme);
   const [colorCardData, setColorCardData] = useState(null);
   const [companyData, setCompanyData] = useState([]);
   const [isBioEditable, setIsBioEditable] = useState(false);
   const [companyDescription, setCompanyDescription] = useState(null);
-
   // States for popup
   const [showPopup, setShowPopup] = useState({ success: false, error: false });
   const [isSaveAll, setIsSaveAll] = useState(false);
@@ -57,6 +68,8 @@ export default function EditCompanyProfilePage() {
             fund_ask: data.colorCard.fund_ask,
             valuation: data.colorCard.valuation,
             raised_funds: data.colorCard.raised_funds,
+            last_year_revenue: data.colorCard?.last_year_revenue,
+            target: data.colorCard?.target,
           });
         })
         .catch((error) => {
@@ -72,6 +85,8 @@ export default function EditCompanyProfilePage() {
         fund_ask: userCompanyData.colorCard?.fund_ask,
         valuation: userCompanyData.colorCard?.valuation,
         raised_funds: userCompanyData.colorCard?.raised_funds,
+        last_year_revenue: userCompanyData.colorCard?.last_year_revenue,
+        target: userCompanyData.colorCard?.target,
       });
     }
     document.title = "Edit Company Profile | The Capital Hub";
@@ -173,7 +188,7 @@ export default function EditCompanyProfilePage() {
           </span>
           {/* <SmallProfileCard text={"Company Profile"} /> */}
 
-          <div className="company_profile_form rounded-4 py-5 px-3 px-md-5">
+          <div className="company_profile_form rounded-4 py-3 px-3 px-md-5">
             <CompanyProfileForm
               companyData={companyData}
               isSaveAll={isSaveAll}
@@ -194,7 +209,7 @@ export default function EditCompanyProfilePage() {
           />
 
           {/* Core Team */}
-          <div className="core__team  rounded-4 py-5 px-3 px-md-5">
+          <div className="core__team  rounded-4 py-3 px-3 px-md-5">
             <CoreTeam
               companyData={companyData}
               setCompanyData={setCompanyData}
@@ -208,89 +223,151 @@ export default function EditCompanyProfilePage() {
           </div> */}
 
           {/* Color Cards */}
-          <div>
-          <h6 className="div__heading" style={{marginLeft:"1rem"}}>{`Previous Funding Round`}</h6>
-          <div className="card_holder d-flex justify-content-between flex-wrap">
-
-            <ColorCard
-              color="white"
-              background="#DAC191"
-              text="Total Investment"
-              image={CoinIcon}
-              amount={colorCardData?.total_investment || ""}
-              onAmountChange={(amount) =>
-                handleAmountChange("total_investment", amount)
-              }
-              field={"total_investment"}
-              colorCardData={colorCardData}
-            />
-            <ColorCard
-              color="white"
-              background="#DCDCDC"
-              text="No.of Investers"
-              image={CoinIcon}
-              amount={colorCardData?.no_of_investers || ""}
-              onAmountChange={(amount) =>
-                handleAmountChange("no_of_investers", amount)
-              }
-              field={"no_of_investers"}
-              colorCardData={colorCardData}
-              noRupee={true}
-            />
-            <ColorCard
-            color="white"
-            background="#BB98FF"
-            text="Valuation"
-            image={CoinIcon}
-            amount={colorCardData?.last_round_investment || ""}
-            onAmountChange={(amount) =>
-              handleAmountChange("last_round_investment", amount)
-            }
-            field={"last_round_investment"}
-            colorCardData={colorCardData}
-          />
+          <div className="col-12 mt-2">
+            <h6
+              className="typography div__heading"
+              style={{
+                marginLeft: "1rem",
+                textDecoration: "underline",
+                textDecorationColor: "rgba(253,89,1,1)",
+                textDecorationThickness: "2px",
+                textUnderlineOffset: "0.25em",
+                fontSize: "13px",
+                color: theme === "dark" ? "#fff" : "black",
+              }}
+            >{`Previous Funding Round`}</h6>
+            <div className="card_holder d-flex flex-wrap">
+              <ColorCard
+                color="white"
+                background="#DAC191"
+                text="Total Investment"
+                image={About2}
+                amount={colorCardData?.total_investment || ""}
+                onAmountChange={(amount) =>
+                  handleAmountChange("total_investment", amount)
+                }
+                field={"total_investment"}
+                colorCardData={colorCardData}
+              />
+              <ColorCard
+                color="white"
+                background="#DCDCDC"
+                text="No.of Investers"
+                image={About3}
+                amount={colorCardData?.no_of_investers || ""}
+                onAmountChange={(amount) =>
+                  handleAmountChange("no_of_investers", amount)
+                }
+                field={"no_of_investers"}
+                colorCardData={colorCardData}
+                noRupee={true}
+              />
+              <ColorCard
+                color="white"
+                background="#BB98FF"
+                text="Valuation"
+                image={CoinIcon}
+                amount={colorCardData?.last_round_investment || ""}
+                onAmountChange={(amount) =>
+                  handleAmountChange("last_round_investment", amount)
+                }
+                field={"last_round_investment"}
+                colorCardData={colorCardData}
+              />
             </div>
           </div>
           <div>
-          <h6 className="div__heading" style={{marginLeft:"1rem"}}>{`Current Funding Round`}</h6>
-          <div className="card_holder d-flex justify-content-between flex-wrap">
-          <ColorCard
-            color="white"
-            background="#2B2B2B"
-            text="Fund ask"
-            image={CoinIcon}
-            amount={colorCardData?.fund_ask || ""}
-            onAmountChange={(amount) =>
-              handleAmountChange("fund_ask", amount)
-            }
-            field={"fund_ask"}
-            colorCardData={colorCardData}
-          />
-          <ColorCard
-            color="white"
-            background="#FF7373"
-            text="Valuation"
-            image={CoinIcon}
-            amount={colorCardData?.valuation || ""}
-            onAmountChange={(amount) =>
-              handleAmountChange("valuation", amount)
-            }
-            field={"valuation"}
-            colorCardData={colorCardData}
-          />
-          <ColorCard
-            color="white"
-            background="#9198DA"
-            text="Funds raised"
-            image={CoinIcon}
-            amount={colorCardData?.raised_funds || ""}
-            onAmountChange={(amount) =>
-              handleAmountChange("raised_funds", amount)
-            }
-            field={"raised_funds"}
-            colorCardData={colorCardData}
-          />
-        </div>
+            <h6
+              className="typography div__heading"
+              style={{
+                marginLeft: "1rem",
+                textDecoration: "underline",
+                textDecorationColor: "rgba(253,89,1,1)",
+                textDecorationThickness: "2px",
+                textUnderlineOffset: "0.25em",
+                fontSize: "13px",
+                color: theme === "dark" ? "#fff" : "black",
+              }}
+            >{`Current Funding Round`}</h6>
+            <div className="card_holder d-flex flex-wrap">
+              <ColorCard
+                color="white"
+                background="#2B2B2B"
+                text="Fund ask"
+                image={revenue2}
+                amount={colorCardData?.fund_ask || ""}
+                onAmountChange={(amount) =>
+                  handleAmountChange("fund_ask", amount)
+                }
+                field={"fund_ask"}
+                colorCardData={colorCardData}
+              />
+              <ColorCard
+                color="white"
+                background="#FF7373"
+                text="Valuation"
+                image={revenue}
+                amount={colorCardData?.valuation || ""}
+                onAmountChange={(amount) =>
+                  handleAmountChange("valuation", amount)
+                }
+                field={"valuation"}
+                colorCardData={colorCardData}
+              />
+              <ColorCard
+                color="white"
+                background="#9198DA"
+                text="Funds raised"
+                image={revenue3}
+                amount={colorCardData?.raised_funds || ""}
+                onAmountChange={(amount) =>
+                  handleAmountChange("raised_funds", amount)
+                }
+                field={"raised_funds"}
+                colorCardData={colorCardData}
+              />
+            </div>
+          </div>
+          <div className="col-12 mt-2">
+            <h6
+              className="typography div__heading"
+              style={{
+                marginLeft: "1rem",
+                textDecoration: "underline",
+                textDecorationColor: "rgba(253,89,1,1)",
+                textDecorationThickness: "2px",
+                textUnderlineOffset: "0.25em",
+                fontSize: "13px",
+                color: theme === "dark" ? "#fff" : "black",
+              }}
+            >{`Revenue Statistics`}</h6>
+            <div className="card_holder d-flex flex-wrap">
+              <ColorCard
+                color="white"
+                background="#DAC191"
+                text="Last year revenue(FY 23)"
+                image={Revenue1}
+                amount={colorCardData?.last_year_revenue || "NA"}
+                onAmountChange={(amount) =>
+                  handleAmountChange("last_year_revenue", amount)
+                }
+                field={"last_year_revenue"}
+                colorCardData={colorCardData}
+              />
+              <ColorCard
+                color="white"
+                background="#DCDCDC"
+                text="Target (FY 24)"
+                image={Revenue2}
+                amount={colorCardData?.target || "NA"}
+                onAmountChange={(amount) =>
+                  handleAmountChange("target", amount)
+                }
+                field={"target"}
+                colorCardData={colorCardData}
+                noRupee={true}
+              />
+            </div>
           </div>
           <button
             className={`align-self-end btn-base startup`}

@@ -9,6 +9,9 @@ import SuspenseLoader from "../components/SuspenseLoader/SuspenseLoader";
 const InvestorHome = lazy(() =>
   import("../components/Investor/InvestorHome/InvestorHome")
 );
+const SubscriptionSuccess = lazy(() =>
+  import("../components/SubscriptionSuccess/SubscriptionSuccess")
+);
 const OtherUserProfile = lazy(() =>
   import("../pages/StartUp/OtherUserProfile/OtherUserProfile")
 );
@@ -122,12 +125,13 @@ const CloseAccount = lazy(() =>
     "../pages/StartUp/UserSettings/SettingsPages/CloseAccount/CloseAccount"
   )
 );
-
 const FundingInfo = lazy(() => import("../pages/StartUp/Funding/FundingInfo"));
 const StartupQuiz = lazy(() =>
   import("../pages/StartUp/StartupQuiz/StartupQuiz")
 );
-
+const MeetingToken = lazy(() => {
+  import("../pages/InvestorOneLink/InvestorOneLinkAppointment/MeetingToken");
+});
 function StartUpRoutes() {
   // Light and dark Theme
   // const theme = useSelector(selectTheme);
@@ -169,6 +173,14 @@ function StartUpRoutes() {
       />
       <Route
         path="/home"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <Feed />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/post_detail/:postId"
         element={
           <Suspense fallback={<SuspenseLoader />}>
             <Feed />
@@ -464,6 +476,22 @@ function StartUpRoutes() {
           element={
             <Suspense fallback={<SuspenseLoader />}>
               <CloseAccount />
+            </Suspense>
+          }
+        />
+        <Route
+          path="meeting_token"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <MeetingToken />
+            </Suspense>
+          }
+        />
+        <Route
+          path="payment/success"
+          element={
+            <Suspense fallback={<SuspenseLoader />}>
+              <SubscriptionSuccess />
             </Suspense>
           }
         />

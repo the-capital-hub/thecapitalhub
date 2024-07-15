@@ -62,12 +62,12 @@ export default function EditInvestorCompanyProfilePage() {
           setCompanyData(data);
           setCompanyDescription(data.description);
           setColorCardData({
-            averageInvestment: data.colorCard.averageInvestment,
-            total_investment: data.colorCard.total_investment,
-            no_of_investments: data.colorCard.no_of_investments,
-            minimumTicketsSize: data.colorCard.minimumTicketsSize,
-            maximumTicketsSize: data.colorCard.maximumTicketsSize,
-            seedRound: data.colorCard.seedRound,
+            averageInvestment: data.colorCard?.averageInvestment,
+            total_investment: data.colorCard?.total_investment,
+            no_of_investments: data.colorCard?.no_of_investments,
+            minimumTicketsSize: data.colorCard?.minimumTicketsSize,
+            maximumTicketsSize: data.colorCard?.maximumTicketsSize,
+            seedRound: data.colorCard?.seedRound,
           });
         })
         .catch((error) => {
@@ -77,20 +77,18 @@ export default function EditInvestorCompanyProfilePage() {
       setCompanyData(userCompanyData);
       setCompanyDescription(userCompanyData.description);
       setColorCardData({
-        averageInvestment: userCompanyData.colorCard.averageInvestment,
-        total_investment: userCompanyData.colorCard.total_investment,
-        no_of_investments: userCompanyData.colorCard.no_of_investments,
-        minimumTicketsSize: userCompanyData.colorCard.minimumTicketsSize,
-        maximumTicketsSize: userCompanyData.colorCard.maximumTicketsSize,
-        seedRound: userCompanyData.colorCard.seedRound,
+        averageInvestment: userCompanyData.colorCard?.averageInvestment,
+        total_investment: userCompanyData.colorCard?.total_investment,
+        no_of_investments: userCompanyData.colorCard?.no_of_investments,
+        minimumTicketsSize: userCompanyData.colorCard?.minimumTicketsSize,
+        maximumTicketsSize: userCompanyData.colorCard?.maximumTicketsSize,
+        seedRound: userCompanyData.colorCard?.seedRound,
       });
     }
   }, [isSaveAll, userInvestor, userCompanyData]);
 
   // handleAmountChange
   const handleAmountChange = (currentfield, updatedAmount) => {
-    console.log(field);
-    console.log(currentfield);
     setField(currentfield);
     setColorCardData((prevData) => ({
       ...prevData,

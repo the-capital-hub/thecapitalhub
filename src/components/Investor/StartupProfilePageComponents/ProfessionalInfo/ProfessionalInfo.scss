@@ -25,12 +25,14 @@
 
   .edit_btn {
     button {
-      border-radius: 131px;
-      border: 1px solid #c6c6c6;
+      //border-radius: 131px;
+      //border: 1px solid #c6c6c6;
+      border: none;
+      background-color: transparent !important;
       width: fit-content;
       height: 35px;
       flex-shrink: 0;
-      color: var(--d-l-grey);
+      color: var(--startup);
       font-size: 18px;
       font-family: "Poppins";
       cursor: pointer;

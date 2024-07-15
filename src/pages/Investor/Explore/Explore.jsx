@@ -19,38 +19,68 @@ import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/i
 import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
 
 const sectorOptions = [
-  "FMCG",
-  "Restaurants",
+  "Sector Agnostic",
+  "B2B",
+  "B2C",
+  "AI/ML",
+  "API",
+  "AR/VR",
+  "Analytics",
+  "Automation",
+  "BioTech",
+  "Cloud",
+  "Consumer Tech",
+  "Creator Economy",
+  "Crypto/Blockchain",
+  "D2C",
+  "DeepTech",
+  "Developer Tools",
+  "E-Commerce",
   "Education",
-  "Tourism",
-  "Automobile",
-  "Textile",
-  "Chemicals",
+  "Climate Tech",
+  "Fintech",
+  "Gaming",
+  "Healthtech",
+  "IoT (Internet of Things)",
+  "Legaltech",
+  "Logistics and Supply Chain",
+  "Manufacturing",
+  "Media and Entertainment",
+  "Mobility and Transportation",
+  "PropTech (Property Technology)",
+  "Robotics",
+  "Saas (Software as a Service)",
+  "SpaceTech",
+  "SportsTech",
   "Telecommunications",
-  "Oil and Gas",
-  "Renewable Energy",
-  "Investment Banking and Venture Capital",
-  "NBFC",
-  "Biotechnology",
-  "Software Development Services",
-  "Computer and Information Technology",
-  "Aerospace",
-  "Sales and Marketing",
+  "Travel and Tourism",
+  "Wearables",
+  "Insurtech",
+  "Agtech (Agriculture Technology)",
+  "Clean Energy / Renewable Energy",
+  "HRtech (Human Resources Technology)",
+  "B2B Marketplace",
+  "Cybersecurity",
+  "E-sports",
+  "MarTech (Marketing Technology)",
+  "MedTech (Medical Technology)",
+  "Retail Tech",
+  "others",
 ];
 
 const genderOptions = ["Male", "Female"];
 
 const sizeOptions = ["10+", "100+", "1000+"];
 
-const ageOptions = ["0-2", "2-3", "4-5", "5-10", "10+"];
+const ageOptions = ["Less then a year", "1-3 years", "3-5 years", "More thn 5 years"];
 
 const stageOptions = [
-  "Pre-seed",
+  "Bootstrap",
+  "Incubated",
+  "Angel invested",
+  "Pre seed",
   "Seed",
-  "Series A",
-  "Series B",
-  "Series C",
-  "Series D and Beyond",
+  "Series A and above",
 ];
 
 const investmentStageOptions = [
@@ -297,13 +327,13 @@ function Explore() {
                     label="Gender"
                     name="gender"
                   />
-                  <FilterBySelect
+                  {/*<FilterBySelect
                     value={filters?.sectorPreference}
                     onChange={handleOnChange}
                     options={filterOptions?.sectors || sectorOptions}
                     label="Sector Preference"
                     name="sectorPreference"
-                  />
+                  />*/}
                   <FilterBySelect
                     value={filters?.investmentSize}
                     onChange={handleOnChange}
@@ -403,7 +433,7 @@ function Explore() {
                     label="Gender"
                     name="gender"
                   />
-                  
+
                   <FilterBySelect
                     value={filters?.yearsOfExperience}
                     onChange={handleOnChange}
@@ -414,13 +444,13 @@ function Explore() {
                     label="Years of Experience"
                     name="yearsOfExperience"
                   />
-                  <FilterBySelect
+                  {/*<FilterBySelect
                     value={filters?.education}
                     onChange={handleOnChange}
                     options={filterOptions?.education || educationOptions}
                     label="Education"
                     name="education"
-                  />
+                  />*/}
                   <FilterBySelect
                     value={filters?.diversityMetrics}
                     onChange={handleOnChange}

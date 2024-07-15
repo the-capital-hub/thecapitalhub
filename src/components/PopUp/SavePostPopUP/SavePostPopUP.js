@@ -3,11 +3,14 @@ import "./SavePostPopUP.scss";
 import { getSavedPostCollections, savePostByUserIdAPI, updateUserById, addNotificationAPI } from "../../../Service/user";
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess } from '../../../Store/features/user/userSlice';
-import AchievementToast from '../../Toasts/AchievementToast/AchievementToast';
-import { achievementTypes } from '../../Toasts/AchievementToast/types';
+// import AchievementToast from '../../Toasts/AchievementToast/AchievementToast';
+// import { achievementTypes } from '../../Toasts/AchievementToast/types';
 import toast from 'react-hot-toast';
+import { selectTheme } from "../../../Store/features/design/designSlice";
+
 
 function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false }) {
+  const theme = useSelector(selectTheme);
   const [selectedOption, setSelectedOption] = useState("");
   const [collectionOptions, setCollectionOptions] = useState([]);
   const [inputValue, setInputValue] = useState('');
@@ -58,9 +61,9 @@ function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false })
               .then((data) => console.log("Added"))
               .catch((error) => console.error(error.message));
 
-            toast.custom((t) => (
-              <AchievementToast type={achievementTypes.seeYouLaterAlligator} />
-            ));
+            // toast.custom((t) => (
+            //   <AchievementToast type={achievementTypes.seeYouLaterAlligator} />
+            // ));
           })
           .catch((error) => {
             console.error("Error updating user:", error);
@@ -78,7 +81,7 @@ function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false })
         <div className="popup-content">
           <div className='selection_input d-flex flex-column align-items-center gap-3'   >
             <h4>
-              Select the playlist in which to save the post.
+              Select the collection in which to save the post.
             </h4>
             <select className='collection_selecter' value={selectedOption} onChange={handleOptionChange}>
               <option value="">Select a collection</option>
@@ -88,7 +91,7 @@ function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false })
                   <hr />
                 </option>
               ))}
-              <option value="Other">{collectionOptions.length === 0 ? "Create New" : "Other"}</option>
+              <option value="Other">{collectionOptions.length === 0 ? "Other" : "Create New"}</option>
             </select>
             {selectedOption === "Other" && (
               <input
@@ -103,7 +106,8 @@ function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false })
             </button>
             {postSaveError && <h6>Post is already in the collection</h6>}
           </div>
-          <button className="close-button" onClick={onClose}>
+          {/* //add color here */}
+          <button className="close-button" style={{color:theme==="dark"?"#000":"#fff"}}>  
             X
           </button>
         </div>

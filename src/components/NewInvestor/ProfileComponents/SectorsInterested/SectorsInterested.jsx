@@ -11,7 +11,7 @@ import AddEditModal from "../AddEditModal";
 import "./SectorsInterested.scss";
 import {
   selectUserInvestor,
-  selectUserSectorInterested,
+  selectUserSectorInterested
 } from "../../../../Store/features/user/userSlice";
 import { getInvestorById } from "../../../../Service/user";
 
@@ -40,16 +40,16 @@ export default function SectorsInterested() {
       <div className="sector_interested border shadow-sm">
         <div className="header border-bottom p-4">
           <h2 className="green_underline typography">Sectors Interested</h2>
-          <div className="">
-            {/* {investor?.founderId === loggedInUser._id && ( */}
+          {/* <div className="">
+            {/* {investor?.founderId === loggedInUser._id && ( 
             <ModalBsLauncher
               id="sectorsModal"
               className={"green_button px-2 px-sm-3 "}
             >
               Add New
             </ModalBsLauncher>
-            {/* )} */}
-          </div>
+            )} 
+          </div>*/}
         </div>
         {/* Loop cards from here onwards */}
         <div className="interested_cards px-3 py-5 ">

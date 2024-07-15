@@ -6,23 +6,37 @@ import {
   selectUserInvestmentPhilosophy,
   selectUserSectorPreferences,
 } from "../../../../../../Store/features/user/userSlice";
+import { Accordion, AccordionItem as Item } from "@szhsin/react-accordion";
 import { useDispatch, useSelector } from "react-redux";
 import { CiEdit, CiSaveUp2 } from "react-icons/ci";
 // import { postInvestorData } from "../../../../../../Service/user";
 import "./InvestmentPhilosophyInfo.scss";
 import InfoField from "./InfoField/InfoField";
-import SectorPreferences from "./SectorPreferences/SectorPreferences";
 import { updateUserAPI } from "../../../../../../Service/user";
 import SpinnerBS from "../../../../../Shared/Spinner/SpinnerBS";
 import { PhilosophyQuestions } from "../../../../../../constants/Investor/ProfilePage";
 import toast from "react-hot-toast";
+import { IoIosArrowDown } from "react-icons/io";
+import "./investment.scss"
+
+const AccordionItem = ({ header, ...rest }) => (
+  <Item
+    {...rest}
+    header={
+      <>
+        {header}
+        <IoIosArrowDown className="chevron-down" />
+      </>
+    }
+  />
+);
 
 export default function InvestmentPhilosophyInfo() {
   const loggedInUserId = useSelector(selectLoggedInUserId);
   const companyFounderId = useSelector(selectCompanyFounderId);
   const userSectorPreferences = useSelector(selectUserSectorPreferences);
   const userInvestmentPhilosophy = useSelector(selectUserInvestmentPhilosophy);
-
+  const [openItems, setOpenItems] = useState([]);
   const dispatch = useDispatch();
 
   // Local states
@@ -52,7 +66,7 @@ export default function InvestmentPhilosophyInfo() {
     } = e.target;
 
     let updatedData = {
-      investmentPhilosophy: {
+      philosophy: {
         importanceOfManagament: importanceOfManagament?.value,
         roleAsAInvestor: roleAsAInvestor?.value,
         founderAlmaMaterMatters: founderAlmaMaterMatters?.value,
@@ -72,7 +86,7 @@ export default function InvestmentPhilosophyInfo() {
       sectorPreferences: selectedSectors,
     };
 
-    console.log("sending to server", updatedData);
+    //console.log("sending to server", updatedData);
 
     try {
       const { data } = await updateUserAPI(updatedData);
@@ -88,6 +102,13 @@ export default function InvestmentPhilosophyInfo() {
     }
   };
 
+  const handleAccordionChange = (key) => {
+    setOpenItems((prevOpenItems) =>
+      prevOpenItems.includes(key)
+        ? prevOpenItems.filter((item) => item !== key)
+        : [...prevOpenItems, key]
+    );
+  };
   return (
     <>
       <form
@@ -103,15 +124,17 @@ export default function InvestmentPhilosophyInfo() {
               className="btn edit_button"
               onClick={() => setIsEditing(!isEditing)}
               type="button"
+              style={{ border: "none" }}
             >
-              {isEditing ? "Cancel" : "Edit"}
-              <CiEdit />
+              {/*{isEditing ? "Cancel" : "Edit"}*/}
+              <CiEdit color="#d3f36b" />
             </button>
             {isEditing && (
               <button
                 className="btn edit_button"
                 //   onClick={() => submitInvestmentPhilosophyChange()}
                 type="submit"
+                style={{ color: "#d3f36b" }}
               >
                 {loading ? (
                   <SpinnerBS
@@ -131,31 +154,40 @@ export default function InvestmentPhilosophyInfo() {
         {/* Info */}
         <div className="philosophy_info d-flex flex-column gap-4 w-100 px-4 py-2">
           {/* Select field */}
-          <fieldset className="">
+          {/*<fieldset className="">
             <legend>What are your Industries of preference?</legend>
             <SectorPreferences
               isEditing={isEditing}
               setSelectedSectors={setSelectedSectors}
             />
-          </fieldset>
+          </fieldset>*}
 
           {/* Text fields */}
-          {Object.keys(PhilosophyQuestions).map((question) => {
-            return (
-              <InfoField
-                data={
-                  userInvestmentPhilosophy
-                    ? userInvestmentPhilosophy[question]
-                    : null
-                }
-                isEditing={isEditing}
-                legend={PhilosophyQuestions[question]}
-                name={question}
-                key={question}
-                loading={loading}
-              />
-            );
-          })}
+          <Accordion transition transitionTimeout={250}>
+            {Object.keys(PhilosophyQuestions).map((question) => {
+              return (
+                <AccordionItem
+                  header={PhilosophyQuestions[question]}
+                  key={question}
+                  onClick={() => handleAccordionChange(question)}
+                  initialEntered={openItems.includes(question)}
+                >
+                  <InfoField
+                    data={
+                      userInvestmentPhilosophy
+                        ? userInvestmentPhilosophy[question]
+                        : null
+                    }
+                    isEditing={isEditing}
+                    legend={PhilosophyQuestions[question]}
+                    name={question}
+                    key={question}
+                    loading={loading}
+                  />
+                </AccordionItem>
+              );
+            })}
+          </Accordion>
         </div>
       </form>
     </>

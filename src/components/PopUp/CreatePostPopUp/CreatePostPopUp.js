@@ -21,8 +21,8 @@ import { s3 } from "../../../Service/awsConfig";
 import { toggleCreatePostModal } from "../../../Store/features/design/designSlice";
 import toast from "react-hot-toast";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
-import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
-import { achievementTypes } from "../../Toasts/AchievementToast/types";
+// import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
+// import { achievementTypes } from "../../Toasts/AchievementToast/types";
 
 const CreatePostPopUp = ({
   setPopupOpen,
@@ -38,7 +38,7 @@ const CreatePostPopUp = ({
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [selectedDocument, setSelectedDocument] = useState(null);
   const [posting, setPosting] = useState(false);
-  const [postType,setPostType] = useState("public")
+  const [postType, setPostType] = useState("public");
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedImage, setCroppedImage] = useState(null);
@@ -215,9 +215,8 @@ const CreatePostPopUp = ({
       const res = await s3.upload(params).promise();
       postData.append("documentUrl", res.Location);
       postData.append("documentName", selectedDocument.name);
-    
     }
-    postData.append("postType",postType)
+    postData.append("postType", postType);
     postUserPost(postData)
       .then((response) => {
         appendDataToAllPosts(response.data);
@@ -246,9 +245,9 @@ const CreatePostPopUp = ({
                 .then((data) => console.log("Added"))
                 .catch((error) => console.error(error.message));
 
-              toast.custom((t) => (
-                <AchievementToast type={achievementTypes.voyager} />
-              ));
+              // toast.custom((t) => (
+              //   <AchievementToast type={achievementTypes.voyager} />
+              // ));
             })
             .catch((error) => {
               console.error("Error updating user:", error);
@@ -304,9 +303,39 @@ const CreatePostPopUp = ({
                     <h2>
                       {loggedInUser?.firstName} {loggedInUser.lastName}
                     </h2>
-                    <div style={{display:"flex",width:"110px",justifyContent:"space-between"}}>
-                    <h6 className="" style={{backgroundColor:postType==="public"&&"#fd5901",color:postType==="public"?"#fff":"grey",padding:"1px 2px",borderRadius:"2px",cursor:"pointer"}} onClick={()=>setPostType("public")}>Public</h6>
-                    <h6 style={{backgroundColor:postType==="company"&&"rgb(211, 243, 107)",color:postType==="company"?"#000":"grey",padding:"1px 2px",borderRadius:"2px",cursor:"pointer"}} onClick={()=>setPostType("company")}>Company</h6>
+                    <div
+                      style={{
+                        display: "flex",
+                        width: "110px",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <h6
+                        className=""
+                        style={{
+                          backgroundColor: postType === "public" && "#fd5901",
+                          color: postType === "public" ? "#fff" : "grey",
+                          padding: "1px 2px",
+                          borderRadius: "2px",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => setPostType("public")}
+                      >
+                        Public
+                      </h6>
+                      <h6
+                        style={{
+                          backgroundColor:
+                            postType === "company" && "rgb(211, 243, 107)",
+                          color: postType === "company" ? "#000" : "grey",
+                          padding: "1px 2px",
+                          borderRadius: "2px",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => setPostType("company")}
+                      >
+                        Company
+                      </h6>
                     </div>
                   </span>
                 </div>
@@ -445,9 +474,12 @@ const CreatePostPopUp = ({
                   >
                     {/* <img src={GallaryIcon} alt="Button 1" />
                      */}
-                    <CiImageOn size={25} style={{
-                      color: 'var(--d-l-grey)'
-                    }}/>
+                    <CiImageOn
+                      size={25}
+                      style={{
+                        color: "var(--d-l-grey)",
+                      }}
+                    />
                     <span class="tooltip-text top">images</span>
                   </button>
 
@@ -465,9 +497,12 @@ const CreatePostPopUp = ({
                     onClick={handleCameraButtonClick}
                   >
                     {/* <img src={IconVideo} alt="Button 2" /> */}
-                    <CiVideoOn size={25} style={{
-                      color: 'var(--d-l-grey)'
-                    }}/>
+                    <CiVideoOn
+                      size={25}
+                      style={{
+                        color: "var(--d-l-grey)",
+                      }}
+                    />
                     <span class="tooltip-text top1">video</span>
                   </button>
 
@@ -484,9 +519,13 @@ const CreatePostPopUp = ({
                     onClick={handleDocumentButtonClick}
                   >
                     {/* <img src={CameraIcon} alt="Button 2" /> */}
-                    <IconFile width="16px" height="16px" style={{
-                      color: 'var(--d-l-grey)'
-                    }}/>
+                    <IconFile
+                      width="16px"
+                      height="16px"
+                      style={{
+                        color: "var(--d-l-grey)",
+                      }}
+                    />
                     <span class="tooltip-text top2">doc</span>
                   </button>
 
@@ -504,11 +543,19 @@ const CreatePostPopUp = ({
                       <img src={SmileeIcon} alt="Button 3" />
                     </button> */}
 
-                  <button className="white_button hover-text" onClick={handleOneLinkClick}>
+                  <button
+                    className="white_button hover-text"
+                    onClick={handleOneLinkClick}
+                  >
                     {/* <img src={ThreeDotsIcon} alt="Button 4" /> */}
-                    <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} style={{
-                      color: 'var(--d-l-grey)'
-                    }}/>
+                    <BsLink45Deg
+                      height={"59px"}
+                      width={"59px"}
+                      size={"20px"}
+                      style={{
+                        color: "var(--d-l-grey)",
+                      }}
+                    />
                     <span class="tooltip-text top3">link</span>
                   </button>
                 </div>

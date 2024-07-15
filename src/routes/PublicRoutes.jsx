@@ -13,6 +13,9 @@ const Home = lazy(() => import("../components/Home/Home"));
 const AboutUs = lazy(() => import("../components/AboutUs/AboutUs"));
 const ContactUs = lazy(() => import("../components/ContactUs/ContactUs"));
 const Service = lazy(() => import("../components/Service/Service"));
+const LinkedInCallback = lazy(() =>
+  import("../components/Login/LinkedInCallback")
+);
 const Fundraising = lazy(() =>
   import("../components/Service/Fundraising/Fundraising")
 );
@@ -27,6 +30,9 @@ const FinancialsDocumentation = lazy(() =>
     "../components/Service/FinancialsDocumentation/FinancialsDocumentation"
   )
 );
+const TermsPolicy = lazy(() =>
+  import("../components/TermsAndConditions/Terms")
+);
 const StartupConsulting = lazy(() =>
   import("../components/Service/StartupConsulting/StartupConsulting")
 );
@@ -37,11 +43,16 @@ const OurInvestor = lazy(() => import("../components/OurInvestor/OurInvestor"));
 const TermOfService = lazy(() =>
   import("../components/TermOfService/TermOfService")
 );
+const CancellationRefundPolicy = lazy(() =>
+  import("../components/RefundPolicy/RefundPolicy")
+);
 const Privacy = lazy(() => import("../components/Privacy/Privacy"));
 const SecuritySafeGuard = lazy(() =>
   import("../components/SecuritySafeGuard/SecuritySafeGuard")
 );
-
+const StartUpLendingPage = lazy(() =>
+  import("../pages/StartUp/StartUpLendingPage/StartUpLendingPage")
+);
 const PortfolioPage = lazy(() =>
   import("../webDevelopment/pages/PortfolioPage/PortfolioPage")
 );
@@ -202,6 +213,26 @@ function PublicRoutes() {
         }
       />
       <Route
+        path="/refund-policy"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <Navbar />
+            <CancellationRefundPolicy />
+            <Footer />
+          </Suspense>
+        }
+      />
+      <Route
+        path="/terms-and-conditions"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <Navbar />
+            <TermsPolicy />
+            <Footer />
+          </Suspense>
+        }
+      />
+      <Route
         path="/security-safeguard"
         element={
           <Suspense fallback={<SuspenseLoader />}>
@@ -225,7 +256,17 @@ function PublicRoutes() {
 
       <Route path="/signup" element={<Register />} />
       <Route path="/login" element={<Login />} />
-
+      <Route path="/linkedin" element={<LinkedInCallback />} />
+      <Route
+        path="/start-up"
+        element={
+          <Suspense fallback={<SuspenseLoader />}>
+            <Navbar />
+            <StartUpLendingPage />
+            <Footer />
+          </Suspense>
+        }
+      />
       <Route
         path="/author-profile/:username/:userId"
         element={

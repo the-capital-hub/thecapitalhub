@@ -24,8 +24,8 @@ import { MdDarkMode } from "react-icons/md";
 import { GoSun } from "react-icons/go";
 import { clearAllChatsData } from "../../../Store/features/chat/chatSlice";
 import { fetchAllChats } from "../../../Store/features/chat/chatThunks";
-import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
-import { achievementTypes } from "../../Toasts/AchievementToast/types";
+// import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
+// import { achievementTypes } from "../../Toasts/AchievementToast/types";
 
 const InvestorManageAccount = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
@@ -56,9 +56,9 @@ const InvestorManageAccount = () => {
             .then((data) => console.log("Added"))
             .catch((error) => console.error(error.message));
 
-          toast.custom((t) => (
-            <AchievementToast type={achievementTypes.fallIntoTheDarkSide} />
-          ));
+          // toast.custom((t) => (
+          //   <AchievementToast type={achievementTypes.fallIntoTheDarkSide} />
+          // ));
         })
         .catch((error) => {
           console.error("Error updating user:", error);
@@ -291,7 +291,7 @@ const InvestorManageAccount = () => {
                     </Link>
                     <button
                       className="btn btn-delete"
-                      onClick={setShowLogoutPopup}
+                      onClick={() => setShowLogoutPopup(true)}
                     >
                       Log out
                     </button>
@@ -326,64 +326,61 @@ const InvestorManageAccount = () => {
                   </div>
                   <hr />
                   <section className="existing_accounts">
-                    {otherAccounts?.map((account) => {
-                      const fullmname =
-                        account.user.firstName + " " + account.user.lastName;
+                    {otherAccounts?.map((account, index) => {
+                      const fullName = account?.user
+                        ? account.user.firstName + " " + account.user.lastName
+                        : "Unknown User";
 
                       return (
-                        <>
-                          <div className="small_card">
-                            <div className="left_section">
-                              <div className="d-flex align-items-center">
-                                <label className="checkbox_container me-2">
-                                  <input
-                                    type="checkbox"
-                                    checked={
-                                      account.user._id === selectedAccount._id
-                                    }
-                                    onClick={() =>
-                                      handleSelectedAccount(account)
-                                    }
-                                  />
-                                  <span className="checkmark"></span>
-                                </label>
-                                <div className="profile_image">
-                                  <img
-                                    src={account.user.profilePicture}
-                                    alt="img"
-                                  />
-                                </div>
-                                <div className="name_email">
-                                  <h5 className="m-0">{fullmname}</h5>
-                                  <span className="fs-sm fw-semibold ">
-                                    {window.innerWidth <= 600
-                                      ? account.user.email.slice(0, 21) ===
-                                        account.user.email
-                                        ? account.user.email
-                                        : account.user.email.slice(0, 21) +
-                                        "..."
-                                      : account.user.email.slice(0, 23) ===
-                                        account.user.email
-                                        ? account.user.email
-                                        : account.user.email.slice(0, 23) + "..."}
-                                  </span>
-                                </div>
+                        <div className="small_card" key={index}>
+                          <div className="left_section">
+                            <div className="d-flex align-items-center">
+                              <label className="checkbox_container me-2">
+                                <input
+                                  type="checkbox"
+                                  checked={
+                                    account.user?._id === selectedAccount?._id
+                                  }
+                                  onChange={() => handleSelectedAccount(account)}
+                                />
+                                <span className="checkmark"></span>
+                              </label>
+                              <div className="profile_image">
+                                <img
+                                  src={account.user?.profilePicture || ""}
+                                  alt="img"
+                                />
+                              </div>
+                              <div className="name_email">
+                                <h5 className="m-0">{fullName}</h5>
+                                <span className="fs-sm fw-semibold ">
+                                  {window.innerWidth <= 600
+                                    ? account.user?.email?.slice(0, 21) ===
+                                      account.user?.email
+                                      ? account.user?.email
+                                      : account.user?.email?.slice(0, 21) + "..."
+                                    : account.user?.email?.slice(0, 23) ===
+                                      account.user?.email
+                                      ? account.user?.email
+                                      : account.user?.email?.slice(0, 23) +
+                                      "..."}
+                                </span>
                               </div>
                             </div>
-                            <div className="right_section d-flex flex-column ">
-                              <button
-                                className="img-btn pt-md-2"
-                                onClick={() => handleRemoveAccount(account)}
-                              >
-                                <img
-                                  src={deleteIcon}
-                                  alt="delete icon"
-                                  className="deleteIcon"
-                                />
-                              </button>
-                            </div>
                           </div>
-                        </>
+                          <div className="right_section d-flex flex-column ">
+                            <button
+                              className="img-btn pt-md-2"
+                              onClick={() => handleRemoveAccount(account)}
+                            >
+                              <img
+                                src={deleteIcon}
+                                alt="delete icon"
+                                className="deleteIcon"
+                              />
+                            </button>
+                          </div>
+                        </div>
                       );
                     })}
                     <div className="footer d-flex gap-3">

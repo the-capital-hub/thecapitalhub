@@ -28,7 +28,6 @@ export default function EditChatSettings({ theme = "startup" }) {
     };
     updateCommunity(communityProfile?.community._id, updatedData)
       .then(({ data }) => {
-        console.log(data);
         const updatedCommunityProfile = {
           ...communityProfile,
           community: {
@@ -37,8 +36,6 @@ export default function EditChatSettings({ theme = "startup" }) {
           },
         };
         dispatch(setCommunityProfile(updatedCommunityProfile));
-
-        console.log(communityProfile);
       })
       .catch((error) => {
         console.log(error);

@@ -1,5 +1,6 @@
 import "./investorNavbar.scss";
-import Logo from "../../../Images/investorIcon/new-logo.png";
+import DarkLogo from "../../../Images/investorIcon/new-logo.png";
+import WhiteLogo from "../../../Images/investorIcon/logo-white.png";
 import { FiSearch } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +16,7 @@ import OnboardingSwitch from "./OnboardingSwitch/OnboardingSwitch";
 import {
   selectIsMobileView,
   selectNotificationtModal,
+  selectTheme
 } from "../../../Store/features/design/designSlice";
 import {
   selectLoggedInUserId,
@@ -28,6 +30,7 @@ import { MdMenu, MdMenuOpen } from "react-icons/md";
 
 // Startup navbar
 const InvestorNavbar = (props) => {
+  const theme = useSelector(selectTheme);
   const loggedInUserId = useSelector(selectLoggedInUserId);
   const userProfilePicture = useSelector(selectUserProfilePicture);
   const isMobileView = useSelector(selectIsMobileView);
@@ -123,7 +126,7 @@ const InvestorNavbar = (props) => {
             <div className="row bar_logo_container ">
               <div className="logo_container">
                 <img
-                  src={Logo}
+                  src={theme === "dark" ? WhiteLogo : DarkLogo}
                   onClick={() => navigate("/home")}
                   alt="the capital hub logo"
                 />
@@ -189,9 +192,9 @@ const InvestorNavbar = (props) => {
                               No Suggestions.
                             </h6>
                           )}
-                        {!!searchSuggestions?.users?.length && (
+                        {/*{!!searchSuggestions?.users?.length && (
                           <span className="">Users</span>
-                        )}
+                        )}*/}
                         {searchSuggestions?.users
                           ?.slice(0, 5)
                           .map(({ firstName, lastName, oneLinkId, _id }) => (
@@ -216,9 +219,9 @@ const InvestorNavbar = (props) => {
                             </button>
                           </span>
                         )}
-                        {!!searchSuggestions?.company?.length && (
+                        {/*{!!searchSuggestions?.company?.length && (
                           <span className="mt-2">Companies</span>
-                        )}
+                        )}*/}
                         {searchSuggestions?.company
                           ?.slice(0, 5)
                           .map(({ company, founderId, _id, isInvestor }) => (

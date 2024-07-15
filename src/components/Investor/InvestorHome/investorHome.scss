@@ -35,7 +35,7 @@
 
     .small_typo {
       color: var(--d-l-grey);
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 500;
       font-family: Poppins;
     }
@@ -52,7 +52,8 @@
     .box {
       // background-color: #fff;
       padding: 10px;
-      border-radius: var(--border-radius);
+      border-radius: 0.37rem;
+      //var(--border-radius);
       // background: #fff;
       background: var(--white-to-grey);
       box-shadow: 4px 4px 6px 0px rgba(0, 0, 0, 0.05);
@@ -110,15 +111,17 @@
 
     .edit_btn {
       button {
-        border-radius: 131px;
-        border: 1px solid var(--bs-border-color);
+        //border-radius: 131px;
+        //border: 1px solid var(--bs-border-color);
+        border: none;
         width: fit-content;
-        height: 35px;
+        //height: 35px;
         flex-shrink: 0;
-        color: var(--d-l-grey);
-        font-size: 18px;
+        color: var(--startup);
+        font-size: 22px;
         font-family: Poppins;
         cursor: pointer;
+        background-color: transparent !important;
       }
     }
 
@@ -160,21 +163,32 @@
       display: flex;
       justify-content: space-between;
       margin: 1rem;
+      h2{
+
+        &.active {
+          color: #fd5901;
+        }
+      }
     }
     .card_holder {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
+      align-items: flex-start;
       flex-wrap: wrap;
+      @media (max-width: 426px){
+        margin-top: 0.5rem;
+      }
     }
 
     .personal_information_header button {
-      border-radius: 131px;
-      border: 1px solid var(--bs-border-color);
+      //border-radius: 131px;
+      //border: 1px solid var(--bs-border-color);
+      background-color: transparent;
       width: fit-content;
-      height: 35px;
+      //height: 35px;
       flex-shrink: 0;
-      color: var(--d-l-grey);
-      font-size: 18px;
+      color: var(--startup);
+      font-size: 22px;
       font-family: Poppins;
       cursor: pointer;
     }

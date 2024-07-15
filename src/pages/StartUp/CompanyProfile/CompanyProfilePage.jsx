@@ -10,6 +10,7 @@ import {
   addStartUpToUser,
   updateUserAPI,
   addNotificationAPI,
+  getUserById,
 } from "../../../Service/user";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -17,7 +18,10 @@ import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidth
 import DefaultAvatar from "../../../Images/Chat/default-user-avatar.webp";
 import AfterSuccessPopUp from "../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
 import { useNavigate } from "react-router-dom";
-import { setPageTitle } from "../../../Store/features/design/designSlice";
+import {
+  selectTheme,
+  setPageTitle,
+} from "../../../Store/features/design/designSlice";
 import {
   selectLoggedInUserId,
   selectUserCompanyData,
@@ -30,33 +34,37 @@ import AchievementToast from "../../../components/Toasts/AchievementToast/Achiev
 
 export default function CompanyProfilePage() {
   const navigate = useNavigate();
-  const loggedInUserId = useSelector(selectLoggedInUserId);
-  const userCompanyData = useSelector(selectUserCompanyData);
+  const loggedInUser = useSelector((state) => state.user.loggedInUser);
+  //const userCompanyData = useSelector(selectUserCompanyData);
+  const [userData, setUserData] = useState({});
   const dispatch = useDispatch();
-
-  const [companyData, setCompanyData] = useState(userCompanyData);
+  const theme = useSelector(selectTheme);
+  const [companyData, setCompanyData] = useState({});
   const [loading, setLoading] = useState(false);
   const [companies, setCompanies] = useState([]);
   const [selectedCompanyId, setSelectedCompanyId] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
-    if (!userCompanyData) {
-      setLoading(true);
-      getStartupByFounderId(loggedInUserId)
-        .then(({ data }) => {
-          setCompanyData(data);
-          dispatch(setUserCompany(data));
-          setLoading(false);
-        })
-        .catch((error) => {
-          setLoading(false);
-          console.error("Error fetching startup data:", error.message);
-        });
-    }
+    //if (!userCompanyData) {
+    setLoading(true);
+    getStartupByFounderId(loggedInUser._id)
+      .then(({ data }) => {
+        setCompanyData(data);
+        dispatch(setUserCompany(data));
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.error("Error fetching startup data:", error.message);
+      });
+    getUserById("", loggedInUser._id).then(({ data }) => {
+      setUserData(data);
+    });
+    // }
     document.title = "Company Profile | The Capital Hub";
     dispatch(setPageTitle("Company"));
-  }, [dispatch, userCompanyData, loggedInUserId]);
+  }, []);
 
   const handleSearchInputChange = (e) => {
     const newValue = e.target.value;
@@ -64,7 +72,6 @@ export default function CompanyProfilePage() {
     searchStartUps(newValue)
       .then(({ data }) => {
         setCompanies(data);
-        console.log(data);
       })
       .catch(() => {
         setCompanies([]);
@@ -82,13 +89,13 @@ export default function CompanyProfilePage() {
   const handleAddStartup = async () => {
     try {
       const response = await addStartUpToUser(
-        loggedInUserId,
+        loggedInUser._id,
         selectedCompanyId
       );
       if (response.isFirst) {
         notify();
         const notificationBody = {
-          recipient: loggedInUserId,
+          recipient: loggedInUser._id,
           type: "achievementCompleted",
           achievementId: "6564687349186bca517cd0cd",
         };
@@ -98,7 +105,7 @@ export default function CompanyProfilePage() {
       }
       if (response.status === 200) {
         setShowSuccess(true);
-        getStartupByFounderId(loggedInUserId)
+        getStartupByFounderId(loggedInUser._id)
           .then(({ data }) => {
             setCompanyData(data);
             dispatch(setUserCompany(data));
@@ -113,15 +120,13 @@ export default function CompanyProfilePage() {
       console.log(error.message);
     }
   };
-
   const handleAddNew = async () => {
     try {
       const requestBody = {
-        userId: loggedInUserId,
+        userId: loggedInUser._id,
         startUp: null,
       };
-      const response = await updateUserAPI(requestBody);
-      console.log(response);
+      await updateUserAPI(requestBody);
       navigate("/company-profile/edit");
     } catch (error) {
       console.log(error);
@@ -138,142 +143,77 @@ export default function CompanyProfilePage() {
         <div className="main__content">
           <SmallProfileCard text={"Company Profile"} />
           <div className="edit-container">
-            {!loading && (
-              <>
-                {companyData?.length !== 0 ? (
-                  companyData?.founderId === loggedInUserId ? (
-                    <div className="edit_company_text rounded-4 p-4 shadow-sm">
-                      <Link
-                        to="/company-profile/edit"
-                        className="text-decoration-none  fs-5"
+            <div className="add_company_data rounded-4 p-4 mb-2">
+              {/* <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5"> */}
+              <div class="text-center">
+                <button className="btn-base startup " onClick={handleAddNew}>
+                  Add new company details
+                </button>
+              </div>
+              {/* </Link> */}
+              <div className="or-text-container">
+                <p
+                  className="text-decoration-none fs-5"
+                  style={{ color: theme === "dark" ? "#fff" : "#000" }}
+                >
+                  Or
+                </p>
+              </div>
+              <p
+                className="text-decoration-none fs-5"
+                style={{ color: theme === "dark" ? "#fff" : "#000" }}
+              >
+                Choose from an existing Company
+              </p>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Search company"
+                  className="search-company-input"
+                  onChange={handleSearchInputChange}
+                />
+                {companies.length !== 0 && (
+                  <div className="suggestion">
+                    {companies.map((company, index) => (
+                      <div
+                        className={`suggestion-item ${
+                          selectedCompanyId === company._id ? "active" : ""
+                        }`}
+                        key={index}
+                        onClick={() =>
+                          handleCompanySelection(company._id, company.company)
+                        }
                       >
-                        Edit company details
-                      </Link>
-                    </div>
-                  ) : (
-                    <div className="add_company_data rounded-4 p-4 ">
-                      {/* <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5"> */}
-                      <div class="text-center">
-                        <button
-                          className="btn-base startup "
-                          onClick={handleAddNew}
-                        >
-                          Add new company details
-                        </button>
-                      </div>
-                      {/* </Link> */}
-                      <div className="or-text-container">
-                        <p className="text-decoration-none text-dark fs-5">
-                          Or
-                        </p>
-                      </div>
-                      <p className="text-decoration-none text-dark fs-5">
-                        Choose from an existing Company
-                      </p>
-                      <div>
-                        <input
-                          type="text"
-                          placeholder="Search company"
-                          className="search-company-input"
-                          onChange={handleSearchInputChange}
+                        <img
+                          src={company.logo || DefaultAvatar}
+                          alt={`Company Logo ${index}`}
+                          className="suggestion-logo"
                         />
-                        {companies.length !== 0 && (
-                          <div className="suggestion">
-                            {companies.map((company, index) => (
-                              <div
-                                className={`suggestion-item ${
-                                  selectedCompanyId === company._id
-                                    ? "active"
-                                    : ""
-                                }`}
-                                key={index}
-                                onClick={() =>
-                                  handleCompanySelection(
-                                    company._id,
-                                    company.company
-                                  )
-                                }
-                              >
-                                <img
-                                  src={company.logo || DefaultAvatar}
-                                  alt={`Company Logo ${index}`}
-                                  className="suggestion-logo"
-                                />
-                                {company.company}
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                        <button
-                          className="btn-base startup"
-                          onClick={handleAddStartup}
-                        >
-                          Save
-                        </button>
+                        {company.company}
                       </div>
-                    </div>
-                  )
-                ) : (
-                  <div className="bg-white rounded-4 p-4">
-                    <Link
-                      to="/company-profile/edit"
-                      className="text-decoration-none text-dark fs-5"
-                    >
-                      <button className="btn-base startup">
-                        Add company details
-                      </button>
-                    </Link>
-                    <div className="or-text-container">
-                      <p className="text-decoration-none text-dark fs-5">Or</p>
-                    </div>
-                    <div>
-                      <p className="text-decoration-none text-dark fs-5">
-                        Choose from an existing Company
-                      </p>
-                      <div>
-                        <input
-                          type="text"
-                          placeholder="Search company"
-                          className="search-company-input"
-                          onChange={handleSearchInputChange}
-                        />
-                        {companies.length !== 0 && (
-                          <div className="suggestion">
-                            {companies.map((company, index) => (
-                              <div
-                                className={`suggestion-item ${
-                                  selectedCompanyId === company._id
-                                    ? "active"
-                                    : ""
-                                }`}
-                                key={index}
-                                onClick={() =>
-                                  handleCompanySelection(
-                                    company._id,
-                                    company.company
-                                  )
-                                }
-                              >
-                                <img
-                                  src={company.logo || DefaultAvatar}
-                                  alt={`Company Logo ${index}`}
-                                  className="suggestion-logo"
-                                />
-                                {company.company}
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                        <button
-                          className="btn-base startup"
-                          onClick={handleAddStartup}
-                        >
-                          Save
-                        </button>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 )}
+                <button className="btn-base startup" onClick={handleAddStartup}>
+                  Save
+                </button>
+              </div>
+            </div>
+            {!loading && (
+              <>
+                {companyData && companyData?.length !== 0 && (
+                  companyData?.founderId === loggedInUser._id && (
+                    <>
+                      <div className="edit_company_text rounded-4 p-4 shadow-sm">
+                        <Link
+                          to="/company-profile/edit"
+                          className="text-decoration-none  fs-5"
+                        >
+                          Edit company details
+                        </Link>
+                      </div>
+                    </>
+                  ))}
               </>
             )}
           </div>
@@ -290,12 +230,24 @@ export default function CompanyProfilePage() {
               <div className="bg-white rounded-4 p-4">
                 <p>No company found.</p>
               </div>
+            ) : userData.startUp === null ? (
+              <div className="company__profile  shadow-sm rounded-2">
+                <div className="company__section__one d-flex flex-column gap-4 p-3 p-md-5">
+                  <h2 style={{ color: theme === "dark" ? "#fff" : "#000" }}>
+                    No Company
+                  </h2>
+                </div>
+              </div>
             ) : (
-              <CompanyProfile
-                isOnelink={true}
-                companyData={companyData}
-                startup="true"
-              />
+              companyData?._id !== loggedInUser.startUp && (
+                <CompanyProfile
+                  isOnelink={true}
+                  companyData={companyData}
+                  startup="true"
+                  setCompanyData={setCompanyData}
+                  companyDelete={true}
+                />
+              )
             )
           ) : (
             <div className="mx-auto w-100 bg-white rounded-4 p-5 d-flex justify-content-center min-vh-100">

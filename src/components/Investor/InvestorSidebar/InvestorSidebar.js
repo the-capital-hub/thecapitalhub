@@ -160,7 +160,7 @@ const InvestorSidebar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                   <h3 className="" style={{ color: "var(--d-l-grey)" }}>
                     {loggedInUser?.firstName} {loggedInUser?.lastName}
                   </h3>
-                  <h4>{loggedInUser?.email}</h4>
+                  <h4>{loggedInUser?.userName}</h4>
                 </>
               )}
             </div>

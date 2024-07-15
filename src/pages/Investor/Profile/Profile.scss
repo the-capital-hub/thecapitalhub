@@ -50,7 +50,6 @@
     display: flex;
     overflow: hidden;
   }
-
   .box {
     background-color: var(--white-to-grey);
     padding: 10px;
@@ -160,10 +159,11 @@
   }
 
   .personal_information_header button {
-    border-radius: 131px;
-    border: 1px solid var(--bs-border-color);
+    // border-radius: 131px;
+    // border: 1px solid var(--bs-border-color);
+    background-color: transparent !important;
     width: fit-content;
-    height: 35px;
+    //height: 35px;
     flex-shrink: 0;
     color: var(--d-l-grey);
     font-size: 18px;

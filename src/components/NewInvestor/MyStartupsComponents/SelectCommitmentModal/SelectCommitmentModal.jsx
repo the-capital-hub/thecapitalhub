@@ -69,6 +69,7 @@ export default function SelectCommitmentModal({ interestData, founderId }) {
           <form
             onSubmit={handleInterestSubmit}
             className="d-flex flex-column gap-4"
+            style={{height:"15rem"}}
           >
             <fieldset>
               <legend>Select Commitment</legend>

@@ -2,6 +2,7 @@ import React from "react";
 import "./NavBar.scss";
 // import searchIconBlack from "../../../Images/navbar/Search.svg";
 import Logo from "../../../Images/investorIcon/new-logo.png";
+import Logo2 from "../../../Images/investorIcon/Artboard-14.png"
 // import NotificationIcon from "../../../Images/investorIcon/notification.svg";
 // import YellowNotificationIcon from "../../../Images/investorIcon/YellowNotificationIcon.svg";
 // import MessageIcon from "../../../Images/investorIcon/message.svg";
@@ -22,6 +23,7 @@ import { useRef } from "react";
 import {
   selectIsMobileView,
   selectNotificationtModal,
+  selectTheme,
 } from "../../../Store/features/design/designSlice";
 import {
   selectUnreadNotifications,
@@ -35,6 +37,7 @@ import { IoClose, IoReorderThreeOutline } from "react-icons/io5";
 
 const NavBar = (props) => {
   // Fetch global states
+  const theme = useSelector(selectTheme)
   const userProfilePicture = useSelector(selectUserProfilePicture);
   const pageTitle = useSelector((state) => state.design.pageTitle);
   const isNotificationModalOpen = useSelector(selectNotificationtModal);
@@ -47,7 +50,6 @@ const NavBar = (props) => {
   const [inputOnFocus, setInputOnFocus] = useState(false);
   const [toggleNotificationPopup, setToggleNotificationPopup] = useState(false);
   const notificationPopup = useRef();
-  console.log(toggleNotificationPopup);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -99,7 +101,7 @@ const NavBar = (props) => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, [toggleNotificationPopup]);
-
+ 
   return (
     <>
       <div className="container pt-1  mb-4 mb-xl-0">
@@ -107,12 +109,18 @@ const NavBar = (props) => {
           <div className="d-flex">
             <div className="row bar_logo_container ">
               <div className="logo_container">
-                <img
-                  src={Logo}
+                {theme==="dark"?<img
+                  src={Logo2}
                   height={""}
                   onClick={() => navigate("/investor/home")}
                   alt="the capital hub logo"
-                />
+                  style={{maxWidth:"180px",width:"100%",height:"100px",marginBottom:"12px"}}
+                />:<img
+                src={theme==="dark"?Logo2:Logo}
+                height={""}
+                onClick={() => navigate("/investor/home")}
+                alt="the capital hub logo"
+              />}
               </div>
               <div
                 className="mobile-home-hamberger"

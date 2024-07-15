@@ -24,6 +24,7 @@ import {
   Revenue1,
   Revenue2,
 } from "../../../Images/Investor/CompanyProfile";
+import { deleteStartUp } from "../../../Service/user";
 // import { selectIsInvestor } from "../../../Store/features/user/userSlice";
 // import { useSelector } from "react-redux";
 
@@ -36,13 +37,16 @@ export default function CompanyProfile({
   isStartup = "true",
   pageName,
   show,
+  theme,
+  setCompanyData,
+  companyDelete
 }) {
   const { pathname } = useLocation();
   const [open, setOpen] = useState("");
   // Fetch Company Data here
-  let name = "HCL";
+  let name = "NA";
   let logo = DefaultAvatar;
-  let location = "Bangalore";
+  let location = "NA";
   let description = "No description";
   let socialLinks = {
     website: "",
@@ -51,7 +55,7 @@ export default function CompanyProfile({
     linkedin: "",
   };
   let colorCard = "";
-  let foundedIn = "2014";
+  let foundedIn = "NA";
   let vision = "";
   let mission = "";
   let noOfEmployees = "";
@@ -65,7 +69,7 @@ export default function CompanyProfile({
   let industry = "";
   let lastFunding = "";
   let stage = "";
-  let sector ="";
+  let sector = "";
 
   // Interests Data
   let interestData = {
@@ -99,7 +103,8 @@ export default function CompanyProfile({
     lastFunding = companyData?.lastFunding || "";
     stage = companyData?.stage || "";
     sector = companyData?.sector || "";
-     
+    industry = companyData?.industryType || "";
+
     interestData = {
       logo: companyData?.logo,
       name: companyData?.company,
@@ -150,7 +155,19 @@ export default function CompanyProfile({
   // };
   // const navigate = useNavigate();
   // const isInvestor = useSelector(selectIsInvestor);
-  console.log(name);
+
+  const deleteCompany = async () => {
+    try {
+      const response = await deleteStartUp(companyData._id);
+      console.log(response);
+      if (response.delete_status) {
+        setCompanyData({});
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <div className="company__profile  shadow-sm" startup={startup}>
@@ -169,6 +186,8 @@ export default function CompanyProfile({
               lastFunding={lastFunding}
               stage={stage}
               sector={sector}
+              deleteCompany={deleteCompany}
+              companyDelete={companyDelete}
             />
             <CompanyActions
               isOnelink={isOnelink}
@@ -183,14 +202,16 @@ export default function CompanyProfile({
             noOfEmployees={noOfEmployees}
           />
 
-          <CompanyStats
-            colorCard={colorCard}
-            startup={isStartup}
-            sam={sam}
-            tam={tam}
-            som={som}
-            show={show}
-          />
+          {theme !== "investor" && (
+            <CompanyStats
+              colorCard={colorCard}
+              startup={isStartup}
+              sam={sam}
+              tam={tam}
+              som={som}
+              show={show}
+            />
+          )}
         </div>
         {pageName && (
           <div
@@ -231,7 +252,7 @@ export default function CompanyProfile({
             )}
           </div>
         )}
-        {pageName && open === companyData._id && (
+        {theme !== "investor" && pageName && open === companyData._id && (
           <div className="company__section__two d-flex flex-column gap-4 pt-3 pb-5 px-3 px-md-5">
             <FoundingTeam isOnelink={isOnelink} team={team} />
             <h6 className="div__heading">{`Previous funding`}</h6>
@@ -248,7 +269,7 @@ export default function CompanyProfile({
                     {" "}
                     {startup === "true"
                       ? colorCard?.last_round_investment
-                      : colorCard.averageInvestment || ""}
+                      : colorCard?.averageInvestment || ""}
                   </p>
                 </div>
                 <img src={About1} alt="statistics" style={{ width: "80px" }} />

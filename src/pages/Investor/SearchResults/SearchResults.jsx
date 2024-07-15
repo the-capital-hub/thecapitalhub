@@ -30,7 +30,6 @@ export default function SearchResults() {
   // Fetch search data
   useEffect(() => {
     async function fetchData() {
-      console.log(query);
       const data = await getSearchResultsAPI(query);
       setPeopleData(data?.data?.users);
       setCompanyData(data?.data?.company);

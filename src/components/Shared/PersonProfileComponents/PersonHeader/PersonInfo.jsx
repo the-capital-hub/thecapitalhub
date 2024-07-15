@@ -15,7 +15,7 @@ export default function PersonInfo({
   location,
   lastFunding,
   foundedYear,
-  industry
+  industry,
 }) {
   return (
     <div className="person_info">
@@ -34,11 +34,22 @@ export default function PersonInfo({
         </div>
 
         <div className="person__profile__details d-flex flex-column gap-4 justify-content-around">
-          <div className="person__profile__headings d-flex flex-column gap-1">
-            <h5 className="person__profile__name">{fullName}</h5>
-            <p className="person__profile__type">{designation}</p>
-            <p className="person__profile__type">{industry}</p>
-            <p className="person__profile__type">{companyName}</p>
+          <div
+            className="person__profile__headings"
+            style={{ height: "100px" }}
+          >
+            <div style={{ height: "40px" }}>
+              <h5 className="person__profile__name">{fullName}</h5>
+              <p className="person__profile__type" style={{ marginBottom: 0 }}>
+                {designation|| "NA"}
+              </p>
+              <p className="person__profile__type" style={{ marginBottom: 0 }}>
+                {industry||"NA"}
+              </p>
+              <p className="person__profile__type" style={{ marginBottom: 0 }}>
+                {companyName||"NA"}
+              </p>
+            </div>
           </div>
           <div className="icon__details d-flex flex-column flex-md-row gap-4 align-items-start">
             <IconCard

@@ -22,7 +22,6 @@ const InvestorOneLinkAppointment = lazy(() =>
     "../pages/InvestorOneLink/InvestorOneLinkAppointment/InvestorOneLinkAppointment"
   )
 );
-
 export default function InvestorOneLinkRoutes() {
   return (
     <>
@@ -61,6 +60,7 @@ export default function InvestorOneLinkRoutes() {
           </Suspense>
         }
       />
+
     </>
   );
 }

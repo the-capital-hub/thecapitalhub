@@ -14,15 +14,15 @@ const funds = [
   { name: "Team", value: 25, image: Team },
 ];
 
-export default function DealsFunds() {
+export default function DealsFunds({theme}) {
   return (
-    <div className="deals__fund d-flex flex-column gap-4 py-3">
-      <h6 className="div__heading my-2">Fund Utilization</h6>
+    <div className="deals__fund d-flex flex-column gap-2" >
+      <h6 className="div__heading my-2"  style={{ color:theme==="dark"?"#fff": "#000" }}>Fund Utilization</h6>
       <div className="deals__card__container d-flex flex-wrap gap-5">
         {funds.map((fund, index) => {
           return (
-            <DealsCard key={`${fund.name}${index}`} image={fund.image} isFunds>
-              {fund.value}% {fund.name}
+            <DealsCard key={`${fund.name}${index}`} image={fund.image} isFunds theme={theme}>
+              <p style={{ color:theme==="dark"?"#fff": "#000" }}>{fund.value}% {fund.name}</p>
             </DealsCard>
           );
         })}

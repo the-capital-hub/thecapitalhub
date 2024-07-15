@@ -193,12 +193,12 @@ const MyStartUp = () => {
               <div className="">
                 {/* <Link to={""}>Add New</Link> */}
                 {/* {investor?.founderId === loggedInUser._id && ( */}
-                <ModalBsLauncher
+                {/*<ModalBsLauncher
                   id={"myInterestsAddModal"}
                   className={"btn btn-investor"}
                 >
                   Add New
-                </ModalBsLauncher>
+                </ModalBsLauncher>*/}
                 {/* )} */}
               </div>
               <div className="">

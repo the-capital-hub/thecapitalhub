@@ -3,17 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import "./navbar.scss";
 import Logo from "../../Images/Logo.svg";
 import { RxCross2 } from "react-icons/rx";
-import { FaBars } from "react-icons/fa";
 import HambergerIcon from "../../Images/Hamberger.svg";
 import { useSelector } from "react-redux";
 import { setThemeColor } from "../../utils/setThemeColor";
-import { selectTheme } from "../../Store/features/design/designSlice";
 
 function Navbar() {
   const [clicked, setClicked] = useState(false);
   const [selectedLink, setSelectedLink] = useState("home");
   const [isScrolling, setIsScrolling] = useState(false);
-  const [hideDropdown, setHideDropDown] = useState(false);
+  //const [hideDropdown, setHideDropDown] = useState(false);
 
   useEffect(() => {
     setThemeColor();
@@ -30,9 +28,9 @@ function Navbar() {
     setClicked(!clicked);
   };
 
-  const handleMouseOver = () => {
-    setHideDropDown(true);
-  };
+  // const handleMouseOver = () => {
+  //   setHideDropDown(true);
+  // };
 
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const isLoggedInLocal = localStorage.getItem("isLoggedIn");
@@ -47,7 +45,6 @@ function Navbar() {
       return navigate("/home");
     }
   };
-  const theme = useSelector(selectTheme);
 
   return (
     <div className="nav_bar_container">
@@ -63,7 +60,7 @@ function Navbar() {
                 )}
               </div>
               <Link to="/" className="logo">
-                <img src={Logo} alt="logo" />
+              <img src={Logo} alt="bar" />
               </Link>
             </div>
             <div>
@@ -106,9 +103,8 @@ function Navbar() {
                   Contact Us
                 </Link>
               </li>
-              <li className="dropdown">
+              {/*<li className="dropdown">
                 <span className="dropdown-label">Service</span>
-                {/* Start of sub-dropdown menu */}
                 {
                   <ul className="dropdown-menu ">
                     <li>
@@ -183,10 +179,8 @@ function Navbar() {
                     </li>
                   </ul>
                 }
-
-                {/* End of sub-dropdown menu */}
-              </li>
-              <li>
+              </li>*/}
+              {/*<li>
                 <Link
                   to="/our-startup"
                   className={selectedLink === "investor" ? "active" : ""}
@@ -194,7 +188,7 @@ function Navbar() {
                 >
                   Startup
                 </Link>
-              </li>
+              </li>*/}
               <li>
                 <Link
                   to="/our-investor"
@@ -202,6 +196,15 @@ function Navbar() {
                   onClick={() => setSelectedLink("investor")}
                 >
                   Investor
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/start-up"
+                  className={selectedLink === "startup" ? "active" : ""}
+                  onClick={() => setSelectedLink("startup")}
+                >
+                  StartUp
                 </Link>
               </li>
               <li>

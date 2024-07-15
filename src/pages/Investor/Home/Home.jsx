@@ -16,7 +16,7 @@ import {
   getSavedPostCollections,
   postUserPost,
 } from "../../../Service/user";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import {
   setPageTitle,
@@ -33,6 +33,7 @@ import {
   setUserCompany,
 } from "../../../Store/features/user/userSlice";
 import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
+import PostDetail from "../../../components/Investor/Cards/FeedPost/PostDetail";
 
 function Home() {
   const loggedInUserId = useSelector(selectLoggedInUserId);
@@ -40,7 +41,7 @@ function Home() {
   const isInvestor = useSelector(selectIsInvestor);
   const userInvestor = useSelector(selectUserInvestor);
   const companyDataId = useSelector(selectCompanyDataId);
-
+  const { postId } = useParams();
   const [popupOpen, setPopupOpen] = useState(false);
   const [allPosts, setAllPosts] = useState([]);
   const [newPost, setNewPost] = useState(false);
@@ -48,6 +49,27 @@ function Home() {
   const [getSavedPostData, setgetSavedPostData] = useState("");
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
+  const [postData, setPostData] = useState({
+    userId: "",
+    postId: "",
+    designation: "",
+    startUpCompanyName: "",
+    investorCompanyName: "",
+    profilePicture: "",
+    description: "",
+    firstName: "",
+    lastName: "",
+    oneLinkId: "",
+    video: "",
+    image: "",
+    documentName: "",
+    documentUrl: "",
+    createdAt: "",
+    likes: "",
+    response: "",
+    repostLoading: "",
+    resharedPostId: "",
+  });
   const dispatch = useDispatch();
   const isInvestorCreatePostModalOpen = useSelector(
     selectInvestorCreatePostModal
@@ -87,15 +109,14 @@ function Home() {
   }, [dispatch, isInvestor, userInvestor, companyDataId]);
 
   const fetchMorePosts = () => {
-    console.log("hii")
     getAllPostsAPI(page)
       .then(({ data }) => {
-        console.log(data);
+        //console.log(data);
         if (data?.length === 0) {
         } else {
           const totalPost = data.filter((item)=> item?.postType !== "company")
           const post = allPosts.filter((item)=> item?.postType !== "company")
-          console.log(post,totalPost)
+          //console.log(post,totalPost)
           setAllPosts([...post, ...totalPost]);
           setPage(page + 1);
         }
@@ -150,7 +171,37 @@ function Home() {
   return (
     <MaxWidthWrapper>
       <div className="investor_feed_container">
-        <div className="main_content">
+      {postId ? (
+        <PostDetail
+          userId={postData.userId}
+          postId={postId}
+          designation={postData.designation}
+          startUpCompanyName={postData.startUp}
+          investorCompanyName={postData.investor}
+          profilePicture={postData.profilePicture}
+          description={postData.description}
+          firstName={postData.firstName}
+          lastName={postData.lastName}
+          oneLinkId={postData.oneLinkId}
+          video={postData.video}
+          image={postData.image}
+          documentName={postData.documentName}
+          documentUrl={postData.documentUrl}
+          createdAt={postData.createdAt}
+          likes={postData.likes}
+          resharedPostId={postData.resharedPostId}
+          fetchAllPosts={fetchMorePosts}
+          response={getSavedPostData}
+          repostWithToughts={(resharedPostId) => {
+            setRepostingPostId(resharedPostId);
+            openPopup();
+          }}
+          repostInstantly={repostInstantly}
+          repostLoading={repostLoading}
+          deletePostFilterData={deletePostFilterData}
+          setPostData={setPostData}
+        />
+      ) : (<div className="main_content">
           {/* <InvestorSmallProfilecard text={"Home"} /> */}
           <div className="posts_col d-flex flex-column gap-3">
             {/* Onboarding popup */}
@@ -238,6 +289,7 @@ function Home() {
                     repostLoading={repostLoading}
                     resharedPostId={resharedPostId}
                     deletePostFilterData={deletePostFilterData}
+                    setPostData={setPostData}
                   />
                 )
               )}
@@ -252,7 +304,7 @@ function Home() {
                 </p>
               )}*/}
           </div>
-        </div>
+        </div>)}
         <div className="right_content d-none d-xl-block">
           <InvestorRightProfileCard />
           <RecommendationCard isInvestor={true} />

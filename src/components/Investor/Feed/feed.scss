@@ -36,7 +36,7 @@
     align-items: center;
     gap: 1em;
     // width: 750px;
-    height: 100px;
+    //height: 100px;
     padding: 10px 20px;
     // gap: 10px;
     box-sizing: border-box;
@@ -54,6 +54,22 @@
       height: 55px;
       width: 100%;
       cursor: pointer;
+    }
+    .start_footer_container{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: 1em;
+      // width: 750px;
+      //height: 100px;
+      padding: 0px 30px 10px 20px;
+      // gap: 10px;
+      box-sizing: border-box;
+      .white_button{
+        border:none;
+        outline:none;
+        background-color: transparent;
+      }
     }
   }
 

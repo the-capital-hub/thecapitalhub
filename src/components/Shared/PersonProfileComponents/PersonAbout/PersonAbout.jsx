@@ -32,11 +32,11 @@ export default function PersonAbout({
           <>
             {/* <div className="">
               <p className="fw-lighter fs-5">First Name</p>
-              <p className="fw-medium fs-5 field-text">{firstName}</p>
+              <p className="about__text fs-5 field-text">{firstName}</p>
             </div> */}
             {/* <div className="">
               <p className="fw-lighter fs-5">Email Address</p>
-              <p className="fw-medium fs-5 field-text">{email}</p>
+              <p className="about__text fs-5 field-text">{email}</p>
             </div> */}
           </>
           <>
@@ -48,14 +48,14 @@ export default function PersonAbout({
               <p className="fw-lighter fs-5">Mobile Number</p>
               <p className="fw-medium fs-5 field-text">{mobileNumber}</p>
             </div> */}
-            <div className="">
-              <p className="fw-lighter fs-5">Education</p>
-              <p className="fw-medium fs-5 field-text">{education}</p>
-            </div>
-
-            <div className="">
-              <p className="fw-lighter fs-5">Company Name</p>
-              <p className="fw-medium fs-5 field-text">
+            <div className="" style={{ display: "flex" }}>
+              <p
+                className="div__heading field-text"
+                style={{ paddingRight: "10px" }}
+              >
+                Company Name:
+              </p>
+              <p className="about__text field-text">
                 {startUp?.company
                   ? startUp?.company
                   : investor?.companyName
@@ -63,15 +63,34 @@ export default function PersonAbout({
                   : "No company"}
               </p>
             </div>
-
-            <div className="">
-              <p className="fw-lighter fs-5">Designation</p>
-              <p className="fw-medium fs-5 field-text">{designation}</p>
+            <div className="" style={{ display: "flex" }}>
+              <p
+                className="div__heading field-text"
+                style={{ paddingRight: "10px" }}
+              >
+                Education:
+              </p>
+              <p className="about__text field-text">{education}</p>
             </div>
 
-            <div className="">
-              <p className="fw-lighter fs-5">Experience</p>
-              <p className="fw-medium fs-5 field-text">{experience}</p>
+            <div className="" style={{ display: "flex" }}>
+              <p
+                className="div__heading field-text"
+                style={{ paddingRight: "10px" }}
+              >
+                Designation:
+              </p>
+              <p className="about__text field-text">{designation}</p>
+            </div>
+
+            <div className="" style={{ display: "flex" }}>
+              <p
+                className="div__heading field-text"
+                style={{ paddingRight: "10px" }}
+              >
+                Experience:
+              </p>
+              <p className="about__text field-text">{experience}</p>
             </div>
           </>
         </div>

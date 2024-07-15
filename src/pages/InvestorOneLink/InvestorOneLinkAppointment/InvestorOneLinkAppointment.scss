@@ -24,7 +24,6 @@
     text-decoration-thickness: 2px;
     text-underline-offset: 0.25em;
   }
-
   // .time_input {
   //   padding: 1em 0.75em;
   //   border: 1px solid rgba(154, 154, 154, 1);
@@ -101,5 +100,60 @@
     @media (min-width: 1200px) {
       font-size: 32px;
     }
+  }
+}
+
+.custom-calendar {
+  width: 100%;
+   background-color: transparent !important;
+  .p-inputtext {
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      background-color: transparent;
+  }
+  
+  .p-datepicker {
+      border: none;
+      border-radius: 8px;
+      //box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: transparent;
+  }
+
+  .p-datepicker-header {
+      color: white;
+      border-radius: 8px 8px 0 0;
+      background-color: transparent;
+  }
+
+  .p-datepicker-title {
+      font-weight: bold;
+  }
+
+  .p-datepicker-today {
+      //background-color: #007bff;
+      color: white;
+  }
+
+  .p-datepicker-calendar {
+      // Targeting the week names for border styling
+      th {
+        margin: 0 10px; // Margin around each day name
+        padding: 0 5px; // Padding inside each day name
+        text-align: center;
+        background-color: rgba(211, 243, 107, 1); // Optional: Add background color
+        color: #000; // Optional: Change text color to match the border
+        border-radius: 5px;
+        width: 20px;
+      }
+  }
+
+  .p-datepicker-cell {
+      &.p-datepicker-current-day a {
+          //background-color: #007bff;
+          //color: white;
+          border-radius: 50%;
+      }
   }
 }

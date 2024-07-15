@@ -63,7 +63,7 @@ const CompanyPost = ({ userId,postDelete,newPost }) => {
     // useEffect(() => {
     //   document.title = "Featured Post | The Capital Hub";
     // }, []);
-  
+   console.log(userId,"hii",postDelete,newPost)
     return (
       <div className="card-container ">
         <div className="post_container_div d-flex gap-4 ps-3 w-100 overflow-x-auto">

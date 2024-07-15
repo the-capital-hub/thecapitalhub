@@ -117,7 +117,6 @@ const CloseAccount = lazy(() =>
     "../pages/StartUp/UserSettings/SettingsPages/CloseAccount/CloseAccount"
   )
 );
-
 function InvestorRoutes() {
   return (
     <>
@@ -130,6 +129,15 @@ function InvestorRoutes() {
           </Suspense>
         }
       />
+
+      <Route
+      path="post_detail/:postId"
+      element={
+        <Suspense fallback={<SuspenseLoader />}>
+          <InvestorHomeFeed />
+        </Suspense>
+      }
+    />
       <Route
         path="profile"
         element={

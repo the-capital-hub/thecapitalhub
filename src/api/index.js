@@ -4,8 +4,12 @@ const baseUrl = environment.baseUrl;
 const API = Object.freeze({
   getUser: `${baseUrl}/users/getUser`,
   postUser: `${baseUrl}/users/createUser`,
+  getPostById: `${baseUrl}/api/posts/get_post_by_id`,
   postStartUpData: `${baseUrl}/startup/createStartup`,
+  deleteStartUp:`${baseUrl}/startup/delete_startup`,
   loginUser: `${baseUrl}/users/login`,
+  linkdinLogin:`${baseUrl}/users/linkdin_login`,
+  getLinkedInProfile:`${baseUrl}/users/getLinkedInProfile`,
   postUserPost: `${baseUrl}/api/posts/newPost`,
   uploadDocument: `${baseUrl}/upload`,
   getDocument: `${baseUrl}/documentation/getDocumentsByUser`,
@@ -68,6 +72,7 @@ const API = Object.freeze({
   unsavePost: `${baseUrl}/api/posts/unsavePost`,
   removeFromFeaturedPost: `${baseUrl}/api/posts/removeFromFeaturedPost`,
   removeCompanyUpdatePost:`${baseUrl}/api/posts/removeCompanyUpdatePost`,
+  getUserPost : `${baseUrl}/api/posts/user_post`,
   deleteMessage: `${baseUrl}/message/deleteMessage`,
   getNotifications: `${baseUrl}/notificaton/getNotification`,
   markNotificationAsRead: `${baseUrl}/notificaton/markMessageAsRead`,
@@ -89,6 +94,7 @@ const API = Object.freeze({
   validateSecretKey: `${baseUrl}/users/validateSecretKey`,
   getInvestorFromOneLink: `${baseUrl}/investor/getOnePager`,
   createMeeting: `${baseUrl}/schedule/createMeeting`,
+  createMeetingLink: `${baseUrl}/schedule/createMeetingLink`,
   getAllMeetings: `${baseUrl}/schedule/getAllMeetings`,
   deleteMeeting: `${baseUrl}/schedule/deleteMeeting`,
   removeConnection: `${baseUrl}/connections/removeConnection`,
@@ -121,7 +127,13 @@ const API = Object.freeze({
   getAllChats: `${baseUrl}/chat/getAllChats`,
   addPastInvestments: `${baseUrl}/investor/addPastInvestmentsController`,
   sendOtp: `${baseUrl}/users/send_otp`,
-  verifyOtp: `${baseUrl}/users/verify_otp`
+  verifyOtp: `${baseUrl}/users/verify_otp`,
+  liveDeals:`${baseUrl}/live_deal/add_to_live_deals`,
+  getLiveDeals:`${baseUrl}/live_deals/get_live_deals`,
+  addInvestorToLiveDeal:`${baseUrl}/live_deals/add_investor_to_live_deal`,
+  addArticle:`${baseUrl}/article/add_article`,
+  subscription:`${baseUrl}/subscription/create_subscription`,
+  getPaymentDetail:`${baseUrl}/subscription/get_subscription`
 });
 
 export default API;

@@ -1,40 +1,53 @@
-import React from "react";
+// src/components/PhilosophyDetails.js
+import React, { useState } from "react";
+import { Accordion, AccordionItem as Item } from "@szhsin/react-accordion";
 import { useOutletContext } from "react-router-dom";
 import { PhilosophyQuestions } from "../../../constants/Investor/ProfilePage";
+import { IoIosArrowDown } from "react-icons/io";
+import "./investorOne.scss";
 
-export default function PhilosophyDetails() {
+const AccordionItem = ({ header, ...rest }) => (
+  <Item
+    {...rest}
+    header={
+      <>
+        {header}
+        <IoIosArrowDown className="chevron-down" />
+      </>
+    }
+  />
+);
+
+export default function PhilosophyDetails({ canEdit, theme }) {
   const { investor } = useOutletContext();
-  const { investmentPhilosophy, sectorPreferences } = investor;
+  const { philosophy, sectorPreferences } = investor;
+
+  const [openItems, setOpenItems] = useState([]); // State to track open accordion items
+
+  const handleAccordionChange = (key) => {
+    setOpenItems((prevOpenItems) =>
+      prevOpenItems.includes(key)
+        ? prevOpenItems.filter((item) => item !== key)
+        : [...prevOpenItems, key]
+    );
+  };
 
   return (
-    <div className="philosophy_details d-flex flex-column gap-4">
-      <fieldset className="border rounded-3 shadow-sm">
-        <legend className="px-3 py-1 rounded-pill bg-white fw-bold">
-          What are your Industries of preference?
-        </legend>
-        <div className="d-flex align-items-center gap-3 flex-wrap py-4">
-          {sectorPreferences?.map((sector) => {
-            return (
-              <span key={sector} className="sector_tag">
-                {sector}
-              </span>
-            );
-          })}
-        </div>
-      </fieldset>
-
-      {Object.keys(PhilosophyQuestions).map((question, index) => {
-        return (
-          <fieldset className="border rounded-3 shadow-sm" key={question}>
-            <legend className="px-3 py-1 rounded-pill bg-white fw-bold">
-              {PhilosophyQuestions[question]}
-            </legend>
-            <p className="m-0 fw-light fs-6 py-4">
-              {investmentPhilosophy[question]}
+    <div>
+      <Accordion transition transitionTimeout={250}>
+        {Object.keys(PhilosophyQuestions).map((question, index) => (
+          <AccordionItem
+            header={PhilosophyQuestions[question]}
+            key={question}
+            onClick={() => handleAccordionChange(question)}
+            initialEntered={openItems.includes(question)}
+          >
+            <p style={{ color: theme === "dark" ? "#fff" : "#000" }}>
+              {philosophy[question]}
             </p>
-          </fieldset>
-        );
-      })}
+          </AccordionItem>
+        ))}
+      </Accordion>
     </div>
   );
 }

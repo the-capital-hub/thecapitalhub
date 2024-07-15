@@ -8,8 +8,8 @@ import {
   selectLoggedInUserId,
 } from "../../../../Store/features/user/userSlice";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
-import { educationOptions } from "../../../../constants/Startups/ExplorePage";
 import EasyCrop from "react-easy-crop";
+import { selectTheme } from "../../../../Store/features/design/designSlice";
 
 const EXPERIENCE_OPTIONS = [
   "0",
@@ -51,13 +51,14 @@ export default function ProfessionalInfoDisplay({
   setCropComplete,
   setCroppedImage,
   croppedImage,
+  detail,
+  followers
 }) {
+  const userTheme= useSelector(selectTheme)
   const companyFounderId = useSelector(selectCompanyFounderId);
   const loggedinUserId = useSelector(selectLoggedInUserId);
-
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
-
   const getCroppedImg = async (imageSrc, crop) => {
     const image = new Image();
     image.src = imageSrc;
@@ -105,80 +106,123 @@ export default function ProfessionalInfoDisplay({
   return (
     <>
       {/* header */}
-      <header className="professional_info_display p-0 pb-4 border-bottom d-flex flex-column gap-3 flex-md-row align-items-center justify-content-between">
-        {/* profile picture and name */}
-        <div className="d-flex gap-4">
-          <img
-            src={professionalData.profilePicture || DefaultAvatar}
-            alt={professionalData.fullName}
-            style={{ width: "90px", height: "90px", objectFit: "cover" }}
-            className="rounded-circle"
-          />
-          <div className="d-flex flex-column justify-content-center gap-1 ">
-            <h5 className="m-0 fw-semibold">{professionalData.fullName}</h5>
-            <p className="m-0">{professionalData.designation}</p>
-            <p className="m-0">{professionalData.industry}</p>
-            <p className="m-0">{professionalData.location}</p>
-          </div>
-        </div>
+      {!detail && (
+        <header className="professional_info_display p-0 d-flex flex-column gap-3 flex-md-row align-items-center justify-content-between">
+          {/* profile picture and name */}
+          <div className="d-flex gap-4" style={{ width: "100%" }}>
+            <img
+              src={professionalData.profilePicture || DefaultAvatar}
+              alt={professionalData.fullName}
+              style={{ width: "120px", height: "120px", objectFit: "cover" }}
+              className="rounded-circle"
+            />
+            <div className="d-flex flex-column justify-content-center gap-1 ">
+              <div style={{ display: "flex" }}>
+                <h5 className="m-0 fw-semibold">{professionalData.fullName}</h5>
+                {canEdit && (
+                  <span className="edit_btn d-flex align-self-end align-md-self-start ">
+                    <span
+                    //className=" ms-auto d-flex flex-row gap-2"
+                    >
+                      <button
+                        //className="btn d-flex align-items-center gap-1"
+                        onClick={() => setIsEditing(!isEditing)}
+                      >
+                        {/*{isEditing ? "Cancel" : "Edit"}*/}
+                        <CiEdit
+                          style={{
+                            color:
+                              theme !== "startup"
+                                ? "rgb(211, 243, 107)"
+                                : "#ffb27d",
+                          }}
+                        />
+                      </button>
+                    </span>
+                  </span>
+                )}
+              </div>
 
-        {/* Edit button */}
-        {canEdit && (
-          <span className="edit_btn d-flex align-self-end align-md-self-start ">
-            <span className=" ms-auto d-flex flex-row gap-2">
-              <button
-                className="btn d-flex align-items-center gap-1"
-                onClick={() => setIsEditing(!isEditing)}
+              <h6 className="m-0 fw-semibold" style={{color:userTheme==="dark"?"#fff":"#000",marginTop:"-5px"}}>
+                {professionalData.userName || ""}
+              </h6>
+              <p className="m-0">
+                {professionalData.designation}, {professionalData.industry},{" "}
+                {professionalData.location}
+              </p>
+              <p
+                className="m-0"
+                style={{
+                  color: theme !== "startup" ? "rgb(211, 243, 107)" : "#ffb27d",
+                }}
               >
-                {isEditing ? "Cancel" : "Edit"}
-                <CiEdit />
-              </button>
-              {isEditing && (
-                <button
-                  className="btn ms-2 d-flex align-items-center gap-1"
-                  onClick={handleSubmit}
-                >
-                  {loading ? (
-                    <SpinnerBS spinnerSizeClass="spinner-border-sm" />
-                  ) : (
-                    <>
-                      Save <CiSaveUp2 />
-                    </>
-                  )}
-                </button>
-              )}
-            </span>
-          </span>
-        )}
-        {/* Edit button end */}
-      </header>
+                {professionalData.followers.length} Followers | 248 Following
+              </p>
+            </div>
+          </div>
+
+          {/* Edit button */}
+
+          {/* Edit button end */}
+        </header>
+      )}
 
       {/* Info text */}
-      {!isEditing && (
-        <div className="info_text d-flex flex-column gap-3">
-          {/* Company */}
-          <div className="text_field d-flex gap-3 gap-lg-3 align-items-center">
-            <h6 className="m-0">Company</h6>
-            <p className="m-0">{professionalData.company}</p>
+
+      {detail && (
+        <div className="professional_info_display p-0 gap-3 flex-md-row align-items-center justify-content-between">
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          >
+            <h4 className="typography">Personal Information</h4>
+            {canEdit && (
+              <span className="edit_btn d-flex align-self-end align-md-self-start ">
+                <span
+                //className=" ms-auto d-flex flex-row gap-2"
+                >
+                  <button
+                    //className="btn d-flex align-items-center gap-1"
+                    onClick={() => setIsEditing(!isEditing)}
+                  >
+                    {/*{isEditing ? "Cancel" : "Edit"}*/}
+                    <CiEdit
+                      style={{
+                        color:
+                          theme !== "startup"
+                            ? "rgb(211, 243, 107)"
+                            : "#ffb27d",
+                      }}
+                    />
+                  </button>
+                </span>
+              </span>
+            )}
           </div>
 
-          {/* Designation */}
-          <div className="text_field d-flex gap-3 gap-lg-3 align-items-center">
-            <h6 className="m-0">Designation</h6>
-            <p className="m-0">{professionalData.designation}</p>
-          </div>
-
-          {/* Education */}
-          <div className="text_field d-flex gap-3 gap-lg-3 align-items-center">
-            <h6 className="m-0">Education</h6>
-            <p className="m-0">{professionalData.education}</p>
-          </div>
-
-          {/* Experience */}
-          <div className="text_field d-flex gap-3 gap-lg-3 align-items-start">
-            <h6 className="m-0">Experience</h6>
-            <p className="m-0">{professionalData.experience}</p>
-          </div>
+          {!isEditing && (
+            <div className="info_text d-flex flex-column gap-3">
+              <div className="text_field gap-3 gap-lg-3 align-items-center">
+                <h6 className="m-0" style={{fontWeight:400,color:"#9F9F9F"}}>Company</h6>
+                <p className="m-0" style={{paddingTop:"3px"}}>{professionalData.company}</p>
+              </div>
+              <div className="text_field gap-3 gap-lg-3 align-items-center">
+                <h6 className="m-0" style={{fontWeight:400,color:"#9F9F9F"}}>Designation</h6>
+                <p className="m-0" style={{paddingTop:"3px"}}>{professionalData.designation}</p>
+              </div>
+              <div className="text_field gap-3 gap-lg-3 align-items-center">
+                <h6 className="m-0" style={{fontWeight:400,color:"#9F9F9F"}}>Education</h6>
+                <p className="m-0" style={{paddingTop:"3px"}}>{professionalData.education}</p>
+              </div>
+              <div className="text_field gap-3 gap-lg-3 align-items-start">
+                <h6 className="m-0" style={{fontWeight:400,color:"#9F9F9F"}}>Experience</h6>
+                <p className="m-0" style={{paddingTop:"3px"}}>{professionalData.experience}</p>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
@@ -186,28 +230,30 @@ export default function ProfessionalInfoDisplay({
       {isEditing && (
         <form className="">
           {/* profilePicture*/}
-          <fieldset className={` ${theme} `}>
-            <legend className="px-2">Profile Picture</legend>
-            <input
-              type="file"
-              accept="image/*"
-              className="visually-hidden"
-              name="profilePicture"
-              id="profilePicture"
-              //   value={professionalData.company}
-              onChange={handleFileChange}
-            />
-            <div className="professional_form_input d-flex align-items-center gap-4">
-              <label htmlFor="profilePicture" style={{ cursor: "pointer" }}>
-                <IconCloudUpload
-                  color={theme === "startup" ? "#fd5901" : "#b2cc5d"}
-                  height="1.75rem"
-                  width="1.75rem"
-                />
-              </label>
-              <p className="m-0 fs-6 fw-light">{selectedFile?.name}</p>
-            </div>
-          </fieldset>
+          {!detail && (
+            <fieldset className={` ${theme} `}>
+              <legend className="px-2">Profile Picture</legend>
+              <input
+                type="file"
+                accept="image/*"
+                className="visually-hidden"
+                name="profilePicture"
+                id="profilePicture"
+                //   value={professionalData.company}
+                onChange={handleFileChange}
+              />
+              <div className="professional_form_input d-flex align-items-center gap-4">
+                <label htmlFor="profilePicture" style={{ cursor: "pointer" }}>
+                  <IconCloudUpload
+                    color={theme === "startup" ? "#fd5901" : "#b2cc5d"}
+                    height="1.75rem"
+                    width="1.75rem"
+                  />
+                </label>
+                <p className="m-0 fs-6 fw-light">{selectedFile?.name}</p>
+              </div>
+            </fieldset>
+          )}
 
           {previewImage && !cropComplete && (
             <div className="d-flex flex-column justify-content-center gap-2">
@@ -245,7 +291,7 @@ export default function ProfessionalInfoDisplay({
           )}
 
           {/* Company */}
-          {companyFounderId === loggedinUserId && isEditing && (
+          {detail && isEditing && (
             <fieldset className={` ${theme} `}>
               <legend className="px-2">Company</legend>
               <input
@@ -259,28 +305,31 @@ export default function ProfessionalInfoDisplay({
           )}
 
           {/* Designation */}
-          <fieldset className={` ${theme} `}>
-            <legend className="px-2">Designation</legend>
-            <input
-              type="text"
-              className="professional_form_input"
-              name="designation"
-              value={professionalData.designation}
-              onChange={handleTextChange}
-            />
-          </fieldset>
+          {detail && (
+            <fieldset className={` ${theme} `}>
+              <legend className="px-2">Designation</legend>
+              <input
+                type="text"
+                className="professional_form_input"
+                name="designation"
+                value={professionalData.designation}
+                onChange={handleTextChange}
+              />
+            </fieldset>
+          )}
 
           {/* Education */}
-          <fieldset className={` ${theme} `}>
-            <legend className="px-2">Education</legend>
-            <input
-              type="text"
-              className="professional_form_input"
-              name="education"
-              value={professionalData.education}
-              onChange={handleTextChange}
-            /> 
-            {/*<select
+          {detail && (
+            <fieldset className={` ${theme} `}>
+              <legend className="px-2">Education</legend>
+              <input
+                type="text"
+                className="professional_form_input"
+                name="education"
+                value={professionalData.education}
+                onChange={handleTextChange}
+              />
+              {/*<select
               name="education"
               id="userEducation"
               onChange={handleTextChange}
@@ -298,12 +347,14 @@ export default function ProfessionalInfoDisplay({
                 );
               })}
             </select>*/}
-          </fieldset>
+            </fieldset>
+          )}
 
           {/* Experience */}
-          <fieldset className={` ${theme} `}>
-            <legend className="px-2">Experience</legend>
-            {/* <textarea
+          {detail && (
+            <fieldset className={` ${theme} `}>
+              <legend className="px-2">Experience</legend>
+              {/* <textarea
               type="text"
               className="professional_form_input"
               name="experience"
@@ -311,25 +362,42 @@ export default function ProfessionalInfoDisplay({
               onChange={handleTextChange}
               rows={5}
             /> */}
-            <select
-              name="experience"
-              id="userExperience"
-              onChange={handleTextChange}
-              value={professionalData.experience}
-              className="professional_form_input"
-            >
-              <option value="" hidden={Boolean(professionalData.experience)}>
-                Experience
-              </option>
-              {EXPERIENCE_OPTIONS.map((option, index) => {
-                return (
-                  <option value={option} key={option}>
-                    {option}
-                  </option>
-                );
-              })}
-            </select>
-          </fieldset>
+              <select
+                name="experience"
+                id="userExperience"
+                onChange={handleTextChange}
+                value={professionalData.experience}
+                className="professional_form_input"
+              >
+                <option value="" hidden={Boolean(professionalData.experience)}>
+                  Experience
+                </option>
+                {EXPERIENCE_OPTIONS.map((option, index) => {
+                  return (
+                    <option value={option} key={option}>
+                      {option}
+                    </option>
+                  );
+                })}
+              </select>
+            </fieldset>
+          )}
+          {isEditing && canEdit && (
+            <span className="edit_btn d-flex align-self-end align-md-self-start ">
+              <button
+                className="btn ms-2 d-flex align-items-center gap-1"
+                onClick={handleSubmit}
+              >
+                {loading ? (
+                  <SpinnerBS spinnerSizeClass="spinner-border-sm" />
+                ) : (
+                  <>
+                    Save <CiSaveUp2 />
+                  </>
+                )}
+              </button>
+            </span>
+          )}
         </form>
       )}
     </>

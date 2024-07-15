@@ -5,7 +5,6 @@ import API from "../api";
 const getAuthToken = () => {
   return localStorage.getItem("accessToken");
 };
-
 // Create an instance of Axios with default headers
 const axiosInstance = axios.create({
   baseURL: API.baseURL,
@@ -62,28 +61,51 @@ async function uploadDocument(userData) {
   }
 }
 
-async function sendOTP (phoneNumber){
-  try{
-    const response = await axiosInstance.post(API.sendOtp,{phoneNumber})
-    console.log(response)
+async function sendOTP(phoneNumber) {
+  try {
+    const response = await axiosInstance.post(API.sendOtp, { phoneNumber });
     return response.data;
-  }catch(err){
-    throw err
+  } catch (err) {
+    throw err;
   }
 }
 
-async function verifyOTP (userData){
-  try{
-    console.log(userData,API.verifyOtp)
-  const response = await axiosInstance.post(API.verifyOtp,userData);
-  return response.data
-  }catch(err){
-    throw err
+async function verifyOTP(userData) {
+  try {
+    console.log(userData, API.verifyOtp);
+    const response = await axiosInstance.post(API.verifyOtp, userData);
+    return response.data;
+  } catch (err) {
+    throw err;
   }
 }
-async function postUser(userData,isInvestor,companyDetail) {
+export const handelLinkdin = async (code) => {
   try {
-    const response = await axiosInstance.post(API.postUser, {...userData,isInvestor,...companyDetail});
+    const response = await axiosInstance.post(API.linkdinLogin, { code });
+    return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getLinkedInProfile = async (accessToken) => {
+  try {
+    const response = await axiosInstance.post(API.getLinkedInProfile, {
+      accessToken,
+    });
+    console.log(response);
+    return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
+async function postUser(userData, isInvestor, companyDetail) {
+  try {
+    const response = await axiosInstance.post(API.postUser, {
+      ...userData,
+      isInvestor,
+      ...companyDetail,
+    });
     return response.data;
   } catch (error) {
     console.error("Error:", error);
@@ -101,6 +123,15 @@ async function postStartUpData(startUpData) {
   }
 }
 
+export const deleteStartUp = async (startUpId) => {
+  try {
+    const response = await axiosInstance.put(API.deleteStartUp, { startUpId });
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
 async function postUserLogin(userData) {
   try {
     const response = await axiosInstance.post(API.loginUser, userData);
@@ -112,7 +143,6 @@ async function postUserLogin(userData) {
 }
 
 async function postUserPost(postData) {
-  console.log("postData-->0", postData);
   try {
     const response = await axiosInstance.post(API.postUserPost, postData);
     return response.data;
@@ -121,6 +151,16 @@ async function postUserPost(postData) {
     throw error;
   }
 }
+
+export const addArticle = async (content) => {
+  try {
+    const response = await axiosInstance.post(API.addArticle, { content });
+    return response;
+  } catch (error) {
+    console.error("Error: ", error);
+    throw error;
+  }
+};
 async function getAllPostsAPI(page) {
   try {
     const response = await axiosInstance.get(`${API.getAllPosts}?page=${page}`);
@@ -144,12 +184,19 @@ async function getOnePager(oneLink) {
 
 async function getUserById(oneLink, userId) {
   try {
-    const onePager = await getOnePager(oneLink);
-    const response = await axiosInstance.get(API.getUserById + "/" + userId);
-    response.data.data.company = onePager.data.company;
-    response.data.data.location = onePager.data.location;
-    console.log("Response", response);
-    return response.data;
+    console.log(oneLink)
+    if (oneLink!=="") {
+      const onePager = await getOnePager(oneLink);
+      const response = await axiosInstance.get(API.getUserById + "/" + userId);
+      response.data.data.company = onePager.data.company;
+      response.data.data.location = onePager.data.location;
+      console.log("Response", response);
+      return response.data;
+    } else {
+      const response = await axiosInstance.get(API.getUserById + "/" + userId);
+      console.log("Response", response);
+      return response.data;
+    }
   } catch (error) {
     console.error("Error:", error);
     throw error;
@@ -222,12 +269,9 @@ export const investNow = async (data) => {
   }
 };
 export const postResetPaswordLink = async (email) => {
-  console.log("email-fs->", email);
   try {
-    const response = await axiosInstance.post(API.postResetPaswordLink, {
-      email: email, // Pass the email to the request body
-    });
-    return response;
+    const response = await axiosInstance.post(API.postResetPaswordLink, email);
+    return response.data;
   } catch (error) {
     console.error("Error: ", error);
     throw error;
@@ -463,7 +507,7 @@ export {
   getOnePager,
   getUserById,
   sendOTP,
-  verifyOTP
+  verifyOTP,
 };
 export const deletePostAPI = async (postId) => {
   try {
@@ -702,17 +746,27 @@ export const addMyInterest = async (investorId, newInterestData) => {
     throw error;
   }
 };
+
+export const userPosts = async () => {
+  try {
+    const response = await axiosInstance.get(`${API.getUserPost}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error while getting featured post:", error);
+    throw error;
+  }
+};
 export const getCompanyPost = async (userId) => {
-  try{
+  try {
     const response = await axiosInstance.get(
       `${API.getCompanyUpdatePosts}/${userId}`
     );
     return response.data;
-  }catch(error){
+  } catch (error) {
     console.error("Error while getting featured post:", error);
     throw error;
   }
-}
+};
 export const getFeaturedPost = async (userId) => {
   try {
     const response = await axiosInstance.get(
@@ -1108,6 +1162,14 @@ export const createMeetingAPI = async (newMeeting) => {
   }
 };
 
+export const createMeetingLink = async () => {
+  try {
+    const response = await axiosInstance.post(`${API.createMeetingLink}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 export const getAllMeetings = async (oneLinkId) => {
   try {
     const response = await axiosInstance.get(
@@ -1462,10 +1524,7 @@ export const getAllChatsAPI = async () => {
   }
 };
 
-export const addPastInvestments = async (
-  investorId,
-  newPastInvestmentData
-) => {
+export const addPastInvestments = async (investorId, newPastInvestmentData) => {
   try {
     const response = await axiosInstance.patch(
       `${API.addPastInvestments}/${investorId}`,
@@ -1476,4 +1535,48 @@ export const addPastInvestments = async (
     console.error("Error while adding past investments:", error);
     throw error;
   }
+};
+
+export const liveDeals = async () => {
+  try {
+    const response = await axiosInstance.get(`${API.getLiveDeals}`);
+    return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const addInvestorToLiveDeal = async (liveDealId) => {
+  try {
+    const response = await axiosInstance.post(`${API.addInvestorToLiveDeal}`, {
+      liveDealId,
+    });
+    return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getPostById = async (postId) => {
+  try {
+    const response = await axiosInstance.get(`${API.getPostById}`, { postId });
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const subscribe = async (data) => {
+  try {
+    const response = await axiosInstance.post(`${API.subscription}`, data);
+    return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getSubscriptionUrl = async () => {
+  try {
+    const response = await axiosInstance.get(`${API.getPaymentDetail}`);
+    return response.data;
+  } catch (err) {}
 };

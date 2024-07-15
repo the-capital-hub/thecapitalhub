@@ -1,9 +1,12 @@
+import { useSelector } from "react-redux";
 import "./FilterBySelect.scss";
+import { selectTheme } from "../../../Store/features/design/designSlice";
 
 function FilterBySelect({ name, label, onChange, options, value }) {
+  const theme = useSelector(selectTheme)
   return (
     <div className="filter_by_select">
-      <label style={{ color: "#fff", marginLeft: "0.5rem" }}>{label}</label>
+      <label style={{ marginLeft: "0.5rem",color:theme==="dark"?"#fff":"#000" }}>{label}</label>
       <div
         style={{
           paddingRight: "1rem",

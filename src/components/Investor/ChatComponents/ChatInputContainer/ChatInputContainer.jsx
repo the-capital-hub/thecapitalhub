@@ -28,10 +28,10 @@ import AttachmentSelector from "./ChatAttachments/AttachmentSelector/AttachmentS
 import IconSend from "../../SvgIcons/IconSend";
 import { generateId } from "../../../../utils/ChatsHelpers";
 // import { updateLastMessage } from "../../../../Store/features/chat/chatSlice";
-import AchievementToast from "../../../Toasts/AchievementToast/AchievementToast";
+// import AchievementToast from "../../../Toasts/AchievementToast/AchievementToast";
 import toast from "react-hot-toast";
 import { loginSuccess } from "../../../../Store/features/user/userSlice";
-import { achievementTypes } from "../../../Toasts/AchievementToast/types";
+// import { achievementTypes } from "../../../Toasts/AchievementToast/types";
 
 export default function ChatInputContainer({
   setSendMessage,
@@ -77,7 +77,6 @@ export default function ChatInputContainer({
   //   Handle Send. The main send function.
   const handleSend = async () => {
     if (!loggedInUser.achievements.includes("658bb97a8a18edb75e6f4243") && (sendText.includes("https://thecapitalhub.in/onelink/") || sendText.includes("https://thecapitalhub.in/investor/onelink/"))) {
-      console.log("Here");
       const achievements = [...loggedInUser.achievements];
       achievements.push("658bb97a8a18edb75e6f4243");
       const updatedData = { achievements };
@@ -93,9 +92,9 @@ export default function ChatInputContainer({
             .then((data) => console.log("Added"))
             .catch((error) => console.error(error.message));
 
-          toast.custom((t) => (
-            <AchievementToast type={achievementTypes.thisIsMe} />
-          ));
+          // toast.custom((t) => (
+          //   <AchievementToast type={achievementTypes.thisIsMe} />
+          // ));
         })
         .catch((error) => {
           console.error("Error updating user:", error);
@@ -129,7 +128,6 @@ export default function ChatInputContainer({
       message.video = video;
     }
     if (selectedDocument) {
-      console.log("doc");
       const timestamp = Date.now();
       const fileName = `${timestamp}_${selectedDocument.name}`;
       const params = {
@@ -141,17 +139,16 @@ export default function ChatInputContainer({
         const res = await s3.upload(params).promise();
         message.documentName = selectedDocument.name;
         message.documentUrl = res.Location;
-        console.log(res.Location);
       } catch (error) {
         console.error("Error uploading file to S3:", error);
       }
     }
 
-    console.log("message state before adding to db", message);
+    //console.log("message state before adding to db", message);
     addMessage(message)
       .then(({ data }) => {
         // setIsSent(!isSent);
-        console.log("response after adding to db", data);
+        //console.log("response after adding to db", data);
       })
       .catch((error) => {
         console.error("Error-->", error);
@@ -176,7 +173,7 @@ export default function ChatInputContainer({
       recieverId = [userId];
     }
     const createdAt = new Date().toISOString();
-    console.log("State of message before sending", message);
+    //console.log("State of message before sending", message);
     setSendMessage({ ...message, recieverId, createdAt });
     setMessages((prevMessages) => [
       ...prevMessages,

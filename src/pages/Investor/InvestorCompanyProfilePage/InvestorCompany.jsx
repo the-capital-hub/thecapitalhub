@@ -79,12 +79,10 @@ export default function CompanyProfilePage() {
 
   const handleSearchInputChange = (e) => {
     const newValue = e.target.value;
-    console.log(newValue);
     // if (newValue.length > 2) {
     searchInvestors(newValue)
       .then(({ data }) => {
         setCompanies(data);
-        console.log(data);
       })
       .catch(() => {
         setCompanies([]);
@@ -169,28 +167,15 @@ export default function CompanyProfilePage() {
                 {companyData.length !== 0 ? (
                   // companyData.founderId === loggedInUser._id ? (
                   <>
-                    <div
-                      className=" rounded-4 p-4 shadow-sm border"
-                      id="editCompanyDetails"
-                    >
-                      <Link
-                        to="/investor/company-profile/edit"
-                        className="text-decoration-none  fs-5"
-                      >
-                        Edit company details
-                      </Link>
-                    </div>
-                    <p></p>
-                    {/* ) : ( */}
                     <div className=" rounded-4 p-4" id="chooseCompany">
                       {/* <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5"> */}
                       {/* <button className="btn-base investor" onClick={handleAddNew}>
-                        Add new company details
-                      </button> */}
+                    Add new company details
+                  </button> */}
                       {/* </Link> */}
                       {/* <div className="or-text-container">
-                        <p className="text-decoration-none text-dark fs-5">Or</p>
-                      </div> */}
+                    <p className="text-decoration-none text-dark fs-5">Or</p>
+                  </div> */}
                       <p className="text-decoration-none  fs-5">
                         Choose from an existing Company
                       </p>
@@ -236,7 +221,18 @@ export default function CompanyProfilePage() {
                         </button>
                       </div>
                     </div>
-                    {/* ) */}
+                    <p></p>
+                    <div
+                      className=" rounded-4 p-4 shadow-sm border"
+                      id="editCompanyDetails"
+                    >
+                      <Link
+                        to="/investor/company-profile/edit"
+                        className="text-decoration-none  fs-5"
+                      >
+                        Edit company details
+                      </Link>
+                    </div>
                   </>
                 ) : (
                   <div className="bg-white rounded-4 p-4">
@@ -306,6 +302,7 @@ export default function CompanyProfilePage() {
             <CompanyProfile
               isOnelink={true}
               investorData={companyData}
+              theme="investor"
             // startup="t"
             />
           ) : (
@@ -326,6 +323,7 @@ export default function CompanyProfilePage() {
                 investorData={companyData}
                 startup="false"
                 isStartup="false"
+                theme="investor"
               />
             )
           ) : (

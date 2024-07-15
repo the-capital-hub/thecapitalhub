@@ -30,7 +30,7 @@ export default function MissingDetails({ isInvestor = false }) {
 
   return (
     <div className=" rounded-4 shadow-sm lh-1 d-flex flex-column">
-      {countData?.total ? (
+      {/*{countData?.total ? (
         <button
           id="missingDetails"
           className={`btn rounded-4 fs-5 py-3 ${
@@ -48,7 +48,7 @@ export default function MissingDetails({ isInvestor = false }) {
         </button>
       ) : (
         ""
-      )}
+      )}*/}
 
       {/* OffCanvas for questionnaire */}
       <Questionnaire

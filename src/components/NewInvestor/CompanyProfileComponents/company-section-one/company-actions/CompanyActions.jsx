@@ -3,6 +3,7 @@ import "./CompanyActions.scss";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import SubcriptionPop from "../../../../PopUp/SubscriptionPopUp/SubcriptionPop"
 import {
   selectIsInvestor,
   selectLoggedInUserId,
@@ -28,9 +29,10 @@ export default function CompanyActions({
 }) {
   let location = useLocation();
   const dispatch = useDispatch();
-  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
   const [send, setSend] = useState(false);
   const [open, setOpen] = useState(false);
+  const [popPayOpen, setPopPayOpen] = useState(false);
   const isInvestor = useSelector(selectIsInvestor);
   const myInterests = useSelector(selectMyInterests);
   const loggedInUserId = useSelector(selectLoggedInUserId);
@@ -83,43 +85,44 @@ export default function CompanyActions({
 
   const handelOnlinkRequest = async () => {
     try {
-      const notificationBody = {
-        recipient: loggedInUserId,
-        type: "onlinkRequest",
-        achievementId: "658bb97a8a18edb75e6f4243",
-      };
+      setPopPayOpen(true);
+      // const notificationBody = {
+      //   recipient: founderId._id,
+      //   type: "onlinkRequest",
+      //   achievementId: "658bb97a8a18edb75e6f4243",
+      // };
 
-      await createChat(founderId._id, loggedInUserId)
-        .then(async (res) => {
-          console.log(res);
-          if (res.message === "Chat already exists") {
-            setOpen(true);
-            return;
-          }
-          addNotificationAPI(notificationBody)
-            .then((data) => console.log(""))
-            .catch((error) => console.error(error.message));
-          console.log("founderId", founderId);
-          console.log("from create chat:", res.data);
-          dispatch(setChatId(res?.data._id));
-          const message = {
-            id: generateId(),
-            senderId: loggedInUserId,
-            text: `${loggedInUser.firstName}${loggedInUser.lastName} has send you for onlink request`,
-            chatId: res?.data?._id,
-          };
-          await addMessage(message)
-            .then(({ data }) => {
-              setSend(!send);
-              console.log("response after adding to db", data);
-            })
-            .catch((error) => {
-              console.error("Error-->", error);
-            });
-        })
-        .catch((error) => {
-          console.error("Error creating chat-->", error);
-        });
+      // await createChat(founderId._id, loggedInUserId)
+      //   .then(async (res) => {
+      //     //console.log(res);
+      //     if (res.message === "Chat already exists") {
+      //       setOpen(true);
+      //       return;
+      //     }
+      //     addNotificationAPI(notificationBody)
+      //       .then((data) => console.log(""))
+      //       .catch((error) => console.error(error.message));
+      //     console.log("founderId", founderId);
+      //     console.log("from create chat:", res.data);
+      //     dispatch(setChatId(res?.data._id));
+      //     const message = {
+      //       id: generateId(),
+      //       senderId: loggedInUserId,
+      //       text: `${loggedInUser.firstName}${loggedInUser.lastName} has send you for onlink request`,
+      //       chatId: res?.data?._id,
+      //     };
+      //     await addMessage(message)
+      //       .then(({ data }) => {
+      //         setSend(!send);
+      //         console.log("response after adding to db", data);
+      //       })
+      //       .catch((error) => {
+      //         console.error("Error-->", error);
+      //       });
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error creating chat-->", error);
+      //   });
     } catch (err) {
       console.log(err);
     }
@@ -151,7 +154,7 @@ export default function CompanyActions({
                     data-bs-toggle="modal"
                     data-bs-target={`#selectCommitmentModal${founderId._id}`}
                   >
-                    Show Interest
+                    Interested
                   </button>
                 ) : (
                   <button
@@ -190,7 +193,7 @@ export default function CompanyActions({
                 style={{ fontSize: "14px", padding: "5px" }}
                 onClick={handelOnlinkRequest}
               >
-                Request for onlink
+                Request for onelink
               </button>
             )}
           </>
@@ -213,6 +216,9 @@ export default function CompanyActions({
           />
         )}
       </div>
+      {popPayOpen && (
+        <SubcriptionPop popPayOpen={popPayOpen} setPopPayOpen={setPopPayOpen} />
+      )}
     </div>
   );
 }

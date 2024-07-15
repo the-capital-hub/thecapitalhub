@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 import startupOneImage from "../../../../Images/blog/1 AsPGU1Q42C9lsVRoMg91Nw.webp";
 import startupTwoImage from "../../../../Images/blog/eighttips.webp";
 import startupThreeImage from "../../../../Images/blog/threefive.webp";
+import { useSelector } from "react-redux";
+import { selectTheme } from "../../../../Store/features/design/designSlice";
 
 const NewsCorner = ({ title, btnlink }) => {
+  const theme = useSelector(selectTheme)
   // Fetch news items
   const newsItems = [
     {
@@ -48,7 +51,7 @@ const NewsCorner = ({ title, btnlink }) => {
                 key={item.id}
               >
                 <div className="newscorner_card_text d-flex align-items-center gap-1">
-                  <h4 className="smallest_typo">
+                  <h4 className="smallest_typo" style={{color:theme==="dark"?"#fff":"#000"}}>
                     {item.title
                       ? item.title
                       : " Cellbell startup has raised to $10 million dollor funding"}

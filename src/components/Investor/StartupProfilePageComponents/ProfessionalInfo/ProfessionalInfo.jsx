@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./ProfessionalInfo.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { getBase64 } from "../../../../utils/getBase64";
 import {
+  getUserConnections,
   postInvestorData,
   postStartUpData,
   updateUserAPI,
@@ -23,7 +23,7 @@ export default function ProfessionalInfo({ theme }) {
   const [previewImage, setPreviewImage] = useState("");
   const [cropComplete, setCropComplete] = useState(false);
   const [croppedImage, setCroppedImage] = useState(null);
-
+  const [followers,setFollowers]=useState(0)
   const dispatch = useDispatch();
 
   // console.log("companyName", companyName);
@@ -37,9 +37,12 @@ export default function ProfessionalInfo({ theme }) {
     fullName: loggedInUser?.firstName + " " + loggedInUser?.lastName || "",
     company: companyName,
     location: loggedInUser?.location || "Bangalore, India",
-    industry : loggedInUser?.industry || "Nun"
+    industry : loggedInUser?.industry || "Nun",
+    isInvestor: loggedInUser?.isInvestor || false,
+    followers:loggedInUser?.connections || 0,
+    userName:loggedInUser?.userName || " "
   });
- console.log(loggedInUser?.industry)
+
   // State for isEditing
   const [isEditing, setIsEditing] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -52,6 +55,13 @@ export default function ProfessionalInfo({ theme }) {
     } else {
       setProfessionalData((prev) => ({ ...prev, company: companyName }));
     }
+    getUserConnections(loggedInUser._id)
+      .then((data) => {
+        setFollowers(data.data.length);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, [companyName, isInvestor]);
 
   // Handle Text Change
@@ -90,7 +100,7 @@ export default function ProfessionalInfo({ theme }) {
       //   const profilePicture = await getBase64(selectedFile);
       //   editedData = { ...editedData, profilePicture: profilePicture };
       // }
-      console.log(croppedImage);
+      //console.log(croppedImage);
       if (croppedImage) {
         // const profilePicture = await getBase64(croppedImage);
         const profilePicture = croppedImage;
@@ -146,7 +156,7 @@ export default function ProfessionalInfo({ theme }) {
   return (
     <section
       className={`professional_info_section d-flex flex-column gap-3 p-2 px-md-4 py-4  shadow-sm ${
-        theme === "investor" ? "rounded-4 border" : "rounded-4"
+        theme === "investor" ? "rounded-2 border" : "rounded-2"
       }`}
     >
       <ProfessionalInfoDisplay
@@ -164,6 +174,8 @@ export default function ProfessionalInfo({ theme }) {
         setCropComplete={setCropComplete}
         croppedImage={croppedImage}
         setCroppedImage={setCroppedImage}
+        detail={false}
+        //followers={followers}
       />
     </section>
   );
