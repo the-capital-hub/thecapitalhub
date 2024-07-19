@@ -2,7 +2,7 @@ import React from "react";
 import PersonInfo from "./PersonHeader/PersonInfo";
 import PersonActions from "./PersonHeader/PersonActions";
 import PersonAbout from "./PersonAbout/PersonAbout";
-import PublicLinks from "../../NewInvestor/CompanyProfileComponents/company-section-two/public-links/PublicLinks";
+// import PublicLinks from "../../NewInvestor/CompanyProfileComponents/company-section-two/public-links/PublicLinks";
 import CompanyStats from "../../NewInvestor/CompanyProfileComponents/company-section-one/company-stats/CompanyStats";
 import "./PersonProfile.scss";
 import { useSelector } from "react-redux";

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import { GoHome } from "react-icons/go";
 import { PiDotsThreeBold } from "react-icons/pi";
@@ -6,14 +6,23 @@ import "./feedPostCard.scss";
 import fireIcon from "../../../../Images/post/like-fire.png";
 import { ImFire } from "react-icons/im";
 import { FaRegEdit } from "react-icons/fa";
+import IconComponentAdd from "../../SvgIcons/IconComponentAdd";
+import IconDelete from "../../SvgIcons/IconDelete";
+import ModalBSHeader from "../../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
+import ModalBSFooter from "../../../PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
+import { MdDelete } from "react-icons/md";
 import { BiRepost } from "react-icons/bi";
 import { BsFire } from "react-icons/bs";
+import FeedPostCard from "./FeedPostCard";
 import { CiBookmark } from "react-icons/ci";
+import ModalBSBody from "../../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
 import { IoMdBookmark } from "react-icons/io";
-import { FaRegCommentDots, FaCommentDots } from "react-icons/fa6";
+import { FaRegCommentDots, FaCommentDots } from "react-icons/fa";
+import ModalBSContainer from "../../../PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
 import TimeAgo from "timeago-react";
+import IconReportPost from "../../SvgIcons/IconReportPost";
+import { CiCirclePlus } from "react-icons/ci";
 import { useSelector } from "react-redux";
-import { useState } from "react";
 import {
   deletePostAPI,
   getPostComment,
@@ -29,26 +38,15 @@ import {
 import { Link } from "react-router-dom";
 import SavePostPopUP from "../../../../components/PopUp/SavePostPopUP/SavePostPopUP";
 import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
-import { useRef } from "react";
-import ModalBSContainer from "../../../PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
-import ModalBSHeader from "../../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
-import ModalBSFooter from "../../../PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
-import ModalBSBody from "../../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
-import IconComponentAdd from "../../SvgIcons/IconComponentAdd";
-import Linkify from "react-linkify";
-import IconDelete from "../../SvgIcons/IconDelete";
-import IconReportPost from "../../SvgIcons/IconReportPost";
+import { Modal } from "react-bootstrap";
+import DOMPurify from "dompurify";
 import { useNavigate } from "react-router-dom";
 import {
   selectIsMobileView,
   selectTheme,
   selectVideoAutoplay,
 } from "../../../../Store/features/design/designSlice";
-import { CiCirclePlus } from "react-icons/ci";
 import { selectIsInvestor } from "../../../../Store/features/user/userSlice";
-import { Modal } from "react-bootstrap";
-import { MdDelete } from "react-icons/md";
-import FeedPostCard from "./FeedPostCard";
 
 const PostDetail = ({
   postId,
@@ -126,20 +124,12 @@ const PostDetail = ({
 
   const [showUnsaveSuccess, setShowUnsaveSuccess] = useState(false);
   const receiveUnSavedPostStatus = () => {
-    // setShowUnsaveSuccess(true);
-    // setTimeout(() => {
-    //   setShowUnsaveSuccess(false);
     const updatedSavedPostId = savedPostId.filter((id) => id !== postId);
     setSavedPostId(updatedSavedPostId);
-    // }, 2500);
   };
 
   const receiveSavedPostStatus = () => {
-    // setShowSuccess(true);
-    // setTimeout(() => {
-    //   setShowSuccess(false);
     setSavedPostId([...savedPostId, postId]);
-    // }, 2500);
   };
 
   const sendComment = async () => {
@@ -168,35 +158,30 @@ const PostDetail = ({
 
       if (response) {
         await getPostComment({ postId }).then((res) => {
-          console.log("response", res.data.data);
           setComments(res.data.data);
         });
       }
-
-      console.log("Comment submitted successfully:", response.data);
     } catch (error) {
       console.error("Error submitting comment:", error);
     }
   };
 
   const [liked, setLiked] = useState(false);
-  // const [commentLiked, setCommentLiked] = useState(true);
 
   const commentlikeUnlikeHandler = async (postId, commentId) => {
     try {
       const result = await toggleLikeComment(postId, commentId);
-      console.log("Toggle Like Result:", result);
-
       const response = await getPostComment({ postId });
       setComments(response.data.data);
     } catch (error) {
       console.error("Error likeDislike comment : ", error);
     }
   };
+
   useEffect(() => {
     if (!repostPreview) {
       getPostComment({ postId }).then((res) => {
-        setComments(res?.data?.data);
+        setComments(res.data.data);
       });
 
       const fetchSavedPostData = async () => {
@@ -219,11 +204,10 @@ const PostDetail = ({
       };
 
       fetchSavedPostData();
-      // useEffect(() => {
       setLiked(likes?.includes(loggedInUser._id) || null);
 
       getPostComment({ postId }).then((res) => {
-        setComments(res?.data?.data);
+        setComments(res.data.data);
       });
     }
     const outsideClickHandler = (event) => {
@@ -319,7 +303,6 @@ const PostDetail = ({
     }
   };
 
-  // Delete comment
   const deleteComments = async (postId, commentId) => {
     try {
       const updatedComments = comments.filter(
@@ -327,19 +310,14 @@ const PostDetail = ({
       );
       setComments(updatedComments);
       await deleteComment(postId, commentId);
-      // await getPostComment({ postId }).then((res) => {
-      //   setComments(res.data.data);
-      // });
     } catch (error) {
       console.log("Error deleting comment : ", error);
     }
   };
 
-  // Kebab menu
   const [kebabMenuVisible, setKebabMenuVisible] = useState(false);
   const kebabMenuContainerRef = useRef(null);
 
-  // Delete post
   const deletePost = async (postId) => {
     try {
       setLoading(true);
@@ -357,7 +335,6 @@ const PostDetail = ({
     }
   };
 
-  // Report post
   const [reportReason, setReportReason] = useState("");
   const [showReportModal, setShowReportModal] = useState(false);
   const [filingReport, setFilingReport] = useState(false);
@@ -366,7 +343,6 @@ const PostDetail = ({
   const repostContainerRef = useRef(null);
 
   const reportSubmitHandler = () => {
-    // take reason from state = reportReason
     setFilingReport(true);
     setTimeout(() => {
       setFilingReport(false);
@@ -374,7 +350,6 @@ const PostDetail = ({
     }, 2000);
   };
 
-  // add post as featured
   const [showFeaturedPostSuccess, setShowFeaturedPostSuccess] = useState(false);
   const [showCompanyUpdateSuccess, setShowCompanyUpdateSuccess] =
     useState(false);
@@ -426,11 +401,10 @@ const PostDetail = ({
   const handleSingleImage = () => {
     navigate(isInvestor ? `/investor/post/${postId}` : `/posts/${postId}`);
   };
+
   return (
     <>
-      <div
-        className="feedpostcard_main_container mb-2"
-      >
+      <div className="feedpostcard_main_container mb-2">
         <div
           className={`box feedpostcard_container mt-2 ${
             repostPreview && "rounded-4 shadow-sm border"
@@ -443,20 +417,13 @@ const PostDetail = ({
               </div>
             </div>
           )}
-          {/* Post Header */}
-          {/* <div className="feed_header_container border-2 border-bottom mb-3 pb-2"> */}
           <div className="feed_header_container pb-2 ">
             <div className="feedpostcard_content">
-              {/* Poster's Profile Picture */}
               <Link
-                to={`/user/${
-                  firstName.toLowerCase() + "-" + lastName.toLowerCase()
-                }/${oneLinkId}`}
+                to={`/user/${firstName?.toLowerCase() + "-" + lastName?.toLowerCase()}/${oneLinkId}`}
                 className="rounded-circle"
                 style={{
-                  pointerEvents: `${
-                    loggedInUser._id === userId ? "none" : "all"
-                  }`,
+                  pointerEvents: `${loggedInUser._id === userId ? "none" : "all"}`,
                 }}
               >
                 <img
@@ -464,29 +431,28 @@ const PostDetail = ({
                     profilePicture ||
                     "https://res.cloudinary.com/drjt9guif/image/upload/v1692264454/TheCapitalHub/users/default-user-avatar_fe2ky5.webp"
                   }
+                  width={50}
+                  height={50}
                   className="rounded-circle"
                   alt="logo"
-                  style={{ objectFit: "cover", width: "50px", height: "50px" }}
+                  style={{ objectFit: "cover" }}
                 />
               </Link>
-              {/* Poster's Information */}
+
               <div className="feedpostcart_text_header my-1">
-                <Link
-                  to={`/user/${
-                    firstName.toLowerCase() + "-" + lastName.toLowerCase()
-                  }/${oneLinkId}`}
-                  className="text-decoration-none"
-                  style={{
-                    fontSize: "18px",
-                    fontWeight: 600,
-                    color: "var( --d-l-grey)",
-                    pointerEvents: `${
-                      loggedInUser._id === userId ? "none" : "all"
-                    }`,
-                  }}
-                >
-                  {firstName + " " + lastName}
-                </Link>
+              <Link
+                to={`/user/${firstName?.toLowerCase() + "-" + lastName?.toLowerCase()}/${oneLinkId}`}
+                className="text-decoration-none"
+                style={{
+                  fontSize: "18px",
+                  fontWeight: 600,
+                  color: "var( --d-l-grey)",
+                  pointerEvents: `${loggedInUser._id === userId ? "none" : "all"}`,
+                }}
+              >
+                {firstName + " " + lastName}
+              </Link>
+
                 <span className="d-flex flex-column flex-md-row">
                   <span
                     style={{
@@ -495,7 +461,6 @@ const PostDetail = ({
                       color: "var( --d-l-grey)",
                     }}
                   >
-                    {/* <img src={HomeIcon} alt="logo" /> */}
                     <GoHome size={15} />
                     {designation},{" "}
                     {investorCompanyName?.companyName
@@ -509,7 +474,6 @@ const PostDetail = ({
                       color: "var( --d-l-grey)",
                     }}
                   >
-                    {/* <img src={locationIcon} alt="logo" /> */}
                     <IoLocationOutline size={15} />
                     Bangalore, India
                   </span>
@@ -531,19 +495,12 @@ const PostDetail = ({
               </div>
             </div>
 
-            {/* If this is not repost preview show post options */}
             {!repostPreview && (
               <div className="three_dot pe-2 px-md-4">
                 <div
                   className="kebab_menu_container"
                   ref={kebabMenuContainerRef}
                 >
-                  {/* <img
-                  src={ThreeODotIcon}
-                  alt="dot"
-                  className="me-md-3 p-md-2"
-                 
-                /> */}
                   <PiDotsThreeBold
                     size={35}
                     style={{ fill: "var(--d-l-grey)" }}
@@ -583,7 +540,6 @@ const PostDetail = ({
                         data-bs-toggle="modal"
                         data-bs-target="#reportPostModal"
                         className="d-flex align-items-center gap-1"
-                        // onClick={() => setShowReportModal(true)}
                         style={{ color: "var(--d-l-grey)" }}
                       >
                         <IconReportPost />
@@ -606,98 +562,57 @@ const PostDetail = ({
             )}
           </div>
 
-          {/* Post Body */}
           <div className="para_container w-100">
-            <div className="para_container_text w-100">
-              {/* Text */}
-              <Linkify>
-                {description && (
-                  <p style={{ fontSize: "15px" }} className="text-break ">
-                    {/* {description} */}
-                    {expanded
-                      ? description
-                      : description.split(" ").slice(0, 15).join(" ")}
-                    {!expanded &&
-                      description.split(" ").length > 15 &&
-                      !expanded && (
-                        <span
-                          style={{
-                            cursor: "pointer",
-                          }}
-                          onClick={toggleDescription}
-                          className="text-secondary"
-                        >
-                          ...Read more
-                        </span>
-                      )}
-                    {documentUrl && (
-                      <a
-                        href={documentUrl}
-                        style={{
-                          fontSize: "13px",
-                          wordWrap: "break-word",
-                          overflowWrap: "break-word",
-                        }}
-                        className="text-break"
-                      >
-                        {documentName}
-                      </a>
-                    )}
-                  </p>
-                )}
-              </Linkify>
-              {/* Image */}
-              {image && (
-                <span className="d-flex">
-                  <img
-                    className="mx-auto"
-                    style={{width:"100%",maxHeight:"20rem", objectFit: "cover" }}
-                    
-                    src={image}
-                    alt="Post media"
-                    onClick={
-                      isMobileView ? handleSingleImage : handleImageOnClick
-                    }
-                  />
-                </span>
-              )}
-
-              {/* Video */}
-              {video && (
-                <span className="d-flex">
-                  <video
-                    className="mx-auto"
-                    width={!repostPreview ? "100%" : "100%"}
-                    style={{ maxWidth: "500px" }}
-                    controls
-                    ref={videoRef}
-                  >
-                    <source alt="post-video" src={video} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </span>
-              )}
-
-              {resharedPostId && (
-                <FeedPostCard
-                  repostPreview
-                  userId={resharedPostId?.user?._id}
-                  postId={resharedPostId?._id}
-                  designation={resharedPostId?.user?.designation}
-                  profilePicture={resharedPostId?.user?.profilePicture}
-                  description={resharedPostId?.description}
-                  firstName={resharedPostId?.user?.firstName}
-                  lastName={resharedPostId?.user?.lastName}
-                  oneLinkId={resharedPostId?.user?.oneLinkId}
-                  video={resharedPostId?.video}
-                  image={resharedPostId?.image}
-                  createdAt={resharedPostId?.createdAt}
-                  likes={resharedPostId?.likes}
-                  startUpCompanyName={resharedPostId.user?.startUp}
-                  investorCompanyName={resharedPostId.user?.investor}
+            <div
+              className="para_container_text w-100"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(description),
+              }}
+            ></div>
+            {image && (
+              <span className="d-flex">
+                <img
+                  className="mx-auto"
+                  style={{ objectFit: "contain", maxHeight: "30rem" }}
+                  width={!repostPreview ? "100%" : "50%"}
+                  src={image}
+                  alt="Post media"
                 />
-              )}
-            </div>
+              </span>
+            )}
+            {video && (
+              <span className="d-flex">
+                <video
+                  className="mx-auto"
+                  width={!repostPreview ? "100%" : "100%"}
+                  style={{ maxWidth: "500px" }}
+                  controls
+                  ref={videoRef}
+                >
+                  <source alt="post-video" src={video} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </span>
+            )}
+            {resharedPostId && (
+              <FeedPostCard
+                repostPreview
+                userId={resharedPostId?.user?._id}
+                postId={resharedPostId?._id}
+                designation={resharedPostId?.user?.designation}
+                profilePicture={resharedPostId?.user?.profilePicture}
+                description={resharedPostId?.description}
+                firstName={resharedPostId?.user?.firstName}
+                lastName={resharedPostId?.user?.lastName}
+                oneLinkId={resharedPostId?.user?.oneLinkId}
+                video={resharedPostId?.video}
+                image={resharedPostId?.image}
+                createdAt={resharedPostId?.createdAt}
+                likes={resharedPostId?.likes}
+                startUpCompanyName={resharedPostId.user?.startUp}
+                investorCompanyName={resharedPostId.user?.investor}
+              />
+            )}
           </div>
           {likes && (
             <span
@@ -728,13 +643,12 @@ const PostDetail = ({
                 style={{ background: "var(--bs-light)", height: "3px" }}
               />
               <div className="row feedpostcard_footer">
-                {/* Like and Comment */}
                 <div className="col-6">
                   <div className="feedpostcard_footer_like_comment d-flex justify-content-around gap-2">
                     {liked ? (
                       <div
                         className="d-flex flex-column align-items-center justify-content-end
-                     gap-1"
+                       gap-1"
                       >
                         <img
                           src={fireIcon}
@@ -751,16 +665,9 @@ const PostDetail = ({
                         </p>
                       </div>
                     ) : (
-                      // <img
-                      //   src={bwFireIcon}
-                      //   width={18}
-                      //   alt="like post"
-                      //   onClick={likeUnlikeHandler}
-                      //   style={{ cursor: "pointer" }}
-                      // />
                       <div
                         className="d-flex flex-column align-items-center justify-content-end
-                     gap-1"
+                       gap-1"
                       >
                         <ImFire
                           onClick={likeUnlikeHandler}
@@ -774,21 +681,14 @@ const PostDetail = ({
                         </p>
                       </div>
                     )}
-                    {/* <img
-                    src={commentIcon}
-                    width={16}
-                    alt="comment post"
-                    onClick={() => setShowComment(!showComment)}
-                    style={{ cursor: "pointer" }}
-                  /> */}
                     {!showComment ? (
                       <div
                         className="d-flex flex-column align-items-center justify-content-end
-                     gap-1"
+                       gap-1"
                       >
                         <FaRegCommentDots
                           size={20}
-                          //onClick={() => setShowComment((prev) => !prev)}
+                          onClick={() => setShowComment((prev) => !prev)}
                           style={{ cursor: "pointer", fill: "var(--d-l-grey)" }}
                         />
                         <p
@@ -801,7 +701,7 @@ const PostDetail = ({
                     ) : (
                       <div
                         className="d-flex flex-column align-items-center justify-content-end
-                     gap-1"
+                       gap-1"
                       >
                         <FaCommentDots
                           size={20}
@@ -819,7 +719,6 @@ const PostDetail = ({
                   </div>
                 </div>
 
-                {/* Repost and Save posts */}
                 <div className=" col-6 d-flex align-items-center gap-1 justify-content-around">
                   <span
                     className={`repost_container rounded-4 ${
@@ -827,16 +726,9 @@ const PostDetail = ({
                     }`}
                     ref={repostContainerRef}
                   >
-                    {/* <img
-                    src={repostIcon}
-                    width={12}
-                    alt="reshare post"
-                    onClick={() => setShowRepostOptions(!showRepostOptions)}
-                    style={{ cursor: "pointer" }}
-                  /> */}
                     <div
                       className="d-flex flex-column align-items-center justify-content-end
-                     gap-1"
+                       gap-1"
                     >
                       <BiRepost
                         onClick={() => setShowRepostOptions(!showRepostOptions)}
@@ -886,10 +778,6 @@ const PostDetail = ({
                           onClick={() => repostInstantly(postId)}
                         >
                           {!repostLoading?.instant ? (
-                            // <img
-                            //   src={repostInstantlyIcon}
-                            //   alt="repost instantly"
-                            // />
                             <BiRepost
                               size={30}
                               style={{ transform: "rotate(90deg)" }}
@@ -915,15 +803,9 @@ const PostDetail = ({
                     )}
                   </span>
                   {savedPostId.includes(postId) ? (
-                    // <img
-                    //   src={savedIcon}
-                    //   width={16}
-                    //   alt="save post"
-
-                    // />
                     <div
                       className="d-flex flex-column align-items-center justify-content-end
-                     gap-1"
+                       gap-1"
                     >
                       <IoMdBookmark
                         size={20}
@@ -938,16 +820,9 @@ const PostDetail = ({
                       </p>
                     </div>
                   ) : (
-                    // <img
-                    //   src={saveIcon}
-                    //   width={16}
-                    //   alt="save post"
-                    //   onClick={handleSavePopUp}
-                    //   style={{ cursor: "pointer" }}
-                    // />
                     <div
                       className="d-flex flex-column align-items-center justify-content-end
-                  gap-1"
+                    gap-1"
                     >
                       <CiBookmark
                         size={20}
@@ -964,10 +839,9 @@ const PostDetail = ({
                   )}
                 </div>
 
-                {/* Show Comments */}
-                
-                  <div className=" mt-1">
-                    <div className="comment_container mb-1 border-top">
+                {showComment && (
+                  <div className="border-top mt-1">
+                    <div className="comment_container mb-1 border-bottom">
                       <div className="logo">
                         <img
                           src={loggedInUser.profilePicture}
@@ -985,19 +859,11 @@ const PostDetail = ({
                             onChange={(e) => setCommentText(e.target.value)}
                             onKeyDown={(e) => {
                               if (e.key === "Enter") {
-                                e.preventDefault(); // Prevent the default Enter behavior
-                                sendComment(); // Call sendComment when Enter is pressed
+                                e.preventDefault();
+                                sendComment();
                               }
                             }}
                           />
-                          {/* <div className="icons comment_icons">
-                          <span className="image_icon">
-                            <img src={ImageIcon} alt="gallery icon" />
-                          </span>
-                          <span className="smiley_icon">
-                            <img src={SmileeIcon} alt="smiley icon" />
-                          </span>
-                        </div> */}
                         </div>
                         <button
                           type="button"
@@ -1020,7 +886,6 @@ const PostDetail = ({
                         No comments
                       </span>
                     )}
-                    {/* Comments */}
                     {comments.map((val) => (
                       <section
                         className="single-comment row m-0 mt-2"
@@ -1028,17 +893,9 @@ const PostDetail = ({
                       >
                         <div className="img_container col-2 px-2">
                           <Link
-                            to={`/user/${
-                              val.user?.firstName.toLowerCase() +
-                              "-" +
-                              val.user?.lastName.toLowerCase()
-                            }/${val.user.oneLinkId}`}
+                            to={`/user/${val.user?.firstName?.toLowerCase() + "-" + val.user?.lastName?.toLowerCase()}/${val.user.oneLinkId}`}
                             style={{
-                              pointerEvents: `${
-                                loggedInUser._id === val.user._id
-                                  ? "none"
-                                  : "all"
-                              }`,
+                              pointerEvents: `${loggedInUser._id === val.user._id ? "none" : "all"}`,
                             }}
                           >
                             <img
@@ -1094,14 +951,6 @@ const PostDetail = ({
                                   }
                                 />
                               ) : (
-                                // <img
-                                //   src={bwFireIcon}
-                                //   width={15}
-                                //   alt="like post"
-                                //   onClick={() =>
-                                //     commentlikeUnlikeHandler(postId, val._id)
-                                //   }
-                                // />
                                 <ImFire
                                   onClick={() =>
                                     commentlikeUnlikeHandler(postId, val._id)
@@ -1121,12 +970,6 @@ const PostDetail = ({
                                 onClick={() => deleteComments(postId, val._id)}
                                 style={{ cursor: "pointer" }}
                               >
-                                {/* <img
-                                src={deleteIcon}
-                                alt="delete icon"
-                                className="deleteIcon py-1"
-                                width={15}
-                              /> */}
                                 <MdDelete style={{ fill: "var(--d-l-grey)" }} />
                               </span>
                             )}
@@ -1135,7 +978,7 @@ const PostDetail = ({
                       </section>
                     ))}
                   </div>
-                
+                )}
               </div>
             </>
           )}

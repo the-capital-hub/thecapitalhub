@@ -210,11 +210,12 @@ const HalfbendCard = ({ folderName, userId }) => {
               >
                 <div
                   className="custom-card"
-                  onClick={() => openPdfInNewWindow(item.fileUrl)}
+               
                   style={{ width: "100%" }}
                 >
                   <img
                     src={item.fileUrl}
+                    onClick={() => openPdfInNewWindow(item.fileUrl)}
                     //height={50}
                     alt="PDF Icon"
                     style={{ width: "100%",height:"10rem" }}
@@ -240,6 +241,7 @@ const HalfbendCard = ({ folderName, userId }) => {
                         <MdDelete
                           size={20}
                           color="#f34646"
+                        style={{cursor:"pointer"}}
                           onClick={() => handleDeleteDoc(item._id)}
                         />
                       )}

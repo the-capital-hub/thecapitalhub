@@ -21,14 +21,15 @@ import {
   setPageTitle,
   selectCreatePostModal,
   toggleCreatePostModal,
+  setShowOnboarding,
 } from "../../../Store/features/design/designSlice";
 import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
 import TutorialTrigger from "../../Shared/TutorialTrigger/TutorialTrigger";
 import LookingForFund from "./Components/LookingForFund/LookingForFund";
 //import IconFile from "../SvgIcons/IconFile";
-import { GrArticle } from "react-icons/gr";
-import { BsFileText } from "react-icons/bs";
-import { CiImageOn, CiVideoOn } from "react-icons/ci";
+// import { GrArticle } from "react-icons/gr";
+// import { BsFileText } from "react-icons/bs";
+// import { CiImageOn, CiVideoOn } from "react-icons/ci";
 import { useParams } from "react-router-dom";
 import PostDetail from "../Cards/FeedPost/PostDetail";
 import ArticlePopup from "../../PopUp/ArticlePopup/ArticlePopup";
@@ -62,12 +63,18 @@ const Feed = () => {
   const [popupOpen, setPopupOpen] = useState(false);
   const [allPosts, setAllPosts] = useState([]);
   const [newPost, setNewPost] = useState(false);
+  const userVisitCount = localStorage.getItem("userVisit")
   //const [loadingFeed, setLoadingFeed] = useState(false);
   const [articlePopup, setArticlePopup] = useState(false);
   const [getSavedPostData, setgetSavedPostData] = useState("");
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
 
+  useEffect(()=>{
+    if(Number(userVisitCount)<=1){
+      dispatch(setShowOnboarding(true))
+    }
+  },[])
   useEffect(() => {
     setPopupOpen(isCreatePostModalOpen);
   }, [isCreatePostModalOpen]);

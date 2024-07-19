@@ -9,9 +9,7 @@ import SuspenseLoader from "../components/SuspenseLoader/SuspenseLoader";
 const InvestorHome = lazy(() =>
   import("../components/Investor/InvestorHome/InvestorHome")
 );
-const SubscriptionSuccess = lazy(() =>
-  import("../components/SubscriptionSuccess/SubscriptionSuccess")
-);
+
 const OtherUserProfile = lazy(() =>
   import("../pages/StartUp/OtherUserProfile/OtherUserProfile")
 );
@@ -487,14 +485,7 @@ function StartUpRoutes() {
             </Suspense>
           }
         />
-        <Route
-          path="payment/success"
-          element={
-            <Suspense fallback={<SuspenseLoader />}>
-              <SubscriptionSuccess />
-            </Suspense>
-          }
-        />
+
       </Route>
     </Route>
   );

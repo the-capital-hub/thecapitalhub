@@ -41,7 +41,7 @@ const InvestorHome = () => {
   // Fetch loggedInUser from global state
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
   const loggedInUserId = useSelector((state) => state.user.loggedInUser._id);
-  const [postSection, setPostSection] = useState("myPost");
+  const [postSection, setPostSection] = useState("featuredPosts");
   //const companyFounderId = useSelector(selectCompanyFounderId);
   const companyDataId = useSelector(selectCompanyDataId);
   const dispatch = useDispatch();
@@ -107,21 +107,21 @@ const InvestorHome = () => {
               {/* Featured Posts */}
               <div className="box personal_information">
                 <div style={{ display: "flex" }}>
-                  <div
-                    className="personal_information_header"
-                    onClick={() => {
-                      setPostSection("myPost");
-                    }}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <h2
-                      className={`typography ${
-                        postSection === "myPost" ? "active" : ""
-                      }`}
-                    >
-                      My posts
-                    </h2>
-                  </div>
+                <div
+                className="personal_information_header"
+                onClick={() => {
+                  setPostSection("featuredPosts");
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                <h2
+                  className={`typography ${
+                    postSection === "featuredPosts" ? "active" : ""
+                  }`}
+                >
+                  Featured posts
+                </h2>
+              </div>
                   <div
                     className="personal_information_header"
                     onClick={() => {
@@ -140,19 +140,20 @@ const InvestorHome = () => {
                   <Link to={""}>See more</Link>
                 </div> */}
                   </div>
+                  
                   <div
                     className="personal_information_header"
                     onClick={() => {
-                      setPostSection("featuredPosts");
+                      setPostSection("myPost");
                     }}
                     style={{ cursor: "pointer" }}
                   >
                     <h2
                       className={`typography ${
-                        postSection === "featuredPosts" ? "active" : ""
+                        postSection === "myPost" ? "active" : ""
                       }`}
                     >
-                      Featured posts
+                      My posts
                     </h2>
                   </div>
                 </div>

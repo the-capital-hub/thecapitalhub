@@ -32,7 +32,7 @@ const InvestNow = ({ page }) => {
   const [fullName, setFullName] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [email, setEmail] = useState("");
-  const [commitmentAmount, CommitmentAmount] = useState("");
+  const [commitmentAmount, setCommitmentAmount] = useState("");
 
   const handleSubmit = async () => {
     // if (loggedInUser.subscriptionType === "Basic") {
@@ -123,7 +123,7 @@ const InvestNow = ({ page }) => {
                   type={"text"}
                   placeholder={"Commitment amount"}
                   value={commitmentAmount}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setCommitmentAmount(e.target.value)}
                 />
                 {isSubmitted ? (
                   <button>Submitted</button>

@@ -21,8 +21,9 @@ import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidth
 import {
   setPageTitle,
   selectInvestorCreatePostModal,
+  setShowOnboarding,
 } from "../../../Store/features/design/designSlice";
-// import OnBoardUser from "../../../components/OnBoardUser/OnBoardUser";
+
 import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
 import {
   selectCompanyDataId,
@@ -35,6 +36,7 @@ import {
 import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
 import PostDetail from "../../../components/Investor/Cards/FeedPost/PostDetail";
 
+
 function Home() {
   const loggedInUserId = useSelector(selectLoggedInUserId);
   const userProfilePicture = useSelector(selectUserProfilePicture);
@@ -42,6 +44,7 @@ function Home() {
   const userInvestor = useSelector(selectUserInvestor);
   const companyDataId = useSelector(selectCompanyDataId);
   const { postId } = useParams();
+  const userVisitCount = localStorage.getItem("userVisit");
   const [popupOpen, setPopupOpen] = useState(false);
   const [allPosts, setAllPosts] = useState([]);
   const [newPost, setNewPost] = useState(false);
@@ -75,6 +78,11 @@ function Home() {
     selectInvestorCreatePostModal
   );
 
+  useEffect(() => {
+    if (Number(userVisitCount) <= 1) {
+      dispatch(setShowOnboarding(true));
+    }
+  }, []);
   useEffect(() => {
     setPopupOpen(isInvestorCreatePostModalOpen);
   }, [isInvestorCreatePostModalOpen]);
@@ -111,12 +119,11 @@ function Home() {
   const fetchMorePosts = () => {
     getAllPostsAPI(page)
       .then(({ data }) => {
-        //console.log(data);
         if (data?.length === 0) {
+          setHasMore(false);
         } else {
-          const totalPost = data.filter((item)=> item?.postType !== "company")
-          const post = allPosts.filter((item)=> item?.postType !== "company")
-          //console.log(post,totalPost)
+          const totalPost = data.filter((item) => item?.postType !== "company");
+          const post = allPosts.filter((item) => item?.postType !== "company");
           setAllPosts([...post, ...totalPost]);
           setPage(page + 1);
         }
@@ -138,8 +145,6 @@ function Home() {
       });
     fetchMorePosts();
   }, [newPost, loggedInUserId]);
-
-  console.log(allPosts?.[0], 'hii');
 
   // Repost
   const [repostLoading, setRepostLoading] = useState({
@@ -171,140 +176,137 @@ function Home() {
   return (
     <MaxWidthWrapper>
       <div className="investor_feed_container">
-      {postId ? (
-        <PostDetail
-          userId={postData.userId}
-          postId={postId}
-          designation={postData.designation}
-          startUpCompanyName={postData.startUp}
-          investorCompanyName={postData.investor}
-          profilePicture={postData.profilePicture}
-          description={postData.description}
-          firstName={postData.firstName}
-          lastName={postData.lastName}
-          oneLinkId={postData.oneLinkId}
-          video={postData.video}
-          image={postData.image}
-          documentName={postData.documentName}
-          documentUrl={postData.documentUrl}
-          createdAt={postData.createdAt}
-          likes={postData.likes}
-          resharedPostId={postData.resharedPostId}
-          fetchAllPosts={fetchMorePosts}
-          response={getSavedPostData}
-          repostWithToughts={(resharedPostId) => {
-            setRepostingPostId(resharedPostId);
-            openPopup();
-          }}
-          repostInstantly={repostInstantly}
-          repostLoading={repostLoading}
-          deletePostFilterData={deletePostFilterData}
-          setPostData={setPostData}
-        />
-      ) : (<div className="main_content">
-          {/* <InvestorSmallProfilecard text={"Home"} /> */}
-          <div className="posts_col d-flex flex-column gap-3">
-            {/* Onboarding popup */}
-            <TutorialTrigger steps={investorOnboardingSteps.homePage} />
+        {postId ? (
+          <PostDetail
+            userId={postData.userId}
+            postId={postId}
+            designation={postData.designation}
+            startUpCompanyName={postData.startUp}
+            investorCompanyName={postData.investor}
+            profilePicture={postData.profilePicture}
+            description={postData.description}
+            firstName={postData.firstName}
+            lastName={postData.lastName}
+            oneLinkId={postData.oneLinkId}
+            video={postData.video}
+            image={postData.image}
+            documentName={postData.documentName}
+            documentUrl={postData.documentUrl}
+            createdAt={postData.createdAt}
+            likes={postData.likes}
+            resharedPostId={postData.resharedPostId}
+            fetchAllPosts={fetchMorePosts}
+            response={getSavedPostData}
+            repostWithToughts={(resharedPostId) => {
+              setRepostingPostId(resharedPostId);
+              openPopup();
+            }}
+            repostInstantly={repostInstantly}
+            repostLoading={repostLoading}
+            deletePostFilterData={deletePostFilterData}
+            setPostData={setPostData}
+          />
+        ) : (
+          <div className="main_content">
+            {/* <InvestorSmallProfilecard text={"Home"} /> */}
+            <div className="posts_col d-flex flex-column gap-3">
+              {/* Onboarding popup */}
+              <TutorialTrigger steps={investorOnboardingSteps.homePage} />
 
-            {/* Write a post */}
-            <div className="box start_post_container border">
-              <img
-                src={userProfilePicture}
-                alt="Profile"
-                className="rounded-circle"
-                style={{ objectFit: "cover" }}
-              />
-              <div className="w-100 me-4" onClick={openPopup}>
-                <input
-                  className="px-3"
-                  type="text"
-                  placeholder="Write a post..."
-                  style={{ pointerEvents: "none" }}
+              {/* Write a post */}
+              <div className="box start_post_container border">
+                <img
+                  src={userProfilePicture}
+                  alt="Profile"
+                  className="rounded-circle"
+                  style={{ objectFit: "cover" }}
                 />
-              </div>
-            </div>
-            {/* {!loadingFeed ? ( */}
-            <InfiniteScroll
-              dataLength={allPosts.length}
-              next={fetchMorePosts}
-              hasMore={hasMore}
-              loader={
-                <p className="spinner_loader container p-5 text-center my-5  rounded-4 shadow ">
-                  <div class="d-flex justify-content-center">
-                    <div class="spinner-border text-secondary" role="status">
-                      <span class="visually-hidden">Loading...</span>
-                    </div>
-                  </div>
-                </p>
-              }
-            >
-              {allPosts?.map(
-                ({
-                  description,
-                  user: {
-                    firstName,
-                    lastName,
-                    designation,
-                    profilePicture,
-                    _id: userId,
-                    startUp,
-                    investor,
-                    oneLinkId,
-                  },
-                  video,
-                  image,
-                  documentUrl,
-                  documentName,
-                  createdAt,
-                  likes,
-                  _id,
-                  resharedPostId,
-                }) => (
-                  <InvestorFeedPostCard
-                    key={Math.random()}
-                    userId={userId}
-                    postId={_id}
-                    designation={designation}
-                    profilePicture={profilePicture}
-                    description={description}
-                    startUpCompanyName={startUp}
-                    investorCompanyName={investor}
-                    firstName={firstName}
-                    lastName={lastName}
-                    oneLinkId={oneLinkId}
-                    video={video}
-                    image={image}
-                    documentName={documentName}
-                    documentUrl={documentUrl}
-                    createdAt={createdAt}
-                    likes={likes}
-                    fetchAllPosts={fetchMorePosts}
-                    response={getSavedPostData}
-                    repostWithToughts={(resharedPostId) => {
-                      setRepostingPostId(resharedPostId);
-                      openPopup();
-                    }}
-                    repostInstantly={repostInstantly}
-                    repostLoading={repostLoading}
-                    resharedPostId={resharedPostId}
-                    deletePostFilterData={deletePostFilterData}
-                    setPostData={setPostData}
+                <div className="w-100 me-4" onClick={openPopup}>
+                  <input
+                    className="px-3"
+                    type="text"
+                    placeholder="Write a post..."
+                    style={{ pointerEvents: "none" }}
                   />
-                )
-              )}
-            </InfiniteScroll>
-            {/* ) : (
-                <p className="container p-5 text-center my-5 bg-white rounded-4 shadow ">
-                  <div class="d-flex justify-content-center">
-                    <div class="spinner-border" role="status">
-                      <span class="visually-hidden">Loading...</span>
-                    </div>
-                  </div>
-                </p>
-              )}*/}
+                </div>
+              </div>
+              <InfiniteScroll
+                  dataLength={allPosts.length}
+                  next={fetchMorePosts}
+                  hasMore={hasMore}
+                  loader={
+                    <p className="spinner_loader container p-5 text-center my-5 rounded-4 shadow">
+                      <div className="d-flex justify-content-center">
+                        <div className="spinner-border text-secondary" role="status">
+                          <span className="visually-hidden">Loading...</span>
+                        </div>
+                      </div>
+                    </p>
+                  }
+                >
+                  {allPosts?.map((post) => {
+                    if (!post || !post.user) {
+                      return null;
+                    }
+                    const {
+                      description,
+                      user: {
+                        firstName,
+                        lastName,
+                        designation,
+                        profilePicture,
+                        _id: userId,
+                        startUp,
+                        investor,
+                        oneLinkId,
+                      },
+                      video,
+                      image,
+                      documentUrl,
+                      documentName,
+                      createdAt,
+                      likes,
+                      _id,
+                      resharedPostId,
+                    } = post;
+                    return (
+                      <InvestorFeedPostCard
+                        key={_id} // Ensure this is a unique key
+                        userId={userId}
+                        postId={_id}
+                        designation={designation}
+                        profilePicture={profilePicture}
+                        description={description}
+                        startUpCompanyName={startUp}
+                        investorCompanyName={investor}
+                        firstName={firstName}
+                        lastName={lastName}
+                        oneLinkId={oneLinkId}
+                        video={video}
+                        image={image}
+                        documentName={documentName}
+                        documentUrl={documentUrl}
+                        createdAt={createdAt}
+                        likes={likes}
+                        fetchAllPosts={fetchMorePosts}
+                        response={getSavedPostData}
+                        repostWithToughts={(resharedPostId) => {
+                          setRepostingPostId(resharedPostId);
+                          openPopup();
+                        }}
+                        repostInstantly={repostInstantly}
+                        repostLoading={repostLoading}
+                        resharedPostId={resharedPostId}
+                        deletePostFilterData={deletePostFilterData}
+                        setPostData={setPostData}
+                      />
+                    );
+                  })}
+                </InfiniteScroll>
+
+            </div>
           </div>
-        </div>)}
+        )}
         <div className="right_content d-none d-xl-block">
           <InvestorRightProfileCard />
           <RecommendationCard isInvestor={true} />
@@ -320,7 +322,6 @@ function Home() {
           appendDataToAllPosts={appendDataToAllPosts}
         />
       )}
-      {/* <OnBoardUser steps={investorOnboardingSteps.homePage} /> */}
     </MaxWidthWrapper>
   );
 }

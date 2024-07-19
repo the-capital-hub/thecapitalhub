@@ -1,4 +1,3 @@
-// import { Bookmark } from "../../../../../Images/Investor/CompanyProfile";
 import "./CompanyActions.scss";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -83,6 +82,25 @@ export default function CompanyActions({
     }
   };
 
+  // Handle Interest click
+  const handleInterest = async () => {
+    setLoading(true);
+    let updatedMyInterests = [...myInterests, { companyId }];
+
+    try {
+      const { data } = await postInvestorData({
+        founderId: loggedInUserId,
+        myInterests: updatedMyInterests,
+      });
+      console.log("interest", data);
+      dispatch(setUserCompany(data));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handelOnlinkRequest = async () => {
     try {
       setPopPayOpen(true);
@@ -127,6 +145,7 @@ export default function CompanyActions({
       console.log(err);
     }
   };
+
   return (
     <div className="company__actions d-flex flex-column justify-content-end">
       {/* {isOnelink ? (
@@ -151,8 +170,7 @@ export default function CompanyActions({
                 !myInterestsIds?.includes(companyId) ? (
                   <button
                     className="btn-capital text-center"
-                    data-bs-toggle="modal"
-                    data-bs-target={`#selectCommitmentModal${founderId._id}`}
+                    onClick={handleInterest}
                   >
                     Interested
                   </button>

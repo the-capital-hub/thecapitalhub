@@ -8,10 +8,12 @@ import {
 import { useSelector } from "react-redux";
 import SavedPostSmallCard from "../../InvestorGlobalCards/SavedPostSmallCard/SavedPostSmallCard";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
+import { selectTheme } from "../../../../Store/features/design/designSlice";
 
 const NavigatedCardViewer = () => {
   const [activeHeader, setActiveHeader] = useState("startup");
   const [loading, setLoading] = useState(false);
+  const theme = useSelector(selectTheme);
   const [allPosts, setAllPosts] = useState(null);
   const [headerTabs, setHeaderTabs] = useState([]);
   const [collectionName, setCollectionName] = useState(null);
@@ -51,6 +53,7 @@ const NavigatedCardViewer = () => {
       getSavedPostsByCollection(loggedInUser._id, collectionName)
         .then((data) => {
           console.log(data);
+
           setAllPosts(data.data);
           setLoading(false);
         })
@@ -61,7 +64,7 @@ const NavigatedCardViewer = () => {
         });
     }
   }, [loggedInUser, collectionName, activeHeader]);
- console.log(headerTabs)
+  console.log(loading);
   return (
     <div className="navigated_box_container">
       <div className="navigated-card-viewer">
@@ -76,7 +79,10 @@ const NavigatedCardViewer = () => {
             </div>
           ))}
         </div>
-        <div className="card-viewer">
+        <div
+          className="card-viewer"
+        
+        >
           {loading ? (
             <SpinnerBS
               className={
@@ -125,17 +131,12 @@ const NavigatedCardViewer = () => {
                 />
               )
             )
-          ) : allPosts?.length === 0 ? (
-            <p className="container p-5 text-center my-5 white-to-grey d-l-grey mx-auto">
-              No posts saved
-            </p>
           ) : (
-            <SpinnerBS
-              className={
-                "d-flex py-5 justify-content-center align-items-center w-100"
-              }
-              colorClass={"d-l-grey"}
-            />
+            allPosts?.length === 0 && (
+              <p className="container p-5 text-center my-5 d-l-grey mx-auto" style={{ color: theme === "dark" ? "#fff" : "#000" }}>
+                No posts saved
+              </p>
+            )
           )}
         </div>
       </div>

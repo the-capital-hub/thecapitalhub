@@ -39,7 +39,7 @@ export default function InvestorActions({
           <>
             <Link to={linkTo}
               className="btn btn-capital-investor-view actions-btn"
-              //onClick={handleScheduleClick}
+              //onClick={()=>setPopPayOpen(true)}
             >
               Schedule Appointment
             </Link>

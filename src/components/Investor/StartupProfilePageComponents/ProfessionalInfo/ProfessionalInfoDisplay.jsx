@@ -147,7 +147,7 @@ export default function ProfessionalInfoDisplay({
                 {professionalData.userName || ""}
               </h6>
               <p className="m-0">
-                {professionalData.designation}, {professionalData.industry},{" "}
+                {professionalData.designation} of {professionalData.company},{" "}
                 {professionalData.location}
               </p>
               <p

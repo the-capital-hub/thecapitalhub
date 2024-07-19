@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "./subscriptionPop.scss";
 import { CiCircleCheck } from "react-icons/ci";
 import { subscription } from "./data";
 import { subscribe } from "../../../Service/user";
 import { useNavigate } from "react-router-dom";
+import { load } from "@cashfreepayments/cashfree-js";
 //import { Cashfree } from "cashfree-pg";
 //import { useSelector } from "react-redux";
 
 const SubcriptionPop = ({ popPayOpen, setPopPayOpen }) => {
   //const loggedInUser = useSelector((state) => state.user.loggedInUser);
-  const navigate = useNavigate();
+  const [orderId, setOrderId] = useState("");
+  let cashfree;
+
+  let insitialzeSDK = async () => {
+    cashfree = await load({
+      mode: "sandbox",
+    });
+  };
+  insitialzeSDK();
+  //const navigate = useNavigate();
   const handleCloseBar = () => {
     setPopPayOpen(false);
   };
@@ -17,9 +27,19 @@ const SubcriptionPop = ({ popPayOpen, setPopPayOpen }) => {
   const handelPurchase = async (item) => {
     try {
       const res = await subscribe(item);
-      console.log(res);
+      console.log(res)
       if (res) {
-        window.location.href = res.data.authLink;
+        setOrderId(res.order_id);
+        //res.data.payment_session_id
+        let checkOutOptions = {
+          paymentSessionId: res.payment_session_id,
+          redirectTrarget: "_modal",
+        };
+        cashfree.checkout(checkOutOptions).then(()=>{
+          console.log("Payment Success")
+        }).catch(error=>{
+          console.log(error)
+        })
         // Cashfree.checkout(
         //   {
         //     token: res.data.authLink, // Pass the payment link from your backend

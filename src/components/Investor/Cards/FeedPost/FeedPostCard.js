@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import { GoHome } from "react-icons/go";
 import { PiDotsThreeBold } from "react-icons/pi";
@@ -6,15 +6,22 @@ import "./feedPostCard.scss";
 import fireIcon from "../../../../Images/post/like-fire.png";
 import { ImFire } from "react-icons/im";
 import { FaRegEdit } from "react-icons/fa";
+import IconComponentAdd from "../../SvgIcons/IconComponentAdd";
+import IconDelete from "../../SvgIcons/IconDelete";
+import ModalBSHeader from "../../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
+import ModalBSFooter from "../../../PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
+import { MdDelete } from "react-icons/md"
 import { BiRepost } from "react-icons/bi";
 import { BsFire } from "react-icons/bs";
 import { CiBookmark } from "react-icons/ci";
+import ModalBSBody from "../../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
 import { IoMdBookmark } from "react-icons/io";
-//import CustomModal from "../../../PopUp/Modal/Modal";
-import { FaRegCommentDots, FaCommentDots } from "react-icons/fa6";
+import { FaRegCommentDots, FaCommentDots } from "react-icons/fa";
+import ModalBSContainer from "../../../PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
 import TimeAgo from "timeago-react";
+import IconReportPost from "../../SvgIcons/IconReportPost";
+import { CiCirclePlus } from "react-icons/ci";
 import { useSelector } from "react-redux";
-import { useState } from "react";
 import {
   deletePostAPI,
   getPostComment,
@@ -30,25 +37,15 @@ import {
 import { Link } from "react-router-dom";
 import SavePostPopUP from "../../../../components/PopUp/SavePostPopUP/SavePostPopUP";
 import AfterSuccessPopUp from "../../../../components/PopUp/AfterSuccessPopUp/AfterSuccessPopUp";
-import { useRef } from "react";
-import ModalBSContainer from "../../../PopUp/ModalBS/ModalBSContainer/ModalBSContainer";
-import ModalBSHeader from "../../../PopUp/ModalBS/ModalBSHeader/ModalBSHeader";
-import ModalBSFooter from "../../../PopUp/ModalBS/ModalBSFooter/ModalBSFooter";
-import ModalBSBody from "../../../PopUp/ModalBS/ModalBSBody/ModalBSBody";
-import IconComponentAdd from "../../SvgIcons/IconComponentAdd";
-import Linkify from "react-linkify";
-import IconDelete from "../../SvgIcons/IconDelete";
-import IconReportPost from "../../SvgIcons/IconReportPost";
+import { Modal } from "react-bootstrap";
+import DOMPurify from "dompurify";
 import { useNavigate } from "react-router-dom";
 import {
   selectIsMobileView,
   selectTheme,
   selectVideoAutoplay,
 } from "../../../../Store/features/design/designSlice";
-import { CiCirclePlus } from "react-icons/ci";
 import { selectIsInvestor } from "../../../../Store/features/user/userSlice";
-import { Modal } from "react-bootstrap";
-import { MdDelete } from "react-icons/md";
 
 const FeedPostCard = ({
   postId,
@@ -127,20 +124,12 @@ const FeedPostCard = ({
 
   const [showUnsaveSuccess, setShowUnsaveSuccess] = useState(false);
   const receiveUnSavedPostStatus = () => {
-    // setShowUnsaveSuccess(true);
-    // setTimeout(() => {
-    //   setShowUnsaveSuccess(false);
     const updatedSavedPostId = savedPostId.filter((id) => id !== postId);
     setSavedPostId(updatedSavedPostId);
-    // }, 2500);
   };
 
   const receiveSavedPostStatus = () => {
-    // setShowSuccess(true);
-    // setTimeout(() => {
-    //   setShowSuccess(false);
     setSavedPostId([...savedPostId, postId]);
-    // }, 2500);
   };
 
   const sendComment = async () => {
@@ -169,31 +158,26 @@ const FeedPostCard = ({
 
       if (response) {
         await getPostComment({ postId }).then((res) => {
-          console.log("response", res.data.data);
           setComments(res.data.data);
         });
       }
-
-      console.log("Comment submitted successfully:", response.data);
     } catch (error) {
       console.error("Error submitting comment:", error);
     }
   };
 
   const [liked, setLiked] = useState(false);
-  // const [commentLiked, setCommentLiked] = useState(true);
 
   const commentlikeUnlikeHandler = async (postId, commentId) => {
     try {
       const result = await toggleLikeComment(postId, commentId);
-      console.log("Toggle Like Result:", result);
-
       const response = await getPostComment({ postId });
       setComments(response.data.data);
     } catch (error) {
       console.error("Error likeDislike comment : ", error);
     }
   };
+
   useEffect(() => {
     if (!repostPreview) {
       getPostComment({ postId }).then((res) => {
@@ -220,7 +204,6 @@ const FeedPostCard = ({
       };
 
       fetchSavedPostData();
-      // useEffect(() => {
       setLiked(likes?.includes(loggedInUser._id) || null);
 
       getPostComment({ postId }).then((res) => {
@@ -320,7 +303,6 @@ const FeedPostCard = ({
     }
   };
 
-  // Delete comment
   const deleteComments = async (postId, commentId) => {
     try {
       const updatedComments = comments.filter(
@@ -328,19 +310,14 @@ const FeedPostCard = ({
       );
       setComments(updatedComments);
       await deleteComment(postId, commentId);
-      // await getPostComment({ postId }).then((res) => {
-      //   setComments(res.data.data);
-      // });
     } catch (error) {
       console.log("Error deleting comment : ", error);
     }
   };
 
-  // Kebab menu
   const [kebabMenuVisible, setKebabMenuVisible] = useState(false);
   const kebabMenuContainerRef = useRef(null);
 
-  // Delete post
   const deletePost = async (postId) => {
     try {
       setLoading(true);
@@ -358,7 +335,6 @@ const FeedPostCard = ({
     }
   };
 
-  // Report post
   const [reportReason, setReportReason] = useState("");
   const [showReportModal, setShowReportModal] = useState(false);
   const [filingReport, setFilingReport] = useState(false);
@@ -367,7 +343,6 @@ const FeedPostCard = ({
   const repostContainerRef = useRef(null);
 
   const reportSubmitHandler = () => {
-    // take reason from state = reportReason
     setFilingReport(true);
     setTimeout(() => {
       setFilingReport(false);
@@ -375,7 +350,6 @@ const FeedPostCard = ({
     }, 2000);
   };
 
-  // add post as featured
   const [showFeaturedPostSuccess, setShowFeaturedPostSuccess] = useState(false);
   const [showCompanyUpdateSuccess, setShowCompanyUpdateSuccess] =
     useState(false);
@@ -462,11 +436,8 @@ const FeedPostCard = ({
               </div>
             </div>
           )}
-          {/* Post Header */}
-          {/* <div className="feed_header_container border-2 border-bottom mb-3 pb-2"> */}
           <div className="feed_header_container pb-2 ">
             <div className="feedpostcard_content">
-              {/* Poster's Profile Picture */}
               <Link
                 to={`/user/${firstName?.toLowerCase() + "-" + lastName?.toLowerCase()}/${oneLinkId}`}
                 className="rounded-circle"
@@ -485,10 +456,8 @@ const FeedPostCard = ({
                   alt="logo"
                   style={{ objectFit: "cover" }}
                 />
-              </Link> 
-              {/* changes on 02/07/24 by aman in above link */}
+              </Link>
 
-              {/* Poster's Information */}
               <div className="feedpostcart_text_header my-1">
               <Link
                 to={`/user/${firstName?.toLowerCase() + "-" + lastName?.toLowerCase()}/${oneLinkId}`}
@@ -511,7 +480,6 @@ const FeedPostCard = ({
                       color: "var( --d-l-grey)",
                     }}
                   >
-                    {/* <img src={HomeIcon} alt="logo" /> */}
                     <GoHome size={15} />
                     {designation},{" "}
                     {investorCompanyName?.companyName
@@ -525,7 +493,6 @@ const FeedPostCard = ({
                       color: "var( --d-l-grey)",
                     }}
                   >
-                    {/* <img src={locationIcon} alt="logo" /> */}
                     <IoLocationOutline size={15} />
                     Bangalore, India
                   </span>
@@ -547,19 +514,12 @@ const FeedPostCard = ({
               </div>
             </div>
 
-            {/* If this is not repost preview show post options */}
             {!repostPreview && (
               <div className="three_dot pe-2 px-md-4">
                 <div
                   className="kebab_menu_container"
                   ref={kebabMenuContainerRef}
                 >
-                  {/* <img
-                    src={ThreeODotIcon}
-                    alt="dot"
-                    className="me-md-3 p-md-2"
-                   
-                  /> */}
                   <PiDotsThreeBold
                     size={35}
                     style={{ fill: "var(--d-l-grey)" }}
@@ -599,7 +559,6 @@ const FeedPostCard = ({
                         data-bs-toggle="modal"
                         data-bs-target="#reportPostModal"
                         className="d-flex align-items-center gap-1"
-                        // onClick={() => setShowReportModal(true)}
                         style={{ color: "var(--d-l-grey)" }}
                       >
                         <IconReportPost />
@@ -622,98 +581,57 @@ const FeedPostCard = ({
             )}
           </div>
 
-          {/* Post Body */}
           <div className="para_container w-100" onClick={handleImageOnClick}>
-            <div className="para_container_text w-100">
-              {/* Text */}
-              <Linkify>
-                {description && (
-                  <p style={{ fontSize: "15px" }} className="text-break ">
-                    {/* {description} */}
-                    {expanded
-                      ? description
-                      : description.split(" ").slice(0, 15).join(" ")}
-                    {!expanded &&
-                      description.split(" ").length > 15 &&
-                      !expanded && (
-                        <span
-                          style={{
-                            cursor: "pointer",
-                          }}
-                          onClick={toggleDescription}
-                          className="text-secondary"
-                        >
-                          ...Read more
-                        </span>
-                      )}
-                    {documentUrl && (
-                      <a
-                        href={documentUrl}
-                        style={{
-                          fontSize: "13px",
-                          wordWrap: "break-word",
-                          overflowWrap: "break-word",
-                        }}
-                        className="text-break"
-                      >
-                        {documentName}
-                      </a>
-                    )}
-                  </p>
-                )}
-              </Linkify>
-              {/* Image */}
-              {image && (
-                <span className="d-flex">
-                  <img
-                    className="mx-auto"
-                    style={{ objectFit: "contain",maxHeight:"30rem" }}
-                    width={!repostPreview ? "100%" : "50%"}
-                    src={image}
-                    alt="Post media"
-                    // onClick={
-                    //   isMobileView ? handleSingleImage : handleImageOnClick
-                    // }
-                  />
-                </span>
-              )}
-
-              {/* Video */}
-              {video && (
-                <span className="d-flex">
-                  <video
-                    className="mx-auto"
-                    width={!repostPreview ? "100%" : "100%"}
-                    style={{ maxWidth: "500px" }}
-                    controls
-                    ref={videoRef}
-                  >
-                    <source alt="post-video" src={video} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </span>
-              )}
-
-              {resharedPostId && (
-                <FeedPostCard
-                  repostPreview
-                  userId={resharedPostId?.user?._id}
-                  postId={resharedPostId?._id}
-                  designation={resharedPostId?.user?.designation}
-                  profilePicture={resharedPostId?.user?.profilePicture}
-                  description={resharedPostId?.description}
-                  firstName={resharedPostId?.user?.firstName}
-                  lastName={resharedPostId?.user?.lastName}
-                  oneLinkId={resharedPostId?.user?.oneLinkId}
-                  video={resharedPostId?.video}
-                  image={resharedPostId?.image}
-                  createdAt={resharedPostId?.createdAt}
-                  likes={resharedPostId?.likes}
-                  startUpCompanyName={resharedPostId.user?.startUp}
-                  investorCompanyName={resharedPostId.user?.investor}
+            <div
+              className="para_container_text w-100"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(description),
+              }}
+            ></div>
+            {image && (
+              <span className="d-flex">
+                <img
+                  className="mx-auto"
+                  style={{ objectFit: "contain", maxHeight: "30rem" }}
+                  width={!repostPreview ? "100%" : "50%"}
+                  src={image}
+                  alt="Post media"
                 />
-              )}
-            </div>
+              </span>
+            )}
+            {video && (
+              <span className="d-flex">
+                <video
+                  className="mx-auto"
+                  width={!repostPreview ? "100%" : "100%"}
+                  style={{ maxWidth: "500px" }}
+                  controls
+                  ref={videoRef}
+                >
+                  <source alt="post-video" src={video} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </span>
+            )}
+            {resharedPostId && (
+              <FeedPostCard
+                repostPreview
+                userId={resharedPostId?.user?._id}
+                postId={resharedPostId?._id}
+                designation={resharedPostId?.user?.designation}
+                profilePicture={resharedPostId?.user?.profilePicture}
+                description={resharedPostId?.description}
+                firstName={resharedPostId?.user?.firstName}
+                lastName={resharedPostId?.user?.lastName}
+                oneLinkId={resharedPostId?.user?.oneLinkId}
+                video={resharedPostId?.video}
+                image={resharedPostId?.image}
+                createdAt={resharedPostId?.createdAt}
+                likes={resharedPostId?.likes}
+                startUpCompanyName={resharedPostId.user?.startUp}
+                investorCompanyName={resharedPostId.user?.investor}
+              />
+            )}
           </div>
           {likes && (
             <span
@@ -744,7 +662,6 @@ const FeedPostCard = ({
                 style={{ background: "var(--bs-light)", height: "3px" }}
               />
               <div className="row feedpostcard_footer">
-                {/* Like and Comment */}
                 <div className="col-6">
                   <div className="feedpostcard_footer_like_comment d-flex justify-content-around gap-2">
                     {liked ? (
@@ -767,13 +684,6 @@ const FeedPostCard = ({
                         </p>
                       </div>
                     ) : (
-                      // <img
-                      //   src={bwFireIcon}
-                      //   width={18}
-                      //   alt="like post"
-                      //   onClick={likeUnlikeHandler}
-                      //   style={{ cursor: "pointer" }}
-                      // />
                       <div
                         className="d-flex flex-column align-items-center justify-content-end
                        gap-1"
@@ -790,13 +700,6 @@ const FeedPostCard = ({
                         </p>
                       </div>
                     )}
-                    {/* <img
-                      src={commentIcon}
-                      width={16}
-                      alt="comment post"
-                      onClick={() => setShowComment(!showComment)}
-                      style={{ cursor: "pointer" }}
-                    /> */}
                     {!showComment ? (
                       <div
                         className="d-flex flex-column align-items-center justify-content-end
@@ -835,7 +738,6 @@ const FeedPostCard = ({
                   </div>
                 </div>
 
-                {/* Repost and Save posts */}
                 <div className=" col-6 d-flex align-items-center gap-1 justify-content-around">
                   <span
                     className={`repost_container rounded-4 ${
@@ -843,13 +745,6 @@ const FeedPostCard = ({
                     }`}
                     ref={repostContainerRef}
                   >
-                    {/* <img
-                      src={repostIcon}
-                      width={12}
-                      alt="reshare post"
-                      onClick={() => setShowRepostOptions(!showRepostOptions)}
-                      style={{ cursor: "pointer" }}
-                    /> */}
                     <div
                       className="d-flex flex-column align-items-center justify-content-end
                        gap-1"
@@ -902,10 +797,6 @@ const FeedPostCard = ({
                           onClick={() => repostInstantly(postId)}
                         >
                           {!repostLoading?.instant ? (
-                            // <img
-                            //   src={repostInstantlyIcon}
-                            //   alt="repost instantly"
-                            // />
                             <BiRepost
                               size={30}
                               style={{ transform: "rotate(90deg)" }}
@@ -931,12 +822,6 @@ const FeedPostCard = ({
                     )}
                   </span>
                   {savedPostId.includes(postId) ? (
-                    // <img
-                    //   src={savedIcon}
-                    //   width={16}
-                    //   alt="save post"
-
-                    // />
                     <div
                       className="d-flex flex-column align-items-center justify-content-end
                        gap-1"
@@ -954,13 +839,6 @@ const FeedPostCard = ({
                       </p>
                     </div>
                   ) : (
-                    // <img
-                    //   src={saveIcon}
-                    //   width={16}
-                    //   alt="save post"
-                    //   onClick={handleSavePopUp}
-                    //   style={{ cursor: "pointer" }}
-                    // />
                     <div
                       className="d-flex flex-column align-items-center justify-content-end
                     gap-1"
@@ -980,7 +858,6 @@ const FeedPostCard = ({
                   )}
                 </div>
 
-                {/* Show Comments */}
                 {showComment && (
                   <div className="border-top mt-1">
                     <div className="comment_container mb-1 border-bottom">
@@ -1001,19 +878,11 @@ const FeedPostCard = ({
                             onChange={(e) => setCommentText(e.target.value)}
                             onKeyDown={(e) => {
                               if (e.key === "Enter") {
-                                e.preventDefault(); // Prevent the default Enter behavior
-                                sendComment(); // Call sendComment when Enter is pressed
+                                e.preventDefault();
+                                sendComment();
                               }
                             }}
                           />
-                          {/* <div className="icons comment_icons">
-                            <span className="image_icon">
-                              <img src={ImageIcon} alt="gallery icon" />
-                            </span>
-                            <span className="smiley_icon">
-                              <img src={SmileeIcon} alt="smiley icon" />
-                            </span>
-                          </div> */}
                         </div>
                         <button
                           type="button"
@@ -1036,25 +905,24 @@ const FeedPostCard = ({
                         No comments
                       </span>
                     )}
-                    {/* Comments */}
                     {comments.map((val) => (
                       <section
                         className="single-comment row m-0 mt-2"
                         key={val.tex}
                       >
                         <div className="img_container col-2 px-2">
-                        <Link
-                          to={`/user/${val.user?.firstName?.toLowerCase() + "-" + val.user?.lastName?.toLowerCase()}/${val.user.oneLinkId}`}
-                          style={{
-                            pointerEvents: `${loggedInUser._id === val.user._id ? "none" : "all"}`,
-                          }}
-                        >
-                          <img
-                            src={val.user.profilePicture || ""}
-                            alt="Connection"
-                            className="w-100 rounded-circle border border-light"
-                          />
-                        </Link>
+                          <Link
+                            to={`/user/${val.user?.firstName?.toLowerCase() + "-" + val.user?.lastName?.toLowerCase()}/${val.user.oneLinkId}`}
+                            style={{
+                              pointerEvents: `${loggedInUser._id === val.user._id ? "none" : "all"}`,
+                            }}
+                          >
+                            <img
+                              src={val.user.profilePicture || ""}
+                              alt="Connection"
+                              className="w-100 rounded-circle border border-light"
+                            />
+                          </Link>
                         </div>
                         <div className="col-10 p-0 flex-grow-1">
                           <div className="comment-details  rounded-3 p-2 p-lg-3 d-flex flex-column">
@@ -1102,14 +970,6 @@ const FeedPostCard = ({
                                   }
                                 />
                               ) : (
-                                // <img
-                                //   src={bwFireIcon}
-                                //   width={15}
-                                //   alt="like post"
-                                //   onClick={() =>
-                                //     commentlikeUnlikeHandler(postId, val._id)
-                                //   }
-                                // />
                                 <ImFire
                                   onClick={() =>
                                     commentlikeUnlikeHandler(postId, val._id)
@@ -1129,12 +989,6 @@ const FeedPostCard = ({
                                 onClick={() => deleteComments(postId, val._id)}
                                 style={{ cursor: "pointer" }}
                               >
-                                {/* <img
-                                  src={deleteIcon}
-                                  alt="delete icon"
-                                  className="deleteIcon py-1"
-                                  width={15}
-                                /> */}
                                 <MdDelete style={{ fill: "var(--d-l-grey)" }} />
                               </span>
                             )}
@@ -1230,20 +1084,6 @@ const FeedPostCard = ({
           ))}
         </Modal.Body>
       </Modal>
-
-      {/*{showImgagePopup && (
-        <CustomModal>
-          <div className="image-popup-container ">
-            <button
-              className="btn btn-sm btn-light  top-0 end-0 m-2"
-              onClick={() => setShowImgagePopup(false)}
-            >
-              X
-            </button>
-            <img src={image} className="popup-image" alt="zoomed image" />
-          </div>
-        </CustomModal>
-)}*/}
 
       <ModalBSContainer id="reportPostModal">
         <ModalBSHeader title="Report Post" className={"d-l-grey"} />

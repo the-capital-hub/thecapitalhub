@@ -26,7 +26,7 @@ function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false })
       .then((res) => {
         setCollectionOptions(res);
       });
-  }, []);
+  }, [loggedInUser._id]);
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -44,7 +44,7 @@ function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false })
         savedPostStatus();
       }
 
-      //saved post achivement
+      //saved post achievement
       if (!loggedInUser.achievements.includes("658bb9748a18edb75e6f4241")) {
         const achievements = [...loggedInUser.achievements];
         achievements.push("658bb9748a18edb75e6f4241");
@@ -58,7 +58,7 @@ function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false })
               achievementId: "658bb9748a18edb75e6f4241",
             };
             addNotificationAPI(notificationBody)
-              .then((data) => console.log("Added"))
+              .then(() => console.log("Added"))
               .catch((error) => console.error(error.message));
 
             // toast.custom((t) => (
@@ -79,7 +79,7 @@ function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false })
     <div className="save_post_popup">
       <div className="popup">
         <div className="popup-content">
-          <div className='selection_input d-flex flex-column align-items-center gap-3'   >
+          <div className='selection_input d-flex flex-column align-items-center gap-3'>
             <h4>
               Select the collection in which to save the post.
             </h4>
@@ -101,13 +101,12 @@ function SavePostPopUP({ postId, onClose, savedPostStatus, isInvestor = false })
                 onChange={handleInputChange}
               />
             )}
-            <button onClick={handleSavePost} style={{ background: buttonColor, color: buttonText }} className="ok_button py-2 px-5" >
+            <button onClick={handleSavePost} style={{ background: buttonColor, color: buttonText }} className="ok_button py-2 px-5">
               Save
             </button>
             {postSaveError && <h6>Post is already in the collection</h6>}
           </div>
-          {/* //add color here */}
-          <button className="close-button" style={{color:theme==="dark"?"#000":"#fff"}}>  
+          <button className="close-button" style={{ color: theme === "dark" ? "#000" : "#fff" }} onClick={onClose}>
             X
           </button>
         </div>

@@ -29,6 +29,7 @@ import {
 } from "../../../Store/features/user/userSlice";
 import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
 import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
+import PublicLinks from "../../../components/Investor/CompanyProfilePageComponents/PublicLinks/PublicLinks";
 
 export default function EditInvestorCompanyProfilePage() {
   const loggedInUserId = useSelector(selectLoggedInUserId);
@@ -36,7 +37,7 @@ export default function EditInvestorCompanyProfilePage() {
   const userCompanyData = useSelector(selectUserCompanyData);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [publicLinks, setPublicLinks] = useState(null);
   const [colorCardData, setColorCardData] = useState(null);
 
   const [field, setField] = useState("last_round_investment");
@@ -60,6 +61,7 @@ export default function EditInvestorCompanyProfilePage() {
       getInvestorById(userInvestor)
         .then(({ data }) => {
           setCompanyData(data);
+          setPublicLinks(data.socialLinks);
           setCompanyDescription(data.description);
           setColorCardData({
             averageInvestment: data.colorCard?.averageInvestment,
@@ -74,6 +76,7 @@ export default function EditInvestorCompanyProfilePage() {
           console.log(error);
         });
     } else {
+      setPublicLinks(userCompanyData.socialLinks);
       setCompanyData(userCompanyData);
       setCompanyDescription(userCompanyData.description);
       setColorCardData({
@@ -190,7 +193,12 @@ export default function EditInvestorCompanyProfilePage() {
               isSaveAll={isSaveAll}
             />
           </div>
-
+          <div
+            className="CompanyProfileForm rounded-4 p-5 border"
+            id="profileFormContainer"
+          >
+            <PublicLinks publicLinks={publicLinks} />
+          </div>
           {/* Company Description */}
           <CompanyDescription
             companyData={companyData}
@@ -213,12 +221,12 @@ export default function EditInvestorCompanyProfilePage() {
           </div>
 
           {/* Milestones */}
-          <div className="milestones__component  rounded-4 p-5 d-flex flex-column gap-4 border">
+          {/*<div className="milestones__component  rounded-4 p-5 d-flex flex-column gap-4 border">
             <Milestones theme={"investor"} />
-          </div>
+          </div>*/}
 
           {/* Color Cards */}
-          <div className="card_holder d-flex justify-content-between flex-wrap">
+          {/*<div className="card_holder d-flex justify-content-between flex-wrap">
             <ColorCard
               color="white"
               background="#BB98FF"
@@ -301,7 +309,7 @@ export default function EditInvestorCompanyProfilePage() {
               isInvestor={true}
               noRupee={true}
             />
-          </div>
+          </div>*/}
           <button
             className={`align-self-end btn-base investor`}
             onClick={handleSaveAll}

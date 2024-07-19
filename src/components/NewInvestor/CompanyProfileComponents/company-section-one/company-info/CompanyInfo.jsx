@@ -36,7 +36,7 @@ export default function CompanyInfo({
       <div className="company__details d-flex flex-column gap-3 justify-content-around" style={{marginLeft:"0.5rem"}}>
         <div className="company__headings">
           <h3 className="company__name">{name|| "NA"}</h3>
-          <p className="company__type">{industry|| "NA"}</p>
+          {/*<p className="company__type">{industry|| "NA"}</p>*/}
           <p className="company__type">{tagline || "NA"}</p>
           
         </div>

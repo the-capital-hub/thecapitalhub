@@ -6,7 +6,7 @@ import "./StartupExplore.scss";
 import FilterBySelect from "../../../components/NewInvestor/FilterBySelect/FilterBySelect";
 import CompanyProfileList from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfileList";
 import { useDispatch } from "react-redux";
-import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { setPageTitle, setShowOnboarding } from "../../../Store/features/design/designSlice";
 import {
   fetchExploreFilteredResultsAPI,
   fetchExploreFiltersAPI,
@@ -42,7 +42,13 @@ export default function StartupExplore() {
   const [filters, setFilters] = useState({});
   const [filteredData, setFilteredData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const userVisitCount = localStorage.getItem("userVisit")
 
+  useEffect(()=>{
+    if(Number(userVisitCount)<=1){
+      dispatch(setShowOnboarding(true))
+    }
+  },[])
   useEffect(() => {
     document.title = "Explore | The Capital Hub";
     dispatch(setPageTitle("Explore"));

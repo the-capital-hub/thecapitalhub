@@ -51,6 +51,7 @@
     .para_container {
       display: flex;
       margin: auto;
+      flex-direction: column;
 
       .para_container_text {
         p {
@@ -60,18 +61,18 @@
           // background: #eaeef2;
           // color: #373737;
           color: var(--d-l-grey);
-          font-size: 18px;
+          font-size: 0.85rem;
           font-family: Poppins;
           font-weight: 500;
-          line-height: 160%;
+          line-height: 120%;
           letter-spacing: 0.42px;
           // padding: 10px 5px;
-          padding: 10px 5px 0 5px;
+          // padding: 10px 5px 0 5px;
           // background: var(--white-to-dgrey);
 
           @media (max-width: 768px) {
             height: auto;
-            font-size: 15px; /* Reduce font size for smaller screens */
+            font-size: 0.85rem; /* Reduce font size for smaller screens */
           }
         }
       }

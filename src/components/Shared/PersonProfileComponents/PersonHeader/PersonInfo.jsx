@@ -43,9 +43,9 @@ export default function PersonInfo({
               <p className="person__profile__type" style={{ marginBottom: 0 }}>
                 {designation|| "NA"}
               </p>
-              <p className="person__profile__type" style={{ marginBottom: 0 }}>
+ {/*             <p className="person__profile__type" style={{ marginBottom: 0 }}>
                 {industry||"NA"}
-              </p>
+              </p>*/}
               <p className="person__profile__type" style={{ marginBottom: 0 }}>
                 {companyName||"NA"}
               </p>

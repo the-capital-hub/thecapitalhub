@@ -18,7 +18,7 @@ export default function PersonActions({
     ? `/investor/user/${name}/${oneLinkId}`
     : `/user/${name}/${oneLinkId}`;
   return (
-    <div className="d-flex flex-column justify-content-end ">
+    <div className="d-flex flex-column">
       {/* <button className="person_bookmark position-absolute top-0 right-0 me-4">
         <img src={Bookmark} alt="bookmark icon" />
       </button> */}

@@ -7,7 +7,7 @@ import { updateUserById, addNotificationAPI } from "../../Service/user";
 import { loginSuccess } from "../../Store/features/user/userSlice";
 // import AchievementToast from "../Toasts/AchievementToast/AchievementToast";
 // import { achievementTypes } from "../Toasts/AchievementToast/types";
-import toast from "react-hot-toast";
+//import toast from "react-hot-toast";
 
 function OnBoardUser({
   steps,
@@ -27,9 +27,10 @@ function OnBoardUser({
       disableBodyScroll(document.body);
     }
   }, [run, noBodyRoll]);
-
+  console.log(setRun)
   const handleTourClose = () => {
     enableBodyScroll(document.body);
+    
     setRun(false);
 
     // achivement for completing the tutorial

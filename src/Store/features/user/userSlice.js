@@ -15,7 +15,6 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess: (state, action) => {
-      console.log(action)
       localStorage.setItem("loggedInUser", JSON.stringify(action.payload));
       state.loggedInUser = action.payload;
       setThemeColor(
@@ -26,7 +25,6 @@ export const userSlice = createSlice({
         const startupAccounts =
           JSON.parse(localStorage.getItem("StartupAccounts")) || [];
         const updatedStartupAccounts = startupAccounts.map((account) => {
-          console.log(account)
           if (account?.user?._id === action?.payload?._id) {
             account.user = action.payload;
           }

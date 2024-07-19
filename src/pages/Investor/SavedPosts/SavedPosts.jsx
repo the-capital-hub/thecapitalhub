@@ -7,7 +7,7 @@ import "../Syndicates/Syndicates.scss";
 import "./SavedPosts.scss";
 import NavigatedCardViewer from "../../../components/Investor/SavePost/NavigatedCardViewer/NavigatedCardViewer";
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
-import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { setPageTitle, setShowOnboarding } from "../../../Store/features/design/designSlice";
 import { useDispatch } from "react-redux";
 import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
 import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
@@ -15,7 +15,13 @@ import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/i
 export default function SavedPosts() {
   // const [selectedTab, setSelectedTab] = useState("startups");
   const dispatch = useDispatch();
+  const userVisitCount = localStorage.getItem("userVisit")
 
+  useEffect(()=>{
+    if(Number(userVisitCount)<=1){
+      dispatch(setShowOnboarding(true))
+    }
+  },[])
   useEffect(() => {
     window.title = "Saved Posts | The Capital Hub";
     dispatch(setPageTitle("Saved Posts"));

@@ -674,6 +674,7 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [show, setShow] = useState(false);
   const [orderId, setOrderId] = useState("");
+  const userVisitCount = localStorage.getItem("userVisit")
   const [isMobileLogin, setIsMobileLogin] = useState(true);
   const otpInputRefs = useRef([]);
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -751,6 +752,11 @@ const Login = () => {
         });
         const user = response.user;
         const token = response.token;
+        if(!userVisitCount){
+         localStorage.setItem("userVisit",1)
+        }else{
+          localStorage.setItem("userVisit",2)
+        }
         localStorage.setItem("accessToken", token);
         localStorage.setItem("isLoggedIn", "true");
         if (response) {
@@ -802,7 +808,7 @@ const Login = () => {
         }
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       //setError(error.response.data.message);
     } finally {
       setLoading(false);
@@ -819,61 +825,64 @@ const Login = () => {
       //   phoneNumber: inputValues.phoneNumber,
       // });
       // if (res.isOTPVerified) {
-        setLoading(true);
-        const response = await postUserLogin(inputValues);
-        const user = response.user;
-        const token = response.token;
-        localStorage.setItem("accessToken", token);
-        localStorage.setItem("isLoggedIn", "true");
-        if (response) {
-          if (!isInvestorSelected && user.isInvestor === "true") {
-            setError("Invalid credentials");
-            return;
-          }
-          if (isInvestorSelected && user.isInvestor === "false") {
-            setError("Invalid credentials");
-            return;
-          }
-
-          const storedAccountsKey =
-            user.isInvestor === "true" ? "InvestorAccounts" : "StartupAccounts";
-
-          const storedAccounts =
-            JSON.parse(localStorage.getItem(storedAccountsKey)) || [];
-          const isAccountExists = storedAccounts.some(
-            (account) => account?.user?._id === user?._id
-          );
-
-          if (!isAccountExists) {
-            storedAccounts.push(response);
-            localStorage.setItem(
-              storedAccountsKey,
-              JSON.stringify(storedAccounts)
-            );
-          }
-
-          setIsLoginSuccessfull(true);
-
-          setTimeout(() => {
-            setIsInvestorSelected(false);
-            setIsLoginSuccessfull(false);
-
-            if (!user.investor) navigate("/home");
-            else navigate("/investor/home");
-          }, 2000);
-
-          dispatch(loginSuccess(response.user));
-          let isInvestor = response.user.isInvestor === "true" ? true : false;
-          if (isInvestor) {
-            dispatch(fetchCompanyData(response.user.investor, isInvestor));
-          } else {
-            dispatch(fetchCompanyData(response.user._id, isInvestor));
-          }
-
-          dispatch(fetchAllChats());
+      setLoading(true);
+      const response = await postUserLogin(inputValues);
+      const user = response.user;
+      const token = response.token;
+      if(!userVisitCount){
+        localStorage.setItem("userVisit",1)
+       }else{
+        localStorage.setItem("userVisit",2)
+      }
+      localStorage.setItem("accessToken", token);
+      localStorage.setItem("isLoggedIn", "true");
+      if (response) {
+        if (!isInvestorSelected && user.isInvestor === "true") {
+          setError("Invalid credentials");
+          return;
+        }
+        if (isInvestorSelected && user.isInvestor === "false") {
+          setError("Invalid credentials");
+          return;
         }
 
-        console.log("JWT Token:", token);
+        const storedAccountsKey =
+          user.isInvestor === "true" ? "InvestorAccounts" : "StartupAccounts";
+
+        const storedAccounts =
+          JSON.parse(localStorage.getItem(storedAccountsKey)) || [];
+        const isAccountExists = storedAccounts.some(
+          (account) => account?.user?._id === user?._id
+        );
+
+        if (!isAccountExists) {
+          storedAccounts.push(response);
+          localStorage.setItem(
+            storedAccountsKey,
+            JSON.stringify(storedAccounts)
+          );
+        }
+
+        setIsLoginSuccessfull(true);
+
+        setTimeout(() => {
+          setIsInvestorSelected(false);
+          setIsLoginSuccessfull(false);
+          
+          if (!user.investor) navigate("/home");
+          else navigate("/investor/home");
+        }, 2000);
+
+        dispatch(loginSuccess(response.user));
+        let isInvestor = response.user.isInvestor === "true" ? true : false;
+        if (isInvestor) {
+          dispatch(fetchCompanyData(response.user.investor, isInvestor));
+        } else {
+          dispatch(fetchCompanyData(response.user._id, isInvestor));
+        }
+
+        dispatch(fetchAllChats());
+      }
       //}
     } catch (error) {
       console.log(error);
@@ -892,10 +901,10 @@ const Login = () => {
     }
   };
 
-  const handleCloseResetPopup = () => {
-    setShowResetPopUp(false);
-    navigate("/login");
-  };
+  // const handleCloseResetPopup = () => {
+  //   setShowResetPopUp(false);
+  //   navigate("/login");
+  // };
 
   useEffect(() => {
     document.title = "Log In | The Capital Hub";
@@ -960,16 +969,12 @@ const Login = () => {
     }
   }, []);
 
-  const googleLoginHandle = async () => {
-    let googleUser = await GoogleAuth.signIn();
-    const credential = googleUser.authentication.idToken;
-    googleUserVerifyHandler({ credential });
-  };
+  // const googleLoginHandle = async () => {
+  //   let googleUser = await GoogleAuth.signIn();
+  //   const credential = googleUser.authentication.idToken;
+  //   googleUserVerifyHandler({ credential });
+  // };
 
-  const isEmail = (input) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(input);
-  };
   const restPassword = async () => {
     try {
       const response = await postResetPaswordLink(inputValues);
@@ -978,7 +983,7 @@ const Login = () => {
 
         setLoading(true);
         setShowResetPopUp(false);
-        setInputValues()
+        setInputValues();
       } else {
         alert("Something went wrong while sending Email");
       }
@@ -989,6 +994,16 @@ const Login = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  // Function to validate password for spaces
+  const validatePassword = (password) => {
+    return !/\s/.test(password);
   };
   return (
     <div className="container d-flex justify-content-center align-items-start py-md-5 min-vh-100">
@@ -1074,7 +1089,9 @@ const Login = () => {
                       countryCallingCodeEditable={false}
                       initialValueFormat="national"
                       autoComplete="off"
-                      onChange={(e) => handleInputChange(e, "phoneNumber")}
+                      onChange={(e) => {
+                        handleInputChange(e, "phoneNumber");
+                      }}
                       value={inputValues.phoneNumber}
                       countrySelectProps={{
                         native: true,
@@ -1097,10 +1114,11 @@ const Login = () => {
                             placeholder="Enter your email"
                             value={inputValues.usernameOrEmail}
                             onChange={(e) => {
-                              setInputValues({
-                                ...inputValues,
-                                usernameOrEmail: e.target.value,
-                              });
+                              const email = e.target.value;
+                              setInputValues((prev) => ({
+                                ...prev,
+                                usernameOrEmail: email,
+                              }));
                             }}
                           />
                         </div>
@@ -1114,10 +1132,18 @@ const Login = () => {
                             placeholder="Enter your new password"
                             value={inputValues.password}
                             onChange={(e) => {
-                              setInputValues({
-                                ...inputValues,
-                                password: e.target.value,
-                              });
+                              const password = e.target.value;
+                              setInputValues((prev) => ({
+                                ...prev,
+                                password: password,
+                              }));
+                              if (!validatePassword(password)) {
+                                setError(
+                                  "Invalid Password. Password cannot contain spaces"
+                                );
+                              } else {
+                                setError("");
+                              }
                             }}
                           />
                         </div>
@@ -1140,7 +1166,7 @@ const Login = () => {
                             padding: "5px 10px",
                             borderRadius: "15px",
                             color: "#fff",
-                            cursor:"pointer"
+                            cursor: "pointer",
                           }}
                           onClick={restPassword}
                         >
@@ -1157,10 +1183,11 @@ const Login = () => {
                             placeholder="Username or Email"
                             className="form-control plato_form_control rounded-3"
                             onChange={(e) => {
-                              setInputValues({
-                                ...inputValues,
-                                usernameOrEmail: e.target.value,
-                              });
+                              const email = e.target.value;
+                              setInputValues((prev) => ({
+                                ...prev,
+                                usernameOrEmail: email,
+                              }));
                             }}
                             value={inputValues?.usernameOrEmail}
                             name="phoneNumber"
@@ -1177,7 +1204,20 @@ const Login = () => {
                             className="form-control rounded-3"
                             required
                             placeholder="Password"
-                            onChange={(e) => handleInputChange(e, "password")}
+                            onChange={(e) => {
+                              const password = e.target.value;
+                              setInputValues((prev) => ({
+                                ...prev,
+                                password: password,
+                              }));
+                              if (!validatePassword(password)) {
+                                setError(
+                                  "Invalid Password. Password cannot contain spaces"
+                                );
+                              } else {
+                                setError("");
+                              }
+                            }}
                             value={inputValues?.password}
                           />
                         </div>
@@ -1296,18 +1336,18 @@ const Login = () => {
             </div>
           )}
 
-          <div className="line-container m-auto">
+          {/*<div className="line-container m-auto">
             <hr className="line" />
             <span className="text mx-2">OR</span>
             <hr className="line" />
-          </div>
-          <div className="social-login-container d-flex flex-column justify-content-center">
+          </div>*/}
+          {/*<div className="social-login-container d-flex flex-column justify-content-center">
             {isMobileApp ? (
               <img src={GIcon} alt="Google logo" onClick={googleLoginHandle} />
             ) : (
               <div id="googlesignin" className="mx-auto"></div>
             )}
-          </div>
+          </div>*/}
         </div>
         {isLoginSuccessfull && !isInvestorSelected && (
           <AfterSuccessPopUp onClose={handleClosePopup} login={true} />

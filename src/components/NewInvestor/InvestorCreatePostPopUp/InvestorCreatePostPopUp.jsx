@@ -1,20 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./investorCreatePostPopUp.scss";
-// import SmileeIcon from "../../../Images/Smilee.svg";
-// import GallaryIcon from "../../../Images/Gallary.svg";
-// import ThreeDotsIcon from "../../../Images/ThreeDots.svg";
-// import CameraIcon from "../../../Images/Camera.svg";
-// import IconVideo from "../../../Images/post/Video.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getSinglePostAPI,
   postUserPost,
   getInvestorById,
   updateUserById,
-  addNotificationAPI
+  addNotificationAPI,
 } from "../../../Service/user";
 import { getBase64 } from "../../../utils/getBase64";
-import profilePic from "../../../Images/investorIcon/profilePic.webp";
 import FeedPostCard from "../../Investor/Cards/FeedPost/FeedPostCard";
 import EasyCrop from "react-easy-crop";
 import IconFile from "../../Investor/SvgIcons/IconFile";
@@ -24,8 +18,8 @@ import { toggleinvestorCreatePostModal } from "../../../Store/features/design/de
 import { CiImageOn, CiVideoOn } from "react-icons/ci";
 import toast from "react-hot-toast";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
-// import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
-// import { achievementTypes } from "../../Toasts/AchievementToast/types";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const CreatePostPopUp = ({
   setPopupOpen,
@@ -50,8 +44,13 @@ const CreatePostPopUp = ({
 
   const handleClose = () => {
     setPopupOpen(false);
-    dispatch(toggleinvestorCreatePostModal());
-  }
+  };
+
+  useEffect(() => {
+    if (!popupOpen) {
+      dispatch(toggleinvestorCreatePostModal());
+    }
+  }, [popupOpen, dispatch]);
 
   const galleryInputRef = useRef(null);
   const cameraInputRef = useRef(null);
@@ -123,8 +122,9 @@ const CreatePostPopUp = ({
       }
     }
   };
-  const handleTextareaChange = (event) => {
-    setPostText(event.target.value);
+
+  const handleQuillChange = (value) => {
+    setPostText(value);
   };
 
   const getCroppedImg = async (imageSrc, crop) => {
@@ -177,7 +177,8 @@ const CreatePostPopUp = ({
 
     if (!selectedImage && !selectedVideo) {
       if (!respostingPostId && !postText) {
-        return setPosting(false);
+        setPosting(false);
+        return;
       }
     }
     const postData = new FormData();
@@ -221,8 +222,6 @@ const CreatePostPopUp = ({
         setNewPost(Math.random());
         // Close the popup after successful submission
         handleClose();
-        dispatch(toggleinvestorCreatePostModal());
-
 
         if (!loggedInUser.achievements.includes("6564684649186bca517cd0c9")) {
           const achievements = [...loggedInUser.achievements];
@@ -239,10 +238,6 @@ const CreatePostPopUp = ({
               addNotificationAPI(notificationBody)
                 .then((data) => console.log("Added"))
                 .catch((error) => console.error(error.message));
-
-              // toast.custom((t) => (
-              //   <AchievementToast type={achievementTypes.voyager} />
-              // ));
             })
             .catch((error) => {
               console.error("Error updating user:", error);
@@ -269,14 +264,15 @@ const CreatePostPopUp = ({
         })
         .catch(() => handleClose());
     }
-  }, []);
+  }, [respostingPostId]);
 
   return (
     <>
       {popupOpen && <div className="background-overlay"></div>}
       <div
-        className={`investor_create_post_modal modal ${popupOpen ? "d-block" : ""
-          }`}
+        className={`investor_create_post_modal modal ${
+          popupOpen ? "d-block" : ""
+        }`}
         tabIndex="-1"
         role="dialog"
       >
@@ -316,32 +312,32 @@ const CreatePostPopUp = ({
             </div>
             <div className="modal-body">
               <div className="createpost_text_area">
-                <textarea
-                  className="p-3"
-                  style={{ height: respostingPostId ? "80px" : "200px" }}
+                <ReactQuill
                   value={postText}
-                  onChange={handleTextareaChange}
+                  onChange={handleQuillChange}
                   placeholder="Write a post..."
+                  modules={{ toolbar: false }} // Hide the toolbar
+                  formats={[
+                    "header",
+                    "bold",
+                    "italic",
+                    "underline",
+                    "strike",
+                    "list",
+                    "bullet",
+                    "link",
+                    "image",
+                    "video",
+                  ]}
+                  style={{ height: respostingPostId ? "80px" : "200px" }}
                 />
-                {/* <select
-                  name="category"
-                  className="w-100 my-2 p-1"
-                  onChange={({ target: { value } }) => setCategory(value)}
-                >
-                  <option value="">Choose a topic</option>
-                  <option value="startup">Startup</option>
-                  <option value="investor">Investor</option>
-                  <option value="learning">Learnings</option>
-                  <option value="fund">Fund</option>
-                  <option value="other">Others</option>
-                </select> */}
 
                 {respostingPostId &&
                   (loadingRepostData ? (
-                    <div class="d-flex justify-content-center my-4">
+                    <div className="d-flex justify-content-center my-4">
                       <h6 className="h6 me-4">Loading post...</h6>
-                      <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading...</span>
+                      <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Loading...</span>
                       </div>
                     </div>
                   ) : (
@@ -401,9 +397,7 @@ const CreatePostPopUp = ({
                     className="white_button"
                     onClick={handleGalleryButtonClick}
                   >
-                    {/* <img src={GallaryIcon} alt="Button 1" /> */}
                     <CiImageOn size={20} />
-
                   </button>
 
                   <input
@@ -418,9 +412,7 @@ const CreatePostPopUp = ({
                     className="white_button"
                     onClick={handleCameraButtonClick}
                   >
-                    {/* <img src={IconVideo} alt="Button 2" /> */}
                     <CiVideoOn size={20} />
-
                   </button>
 
                   <input
@@ -434,7 +426,6 @@ const CreatePostPopUp = ({
                     className="white_button"
                     onClick={handleDocumentButtonClick}
                   >
-                    {/* <img src={CameraIcon} alt="Button 2" /> */}
                     <IconFile width="16px" height="16px" />
                   </button>
 
@@ -445,18 +436,8 @@ const CreatePostPopUp = ({
                     ref={smileeInputRef}
                     onChange={handleFileChange}
                   />
-                  {/* <button
-                      className="white_button"
-                      onClick={handleSmileeButtonClick}
-                    >
-                      <img src={SmileeIcon} alt="Button 3" />
-                    </button> */}
 
-                  {/* <button className="white_button">
-                      <img src={ThreeDotsIcon} alt="Button 4" />
-                    </button> */}
                   <button className="white_button" onClick={handleOneLinkClick}>
-                    {/* <img src={ThreeDotsIcon} alt="Button 4" /> */}
                     <BsLink45Deg height={"59px"} width={"59px"} size={"20px"} />
                   </button>
                 </div>

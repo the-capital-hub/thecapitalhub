@@ -111,64 +111,63 @@ export default function InvestorOneLinkAppointment() {
         timing,
       };
       try {
-        // const response= await createMeetingLink()
-        // console.log(response)
-        // window.location.href = response.data;
+        const response= await createMeetingLink()
+        window.location.href = response.data;
         // //if(response)
-        const { data } = await createMeetingAPI(newMeetingData);
-        console.log(data)
-        if (data) {
-          //navigate(`/meeting_token`)
-          const notificationBody = {
-            recipient: userId,
-            type: "onlinkRequest",
-            achievementId: "658bb97a8a18edb75e6f4243",
-          };
-          const schuldedUserId = data.userId;
-          await createChat(schuldedUserId, loggedInUserId)
-            .then(async (res) => {
-              console.log(res);
-              if (res.message === "Chat already exists") {
-                addNotificationAPI(notificationBody)
-                  .then((data) => console.log(""))
-                  .catch((error) => console.error(error.message));
-                const message = {
-                  id: generateId(),
-                  senderId: loggedInUserId,
-                  text: `${loggedInUser.firstName}${loggedInUser.lastName} has scheduled a meeting withe you at ${date} ${fromTime}${timing}`,
-                  chatId: res?.data?._id,
-                };
-                await addMessage(message)
-                  .then(({ data }) => {
-                    console.log("response after adding to db", data);
-                  })
-                  .catch((error) => {
-                    console.error("Error-->", error);
-                  });
-                return;
-              }
-              addNotificationAPI(notificationBody)
-                .then((data) => console.log(""))
-                .catch((error) => console.error(error.message));
-              dispatch(setChatId(res?.data._id));
-              const message = {
-                id: generateId(),
-                senderId: loggedInUserId,
-                text: `${loggedInUser.firstName}${loggedInUser.lastName} has scheduled a meeting withe you at ${date} ${fromTime}${timing}`,
-                chatId: res?.data?._id,
-              };
-              await addMessage(message)
-                .then(({ data }) => {
-                  console.log("response after adding to db", data);
-                })
-                .catch((error) => {
-                  console.error("Error-->", error);
-                });
-            })
-            .catch((error) => {
-              console.error("Error creating chat-->", error);
-            });
-        }
+        // const { data } = await createMeetingAPI(newMeetingData);
+        // console.log(data)
+        // if (data) {
+        //   //navigate(`/meeting_token`)
+        //   const notificationBody = {
+        //     recipient: userId,
+        //     type: "onlinkRequest",
+        //     achievementId: "658bb97a8a18edb75e6f4243",
+        //   };
+        //   const schuldedUserId = data.userId;
+        //   await createChat(schuldedUserId, loggedInUserId)
+        //     .then(async (res) => {
+        //       console.log(res);
+        //       if (res.message === "Chat already exists") {
+        //         addNotificationAPI(notificationBody)
+        //           .then((data) => console.log(""))
+        //           .catch((error) => console.error(error.message));
+        //         const message = {
+        //           id: generateId(),
+        //           senderId: loggedInUserId,
+        //           text: `${loggedInUser.firstName}${loggedInUser.lastName} has scheduled a meeting withe you at ${date} ${fromTime}${timing}`,
+        //           chatId: res?.data?._id,
+        //         };
+        //         await addMessage(message)
+        //           .then(({ data }) => {
+        //             console.log("response after adding to db", data);
+        //           })
+        //           .catch((error) => {
+        //             console.error("Error-->", error);
+        //           });
+        //         return;
+        //       }
+        //       addNotificationAPI(notificationBody)
+        //         .then((data) => console.log(""))
+        //         .catch((error) => console.error(error.message));
+        //       dispatch(setChatId(res?.data._id));
+        //       const message = {
+        //         id: generateId(),
+        //         senderId: loggedInUserId,
+        //         text: `${loggedInUser.firstName}${loggedInUser.lastName} has scheduled a meeting withe you at ${date} ${fromTime}${timing}`,
+        //         chatId: res?.data?._id,
+        //       };
+        //       await addMessage(message)
+        //         .then(({ data }) => {
+        //           console.log("response after adding to db", data);
+        //         })
+        //         .catch((error) => {
+        //           console.error("Error-->", error);
+        //         });
+        //     })
+        //     .catch((error) => {
+        //       console.error("Error creating chat-->", error);
+        //     });
+        // }
       } catch (error) {
         console.log("Create meeting error:", error);
       }

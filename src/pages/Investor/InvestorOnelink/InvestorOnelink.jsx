@@ -52,12 +52,10 @@ export default function InvestorOnelink() {
   useEffect(() => {
     getInvestorById(loggedInUser._id)
       .then(({ data }) => {
-        console.log(data)
         setCompany(data);
       })
       .catch(() => setCompany([]));
   }, [loggedInUser._id]);
-
   // HandleExitClick
   const handleExitClick = () => {
     // if (loggedInUser.subscriptionType === "Basic") {

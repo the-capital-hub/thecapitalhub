@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SpinnerBS from "../../../Shared/Spinner/SpinnerBS";
 import TimeAgo from "timeago-react";
 import { Link, useNavigate } from "react-router-dom";
+import { selectTheme } from "../../../../Store/features/design/designSlice";
 import {
   decrementUnreadNotifications,
   selectIsInvestor,
@@ -21,6 +22,8 @@ function NotificationsPopup({ toggleVisibility }) {
   const isInvestor = useSelector(selectIsInvestor);
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(false);
+  const theme = useSelector(selectTheme);
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -66,6 +69,10 @@ function NotificationsPopup({ toggleVisibility }) {
 
 
   const notificationType = (type, post, achievementId, notificationId) => {
+    const stripHtmlTags = (str) => {
+      if (!str) return '';
+      return str.replace(/<\/?[^>]+(>|$)/g, '');
+    };
     switch (type) {
       case "connectionRequest": {
         return "sent you a connection request";
@@ -87,10 +94,10 @@ function NotificationsPopup({ toggleVisibility }) {
             {post?.description && (
               <>
                 <br />
-                <span className="text-muted">
-                  {post?.description?.length > 100
-                    ? `${post?.description?.slice(0, 100)}...`
-                    : post?.description}
+                <span className="text-notification" style={{color:theme === "dark" ? "white" : "black"}}>
+                  {stripHtmlTags(post?.description)?.length > 100
+                    ? `${stripHtmlTags(post?.description)?.slice(0, 100)}...`
+                    : stripHtmlTags(post?.description)}
                 </span>
               </>
             )}
@@ -99,6 +106,7 @@ function NotificationsPopup({ toggleVisibility }) {
         );
       }
       case "postShared": {
+        
         return (
           <span>
             shared your{" "}
@@ -109,13 +117,14 @@ function NotificationsPopup({ toggleVisibility }) {
             >
               post
             </Link>
+            
             {post?.description && (
               <>
                 <br />
-                <span className="text-muted">
-                  {post?.description?.length > 100
-                    ? `${post?.description?.slice(0, 100)}...`
-                    : post?.description}
+                <span className="text-notification" style={{color:theme === "dark" ? "white" : "black"}}>
+                  {stripHtmlTags(post?.description)?.length > 100
+                    ? `${stripHtmlTags(post?.description)?.slice(0, 100)}...`
+                    : stripHtmlTags(post?.description)}
                 </span>
               </>
             )}
@@ -137,10 +146,10 @@ function NotificationsPopup({ toggleVisibility }) {
             {post.description && (
               <>
                 <br />
-                <span className="text-muted">
-                  {post?.description?.length > 100
-                    ? `${post?.description?.slice(0, 100)}...`
-                    : post?.description}
+                <span className="text-notification" style={{color:theme === "dark" ? "white" : "black"}}>
+                  {stripHtmlTags(post?.description)?.length > 100
+                    ? `${stripHtmlTags(post?.description)?.slice(0, 100)}...`
+                    : stripHtmlTags(post?.description)}
                 </span>
               </>
             )}

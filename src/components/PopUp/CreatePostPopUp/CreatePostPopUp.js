@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./createpostpopup.scss";
-import { CiImageOn } from "react-icons/ci";
-
+import { CiImageOn, CiVideoOn } from "react-icons/ci";
+import { BsLink45Deg } from "react-icons/bs";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getSinglePostAPI,
@@ -13,16 +15,11 @@ import {
 import { getBase64 } from "../../../utils/getBase64";
 import FeedPostCard from "../../Investor/Cards/FeedPost/FeedPostCard";
 import EasyCrop from "react-easy-crop";
-import { BsLink45Deg } from "react-icons/bs";
-import IconFile from "../../Investor/SvgIcons/IconFile";
-import { CiVideoOn } from "react-icons/ci";
-
 import { s3 } from "../../../Service/awsConfig";
 import { toggleCreatePostModal } from "../../../Store/features/design/designSlice";
 import toast from "react-hot-toast";
 import { loginSuccess } from "../../../Store/features/user/userSlice";
-// import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
-// import { achievementTypes } from "../../Toasts/AchievementToast/types";
+import IconFile from "../../Investor/SvgIcons/IconFile";
 
 const CreatePostPopUp = ({
   setPopupOpen,
@@ -51,7 +48,6 @@ const CreatePostPopUp = ({
 
   const galleryInputRef = useRef(null);
   const documentInputRef = useRef(null);
-  const smileeInputRef = useRef(null);
   const cameraInputRef = useRef(null);
 
   const handleGalleryButtonClick = () => {
@@ -66,12 +62,7 @@ const CreatePostPopUp = ({
     cameraInputRef.current.click();
   };
 
-  const handleSmileeButtonClick = () => {
-    smileeInputRef.current.click();
-  };
-
   const [cropComplete, setCropComplete] = useState(false);
-
   const [previewImage, setPreviewImage] = useState("");
   const [previewVideo, setPreviewVideo] = useState("");
   const [previewVideoType, setPreviewVideoType] = useState("");
@@ -85,41 +76,18 @@ const CreatePostPopUp = ({
       setSelectedImage(file);
       setSelectedVideo(null);
       setCroppedImage(null);
-      if (selectedVideo || selectedDocument) {
-        setPreviewVideo("");
-        setSelectedVideo(null);
-        setPreviewVideoType("");
-        setSelectedDocument(null);
-      }
     } else if (event.target.name === "video" && file.type.includes("video")) {
       setPreviewVideoType(file.type);
       setPreviewVideo(objectUrl);
       setSelectedVideo(file);
       setSelectedImage(null);
-      if (selectedImage || selectedDocument) {
-        setPreviewImage("");
-        setSelectedImage(null);
-        setSelectedDocument(null);
-      }
     } else if (event.target.name === "document") {
       setSelectedDocument(file);
-      if (selectedImage || selectedVideo) {
-        setPreviewImage("");
-        setSelectedImage(null);
-        setPreviewVideo("");
-        setSelectedVideo(null);
-        setPreviewVideoType("");
-      }
+      setSelectedImage(null);
+      setSelectedVideo(null);
     }
   };
 
-  // const handleOneLinkClick = async () => {
-  //   try {
-
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
   const handleOneLinkClick = () => {
     getStartupByFounderId(loggedInUser._id)
       .then(({ data }) => {
@@ -132,8 +100,8 @@ const CreatePostPopUp = ({
       .catch((error) => console.log(error));
   };
 
-  const handleTextareaChange = (event) => {
-    setPostText(event.target.value);
+  const handleQuillChange = (value) => {
+    setPostText(value);
   };
 
   const getCroppedImg = async (imageSrc, crop) => {
@@ -244,10 +212,6 @@ const CreatePostPopUp = ({
               addNotificationAPI(notificationBody)
                 .then((data) => console.log("Added"))
                 .catch((error) => console.error(error.message));
-
-              // toast.custom((t) => (
-              //   <AchievementToast type={achievementTypes.voyager} />
-              // ));
             })
             .catch((error) => {
               console.error("Error updating user:", error);
@@ -287,7 +251,6 @@ const CreatePostPopUp = ({
       >
         <div className="modal-dialog modal-dialog-centered" role="document">
           <div className="modal-content">
-            {/* Create Post modal header */}
             <div className="createpost_modal-header">
               <div className="createpostpopup">
                 <div className="ceatepost_img_name">
@@ -354,36 +317,33 @@ const CreatePostPopUp = ({
               </div>
             </div>
 
-            {/* Create Post modal body */}
             <div className="modal-body">
               <div className="createpost_text_area">
-                <textarea
-                  className="p-3"
-                  style={{ height: respostingPostId ? "80px" : "200px" }}
+                <ReactQuill
                   value={postText}
-                  onChange={handleTextareaChange}
-                  placeholder="Write a post..."
-                  rows={3}
+                  onChange={handleQuillChange}
+                  placeholder="What would you like to converse about? Write a post..."
+                  modules={{ toolbar: false }} // Hide the toolbar
+                  formats={[
+                    "header",
+                    "bold",
+                    "italic",
+                    "underline",
+                    "strike",
+                    "list",
+                    "bullet",
+                    "link",
+                    "image",
+                    "video",
+                  ]}
+                  style={{ height: respostingPostId ? "80px" : "200px" }}
                 />
-                {/* <select
-                  name="category"
-                  className="w-100 my-2 p-1"
-                  onChange={({ target: { value } }) => setCategory(value)}
-                >
-                  <option value="">Choose a topic</option>
-                  <option value="startup">Startup</option>
-                  <option value="investor">Investor</option>
-                  <option value="learning">Learnings</option>
-                  <option value="fund">Fund</option>
-                  <option value="other">Others</option>
-                </select> */}
-
                 {respostingPostId &&
                   (loadingRepostData ? (
-                    <div class="d-flex justify-content-center my-4">
+                    <div className="d-flex justify-content-center my-4">
                       <h6 className="h6 me-4">Loading post...</h6>
-                      <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading...</span>
+                      <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Loading...</span>
                       </div>
                     </div>
                   ) : (
@@ -402,64 +362,64 @@ const CreatePostPopUp = ({
                       likes={repostingPostData?.likes}
                     />
                   ))}
-
-                {previewImage && !cropComplete && (
-                  <div className="d-flex flex-column justify-content-center gap-2">
-                    <div className="image-cropper">
-                      <EasyCrop
-                        image={previewImage}
-                        crop={crop}
-                        zoom={zoom}
-                        onCropChange={setCrop}
-                        onZoomChange={setZoom}
-                        onCropComplete={onCropComplete}
-                      />
-                    </div>
-                    <button
-                      className="btn btn-light btn-sm"
-                      onClick={() => setCropComplete(true)}
-                    >
-                      Crop
-                    </button>
-                  </div>
-                )}
-                {cropComplete && (
-                  <div className="cropped-preview w-100 d-flex justify-content-center">
-                    <img
-                      src={croppedImage}
-                      alt="cropped post"
-                      className=""
-                      style={{
-                        maxHeight: "30vh",
-                        width: "auto",
-                        objectFit: "contain",
-                      }}
-                    />
-                  </div>
-                )}
-
-                {previewVideo && (
-                  <video
-                    key={selectedVideo ? selectedVideo.name : ""}
-                    controls
-                    width={"100%"}
-                  >
-                    <source src={previewVideo} type={previewVideoType} />
-                    Your browser does not support the video tag.
-                  </video>
-                )}
-
-                {selectedDocument && (
-                  <p>Selected File: {selectedDocument.name}</p>
-                )}
               </div>
+
+              
             </div>
 
-            {/* create post modal footer - Icons and Post button */}
+            {previewImage && !cropComplete && (
+                <div className="d-flex flex-column justify-content-center gap-2">
+                  <div className="image-cropper">
+                    <EasyCrop
+                      image={previewImage}
+                      crop={crop}
+                      zoom={zoom}
+                      onCropChange={setCrop}
+                      onZoomChange={setZoom}
+                      onCropComplete={onCropComplete}
+                    />
+                  </div>
+                  <button
+                    className="btn btn-light btn-sm"
+                    onClick={() => setCropComplete(true)}
+                  >
+                    Crop
+                  </button>
+                </div>
+              )}
+              {cropComplete && (
+                <div className="cropped-preview w-100 d-flex justify-content-center">
+                  <img
+                    src={croppedImage}
+                    alt="cropped post"
+                    className=""
+                    style={{
+                      maxHeight: "30vh",
+                      width: "auto",
+                      objectFit: "contain",
+                    }}
+                  />
+                </div>
+              )}
+
+              {previewVideo && (
+                <video
+                  key={selectedVideo ? selectedVideo.name : ""}
+                  controls
+                  width={"100%"}
+                >
+                  <source src={previewVideo} type={previewVideoType} />
+                  Your browser does not support the video tag.
+                </video>
+              )}
+
+              {selectedDocument && (
+                <p>Selected File: {selectedDocument.name}</p>
+              )}
+
             <div className="createpost_modal_footer">
               <div className="modal_footer_container mt-4 mb-3">
                 <div className="left_buttons">
-                  {/* Image input and Icon */}
                   <input
                     type="file"
                     name="image"
@@ -472,18 +432,13 @@ const CreatePostPopUp = ({
                     className="white_button hover-text"
                     onClick={handleGalleryButtonClick}
                   >
-                    {/* <img src={GallaryIcon} alt="Button 1" />
-                     */}
                     <CiImageOn
                       size={25}
-                      style={{
-                        color: "var(--d-l-grey)",
-                      }}
+                      style={{ color: "var(--d-l-grey)" }}
                     />
-                    <span class="tooltip-text top">images</span>
+                    <span className="tooltip-text top">images</span>
                   </button>
 
-                  {/* Video input and Icon */}
                   <input
                     type="file"
                     name="video"
@@ -496,17 +451,13 @@ const CreatePostPopUp = ({
                     className="white_button hover-text"
                     onClick={handleCameraButtonClick}
                   >
-                    {/* <img src={IconVideo} alt="Button 2" /> */}
                     <CiVideoOn
                       size={25}
-                      style={{
-                        color: "var(--d-l-grey)",
-                      }}
+                      style={{ color: "var(--d-l-grey)" }}
                     />
-                    <span class="tooltip-text top1">video</span>
+                    <span className="tooltip-text top1">video</span>
                   </button>
 
-                  {/* Document input and Icon */}
                   <input
                     type="file"
                     name="document"
@@ -518,45 +469,25 @@ const CreatePostPopUp = ({
                     className="white_button hover-text"
                     onClick={handleDocumentButtonClick}
                   >
-                    {/* <img src={CameraIcon} alt="Button 2" /> */}
                     <IconFile
                       width="16px"
                       height="16px"
-                      style={{
-                        color: "var(--d-l-grey)",
-                      }}
+                      style={{ color: "var(--d-l-grey)" }}
                     />
-                    <span class="tooltip-text top2">doc</span>
+                    <span className="tooltip-text top2">doc</span>
                   </button>
-
-                  {/* <input
-                      type="file"
-                      name="document"
-                      style={{ display: "none" }}
-                      ref={smileeInputRef}
-                      onChange={handleFileChange}
-                    /> */}
-                  {/* <button
-                      className="white_button"
-                      onClick={handleSmileeButtonClick}
-                    >
-                      <img src={SmileeIcon} alt="Button 3" />
-                    </button> */}
 
                   <button
                     className="white_button hover-text"
                     onClick={handleOneLinkClick}
                   >
-                    {/* <img src={ThreeDotsIcon} alt="Button 4" /> */}
                     <BsLink45Deg
                       height={"59px"}
                       width={"59px"}
                       size={"20px"}
-                      style={{
-                        color: "var(--d-l-grey)",
-                      }}
+                      style={{ color: "var(--d-l-grey)" }}
                     />
-                    <span class="tooltip-text top3">link</span>
+                    <span className="tooltip-text top3">link</span>
                   </button>
                 </div>
                 <div className="post_button_container">
@@ -574,10 +505,10 @@ const CreatePostPopUp = ({
             </div>
           </div>
         </div>
-        {/* <Toaster /> */}
       </div>
     </>
   );
 };
 
 export default CreatePostPopUp;
+

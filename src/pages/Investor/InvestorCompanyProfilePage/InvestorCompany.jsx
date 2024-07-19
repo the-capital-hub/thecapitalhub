@@ -23,7 +23,7 @@ import {
 } from "../../../Store/features/user/userSlice";
 import InvestorAfterSuccessPopUp from "../../../components/PopUp/InvestorAfterSuccessPopUp/InvestorAfterSuccessPopUp";
 import { useNavigate } from "react-router-dom";
-import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { setPageTitle, setShowOnboarding } from "../../../Store/features/design/designSlice";
 import Modal from "../../../components/PopUp/Modal/Modal";
 import TutorialTrigger from "../../../components/Shared/TutorialTrigger/TutorialTrigger";
 import { investorOnboardingSteps } from "../../../components/OnBoardUser/steps/investor";
@@ -42,6 +42,13 @@ export default function CompanyProfilePage() {
   const [selectedCompanyId, setSelectedCompanyId] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
+  const userVisitCount = localStorage.getItem("userVisit")
+
+  useEffect(()=>{
+    if(Number(userVisitCount)<=1){
+      dispatch(setShowOnboarding(true))
+    }
+  },[])
   // const [isTrue, setIsTrue] = useState(false);
 
   // const handleClick = () => {
@@ -95,6 +102,7 @@ export default function CompanyProfilePage() {
     setSelectedCompanyId(companyId);
     const searchInput = document.querySelector(".search-company-input");
     searchInput.value = companyName;
+    setCompanies([])
   };
 
   const handleAddInvestor = async () => {
@@ -170,12 +178,12 @@ export default function CompanyProfilePage() {
                     <div className=" rounded-4 p-4" id="chooseCompany">
                       {/* <Link to="/company-profile/edit" className="text-decoration-none text-dark fs-5"> */}
                       {/* <button className="btn-base investor" onClick={handleAddNew}>
-                    Add new company details
-                  </button> */}
+                     Add new company details
+                     </button> */}
                       {/* </Link> */}
                       {/* <div className="or-text-container">
-                    <p className="text-decoration-none text-dark fs-5">Or</p>
-                  </div> */}
+                     <p className="text-decoration-none text-dark fs-5">Or</p>
+                     </div> */}
                       <p className="text-decoration-none  fs-5">
                         Choose from an existing Company
                       </p>
@@ -222,7 +230,7 @@ export default function CompanyProfilePage() {
                       </div>
                     </div>
                     <p></p>
-                    <div
+                    {loggedInUserId ===companyData.founderId && <div
                       className=" rounded-4 p-4 shadow-sm border"
                       id="editCompanyDetails"
                     >
@@ -232,7 +240,7 @@ export default function CompanyProfilePage() {
                       >
                         Edit company details
                       </Link>
-                    </div>
+                    </div>}
                   </>
                 ) : (
                   <div className="bg-white rounded-4 p-4">

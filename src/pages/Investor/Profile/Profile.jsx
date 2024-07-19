@@ -44,7 +44,7 @@ function Profile() {
   const loggedInUserId = useSelector((state) => state.user.loggedInUser._id);
   const email = useSelector((state)=> state.user.loggedInUser.email)
   const isInvestor = useSelector(selectIsInvestor);
-  const [postSection, setPostSection] = useState("myPost");
+  const [postSection, setPostSection] = useState("featuredPosts");
   const userInvestor = useSelector(selectUserInvestor);
   const companyDataId = useSelector(selectCompanyDataId);
   const dispatch = useDispatch();
@@ -96,21 +96,22 @@ function Profile() {
             <InvestorPhilosophy showProfile={false} />
             <div className="box personal_information rounded-2 border">
               <div style={{ display: "flex" }}>
-                <div
+              <div
                   className="personal_information_header"
                   onClick={() => {
-                    setPostSection("myPost");
+                    setPostSection("featuredPosts");
                   }}
                   style={{ cursor: "pointer" }}
                 >
                   <h2
                     className={`typography ${
-                      postSection === "myPost" ? "active" : ""
+                      postSection === "featuredPosts" ? "active" : ""
                     }`}
                   >
-                    My posts
+                    Featured posts
                   </h2>
                 </div>
+
                 <div
                   className="personal_information_header"
                   onClick={() => {
@@ -130,20 +131,20 @@ function Profile() {
             </div> */}
                 </div>
                 <div
-                  className="personal_information_header"
-                  onClick={() => {
-                    setPostSection("featuredPosts");
-                  }}
-                  style={{ cursor: "pointer" }}
+                className="personal_information_header"
+                onClick={() => {
+                  setPostSection("myPost");
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                <h2
+                  className={`typography ${
+                    postSection === "myPost" ? "active" : ""
+                  }`}
                 >
-                  <h2
-                    className={`typography ${
-                      postSection === "featuredPosts" ? "active" : ""
-                    }`}
-                  >
-                    Featured posts
-                  </h2>
-                </div>
+                  My posts
+                </h2>
+              </div>
               </div>
               <div className="mt-2 milestones">
                 {postSection === "companyUpdate" ? (

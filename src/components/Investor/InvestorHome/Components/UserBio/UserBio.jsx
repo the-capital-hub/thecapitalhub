@@ -55,7 +55,7 @@ export default function UserBio({ canEdit = true, bioText = "" }) {
         id="userBio"
       
       >
-        <div className="personal_information_header">
+        <div className="personal_information_header" style={{marginBottom:"0.3rem"}}>
           <h2 className="typography" >Bio</h2>
           {/* Edit button */}
           {canEdit && (
@@ -91,7 +91,7 @@ export default function UserBio({ canEdit = true, bioText = "" }) {
             </span>
           )}
         </div>
-        <div className="mt-2">
+
           <div className="designation_info">
             {isBioEditable ? (
               <textarea
@@ -103,12 +103,11 @@ export default function UserBio({ canEdit = true, bioText = "" }) {
                 autoFocus
               />
             ) : (
-              <p className="small_typo">
+              <p className="small_typo" style={{fontSize:"12px"}}>
                 {bioContent || "Click on edit to add bio"}
               </p>
             )}
           </div>
-        </div>
         {/* <div className="col-12 mt-2 designation_see_more">
       <Link to={""}>See more</Link>
     </div> */}

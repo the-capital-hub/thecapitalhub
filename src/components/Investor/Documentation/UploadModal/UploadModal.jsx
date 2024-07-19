@@ -1,4 +1,3 @@
-// Frontend: components/UploadModal.js
 import { useState, useRef, useEffect } from "react";
 import "./UploadModal.scss";
 import axios from "axios";
@@ -30,6 +29,7 @@ const UploadModal = ({ onCancel, fetchFolder, notify }) => {
         .then((data) => {
           const folders = data.data;
           folders.push("New Folder");
+          console.log(folders);
           setFolderSelector(folders);
         })
         .catch((error) => {
@@ -45,7 +45,16 @@ const UploadModal = ({ onCancel, fetchFolder, notify }) => {
   };
 
   const handleFileSelect = (e) => {
-    setFiles([...e.target.files]);
+    const selectedFiles = [...e.target.files];
+    const filteredFiles = selectedFiles.filter(file => {
+      if (file.size > 20 * 1024 * 1024) { // 5MB in bytes
+        alert(`File ${file.name} exceeds 20MB. Please select a smaller file.`);
+        return false;
+      }
+      return true;
+    });
+
+    setFiles([...files, ...filteredFiles]);
   };
 
   const handleRemoveFile = (index) => {
@@ -62,19 +71,16 @@ const UploadModal = ({ onCancel, fetchFolder, notify }) => {
     const formData = new FormData();
     formData.append("userId", loggedInUser._id);
     formData.append("folderName", folder === "New Folder" ? folderName : folder);
-    
-    console.log("Appending files to FormData...");
-    files.forEach((file, index) => {
-      console.log(`File ${index + 1}:`, file);
+
+    files.forEach((file) => {
       formData.append("file", file);
     });
-    
-    console.log("FormData Entries:");
-    for (let pair of formData.entries()) {
-      console.log(pair[0] + ': ' + pair[1]);
-    }
 
+    console.log(formData.folderName);
     try {
+      const getAuthToken = () => {
+        return localStorage.getItem("accessToken");
+      };
       const response = await axios.post(`${baseUrl}/documentation/uploadDocument`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -108,7 +114,7 @@ const UploadModal = ({ onCancel, fetchFolder, notify }) => {
             <button
               type="button"
               className="btn border-0 ms-auto m-0 p-0"
-              onClick={(e) => handleRemoveFile(e, index)}
+              onClick={() => handleRemoveFile(index)}
             >
               <IconDelete />
             </button>

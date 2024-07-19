@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import {
   selectTheme,
   setPageTitle,
+  setShowOnboarding,
 } from "../../../Store/features/design/designSlice";
 import {
   selectLoggedInUserId,
@@ -44,7 +45,13 @@ export default function CompanyProfilePage() {
   const [companies, setCompanies] = useState([]);
   const [selectedCompanyId, setSelectedCompanyId] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
+  const userVisitCount = localStorage.getItem("userVisit")
 
+  useEffect(()=>{
+    if(Number(userVisitCount)<=1){
+      dispatch(setShowOnboarding(true))
+    }
+  },[])
   useEffect(() => {
     //if (!userCompanyData) {
     setLoading(true);
@@ -135,7 +142,7 @@ export default function CompanyProfilePage() {
 
   const notify = () =>
     toast.custom((t) => <AchievementToast type={achievementTypes.employer} />);
-
+  console.log(companyData?._id !== loggedInUser.startUp,)
   return (
     <MaxWidthWrapper>
       <div className="companyProfilePage__wrapper">
@@ -238,8 +245,7 @@ export default function CompanyProfilePage() {
                   </h2>
                 </div>
               </div>
-            ) : (
-              companyData?._id !== loggedInUser.startUp && (
+            ) :  (
                 <CompanyProfile
                   isOnelink={true}
                   companyData={companyData}
@@ -248,7 +254,7 @@ export default function CompanyProfilePage() {
                   companyDelete={true}
                 />
               )
-            )
+            
           ) : (
             <div className="mx-auto w-100 bg-white rounded-4 p-5 d-flex justify-content-center min-vh-100">
               <div class="spinner-grow orange" role="status">

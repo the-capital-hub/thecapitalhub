@@ -7,7 +7,7 @@ import './style.scss';
 const ProfileSection = ({ profile }) => {
   return (
     <div className="profile-section">
-      <InvestmentAreas areas={profile?.myInterests} />
+      {/*<InvestmentAreas areas={profile?.myInterests} />*/}
       <CompaniesInvested companies={profile?.startupsInvested} />
     
     </div>

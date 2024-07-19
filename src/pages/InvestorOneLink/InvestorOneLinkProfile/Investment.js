@@ -21,6 +21,7 @@ const Investment = ({ canEdit }) => {
   const [companyData, setCompanyData] = useState({
     age: "",
   });
+
   useEffect(() => {
     if (isInvestor && !userCompanyData) {
       //setLoading(true);
@@ -40,6 +41,7 @@ const Investment = ({ canEdit }) => {
       setCompanyData(userCompanyData);
     }
   }, [isInvestor, userInvestor, userCompanyData]);
+
   function formatNumber(value) {
     if (value >= 10000000) {
       // Greater than or equal to 1 Crore
@@ -53,6 +55,7 @@ const Investment = ({ canEdit }) => {
     }
     return value.toString(); // Less than 1 Thousand
   }
+
   return (
     <div
       style={{
@@ -67,7 +70,7 @@ const Investment = ({ canEdit }) => {
           background: theme === "dark" ? "#22262c" : "#f5f5f5",
           padding: "10px",
           borderRadius: "0.37rem",
-          maxwidth: "25rem",
+          maxWidth: "25rem",
           width: "100%",
         }}
       >
@@ -85,7 +88,6 @@ const Investment = ({ canEdit }) => {
               fontWeight: "bold",
               fontSize: "12px",
               marginBottom: "5px",
-
               color: theme === "dark" ? "#fff" : "#000",
             }}
           >
@@ -118,25 +120,26 @@ const Investment = ({ canEdit }) => {
           }}
         >
           {canEdit && edit === "recent" ? (
-            <input value={userCompanyData?.revenue[userCompanyData?.revenue.length - 1]
-              ?.amount}/>
+            <input
+              value={
+                userCompanyData?.revenue &&
+                userCompanyData.revenue.length > 0 &&
+                userCompanyData.revenue[userCompanyData.revenue.length - 1]
+                  ?.amount
+              }
+            />
           ) : (
             <p
-              // style={{
-              //   background: " rgba(211, 243, 107, 1)",
-              //   borderRadius: "5px",
-              //   color: "#000",
-              //   padding: "5px 10px",
-              // }}
               style={{
                 color: theme === "dark" ? "#fff" : "#000",
                 marginBottom: "0",
               }}
             >
-              {
-                userCompanyData?.revenue[userCompanyData?.revenue.length - 1]
-                  ?.amount|| "NA"
-              }
+              {userCompanyData?.revenue &&
+              userCompanyData.revenue.length > 0
+                ? userCompanyData.revenue[userCompanyData.revenue.length - 1]
+                    ?.amount
+                : "NA"}
             </p>
           )}
         </div>
@@ -146,7 +149,7 @@ const Investment = ({ canEdit }) => {
           background: theme === "dark" ? "#22262c" : "#f5f5f5",
           padding: "10px",
           borderRadius: "0.37rem",
-          maxwidth: "25rem",
+          maxWidth: "25rem",
           width: "100%",
           margin: "0 5px",
         }}
@@ -173,21 +176,18 @@ const Investment = ({ canEdit }) => {
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <p
-            // style={{
-            //   background: " rgba(211, 243, 107, 1)",
-            //   borderRadius: "5px",
-            //   color: "#000",
-            //   padding: "5px 10px",
-            // }}
             style={{
               color: theme === "dark" ? "#fff" : "#000",
               marginBottom: "0",
             }}
           >
-            {userCompanyData?.maximumInvest && userCompanyData?.minimumInvest?formatNumber(
-              (userCompanyData?.maximumInvest + userCompanyData?.minimumInvest) /
-                2
-            ):"NA"}
+            {userCompanyData?.maximumInvest && userCompanyData?.minimumInvest
+              ? formatNumber(
+                  (userCompanyData?.maximumInvest +
+                    userCompanyData?.minimumInvest) /
+                    2
+                )
+              : "NA"}
           </p>
         </div>
       </div>
@@ -196,7 +196,7 @@ const Investment = ({ canEdit }) => {
           background: theme === "dark" ? "#22262c" : "#f5f5f5",
           padding: "10px",
           borderRadius: "0.37rem",
-          maxwidth: "25rem",
+          maxWidth: "25rem",
           width: "100%",
         }}
       >
@@ -246,21 +246,15 @@ const Investment = ({ canEdit }) => {
           }}
         >
           {canEdit && edit === "age" ? (
-            <input value={userCompanyData?.age}/>
+            <input value={userCompanyData?.age} />
           ) : (
             <p
-              // style={{
-              //   background: " rgba(211, 243, 107, 1)",
-              //   borderRadius: "5px",
-              //   color: "#000",
-              //   padding: "5px 10px",
-              // }}
               style={{
                 color: theme === "dark" ? "#fff" : "#000",
                 marginBottom: "0",
               }}
             >
-             {userCompanyData?.age? `Age ${userCompanyData?.age}`:"NA"}
+              {userCompanyData?.age ? `Age ${userCompanyData?.age}` : "NA"}
             </p>
           )}
         </div>

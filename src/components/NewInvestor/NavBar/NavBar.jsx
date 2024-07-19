@@ -1,8 +1,8 @@
 import React from "react";
 import "./NavBar.scss";
 // import searchIconBlack from "../../../Images/navbar/Search.svg";
-import Logo from "../../../Images/investorIcon/new-logo.png";
-import Logo2 from "../../../Images/investorIcon/Artboard-14.png"
+import DarkLogo from "../../../Images/investorIcon/new-logo.png";
+import WhiteLogo from "../../../Images/investorIcon/logo-white.png";
 // import NotificationIcon from "../../../Images/investorIcon/notification.svg";
 // import YellowNotificationIcon from "../../../Images/investorIcon/YellowNotificationIcon.svg";
 // import MessageIcon from "../../../Images/investorIcon/message.svg";
@@ -104,23 +104,17 @@ const NavBar = (props) => {
  
   return (
     <>
-      <div className="container pt-1  mb-4 mb-xl-0">
+      <div className="container pt-1  mb-4 mb-xl-0 pl-2">
         <div className="d-flex my-investor_navbar justify-content-between">
           <div className="d-flex">
             <div className="row bar_logo_container ">
               <div className="logo_container">
-                {theme==="dark"?<img
-                  src={Logo2}
-                  height={""}
-                  onClick={() => navigate("/investor/home")}
-                  alt="the capital hub logo"
-                  style={{maxWidth:"180px",width:"100%",height:"100px",marginBottom:"12px"}}
-                />:<img
-                src={theme==="dark"?Logo2:Logo}
+                <img
+                src={theme==="dark"?WhiteLogo:DarkLogo}
                 height={""}
                 onClick={() => navigate("/investor/home")}
                 alt="the capital hub logo"
-              />}
+              />
               </div>
               <div
                 className="mobile-home-hamberger"

@@ -39,6 +39,7 @@ import {
   setUserCompany,
 } from "../../../Store/features/user/userSlice";
 import IconChevronBack from "../../../components/Investor/SvgIcons/IconChevronBack";
+import PublicLinks from "../../../components/Investor/CompanyProfilePageComponents/PublicLinks/PublicLinks";
 
 export default function EditCompanyProfilePage() {
   const loggedInUserId = useSelector(selectLoggedInUserId);
@@ -46,6 +47,7 @@ export default function EditCompanyProfilePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const theme = useSelector(selectTheme);
+  const [publicLinks, setPublicLinks] = useState(null);
   const [colorCardData, setColorCardData] = useState(null);
   const [companyData, setCompanyData] = useState([]);
   const [isBioEditable, setIsBioEditable] = useState(false);
@@ -187,7 +189,7 @@ export default function EditCompanyProfilePage() {
             <IconChevronBack width={25} height={25} color="var(--d-l-grey)" />
           </span>
           {/* <SmallProfileCard text={"Company Profile"} /> */}
-
+  
           <div className="company_profile_form rounded-4 py-3 px-3 px-md-5">
             <CompanyProfileForm
               companyData={companyData}
@@ -195,7 +197,7 @@ export default function EditCompanyProfilePage() {
               handleShowPopup={handleShowPopup}
             />
           </div>
-
+          <PublicLinks publicLinks={companyData?.socialLinks}  loading={loading} />
           {/* Company Description */}
           <CompanyDescription
             companyData={companyData}

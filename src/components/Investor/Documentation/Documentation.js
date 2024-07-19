@@ -19,25 +19,25 @@ import {
   Legal,
   Pitch,
 } from "../../../Images/StartUp/Documentaion";
-import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { setPageTitle, setShowOnboarding } from "../../../Store/features/design/designSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getFoldersApi } from "../../../Service/user";
 import SpinnerBS from "../../Shared/Spinner/SpinnerBS";
 import TutorialTrigger from "../../Shared/TutorialTrigger/TutorialTrigger";
 import { startupOnboardingSteps } from "../../OnBoardUser/steps/startup";
-import toast, { Toaster } from "react-hot-toast";
-import achievement from "../../../Images/Investor/Achievements/img_1.png";
+// import toast, { Toaster } from "react-hot-toast";
+// import achievement from "../../../Images/Investor/Achievements/img_1.png";
 // import AchievementToast from "../../Toasts/AchievementToast/AchievementToast";
 // import { achievementTypes } from "../../Toasts/AchievementToast/types";
 
 const Documentation = () => {
   const loggedInUser = useSelector((state) => state.user.loggedInUser);
-
+  const userVisitCount = localStorage.getItem("userVisit")
   const [showModal, setShowModal] = useState(false);
   const [folderName, setFolderName] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const baseURL = environment.baseUrl;
+  //const baseURL = environment.baseUrl;
   // const [folders, setFolders] = useState([
   //   "Financials",
   //   "Pitch Deck",
@@ -46,7 +46,11 @@ const Documentation = () => {
   //   "KYC Details",
   //   "Business",
   // ]);
-
+  useEffect(()=>{
+    if(Number(userVisitCount)<=1){
+      dispatch(setShowOnboarding(true))
+    }
+  },[])
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

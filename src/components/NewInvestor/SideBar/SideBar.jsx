@@ -60,7 +60,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
   // const menuIconClick = () => {
   //   setSidebarCollapsed(true);
   // };
-  console.log(loggedInUser.userName)
+
   const handleLogout = () => {
     // Step 3: Show the logout popup
     setShowLogoutPopup(true);

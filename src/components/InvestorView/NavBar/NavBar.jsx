@@ -58,27 +58,28 @@
 // export default NavBar;
 
 import "./NavBar.scss";
-import Logo from "../../../Images/investorIcon/new-logo.png";
+import DarkLogo from "../../../Images/investorIcon/new-logo.png";
+import WhiteLogo from "../../../Images/investorIcon/logo-white.png";
 import { useNavigate } from "react-router-dom";
-import Logo2 from "../../../Images/investorIcon/Artboard-14.png"
 import { useSelector } from "react-redux";
 import { selectIsInvestor } from "../../../Store/features/user/userSlice";
 import { MdOutlineMenu, MdOutlineMenuOpen } from "react-icons/md";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { selectTheme } from "../../../Store/features/design/designSlice";
+import OnboardingSwitch from "../../Investor/InvestorNavbar/OnboardingSwitch/OnboardingSwitch";
 
 const NavBar = ({ handleSidebarToggle, sidebarCollapsed, ...props }) => {
-  const theme = useSelector(selectTheme)
+  const theme = useSelector(selectTheme);
   const navigate = useNavigate();
   const isInvestor = useSelector(selectIsInvestor);
-  console.log(theme)
+  console.log(theme);
   return (
     <div className="container" {...props}>
       <div className="investor_view_navbar ">
-        <div className="d-flex align-items-center h-100 ms-4">
+        <div className="d-flex align-items-center h-100 ms-4" style={{justifyContent:"space-between"}}>
           <div className="row bar_logo_container ">
             <div className="logo_container">
-              {theme==="dark"?<img src={Logo2} alt="bar" />:<img src={Logo} alt="bar" />}
+              <img src={theme === "dark" ? WhiteLogo : DarkLogo} alt="bar" />
             </div>
             <div
               className="mobile-home-hamberger"
@@ -91,14 +92,17 @@ const NavBar = ({ handleSidebarToggle, sidebarCollapsed, ...props }) => {
               )}
             </div>
           </div>
-          <span
-            className="ms-auto m-2 px-2 close-button"
-            onClick={() =>
-              navigate(isInvestor === "true" ? "/investor/home" : "/home")
-            }
-          >
-            <IoArrowBackCircleOutline size={25} />
-          </span>
+          <div style={{display:"flex"}}>
+            <OnboardingSwitch />
+            <span
+              className="ms-auto m-2 px-2 close-button"
+              onClick={() =>
+                navigate(isInvestor === "true" ? "/investor/home" : "/home")
+              }
+            >
+              <IoArrowBackCircleOutline size={25} />
+            </span>
+          </div>
         </div>
       </div>
     </div>

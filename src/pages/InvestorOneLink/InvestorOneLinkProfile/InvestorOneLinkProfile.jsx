@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import "./InvestorOneLinkProfile.scss";
 import { useOutletContext } from "react-router";
-import PublicLinks from "../../../components/NewInvestor/CompanyProfileComponents/company-section-two/public-links/PublicLinks";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectTheme,

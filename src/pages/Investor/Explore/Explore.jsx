@@ -7,7 +7,7 @@ import FilterBySelect from "../../../components/NewInvestor/FilterBySelect/Filte
 import MaxWidthWrapper from "../../../components/Shared/MaxWidthWrapper/MaxWidthWrapper";
 import CompanyProfileList from "../../../components/NewInvestor/CompanyProfileComponents/CompanyProfileList";
 import { useDispatch } from "react-redux";
-import { setPageTitle } from "../../../Store/features/design/designSlice";
+import { setPageTitle, setShowOnboarding } from "../../../Store/features/design/designSlice";
 import PersonProfileList from "../../../components/Shared/PersonProfileComponents/PersonProfileList";
 import {
   fetchExploreFilteredResultsAPI,
@@ -166,7 +166,13 @@ function Explore() {
   const [filters, setFilters] = useState({});
   const [filteredData, setFilteredData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const userVisitCount = localStorage.getItem("userVisit")
 
+  useEffect(()=>{
+    if(Number(userVisitCount)<=1){
+      dispatch(setShowOnboarding(true))
+    }
+  },[])
   // Set page title
   useEffect(() => {
     document.title = "Explore | Investors - The Capital Hub";

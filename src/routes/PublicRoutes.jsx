@@ -7,6 +7,7 @@ import Login from "../components/Login/Login";
 import NewPasswordPopUp from "../components/PopUp/NewPasswordPopUp/NewPasswordPopUp";
 import SuspenseLoader from "../components/SuspenseLoader/SuspenseLoader";
 import OurStartup from "../components/OurStartup/OurStartUp";
+import SubscriptionSuccess from "../components/SubscriptionSuccess/SubscriptionSuccess";
 
 // Import the other components using lazy loading
 const Home = lazy(() => import("../components/Home/Home"));
@@ -275,6 +276,14 @@ function PublicRoutes() {
           </Suspense>
         }
       />
+      <Route
+      path="/payment/success"
+      element={
+        <Suspense fallback={<SuspenseLoader />}>
+          <SubscriptionSuccess />
+        </Suspense>
+      }
+    />
     </>
   );
 }

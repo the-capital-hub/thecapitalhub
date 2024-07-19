@@ -42,7 +42,6 @@ export default function OtherInvestorProfile() {
     window.scrollTo(0, 0);
     getUserAndStartUpByUserIdAPI(userId)
       .then(({ data }) => {
-        console.log(data);
         setUserData(data);
         if (data.isInvestor === "true") {
           dispatch(setPageTitle("Investor Profile"));

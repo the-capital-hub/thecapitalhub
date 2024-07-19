@@ -72,7 +72,6 @@ async function sendOTP(phoneNumber) {
 
 async function verifyOTP(userData) {
   try {
-    console.log(userData, API.verifyOtp);
     const response = await axiosInstance.post(API.verifyOtp, userData);
     return response.data;
   } catch (err) {
@@ -93,7 +92,6 @@ export const getLinkedInProfile = async (accessToken) => {
     const response = await axiosInstance.post(API.getLinkedInProfile, {
       accessToken,
     });
-    console.log(response);
     return response.data;
   } catch (err) {
     throw err;
@@ -184,7 +182,6 @@ async function getOnePager(oneLink) {
 
 async function getUserById(oneLink, userId) {
   try {
-    console.log(oneLink)
     if (oneLink!=="") {
       const onePager = await getOnePager(oneLink);
       const response = await axiosInstance.get(API.getUserById + "/" + userId);

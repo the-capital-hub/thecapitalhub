@@ -238,7 +238,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                 <MenuItem
                   active={currentTab === "investnow"}
                   onClick={() => setCurrentTab("investnow")}
-                  className="active-item invest_now"
+                  className="active-item"
                 >
                   <Link to="investnow">
                     {/* <img
@@ -249,7 +249,7 @@ const SideBar = ({ sidebarCollapsed, setSidebarCollapsed }) => {
                     /> */}
                     <RiMoneyDollarCircleLine size={25} />
                     {!sidebarCollapsed && (
-                      <span className={"items-active"}>Invest Now</span>
+                      <span className={currentTab === "investnow" ?"items-active":""}>Invest Now</span>
                     )}
                   </Link>
                 </MenuItem>
